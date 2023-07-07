@@ -709,7 +709,7 @@ namespace AuthoringTypeSpec.Samples
             var endpoint = new Uri("<https://my-service.azure.com>");
             var client = new AuthoringTypeSpecClient(endpoint);
 
-            Response response = client.GetDeploymentStatus("<projectName>", "<deploymentName>", "<jobId>", new RequestContext());
+            Response response = client.GetDeploymentStatus("<projectName>", "<deploymentName>", "<jobId>");
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("jobId").ToString());
@@ -731,7 +731,7 @@ namespace AuthoringTypeSpec.Samples
             var endpoint = new Uri("<https://my-service.azure.com>");
             var client = new AuthoringTypeSpecClient(endpoint);
 
-            Response response = client.GetDeploymentStatus("<projectName>", "<deploymentName>", "<jobId>", new RequestContext());
+            Response response = client.GetDeploymentStatus("<projectName>", "<deploymentName>", "<jobId>");
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("jobId").ToString());
@@ -755,7 +755,7 @@ namespace AuthoringTypeSpec.Samples
             var endpoint = new Uri("<https://my-service.azure.com>");
             var client = new AuthoringTypeSpecClient(endpoint);
 
-            Response response = await client.GetDeploymentStatusAsync("<projectName>", "<deploymentName>", "<jobId>", new RequestContext());
+            Response response = await client.GetDeploymentStatusAsync("<projectName>", "<deploymentName>", "<jobId>");
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("jobId").ToString());
@@ -777,7 +777,7 @@ namespace AuthoringTypeSpec.Samples
             var endpoint = new Uri("<https://my-service.azure.com>");
             var client = new AuthoringTypeSpecClient(endpoint);
 
-            Response response = await client.GetDeploymentStatusAsync("<projectName>", "<deploymentName>", "<jobId>", new RequestContext());
+            Response response = await client.GetDeploymentStatusAsync("<projectName>", "<deploymentName>", "<jobId>");
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("jobId").ToString());
@@ -796,12 +796,12 @@ namespace AuthoringTypeSpec.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetDeploymentStatus_Convenience_Async()
+        public async Task Example_GetDeploymentStatusValue_Convenience_Async()
         {
             var endpoint = new Uri("<https://my-service.azure.com>");
             var client = new AuthoringTypeSpecClient(endpoint);
 
-            var result = await client.GetDeploymentStatusAsync("<projectName>", "<deploymentName>", "<jobId>");
+            var result = await client.GetDeploymentStatusValueAsync("<projectName>", "<deploymentName>", "<jobId>");
         }
 
         [Test]
@@ -811,7 +811,7 @@ namespace AuthoringTypeSpec.Samples
             var endpoint = new Uri("<https://my-service.azure.com>");
             var client = new AuthoringTypeSpecClient(endpoint);
 
-            Response response = client.GetSwapDeploymentsStatus("<projectName>", "<deploymentName>", "<jobId>", new RequestContext());
+            Response response = client.GetSwapDeploymentsStatus("<projectName>", "<deploymentName>", "<jobId>");
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("jobId").ToString());
@@ -833,7 +833,7 @@ namespace AuthoringTypeSpec.Samples
             var endpoint = new Uri("<https://my-service.azure.com>");
             var client = new AuthoringTypeSpecClient(endpoint);
 
-            Response response = client.GetSwapDeploymentsStatus("<projectName>", "<deploymentName>", "<jobId>", new RequestContext());
+            Response response = client.GetSwapDeploymentsStatus("<projectName>", "<deploymentName>", "<jobId>");
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("jobId").ToString());
@@ -857,7 +857,7 @@ namespace AuthoringTypeSpec.Samples
             var endpoint = new Uri("<https://my-service.azure.com>");
             var client = new AuthoringTypeSpecClient(endpoint);
 
-            Response response = await client.GetSwapDeploymentsStatusAsync("<projectName>", "<deploymentName>", "<jobId>", new RequestContext());
+            Response response = await client.GetSwapDeploymentsStatusAsync("<projectName>", "<deploymentName>", "<jobId>");
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("jobId").ToString());
@@ -879,7 +879,7 @@ namespace AuthoringTypeSpec.Samples
             var endpoint = new Uri("<https://my-service.azure.com>");
             var client = new AuthoringTypeSpecClient(endpoint);
 
-            Response response = await client.GetSwapDeploymentsStatusAsync("<projectName>", "<deploymentName>", "<jobId>", new RequestContext());
+            Response response = await client.GetSwapDeploymentsStatusAsync("<projectName>", "<deploymentName>", "<jobId>");
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("jobId").ToString());
@@ -898,12 +898,12 @@ namespace AuthoringTypeSpec.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetSwapDeploymentsStatus_Convenience_Async()
+        public async Task Example_GetSwapDeploymentsStatusValue_Convenience_Async()
         {
             var endpoint = new Uri("<https://my-service.azure.com>");
             var client = new AuthoringTypeSpecClient(endpoint);
 
-            var result = await client.GetSwapDeploymentsStatusAsync("<projectName>", "<deploymentName>", "<jobId>");
+            var result = await client.GetSwapDeploymentsStatusValueAsync("<projectName>", "<deploymentName>", "<jobId>");
         }
 
         [Test]

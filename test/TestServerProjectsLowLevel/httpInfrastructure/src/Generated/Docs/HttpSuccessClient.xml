@@ -27,12 +27,12 @@ Console.WriteLine(response.Status);
     </member>
     <member name="Get200Async(RequestContext)">
 <example>
-This sample shows how to call Get200Async and parse the result.
+This sample shows how to call Get200Async with required parameters and parse the result.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
 var client = new HttpSuccessClient(credential);
 
-Response response = await client.Get200Async();
+Response response = await client.Get200Async(new RequestContext());
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.ToString());
@@ -41,12 +41,12 @@ Console.WriteLine(result.ToString());
     </member>
     <member name="Get200(RequestContext)">
 <example>
-This sample shows how to call Get200 and parse the result.
+This sample shows how to call Get200 with required parameters and parse the result.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
 var client = new HttpSuccessClient(credential);
 
-Response response = client.Get200();
+Response response = client.Get200(new RequestContext());
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.ToString());
@@ -55,12 +55,12 @@ Console.WriteLine(result.ToString());
     </member>
     <member name="Options200Async(RequestContext)">
 <example>
-This sample shows how to call Options200Async and parse the result.
+This sample shows how to call Options200Async with required parameters and parse the result.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
 var client = new HttpSuccessClient(credential);
 
-Response response = await client.Options200Async();
+Response response = await client.Options200Async(new RequestContext());
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.ToString());
@@ -69,12 +69,12 @@ Console.WriteLine(result.ToString());
     </member>
     <member name="Options200(RequestContext)">
 <example>
-This sample shows how to call Options200 and parse the result.
+This sample shows how to call Options200 with required parameters and parse the result.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
 var client = new HttpSuccessClient(credential);
 
-Response response = client.Options200();
+Response response = client.Options200(new RequestContext());
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.ToString());

@@ -70,7 +70,7 @@ namespace MixApiVersion.Samples
             var endpoint = new Uri("<https://my-service.azure.com>");
             var client = new MixApiVersionClient(endpoint);
 
-            Response response = client.Read(1234);
+            Response response = client.Read(1234, new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("name").ToString());
@@ -84,7 +84,7 @@ namespace MixApiVersion.Samples
             var endpoint = new Uri("<https://my-service.azure.com>");
             var client = new MixApiVersionClient(endpoint);
 
-            Response response = client.Read(1234);
+            Response response = client.Read(1234, new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("name").ToString());
@@ -99,7 +99,7 @@ namespace MixApiVersion.Samples
             var endpoint = new Uri("<https://my-service.azure.com>");
             var client = new MixApiVersionClient(endpoint);
 
-            Response response = await client.ReadAsync(1234);
+            Response response = await client.ReadAsync(1234, new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("name").ToString());
@@ -113,7 +113,7 @@ namespace MixApiVersion.Samples
             var endpoint = new Uri("<https://my-service.azure.com>");
             var client = new MixApiVersionClient(endpoint);
 
-            Response response = await client.ReadAsync(1234);
+            Response response = await client.ReadAsync(1234, new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("name").ToString());
@@ -208,7 +208,7 @@ namespace MixApiVersion.Samples
             var endpoint = new Uri("<https://my-service.azure.com>");
             var client = new MixApiVersionClient(endpoint);
 
-            foreach (var item in client.GetPets())
+            foreach (var item in client.GetPets(new RequestContext()))
             {
                 JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
                 Console.WriteLine(result.GetProperty("id").ToString());
@@ -224,7 +224,7 @@ namespace MixApiVersion.Samples
             var endpoint = new Uri("<https://my-service.azure.com>");
             var client = new MixApiVersionClient(endpoint);
 
-            foreach (var item in client.GetPets())
+            foreach (var item in client.GetPets(new RequestContext()))
             {
                 JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
                 Console.WriteLine(result.GetProperty("id").ToString());
@@ -240,7 +240,7 @@ namespace MixApiVersion.Samples
             var endpoint = new Uri("<https://my-service.azure.com>");
             var client = new MixApiVersionClient(endpoint);
 
-            await foreach (var item in client.GetPetsAsync())
+            await foreach (var item in client.GetPetsAsync(new RequestContext()))
             {
                 JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
                 Console.WriteLine(result.GetProperty("id").ToString());
@@ -256,7 +256,7 @@ namespace MixApiVersion.Samples
             var endpoint = new Uri("<https://my-service.azure.com>");
             var client = new MixApiVersionClient(endpoint);
 
-            await foreach (var item in client.GetPetsAsync())
+            await foreach (var item in client.GetPetsAsync(new RequestContext()))
             {
                 JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
                 Console.WriteLine(result.GetProperty("id").ToString());

@@ -24,7 +24,7 @@ namespace AutoRest.TestServer.Tests
             await base.DpgAddOptionalInput_NoParams(host);
 
             // test new cases in dpg_update1
-            var result3 = await new ParamsClient(Key, host, null).HeadNoParamsAsync("newParam");
+            var result3 = await new ParamsClient(Key, host, null).HeadNoParamsAsync("newParam", new());
             Assert.IsEmpty(result3.Content.ToArray());
             Assert.AreEqual(200, result3.Status);
             Assert.AreEqual(123, result3.Headers.ContentLength);
@@ -45,7 +45,7 @@ namespace AutoRest.TestServer.Tests
             await base.DpgAddOptionalInput(host);
 
             // test new cases in dpg_update1
-            var result4 = await new ParamsClient(Key, host, null).GetRequiredAsync("param", "newParam");
+            var result4 = await new ParamsClient(Key, host, null).GetRequiredAsync("param", "newParam", new());
             var responseBody4 = JsonData.FromBytes(result4.Content.ToMemory());
             Assert.AreEqual("An object was successfully returned", (string)responseBody4["message"]);
 
@@ -68,11 +68,11 @@ namespace AutoRest.TestServer.Tests
             await base.DpgAddOptionalInput_RequiredOptionalParam(host);
 
             // test new cases in dpg_update1
-            var result5 = await new ParamsClient(Key, host, null).PutRequiredOptionalAsync("requiredParam", newParameter: "newParam");
+            var result5 = await new ParamsClient(Key, host, null).PutRequiredOptionalAsync("requiredParam", null, newParameter: "newParam", new());
             var responseBody5 = JsonData.FromBytes(result5.Content.ToMemory());
             Assert.AreEqual("An object was successfully returned", (string)responseBody5["message"]);
 
-            var result6 = await new ParamsClient(Key, host, null).PutRequiredOptionalAsync("requiredParam", "optionalParam", "newParam");
+            var result6 = await new ParamsClient(Key, host, null).PutRequiredOptionalAsync("requiredParam", "optionalParam", "newParam", new());
             var responseBody6 = JsonData.FromBytes(result6.Content.ToMemory());
             Assert.AreEqual("An object was successfully returned", (string)responseBody6["message"]);
 
@@ -80,7 +80,7 @@ namespace AutoRest.TestServer.Tests
             var responseBody7 = JsonData.FromBytes(result7.Content.ToMemory());
             Assert.AreEqual("An object was successfully returned", (string)responseBody7["message"]);
 
-            var result8 = await new ParamsClient(Key, host, null).PutRequiredOptionalAsync("requiredParam", newParameter: "newParam", context: new Azure.RequestContext());
+            var result8 = await new ParamsClient(Key, host, null).PutRequiredOptionalAsync("requiredParam", optionalParam: null, newParameter: "newParam", context: new Azure.RequestContext());
             var responseBody8 = JsonData.FromBytes(result8.Content.ToMemory());
             Assert.AreEqual("An object was successfully returned", (string)responseBody8["message"]);
         }
@@ -95,11 +95,11 @@ namespace AutoRest.TestServer.Tests
             await base.DpgAddOptionalInput_OptionalParam(host);
 
             // test new cases in dpg_update1
-            var result5 = await new ParamsClient(Key, host, null).GetOptionalAsync(newParameter: "newParam");
+            var result5 = await new ParamsClient(Key, host, null).GetOptionalAsync(optionalParam: null, newParameter: "newParam", new());
             var responseBody5 = JsonData.FromBytes(result5.Content.ToMemory());
             Assert.AreEqual("An object was successfully returned", (string)responseBody5["message"]);
 
-            var result6 = await new ParamsClient(Key, host, null).GetOptionalAsync("optionalParam", "newParam");
+            var result6 = await new ParamsClient(Key, host, null).GetOptionalAsync("optionalParam", "newParam", new());
             var responseBody6 = JsonData.FromBytes(result6.Content.ToMemory());
             Assert.AreEqual("An object was successfully returned", (string)responseBody6["message"]);
 
@@ -107,7 +107,7 @@ namespace AutoRest.TestServer.Tests
             var responseBody7 = JsonData.FromBytes(result7.Content.ToMemory());
             Assert.AreEqual("An object was successfully returned", (string)responseBody7["message"]);
 
-            var result8 = await new ParamsClient(Key, host, null).GetOptionalAsync(newParameter: "newParam", context: new Azure.RequestContext());
+            var result8 = await new ParamsClient(Key, host, null).GetOptionalAsync(optionalParam: null, newParameter: "newParam", context: new Azure.RequestContext());
             var responseBody8 = JsonData.FromBytes(result8.Content.ToMemory());
             Assert.AreEqual("An object was successfully returned", (string)responseBody8["message"]);
         }
@@ -149,7 +149,7 @@ namespace AutoRest.TestServer.Tests
         [Description("Test for v2 client GET request that is newly added in a new path")]
         public Task DpgAddNewPath_V2() => Test(async (host) =>
         {
-            var result = await new ParamsClient(Key, host, null).GetNewOperationAsync();
+            var result = await new ParamsClient(Key, host, null).GetNewOperationAsync(new());
             var responseBody = JsonData.FromBytes(result.Content.ToMemory());
             Assert.AreEqual("An object was successfully returned", (string)responseBody["message"]);
         });
