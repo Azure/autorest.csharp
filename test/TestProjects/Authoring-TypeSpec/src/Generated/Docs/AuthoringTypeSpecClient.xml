@@ -10,7 +10,18 @@ This sample shows how to call CreateOrUpdateAsync with all parameters and reques
 Uri endpoint = new Uri("<https://my-service.azure.com>");
 AuthoringTypeSpecClient client = new AuthoringTypeSpecClient(endpoint);
 
-RequestContent content = null;
+RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+{
+    ["projectKind"] = "CustomSingleLabelClassification",
+    ["storageInputContainerName"] = "<storageInputContainerName>",
+    ["settings"] = new Dictionary<string, object>()
+    {
+        ["key"] = "<settings>",
+    },
+    ["multilingual"] = true,
+    ["description"] = "<description>",
+    ["language"] = "<language>",
+});
 Response response = await client.CreateOrUpdateAsync("<projectName>", content);
 ]]></code></example>
     </member>
@@ -23,7 +34,18 @@ This sample shows how to call CreateOrUpdate with all parameters and request con
 Uri endpoint = new Uri("<https://my-service.azure.com>");
 AuthoringTypeSpecClient client = new AuthoringTypeSpecClient(endpoint);
 
-RequestContent content = null;
+RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+{
+    ["projectKind"] = "CustomSingleLabelClassification",
+    ["storageInputContainerName"] = "<storageInputContainerName>",
+    ["settings"] = new Dictionary<string, object>()
+    {
+        ["key"] = "<settings>",
+    },
+    ["multilingual"] = true,
+    ["description"] = "<description>",
+    ["language"] = "<language>",
+});
 Response response = client.CreateOrUpdate("<projectName>", content);
 ]]></code></example>
     </member>
@@ -114,7 +136,10 @@ This sample shows how to call TrainAsync with required parameters and request co
 Uri endpoint = new Uri("<https://my-service.azure.com>");
 AuthoringTypeSpecClient client = new AuthoringTypeSpecClient(endpoint);
 
-RequestContent content = null;
+RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+{
+    ["modelLabel"] = "<modelLabel>",
+});
 Response response = await client.TrainAsync("<projectName>", content);
 ]]></code></example>
     </member>
@@ -125,7 +150,10 @@ This sample shows how to call Train with required parameters and request content
 Uri endpoint = new Uri("<https://my-service.azure.com>");
 AuthoringTypeSpecClient client = new AuthoringTypeSpecClient(endpoint);
 
-RequestContent content = null;
+RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+{
+    ["modelLabel"] = "<modelLabel>",
+});
 Response response = client.Train("<projectName>", content);
 ]]></code></example>
     </member>
@@ -156,7 +184,9 @@ This sample shows how to call DeployProjectAsync with required parameters and re
 Uri endpoint = new Uri("<https://my-service.azure.com>");
 AuthoringTypeSpecClient client = new AuthoringTypeSpecClient(endpoint);
 
-RequestContent content = null;
+RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+{
+});
 Response response = await client.DeployProjectAsync("<projectName>", "<deploymentName>", content);
 ]]></code></example>
     </member>
@@ -167,7 +197,9 @@ This sample shows how to call DeployProject with required parameters and request
 Uri endpoint = new Uri("<https://my-service.azure.com>");
 AuthoringTypeSpecClient client = new AuthoringTypeSpecClient(endpoint);
 
-RequestContent content = null;
+RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+{
+});
 Response response = client.DeployProject("<projectName>", "<deploymentName>", content);
 ]]></code></example>
     </member>
@@ -198,7 +230,11 @@ This sample shows how to call SwapDeploymentsAsync with required parameters and 
 Uri endpoint = new Uri("<https://my-service.azure.com>");
 AuthoringTypeSpecClient client = new AuthoringTypeSpecClient(endpoint);
 
-RequestContent content = null;
+RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+{
+    ["firstDeploymentName"] = "<firstDeploymentName>",
+    ["secondDeploymentName"] = "<secondDeploymentName>",
+});
 Response response = await client.SwapDeploymentsAsync("<projectName>", content);
 ]]></code></example>
     </member>
@@ -209,7 +245,11 @@ This sample shows how to call SwapDeployments with required parameters and reque
 Uri endpoint = new Uri("<https://my-service.azure.com>");
 AuthoringTypeSpecClient client = new AuthoringTypeSpecClient(endpoint);
 
-RequestContent content = null;
+RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+{
+    ["firstDeploymentName"] = "<firstDeploymentName>",
+    ["secondDeploymentName"] = "<secondDeploymentName>",
+});
 Response response = client.SwapDeployments("<projectName>", content);
 ]]></code></example>
     </member>

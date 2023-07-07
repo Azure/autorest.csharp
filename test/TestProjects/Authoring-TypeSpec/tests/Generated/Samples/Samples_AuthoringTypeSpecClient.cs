@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using AuthoringTypeSpec;
 using Azure;
@@ -23,7 +24,18 @@ namespace AuthoringTypeSpec.Samples
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             AuthoringTypeSpecClient client = new AuthoringTypeSpecClient(endpoint);
 
-            RequestContent content = null;
+            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            {
+                ["projectKind"] = "CustomSingleLabelClassification",
+                ["storageInputContainerName"] = "<storageInputContainerName>",
+                ["settings"] = new Dictionary<string, object>()
+                {
+                    ["key"] = "<settings>",
+                },
+                ["multilingual"] = true,
+                ["description"] = "<description>",
+                ["language"] = "<language>",
+            });
             Response response = client.CreateOrUpdate("<projectName>", content);
         }
 
@@ -34,7 +46,18 @@ namespace AuthoringTypeSpec.Samples
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             AuthoringTypeSpecClient client = new AuthoringTypeSpecClient(endpoint);
 
-            RequestContent content = null;
+            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            {
+                ["projectKind"] = "CustomSingleLabelClassification",
+                ["storageInputContainerName"] = "<storageInputContainerName>",
+                ["settings"] = new Dictionary<string, object>()
+                {
+                    ["key"] = "<settings>",
+                },
+                ["multilingual"] = true,
+                ["description"] = "<description>",
+                ["language"] = "<language>",
+            });
             Response response = await client.CreateOrUpdateAsync("<projectName>", content);
         }
 
@@ -125,7 +148,10 @@ namespace AuthoringTypeSpec.Samples
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             AuthoringTypeSpecClient client = new AuthoringTypeSpecClient(endpoint);
 
-            RequestContent content = null;
+            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            {
+                ["modelLabel"] = "<modelLabel>",
+            });
             Response response = client.Train("<projectName>", content);
         }
 
@@ -136,7 +162,10 @@ namespace AuthoringTypeSpec.Samples
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             AuthoringTypeSpecClient client = new AuthoringTypeSpecClient(endpoint);
 
-            RequestContent content = null;
+            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            {
+                ["modelLabel"] = "<modelLabel>",
+            });
             Response response = await client.TrainAsync("<projectName>", content);
         }
 
@@ -167,7 +196,9 @@ namespace AuthoringTypeSpec.Samples
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             AuthoringTypeSpecClient client = new AuthoringTypeSpecClient(endpoint);
 
-            RequestContent content = null;
+            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            {
+            });
             Response response = client.DeployProject("<projectName>", "<deploymentName>", content);
         }
 
@@ -178,7 +209,9 @@ namespace AuthoringTypeSpec.Samples
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             AuthoringTypeSpecClient client = new AuthoringTypeSpecClient(endpoint);
 
-            RequestContent content = null;
+            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            {
+            });
             Response response = await client.DeployProjectAsync("<projectName>", "<deploymentName>", content);
         }
 
@@ -209,7 +242,11 @@ namespace AuthoringTypeSpec.Samples
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             AuthoringTypeSpecClient client = new AuthoringTypeSpecClient(endpoint);
 
-            RequestContent content = null;
+            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            {
+                ["firstDeploymentName"] = "<firstDeploymentName>",
+                ["secondDeploymentName"] = "<secondDeploymentName>",
+            });
             Response response = client.SwapDeployments("<projectName>", content);
         }
 
@@ -220,7 +257,11 @@ namespace AuthoringTypeSpec.Samples
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             AuthoringTypeSpecClient client = new AuthoringTypeSpecClient(endpoint);
 
-            RequestContent content = null;
+            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            {
+                ["firstDeploymentName"] = "<firstDeploymentName>",
+                ["secondDeploymentName"] = "<secondDeploymentName>",
+            });
             Response response = await client.SwapDeploymentsAsync("<projectName>", content);
         }
 

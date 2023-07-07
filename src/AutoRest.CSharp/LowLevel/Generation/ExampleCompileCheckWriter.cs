@@ -128,63 +128,14 @@ namespace AutoRest.CSharp.LowLevel.Generation
         {
             var clientConstructor = sample.ClientInvocationChain.First();
             // handle authentication related parameters
-            var parameterDeclarations = new Dictionary<Parameter, CodeWriterDeclaration>();
-            foreach (var parameter in clientConstructor.Parameters)
-            {
-                var declaration = new CodeWriterDeclaration(parameter.Name);
-                if (parameter.Type.EqualsIgnoreNullable(KeyAuthType))
-                {
-                    _writer.Line($"{typeof(AzureKeyCredential)} {declaration:D} = new {typeof(AzureKeyCredential)}({"<key>":L});");
-                    parameterDeclarations.Add(parameter, declaration);
-                }
-                else if (parameter.Type.EqualsIgnoreNullable(TokenAuthType))
-                {
-                    // we cannot use typeof(DefaultAzureCredential) here because autorest.csharp does not use `Azure.Identity` as a dependency
-                    _writer.UseNamespace("Azure.Identity");
-                    _writer.Line($"{typeof(TokenCredential)} {declaration:D} = new DefaultAzureCredential();");
-                    parameterDeclarations.Add(parameter, declaration);
-                }
-                else if (parameter.Name == KnownParameters.Endpoint.Name && parameter.Type.EqualsIgnoreNullable(KnownParameters.Endpoint.Type))
-                {
-                    // randomly find an endpoint in the list as its value
-                    var exampleValue = sample.GetEndpointValue();
-                    _writer.Append($"{parameter.Type} {declaration:D} = ")
-                        .AppendExampleParameterValue(parameter, new(parameter, exampleValue))
-                        .LineRaw(";");
-                    parameterDeclarations.Add(parameter, declaration);
-                }
-            }
+            var parameterDeclarations = WriteOperationInvocationParameters(sample, clientConstructor.Parameters);
 
             var clientVar = new CodeWriterDeclaration("client");
             _writer.Append($"{sample.Client.Type} {clientVar:D} = ");
             foreach (var method in sample.ClientInvocationChain)
             {
-                // write the method invocation
-                if (method is ConstructorSignature ctor)
-                    _writer.Append($"new {clientConstructor.Name}(");
-                else
-                    _writer.Append($"{method.Name}(");
-
-                // write the parameters
-                foreach (var parameter in method.Parameters)
-                {
-                    // if it is handled above
-                    if (parameterDeclarations.TryGetValue(parameter, out var declaration))
-                    {
-                        _writer.Append($"{declaration:I},");
-                    }
-                    else if (sample.ParameterValueMapping.TryGetValue(parameter.Name, out var exampleValue))
-                    {
-                        _writer.AppendExampleParameterValue(parameter, exampleValue)
-                            .AppendRaw(",");
-                    }
-                    else
-                    {
-                        _writer.Append($"default,");
-                    }
-                }
-                _writer.RemoveTrailingComma();
-                _writer.AppendRaw(").");
+                WriteOperationInvocation(parameterDeclarations, sample, method);
+                _writer.AppendRaw(".");
             }
             _writer.RemoveTrailingCharacter();
             _writer.LineRaw(";");
@@ -229,21 +180,23 @@ namespace AutoRest.CSharp.LowLevel.Generation
 
         private CodeWriterDeclaration? WriteSampleNormalOperation(DpgOperationSample sample, MethodSignature methodSignature, CodeWriterDeclaration clientVar, bool useAllParameters, bool isAsync)
         {
-            var parameters = WriteOperationInvocationParameters(sample, methodSignature);
+            var parameters = WriteOperationInvocationParameters(sample, methodSignature.Parameters);
 
             var returnType = GetReturnType(methodSignature);
             var response = new CodeWriterDeclaration("response");
 
-            _writer.Append($"{returnType} {response:D} = ");
-            WriteOperationInvocation(clientVar, parameters, sample, methodSignature, isAsync, false);
+            _writer.Append($"{returnType} {response:D} = ")
+                .AppendRawIf("await ", isAsync)
+                .Append($"{clientVar}.");
+            WriteOperationInvocation(parameters, sample, methodSignature);
             _writer.LineRaw(";");
             return response;
         }
 
-        private Dictionary<string, CodeWriterDeclaration> WriteOperationInvocationParameters(DpgOperationSample sample, MethodSignature methodSignature)
+        private Dictionary<Parameter, CodeWriterDeclaration> WriteOperationInvocationParameters(DpgOperationSample sample, IEnumerable<Parameter> parameters)
         {
-            var result = new Dictionary<string, CodeWriterDeclaration>();
-            foreach (var parameter in methodSignature.Parameters)
+            var result = new Dictionary<Parameter, CodeWriterDeclaration>();
+            foreach (var parameter in parameters)
             {
                 // some parameters are always inline
                 if (sample.IsInlineParameter(parameter))
@@ -254,18 +207,17 @@ namespace AutoRest.CSharp.LowLevel.Generation
                     var declaration = new CodeWriterDeclaration(parameter.Name);
                     _writer.Append($"{parameter.Type} {declaration:D} = ")
                         .AppendExampleParameterValue(parameterValue).LineRaw(";");
-                    result.Add(parameter.Name, declaration);
+                    result.Add(parameter, declaration);
                 }
             }
 
             return result;
         }
 
-        private void WriteOperationInvocation(CodeWriterDeclaration instanceVar, Dictionary<string, CodeWriterDeclaration> parameters, DpgOperationSample sample, MethodSignature methodSignature, bool isAsync, bool isPageable)
+        private void WriteOperationInvocation(Dictionary<Parameter, CodeWriterDeclaration> parameters, DpgOperationSample sample, MethodSignatureBase methodSignature)
         {
-            var methodName = methodSignature.Name;
-            _writer.AppendRawIf("await ", isAsync && !isPageable) // pageable operations do not need the await keyword
-                .Append($"{instanceVar}.{methodName}(");
+            _writer.AppendRawIf("new ", methodSignature is ConstructorSignature)
+                .Append($"{methodSignature.Name}(");
             // write parameters
             foreach (var parameter in methodSignature.Parameters)
             {
@@ -278,7 +230,7 @@ namespace AutoRest.CSharp.LowLevel.Generation
                     }
                     continue;
                 }
-                else if (parameters.TryGetValue(parameter.Name, out var declaration))
+                else if (parameters.TryGetValue(parameter, out var declaration))
                 {
                     _writer.AppendIf($"{parameter.Name}: ", parameter.DefaultValue != null)
                         .Append($"{declaration:I}")

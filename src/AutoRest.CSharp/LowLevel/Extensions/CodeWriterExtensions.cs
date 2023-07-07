@@ -66,10 +66,20 @@ namespace AutoRest.CSharp.LowLevel.Generation.Extensions
             if (type.FrameworkType == typeof(BinaryData))
                 return writer.AppendBinaryData(exampleValue);
 
+            if (type.FrameworkType == typeof(RequestContent))
+                return writer.AppendRequestContent(exampleValue);
+
             //if (exampleValue.Schema is ObjectSchema objectSchema)
             //    return writer.AppendComplexFrameworkTypeValue(objectSchema, type.FrameworkType, exampleValue);
 
             return writer.AppendRawValue(exampleValue.RawValue, type.FrameworkType, exampleValue.Type);
+        }
+
+        private static CodeWriter AppendRequestContent(this CodeWriter writer, InputExampleValue value)
+        {
+            return writer.Append($"{typeof(RequestContent)}.Create(")
+                .AppendAnonymousObject(value)
+                .AppendRaw(")");
         }
 
         private static CodeWriter AppendListValue(this CodeWriter writer, CSharpType type, InputExampleValue exampleValue, bool includeInitialization = true)
@@ -151,12 +161,13 @@ namespace AutoRest.CSharp.LowLevel.Generation.Extensions
             }
             else
             {
-                using (writer.Scope($"new {typeof(Dictionary<string, object>)}()"))
+                using (writer.Scope($"new {typeof(Dictionary<string, object>)}()", newLine: false))
                 {
                     foreach ((var key, var value) in exampleValue.Properties)
                     {
-                        writer.Append($"[{key:L}] = ");
-                        writer.AppendAnonymousObject(value);
+                        writer.Append($"[{key:L}] = ")
+                            .AppendAnonymousObject(value)
+                            .AppendRaw(",");
                     }
                 }
             }

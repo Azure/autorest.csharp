@@ -220,6 +220,9 @@ namespace AutoRest.CSharp.Output.Samples.Models
             if (IsSameParameter(parameter, KnownParameters.RequestContent) || IsSameParameter(parameter, KnownParameters.RequestContentNullable))
                 return false;
 
+            if (IsSameParameter(parameter, KnownParameters.Endpoint))
+                return false;
+
             if (parameter.Type.EqualsIgnoreNullable(KnownParameters.KeyAuth.Type))
                 return false;
 
