@@ -8,7 +8,7 @@ This sample shows how to call GetDocumentStatusAsync with required parameters an
 var credential = new AzureKeyCredential("<key>");
 var client = new DocumentTranslationClient("<https://my-service.azure.com>", credential);
 
-Response response = await client.GetDocumentStatusAsync(Guid.NewGuid(), Guid.NewGuid());
+Response response = await client.GetDocumentStatusAsync(Guid.NewGuid(), Guid.NewGuid()).ConfigureAwait(false);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("path").ToString());
@@ -64,7 +64,7 @@ This sample shows how to call GetTranslationStatusAsync with required parameters
 var credential = new AzureKeyCredential("<key>");
 var client = new DocumentTranslationClient("<https://my-service.azure.com>", credential);
 
-Response response = await client.GetTranslationStatusAsync(Guid.NewGuid());
+Response response = await client.GetTranslationStatusAsync(Guid.NewGuid()).ConfigureAwait(false);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("id").ToString());
@@ -124,7 +124,7 @@ This sample shows how to call CancelTranslationAsync with required parameters an
 var credential = new AzureKeyCredential("<key>");
 var client = new DocumentTranslationClient("<https://my-service.azure.com>", credential);
 
-Response response = await client.CancelTranslationAsync(Guid.NewGuid());
+Response response = await client.CancelTranslationAsync(Guid.NewGuid()).ConfigureAwait(false);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("id").ToString());
@@ -184,7 +184,7 @@ This sample shows how to call GetSupportedDocumentFormatsAsync and parse the res
 var credential = new AzureKeyCredential("<key>");
 var client = new DocumentTranslationClient("<https://my-service.azure.com>", credential);
 
-Response response = await client.GetSupportedDocumentFormatsAsync();
+Response response = await client.GetSupportedDocumentFormatsAsync().ConfigureAwait(false);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("value")[0].GetProperty("format").ToString());
@@ -220,7 +220,7 @@ This sample shows how to call GetSupportedGlossaryFormatsAsync and parse the res
 var credential = new AzureKeyCredential("<key>");
 var client = new DocumentTranslationClient("<https://my-service.azure.com>", credential);
 
-Response response = await client.GetSupportedGlossaryFormatsAsync();
+Response response = await client.GetSupportedGlossaryFormatsAsync().ConfigureAwait(false);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("value")[0].GetProperty("format").ToString());
@@ -256,7 +256,7 @@ This sample shows how to call GetSupportedStorageSourcesAsync and parse the resu
 var credential = new AzureKeyCredential("<key>");
 var client = new DocumentTranslationClient("<https://my-service.azure.com>", credential);
 
-Response response = await client.GetSupportedStorageSourcesAsync();
+Response response = await client.GetSupportedStorageSourcesAsync().ConfigureAwait(false);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("value")[0].ToString());

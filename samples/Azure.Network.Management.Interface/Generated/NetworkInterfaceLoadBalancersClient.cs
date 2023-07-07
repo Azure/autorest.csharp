@@ -7,7 +7,6 @@
 
 using System;
 using System.Threading;
-using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
 using Azure.Network.Management.Interface.Models;

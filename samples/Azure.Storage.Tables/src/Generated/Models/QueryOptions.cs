@@ -5,8 +5,6 @@
 
 #nullable disable
 
-using Azure.Storage.Tables;
-
 namespace Azure.Storage.Tables.Models
 {
     /// <summary> Parameter group. </summary>

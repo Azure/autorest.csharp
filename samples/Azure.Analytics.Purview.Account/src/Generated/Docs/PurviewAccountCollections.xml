@@ -5,7 +5,7 @@
 <example>
 This sample shows how to call GetCollectionAsync and parse the result.
 <code><![CDATA[
-var credential = new DefaultAzureCredential();
+var credential = new Azure.Identity.DefaultAzureCredential();
 var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new PurviewAccountsClient(endpoint, credential).GetCollectionsClient("<collectionName>");
 
@@ -31,7 +31,7 @@ Console.WriteLine(result.GetProperty("systemData").GetProperty("lastModifiedByTy
 <example>
 This sample shows how to call GetCollection and parse the result.
 <code><![CDATA[
-var credential = new DefaultAzureCredential();
+var credential = new Azure.Identity.DefaultAzureCredential();
 var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new PurviewAccountsClient(endpoint, credential).GetCollectionsClient("<collectionName>");
 
@@ -57,7 +57,7 @@ Console.WriteLine(result.GetProperty("systemData").GetProperty("lastModifiedByTy
 <example>
 This sample shows how to call CreateOrUpdateCollectionAsync and parse the result.
 <code><![CDATA[
-var credential = new DefaultAzureCredential();
+var credential = new Azure.Identity.DefaultAzureCredential();
 var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new PurviewAccountsClient(endpoint, credential).GetCollectionsClient("<collectionName>");
 
@@ -70,7 +70,7 @@ Console.WriteLine(result.ToString());
 ]]></code>
 This sample shows how to call CreateOrUpdateCollectionAsync with all request content, and how to parse the result.
 <code><![CDATA[
-var credential = new DefaultAzureCredential();
+var credential = new Azure.Identity.DefaultAzureCredential();
 var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new PurviewAccountsClient(endpoint, credential).GetCollectionsClient("<collectionName>");
 
@@ -104,7 +104,7 @@ Console.WriteLine(result.GetProperty("systemData").GetProperty("lastModifiedByTy
 <example>
 This sample shows how to call CreateOrUpdateCollection and parse the result.
 <code><![CDATA[
-var credential = new DefaultAzureCredential();
+var credential = new Azure.Identity.DefaultAzureCredential();
 var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new PurviewAccountsClient(endpoint, credential).GetCollectionsClient("<collectionName>");
 
@@ -117,7 +117,7 @@ Console.WriteLine(result.ToString());
 ]]></code>
 This sample shows how to call CreateOrUpdateCollection with all request content, and how to parse the result.
 <code><![CDATA[
-var credential = new DefaultAzureCredential();
+var credential = new Azure.Identity.DefaultAzureCredential();
 var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new PurviewAccountsClient(endpoint, credential).GetCollectionsClient("<collectionName>");
 
@@ -151,7 +151,7 @@ Console.WriteLine(result.GetProperty("systemData").GetProperty("lastModifiedByTy
 <example>
 This sample shows how to call DeleteCollectionAsync.
 <code><![CDATA[
-var credential = new DefaultAzureCredential();
+var credential = new Azure.Identity.DefaultAzureCredential();
 var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new PurviewAccountsClient(endpoint, credential).GetCollectionsClient("<collectionName>");
 
@@ -164,7 +164,7 @@ Console.WriteLine(response.Status);
 <example>
 This sample shows how to call DeleteCollection.
 <code><![CDATA[
-var credential = new DefaultAzureCredential();
+var credential = new Azure.Identity.DefaultAzureCredential();
 var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new PurviewAccountsClient(endpoint, credential).GetCollectionsClient("<collectionName>");
 
@@ -177,7 +177,7 @@ Console.WriteLine(response.Status);
 <example>
 This sample shows how to call GetCollectionPathAsync and parse the result.
 <code><![CDATA[
-var credential = new DefaultAzureCredential();
+var credential = new Azure.Identity.DefaultAzureCredential();
 var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new PurviewAccountsClient(endpoint, credential).GetCollectionsClient("<collectionName>");
 
@@ -193,7 +193,7 @@ Console.WriteLine(result.GetProperty("parentNameChain")[0].ToString());
 <example>
 This sample shows how to call GetCollectionPath and parse the result.
 <code><![CDATA[
-var credential = new DefaultAzureCredential();
+var credential = new Azure.Identity.DefaultAzureCredential();
 var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new PurviewAccountsClient(endpoint, credential).GetCollectionsClient("<collectionName>");
 
@@ -209,7 +209,7 @@ Console.WriteLine(result.GetProperty("parentNameChain")[0].ToString());
 <example>
 This sample shows how to call GetCollectionsAsync and parse the result.
 <code><![CDATA[
-var credential = new DefaultAzureCredential();
+var credential = new Azure.Identity.DefaultAzureCredential();
 var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new PurviewAccountsClient(endpoint, credential).GetCollectionsClient("<collectionName>");
 
@@ -221,7 +221,7 @@ await foreach (var item in client.GetCollectionsAsync())
 ]]></code>
 This sample shows how to call GetCollectionsAsync with all parameters, and how to parse the result.
 <code><![CDATA[
-var credential = new DefaultAzureCredential();
+var credential = new Azure.Identity.DefaultAzureCredential();
 var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new PurviewAccountsClient(endpoint, credential).GetCollectionsClient("<collectionName>");
 
@@ -248,7 +248,7 @@ await foreach (var item in client.GetCollectionsAsync("<skipToken>"))
 <example>
 This sample shows how to call GetCollections and parse the result.
 <code><![CDATA[
-var credential = new DefaultAzureCredential();
+var credential = new Azure.Identity.DefaultAzureCredential();
 var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new PurviewAccountsClient(endpoint, credential).GetCollectionsClient("<collectionName>");
 
@@ -260,7 +260,7 @@ foreach (var item in client.GetCollections())
 ]]></code>
 This sample shows how to call GetCollections with all parameters, and how to parse the result.
 <code><![CDATA[
-var credential = new DefaultAzureCredential();
+var credential = new Azure.Identity.DefaultAzureCredential();
 var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new PurviewAccountsClient(endpoint, credential).GetCollectionsClient("<collectionName>");
 
@@ -287,7 +287,7 @@ foreach (var item in client.GetCollections("<skipToken>"))
 <example>
 This sample shows how to call GetChildCollectionNamesAsync and parse the result.
 <code><![CDATA[
-var credential = new DefaultAzureCredential();
+var credential = new Azure.Identity.DefaultAzureCredential();
 var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new PurviewAccountsClient(endpoint, credential).GetCollectionsClient("<collectionName>");
 
@@ -299,7 +299,7 @@ await foreach (var item in client.GetChildCollectionNamesAsync())
 ]]></code>
 This sample shows how to call GetChildCollectionNamesAsync with all parameters, and how to parse the result.
 <code><![CDATA[
-var credential = new DefaultAzureCredential();
+var credential = new Azure.Identity.DefaultAzureCredential();
 var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new PurviewAccountsClient(endpoint, credential).GetCollectionsClient("<collectionName>");
 
@@ -316,7 +316,7 @@ await foreach (var item in client.GetChildCollectionNamesAsync("<skipToken>"))
 <example>
 This sample shows how to call GetChildCollectionNames and parse the result.
 <code><![CDATA[
-var credential = new DefaultAzureCredential();
+var credential = new Azure.Identity.DefaultAzureCredential();
 var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new PurviewAccountsClient(endpoint, credential).GetCollectionsClient("<collectionName>");
 
@@ -328,7 +328,7 @@ foreach (var item in client.GetChildCollectionNames())
 ]]></code>
 This sample shows how to call GetChildCollectionNames with all parameters, and how to parse the result.
 <code><![CDATA[
-var credential = new DefaultAzureCredential();
+var credential = new Azure.Identity.DefaultAzureCredential();
 var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new PurviewAccountsClient(endpoint, credential).GetCollectionsClient("<collectionName>");
 

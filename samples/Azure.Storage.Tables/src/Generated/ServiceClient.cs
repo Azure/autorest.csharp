@@ -8,7 +8,6 @@
 using System;
 using System.Threading;
 using System.Threading.Tasks;
-using Azure;
 using Azure.Core.Pipeline;
 using Azure.Storage.Tables.Models;
 

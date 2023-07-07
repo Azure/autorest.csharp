@@ -5,11 +5,11 @@
 <example>
 This sample shows how to call GetResourceSetRuleAsync and parse the result.
 <code><![CDATA[
-var credential = new DefaultAzureCredential();
+var credential = new Azure.Identity.DefaultAzureCredential();
 var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new PurviewAccountsClient(endpoint, credential).GetResourceSetRulesClient();
 
-Response response = await client.GetResourceSetRuleAsync();
+Response response = await client.GetResourceSetRuleAsync().ConfigureAwait(false);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("advancedResourceSet").GetProperty("modifiedAt").ToString());
@@ -104,7 +104,7 @@ Console.WriteLine(result.GetProperty("pathPatternConfig").GetProperty("version")
 <example>
 This sample shows how to call GetResourceSetRule and parse the result.
 <code><![CDATA[
-var credential = new DefaultAzureCredential();
+var credential = new Azure.Identity.DefaultAzureCredential();
 var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new PurviewAccountsClient(endpoint, credential).GetResourceSetRulesClient();
 
@@ -203,20 +203,20 @@ Console.WriteLine(result.GetProperty("pathPatternConfig").GetProperty("version")
 <example>
 This sample shows how to call CreateOrUpdateResourceSetRuleAsync and parse the result.
 <code><![CDATA[
-var credential = new DefaultAzureCredential();
+var credential = new Azure.Identity.DefaultAzureCredential();
 var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new PurviewAccountsClient(endpoint, credential).GetResourceSetRulesClient();
 
 var data = new {};
 
-Response response = await client.CreateOrUpdateResourceSetRuleAsync(RequestContent.Create(data));
+Response response = await client.CreateOrUpdateResourceSetRuleAsync(RequestContent.Create(data)).ConfigureAwait(false);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.ToString());
 ]]></code>
 This sample shows how to call CreateOrUpdateResourceSetRuleAsync with all request content, and how to parse the result.
 <code><![CDATA[
-var credential = new DefaultAzureCredential();
+var credential = new Azure.Identity.DefaultAzureCredential();
 var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new PurviewAccountsClient(endpoint, credential).GetResourceSetRulesClient();
 
@@ -321,7 +321,7 @@ var data = new {
     },
 };
 
-Response response = await client.CreateOrUpdateResourceSetRuleAsync(RequestContent.Create(data));
+Response response = await client.CreateOrUpdateResourceSetRuleAsync(RequestContent.Create(data)).ConfigureAwait(false);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("advancedResourceSet").GetProperty("modifiedAt").ToString());
@@ -416,7 +416,7 @@ Console.WriteLine(result.GetProperty("pathPatternConfig").GetProperty("version")
 <example>
 This sample shows how to call CreateOrUpdateResourceSetRule and parse the result.
 <code><![CDATA[
-var credential = new DefaultAzureCredential();
+var credential = new Azure.Identity.DefaultAzureCredential();
 var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new PurviewAccountsClient(endpoint, credential).GetResourceSetRulesClient();
 
@@ -429,7 +429,7 @@ Console.WriteLine(result.ToString());
 ]]></code>
 This sample shows how to call CreateOrUpdateResourceSetRule with all request content, and how to parse the result.
 <code><![CDATA[
-var credential = new DefaultAzureCredential();
+var credential = new Azure.Identity.DefaultAzureCredential();
 var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new PurviewAccountsClient(endpoint, credential).GetResourceSetRulesClient();
 
@@ -629,11 +629,11 @@ Console.WriteLine(result.GetProperty("pathPatternConfig").GetProperty("version")
 <example>
 This sample shows how to call DeleteResourceSetRuleAsync.
 <code><![CDATA[
-var credential = new DefaultAzureCredential();
+var credential = new Azure.Identity.DefaultAzureCredential();
 var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new PurviewAccountsClient(endpoint, credential).GetResourceSetRulesClient();
 
-Response response = await client.DeleteResourceSetRuleAsync();
+Response response = await client.DeleteResourceSetRuleAsync().ConfigureAwait(false);
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
@@ -642,7 +642,7 @@ Console.WriteLine(response.Status);
 <example>
 This sample shows how to call DeleteResourceSetRule.
 <code><![CDATA[
-var credential = new DefaultAzureCredential();
+var credential = new Azure.Identity.DefaultAzureCredential();
 var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new PurviewAccountsClient(endpoint, credential).GetResourceSetRulesClient();
 
