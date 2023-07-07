@@ -20,9 +20,7 @@ using AutoRest.CSharp.Common.Output.Models.Statements;
 using AutoRest.CSharp.Common.Output.Models.ValueExpressions;
 using Azure;
 using Azure.Core;
-using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
-using Microsoft.CodeAnalysis.CSharp.Syntax;
 using static AutoRest.CSharp.Common.Output.Models.Snippets;
 
 namespace AutoRest.CSharp.Generation.Writers
@@ -253,9 +251,9 @@ namespace AutoRest.CSharp.Generation.Writers
 
             var codeWriter = new CodeWriter(appendTypeNameOnly: true);
             codeWriter.WriteMethodBodyStatement(statement);
-            var code = FormattingSyntaxRewriter.Format(codeWriter.ToString(false));
+            var code = SamplesFormattingSyntaxRewriter.FormatCodeBlock(codeWriter.ToString(false));
 
-            builder.AppendLine(code);
+            builder.Append(code);
             builder.Append("]]></code>");
         }
 
@@ -316,14 +314,15 @@ namespace AutoRest.CSharp.Generation.Writers
 
             var arguments = signature.Parameters
                 //skip last param if its optional and cancellation token or request context
-                .Where((p, i) => i != signature.Parameters.Count - 1 || !p.IsOptionalInSignature || !p.Type.Equals(typeof(RequestContext)))
+                .Where((p, i) => i != signature.Parameters.Count - 1 || !p.Type.Equals(typeof(RequestContext)))
+                .Where(p => allParameters || !p.IsOptionalInSignature)
                 .Select(p => p.RequestLocation == RequestLocation.Body ? RequestContentExpression.Create(data!) : MockParameterValue(p))
                 .ToList();
 
 
             var responseType = restClientMethod.ResponseType;
             var pageItemType = restClientMethod.PageItemType;
-            var isLongRunning = signature.ReturnType is not null && TypeFactory.IsOperation(signature.ReturnType);
+            var isLongRunning = signature.ReturnType is not null && (TypeFactory.IsOperation(signature.ReturnType) || TypeFactory.IsTaskOfOperation(signature.ReturnType));
             if (isLongRunning)
             {
                 if (pageItemType is not null)
@@ -606,7 +605,7 @@ namespace AutoRest.CSharp.Generation.Writers
             var defaultValue = parameter.DefaultValue.Value;
             if (defaultValue is { IsNewInstanceSentinel: true, Type.IsValueType: true })
             {
-                return Snippets.Default;
+                return Default;
             }
 
             // skip null default value like "string a = null"
@@ -623,7 +622,7 @@ namespace AutoRest.CSharp.Generation.Writers
             return Literal(JsonSerializer.Serialize(defaultValue.Value));
         }
 
-        private ValueExpression MockParameterTypeValue(string parameterName, CSharpType parameterType)
+        private ValueExpression MockParameterTypeValue(string? parameterName, CSharpType parameterType)
         {
             if (parameterType.IsFrameworkType)
             {
@@ -647,7 +646,7 @@ namespace AutoRest.CSharp.Generation.Writers
 
                 if (type == typeof(string))
                 {
-                    return Literal($"<{parameterName}>");
+                    return string.IsNullOrWhiteSpace(parameterName) ? Literal("<String>") : Literal($"<{parameterName}>");
                 }
 
                 if (type == typeof(bool))
@@ -704,7 +703,7 @@ namespace AutoRest.CSharp.Generation.Writers
                 if (type == typeof(IEnumerable<>))
                 {
                     var elementType = parameterType.Arguments[0];
-                    return New.Array(elementType, MockParameterTypeValue(parameterName, elementType));
+                    return New.Array(elementType, true, MockParameterTypeValue(parameterName, elementType)) with {};
                 }
 
                 if (type == typeof(IDictionary<,>))
@@ -729,10 +728,9 @@ namespace AutoRest.CSharp.Generation.Writers
 
         private ValueExpression ComposeCSharpTypeInstance(bool allProperties, CSharpType type, string? propertyDescription, bool includeCollectionInitialization, bool isAnonymousType, HashSet<ObjectType> visitedModels) => type switch
         {
-            _ when TypeFactory.IsIEnumerableOfT(type) => ComposeArrayCSharpType(allProperties, type.Arguments.Single(), includeCollectionInitialization, isAnonymousType, visitedModels), // IEnumerable<T> is guaranteed to have one and only one generic parameter
-            _ when TypeFactory.IsReadWriteList(type) => ComposeArrayCSharpType(allProperties, type.Arguments.Single(), includeCollectionInitialization, isAnonymousType, visitedModels), // IList<T> is guaranteed to have one and only one generic parameter
-            _ when TypeFactory.IsReadWriteDictionary(type) => ComposeDictionaryInstance(allProperties, type.Arguments[0], type.Arguments[1], includeCollectionInitialization, isAnonymousType, visitedModels), // IDictionary<K, V> is guaranteed to have two generic parameters
-            { IsFrameworkType: true } => MockParameterTypeValue(propertyDescription ?? "null", type),
+            _ when TypeFactory.IsList(type) => ComposeArrayCSharpType(allProperties, type.Arguments.Single(), includeCollectionInitialization, isAnonymousType, visitedModels), // IList<T> is guaranteed to have one and only one generic parameter
+            _ when TypeFactory.IsDictionary(type) => ComposeDictionaryInstance(allProperties, type.Arguments[0], type.Arguments[1], includeCollectionInitialization, isAnonymousType, visitedModels), // IDictionary<K, V> is guaranteed to have two generic parameters
+            { IsFrameworkType: true } => MockParameterTypeValue(propertyDescription, type),
             { IsFrameworkType: false, Implementation: ObjectType objectType } when isAnonymousType => ComposeAnonymousObjectType(allProperties, objectType, visitedModels),
             { IsFrameworkType: false, Implementation: ObjectType objectType } => ComposeObjectType(allProperties, objectType, visitedModels),
             { IsFrameworkType: false, Implementation: EnumType enumType } => EnumValue(enumType, enumType.Values.First()),
@@ -754,7 +752,7 @@ namespace AutoRest.CSharp.Generation.Writers
                 return includeCollectionInitialization ? New.Array(elementType) : New.Anonymous(null);
             }
 
-            return New.Array(elementType, ComposeCSharpTypeInstance(allProperties, elementType, null, includeCollectionInitialization, isAnonymousType, visitedModels));
+            return New.Array(isAnonymousType ? null : elementType, ComposeCSharpTypeInstance(allProperties, elementType, null, includeCollectionInitialization, isAnonymousType, visitedModels));
         }
 
         private ValueExpression ComposeDictionaryInstance(bool allProperties, CSharpType keyType, CSharpType valueType, bool includeCollectionInitialization, bool isAnonymousType, HashSet<ObjectType> visitedModels)
@@ -951,51 +949,5 @@ namespace AutoRest.CSharp.Generation.Writers
 
         private static InputModelType GetConcreteChildModel(InputModelType model)
             => model.DerivedModels.Any() ? model.DerivedModels[0] : model;
-
-        private class FormattingSyntaxRewriter : CSharpSyntaxRewriter
-        {
-            private static readonly SyntaxAnnotation HasLeadingLineBreak = new(nameof(HasLeadingLineBreak));
-            private static readonly CSharpSyntaxRewriter Instance = new FormattingSyntaxRewriter();
-
-            public static string Format(string code)
-            {
-                var syntaxTree = CSharpSyntaxTree.ParseText(code, options: CSharpParseOptions.Default.WithKind(SourceCodeKind.Script));
-                var root = Instance.Visit(syntaxTree.GetRoot());
-                return root.GetText().ToString();
-            }
-
-            public override SyntaxNode? VisitCompilationUnit(CompilationUnitSyntax node)
-            {
-                node = node.WithMembers(SyntaxFactory.List(node.Members.Select(Annotate))).NormalizeWhitespace();
-                var visitedNode = base.VisitCompilationUnit(node);
-
-                return visitedNode is CompilationUnitSyntax cu ? cu.WithMembers(SyntaxFactory.List(cu.Members.Select(FixTrivia))) : visitedNode;
-
-                static MemberDeclarationSyntax Annotate(MemberDeclarationSyntax memberDeclaration)
-                    => memberDeclaration.GetLeadingTrivia().Any(SyntaxKind.EndOfLineTrivia) ? memberDeclaration.WithAdditionalAnnotations(HasLeadingLineBreak) : memberDeclaration;
-
-                static MemberDeclarationSyntax FixTrivia(MemberDeclarationSyntax memberDeclaration)
-                    => memberDeclaration.GetAnnotations(nameof(HasLeadingLineBreak)).Any() ? memberDeclaration.WithLeadingTrivia(SyntaxFactory.CarriageReturnLineFeed) : memberDeclaration;
-            }
-
-            public override SyntaxNode? VisitAnonymousObjectCreationExpression(AnonymousObjectCreationExpressionSyntax node)
-            {
-                var visitedNode = base.VisitAnonymousObjectCreationExpression(node);
-                if (visitedNode is not AnonymousObjectCreationExpressionSyntax oc)
-                {
-                    return visitedNode;
-                }
-
-                return oc
-                    .WithInitializers(SyntaxFactory.SeparatedList<AnonymousObjectMemberDeclaratorSyntax>(oc.Initializers.GetWithSeparators().Select(FixInitializerTrivia)))
-                    .WithNewKeyword(oc.NewKeyword.WithTrailingTrivia(SyntaxFactory.Space))
-                    .WithCloseBraceToken(oc.CloseBraceToken.WithTrailingTrivia(SyntaxTriviaList.Empty));
-
-                static SyntaxNodeOrToken FixInitializerTrivia(SyntaxNodeOrToken initializer)
-                    => initializer.IsNode
-                        ? initializer.WithLeadingTrivia(initializer.GetLeadingTrivia().Add(SyntaxFactory.Whitespace("    ")))
-                        : initializer.WithTrailingTrivia(SyntaxFactory.CarriageReturnLineFeed);
-            }
-        }
     }
 }

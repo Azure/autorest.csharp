@@ -8,7 +8,6 @@ using System.Threading.Tasks;
 using AutoRest.CSharp.Common.Output.Models;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Generation.Writers;
-using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Output.Models.Shared;
 using NUnit.Framework;
@@ -40,17 +39,6 @@ namespace AutoRest.CSharp.LowLevel.Generation
 
         public void Write()
         {
-            //TODO: Once the code snippet composer uses CodeWriter these won't be needed
-            _writer.UseNamespace("Azure");
-            _writer.UseNamespace("Azure.Core");
-            _writer.UseNamespace("Azure.Identity");
-            _writer.UseNamespace("System");
-            _writer.UseNamespace("System.Collections.Generic");
-            _writer.UseNamespace("System.IO");
-            _writer.UseNamespace("System.Text.Json");
-            if (Configuration.ModelNamespace && _client.ClientMethods.Any(m => m.Convenience.Any()))
-                _writer.UseNamespace($"{_client.Declaration.Namespace}.Models");
-
             using (_writer.Namespace($"{_client.Declaration.Namespace}.Samples"))
             {
                 using (_writer.Scope($"public class Samples_{_client.Declaration.Name}"))
@@ -165,7 +153,7 @@ namespace AutoRest.CSharp.LowLevel.Generation
 
         public override string ToString()
         {
-            return _writer.ToString();
+            return SamplesFormattingSyntaxRewriter.FormatFile(_writer.ToString());
         }
     }
 }

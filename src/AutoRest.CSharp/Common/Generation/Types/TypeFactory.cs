@@ -10,6 +10,7 @@ using System.IO;
 using System.Linq;
 using System.Net;
 using System.Text;
+using System.Threading.Tasks;
 using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Output.Models.Shared;
@@ -231,6 +232,9 @@ namespace AutoRest.CSharp.Generation.Types
 
         internal static bool IsOperation(CSharpType type)
             => type.IsFrameworkType && (type.FrameworkType == typeof(Operation) || type.FrameworkType == typeof(Operation<>));
+
+        internal static bool IsTaskOfOperation(CSharpType type)
+            => type.IsFrameworkType && type.FrameworkType == typeof(Task<>) && IsOperation(type.Arguments[0]);
 
         internal static bool IsAsyncPageable(CSharpType type) => type.IsFrameworkType && type.FrameworkType == typeof(AsyncPageable<>);
 

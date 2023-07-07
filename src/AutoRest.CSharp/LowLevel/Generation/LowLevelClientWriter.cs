@@ -358,12 +358,6 @@ namespace AutoRest.CSharp.Generation.Writers
             WriteDocumentationRemarks((tag, text) => writer.WriteXmlDocumentation(tag, text), clientMethod, methodSignature, false);
         }
 
-        private static void WriteConvenienceMethodDocumentation(CodeWriter writer, MethodSignatureBase convenienceMethod)
-        {
-            writer.WriteMethodDocumentation(convenienceMethod);
-            writer.WriteXmlDocumentation("remarks", $"{convenienceMethod.DescriptionText}");
-        }
-
         private void WriteCancellationTokenToRequestContextMethod()
         {
             var defaultRequestContext = new CodeWriterDeclaration("DefaultRequestContext");

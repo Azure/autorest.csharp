@@ -186,10 +186,17 @@ namespace AutoRest.CSharp.Generation.Writers
 
         public void UseNamespace(string @namespace)
         {
-            if (_currentNamespace != @namespace)
+            if (_currentNamespace == @namespace)
             {
-                _usingNamespaces.Add(@namespace);
+                return;
             }
+
+            if (_currentNamespace is not null && _currentNamespace.Length > @namespace.Length && _currentNamespace.StartsWith(@namespace) && _currentNamespace[@namespace.Length] == '.')
+            {
+                return;
+            }
+
+            _usingNamespaces.Add(@namespace);
         }
 
         public CodeWriter AppendXmlDocumentation(FormattableString startTag, FormattableString endTag, FormattableString content)

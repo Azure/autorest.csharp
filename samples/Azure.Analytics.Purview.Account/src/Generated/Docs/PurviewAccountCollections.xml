@@ -9,7 +9,7 @@ var credential = new DefaultAzureCredential();
 var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new PurviewAccountsClient(endpoint, credential).GetCollectionsClient("<collectionName>");
 
-Response response = await client.GetCollectionAsync();
+Response response = await client.GetCollectionAsync().ConfigureAwait(false);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("collectionProvisioningState").ToString());
@@ -63,7 +63,7 @@ var client = new PurviewAccountsClient(endpoint, credential).GetCollectionsClien
 
 var data = new {};
 
-Response response = await client.CreateOrUpdateCollectionAsync(RequestContent.Create(data));
+Response response = await client.CreateOrUpdateCollectionAsync(RequestContent.Create(data)).ConfigureAwait(false);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.ToString());
@@ -82,7 +82,7 @@ var data = new {
     },
 };
 
-Response response = await client.CreateOrUpdateCollectionAsync(RequestContent.Create(data));
+Response response = await client.CreateOrUpdateCollectionAsync(RequestContent.Create(data)).ConfigureAwait(false);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("collectionProvisioningState").ToString());
@@ -155,7 +155,7 @@ var credential = new DefaultAzureCredential();
 var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new PurviewAccountsClient(endpoint, credential).GetCollectionsClient("<collectionName>");
 
-Response response = await client.DeleteCollectionAsync();
+Response response = await client.DeleteCollectionAsync().ConfigureAwait(false);
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
@@ -181,7 +181,7 @@ var credential = new DefaultAzureCredential();
 var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new PurviewAccountsClient(endpoint, credential).GetCollectionsClient("<collectionName>");
 
-Response response = await client.GetCollectionPathAsync();
+Response response = await client.GetCollectionPathAsync().ConfigureAwait(false);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("parentFriendlyNameChain")[0].ToString());

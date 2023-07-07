@@ -23,8 +23,9 @@ namespace AutoRest.CSharp.Common.Output.Models
             public static ValueExpression ArgumentOutOfRangeException(EnumType enumType, Parameter valueParameter)
                 => Instance(typeof(ArgumentOutOfRangeException), Nameof(valueParameter), valueParameter, Literal($"Unknown {enumType.Declaration.Name} value."));
 
-            public static EnumerableExpression Array(CSharpType elementType) => new(new NewArrayExpression(elementType));
-            public static EnumerableExpression Array(CSharpType elementType, params ValueExpression[] items) => new(new NewArrayExpression(elementType, items));
+            public static EnumerableExpression Array(CSharpType? elementType) => new(new NewArrayExpression(elementType));
+            public static EnumerableExpression Array(CSharpType? elementType, params ValueExpression[] items) => new(new NewArrayExpression(elementType, items));
+            public static EnumerableExpression Array(CSharpType? elementType, bool isInline, params ValueExpression[] items) => new(new NewArrayExpression(elementType, items, isInline));
 
             public static DictionaryExpression Dictionary(CSharpType dictionaryType) => new(new NewDictionaryExpression(dictionaryType));
             public static DictionaryExpression Dictionary(CSharpType keyType, CSharpType valueType) => Dictionary(new CSharpType(typeof(Dictionary<,>), keyType, valueType));

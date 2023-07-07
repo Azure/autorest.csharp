@@ -27,7 +27,7 @@ namespace AutoRest.CSharp.Output.Models.Types
         public IEnumerable<ModelTypeProvider> Models => _models.Values;
         public IReadOnlyList<LowLevelClient> RestClients { get; }
         public ClientOptionsTypeProvider ClientOptions { get; }
-        public IEnumerable<TypeProvider> AllModels => new List<TypeProvider>(_enums.Values).Concat(_models.Values);
+        public IEnumerable<TypeProvider> AllModels => _isTspInput ? new List<TypeProvider>(_enums.Values).Concat(_models.Values) : Array.Empty<TypeProvider>();
 
         public DpgOutputLibrary(string libraryName, string rootNamespace, IReadOnlyDictionary<InputEnumType, EnumType> enums, IReadOnlyDictionary<InputModelType, ModelTypeProvider> models, IReadOnlyList<LowLevelClient> restClients, ClientOptionsTypeProvider clientOptions, bool isTspInput, SourceInputModel? sourceInputModel)
         {

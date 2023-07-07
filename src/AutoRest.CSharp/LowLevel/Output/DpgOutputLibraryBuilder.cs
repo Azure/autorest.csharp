@@ -58,11 +58,8 @@ namespace AutoRest.CSharp.Output.Models
 
             var library = new DpgOutputLibrary(_libraryName, _rootNamespace.Name, enums, models, clients, clientOptions, isTspInput, _sourceInputModel);
 
-            if (isTspInput)
-            {
-                CreateEnums(enums, library.TypeFactory);
-                CreateModels(models, library.TypeFactory);
-            }
+            CreateEnums(enums, library.TypeFactory);
+            CreateModels(models, library.TypeFactory);
             CreateClients(clients, topLevelClientInfos, library.TypeFactory, clientOptions);
 
             return library;

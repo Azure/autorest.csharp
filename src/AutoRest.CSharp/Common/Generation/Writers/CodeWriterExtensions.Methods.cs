@@ -445,14 +445,43 @@ namespace AutoRest.CSharp.Generation.Writers
 
                     break;
 
-                case NewArrayExpression(var type, var items):
-                    if (items is not { Count: > 0 })
+                case NewArrayExpression(var type, not { Count: > 0 }, _):
+                    if (type is null)
                     {
-                        writer.Append($"Array.Empty<{type}>()");
+                        writer.AppendRaw("new[] {}");
                     }
                     else
                     {
-                        writer.Line($"new {type}[]{{");
+                        writer.Append($"Array.Empty<{type}>()");
+                    }
+                    break;
+
+                case NewArrayExpression(var type, var items, var isInline) when items.Count > 0:
+                    if (type is null)
+                    {
+                        writer.AppendRaw($"new[]");
+                    }
+                    else
+                    {
+                        writer.Append($"new {type}[] ");
+                    }
+
+                    if (isInline)
+                    {
+                        writer.AppendRaw(" { ");
+                        foreach (var item in items)
+                        {
+                            writer.WriteValueExpression(item);
+                            writer.AppendRaw(", ");
+                        }
+
+                        writer.RemoveTrailingComma();
+                        writer.AppendRaw(" }");
+                    }
+                    else
+                    {
+                        writer.Line();
+                        writer.LineRaw("{");
                         foreach (var item in items)
                         {
                             writer.WriteValueExpression(item);
