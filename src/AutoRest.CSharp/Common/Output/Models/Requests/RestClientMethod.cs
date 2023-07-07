@@ -77,6 +77,10 @@ namespace AutoRest.CSharp.Output.Models.Requests
 
         public bool ShouldEnableRedirect => Responses.Any(r => r.StatusCodes.Any(r => IsRedirectResponseCode(r.Code)));
 
-        private bool IsRedirectResponseCode(int? code) => code >= 300 && code < 400;
+        private bool IsRedirectResponseCode(int? code) => code switch
+        {
+            300 or 301 or 302 or 303 or 307 or 308 => true,
+            _ => false,
+        };
     }
 }
