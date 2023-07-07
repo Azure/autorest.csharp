@@ -203,7 +203,13 @@ namespace AutoRest.CSharp.LowLevel.Generation
         {
             var operation = WriteSampleLongRunningOperation(sample, methodSignature, clientVar, useAllParameters, isAsync);
 
-            // TODO -- handle response
+            var responseType = sample.Method.ResponseBodyType;
+            if (responseType != null)
+            {
+                var responseData = new CodeWriterDeclaration("responseData");
+                _writer.Line($"{typeof(BinaryData)} {responseData:D} = {operation}.Value;");
+                WriteNormalOperationResponse(responseType, $"{responseData}", $"{responseData}.ToStream()", useAllParameters);
+            }
         }
 
         private void WriteSamplePageableOperationWithResponse(DpgOperationSample sample, MethodSignature methodSignature, CodeWriterDeclaration clientVar, bool useAllParameters, bool isAsync)
@@ -219,7 +225,19 @@ namespace AutoRest.CSharp.LowLevel.Generation
 
             using (_writer.Scope())
             {
-                // TODO -- handle response
+                // find the item type
+                // TODO -- we need to move this into the sample model as well
+                var responseType = sample.Method.ResponseBodyType as InputModelType;
+                var pagingItemName = sample.Method.PagingInfo!.ItemName;
+                if (responseType != null)
+                {
+                    var itemsArrayProperty = responseType.Properties.FirstOrDefault(p => p.SerializedName == pagingItemName && p.Type is InputListType);
+                    var listType = itemsArrayProperty?.Type as InputListType;
+                    if (listType != null)
+                    {
+                        WriteNormalOperationResponse(listType.ElementType, $"{item}", $"{item}.ToStream()", useAllParameters);
+                    }
+                }
             }
         }
 
@@ -236,7 +254,11 @@ namespace AutoRest.CSharp.LowLevel.Generation
             WriteOperationInvocation(parameters, sample, methodSignature);
             _writer.LineRaw(";");
 
-            WriteNormalOperationResponse(sample, $"{response}", useAllParameters);
+            var responseType = sample.Method.ResponseBodyType;
+            if (responseType != null)
+                WriteNormalOperationResponse(responseType, $"{response}", $"{response}.ContentStream", useAllParameters);
+            else
+                _writer.ConsoleWriteLine($"{response}.Status");
         }
 
         private Dictionary<Parameter, CodeWriterDeclaration> WriteOperationInvocationParameters(DpgOperationSample sample, IEnumerable<Parameter> parameters)
@@ -287,20 +309,16 @@ namespace AutoRest.CSharp.LowLevel.Generation
             _writer.AppendRaw(")");
         }
 
-        private void WriteNormalOperationResponse(DpgOperationSample sample, FormattableString resultVar, bool useAllParameters)
+        private void WriteNormalOperationResponse(InputType responseType, FormattableString resultVar, FormattableString jsonVar, bool useAllParameters)
         {
             // TODO -- add a flag to control this, only protocol samples need this part
-            var responseType = sample.Method.ResponseBodyType;
             switch (responseType)
             {
-                case null:
-                    _writer.ConsoleWriteLine($"{resultVar}.Status");
-                    break;
                 case InputPrimitiveType { Kind: InputTypeKind.Stream }:
                     WriteStreamResponse(resultVar);
                     break;
                 default:
-                    WriteOtherResponse(responseType, resultVar, useAllParameters);
+                    WriteOtherResponse(responseType, resultVar, jsonVar, useAllParameters);
                     break;
             }
         }
@@ -316,7 +334,7 @@ namespace AutoRest.CSharp.LowLevel.Generation
             }
         }
 
-        private void WriteOtherResponse(InputType responseType, FormattableString resultVar, bool useAllParameters)
+        private void WriteOtherResponse(InputType responseType, FormattableString resultVar, FormattableString jsonVar, bool useAllParameters)
         {
             // build the api invocation chain
             // TODO -- move this into the sample
@@ -326,7 +344,7 @@ namespace AutoRest.CSharp.LowLevel.Generation
             _writer.Line();
             if (apiInvocationChainList.Any())
             {
-                _writer.Line($"{typeof(JsonElement)} result = {typeof(JsonDocument)}.{nameof(JsonDocument.Parse)}({resultVar}.ContentStream).RootElement;");
+                _writer.Line($"{typeof(JsonElement)} result = {typeof(JsonDocument)}.{nameof(JsonDocument.Parse)}({jsonVar}).RootElement;");
                 foreach (var apiInvocationChain in apiInvocationChainList)
                 {
                     _writer.ConsoleWriteLine($"{apiInvocationChain.ToList().Join(".")}.ToString()");
@@ -353,8 +371,8 @@ namespace AutoRest.CSharp.LowLevel.Generation
                 case InputDictionaryType dictionaryType:
                     if (visitedTypes.Contains(dictionaryType.ValueType))
                         return;
-                    // .GetProrperty("<test>")
-                    currentApiInvocationChain.Push($"GetProperty({"<test>":L})");
+                    // .GetProrperty("<key>")
+                    currentApiInvocationChain.Push($"GetProperty({"<key>":L})");
                     ComposeResponseParsingCode(useAllProperties, dictionaryType.ValueType, apiInvocationChainList, currentApiInvocationChain, visitedTypes);
                     currentApiInvocationChain.Pop();
                     return;

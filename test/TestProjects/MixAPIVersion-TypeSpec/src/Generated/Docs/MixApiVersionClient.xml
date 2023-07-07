@@ -56,33 +56,18 @@ Console.WriteLine(result.GetProperty("age").ToString());
     <member name="CreateAsync(RequestContent,RequestContext)">
       <example>
 This sample shows how to call CreateAsync with required request content, and how to parse the result.
-<code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
-MixApiVersionClient client = new MixApiVersionClient(endpoint);
-
-var data = new
-{
-    age = 1234,
-};
-
-Response response = await client.CreateAsync(RequestContent.Create(data));
-
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(result.GetProperty("name").ToString());
-Console.WriteLine(result.GetProperty("age").ToString());
-]]></code>
+<code>Example_Create_Async</code>
 This sample shows how to call CreateAsync with all request content, and how to parse the result.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
 MixApiVersionClient client = new MixApiVersionClient(endpoint);
 
-var data = new
+RequestContent content = RequestContent.Create(new Dictionary<string, object>()
 {
-    tag = "<tag>",
-    age = 1234,
-};
-
-Response response = await client.CreateAsync(RequestContent.Create(data));
+    ["tag"] = "<tag>",
+    ["age"] = 1234,
+});
+Response response = await client.CreateAsync(content);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("name").ToString());
@@ -93,33 +78,18 @@ Console.WriteLine(result.GetProperty("age").ToString());
     <member name="Create(RequestContent,RequestContext)">
       <example>
 This sample shows how to call Create with required request content, and how to parse the result.
-<code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
-MixApiVersionClient client = new MixApiVersionClient(endpoint);
-
-var data = new
-{
-    age = 1234,
-};
-
-Response response = client.Create(RequestContent.Create(data));
-
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(result.GetProperty("name").ToString());
-Console.WriteLine(result.GetProperty("age").ToString());
-]]></code>
+<code>Example_Create</code>
 This sample shows how to call Create with all request content, and how to parse the result.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
 MixApiVersionClient client = new MixApiVersionClient(endpoint);
 
-var data = new
+RequestContent content = RequestContent.Create(new Dictionary<string, object>()
 {
-    tag = "<tag>",
-    age = 1234,
-};
-
-Response response = client.Create(RequestContent.Create(data));
+    ["tag"] = "<tag>",
+    ["age"] = 1234,
+});
+Response response = client.Create(content);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("name").ToString());
@@ -136,6 +106,10 @@ MixApiVersionClient client = new MixApiVersionClient(endpoint);
 
 await foreach (BinaryData item in client.GetPetsAsync())
 {
+    JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+    Console.WriteLine(result.GetProperty("id").ToString());
+    Console.WriteLine(result.GetProperty("petId").ToString());
+    Console.WriteLine(result.GetProperty("name").ToString());
 }
 ]]></code></example>
     </member>
@@ -148,6 +122,10 @@ MixApiVersionClient client = new MixApiVersionClient(endpoint);
 
 foreach (BinaryData item in client.GetPets())
 {
+    JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+    Console.WriteLine(result.GetProperty("id").ToString());
+    Console.WriteLine(result.GetProperty("petId").ToString());
+    Console.WriteLine(result.GetProperty("name").ToString());
 }
 ]]></code></example>
     </member>

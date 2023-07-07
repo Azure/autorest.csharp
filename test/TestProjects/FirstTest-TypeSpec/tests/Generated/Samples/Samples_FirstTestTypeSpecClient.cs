@@ -463,7 +463,7 @@ namespace FirstTestTypeSpec.Samples
             Console.WriteLine(result.GetProperty("requiredString").ToString());
             Console.WriteLine(result.GetProperty("requiredInt").ToString());
             Console.WriteLine(result.GetProperty("requiredCollection")[0].ToString());
-            Console.WriteLine(result.GetProperty("requiredDictionary").GetProperty("<test>").ToString());
+            Console.WriteLine(result.GetProperty("requiredDictionary").GetProperty("<key>").ToString());
             Console.WriteLine(result.GetProperty("requiredModel").GetProperty("name").ToString());
             Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredUnion").ToString());
             Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredLiteralString").ToString());
@@ -486,10 +486,10 @@ namespace FirstTestTypeSpec.Samples
             Console.WriteLine(result.GetProperty("stringFixedEnum").ToString());
             Console.WriteLine(result.GetProperty("requiredUnknown").ToString());
             Console.WriteLine(result.GetProperty("optionalUnknown").ToString());
-            Console.WriteLine(result.GetProperty("requiredRecordUnknown").GetProperty("<test>").ToString());
-            Console.WriteLine(result.GetProperty("optionalRecordUnknown").GetProperty("<test>").ToString());
-            Console.WriteLine(result.GetProperty("readOnlyRequiredRecordUnknown").GetProperty("<test>").ToString());
-            Console.WriteLine(result.GetProperty("readOnlyOptionalRecordUnknown").GetProperty("<test>").ToString());
+            Console.WriteLine(result.GetProperty("requiredRecordUnknown").GetProperty("<key>").ToString());
+            Console.WriteLine(result.GetProperty("optionalRecordUnknown").GetProperty("<key>").ToString());
+            Console.WriteLine(result.GetProperty("readOnlyRequiredRecordUnknown").GetProperty("<key>").ToString());
+            Console.WriteLine(result.GetProperty("readOnlyOptionalRecordUnknown").GetProperty("<key>").ToString());
         }
 
         [Test]
@@ -563,7 +563,7 @@ namespace FirstTestTypeSpec.Samples
             Console.WriteLine(result.GetProperty("requiredString").ToString());
             Console.WriteLine(result.GetProperty("requiredInt").ToString());
             Console.WriteLine(result.GetProperty("requiredCollection")[0].ToString());
-            Console.WriteLine(result.GetProperty("requiredDictionary").GetProperty("<test>").ToString());
+            Console.WriteLine(result.GetProperty("requiredDictionary").GetProperty("<key>").ToString());
             Console.WriteLine(result.GetProperty("requiredModel").GetProperty("name").ToString());
             Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredUnion").ToString());
             Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredLiteralString").ToString());
@@ -586,10 +586,10 @@ namespace FirstTestTypeSpec.Samples
             Console.WriteLine(result.GetProperty("stringFixedEnum").ToString());
             Console.WriteLine(result.GetProperty("requiredUnknown").ToString());
             Console.WriteLine(result.GetProperty("optionalUnknown").ToString());
-            Console.WriteLine(result.GetProperty("requiredRecordUnknown").GetProperty("<test>").ToString());
-            Console.WriteLine(result.GetProperty("optionalRecordUnknown").GetProperty("<test>").ToString());
-            Console.WriteLine(result.GetProperty("readOnlyRequiredRecordUnknown").GetProperty("<test>").ToString());
-            Console.WriteLine(result.GetProperty("readOnlyOptionalRecordUnknown").GetProperty("<test>").ToString());
+            Console.WriteLine(result.GetProperty("requiredRecordUnknown").GetProperty("<key>").ToString());
+            Console.WriteLine(result.GetProperty("optionalRecordUnknown").GetProperty("<key>").ToString());
+            Console.WriteLine(result.GetProperty("readOnlyRequiredRecordUnknown").GetProperty("<key>").ToString());
+            Console.WriteLine(result.GetProperty("readOnlyOptionalRecordUnknown").GetProperty("<key>").ToString());
         }
 
         [Test]
@@ -663,7 +663,7 @@ namespace FirstTestTypeSpec.Samples
             Console.WriteLine(result.GetProperty("requiredString").ToString());
             Console.WriteLine(result.GetProperty("requiredInt").ToString());
             Console.WriteLine(result.GetProperty("requiredCollection")[0].ToString());
-            Console.WriteLine(result.GetProperty("requiredDictionary").GetProperty("<test>").ToString());
+            Console.WriteLine(result.GetProperty("requiredDictionary").GetProperty("<key>").ToString());
             Console.WriteLine(result.GetProperty("requiredModel").GetProperty("name").ToString());
             Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredUnion").ToString());
             Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredLiteralString").ToString());
@@ -686,10 +686,10 @@ namespace FirstTestTypeSpec.Samples
             Console.WriteLine(result.GetProperty("stringFixedEnum").ToString());
             Console.WriteLine(result.GetProperty("requiredUnknown").ToString());
             Console.WriteLine(result.GetProperty("optionalUnknown").ToString());
-            Console.WriteLine(result.GetProperty("requiredRecordUnknown").GetProperty("<test>").ToString());
-            Console.WriteLine(result.GetProperty("optionalRecordUnknown").GetProperty("<test>").ToString());
-            Console.WriteLine(result.GetProperty("readOnlyRequiredRecordUnknown").GetProperty("<test>").ToString());
-            Console.WriteLine(result.GetProperty("readOnlyOptionalRecordUnknown").GetProperty("<test>").ToString());
+            Console.WriteLine(result.GetProperty("requiredRecordUnknown").GetProperty("<key>").ToString());
+            Console.WriteLine(result.GetProperty("optionalRecordUnknown").GetProperty("<key>").ToString());
+            Console.WriteLine(result.GetProperty("readOnlyRequiredRecordUnknown").GetProperty("<key>").ToString());
+            Console.WriteLine(result.GetProperty("readOnlyOptionalRecordUnknown").GetProperty("<key>").ToString());
         }
 
         [Test]
@@ -763,7 +763,7 @@ namespace FirstTestTypeSpec.Samples
             Console.WriteLine(result.GetProperty("requiredString").ToString());
             Console.WriteLine(result.GetProperty("requiredInt").ToString());
             Console.WriteLine(result.GetProperty("requiredCollection")[0].ToString());
-            Console.WriteLine(result.GetProperty("requiredDictionary").GetProperty("<test>").ToString());
+            Console.WriteLine(result.GetProperty("requiredDictionary").GetProperty("<key>").ToString());
             Console.WriteLine(result.GetProperty("requiredModel").GetProperty("name").ToString());
             Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredUnion").ToString());
             Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredLiteralString").ToString());
@@ -786,10 +786,10 @@ namespace FirstTestTypeSpec.Samples
             Console.WriteLine(result.GetProperty("stringFixedEnum").ToString());
             Console.WriteLine(result.GetProperty("requiredUnknown").ToString());
             Console.WriteLine(result.GetProperty("optionalUnknown").ToString());
-            Console.WriteLine(result.GetProperty("requiredRecordUnknown").GetProperty("<test>").ToString());
-            Console.WriteLine(result.GetProperty("optionalRecordUnknown").GetProperty("<test>").ToString());
-            Console.WriteLine(result.GetProperty("readOnlyRequiredRecordUnknown").GetProperty("<test>").ToString());
-            Console.WriteLine(result.GetProperty("readOnlyOptionalRecordUnknown").GetProperty("<test>").ToString());
+            Console.WriteLine(result.GetProperty("requiredRecordUnknown").GetProperty("<key>").ToString());
+            Console.WriteLine(result.GetProperty("optionalRecordUnknown").GetProperty("<key>").ToString());
+            Console.WriteLine(result.GetProperty("readOnlyRequiredRecordUnknown").GetProperty("<key>").ToString());
+            Console.WriteLine(result.GetProperty("readOnlyOptionalRecordUnknown").GetProperty("<key>").ToString());
         }
 
         [Test]
