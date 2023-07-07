@@ -28,8 +28,9 @@ namespace AutoRest.CSharp.Common.Output.Models
 
         public static BoolExpression Bool(bool value) => value ? True : False;
         public static ValueExpression Int(int value) => new FormattableStringToExpression($"{value}");
+        public static ValueExpression Long(long value) => new FormattableStringToExpression($"{value}L");
         public static ValueExpression Float(float value) => new FormattableStringToExpression($"{value}f");
-        public static ValueExpression Double(double value) => new FormattableStringToExpression($"{value}");
+        public static ValueExpression Double(double value) => new FormattableStringToExpression($"{value}d");
 
         public static ValueExpression Nameof(ValueExpression expression) => new InvokeInstanceMethodExpression(null, "nameof", expression);
         public static ValueExpression ThrowExpression(ValueExpression expression) => new KeywordExpression("throw", expression);

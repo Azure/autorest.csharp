@@ -61,7 +61,6 @@ namespace AutoRest.CSharp.Common.Output.Models
             public static ValueExpression Anonymous(IReadOnlyDictionary<string, ValueExpression>? properties) => new KeywordExpression("new", new ObjectInitializerExpression(properties, IsInline: false));
             public static ValueExpression Instance(CSharpType type, params ValueExpression[] arguments) => new NewInstanceExpression(type, arguments);
             public static ValueExpression Instance(CSharpType type, IReadOnlyDictionary<string, ValueExpression> properties) => new NewInstanceExpression(type, System.Array.Empty<ValueExpression>(), new ObjectInitializerExpression(properties));
-            public static ValueExpression Instance(IReadOnlyDictionary<string, ValueExpression> properties) => new KeywordExpression("new", new ObjectInitializerExpression(properties));
         }
     }
 }

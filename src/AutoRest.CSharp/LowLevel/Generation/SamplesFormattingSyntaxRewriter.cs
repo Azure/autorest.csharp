@@ -58,7 +58,6 @@ namespace AutoRest.CSharp.Generation.Writers
 
             node = node
                 .WithInitializers(SyntaxFactory.SeparatedList<AnonymousObjectMemberDeclaratorSyntax>(FixInitializerTrivia(node.Initializers.GetWithSeparators(), parentLeadingTrivia)))
-                .WithNewKeyword(node.NewKeyword.WithTrailingTrivia(SyntaxFactory.Space))
                 .WithOpenBraceToken(FixOpenBraceTrivia(node.OpenBraceToken, node.Initializers.Any()))
                 .WithCloseBraceToken(FixCloseBraceTrivia(node.CloseBraceToken, parentLeadingTrivia));
 
@@ -72,6 +71,7 @@ namespace AutoRest.CSharp.Generation.Writers
 
             node = node
                 .WithNewKeyword(node.NewKeyword.WithTrailingTrivia(SyntaxTriviaList.Empty))
+                .WithCloseBracketToken(node.CloseBracketToken.WithTrailingTrivia(SyntaxTriviaList.Empty))
                 .WithInitializer(initializer
                     .WithExpressions(SyntaxFactory.SeparatedList<ExpressionSyntax>(FixInitializerTrivia(initializer.Expressions.GetWithSeparators(), parentLeadingTrivia)))
                     .WithOpenBraceToken(FixOpenBraceTrivia(initializer.OpenBraceToken, initializer.Expressions.Any()))
@@ -117,7 +117,9 @@ namespace AutoRest.CSharp.Generation.Writers
 
         private static SyntaxToken FixOpenBraceTrivia(SyntaxToken openBraceToken, bool hasInnerTokens)
         {
-            openBraceToken = openBraceToken.WithLeadingTrivia(SyntaxFactory.Space);
+            openBraceToken = openBraceToken
+                .WithoutAnnotations(HasLeadingLineBreak)
+                .WithLeadingTrivia(SyntaxFactory.Space);
             return hasInnerTokens
                 ? openBraceToken.WithTrailingTrivia(SyntaxFactory.CarriageReturnLineFeed)
                 : openBraceToken.WithTrailingTrivia(SyntaxTriviaList.Empty);

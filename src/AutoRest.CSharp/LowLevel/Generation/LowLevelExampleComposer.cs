@@ -629,9 +629,14 @@ namespace AutoRest.CSharp.Generation.Writers
                 var type = parameterType.FrameworkType;
 
                 // Refer to TypeFactory.cs as how number type is created
-                if (type == typeof(long) || type == typeof(int))
+                if (type == typeof(int))
                 {
                     return Int(1234);
+                }
+
+                if (type == typeof(long))
+                {
+                    return Long(1234L);
                 }
 
                 if (type == typeof(float))
