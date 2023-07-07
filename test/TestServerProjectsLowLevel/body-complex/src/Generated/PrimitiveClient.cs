@@ -71,7 +71,7 @@ namespace body_complex_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/PrimitiveClient.xml" path="doc/members/member[@name='GetIntAsync(RequestContext)']/*" />
-        public virtual async Task<Response> GetIntAsync(RequestContext context = null)
+        public virtual async Task<Response> GetIntAsync(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("PrimitiveClient.GetInt");
             scope.Start();
@@ -101,7 +101,7 @@ namespace body_complex_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/PrimitiveClient.xml" path="doc/members/member[@name='GetInt(RequestContext)']/*" />
-        public virtual Response GetInt(RequestContext context = null)
+        public virtual Response GetInt(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("PrimitiveClient.GetInt");
             scope.Start();
@@ -199,7 +199,7 @@ namespace body_complex_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/PrimitiveClient.xml" path="doc/members/member[@name='GetLongAsync(RequestContext)']/*" />
-        public virtual async Task<Response> GetLongAsync(RequestContext context = null)
+        public virtual async Task<Response> GetLongAsync(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("PrimitiveClient.GetLong");
             scope.Start();
@@ -229,7 +229,7 @@ namespace body_complex_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/PrimitiveClient.xml" path="doc/members/member[@name='GetLong(RequestContext)']/*" />
-        public virtual Response GetLong(RequestContext context = null)
+        public virtual Response GetLong(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("PrimitiveClient.GetLong");
             scope.Start();
@@ -327,7 +327,7 @@ namespace body_complex_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/PrimitiveClient.xml" path="doc/members/member[@name='GetFloatAsync(RequestContext)']/*" />
-        public virtual async Task<Response> GetFloatAsync(RequestContext context = null)
+        public virtual async Task<Response> GetFloatAsync(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("PrimitiveClient.GetFloat");
             scope.Start();
@@ -357,7 +357,7 @@ namespace body_complex_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/PrimitiveClient.xml" path="doc/members/member[@name='GetFloat(RequestContext)']/*" />
-        public virtual Response GetFloat(RequestContext context = null)
+        public virtual Response GetFloat(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("PrimitiveClient.GetFloat");
             scope.Start();
@@ -455,7 +455,7 @@ namespace body_complex_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/PrimitiveClient.xml" path="doc/members/member[@name='GetDoubleAsync(RequestContext)']/*" />
-        public virtual async Task<Response> GetDoubleAsync(RequestContext context = null)
+        public virtual async Task<Response> GetDoubleAsync(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("PrimitiveClient.GetDouble");
             scope.Start();
@@ -485,7 +485,7 @@ namespace body_complex_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/PrimitiveClient.xml" path="doc/members/member[@name='GetDouble(RequestContext)']/*" />
-        public virtual Response GetDouble(RequestContext context = null)
+        public virtual Response GetDouble(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("PrimitiveClient.GetDouble");
             scope.Start();
@@ -583,7 +583,7 @@ namespace body_complex_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/PrimitiveClient.xml" path="doc/members/member[@name='GetBoolAsync(RequestContext)']/*" />
-        public virtual async Task<Response> GetBoolAsync(RequestContext context = null)
+        public virtual async Task<Response> GetBoolAsync(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("PrimitiveClient.GetBool");
             scope.Start();
@@ -613,7 +613,7 @@ namespace body_complex_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/PrimitiveClient.xml" path="doc/members/member[@name='GetBool(RequestContext)']/*" />
-        public virtual Response GetBool(RequestContext context = null)
+        public virtual Response GetBool(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("PrimitiveClient.GetBool");
             scope.Start();
@@ -711,7 +711,7 @@ namespace body_complex_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/PrimitiveClient.xml" path="doc/members/member[@name='GetStringAsync(RequestContext)']/*" />
-        public virtual async Task<Response> GetStringAsync(RequestContext context = null)
+        public virtual async Task<Response> GetStringAsync(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("PrimitiveClient.GetString");
             scope.Start();
@@ -741,7 +741,7 @@ namespace body_complex_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/PrimitiveClient.xml" path="doc/members/member[@name='GetString(RequestContext)']/*" />
-        public virtual Response GetString(RequestContext context = null)
+        public virtual Response GetString(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("PrimitiveClient.GetString");
             scope.Start();
@@ -839,7 +839,7 @@ namespace body_complex_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/PrimitiveClient.xml" path="doc/members/member[@name='GetDateAsync(RequestContext)']/*" />
-        public virtual async Task<Response> GetDateAsync(RequestContext context = null)
+        public virtual async Task<Response> GetDateAsync(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("PrimitiveClient.GetDate");
             scope.Start();
@@ -869,7 +869,7 @@ namespace body_complex_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/PrimitiveClient.xml" path="doc/members/member[@name='GetDate(RequestContext)']/*" />
-        public virtual Response GetDate(RequestContext context = null)
+        public virtual Response GetDate(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("PrimitiveClient.GetDate");
             scope.Start();
@@ -967,7 +967,7 @@ namespace body_complex_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/PrimitiveClient.xml" path="doc/members/member[@name='GetDateTimeAsync(RequestContext)']/*" />
-        public virtual async Task<Response> GetDateTimeAsync(RequestContext context = null)
+        public virtual async Task<Response> GetDateTimeAsync(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("PrimitiveClient.GetDateTime");
             scope.Start();
@@ -997,7 +997,7 @@ namespace body_complex_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/PrimitiveClient.xml" path="doc/members/member[@name='GetDateTime(RequestContext)']/*" />
-        public virtual Response GetDateTime(RequestContext context = null)
+        public virtual Response GetDateTime(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("PrimitiveClient.GetDateTime");
             scope.Start();
@@ -1095,7 +1095,7 @@ namespace body_complex_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/PrimitiveClient.xml" path="doc/members/member[@name='GetDateTimeRfc1123Async(RequestContext)']/*" />
-        public virtual async Task<Response> GetDateTimeRfc1123Async(RequestContext context = null)
+        public virtual async Task<Response> GetDateTimeRfc1123Async(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("PrimitiveClient.GetDateTimeRfc1123");
             scope.Start();
@@ -1125,7 +1125,7 @@ namespace body_complex_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/PrimitiveClient.xml" path="doc/members/member[@name='GetDateTimeRfc1123(RequestContext)']/*" />
-        public virtual Response GetDateTimeRfc1123(RequestContext context = null)
+        public virtual Response GetDateTimeRfc1123(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("PrimitiveClient.GetDateTimeRfc1123");
             scope.Start();
@@ -1223,7 +1223,7 @@ namespace body_complex_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/PrimitiveClient.xml" path="doc/members/member[@name='GetDurationAsync(RequestContext)']/*" />
-        public virtual async Task<Response> GetDurationAsync(RequestContext context = null)
+        public virtual async Task<Response> GetDurationAsync(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("PrimitiveClient.GetDuration");
             scope.Start();
@@ -1253,7 +1253,7 @@ namespace body_complex_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/PrimitiveClient.xml" path="doc/members/member[@name='GetDuration(RequestContext)']/*" />
-        public virtual Response GetDuration(RequestContext context = null)
+        public virtual Response GetDuration(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("PrimitiveClient.GetDuration");
             scope.Start();
@@ -1351,7 +1351,7 @@ namespace body_complex_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/PrimitiveClient.xml" path="doc/members/member[@name='GetByteAsync(RequestContext)']/*" />
-        public virtual async Task<Response> GetByteAsync(RequestContext context = null)
+        public virtual async Task<Response> GetByteAsync(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("PrimitiveClient.GetByte");
             scope.Start();
@@ -1381,7 +1381,7 @@ namespace body_complex_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/PrimitiveClient.xml" path="doc/members/member[@name='GetByte(RequestContext)']/*" />
-        public virtual Response GetByte(RequestContext context = null)
+        public virtual Response GetByte(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("PrimitiveClient.GetByte");
             scope.Start();

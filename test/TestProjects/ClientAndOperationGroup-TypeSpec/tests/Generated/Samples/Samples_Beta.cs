@@ -26,7 +26,7 @@ namespace ClientAndOperationGroup.Samples
             var endpoint = new Uri("<https://my-service.azure.com>");
             var client = new ClientAndOperationGroupClient(endpoint).GetBetaClient();
 
-            Response response = client.Two();
+            Response response = client.Two(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());
@@ -39,7 +39,7 @@ namespace ClientAndOperationGroup.Samples
             var endpoint = new Uri("<https://my-service.azure.com>");
             var client = new ClientAndOperationGroupClient(endpoint).GetBetaClient();
 
-            Response response = client.Two();
+            Response response = client.Two(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());
@@ -52,7 +52,7 @@ namespace ClientAndOperationGroup.Samples
             var endpoint = new Uri("<https://my-service.azure.com>");
             var client = new ClientAndOperationGroupClient(endpoint).GetBetaClient();
 
-            Response response = await client.TwoAsync();
+            Response response = await client.TwoAsync(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());
@@ -65,7 +65,7 @@ namespace ClientAndOperationGroup.Samples
             var endpoint = new Uri("<https://my-service.azure.com>");
             var client = new ClientAndOperationGroupClient(endpoint).GetBetaClient();
 
-            Response response = await client.TwoAsync();
+            Response response = await client.TwoAsync(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());
@@ -78,7 +78,7 @@ namespace ClientAndOperationGroup.Samples
             var endpoint = new Uri("<https://my-service.azure.com>");
             var client = new ClientAndOperationGroupClient(endpoint).GetBetaClient();
 
-            Response response = client.Three();
+            Response response = client.Three(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());
@@ -91,7 +91,7 @@ namespace ClientAndOperationGroup.Samples
             var endpoint = new Uri("<https://my-service.azure.com>");
             var client = new ClientAndOperationGroupClient(endpoint).GetBetaClient();
 
-            Response response = client.Three();
+            Response response = client.Three(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());
@@ -104,7 +104,7 @@ namespace ClientAndOperationGroup.Samples
             var endpoint = new Uri("<https://my-service.azure.com>");
             var client = new ClientAndOperationGroupClient(endpoint).GetBetaClient();
 
-            Response response = await client.ThreeAsync();
+            Response response = await client.ThreeAsync(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());
@@ -117,7 +117,7 @@ namespace ClientAndOperationGroup.Samples
             var endpoint = new Uri("<https://my-service.azure.com>");
             var client = new ClientAndOperationGroupClient(endpoint).GetBetaClient();
 
-            Response response = await client.ThreeAsync();
+            Response response = await client.ThreeAsync(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());

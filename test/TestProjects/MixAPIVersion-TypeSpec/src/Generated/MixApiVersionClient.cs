@@ -139,7 +139,7 @@ namespace MixApiVersion
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/MixApiVersionClient.xml" path="doc/members/member[@name='ReadAsync(int,RequestContext)']/*" />
-        public virtual async Task<Response> ReadAsync(int petId, RequestContext context = null)
+        public virtual async Task<Response> ReadAsync(int petId, RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("MixApiVersionClient.Read");
             scope.Start();
@@ -170,7 +170,7 @@ namespace MixApiVersion
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/MixApiVersionClient.xml" path="doc/members/member[@name='Read(int,RequestContext)']/*" />
-        public virtual Response Read(int petId, RequestContext context = null)
+        public virtual Response Read(int petId, RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("MixApiVersionClient.Read");
             scope.Start();
@@ -268,7 +268,7 @@ namespace MixApiVersion
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="AsyncPageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
         /// <include file="Docs/MixApiVersionClient.xml" path="doc/members/member[@name='GetPetsAsync(RequestContext)']/*" />
-        public virtual AsyncPageable<BinaryData> GetPetsAsync(RequestContext context = null)
+        public virtual AsyncPageable<BinaryData> GetPetsAsync(RequestContext context)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetPetsRequest(context);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => CreateGetPetsNextPageRequest(nextLink, context);
@@ -289,7 +289,7 @@ namespace MixApiVersion
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="Pageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
         /// <include file="Docs/MixApiVersionClient.xml" path="doc/members/member[@name='GetPets(RequestContext)']/*" />
-        public virtual Pageable<BinaryData> GetPets(RequestContext context = null)
+        public virtual Pageable<BinaryData> GetPets(RequestContext context)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetPetsRequest(context);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => CreateGetPetsNextPageRequest(nextLink, context);

@@ -7,6 +7,7 @@ using Azure;
 using Azure.Core;
 using ConvenienceInCadl;
 using ConvenienceInCadl.Models;
+using MixApiVersion;
 using NUnit.Framework;
 
 namespace AutoRest.TestServer.Tests
@@ -211,6 +212,37 @@ namespace AutoRest.TestServer.Tests
             Assert.AreEqual(true, protocolInUpdate.GetParameters().Last().IsOptional);
             Assert.AreEqual(false, protocolInUpdate.GetParameters().First().IsOptional);
             Assert.AreEqual(false, convenienceInUpdate.GetParameters().First().IsOptional);
+        }
+
+        [Test]
+        public void NoConvenienceScenario()
+        {
+            var protocolInUpdate = typeof(ConvenienceInCadlClient).GetMethod("NoConvenience");
+            Assert.AreEqual(false, protocolInUpdate.GetParameters().Last().IsOptional);
+        }
+
+        [Test]
+        public void NoConvenienceRequiredBodyScenario()
+        {
+            var protocolInUpdate = typeof(ConvenienceInCadlClient).GetMethod("NoConvenienceRequiredBody");
+            Assert.AreEqual(true, protocolInUpdate.GetParameters().Last().IsOptional);
+        }
+
+        [Test]
+        public void NoConvenienceOptionalBodyScenario()
+        {
+            var protocolInUpdate = typeof(ConvenienceInCadlClient).GetMethod("NoConvenienceOptionalBody");
+            Assert.AreEqual(false, protocolInUpdate.GetParameters().Last().IsOptional);
+        }
+
+        [Test]
+        public void SetKeepNonOverloadableProtocolSignature()
+        {
+            var method = typeof(MixApiVersionClient).GetMethod("Delete");
+            Assert.AreEqual(true, method.GetParameters().Last().IsOptional);
+
+            method = typeof(MixApiVersionClient).GetMethod("Read");
+            Assert.AreEqual(false, method.GetParameters().Last().IsOptional);
         }
     }
 }

@@ -281,6 +281,7 @@ namespace AutoRest.CSharp.AutoRest.Communication
                 oldModelFactoryEntries,
                 ReadEnumOption<Configuration.UnreferencedTypesHandlingOption>(root, Configuration.Options.UnreferencedTypesHandling),
                 ReadOption(root, Configuration.Options.UseOverloadsBetweenProtocolAndConvenience),
+                ReadOption(root, Configuration.Options.KeepNonOverloadableProtocolSignature),
                 projectPath ?? ReadStringOption(root, Configuration.Options.ProjectFolder),
                 existingProjectFolder,
                 protocolMethods,
