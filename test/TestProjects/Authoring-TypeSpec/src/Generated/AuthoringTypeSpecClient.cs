@@ -795,16 +795,26 @@ namespace AuthoringTypeSpec
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="projectName"/>, <paramref name="deploymentName"/> or <paramref name="jobId"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="projectName"/>, <paramref name="deploymentName"/> or <paramref name="jobId"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <include file="Docs/AuthoringTypeSpecClient.xml" path="doc/members/member[@name='GetDeploymentStatusAsync(string,string,string,CancellationToken)']/*" />
-        public virtual async Task<Response<DeploymentJob>> GetDeploymentStatusAsync(string projectName, string deploymentName, string jobId, CancellationToken cancellationToken = default)
+        /// <include file="Docs/AuthoringTypeSpecClient.xml" path="doc/members/member[@name='GetDeploymentStatusValueAsync(string,string,string,CancellationToken)']/*" />
+        public virtual async Task<Response<DeploymentJob>> GetDeploymentStatusValueAsync(string projectName, string deploymentName, string jobId, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(projectName, nameof(projectName));
             Argument.AssertNotNullOrEmpty(deploymentName, nameof(deploymentName));
             Argument.AssertNotNullOrEmpty(jobId, nameof(jobId));
 
-            RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = await GetDeploymentStatusAsync(projectName, deploymentName, jobId, context).ConfigureAwait(false);
-            return Response.FromValue(DeploymentJob.FromResponse(response), response);
+            using var scope = ClientDiagnostics.CreateScope("AuthoringTypeSpecClient.GetDeploymentStatusValue");
+            scope.Start();
+            try
+            {
+                RequestContext context = FromCancellationToken(cancellationToken);
+                Response response = await GetDeploymentStatusAsync(projectName, deploymentName, jobId, context).ConfigureAwait(false);
+                return Response.FromValue(DeploymentJob.FromResponse(response), response);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Gets the status of an existing deployment job. </summary>
@@ -814,16 +824,26 @@ namespace AuthoringTypeSpec
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="projectName"/>, <paramref name="deploymentName"/> or <paramref name="jobId"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="projectName"/>, <paramref name="deploymentName"/> or <paramref name="jobId"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <include file="Docs/AuthoringTypeSpecClient.xml" path="doc/members/member[@name='GetDeploymentStatus(string,string,string,CancellationToken)']/*" />
-        public virtual Response<DeploymentJob> GetDeploymentStatus(string projectName, string deploymentName, string jobId, CancellationToken cancellationToken = default)
+        /// <include file="Docs/AuthoringTypeSpecClient.xml" path="doc/members/member[@name='GetDeploymentStatusValue(string,string,string,CancellationToken)']/*" />
+        public virtual Response<DeploymentJob> GetDeploymentStatusValue(string projectName, string deploymentName, string jobId, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(projectName, nameof(projectName));
             Argument.AssertNotNullOrEmpty(deploymentName, nameof(deploymentName));
             Argument.AssertNotNullOrEmpty(jobId, nameof(jobId));
 
-            RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = GetDeploymentStatus(projectName, deploymentName, jobId, context);
-            return Response.FromValue(DeploymentJob.FromResponse(response), response);
+            using var scope = ClientDiagnostics.CreateScope("AuthoringTypeSpecClient.GetDeploymentStatusValue");
+            scope.Start();
+            try
+            {
+                RequestContext context = FromCancellationToken(cancellationToken);
+                Response response = GetDeploymentStatus(projectName, deploymentName, jobId, context);
+                return Response.FromValue(DeploymentJob.FromResponse(response), response);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary>
@@ -836,7 +856,7 @@ namespace AuthoringTypeSpec
         /// </item>
         /// <item>
         /// <description>
-        /// Please try the simpler <see cref="GetDeploymentStatusAsync(string,string,string,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// Please try the simpler <see cref="GetDeploymentStatusValueAsync(string,string,string,CancellationToken)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>
@@ -850,7 +870,7 @@ namespace AuthoringTypeSpec
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/AuthoringTypeSpecClient.xml" path="doc/members/member[@name='GetDeploymentStatusAsync(string,string,string,RequestContext)']/*" />
-        public virtual async Task<Response> GetDeploymentStatusAsync(string projectName, string deploymentName, string jobId, RequestContext context)
+        public virtual async Task<Response> GetDeploymentStatusAsync(string projectName, string deploymentName, string jobId, RequestContext context = null)
         {
             Argument.AssertNotNullOrEmpty(projectName, nameof(projectName));
             Argument.AssertNotNullOrEmpty(deploymentName, nameof(deploymentName));
@@ -880,7 +900,7 @@ namespace AuthoringTypeSpec
         /// </item>
         /// <item>
         /// <description>
-        /// Please try the simpler <see cref="GetDeploymentStatus(string,string,string,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// Please try the simpler <see cref="GetDeploymentStatusValue(string,string,string,CancellationToken)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>
@@ -894,7 +914,7 @@ namespace AuthoringTypeSpec
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/AuthoringTypeSpecClient.xml" path="doc/members/member[@name='GetDeploymentStatus(string,string,string,RequestContext)']/*" />
-        public virtual Response GetDeploymentStatus(string projectName, string deploymentName, string jobId, RequestContext context)
+        public virtual Response GetDeploymentStatus(string projectName, string deploymentName, string jobId, RequestContext context = null)
         {
             Argument.AssertNotNullOrEmpty(projectName, nameof(projectName));
             Argument.AssertNotNullOrEmpty(deploymentName, nameof(deploymentName));
@@ -921,16 +941,26 @@ namespace AuthoringTypeSpec
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="projectName"/>, <paramref name="deploymentName"/> or <paramref name="jobId"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="projectName"/>, <paramref name="deploymentName"/> or <paramref name="jobId"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <include file="Docs/AuthoringTypeSpecClient.xml" path="doc/members/member[@name='GetSwapDeploymentsStatusAsync(string,string,string,CancellationToken)']/*" />
-        public virtual async Task<Response<SwapDeploymentsJob>> GetSwapDeploymentsStatusAsync(string projectName, string deploymentName, string jobId, CancellationToken cancellationToken = default)
+        /// <include file="Docs/AuthoringTypeSpecClient.xml" path="doc/members/member[@name='GetSwapDeploymentsStatusValueAsync(string,string,string,CancellationToken)']/*" />
+        public virtual async Task<Response<SwapDeploymentsJob>> GetSwapDeploymentsStatusValueAsync(string projectName, string deploymentName, string jobId, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(projectName, nameof(projectName));
             Argument.AssertNotNullOrEmpty(deploymentName, nameof(deploymentName));
             Argument.AssertNotNullOrEmpty(jobId, nameof(jobId));
 
-            RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = await GetSwapDeploymentsStatusAsync(projectName, deploymentName, jobId, context).ConfigureAwait(false);
-            return Response.FromValue(SwapDeploymentsJob.FromResponse(response), response);
+            using var scope = ClientDiagnostics.CreateScope("AuthoringTypeSpecClient.GetSwapDeploymentsStatusValue");
+            scope.Start();
+            try
+            {
+                RequestContext context = FromCancellationToken(cancellationToken);
+                Response response = await GetSwapDeploymentsStatusAsync(projectName, deploymentName, jobId, context).ConfigureAwait(false);
+                return Response.FromValue(SwapDeploymentsJob.FromResponse(response), response);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> Gets the status of an existing swap deployment job. </summary>
@@ -940,16 +970,26 @@ namespace AuthoringTypeSpec
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="projectName"/>, <paramref name="deploymentName"/> or <paramref name="jobId"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="projectName"/>, <paramref name="deploymentName"/> or <paramref name="jobId"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <include file="Docs/AuthoringTypeSpecClient.xml" path="doc/members/member[@name='GetSwapDeploymentsStatus(string,string,string,CancellationToken)']/*" />
-        public virtual Response<SwapDeploymentsJob> GetSwapDeploymentsStatus(string projectName, string deploymentName, string jobId, CancellationToken cancellationToken = default)
+        /// <include file="Docs/AuthoringTypeSpecClient.xml" path="doc/members/member[@name='GetSwapDeploymentsStatusValue(string,string,string,CancellationToken)']/*" />
+        public virtual Response<SwapDeploymentsJob> GetSwapDeploymentsStatusValue(string projectName, string deploymentName, string jobId, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(projectName, nameof(projectName));
             Argument.AssertNotNullOrEmpty(deploymentName, nameof(deploymentName));
             Argument.AssertNotNullOrEmpty(jobId, nameof(jobId));
 
-            RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = GetSwapDeploymentsStatus(projectName, deploymentName, jobId, context);
-            return Response.FromValue(SwapDeploymentsJob.FromResponse(response), response);
+            using var scope = ClientDiagnostics.CreateScope("AuthoringTypeSpecClient.GetSwapDeploymentsStatusValue");
+            scope.Start();
+            try
+            {
+                RequestContext context = FromCancellationToken(cancellationToken);
+                Response response = GetSwapDeploymentsStatus(projectName, deploymentName, jobId, context);
+                return Response.FromValue(SwapDeploymentsJob.FromResponse(response), response);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary>
@@ -962,7 +1002,7 @@ namespace AuthoringTypeSpec
         /// </item>
         /// <item>
         /// <description>
-        /// Please try the simpler <see cref="GetSwapDeploymentsStatusAsync(string,string,string,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// Please try the simpler <see cref="GetSwapDeploymentsStatusValueAsync(string,string,string,CancellationToken)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>
@@ -976,7 +1016,7 @@ namespace AuthoringTypeSpec
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/AuthoringTypeSpecClient.xml" path="doc/members/member[@name='GetSwapDeploymentsStatusAsync(string,string,string,RequestContext)']/*" />
-        public virtual async Task<Response> GetSwapDeploymentsStatusAsync(string projectName, string deploymentName, string jobId, RequestContext context)
+        public virtual async Task<Response> GetSwapDeploymentsStatusAsync(string projectName, string deploymentName, string jobId, RequestContext context = null)
         {
             Argument.AssertNotNullOrEmpty(projectName, nameof(projectName));
             Argument.AssertNotNullOrEmpty(deploymentName, nameof(deploymentName));
@@ -1006,7 +1046,7 @@ namespace AuthoringTypeSpec
         /// </item>
         /// <item>
         /// <description>
-        /// Please try the simpler <see cref="GetSwapDeploymentsStatus(string,string,string,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// Please try the simpler <see cref="GetSwapDeploymentsStatusValue(string,string,string,CancellationToken)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>
@@ -1020,7 +1060,7 @@ namespace AuthoringTypeSpec
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/AuthoringTypeSpecClient.xml" path="doc/members/member[@name='GetSwapDeploymentsStatus(string,string,string,RequestContext)']/*" />
-        public virtual Response GetSwapDeploymentsStatus(string projectName, string deploymentName, string jobId, RequestContext context)
+        public virtual Response GetSwapDeploymentsStatus(string projectName, string deploymentName, string jobId, RequestContext context = null)
         {
             Argument.AssertNotNullOrEmpty(projectName, nameof(projectName));
             Argument.AssertNotNullOrEmpty(deploymentName, nameof(deploymentName));
