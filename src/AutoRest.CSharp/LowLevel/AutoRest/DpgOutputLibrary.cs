@@ -51,11 +51,6 @@ namespace AutoRest.CSharp.Output.Models.Types
 
         public override CSharpType ResolveEnum(InputEnumType enumType)
         {
-            if (!_isTspInput || enumType.Usage == InputModelTypeUsage.None)
-            {
-                return TypeFactory.CreateType(enumType.EnumValueType);
-            }
-
             if (_enums.TryGetValue(enumType, out var typeProvider))
             {
                 return typeProvider.Type;

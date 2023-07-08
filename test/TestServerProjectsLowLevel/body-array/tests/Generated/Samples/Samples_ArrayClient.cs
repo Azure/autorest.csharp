@@ -1815,7 +1815,7 @@ namespace body_array_LowLevel.Samples
             var client = new ArrayClient(credential);
 
             var data = new[] {
-    "73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"
+    "d456d0e2-16cf-4fac-a7a5-922e6fcda1a3"
 };
 
             Response response = client.PutUuidValid(RequestContent.Create(data));
@@ -1830,7 +1830,7 @@ namespace body_array_LowLevel.Samples
             var client = new ArrayClient(credential);
 
             var data = new[] {
-    "73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"
+    "d72d64ca-d348-45fd-879d-3af4e2a3ace4"
 };
 
             Response response = client.PutUuidValid(RequestContent.Create(data));
@@ -1845,7 +1845,7 @@ namespace body_array_LowLevel.Samples
             var client = new ArrayClient(credential);
 
             var data = new[] {
-    "73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"
+    "64fe6751-6254-4548-9d3f-ece2f8fc9960"
 };
 
             Response response = await client.PutUuidValidAsync(RequestContent.Create(data)).ConfigureAwait(false);
@@ -1860,7 +1860,7 @@ namespace body_array_LowLevel.Samples
             var client = new ArrayClient(credential);
 
             var data = new[] {
-    "73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"
+    "ace6fddc-6c8b-4eb8-ab8d-5c57b0947b03"
 };
 
             Response response = await client.PutUuidValidAsync(RequestContent.Create(data)).ConfigureAwait(false);
@@ -1979,7 +1979,7 @@ namespace body_array_LowLevel.Samples
             var client = new ArrayClient(credential);
 
             var data = new[] {
-    "2022-05-10"
+    "2023-07-08"
 };
 
             Response response = client.PutDateValid(RequestContent.Create(data));
@@ -1994,7 +1994,7 @@ namespace body_array_LowLevel.Samples
             var client = new ArrayClient(credential);
 
             var data = new[] {
-    "2022-05-10"
+    "2023-07-08"
 };
 
             Response response = client.PutDateValid(RequestContent.Create(data));
@@ -2009,7 +2009,7 @@ namespace body_array_LowLevel.Samples
             var client = new ArrayClient(credential);
 
             var data = new[] {
-    "2022-05-10"
+    "2023-07-08"
 };
 
             Response response = await client.PutDateValidAsync(RequestContent.Create(data)).ConfigureAwait(false);
@@ -2024,7 +2024,7 @@ namespace body_array_LowLevel.Samples
             var client = new ArrayClient(credential);
 
             var data = new[] {
-    "2022-05-10"
+    "2023-07-08"
 };
 
             Response response = await client.PutDateValidAsync(RequestContent.Create(data)).ConfigureAwait(false);
@@ -2195,7 +2195,7 @@ namespace body_array_LowLevel.Samples
             var client = new ArrayClient(credential);
 
             var data = new[] {
-    "2022-05-10T18:57:31.2311892Z"
+    "2023-07-08T06:06:19.5858353Z"
 };
 
             Response response = client.PutDateTimeValid(RequestContent.Create(data));
@@ -2210,7 +2210,7 @@ namespace body_array_LowLevel.Samples
             var client = new ArrayClient(credential);
 
             var data = new[] {
-    "2022-05-10T18:57:31.2311892Z"
+    "2023-07-08T06:06:19.5859061Z"
 };
 
             Response response = client.PutDateTimeValid(RequestContent.Create(data));
@@ -2225,7 +2225,7 @@ namespace body_array_LowLevel.Samples
             var client = new ArrayClient(credential);
 
             var data = new[] {
-    "2022-05-10T18:57:31.2311892Z"
+    "2023-07-08T06:06:19.5859733Z"
 };
 
             Response response = await client.PutDateTimeValidAsync(RequestContent.Create(data)).ConfigureAwait(false);
@@ -2240,7 +2240,7 @@ namespace body_array_LowLevel.Samples
             var client = new ArrayClient(credential);
 
             var data = new[] {
-    "2022-05-10T18:57:31.2311892Z"
+    "2023-07-08T06:06:19.5860384Z"
 };
 
             Response response = await client.PutDateTimeValidAsync(RequestContent.Create(data)).ConfigureAwait(false);
@@ -2411,7 +2411,7 @@ namespace body_array_LowLevel.Samples
             var client = new ArrayClient(credential);
 
             var data = new[] {
-    "Tue, 10 May 2022 18:57:31 GMT"
+    "Sat, 08 Jul 2023 06:06:19 GMT"
 };
 
             Response response = client.PutDateTimeRfc1123Valid(RequestContent.Create(data));
@@ -2426,7 +2426,7 @@ namespace body_array_LowLevel.Samples
             var client = new ArrayClient(credential);
 
             var data = new[] {
-    "Tue, 10 May 2022 18:57:31 GMT"
+    "Sat, 08 Jul 2023 06:06:19 GMT"
 };
 
             Response response = client.PutDateTimeRfc1123Valid(RequestContent.Create(data));
@@ -2441,7 +2441,7 @@ namespace body_array_LowLevel.Samples
             var client = new ArrayClient(credential);
 
             var data = new[] {
-    "Tue, 10 May 2022 18:57:31 GMT"
+    "Sat, 08 Jul 2023 06:06:19 GMT"
 };
 
             Response response = await client.PutDateTimeRfc1123ValidAsync(RequestContent.Create(data)).ConfigureAwait(false);
@@ -2456,7 +2456,7 @@ namespace body_array_LowLevel.Samples
             var client = new ArrayClient(credential);
 
             var data = new[] {
-    "Tue, 10 May 2022 18:57:31 GMT"
+    "Sat, 08 Jul 2023 06:06:19 GMT"
 };
 
             Response response = await client.PutDateTimeRfc1123ValidAsync(RequestContent.Create(data)).ConfigureAwait(false);

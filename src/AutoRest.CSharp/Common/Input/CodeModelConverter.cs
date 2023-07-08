@@ -431,7 +431,6 @@ namespace AutoRest.CSharp.Common.Input
             Accessibility: schema.Extensions?.Accessibility,
             Deprecated: schema.Deprecated?.Reason,
             Description: schema.CreateDescription(),
-            Usage: InputModelTypeUsage.None,
             EnumValueType: (InputPrimitiveType)CreateType(choiceType, schema.Extensions?.Format, null),
             AllowedValues: choices.Select(CreateEnumValue).ToList(),
             IsExtensible: isExtensible

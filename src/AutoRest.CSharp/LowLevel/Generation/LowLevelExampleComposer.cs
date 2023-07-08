@@ -18,9 +18,13 @@ using AutoRest.CSharp.Common.Output.Models;
 using AutoRest.CSharp.Common.Output.Models.KnownValueExpressions;
 using AutoRest.CSharp.Common.Output.Models.Statements;
 using AutoRest.CSharp.Common.Output.Models.ValueExpressions;
+using AutoRest.CSharp.Common.Output.Models.Types;
+using AutoRest.CSharp.Output.Builders;
+using AutoRest.CSharp.Output.Models.Serialization;
+using AutoRest.CSharp.Output.Models.Serialization.Json;
+using AutoRest.CSharp.Utilities;
 using Azure;
 using Azure.Core;
-using Microsoft.CodeAnalysis.CSharp;
 using static AutoRest.CSharp.Common.Output.Models.Snippets;
 
 namespace AutoRest.CSharp.Generation.Writers
@@ -266,7 +270,7 @@ namespace AutoRest.CSharp.Generation.Writers
             var bodyArguments = new Dictionary<Parameter, ValueExpression>();
             foreach (var parameter in signature.Parameters.Where(p => p.RequestLocation == RequestLocation.Body))
             {
-                yield return Var(parameter.Name, ComposeCSharpTypeInstance(true, parameter.Type, null, true, false, new HashSet<ObjectType>()), out var bodyArgument);
+                yield return Var(parameter.Name, ComposeConvenienceCSharpTypeInstance(true, parameter.Type, null, true, new HashSet<ObjectType>()), out var bodyArgument);
                 bodyArguments[parameter] = bodyArgument;
             }
 
@@ -308,7 +312,7 @@ namespace AutoRest.CSharp.Generation.Writers
             ValueExpression? data = null;
             if (restClientMethod.RequestBodyType != null)
             {
-                yield return Var("data", ComposeCSharpTypeInstance(allParameters, _typeFactory.CreateType(restClientMethod.RequestBodyType), null, false, true, new HashSet<ObjectType>()), out data);
+                yield return Var("data", ComposeProtocolCSharpTypeInstance(allParameters, GetTypeSerialization(restClientMethod.RequestBodyType), null, new HashSet<ObjectType>()), out data);
                 yield return EmptyLine;
             }
 
@@ -548,7 +552,7 @@ namespace AutoRest.CSharp.Generation.Writers
                     : Array.Empty<MethodBodyStatement>();
             }
 
-            if (expectedJsonElementType is { IsFrameworkType: false, Implementation: ObjectType objectType })
+            if (expectedJsonElementType is { IsFrameworkType: false, Implementation: SerializableObjectType objectType })
             {
                 return ComposeResponseParsing(jsonElement, objectType, allProperties, visitedTypes);
             }
@@ -556,40 +560,31 @@ namespace AutoRest.CSharp.Generation.Writers
             return new[]{InvokeConsoleWriteLine(jsonElement.InvokeToString())};
         }
 
-        private IReadOnlyList<MethodBodyStatement> ComposeResponseParsing(JsonElementExpression jsonElement, ObjectType model, bool allProperties, HashSet<CSharpType> visitedTypes)
+        private IReadOnlyList<MethodBodyStatement> ComposeResponseParsing(JsonElementExpression jsonElement, SerializableObjectType model, bool allProperties, HashSet<CSharpType> visitedTypes)
         {
-            var statements = new List<MethodBodyStatement>();
-            foreach (var modelOrBase in model.EnumerateHierarchy())
+            var propertiesToExplore = allProperties
+                ? model.JsonSerialization?.Properties
+                : model.JsonSerialization?.Properties.Where(p => p.IsRequired).ToArray();
+
+            if (propertiesToExplore is null || !propertiesToExplore.Any()) // if you have a required property, but its child properties are all optional
             {
-                if (!modelOrBase.Properties.Any())
+                // return the object
+                return new[] {InvokeConsoleWriteLine(jsonElement.InvokeToString())};
+            }
+
+            var statements = new List<MethodBodyStatement>();
+            foreach (var propertySerialization in propertiesToExplore)
+            {
+                var propertyType = propertySerialization.ValueType;
+                if (visitedTypes.Contains(propertyType))
                 {
                     continue;
                 }
 
-                var propertiesToExplore = modelOrBase.Properties;
-                if (!allProperties)
-                {
-                    propertiesToExplore = modelOrBase.Properties.Where(p => p.IsRequired).ToArray();
-                }
-
-                if (propertiesToExplore.Length == 0) // if you have a required property, but its child properties are all optional
-                {
-                    // return the object
-                    statements.Add(InvokeConsoleWriteLine(jsonElement.InvokeToString()));
-                    break;
-                }
-
-                foreach (var property in propertiesToExplore)
-                {
-                    var propertyType = property.Declaration.Type;
-                    if (!visitedTypes.Contains(propertyType))
-                    {
-                        var propertyName = GetSerializedName(property);
-                        visitedTypes.Add(propertyType);
-                        statements.AddRange(ComposeResponseParsing(jsonElement.GetProperty(propertyName), propertyType, allProperties, visitedTypes));
-                        visitedTypes.Remove(propertyType);
-                    }
-                }
+                var propertyName = propertySerialization.SerializedName;
+                visitedTypes.Add(propertyType);
+                statements.AddRange(ComposeResponseParsing(jsonElement.GetProperty(propertyName), propertyType, allProperties, visitedTypes));
+                visitedTypes.Remove(propertyType);
             }
 
             return statements;
@@ -599,7 +594,7 @@ namespace AutoRest.CSharp.Generation.Writers
         {
             if (parameter.DefaultValue == null)
             {
-                return MockParameterTypeValue(parameter.Name, parameter.Type);
+                return MockParameterTypeValue(parameter.Name, parameter.Type, null);
             }
 
             var defaultValue = parameter.DefaultValue.Value;
@@ -611,7 +606,7 @@ namespace AutoRest.CSharp.Generation.Writers
             // skip null default value like "string a = null"
             if (defaultValue.Value == null)
             {
-                return MockParameterTypeValue(parameter.Name, parameter.Type);
+                return MockParameterTypeValue(parameter.Name, parameter.Type, null);
             }
 
             if (defaultValue.Type.IsFrameworkType && defaultValue.Type.FrameworkType == typeof(string))
@@ -622,11 +617,12 @@ namespace AutoRest.CSharp.Generation.Writers
             return Literal(JsonSerializer.Serialize(defaultValue.Value));
         }
 
-        private ValueExpression MockParameterTypeValue(string? parameterName, CSharpType parameterType)
+        private ValueExpression MockParameterTypeValue(string? parameterName, CSharpType parameterType, SerializationFormat? serializationFormat)
         {
             if (parameterType.IsFrameworkType)
             {
                 var type = parameterType.FrameworkType;
+                var format = serializationFormat?.ToFormatSpecifier();
 
                 // Refer to TypeFactory.cs as how number type is created
                 if (type == typeof(int))
@@ -661,17 +657,23 @@ namespace AutoRest.CSharp.Generation.Writers
 
                 if (type == typeof(DateTimeOffset))
                 {
-                    return new MemberExpression(typeof(DateTimeOffset), nameof(DateTimeOffset.UtcNow));
+                    return format is null
+                        ? new MemberExpression(typeof(DateTimeOffset), nameof(DateTimeOffset.UtcNow))
+                        : Literal(TypeFormatters.ToString(DateTimeOffset.UtcNow, format));
                 }
 
                 if (type == typeof(DateTime))
                 {
-                    return new MemberExpression(typeof(DateTime), nameof(DateTime.UtcNow));
+                    return format is null
+                        ? new MemberExpression(typeof(DateTimeOffset), nameof(DateTime.UtcNow))
+                        : Literal(TypeFormatters.ToString(DateTime.UtcNow, format));
                 }
 
                 if (type == typeof(TimeSpan))
                 {
-                    return New.TimeSpan(1, 2, 3);
+                    return format is null
+                        ? New.TimeSpan(1, 23, 45)
+                        : Literal(TypeFormatters.ToString(new TimeSpan(1, 23, 45), format));
                 }
 
                 if (type == typeof(MatchConditions))
@@ -681,7 +683,9 @@ namespace AutoRest.CSharp.Generation.Writers
 
                 if (type == typeof(Guid))
                 {
-                    return new InvokeStaticMethodExpression(typeof(Guid), nameof(Guid.NewGuid));
+                    return serializationFormat.HasValue
+                        ? Literal(Guid.NewGuid().ToString())
+                        : new InvokeStaticMethodExpression(typeof(Guid), nameof(Guid.NewGuid));
                 }
 
                 if (type == typeof(Uri))
@@ -697,7 +701,9 @@ namespace AutoRest.CSharp.Generation.Writers
 
                 if (type.IsEnum)
                 {
-                    return new MemberExpression(type, Enum.GetNames(type)[0]);
+                    return serializationFormat.HasValue
+                        ? Literal(Enum.GetNames(type)[0])
+                        : new MemberExpression(type, Enum.GetNames(type)[0]);
                 }
 
                 if (type == typeof(ContentType))
@@ -707,14 +713,12 @@ namespace AutoRest.CSharp.Generation.Writers
 
                 if (type == typeof(IEnumerable<>))
                 {
-                    var elementType = parameterType.Arguments[0];
-                    return New.Array(elementType, true, MockParameterTypeValue(parameterName, elementType)) with {};
+                    throw new InvalidOperationException($"Collection should go the code path of {nameof(JsonArraySerialization)}.");
                 }
 
                 if (type == typeof(IDictionary<,>))
                 {
-                    var valueType = parameterType.Arguments[1];
-                    return New.Dictionary(typeof(string), valueType, (Literal("test"), MockParameterTypeValue(parameterName, valueType)));
+                    throw new InvalidOperationException($"Dictionary should go the code path of {nameof(JsonDictionarySerialization)}.");
                 }
 
                 if (type == typeof(BinaryData))
@@ -731,18 +735,40 @@ namespace AutoRest.CSharp.Generation.Writers
             return Null; // some unknown found
         }
 
-        private ValueExpression ComposeCSharpTypeInstance(bool allProperties, CSharpType type, string? propertyDescription, bool includeCollectionInitialization, bool isAnonymousType, HashSet<ObjectType> visitedModels) => type switch
+        private JsonSerialization GetTypeSerialization(InputType inputType)
         {
-            _ when TypeFactory.IsList(type) => ComposeArrayCSharpType(allProperties, type.Arguments.Single(), includeCollectionInitialization, isAnonymousType, visitedModels), // IList<T> is guaranteed to have one and only one generic parameter
-            _ when TypeFactory.IsDictionary(type) => ComposeDictionaryInstance(allProperties, type.Arguments[0], type.Arguments[1], includeCollectionInitialization, isAnonymousType, visitedModels), // IDictionary<K, V> is guaranteed to have two generic parameters
-            { IsFrameworkType: true } => MockParameterTypeValue(propertyDescription, type),
-            { IsFrameworkType: false, Implementation: ObjectType objectType } when isAnonymousType => ComposeAnonymousObjectType(allProperties, objectType, visitedModels),
-            { IsFrameworkType: false, Implementation: ObjectType objectType } => ComposeObjectType(allProperties, objectType, visitedModels),
+            var outputType = _typeFactory.CreateType(inputType);
+
+            return inputType switch
+            {
+                InputListType listType => new JsonArraySerialization(TypeFactory.GetImplementationType(outputType), GetTypeSerialization(listType.ElementType), false),
+                InputDictionaryType dictionaryType => new JsonDictionarySerialization(TypeFactory.GetImplementationType(outputType), GetTypeSerialization(dictionaryType.ValueType), false),
+                _ => new JsonValueSerialization(outputType, SerializationBuilder.GetSerializationFormat(inputType), false)
+            };
+        }
+
+        private ValueExpression ComposeConvenienceCSharpTypeInstance(bool allProperties, CSharpType type, string? propertyDescription, bool includeCollectionInitialization, HashSet<ObjectType> visitedModels) => type switch
+        {
+            _ when TypeFactory.IsList(type) => ComposeConvenienceArrayCSharpType(allProperties, type.Arguments.Single(), includeCollectionInitialization, visitedModels), // IList<T> is guaranteed to have one and only one generic parameter
+            _ when TypeFactory.IsDictionary(type) => ComposeConvenienceDictionaryInstance(allProperties, type.Arguments[0], type.Arguments[1], includeCollectionInitialization, visitedModels), // IDictionary<K, V> is guaranteed to have two generic parameters
+            { IsFrameworkType: true } => MockParameterTypeValue(propertyDescription, type, null),
+            { IsFrameworkType: false, Implementation: ObjectType objectType } => ComposeObjectType(objectType, allProperties, visitedModels),
             { IsFrameworkType: false, Implementation: EnumType enumType } => EnumValue(enumType, enumType.Values.First()),
             _ => Null
         };
 
-        private ValueExpression ComposeArrayCSharpType(bool allProperties, CSharpType elementType, bool includeCollectionInitialization, bool isAnonymousType, HashSet<ObjectType> visitedModels)
+
+        private ValueExpression ComposeProtocolCSharpTypeInstance(bool allProperties, JsonSerialization? serialization, string? propertyDescription, HashSet<ObjectType> visitedModels) => serialization switch
+        {
+            JsonArraySerialization array => ComposeProtocolArrayCSharpType(allProperties, array, visitedModels), // IList<T> is guaranteed to have one and only one generic parameter
+            JsonDictionarySerialization dictionary => ComposeProtocolDictionaryInstance(allProperties, dictionary, visitedModels),
+            JsonValueSerialization { Type.IsFrameworkType: true } value => MockParameterTypeValue(propertyDescription, value.Type, value.Format),
+            JsonValueSerialization { Type.IsFrameworkType: false, Type.Implementation: SerializableObjectType model } => ComposeAnonymousObjectType(model, allProperties, visitedModels),
+            JsonValueSerialization { Type.IsFrameworkType: false, Type.Implementation: EnumType enumType } => new ConstantExpression(enumType.Values.First().Value),
+            _ => Null
+        };
+
+        private ValueExpression ComposeConvenienceArrayCSharpType(bool allProperties, CSharpType elementType, bool includeCollectionInitialization, HashSet<ObjectType> visitedModels)
         {
             /* GENERATED CODE PATTERN
              * new <TypeName>[] {
@@ -751,16 +777,33 @@ namespace AutoRest.CSharp.Generation.Writers
              * or
              * Array.Empty<TypeName>()
              */
-
             if (IsVisitedModel(elementType, visitedModels))
             {
                 return includeCollectionInitialization ? New.Array(elementType) : New.Anonymous(null);
             }
 
-            return New.Array(isAnonymousType ? null : elementType, ComposeCSharpTypeInstance(allProperties, elementType, null, includeCollectionInitialization, isAnonymousType, visitedModels));
+            return New.Array(elementType, ComposeConvenienceCSharpTypeInstance(allProperties, elementType, null, includeCollectionInitialization, visitedModels));
         }
 
-        private ValueExpression ComposeDictionaryInstance(bool allProperties, CSharpType keyType, CSharpType valueType, bool includeCollectionInitialization, bool isAnonymousType, HashSet<ObjectType> visitedModels)
+        private ValueExpression ComposeProtocolArrayCSharpType(bool allProperties, JsonArraySerialization serialization, HashSet<ObjectType> visitedModels)
+        {
+            /* GENERATED CODE PATTERN
+             * new[] {
+             *     {element_expression}
+             * }
+             * or
+             * new[] {}
+             */
+            var elementType = serialization.ImplementationType.Arguments.Single(); // IList<T> is guaranteed to have one and only one generic parameter
+            if (IsVisitedModel(elementType, visitedModels))
+            {
+                return New.Array(null);
+            }
+
+            return New.Array(null, ComposeProtocolCSharpTypeInstance(allProperties, serialization.ValueSerialization, null, visitedModels));
+        }
+
+        private ValueExpression ComposeConvenienceDictionaryInstance(bool allProperties, CSharpType keyType, CSharpType valueType, bool includeCollectionInitialization, HashSet<ObjectType> visitedModels)
         {
             /* GENERATED CODE PATTERN
              * new Dictionary<{keyType}, {valueType}>{
@@ -769,25 +812,53 @@ namespace AutoRest.CSharp.Generation.Writers
              * or
              * new Dictionary<{keyType}, {valueType}>()
              */
+
             if (IsVisitedModel(valueType, visitedModels))
             {
                 return includeCollectionInitialization ? New.Dictionary(keyType, valueType) : New.Anonymous(null);
             }
 
             var keyExpr = keyType.Equals(typeof(int)) ? Int(0) : Literal("key"); //handle dictionary with int key
-            var valueExpr = ComposeCSharpTypeInstance(allProperties, valueType, null, includeCollectionInitialization, isAnonymousType, visitedModels);
+            var valueExpr = ComposeConvenienceCSharpTypeInstance(allProperties, valueType, null, includeCollectionInitialization, visitedModels);
+            return New.Dictionary(keyType, valueType, (keyExpr, valueExpr));
+        }
+
+        private ValueExpression ComposeProtocolDictionaryInstance(bool allProperties, JsonDictionarySerialization serialization, HashSet<ObjectType> visitedModels)
+        {
+            /* GENERATED CODE PATTERN
+             * new Dictionary<{keyType}, {valueType}>{
+             *     [key] = {value_expression},
+             * }
+             * or
+             * new Dictionary<{keyType}, {valueType}>()
+             */
+
+            var keyType = serialization.Type.Arguments[0];  // IDictionary<K, V> is guaranteed to have two generic parameters
+            var valueType = serialization.Type.Arguments[1];
+
+            if (IsVisitedModel(valueType, visitedModels))
+            {
+                return New.Anonymous(null);
+            }
+
+            var keyExpr = keyType.Equals(typeof(int)) ? Int(0) : Literal("key"); //handle dictionary with int key
+            var valueExpr = ComposeProtocolCSharpTypeInstance(allProperties, serialization.ValueSerialization, null, visitedModels);
             return New.Dictionary(keyType, valueType, (keyExpr, valueExpr));
         }
 
         private static bool IsVisitedModel(CSharpType valueType, IReadOnlySet<ObjectType> visitedModels)
             => valueType is { IsFrameworkType: false, Implementation: ObjectType objectType } && visitedModels.Contains(objectType);
 
-        private ValueExpression ComposeObjectType(bool allProperties, ObjectType model, HashSet<ObjectType> visitedModels)
+        private ValueExpression ComposeObjectType(ObjectType model, bool allProperties, HashSet<ObjectType> visitedModels)
         {
             visitedModels.Add(model);
             if (model.Discriminator is { Implementations.Length: > 0 })
             {
-                model = model.Discriminator.Implementations.Where(i => i.Type is { IsFrameworkType: false, Implementation: ObjectType }).Select(i => (i.Type.Implementation as ObjectType)!).First();
+                model = model.Discriminator.Implementations
+                    .Where(i => i.Type is { IsFrameworkType: false })
+                    .Select(i => i.Type.Implementation as ObjectType)
+                    .WhereNotNull()
+                    .First();
             }
 
             /* GENERATED CODE PATTERN
@@ -802,7 +873,9 @@ namespace AutoRest.CSharp.Generation.Writers
             var ctor = model.InitializationConstructor;
             // write the ctor
 
-            var arguments = ctor.Signature.Parameters.Select(parameter => ComposeCSharpTypeInstance(allProperties, parameter.Type, parameter.Name, true, false, visitedModels)).ToList();
+            var arguments = ctor.Signature.Parameters
+                .Select(parameter => ComposeConvenienceCSharpTypeInstance(allProperties, parameter.Type, parameter.Name, true, visitedModels))
+                .ToList();
 
             // find other properties
             var propertyExpressions = allProperties
@@ -811,18 +884,22 @@ namespace AutoRest.CSharp.Generation.Writers
                     .SelectMany(m => m.Properties).Distinct()
                     .Where(p => p.Declaration.Accessibility == "public" && ctor.FindParameterByInitializedProperty(p) == null && IsPropertyAssignable(p))
                     .Where(p => !IsVisitedModel(p.Declaration.Type, visitedModels))
-                    .ToDictionary(p => p.Declaration.Name, p => ComposeCSharpTypeInstance(allProperties, p.Declaration.Type, p.Declaration.Name, false, false, visitedModels))
+                    .ToDictionary(p => p.Declaration.Name, p => ComposeConvenienceCSharpTypeInstance(allProperties, p.Declaration.Type, p.Declaration.Name, false, visitedModels))
                 : null;
 
             return new NewInstanceExpression(model.Type, arguments, new ObjectInitializerExpression(propertyExpressions, IsInline: false));
         }
 
-        private ValueExpression ComposeAnonymousObjectType(bool allProperties, ObjectType model, HashSet<ObjectType> visitedModels)
+        private ValueExpression ComposeAnonymousObjectType(SerializableObjectType model, bool allProperties, HashSet<ObjectType> visitedModels)
         {
             visitedModels.Add(model);
             if (model.Discriminator is { Implementations.Length: > 0 })
             {
-                model = model.Discriminator.Implementations.Where(i => i.Type is { IsFrameworkType: false, Implementation: ObjectType }).Select(i => (i.Type.Implementation as ObjectType)!).First();
+                model = model.Discriminator.Implementations
+                    .Where(i => i.Type is { IsFrameworkType: false })
+                    .Select(i => i.Type.Implementation as SerializableObjectType)
+                    .WhereNotNull()
+                    .First();
             }
 
             /* GENERATED CODE PATTERN
@@ -834,27 +911,16 @@ namespace AutoRest.CSharp.Generation.Writers
              * }
              */
 
-            var propertyExpressions = model.EnumerateHierarchy()
-                .SelectMany(m => m.Properties).Distinct()
-                .Where(p => !IsVisitedModel(p.Declaration.Type, visitedModels) && !p.InputModelProperty!.IsReadOnly && (allProperties || p.IsRequired))
-                .ToDictionary(GetSerializedName, p => ComposeCSharpTypeInstance(allProperties, p.Declaration.Type, GetSerializedName(p), false, true, visitedModels));
+            var propertyExpressions = model.JsonSerialization?.Properties
+                .Where(p => !IsVisitedModel(p.ValueType, visitedModels))
+                .Where(p => allProperties || p.IsRequired)
+                .ToDictionary(p => p.SerializedName, p => ComposeProtocolCSharpTypeInstance(allProperties, p.ValueSerialization, p.SerializedName, visitedModels));
 
             return New.Anonymous(propertyExpressions);
         }
 
-        private static string GetSerializedName(ObjectTypeProperty property)
-            => property.InputModelProperty?.SerializedName ?? property.SchemaProperty?.SerializedName ?? property.Declaration.Name;
-
         private static bool IsPropertyAssignable(ObjectTypeProperty property)
             => TypeFactory.IsReadWriteDictionary(property.Declaration.Type) || TypeFactory.IsReadWriteList(property.Declaration.Type) || !property.IsReadOnly;
-
-        private string FixKeyWords(string serializedName)
-        {
-            // TODO -- this is incorrect, we should never change the property name here otherwise the serialized request content is wrong
-            // if the name changed after calling this method, we should use a dictionary instead of using anonymous object
-            var result = serializedName.Replace('-', '_').Replace(".", string.Empty);
-            return SyntaxFacts.GetKeywordKind(result) == SyntaxKind.None ? result : $"@{result}";
-        }
 
         private MethodBodyStatement ComposeGetClient(out ValueExpression client)
         {

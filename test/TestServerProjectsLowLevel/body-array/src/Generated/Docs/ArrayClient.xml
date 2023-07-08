@@ -969,7 +969,7 @@ var credential = new AzureKeyCredential("<key>");
 var client = new ArrayClient(credential);
 
 var data = new[] {
-    "73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"
+    "b8a41dc9-5df5-4fa4-8b69-6f624d2e4877"
 };
 
 Response response = await client.PutUuidValidAsync(RequestContent.Create(data)).ConfigureAwait(false);
@@ -985,7 +985,7 @@ var credential = new AzureKeyCredential("<key>");
 var client = new ArrayClient(credential);
 
 var data = new[] {
-    "73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"
+    "af35c3ee-532c-4e6f-892e-6851d2f31e03"
 };
 
 Response response = client.PutUuidValid(RequestContent.Create(data));
@@ -1057,7 +1057,7 @@ var credential = new AzureKeyCredential("<key>");
 var client = new ArrayClient(credential);
 
 var data = new[] {
-    "2022-05-10"
+    "2023-07-08"
 };
 
 Response response = await client.PutDateValidAsync(RequestContent.Create(data)).ConfigureAwait(false);
@@ -1073,7 +1073,7 @@ var credential = new AzureKeyCredential("<key>");
 var client = new ArrayClient(credential);
 
 var data = new[] {
-    "2022-05-10"
+    "2023-07-08"
 };
 
 Response response = client.PutDateValid(RequestContent.Create(data));
@@ -1173,7 +1173,7 @@ var credential = new AzureKeyCredential("<key>");
 var client = new ArrayClient(credential);
 
 var data = new[] {
-    "2022-05-10T18:57:31.2311892Z"
+    "2023-07-08T06:06:19.3637622Z"
 };
 
 Response response = await client.PutDateTimeValidAsync(RequestContent.Create(data)).ConfigureAwait(false);
@@ -1189,7 +1189,7 @@ var credential = new AzureKeyCredential("<key>");
 var client = new ArrayClient(credential);
 
 var data = new[] {
-    "2022-05-10T18:57:31.2311892Z"
+    "2023-07-08T06:06:19.3647144Z"
 };
 
 Response response = client.PutDateTimeValid(RequestContent.Create(data));
@@ -1289,7 +1289,7 @@ var credential = new AzureKeyCredential("<key>");
 var client = new ArrayClient(credential);
 
 var data = new[] {
-    "Tue, 10 May 2022 18:57:31 GMT"
+    "Sat, 08 Jul 2023 06:06:19 GMT"
 };
 
 Response response = await client.PutDateTimeRfc1123ValidAsync(RequestContent.Create(data)).ConfigureAwait(false);
@@ -1305,7 +1305,7 @@ var credential = new AzureKeyCredential("<key>");
 var client = new ArrayClient(credential);
 
 var data = new[] {
-    "Tue, 10 May 2022 18:57:31 GMT"
+    "Sat, 08 Jul 2023 06:06:19 GMT"
 };
 
 Response response = client.PutDateTimeRfc1123Valid(RequestContent.Create(data));

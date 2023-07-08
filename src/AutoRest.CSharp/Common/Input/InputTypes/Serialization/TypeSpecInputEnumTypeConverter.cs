@@ -30,8 +30,6 @@ namespace AutoRest.CSharp.Common.Input
             string? accessibility = null;
             string? deprecated = null;
             string? description = null;
-            InputModelTypeUsage usage = InputModelTypeUsage.None;
-            string? usageString = null;
             bool isExtendable = false;
             InputPrimitiveType? valueType = null;
             IReadOnlyList<InputEnumTypeValue>? allowedValues = null;
@@ -43,7 +41,6 @@ namespace AutoRest.CSharp.Common.Input
                     || reader.TryReadString(nameof(InputEnumType.Accessibility), ref accessibility)
                     || reader.TryReadString(nameof(InputEnumType.Deprecated), ref deprecated)
                     || reader.TryReadString(nameof(InputEnumType.Description), ref description)
-                    || reader.TryReadString(nameof(InputEnumType.Usage), ref usageString)
                     || reader.TryReadBoolean(nameof(InputEnumType.IsExtensible), ref isExtendable)
                     || reader.TryReadPrimitiveType(nameof(InputEnumType.EnumValueType), ref valueType)
                     || reader.TryReadWithConverter(nameof(InputEnumType.AllowedValues), options, ref allowedValues);
@@ -61,11 +58,6 @@ namespace AutoRest.CSharp.Common.Input
             {
                 description = "";
                 System.Console.Error.WriteLine($"[Warn]: Enum '{name}' must have a description");
-            }
-
-            if (usageString != null)
-            {
-                Enum.TryParse<InputModelTypeUsage>(usageString, ignoreCase: true, out usage);
             }
 
             if (allowedValues == null || allowedValues.Count == 0)
@@ -98,7 +90,7 @@ namespace AutoRest.CSharp.Common.Input
             }
             valueType = currentType ?? throw new JsonException("Enum value type must be set.");
 
-            var enumType = new InputEnumType(name, ns, accessibility, deprecated, description, usage, valueType, NormalizeValues(allowedValues, valueType), isExtendable);
+            var enumType = new InputEnumType(name, ns, accessibility, deprecated, description, valueType, NormalizeValues(allowedValues, valueType), isExtendable);
             if (id != null)
             {
                 resolver.AddReference(id, enumType);
@@ -146,17 +138,5 @@ namespace AutoRest.CSharp.Common.Input
 
             return concreteValues;
         }
-
-        //private static IReadOnlyList<InputEnumTypeValue> convertToConcreteValues<EnumType, ValueType>(IReadOnlyList<InputEnumTypeValue> allowedValues) where EnumType : InputEnumTypeValue
-        //{
-        //    var concreteValues = new List<InputEnumTypeValue>(allowedValues.Count);
-
-        //    foreach (var value in allowedValues)
-        //    {
-        //        concreteValues.Add(new EnumType(value.Name, (ValueType)value.Value, value.Description));
-        //    }
-
-        //    return concreteValues;
-        //}
     }
 }
