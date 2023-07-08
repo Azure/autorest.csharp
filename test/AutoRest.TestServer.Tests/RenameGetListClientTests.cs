@@ -2,8 +2,8 @@
 // Licensed under the MIT License.
 
 using System.Reflection;
-using Azure.RenameGetList;
 using NUnit.Framework;
+using RenameGetList;
 
 namespace AutoRest.TestServer.Tests
 {

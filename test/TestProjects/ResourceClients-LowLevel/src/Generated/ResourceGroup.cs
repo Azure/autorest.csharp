@@ -65,7 +65,7 @@ namespace ResourceClients_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/ResourceGroup.xml" path="doc/members/member[@name='GetGroupAsync(RequestContext)']/*" />
-        public virtual async Task<Response> GetGroupAsync(RequestContext context = null)
+        public virtual async Task<Response> GetGroupAsync(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("ResourceGroup.GetGroup");
             scope.Start();
@@ -95,7 +95,7 @@ namespace ResourceClients_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/ResourceGroup.xml" path="doc/members/member[@name='GetGroup(RequestContext)']/*" />
-        public virtual Response GetGroup(RequestContext context = null)
+        public virtual Response GetGroup(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("ResourceGroup.GetGroup");
             scope.Start();
@@ -125,7 +125,7 @@ namespace ResourceClients_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="AsyncPageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
         /// <include file="Docs/ResourceGroup.xml" path="doc/members/member[@name='GetItemsAsync(RequestContext)']/*" />
-        public virtual AsyncPageable<BinaryData> GetItemsAsync(RequestContext context = null)
+        public virtual AsyncPageable<BinaryData> GetItemsAsync(RequestContext context)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetItemsRequest(context);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => CreateGetItemsNextPageRequest(nextLink, context);
@@ -146,7 +146,7 @@ namespace ResourceClients_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="Pageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
         /// <include file="Docs/ResourceGroup.xml" path="doc/members/member[@name='GetItems(RequestContext)']/*" />
-        public virtual Pageable<BinaryData> GetItems(RequestContext context = null)
+        public virtual Pageable<BinaryData> GetItems(RequestContext context)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetItemsRequest(context);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => CreateGetItemsNextPageRequest(nextLink, context);

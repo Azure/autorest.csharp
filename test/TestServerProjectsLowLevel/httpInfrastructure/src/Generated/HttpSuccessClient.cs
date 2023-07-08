@@ -131,7 +131,7 @@ namespace httpInfrastructure_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/HttpSuccessClient.xml" path="doc/members/member[@name='Get200Async(RequestContext)']/*" />
-        public virtual async Task<Response> Get200Async(RequestContext context = null)
+        public virtual async Task<Response> Get200Async(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("HttpSuccessClient.Get200");
             scope.Start();
@@ -161,7 +161,7 @@ namespace httpInfrastructure_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/HttpSuccessClient.xml" path="doc/members/member[@name='Get200(RequestContext)']/*" />
-        public virtual Response Get200(RequestContext context = null)
+        public virtual Response Get200(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("HttpSuccessClient.Get200");
             scope.Start();
@@ -191,7 +191,7 @@ namespace httpInfrastructure_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/HttpSuccessClient.xml" path="doc/members/member[@name='Options200Async(RequestContext)']/*" />
-        public virtual async Task<Response> Options200Async(RequestContext context = null)
+        public virtual async Task<Response> Options200Async(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("HttpSuccessClient.Options200");
             scope.Start();
@@ -221,7 +221,7 @@ namespace httpInfrastructure_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/HttpSuccessClient.xml" path="doc/members/member[@name='Options200(RequestContext)']/*" />
-        public virtual Response Options200(RequestContext context = null)
+        public virtual Response Options200(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("HttpSuccessClient.Options200");
             scope.Start();

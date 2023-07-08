@@ -1,7 +1,7 @@
 {
   "OutputFolder": ".",
   "Namespace": "_Type.Property.Nullable",
-  "LibraryName": "Type.Property.Nullable",
+  "LibraryName": "_Type.Property.Nullable",
   "SharedSourceFolders": [
     "../../../../../../../artifacts/bin/AutoRest.CSharp/Debug/net6.0/Generator.Shared",
     "../../../../../../../artifacts/bin/AutoRest.CSharp/Debug/net6.0/Azure.Core.Shared"

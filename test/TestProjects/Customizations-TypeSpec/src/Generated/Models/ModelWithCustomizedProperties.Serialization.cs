@@ -11,7 +11,7 @@ using System.Text.Json;
 using Azure;
 using Azure.Core;
 
-namespace CustomizationsInCadl.Models
+namespace CustomizationsInTsp.Models
 {
     public partial class ModelWithCustomizedProperties : IUtf8JsonSerializable
     {
