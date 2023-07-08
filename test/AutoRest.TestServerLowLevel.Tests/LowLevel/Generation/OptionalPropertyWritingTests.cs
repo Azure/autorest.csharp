@@ -47,12 +47,12 @@ namespace AutoRest.CSharp.Generation.Writers.Tests
         }
 
         private static readonly IReadOnlyList<InputModelProperty> OptionalProperties = new List<InputModelProperty>{
-            new InputModelProperty("optionalString", "optionalString", "Optional string, illustrating an optional reference type property.", InputPrimitiveType.String, false, false, false),
-            new InputModelProperty("optionalInt", "optionalInt", "Optional int, illustrating an optional reference type property.", InputPrimitiveType.Int32, false, false, false),
-            new InputModelProperty("optionalStringList", "optionalStringList", "Optional string collection.", new InputListType("optionalStringList", InputPrimitiveType.String), false, false, false),
-            new InputModelProperty("optionalIntList", "optionalIntList", "Optional int collection.", new InputListType("optionalIntList", InputPrimitiveType.Int32), false, false, false),
-            new InputModelProperty("optionalModelCollection", "optionalModelCollection", "Optional collection of models.", new InputListType("optionalModelCollection", ElementModelType), false, false, false),
-            new InputModelProperty("optionalModelDictionary", "optionalModelDictionary", "Optional dictionary of models.", new InputDictionaryType("optionalModelDictionary", InputPrimitiveType.String, ElementModelType), false, false, false)
+            new InputModelProperty("optionalString", "optionalString", "Optional string, illustrating an optional reference type property.", InputPrimitiveType.String, null, false, false, false),
+            new InputModelProperty("optionalInt", "optionalInt", "Optional int, illustrating an optional reference type property.", InputPrimitiveType.Int32, null, false, false, false),
+            new InputModelProperty("optionalStringList", "optionalStringList", "Optional string collection.", new InputListType("optionalStringList", InputPrimitiveType.String), null, false, false, false),
+            new InputModelProperty("optionalIntList", "optionalIntList", "Optional int collection.", new InputListType("optionalIntList", InputPrimitiveType.Int32), null, false, false, false),
+            new InputModelProperty("optionalModelCollection", "optionalModelCollection", "Optional collection of models.", new InputListType("optionalModelCollection", ElementModelType), null, false, false, false),
+            new InputModelProperty("optionalModelDictionary", "optionalModelDictionary", "Optional dictionary of models.", new InputDictionaryType("optionalModelDictionary", InputPrimitiveType.String, ElementModelType), null, false, false, false)
         };
 
         // below are test cases

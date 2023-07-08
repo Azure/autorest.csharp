@@ -54,16 +54,16 @@ namespace AutoRest.CSharp.Generation.Writers.Tests
             var input = new InputModelType("PrimitivePropertyModel", "Cadl.TestServer.PrimitiveProperties", null, "public",
                 "Round-trip model with primitive properties to show serialization and deserialization of each.", InputModelTypeUsage.RoundTrip,
                 new List<InputModelProperty>{
-                    new InputModelProperty("requiredString", "requiredString", "", InputPrimitiveType.String, true, false, false),
-                    new InputModelProperty("requiredInt", "requiredInt", "", InputPrimitiveType.Int32, true, false, false),
-                    new InputModelProperty("requiredLong", "requiredLong", "", InputPrimitiveType.Int64, true, false, false),
-                    new InputModelProperty("requiredSafeInt", "requiredSafeInt", "", InputPrimitiveType.Int64, true, false, false),
-                    new InputModelProperty("requiredFloat", "requiredFloat", "", InputPrimitiveType.Float32, true, false, false),
-                    new InputModelProperty("requiredDouble", "requiredDouble", "", InputPrimitiveType.Float64, true, false, false),
-                    new InputModelProperty("requiredBodyDateTime", "requiredBodyDateTime", "Illustrate a zonedDateTime body parameter, serialized as (https://datatracker.ietf.org/doc/html/rfc3339)", InputPrimitiveType.DateTimeISO8601, true, false, false),
-                    new InputModelProperty("requiredDuration", "requiredDuration", "", InputPrimitiveType.DurationISO8601, true, false, false),
-                    new InputModelProperty("requiredBoolean", "requiredBoolean", "", InputPrimitiveType.Boolean, true, false, false),
-                    new InputModelProperty("requiredBytes", "requiredBytes", "", InputPrimitiveType.BinaryData, true, false, false)
+                    new InputModelProperty("requiredString", "requiredString", "", InputPrimitiveType.String, null, true, false, false),
+                    new InputModelProperty("requiredInt", "requiredInt", "", InputPrimitiveType.Int32, null, true, false, false),
+                    new InputModelProperty("requiredLong", "requiredLong", "", InputPrimitiveType.Int64, null, true, false, false),
+                    new InputModelProperty("requiredSafeInt", "requiredSafeInt", "", InputPrimitiveType.Int64, null, true, false, false),
+                    new InputModelProperty("requiredFloat", "requiredFloat", "", InputPrimitiveType.Float32, null, true, false, false),
+                    new InputModelProperty("requiredDouble", "requiredDouble", "", InputPrimitiveType.Float64, null, true, false, false),
+                    new InputModelProperty("requiredBodyDateTime", "requiredBodyDateTime", "Illustrate a zonedDateTime body parameter, serialized as (https://datatracker.ietf.org/doc/html/rfc3339)", InputPrimitiveType.DateTimeISO8601, null, true, false, false),
+                    new InputModelProperty("requiredDuration", "requiredDuration", "", InputPrimitiveType.DurationISO8601, null, true, false, false),
+                    new InputModelProperty("requiredBoolean", "requiredBoolean", "", InputPrimitiveType.Boolean, null, true, false, false),
+                    new InputModelProperty("requiredBytes", "requiredBytes", "", InputPrimitiveType.BinaryData, null, true, false, false)
                 },
                 null, null, null, null);
 

@@ -27,6 +27,7 @@ namespace AutoRest.CSharp.Utilities
 
         public static bool IsNullOrEmpty(this string? text) => String.IsNullOrEmpty(text);
         public static bool IsNullOrWhiteSpace(this string? text) => String.IsNullOrWhiteSpace(text);
+        public static bool IsValidIdentifier(this string? name) => SyntaxFacts.IsValidIdentifier(name);
 
         private static bool IsWordSeparator(char c) => !SyntaxFacts.IsIdentifierPartCharacter(c) || c == '_';
 

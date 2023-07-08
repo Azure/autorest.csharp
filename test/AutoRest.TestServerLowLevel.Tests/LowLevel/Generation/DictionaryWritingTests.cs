@@ -48,13 +48,13 @@ namespace AutoRest.CSharp.Generation.Writers.Tests
 
         private static readonly IReadOnlyList<InputModelProperty> DictionaryProperties = new List<InputModelProperty>
         {
-            new InputModelProperty("requiredStringDictionary", "requiredStringDictionary", "Required dictionary of strings, illustrating a dictionary of reference types.", new InputDictionaryType("requiredStringDictionary", InputPrimitiveType.String, InputPrimitiveType.String), true, false, false),
-            new InputModelProperty("requiredIntDictionary", "requiredIntDictionary", "Required dictionary of ints, illustrating a dictionary of value types.", new InputDictionaryType("requiredIntDictionary", InputPrimitiveType.String, InputPrimitiveType.Int32), true, false, false),
-            new InputModelProperty("requiredModelDictionary", "requiredModelDictionary", "Required dictionary of models, illustrating a dictionary of model types.", new InputDictionaryType("requiredIntDictionary", InputPrimitiveType.String, ElementModelType), true, false, false),
+            new InputModelProperty("requiredStringDictionary", "requiredStringDictionary", "Required dictionary of strings, illustrating a dictionary of reference types.", new InputDictionaryType("requiredStringDictionary", InputPrimitiveType.String, InputPrimitiveType.String), null, true, false, false),
+            new InputModelProperty("requiredIntDictionary", "requiredIntDictionary", "Required dictionary of ints, illustrating a dictionary of value types.", new InputDictionaryType("requiredIntDictionary", InputPrimitiveType.String, InputPrimitiveType.Int32), null, true, false, false),
+            new InputModelProperty("requiredModelDictionary", "requiredModelDictionary", "Required dictionary of models, illustrating a dictionary of model types.", new InputDictionaryType("requiredIntDictionary", InputPrimitiveType.String, ElementModelType), null, true, false, false),
             new InputModelProperty("requiredModelDictionaryDictionary", "requiredModelDictionaryDictionary", "Required dictionary of dictionary of models, illustrating a dictionary of dictionary types.",
-                    new InputDictionaryType("requiredModelDictionaryDictionary", InputPrimitiveType.String, new InputDictionaryType("requiredModelDictionary", InputPrimitiveType.String, ElementModelType)), true, false, false),
+                    new InputDictionaryType("requiredModelDictionaryDictionary", InputPrimitiveType.String, new InputDictionaryType("requiredModelDictionary", InputPrimitiveType.String, ElementModelType)), null, true, false, false),
             new InputModelProperty("requiredModelListDictionary", "requiredModelListDictionary", "Required dictionary of list of models, illustrating a dictionary of list types.",
-                    new InputDictionaryType("requiredModelListDictionary", InputPrimitiveType.String, new InputListType("requiredModelList", ElementModelType)), true, false, false)
+                    new InputDictionaryType("requiredModelListDictionary", InputPrimitiveType.String, new InputListType("requiredModelList", ElementModelType)), null, true, false, false)
         };
 
         // below are test cases

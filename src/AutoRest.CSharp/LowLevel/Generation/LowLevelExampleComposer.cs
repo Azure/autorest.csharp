@@ -916,6 +916,11 @@ namespace AutoRest.CSharp.Generation.Writers
                 .Where(p => allProperties || p.IsRequired)
                 .ToDictionary(p => p.SerializedName, p => ComposeProtocolCSharpTypeInstance(allProperties, p.ValueSerialization, p.SerializedName, visitedModels));
 
+            if (propertyExpressions is not null && propertyExpressions.Keys.Any(name => StringExtensions.IsCSharpKeyword(name) || !name.IsValidIdentifier()))
+            {
+                return New.Dictionary(typeof(string), typeof(object), propertyExpressions.Select(kvp => (Literal(kvp.Key), kvp.Value)).ToArray());
+            }
+
             return New.Anonymous(propertyExpressions);
         }
 
