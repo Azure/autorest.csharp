@@ -11,6 +11,7 @@ Response response = await client.CsvAsync(new string[]
 {
 "<colors>"
 });
+Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
     <member name="Csv(IEnumerable{string},RequestContext)">
@@ -23,6 +24,7 @@ Response response = client.Csv(new string[]
 {
 "<colors>"
 });
+Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
   </members>

@@ -11,6 +11,7 @@ using System.Text.Json;
 using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
+using Azure.Identity;
 using FirstTestTypeSpec;
 using NUnit.Framework;
 

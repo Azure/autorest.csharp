@@ -6,8 +6,6 @@
 #nullable disable
 
 using System;
-using System.Collections.Generic;
-using System.IO;
 using System.Text.Json;
 using System.Threading.Tasks;
 using Azure;
@@ -15,7 +13,6 @@ using Azure.Core;
 using Azure.Identity;
 using NUnit.Framework;
 using _Type._Array;
-using _Type._Array.Models;
 
 namespace _Type._Array.Samples
 {
@@ -25,19 +22,7 @@ namespace _Type._Array.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_GetUnknownValue()
         {
-            UnknownValue client = new ArrayClient().GetUnknownValueClient("1.0.0");
-
-            Response response = client.GetUnknownValue(new RequestContext());
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result[0].ToString());
-        }
-
-        [Test]
-        [Ignore("Only validating compilation of examples")]
-        public void Example_GetUnknownValue_AllParameters()
-        {
-            UnknownValue client = new ArrayClient().GetUnknownValueClient("1.0.0");
+            UnknownValue client = new ArrayClient().GetUnknownValueClient(apiVersion: "1.0.0");
 
             Response response = client.GetUnknownValue(new RequestContext());
 
@@ -49,9 +34,21 @@ namespace _Type._Array.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_GetUnknownValue_Async()
         {
-            UnknownValue client = new ArrayClient().GetUnknownValueClient("1.0.0");
+            UnknownValue client = new ArrayClient().GetUnknownValueClient(apiVersion: "1.0.0");
 
             Response response = await client.GetUnknownValueAsync(new RequestContext());
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result[0].ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_GetUnknownValue_AllParameters()
+        {
+            UnknownValue client = new ArrayClient().GetUnknownValueClient(apiVersion: "1.0.0");
+
+            Response response = client.GetUnknownValue(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result[0].ToString());
@@ -61,7 +58,7 @@ namespace _Type._Array.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_GetUnknownValue_AllParameters_Async()
         {
-            UnknownValue client = new ArrayClient().GetUnknownValueClient("1.0.0");
+            UnknownValue client = new ArrayClient().GetUnknownValueClient(apiVersion: "1.0.0");
 
             Response response = await client.GetUnknownValueAsync(new RequestContext());
 
@@ -71,40 +68,15 @@ namespace _Type._Array.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetUnknownValue_Convenience_Async()
-        {
-            var client = new ArrayClient().GetUnknownValueClient("1.0.0");
-
-            var result = await client.GetUnknownValueAsync();
-        }
-
-        [Test]
-        [Ignore("Only validating compilation of examples")]
         public void Example_Put()
         {
-            UnknownValue client = new ArrayClient().GetUnknownValueClient("1.0.0");
+            UnknownValue client = new ArrayClient().GetUnknownValueClient(apiVersion: "1.0.0");
 
-            var data = new[]
+            RequestContent content = RequestContent.Create(new object[]
             {
-new {}
-};
-
-            Response response = client.Put(RequestContent.Create(data));
-            Console.WriteLine(response.Status);
-        }
-
-        [Test]
-        [Ignore("Only validating compilation of examples")]
-        public void Example_Put_AllParameters()
-        {
-            UnknownValue client = new ArrayClient().GetUnknownValueClient("1.0.0");
-
-            var data = new[]
-            {
-new {}
-};
-
-            Response response = client.Put(RequestContent.Create(data));
+null
+            });
+            Response response = client.Put(content);
             Console.WriteLine(response.Status);
         }
 
@@ -112,14 +84,27 @@ new {}
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Put_Async()
         {
-            UnknownValue client = new ArrayClient().GetUnknownValueClient("1.0.0");
+            UnknownValue client = new ArrayClient().GetUnknownValueClient(apiVersion: "1.0.0");
 
-            var data = new[]
+            RequestContent content = RequestContent.Create(new object[]
             {
-new {}
-};
+null
+            });
+            Response response = await client.PutAsync(content);
+            Console.WriteLine(response.Status);
+        }
 
-            Response response = await client.PutAsync(RequestContent.Create(data));
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_Put_AllParameters()
+        {
+            UnknownValue client = new ArrayClient().GetUnknownValueClient(apiVersion: "1.0.0");
+
+            RequestContent content = RequestContent.Create(new object[]
+            {
+null
+            });
+            Response response = client.Put(content);
             Console.WriteLine(response.Status);
         }
 
@@ -127,28 +112,14 @@ new {}
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Put_AllParameters_Async()
         {
-            UnknownValue client = new ArrayClient().GetUnknownValueClient("1.0.0");
+            UnknownValue client = new ArrayClient().GetUnknownValueClient(apiVersion: "1.0.0");
 
-            var data = new[]
+            RequestContent content = RequestContent.Create(new object[]
             {
-new {}
-};
-
-            Response response = await client.PutAsync(RequestContent.Create(data));
+null
+            });
+            Response response = await client.PutAsync(content);
             Console.WriteLine(response.Status);
-        }
-
-        [Test]
-        [Ignore("Only validating compilation of examples")]
-        public async Task Example_Put_Convenience_Async()
-        {
-            var client = new ArrayClient().GetUnknownValueClient("1.0.0");
-
-            var body = new BinaryData[]
-            {
-    BinaryData.FromString("<your binary data content>")
-            };
-            var result = await client.PutAsync(body);
         }
     }
 }

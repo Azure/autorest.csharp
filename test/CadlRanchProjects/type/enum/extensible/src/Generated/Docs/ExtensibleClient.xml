@@ -111,9 +111,8 @@ This sample shows how to call PutKnownValueAsync with required request content.
 <code><![CDATA[
 ExtensibleClient client = new ExtensibleClient();
 
-var data = "Monday";
-
-Response response = await client.PutKnownValueAsync(RequestContent.Create(data));
+RequestContent content = RequestContent.Create("Monday");
+Response response = await client.PutKnownValueAsync(content);
 Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
@@ -123,9 +122,8 @@ This sample shows how to call PutKnownValue with required request content.
 <code><![CDATA[
 ExtensibleClient client = new ExtensibleClient();
 
-var data = "Monday";
-
-Response response = client.PutKnownValue(RequestContent.Create(data));
+RequestContent content = RequestContent.Create("Monday");
+Response response = client.PutKnownValue(content);
 Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
@@ -155,9 +153,8 @@ This sample shows how to call PutUnknownValueAsync with required request content
 <code><![CDATA[
 ExtensibleClient client = new ExtensibleClient();
 
-var data = "Monday";
-
-Response response = await client.PutUnknownValueAsync(RequestContent.Create(data));
+RequestContent content = RequestContent.Create("Monday");
+Response response = await client.PutUnknownValueAsync(content);
 Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
@@ -167,9 +164,8 @@ This sample shows how to call PutUnknownValue with required request content.
 <code><![CDATA[
 ExtensibleClient client = new ExtensibleClient();
 
-var data = "Monday";
-
-Response response = client.PutUnknownValue(RequestContent.Create(data));
+RequestContent content = RequestContent.Create("Monday");
+Response response = client.PutUnknownValue(content);
 Console.WriteLine(response.Status);
 ]]></code></example>
     </member>

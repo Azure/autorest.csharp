@@ -5,8 +5,10 @@
 
 #nullable disable
 
+using System;
 using System.Threading.Tasks;
 using Azure;
+using Azure.Identity;
 using NUnit.Framework;
 using Parameters.CollectionFormat;
 
@@ -14,6 +16,32 @@ namespace Parameters.CollectionFormat.Samples
 {
     internal class Samples_Header
     {
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_Csv()
+        {
+            Header client = new CollectionFormatClient().GetHeaderClient(apiVersion: "1.0.0");
+
+            Response response = client.Csv(new string[]
+            {
+"<colors>"
+            });
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_Csv_Async()
+        {
+            Header client = new CollectionFormatClient().GetHeaderClient(apiVersion: "1.0.0");
+
+            Response response = await client.CsvAsync(new string[]
+            {
+"<colors>"
+            });
+            Console.WriteLine(response.Status);
+        }
+
         [Test]
         [Ignore("Only validating compilation of examples")]
         public void Example_Csv_AllParameters()
@@ -24,6 +52,7 @@ namespace Parameters.CollectionFormat.Samples
             {
 "<colors>"
             });
+            Console.WriteLine(response.Status);
         }
 
         [Test]
@@ -36,6 +65,7 @@ namespace Parameters.CollectionFormat.Samples
             {
 "<colors>"
             });
+            Console.WriteLine(response.Status);
         }
     }
 }

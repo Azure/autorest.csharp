@@ -178,7 +178,7 @@ namespace AutoRest.CSharp.LowLevel.Generation.Extensions
         private static CodeWriter AppendRawValue(this CodeWriter writer, object? rawValue, Type type, InputType? inputType = null) => rawValue switch
         {
             string str => writer.AppendStringValue(type, str, inputType),
-            int or float or double or decimal or bool => writer.Literal(rawValue),
+            int or float or double or decimal or bool => writer.AppendNumberValue(rawValue, inputType),
             null => writer.AppendRaw("null"),
             _ => writer.AppendRaw(rawValue.ToString()!)
         };
@@ -192,6 +192,15 @@ namespace AutoRest.CSharp.LowLevel.Generation.Extensions
             _ when _newInstanceInitializedTypes.Contains(type) => writer.Append($"new {type}({value:L})"),
             _ when _parsableInitializedTypes.Contains(type) => writer.Append($"{type}.Parse({value:L})"),
             _ when type == typeof(byte[]) => writer.Append($"{typeof(Convert)}.FromBase64String({value:L})"),
+            _ => writer.Literal(value),
+        };
+
+        private static CodeWriter AppendNumberValue(this CodeWriter writer, object value, InputType? inputType = null) => inputType switch
+        {
+            null => writer.Literal(value),
+            InputPrimitiveType { IsNumber: true } => writer.Literal(value),
+            InputPrimitiveType { Kind: InputTypeKind.DurationSeconds or InputTypeKind.DurationSecondsFloat } => writer.Append($"{typeof(TimeSpan)}.{nameof(TimeSpan.FromSeconds)}({value:L})"),
+            // TODO -- other types
             _ => writer.Literal(value),
         };
 

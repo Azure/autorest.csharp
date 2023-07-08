@@ -108,13 +108,13 @@ This sample shows how to call CreateAsync with required request content, and how
 Uri endpoint = new Uri("<https://my-service.azure.com>");
 PetStoreClient client = new PetStoreClient(endpoint);
 
-var data = new
+RequestContent content = RequestContent.Create(new Dictionary<string, object>()
 {
-    name = "<name>",
-    age = 1234,
-};
-
-Response response = await client.CreateAsync(RequestContent.Create(data));
+    ["name"] = "<name>",
+    ["tag"] = "<tag>",
+    ["age"] = 1234,
+});
+Response response = await client.CreateAsync(content);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("name").ToString());
@@ -125,14 +125,13 @@ This sample shows how to call CreateAsync with all request content, and how to p
 Uri endpoint = new Uri("<https://my-service.azure.com>");
 PetStoreClient client = new PetStoreClient(endpoint);
 
-var data = new
+RequestContent content = RequestContent.Create(new Dictionary<string, object>()
 {
-    name = "<name>",
-    tag = "<tag>",
-    age = 1234,
-};
-
-Response response = await client.CreateAsync(RequestContent.Create(data));
+    ["name"] = "<name>",
+    ["tag"] = "<tag>",
+    ["age"] = 1234,
+});
+Response response = await client.CreateAsync(content);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("name").ToString());
@@ -147,13 +146,13 @@ This sample shows how to call Create with required request content, and how to p
 Uri endpoint = new Uri("<https://my-service.azure.com>");
 PetStoreClient client = new PetStoreClient(endpoint);
 
-var data = new
+RequestContent content = RequestContent.Create(new Dictionary<string, object>()
 {
-    name = "<name>",
-    age = 1234,
-};
-
-Response response = client.Create(RequestContent.Create(data));
+    ["name"] = "<name>",
+    ["tag"] = "<tag>",
+    ["age"] = 1234,
+});
+Response response = client.Create(content);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("name").ToString());
@@ -164,14 +163,13 @@ This sample shows how to call Create with all request content, and how to parse 
 Uri endpoint = new Uri("<https://my-service.azure.com>");
 PetStoreClient client = new PetStoreClient(endpoint);
 
-var data = new
+RequestContent content = RequestContent.Create(new Dictionary<string, object>()
 {
-    name = "<name>",
-    tag = "<tag>",
-    age = 1234,
-};
-
-Response response = client.Create(RequestContent.Create(data));
+    ["name"] = "<name>",
+    ["tag"] = "<tag>",
+    ["age"] = 1234,
+});
+Response response = client.Create(content);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("name").ToString());
@@ -206,7 +204,7 @@ This sample shows how to call GetPetByKindAsync with required parameters and par
 Uri endpoint = new Uri("<https://my-service.azure.com>");
 PetStoreClient client = new PetStoreClient(endpoint);
 
-Response response = await client.GetPetByKindAsync("<kind>");
+Response response = await client.GetPetByKindAsync("dog");
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("name").ToString());
@@ -221,7 +219,7 @@ This sample shows how to call GetPetByKind with required parameters and parse th
 Uri endpoint = new Uri("<https://my-service.azure.com>");
 PetStoreClient client = new PetStoreClient(endpoint);
 
-Response response = client.GetPetByKind("<kind>");
+Response response = client.GetPetByKind("dog");
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("name").ToString());

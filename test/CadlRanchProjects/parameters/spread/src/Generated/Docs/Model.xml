@@ -25,14 +25,13 @@ var result = client.SpreadAsRequestBody(bodyParameter);
       <example>
 This sample shows how to call SpreadAsRequestBodyAsync with required request content.
 <code><![CDATA[
-Model client = new SpreadClient().GetModelClient("1.0.0");
+Model client = new SpreadClient().GetModelClient(apiVersion: "1.0.0");
 
-var data = new
+RequestContent content = RequestContent.Create(new Dictionary<string, object>()
 {
-    name = "<name>",
-};
-
-Response response = await client.SpreadAsRequestBodyAsync(RequestContent.Create(data));
+    ["name"] = "<name>",
+});
+Response response = await client.SpreadAsRequestBodyAsync(content);
 Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
@@ -40,14 +39,13 @@ Console.WriteLine(response.Status);
       <example>
 This sample shows how to call SpreadAsRequestBody with required request content.
 <code><![CDATA[
-Model client = new SpreadClient().GetModelClient("1.0.0");
+Model client = new SpreadClient().GetModelClient(apiVersion: "1.0.0");
 
-var data = new
+RequestContent content = RequestContent.Create(new Dictionary<string, object>()
 {
-    name = "<name>",
-};
-
-Response response = client.SpreadAsRequestBody(RequestContent.Create(data));
+    ["name"] = "<name>",
+});
+Response response = client.SpreadAsRequestBody(content);
 Console.WriteLine(response.Status);
 ]]></code></example>
     </member>

@@ -6,16 +6,14 @@
 #nullable disable
 
 using System;
-using System.Collections.Generic;
-using System.IO;
 using System.Text.Json;
 using System.Threading.Tasks;
+using System.Xml;
 using Azure;
 using Azure.Core;
 using Azure.Identity;
 using NUnit.Framework;
 using _Type._Array;
-using _Type._Array.Models;
 
 namespace _Type._Array.Samples
 {
@@ -25,19 +23,7 @@ namespace _Type._Array.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_GetDurationValue()
         {
-            DurationValue client = new ArrayClient().GetDurationValueClient("1.0.0");
-
-            Response response = client.GetDurationValue(new RequestContext());
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result[0].ToString());
-        }
-
-        [Test]
-        [Ignore("Only validating compilation of examples")]
-        public void Example_GetDurationValue_AllParameters()
-        {
-            DurationValue client = new ArrayClient().GetDurationValueClient("1.0.0");
+            DurationValue client = new ArrayClient().GetDurationValueClient(apiVersion: "1.0.0");
 
             Response response = client.GetDurationValue(new RequestContext());
 
@@ -49,9 +35,21 @@ namespace _Type._Array.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_GetDurationValue_Async()
         {
-            DurationValue client = new ArrayClient().GetDurationValueClient("1.0.0");
+            DurationValue client = new ArrayClient().GetDurationValueClient(apiVersion: "1.0.0");
 
             Response response = await client.GetDurationValueAsync(new RequestContext());
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result[0].ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_GetDurationValue_AllParameters()
+        {
+            DurationValue client = new ArrayClient().GetDurationValueClient(apiVersion: "1.0.0");
+
+            Response response = client.GetDurationValue(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result[0].ToString());
@@ -61,7 +59,7 @@ namespace _Type._Array.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_GetDurationValue_AllParameters_Async()
         {
-            DurationValue client = new ArrayClient().GetDurationValueClient("1.0.0");
+            DurationValue client = new ArrayClient().GetDurationValueClient(apiVersion: "1.0.0");
 
             Response response = await client.GetDurationValueAsync(new RequestContext());
 
@@ -71,40 +69,15 @@ namespace _Type._Array.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetDurationValue_Convenience_Async()
-        {
-            var client = new ArrayClient().GetDurationValueClient("1.0.0");
-
-            var result = await client.GetDurationValueAsync();
-        }
-
-        [Test]
-        [Ignore("Only validating compilation of examples")]
         public void Example_Put()
         {
-            DurationValue client = new ArrayClient().GetDurationValueClient("1.0.0");
+            DurationValue client = new ArrayClient().GetDurationValueClient(apiVersion: "1.0.0");
 
-            var data = new[]
+            RequestContent content = RequestContent.Create(new object[]
             {
-"PT1H23M45S"
-};
-
-            Response response = client.Put(RequestContent.Create(data));
-            Console.WriteLine(response.Status);
-        }
-
-        [Test]
-        [Ignore("Only validating compilation of examples")]
-        public void Example_Put_AllParameters()
-        {
-            DurationValue client = new ArrayClient().GetDurationValueClient("1.0.0");
-
-            var data = new[]
-            {
-"PT1H23M45S"
-};
-
-            Response response = client.Put(RequestContent.Create(data));
+XmlConvert.ToTimeSpan("PT1H23M45S")
+            });
+            Response response = client.Put(content);
             Console.WriteLine(response.Status);
         }
 
@@ -112,14 +85,27 @@ namespace _Type._Array.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Put_Async()
         {
-            DurationValue client = new ArrayClient().GetDurationValueClient("1.0.0");
+            DurationValue client = new ArrayClient().GetDurationValueClient(apiVersion: "1.0.0");
 
-            var data = new[]
+            RequestContent content = RequestContent.Create(new object[]
             {
-"PT1H23M45S"
-};
+XmlConvert.ToTimeSpan("PT1H23M45S")
+            });
+            Response response = await client.PutAsync(content);
+            Console.WriteLine(response.Status);
+        }
 
-            Response response = await client.PutAsync(RequestContent.Create(data));
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_Put_AllParameters()
+        {
+            DurationValue client = new ArrayClient().GetDurationValueClient(apiVersion: "1.0.0");
+
+            RequestContent content = RequestContent.Create(new object[]
+            {
+XmlConvert.ToTimeSpan("PT1H23M45S")
+            });
+            Response response = client.Put(content);
             Console.WriteLine(response.Status);
         }
 
@@ -127,28 +113,14 @@ namespace _Type._Array.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Put_AllParameters_Async()
         {
-            DurationValue client = new ArrayClient().GetDurationValueClient("1.0.0");
+            DurationValue client = new ArrayClient().GetDurationValueClient(apiVersion: "1.0.0");
 
-            var data = new[]
+            RequestContent content = RequestContent.Create(new object[]
             {
-"PT1H23M45S"
-};
-
-            Response response = await client.PutAsync(RequestContent.Create(data));
+XmlConvert.ToTimeSpan("PT1H23M45S")
+            });
+            Response response = await client.PutAsync(content);
             Console.WriteLine(response.Status);
-        }
-
-        [Test]
-        [Ignore("Only validating compilation of examples")]
-        public async Task Example_Put_Convenience_Async()
-        {
-            var client = new ArrayClient().GetDurationValueClient("1.0.0");
-
-            var body = new TimeSpan[]
-            {
-    new TimeSpan(1, 2, 3)
-            };
-            var result = await client.PutAsync(body);
         }
     }
 }

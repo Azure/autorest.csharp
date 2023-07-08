@@ -123,13 +123,15 @@ namespace AutoRest.CSharp.Output.Samples.Models
         {
             var result = new Dictionary<string, ExampleParameterValue>();
             var parameters = GetAllParameters();
+            var parameterExamples = GetAllParameterExamples();
 
             foreach (var parameter in parameters)
             {
                 if (ProcessKnownParameters(result, parameter))
                     continue;
 
-                var exampleParameter = FindExampleParameterBySerializedName(GetAllParameterExamples(), parameter.Name);
+                // find the corresponding input parameter
+                var exampleParameter = FindExampleParameterBySerializedName(parameterExamples, parameter.Name);
 
                 var exampleValue = exampleParameter?.ExampleValue;
                 if (exampleValue == null)
@@ -219,6 +221,13 @@ namespace AutoRest.CSharp.Output.Samples.Models
                 return true;
             }
 
+            if (IsSameParameter(parameter, KnownParameters.RequestConditionsParameter) || IsSameParameter(parameter, KnownParameters.MatchConditionsParameter))
+            {
+                // temporarily just return null value
+                result.Add(parameter.Name, new ExampleParameterValue(parameter, $"null"));
+                return true;
+            }
+
             // handle credentials
             if (parameter.Type.EqualsIgnoreNullable(KnownParameters.KeyAuth.Type))
             {
@@ -235,8 +244,8 @@ namespace AutoRest.CSharp.Output.Samples.Models
             return false;
         }
 
-        protected InputParameterExample? FindExampleParameterBySerializedName(IEnumerable<InputParameterExample> parameters, string name)
-            => parameters.FirstOrDefault(p => p.Parameter.Name == name);
+        protected InputParameterExample? FindExampleParameterBySerializedName(IEnumerable<InputParameterExample> parameterExamples, string name)
+            => parameterExamples.FirstOrDefault(p => p.Parameter.Name.ToVariableName() == name);
 
         public InputExampleValue GetEndpointValue()
         {

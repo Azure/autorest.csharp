@@ -6,13 +6,9 @@
 #nullable disable
 
 using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Text.Json;
 using System.Threading.Tasks;
 using Authentication.Union;
 using Azure;
-using Azure.Core;
 using Azure.Identity;
 using NUnit.Framework;
 
@@ -33,23 +29,23 @@ namespace Authentication.Union.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_ValidKey_AllParameters()
-        {
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
-            UnionClient client = new UnionClient(credential);
-
-            Response response = client.ValidKey();
-            Console.WriteLine(response.Status);
-        }
-
-        [Test]
-        [Ignore("Only validating compilation of examples")]
         public async Task Example_ValidKey_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             UnionClient client = new UnionClient(credential);
 
             Response response = await client.ValidKeyAsync();
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_ValidKey_AllParameters()
+        {
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            UnionClient client = new UnionClient(credential);
+
+            Response response = client.ValidKey();
             Console.WriteLine(response.Status);
         }
 
@@ -77,23 +73,23 @@ namespace Authentication.Union.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_ValidToken_AllParameters()
-        {
-            AzureKeyCredential credential = new AzureKeyCredential("<key>");
-            UnionClient client = new UnionClient(credential);
-
-            Response response = client.ValidToken();
-            Console.WriteLine(response.Status);
-        }
-
-        [Test]
-        [Ignore("Only validating compilation of examples")]
         public async Task Example_ValidToken_Async()
         {
             AzureKeyCredential credential = new AzureKeyCredential("<key>");
             UnionClient client = new UnionClient(credential);
 
             Response response = await client.ValidTokenAsync();
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_ValidToken_AllParameters()
+        {
+            AzureKeyCredential credential = new AzureKeyCredential("<key>");
+            UnionClient client = new UnionClient(credential);
+
+            Response response = client.ValidToken();
             Console.WriteLine(response.Status);
         }
 

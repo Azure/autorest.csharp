@@ -24,9 +24,6 @@ namespace AutoRest.CSharp.LowLevel.Generation
 {
     internal class ExampleCompileCheckWriter
     {
-        private static readonly CSharpType KeyAuthType = KnownParameters.KeyAuth.Type;
-        private static readonly CSharpType TokenAuthType = KnownParameters.TokenAuth.Type;
-
         private MethodSignature GetExampleMethodSignature(string name, bool isAsync) => new MethodSignature(
             name,
             null,
@@ -52,10 +49,10 @@ namespace AutoRest.CSharp.LowLevel.Generation
 
         public void Write()
         {
-            ////TODO: Once the code snippet composer uses CodeWriter these won't be needed
             //_writer.UseNamespace("Azure");
             //_writer.UseNamespace("Azure.Core");
-            //_writer.UseNamespace("Azure.Identity");
+            // The source code generator does not have this dependency therefore this will be never automatically added, we have to hard code it here
+            _writer.UseNamespace("Azure.Identity");
             //_writer.UseNamespace("System");
             //_writer.UseNamespace("System.Collections.Generic");
             //_writer.UseNamespace("System.IO");
@@ -108,12 +105,12 @@ namespace AutoRest.CSharp.LowLevel.Generation
                             WriteTestCompilation(method, true, true);
                         }
 
-                        //if (method.ConvenienceMethod is not null &&
-                        //    !method.ConvenienceMethod.IsDeprecatedForExamples() &&
-                        //    method.ConvenienceMethod.Signature.Modifiers.HasFlag(MethodSignatureModifiers.Public) &&
-                        //    (_client.IsSubClient ? true : _client.GetEffectiveCtor() is not null) &&
-                        //    !_client.IsMethodSuppressed(method.ConvenienceMethod.Signature))
-                        //    WriteConvenienceTestCompilation(method.ConvenienceMethod, method.ConvenienceMethod.Signature.Name, true, false);
+                        if (method.ConvenienceMethod is not null &&
+                            !method.ConvenienceMethod.IsDeprecatedForExamples() &&
+                            method.ConvenienceMethod.Signature.Modifiers.HasFlag(MethodSignatureModifiers.Public) &&
+                            (_client.IsSubClient ? true : _client.GetEffectiveCtor() is not null) &&
+                            !_client.IsMethodSuppressed(method.ConvenienceMethod.Signature))
+                            WriteConvenienceTestCompilation(method.ConvenienceMethod, method.ConvenienceMethod.Signature.Name, true, false);
                     }
 #endif
                 }

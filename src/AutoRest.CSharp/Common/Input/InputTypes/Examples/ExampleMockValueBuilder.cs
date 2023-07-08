@@ -52,7 +52,22 @@ namespace AutoRest.CSharp.Common.Input.Examples
             // if the parameter is constant, we just put the constant into the example value instead of mocking a new one
             if (parameter.Kind == InputOperationParameterKind.Constant)
             {
-                var value = InputExampleValue.FromRawValue(parameter.Type, parameter.DefaultValue!.Value);
+                InputExampleValue value;
+                if (parameter.DefaultValue != null)
+                {
+                    // when it is constant, it could have DefaultValue
+                    value = InputExampleValue.FromRawValue(parameter.Type, parameter.DefaultValue.Value);
+                }
+                else if (parameter.Type is InputUnionType unionType && unionType.UnionItemTypes.First() is InputLiteralType literalType)
+                {
+                    // or it could be a union of literal types
+                    value = InputExampleValue.FromRawValue(parameter.Type, literalType.Value);
+                }
+                else
+                {
+                    // fallback to null
+                    value = InputExampleValue.Null(parameter.Type);
+                }
                 return new(parameter, value);
             }
 
@@ -129,6 +144,8 @@ namespace AutoRest.CSharp.Common.Input.Examples
             InputTypeKind.DurationConstant => InputExampleValue.FromRawValue(primitiveType, "01:23:45"),
             InputTypeKind.Time => InputExampleValue.FromRawValue(primitiveType, "01:23:45"),
             InputTypeKind.Uri => InputExampleValue.FromRawValue(primitiveType, "http://localhost:3000"),
+            InputTypeKind.DurationSeconds => InputExampleValue.FromRawValue(primitiveType, 10),
+            InputTypeKind.DurationSecondsFloat => InputExampleValue.FromRawValue(primitiveType, 10f),
             _ => InputExampleValue.FromDictionary(primitiveType, new Dictionary<string, InputExampleValue>())
         };
 

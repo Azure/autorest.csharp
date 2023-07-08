@@ -7,7 +7,6 @@
 
 using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Text.Json;
 using System.Threading.Tasks;
 using Azure;
@@ -15,7 +14,6 @@ using Azure.Core;
 using Azure.Identity;
 using NUnit.Framework;
 using SpecialWords;
-using SpecialWords.Models;
 
 namespace SpecialWords.Samples
 {
@@ -25,19 +23,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_GetModel()
         {
-            Model client = new SpecialWordsClient().GetModelClient("1.0.0");
-
-            Response response = client.GetModel();
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("model.kind").ToString());
-        }
-
-        [Test]
-        [Ignore("Only validating compilation of examples")]
-        public void Example_GetModel_AllParameters()
-        {
-            Model client = new SpecialWordsClient().GetModelClient("1.0.0");
+            Model client = new SpecialWordsClient().GetModelClient(apiVersion: "1.0.0");
 
             Response response = client.GetModel();
 
@@ -49,9 +35,21 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_GetModel_Async()
         {
-            Model client = new SpecialWordsClient().GetModelClient("1.0.0");
+            Model client = new SpecialWordsClient().GetModelClient(apiVersion: "1.0.0");
 
             Response response = await client.GetModelAsync();
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("model.kind").ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_GetModel_AllParameters()
+        {
+            Model client = new SpecialWordsClient().GetModelClient(apiVersion: "1.0.0");
+
+            Response response = client.GetModel();
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("model.kind").ToString());
@@ -61,7 +59,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_GetModel_AllParameters_Async()
         {
-            Model client = new SpecialWordsClient().GetModelClient("1.0.0");
+            Model client = new SpecialWordsClient().GetModelClient(apiVersion: "1.0.0");
 
             Response response = await client.GetModelAsync();
 
@@ -71,40 +69,15 @@ namespace SpecialWords.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetModelValue_Convenience_Async()
-        {
-            var client = new SpecialWordsClient().GetModelClient("1.0.0");
-
-            var result = await client.GetModelValueAsync();
-        }
-
-        [Test]
-        [Ignore("Only validating compilation of examples")]
         public void Example_Put()
         {
-            Model client = new SpecialWordsClient().GetModelClient("1.0.0");
+            Model client = new SpecialWordsClient().GetModelClient(apiVersion: "1.0.0");
 
-            var data = new
+            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
             {
-                modelkind = "",
-            };
-
-            Response response = client.Put(RequestContent.Create(data));
-            Console.WriteLine(response.Status);
-        }
-
-        [Test]
-        [Ignore("Only validating compilation of examples")]
-        public void Example_Put_AllParameters()
-        {
-            Model client = new SpecialWordsClient().GetModelClient("1.0.0");
-
-            var data = new
-            {
-                modelkind = "",
-            };
-
-            Response response = client.Put(RequestContent.Create(data));
+                ["model.kind"] = "<model.kind>",
+            });
+            Response response = client.Put(content);
             Console.WriteLine(response.Status);
         }
 
@@ -112,14 +85,27 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Put_Async()
         {
-            Model client = new SpecialWordsClient().GetModelClient("1.0.0");
+            Model client = new SpecialWordsClient().GetModelClient(apiVersion: "1.0.0");
 
-            var data = new
+            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
             {
-                modelkind = "",
-            };
+                ["model.kind"] = "<model.kind>",
+            });
+            Response response = await client.PutAsync(content);
+            Console.WriteLine(response.Status);
+        }
 
-            Response response = await client.PutAsync(RequestContent.Create(data));
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_Put_AllParameters()
+        {
+            Model client = new SpecialWordsClient().GetModelClient(apiVersion: "1.0.0");
+
+            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            {
+                ["model.kind"] = "<model.kind>",
+            });
+            Response response = client.Put(content);
             Console.WriteLine(response.Status);
         }
 
@@ -127,25 +113,14 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Put_AllParameters_Async()
         {
-            Model client = new SpecialWordsClient().GetModelClient("1.0.0");
+            Model client = new SpecialWordsClient().GetModelClient(apiVersion: "1.0.0");
 
-            var data = new
+            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
             {
-                modelkind = "",
-            };
-
-            Response response = await client.PutAsync(RequestContent.Create(data));
+                ["model.kind"] = "<model.kind>",
+            });
+            Response response = await client.PutAsync(content);
             Console.WriteLine(response.Status);
-        }
-
-        [Test]
-        [Ignore("Only validating compilation of examples")]
-        public async Task Example_Put_Convenience_Async()
-        {
-            var client = new SpecialWordsClient().GetModelClient("1.0.0");
-
-            var body = new DerivedModel("<derivedName>", "<for>");
-            var result = await client.PutAsync(body);
         }
     }
 }

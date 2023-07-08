@@ -25,14 +25,13 @@ var result = client.Default(body);
       <example>
 This sample shows how to call DefaultAsync with required request content and parse the result.
 <code><![CDATA[
-Property client = new DurationClient().GetPropertyClient("1.0.0");
+Property client = new DurationClient().GetPropertyClient(apiVersion: "1.0.0");
 
-var data = new
+RequestContent content = RequestContent.Create(new Dictionary<string, object>()
 {
-    value = "PT1H23M45S",
-};
-
-Response response = await client.DefaultAsync(RequestContent.Create(data));
+    ["value"] = XmlConvert.ToTimeSpan("PT1H23M45S"),
+});
+Response response = await client.DefaultAsync(content);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("value").ToString());
@@ -42,14 +41,13 @@ Console.WriteLine(result.GetProperty("value").ToString());
       <example>
 This sample shows how to call Default with required request content and parse the result.
 <code><![CDATA[
-Property client = new DurationClient().GetPropertyClient("1.0.0");
+Property client = new DurationClient().GetPropertyClient(apiVersion: "1.0.0");
 
-var data = new
+RequestContent content = RequestContent.Create(new Dictionary<string, object>()
 {
-    value = "PT1H23M45S",
-};
-
-Response response = client.Default(RequestContent.Create(data));
+    ["value"] = XmlConvert.ToTimeSpan("PT1H23M45S"),
+});
+Response response = client.Default(content);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("value").ToString());
@@ -79,14 +77,13 @@ var result = client.Iso8601(body);
       <example>
 This sample shows how to call Iso8601Async with required request content and parse the result.
 <code><![CDATA[
-Property client = new DurationClient().GetPropertyClient("1.0.0");
+Property client = new DurationClient().GetPropertyClient(apiVersion: "1.0.0");
 
-var data = new
+RequestContent content = RequestContent.Create(new Dictionary<string, object>()
 {
-    value = "PT1H23M45S",
-};
-
-Response response = await client.Iso8601Async(RequestContent.Create(data));
+    ["value"] = XmlConvert.ToTimeSpan("PT1H23M45S"),
+});
+Response response = await client.Iso8601Async(content);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("value").ToString());
@@ -96,14 +93,13 @@ Console.WriteLine(result.GetProperty("value").ToString());
       <example>
 This sample shows how to call Iso8601 with required request content and parse the result.
 <code><![CDATA[
-Property client = new DurationClient().GetPropertyClient("1.0.0");
+Property client = new DurationClient().GetPropertyClient(apiVersion: "1.0.0");
 
-var data = new
+RequestContent content = RequestContent.Create(new Dictionary<string, object>()
 {
-    value = "PT1H23M45S",
-};
-
-Response response = client.Iso8601(RequestContent.Create(data));
+    ["value"] = XmlConvert.ToTimeSpan("PT1H23M45S"),
+});
+Response response = client.Iso8601(content);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("value").ToString());
@@ -133,14 +129,13 @@ var result = client.Int32Seconds(body);
       <example>
 This sample shows how to call Int32SecondsAsync with required request content and parse the result.
 <code><![CDATA[
-Property client = new DurationClient().GetPropertyClient("1.0.0");
+Property client = new DurationClient().GetPropertyClient(apiVersion: "1.0.0");
 
-var data = new
+RequestContent content = RequestContent.Create(new Dictionary<string, object>()
 {
-    value = new { },
-};
-
-Response response = await client.Int32SecondsAsync(RequestContent.Create(data));
+    ["value"] = TimeSpan.FromSeconds(10),
+});
+Response response = await client.Int32SecondsAsync(content);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("value").ToString());
@@ -150,14 +145,13 @@ Console.WriteLine(result.GetProperty("value").ToString());
       <example>
 This sample shows how to call Int32Seconds with required request content and parse the result.
 <code><![CDATA[
-Property client = new DurationClient().GetPropertyClient("1.0.0");
+Property client = new DurationClient().GetPropertyClient(apiVersion: "1.0.0");
 
-var data = new
+RequestContent content = RequestContent.Create(new Dictionary<string, object>()
 {
-    value = new { },
-};
-
-Response response = client.Int32Seconds(RequestContent.Create(data));
+    ["value"] = TimeSpan.FromSeconds(10),
+});
+Response response = client.Int32Seconds(content);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("value").ToString());
@@ -187,14 +181,13 @@ var result = client.FloatSeconds(body);
       <example>
 This sample shows how to call FloatSecondsAsync with required request content and parse the result.
 <code><![CDATA[
-Property client = new DurationClient().GetPropertyClient("1.0.0");
+Property client = new DurationClient().GetPropertyClient(apiVersion: "1.0.0");
 
-var data = new
+RequestContent content = RequestContent.Create(new Dictionary<string, object>()
 {
-    value = new { },
-};
-
-Response response = await client.FloatSecondsAsync(RequestContent.Create(data));
+    ["value"] = TimeSpan.FromSeconds(10F),
+});
+Response response = await client.FloatSecondsAsync(content);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("value").ToString());
@@ -204,14 +197,13 @@ Console.WriteLine(result.GetProperty("value").ToString());
       <example>
 This sample shows how to call FloatSeconds with required request content and parse the result.
 <code><![CDATA[
-Property client = new DurationClient().GetPropertyClient("1.0.0");
+Property client = new DurationClient().GetPropertyClient(apiVersion: "1.0.0");
 
-var data = new
+RequestContent content = RequestContent.Create(new Dictionary<string, object>()
 {
-    value = new { },
-};
-
-Response response = client.FloatSeconds(RequestContent.Create(data));
+    ["value"] = TimeSpan.FromSeconds(10F),
+});
+Response response = client.FloatSeconds(content);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("value").ToString());
@@ -247,17 +239,16 @@ var result = client.FloatSecondsArray(body);
       <example>
 This sample shows how to call FloatSecondsArrayAsync with required request content and parse the result.
 <code><![CDATA[
-Property client = new DurationClient().GetPropertyClient("1.0.0");
+Property client = new DurationClient().GetPropertyClient(apiVersion: "1.0.0");
 
-var data = new
+RequestContent content = RequestContent.Create(new Dictionary<string, object>()
 {
-    value = new[]
+    ["value"] = new object[]
 {
-new {}
+mSeconds(10F)
 },
-};
-
-Response response = await client.FloatSecondsArrayAsync(RequestContent.Create(data));
+});
+Response response = await client.FloatSecondsArrayAsync(content);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("value")[0].ToString());
@@ -267,17 +258,16 @@ Console.WriteLine(result.GetProperty("value")[0].ToString());
       <example>
 This sample shows how to call FloatSecondsArray with required request content and parse the result.
 <code><![CDATA[
-Property client = new DurationClient().GetPropertyClient("1.0.0");
+Property client = new DurationClient().GetPropertyClient(apiVersion: "1.0.0");
 
-var data = new
+RequestContent content = RequestContent.Create(new Dictionary<string, object>()
 {
-    value = new[]
+    ["value"] = new object[]
 {
-new {}
+mSeconds(10F)
 },
-};
-
-Response response = client.FloatSecondsArray(RequestContent.Create(data));
+});
+Response response = client.FloatSecondsArray(content);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("value")[0].ToString());

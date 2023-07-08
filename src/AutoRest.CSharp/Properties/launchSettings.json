@@ -242,7 +242,7 @@
     },
     "FirstTest-TypeSpec": {
       "commandName": "Project",
-      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\FirstTest-TypeSpec\\src\\Generated -n"
+      "commandLineArgs": "--standalone $(SolutionDir)\\\\test\\\\CadlRanchProjects\\\\type\\\\dictionary\\\\src\\\\Generated -n"
     },
     "FlattenedParameters": {
       "commandName": "Project",

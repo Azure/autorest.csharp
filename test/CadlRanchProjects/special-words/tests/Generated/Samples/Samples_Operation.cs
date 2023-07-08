@@ -6,12 +6,8 @@
 #nullable disable
 
 using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Text.Json;
 using System.Threading.Tasks;
 using Azure;
-using Azure.Core;
 using Azure.Identity;
 using NUnit.Framework;
 using SpecialWords;
@@ -24,17 +20,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_For()
         {
-            Operation client = new SpecialWordsClient().GetOperationClient("1.0.0");
-
-            Response response = client.For();
-            Console.WriteLine(response.Status);
-        }
-
-        [Test]
-        [Ignore("Only validating compilation of examples")]
-        public void Example_For_AllParameters()
-        {
-            Operation client = new SpecialWordsClient().GetOperationClient("1.0.0");
+            Operation client = new SpecialWordsClient().GetOperationClient(apiVersion: "1.0.0");
 
             Response response = client.For();
             Console.WriteLine(response.Status);
@@ -44,7 +30,7 @@ namespace SpecialWords.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_For_Async()
         {
-            Operation client = new SpecialWordsClient().GetOperationClient("1.0.0");
+            Operation client = new SpecialWordsClient().GetOperationClient(apiVersion: "1.0.0");
 
             Response response = await client.ForAsync();
             Console.WriteLine(response.Status);
@@ -52,9 +38,19 @@ namespace SpecialWords.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
+        public void Example_For_AllParameters()
+        {
+            Operation client = new SpecialWordsClient().GetOperationClient(apiVersion: "1.0.0");
+
+            Response response = client.For();
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
         public async Task Example_For_AllParameters_Async()
         {
-            Operation client = new SpecialWordsClient().GetOperationClient("1.0.0");
+            Operation client = new SpecialWordsClient().GetOperationClient(apiVersion: "1.0.0");
 
             Response response = await client.ForAsync();
             Console.WriteLine(response.Status);

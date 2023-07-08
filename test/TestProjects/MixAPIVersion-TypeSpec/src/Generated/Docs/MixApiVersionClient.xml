@@ -56,7 +56,21 @@ Console.WriteLine(result.GetProperty("age").ToString());
     <member name="CreateAsync(RequestContent,RequestContext)">
       <example>
 This sample shows how to call CreateAsync with required request content, and how to parse the result.
-<code>Example_Create_Async</code>
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+MixApiVersionClient client = new MixApiVersionClient(endpoint);
+
+RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+{
+    ["tag"] = "<tag>",
+    ["age"] = 1234,
+});
+Response response = await client.CreateAsync(content);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("name").ToString());
+Console.WriteLine(result.GetProperty("age").ToString());
+]]></code>
 This sample shows how to call CreateAsync with all request content, and how to parse the result.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -78,7 +92,21 @@ Console.WriteLine(result.GetProperty("age").ToString());
     <member name="Create(RequestContent,RequestContext)">
       <example>
 This sample shows how to call Create with required request content, and how to parse the result.
-<code>Example_Create</code>
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+MixApiVersionClient client = new MixApiVersionClient(endpoint);
+
+RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+{
+    ["tag"] = "<tag>",
+    ["age"] = 1234,
+});
+Response response = client.Create(content);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("name").ToString());
+Console.WriteLine(result.GetProperty("age").ToString());
+]]></code>
 This sample shows how to call Create with all request content, and how to parse the result.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -107,9 +135,9 @@ MixApiVersionClient client = new MixApiVersionClient(endpoint);
 await foreach (BinaryData item in client.GetPetsAsync(new RequestContext()))
 {
     JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
-    Console.WriteLine(result.GetProperty("id").ToString());
-    Console.WriteLine(result.GetProperty("petId").ToString());
-    Console.WriteLine(result.GetProperty("name").ToString());
+    Console.WriteLine(result[0].GetProperty("id").ToString());
+    Console.WriteLine(result[0].GetProperty("petId").ToString());
+    Console.WriteLine(result[0].GetProperty("name").ToString());
 }
 ]]></code></example>
     </member>
@@ -123,9 +151,9 @@ MixApiVersionClient client = new MixApiVersionClient(endpoint);
 foreach (BinaryData item in client.GetPets(new RequestContext()))
 {
     JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
-    Console.WriteLine(result.GetProperty("id").ToString());
-    Console.WriteLine(result.GetProperty("petId").ToString());
-    Console.WriteLine(result.GetProperty("name").ToString());
+    Console.WriteLine(result[0].GetProperty("id").ToString());
+    Console.WriteLine(result[0].GetProperty("petId").ToString());
+    Console.WriteLine(result[0].GetProperty("name").ToString());
 }
 ]]></code></example>
     </member>

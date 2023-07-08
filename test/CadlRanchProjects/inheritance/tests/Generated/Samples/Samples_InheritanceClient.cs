@@ -7,7 +7,6 @@
 
 using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Text.Json;
 using System.Threading.Tasks;
 using Azure;
@@ -15,7 +14,6 @@ using Azure.Core;
 using Azure.Identity;
 using NUnit.Framework;
 using _Type.Model.Inheritance;
-using _Type.Model.Inheritance.Models;
 
 namespace _Type.Model.Inheritance.Samples
 {
@@ -27,31 +25,13 @@ namespace _Type.Model.Inheritance.Samples
         {
             InheritanceClient client = new InheritanceClient();
 
-            var data = new
+            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
             {
-                smart = true,
-                age = 1234,
-                name = "<name>",
-            };
-
-            Response response = client.PostValid(RequestContent.Create(data));
-            Console.WriteLine(response.Status);
-        }
-
-        [Test]
-        [Ignore("Only validating compilation of examples")]
-        public void Example_PostValid_AllParameters()
-        {
-            InheritanceClient client = new InheritanceClient();
-
-            var data = new
-            {
-                smart = true,
-                age = 1234,
-                name = "<name>",
-            };
-
-            Response response = client.PostValid(RequestContent.Create(data));
+                ["smart"] = true,
+                ["age"] = 1234,
+                ["name"] = "<name>",
+            });
+            Response response = client.PostValid(content);
             Console.WriteLine(response.Status);
         }
 
@@ -61,14 +41,29 @@ namespace _Type.Model.Inheritance.Samples
         {
             InheritanceClient client = new InheritanceClient();
 
-            var data = new
+            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
             {
-                smart = true,
-                age = 1234,
-                name = "<name>",
-            };
+                ["smart"] = true,
+                ["age"] = 1234,
+                ["name"] = "<name>",
+            });
+            Response response = await client.PostValidAsync(content);
+            Console.WriteLine(response.Status);
+        }
 
-            Response response = await client.PostValidAsync(RequestContent.Create(data));
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_PostValid_AllParameters()
+        {
+            InheritanceClient client = new InheritanceClient();
+
+            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            {
+                ["smart"] = true,
+                ["age"] = 1234,
+                ["name"] = "<name>",
+            });
+            Response response = client.PostValid(content);
             Console.WriteLine(response.Status);
         }
 
@@ -78,44 +73,19 @@ namespace _Type.Model.Inheritance.Samples
         {
             InheritanceClient client = new InheritanceClient();
 
-            var data = new
+            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
             {
-                smart = true,
-                age = 1234,
-                name = "<name>",
-            };
-
-            Response response = await client.PostValidAsync(RequestContent.Create(data));
+                ["smart"] = true,
+                ["age"] = 1234,
+                ["name"] = "<name>",
+            });
+            Response response = await client.PostValidAsync(content);
             Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_PostValid_Convenience_Async()
-        {
-            var client = new InheritanceClient();
-
-            var input = new Siamese("<name>", 1234, true);
-            var result = await client.PostValidAsync(input);
-        }
-
-        [Test]
-        [Ignore("Only validating compilation of examples")]
         public void Example_GetValid()
-        {
-            InheritanceClient client = new InheritanceClient();
-
-            Response response = client.GetValid(new RequestContext());
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("smart").ToString());
-            Console.WriteLine(result.GetProperty("age").ToString());
-            Console.WriteLine(result.GetProperty("name").ToString());
-        }
-
-        [Test]
-        [Ignore("Only validating compilation of examples")]
-        public void Example_GetValid_AllParameters()
         {
             InheritanceClient client = new InheritanceClient();
 
@@ -143,6 +113,20 @@ namespace _Type.Model.Inheritance.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
+        public void Example_GetValid_AllParameters()
+        {
+            InheritanceClient client = new InheritanceClient();
+
+            Response response = client.GetValid(new RequestContext());
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("smart").ToString());
+            Console.WriteLine(result.GetProperty("age").ToString());
+            Console.WriteLine(result.GetProperty("name").ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
         public async Task Example_GetValid_AllParameters_Async()
         {
             InheritanceClient client = new InheritanceClient();
@@ -157,48 +141,17 @@ namespace _Type.Model.Inheritance.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetValid_Convenience_Async()
-        {
-            var client = new InheritanceClient();
-
-            var result = await client.GetValidAsync();
-        }
-
-        [Test]
-        [Ignore("Only validating compilation of examples")]
         public void Example_PutValid()
         {
             InheritanceClient client = new InheritanceClient();
 
-            var data = new
+            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
             {
-                smart = true,
-                age = 1234,
-                name = "<name>",
-            };
-
-            Response response = client.PutValid(RequestContent.Create(data));
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("smart").ToString());
-            Console.WriteLine(result.GetProperty("age").ToString());
-            Console.WriteLine(result.GetProperty("name").ToString());
-        }
-
-        [Test]
-        [Ignore("Only validating compilation of examples")]
-        public void Example_PutValid_AllParameters()
-        {
-            InheritanceClient client = new InheritanceClient();
-
-            var data = new
-            {
-                smart = true,
-                age = 1234,
-                name = "<name>",
-            };
-
-            Response response = client.PutValid(RequestContent.Create(data));
+                ["smart"] = true,
+                ["age"] = 1234,
+                ["name"] = "<name>",
+            });
+            Response response = client.PutValid(content);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("smart").ToString());
@@ -212,14 +165,33 @@ namespace _Type.Model.Inheritance.Samples
         {
             InheritanceClient client = new InheritanceClient();
 
-            var data = new
+            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
             {
-                smart = true,
-                age = 1234,
-                name = "<name>",
-            };
+                ["smart"] = true,
+                ["age"] = 1234,
+                ["name"] = "<name>",
+            });
+            Response response = await client.PutValidAsync(content);
 
-            Response response = await client.PutValidAsync(RequestContent.Create(data));
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("smart").ToString());
+            Console.WriteLine(result.GetProperty("age").ToString());
+            Console.WriteLine(result.GetProperty("name").ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_PutValid_AllParameters()
+        {
+            InheritanceClient client = new InheritanceClient();
+
+            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            {
+                ["smart"] = true,
+                ["age"] = 1234,
+                ["name"] = "<name>",
+            });
+            Response response = client.PutValid(content);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("smart").ToString());
@@ -233,14 +205,13 @@ namespace _Type.Model.Inheritance.Samples
         {
             InheritanceClient client = new InheritanceClient();
 
-            var data = new
+            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
             {
-                smart = true,
-                age = 1234,
-                name = "<name>",
-            };
-
-            Response response = await client.PutValidAsync(RequestContent.Create(data));
+                ["smart"] = true,
+                ["age"] = 1234,
+                ["name"] = "<name>",
+            });
+            Response response = await client.PutValidAsync(content);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("smart").ToString());
@@ -250,31 +221,9 @@ namespace _Type.Model.Inheritance.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_PutValid_Convenience_Async()
-        {
-            var client = new InheritanceClient();
-
-            var input = new Siamese("<name>", 1234, true);
-            var result = await client.PutValidAsync(input);
-        }
-
-        [Test]
-        [Ignore("Only validating compilation of examples")]
         public void Example_GetDuplicate()
         {
-            var client = new InheritanceClient();
-
-            Response response = client.GetDuplicate(new RequestContext());
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("kind").ToString());
-        }
-
-        [Test]
-        [Ignore("Only validating compilation of examples")]
-        public void Example_GetDuplicate_AllParameters()
-        {
-            var client = new InheritanceClient();
+            InheritanceClient client = new InheritanceClient();
 
             Response response = client.GetDuplicate(new RequestContext());
 
@@ -286,9 +235,21 @@ namespace _Type.Model.Inheritance.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_GetDuplicate_Async()
         {
-            var client = new InheritanceClient();
+            InheritanceClient client = new InheritanceClient();
 
             Response response = await client.GetDuplicateAsync(new RequestContext());
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("kind").ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_GetDuplicate_AllParameters()
+        {
+            InheritanceClient client = new InheritanceClient();
+
+            Response response = client.GetDuplicate(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("kind").ToString());
@@ -298,7 +259,7 @@ namespace _Type.Model.Inheritance.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_GetDuplicate_AllParameters_Async()
         {
-            var client = new InheritanceClient();
+            InheritanceClient client = new InheritanceClient();
 
             Response response = await client.GetDuplicateAsync(new RequestContext());
 
@@ -308,29 +269,7 @@ namespace _Type.Model.Inheritance.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetDuplicate_Convenience_Async()
-        {
-            var client = new InheritanceClient();
-
-            var result = await client.GetDuplicateAsync();
-        }
-
-        [Test]
-        [Ignore("Only validating compilation of examples")]
         public void Example_GetModel()
-        {
-            InheritanceClient client = new InheritanceClient();
-
-            Response response = client.GetModel(new RequestContext());
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("kind").ToString());
-            Console.WriteLine(result.GetProperty("age").ToString());
-        }
-
-        [Test]
-        [Ignore("Only validating compilation of examples")]
-        public void Example_GetModel_AllParameters()
         {
             InheritanceClient client = new InheritanceClient();
 
@@ -356,6 +295,19 @@ namespace _Type.Model.Inheritance.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
+        public void Example_GetModel_AllParameters()
+        {
+            InheritanceClient client = new InheritanceClient();
+
+            Response response = client.GetModel(new RequestContext());
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("kind").ToString());
+            Console.WriteLine(result.GetProperty("age").ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
         public async Task Example_GetModel_AllParameters_Async()
         {
             InheritanceClient client = new InheritanceClient();
@@ -369,42 +321,16 @@ namespace _Type.Model.Inheritance.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetModel_Convenience_Async()
-        {
-            var client = new InheritanceClient();
-
-            var result = await client.GetModelAsync();
-        }
-
-        [Test]
-        [Ignore("Only validating compilation of examples")]
         public void Example_PutModel()
         {
             InheritanceClient client = new InheritanceClient();
 
-            var data = new
+            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
             {
-                kind = "",
-                age = 1234,
-            };
-
-            Response response = client.PutModel(RequestContent.Create(data));
-            Console.WriteLine(response.Status);
-        }
-
-        [Test]
-        [Ignore("Only validating compilation of examples")]
-        public void Example_PutModel_AllParameters()
-        {
-            InheritanceClient client = new InheritanceClient();
-
-            var data = new
-            {
-                kind = "",
-                age = 1234,
-            };
-
-            Response response = client.PutModel(RequestContent.Create(data));
+                ["kind"] = "<kind>",
+                ["age"] = 1234,
+            });
+            Response response = client.PutModel(content);
             Console.WriteLine(response.Status);
         }
 
@@ -414,13 +340,27 @@ namespace _Type.Model.Inheritance.Samples
         {
             InheritanceClient client = new InheritanceClient();
 
-            var data = new
+            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
             {
-                kind = "",
-                age = 1234,
-            };
+                ["kind"] = "<kind>",
+                ["age"] = 1234,
+            });
+            Response response = await client.PutModelAsync(content);
+            Console.WriteLine(response.Status);
+        }
 
-            Response response = await client.PutModelAsync(RequestContent.Create(data));
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_PutModel_AllParameters()
+        {
+            InheritanceClient client = new InheritanceClient();
+
+            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            {
+                ["kind"] = "<kind>",
+                ["age"] = 1234,
+            });
+            Response response = client.PutModel(content);
             Console.WriteLine(response.Status);
         }
 
@@ -430,42 +370,18 @@ namespace _Type.Model.Inheritance.Samples
         {
             InheritanceClient client = new InheritanceClient();
 
-            var data = new
+            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
             {
-                kind = "",
-                age = 1234,
-            };
-
-            Response response = await client.PutModelAsync(RequestContent.Create(data));
+                ["kind"] = "<kind>",
+                ["age"] = 1234,
+            });
+            Response response = await client.PutModelAsync(content);
             Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_PutModel_Convenience_Async()
-        {
-            var client = new InheritanceClient();
-
-            var input = new Shark(1234);
-            var result = await client.PutModelAsync(input);
-        }
-
-        [Test]
-        [Ignore("Only validating compilation of examples")]
         public void Example_GetRecursiveModel()
-        {
-            InheritanceClient client = new InheritanceClient();
-
-            Response response = client.GetRecursiveModel(new RequestContext());
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("kind").ToString());
-            Console.WriteLine(result.GetProperty("age").ToString());
-        }
-
-        [Test]
-        [Ignore("Only validating compilation of examples")]
-        public void Example_GetRecursiveModel_AllParameters()
         {
             InheritanceClient client = new InheritanceClient();
 
@@ -491,6 +407,19 @@ namespace _Type.Model.Inheritance.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
+        public void Example_GetRecursiveModel_AllParameters()
+        {
+            InheritanceClient client = new InheritanceClient();
+
+            Response response = client.GetRecursiveModel(new RequestContext());
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("kind").ToString());
+            Console.WriteLine(result.GetProperty("age").ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
         public async Task Example_GetRecursiveModel_AllParameters_Async()
         {
             InheritanceClient client = new InheritanceClient();
@@ -504,42 +433,16 @@ namespace _Type.Model.Inheritance.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetRecursiveModel_Convenience_Async()
-        {
-            var client = new InheritanceClient();
-
-            var result = await client.GetRecursiveModelAsync();
-        }
-
-        [Test]
-        [Ignore("Only validating compilation of examples")]
         public void Example_PutRecursiveModel()
         {
             InheritanceClient client = new InheritanceClient();
 
-            var data = new
+            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
             {
-                kind = "",
-                age = 1234,
-            };
-
-            Response response = client.PutRecursiveModel(RequestContent.Create(data));
-            Console.WriteLine(response.Status);
-        }
-
-        [Test]
-        [Ignore("Only validating compilation of examples")]
-        public void Example_PutRecursiveModel_AllParameters()
-        {
-            InheritanceClient client = new InheritanceClient();
-
-            var data = new
-            {
-                kind = "",
-                age = 1234,
-            };
-
-            Response response = client.PutRecursiveModel(RequestContent.Create(data));
+                ["kind"] = "<kind>",
+                ["age"] = 1234,
+            });
+            Response response = client.PutRecursiveModel(content);
             Console.WriteLine(response.Status);
         }
 
@@ -549,13 +452,27 @@ namespace _Type.Model.Inheritance.Samples
         {
             InheritanceClient client = new InheritanceClient();
 
-            var data = new
+            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
             {
-                kind = "",
-                age = 1234,
-            };
+                ["kind"] = "<kind>",
+                ["age"] = 1234,
+            });
+            Response response = await client.PutRecursiveModelAsync(content);
+            Console.WriteLine(response.Status);
+        }
 
-            Response response = await client.PutRecursiveModelAsync(RequestContent.Create(data));
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_PutRecursiveModel_AllParameters()
+        {
+            InheritanceClient client = new InheritanceClient();
+
+            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            {
+                ["kind"] = "<kind>",
+                ["age"] = 1234,
+            });
+            Response response = client.PutRecursiveModel(content);
             Console.WriteLine(response.Status);
         }
 
@@ -565,42 +482,18 @@ namespace _Type.Model.Inheritance.Samples
         {
             InheritanceClient client = new InheritanceClient();
 
-            var data = new
+            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
             {
-                kind = "",
-                age = 1234,
-            };
-
-            Response response = await client.PutRecursiveModelAsync(RequestContent.Create(data));
+                ["kind"] = "<kind>",
+                ["age"] = 1234,
+            });
+            Response response = await client.PutRecursiveModelAsync(content);
             Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_PutRecursiveModel_Convenience_Async()
-        {
-            var client = new InheritanceClient();
-
-            var input = new Shark(1234);
-            var result = await client.PutRecursiveModelAsync(input);
-        }
-
-        [Test]
-        [Ignore("Only validating compilation of examples")]
         public void Example_GetMissingDiscriminator()
-        {
-            InheritanceClient client = new InheritanceClient();
-
-            Response response = client.GetMissingDiscriminator(new RequestContext());
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("kind").ToString());
-            Console.WriteLine(result.GetProperty("age").ToString());
-        }
-
-        [Test]
-        [Ignore("Only validating compilation of examples")]
-        public void Example_GetMissingDiscriminator_AllParameters()
         {
             InheritanceClient client = new InheritanceClient();
 
@@ -626,6 +519,19 @@ namespace _Type.Model.Inheritance.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
+        public void Example_GetMissingDiscriminator_AllParameters()
+        {
+            InheritanceClient client = new InheritanceClient();
+
+            Response response = client.GetMissingDiscriminator(new RequestContext());
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("kind").ToString());
+            Console.WriteLine(result.GetProperty("age").ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
         public async Task Example_GetMissingDiscriminator_AllParameters_Async()
         {
             InheritanceClient client = new InheritanceClient();
@@ -639,29 +545,7 @@ namespace _Type.Model.Inheritance.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetMissingDiscriminator_Convenience_Async()
-        {
-            var client = new InheritanceClient();
-
-            var result = await client.GetMissingDiscriminatorAsync();
-        }
-
-        [Test]
-        [Ignore("Only validating compilation of examples")]
         public void Example_GetWrongDiscriminator()
-        {
-            InheritanceClient client = new InheritanceClient();
-
-            Response response = client.GetWrongDiscriminator(new RequestContext());
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("kind").ToString());
-            Console.WriteLine(result.GetProperty("age").ToString());
-        }
-
-        [Test]
-        [Ignore("Only validating compilation of examples")]
-        public void Example_GetWrongDiscriminator_AllParameters()
         {
             InheritanceClient client = new InheritanceClient();
 
@@ -687,6 +571,19 @@ namespace _Type.Model.Inheritance.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
+        public void Example_GetWrongDiscriminator_AllParameters()
+        {
+            InheritanceClient client = new InheritanceClient();
+
+            Response response = client.GetWrongDiscriminator(new RequestContext());
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("kind").ToString());
+            Console.WriteLine(result.GetProperty("age").ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
         public async Task Example_GetWrongDiscriminator_AllParameters_Async()
         {
             InheritanceClient client = new InheritanceClient();
@@ -696,15 +593,6 @@ namespace _Type.Model.Inheritance.Samples
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("kind").ToString());
             Console.WriteLine(result.GetProperty("age").ToString());
-        }
-
-        [Test]
-        [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetWrongDiscriminator_Convenience_Async()
-        {
-            var client = new InheritanceClient();
-
-            var result = await client.GetWrongDiscriminatorAsync();
         }
     }
 }

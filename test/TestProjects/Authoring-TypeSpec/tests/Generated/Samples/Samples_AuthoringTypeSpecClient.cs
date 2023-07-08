@@ -12,6 +12,7 @@ using System.Threading.Tasks;
 using AuthoringTypeSpec;
 using Azure;
 using Azure.Core;
+using Azure.Identity;
 using NUnit.Framework;
 
 namespace AuthoringTypeSpec.Samples

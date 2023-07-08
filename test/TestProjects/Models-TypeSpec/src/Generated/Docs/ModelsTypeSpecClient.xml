@@ -112,46 +112,43 @@ This sample shows how to call InputToRoundTripAsync with required request conten
 Uri endpoint = new Uri("<https://my-service.azure.com>");
 ModelsTypeSpecClient client = new ModelsTypeSpecClient(endpoint);
 
-var data = new
+RequestContent content = RequestContent.Create(new Dictionary<string, object>()
 {
-    requiredString = "<requiredString>",
-    requiredInt = 1234,
-    requiredModel = new { },
-    requiredIntCollection = new[]
+    ["requiredString"] = "<requiredString>",
+    ["requiredInt"] = 1234,
+    ["requiredModel"] = new Dictionary<string, object>(),
+    ["requiredIntCollection"] = new object[]
 {
 1234
 },
-    requiredStringCollection = new[]
+    ["requiredStringCollection"] = new object[]
 {
-"<String>"
+ringCollection>"
 },
-    requiredModelCollection = new[]
+    ["requiredModelCollection"] = new object[]
 {
-new
-{
-lRecord = new
-{
-key = new
-{
-}},}
+null
 },
-    requiredModelRecord = new
+    ["requiredModelRecord"] = new Dictionary<string, object>()
     {
-        key = new
+        ["key"] = new Dictionary<string, object>()
         {
-        }
+            ["requiredCollection"] = new object[]
+{
+null
+},
+        },
     },
-    requiredCollectionWithNullableFloatElement = new[]
+    ["requiredCollectionWithNullableFloatElement"] = new object[]
 {
 123.45F
 },
-    requiredCollectionWithNullableBooleanElement = new[]
+    ["requiredCollectionWithNullableBooleanElement"] = new object[]
 {
 true
 },
-};
-
-Response response = await client.InputToRoundTripAsync(RequestContent.Create(data));
+});
+Response response = await client.InputToRoundTripAsync(content);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("requiredString").ToString());
@@ -162,8 +159,8 @@ Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredPrope
 Console.WriteLine(result.GetProperty("requiredFixedStringEnum").ToString());
 Console.WriteLine(result.GetProperty("requiredFixedIntEnum").ToString());
 Console.WriteLine(result.GetProperty("requiredExtensibleEnum").ToString());
-Console.WriteLine(result.GetProperty("requiredIntRecord").GetProperty("<test>").ToString());
-Console.WriteLine(result.GetProperty("requiredStringRecord").GetProperty("<test>").ToString());
+Console.WriteLine(result.GetProperty("requiredIntRecord").GetProperty("<key>").ToString());
+Console.WriteLine(result.GetProperty("requiredStringRecord").GetProperty("<key>").ToString());
 Console.WriteLine(result.GetProperty("requiredBytes").ToString());
 Console.WriteLine(result.GetProperty("optionalBytes").ToString());
 Console.WriteLine(result.GetProperty("requiredUint8Array")[0].ToString());
@@ -181,46 +178,43 @@ This sample shows how to call InputToRoundTrip with required request content and
 Uri endpoint = new Uri("<https://my-service.azure.com>");
 ModelsTypeSpecClient client = new ModelsTypeSpecClient(endpoint);
 
-var data = new
+RequestContent content = RequestContent.Create(new Dictionary<string, object>()
 {
-    requiredString = "<requiredString>",
-    requiredInt = 1234,
-    requiredModel = new { },
-    requiredIntCollection = new[]
+    ["requiredString"] = "<requiredString>",
+    ["requiredInt"] = 1234,
+    ["requiredModel"] = new Dictionary<string, object>(),
+    ["requiredIntCollection"] = new object[]
 {
 1234
 },
-    requiredStringCollection = new[]
+    ["requiredStringCollection"] = new object[]
 {
-"<String>"
+ringCollection>"
 },
-    requiredModelCollection = new[]
+    ["requiredModelCollection"] = new object[]
 {
-new
-{
-lRecord = new
-{
-key = new
-{
-}},}
+null
 },
-    requiredModelRecord = new
+    ["requiredModelRecord"] = new Dictionary<string, object>()
     {
-        key = new
+        ["key"] = new Dictionary<string, object>()
         {
-        }
+            ["requiredCollection"] = new object[]
+{
+null
+},
+        },
     },
-    requiredCollectionWithNullableFloatElement = new[]
+    ["requiredCollectionWithNullableFloatElement"] = new object[]
 {
 123.45F
 },
-    requiredCollectionWithNullableBooleanElement = new[]
+    ["requiredCollectionWithNullableBooleanElement"] = new object[]
 {
 true
 },
-};
-
-Response response = client.InputToRoundTrip(RequestContent.Create(data));
+});
+Response response = client.InputToRoundTrip(content);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("requiredString").ToString());
@@ -231,8 +225,8 @@ Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredPrope
 Console.WriteLine(result.GetProperty("requiredFixedStringEnum").ToString());
 Console.WriteLine(result.GetProperty("requiredFixedIntEnum").ToString());
 Console.WriteLine(result.GetProperty("requiredExtensibleEnum").ToString());
-Console.WriteLine(result.GetProperty("requiredIntRecord").GetProperty("<test>").ToString());
-Console.WriteLine(result.GetProperty("requiredStringRecord").GetProperty("<test>").ToString());
+Console.WriteLine(result.GetProperty("requiredIntRecord").GetProperty("<key>").ToString());
+Console.WriteLine(result.GetProperty("requiredStringRecord").GetProperty("<key>").ToString());
 Console.WriteLine(result.GetProperty("requiredBytes").ToString());
 Console.WriteLine(result.GetProperty("optionalBytes").ToString());
 Console.WriteLine(result.GetProperty("requiredUint8Array")[0].ToString());
@@ -308,46 +302,43 @@ This sample shows how to call InputToRoundTripPrimitiveAsync with required reque
 Uri endpoint = new Uri("<https://my-service.azure.com>");
 ModelsTypeSpecClient client = new ModelsTypeSpecClient(endpoint);
 
-var data = new
+RequestContent content = RequestContent.Create(new Dictionary<string, object>()
 {
-    requiredString = "<requiredString>",
-    requiredInt = 1234,
-    requiredModel = new { },
-    requiredIntCollection = new[]
+    ["requiredString"] = "<requiredString>",
+    ["requiredInt"] = 1234,
+    ["requiredModel"] = new Dictionary<string, object>(),
+    ["requiredIntCollection"] = new object[]
 {
 1234
 },
-    requiredStringCollection = new[]
+    ["requiredStringCollection"] = new object[]
 {
-"<String>"
+ringCollection>"
 },
-    requiredModelCollection = new[]
+    ["requiredModelCollection"] = new object[]
 {
-new
-{
-lRecord = new
-{
-key = new
-{
-}},}
+null
 },
-    requiredModelRecord = new
+    ["requiredModelRecord"] = new Dictionary<string, object>()
     {
-        key = new
+        ["key"] = new Dictionary<string, object>()
         {
-        }
+            ["requiredCollection"] = new object[]
+{
+null
+},
+        },
     },
-    requiredCollectionWithNullableFloatElement = new[]
+    ["requiredCollectionWithNullableFloatElement"] = new object[]
 {
 123.45F
 },
-    requiredCollectionWithNullableBooleanElement = new[]
+    ["requiredCollectionWithNullableBooleanElement"] = new object[]
 {
 true
 },
-};
-
-Response response = await client.InputToRoundTripPrimitiveAsync(RequestContent.Create(data));
+});
+Response response = await client.InputToRoundTripPrimitiveAsync(content);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("requiredString").ToString());
@@ -369,46 +360,43 @@ This sample shows how to call InputToRoundTripPrimitive with required request co
 Uri endpoint = new Uri("<https://my-service.azure.com>");
 ModelsTypeSpecClient client = new ModelsTypeSpecClient(endpoint);
 
-var data = new
+RequestContent content = RequestContent.Create(new Dictionary<string, object>()
 {
-    requiredString = "<requiredString>",
-    requiredInt = 1234,
-    requiredModel = new { },
-    requiredIntCollection = new[]
+    ["requiredString"] = "<requiredString>",
+    ["requiredInt"] = 1234,
+    ["requiredModel"] = new Dictionary<string, object>(),
+    ["requiredIntCollection"] = new object[]
 {
 1234
 },
-    requiredStringCollection = new[]
+    ["requiredStringCollection"] = new object[]
 {
-"<String>"
+ringCollection>"
 },
-    requiredModelCollection = new[]
+    ["requiredModelCollection"] = new object[]
 {
-new
-{
-lRecord = new
-{
-key = new
-{
-}},}
+null
 },
-    requiredModelRecord = new
+    ["requiredModelRecord"] = new Dictionary<string, object>()
     {
-        key = new
+        ["key"] = new Dictionary<string, object>()
         {
-        }
+            ["requiredCollection"] = new object[]
+{
+null
+},
+        },
     },
-    requiredCollectionWithNullableFloatElement = new[]
+    ["requiredCollectionWithNullableFloatElement"] = new object[]
 {
 123.45F
 },
-    requiredCollectionWithNullableBooleanElement = new[]
+    ["requiredCollectionWithNullableBooleanElement"] = new object[]
 {
 true
 },
-};
-
-Response response = client.InputToRoundTripPrimitive(RequestContent.Create(data));
+});
+Response response = client.InputToRoundTripPrimitive(content);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("requiredString").ToString());
@@ -432,9 +420,65 @@ This sample shows how to call InputToRoundTripOptionalAsync and parse the result
 Uri endpoint = new Uri("<https://my-service.azure.com>");
 ModelsTypeSpecClient client = new ModelsTypeSpecClient(endpoint);
 
-var data = new { };
-
-Response response = await client.InputToRoundTripOptionalAsync(RequestContent.Create(data));
+RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+{
+    ["optionalString"] = "<optionalString>",
+    ["optionalInt"] = 1234,
+    ["optionalStringList"] = new object[]
+{
+ringList>"
+},
+    ["optionalIntList"] = new object[]
+{
+1234
+},
+    ["optionalModelCollection"] = new object[]
+{
+null
+},
+    ["optionalModel"] = new Dictionary<string, object>()
+    {
+        ["requiredCollection"] = new object[]
+{
+null
+},
+    },
+    ["optionalModelWithPropertiesOnBase"] = new Dictionary<string, object>()
+    {
+        ["requiredCollection"] = new object[]
+{
+null
+},
+        ["optionalPropertyOnBase"] = "<optionalPropertyOnBase>",
+    },
+    ["optionalFixedStringEnum"] = "1",
+    ["optionalExtensibleEnum"] = "1",
+    ["optionalIntRecord"] = new Dictionary<string, object>()
+    {
+        ["key"] = 1234,
+    },
+    ["optionalStringRecord"] = new Dictionary<string, object>()
+    {
+        ["key"] = "<optionalStringRecord>",
+    },
+    ["optionalModelRecord"] = new Dictionary<string, object>()
+    {
+        ["key"] = new Dictionary<string, object>()
+        {
+            ["requiredCollection"] = new object[]
+{
+null
+},
+        },
+    },
+    ["optionalPlainDate"] = "2022-05-10",
+    ["optionalPlainTime"] = "01:23:45",
+    ["optionalCollectionWithNullableIntElement"] = new object[]
+{
+1234
+},
+});
+Response response = await client.InputToRoundTripOptionalAsync(content);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.ToString());
@@ -444,60 +488,65 @@ This sample shows how to call InputToRoundTripOptionalAsync with all request con
 Uri endpoint = new Uri("<https://my-service.azure.com>");
 ModelsTypeSpecClient client = new ModelsTypeSpecClient(endpoint);
 
-var data = new
+RequestContent content = RequestContent.Create(new Dictionary<string, object>()
 {
-    optionalString = "<optionalString>",
-    optionalInt = 1234,
-    optionalStringList = new[]
+    ["optionalString"] = "<optionalString>",
+    ["optionalInt"] = 1234,
+    ["optionalStringList"] = new object[]
 {
-"<String>"
+ringList>"
 },
-    optionalIntList = new[]
+    ["optionalIntList"] = new object[]
 {
 1234
 },
-    optionalModelCollection = new[]
+    ["optionalModelCollection"] = new object[]
 {
-new
-{
-lRecord = new
-{
-key = new
-{
-}},}
+null
 },
-    optionalModel = new
+    ["optionalModel"] = new Dictionary<string, object>()
     {
+        ["requiredCollection"] = new object[]
+{
+null
+},
     },
-    optionalModelWithPropertiesOnBase = new
+    ["optionalModelWithPropertiesOnBase"] = new Dictionary<string, object>()
     {
-        optionalPropertyOnBase = "<optionalPropertyOnBase>",
+        ["requiredCollection"] = new object[]
+{
+null
+},
+        ["optionalPropertyOnBase"] = "<optionalPropertyOnBase>",
     },
-    optionalFixedStringEnum = "1",
-    optionalExtensibleEnum = "1",
-    optionalIntRecord = new
+    ["optionalFixedStringEnum"] = "1",
+    ["optionalExtensibleEnum"] = "1",
+    ["optionalIntRecord"] = new Dictionary<string, object>()
     {
-        key = 1234
+        ["key"] = 1234,
     },
-    optionalStringRecord = new
+    ["optionalStringRecord"] = new Dictionary<string, object>()
     {
-        key = "<String>"
+        ["key"] = "<optionalStringRecord>",
     },
-    optionalModelRecord = new
+    ["optionalModelRecord"] = new Dictionary<string, object>()
     {
-        key = new
+        ["key"] = new Dictionary<string, object>()
         {
-        }
+            ["requiredCollection"] = new object[]
+{
+null
+},
+        },
     },
-    optionalPlainDate = "2022-05-10",
-    optionalPlainTime = "01:23:45",
-    optionalCollectionWithNullableIntElement = new[]
+    ["optionalPlainDate"] = "2022-05-10",
+    ["optionalPlainTime"] = "01:23:45",
+    ["optionalCollectionWithNullableIntElement"] = new object[]
 {
 1234
 },
-};
-
-Response response = await client.InputToRoundTripOptionalAsync(RequestContent.Create(data));
+});
+Response response = await client.InputToRoundTripOptionalAsync(content);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("optionalString").ToString());
@@ -507,8 +556,8 @@ Console.WriteLine(result.GetProperty("optionalIntList")[0].ToString());
 Console.WriteLine(result.GetProperty("optionalModelWithPropertiesOnBase").GetProperty("optionalPropertyOnBase").ToString());
 Console.WriteLine(result.GetProperty("optionalFixedStringEnum").ToString());
 Console.WriteLine(result.GetProperty("optionalExtensibleEnum").ToString());
-Console.WriteLine(result.GetProperty("optionalIntRecord").GetProperty("<test>").ToString());
-Console.WriteLine(result.GetProperty("optionalStringRecord").GetProperty("<test>").ToString());
+Console.WriteLine(result.GetProperty("optionalIntRecord").GetProperty("<key>").ToString());
+Console.WriteLine(result.GetProperty("optionalStringRecord").GetProperty("<key>").ToString());
 Console.WriteLine(result.GetProperty("optionalPlainDate").ToString());
 Console.WriteLine(result.GetProperty("optionalPlainTime").ToString());
 Console.WriteLine(result.GetProperty("optionalCollectionWithNullableIntElement")[0].ToString());
@@ -521,9 +570,65 @@ This sample shows how to call InputToRoundTripOptional and parse the result.
 Uri endpoint = new Uri("<https://my-service.azure.com>");
 ModelsTypeSpecClient client = new ModelsTypeSpecClient(endpoint);
 
-var data = new { };
-
-Response response = client.InputToRoundTripOptional(RequestContent.Create(data));
+RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+{
+    ["optionalString"] = "<optionalString>",
+    ["optionalInt"] = 1234,
+    ["optionalStringList"] = new object[]
+{
+ringList>"
+},
+    ["optionalIntList"] = new object[]
+{
+1234
+},
+    ["optionalModelCollection"] = new object[]
+{
+null
+},
+    ["optionalModel"] = new Dictionary<string, object>()
+    {
+        ["requiredCollection"] = new object[]
+{
+null
+},
+    },
+    ["optionalModelWithPropertiesOnBase"] = new Dictionary<string, object>()
+    {
+        ["requiredCollection"] = new object[]
+{
+null
+},
+        ["optionalPropertyOnBase"] = "<optionalPropertyOnBase>",
+    },
+    ["optionalFixedStringEnum"] = "1",
+    ["optionalExtensibleEnum"] = "1",
+    ["optionalIntRecord"] = new Dictionary<string, object>()
+    {
+        ["key"] = 1234,
+    },
+    ["optionalStringRecord"] = new Dictionary<string, object>()
+    {
+        ["key"] = "<optionalStringRecord>",
+    },
+    ["optionalModelRecord"] = new Dictionary<string, object>()
+    {
+        ["key"] = new Dictionary<string, object>()
+        {
+            ["requiredCollection"] = new object[]
+{
+null
+},
+        },
+    },
+    ["optionalPlainDate"] = "2022-05-10",
+    ["optionalPlainTime"] = "01:23:45",
+    ["optionalCollectionWithNullableIntElement"] = new object[]
+{
+1234
+},
+});
+Response response = client.InputToRoundTripOptional(content);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.ToString());
@@ -533,60 +638,65 @@ This sample shows how to call InputToRoundTripOptional with all request content,
 Uri endpoint = new Uri("<https://my-service.azure.com>");
 ModelsTypeSpecClient client = new ModelsTypeSpecClient(endpoint);
 
-var data = new
+RequestContent content = RequestContent.Create(new Dictionary<string, object>()
 {
-    optionalString = "<optionalString>",
-    optionalInt = 1234,
-    optionalStringList = new[]
+    ["optionalString"] = "<optionalString>",
+    ["optionalInt"] = 1234,
+    ["optionalStringList"] = new object[]
 {
-"<String>"
+ringList>"
 },
-    optionalIntList = new[]
+    ["optionalIntList"] = new object[]
 {
 1234
 },
-    optionalModelCollection = new[]
+    ["optionalModelCollection"] = new object[]
 {
-new
-{
-lRecord = new
-{
-key = new
-{
-}},}
+null
 },
-    optionalModel = new
+    ["optionalModel"] = new Dictionary<string, object>()
     {
+        ["requiredCollection"] = new object[]
+{
+null
+},
     },
-    optionalModelWithPropertiesOnBase = new
+    ["optionalModelWithPropertiesOnBase"] = new Dictionary<string, object>()
     {
-        optionalPropertyOnBase = "<optionalPropertyOnBase>",
+        ["requiredCollection"] = new object[]
+{
+null
+},
+        ["optionalPropertyOnBase"] = "<optionalPropertyOnBase>",
     },
-    optionalFixedStringEnum = "1",
-    optionalExtensibleEnum = "1",
-    optionalIntRecord = new
+    ["optionalFixedStringEnum"] = "1",
+    ["optionalExtensibleEnum"] = "1",
+    ["optionalIntRecord"] = new Dictionary<string, object>()
     {
-        key = 1234
+        ["key"] = 1234,
     },
-    optionalStringRecord = new
+    ["optionalStringRecord"] = new Dictionary<string, object>()
     {
-        key = "<String>"
+        ["key"] = "<optionalStringRecord>",
     },
-    optionalModelRecord = new
+    ["optionalModelRecord"] = new Dictionary<string, object>()
     {
-        key = new
+        ["key"] = new Dictionary<string, object>()
         {
-        }
+            ["requiredCollection"] = new object[]
+{
+null
+},
+        },
     },
-    optionalPlainDate = "2022-05-10",
-    optionalPlainTime = "01:23:45",
-    optionalCollectionWithNullableIntElement = new[]
+    ["optionalPlainDate"] = "2022-05-10",
+    ["optionalPlainTime"] = "01:23:45",
+    ["optionalCollectionWithNullableIntElement"] = new object[]
 {
 1234
 },
-};
-
-Response response = client.InputToRoundTripOptional(RequestContent.Create(data));
+});
+Response response = client.InputToRoundTripOptional(content);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("optionalString").ToString());
@@ -596,8 +706,8 @@ Console.WriteLine(result.GetProperty("optionalIntList")[0].ToString());
 Console.WriteLine(result.GetProperty("optionalModelWithPropertiesOnBase").GetProperty("optionalPropertyOnBase").ToString());
 Console.WriteLine(result.GetProperty("optionalFixedStringEnum").ToString());
 Console.WriteLine(result.GetProperty("optionalExtensibleEnum").ToString());
-Console.WriteLine(result.GetProperty("optionalIntRecord").GetProperty("<test>").ToString());
-Console.WriteLine(result.GetProperty("optionalStringRecord").GetProperty("<test>").ToString());
+Console.WriteLine(result.GetProperty("optionalIntRecord").GetProperty("<key>").ToString());
+Console.WriteLine(result.GetProperty("optionalStringRecord").GetProperty("<key>").ToString());
 Console.WriteLine(result.GetProperty("optionalPlainDate").ToString());
 Console.WriteLine(result.GetProperty("optionalPlainTime").ToString());
 Console.WriteLine(result.GetProperty("optionalCollectionWithNullableIntElement")[0].ToString());
@@ -616,55 +726,63 @@ This sample shows how to call RoundTripToOutputAsync with required request conte
 Uri endpoint = new Uri("<https://my-service.azure.com>");
 ModelsTypeSpecClient client = new ModelsTypeSpecClient(endpoint);
 
-var data = new
+RequestContent content = RequestContent.Create(new Dictionary<string, object>()
 {
-    requiredString = "<requiredString>",
-    requiredInt = 1234,
-    requiredModel = new
+    ["requiredString"] = "<requiredString>",
+    ["requiredInt"] = 1234,
+    ["requiredModel"] = new Dictionary<string, object>()
     {
-        discriminatorProperty = "",
-        requiredPropertyOnBase = 1234,
+        ["discriminatorProperty"] = "<discriminatorProperty>",
+        ["optionalPropertyOnBase"] = "<optionalPropertyOnBase>",
+        ["requiredPropertyOnBase"] = 1234,
     },
-    requiredFixedStringEnum = "1",
-    requiredFixedIntEnum = 1,
-    requiredExtensibleEnum = "1",
-    requiredCollection = new[]
+    ["requiredFixedStringEnum"] = "1",
+    ["requiredFixedIntEnum"] = 1,
+    ["requiredExtensibleEnum"] = "1",
+    ["requiredCollection"] = new object[]
 {
-new
-{
-lRecord = new
-{
-key = new
-{
-}},}
+null
 },
-    requiredIntRecord = new
+    ["requiredIntRecord"] = new Dictionary<string, object>()
     {
-        key = 1234
+        ["key"] = 1234,
     },
-    requiredStringRecord = new
+    ["requiredStringRecord"] = new Dictionary<string, object>()
     {
-        key = "<String>"
+        ["key"] = "<requiredStringRecord>",
     },
-    requiredModelRecord = new
+    ["requiredModelRecord"] = new Dictionary<string, object>()
     {
-        key = new
+        ["key"] = new Dictionary<string, object>()
         {
-        }
+            ["requiredCollection"] = new object[]
+{
+null
+},
+        },
     },
-    requiredBytes = new { },
-    requiredUint8Array = new[]
+    ["requiredBytes"] = new Dictionary<string, object>(),
+    ["optionalBytes"] = new Dictionary<string, object>(),
+    ["requiredUint8Array"] = new object[]
 {
 1234
 },
-    requiredUnknown = new { },
-    requiredInt8Array = new[]
+    ["optionalUint8Array"] = new object[]
 {
 1234
 },
-};
-
-Response response = await client.RoundTripToOutputAsync(RequestContent.Create(data));
+    ["requiredUnknown"] = new Dictionary<string, object>(),
+    ["optionalUnknown"] = new Dictionary<string, object>(),
+    ["requiredInt8Array"] = new object[]
+{
+1234
+},
+    ["optionalInt8Array"] = new object[]
+{
+1234
+},
+});
+Response response = await client.RoundTripToOutputAsync(content);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("requiredString").ToString());
@@ -675,66 +793,63 @@ This sample shows how to call RoundTripToOutputAsync with all request content, a
 Uri endpoint = new Uri("<https://my-service.azure.com>");
 ModelsTypeSpecClient client = new ModelsTypeSpecClient(endpoint);
 
-var data = new
+RequestContent content = RequestContent.Create(new Dictionary<string, object>()
 {
-    requiredString = "<requiredString>",
-    requiredInt = 1234,
-    requiredModel = new
+    ["requiredString"] = "<requiredString>",
+    ["requiredInt"] = 1234,
+    ["requiredModel"] = new Dictionary<string, object>()
     {
-        discriminatorProperty = "",
-        optionalPropertyOnBase = "<optionalPropertyOnBase>",
-        requiredPropertyOnBase = 1234,
+        ["discriminatorProperty"] = "<discriminatorProperty>",
+        ["optionalPropertyOnBase"] = "<optionalPropertyOnBase>",
+        ["requiredPropertyOnBase"] = 1234,
     },
-    requiredFixedStringEnum = "1",
-    requiredFixedIntEnum = 1,
-    requiredExtensibleEnum = "1",
-    requiredCollection = new[]
+    ["requiredFixedStringEnum"] = "1",
+    ["requiredFixedIntEnum"] = 1,
+    ["requiredExtensibleEnum"] = "1",
+    ["requiredCollection"] = new object[]
 {
-new
-{
-lRecord = new
-{
-key = new
-{
-}},}
+null
 },
-    requiredIntRecord = new
+    ["requiredIntRecord"] = new Dictionary<string, object>()
     {
-        key = 1234
+        ["key"] = 1234,
     },
-    requiredStringRecord = new
+    ["requiredStringRecord"] = new Dictionary<string, object>()
     {
-        key = "<String>"
+        ["key"] = "<requiredStringRecord>",
     },
-    requiredModelRecord = new
+    ["requiredModelRecord"] = new Dictionary<string, object>()
     {
-        key = new
+        ["key"] = new Dictionary<string, object>()
         {
-        }
+            ["requiredCollection"] = new object[]
+{
+null
+},
+        },
     },
-    requiredBytes = new { },
-    optionalBytes = new { },
-    requiredUint8Array = new[]
+    ["requiredBytes"] = new Dictionary<string, object>(),
+    ["optionalBytes"] = new Dictionary<string, object>(),
+    ["requiredUint8Array"] = new object[]
 {
 1234
 },
-    optionalUint8Array = new[]
+    ["optionalUint8Array"] = new object[]
 {
 1234
 },
-    requiredUnknown = new { },
-    optionalUnknown = new { },
-    requiredInt8Array = new[]
+    ["requiredUnknown"] = new Dictionary<string, object>(),
+    ["optionalUnknown"] = new Dictionary<string, object>(),
+    ["requiredInt8Array"] = new object[]
 {
 1234
 },
-    optionalInt8Array = new[]
+    ["optionalInt8Array"] = new object[]
 {
 1234
 },
-};
-
-Response response = await client.RoundTripToOutputAsync(RequestContent.Create(data));
+});
+Response response = await client.RoundTripToOutputAsync(content);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("requiredString").ToString());
@@ -748,55 +863,63 @@ This sample shows how to call RoundTripToOutput with required request content, a
 Uri endpoint = new Uri("<https://my-service.azure.com>");
 ModelsTypeSpecClient client = new ModelsTypeSpecClient(endpoint);
 
-var data = new
+RequestContent content = RequestContent.Create(new Dictionary<string, object>()
 {
-    requiredString = "<requiredString>",
-    requiredInt = 1234,
-    requiredModel = new
+    ["requiredString"] = "<requiredString>",
+    ["requiredInt"] = 1234,
+    ["requiredModel"] = new Dictionary<string, object>()
     {
-        discriminatorProperty = "",
-        requiredPropertyOnBase = 1234,
+        ["discriminatorProperty"] = "<discriminatorProperty>",
+        ["optionalPropertyOnBase"] = "<optionalPropertyOnBase>",
+        ["requiredPropertyOnBase"] = 1234,
     },
-    requiredFixedStringEnum = "1",
-    requiredFixedIntEnum = 1,
-    requiredExtensibleEnum = "1",
-    requiredCollection = new[]
+    ["requiredFixedStringEnum"] = "1",
+    ["requiredFixedIntEnum"] = 1,
+    ["requiredExtensibleEnum"] = "1",
+    ["requiredCollection"] = new object[]
 {
-new
-{
-lRecord = new
-{
-key = new
-{
-}},}
+null
 },
-    requiredIntRecord = new
+    ["requiredIntRecord"] = new Dictionary<string, object>()
     {
-        key = 1234
+        ["key"] = 1234,
     },
-    requiredStringRecord = new
+    ["requiredStringRecord"] = new Dictionary<string, object>()
     {
-        key = "<String>"
+        ["key"] = "<requiredStringRecord>",
     },
-    requiredModelRecord = new
+    ["requiredModelRecord"] = new Dictionary<string, object>()
     {
-        key = new
+        ["key"] = new Dictionary<string, object>()
         {
-        }
+            ["requiredCollection"] = new object[]
+{
+null
+},
+        },
     },
-    requiredBytes = new { },
-    requiredUint8Array = new[]
+    ["requiredBytes"] = new Dictionary<string, object>(),
+    ["optionalBytes"] = new Dictionary<string, object>(),
+    ["requiredUint8Array"] = new object[]
 {
 1234
 },
-    requiredUnknown = new { },
-    requiredInt8Array = new[]
+    ["optionalUint8Array"] = new object[]
 {
 1234
 },
-};
-
-Response response = client.RoundTripToOutput(RequestContent.Create(data));
+    ["requiredUnknown"] = new Dictionary<string, object>(),
+    ["optionalUnknown"] = new Dictionary<string, object>(),
+    ["requiredInt8Array"] = new object[]
+{
+1234
+},
+    ["optionalInt8Array"] = new object[]
+{
+1234
+},
+});
+Response response = client.RoundTripToOutput(content);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("requiredString").ToString());
@@ -807,66 +930,63 @@ This sample shows how to call RoundTripToOutput with all request content, and ho
 Uri endpoint = new Uri("<https://my-service.azure.com>");
 ModelsTypeSpecClient client = new ModelsTypeSpecClient(endpoint);
 
-var data = new
+RequestContent content = RequestContent.Create(new Dictionary<string, object>()
 {
-    requiredString = "<requiredString>",
-    requiredInt = 1234,
-    requiredModel = new
+    ["requiredString"] = "<requiredString>",
+    ["requiredInt"] = 1234,
+    ["requiredModel"] = new Dictionary<string, object>()
     {
-        discriminatorProperty = "",
-        optionalPropertyOnBase = "<optionalPropertyOnBase>",
-        requiredPropertyOnBase = 1234,
+        ["discriminatorProperty"] = "<discriminatorProperty>",
+        ["optionalPropertyOnBase"] = "<optionalPropertyOnBase>",
+        ["requiredPropertyOnBase"] = 1234,
     },
-    requiredFixedStringEnum = "1",
-    requiredFixedIntEnum = 1,
-    requiredExtensibleEnum = "1",
-    requiredCollection = new[]
+    ["requiredFixedStringEnum"] = "1",
+    ["requiredFixedIntEnum"] = 1,
+    ["requiredExtensibleEnum"] = "1",
+    ["requiredCollection"] = new object[]
 {
-new
-{
-lRecord = new
-{
-key = new
-{
-}},}
+null
 },
-    requiredIntRecord = new
+    ["requiredIntRecord"] = new Dictionary<string, object>()
     {
-        key = 1234
+        ["key"] = 1234,
     },
-    requiredStringRecord = new
+    ["requiredStringRecord"] = new Dictionary<string, object>()
     {
-        key = "<String>"
+        ["key"] = "<requiredStringRecord>",
     },
-    requiredModelRecord = new
+    ["requiredModelRecord"] = new Dictionary<string, object>()
     {
-        key = new
+        ["key"] = new Dictionary<string, object>()
         {
-        }
+            ["requiredCollection"] = new object[]
+{
+null
+},
+        },
     },
-    requiredBytes = new { },
-    optionalBytes = new { },
-    requiredUint8Array = new[]
+    ["requiredBytes"] = new Dictionary<string, object>(),
+    ["optionalBytes"] = new Dictionary<string, object>(),
+    ["requiredUint8Array"] = new object[]
 {
 1234
 },
-    optionalUint8Array = new[]
+    ["optionalUint8Array"] = new object[]
 {
 1234
 },
-    requiredUnknown = new { },
-    optionalUnknown = new { },
-    requiredInt8Array = new[]
+    ["requiredUnknown"] = new Dictionary<string, object>(),
+    ["optionalUnknown"] = new Dictionary<string, object>(),
+    ["requiredInt8Array"] = new object[]
 {
 1234
 },
-    optionalInt8Array = new[]
+    ["optionalInt8Array"] = new object[]
 {
 1234
 },
-};
-
-Response response = client.RoundTripToOutput(RequestContent.Create(data));
+});
+Response response = client.RoundTripToOutput(content);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("requiredString").ToString());
@@ -902,12 +1022,11 @@ This sample shows how to call InputRecursiveAsync with required request content.
 Uri endpoint = new Uri("<https://my-service.azure.com>");
 ModelsTypeSpecClient client = new ModelsTypeSpecClient(endpoint);
 
-var data = new
+RequestContent content = RequestContent.Create(new Dictionary<string, object>()
 {
-    message = "<message>",
-};
-
-Response response = await client.InputRecursiveAsync(RequestContent.Create(data));
+    ["message"] = "<message>",
+});
+Response response = await client.InputRecursiveAsync(content);
 Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call InputRecursiveAsync with all request content.
@@ -915,12 +1034,11 @@ This sample shows how to call InputRecursiveAsync with all request content.
 Uri endpoint = new Uri("<https://my-service.azure.com>");
 ModelsTypeSpecClient client = new ModelsTypeSpecClient(endpoint);
 
-var data = new
+RequestContent content = RequestContent.Create(new Dictionary<string, object>()
 {
-    message = "<message>",
-};
-
-Response response = await client.InputRecursiveAsync(RequestContent.Create(data));
+    ["message"] = "<message>",
+});
+Response response = await client.InputRecursiveAsync(content);
 Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
@@ -931,12 +1049,11 @@ This sample shows how to call InputRecursive with required request content.
 Uri endpoint = new Uri("<https://my-service.azure.com>");
 ModelsTypeSpecClient client = new ModelsTypeSpecClient(endpoint);
 
-var data = new
+RequestContent content = RequestContent.Create(new Dictionary<string, object>()
 {
-    message = "<message>",
-};
-
-Response response = client.InputRecursive(RequestContent.Create(data));
+    ["message"] = "<message>",
+});
+Response response = client.InputRecursive(content);
 Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call InputRecursive with all request content.
@@ -944,12 +1061,11 @@ This sample shows how to call InputRecursive with all request content.
 Uri endpoint = new Uri("<https://my-service.azure.com>");
 ModelsTypeSpecClient client = new ModelsTypeSpecClient(endpoint);
 
-var data = new
+RequestContent content = RequestContent.Create(new Dictionary<string, object>()
 {
-    message = "<message>",
-};
-
-Response response = client.InputRecursive(RequestContent.Create(data));
+    ["message"] = "<message>",
+});
+Response response = client.InputRecursive(content);
 Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
@@ -982,12 +1098,11 @@ This sample shows how to call RoundTripRecursiveAsync with required request cont
 Uri endpoint = new Uri("<https://my-service.azure.com>");
 ModelsTypeSpecClient client = new ModelsTypeSpecClient(endpoint);
 
-var data = new
+RequestContent content = RequestContent.Create(new Dictionary<string, object>()
 {
-    message = "<message>",
-};
-
-Response response = await client.RoundTripRecursiveAsync(RequestContent.Create(data));
+    ["message"] = "<message>",
+});
+Response response = await client.RoundTripRecursiveAsync(content);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("message").ToString());
@@ -997,12 +1112,11 @@ This sample shows how to call RoundTripRecursiveAsync with all request content, 
 Uri endpoint = new Uri("<https://my-service.azure.com>");
 ModelsTypeSpecClient client = new ModelsTypeSpecClient(endpoint);
 
-var data = new
+RequestContent content = RequestContent.Create(new Dictionary<string, object>()
 {
-    message = "<message>",
-};
-
-Response response = await client.RoundTripRecursiveAsync(RequestContent.Create(data));
+    ["message"] = "<message>",
+});
+Response response = await client.RoundTripRecursiveAsync(content);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("message").ToString());
@@ -1016,12 +1130,11 @@ This sample shows how to call RoundTripRecursive with required request content, 
 Uri endpoint = new Uri("<https://my-service.azure.com>");
 ModelsTypeSpecClient client = new ModelsTypeSpecClient(endpoint);
 
-var data = new
+RequestContent content = RequestContent.Create(new Dictionary<string, object>()
 {
-    message = "<message>",
-};
-
-Response response = client.RoundTripRecursive(RequestContent.Create(data));
+    ["message"] = "<message>",
+});
+Response response = client.RoundTripRecursive(content);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("message").ToString());
@@ -1031,12 +1144,11 @@ This sample shows how to call RoundTripRecursive with all request content, and h
 Uri endpoint = new Uri("<https://my-service.azure.com>");
 ModelsTypeSpecClient client = new ModelsTypeSpecClient(endpoint);
 
-var data = new
+RequestContent content = RequestContent.Create(new Dictionary<string, object>()
 {
-    message = "<message>",
-};
-
-Response response = client.RoundTripRecursive(RequestContent.Create(data));
+    ["message"] = "<message>",
+});
+Response response = client.RoundTripRecursive(content);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("message").ToString());
@@ -1132,22 +1244,15 @@ This sample shows how to call RoundTripToOutputWithNoUseBaseAsync with required 
 Uri endpoint = new Uri("<https://my-service.azure.com>");
 ModelsTypeSpecClient client = new ModelsTypeSpecClient(endpoint);
 
-var data = new
+RequestContent content = RequestContent.Create(new Dictionary<string, object>()
 {
-    requiredCollection = new[]
+    ["requiredCollection"] = new object[]
 {
-new
-{
-lRecord = new
-{
-key = new
-{
-}},}
+null
 },
-    baseModelProp = "<baseModelProp>",
-};
-
-Response response = await client.RoundTripToOutputWithNoUseBaseAsync(RequestContent.Create(data));
+    ["baseModelProp"] = "<baseModelProp>",
+});
+Response response = await client.RoundTripToOutputWithNoUseBaseAsync(content);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("baseModelProp").ToString());
@@ -1160,22 +1265,15 @@ This sample shows how to call RoundTripToOutputWithNoUseBase with required reque
 Uri endpoint = new Uri("<https://my-service.azure.com>");
 ModelsTypeSpecClient client = new ModelsTypeSpecClient(endpoint);
 
-var data = new
+RequestContent content = RequestContent.Create(new Dictionary<string, object>()
 {
-    requiredCollection = new[]
+    ["requiredCollection"] = new object[]
 {
-new
-{
-lRecord = new
-{
-key = new
-{
-}},}
+null
 },
-    baseModelProp = "<baseModelProp>",
-};
-
-Response response = client.RoundTripToOutputWithNoUseBase(RequestContent.Create(data));
+    ["baseModelProp"] = "<baseModelProp>",
+});
+Response response = client.RoundTripToOutputWithNoUseBase(content);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("baseModelProp").ToString());

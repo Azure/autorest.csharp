@@ -5,9 +5,9 @@
       <example>
 This sample shows how to call DefaultAsync with required parameters.
 <code><![CDATA[
-Query client = new DurationClient().GetQueryClient("1.0.0");
+Query client = new DurationClient().GetQueryClient(apiVersion: "1.0.0");
 
-Response response = await client.DefaultAsync(new TimeSpan(1, 2, 3));
+Response response = await client.DefaultAsync(XmlConvert.ToTimeSpan("PT1H23M45S"));
 Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
@@ -15,9 +15,9 @@ Console.WriteLine(response.Status);
       <example>
 This sample shows how to call Default with required parameters.
 <code><![CDATA[
-Query client = new DurationClient().GetQueryClient("1.0.0");
+Query client = new DurationClient().GetQueryClient(apiVersion: "1.0.0");
 
-Response response = client.Default(new TimeSpan(1, 2, 3));
+Response response = client.Default(XmlConvert.ToTimeSpan("PT1H23M45S"));
 Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
@@ -25,9 +25,9 @@ Console.WriteLine(response.Status);
       <example>
 This sample shows how to call Iso8601Async with required parameters.
 <code><![CDATA[
-Query client = new DurationClient().GetQueryClient("1.0.0");
+Query client = new DurationClient().GetQueryClient(apiVersion: "1.0.0");
 
-Response response = await client.Iso8601Async(new TimeSpan(1, 2, 3));
+Response response = await client.Iso8601Async(XmlConvert.ToTimeSpan("PT1H23M45S"));
 Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
@@ -35,9 +35,9 @@ Console.WriteLine(response.Status);
       <example>
 This sample shows how to call Iso8601 with required parameters.
 <code><![CDATA[
-Query client = new DurationClient().GetQueryClient("1.0.0");
+Query client = new DurationClient().GetQueryClient(apiVersion: "1.0.0");
 
-Response response = client.Iso8601(new TimeSpan(1, 2, 3));
+Response response = client.Iso8601(XmlConvert.ToTimeSpan("PT1H23M45S"));
 Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
@@ -45,9 +45,9 @@ Console.WriteLine(response.Status);
       <example>
 This sample shows how to call Int32SecondsAsync with required parameters.
 <code><![CDATA[
-Query client = new DurationClient().GetQueryClient("1.0.0");
+Query client = new DurationClient().GetQueryClient(apiVersion: "1.0.0");
 
-Response response = await client.Int32SecondsAsync(new TimeSpan(1, 2, 3));
+Response response = await client.Int32SecondsAsync(TimeSpan.FromSeconds(10));
 Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
@@ -55,9 +55,9 @@ Console.WriteLine(response.Status);
       <example>
 This sample shows how to call Int32Seconds with required parameters.
 <code><![CDATA[
-Query client = new DurationClient().GetQueryClient("1.0.0");
+Query client = new DurationClient().GetQueryClient(apiVersion: "1.0.0");
 
-Response response = client.Int32Seconds(new TimeSpan(1, 2, 3));
+Response response = client.Int32Seconds(TimeSpan.FromSeconds(10));
 Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
@@ -65,9 +65,9 @@ Console.WriteLine(response.Status);
       <example>
 This sample shows how to call FloatSecondsAsync with required parameters.
 <code><![CDATA[
-Query client = new DurationClient().GetQueryClient("1.0.0");
+Query client = new DurationClient().GetQueryClient(apiVersion: "1.0.0");
 
-Response response = await client.FloatSecondsAsync(new TimeSpan(1, 2, 3));
+Response response = await client.FloatSecondsAsync(TimeSpan.FromSeconds(10F));
 Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
@@ -75,9 +75,9 @@ Console.WriteLine(response.Status);
       <example>
 This sample shows how to call FloatSeconds with required parameters.
 <code><![CDATA[
-Query client = new DurationClient().GetQueryClient("1.0.0");
+Query client = new DurationClient().GetQueryClient(apiVersion: "1.0.0");
 
-Response response = client.FloatSeconds(new TimeSpan(1, 2, 3));
+Response response = client.FloatSeconds(TimeSpan.FromSeconds(10F));
 Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
@@ -85,9 +85,12 @@ Console.WriteLine(response.Status);
       <example>
 This sample shows how to call Int32SecondsArrayAsync with required parameters.
 <code><![CDATA[
-Query client = new DurationClient().GetQueryClient("1.0.0");
+Query client = new DurationClient().GetQueryClient(apiVersion: "1.0.0");
 
-Response response = await client.Int32SecondsArrayAsync(new TimeSpan[] { new TimeSpan(1, 2, 3) });
+Response response = await client.Int32SecondsArrayAsync(new TimeSpan[]
+{
+mSeconds(10)
+});
 Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
@@ -95,9 +98,12 @@ Console.WriteLine(response.Status);
       <example>
 This sample shows how to call Int32SecondsArray with required parameters.
 <code><![CDATA[
-Query client = new DurationClient().GetQueryClient("1.0.0");
+Query client = new DurationClient().GetQueryClient(apiVersion: "1.0.0");
 
-Response response = client.Int32SecondsArray(new TimeSpan[] { new TimeSpan(1, 2, 3) });
+Response response = client.Int32SecondsArray(new TimeSpan[]
+{
+mSeconds(10)
+});
 Console.WriteLine(response.Status);
 ]]></code></example>
     </member>

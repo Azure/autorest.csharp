@@ -56,6 +56,8 @@ namespace AutoRest.CSharp.Output.Models.Types
         private IEnumerable<InputParameterExample>? _inputClientParameterExamples;
         private IEnumerable<InputParameterExample> InputClientParameterExamples => _inputClientParameterExamples ??= InputClientExamples.SelectMany(c => c.Parameters);
 
+        // TODO -- there is an issue that operations with the same name could be on different clients.
+        // We might still need the mapping from InputClient -> LowLevelClient
         private IReadOnlyDictionary<string, InputOperationExample>? _inputOperationExamples;
         private IReadOnlyDictionary<string, InputOperationExample> InputOperationExamples => _inputOperationExamples ??= InputClientExamples.SelectMany(c => c.Operations).ToDictionary(e => GetInputOperationKey(e.Operation), e => e);
 

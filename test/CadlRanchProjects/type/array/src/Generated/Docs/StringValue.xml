@@ -23,7 +23,7 @@ var result = client.GetStringValue();
       <example>
 This sample shows how to call GetStringValueAsync with required parameters and parse the result.
 <code><![CDATA[
-StringValue client = new ArrayClient().GetStringValueClient("1.0.0");
+StringValue client = new ArrayClient().GetStringValueClient(apiVersion: "1.0.0");
 
 Response response = await client.GetStringValueAsync(new RequestContext());
 
@@ -35,7 +35,7 @@ Console.WriteLine(result[0].ToString());
       <example>
 This sample shows how to call GetStringValue with required parameters and parse the result.
 <code><![CDATA[
-StringValue client = new ArrayClient().GetStringValueClient("1.0.0");
+StringValue client = new ArrayClient().GetStringValueClient(apiVersion: "1.0.0");
 
 Response response = client.GetStringValue(new RequestContext());
 
@@ -73,14 +73,13 @@ var result = client.Put(body);
       <example>
 This sample shows how to call PutAsync with required request content.
 <code><![CDATA[
-StringValue client = new ArrayClient().GetStringValueClient("1.0.0");
+StringValue client = new ArrayClient().GetStringValueClient(apiVersion: "1.0.0");
 
-var data = new[]
+RequestContent content = RequestContent.Create(new object[]
 {
-"<String>"
-};
-
-Response response = await client.PutAsync(RequestContent.Create(data));
+"<body>"
+});
+Response response = await client.PutAsync(content);
 Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
@@ -88,14 +87,13 @@ Console.WriteLine(response.Status);
       <example>
 This sample shows how to call Put with required request content.
 <code><![CDATA[
-StringValue client = new ArrayClient().GetStringValueClient("1.0.0");
+StringValue client = new ArrayClient().GetStringValueClient(apiVersion: "1.0.0");
 
-var data = new[]
+RequestContent content = RequestContent.Create(new object[]
 {
-"<String>"
-};
-
-Response response = client.Put(RequestContent.Create(data));
+"<body>"
+});
+Response response = client.Put(content);
 Console.WriteLine(response.Status);
 ]]></code></example>
     </member>

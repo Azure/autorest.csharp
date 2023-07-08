@@ -11,6 +11,7 @@ Response response = await client.MultiAsync(new string[]
 {
 "<colors>"
 });
+Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
     <member name="Multi(IEnumerable{string},RequestContext)">
@@ -23,6 +24,7 @@ Response response = client.Multi(new string[]
 {
 "<colors>"
 });
+Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
     <member name="SsvAsync(IEnumerable{string},RequestContext)">
@@ -35,6 +37,7 @@ Response response = await client.SsvAsync(new string[]
 {
 "<colors>"
 });
+Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
     <member name="Ssv(IEnumerable{string},RequestContext)">
@@ -47,6 +50,7 @@ Response response = client.Ssv(new string[]
 {
 "<colors>"
 });
+Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
     <member name="TsvAsync(IEnumerable{string},RequestContext)">
@@ -59,6 +63,7 @@ Response response = await client.TsvAsync(new string[]
 {
 "<colors>"
 });
+Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
     <member name="Tsv(IEnumerable{string},RequestContext)">
@@ -71,6 +76,7 @@ Response response = client.Tsv(new string[]
 {
 "<colors>"
 });
+Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
     <member name="PipesAsync(IEnumerable{string},RequestContext)">
@@ -83,6 +89,7 @@ Response response = await client.PipesAsync(new string[]
 {
 "<colors>"
 });
+Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
     <member name="Pipes(IEnumerable{string},RequestContext)">
@@ -95,6 +102,7 @@ Response response = client.Pipes(new string[]
 {
 "<colors>"
 });
+Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
     <member name="CsvAsync(IEnumerable{string},RequestContext)">
@@ -107,6 +115,7 @@ Response response = await client.CsvAsync(new string[]
 {
 "<colors>"
 });
+Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
     <member name="Csv(IEnumerable{string},RequestContext)">
@@ -119,6 +128,7 @@ Response response = client.Csv(new string[]
 {
 "<colors>"
 });
+Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
   </members>

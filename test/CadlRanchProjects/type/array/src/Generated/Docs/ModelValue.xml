@@ -23,7 +23,7 @@ var result = client.GetModelValue();
       <example>
 This sample shows how to call GetModelValueAsync with required parameters and parse the result.
 <code><![CDATA[
-ModelValue client = new ArrayClient().GetModelValueClient("1.0.0");
+ModelValue client = new ArrayClient().GetModelValueClient(apiVersion: "1.0.0");
 
 Response response = await client.GetModelValueAsync(new RequestContext());
 
@@ -36,7 +36,7 @@ Console.WriteLine(result[0].GetProperty("children")[0].GetProperty("property").T
       <example>
 This sample shows how to call GetModelValue with required parameters and parse the result.
 <code><![CDATA[
-ModelValue client = new ArrayClient().GetModelValueClient("1.0.0");
+ModelValue client = new ArrayClient().GetModelValueClient(apiVersion: "1.0.0");
 
 Response response = client.GetModelValue(new RequestContext());
 
@@ -81,16 +81,13 @@ var result = client.Put(body);
       <example>
 This sample shows how to call PutAsync with required request content.
 <code><![CDATA[
-ModelValue client = new ArrayClient().GetModelValueClient("1.0.0");
+ModelValue client = new ArrayClient().GetModelValueClient(apiVersion: "1.0.0");
 
-var data = new[]
+RequestContent content = RequestContent.Create(new object[]
 {
-new
-{
-<property>",}
-};
-
-Response response = await client.PutAsync(RequestContent.Create(data));
+null
+});
+Response response = await client.PutAsync(content);
 Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
@@ -98,16 +95,13 @@ Console.WriteLine(response.Status);
       <example>
 This sample shows how to call Put with required request content.
 <code><![CDATA[
-ModelValue client = new ArrayClient().GetModelValueClient("1.0.0");
+ModelValue client = new ArrayClient().GetModelValueClient(apiVersion: "1.0.0");
 
-var data = new[]
+RequestContent content = RequestContent.Create(new object[]
 {
-new
-{
-<property>",}
-};
-
-Response response = client.Put(RequestContent.Create(data));
+null
+});
+Response response = client.Put(content);
 Console.WriteLine(response.Status);
 ]]></code></example>
     </member>

@@ -5,6 +5,8 @@
 
 #nullable disable
 
+using Azure.Identity;
+
 namespace Parameters.CollectionFormat.Samples
 {
     public class Samples_CollectionFormatClient

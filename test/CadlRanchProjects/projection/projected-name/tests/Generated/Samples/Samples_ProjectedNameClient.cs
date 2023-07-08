@@ -6,12 +6,8 @@
 #nullable disable
 
 using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Text.Json;
 using System.Threading.Tasks;
 using Azure;
-using Azure.Core;
 using Azure.Identity;
 using NUnit.Framework;
 using Projection.ProjectedName;
@@ -32,21 +28,21 @@ namespace Projection.ProjectedName.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_Operation_AllParameters()
-        {
-            ProjectedNameClient client = new ProjectedNameClient();
-
-            Response response = client.Operation();
-            Console.WriteLine(response.Status);
-        }
-
-        [Test]
-        [Ignore("Only validating compilation of examples")]
         public async Task Example_Operation_Async()
         {
             ProjectedNameClient client = new ProjectedNameClient();
 
             Response response = await client.OperationAsync();
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_Operation_AllParameters()
+        {
+            ProjectedNameClient client = new ProjectedNameClient();
+
+            Response response = client.Operation();
             Console.WriteLine(response.Status);
         }
 
@@ -66,17 +62,7 @@ namespace Projection.ProjectedName.Samples
         {
             ProjectedNameClient client = new ProjectedNameClient();
 
-            Response response = client.Parameter("<defaultName>");
-            Console.WriteLine(response.Status);
-        }
-
-        [Test]
-        [Ignore("Only validating compilation of examples")]
-        public void Example_Parameter_AllParameters()
-        {
-            ProjectedNameClient client = new ProjectedNameClient();
-
-            Response response = client.Parameter("<defaultName>");
+            Response response = client.Parameter("<default-name>");
             Console.WriteLine(response.Status);
         }
 
@@ -86,7 +72,17 @@ namespace Projection.ProjectedName.Samples
         {
             ProjectedNameClient client = new ProjectedNameClient();
 
-            Response response = await client.ParameterAsync("<defaultName>");
+            Response response = await client.ParameterAsync("<default-name>");
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_Parameter_AllParameters()
+        {
+            ProjectedNameClient client = new ProjectedNameClient();
+
+            Response response = client.Parameter("<default-name>");
             Console.WriteLine(response.Status);
         }
 
@@ -96,7 +92,7 @@ namespace Projection.ProjectedName.Samples
         {
             ProjectedNameClient client = new ProjectedNameClient();
 
-            Response response = await client.ParameterAsync("<defaultName>");
+            Response response = await client.ParameterAsync("<default-name>");
             Console.WriteLine(response.Status);
         }
     }

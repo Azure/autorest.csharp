@@ -6,16 +6,12 @@
 #nullable disable
 
 using System;
-using System.Collections.Generic;
-using System.IO;
 using System.Text.Json;
 using System.Threading.Tasks;
 using Azure;
-using Azure.Core;
 using Azure.Identity;
 using NUnit.Framework;
 using ParametersCadl;
-using ParametersCadl.Models;
 
 namespace ParametersCadl.Samples
 {
@@ -24,18 +20,6 @@ namespace ParametersCadl.Samples
         [Test]
         [Ignore("Only validating compilation of examples")]
         public void Example_Operation()
-        {
-            ParametersCadlClient client = new ParametersCadlClient();
-
-            Response response = client.Operation(1234, 1234, new RequestContext());
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("id").ToString());
-        }
-
-        [Test]
-        [Ignore("Only validating compilation of examples")]
-        public void Example_Operation_AllParameters()
         {
             ParametersCadlClient client = new ParametersCadlClient();
 
@@ -59,6 +43,18 @@ namespace ParametersCadl.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
+        public void Example_Operation_AllParameters()
+        {
+            ParametersCadlClient client = new ParametersCadlClient();
+
+            Response response = client.Operation(1234, 1234, new RequestContext());
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("id").ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
         public async Task Example_Operation_AllParameters_Async()
         {
             ParametersCadlClient client = new ParametersCadlClient();
@@ -71,28 +67,7 @@ namespace ParametersCadl.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Operation_Convenience_Async()
-        {
-            var client = new ParametersCadlClient();
-
-            var result = await client.OperationAsync(1234, 1234);
-        }
-
-        [Test]
-        [Ignore("Only validating compilation of examples")]
         public void Example_Operation2()
-        {
-            ParametersCadlClient client = new ParametersCadlClient();
-
-            Response response = client.Operation2(1234, 1234, new RequestContext());
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("id").ToString());
-        }
-
-        [Test]
-        [Ignore("Only validating compilation of examples")]
-        public void Example_Operation2_AllParameters()
         {
             ParametersCadlClient client = new ParametersCadlClient();
 
@@ -116,6 +91,18 @@ namespace ParametersCadl.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
+        public void Example_Operation2_AllParameters()
+        {
+            ParametersCadlClient client = new ParametersCadlClient();
+
+            Response response = client.Operation2(1234, 1234, new RequestContext());
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("id").ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
         public async Task Example_Operation2_AllParameters_Async()
         {
             ParametersCadlClient client = new ParametersCadlClient();
@@ -124,15 +111,6 @@ namespace ParametersCadl.Samples
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("id").ToString());
-        }
-
-        [Test]
-        [Ignore("Only validating compilation of examples")]
-        public async Task Example_Operation2_Convenience_Async()
-        {
-            var client = new ParametersCadlClient();
-
-            var result = await client.Operation2Async(1234, 1234);
         }
     }
 }

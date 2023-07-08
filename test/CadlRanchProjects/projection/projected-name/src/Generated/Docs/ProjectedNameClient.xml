@@ -27,7 +27,7 @@ This sample shows how to call ParameterAsync with required parameters.
 <code><![CDATA[
 ProjectedNameClient client = new ProjectedNameClient();
 
-Response response = await client.ParameterAsync("<defaultName>");
+Response response = await client.ParameterAsync("<default-name>");
 Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
@@ -37,7 +37,7 @@ This sample shows how to call Parameter with required parameters.
 <code><![CDATA[
 ProjectedNameClient client = new ProjectedNameClient();
 
-Response response = client.Parameter("<defaultName>");
+Response response = client.Parameter("<default-name>");
 Console.WriteLine(response.Status);
 ]]></code></example>
     </member>

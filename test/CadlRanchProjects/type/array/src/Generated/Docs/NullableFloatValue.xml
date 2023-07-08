@@ -23,7 +23,7 @@ var result = client.GetNullableFloatValue();
       <example>
 This sample shows how to call GetNullableFloatValueAsync with required parameters and parse the result.
 <code><![CDATA[
-NullableFloatValue client = new ArrayClient().GetNullableFloatValueClient("1.0.0");
+NullableFloatValue client = new ArrayClient().GetNullableFloatValueClient(apiVersion: "1.0.0");
 
 Response response = await client.GetNullableFloatValueAsync(new RequestContext());
 
@@ -35,7 +35,7 @@ Console.WriteLine(result[0].ToString());
       <example>
 This sample shows how to call GetNullableFloatValue with required parameters and parse the result.
 <code><![CDATA[
-NullableFloatValue client = new ArrayClient().GetNullableFloatValueClient("1.0.0");
+NullableFloatValue client = new ArrayClient().GetNullableFloatValueClient(apiVersion: "1.0.0");
 
 Response response = client.GetNullableFloatValue(new RequestContext());
 
@@ -73,14 +73,13 @@ var result = client.Put(body);
       <example>
 This sample shows how to call PutAsync with required request content.
 <code><![CDATA[
-NullableFloatValue client = new ArrayClient().GetNullableFloatValueClient("1.0.0");
+NullableFloatValue client = new ArrayClient().GetNullableFloatValueClient(apiVersion: "1.0.0");
 
-var data = new[]
+RequestContent content = RequestContent.Create(new object[]
 {
 123.45F
-};
-
-Response response = await client.PutAsync(RequestContent.Create(data));
+});
+Response response = await client.PutAsync(content);
 Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
@@ -88,14 +87,13 @@ Console.WriteLine(response.Status);
       <example>
 This sample shows how to call Put with required request content.
 <code><![CDATA[
-NullableFloatValue client = new ArrayClient().GetNullableFloatValueClient("1.0.0");
+NullableFloatValue client = new ArrayClient().GetNullableFloatValueClient(apiVersion: "1.0.0");
 
-var data = new[]
+RequestContent content = RequestContent.Create(new object[]
 {
 123.45F
-};
-
-Response response = client.Put(RequestContent.Create(data));
+});
+Response response = client.Put(content);
 Console.WriteLine(response.Status);
 ]]></code></example>
     </member>

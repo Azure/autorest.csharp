@@ -27,14 +27,13 @@ This sample shows how to call PostValidAsync with required request content.
 <code><![CDATA[
 InheritanceClient client = new InheritanceClient();
 
-var data = new
+RequestContent content = RequestContent.Create(new Dictionary<string, object>()
 {
-    smart = true,
-    age = 1234,
-    name = "<name>",
-};
-
-Response response = await client.PostValidAsync(RequestContent.Create(data));
+    ["smart"] = true,
+    ["age"] = 1234,
+    ["name"] = "<name>",
+});
+Response response = await client.PostValidAsync(content);
 Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
@@ -44,14 +43,13 @@ This sample shows how to call PostValid with required request content.
 <code><![CDATA[
 InheritanceClient client = new InheritanceClient();
 
-var data = new
+RequestContent content = RequestContent.Create(new Dictionary<string, object>()
 {
-    smart = true,
-    age = 1234,
-    name = "<name>",
-};
-
-Response response = client.PostValid(RequestContent.Create(data));
+    ["smart"] = true,
+    ["age"] = 1234,
+    ["name"] = "<name>",
+});
+Response response = client.PostValid(content);
 Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
@@ -127,14 +125,13 @@ This sample shows how to call PutValidAsync with required request content and pa
 <code><![CDATA[
 InheritanceClient client = new InheritanceClient();
 
-var data = new
+RequestContent content = RequestContent.Create(new Dictionary<string, object>()
 {
-    smart = true,
-    age = 1234,
-    name = "<name>",
-};
-
-Response response = await client.PutValidAsync(RequestContent.Create(data));
+    ["smart"] = true,
+    ["age"] = 1234,
+    ["name"] = "<name>",
+});
+Response response = await client.PutValidAsync(content);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("smart").ToString());
@@ -148,14 +145,13 @@ This sample shows how to call PutValid with required request content and parse t
 <code><![CDATA[
 InheritanceClient client = new InheritanceClient();
 
-var data = new
+RequestContent content = RequestContent.Create(new Dictionary<string, object>()
 {
-    smart = true,
-    age = 1234,
-    name = "<name>",
-};
-
-Response response = client.PutValid(RequestContent.Create(data));
+    ["smart"] = true,
+    ["age"] = 1234,
+    ["name"] = "<name>",
+});
+Response response = client.PutValid(content);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("smart").ToString());
@@ -164,50 +160,46 @@ Console.WriteLine(result.GetProperty("name").ToString());
 ]]></code></example>
     </member>
     <member name="GetDuplicateAsync(CancellationToken)">
-<example>
+      <example>
 This sample shows how to call GetDuplicateAsync.
 <code><![CDATA[
 var client = new InheritanceClient();
 
 var result = await client.GetDuplicateAsync();
-]]></code>
-</example>
+]]></code></example>
     </member>
     <member name="GetDuplicate(CancellationToken)">
-<example>
+      <example>
 This sample shows how to call GetDuplicate.
 <code><![CDATA[
 var client = new InheritanceClient();
 
 var result = client.GetDuplicate();
-]]></code>
-</example>
+]]></code></example>
     </member>
     <member name="GetDuplicateAsync(RequestContext)">
-<example>
+      <example>
 This sample shows how to call GetDuplicateAsync with required parameters and parse the result.
 <code><![CDATA[
-var client = new InheritanceClient();
+InheritanceClient client = new InheritanceClient();
 
 Response response = await client.GetDuplicateAsync(new RequestContext());
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("kind").ToString());
-]]></code>
-</example>
+]]></code></example>
     </member>
     <member name="GetDuplicate(RequestContext)">
-<example>
+      <example>
 This sample shows how to call GetDuplicate with required parameters and parse the result.
 <code><![CDATA[
-var client = new InheritanceClient();
+InheritanceClient client = new InheritanceClient();
 
 Response response = client.GetDuplicate(new RequestContext());
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("kind").ToString());
-]]></code>
-</example>
+]]></code></example>
     </member>
     <member name="GetModelAsync(CancellationToken)">
       <example>
@@ -279,13 +271,12 @@ This sample shows how to call PutModelAsync with required request content.
 <code><![CDATA[
 InheritanceClient client = new InheritanceClient();
 
-var data = new
+RequestContent content = RequestContent.Create(new Dictionary<string, object>()
 {
-    kind = "",
-    age = 1234,
-};
-
-Response response = await client.PutModelAsync(RequestContent.Create(data));
+    ["kind"] = "<kind>",
+    ["age"] = 1234,
+});
+Response response = await client.PutModelAsync(content);
 Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
@@ -295,13 +286,12 @@ This sample shows how to call PutModel with required request content.
 <code><![CDATA[
 InheritanceClient client = new InheritanceClient();
 
-var data = new
+RequestContent content = RequestContent.Create(new Dictionary<string, object>()
 {
-    kind = "",
-    age = 1234,
-};
-
-Response response = client.PutModel(RequestContent.Create(data));
+    ["kind"] = "<kind>",
+    ["age"] = 1234,
+});
+Response response = client.PutModel(content);
 Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
@@ -375,13 +365,12 @@ This sample shows how to call PutRecursiveModelAsync with required request conte
 <code><![CDATA[
 InheritanceClient client = new InheritanceClient();
 
-var data = new
+RequestContent content = RequestContent.Create(new Dictionary<string, object>()
 {
-    kind = "",
-    age = 1234,
-};
-
-Response response = await client.PutRecursiveModelAsync(RequestContent.Create(data));
+    ["kind"] = "<kind>",
+    ["age"] = 1234,
+});
+Response response = await client.PutRecursiveModelAsync(content);
 Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
@@ -391,13 +380,12 @@ This sample shows how to call PutRecursiveModel with required request content.
 <code><![CDATA[
 InheritanceClient client = new InheritanceClient();
 
-var data = new
+RequestContent content = RequestContent.Create(new Dictionary<string, object>()
 {
-    kind = "",
-    age = 1234,
-};
-
-Response response = client.PutRecursiveModel(RequestContent.Create(data));
+    ["kind"] = "<kind>",
+    ["age"] = 1234,
+});
+Response response = client.PutRecursiveModel(content);
 Console.WriteLine(response.Status);
 ]]></code></example>
     </member>

@@ -6,8 +6,6 @@
 #nullable disable
 
 using System;
-using System.Collections.Generic;
-using System.IO;
 using System.Text.Json;
 using System.Threading.Tasks;
 using Azure;
@@ -15,7 +13,6 @@ using Azure.Core;
 using Azure.Identity;
 using NUnit.Framework;
 using _Type._Array;
-using _Type._Array.Models;
 
 namespace _Type._Array.Samples
 {
@@ -25,19 +22,7 @@ namespace _Type._Array.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_GetDatetimeValue()
         {
-            DatetimeValue client = new ArrayClient().GetDatetimeValueClient("1.0.0");
-
-            Response response = client.GetDatetimeValue(new RequestContext());
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result[0].ToString());
-        }
-
-        [Test]
-        [Ignore("Only validating compilation of examples")]
-        public void Example_GetDatetimeValue_AllParameters()
-        {
-            DatetimeValue client = new ArrayClient().GetDatetimeValueClient("1.0.0");
+            DatetimeValue client = new ArrayClient().GetDatetimeValueClient(apiVersion: "1.0.0");
 
             Response response = client.GetDatetimeValue(new RequestContext());
 
@@ -49,9 +34,21 @@ namespace _Type._Array.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_GetDatetimeValue_Async()
         {
-            DatetimeValue client = new ArrayClient().GetDatetimeValueClient("1.0.0");
+            DatetimeValue client = new ArrayClient().GetDatetimeValueClient(apiVersion: "1.0.0");
 
             Response response = await client.GetDatetimeValueAsync(new RequestContext());
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result[0].ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_GetDatetimeValue_AllParameters()
+        {
+            DatetimeValue client = new ArrayClient().GetDatetimeValueClient(apiVersion: "1.0.0");
+
+            Response response = client.GetDatetimeValue(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result[0].ToString());
@@ -61,7 +58,7 @@ namespace _Type._Array.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_GetDatetimeValue_AllParameters_Async()
         {
-            DatetimeValue client = new ArrayClient().GetDatetimeValueClient("1.0.0");
+            DatetimeValue client = new ArrayClient().GetDatetimeValueClient(apiVersion: "1.0.0");
 
             Response response = await client.GetDatetimeValueAsync(new RequestContext());
 
@@ -71,40 +68,15 @@ namespace _Type._Array.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetDatetimeValue_Convenience_Async()
-        {
-            var client = new ArrayClient().GetDatetimeValueClient("1.0.0");
-
-            var result = await client.GetDatetimeValueAsync();
-        }
-
-        [Test]
-        [Ignore("Only validating compilation of examples")]
         public void Example_Put()
         {
-            DatetimeValue client = new ArrayClient().GetDatetimeValueClient("1.0.0");
+            DatetimeValue client = new ArrayClient().GetDatetimeValueClient(apiVersion: "1.0.0");
 
-            var data = new[]
+            RequestContent content = RequestContent.Create(new object[]
             {
 "2022-05-10T14:57:31.2311892-04:00"
-};
-
-            Response response = client.Put(RequestContent.Create(data));
-            Console.WriteLine(response.Status);
-        }
-
-        [Test]
-        [Ignore("Only validating compilation of examples")]
-        public void Example_Put_AllParameters()
-        {
-            DatetimeValue client = new ArrayClient().GetDatetimeValueClient("1.0.0");
-
-            var data = new[]
-            {
-"2022-05-10T14:57:31.2311892-04:00"
-};
-
-            Response response = client.Put(RequestContent.Create(data));
+            });
+            Response response = client.Put(content);
             Console.WriteLine(response.Status);
         }
 
@@ -112,14 +84,27 @@ namespace _Type._Array.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Put_Async()
         {
-            DatetimeValue client = new ArrayClient().GetDatetimeValueClient("1.0.0");
+            DatetimeValue client = new ArrayClient().GetDatetimeValueClient(apiVersion: "1.0.0");
 
-            var data = new[]
+            RequestContent content = RequestContent.Create(new object[]
             {
 "2022-05-10T14:57:31.2311892-04:00"
-};
+            });
+            Response response = await client.PutAsync(content);
+            Console.WriteLine(response.Status);
+        }
 
-            Response response = await client.PutAsync(RequestContent.Create(data));
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_Put_AllParameters()
+        {
+            DatetimeValue client = new ArrayClient().GetDatetimeValueClient(apiVersion: "1.0.0");
+
+            RequestContent content = RequestContent.Create(new object[]
+            {
+"2022-05-10T14:57:31.2311892-04:00"
+            });
+            Response response = client.Put(content);
             Console.WriteLine(response.Status);
         }
 
@@ -127,28 +112,14 @@ namespace _Type._Array.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Put_AllParameters_Async()
         {
-            DatetimeValue client = new ArrayClient().GetDatetimeValueClient("1.0.0");
+            DatetimeValue client = new ArrayClient().GetDatetimeValueClient(apiVersion: "1.0.0");
 
-            var data = new[]
+            RequestContent content = RequestContent.Create(new object[]
             {
 "2022-05-10T14:57:31.2311892-04:00"
-};
-
-            Response response = await client.PutAsync(RequestContent.Create(data));
+            });
+            Response response = await client.PutAsync(content);
             Console.WriteLine(response.Status);
-        }
-
-        [Test]
-        [Ignore("Only validating compilation of examples")]
-        public async Task Example_Put_Convenience_Async()
-        {
-            var client = new ArrayClient().GetDatetimeValueClient("1.0.0");
-
-            var body = new DateTimeOffset[]
-            {
-    DateTimeOffset.UtcNow
-            };
-            var result = await client.PutAsync(body);
         }
     }
 }

@@ -7,12 +7,15 @@ This sample shows how to call CreateOrUpdateAsync with required parameters and r
 <code><![CDATA[
 BasicClient client = new BasicClient();
 
-var data = new
+RequestContent content = RequestContent.Create(new Dictionary<string, object>()
 {
-    name = "<name>",
-};
-
-Response response = await client.CreateOrUpdateAsync(1234, RequestContent.Create(data));
+    ["name"] = "<name>",
+    ["orders"] = new object[]
+{
+null
+},
+});
+Response response = await client.CreateOrUpdateAsync(1234, content);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("id").ToString());
@@ -23,18 +26,15 @@ This sample shows how to call CreateOrUpdateAsync with all parameters and reques
 <code><![CDATA[
 BasicClient client = new BasicClient();
 
-var data = new
+RequestContent content = RequestContent.Create(new Dictionary<string, object>()
 {
-    name = "<name>",
-    orders = new[]
+    ["name"] = "<name>",
+    ["orders"] = new object[]
 {
-new
-{
-4,detail = "<detail>",}
+null
 },
-};
-
-Response response = await client.CreateOrUpdateAsync(1234, RequestContent.Create(data));
+});
+Response response = await client.CreateOrUpdateAsync(1234, content);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("id").ToString());
@@ -51,12 +51,15 @@ This sample shows how to call CreateOrUpdate with required parameters and reques
 <code><![CDATA[
 BasicClient client = new BasicClient();
 
-var data = new
+RequestContent content = RequestContent.Create(new Dictionary<string, object>()
 {
-    name = "<name>",
-};
-
-Response response = client.CreateOrUpdate(1234, RequestContent.Create(data));
+    ["name"] = "<name>",
+    ["orders"] = new object[]
+{
+null
+},
+});
+Response response = client.CreateOrUpdate(1234, content);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("id").ToString());
@@ -67,18 +70,15 @@ This sample shows how to call CreateOrUpdate with all parameters and request con
 <code><![CDATA[
 BasicClient client = new BasicClient();
 
-var data = new
+RequestContent content = RequestContent.Create(new Dictionary<string, object>()
 {
-    name = "<name>",
-    orders = new[]
+    ["name"] = "<name>",
+    ["orders"] = new object[]
 {
-new
-{
-4,detail = "<detail>",}
+null
 },
-};
-
-Response response = client.CreateOrUpdate(1234, RequestContent.Create(data));
+});
+Response response = client.CreateOrUpdate(1234, content);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("id").ToString());
@@ -127,12 +127,15 @@ This sample shows how to call CreateOrReplaceAsync with required parameters and 
 <code><![CDATA[
 BasicClient client = new BasicClient();
 
-var data = new
+RequestContent content = RequestContent.Create(new Dictionary<string, object>()
 {
-    name = "<name>",
-};
-
-Response response = await client.CreateOrReplaceAsync(1234, RequestContent.Create(data));
+    ["name"] = "<name>",
+    ["orders"] = new object[]
+{
+null
+},
+});
+Response response = await client.CreateOrReplaceAsync(1234, content);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("id").ToString());
@@ -143,18 +146,15 @@ This sample shows how to call CreateOrReplaceAsync with all parameters and reque
 <code><![CDATA[
 BasicClient client = new BasicClient();
 
-var data = new
+RequestContent content = RequestContent.Create(new Dictionary<string, object>()
 {
-    name = "<name>",
-    orders = new[]
+    ["name"] = "<name>",
+    ["orders"] = new object[]
 {
-new
-{
-4,detail = "<detail>",}
+null
 },
-};
-
-Response response = await client.CreateOrReplaceAsync(1234, RequestContent.Create(data));
+});
+Response response = await client.CreateOrReplaceAsync(1234, content);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("id").ToString());
@@ -171,12 +171,15 @@ This sample shows how to call CreateOrReplace with required parameters and reque
 <code><![CDATA[
 BasicClient client = new BasicClient();
 
-var data = new
+RequestContent content = RequestContent.Create(new Dictionary<string, object>()
 {
-    name = "<name>",
-};
-
-Response response = client.CreateOrReplace(1234, RequestContent.Create(data));
+    ["name"] = "<name>",
+    ["orders"] = new object[]
+{
+null
+},
+});
+Response response = client.CreateOrReplace(1234, content);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("id").ToString());
@@ -187,18 +190,15 @@ This sample shows how to call CreateOrReplace with all parameters and request co
 <code><![CDATA[
 BasicClient client = new BasicClient();
 
-var data = new
+RequestContent content = RequestContent.Create(new Dictionary<string, object>()
 {
-    name = "<name>",
-    orders = new[]
+    ["name"] = "<name>",
+    ["orders"] = new object[]
 {
-new
-{
-4,detail = "<detail>",}
+null
 },
-};
-
-Response response = client.CreateOrReplace(1234, RequestContent.Create(data));
+});
+Response response = client.CreateOrReplace(1234, content);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("id").ToString());
@@ -361,8 +361,24 @@ This sample shows how to call GetUsersAsync with required parameters and parse t
 <code><![CDATA[
 BasicClient client = new BasicClient();
 
-await foreach (BinaryData item in client.GetUsersAsync(1234, 1234, 1234, new string[] { "<orderby>" }, "<filter>", new string[] { "<select>" }, new string[] { "<expand>" }, new RequestContext()))
+await foreach (BinaryData item in client.GetUsersAsync(1234, 1234, 1234, new string[]
 {
+"<orderby>"
+}, "<filter>", new string[]
+{
+"<select>"
+}, new string[]
+{
+"<expand>"
+}, new RequestContext()))
+{
+    JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+    Console.WriteLine(result[0].GetProperty("id").ToString());
+    Console.WriteLine(result[0].GetProperty("name").ToString());
+    Console.WriteLine(result[0].GetProperty("orders")[0].GetProperty("id").ToString());
+    Console.WriteLine(result[0].GetProperty("orders")[0].GetProperty("userId").ToString());
+    Console.WriteLine(result[0].GetProperty("orders")[0].GetProperty("detail").ToString());
+    Console.WriteLine(result[0].GetProperty("etag").ToString());
 }
 ]]></code></example>
     </member>
@@ -372,8 +388,24 @@ This sample shows how to call GetUsers with required parameters and parse the re
 <code><![CDATA[
 BasicClient client = new BasicClient();
 
-foreach (BinaryData item in client.GetUsers(1234, 1234, 1234, new string[] { "<orderby>" }, "<filter>", new string[] { "<select>" }, new string[] { "<expand>" }, new RequestContext()))
+foreach (BinaryData item in client.GetUsers(1234, 1234, 1234, new string[]
 {
+"<orderby>"
+}, "<filter>", new string[]
+{
+"<select>"
+}, new string[]
+{
+"<expand>"
+}, new RequestContext()))
+{
+    JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+    Console.WriteLine(result[0].GetProperty("id").ToString());
+    Console.WriteLine(result[0].GetProperty("name").ToString());
+    Console.WriteLine(result[0].GetProperty("orders")[0].GetProperty("id").ToString());
+    Console.WriteLine(result[0].GetProperty("orders")[0].GetProperty("userId").ToString());
+    Console.WriteLine(result[0].GetProperty("orders")[0].GetProperty("detail").ToString());
+    Console.WriteLine(result[0].GetProperty("etag").ToString());
 }
 ]]></code></example>
     </member>
@@ -407,6 +439,13 @@ BasicClient client = new BasicClient();
 
 await foreach (BinaryData item in client.GetWithPageAsync(new RequestContext()))
 {
+    JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+    Console.WriteLine(result[0].GetProperty("id").ToString());
+    Console.WriteLine(result[0].GetProperty("name").ToString());
+    Console.WriteLine(result[0].GetProperty("orders")[0].GetProperty("id").ToString());
+    Console.WriteLine(result[0].GetProperty("orders")[0].GetProperty("userId").ToString());
+    Console.WriteLine(result[0].GetProperty("orders")[0].GetProperty("detail").ToString());
+    Console.WriteLine(result[0].GetProperty("etag").ToString());
 }
 ]]></code></example>
     </member>
@@ -418,6 +457,13 @@ BasicClient client = new BasicClient();
 
 foreach (BinaryData item in client.GetWithPage(new RequestContext()))
 {
+    JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+    Console.WriteLine(result[0].GetProperty("id").ToString());
+    Console.WriteLine(result[0].GetProperty("name").ToString());
+    Console.WriteLine(result[0].GetProperty("orders")[0].GetProperty("id").ToString());
+    Console.WriteLine(result[0].GetProperty("orders")[0].GetProperty("userId").ToString());
+    Console.WriteLine(result[0].GetProperty("orders")[0].GetProperty("detail").ToString());
+    Console.WriteLine(result[0].GetProperty("etag").ToString());
 }
 ]]></code></example>
     </member>
@@ -451,6 +497,13 @@ BasicClient client = new BasicClient();
 
 await foreach (BinaryData item in client.GetWithCustomPageModelAsync(new RequestContext()))
 {
+    JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+    Console.WriteLine(result[0].GetProperty("id").ToString());
+    Console.WriteLine(result[0].GetProperty("name").ToString());
+    Console.WriteLine(result[0].GetProperty("orders")[0].GetProperty("id").ToString());
+    Console.WriteLine(result[0].GetProperty("orders")[0].GetProperty("userId").ToString());
+    Console.WriteLine(result[0].GetProperty("orders")[0].GetProperty("detail").ToString());
+    Console.WriteLine(result[0].GetProperty("etag").ToString());
 }
 ]]></code></example>
     </member>
@@ -462,6 +515,13 @@ BasicClient client = new BasicClient();
 
 foreach (BinaryData item in client.GetWithCustomPageModel(new RequestContext()))
 {
+    JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+    Console.WriteLine(result[0].GetProperty("id").ToString());
+    Console.WriteLine(result[0].GetProperty("name").ToString());
+    Console.WriteLine(result[0].GetProperty("orders")[0].GetProperty("id").ToString());
+    Console.WriteLine(result[0].GetProperty("orders")[0].GetProperty("userId").ToString());
+    Console.WriteLine(result[0].GetProperty("orders")[0].GetProperty("detail").ToString());
+    Console.WriteLine(result[0].GetProperty("etag").ToString());
 }
 ]]></code></example>
     </member>

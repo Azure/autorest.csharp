@@ -7,7 +7,6 @@
 
 using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Text.Json;
 using System.Threading.Tasks;
 using Azure;
@@ -15,7 +14,6 @@ using Azure.Core;
 using Azure.Identity;
 using NUnit.Framework;
 using _Specs_.Azure.Core.Basic;
-using _Specs_.Azure.Core.Basic.Models;
 
 namespace _Specs_.Azure.Core.Basic.Samples
 {
@@ -27,12 +25,37 @@ namespace _Specs_.Azure.Core.Basic.Samples
         {
             BasicClient client = new BasicClient();
 
-            var data = new
+            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
             {
-                name = "<name>",
-            };
+                ["name"] = "<name>",
+                ["orders"] = new object[]
+            {
+null
+            },
+            });
+            Response response = client.CreateOrUpdate(1234, content);
 
-            Response response = client.CreateOrUpdate(1234, RequestContent.Create(data));
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("id").ToString());
+            Console.WriteLine(result.GetProperty("name").ToString());
+            Console.WriteLine(result.GetProperty("etag").ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_CreateOrUpdate_Async()
+        {
+            BasicClient client = new BasicClient();
+
+            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            {
+                ["name"] = "<name>",
+                ["orders"] = new object[]
+            {
+null
+            },
+            });
+            Response response = await client.CreateOrUpdateAsync(1234, content);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("id").ToString());
@@ -46,18 +69,15 @@ namespace _Specs_.Azure.Core.Basic.Samples
         {
             BasicClient client = new BasicClient();
 
-            var data = new
+            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
             {
-                name = "<name>",
-                orders = new[]
+                ["name"] = "<name>",
+                ["orders"] = new object[]
             {
-new
-{
-userId = 1234,detail = "<detail>",}
-},
-            };
-
-            Response response = client.CreateOrUpdate(1234, RequestContent.Create(data));
+null
+            },
+            });
+            Response response = client.CreateOrUpdate(1234, content);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("id").ToString());
@@ -70,41 +90,19 @@ userId = 1234,detail = "<detail>",}
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_CreateOrUpdate_Async()
-        {
-            BasicClient client = new BasicClient();
-
-            var data = new
-            {
-                name = "<name>",
-            };
-
-            Response response = await client.CreateOrUpdateAsync(1234, RequestContent.Create(data));
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("id").ToString());
-            Console.WriteLine(result.GetProperty("name").ToString());
-            Console.WriteLine(result.GetProperty("etag").ToString());
-        }
-
-        [Test]
-        [Ignore("Only validating compilation of examples")]
         public async Task Example_CreateOrUpdate_AllParameters_Async()
         {
             BasicClient client = new BasicClient();
 
-            var data = new
+            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
             {
-                name = "<name>",
-                orders = new[]
+                ["name"] = "<name>",
+                ["orders"] = new object[]
             {
-new
-{
-userId = 1234,detail = "<detail>",}
-},
-            };
-
-            Response response = await client.CreateOrUpdateAsync(1234, RequestContent.Create(data));
+null
+            },
+            });
+            Response response = await client.CreateOrUpdateAsync(1234, content);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("id").ToString());
@@ -121,12 +119,37 @@ userId = 1234,detail = "<detail>",}
         {
             BasicClient client = new BasicClient();
 
-            var data = new
+            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
             {
-                name = "<name>",
-            };
+                ["name"] = "<name>",
+                ["orders"] = new object[]
+            {
+null
+            },
+            });
+            Response response = client.CreateOrReplace(1234, content);
 
-            Response response = client.CreateOrReplace(1234, RequestContent.Create(data));
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("id").ToString());
+            Console.WriteLine(result.GetProperty("name").ToString());
+            Console.WriteLine(result.GetProperty("etag").ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_CreateOrReplace_Async()
+        {
+            BasicClient client = new BasicClient();
+
+            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+            {
+                ["name"] = "<name>",
+                ["orders"] = new object[]
+            {
+null
+            },
+            });
+            Response response = await client.CreateOrReplaceAsync(1234, content);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("id").ToString());
@@ -140,18 +163,15 @@ userId = 1234,detail = "<detail>",}
         {
             BasicClient client = new BasicClient();
 
-            var data = new
+            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
             {
-                name = "<name>",
-                orders = new[]
+                ["name"] = "<name>",
+                ["orders"] = new object[]
             {
-new
-{
-userId = 1234,detail = "<detail>",}
-},
-            };
-
-            Response response = client.CreateOrReplace(1234, RequestContent.Create(data));
+null
+            },
+            });
+            Response response = client.CreateOrReplace(1234, content);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("id").ToString());
@@ -159,25 +179,6 @@ userId = 1234,detail = "<detail>",}
             Console.WriteLine(result.GetProperty("orders")[0].GetProperty("id").ToString());
             Console.WriteLine(result.GetProperty("orders")[0].GetProperty("userId").ToString());
             Console.WriteLine(result.GetProperty("orders")[0].GetProperty("detail").ToString());
-            Console.WriteLine(result.GetProperty("etag").ToString());
-        }
-
-        [Test]
-        [Ignore("Only validating compilation of examples")]
-        public async Task Example_CreateOrReplace_Async()
-        {
-            BasicClient client = new BasicClient();
-
-            var data = new
-            {
-                name = "<name>",
-            };
-
-            Response response = await client.CreateOrReplaceAsync(1234, RequestContent.Create(data));
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("id").ToString());
-            Console.WriteLine(result.GetProperty("name").ToString());
             Console.WriteLine(result.GetProperty("etag").ToString());
         }
 
@@ -187,18 +188,15 @@ userId = 1234,detail = "<detail>",}
         {
             BasicClient client = new BasicClient();
 
-            var data = new
+            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
             {
-                name = "<name>",
-                orders = new[]
+                ["name"] = "<name>",
+                ["orders"] = new object[]
             {
-new
-{
-userId = 1234,detail = "<detail>",}
-},
-            };
-
-            Response response = await client.CreateOrReplaceAsync(1234, RequestContent.Create(data));
+null
+            },
+            });
+            Response response = await client.CreateOrReplaceAsync(1234, content);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("id").ToString());
@@ -211,27 +209,25 @@ userId = 1234,detail = "<detail>",}
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_CreateOrReplace_Convenience_Async()
-        {
-            var client = new BasicClient();
-
-            var resource = new User("<name>")
-            {
-                Orders =
-{
-        new UserOrder(1234, "<detail>")
-    },
-            };
-            var result = await client.CreateOrReplaceAsync(1234, resource);
-        }
-
-        [Test]
-        [Ignore("Only validating compilation of examples")]
         public void Example_GetUser()
         {
             BasicClient client = new BasicClient();
 
             Response response = client.GetUser(1234, new RequestContext());
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("id").ToString());
+            Console.WriteLine(result.GetProperty("name").ToString());
+            Console.WriteLine(result.GetProperty("etag").ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_GetUser_Async()
+        {
+            BasicClient client = new BasicClient();
+
+            Response response = await client.GetUserAsync(1234, new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("id").ToString());
@@ -258,20 +254,6 @@ userId = 1234,detail = "<detail>",}
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetUser_Async()
-        {
-            BasicClient client = new BasicClient();
-
-            Response response = await client.GetUserAsync(1234, new RequestContext());
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("id").ToString());
-            Console.WriteLine(result.GetProperty("name").ToString());
-            Console.WriteLine(result.GetProperty("etag").ToString());
-        }
-
-        [Test]
-        [Ignore("Only validating compilation of examples")]
         public async Task Example_GetUser_AllParameters_Async()
         {
             BasicClient client = new BasicClient();
@@ -289,26 +271,7 @@ userId = 1234,detail = "<detail>",}
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetUser_Convenience_Async()
-        {
-            var client = new BasicClient();
-
-            var result = await client.GetUserAsync(1234);
-        }
-
-        [Test]
-        [Ignore("Only validating compilation of examples")]
         public void Example_Delete()
-        {
-            BasicClient client = new BasicClient();
-
-            Response response = client.Delete(1234);
-            Console.WriteLine(response.Status);
-        }
-
-        [Test]
-        [Ignore("Only validating compilation of examples")]
-        public void Example_Delete_AllParameters()
         {
             BasicClient client = new BasicClient();
 
@@ -323,6 +286,16 @@ userId = 1234,detail = "<detail>",}
             BasicClient client = new BasicClient();
 
             Response response = await client.DeleteAsync(1234);
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_Delete_AllParameters()
+        {
+            BasicClient client = new BasicClient();
+
+            Response response = client.Delete(1234);
             Console.WriteLine(response.Status);
         }
 
@@ -352,6 +325,20 @@ userId = 1234,detail = "<detail>",}
 
         [Test]
         [Ignore("Only validating compilation of examples")]
+        public async Task Example_Export_Async()
+        {
+            BasicClient client = new BasicClient();
+
+            Response response = await client.ExportAsync(1234, "<format>", new RequestContext());
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("id").ToString());
+            Console.WriteLine(result.GetProperty("name").ToString());
+            Console.WriteLine(result.GetProperty("etag").ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
         public void Example_Export_AllParameters()
         {
             BasicClient client = new BasicClient();
@@ -364,20 +351,6 @@ userId = 1234,detail = "<detail>",}
             Console.WriteLine(result.GetProperty("orders")[0].GetProperty("id").ToString());
             Console.WriteLine(result.GetProperty("orders")[0].GetProperty("userId").ToString());
             Console.WriteLine(result.GetProperty("orders")[0].GetProperty("detail").ToString());
-            Console.WriteLine(result.GetProperty("etag").ToString());
-        }
-
-        [Test]
-        [Ignore("Only validating compilation of examples")]
-        public async Task Example_Export_Async()
-        {
-            BasicClient client = new BasicClient();
-
-            Response response = await client.ExportAsync(1234, "<format>", new RequestContext());
-
-            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.GetProperty("id").ToString());
-            Console.WriteLine(result.GetProperty("name").ToString());
             Console.WriteLine(result.GetProperty("etag").ToString());
         }
 
@@ -400,32 +373,25 @@ userId = 1234,detail = "<detail>",}
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_Export_Convenience_Async()
-        {
-            var client = new BasicClient();
-
-            var result = await client.ExportAsync(1234, "<format>");
-        }
-
-        [Test]
-        [Ignore("Only validating compilation of examples")]
         public void Example_GetUsers()
         {
             BasicClient client = new BasicClient();
 
-            foreach (BinaryData item in client.GetUsers(1234, 1234, 1234, new string[] { "<orderby>" }, "<filter>", new string[] { "<select>" }, new string[] { "<expand>" }, new RequestContext()))
+            foreach (BinaryData item in client.GetUsers(1234, 1234, 1234, new string[]
             {
-            }
-        }
-
-        [Test]
-        [Ignore("Only validating compilation of examples")]
-        public void Example_GetUsers_AllParameters()
-        {
-            BasicClient client = new BasicClient();
-
-            foreach (BinaryData item in client.GetUsers(1234, 1234, 1234, new string[] { "<orderby>" }, "<filter>", new string[] { "<select>" }, new string[] { "<expand>" }, new RequestContext()))
+"<orderby>"
+            }, "<filter>", new string[]
             {
+"<select>"
+            }, new string[]
+            {
+"<expand>"
+            }, new RequestContext()))
+            {
+                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+                Console.WriteLine(result[0].GetProperty("id").ToString());
+                Console.WriteLine(result[0].GetProperty("name").ToString());
+                Console.WriteLine(result[0].GetProperty("etag").ToString());
             }
         }
 
@@ -435,8 +401,48 @@ userId = 1234,detail = "<detail>",}
         {
             BasicClient client = new BasicClient();
 
-            await foreach (BinaryData item in client.GetUsersAsync(1234, 1234, 1234, new string[] { "<orderby>" }, "<filter>", new string[] { "<select>" }, new string[] { "<expand>" }, new RequestContext()))
+            await foreach (BinaryData item in client.GetUsersAsync(1234, 1234, 1234, new string[]
             {
+"<orderby>"
+            }, "<filter>", new string[]
+            {
+"<select>"
+            }, new string[]
+            {
+"<expand>"
+            }, new RequestContext()))
+            {
+                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+                Console.WriteLine(result[0].GetProperty("id").ToString());
+                Console.WriteLine(result[0].GetProperty("name").ToString());
+                Console.WriteLine(result[0].GetProperty("etag").ToString());
+            }
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_GetUsers_AllParameters()
+        {
+            BasicClient client = new BasicClient();
+
+            foreach (BinaryData item in client.GetUsers(1234, 1234, 1234, new string[]
+            {
+"<orderby>"
+            }, "<filter>", new string[]
+            {
+"<select>"
+            }, new string[]
+            {
+"<expand>"
+            }, new RequestContext()))
+            {
+                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+                Console.WriteLine(result[0].GetProperty("id").ToString());
+                Console.WriteLine(result[0].GetProperty("name").ToString());
+                Console.WriteLine(result[0].GetProperty("orders")[0].GetProperty("id").ToString());
+                Console.WriteLine(result[0].GetProperty("orders")[0].GetProperty("userId").ToString());
+                Console.WriteLine(result[0].GetProperty("orders")[0].GetProperty("detail").ToString());
+                Console.WriteLine(result[0].GetProperty("etag").ToString());
             }
         }
 
@@ -446,19 +452,24 @@ userId = 1234,detail = "<detail>",}
         {
             BasicClient client = new BasicClient();
 
-            await foreach (BinaryData item in client.GetUsersAsync(1234, 1234, 1234, new string[] { "<orderby>" }, "<filter>", new string[] { "<select>" }, new string[] { "<expand>" }, new RequestContext()))
+            await foreach (BinaryData item in client.GetUsersAsync(1234, 1234, 1234, new string[]
             {
-            }
-        }
-
-        [Test]
-        [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetUsers_Convenience_Async()
-        {
-            var client = new BasicClient();
-
-            await foreach (var item in client.GetUsersAsync(1234, 1234, 1234, new string[] { "<orderby>" }, "<filter>", new string[] { "<select>" }, new string[] { "<expand>" }))
+"<orderby>"
+            }, "<filter>", new string[]
             {
+"<select>"
+            }, new string[]
+            {
+"<expand>"
+            }, new RequestContext()))
+            {
+                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+                Console.WriteLine(result[0].GetProperty("id").ToString());
+                Console.WriteLine(result[0].GetProperty("name").ToString());
+                Console.WriteLine(result[0].GetProperty("orders")[0].GetProperty("id").ToString());
+                Console.WriteLine(result[0].GetProperty("orders")[0].GetProperty("userId").ToString());
+                Console.WriteLine(result[0].GetProperty("orders")[0].GetProperty("detail").ToString());
+                Console.WriteLine(result[0].GetProperty("etag").ToString());
             }
         }
 
@@ -470,17 +481,10 @@ userId = 1234,detail = "<detail>",}
 
             foreach (BinaryData item in client.GetWithPage(new RequestContext()))
             {
-            }
-        }
-
-        [Test]
-        [Ignore("Only validating compilation of examples")]
-        public void Example_GetWithPage_AllParameters()
-        {
-            BasicClient client = new BasicClient();
-
-            foreach (BinaryData item in client.GetWithPage(new RequestContext()))
-            {
+                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+                Console.WriteLine(result[0].GetProperty("id").ToString());
+                Console.WriteLine(result[0].GetProperty("name").ToString());
+                Console.WriteLine(result[0].GetProperty("etag").ToString());
             }
         }
 
@@ -492,6 +496,28 @@ userId = 1234,detail = "<detail>",}
 
             await foreach (BinaryData item in client.GetWithPageAsync(new RequestContext()))
             {
+                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+                Console.WriteLine(result[0].GetProperty("id").ToString());
+                Console.WriteLine(result[0].GetProperty("name").ToString());
+                Console.WriteLine(result[0].GetProperty("etag").ToString());
+            }
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_GetWithPage_AllParameters()
+        {
+            BasicClient client = new BasicClient();
+
+            foreach (BinaryData item in client.GetWithPage(new RequestContext()))
+            {
+                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+                Console.WriteLine(result[0].GetProperty("id").ToString());
+                Console.WriteLine(result[0].GetProperty("name").ToString());
+                Console.WriteLine(result[0].GetProperty("orders")[0].GetProperty("id").ToString());
+                Console.WriteLine(result[0].GetProperty("orders")[0].GetProperty("userId").ToString());
+                Console.WriteLine(result[0].GetProperty("orders")[0].GetProperty("detail").ToString());
+                Console.WriteLine(result[0].GetProperty("etag").ToString());
             }
         }
 
@@ -503,17 +529,13 @@ userId = 1234,detail = "<detail>",}
 
             await foreach (BinaryData item in client.GetWithPageAsync(new RequestContext()))
             {
-            }
-        }
-
-        [Test]
-        [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetWithPage_Convenience_Async()
-        {
-            var client = new BasicClient();
-
-            await foreach (var item in client.GetWithPageAsync())
-            {
+                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+                Console.WriteLine(result[0].GetProperty("id").ToString());
+                Console.WriteLine(result[0].GetProperty("name").ToString());
+                Console.WriteLine(result[0].GetProperty("orders")[0].GetProperty("id").ToString());
+                Console.WriteLine(result[0].GetProperty("orders")[0].GetProperty("userId").ToString());
+                Console.WriteLine(result[0].GetProperty("orders")[0].GetProperty("detail").ToString());
+                Console.WriteLine(result[0].GetProperty("etag").ToString());
             }
         }
 
@@ -525,17 +547,10 @@ userId = 1234,detail = "<detail>",}
 
             foreach (BinaryData item in client.GetWithCustomPageModel(new RequestContext()))
             {
-            }
-        }
-
-        [Test]
-        [Ignore("Only validating compilation of examples")]
-        public void Example_GetWithCustomPageModel_AllParameters()
-        {
-            BasicClient client = new BasicClient();
-
-            foreach (BinaryData item in client.GetWithCustomPageModel(new RequestContext()))
-            {
+                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+                Console.WriteLine(result[0].GetProperty("id").ToString());
+                Console.WriteLine(result[0].GetProperty("name").ToString());
+                Console.WriteLine(result[0].GetProperty("etag").ToString());
             }
         }
 
@@ -547,6 +562,28 @@ userId = 1234,detail = "<detail>",}
 
             await foreach (BinaryData item in client.GetWithCustomPageModelAsync(new RequestContext()))
             {
+                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+                Console.WriteLine(result[0].GetProperty("id").ToString());
+                Console.WriteLine(result[0].GetProperty("name").ToString());
+                Console.WriteLine(result[0].GetProperty("etag").ToString());
+            }
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_GetWithCustomPageModel_AllParameters()
+        {
+            BasicClient client = new BasicClient();
+
+            foreach (BinaryData item in client.GetWithCustomPageModel(new RequestContext()))
+            {
+                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+                Console.WriteLine(result[0].GetProperty("id").ToString());
+                Console.WriteLine(result[0].GetProperty("name").ToString());
+                Console.WriteLine(result[0].GetProperty("orders")[0].GetProperty("id").ToString());
+                Console.WriteLine(result[0].GetProperty("orders")[0].GetProperty("userId").ToString());
+                Console.WriteLine(result[0].GetProperty("orders")[0].GetProperty("detail").ToString());
+                Console.WriteLine(result[0].GetProperty("etag").ToString());
             }
         }
 
@@ -558,17 +595,13 @@ userId = 1234,detail = "<detail>",}
 
             await foreach (BinaryData item in client.GetWithCustomPageModelAsync(new RequestContext()))
             {
-            }
-        }
-
-        [Test]
-        [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetWithCustomPageModel_Convenience_Async()
-        {
-            var client = new BasicClient();
-
-            await foreach (var item in client.GetWithCustomPageModelAsync())
-            {
+                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+                Console.WriteLine(result[0].GetProperty("id").ToString());
+                Console.WriteLine(result[0].GetProperty("name").ToString());
+                Console.WriteLine(result[0].GetProperty("orders")[0].GetProperty("id").ToString());
+                Console.WriteLine(result[0].GetProperty("orders")[0].GetProperty("userId").ToString());
+                Console.WriteLine(result[0].GetProperty("orders")[0].GetProperty("detail").ToString());
+                Console.WriteLine(result[0].GetProperty("etag").ToString());
             }
         }
     }
