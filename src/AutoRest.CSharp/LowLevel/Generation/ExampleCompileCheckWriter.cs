@@ -69,17 +69,24 @@ namespace AutoRest.CSharp.LowLevel.Generation
                 {
                     foreach (var sample in _operationSamples)
                     {
-                        var method = sample.Method;
-                        if (method.ProtocolMethodSignature.Modifiers.HasFlag(MethodSignatureModifiers.Public) &&
-                            !method.ProtocolMethodSignature.Attributes.Any(a => a.Type.Equals(typeof(ObsoleteAttribute))) &&
-                            !_client.IsMethodSuppressed(method.ProtocolMethodSignature) &&
-                            (_client.IsSubClient ? true : _client.GetEffectiveCtor() is not null))
-                        {
-                            bool writeShortVersion = ShouldGenerateShortVersion(method);
+                        WriteTestMethod(sample, false);
+                        WriteTestMethod(sample, true);
+                        //var method = sample.Method;
+                        //if (method.ProtocolMethodSignature.Modifiers.HasFlag(MethodSignatureModifiers.Public) &&
+                        //    !method.ProtocolMethodSignature.Attributes.Any(a => a.Type.Equals(typeof(ObsoleteAttribute))) &&
+                        //    !_client.IsMethodSuppressed(method.ProtocolMethodSignature) &&
+                        //    (_client.IsSubClient ? true : _client.GetEffectiveCtor() is not null))
+                        //{
+                        //    bool writeShortVersion = ShouldGenerateShortVersion(method);
 
-                            WriteTestMethod(sample, writeShortVersion, false);
-                            WriteTestMethod(sample, writeShortVersion, true);
-                        }
+                        //    if (writeShortVersion)
+                        //        WriteTestMethod(sample, false, false);
+                        //    WriteTestMethod(sample, true, false);
+
+                        //    if (writeShortVersion)
+                        //        WriteTestMethod(sample, false, true);
+                        //    WriteTestMethod(sample, true, true);
+                        //}
                     }
 #if false
                     foreach (var method in _client.ClientMethods)
@@ -114,13 +121,13 @@ namespace AutoRest.CSharp.LowLevel.Generation
         }
 
         // TODO -- maybe change this DpgOperationSample to DpgProtocolMethodSample
-        private void WriteTestMethod(DpgOperationSample sample, bool useAllParameters, bool isAsync)
+        private void WriteTestMethod(DpgOperationSample sample, bool isAsync)
         {
-            using (_writer.WriteMethodDeclaration(sample.GetExampleMethodSignature(true, isAsync)))
+            using (_writer.WriteMethodDeclaration(sample.GetExampleMethodSignature(isAsync)))
             {
                 var clientVar = WriteGetClient(sample);
 
-                WriteSampleOperation(sample, sample.Method.ProtocolMethodSignature.WithAsync(isAsync), clientVar, useAllParameters, isAsync);
+                WriteSampleOperation(sample, sample.MethodSignature.WithAsync(isAsync), clientVar, isAsync);
             }
 
             _writer.Line();
@@ -147,29 +154,29 @@ namespace AutoRest.CSharp.LowLevel.Generation
             return clientVar;
         }
 
-        private void WriteSampleOperation(DpgOperationSample sample, MethodSignature methodSignature, CodeWriterDeclaration clientVar, bool useAllParameters, bool isAsync)
+        private void WriteSampleOperation(DpgOperationSample sample, MethodSignature methodSignature, CodeWriterDeclaration clientVar, bool isAsync)
         {
-            switch (sample.Method.LongRunning, sample.Method.PagingInfo)
+            switch (sample.IsLongRunning, sample.IsPageable)
             {
-                case (not null, not null):
-                    WriteSampleLongRunningPageableOperationWithResponse(sample, methodSignature, clientVar, useAllParameters, isAsync);
+                case (true, true):
+                    WriteSampleLongRunningPageableOperationWithResponse(sample, methodSignature, clientVar, isAsync);
                     break;
-                case (not null, null):
-                    WriteSampleLongRunningOperationWithResponse(sample, methodSignature, clientVar, useAllParameters, isAsync);
+                case (true, false):
+                    WriteSampleLongRunningOperationWithResponse(sample, methodSignature, clientVar, isAsync);
                     break;
-                case (null, not null):
-                    WriteSamplePageableOperationWithResponse(sample, methodSignature, clientVar, useAllParameters, isAsync);
+                case (false, true):
+                    WriteSamplePageableOperationWithResponse(sample, methodSignature, clientVar, isAsync);
                     break;
-                case (null, null):
-                    WriteSampleNormalOperationWithResponse(sample, methodSignature, clientVar, useAllParameters, isAsync);
+                case (false, false):
+                    WriteSampleNormalOperationWithResponse(sample, methodSignature, clientVar, isAsync);
                     break;
             };
         }
 
-        private void WriteSampleLongRunningPageableOperationWithResponse(DpgOperationSample sample, MethodSignature methodSignature, CodeWriterDeclaration clientVar, bool useAllParameters, bool isAsync)
+        private void WriteSampleLongRunningPageableOperationWithResponse(DpgOperationSample sample, MethodSignature methodSignature, CodeWriterDeclaration clientVar, bool isAsync)
         {
             // write the lro invocation
-            var operation = WriteSampleLongRunningOperation(sample, methodSignature, clientVar, useAllParameters, isAsync);
+            var operation = WriteSampleLongRunningOperation(sample, methodSignature, clientVar, isAsync);
 
             // write the paging invocation
             // TODO -- this might be incorrect, to be verified
@@ -183,7 +190,7 @@ namespace AutoRest.CSharp.LowLevel.Generation
             }
         }
 
-        private CodeWriterDeclaration WriteSampleLongRunningOperation(DpgOperationSample sample, MethodSignature methodSignature, CodeWriterDeclaration clientVar, bool useAllParameters, bool isAsync)
+        private CodeWriterDeclaration WriteSampleLongRunningOperation(DpgOperationSample sample, MethodSignature methodSignature, CodeWriterDeclaration clientVar, bool isAsync)
         {
             var parameters = WriteOperationInvocationParameters(sample, methodSignature.Parameters);
 
@@ -199,20 +206,19 @@ namespace AutoRest.CSharp.LowLevel.Generation
             return operation;
         }
 
-        private void WriteSampleLongRunningOperationWithResponse(DpgOperationSample sample, MethodSignature methodSignature, CodeWriterDeclaration clientVar, bool useAllParameters, bool isAsync)
+        private void WriteSampleLongRunningOperationWithResponse(DpgOperationSample sample, MethodSignature methodSignature, CodeWriterDeclaration clientVar, bool isAsync)
         {
-            var operation = WriteSampleLongRunningOperation(sample, methodSignature, clientVar, useAllParameters, isAsync);
+            var operation = WriteSampleLongRunningOperation(sample, methodSignature, clientVar, isAsync);
 
-            var responseType = sample.Method.ResponseBodyType;
-            if (responseType != null)
+            if (sample.HasResponseBody)
             {
                 var responseData = new CodeWriterDeclaration("responseData");
                 _writer.Line($"{typeof(BinaryData)} {responseData:D} = {operation}.Value;");
-                WriteNormalOperationResponse(responseType, $"{responseData}", $"{responseData}.ToStream()", useAllParameters);
+                WriteNormalOperationResponse(sample, $"{responseData}", $"{responseData}.ToStream()");
             }
         }
 
-        private void WriteSamplePageableOperationWithResponse(DpgOperationSample sample, MethodSignature methodSignature, CodeWriterDeclaration clientVar, bool useAllParameters, bool isAsync)
+        private void WriteSamplePageableOperationWithResponse(DpgOperationSample sample, MethodSignature methodSignature, CodeWriterDeclaration clientVar, bool isAsync)
         {
             var parameters = WriteOperationInvocationParameters(sample, methodSignature.Parameters);
 
@@ -225,23 +231,11 @@ namespace AutoRest.CSharp.LowLevel.Generation
 
             using (_writer.Scope())
             {
-                // find the item type
-                // TODO -- we need to move this into the sample model as well
-                var responseType = sample.Method.ResponseBodyType as InputModelType;
-                var pagingItemName = sample.Method.PagingInfo!.ItemName;
-                if (responseType != null)
-                {
-                    var itemsArrayProperty = responseType.Properties.FirstOrDefault(p => p.SerializedName == pagingItemName && p.Type is InputListType);
-                    var listType = itemsArrayProperty?.Type as InputListType;
-                    if (listType != null)
-                    {
-                        WriteNormalOperationResponse(listType.ElementType, $"{item}", $"{item}.ToStream()", useAllParameters);
-                    }
-                }
+                WriteNormalOperationResponse(sample, $"{item}", $"{item}.ToStream()");
             }
         }
 
-        private void WriteSampleNormalOperationWithResponse(DpgOperationSample sample, MethodSignature methodSignature, CodeWriterDeclaration clientVar, bool useAllParameters, bool isAsync)
+        private void WriteSampleNormalOperationWithResponse(DpgOperationSample sample, MethodSignature methodSignature, CodeWriterDeclaration clientVar, bool isAsync)
         {
             var parameters = WriteOperationInvocationParameters(sample, methodSignature.Parameters);
 
@@ -254,11 +248,12 @@ namespace AutoRest.CSharp.LowLevel.Generation
             WriteOperationInvocation(parameters, sample, methodSignature);
             _writer.LineRaw(";");
 
-            var responseType = sample.Method.ResponseBodyType;
-            if (responseType != null)
-                WriteNormalOperationResponse(responseType, $"{response}", $"{response}.ContentStream", useAllParameters);
+            if (sample.HasResponseBody)
+                WriteNormalOperationResponse(sample, $"{response}", $"{response}.ContentStream");
             else
+            {
                 _writer.ConsoleWriteLine($"{response}.Status");
+            }
         }
 
         private Dictionary<Parameter, CodeWriterDeclaration> WriteOperationInvocationParameters(DpgOperationSample sample, IEnumerable<Parameter> parameters)
@@ -309,17 +304,13 @@ namespace AutoRest.CSharp.LowLevel.Generation
             _writer.AppendRaw(")");
         }
 
-        private void WriteNormalOperationResponse(InputType responseType, FormattableString resultVar, FormattableString jsonVar, bool useAllParameters)
+        private void WriteNormalOperationResponse(DpgOperationSample sample, FormattableString resultVar, FormattableString jsonVar)
         {
-            // TODO -- add a flag to control this, only protocol samples need this part
-            switch (responseType)
+            if (sample.IsResponseStream)
+                WriteStreamResponse(resultVar);
+            else
             {
-                case InputPrimitiveType { Kind: InputTypeKind.Stream }:
-                    WriteStreamResponse(resultVar);
-                    break;
-                default:
-                    WriteOtherResponse(responseType, resultVar, jsonVar, useAllParameters);
-                    break;
+                WriteOtherResponse(sample, resultVar, jsonVar);
             }
         }
 
@@ -334,17 +325,15 @@ namespace AutoRest.CSharp.LowLevel.Generation
             }
         }
 
-        private void WriteOtherResponse(InputType responseType, FormattableString resultVar, FormattableString jsonVar, bool useAllParameters)
+        private void WriteOtherResponse(DpgOperationSample sample, FormattableString resultVar, FormattableString jsonVar)
         {
-            // build the api invocation chain
-            // TODO -- move this into the sample
-            var apiInvocationChainList = new List<IReadOnlyList<FormattableString>>();
-            ComposeResponseParsingCode(useAllParameters, responseType, apiInvocationChainList, new Stack<FormattableString>(new FormattableString[] { $"result" }), new HashSet<InputType>());
+            var result = new CodeWriterDeclaration("result");
+            var apiInvocationChainList = sample.ComposeResponseParsingCode($"{result}");
 
             _writer.Line();
             if (apiInvocationChainList.Any())
             {
-                _writer.Line($"{typeof(JsonElement)} result = {typeof(JsonDocument)}.{nameof(JsonDocument.Parse)}({jsonVar}).RootElement;");
+                _writer.Line($"{typeof(JsonElement)} {result:D} = {typeof(JsonDocument)}.{nameof(JsonDocument.Parse)}({jsonVar}).RootElement;");
                 foreach (var apiInvocationChain in apiInvocationChainList)
                 {
                     _writer.ConsoleWriteLine($"{apiInvocationChain.ToList().Join(".")}.ToString()");
@@ -354,75 +343,6 @@ namespace AutoRest.CSharp.LowLevel.Generation
             {
                 _writer.ConsoleWriteLine($"{resultVar}.ToString()");
             }
-        }
-
-        private void ComposeResponseParsingCode(bool useAllProperties, InputType type, List<IReadOnlyList<FormattableString>> apiInvocationChainList, Stack<FormattableString> currentApiInvocationChain, HashSet<InputType> visitedTypes)
-        {
-            switch (type)
-            {
-                case InputListType listType:
-                    if (visitedTypes.Contains(listType.ElementType))
-                        return;
-                    // {parentOp}[0]
-                    var parentOp = currentApiInvocationChain.Pop();
-                    currentApiInvocationChain.Push($"{parentOp}[0]");
-                    ComposeResponseParsingCode(useAllProperties, listType.ElementType, apiInvocationChainList, currentApiInvocationChain, visitedTypes);
-                    return;
-                case InputDictionaryType dictionaryType:
-                    if (visitedTypes.Contains(dictionaryType.ValueType))
-                        return;
-                    // .GetProrperty("<key>")
-                    currentApiInvocationChain.Push($"GetProperty({"<key>":L})");
-                    ComposeResponseParsingCode(useAllProperties, dictionaryType.ValueType, apiInvocationChainList, currentApiInvocationChain, visitedTypes);
-                    currentApiInvocationChain.Pop();
-                    return;
-                case InputModelType modelType:
-                    ComposeResponseParsingCodeForModel(useAllProperties, modelType, apiInvocationChainList, currentApiInvocationChain, visitedTypes);
-                    return;
-            }
-
-            // primitive types, return
-            AddApiInvocationChainResult(apiInvocationChainList, currentApiInvocationChain);
-        }
-
-        private void ComposeResponseParsingCodeForModel(bool useAllProperties, InputModelType model, List<IReadOnlyList<FormattableString>> apiInvocationChainList, Stack<FormattableString> currentApiInvocationChain, HashSet<InputType> visitedTypes)
-        {
-            foreach (var modelOrBase in model.GetSelfAndBaseModels())
-            {
-                if (!modelOrBase.Properties.Any())
-                    continue;
-
-                var propertiesToExplore = useAllProperties ?
-                    modelOrBase.Properties :
-                    modelOrBase.Properties.Where(p => p.IsRequired);
-
-                if (!propertiesToExplore.Any()) // if you have a required property, but its child properties are all optional
-                {
-                    // return the object
-                    AddApiInvocationChainResult(apiInvocationChainList, currentApiInvocationChain);
-                    return;
-                }
-
-                foreach (var property in propertiesToExplore)
-                {
-                    if (!visitedTypes.Contains(property.Type))
-                    {
-                        // .GetProperty("{propertyName}")
-                        visitedTypes.Add(property.Type);
-                        currentApiInvocationChain.Push($"GetProperty({property.SerializedName:L})");
-                        ComposeResponseParsingCode(useAllProperties, property.Type, apiInvocationChainList, currentApiInvocationChain, visitedTypes);
-                        currentApiInvocationChain.Pop();
-                        visitedTypes.Remove(property.Type);
-                    }
-                }
-            }
-        }
-
-        private void AddApiInvocationChainResult(List<IReadOnlyList<FormattableString>> apiInvocationChainList, Stack<FormattableString> currentApiInvocationChain)
-        {
-            var finalChain = currentApiInvocationChain.ToList();
-            finalChain.Reverse();
-            apiInvocationChainList.Add(finalChain);
         }
 
         private void WriteConvenienceTestCompilation(ConvenienceMethod method, string methodName, bool isAsync, bool useAllParameters)
@@ -439,36 +359,36 @@ namespace AutoRest.CSharp.LowLevel.Generation
 
         }
 
-        private bool ShouldGenerateShortVersion(LowLevelClientMethod method)
-        {
-            if (method.ConvenienceMethod is not null)
-            {
-                if (method.ConvenienceMethod.Signature.Parameters.Count == method.ProtocolMethodSignature.Parameters.Count - 1 &&
-                    !method.ConvenienceMethod.Signature.Parameters.Last().Type.Equals(typeof(CancellationToken)))
-                {
-                    bool allEqual = true;
-                    for (int i = 0; i < method.ConvenienceMethod.Signature.Parameters.Count; i++)
-                    {
-                        if (!method.ConvenienceMethod.Signature.Parameters[i].Type.Equals(method.ProtocolMethodSignature.Parameters[i].Type))
-                        {
-                            allEqual = false;
-                            break;
-                        }
-                    }
-                    if (allEqual)
-                    {
-                        return false;
-                    }
-                }
-            }
-            else
-            {
-                if (_client.HasMatchingCustomMethod(method))
-                    return false;
-            }
+        //private bool ShouldGenerateShortVersion(LowLevelClientMethod method)
+        //{
+        //    if (method.ConvenienceMethod is not null)
+        //    {
+        //        if (method.ConvenienceMethod.Signature.Parameters.Count == method.ProtocolMethodSignature.Parameters.Count - 1 &&
+        //            !method.ConvenienceMethod.Signature.Parameters.Last().Type.Equals(typeof(CancellationToken)))
+        //        {
+        //            bool allEqual = true;
+        //            for (int i = 0; i < method.ConvenienceMethod.Signature.Parameters.Count; i++)
+        //            {
+        //                if (!method.ConvenienceMethod.Signature.Parameters[i].Type.Equals(method.ProtocolMethodSignature.Parameters[i].Type))
+        //                {
+        //                    allEqual = false;
+        //                    break;
+        //                }
+        //            }
+        //            if (allEqual)
+        //            {
+        //                return false;
+        //            }
+        //        }
+        //    }
+        //    else
+        //    {
+        //        if (_client.HasMatchingCustomMethod(method))
+        //            return false;
+        //    }
 
-            return true;
-        }
+        //    return true;
+        //}
 
         private void WriteTestCompilation(LowLevelClientMethod method, bool isAsync, bool useAllParameters)
         {

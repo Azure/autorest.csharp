@@ -116,7 +116,35 @@ Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
     <member name="PatchActionAsync(RequestContent,RequestContext)">
       <example>
 This sample shows how to call PatchActionAsync with required request content, and how to parse the result.
-<code>Example_PatchAction_Async</code>
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+
+RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+{
+    ["name"] = "<name>",
+    ["requiredUnion"] = new Dictionary<string, object>(),
+    ["requiredLiteralString"] = "accept",
+    ["requiredLiteralInt"] = 123,
+    ["requiredLiteralFloat"] = 1.23F,
+    ["requiredLiteralBool"] = false,
+    ["optionalLiteralString"] = "reject",
+    ["optionalLiteralInt"] = 456,
+    ["optionalLiteralFloat"] = 4.56F,
+    ["optionalLiteralBool"] = true,
+    ["requiredBadDescription"] = "<requiredBadDescription>",
+});
+Response response = await client.PatchActionAsync(content);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("name").ToString());
+Console.WriteLine(result.GetProperty("requiredUnion").ToString());
+Console.WriteLine(result.GetProperty("requiredLiteralString").ToString());
+Console.WriteLine(result.GetProperty("requiredLiteralInt").ToString());
+Console.WriteLine(result.GetProperty("requiredLiteralFloat").ToString());
+Console.WriteLine(result.GetProperty("requiredLiteralBool").ToString());
+Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
+]]></code>
 This sample shows how to call PatchActionAsync with all request content, and how to parse the result.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -155,7 +183,35 @@ Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
     <member name="PatchAction(RequestContent,RequestContext)">
       <example>
 This sample shows how to call PatchAction with required request content, and how to parse the result.
-<code>Example_PatchAction</code>
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+
+RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+{
+    ["name"] = "<name>",
+    ["requiredUnion"] = new Dictionary<string, object>(),
+    ["requiredLiteralString"] = "accept",
+    ["requiredLiteralInt"] = 123,
+    ["requiredLiteralFloat"] = 1.23F,
+    ["requiredLiteralBool"] = false,
+    ["optionalLiteralString"] = "reject",
+    ["optionalLiteralInt"] = 456,
+    ["optionalLiteralFloat"] = 4.56F,
+    ["optionalLiteralBool"] = true,
+    ["requiredBadDescription"] = "<requiredBadDescription>",
+});
+Response response = client.PatchAction(content);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("name").ToString());
+Console.WriteLine(result.GetProperty("requiredUnion").ToString());
+Console.WriteLine(result.GetProperty("requiredLiteralString").ToString());
+Console.WriteLine(result.GetProperty("requiredLiteralInt").ToString());
+Console.WriteLine(result.GetProperty("requiredLiteralFloat").ToString());
+Console.WriteLine(result.GetProperty("requiredLiteralBool").ToString());
+Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
+]]></code>
 This sample shows how to call PatchAction with all request content, and how to parse the result.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -228,7 +284,35 @@ var result = client.AnonymousBody(thing);
     <member name="AnonymousBodyAsync(RequestContent,RequestContext)">
       <example>
 This sample shows how to call AnonymousBodyAsync with required request content, and how to parse the result.
-<code>Example_AnonymousBody_Async</code>
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+
+RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+{
+    ["name"] = "<name>",
+    ["requiredUnion"] = new Dictionary<string, object>(),
+    ["requiredLiteralString"] = "accept",
+    ["requiredLiteralInt"] = 123,
+    ["requiredLiteralFloat"] = 1.23F,
+    ["requiredLiteralBool"] = false,
+    ["optionalLiteralString"] = "reject",
+    ["optionalLiteralInt"] = 456,
+    ["optionalLiteralFloat"] = 4.56F,
+    ["optionalLiteralBool"] = true,
+    ["requiredBadDescription"] = "<requiredBadDescription>",
+});
+Response response = await client.AnonymousBodyAsync(content);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("name").ToString());
+Console.WriteLine(result.GetProperty("requiredUnion").ToString());
+Console.WriteLine(result.GetProperty("requiredLiteralString").ToString());
+Console.WriteLine(result.GetProperty("requiredLiteralInt").ToString());
+Console.WriteLine(result.GetProperty("requiredLiteralFloat").ToString());
+Console.WriteLine(result.GetProperty("requiredLiteralBool").ToString());
+Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
+]]></code>
 This sample shows how to call AnonymousBodyAsync with all request content, and how to parse the result.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -267,7 +351,35 @@ Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
     <member name="AnonymousBody(RequestContent,RequestContext)">
       <example>
 This sample shows how to call AnonymousBody with required request content, and how to parse the result.
-<code>Example_AnonymousBody</code>
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+
+RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+{
+    ["name"] = "<name>",
+    ["requiredUnion"] = new Dictionary<string, object>(),
+    ["requiredLiteralString"] = "accept",
+    ["requiredLiteralInt"] = 123,
+    ["requiredLiteralFloat"] = 1.23F,
+    ["requiredLiteralBool"] = false,
+    ["optionalLiteralString"] = "reject",
+    ["optionalLiteralInt"] = 456,
+    ["optionalLiteralFloat"] = 4.56F,
+    ["optionalLiteralBool"] = true,
+    ["requiredBadDescription"] = "<requiredBadDescription>",
+});
+Response response = client.AnonymousBody(content);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("name").ToString());
+Console.WriteLine(result.GetProperty("requiredUnion").ToString());
+Console.WriteLine(result.GetProperty("requiredLiteralString").ToString());
+Console.WriteLine(result.GetProperty("requiredLiteralInt").ToString());
+Console.WriteLine(result.GetProperty("requiredLiteralFloat").ToString());
+Console.WriteLine(result.GetProperty("requiredLiteralBool").ToString());
+Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
+]]></code>
 This sample shows how to call AnonymousBody with all request content, and how to parse the result.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -362,7 +474,13 @@ Console.WriteLine(result.GetProperty("name").ToString());
     <member name="AddTimeHeaderAsync(DateTimeOffset?,RequestContext)">
       <example>
 This sample shows how to call AddTimeHeaderAsync.
-<code>Example_AddTimeHeader_Async</code>
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+
+Response response = await client.AddTimeHeaderAsync();
+Console.WriteLine(response.Status);
+]]></code>
 This sample shows how to call AddTimeHeaderAsync with all parameters.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -375,7 +493,13 @@ Console.WriteLine(response.Status);
     <member name="AddTimeHeader(DateTimeOffset?,RequestContext)">
       <example>
 This sample shows how to call AddTimeHeader.
-<code>Example_AddTimeHeader</code>
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+
+Response response = client.AddTimeHeader();
+Console.WriteLine(response.Status);
+]]></code>
 This sample shows how to call AddTimeHeader with all parameters.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -596,7 +720,86 @@ var result = client.HelloAgain("<p2>", "<p1>", action);
     <member name="HelloAgainAsync(string,string,RequestContent,RequestContext)">
       <example>
 This sample shows how to call HelloAgainAsync with required parameters and request content, and how to parse the result.
-<code>Example_HelloAgain_Async</code>
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+
+RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+{
+    ["requiredString"] = "<requiredString>",
+    ["requiredInt"] = 1234,
+    ["requiredCollection"] = new object[]
+{
+"1"
+},
+    ["requiredDictionary"] = new Dictionary<string, object>()
+    {
+        ["key"] = "1",
+    },
+    ["requiredModel"] = new Dictionary<string, object>()
+    {
+        ["name"] = "<name>",
+        ["requiredUnion"] = new Dictionary<string, object>(),
+        ["requiredLiteralString"] = "accept",
+        ["requiredLiteralInt"] = 123,
+        ["requiredLiteralFloat"] = 1.23F,
+        ["requiredLiteralBool"] = false,
+        ["optionalLiteralString"] = "reject",
+        ["optionalLiteralInt"] = 456,
+        ["optionalLiteralFloat"] = 4.56F,
+        ["optionalLiteralBool"] = true,
+        ["requiredBadDescription"] = "<requiredBadDescription>",
+    },
+    ["intExtensibleEnum"] = 1,
+    ["intExtensibleEnumCollection"] = new object[]
+{
+1
+},
+    ["floatExtensibleEnum"] = 1,
+    ["floatExtensibleEnumCollection"] = new object[]
+{
+1
+},
+    ["floatFixedEnum"] = 1.1F,
+    ["floatFixedEnumCollection"] = new object[]
+{
+1.1F
+},
+    ["intFixedEnum"] = 1,
+    ["intFixedEnumCollection"] = new object[]
+{
+1
+},
+    ["stringFixedEnum"] = "1",
+    ["requiredUnknown"] = new Dictionary<string, object>(),
+    ["optionalUnknown"] = new Dictionary<string, object>(),
+    ["requiredRecordUnknown"] = new Dictionary<string, object>()
+    {
+        ["key"] = new Dictionary<string, object>(),
+    },
+    ["optionalRecordUnknown"] = new Dictionary<string, object>()
+    {
+        ["key"] = new Dictionary<string, object>(),
+    },
+});
+Response response = await client.HelloAgainAsync("<p2>", "<p1>", content);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("requiredString").ToString());
+Console.WriteLine(result.GetProperty("requiredInt").ToString());
+Console.WriteLine(result.GetProperty("requiredCollection")[0].ToString());
+Console.WriteLine(result.GetProperty("requiredDictionary").GetProperty("<key>").ToString());
+Console.WriteLine(result.GetProperty("requiredModel").GetProperty("name").ToString());
+Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredUnion").ToString());
+Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredLiteralString").ToString());
+Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredLiteralInt").ToString());
+Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredLiteralFloat").ToString());
+Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredLiteralBool").ToString());
+Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredBadDescription").ToString());
+Console.WriteLine(result.GetProperty("requiredUnknown").ToString());
+Console.WriteLine(result.GetProperty("requiredRecordUnknown").GetProperty("<key>").ToString());
+Console.WriteLine(result.GetProperty("readOnlyRequiredRecordUnknown").GetProperty("<key>").ToString());
+]]></code>
 This sample shows how to call HelloAgainAsync with all parameters and request content, and how to parse the result.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -698,7 +901,86 @@ Console.WriteLine(result.GetProperty("readOnlyOptionalRecordUnknown").GetPropert
     <member name="HelloAgain(string,string,RequestContent,RequestContext)">
       <example>
 This sample shows how to call HelloAgain with required parameters and request content, and how to parse the result.
-<code>Example_HelloAgain</code>
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+
+RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+{
+    ["requiredString"] = "<requiredString>",
+    ["requiredInt"] = 1234,
+    ["requiredCollection"] = new object[]
+{
+"1"
+},
+    ["requiredDictionary"] = new Dictionary<string, object>()
+    {
+        ["key"] = "1",
+    },
+    ["requiredModel"] = new Dictionary<string, object>()
+    {
+        ["name"] = "<name>",
+        ["requiredUnion"] = new Dictionary<string, object>(),
+        ["requiredLiteralString"] = "accept",
+        ["requiredLiteralInt"] = 123,
+        ["requiredLiteralFloat"] = 1.23F,
+        ["requiredLiteralBool"] = false,
+        ["optionalLiteralString"] = "reject",
+        ["optionalLiteralInt"] = 456,
+        ["optionalLiteralFloat"] = 4.56F,
+        ["optionalLiteralBool"] = true,
+        ["requiredBadDescription"] = "<requiredBadDescription>",
+    },
+    ["intExtensibleEnum"] = 1,
+    ["intExtensibleEnumCollection"] = new object[]
+{
+1
+},
+    ["floatExtensibleEnum"] = 1,
+    ["floatExtensibleEnumCollection"] = new object[]
+{
+1
+},
+    ["floatFixedEnum"] = 1.1F,
+    ["floatFixedEnumCollection"] = new object[]
+{
+1.1F
+},
+    ["intFixedEnum"] = 1,
+    ["intFixedEnumCollection"] = new object[]
+{
+1
+},
+    ["stringFixedEnum"] = "1",
+    ["requiredUnknown"] = new Dictionary<string, object>(),
+    ["optionalUnknown"] = new Dictionary<string, object>(),
+    ["requiredRecordUnknown"] = new Dictionary<string, object>()
+    {
+        ["key"] = new Dictionary<string, object>(),
+    },
+    ["optionalRecordUnknown"] = new Dictionary<string, object>()
+    {
+        ["key"] = new Dictionary<string, object>(),
+    },
+});
+Response response = client.HelloAgain("<p2>", "<p1>", content);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("requiredString").ToString());
+Console.WriteLine(result.GetProperty("requiredInt").ToString());
+Console.WriteLine(result.GetProperty("requiredCollection")[0].ToString());
+Console.WriteLine(result.GetProperty("requiredDictionary").GetProperty("<key>").ToString());
+Console.WriteLine(result.GetProperty("requiredModel").GetProperty("name").ToString());
+Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredUnion").ToString());
+Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredLiteralString").ToString());
+Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredLiteralInt").ToString());
+Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredLiteralFloat").ToString());
+Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredLiteralBool").ToString());
+Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredBadDescription").ToString());
+Console.WriteLine(result.GetProperty("requiredUnknown").ToString());
+Console.WriteLine(result.GetProperty("requiredRecordUnknown").GetProperty("<key>").ToString());
+Console.WriteLine(result.GetProperty("readOnlyRequiredRecordUnknown").GetProperty("<key>").ToString());
+]]></code>
 This sample shows how to call HelloAgain with all parameters and request content, and how to parse the result.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -800,7 +1082,86 @@ Console.WriteLine(result.GetProperty("readOnlyOptionalRecordUnknown").GetPropert
     <member name="NoContentTypeAsync(string,string,RequestContent,RequestContext)">
       <example>
 This sample shows how to call NoContentTypeAsync with required parameters and request content, and how to parse the result.
-<code>Example_NoContentType_Async</code>
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+
+RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+{
+    ["requiredString"] = "<requiredString>",
+    ["requiredInt"] = 1234,
+    ["requiredCollection"] = new object[]
+{
+"1"
+},
+    ["requiredDictionary"] = new Dictionary<string, object>()
+    {
+        ["key"] = "1",
+    },
+    ["requiredModel"] = new Dictionary<string, object>()
+    {
+        ["name"] = "<name>",
+        ["requiredUnion"] = new Dictionary<string, object>(),
+        ["requiredLiteralString"] = "accept",
+        ["requiredLiteralInt"] = 123,
+        ["requiredLiteralFloat"] = 1.23F,
+        ["requiredLiteralBool"] = false,
+        ["optionalLiteralString"] = "reject",
+        ["optionalLiteralInt"] = 456,
+        ["optionalLiteralFloat"] = 4.56F,
+        ["optionalLiteralBool"] = true,
+        ["requiredBadDescription"] = "<requiredBadDescription>",
+    },
+    ["intExtensibleEnum"] = 1,
+    ["intExtensibleEnumCollection"] = new object[]
+{
+1
+},
+    ["floatExtensibleEnum"] = 1,
+    ["floatExtensibleEnumCollection"] = new object[]
+{
+1
+},
+    ["floatFixedEnum"] = 1.1F,
+    ["floatFixedEnumCollection"] = new object[]
+{
+1.1F
+},
+    ["intFixedEnum"] = 1,
+    ["intFixedEnumCollection"] = new object[]
+{
+1
+},
+    ["stringFixedEnum"] = "1",
+    ["requiredUnknown"] = new Dictionary<string, object>(),
+    ["optionalUnknown"] = new Dictionary<string, object>(),
+    ["requiredRecordUnknown"] = new Dictionary<string, object>()
+    {
+        ["key"] = new Dictionary<string, object>(),
+    },
+    ["optionalRecordUnknown"] = new Dictionary<string, object>()
+    {
+        ["key"] = new Dictionary<string, object>(),
+    },
+});
+Response response = await client.NoContentTypeAsync("<p2>", "<p1>", content);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("requiredString").ToString());
+Console.WriteLine(result.GetProperty("requiredInt").ToString());
+Console.WriteLine(result.GetProperty("requiredCollection")[0].ToString());
+Console.WriteLine(result.GetProperty("requiredDictionary").GetProperty("<key>").ToString());
+Console.WriteLine(result.GetProperty("requiredModel").GetProperty("name").ToString());
+Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredUnion").ToString());
+Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredLiteralString").ToString());
+Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredLiteralInt").ToString());
+Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredLiteralFloat").ToString());
+Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredLiteralBool").ToString());
+Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredBadDescription").ToString());
+Console.WriteLine(result.GetProperty("requiredUnknown").ToString());
+Console.WriteLine(result.GetProperty("requiredRecordUnknown").GetProperty("<key>").ToString());
+Console.WriteLine(result.GetProperty("readOnlyRequiredRecordUnknown").GetProperty("<key>").ToString());
+]]></code>
 This sample shows how to call NoContentTypeAsync with all parameters and request content, and how to parse the result.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -902,7 +1263,86 @@ Console.WriteLine(result.GetProperty("readOnlyOptionalRecordUnknown").GetPropert
     <member name="NoContentType(string,string,RequestContent,RequestContext)">
       <example>
 This sample shows how to call NoContentType with required parameters and request content, and how to parse the result.
-<code>Example_NoContentType</code>
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+
+RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+{
+    ["requiredString"] = "<requiredString>",
+    ["requiredInt"] = 1234,
+    ["requiredCollection"] = new object[]
+{
+"1"
+},
+    ["requiredDictionary"] = new Dictionary<string, object>()
+    {
+        ["key"] = "1",
+    },
+    ["requiredModel"] = new Dictionary<string, object>()
+    {
+        ["name"] = "<name>",
+        ["requiredUnion"] = new Dictionary<string, object>(),
+        ["requiredLiteralString"] = "accept",
+        ["requiredLiteralInt"] = 123,
+        ["requiredLiteralFloat"] = 1.23F,
+        ["requiredLiteralBool"] = false,
+        ["optionalLiteralString"] = "reject",
+        ["optionalLiteralInt"] = 456,
+        ["optionalLiteralFloat"] = 4.56F,
+        ["optionalLiteralBool"] = true,
+        ["requiredBadDescription"] = "<requiredBadDescription>",
+    },
+    ["intExtensibleEnum"] = 1,
+    ["intExtensibleEnumCollection"] = new object[]
+{
+1
+},
+    ["floatExtensibleEnum"] = 1,
+    ["floatExtensibleEnumCollection"] = new object[]
+{
+1
+},
+    ["floatFixedEnum"] = 1.1F,
+    ["floatFixedEnumCollection"] = new object[]
+{
+1.1F
+},
+    ["intFixedEnum"] = 1,
+    ["intFixedEnumCollection"] = new object[]
+{
+1
+},
+    ["stringFixedEnum"] = "1",
+    ["requiredUnknown"] = new Dictionary<string, object>(),
+    ["optionalUnknown"] = new Dictionary<string, object>(),
+    ["requiredRecordUnknown"] = new Dictionary<string, object>()
+    {
+        ["key"] = new Dictionary<string, object>(),
+    },
+    ["optionalRecordUnknown"] = new Dictionary<string, object>()
+    {
+        ["key"] = new Dictionary<string, object>(),
+    },
+});
+Response response = client.NoContentType("<p2>", "<p1>", content);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("requiredString").ToString());
+Console.WriteLine(result.GetProperty("requiredInt").ToString());
+Console.WriteLine(result.GetProperty("requiredCollection")[0].ToString());
+Console.WriteLine(result.GetProperty("requiredDictionary").GetProperty("<key>").ToString());
+Console.WriteLine(result.GetProperty("requiredModel").GetProperty("name").ToString());
+Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredUnion").ToString());
+Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredLiteralString").ToString());
+Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredLiteralInt").ToString());
+Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredLiteralFloat").ToString());
+Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredLiteralBool").ToString());
+Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredBadDescription").ToString());
+Console.WriteLine(result.GetProperty("requiredUnknown").ToString());
+Console.WriteLine(result.GetProperty("requiredRecordUnknown").GetProperty("<key>").ToString());
+Console.WriteLine(result.GetProperty("readOnlyRequiredRecordUnknown").GetProperty("<key>").ToString());
+]]></code>
 This sample shows how to call NoContentType with all parameters and request content, and how to parse the result.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -1104,7 +1544,35 @@ var result = client.CreateLiteral(body);
     <member name="CreateLiteralAsync(RequestContent,RequestContext)">
       <example>
 This sample shows how to call CreateLiteralAsync with required request content, and how to parse the result.
-<code>Example_CreateLiteral_Async</code>
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+
+RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+{
+    ["name"] = "<name>",
+    ["requiredUnion"] = new Dictionary<string, object>(),
+    ["requiredLiteralString"] = "accept",
+    ["requiredLiteralInt"] = 123,
+    ["requiredLiteralFloat"] = 1.23F,
+    ["requiredLiteralBool"] = false,
+    ["optionalLiteralString"] = "reject",
+    ["optionalLiteralInt"] = 456,
+    ["optionalLiteralFloat"] = 4.56F,
+    ["optionalLiteralBool"] = true,
+    ["requiredBadDescription"] = "<requiredBadDescription>",
+});
+Response response = await client.CreateLiteralAsync(content);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("name").ToString());
+Console.WriteLine(result.GetProperty("requiredUnion").ToString());
+Console.WriteLine(result.GetProperty("requiredLiteralString").ToString());
+Console.WriteLine(result.GetProperty("requiredLiteralInt").ToString());
+Console.WriteLine(result.GetProperty("requiredLiteralFloat").ToString());
+Console.WriteLine(result.GetProperty("requiredLiteralBool").ToString());
+Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
+]]></code>
 This sample shows how to call CreateLiteralAsync with all request content, and how to parse the result.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -1143,7 +1611,35 @@ Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
     <member name="CreateLiteral(RequestContent,RequestContext)">
       <example>
 This sample shows how to call CreateLiteral with required request content, and how to parse the result.
-<code>Example_CreateLiteral</code>
+<code><![CDATA[
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+
+RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+{
+    ["name"] = "<name>",
+    ["requiredUnion"] = new Dictionary<string, object>(),
+    ["requiredLiteralString"] = "accept",
+    ["requiredLiteralInt"] = 123,
+    ["requiredLiteralFloat"] = 1.23F,
+    ["requiredLiteralBool"] = false,
+    ["optionalLiteralString"] = "reject",
+    ["optionalLiteralInt"] = 456,
+    ["optionalLiteralFloat"] = 4.56F,
+    ["optionalLiteralBool"] = true,
+    ["requiredBadDescription"] = "<requiredBadDescription>",
+});
+Response response = client.CreateLiteral(content);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("name").ToString());
+Console.WriteLine(result.GetProperty("requiredUnion").ToString());
+Console.WriteLine(result.GetProperty("requiredLiteralString").ToString());
+Console.WriteLine(result.GetProperty("requiredLiteralInt").ToString());
+Console.WriteLine(result.GetProperty("requiredLiteralFloat").ToString());
+Console.WriteLine(result.GetProperty("requiredLiteralBool").ToString());
+Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
+]]></code>
 This sample shows how to call CreateLiteral with all request content, and how to parse the result.
 <code><![CDATA[
 Uri endpoint = new Uri("<https://my-service.azure.com>");

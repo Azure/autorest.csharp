@@ -3,14 +3,17 @@
 
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Reflection;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Common.Input.Examples;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Input;
+using AutoRest.CSharp.MgmtTest.Models;
 using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Utilities;
@@ -28,12 +31,37 @@ namespace AutoRest.CSharp.Output.Samples.Models
             _inputClientParameterExamples = inputClientParameterExamples;
             _inputOperationExample = inputOperationExample;
             ClientInvocationChain = GetClientInvocationChain(client);
+            _isConvenienceSample = false;
+            _useAllParameters = true;
+            _methodSignature = method.ProtocolMethodSignature;
         }
 
+        public DpgOperationSample(LowLevelClient client, LowLevelClientMethod method, IEnumerable<InputParameterExample> inputClientParameterExamples, InputOperationExample inputOperationExample, bool isConvenienceSample, bool useAllParameters)
+        {
+            Client = client;
+            Method = method;
+            _inputClientParameterExamples = inputClientParameterExamples;
+            _inputOperationExample = inputOperationExample;
+            ClientInvocationChain = GetClientInvocationChain(client);
+            _isConvenienceSample = isConvenienceSample;
+            _useAllParameters = useAllParameters;
+            _methodSignature = isConvenienceSample ? method.ConvenienceMethod!.Signature : method.ProtocolMethodSignature;
+        }
+
+        private readonly bool _isConvenienceSample;
+        private readonly bool _useAllParameters;
         private readonly IEnumerable<InputParameterExample> _inputClientParameterExamples;
         private readonly InputOperationExample _inputOperationExample;
+        private readonly MethodSignature _methodSignature;
 
         public LowLevelClient Client { get; }
+        public LowLevelClientMethod Method { get; }
+
+        public MethodSignature MethodSignature => _methodSignature;
+
+        public bool IsLongRunning => _isConvenienceSample ? Method.ConvenienceMethod!.IsLongRunning : Method.LongRunning != null;
+
+        public bool IsPageable => _isConvenienceSample ? Method.ConvenienceMethod!.IsPageable : Method.PagingInfo != null;
 
         public IReadOnlyList<MethodSignatureBase> ClientInvocationChain { get; }
 
@@ -60,17 +88,17 @@ namespace AutoRest.CSharp.Output.Samples.Models
             return callChain.ToList();
         }
 
-        private string GetMethodName(bool useAllParameters, bool isAsync)
+        private string GetMethodName(bool isAsync)
         {
-            var builder = new StringBuilder("Example_").Append(Method.ProtocolMethodSignature.Name);
-            if (useAllParameters)
+            var builder = new StringBuilder("Example_").Append(_methodSignature.Name);
+            if (_useAllParameters)
             {
                 builder.Append("_AllParameters");
             }
-            //if (isConvenienceMethod)
-            //{
-            //    builder.Append("_Convenience");
-            //}
+            if (_isConvenienceSample)
+            {
+                builder.Append("_Convenience");
+            }
             if (isAsync)
             {
                 builder.Append("_Async");
@@ -78,8 +106,8 @@ namespace AutoRest.CSharp.Output.Samples.Models
             return builder.ToString();
         }
 
-        public MethodSignature GetExampleMethodSignature(bool useAllParameters, bool isAsync) => new MethodSignature(
-            GetMethodName(useAllParameters, isAsync),
+        public MethodSignature GetExampleMethodSignature(bool isAsync) => new MethodSignature(
+            GetMethodName(isAsync),
             null,
             null,
             isAsync ? MethodSignatureModifiers.Public | MethodSignatureModifiers.Async : MethodSignatureModifiers.Public,
@@ -88,15 +116,12 @@ namespace AutoRest.CSharp.Output.Samples.Models
             Array.Empty<Parameter>(),
             Attributes: new CSharpAttribute[] { new CSharpAttribute(typeof(TestAttribute)), new CSharpAttribute(typeof(IgnoreAttribute), "Only validating compilation of examples") });
 
-        public LowLevelClientMethod Method { get; }
-
         private Dictionary<string, ExampleParameterValue>? _parameterValueMapping;
         public Dictionary<string, ExampleParameterValue> ParameterValueMapping => _parameterValueMapping ??= EnsureParameterValueMapping();
 
         private Dictionary<string, ExampleParameterValue> EnsureParameterValueMapping()
         {
             var result = new Dictionary<string, ExampleParameterValue>();
-            // TODO -- now we only consider protocol method. Convenience method will be added into this later
             var parameters = GetAllParameters();
 
             foreach (var parameter in parameters)
@@ -124,6 +149,12 @@ namespace AutoRest.CSharp.Output.Samples.Models
             return result;
         }
 
+        /// <summary>
+        /// Returns all the parameters that should be used in this sample
+        /// Only required parameters on this operation will be included if useAllParameters is false
+        /// Includes all parameters if useAllParameters is true
+        /// </summary>
+        /// <returns></returns>
         private IEnumerable<Parameter> GetAllParameters()
         {
             // here we should gather all the parameters from my client, and my parent client, and the parent client of my parent client, etc
@@ -133,7 +164,10 @@ namespace AutoRest.CSharp.Output.Samples.Models
                     yield return parameter;
             }
             // then we return all the parameters on this operation
-            foreach (var parameter in Method.ProtocolMethodSignature.Parameters)
+            var parameters = _useAllParameters ?
+                _methodSignature.Parameters :
+                _methodSignature.Parameters.Where(p => p.DefaultValue == null);
+            foreach (var parameter in parameters)
                 yield return parameter;
         }
 
@@ -216,7 +250,6 @@ namespace AutoRest.CSharp.Output.Samples.Models
         public bool IsInlineParameter(Parameter parameter)
         {
             // TODO -- maybe we should store it here?
-            // temporarily only RequestContent is not inline parameter
             if (IsSameParameter(parameter, KnownParameters.RequestContent) || IsSameParameter(parameter, KnownParameters.RequestContentNullable))
                 return false;
 
@@ -239,5 +272,145 @@ namespace AutoRest.CSharp.Output.Samples.Models
 
         private static bool IsSameParameter(Parameter parameter, Parameter knownParameter)
             => parameter.Name == knownParameter.Name && parameter.Type.EqualsIgnoreNullable(knownParameter.Type);
+
+        public bool HasResponseBody => Method.ResponseBodyType != null;
+        public bool IsResponseStream => Method.ResponseBodyType is InputPrimitiveType { Kind: InputTypeKind.Stream };
+
+        /// <summary>
+        /// This method returns the Type we would like to deal with in the sample code.
+        /// For normal operation and long running operation, it is just the InputType of the response
+        /// For pageable operation, it is the InputType of the item
+        /// </summary>
+        /// <returns></returns>
+        private InputType? GetEffectiveResponseType()
+        {
+            var responseType = Method.ResponseBodyType;
+            if (Method.PagingInfo == null)
+                return responseType;
+
+            var pagingItemName = Method.PagingInfo.ItemName;
+            var listResultType = responseType as InputModelType;
+            var itemsArrayProperty = listResultType?.Properties.FirstOrDefault(p => p.SerializedName == pagingItemName && p.Type is InputListType);
+            return itemsArrayProperty?.Type as InputListType;
+        }
+
+        public IEnumerable<IEnumerable<FormattableString>> ComposeResponseParsingCode(FormattableString rootElementVar)
+        {
+            var responseType = GetEffectiveResponseType();
+            Debug.Assert(responseType != null);
+            var apiInvocationChainList = new List<IReadOnlyList<FormattableString>>();
+            ComposeResponseParsingCode(_useAllParameters, responseType, apiInvocationChainList, new Stack<FormattableString>(new FormattableString[] { rootElementVar }), new HashSet<InputType>());
+
+            return apiInvocationChainList;
+        }
+
+        private static void ComposeResponseParsingCode(bool useAllProperties, InputType type, List<IReadOnlyList<FormattableString>> apiInvocationChainList, Stack<FormattableString> currentApiInvocationChain, HashSet<InputType> visitedTypes)
+        {
+            switch (type)
+            {
+                case InputListType listType:
+                    if (visitedTypes.Contains(listType.ElementType))
+                        return;
+                    // {parentOp}[0]
+                    var parentOp = currentApiInvocationChain.Pop();
+                    currentApiInvocationChain.Push($"{parentOp}[0]");
+                    ComposeResponseParsingCode(useAllProperties, listType.ElementType, apiInvocationChainList, currentApiInvocationChain, visitedTypes);
+                    return;
+                case InputDictionaryType dictionaryType:
+                    if (visitedTypes.Contains(dictionaryType.ValueType))
+                        return;
+                    // .GetProrperty("<key>")
+                    currentApiInvocationChain.Push($"GetProperty({"<key>":L})");
+                    ComposeResponseParsingCode(useAllProperties, dictionaryType.ValueType, apiInvocationChainList, currentApiInvocationChain, visitedTypes);
+                    currentApiInvocationChain.Pop();
+                    return;
+                case InputModelType modelType:
+                    ComposeResponseParsingCodeForModel(useAllProperties, modelType, apiInvocationChainList, currentApiInvocationChain, visitedTypes);
+                    return;
+            }
+
+            // primitive types, return
+            AddApiInvocationChainResult(apiInvocationChainList, currentApiInvocationChain);
+        }
+
+        private static void ComposeResponseParsingCodeForModel(bool useAllProperties, InputModelType model, List<IReadOnlyList<FormattableString>> apiInvocationChainList, Stack<FormattableString> currentApiInvocationChain, HashSet<InputType> visitedTypes)
+        {
+            foreach (var modelOrBase in model.GetSelfAndBaseModels())
+            {
+                if (!modelOrBase.Properties.Any())
+                    continue;
+
+                var propertiesToExplore = useAllProperties ?
+                    modelOrBase.Properties :
+                    modelOrBase.Properties.Where(p => p.IsRequired);
+
+                if (!propertiesToExplore.Any()) // if you have a required property, but its child properties are all optional
+                {
+                    // return the object
+                    AddApiInvocationChainResult(apiInvocationChainList, currentApiInvocationChain);
+                    return;
+                }
+
+                foreach (var property in propertiesToExplore)
+                {
+                    if (!visitedTypes.Contains(property.Type))
+                    {
+                        // .GetProperty("{propertyName}")
+                        visitedTypes.Add(property.Type);
+                        currentApiInvocationChain.Push($"GetProperty({property.SerializedName:L})");
+                        ComposeResponseParsingCode(useAllProperties, property.Type, apiInvocationChainList, currentApiInvocationChain, visitedTypes);
+                        currentApiInvocationChain.Pop();
+                        visitedTypes.Remove(property.Type);
+                    }
+                }
+            }
+        }
+
+        private static void AddApiInvocationChainResult(List<IReadOnlyList<FormattableString>> apiInvocationChainList, Stack<FormattableString> currentApiInvocationChain)
+        {
+            var finalChain = currentApiInvocationChain.ToList();
+            finalChain.Reverse();
+            apiInvocationChainList.Add(finalChain);
+        }
+
+        // TODO -- this needs a refactor when we consolidate things around customization code https://github.com/Azure/autorest.csharp/issues/3370
+        public static bool ShouldGenerateShortVersion(LowLevelClient client, LowLevelClientMethod method)
+        {
+            if (method.ConvenienceMethod is not null)
+            {
+                if (method.ConvenienceMethod.Signature.Parameters.Count == method.ProtocolMethodSignature.Parameters.Count - 1 &&
+                    !method.ConvenienceMethod.Signature.Parameters.Last().Type.Equals(typeof(CancellationToken)))
+                {
+                    bool allEqual = true;
+                    for (int i = 0; i < method.ConvenienceMethod.Signature.Parameters.Count; i++)
+                    {
+                        if (!method.ConvenienceMethod.Signature.Parameters[i].Type.Equals(method.ProtocolMethodSignature.Parameters[i].Type))
+                        {
+                            allEqual = false;
+                            break;
+                        }
+                    }
+                    if (allEqual)
+                    {
+                        return false;
+                    }
+                }
+            }
+            else
+            {
+                if (client.HasMatchingCustomMethod(method))
+                    return false;
+            }
+
+            return true;
+        }
+
+        public static bool ShouldGenerateSample(LowLevelClient client, LowLevelClientMethod method)
+        {
+            return method.ProtocolMethodSignature.Modifiers.HasFlag(MethodSignatureModifiers.Public) &&
+                !method.ProtocolMethodSignature.Attributes.Any(a => a.Type.Equals(typeof(ObsoleteAttribute))) &&
+                !client.IsMethodSuppressed(method.ProtocolMethodSignature) &&
+                (client.IsSubClient ? true : client.GetEffectiveCtor() is not null);
+        }
     }
 }

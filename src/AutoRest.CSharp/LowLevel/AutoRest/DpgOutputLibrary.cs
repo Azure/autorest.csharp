@@ -71,23 +71,54 @@ namespace AutoRest.CSharp.Output.Models.Types
             return builder.ToString();
         }
 
-        private readonly Dictionary<LowLevelClientMethod, DpgOperationSample> _inputOperationSampleCache = new();
+        // One method might corresponds to multiple samples
+        private readonly Dictionary<LowLevelClientMethod, IEnumerable<DpgOperationSample>> _inputOperationSampleCache = new();
         public IEnumerable<DpgOperationSample> GetSamples(LowLevelClient client)
         {
             foreach (var method in client.ClientMethods)
             {
-                if (_inputOperationSampleCache.TryGetValue(method, out var sample))
-                {
-                    // return the sample if we get it in the cache
-                    yield return sample;
-                }
-                else
+                // add to the cache if does not exist
+                if (!_inputOperationSampleCache.ContainsKey(method))
                 {
                     // build the sample and add it into the cache then return it
-                    // TODO -- should we return nothing if inputOperation is not in the dictionary?
                     var inputOperation = method.RequestMethod.Operation;
-                    sample = new DpgOperationSample(client, method, InputClientParameterExamples, InputOperationExamples[GetInputOperationKey(inputOperation)]);
-                    _inputOperationSampleCache.Add(method, sample);
+                    var samples = new List<DpgOperationSample>();
+
+                    // TODO -- maybe move all these things as a static method in DpgOperationSample to simplify the code here
+                    var shouldGenerateSample = DpgOperationSample.ShouldGenerateSample(client, method);
+                    if (shouldGenerateSample)
+                    {
+                        var shouldGenerateShortVersion = DpgOperationSample.ShouldGenerateShortVersion(client, method);
+                        var inputOperationExample = InputOperationExamples[GetInputOperationKey(inputOperation)];
+
+                        // protocol samples
+                        if (shouldGenerateShortVersion)
+                        {
+                            // add a "not use all parameters" sample is short version is needed
+                            samples.Add(new DpgOperationSample(
+                                client,
+                                method,
+                                InputClientParameterExamples,
+                                inputOperationExample,
+                                false,
+                                false));
+                        }
+                        samples.Add(new DpgOperationSample(
+                            client,
+                            method,
+                            InputClientParameterExamples,
+                            inputOperationExample,
+                            false,
+                            true));
+
+                        // TODO -- convenience samples
+                    }
+
+                    _inputOperationSampleCache.Add(method, samples);
+                }
+
+                foreach (var sample in _inputOperationSampleCache[method])
+                {
                     yield return sample;
                 }
             }
