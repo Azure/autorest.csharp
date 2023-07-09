@@ -3,12 +3,12 @@
   <members>
     <member name="GetValidAsync(RequestContext)">
 <example>
-This sample shows how to call GetValidAsync and parse the result.
+This sample shows how to call GetValidAsync with required parameters and parse the result.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
 var client = new FlattencomplexClient(credential);
 
-Response response = await client.GetValidAsync();
+Response response = await client.GetValidAsync(new RequestContext());
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("kind").ToString());
@@ -19,12 +19,12 @@ Console.WriteLine(result.GetProperty("helper").GetProperty("propBH1").ToString()
     </member>
     <member name="GetValid(RequestContext)">
 <example>
-This sample shows how to call GetValid and parse the result.
+This sample shows how to call GetValid with required parameters and parse the result.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
 var client = new FlattencomplexClient(credential);
 
-Response response = client.GetValid();
+Response response = client.GetValid(new RequestContext());
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("kind").ToString());

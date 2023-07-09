@@ -7,7 +7,7 @@
 
 using System;
 
-namespace ApiVersionInCadl.Models
+namespace ApiVersionInTsp.Models
 {
     /// <summary> Detection results for the given resultId. </summary>
     public partial class DetectionResult

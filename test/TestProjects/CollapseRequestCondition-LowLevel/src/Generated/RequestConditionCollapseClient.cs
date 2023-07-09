@@ -73,7 +73,7 @@ namespace CollapseRequestCondition_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/RequestConditionCollapseClient.xml" path="doc/members/member[@name='CollapsePutAsync(RequestContent,RequestConditions,RequestContext)']/*" />
-        public virtual async Task<Response> CollapsePutAsync(RequestContent content, RequestConditions requestConditions = null, RequestContext context = null)
+        public virtual async Task<Response> CollapsePutAsync(RequestContent content, RequestConditions requestConditions, RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("RequestConditionCollapseClient.CollapsePut");
             scope.Start();
@@ -105,7 +105,7 @@ namespace CollapseRequestCondition_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/RequestConditionCollapseClient.xml" path="doc/members/member[@name='CollapsePut(RequestContent,RequestConditions,RequestContext)']/*" />
-        public virtual Response CollapsePut(RequestContent content, RequestConditions requestConditions = null, RequestContext context = null)
+        public virtual Response CollapsePut(RequestContent content, RequestConditions requestConditions, RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("RequestConditionCollapseClient.CollapsePut");
             scope.Start();

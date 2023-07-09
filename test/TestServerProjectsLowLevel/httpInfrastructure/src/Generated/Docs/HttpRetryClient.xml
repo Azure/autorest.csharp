@@ -107,12 +107,12 @@ Console.WriteLine(response.Status);
     </member>
     <member name="Options502Async(RequestContext)">
 <example>
-This sample shows how to call Options502Async and parse the result.
+This sample shows how to call Options502Async with required parameters and parse the result.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
 var client = new HttpRetryClient(credential);
 
-Response response = await client.Options502Async();
+Response response = await client.Options502Async(new RequestContext());
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.ToString());
@@ -121,12 +121,12 @@ Console.WriteLine(result.ToString());
     </member>
     <member name="Options502(RequestContext)">
 <example>
-This sample shows how to call Options502 and parse the result.
+This sample shows how to call Options502 with required parameters and parse the result.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
 var client = new HttpRetryClient(credential);
 
-Response response = client.Options502();
+Response response = client.Options502(new RequestContext());
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.ToString());

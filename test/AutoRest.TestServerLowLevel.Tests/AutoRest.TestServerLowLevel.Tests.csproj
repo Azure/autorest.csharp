@@ -36,7 +36,7 @@
     <Compile Include="../TestServerProjectsLowLevel/**/*.cs" LinkBase="TestServerProjectsLowLevel" />
     <Compile Include="../TestProjectsLowLevel/**/*.cs" LinkBase="TestProjectsLowLevel" />
     <None Include="../TestServerProjectsLowLevel/**/*.yaml" LinkBase="TestServerProjectsLowLevel" />
-    <Compile Include="../TestProjects/**/*.cs" Exclude="../TestProjects/ConvenienceInitial-TypeSpec/**/*.cs" LinkBase="TestProjects" />
+    <Compile Include="../TestProjects/**/*.cs" Exclude="../TestProjects/ConvenienceInitial-TypeSpec/**/*.cs;../TestProjects/sdk/core/**" LinkBase="TestProjects" />
 
     <Compile Include="../AutoRest.TestServer.Tests/Infrastructure/*.cs" />
     <Compile Include="../AutoRest.TestServer.Tests/TestConstants.cs" />
