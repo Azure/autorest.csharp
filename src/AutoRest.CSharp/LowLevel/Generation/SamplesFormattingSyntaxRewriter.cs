@@ -11,9 +11,7 @@ namespace AutoRest.CSharp.Generation.Writers
 {
     public class SamplesFormattingSyntaxRewriter : CSharpSyntaxRewriter
     {
-        private static readonly SyntaxAnnotation HasLeadingLineBreak = new(nameof(HasLeadingLineBreak));
         private static readonly CSharpSyntaxRewriter Instance = new SamplesFormattingSyntaxRewriter();
-        private static readonly CSharpSyntaxRewriter AnnotatingVisitor = new AnnotatingSyntaxVisitor();
 
         public static string FormatFile(string code)
         {
@@ -25,31 +23,8 @@ namespace AutoRest.CSharp.Generation.Writers
         public static string FormatCodeBlock(string code)
         {
             var syntaxTree = CSharpSyntaxTree.ParseText(code, options: CSharpParseOptions.Default.WithKind(SourceCodeKind.Script));
-            var root = Instance.Visit(AnnotatingVisitor.Visit(syntaxTree.GetRoot()));
+            var root = Instance.Visit(syntaxTree.GetRoot());
             return root.GetText().ToString();
-        }
-
-        private class AnnotatingSyntaxVisitor : CSharpSyntaxRewriter
-        {
-            public override SyntaxNode? Visit(SyntaxNode? node)
-            {
-                if (node is not null && node.GetLeadingTrivia().Any(SyntaxKind.EndOfLineTrivia))
-                {
-                    node = node.WithAdditionalAnnotations(HasLeadingLineBreak);
-                }
-
-                return base.Visit(node);
-            }
-        }
-
-        public override SyntaxNode? Visit(SyntaxNode? node)
-        {
-            node = base.Visit(node);
-            if (node is not null && node.GetAnnotations(nameof(HasLeadingLineBreak)).Any() && !node.GetLeadingTrivia().Any(SyntaxKind.EndOfLineTrivia))
-            {
-                return node.WithLeadingTrivia(SyntaxFactory.CarriageReturnLineFeed);
-            }
-            return node;
         }
 
         public override SyntaxNode? VisitAnonymousObjectCreationExpression(AnonymousObjectCreationExpressionSyntax node)
@@ -57,11 +32,18 @@ namespace AutoRest.CSharp.Generation.Writers
             var parentLeadingTrivia = GetParentLeadingTrivia(node);
 
             node = node
-                .WithInitializers(SyntaxFactory.SeparatedList<AnonymousObjectMemberDeclaratorSyntax>(FixInitializerTrivia(node.Initializers.GetWithSeparators(), parentLeadingTrivia)))
+                .WithNewKeyword(node.NewKeyword.WithTrailingTrivia(SyntaxTriviaList.Empty))
                 .WithOpenBraceToken(FixOpenBraceTrivia(node.OpenBraceToken, node.Initializers.Any()))
-                .WithCloseBraceToken(FixCloseBraceTrivia(node.CloseBraceToken, parentLeadingTrivia));
+                .WithInitializers(SyntaxFactory.SeparatedList<AnonymousObjectMemberDeclaratorSyntax>(FixInitializerLeadingTrivia(node.Initializers.GetWithSeparators(), parentLeadingTrivia)));
 
-            return base.VisitAnonymousObjectCreationExpression(node);
+            if (base.VisitAnonymousObjectCreationExpression(node) is not AnonymousObjectCreationExpressionSyntax newNode)
+            {
+                return null;
+            }
+
+            return newNode
+                .WithInitializers(SyntaxFactory.SeparatedList<AnonymousObjectMemberDeclaratorSyntax>(FixInitializerTrailingTrivia(newNode.Initializers.GetWithSeparators(), parentLeadingTrivia)))
+                .WithCloseBraceToken(FixCloseBraceTrivia(newNode.CloseBraceToken, newNode.Initializers.Any() ? parentLeadingTrivia : SyntaxTriviaList.Empty));
         }
 
         public override SyntaxNode? VisitImplicitArrayCreationExpression(ImplicitArrayCreationExpressionSyntax node)
@@ -73,11 +55,18 @@ namespace AutoRest.CSharp.Generation.Writers
                 .WithNewKeyword(node.NewKeyword.WithTrailingTrivia(SyntaxTriviaList.Empty))
                 .WithCloseBracketToken(node.CloseBracketToken.WithTrailingTrivia(SyntaxTriviaList.Empty))
                 .WithInitializer(initializer
-                    .WithExpressions(SyntaxFactory.SeparatedList<ExpressionSyntax>(FixInitializerTrivia(initializer.Expressions.GetWithSeparators(), parentLeadingTrivia)))
                     .WithOpenBraceToken(FixOpenBraceTrivia(initializer.OpenBraceToken, initializer.Expressions.Any()))
-                    .WithCloseBraceToken(FixCloseBraceTrivia(initializer.CloseBraceToken, parentLeadingTrivia)));
+                    .WithExpressions(SyntaxFactory.SeparatedList<ExpressionSyntax>(FixInitializerLeadingTrivia(initializer.Expressions.GetWithSeparators(), parentLeadingTrivia))));
 
-            return base.VisitImplicitArrayCreationExpression(node);
+            if (base.VisitImplicitArrayCreationExpression(node) is not ImplicitArrayCreationExpressionSyntax newNode)
+            {
+                return null;
+            }
+
+            initializer = newNode.Initializer;
+            return newNode.WithInitializer(initializer
+                .WithExpressions(SyntaxFactory.SeparatedList<ExpressionSyntax>(FixInitializerTrailingTrivia(initializer.Expressions.GetWithSeparators(), parentLeadingTrivia)))
+                .WithCloseBraceToken(FixCloseBraceTrivia(initializer.CloseBraceToken, initializer.Expressions.Any() ? parentLeadingTrivia : SyntaxTriviaList.Empty)));
         }
 
         private static SyntaxTriviaList GetParentLeadingTrivia(SyntaxNode node)
@@ -96,16 +85,16 @@ namespace AutoRest.CSharp.Generation.Writers
             return SyntaxTriviaList.Empty;
         }
 
-        private static IEnumerable<SyntaxNodeOrToken> FixInitializerTrivia(SyntaxNodeOrTokenList nodesOrToken, SyntaxTriviaList leadingTrivia)
+        private static IEnumerable<SyntaxNodeOrToken> FixInitializerLeadingTrivia(SyntaxNodeOrTokenList nodesOrToken, SyntaxTriviaList leadingTrivia)
+            => nodesOrToken.Select(nodeOrToken => nodeOrToken.IsNode
+                ? nodeOrToken.WithLeadingTrivia(nodeOrToken.GetLeadingTrivia().AddRange(leadingTrivia).Add(SyntaxFactory.Whitespace("    ")))
+                : nodeOrToken);
+
+        private static IEnumerable<SyntaxNodeOrToken> FixInitializerTrailingTrivia(SyntaxNodeOrTokenList nodesOrToken, SyntaxTriviaList leadingTrivia)
         {
             for (int i = 0; i < nodesOrToken.Count; i++)
             {
                 var nodeOrToken = nodesOrToken[i];
-                if (nodeOrToken.IsNode)
-                {
-                    nodeOrToken = nodeOrToken.WithLeadingTrivia(nodeOrToken.GetLeadingTrivia().AddRange(leadingTrivia).Add(SyntaxFactory.Whitespace("    ")));
-                }
-
                 if (!nodeOrToken.IsNode || i == nodesOrToken.Count - 1)
                 {
                     nodeOrToken = nodeOrToken.WithTrailingTrivia(SyntaxFactory.CarriageReturnLineFeed);
@@ -117,9 +106,7 @@ namespace AutoRest.CSharp.Generation.Writers
 
         private static SyntaxToken FixOpenBraceTrivia(SyntaxToken openBraceToken, bool hasInnerTokens)
         {
-            openBraceToken = openBraceToken
-                .WithoutAnnotations(HasLeadingLineBreak)
-                .WithLeadingTrivia(SyntaxFactory.Space);
+            openBraceToken = openBraceToken.WithLeadingTrivia(SyntaxFactory.Space);
             return hasInnerTokens
                 ? openBraceToken.WithTrailingTrivia(SyntaxFactory.CarriageReturnLineFeed)
                 : openBraceToken.WithTrailingTrivia(SyntaxTriviaList.Empty);

@@ -713,12 +713,14 @@ namespace AutoRest.CSharp.Generation.Writers
 
                 if (type == typeof(IEnumerable<>))
                 {
-                    throw new InvalidOperationException($"Collection should go the code path of {nameof(JsonArraySerialization)}.");
+                    var elementType = parameterType.Arguments[0];
+                    return New.Array(elementType, true, MockParameterTypeValue(parameterName, elementType, null));
                 }
 
                 if (type == typeof(IDictionary<,>))
                 {
-                    throw new InvalidOperationException($"Dictionary should go the code path of {nameof(JsonDictionarySerialization)}.");
+                    var valueType = parameterType.Arguments[1];
+                    return New.Dictionary(typeof(string), valueType, (Literal("test"), MockParameterTypeValue(parameterName, valueType, null)));
                 }
 
                 if (type == typeof(BinaryData))
@@ -760,7 +762,7 @@ namespace AutoRest.CSharp.Generation.Writers
 
         private ValueExpression ComposeProtocolCSharpTypeInstance(bool allProperties, JsonSerialization? serialization, string? propertyDescription, HashSet<ObjectType> visitedModels) => serialization switch
         {
-            JsonArraySerialization array => ComposeProtocolArrayCSharpType(allProperties, array, visitedModels), // IList<T> is guaranteed to have one and only one generic parameter
+            JsonArraySerialization array => ComposeProtocolArrayCSharpType(allProperties, array, visitedModels),
             JsonDictionarySerialization dictionary => ComposeProtocolDictionaryInstance(allProperties, dictionary, visitedModels),
             JsonValueSerialization { Type.IsFrameworkType: true } value => MockParameterTypeValue(propertyDescription, value.Type, value.Format),
             JsonValueSerialization { Type.IsFrameworkType: false, Type.Implementation: SerializableObjectType model } => ComposeAnonymousObjectType(model, allProperties, visitedModels),
@@ -791,15 +793,7 @@ namespace AutoRest.CSharp.Generation.Writers
              * new[] {
              *     {element_expression}
              * }
-             * or
-             * new[] {}
              */
-            var elementType = serialization.ImplementationType.Arguments.Single(); // IList<T> is guaranteed to have one and only one generic parameter
-            if (IsVisitedModel(elementType, visitedModels))
-            {
-                return New.Array(null);
-            }
-
             return New.Array(null, ComposeProtocolCSharpTypeInstance(allProperties, serialization.ValueSerialization, null, visitedModels));
         }
 
@@ -836,15 +830,18 @@ namespace AutoRest.CSharp.Generation.Writers
             var keyType = serialization.Type.Arguments[0];  // IDictionary<K, V> is guaranteed to have two generic parameters
             var valueType = serialization.Type.Arguments[1];
 
-            if (IsVisitedModel(valueType, visitedModels))
-            {
-                return New.Anonymous(null);
-            }
-
             var keyExpr = keyType.Equals(typeof(int)) ? Int(0) : Literal("key"); //handle dictionary with int key
             var valueExpr = ComposeProtocolCSharpTypeInstance(allProperties, serialization.ValueSerialization, null, visitedModels);
             return New.Dictionary(keyType, valueType, (keyExpr, valueExpr));
         }
+
+        private static bool IsVisitedModel(JsonSerialization? serialization, IReadOnlySet<ObjectType> visitedModels) => serialization switch
+        {
+            JsonArraySerialization array => IsVisitedModel(array.ValueSerialization, visitedModels),
+            JsonDictionarySerialization dictionary => IsVisitedModel(dictionary.ValueSerialization, visitedModels),
+            JsonValueSerialization { Type.IsFrameworkType: false, Type.Implementation: SerializableObjectType model } => visitedModels.Contains(model),
+            _ => false
+        };
 
         private static bool IsVisitedModel(CSharpType valueType, IReadOnlySet<ObjectType> visitedModels)
             => valueType is { IsFrameworkType: false, Implementation: ObjectType objectType } && visitedModels.Contains(objectType);
@@ -892,7 +889,6 @@ namespace AutoRest.CSharp.Generation.Writers
 
         private ValueExpression ComposeAnonymousObjectType(SerializableObjectType model, bool allProperties, HashSet<ObjectType> visitedModels)
         {
-            visitedModels.Add(model);
             if (model.Discriminator is { Implementations.Length: > 0 })
             {
                 model = model.Discriminator.Implementations
@@ -902,6 +898,7 @@ namespace AutoRest.CSharp.Generation.Writers
                     .First();
             }
 
+            visitedModels.Add(model);
             /* GENERATED CODE PATTERN
              * new
              * {
@@ -912,8 +909,7 @@ namespace AutoRest.CSharp.Generation.Writers
              */
 
             var propertyExpressions = model.JsonSerialization?.Properties
-                .Where(p => !IsVisitedModel(p.ValueType, visitedModels))
-                .Where(p => allProperties || p.IsRequired)
+                .Where(p => !p.ShouldSkipSerialization && !IsVisitedModel(p.ValueSerialization, visitedModels) && (allProperties || p.IsRequired))
                 .ToDictionary(p => p.SerializedName, p => ComposeProtocolCSharpTypeInstance(allProperties, p.ValueSerialization, p.SerializedName, visitedModels));
 
             if (propertyExpressions is not null && propertyExpressions.Keys.Any(name => StringExtensions.IsCSharpKeyword(name) || !name.IsValidIdentifier()))

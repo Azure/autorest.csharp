@@ -102,7 +102,7 @@ namespace AutoRest.CSharp.Generation.Writers
                     using (writer.AmbientScope())
                     {
                         writer.AppendRawIf("await ", foreachStatement.IsAsync);
-                        writer.Append($"foreach(var {foreachStatement.Item:D} in ");
+                        writer.Append($"foreach (var {foreachStatement.Item:D} in ");
                         writer.WriteValueExpression(foreachStatement.Enumerable switch
                         {
                             InvokeInstanceMethodExpression invokeInstance => invokeInstance with {CallAsAsync = false},
