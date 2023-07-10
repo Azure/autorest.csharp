@@ -59,8 +59,8 @@ namespace azure_special_properties
             return message;
         }
 
-        /// <summary> Specify filter parameter with value &apos;$filter=id gt 5 and name eq &apos;foo&apos;&amp;$orderby=id&amp;$top=10&apos;. </summary>
-        /// <param name="filter"> The filter parameter with value &apos;$filter=id gt 5 and name eq &apos;foo&apos;&apos;. </param>
+        /// <summary> Specify filter parameter with value '$filter=id gt 5 and name eq 'foo'&amp;$orderby=id&amp;$top=10'. </summary>
+        /// <param name="filter"> The filter parameter with value '$filter=id gt 5 and name eq 'foo''. </param>
         /// <param name="top"> The top parameter with value 10. </param>
         /// <param name="orderby"> The orderby parameter with value id. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -77,8 +77,8 @@ namespace azure_special_properties
             }
         }
 
-        /// <summary> Specify filter parameter with value &apos;$filter=id gt 5 and name eq &apos;foo&apos;&amp;$orderby=id&amp;$top=10&apos;. </summary>
-        /// <param name="filter"> The filter parameter with value &apos;$filter=id gt 5 and name eq &apos;foo&apos;&apos;. </param>
+        /// <summary> Specify filter parameter with value '$filter=id gt 5 and name eq 'foo'&amp;$orderby=id&amp;$top=10'. </summary>
+        /// <param name="filter"> The filter parameter with value '$filter=id gt 5 and name eq 'foo''. </param>
         /// <param name="top"> The top parameter with value 10. </param>
         /// <param name="orderby"> The orderby parameter with value id. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>

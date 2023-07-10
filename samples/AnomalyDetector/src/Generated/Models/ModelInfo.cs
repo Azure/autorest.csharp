@@ -21,7 +21,7 @@ namespace AnomalyDetector.Models
         /// <param name="dataSource">
         /// Source link to the input data to indicate an accessible Azure storage Uri,
         /// either pointed to an Azure blob storage folder, or pointed to a CSV file in
-        /// Azure blob storage based on you data schema selection. 
+        /// Azure blob storage based on you data schema selection.
         /// </param>
         /// <param name="startTime">
         /// A required field, indicating the start time of training data, which should be
@@ -46,7 +46,7 @@ namespace AnomalyDetector.Models
         /// <param name="dataSource">
         /// Source link to the input data to indicate an accessible Azure storage Uri,
         /// either pointed to an Azure blob storage folder, or pointed to a CSV file in
-        /// Azure blob storage based on you data schema selection. 
+        /// Azure blob storage based on you data schema selection.
         /// </param>
         /// <param name="dataSchema">
         /// Data schema of input data source: OneTable or MultiTable. The default
@@ -66,7 +66,7 @@ namespace AnomalyDetector.Models
         /// </param>
         /// <param name="slidingWindow">
         /// An optional field, indicating how many previous timestamps will be used to
-        /// detect whether the timestamp is anomaly or not. 
+        /// detect whether the timestamp is anomaly or not.
         /// </param>
         /// <param name="alignPolicy"> An optional field, indicating the manner to align multiple variables. </param>
         /// <param name="status"> Model status. One of CREATED, RUNNING, READY, and FAILED. </param>
@@ -89,7 +89,7 @@ namespace AnomalyDetector.Models
         /// <summary>
         /// Source link to the input data to indicate an accessible Azure storage Uri,
         /// either pointed to an Azure blob storage folder, or pointed to a CSV file in
-        /// Azure blob storage based on you data schema selection. 
+        /// Azure blob storage based on you data schema selection.
         /// </summary>
         public string DataSource { get; set; }
         /// <summary>
@@ -114,7 +114,7 @@ namespace AnomalyDetector.Models
         public string DisplayName { get; set; }
         /// <summary>
         /// An optional field, indicating how many previous timestamps will be used to
-        /// detect whether the timestamp is anomaly or not. 
+        /// detect whether the timestamp is anomaly or not.
         /// </summary>
         public int? SlidingWindow { get; set; }
         /// <summary> An optional field, indicating the manner to align multiple variables. </summary>

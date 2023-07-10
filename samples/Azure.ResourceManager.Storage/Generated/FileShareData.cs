@@ -49,7 +49,7 @@ namespace Azure.ResourceManager.Storage
         /// <param name="leaseState"> Lease state of the share. </param>
         /// <param name="leaseDuration"> Specifies whether the lease on a share is of infinite or fixed duration, only when the share is leased. </param>
         /// <param name="signedIdentifiers"> List of stored access policies specified on the share. </param>
-        /// <param name="snapshotOn"> Creation time of share snapshot returned in the response of list shares with expand param &quot;snapshots&quot;. </param>
+        /// <param name="snapshotOn"> Creation time of share snapshot returned in the response of list shares with expand param "snapshots". </param>
         /// <param name="etag"> Resource Etag. </param>
         internal FileShareData(ResourceIdentifier id, string name, ResourceType resourceType, SystemData systemData, DateTimeOffset? lastModifiedOn, IDictionary<string, string> metadata, int? shareQuota, EnabledProtocol? enabledProtocols, RootSquashType? rootSquash, string version, bool? deleted, DateTimeOffset? deletedOn, int? remainingRetentionDays, ShareAccessTier? accessTier, DateTimeOffset? accessTierChangeOn, string accessTierStatus, long? shareUsageBytes, LeaseStatus? leaseStatus, LeaseState? leaseState, LeaseDuration? leaseDuration, IList<SignedIdentifier> signedIdentifiers, DateTimeOffset? snapshotOn, ETag? etag) : base(id, name, resourceType, systemData)
         {
@@ -108,7 +108,7 @@ namespace Azure.ResourceManager.Storage
         public LeaseDuration? LeaseDuration { get; }
         /// <summary> List of stored access policies specified on the share. </summary>
         public IList<SignedIdentifier> SignedIdentifiers { get; }
-        /// <summary> Creation time of share snapshot returned in the response of list shares with expand param &quot;snapshots&quot;. </summary>
+        /// <summary> Creation time of share snapshot returned in the response of list shares with expand param "snapshots". </summary>
         public DateTimeOffset? SnapshotOn { get; }
         /// <summary> Resource Etag. </summary>
         public ETag? Etag { get; }

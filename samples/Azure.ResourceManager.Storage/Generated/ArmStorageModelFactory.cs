@@ -101,7 +101,7 @@ namespace Azure.ResourceManager.Storage.Models
         /// <param name="immutabilityPeriodSinceCreationInDays"> The immutability period for the blobs in the container since the policy creation, in days. </param>
         /// <param name="state"> The ImmutabilityPolicy state of a blob container, possible values include: Locked and Unlocked. </param>
         /// <param name="allowProtectedAppendWrites"> This property can only be changed for unlocked time-based retention policies. When enabled, new blocks can be written to an append blob while maintaining immutability protection and compliance. Only new blocks can be added and any existing blocks cannot be modified or deleted. This property cannot be changed with ExtendImmutabilityPolicy API. </param>
-        /// <param name="allowProtectedAppendWritesAll"> This property can only be changed for unlocked time-based retention policies. When enabled, new blocks can be written to both &apos;Append and Bock Blobs&apos; while maintaining immutability protection and compliance. Only new blocks can be added and any existing blocks cannot be modified or deleted. This property cannot be changed with ExtendImmutabilityPolicy API. The &apos;allowProtectedAppendWrites&apos; and &apos;allowProtectedAppendWritesAll&apos; properties are mutually exclusive. </param>
+        /// <param name="allowProtectedAppendWritesAll"> This property can only be changed for unlocked time-based retention policies. When enabled, new blocks can be written to both 'Append and Bock Blobs' while maintaining immutability protection and compliance. Only new blocks can be added and any existing blocks cannot be modified or deleted. This property cannot be changed with ExtendImmutabilityPolicy API. The 'allowProtectedAppendWrites' and 'allowProtectedAppendWritesAll' properties are mutually exclusive. </param>
         /// <returns> A new <see cref="Models.ImmutabilityPolicyProperties"/> instance for mocking. </returns>
         public static ImmutabilityPolicyProperties ImmutabilityPolicyProperties(ETag? etag = null, IEnumerable<UpdateHistoryProperty> updateHistory = null, int? immutabilityPeriodSinceCreationInDays = null, ImmutabilityPolicyState? state = null, bool? allowProtectedAppendWrites = null, bool? allowProtectedAppendWritesAll = null)
         {
@@ -118,7 +118,7 @@ namespace Azure.ResourceManager.Storage.Models
         /// <param name="tenantId"> Returns the Tenant ID that issued the token for the user who updated the ImmutabilityPolicy. </param>
         /// <param name="upn"> Returns the User Principal Name of the user who updated the ImmutabilityPolicy. </param>
         /// <param name="allowProtectedAppendWrites"> This property can only be changed for unlocked time-based retention policies. When enabled, new blocks can be written to an append blob while maintaining immutability protection and compliance. Only new blocks can be added and any existing blocks cannot be modified or deleted. This property cannot be changed with ExtendImmutabilityPolicy API. </param>
-        /// <param name="allowProtectedAppendWritesAll"> This property can only be changed for unlocked time-based retention policies. When enabled, new blocks can be written to both &apos;Append and Bock Blobs&apos; while maintaining immutability protection and compliance. Only new blocks can be added and any existing blocks cannot be modified or deleted. This property cannot be changed with ExtendImmutabilityPolicy API. The &apos;allowProtectedAppendWrites&apos; and &apos;allowProtectedAppendWritesAll&apos; properties are mutually exclusive. </param>
+        /// <param name="allowProtectedAppendWritesAll"> This property can only be changed for unlocked time-based retention policies. When enabled, new blocks can be written to both 'Append and Bock Blobs' while maintaining immutability protection and compliance. Only new blocks can be added and any existing blocks cannot be modified or deleted. This property cannot be changed with ExtendImmutabilityPolicy API. The 'allowProtectedAppendWrites' and 'allowProtectedAppendWritesAll' properties are mutually exclusive. </param>
         /// <returns> A new <see cref="Models.UpdateHistoryProperty"/> instance for mocking. </returns>
         public static UpdateHistoryProperty UpdateHistoryProperty(ImmutabilityPolicyUpdateType? update = null, int? immutabilityPeriodSinceCreationInDays = null, DateTimeOffset? timestamp = null, string objectIdentifier = null, Guid? tenantId = null, string upn = null, bool? allowProtectedAppendWrites = null, bool? allowProtectedAppendWritesAll = null)
         {
@@ -150,7 +150,7 @@ namespace Azure.ResourceManager.Storage.Models
         }
 
         /// <summary> Initializes a new instance of ProtectedAppendWritesHistory. </summary>
-        /// <param name="allowProtectedAppendWritesAll"> When enabled, new blocks can be written to both &apos;Append and Bock Blobs&apos; while maintaining legal hold protection and compliance. Only new blocks can be added and any existing blocks cannot be modified or deleted. </param>
+        /// <param name="allowProtectedAppendWritesAll"> When enabled, new blocks can be written to both 'Append and Bock Blobs' while maintaining legal hold protection and compliance. Only new blocks can be added and any existing blocks cannot be modified or deleted. </param>
         /// <param name="timestamp"> Returns the date and time the tag was added. </param>
         /// <returns> A new <see cref="Models.ProtectedAppendWritesHistory"/> instance for mocking. </returns>
         public static ProtectedAppendWritesHistory ProtectedAppendWritesHistory(bool? allowProtectedAppendWritesAll = null, DateTimeOffset? timestamp = null)
@@ -171,7 +171,7 @@ namespace Azure.ResourceManager.Storage.Models
         /// <summary> Initializes a new instance of LegalHold. </summary>
         /// <param name="hasLegalHold"> The hasLegalHold public property is set to true by SRP if there are at least one existing tag. The hasLegalHold public property is set to false by SRP if all existing legal hold tags are cleared out. There can be a maximum of 1000 blob containers with hasLegalHold=true for a given account. </param>
         /// <param name="tags"> Each tag should be 3 to 23 alphanumeric characters and is normalized to lower case at SRP. </param>
-        /// <param name="allowProtectedAppendWritesAll"> When enabled, new blocks can be written to both &apos;Append and Bock Blobs&apos; while maintaining legal hold protection and compliance. Only new blocks can be added and any existing blocks cannot be modified or deleted. </param>
+        /// <param name="allowProtectedAppendWritesAll"> When enabled, new blocks can be written to both 'Append and Bock Blobs' while maintaining legal hold protection and compliance. Only new blocks can be added and any existing blocks cannot be modified or deleted. </param>
         /// <returns> A new <see cref="Models.LegalHold"/> instance for mocking. </returns>
         public static LegalHold LegalHold(bool? hasLegalHold = null, IEnumerable<string> tags = null, bool? allowProtectedAppendWritesAll = null)
         {
@@ -188,7 +188,7 @@ namespace Azure.ResourceManager.Storage.Models
         /// <param name="immutabilityPeriodSinceCreationInDays"> The immutability period for the blobs in the container since the policy creation, in days. </param>
         /// <param name="state"> The ImmutabilityPolicy state of a blob container, possible values include: Locked and Unlocked. </param>
         /// <param name="allowProtectedAppendWrites"> This property can only be changed for unlocked time-based retention policies. When enabled, new blocks can be written to an append blob while maintaining immutability protection and compliance. Only new blocks can be added and any existing blocks cannot be modified or deleted. This property cannot be changed with ExtendImmutabilityPolicy API. </param>
-        /// <param name="allowProtectedAppendWritesAll"> This property can only be changed for unlocked time-based retention policies. When enabled, new blocks can be written to both &apos;Append and Bock Blobs&apos; while maintaining immutability protection and compliance. Only new blocks can be added and any existing blocks cannot be modified or deleted. This property cannot be changed with ExtendImmutabilityPolicy API. The &apos;allowProtectedAppendWrites&apos; and &apos;allowProtectedAppendWritesAll&apos; properties are mutually exclusive. </param>
+        /// <param name="allowProtectedAppendWritesAll"> This property can only be changed for unlocked time-based retention policies. When enabled, new blocks can be written to both 'Append and Bock Blobs' while maintaining immutability protection and compliance. Only new blocks can be added and any existing blocks cannot be modified or deleted. This property cannot be changed with ExtendImmutabilityPolicy API. The 'allowProtectedAppendWrites' and 'allowProtectedAppendWritesAll' properties are mutually exclusive. </param>
         /// <param name="etag"> Resource Etag. </param>
         /// <returns> A new <see cref="Storage.ImmutabilityPolicyData"/> instance for mocking. </returns>
         public static ImmutabilityPolicyData ImmutabilityPolicyData(ResourceIdentifier id = null, string name = null, ResourceType resourceType = default, SystemData systemData = null, int? immutabilityPeriodSinceCreationInDays = null, ImmutabilityPolicyState? state = null, bool? allowProtectedAppendWrites = null, bool? allowProtectedAppendWritesAll = null, ETag? etag = null)
@@ -244,7 +244,7 @@ namespace Azure.ResourceManager.Storage.Models
         /// <param name="leaseState"> Lease state of the share. </param>
         /// <param name="leaseDuration"> Specifies whether the lease on a share is of infinite or fixed duration, only when the share is leased. </param>
         /// <param name="signedIdentifiers"> List of stored access policies specified on the share. </param>
-        /// <param name="snapshotOn"> Creation time of share snapshot returned in the response of list shares with expand param &quot;snapshots&quot;. </param>
+        /// <param name="snapshotOn"> Creation time of share snapshot returned in the response of list shares with expand param "snapshots". </param>
         /// <param name="etag"> Resource Etag. </param>
         /// <returns> A new <see cref="Storage.FileShareData"/> instance for mocking. </returns>
         public static FileShareData FileShareData(ResourceIdentifier id = null, string name = null, ResourceType resourceType = default, SystemData systemData = null, DateTimeOffset? lastModifiedOn = null, IDictionary<string, string> metadata = null, int? shareQuota = null, EnabledProtocol? enabledProtocols = null, RootSquashType? rootSquash = null, string version = null, bool? deleted = null, DateTimeOffset? deletedOn = null, int? remainingRetentionDays = null, ShareAccessTier? accessTier = null, DateTimeOffset? accessTierChangeOn = null, string accessTierStatus = null, long? shareUsageBytes = null, LeaseStatus? leaseStatus = null, LeaseState? leaseState = null, LeaseDuration? leaseDuration = null, IEnumerable<SignedIdentifier> signedIdentifiers = null, DateTimeOffset? snapshotOn = null, ETag? etag = null)
@@ -267,7 +267,7 @@ namespace Azure.ResourceManager.Storage.Models
         /// <summary> Initializes a new instance of StorageSkuInformation. </summary>
         /// <param name="name"> The SKU name. Required for account creation; optional for update. Note that in older versions, SKU name was called accountType. </param>
         /// <param name="tier"> The SKU tier. This is based on the SKU name. </param>
-        /// <param name="resourceType"> The type of the resource, usually it is &apos;storageAccounts&apos;. </param>
+        /// <param name="resourceType"> The type of the resource, usually it is 'storageAccounts'. </param>
         /// <param name="kind"> Indicates the type of storage account. </param>
         /// <param name="locations"> The set of locations that the SKU is available. This will be supported and registered Azure Geo Regions (e.g. West US, East US, Southeast Asia, etc.). </param>
         /// <param name="capabilities"> The capability information in the specified SKU, including file encryption, network ACLs, change notification, etc. </param>
@@ -284,7 +284,7 @@ namespace Azure.ResourceManager.Storage.Models
 
         /// <summary> Initializes a new instance of SKUCapability. </summary>
         /// <param name="name"> The name of capability, The capability information in the specified SKU, including file encryption, network ACLs, change notification, etc. </param>
-        /// <param name="value"> A string value to indicate states of given capability. Possibly &apos;true&apos; or &apos;false&apos;. </param>
+        /// <param name="value"> A string value to indicate states of given capability. Possibly 'true' or 'false'. </param>
         /// <returns> A new <see cref="Models.SKUCapability"/> instance for mocking. </returns>
         public static SKUCapability SKUCapability(string name = null, string value = null)
         {
@@ -294,7 +294,7 @@ namespace Azure.ResourceManager.Storage.Models
         /// <summary> Initializes a new instance of Restriction. </summary>
         /// <param name="restrictionType"> The type of restrictions. As of now only possible value for this is location. </param>
         /// <param name="values"> The value of restrictions. If the restriction type is set to location. This would be different locations where the SKU is restricted. </param>
-        /// <param name="reasonCode"> The reason for the restriction. As of now this can be &quot;QuotaId&quot; or &quot;NotAvailableForSubscription&quot;. Quota Id is set when the SKU has requiredQuotas parameter as the subscription does not belong to that quota. The &quot;NotAvailableForSubscription&quot; is related to capacity at DC. </param>
+        /// <param name="reasonCode"> The reason for the restriction. As of now this can be "QuotaId" or "NotAvailableForSubscription". Quota Id is set when the SKU has requiredQuotas parameter as the subscription does not belong to that quota. The "NotAvailableForSubscription" is related to capacity at DC. </param>
         /// <returns> A new <see cref="Models.Restriction"/> instance for mocking. </returns>
         public static Restriction Restriction(string restrictionType = null, IEnumerable<string> values = null, ReasonCode? reasonCode = null)
         {
@@ -316,7 +316,7 @@ namespace Azure.ResourceManager.Storage.Models
         /// <summary> Initializes a new instance of EncryptionService. </summary>
         /// <param name="enabled"> A boolean indicating whether or not the service encrypts the data as it is stored. </param>
         /// <param name="lastEnabledOn"> Gets a rough estimate of the date/time when the encryption was last enabled by the user. Only returned when encryption is enabled. There might be some unencrypted blobs which were written after this time, as it is just a rough estimate. </param>
-        /// <param name="keyType"> Encryption key type to be used for the encryption service. &apos;Account&apos; key type implies that an account-scoped encryption key will be used. &apos;Service&apos; key type implies that a default service key is used. </param>
+        /// <param name="keyType"> Encryption key type to be used for the encryption service. 'Account' key type implies that an account-scoped encryption key will be used. 'Service' key type implies that a default service key is used. </param>
         /// <returns> A new <see cref="Models.EncryptionService"/> instance for mocking. </returns>
         public static EncryptionService EncryptionService(bool? enabled = null, DateTimeOffset? lastEnabledOn = null, KeyType? keyType = null)
         {
@@ -377,7 +377,7 @@ namespace Azure.ResourceManager.Storage.Models
         /// <param name="enableNfsV3"> NFS 3.0 protocol support enabled if set to true. </param>
         /// <param name="allowCrossTenantReplication"> Allow or disallow cross AAD tenant object replication. The default interpretation is true for this property. </param>
         /// <param name="defaultToOAuthAuthentication"> A boolean flag which indicates whether the default authentication is OAuth or not. The default interpretation is false for this property. </param>
-        /// <param name="publicNetworkAccess"> Allow or disallow public network access to Storage Account. Value is optional but if passed in, must be &apos;Enabled&apos; or &apos;Disabled&apos;. </param>
+        /// <param name="publicNetworkAccess"> Allow or disallow public network access to Storage Account. Value is optional but if passed in, must be 'Enabled' or 'Disabled'. </param>
         /// <param name="immutableStorageWithVersioning"> The property is immutable and can only be set to true at the account creation time. When set to true, it enables object level immutability for all the containers in the account by default. </param>
         /// <returns> A new <see cref="Storage.StorageAccountData"/> instance for mocking. </returns>
         public static StorageAccountData StorageAccountData(ResourceIdentifier id = null, string name = null, ResourceType resourceType = default, SystemData systemData = null, IDictionary<string, string> tags = null, AzureLocation location = default, StorageSku sku = null, StorageKind? kind = null, ManagedServiceIdentity identity = null, ExtendedLocation extendedLocation = null, ProvisioningState? provisioningState = null, Endpoints primaryEndpoints = null, string primaryLocation = null, AccountStatus? statusOfPrimary = null, DateTimeOffset? lastGeoFailoverOn = null, string secondaryLocation = null, AccountStatus? statusOfSecondary = null, DateTimeOffset? createdOn = null, CustomDomain customDomain = null, SasPolicy sasPolicy = null, int? keyExpirationPeriodInDays = null, KeyCreationTime keyCreationTime = null, Endpoints secondaryEndpoints = null, Encryption encryption = null, AccessTier? accessTier = null, AzureFilesIdentityBasedAuthentication azureFilesIdentityBasedAuthentication = null, bool? enableHttpsTrafficOnly = null, NetworkRuleSet networkRuleSet = null, bool? isHnsEnabled = null, GeoReplicationStats geoReplicationStats = null, bool? failoverInProgress = null, LargeFileSharesState? largeFileSharesState = null, IEnumerable<StoragePrivateEndpointConnectionData> privateEndpointConnections = null, RoutingPreference routingPreference = null, BlobRestoreStatus blobRestoreStatus = null, bool? allowBlobPublicAccess = null, MinimumTlsVersion? minimumTlsVersion = null, bool? allowSharedKeyAccess = null, bool? enableNfsV3 = null, bool? allowCrossTenantReplication = null, bool? defaultToOAuthAuthentication = null, PublicNetworkAccess? publicNetworkAccess = null, ImmutableStorageAccount immutableStorageWithVersioning = null)
@@ -616,7 +616,7 @@ namespace Azure.ResourceManager.Storage.Models
         /// <param name="state"> The state of the encryption scope. Possible values (case-insensitive):  Enabled, Disabled. </param>
         /// <param name="createdOn"> Gets the creation date and time of the encryption scope in UTC. </param>
         /// <param name="lastModifiedOn"> Gets the last modification date and time of the encryption scope in UTC. </param>
-        /// <param name="keyVaultProperties"> The key vault properties for the encryption scope. This is a required field if encryption scope &apos;source&apos; attribute is set to &apos;Microsoft.KeyVault&apos;. </param>
+        /// <param name="keyVaultProperties"> The key vault properties for the encryption scope. This is a required field if encryption scope 'source' attribute is set to 'Microsoft.KeyVault'. </param>
         /// <param name="requireInfrastructureEncryption"> A boolean indicating whether or not the service applies a secondary layer of encryption with platform managed keys for data at rest. </param>
         /// <returns> A new <see cref="Storage.EncryptionScopeData"/> instance for mocking. </returns>
         public static EncryptionScopeData EncryptionScopeData(ResourceIdentifier id = null, string name = null, ResourceType resourceType = default, SystemData systemData = null, EncryptionScopeSource? source = null, EncryptionScopeState? state = null, DateTimeOffset? createdOn = null, DateTimeOffset? lastModifiedOn = null, EncryptionScopeKeyVaultProperties keyVaultProperties = null, bool? requireInfrastructureEncryption = null)

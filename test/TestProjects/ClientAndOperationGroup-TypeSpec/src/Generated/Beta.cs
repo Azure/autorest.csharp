@@ -11,7 +11,7 @@ using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
 
-namespace Azure.ClientAndOperationGroupService
+namespace ClientAndOperationGroup
 {
     // Data plane generated sub-client.
     /// <summary> The Beta sub-client. </summary>
@@ -46,7 +46,7 @@ namespace Azure.ClientAndOperationGroupService
         }
 
         /// <summary>
-        /// [Protocol Method] 
+        /// [Protocol Method]
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -59,7 +59,7 @@ namespace Azure.ClientAndOperationGroupService
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/Beta.xml" path="doc/members/member[@name='TwoAsync(RequestContext)']/*" />
-        public virtual async Task<Response> TwoAsync(RequestContext context = null)
+        public virtual async Task<Response> TwoAsync(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("Beta.Two");
             scope.Start();
@@ -76,7 +76,7 @@ namespace Azure.ClientAndOperationGroupService
         }
 
         /// <summary>
-        /// [Protocol Method] 
+        /// [Protocol Method]
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -89,7 +89,7 @@ namespace Azure.ClientAndOperationGroupService
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/Beta.xml" path="doc/members/member[@name='Two(RequestContext)']/*" />
-        public virtual Response Two(RequestContext context = null)
+        public virtual Response Two(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("Beta.Two");
             scope.Start();
@@ -106,7 +106,7 @@ namespace Azure.ClientAndOperationGroupService
         }
 
         /// <summary>
-        /// [Protocol Method] 
+        /// [Protocol Method]
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -119,7 +119,7 @@ namespace Azure.ClientAndOperationGroupService
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/Beta.xml" path="doc/members/member[@name='ThreeAsync(RequestContext)']/*" />
-        public virtual async Task<Response> ThreeAsync(RequestContext context = null)
+        public virtual async Task<Response> ThreeAsync(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("Beta.Three");
             scope.Start();
@@ -136,7 +136,7 @@ namespace Azure.ClientAndOperationGroupService
         }
 
         /// <summary>
-        /// [Protocol Method] 
+        /// [Protocol Method]
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -149,7 +149,7 @@ namespace Azure.ClientAndOperationGroupService
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/Beta.xml" path="doc/members/member[@name='Three(RequestContext)']/*" />
-        public virtual Response Three(RequestContext context = null)
+        public virtual Response Three(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("Beta.Three");
             scope.Start();

@@ -42,8 +42,10 @@ namespace AutoRest.TestServer.Tests
             TypeAsserts.HasParameter(method, "cancellationToken");
             var paramInfo = TypeAsserts.HasParameter(method, "input");
             Assert.AreEqual(typeof(NoModelAsStringNoRequiredTwoValueDefaultOpEnum?), paramInfo.ParameterType);
+            // verify if the client default value is eliminated. And it is optional,so set defautl value.
             Assert.True(paramInfo.HasDefaultValue);
-            Assert.AreEqual((int)NoModelAsStringNoRequiredTwoValueDefaultOpEnum.Value1, paramInfo.DefaultValue);
+            Assert.AreEqual(null, paramInfo.DefaultValue);
+
         }
 
         [Test]
@@ -117,8 +119,8 @@ namespace AutoRest.TestServer.Tests
             TypeAsserts.HasParameter(method, "cancellationToken");
             var paramInfo = TypeAsserts.HasParameter(method, "input");
             Assert.AreEqual(typeof(NoModelAsStringRequiredTwoValueDefaultOpEnum), paramInfo.ParameterType);
-            Assert.True(paramInfo.HasDefaultValue);
-            Assert.AreEqual(NoModelAsStringRequiredTwoValueDefaultOpEnum.Value1, paramInfo.DefaultValue);
+            // verify if the client default value is eliminated.
+            Assert.False(paramInfo.HasDefaultValue);
         }
 
         [Test]
@@ -273,9 +275,9 @@ namespace AutoRest.TestServer.Tests
 
             TypeAsserts.HasParameter(method, "cancellationToken");
             var paramInfo = TypeAsserts.HasParameter(method, "input");
-            Assert.AreEqual(typeof(ModelAsStringRequiredTwoValueDefaultOpEnum?), paramInfo.ParameterType);
-            Assert.True(paramInfo.HasDefaultValue);
-            Assert.AreEqual(null, paramInfo.DefaultValue);
+            Assert.AreEqual(typeof(ModelAsStringRequiredTwoValueDefaultOpEnum), paramInfo.ParameterType);
+            // verify if the client default value is eliminated.
+            Assert.False(paramInfo.HasDefaultValue);
         }
 
         [Test]
@@ -319,9 +321,9 @@ namespace AutoRest.TestServer.Tests
 
             TypeAsserts.HasParameter(method, "cancellationToken");
             var paramInfo = TypeAsserts.HasParameter(method, "input");
-            Assert.AreEqual(typeof(ModelAsStringRequiredOneValueDefaultOpEnum?), paramInfo.ParameterType);
-            Assert.True(paramInfo.HasDefaultValue);
-            Assert.AreEqual(null, paramInfo.DefaultValue);
+            Assert.AreEqual(typeof(ModelAsStringRequiredOneValueDefaultOpEnum), paramInfo.ParameterType);
+            // verify if the client default value is eliminated.
+            Assert.False(paramInfo.HasDefaultValue);
         }
 
         [Test]

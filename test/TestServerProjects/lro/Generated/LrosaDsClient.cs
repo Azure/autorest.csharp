@@ -75,7 +75,7 @@ namespace lro
             }
         }
 
-        /// <summary> Long running put request, service returns a Product with &apos;ProvisioningState&apos; = &apos;Creating&apos; and 201 response code. </summary>
+        /// <summary> Long running put request, service returns a Product with 'ProvisioningState' = 'Creating' and 201 response code. </summary>
         /// <param name="product"> Product to put. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<LrosaDsPutNonRetry201Creating400Operation> StartPutNonRetry201Creating400Async(Product product = null, CancellationToken cancellationToken = default)
@@ -94,7 +94,7 @@ namespace lro
             }
         }
 
-        /// <summary> Long running put request, service returns a Product with &apos;ProvisioningState&apos; = &apos;Creating&apos; and 201 response code. </summary>
+        /// <summary> Long running put request, service returns a Product with 'ProvisioningState' = 'Creating' and 201 response code. </summary>
         /// <param name="product"> Product to put. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual LrosaDsPutNonRetry201Creating400Operation StartPutNonRetry201Creating400(Product product = null, CancellationToken cancellationToken = default)
@@ -113,7 +113,7 @@ namespace lro
             }
         }
 
-        /// <summary> Long running put request, service returns a Product with &apos;ProvisioningState&apos; = &apos;Creating&apos; and 201 response code. </summary>
+        /// <summary> Long running put request, service returns a Product with 'ProvisioningState' = 'Creating' and 201 response code. </summary>
         /// <param name="product"> Product to put. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<LrosaDsPutNonRetry201Creating400InvalidJsonOperation> StartPutNonRetry201Creating400InvalidJsonAsync(Product product = null, CancellationToken cancellationToken = default)
@@ -132,7 +132,7 @@ namespace lro
             }
         }
 
-        /// <summary> Long running put request, service returns a Product with &apos;ProvisioningState&apos; = &apos;Creating&apos; and 201 response code. </summary>
+        /// <summary> Long running put request, service returns a Product with 'ProvisioningState' = 'Creating' and 201 response code. </summary>
         /// <param name="product"> Product to put. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual LrosaDsPutNonRetry201Creating400InvalidJsonOperation StartPutNonRetry201Creating400InvalidJson(Product product = null, CancellationToken cancellationToken = default)
@@ -787,7 +787,7 @@ namespace lro
             }
         }
 
-        /// <summary> Long running delete request, service returns a 202 to the initial request receing a reponse with an invalid &apos;Location&apos; and &apos;Retry-After&apos; headers. </summary>
+        /// <summary> Long running delete request, service returns a 202 to the initial request receing a reponse with an invalid 'Location' and 'Retry-After' headers. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<LrosaDsDelete202RetryInvalidHeaderOperation> StartDelete202RetryInvalidHeaderAsync(CancellationToken cancellationToken = default)
         {
@@ -805,7 +805,7 @@ namespace lro
             }
         }
 
-        /// <summary> Long running delete request, service returns a 202 to the initial request receing a reponse with an invalid &apos;Location&apos; and &apos;Retry-After&apos; headers. </summary>
+        /// <summary> Long running delete request, service returns a 202 to the initial request receing a reponse with an invalid 'Location' and 'Retry-After' headers. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual LrosaDsDelete202RetryInvalidHeaderOperation StartDelete202RetryInvalidHeader(CancellationToken cancellationToken = default)
         {
@@ -895,7 +895,7 @@ namespace lro
             }
         }
 
-        /// <summary> Long running post request, service returns a 202 to the initial request, with invalid &apos;Location&apos; and &apos;Retry-After&apos; headers. </summary>
+        /// <summary> Long running post request, service returns a 202 to the initial request, with invalid 'Location' and 'Retry-After' headers. </summary>
         /// <param name="product"> Product to put. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<LrosaDsPost202RetryInvalidHeaderOperation> StartPost202RetryInvalidHeaderAsync(Product product = null, CancellationToken cancellationToken = default)
@@ -914,7 +914,7 @@ namespace lro
             }
         }
 
-        /// <summary> Long running post request, service returns a 202 to the initial request, with invalid &apos;Location&apos; and &apos;Retry-After&apos; headers. </summary>
+        /// <summary> Long running post request, service returns a 202 to the initial request, with invalid 'Location' and 'Retry-After' headers. </summary>
         /// <param name="product"> Product to put. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual LrosaDsPost202RetryInvalidHeaderOperation StartPost202RetryInvalidHeader(Product product = null, CancellationToken cancellationToken = default)

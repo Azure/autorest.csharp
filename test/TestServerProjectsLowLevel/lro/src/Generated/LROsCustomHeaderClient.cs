@@ -73,7 +73,7 @@ namespace lro_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="Operation"/> representing an asynchronous operation on the service. </returns>
         /// <include file="Docs/LROsCustomHeaderClient.xml" path="doc/members/member[@name='PutAsyncRetrySucceededAsync(WaitUntil,RequestContent,RequestContext)']/*" />
-        public virtual async Task<Operation<BinaryData>> PutAsyncRetrySucceededAsync(WaitUntil waitUntil, RequestContent content, RequestContext context = null)
+        public virtual async Task<Operation<BinaryData>> PutAsyncRetrySucceededAsync(WaitUntil waitUntil, RequestContent content, RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("LROsCustomHeaderClient.PutAsyncRetrySucceeded");
             scope.Start();
@@ -105,7 +105,7 @@ namespace lro_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="Operation"/> representing an asynchronous operation on the service. </returns>
         /// <include file="Docs/LROsCustomHeaderClient.xml" path="doc/members/member[@name='PutAsyncRetrySucceeded(WaitUntil,RequestContent,RequestContext)']/*" />
-        public virtual Operation<BinaryData> PutAsyncRetrySucceeded(WaitUntil waitUntil, RequestContent content, RequestContext context = null)
+        public virtual Operation<BinaryData> PutAsyncRetrySucceeded(WaitUntil waitUntil, RequestContent content, RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("LROsCustomHeaderClient.PutAsyncRetrySucceeded");
             scope.Start();
@@ -137,7 +137,7 @@ namespace lro_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="Operation"/> representing an asynchronous operation on the service. </returns>
         /// <include file="Docs/LROsCustomHeaderClient.xml" path="doc/members/member[@name='Put201CreatingSucceeded200Async(WaitUntil,RequestContent,RequestContext)']/*" />
-        public virtual async Task<Operation<BinaryData>> Put201CreatingSucceeded200Async(WaitUntil waitUntil, RequestContent content, RequestContext context = null)
+        public virtual async Task<Operation<BinaryData>> Put201CreatingSucceeded200Async(WaitUntil waitUntil, RequestContent content, RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("LROsCustomHeaderClient.Put201CreatingSucceeded200");
             scope.Start();
@@ -169,7 +169,7 @@ namespace lro_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="Operation"/> representing an asynchronous operation on the service. </returns>
         /// <include file="Docs/LROsCustomHeaderClient.xml" path="doc/members/member[@name='Put201CreatingSucceeded200(WaitUntil,RequestContent,RequestContext)']/*" />
-        public virtual Operation<BinaryData> Put201CreatingSucceeded200(WaitUntil waitUntil, RequestContent content, RequestContext context = null)
+        public virtual Operation<BinaryData> Put201CreatingSucceeded200(WaitUntil waitUntil, RequestContent content, RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("LROsCustomHeaderClient.Put201CreatingSucceeded200");
             scope.Start();
@@ -186,7 +186,7 @@ namespace lro_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method] x-ms-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 is required message header for all requests. Long running post request, service returns a 202 to the initial request, with &apos;Location&apos; and &apos;Retry-After&apos; headers, Polls return a 200 with a response body after success
+        /// [Protocol Method] x-ms-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 is required message header for all requests. Long running post request, service returns a 202 to the initial request, with 'Location' and 'Retry-After' headers, Polls return a 200 with a response body after success
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -201,7 +201,7 @@ namespace lro_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="Operation"/> representing an asynchronous operation on the service. </returns>
         /// <include file="Docs/LROsCustomHeaderClient.xml" path="doc/members/member[@name='Post202Retry200Async(WaitUntil,RequestContent,RequestContext)']/*" />
-        public virtual async Task<Operation> Post202Retry200Async(WaitUntil waitUntil, RequestContent content, RequestContext context = null)
+        public virtual async Task<Operation> Post202Retry200Async(WaitUntil waitUntil, RequestContent content, RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("LROsCustomHeaderClient.Post202Retry200");
             scope.Start();
@@ -218,7 +218,7 @@ namespace lro_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method] x-ms-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 is required message header for all requests. Long running post request, service returns a 202 to the initial request, with &apos;Location&apos; and &apos;Retry-After&apos; headers, Polls return a 200 with a response body after success
+        /// [Protocol Method] x-ms-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 is required message header for all requests. Long running post request, service returns a 202 to the initial request, with 'Location' and 'Retry-After' headers, Polls return a 200 with a response body after success
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -233,7 +233,7 @@ namespace lro_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="Operation"/> representing an asynchronous operation on the service. </returns>
         /// <include file="Docs/LROsCustomHeaderClient.xml" path="doc/members/member[@name='Post202Retry200(WaitUntil,RequestContent,RequestContext)']/*" />
-        public virtual Operation Post202Retry200(WaitUntil waitUntil, RequestContent content, RequestContext context = null)
+        public virtual Operation Post202Retry200(WaitUntil waitUntil, RequestContent content, RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("LROsCustomHeaderClient.Post202Retry200");
             scope.Start();
@@ -265,7 +265,7 @@ namespace lro_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="Operation"/> representing an asynchronous operation on the service. </returns>
         /// <include file="Docs/LROsCustomHeaderClient.xml" path="doc/members/member[@name='PostAsyncRetrySucceededAsync(WaitUntil,RequestContent,RequestContext)']/*" />
-        public virtual async Task<Operation> PostAsyncRetrySucceededAsync(WaitUntil waitUntil, RequestContent content, RequestContext context = null)
+        public virtual async Task<Operation> PostAsyncRetrySucceededAsync(WaitUntil waitUntil, RequestContent content, RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("LROsCustomHeaderClient.PostAsyncRetrySucceeded");
             scope.Start();
@@ -297,7 +297,7 @@ namespace lro_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="Operation"/> representing an asynchronous operation on the service. </returns>
         /// <include file="Docs/LROsCustomHeaderClient.xml" path="doc/members/member[@name='PostAsyncRetrySucceeded(WaitUntil,RequestContent,RequestContext)']/*" />
-        public virtual Operation PostAsyncRetrySucceeded(WaitUntil waitUntil, RequestContent content, RequestContext context = null)
+        public virtual Operation PostAsyncRetrySucceeded(WaitUntil waitUntil, RequestContent content, RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("LROsCustomHeaderClient.PostAsyncRetrySucceeded");
             scope.Start();

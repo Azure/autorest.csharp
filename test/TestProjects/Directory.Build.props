@@ -2,7 +2,17 @@
   <PropertyGroup>
     <IncludeStyleCopAnalyzers>true</IncludeStyleCopAnalyzers>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
-    <NoWarn>CS1591</NoWarn>
+    <NoWarn>$(NoWarn);CS1591</NoWarn>
   </PropertyGroup>
+
+  <!-- Placeholders to mimic Directory.Build.Common.props from azure-sdk-for-net for new project tests-->
+  <PropertyGroup>
+    <IsTestGenerationSrcProject Condition="!$(MSBuildProjectName.EndsWith('.Tests'))">true</IsTestGenerationSrcProject>
+    <IsTestGenerationTestProjet Condition="$(MSBuildProjectName.EndsWith('.Tests'))">true</IsTestGenerationTestProjet>
+    <RequiredTargetFrameworks Condition="'$(IsTestGenerationSrcProject)' == 'true'">netstandard2.0</RequiredTargetFrameworks>
+    <RequiredTargetFrameworks Condition="'$(IsTestGenerationTestProjet)' == 'true'">net7.0;net6.0;net462</RequiredTargetFrameworks>
+    <ShouldUseCentralVersions Condition="'$(ShouldUseCentralVersions)' == ''">true</ShouldUseCentralVersions>
+  </PropertyGroup>
+
   <Import Project="..\..\Directory.Build.props" />
 </Project>

@@ -29,7 +29,8 @@ namespace ModelsTypeSpec.Samples
 
             Response response = client.GetOutputDiscriminatorModel(new RequestContext());
 
-            Console.WriteLine(response.ToString());
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("kind").ToString());
         }
 
         [Test]
@@ -41,7 +42,8 @@ namespace ModelsTypeSpec.Samples
 
             Response response = client.GetOutputDiscriminatorModel(new RequestContext());
 
-            Console.WriteLine(response.ToString());
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("kind").ToString());
         }
 
         [Test]
@@ -53,7 +55,8 @@ namespace ModelsTypeSpec.Samples
 
             Response response = await client.GetOutputDiscriminatorModelAsync(new RequestContext());
 
-            Console.WriteLine(response.ToString());
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("kind").ToString());
         }
 
         [Test]
@@ -65,7 +68,8 @@ namespace ModelsTypeSpec.Samples
 
             Response response = await client.GetOutputDiscriminatorModelAsync(new RequestContext());
 
-            Console.WriteLine(response.ToString());
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("kind").ToString());
         }
 
         [Test]
@@ -120,6 +124,7 @@ namespace ModelsTypeSpec.Samples
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("requiredString").ToString());
             Console.WriteLine(result.GetProperty("requiredInt").ToString());
+            Console.WriteLine(result.GetProperty("requiredModel").GetProperty("discriminatorProperty").ToString());
             Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredPropertyOnBase").ToString());
             Console.WriteLine(result.GetProperty("requiredFixedStringEnum").ToString());
             Console.WriteLine(result.GetProperty("requiredFixedIntEnum").ToString());
@@ -174,6 +179,7 @@ namespace ModelsTypeSpec.Samples
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("requiredString").ToString());
             Console.WriteLine(result.GetProperty("requiredInt").ToString());
+            Console.WriteLine(result.GetProperty("requiredModel").GetProperty("discriminatorProperty").ToString());
             Console.WriteLine(result.GetProperty("requiredModel").GetProperty("optionalPropertyOnBase").ToString());
             Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredPropertyOnBase").ToString());
             Console.WriteLine(result.GetProperty("requiredFixedStringEnum").ToString());
@@ -233,6 +239,7 @@ namespace ModelsTypeSpec.Samples
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("requiredString").ToString());
             Console.WriteLine(result.GetProperty("requiredInt").ToString());
+            Console.WriteLine(result.GetProperty("requiredModel").GetProperty("discriminatorProperty").ToString());
             Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredPropertyOnBase").ToString());
             Console.WriteLine(result.GetProperty("requiredFixedStringEnum").ToString());
             Console.WriteLine(result.GetProperty("requiredFixedIntEnum").ToString());
@@ -287,6 +294,7 @@ namespace ModelsTypeSpec.Samples
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("requiredString").ToString());
             Console.WriteLine(result.GetProperty("requiredInt").ToString());
+            Console.WriteLine(result.GetProperty("requiredModel").GetProperty("discriminatorProperty").ToString());
             Console.WriteLine(result.GetProperty("requiredModel").GetProperty("optionalPropertyOnBase").ToString());
             Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredPropertyOnBase").ToString());
             Console.WriteLine(result.GetProperty("requiredFixedStringEnum").ToString());
@@ -747,6 +755,7 @@ namespace ModelsTypeSpec.Samples
                 requiredInt = 1234,
                 requiredModel = new
                 {
+                    discriminatorProperty = "",
                     requiredPropertyOnBase = 1234,
                 },
                 requiredFixedStringEnum = "1",
@@ -801,6 +810,7 @@ namespace ModelsTypeSpec.Samples
                 requiredInt = 1234,
                 requiredModel = new
                 {
+                    discriminatorProperty = "",
                     optionalPropertyOnBase = "<optionalPropertyOnBase>",
                     requiredPropertyOnBase = 1234,
                 },
@@ -864,6 +874,7 @@ namespace ModelsTypeSpec.Samples
                 requiredInt = 1234,
                 requiredModel = new
                 {
+                    discriminatorProperty = "",
                     requiredPropertyOnBase = 1234,
                 },
                 requiredFixedStringEnum = "1",
@@ -918,6 +929,7 @@ namespace ModelsTypeSpec.Samples
                 requiredInt = 1234,
                 requiredModel = new
                 {
+                    discriminatorProperty = "",
                     optionalPropertyOnBase = "<optionalPropertyOnBase>",
                     requiredPropertyOnBase = 1234,
                 },

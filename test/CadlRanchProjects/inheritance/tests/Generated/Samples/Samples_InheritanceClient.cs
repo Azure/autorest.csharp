@@ -259,6 +259,63 @@ namespace _Type.Model.Inheritance.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
+        public void Example_GetDuplicate()
+        {
+            var client = new InheritanceClient();
+
+            Response response = client.GetDuplicate(new RequestContext());
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("kind").ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_GetDuplicate_AllParameters()
+        {
+            var client = new InheritanceClient();
+
+            Response response = client.GetDuplicate(new RequestContext());
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("kind").ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_GetDuplicate_Async()
+        {
+            var client = new InheritanceClient();
+
+            Response response = await client.GetDuplicateAsync(new RequestContext());
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("kind").ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_GetDuplicate_AllParameters_Async()
+        {
+            var client = new InheritanceClient();
+
+            Response response = await client.GetDuplicateAsync(new RequestContext());
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("kind").ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_GetDuplicate_Convenience_Async()
+        {
+            var client = new InheritanceClient();
+
+            var result = await client.GetDuplicateAsync();
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
         public void Example_GetModel()
         {
             var client = new InheritanceClient();
@@ -266,6 +323,7 @@ namespace _Type.Model.Inheritance.Samples
             Response response = client.GetModel(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("kind").ToString());
             Console.WriteLine(result.GetProperty("age").ToString());
         }
 
@@ -278,6 +336,7 @@ namespace _Type.Model.Inheritance.Samples
             Response response = client.GetModel(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("kind").ToString());
             Console.WriteLine(result.GetProperty("age").ToString());
         }
 
@@ -290,6 +349,7 @@ namespace _Type.Model.Inheritance.Samples
             Response response = await client.GetModelAsync(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("kind").ToString());
             Console.WriteLine(result.GetProperty("age").ToString());
         }
 
@@ -302,6 +362,7 @@ namespace _Type.Model.Inheritance.Samples
             Response response = await client.GetModelAsync(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("kind").ToString());
             Console.WriteLine(result.GetProperty("age").ToString());
         }
 
@@ -322,6 +383,7 @@ namespace _Type.Model.Inheritance.Samples
 
             var data = new
             {
+                kind = "",
                 age = 1234,
             };
 
@@ -337,6 +399,7 @@ namespace _Type.Model.Inheritance.Samples
 
             var data = new
             {
+                kind = "",
                 age = 1234,
             };
 
@@ -352,6 +415,7 @@ namespace _Type.Model.Inheritance.Samples
 
             var data = new
             {
+                kind = "",
                 age = 1234,
             };
 
@@ -367,6 +431,7 @@ namespace _Type.Model.Inheritance.Samples
 
             var data = new
             {
+                kind = "",
                 age = 1234,
             };
 
@@ -393,6 +458,7 @@ namespace _Type.Model.Inheritance.Samples
             Response response = client.GetRecursiveModel(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("kind").ToString());
             Console.WriteLine(result.GetProperty("age").ToString());
         }
 
@@ -405,6 +471,7 @@ namespace _Type.Model.Inheritance.Samples
             Response response = client.GetRecursiveModel(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("kind").ToString());
             Console.WriteLine(result.GetProperty("age").ToString());
         }
 
@@ -417,6 +484,7 @@ namespace _Type.Model.Inheritance.Samples
             Response response = await client.GetRecursiveModelAsync(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("kind").ToString());
             Console.WriteLine(result.GetProperty("age").ToString());
         }
 
@@ -429,6 +497,7 @@ namespace _Type.Model.Inheritance.Samples
             Response response = await client.GetRecursiveModelAsync(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("kind").ToString());
             Console.WriteLine(result.GetProperty("age").ToString());
         }
 
@@ -449,6 +518,7 @@ namespace _Type.Model.Inheritance.Samples
 
             var data = new
             {
+                kind = "",
                 age = 1234,
             };
 
@@ -464,6 +534,7 @@ namespace _Type.Model.Inheritance.Samples
 
             var data = new
             {
+                kind = "",
                 age = 1234,
             };
 
@@ -479,6 +550,7 @@ namespace _Type.Model.Inheritance.Samples
 
             var data = new
             {
+                kind = "",
                 age = 1234,
             };
 
@@ -494,6 +566,7 @@ namespace _Type.Model.Inheritance.Samples
 
             var data = new
             {
+                kind = "",
                 age = 1234,
             };
 
@@ -520,6 +593,7 @@ namespace _Type.Model.Inheritance.Samples
             Response response = client.GetMissingDiscriminator(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("kind").ToString());
             Console.WriteLine(result.GetProperty("age").ToString());
         }
 
@@ -532,6 +606,7 @@ namespace _Type.Model.Inheritance.Samples
             Response response = client.GetMissingDiscriminator(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("kind").ToString());
             Console.WriteLine(result.GetProperty("age").ToString());
         }
 
@@ -544,6 +619,7 @@ namespace _Type.Model.Inheritance.Samples
             Response response = await client.GetMissingDiscriminatorAsync(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("kind").ToString());
             Console.WriteLine(result.GetProperty("age").ToString());
         }
 
@@ -556,6 +632,7 @@ namespace _Type.Model.Inheritance.Samples
             Response response = await client.GetMissingDiscriminatorAsync(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("kind").ToString());
             Console.WriteLine(result.GetProperty("age").ToString());
         }
 
@@ -577,6 +654,7 @@ namespace _Type.Model.Inheritance.Samples
             Response response = client.GetWrongDiscriminator(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("kind").ToString());
             Console.WriteLine(result.GetProperty("age").ToString());
         }
 
@@ -589,6 +667,7 @@ namespace _Type.Model.Inheritance.Samples
             Response response = client.GetWrongDiscriminator(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("kind").ToString());
             Console.WriteLine(result.GetProperty("age").ToString());
         }
 
@@ -601,6 +680,7 @@ namespace _Type.Model.Inheritance.Samples
             Response response = await client.GetWrongDiscriminatorAsync(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("kind").ToString());
             Console.WriteLine(result.GetProperty("age").ToString());
         }
 
@@ -613,6 +693,7 @@ namespace _Type.Model.Inheritance.Samples
             Response response = await client.GetWrongDiscriminatorAsync(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("kind").ToString());
             Console.WriteLine(result.GetProperty("age").ToString());
         }
 

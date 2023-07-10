@@ -26,7 +26,7 @@ namespace body_string_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new EnumClient(credential);
 
-            Response response = client.GetNotExpandable();
+            Response response = client.GetNotExpandable(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());
@@ -39,7 +39,7 @@ namespace body_string_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new EnumClient(credential);
 
-            Response response = client.GetNotExpandable();
+            Response response = client.GetNotExpandable(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());
@@ -52,7 +52,7 @@ namespace body_string_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new EnumClient(credential);
 
-            Response response = await client.GetNotExpandableAsync();
+            Response response = await client.GetNotExpandableAsync(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());
@@ -65,7 +65,7 @@ namespace body_string_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new EnumClient(credential);
 
-            Response response = await client.GetNotExpandableAsync();
+            Response response = await client.GetNotExpandableAsync(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());
@@ -130,7 +130,7 @@ namespace body_string_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new EnumClient(credential);
 
-            Response response = client.GetReferenced();
+            Response response = client.GetReferenced(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());
@@ -143,7 +143,7 @@ namespace body_string_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new EnumClient(credential);
 
-            Response response = client.GetReferenced();
+            Response response = client.GetReferenced(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());
@@ -156,7 +156,7 @@ namespace body_string_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new EnumClient(credential);
 
-            Response response = await client.GetReferencedAsync();
+            Response response = await client.GetReferencedAsync(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());
@@ -169,7 +169,7 @@ namespace body_string_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new EnumClient(credential);
 
-            Response response = await client.GetReferencedAsync();
+            Response response = await client.GetReferencedAsync(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());
@@ -234,7 +234,7 @@ namespace body_string_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new EnumClient(credential);
 
-            Response response = client.GetReferencedConstant();
+            Response response = client.GetReferencedConstant(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("ColorConstant").ToString());
@@ -247,7 +247,7 @@ namespace body_string_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new EnumClient(credential);
 
-            Response response = client.GetReferencedConstant();
+            Response response = client.GetReferencedConstant(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("ColorConstant").ToString());
@@ -261,7 +261,7 @@ namespace body_string_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new EnumClient(credential);
 
-            Response response = await client.GetReferencedConstantAsync();
+            Response response = await client.GetReferencedConstantAsync(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("ColorConstant").ToString());
@@ -274,7 +274,7 @@ namespace body_string_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new EnumClient(credential);
 
-            Response response = await client.GetReferencedConstantAsync();
+            Response response = await client.GetReferencedConstantAsync(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("ColorConstant").ToString());
