@@ -583,9 +583,10 @@ export function getInputType(
                 discriminatorProperty?.type.kind === "String" ||
                 // discriminator property cannot be number, but enum support number values
                 // typespec compiler will do the check, but here we do a double check just in case
-                (discriminatorProperty?.type.kind === "EnumMember" && typeof discriminatorProperty?.type.value === 'string')
+                (discriminatorProperty?.type.kind === "EnumMember" &&
+                    typeof discriminatorProperty?.type.value === "string")
             ) {
-                return (String)(discriminatorProperty.type.value);
+                return String(discriminatorProperty.type.value);
             }
         }
 
