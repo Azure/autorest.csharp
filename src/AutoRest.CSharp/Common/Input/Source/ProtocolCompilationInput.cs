@@ -6,6 +6,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using AutoRest.CSharp.AutoRest.Plugins;
 using AutoRest.CSharp.Generation.Types;
+using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Utilities;
 using Azure;
 using Microsoft.CodeAnalysis;
@@ -93,6 +94,9 @@ namespace AutoRest.CSharp.Input.Source
         }
 
         private bool IsClient(INamedTypeSymbol type) => type.Name.EndsWith("Client");
-        private bool IsProtocolMethod(IMethodSymbol method) => method.Parameters.Length > 0 && method.Parameters.Last().Name == "context";
+        private bool IsProtocolMethod(IMethodSymbol method) =>
+            method.Parameters.Length > 0
+            && ((method.Parameters.Last().Type as INamedTypeSymbol)!.IsSameType(KnownParameters.RequestContext.Type)
+            || (method.Parameters.Last().Type as INamedTypeSymbol)!.IsSameType(KnownParameters.RequestContextRequired.Type));
     }
 }
