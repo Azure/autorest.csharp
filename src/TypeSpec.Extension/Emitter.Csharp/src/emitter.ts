@@ -112,7 +112,7 @@ export async function $onEmit(context: EmitContext<NetEmitterOptions>) {
 
             //emit configuration.json
             const configurations = {
-                OutputFolder: ".",
+                OutputFolder: ".", // TODO -- align
                 Namespace: options.namespace ?? namespace,
                 LibraryName:
                     options["library-name"] ?? options.namespace ?? namespace,
@@ -208,10 +208,4 @@ function deleteFile(filePath: string) {
 
 function prettierOutput(output: string) {
     return output + "\n";
-}
-
-class ErrorTypeFoundError extends Error {
-    constructor() {
-        super("Error type found in evaluated typespec output");
-    }
 }
