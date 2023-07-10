@@ -1,8 +1,8 @@
 {
-  "OutputFolder": ".",
-  "Namespace": "TypeSpec.HeadClient",
-  "LibraryName": "TypeSpec.HeadClient",
-  "SharedSourceFolders": [
+  "output-folder": ".",
+  "namespace": "TypeSpec.HeadClient",
+  "library-name": "TypeSpec.HeadClient",
+  "shared-source-folders": [
     "../../../../../../../node_modules/@autorest/csharp/Generator.Shared",
     "../../../../../../../node_modules/@autorest/csharp/Azure.Core.Shared"
   ],
