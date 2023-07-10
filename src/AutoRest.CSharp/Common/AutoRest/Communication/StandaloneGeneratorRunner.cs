@@ -278,6 +278,7 @@ namespace AutoRest.CSharp.AutoRest.Communication
                 ReadOption(root, Configuration.Options.DisablePaginationTopRenaming),
                 ReadOption(root, Configuration.Options.GenerateModelFactory),
                 ReadOption(root, Configuration.Options.PublicDiscriminatorProperty),
+                ReadOption(root, Configuration.Options.DeserializeNullCollectionAsNullValue),
                 oldModelFactoryEntries,
                 ReadEnumOption<Configuration.UnreferencedTypesHandlingOption>(root, Configuration.Options.UnreferencedTypesHandling),
                 ReadOption(root, Configuration.Options.UseOverloadsBetweenProtocolAndConvenience),

@@ -32,7 +32,7 @@ namespace AutoRest.CSharp.Generation.Writers.Tests
             null, new List<InputModelType>(), null, null, false);
 
         [OneTimeSetUp]
-        public void init()
+        public void Initialize()
         {
             Configuration.Initialize(
                 outputFolder: "Generated",
@@ -51,6 +51,7 @@ namespace AutoRest.CSharp.Generation.Writers.Tests
                 disablePaginationTopRenaming: false,
                 generateModelFactory: true,
                 publicDiscriminatorProperty: false,
+                deserializeNullCollectionAsNullValue: false,
                 modelFactoryForHlc: Array.Empty<string>(),
                 unreferencedTypesHandling: Configuration.UnreferencedTypesHandlingOption.RemoveOrInternalize,
                 useOverloadsBetweenProtocolAndConvenience: true,
