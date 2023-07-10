@@ -19,6 +19,7 @@ using AutoRest.CSharp.Common.Output.Models;
 using Azure.Core;
 using static AutoRest.CSharp.Output.Models.MethodSignatureModifiers;
 using System.Text.Json;
+using Azure.Core.Pipeline;
 
 namespace AutoRest.CSharp.Generation.Writers
 {
@@ -646,6 +647,15 @@ namespace AutoRest.CSharp.Generation.Writers
                 writer.WriteParametersValidation(signature.Parameters);
 
             return scope;
+        }
+
+        public static CodeWriter WriteEnableHttpRedirectIfNecessary(this CodeWriter writer, RestClientMethod restClientMethod, CodeWriterDeclaration messageVariable)
+        {
+            if (restClientMethod.ShouldEnableRedirect)
+            {
+                writer.Line($"{nameof(RedirectPolicy)}.{nameof(RedirectPolicy.SetAllowAutoRedirect)}({messageVariable}, true);");
+            }
+            return writer;
         }
     }
 }
