@@ -37,7 +37,7 @@ namespace httpInfrastructure_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new HttpRetryClient(credential);
 
-            Response response = client.Head408(new RequestContext());
+            Response response = client.Head408();
             Console.WriteLine(response.Status);
         }
 
@@ -59,7 +59,7 @@ namespace httpInfrastructure_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new HttpRetryClient(credential);
 
-            Response response = await client.Head408Async(new RequestContext());
+            Response response = await client.Head408Async();
             Console.WriteLine(response.Status);
         }
 
@@ -85,7 +85,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
             var data = true;
 
-            Response response = client.Put500(RequestContent.Create(data), new RequestContext());
+            Response response = client.Put500(RequestContent.Create(data));
             Console.WriteLine(response.Status);
         }
 
@@ -111,7 +111,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
             var data = true;
 
-            Response response = await client.Put500Async(RequestContent.Create(data), new RequestContext());
+            Response response = await client.Put500Async(RequestContent.Create(data));
             Console.WriteLine(response.Status);
         }
 
@@ -137,7 +137,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
             var data = true;
 
-            Response response = client.Patch500(RequestContent.Create(data), new RequestContext());
+            Response response = client.Patch500(RequestContent.Create(data));
             Console.WriteLine(response.Status);
         }
 
@@ -163,7 +163,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
             var data = true;
 
-            Response response = await client.Patch500Async(RequestContent.Create(data), new RequestContext());
+            Response response = await client.Patch500Async(RequestContent.Create(data));
             Console.WriteLine(response.Status);
         }
 
@@ -185,7 +185,7 @@ namespace httpInfrastructure_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new HttpRetryClient(credential);
 
-            Response response = client.Get502(new RequestContext());
+            Response response = client.Get502();
             Console.WriteLine(response.Status);
         }
 
@@ -207,7 +207,7 @@ namespace httpInfrastructure_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new HttpRetryClient(credential);
 
-            Response response = await client.Get502Async(new RequestContext());
+            Response response = await client.Get502Async();
             Console.WriteLine(response.Status);
         }
 
@@ -218,7 +218,7 @@ namespace httpInfrastructure_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new HttpRetryClient(credential);
 
-            Response response = client.Options502();
+            Response response = client.Options502(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());
@@ -244,7 +244,7 @@ namespace httpInfrastructure_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new HttpRetryClient(credential);
 
-            Response response = await client.Options502Async();
+            Response response = await client.Options502Async(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());
@@ -285,7 +285,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
             var data = true;
 
-            Response response = client.Post503(RequestContent.Create(data), new RequestContext());
+            Response response = client.Post503(RequestContent.Create(data));
             Console.WriteLine(response.Status);
         }
 
@@ -311,7 +311,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
             var data = true;
 
-            Response response = await client.Post503Async(RequestContent.Create(data), new RequestContext());
+            Response response = await client.Post503Async(RequestContent.Create(data));
             Console.WriteLine(response.Status);
         }
 
@@ -337,7 +337,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
             var data = true;
 
-            Response response = client.Delete503(RequestContent.Create(data), new RequestContext());
+            Response response = client.Delete503(RequestContent.Create(data));
             Console.WriteLine(response.Status);
         }
 
@@ -363,7 +363,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
             var data = true;
 
-            Response response = await client.Delete503Async(RequestContent.Create(data), new RequestContext());
+            Response response = await client.Delete503Async(RequestContent.Create(data));
             Console.WriteLine(response.Status);
         }
 
@@ -389,7 +389,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
             var data = true;
 
-            Response response = client.Put504(RequestContent.Create(data), new RequestContext());
+            Response response = client.Put504(RequestContent.Create(data));
             Console.WriteLine(response.Status);
         }
 
@@ -415,7 +415,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
             var data = true;
 
-            Response response = await client.Put504Async(RequestContent.Create(data), new RequestContext());
+            Response response = await client.Put504Async(RequestContent.Create(data));
             Console.WriteLine(response.Status);
         }
 
@@ -441,7 +441,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
             var data = true;
 
-            Response response = client.Patch504(RequestContent.Create(data), new RequestContext());
+            Response response = client.Patch504(RequestContent.Create(data));
             Console.WriteLine(response.Status);
         }
 
@@ -467,7 +467,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
             var data = true;
 
-            Response response = await client.Patch504Async(RequestContent.Create(data), new RequestContext());
+            Response response = await client.Patch504Async(RequestContent.Create(data));
             Console.WriteLine(response.Status);
         }
     }

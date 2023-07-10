@@ -1,90 +1,179 @@
 trigger: none
 
+parameters:
+  - name: UseTypeSpecNext
+    type: boolean
+    default: false
+
 variables:
-  NugetSecurityAnalysisWarningLevel: 'none'
+  nugetMultiFeedWarnLevel: 'none'
 
 resources:
   repositories:
-    - repository: azure-sdk-for-net
-      type: github
-      name: Azure/azure-sdk-for-net
-      endpoint: azure
     - repository: azure-sdk-tools
       type: github
       name: Azure/azure-sdk-tools
       endpoint: azure
       ref: refs/tags/azure-sdk-tools_20230428.1
+    - repository: azure-sdk-for-net
+      type: github
+      name: Azure/azure-sdk-for-net
+      endpoint: azure
+      ref: main
+    - repository: azure-sdk-build-tools
+      type: git
+      name: internal/azure-sdk-build-tools
+      ref: refs/tags/azure-sdk-build-tools_20230307.1
 
 stages:
-  - stage: 'Build_and_Publish'
+  - stage: 'Build_and_Test'
     jobs:
-    - job: Build_and_Publish
-      timeoutInMinutes: 120
-      pool:
-        name: azsdk-pool-mms-win-2022-general
-        vmImage: windows-2022
-      steps:
-        - checkout: self
-          fetchDepth: 1
-        - task: UseDotNet@2
-          displayName: 'Use .NET Core SDK'
-          retryCountOnTaskFailure: 3
-          inputs:
-            useGlobalJson: true
-            performMultiLevelLookup: true
-        - task: NodeTool@0
-          displayName: "Install Node 18.13.0"
-          inputs:
-            versionSpec: '18.13.0'
-        - script: |
-            npm ci
-          displayName: "Install packages"
-          workingDirectory: $(Build.SourcesDirectory)
-        - pwsh: ./eng/PackArtifacts.ps1 -BuildNumber $(Build.BuildNumber) -StagingDirectory $(Build.ArtifactStagingDirectory)
-          name: Package
-          displayName: "Pack Artifacts"
-          workingDirectory: $(Build.SourcesDirectory)
-        - task: NuGetCommand@2
-          displayName: 'Publish NugetPackage'
-          inputs:
-            command: 'push'
-            packagesToPush: '$(Build.ArtifactStagingDirectory)/**/*.nupkg;!$(Build.ArtifactStagingDirectory)/**/*.symbols.nupkg'
-            nuGetFeedType: 'internal'
-            publishVstsFeed: '29ec6040-b234-4e31-b139-33dc4287b756/fa8c16a3-dbe0-4de2-a297-03065ec1ba3f'
-        - task: Npm@1
-          displayName: 'Publish @autorest/csharp'
-          inputs:
-            command: 'publish'
-            workingDir: '$(Build.SourcesDirectory)/artifacts/bin/AutoRest.CSharp/Release/net6.0'
-            publishRegistry: 'useFeed'
-            publishFeed: '29ec6040-b234-4e31-b139-33dc4287b756/05efbea8-6e52-49dd-ad3d-ac3d4aa65036'
-        - pwsh: ./eng/PackEmitter.ps1 -BuildNumber $(Build.BuildNumber) -AutorestVersion $(Package.autorestVersion) -StagingDirectory $(Build.ArtifactStagingDirectory)
-          name: PackEmitter
-          displayName: "Pack Emitter"
-          workingDirectory: $(Build.SourcesDirectory)
-        - task: Npm@1
-          displayName: 'Publish @azure-tools/typespec-csharp'
-          inputs:
-            command: 'publish'
-            workingDir: '$(Build.SourcesDirectory)/src/CADL.Extension/Emitter.Csharp'
-            publishRegistry: 'useFeed'
-            publishFeed: '29ec6040-b234-4e31-b139-33dc4287b756/05efbea8-6e52-49dd-ad3d-ac3d4aa65036'
-        - task: PublishBuildArtifacts@1
-          condition: succeededOrFailed()
-          displayName: 'Publish Artifacts'
-          inputs:
-            ArtifactName: packages
+      - job: Build
+        timeoutInMinutes: 120
+        pool:
+          name: azsdk-pool-mms-win-2022-general
+          vmImage: windows-2022
+        steps:
+          - checkout: self
+            fetchDepth: 1
+          - checkout: azure-sdk-tools
+            fetchDepth: 1
+          - task: UseDotNet@2
+            displayName: 'Use .NET Core SDK'
+            retryCountOnTaskFailure: 3
+            inputs:
+              useGlobalJson: true
+              performMultiLevelLookup: true
+          - task: NodeTool@0
+            displayName: "Install Node 18.x"
+            inputs:
+              versionSpec: '18.x'
+          - ${{ if eq(parameters.UseTypeSpecNext, 'true') }}:
+            - pwsh: ./eng/UseTypeSpecNextVersions.ps1
+              displayName: "Use 'next' TypeSpec dependencies"
+              workingDirectory: $(Build.SourcesDirectory)/autorest.csharp
+            - pwsh: |
+                $dir = New-Item -ItemType Directory -Path $(Build.ArtifactStagingDirectory)/package-json -Verbose
+                Copy-Item ./package*.json $(Build.ArtifactStagingDirectory)/package-json -Verbose
+                Copy-Item ./src/TypeSpec.Extension/Emitter.Csharp/package.json $(Build.ArtifactStagingDirectory)/package-json/emitter-package.json -Verbose
+              workingDirectory: $(Build.SourcesDirectory)/autorest.csharp
+              displayName: 'Stage package-json artifact'
+              condition: succeededOrFailed()
+            - publish: $(Build.ArtifactStagingDirectory)/package-json
+              artifact: package-json
+              condition: succeededOrFailed()
+              displayName: "Publish package-json artifact"
+          - script: |
+              npm ci
+            displayName: "Install packages"
+            workingDirectory: $(Build.SourcesDirectory)/autorest.csharp
+          - script: |
+              npm ls -a
+            displayName: "List packages"
+            workingDirectory: $(Build.SourcesDirectory)/autorest.csharp
+          - script: |
+              npm run prettier
+            displayName: "Emitter format check"
+            workingDirectory: $(Build.SourcesDirectory)/autorest.csharp/src/TypeSpec.Extension/Emitter.Csharp
+          - pwsh: ./eng/PackArtifacts.ps1 -BuildNumber $(Build.BuildNumber) -StagingDirectory $(Build.ArtifactStagingDirectory)/packages
+            name: Package
+            displayName: "Pack Artifacts"
+            workingDirectory: $(Build.SourcesDirectory)/autorest.csharp
+          - task: Npm@1
+            displayName: 'Build CADL Ranch Mock Api project'
+            inputs:
+              command: custom
+              customCommand: run build
+              workingDir: $(Build.SourcesDirectory)/autorest.csharp/test/CadlRanchMockApis
+          - script: |
+              dotnet test AutoRest.CSharp.sln -v:q
+            displayName: "Test"
+            env:
+              DOTNET_SKIP_FIRST_TIME_EXPERIENCE: 1
+              DOTNET_CLI_TELEMETRY_OPTOUT: 1
+              DOTNET_MULTILEVEL_LOOKUP: 0
+            workingDirectory: $(Build.SourcesDirectory)/autorest.csharp
+            continueOnError: ${{ parameters.UseTypeSpecNext }}
+          - task: Npm@1
+            displayName: 'Build TypeSpec csharp emitter'
+            inputs:
+              command: custom
+              customCommand: run build
+              workingDir: $(Build.SourcesDirectory)/autorest.csharp/src/TypeSpec.Extension/Emitter.Csharp
+          - pwsh: ./eng/ExecuteTypespecEmitterUnitTests.ps1
+            displayName: 'E2E Test for TypeSpec emitter'
+            workingDirectory: $(Build.SourcesDirectory)/autorest.csharp
+            continueOnError: ${{ parameters.UseTypeSpecNext }}
+          - script: |
+              npm run test --prefix src/TypeSpec.Extension/Emitter.Csharp
+            displayName: 'Unit Test'
+            workingDirectory: $(Build.SourcesDirectory)/autorest.csharp
+            continueOnError: ${{ parameters.UseTypeSpecNext }}
+          - task: NuGetCommand@2
+            displayName: 'Publish NugetPackage'
+            inputs:
+              command: 'push'
+              packagesToPush: '$(Build.ArtifactStagingDirectory)/packages/**/*.nupkg;!$(Build.ArtifactStagingDirectory)/packages/**/*.symbols.nupkg'
+              nuGetFeedType: 'internal'
+              publishVstsFeed: '29ec6040-b234-4e31-b139-33dc4287b756/fa8c16a3-dbe0-4de2-a297-03065ec1ba3f'
+          - task: Npm@1
+            displayName: 'Publish @autorest/csharp'
+            inputs:
+              command: 'publish'
+              workingDir: '$(Build.SourcesDirectory)/autorest.csharp/artifacts/bin/AutoRest.CSharp/Release/net6.0'
+              publishRegistry: 'useFeed'
+              publishFeed: '29ec6040-b234-4e31-b139-33dc4287b756/05efbea8-6e52-49dd-ad3d-ac3d4aa65036'
+          - pwsh: ./eng/PackEmitter.ps1 -BuildNumber $(Build.BuildNumber) -AutorestVersion $(Package.autorestVersion) -StagingDirectory $(Build.ArtifactStagingDirectory)/packages
+            name: PackEmitter
+            displayName: "Pack Emitter"
+            workingDirectory: $(Build.SourcesDirectory)/autorest.csharp
+          - task: Npm@1
+            displayName: 'Publish @azure-tools/typespec-csharp'
+            inputs:
+              command: 'publish'
+              workingDir: '$(Build.SourcesDirectory)/autorest.csharp/src/TypeSpec.Extension/Emitter.Csharp'
+              publishRegistry: 'useFeed'
+              publishFeed: '29ec6040-b234-4e31-b139-33dc4287b756/05efbea8-6e52-49dd-ad3d-ac3d4aa65036'
+          - publish: $(Build.ArtifactStagingDirectory)/packages
+            artifact: packages
+            condition: succeededOrFailed()
+            displayName: "Publish packages artifact"
+  - ${{ if eq(parameters.UseTypeSpecNext, 'true') }}:
+    - stage: 'Check_Code_Generation'
+      dependsOn:
+        - Build_and_Test
+      jobs:
+      - template: check-code-generation.yml
+        parameters:
+          name: Check_Code_Generation_A_C
+          filter: "^[a-b]"
+          usePackageJsonFromArtifacts: true
+      - template: check-code-generation.yml
+        parameters:
+          name: Check_Code_Generation_C_I
+          filter: "^[c-i]"
+          usePackageJsonFromArtifacts: true
+      - template: check-code-generation.yml
+        parameters:
+          name: Check_Code_Generation_J_R
+          filter: "^[j-r]"
+          usePackageJsonFromArtifacts: true
+      - template: check-code-generation.yml
+        parameters:
+          name: Check_Code_Generation_S_Z
+          filter: "^[s-z]"
+          usePackageJsonFromArtifacts: true
   - stage: 'Update_azure_sdk_for_net'
     dependsOn:
-      - Build_and_Publish
+      - Build_and_Test
     variables:
-      AutorestCSharpVersion: $[stageDependencies.Build_and_Publish.Build_and_Publish.outputs['Package.autorestVersion']]
-      CadlEmitterVersion: $[stageDependencies.Build_and_Publish.Build_and_Publish.outputs['PackEmitter.emitterVersion']]
+      AutorestCSharpVersion: $[stageDependencies.Build_and_Test.Build.outputs['Package.autorestVersion']]
+      TypeSpecEmitterVersion: $[stageDependencies.Build_and_Test.Build.outputs['PackEmitter.emitterVersion']]
     jobs:
       - template: update-generator-versions.yml
         parameters:
           AutorestCSharpVersion: $(AutorestCSharpVersion)
-          CadlEmitterVersion: $(CadlEmitterVersion)
+          TypeSpecEmitterVersion: $(TypeSpecEmitterVersion)
           IsInternalFeed: true
       - template: generate-sdk-job-matrix-files.yml
         parameters:
@@ -95,7 +184,7 @@ stages:
           Name: Update_Code
           Matrix: $[dependencies.Generate_Job_Matrix.outputs['generate_job_matrix.matrix']]
           AutorestCSharpVersion: $(AutorestCSharpVersion)
-          CadlEmitterVersion: $(CadlEmitterVersion)
+          TypeSpecEmitterVersion: $(TypeSpecEmitterVersion)
           IsInternalFeed: true
           DependsOn: Generate_Job_Matrix
       - job: Create_PR

@@ -38,7 +38,7 @@ namespace AutoRest.TestServer.Tests
             Assert.NotNull(thirdParam);
             Assert.AreEqual(typeof(string), thirdParam.ParameterType);
             Assert.True(thirdParam.HasDefaultValue);
-            Assert.AreEqual("value1", thirdParam.DefaultValue);
+            Assert.AreEqual(null, thirdParam.DefaultValue);
 
             var fourthParam = TypeAsserts.HasParameter(ctor, "param2");
             Assert.NotNull(fourthParam);
@@ -73,7 +73,7 @@ namespace AutoRest.TestServer.Tests
             Assert.NotNull(thirdParam);
             Assert.AreEqual(typeof(string), thirdParam.ParameterType);
             Assert.True(thirdParam.HasDefaultValue);
-            Assert.AreEqual("value1", thirdParam.DefaultValue);
+            Assert.AreEqual(null, thirdParam.DefaultValue);
 
             var fourthParam = TypeAsserts.HasParameter(ctor, "param2");
             Assert.NotNull(fourthParam);
@@ -102,7 +102,6 @@ namespace AutoRest.TestServer.Tests
             await client.OperationAsync(new TestModel());
 
             Assert.True(requestHeaders.TryGetValue("fake-key", out var value) && value == "fake");
-            Assert.True(requestHeaders.TryGetValue("Param1", out value) && value == "value1");
         }
     }
 }

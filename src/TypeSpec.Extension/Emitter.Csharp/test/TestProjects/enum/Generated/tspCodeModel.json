@@ -1,0 +1,398 @@
+{
+ "$id": "1",
+ "Name": "TypeSpec.EnumPropertiesBasic",
+ "Description": "Illustrates input models with required enum type properties.",
+ "ApiVersions": [
+  "1.0.0"
+ ],
+ "Enums": [
+  {
+   "$id": "2",
+   "Name": "DayOfTheWeek",
+   "Namespace": "TypeSpec.EnumPropertiesBasic",
+   "Description": "Represents the days of the week using a standard, non-string enum.",
+   "EnumValueType": "String",
+   "AllowedValues": [
+    {
+     "$id": "3",
+     "Name": "Monday",
+     "Value": "Monday"
+    },
+    {
+     "$id": "4",
+     "Name": "Tuesday",
+     "Value": "Tuesday"
+    },
+    {
+     "$id": "5",
+     "Name": "Wednesday",
+     "Value": "Wednesday",
+     "Description": "Wednesday is documented to test this case."
+    },
+    {
+     "$id": "6",
+     "Name": "Thursday",
+     "Value": "Thursday"
+    },
+    {
+     "$id": "7",
+     "Name": "Friday",
+     "Value": "Friday"
+    },
+    {
+     "$id": "8",
+     "Name": "Saturday",
+     "Value": "Saturday"
+    },
+    {
+     "$id": "9",
+     "Name": "Sunday",
+     "Value": "Sunday"
+    }
+   ],
+   "IsExtensible": true,
+   "IsNullable": false,
+   "Usage": "Input"
+  },
+  {
+   "$id": "10",
+   "Name": "FixedDayOfTheWeek",
+   "Namespace": "TypeSpec.EnumPropertiesBasic",
+   "Description": "Represents the days of the week using a standard, non-string enum.",
+   "EnumValueType": "String",
+   "AllowedValues": [
+    {
+     "$id": "11",
+     "Name": "Monday",
+     "Value": "Monday"
+    },
+    {
+     "$id": "12",
+     "Name": "Tuesday",
+     "Value": "Tuesday"
+    },
+    {
+     "$id": "13",
+     "Name": "Wednesday",
+     "Value": "Wednesday",
+     "Description": "Wednesday is documented to test this case."
+    },
+    {
+     "$id": "14",
+     "Name": "Thursday",
+     "Value": "Thursday"
+    },
+    {
+     "$id": "15",
+     "Name": "Friday",
+     "Value": "Friday"
+    },
+    {
+     "$id": "16",
+     "Name": "Saturday",
+     "Value": "Saturday"
+    },
+    {
+     "$id": "17",
+     "Name": "Sunday",
+     "Value": "Sunday"
+    }
+   ],
+   "IsExtensible": false,
+   "IsNullable": false,
+   "Usage": "Input"
+  },
+  {
+   "$id": "18",
+   "Name": "TranslationLanguage",
+   "Namespace": "TypeSpec.EnumPropertiesBasic",
+   "Description": "The language to translate the input text into.",
+   "EnumValueType": "String",
+   "AllowedValues": [
+    {
+     "$id": "19",
+     "Name": "English",
+     "Value": "English",
+     "Description": "Translate to English"
+    },
+    {
+     "$id": "20",
+     "Name": "Spanish",
+     "Value": "Spanish",
+     "Description": "Translate to Spanish"
+    },
+    {
+     "$id": "21",
+     "Name": "Mandarin",
+     "Value": "Mandarin",
+     "Description": "Translate to Mandarin"
+    },
+    {
+     "$id": "22",
+     "Name": "Undocumented",
+     "Value": "Undocumented"
+    }
+   ],
+   "IsExtensible": true,
+   "IsNullable": false,
+   "Usage": "None"
+  },
+  {
+   "$id": "23",
+   "Name": "EnumWithStringValue",
+   "Namespace": "TypeSpec.EnumPropertiesBasic",
+   "Description": "Represents the simple enum with enum string value.",
+   "EnumValueType": "String",
+   "AllowedValues": [
+    {
+     "$id": "24",
+     "Name": "One",
+     "Value": "1"
+    },
+    {
+     "$id": "25",
+     "Name": "Two",
+     "Value": "2"
+    },
+    {
+     "$id": "26",
+     "Name": "Three",
+     "Value": "3"
+    }
+   ],
+   "IsExtensible": true,
+   "IsNullable": false,
+   "Usage": "Input"
+  }
+ ],
+ "Models": [
+  {
+   "$id": "27",
+   "Name": "InputModel",
+   "Namespace": "TypeSpec.EnumPropertiesBasic",
+   "Description": "Input model with enum properties.",
+   "IsNullable": false,
+   "Usage": "Input",
+   "Properties": [
+    {
+     "$id": "28",
+     "Name": "Day",
+     "SerializedName": "Day",
+     "Description": "Required standard enum value.",
+     "Type": {
+      "$ref": "2"
+     },
+     "IsRequired": true,
+     "IsReadOnly": false
+    },
+    {
+     "$id": "29",
+     "Name": "FixedDay",
+     "SerializedName": "FixedDay",
+     "Description": "Required fixed enum value.",
+     "Type": {
+      "$ref": "10"
+     },
+     "IsRequired": true,
+     "IsReadOnly": false
+    },
+    {
+     "$id": "30",
+     "Name": "Language",
+     "SerializedName": "Language",
+     "Description": "",
+     "Type": {
+      "$ref": "18"
+     },
+     "IsRequired": true,
+     "IsReadOnly": false
+    },
+    {
+     "$id": "31",
+     "Name": "Title",
+     "SerializedName": "Title",
+     "Description": "",
+     "Type": {
+      "$ref": "23"
+     },
+     "IsRequired": true,
+     "IsReadOnly": false
+    }
+   ]
+  }
+ ],
+ "Clients": [
+  {
+   "$id": "32",
+   "Name": "EnumPropertiesBasicClient",
+   "Description": "Illustrates input models with required enum type properties.",
+   "Operations": [
+    {
+     "$id": "33",
+     "Name": "sendEnumPropertyModel",
+     "ResourceName": "EnumPropertiesBasic",
+     "Parameters": [
+      {
+       "$id": "34",
+       "Name": "host",
+       "NameInRequest": "host",
+       "Description": "TestServer endpoint",
+       "Type": {
+        "$id": "35",
+        "Name": "String",
+        "Kind": "String",
+        "IsNullable": false
+       },
+       "Location": "Uri",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsRequired": true,
+       "IsEndpoint": true,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Client",
+       "DefaultValue": {
+        "$id": "36",
+        "Type": {
+         "$id": "37",
+         "Name": "String",
+         "Kind": "String",
+         "IsNullable": false
+        },
+        "Value": "http://localhost:3000"
+       }
+      },
+      {
+       "$id": "38",
+       "Name": "input",
+       "NameInRequest": "input",
+       "Type": {
+        "$ref": "27"
+       },
+       "Location": "Body",
+       "IsRequired": true,
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Method"
+      },
+      {
+       "$id": "39",
+       "Name": "contentType",
+       "NameInRequest": "Content-Type",
+       "Type": {
+        "$id": "40",
+        "Name": "String",
+        "Kind": "String",
+        "IsNullable": false
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": true,
+       "IsRequired": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "41",
+        "Type": {
+         "$ref": "40"
+        },
+        "Value": "application/json"
+       }
+      },
+      {
+       "$id": "42",
+       "Name": "accept",
+       "NameInRequest": "Accept",
+       "Type": {
+        "$id": "43",
+        "Name": "String",
+        "Kind": "String",
+        "IsNullable": false
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsRequired": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "44",
+        "Type": {
+         "$ref": "43"
+        },
+        "Value": "application/json"
+       }
+      },
+      {
+       "$id": "45",
+       "Name": "apiVersion",
+       "NameInRequest": "api-version",
+       "Description": "",
+       "Type": {
+        "$id": "46",
+        "Name": "String",
+        "Kind": "String",
+        "IsNullable": false
+       },
+       "Location": "Query",
+       "IsRequired": true,
+       "IsApiVersion": true,
+       "IsContentType": false,
+       "IsEndpoint": false,
+       "IsResourceParameter": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Client",
+       "DefaultValue": {
+        "$id": "47",
+        "Type": {
+         "$id": "48",
+         "Name": "String",
+         "Kind": "String",
+         "IsNullable": false
+        },
+        "Value": "1.0.0"
+       }
+      }
+     ],
+     "Responses": [
+      {
+       "$id": "49",
+       "StatusCodes": [
+        200
+       ],
+       "BodyMediaType": "Json",
+       "Headers": [],
+       "IsErrorResponse": false
+      }
+     ],
+     "HttpMethod": "POST",
+     "RequestBodyMediaType": "Json",
+     "Uri": "{host}",
+     "Path": "/models",
+     "RequestMediaTypes": [
+      "application/json"
+     ],
+     "BufferResponse": true,
+     "GenerateProtocolMethod": true,
+     "GenerateConvenienceMethod": true
+    }
+   ],
+   "Protocol": {
+    "$id": "50"
+   },
+   "Creatable": true
+  }
+ ]
+}

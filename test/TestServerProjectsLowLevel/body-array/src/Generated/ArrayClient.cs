@@ -71,7 +71,7 @@ namespace body_array_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetNullAsync(RequestContext)']/*" />
-        public virtual async Task<Response> GetNullAsync(RequestContext context = null)
+        public virtual async Task<Response> GetNullAsync(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("ArrayClient.GetNull");
             scope.Start();
@@ -101,7 +101,7 @@ namespace body_array_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetNull(RequestContext)']/*" />
-        public virtual Response GetNull(RequestContext context = null)
+        public virtual Response GetNull(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("ArrayClient.GetNull");
             scope.Start();
@@ -131,7 +131,7 @@ namespace body_array_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetInvalidAsync(RequestContext)']/*" />
-        public virtual async Task<Response> GetInvalidAsync(RequestContext context = null)
+        public virtual async Task<Response> GetInvalidAsync(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("ArrayClient.GetInvalid");
             scope.Start();
@@ -161,7 +161,7 @@ namespace body_array_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetInvalid(RequestContext)']/*" />
-        public virtual Response GetInvalid(RequestContext context = null)
+        public virtual Response GetInvalid(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("ArrayClient.GetInvalid");
             scope.Start();
@@ -191,7 +191,7 @@ namespace body_array_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetEmptyAsync(RequestContext)']/*" />
-        public virtual async Task<Response> GetEmptyAsync(RequestContext context = null)
+        public virtual async Task<Response> GetEmptyAsync(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("ArrayClient.GetEmpty");
             scope.Start();
@@ -221,7 +221,7 @@ namespace body_array_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetEmpty(RequestContext)']/*" />
-        public virtual Response GetEmpty(RequestContext context = null)
+        public virtual Response GetEmpty(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("ArrayClient.GetEmpty");
             scope.Start();
@@ -319,7 +319,7 @@ namespace body_array_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetBooleanTfftAsync(RequestContext)']/*" />
-        public virtual async Task<Response> GetBooleanTfftAsync(RequestContext context = null)
+        public virtual async Task<Response> GetBooleanTfftAsync(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("ArrayClient.GetBooleanTfft");
             scope.Start();
@@ -349,7 +349,7 @@ namespace body_array_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetBooleanTfft(RequestContext)']/*" />
-        public virtual Response GetBooleanTfft(RequestContext context = null)
+        public virtual Response GetBooleanTfft(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("ArrayClient.GetBooleanTfft");
             scope.Start();
@@ -447,7 +447,7 @@ namespace body_array_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetBooleanInvalidNullAsync(RequestContext)']/*" />
-        public virtual async Task<Response> GetBooleanInvalidNullAsync(RequestContext context = null)
+        public virtual async Task<Response> GetBooleanInvalidNullAsync(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("ArrayClient.GetBooleanInvalidNull");
             scope.Start();
@@ -477,7 +477,7 @@ namespace body_array_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetBooleanInvalidNull(RequestContext)']/*" />
-        public virtual Response GetBooleanInvalidNull(RequestContext context = null)
+        public virtual Response GetBooleanInvalidNull(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("ArrayClient.GetBooleanInvalidNull");
             scope.Start();
@@ -494,7 +494,7 @@ namespace body_array_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method] Get boolean array value [true, &apos;boolean&apos;, false]
+        /// [Protocol Method] Get boolean array value [true, 'boolean', false]
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -507,7 +507,7 @@ namespace body_array_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetBooleanInvalidStringAsync(RequestContext)']/*" />
-        public virtual async Task<Response> GetBooleanInvalidStringAsync(RequestContext context = null)
+        public virtual async Task<Response> GetBooleanInvalidStringAsync(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("ArrayClient.GetBooleanInvalidString");
             scope.Start();
@@ -524,7 +524,7 @@ namespace body_array_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method] Get boolean array value [true, &apos;boolean&apos;, false]
+        /// [Protocol Method] Get boolean array value [true, 'boolean', false]
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -537,7 +537,7 @@ namespace body_array_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetBooleanInvalidString(RequestContext)']/*" />
-        public virtual Response GetBooleanInvalidString(RequestContext context = null)
+        public virtual Response GetBooleanInvalidString(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("ArrayClient.GetBooleanInvalidString");
             scope.Start();
@@ -567,7 +567,7 @@ namespace body_array_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetIntegerValidAsync(RequestContext)']/*" />
-        public virtual async Task<Response> GetIntegerValidAsync(RequestContext context = null)
+        public virtual async Task<Response> GetIntegerValidAsync(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("ArrayClient.GetIntegerValid");
             scope.Start();
@@ -597,7 +597,7 @@ namespace body_array_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetIntegerValid(RequestContext)']/*" />
-        public virtual Response GetIntegerValid(RequestContext context = null)
+        public virtual Response GetIntegerValid(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("ArrayClient.GetIntegerValid");
             scope.Start();
@@ -695,7 +695,7 @@ namespace body_array_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetIntInvalidNullAsync(RequestContext)']/*" />
-        public virtual async Task<Response> GetIntInvalidNullAsync(RequestContext context = null)
+        public virtual async Task<Response> GetIntInvalidNullAsync(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("ArrayClient.GetIntInvalidNull");
             scope.Start();
@@ -725,7 +725,7 @@ namespace body_array_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetIntInvalidNull(RequestContext)']/*" />
-        public virtual Response GetIntInvalidNull(RequestContext context = null)
+        public virtual Response GetIntInvalidNull(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("ArrayClient.GetIntInvalidNull");
             scope.Start();
@@ -742,7 +742,7 @@ namespace body_array_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method] Get integer array value [1, &apos;integer&apos;, 0]
+        /// [Protocol Method] Get integer array value [1, 'integer', 0]
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -755,7 +755,7 @@ namespace body_array_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetIntInvalidStringAsync(RequestContext)']/*" />
-        public virtual async Task<Response> GetIntInvalidStringAsync(RequestContext context = null)
+        public virtual async Task<Response> GetIntInvalidStringAsync(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("ArrayClient.GetIntInvalidString");
             scope.Start();
@@ -772,7 +772,7 @@ namespace body_array_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method] Get integer array value [1, &apos;integer&apos;, 0]
+        /// [Protocol Method] Get integer array value [1, 'integer', 0]
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -785,7 +785,7 @@ namespace body_array_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetIntInvalidString(RequestContext)']/*" />
-        public virtual Response GetIntInvalidString(RequestContext context = null)
+        public virtual Response GetIntInvalidString(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("ArrayClient.GetIntInvalidString");
             scope.Start();
@@ -815,7 +815,7 @@ namespace body_array_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetLongValidAsync(RequestContext)']/*" />
-        public virtual async Task<Response> GetLongValidAsync(RequestContext context = null)
+        public virtual async Task<Response> GetLongValidAsync(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("ArrayClient.GetLongValid");
             scope.Start();
@@ -845,7 +845,7 @@ namespace body_array_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetLongValid(RequestContext)']/*" />
-        public virtual Response GetLongValid(RequestContext context = null)
+        public virtual Response GetLongValid(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("ArrayClient.GetLongValid");
             scope.Start();
@@ -943,7 +943,7 @@ namespace body_array_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetLongInvalidNullAsync(RequestContext)']/*" />
-        public virtual async Task<Response> GetLongInvalidNullAsync(RequestContext context = null)
+        public virtual async Task<Response> GetLongInvalidNullAsync(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("ArrayClient.GetLongInvalidNull");
             scope.Start();
@@ -973,7 +973,7 @@ namespace body_array_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetLongInvalidNull(RequestContext)']/*" />
-        public virtual Response GetLongInvalidNull(RequestContext context = null)
+        public virtual Response GetLongInvalidNull(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("ArrayClient.GetLongInvalidNull");
             scope.Start();
@@ -990,7 +990,7 @@ namespace body_array_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method] Get long array value [1, &apos;integer&apos;, 0]
+        /// [Protocol Method] Get long array value [1, 'integer', 0]
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -1003,7 +1003,7 @@ namespace body_array_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetLongInvalidStringAsync(RequestContext)']/*" />
-        public virtual async Task<Response> GetLongInvalidStringAsync(RequestContext context = null)
+        public virtual async Task<Response> GetLongInvalidStringAsync(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("ArrayClient.GetLongInvalidString");
             scope.Start();
@@ -1020,7 +1020,7 @@ namespace body_array_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method] Get long array value [1, &apos;integer&apos;, 0]
+        /// [Protocol Method] Get long array value [1, 'integer', 0]
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -1033,7 +1033,7 @@ namespace body_array_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetLongInvalidString(RequestContext)']/*" />
-        public virtual Response GetLongInvalidString(RequestContext context = null)
+        public virtual Response GetLongInvalidString(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("ArrayClient.GetLongInvalidString");
             scope.Start();
@@ -1063,7 +1063,7 @@ namespace body_array_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetFloatValidAsync(RequestContext)']/*" />
-        public virtual async Task<Response> GetFloatValidAsync(RequestContext context = null)
+        public virtual async Task<Response> GetFloatValidAsync(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("ArrayClient.GetFloatValid");
             scope.Start();
@@ -1093,7 +1093,7 @@ namespace body_array_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetFloatValid(RequestContext)']/*" />
-        public virtual Response GetFloatValid(RequestContext context = null)
+        public virtual Response GetFloatValid(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("ArrayClient.GetFloatValid");
             scope.Start();
@@ -1191,7 +1191,7 @@ namespace body_array_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetFloatInvalidNullAsync(RequestContext)']/*" />
-        public virtual async Task<Response> GetFloatInvalidNullAsync(RequestContext context = null)
+        public virtual async Task<Response> GetFloatInvalidNullAsync(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("ArrayClient.GetFloatInvalidNull");
             scope.Start();
@@ -1221,7 +1221,7 @@ namespace body_array_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetFloatInvalidNull(RequestContext)']/*" />
-        public virtual Response GetFloatInvalidNull(RequestContext context = null)
+        public virtual Response GetFloatInvalidNull(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("ArrayClient.GetFloatInvalidNull");
             scope.Start();
@@ -1238,7 +1238,7 @@ namespace body_array_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method] Get boolean array value [1.0, &apos;number&apos;, 0.0]
+        /// [Protocol Method] Get boolean array value [1.0, 'number', 0.0]
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -1251,7 +1251,7 @@ namespace body_array_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetFloatInvalidStringAsync(RequestContext)']/*" />
-        public virtual async Task<Response> GetFloatInvalidStringAsync(RequestContext context = null)
+        public virtual async Task<Response> GetFloatInvalidStringAsync(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("ArrayClient.GetFloatInvalidString");
             scope.Start();
@@ -1268,7 +1268,7 @@ namespace body_array_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method] Get boolean array value [1.0, &apos;number&apos;, 0.0]
+        /// [Protocol Method] Get boolean array value [1.0, 'number', 0.0]
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -1281,7 +1281,7 @@ namespace body_array_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetFloatInvalidString(RequestContext)']/*" />
-        public virtual Response GetFloatInvalidString(RequestContext context = null)
+        public virtual Response GetFloatInvalidString(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("ArrayClient.GetFloatInvalidString");
             scope.Start();
@@ -1311,7 +1311,7 @@ namespace body_array_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetDoubleValidAsync(RequestContext)']/*" />
-        public virtual async Task<Response> GetDoubleValidAsync(RequestContext context = null)
+        public virtual async Task<Response> GetDoubleValidAsync(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("ArrayClient.GetDoubleValid");
             scope.Start();
@@ -1341,7 +1341,7 @@ namespace body_array_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetDoubleValid(RequestContext)']/*" />
-        public virtual Response GetDoubleValid(RequestContext context = null)
+        public virtual Response GetDoubleValid(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("ArrayClient.GetDoubleValid");
             scope.Start();
@@ -1439,7 +1439,7 @@ namespace body_array_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetDoubleInvalidNullAsync(RequestContext)']/*" />
-        public virtual async Task<Response> GetDoubleInvalidNullAsync(RequestContext context = null)
+        public virtual async Task<Response> GetDoubleInvalidNullAsync(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("ArrayClient.GetDoubleInvalidNull");
             scope.Start();
@@ -1469,7 +1469,7 @@ namespace body_array_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetDoubleInvalidNull(RequestContext)']/*" />
-        public virtual Response GetDoubleInvalidNull(RequestContext context = null)
+        public virtual Response GetDoubleInvalidNull(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("ArrayClient.GetDoubleInvalidNull");
             scope.Start();
@@ -1486,7 +1486,7 @@ namespace body_array_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method] Get boolean array value [1.0, &apos;number&apos;, 0.0]
+        /// [Protocol Method] Get boolean array value [1.0, 'number', 0.0]
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -1499,7 +1499,7 @@ namespace body_array_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetDoubleInvalidStringAsync(RequestContext)']/*" />
-        public virtual async Task<Response> GetDoubleInvalidStringAsync(RequestContext context = null)
+        public virtual async Task<Response> GetDoubleInvalidStringAsync(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("ArrayClient.GetDoubleInvalidString");
             scope.Start();
@@ -1516,7 +1516,7 @@ namespace body_array_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method] Get boolean array value [1.0, &apos;number&apos;, 0.0]
+        /// [Protocol Method] Get boolean array value [1.0, 'number', 0.0]
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -1529,7 +1529,7 @@ namespace body_array_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetDoubleInvalidString(RequestContext)']/*" />
-        public virtual Response GetDoubleInvalidString(RequestContext context = null)
+        public virtual Response GetDoubleInvalidString(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("ArrayClient.GetDoubleInvalidString");
             scope.Start();
@@ -1546,7 +1546,7 @@ namespace body_array_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method] Get string array value [&apos;foo1&apos;, &apos;foo2&apos;, &apos;foo3&apos;]
+        /// [Protocol Method] Get string array value ['foo1', 'foo2', 'foo3']
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -1559,7 +1559,7 @@ namespace body_array_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetStringValidAsync(RequestContext)']/*" />
-        public virtual async Task<Response> GetStringValidAsync(RequestContext context = null)
+        public virtual async Task<Response> GetStringValidAsync(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("ArrayClient.GetStringValid");
             scope.Start();
@@ -1576,7 +1576,7 @@ namespace body_array_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method] Get string array value [&apos;foo1&apos;, &apos;foo2&apos;, &apos;foo3&apos;]
+        /// [Protocol Method] Get string array value ['foo1', 'foo2', 'foo3']
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -1589,7 +1589,7 @@ namespace body_array_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetStringValid(RequestContext)']/*" />
-        public virtual Response GetStringValid(RequestContext context = null)
+        public virtual Response GetStringValid(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("ArrayClient.GetStringValid");
             scope.Start();
@@ -1606,7 +1606,7 @@ namespace body_array_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method] Set array value [&apos;foo1&apos;, &apos;foo2&apos;, &apos;foo3&apos;]
+        /// [Protocol Method] Set array value ['foo1', 'foo2', 'foo3']
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -1640,7 +1640,7 @@ namespace body_array_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method] Set array value [&apos;foo1&apos;, &apos;foo2&apos;, &apos;foo3&apos;]
+        /// [Protocol Method] Set array value ['foo1', 'foo2', 'foo3']
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -1674,7 +1674,7 @@ namespace body_array_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method] Get enum array value [&apos;foo1&apos;, &apos;foo2&apos;, &apos;foo3&apos;]
+        /// [Protocol Method] Get enum array value ['foo1', 'foo2', 'foo3']
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -1687,7 +1687,7 @@ namespace body_array_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetEnumValidAsync(RequestContext)']/*" />
-        public virtual async Task<Response> GetEnumValidAsync(RequestContext context = null)
+        public virtual async Task<Response> GetEnumValidAsync(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("ArrayClient.GetEnumValid");
             scope.Start();
@@ -1704,7 +1704,7 @@ namespace body_array_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method] Get enum array value [&apos;foo1&apos;, &apos;foo2&apos;, &apos;foo3&apos;]
+        /// [Protocol Method] Get enum array value ['foo1', 'foo2', 'foo3']
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -1717,7 +1717,7 @@ namespace body_array_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetEnumValid(RequestContext)']/*" />
-        public virtual Response GetEnumValid(RequestContext context = null)
+        public virtual Response GetEnumValid(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("ArrayClient.GetEnumValid");
             scope.Start();
@@ -1734,7 +1734,7 @@ namespace body_array_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method] Set array value [&apos;foo1&apos;, &apos;foo2&apos;, &apos;foo3&apos;]
+        /// [Protocol Method] Set array value ['foo1', 'foo2', 'foo3']
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -1768,7 +1768,7 @@ namespace body_array_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method] Set array value [&apos;foo1&apos;, &apos;foo2&apos;, &apos;foo3&apos;]
+        /// [Protocol Method] Set array value ['foo1', 'foo2', 'foo3']
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -1802,7 +1802,7 @@ namespace body_array_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method] Get enum array value [&apos;foo1&apos;, &apos;foo2&apos;, &apos;foo3&apos;]
+        /// [Protocol Method] Get enum array value ['foo1', 'foo2', 'foo3']
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -1815,7 +1815,7 @@ namespace body_array_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetStringEnumValidAsync(RequestContext)']/*" />
-        public virtual async Task<Response> GetStringEnumValidAsync(RequestContext context = null)
+        public virtual async Task<Response> GetStringEnumValidAsync(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("ArrayClient.GetStringEnumValid");
             scope.Start();
@@ -1832,7 +1832,7 @@ namespace body_array_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method] Get enum array value [&apos;foo1&apos;, &apos;foo2&apos;, &apos;foo3&apos;]
+        /// [Protocol Method] Get enum array value ['foo1', 'foo2', 'foo3']
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -1845,7 +1845,7 @@ namespace body_array_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetStringEnumValid(RequestContext)']/*" />
-        public virtual Response GetStringEnumValid(RequestContext context = null)
+        public virtual Response GetStringEnumValid(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("ArrayClient.GetStringEnumValid");
             scope.Start();
@@ -1862,7 +1862,7 @@ namespace body_array_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method] Set array value [&apos;foo1&apos;, &apos;foo2&apos;, &apos;foo3&apos;]
+        /// [Protocol Method] Set array value ['foo1', 'foo2', 'foo3']
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -1896,7 +1896,7 @@ namespace body_array_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method] Set array value [&apos;foo1&apos;, &apos;foo2&apos;, &apos;foo3&apos;]
+        /// [Protocol Method] Set array value ['foo1', 'foo2', 'foo3']
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -1930,7 +1930,7 @@ namespace body_array_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method] Get string array value [&apos;foo&apos;, null, &apos;foo2&apos;]
+        /// [Protocol Method] Get string array value ['foo', null, 'foo2']
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -1943,7 +1943,7 @@ namespace body_array_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetStringWithNullAsync(RequestContext)']/*" />
-        public virtual async Task<Response> GetStringWithNullAsync(RequestContext context = null)
+        public virtual async Task<Response> GetStringWithNullAsync(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("ArrayClient.GetStringWithNull");
             scope.Start();
@@ -1960,7 +1960,7 @@ namespace body_array_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method] Get string array value [&apos;foo&apos;, null, &apos;foo2&apos;]
+        /// [Protocol Method] Get string array value ['foo', null, 'foo2']
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -1973,7 +1973,7 @@ namespace body_array_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetStringWithNull(RequestContext)']/*" />
-        public virtual Response GetStringWithNull(RequestContext context = null)
+        public virtual Response GetStringWithNull(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("ArrayClient.GetStringWithNull");
             scope.Start();
@@ -1990,7 +1990,7 @@ namespace body_array_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method] Get string array value [&apos;foo&apos;, 123, &apos;foo2&apos;]
+        /// [Protocol Method] Get string array value ['foo', 123, 'foo2']
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -2003,7 +2003,7 @@ namespace body_array_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetStringWithInvalidAsync(RequestContext)']/*" />
-        public virtual async Task<Response> GetStringWithInvalidAsync(RequestContext context = null)
+        public virtual async Task<Response> GetStringWithInvalidAsync(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("ArrayClient.GetStringWithInvalid");
             scope.Start();
@@ -2020,7 +2020,7 @@ namespace body_array_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method] Get string array value [&apos;foo&apos;, 123, &apos;foo2&apos;]
+        /// [Protocol Method] Get string array value ['foo', 123, 'foo2']
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -2033,7 +2033,7 @@ namespace body_array_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetStringWithInvalid(RequestContext)']/*" />
-        public virtual Response GetStringWithInvalid(RequestContext context = null)
+        public virtual Response GetStringWithInvalid(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("ArrayClient.GetStringWithInvalid");
             scope.Start();
@@ -2050,7 +2050,7 @@ namespace body_array_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method] Get uuid array value [&apos;6dcc7237-45fe-45c4-8a6b-3a8a3f625652&apos;, &apos;d1399005-30f7-40d6-8da6-dd7c89ad34db&apos;, &apos;f42f6aa1-a5bc-4ddf-907e-5f915de43205&apos;]
+        /// [Protocol Method] Get uuid array value ['6dcc7237-45fe-45c4-8a6b-3a8a3f625652', 'd1399005-30f7-40d6-8da6-dd7c89ad34db', 'f42f6aa1-a5bc-4ddf-907e-5f915de43205']
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -2063,7 +2063,7 @@ namespace body_array_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetUuidValidAsync(RequestContext)']/*" />
-        public virtual async Task<Response> GetUuidValidAsync(RequestContext context = null)
+        public virtual async Task<Response> GetUuidValidAsync(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("ArrayClient.GetUuidValid");
             scope.Start();
@@ -2080,7 +2080,7 @@ namespace body_array_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method] Get uuid array value [&apos;6dcc7237-45fe-45c4-8a6b-3a8a3f625652&apos;, &apos;d1399005-30f7-40d6-8da6-dd7c89ad34db&apos;, &apos;f42f6aa1-a5bc-4ddf-907e-5f915de43205&apos;]
+        /// [Protocol Method] Get uuid array value ['6dcc7237-45fe-45c4-8a6b-3a8a3f625652', 'd1399005-30f7-40d6-8da6-dd7c89ad34db', 'f42f6aa1-a5bc-4ddf-907e-5f915de43205']
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -2093,7 +2093,7 @@ namespace body_array_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetUuidValid(RequestContext)']/*" />
-        public virtual Response GetUuidValid(RequestContext context = null)
+        public virtual Response GetUuidValid(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("ArrayClient.GetUuidValid");
             scope.Start();
@@ -2110,7 +2110,7 @@ namespace body_array_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method] Set array value  [&apos;6dcc7237-45fe-45c4-8a6b-3a8a3f625652&apos;, &apos;d1399005-30f7-40d6-8da6-dd7c89ad34db&apos;, &apos;f42f6aa1-a5bc-4ddf-907e-5f915de43205&apos;]
+        /// [Protocol Method] Set array value  ['6dcc7237-45fe-45c4-8a6b-3a8a3f625652', 'd1399005-30f7-40d6-8da6-dd7c89ad34db', 'f42f6aa1-a5bc-4ddf-907e-5f915de43205']
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -2144,7 +2144,7 @@ namespace body_array_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method] Set array value  [&apos;6dcc7237-45fe-45c4-8a6b-3a8a3f625652&apos;, &apos;d1399005-30f7-40d6-8da6-dd7c89ad34db&apos;, &apos;f42f6aa1-a5bc-4ddf-907e-5f915de43205&apos;]
+        /// [Protocol Method] Set array value  ['6dcc7237-45fe-45c4-8a6b-3a8a3f625652', 'd1399005-30f7-40d6-8da6-dd7c89ad34db', 'f42f6aa1-a5bc-4ddf-907e-5f915de43205']
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -2178,7 +2178,7 @@ namespace body_array_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method] Get uuid array value [&apos;6dcc7237-45fe-45c4-8a6b-3a8a3f625652&apos;, &apos;foo&apos;]
+        /// [Protocol Method] Get uuid array value ['6dcc7237-45fe-45c4-8a6b-3a8a3f625652', 'foo']
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -2191,7 +2191,7 @@ namespace body_array_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetUuidInvalidCharsAsync(RequestContext)']/*" />
-        public virtual async Task<Response> GetUuidInvalidCharsAsync(RequestContext context = null)
+        public virtual async Task<Response> GetUuidInvalidCharsAsync(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("ArrayClient.GetUuidInvalidChars");
             scope.Start();
@@ -2208,7 +2208,7 @@ namespace body_array_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method] Get uuid array value [&apos;6dcc7237-45fe-45c4-8a6b-3a8a3f625652&apos;, &apos;foo&apos;]
+        /// [Protocol Method] Get uuid array value ['6dcc7237-45fe-45c4-8a6b-3a8a3f625652', 'foo']
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -2221,7 +2221,7 @@ namespace body_array_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetUuidInvalidChars(RequestContext)']/*" />
-        public virtual Response GetUuidInvalidChars(RequestContext context = null)
+        public virtual Response GetUuidInvalidChars(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("ArrayClient.GetUuidInvalidChars");
             scope.Start();
@@ -2238,7 +2238,7 @@ namespace body_array_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method] Get integer array value [&apos;2000-12-01&apos;, &apos;1980-01-02&apos;, &apos;1492-10-12&apos;]
+        /// [Protocol Method] Get integer array value ['2000-12-01', '1980-01-02', '1492-10-12']
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -2251,7 +2251,7 @@ namespace body_array_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetDateValidAsync(RequestContext)']/*" />
-        public virtual async Task<Response> GetDateValidAsync(RequestContext context = null)
+        public virtual async Task<Response> GetDateValidAsync(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("ArrayClient.GetDateValid");
             scope.Start();
@@ -2268,7 +2268,7 @@ namespace body_array_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method] Get integer array value [&apos;2000-12-01&apos;, &apos;1980-01-02&apos;, &apos;1492-10-12&apos;]
+        /// [Protocol Method] Get integer array value ['2000-12-01', '1980-01-02', '1492-10-12']
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -2281,7 +2281,7 @@ namespace body_array_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetDateValid(RequestContext)']/*" />
-        public virtual Response GetDateValid(RequestContext context = null)
+        public virtual Response GetDateValid(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("ArrayClient.GetDateValid");
             scope.Start();
@@ -2298,7 +2298,7 @@ namespace body_array_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method] Set array value  [&apos;2000-12-01&apos;, &apos;1980-01-02&apos;, &apos;1492-10-12&apos;]
+        /// [Protocol Method] Set array value  ['2000-12-01', '1980-01-02', '1492-10-12']
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -2332,7 +2332,7 @@ namespace body_array_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method] Set array value  [&apos;2000-12-01&apos;, &apos;1980-01-02&apos;, &apos;1492-10-12&apos;]
+        /// [Protocol Method] Set array value  ['2000-12-01', '1980-01-02', '1492-10-12']
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -2366,7 +2366,7 @@ namespace body_array_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method] Get date array value [&apos;2012-01-01&apos;, null, &apos;1776-07-04&apos;]
+        /// [Protocol Method] Get date array value ['2012-01-01', null, '1776-07-04']
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -2379,7 +2379,7 @@ namespace body_array_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetDateInvalidNullAsync(RequestContext)']/*" />
-        public virtual async Task<Response> GetDateInvalidNullAsync(RequestContext context = null)
+        public virtual async Task<Response> GetDateInvalidNullAsync(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("ArrayClient.GetDateInvalidNull");
             scope.Start();
@@ -2396,7 +2396,7 @@ namespace body_array_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method] Get date array value [&apos;2012-01-01&apos;, null, &apos;1776-07-04&apos;]
+        /// [Protocol Method] Get date array value ['2012-01-01', null, '1776-07-04']
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -2409,7 +2409,7 @@ namespace body_array_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetDateInvalidNull(RequestContext)']/*" />
-        public virtual Response GetDateInvalidNull(RequestContext context = null)
+        public virtual Response GetDateInvalidNull(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("ArrayClient.GetDateInvalidNull");
             scope.Start();
@@ -2426,7 +2426,7 @@ namespace body_array_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method] Get date array value [&apos;2011-03-22&apos;, &apos;date&apos;]
+        /// [Protocol Method] Get date array value ['2011-03-22', 'date']
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -2439,7 +2439,7 @@ namespace body_array_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetDateInvalidCharsAsync(RequestContext)']/*" />
-        public virtual async Task<Response> GetDateInvalidCharsAsync(RequestContext context = null)
+        public virtual async Task<Response> GetDateInvalidCharsAsync(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("ArrayClient.GetDateInvalidChars");
             scope.Start();
@@ -2456,7 +2456,7 @@ namespace body_array_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method] Get date array value [&apos;2011-03-22&apos;, &apos;date&apos;]
+        /// [Protocol Method] Get date array value ['2011-03-22', 'date']
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -2469,7 +2469,7 @@ namespace body_array_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetDateInvalidChars(RequestContext)']/*" />
-        public virtual Response GetDateInvalidChars(RequestContext context = null)
+        public virtual Response GetDateInvalidChars(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("ArrayClient.GetDateInvalidChars");
             scope.Start();
@@ -2486,7 +2486,7 @@ namespace body_array_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method] Get date-time array value [&apos;2000-12-01t00:00:01z&apos;, &apos;1980-01-02T00:11:35+01:00&apos;, &apos;1492-10-12T10:15:01-08:00&apos;]
+        /// [Protocol Method] Get date-time array value ['2000-12-01t00:00:01z', '1980-01-02T00:11:35+01:00', '1492-10-12T10:15:01-08:00']
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -2499,7 +2499,7 @@ namespace body_array_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetDateTimeValidAsync(RequestContext)']/*" />
-        public virtual async Task<Response> GetDateTimeValidAsync(RequestContext context = null)
+        public virtual async Task<Response> GetDateTimeValidAsync(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("ArrayClient.GetDateTimeValid");
             scope.Start();
@@ -2516,7 +2516,7 @@ namespace body_array_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method] Get date-time array value [&apos;2000-12-01t00:00:01z&apos;, &apos;1980-01-02T00:11:35+01:00&apos;, &apos;1492-10-12T10:15:01-08:00&apos;]
+        /// [Protocol Method] Get date-time array value ['2000-12-01t00:00:01z', '1980-01-02T00:11:35+01:00', '1492-10-12T10:15:01-08:00']
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -2529,7 +2529,7 @@ namespace body_array_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetDateTimeValid(RequestContext)']/*" />
-        public virtual Response GetDateTimeValid(RequestContext context = null)
+        public virtual Response GetDateTimeValid(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("ArrayClient.GetDateTimeValid");
             scope.Start();
@@ -2546,7 +2546,7 @@ namespace body_array_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method] Set array value  [&apos;2000-12-01t00:00:01z&apos;, &apos;1980-01-02T00:11:35+01:00&apos;, &apos;1492-10-12T10:15:01-08:00&apos;]
+        /// [Protocol Method] Set array value  ['2000-12-01t00:00:01z', '1980-01-02T00:11:35+01:00', '1492-10-12T10:15:01-08:00']
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -2580,7 +2580,7 @@ namespace body_array_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method] Set array value  [&apos;2000-12-01t00:00:01z&apos;, &apos;1980-01-02T00:11:35+01:00&apos;, &apos;1492-10-12T10:15:01-08:00&apos;]
+        /// [Protocol Method] Set array value  ['2000-12-01t00:00:01z', '1980-01-02T00:11:35+01:00', '1492-10-12T10:15:01-08:00']
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -2614,7 +2614,7 @@ namespace body_array_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method] Get date array value [&apos;2000-12-01t00:00:01z&apos;, null]
+        /// [Protocol Method] Get date array value ['2000-12-01t00:00:01z', null]
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -2627,7 +2627,7 @@ namespace body_array_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetDateTimeInvalidNullAsync(RequestContext)']/*" />
-        public virtual async Task<Response> GetDateTimeInvalidNullAsync(RequestContext context = null)
+        public virtual async Task<Response> GetDateTimeInvalidNullAsync(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("ArrayClient.GetDateTimeInvalidNull");
             scope.Start();
@@ -2644,7 +2644,7 @@ namespace body_array_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method] Get date array value [&apos;2000-12-01t00:00:01z&apos;, null]
+        /// [Protocol Method] Get date array value ['2000-12-01t00:00:01z', null]
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -2657,7 +2657,7 @@ namespace body_array_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetDateTimeInvalidNull(RequestContext)']/*" />
-        public virtual Response GetDateTimeInvalidNull(RequestContext context = null)
+        public virtual Response GetDateTimeInvalidNull(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("ArrayClient.GetDateTimeInvalidNull");
             scope.Start();
@@ -2674,7 +2674,7 @@ namespace body_array_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method] Get date array value [&apos;2000-12-01t00:00:01z&apos;, &apos;date-time&apos;]
+        /// [Protocol Method] Get date array value ['2000-12-01t00:00:01z', 'date-time']
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -2687,7 +2687,7 @@ namespace body_array_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetDateTimeInvalidCharsAsync(RequestContext)']/*" />
-        public virtual async Task<Response> GetDateTimeInvalidCharsAsync(RequestContext context = null)
+        public virtual async Task<Response> GetDateTimeInvalidCharsAsync(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("ArrayClient.GetDateTimeInvalidChars");
             scope.Start();
@@ -2704,7 +2704,7 @@ namespace body_array_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method] Get date array value [&apos;2000-12-01t00:00:01z&apos;, &apos;date-time&apos;]
+        /// [Protocol Method] Get date array value ['2000-12-01t00:00:01z', 'date-time']
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -2717,7 +2717,7 @@ namespace body_array_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetDateTimeInvalidChars(RequestContext)']/*" />
-        public virtual Response GetDateTimeInvalidChars(RequestContext context = null)
+        public virtual Response GetDateTimeInvalidChars(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("ArrayClient.GetDateTimeInvalidChars");
             scope.Start();
@@ -2734,7 +2734,7 @@ namespace body_array_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method] Get date-time array value [&apos;Fri, 01 Dec 2000 00:00:01 GMT&apos;, &apos;Wed, 02 Jan 1980 00:11:35 GMT&apos;, &apos;Wed, 12 Oct 1492 10:15:01 GMT&apos;]
+        /// [Protocol Method] Get date-time array value ['Fri, 01 Dec 2000 00:00:01 GMT', 'Wed, 02 Jan 1980 00:11:35 GMT', 'Wed, 12 Oct 1492 10:15:01 GMT']
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -2747,7 +2747,7 @@ namespace body_array_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetDateTimeRfc1123ValidAsync(RequestContext)']/*" />
-        public virtual async Task<Response> GetDateTimeRfc1123ValidAsync(RequestContext context = null)
+        public virtual async Task<Response> GetDateTimeRfc1123ValidAsync(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("ArrayClient.GetDateTimeRfc1123Valid");
             scope.Start();
@@ -2764,7 +2764,7 @@ namespace body_array_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method] Get date-time array value [&apos;Fri, 01 Dec 2000 00:00:01 GMT&apos;, &apos;Wed, 02 Jan 1980 00:11:35 GMT&apos;, &apos;Wed, 12 Oct 1492 10:15:01 GMT&apos;]
+        /// [Protocol Method] Get date-time array value ['Fri, 01 Dec 2000 00:00:01 GMT', 'Wed, 02 Jan 1980 00:11:35 GMT', 'Wed, 12 Oct 1492 10:15:01 GMT']
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -2777,7 +2777,7 @@ namespace body_array_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetDateTimeRfc1123Valid(RequestContext)']/*" />
-        public virtual Response GetDateTimeRfc1123Valid(RequestContext context = null)
+        public virtual Response GetDateTimeRfc1123Valid(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("ArrayClient.GetDateTimeRfc1123Valid");
             scope.Start();
@@ -2794,7 +2794,7 @@ namespace body_array_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method] Set array value  [&apos;Fri, 01 Dec 2000 00:00:01 GMT&apos;, &apos;Wed, 02 Jan 1980 00:11:35 GMT&apos;, &apos;Wed, 12 Oct 1492 10:15:01 GMT&apos;]
+        /// [Protocol Method] Set array value  ['Fri, 01 Dec 2000 00:00:01 GMT', 'Wed, 02 Jan 1980 00:11:35 GMT', 'Wed, 12 Oct 1492 10:15:01 GMT']
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -2828,7 +2828,7 @@ namespace body_array_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method] Set array value  [&apos;Fri, 01 Dec 2000 00:00:01 GMT&apos;, &apos;Wed, 02 Jan 1980 00:11:35 GMT&apos;, &apos;Wed, 12 Oct 1492 10:15:01 GMT&apos;]
+        /// [Protocol Method] Set array value  ['Fri, 01 Dec 2000 00:00:01 GMT', 'Wed, 02 Jan 1980 00:11:35 GMT', 'Wed, 12 Oct 1492 10:15:01 GMT']
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -2862,7 +2862,7 @@ namespace body_array_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method] Get duration array value [&apos;P123DT22H14M12.011S&apos;, &apos;P5DT1H0M0S&apos;]
+        /// [Protocol Method] Get duration array value ['P123DT22H14M12.011S', 'P5DT1H0M0S']
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -2875,7 +2875,7 @@ namespace body_array_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetDurationValidAsync(RequestContext)']/*" />
-        public virtual async Task<Response> GetDurationValidAsync(RequestContext context = null)
+        public virtual async Task<Response> GetDurationValidAsync(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("ArrayClient.GetDurationValid");
             scope.Start();
@@ -2892,7 +2892,7 @@ namespace body_array_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method] Get duration array value [&apos;P123DT22H14M12.011S&apos;, &apos;P5DT1H0M0S&apos;]
+        /// [Protocol Method] Get duration array value ['P123DT22H14M12.011S', 'P5DT1H0M0S']
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -2905,7 +2905,7 @@ namespace body_array_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetDurationValid(RequestContext)']/*" />
-        public virtual Response GetDurationValid(RequestContext context = null)
+        public virtual Response GetDurationValid(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("ArrayClient.GetDurationValid");
             scope.Start();
@@ -2922,7 +2922,7 @@ namespace body_array_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method] Set array value  [&apos;P123DT22H14M12.011S&apos;, &apos;P5DT1H0M0S&apos;]
+        /// [Protocol Method] Set array value  ['P123DT22H14M12.011S', 'P5DT1H0M0S']
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -2956,7 +2956,7 @@ namespace body_array_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method] Set array value  [&apos;P123DT22H14M12.011S&apos;, &apos;P5DT1H0M0S&apos;]
+        /// [Protocol Method] Set array value  ['P123DT22H14M12.011S', 'P5DT1H0M0S']
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -3003,7 +3003,7 @@ namespace body_array_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetByteValidAsync(RequestContext)']/*" />
-        public virtual async Task<Response> GetByteValidAsync(RequestContext context = null)
+        public virtual async Task<Response> GetByteValidAsync(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("ArrayClient.GetByteValid");
             scope.Start();
@@ -3033,7 +3033,7 @@ namespace body_array_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetByteValid(RequestContext)']/*" />
-        public virtual Response GetByteValid(RequestContext context = null)
+        public virtual Response GetByteValid(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("ArrayClient.GetByteValid");
             scope.Start();
@@ -3131,7 +3131,7 @@ namespace body_array_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetByteInvalidNullAsync(RequestContext)']/*" />
-        public virtual async Task<Response> GetByteInvalidNullAsync(RequestContext context = null)
+        public virtual async Task<Response> GetByteInvalidNullAsync(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("ArrayClient.GetByteInvalidNull");
             scope.Start();
@@ -3161,7 +3161,7 @@ namespace body_array_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetByteInvalidNull(RequestContext)']/*" />
-        public virtual Response GetByteInvalidNull(RequestContext context = null)
+        public virtual Response GetByteInvalidNull(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("ArrayClient.GetByteInvalidNull");
             scope.Start();
@@ -3178,7 +3178,7 @@ namespace body_array_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method] Get array value [&apos;a string that gets encoded with base64url&apos;, &apos;test string&apos; &apos;Lorem ipsum&apos;] with the items base64url encoded
+        /// [Protocol Method] Get array value ['a string that gets encoded with base64url', 'test string' 'Lorem ipsum'] with the items base64url encoded
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -3191,7 +3191,7 @@ namespace body_array_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetBase64UrlAsync(RequestContext)']/*" />
-        public virtual async Task<Response> GetBase64UrlAsync(RequestContext context = null)
+        public virtual async Task<Response> GetBase64UrlAsync(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("ArrayClient.GetBase64Url");
             scope.Start();
@@ -3208,7 +3208,7 @@ namespace body_array_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method] Get array value [&apos;a string that gets encoded with base64url&apos;, &apos;test string&apos; &apos;Lorem ipsum&apos;] with the items base64url encoded
+        /// [Protocol Method] Get array value ['a string that gets encoded with base64url', 'test string' 'Lorem ipsum'] with the items base64url encoded
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -3221,7 +3221,7 @@ namespace body_array_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetBase64Url(RequestContext)']/*" />
-        public virtual Response GetBase64Url(RequestContext context = null)
+        public virtual Response GetBase64Url(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("ArrayClient.GetBase64Url");
             scope.Start();
@@ -3251,7 +3251,7 @@ namespace body_array_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetComplexNullAsync(RequestContext)']/*" />
-        public virtual async Task<Response> GetComplexNullAsync(RequestContext context = null)
+        public virtual async Task<Response> GetComplexNullAsync(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("ArrayClient.GetComplexNull");
             scope.Start();
@@ -3281,7 +3281,7 @@ namespace body_array_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetComplexNull(RequestContext)']/*" />
-        public virtual Response GetComplexNull(RequestContext context = null)
+        public virtual Response GetComplexNull(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("ArrayClient.GetComplexNull");
             scope.Start();
@@ -3311,7 +3311,7 @@ namespace body_array_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetComplexEmptyAsync(RequestContext)']/*" />
-        public virtual async Task<Response> GetComplexEmptyAsync(RequestContext context = null)
+        public virtual async Task<Response> GetComplexEmptyAsync(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("ArrayClient.GetComplexEmpty");
             scope.Start();
@@ -3341,7 +3341,7 @@ namespace body_array_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetComplexEmpty(RequestContext)']/*" />
-        public virtual Response GetComplexEmpty(RequestContext context = null)
+        public virtual Response GetComplexEmpty(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("ArrayClient.GetComplexEmpty");
             scope.Start();
@@ -3358,7 +3358,7 @@ namespace body_array_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method] Get array of complex type with null item [{&apos;integer&apos;: 1 &apos;string&apos;: &apos;2&apos;}, null, {&apos;integer&apos;: 5, &apos;string&apos;: &apos;6&apos;}]
+        /// [Protocol Method] Get array of complex type with null item [{'integer': 1 'string': '2'}, null, {'integer': 5, 'string': '6'}]
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -3371,7 +3371,7 @@ namespace body_array_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetComplexItemNullAsync(RequestContext)']/*" />
-        public virtual async Task<Response> GetComplexItemNullAsync(RequestContext context = null)
+        public virtual async Task<Response> GetComplexItemNullAsync(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("ArrayClient.GetComplexItemNull");
             scope.Start();
@@ -3388,7 +3388,7 @@ namespace body_array_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method] Get array of complex type with null item [{&apos;integer&apos;: 1 &apos;string&apos;: &apos;2&apos;}, null, {&apos;integer&apos;: 5, &apos;string&apos;: &apos;6&apos;}]
+        /// [Protocol Method] Get array of complex type with null item [{'integer': 1 'string': '2'}, null, {'integer': 5, 'string': '6'}]
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -3401,7 +3401,7 @@ namespace body_array_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetComplexItemNull(RequestContext)']/*" />
-        public virtual Response GetComplexItemNull(RequestContext context = null)
+        public virtual Response GetComplexItemNull(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("ArrayClient.GetComplexItemNull");
             scope.Start();
@@ -3418,7 +3418,7 @@ namespace body_array_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method] Get array of complex type with empty item [{&apos;integer&apos;: 1 &apos;string&apos;: &apos;2&apos;}, {}, {&apos;integer&apos;: 5, &apos;string&apos;: &apos;6&apos;}]
+        /// [Protocol Method] Get array of complex type with empty item [{'integer': 1 'string': '2'}, {}, {'integer': 5, 'string': '6'}]
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -3431,7 +3431,7 @@ namespace body_array_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetComplexItemEmptyAsync(RequestContext)']/*" />
-        public virtual async Task<Response> GetComplexItemEmptyAsync(RequestContext context = null)
+        public virtual async Task<Response> GetComplexItemEmptyAsync(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("ArrayClient.GetComplexItemEmpty");
             scope.Start();
@@ -3448,7 +3448,7 @@ namespace body_array_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method] Get array of complex type with empty item [{&apos;integer&apos;: 1 &apos;string&apos;: &apos;2&apos;}, {}, {&apos;integer&apos;: 5, &apos;string&apos;: &apos;6&apos;}]
+        /// [Protocol Method] Get array of complex type with empty item [{'integer': 1 'string': '2'}, {}, {'integer': 5, 'string': '6'}]
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -3461,7 +3461,7 @@ namespace body_array_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetComplexItemEmpty(RequestContext)']/*" />
-        public virtual Response GetComplexItemEmpty(RequestContext context = null)
+        public virtual Response GetComplexItemEmpty(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("ArrayClient.GetComplexItemEmpty");
             scope.Start();
@@ -3478,7 +3478,7 @@ namespace body_array_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method] Get array of complex type with [{&apos;integer&apos;: 1 &apos;string&apos;: &apos;2&apos;}, {&apos;integer&apos;: 3, &apos;string&apos;: &apos;4&apos;}, {&apos;integer&apos;: 5, &apos;string&apos;: &apos;6&apos;}]
+        /// [Protocol Method] Get array of complex type with [{'integer': 1 'string': '2'}, {'integer': 3, 'string': '4'}, {'integer': 5, 'string': '6'}]
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -3491,7 +3491,7 @@ namespace body_array_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetComplexValidAsync(RequestContext)']/*" />
-        public virtual async Task<Response> GetComplexValidAsync(RequestContext context = null)
+        public virtual async Task<Response> GetComplexValidAsync(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("ArrayClient.GetComplexValid");
             scope.Start();
@@ -3508,7 +3508,7 @@ namespace body_array_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method] Get array of complex type with [{&apos;integer&apos;: 1 &apos;string&apos;: &apos;2&apos;}, {&apos;integer&apos;: 3, &apos;string&apos;: &apos;4&apos;}, {&apos;integer&apos;: 5, &apos;string&apos;: &apos;6&apos;}]
+        /// [Protocol Method] Get array of complex type with [{'integer': 1 'string': '2'}, {'integer': 3, 'string': '4'}, {'integer': 5, 'string': '6'}]
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -3521,7 +3521,7 @@ namespace body_array_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetComplexValid(RequestContext)']/*" />
-        public virtual Response GetComplexValid(RequestContext context = null)
+        public virtual Response GetComplexValid(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("ArrayClient.GetComplexValid");
             scope.Start();
@@ -3538,7 +3538,7 @@ namespace body_array_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method] Put an array of complex type with values [{&apos;integer&apos;: 1 &apos;string&apos;: &apos;2&apos;}, {&apos;integer&apos;: 3, &apos;string&apos;: &apos;4&apos;}, {&apos;integer&apos;: 5, &apos;string&apos;: &apos;6&apos;}]
+        /// [Protocol Method] Put an array of complex type with values [{'integer': 1 'string': '2'}, {'integer': 3, 'string': '4'}, {'integer': 5, 'string': '6'}]
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -3572,7 +3572,7 @@ namespace body_array_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method] Put an array of complex type with values [{&apos;integer&apos;: 1 &apos;string&apos;: &apos;2&apos;}, {&apos;integer&apos;: 3, &apos;string&apos;: &apos;4&apos;}, {&apos;integer&apos;: 5, &apos;string&apos;: &apos;6&apos;}]
+        /// [Protocol Method] Put an array of complex type with values [{'integer': 1 'string': '2'}, {'integer': 3, 'string': '4'}, {'integer': 5, 'string': '6'}]
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -3619,7 +3619,7 @@ namespace body_array_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetArrayNullAsync(RequestContext)']/*" />
-        public virtual async Task<Response> GetArrayNullAsync(RequestContext context = null)
+        public virtual async Task<Response> GetArrayNullAsync(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("ArrayClient.GetArrayNull");
             scope.Start();
@@ -3649,7 +3649,7 @@ namespace body_array_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetArrayNull(RequestContext)']/*" />
-        public virtual Response GetArrayNull(RequestContext context = null)
+        public virtual Response GetArrayNull(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("ArrayClient.GetArrayNull");
             scope.Start();
@@ -3679,7 +3679,7 @@ namespace body_array_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetArrayEmptyAsync(RequestContext)']/*" />
-        public virtual async Task<Response> GetArrayEmptyAsync(RequestContext context = null)
+        public virtual async Task<Response> GetArrayEmptyAsync(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("ArrayClient.GetArrayEmpty");
             scope.Start();
@@ -3709,7 +3709,7 @@ namespace body_array_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetArrayEmpty(RequestContext)']/*" />
-        public virtual Response GetArrayEmpty(RequestContext context = null)
+        public virtual Response GetArrayEmpty(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("ArrayClient.GetArrayEmpty");
             scope.Start();
@@ -3726,7 +3726,7 @@ namespace body_array_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method] Get an array of array of strings [[&apos;1&apos;, &apos;2&apos;, &apos;3&apos;], null, [&apos;7&apos;, &apos;8&apos;, &apos;9&apos;]]
+        /// [Protocol Method] Get an array of array of strings [['1', '2', '3'], null, ['7', '8', '9']]
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -3739,7 +3739,7 @@ namespace body_array_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetArrayItemNullAsync(RequestContext)']/*" />
-        public virtual async Task<Response> GetArrayItemNullAsync(RequestContext context = null)
+        public virtual async Task<Response> GetArrayItemNullAsync(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("ArrayClient.GetArrayItemNull");
             scope.Start();
@@ -3756,7 +3756,7 @@ namespace body_array_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method] Get an array of array of strings [[&apos;1&apos;, &apos;2&apos;, &apos;3&apos;], null, [&apos;7&apos;, &apos;8&apos;, &apos;9&apos;]]
+        /// [Protocol Method] Get an array of array of strings [['1', '2', '3'], null, ['7', '8', '9']]
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -3769,7 +3769,7 @@ namespace body_array_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetArrayItemNull(RequestContext)']/*" />
-        public virtual Response GetArrayItemNull(RequestContext context = null)
+        public virtual Response GetArrayItemNull(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("ArrayClient.GetArrayItemNull");
             scope.Start();
@@ -3786,7 +3786,7 @@ namespace body_array_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method] Get an array of array of strings [[&apos;1&apos;, &apos;2&apos;, &apos;3&apos;], [], [&apos;7&apos;, &apos;8&apos;, &apos;9&apos;]]
+        /// [Protocol Method] Get an array of array of strings [['1', '2', '3'], [], ['7', '8', '9']]
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -3799,7 +3799,7 @@ namespace body_array_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetArrayItemEmptyAsync(RequestContext)']/*" />
-        public virtual async Task<Response> GetArrayItemEmptyAsync(RequestContext context = null)
+        public virtual async Task<Response> GetArrayItemEmptyAsync(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("ArrayClient.GetArrayItemEmpty");
             scope.Start();
@@ -3816,7 +3816,7 @@ namespace body_array_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method] Get an array of array of strings [[&apos;1&apos;, &apos;2&apos;, &apos;3&apos;], [], [&apos;7&apos;, &apos;8&apos;, &apos;9&apos;]]
+        /// [Protocol Method] Get an array of array of strings [['1', '2', '3'], [], ['7', '8', '9']]
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -3829,7 +3829,7 @@ namespace body_array_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetArrayItemEmpty(RequestContext)']/*" />
-        public virtual Response GetArrayItemEmpty(RequestContext context = null)
+        public virtual Response GetArrayItemEmpty(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("ArrayClient.GetArrayItemEmpty");
             scope.Start();
@@ -3846,7 +3846,7 @@ namespace body_array_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method] Get an array of array of strings [[&apos;1&apos;, &apos;2&apos;, &apos;3&apos;], [&apos;4&apos;, &apos;5&apos;, &apos;6&apos;], [&apos;7&apos;, &apos;8&apos;, &apos;9&apos;]]
+        /// [Protocol Method] Get an array of array of strings [['1', '2', '3'], ['4', '5', '6'], ['7', '8', '9']]
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -3859,7 +3859,7 @@ namespace body_array_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetArrayValidAsync(RequestContext)']/*" />
-        public virtual async Task<Response> GetArrayValidAsync(RequestContext context = null)
+        public virtual async Task<Response> GetArrayValidAsync(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("ArrayClient.GetArrayValid");
             scope.Start();
@@ -3876,7 +3876,7 @@ namespace body_array_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method] Get an array of array of strings [[&apos;1&apos;, &apos;2&apos;, &apos;3&apos;], [&apos;4&apos;, &apos;5&apos;, &apos;6&apos;], [&apos;7&apos;, &apos;8&apos;, &apos;9&apos;]]
+        /// [Protocol Method] Get an array of array of strings [['1', '2', '3'], ['4', '5', '6'], ['7', '8', '9']]
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -3889,7 +3889,7 @@ namespace body_array_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetArrayValid(RequestContext)']/*" />
-        public virtual Response GetArrayValid(RequestContext context = null)
+        public virtual Response GetArrayValid(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("ArrayClient.GetArrayValid");
             scope.Start();
@@ -3906,7 +3906,7 @@ namespace body_array_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method] Put An array of array of strings [[&apos;1&apos;, &apos;2&apos;, &apos;3&apos;], [&apos;4&apos;, &apos;5&apos;, &apos;6&apos;], [&apos;7&apos;, &apos;8&apos;, &apos;9&apos;]]
+        /// [Protocol Method] Put An array of array of strings [['1', '2', '3'], ['4', '5', '6'], ['7', '8', '9']]
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -3940,7 +3940,7 @@ namespace body_array_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method] Put An array of array of strings [[&apos;1&apos;, &apos;2&apos;, &apos;3&apos;], [&apos;4&apos;, &apos;5&apos;, &apos;6&apos;], [&apos;7&apos;, &apos;8&apos;, &apos;9&apos;]]
+        /// [Protocol Method] Put An array of array of strings [['1', '2', '3'], ['4', '5', '6'], ['7', '8', '9']]
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -3987,7 +3987,7 @@ namespace body_array_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetDictionaryNullAsync(RequestContext)']/*" />
-        public virtual async Task<Response> GetDictionaryNullAsync(RequestContext context = null)
+        public virtual async Task<Response> GetDictionaryNullAsync(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("ArrayClient.GetDictionaryNull");
             scope.Start();
@@ -4017,7 +4017,7 @@ namespace body_array_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetDictionaryNull(RequestContext)']/*" />
-        public virtual Response GetDictionaryNull(RequestContext context = null)
+        public virtual Response GetDictionaryNull(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("ArrayClient.GetDictionaryNull");
             scope.Start();
@@ -4047,7 +4047,7 @@ namespace body_array_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetDictionaryEmptyAsync(RequestContext)']/*" />
-        public virtual async Task<Response> GetDictionaryEmptyAsync(RequestContext context = null)
+        public virtual async Task<Response> GetDictionaryEmptyAsync(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("ArrayClient.GetDictionaryEmpty");
             scope.Start();
@@ -4077,7 +4077,7 @@ namespace body_array_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetDictionaryEmpty(RequestContext)']/*" />
-        public virtual Response GetDictionaryEmpty(RequestContext context = null)
+        public virtual Response GetDictionaryEmpty(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("ArrayClient.GetDictionaryEmpty");
             scope.Start();
@@ -4094,7 +4094,7 @@ namespace body_array_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method] Get an array of Dictionaries of type &lt;string, string&gt; with value [{&apos;1&apos;: &apos;one&apos;, &apos;2&apos;: &apos;two&apos;, &apos;3&apos;: &apos;three&apos;}, null, {&apos;7&apos;: &apos;seven&apos;, &apos;8&apos;: &apos;eight&apos;, &apos;9&apos;: &apos;nine&apos;}]
+        /// [Protocol Method] Get an array of Dictionaries of type &lt;string, string&gt; with value [{'1': 'one', '2': 'two', '3': 'three'}, null, {'7': 'seven', '8': 'eight', '9': 'nine'}]
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -4107,7 +4107,7 @@ namespace body_array_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetDictionaryItemNullAsync(RequestContext)']/*" />
-        public virtual async Task<Response> GetDictionaryItemNullAsync(RequestContext context = null)
+        public virtual async Task<Response> GetDictionaryItemNullAsync(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("ArrayClient.GetDictionaryItemNull");
             scope.Start();
@@ -4124,7 +4124,7 @@ namespace body_array_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method] Get an array of Dictionaries of type &lt;string, string&gt; with value [{&apos;1&apos;: &apos;one&apos;, &apos;2&apos;: &apos;two&apos;, &apos;3&apos;: &apos;three&apos;}, null, {&apos;7&apos;: &apos;seven&apos;, &apos;8&apos;: &apos;eight&apos;, &apos;9&apos;: &apos;nine&apos;}]
+        /// [Protocol Method] Get an array of Dictionaries of type &lt;string, string&gt; with value [{'1': 'one', '2': 'two', '3': 'three'}, null, {'7': 'seven', '8': 'eight', '9': 'nine'}]
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -4137,7 +4137,7 @@ namespace body_array_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetDictionaryItemNull(RequestContext)']/*" />
-        public virtual Response GetDictionaryItemNull(RequestContext context = null)
+        public virtual Response GetDictionaryItemNull(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("ArrayClient.GetDictionaryItemNull");
             scope.Start();
@@ -4154,7 +4154,7 @@ namespace body_array_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method] Get an array of Dictionaries of type &lt;string, string&gt; with value [{&apos;1&apos;: &apos;one&apos;, &apos;2&apos;: &apos;two&apos;, &apos;3&apos;: &apos;three&apos;}, {}, {&apos;7&apos;: &apos;seven&apos;, &apos;8&apos;: &apos;eight&apos;, &apos;9&apos;: &apos;nine&apos;}]
+        /// [Protocol Method] Get an array of Dictionaries of type &lt;string, string&gt; with value [{'1': 'one', '2': 'two', '3': 'three'}, {}, {'7': 'seven', '8': 'eight', '9': 'nine'}]
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -4167,7 +4167,7 @@ namespace body_array_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetDictionaryItemEmptyAsync(RequestContext)']/*" />
-        public virtual async Task<Response> GetDictionaryItemEmptyAsync(RequestContext context = null)
+        public virtual async Task<Response> GetDictionaryItemEmptyAsync(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("ArrayClient.GetDictionaryItemEmpty");
             scope.Start();
@@ -4184,7 +4184,7 @@ namespace body_array_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method] Get an array of Dictionaries of type &lt;string, string&gt; with value [{&apos;1&apos;: &apos;one&apos;, &apos;2&apos;: &apos;two&apos;, &apos;3&apos;: &apos;three&apos;}, {}, {&apos;7&apos;: &apos;seven&apos;, &apos;8&apos;: &apos;eight&apos;, &apos;9&apos;: &apos;nine&apos;}]
+        /// [Protocol Method] Get an array of Dictionaries of type &lt;string, string&gt; with value [{'1': 'one', '2': 'two', '3': 'three'}, {}, {'7': 'seven', '8': 'eight', '9': 'nine'}]
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -4197,7 +4197,7 @@ namespace body_array_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetDictionaryItemEmpty(RequestContext)']/*" />
-        public virtual Response GetDictionaryItemEmpty(RequestContext context = null)
+        public virtual Response GetDictionaryItemEmpty(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("ArrayClient.GetDictionaryItemEmpty");
             scope.Start();
@@ -4214,7 +4214,7 @@ namespace body_array_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method] Get an array of Dictionaries of type &lt;string, string&gt; with value [{&apos;1&apos;: &apos;one&apos;, &apos;2&apos;: &apos;two&apos;, &apos;3&apos;: &apos;three&apos;}, {&apos;4&apos;: &apos;four&apos;, &apos;5&apos;: &apos;five&apos;, &apos;6&apos;: &apos;six&apos;}, {&apos;7&apos;: &apos;seven&apos;, &apos;8&apos;: &apos;eight&apos;, &apos;9&apos;: &apos;nine&apos;}]
+        /// [Protocol Method] Get an array of Dictionaries of type &lt;string, string&gt; with value [{'1': 'one', '2': 'two', '3': 'three'}, {'4': 'four', '5': 'five', '6': 'six'}, {'7': 'seven', '8': 'eight', '9': 'nine'}]
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -4227,7 +4227,7 @@ namespace body_array_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetDictionaryValidAsync(RequestContext)']/*" />
-        public virtual async Task<Response> GetDictionaryValidAsync(RequestContext context = null)
+        public virtual async Task<Response> GetDictionaryValidAsync(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("ArrayClient.GetDictionaryValid");
             scope.Start();
@@ -4244,7 +4244,7 @@ namespace body_array_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method] Get an array of Dictionaries of type &lt;string, string&gt; with value [{&apos;1&apos;: &apos;one&apos;, &apos;2&apos;: &apos;two&apos;, &apos;3&apos;: &apos;three&apos;}, {&apos;4&apos;: &apos;four&apos;, &apos;5&apos;: &apos;five&apos;, &apos;6&apos;: &apos;six&apos;}, {&apos;7&apos;: &apos;seven&apos;, &apos;8&apos;: &apos;eight&apos;, &apos;9&apos;: &apos;nine&apos;}]
+        /// [Protocol Method] Get an array of Dictionaries of type &lt;string, string&gt; with value [{'1': 'one', '2': 'two', '3': 'three'}, {'4': 'four', '5': 'five', '6': 'six'}, {'7': 'seven', '8': 'eight', '9': 'nine'}]
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -4257,7 +4257,7 @@ namespace body_array_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/ArrayClient.xml" path="doc/members/member[@name='GetDictionaryValid(RequestContext)']/*" />
-        public virtual Response GetDictionaryValid(RequestContext context = null)
+        public virtual Response GetDictionaryValid(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("ArrayClient.GetDictionaryValid");
             scope.Start();
@@ -4274,7 +4274,7 @@ namespace body_array_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method] Get an array of Dictionaries of type &lt;string, string&gt; with value [{&apos;1&apos;: &apos;one&apos;, &apos;2&apos;: &apos;two&apos;, &apos;3&apos;: &apos;three&apos;}, {&apos;4&apos;: &apos;four&apos;, &apos;5&apos;: &apos;five&apos;, &apos;6&apos;: &apos;six&apos;}, {&apos;7&apos;: &apos;seven&apos;, &apos;8&apos;: &apos;eight&apos;, &apos;9&apos;: &apos;nine&apos;}]
+        /// [Protocol Method] Get an array of Dictionaries of type &lt;string, string&gt; with value [{'1': 'one', '2': 'two', '3': 'three'}, {'4': 'four', '5': 'five', '6': 'six'}, {'7': 'seven', '8': 'eight', '9': 'nine'}]
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -4308,7 +4308,7 @@ namespace body_array_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method] Get an array of Dictionaries of type &lt;string, string&gt; with value [{&apos;1&apos;: &apos;one&apos;, &apos;2&apos;: &apos;two&apos;, &apos;3&apos;: &apos;three&apos;}, {&apos;4&apos;: &apos;four&apos;, &apos;5&apos;: &apos;five&apos;, &apos;6&apos;: &apos;six&apos;}, {&apos;7&apos;: &apos;seven&apos;, &apos;8&apos;: &apos;eight&apos;, &apos;9&apos;: &apos;nine&apos;}]
+        /// [Protocol Method] Get an array of Dictionaries of type &lt;string, string&gt; with value [{'1': 'one', '2': 'two', '3': 'three'}, {'4': 'four', '5': 'five', '6': 'six'}, {'7': 'seven', '8': 'eight', '9': 'nine'}]
         /// <list type="bullet">
         /// <item>
         /// <description>

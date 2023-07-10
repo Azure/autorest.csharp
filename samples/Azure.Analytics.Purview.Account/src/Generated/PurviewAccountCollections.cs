@@ -21,10 +21,8 @@ namespace Azure.Analytics.Purview.Account
         private readonly TokenCredential _tokenCredential;
         private readonly HttpPipeline _pipeline;
         private readonly Uri _endpoint;
+        private readonly string _collectionName;
         private readonly string _apiVersion;
-
-        /// <summary> The String to use. </summary>
-        public string CollectionName { get; }
 
         /// <summary> The ClientDiagnostics is used to provide tracing support for the client library. </summary>
         internal ClientDiagnostics ClientDiagnostics { get; }
@@ -50,7 +48,7 @@ namespace Azure.Analytics.Purview.Account
             _pipeline = pipeline;
             _tokenCredential = tokenCredential;
             _endpoint = endpoint;
-            CollectionName = collectionName;
+            _collectionName = collectionName;
             _apiVersion = apiVersion;
         }
 
@@ -68,7 +66,7 @@ namespace Azure.Analytics.Purview.Account
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/PurviewAccountCollections.xml" path="doc/members/member[@name='GetCollectionAsync(RequestContext)']/*" />
-        public virtual async Task<Response> GetCollectionAsync(RequestContext context = null)
+        public virtual async Task<Response> GetCollectionAsync(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("PurviewAccountCollections.GetCollection");
             scope.Start();
@@ -98,7 +96,7 @@ namespace Azure.Analytics.Purview.Account
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/PurviewAccountCollections.xml" path="doc/members/member[@name='GetCollection(RequestContext)']/*" />
-        public virtual Response GetCollection(RequestContext context = null)
+        public virtual Response GetCollection(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("PurviewAccountCollections.GetCollection");
             scope.Start();
@@ -256,7 +254,7 @@ namespace Azure.Analytics.Purview.Account
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/PurviewAccountCollections.xml" path="doc/members/member[@name='GetCollectionPathAsync(RequestContext)']/*" />
-        public virtual async Task<Response> GetCollectionPathAsync(RequestContext context = null)
+        public virtual async Task<Response> GetCollectionPathAsync(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("PurviewAccountCollections.GetCollectionPath");
             scope.Start();
@@ -286,7 +284,7 @@ namespace Azure.Analytics.Purview.Account
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/PurviewAccountCollections.xml" path="doc/members/member[@name='GetCollectionPath(RequestContext)']/*" />
-        public virtual Response GetCollectionPath(RequestContext context = null)
+        public virtual Response GetCollectionPath(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("PurviewAccountCollections.GetCollectionPath");
             scope.Start();
@@ -300,6 +298,50 @@ namespace Azure.Analytics.Purview.Account
                 scope.Failed(e);
                 throw;
             }
+        }
+
+        /// <summary>
+        /// [Protocol Method] List the collections in the account.
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
+        /// <param name="skipToken"> The String to use. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The <see cref="AsyncPageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
+        /// <include file="Docs/PurviewAccountCollections.xml" path="doc/members/member[@name='GetCollectionsAsync(string,RequestContext)']/*" />
+        public virtual AsyncPageable<BinaryData> GetCollectionsAsync(string skipToken, RequestContext context)
+        {
+            HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetCollectionsRequest(skipToken, context);
+            HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => CreateGetCollectionsNextPageRequest(nextLink, skipToken, context);
+            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "PurviewAccountCollections.GetCollections", "value", "nextLink", context);
+        }
+
+        /// <summary>
+        /// [Protocol Method] List the collections in the account.
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
+        /// <param name="skipToken"> The String to use. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The <see cref="Pageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
+        /// <include file="Docs/PurviewAccountCollections.xml" path="doc/members/member[@name='GetCollections(string,RequestContext)']/*" />
+        public virtual Pageable<BinaryData> GetCollections(string skipToken, RequestContext context)
+        {
+            HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetCollectionsRequest(skipToken, context);
+            HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => CreateGetCollectionsNextPageRequest(nextLink, skipToken, context);
+            return PageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "PurviewAccountCollections.GetCollections", "value", "nextLink", context);
         }
 
         /// <summary>
@@ -317,7 +359,7 @@ namespace Azure.Analytics.Purview.Account
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="AsyncPageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
         /// <include file="Docs/PurviewAccountCollections.xml" path="doc/members/member[@name='GetChildCollectionNamesAsync(string,RequestContext)']/*" />
-        public virtual AsyncPageable<BinaryData> GetChildCollectionNamesAsync(string skipToken = null, RequestContext context = null)
+        public virtual AsyncPageable<BinaryData> GetChildCollectionNamesAsync(string skipToken, RequestContext context)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetChildCollectionNamesRequest(skipToken, context);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => CreateGetChildCollectionNamesNextPageRequest(nextLink, skipToken, context);
@@ -339,7 +381,7 @@ namespace Azure.Analytics.Purview.Account
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="Pageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
         /// <include file="Docs/PurviewAccountCollections.xml" path="doc/members/member[@name='GetChildCollectionNames(string,RequestContext)']/*" />
-        public virtual Pageable<BinaryData> GetChildCollectionNames(string skipToken = null, RequestContext context = null)
+        public virtual Pageable<BinaryData> GetChildCollectionNames(string skipToken, RequestContext context)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetChildCollectionNamesRequest(skipToken, context);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => CreateGetChildCollectionNamesNextPageRequest(nextLink, skipToken, context);
@@ -354,7 +396,7 @@ namespace Azure.Analytics.Purview.Account
             var uri = new RawRequestUriBuilder();
             uri.Reset(_endpoint);
             uri.AppendPath("/collections/", false);
-            uri.AppendPath(CollectionName, true);
+            uri.AppendPath(_collectionName, true);
             uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
@@ -369,7 +411,7 @@ namespace Azure.Analytics.Purview.Account
             var uri = new RawRequestUriBuilder();
             uri.Reset(_endpoint);
             uri.AppendPath("/collections/", false);
-            uri.AppendPath(CollectionName, true);
+            uri.AppendPath(_collectionName, true);
             uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
@@ -386,8 +428,26 @@ namespace Azure.Analytics.Purview.Account
             var uri = new RawRequestUriBuilder();
             uri.Reset(_endpoint);
             uri.AppendPath("/collections/", false);
-            uri.AppendPath(CollectionName, true);
+            uri.AppendPath(_collectionName, true);
             uri.AppendQuery("api-version", _apiVersion, true);
+            request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
+            return message;
+        }
+
+        internal HttpMessage CreateGetCollectionsRequest(string skipToken, RequestContext context)
+        {
+            var message = _pipeline.CreateMessage(context, ResponseClassifier200);
+            var request = message.Request;
+            request.Method = RequestMethod.Get;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/collections", false);
+            uri.AppendQuery("api-version", _apiVersion, true);
+            if (skipToken != null)
+            {
+                uri.AppendQuery("$skipToken", skipToken, true);
+            }
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             return message;
@@ -401,7 +461,7 @@ namespace Azure.Analytics.Purview.Account
             var uri = new RawRequestUriBuilder();
             uri.Reset(_endpoint);
             uri.AppendPath("/collections/", false);
-            uri.AppendPath(CollectionName, true);
+            uri.AppendPath(_collectionName, true);
             uri.AppendPath("/getChildCollectionNames", false);
             uri.AppendQuery("api-version", _apiVersion, true);
             if (skipToken != null)
@@ -421,9 +481,22 @@ namespace Azure.Analytics.Purview.Account
             var uri = new RawRequestUriBuilder();
             uri.Reset(_endpoint);
             uri.AppendPath("/collections/", false);
-            uri.AppendPath(CollectionName, true);
+            uri.AppendPath(_collectionName, true);
             uri.AppendPath("/getCollectionPath", false);
             uri.AppendQuery("api-version", _apiVersion, true);
+            request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
+            return message;
+        }
+
+        internal HttpMessage CreateGetCollectionsNextPageRequest(string nextLink, string skipToken, RequestContext context)
+        {
+            var message = _pipeline.CreateMessage(context, ResponseClassifier200);
+            var request = message.Request;
+            request.Method = RequestMethod.Get;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendRawNextLink(nextLink, false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             return message;

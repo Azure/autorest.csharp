@@ -17,7 +17,7 @@ namespace header
         {
             _response = response;
         }
-        /// <summary> response with header value &quot;value&quot;: 1 or -2. </summary>
+        /// <summary> response with header value "value": 1 or -2. </summary>
         public int? Value => _response.Headers.TryGetValue("value", out int? value) ? value : null;
     }
 }

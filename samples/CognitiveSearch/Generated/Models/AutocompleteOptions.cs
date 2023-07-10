@@ -19,11 +19,11 @@ namespace CognitiveSearch.Models
             SearchFields = new ChangeTrackingList<string>();
         }
 
-        /// <summary> Specifies the mode for Autocomplete. The default is &apos;oneTerm&apos;. Use &apos;twoTerms&apos; to get shingles and &apos;oneTermWithContext&apos; to use the current context while producing auto-completed terms. </summary>
+        /// <summary> Specifies the mode for Autocomplete. The default is 'oneTerm'. Use 'twoTerms' to get shingles and 'oneTermWithContext' to use the current context while producing auto-completed terms. </summary>
         public AutocompleteMode? AutocompleteMode { get; set; }
         /// <summary> An OData expression that filters the documents used to produce completed terms for the Autocomplete result. </summary>
         public string Filter { get; set; }
-        /// <summary> A value indicating whether to use fuzzy matching for the autocomplete query. Default is false. When set to true, the query will find terms even if there&apos;s a substituted or missing character in the search text. While this provides a better experience in some scenarios, it comes at a performance cost as fuzzy autocomplete queries are slower and consume more resources. </summary>
+        /// <summary> A value indicating whether to use fuzzy matching for the autocomplete query. Default is false. When set to true, the query will find terms even if there's a substituted or missing character in the search text. While this provides a better experience in some scenarios, it comes at a performance cost as fuzzy autocomplete queries are slower and consume more resources. </summary>
         public bool? UseFuzzyMatching { get; set; }
         /// <summary> A string tag that is appended to hit highlights. Must be set with highlightPreTag. If omitted, hit highlighting is disabled. </summary>
         public string HighlightPostTag { get; set; }

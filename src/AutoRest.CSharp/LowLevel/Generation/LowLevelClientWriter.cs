@@ -222,7 +222,8 @@ namespace AutoRest.CSharp.Generation.Writers
                         _writer.Line($"{fieldName:I} = {credentialParameter.Name:I};");
                         if (credentialField.Type.Equals(typeof(AzureKeyCredential)))
                         {
-                            perRetryPolicies = $"new {typeof(HttpPipelinePolicy)}[] {{new {typeof(AzureKeyCredentialPolicy)}({fieldName:I}, {_client.Fields.AuthorizationHeaderConstant!.Name})}}";
+                            string prefixString = _client.Fields.AuthorizationApiKeyPrefixConstant != null ? $", {_client.Fields.AuthorizationApiKeyPrefixConstant.Name}" : "";
+                            perRetryPolicies = $"new {typeof(HttpPipelinePolicy)}[] {{new {typeof(AzureKeyCredentialPolicy)}({fieldName:I}, {_client.Fields.AuthorizationHeaderConstant!.Name}{prefixString})}}";
                         }
                         else if (credentialField.Type.Equals(typeof(TokenCredential)))
                         {
@@ -891,7 +892,7 @@ namespace AutoRest.CSharp.Generation.Writers
                                         property.SerializedName ?? property.Name,
                                         modelType.DiscriminatorValue,
                                         property.IsRequired,
-                                        BuilderHelpers.EscapeXmlDescription(property.Description)));
+                                        BuilderHelpers.EscapeXmlDocDescription(property.Description)));
 
                                     typesToExplore.Enqueue(property.Type);
                                     continue;
@@ -899,15 +900,15 @@ namespace AutoRest.CSharp.Generation.Writers
 
                                 propertyDocumentation.Add(new SchemaDocumentation.DocumentationRow(
                                     property.SerializedName ?? property.Name,
-                                    BuilderHelpers.EscapeXmlDescription(StringifyTypeForTable(property.Type)),
+                                    BuilderHelpers.EscapeXmlDocDescription(StringifyTypeForTable(property.Type)),
                                     property.IsRequired,
-                                    BuilderHelpers.EscapeXmlDescription(property.Description)));
+                                    BuilderHelpers.EscapeXmlDocDescription(property.Description)));
 
                                 typesToExplore.Enqueue(property.Type);
                             }
                         }
 
-                        documentationObjects.Add(new(toExplore == type ? schemaName : BuilderHelpers.EscapeXmlDescription(StringifyTypeForTable(toExplore)), propertyDocumentation));
+                        documentationObjects.Add(new(toExplore == type ? schemaName : BuilderHelpers.EscapeXmlDocDescription(StringifyTypeForTable(toExplore)), propertyDocumentation));
                         break;
                     case InputListType listType:
                         typesToExplore.Enqueue(listType.ElementType);
@@ -943,6 +944,8 @@ namespace AutoRest.CSharp.Generation.Writers
                 InputPrimitiveType { Kind: InputTypeKind.DateTime } => "string (date & time)",
                 InputPrimitiveType { Kind: InputTypeKind.DateTimeISO8601 } => "string (ISO 8601 Format)",
                 InputPrimitiveType { Kind: InputTypeKind.DateTimeRFC1123 } => "string (RFC1123 Format)",
+                InputPrimitiveType { Kind: InputTypeKind.DateTimeRFC3339 } => "string (RFC3339 Format)",
+                InputPrimitiveType { Kind: InputTypeKind.DateTimeRFC7231 } => "string (RFC7231 Format)",
                 InputPrimitiveType { Kind: InputTypeKind.DateTimeUnix } => "string (Unix Format)",
                 InputPrimitiveType { Kind: InputTypeKind.DurationISO8601 } => "string (duration ISO 8601 Format)",
                 InputPrimitiveType { Kind: InputTypeKind.DurationConstant } => "string (duration)",

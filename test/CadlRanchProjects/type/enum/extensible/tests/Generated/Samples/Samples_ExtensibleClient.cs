@@ -154,7 +154,7 @@ namespace _Type._Enum.Extensible.Samples
 
             var data = "Monday";
 
-            Response response = client.PutKnownValue(RequestContent.Create(data), new RequestContext());
+            Response response = client.PutKnownValue(RequestContent.Create(data));
             Console.WriteLine(response.Status);
         }
 
@@ -178,7 +178,7 @@ namespace _Type._Enum.Extensible.Samples
 
             var data = "Monday";
 
-            Response response = await client.PutKnownValueAsync(RequestContent.Create(data), new RequestContext());
+            Response response = await client.PutKnownValueAsync(RequestContent.Create(data));
             Console.WriteLine(response.Status);
         }
 
@@ -212,7 +212,7 @@ namespace _Type._Enum.Extensible.Samples
 
             var data = "Monday";
 
-            Response response = client.PutUnknownValue(RequestContent.Create(data), new RequestContext());
+            Response response = client.PutUnknownValue(RequestContent.Create(data));
             Console.WriteLine(response.Status);
         }
 
@@ -236,7 +236,7 @@ namespace _Type._Enum.Extensible.Samples
 
             var data = "Monday";
 
-            Response response = await client.PutUnknownValueAsync(RequestContent.Create(data), new RequestContext());
+            Response response = await client.PutUnknownValueAsync(RequestContent.Create(data));
             Console.WriteLine(response.Status);
         }
 

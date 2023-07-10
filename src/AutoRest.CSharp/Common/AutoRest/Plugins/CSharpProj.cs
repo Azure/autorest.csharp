@@ -126,7 +126,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             {
                 _coreCsProjContent += @"
   <ItemGroup>
-    <PackageReference Include=""Azure.Core.Expressions.DataFactory"" Version=""1.0.0-alpha.20221121.1"" />
+    <PackageReference Include=""Azure.Core.Expressions.DataFactory"" Version=""1.0.0-beta.2"" />
   </ItemGroup>";
             }
             var isTestProject = Configuration.MgmtTestConfiguration is not null;

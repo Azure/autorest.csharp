@@ -26,7 +26,7 @@ namespace body_complex_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new ReadonlypropertyClient(credential);
 
-            Response response = client.GetValid();
+            Response response = client.GetValid(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());
@@ -53,7 +53,7 @@ namespace body_complex_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new ReadonlypropertyClient(credential);
 
-            Response response = await client.GetValidAsync();
+            Response response = await client.GetValidAsync(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());
@@ -98,7 +98,7 @@ namespace body_complex_LowLevel.Samples
                 size = 1234,
             };
 
-            Response response = client.PutValid(RequestContent.Create(data), new RequestContext());
+            Response response = client.PutValid(RequestContent.Create(data));
             Console.WriteLine(response.Status);
         }
 
@@ -127,7 +127,7 @@ namespace body_complex_LowLevel.Samples
                 size = 1234,
             };
 
-            Response response = await client.PutValidAsync(RequestContent.Create(data), new RequestContext());
+            Response response = await client.PutValidAsync(RequestContent.Create(data));
             Console.WriteLine(response.Status);
         }
     }

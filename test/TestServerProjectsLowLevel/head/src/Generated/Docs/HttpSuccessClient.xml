@@ -8,7 +8,7 @@ This sample shows how to call Head200Async.
 var credential = new AzureKeyCredential("<key>");
 var client = new HttpSuccessClient(credential);
 
-Response response = await client.Head200Async(new RequestContext());
+Response response = await client.Head200Async();
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
@@ -20,7 +20,7 @@ This sample shows how to call Head200.
 var credential = new AzureKeyCredential("<key>");
 var client = new HttpSuccessClient(credential);
 
-Response response = client.Head200(new RequestContext());
+Response response = client.Head200();
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
@@ -32,7 +32,7 @@ This sample shows how to call Head204Async.
 var credential = new AzureKeyCredential("<key>");
 var client = new HttpSuccessClient(credential);
 
-Response response = await client.Head204Async(new RequestContext());
+Response response = await client.Head204Async();
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
@@ -44,7 +44,7 @@ This sample shows how to call Head204.
 var credential = new AzureKeyCredential("<key>");
 var client = new HttpSuccessClient(credential);
 
-Response response = client.Head204(new RequestContext());
+Response response = client.Head204();
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
@@ -56,7 +56,7 @@ This sample shows how to call Head404Async.
 var credential = new AzureKeyCredential("<key>");
 var client = new HttpSuccessClient(credential);
 
-Response response = await client.Head404Async(new RequestContext());
+Response response = await client.Head404Async();
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
@@ -68,7 +68,7 @@ This sample shows how to call Head404.
 var credential = new AzureKeyCredential("<key>");
 var client = new HttpSuccessClient(credential);
 
-Response response = client.Head404(new RequestContext());
+Response response = client.Head404();
 Console.WriteLine(response.Status);
 ]]></code>
 </example>

@@ -3,7 +3,7 @@
   <members>
     <member name="GetItemAsync(RequestContext)">
 <example>
-This sample shows how to call GetItemAsync and parse the result.
+This sample shows how to call GetItemAsync with required parameters and parse the result.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
 var client = new ResourceServiceClient(credential).GetResourceGroup("<groupId>").GetResource("<itemId>");
@@ -17,7 +17,7 @@ Console.WriteLine(result.ToString());
     </member>
     <member name="GetItem(RequestContext)">
 <example>
-This sample shows how to call GetItem and parse the result.
+This sample shows how to call GetItem with required parameters and parse the result.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
 var client = new ResourceServiceClient(credential).GetResourceGroup("<groupId>").GetResource("<itemId>");

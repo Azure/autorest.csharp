@@ -1,0 +1,68 @@
+{
+    "name": "@azure-tools/typespec-csharp",
+    "version": "0.2.0",
+    "author": "Microsoft Corporation",
+    "description": "The typespec library that can be used to generate C# models from a TypeSpec REST protocol binding",
+    "homepage": "https://github.com/Microsoft/typespec",
+    "readme": "https://github.com/Azure/autorest.csharp/blob/feature/v3/src/TypeSpec.Extension/Emitter.Csharp/readme.md",
+    "license": "MIT",
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/Azure/autorest.csharp.git"
+    },
+    "bugs": {
+        "url": "https://github.com/Azure/autorest.csharp/issues"
+    },
+    "keywords": [
+        "typespec"
+    ],
+    "type": "module",
+    "main": "dist/src/index.js",
+    "scripts": {
+        "clean": "rimraf ./dist ./temp",
+        "build": "tsc -p .",
+        "watch": "tsc -p . --watch",
+        "pack": "npx webpack",
+        "lint-typespec-library": "tsp compile . --warn-as-error --import @typespec/library-linter --no-emit",
+        "test": "mocha dist/test/**/*.js",
+        "test-official": "c8 mocha --forbid-only dist/test/**/*.js",
+        "lint": "eslint . --ext .ts --max-warnings=0",
+        "lint:fix": "eslint . --fix --ext .ts",
+        "prettier:fix": "prettier --write --config .prettierrc.json ./src/**/*.ts ./test/**/*.ts",
+        "prettier": "prettier --check --config .prettierrc.json ./src/**/*.ts ./test/**/*.ts"
+    },
+    "files": [
+        "dist/src/**"
+    ],
+    "devDependencies": {
+        "@types/fs-extra": "^9.0.13",
+        "@types/js-yaml": "^4.0.5",
+        "@types/lodash.isequal": "^4.5.6",
+        "@types/mocha": "~9.1.0",
+        "@types/node": "~18.13.0",
+        "@types/prettier": "^2.6.3",
+        "c8": "~7.11.0",
+        "eslint": "^8.12.0",
+        "lodash.isequal": "^4.5.0",
+        "mocha": "~9.2.0",
+        "rimraf": "~3.0.2",
+        "typescript": "~5.1.5"
+    },
+    "dependencies": {
+        "@autorest/csharp": "3.0.0-beta.20230309.1",
+        "@azure-tools/typespec-autorest": "0.31.0",
+        "@azure-tools/typespec-azure-core": "0.31.0",
+        "@azure-tools/typespec-client-generator-core": "0.31.0",
+        "@typespec/compiler": "0.45.2",
+        "@typespec/eslint-config-typespec": "0.7.0",
+        "@typespec/eslint-plugin": "0.45.0",
+        "@typespec/http": "0.45.0",
+        "@typespec/library-linter": "0.45.0",
+        "@typespec/rest": "0.45.0",
+        "@typespec/versioning": "0.45.0",
+        "fs-extra": "^10.1.0",
+        "js-yaml": "^4.1.0",
+        "json-serialize-refs": "0.1.0-0",
+        "winston": "^3.8.2"
+    }
+}

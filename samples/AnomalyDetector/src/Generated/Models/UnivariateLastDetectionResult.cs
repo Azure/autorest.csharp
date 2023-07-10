@@ -27,7 +27,7 @@ namespace AnomalyDetector.Models
         /// <param name="lowerMargin">
         /// Lower margin of the latest point. LowerMargin is used to calculate
         /// lowerBoundary, which equals to expectedValue - (100 - marginScale)*lowerMargin.
-        /// 
+        ///
         /// </param>
         /// <param name="isAnomaly">
         /// Anomaly status of the latest point, true means the latest point is an anomaly
@@ -70,7 +70,7 @@ namespace AnomalyDetector.Models
         /// <param name="lowerMargin">
         /// Lower margin of the latest point. LowerMargin is used to calculate
         /// lowerBoundary, which equals to expectedValue - (100 - marginScale)*lowerMargin.
-        /// 
+        ///
         /// </param>
         /// <param name="isAnomaly">
         /// Anomaly status of the latest point, true means the latest point is an anomaly
@@ -121,7 +121,7 @@ namespace AnomalyDetector.Models
         /// <summary>
         /// Lower margin of the latest point. LowerMargin is used to calculate
         /// lowerBoundary, which equals to expectedValue - (100 - marginScale)*lowerMargin.
-        /// 
+        ///
         /// </summary>
         public float LowerMargin { get; }
         /// <summary>

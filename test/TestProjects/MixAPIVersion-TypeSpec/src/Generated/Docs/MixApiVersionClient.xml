@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <members>
+    <member name="DeleteAsync(string,RequestContext)">
+<example>
+This sample shows how to call DeleteAsync with required parameters.
+<code><![CDATA[
+var endpoint = new Uri("<https://my-service.azure.com>");
+var client = new MixApiVersionClient(endpoint);
+
+Response response = await client.DeleteAsync("<name>");
+Console.WriteLine(response.Status);
+]]></code>
+</example>
+    </member>
+    <member name="Delete(string,RequestContext)">
+<example>
+This sample shows how to call Delete with required parameters.
+<code><![CDATA[
+var endpoint = new Uri("<https://my-service.azure.com>");
+var client = new MixApiVersionClient(endpoint);
+
+Response response = client.Delete("<name>");
+Console.WriteLine(response.Status);
+]]></code>
+</example>
+    </member>
+    <member name="ReadAsync(int,RequestContext)">
+<example>
+This sample shows how to call ReadAsync with required parameters and parse the result.
+<code><![CDATA[
+var endpoint = new Uri("<https://my-service.azure.com>");
+var client = new MixApiVersionClient(endpoint);
+
+Response response = await client.ReadAsync(1234, new RequestContext());
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("name").ToString());
+Console.WriteLine(result.GetProperty("tag").ToString());
+Console.WriteLine(result.GetProperty("age").ToString());
+]]></code>
+</example>
+    </member>
+    <member name="Read(int,RequestContext)">
+<example>
+This sample shows how to call Read with required parameters and parse the result.
+<code><![CDATA[
+var endpoint = new Uri("<https://my-service.azure.com>");
+var client = new MixApiVersionClient(endpoint);
+
+Response response = client.Read(1234, new RequestContext());
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("name").ToString());
+Console.WriteLine(result.GetProperty("tag").ToString());
+Console.WriteLine(result.GetProperty("age").ToString());
+]]></code>
+</example>
+    </member>
+    <member name="CreateAsync(RequestContent,RequestContext)">
+<example>
+This sample shows how to call CreateAsync with required request content, and how to parse the result.
+<code><![CDATA[
+var endpoint = new Uri("<https://my-service.azure.com>");
+var client = new MixApiVersionClient(endpoint);
+
+var data = new {
+    age = 1234,
+};
+
+Response response = await client.CreateAsync(RequestContent.Create(data));
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("name").ToString());
+Console.WriteLine(result.GetProperty("age").ToString());
+]]></code>
+This sample shows how to call CreateAsync with all request content, and how to parse the result.
+<code><![CDATA[
+var endpoint = new Uri("<https://my-service.azure.com>");
+var client = new MixApiVersionClient(endpoint);
+
+var data = new {
+    tag = "<tag>",
+    age = 1234,
+};
+
+Response response = await client.CreateAsync(RequestContent.Create(data));
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("name").ToString());
+Console.WriteLine(result.GetProperty("tag").ToString());
+Console.WriteLine(result.GetProperty("age").ToString());
+]]></code>
+</example>
+    </member>
+    <member name="Create(RequestContent,RequestContext)">
+<example>
+This sample shows how to call Create with required request content, and how to parse the result.
+<code><![CDATA[
+var endpoint = new Uri("<https://my-service.azure.com>");
+var client = new MixApiVersionClient(endpoint);
+
+var data = new {
+    age = 1234,
+};
+
+Response response = client.Create(RequestContent.Create(data));
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("name").ToString());
+Console.WriteLine(result.GetProperty("age").ToString());
+]]></code>
+This sample shows how to call Create with all request content, and how to parse the result.
+<code><![CDATA[
+var endpoint = new Uri("<https://my-service.azure.com>");
+var client = new MixApiVersionClient(endpoint);
+
+var data = new {
+    tag = "<tag>",
+    age = 1234,
+};
+
+Response response = client.Create(RequestContent.Create(data));
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("name").ToString());
+Console.WriteLine(result.GetProperty("tag").ToString());
+Console.WriteLine(result.GetProperty("age").ToString());
+]]></code>
+</example>
+    </member>
+    <member name="GetPetsAsync(RequestContext)">
+<example>
+This sample shows how to call GetPetsAsync with required parameters and parse the result.
+<code><![CDATA[
+var endpoint = new Uri("<https://my-service.azure.com>");
+var client = new MixApiVersionClient(endpoint);
+
+await foreach (var item in client.GetPetsAsync(new RequestContext()))
+{
+    JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+    Console.WriteLine(result.GetProperty("id").ToString());
+    Console.WriteLine(result.GetProperty("petId").ToString());
+    Console.WriteLine(result.GetProperty("name").ToString());
+}
+]]></code>
+</example>
+    </member>
+    <member name="GetPets(RequestContext)">
+<example>
+This sample shows how to call GetPets with required parameters and parse the result.
+<code><![CDATA[
+var endpoint = new Uri("<https://my-service.azure.com>");
+var client = new MixApiVersionClient(endpoint);
+
+foreach (var item in client.GetPets(new RequestContext()))
+{
+    JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
+    Console.WriteLine(result.GetProperty("id").ToString());
+    Console.WriteLine(result.GetProperty("petId").ToString());
+    Console.WriteLine(result.GetProperty("name").ToString());
+}
+]]></code>
+</example>
+    </member>
+  </members>
+</doc>

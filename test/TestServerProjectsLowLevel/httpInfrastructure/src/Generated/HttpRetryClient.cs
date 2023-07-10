@@ -315,7 +315,7 @@ namespace httpInfrastructure_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/HttpRetryClient.xml" path="doc/members/member[@name='Options502Async(RequestContext)']/*" />
-        public virtual async Task<Response> Options502Async(RequestContext context = null)
+        public virtual async Task<Response> Options502Async(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("HttpRetryClient.Options502");
             scope.Start();
@@ -345,7 +345,7 @@ namespace httpInfrastructure_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/HttpRetryClient.xml" path="doc/members/member[@name='Options502(RequestContext)']/*" />
-        public virtual Response Options502(RequestContext context = null)
+        public virtual Response Options502(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("HttpRetryClient.Options502");
             scope.Start();

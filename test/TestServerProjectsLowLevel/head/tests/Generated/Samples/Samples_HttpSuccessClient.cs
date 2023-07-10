@@ -37,7 +37,7 @@ namespace head_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new HttpSuccessClient(credential);
 
-            Response response = client.Head200(new RequestContext());
+            Response response = client.Head200();
             Console.WriteLine(response.Status);
         }
 
@@ -59,7 +59,7 @@ namespace head_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new HttpSuccessClient(credential);
 
-            Response response = await client.Head200Async(new RequestContext());
+            Response response = await client.Head200Async();
             Console.WriteLine(response.Status);
         }
 
@@ -81,7 +81,7 @@ namespace head_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new HttpSuccessClient(credential);
 
-            Response response = client.Head204(new RequestContext());
+            Response response = client.Head204();
             Console.WriteLine(response.Status);
         }
 
@@ -103,7 +103,7 @@ namespace head_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new HttpSuccessClient(credential);
 
-            Response response = await client.Head204Async(new RequestContext());
+            Response response = await client.Head204Async();
             Console.WriteLine(response.Status);
         }
 
@@ -125,7 +125,7 @@ namespace head_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new HttpSuccessClient(credential);
 
-            Response response = client.Head404(new RequestContext());
+            Response response = client.Head404();
             Console.WriteLine(response.Status);
         }
 
@@ -147,7 +147,7 @@ namespace head_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new HttpSuccessClient(credential);
 
-            Response response = await client.Head404Async(new RequestContext());
+            Response response = await client.Head404Async();
             Console.WriteLine(response.Status);
         }
     }

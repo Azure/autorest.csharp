@@ -22,15 +22,8 @@ namespace AnomalyDetector.Models
             writer.WriteStringValue(DataSource);
             if (Optional.IsDefined(DataSchema))
             {
-                if (DataSchema != null)
-                {
-                    writer.WritePropertyName("dataSchema"u8);
-                    writer.WriteStringValue(DataSchema.Value.ToString());
-                }
-                else
-                {
-                    writer.WriteNull("dataSchema");
-                }
+                writer.WritePropertyName("dataSchema"u8);
+                writer.WriteStringValue(DataSchema.Value.ToString());
             }
             writer.WritePropertyName("startTime"u8);
             writer.WriteStringValue(StartTime, "O");
@@ -43,15 +36,8 @@ namespace AnomalyDetector.Models
             }
             if (Optional.IsDefined(SlidingWindow))
             {
-                if (SlidingWindow != null)
-                {
-                    writer.WritePropertyName("slidingWindow"u8);
-                    writer.WriteNumberValue(SlidingWindow.Value);
-                }
-                else
-                {
-                    writer.WriteNull("slidingWindow");
-                }
+                writer.WritePropertyName("slidingWindow"u8);
+                writer.WriteNumberValue(SlidingWindow.Value);
             }
             if (Optional.IsDefined(AlignPolicy))
             {
@@ -60,15 +46,8 @@ namespace AnomalyDetector.Models
             }
             if (Optional.IsDefined(Status))
             {
-                if (Status != null)
-                {
-                    writer.WritePropertyName("status"u8);
-                    writer.WriteStringValue(Status.Value.ToSerialString());
-                }
-                else
-                {
-                    writer.WriteNull("status");
-                }
+                writer.WritePropertyName("status"u8);
+                writer.WriteStringValue(Status.Value.ToSerialString());
             }
             if (Optional.IsDefined(DiagnosticsInfo))
             {
@@ -85,13 +64,13 @@ namespace AnomalyDetector.Models
                 return null;
             }
             string dataSource = default;
-            Optional<DataSchema?> dataSchema = default;
+            Optional<DataSchema> dataSchema = default;
             DateTimeOffset startTime = default;
             DateTimeOffset endTime = default;
             Optional<string> displayName = default;
-            Optional<int?> slidingWindow = default;
+            Optional<int> slidingWindow = default;
             Optional<AlignPolicy> alignPolicy = default;
-            Optional<ModelStatus?> status = default;
+            Optional<ModelStatus> status = default;
             Optional<IReadOnlyList<ErrorResponse>> errors = default;
             Optional<DiagnosticsInfo> diagnosticsInfo = default;
             foreach (var property in element.EnumerateObject())
@@ -105,7 +84,6 @@ namespace AnomalyDetector.Models
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        dataSchema = null;
                         continue;
                     }
                     dataSchema = new DataSchema(property.Value.GetString());
@@ -130,7 +108,6 @@ namespace AnomalyDetector.Models
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        slidingWindow = null;
                         continue;
                     }
                     slidingWindow = property.Value.GetInt32();
@@ -149,7 +126,6 @@ namespace AnomalyDetector.Models
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        status = null;
                         continue;
                     }
                     status = property.Value.GetString().ToModelStatus();
@@ -179,7 +155,7 @@ namespace AnomalyDetector.Models
                     continue;
                 }
             }
-            return new ModelInfo(dataSource, Optional.ToNullable(dataSchema), startTime, endTime, displayName, Optional.ToNullable(slidingWindow), alignPolicy, Optional.ToNullable(status), Optional.ToList(errors), diagnosticsInfo);
+            return new ModelInfo(dataSource, Optional.ToNullable(dataSchema), startTime, endTime, displayName.Value, Optional.ToNullable(slidingWindow), alignPolicy.Value, Optional.ToNullable(status), Optional.ToList(errors), diagnosticsInfo.Value);
         }
 
         /// <summary> Deserializes the model from a raw response. </summary>

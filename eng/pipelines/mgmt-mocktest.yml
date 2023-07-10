@@ -9,7 +9,7 @@ schedules:
 
 variables:
   OfficialBuildId: $(Build.BuildNumber)
-  NugetSecurityAnalysisWarningLevel: 'none'
+  nugetMultiFeedWarnLevel: 'none'
 
 resources:
   repositories:
@@ -50,6 +50,10 @@ stages:
           - script: |
               npm ci
             displayName: "Install packages"
+            workingDirectory: $(Build.SourcesDirectory)/autorest.csharp
+          - script: |
+              npm ls -a
+            displayName: "List packages"
             workingDirectory: $(Build.SourcesDirectory)/autorest.csharp
           - script: 'dotnet pack src/AutoRest.CSharp/AutoRest.CSharp.csproj -o $(Build.ArtifactStagingDirectory) -warnaserror -c Release'
             name: Package

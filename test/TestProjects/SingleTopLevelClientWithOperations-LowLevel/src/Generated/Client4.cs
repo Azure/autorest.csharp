@@ -52,7 +52,7 @@ namespace SingleTopLevelClientWithOperations_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method] Operation has a parameter with `x-ms-resource-identifier: true`, hence `Client4` will be codegen&apos;ed as a resource client.
+        /// [Protocol Method] Operation has a parameter with `x-ms-resource-identifier: true`, hence `Client4` will be codegen'ed as a resource client.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -67,7 +67,7 @@ namespace SingleTopLevelClientWithOperations_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/Client4.xml" path="doc/members/member[@name='PatchAsync(string,RequestContext)']/*" />
-        public virtual async Task<Response> PatchAsync(string filter, RequestContext context = null)
+        public virtual async Task<Response> PatchAsync(string filter, RequestContext context)
         {
             Argument.AssertNotNull(filter, nameof(filter));
 
@@ -86,7 +86,7 @@ namespace SingleTopLevelClientWithOperations_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method] Operation has a parameter with `x-ms-resource-identifier: true`, hence `Client4` will be codegen&apos;ed as a resource client.
+        /// [Protocol Method] Operation has a parameter with `x-ms-resource-identifier: true`, hence `Client4` will be codegen'ed as a resource client.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -101,7 +101,7 @@ namespace SingleTopLevelClientWithOperations_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/Client4.xml" path="doc/members/member[@name='Patch(string,RequestContext)']/*" />
-        public virtual Response Patch(string filter, RequestContext context = null)
+        public virtual Response Patch(string filter, RequestContext context)
         {
             Argument.AssertNotNull(filter, nameof(filter));
 

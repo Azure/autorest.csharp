@@ -90,7 +90,7 @@ namespace AutoRest.TestServer.Tests
         public Task SendErrorWithParamNameModels() => Test((host, pipeline) =>
         {
             var content = "{\"actionResponse\":\"grrrr\",\"errorType\":\"PetSadError\",\"errorMessage\":\"casper aint happy\",\"reason\":\"need more treats\"}";
-            var exception = Assert.ThrowsAsync<RequestFailedException>(async () => await new PetClient(ClientDiagnostics, pipeline, host).HasModelsParamAsync());
+            var exception = Assert.ThrowsAsync<RequestFailedException>(async () => await new PetClient(ClientDiagnostics, pipeline, host).HasModelsParamAsync("value1"));
             Assert.AreEqual(500, exception.Status);
             StringAssert.Contains(content, exception.Message);
         });

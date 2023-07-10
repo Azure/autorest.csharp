@@ -101,7 +101,7 @@ namespace _Type._Array.Samples
     "<String>"
 };
 
-            Response response = client.Put(RequestContent.Create(data), new RequestContext());
+            Response response = client.Put(RequestContent.Create(data));
             Console.WriteLine(response.Status);
         }
 
@@ -129,7 +129,7 @@ namespace _Type._Array.Samples
     "<String>"
 };
 
-            Response response = await client.PutAsync(RequestContent.Create(data), new RequestContext());
+            Response response = await client.PutAsync(RequestContent.Create(data));
             Console.WriteLine(response.Status);
         }
 
@@ -139,7 +139,10 @@ namespace _Type._Array.Samples
         {
             var client = new ArrayClient().GetStringValueClient("1.0.0");
 
-            var body = new object();
+            var body = new string[]
+            {
+    "<null>"
+            };
             var result = await client.PutAsync(body);
         }
     }

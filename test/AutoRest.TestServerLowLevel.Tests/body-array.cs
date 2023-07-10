@@ -113,7 +113,7 @@ namespace AutoRest.TestServer.Tests
         [Test]
         public Task GetArrayBooleanWithNullExample() => Test(async (host) =>
         {
-            Response response = await new ArrayClient(Key, host, null).GetBooleanInvalidNullAsync();
+            Response response = await new ArrayClient(Key, host, null).GetBooleanInvalidNullAsync(new());
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Assert.AreEqual(true, result[0].GetBoolean());
             Assert.AreEqual(null, result[1].GetObject());

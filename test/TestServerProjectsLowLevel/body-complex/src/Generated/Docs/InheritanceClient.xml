@@ -3,7 +3,7 @@
   <members>
     <member name="GetValidAsync(RequestContext)">
 <example>
-This sample shows how to call GetValidAsync and parse the result.
+This sample shows how to call GetValidAsync with required parameters and parse the result.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
 var client = new InheritanceClient(credential);
@@ -23,7 +23,7 @@ Console.WriteLine(result.GetProperty("name").ToString());
     </member>
     <member name="GetValid(RequestContext)">
 <example>
-This sample shows how to call GetValid and parse the result.
+This sample shows how to call GetValid with required parameters and parse the result.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
 var client = new InheritanceClient(credential);
@@ -72,7 +72,7 @@ var data = new {
     name = "<name>",
 };
 
-Response response = await client.PutValidAsync(RequestContent.Create(data), new RequestContext());
+Response response = await client.PutValidAsync(RequestContent.Create(data));
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
@@ -108,7 +108,7 @@ var data = new {
     name = "<name>",
 };
 
-Response response = client.PutValid(RequestContent.Create(data), new RequestContext());
+Response response = client.PutValid(RequestContent.Create(data));
 Console.WriteLine(response.Status);
 ]]></code>
 </example>

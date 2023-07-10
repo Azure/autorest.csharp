@@ -68,12 +68,12 @@ namespace media_types_LowLevel
         /// </list>
         /// </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="contentType"> Upload file type. Allowed values: &quot;application/json&quot; | &quot;application/pdf&quot; | &quot;image/jpeg&quot; | &quot;image/png&quot; | &quot;image/tiff&quot;. </param>
+        /// <param name="contentType"> Upload file type. Allowed values: "application/json" | "application/pdf" | "image/jpeg" | "image/png" | "image/tiff". </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/MediaTypesClient.xml" path="doc/members/member[@name='AnalyzeBodyAsync(RequestContent,ContentType,RequestContext)']/*" />
-        public virtual async Task<Response> AnalyzeBodyAsync(RequestContent content, ContentType contentType, RequestContext context = null)
+        public virtual async Task<Response> AnalyzeBodyAsync(RequestContent content, ContentType contentType, RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("MediaTypesClient.AnalyzeBody");
             scope.Start();
@@ -100,12 +100,12 @@ namespace media_types_LowLevel
         /// </list>
         /// </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="contentType"> Upload file type. Allowed values: &quot;application/json&quot; | &quot;application/pdf&quot; | &quot;image/jpeg&quot; | &quot;image/png&quot; | &quot;image/tiff&quot;. </param>
+        /// <param name="contentType"> Upload file type. Allowed values: "application/json" | "application/pdf" | "image/jpeg" | "image/png" | "image/tiff". </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/MediaTypesClient.xml" path="doc/members/member[@name='AnalyzeBody(RequestContent,ContentType,RequestContext)']/*" />
-        public virtual Response AnalyzeBody(RequestContent content, ContentType contentType, RequestContext context = null)
+        public virtual Response AnalyzeBody(RequestContent content, ContentType contentType, RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("MediaTypesClient.AnalyzeBody");
             scope.Start();
@@ -132,12 +132,12 @@ namespace media_types_LowLevel
         /// </list>
         /// </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="contentType"> Upload file type. Allowed values: &quot;application/json&quot; | &quot;application/pdf&quot; | &quot;image/jpeg&quot; | &quot;image/png&quot; | &quot;image/tiff&quot;. </param>
+        /// <param name="contentType"> Upload file type. Allowed values: "application/json" | "application/pdf" | "image/jpeg" | "image/png" | "image/tiff". </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/MediaTypesClient.xml" path="doc/members/member[@name='AnalyzeBodyNoAcceptHeaderAsync(RequestContent,ContentType,RequestContext)']/*" />
-        public virtual async Task<Response> AnalyzeBodyNoAcceptHeaderAsync(RequestContent content, ContentType contentType, RequestContext context = null)
+        public virtual async Task<Response> AnalyzeBodyNoAcceptHeaderAsync(RequestContent content, ContentType contentType, RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("MediaTypesClient.AnalyzeBodyNoAcceptHeader");
             scope.Start();
@@ -164,12 +164,12 @@ namespace media_types_LowLevel
         /// </list>
         /// </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="contentType"> Upload file type. Allowed values: &quot;application/json&quot; | &quot;application/pdf&quot; | &quot;image/jpeg&quot; | &quot;image/png&quot; | &quot;image/tiff&quot;. </param>
+        /// <param name="contentType"> Upload file type. Allowed values: "application/json" | "application/pdf" | "image/jpeg" | "image/png" | "image/tiff". </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/MediaTypesClient.xml" path="doc/members/member[@name='AnalyzeBodyNoAcceptHeader(RequestContent,ContentType,RequestContext)']/*" />
-        public virtual Response AnalyzeBodyNoAcceptHeader(RequestContent content, ContentType contentType, RequestContext context = null)
+        public virtual Response AnalyzeBodyNoAcceptHeader(RequestContent content, ContentType contentType, RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("MediaTypesClient.AnalyzeBodyNoAcceptHeader");
             scope.Start();
@@ -186,7 +186,7 @@ namespace media_types_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method] Pass in contentType &apos;text/plain; charset=UTF-8&apos; to pass test. Value for input does not matter
+        /// [Protocol Method] Pass in contentType 'text/plain; charset=UTF-8' to pass test. Value for input does not matter
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -200,7 +200,7 @@ namespace media_types_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/MediaTypesClient.xml" path="doc/members/member[@name='ContentTypeWithEncodingAsync(RequestContent,RequestContext)']/*" />
-        public virtual async Task<Response> ContentTypeWithEncodingAsync(RequestContent content, RequestContext context = null)
+        public virtual async Task<Response> ContentTypeWithEncodingAsync(RequestContent content, RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("MediaTypesClient.ContentTypeWithEncoding");
             scope.Start();
@@ -217,7 +217,7 @@ namespace media_types_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method] Pass in contentType &apos;text/plain; charset=UTF-8&apos; to pass test. Value for input does not matter
+        /// [Protocol Method] Pass in contentType 'text/plain; charset=UTF-8' to pass test. Value for input does not matter
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -231,7 +231,7 @@ namespace media_types_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/MediaTypesClient.xml" path="doc/members/member[@name='ContentTypeWithEncoding(RequestContent,RequestContext)']/*" />
-        public virtual Response ContentTypeWithEncoding(RequestContent content, RequestContext context = null)
+        public virtual Response ContentTypeWithEncoding(RequestContent content, RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("MediaTypesClient.ContentTypeWithEncoding");
             scope.Start();
@@ -248,7 +248,7 @@ namespace media_types_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method] Binary body with two content types. Pass in of {&apos;hello&apos;: &apos;world&apos;} for the application/json content type, and a byte stream of &apos;hello, world!&apos; for application/octet-stream.
+        /// [Protocol Method] Binary body with two content types. Pass in of {'hello': 'world'} for the application/json content type, and a byte stream of 'hello, world!' for application/octet-stream.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -258,7 +258,7 @@ namespace media_types_LowLevel
         /// </list>
         /// </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="contentType"> Upload file type. Allowed values: &quot;application/json&quot; | &quot;application/octet-stream&quot;. </param>
+        /// <param name="contentType"> Upload file type. Allowed values: "application/json" | "application/octet-stream". </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
@@ -283,7 +283,7 @@ namespace media_types_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method] Binary body with two content types. Pass in of {&apos;hello&apos;: &apos;world&apos;} for the application/json content type, and a byte stream of &apos;hello, world!&apos; for application/octet-stream.
+        /// [Protocol Method] Binary body with two content types. Pass in of {'hello': 'world'} for the application/json content type, and a byte stream of 'hello, world!' for application/octet-stream.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -293,7 +293,7 @@ namespace media_types_LowLevel
         /// </list>
         /// </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="contentType"> Upload file type. Allowed values: &quot;application/json&quot; | &quot;application/octet-stream&quot;. </param>
+        /// <param name="contentType"> Upload file type. Allowed values: "application/json" | "application/octet-stream". </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
@@ -318,7 +318,7 @@ namespace media_types_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method] Binary body with three content types. Pass in string &apos;hello, world&apos; with content type &apos;text/plain&apos;, {&apos;hello&apos;: world&apos;} with content type &apos;application/json&apos; and a byte string for &apos;application/octet-stream&apos;.
+        /// [Protocol Method] Binary body with three content types. Pass in string 'hello, world' with content type 'text/plain', {'hello': world'} with content type 'application/json' and a byte string for 'application/octet-stream'.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -328,7 +328,7 @@ namespace media_types_LowLevel
         /// </list>
         /// </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="contentType"> Upload file type. Allowed values: &quot;application/json&quot; | &quot;application/octet-stream&quot; | &quot;text/plain&quot;. </param>
+        /// <param name="contentType"> Upload file type. Allowed values: "application/json" | "application/octet-stream" | "text/plain". </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
@@ -353,7 +353,7 @@ namespace media_types_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method] Binary body with three content types. Pass in string &apos;hello, world&apos; with content type &apos;text/plain&apos;, {&apos;hello&apos;: world&apos;} with content type &apos;application/json&apos; and a byte string for &apos;application/octet-stream&apos;.
+        /// [Protocol Method] Binary body with three content types. Pass in string 'hello, world' with content type 'text/plain', {'hello': world'} with content type 'application/json' and a byte string for 'application/octet-stream'.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -363,7 +363,7 @@ namespace media_types_LowLevel
         /// </list>
         /// </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="contentType"> Upload file type. Allowed values: &quot;application/json&quot; | &quot;application/octet-stream&quot; | &quot;text/plain&quot;. </param>
+        /// <param name="contentType"> Upload file type. Allowed values: "application/json" | "application/octet-stream" | "text/plain". </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
@@ -388,7 +388,7 @@ namespace media_types_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method] Body that&apos;s either text/plain or application/json
+        /// [Protocol Method] Body that's either text/plain or application/json
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -398,7 +398,7 @@ namespace media_types_LowLevel
         /// </list>
         /// </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="contentType"> Upload file type. Allowed values: &quot;application/json&quot; | &quot;text/plain&quot;. </param>
+        /// <param name="contentType"> Upload file type. Allowed values: "application/json" | "text/plain". </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
@@ -423,7 +423,7 @@ namespace media_types_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method] Body that&apos;s either text/plain or application/json
+        /// [Protocol Method] Body that's either text/plain or application/json
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -433,7 +433,7 @@ namespace media_types_LowLevel
         /// </list>
         /// </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="contentType"> Upload file type. Allowed values: &quot;application/json&quot; | &quot;text/plain&quot;. </param>
+        /// <param name="contentType"> Upload file type. Allowed values: "application/json" | "text/plain". </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>

@@ -3,7 +3,7 @@
   <members>
     <member name="GetParametersAsync(RequestContext)">
 <example>
-This sample shows how to call GetParametersAsync and parse the result.
+This sample shows how to call GetParametersAsync with required parameters and parse the result.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
 var client = new ResourceServiceClient(credential);
@@ -17,7 +17,7 @@ Console.WriteLine(result.ToString());
     </member>
     <member name="GetParameters(RequestContext)">
 <example>
-This sample shows how to call GetParameters and parse the result.
+This sample shows how to call GetParameters with required parameters and parse the result.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
 var client = new ResourceServiceClient(credential);
@@ -31,7 +31,7 @@ Console.WriteLine(result.ToString());
     </member>
     <member name="GetGroupsAsync(RequestContext)">
 <example>
-This sample shows how to call GetGroupsAsync and parse the result.
+This sample shows how to call GetGroupsAsync with required parameters and parse the result.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
 var client = new ResourceServiceClient(credential);
@@ -46,7 +46,7 @@ await foreach (var item in client.GetGroupsAsync(new RequestContext()))
     </member>
     <member name="GetGroups(RequestContext)">
 <example>
-This sample shows how to call GetGroups and parse the result.
+This sample shows how to call GetGroups with required parameters and parse the result.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
 var client = new ResourceServiceClient(credential);
@@ -61,7 +61,7 @@ foreach (var item in client.GetGroups(new RequestContext()))
     </member>
     <member name="GetAllItemsAsync(RequestContext)">
 <example>
-This sample shows how to call GetAllItemsAsync and parse the result.
+This sample shows how to call GetAllItemsAsync with required parameters and parse the result.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
 var client = new ResourceServiceClient(credential);
@@ -76,7 +76,7 @@ await foreach (var item in client.GetAllItemsAsync(new RequestContext()))
     </member>
     <member name="GetAllItems(RequestContext)">
 <example>
-This sample shows how to call GetAllItems and parse the result.
+This sample shows how to call GetAllItems with required parameters and parse the result.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
 var client = new ResourceServiceClient(credential);

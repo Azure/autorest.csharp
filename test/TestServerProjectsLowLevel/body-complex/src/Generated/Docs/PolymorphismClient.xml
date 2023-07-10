@@ -3,7 +3,7 @@
   <members>
     <member name="GetValidAsync(RequestContext)">
 <example>
-This sample shows how to call GetValidAsync and parse the result.
+This sample shows how to call GetValidAsync with required parameters and parse the result.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
 var client = new PolymorphismClient(credential);
@@ -22,7 +22,7 @@ Console.WriteLine(result.GetProperty("siblings")[0].GetProperty("length").ToStri
     </member>
     <member name="GetValid(RequestContext)">
 <example>
-This sample shows how to call GetValid and parse the result.
+This sample shows how to call GetValid with required parameters and parse the result.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
 var client = new PolymorphismClient(credential);
@@ -67,7 +67,7 @@ var data = new {
     length = 123.45f,
 };
 
-Response response = await client.PutValidAsync(RequestContent.Create(data), new RequestContext());
+Response response = await client.PutValidAsync(RequestContent.Create(data));
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
@@ -100,14 +100,14 @@ var data = new {
     length = 123.45f,
 };
 
-Response response = client.PutValid(RequestContent.Create(data), new RequestContext());
+Response response = client.PutValid(RequestContent.Create(data));
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
     <member name="GetDotSyntaxAsync(RequestContext)">
 <example>
-This sample shows how to call GetDotSyntaxAsync and parse the result.
+This sample shows how to call GetDotSyntaxAsync with required parameters and parse the result.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
 var client = new PolymorphismClient(credential);
@@ -122,7 +122,7 @@ Console.WriteLine(result.GetProperty("species").ToString());
     </member>
     <member name="GetDotSyntax(RequestContext)">
 <example>
-This sample shows how to call GetDotSyntax and parse the result.
+This sample shows how to call GetDotSyntax with required parameters and parse the result.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
 var client = new PolymorphismClient(credential);
@@ -137,7 +137,7 @@ Console.WriteLine(result.GetProperty("species").ToString());
     </member>
     <member name="GetComposedWithDiscriminatorAsync(RequestContext)">
 <example>
-This sample shows how to call GetComposedWithDiscriminatorAsync and parse the result.
+This sample shows how to call GetComposedWithDiscriminatorAsync with required parameters and parse the result.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
 var client = new PolymorphismClient(credential);
@@ -162,7 +162,7 @@ Console.WriteLine(result.GetProperty("fishes")[0].GetProperty("species").ToStrin
     </member>
     <member name="GetComposedWithDiscriminator(RequestContext)">
 <example>
-This sample shows how to call GetComposedWithDiscriminator and parse the result.
+This sample shows how to call GetComposedWithDiscriminator with required parameters and parse the result.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
 var client = new PolymorphismClient(credential);
@@ -187,7 +187,7 @@ Console.WriteLine(result.GetProperty("fishes")[0].GetProperty("species").ToStrin
     </member>
     <member name="GetComposedWithoutDiscriminatorAsync(RequestContext)">
 <example>
-This sample shows how to call GetComposedWithoutDiscriminatorAsync and parse the result.
+This sample shows how to call GetComposedWithoutDiscriminatorAsync with required parameters and parse the result.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
 var client = new PolymorphismClient(credential);
@@ -212,7 +212,7 @@ Console.WriteLine(result.GetProperty("fishes")[0].GetProperty("species").ToStrin
     </member>
     <member name="GetComposedWithoutDiscriminator(RequestContext)">
 <example>
-This sample shows how to call GetComposedWithoutDiscriminator and parse the result.
+This sample shows how to call GetComposedWithoutDiscriminator with required parameters and parse the result.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
 var client = new PolymorphismClient(credential);
@@ -237,7 +237,7 @@ Console.WriteLine(result.GetProperty("fishes")[0].GetProperty("species").ToStrin
     </member>
     <member name="GetComplicatedAsync(RequestContext)">
 <example>
-This sample shows how to call GetComplicatedAsync and parse the result.
+This sample shows how to call GetComplicatedAsync with required parameters and parse the result.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
 var client = new PolymorphismClient(credential);
@@ -258,7 +258,7 @@ Console.WriteLine(result.GetProperty("siblings")[0].GetProperty("length").ToStri
     </member>
     <member name="GetComplicated(RequestContext)">
 <example>
-This sample shows how to call GetComplicated and parse the result.
+This sample shows how to call GetComplicated with required parameters and parse the result.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
 var client = new PolymorphismClient(credential);
@@ -315,7 +315,7 @@ var data = new {
     },
 };
 
-Response response = await client.PutComplicatedAsync(RequestContent.Create(data), new RequestContext());
+Response response = await client.PutComplicatedAsync(RequestContent.Create(data));
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
@@ -358,7 +358,7 @@ var data = new {
     },
 };
 
-Response response = client.PutComplicated(RequestContent.Create(data), new RequestContext());
+Response response = client.PutComplicated(RequestContent.Create(data));
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
@@ -403,7 +403,7 @@ var data = new {
     },
 };
 
-Response response = await client.PutMissingDiscriminatorAsync(RequestContent.Create(data), new RequestContext());
+Response response = await client.PutMissingDiscriminatorAsync(RequestContent.Create(data));
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("location").ToString());
@@ -457,7 +457,7 @@ var data = new {
     },
 };
 
-Response response = client.PutMissingDiscriminator(RequestContent.Create(data), new RequestContext());
+Response response = client.PutMissingDiscriminator(RequestContent.Create(data));
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("location").ToString());
@@ -499,7 +499,7 @@ var data = new {
     length = 123.45f,
 };
 
-Response response = await client.PutValidMissingRequiredAsync(RequestContent.Create(data), new RequestContext());
+Response response = await client.PutValidMissingRequiredAsync(RequestContent.Create(data));
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
@@ -532,7 +532,7 @@ var data = new {
     length = 123.45f,
 };
 
-Response response = client.PutValidMissingRequired(RequestContent.Create(data), new RequestContext());
+Response response = client.PutValidMissingRequired(RequestContent.Create(data));
 Console.WriteLine(response.Status);
 ]]></code>
 </example>

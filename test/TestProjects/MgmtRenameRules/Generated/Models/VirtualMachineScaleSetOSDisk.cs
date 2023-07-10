@@ -129,7 +129,7 @@ namespace MgmtRenameRules.Models
         /// </summary>
         internal VirtualHardDisk Image { get; set; }
         /// <summary>
-        /// Specifies the virtual hard disk&apos;s uri.
+        /// Specifies the virtual hard disk's uri.
         /// Serialized Name: VirtualHardDisk.uri
         /// </summary>
         public Uri ImageUri

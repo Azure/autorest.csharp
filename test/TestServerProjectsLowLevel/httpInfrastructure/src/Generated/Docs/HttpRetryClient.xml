@@ -8,7 +8,7 @@ This sample shows how to call Head408Async.
 var credential = new AzureKeyCredential("<key>");
 var client = new HttpRetryClient(credential);
 
-Response response = await client.Head408Async(new RequestContext());
+Response response = await client.Head408Async();
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
@@ -20,7 +20,7 @@ This sample shows how to call Head408.
 var credential = new AzureKeyCredential("<key>");
 var client = new HttpRetryClient(credential);
 
-Response response = client.Head408(new RequestContext());
+Response response = client.Head408();
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
@@ -34,7 +34,7 @@ var client = new HttpRetryClient(credential);
 
 var data = true;
 
-Response response = await client.Put500Async(RequestContent.Create(data), new RequestContext());
+Response response = await client.Put500Async(RequestContent.Create(data));
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
@@ -48,7 +48,7 @@ var client = new HttpRetryClient(credential);
 
 var data = true;
 
-Response response = client.Put500(RequestContent.Create(data), new RequestContext());
+Response response = client.Put500(RequestContent.Create(data));
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
@@ -62,7 +62,7 @@ var client = new HttpRetryClient(credential);
 
 var data = true;
 
-Response response = await client.Patch500Async(RequestContent.Create(data), new RequestContext());
+Response response = await client.Patch500Async(RequestContent.Create(data));
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
@@ -76,7 +76,7 @@ var client = new HttpRetryClient(credential);
 
 var data = true;
 
-Response response = client.Patch500(RequestContent.Create(data), new RequestContext());
+Response response = client.Patch500(RequestContent.Create(data));
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
@@ -88,7 +88,7 @@ This sample shows how to call Get502Async.
 var credential = new AzureKeyCredential("<key>");
 var client = new HttpRetryClient(credential);
 
-Response response = await client.Get502Async(new RequestContext());
+Response response = await client.Get502Async();
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
@@ -100,14 +100,14 @@ This sample shows how to call Get502.
 var credential = new AzureKeyCredential("<key>");
 var client = new HttpRetryClient(credential);
 
-Response response = client.Get502(new RequestContext());
+Response response = client.Get502();
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
     <member name="Options502Async(RequestContext)">
 <example>
-This sample shows how to call Options502Async and parse the result.
+This sample shows how to call Options502Async with required parameters and parse the result.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
 var client = new HttpRetryClient(credential);
@@ -121,7 +121,7 @@ Console.WriteLine(result.ToString());
     </member>
     <member name="Options502(RequestContext)">
 <example>
-This sample shows how to call Options502 and parse the result.
+This sample shows how to call Options502 with required parameters and parse the result.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
 var client = new HttpRetryClient(credential);
@@ -142,7 +142,7 @@ var client = new HttpRetryClient(credential);
 
 var data = true;
 
-Response response = await client.Post503Async(RequestContent.Create(data), new RequestContext());
+Response response = await client.Post503Async(RequestContent.Create(data));
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
@@ -156,7 +156,7 @@ var client = new HttpRetryClient(credential);
 
 var data = true;
 
-Response response = client.Post503(RequestContent.Create(data), new RequestContext());
+Response response = client.Post503(RequestContent.Create(data));
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
@@ -170,7 +170,7 @@ var client = new HttpRetryClient(credential);
 
 var data = true;
 
-Response response = await client.Delete503Async(RequestContent.Create(data), new RequestContext());
+Response response = await client.Delete503Async(RequestContent.Create(data));
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
@@ -184,7 +184,7 @@ var client = new HttpRetryClient(credential);
 
 var data = true;
 
-Response response = client.Delete503(RequestContent.Create(data), new RequestContext());
+Response response = client.Delete503(RequestContent.Create(data));
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
@@ -198,7 +198,7 @@ var client = new HttpRetryClient(credential);
 
 var data = true;
 
-Response response = await client.Put504Async(RequestContent.Create(data), new RequestContext());
+Response response = await client.Put504Async(RequestContent.Create(data));
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
@@ -212,7 +212,7 @@ var client = new HttpRetryClient(credential);
 
 var data = true;
 
-Response response = client.Put504(RequestContent.Create(data), new RequestContext());
+Response response = client.Put504(RequestContent.Create(data));
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
@@ -226,7 +226,7 @@ var client = new HttpRetryClient(credential);
 
 var data = true;
 
-Response response = await client.Patch504Async(RequestContent.Create(data), new RequestContext());
+Response response = await client.Patch504Async(RequestContent.Create(data));
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
@@ -240,7 +240,7 @@ var client = new HttpRetryClient(credential);
 
 var data = true;
 
-Response response = client.Patch504(RequestContent.Create(data), new RequestContext());
+Response response = client.Patch504(RequestContent.Create(data));
 Console.WriteLine(response.Status);
 ]]></code>
 </example>

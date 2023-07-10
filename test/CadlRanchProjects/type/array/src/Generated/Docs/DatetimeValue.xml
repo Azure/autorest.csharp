@@ -47,24 +47,30 @@ Console.WriteLine(result[0].ToString());
 ]]></code>
 </example>
     </member>
-    <member name="PutAsync(object,CancellationToken)">
+    <member name="PutAsync(IEnumerable{DateTimeOffset},CancellationToken)">
 <example>
 This sample shows how to call PutAsync with required parameters.
 <code><![CDATA[
 var client = new ArrayClient().GetDatetimeValueClient("1.0.0");
 
-var body = new object();
+var body = new DateTimeOffset[] 
+{
+    DateTimeOffset.UtcNow
+};
 var result = await client.PutAsync(body);
 ]]></code>
 </example>
     </member>
-    <member name="Put(object,CancellationToken)">
+    <member name="Put(IEnumerable{DateTimeOffset},CancellationToken)">
 <example>
 This sample shows how to call Put with required parameters.
 <code><![CDATA[
 var client = new ArrayClient().GetDatetimeValueClient("1.0.0");
 
-var body = new object();
+var body = new DateTimeOffset[] 
+{
+    DateTimeOffset.UtcNow
+};
 var result = client.Put(body);
 ]]></code>
 </example>
@@ -79,7 +85,7 @@ var data = new[] {
     "2022-05-10T14:57:31.2311892-04:00"
 };
 
-Response response = await client.PutAsync(RequestContent.Create(data), new RequestContext());
+Response response = await client.PutAsync(RequestContent.Create(data));
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
@@ -94,7 +100,7 @@ var data = new[] {
     "2022-05-10T14:57:31.2311892-04:00"
 };
 
-Response response = client.Put(RequestContent.Create(data), new RequestContext());
+Response response = client.Put(RequestContent.Create(data));
 Console.WriteLine(response.Status);
 ]]></code>
 </example>

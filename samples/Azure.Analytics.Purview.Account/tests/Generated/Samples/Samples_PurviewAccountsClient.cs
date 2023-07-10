@@ -27,7 +27,7 @@ namespace Azure.Analytics.Purview.Account.Samples
             var endpoint = new Uri("<https://my-service.azure.com>");
             var client = new PurviewAccountsClient(endpoint, credential);
 
-            Response response = client.GetAccountProperties();
+            Response response = client.GetAccountProperties(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());
@@ -92,7 +92,7 @@ namespace Azure.Analytics.Purview.Account.Samples
             var endpoint = new Uri("<https://my-service.azure.com>");
             var client = new PurviewAccountsClient(endpoint, credential);
 
-            Response response = await client.GetAccountPropertiesAsync();
+            Response response = await client.GetAccountPropertiesAsync(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());
@@ -178,7 +178,7 @@ namespace Azure.Analytics.Purview.Account.Samples
                 friendlyName = "<friendlyName>",
             };
 
-            Response response = client.UpdateAccountProperties(RequestContent.Create(data), new RequestContext());
+            Response response = client.UpdateAccountProperties(RequestContent.Create(data));
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("id").ToString());
@@ -250,7 +250,7 @@ namespace Azure.Analytics.Purview.Account.Samples
                 friendlyName = "<friendlyName>",
             };
 
-            Response response = await client.UpdateAccountPropertiesAsync(RequestContent.Create(data), new RequestContext());
+            Response response = await client.UpdateAccountPropertiesAsync(RequestContent.Create(data));
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("id").ToString());
@@ -301,7 +301,7 @@ namespace Azure.Analytics.Purview.Account.Samples
             var endpoint = new Uri("<https://my-service.azure.com>");
             var client = new PurviewAccountsClient(endpoint, credential);
 
-            Response response = client.GetAccessKeys();
+            Response response = client.GetAccessKeys(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());
@@ -330,7 +330,7 @@ namespace Azure.Analytics.Purview.Account.Samples
             var endpoint = new Uri("<https://my-service.azure.com>");
             var client = new PurviewAccountsClient(endpoint, credential);
 
-            Response response = await client.GetAccessKeysAsync();
+            Response response = await client.GetAccessKeysAsync(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());
@@ -380,7 +380,7 @@ namespace Azure.Analytics.Purview.Account.Samples
                 keyType = "PrimaryAtlasKafkaKey",
             };
 
-            Response response = client.RegenerateAccessKey(RequestContent.Create(data), new RequestContext());
+            Response response = client.RegenerateAccessKey(RequestContent.Create(data));
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("atlasKafkaPrimaryEndpoint").ToString());
@@ -416,7 +416,7 @@ namespace Azure.Analytics.Purview.Account.Samples
                 keyType = "PrimaryAtlasKafkaKey",
             };
 
-            Response response = await client.RegenerateAccessKeyAsync(RequestContent.Create(data), new RequestContext());
+            Response response = await client.RegenerateAccessKeyAsync(RequestContent.Create(data));
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("atlasKafkaPrimaryEndpoint").ToString());
@@ -431,7 +431,7 @@ namespace Azure.Analytics.Purview.Account.Samples
             var endpoint = new Uri("<https://my-service.azure.com>");
             var client = new PurviewAccountsClient(endpoint, credential);
 
-            foreach (var item in client.GetResourceSetRules())
+            foreach (var item in client.GetResourceSetRules("<skipToken>", new RequestContext()))
             {
                 JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
                 Console.WriteLine(result.ToString());
@@ -545,7 +545,7 @@ namespace Azure.Analytics.Purview.Account.Samples
             var endpoint = new Uri("<https://my-service.azure.com>");
             var client = new PurviewAccountsClient(endpoint, credential);
 
-            await foreach (var item in client.GetResourceSetRulesAsync())
+            await foreach (var item in client.GetResourceSetRulesAsync("<skipToken>", new RequestContext()))
             {
                 JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
                 Console.WriteLine(result.ToString());
@@ -648,88 +648,6 @@ namespace Azure.Analytics.Purview.Account.Samples
                 Console.WriteLine(result.GetProperty("pathPatternConfig").GetProperty("scopedRules")[0].GetProperty("rules")[0].GetProperty("qualifiedName").ToString());
                 Console.WriteLine(result.GetProperty("pathPatternConfig").GetProperty("scopedRules")[0].GetProperty("storeType").ToString());
                 Console.WriteLine(result.GetProperty("pathPatternConfig").GetProperty("version").ToString());
-            }
-        }
-
-        [Test]
-        [Ignore("Only validating compilation of examples")]
-        public void Example_GetCollections()
-        {
-            var credential = new DefaultAzureCredential();
-            var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new PurviewAccountsClient(endpoint, credential);
-
-            foreach (var item in client.GetCollections())
-            {
-                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
-                Console.WriteLine(result.ToString());
-            }
-        }
-
-        [Test]
-        [Ignore("Only validating compilation of examples")]
-        public void Example_GetCollections_AllParameters()
-        {
-            var credential = new DefaultAzureCredential();
-            var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new PurviewAccountsClient(endpoint, credential);
-
-            foreach (var item in client.GetCollections("<skipToken>", new RequestContext()))
-            {
-                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
-                Console.WriteLine(result.GetProperty("collectionProvisioningState").ToString());
-                Console.WriteLine(result.GetProperty("description").ToString());
-                Console.WriteLine(result.GetProperty("friendlyName").ToString());
-                Console.WriteLine(result.GetProperty("name").ToString());
-                Console.WriteLine(result.GetProperty("parentCollection").GetProperty("referenceName").ToString());
-                Console.WriteLine(result.GetProperty("parentCollection").GetProperty("type").ToString());
-                Console.WriteLine(result.GetProperty("systemData").GetProperty("createdAt").ToString());
-                Console.WriteLine(result.GetProperty("systemData").GetProperty("createdBy").ToString());
-                Console.WriteLine(result.GetProperty("systemData").GetProperty("createdByType").ToString());
-                Console.WriteLine(result.GetProperty("systemData").GetProperty("lastModifiedAt").ToString());
-                Console.WriteLine(result.GetProperty("systemData").GetProperty("lastModifiedBy").ToString());
-                Console.WriteLine(result.GetProperty("systemData").GetProperty("lastModifiedByType").ToString());
-            }
-        }
-
-        [Test]
-        [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetCollections_Async()
-        {
-            var credential = new DefaultAzureCredential();
-            var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new PurviewAccountsClient(endpoint, credential);
-
-            await foreach (var item in client.GetCollectionsAsync())
-            {
-                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
-                Console.WriteLine(result.ToString());
-            }
-        }
-
-        [Test]
-        [Ignore("Only validating compilation of examples")]
-        public async Task Example_GetCollections_AllParameters_Async()
-        {
-            var credential = new DefaultAzureCredential();
-            var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new PurviewAccountsClient(endpoint, credential);
-
-            await foreach (var item in client.GetCollectionsAsync("<skipToken>", new RequestContext()))
-            {
-                JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
-                Console.WriteLine(result.GetProperty("collectionProvisioningState").ToString());
-                Console.WriteLine(result.GetProperty("description").ToString());
-                Console.WriteLine(result.GetProperty("friendlyName").ToString());
-                Console.WriteLine(result.GetProperty("name").ToString());
-                Console.WriteLine(result.GetProperty("parentCollection").GetProperty("referenceName").ToString());
-                Console.WriteLine(result.GetProperty("parentCollection").GetProperty("type").ToString());
-                Console.WriteLine(result.GetProperty("systemData").GetProperty("createdAt").ToString());
-                Console.WriteLine(result.GetProperty("systemData").GetProperty("createdBy").ToString());
-                Console.WriteLine(result.GetProperty("systemData").GetProperty("createdByType").ToString());
-                Console.WriteLine(result.GetProperty("systemData").GetProperty("lastModifiedAt").ToString());
-                Console.WriteLine(result.GetProperty("systemData").GetProperty("lastModifiedBy").ToString());
-                Console.WriteLine(result.GetProperty("systemData").GetProperty("lastModifiedByType").ToString());
             }
         }
     }

@@ -3,7 +3,7 @@
   <members>
     <member name="OperationAsync(RequestContent,RequestContext)">
 <example>
-This sample shows how to call OperationAsync with required request content.
+This sample shows how to call OperationAsync with required parameters and request content.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
 var client = new AccessibilityClient(credential);
@@ -17,7 +17,7 @@ Console.WriteLine(response.Status);
     </member>
     <member name="Operation(RequestContent,RequestContext)">
 <example>
-This sample shows how to call Operation with required request content.
+This sample shows how to call Operation with required parameters and request content.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
 var client = new AccessibilityClient(credential);

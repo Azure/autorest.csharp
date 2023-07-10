@@ -28,7 +28,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
         public static string CreateDescription(string description, string clientPrefix)
             => string.IsNullOrWhiteSpace(description)
                 ? $"The {clientPrefix} service client."
-                : BuilderHelpers.EscapeXmlDescription(description);
+                : BuilderHelpers.EscapeXmlDocDescription(description);
 
         public static string GetClientPrefix(string name, BuildContext context)
             => GetClientPrefix(name, context.DefaultName);
@@ -72,7 +72,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
                 yield return new ClientMethod(
                     name,
                     startMethod,
-                    BuilderHelpers.EscapeXmlDescription(operation.Description),
+                    BuilderHelpers.EscapeXmlDocDescription(operation.Description),
                     new Diagnostic($"{declaration.Name}.{name}", Array.Empty<DiagnosticAttribute>()),
                     operation.Accessibility ?? "public");
             }

@@ -26,7 +26,7 @@ namespace body_file_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new FilesClient(credential);
 
-            Response response = client.GetFile();
+            Response response = client.GetFile(new RequestContext());
             if (response.ContentStream != null)
             {
                 using (Stream outFileStream = File.OpenWrite("<filePath>"))
@@ -60,7 +60,7 @@ namespace body_file_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new FilesClient(credential);
 
-            Response response = await client.GetFileAsync();
+            Response response = await client.GetFileAsync(new RequestContext());
             if (response.ContentStream != null)
             {
                 using (Stream outFileStream = File.OpenWrite("<filePath>"))
@@ -94,7 +94,7 @@ namespace body_file_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new FilesClient(credential);
 
-            Response response = client.GetFileLarge();
+            Response response = client.GetFileLarge(new RequestContext());
             if (response.ContentStream != null)
             {
                 using (Stream outFileStream = File.OpenWrite("<filePath>"))
@@ -128,7 +128,7 @@ namespace body_file_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new FilesClient(credential);
 
-            Response response = await client.GetFileLargeAsync();
+            Response response = await client.GetFileLargeAsync(new RequestContext());
             if (response.ContentStream != null)
             {
                 using (Stream outFileStream = File.OpenWrite("<filePath>"))
@@ -162,7 +162,7 @@ namespace body_file_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new FilesClient(credential);
 
-            Response response = client.GetEmptyFile();
+            Response response = client.GetEmptyFile(new RequestContext());
             if (response.ContentStream != null)
             {
                 using (Stream outFileStream = File.OpenWrite("<filePath>"))
@@ -196,7 +196,7 @@ namespace body_file_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new FilesClient(credential);
 
-            Response response = await client.GetEmptyFileAsync();
+            Response response = await client.GetEmptyFileAsync(new RequestContext());
             if (response.ContentStream != null)
             {
                 using (Stream outFileStream = File.OpenWrite("<filePath>"))

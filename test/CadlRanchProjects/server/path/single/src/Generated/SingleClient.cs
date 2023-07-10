@@ -33,14 +33,14 @@ namespace Server.Path.Single
         }
 
         /// <summary> Initializes a new instance of SingleClient. </summary>
-        /// <param name="endpoint"> Need to be set as &apos;http://localhost:3000&apos; in client. </param>
+        /// <param name="endpoint"> Need to be set as 'http://localhost:3000' in client. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> is null. </exception>
         public SingleClient(Uri endpoint) : this(endpoint, new SingleClientOptions())
         {
         }
 
         /// <summary> Initializes a new instance of SingleClient. </summary>
-        /// <param name="endpoint"> Need to be set as &apos;http://localhost:3000&apos; in client. </param>
+        /// <param name="endpoint"> Need to be set as 'http://localhost:3000' in client. </param>
         /// <param name="options"> The options for configuring the client. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="endpoint"/> is null. </exception>
         public SingleClient(Uri endpoint, SingleClientOptions options)
@@ -55,7 +55,7 @@ namespace Server.Path.Single
         }
 
         /// <summary>
-        /// [Protocol Method] 
+        /// [Protocol Method]
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -85,7 +85,7 @@ namespace Server.Path.Single
         }
 
         /// <summary>
-        /// [Protocol Method] 
+        /// [Protocol Method]
         /// <list type="bullet">
         /// <item>
         /// <description>

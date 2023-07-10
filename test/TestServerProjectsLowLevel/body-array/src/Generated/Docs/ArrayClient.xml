@@ -3,7 +3,7 @@
   <members>
     <member name="GetNullAsync(RequestContext)">
 <example>
-This sample shows how to call GetNullAsync and parse the result.
+This sample shows how to call GetNullAsync with required parameters and parse the result.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
 var client = new ArrayClient(credential);
@@ -17,7 +17,7 @@ Console.WriteLine(result[0].ToString());
     </member>
     <member name="GetNull(RequestContext)">
 <example>
-This sample shows how to call GetNull and parse the result.
+This sample shows how to call GetNull with required parameters and parse the result.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
 var client = new ArrayClient(credential);
@@ -31,7 +31,7 @@ Console.WriteLine(result[0].ToString());
     </member>
     <member name="GetInvalidAsync(RequestContext)">
 <example>
-This sample shows how to call GetInvalidAsync and parse the result.
+This sample shows how to call GetInvalidAsync with required parameters and parse the result.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
 var client = new ArrayClient(credential);
@@ -45,7 +45,7 @@ Console.WriteLine(result[0].ToString());
     </member>
     <member name="GetInvalid(RequestContext)">
 <example>
-This sample shows how to call GetInvalid and parse the result.
+This sample shows how to call GetInvalid with required parameters and parse the result.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
 var client = new ArrayClient(credential);
@@ -59,7 +59,7 @@ Console.WriteLine(result[0].ToString());
     </member>
     <member name="GetEmptyAsync(RequestContext)">
 <example>
-This sample shows how to call GetEmptyAsync and parse the result.
+This sample shows how to call GetEmptyAsync with required parameters and parse the result.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
 var client = new ArrayClient(credential);
@@ -73,7 +73,7 @@ Console.WriteLine(result[0].ToString());
     </member>
     <member name="GetEmpty(RequestContext)">
 <example>
-This sample shows how to call GetEmpty and parse the result.
+This sample shows how to call GetEmpty with required parameters and parse the result.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
 var client = new ArrayClient(credential);
@@ -96,7 +96,7 @@ var data = new[] {
     "<String>"
 };
 
-Response response = await client.PutEmptyAsync(RequestContent.Create(data), new RequestContext());
+Response response = await client.PutEmptyAsync(RequestContent.Create(data));
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
@@ -112,14 +112,14 @@ var data = new[] {
     "<String>"
 };
 
-Response response = client.PutEmpty(RequestContent.Create(data), new RequestContext());
+Response response = client.PutEmpty(RequestContent.Create(data));
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
     <member name="GetBooleanTfftAsync(RequestContext)">
 <example>
-This sample shows how to call GetBooleanTfftAsync and parse the result.
+This sample shows how to call GetBooleanTfftAsync with required parameters and parse the result.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
 var client = new ArrayClient(credential);
@@ -133,7 +133,7 @@ Console.WriteLine(result[0].ToString());
     </member>
     <member name="GetBooleanTfft(RequestContext)">
 <example>
-This sample shows how to call GetBooleanTfft and parse the result.
+This sample shows how to call GetBooleanTfft with required parameters and parse the result.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
 var client = new ArrayClient(credential);
@@ -156,7 +156,7 @@ var data = new[] {
     true
 };
 
-Response response = await client.PutBooleanTfftAsync(RequestContent.Create(data), new RequestContext());
+Response response = await client.PutBooleanTfftAsync(RequestContent.Create(data));
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
@@ -172,14 +172,14 @@ var data = new[] {
     true
 };
 
-Response response = client.PutBooleanTfft(RequestContent.Create(data), new RequestContext());
+Response response = client.PutBooleanTfft(RequestContent.Create(data));
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
     <member name="GetBooleanInvalidNullAsync(RequestContext)">
 <example>
-This sample shows how to call GetBooleanInvalidNullAsync and parse the result.
+This sample shows how to call GetBooleanInvalidNullAsync with required parameters and parse the result.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
 var client = new ArrayClient(credential);
@@ -193,7 +193,7 @@ Console.WriteLine(result[0].ToString());
     </member>
     <member name="GetBooleanInvalidNull(RequestContext)">
 <example>
-This sample shows how to call GetBooleanInvalidNull and parse the result.
+This sample shows how to call GetBooleanInvalidNull with required parameters and parse the result.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
 var client = new ArrayClient(credential);
@@ -207,7 +207,7 @@ Console.WriteLine(result[0].ToString());
     </member>
     <member name="GetBooleanInvalidStringAsync(RequestContext)">
 <example>
-This sample shows how to call GetBooleanInvalidStringAsync and parse the result.
+This sample shows how to call GetBooleanInvalidStringAsync with required parameters and parse the result.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
 var client = new ArrayClient(credential);
@@ -221,7 +221,7 @@ Console.WriteLine(result[0].ToString());
     </member>
     <member name="GetBooleanInvalidString(RequestContext)">
 <example>
-This sample shows how to call GetBooleanInvalidString and parse the result.
+This sample shows how to call GetBooleanInvalidString with required parameters and parse the result.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
 var client = new ArrayClient(credential);
@@ -235,7 +235,7 @@ Console.WriteLine(result[0].ToString());
     </member>
     <member name="GetIntegerValidAsync(RequestContext)">
 <example>
-This sample shows how to call GetIntegerValidAsync and parse the result.
+This sample shows how to call GetIntegerValidAsync with required parameters and parse the result.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
 var client = new ArrayClient(credential);
@@ -249,7 +249,7 @@ Console.WriteLine(result[0].ToString());
     </member>
     <member name="GetIntegerValid(RequestContext)">
 <example>
-This sample shows how to call GetIntegerValid and parse the result.
+This sample shows how to call GetIntegerValid with required parameters and parse the result.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
 var client = new ArrayClient(credential);
@@ -272,7 +272,7 @@ var data = new[] {
     1234
 };
 
-Response response = await client.PutIntegerValidAsync(RequestContent.Create(data), new RequestContext());
+Response response = await client.PutIntegerValidAsync(RequestContent.Create(data));
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
@@ -288,14 +288,14 @@ var data = new[] {
     1234
 };
 
-Response response = client.PutIntegerValid(RequestContent.Create(data), new RequestContext());
+Response response = client.PutIntegerValid(RequestContent.Create(data));
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
     <member name="GetIntInvalidNullAsync(RequestContext)">
 <example>
-This sample shows how to call GetIntInvalidNullAsync and parse the result.
+This sample shows how to call GetIntInvalidNullAsync with required parameters and parse the result.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
 var client = new ArrayClient(credential);
@@ -309,7 +309,7 @@ Console.WriteLine(result[0].ToString());
     </member>
     <member name="GetIntInvalidNull(RequestContext)">
 <example>
-This sample shows how to call GetIntInvalidNull and parse the result.
+This sample shows how to call GetIntInvalidNull with required parameters and parse the result.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
 var client = new ArrayClient(credential);
@@ -323,7 +323,7 @@ Console.WriteLine(result[0].ToString());
     </member>
     <member name="GetIntInvalidStringAsync(RequestContext)">
 <example>
-This sample shows how to call GetIntInvalidStringAsync and parse the result.
+This sample shows how to call GetIntInvalidStringAsync with required parameters and parse the result.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
 var client = new ArrayClient(credential);
@@ -337,7 +337,7 @@ Console.WriteLine(result[0].ToString());
     </member>
     <member name="GetIntInvalidString(RequestContext)">
 <example>
-This sample shows how to call GetIntInvalidString and parse the result.
+This sample shows how to call GetIntInvalidString with required parameters and parse the result.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
 var client = new ArrayClient(credential);
@@ -351,7 +351,7 @@ Console.WriteLine(result[0].ToString());
     </member>
     <member name="GetLongValidAsync(RequestContext)">
 <example>
-This sample shows how to call GetLongValidAsync and parse the result.
+This sample shows how to call GetLongValidAsync with required parameters and parse the result.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
 var client = new ArrayClient(credential);
@@ -365,7 +365,7 @@ Console.WriteLine(result[0].ToString());
     </member>
     <member name="GetLongValid(RequestContext)">
 <example>
-This sample shows how to call GetLongValid and parse the result.
+This sample shows how to call GetLongValid with required parameters and parse the result.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
 var client = new ArrayClient(credential);
@@ -388,7 +388,7 @@ var data = new[] {
     1234L
 };
 
-Response response = await client.PutLongValidAsync(RequestContent.Create(data), new RequestContext());
+Response response = await client.PutLongValidAsync(RequestContent.Create(data));
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
@@ -404,14 +404,14 @@ var data = new[] {
     1234L
 };
 
-Response response = client.PutLongValid(RequestContent.Create(data), new RequestContext());
+Response response = client.PutLongValid(RequestContent.Create(data));
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
     <member name="GetLongInvalidNullAsync(RequestContext)">
 <example>
-This sample shows how to call GetLongInvalidNullAsync and parse the result.
+This sample shows how to call GetLongInvalidNullAsync with required parameters and parse the result.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
 var client = new ArrayClient(credential);
@@ -425,7 +425,7 @@ Console.WriteLine(result[0].ToString());
     </member>
     <member name="GetLongInvalidNull(RequestContext)">
 <example>
-This sample shows how to call GetLongInvalidNull and parse the result.
+This sample shows how to call GetLongInvalidNull with required parameters and parse the result.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
 var client = new ArrayClient(credential);
@@ -439,7 +439,7 @@ Console.WriteLine(result[0].ToString());
     </member>
     <member name="GetLongInvalidStringAsync(RequestContext)">
 <example>
-This sample shows how to call GetLongInvalidStringAsync and parse the result.
+This sample shows how to call GetLongInvalidStringAsync with required parameters and parse the result.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
 var client = new ArrayClient(credential);
@@ -453,7 +453,7 @@ Console.WriteLine(result[0].ToString());
     </member>
     <member name="GetLongInvalidString(RequestContext)">
 <example>
-This sample shows how to call GetLongInvalidString and parse the result.
+This sample shows how to call GetLongInvalidString with required parameters and parse the result.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
 var client = new ArrayClient(credential);
@@ -467,7 +467,7 @@ Console.WriteLine(result[0].ToString());
     </member>
     <member name="GetFloatValidAsync(RequestContext)">
 <example>
-This sample shows how to call GetFloatValidAsync and parse the result.
+This sample shows how to call GetFloatValidAsync with required parameters and parse the result.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
 var client = new ArrayClient(credential);
@@ -481,7 +481,7 @@ Console.WriteLine(result[0].ToString());
     </member>
     <member name="GetFloatValid(RequestContext)">
 <example>
-This sample shows how to call GetFloatValid and parse the result.
+This sample shows how to call GetFloatValid with required parameters and parse the result.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
 var client = new ArrayClient(credential);
@@ -504,7 +504,7 @@ var data = new[] {
     123.45f
 };
 
-Response response = await client.PutFloatValidAsync(RequestContent.Create(data), new RequestContext());
+Response response = await client.PutFloatValidAsync(RequestContent.Create(data));
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
@@ -520,14 +520,14 @@ var data = new[] {
     123.45f
 };
 
-Response response = client.PutFloatValid(RequestContent.Create(data), new RequestContext());
+Response response = client.PutFloatValid(RequestContent.Create(data));
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
     <member name="GetFloatInvalidNullAsync(RequestContext)">
 <example>
-This sample shows how to call GetFloatInvalidNullAsync and parse the result.
+This sample shows how to call GetFloatInvalidNullAsync with required parameters and parse the result.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
 var client = new ArrayClient(credential);
@@ -541,7 +541,7 @@ Console.WriteLine(result[0].ToString());
     </member>
     <member name="GetFloatInvalidNull(RequestContext)">
 <example>
-This sample shows how to call GetFloatInvalidNull and parse the result.
+This sample shows how to call GetFloatInvalidNull with required parameters and parse the result.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
 var client = new ArrayClient(credential);
@@ -555,7 +555,7 @@ Console.WriteLine(result[0].ToString());
     </member>
     <member name="GetFloatInvalidStringAsync(RequestContext)">
 <example>
-This sample shows how to call GetFloatInvalidStringAsync and parse the result.
+This sample shows how to call GetFloatInvalidStringAsync with required parameters and parse the result.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
 var client = new ArrayClient(credential);
@@ -569,7 +569,7 @@ Console.WriteLine(result[0].ToString());
     </member>
     <member name="GetFloatInvalidString(RequestContext)">
 <example>
-This sample shows how to call GetFloatInvalidString and parse the result.
+This sample shows how to call GetFloatInvalidString with required parameters and parse the result.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
 var client = new ArrayClient(credential);
@@ -583,7 +583,7 @@ Console.WriteLine(result[0].ToString());
     </member>
     <member name="GetDoubleValidAsync(RequestContext)">
 <example>
-This sample shows how to call GetDoubleValidAsync and parse the result.
+This sample shows how to call GetDoubleValidAsync with required parameters and parse the result.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
 var client = new ArrayClient(credential);
@@ -597,7 +597,7 @@ Console.WriteLine(result[0].ToString());
     </member>
     <member name="GetDoubleValid(RequestContext)">
 <example>
-This sample shows how to call GetDoubleValid and parse the result.
+This sample shows how to call GetDoubleValid with required parameters and parse the result.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
 var client = new ArrayClient(credential);
@@ -620,7 +620,7 @@ var data = new[] {
     123.45d
 };
 
-Response response = await client.PutDoubleValidAsync(RequestContent.Create(data), new RequestContext());
+Response response = await client.PutDoubleValidAsync(RequestContent.Create(data));
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
@@ -636,14 +636,14 @@ var data = new[] {
     123.45d
 };
 
-Response response = client.PutDoubleValid(RequestContent.Create(data), new RequestContext());
+Response response = client.PutDoubleValid(RequestContent.Create(data));
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
     <member name="GetDoubleInvalidNullAsync(RequestContext)">
 <example>
-This sample shows how to call GetDoubleInvalidNullAsync and parse the result.
+This sample shows how to call GetDoubleInvalidNullAsync with required parameters and parse the result.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
 var client = new ArrayClient(credential);
@@ -657,7 +657,7 @@ Console.WriteLine(result[0].ToString());
     </member>
     <member name="GetDoubleInvalidNull(RequestContext)">
 <example>
-This sample shows how to call GetDoubleInvalidNull and parse the result.
+This sample shows how to call GetDoubleInvalidNull with required parameters and parse the result.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
 var client = new ArrayClient(credential);
@@ -671,7 +671,7 @@ Console.WriteLine(result[0].ToString());
     </member>
     <member name="GetDoubleInvalidStringAsync(RequestContext)">
 <example>
-This sample shows how to call GetDoubleInvalidStringAsync and parse the result.
+This sample shows how to call GetDoubleInvalidStringAsync with required parameters and parse the result.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
 var client = new ArrayClient(credential);
@@ -685,7 +685,7 @@ Console.WriteLine(result[0].ToString());
     </member>
     <member name="GetDoubleInvalidString(RequestContext)">
 <example>
-This sample shows how to call GetDoubleInvalidString and parse the result.
+This sample shows how to call GetDoubleInvalidString with required parameters and parse the result.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
 var client = new ArrayClient(credential);
@@ -699,7 +699,7 @@ Console.WriteLine(result[0].ToString());
     </member>
     <member name="GetStringValidAsync(RequestContext)">
 <example>
-This sample shows how to call GetStringValidAsync and parse the result.
+This sample shows how to call GetStringValidAsync with required parameters and parse the result.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
 var client = new ArrayClient(credential);
@@ -713,7 +713,7 @@ Console.WriteLine(result[0].ToString());
     </member>
     <member name="GetStringValid(RequestContext)">
 <example>
-This sample shows how to call GetStringValid and parse the result.
+This sample shows how to call GetStringValid with required parameters and parse the result.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
 var client = new ArrayClient(credential);
@@ -736,7 +736,7 @@ var data = new[] {
     "<String>"
 };
 
-Response response = await client.PutStringValidAsync(RequestContent.Create(data), new RequestContext());
+Response response = await client.PutStringValidAsync(RequestContent.Create(data));
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
@@ -752,14 +752,14 @@ var data = new[] {
     "<String>"
 };
 
-Response response = client.PutStringValid(RequestContent.Create(data), new RequestContext());
+Response response = client.PutStringValid(RequestContent.Create(data));
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
     <member name="GetEnumValidAsync(RequestContext)">
 <example>
-This sample shows how to call GetEnumValidAsync and parse the result.
+This sample shows how to call GetEnumValidAsync with required parameters and parse the result.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
 var client = new ArrayClient(credential);
@@ -773,7 +773,7 @@ Console.WriteLine(result[0].ToString());
     </member>
     <member name="GetEnumValid(RequestContext)">
 <example>
-This sample shows how to call GetEnumValid and parse the result.
+This sample shows how to call GetEnumValid with required parameters and parse the result.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
 var client = new ArrayClient(credential);
@@ -796,7 +796,7 @@ var data = new[] {
     "foo1"
 };
 
-Response response = await client.PutEnumValidAsync(RequestContent.Create(data), new RequestContext());
+Response response = await client.PutEnumValidAsync(RequestContent.Create(data));
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
@@ -812,14 +812,14 @@ var data = new[] {
     "foo1"
 };
 
-Response response = client.PutEnumValid(RequestContent.Create(data), new RequestContext());
+Response response = client.PutEnumValid(RequestContent.Create(data));
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
     <member name="GetStringEnumValidAsync(RequestContext)">
 <example>
-This sample shows how to call GetStringEnumValidAsync and parse the result.
+This sample shows how to call GetStringEnumValidAsync with required parameters and parse the result.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
 var client = new ArrayClient(credential);
@@ -833,7 +833,7 @@ Console.WriteLine(result[0].ToString());
     </member>
     <member name="GetStringEnumValid(RequestContext)">
 <example>
-This sample shows how to call GetStringEnumValid and parse the result.
+This sample shows how to call GetStringEnumValid with required parameters and parse the result.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
 var client = new ArrayClient(credential);
@@ -856,7 +856,7 @@ var data = new[] {
     "foo1"
 };
 
-Response response = await client.PutStringEnumValidAsync(RequestContent.Create(data), new RequestContext());
+Response response = await client.PutStringEnumValidAsync(RequestContent.Create(data));
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
@@ -872,14 +872,14 @@ var data = new[] {
     "foo1"
 };
 
-Response response = client.PutStringEnumValid(RequestContent.Create(data), new RequestContext());
+Response response = client.PutStringEnumValid(RequestContent.Create(data));
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
     <member name="GetStringWithNullAsync(RequestContext)">
 <example>
-This sample shows how to call GetStringWithNullAsync and parse the result.
+This sample shows how to call GetStringWithNullAsync with required parameters and parse the result.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
 var client = new ArrayClient(credential);
@@ -893,7 +893,7 @@ Console.WriteLine(result[0].ToString());
     </member>
     <member name="GetStringWithNull(RequestContext)">
 <example>
-This sample shows how to call GetStringWithNull and parse the result.
+This sample shows how to call GetStringWithNull with required parameters and parse the result.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
 var client = new ArrayClient(credential);
@@ -907,7 +907,7 @@ Console.WriteLine(result[0].ToString());
     </member>
     <member name="GetStringWithInvalidAsync(RequestContext)">
 <example>
-This sample shows how to call GetStringWithInvalidAsync and parse the result.
+This sample shows how to call GetStringWithInvalidAsync with required parameters and parse the result.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
 var client = new ArrayClient(credential);
@@ -921,7 +921,7 @@ Console.WriteLine(result[0].ToString());
     </member>
     <member name="GetStringWithInvalid(RequestContext)">
 <example>
-This sample shows how to call GetStringWithInvalid and parse the result.
+This sample shows how to call GetStringWithInvalid with required parameters and parse the result.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
 var client = new ArrayClient(credential);
@@ -935,7 +935,7 @@ Console.WriteLine(result[0].ToString());
     </member>
     <member name="GetUuidValidAsync(RequestContext)">
 <example>
-This sample shows how to call GetUuidValidAsync and parse the result.
+This sample shows how to call GetUuidValidAsync with required parameters and parse the result.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
 var client = new ArrayClient(credential);
@@ -949,7 +949,7 @@ Console.WriteLine(result[0].ToString());
     </member>
     <member name="GetUuidValid(RequestContext)">
 <example>
-This sample shows how to call GetUuidValid and parse the result.
+This sample shows how to call GetUuidValid with required parameters and parse the result.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
 var client = new ArrayClient(credential);
@@ -972,7 +972,7 @@ var data = new[] {
     "73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"
 };
 
-Response response = await client.PutUuidValidAsync(RequestContent.Create(data), new RequestContext());
+Response response = await client.PutUuidValidAsync(RequestContent.Create(data));
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
@@ -988,14 +988,14 @@ var data = new[] {
     "73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"
 };
 
-Response response = client.PutUuidValid(RequestContent.Create(data), new RequestContext());
+Response response = client.PutUuidValid(RequestContent.Create(data));
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
     <member name="GetUuidInvalidCharsAsync(RequestContext)">
 <example>
-This sample shows how to call GetUuidInvalidCharsAsync and parse the result.
+This sample shows how to call GetUuidInvalidCharsAsync with required parameters and parse the result.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
 var client = new ArrayClient(credential);
@@ -1009,7 +1009,7 @@ Console.WriteLine(result[0].ToString());
     </member>
     <member name="GetUuidInvalidChars(RequestContext)">
 <example>
-This sample shows how to call GetUuidInvalidChars and parse the result.
+This sample shows how to call GetUuidInvalidChars with required parameters and parse the result.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
 var client = new ArrayClient(credential);
@@ -1023,7 +1023,7 @@ Console.WriteLine(result[0].ToString());
     </member>
     <member name="GetDateValidAsync(RequestContext)">
 <example>
-This sample shows how to call GetDateValidAsync and parse the result.
+This sample shows how to call GetDateValidAsync with required parameters and parse the result.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
 var client = new ArrayClient(credential);
@@ -1037,7 +1037,7 @@ Console.WriteLine(result[0].ToString());
     </member>
     <member name="GetDateValid(RequestContext)">
 <example>
-This sample shows how to call GetDateValid and parse the result.
+This sample shows how to call GetDateValid with required parameters and parse the result.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
 var client = new ArrayClient(credential);
@@ -1060,7 +1060,7 @@ var data = new[] {
     "2022-05-10"
 };
 
-Response response = await client.PutDateValidAsync(RequestContent.Create(data), new RequestContext());
+Response response = await client.PutDateValidAsync(RequestContent.Create(data));
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
@@ -1076,14 +1076,14 @@ var data = new[] {
     "2022-05-10"
 };
 
-Response response = client.PutDateValid(RequestContent.Create(data), new RequestContext());
+Response response = client.PutDateValid(RequestContent.Create(data));
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
     <member name="GetDateInvalidNullAsync(RequestContext)">
 <example>
-This sample shows how to call GetDateInvalidNullAsync and parse the result.
+This sample shows how to call GetDateInvalidNullAsync with required parameters and parse the result.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
 var client = new ArrayClient(credential);
@@ -1097,7 +1097,7 @@ Console.WriteLine(result[0].ToString());
     </member>
     <member name="GetDateInvalidNull(RequestContext)">
 <example>
-This sample shows how to call GetDateInvalidNull and parse the result.
+This sample shows how to call GetDateInvalidNull with required parameters and parse the result.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
 var client = new ArrayClient(credential);
@@ -1111,7 +1111,7 @@ Console.WriteLine(result[0].ToString());
     </member>
     <member name="GetDateInvalidCharsAsync(RequestContext)">
 <example>
-This sample shows how to call GetDateInvalidCharsAsync and parse the result.
+This sample shows how to call GetDateInvalidCharsAsync with required parameters and parse the result.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
 var client = new ArrayClient(credential);
@@ -1125,7 +1125,7 @@ Console.WriteLine(result[0].ToString());
     </member>
     <member name="GetDateInvalidChars(RequestContext)">
 <example>
-This sample shows how to call GetDateInvalidChars and parse the result.
+This sample shows how to call GetDateInvalidChars with required parameters and parse the result.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
 var client = new ArrayClient(credential);
@@ -1139,7 +1139,7 @@ Console.WriteLine(result[0].ToString());
     </member>
     <member name="GetDateTimeValidAsync(RequestContext)">
 <example>
-This sample shows how to call GetDateTimeValidAsync and parse the result.
+This sample shows how to call GetDateTimeValidAsync with required parameters and parse the result.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
 var client = new ArrayClient(credential);
@@ -1153,7 +1153,7 @@ Console.WriteLine(result[0].ToString());
     </member>
     <member name="GetDateTimeValid(RequestContext)">
 <example>
-This sample shows how to call GetDateTimeValid and parse the result.
+This sample shows how to call GetDateTimeValid with required parameters and parse the result.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
 var client = new ArrayClient(credential);
@@ -1176,7 +1176,7 @@ var data = new[] {
     "2022-05-10T18:57:31.2311892Z"
 };
 
-Response response = await client.PutDateTimeValidAsync(RequestContent.Create(data), new RequestContext());
+Response response = await client.PutDateTimeValidAsync(RequestContent.Create(data));
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
@@ -1192,14 +1192,14 @@ var data = new[] {
     "2022-05-10T18:57:31.2311892Z"
 };
 
-Response response = client.PutDateTimeValid(RequestContent.Create(data), new RequestContext());
+Response response = client.PutDateTimeValid(RequestContent.Create(data));
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
     <member name="GetDateTimeInvalidNullAsync(RequestContext)">
 <example>
-This sample shows how to call GetDateTimeInvalidNullAsync and parse the result.
+This sample shows how to call GetDateTimeInvalidNullAsync with required parameters and parse the result.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
 var client = new ArrayClient(credential);
@@ -1213,7 +1213,7 @@ Console.WriteLine(result[0].ToString());
     </member>
     <member name="GetDateTimeInvalidNull(RequestContext)">
 <example>
-This sample shows how to call GetDateTimeInvalidNull and parse the result.
+This sample shows how to call GetDateTimeInvalidNull with required parameters and parse the result.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
 var client = new ArrayClient(credential);
@@ -1227,7 +1227,7 @@ Console.WriteLine(result[0].ToString());
     </member>
     <member name="GetDateTimeInvalidCharsAsync(RequestContext)">
 <example>
-This sample shows how to call GetDateTimeInvalidCharsAsync and parse the result.
+This sample shows how to call GetDateTimeInvalidCharsAsync with required parameters and parse the result.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
 var client = new ArrayClient(credential);
@@ -1241,7 +1241,7 @@ Console.WriteLine(result[0].ToString());
     </member>
     <member name="GetDateTimeInvalidChars(RequestContext)">
 <example>
-This sample shows how to call GetDateTimeInvalidChars and parse the result.
+This sample shows how to call GetDateTimeInvalidChars with required parameters and parse the result.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
 var client = new ArrayClient(credential);
@@ -1255,7 +1255,7 @@ Console.WriteLine(result[0].ToString());
     </member>
     <member name="GetDateTimeRfc1123ValidAsync(RequestContext)">
 <example>
-This sample shows how to call GetDateTimeRfc1123ValidAsync and parse the result.
+This sample shows how to call GetDateTimeRfc1123ValidAsync with required parameters and parse the result.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
 var client = new ArrayClient(credential);
@@ -1269,7 +1269,7 @@ Console.WriteLine(result[0].ToString());
     </member>
     <member name="GetDateTimeRfc1123Valid(RequestContext)">
 <example>
-This sample shows how to call GetDateTimeRfc1123Valid and parse the result.
+This sample shows how to call GetDateTimeRfc1123Valid with required parameters and parse the result.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
 var client = new ArrayClient(credential);
@@ -1292,7 +1292,7 @@ var data = new[] {
     "Tue, 10 May 2022 18:57:31 GMT"
 };
 
-Response response = await client.PutDateTimeRfc1123ValidAsync(RequestContent.Create(data), new RequestContext());
+Response response = await client.PutDateTimeRfc1123ValidAsync(RequestContent.Create(data));
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
@@ -1308,14 +1308,14 @@ var data = new[] {
     "Tue, 10 May 2022 18:57:31 GMT"
 };
 
-Response response = client.PutDateTimeRfc1123Valid(RequestContent.Create(data), new RequestContext());
+Response response = client.PutDateTimeRfc1123Valid(RequestContent.Create(data));
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
     <member name="GetDurationValidAsync(RequestContext)">
 <example>
-This sample shows how to call GetDurationValidAsync and parse the result.
+This sample shows how to call GetDurationValidAsync with required parameters and parse the result.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
 var client = new ArrayClient(credential);
@@ -1329,7 +1329,7 @@ Console.WriteLine(result[0].ToString());
     </member>
     <member name="GetDurationValid(RequestContext)">
 <example>
-This sample shows how to call GetDurationValid and parse the result.
+This sample shows how to call GetDurationValid with required parameters and parse the result.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
 var client = new ArrayClient(credential);
@@ -1352,7 +1352,7 @@ var data = new[] {
     "PT1H23M45S"
 };
 
-Response response = await client.PutDurationValidAsync(RequestContent.Create(data), new RequestContext());
+Response response = await client.PutDurationValidAsync(RequestContent.Create(data));
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
@@ -1368,14 +1368,14 @@ var data = new[] {
     "PT1H23M45S"
 };
 
-Response response = client.PutDurationValid(RequestContent.Create(data), new RequestContext());
+Response response = client.PutDurationValid(RequestContent.Create(data));
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
     <member name="GetByteValidAsync(RequestContext)">
 <example>
-This sample shows how to call GetByteValidAsync and parse the result.
+This sample shows how to call GetByteValidAsync with required parameters and parse the result.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
 var client = new ArrayClient(credential);
@@ -1389,7 +1389,7 @@ Console.WriteLine(result[0].ToString());
     </member>
     <member name="GetByteValid(RequestContext)">
 <example>
-This sample shows how to call GetByteValid and parse the result.
+This sample shows how to call GetByteValid with required parameters and parse the result.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
 var client = new ArrayClient(credential);
@@ -1412,7 +1412,7 @@ var data = new[] {
     new {}
 };
 
-Response response = await client.PutByteValidAsync(RequestContent.Create(data), new RequestContext());
+Response response = await client.PutByteValidAsync(RequestContent.Create(data));
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
@@ -1428,14 +1428,14 @@ var data = new[] {
     new {}
 };
 
-Response response = client.PutByteValid(RequestContent.Create(data), new RequestContext());
+Response response = client.PutByteValid(RequestContent.Create(data));
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
     <member name="GetByteInvalidNullAsync(RequestContext)">
 <example>
-This sample shows how to call GetByteInvalidNullAsync and parse the result.
+This sample shows how to call GetByteInvalidNullAsync with required parameters and parse the result.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
 var client = new ArrayClient(credential);
@@ -1449,7 +1449,7 @@ Console.WriteLine(result[0].ToString());
     </member>
     <member name="GetByteInvalidNull(RequestContext)">
 <example>
-This sample shows how to call GetByteInvalidNull and parse the result.
+This sample shows how to call GetByteInvalidNull with required parameters and parse the result.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
 var client = new ArrayClient(credential);
@@ -1463,7 +1463,7 @@ Console.WriteLine(result[0].ToString());
     </member>
     <member name="GetBase64UrlAsync(RequestContext)">
 <example>
-This sample shows how to call GetBase64UrlAsync and parse the result.
+This sample shows how to call GetBase64UrlAsync with required parameters and parse the result.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
 var client = new ArrayClient(credential);
@@ -1477,7 +1477,7 @@ Console.WriteLine(result[0].ToString());
     </member>
     <member name="GetBase64Url(RequestContext)">
 <example>
-This sample shows how to call GetBase64Url and parse the result.
+This sample shows how to call GetBase64Url with required parameters and parse the result.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
 var client = new ArrayClient(credential);
@@ -1491,7 +1491,7 @@ Console.WriteLine(result[0].ToString());
     </member>
     <member name="GetComplexNullAsync(RequestContext)">
 <example>
-This sample shows how to call GetComplexNullAsync and parse the result.
+This sample shows how to call GetComplexNullAsync with required parameters and parse the result.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
 var client = new ArrayClient(credential);
@@ -1506,7 +1506,7 @@ Console.WriteLine(result[0].GetProperty("string").ToString());
     </member>
     <member name="GetComplexNull(RequestContext)">
 <example>
-This sample shows how to call GetComplexNull and parse the result.
+This sample shows how to call GetComplexNull with required parameters and parse the result.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
 var client = new ArrayClient(credential);
@@ -1521,7 +1521,7 @@ Console.WriteLine(result[0].GetProperty("string").ToString());
     </member>
     <member name="GetComplexEmptyAsync(RequestContext)">
 <example>
-This sample shows how to call GetComplexEmptyAsync and parse the result.
+This sample shows how to call GetComplexEmptyAsync with required parameters and parse the result.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
 var client = new ArrayClient(credential);
@@ -1536,7 +1536,7 @@ Console.WriteLine(result[0].GetProperty("string").ToString());
     </member>
     <member name="GetComplexEmpty(RequestContext)">
 <example>
-This sample shows how to call GetComplexEmpty and parse the result.
+This sample shows how to call GetComplexEmpty with required parameters and parse the result.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
 var client = new ArrayClient(credential);
@@ -1551,7 +1551,7 @@ Console.WriteLine(result[0].GetProperty("string").ToString());
     </member>
     <member name="GetComplexItemNullAsync(RequestContext)">
 <example>
-This sample shows how to call GetComplexItemNullAsync and parse the result.
+This sample shows how to call GetComplexItemNullAsync with required parameters and parse the result.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
 var client = new ArrayClient(credential);
@@ -1566,7 +1566,7 @@ Console.WriteLine(result[0].GetProperty("string").ToString());
     </member>
     <member name="GetComplexItemNull(RequestContext)">
 <example>
-This sample shows how to call GetComplexItemNull and parse the result.
+This sample shows how to call GetComplexItemNull with required parameters and parse the result.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
 var client = new ArrayClient(credential);
@@ -1581,7 +1581,7 @@ Console.WriteLine(result[0].GetProperty("string").ToString());
     </member>
     <member name="GetComplexItemEmptyAsync(RequestContext)">
 <example>
-This sample shows how to call GetComplexItemEmptyAsync and parse the result.
+This sample shows how to call GetComplexItemEmptyAsync with required parameters and parse the result.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
 var client = new ArrayClient(credential);
@@ -1596,7 +1596,7 @@ Console.WriteLine(result[0].GetProperty("string").ToString());
     </member>
     <member name="GetComplexItemEmpty(RequestContext)">
 <example>
-This sample shows how to call GetComplexItemEmpty and parse the result.
+This sample shows how to call GetComplexItemEmpty with required parameters and parse the result.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
 var client = new ArrayClient(credential);
@@ -1611,7 +1611,7 @@ Console.WriteLine(result[0].GetProperty("string").ToString());
     </member>
     <member name="GetComplexValidAsync(RequestContext)">
 <example>
-This sample shows how to call GetComplexValidAsync and parse the result.
+This sample shows how to call GetComplexValidAsync with required parameters and parse the result.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
 var client = new ArrayClient(credential);
@@ -1626,7 +1626,7 @@ Console.WriteLine(result[0].GetProperty("string").ToString());
     </member>
     <member name="GetComplexValid(RequestContext)">
 <example>
-This sample shows how to call GetComplexValid and parse the result.
+This sample shows how to call GetComplexValid with required parameters and parse the result.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
 var client = new ArrayClient(credential);
@@ -1653,7 +1653,7 @@ var data = new[] {
     }
 };
 
-Response response = await client.PutComplexValidAsync(RequestContent.Create(data), new RequestContext());
+Response response = await client.PutComplexValidAsync(RequestContent.Create(data));
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
@@ -1672,14 +1672,14 @@ var data = new[] {
     }
 };
 
-Response response = client.PutComplexValid(RequestContent.Create(data), new RequestContext());
+Response response = client.PutComplexValid(RequestContent.Create(data));
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
     <member name="GetArrayNullAsync(RequestContext)">
 <example>
-This sample shows how to call GetArrayNullAsync and parse the result.
+This sample shows how to call GetArrayNullAsync with required parameters and parse the result.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
 var client = new ArrayClient(credential);
@@ -1693,7 +1693,7 @@ Console.WriteLine(result[0][0].ToString());
     </member>
     <member name="GetArrayNull(RequestContext)">
 <example>
-This sample shows how to call GetArrayNull and parse the result.
+This sample shows how to call GetArrayNull with required parameters and parse the result.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
 var client = new ArrayClient(credential);
@@ -1707,7 +1707,7 @@ Console.WriteLine(result[0][0].ToString());
     </member>
     <member name="GetArrayEmptyAsync(RequestContext)">
 <example>
-This sample shows how to call GetArrayEmptyAsync and parse the result.
+This sample shows how to call GetArrayEmptyAsync with required parameters and parse the result.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
 var client = new ArrayClient(credential);
@@ -1721,7 +1721,7 @@ Console.WriteLine(result[0][0].ToString());
     </member>
     <member name="GetArrayEmpty(RequestContext)">
 <example>
-This sample shows how to call GetArrayEmpty and parse the result.
+This sample shows how to call GetArrayEmpty with required parameters and parse the result.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
 var client = new ArrayClient(credential);
@@ -1735,7 +1735,7 @@ Console.WriteLine(result[0][0].ToString());
     </member>
     <member name="GetArrayItemNullAsync(RequestContext)">
 <example>
-This sample shows how to call GetArrayItemNullAsync and parse the result.
+This sample shows how to call GetArrayItemNullAsync with required parameters and parse the result.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
 var client = new ArrayClient(credential);
@@ -1749,7 +1749,7 @@ Console.WriteLine(result[0][0].ToString());
     </member>
     <member name="GetArrayItemNull(RequestContext)">
 <example>
-This sample shows how to call GetArrayItemNull and parse the result.
+This sample shows how to call GetArrayItemNull with required parameters and parse the result.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
 var client = new ArrayClient(credential);
@@ -1763,7 +1763,7 @@ Console.WriteLine(result[0][0].ToString());
     </member>
     <member name="GetArrayItemEmptyAsync(RequestContext)">
 <example>
-This sample shows how to call GetArrayItemEmptyAsync and parse the result.
+This sample shows how to call GetArrayItemEmptyAsync with required parameters and parse the result.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
 var client = new ArrayClient(credential);
@@ -1777,7 +1777,7 @@ Console.WriteLine(result[0][0].ToString());
     </member>
     <member name="GetArrayItemEmpty(RequestContext)">
 <example>
-This sample shows how to call GetArrayItemEmpty and parse the result.
+This sample shows how to call GetArrayItemEmpty with required parameters and parse the result.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
 var client = new ArrayClient(credential);
@@ -1791,7 +1791,7 @@ Console.WriteLine(result[0][0].ToString());
     </member>
     <member name="GetArrayValidAsync(RequestContext)">
 <example>
-This sample shows how to call GetArrayValidAsync and parse the result.
+This sample shows how to call GetArrayValidAsync with required parameters and parse the result.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
 var client = new ArrayClient(credential);
@@ -1805,7 +1805,7 @@ Console.WriteLine(result[0][0].ToString());
     </member>
     <member name="GetArrayValid(RequestContext)">
 <example>
-This sample shows how to call GetArrayValid and parse the result.
+This sample shows how to call GetArrayValid with required parameters and parse the result.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
 var client = new ArrayClient(credential);
@@ -1830,7 +1830,7 @@ var data = new[] {
     }
 };
 
-Response response = await client.PutArrayValidAsync(RequestContent.Create(data), new RequestContext());
+Response response = await client.PutArrayValidAsync(RequestContent.Create(data));
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
@@ -1848,14 +1848,14 @@ var data = new[] {
     }
 };
 
-Response response = client.PutArrayValid(RequestContent.Create(data), new RequestContext());
+Response response = client.PutArrayValid(RequestContent.Create(data));
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
     <member name="GetDictionaryNullAsync(RequestContext)">
 <example>
-This sample shows how to call GetDictionaryNullAsync and parse the result.
+This sample shows how to call GetDictionaryNullAsync with required parameters and parse the result.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
 var client = new ArrayClient(credential);
@@ -1869,7 +1869,7 @@ Console.WriteLine(result[0].GetProperty("<test>").ToString());
     </member>
     <member name="GetDictionaryNull(RequestContext)">
 <example>
-This sample shows how to call GetDictionaryNull and parse the result.
+This sample shows how to call GetDictionaryNull with required parameters and parse the result.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
 var client = new ArrayClient(credential);
@@ -1883,7 +1883,7 @@ Console.WriteLine(result[0].GetProperty("<test>").ToString());
     </member>
     <member name="GetDictionaryEmptyAsync(RequestContext)">
 <example>
-This sample shows how to call GetDictionaryEmptyAsync and parse the result.
+This sample shows how to call GetDictionaryEmptyAsync with required parameters and parse the result.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
 var client = new ArrayClient(credential);
@@ -1897,7 +1897,7 @@ Console.WriteLine(result[0].GetProperty("<test>").ToString());
     </member>
     <member name="GetDictionaryEmpty(RequestContext)">
 <example>
-This sample shows how to call GetDictionaryEmpty and parse the result.
+This sample shows how to call GetDictionaryEmpty with required parameters and parse the result.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
 var client = new ArrayClient(credential);
@@ -1911,7 +1911,7 @@ Console.WriteLine(result[0].GetProperty("<test>").ToString());
     </member>
     <member name="GetDictionaryItemNullAsync(RequestContext)">
 <example>
-This sample shows how to call GetDictionaryItemNullAsync and parse the result.
+This sample shows how to call GetDictionaryItemNullAsync with required parameters and parse the result.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
 var client = new ArrayClient(credential);
@@ -1925,7 +1925,7 @@ Console.WriteLine(result[0].GetProperty("<test>").ToString());
     </member>
     <member name="GetDictionaryItemNull(RequestContext)">
 <example>
-This sample shows how to call GetDictionaryItemNull and parse the result.
+This sample shows how to call GetDictionaryItemNull with required parameters and parse the result.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
 var client = new ArrayClient(credential);
@@ -1939,7 +1939,7 @@ Console.WriteLine(result[0].GetProperty("<test>").ToString());
     </member>
     <member name="GetDictionaryItemEmptyAsync(RequestContext)">
 <example>
-This sample shows how to call GetDictionaryItemEmptyAsync and parse the result.
+This sample shows how to call GetDictionaryItemEmptyAsync with required parameters and parse the result.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
 var client = new ArrayClient(credential);
@@ -1953,7 +1953,7 @@ Console.WriteLine(result[0].GetProperty("<test>").ToString());
     </member>
     <member name="GetDictionaryItemEmpty(RequestContext)">
 <example>
-This sample shows how to call GetDictionaryItemEmpty and parse the result.
+This sample shows how to call GetDictionaryItemEmpty with required parameters and parse the result.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
 var client = new ArrayClient(credential);
@@ -1967,7 +1967,7 @@ Console.WriteLine(result[0].GetProperty("<test>").ToString());
     </member>
     <member name="GetDictionaryValidAsync(RequestContext)">
 <example>
-This sample shows how to call GetDictionaryValidAsync and parse the result.
+This sample shows how to call GetDictionaryValidAsync with required parameters and parse the result.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
 var client = new ArrayClient(credential);
@@ -1981,7 +1981,7 @@ Console.WriteLine(result[0].GetProperty("<test>").ToString());
     </member>
     <member name="GetDictionaryValid(RequestContext)">
 <example>
-This sample shows how to call GetDictionaryValid and parse the result.
+This sample shows how to call GetDictionaryValid with required parameters and parse the result.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
 var client = new ArrayClient(credential);
@@ -2006,7 +2006,7 @@ var data = new[] {
     }
 };
 
-Response response = await client.PutDictionaryValidAsync(RequestContent.Create(data), new RequestContext());
+Response response = await client.PutDictionaryValidAsync(RequestContent.Create(data));
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
@@ -2024,7 +2024,7 @@ var data = new[] {
     }
 };
 
-Response response = client.PutDictionaryValid(RequestContent.Create(data), new RequestContext());
+Response response = client.PutDictionaryValid(RequestContent.Create(data));
 Console.WriteLine(response.Status);
 ]]></code>
 </example>

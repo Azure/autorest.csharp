@@ -37,7 +37,7 @@ namespace httpInfrastructure_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new HttpServerFailureClient(credential);
 
-            Response response = client.Head501(new RequestContext());
+            Response response = client.Head501();
             Console.WriteLine(response.Status);
         }
 
@@ -59,7 +59,7 @@ namespace httpInfrastructure_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new HttpServerFailureClient(credential);
 
-            Response response = await client.Head501Async(new RequestContext());
+            Response response = await client.Head501Async();
             Console.WriteLine(response.Status);
         }
 
@@ -81,7 +81,7 @@ namespace httpInfrastructure_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new HttpServerFailureClient(credential);
 
-            Response response = client.Get501(new RequestContext());
+            Response response = client.Get501();
             Console.WriteLine(response.Status);
         }
 
@@ -103,7 +103,7 @@ namespace httpInfrastructure_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new HttpServerFailureClient(credential);
 
-            Response response = await client.Get501Async(new RequestContext());
+            Response response = await client.Get501Async();
             Console.WriteLine(response.Status);
         }
 
@@ -129,7 +129,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
             var data = true;
 
-            Response response = client.Post505(RequestContent.Create(data), new RequestContext());
+            Response response = client.Post505(RequestContent.Create(data));
             Console.WriteLine(response.Status);
         }
 
@@ -155,7 +155,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
             var data = true;
 
-            Response response = await client.Post505Async(RequestContent.Create(data), new RequestContext());
+            Response response = await client.Post505Async(RequestContent.Create(data));
             Console.WriteLine(response.Status);
         }
 
@@ -181,7 +181,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
             var data = true;
 
-            Response response = client.Delete505(RequestContent.Create(data), new RequestContext());
+            Response response = client.Delete505(RequestContent.Create(data));
             Console.WriteLine(response.Status);
         }
 
@@ -207,7 +207,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
             var data = true;
 
-            Response response = await client.Delete505Async(RequestContent.Create(data), new RequestContext());
+            Response response = await client.Delete505Async(RequestContent.Create(data));
             Console.WriteLine(response.Status);
         }
     }

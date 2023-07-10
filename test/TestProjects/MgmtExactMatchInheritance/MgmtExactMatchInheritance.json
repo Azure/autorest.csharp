@@ -542,7 +542,7 @@
                 "type10": {
                   "type": "object",
                   "x-ms-format": "dfe-list-generic",
-                  "x-ms-format-element-definition": "SeparateClass"
+                  "x-ms-format-element-type": "SeparateClass"
                 },
                 "type11": {
                   "type": "object",
@@ -555,7 +555,7 @@
                 "type13": {
                     "type": "object",
                     "x-ms-format": "dfe-list-generic",
-                    "x-ms-format-element-definition": "#/definitions/SeparateClass"
+                    "x-ms-format-element-type": "#/definitions/SeparateClass"
                 },
                 "type14": {
                     "type": "object",

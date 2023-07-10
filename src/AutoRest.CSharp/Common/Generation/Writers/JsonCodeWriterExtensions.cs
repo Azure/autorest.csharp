@@ -10,6 +10,7 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 using AutoRest.CSharp.Common.Output.Models.Types;
 using AutoRest.CSharp.Generation.Types;
+using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Mgmt.Decorator;
 using AutoRest.CSharp.Mgmt.Output;
 using AutoRest.CSharp.Output.Models.Serialization;
@@ -103,7 +104,7 @@ namespace AutoRest.CSharp.Generation.Writers
                         bool writeFormat = false;
                         bool addToArrayForBinaryData = false;
 
-                        if (frameworkType != typeof(BinaryData) && frameworkType != typeof(DataFactoryExpression<>))
+                        if (frameworkType != typeof(BinaryData) && frameworkType != typeof(DataFactoryElement<>))
                             writer.Append($"{writerName}.");
                         if (frameworkType == typeof(decimal) ||
                             frameworkType == typeof(double) ||
@@ -141,7 +142,9 @@ namespace AutoRest.CSharp.Generation.Writers
                                  frameworkType == typeof(DateTime) ||
                                  frameworkType == typeof(TimeSpan))
                         {
-                            if (valueSerialization.Format == SerializationFormat.DateTime_Unix)
+                            if (valueSerialization.Format == SerializationFormat.DateTime_Unix ||
+                                valueSerialization.Format == SerializationFormat.Duration_Seconds ||
+                                valueSerialization.Format == SerializationFormat.Duration_Seconds_Float)
                             {
                                 writer.AppendRaw("WriteNumberValue");
                             }
@@ -187,6 +190,22 @@ namespace AutoRest.CSharp.Generation.Writers
                         {
                             writer.Line($"{typeof(JsonSerializer)}.{nameof(JsonSerializer.Serialize)}(writer, {name:I});");
                             return;
+                        }
+
+                        if (frameworkType == typeof(TimeSpan))
+                        {
+                            if (valueSerialization.Format == SerializationFormat.Duration_Seconds)
+                            {
+                                writer.Append($"(Convert.ToInt32({name:I}.ToString({valueSerialization.Format.ToFormatSpecifier():L})));");
+                                writer.LineRaw("");
+                                return;
+                            }
+                            else if (valueSerialization.Format == SerializationFormat.Duration_Seconds_Float)
+                            {
+                                writer.Append($"(Convert.ToDouble({name:I}.ToString({valueSerialization.Format.ToFormatSpecifier():L})));");
+                                writer.LineRaw("");
+                                return;
+                            }
                         }
 
                         writer.Append($"({name:I}")
@@ -304,7 +323,12 @@ namespace AutoRest.CSharp.Generation.Writers
 
                         writer.Line($"{writerName}.WritePropertyName({property.SerializedName:L}u8);");
 
-                        if (property.OptionalViaNullability && propertyType.IsNullable && propertyType.IsValueType)
+                        if (property.SerializationValueHook is not null)
+                        {
+                            // write the serialization value hook
+                            writer.Line($"{property.SerializationValueHook}({writerName});");
+                        }
+                        else if (property.OptionalViaNullability && propertyType.IsNullable && propertyType.IsValueType)
                         {
                             writer.ToSerializeCall(property.ValueSerialization, $"{declarationName:I}.Value");
                         }
@@ -332,7 +356,11 @@ namespace AutoRest.CSharp.Generation.Writers
                 writer.Append($"if({itemVariable}.NameEquals({property.SerializedName:L}u8))");
                 using (writer.Scope())
                 {
-                    if (property.ValueType?.IsNullable == true)
+                    if (property.DeserializationValueHook is not null)
+                    {
+                        // if we have the deserialization hook here, we do not need to do any check, all these checks should be taken care of by the hook
+                    }
+                    else if (property.ValueType?.IsNullable == true)
                     {
                         var emptyStringCheck = GetEmptyStringCheckClause(property, itemVariable, shouldTreatEmptyStringAsNull);
                         using (writer.Scope($"if ({itemVariable}.Value.ValueKind == {typeof(JsonValueKind)}.Null{emptyStringCheck})"))
@@ -365,7 +393,12 @@ namespace AutoRest.CSharp.Generation.Writers
                         }
                     }
 
-                    if (property.ValueSerialization is not null)
+                    if (property.DeserializationValueHook is not null)
+                    {
+                        // write the deserialization hook
+                        writer.Line($"{property.DeserializationValueHook}({itemVariable}, ref {propertyVariables[property].Declaration});");
+                    }
+                    else if (property.ValueSerialization is not null)
                     {
                         // Reading a property value
                         var variableOrExpression = writer.DeserializeValue(property.ValueSerialization, $"{itemVariable}.Value");
@@ -674,6 +707,26 @@ namespace AutoRest.CSharp.Generation.Writers
                 }
             }
 
+            if (frameworkType == typeof(TimeSpan))
+            {
+                if (format == SerializationFormat.Duration_Seconds)
+                {
+                    return $"{typeof(TimeSpan)}.FromSeconds({element}.GetInt32())";
+                }
+                else if (format == SerializationFormat.Duration_Seconds_Float)
+                {
+                    return $"{typeof(TimeSpan)}.FromSeconds({element}.GetDouble())";
+                }
+            }
+
+            if (frameworkType == typeof(DateTimeOffset))
+            {
+                if (format == SerializationFormat.DateTime_Unix)
+                {
+                    return $"{typeof(DateTimeOffset)}.FromUnixTimeSeconds({element}.GetInt64())";
+                }
+            }
+
             if (IsCustomJsonConverterAdded(frameworkType))
             {
                 return $"{typeof(JsonSerializer)}.{nameof(JsonSerializer.Deserialize)}<{serializationType}>({element}.GetRawText())";
@@ -772,6 +825,8 @@ namespace AutoRest.CSharp.Generation.Writers
         public static string? ToFormatSpecifier(this SerializationFormat format) => format switch
         {
             SerializationFormat.DateTime_RFC1123 => "R",
+            SerializationFormat.DateTime_RFC3339 => "O",
+            SerializationFormat.DateTime_RFC7231 => "R",
             SerializationFormat.DateTime_ISO8601 => "O",
             SerializationFormat.Date_ISO8601 => "D",
             SerializationFormat.DateTime_Unix => "U",
@@ -779,6 +834,8 @@ namespace AutoRest.CSharp.Generation.Writers
             SerializationFormat.Bytes_Base64 => "D",
             SerializationFormat.Duration_ISO8601 => "P",
             SerializationFormat.Duration_Constant => "c",
+            SerializationFormat.Duration_Seconds => "%s",
+            SerializationFormat.Duration_Seconds_Float => "s\\.fff",
             SerializationFormat.Time_ISO8601 => "T",
             _ => null
         };
