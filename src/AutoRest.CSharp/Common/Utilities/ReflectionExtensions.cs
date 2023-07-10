@@ -15,7 +15,8 @@ namespace AutoRest.CSharp.Common.Utilities
                 return TypeFactory.IsReadOnlyDictionary(property.PropertyType) || TypeFactory.IsReadOnlyList(property.PropertyType);
             }
 
-            return property.GetSetMethod() == null;
+            // since we are potentially comparing internal properties, set nonPublic to true
+            return property.GetSetMethod(true) == null;
         }
     }
 }
