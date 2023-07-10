@@ -113,7 +113,7 @@ export async function $onEmit(context: EmitContext<NetEmitterOptions>) {
             //emit configuration.json
             const configurations = {
                 "output-folder": ".", // TODO -- align
-                "namespace": options.namespace ?? namespace,
+                namespace: options.namespace ?? namespace,
                 "library-name":
                     options["library-name"] ?? options.namespace ?? namespace,
                 "shared-source-folders": resolvedSharedFolders ?? [],
