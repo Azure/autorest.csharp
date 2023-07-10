@@ -119,10 +119,11 @@ namespace AutoRest.CSharp.Mgmt.Decorator
 
             // here we cannot find a property from its declared name
             var childPropertyType = childProperty.Declaration.Type;
+            var isInternal = childProperty.Declaration.Accessibility == "internal";
             if (parentProperty.PropertyType.FullName == $"{childPropertyType.Namespace}.{childPropertyType.Name}" ||
                 IsAssignable(parentProperty.PropertyType, childPropertyType))
             {
-                if (childProperty.IsReadOnly != parentProperty.IsReadOnly())
+                if (childProperty.IsReadOnly != parentProperty.IsReadOnly(allowInternal: isInternal))
                     return false;
             }
             else if (!ArePropertyTypesMatch(sourceType, targetType, parentProperty.PropertyType!, childPropertyType, propertiesInComparison))
