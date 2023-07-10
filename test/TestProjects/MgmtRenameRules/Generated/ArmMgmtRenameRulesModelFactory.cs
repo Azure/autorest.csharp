@@ -610,6 +610,35 @@ namespace MgmtRenameRules.Models
             return new ImageData(id, name, resourceType, systemData, tags, location, sourceVirtualMachineId != null ? ResourceManagerModelFactory.WritableSubResource(sourceVirtualMachineId) : null, storageProfile, provisioningState, hyperVGeneration);
         }
 
+        /// <summary> Initializes a new instance of ImagePatch. </summary>
+        /// <param name="tags">
+        /// Resource tags
+        /// Serialized Name: UpdateResource.tags
+        /// </param>
+        /// <param name="sourceVirtualMachineId">
+        /// The source virtual machine from which Image is created.
+        /// Serialized Name: ImageUpdate.properties.sourceVirtualMachine
+        /// </param>
+        /// <param name="storageProfile">
+        /// Specifies the storage settings for the virtual machine disks.
+        /// Serialized Name: ImageUpdate.properties.storageProfile
+        /// </param>
+        /// <param name="provisioningState">
+        /// The provisioning state.
+        /// Serialized Name: ImageUpdate.properties.provisioningState
+        /// </param>
+        /// <param name="hyperVGeneration">
+        /// Gets the HyperVGenerationType of the VirtualMachine created from the image
+        /// Serialized Name: ImageUpdate.properties.hyperVGeneration
+        /// </param>
+        /// <returns> A new <see cref="Models.ImagePatch"/> instance for mocking. </returns>
+        public static ImagePatch ImagePatch(IDictionary<string, string> tags = null, ResourceIdentifier sourceVirtualMachineId = null, ImageStorageProfile storageProfile = null, string provisioningState = null, HyperVGenerationType? hyperVGeneration = null)
+        {
+            tags ??= new Dictionary<string, string>();
+
+            return new ImagePatch(tags, sourceVirtualMachineId != null ? ResourceManagerModelFactory.WritableSubResource(sourceVirtualMachineId) : null, storageProfile, provisioningState, hyperVGeneration);
+        }
+
         /// <summary> Initializes a new instance of VirtualMachineCaptureResult. </summary>
         /// <param name="id">
         /// Resource Id
@@ -637,6 +666,113 @@ namespace MgmtRenameRules.Models
             resources ??= new List<BinaryData>();
 
             return new VirtualMachineCaptureResult(id, schema, contentVersion, parameters, resources?.ToList());
+        }
+
+        /// <summary> Initializes a new instance of VirtualMachinePatch. </summary>
+        /// <param name="tags">
+        /// Resource tags
+        /// Serialized Name: UpdateResource.tags
+        /// </param>
+        /// <param name="plan">
+        /// Specifies information about the marketplace image used to create the virtual machine. This element is only used for marketplace images. Before you can use a marketplace image from an API, you must enable the image for programmatic use.  In the Azure portal, find the marketplace image that you want to use and then click **Want to deploy programmatically, Get Started -&gt;**. Enter any required information and then click **Save**.
+        /// Serialized Name: VirtualMachineUpdate.plan
+        /// </param>
+        /// <param name="identity">
+        /// The identity of the virtual machine, if configured.
+        /// Serialized Name: VirtualMachineUpdate.identity
+        /// </param>
+        /// <param name="zones">
+        /// The virtual machine zones.
+        /// Serialized Name: VirtualMachineUpdate.zones
+        /// </param>
+        /// <param name="hardwareVmSize">
+        /// Specifies the hardware settings for the virtual machine.
+        /// Serialized Name: VirtualMachineUpdate.properties.hardwareProfile
+        /// </param>
+        /// <param name="storageProfile">
+        /// Specifies the storage settings for the virtual machine disks.
+        /// Serialized Name: VirtualMachineUpdate.properties.storageProfile
+        /// </param>
+        /// <param name="ultraSSDEnabled">
+        /// Specifies additional capabilities enabled or disabled on the virtual machine.
+        /// Serialized Name: VirtualMachineUpdate.properties.additionalCapabilities
+        /// </param>
+        /// <param name="osProfile">
+        /// Specifies the operating system settings used while creating the virtual machine. Some of the settings cannot be changed once VM is provisioned.
+        /// Serialized Name: VirtualMachineUpdate.properties.osProfile
+        /// </param>
+        /// <param name="networkInterfaces">
+        /// Specifies the network interfaces of the virtual machine.
+        /// Serialized Name: VirtualMachineUpdate.properties.networkProfile
+        /// </param>
+        /// <param name="encryptionAtHost">
+        /// Specifies the Security related profile settings for the virtual machine.
+        /// Serialized Name: VirtualMachineUpdate.properties.securityProfile
+        /// </param>
+        /// <param name="bootDiagnostics">
+        /// Specifies the boot diagnostic settings state. &lt;br&gt;&lt;br&gt;Minimum api-version: 2015-06-15.
+        /// Serialized Name: VirtualMachineUpdate.properties.diagnosticsProfile
+        /// </param>
+        /// <param name="availabilitySetId">
+        /// Specifies information about the availability set that the virtual machine should be assigned to. Virtual machines specified in the same availability set are allocated to different nodes to maximize availability. For more information about availability sets, see [Manage the availability of virtual machines](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-windows-manage-availability?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json). &lt;br&gt;&lt;br&gt; For more information on Azure planned maintenance, see [Planned maintenance for virtual machines in Azure](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-windows-planned-maintenance?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json) &lt;br&gt;&lt;br&gt; Currently, a VM can only be added to availability set at creation time. The availability set to which the VM is being added should be under the same resource group as the availability set resource. An existing VM cannot be added to an availability set. &lt;br&gt;&lt;br&gt;This property cannot exist along with a non-null properties.virtualMachineScaleSet reference.
+        /// Serialized Name: VirtualMachineUpdate.properties.availabilitySet
+        /// </param>
+        /// <param name="virtualMachineScaleSetId">
+        /// Specifies information about the virtual machine scale set that the virtual machine should be assigned to. Virtual machines specified in the same virtual machine scale set are allocated to different nodes to maximize availability. Currently, a VM can only be added to virtual machine scale set at creation time. An existing VM cannot be added to a virtual machine scale set. &lt;br&gt;&lt;br&gt;This property cannot exist along with a non-null properties.availabilitySet reference. &lt;br&gt;&lt;br&gt;Minimum api‐version: 2019‐03‐01
+        /// Serialized Name: VirtualMachineUpdate.properties.virtualMachineScaleSet
+        /// </param>
+        /// <param name="proximityPlacementGroupId">
+        /// Specifies information about the proximity placement group that the virtual machine should be assigned to. &lt;br&gt;&lt;br&gt;Minimum api-version: 2018-04-01.
+        /// Serialized Name: VirtualMachineUpdate.properties.proximityPlacementGroup
+        /// </param>
+        /// <param name="priority">
+        /// Specifies the priority for the virtual machine. &lt;br&gt;&lt;br&gt;Minimum api-version: 2019-03-01
+        /// Serialized Name: VirtualMachineUpdate.properties.priority
+        /// </param>
+        /// <param name="evictionPolicy">
+        /// Specifies the eviction policy for the Azure Spot virtual machine and Azure Spot scale set. &lt;br&gt;&lt;br&gt;For Azure Spot virtual machines, both 'Deallocate' and 'Delete' are supported and the minimum api-version is 2019-03-01. &lt;br&gt;&lt;br&gt;For Azure Spot scale sets, both 'Deallocate' and 'Delete' are supported and the minimum api-version is 2017-10-30-preview.
+        /// Serialized Name: VirtualMachineUpdate.properties.evictionPolicy
+        /// </param>
+        /// <param name="billingMaxPrice">
+        /// Specifies the billing related details of a Azure Spot virtual machine. &lt;br&gt;&lt;br&gt;Minimum api-version: 2019-03-01.
+        /// Serialized Name: VirtualMachineUpdate.properties.billingProfile
+        /// </param>
+        /// <param name="hostId">
+        /// Specifies information about the dedicated host that the virtual machine resides in. &lt;br&gt;&lt;br&gt;Minimum api-version: 2018-10-01.
+        /// Serialized Name: VirtualMachineUpdate.properties.host
+        /// </param>
+        /// <param name="hostGroupId">
+        /// Specifies information about the dedicated host group that the virtual machine resides in. &lt;br&gt;&lt;br&gt;Minimum api-version: 2020-06-01. &lt;br&gt;&lt;br&gt;NOTE: User cannot specify both host and hostGroup properties.
+        /// Serialized Name: VirtualMachineUpdate.properties.hostGroup
+        /// </param>
+        /// <param name="provisioningState">
+        /// The provisioning state, which only appears in the response.
+        /// Serialized Name: VirtualMachineUpdate.properties.provisioningState
+        /// </param>
+        /// <param name="instanceView">
+        /// The virtual machine instance view.
+        /// Serialized Name: VirtualMachineUpdate.properties.instanceView
+        /// </param>
+        /// <param name="licenseType">
+        /// Specifies that the image or disk that is being used was licensed on-premises. This element is only used for images that contain the Windows Server operating system. &lt;br&gt;&lt;br&gt; Possible values are: &lt;br&gt;&lt;br&gt; Windows_Client &lt;br&gt;&lt;br&gt; Windows_Server &lt;br&gt;&lt;br&gt; If this element is included in a request for an update, the value must match the initial value. This value cannot be updated. &lt;br&gt;&lt;br&gt; For more information, see [Azure Hybrid Use Benefit for Windows Server](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-windows-hybrid-use-benefit-licensing?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json) &lt;br&gt;&lt;br&gt; Minimum api-version: 2015-06-15
+        /// Serialized Name: VirtualMachineUpdate.properties.licenseType
+        /// </param>
+        /// <param name="vmId">
+        /// Specifies the VM unique ID which is a 128-bits identifier that is encoded and stored in all Azure IaaS VMs SMBIOS and can be read using platform BIOS commands.
+        /// Serialized Name: VirtualMachineUpdate.properties.vmId
+        /// </param>
+        /// <param name="extensionsTimeBudget">
+        /// Specifies the time alloted for all extensions to start. The time duration should be between 15 minutes and 120 minutes (inclusive) and should be specified in ISO 8601 format. The default value is 90 minutes (PT1H30M). &lt;br&gt;&lt;br&gt; Minimum api-version: 2020-06-01
+        /// Serialized Name: VirtualMachineUpdate.properties.extensionsTimeBudget
+        /// </param>
+        /// <returns> A new <see cref="Models.VirtualMachinePatch"/> instance for mocking. </returns>
+        public static VirtualMachinePatch VirtualMachinePatch(IDictionary<string, string> tags = null, MgmtRenameRulesPlan plan = null, ManagedServiceIdentity identity = null, IEnumerable<string> zones = null, VirtualMachineSizeType? hardwareVmSize = null, StorageProfile storageProfile = null, bool? ultraSSDEnabled = null, OSProfile osProfile = null, IEnumerable<NetworkInterfaceReference> networkInterfaces = null, bool? encryptionAtHost = null, BootDiagnostics bootDiagnostics = null, ResourceIdentifier availabilitySetId = null, ResourceIdentifier virtualMachineScaleSetId = null, ResourceIdentifier proximityPlacementGroupId = null, VirtualMachinePriorityType? priority = null, VirtualMachineEvictionPolicyType? evictionPolicy = null, double? billingMaxPrice = null, ResourceIdentifier hostId = null, ResourceIdentifier hostGroupId = null, string provisioningState = null, VirtualMachineInstanceView instanceView = null, string licenseType = null, string vmId = null, string extensionsTimeBudget = null)
+        {
+            tags ??= new Dictionary<string, string>();
+            zones ??= new List<string>();
+            networkInterfaces ??= new List<NetworkInterfaceReference>();
+
+            return new VirtualMachinePatch(tags, plan, identity, zones?.ToList(), hardwareVmSize != null ? new HardwareProfile(hardwareVmSize) : null, storageProfile, ultraSSDEnabled != null ? new AdditionalCapabilities(ultraSSDEnabled) : null, osProfile, networkInterfaces != null ? new NetworkProfile(networkInterfaces?.ToList()) : null, encryptionAtHost != null ? new SecurityProfile(encryptionAtHost) : null, bootDiagnostics != null ? new DiagnosticsProfile(bootDiagnostics) : null, availabilitySetId != null ? ResourceManagerModelFactory.WritableSubResource(availabilitySetId) : null, virtualMachineScaleSetId != null ? ResourceManagerModelFactory.WritableSubResource(virtualMachineScaleSetId) : null, proximityPlacementGroupId != null ? ResourceManagerModelFactory.WritableSubResource(proximityPlacementGroupId) : null, priority, evictionPolicy, billingMaxPrice != null ? new BillingProfile(billingMaxPrice) : null, hostId != null ? ResourceManagerModelFactory.WritableSubResource(hostId) : null, hostGroupId != null ? ResourceManagerModelFactory.WritableSubResource(hostGroupId) : null, provisioningState, instanceView, licenseType, vmId, extensionsTimeBudget);
         }
 
         /// <summary> Initializes a new instance of VirtualMachineSize. </summary>
@@ -1450,6 +1586,72 @@ namespace MgmtRenameRules.Models
             return new VirtualMachineScaleSetVmInstanceView(platformUpdateDomain, platformFaultDomain, rdpThumbPrint, vmAgent, maintenanceRedeployStatus, disks?.ToList(), vmHealthStatus != null ? new VirtualMachineHealthStatus(vmHealthStatus) : null, bootDiagnostics, statuses?.ToList(), assignedHost, placementGroupId);
         }
 
+        /// <summary> Initializes a new instance of RequestRateByIntervalContent. </summary>
+        /// <param name="blobContainerSasUri">
+        /// SAS Uri of the logging blob container to which LogAnalytics Api writes output logs to.
+        /// Serialized Name: LogAnalyticsInputBase.blobContainerSasUri
+        /// </param>
+        /// <param name="fromTime">
+        /// From time of the query
+        /// Serialized Name: LogAnalyticsInputBase.fromTime
+        /// </param>
+        /// <param name="toTime">
+        /// To time of the query
+        /// Serialized Name: LogAnalyticsInputBase.toTime
+        /// </param>
+        /// <param name="groupByThrottlePolicy">
+        /// Group query result by Throttle Policy applied.
+        /// Serialized Name: LogAnalyticsInputBase.groupByThrottlePolicy
+        /// </param>
+        /// <param name="groupByOperationName">
+        /// Group query result by Operation Name.
+        /// Serialized Name: LogAnalyticsInputBase.groupByOperationName
+        /// </param>
+        /// <param name="groupByResourceName">
+        /// Group query result by Resource Name.
+        /// Serialized Name: LogAnalyticsInputBase.groupByResourceName
+        /// </param>
+        /// <param name="intervalLength">
+        /// Interval value in minutes used to create LogAnalytics call rate logs.
+        /// Serialized Name: RequestRateByIntervalInput.intervalLength
+        /// </param>
+        /// <returns> A new <see cref="Models.RequestRateByIntervalContent"/> instance for mocking. </returns>
+        public static RequestRateByIntervalContent RequestRateByIntervalContent(Uri blobContainerSasUri = null, DateTimeOffset fromTime = default, DateTimeOffset toTime = default, bool? groupByThrottlePolicy = null, bool? groupByOperationName = null, bool? groupByResourceName = null, IntervalInMin intervalLength = default)
+        {
+            return new RequestRateByIntervalContent(blobContainerSasUri, fromTime, toTime, groupByThrottlePolicy, groupByOperationName, groupByResourceName, intervalLength);
+        }
+
+        /// <summary> Initializes a new instance of LogAnalyticsInputBase. </summary>
+        /// <param name="blobContainerSasUri">
+        /// SAS Uri of the logging blob container to which LogAnalytics Api writes output logs to.
+        /// Serialized Name: LogAnalyticsInputBase.blobContainerSasUri
+        /// </param>
+        /// <param name="fromTime">
+        /// From time of the query
+        /// Serialized Name: LogAnalyticsInputBase.fromTime
+        /// </param>
+        /// <param name="toTime">
+        /// To time of the query
+        /// Serialized Name: LogAnalyticsInputBase.toTime
+        /// </param>
+        /// <param name="groupByThrottlePolicy">
+        /// Group query result by Throttle Policy applied.
+        /// Serialized Name: LogAnalyticsInputBase.groupByThrottlePolicy
+        /// </param>
+        /// <param name="groupByOperationName">
+        /// Group query result by Operation Name.
+        /// Serialized Name: LogAnalyticsInputBase.groupByOperationName
+        /// </param>
+        /// <param name="groupByResourceName">
+        /// Group query result by Resource Name.
+        /// Serialized Name: LogAnalyticsInputBase.groupByResourceName
+        /// </param>
+        /// <returns> A new <see cref="Models.LogAnalyticsInputBase"/> instance for mocking. </returns>
+        public static LogAnalyticsInputBase LogAnalyticsInputBase(Uri blobContainerSasUri = null, DateTimeOffset fromTime = default, DateTimeOffset toTime = default, bool? groupByThrottlePolicy = null, bool? groupByOperationName = null, bool? groupByResourceName = null)
+        {
+            return new LogAnalyticsInputBase(blobContainerSasUri, fromTime, toTime, groupByThrottlePolicy, groupByOperationName, groupByResourceName);
+        }
+
         /// <summary> Initializes a new instance of LogAnalytics. </summary>
         /// <param name="logAnalyticsOutput">
         /// LogAnalyticsOutput
@@ -1475,6 +1677,37 @@ namespace MgmtRenameRules.Models
         public static LogAnalytics LogAnalytics(string logAnalyticsOutput = null, ContentType? contentType = null, BinaryData content = null, RequestMethod? requestMethod = null, Uri basePathUri = null)
         {
             return new LogAnalytics(logAnalyticsOutput != null ? new LogAnalyticsOutput(logAnalyticsOutput) : null, contentType, content, requestMethod, basePathUri);
+        }
+
+        /// <summary> Initializes a new instance of ThrottledRequestsContent. </summary>
+        /// <param name="blobContainerSasUri">
+        /// SAS Uri of the logging blob container to which LogAnalytics Api writes output logs to.
+        /// Serialized Name: LogAnalyticsInputBase.blobContainerSasUri
+        /// </param>
+        /// <param name="fromTime">
+        /// From time of the query
+        /// Serialized Name: LogAnalyticsInputBase.fromTime
+        /// </param>
+        /// <param name="toTime">
+        /// To time of the query
+        /// Serialized Name: LogAnalyticsInputBase.toTime
+        /// </param>
+        /// <param name="groupByThrottlePolicy">
+        /// Group query result by Throttle Policy applied.
+        /// Serialized Name: LogAnalyticsInputBase.groupByThrottlePolicy
+        /// </param>
+        /// <param name="groupByOperationName">
+        /// Group query result by Operation Name.
+        /// Serialized Name: LogAnalyticsInputBase.groupByOperationName
+        /// </param>
+        /// <param name="groupByResourceName">
+        /// Group query result by Resource Name.
+        /// Serialized Name: LogAnalyticsInputBase.groupByResourceName
+        /// </param>
+        /// <returns> A new <see cref="Models.ThrottledRequestsContent"/> instance for mocking. </returns>
+        public static ThrottledRequestsContent ThrottledRequestsContent(Uri blobContainerSasUri = null, DateTimeOffset fromTime = default, DateTimeOffset toTime = default, bool? groupByThrottlePolicy = null, bool? groupByOperationName = null, bool? groupByResourceName = null)
+        {
+            return new ThrottledRequestsContent(blobContainerSasUri, fromTime, toTime, groupByThrottlePolicy, groupByOperationName, groupByResourceName);
         }
     }
 }

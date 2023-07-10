@@ -19,6 +19,15 @@ namespace MgmtListMethods.Models
             Value = new ChangeTrackingList<QuotaBaseProperties>();
         }
 
+        /// <summary> Initializes a new instance of QuotaUpdateContent. </summary>
+        /// <param name="value"> The list for update quota. </param>
+        /// <param name="location"> Region of workspace quota to be updated. </param>
+        internal QuotaUpdateContent(IList<QuotaBaseProperties> value, string location)
+        {
+            Value = value;
+            Location = location;
+        }
+
         /// <summary> The list for update quota. </summary>
         public IList<QuotaBaseProperties> Value { get; }
         /// <summary> Region of workspace quota to be updated. </summary>

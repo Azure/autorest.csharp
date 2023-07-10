@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
 
 namespace MgmtNonStringPathVariable.Models
 {
@@ -15,6 +16,14 @@ namespace MgmtNonStringPathVariable.Models
         /// <summary> Initializes a new instance of BarPatch. </summary>
         public BarPatch()
         {
+        }
+
+        /// <summary> Initializes a new instance of BarPatch. </summary>
+        /// <param name="tags"> Resource tags. </param>
+        /// <param name="buzz"> Update Domain count. </param>
+        internal BarPatch(IDictionary<string, string> tags, Guid? buzz) : base(tags)
+        {
+            Buzz = buzz;
         }
 
         /// <summary> Update Domain count. </summary>

@@ -18,6 +18,19 @@ namespace MgmtMockAndSample.Models
     /// <summary> Model factory for models. </summary>
     public static partial class ArmMgmtMockAndSampleModelFactory
     {
+        /// <summary> Initializes a new instance of VaultCreateOrUpdateContent. </summary>
+        /// <param name="location"> The supported Azure location where the key vault should be created. </param>
+        /// <param name="tags"> The tags that will be assigned to the key vault. </param>
+        /// <param name="properties"> Properties of the vault. </param>
+        /// <param name="identity"> Identity for the virtual machine. </param>
+        /// <returns> A new <see cref="Models.VaultCreateOrUpdateContent"/> instance for mocking. </returns>
+        public static VaultCreateOrUpdateContent VaultCreateOrUpdateContent(AzureLocation location = default, IDictionary<string, string> tags = null, VaultProperties properties = null, ManagedServiceIdentity identity = null)
+        {
+            tags ??= new Dictionary<string, string>();
+
+            return new VaultCreateOrUpdateContent(location, tags, properties, identity);
+        }
+
         /// <summary> Initializes a new instance of VaultProperties. </summary>
         /// <param name="duration"> Time elapsed for task. </param>
         /// <param name="createOn"> The date and time when the cluster creating. </param>
@@ -150,6 +163,15 @@ namespace MgmtMockAndSample.Models
             tags ??= new Dictionary<string, string>();
 
             return new DeletedVaultProperties(vaultId, location, deletedOn, scheduledPurgeOn, tags, purgeProtectionEnabled);
+        }
+
+        /// <summary> Initializes a new instance of VaultCheckNameAvailabilityContent. </summary>
+        /// <param name="name"> The vault name. </param>
+        /// <param name="resourceType"> The type of resource, Microsoft.KeyVault/vaults. </param>
+        /// <returns> A new <see cref="Models.VaultCheckNameAvailabilityContent"/> instance for mocking. </returns>
+        public static VaultCheckNameAvailabilityContent VaultCheckNameAvailabilityContent(string name = null, EncryptionType resourceType = default)
+        {
+            return new VaultCheckNameAvailabilityContent(name, resourceType);
         }
 
         /// <summary> Initializes a new instance of CheckNameAvailabilityResult. </summary>

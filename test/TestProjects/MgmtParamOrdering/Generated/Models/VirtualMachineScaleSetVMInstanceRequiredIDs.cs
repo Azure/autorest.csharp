@@ -25,6 +25,13 @@ namespace MgmtParamOrdering.Models
             InstanceIds = instanceIds.ToList();
         }
 
+        /// <summary> Initializes a new instance of VirtualMachineScaleSetVMInstanceRequiredIDs. </summary>
+        /// <param name="instanceIds"> The virtual machine scale set instance ids. </param>
+        internal VirtualMachineScaleSetVMInstanceRequiredIDs(IList<string> instanceIds)
+        {
+            InstanceIds = instanceIds;
+        }
+
         /// <summary> The virtual machine scale set instance ids. </summary>
         public IList<string> InstanceIds { get; }
     }

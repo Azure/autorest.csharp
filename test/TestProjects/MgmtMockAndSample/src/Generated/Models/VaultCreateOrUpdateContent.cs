@@ -28,6 +28,19 @@ namespace MgmtMockAndSample.Models
             Properties = properties;
         }
 
+        /// <summary> Initializes a new instance of VaultCreateOrUpdateContent. </summary>
+        /// <param name="location"> The supported Azure location where the key vault should be created. </param>
+        /// <param name="tags"> The tags that will be assigned to the key vault. </param>
+        /// <param name="properties"> Properties of the vault. </param>
+        /// <param name="identity"> Identity for the virtual machine. </param>
+        internal VaultCreateOrUpdateContent(AzureLocation location, IDictionary<string, string> tags, VaultProperties properties, ManagedServiceIdentity identity)
+        {
+            Location = location;
+            Tags = tags;
+            Properties = properties;
+            Identity = identity;
+        }
+
         /// <summary> The supported Azure location where the key vault should be created. </summary>
         public AzureLocation Location { get; }
         /// <summary> The tags that will be assigned to the key vault. </summary>
