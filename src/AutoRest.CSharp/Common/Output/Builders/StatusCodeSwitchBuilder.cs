@@ -47,62 +47,49 @@ namespace AutoRest.CSharp.Output.Models
             var headerModelType = (library as DataPlaneOutputLibrary)?.FindHeaderModel(operation)?.Type;
             var isLro = operation.LongRunning is not null;
             var successStatusCodes = new List<int>();
-            List<(CSharpType? Type, ObjectSerialization? Serialization, IReadOnlyList<int> StatusCodes)> successResponses;
 
-            if (isLro && (Configuration.AzureArm || Configuration.Generation1ConvenienceClient))
+            var successResponses = new List<(CSharpType? Type, ObjectSerialization? Serialization, IReadOnlyList<int> StatusCodes)>();
+            foreach (var (statusCodes, bodyType, bodyMediaType, _, isErrorResponse) in operation.Responses)
             {
-                successStatusCodes = operation.Responses
-                    .Where(r => !r.IsErrorResponse)
-                    .SelectMany(r => r.StatusCodes)
-                    .ToList();
-
-                successResponses = new(){ (null, null, successStatusCodes.Distinct().ToList()) };
-            }
-            else
-            {
-                successResponses = new List<(CSharpType? Type, ObjectSerialization? Serialization, IReadOnlyList<int> StatusCodes)>();
-                foreach (var (statusCodes, bodyType, bodyMediaType, _, isErrorResponse) in operation.Responses)
+                if (isErrorResponse)
                 {
-                    if (isErrorResponse)
-                    {
-                        continue;
-                    }
-
-                    successStatusCodes.AddRange(statusCodes);
-                    if (bodyType == null)
-                    {
-                        successResponses.Add((null, null, statusCodes));
-                    }
-                    else if (bodyMediaType == BodyMediaType.Text)
-                    {
-                        successResponses.Add((typeof(string), null, statusCodes));
-                    }
-                    else if (bodyType is InputPrimitiveType { Kind: InputTypeKind.Stream })
-                    {
-                        successResponses.Add((typeof(Stream), null, statusCodes));
-                    }
-                    else
-                    {
-                        var responseType = TypeFactory.GetOutputType(typeFactory.CreateType(bodyType));
-                        var serialization = SerializationBuilder.Build(bodyMediaType, bodyType, responseType);
-                        successResponses.Add((responseType, serialization, statusCodes));
-                    }
+                    continue;
                 }
 
-                if (FindResourceDataType(operation, library) is {} resourceDataType && successResponses.Any())
+                successStatusCodes.AddRange(statusCodes);
+                if (bodyType == null)
                 {
-                    var responseBodyTypeName = successResponses[0].Type?.Name;
-                    if (responseBodyTypeName == resourceDataType.Name && operation.Responses.Any(r => r.BodyType is {} type && resourceDataType.EqualsIgnoreNullable(typeFactory.CreateType(type))))
-                    {
-                        successResponses.Add((null, null, new[]{404}));
-                    }
+                    successResponses.Add((null, null, statusCodes));
                 }
-
-                successResponses = successResponses
-                    .GroupBy(r => r.Type)
-                    .Select(g => (g.Key, g.First().Serialization, (IReadOnlyList<int>)g.SelectMany(r => r.StatusCodes).Distinct().ToArray()))
-                    .ToList();
+                else if (bodyMediaType == BodyMediaType.Text)
+                {
+                    successResponses.Add((typeof(string), null, statusCodes));
+                }
+                else if (bodyType is InputPrimitiveType { Kind: InputTypeKind.Stream })
+                {
+                    successResponses.Add((typeof(Stream), null, statusCodes));
+                }
+                else
+                {
+                    var responseType = TypeFactory.GetOutputType(typeFactory.CreateType(bodyType));
+                    var serialization = SerializationBuilder.Build(bodyMediaType, bodyType, responseType);
+                    successResponses.Add((responseType, serialization, statusCodes));
+                }
             }
+
+            if (FindResourceDataType(operation, library) is {} resourceDataType && successResponses.Any())
+            {
+                var responseBodyTypeName = successResponses[0].Type?.Name;
+                if (responseBodyTypeName == resourceDataType.Name && operation.Responses.Any(r => r.BodyType is {} type && resourceDataType.EqualsIgnoreNullable(typeFactory.CreateType(type))))
+                {
+                    successResponses.Add((null, null, new[]{404}));
+                }
+            }
+
+            successResponses = successResponses
+                .GroupBy(r => r.Type)
+                .Select(g => (g.Key, g.First().Serialization, (IReadOnlyList<int>)g.SelectMany(r => r.StatusCodes).Distinct().ToArray()))
+                .ToList();
 
             var commonResponseType = successResponses.Count(r => r.Type is not null) switch
             {
@@ -112,6 +99,17 @@ namespace AutoRest.CSharp.Output.Models
             };
 
             var pageItemType = GetPageItemType(commonResponseType, operation);
+
+            if (isLro && (Configuration.AzureArm || Configuration.Generation1ConvenienceClient))
+            {
+                successStatusCodes = operation.Responses
+                    .Where(r => !r.IsErrorResponse)
+                    .SelectMany(r => r.StatusCodes)
+                    .ToList();
+
+                successResponses = new(){ (null, null, successStatusCodes.Distinct().ToList()) };
+                commonResponseType = null;
+            }
 
             return new StatusCodeSwitchBuilder
             (
@@ -216,7 +214,7 @@ namespace AutoRest.CSharp.Output.Models
 
         private static CSharpType? GetPageItemType(CSharpType? responseType, InputOperation operation)
         {
-            if (operation.Paging is not {} paging || operation.LongRunning is not null)
+            if (operation.Paging is not {} paging)
             {
                 return null;
             }

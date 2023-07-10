@@ -41,7 +41,7 @@ namespace AutoRest.CSharp.Output.Models
 
         public DpgOutputLibrary Build(bool isTspInput)
         {
-            var inputClients = UpdateOperations();
+            var inputClients = UpdateOperations().ToList();
 
             var clientInfosByName = inputClients
                 .Select(og => CreateClientInfo(og, _sourceInputModel, _rootNamespace.Name))
@@ -51,95 +51,7 @@ namespace AutoRest.CSharp.Output.Models
             var clientOptions = CreateClientOptions(topLevelClientInfos);
 
             SetRequestsToClients(clientInfosByName.Values);
-
-            var enums = new Dictionary<InputEnumType, EnumType>(InputEnumType.IgnoreNullabilityComparer);
-            var models = new Dictionary<InputModelType, ModelTypeProvider>();
-            var clients = new List<LowLevelClient>();
-
-            var library = new DpgOutputLibrary(_libraryName, _rootNamespace.Name, enums, models, clients, clientOptions, isTspInput, _sourceInputModel);
-
-            CreateEnums(enums, library.TypeFactory);
-            CreateModels(models, library.TypeFactory);
-            CreateClients(clients, topLevelClientInfos, library.TypeFactory, clientOptions);
-
-            return library;
-        }
-
-        private void CreateEnums(IDictionary<InputEnumType, EnumType> dictionary, TypeFactory typeFactory)
-        {
-            foreach (var inputEnum in _rootNamespace.Enums)
-            {
-                dictionary.Add(inputEnum, new EnumType(inputEnum, TypeProvider.GetDefaultModelNamespace(null, _defaultNamespace), "public", typeFactory, _sourceInputModel));
-            }
-        }
-
-        private void CreateModels(IDictionary<InputModelType, ModelTypeProvider> models, TypeFactory typeFactory)
-        {
-            Dictionary<InputModelType, List<InputModelType>> derivedTypesLookup = new Dictionary<InputModelType, List<InputModelType>>();
-            foreach (var model in _rootNamespace.Models)
-            {
-                if (model.BaseModel is null)
-                    continue;
-
-                if (!derivedTypesLookup.TryGetValue(model.BaseModel, out var derivedTypes))
-                {
-                    derivedTypes = new List<InputModelType>();
-                    derivedTypesLookup.Add(model.BaseModel, derivedTypes);
-                }
-                derivedTypes.Add(model);
-            }
-
-            Dictionary<string, ModelTypeProvider> defaultDerivedTypes = new Dictionary<string, ModelTypeProvider>();
-
-            foreach (var model in _rootNamespace.Models)
-            {
-                derivedTypesLookup.TryGetValue(model, out var children);
-                InputModelType[] derivedTypesArray = children?.ToArray() ?? Array.Empty<InputModelType>();
-                ModelTypeProvider? defaultDerivedType = GetDefaultDerivedType(models, typeFactory, model, derivedTypesArray, defaultDerivedTypes);
-                models.Add(model, new ModelTypeProvider(model, TypeProvider.GetDefaultModelNamespace(null, _defaultNamespace), _sourceInputModel, typeFactory, derivedTypesArray, defaultDerivedType));
-            }
-        }
-
-        private ModelTypeProvider? GetDefaultDerivedType(IDictionary<InputModelType, ModelTypeProvider> models, TypeFactory typeFactory, InputModelType model, InputModelType[] derivedTypesArray, Dictionary<string, ModelTypeProvider> defaultDerivedTypes)
-        {
-            //only want to create one instance of the default derived per polymorphic set
-            ModelTypeProvider? defaultDerivedType = null;
-            bool isBasePolyType = derivedTypesArray.Length > 0 && model.DiscriminatorPropertyName is not null;
-            bool isChildPolyType = model.DiscriminatorValue is not null;
-            if (isBasePolyType || isChildPolyType)
-            {
-                InputModelType actualBase = isBasePolyType ? model : model.BaseModel!;
-
-                //Since the unknown type is used for deserialization only we don't need to create if its an input only model
-                if (!actualBase.Usage.HasFlag(InputModelTypeUsage.Output))
-                    return null;
-
-                string defaultDerivedName = $"Unknown{actualBase.Name}";
-                if (!defaultDerivedTypes.TryGetValue(defaultDerivedName, out defaultDerivedType))
-                {
-                    //create the "Unknown" version
-                    var unknownDerviedType = new InputModelType(
-                        defaultDerivedName,
-                        actualBase.Namespace,
-                        "internal",
-                        null,
-                        $"Unknown version of {actualBase.Name}",
-                        InputModelTypeUsage.Output,
-                        Array.Empty<InputModelProperty>(),
-                        actualBase,
-                        Array.Empty<InputModelType>(),
-                        "Unknown", //TODO: do we need to support extensible enum / int values?
-                        null)
-                    {
-                        IsUnknownDiscriminatorModel = true
-                    };
-                    defaultDerivedType = new ModelTypeProvider(unknownDerviedType, TypeProvider.GetDefaultModelNamespace(null, _defaultNamespace), _sourceInputModel, typeFactory, Array.Empty<InputModelType>(), null);
-                    defaultDerivedTypes.Add(defaultDerivedName, defaultDerivedType);
-                    models.Add(unknownDerviedType, defaultDerivedType);
-                }
-            }
-
-            return defaultDerivedType;
+            return new DpgOutputLibrary(_rootNamespace, topLevelClientInfos, clientOptions, isTspInput, _sourceInputModel);
         }
 
         private IEnumerable<InputClient> UpdateOperations()
@@ -359,55 +271,7 @@ namespace AutoRest.CSharp.Output.Models
             clientInfo.Requests.Add(operation);
         }
 
-        private void CreateClients(List<LowLevelClient> allClients, IEnumerable<ClientInfo> topLevelClientInfos, TypeFactory typeFactory, ClientOptionsTypeProvider clientOptions)
-        {
-            var topLevelClients = CreateClients(topLevelClientInfos, typeFactory, clientOptions, null);
-
-            // Simple implementation of breadth first traversal
-            allClients.AddRange(topLevelClients);
-            for (int i = 0; i < allClients.Count; i++)
-            {
-                allClients.AddRange(allClients[i].SubClients);
-            }
-        }
-
-        private IEnumerable<LowLevelClient> CreateClients(IEnumerable<ClientInfo> clientInfos, TypeFactory typeFactory, ClientOptionsTypeProvider clientOptions, LowLevelClient? parentClient)
-        {
-            foreach (var clientInfo in clientInfos)
-            {
-                var description = string.IsNullOrWhiteSpace(clientInfo.Description)
-                    ? $"The {ClientBuilder.GetClientPrefix(clientInfo.Name, _rootNamespace.Name)} {(parentClient == null ? "service client" : "sub-client")}."
-                    : BuilderHelpers.EscapeXmlDocDescription(clientInfo.Description);
-
-                var subClients = new List<LowLevelClient>();
-                var clientParameters = clientInfo.ClientParameters
-                    .Select(p => RestClientBuilder.BuildConstructorParameter(p, typeFactory))
-                    .OrderBy(p => p.IsOptionalInSignature)
-                    .ToList();
-
-                var client = new LowLevelClient(
-                    clientInfo.Name,
-                    clientInfo.Namespace,
-                    description,
-                    _libraryName,
-                    parentClient,
-                    clientInfo.Requests,
-                    clientParameters,
-                    _rootNamespace.Auth,
-                    _sourceInputModel,
-                    clientOptions,
-                    typeFactory)
-                {
-                    SubClients = subClients
-                };
-
-                subClients.AddRange(CreateClients(clientInfo.Children, typeFactory, clientOptions, client));
-
-                yield return client;
-            }
-        }
-
-        private class ClientInfo
+        public class ClientInfo
         {
             public string OperationGroupKey { get; }
             public string Name { get; }

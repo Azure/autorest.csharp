@@ -10,44 +10,46 @@ using AutoRest.CSharp.Common.Output.Models.Types;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Input.Source;
+using AutoRest.CSharp.Output.Builders;
 
 namespace AutoRest.CSharp.Output.Models.Types
 {
     internal class DpgOutputLibrary : OutputLibrary
     {
-        private readonly string _libraryName;
-        private readonly string _rootNamespace;
         private readonly IReadOnlyDictionary<InputEnumType, EnumType> _enums;
         private readonly IReadOnlyDictionary<InputModelType, ModelTypeProvider> _models;
-        private readonly bool _isTspInput;
-        private readonly SourceInputModel? _sourceInputModel;
+        private readonly IReadOnlyList<TypeProvider> _privateAllModels;
 
         public TypeFactory TypeFactory { get; }
         public IEnumerable<EnumType> Enums => _enums.Values;
         public IEnumerable<ModelTypeProvider> Models => _models.Values;
         public IReadOnlyList<LowLevelClient> RestClients { get; }
         public ClientOptionsTypeProvider ClientOptions { get; }
-        public IEnumerable<TypeProvider> AllModels => _isTspInput ? new List<TypeProvider>(_enums.Values).Concat(_models.Values) : Array.Empty<TypeProvider>();
+        public IEnumerable<TypeProvider> AllModels { get; }
+        public ModelFactoryTypeProvider? ModelFactory { get; }
+        public AspDotNetExtensionTypeProvider AspDotNetExtension { get; }
 
-        public DpgOutputLibrary(string libraryName, string rootNamespace, IReadOnlyDictionary<InputEnumType, EnumType> enums, IReadOnlyDictionary<InputModelType, ModelTypeProvider> models, IReadOnlyList<LowLevelClient> restClients, ClientOptionsTypeProvider clientOptions, bool isTspInput, SourceInputModel? sourceInputModel)
+        public DpgOutputLibrary(InputNamespace rootNamespace, IReadOnlyList<DpgOutputLibraryBuilder.ClientInfo> topLevelClientInfos, ClientOptionsTypeProvider clientOptions, bool isTspInput, SourceInputModel? sourceInputModel)
         {
             TypeFactory = new TypeFactory(this);
-            _libraryName = libraryName;
-            _rootNamespace = rootNamespace;
-            _enums = enums;
-            _models = models;
-            _isTspInput = isTspInput;
-             _sourceInputModel = sourceInputModel;
-            RestClients = restClients;
+
+            var defaultNamespace = Configuration.Namespace ?? rootNamespace.Name;
+            var libraryName = Configuration.LibraryName ?? rootNamespace.Name;
+            var defaultModelNamespace = TypeProvider.GetDefaultModelNamespace(null, defaultNamespace);
+
+            _enums = CreateEnums(rootNamespace.Enums, defaultModelNamespace, TypeFactory, sourceInputModel);
+            _models = CreateModels(rootNamespace.Models, defaultModelNamespace, TypeFactory, sourceInputModel);
+
+            var allModels = new List<TypeProvider>(_enums.Values);
+            allModels.AddRange(_models.Values);
+            _privateAllModels = allModels;
+
+            AllModels = isTspInput ? allModels : Array.Empty<TypeProvider>();
+            RestClients = CreateClients(topLevelClientInfos, clientOptions, rootNamespace, TypeFactory, libraryName, sourceInputModel);
             ClientOptions = clientOptions;
+            ModelFactory = ModelFactoryTypeProvider.TryCreate(ClientBuilder.GetClientPrefix(Configuration.LibraryName, libraryName), defaultNamespace, AllModels, sourceInputModel);
+            AspDotNetExtension = new AspDotNetExtensionTypeProvider(RestClients, defaultNamespace, sourceInputModel);
         }
-
-        private AspDotNetExtensionTypeProvider? _aspDotNetExtension;
-        public AspDotNetExtensionTypeProvider AspDotNetExtension => _aspDotNetExtension ??= new AspDotNetExtensionTypeProvider(RestClients, _rootNamespace, _sourceInputModel);
-
-        private ModelFactoryTypeProvider? _modelFactoryProvider;
-        public ModelFactoryTypeProvider? ModelFactory => _modelFactoryProvider ??= ModelFactoryTypeProvider.TryCreate(ClientBuilder.GetClientPrefix(Configuration.LibraryName, _libraryName), _rootNamespace, AllModels, _sourceInputModel);
-
 
         public override CSharpType ResolveEnum(InputEnumType enumType)
         {
@@ -62,10 +64,135 @@ namespace AutoRest.CSharp.Output.Models.Types
         public override CSharpType ResolveModel(InputModelType model)
             => _models.TryGetValue(model, out var modelTypeProvider) ? modelTypeProvider.Type : new CSharpType(typeof(object), model.IsNullable);
 
-        public override CSharpType? FindTypeByName(string originalName) => Models.Where(m => m.Declaration.Name == originalName)?.Select(m => m.Type).FirstOrDefault();
+        public override CSharpType? FindTypeByName(string originalName) => _privateAllModels.Where(m => m.Declaration.Name == originalName)?.Select(m => m.Type).FirstOrDefault();
 
         public override CSharpType FindTypeForSchema(Schema schema) => throw new NotImplementedException($"{nameof(FindTypeForSchema)} shouldn't be called for DPG!");
 
         public override TypeProvider FindTypeProviderForSchema(Schema schema) => throw new NotImplementedException($"{nameof(FindTypeForSchema)} shouldn't be called for DPG!");
+
+        private static IReadOnlyDictionary<InputEnumType, EnumType> CreateEnums(IReadOnlyList<InputEnumType> inputEnums, string defaultNamespace, TypeFactory typeFactory, SourceInputModel? sourceInputModel)
+            => inputEnums.ToDictionary(e => e, e => new EnumType(e, defaultNamespace, "public", typeFactory, sourceInputModel), InputEnumType.IgnoreNullabilityComparer);
+
+        private static IReadOnlyDictionary<InputModelType, ModelTypeProvider> CreateModels(IReadOnlyList<InputModelType> inputModels, string defaultNamespace, TypeFactory typeFactory, SourceInputModel? sourceInputModel)
+        {
+            var models = new Dictionary<InputModelType, ModelTypeProvider>();
+            var derivedTypesLookup = new Dictionary<InputModelType, List<InputModelType>>();
+            foreach (var model in inputModels)
+            {
+                if (model.BaseModel is null)
+                    continue;
+
+                if (!derivedTypesLookup.TryGetValue(model.BaseModel, out var derivedTypes))
+                {
+                    derivedTypes = new List<InputModelType>();
+                    derivedTypesLookup.Add(model.BaseModel, derivedTypes);
+                }
+                derivedTypes.Add(model);
+            }
+
+            var defaultDerivedTypes = new Dictionary<string, ModelTypeProvider>();
+            foreach (var model in inputModels)
+            {
+                derivedTypesLookup.TryGetValue(model, out var children);
+                InputModelType[] derivedTypesArray = children?.ToArray() ?? Array.Empty<InputModelType>();
+                ModelTypeProvider? defaultDerivedType = GetDefaultDerivedType(models, defaultNamespace, typeFactory, model, derivedTypesArray, defaultDerivedTypes, sourceInputModel);
+                models.Add(model, new ModelTypeProvider(model, defaultNamespace, sourceInputModel, typeFactory, derivedTypesArray, defaultDerivedType));
+            }
+
+            return models;
+        }
+
+        private static ModelTypeProvider? GetDefaultDerivedType(IDictionary<InputModelType, ModelTypeProvider> models, string defaultNamespace, TypeFactory typeFactory, InputModelType model, InputModelType[] derivedTypesArray, Dictionary<string, ModelTypeProvider> defaultDerivedTypes, SourceInputModel? sourceInputModel)
+        {
+            //only want to create one instance of the default derived per polymorphic set
+            ModelTypeProvider? defaultDerivedType = null;
+            bool isBasePolyType = derivedTypesArray.Length > 0 && model.DiscriminatorPropertyName is not null;
+            bool isChildPolyType = model.DiscriminatorValue is not null;
+            if (isBasePolyType || isChildPolyType)
+            {
+                InputModelType actualBase = isBasePolyType ? model : model.BaseModel!;
+
+                //Since the unknown type is used for deserialization only we don't need to create if its an input only model
+                if (!actualBase.Usage.HasFlag(InputModelTypeUsage.Output))
+                    return null;
+
+                string defaultDerivedName = $"Unknown{actualBase.Name}";
+                if (!defaultDerivedTypes.TryGetValue(defaultDerivedName, out defaultDerivedType))
+                {
+                    //create the "Unknown" version
+                    var unknownDerviedType = new InputModelType(
+                        defaultDerivedName,
+                        actualBase.Namespace,
+                        "internal",
+                        null,
+                        $"Unknown version of {actualBase.Name}",
+                        InputModelTypeUsage.Output,
+                        Array.Empty<InputModelProperty>(),
+                        actualBase,
+                        Array.Empty<InputModelType>(),
+                        "Unknown", //TODO: do we need to support extensible enum / int values?
+                        null)
+                    {
+                        IsUnknownDiscriminatorModel = true
+                    };
+                    defaultDerivedType = new ModelTypeProvider(unknownDerviedType, defaultNamespace, sourceInputModel, typeFactory, Array.Empty<InputModelType>(), null);
+                    defaultDerivedTypes.Add(defaultDerivedName, defaultDerivedType);
+                    models.Add(unknownDerviedType, defaultDerivedType);
+                }
+            }
+
+            return defaultDerivedType;
+        }
+
+        private static IReadOnlyList<LowLevelClient> CreateClients(IEnumerable<DpgOutputLibraryBuilder.ClientInfo> topLevelClientInfos, ClientOptionsTypeProvider clientOptions, InputNamespace rootNamespace, TypeFactory typeFactory, string libraryName, SourceInputModel? sourceInputModel)
+        {
+            var topLevelClients = CreateClients(topLevelClientInfos, clientOptions, null, rootNamespace, typeFactory, libraryName, sourceInputModel);
+            var allClients = new List<LowLevelClient>();
+
+            // Simple implementation of breadth first traversal
+            allClients.AddRange(topLevelClients);
+            for (int i = 0; i < allClients.Count; i++)
+            {
+                allClients.AddRange(allClients[i].SubClients);
+            }
+
+            return allClients;
+        }
+
+        private static IEnumerable<LowLevelClient> CreateClients(IEnumerable<DpgOutputLibraryBuilder.ClientInfo> clientInfos, ClientOptionsTypeProvider clientOptions, LowLevelClient? parentClient, InputNamespace rootNamespace, TypeFactory typeFactory, string libraryName, SourceInputModel? sourceInputModel)
+        {
+            foreach (var clientInfo in clientInfos)
+            {
+                var description = string.IsNullOrWhiteSpace(clientInfo.Description)
+                    ? $"The {ClientBuilder.GetClientPrefix(clientInfo.Name, rootNamespace.Name)} {(parentClient == null ? "service client" : "sub-client")}."
+                    : BuilderHelpers.EscapeXmlDocDescription(clientInfo.Description);
+
+                var subClients = new List<LowLevelClient>();
+                var clientParameters = clientInfo.ClientParameters
+                    .Select(p => RestClientBuilder.BuildConstructorParameter(p, typeFactory))
+                    .OrderBy(p => p.IsOptionalInSignature)
+                    .ToList();
+
+                var client = new LowLevelClient(
+                    clientInfo.Name,
+                    clientInfo.Namespace,
+                    description,
+                    libraryName,
+                    parentClient,
+                    clientInfo.Requests,
+                    clientParameters,
+                    rootNamespace.Auth,
+                    sourceInputModel,
+                    clientOptions,
+                    typeFactory)
+                {
+                    SubClients = subClients
+                };
+
+                subClients.AddRange(CreateClients(clientInfo.Children, clientOptions, client, rootNamespace, typeFactory, libraryName, sourceInputModel));
+
+                yield return client;
+            }
+        }
     }
 }

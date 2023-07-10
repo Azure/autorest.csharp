@@ -398,28 +398,23 @@ namespace AutoRest.CSharp.Output.Models.Types
 
         protected override ObjectTypeDiscriminator? BuildDiscriminator()
         {
-            string? discriminatorPropertyName = _inputModel.DiscriminatorPropertyName;
-            ObjectTypeDiscriminatorImplementation[] implementations = Array.Empty<ObjectTypeDiscriminatorImplementation>();
             Constant? value = null;
-            ObjectTypeProperty property;
 
-            if (discriminatorPropertyName == null)
-            {
-                var parent = GetBaseObjectType();
-                if (parent is null || parent.Discriminator is null)
-                {
-                    //neither me nor my parent are discriminators so I can bail
-                    return null;
-                }
+            //only load implementations for the base type
+            var implementations = _derivedTypes is not null
+                ? _derivedTypes.Select(child => new ObjectTypeDiscriminatorImplementation(child.DiscriminatorValue!, _typeFactory.CreateType(child))).ToArray()
+                : Array.Empty<ObjectTypeDiscriminatorImplementation>();
 
-                discriminatorPropertyName = parent.Discriminator.SerializedName;
-                property = parent.Discriminator.Property;
-            }
-            else
+            var parentDiscriminator = GetBaseObjectType()?.Discriminator;
+            var property = Properties.FirstOrDefault(p => p.InputModelProperty is not null && p.InputModelProperty.IsDiscriminator)
+                ?? parentDiscriminator?.Property;
+
+            var discriminatorPropertyName = _inputModel.DiscriminatorPropertyName ?? parentDiscriminator?.SerializedName;
+
+            //neither me nor my parent are discriminators so I can bail
+            if (property is null || discriminatorPropertyName is null)
             {
-                //only load implementations for the base type
-                implementations = _derivedTypes!.Select(child => new ObjectTypeDiscriminatorImplementation(child.DiscriminatorValue!, _typeFactory.CreateType(child))).ToArray();
-                property = Properties.First(p => p.InputModelProperty is not null && p.InputModelProperty.IsDiscriminator);
+                return null;
             }
 
             if (_inputModel.DiscriminatorValue != null)

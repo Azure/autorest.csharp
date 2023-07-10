@@ -9,6 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Text.Json;
 using System.Threading;
+using System.Threading.Tasks;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Output.Models;
@@ -342,7 +343,7 @@ namespace AutoRest.CSharp.Generation.Writers
             {
                 yield return ComposeProtocolHandlePageableResponseCode(client, signature.Name, arguments, pageItemType, allParameters, async);
             }
-            else if (signature.ReturnType is {} returnType && returnType.Equals(typeof(Response<bool>)))
+            else if (signature.ReturnType is {} returnType && (returnType.Equals(typeof(Response<bool>)) || returnType.Equals(typeof(Task<Response<bool>>))))
             {
                 yield return ComposeProtocolHandleHeadAsBoolean(client, signature.Name, arguments, async);
             }
@@ -728,6 +729,11 @@ namespace AutoRest.CSharp.Generation.Writers
                     return BinaryDataExpression.FromString(Literal("<your binary data content>"));
                 }
 
+                if (type == typeof(Stream))
+                {
+                    return InvokeFileOpenRead(Literal("<filePath>"));
+                }
+
                 if (type.GetConstructor(Type.EmptyTypes) is not null)
                 {
                     return New.Instance(type);
@@ -765,7 +771,7 @@ namespace AutoRest.CSharp.Generation.Writers
             JsonArraySerialization array => ComposeProtocolArrayCSharpType(allProperties, array, visitedModels),
             JsonDictionarySerialization dictionary => ComposeProtocolDictionaryInstance(allProperties, dictionary, visitedModels),
             JsonValueSerialization { Type.IsFrameworkType: true } value => MockParameterTypeValue(propertyDescription, value.Type, value.Format),
-            JsonValueSerialization { Type.IsFrameworkType: false, Type.Implementation: SerializableObjectType model } => ComposeAnonymousObjectType(model, allProperties, visitedModels),
+            JsonValueSerialization { Type.IsFrameworkType: false, Type.Implementation: SerializableObjectType model } => ComposeAnonymousObjectType(GetMostConcreteModel(model), allProperties, visitedModels),
             JsonValueSerialization { Type.IsFrameworkType: false, Type.Implementation: EnumType enumType } => new ConstantExpression(enumType.Values.First().Value),
             _ => Null
         };
@@ -839,7 +845,7 @@ namespace AutoRest.CSharp.Generation.Writers
         {
             JsonArraySerialization array => IsVisitedModel(array.ValueSerialization, visitedModels),
             JsonDictionarySerialization dictionary => IsVisitedModel(dictionary.ValueSerialization, visitedModels),
-            JsonValueSerialization { Type.IsFrameworkType: false, Type.Implementation: SerializableObjectType model } => visitedModels.Contains(model),
+            JsonValueSerialization { Type.IsFrameworkType: false, Type.Implementation: SerializableObjectType model } => visitedModels.Contains(GetMostConcreteModel(model)),
             _ => false
         };
 
@@ -889,15 +895,6 @@ namespace AutoRest.CSharp.Generation.Writers
 
         private ValueExpression ComposeAnonymousObjectType(SerializableObjectType model, bool allProperties, HashSet<ObjectType> visitedModels)
         {
-            if (model.Discriminator is { Implementations.Length: > 0 })
-            {
-                model = model.Discriminator.Implementations
-                    .Where(i => i.Type is { IsFrameworkType: false })
-                    .Select(i => i.Type.Implementation as SerializableObjectType)
-                    .WhereNotNull()
-                    .First();
-            }
-
             visitedModels.Add(model);
             /* GENERATED CODE PATTERN
              * new
@@ -918,6 +915,20 @@ namespace AutoRest.CSharp.Generation.Writers
             }
 
             return New.Anonymous(propertyExpressions);
+        }
+
+        private static SerializableObjectType GetMostConcreteModel(SerializableObjectType model)
+        {
+            while (model.Discriminator is { Implementations.Length: > 0 })
+            {
+                model = model.Discriminator.Implementations
+                    .Where(i => i.Type is { IsFrameworkType: false })
+                    .Select(i => i.Type.Implementation as SerializableObjectType)
+                    .WhereNotNull()
+                    .First();
+            }
+
+            return model;
         }
 
         private static bool IsPropertyAssignable(ObjectTypeProperty property)
