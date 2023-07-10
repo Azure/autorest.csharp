@@ -178,13 +178,21 @@ namespace AutoRest.CSharp.Output.Models.Types
                 }
             }
 
-            return new ObjectTypeConstructor(
+            var serializationCtor = new ObjectTypeConstructor(
                 Type.Name,
                 IsInheritableCommonType ? Protected : Internal,
                 serializationConstructorParameters.ToArray(),
                 serializationInitializers.ToArray(),
                 baseSerializationCtor
             );
+
+            // returns the InitializationConstructor if this new ctor is the same
+            var initializationConstructorSignature = InitializationConstructor.Signature;
+            var serializationConstructorSignature = serializationCtor.Signature;
+            if (!serializationConstructorSignature.Parameters.Any(p => TypeFactory.IsList(p.Type)) && initializationConstructorSignature.Parameters.SequenceEqual(serializationConstructorSignature.Parameters, Parameter.EqualityComparerByType))
+                return InitializationConstructor;
+
+            return serializationCtor;
         }
 
         private ReferenceOrConstant? GetPropertyDefaultValue(ObjectTypeProperty property)
