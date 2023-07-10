@@ -42,6 +42,18 @@ model Salmon extends Fish {
   partner?: Fish;
 }
 
+@doc("Test duplicated discriminator declaration, see issue 3504")
+@discriminator("kind")
+model Turtle {
+    kind: string;
+}
+
+@doc("See turtle")
+model SeaTurtle extends Turtle {
+    kind: "seeTurtle";
+    swimmingSpeed: int32;
+}
+
 /*@doc("The third level model SawShark in polymorphic multiple levels inheritance.")
 model SawShark extends Shark {
   sharktype: "saw";
@@ -81,6 +93,14 @@ op getValid(): Siamese;
 @route("/valid")
 @put
 op putValid(@body input: Siamese): Siamese;
+
+@scenario
+@scenarioDoc("""
+Test model with duplicated discriminator declaration
+""")
+@route("/duplicate")
+@get
+op getDuplicate(): Turtle;
 
 @route("/discriminated")
 interface Discriminated {

@@ -19,9 +19,9 @@ namespace AutoRest.TestServer.Tests
                 new TypeAsserts.Parameter[] {
                     new("id", typeof(int)),
                     new("skip", typeof(int)),
-                    new("top", typeof(int?), null),
-                    new("status", typeof(string), null),
-                    new("context", typeof(RequestContext), null)
+                    new("top", typeof(int?)),
+                    new("status", typeof(string)),
+                    new("context", typeof(RequestContext))
                 });
         }
 
@@ -36,7 +36,7 @@ namespace AutoRest.TestServer.Tests
             Assert.AreEqual(parameters[0].ParameterType, typeof(string));
             Assert.AreEqual(parameters[0].IsOptional, false);
             Assert.AreEqual(parameters[1].ParameterType, typeof(RequestContext));
-            Assert.AreEqual(parameters[1].IsOptional, true);
+            Assert.AreEqual(parameters[1].IsOptional, false);
         }
 
         [Test]
@@ -50,7 +50,7 @@ namespace AutoRest.TestServer.Tests
             Assert.AreEqual(parameters[0].ParameterType, typeof(RequestContent));
             Assert.AreEqual(parameters[0].IsOptional, false);
             Assert.AreEqual(parameters[1].ParameterType, typeof(RequestContext));
-            Assert.AreEqual(parameters[1].IsOptional, true);
+            Assert.AreEqual(parameters[1].IsOptional, false);
         }
 
         [Test]
@@ -76,7 +76,7 @@ namespace AutoRest.TestServer.Tests
             Assert.AreEqual(parameters[0].ParameterType, typeof(RequestContent));
             Assert.AreEqual(parameters[0].IsOptional, false);
             Assert.AreEqual(parameters[1].ParameterType, typeof(RequestContext));
-            Assert.AreEqual(parameters[1].IsOptional, true);
+            Assert.AreEqual(parameters[1].IsOptional, false);
         }
     }
 }

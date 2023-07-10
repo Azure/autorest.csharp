@@ -22,6 +22,7 @@ namespace AutoRest.CSharp.Output.Models
     internal class ClientFields : IReadOnlyCollection<FieldDeclaration>
     {
         public FieldDeclaration? AuthorizationHeaderConstant { get; }
+        public FieldDeclaration? AuthorizationApiKeyPrefixConstant { get; }
         public FieldDeclaration? ScopesConstant { get; }
 
         public FieldDeclaration ClientDiagnosticsProperty { get; }
@@ -64,6 +65,11 @@ namespace AutoRest.CSharp.Output.Models
 
                     fields.Add(AuthorizationHeaderConstant);
                     fields.Add(_keyAuthField);
+                    if (authorization.ApiKey.Prefix is not null)
+                    {
+                        AuthorizationApiKeyPrefixConstant = new(Private | Const, typeof(string), "AuthorizationApiKeyPrefix", $"{authorization.ApiKey.Prefix:L}", SerializationFormat.Default);
+                        fields.Add(AuthorizationApiKeyPrefixConstant);
+                    }
                     credentialFields.Add(_keyAuthField);
                     parameterNamesToFields[KnownParameters.KeyAuth.Name] = _keyAuthField;
                 }

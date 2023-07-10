@@ -27,7 +27,7 @@ namespace Azure.Analytics.Purview.Account.Samples
             var endpoint = new Uri("<https://my-service.azure.com>");
             var client = new PurviewAccountsClient(endpoint, credential).GetResourceSetRulesClient();
 
-            Response response = client.GetResourceSetRule();
+            Response response = client.GetResourceSetRule(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());
@@ -41,7 +41,7 @@ namespace Azure.Analytics.Purview.Account.Samples
             var endpoint = new Uri("<https://my-service.azure.com>");
             var client = new PurviewAccountsClient(endpoint, credential).GetResourceSetRulesClient();
 
-            Response response = client.GetResourceSetRule();
+            Response response = client.GetResourceSetRule(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("advancedResourceSet").GetProperty("modifiedAt").ToString());
@@ -139,7 +139,7 @@ namespace Azure.Analytics.Purview.Account.Samples
             var endpoint = new Uri("<https://my-service.azure.com>");
             var client = new PurviewAccountsClient(endpoint, credential).GetResourceSetRulesClient();
 
-            Response response = await client.GetResourceSetRuleAsync();
+            Response response = await client.GetResourceSetRuleAsync(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());
@@ -153,7 +153,7 @@ namespace Azure.Analytics.Purview.Account.Samples
             var endpoint = new Uri("<https://my-service.azure.com>");
             var client = new PurviewAccountsClient(endpoint, credential).GetResourceSetRulesClient();
 
-            Response response = await client.GetResourceSetRuleAsync();
+            Response response = await client.GetResourceSetRuleAsync(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("advancedResourceSet").GetProperty("modifiedAt").ToString());

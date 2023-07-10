@@ -25,8 +25,7 @@
       "IsNullable": false
      },
      "IsRequired": true,
-     "IsReadOnly": true,
-     "IsDiscriminator": false
+     "IsReadOnly": true
     },
     {
      "$id": "5",
@@ -40,8 +39,7 @@
       "IsNullable": false
      },
      "IsRequired": false,
-     "IsReadOnly": false,
-     "IsDiscriminator": false
+     "IsReadOnly": false
     },
     {
      "$id": "7",
@@ -55,8 +53,7 @@
       "IsNullable": false
      },
      "IsRequired": true,
-     "IsReadOnly": false,
-     "IsDiscriminator": false
+     "IsReadOnly": false
     }
    ]
   }
@@ -284,26 +281,12 @@
       "application/merge-patch+json"
      ],
      "BufferResponse": true,
-     "LongRunning": {
-      "$id": "33",
-      "FinalStateVia": 3,
-      "FinalResponse": {
-       "$id": "34",
-       "StatusCodes": [
-        200
-       ],
-       "BodyType": {
-        "$ref": "2"
-       },
-       "BodyMediaType": "Json"
-      }
-     },
      "GenerateProtocolMethod": true,
      "GenerateConvenienceMethod": false
     }
    ],
    "Protocol": {
-    "$id": "35"
+    "$id": "33"
    },
    "Creatable": true
   }

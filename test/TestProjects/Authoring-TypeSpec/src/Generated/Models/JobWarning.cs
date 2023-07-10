@@ -8,7 +8,7 @@
 using System;
 using Azure.Core;
 
-namespace Azure.Language.Authoring.Models
+namespace AuthoringTypeSpec.Models
 {
     /// <summary> Represents a warning that was encountered while executing the request. </summary>
     public partial class JobWarning

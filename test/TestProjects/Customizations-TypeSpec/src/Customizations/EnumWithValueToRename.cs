@@ -3,7 +3,7 @@
 
 using Azure.Core;
 
-namespace CustomizationsInCadl.Models
+namespace CustomizationsInTsp.Models
 {
     /// <summary> Enum with renamed value (original name: ValueToRename). </summary>
     public enum EnumWithValueToRename

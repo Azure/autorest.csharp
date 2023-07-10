@@ -9,8 +9,28 @@
     </AdditionalFiles>
   </ItemGroup>
 
-  <ItemGroup Condition="!$(MSBuildProjectName.StartsWith('AutoRest.'))">
-    <Compile Include="$(MSBuildThisFileDirectory)/src/assets/Azure.Core.Shared/**/*.cs" Link="Shared/Core/%(RecursiveDir)/%(Filename)%(Extension)" />
+  <ItemGroup Condition="!$(MSBuildProjectName.StartsWith('AutoRest.')) And '$(IsTestGenerationTestProjet)' != 'true'">
+    <!-- Need to list out each include individually to support the new project which includes one of these files by name -->
+    <Compile Include="$(AzureCoreSharedSources)Multipart/MultipartContent.cs" LinkBase="Shared/Core/Multipart" />
+    <Compile Include="$(AzureCoreSharedSources)Multipart/MultipartFormDataContent.cs" LinkBase="Shared/Core/Multipart" />
+    <Compile Include="$(AzureCoreSharedSources)AppContextSwitchHelper.cs" LinkBase="Shared/Core" />
+    <Compile Include="$(AzureCoreSharedSources)Argument.cs" LinkBase="Shared/Core" />
+    <Compile Include="$(AzureCoreSharedSources)AsyncLockWithValue.cs" LinkBase="Shared/Core" />
+    <Compile Include="$(AzureCoreSharedSources)AzureKeyCredentialPolicy.cs" LinkBase="Shared/Core" />
+    <Compile Include="$(AzureCoreSharedSources)ClientDiagnostics.cs" LinkBase="Shared/Core" />
+    <Compile Include="$(AzureCoreSharedSources)ContentTypeUtilities.cs" LinkBase="Shared/Core" />
+    <Compile Include="$(AzureCoreSharedSources)DiagnosticScope.cs" LinkBase="Shared/Core" />
+    <Compile Include="$(AzureCoreSharedSources)DiagnosticScopeFactory.cs" LinkBase="Shared/Core" />
+    <Compile Include="$(AzureCoreSharedSources)FixedDelayWithNoJitterStrategy.cs" LinkBase="Shared/Core" />
+    <Compile Include="$(AzureCoreSharedSources)ForwardsClientCallsAttribute.cs" LinkBase="Shared/Core" />
+    <Compile Include="$(AzureCoreSharedSources)HttpMessageSanitizer.cs" LinkBase="Shared/Core" />
+    <Compile Include="$(AzureCoreSharedSources)OperationInternal.cs" LinkBase="Shared/Core" />
+    <Compile Include="$(AzureCoreSharedSources)OperationInternalBase.cs" LinkBase="Shared/Core" />
+    <Compile Include="$(AzureCoreSharedSources)OperationInternalOfT.cs" LinkBase="Shared/Core" />
+    <Compile Include="$(AzureCoreSharedSources)OperationPoller.cs" LinkBase="Shared/Core" />
+    <Compile Include="$(AzureCoreSharedSources)SequentialDelayStrategy.cs" LinkBase="Shared/Core" />
+    <Compile Include="$(AzureCoreSharedSources)TaskExtensions.cs" LinkBase="Shared/Core" />
+    <Compile Include="$(AzureCoreSharedSources)VoidValue.cs" LinkBase="Shared/Core" />
     <Compile Include="$(MSBuildThisFileDirectory)/src/assets/Generator.Shared/**/*.cs" Link="Shared/AutoRest/%(RecursiveDir)/%(Filename)%(Extension)" />
   </ItemGroup>
   <ItemGroup Condition="'$(IncludeManagementSharedCode)' == 'true'">
@@ -32,5 +52,6 @@
       Condition="'@(_ContainsCurlyBraces)' != ''" />
   </Target>
 
+  <Import Project="$(CentralPackagesFile)" Condition="'$(ShouldUseCentralVersions)' == 'true'" />
   <Import Project="eng\Versioning.targets" />
 </Project>
