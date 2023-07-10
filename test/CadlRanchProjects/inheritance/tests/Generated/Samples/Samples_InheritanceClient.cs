@@ -316,6 +316,120 @@ namespace _Type.Model.Inheritance.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
+        public void Example_GetExtensibleEnum()
+        {
+            var client = new InheritanceClient();
+
+            Response response = client.GetExtensibleEnum(new RequestContext());
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("kind").ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_GetExtensibleEnum_AllParameters()
+        {
+            var client = new InheritanceClient();
+
+            Response response = client.GetExtensibleEnum(new RequestContext());
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("kind").ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_GetExtensibleEnum_Async()
+        {
+            var client = new InheritanceClient();
+
+            Response response = await client.GetExtensibleEnumAsync(new RequestContext());
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("kind").ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_GetExtensibleEnum_AllParameters_Async()
+        {
+            var client = new InheritanceClient();
+
+            Response response = await client.GetExtensibleEnumAsync(new RequestContext());
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("kind").ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_GetExtensibleEnum_Convenience_Async()
+        {
+            var client = new InheritanceClient();
+
+            var result = await client.GetExtensibleEnumAsync();
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_GetFixedEnum()
+        {
+            var client = new InheritanceClient();
+
+            Response response = client.GetFixedEnum(new RequestContext());
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("kind").ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_GetFixedEnum_AllParameters()
+        {
+            var client = new InheritanceClient();
+
+            Response response = client.GetFixedEnum(new RequestContext());
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("kind").ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_GetFixedEnum_Async()
+        {
+            var client = new InheritanceClient();
+
+            Response response = await client.GetFixedEnumAsync(new RequestContext());
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("kind").ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_GetFixedEnum_AllParameters_Async()
+        {
+            var client = new InheritanceClient();
+
+            Response response = await client.GetFixedEnumAsync(new RequestContext());
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("kind").ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_GetFixedEnum_Convenience_Async()
+        {
+            var client = new InheritanceClient();
+
+            var result = await client.GetFixedEnumAsync();
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
         public void Example_GetModel()
         {
             var client = new InheritanceClient();

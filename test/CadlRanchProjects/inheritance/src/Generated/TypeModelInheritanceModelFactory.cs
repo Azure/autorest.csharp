@@ -17,5 +17,21 @@ namespace _Type.Model.Inheritance.Models
         {
             return new SeaTurtle("seeTurtle", swimmingSpeed);
         }
+
+        /// <summary> Initializes a new instance of Golden. </summary>
+        /// <param name="size"></param>
+        /// <returns> A new <see cref="Models.Golden"/> instance for mocking. </returns>
+        public static Golden Golden(int size = default)
+        {
+            return new Golden(DogKind.Golden, size);
+        }
+
+        /// <summary> Initializes a new instance of Cobra. </summary>
+        /// <param name="size"></param>
+        /// <returns> A new <see cref="Models.Cobra"/> instance for mocking. </returns>
+        public static Cobra Cobra(int size = default)
+        {
+            return new Cobra(SnakeKind.Cobra, size);
+        }
     }
 }

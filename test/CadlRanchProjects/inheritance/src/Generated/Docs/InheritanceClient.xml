@@ -217,6 +217,98 @@ Console.WriteLine(result.GetProperty("kind").ToString());
 ]]></code>
 </example>
     </member>
+    <member name="GetExtensibleEnumAsync(CancellationToken)">
+<example>
+This sample shows how to call GetExtensibleEnumAsync.
+<code><![CDATA[
+var client = new InheritanceClient();
+
+var result = await client.GetExtensibleEnumAsync();
+]]></code>
+</example>
+    </member>
+    <member name="GetExtensibleEnum(CancellationToken)">
+<example>
+This sample shows how to call GetExtensibleEnum.
+<code><![CDATA[
+var client = new InheritanceClient();
+
+var result = client.GetExtensibleEnum();
+]]></code>
+</example>
+    </member>
+    <member name="GetExtensibleEnumAsync(RequestContext)">
+<example>
+This sample shows how to call GetExtensibleEnumAsync with required parameters and parse the result.
+<code><![CDATA[
+var client = new InheritanceClient();
+
+Response response = await client.GetExtensibleEnumAsync(new RequestContext());
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("kind").ToString());
+]]></code>
+</example>
+    </member>
+    <member name="GetExtensibleEnum(RequestContext)">
+<example>
+This sample shows how to call GetExtensibleEnum with required parameters and parse the result.
+<code><![CDATA[
+var client = new InheritanceClient();
+
+Response response = client.GetExtensibleEnum(new RequestContext());
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("kind").ToString());
+]]></code>
+</example>
+    </member>
+    <member name="GetFixedEnumAsync(CancellationToken)">
+<example>
+This sample shows how to call GetFixedEnumAsync.
+<code><![CDATA[
+var client = new InheritanceClient();
+
+var result = await client.GetFixedEnumAsync();
+]]></code>
+</example>
+    </member>
+    <member name="GetFixedEnum(CancellationToken)">
+<example>
+This sample shows how to call GetFixedEnum.
+<code><![CDATA[
+var client = new InheritanceClient();
+
+var result = client.GetFixedEnum();
+]]></code>
+</example>
+    </member>
+    <member name="GetFixedEnumAsync(RequestContext)">
+<example>
+This sample shows how to call GetFixedEnumAsync with required parameters and parse the result.
+<code><![CDATA[
+var client = new InheritanceClient();
+
+Response response = await client.GetFixedEnumAsync(new RequestContext());
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("kind").ToString());
+]]></code>
+</example>
+    </member>
+    <member name="GetFixedEnum(RequestContext)">
+<example>
+This sample shows how to call GetFixedEnum with required parameters and parse the result.
+<code><![CDATA[
+var client = new InheritanceClient();
+
+Response response = client.GetFixedEnum(new RequestContext());
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("kind").ToString());
+]]></code>
+</example>
+    </member>
     <member name="GetModelAsync(CancellationToken)">
 <example>
 This sample shows how to call GetModelAsync.

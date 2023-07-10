@@ -434,6 +434,182 @@ namespace _Type.Model.Inheritance
         }
 
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <include file="Docs/InheritanceClient.xml" path="doc/members/member[@name='GetExtensibleEnumAsync(CancellationToken)']/*" />
+        public virtual async Task<Response<Dog>> GetExtensibleEnumAsync(CancellationToken cancellationToken = default)
+        {
+            RequestContext context = FromCancellationToken(cancellationToken);
+            Response response = await GetExtensibleEnumAsync(context).ConfigureAwait(false);
+            return Response.FromValue(Dog.FromResponse(response), response);
+        }
+
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <include file="Docs/InheritanceClient.xml" path="doc/members/member[@name='GetExtensibleEnum(CancellationToken)']/*" />
+        public virtual Response<Dog> GetExtensibleEnum(CancellationToken cancellationToken = default)
+        {
+            RequestContext context = FromCancellationToken(cancellationToken);
+            Response response = GetExtensibleEnum(context);
+            return Response.FromValue(Dog.FromResponse(response), response);
+        }
+
+        /// <summary>
+        /// [Protocol Method]
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
+        /// <item>
+        /// <description>
+        /// Please try the simpler <see cref="GetExtensibleEnumAsync(CancellationToken)"/> convenience overload with strongly typed models first.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <include file="Docs/InheritanceClient.xml" path="doc/members/member[@name='GetExtensibleEnumAsync(RequestContext)']/*" />
+        public virtual async Task<Response> GetExtensibleEnumAsync(RequestContext context)
+        {
+            using var scope = ClientDiagnostics.CreateScope("InheritanceClient.GetExtensibleEnum");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateGetExtensibleEnumRequest(context);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// [Protocol Method]
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
+        /// <item>
+        /// <description>
+        /// Please try the simpler <see cref="GetExtensibleEnum(CancellationToken)"/> convenience overload with strongly typed models first.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <include file="Docs/InheritanceClient.xml" path="doc/members/member[@name='GetExtensibleEnum(RequestContext)']/*" />
+        public virtual Response GetExtensibleEnum(RequestContext context)
+        {
+            using var scope = ClientDiagnostics.CreateScope("InheritanceClient.GetExtensibleEnum");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateGetExtensibleEnumRequest(context);
+                return _pipeline.ProcessMessage(message, context);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <include file="Docs/InheritanceClient.xml" path="doc/members/member[@name='GetFixedEnumAsync(CancellationToken)']/*" />
+        public virtual async Task<Response<Snake>> GetFixedEnumAsync(CancellationToken cancellationToken = default)
+        {
+            RequestContext context = FromCancellationToken(cancellationToken);
+            Response response = await GetFixedEnumAsync(context).ConfigureAwait(false);
+            return Response.FromValue(Snake.FromResponse(response), response);
+        }
+
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <include file="Docs/InheritanceClient.xml" path="doc/members/member[@name='GetFixedEnum(CancellationToken)']/*" />
+        public virtual Response<Snake> GetFixedEnum(CancellationToken cancellationToken = default)
+        {
+            RequestContext context = FromCancellationToken(cancellationToken);
+            Response response = GetFixedEnum(context);
+            return Response.FromValue(Snake.FromResponse(response), response);
+        }
+
+        /// <summary>
+        /// [Protocol Method]
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
+        /// <item>
+        /// <description>
+        /// Please try the simpler <see cref="GetFixedEnumAsync(CancellationToken)"/> convenience overload with strongly typed models first.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <include file="Docs/InheritanceClient.xml" path="doc/members/member[@name='GetFixedEnumAsync(RequestContext)']/*" />
+        public virtual async Task<Response> GetFixedEnumAsync(RequestContext context)
+        {
+            using var scope = ClientDiagnostics.CreateScope("InheritanceClient.GetFixedEnum");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateGetFixedEnumRequest(context);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// [Protocol Method]
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
+        /// <item>
+        /// <description>
+        /// Please try the simpler <see cref="GetFixedEnum(CancellationToken)"/> convenience overload with strongly typed models first.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <include file="Docs/InheritanceClient.xml" path="doc/members/member[@name='GetFixedEnum(RequestContext)']/*" />
+        public virtual Response GetFixedEnum(RequestContext context)
+        {
+            using var scope = ClientDiagnostics.CreateScope("InheritanceClient.GetFixedEnum");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateGetFixedEnumRequest(context);
+                return _pipeline.ProcessMessage(message, context);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <include file="Docs/InheritanceClient.xml" path="doc/members/member[@name='GetModelAsync(CancellationToken)']/*" />
         public virtual async Task<Response<Fish>> GetModelAsync(CancellationToken cancellationToken = default)
         {
@@ -1047,6 +1223,34 @@ namespace _Type.Model.Inheritance
             var uri = new RawRequestUriBuilder();
             uri.Reset(_endpoint);
             uri.AppendPath("/type/model/inheritance/duplicate", false);
+            uri.AppendQuery("api-version", _apiVersion, true);
+            request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
+            return message;
+        }
+
+        internal HttpMessage CreateGetExtensibleEnumRequest(RequestContext context)
+        {
+            var message = _pipeline.CreateMessage(context, ResponseClassifier200);
+            var request = message.Request;
+            request.Method = RequestMethod.Get;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/type/model/inheritance/extensible-enum", false);
+            uri.AppendQuery("api-version", _apiVersion, true);
+            request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
+            return message;
+        }
+
+        internal HttpMessage CreateGetFixedEnumRequest(RequestContext context)
+        {
+            var message = _pipeline.CreateMessage(context, ResponseClassifier200);
+            var request = message.Request;
+            request.Method = RequestMethod.Get;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/type/model/inheritance/fixed-enum", false);
             uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");

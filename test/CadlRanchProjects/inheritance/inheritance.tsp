@@ -1,7 +1,9 @@
 import "@typespec/http";
 import "@azure-tools/cadl-ranch-expect";
+import "@azure-tools/typespec-azure-core";
 
 using TypeSpec.Http;
+using Azure.Core;
 
 @doc("Illustrates inheritance and polymorphic model.")
 @scenarioService("/type/model/inheritance")
@@ -64,6 +66,39 @@ model GoblinShark extends Shark {
   sharktype: "goblin";
 }*/
 
+@doc("extensible enum type for discriminator")
+enum DogKind {
+    Golden: "golden",
+}
+
+@doc("Test extensible enum type for discriminator")
+@discriminator("kind")
+model Dog {
+    kind: DogKind;
+}
+
+model Golden extends Dog {
+    kind: DogKind.Golden;
+    size: int32;
+}
+
+@fixed
+@doc("fixed enum type for discriminator")
+enum SnakeKind {
+    Cobra: "cobra",
+}
+
+@doc("Test fixed enum type for discriminator")
+@discriminator("kind")
+model Snake {
+    kind: SnakeKind;
+}
+
+model Cobra extends Snake {
+    kind: SnakeKind.Cobra;
+    size: int32;
+}
+
 @scenario
 @scenarioDoc("""
 Generate and send model.
@@ -101,6 +136,22 @@ Test model with duplicated discriminator declaration
 @route("/duplicate")
 @get
 op getDuplicate(): Turtle;
+
+@scenario
+@scenarioDoc("""
+Test model with extensible enum discriminator type
+""")
+@route("/extensible-enum")
+@get
+op getExtensibleEnum(): Dog;
+
+@scenario
+@scenarioDoc("""
+Test model with fixed enum discriminator type
+""")
+@route("/fixed-enum")
+@get
+op getFixedEnum(): Snake;
 
 @route("/discriminated")
 interface Discriminated {
