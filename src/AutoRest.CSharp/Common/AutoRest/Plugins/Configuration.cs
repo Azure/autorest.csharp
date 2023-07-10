@@ -44,6 +44,7 @@ namespace AutoRest.CSharp.Input
             public const string ModelFactoryForHlc = "model-factory-for-hlc";
             public const string GenerateModelFactory = "generate-model-factory";
             public const string ModelsToTreatEmptyStringAsNull = "models-to-treat-empty-string-as-null";
+            public const string IntrinsicTypesToTreatEmptyStringAsNull = "intrinsic-types-to-treat-empty-string-as-null";
             public const string AdditionalIntrinsicTypesToTreatEmptyStringAsNull = "additional-intrinsic-types-to-treat-empty-string-as-null";
             public const string PublicDiscriminatorProperty = "public-discriminator-property";
             public const string ShouldTreatBase64AsBinaryData = "should-treat-base64-as-binary-data";
@@ -394,52 +395,52 @@ namespace AutoRest.CSharp.Input
         internal static void LoadConfiguration(JsonElement root, string? projectPath, string outputPath, string? existingProjectFolder)
         {
             var sharedSourceFolders = new List<string>();
-            foreach (var sharedSourceFolder in root.GetProperty(nameof(Configuration.SharedSourceFolders)).EnumerateArray())
+            foreach (var sharedSourceFolder in root.GetProperty(Options.SharedSourceFolders).EnumerateArray())
             {
                 sharedSourceFolders.Add(Path.Combine(outputPath, sharedSourceFolder.GetString()!));
             }
 
-            root.TryGetProperty(nameof(Configuration.Options.ProtocolMethodList), out var protocolMethodList);
+            root.TryGetProperty(Options.ProtocolMethodList, out var protocolMethodList);
             var protocolMethods = Configuration.DeserializeArray(protocolMethodList);
-            root.TryGetProperty(nameof(Configuration.Options.SuppressAbstractBaseClasses), out var suppressAbstractBaseClassesElement);
+            root.TryGetProperty(Options.SuppressAbstractBaseClasses, out var suppressAbstractBaseClassesElement);
             var suppressAbstractBaseClasses = Configuration.DeserializeArray(suppressAbstractBaseClassesElement);
-            root.TryGetProperty(nameof(Configuration.Options.ModelsToTreatEmptyStringAsNull), out var modelsToTreatEmptyStringAsNullElement);
+            root.TryGetProperty(Options.ModelsToTreatEmptyStringAsNull, out var modelsToTreatEmptyStringAsNullElement);
             var modelsToTreatEmptyStringAsNull = Configuration.DeserializeArray(modelsToTreatEmptyStringAsNullElement);
-            root.TryGetProperty(nameof(Configuration.IntrinsicTypesToTreatEmptyStringAsNull), out var intrinsicTypesToTreatEmptyStringAsNullElement);
+            root.TryGetProperty(Options.IntrinsicTypesToTreatEmptyStringAsNull, out var intrinsicTypesToTreatEmptyStringAsNullElement);
             var intrinsicTypesToTreatEmptyStringAsNull = Configuration.DeserializeArray(intrinsicTypesToTreatEmptyStringAsNullElement);
-            root.TryGetProperty(nameof(Configuration.Options.ModelFactoryForHlc), out var oldModelFactoryEntriesElement);
+            root.TryGetProperty(Options.ModelFactoryForHlc, out var oldModelFactoryEntriesElement);
             var oldModelFactoryEntries = Configuration.DeserializeArray(oldModelFactoryEntriesElement);
-            root.TryGetProperty(nameof(Configuration.Options.MethodsToKeepClientDefaultValue), out var methodsToKeepClientDefaultValueElement);
+            root.TryGetProperty(Options.MethodsToKeepClientDefaultValue, out var methodsToKeepClientDefaultValueElement);
             var methodsToKeepClientDefaultValue = Configuration.DeserializeArray(methodsToKeepClientDefaultValueElement);
 
             Configuration.Initialize(
-                Path.Combine(outputPath, root.GetProperty(nameof(Configuration.OutputFolder)).GetString()!),
-                root.GetProperty(nameof(Configuration.Namespace)).GetString()!,
-                root.GetProperty(nameof(Configuration.LibraryName)).GetString()!,
+                Path.Combine(outputPath, root.GetProperty(Options.OutputFolder).GetString()!),
+                root.GetProperty(Options.Namespace).GetString()!,
+                root.GetProperty(Options.LibraryName).GetString()!,
                 sharedSourceFolders.ToArray(),
                 saveInputs: false,
-                ReadOption(root, Configuration.Options.AzureArm),
-                ReadOption(root, Configuration.Options.PublicClients),
-                ReadOption(root, Configuration.Options.ModelNamespace),
-                ReadOption(root, Configuration.Options.HeadAsBoolean),
-                ReadOption(root, Configuration.Options.SkipCSProjPackageReference),
-                ReadOption(root, Configuration.Options.Generation1ConvenienceClient),
-                ReadOption(root, Configuration.Options.SingleTopLevelClient),
-                ReadOption(root, Configuration.Options.SkipSerializationFormatXml),
-                ReadOption(root, Configuration.Options.DisablePaginationTopRenaming),
-                ReadOption(root, Configuration.Options.GenerateModelFactory),
-                ReadOption(root, Configuration.Options.PublicDiscriminatorProperty),
+                ReadOption(root, Options.AzureArm),
+                ReadOption(root, Options.PublicClients),
+                ReadOption(root, Options.ModelNamespace),
+                ReadOption(root, Options.HeadAsBoolean),
+                ReadOption(root, Options.SkipCSProjPackageReference),
+                ReadOption(root, Options.Generation1ConvenienceClient),
+                ReadOption(root, Options.SingleTopLevelClient),
+                ReadOption(root, Options.SkipSerializationFormatXml),
+                ReadOption(root, Options.DisablePaginationTopRenaming),
+                ReadOption(root, Options.GenerateModelFactory),
+                ReadOption(root, Options.PublicDiscriminatorProperty),
                 oldModelFactoryEntries,
-                ReadEnumOption<Configuration.UnreferencedTypesHandlingOption>(root, Configuration.Options.UnreferencedTypesHandling),
-                ReadOption(root, Configuration.Options.UseOverloadsBetweenProtocolAndConvenience),
-                ReadOption(root, Configuration.Options.KeepNonOverloadableProtocolSignature),
-                projectPath ?? ReadStringOption(root, Configuration.Options.ProjectFolder),
+                ReadEnumOption<UnreferencedTypesHandlingOption>(root, Options.UnreferencedTypesHandling),
+                ReadOption(root, Options.UseOverloadsBetweenProtocolAndConvenience),
+                ReadOption(root, Options.KeepNonOverloadableProtocolSignature),
+                projectPath ?? ReadStringOption(root, Options.ProjectFolder),
                 existingProjectFolder,
                 protocolMethods,
                 suppressAbstractBaseClasses,
                 modelsToTreatEmptyStringAsNull,
                 intrinsicTypesToTreatEmptyStringAsNull,
-                ReadOption(root, Configuration.Options.ShouldTreatBase64AsBinaryData),
+                ReadOption(root, Options.ShouldTreatBase64AsBinaryData),
                 methodsToKeepClientDefaultValue,
                 MgmtConfiguration.LoadConfiguration(root),
                 MgmtTestConfiguration.LoadConfiguration(root)
@@ -454,7 +455,7 @@ namespace AutoRest.CSharp.Input
                 {
                     Indented = true,
                 };
-                using (var writer = new Utf8JsonWriter(memoryStream , options))
+                using (var writer = new Utf8JsonWriter(memoryStream, options))
                 {
                     WriteConfiguration(writer);
                 }
@@ -466,33 +467,33 @@ namespace AutoRest.CSharp.Input
         private static void WriteConfiguration(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            writer.WriteString(nameof(Configuration.OutputFolder), Path.GetRelativePath(Configuration.OutputFolder, Configuration.OutputFolder));
-            writer.WriteString(nameof(Configuration.Namespace), Configuration.Namespace);
-            writer.WriteString(nameof(Configuration.LibraryName), Configuration.LibraryName);
-            writer.WriteStartArray(nameof(Configuration.SharedSourceFolders));
+            writer.WriteString(Options.OutputFolder, Path.GetRelativePath(Configuration.OutputFolder, Configuration.OutputFolder));
+            writer.WriteString(Options.Namespace, Configuration.Namespace);
+            writer.WriteString(Options.LibraryName, Configuration.LibraryName);
+            writer.WriteStartArray(Options.SharedSourceFolders);
             foreach (var sharedSourceFolder in Configuration.SharedSourceFolders)
             {
                 writer.WriteStringValue(NormalizePath(sharedSourceFolder));
             }
             writer.WriteEndArray();
-            WriteIfNotDefault(writer, Configuration.Options.AzureArm, Configuration.AzureArm);
-            WriteIfNotDefault(writer, Configuration.Options.PublicClients, Configuration.PublicClients);
-            WriteIfNotDefault(writer, Configuration.Options.ModelNamespace, Configuration.ModelNamespace);
-            WriteIfNotDefault(writer, Configuration.Options.HeadAsBoolean, Configuration.HeadAsBoolean);
-            WriteIfNotDefault(writer, Configuration.Options.SkipCSProjPackageReference, Configuration.SkipCSProjPackageReference);
-            WriteIfNotDefault(writer, Configuration.Options.Generation1ConvenienceClient, Configuration.Generation1ConvenienceClient);
-            WriteIfNotDefault(writer, Configuration.Options.SingleTopLevelClient, Configuration.SingleTopLevelClient);
-            WriteIfNotDefault(writer, Configuration.Options.GenerateModelFactory, Configuration.GenerateModelFactory);
-            Utf8JsonWriterExtensions.WriteNonEmptyArray(writer, Configuration.Options.ModelFactoryForHlc, Configuration.ModelFactoryForHlc);
-            WriteIfNotDefault(writer, Configuration.Options.UnreferencedTypesHandling, Configuration.UnreferencedTypesHandling);
-            WriteIfNotDefault(writer, Configuration.Options.UseOverloadsBetweenProtocolAndConvenience, Configuration.UseOverloadsBetweenProtocolAndConvenience);
-            WriteIfNotDefault(writer, Configuration.Options.ProjectFolder, Configuration.RelativeProjectFolder);
-            Utf8JsonWriterExtensions.WriteNonEmptyArray(writer, nameof(Configuration.Options.ProtocolMethodList), Configuration.ProtocolMethodList);
-            Utf8JsonWriterExtensions.WriteNonEmptyArray(writer, nameof(Configuration.Options.SuppressAbstractBaseClasses), Configuration.SuppressAbstractBaseClasses);
-            Utf8JsonWriterExtensions.WriteNonEmptyArray(writer, nameof(Configuration.Options.ModelsToTreatEmptyStringAsNull), Configuration.ModelsToTreatEmptyStringAsNull.ToList<string>());
+            WriteIfNotDefault(writer, Options.AzureArm, Configuration.AzureArm);
+            WriteIfNotDefault(writer, Options.PublicClients, Configuration.PublicClients);
+            WriteIfNotDefault(writer, Options.ModelNamespace, Configuration.ModelNamespace);
+            WriteIfNotDefault(writer, Options.HeadAsBoolean, Configuration.HeadAsBoolean);
+            WriteIfNotDefault(writer, Options.SkipCSProjPackageReference, Configuration.SkipCSProjPackageReference);
+            WriteIfNotDefault(writer, Options.Generation1ConvenienceClient, Configuration.Generation1ConvenienceClient);
+            WriteIfNotDefault(writer, Options.SingleTopLevelClient, Configuration.SingleTopLevelClient);
+            WriteIfNotDefault(writer, Options.GenerateModelFactory, Configuration.GenerateModelFactory);
+            writer.WriteNonEmptyArray(Options.ModelFactoryForHlc, Configuration.ModelFactoryForHlc);
+            WriteIfNotDefault(writer, Options.UnreferencedTypesHandling, Configuration.UnreferencedTypesHandling);
+            WriteIfNotDefault(writer, Options.UseOverloadsBetweenProtocolAndConvenience, Configuration.UseOverloadsBetweenProtocolAndConvenience);
+            WriteIfNotDefault(writer, Options.ProjectFolder, Configuration.RelativeProjectFolder);
+            writer.WriteNonEmptyArray(Options.ProtocolMethodList, Configuration.ProtocolMethodList);
+            writer.WriteNonEmptyArray(Options.SuppressAbstractBaseClasses, Configuration.SuppressAbstractBaseClasses);
+            writer.WriteNonEmptyArray(Options.ModelsToTreatEmptyStringAsNull, Configuration.ModelsToTreatEmptyStringAsNull.ToList());
             if (Configuration.ModelsToTreatEmptyStringAsNull.Any())
             {
-                Utf8JsonWriterExtensions.WriteNonEmptyArray(writer, nameof(Configuration.IntrinsicTypesToTreatEmptyStringAsNull), Configuration.IntrinsicTypesToTreatEmptyStringAsNull.ToList<string>());
+                writer.WriteNonEmptyArray(Options.IntrinsicTypesToTreatEmptyStringAsNull, Configuration.IntrinsicTypesToTreatEmptyStringAsNull.ToList());
             }
 
             Configuration.MgmtConfiguration.SaveConfiguration(writer);
