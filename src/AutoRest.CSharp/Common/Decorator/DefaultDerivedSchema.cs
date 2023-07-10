@@ -51,14 +51,6 @@ namespace AutoRest.CSharp.Common.Decorator
             if (actualBaseSchema is null)
                 throw new InvalidOperationException($"Found a child poly {schema.Language.Default.Name} that we weren't able to determine its base poly from {string.Join(',', schema.Parents?.Immediate.Select(p => p.Name) ?? Array.Empty<string>())}");
 
-            //Since the unknown type is used for deserialization only we don't need to create if its an input only model
-            var hasXCsharpUsageOutput = !actualBaseSchema.Extensions?.Usage?.Contains("output", StringComparison.OrdinalIgnoreCase);
-            if (!actualBaseSchema.Usage.Contains(SchemaContext.Output) &&
-                !actualBaseSchema.Usage.Contains(SchemaContext.Exception) &&
-                (!hasXCsharpUsageOutput.HasValue ||
-                hasXCsharpUsageOutput.Value))
-                return;
-
             ObjectSchema? defaultDerivedSchema = null;
 
             //if I have children and parents then I am my own defaultDerivedType
