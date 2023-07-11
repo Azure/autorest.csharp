@@ -70,7 +70,7 @@ namespace ResourceClients_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/Resource.xml" path="doc/members/member[@name='GetItemAsync(RequestContext)']/*" />
-        public virtual async Task<Response> GetItemAsync(RequestContext context = null)
+        public virtual async Task<Response> GetItemAsync(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("Resource.GetItem");
             scope.Start();
@@ -100,7 +100,7 @@ namespace ResourceClients_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/Resource.xml" path="doc/members/member[@name='GetItem(RequestContext)']/*" />
-        public virtual Response GetItem(RequestContext context = null)
+        public virtual Response GetItem(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("Resource.GetItem");
             scope.Start();

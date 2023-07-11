@@ -71,7 +71,7 @@ namespace httpInfrastructure_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/HttpFailureClient.xml" path="doc/members/member[@name='GetEmptyErrorAsync(RequestContext)']/*" />
-        public virtual async Task<Response> GetEmptyErrorAsync(RequestContext context = null)
+        public virtual async Task<Response> GetEmptyErrorAsync(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("HttpFailureClient.GetEmptyError");
             scope.Start();
@@ -101,7 +101,7 @@ namespace httpInfrastructure_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/HttpFailureClient.xml" path="doc/members/member[@name='GetEmptyError(RequestContext)']/*" />
-        public virtual Response GetEmptyError(RequestContext context = null)
+        public virtual Response GetEmptyError(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("HttpFailureClient.GetEmptyError");
             scope.Start();
@@ -131,7 +131,7 @@ namespace httpInfrastructure_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/HttpFailureClient.xml" path="doc/members/member[@name='GetNoModelErrorAsync(RequestContext)']/*" />
-        public virtual async Task<Response> GetNoModelErrorAsync(RequestContext context = null)
+        public virtual async Task<Response> GetNoModelErrorAsync(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("HttpFailureClient.GetNoModelError");
             scope.Start();
@@ -161,7 +161,7 @@ namespace httpInfrastructure_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/HttpFailureClient.xml" path="doc/members/member[@name='GetNoModelError(RequestContext)']/*" />
-        public virtual Response GetNoModelError(RequestContext context = null)
+        public virtual Response GetNoModelError(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("HttpFailureClient.GetNoModelError");
             scope.Start();
@@ -191,7 +191,7 @@ namespace httpInfrastructure_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/HttpFailureClient.xml" path="doc/members/member[@name='GetNoModelEmptyAsync(RequestContext)']/*" />
-        public virtual async Task<Response> GetNoModelEmptyAsync(RequestContext context = null)
+        public virtual async Task<Response> GetNoModelEmptyAsync(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("HttpFailureClient.GetNoModelEmpty");
             scope.Start();
@@ -221,7 +221,7 @@ namespace httpInfrastructure_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/HttpFailureClient.xml" path="doc/members/member[@name='GetNoModelEmpty(RequestContext)']/*" />
-        public virtual Response GetNoModelEmpty(RequestContext context = null)
+        public virtual Response GetNoModelEmpty(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("HttpFailureClient.GetNoModelEmpty");
             scope.Start();

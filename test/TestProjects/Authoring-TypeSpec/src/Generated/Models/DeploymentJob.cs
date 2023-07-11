@@ -11,7 +11,7 @@ using System.Linq;
 using Azure;
 using Azure.Core;
 
-namespace Azure.Language.Authoring.Models
+namespace AuthoringTypeSpec.Models
 {
     /// <summary> The DeploymentJob. </summary>
     public partial class DeploymentJob
