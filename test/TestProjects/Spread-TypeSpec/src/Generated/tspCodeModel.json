@@ -1,6 +1,6 @@
 {
  "$id": "1",
- "Name": "Spread",
+ "Name": "SpreadTypeSpec",
  "Description": "This is a spread model or alias service.",
  "ApiVersions": [
   "2022-01-01-preview"
@@ -10,7 +10,7 @@
   {
    "$id": "2",
    "Name": "Thing",
-   "Namespace": "Spread",
+   "Namespace": "SpreadTypeSpec",
    "IsNullable": false,
    "Usage": "Input",
    "Properties": [
@@ -47,7 +47,7 @@
   {
    "$id": "7",
    "Name": "SpreadAliasRequest",
-   "Namespace": "Spread",
+   "Namespace": "SpreadTypeSpec",
    "IsNullable": false,
    "Usage": "Input",
    "Properties": [
@@ -248,13 +248,13 @@
  "Clients": [
   {
    "$id": "35",
-   "Name": "SpreadClient",
+   "Name": "SpreadTypeSpecClient",
    "Description": "This is a spread model or alias service.",
    "Operations": [
     {
      "$id": "36",
      "Name": "spreadModel",
-     "ResourceName": "Spread",
+     "ResourceName": "SpreadTypeSpec",
      "Description": "spread a model as body.",
      "Parameters": [
       {
@@ -405,7 +405,7 @@
     {
      "$id": "51",
      "Name": "spreadAlias",
-     "ResourceName": "Spread",
+     "ResourceName": "SpreadTypeSpec",
      "Description": "spread an alias as body.",
      "Parameters": [
       {
@@ -511,7 +511,7 @@
     {
      "$id": "60",
      "Name": "spreadMultiTargetAlias",
-     "ResourceName": "Spread",
+     "ResourceName": "SpreadTypeSpec",
      "Description": "spread an alias which has multiple target property as body.",
      "Parameters": [
       {
@@ -657,7 +657,7 @@
     {
      "$id": "73",
      "Name": "spreadAliasWithModel",
-     "ResourceName": "Spread",
+     "ResourceName": "SpreadTypeSpec",
      "Description": "spread an alias which contains a complex model property as body.",
      "Parameters": [
       {
@@ -803,7 +803,7 @@
     {
      "$id": "86",
      "Name": "spreadAliasWithSpreadAlias",
-     "ResourceName": "Spread",
+     "ResourceName": "SpreadTypeSpec",
      "Description": "spread an alias with contains another alias property as body.",
      "Parameters": [
       {
@@ -949,7 +949,7 @@
     {
      "$id": "99",
      "Name": "spreadAliasWithOptionalProps",
-     "ResourceName": "Spread",
+     "ResourceName": "SpreadTypeSpec",
      "Description": "spread an alias with contains optional properties as body.",
      "Parameters": [
       {

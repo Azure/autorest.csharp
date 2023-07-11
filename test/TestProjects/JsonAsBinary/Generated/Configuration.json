@@ -1,8 +1,8 @@
 {
-  "OutputFolder": ".",
-  "Namespace": "JsonAsBinary",
-  "LibraryName": "JsonAsBinary",
-  "SharedSourceFolders": [
+  "output-folder": ".",
+  "namespace": "JsonAsBinary",
+  "library-name": "JsonAsBinary",
+  "shared-source-folders": [
     "..\\..\\..\\..\\artifacts\\bin\\AutoRest.CSharp\\Debug\\net6.0\\Generator.Shared",
     "..\\..\\..\\..\\artifacts\\bin\\AutoRest.CSharp\\Debug\\net6.0\\Azure.Core.Shared"
   ],

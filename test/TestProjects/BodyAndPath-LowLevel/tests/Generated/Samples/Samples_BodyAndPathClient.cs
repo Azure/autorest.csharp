@@ -182,7 +182,7 @@ namespace BodyAndPath_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new BodyAndPathClient(credential);
 
-            Response response = client.GetBodyAndPaths();
+            Response response = client.GetBodyAndPaths(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result[0].ToString());
@@ -195,7 +195,7 @@ namespace BodyAndPath_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new BodyAndPathClient(credential);
 
-            Response response = client.GetBodyAndPaths();
+            Response response = client.GetBodyAndPaths(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result[0].ToString());
@@ -208,7 +208,7 @@ namespace BodyAndPath_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new BodyAndPathClient(credential);
 
-            Response response = await client.GetBodyAndPathsAsync();
+            Response response = await client.GetBodyAndPathsAsync(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result[0].ToString());
@@ -221,7 +221,7 @@ namespace BodyAndPath_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new BodyAndPathClient(credential);
 
-            Response response = await client.GetBodyAndPathsAsync();
+            Response response = await client.GetBodyAndPathsAsync(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result[0].ToString());
@@ -234,7 +234,7 @@ namespace BodyAndPath_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new BodyAndPathClient(credential);
 
-            Response response = client.GetItems();
+            Response response = client.GetItems(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result[0].ToString());
@@ -247,7 +247,7 @@ namespace BodyAndPath_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new BodyAndPathClient(credential);
 
-            Response response = client.GetItems();
+            Response response = client.GetItems(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result[0].ToString());
@@ -260,7 +260,7 @@ namespace BodyAndPath_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new BodyAndPathClient(credential);
 
-            Response response = await client.GetItemsAsync();
+            Response response = await client.GetItemsAsync(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result[0].ToString());
@@ -273,7 +273,7 @@ namespace BodyAndPath_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new BodyAndPathClient(credential);
 
-            Response response = await client.GetItemsAsync();
+            Response response = await client.GetItemsAsync(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result[0].ToString());

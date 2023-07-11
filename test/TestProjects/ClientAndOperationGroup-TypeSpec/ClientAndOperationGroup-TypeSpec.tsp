@@ -14,7 +14,7 @@ import "@azure-tools/typespec-client-generator-core";
         operationGroupServiceUrl: string,
     }
 )
-namespace Azure.ClientAndOperationGroupService;
+namespace ClientAndOperationGroup;
 
 using TypeSpec.Http;
 using Azure.ClientGenerator.Core;

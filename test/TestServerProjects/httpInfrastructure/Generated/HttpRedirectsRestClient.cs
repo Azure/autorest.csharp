@@ -54,6 +54,7 @@ namespace httpInfrastructure
         public async Task<ResponseWithHeaders<HttpRedirectsHead300Headers>> Head300Async(CancellationToken cancellationToken = default)
         {
             using var message = CreateHead300Request();
+            RedirectPolicy.SetAllowAutoRedirect(message, true);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
             var headers = new HttpRedirectsHead300Headers(message.Response);
             switch (message.Response.Status)
@@ -71,6 +72,7 @@ namespace httpInfrastructure
         public ResponseWithHeaders<HttpRedirectsHead300Headers> Head300(CancellationToken cancellationToken = default)
         {
             using var message = CreateHead300Request();
+            RedirectPolicy.SetAllowAutoRedirect(message, true);
             _pipeline.Send(message, cancellationToken);
             var headers = new HttpRedirectsHead300Headers(message.Response);
             switch (message.Response.Status)
@@ -101,6 +103,7 @@ namespace httpInfrastructure
         public async Task<ResponseWithHeaders<IReadOnlyList<string>, HttpRedirectsGet300Headers>> Get300Async(CancellationToken cancellationToken = default)
         {
             using var message = CreateGet300Request();
+            RedirectPolicy.SetAllowAutoRedirect(message, true);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
             var headers = new HttpRedirectsGet300Headers(message.Response);
             switch (message.Response.Status)
@@ -129,6 +132,7 @@ namespace httpInfrastructure
         public ResponseWithHeaders<IReadOnlyList<string>, HttpRedirectsGet300Headers> Get300(CancellationToken cancellationToken = default)
         {
             using var message = CreateGet300Request();
+            RedirectPolicy.SetAllowAutoRedirect(message, true);
             _pipeline.Send(message, cancellationToken);
             var headers = new HttpRedirectsGet300Headers(message.Response);
             switch (message.Response.Status)
@@ -170,6 +174,7 @@ namespace httpInfrastructure
         public async Task<ResponseWithHeaders<HttpRedirectsHead301Headers>> Head301Async(CancellationToken cancellationToken = default)
         {
             using var message = CreateHead301Request();
+            RedirectPolicy.SetAllowAutoRedirect(message, true);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
             var headers = new HttpRedirectsHead301Headers(message.Response);
             switch (message.Response.Status)
@@ -187,6 +192,7 @@ namespace httpInfrastructure
         public ResponseWithHeaders<HttpRedirectsHead301Headers> Head301(CancellationToken cancellationToken = default)
         {
             using var message = CreateHead301Request();
+            RedirectPolicy.SetAllowAutoRedirect(message, true);
             _pipeline.Send(message, cancellationToken);
             var headers = new HttpRedirectsHead301Headers(message.Response);
             switch (message.Response.Status)
@@ -217,6 +223,7 @@ namespace httpInfrastructure
         public async Task<ResponseWithHeaders<HttpRedirectsGet301Headers>> Get301Async(CancellationToken cancellationToken = default)
         {
             using var message = CreateGet301Request();
+            RedirectPolicy.SetAllowAutoRedirect(message, true);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
             var headers = new HttpRedirectsGet301Headers(message.Response);
             switch (message.Response.Status)
@@ -234,6 +241,7 @@ namespace httpInfrastructure
         public ResponseWithHeaders<HttpRedirectsGet301Headers> Get301(CancellationToken cancellationToken = default)
         {
             using var message = CreateGet301Request();
+            RedirectPolicy.SetAllowAutoRedirect(message, true);
             _pipeline.Send(message, cancellationToken);
             var headers = new HttpRedirectsGet301Headers(message.Response);
             switch (message.Response.Status)
@@ -268,6 +276,7 @@ namespace httpInfrastructure
         public async Task<ResponseWithHeaders<HttpRedirectsPut301Headers>> Put301Async(CancellationToken cancellationToken = default)
         {
             using var message = CreatePut301Request();
+            RedirectPolicy.SetAllowAutoRedirect(message, true);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
             var headers = new HttpRedirectsPut301Headers(message.Response);
             switch (message.Response.Status)
@@ -284,6 +293,7 @@ namespace httpInfrastructure
         public ResponseWithHeaders<HttpRedirectsPut301Headers> Put301(CancellationToken cancellationToken = default)
         {
             using var message = CreatePut301Request();
+            RedirectPolicy.SetAllowAutoRedirect(message, true);
             _pipeline.Send(message, cancellationToken);
             var headers = new HttpRedirectsPut301Headers(message.Response);
             switch (message.Response.Status)
@@ -313,6 +323,7 @@ namespace httpInfrastructure
         public async Task<ResponseWithHeaders<HttpRedirectsHead302Headers>> Head302Async(CancellationToken cancellationToken = default)
         {
             using var message = CreateHead302Request();
+            RedirectPolicy.SetAllowAutoRedirect(message, true);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
             var headers = new HttpRedirectsHead302Headers(message.Response);
             switch (message.Response.Status)
@@ -330,6 +341,7 @@ namespace httpInfrastructure
         public ResponseWithHeaders<HttpRedirectsHead302Headers> Head302(CancellationToken cancellationToken = default)
         {
             using var message = CreateHead302Request();
+            RedirectPolicy.SetAllowAutoRedirect(message, true);
             _pipeline.Send(message, cancellationToken);
             var headers = new HttpRedirectsHead302Headers(message.Response);
             switch (message.Response.Status)
@@ -360,6 +372,7 @@ namespace httpInfrastructure
         public async Task<ResponseWithHeaders<HttpRedirectsGet302Headers>> Get302Async(CancellationToken cancellationToken = default)
         {
             using var message = CreateGet302Request();
+            RedirectPolicy.SetAllowAutoRedirect(message, true);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
             var headers = new HttpRedirectsGet302Headers(message.Response);
             switch (message.Response.Status)
@@ -377,6 +390,7 @@ namespace httpInfrastructure
         public ResponseWithHeaders<HttpRedirectsGet302Headers> Get302(CancellationToken cancellationToken = default)
         {
             using var message = CreateGet302Request();
+            RedirectPolicy.SetAllowAutoRedirect(message, true);
             _pipeline.Send(message, cancellationToken);
             var headers = new HttpRedirectsGet302Headers(message.Response);
             switch (message.Response.Status)
@@ -411,6 +425,7 @@ namespace httpInfrastructure
         public async Task<ResponseWithHeaders<HttpRedirectsPatch302Headers>> Patch302Async(CancellationToken cancellationToken = default)
         {
             using var message = CreatePatch302Request();
+            RedirectPolicy.SetAllowAutoRedirect(message, true);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
             var headers = new HttpRedirectsPatch302Headers(message.Response);
             switch (message.Response.Status)
@@ -427,6 +442,7 @@ namespace httpInfrastructure
         public ResponseWithHeaders<HttpRedirectsPatch302Headers> Patch302(CancellationToken cancellationToken = default)
         {
             using var message = CreatePatch302Request();
+            RedirectPolicy.SetAllowAutoRedirect(message, true);
             _pipeline.Send(message, cancellationToken);
             var headers = new HttpRedirectsPatch302Headers(message.Response);
             switch (message.Response.Status)
@@ -460,6 +476,7 @@ namespace httpInfrastructure
         public async Task<ResponseWithHeaders<HttpRedirectsPost303Headers>> Post303Async(CancellationToken cancellationToken = default)
         {
             using var message = CreatePost303Request();
+            RedirectPolicy.SetAllowAutoRedirect(message, true);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
             var headers = new HttpRedirectsPost303Headers(message.Response);
             switch (message.Response.Status)
@@ -477,6 +494,7 @@ namespace httpInfrastructure
         public ResponseWithHeaders<HttpRedirectsPost303Headers> Post303(CancellationToken cancellationToken = default)
         {
             using var message = CreatePost303Request();
+            RedirectPolicy.SetAllowAutoRedirect(message, true);
             _pipeline.Send(message, cancellationToken);
             var headers = new HttpRedirectsPost303Headers(message.Response);
             switch (message.Response.Status)
@@ -507,6 +525,7 @@ namespace httpInfrastructure
         public async Task<ResponseWithHeaders<HttpRedirectsHead307Headers>> Head307Async(CancellationToken cancellationToken = default)
         {
             using var message = CreateHead307Request();
+            RedirectPolicy.SetAllowAutoRedirect(message, true);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
             var headers = new HttpRedirectsHead307Headers(message.Response);
             switch (message.Response.Status)
@@ -524,6 +543,7 @@ namespace httpInfrastructure
         public ResponseWithHeaders<HttpRedirectsHead307Headers> Head307(CancellationToken cancellationToken = default)
         {
             using var message = CreateHead307Request();
+            RedirectPolicy.SetAllowAutoRedirect(message, true);
             _pipeline.Send(message, cancellationToken);
             var headers = new HttpRedirectsHead307Headers(message.Response);
             switch (message.Response.Status)
@@ -554,6 +574,7 @@ namespace httpInfrastructure
         public async Task<ResponseWithHeaders<HttpRedirectsGet307Headers>> Get307Async(CancellationToken cancellationToken = default)
         {
             using var message = CreateGet307Request();
+            RedirectPolicy.SetAllowAutoRedirect(message, true);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
             var headers = new HttpRedirectsGet307Headers(message.Response);
             switch (message.Response.Status)
@@ -571,6 +592,7 @@ namespace httpInfrastructure
         public ResponseWithHeaders<HttpRedirectsGet307Headers> Get307(CancellationToken cancellationToken = default)
         {
             using var message = CreateGet307Request();
+            RedirectPolicy.SetAllowAutoRedirect(message, true);
             _pipeline.Send(message, cancellationToken);
             var headers = new HttpRedirectsGet307Headers(message.Response);
             switch (message.Response.Status)
@@ -601,6 +623,7 @@ namespace httpInfrastructure
         public async Task<ResponseWithHeaders<HttpRedirectsOptions307Headers>> Options307Async(CancellationToken cancellationToken = default)
         {
             using var message = CreateOptions307Request();
+            RedirectPolicy.SetAllowAutoRedirect(message, true);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
             var headers = new HttpRedirectsOptions307Headers(message.Response);
             switch (message.Response.Status)
@@ -618,6 +641,7 @@ namespace httpInfrastructure
         public ResponseWithHeaders<HttpRedirectsOptions307Headers> Options307(CancellationToken cancellationToken = default)
         {
             using var message = CreateOptions307Request();
+            RedirectPolicy.SetAllowAutoRedirect(message, true);
             _pipeline.Send(message, cancellationToken);
             var headers = new HttpRedirectsOptions307Headers(message.Response);
             switch (message.Response.Status)
@@ -652,6 +676,7 @@ namespace httpInfrastructure
         public async Task<ResponseWithHeaders<HttpRedirectsPut307Headers>> Put307Async(CancellationToken cancellationToken = default)
         {
             using var message = CreatePut307Request();
+            RedirectPolicy.SetAllowAutoRedirect(message, true);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
             var headers = new HttpRedirectsPut307Headers(message.Response);
             switch (message.Response.Status)
@@ -669,6 +694,7 @@ namespace httpInfrastructure
         public ResponseWithHeaders<HttpRedirectsPut307Headers> Put307(CancellationToken cancellationToken = default)
         {
             using var message = CreatePut307Request();
+            RedirectPolicy.SetAllowAutoRedirect(message, true);
             _pipeline.Send(message, cancellationToken);
             var headers = new HttpRedirectsPut307Headers(message.Response);
             switch (message.Response.Status)
@@ -703,6 +729,7 @@ namespace httpInfrastructure
         public async Task<ResponseWithHeaders<HttpRedirectsPatch307Headers>> Patch307Async(CancellationToken cancellationToken = default)
         {
             using var message = CreatePatch307Request();
+            RedirectPolicy.SetAllowAutoRedirect(message, true);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
             var headers = new HttpRedirectsPatch307Headers(message.Response);
             switch (message.Response.Status)
@@ -720,6 +747,7 @@ namespace httpInfrastructure
         public ResponseWithHeaders<HttpRedirectsPatch307Headers> Patch307(CancellationToken cancellationToken = default)
         {
             using var message = CreatePatch307Request();
+            RedirectPolicy.SetAllowAutoRedirect(message, true);
             _pipeline.Send(message, cancellationToken);
             var headers = new HttpRedirectsPatch307Headers(message.Response);
             switch (message.Response.Status)
@@ -754,6 +782,7 @@ namespace httpInfrastructure
         public async Task<ResponseWithHeaders<HttpRedirectsPost307Headers>> Post307Async(CancellationToken cancellationToken = default)
         {
             using var message = CreatePost307Request();
+            RedirectPolicy.SetAllowAutoRedirect(message, true);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
             var headers = new HttpRedirectsPost307Headers(message.Response);
             switch (message.Response.Status)
@@ -771,6 +800,7 @@ namespace httpInfrastructure
         public ResponseWithHeaders<HttpRedirectsPost307Headers> Post307(CancellationToken cancellationToken = default)
         {
             using var message = CreatePost307Request();
+            RedirectPolicy.SetAllowAutoRedirect(message, true);
             _pipeline.Send(message, cancellationToken);
             var headers = new HttpRedirectsPost307Headers(message.Response);
             switch (message.Response.Status)
@@ -805,6 +835,7 @@ namespace httpInfrastructure
         public async Task<ResponseWithHeaders<HttpRedirectsDelete307Headers>> Delete307Async(CancellationToken cancellationToken = default)
         {
             using var message = CreateDelete307Request();
+            RedirectPolicy.SetAllowAutoRedirect(message, true);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
             var headers = new HttpRedirectsDelete307Headers(message.Response);
             switch (message.Response.Status)
@@ -822,6 +853,7 @@ namespace httpInfrastructure
         public ResponseWithHeaders<HttpRedirectsDelete307Headers> Delete307(CancellationToken cancellationToken = default)
         {
             using var message = CreateDelete307Request();
+            RedirectPolicy.SetAllowAutoRedirect(message, true);
             _pipeline.Send(message, cancellationToken);
             var headers = new HttpRedirectsDelete307Headers(message.Response);
             switch (message.Response.Status)

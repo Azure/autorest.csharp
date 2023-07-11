@@ -1,8 +1,8 @@
 {
-  "OutputFolder": ".",
-  "Namespace": "SpecialWords",
-  "LibraryName": "SpecialWords",
-  "SharedSourceFolders": [
+  "output-folder": ".",
+  "namespace": "SpecialWords",
+  "library-name": "SpecialWords",
+  "shared-source-folders": [
     "../../../../../artifacts/bin/AutoRest.CSharp/Debug/net6.0/Generator.Shared",
     "../../../../../artifacts/bin/AutoRest.CSharp/Debug/net6.0/Azure.Core.Shared"
   ],

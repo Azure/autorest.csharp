@@ -1,8 +1,8 @@
 {
-  "OutputFolder": ".",
-  "Namespace": "url_multi_collectionFormat_LowLevel",
-  "LibraryName": "AutoRestUrlMutliCollectionFormatTestService",
-  "SharedSourceFolders": [
+  "output-folder": ".",
+  "namespace": "url_multi_collectionFormat_LowLevel",
+  "library-name": "AutoRestUrlMutliCollectionFormatTestService",
+  "shared-source-folders": [
     "..\\..\\..\\..\\..\\artifacts\\bin\\AutoRest.CSharp\\Debug\\net6.0\\Generator.Shared",
     "..\\..\\..\\..\\..\\artifacts\\bin\\AutoRest.CSharp\\Debug\\net6.0\\Azure.Core.Shared"
   ],

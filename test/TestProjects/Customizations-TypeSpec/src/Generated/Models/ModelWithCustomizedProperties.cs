@@ -11,7 +11,7 @@ using System.Linq;
 using System.Text.Json;
 using Azure.Core;
 
-namespace CustomizationsInCadl.Models
+namespace CustomizationsInTsp.Models
 {
     /// <summary> Model with customized properties. </summary>
     public partial class ModelWithCustomizedProperties

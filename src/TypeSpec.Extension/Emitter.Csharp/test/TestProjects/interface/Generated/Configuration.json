@@ -1,8 +1,8 @@
 {
-  "OutputFolder": ".",
-  "Namespace": "TypeSpec.TestServer.MultiInterfaceClient",
-  "LibraryName": "TypeSpec.TestServer.MultiInterfaceClient",
-  "SharedSourceFolders": [
+  "output-folder": ".",
+  "namespace": "TypeSpec.TestServer.MultiInterfaceClient",
+  "library-name": "TypeSpec.TestServer.MultiInterfaceClient",
+  "shared-source-folders": [
     "../../../../../../../node_modules/@autorest/csharp/Generator.Shared",
     "../../../../../../../node_modules/@autorest/csharp/Azure.Core.Shared"
   ],

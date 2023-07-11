@@ -26,7 +26,7 @@ namespace SubClients_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new RootClient("<cachedParameter>", credential);
 
-            Response response = client.GetCachedParameter();
+            Response response = client.GetCachedParameter(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());
@@ -39,7 +39,7 @@ namespace SubClients_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new RootClient("<cachedParameter>", credential);
 
-            Response response = client.GetCachedParameter();
+            Response response = client.GetCachedParameter(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());
@@ -52,7 +52,7 @@ namespace SubClients_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new RootClient("<cachedParameter>", credential);
 
-            Response response = await client.GetCachedParameterAsync();
+            Response response = await client.GetCachedParameterAsync(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());
@@ -65,7 +65,7 @@ namespace SubClients_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new RootClient("<cachedParameter>", credential);
 
-            Response response = await client.GetCachedParameterAsync();
+            Response response = await client.GetCachedParameterAsync(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());
