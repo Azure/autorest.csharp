@@ -1,8 +1,8 @@
 {
-  "OutputFolder": ".",
-  "Namespace": "security_key_LowLevel",
-  "LibraryName": "AutorestSecurityKey",
-  "SharedSourceFolders": [
+  "output-folder": ".",
+  "namespace": "security_key_LowLevel",
+  "library-name": "AutorestSecurityKey",
+  "shared-source-folders": [
     "..\\..\\..\\..\\..\\artifacts\\bin\\AutoRest.CSharp\\Debug\\net6.0\\Generator.Shared",
     "..\\..\\..\\..\\..\\artifacts\\bin\\AutoRest.CSharp\\Debug\\net6.0\\Azure.Core.Shared"
   ],

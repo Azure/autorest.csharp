@@ -1,8 +1,8 @@
 {
-  "OutputFolder": ".",
-  "Namespace": "LroOperation",
-  "LibraryName": "LroOperation",
-  "SharedSourceFolders": [
+  "output-folder": ".",
+  "namespace": "LroOperation",
+  "library-name": "LroOperation",
+  "shared-source-folders": [
     "../../../../../../../node_modules/@autorest/csharp/Generator.Shared",
     "../../../../../../../node_modules/@autorest/csharp/Azure.Core.Shared"
   ],
