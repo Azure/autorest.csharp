@@ -276,7 +276,9 @@ namespace AutoRest.CSharp.Output.Builders
                     BuildSerialization(property.Schema, objectProperty.Declaration.Type, false),
                     property.IsRequired,
                     property.IsReadOnly,
-                    false);
+                    false,
+                    customSerializationMethodName: objectProperty.SerializationMapping?.SerializationValueHook,
+                    customDeserializationMethodName: objectProperty.SerializationMapping?.DeserializationValueHook);
             }
 
             foreach ((string name, PropertyBag innerBag) in propertyBag.Bag)

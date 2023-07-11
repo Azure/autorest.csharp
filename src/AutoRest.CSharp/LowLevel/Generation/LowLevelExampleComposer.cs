@@ -319,11 +319,10 @@ namespace AutoRest.CSharp.Generation.Writers
 
             var arguments = signature.Parameters
                 //skip last param if its optional and cancellation token or request context
-                .Where((p, i) => i != signature.Parameters.Count - 1 || !p.Type.Equals(typeof(RequestContext)))
+                .Where((p, i) => !(i == signature.Parameters.Count - 1 && p.IsOptionalInSignature && p.Type.Equals(typeof(RequestContext))))
                 .Where(p => allParameters || !p.IsOptionalInSignature)
                 .Select(p => p.RequestLocation == RequestLocation.Body ? RequestContentExpression.Create(data!) : MockParameterValue(p))
                 .ToList();
-
 
             var responseType = restClientMethod.ResponseType;
             var pageItemType = restClientMethod.PageItemType;
@@ -503,7 +502,7 @@ namespace AutoRest.CSharp.Generation.Writers
         }
 
         private MethodBodyStatement ComposeConvenienceHandleNormalResponseCode(ValueExpression client, string methodName, IReadOnlyList<ValueExpression> arguments, bool async)
-            => Var("result", client.Invoke(methodName, arguments), out _);
+            => Var("result", client.Invoke(methodName, arguments, async), out _);
 
         private MethodBodyStatement ComposeParsingNormalResponseCodes(ResponseExpression response, CSharpType responseType, bool allProperties)
         {

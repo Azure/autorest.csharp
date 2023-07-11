@@ -108,8 +108,8 @@ namespace AutoRest.CSharp.Output.Models
 
         private static IEnumerable<InputParameter> GetSortedParameters(InputOperation operation, IEnumerable<InputParameter> inputParameters)
         {
-            var requiredPathParameters = new Dictionary<string, InputParameter>();
-            var optionalPathParameters = new Dictionary<string, InputParameter>();
+            var keepCurrentDefaultValue = Configuration.MethodsToKeepClientDefaultValue.Contains(operation.Name);
+            var uriOrPathParameters = new Dictionary<string, InputParameter>();
             var requiredRequestParameters = new List<InputParameter>();
             var optionalRequestParameters = new List<InputParameter>();
 
@@ -126,13 +126,13 @@ namespace AutoRest.CSharp.Output.Models
                     case { Location: RequestLocation.Header, IsContentType: true } when contentTypeRequestParameter == null:
                         contentTypeRequestParameter = operationParameter;
                         break;
-                    case { Location: RequestLocation.Uri or RequestLocation.Path, DefaultValue: null }:
-                        requiredPathParameters.Add(operationParameter.NameInRequest, operationParameter);
-                        break;
-                    case { Location: RequestLocation.Uri or RequestLocation.Path, DefaultValue: not null }:
-                        optionalPathParameters.Add(operationParameter.NameInRequest, operationParameter);
+                    case { Location: RequestLocation.Uri or RequestLocation.Path }:
+                        uriOrPathParameters.Add(operationParameter.NameInRequest, operationParameter);
                         break;
                     case { IsRequired: true, DefaultValue: null }:
+                        requiredRequestParameters.Add(operationParameter);
+                        break;
+                    case { IsRequired: true } when !keepCurrentDefaultValue:
                         requiredRequestParameters.Add(operationParameter);
                         break;
                     default:
@@ -143,8 +143,8 @@ namespace AutoRest.CSharp.Output.Models
 
             var orderedParameters = new List<InputParameter>();
 
-            SortUriOrPathParameters(operation.Uri, requiredPathParameters, orderedParameters);
-            SortUriOrPathParameters(operation.Path, requiredPathParameters, orderedParameters);
+            SortUriOrPathParameters(operation.Uri, uriOrPathParameters, orderedParameters);
+            SortUriOrPathParameters(operation.Path, uriOrPathParameters, orderedParameters);
             orderedParameters.AddRange(requiredRequestParameters);
             if (bodyParameter is not null)
             {
@@ -154,8 +154,6 @@ namespace AutoRest.CSharp.Output.Models
                     orderedParameters.Add(contentTypeRequestParameter);
                 }
             }
-            SortUriOrPathParameters(operation.Uri, optionalPathParameters, orderedParameters);
-            SortUriOrPathParameters(operation.Path, optionalPathParameters, orderedParameters);
             orderedParameters.AddRange(optionalRequestParameters);
 
             return orderedParameters;

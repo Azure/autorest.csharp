@@ -110,22 +110,25 @@ namespace AutoRest.CSharp.Output.Models
             var protocolMethodParameters = ProtocolMethodParameters;
             var convenienceMethods = Array.Empty<Method>();
 
+            var hasAmbiguityBetweenProtocolAndConvenience = ProtocolMethodParameters.Where(p => !p.IsOptionalInSignature).SequenceEqual(ConvenienceMethodParameters.Where(p => !p.IsOptionalInSignature));
+            var makeAllProtocolMethodsRequired = !Configuration.KeepNonOverloadableProtocolSignature &&
+                                                 Configuration.UseOverloadsBetweenProtocolAndConvenience &&
+                                                 !_existingProtocolMethodHasOptionalParameters &&
+                                                 hasAmbiguityBetweenProtocolAndConvenience;
+
+            if (makeAllProtocolMethodsRequired)
+            {
+                protocolMethodParameters = protocolMethodParameters
+                    .Select(p => p with {DefaultValue = null}).ToList();
+            }
+
             if (Operation.GenerateConvenienceMethod && ShouldConvenienceMethodGenerated())
             {
-                var hasAmbiguityBetweenProtocolAndConvenience = ProtocolMethodParameters.Where(p => !p.IsOptionalInSignature).SequenceEqual(ConvenienceMethodParameters.Where(p => !p.IsOptionalInSignature));
-                if (hasAmbiguityBetweenProtocolAndConvenience)
+                if (hasAmbiguityBetweenProtocolAndConvenience && !makeAllProtocolMethodsRequired)
                 {
-                    if (!_existingProtocolMethodHasOptionalParameters && Configuration.UseOverloadsBetweenProtocolAndConvenience)
-                    {
-                        protocolMethodParameters = protocolMethodParameters
-                            .Select(p => p with {DefaultValue = null}).ToList();
-                    }
-                    else
-                    {
-                        convenienceMethodName = ProtocolMethodName.IsLastWordSingular()
-                            ? $"{ProtocolMethodName}Value"
-                            : $"{ProtocolMethodName.LastWordToSingular()}Values";
-                    }
+                    convenienceMethodName = ProtocolMethodName.IsLastWordSingular()
+                        ? $"{ProtocolMethodName}Value"
+                        : $"{ProtocolMethodName.LastWordToSingular()}Values";
                 }
 
                 convenienceMethods = new[]{ BuildConvenienceMethod(convenienceMethodName, true), BuildConvenienceMethod(convenienceMethodName, false) };

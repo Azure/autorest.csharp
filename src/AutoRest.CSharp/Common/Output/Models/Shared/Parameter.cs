@@ -26,15 +26,20 @@ namespace AutoRest.CSharp.Output.Models.Shared
             return new Parameter(name, property.Description, propertyType, null, validation, null);
         }
 
-        public static Parameter FromInputParameter(in InputParameter operationParameter, CSharpType type, TypeFactory typeFactory)
+        public static Parameter FromInputParameter(in InputParameter operationParameter, CSharpType type, bool keepClientDefaultValue, TypeFactory typeFactory)
         {
             var name = operationParameter.Name.ToVariableName();
-            var description = CreateDescription(operationParameter, type, (operationParameter.Type as InputEnumType)?.AllowedValues.Select(c => c.GetValueString()));
             var requestLocation = operationParameter.Location;
             var isConstant = operationParameter.Kind == InputOperationParameterKind.Constant;
             var isRequired = operationParameter.IsRequired;
 
-            CreateDefaultValue(ref type, typeFactory, operationParameter.DefaultValue, isConstant, isRequired, out Constant? defaultValue, out FormattableString? initializer);
+            if (!keepClientDefaultValue && (operationParameter.Kind == InputOperationParameterKind.Constant || operationParameter.IsApiVersion || operationParameter.IsContentType || operationParameter.IsEndpoint))
+            {
+                keepClientDefaultValue = true;
+            }
+
+            CreateDefaultValue(ref type, typeFactory, operationParameter.DefaultValue, isConstant, isRequired, keepClientDefaultValue, out Constant? clientDefaultValue, out Constant? defaultValue, out FormattableString? initializer);
+            var description = CreateDescription(operationParameter, type, (operationParameter.Type as InputEnumType)?.AllowedValues.Select(c => c.GetValueString()), keepClientDefaultValue ? null : clientDefaultValue);
 
             var validation = isRequired && initializer == null
                 ? GetValidation(type, requestLocation, operationParameter.SkipUrlEncoding)
@@ -54,9 +59,10 @@ namespace AutoRest.CSharp.Output.Models.Shared
                 RequestLocation: requestLocation);
         }
 
-        public static void CreateDefaultValue(ref CSharpType type, TypeFactory typeFactory, InputConstant? inputDefaultValue, bool isConstant, bool isRequired, out Constant? defaultValue, out FormattableString? initializer)
+        public static void CreateDefaultValue(ref CSharpType type, TypeFactory typeFactory, InputConstant? inputDefaultValue, bool isConstant, bool isRequired, bool keepClientDefaultValue, out Constant? clientDefaultValue, out Constant? defaultValue, out FormattableString? initializer)
         {
-            defaultValue = inputDefaultValue != null ? BuilderHelpers.ParseConstant(inputDefaultValue.Value, typeFactory.CreateType(inputDefaultValue.Type)) : null;
+            clientDefaultValue = inputDefaultValue != null ? BuilderHelpers.ParseConstant(inputDefaultValue.Value, typeFactory.CreateType(inputDefaultValue.Type)) : null;
+            defaultValue = keepClientDefaultValue ? clientDefaultValue : null;
 
             initializer = null;
 
@@ -74,11 +80,17 @@ namespace AutoRest.CSharp.Output.Models.Shared
             }
         }
 
-        public static string CreateDescription(InputParameter operationParameter, CSharpType type, IEnumerable<string>? values)
+        public static string CreateDescription(InputParameter operationParameter, CSharpType type, IEnumerable<string>? values, Constant? defaultValue)
         {
             string description = string.IsNullOrWhiteSpace(operationParameter.Description)
                 ? $"The {type.ToStringForDocs()} to use."
                 : BuilderHelpers.EscapeXmlDocDescription(operationParameter.Description);
+
+            if (defaultValue != null)
+            {
+                var defaultValueString = defaultValue?.Value is string s ? $"\"{s}\"" : $"{defaultValue?.Value}";
+                description = $"{description}{(description.EndsWith(".") ? "" : ".")} The default value is {defaultValueString}";
+            }
 
             if (!type.IsFrameworkType || values == null)
             {

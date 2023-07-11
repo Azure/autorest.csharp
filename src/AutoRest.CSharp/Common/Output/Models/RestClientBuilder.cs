@@ -23,7 +23,7 @@ namespace AutoRest.CSharp.Output.Models
 
         public static Parameter BuildConstructorParameter(InputParameter inputParameter, TypeFactory typeFactory)
         {
-            var parameter = Parameter.FromInputParameter(inputParameter, typeFactory.CreateType(inputParameter.Type), typeFactory);
+            var parameter = Parameter.FromInputParameter(inputParameter, typeFactory.CreateType(inputParameter.Type), false, typeFactory);
             if (!inputParameter.IsEndpoint)
             {
                 return parameter;

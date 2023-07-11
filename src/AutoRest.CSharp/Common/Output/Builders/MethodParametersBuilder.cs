@@ -13,6 +13,7 @@ using AutoRest.CSharp.Common.Output.Models.Types;
 using AutoRest.CSharp.Common.Output.Models.ValueExpressions;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Generation.Writers;
+using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Output.Builders;
 using AutoRest.CSharp.Output.Models.Serialization;
 using AutoRest.CSharp.Output.Models.Shared;
@@ -42,6 +43,7 @@ namespace AutoRest.CSharp.Output.Models
         private readonly List<Parameter> _convenienceParameters;
         private readonly Dictionary<Parameter, ValueExpression> _arguments;
         private readonly Dictionary<Parameter, MethodBodyStatement> _conversions;
+        private readonly bool _keepClientDefaultValue;
 
         public MethodParametersBuilder(InputOperation operation, TypeFactory typeFactory)
         {
@@ -53,6 +55,7 @@ namespace AutoRest.CSharp.Output.Models
             _convenienceParameters = new List<Parameter>();
             _arguments = new Dictionary<Parameter, ValueExpression>();
             _conversions = new Dictionary<Parameter, MethodBodyStatement>();
+            _keepClientDefaultValue = Configuration.MethodsToKeepClientDefaultValue.Contains(operation.Name);
         }
 
         public ClientMethodParameters BuildParameters(IEnumerable<InputParameter> sortedParameters)
@@ -107,7 +110,7 @@ namespace AutoRest.CSharp.Output.Models
             var parameters = new Dictionary<InputParameter, Parameter>();
             foreach (var inputParameter in sortedParameters)
             {
-                var parameter = Parameter.FromInputParameter(inputParameter, _typeFactory.CreateType(inputParameter.Type), _typeFactory);
+                var parameter = Parameter.FromInputParameter(inputParameter, _typeFactory.CreateType(inputParameter.Type), _keepClientDefaultValue, _typeFactory);
                 // Grouped and flattened parameters shouldn't be added to methods
                 if (inputParameter.Kind == InputOperationParameterKind.Method)
                 {
@@ -201,7 +204,7 @@ namespace AutoRest.CSharp.Output.Models
         private void AddReferenceAndParameter(InputParameter inputParameter, Type parameterType)
         {
             var type = new CSharpType(parameterType, inputParameter.Type.IsNullable);
-            var protocolMethodParameter = Parameter.FromInputParameter(inputParameter, type, _typeFactory);
+            var protocolMethodParameter = Parameter.FromInputParameter(inputParameter, type, _keepClientDefaultValue, _typeFactory);
 
             AddReference(inputParameter.NameInRequest, inputParameter, protocolMethodParameter, SerializationBuilder.GetSerializationFormat(inputParameter.Type));
             AddParameter(inputParameter, protocolMethodParameter);
@@ -211,7 +214,7 @@ namespace AutoRest.CSharp.Output.Models
         {
             var protocolMethodParameter = inputParameter.Location == RequestLocation.Body
                 ? inputParameter.IsRequired ? KnownParameters.RequestContent : KnownParameters.RequestContentNullable
-                : Parameter.FromInputParameter(inputParameter, ChangeTypeForProtocolMethod(inputParameter.Type), _typeFactory);
+                : Parameter.FromInputParameter(inputParameter, ChangeTypeForProtocolMethod(inputParameter.Type), _keepClientDefaultValue, _typeFactory);
 
             AddReference(nameInRequest, inputParameter, protocolMethodParameter, SerializationBuilder.GetSerializationFormat(inputParameter.Type));
             AddParameter(inputParameter, protocolMethodParameter);
@@ -251,7 +254,7 @@ namespace AutoRest.CSharp.Output.Models
                     ? new CSharpType(typeof(object))
                     : _typeFactory.CreateType(inputParameter.Type);
 
-                var convenienceMethodParameter = Parameter.FromInputParameter(inputParameter, convenienceMethodParameterType, _typeFactory);
+                var convenienceMethodParameter = Parameter.FromInputParameter(inputParameter, convenienceMethodParameterType, _keepClientDefaultValue, _typeFactory);
                 AddCreateMessageParameter(protocolMethodParameter);
                 _protocolParameters.Add(protocolMethodParameter);
                 _convenienceParameters.Add(convenienceMethodParameter);
@@ -328,7 +331,7 @@ namespace AutoRest.CSharp.Output.Models
         private Parameter CreateSpreadParameter(InputParameter inputParameter, InputModelProperty property)
         {
             var parameterType = TypeFactory.GetInputType(_typeFactory.CreateType(property.Type));
-            Parameter.CreateDefaultValue(ref parameterType, _typeFactory, property.ConstantValue, false, property.IsRequired, out var defaultValue, out var initializer);
+            Parameter.CreateDefaultValue(ref parameterType, _typeFactory, property.ConstantValue, false, property.IsRequired, _keepClientDefaultValue, out _, out var defaultValue, out var initializer);
             var validation = property.IsRequired && initializer == null
                 ? Parameter.GetValidation(parameterType, inputParameter.Location, false)
                 : Validation.None;
@@ -373,7 +376,7 @@ namespace AutoRest.CSharp.Output.Models
         private void AddContentTypeRequestParameter(InputParameter inputParameter, IEnumerable<string> requestMediaTypes)
         {
             var name = inputParameter.Name.ToVariableName();
-            var description = Parameter.CreateDescription(inputParameter, typeof(ContentType), requestMediaTypes);
+            var description = Parameter.CreateDescription(inputParameter, typeof(ContentType), requestMediaTypes, null);
             var parameter = new Parameter(name, description, typeof(ContentType), null, Validation.None, null, RequestLocation: RequestLocation.Header);
 
             AddCreateMessageParameter(parameter);

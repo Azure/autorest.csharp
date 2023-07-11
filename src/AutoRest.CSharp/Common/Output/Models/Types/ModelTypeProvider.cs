@@ -161,7 +161,9 @@ namespace AutoRest.CSharp.Output.Models.Types
                         valueSerialization,
                         property.IsRequired,
                         ShouldSkipSerialization(property),
-                        false));
+                        false,
+                        customSerializationMethodName: property.SerializationMapping?.SerializationValueHook,
+                        customDeserializationMethodName: property.SerializationMapping?.DeserializationValueHook));
                 }
             }
             return result;

@@ -70,6 +70,14 @@ namespace AutoRest.CSharp.Common.Output.Models
         public static ValueExpression InvokeFileOpenWrite(ValueExpression expression)
             => new InvokeStaticMethodExpression(typeof(System.IO.File), nameof(System.IO.File.OpenWrite), new[]{expression});
 
+        // Expected signature: MethodName(Utf8JsonWriter writer);
+        public static MethodBodyStatement InvokeCustomSerializationMethod(string methodName, Utf8JsonWriterExpression utf8JsonWriter)
+            => new InvokeInstanceMethodStatement(null, methodName, utf8JsonWriter);
+
+        // Expected signature: MethodName(JsonProperty property, ref Optional<T> optional)
+        public static MethodBodyStatement InvokeCustomDeserializationMethod(string methodName, JsonPropertyExpression jsonProperty, CodeWriterDeclaration variable)
+            => new InvokeStaticMethodStatement(null, methodName, new ValueExpression[]{jsonProperty, new FormattableStringToExpression($"ref {variable}")});
+
         public static AssignValueStatement Assign<T>(T variable, T expression) where T : ValueExpression => new(variable, expression);
 
         public static MethodBodyStatement AssignOrReturn<T>(T? variable, T expression) where T : ValueExpression

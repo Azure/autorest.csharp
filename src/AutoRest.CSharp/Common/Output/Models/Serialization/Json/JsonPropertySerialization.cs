@@ -8,10 +8,12 @@ namespace AutoRest.CSharp.Output.Models.Serialization.Json
 {
     internal class JsonPropertySerialization : PropertySerialization
     {
-        public JsonPropertySerialization(string parameterName, ValueExpression value, string serializedName, CSharpType valueType, CSharpType? serializedType, JsonSerialization valueSerialization, bool isRequired, bool shouldSkipSerialization, bool shouldSkipDeserialization)
+        public JsonPropertySerialization(string parameterName, ValueExpression value, string serializedName, CSharpType valueType, CSharpType? serializedType, JsonSerialization valueSerialization, bool isRequired, bool shouldSkipSerialization, bool shouldSkipDeserialization, string? customSerializationMethodName = null, string? customDeserializationMethodName = null)
             : base(parameterName, value, serializedName, valueType, serializedType, isRequired, shouldSkipSerialization, shouldSkipDeserialization)
         {
             ValueSerialization = valueSerialization;
+            CustomSerializationMethodName = customSerializationMethodName;
+            CustomDeserializationMethodName = customDeserializationMethodName;
         }
 
         public JsonPropertySerialization(string serializedName, JsonPropertySerialization[] propertySerializations)
@@ -25,5 +27,9 @@ namespace AutoRest.CSharp.Output.Models.Serialization.Json
         /// This is not null when the property is flattened in generated client SDK `x-ms-client-flatten: true`
         /// </summary>
         public JsonPropertySerialization[]? PropertySerializations { get; }
+
+        public string? CustomSerializationMethodName { get; }
+
+        public string? CustomDeserializationMethodName { get; }
     }
 }

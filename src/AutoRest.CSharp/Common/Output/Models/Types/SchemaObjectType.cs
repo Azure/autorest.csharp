@@ -436,7 +436,7 @@ namespace AutoRest.CSharp.Output.Models.Types
                 }
             }
 
-            if (AdditionalPropertiesProperty is ObjectTypeProperty additionalPropertiesProperty)
+            if (AdditionalPropertiesProperty is { } additionalPropertiesProperty)
             {
                 yield return additionalPropertiesProperty;
             }
