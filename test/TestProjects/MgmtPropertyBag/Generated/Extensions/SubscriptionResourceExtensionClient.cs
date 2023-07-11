@@ -58,10 +58,10 @@ namespace MgmtPropertyBag
         /// </list>
         /// </summary>
         /// <param name="filter"> The filter to apply on the operation. </param>
-        /// <param name="top"> The int? to use. </param>
+        /// <param name="top"> The Integer to use. The default value is 10. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> An async collection of <see cref="FooResource" /> that may take multiple service requests to iterate over. </returns>
-        public virtual AsyncPageable<FooResource> GetFoosAsync(string filter = null, int? top = 10, CancellationToken cancellationToken = default)
+        public virtual AsyncPageable<FooResource> GetFoosAsync(string filter = null, int? top = null, CancellationToken cancellationToken = default)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => FooRestClient.CreateListWithSubscriptionRequest(Id.SubscriptionId, filter, top);
             return PageableHelpers.CreateAsyncPageable(FirstPageRequest, null, e => new FooResource(Client, FooData.DeserializeFooData(e)), FooClientDiagnostics, Pipeline, "SubscriptionResourceExtensionClient.GetFoos", "", null, cancellationToken);
@@ -81,10 +81,10 @@ namespace MgmtPropertyBag
         /// </list>
         /// </summary>
         /// <param name="filter"> The filter to apply on the operation. </param>
-        /// <param name="top"> The int? to use. </param>
+        /// <param name="top"> The Integer to use. The default value is 10. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> A collection of <see cref="FooResource" /> that may take multiple service requests to iterate over. </returns>
-        public virtual Pageable<FooResource> GetFoos(string filter = null, int? top = 10, CancellationToken cancellationToken = default)
+        public virtual Pageable<FooResource> GetFoos(string filter = null, int? top = null, CancellationToken cancellationToken = default)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => FooRestClient.CreateListWithSubscriptionRequest(Id.SubscriptionId, filter, top);
             return PageableHelpers.CreatePageable(FirstPageRequest, null, e => new FooResource(Client, FooData.DeserializeFooData(e)), FooClientDiagnostics, Pipeline, "SubscriptionResourceExtensionClient.GetFoos", "", null, cancellationToken);
@@ -104,7 +104,7 @@ namespace MgmtPropertyBag
         /// </list>
         /// </summary>
         /// <param name="ifMatch"> The entity state (Etag) version. A value of "*" can be used for If-Match to unconditionally apply the operation. </param>
-        /// <param name="top"> The int? to use. </param>
+        /// <param name="top"> The Integer to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> An async collection of <see cref="BarResource" /> that may take multiple service requests to iterate over. </returns>
         public virtual AsyncPageable<BarResource> GetBarsAsync(ETag? ifMatch = null, int? top = null, CancellationToken cancellationToken = default)
@@ -128,7 +128,7 @@ namespace MgmtPropertyBag
         /// </list>
         /// </summary>
         /// <param name="ifMatch"> The entity state (Etag) version. A value of "*" can be used for If-Match to unconditionally apply the operation. </param>
-        /// <param name="top"> The int? to use. </param>
+        /// <param name="top"> The Integer to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <returns> A collection of <see cref="BarResource" /> that may take multiple service requests to iterate over. </returns>
         public virtual Pageable<BarResource> GetBars(ETag? ifMatch = null, int? top = null, CancellationToken cancellationToken = default)

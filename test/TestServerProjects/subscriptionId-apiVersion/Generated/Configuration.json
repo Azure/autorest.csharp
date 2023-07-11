@@ -1,8 +1,8 @@
 {
-  "OutputFolder": ".",
-  "Namespace": "subscriptionId_apiVersion",
-  "LibraryName": "MicrosoftAzureTestUrl",
-  "SharedSourceFolders": [
+  "output-folder": ".",
+  "namespace": "subscriptionId_apiVersion",
+  "library-name": "MicrosoftAzureTestUrl",
+  "shared-source-folders": [
     "..\\..\\..\\..\\artifacts\\bin\\AutoRest.CSharp\\Debug\\net6.0\\Generator.Shared",
     "..\\..\\..\\..\\artifacts\\bin\\AutoRest.CSharp\\Debug\\net6.0\\Azure.Core.Shared"
   ],

@@ -1,6 +1,6 @@
 {
  "$id": "1",
- "Name": "Azure.ClientAndOperationGroupService",
+ "Name": "ClientAndOperationGroup",
  "ApiVersions": [
   "2015-06-18"
  ],
@@ -9,13 +9,13 @@
  "Clients": [
   {
    "$id": "2",
-   "Name": "ClientAndOperationGroupServiceClient",
+   "Name": "ClientAndOperationGroupClient",
    "Description": "",
    "Operations": [
     {
      "$id": "3",
      "Name": "zero",
-     "ResourceName": "ClientAndOperationGroupService",
+     "ResourceName": "ClientAndOperationGroup",
      "Parameters": [
       {
        "$id": "4",
@@ -329,7 +329,7 @@
     "$id": "35"
    },
    "Creatable": false,
-   "Parent": "ClientAndOperationGroupServiceClient"
+   "Parent": "ClientAndOperationGroupClient"
   },
   {
    "$id": "36",
@@ -469,7 +469,7 @@
     "$id": "49"
    },
    "Creatable": false,
-   "Parent": "ClientAndOperationGroupServiceClient"
+   "Parent": "ClientAndOperationGroupClient"
   }
  ]
 }

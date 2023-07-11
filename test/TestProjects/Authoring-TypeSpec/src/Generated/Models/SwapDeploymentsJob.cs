@@ -10,7 +10,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Azure.Core;
 
-namespace Azure.Language.Authoring.Models
+namespace AuthoringTypeSpec.Models
 {
     /// <summary> The SwapDeploymentsJob. </summary>
     public partial class SwapDeploymentsJob

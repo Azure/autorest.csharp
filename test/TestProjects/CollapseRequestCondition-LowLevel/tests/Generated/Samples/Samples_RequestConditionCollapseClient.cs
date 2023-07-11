@@ -6,9 +6,13 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Text.Json;
 using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
+using Azure.Identity;
 using NUnit.Framework;
 
 namespace CollapseRequestCondition_LowLevel.Samples
@@ -24,7 +28,7 @@ namespace CollapseRequestCondition_LowLevel.Samples
 
             var data = "<String>";
 
-            Response response = client.CollapsePut(RequestContent.Create(data));
+            Response response = client.CollapsePut(RequestContent.Create(data), null, new RequestContext());
             Console.WriteLine(response.Status);
         }
 
@@ -37,7 +41,7 @@ namespace CollapseRequestCondition_LowLevel.Samples
 
             var data = "<String>";
 
-            Response response = client.CollapsePut(RequestContent.Create(data), null);
+            Response response = client.CollapsePut(RequestContent.Create(data), null, new RequestContext());
             Console.WriteLine(response.Status);
         }
 
@@ -50,7 +54,7 @@ namespace CollapseRequestCondition_LowLevel.Samples
 
             var data = "<String>";
 
-            Response response = await client.CollapsePutAsync(RequestContent.Create(data)).ConfigureAwait(false);
+            Response response = await client.CollapsePutAsync(RequestContent.Create(data), null, new RequestContext());
             Console.WriteLine(response.Status);
         }
 
@@ -63,7 +67,7 @@ namespace CollapseRequestCondition_LowLevel.Samples
 
             var data = "<String>";
 
-            Response response = await client.CollapsePutAsync(RequestContent.Create(data), null);
+            Response response = await client.CollapsePutAsync(RequestContent.Create(data), null, new RequestContext());
             Console.WriteLine(response.Status);
         }
 
@@ -96,7 +100,7 @@ namespace CollapseRequestCondition_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new RequestConditionCollapseClient(credential);
 
-            Response response = await client.CollapseGetAsync().ConfigureAwait(false);
+            Response response = await client.CollapseGetAsync();
             Console.WriteLine(response.Status);
         }
 
@@ -140,7 +144,7 @@ namespace CollapseRequestCondition_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new RequestConditionCollapseClient(credential);
 
-            Response response = await client.MissIfNoneMatchGetAsync().ConfigureAwait(false);
+            Response response = await client.MissIfNoneMatchGetAsync();
             Console.WriteLine(response.Status);
         }
 
@@ -184,7 +188,7 @@ namespace CollapseRequestCondition_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new RequestConditionCollapseClient(credential);
 
-            Response response = await client.MissIfMatchGetAsync().ConfigureAwait(false);
+            Response response = await client.MissIfMatchGetAsync();
             Console.WriteLine(response.Status);
         }
 

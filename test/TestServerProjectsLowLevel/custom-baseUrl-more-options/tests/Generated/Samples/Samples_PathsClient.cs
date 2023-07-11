@@ -19,7 +19,7 @@ namespace custom_baseUrl_more_options_LowLevel.Samples
         public void Example_GetEmpty()
         {
             var credential = new AzureKeyCredential("<key>");
-            var client = new PathsClient("<subscriptionId>", credential);
+            var client = new PathsClient("<dnsSuffix>", "<subscriptionId>", credential);
 
             Response response = client.GetEmpty("<vault>", "<secret>", "<keyName>");
             Console.WriteLine(response.Status);
@@ -30,7 +30,7 @@ namespace custom_baseUrl_more_options_LowLevel.Samples
         public void Example_GetEmpty_AllParameters()
         {
             var credential = new AzureKeyCredential("<key>");
-            var client = new PathsClient("<subscriptionId>", credential);
+            var client = new PathsClient("<dnsSuffix>", "<subscriptionId>", credential);
 
             Response response = client.GetEmpty("<vault>", "<secret>", "<keyName>", "<keyVersion>");
             Console.WriteLine(response.Status);
@@ -41,7 +41,7 @@ namespace custom_baseUrl_more_options_LowLevel.Samples
         public async Task Example_GetEmpty_Async()
         {
             var credential = new AzureKeyCredential("<key>");
-            var client = new PathsClient("<subscriptionId>", credential);
+            var client = new PathsClient("<dnsSuffix>", "<subscriptionId>", credential);
 
             Response response = await client.GetEmptyAsync("<vault>", "<secret>", "<keyName>").ConfigureAwait(false);
             Console.WriteLine(response.Status);
@@ -52,7 +52,7 @@ namespace custom_baseUrl_more_options_LowLevel.Samples
         public async Task Example_GetEmpty_AllParameters_Async()
         {
             var credential = new AzureKeyCredential("<key>");
-            var client = new PathsClient("<subscriptionId>", credential);
+            var client = new PathsClient("<dnsSuffix>", "<subscriptionId>", credential);
 
             Response response = await client.GetEmptyAsync("<vault>", "<secret>", "<keyName>", "<keyVersion>").ConfigureAwait(false);
             Console.WriteLine(response.Status);

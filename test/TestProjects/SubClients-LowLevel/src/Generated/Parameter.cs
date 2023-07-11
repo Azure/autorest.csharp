@@ -63,7 +63,7 @@ namespace SubClients_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/Parameter.xml" path="doc/members/member[@name='GetSubParameterAsync(string,RequestContext)']/*" />
-        public virtual async Task<Response> GetSubParameterAsync(string subParameter, RequestContext context = null)
+        public virtual async Task<Response> GetSubParameterAsync(string subParameter, RequestContext context)
         {
             Argument.AssertNotNullOrEmpty(subParameter, nameof(subParameter));
 
@@ -98,7 +98,7 @@ namespace SubClients_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/Parameter.xml" path="doc/members/member[@name='GetSubParameter(string,RequestContext)']/*" />
-        public virtual Response GetSubParameter(string subParameter, RequestContext context = null)
+        public virtual Response GetSubParameter(string subParameter, RequestContext context)
         {
             Argument.AssertNotNullOrEmpty(subParameter, nameof(subParameter));
 

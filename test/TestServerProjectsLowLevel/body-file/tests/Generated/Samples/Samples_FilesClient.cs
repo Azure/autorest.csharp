@@ -5,9 +5,14 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
 using System.IO;
+using System.Text.Json;
 using System.Threading.Tasks;
 using Azure;
+using Azure.Core;
+using Azure.Identity;
 using NUnit.Framework;
 
 namespace body_file_LowLevel.Samples
@@ -21,11 +26,13 @@ namespace body_file_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new FilesClient(credential);
 
-            Response response = client.GetFile();
+            Response response = client.GetFile(new RequestContext());
             if (response.ContentStream != null)
             {
-                using Stream outFileStream = File.OpenWrite("<filePath>");
-                response.ContentStream.CopyTo(outFileStream);
+                using (Stream outFileStream = File.OpenWrite("<filePath>"))
+                {
+                    response.ContentStream.CopyTo(outFileStream);
+                }
             }
         }
 
@@ -36,11 +43,13 @@ namespace body_file_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new FilesClient(credential);
 
-            Response response = client.GetFile();
+            Response response = client.GetFile(new RequestContext());
             if (response.ContentStream != null)
             {
-                using Stream outFileStream = File.OpenWrite("<filePath>");
-                response.ContentStream.CopyTo(outFileStream);
+                using (Stream outFileStream = File.OpenWrite("<filePath>"))
+                {
+                    response.ContentStream.CopyTo(outFileStream);
+                }
             }
         }
 
@@ -51,11 +60,13 @@ namespace body_file_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new FilesClient(credential);
 
-            Response response = await client.GetFileAsync().ConfigureAwait(false);
+            Response response = await client.GetFileAsync(new RequestContext());
             if (response.ContentStream != null)
             {
-                using Stream outFileStream = File.OpenWrite("<filePath>");
-                response.ContentStream.CopyTo(outFileStream);
+                using (Stream outFileStream = File.OpenWrite("<filePath>"))
+                {
+                    response.ContentStream.CopyTo(outFileStream);
+                }
             }
         }
 
@@ -66,11 +77,13 @@ namespace body_file_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new FilesClient(credential);
 
-            Response response = await client.GetFileAsync().ConfigureAwait(false);
+            Response response = await client.GetFileAsync(new RequestContext());
             if (response.ContentStream != null)
             {
-                using Stream outFileStream = File.OpenWrite("<filePath>");
-                response.ContentStream.CopyTo(outFileStream);
+                using (Stream outFileStream = File.OpenWrite("<filePath>"))
+                {
+                    response.ContentStream.CopyTo(outFileStream);
+                }
             }
         }
 
@@ -81,11 +94,13 @@ namespace body_file_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new FilesClient(credential);
 
-            Response response = client.GetFileLarge();
+            Response response = client.GetFileLarge(new RequestContext());
             if (response.ContentStream != null)
             {
-                using Stream outFileStream = File.OpenWrite("<filePath>");
-                response.ContentStream.CopyTo(outFileStream);
+                using (Stream outFileStream = File.OpenWrite("<filePath>"))
+                {
+                    response.ContentStream.CopyTo(outFileStream);
+                }
             }
         }
 
@@ -96,11 +111,13 @@ namespace body_file_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new FilesClient(credential);
 
-            Response response = client.GetFileLarge();
+            Response response = client.GetFileLarge(new RequestContext());
             if (response.ContentStream != null)
             {
-                using Stream outFileStream = File.OpenWrite("<filePath>");
-                response.ContentStream.CopyTo(outFileStream);
+                using (Stream outFileStream = File.OpenWrite("<filePath>"))
+                {
+                    response.ContentStream.CopyTo(outFileStream);
+                }
             }
         }
 
@@ -111,11 +128,13 @@ namespace body_file_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new FilesClient(credential);
 
-            Response response = await client.GetFileLargeAsync().ConfigureAwait(false);
+            Response response = await client.GetFileLargeAsync(new RequestContext());
             if (response.ContentStream != null)
             {
-                using Stream outFileStream = File.OpenWrite("<filePath>");
-                response.ContentStream.CopyTo(outFileStream);
+                using (Stream outFileStream = File.OpenWrite("<filePath>"))
+                {
+                    response.ContentStream.CopyTo(outFileStream);
+                }
             }
         }
 
@@ -126,11 +145,13 @@ namespace body_file_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new FilesClient(credential);
 
-            Response response = await client.GetFileLargeAsync().ConfigureAwait(false);
+            Response response = await client.GetFileLargeAsync(new RequestContext());
             if (response.ContentStream != null)
             {
-                using Stream outFileStream = File.OpenWrite("<filePath>");
-                response.ContentStream.CopyTo(outFileStream);
+                using (Stream outFileStream = File.OpenWrite("<filePath>"))
+                {
+                    response.ContentStream.CopyTo(outFileStream);
+                }
             }
         }
 
@@ -141,11 +162,13 @@ namespace body_file_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new FilesClient(credential);
 
-            Response response = client.GetEmptyFile();
+            Response response = client.GetEmptyFile(new RequestContext());
             if (response.ContentStream != null)
             {
-                using Stream outFileStream = File.OpenWrite("<filePath>");
-                response.ContentStream.CopyTo(outFileStream);
+                using (Stream outFileStream = File.OpenWrite("<filePath>"))
+                {
+                    response.ContentStream.CopyTo(outFileStream);
+                }
             }
         }
 
@@ -156,11 +179,13 @@ namespace body_file_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new FilesClient(credential);
 
-            Response response = client.GetEmptyFile();
+            Response response = client.GetEmptyFile(new RequestContext());
             if (response.ContentStream != null)
             {
-                using Stream outFileStream = File.OpenWrite("<filePath>");
-                response.ContentStream.CopyTo(outFileStream);
+                using (Stream outFileStream = File.OpenWrite("<filePath>"))
+                {
+                    response.ContentStream.CopyTo(outFileStream);
+                }
             }
         }
 
@@ -171,11 +196,13 @@ namespace body_file_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new FilesClient(credential);
 
-            Response response = await client.GetEmptyFileAsync().ConfigureAwait(false);
+            Response response = await client.GetEmptyFileAsync(new RequestContext());
             if (response.ContentStream != null)
             {
-                using Stream outFileStream = File.OpenWrite("<filePath>");
-                response.ContentStream.CopyTo(outFileStream);
+                using (Stream outFileStream = File.OpenWrite("<filePath>"))
+                {
+                    response.ContentStream.CopyTo(outFileStream);
+                }
             }
         }
 
@@ -186,11 +213,13 @@ namespace body_file_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new FilesClient(credential);
 
-            Response response = await client.GetEmptyFileAsync().ConfigureAwait(false);
+            Response response = await client.GetEmptyFileAsync(new RequestContext());
             if (response.ContentStream != null)
             {
-                using Stream outFileStream = File.OpenWrite("<filePath>");
-                response.ContentStream.CopyTo(outFileStream);
+                using (Stream outFileStream = File.OpenWrite("<filePath>"))
+                {
+                    response.ContentStream.CopyTo(outFileStream);
+                }
             }
         }
     }

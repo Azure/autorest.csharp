@@ -9,7 +9,7 @@ using System;
 using System.Text.Json;
 using Azure;
 
-namespace ApiVersionInCadl.Models
+namespace ApiVersionInTsp.Models
 {
     public partial class DetectionResult
     {

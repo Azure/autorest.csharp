@@ -6,9 +6,13 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
+using System.IO;
 using System.Text.Json;
 using System.Threading.Tasks;
 using Azure;
+using Azure.Core;
+using Azure.Identity;
 using NUnit.Framework;
 
 namespace SingleTopLevelClientWithOperations_LowLevel.Samples
@@ -22,7 +26,7 @@ namespace SingleTopLevelClientWithOperations_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new TopLevelClientWithOperationClient(credential);
 
-            Response response = client.Operation();
+            Response response = client.Operation(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());
@@ -35,7 +39,7 @@ namespace SingleTopLevelClientWithOperations_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new TopLevelClientWithOperationClient(credential);
 
-            Response response = client.Operation();
+            Response response = client.Operation(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());
@@ -48,7 +52,7 @@ namespace SingleTopLevelClientWithOperations_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new TopLevelClientWithOperationClient(credential);
 
-            Response response = await client.OperationAsync().ConfigureAwait(false);
+            Response response = await client.OperationAsync(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());
@@ -61,7 +65,7 @@ namespace SingleTopLevelClientWithOperations_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new TopLevelClientWithOperationClient(credential);
 
-            Response response = await client.OperationAsync().ConfigureAwait(false);
+            Response response = await client.OperationAsync(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());
@@ -74,7 +78,7 @@ namespace SingleTopLevelClientWithOperations_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new TopLevelClientWithOperationClient(credential);
 
-            foreach (var item in client.GetAll("<filter>"))
+            foreach (var item in client.GetAll("<filter>", new RequestContext()))
             {
                 JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
                 Console.WriteLine(result.ToString());
@@ -88,7 +92,7 @@ namespace SingleTopLevelClientWithOperations_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new TopLevelClientWithOperationClient(credential);
 
-            foreach (var item in client.GetAll("<filter>"))
+            foreach (var item in client.GetAll("<filter>", new RequestContext()))
             {
                 JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
                 Console.WriteLine(result.ToString());
@@ -102,7 +106,7 @@ namespace SingleTopLevelClientWithOperations_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new TopLevelClientWithOperationClient(credential);
 
-            await foreach (var item in client.GetAllAsync("<filter>"))
+            await foreach (var item in client.GetAllAsync("<filter>", new RequestContext()))
             {
                 JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
                 Console.WriteLine(result.ToString());
@@ -116,7 +120,7 @@ namespace SingleTopLevelClientWithOperations_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new TopLevelClientWithOperationClient(credential);
 
-            await foreach (var item in client.GetAllAsync("<filter>"))
+            await foreach (var item in client.GetAllAsync("<filter>", new RequestContext()))
             {
                 JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
                 Console.WriteLine(result.ToString());

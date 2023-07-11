@@ -1,8 +1,8 @@
 {
-  "OutputFolder": ".",
-  "Namespace": "MgmtExactMatchInheritance",
-  "LibraryName": "MgmtExactMatchInheritance",
-  "SharedSourceFolders": [
+  "output-folder": ".",
+  "namespace": "MgmtExactMatchInheritance",
+  "library-name": "MgmtExactMatchInheritance",
+  "shared-source-folders": [
     "..\\..\\..\\..\\artifacts\\bin\\AutoRest.CSharp\\Debug\\net6.0\\Generator.Shared",
     "..\\..\\..\\..\\artifacts\\bin\\AutoRest.CSharp\\Debug\\net6.0\\Azure.Core.Shared"
   ],
@@ -14,7 +14,7 @@
     "ExactMatchModel11",
     "ExactMatchModel1Data"
   ],
-  "additional-intrinsic-types-to-treat-empty-string-as-null": [
+  "intrinsic-types-to-treat-empty-string-as-null": [
     "Uri",
     "Guid",
     "ResourceIdentifier",

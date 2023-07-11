@@ -6,9 +6,13 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Text.Json;
 using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
+using Azure.Identity;
 using NUnit.Framework;
 
 namespace Accessibility_LowLevel_NoAuth.Samples
@@ -23,7 +27,7 @@ namespace Accessibility_LowLevel_NoAuth.Samples
 
             var data = "<String>";
 
-            Response response = client.Operation(RequestContent.Create(data));
+            Response response = client.Operation(RequestContent.Create(data), new RequestContext());
             Console.WriteLine(response.Status);
         }
 
@@ -35,7 +39,7 @@ namespace Accessibility_LowLevel_NoAuth.Samples
 
             var data = "<String>";
 
-            Response response = client.Operation(RequestContent.Create(data));
+            Response response = client.Operation(RequestContent.Create(data), new RequestContext());
             Console.WriteLine(response.Status);
         }
 
@@ -47,7 +51,7 @@ namespace Accessibility_LowLevel_NoAuth.Samples
 
             var data = "<String>";
 
-            Response response = await client.OperationAsync(RequestContent.Create(data)).ConfigureAwait(false);
+            Response response = await client.OperationAsync(RequestContent.Create(data), new RequestContext());
             Console.WriteLine(response.Status);
         }
 
@@ -59,7 +63,7 @@ namespace Accessibility_LowLevel_NoAuth.Samples
 
             var data = "<String>";
 
-            Response response = await client.OperationAsync(RequestContent.Create(data)).ConfigureAwait(false);
+            Response response = await client.OperationAsync(RequestContent.Create(data), new RequestContext());
             Console.WriteLine(response.Status);
         }
     }

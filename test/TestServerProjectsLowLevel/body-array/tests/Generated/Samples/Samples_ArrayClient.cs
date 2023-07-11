@@ -26,7 +26,7 @@ namespace body_array_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new ArrayClient(credential);
 
-            Response response = client.GetNull();
+            Response response = client.GetNull(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result[0].ToString());
@@ -39,7 +39,7 @@ namespace body_array_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new ArrayClient(credential);
 
-            Response response = client.GetNull();
+            Response response = client.GetNull(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result[0].ToString());
@@ -52,7 +52,7 @@ namespace body_array_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new ArrayClient(credential);
 
-            Response response = await client.GetNullAsync().ConfigureAwait(false);
+            Response response = await client.GetNullAsync(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result[0].ToString());
@@ -65,7 +65,7 @@ namespace body_array_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new ArrayClient(credential);
 
-            Response response = await client.GetNullAsync().ConfigureAwait(false);
+            Response response = await client.GetNullAsync(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result[0].ToString());
@@ -78,7 +78,7 @@ namespace body_array_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new ArrayClient(credential);
 
-            Response response = client.GetInvalid();
+            Response response = client.GetInvalid(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result[0].ToString());
@@ -91,7 +91,7 @@ namespace body_array_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new ArrayClient(credential);
 
-            Response response = client.GetInvalid();
+            Response response = client.GetInvalid(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result[0].ToString());
@@ -104,7 +104,7 @@ namespace body_array_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new ArrayClient(credential);
 
-            Response response = await client.GetInvalidAsync().ConfigureAwait(false);
+            Response response = await client.GetInvalidAsync(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result[0].ToString());
@@ -117,7 +117,7 @@ namespace body_array_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new ArrayClient(credential);
 
-            Response response = await client.GetInvalidAsync().ConfigureAwait(false);
+            Response response = await client.GetInvalidAsync(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result[0].ToString());
@@ -130,7 +130,7 @@ namespace body_array_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new ArrayClient(credential);
 
-            Response response = client.GetEmpty();
+            Response response = client.GetEmpty(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result[0].ToString());
@@ -143,7 +143,7 @@ namespace body_array_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new ArrayClient(credential);
 
-            Response response = client.GetEmpty();
+            Response response = client.GetEmpty(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result[0].ToString());
@@ -156,7 +156,7 @@ namespace body_array_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new ArrayClient(credential);
 
-            Response response = await client.GetEmptyAsync().ConfigureAwait(false);
+            Response response = await client.GetEmptyAsync(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result[0].ToString());
@@ -169,7 +169,7 @@ namespace body_array_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new ArrayClient(credential);
 
-            Response response = await client.GetEmptyAsync().ConfigureAwait(false);
+            Response response = await client.GetEmptyAsync(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result[0].ToString());
@@ -216,7 +216,7 @@ namespace body_array_LowLevel.Samples
     "<String>"
 };
 
-            Response response = await client.PutEmptyAsync(RequestContent.Create(data)).ConfigureAwait(false);
+            Response response = await client.PutEmptyAsync(RequestContent.Create(data));
             Console.WriteLine(response.Status);
         }
 
@@ -231,7 +231,7 @@ namespace body_array_LowLevel.Samples
     "<String>"
 };
 
-            Response response = await client.PutEmptyAsync(RequestContent.Create(data)).ConfigureAwait(false);
+            Response response = await client.PutEmptyAsync(RequestContent.Create(data));
             Console.WriteLine(response.Status);
         }
 
@@ -242,7 +242,7 @@ namespace body_array_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new ArrayClient(credential);
 
-            Response response = client.GetBooleanTfft();
+            Response response = client.GetBooleanTfft(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result[0].ToString());
@@ -255,7 +255,7 @@ namespace body_array_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new ArrayClient(credential);
 
-            Response response = client.GetBooleanTfft();
+            Response response = client.GetBooleanTfft(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result[0].ToString());
@@ -268,7 +268,7 @@ namespace body_array_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new ArrayClient(credential);
 
-            Response response = await client.GetBooleanTfftAsync().ConfigureAwait(false);
+            Response response = await client.GetBooleanTfftAsync(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result[0].ToString());
@@ -281,7 +281,7 @@ namespace body_array_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new ArrayClient(credential);
 
-            Response response = await client.GetBooleanTfftAsync().ConfigureAwait(false);
+            Response response = await client.GetBooleanTfftAsync(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result[0].ToString());
@@ -328,7 +328,7 @@ namespace body_array_LowLevel.Samples
     true
 };
 
-            Response response = await client.PutBooleanTfftAsync(RequestContent.Create(data)).ConfigureAwait(false);
+            Response response = await client.PutBooleanTfftAsync(RequestContent.Create(data));
             Console.WriteLine(response.Status);
         }
 
@@ -343,7 +343,7 @@ namespace body_array_LowLevel.Samples
     true
 };
 
-            Response response = await client.PutBooleanTfftAsync(RequestContent.Create(data)).ConfigureAwait(false);
+            Response response = await client.PutBooleanTfftAsync(RequestContent.Create(data));
             Console.WriteLine(response.Status);
         }
 
@@ -354,7 +354,7 @@ namespace body_array_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new ArrayClient(credential);
 
-            Response response = client.GetBooleanInvalidNull();
+            Response response = client.GetBooleanInvalidNull(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result[0].ToString());
@@ -367,7 +367,7 @@ namespace body_array_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new ArrayClient(credential);
 
-            Response response = client.GetBooleanInvalidNull();
+            Response response = client.GetBooleanInvalidNull(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result[0].ToString());
@@ -380,7 +380,7 @@ namespace body_array_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new ArrayClient(credential);
 
-            Response response = await client.GetBooleanInvalidNullAsync().ConfigureAwait(false);
+            Response response = await client.GetBooleanInvalidNullAsync(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result[0].ToString());
@@ -393,7 +393,7 @@ namespace body_array_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new ArrayClient(credential);
 
-            Response response = await client.GetBooleanInvalidNullAsync().ConfigureAwait(false);
+            Response response = await client.GetBooleanInvalidNullAsync(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result[0].ToString());
@@ -406,7 +406,7 @@ namespace body_array_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new ArrayClient(credential);
 
-            Response response = client.GetBooleanInvalidString();
+            Response response = client.GetBooleanInvalidString(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result[0].ToString());
@@ -419,7 +419,7 @@ namespace body_array_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new ArrayClient(credential);
 
-            Response response = client.GetBooleanInvalidString();
+            Response response = client.GetBooleanInvalidString(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result[0].ToString());
@@ -432,7 +432,7 @@ namespace body_array_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new ArrayClient(credential);
 
-            Response response = await client.GetBooleanInvalidStringAsync().ConfigureAwait(false);
+            Response response = await client.GetBooleanInvalidStringAsync(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result[0].ToString());
@@ -445,7 +445,7 @@ namespace body_array_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new ArrayClient(credential);
 
-            Response response = await client.GetBooleanInvalidStringAsync().ConfigureAwait(false);
+            Response response = await client.GetBooleanInvalidStringAsync(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result[0].ToString());
@@ -458,7 +458,7 @@ namespace body_array_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new ArrayClient(credential);
 
-            Response response = client.GetIntegerValid();
+            Response response = client.GetIntegerValid(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result[0].ToString());
@@ -471,7 +471,7 @@ namespace body_array_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new ArrayClient(credential);
 
-            Response response = client.GetIntegerValid();
+            Response response = client.GetIntegerValid(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result[0].ToString());
@@ -484,7 +484,7 @@ namespace body_array_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new ArrayClient(credential);
 
-            Response response = await client.GetIntegerValidAsync().ConfigureAwait(false);
+            Response response = await client.GetIntegerValidAsync(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result[0].ToString());
@@ -497,7 +497,7 @@ namespace body_array_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new ArrayClient(credential);
 
-            Response response = await client.GetIntegerValidAsync().ConfigureAwait(false);
+            Response response = await client.GetIntegerValidAsync(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result[0].ToString());
@@ -544,7 +544,7 @@ namespace body_array_LowLevel.Samples
     1234
 };
 
-            Response response = await client.PutIntegerValidAsync(RequestContent.Create(data)).ConfigureAwait(false);
+            Response response = await client.PutIntegerValidAsync(RequestContent.Create(data));
             Console.WriteLine(response.Status);
         }
 
@@ -559,7 +559,7 @@ namespace body_array_LowLevel.Samples
     1234
 };
 
-            Response response = await client.PutIntegerValidAsync(RequestContent.Create(data)).ConfigureAwait(false);
+            Response response = await client.PutIntegerValidAsync(RequestContent.Create(data));
             Console.WriteLine(response.Status);
         }
 
@@ -570,7 +570,7 @@ namespace body_array_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new ArrayClient(credential);
 
-            Response response = client.GetIntInvalidNull();
+            Response response = client.GetIntInvalidNull(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result[0].ToString());
@@ -583,7 +583,7 @@ namespace body_array_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new ArrayClient(credential);
 
-            Response response = client.GetIntInvalidNull();
+            Response response = client.GetIntInvalidNull(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result[0].ToString());
@@ -596,7 +596,7 @@ namespace body_array_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new ArrayClient(credential);
 
-            Response response = await client.GetIntInvalidNullAsync().ConfigureAwait(false);
+            Response response = await client.GetIntInvalidNullAsync(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result[0].ToString());
@@ -609,7 +609,7 @@ namespace body_array_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new ArrayClient(credential);
 
-            Response response = await client.GetIntInvalidNullAsync().ConfigureAwait(false);
+            Response response = await client.GetIntInvalidNullAsync(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result[0].ToString());
@@ -622,7 +622,7 @@ namespace body_array_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new ArrayClient(credential);
 
-            Response response = client.GetIntInvalidString();
+            Response response = client.GetIntInvalidString(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result[0].ToString());
@@ -635,7 +635,7 @@ namespace body_array_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new ArrayClient(credential);
 
-            Response response = client.GetIntInvalidString();
+            Response response = client.GetIntInvalidString(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result[0].ToString());
@@ -648,7 +648,7 @@ namespace body_array_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new ArrayClient(credential);
 
-            Response response = await client.GetIntInvalidStringAsync().ConfigureAwait(false);
+            Response response = await client.GetIntInvalidStringAsync(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result[0].ToString());
@@ -661,7 +661,7 @@ namespace body_array_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new ArrayClient(credential);
 
-            Response response = await client.GetIntInvalidStringAsync().ConfigureAwait(false);
+            Response response = await client.GetIntInvalidStringAsync(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result[0].ToString());
@@ -674,7 +674,7 @@ namespace body_array_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new ArrayClient(credential);
 
-            Response response = client.GetLongValid();
+            Response response = client.GetLongValid(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result[0].ToString());
@@ -687,7 +687,7 @@ namespace body_array_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new ArrayClient(credential);
 
-            Response response = client.GetLongValid();
+            Response response = client.GetLongValid(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result[0].ToString());
@@ -700,7 +700,7 @@ namespace body_array_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new ArrayClient(credential);
 
-            Response response = await client.GetLongValidAsync().ConfigureAwait(false);
+            Response response = await client.GetLongValidAsync(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result[0].ToString());
@@ -713,7 +713,7 @@ namespace body_array_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new ArrayClient(credential);
 
-            Response response = await client.GetLongValidAsync().ConfigureAwait(false);
+            Response response = await client.GetLongValidAsync(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result[0].ToString());
@@ -760,7 +760,7 @@ namespace body_array_LowLevel.Samples
     1234L
 };
 
-            Response response = await client.PutLongValidAsync(RequestContent.Create(data)).ConfigureAwait(false);
+            Response response = await client.PutLongValidAsync(RequestContent.Create(data));
             Console.WriteLine(response.Status);
         }
 
@@ -775,7 +775,7 @@ namespace body_array_LowLevel.Samples
     1234L
 };
 
-            Response response = await client.PutLongValidAsync(RequestContent.Create(data)).ConfigureAwait(false);
+            Response response = await client.PutLongValidAsync(RequestContent.Create(data));
             Console.WriteLine(response.Status);
         }
 
@@ -786,7 +786,7 @@ namespace body_array_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new ArrayClient(credential);
 
-            Response response = client.GetLongInvalidNull();
+            Response response = client.GetLongInvalidNull(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result[0].ToString());
@@ -799,7 +799,7 @@ namespace body_array_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new ArrayClient(credential);
 
-            Response response = client.GetLongInvalidNull();
+            Response response = client.GetLongInvalidNull(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result[0].ToString());
@@ -812,7 +812,7 @@ namespace body_array_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new ArrayClient(credential);
 
-            Response response = await client.GetLongInvalidNullAsync().ConfigureAwait(false);
+            Response response = await client.GetLongInvalidNullAsync(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result[0].ToString());
@@ -825,7 +825,7 @@ namespace body_array_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new ArrayClient(credential);
 
-            Response response = await client.GetLongInvalidNullAsync().ConfigureAwait(false);
+            Response response = await client.GetLongInvalidNullAsync(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result[0].ToString());
@@ -838,7 +838,7 @@ namespace body_array_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new ArrayClient(credential);
 
-            Response response = client.GetLongInvalidString();
+            Response response = client.GetLongInvalidString(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result[0].ToString());
@@ -851,7 +851,7 @@ namespace body_array_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new ArrayClient(credential);
 
-            Response response = client.GetLongInvalidString();
+            Response response = client.GetLongInvalidString(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result[0].ToString());
@@ -864,7 +864,7 @@ namespace body_array_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new ArrayClient(credential);
 
-            Response response = await client.GetLongInvalidStringAsync().ConfigureAwait(false);
+            Response response = await client.GetLongInvalidStringAsync(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result[0].ToString());
@@ -877,7 +877,7 @@ namespace body_array_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new ArrayClient(credential);
 
-            Response response = await client.GetLongInvalidStringAsync().ConfigureAwait(false);
+            Response response = await client.GetLongInvalidStringAsync(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result[0].ToString());
@@ -890,7 +890,7 @@ namespace body_array_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new ArrayClient(credential);
 
-            Response response = client.GetFloatValid();
+            Response response = client.GetFloatValid(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result[0].ToString());
@@ -903,7 +903,7 @@ namespace body_array_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new ArrayClient(credential);
 
-            Response response = client.GetFloatValid();
+            Response response = client.GetFloatValid(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result[0].ToString());
@@ -916,7 +916,7 @@ namespace body_array_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new ArrayClient(credential);
 
-            Response response = await client.GetFloatValidAsync().ConfigureAwait(false);
+            Response response = await client.GetFloatValidAsync(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result[0].ToString());
@@ -929,7 +929,7 @@ namespace body_array_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new ArrayClient(credential);
 
-            Response response = await client.GetFloatValidAsync().ConfigureAwait(false);
+            Response response = await client.GetFloatValidAsync(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result[0].ToString());
@@ -943,7 +943,7 @@ namespace body_array_LowLevel.Samples
             var client = new ArrayClient(credential);
 
             var data = new[] {
-    3.14f
+    123.45f
 };
 
             Response response = client.PutFloatValid(RequestContent.Create(data));
@@ -958,7 +958,7 @@ namespace body_array_LowLevel.Samples
             var client = new ArrayClient(credential);
 
             var data = new[] {
-    3.14f
+    123.45f
 };
 
             Response response = client.PutFloatValid(RequestContent.Create(data));
@@ -973,10 +973,10 @@ namespace body_array_LowLevel.Samples
             var client = new ArrayClient(credential);
 
             var data = new[] {
-    3.14f
+    123.45f
 };
 
-            Response response = await client.PutFloatValidAsync(RequestContent.Create(data)).ConfigureAwait(false);
+            Response response = await client.PutFloatValidAsync(RequestContent.Create(data));
             Console.WriteLine(response.Status);
         }
 
@@ -988,10 +988,10 @@ namespace body_array_LowLevel.Samples
             var client = new ArrayClient(credential);
 
             var data = new[] {
-    3.14f
+    123.45f
 };
 
-            Response response = await client.PutFloatValidAsync(RequestContent.Create(data)).ConfigureAwait(false);
+            Response response = await client.PutFloatValidAsync(RequestContent.Create(data));
             Console.WriteLine(response.Status);
         }
 
@@ -1002,7 +1002,7 @@ namespace body_array_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new ArrayClient(credential);
 
-            Response response = client.GetFloatInvalidNull();
+            Response response = client.GetFloatInvalidNull(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result[0].ToString());
@@ -1015,7 +1015,7 @@ namespace body_array_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new ArrayClient(credential);
 
-            Response response = client.GetFloatInvalidNull();
+            Response response = client.GetFloatInvalidNull(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result[0].ToString());
@@ -1028,7 +1028,7 @@ namespace body_array_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new ArrayClient(credential);
 
-            Response response = await client.GetFloatInvalidNullAsync().ConfigureAwait(false);
+            Response response = await client.GetFloatInvalidNullAsync(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result[0].ToString());
@@ -1041,7 +1041,7 @@ namespace body_array_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new ArrayClient(credential);
 
-            Response response = await client.GetFloatInvalidNullAsync().ConfigureAwait(false);
+            Response response = await client.GetFloatInvalidNullAsync(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result[0].ToString());
@@ -1054,7 +1054,7 @@ namespace body_array_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new ArrayClient(credential);
 
-            Response response = client.GetFloatInvalidString();
+            Response response = client.GetFloatInvalidString(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result[0].ToString());
@@ -1067,7 +1067,7 @@ namespace body_array_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new ArrayClient(credential);
 
-            Response response = client.GetFloatInvalidString();
+            Response response = client.GetFloatInvalidString(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result[0].ToString());
@@ -1080,7 +1080,7 @@ namespace body_array_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new ArrayClient(credential);
 
-            Response response = await client.GetFloatInvalidStringAsync().ConfigureAwait(false);
+            Response response = await client.GetFloatInvalidStringAsync(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result[0].ToString());
@@ -1093,7 +1093,7 @@ namespace body_array_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new ArrayClient(credential);
 
-            Response response = await client.GetFloatInvalidStringAsync().ConfigureAwait(false);
+            Response response = await client.GetFloatInvalidStringAsync(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result[0].ToString());
@@ -1106,7 +1106,7 @@ namespace body_array_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new ArrayClient(credential);
 
-            Response response = client.GetDoubleValid();
+            Response response = client.GetDoubleValid(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result[0].ToString());
@@ -1119,7 +1119,7 @@ namespace body_array_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new ArrayClient(credential);
 
-            Response response = client.GetDoubleValid();
+            Response response = client.GetDoubleValid(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result[0].ToString());
@@ -1132,7 +1132,7 @@ namespace body_array_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new ArrayClient(credential);
 
-            Response response = await client.GetDoubleValidAsync().ConfigureAwait(false);
+            Response response = await client.GetDoubleValidAsync(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result[0].ToString());
@@ -1145,7 +1145,7 @@ namespace body_array_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new ArrayClient(credential);
 
-            Response response = await client.GetDoubleValidAsync().ConfigureAwait(false);
+            Response response = await client.GetDoubleValidAsync(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result[0].ToString());
@@ -1159,7 +1159,7 @@ namespace body_array_LowLevel.Samples
             var client = new ArrayClient(credential);
 
             var data = new[] {
-    3.14d
+    123.45d
 };
 
             Response response = client.PutDoubleValid(RequestContent.Create(data));
@@ -1174,7 +1174,7 @@ namespace body_array_LowLevel.Samples
             var client = new ArrayClient(credential);
 
             var data = new[] {
-    3.14d
+    123.45d
 };
 
             Response response = client.PutDoubleValid(RequestContent.Create(data));
@@ -1189,10 +1189,10 @@ namespace body_array_LowLevel.Samples
             var client = new ArrayClient(credential);
 
             var data = new[] {
-    3.14d
+    123.45d
 };
 
-            Response response = await client.PutDoubleValidAsync(RequestContent.Create(data)).ConfigureAwait(false);
+            Response response = await client.PutDoubleValidAsync(RequestContent.Create(data));
             Console.WriteLine(response.Status);
         }
 
@@ -1204,10 +1204,10 @@ namespace body_array_LowLevel.Samples
             var client = new ArrayClient(credential);
 
             var data = new[] {
-    3.14d
+    123.45d
 };
 
-            Response response = await client.PutDoubleValidAsync(RequestContent.Create(data)).ConfigureAwait(false);
+            Response response = await client.PutDoubleValidAsync(RequestContent.Create(data));
             Console.WriteLine(response.Status);
         }
 
@@ -1218,7 +1218,7 @@ namespace body_array_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new ArrayClient(credential);
 
-            Response response = client.GetDoubleInvalidNull();
+            Response response = client.GetDoubleInvalidNull(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result[0].ToString());
@@ -1231,7 +1231,7 @@ namespace body_array_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new ArrayClient(credential);
 
-            Response response = client.GetDoubleInvalidNull();
+            Response response = client.GetDoubleInvalidNull(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result[0].ToString());
@@ -1244,7 +1244,7 @@ namespace body_array_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new ArrayClient(credential);
 
-            Response response = await client.GetDoubleInvalidNullAsync().ConfigureAwait(false);
+            Response response = await client.GetDoubleInvalidNullAsync(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result[0].ToString());
@@ -1257,7 +1257,7 @@ namespace body_array_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new ArrayClient(credential);
 
-            Response response = await client.GetDoubleInvalidNullAsync().ConfigureAwait(false);
+            Response response = await client.GetDoubleInvalidNullAsync(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result[0].ToString());
@@ -1270,7 +1270,7 @@ namespace body_array_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new ArrayClient(credential);
 
-            Response response = client.GetDoubleInvalidString();
+            Response response = client.GetDoubleInvalidString(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result[0].ToString());
@@ -1283,7 +1283,7 @@ namespace body_array_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new ArrayClient(credential);
 
-            Response response = client.GetDoubleInvalidString();
+            Response response = client.GetDoubleInvalidString(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result[0].ToString());
@@ -1296,7 +1296,7 @@ namespace body_array_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new ArrayClient(credential);
 
-            Response response = await client.GetDoubleInvalidStringAsync().ConfigureAwait(false);
+            Response response = await client.GetDoubleInvalidStringAsync(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result[0].ToString());
@@ -1309,7 +1309,7 @@ namespace body_array_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new ArrayClient(credential);
 
-            Response response = await client.GetDoubleInvalidStringAsync().ConfigureAwait(false);
+            Response response = await client.GetDoubleInvalidStringAsync(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result[0].ToString());
@@ -1322,7 +1322,7 @@ namespace body_array_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new ArrayClient(credential);
 
-            Response response = client.GetStringValid();
+            Response response = client.GetStringValid(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result[0].ToString());
@@ -1335,7 +1335,7 @@ namespace body_array_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new ArrayClient(credential);
 
-            Response response = client.GetStringValid();
+            Response response = client.GetStringValid(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result[0].ToString());
@@ -1348,7 +1348,7 @@ namespace body_array_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new ArrayClient(credential);
 
-            Response response = await client.GetStringValidAsync().ConfigureAwait(false);
+            Response response = await client.GetStringValidAsync(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result[0].ToString());
@@ -1361,7 +1361,7 @@ namespace body_array_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new ArrayClient(credential);
 
-            Response response = await client.GetStringValidAsync().ConfigureAwait(false);
+            Response response = await client.GetStringValidAsync(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result[0].ToString());
@@ -1408,7 +1408,7 @@ namespace body_array_LowLevel.Samples
     "<String>"
 };
 
-            Response response = await client.PutStringValidAsync(RequestContent.Create(data)).ConfigureAwait(false);
+            Response response = await client.PutStringValidAsync(RequestContent.Create(data));
             Console.WriteLine(response.Status);
         }
 
@@ -1423,7 +1423,7 @@ namespace body_array_LowLevel.Samples
     "<String>"
 };
 
-            Response response = await client.PutStringValidAsync(RequestContent.Create(data)).ConfigureAwait(false);
+            Response response = await client.PutStringValidAsync(RequestContent.Create(data));
             Console.WriteLine(response.Status);
         }
 
@@ -1434,7 +1434,7 @@ namespace body_array_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new ArrayClient(credential);
 
-            Response response = client.GetEnumValid();
+            Response response = client.GetEnumValid(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result[0].ToString());
@@ -1447,7 +1447,7 @@ namespace body_array_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new ArrayClient(credential);
 
-            Response response = client.GetEnumValid();
+            Response response = client.GetEnumValid(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result[0].ToString());
@@ -1460,7 +1460,7 @@ namespace body_array_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new ArrayClient(credential);
 
-            Response response = await client.GetEnumValidAsync().ConfigureAwait(false);
+            Response response = await client.GetEnumValidAsync(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result[0].ToString());
@@ -1473,7 +1473,7 @@ namespace body_array_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new ArrayClient(credential);
 
-            Response response = await client.GetEnumValidAsync().ConfigureAwait(false);
+            Response response = await client.GetEnumValidAsync(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result[0].ToString());
@@ -1520,7 +1520,7 @@ namespace body_array_LowLevel.Samples
     "foo1"
 };
 
-            Response response = await client.PutEnumValidAsync(RequestContent.Create(data)).ConfigureAwait(false);
+            Response response = await client.PutEnumValidAsync(RequestContent.Create(data));
             Console.WriteLine(response.Status);
         }
 
@@ -1535,7 +1535,7 @@ namespace body_array_LowLevel.Samples
     "foo1"
 };
 
-            Response response = await client.PutEnumValidAsync(RequestContent.Create(data)).ConfigureAwait(false);
+            Response response = await client.PutEnumValidAsync(RequestContent.Create(data));
             Console.WriteLine(response.Status);
         }
 
@@ -1546,7 +1546,7 @@ namespace body_array_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new ArrayClient(credential);
 
-            Response response = client.GetStringEnumValid();
+            Response response = client.GetStringEnumValid(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result[0].ToString());
@@ -1559,7 +1559,7 @@ namespace body_array_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new ArrayClient(credential);
 
-            Response response = client.GetStringEnumValid();
+            Response response = client.GetStringEnumValid(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result[0].ToString());
@@ -1572,7 +1572,7 @@ namespace body_array_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new ArrayClient(credential);
 
-            Response response = await client.GetStringEnumValidAsync().ConfigureAwait(false);
+            Response response = await client.GetStringEnumValidAsync(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result[0].ToString());
@@ -1585,7 +1585,7 @@ namespace body_array_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new ArrayClient(credential);
 
-            Response response = await client.GetStringEnumValidAsync().ConfigureAwait(false);
+            Response response = await client.GetStringEnumValidAsync(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result[0].ToString());
@@ -1632,7 +1632,7 @@ namespace body_array_LowLevel.Samples
     "foo1"
 };
 
-            Response response = await client.PutStringEnumValidAsync(RequestContent.Create(data)).ConfigureAwait(false);
+            Response response = await client.PutStringEnumValidAsync(RequestContent.Create(data));
             Console.WriteLine(response.Status);
         }
 
@@ -1647,7 +1647,7 @@ namespace body_array_LowLevel.Samples
     "foo1"
 };
 
-            Response response = await client.PutStringEnumValidAsync(RequestContent.Create(data)).ConfigureAwait(false);
+            Response response = await client.PutStringEnumValidAsync(RequestContent.Create(data));
             Console.WriteLine(response.Status);
         }
 
@@ -1658,7 +1658,7 @@ namespace body_array_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new ArrayClient(credential);
 
-            Response response = client.GetStringWithNull();
+            Response response = client.GetStringWithNull(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result[0].ToString());
@@ -1671,7 +1671,7 @@ namespace body_array_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new ArrayClient(credential);
 
-            Response response = client.GetStringWithNull();
+            Response response = client.GetStringWithNull(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result[0].ToString());
@@ -1684,7 +1684,7 @@ namespace body_array_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new ArrayClient(credential);
 
-            Response response = await client.GetStringWithNullAsync().ConfigureAwait(false);
+            Response response = await client.GetStringWithNullAsync(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result[0].ToString());
@@ -1697,7 +1697,7 @@ namespace body_array_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new ArrayClient(credential);
 
-            Response response = await client.GetStringWithNullAsync().ConfigureAwait(false);
+            Response response = await client.GetStringWithNullAsync(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result[0].ToString());
@@ -1710,7 +1710,7 @@ namespace body_array_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new ArrayClient(credential);
 
-            Response response = client.GetStringWithInvalid();
+            Response response = client.GetStringWithInvalid(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result[0].ToString());
@@ -1723,7 +1723,7 @@ namespace body_array_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new ArrayClient(credential);
 
-            Response response = client.GetStringWithInvalid();
+            Response response = client.GetStringWithInvalid(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result[0].ToString());
@@ -1736,7 +1736,7 @@ namespace body_array_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new ArrayClient(credential);
 
-            Response response = await client.GetStringWithInvalidAsync().ConfigureAwait(false);
+            Response response = await client.GetStringWithInvalidAsync(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result[0].ToString());
@@ -1749,7 +1749,7 @@ namespace body_array_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new ArrayClient(credential);
 
-            Response response = await client.GetStringWithInvalidAsync().ConfigureAwait(false);
+            Response response = await client.GetStringWithInvalidAsync(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result[0].ToString());
@@ -1762,7 +1762,7 @@ namespace body_array_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new ArrayClient(credential);
 
-            Response response = client.GetUuidValid();
+            Response response = client.GetUuidValid(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result[0].ToString());
@@ -1775,7 +1775,7 @@ namespace body_array_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new ArrayClient(credential);
 
-            Response response = client.GetUuidValid();
+            Response response = client.GetUuidValid(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result[0].ToString());
@@ -1788,7 +1788,7 @@ namespace body_array_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new ArrayClient(credential);
 
-            Response response = await client.GetUuidValidAsync().ConfigureAwait(false);
+            Response response = await client.GetUuidValidAsync(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result[0].ToString());
@@ -1801,7 +1801,7 @@ namespace body_array_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new ArrayClient(credential);
 
-            Response response = await client.GetUuidValidAsync().ConfigureAwait(false);
+            Response response = await client.GetUuidValidAsync(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result[0].ToString());
@@ -1815,7 +1815,7 @@ namespace body_array_LowLevel.Samples
             var client = new ArrayClient(credential);
 
             var data = new[] {
-    "d456d0e2-16cf-4fac-a7a5-922e6fcda1a3"
+    "73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"
 };
 
             Response response = client.PutUuidValid(RequestContent.Create(data));
@@ -1830,7 +1830,7 @@ namespace body_array_LowLevel.Samples
             var client = new ArrayClient(credential);
 
             var data = new[] {
-    "d72d64ca-d348-45fd-879d-3af4e2a3ace4"
+    "73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"
 };
 
             Response response = client.PutUuidValid(RequestContent.Create(data));
@@ -1845,10 +1845,10 @@ namespace body_array_LowLevel.Samples
             var client = new ArrayClient(credential);
 
             var data = new[] {
-    "64fe6751-6254-4548-9d3f-ece2f8fc9960"
+    "73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"
 };
 
-            Response response = await client.PutUuidValidAsync(RequestContent.Create(data)).ConfigureAwait(false);
+            Response response = await client.PutUuidValidAsync(RequestContent.Create(data));
             Console.WriteLine(response.Status);
         }
 
@@ -1860,10 +1860,10 @@ namespace body_array_LowLevel.Samples
             var client = new ArrayClient(credential);
 
             var data = new[] {
-    "ace6fddc-6c8b-4eb8-ab8d-5c57b0947b03"
+    "73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"
 };
 
-            Response response = await client.PutUuidValidAsync(RequestContent.Create(data)).ConfigureAwait(false);
+            Response response = await client.PutUuidValidAsync(RequestContent.Create(data));
             Console.WriteLine(response.Status);
         }
 
@@ -1874,7 +1874,7 @@ namespace body_array_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new ArrayClient(credential);
 
-            Response response = client.GetUuidInvalidChars();
+            Response response = client.GetUuidInvalidChars(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result[0].ToString());
@@ -1887,7 +1887,7 @@ namespace body_array_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new ArrayClient(credential);
 
-            Response response = client.GetUuidInvalidChars();
+            Response response = client.GetUuidInvalidChars(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result[0].ToString());
@@ -1900,7 +1900,7 @@ namespace body_array_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new ArrayClient(credential);
 
-            Response response = await client.GetUuidInvalidCharsAsync().ConfigureAwait(false);
+            Response response = await client.GetUuidInvalidCharsAsync(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result[0].ToString());
@@ -1913,7 +1913,7 @@ namespace body_array_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new ArrayClient(credential);
 
-            Response response = await client.GetUuidInvalidCharsAsync().ConfigureAwait(false);
+            Response response = await client.GetUuidInvalidCharsAsync(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result[0].ToString());
@@ -1926,7 +1926,7 @@ namespace body_array_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new ArrayClient(credential);
 
-            Response response = client.GetDateValid();
+            Response response = client.GetDateValid(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result[0].ToString());
@@ -1939,7 +1939,7 @@ namespace body_array_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new ArrayClient(credential);
 
-            Response response = client.GetDateValid();
+            Response response = client.GetDateValid(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result[0].ToString());
@@ -1952,7 +1952,7 @@ namespace body_array_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new ArrayClient(credential);
 
-            Response response = await client.GetDateValidAsync().ConfigureAwait(false);
+            Response response = await client.GetDateValidAsync(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result[0].ToString());
@@ -1965,7 +1965,7 @@ namespace body_array_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new ArrayClient(credential);
 
-            Response response = await client.GetDateValidAsync().ConfigureAwait(false);
+            Response response = await client.GetDateValidAsync(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result[0].ToString());
@@ -1979,7 +1979,7 @@ namespace body_array_LowLevel.Samples
             var client = new ArrayClient(credential);
 
             var data = new[] {
-    "2023-07-08"
+    "2022-05-10"
 };
 
             Response response = client.PutDateValid(RequestContent.Create(data));
@@ -1994,7 +1994,7 @@ namespace body_array_LowLevel.Samples
             var client = new ArrayClient(credential);
 
             var data = new[] {
-    "2023-07-08"
+    "2022-05-10"
 };
 
             Response response = client.PutDateValid(RequestContent.Create(data));
@@ -2009,10 +2009,10 @@ namespace body_array_LowLevel.Samples
             var client = new ArrayClient(credential);
 
             var data = new[] {
-    "2023-07-08"
+    "2022-05-10"
 };
 
-            Response response = await client.PutDateValidAsync(RequestContent.Create(data)).ConfigureAwait(false);
+            Response response = await client.PutDateValidAsync(RequestContent.Create(data));
             Console.WriteLine(response.Status);
         }
 
@@ -2024,10 +2024,10 @@ namespace body_array_LowLevel.Samples
             var client = new ArrayClient(credential);
 
             var data = new[] {
-    "2023-07-08"
+    "2022-05-10"
 };
 
-            Response response = await client.PutDateValidAsync(RequestContent.Create(data)).ConfigureAwait(false);
+            Response response = await client.PutDateValidAsync(RequestContent.Create(data));
             Console.WriteLine(response.Status);
         }
 
@@ -2038,7 +2038,7 @@ namespace body_array_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new ArrayClient(credential);
 
-            Response response = client.GetDateInvalidNull();
+            Response response = client.GetDateInvalidNull(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result[0].ToString());
@@ -2051,7 +2051,7 @@ namespace body_array_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new ArrayClient(credential);
 
-            Response response = client.GetDateInvalidNull();
+            Response response = client.GetDateInvalidNull(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result[0].ToString());
@@ -2064,7 +2064,7 @@ namespace body_array_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new ArrayClient(credential);
 
-            Response response = await client.GetDateInvalidNullAsync().ConfigureAwait(false);
+            Response response = await client.GetDateInvalidNullAsync(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result[0].ToString());
@@ -2077,7 +2077,7 @@ namespace body_array_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new ArrayClient(credential);
 
-            Response response = await client.GetDateInvalidNullAsync().ConfigureAwait(false);
+            Response response = await client.GetDateInvalidNullAsync(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result[0].ToString());
@@ -2090,7 +2090,7 @@ namespace body_array_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new ArrayClient(credential);
 
-            Response response = client.GetDateInvalidChars();
+            Response response = client.GetDateInvalidChars(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result[0].ToString());
@@ -2103,7 +2103,7 @@ namespace body_array_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new ArrayClient(credential);
 
-            Response response = client.GetDateInvalidChars();
+            Response response = client.GetDateInvalidChars(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result[0].ToString());
@@ -2116,7 +2116,7 @@ namespace body_array_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new ArrayClient(credential);
 
-            Response response = await client.GetDateInvalidCharsAsync().ConfigureAwait(false);
+            Response response = await client.GetDateInvalidCharsAsync(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result[0].ToString());
@@ -2129,7 +2129,7 @@ namespace body_array_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new ArrayClient(credential);
 
-            Response response = await client.GetDateInvalidCharsAsync().ConfigureAwait(false);
+            Response response = await client.GetDateInvalidCharsAsync(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result[0].ToString());
@@ -2142,7 +2142,7 @@ namespace body_array_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new ArrayClient(credential);
 
-            Response response = client.GetDateTimeValid();
+            Response response = client.GetDateTimeValid(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result[0].ToString());
@@ -2155,7 +2155,7 @@ namespace body_array_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new ArrayClient(credential);
 
-            Response response = client.GetDateTimeValid();
+            Response response = client.GetDateTimeValid(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result[0].ToString());
@@ -2168,7 +2168,7 @@ namespace body_array_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new ArrayClient(credential);
 
-            Response response = await client.GetDateTimeValidAsync().ConfigureAwait(false);
+            Response response = await client.GetDateTimeValidAsync(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result[0].ToString());
@@ -2181,7 +2181,7 @@ namespace body_array_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new ArrayClient(credential);
 
-            Response response = await client.GetDateTimeValidAsync().ConfigureAwait(false);
+            Response response = await client.GetDateTimeValidAsync(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result[0].ToString());
@@ -2195,7 +2195,7 @@ namespace body_array_LowLevel.Samples
             var client = new ArrayClient(credential);
 
             var data = new[] {
-    "2023-07-08T06:06:19.5858353Z"
+    "2022-05-10T18:57:31.2311892Z"
 };
 
             Response response = client.PutDateTimeValid(RequestContent.Create(data));
@@ -2210,7 +2210,7 @@ namespace body_array_LowLevel.Samples
             var client = new ArrayClient(credential);
 
             var data = new[] {
-    "2023-07-08T06:06:19.5859061Z"
+    "2022-05-10T18:57:31.2311892Z"
 };
 
             Response response = client.PutDateTimeValid(RequestContent.Create(data));
@@ -2225,10 +2225,10 @@ namespace body_array_LowLevel.Samples
             var client = new ArrayClient(credential);
 
             var data = new[] {
-    "2023-07-08T06:06:19.5859733Z"
+    "2022-05-10T18:57:31.2311892Z"
 };
 
-            Response response = await client.PutDateTimeValidAsync(RequestContent.Create(data)).ConfigureAwait(false);
+            Response response = await client.PutDateTimeValidAsync(RequestContent.Create(data));
             Console.WriteLine(response.Status);
         }
 
@@ -2240,10 +2240,10 @@ namespace body_array_LowLevel.Samples
             var client = new ArrayClient(credential);
 
             var data = new[] {
-    "2023-07-08T06:06:19.5860384Z"
+    "2022-05-10T18:57:31.2311892Z"
 };
 
-            Response response = await client.PutDateTimeValidAsync(RequestContent.Create(data)).ConfigureAwait(false);
+            Response response = await client.PutDateTimeValidAsync(RequestContent.Create(data));
             Console.WriteLine(response.Status);
         }
 
@@ -2254,7 +2254,7 @@ namespace body_array_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new ArrayClient(credential);
 
-            Response response = client.GetDateTimeInvalidNull();
+            Response response = client.GetDateTimeInvalidNull(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result[0].ToString());
@@ -2267,7 +2267,7 @@ namespace body_array_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new ArrayClient(credential);
 
-            Response response = client.GetDateTimeInvalidNull();
+            Response response = client.GetDateTimeInvalidNull(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result[0].ToString());
@@ -2280,7 +2280,7 @@ namespace body_array_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new ArrayClient(credential);
 
-            Response response = await client.GetDateTimeInvalidNullAsync().ConfigureAwait(false);
+            Response response = await client.GetDateTimeInvalidNullAsync(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result[0].ToString());
@@ -2293,7 +2293,7 @@ namespace body_array_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new ArrayClient(credential);
 
-            Response response = await client.GetDateTimeInvalidNullAsync().ConfigureAwait(false);
+            Response response = await client.GetDateTimeInvalidNullAsync(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result[0].ToString());
@@ -2306,7 +2306,7 @@ namespace body_array_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new ArrayClient(credential);
 
-            Response response = client.GetDateTimeInvalidChars();
+            Response response = client.GetDateTimeInvalidChars(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result[0].ToString());
@@ -2319,7 +2319,7 @@ namespace body_array_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new ArrayClient(credential);
 
-            Response response = client.GetDateTimeInvalidChars();
+            Response response = client.GetDateTimeInvalidChars(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result[0].ToString());
@@ -2332,7 +2332,7 @@ namespace body_array_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new ArrayClient(credential);
 
-            Response response = await client.GetDateTimeInvalidCharsAsync().ConfigureAwait(false);
+            Response response = await client.GetDateTimeInvalidCharsAsync(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result[0].ToString());
@@ -2345,7 +2345,7 @@ namespace body_array_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new ArrayClient(credential);
 
-            Response response = await client.GetDateTimeInvalidCharsAsync().ConfigureAwait(false);
+            Response response = await client.GetDateTimeInvalidCharsAsync(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result[0].ToString());
@@ -2358,7 +2358,7 @@ namespace body_array_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new ArrayClient(credential);
 
-            Response response = client.GetDateTimeRfc1123Valid();
+            Response response = client.GetDateTimeRfc1123Valid(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result[0].ToString());
@@ -2371,7 +2371,7 @@ namespace body_array_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new ArrayClient(credential);
 
-            Response response = client.GetDateTimeRfc1123Valid();
+            Response response = client.GetDateTimeRfc1123Valid(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result[0].ToString());
@@ -2384,7 +2384,7 @@ namespace body_array_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new ArrayClient(credential);
 
-            Response response = await client.GetDateTimeRfc1123ValidAsync().ConfigureAwait(false);
+            Response response = await client.GetDateTimeRfc1123ValidAsync(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result[0].ToString());
@@ -2397,7 +2397,7 @@ namespace body_array_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new ArrayClient(credential);
 
-            Response response = await client.GetDateTimeRfc1123ValidAsync().ConfigureAwait(false);
+            Response response = await client.GetDateTimeRfc1123ValidAsync(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result[0].ToString());
@@ -2411,7 +2411,7 @@ namespace body_array_LowLevel.Samples
             var client = new ArrayClient(credential);
 
             var data = new[] {
-    "Sat, 08 Jul 2023 06:06:19 GMT"
+    "Tue, 10 May 2022 18:57:31 GMT"
 };
 
             Response response = client.PutDateTimeRfc1123Valid(RequestContent.Create(data));
@@ -2426,7 +2426,7 @@ namespace body_array_LowLevel.Samples
             var client = new ArrayClient(credential);
 
             var data = new[] {
-    "Sat, 08 Jul 2023 06:06:19 GMT"
+    "Tue, 10 May 2022 18:57:31 GMT"
 };
 
             Response response = client.PutDateTimeRfc1123Valid(RequestContent.Create(data));
@@ -2441,10 +2441,10 @@ namespace body_array_LowLevel.Samples
             var client = new ArrayClient(credential);
 
             var data = new[] {
-    "Sat, 08 Jul 2023 06:06:19 GMT"
+    "Tue, 10 May 2022 18:57:31 GMT"
 };
 
-            Response response = await client.PutDateTimeRfc1123ValidAsync(RequestContent.Create(data)).ConfigureAwait(false);
+            Response response = await client.PutDateTimeRfc1123ValidAsync(RequestContent.Create(data));
             Console.WriteLine(response.Status);
         }
 
@@ -2456,10 +2456,10 @@ namespace body_array_LowLevel.Samples
             var client = new ArrayClient(credential);
 
             var data = new[] {
-    "Sat, 08 Jul 2023 06:06:19 GMT"
+    "Tue, 10 May 2022 18:57:31 GMT"
 };
 
-            Response response = await client.PutDateTimeRfc1123ValidAsync(RequestContent.Create(data)).ConfigureAwait(false);
+            Response response = await client.PutDateTimeRfc1123ValidAsync(RequestContent.Create(data));
             Console.WriteLine(response.Status);
         }
 
@@ -2470,7 +2470,7 @@ namespace body_array_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new ArrayClient(credential);
 
-            Response response = client.GetDurationValid();
+            Response response = client.GetDurationValid(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result[0].ToString());
@@ -2483,7 +2483,7 @@ namespace body_array_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new ArrayClient(credential);
 
-            Response response = client.GetDurationValid();
+            Response response = client.GetDurationValid(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result[0].ToString());
@@ -2496,7 +2496,7 @@ namespace body_array_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new ArrayClient(credential);
 
-            Response response = await client.GetDurationValidAsync().ConfigureAwait(false);
+            Response response = await client.GetDurationValidAsync(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result[0].ToString());
@@ -2509,7 +2509,7 @@ namespace body_array_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new ArrayClient(credential);
 
-            Response response = await client.GetDurationValidAsync().ConfigureAwait(false);
+            Response response = await client.GetDurationValidAsync(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result[0].ToString());
@@ -2556,7 +2556,7 @@ namespace body_array_LowLevel.Samples
     "PT1H23M45S"
 };
 
-            Response response = await client.PutDurationValidAsync(RequestContent.Create(data)).ConfigureAwait(false);
+            Response response = await client.PutDurationValidAsync(RequestContent.Create(data));
             Console.WriteLine(response.Status);
         }
 
@@ -2571,7 +2571,7 @@ namespace body_array_LowLevel.Samples
     "PT1H23M45S"
 };
 
-            Response response = await client.PutDurationValidAsync(RequestContent.Create(data)).ConfigureAwait(false);
+            Response response = await client.PutDurationValidAsync(RequestContent.Create(data));
             Console.WriteLine(response.Status);
         }
 
@@ -2582,7 +2582,7 @@ namespace body_array_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new ArrayClient(credential);
 
-            Response response = client.GetByteValid();
+            Response response = client.GetByteValid(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result[0].ToString());
@@ -2595,7 +2595,7 @@ namespace body_array_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new ArrayClient(credential);
 
-            Response response = client.GetByteValid();
+            Response response = client.GetByteValid(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result[0].ToString());
@@ -2608,7 +2608,7 @@ namespace body_array_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new ArrayClient(credential);
 
-            Response response = await client.GetByteValidAsync().ConfigureAwait(false);
+            Response response = await client.GetByteValidAsync(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result[0].ToString());
@@ -2621,7 +2621,7 @@ namespace body_array_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new ArrayClient(credential);
 
-            Response response = await client.GetByteValidAsync().ConfigureAwait(false);
+            Response response = await client.GetByteValidAsync(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result[0].ToString());
@@ -2668,7 +2668,7 @@ namespace body_array_LowLevel.Samples
     new {}
 };
 
-            Response response = await client.PutByteValidAsync(RequestContent.Create(data)).ConfigureAwait(false);
+            Response response = await client.PutByteValidAsync(RequestContent.Create(data));
             Console.WriteLine(response.Status);
         }
 
@@ -2683,7 +2683,7 @@ namespace body_array_LowLevel.Samples
     new {}
 };
 
-            Response response = await client.PutByteValidAsync(RequestContent.Create(data)).ConfigureAwait(false);
+            Response response = await client.PutByteValidAsync(RequestContent.Create(data));
             Console.WriteLine(response.Status);
         }
 
@@ -2694,7 +2694,7 @@ namespace body_array_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new ArrayClient(credential);
 
-            Response response = client.GetByteInvalidNull();
+            Response response = client.GetByteInvalidNull(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result[0].ToString());
@@ -2707,7 +2707,7 @@ namespace body_array_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new ArrayClient(credential);
 
-            Response response = client.GetByteInvalidNull();
+            Response response = client.GetByteInvalidNull(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result[0].ToString());
@@ -2720,7 +2720,7 @@ namespace body_array_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new ArrayClient(credential);
 
-            Response response = await client.GetByteInvalidNullAsync().ConfigureAwait(false);
+            Response response = await client.GetByteInvalidNullAsync(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result[0].ToString());
@@ -2733,7 +2733,7 @@ namespace body_array_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new ArrayClient(credential);
 
-            Response response = await client.GetByteInvalidNullAsync().ConfigureAwait(false);
+            Response response = await client.GetByteInvalidNullAsync(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result[0].ToString());
@@ -2746,7 +2746,7 @@ namespace body_array_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new ArrayClient(credential);
 
-            Response response = client.GetBase64Url();
+            Response response = client.GetBase64Url(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result[0].ToString());
@@ -2759,7 +2759,7 @@ namespace body_array_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new ArrayClient(credential);
 
-            Response response = client.GetBase64Url();
+            Response response = client.GetBase64Url(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result[0].ToString());
@@ -2772,7 +2772,7 @@ namespace body_array_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new ArrayClient(credential);
 
-            Response response = await client.GetBase64UrlAsync().ConfigureAwait(false);
+            Response response = await client.GetBase64UrlAsync(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result[0].ToString());
@@ -2785,7 +2785,7 @@ namespace body_array_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new ArrayClient(credential);
 
-            Response response = await client.GetBase64UrlAsync().ConfigureAwait(false);
+            Response response = await client.GetBase64UrlAsync(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result[0].ToString());
@@ -2798,7 +2798,7 @@ namespace body_array_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new ArrayClient(credential);
 
-            Response response = client.GetComplexNull();
+            Response response = client.GetComplexNull(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result[0].ToString());
@@ -2811,7 +2811,7 @@ namespace body_array_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new ArrayClient(credential);
 
-            Response response = client.GetComplexNull();
+            Response response = client.GetComplexNull(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result[0].GetProperty("integer").ToString());
@@ -2825,7 +2825,7 @@ namespace body_array_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new ArrayClient(credential);
 
-            Response response = await client.GetComplexNullAsync().ConfigureAwait(false);
+            Response response = await client.GetComplexNullAsync(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result[0].ToString());
@@ -2838,7 +2838,7 @@ namespace body_array_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new ArrayClient(credential);
 
-            Response response = await client.GetComplexNullAsync().ConfigureAwait(false);
+            Response response = await client.GetComplexNullAsync(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result[0].GetProperty("integer").ToString());
@@ -2852,7 +2852,7 @@ namespace body_array_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new ArrayClient(credential);
 
-            Response response = client.GetComplexEmpty();
+            Response response = client.GetComplexEmpty(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result[0].ToString());
@@ -2865,7 +2865,7 @@ namespace body_array_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new ArrayClient(credential);
 
-            Response response = client.GetComplexEmpty();
+            Response response = client.GetComplexEmpty(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result[0].GetProperty("integer").ToString());
@@ -2879,7 +2879,7 @@ namespace body_array_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new ArrayClient(credential);
 
-            Response response = await client.GetComplexEmptyAsync().ConfigureAwait(false);
+            Response response = await client.GetComplexEmptyAsync(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result[0].ToString());
@@ -2892,7 +2892,7 @@ namespace body_array_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new ArrayClient(credential);
 
-            Response response = await client.GetComplexEmptyAsync().ConfigureAwait(false);
+            Response response = await client.GetComplexEmptyAsync(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result[0].GetProperty("integer").ToString());
@@ -2906,7 +2906,7 @@ namespace body_array_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new ArrayClient(credential);
 
-            Response response = client.GetComplexItemNull();
+            Response response = client.GetComplexItemNull(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result[0].ToString());
@@ -2919,7 +2919,7 @@ namespace body_array_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new ArrayClient(credential);
 
-            Response response = client.GetComplexItemNull();
+            Response response = client.GetComplexItemNull(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result[0].GetProperty("integer").ToString());
@@ -2933,7 +2933,7 @@ namespace body_array_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new ArrayClient(credential);
 
-            Response response = await client.GetComplexItemNullAsync().ConfigureAwait(false);
+            Response response = await client.GetComplexItemNullAsync(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result[0].ToString());
@@ -2946,7 +2946,7 @@ namespace body_array_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new ArrayClient(credential);
 
-            Response response = await client.GetComplexItemNullAsync().ConfigureAwait(false);
+            Response response = await client.GetComplexItemNullAsync(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result[0].GetProperty("integer").ToString());
@@ -2960,7 +2960,7 @@ namespace body_array_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new ArrayClient(credential);
 
-            Response response = client.GetComplexItemEmpty();
+            Response response = client.GetComplexItemEmpty(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result[0].ToString());
@@ -2973,7 +2973,7 @@ namespace body_array_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new ArrayClient(credential);
 
-            Response response = client.GetComplexItemEmpty();
+            Response response = client.GetComplexItemEmpty(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result[0].GetProperty("integer").ToString());
@@ -2987,7 +2987,7 @@ namespace body_array_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new ArrayClient(credential);
 
-            Response response = await client.GetComplexItemEmptyAsync().ConfigureAwait(false);
+            Response response = await client.GetComplexItemEmptyAsync(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result[0].ToString());
@@ -3000,7 +3000,7 @@ namespace body_array_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new ArrayClient(credential);
 
-            Response response = await client.GetComplexItemEmptyAsync().ConfigureAwait(false);
+            Response response = await client.GetComplexItemEmptyAsync(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result[0].GetProperty("integer").ToString());
@@ -3014,7 +3014,7 @@ namespace body_array_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new ArrayClient(credential);
 
-            Response response = client.GetComplexValid();
+            Response response = client.GetComplexValid(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result[0].ToString());
@@ -3027,7 +3027,7 @@ namespace body_array_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new ArrayClient(credential);
 
-            Response response = client.GetComplexValid();
+            Response response = client.GetComplexValid(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result[0].GetProperty("integer").ToString());
@@ -3041,7 +3041,7 @@ namespace body_array_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new ArrayClient(credential);
 
-            Response response = await client.GetComplexValidAsync().ConfigureAwait(false);
+            Response response = await client.GetComplexValidAsync(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result[0].ToString());
@@ -3054,7 +3054,7 @@ namespace body_array_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new ArrayClient(credential);
 
-            Response response = await client.GetComplexValidAsync().ConfigureAwait(false);
+            Response response = await client.GetComplexValidAsync(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result[0].GetProperty("integer").ToString());
@@ -3105,7 +3105,7 @@ namespace body_array_LowLevel.Samples
     new {}
 };
 
-            Response response = await client.PutComplexValidAsync(RequestContent.Create(data)).ConfigureAwait(false);
+            Response response = await client.PutComplexValidAsync(RequestContent.Create(data));
             Console.WriteLine(response.Status);
         }
 
@@ -3123,7 +3123,7 @@ namespace body_array_LowLevel.Samples
     }
 };
 
-            Response response = await client.PutComplexValidAsync(RequestContent.Create(data)).ConfigureAwait(false);
+            Response response = await client.PutComplexValidAsync(RequestContent.Create(data));
             Console.WriteLine(response.Status);
         }
 
@@ -3134,7 +3134,7 @@ namespace body_array_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new ArrayClient(credential);
 
-            Response response = client.GetArrayNull();
+            Response response = client.GetArrayNull(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result[0][0].ToString());
@@ -3147,7 +3147,7 @@ namespace body_array_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new ArrayClient(credential);
 
-            Response response = client.GetArrayNull();
+            Response response = client.GetArrayNull(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result[0][0].ToString());
@@ -3160,7 +3160,7 @@ namespace body_array_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new ArrayClient(credential);
 
-            Response response = await client.GetArrayNullAsync().ConfigureAwait(false);
+            Response response = await client.GetArrayNullAsync(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result[0][0].ToString());
@@ -3173,7 +3173,7 @@ namespace body_array_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new ArrayClient(credential);
 
-            Response response = await client.GetArrayNullAsync().ConfigureAwait(false);
+            Response response = await client.GetArrayNullAsync(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result[0][0].ToString());
@@ -3186,7 +3186,7 @@ namespace body_array_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new ArrayClient(credential);
 
-            Response response = client.GetArrayEmpty();
+            Response response = client.GetArrayEmpty(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result[0][0].ToString());
@@ -3199,7 +3199,7 @@ namespace body_array_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new ArrayClient(credential);
 
-            Response response = client.GetArrayEmpty();
+            Response response = client.GetArrayEmpty(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result[0][0].ToString());
@@ -3212,7 +3212,7 @@ namespace body_array_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new ArrayClient(credential);
 
-            Response response = await client.GetArrayEmptyAsync().ConfigureAwait(false);
+            Response response = await client.GetArrayEmptyAsync(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result[0][0].ToString());
@@ -3225,7 +3225,7 @@ namespace body_array_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new ArrayClient(credential);
 
-            Response response = await client.GetArrayEmptyAsync().ConfigureAwait(false);
+            Response response = await client.GetArrayEmptyAsync(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result[0][0].ToString());
@@ -3238,7 +3238,7 @@ namespace body_array_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new ArrayClient(credential);
 
-            Response response = client.GetArrayItemNull();
+            Response response = client.GetArrayItemNull(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result[0][0].ToString());
@@ -3251,7 +3251,7 @@ namespace body_array_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new ArrayClient(credential);
 
-            Response response = client.GetArrayItemNull();
+            Response response = client.GetArrayItemNull(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result[0][0].ToString());
@@ -3264,7 +3264,7 @@ namespace body_array_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new ArrayClient(credential);
 
-            Response response = await client.GetArrayItemNullAsync().ConfigureAwait(false);
+            Response response = await client.GetArrayItemNullAsync(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result[0][0].ToString());
@@ -3277,7 +3277,7 @@ namespace body_array_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new ArrayClient(credential);
 
-            Response response = await client.GetArrayItemNullAsync().ConfigureAwait(false);
+            Response response = await client.GetArrayItemNullAsync(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result[0][0].ToString());
@@ -3290,7 +3290,7 @@ namespace body_array_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new ArrayClient(credential);
 
-            Response response = client.GetArrayItemEmpty();
+            Response response = client.GetArrayItemEmpty(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result[0][0].ToString());
@@ -3303,7 +3303,7 @@ namespace body_array_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new ArrayClient(credential);
 
-            Response response = client.GetArrayItemEmpty();
+            Response response = client.GetArrayItemEmpty(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result[0][0].ToString());
@@ -3316,7 +3316,7 @@ namespace body_array_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new ArrayClient(credential);
 
-            Response response = await client.GetArrayItemEmptyAsync().ConfigureAwait(false);
+            Response response = await client.GetArrayItemEmptyAsync(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result[0][0].ToString());
@@ -3329,7 +3329,7 @@ namespace body_array_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new ArrayClient(credential);
 
-            Response response = await client.GetArrayItemEmptyAsync().ConfigureAwait(false);
+            Response response = await client.GetArrayItemEmptyAsync(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result[0][0].ToString());
@@ -3342,7 +3342,7 @@ namespace body_array_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new ArrayClient(credential);
 
-            Response response = client.GetArrayValid();
+            Response response = client.GetArrayValid(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result[0][0].ToString());
@@ -3355,7 +3355,7 @@ namespace body_array_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new ArrayClient(credential);
 
-            Response response = client.GetArrayValid();
+            Response response = client.GetArrayValid(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result[0][0].ToString());
@@ -3368,7 +3368,7 @@ namespace body_array_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new ArrayClient(credential);
 
-            Response response = await client.GetArrayValidAsync().ConfigureAwait(false);
+            Response response = await client.GetArrayValidAsync(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result[0][0].ToString());
@@ -3381,7 +3381,7 @@ namespace body_array_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new ArrayClient(credential);
 
-            Response response = await client.GetArrayValidAsync().ConfigureAwait(false);
+            Response response = await client.GetArrayValidAsync(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result[0][0].ToString());
@@ -3434,7 +3434,7 @@ namespace body_array_LowLevel.Samples
     }
 };
 
-            Response response = await client.PutArrayValidAsync(RequestContent.Create(data)).ConfigureAwait(false);
+            Response response = await client.PutArrayValidAsync(RequestContent.Create(data));
             Console.WriteLine(response.Status);
         }
 
@@ -3451,7 +3451,7 @@ namespace body_array_LowLevel.Samples
     }
 };
 
-            Response response = await client.PutArrayValidAsync(RequestContent.Create(data)).ConfigureAwait(false);
+            Response response = await client.PutArrayValidAsync(RequestContent.Create(data));
             Console.WriteLine(response.Status);
         }
 
@@ -3462,7 +3462,7 @@ namespace body_array_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new ArrayClient(credential);
 
-            Response response = client.GetDictionaryNull();
+            Response response = client.GetDictionaryNull(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result[0].GetProperty("<test>").ToString());
@@ -3475,7 +3475,7 @@ namespace body_array_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new ArrayClient(credential);
 
-            Response response = client.GetDictionaryNull();
+            Response response = client.GetDictionaryNull(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result[0].GetProperty("<test>").ToString());
@@ -3488,7 +3488,7 @@ namespace body_array_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new ArrayClient(credential);
 
-            Response response = await client.GetDictionaryNullAsync().ConfigureAwait(false);
+            Response response = await client.GetDictionaryNullAsync(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result[0].GetProperty("<test>").ToString());
@@ -3501,7 +3501,7 @@ namespace body_array_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new ArrayClient(credential);
 
-            Response response = await client.GetDictionaryNullAsync().ConfigureAwait(false);
+            Response response = await client.GetDictionaryNullAsync(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result[0].GetProperty("<test>").ToString());
@@ -3514,7 +3514,7 @@ namespace body_array_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new ArrayClient(credential);
 
-            Response response = client.GetDictionaryEmpty();
+            Response response = client.GetDictionaryEmpty(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result[0].GetProperty("<test>").ToString());
@@ -3527,7 +3527,7 @@ namespace body_array_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new ArrayClient(credential);
 
-            Response response = client.GetDictionaryEmpty();
+            Response response = client.GetDictionaryEmpty(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result[0].GetProperty("<test>").ToString());
@@ -3540,7 +3540,7 @@ namespace body_array_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new ArrayClient(credential);
 
-            Response response = await client.GetDictionaryEmptyAsync().ConfigureAwait(false);
+            Response response = await client.GetDictionaryEmptyAsync(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result[0].GetProperty("<test>").ToString());
@@ -3553,7 +3553,7 @@ namespace body_array_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new ArrayClient(credential);
 
-            Response response = await client.GetDictionaryEmptyAsync().ConfigureAwait(false);
+            Response response = await client.GetDictionaryEmptyAsync(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result[0].GetProperty("<test>").ToString());
@@ -3566,7 +3566,7 @@ namespace body_array_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new ArrayClient(credential);
 
-            Response response = client.GetDictionaryItemNull();
+            Response response = client.GetDictionaryItemNull(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result[0].GetProperty("<test>").ToString());
@@ -3579,7 +3579,7 @@ namespace body_array_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new ArrayClient(credential);
 
-            Response response = client.GetDictionaryItemNull();
+            Response response = client.GetDictionaryItemNull(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result[0].GetProperty("<test>").ToString());
@@ -3592,7 +3592,7 @@ namespace body_array_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new ArrayClient(credential);
 
-            Response response = await client.GetDictionaryItemNullAsync().ConfigureAwait(false);
+            Response response = await client.GetDictionaryItemNullAsync(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result[0].GetProperty("<test>").ToString());
@@ -3605,7 +3605,7 @@ namespace body_array_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new ArrayClient(credential);
 
-            Response response = await client.GetDictionaryItemNullAsync().ConfigureAwait(false);
+            Response response = await client.GetDictionaryItemNullAsync(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result[0].GetProperty("<test>").ToString());
@@ -3618,7 +3618,7 @@ namespace body_array_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new ArrayClient(credential);
 
-            Response response = client.GetDictionaryItemEmpty();
+            Response response = client.GetDictionaryItemEmpty(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result[0].GetProperty("<test>").ToString());
@@ -3631,7 +3631,7 @@ namespace body_array_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new ArrayClient(credential);
 
-            Response response = client.GetDictionaryItemEmpty();
+            Response response = client.GetDictionaryItemEmpty(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result[0].GetProperty("<test>").ToString());
@@ -3644,7 +3644,7 @@ namespace body_array_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new ArrayClient(credential);
 
-            Response response = await client.GetDictionaryItemEmptyAsync().ConfigureAwait(false);
+            Response response = await client.GetDictionaryItemEmptyAsync(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result[0].GetProperty("<test>").ToString());
@@ -3657,7 +3657,7 @@ namespace body_array_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new ArrayClient(credential);
 
-            Response response = await client.GetDictionaryItemEmptyAsync().ConfigureAwait(false);
+            Response response = await client.GetDictionaryItemEmptyAsync(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result[0].GetProperty("<test>").ToString());
@@ -3670,7 +3670,7 @@ namespace body_array_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new ArrayClient(credential);
 
-            Response response = client.GetDictionaryValid();
+            Response response = client.GetDictionaryValid(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result[0].GetProperty("<test>").ToString());
@@ -3683,7 +3683,7 @@ namespace body_array_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new ArrayClient(credential);
 
-            Response response = client.GetDictionaryValid();
+            Response response = client.GetDictionaryValid(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result[0].GetProperty("<test>").ToString());
@@ -3696,7 +3696,7 @@ namespace body_array_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new ArrayClient(credential);
 
-            Response response = await client.GetDictionaryValidAsync().ConfigureAwait(false);
+            Response response = await client.GetDictionaryValidAsync(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result[0].GetProperty("<test>").ToString());
@@ -3709,7 +3709,7 @@ namespace body_array_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new ArrayClient(credential);
 
-            Response response = await client.GetDictionaryValidAsync().ConfigureAwait(false);
+            Response response = await client.GetDictionaryValidAsync(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result[0].GetProperty("<test>").ToString());
@@ -3762,7 +3762,7 @@ namespace body_array_LowLevel.Samples
     }
 };
 
-            Response response = await client.PutDictionaryValidAsync(RequestContent.Create(data)).ConfigureAwait(false);
+            Response response = await client.PutDictionaryValidAsync(RequestContent.Create(data));
             Console.WriteLine(response.Status);
         }
 
@@ -3779,7 +3779,7 @@ namespace body_array_LowLevel.Samples
     }
 };
 
-            Response response = await client.PutDictionaryValidAsync(RequestContent.Create(data)).ConfigureAwait(false);
+            Response response = await client.PutDictionaryValidAsync(RequestContent.Create(data));
             Console.WriteLine(response.Status);
         }
     }

@@ -8,7 +8,7 @@ This sample shows how to call GetSubParameterAsync with required parameters and 
 var credential = new AzureKeyCredential("<key>");
 var client = new RootClient("<cachedParameter>", credential).GetParameterClient();
 
-Response response = await client.GetSubParameterAsync("<subParameter>").ConfigureAwait(false);
+Response response = await client.GetSubParameterAsync("<subParameter>", new RequestContext());
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.ToString());
@@ -22,7 +22,7 @@ This sample shows how to call GetSubParameter with required parameters and parse
 var credential = new AzureKeyCredential("<key>");
 var client = new RootClient("<cachedParameter>", credential).GetParameterClient();
 
-Response response = client.GetSubParameter("<subParameter>");
+Response response = client.GetSubParameter("<subParameter>", new RequestContext());
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.ToString());

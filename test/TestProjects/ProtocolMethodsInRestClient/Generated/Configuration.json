@@ -1,8 +1,8 @@
 {
-  "OutputFolder": ".",
-  "Namespace": "ProtocolMethodsInRestClient",
-  "LibraryName": "TestService",
-  "SharedSourceFolders": [
+  "output-folder": ".",
+  "namespace": "ProtocolMethodsInRestClient",
+  "library-name": "TestService",
+  "shared-source-folders": [
     "..\\..\\..\\..\\artifacts\\bin\\AutoRest.CSharp\\Debug\\net6.0\\Generator.Shared",
     "..\\..\\..\\..\\artifacts\\bin\\AutoRest.CSharp\\Debug\\net6.0\\Azure.Core.Shared"
   ],

@@ -19,7 +19,7 @@ namespace custom_baseUrl_LowLevel.Samples
         public void Example_GetEmpty()
         {
             var credential = new AzureKeyCredential("<key>");
-            var client = new PathsClient(credential);
+            var client = new PathsClient("<host>", credential);
 
             Response response = client.GetEmpty("<accountName>");
             Console.WriteLine(response.Status);
@@ -30,7 +30,7 @@ namespace custom_baseUrl_LowLevel.Samples
         public void Example_GetEmpty_AllParameters()
         {
             var credential = new AzureKeyCredential("<key>");
-            var client = new PathsClient(credential);
+            var client = new PathsClient("<host>", credential);
 
             Response response = client.GetEmpty("<accountName>");
             Console.WriteLine(response.Status);
@@ -41,7 +41,7 @@ namespace custom_baseUrl_LowLevel.Samples
         public async Task Example_GetEmpty_Async()
         {
             var credential = new AzureKeyCredential("<key>");
-            var client = new PathsClient(credential);
+            var client = new PathsClient("<host>", credential);
 
             Response response = await client.GetEmptyAsync("<accountName>").ConfigureAwait(false);
             Console.WriteLine(response.Status);
@@ -52,7 +52,7 @@ namespace custom_baseUrl_LowLevel.Samples
         public async Task Example_GetEmpty_AllParameters_Async()
         {
             var credential = new AzureKeyCredential("<key>");
-            var client = new PathsClient(credential);
+            var client = new PathsClient("<host>", credential);
 
             Response response = await client.GetEmptyAsync("<accountName>").ConfigureAwait(false);
             Console.WriteLine(response.Status);

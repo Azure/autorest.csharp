@@ -8,7 +8,7 @@ This sample shows how to call Head408Async.
 var credential = new AzureKeyCredential("<key>");
 var client = new HttpRetryClient(credential);
 
-Response response = await client.Head408Async().ConfigureAwait(false);
+Response response = await client.Head408Async();
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
@@ -34,7 +34,7 @@ var client = new HttpRetryClient(credential);
 
 var data = true;
 
-Response response = await client.Put500Async(RequestContent.Create(data)).ConfigureAwait(false);
+Response response = await client.Put500Async(RequestContent.Create(data));
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
@@ -62,7 +62,7 @@ var client = new HttpRetryClient(credential);
 
 var data = true;
 
-Response response = await client.Patch500Async(RequestContent.Create(data)).ConfigureAwait(false);
+Response response = await client.Patch500Async(RequestContent.Create(data));
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
@@ -88,7 +88,7 @@ This sample shows how to call Get502Async.
 var credential = new AzureKeyCredential("<key>");
 var client = new HttpRetryClient(credential);
 
-Response response = await client.Get502Async().ConfigureAwait(false);
+Response response = await client.Get502Async();
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
@@ -107,12 +107,12 @@ Console.WriteLine(response.Status);
     </member>
     <member name="Options502Async(RequestContext)">
 <example>
-This sample shows how to call Options502Async and parse the result.
+This sample shows how to call Options502Async with required parameters and parse the result.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
 var client = new HttpRetryClient(credential);
 
-Response response = await client.Options502Async().ConfigureAwait(false);
+Response response = await client.Options502Async(new RequestContext());
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.ToString());
@@ -121,12 +121,12 @@ Console.WriteLine(result.ToString());
     </member>
     <member name="Options502(RequestContext)">
 <example>
-This sample shows how to call Options502 and parse the result.
+This sample shows how to call Options502 with required parameters and parse the result.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
 var client = new HttpRetryClient(credential);
 
-Response response = client.Options502();
+Response response = client.Options502(new RequestContext());
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.ToString());
@@ -142,7 +142,7 @@ var client = new HttpRetryClient(credential);
 
 var data = true;
 
-Response response = await client.Post503Async(RequestContent.Create(data)).ConfigureAwait(false);
+Response response = await client.Post503Async(RequestContent.Create(data));
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
@@ -170,7 +170,7 @@ var client = new HttpRetryClient(credential);
 
 var data = true;
 
-Response response = await client.Delete503Async(RequestContent.Create(data)).ConfigureAwait(false);
+Response response = await client.Delete503Async(RequestContent.Create(data));
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
@@ -198,7 +198,7 @@ var client = new HttpRetryClient(credential);
 
 var data = true;
 
-Response response = await client.Put504Async(RequestContent.Create(data)).ConfigureAwait(false);
+Response response = await client.Put504Async(RequestContent.Create(data));
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
@@ -226,7 +226,7 @@ var client = new HttpRetryClient(credential);
 
 var data = true;
 
-Response response = await client.Patch504Async(RequestContent.Create(data)).ConfigureAwait(false);
+Response response = await client.Patch504Async(RequestContent.Create(data));
 Console.WriteLine(response.Status);
 ]]></code>
 </example>

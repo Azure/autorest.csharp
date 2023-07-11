@@ -6,9 +6,13 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
+using System.IO;
 using System.Text.Json;
 using System.Threading.Tasks;
 using Azure;
+using Azure.Core;
+using Azure.Identity;
 using NUnit.Framework;
 
 namespace SingleTopLevelClientWithoutOperations_LowLevel.Samples
@@ -22,7 +26,7 @@ namespace SingleTopLevelClientWithoutOperations_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new TopLevelClientWithoutOperationClient(credential).GetClient5Client();
 
-            Response response = client.Operation();
+            Response response = client.Operation(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());
@@ -35,7 +39,7 @@ namespace SingleTopLevelClientWithoutOperations_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new TopLevelClientWithoutOperationClient(credential).GetClient5Client();
 
-            Response response = client.Operation();
+            Response response = client.Operation(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());
@@ -48,7 +52,7 @@ namespace SingleTopLevelClientWithoutOperations_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new TopLevelClientWithoutOperationClient(credential).GetClient5Client();
 
-            Response response = await client.OperationAsync().ConfigureAwait(false);
+            Response response = await client.OperationAsync(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());
@@ -61,7 +65,7 @@ namespace SingleTopLevelClientWithoutOperations_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new TopLevelClientWithoutOperationClient(credential).GetClient5Client();
 
-            Response response = await client.OperationAsync().ConfigureAwait(false);
+            Response response = await client.OperationAsync(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());

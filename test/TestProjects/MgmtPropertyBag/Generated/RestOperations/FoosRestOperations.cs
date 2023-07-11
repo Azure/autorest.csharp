@@ -66,11 +66,11 @@ namespace MgmtPropertyBag
         /// <summary> Gets a list of foo with two optional query parameters. </summary>
         /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
         /// <param name="filter"> The filter to apply on the operation. </param>
-        /// <param name="top"> The int? to use. </param>
+        /// <param name="top"> The Integer to use. The default value is 10. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/> is an empty string, and was expected to be non-empty. </exception>
-        public async Task<Response<IReadOnlyList<FooData>>> ListWithSubscriptionAsync(string subscriptionId, string filter = null, int? top = 10, CancellationToken cancellationToken = default)
+        public async Task<Response<IReadOnlyList<FooData>>> ListWithSubscriptionAsync(string subscriptionId, string filter = null, int? top = null, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
 
@@ -98,11 +98,11 @@ namespace MgmtPropertyBag
         /// <summary> Gets a list of foo with two optional query parameters. </summary>
         /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
         /// <param name="filter"> The filter to apply on the operation. </param>
-        /// <param name="top"> The int? to use. </param>
+        /// <param name="top"> The Integer to use. The default value is 10. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/> is an empty string, and was expected to be non-empty. </exception>
-        public Response<IReadOnlyList<FooData>> ListWithSubscription(string subscriptionId, string filter = null, int? top = 10, CancellationToken cancellationToken = default)
+        public Response<IReadOnlyList<FooData>> ListWithSubscription(string subscriptionId, string filter = null, int? top = null, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
 
@@ -174,15 +174,15 @@ namespace MgmtPropertyBag
         /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
         /// <param name="resourceGroupName"> The name of the resource group. The name is case insensitive. </param>
         /// <param name="filter"> The filter to apply on the operation. </param>
-        /// <param name="top"> The int? to use. </param>
-        /// <param name="orderby"> The string to use. </param>
+        /// <param name="top"> The Integer to use. The default value is 10. </param>
+        /// <param name="orderby"> The String to use. </param>
         /// <param name="ifMatch"> The entity state (Etag) version. A value of "*" can be used for If-Match to unconditionally apply the operation. </param>
         /// <param name="maxpagesize"> Optional. Specified maximum number of containers that can be included in the list. </param>
         /// <param name="skip"> Optional. Number of records to skip. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/> or <paramref name="resourceGroupName"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/> or <paramref name="resourceGroupName"/> is an empty string, and was expected to be non-empty. </exception>
-        public async Task<Response<IReadOnlyList<FooData>>> ListAsync(string subscriptionId, string resourceGroupName, string filter = null, int? top = 10, string orderby = null, ETag? ifMatch = null, string maxpagesize = null, int? skip = null, CancellationToken cancellationToken = default)
+        public async Task<Response<IReadOnlyList<FooData>>> ListAsync(string subscriptionId, string resourceGroupName, string filter = null, int? top = null, string orderby = null, ETag? ifMatch = null, string maxpagesize = null, int? skip = null, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
             Argument.AssertNotNullOrEmpty(resourceGroupName, nameof(resourceGroupName));
@@ -212,15 +212,15 @@ namespace MgmtPropertyBag
         /// <param name="subscriptionId"> Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call. </param>
         /// <param name="resourceGroupName"> The name of the resource group. The name is case insensitive. </param>
         /// <param name="filter"> The filter to apply on the operation. </param>
-        /// <param name="top"> The int? to use. </param>
-        /// <param name="orderby"> The string to use. </param>
+        /// <param name="top"> The Integer to use. The default value is 10. </param>
+        /// <param name="orderby"> The String to use. </param>
         /// <param name="ifMatch"> The entity state (Etag) version. A value of "*" can be used for If-Match to unconditionally apply the operation. </param>
         /// <param name="maxpagesize"> Optional. Specified maximum number of containers that can be included in the list. </param>
         /// <param name="skip"> Optional. Number of records to skip. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/> or <paramref name="resourceGroupName"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/> or <paramref name="resourceGroupName"/> is an empty string, and was expected to be non-empty. </exception>
-        public Response<IReadOnlyList<FooData>> List(string subscriptionId, string resourceGroupName, string filter = null, int? top = 10, string orderby = null, ETag? ifMatch = null, string maxpagesize = null, int? skip = null, CancellationToken cancellationToken = default)
+        public Response<IReadOnlyList<FooData>> List(string subscriptionId, string resourceGroupName, string filter = null, int? top = null, string orderby = null, ETag? ifMatch = null, string maxpagesize = null, int? skip = null, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(subscriptionId, nameof(subscriptionId));
             Argument.AssertNotNullOrEmpty(resourceGroupName, nameof(resourceGroupName));
@@ -291,8 +291,8 @@ namespace MgmtPropertyBag
         /// <param name="resourceGroupName"> The name of the resource group. The name is case insensitive. </param>
         /// <param name="fooName"> The foo name. </param>
         /// <param name="filter"> The filter to apply on the operation. </param>
-        /// <param name="top"> The int? to use. </param>
-        /// <param name="orderby"> The string to use. </param>
+        /// <param name="top"> The Integer to use. </param>
+        /// <param name="orderby"> The String to use. </param>
         /// <param name="ifMatch"> The entity state (Etag) version. A value of "*" can be used for If-Match to unconditionally apply the operation. </param>
         /// <param name="skip"> Optional. Number of records to skip. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -327,8 +327,8 @@ namespace MgmtPropertyBag
         /// <param name="resourceGroupName"> The name of the resource group. The name is case insensitive. </param>
         /// <param name="fooName"> The foo name. </param>
         /// <param name="filter"> The filter to apply on the operation. </param>
-        /// <param name="top"> The int? to use. </param>
-        /// <param name="orderby"> The string to use. </param>
+        /// <param name="top"> The Integer to use. </param>
+        /// <param name="orderby"> The String to use. </param>
         /// <param name="ifMatch"> The entity state (Etag) version. A value of "*" can be used for If-Match to unconditionally apply the operation. </param>
         /// <param name="skip"> Optional. Number of records to skip. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -400,8 +400,8 @@ namespace MgmtPropertyBag
         /// <param name="fooName"> The foo name. </param>
         /// <param name="data"> The foo parameters supplied to the CreateOrUpdate operation. </param>
         /// <param name="filter"> The filter to apply on the operation. </param>
-        /// <param name="top"> The int? to use. </param>
-        /// <param name="orderby"> The string to use. </param>
+        /// <param name="top"> The Integer to use. </param>
+        /// <param name="orderby"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="fooName"/> or <paramref name="data"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="fooName"/> is an empty string, and was expected to be non-empty. </exception>
@@ -434,8 +434,8 @@ namespace MgmtPropertyBag
         /// <param name="fooName"> The foo name. </param>
         /// <param name="data"> The foo parameters supplied to the CreateOrUpdate operation. </param>
         /// <param name="filter"> The filter to apply on the operation. </param>
-        /// <param name="top"> The int? to use. </param>
-        /// <param name="orderby"> The string to use. </param>
+        /// <param name="top"> The Integer to use. </param>
+        /// <param name="orderby"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/>, <paramref name="fooName"/> or <paramref name="data"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="fooName"/> is an empty string, and was expected to be non-empty. </exception>
@@ -605,10 +605,10 @@ namespace MgmtPropertyBag
         /// <param name="fooName"> The foo name. </param>
         /// <param name="data"> The parameters supplied to the Reconnect operation. </param>
         /// <param name="filter"> The filter to apply on the operation. </param>
-        /// <param name="top"> The int? to use. </param>
-        /// <param name="orderby"> The string to use. </param>
+        /// <param name="top"> The Integer to use. </param>
+        /// <param name="orderby"> The String to use. </param>
         /// <param name="ifMatch"> The entity state (Etag) version. A value of "*" can be used for If-Match to unconditionally apply the operation. </param>
-        /// <param name="countryOrRegions"> The IList{string} to use. </param>
+        /// <param name="countryOrRegions"> The ArrayOfPost5ItemsItem to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="fooName"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="fooName"/> is an empty string, and was expected to be non-empty. </exception>
@@ -640,10 +640,10 @@ namespace MgmtPropertyBag
         /// <param name="fooName"> The foo name. </param>
         /// <param name="data"> The parameters supplied to the Reconnect operation. </param>
         /// <param name="filter"> The filter to apply on the operation. </param>
-        /// <param name="top"> The int? to use. </param>
-        /// <param name="orderby"> The string to use. </param>
+        /// <param name="top"> The Integer to use. </param>
+        /// <param name="orderby"> The String to use. </param>
         /// <param name="ifMatch"> The entity state (Etag) version. A value of "*" can be used for If-Match to unconditionally apply the operation. </param>
-        /// <param name="countryOrRegions"> The IList{string} to use. </param>
+        /// <param name="countryOrRegions"> The ArrayOfPost5ItemsItem to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="fooName"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="subscriptionId"/>, <paramref name="resourceGroupName"/> or <paramref name="fooName"/> is an empty string, and was expected to be non-empty. </exception>

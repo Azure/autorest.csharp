@@ -6,9 +6,13 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
+using System.IO;
 using System.Text.Json;
 using System.Threading.Tasks;
 using Azure;
+using Azure.Core;
+using Azure.Identity;
 using NUnit.Framework;
 
 namespace ParameterSequence_LowLevel.Samples
@@ -22,7 +26,7 @@ namespace ParameterSequence_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new ParameterSequenceClient(credential);
 
-            Response response = client.GetItem("<itemName>", "<origin>");
+            Response response = client.GetItem("<itemName>", "<origin>", "<version>", new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());
@@ -35,7 +39,7 @@ namespace ParameterSequence_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new ParameterSequenceClient(credential);
 
-            Response response = client.GetItem("<itemName>", "<origin>", "<version>");
+            Response response = client.GetItem("<itemName>", "<origin>", "<version>", new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());
@@ -48,7 +52,7 @@ namespace ParameterSequence_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new ParameterSequenceClient(credential);
 
-            Response response = await client.GetItemAsync("<itemName>", "<origin>").ConfigureAwait(false);
+            Response response = await client.GetItemAsync("<itemName>", "<origin>", "<version>", new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());
@@ -61,7 +65,7 @@ namespace ParameterSequence_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new ParameterSequenceClient(credential);
 
-            Response response = await client.GetItemAsync("<itemName>", "<origin>", "<version>").ConfigureAwait(false);
+            Response response = await client.GetItemAsync("<itemName>", "<origin>", "<version>", new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());
@@ -74,7 +78,7 @@ namespace ParameterSequence_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new ParameterSequenceClient(credential);
 
-            Response response = client.SelectItem("<itemName>", "<origin>");
+            Response response = client.SelectItem("<itemName>", "<origin>", "<version>", new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());
@@ -87,7 +91,7 @@ namespace ParameterSequence_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new ParameterSequenceClient(credential);
 
-            Response response = client.SelectItem("<itemName>", "<origin>", "<version>");
+            Response response = client.SelectItem("<itemName>", "<origin>", "<version>", new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());
@@ -100,7 +104,7 @@ namespace ParameterSequence_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new ParameterSequenceClient(credential);
 
-            Response response = await client.SelectItemAsync("<itemName>", "<origin>").ConfigureAwait(false);
+            Response response = await client.SelectItemAsync("<itemName>", "<origin>", "<version>", new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());
@@ -113,7 +117,7 @@ namespace ParameterSequence_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new ParameterSequenceClient(credential);
 
-            Response response = await client.SelectItemAsync("<itemName>", "<origin>", "<version>").ConfigureAwait(false);
+            Response response = await client.SelectItemAsync("<itemName>", "<origin>", "<version>", new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());

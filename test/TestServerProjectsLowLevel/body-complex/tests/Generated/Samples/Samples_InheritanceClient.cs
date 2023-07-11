@@ -6,10 +6,13 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
+using System.IO;
 using System.Text.Json;
 using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
+using Azure.Identity;
 using NUnit.Framework;
 
 namespace body_complex_LowLevel.Samples
@@ -23,7 +26,7 @@ namespace body_complex_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new InheritanceClient(credential);
 
-            Response response = client.GetValid();
+            Response response = client.GetValid(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());
@@ -36,7 +39,7 @@ namespace body_complex_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new InheritanceClient(credential);
 
-            Response response = client.GetValid();
+            Response response = client.GetValid(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("breed").ToString());
@@ -55,7 +58,7 @@ namespace body_complex_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new InheritanceClient(credential);
 
-            Response response = await client.GetValidAsync().ConfigureAwait(false);
+            Response response = await client.GetValidAsync(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());
@@ -68,7 +71,7 @@ namespace body_complex_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new InheritanceClient(credential);
 
-            Response response = await client.GetValidAsync().ConfigureAwait(false);
+            Response response = await client.GetValidAsync(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("breed").ToString());
@@ -128,7 +131,7 @@ namespace body_complex_LowLevel.Samples
 
             var data = new { };
 
-            Response response = await client.PutValidAsync(RequestContent.Create(data)).ConfigureAwait(false);
+            Response response = await client.PutValidAsync(RequestContent.Create(data));
             Console.WriteLine(response.Status);
         }
 
@@ -154,7 +157,7 @@ namespace body_complex_LowLevel.Samples
                 name = "<name>",
             };
 
-            Response response = await client.PutValidAsync(RequestContent.Create(data)).ConfigureAwait(false);
+            Response response = await client.PutValidAsync(RequestContent.Create(data));
             Console.WriteLine(response.Status);
         }
     }

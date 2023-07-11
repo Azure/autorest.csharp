@@ -7,7 +7,7 @@
 
 using System.Text.Json;
 
-namespace Azure.Language.Authoring.Models
+namespace AuthoringTypeSpec.Models
 {
     public partial class JobWarning
     {

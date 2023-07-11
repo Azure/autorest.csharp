@@ -1,8 +1,8 @@
 {
-  "OutputFolder": ".",
-  "Namespace": "Authentication.Union",
-  "LibraryName": "Authentication.Union",
-  "SharedSourceFolders": [
+  "output-folder": ".",
+  "namespace": "Authentication.Union",
+  "library-name": "Authentication.Union",
+  "shared-source-folders": [
     "../../../../../../artifacts/bin/AutoRest.CSharp/Debug/net6.0/Generator.Shared",
     "../../../../../../artifacts/bin/AutoRest.CSharp/Debug/net6.0/Azure.Core.Shared"
   ],

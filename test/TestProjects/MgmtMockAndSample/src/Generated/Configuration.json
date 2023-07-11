@@ -1,8 +1,8 @@
 {
-  "OutputFolder": ".",
-  "Namespace": "MgmtMockAndSample",
-  "LibraryName": "MgmtMockAndSample",
-  "SharedSourceFolders": [
+  "output-folder": ".",
+  "namespace": "MgmtMockAndSample",
+  "library-name": "MgmtMockAndSample",
+  "shared-source-folders": [
     "..\\..\\..\\..\\..\\artifacts\\bin\\AutoRest.CSharp\\Debug\\net6.0\\Generator.Shared",
     "..\\..\\..\\..\\..\\artifacts\\bin\\AutoRest.CSharp\\Debug\\net6.0\\Azure.Core.Shared"
   ],
@@ -14,7 +14,7 @@
     "EventData",
     "ManagedHsmProperties"
   ],
-  "additional-intrinsic-types-to-treat-empty-string-as-null": [
+  "intrinsic-types-to-treat-empty-string-as-null": [
     "Uri",
     "Guid",
     "ResourceIdentifier",
