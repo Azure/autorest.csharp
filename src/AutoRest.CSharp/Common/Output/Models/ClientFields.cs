@@ -31,6 +31,7 @@ namespace AutoRest.CSharp.Output.Models
 
         public CodeWriterScopeDeclarations ScopeDeclarations { get; }
 
+        private readonly FieldDeclaration? _apiVersionField;
         private readonly FieldDeclaration? _keyAuthField;
         private readonly FieldDeclaration? _tokenAuthField;
         private readonly IReadOnlyList<FieldDeclaration> _fields;
@@ -106,6 +107,11 @@ namespace AutoRest.CSharp.Output.Models
                 {
                     EndpointField = field;
                 }
+
+                if (parameter.IsApiVersionParameter)
+                {
+                    _apiVersionField = field;
+                }
             }
 
             fields.AddRange(properties);
@@ -132,6 +138,11 @@ namespace AutoRest.CSharp.Output.Models
                 return PipelineField;
             }
 
+            if (parameter.IsApiVersionParameter)
+            {
+                return new FieldDeclaration(Private | ReadOnly, typeof(string), "_" + parameter.Name);
+            }
+
             return parameter.IsResourceIdentifier
                 ? new FieldDeclaration($"{parameter.Description}", Public | ReadOnly, parameter.Type, parameter.Name.FirstCharToUpperCase(), writeAsProperty: true)
                 : new FieldDeclaration(Private | ReadOnly, parameter.Type, "_" + parameter.Name);
@@ -142,8 +153,18 @@ namespace AutoRest.CSharp.Output.Models
             {
                 "credential" when _keyAuthField != null && parameterType.EqualsIgnoreNullable(_keyAuthField.Type) => _keyAuthField,
                 "credential" when _tokenAuthField != null && parameterType.EqualsIgnoreNullable(_tokenAuthField.Type) => _tokenAuthField,
-                var name => _parameterNamesToFields.TryGetValue(name, out var field) ? parameterType.Equals(field.Type) ? field : null : null
+                _ => _parameterNamesToFields.TryGetValue(parameterName, out var field) ? CheckFieldType(parameterType, field) : null
             };
+
+        private FieldDeclaration? CheckFieldType(CSharpType parameterType, FieldDeclaration field)
+        {
+            if (field == _apiVersionField ? field.Type.Equals(typeof(string)) : field.Type.Equals(parameterType))
+            {
+                return field;
+            }
+
+            return null;
+        }
 
         public FieldDeclaration? GetFieldByParameter(Parameter parameter)
             => GetFieldByParameter(parameter.Name, parameter.Type);
