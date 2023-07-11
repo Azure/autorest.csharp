@@ -11,7 +11,7 @@ pr:
 variables:
   BlobFeedUrl: https://azuresdkartifacts.blob.core.windows.net/azure-sdk-tools/index.json
   OfficialBuildId: $(Build.BuildNumber)
-  NugetSecurityAnalysisWarningLevel: 'none'
+  nugetMultiFeedWarnLevel: 'none'
 
 resources:
   repositories:

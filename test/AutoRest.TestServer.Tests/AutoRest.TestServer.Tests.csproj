@@ -15,7 +15,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Azure.Core" Version="1.32.0" />
+    <PackageReference Include="Azure.Core" Version="1.33.0" />
     <PackageReference Include="Azure.Core.Experimental" Version="0.1.0-preview.18" />
     <PackageReference Include="Azure.Identity" Version="1.0.0" />
     <PackageReference Include="Azure.ResourceManager" Version="1.6.0" />
@@ -30,7 +30,7 @@
   <ItemGroup>
     <None Include="../swaggers/*.json" LinkBase="swaggers" />
     <Compile Include="../TestServerProjects/**/*.cs" LinkBase="TestServerProjects" />
-    <Compile Include="../TestProjects/**/*.cs" Exclude="../TestProjects/ConvenienceInitial-TypeSpec/**/*.cs" LinkBase="TestProjects" />
+    <Compile Include="../TestProjects/**/*.cs" Exclude="../TestProjects/ConvenienceInitial-TypeSpec/**/*.cs;../TestProjects/sdk/core/**" LinkBase="TestProjects" />
     <None Include="../TestServerProjects/**/*.yaml" LinkBase="TestServerProjects" />
     <Compile Update="..\TestProjects\TypeSchemaMapping\Customized\ModelWithCustomUsageViaAttribute.cs">
       <Link>TestProjects\TypeSchemaMapping\Customized\ModelWithCustomUsageViaAttribute.cs</Link>

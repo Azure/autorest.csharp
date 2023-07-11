@@ -1,8 +1,8 @@
 {
-  "OutputFolder": ".",
-  "Namespace": "MgmtExactMatchFlattenInheritance",
-  "LibraryName": "MgmtExactMatchFlattenInheritance",
-  "SharedSourceFolders": [
+  "output-folder": ".",
+  "namespace": "MgmtExactMatchFlattenInheritance",
+  "library-name": "MgmtExactMatchFlattenInheritance",
+  "shared-source-folders": [
     "..\\..\\..\\..\\artifacts\\bin\\AutoRest.CSharp\\Debug\\net6.0\\Generator.Shared",
     "..\\..\\..\\..\\artifacts\\bin\\AutoRest.CSharp\\Debug\\net6.0\\Azure.Core.Shared"
   ],

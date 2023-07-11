@@ -67,7 +67,7 @@ namespace SingleTopLevelClientWithOperations_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/Client4.xml" path="doc/members/member[@name='PatchAsync(string,RequestContext)']/*" />
-        public virtual async Task<Response> PatchAsync(string filter, RequestContext context = null)
+        public virtual async Task<Response> PatchAsync(string filter, RequestContext context)
         {
             Argument.AssertNotNull(filter, nameof(filter));
 
@@ -101,7 +101,7 @@ namespace SingleTopLevelClientWithOperations_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/Client4.xml" path="doc/members/member[@name='Patch(string,RequestContext)']/*" />
-        public virtual Response Patch(string filter, RequestContext context = null)
+        public virtual Response Patch(string filter, RequestContext context)
         {
             Argument.AssertNotNull(filter, nameof(filter));
 

@@ -15,7 +15,7 @@ namespace AutoRest.TestServer.Tests
         [Test]
         public Task HttpClientFailure400Delete() => Test((host) =>
         {
-            Assert.ThrowsAsync<RequestFailedException>(async () => await new HttpClientFailureClient(Key, host, null).Delete400Async(RequestContent.Create(new JsonData(true))));
+            Assert.ThrowsAsync<RequestFailedException>(async () => await new HttpClientFailureClient(Key, host, null).Delete400Async(RequestContent.Create(new JsonData(true)), new()));
         });
 
         [Test]
@@ -39,19 +39,19 @@ namespace AutoRest.TestServer.Tests
         [Test]
         public Task HttpClientFailure400Patch() => Test((host) =>
         {
-            Assert.ThrowsAsync<RequestFailedException>(async () => await new HttpClientFailureClient(Key, host, null).Patch400Async(RequestContent.Create(new JsonData(true))));
+            Assert.ThrowsAsync<RequestFailedException>(async () => await new HttpClientFailureClient(Key, host, null).Patch400Async(RequestContent.Create(new JsonData(true)), new()));
         });
 
         [Test]
         public Task HttpClientFailure400Post() => Test((host) =>
         {
-            Assert.ThrowsAsync<RequestFailedException>(async () => await new HttpClientFailureClient(Key, host, null).Post400Async(RequestContent.Create(new JsonData(true))));
+            Assert.ThrowsAsync<RequestFailedException>(async () => await new HttpClientFailureClient(Key, host, null).Post400Async(RequestContent.Create(new JsonData(true)), new()));
         });
 
         [Test]
         public Task HttpClientFailure400Put() => Test((host) =>
         {
-            Assert.ThrowsAsync<RequestFailedException>(async () => await new HttpClientFailureClient(Key, host, null).Put400Async(RequestContent.Create(new JsonData(true))));
+            Assert.ThrowsAsync<RequestFailedException>(async () => await new HttpClientFailureClient(Key, host, null).Put400Async(RequestContent.Create(new JsonData(true)), new()));
         });
 
         [Test]
@@ -81,31 +81,31 @@ namespace AutoRest.TestServer.Tests
         [Test]
         public Task HttpClientFailure404Put() => Test((host) =>
         {
-            Assert.ThrowsAsync<RequestFailedException>(async () => await new HttpClientFailureClient(Key, host, null).Put404Async(RequestContent.Create(new JsonData(true))));
+            Assert.ThrowsAsync<RequestFailedException>(async () => await new HttpClientFailureClient(Key, host, null).Put404Async(RequestContent.Create(new JsonData(true)), new()));
         });
 
         [Test]
         public Task HttpClientFailure405Patch() => Test((host) =>
         {
-            Assert.ThrowsAsync<RequestFailedException>(async () => await new HttpClientFailureClient(Key, host, null).Patch405Async(RequestContent.Create(new JsonData(true))));
+            Assert.ThrowsAsync<RequestFailedException>(async () => await new HttpClientFailureClient(Key, host, null).Patch405Async(RequestContent.Create(new JsonData(true)), new()));
         });
 
         [Test]
         public Task HttpClientFailure406Post() => Test((host) =>
         {
-            Assert.ThrowsAsync<RequestFailedException>(async () => await new HttpClientFailureClient(Key, host, null).Post406Async(RequestContent.Create(new JsonData(true))));
+            Assert.ThrowsAsync<RequestFailedException>(async () => await new HttpClientFailureClient(Key, host, null).Post406Async(RequestContent.Create(new JsonData(true)), new()));
         });
 
         [Test]
         public Task HttpClientFailure407Delete() => Test((host) =>
         {
-            Assert.ThrowsAsync<RequestFailedException>(async () => await new HttpClientFailureClient(Key, host, null).Delete407Async(RequestContent.Create(new JsonData(true))));
+            Assert.ThrowsAsync<RequestFailedException>(async () => await new HttpClientFailureClient(Key, host, null).Delete407Async(RequestContent.Create(new JsonData(true)), new()));
         });
 
         [Test]
         public Task HttpClientFailure409Put() => Test((host) =>
         {
-            Assert.ThrowsAsync<RequestFailedException>(async () => await new HttpClientFailureClient(Key, host, null).Put409Async(RequestContent.Create(new JsonData(true))));
+            Assert.ThrowsAsync<RequestFailedException>(async () => await new HttpClientFailureClient(Key, host, null).Put409Async(RequestContent.Create(new JsonData(true)), new()));
         });
 
         [Test]
@@ -135,19 +135,19 @@ namespace AutoRest.TestServer.Tests
         [Test]
         public Task HttpClientFailure413Put() => Test((host) =>
         {
-            Assert.ThrowsAsync<RequestFailedException>(async () => await new HttpClientFailureClient(Key, host, null).Put413Async(RequestContent.Create(new JsonData(true))));
+            Assert.ThrowsAsync<RequestFailedException>(async () => await new HttpClientFailureClient(Key, host, null).Put413Async(RequestContent.Create(new JsonData(true)), new()));
         });
 
         [Test]
         public Task HttpClientFailure414Patch() => Test((host) =>
         {
-            Assert.ThrowsAsync<RequestFailedException>(async () => await new HttpClientFailureClient(Key, host, null).Patch414Async(RequestContent.Create(new JsonData(true))));
+            Assert.ThrowsAsync<RequestFailedException>(async () => await new HttpClientFailureClient(Key, host, null).Patch414Async(RequestContent.Create(new JsonData(true)), new()));
         });
 
         [Test]
         public Task HttpClientFailure415Post() => Test((host) =>
         {
-            Assert.ThrowsAsync<RequestFailedException>(async () => await new HttpClientFailureClient(Key, host, null).Post415Async(RequestContent.Create(new JsonData(true))));
+            Assert.ThrowsAsync<RequestFailedException>(async () => await new HttpClientFailureClient(Key, host, null).Post415Async(RequestContent.Create(new JsonData(true)), new()));
         });
 
         [Test]
@@ -159,7 +159,7 @@ namespace AutoRest.TestServer.Tests
         [Test]
         public Task HttpClientFailure417Delete() => Test((host) =>
         {
-            Assert.ThrowsAsync<RequestFailedException>(async () => await new HttpClientFailureClient(Key, host, null).Delete417Async(RequestContent.Create(new JsonData(true))));
+            Assert.ThrowsAsync<RequestFailedException>(async () => await new HttpClientFailureClient(Key, host, null).Delete417Async(RequestContent.Create(new JsonData(true)), new()));
         });
 
         [Test]
@@ -190,7 +190,7 @@ namespace AutoRest.TestServer.Tests
 
         [Test]
         public Task HttpRedirect307Delete() => TestStatus(async (host) =>
-            await new HttpRedirectsClient(Key, host, null).Delete307Async(RequestContent.Create(new JsonData(true))));
+            await new HttpRedirectsClient(Key, host, null).Delete307Async(RequestContent.Create(new JsonData(true)), new()));
 
         [Test]
         public Task HttpRedirect307Get() => TestStatus(async (host) =>
@@ -206,15 +206,15 @@ namespace AutoRest.TestServer.Tests
 
         [Test]
         public Task HttpRedirect307Patch() => TestStatus(async (host) =>
-            await new HttpRedirectsClient(Key, host, null).Patch307Async(RequestContent.Create(new JsonData(true))));
+            await new HttpRedirectsClient(Key, host, null).Patch307Async(RequestContent.Create(new JsonData(true)), new()));
 
         [Test]
         public Task HttpRedirect307Post() => TestStatus(async (host) =>
-            await new HttpRedirectsClient(Key, host, null).Post307Async(RequestContent.Create(new JsonData(true))));
+            await new HttpRedirectsClient(Key, host, null).Post307Async(RequestContent.Create(new JsonData(true)), new()));
 
         [Test]
         public Task HttpRedirect307Put() => TestStatus(async (host) =>
-            await new HttpRedirectsClient(Key, host, null).Put307Async(RequestContent.Create(new JsonData(true))));
+            await new HttpRedirectsClient(Key, host, null).Put307Async(RequestContent.Create(new JsonData(true)), new()));
 
         [Test]
         public Task HttpRetry408Head() => TestStatus(async (host) =>
@@ -222,11 +222,11 @@ namespace AutoRest.TestServer.Tests
 
         [Test]
         public Task HttpRetry500Patch() => TestStatus(async (host) =>
-            await new HttpRetryClient(Key, host, null).Patch500Async(RequestContent.Create(new JsonData(true))));
+            await new HttpRetryClient(Key, host, null).Patch500Async(RequestContent.Create(new JsonData(true)), new()));
 
         [Test]
         public Task HttpRetry500Put() => TestStatus(async (host) =>
-            await new HttpRetryClient(Key, host, null).Put500Async(RequestContent.Create(new JsonData(true))));
+            await new HttpRetryClient(Key, host, null).Put500Async(RequestContent.Create(new JsonData(true)), new()));
 
         [Test]
         public Task HttpRetry502Get() => TestStatus(async (host) =>
@@ -241,19 +241,19 @@ namespace AutoRest.TestServer.Tests
 
         [Test]
         public Task HttpRetry503Delete() => TestStatus(async (host) =>
-            await new HttpRetryClient(Key, host, null).Delete503Async(RequestContent.Create(new JsonData(true))));
+            await new HttpRetryClient(Key, host, null).Delete503Async(RequestContent.Create(new JsonData(true)), new()));
 
         [Test]
         public Task HttpRetry503Post() => TestStatus(async (host) =>
-            await new HttpRetryClient(Key, host, null).Post503Async(RequestContent.Create(new JsonData(true))));
+            await new HttpRetryClient(Key, host, null).Post503Async(RequestContent.Create(new JsonData(true)), new()));
 
         [Test]
         public Task HttpRetry504Patch() => TestStatus(async (host) =>
-            await new HttpRetryClient(Key, host, null).Patch504Async(RequestContent.Create(new JsonData(true))));
+            await new HttpRetryClient(Key, host, null).Patch504Async(RequestContent.Create(new JsonData(true)), new()));
 
         [Test]
         public Task HttpRetry504Put() => TestStatus(async (host) =>
-            await new HttpRetryClient(Key, host, null).Put504Async(RequestContent.Create(new JsonData(true))));
+            await new HttpRetryClient(Key, host, null).Put504Async(RequestContent.Create(new JsonData(true)), new()));
 
         [Test]
         public Task HttpServerFailure501Get() => Test((host) =>
@@ -270,18 +270,18 @@ namespace AutoRest.TestServer.Tests
         [Test]
         public Task HttpServerFailure505Delete() => Test((host) =>
         {
-            Assert.ThrowsAsync<RequestFailedException>(async () => await new HttpServerFailureClient(Key, host, null).Delete505Async(RequestContent.Create(new JsonData(true))));
+            Assert.ThrowsAsync<RequestFailedException>(async () => await new HttpServerFailureClient(Key, host, null).Delete505Async(RequestContent.Create(new JsonData(true)), new()));
         });
 
         [Test]
         public Task HttpServerFailure505Post() => Test((host) =>
         {
-            Assert.ThrowsAsync<RequestFailedException>(async () => await new HttpServerFailureClient(Key, host, null).Post505Async(RequestContent.Create(new JsonData(true))));
+            Assert.ThrowsAsync<RequestFailedException>(async () => await new HttpServerFailureClient(Key, host, null).Post505Async(RequestContent.Create(new JsonData(true)), new()));
         });
 
         [Test]
         public Task HttpSuccess200Delete() => TestStatus(async (host) =>
-            await new HttpSuccessClient(Key, host, null).Delete200Async(RequestContent.Create(new JsonData(true))));
+            await new HttpSuccessClient(Key, host, null).Delete200Async(RequestContent.Create(new JsonData(true)), new()));
 
         [Test]
         public Task HttpSuccess200Get() => Test(async (host) =>
@@ -304,43 +304,43 @@ namespace AutoRest.TestServer.Tests
 
         [Test]
         public Task HttpSuccess200Patch() => TestStatus(async (host) =>
-            await new HttpSuccessClient(Key, host, null).Patch200Async(RequestContent.Create(new JsonData(true))));
+            await new HttpSuccessClient(Key, host, null).Patch200Async(RequestContent.Create(new JsonData(true)), new()));
 
         [Test]
         public Task HttpSuccess200Post() => TestStatus(async (host) =>
-            await new HttpSuccessClient(Key, host, null).Post200Async(RequestContent.Create(new JsonData(true))));
+            await new HttpSuccessClient(Key, host, null).Post200Async(RequestContent.Create(new JsonData(true)), new()));
 
         [Test]
         public Task HttpSuccess200Put() => TestStatus(async (host) =>
-            await new HttpSuccessClient(Key, host, null).Put200Async(RequestContent.Create(new JsonData(true))));
+            await new HttpSuccessClient(Key, host, null).Put200Async(RequestContent.Create(new JsonData(true)), new()));
 
         [Test]
         public Task HttpSuccess201Post() => TestStatus(async (host) =>
-            await new HttpSuccessClient(Key, host, null).Post201Async(RequestContent.Create(new JsonData(true))));
+            await new HttpSuccessClient(Key, host, null).Post201Async(RequestContent.Create(new JsonData(true)), new()));
 
         [Test]
         public Task HttpSuccess201Put() => TestStatus(async (host) =>
-            await new HttpSuccessClient(Key, host, null).Put201Async(RequestContent.Create(new JsonData(true))));
+            await new HttpSuccessClient(Key, host, null).Put201Async(RequestContent.Create(new JsonData(true)), new()));
 
         [Test]
         public Task HttpSuccess202Delete() => TestStatus(async (host) =>
-            await new HttpSuccessClient(Key, host, null).Delete202Async(RequestContent.Create(new JsonData(true))));
+            await new HttpSuccessClient(Key, host, null).Delete202Async(RequestContent.Create(new JsonData(true)), new()));
 
         [Test]
         public Task HttpSuccess202Patch() => TestStatus(async (host) =>
-            await new HttpSuccessClient(Key, host, null).Patch202Async(RequestContent.Create(new JsonData(true))));
+            await new HttpSuccessClient(Key, host, null).Patch202Async(RequestContent.Create(new JsonData(true)), new()));
 
         [Test]
         public Task HttpSuccess202Post() => TestStatus(async (host) =>
-            await new HttpSuccessClient(Key, host, null).Post202Async(RequestContent.Create(new JsonData(true))));
+            await new HttpSuccessClient(Key, host, null).Post202Async(RequestContent.Create(new JsonData(true)), new()));
 
         [Test]
         public Task HttpSuccess202Put() => TestStatus(async (host) =>
-            await new HttpSuccessClient(Key, host, null).Put202Async(RequestContent.Create(new JsonData(true))));
+            await new HttpSuccessClient(Key, host, null).Put202Async(RequestContent.Create(new JsonData(true)), new()));
 
         [Test]
         public Task HttpSuccess204Delete() => TestStatus(async (host) =>
-            await new HttpSuccessClient(Key, host, null).Delete204Async(RequestContent.Create(new JsonData(true))));
+            await new HttpSuccessClient(Key, host, null).Delete204Async(RequestContent.Create(new JsonData(true)), new()));
 
         [Test]
         public Task HttpSuccess204Head() => TestStatus(async (host) =>
@@ -348,15 +348,15 @@ namespace AutoRest.TestServer.Tests
 
         [Test]
         public Task HttpSuccess204Patch() => TestStatus(async (host) =>
-            await new HttpSuccessClient(Key, host, null).Patch204Async(RequestContent.Create(new JsonData(true))));
+            await new HttpSuccessClient(Key, host, null).Patch204Async(RequestContent.Create(new JsonData(true)), new()));
 
         [Test]
         public Task HttpSuccess204Post() => TestStatus(async (host) =>
-            await new HttpSuccessClient(Key, host, null).Post204Async(RequestContent.Create(new JsonData(true))));
+            await new HttpSuccessClient(Key, host, null).Post204Async(RequestContent.Create(new JsonData(true)), new()));
 
         [Test]
         public Task HttpSuccess204Put() => TestStatus(async (host) =>
-            await new HttpSuccessClient(Key, host, null).Put204Async(RequestContent.Create(new JsonData(true))));
+            await new HttpSuccessClient(Key, host, null).Put204Async(RequestContent.Create(new JsonData(true)), new()));
 
         [Test]
         public Task HttpSuccess404Head() => Test(async (host) =>

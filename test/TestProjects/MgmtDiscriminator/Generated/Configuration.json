@@ -1,15 +1,15 @@
 {
-  "OutputFolder": ".",
-  "Namespace": "MgmtDiscriminator",
-  "LibraryName": "ComputeManagementClient",
-  "SharedSourceFolders": [
+  "output-folder": ".",
+  "namespace": "MgmtDiscriminator",
+  "library-name": "ComputeManagementClient",
+  "shared-source-folders": [
     "..\\..\\..\\..\\artifacts\\bin\\AutoRest.CSharp\\Debug\\net6.0\\Generator.Shared",
     "..\\..\\..\\..\\artifacts\\bin\\AutoRest.CSharp\\Debug\\net6.0\\Azure.Core.Shared"
   ],
   "azure-arm": true,
   "public-clients": true,
   "skip-csproj-packagereference": true,
-  "SuppressAbstractBaseClasses": [
+  "suppress-abstract-base-class": [
     "DeliveryRuleAction"
   ]
 }

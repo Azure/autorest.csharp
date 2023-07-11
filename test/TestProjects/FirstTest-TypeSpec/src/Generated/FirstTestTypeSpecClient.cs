@@ -202,7 +202,7 @@ namespace FirstTestTypeSpec
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/FirstTestTypeSpecClient.xml" path="doc/members/member[@name='TopAction2Async(RequestContext)']/*" />
-        public virtual async Task<Response> TopAction2Async(RequestContext context = null)
+        public virtual async Task<Response> TopAction2Async(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("FirstTestTypeSpecClient.TopAction2");
             scope.Start();
@@ -232,7 +232,7 @@ namespace FirstTestTypeSpec
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/FirstTestTypeSpecClient.xml" path="doc/members/member[@name='TopAction2(RequestContext)']/*" />
-        public virtual Response TopAction2(RequestContext context = null)
+        public virtual Response TopAction2(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("FirstTestTypeSpecClient.TopAction2");
             scope.Start();
@@ -828,7 +828,7 @@ namespace FirstTestTypeSpec
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/FirstTestTypeSpecClient.xml" path="doc/members/member[@name='SayHiAsync(string,string,string,RequestContext)']/*" />
-        public virtual async Task<Response> SayHiAsync(string headParameter, string queryParameter, string optionalQuery = null, RequestContext context = null)
+        public virtual async Task<Response> SayHiAsync(string headParameter, string queryParameter, string optionalQuery, RequestContext context)
         {
             Argument.AssertNotNull(headParameter, nameof(headParameter));
             Argument.AssertNotNull(queryParameter, nameof(queryParameter));
@@ -865,7 +865,7 @@ namespace FirstTestTypeSpec
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/FirstTestTypeSpecClient.xml" path="doc/members/member[@name='SayHi(string,string,string,RequestContext)']/*" />
-        public virtual Response SayHi(string headParameter, string queryParameter, string optionalQuery = null, RequestContext context = null)
+        public virtual Response SayHi(string headParameter, string queryParameter, string optionalQuery, RequestContext context)
         {
             Argument.AssertNotNull(headParameter, nameof(headParameter));
             Argument.AssertNotNull(queryParameter, nameof(queryParameter));
@@ -1388,7 +1388,7 @@ namespace FirstTestTypeSpec
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/FirstTestTypeSpecClient.xml" path="doc/members/member[@name='GetUnknownValueAsync(RequestContext)']/*" />
-        public virtual async Task<Response> GetUnknownValueAsync(RequestContext context = null)
+        public virtual async Task<Response> GetUnknownValueAsync(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("FirstTestTypeSpecClient.GetUnknownValue");
             scope.Start();
@@ -1418,7 +1418,7 @@ namespace FirstTestTypeSpec
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/FirstTestTypeSpecClient.xml" path="doc/members/member[@name='GetUnknownValue(RequestContext)']/*" />
-        public virtual Response GetUnknownValue(RequestContext context = null)
+        public virtual Response GetUnknownValue(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("FirstTestTypeSpecClient.GetUnknownValue");
             scope.Start();
@@ -1542,22 +1542,42 @@ namespace FirstTestTypeSpec
 
         /// <summary> When set protocol false and convenient true, the convenient method should be generated even it has the same signature as protocol one. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <include file="Docs/FirstTestTypeSpecClient.xml" path="doc/members/member[@name='StillConvenientAsync(CancellationToken)']/*" />
-        public virtual async Task<Response> StillConvenientAsync(CancellationToken cancellationToken = default)
+        /// <include file="Docs/FirstTestTypeSpecClient.xml" path="doc/members/member[@name='StillConvenientValueAsync(CancellationToken)']/*" />
+        public virtual async Task<Response> StillConvenientValueAsync(CancellationToken cancellationToken = default)
         {
-            RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = await StillConvenientAsync(context).ConfigureAwait(false);
-            return response;
+            using var scope = ClientDiagnostics.CreateScope("FirstTestTypeSpecClient.StillConvenientValue");
+            scope.Start();
+            try
+            {
+                RequestContext context = FromCancellationToken(cancellationToken);
+                Response response = await StillConvenientAsync(context).ConfigureAwait(false);
+                return response;
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> When set protocol false and convenient true, the convenient method should be generated even it has the same signature as protocol one. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <include file="Docs/FirstTestTypeSpecClient.xml" path="doc/members/member[@name='StillConvenient(CancellationToken)']/*" />
-        public virtual Response StillConvenient(CancellationToken cancellationToken = default)
+        /// <include file="Docs/FirstTestTypeSpecClient.xml" path="doc/members/member[@name='StillConvenientValue(CancellationToken)']/*" />
+        public virtual Response StillConvenientValue(CancellationToken cancellationToken = default)
         {
-            RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = StillConvenient(context);
-            return response;
+            using var scope = ClientDiagnostics.CreateScope("FirstTestTypeSpecClient.StillConvenientValue");
+            scope.Start();
+            try
+            {
+                RequestContext context = FromCancellationToken(cancellationToken);
+                Response response = StillConvenient(context);
+                return response;
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary>
@@ -1570,7 +1590,7 @@ namespace FirstTestTypeSpec
         /// </item>
         /// <item>
         /// <description>
-        /// Please try the simpler <see cref="StillConvenientAsync(CancellationToken)"/> convenience overload with strongly typed models first.
+        /// Please try the simpler <see cref="StillConvenientValueAsync(CancellationToken)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>
@@ -1579,7 +1599,7 @@ namespace FirstTestTypeSpec
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/FirstTestTypeSpecClient.xml" path="doc/members/member[@name='StillConvenientAsync(RequestContext)']/*" />
-        internal virtual async Task<Response> StillConvenientAsync(RequestContext context)
+        internal virtual async Task<Response> StillConvenientAsync(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("FirstTestTypeSpecClient.StillConvenient");
             scope.Start();
@@ -1605,7 +1625,7 @@ namespace FirstTestTypeSpec
         /// </item>
         /// <item>
         /// <description>
-        /// Please try the simpler <see cref="StillConvenient(CancellationToken)"/> convenience overload with strongly typed models first.
+        /// Please try the simpler <see cref="StillConvenientValue(CancellationToken)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>
@@ -1614,7 +1634,7 @@ namespace FirstTestTypeSpec
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/FirstTestTypeSpecClient.xml" path="doc/members/member[@name='StillConvenient(RequestContext)']/*" />
-        internal virtual Response StillConvenient(RequestContext context)
+        internal virtual Response StillConvenient(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("FirstTestTypeSpecClient.StillConvenient");
             scope.Start();
@@ -1720,7 +1740,7 @@ namespace FirstTestTypeSpec
             request.Headers.Add("Accept", "application/json");
             if (repeatabilityFirstSent != null)
             {
-                request.Headers.Add("Repeatability-First-Sent", repeatabilityFirstSent.Value, "O");
+                request.Headers.Add("Repeatability-First-Sent", repeatabilityFirstSent.Value, "R");
             }
             return message;
         }
