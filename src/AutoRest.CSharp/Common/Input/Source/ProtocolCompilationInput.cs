@@ -94,9 +94,6 @@ namespace AutoRest.CSharp.Input.Source
         }
 
         private bool IsClient(INamedTypeSymbol type) => type.Name.EndsWith("Client");
-        private bool IsProtocolMethod(IMethodSymbol method) =>
-            method.Parameters.Length > 0
-            && ((method.Parameters.Last().Type as INamedTypeSymbol)!.IsSameType(KnownParameters.RequestContext.Type)
-            || (method.Parameters.Last().Type as INamedTypeSymbol)!.IsSameType(KnownParameters.RequestContextRequired.Type));
+        private bool IsProtocolMethod(IMethodSymbol method) => method.Parameters.Length > 0 && (method.Parameters.Last().Type as INamedTypeSymbol)!.IsSameType(KnownParameters.RequestContext.Type);
     }
 }
