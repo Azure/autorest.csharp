@@ -72,7 +72,7 @@ export async function $onEmit(context: EmitContext<NetEmitterOptions>) {
             );
             process.exit(1);
         }
-        const namespace = root.Name;
+        const tspNamespace = root.Name; // this is the top-level namespace defined in the typespec file, which is actually always different from the namespace of the SDK
         // await program.host.writeFile(outPath, prettierOutput(JSON.stringify(root, null, 2)));
         if (root) {
             const generatedFolder = resolvePath(outputFolder, "Generated");
@@ -112,12 +112,14 @@ export async function $onEmit(context: EmitContext<NetEmitterOptions>) {
 
             //emit configuration.json
             const configurations = {
-                OutputFolder: ".",
-                Namespace: options.namespace ?? namespace,
-                LibraryName:
-                    options["library-name"] ?? options.namespace ?? namespace,
-                SharedSourceFolders: resolvedSharedFolders ?? [],
-                SingleTopLevelClient: options["single-top-level-client"],
+                "output-folder": ".",
+                namespace: options.namespace ?? tspNamespace,
+                "library-name":
+                    options["library-name"] ??
+                    options.namespace ??
+                    tspNamespace,
+                "shared-source-folders": resolvedSharedFolders ?? [],
+                "single-top-level-client": options["single-top-level-client"],
                 "unreferenced-types-handling":
                     options["unreferenced-types-handling"],
                 "use-overloads-between-protocol-and-convenience":
@@ -125,9 +127,9 @@ export async function $onEmit(context: EmitContext<NetEmitterOptions>) {
                 "keep-non-overloadable-protocol-signature":
                     options["keep-non-overloadable-protocol-signature"],
                 "model-namespace": options["model-namespace"],
-                ModelsToTreatEmptyStringAsNull:
+                "models-to-treat-empty-string-as-null":
                     options["models-to-treat-empty-string-as-null"],
-                IntrinsicTypesToTreatEmptyStringAsNull: options[
+                "intrinsic-types-to-treat-empty-string-as-null": options[
                     "models-to-treat-empty-string-as-null"
                 ]
                     ? options[
@@ -158,7 +160,7 @@ export async function $onEmit(context: EmitContext<NetEmitterOptions>) {
             if (options.skipSDKGeneration !== true) {
                 const csProjFile = resolvePath(
                     outputFolder,
-                    `${configurations.LibraryName}.csproj`
+                    `${configurations["library-name"]}.csproj`
                 );
                 logger.info(`Checking if ${csProjFile} exists`);
                 const newProjectOption =
@@ -208,10 +210,4 @@ function deleteFile(filePath: string) {
 
 function prettierOutput(output: string) {
     return output + "\n";
-}
-
-class ErrorTypeFoundError extends Error {
-    constructor() {
-        super("Error type found in evaluated typespec output");
-    }
 }

@@ -1,8 +1,8 @@
 {
-  "OutputFolder": ".",
-  "Namespace": "MgmtHierarchicalNonResource",
-  "LibraryName": "ManagementOperations",
-  "SharedSourceFolders": [
+  "output-folder": ".",
+  "namespace": "MgmtHierarchicalNonResource",
+  "library-name": "ManagementOperations",
+  "shared-source-folders": [
     "..\\..\\..\\..\\artifacts\\bin\\AutoRest.CSharp\\Debug\\net6.0\\Generator.Shared",
     "..\\..\\..\\..\\artifacts\\bin\\AutoRest.CSharp\\Debug\\net6.0\\Azure.Core.Shared"
   ],

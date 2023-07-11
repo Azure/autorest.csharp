@@ -1,8 +1,8 @@
 {
-  "OutputFolder": ".",
-  "Namespace": "Authentication.Http.Custom",
-  "LibraryName": "Authentication.Http.Custom",
-  "SharedSourceFolders": [
+  "output-folder": ".",
+  "namespace": "Authentication.Http.Custom",
+  "library-name": "Authentication.Http.Custom",
+  "shared-source-folders": [
     "../../../../../../../artifacts/bin/AutoRest.CSharp/Debug/net6.0/Generator.Shared",
     "../../../../../../../artifacts/bin/AutoRest.CSharp/Debug/net6.0/Azure.Core.Shared"
   ],

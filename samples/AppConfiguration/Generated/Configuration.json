@@ -1,8 +1,8 @@
 {
-  "OutputFolder": ".",
-  "Namespace": "AppConfiguration",
-  "LibraryName": "AppConfiguration",
-  "SharedSourceFolders": [
+  "output-folder": ".",
+  "namespace": "AppConfiguration",
+  "library-name": "AppConfiguration",
+  "shared-source-folders": [
     "..\\..\\..\\artifacts\\bin\\AutoRest.CSharp\\Debug\\net6.0\\Generator.Shared",
     "..\\..\\..\\artifacts\\bin\\AutoRest.CSharp\\Debug\\net6.0\\Azure.Core.Shared"
   ],
