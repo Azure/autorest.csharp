@@ -1,8 +1,8 @@
 {
-  "OutputFolder": ".",
-  "Namespace": "media_types",
-  "LibraryName": "MediaTypesClient",
-  "SharedSourceFolders": [
+  "output-folder": ".",
+  "namespace": "media_types",
+  "library-name": "MediaTypesClient",
+  "shared-source-folders": [
     "..\\..\\..\\..\\artifacts\\bin\\AutoRest.CSharp\\Debug\\net6.0\\Generator.Shared",
     "..\\..\\..\\..\\artifacts\\bin\\AutoRest.CSharp\\Debug\\net6.0\\Azure.Core.Shared"
   ],

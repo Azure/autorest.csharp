@@ -1,8 +1,8 @@
 {
-  "OutputFolder": ".",
-  "Namespace": "Authentication.OAuth2",
-  "LibraryName": "Authentication.OAuth2",
-  "SharedSourceFolders": [
+  "output-folder": ".",
+  "namespace": "Authentication.OAuth2",
+  "library-name": "Authentication.OAuth2",
+  "shared-source-folders": [
     "../../../../../../artifacts/bin/AutoRest.CSharp/Debug/net6.0/Generator.Shared",
     "../../../../../../artifacts/bin/AutoRest.CSharp/Debug/net6.0/Azure.Core.Shared"
   ],

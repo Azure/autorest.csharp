@@ -1,8 +1,8 @@
 {
-  "OutputFolder": ".",
-  "Namespace": "TypeSpec.EnumPropertiesBasic",
-  "LibraryName": "TypeSpec.EnumPropertiesBasic",
-  "SharedSourceFolders": [
+  "output-folder": ".",
+  "namespace": "TypeSpec.EnumPropertiesBasic",
+  "library-name": "TypeSpec.EnumPropertiesBasic",
+  "shared-source-folders": [
     "../../../../../../../node_modules/@autorest/csharp/Generator.Shared",
     "../../../../../../../node_modules/@autorest/csharp/Azure.Core.Shared"
   ],

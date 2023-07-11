@@ -1,8 +1,8 @@
 {
-  "OutputFolder": ".",
-  "Namespace": "body_string",
-  "LibraryName": "AutoRestSwaggerBATService",
-  "SharedSourceFolders": [
+  "output-folder": ".",
+  "namespace": "body_string",
+  "library-name": "AutoRestSwaggerBATService",
+  "shared-source-folders": [
     "..\\..\\..\\..\\artifacts\\bin\\AutoRest.CSharp\\Debug\\net6.0\\Generator.Shared",
     "..\\..\\..\\..\\artifacts\\bin\\AutoRest.CSharp\\Debug\\net6.0\\Azure.Core.Shared"
   ],
