@@ -48,6 +48,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             _inputClients = inputClients;
         }
 
+        // TODO -- use the Operations on LowLevelClient instead to ensure the dictionary by reference?
         private readonly IEnumerable<InputClient> _inputClients;
 
         private IEnumerable<InputClientExample>? _inputClientExamples;

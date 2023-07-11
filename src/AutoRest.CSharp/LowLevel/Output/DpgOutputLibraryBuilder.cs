@@ -402,6 +402,7 @@ namespace AutoRest.CSharp.Output.Models
             }
         }
 
+        // TODO -- should add the reference of InputClient into this class as reference when we build LowLevelClient
         private class ClientInfo
         {
             public string OperationGroupKey { get; }

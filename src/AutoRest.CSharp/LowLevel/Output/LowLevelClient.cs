@@ -29,7 +29,6 @@ namespace AutoRest.CSharp.Output.Models
         private readonly TypeFactory _typeFactory;
         private readonly IEnumerable<InputParameter> _clientParameters;
         private readonly InputAuth _authorization;
-        private readonly IEnumerable<InputOperation> _operations;
         private readonly SourceInputModel? _sourceInputModel;
 
         protected override string DefaultName { get; }
@@ -64,11 +63,13 @@ namespace AutoRest.CSharp.Output.Models
 
             _clientParameters = clientParameters;
             _authorization = authorization;
-            _operations = operations;
+            Operations = operations;
             _sourceInputModel = sourceInputModel;
 
             SubClients = Array.Empty<LowLevelClient>();
         }
+
+        internal IEnumerable<InputOperation> Operations { get; }
 
         private IReadOnlyList<Parameter>? _parameters;
         public IReadOnlyList<Parameter> Parameters => _parameters ??= new RestClientBuilder(_clientParameters, _typeFactory).GetOrderedParametersByRequired();
@@ -82,7 +83,7 @@ namespace AutoRest.CSharp.Output.Models
         public ConstructorSignature[] SecondaryConstructors => Constructors.SecondaryConstructors;
 
         private IReadOnlyList<LowLevelClientMethod>? _allClientMethods;
-        private IReadOnlyList<LowLevelClientMethod> AllClientMethods => _allClientMethods ??= BuildMethods(_typeFactory, _operations, Fields, Declaration.Namespace, Declaration.Name, _sourceInputModel).ToArray();
+        private IReadOnlyList<LowLevelClientMethod> AllClientMethods => _allClientMethods ??= BuildMethods(_typeFactory, Operations, Fields, Declaration.Namespace, Declaration.Name, _sourceInputModel).ToArray();
 
         private IReadOnlyList<LowLevelClientMethod>? _clientMethods;
         public IReadOnlyList<LowLevelClientMethod> ClientMethods => _clientMethods ??= AllClientMethods
