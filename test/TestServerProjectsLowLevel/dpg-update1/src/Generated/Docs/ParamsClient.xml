@@ -8,7 +8,7 @@ This sample shows how to call HeadNoParamsAsync and parse the result.
 var credential = new AzureKeyCredential("<key>");
 var client = new ParamsClient(credential);
 
-Response response = await client.HeadNoParamsAsync();
+Response response = await client.HeadNoParamsAsync().ConfigureAwait(false);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.ToString());
@@ -18,7 +18,7 @@ This sample shows how to call HeadNoParamsAsync with all parameters, and how to 
 var credential = new AzureKeyCredential("<key>");
 var client = new ParamsClient(credential);
 
-Response response = await client.HeadNoParamsAsync("<newParameter>");
+Response response = await client.HeadNoParamsAsync("<newParameter>").ConfigureAwait(false);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.ToString());
@@ -56,7 +56,7 @@ This sample shows how to call GetRequiredAsync with required parameters and pars
 var credential = new AzureKeyCredential("<key>");
 var client = new ParamsClient(credential);
 
-Response response = await client.GetRequiredAsync("<parameter>");
+Response response = await client.GetRequiredAsync("<parameter>").ConfigureAwait(false);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.ToString());
@@ -66,7 +66,7 @@ This sample shows how to call GetRequiredAsync with all parameters, and how to p
 var credential = new AzureKeyCredential("<key>");
 var client = new ParamsClient(credential);
 
-Response response = await client.GetRequiredAsync("<parameter>", "<newParameter>");
+Response response = await client.GetRequiredAsync("<parameter>", "<newParameter>").ConfigureAwait(false);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.ToString());
@@ -104,7 +104,7 @@ This sample shows how to call PutRequiredOptionalAsync with required parameters 
 var credential = new AzureKeyCredential("<key>");
 var client = new ParamsClient(credential);
 
-Response response = await client.PutRequiredOptionalAsync("<requiredParam>");
+Response response = await client.PutRequiredOptionalAsync("<requiredParam>").ConfigureAwait(false);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.ToString());
@@ -114,7 +114,7 @@ This sample shows how to call PutRequiredOptionalAsync with all parameters, and 
 var credential = new AzureKeyCredential("<key>");
 var client = new ParamsClient(credential);
 
-Response response = await client.PutRequiredOptionalAsync("<requiredParam>", "<optionalParam>", "<newParameter>");
+Response response = await client.PutRequiredOptionalAsync("<requiredParam>", "<optionalParam>", "<newParameter>").ConfigureAwait(false);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.ToString());
@@ -156,7 +156,7 @@ var data = new {
     url = "<url>",
 };
 
-Response response = await client.PostParametersAsync(RequestContent.Create(data), ContentType.ApplicationOctetStream);
+Response response = await client.PostParametersAsync(RequestContent.Create(data), ContentType.ApplicationOctetStream).ConfigureAwait(false);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.ToString());
@@ -188,7 +188,7 @@ This sample shows how to call DeleteParametersAsync.
 var credential = new AzureKeyCredential("<key>");
 var client = new ParamsClient(credential);
 
-Response response = await client.DeleteParametersAsync();
+Response response = await client.DeleteParametersAsync().ConfigureAwait(false);
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
@@ -212,7 +212,7 @@ This sample shows how to call GetOptionalAsync and parse the result.
 var credential = new AzureKeyCredential("<key>");
 var client = new ParamsClient(credential);
 
-Response response = await client.GetOptionalAsync();
+Response response = await client.GetOptionalAsync().ConfigureAwait(false);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.ToString());
@@ -222,7 +222,7 @@ This sample shows how to call GetOptionalAsync with all parameters, and how to p
 var credential = new AzureKeyCredential("<key>");
 var client = new ParamsClient(credential);
 
-Response response = await client.GetOptionalAsync("<optionalParam>", "<newParameter>");
+Response response = await client.GetOptionalAsync("<optionalParam>", "<newParameter>").ConfigureAwait(false);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.ToString());
@@ -260,7 +260,7 @@ This sample shows how to call GetNewOperationAsync and parse the result.
 var credential = new AzureKeyCredential("<key>");
 var client = new ParamsClient(credential);
 
-Response response = await client.GetNewOperationAsync();
+Response response = await client.GetNewOperationAsync().ConfigureAwait(false);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.ToString());

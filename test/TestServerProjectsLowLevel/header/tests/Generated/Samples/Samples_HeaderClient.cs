@@ -6,13 +6,8 @@
 #nullable disable
 
 using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Text.Json;
 using System.Threading.Tasks;
 using Azure;
-using Azure.Core;
-using Azure.Identity;
 using NUnit.Framework;
 
 namespace header_LowLevel.Samples
@@ -48,7 +43,7 @@ namespace header_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new HeaderClient(credential);
 
-            Response response = await client.ParamExistingKeyAsync("<userAgent>");
+            Response response = await client.ParamExistingKeyAsync("<userAgent>").ConfigureAwait(false);
             Console.WriteLine(response.Status);
         }
 
@@ -59,7 +54,7 @@ namespace header_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new HeaderClient(credential);
 
-            Response response = await client.ParamExistingKeyAsync("<userAgent>");
+            Response response = await client.ParamExistingKeyAsync("<userAgent>").ConfigureAwait(false);
             Console.WriteLine(response.Status);
         }
 
@@ -92,7 +87,7 @@ namespace header_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new HeaderClient(credential);
 
-            Response response = await client.ResponseExistingKeyAsync();
+            Response response = await client.ResponseExistingKeyAsync().ConfigureAwait(false);
             Console.WriteLine(response.Status);
         }
 
@@ -103,7 +98,7 @@ namespace header_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new HeaderClient(credential);
 
-            Response response = await client.ResponseExistingKeyAsync();
+            Response response = await client.ResponseExistingKeyAsync().ConfigureAwait(false);
             Console.WriteLine(response.Status);
         }
 
@@ -136,7 +131,7 @@ namespace header_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new HeaderClient(credential);
 
-            Response response = await client.ParamProtectedKeyAsync("<contentType>");
+            Response response = await client.ParamProtectedKeyAsync("<contentType>").ConfigureAwait(false);
             Console.WriteLine(response.Status);
         }
 
@@ -147,7 +142,7 @@ namespace header_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new HeaderClient(credential);
 
-            Response response = await client.ParamProtectedKeyAsync("<contentType>");
+            Response response = await client.ParamProtectedKeyAsync("<contentType>").ConfigureAwait(false);
             Console.WriteLine(response.Status);
         }
 
@@ -180,7 +175,7 @@ namespace header_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new HeaderClient(credential);
 
-            Response response = await client.ResponseProtectedKeyAsync();
+            Response response = await client.ResponseProtectedKeyAsync().ConfigureAwait(false);
             Console.WriteLine(response.Status);
         }
 
@@ -191,7 +186,7 @@ namespace header_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new HeaderClient(credential);
 
-            Response response = await client.ResponseProtectedKeyAsync();
+            Response response = await client.ResponseProtectedKeyAsync().ConfigureAwait(false);
             Console.WriteLine(response.Status);
         }
 
@@ -224,7 +219,7 @@ namespace header_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new HeaderClient(credential);
 
-            Response response = await client.ParamIntegerAsync("<scenario>", 1234);
+            Response response = await client.ParamIntegerAsync("<scenario>", 1234).ConfigureAwait(false);
             Console.WriteLine(response.Status);
         }
 
@@ -235,7 +230,7 @@ namespace header_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new HeaderClient(credential);
 
-            Response response = await client.ParamIntegerAsync("<scenario>", 1234);
+            Response response = await client.ParamIntegerAsync("<scenario>", 1234).ConfigureAwait(false);
             Console.WriteLine(response.Status);
         }
 
@@ -268,7 +263,7 @@ namespace header_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new HeaderClient(credential);
 
-            Response response = await client.ResponseIntegerAsync("<scenario>");
+            Response response = await client.ResponseIntegerAsync("<scenario>").ConfigureAwait(false);
             Console.WriteLine(response.Status);
         }
 
@@ -279,7 +274,7 @@ namespace header_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new HeaderClient(credential);
 
-            Response response = await client.ResponseIntegerAsync("<scenario>");
+            Response response = await client.ResponseIntegerAsync("<scenario>").ConfigureAwait(false);
             Console.WriteLine(response.Status);
         }
 
@@ -290,7 +285,7 @@ namespace header_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new HeaderClient(credential);
 
-            Response response = client.ParamLong("<scenario>", 1234);
+            Response response = client.ParamLong("<scenario>", 1234L);
             Console.WriteLine(response.Status);
         }
 
@@ -301,7 +296,7 @@ namespace header_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new HeaderClient(credential);
 
-            Response response = client.ParamLong("<scenario>", 1234);
+            Response response = client.ParamLong("<scenario>", 1234L);
             Console.WriteLine(response.Status);
         }
 
@@ -312,7 +307,7 @@ namespace header_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new HeaderClient(credential);
 
-            Response response = await client.ParamLongAsync("<scenario>", 1234);
+            Response response = await client.ParamLongAsync("<scenario>", 1234L).ConfigureAwait(false);
             Console.WriteLine(response.Status);
         }
 
@@ -323,7 +318,7 @@ namespace header_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new HeaderClient(credential);
 
-            Response response = await client.ParamLongAsync("<scenario>", 1234);
+            Response response = await client.ParamLongAsync("<scenario>", 1234L).ConfigureAwait(false);
             Console.WriteLine(response.Status);
         }
 
@@ -356,7 +351,7 @@ namespace header_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new HeaderClient(credential);
 
-            Response response = await client.ResponseLongAsync("<scenario>");
+            Response response = await client.ResponseLongAsync("<scenario>").ConfigureAwait(false);
             Console.WriteLine(response.Status);
         }
 
@@ -367,7 +362,7 @@ namespace header_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new HeaderClient(credential);
 
-            Response response = await client.ResponseLongAsync("<scenario>");
+            Response response = await client.ResponseLongAsync("<scenario>").ConfigureAwait(false);
             Console.WriteLine(response.Status);
         }
 
@@ -400,7 +395,7 @@ namespace header_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new HeaderClient(credential);
 
-            Response response = await client.ParamFloatAsync("<scenario>", 3.14f);
+            Response response = await client.ParamFloatAsync("<scenario>", 3.14f).ConfigureAwait(false);
             Console.WriteLine(response.Status);
         }
 
@@ -411,7 +406,7 @@ namespace header_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new HeaderClient(credential);
 
-            Response response = await client.ParamFloatAsync("<scenario>", 3.14f);
+            Response response = await client.ParamFloatAsync("<scenario>", 3.14f).ConfigureAwait(false);
             Console.WriteLine(response.Status);
         }
 
@@ -444,7 +439,7 @@ namespace header_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new HeaderClient(credential);
 
-            Response response = await client.ResponseFloatAsync("<scenario>");
+            Response response = await client.ResponseFloatAsync("<scenario>").ConfigureAwait(false);
             Console.WriteLine(response.Status);
         }
 
@@ -455,7 +450,7 @@ namespace header_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new HeaderClient(credential);
 
-            Response response = await client.ResponseFloatAsync("<scenario>");
+            Response response = await client.ResponseFloatAsync("<scenario>").ConfigureAwait(false);
             Console.WriteLine(response.Status);
         }
 
@@ -466,7 +461,7 @@ namespace header_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new HeaderClient(credential);
 
-            Response response = client.ParamDouble("<scenario>", 3.14);
+            Response response = client.ParamDouble("<scenario>", 3.14d);
             Console.WriteLine(response.Status);
         }
 
@@ -477,7 +472,7 @@ namespace header_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new HeaderClient(credential);
 
-            Response response = client.ParamDouble("<scenario>", 3.14);
+            Response response = client.ParamDouble("<scenario>", 3.14d);
             Console.WriteLine(response.Status);
         }
 
@@ -488,7 +483,7 @@ namespace header_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new HeaderClient(credential);
 
-            Response response = await client.ParamDoubleAsync("<scenario>", 3.14);
+            Response response = await client.ParamDoubleAsync("<scenario>", 3.14d).ConfigureAwait(false);
             Console.WriteLine(response.Status);
         }
 
@@ -499,7 +494,7 @@ namespace header_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new HeaderClient(credential);
 
-            Response response = await client.ParamDoubleAsync("<scenario>", 3.14);
+            Response response = await client.ParamDoubleAsync("<scenario>", 3.14d).ConfigureAwait(false);
             Console.WriteLine(response.Status);
         }
 
@@ -532,7 +527,7 @@ namespace header_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new HeaderClient(credential);
 
-            Response response = await client.ResponseDoubleAsync("<scenario>");
+            Response response = await client.ResponseDoubleAsync("<scenario>").ConfigureAwait(false);
             Console.WriteLine(response.Status);
         }
 
@@ -543,7 +538,7 @@ namespace header_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new HeaderClient(credential);
 
-            Response response = await client.ResponseDoubleAsync("<scenario>");
+            Response response = await client.ResponseDoubleAsync("<scenario>").ConfigureAwait(false);
             Console.WriteLine(response.Status);
         }
 
@@ -576,7 +571,7 @@ namespace header_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new HeaderClient(credential);
 
-            Response response = await client.ParamBoolAsync("<scenario>", true);
+            Response response = await client.ParamBoolAsync("<scenario>", true).ConfigureAwait(false);
             Console.WriteLine(response.Status);
         }
 
@@ -587,7 +582,7 @@ namespace header_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new HeaderClient(credential);
 
-            Response response = await client.ParamBoolAsync("<scenario>", true);
+            Response response = await client.ParamBoolAsync("<scenario>", true).ConfigureAwait(false);
             Console.WriteLine(response.Status);
         }
 
@@ -620,7 +615,7 @@ namespace header_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new HeaderClient(credential);
 
-            Response response = await client.ResponseBoolAsync("<scenario>");
+            Response response = await client.ResponseBoolAsync("<scenario>").ConfigureAwait(false);
             Console.WriteLine(response.Status);
         }
 
@@ -631,7 +626,7 @@ namespace header_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new HeaderClient(credential);
 
-            Response response = await client.ResponseBoolAsync("<scenario>");
+            Response response = await client.ResponseBoolAsync("<scenario>").ConfigureAwait(false);
             Console.WriteLine(response.Status);
         }
 
@@ -664,7 +659,7 @@ namespace header_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new HeaderClient(credential);
 
-            Response response = await client.ParamStringAsync("<scenario>");
+            Response response = await client.ParamStringAsync("<scenario>").ConfigureAwait(false);
             Console.WriteLine(response.Status);
         }
 
@@ -675,7 +670,7 @@ namespace header_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new HeaderClient(credential);
 
-            Response response = await client.ParamStringAsync("<scenario>", "<value>");
+            Response response = await client.ParamStringAsync("<scenario>", "<value>").ConfigureAwait(false);
             Console.WriteLine(response.Status);
         }
 
@@ -708,7 +703,7 @@ namespace header_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new HeaderClient(credential);
 
-            Response response = await client.ResponseStringAsync("<scenario>");
+            Response response = await client.ResponseStringAsync("<scenario>").ConfigureAwait(false);
             Console.WriteLine(response.Status);
         }
 
@@ -719,7 +714,7 @@ namespace header_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new HeaderClient(credential);
 
-            Response response = await client.ResponseStringAsync("<scenario>");
+            Response response = await client.ResponseStringAsync("<scenario>").ConfigureAwait(false);
             Console.WriteLine(response.Status);
         }
 
@@ -752,7 +747,7 @@ namespace header_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new HeaderClient(credential);
 
-            Response response = await client.ParamDateAsync("<scenario>", DateTimeOffset.UtcNow);
+            Response response = await client.ParamDateAsync("<scenario>", DateTimeOffset.UtcNow).ConfigureAwait(false);
             Console.WriteLine(response.Status);
         }
 
@@ -763,7 +758,7 @@ namespace header_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new HeaderClient(credential);
 
-            Response response = await client.ParamDateAsync("<scenario>", DateTimeOffset.UtcNow);
+            Response response = await client.ParamDateAsync("<scenario>", DateTimeOffset.UtcNow).ConfigureAwait(false);
             Console.WriteLine(response.Status);
         }
 
@@ -796,7 +791,7 @@ namespace header_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new HeaderClient(credential);
 
-            Response response = await client.ResponseDateAsync("<scenario>");
+            Response response = await client.ResponseDateAsync("<scenario>").ConfigureAwait(false);
             Console.WriteLine(response.Status);
         }
 
@@ -807,7 +802,7 @@ namespace header_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new HeaderClient(credential);
 
-            Response response = await client.ResponseDateAsync("<scenario>");
+            Response response = await client.ResponseDateAsync("<scenario>").ConfigureAwait(false);
             Console.WriteLine(response.Status);
         }
 
@@ -840,7 +835,7 @@ namespace header_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new HeaderClient(credential);
 
-            Response response = await client.ParamDatetimeAsync("<scenario>", DateTimeOffset.UtcNow);
+            Response response = await client.ParamDatetimeAsync("<scenario>", DateTimeOffset.UtcNow).ConfigureAwait(false);
             Console.WriteLine(response.Status);
         }
 
@@ -851,7 +846,7 @@ namespace header_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new HeaderClient(credential);
 
-            Response response = await client.ParamDatetimeAsync("<scenario>", DateTimeOffset.UtcNow);
+            Response response = await client.ParamDatetimeAsync("<scenario>", DateTimeOffset.UtcNow).ConfigureAwait(false);
             Console.WriteLine(response.Status);
         }
 
@@ -884,7 +879,7 @@ namespace header_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new HeaderClient(credential);
 
-            Response response = await client.ResponseDatetimeAsync("<scenario>");
+            Response response = await client.ResponseDatetimeAsync("<scenario>").ConfigureAwait(false);
             Console.WriteLine(response.Status);
         }
 
@@ -895,7 +890,7 @@ namespace header_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new HeaderClient(credential);
 
-            Response response = await client.ResponseDatetimeAsync("<scenario>");
+            Response response = await client.ResponseDatetimeAsync("<scenario>").ConfigureAwait(false);
             Console.WriteLine(response.Status);
         }
 
@@ -928,7 +923,7 @@ namespace header_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new HeaderClient(credential);
 
-            Response response = await client.ParamDatetimeRfc1123Async("<scenario>");
+            Response response = await client.ParamDatetimeRfc1123Async("<scenario>").ConfigureAwait(false);
             Console.WriteLine(response.Status);
         }
 
@@ -939,7 +934,7 @@ namespace header_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new HeaderClient(credential);
 
-            Response response = await client.ParamDatetimeRfc1123Async("<scenario>", DateTimeOffset.UtcNow);
+            Response response = await client.ParamDatetimeRfc1123Async("<scenario>", DateTimeOffset.UtcNow).ConfigureAwait(false);
             Console.WriteLine(response.Status);
         }
 
@@ -972,7 +967,7 @@ namespace header_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new HeaderClient(credential);
 
-            Response response = await client.ResponseDatetimeRfc1123Async("<scenario>");
+            Response response = await client.ResponseDatetimeRfc1123Async("<scenario>").ConfigureAwait(false);
             Console.WriteLine(response.Status);
         }
 
@@ -983,7 +978,7 @@ namespace header_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new HeaderClient(credential);
 
-            Response response = await client.ResponseDatetimeRfc1123Async("<scenario>");
+            Response response = await client.ResponseDatetimeRfc1123Async("<scenario>").ConfigureAwait(false);
             Console.WriteLine(response.Status);
         }
 
@@ -994,7 +989,7 @@ namespace header_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new HeaderClient(credential);
 
-            Response response = client.ParamDuration("<scenario>", new TimeSpan(1, 2, 3));
+            Response response = client.ParamDuration("<scenario>", new TimeSpan(1, 23, 45));
             Console.WriteLine(response.Status);
         }
 
@@ -1005,7 +1000,7 @@ namespace header_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new HeaderClient(credential);
 
-            Response response = client.ParamDuration("<scenario>", new TimeSpan(1, 2, 3));
+            Response response = client.ParamDuration("<scenario>", new TimeSpan(1, 23, 45));
             Console.WriteLine(response.Status);
         }
 
@@ -1016,7 +1011,7 @@ namespace header_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new HeaderClient(credential);
 
-            Response response = await client.ParamDurationAsync("<scenario>", new TimeSpan(1, 2, 3));
+            Response response = await client.ParamDurationAsync("<scenario>", new TimeSpan(1, 23, 45)).ConfigureAwait(false);
             Console.WriteLine(response.Status);
         }
 
@@ -1027,7 +1022,7 @@ namespace header_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new HeaderClient(credential);
 
-            Response response = await client.ParamDurationAsync("<scenario>", new TimeSpan(1, 2, 3));
+            Response response = await client.ParamDurationAsync("<scenario>", new TimeSpan(1, 23, 45)).ConfigureAwait(false);
             Console.WriteLine(response.Status);
         }
 
@@ -1060,7 +1055,7 @@ namespace header_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new HeaderClient(credential);
 
-            Response response = await client.ResponseDurationAsync("<scenario>");
+            Response response = await client.ResponseDurationAsync("<scenario>").ConfigureAwait(false);
             Console.WriteLine(response.Status);
         }
 
@@ -1071,7 +1066,7 @@ namespace header_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new HeaderClient(credential);
 
-            Response response = await client.ResponseDurationAsync("<scenario>");
+            Response response = await client.ResponseDurationAsync("<scenario>").ConfigureAwait(false);
             Console.WriteLine(response.Status);
         }
 
@@ -1104,7 +1099,7 @@ namespace header_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new HeaderClient(credential);
 
-            Response response = await client.ParamByteAsync("<scenario>", BinaryData.FromString("<your binary data content>"));
+            Response response = await client.ParamByteAsync("<scenario>", BinaryData.FromString("<your binary data content>")).ConfigureAwait(false);
             Console.WriteLine(response.Status);
         }
 
@@ -1115,7 +1110,7 @@ namespace header_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new HeaderClient(credential);
 
-            Response response = await client.ParamByteAsync("<scenario>", BinaryData.FromString("<your binary data content>"));
+            Response response = await client.ParamByteAsync("<scenario>", BinaryData.FromString("<your binary data content>")).ConfigureAwait(false);
             Console.WriteLine(response.Status);
         }
 
@@ -1148,7 +1143,7 @@ namespace header_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new HeaderClient(credential);
 
-            Response response = await client.ResponseByteAsync("<scenario>");
+            Response response = await client.ResponseByteAsync("<scenario>").ConfigureAwait(false);
             Console.WriteLine(response.Status);
         }
 
@@ -1159,7 +1154,7 @@ namespace header_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new HeaderClient(credential);
 
-            Response response = await client.ResponseByteAsync("<scenario>");
+            Response response = await client.ResponseByteAsync("<scenario>").ConfigureAwait(false);
             Console.WriteLine(response.Status);
         }
 
@@ -1192,7 +1187,7 @@ namespace header_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new HeaderClient(credential);
 
-            Response response = await client.ParamEnumAsync("<scenario>");
+            Response response = await client.ParamEnumAsync("<scenario>").ConfigureAwait(false);
             Console.WriteLine(response.Status);
         }
 
@@ -1203,7 +1198,7 @@ namespace header_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new HeaderClient(credential);
 
-            Response response = await client.ParamEnumAsync("<scenario>", "<value>");
+            Response response = await client.ParamEnumAsync("<scenario>", "<value>").ConfigureAwait(false);
             Console.WriteLine(response.Status);
         }
 
@@ -1236,7 +1231,7 @@ namespace header_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new HeaderClient(credential);
 
-            Response response = await client.ResponseEnumAsync("<scenario>");
+            Response response = await client.ResponseEnumAsync("<scenario>").ConfigureAwait(false);
             Console.WriteLine(response.Status);
         }
 
@@ -1247,7 +1242,7 @@ namespace header_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new HeaderClient(credential);
 
-            Response response = await client.ResponseEnumAsync("<scenario>");
+            Response response = await client.ResponseEnumAsync("<scenario>").ConfigureAwait(false);
             Console.WriteLine(response.Status);
         }
 
@@ -1280,7 +1275,7 @@ namespace header_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new HeaderClient(credential);
 
-            Response response = await client.CustomRequestIdAsync();
+            Response response = await client.CustomRequestIdAsync().ConfigureAwait(false);
             Console.WriteLine(response.Status);
         }
 
@@ -1291,7 +1286,7 @@ namespace header_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new HeaderClient(credential);
 
-            Response response = await client.CustomRequestIdAsync();
+            Response response = await client.CustomRequestIdAsync().ConfigureAwait(false);
             Console.WriteLine(response.Status);
         }
     }

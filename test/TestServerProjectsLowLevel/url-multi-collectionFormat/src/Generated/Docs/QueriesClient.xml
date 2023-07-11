@@ -8,7 +8,7 @@ This sample shows how to call ArrayStringMultiNullAsync.
 var credential = new AzureKeyCredential("<key>");
 var client = new QueriesClient(credential);
 
-Response response = await client.ArrayStringMultiNullAsync();
+Response response = await client.ArrayStringMultiNullAsync().ConfigureAwait(false);
 Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call ArrayStringMultiNullAsync with all parameters.

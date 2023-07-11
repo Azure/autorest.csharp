@@ -6,13 +6,8 @@
 #nullable disable
 
 using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Text.Json;
 using System.Threading.Tasks;
 using Azure;
-using Azure.Core;
-using Azure.Identity;
 using NUnit.Framework;
 
 namespace custom_baseUrl_more_options_LowLevel.Samples
@@ -48,7 +43,7 @@ namespace custom_baseUrl_more_options_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new PathsClient("<subscriptionId>", credential);
 
-            Response response = await client.GetEmptyAsync("<vault>", "<secret>", "<keyName>");
+            Response response = await client.GetEmptyAsync("<vault>", "<secret>", "<keyName>").ConfigureAwait(false);
             Console.WriteLine(response.Status);
         }
 
@@ -59,7 +54,7 @@ namespace custom_baseUrl_more_options_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new PathsClient("<subscriptionId>", credential);
 
-            Response response = await client.GetEmptyAsync("<vault>", "<secret>", "<keyName>", "<keyVersion>");
+            Response response = await client.GetEmptyAsync("<vault>", "<secret>", "<keyName>", "<keyVersion>").ConfigureAwait(false);
             Console.WriteLine(response.Status);
         }
     }

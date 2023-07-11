@@ -8,7 +8,7 @@ This sample shows how to call Head200Async.
 var credential = new AzureKeyCredential("<key>");
 var client = new HttpSuccessClient(credential);
 
-Response response = await client.Head200Async();
+Response response = await client.Head200Async().ConfigureAwait(false);
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
@@ -32,7 +32,7 @@ This sample shows how to call Get200Async and parse the result.
 var credential = new AzureKeyCredential("<key>");
 var client = new HttpSuccessClient(credential);
 
-Response response = await client.Get200Async();
+Response response = await client.Get200Async().ConfigureAwait(false);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.ToString());
@@ -60,7 +60,7 @@ This sample shows how to call Options200Async and parse the result.
 var credential = new AzureKeyCredential("<key>");
 var client = new HttpSuccessClient(credential);
 
-Response response = await client.Options200Async();
+Response response = await client.Options200Async().ConfigureAwait(false);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.ToString());
@@ -90,7 +90,7 @@ var client = new HttpSuccessClient(credential);
 
 var data = true;
 
-Response response = await client.Put200Async(RequestContent.Create(data));
+Response response = await client.Put200Async(RequestContent.Create(data)).ConfigureAwait(false);
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
@@ -118,7 +118,7 @@ var client = new HttpSuccessClient(credential);
 
 var data = true;
 
-Response response = await client.Patch200Async(RequestContent.Create(data));
+Response response = await client.Patch200Async(RequestContent.Create(data)).ConfigureAwait(false);
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
@@ -146,7 +146,7 @@ var client = new HttpSuccessClient(credential);
 
 var data = true;
 
-Response response = await client.Post200Async(RequestContent.Create(data));
+Response response = await client.Post200Async(RequestContent.Create(data)).ConfigureAwait(false);
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
@@ -174,7 +174,7 @@ var client = new HttpSuccessClient(credential);
 
 var data = true;
 
-Response response = await client.Delete200Async(RequestContent.Create(data));
+Response response = await client.Delete200Async(RequestContent.Create(data)).ConfigureAwait(false);
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
@@ -202,7 +202,7 @@ var client = new HttpSuccessClient(credential);
 
 var data = true;
 
-Response response = await client.Put201Async(RequestContent.Create(data));
+Response response = await client.Put201Async(RequestContent.Create(data)).ConfigureAwait(false);
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
@@ -230,7 +230,7 @@ var client = new HttpSuccessClient(credential);
 
 var data = true;
 
-Response response = await client.Post201Async(RequestContent.Create(data));
+Response response = await client.Post201Async(RequestContent.Create(data)).ConfigureAwait(false);
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
@@ -258,7 +258,7 @@ var client = new HttpSuccessClient(credential);
 
 var data = true;
 
-Response response = await client.Put202Async(RequestContent.Create(data));
+Response response = await client.Put202Async(RequestContent.Create(data)).ConfigureAwait(false);
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
@@ -286,7 +286,7 @@ var client = new HttpSuccessClient(credential);
 
 var data = true;
 
-Response response = await client.Patch202Async(RequestContent.Create(data));
+Response response = await client.Patch202Async(RequestContent.Create(data)).ConfigureAwait(false);
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
@@ -314,7 +314,7 @@ var client = new HttpSuccessClient(credential);
 
 var data = true;
 
-Response response = await client.Post202Async(RequestContent.Create(data));
+Response response = await client.Post202Async(RequestContent.Create(data)).ConfigureAwait(false);
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
@@ -342,7 +342,7 @@ var client = new HttpSuccessClient(credential);
 
 var data = true;
 
-Response response = await client.Delete202Async(RequestContent.Create(data));
+Response response = await client.Delete202Async(RequestContent.Create(data)).ConfigureAwait(false);
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
@@ -368,7 +368,7 @@ This sample shows how to call Head204Async.
 var credential = new AzureKeyCredential("<key>");
 var client = new HttpSuccessClient(credential);
 
-Response response = await client.Head204Async();
+Response response = await client.Head204Async().ConfigureAwait(false);
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
@@ -394,7 +394,7 @@ var client = new HttpSuccessClient(credential);
 
 var data = true;
 
-Response response = await client.Put204Async(RequestContent.Create(data));
+Response response = await client.Put204Async(RequestContent.Create(data)).ConfigureAwait(false);
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
@@ -422,7 +422,7 @@ var client = new HttpSuccessClient(credential);
 
 var data = true;
 
-Response response = await client.Patch204Async(RequestContent.Create(data));
+Response response = await client.Patch204Async(RequestContent.Create(data)).ConfigureAwait(false);
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
@@ -450,7 +450,7 @@ var client = new HttpSuccessClient(credential);
 
 var data = true;
 
-Response response = await client.Post204Async(RequestContent.Create(data));
+Response response = await client.Post204Async(RequestContent.Create(data)).ConfigureAwait(false);
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
@@ -478,7 +478,7 @@ var client = new HttpSuccessClient(credential);
 
 var data = true;
 
-Response response = await client.Delete204Async(RequestContent.Create(data));
+Response response = await client.Delete204Async(RequestContent.Create(data)).ConfigureAwait(false);
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
@@ -504,7 +504,7 @@ This sample shows how to call Head404Async.
 var credential = new AzureKeyCredential("<key>");
 var client = new HttpSuccessClient(credential);
 
-Response response = await client.Head404Async();
+Response response = await client.Head404Async().ConfigureAwait(false);
 Console.WriteLine(response.Status);
 ]]></code>
 </example>

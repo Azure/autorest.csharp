@@ -8,7 +8,6 @@
 using System;
 using System.Text.Json;
 using System.Text.Json.Serialization;
-using Azure;
 using Azure.Core;
 
 namespace Azure.ResourceManager.Fake.Models

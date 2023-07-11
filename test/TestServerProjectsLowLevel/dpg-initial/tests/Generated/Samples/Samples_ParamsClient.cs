@@ -6,13 +6,10 @@
 #nullable disable
 
 using System;
-using System.Collections.Generic;
-using System.IO;
 using System.Text.Json;
 using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
-using Azure.Identity;
 using NUnit.Framework;
 
 namespace dpg_initial_LowLevel.Samples
@@ -52,7 +49,7 @@ namespace dpg_initial_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new ParamsClient(credential);
 
-            Response response = await client.HeadNoParamsAsync();
+            Response response = await client.HeadNoParamsAsync().ConfigureAwait(false);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());
@@ -65,7 +62,7 @@ namespace dpg_initial_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new ParamsClient(credential);
 
-            Response response = await client.HeadNoParamsAsync();
+            Response response = await client.HeadNoParamsAsync().ConfigureAwait(false);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());
@@ -104,7 +101,7 @@ namespace dpg_initial_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new ParamsClient(credential);
 
-            Response response = await client.GetRequiredAsync("<parameter>");
+            Response response = await client.GetRequiredAsync("<parameter>").ConfigureAwait(false);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());
@@ -117,7 +114,7 @@ namespace dpg_initial_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new ParamsClient(credential);
 
-            Response response = await client.GetRequiredAsync("<parameter>");
+            Response response = await client.GetRequiredAsync("<parameter>").ConfigureAwait(false);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());
@@ -156,7 +153,7 @@ namespace dpg_initial_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new ParamsClient(credential);
 
-            Response response = await client.PutRequiredOptionalAsync("<requiredParam>");
+            Response response = await client.PutRequiredOptionalAsync("<requiredParam>").ConfigureAwait(false);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());
@@ -169,7 +166,7 @@ namespace dpg_initial_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new ParamsClient(credential);
 
-            Response response = await client.PutRequiredOptionalAsync("<requiredParam>", "<optionalParam>");
+            Response response = await client.PutRequiredOptionalAsync("<requiredParam>", "<optionalParam>").ConfigureAwait(false);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());
@@ -223,7 +220,7 @@ namespace dpg_initial_LowLevel.Samples
                 url = "<url>",
             };
 
-            Response response = await client.PostParametersAsync(RequestContent.Create(data));
+            Response response = await client.PostParametersAsync(RequestContent.Create(data)).ConfigureAwait(false);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());
@@ -241,7 +238,7 @@ namespace dpg_initial_LowLevel.Samples
                 url = "<url>",
             };
 
-            Response response = await client.PostParametersAsync(RequestContent.Create(data));
+            Response response = await client.PostParametersAsync(RequestContent.Create(data)).ConfigureAwait(false);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());
@@ -280,7 +277,7 @@ namespace dpg_initial_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new ParamsClient(credential);
 
-            Response response = await client.GetOptionalAsync();
+            Response response = await client.GetOptionalAsync().ConfigureAwait(false);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());
@@ -293,7 +290,7 @@ namespace dpg_initial_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new ParamsClient(credential);
 
-            Response response = await client.GetOptionalAsync("<optionalParam>");
+            Response response = await client.GetOptionalAsync("<optionalParam>").ConfigureAwait(false);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());

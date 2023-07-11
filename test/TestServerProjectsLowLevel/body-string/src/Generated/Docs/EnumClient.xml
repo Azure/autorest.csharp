@@ -8,7 +8,7 @@ This sample shows how to call GetNotExpandableAsync and parse the result.
 var credential = new AzureKeyCredential("<key>");
 var client = new EnumClient(credential);
 
-Response response = await client.GetNotExpandableAsync();
+Response response = await client.GetNotExpandableAsync().ConfigureAwait(false);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.ToString());
@@ -38,7 +38,7 @@ var client = new EnumClient(credential);
 
 var data = "red color";
 
-Response response = await client.PutNotExpandableAsync(RequestContent.Create(data));
+Response response = await client.PutNotExpandableAsync(RequestContent.Create(data)).ConfigureAwait(false);
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
@@ -64,7 +64,7 @@ This sample shows how to call GetReferencedAsync and parse the result.
 var credential = new AzureKeyCredential("<key>");
 var client = new EnumClient(credential);
 
-Response response = await client.GetReferencedAsync();
+Response response = await client.GetReferencedAsync().ConfigureAwait(false);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.ToString());
@@ -94,7 +94,7 @@ var client = new EnumClient(credential);
 
 var data = "red color";
 
-Response response = await client.PutReferencedAsync(RequestContent.Create(data));
+Response response = await client.PutReferencedAsync(RequestContent.Create(data)).ConfigureAwait(false);
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
@@ -120,7 +120,7 @@ This sample shows how to call GetReferencedConstantAsync and parse the result.
 var credential = new AzureKeyCredential("<key>");
 var client = new EnumClient(credential);
 
-Response response = await client.GetReferencedConstantAsync();
+Response response = await client.GetReferencedConstantAsync().ConfigureAwait(false);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("ColorConstant").ToString());

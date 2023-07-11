@@ -6,13 +6,8 @@
 #nullable disable
 
 using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Text.Json;
 using System.Threading.Tasks;
 using Azure;
-using Azure.Core;
-using Azure.Identity;
 using NUnit.Framework;
 
 namespace head_LowLevel.Samples
@@ -48,7 +43,7 @@ namespace head_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new HttpSuccessClient(credential);
 
-            Response response = await client.Head200Async();
+            Response response = await client.Head200Async().ConfigureAwait(false);
             Console.WriteLine(response.Status);
         }
 
@@ -59,7 +54,7 @@ namespace head_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new HttpSuccessClient(credential);
 
-            Response response = await client.Head200Async();
+            Response response = await client.Head200Async().ConfigureAwait(false);
             Console.WriteLine(response.Status);
         }
 
@@ -92,7 +87,7 @@ namespace head_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new HttpSuccessClient(credential);
 
-            Response response = await client.Head204Async();
+            Response response = await client.Head204Async().ConfigureAwait(false);
             Console.WriteLine(response.Status);
         }
 
@@ -103,7 +98,7 @@ namespace head_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new HttpSuccessClient(credential);
 
-            Response response = await client.Head204Async();
+            Response response = await client.Head204Async().ConfigureAwait(false);
             Console.WriteLine(response.Status);
         }
 
@@ -136,7 +131,7 @@ namespace head_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new HttpSuccessClient(credential);
 
-            Response response = await client.Head404Async();
+            Response response = await client.Head404Async().ConfigureAwait(false);
             Console.WriteLine(response.Status);
         }
 
@@ -147,7 +142,7 @@ namespace head_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new HttpSuccessClient(credential);
 
-            Response response = await client.Head404Async();
+            Response response = await client.Head404Async().ConfigureAwait(false);
             Console.WriteLine(response.Status);
         }
     }

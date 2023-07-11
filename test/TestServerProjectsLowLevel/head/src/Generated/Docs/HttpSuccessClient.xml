@@ -8,7 +8,7 @@ This sample shows how to call Head200Async.
 var credential = new AzureKeyCredential("<key>");
 var client = new HttpSuccessClient(credential);
 
-Response response = await client.Head200Async();
+Response response = await client.Head200Async().ConfigureAwait(false);
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
@@ -32,7 +32,7 @@ This sample shows how to call Head204Async.
 var credential = new AzureKeyCredential("<key>");
 var client = new HttpSuccessClient(credential);
 
-Response response = await client.Head204Async();
+Response response = await client.Head204Async().ConfigureAwait(false);
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
@@ -56,7 +56,7 @@ This sample shows how to call Head404Async.
 var credential = new AzureKeyCredential("<key>");
 var client = new HttpSuccessClient(credential);
 
-Response response = await client.Head404Async();
+Response response = await client.Head404Async().ConfigureAwait(false);
 Console.WriteLine(response.Status);
 ]]></code>
 </example>

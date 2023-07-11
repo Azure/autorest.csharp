@@ -8,7 +8,7 @@ This sample shows how to call GetNullAsync and parse the result.
 var credential = new AzureKeyCredential("<key>");
 var client = new StringClient(credential);
 
-Response response = await client.GetNullAsync();
+Response response = await client.GetNullAsync().ConfigureAwait(false);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.ToString());
@@ -38,7 +38,7 @@ var client = new StringClient(credential);
 
 var data = "<String>";
 
-Response response = await client.PutNullAsync(RequestContent.Create(data));
+Response response = await client.PutNullAsync(RequestContent.Create(data)).ConfigureAwait(false);
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
@@ -64,7 +64,7 @@ This sample shows how to call GetEmptyAsync and parse the result.
 var credential = new AzureKeyCredential("<key>");
 var client = new StringClient(credential);
 
-Response response = await client.GetEmptyAsync();
+Response response = await client.GetEmptyAsync().ConfigureAwait(false);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.ToString());
@@ -92,9 +92,9 @@ This sample shows how to call PutEmptyAsync with required request content.
 var credential = new AzureKeyCredential("<key>");
 var client = new StringClient(credential);
 
-var data = "";
+var data = "<String>";
 
-Response response = await client.PutEmptyAsync(RequestContent.Create(data));
+Response response = await client.PutEmptyAsync(RequestContent.Create(data)).ConfigureAwait(false);
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
@@ -106,7 +106,7 @@ This sample shows how to call PutEmpty with required request content.
 var credential = new AzureKeyCredential("<key>");
 var client = new StringClient(credential);
 
-var data = "";
+var data = "<String>";
 
 Response response = client.PutEmpty(RequestContent.Create(data));
 Console.WriteLine(response.Status);
@@ -120,7 +120,7 @@ This sample shows how to call GetMbcsAsync and parse the result.
 var credential = new AzureKeyCredential("<key>");
 var client = new StringClient(credential);
 
-Response response = await client.GetMbcsAsync();
+Response response = await client.GetMbcsAsync().ConfigureAwait(false);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.ToString());

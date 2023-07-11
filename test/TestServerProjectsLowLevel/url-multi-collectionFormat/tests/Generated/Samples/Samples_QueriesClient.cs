@@ -6,13 +6,8 @@
 #nullable disable
 
 using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Text.Json;
 using System.Threading.Tasks;
 using Azure;
-using Azure.Core;
-using Azure.Identity;
 using NUnit.Framework;
 
 namespace url_multi_collectionFormat_LowLevel.Samples
@@ -48,7 +43,7 @@ namespace url_multi_collectionFormat_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new QueriesClient(credential);
 
-            Response response = await client.ArrayStringMultiNullAsync();
+            Response response = await client.ArrayStringMultiNullAsync().ConfigureAwait(false);
             Console.WriteLine(response.Status);
         }
 
@@ -59,7 +54,7 @@ namespace url_multi_collectionFormat_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new QueriesClient(credential);
 
-            Response response = await client.ArrayStringMultiNullAsync(new string[] { "<arrayQuery>" });
+            Response response = await client.ArrayStringMultiNullAsync(new string[] { "<arrayQuery>" }).ConfigureAwait(false);
             Console.WriteLine(response.Status);
         }
 
@@ -92,7 +87,7 @@ namespace url_multi_collectionFormat_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new QueriesClient(credential);
 
-            Response response = await client.ArrayStringMultiEmptyAsync();
+            Response response = await client.ArrayStringMultiEmptyAsync().ConfigureAwait(false);
             Console.WriteLine(response.Status);
         }
 
@@ -103,7 +98,7 @@ namespace url_multi_collectionFormat_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new QueriesClient(credential);
 
-            Response response = await client.ArrayStringMultiEmptyAsync(new string[] { "<arrayQuery>" });
+            Response response = await client.ArrayStringMultiEmptyAsync(new string[] { "<arrayQuery>" }).ConfigureAwait(false);
             Console.WriteLine(response.Status);
         }
 
@@ -136,7 +131,7 @@ namespace url_multi_collectionFormat_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new QueriesClient(credential);
 
-            Response response = await client.ArrayStringMultiValidAsync();
+            Response response = await client.ArrayStringMultiValidAsync().ConfigureAwait(false);
             Console.WriteLine(response.Status);
         }
 
@@ -147,7 +142,7 @@ namespace url_multi_collectionFormat_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new QueriesClient(credential);
 
-            Response response = await client.ArrayStringMultiValidAsync(new string[] { "<arrayQuery>" });
+            Response response = await client.ArrayStringMultiValidAsync(new string[] { "<arrayQuery>" }).ConfigureAwait(false);
             Console.WriteLine(response.Status);
         }
     }

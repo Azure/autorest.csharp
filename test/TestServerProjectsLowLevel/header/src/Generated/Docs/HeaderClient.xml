@@ -8,7 +8,7 @@ This sample shows how to call ParamExistingKeyAsync with required parameters.
 var credential = new AzureKeyCredential("<key>");
 var client = new HeaderClient(credential);
 
-Response response = await client.ParamExistingKeyAsync("<userAgent>");
+Response response = await client.ParamExistingKeyAsync("<userAgent>").ConfigureAwait(false);
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
@@ -32,7 +32,7 @@ This sample shows how to call ResponseExistingKeyAsync.
 var credential = new AzureKeyCredential("<key>");
 var client = new HeaderClient(credential);
 
-Response response = await client.ResponseExistingKeyAsync();
+Response response = await client.ResponseExistingKeyAsync().ConfigureAwait(false);
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
@@ -56,7 +56,7 @@ This sample shows how to call ParamProtectedKeyAsync with required parameters.
 var credential = new AzureKeyCredential("<key>");
 var client = new HeaderClient(credential);
 
-Response response = await client.ParamProtectedKeyAsync("<contentType>");
+Response response = await client.ParamProtectedKeyAsync("<contentType>").ConfigureAwait(false);
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
@@ -80,7 +80,7 @@ This sample shows how to call ResponseProtectedKeyAsync.
 var credential = new AzureKeyCredential("<key>");
 var client = new HeaderClient(credential);
 
-Response response = await client.ResponseProtectedKeyAsync();
+Response response = await client.ResponseProtectedKeyAsync().ConfigureAwait(false);
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
@@ -104,7 +104,7 @@ This sample shows how to call ParamIntegerAsync with required parameters.
 var credential = new AzureKeyCredential("<key>");
 var client = new HeaderClient(credential);
 
-Response response = await client.ParamIntegerAsync("<scenario>", 1234);
+Response response = await client.ParamIntegerAsync("<scenario>", 1234).ConfigureAwait(false);
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
@@ -128,7 +128,7 @@ This sample shows how to call ResponseIntegerAsync with required parameters.
 var credential = new AzureKeyCredential("<key>");
 var client = new HeaderClient(credential);
 
-Response response = await client.ResponseIntegerAsync("<scenario>");
+Response response = await client.ResponseIntegerAsync("<scenario>").ConfigureAwait(false);
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
@@ -152,7 +152,7 @@ This sample shows how to call ParamLongAsync with required parameters.
 var credential = new AzureKeyCredential("<key>");
 var client = new HeaderClient(credential);
 
-Response response = await client.ParamLongAsync("<scenario>", 1234);
+Response response = await client.ParamLongAsync("<scenario>", 1234L).ConfigureAwait(false);
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
@@ -164,7 +164,7 @@ This sample shows how to call ParamLong with required parameters.
 var credential = new AzureKeyCredential("<key>");
 var client = new HeaderClient(credential);
 
-Response response = client.ParamLong("<scenario>", 1234);
+Response response = client.ParamLong("<scenario>", 1234L);
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
@@ -176,7 +176,7 @@ This sample shows how to call ResponseLongAsync with required parameters.
 var credential = new AzureKeyCredential("<key>");
 var client = new HeaderClient(credential);
 
-Response response = await client.ResponseLongAsync("<scenario>");
+Response response = await client.ResponseLongAsync("<scenario>").ConfigureAwait(false);
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
@@ -200,7 +200,7 @@ This sample shows how to call ParamFloatAsync with required parameters.
 var credential = new AzureKeyCredential("<key>");
 var client = new HeaderClient(credential);
 
-Response response = await client.ParamFloatAsync("<scenario>", 3.14f);
+Response response = await client.ParamFloatAsync("<scenario>", 3.14f).ConfigureAwait(false);
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
@@ -224,7 +224,7 @@ This sample shows how to call ResponseFloatAsync with required parameters.
 var credential = new AzureKeyCredential("<key>");
 var client = new HeaderClient(credential);
 
-Response response = await client.ResponseFloatAsync("<scenario>");
+Response response = await client.ResponseFloatAsync("<scenario>").ConfigureAwait(false);
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
@@ -248,7 +248,7 @@ This sample shows how to call ParamDoubleAsync with required parameters.
 var credential = new AzureKeyCredential("<key>");
 var client = new HeaderClient(credential);
 
-Response response = await client.ParamDoubleAsync("<scenario>", 3.14);
+Response response = await client.ParamDoubleAsync("<scenario>", 3.14d).ConfigureAwait(false);
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
@@ -260,7 +260,7 @@ This sample shows how to call ParamDouble with required parameters.
 var credential = new AzureKeyCredential("<key>");
 var client = new HeaderClient(credential);
 
-Response response = client.ParamDouble("<scenario>", 3.14);
+Response response = client.ParamDouble("<scenario>", 3.14d);
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
@@ -272,7 +272,7 @@ This sample shows how to call ResponseDoubleAsync with required parameters.
 var credential = new AzureKeyCredential("<key>");
 var client = new HeaderClient(credential);
 
-Response response = await client.ResponseDoubleAsync("<scenario>");
+Response response = await client.ResponseDoubleAsync("<scenario>").ConfigureAwait(false);
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
@@ -296,7 +296,7 @@ This sample shows how to call ParamBoolAsync with required parameters.
 var credential = new AzureKeyCredential("<key>");
 var client = new HeaderClient(credential);
 
-Response response = await client.ParamBoolAsync("<scenario>", true);
+Response response = await client.ParamBoolAsync("<scenario>", true).ConfigureAwait(false);
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
@@ -320,7 +320,7 @@ This sample shows how to call ResponseBoolAsync with required parameters.
 var credential = new AzureKeyCredential("<key>");
 var client = new HeaderClient(credential);
 
-Response response = await client.ResponseBoolAsync("<scenario>");
+Response response = await client.ResponseBoolAsync("<scenario>").ConfigureAwait(false);
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
@@ -344,7 +344,7 @@ This sample shows how to call ParamStringAsync with required parameters.
 var credential = new AzureKeyCredential("<key>");
 var client = new HeaderClient(credential);
 
-Response response = await client.ParamStringAsync("<scenario>");
+Response response = await client.ParamStringAsync("<scenario>").ConfigureAwait(false);
 Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call ParamStringAsync with all parameters.
@@ -352,7 +352,7 @@ This sample shows how to call ParamStringAsync with all parameters.
 var credential = new AzureKeyCredential("<key>");
 var client = new HeaderClient(credential);
 
-Response response = await client.ParamStringAsync("<scenario>", "<value>");
+Response response = await client.ParamStringAsync("<scenario>", "<value>").ConfigureAwait(false);
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
@@ -384,7 +384,7 @@ This sample shows how to call ResponseStringAsync with required parameters.
 var credential = new AzureKeyCredential("<key>");
 var client = new HeaderClient(credential);
 
-Response response = await client.ResponseStringAsync("<scenario>");
+Response response = await client.ResponseStringAsync("<scenario>").ConfigureAwait(false);
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
@@ -408,7 +408,7 @@ This sample shows how to call ParamDateAsync with required parameters.
 var credential = new AzureKeyCredential("<key>");
 var client = new HeaderClient(credential);
 
-Response response = await client.ParamDateAsync("<scenario>", DateTimeOffset.UtcNow);
+Response response = await client.ParamDateAsync("<scenario>", DateTimeOffset.UtcNow).ConfigureAwait(false);
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
@@ -432,7 +432,7 @@ This sample shows how to call ResponseDateAsync with required parameters.
 var credential = new AzureKeyCredential("<key>");
 var client = new HeaderClient(credential);
 
-Response response = await client.ResponseDateAsync("<scenario>");
+Response response = await client.ResponseDateAsync("<scenario>").ConfigureAwait(false);
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
@@ -456,7 +456,7 @@ This sample shows how to call ParamDatetimeAsync with required parameters.
 var credential = new AzureKeyCredential("<key>");
 var client = new HeaderClient(credential);
 
-Response response = await client.ParamDatetimeAsync("<scenario>", DateTimeOffset.UtcNow);
+Response response = await client.ParamDatetimeAsync("<scenario>", DateTimeOffset.UtcNow).ConfigureAwait(false);
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
@@ -480,7 +480,7 @@ This sample shows how to call ResponseDatetimeAsync with required parameters.
 var credential = new AzureKeyCredential("<key>");
 var client = new HeaderClient(credential);
 
-Response response = await client.ResponseDatetimeAsync("<scenario>");
+Response response = await client.ResponseDatetimeAsync("<scenario>").ConfigureAwait(false);
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
@@ -504,7 +504,7 @@ This sample shows how to call ParamDatetimeRfc1123Async with required parameters
 var credential = new AzureKeyCredential("<key>");
 var client = new HeaderClient(credential);
 
-Response response = await client.ParamDatetimeRfc1123Async("<scenario>");
+Response response = await client.ParamDatetimeRfc1123Async("<scenario>").ConfigureAwait(false);
 Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call ParamDatetimeRfc1123Async with all parameters.
@@ -512,7 +512,7 @@ This sample shows how to call ParamDatetimeRfc1123Async with all parameters.
 var credential = new AzureKeyCredential("<key>");
 var client = new HeaderClient(credential);
 
-Response response = await client.ParamDatetimeRfc1123Async("<scenario>", DateTimeOffset.UtcNow);
+Response response = await client.ParamDatetimeRfc1123Async("<scenario>", DateTimeOffset.UtcNow).ConfigureAwait(false);
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
@@ -544,7 +544,7 @@ This sample shows how to call ResponseDatetimeRfc1123Async with required paramet
 var credential = new AzureKeyCredential("<key>");
 var client = new HeaderClient(credential);
 
-Response response = await client.ResponseDatetimeRfc1123Async("<scenario>");
+Response response = await client.ResponseDatetimeRfc1123Async("<scenario>").ConfigureAwait(false);
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
@@ -568,7 +568,7 @@ This sample shows how to call ParamDurationAsync with required parameters.
 var credential = new AzureKeyCredential("<key>");
 var client = new HeaderClient(credential);
 
-Response response = await client.ParamDurationAsync("<scenario>", new TimeSpan(1, 2, 3));
+Response response = await client.ParamDurationAsync("<scenario>", new TimeSpan(1, 23, 45)).ConfigureAwait(false);
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
@@ -580,7 +580,7 @@ This sample shows how to call ParamDuration with required parameters.
 var credential = new AzureKeyCredential("<key>");
 var client = new HeaderClient(credential);
 
-Response response = client.ParamDuration("<scenario>", new TimeSpan(1, 2, 3));
+Response response = client.ParamDuration("<scenario>", new TimeSpan(1, 23, 45));
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
@@ -592,7 +592,7 @@ This sample shows how to call ResponseDurationAsync with required parameters.
 var credential = new AzureKeyCredential("<key>");
 var client = new HeaderClient(credential);
 
-Response response = await client.ResponseDurationAsync("<scenario>");
+Response response = await client.ResponseDurationAsync("<scenario>").ConfigureAwait(false);
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
@@ -616,7 +616,7 @@ This sample shows how to call ParamByteAsync with required parameters.
 var credential = new AzureKeyCredential("<key>");
 var client = new HeaderClient(credential);
 
-Response response = await client.ParamByteAsync("<scenario>", BinaryData.FromString("<your binary data content>"));
+Response response = await client.ParamByteAsync("<scenario>", BinaryData.FromString("<your binary data content>")).ConfigureAwait(false);
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
@@ -640,7 +640,7 @@ This sample shows how to call ResponseByteAsync with required parameters.
 var credential = new AzureKeyCredential("<key>");
 var client = new HeaderClient(credential);
 
-Response response = await client.ResponseByteAsync("<scenario>");
+Response response = await client.ResponseByteAsync("<scenario>").ConfigureAwait(false);
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
@@ -664,7 +664,7 @@ This sample shows how to call ParamEnumAsync with required parameters.
 var credential = new AzureKeyCredential("<key>");
 var client = new HeaderClient(credential);
 
-Response response = await client.ParamEnumAsync("<scenario>");
+Response response = await client.ParamEnumAsync("<scenario>").ConfigureAwait(false);
 Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call ParamEnumAsync with all parameters.
@@ -672,7 +672,7 @@ This sample shows how to call ParamEnumAsync with all parameters.
 var credential = new AzureKeyCredential("<key>");
 var client = new HeaderClient(credential);
 
-Response response = await client.ParamEnumAsync("<scenario>", "<value>");
+Response response = await client.ParamEnumAsync("<scenario>", "<value>").ConfigureAwait(false);
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
@@ -704,7 +704,7 @@ This sample shows how to call ResponseEnumAsync with required parameters.
 var credential = new AzureKeyCredential("<key>");
 var client = new HeaderClient(credential);
 
-Response response = await client.ResponseEnumAsync("<scenario>");
+Response response = await client.ResponseEnumAsync("<scenario>").ConfigureAwait(false);
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
@@ -728,7 +728,7 @@ This sample shows how to call CustomRequestIdAsync.
 var credential = new AzureKeyCredential("<key>");
 var client = new HeaderClient(credential);
 
-Response response = await client.CustomRequestIdAsync();
+Response response = await client.CustomRequestIdAsync().ConfigureAwait(false);
 Console.WriteLine(response.Status);
 ]]></code>
 </example>

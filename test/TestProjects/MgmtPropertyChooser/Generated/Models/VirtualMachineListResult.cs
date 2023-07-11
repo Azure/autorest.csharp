@@ -9,7 +9,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Azure.Core;
-using MgmtPropertyChooser;
 
 namespace MgmtPropertyChooser.Models
 {

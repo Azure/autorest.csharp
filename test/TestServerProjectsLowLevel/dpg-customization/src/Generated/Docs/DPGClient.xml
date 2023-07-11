@@ -8,7 +8,7 @@ This sample shows how to call GetModelAsync with required parameters and parse t
 var credential = new AzureKeyCredential("<key>");
 var client = new DPGClient(credential);
 
-Response response = await client.GetModelAsync("<mode>");
+Response response = await client.GetModelAsync("<mode>").ConfigureAwait(false);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("received").ToString());
@@ -40,7 +40,7 @@ var data = new {
     hello = "<hello>",
 };
 
-Response response = await client.PostModelAsync("<mode>", RequestContent.Create(data));
+Response response = await client.PostModelAsync("<mode>", RequestContent.Create(data)).ConfigureAwait(false);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("received").ToString());
@@ -102,7 +102,7 @@ This sample shows how to call LroAsync with required parameters and parse the re
 var credential = new AzureKeyCredential("<key>");
 var client = new DPGClient(credential);
 
-var operation = await client.LroAsync(WaitUntil.Completed, "<mode>");
+var operation = await client.LroAsync(WaitUntil.Completed, "<mode>").ConfigureAwait(false);
 
 BinaryData responseData = operation.Value;
 JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
