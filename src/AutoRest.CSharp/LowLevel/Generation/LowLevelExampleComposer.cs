@@ -615,7 +615,7 @@ namespace AutoRest.CSharp.Generation.Writers
                 return Literal(defaultValue.Value.ToString());
             }
 
-            return Literal(JsonSerializer.Serialize(defaultValue.Value));
+            return new ConstantExpression(defaultValue);
         }
 
         private ValueExpression MockParameterTypeValue(string? parameterName, CSharpType parameterType, SerializationFormat? serializationFormat)
