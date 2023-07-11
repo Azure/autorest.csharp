@@ -78,6 +78,7 @@ namespace httpInfrastructure_LowLevel
             try
             {
                 using HttpMessage message = CreateHead300Request(context);
+                RedirectPolicy.SetAllowAutoRedirect(message, true);
                 return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -108,6 +109,7 @@ namespace httpInfrastructure_LowLevel
             try
             {
                 using HttpMessage message = CreateHead300Request(context);
+                RedirectPolicy.SetAllowAutoRedirect(message, true);
                 return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
@@ -138,6 +140,7 @@ namespace httpInfrastructure_LowLevel
             try
             {
                 using HttpMessage message = CreateGet300Request(context);
+                RedirectPolicy.SetAllowAutoRedirect(message, true);
                 return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -168,6 +171,7 @@ namespace httpInfrastructure_LowLevel
             try
             {
                 using HttpMessage message = CreateGet300Request(context);
+                RedirectPolicy.SetAllowAutoRedirect(message, true);
                 return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
@@ -198,6 +202,7 @@ namespace httpInfrastructure_LowLevel
             try
             {
                 using HttpMessage message = CreateHead301Request(context);
+                RedirectPolicy.SetAllowAutoRedirect(message, true);
                 return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -228,6 +233,7 @@ namespace httpInfrastructure_LowLevel
             try
             {
                 using HttpMessage message = CreateHead301Request(context);
+                RedirectPolicy.SetAllowAutoRedirect(message, true);
                 return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
@@ -258,6 +264,7 @@ namespace httpInfrastructure_LowLevel
             try
             {
                 using HttpMessage message = CreateGet301Request(context);
+                RedirectPolicy.SetAllowAutoRedirect(message, true);
                 return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -288,6 +295,7 @@ namespace httpInfrastructure_LowLevel
             try
             {
                 using HttpMessage message = CreateGet301Request(context);
+                RedirectPolicy.SetAllowAutoRedirect(message, true);
                 return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
@@ -319,6 +327,7 @@ namespace httpInfrastructure_LowLevel
             try
             {
                 using HttpMessage message = CreatePut301Request(content, context);
+                RedirectPolicy.SetAllowAutoRedirect(message, true);
                 return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -350,6 +359,7 @@ namespace httpInfrastructure_LowLevel
             try
             {
                 using HttpMessage message = CreatePut301Request(content, context);
+                RedirectPolicy.SetAllowAutoRedirect(message, true);
                 return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
@@ -380,6 +390,7 @@ namespace httpInfrastructure_LowLevel
             try
             {
                 using HttpMessage message = CreateHead302Request(context);
+                RedirectPolicy.SetAllowAutoRedirect(message, true);
                 return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -410,6 +421,7 @@ namespace httpInfrastructure_LowLevel
             try
             {
                 using HttpMessage message = CreateHead302Request(context);
+                RedirectPolicy.SetAllowAutoRedirect(message, true);
                 return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
@@ -440,6 +452,7 @@ namespace httpInfrastructure_LowLevel
             try
             {
                 using HttpMessage message = CreateGet302Request(context);
+                RedirectPolicy.SetAllowAutoRedirect(message, true);
                 return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -470,6 +483,7 @@ namespace httpInfrastructure_LowLevel
             try
             {
                 using HttpMessage message = CreateGet302Request(context);
+                RedirectPolicy.SetAllowAutoRedirect(message, true);
                 return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
@@ -501,6 +515,7 @@ namespace httpInfrastructure_LowLevel
             try
             {
                 using HttpMessage message = CreatePatch302Request(content, context);
+                RedirectPolicy.SetAllowAutoRedirect(message, true);
                 return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -532,6 +547,7 @@ namespace httpInfrastructure_LowLevel
             try
             {
                 using HttpMessage message = CreatePatch302Request(content, context);
+                RedirectPolicy.SetAllowAutoRedirect(message, true);
                 return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
@@ -563,6 +579,7 @@ namespace httpInfrastructure_LowLevel
             try
             {
                 using HttpMessage message = CreatePost303Request(content, context);
+                RedirectPolicy.SetAllowAutoRedirect(message, true);
                 return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -594,6 +611,7 @@ namespace httpInfrastructure_LowLevel
             try
             {
                 using HttpMessage message = CreatePost303Request(content, context);
+                RedirectPolicy.SetAllowAutoRedirect(message, true);
                 return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
@@ -624,6 +642,7 @@ namespace httpInfrastructure_LowLevel
             try
             {
                 using HttpMessage message = CreateHead307Request(context);
+                RedirectPolicy.SetAllowAutoRedirect(message, true);
                 return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -654,6 +673,7 @@ namespace httpInfrastructure_LowLevel
             try
             {
                 using HttpMessage message = CreateHead307Request(context);
+                RedirectPolicy.SetAllowAutoRedirect(message, true);
                 return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
@@ -684,6 +704,7 @@ namespace httpInfrastructure_LowLevel
             try
             {
                 using HttpMessage message = CreateGet307Request(context);
+                RedirectPolicy.SetAllowAutoRedirect(message, true);
                 return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -714,6 +735,7 @@ namespace httpInfrastructure_LowLevel
             try
             {
                 using HttpMessage message = CreateGet307Request(context);
+                RedirectPolicy.SetAllowAutoRedirect(message, true);
                 return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
@@ -744,6 +766,7 @@ namespace httpInfrastructure_LowLevel
             try
             {
                 using HttpMessage message = CreateOptions307Request(context);
+                RedirectPolicy.SetAllowAutoRedirect(message, true);
                 return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -774,6 +797,7 @@ namespace httpInfrastructure_LowLevel
             try
             {
                 using HttpMessage message = CreateOptions307Request(context);
+                RedirectPolicy.SetAllowAutoRedirect(message, true);
                 return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
@@ -805,6 +829,7 @@ namespace httpInfrastructure_LowLevel
             try
             {
                 using HttpMessage message = CreatePut307Request(content, context);
+                RedirectPolicy.SetAllowAutoRedirect(message, true);
                 return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -836,6 +861,7 @@ namespace httpInfrastructure_LowLevel
             try
             {
                 using HttpMessage message = CreatePut307Request(content, context);
+                RedirectPolicy.SetAllowAutoRedirect(message, true);
                 return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
@@ -867,6 +893,7 @@ namespace httpInfrastructure_LowLevel
             try
             {
                 using HttpMessage message = CreatePatch307Request(content, context);
+                RedirectPolicy.SetAllowAutoRedirect(message, true);
                 return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -898,6 +925,7 @@ namespace httpInfrastructure_LowLevel
             try
             {
                 using HttpMessage message = CreatePatch307Request(content, context);
+                RedirectPolicy.SetAllowAutoRedirect(message, true);
                 return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
@@ -929,6 +957,7 @@ namespace httpInfrastructure_LowLevel
             try
             {
                 using HttpMessage message = CreatePost307Request(content, context);
+                RedirectPolicy.SetAllowAutoRedirect(message, true);
                 return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -960,6 +989,7 @@ namespace httpInfrastructure_LowLevel
             try
             {
                 using HttpMessage message = CreatePost307Request(content, context);
+                RedirectPolicy.SetAllowAutoRedirect(message, true);
                 return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
@@ -991,6 +1021,7 @@ namespace httpInfrastructure_LowLevel
             try
             {
                 using HttpMessage message = CreateDelete307Request(content, context);
+                RedirectPolicy.SetAllowAutoRedirect(message, true);
                 return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -1022,6 +1053,7 @@ namespace httpInfrastructure_LowLevel
             try
             {
                 using HttpMessage message = CreateDelete307Request(content, context);
+                RedirectPolicy.SetAllowAutoRedirect(message, true);
                 return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)

@@ -1,8 +1,8 @@
 {
-  "OutputFolder": ".",
-  "Namespace": "MgmtSupersetFlattenInheritance",
-  "LibraryName": "SuperSetOfFlattenProperties",
-  "SharedSourceFolders": [
+  "output-folder": ".",
+  "namespace": "MgmtSupersetFlattenInheritance",
+  "library-name": "SuperSetOfFlattenProperties",
+  "shared-source-folders": [
     "..\\..\\..\\..\\artifacts\\bin\\AutoRest.CSharp\\Debug\\net6.0\\Generator.Shared",
     "..\\..\\..\\..\\artifacts\\bin\\AutoRest.CSharp\\Debug\\net6.0\\Azure.Core.Shared"
   ],

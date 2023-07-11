@@ -494,15 +494,15 @@ namespace AutoRest.TestServer.Tests
         [Test]
         public void ModelFactory_DeclaresOnlyStaticMethodsForReadonlyTypes()
         {
-            TypeAsserts.TypeIsStatic(typeof(SchemaMappingModelFactory));
-            TypeAsserts.TypeOnlyDeclaresThesePublicMethods(typeof(SchemaMappingModelFactory),
+            TypeAsserts.TypeIsStatic(typeof(ModelShapesModelFactory));
+            TypeAsserts.TypeOnlyDeclaresThesePublicMethods(typeof(ModelShapesModelFactory),
                 nameof(MixedModel), nameof(MixedModelWithReadonlyProperty), nameof(OutputModel), nameof(ReadonlyModel));
         }
 
         [Test]
         public void ModelFactory_AlwaysInitializesCollectionFields()
         {
-            var model = SchemaMappingModelFactory.MixedModelWithReadonlyProperty();
+            var model = ModelShapesModelFactory.MixedModelWithReadonlyProperty();
             Assert.NotNull(model.ReadonlyListProperty);
         }
 
@@ -512,7 +512,7 @@ namespace AutoRest.TestServer.Tests
             const string stringValue = "stringValue";
 
             var expectedModel = new ReadonlyModel(stringValue);
-            var actualModel = SchemaMappingModelFactory.ReadonlyModel(stringValue);
+            var actualModel = ModelShapesModelFactory.ReadonlyModel(stringValue);
 
             Assert.AreEqual(expectedModel.Name, actualModel.Name);
         }
@@ -525,7 +525,7 @@ namespace AutoRest.TestServer.Tests
             var readonlyModelList = new List<ReadonlyModel> { readonlyModel };
 
             var expectedModel = new MixedModelWithReadonlyProperty(readonlyModel, readonlyModelList.ToList());
-            var actualModel = SchemaMappingModelFactory.MixedModelWithReadonlyProperty(readonlyModel, readonlyModelList);
+            var actualModel = ModelShapesModelFactory.MixedModelWithReadonlyProperty(readonlyModel, readonlyModelList);
 
             Assert.AreEqual(expectedModel.ReadonlyProperty, actualModel.ReadonlyProperty);
             Assert.AreEqual(expectedModel.ReadonlyProperty.Name, actualModel.ReadonlyProperty.Name);

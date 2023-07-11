@@ -1,8 +1,8 @@
 {
-  "OutputFolder": ".",
-  "Namespace": "Parameters_LowLevel",
-  "LibraryName": "ParametersLowlevel",
-  "SharedSourceFolders": [
+  "output-folder": ".",
+  "namespace": "Parameters_LowLevel",
+  "library-name": "ParametersLowlevel",
+  "shared-source-folders": [
     "..\\..\\..\\..\\..\\artifacts\\bin\\AutoRest.CSharp\\Debug\\net6.0\\Generator.Shared",
     "..\\..\\..\\..\\..\\artifacts\\bin\\AutoRest.CSharp\\Debug\\net6.0\\Azure.Core.Shared"
   ],

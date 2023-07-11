@@ -8,8 +8,8 @@ using System.Reflection;
 using System.Threading;
 using Azure.Core;
 using NUnit.Framework;
-using Spread;
-using Spread.Models;
+using SpreadTypeSpec;
+using SpreadTypeSpec.Models;
 
 namespace AutoRest.TestServer.Tests
 {
@@ -22,7 +22,7 @@ namespace AutoRest.TestServer.Tests
             {
                 (typeof(Thing), "thing", true)
             };
-            ValidateConvenienceMethod(typeof(SpreadClient), "SpreadModel", expected);
+            ValidateConvenienceMethod(typeof(SpreadTypeSpecClient), "SpreadModel", expected);
         }
 
         [Test]
@@ -33,7 +33,7 @@ namespace AutoRest.TestServer.Tests
                 (typeof(string), "name", true),
                 (typeof(int), "age", true)
             };
-            ValidateConvenienceMethod(typeof(SpreadClient), "SpreadAlias", expected);
+            ValidateConvenienceMethod(typeof(SpreadTypeSpecClient), "SpreadAlias", expected);
         }
 
         [Test]
@@ -46,7 +46,7 @@ namespace AutoRest.TestServer.Tests
                 (typeof(string), "name", true),
                 (typeof(int), "age", true)
             };
-            ValidateConvenienceMethod(typeof(SpreadClient), "SpreadMultiTargetAlias", expected);
+            ValidateConvenienceMethod(typeof(SpreadTypeSpecClient), "SpreadMultiTargetAlias", expected);
         }
 
         [Test]
@@ -58,7 +58,7 @@ namespace AutoRest.TestServer.Tests
                 (typeof(int), "top", true),
                 (typeof(Thing), "thing", true)
             };
-            ValidateConvenienceMethod(typeof(SpreadClient), "SpreadAliasWithModel", expected);
+            ValidateConvenienceMethod(typeof(SpreadTypeSpecClient), "SpreadAliasWithModel", expected);
         }
 
         [Test]
@@ -71,7 +71,7 @@ namespace AutoRest.TestServer.Tests
                 (typeof(string), "name", true),
                 (typeof(int), "age", true)
             };
-            ValidateConvenienceMethod(typeof(SpreadClient), "SpreadAliasWithSpreadAlias", expected);
+            ValidateConvenienceMethod(typeof(SpreadTypeSpecClient), "SpreadAliasWithSpreadAlias", expected);
         }
 
         [Test]
@@ -87,7 +87,7 @@ namespace AutoRest.TestServer.Tests
                 (typeof(int?), "age", false),
                 (typeof(IEnumerable<string>), "elements", false)
             };
-            ValidateConvenienceMethod(typeof(SpreadClient), "SpreadAliasWithOptionalProps", expected);
+            ValidateConvenienceMethod(typeof(SpreadTypeSpecClient), "SpreadAliasWithOptionalProps", expected);
         }
 
         private static void ValidateConvenienceMethod(Type clientType, string methodName, IEnumerable<(Type ParameterType, string Name, bool IsRequired)> expected)

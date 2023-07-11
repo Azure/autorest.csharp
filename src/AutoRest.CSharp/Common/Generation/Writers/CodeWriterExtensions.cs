@@ -650,5 +650,14 @@ namespace AutoRest.CSharp.Generation.Writers
 
             return scope;
         }
+
+        public static CodeWriter WriteEnableHttpRedirectIfNecessary(this CodeWriter writer, RestClientMethod restClientMethod, CodeWriterDeclaration messageVariable)
+        {
+            if (restClientMethod.ShouldEnableRedirect)
+            {
+                writer.Line($"{nameof(RedirectPolicy)}.{nameof(RedirectPolicy.SetAllowAutoRedirect)}({messageVariable}, true);");
+            }
+            return writer;
+        }
     }
 }

@@ -1,8 +1,8 @@
 {
-  "OutputFolder": ".",
-  "Namespace": "FlattenedParameters",
-  "LibraryName": "FlattenedParameters",
-  "SharedSourceFolders": [
+  "output-folder": ".",
+  "namespace": "FlattenedParameters",
+  "library-name": "FlattenedParameters",
+  "shared-source-folders": [
     "..\\..\\..\\..\\artifacts\\bin\\AutoRest.CSharp\\Debug\\net6.0\\Generator.Shared",
     "..\\..\\..\\..\\artifacts\\bin\\AutoRest.CSharp\\Debug\\net6.0\\Azure.Core.Shared"
   ],

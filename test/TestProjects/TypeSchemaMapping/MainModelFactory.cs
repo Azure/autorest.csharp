@@ -5,7 +5,7 @@ using Azure.Core;
 
 namespace TypeSchemaMapping.Models
 {
-    [CodeGenType("SchemaMappingModelFactory")]
+    [CodeGenType("TypeSchemaMappingModelFactory")]
     internal partial class MainModelFactory
     {
         public static ModelWithAbstractModel ModelWithAbstractModel(AbstractModel abstractModelProperty = default)
