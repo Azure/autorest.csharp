@@ -6,6 +6,8 @@
 using System;
 using System.Collections.Generic;
 using System.Globalization;
+using System.Linq;
+using System.Xml;
 
 namespace Azure.Core
 {
@@ -113,6 +115,12 @@ namespace Azure.Core
         public static void AddDelimited<T>(this RequestHeaders headers, string name, IEnumerable<T> value, string delimiter)
         {
             headers.Add(name, string.Join(delimiter, value));
+        }
+
+        public static void AddDelimited<T>(this RequestHeaders headers, string name, IEnumerable<T> value, string delimiter, string format)
+        {
+            var stringValues = value.Select(v => TypeFormatters.ConvertToString(v, format));
+            headers.Add(name, string.Join(delimiter, stringValues));
         }
     }
 }

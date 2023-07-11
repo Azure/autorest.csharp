@@ -12,7 +12,7 @@ import {
 } from "@typespec/compiler";
 
 import { stringifyRefs, PreserveType } from "json-serialize-refs";
-import fs from "fs";
+import fs, { existsSync } from "fs";
 import path from "node:path";
 import { Configuration } from "./type/configuration.js";
 import { execSync } from "child_process";
@@ -112,36 +112,42 @@ export async function $onEmit(context: EmitContext<NetEmitterOptions>) {
 
             //emit configuration.json
             const configurations = {
-                OutputFolder: ".",
-                Namespace: options.namespace ?? namespace,
-                LibraryName: options["library-name"] ?? namespace,
-                SharedSourceFolders: resolvedSharedFolders ?? [],
-                SingleTopLevelClient: options["single-top-level-client"],
+                "output-folder": ".", // TODO -- align
+                namespace: options.namespace ?? namespace,
+                "library-name":
+                    options["library-name"] ?? options.namespace ?? namespace,
+                "shared-source-folders": resolvedSharedFolders ?? [],
+                "single-top-level-client": options["single-top-level-client"],
                 "unreferenced-types-handling":
                     options["unreferenced-types-handling"],
                 "use-overloads-between-protocol-and-convenience":
                     options["use-overloads-between-protocol-and-convenience"],
+                "keep-non-overloadable-protocol-signature":
+                    options["keep-non-overloadable-protocol-signature"],
                 "model-namespace": options["model-namespace"],
                 "models-to-treat-empty-string-as-null":
                     options["models-to-treat-empty-string-as-null"],
-                "additional-intrinsic-types-to-treat-empty-string-as-null":
-                    options["models-to-treat-empty-string-as-null"]
-                        ? options[
-                              "additional-intrinsic-types-to-treat-empty-string-as-null"
-                          ].concat(
-                              [
-                                  "Uri",
-                                  "Guid",
-                                  "ResourceIdentifier",
-                                  "DateTimeOffset"
-                              ].filter(
-                                  (item) =>
-                                      options[
-                                          "additional-intrinsic-types-to-treat-empty-string-as-null"
-                                      ].indexOf(item) < 0
-                              )
+                "intrinsic-types-to-treat-empty-string-as-null": options[
+                    "models-to-treat-empty-string-as-null"
+                ]
+                    ? options[
+                          "additional-intrinsic-types-to-treat-empty-string-as-null"
+                      ].concat(
+                          [
+                              "Uri",
+                              "Guid",
+                              "ResourceIdentifier",
+                              "DateTimeOffset"
+                          ].filter(
+                              (item) =>
+                                  options[
+                                      "additional-intrinsic-types-to-treat-empty-string-as-null"
+                                  ].indexOf(item) < 0
                           )
-                        : undefined
+                      )
+                    : undefined,
+                "methods-to-keep-client-default-value":
+                    options["methods-to-keep-client-default-value"]
             } as Configuration;
 
             await program.host.writeFile(
@@ -150,9 +156,15 @@ export async function $onEmit(context: EmitContext<NetEmitterOptions>) {
             );
 
             if (options.skipSDKGeneration !== true) {
-                const newProjectOption = options["new-project"]
-                    ? "--new-project"
-                    : "";
+                const csProjFile = resolvePath(
+                    outputFolder,
+                    `${configurations["library-name"]}.csproj`
+                );
+                logger.info(`Checking if ${csProjFile} exists`);
+                const newProjectOption =
+                    options["new-project"] || !existsSync(csProjFile)
+                        ? "--new-project"
+                        : "";
                 const existingProjectOption = options["existing-project-folder"]
                     ? `--existing-project-folder ${options["existing-project-folder"]}`
                     : "";
@@ -163,7 +175,7 @@ export async function $onEmit(context: EmitContext<NetEmitterOptions>) {
                 )} --project-path ${outputFolder} ${newProjectOption} ${existingProjectOption} --clear-output-folder ${
                     options["clear-output-folder"]
                 }${debugFlag}`;
-                logger.verbose(command);
+                logger.info(command);
 
                 try {
                     execSync(command, { stdio: "inherit" });
@@ -196,10 +208,4 @@ function deleteFile(filePath: string) {
 
 function prettierOutput(output: string) {
     return output + "\n";
-}
-
-class ErrorTypeFoundError extends Error {
-    constructor() {
-        super("Error type found in evaluated typespec output");
-    }
 }
