@@ -115,7 +115,9 @@ export async function $onEmit(context: EmitContext<NetEmitterOptions>) {
                 "output-folder": ".",
                 namespace: options.namespace ?? tspNamespace,
                 "library-name":
-                    options["library-name"] ?? options.namespace ?? tspNamespace,
+                    options["library-name"] ??
+                    options.namespace ??
+                    tspNamespace,
                 "shared-source-folders": resolvedSharedFolders ?? [],
                 "single-top-level-client": options["single-top-level-client"],
                 "unreferenced-types-handling":
