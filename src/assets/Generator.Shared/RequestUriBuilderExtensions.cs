@@ -40,7 +40,7 @@ namespace Azure.Core
 
         public static void AppendPath(this RequestUriBuilder builder, BinaryData value, string format, bool escape = true)
         {
-            builder.AppendPath(ConvertToString(value, format), escape);
+            builder.AppendPath(TypeFormatters.ConvertToString(value, format), escape);
         }
 
         public static void AppendPath(this RequestUriBuilder builder, IEnumerable<string> value, bool escape = true)
@@ -120,7 +120,7 @@ namespace Azure.Core
 
         public static void AppendQuery(this RequestUriBuilder builder, string name, BinaryData value, string format, bool escape = true)
         {
-            builder.AppendQuery(name, ConvertToString(value, format), escape);
+            builder.AppendQuery(name, TypeFormatters.ConvertToString(value, format), escape);
         }
 
         public static void AppendQuery(this RequestUriBuilder builder, string name, Guid value, bool escape = true)

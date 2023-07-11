@@ -69,7 +69,7 @@ namespace AutoRest.CSharp.Output.Models
                     fields.Add(_keyAuthField);
                     if (authorization.ApiKey.Prefix is not null)
                     {
-                        AuthorizationApiKeyPrefixConstant = new(Private | Const, typeof(string), "AuthorizationApiKeyPrefix", $"{authorization.ApiKey.Prefix:L}", SerializationFormat.Default);
+                        AuthorizationApiKeyPrefixConstant = new(Private | Const, typeof(string), "AuthorizationApiKeyPrefix", $"{authorization.ApiKey.Prefix:L}");
                         fields.Add(AuthorizationApiKeyPrefixConstant);
                     }
                     credentialFields.Add(_keyAuthField);
