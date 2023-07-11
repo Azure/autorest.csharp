@@ -8,7 +8,7 @@
 using System.Text.Json;
 using Azure.Core;
 
-namespace Spread.Models
+namespace SpreadTypeSpec.Models
 {
     internal partial class SpreadAliasWithOptionalPropsRequest : IUtf8JsonSerializable
     {

@@ -1,7 +1,7 @@
 {
   "output-folder": ".",
-  "namespace": "Spread",
-  "library-name": "Spread",
+  "namespace": "SpreadTypeSpec",
+  "library-name": "SpreadTypeSpec",
   "shared-source-folders": [
     "../../../../../artifacts/bin/AutoRest.CSharp/Debug/net6.0/Generator.Shared",
     "../../../../../artifacts/bin/AutoRest.CSharp/Debug/net6.0/Azure.Core.Shared"
