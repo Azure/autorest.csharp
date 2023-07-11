@@ -7,7 +7,7 @@ This sample shows how to call OperationAsync with required parameters.
 <code><![CDATA[
 var client = new ServiceVersionOverrideClient();
 
-Response response = await client.OperationAsync("<notApiVersionEnum>");
+Response response = await client.OperationAsync("<notApiVersionEnum>").ConfigureAwait(false);
 Console.WriteLine(response.Status);
 ]]></code>
 </example>

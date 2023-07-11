@@ -8,7 +8,6 @@
 using System.Collections.Generic;
 using Azure.Core;
 using Azure.ResourceManager.Models;
-using MgmtConstants;
 
 namespace MgmtConstants.Models
 {

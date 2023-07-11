@@ -110,7 +110,7 @@ namespace paging
         }
 
         /// <summary> A paging operation that includes a nextLink that has 10 pages. </summary>
-        /// <param name="clientRequestId"> The String to use. </param>
+        /// <param name="clientRequestId"> The string to use. </param>
         /// <param name="pagingGetMultiplePagesOptions"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual AsyncPageable<Product> GetMultiplePagesAsync(string clientRequestId = null, PagingGetMultiplePagesOptions pagingGetMultiplePagesOptions = null, CancellationToken cancellationToken = default)
@@ -121,7 +121,7 @@ namespace paging
         }
 
         /// <summary> A paging operation that includes a nextLink that has 10 pages. </summary>
-        /// <param name="clientRequestId"> The String to use. </param>
+        /// <param name="clientRequestId"> The string to use. </param>
         /// <param name="pagingGetMultiplePagesOptions"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Pageable<Product> GetMultiplePages(string clientRequestId = null, PagingGetMultiplePagesOptions pagingGetMultiplePagesOptions = null, CancellationToken cancellationToken = default)
@@ -188,7 +188,7 @@ namespace paging
         }
 
         /// <summary> A paging operation that includes a nextLink in odata format that has 10 pages. </summary>
-        /// <param name="clientRequestId"> The String to use. </param>
+        /// <param name="clientRequestId"> The string to use. </param>
         /// <param name="pagingGetOdataMultiplePagesOptions"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual AsyncPageable<Product> GetOdataMultiplePagesAsync(string clientRequestId = null, PagingGetOdataMultiplePagesOptions pagingGetOdataMultiplePagesOptions = null, CancellationToken cancellationToken = default)
@@ -199,7 +199,7 @@ namespace paging
         }
 
         /// <summary> A paging operation that includes a nextLink in odata format that has 10 pages. </summary>
-        /// <param name="clientRequestId"> The String to use. </param>
+        /// <param name="clientRequestId"> The string to use. </param>
         /// <param name="pagingGetOdataMultiplePagesOptions"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Pageable<Product> GetOdataMultiplePages(string clientRequestId = null, PagingGetOdataMultiplePagesOptions pagingGetOdataMultiplePagesOptions = null, CancellationToken cancellationToken = default)
@@ -211,7 +211,7 @@ namespace paging
 
         /// <summary> A paging operation that includes a nextLink that has 10 pages. </summary>
         /// <param name="pagingGetMultiplePagesWithOffsetOptions"> Parameter group. </param>
-        /// <param name="clientRequestId"> The String to use. </param>
+        /// <param name="clientRequestId"> The string to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="pagingGetMultiplePagesWithOffsetOptions"/> is null. </exception>
         public virtual AsyncPageable<Product> GetMultiplePagesWithOffsetAsync(PagingGetMultiplePagesWithOffsetOptions pagingGetMultiplePagesWithOffsetOptions, string clientRequestId = null, CancellationToken cancellationToken = default)
@@ -225,7 +225,7 @@ namespace paging
 
         /// <summary> A paging operation that includes a nextLink that has 10 pages. </summary>
         /// <param name="pagingGetMultiplePagesWithOffsetOptions"> Parameter group. </param>
-        /// <param name="clientRequestId"> The String to use. </param>
+        /// <param name="clientRequestId"> The string to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="pagingGetMultiplePagesWithOffsetOptions"/> is null. </exception>
         public virtual Pageable<Product> GetMultiplePagesWithOffset(PagingGetMultiplePagesWithOffsetOptions pagingGetMultiplePagesWithOffsetOptions, string clientRequestId = null, CancellationToken cancellationToken = default)
@@ -466,7 +466,7 @@ namespace paging
         }
 
         /// <summary> A long-running paging operation that includes a nextLink that has 10 pages. </summary>
-        /// <param name="clientRequestId"> The String to use. </param>
+        /// <param name="clientRequestId"> The string to use. </param>
         /// <param name="pagingGetMultiplePagesLroOptions"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<PagingGetMultiplePagesLROOperation> StartGetMultiplePagesLROAsync(string clientRequestId = null, PagingGetMultiplePagesLroOptions pagingGetMultiplePagesLroOptions = null, CancellationToken cancellationToken = default)
@@ -486,7 +486,7 @@ namespace paging
         }
 
         /// <summary> A long-running paging operation that includes a nextLink that has 10 pages. </summary>
-        /// <param name="clientRequestId"> The String to use. </param>
+        /// <param name="clientRequestId"> The string to use. </param>
         /// <param name="pagingGetMultiplePagesLroOptions"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual PagingGetMultiplePagesLROOperation StartGetMultiplePagesLRO(string clientRequestId = null, PagingGetMultiplePagesLroOptions pagingGetMultiplePagesLroOptions = null, CancellationToken cancellationToken = default)

@@ -8,7 +8,6 @@
 using System;
 using System.Threading;
 using System.Threading.Tasks;
-using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
 using Azure.Language.Authoring.Models;
@@ -66,7 +65,7 @@ namespace Azure.Language.Authoring
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="projectName"> The String to use. </param>
+        /// <param name="projectName"> The string to use. </param>
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="projectName"/> or <paramref name="content"/> is null. </exception>
@@ -103,7 +102,7 @@ namespace Azure.Language.Authoring
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="projectName"> The String to use. </param>
+        /// <param name="projectName"> The string to use. </param>
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="projectName"/> or <paramref name="content"/> is null. </exception>
@@ -140,7 +139,7 @@ namespace Azure.Language.Authoring
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="projectName"> The String to use. </param>
+        /// <param name="projectName"> The string to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="projectName"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="projectName"/> is an empty string, and was expected to be non-empty. </exception>
@@ -175,7 +174,7 @@ namespace Azure.Language.Authoring
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="projectName"> The String to use. </param>
+        /// <param name="projectName"> The string to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="projectName"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="projectName"/> is an empty string, and was expected to be non-empty. </exception>
@@ -210,7 +209,7 @@ namespace Azure.Language.Authoring
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="projectName"> The String to use. </param>
+        /// <param name="projectName"> The string to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="projectName"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="projectName"/> is an empty string, and was expected to be non-empty. </exception>
@@ -245,7 +244,7 @@ namespace Azure.Language.Authoring
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="projectName"> The String to use. </param>
+        /// <param name="projectName"> The string to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="projectName"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="projectName"/> is an empty string, and was expected to be non-empty. </exception>
@@ -280,8 +279,8 @@ namespace Azure.Language.Authoring
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="projectName"> The String to use. </param>
-        /// <param name="projectFileVersion"> The String to use. </param>
+        /// <param name="projectName"> The string to use. </param>
+        /// <param name="projectFileVersion"> The string to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="projectName"/> or <paramref name="projectFileVersion"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="projectName"/> is an empty string, and was expected to be non-empty. </exception>
@@ -317,8 +316,8 @@ namespace Azure.Language.Authoring
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="projectName"> The String to use. </param>
-        /// <param name="projectFileVersion"> The String to use. </param>
+        /// <param name="projectName"> The string to use. </param>
+        /// <param name="projectFileVersion"> The string to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="projectName"/> or <paramref name="projectFileVersion"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="projectName"/> is an empty string, and was expected to be non-empty. </exception>
@@ -354,7 +353,7 @@ namespace Azure.Language.Authoring
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="projectName"> The String to use. </param>
+        /// <param name="projectName"> The string to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="projectName"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="projectName"/> is an empty string, and was expected to be non-empty. </exception>
@@ -389,7 +388,7 @@ namespace Azure.Language.Authoring
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="projectName"> The String to use. </param>
+        /// <param name="projectName"> The string to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="projectName"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="projectName"/> is an empty string, and was expected to be non-empty. </exception>
@@ -424,7 +423,7 @@ namespace Azure.Language.Authoring
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="projectName"> The String to use. </param>
+        /// <param name="projectName"> The string to use. </param>
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="projectName"/> or <paramref name="content"/> is null. </exception>
@@ -461,7 +460,7 @@ namespace Azure.Language.Authoring
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="projectName"> The String to use. </param>
+        /// <param name="projectName"> The string to use. </param>
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="projectName"/> or <paramref name="content"/> is null. </exception>
@@ -498,8 +497,8 @@ namespace Azure.Language.Authoring
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="projectName"> The String to use. </param>
-        /// <param name="deploymentName"> The String to use. </param>
+        /// <param name="projectName"> The string to use. </param>
+        /// <param name="deploymentName"> The string to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="projectName"/> or <paramref name="deploymentName"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="projectName"/> or <paramref name="deploymentName"/> is an empty string, and was expected to be non-empty. </exception>
@@ -535,8 +534,8 @@ namespace Azure.Language.Authoring
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="projectName"> The String to use. </param>
-        /// <param name="deploymentName"> The String to use. </param>
+        /// <param name="projectName"> The string to use. </param>
+        /// <param name="deploymentName"> The string to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="projectName"/> or <paramref name="deploymentName"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="projectName"/> or <paramref name="deploymentName"/> is an empty string, and was expected to be non-empty. </exception>
@@ -572,8 +571,8 @@ namespace Azure.Language.Authoring
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="projectName"> The String to use. </param>
-        /// <param name="deploymentName"> The String to use. </param>
+        /// <param name="projectName"> The string to use. </param>
+        /// <param name="deploymentName"> The string to use. </param>
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="projectName"/>, <paramref name="deploymentName"/> or <paramref name="content"/> is null. </exception>
@@ -611,8 +610,8 @@ namespace Azure.Language.Authoring
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="projectName"> The String to use. </param>
-        /// <param name="deploymentName"> The String to use. </param>
+        /// <param name="projectName"> The string to use. </param>
+        /// <param name="deploymentName"> The string to use. </param>
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="projectName"/>, <paramref name="deploymentName"/> or <paramref name="content"/> is null. </exception>
@@ -650,8 +649,8 @@ namespace Azure.Language.Authoring
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="projectName"> The String to use. </param>
-        /// <param name="deploymentName"> The String to use. </param>
+        /// <param name="projectName"> The string to use. </param>
+        /// <param name="deploymentName"> The string to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="projectName"/> or <paramref name="deploymentName"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="projectName"/> or <paramref name="deploymentName"/> is an empty string, and was expected to be non-empty. </exception>
@@ -687,8 +686,8 @@ namespace Azure.Language.Authoring
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="projectName"> The String to use. </param>
-        /// <param name="deploymentName"> The String to use. </param>
+        /// <param name="projectName"> The string to use. </param>
+        /// <param name="deploymentName"> The string to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="projectName"/> or <paramref name="deploymentName"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="projectName"/> or <paramref name="deploymentName"/> is an empty string, and was expected to be non-empty. </exception>
@@ -724,7 +723,7 @@ namespace Azure.Language.Authoring
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="projectName"> The String to use. </param>
+        /// <param name="projectName"> The string to use. </param>
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="projectName"/> or <paramref name="content"/> is null. </exception>
@@ -761,7 +760,7 @@ namespace Azure.Language.Authoring
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="projectName"> The String to use. </param>
+        /// <param name="projectName"> The string to use. </param>
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="projectName"/> or <paramref name="content"/> is null. </exception>
@@ -789,9 +788,9 @@ namespace Azure.Language.Authoring
         }
 
         /// <summary> Gets the status of an existing deployment job. </summary>
-        /// <param name="projectName"> The String to use. </param>
-        /// <param name="deploymentName"> The String to use. </param>
-        /// <param name="jobId"> The String to use. </param>
+        /// <param name="projectName"> The string to use. </param>
+        /// <param name="deploymentName"> The string to use. </param>
+        /// <param name="jobId"> The string to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="projectName"/>, <paramref name="deploymentName"/> or <paramref name="jobId"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="projectName"/>, <paramref name="deploymentName"/> or <paramref name="jobId"/> is an empty string, and was expected to be non-empty. </exception>
@@ -808,9 +807,9 @@ namespace Azure.Language.Authoring
         }
 
         /// <summary> Gets the status of an existing deployment job. </summary>
-        /// <param name="projectName"> The String to use. </param>
-        /// <param name="deploymentName"> The String to use. </param>
-        /// <param name="jobId"> The String to use. </param>
+        /// <param name="projectName"> The string to use. </param>
+        /// <param name="deploymentName"> The string to use. </param>
+        /// <param name="jobId"> The string to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="projectName"/>, <paramref name="deploymentName"/> or <paramref name="jobId"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="projectName"/>, <paramref name="deploymentName"/> or <paramref name="jobId"/> is an empty string, and was expected to be non-empty. </exception>
@@ -841,9 +840,9 @@ namespace Azure.Language.Authoring
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="projectName"> The String to use. </param>
-        /// <param name="deploymentName"> The String to use. </param>
-        /// <param name="jobId"> The String to use. </param>
+        /// <param name="projectName"> The string to use. </param>
+        /// <param name="deploymentName"> The string to use. </param>
+        /// <param name="jobId"> The string to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="projectName"/>, <paramref name="deploymentName"/> or <paramref name="jobId"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="projectName"/>, <paramref name="deploymentName"/> or <paramref name="jobId"/> is an empty string, and was expected to be non-empty. </exception>
@@ -885,9 +884,9 @@ namespace Azure.Language.Authoring
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="projectName"> The String to use. </param>
-        /// <param name="deploymentName"> The String to use. </param>
-        /// <param name="jobId"> The String to use. </param>
+        /// <param name="projectName"> The string to use. </param>
+        /// <param name="deploymentName"> The string to use. </param>
+        /// <param name="jobId"> The string to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="projectName"/>, <paramref name="deploymentName"/> or <paramref name="jobId"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="projectName"/>, <paramref name="deploymentName"/> or <paramref name="jobId"/> is an empty string, and was expected to be non-empty. </exception>
@@ -915,9 +914,9 @@ namespace Azure.Language.Authoring
         }
 
         /// <summary> Gets the status of an existing swap deployment job. </summary>
-        /// <param name="projectName"> The String to use. </param>
-        /// <param name="deploymentName"> The String to use. </param>
-        /// <param name="jobId"> The String to use. </param>
+        /// <param name="projectName"> The string to use. </param>
+        /// <param name="deploymentName"> The string to use. </param>
+        /// <param name="jobId"> The string to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="projectName"/>, <paramref name="deploymentName"/> or <paramref name="jobId"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="projectName"/>, <paramref name="deploymentName"/> or <paramref name="jobId"/> is an empty string, and was expected to be non-empty. </exception>
@@ -934,9 +933,9 @@ namespace Azure.Language.Authoring
         }
 
         /// <summary> Gets the status of an existing swap deployment job. </summary>
-        /// <param name="projectName"> The String to use. </param>
-        /// <param name="deploymentName"> The String to use. </param>
-        /// <param name="jobId"> The String to use. </param>
+        /// <param name="projectName"> The string to use. </param>
+        /// <param name="deploymentName"> The string to use. </param>
+        /// <param name="jobId"> The string to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="projectName"/>, <paramref name="deploymentName"/> or <paramref name="jobId"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="projectName"/>, <paramref name="deploymentName"/> or <paramref name="jobId"/> is an empty string, and was expected to be non-empty. </exception>
@@ -967,9 +966,9 @@ namespace Azure.Language.Authoring
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="projectName"> The String to use. </param>
-        /// <param name="deploymentName"> The String to use. </param>
-        /// <param name="jobId"> The String to use. </param>
+        /// <param name="projectName"> The string to use. </param>
+        /// <param name="deploymentName"> The string to use. </param>
+        /// <param name="jobId"> The string to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="projectName"/>, <paramref name="deploymentName"/> or <paramref name="jobId"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="projectName"/>, <paramref name="deploymentName"/> or <paramref name="jobId"/> is an empty string, and was expected to be non-empty. </exception>
@@ -1011,9 +1010,9 @@ namespace Azure.Language.Authoring
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="projectName"> The String to use. </param>
-        /// <param name="deploymentName"> The String to use. </param>
-        /// <param name="jobId"> The String to use. </param>
+        /// <param name="projectName"> The string to use. </param>
+        /// <param name="deploymentName"> The string to use. </param>
+        /// <param name="jobId"> The string to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="projectName"/>, <paramref name="deploymentName"/> or <paramref name="jobId"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="projectName"/>, <paramref name="deploymentName"/> or <paramref name="jobId"/> is an empty string, and was expected to be non-empty. </exception>
@@ -1092,7 +1091,7 @@ namespace Azure.Language.Authoring
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="projectName"> The String to use. </param>
+        /// <param name="projectName"> The string to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="projectName"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="projectName"/> is an empty string, and was expected to be non-empty. </exception>
@@ -1118,7 +1117,7 @@ namespace Azure.Language.Authoring
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="projectName"> The String to use. </param>
+        /// <param name="projectName"> The string to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="projectName"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="projectName"/> is an empty string, and was expected to be non-empty. </exception>
@@ -1144,9 +1143,9 @@ namespace Azure.Language.Authoring
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="maxCount"> The Int32 to use. </param>
-        /// <param name="skip"> The Int32 to use. </param>
-        /// <param name="maxpagesize"> The Int32 to use. </param>
+        /// <param name="maxCount"> The int to use. </param>
+        /// <param name="skip"> The int to use. </param>
+        /// <param name="maxpagesize"> The int to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="AsyncPageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
@@ -1168,9 +1167,9 @@ namespace Azure.Language.Authoring
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="maxCount"> The Int32 to use. </param>
-        /// <param name="skip"> The Int32 to use. </param>
-        /// <param name="maxpagesize"> The Int32 to use. </param>
+        /// <param name="maxCount"> The int to use. </param>
+        /// <param name="skip"> The int to use. </param>
+        /// <param name="maxpagesize"> The int to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="Pageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
@@ -1192,9 +1191,9 @@ namespace Azure.Language.Authoring
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="maxCount"> The Int32 to use. </param>
-        /// <param name="skip"> The Int32 to use. </param>
-        /// <param name="maxpagesize"> The Int32 to use. </param>
+        /// <param name="maxCount"> The int to use. </param>
+        /// <param name="skip"> The int to use. </param>
+        /// <param name="maxpagesize"> The int to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="AsyncPageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
@@ -1216,9 +1215,9 @@ namespace Azure.Language.Authoring
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="maxCount"> The Int32 to use. </param>
-        /// <param name="skip"> The Int32 to use. </param>
-        /// <param name="maxpagesize"> The Int32 to use. </param>
+        /// <param name="maxCount"> The int to use. </param>
+        /// <param name="skip"> The int to use. </param>
+        /// <param name="maxpagesize"> The int to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="Pageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>

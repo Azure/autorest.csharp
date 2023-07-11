@@ -8,7 +8,7 @@ This sample shows how to call GetCachedParameterAsync and parse the result.
 var credential = new AzureKeyCredential("<key>");
 var client = new RootClient("<cachedParameter>", credential);
 
-Response response = await client.GetCachedParameterAsync();
+Response response = await client.GetCachedParameterAsync().ConfigureAwait(false);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.ToString());

@@ -8,9 +8,9 @@ This sample shows how to call CreateAsync with required parameters and request c
 var credential = new AzureKeyCredential("<key>");
 var client = new BodyAndPathClient(credential);
 
-var data = new {};
+var data = BinaryData.FromString("<your binary data content>");
 
-Response response = await client.CreateAsync("<itemName>", RequestContent.Create(data));
+Response response = await client.CreateAsync("<itemName>", RequestContent.Create(data)).ConfigureAwait(false);
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
@@ -22,7 +22,7 @@ This sample shows how to call Create with required parameters and request conten
 var credential = new AzureKeyCredential("<key>");
 var client = new BodyAndPathClient(credential);
 
-var data = new {};
+var data = BinaryData.FromString("<your binary data content>");
 
 Response response = client.Create("<itemName>", RequestContent.Create(data));
 Console.WriteLine(response.Status);

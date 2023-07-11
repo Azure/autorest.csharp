@@ -8,7 +8,7 @@ This sample shows how to call TwoAsync and parse the result.
 var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new ClientAndOperationGroupServiceClient(endpoint).GetBetaClient();
 
-Response response = await client.TwoAsync();
+Response response = await client.TwoAsync().ConfigureAwait(false);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.ToString());
@@ -36,7 +36,7 @@ This sample shows how to call ThreeAsync and parse the result.
 var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new ClientAndOperationGroupServiceClient(endpoint).GetBetaClient();
 
-Response response = await client.ThreeAsync();
+Response response = await client.ThreeAsync().ConfigureAwait(false);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.ToString());

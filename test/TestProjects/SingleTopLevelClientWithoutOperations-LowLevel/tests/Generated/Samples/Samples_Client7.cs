@@ -6,13 +6,9 @@
 #nullable disable
 
 using System;
-using System.Collections.Generic;
-using System.IO;
 using System.Text.Json;
 using System.Threading.Tasks;
 using Azure;
-using Azure.Core;
-using Azure.Identity;
 using NUnit.Framework;
 
 namespace SingleTopLevelClientWithoutOperations_LowLevel.Samples
@@ -52,7 +48,7 @@ namespace SingleTopLevelClientWithoutOperations_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new TopLevelClientWithoutOperationClient(credential).GetClient7Client();
 
-            Response response = await client.OperationAsync();
+            Response response = await client.OperationAsync().ConfigureAwait(false);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());
@@ -65,7 +61,7 @@ namespace SingleTopLevelClientWithoutOperations_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new TopLevelClientWithoutOperationClient(credential).GetClient7Client();
 
-            Response response = await client.OperationAsync();
+            Response response = await client.OperationAsync().ConfigureAwait(false);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());

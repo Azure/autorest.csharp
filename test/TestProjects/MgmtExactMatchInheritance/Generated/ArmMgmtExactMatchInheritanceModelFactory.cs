@@ -12,7 +12,6 @@ using System.Net;
 using Azure.Core;
 using Azure.Core.Expressions.DataFactory;
 using Azure.ResourceManager.Models;
-using MgmtExactMatchInheritance;
 
 namespace MgmtExactMatchInheritance.Models
 {

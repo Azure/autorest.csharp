@@ -9,7 +9,6 @@ using System;
 using System.Collections.Generic;
 using Azure.Core;
 using Azure.ResourceManager.Models;
-using MgmtSubscriptionNameParameter;
 
 namespace MgmtSubscriptionNameParameter.Models
 {

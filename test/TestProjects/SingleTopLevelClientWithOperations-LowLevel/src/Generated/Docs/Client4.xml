@@ -8,7 +8,7 @@ This sample shows how to call PatchAsync with required parameters and parse the 
 var credential = new AzureKeyCredential("<key>");
 var client = new TopLevelClientWithOperationClient(credential).GetClient4("<clientParameter>");
 
-Response response = await client.PatchAsync("<filter>");
+Response response = await client.PatchAsync("<filter>").ConfigureAwait(false);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.ToString());

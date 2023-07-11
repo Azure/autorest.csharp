@@ -6,13 +6,8 @@
 #nullable disable
 
 using System;
-using System.Collections.Generic;
-using System.IO;
 using System.Text.Json;
 using System.Threading.Tasks;
-using Azure;
-using Azure.Core;
-using Azure.Identity;
 using NUnit.Framework;
 
 namespace PaginationParams_LowLevel.Samples
@@ -23,7 +18,7 @@ namespace PaginationParams_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_GetPaginationParams()
         {
-            var credential = new DefaultAzureCredential();
+            var credential = new Azure.Identity.DefaultAzureCredential();
             var client = new PaginationParamsClient(credential);
 
             foreach (var item in client.GetPaginationParams())
@@ -37,7 +32,7 @@ namespace PaginationParams_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_GetPaginationParams_AllParameters()
         {
-            var credential = new DefaultAzureCredential();
+            var credential = new Azure.Identity.DefaultAzureCredential();
             var client = new PaginationParamsClient(credential);
 
             foreach (var item in client.GetPaginationParams(1234, 1234, 1234))
@@ -53,7 +48,7 @@ namespace PaginationParams_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_GetPaginationParams_Async()
         {
-            var credential = new DefaultAzureCredential();
+            var credential = new Azure.Identity.DefaultAzureCredential();
             var client = new PaginationParamsClient(credential);
 
             await foreach (var item in client.GetPaginationParamsAsync())
@@ -67,7 +62,7 @@ namespace PaginationParams_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_GetPaginationParams_AllParameters_Async()
         {
-            var credential = new DefaultAzureCredential();
+            var credential = new Azure.Identity.DefaultAzureCredential();
             var client = new PaginationParamsClient(credential);
 
             await foreach (var item in client.GetPaginationParamsAsync(1234, 1234, 1234))
@@ -83,7 +78,7 @@ namespace PaginationParams_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Get2s()
         {
-            var credential = new DefaultAzureCredential();
+            var credential = new Azure.Identity.DefaultAzureCredential();
             var client = new PaginationParamsClient(credential);
 
             foreach (var item in client.Get2s())
@@ -97,10 +92,10 @@ namespace PaginationParams_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Get2s_AllParameters()
         {
-            var credential = new DefaultAzureCredential();
+            var credential = new Azure.Identity.DefaultAzureCredential();
             var client = new PaginationParamsClient(credential);
 
-            foreach (var item in client.Get2s(1234, 1234, 1234))
+            foreach (var item in client.Get2s(1234, 1234, 1234L))
             {
                 JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
                 Console.WriteLine(result.GetProperty("id").ToString());
@@ -113,7 +108,7 @@ namespace PaginationParams_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Get2s_Async()
         {
-            var credential = new DefaultAzureCredential();
+            var credential = new Azure.Identity.DefaultAzureCredential();
             var client = new PaginationParamsClient(credential);
 
             await foreach (var item in client.Get2sAsync())
@@ -127,10 +122,10 @@ namespace PaginationParams_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Get2s_AllParameters_Async()
         {
-            var credential = new DefaultAzureCredential();
+            var credential = new Azure.Identity.DefaultAzureCredential();
             var client = new PaginationParamsClient(credential);
 
-            await foreach (var item in client.Get2sAsync(1234, 1234, 1234))
+            await foreach (var item in client.Get2sAsync(1234, 1234, 1234L))
             {
                 JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
                 Console.WriteLine(result.GetProperty("id").ToString());
@@ -143,7 +138,7 @@ namespace PaginationParams_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Get3s()
         {
-            var credential = new DefaultAzureCredential();
+            var credential = new Azure.Identity.DefaultAzureCredential();
             var client = new PaginationParamsClient(credential);
 
             foreach (var item in client.Get3s())
@@ -157,7 +152,7 @@ namespace PaginationParams_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Get3s_AllParameters()
         {
-            var credential = new DefaultAzureCredential();
+            var credential = new Azure.Identity.DefaultAzureCredential();
             var client = new PaginationParamsClient(credential);
 
             foreach (var item in client.Get3s(1234, 1234, 1234))
@@ -173,7 +168,7 @@ namespace PaginationParams_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Get3s_Async()
         {
-            var credential = new DefaultAzureCredential();
+            var credential = new Azure.Identity.DefaultAzureCredential();
             var client = new PaginationParamsClient(credential);
 
             await foreach (var item in client.Get3sAsync())
@@ -187,7 +182,7 @@ namespace PaginationParams_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Get3s_AllParameters_Async()
         {
-            var credential = new DefaultAzureCredential();
+            var credential = new Azure.Identity.DefaultAzureCredential();
             var client = new PaginationParamsClient(credential);
 
             await foreach (var item in client.Get3sAsync(1234, 1234, 1234))
@@ -203,7 +198,7 @@ namespace PaginationParams_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Get4s()
         {
-            var credential = new DefaultAzureCredential();
+            var credential = new Azure.Identity.DefaultAzureCredential();
             var client = new PaginationParamsClient(credential);
 
             foreach (var item in client.Get4s())
@@ -217,7 +212,7 @@ namespace PaginationParams_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Get4s_AllParameters()
         {
-            var credential = new DefaultAzureCredential();
+            var credential = new Azure.Identity.DefaultAzureCredential();
             var client = new PaginationParamsClient(credential);
 
             foreach (var item in client.Get4s(1234, 1234, 3.14f))
@@ -233,7 +228,7 @@ namespace PaginationParams_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Get4s_Async()
         {
-            var credential = new DefaultAzureCredential();
+            var credential = new Azure.Identity.DefaultAzureCredential();
             var client = new PaginationParamsClient(credential);
 
             await foreach (var item in client.Get4sAsync())
@@ -247,7 +242,7 @@ namespace PaginationParams_LowLevel.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Get4s_AllParameters_Async()
         {
-            var credential = new DefaultAzureCredential();
+            var credential = new Azure.Identity.DefaultAzureCredential();
             var client = new PaginationParamsClient(credential);
 
             await foreach (var item in client.Get4sAsync(1234, 1234, 3.14f))

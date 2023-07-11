@@ -11,7 +11,7 @@ var client = new SecurityDefinitionClient(endpoint, credential);
 
 var data = new {};
 
-Response response = await client.OperationAsync(RequestContent.Create(data));
+Response response = await client.OperationAsync(RequestContent.Create(data)).ConfigureAwait(false);
 Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call OperationAsync with all request content.
@@ -25,7 +25,7 @@ var data = new {
     Status = "<Status>",
 };
 
-Response response = await client.OperationAsync(RequestContent.Create(data));
+Response response = await client.OperationAsync(RequestContent.Create(data)).ConfigureAwait(false);
 Console.WriteLine(response.Status);
 ]]></code>
 </example>

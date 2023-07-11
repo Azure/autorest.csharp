@@ -8,7 +8,7 @@ This sample shows how to call GetGroupAsync and parse the result.
 var credential = new AzureKeyCredential("<key>");
 var client = new ResourceServiceClient(credential).GetResourceGroup("<groupId>");
 
-Response response = await client.GetGroupAsync();
+Response response = await client.GetGroupAsync().ConfigureAwait(false);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.ToString());

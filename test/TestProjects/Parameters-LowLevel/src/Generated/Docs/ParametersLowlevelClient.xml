@@ -8,7 +8,7 @@ This sample shows how to call NoRequestBodyResponseBodyAsync with required param
 var credential = new AzureKeyCredential("<key>");
 var client = new ParametersLowlevelClient(credential);
 
-Response response = await client.NoRequestBodyResponseBodyAsync(1234);
+Response response = await client.NoRequestBodyResponseBodyAsync(1234).ConfigureAwait(false);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.ToString());
@@ -18,7 +18,7 @@ This sample shows how to call NoRequestBodyResponseBodyAsync with all parameters
 var credential = new AzureKeyCredential("<key>");
 var client = new ParametersLowlevelClient(credential);
 
-Response response = await client.NoRequestBodyResponseBodyAsync(1234, 1234, 12, "start");
+Response response = await client.NoRequestBodyResponseBodyAsync(1234, 1234, 12, "start").ConfigureAwait(false);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.ToString());
@@ -120,7 +120,7 @@ This sample shows how to call DeleteNoRequestBodyResponseBodyAsync with required
 var credential = new AzureKeyCredential("<key>");
 var client = new ParametersLowlevelClient(credential);
 
-Response response = await client.DeleteNoRequestBodyResponseBodyAsync("<resourceName>");
+Response response = await client.DeleteNoRequestBodyResponseBodyAsync("<resourceName>").ConfigureAwait(false);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.ToString());
@@ -148,7 +148,7 @@ This sample shows how to call NoRequestBodyNoResponseBodyAsync.
 var credential = new AzureKeyCredential("<key>");
 var client = new ParametersLowlevelClient(credential);
 
-Response response = await client.NoRequestBodyNoResponseBodyAsync();
+Response response = await client.NoRequestBodyNoResponseBodyAsync().ConfigureAwait(false);
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
@@ -174,7 +174,7 @@ var client = new ParametersLowlevelClient(credential);
 
 var data = "<String>";
 
-Response response = await client.RequestBodyNoResponseBodyAsync(RequestContent.Create(data));
+Response response = await client.RequestBodyNoResponseBodyAsync(RequestContent.Create(data)).ConfigureAwait(false);
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
@@ -200,7 +200,7 @@ This sample shows how to call OptionalPathParametersAsync with required paramete
 var credential = new AzureKeyCredential("<key>");
 var client = new ParametersLowlevelClient(credential);
 
-Response response = await client.OptionalPathParametersAsync(1234, 1234);
+Response response = await client.OptionalPathParametersAsync(1234, 1234).ConfigureAwait(false);
 Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call OptionalPathParametersAsync with all parameters.
@@ -208,7 +208,7 @@ This sample shows how to call OptionalPathParametersAsync with all parameters.
 var credential = new AzureKeyCredential("<key>");
 var client = new ParametersLowlevelClient(credential);
 
-Response response = await client.OptionalPathParametersAsync(1234, 1234, "start");
+Response response = await client.OptionalPathParametersAsync(1234, 1234, "start").ConfigureAwait(false);
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
@@ -240,7 +240,7 @@ This sample shows how to call OptionalPathParametersWithMixedSequenceAsync with 
 var credential = new AzureKeyCredential("<key>");
 var client = new ParametersLowlevelClient(credential);
 
-Response response = await client.OptionalPathParametersWithMixedSequenceAsync(1234);
+Response response = await client.OptionalPathParametersWithMixedSequenceAsync(1234).ConfigureAwait(false);
 Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call OptionalPathParametersWithMixedSequenceAsync with all parameters.
@@ -248,7 +248,7 @@ This sample shows how to call OptionalPathParametersWithMixedSequenceAsync with 
 var credential = new AzureKeyCredential("<key>");
 var client = new ParametersLowlevelClient(credential);
 
-Response response = await client.OptionalPathParametersWithMixedSequenceAsync(1234, "start", 12);
+Response response = await client.OptionalPathParametersWithMixedSequenceAsync(1234, "start", 12).ConfigureAwait(false);
 Console.WriteLine(response.Status);
 ]]></code>
 </example>

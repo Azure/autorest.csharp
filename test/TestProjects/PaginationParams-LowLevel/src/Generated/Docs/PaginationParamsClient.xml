@@ -5,7 +5,7 @@
 <example>
 This sample shows how to call GetPaginationParamsAsync and parse the result.
 <code><![CDATA[
-var credential = new DefaultAzureCredential();
+var credential = new Azure.Identity.DefaultAzureCredential();
 var client = new PaginationParamsClient(credential);
 
 await foreach (var item in client.GetPaginationParamsAsync())
@@ -16,7 +16,7 @@ await foreach (var item in client.GetPaginationParamsAsync())
 ]]></code>
 This sample shows how to call GetPaginationParamsAsync with all parameters, and how to parse the result.
 <code><![CDATA[
-var credential = new DefaultAzureCredential();
+var credential = new Azure.Identity.DefaultAzureCredential();
 var client = new PaginationParamsClient(credential);
 
 await foreach (var item in client.GetPaginationParamsAsync(1234, 1234, 1234))
@@ -33,7 +33,7 @@ await foreach (var item in client.GetPaginationParamsAsync(1234, 1234, 1234))
 <example>
 This sample shows how to call GetPaginationParams and parse the result.
 <code><![CDATA[
-var credential = new DefaultAzureCredential();
+var credential = new Azure.Identity.DefaultAzureCredential();
 var client = new PaginationParamsClient(credential);
 
 foreach (var item in client.GetPaginationParams())
@@ -44,7 +44,7 @@ foreach (var item in client.GetPaginationParams())
 ]]></code>
 This sample shows how to call GetPaginationParams with all parameters, and how to parse the result.
 <code><![CDATA[
-var credential = new DefaultAzureCredential();
+var credential = new Azure.Identity.DefaultAzureCredential();
 var client = new PaginationParamsClient(credential);
 
 foreach (var item in client.GetPaginationParams(1234, 1234, 1234))
@@ -61,7 +61,7 @@ foreach (var item in client.GetPaginationParams(1234, 1234, 1234))
 <example>
 This sample shows how to call Get2sAsync and parse the result.
 <code><![CDATA[
-var credential = new DefaultAzureCredential();
+var credential = new Azure.Identity.DefaultAzureCredential();
 var client = new PaginationParamsClient(credential);
 
 await foreach (var item in client.Get2sAsync())
@@ -72,10 +72,10 @@ await foreach (var item in client.Get2sAsync())
 ]]></code>
 This sample shows how to call Get2sAsync with all parameters, and how to parse the result.
 <code><![CDATA[
-var credential = new DefaultAzureCredential();
+var credential = new Azure.Identity.DefaultAzureCredential();
 var client = new PaginationParamsClient(credential);
 
-await foreach (var item in client.Get2sAsync(1234, 1234, 1234))
+await foreach (var item in client.Get2sAsync(1234, 1234, 1234L))
 {
     JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
     Console.WriteLine(result.GetProperty("id").ToString());
@@ -89,7 +89,7 @@ await foreach (var item in client.Get2sAsync(1234, 1234, 1234))
 <example>
 This sample shows how to call Get2s and parse the result.
 <code><![CDATA[
-var credential = new DefaultAzureCredential();
+var credential = new Azure.Identity.DefaultAzureCredential();
 var client = new PaginationParamsClient(credential);
 
 foreach (var item in client.Get2s())
@@ -100,10 +100,10 @@ foreach (var item in client.Get2s())
 ]]></code>
 This sample shows how to call Get2s with all parameters, and how to parse the result.
 <code><![CDATA[
-var credential = new DefaultAzureCredential();
+var credential = new Azure.Identity.DefaultAzureCredential();
 var client = new PaginationParamsClient(credential);
 
-foreach (var item in client.Get2s(1234, 1234, 1234))
+foreach (var item in client.Get2s(1234, 1234, 1234L))
 {
     JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
     Console.WriteLine(result.GetProperty("id").ToString());
@@ -117,7 +117,7 @@ foreach (var item in client.Get2s(1234, 1234, 1234))
 <example>
 This sample shows how to call Get3sAsync and parse the result.
 <code><![CDATA[
-var credential = new DefaultAzureCredential();
+var credential = new Azure.Identity.DefaultAzureCredential();
 var client = new PaginationParamsClient(credential);
 
 await foreach (var item in client.Get3sAsync())
@@ -128,7 +128,7 @@ await foreach (var item in client.Get3sAsync())
 ]]></code>
 This sample shows how to call Get3sAsync with all parameters, and how to parse the result.
 <code><![CDATA[
-var credential = new DefaultAzureCredential();
+var credential = new Azure.Identity.DefaultAzureCredential();
 var client = new PaginationParamsClient(credential);
 
 await foreach (var item in client.Get3sAsync(1234, 1234, 1234))
@@ -145,7 +145,7 @@ await foreach (var item in client.Get3sAsync(1234, 1234, 1234))
 <example>
 This sample shows how to call Get3s and parse the result.
 <code><![CDATA[
-var credential = new DefaultAzureCredential();
+var credential = new Azure.Identity.DefaultAzureCredential();
 var client = new PaginationParamsClient(credential);
 
 foreach (var item in client.Get3s())
@@ -156,7 +156,7 @@ foreach (var item in client.Get3s())
 ]]></code>
 This sample shows how to call Get3s with all parameters, and how to parse the result.
 <code><![CDATA[
-var credential = new DefaultAzureCredential();
+var credential = new Azure.Identity.DefaultAzureCredential();
 var client = new PaginationParamsClient(credential);
 
 foreach (var item in client.Get3s(1234, 1234, 1234))
@@ -173,7 +173,7 @@ foreach (var item in client.Get3s(1234, 1234, 1234))
 <example>
 This sample shows how to call Get4sAsync and parse the result.
 <code><![CDATA[
-var credential = new DefaultAzureCredential();
+var credential = new Azure.Identity.DefaultAzureCredential();
 var client = new PaginationParamsClient(credential);
 
 await foreach (var item in client.Get4sAsync())
@@ -184,7 +184,7 @@ await foreach (var item in client.Get4sAsync())
 ]]></code>
 This sample shows how to call Get4sAsync with all parameters, and how to parse the result.
 <code><![CDATA[
-var credential = new DefaultAzureCredential();
+var credential = new Azure.Identity.DefaultAzureCredential();
 var client = new PaginationParamsClient(credential);
 
 await foreach (var item in client.Get4sAsync(1234, 1234, 3.14f))
@@ -201,7 +201,7 @@ await foreach (var item in client.Get4sAsync(1234, 1234, 3.14f))
 <example>
 This sample shows how to call Get4s and parse the result.
 <code><![CDATA[
-var credential = new DefaultAzureCredential();
+var credential = new Azure.Identity.DefaultAzureCredential();
 var client = new PaginationParamsClient(credential);
 
 foreach (var item in client.Get4s())
@@ -212,7 +212,7 @@ foreach (var item in client.Get4s())
 ]]></code>
 This sample shows how to call Get4s with all parameters, and how to parse the result.
 <code><![CDATA[
-var credential = new DefaultAzureCredential();
+var credential = new Azure.Identity.DefaultAzureCredential();
 var client = new PaginationParamsClient(credential);
 
 foreach (var item in client.Get4s(1234, 1234, 3.14f))

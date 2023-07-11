@@ -14,7 +14,7 @@ var data = new {
     language = "<language>",
 };
 
-Response response = await client.CreateOrUpdateAsync("<projectName>", RequestContent.Create(data));
+Response response = await client.CreateOrUpdateAsync("<projectName>", RequestContent.Create(data)).ConfigureAwait(false);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("projectName").ToString());
@@ -42,7 +42,7 @@ var data = new {
     language = "<language>",
 };
 
-Response response = await client.CreateOrUpdateAsync("<projectName>", RequestContent.Create(data));
+Response response = await client.CreateOrUpdateAsync("<projectName>", RequestContent.Create(data)).ConfigureAwait(false);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("projectName").ToString());

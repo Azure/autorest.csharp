@@ -6,13 +6,8 @@
 #nullable disable
 
 using System;
-using System.Collections.Generic;
-using System.IO;
 using System.Text.Json;
 using System.Threading.Tasks;
-using Azure;
-using Azure.Core;
-using Azure.Identity;
 using NUnit.Framework;
 
 namespace Azure.ClientAndOperationGroupService.Samples
@@ -52,7 +47,7 @@ namespace Azure.ClientAndOperationGroupService.Samples
             var endpoint = new Uri("<https://my-service.azure.com>");
             var client = new ClientAndOperationGroupServiceClient(endpoint).GetBetaClient();
 
-            Response response = await client.TwoAsync();
+            Response response = await client.TwoAsync().ConfigureAwait(false);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());
@@ -65,7 +60,7 @@ namespace Azure.ClientAndOperationGroupService.Samples
             var endpoint = new Uri("<https://my-service.azure.com>");
             var client = new ClientAndOperationGroupServiceClient(endpoint).GetBetaClient();
 
-            Response response = await client.TwoAsync();
+            Response response = await client.TwoAsync().ConfigureAwait(false);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());
@@ -104,7 +99,7 @@ namespace Azure.ClientAndOperationGroupService.Samples
             var endpoint = new Uri("<https://my-service.azure.com>");
             var client = new ClientAndOperationGroupServiceClient(endpoint).GetBetaClient();
 
-            Response response = await client.ThreeAsync();
+            Response response = await client.ThreeAsync().ConfigureAwait(false);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());
@@ -117,7 +112,7 @@ namespace Azure.ClientAndOperationGroupService.Samples
             var endpoint = new Uri("<https://my-service.azure.com>");
             var client = new ClientAndOperationGroupServiceClient(endpoint).GetBetaClient();
 
-            Response response = await client.ThreeAsync();
+            Response response = await client.ThreeAsync().ConfigureAwait(false);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());

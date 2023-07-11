@@ -14,7 +14,6 @@ using Azure.Identity;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Resources;
 using Azure.ResourceManager.Resources.Models;
-using MgmtMockAndSample;
 using MgmtMockAndSample.Models;
 
 namespace MgmtMockAndSample.Samples
