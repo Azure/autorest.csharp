@@ -1,8 +1,8 @@
 {
-  "OutputFolder": ".",
-  "Namespace": "MgmtSubscriptionNameParameter",
-  "LibraryName": "MgmtSubscriptionNameParameter",
-  "SharedSourceFolders": [
+  "output-folder": ".",
+  "namespace": "MgmtSubscriptionNameParameter",
+  "library-name": "MgmtSubscriptionNameParameter",
+  "shared-source-folders": [
     "..\\..\\..\\..\\artifacts\\bin\\AutoRest.CSharp\\Debug\\net6.0\\Generator.Shared",
     "..\\..\\..\\..\\artifacts\\bin\\AutoRest.CSharp\\Debug\\net6.0\\Azure.Core.Shared"
   ],

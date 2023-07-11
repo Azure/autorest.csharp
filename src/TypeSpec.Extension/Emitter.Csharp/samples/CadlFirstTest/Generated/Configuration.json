@@ -1,8 +1,8 @@
 {
-  "OutputFolder": ".",
-  "Namespace": "Demo.HelloWorld",
-  "LibraryName": "Demo.HelloWorld",
-  "SharedSourceFolders": [
+  "output-folder": ".",
+  "namespace": "Demo.HelloWorld",
+  "library-name": "Demo.HelloWorld",
+  "shared-source-folders": [
     "../../../../../../node_modules/@autorest/csharp/Generator.Shared",
     "../../../../../../node_modules/@autorest/csharp/Azure.Core.Shared"
   ],
