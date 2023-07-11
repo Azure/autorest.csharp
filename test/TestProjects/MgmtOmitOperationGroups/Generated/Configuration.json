@@ -1,8 +1,8 @@
 {
-  "OutputFolder": ".",
-  "Namespace": "MgmtOmitOperationGroups",
-  "LibraryName": "MgmtOmitOperationGroups",
-  "SharedSourceFolders": [
+  "output-folder": ".",
+  "namespace": "MgmtOmitOperationGroups",
+  "library-name": "MgmtOmitOperationGroups",
+  "shared-source-folders": [
     "..\\..\\..\\..\\artifacts\\bin\\AutoRest.CSharp\\Debug\\net6.0\\Generator.Shared",
     "..\\..\\..\\..\\artifacts\\bin\\AutoRest.CSharp\\Debug\\net6.0\\Azure.Core.Shared"
   ],

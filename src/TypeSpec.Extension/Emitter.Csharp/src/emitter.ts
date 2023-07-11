@@ -112,12 +112,12 @@ export async function $onEmit(context: EmitContext<NetEmitterOptions>) {
 
             //emit configuration.json
             const configurations = {
-                OutputFolder: ".",
-                Namespace: options.namespace ?? namespace,
-                LibraryName:
+                "output-folder": ".", // TODO -- align
+                namespace: options.namespace ?? namespace,
+                "library-name":
                     options["library-name"] ?? options.namespace ?? namespace,
-                SharedSourceFolders: resolvedSharedFolders ?? [],
-                SingleTopLevelClient: options["single-top-level-client"],
+                "shared-source-folders": resolvedSharedFolders ?? [],
+                "single-top-level-client": options["single-top-level-client"],
                 "unreferenced-types-handling":
                     options["unreferenced-types-handling"],
                 "use-overloads-between-protocol-and-convenience":
@@ -125,9 +125,9 @@ export async function $onEmit(context: EmitContext<NetEmitterOptions>) {
                 "keep-non-overloadable-protocol-signature":
                     options["keep-non-overloadable-protocol-signature"],
                 "model-namespace": options["model-namespace"],
-                ModelsToTreatEmptyStringAsNull:
+                "models-to-treat-empty-string-as-null":
                     options["models-to-treat-empty-string-as-null"],
-                IntrinsicTypesToTreatEmptyStringAsNull: options[
+                "intrinsic-types-to-treat-empty-string-as-null": options[
                     "models-to-treat-empty-string-as-null"
                 ]
                     ? options[
@@ -158,7 +158,7 @@ export async function $onEmit(context: EmitContext<NetEmitterOptions>) {
             if (options.skipSDKGeneration !== true) {
                 const csProjFile = resolvePath(
                     outputFolder,
-                    `${configurations.LibraryName}.csproj`
+                    `${configurations["library-name"]}.csproj`
                 );
                 logger.info(`Checking if ${csProjFile} exists`);
                 const newProjectOption =
@@ -208,10 +208,4 @@ function deleteFile(filePath: string) {
 
 function prettierOutput(output: string) {
     return output + "\n";
-}
-
-class ErrorTypeFoundError extends Error {
-    constructor() {
-        super("Error type found in evaluated typespec output");
-    }
 }
