@@ -15,6 +15,13 @@ namespace constants.Models
         {
         }
 
+        /// <summary> Initializes a new instance of NoModelAsStringNoRequiredTwoValueDefault. </summary>
+        /// <param name="parameter"></param>
+        internal NoModelAsStringNoRequiredTwoValueDefault(NoModelAsStringNoRequiredTwoValueDefaultEnum? parameter)
+        {
+            Parameter = parameter;
+        }
+
         /// <summary> Gets the parameter. </summary>
         public NoModelAsStringNoRequiredTwoValueDefaultEnum? Parameter { get; }
     }

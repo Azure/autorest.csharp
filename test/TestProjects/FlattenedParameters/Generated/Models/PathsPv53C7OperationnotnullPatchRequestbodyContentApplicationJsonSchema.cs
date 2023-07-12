@@ -19,6 +19,13 @@ namespace FlattenedParameters.Models
             Items = new ChangeTrackingList<string>();
         }
 
+        /// <summary> Initializes a new instance of PathsPv53C7OperationnotnullPatchRequestbodyContentApplicationJsonSchema. </summary>
+        /// <param name="items"></param>
+        internal PathsPv53C7OperationnotnullPatchRequestbodyContentApplicationJsonSchema(IList<string> items)
+        {
+            Items = items;
+        }
+
         /// <summary> Gets the items. </summary>
         public IList<string> Items { get; }
     }

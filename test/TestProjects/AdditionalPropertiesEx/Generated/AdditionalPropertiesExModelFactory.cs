@@ -13,6 +13,17 @@ namespace AdditionalPropertiesEx.Models
     /// <summary> Model factory for models. </summary>
     public static partial class AdditionalPropertiesExModelFactory
     {
+        /// <summary> Initializes a new instance of InputAdditionalPropertiesModel. </summary>
+        /// <param name="id"></param>
+        /// <param name="additionalProperties"> Additional Properties. </param>
+        /// <returns> A new <see cref="Models.InputAdditionalPropertiesModel"/> instance for mocking. </returns>
+        public static InputAdditionalPropertiesModel InputAdditionalPropertiesModel(int id = default, IDictionary<string, object> additionalProperties = null)
+        {
+            additionalProperties ??= new Dictionary<string, object>();
+
+            return new InputAdditionalPropertiesModel(id, additionalProperties);
+        }
+
         /// <summary> Initializes a new instance of OutputAdditionalPropertiesModel. </summary>
         /// <param name="id"></param>
         /// <param name="additionalProperties"> Additional Properties. </param>

@@ -15,6 +15,13 @@ namespace ModelShapes.Models
         {
         }
 
+        /// <summary> Initializes a new instance of UnusedModel. </summary>
+        /// <param name="unusedString"></param>
+        internal UnusedModel(string unusedString)
+        {
+            UnusedString = unusedString;
+        }
+
         /// <summary> Gets the unused string. </summary>
         public string UnusedString { get; }
     }

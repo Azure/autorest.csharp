@@ -17,6 +17,13 @@ namespace constants.Models
             Parameter = parameter ?? ModelAsStringRequiredTwoValueDefaultEnum.Value1;
         }
 
+        /// <summary> Initializes a new instance of ModelAsStringRequiredTwoValueDefault. </summary>
+        /// <param name="parameter"></param>
+        internal ModelAsStringRequiredTwoValueDefault(ModelAsStringRequiredTwoValueDefaultEnum parameter)
+        {
+            Parameter = parameter;
+        }
+
         /// <summary> Gets the parameter. </summary>
         public ModelAsStringRequiredTwoValueDefaultEnum Parameter { get; }
     }

@@ -15,6 +15,13 @@ namespace required_optional.Models
         {
         }
 
+        /// <summary> Initializes a new instance of IntOptionalWrapper. </summary>
+        /// <param name="value"></param>
+        internal IntOptionalWrapper(int? value)
+        {
+            Value = value;
+        }
+
         /// <summary> Gets or sets the value. </summary>
         public int? Value { get; set; }
     }

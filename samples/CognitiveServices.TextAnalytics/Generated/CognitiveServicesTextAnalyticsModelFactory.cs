@@ -14,6 +14,16 @@ namespace CognitiveServices.TextAnalytics.Models
     /// <summary> Model factory for models. </summary>
     public static partial class CognitiveServicesTextAnalyticsModelFactory
     {
+        /// <summary> Initializes a new instance of MultiLanguageInput. </summary>
+        /// <param name="id"> A unique, non-empty document identifier. </param>
+        /// <param name="text"> The input text to process. </param>
+        /// <param name="language"> (Optional) This is the 2 letter ISO 639-1 representation of a language. For example, use "en" for English; "es" for Spanish etc. If not set, use "en" for English as default. </param>
+        /// <returns> A new <see cref="Models.MultiLanguageInput"/> instance for mocking. </returns>
+        public static MultiLanguageInput MultiLanguageInput(string id = null, string text = null, string language = null)
+        {
+            return new MultiLanguageInput(id, text, language);
+        }
+
         /// <summary> Initializes a new instance of EntitiesResult. </summary>
         /// <param name="documents"> Response by document. </param>
         /// <param name="errors"> Errors by document id. </param>
@@ -218,6 +228,16 @@ namespace CognitiveServices.TextAnalytics.Models
             warnings ??= new List<TextAnalyticsWarning>();
 
             return new DocumentKeyPhrases(id, keyPhrases?.ToList(), warnings?.ToList(), statistics);
+        }
+
+        /// <summary> Initializes a new instance of LanguageInput. </summary>
+        /// <param name="id"> Unique, non-empty document identifier. </param>
+        /// <param name="text"></param>
+        /// <param name="countryHint"></param>
+        /// <returns> A new <see cref="Models.LanguageInput"/> instance for mocking. </returns>
+        public static LanguageInput LanguageInput(string id = null, string text = null, string countryHint = null)
+        {
+            return new LanguageInput(id, text, countryHint);
         }
 
         /// <summary> Initializes a new instance of LanguageResult. </summary>

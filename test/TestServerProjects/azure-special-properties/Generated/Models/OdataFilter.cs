@@ -15,6 +15,15 @@ namespace azure_special_properties.Models
         {
         }
 
+        /// <summary> Initializes a new instance of OdataFilter. </summary>
+        /// <param name="id"></param>
+        /// <param name="name"></param>
+        internal OdataFilter(int? id, string name)
+        {
+            Id = id;
+            Name = name;
+        }
+
         /// <summary> Gets the id. </summary>
         public int? Id { get; }
         /// <summary> Gets the name. </summary>
