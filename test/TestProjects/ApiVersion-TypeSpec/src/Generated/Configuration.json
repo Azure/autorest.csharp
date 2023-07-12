@@ -1,8 +1,8 @@
 {
-  "OutputFolder": ".",
-  "Namespace": "ApiVersionInTsp",
-  "LibraryName": "ApiVersionInTsp",
-  "SharedSourceFolders": [
+  "output-folder": ".",
+  "namespace": "ApiVersionInTsp",
+  "library-name": "ApiVersionInTsp",
+  "shared-source-folders": [
     "../../../../../artifacts/bin/AutoRest.CSharp/Debug/net6.0/Generator.Shared",
     "../../../../../artifacts/bin/AutoRest.CSharp/Debug/net6.0/Azure.Core.Shared"
   ],

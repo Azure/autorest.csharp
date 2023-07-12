@@ -1,8 +1,8 @@
 {
-  "OutputFolder": ".",
-  "Namespace": "Azure.ClientService",
-  "LibraryName": "Azure.ClientService",
-  "SharedSourceFolders": [
+  "output-folder": ".",
+  "namespace": "Azure.ClientService",
+  "library-name": "Azure.ClientService",
+  "shared-source-folders": [
     "../../../../../../../node_modules/@autorest/csharp/Generator.Shared",
     "../../../../../../../node_modules/@autorest/csharp/Azure.Core.Shared"
   ],

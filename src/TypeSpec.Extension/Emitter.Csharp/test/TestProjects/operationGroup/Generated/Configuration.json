@@ -1,8 +1,8 @@
 {
-  "OutputFolder": ".",
-  "Namespace": "Azure.OperationGroupService",
-  "LibraryName": "Azure.OperationGroupService",
-  "SharedSourceFolders": [
+  "output-folder": ".",
+  "namespace": "Azure.OperationGroupService",
+  "library-name": "Azure.OperationGroupService",
+  "shared-source-folders": [
     "../../../../../../../node_modules/@autorest/csharp/Generator.Shared",
     "../../../../../../../node_modules/@autorest/csharp/Azure.Core.Shared"
   ],
