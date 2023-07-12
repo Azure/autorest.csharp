@@ -1,8 +1,8 @@
 {
-  "OutputFolder": ".",
-  "Namespace": "PublicClientCtor",
-  "LibraryName": "PublicClientCtor",
-  "SharedSourceFolders": [
+  "output-folder": ".",
+  "namespace": "PublicClientCtor",
+  "library-name": "PublicClientCtor",
+  "shared-source-folders": [
     "..\\..\\..\\..\\artifacts\\bin\\AutoRest.CSharp\\Debug\\net6.0\\Generator.Shared",
     "..\\..\\..\\..\\artifacts\\bin\\AutoRest.CSharp\\Debug\\net6.0\\Azure.Core.Shared"
   ],

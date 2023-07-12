@@ -1,8 +1,8 @@
 {
-  "OutputFolder": ".",
-  "Namespace": "Server.Path.Single",
-  "LibraryName": "Server.Path.Single",
-  "SharedSourceFolders": [
+  "output-folder": ".",
+  "namespace": "Server.Path.Single",
+  "library-name": "Server.Path.Single",
+  "shared-source-folders": [
     "../../../../../../../artifacts/bin/AutoRest.CSharp/Debug/net6.0/Generator.Shared",
     "../../../../../../../artifacts/bin/AutoRest.CSharp/Debug/net6.0/Azure.Core.Shared"
   ],
