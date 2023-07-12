@@ -56,10 +56,10 @@ namespace AutoRest.CSharp.Output.Models
                     ? GetLegacySortedParameters(unsortedParameters)
                     : GetSortedParameters(inputOperation, unsortedParameters);
 
-                var builder = new MethodParametersBuilder(inputOperation, _typeFactory);
+                var builder = new MethodParametersBuilder(inputOperation, _typeFactory, _sourceInputModel);
                 var parameters = _legacyParameterBuilding
                     ? builder.BuildParametersLegacy(unsortedParameters, sortedParameters)
-                    : builder.BuildParameters(sortedParameters);
+                    : builder.BuildParameters(sortedParameters, clientName, clientNamespace);
 
                 operationParameters[inputOperation] = parameters;
             }

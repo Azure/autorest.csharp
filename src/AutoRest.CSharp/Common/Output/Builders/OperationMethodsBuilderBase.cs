@@ -107,24 +107,11 @@ namespace AutoRest.CSharp.Output.Models
             var createRequestMethods = BuildCreateRequestMethods(responseClassifier).ToArray();
 
             var convenienceMethodName = ProtocolMethodName;
-            var protocolMethodParameters = ProtocolMethodParameters;
             var convenienceMethods = Array.Empty<Method>();
-
-            var hasAmbiguityBetweenProtocolAndConvenience = ProtocolMethodParameters.Where(p => !p.IsOptionalInSignature).SequenceEqual(ConvenienceMethodParameters.Where(p => !p.IsOptionalInSignature));
-            var makeAllProtocolMethodsRequired = !Configuration.KeepNonOverloadableProtocolSignature &&
-                                                 Configuration.UseOverloadsBetweenProtocolAndConvenience &&
-                                                 !_existingProtocolMethodHasOptionalParameters &&
-                                                 hasAmbiguityBetweenProtocolAndConvenience;
-
-            if (makeAllProtocolMethodsRequired)
-            {
-                protocolMethodParameters = protocolMethodParameters
-                    .Select(p => p with {DefaultValue = null}).ToList();
-            }
 
             if (Operation.GenerateConvenienceMethod && ShouldConvenienceMethodGenerated())
             {
-                if (hasAmbiguityBetweenProtocolAndConvenience && !makeAllProtocolMethodsRequired)
+                if (ConvenienceMethodParameters.All(p => p != KnownParameters.CancellationTokenParameter))
                 {
                     convenienceMethodName = ProtocolMethodName.IsLastWordSingular()
                         ? $"{ProtocolMethodName}Value"
@@ -134,7 +121,7 @@ namespace AutoRest.CSharp.Output.Models
                 convenienceMethods = new[]{ BuildConvenienceMethod(convenienceMethodName, true), BuildConvenienceMethod(convenienceMethodName, false) };
             }
 
-            var protocolMethods = new[]{ BuildProtocolMethod(protocolMethodParameters, true), BuildProtocolMethod(protocolMethodParameters, false) };
+            var protocolMethods = new[]{ BuildProtocolMethod(true), BuildProtocolMethod(false) };
 
             var order = Operation.LongRunning is not null ? 2 : Operation.Paging is not null ? 1 : 0;
             var requestBodyType = Operation.Parameters.FirstOrDefault(p => p.Location == RequestLocation.Body)?.Type;
@@ -640,9 +627,9 @@ namespace AutoRest.CSharp.Output.Models
 
         protected string CreateScopeName(string methodName) => $"{_clientName}.{methodName}";
 
-        private Method BuildProtocolMethod(IReadOnlyList<Parameter> parameters, bool async)
+        private Method BuildProtocolMethod(bool async)
         {
-            var signature = CreateMethodSignature(ProtocolMethodName, _protocolAccessibility | MethodSignatureModifiers.Virtual, parameters, ProtocolMethodReturnType);
+            var signature = CreateMethodSignature(ProtocolMethodName, _protocolAccessibility | MethodSignatureModifiers.Virtual, ProtocolMethodParameters, ProtocolMethodReturnType);
             var body = new[]
             {
                 new ParameterValidationBlock(signature.Parameters),

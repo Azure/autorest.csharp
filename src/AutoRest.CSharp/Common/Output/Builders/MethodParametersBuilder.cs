@@ -12,8 +12,8 @@ using AutoRest.CSharp.Common.Output.Models.Statements;
 using AutoRest.CSharp.Common.Output.Models.Types;
 using AutoRest.CSharp.Common.Output.Models.ValueExpressions;
 using AutoRest.CSharp.Generation.Types;
-using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Input;
+using AutoRest.CSharp.Input.Source;
 using AutoRest.CSharp.Output.Builders;
 using AutoRest.CSharp.Output.Models.Serialization;
 using AutoRest.CSharp.Output.Models.Shared;
@@ -37,6 +37,7 @@ namespace AutoRest.CSharp.Output.Models
 
         private readonly InputOperation _operation;
         private readonly TypeFactory _typeFactory;
+        private readonly SourceInputModel? _sourceInputModel;
         private readonly List<RequestPartSource> _requestParts;
         private readonly List<Parameter> _createMessageParameters;
         private readonly List<Parameter> _protocolParameters;
@@ -45,10 +46,11 @@ namespace AutoRest.CSharp.Output.Models
         private readonly Dictionary<Parameter, MethodBodyStatement> _conversions;
         private readonly bool _keepClientDefaultValue;
 
-        public MethodParametersBuilder(InputOperation operation, TypeFactory typeFactory)
+        public MethodParametersBuilder(InputOperation operation, TypeFactory typeFactory, SourceInputModel? sourceInputModel)
         {
             _operation = operation;
             _typeFactory = typeFactory;
+            _sourceInputModel = sourceInputModel;
             _requestParts = new List<RequestPartSource>();
             _createMessageParameters = new List<Parameter>();
             _protocolParameters = new List<Parameter>();
@@ -58,7 +60,7 @@ namespace AutoRest.CSharp.Output.Models
             _keepClientDefaultValue = Configuration.MethodsToKeepClientDefaultValue.Contains(operation.Name);
         }
 
-        public ClientMethodParameters BuildParameters(IEnumerable<InputParameter> sortedParameters)
+        public ClientMethodParameters BuildParameters(IEnumerable<InputParameter> sortedParameters, string clientNamespace, string clientName)
         {
             var requestConditionHeaders = RequestConditionHeaders.None;
             var requestConditionSerializationFormat = SerializationFormat.Default;
@@ -93,11 +95,16 @@ namespace AutoRest.CSharp.Output.Models
             AddRequestConditionHeaders(requestConditionHeaders, requestConditionRequestParameter, requestConditionSerializationFormat);
             AddRequestContext();
 
+            var makeAllProtocolParametersRequired = !Configuration.KeepNonOverloadableProtocolSignature
+                && Configuration.UseOverloadsBetweenProtocolAndConvenience
+                && !ExistingProtocolMethodHasOptionalParameters(clientNamespace, clientName)
+                && HasAmbiguityBetweenProtocolAndConvenience();
+
             return new ClientMethodParameters
             (
                 _requestParts,
                 _createMessageParameters,
-                _protocolParameters,
+                makeAllProtocolParametersRequired ? _protocolParameters.Select(p => p with {DefaultValue = null}).ToList() : _protocolParameters,
                 _convenienceParameters,
                 true,
                 _arguments,
@@ -189,16 +196,68 @@ namespace AutoRest.CSharp.Output.Models
 
             if (_operation.Paging is not null)
             {
-                _conversions[KnownParameters.RequestContext]
-                    = Declare(IfCancellationTokenCanBeCanceled(CancellationTokenExpression.KnownParameter), out var requestContext);
+                _conversions[KnownParameters.RequestContext] = Declare(IfCancellationTokenCanBeCanceled(CancellationTokenExpression.KnownParameter), out var requestContext);
                 _arguments[KnownParameters.RequestContext] = requestContext;
             }
             else
             {
-                _conversions[KnownParameters.RequestContext]
-                    = Declare(RequestContextExpression.FromCancellationToken(), out var requestContext);
+                _conversions[KnownParameters.RequestContext] = Declare(RequestContextExpression.FromCancellationToken(), out var requestContext);
                 _arguments[KnownParameters.RequestContext] = requestContext;
             }
+        }
+
+        private bool ExistingProtocolMethodHasOptionalParameters(string clientNamespace, string clientName)
+        {
+            var existingProtocolMethod = _sourceInputModel?.FindMethod(clientNamespace, clientName, _operation.CleanName, _protocolParameters.Select(p => p.Type));
+            return existingProtocolMethod is { Parameters: [.., {IsOptional: true}]};
+        }
+
+        private bool HasAmbiguityBetweenProtocolAndConvenience()
+        {
+            for (int i = 0; i < Math.Min(_protocolParameters.Count, _convenienceParameters.Count); i++)
+            {
+                var protocol = _protocolParameters[i];
+                var convenience = _convenienceParameters[i];
+
+                if (protocol.IsOptionalInSignature && convenience.IsOptionalInSignature)
+                {
+                    // If we reached this point, it means that all previous parameters were ambiguous,
+                    // which is enough to call method with minimal possible signature
+                    return true;
+                }
+
+                // Identical types are obviously ambiguous
+                if (protocol.Type.Equals(convenience.Type))
+                {
+                    continue;
+                }
+
+                // Value types have clear resolution between them with exception of numbers and enums
+                if (protocol.Type.IsValueType && convenience.Type.IsValueType)
+                {
+                    // Implicit numeric conversions: int -> long -> float -> double
+                    // Call can be ambiguous when nullable numeric type can be implicitly cast to non-nullable numeric type,
+                    // e.g.: M1(int? i) vs M1(long j) is ambiguous for call M1(0);
+                    // Call can also be ambiguous when one the parameter types is Enum
+                    // e.g.: M1(EnumType? e) vs M1(long j) is ambiguous for call M1(0);
+                    // For simplicity, we assume that if one parameter type is nullable, and the other one isn't, parameters are ambiguous
+                    if (!(protocol.Type.IsNullable ^ convenience.Type.IsNullable))
+                    {
+                        return false;
+                    }
+                }
+                else if (protocol.Type.IsValueType ^ convenience.Type.IsValueType)
+                {
+                    var valueType = protocol.Type.IsValueType ? protocol.Type : convenience.Type;
+                    var referenceType = protocol.Type.IsValueType ? convenience.Type : protocol.Type;
+                    if (!valueType.IsNullable || !referenceType.EqualsIgnoreNullable(typeof(object)))
+                    {
+                        return false;
+                    }
+                }
+            }
+
+            return true;
         }
 
         private void AddReferenceAndParameter(InputParameter inputParameter, Type parameterType)
