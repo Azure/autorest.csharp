@@ -605,7 +605,7 @@ namespace AutoRest.CSharp.Generation.Writers
             var defaultRequestContext = new CodeWriterDeclaration("DefaultRequestContext");
             _writer.Line($"private static {typeof(RequestContext)} {defaultRequestContext:D} = new {typeof(RequestContext)}();");
 
-            var methodSignature = new MethodSignature("FromCancellationToken", null, null, MethodSignatureModifiers.Internal | MethodSignatureModifiers. Static, typeof(RequestContext), null, new List<Parameter> { KnownParameters.CancellationTokenParameter });
+            var methodSignature = new MethodSignature("FromCancellationToken", null, null, MethodSignatureModifiers.Internal | MethodSignatureModifiers.Static, typeof(RequestContext), null, new List<Parameter> { KnownParameters.CancellationTokenParameter });
             using (_writer.WriteMethodDeclaration(methodSignature))
             {
                 using (_writer.Scope($"if (!{KnownParameters.CancellationTokenParameter.Name}.{nameof(CancellationToken.CanBeCanceled)})"))

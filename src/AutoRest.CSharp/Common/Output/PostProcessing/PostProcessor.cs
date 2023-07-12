@@ -205,6 +205,11 @@ internal class PostProcessor
         var referenceMap = await new ReferenceMapBuilder(compilation, project, HasDiscriminator).BuildAllReferenceMapAsync(definitions.DeclaredSymbols, definitions.DocumentsCache);
         // get root symbols
         var rootSymbols = GetRootSymbols(project, definitions);
+        // if there is a model factory, model factory should also be a root node when removing because if we do not consider model factory, we might get compilation errors
+        if (definitions.ModelFactorySymbol != null)
+        {
+            rootSymbols = rootSymbols.Append(definitions.ModelFactorySymbol);
+        }
         // traverse the map to determine the declarations that we are about to remove, starting from root nodes
         var referencedSymbols = VisitSymbolsFromRootAsync(rootSymbols, referenceMap);
 
@@ -328,9 +333,8 @@ internal class PostProcessor
         return document.Project;
     }
 
-    protected HashSet<INamedTypeSymbol> GetRootSymbols(Project project, TypeSymbols modelSymbols)
+    protected IEnumerable<INamedTypeSymbol> GetRootSymbols(Project project, TypeSymbols modelSymbols)
     {
-        var result = new HashSet<INamedTypeSymbol>(SymbolEqualityComparer.Default);
         foreach (var symbol in modelSymbols.DeclaredSymbols)
         {
             foreach (var declarationNode in modelSymbols.DeclaredNodesCache[symbol])
@@ -340,14 +344,12 @@ internal class PostProcessor
                     continue;
                 if (IsRootDocument(document))
                 {
-                    result.Add(symbol);
+                    yield return symbol;
                     break;
                     // if any of the declaring document of this symbol is considered as a root document, we add the symbol to the root list, skipping the processing of any other documents of this symbol
                 }
             }
         }
-
-        return result;
     }
 
     protected virtual bool IsRootDocument(Document document)
