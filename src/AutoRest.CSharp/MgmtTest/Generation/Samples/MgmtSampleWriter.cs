@@ -7,6 +7,7 @@ using System.Linq;
 using System.Xml.Linq;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Generation.Writers;
+using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Mgmt.Decorator;
 using AutoRest.CSharp.Mgmt.Models;
 using AutoRest.CSharp.Mgmt.Output;
@@ -222,7 +223,8 @@ namespace AutoRest.CSharp.MgmtTest.Generation.Samples
         private CodeWriterVariableDeclaration WriteGetCollectionWithoutParent(CodeWriterVariableDeclaration clientResult, ResourceCollection collection)
         {
             CodeWriterVariableDeclaration col = new CodeWriterVariableDeclaration("collection", collection.Type);
-            if (collection.Type.Name == nameof(TenantCollection))
+            // Can't use CSharpType.Equals(typeof(...)) because the CSharpType.Equals(Type) would assume itself is a FrameworkType, but here it's generated when IsArmCore=true
+            if (Configuration.MgmtConfiguration.IsArmCore && collection.Type.Name == nameof(TenantCollection))
                 _writer.Line($"{col.Type} {col.Declaration:D} = {clientResult.Declaration}.GetTenants();");
             else
                 // TODO: add support when we found any other case
@@ -276,7 +278,8 @@ namespace AutoRest.CSharp.MgmtTest.Generation.Samples
             _writer.AppendDeclaration(collectionResult).AppendRaw(" = ");
             if (parentVar == null)
             {
-                if (parent.Type.Name == nameof(ArmResource))
+                // Can't use CSharpType.Equals(typeof(...)) because the CSharpType.Equals(Type) would assume itself is a FrameworkType, but here it's generated when IsArmCore=true
+                if (Configuration.MgmtConfiguration.IsArmCore && parent.Type.Name == nameof(ArmResource))
                 {
                     // Retrive the generic resource first for the methods of ArmResource directly which don't have extnsion methods under ArmClient
                     _writer.Append($"{clientResult.Declaration}.GetGenericResource({idVar}).{getResourceCollectionMethodName}(");
