@@ -55,10 +55,12 @@ namespace AutoRest.CSharp.Mgmt.Decorator
 
         private static void AddInternalIncludes(Type sourceType, List<PropertyInfo> parentProperties)
         {
-            var typeReferenceAttribute = sourceType.GetCustomAttributes(false).FirstOrDefault(a => a.GetType().Name.Equals(ReferenceClassFinder.TypeReferenceTypeAttributeName));
-            if (typeReferenceAttribute is not null)
+            // Both TypeReferenceTypeAttribute and PropertyReferenceTypeAttribute allow specifying internal properties to include
+            var referenceAttribute = sourceType.GetCustomAttributes(false)
+                .FirstOrDefault(a => a.GetType().Name is ReferenceClassFinder.TypeReferenceTypeAttributeName or ReferenceClassFinder.PropertyReferenceTypeAttributeName);
+            if (referenceAttribute is not null)
             {
-                var internalToInclude = typeReferenceAttribute.GetType().GetProperty("InternalPropertiesToInclude", BindingFlags.Instance | BindingFlags.Public)?.GetValue(typeReferenceAttribute);
+                var internalToInclude = referenceAttribute.GetType().GetProperty("InternalPropertiesToInclude", BindingFlags.Instance | BindingFlags.Public)?.GetValue(referenceAttribute);
                 if (internalToInclude is not null)
                 {
                     foreach (var propertyName in (string[])internalToInclude)

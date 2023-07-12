@@ -47,7 +47,7 @@ namespace MgmtExactMatchInheritance
         /// <param name="type14"> Any object. </param>
         /// <param name="type15"> Any object. </param>
         /// <param name="type16"> Any object. </param>
-        /// <param name="type17"></param>
+        /// <param name="type17"> Gets or sets the type 17. </param>
         /// <param name="type18"> Azure Data Factory secure string definition. The string value will be masked with asterisks '*' during Get or List API calls. </param>
         /// <param name="type19"> Azure Key Vault secret reference. </param>
         internal ExactMatchModel1Data(ResourceIdentifier id, string name, ResourceType resourceType, SystemData systemData, string @new, IList<Uri> supportingUris, Type1? type1, Type2? type2, IPAddress type3, object type4, DataFactoryElement<string> type5, DataFactoryElement<double> type6, DataFactoryElement<bool> type7, DataFactoryElement<int> type8, DataFactoryElement<BinaryData> type9, DataFactoryElement<IList<SeparateClass>> type10, DataFactoryElement<IList<string>> type11, DataFactoryElement<IDictionary<string, string>> type12, DataFactoryElement<IList<SeparateClass>> type13, DataFactoryElement<DateTimeOffset> type14, DataFactoryElement<TimeSpan> type15, DataFactoryElement<Uri> type16, DataFactoryLinkedServiceReference type17, DataFactorySecretString type18, DataFactoryKeyVaultSecretReference type19) : base(id, name, resourceType, systemData)
@@ -114,7 +114,14 @@ namespace MgmtExactMatchInheritance
         /// <summary> Gets or sets the type 17. </summary>
         public DataFactoryLinkedServiceReference Type17 { get; set; }
         /// <summary> Azure Data Factory secure string definition. The string value will be masked with asterisks '*' during Get or List API calls. </summary>
-        public DataFactorySecretString Type18 { get; set; }
+        internal DataFactorySecretString Type18 { get; set; }
+        /// <summary> Gets or sets Value. </summary>
+        public string Type18Value
+        {
+            get => Type18 is null ? default : Type18.Value;
+            set => Type18 = new DataFactorySecretString(value);
+        }
+
         /// <summary> Azure Key Vault secret reference. </summary>
         public DataFactoryKeyVaultSecretReference Type19 { get; set; }
     }

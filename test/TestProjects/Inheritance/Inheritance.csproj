@@ -10,7 +10,7 @@
     <PackageReference Include="Azure.Core" Version="1.33.0" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Azure.Core.Expressions.DataFactory" Version="1.0.0-alpha.20230710.4" />
+    <PackageReference Include="Azure.Core.Expressions.DataFactory" Version="1.0.0-alpha.20230712.6" />
   </ItemGroup>
 
 </Project>
