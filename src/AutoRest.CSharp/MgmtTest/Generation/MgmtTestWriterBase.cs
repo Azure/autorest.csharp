@@ -5,6 +5,7 @@ using System;
 using System.Linq;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Generation.Writers;
+using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Mgmt.Decorator;
 using AutoRest.CSharp.Mgmt.Models;
 using AutoRest.CSharp.Mgmt.Output;
@@ -129,12 +130,20 @@ namespace AutoRest.CSharp.MgmtTest.Generation
 
         protected CodeWriterDeclaration WriteGetFromResource(Resource carrierResource, OperationExample example, FormattableString client)
         {
-            var idVar = new CodeWriterDeclaration($"{carrierResource.Type.Name}Id".ToVariableName());
-            WriteCreateResourceIdentifier(example, idVar, carrierResource.RequestPath, carrierResource.Type);
-            var resourceVar = new CodeWriterDeclaration(carrierResource.ResourceName.ToVariableName());
-            _writer.Line($"{carrierResource.Type} {resourceVar:D} = {client}.Get{carrierResource.Type.Name}({idVar});");
+            // Can't use CSharpType.Equals(typeof(...)) because the CSharpType.Equals(Type) would assume itself is a FrameworkType, but here it's generated when IsArmCore=true
+            if (Configuration.MgmtConfiguration.IsArmCore && carrierResource.Type.Name == nameof(TenantResource))
+            {
+                return WriteGetTenantResource(carrierResource, example, client);
+            }
+            else
+            {
+                var idVar = new CodeWriterDeclaration($"{carrierResource.Type.Name}Id".ToVariableName());
+                WriteCreateResourceIdentifier(example, idVar, carrierResource.RequestPath, carrierResource.Type);
+                var resourceVar = new CodeWriterDeclaration(carrierResource.ResourceName.ToVariableName());
+                _writer.Line($"{carrierResource.Type} {resourceVar:D} = {client}.Get{carrierResource.Type.Name}({idVar});");
 
-            return resourceVar;
+                return resourceVar;
+            }
         }
 
         protected CodeWriterDeclaration WriteGetExtension(MgmtExtension parentExtension, OperationExample example, FormattableString client) => parentExtension.ArmCoreType switch
@@ -144,7 +153,7 @@ namespace AutoRest.CSharp.MgmtTest.Generation
             _ => WriteGetOtherExtension(parentExtension, example, client)
         };
 
-        private CodeWriterDeclaration WriteGetTenantResource(MgmtExtension parentExtension, OperationExample example, FormattableString client)
+        private CodeWriterDeclaration WriteGetTenantResource(MgmtTypeProvider parentExtension, OperationExample example, FormattableString client)
         {
             var resourceVar = new CodeWriterDeclaration(parentExtension.ResourceName.ToVariableName());
             _writer.Line($"var {resourceVar:D} = {client}.GetTenants().GetAllAsync().GetAsyncEnumerator().Current;");
