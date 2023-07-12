@@ -121,7 +121,7 @@ const defaultOptions = {
     "models-to-treat-empty-string-as-null": undefined,
     "additional-intrinsic-types-to-treat-empty-string-as-null": [],
     "methods-to-keep-client-default-value": undefined,
-    "deserialize-null-collection-as-null-value": false,
+    "deserialize-null-collection-as-null-value": undefined,
     logLevel: LoggerLevel.INFO
 };
 
