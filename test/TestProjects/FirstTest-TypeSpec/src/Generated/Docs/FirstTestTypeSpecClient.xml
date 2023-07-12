@@ -44,6 +44,8 @@ Console.WriteLine(result.GetProperty("optionalLiteralInt").ToString());
 Console.WriteLine(result.GetProperty("optionalLiteralFloat").ToString());
 Console.WriteLine(result.GetProperty("optionalLiteralBool").ToString());
 Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
+Console.WriteLine(result.GetProperty("optionalNullableList")[0].ToString());
+Console.WriteLine(result.GetProperty("requiredNullableList")[0].ToString());
 ]]></code>
 </example>
     </member>
@@ -68,6 +70,8 @@ Console.WriteLine(result.GetProperty("optionalLiteralInt").ToString());
 Console.WriteLine(result.GetProperty("optionalLiteralFloat").ToString());
 Console.WriteLine(result.GetProperty("optionalLiteralBool").ToString());
 Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
+Console.WriteLine(result.GetProperty("optionalNullableList")[0].ToString());
+Console.WriteLine(result.GetProperty("requiredNullableList")[0].ToString());
 ]]></code>
 </example>
     </member>
@@ -92,6 +96,8 @@ Console.WriteLine(result.GetProperty("optionalLiteralInt").ToString());
 Console.WriteLine(result.GetProperty("optionalLiteralFloat").ToString());
 Console.WriteLine(result.GetProperty("optionalLiteralBool").ToString());
 Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
+Console.WriteLine(result.GetProperty("optionalNullableList")[0].ToString());
+Console.WriteLine(result.GetProperty("requiredNullableList")[0].ToString());
 ]]></code>
 </example>
     </member>
@@ -116,6 +122,8 @@ Console.WriteLine(result.GetProperty("optionalLiteralInt").ToString());
 Console.WriteLine(result.GetProperty("optionalLiteralFloat").ToString());
 Console.WriteLine(result.GetProperty("optionalLiteralBool").ToString());
 Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
+Console.WriteLine(result.GetProperty("optionalNullableList")[0].ToString());
+Console.WriteLine(result.GetProperty("requiredNullableList")[0].ToString());
 ]]></code>
 </example>
     </member>
@@ -134,6 +142,9 @@ var data = new {
     requiredLiteralFloat = 1.23,
     requiredLiteralBool = false,
     requiredBadDescription = "<requiredBadDescription>",
+    requiredNullableList = new[] {
+        1234
+    },
 };
 
 Response response = await client.PatchActionAsync(RequestContent.Create(data));
@@ -146,6 +157,7 @@ Console.WriteLine(result.GetProperty("requiredLiteralInt").ToString());
 Console.WriteLine(result.GetProperty("requiredLiteralFloat").ToString());
 Console.WriteLine(result.GetProperty("requiredLiteralBool").ToString());
 Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
+Console.WriteLine(result.GetProperty("requiredNullableList")[0].ToString());
 ]]></code>
 This sample shows how to call PatchActionAsync with all request content, and how to parse the result.
 <code><![CDATA[
@@ -164,6 +176,12 @@ var data = new {
     optionalLiteralFloat = 4.56,
     optionalLiteralBool = true,
     requiredBadDescription = "<requiredBadDescription>",
+    optionalNullableList = new[] {
+        1234
+    },
+    requiredNullableList = new[] {
+        1234
+    },
 };
 
 Response response = await client.PatchActionAsync(RequestContent.Create(data));
@@ -180,6 +198,8 @@ Console.WriteLine(result.GetProperty("optionalLiteralInt").ToString());
 Console.WriteLine(result.GetProperty("optionalLiteralFloat").ToString());
 Console.WriteLine(result.GetProperty("optionalLiteralBool").ToString());
 Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
+Console.WriteLine(result.GetProperty("optionalNullableList")[0].ToString());
+Console.WriteLine(result.GetProperty("requiredNullableList")[0].ToString());
 ]]></code>
 </example>
     </member>
@@ -198,6 +218,9 @@ var data = new {
     requiredLiteralFloat = 1.23,
     requiredLiteralBool = false,
     requiredBadDescription = "<requiredBadDescription>",
+    requiredNullableList = new[] {
+        1234
+    },
 };
 
 Response response = client.PatchAction(RequestContent.Create(data));
@@ -210,6 +233,7 @@ Console.WriteLine(result.GetProperty("requiredLiteralInt").ToString());
 Console.WriteLine(result.GetProperty("requiredLiteralFloat").ToString());
 Console.WriteLine(result.GetProperty("requiredLiteralBool").ToString());
 Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
+Console.WriteLine(result.GetProperty("requiredNullableList")[0].ToString());
 ]]></code>
 This sample shows how to call PatchAction with all request content, and how to parse the result.
 <code><![CDATA[
@@ -228,6 +252,12 @@ var data = new {
     optionalLiteralFloat = 4.56,
     optionalLiteralBool = true,
     requiredBadDescription = "<requiredBadDescription>",
+    optionalNullableList = new[] {
+        1234
+    },
+    requiredNullableList = new[] {
+        1234
+    },
 };
 
 Response response = client.PatchAction(RequestContent.Create(data));
@@ -244,6 +274,8 @@ Console.WriteLine(result.GetProperty("optionalLiteralInt").ToString());
 Console.WriteLine(result.GetProperty("optionalLiteralFloat").ToString());
 Console.WriteLine(result.GetProperty("optionalLiteralBool").ToString());
 Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
+Console.WriteLine(result.GetProperty("optionalNullableList")[0].ToString());
+Console.WriteLine(result.GetProperty("requiredNullableList")[0].ToString());
 ]]></code>
 </example>
     </member>
@@ -254,12 +286,19 @@ This sample shows how to call AnonymousBodyAsync with required parameters.
 var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new FirstTestTypeSpecClient(endpoint);
 
-var thing = new Thing("<name>", "<requiredUnion>", "<requiredBadDescription>")
+var thing = new Thing("<name>", "<requiredUnion>", "<requiredBadDescription>", new int[] 
+{
+    1234
+})
 {
     OptionalLiteralString = ThingOptionalLiteralString.Reject,
     OptionalLiteralInt = ThingOptionalLiteralInt._456,
     OptionalLiteralFloat = ThingOptionalLiteralFloat._456,
     OptionalLiteralBool = true,
+    OptionalNullableList = 
+{
+        1234
+    },
 };
 var result = await client.AnonymousBodyAsync(thing);
 ]]></code>
@@ -272,12 +311,19 @@ This sample shows how to call AnonymousBody with required parameters.
 var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new FirstTestTypeSpecClient(endpoint);
 
-var thing = new Thing("<name>", "<requiredUnion>", "<requiredBadDescription>")
+var thing = new Thing("<name>", "<requiredUnion>", "<requiredBadDescription>", new int[] 
+{
+    1234
+})
 {
     OptionalLiteralString = ThingOptionalLiteralString.Reject,
     OptionalLiteralInt = ThingOptionalLiteralInt._456,
     OptionalLiteralFloat = ThingOptionalLiteralFloat._456,
     OptionalLiteralBool = true,
+    OptionalNullableList = 
+{
+        1234
+    },
 };
 var result = client.AnonymousBody(thing);
 ]]></code>
@@ -298,6 +344,9 @@ var data = new {
     requiredLiteralFloat = 1.23,
     requiredLiteralBool = false,
     requiredBadDescription = "<requiredBadDescription>",
+    requiredNullableList = new[] {
+        1234
+    },
 };
 
 Response response = await client.AnonymousBodyAsync(RequestContent.Create(data));
@@ -310,6 +359,7 @@ Console.WriteLine(result.GetProperty("requiredLiteralInt").ToString());
 Console.WriteLine(result.GetProperty("requiredLiteralFloat").ToString());
 Console.WriteLine(result.GetProperty("requiredLiteralBool").ToString());
 Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
+Console.WriteLine(result.GetProperty("requiredNullableList")[0].ToString());
 ]]></code>
 This sample shows how to call AnonymousBodyAsync with all request content, and how to parse the result.
 <code><![CDATA[
@@ -328,6 +378,12 @@ var data = new {
     optionalLiteralFloat = 4.56,
     optionalLiteralBool = true,
     requiredBadDescription = "<requiredBadDescription>",
+    optionalNullableList = new[] {
+        1234
+    },
+    requiredNullableList = new[] {
+        1234
+    },
 };
 
 Response response = await client.AnonymousBodyAsync(RequestContent.Create(data));
@@ -344,6 +400,8 @@ Console.WriteLine(result.GetProperty("optionalLiteralInt").ToString());
 Console.WriteLine(result.GetProperty("optionalLiteralFloat").ToString());
 Console.WriteLine(result.GetProperty("optionalLiteralBool").ToString());
 Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
+Console.WriteLine(result.GetProperty("optionalNullableList")[0].ToString());
+Console.WriteLine(result.GetProperty("requiredNullableList")[0].ToString());
 ]]></code>
 </example>
     </member>
@@ -362,6 +420,9 @@ var data = new {
     requiredLiteralFloat = 1.23,
     requiredLiteralBool = false,
     requiredBadDescription = "<requiredBadDescription>",
+    requiredNullableList = new[] {
+        1234
+    },
 };
 
 Response response = client.AnonymousBody(RequestContent.Create(data));
@@ -374,6 +435,7 @@ Console.WriteLine(result.GetProperty("requiredLiteralInt").ToString());
 Console.WriteLine(result.GetProperty("requiredLiteralFloat").ToString());
 Console.WriteLine(result.GetProperty("requiredLiteralBool").ToString());
 Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
+Console.WriteLine(result.GetProperty("requiredNullableList")[0].ToString());
 ]]></code>
 This sample shows how to call AnonymousBody with all request content, and how to parse the result.
 <code><![CDATA[
@@ -392,6 +454,12 @@ var data = new {
     optionalLiteralFloat = 4.56,
     optionalLiteralBool = true,
     requiredBadDescription = "<requiredBadDescription>",
+    optionalNullableList = new[] {
+        1234
+    },
+    requiredNullableList = new[] {
+        1234
+    },
 };
 
 Response response = client.AnonymousBody(RequestContent.Create(data));
@@ -408,6 +476,8 @@ Console.WriteLine(result.GetProperty("optionalLiteralInt").ToString());
 Console.WriteLine(result.GetProperty("optionalLiteralFloat").ToString());
 Console.WriteLine(result.GetProperty("optionalLiteralBool").ToString());
 Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
+Console.WriteLine(result.GetProperty("optionalNullableList")[0].ToString());
+Console.WriteLine(result.GetProperty("requiredNullableList")[0].ToString());
 ]]></code>
 </example>
     </member>
@@ -590,6 +660,8 @@ Console.WriteLine(result.GetProperty("optionalLiteralInt").ToString());
 Console.WriteLine(result.GetProperty("optionalLiteralFloat").ToString());
 Console.WriteLine(result.GetProperty("optionalLiteralBool").ToString());
 Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
+Console.WriteLine(result.GetProperty("optionalNullableList")[0].ToString());
+Console.WriteLine(result.GetProperty("requiredNullableList")[0].ToString());
 ]]></code>
 </example>
     </member>
@@ -614,6 +686,8 @@ Console.WriteLine(result.GetProperty("optionalLiteralInt").ToString());
 Console.WriteLine(result.GetProperty("optionalLiteralFloat").ToString());
 Console.WriteLine(result.GetProperty("optionalLiteralBool").ToString());
 Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
+Console.WriteLine(result.GetProperty("optionalNullableList")[0].ToString());
+Console.WriteLine(result.GetProperty("requiredNullableList")[0].ToString());
 ]]></code>
 </example>
     </member>
@@ -630,12 +704,19 @@ var action = new RoundTripModel("<requiredString>", 1234, new StringFixedEnum?[]
 }, new Dictionary<string, StringExtensibleEnum?>
 {
     ["key"] = StringExtensibleEnum.One,
-}, new Thing("<name>", "<requiredUnion>", "<requiredBadDescription>")
+}, new Thing("<name>", "<requiredUnion>", "<requiredBadDescription>", new int[] 
+{
+    1234
+})
 {
     OptionalLiteralString = ThingOptionalLiteralString.Reject,
     OptionalLiteralInt = ThingOptionalLiteralInt._456,
     OptionalLiteralFloat = ThingOptionalLiteralFloat._456,
     OptionalLiteralBool = true,
+    OptionalNullableList = 
+{
+        1234
+    },
 }, BinaryData.FromString("<your binary data content>"), new Dictionary<string, BinaryData>
 {
     ["key"] = BinaryData.FromString("<your binary data content>"),
@@ -685,12 +766,19 @@ var action = new RoundTripModel("<requiredString>", 1234, new StringFixedEnum?[]
 }, new Dictionary<string, StringExtensibleEnum?>
 {
     ["key"] = StringExtensibleEnum.One,
-}, new Thing("<name>", "<requiredUnion>", "<requiredBadDescription>")
+}, new Thing("<name>", "<requiredUnion>", "<requiredBadDescription>", new int[] 
+{
+    1234
+})
 {
     OptionalLiteralString = ThingOptionalLiteralString.Reject,
     OptionalLiteralInt = ThingOptionalLiteralInt._456,
     OptionalLiteralFloat = ThingOptionalLiteralFloat._456,
     OptionalLiteralBool = true,
+    OptionalNullableList = 
+{
+        1234
+    },
 }, BinaryData.FromString("<your binary data content>"), new Dictionary<string, BinaryData>
 {
     ["key"] = BinaryData.FromString("<your binary data content>"),
@@ -751,6 +839,9 @@ var data = new {
         requiredLiteralFloat = 1.23,
         requiredLiteralBool = false,
         requiredBadDescription = "<requiredBadDescription>",
+        requiredNullableList = new[] {
+            1234
+        },
     },
     requiredUnknown = new {},
     requiredRecordUnknown = new {
@@ -777,6 +868,7 @@ Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredLiter
 Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredLiteralFloat").ToString());
 Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredLiteralBool").ToString());
 Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredBadDescription").ToString());
+Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredNullableList")[0].ToString());
 Console.WriteLine(result.GetProperty("requiredUnknown").ToString());
 Console.WriteLine(result.GetProperty("requiredRecordUnknown").GetProperty("<test>").ToString());
 Console.WriteLine(result.GetProperty("readOnlyRequiredRecordUnknown").GetProperty("<test>").ToString());
@@ -810,6 +902,12 @@ var data = new {
         optionalLiteralFloat = 4.56,
         optionalLiteralBool = true,
         requiredBadDescription = "<requiredBadDescription>",
+        optionalNullableList = new[] {
+            1234
+        },
+        requiredNullableList = new[] {
+            1234
+        },
     },
     intExtensibleEnum = "1",
     intExtensibleEnumCollection = new[] {
@@ -861,6 +959,8 @@ Console.WriteLine(result.GetProperty("requiredModel").GetProperty("optionalLiter
 Console.WriteLine(result.GetProperty("requiredModel").GetProperty("optionalLiteralFloat").ToString());
 Console.WriteLine(result.GetProperty("requiredModel").GetProperty("optionalLiteralBool").ToString());
 Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredBadDescription").ToString());
+Console.WriteLine(result.GetProperty("requiredModel").GetProperty("optionalNullableList")[0].ToString());
+Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredNullableList")[0].ToString());
 Console.WriteLine(result.GetProperty("intExtensibleEnum").ToString());
 Console.WriteLine(result.GetProperty("intExtensibleEnumCollection")[0].ToString());
 Console.WriteLine(result.GetProperty("floatExtensibleEnum").ToString());
@@ -906,6 +1006,9 @@ var data = new {
         requiredLiteralFloat = 1.23,
         requiredLiteralBool = false,
         requiredBadDescription = "<requiredBadDescription>",
+        requiredNullableList = new[] {
+            1234
+        },
     },
     requiredUnknown = new {},
     requiredRecordUnknown = new {
@@ -932,6 +1035,7 @@ Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredLiter
 Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredLiteralFloat").ToString());
 Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredLiteralBool").ToString());
 Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredBadDescription").ToString());
+Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredNullableList")[0].ToString());
 Console.WriteLine(result.GetProperty("requiredUnknown").ToString());
 Console.WriteLine(result.GetProperty("requiredRecordUnknown").GetProperty("<test>").ToString());
 Console.WriteLine(result.GetProperty("readOnlyRequiredRecordUnknown").GetProperty("<test>").ToString());
@@ -965,6 +1069,12 @@ var data = new {
         optionalLiteralFloat = 4.56,
         optionalLiteralBool = true,
         requiredBadDescription = "<requiredBadDescription>",
+        optionalNullableList = new[] {
+            1234
+        },
+        requiredNullableList = new[] {
+            1234
+        },
     },
     intExtensibleEnum = "1",
     intExtensibleEnumCollection = new[] {
@@ -1016,6 +1126,8 @@ Console.WriteLine(result.GetProperty("requiredModel").GetProperty("optionalLiter
 Console.WriteLine(result.GetProperty("requiredModel").GetProperty("optionalLiteralFloat").ToString());
 Console.WriteLine(result.GetProperty("requiredModel").GetProperty("optionalLiteralBool").ToString());
 Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredBadDescription").ToString());
+Console.WriteLine(result.GetProperty("requiredModel").GetProperty("optionalNullableList")[0].ToString());
+Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredNullableList")[0].ToString());
 Console.WriteLine(result.GetProperty("intExtensibleEnum").ToString());
 Console.WriteLine(result.GetProperty("intExtensibleEnumCollection")[0].ToString());
 Console.WriteLine(result.GetProperty("floatExtensibleEnum").ToString());
@@ -1061,6 +1173,9 @@ var data = new {
         requiredLiteralFloat = 1.23,
         requiredLiteralBool = false,
         requiredBadDescription = "<requiredBadDescription>",
+        requiredNullableList = new[] {
+            1234
+        },
     },
     requiredUnknown = new {},
     requiredRecordUnknown = new {
@@ -1087,6 +1202,7 @@ Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredLiter
 Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredLiteralFloat").ToString());
 Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredLiteralBool").ToString());
 Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredBadDescription").ToString());
+Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredNullableList")[0].ToString());
 Console.WriteLine(result.GetProperty("requiredUnknown").ToString());
 Console.WriteLine(result.GetProperty("requiredRecordUnknown").GetProperty("<test>").ToString());
 Console.WriteLine(result.GetProperty("readOnlyRequiredRecordUnknown").GetProperty("<test>").ToString());
@@ -1120,6 +1236,12 @@ var data = new {
         optionalLiteralFloat = 4.56,
         optionalLiteralBool = true,
         requiredBadDescription = "<requiredBadDescription>",
+        optionalNullableList = new[] {
+            1234
+        },
+        requiredNullableList = new[] {
+            1234
+        },
     },
     intExtensibleEnum = "1",
     intExtensibleEnumCollection = new[] {
@@ -1171,6 +1293,8 @@ Console.WriteLine(result.GetProperty("requiredModel").GetProperty("optionalLiter
 Console.WriteLine(result.GetProperty("requiredModel").GetProperty("optionalLiteralFloat").ToString());
 Console.WriteLine(result.GetProperty("requiredModel").GetProperty("optionalLiteralBool").ToString());
 Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredBadDescription").ToString());
+Console.WriteLine(result.GetProperty("requiredModel").GetProperty("optionalNullableList")[0].ToString());
+Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredNullableList")[0].ToString());
 Console.WriteLine(result.GetProperty("intExtensibleEnum").ToString());
 Console.WriteLine(result.GetProperty("intExtensibleEnumCollection")[0].ToString());
 Console.WriteLine(result.GetProperty("floatExtensibleEnum").ToString());
@@ -1216,6 +1340,9 @@ var data = new {
         requiredLiteralFloat = 1.23,
         requiredLiteralBool = false,
         requiredBadDescription = "<requiredBadDescription>",
+        requiredNullableList = new[] {
+            1234
+        },
     },
     requiredUnknown = new {},
     requiredRecordUnknown = new {
@@ -1242,6 +1369,7 @@ Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredLiter
 Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredLiteralFloat").ToString());
 Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredLiteralBool").ToString());
 Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredBadDescription").ToString());
+Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredNullableList")[0].ToString());
 Console.WriteLine(result.GetProperty("requiredUnknown").ToString());
 Console.WriteLine(result.GetProperty("requiredRecordUnknown").GetProperty("<test>").ToString());
 Console.WriteLine(result.GetProperty("readOnlyRequiredRecordUnknown").GetProperty("<test>").ToString());
@@ -1275,6 +1403,12 @@ var data = new {
         optionalLiteralFloat = 4.56,
         optionalLiteralBool = true,
         requiredBadDescription = "<requiredBadDescription>",
+        optionalNullableList = new[] {
+            1234
+        },
+        requiredNullableList = new[] {
+            1234
+        },
     },
     intExtensibleEnum = "1",
     intExtensibleEnumCollection = new[] {
@@ -1326,6 +1460,8 @@ Console.WriteLine(result.GetProperty("requiredModel").GetProperty("optionalLiter
 Console.WriteLine(result.GetProperty("requiredModel").GetProperty("optionalLiteralFloat").ToString());
 Console.WriteLine(result.GetProperty("requiredModel").GetProperty("optionalLiteralBool").ToString());
 Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredBadDescription").ToString());
+Console.WriteLine(result.GetProperty("requiredModel").GetProperty("optionalNullableList")[0].ToString());
+Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredNullableList")[0].ToString());
 Console.WriteLine(result.GetProperty("intExtensibleEnum").ToString());
 Console.WriteLine(result.GetProperty("intExtensibleEnumCollection")[0].ToString());
 Console.WriteLine(result.GetProperty("floatExtensibleEnum").ToString());
@@ -1390,6 +1526,8 @@ Console.WriteLine(result.GetProperty("optionalLiteralInt").ToString());
 Console.WriteLine(result.GetProperty("optionalLiteralFloat").ToString());
 Console.WriteLine(result.GetProperty("optionalLiteralBool").ToString());
 Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
+Console.WriteLine(result.GetProperty("optionalNullableList")[0].ToString());
+Console.WriteLine(result.GetProperty("requiredNullableList")[0].ToString());
 ]]></code>
 </example>
     </member>
@@ -1414,6 +1552,8 @@ Console.WriteLine(result.GetProperty("optionalLiteralInt").ToString());
 Console.WriteLine(result.GetProperty("optionalLiteralFloat").ToString());
 Console.WriteLine(result.GetProperty("optionalLiteralBool").ToString());
 Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
+Console.WriteLine(result.GetProperty("optionalNullableList")[0].ToString());
+Console.WriteLine(result.GetProperty("requiredNullableList")[0].ToString());
 ]]></code>
 </example>
     </member>
@@ -1424,12 +1564,19 @@ This sample shows how to call CreateLiteralAsync with required parameters.
 var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new FirstTestTypeSpecClient(endpoint);
 
-var body = new Thing("<name>", "<requiredUnion>", "<requiredBadDescription>")
+var body = new Thing("<name>", "<requiredUnion>", "<requiredBadDescription>", new int[] 
+{
+    1234
+})
 {
     OptionalLiteralString = ThingOptionalLiteralString.Reject,
     OptionalLiteralInt = ThingOptionalLiteralInt._456,
     OptionalLiteralFloat = ThingOptionalLiteralFloat._456,
     OptionalLiteralBool = true,
+    OptionalNullableList = 
+{
+        1234
+    },
 };
 var result = await client.CreateLiteralAsync(body);
 ]]></code>
@@ -1442,12 +1589,19 @@ This sample shows how to call CreateLiteral with required parameters.
 var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new FirstTestTypeSpecClient(endpoint);
 
-var body = new Thing("<name>", "<requiredUnion>", "<requiredBadDescription>")
+var body = new Thing("<name>", "<requiredUnion>", "<requiredBadDescription>", new int[] 
+{
+    1234
+})
 {
     OptionalLiteralString = ThingOptionalLiteralString.Reject,
     OptionalLiteralInt = ThingOptionalLiteralInt._456,
     OptionalLiteralFloat = ThingOptionalLiteralFloat._456,
     OptionalLiteralBool = true,
+    OptionalNullableList = 
+{
+        1234
+    },
 };
 var result = client.CreateLiteral(body);
 ]]></code>
@@ -1468,6 +1622,9 @@ var data = new {
     requiredLiteralFloat = 1.23,
     requiredLiteralBool = false,
     requiredBadDescription = "<requiredBadDescription>",
+    requiredNullableList = new[] {
+        1234
+    },
 };
 
 Response response = await client.CreateLiteralAsync(RequestContent.Create(data));
@@ -1480,6 +1637,7 @@ Console.WriteLine(result.GetProperty("requiredLiteralInt").ToString());
 Console.WriteLine(result.GetProperty("requiredLiteralFloat").ToString());
 Console.WriteLine(result.GetProperty("requiredLiteralBool").ToString());
 Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
+Console.WriteLine(result.GetProperty("requiredNullableList")[0].ToString());
 ]]></code>
 This sample shows how to call CreateLiteralAsync with all request content, and how to parse the result.
 <code><![CDATA[
@@ -1498,6 +1656,12 @@ var data = new {
     optionalLiteralFloat = 4.56,
     optionalLiteralBool = true,
     requiredBadDescription = "<requiredBadDescription>",
+    optionalNullableList = new[] {
+        1234
+    },
+    requiredNullableList = new[] {
+        1234
+    },
 };
 
 Response response = await client.CreateLiteralAsync(RequestContent.Create(data));
@@ -1514,6 +1678,8 @@ Console.WriteLine(result.GetProperty("optionalLiteralInt").ToString());
 Console.WriteLine(result.GetProperty("optionalLiteralFloat").ToString());
 Console.WriteLine(result.GetProperty("optionalLiteralBool").ToString());
 Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
+Console.WriteLine(result.GetProperty("optionalNullableList")[0].ToString());
+Console.WriteLine(result.GetProperty("requiredNullableList")[0].ToString());
 ]]></code>
 </example>
     </member>
@@ -1532,6 +1698,9 @@ var data = new {
     requiredLiteralFloat = 1.23,
     requiredLiteralBool = false,
     requiredBadDescription = "<requiredBadDescription>",
+    requiredNullableList = new[] {
+        1234
+    },
 };
 
 Response response = client.CreateLiteral(RequestContent.Create(data));
@@ -1544,6 +1713,7 @@ Console.WriteLine(result.GetProperty("requiredLiteralInt").ToString());
 Console.WriteLine(result.GetProperty("requiredLiteralFloat").ToString());
 Console.WriteLine(result.GetProperty("requiredLiteralBool").ToString());
 Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
+Console.WriteLine(result.GetProperty("requiredNullableList")[0].ToString());
 ]]></code>
 This sample shows how to call CreateLiteral with all request content, and how to parse the result.
 <code><![CDATA[
@@ -1562,6 +1732,12 @@ var data = new {
     optionalLiteralFloat = 4.56,
     optionalLiteralBool = true,
     requiredBadDescription = "<requiredBadDescription>",
+    optionalNullableList = new[] {
+        1234
+    },
+    requiredNullableList = new[] {
+        1234
+    },
 };
 
 Response response = client.CreateLiteral(RequestContent.Create(data));
@@ -1578,6 +1754,8 @@ Console.WriteLine(result.GetProperty("optionalLiteralInt").ToString());
 Console.WriteLine(result.GetProperty("optionalLiteralFloat").ToString());
 Console.WriteLine(result.GetProperty("optionalLiteralBool").ToString());
 Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
+Console.WriteLine(result.GetProperty("optionalNullableList")[0].ToString());
+Console.WriteLine(result.GetProperty("requiredNullableList")[0].ToString());
 ]]></code>
 </example>
     </member>
@@ -1624,6 +1802,8 @@ Console.WriteLine(result.GetProperty("optionalLiteralInt").ToString());
 Console.WriteLine(result.GetProperty("optionalLiteralFloat").ToString());
 Console.WriteLine(result.GetProperty("optionalLiteralBool").ToString());
 Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
+Console.WriteLine(result.GetProperty("optionalNullableList")[0].ToString());
+Console.WriteLine(result.GetProperty("requiredNullableList")[0].ToString());
 ]]></code>
 </example>
     </member>
@@ -1648,6 +1828,8 @@ Console.WriteLine(result.GetProperty("optionalLiteralInt").ToString());
 Console.WriteLine(result.GetProperty("optionalLiteralFloat").ToString());
 Console.WriteLine(result.GetProperty("optionalLiteralBool").ToString());
 Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
+Console.WriteLine(result.GetProperty("optionalNullableList")[0].ToString());
+Console.WriteLine(result.GetProperty("requiredNullableList")[0].ToString());
 ]]></code>
 </example>
     </member>
@@ -1686,12 +1868,19 @@ This sample shows how to call InternalProtocolAsync with required parameters.
 var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new FirstTestTypeSpecClient(endpoint);
 
-var body = new Thing("<name>", "<requiredUnion>", "<requiredBadDescription>")
+var body = new Thing("<name>", "<requiredUnion>", "<requiredBadDescription>", new int[] 
+{
+    1234
+})
 {
     OptionalLiteralString = ThingOptionalLiteralString.Reject,
     OptionalLiteralInt = ThingOptionalLiteralInt._456,
     OptionalLiteralFloat = ThingOptionalLiteralFloat._456,
     OptionalLiteralBool = true,
+    OptionalNullableList = 
+{
+        1234
+    },
 };
 var result = await client.InternalProtocolAsync(body);
 ]]></code>
@@ -1704,12 +1893,19 @@ This sample shows how to call InternalProtocol with required parameters.
 var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new FirstTestTypeSpecClient(endpoint);
 
-var body = new Thing("<name>", "<requiredUnion>", "<requiredBadDescription>")
+var body = new Thing("<name>", "<requiredUnion>", "<requiredBadDescription>", new int[] 
+{
+    1234
+})
 {
     OptionalLiteralString = ThingOptionalLiteralString.Reject,
     OptionalLiteralInt = ThingOptionalLiteralInt._456,
     OptionalLiteralFloat = ThingOptionalLiteralFloat._456,
     OptionalLiteralBool = true,
+    OptionalNullableList = 
+{
+        1234
+    },
 };
 var result = client.InternalProtocol(body);
 ]]></code>

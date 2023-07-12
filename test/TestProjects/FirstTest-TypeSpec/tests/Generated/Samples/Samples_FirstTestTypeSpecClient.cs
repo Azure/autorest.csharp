@@ -37,6 +37,7 @@ namespace FirstTestTypeSpec.Samples
             Console.WriteLine(result.GetProperty("requiredLiteralFloat").ToString());
             Console.WriteLine(result.GetProperty("requiredLiteralBool").ToString());
             Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
+            Console.WriteLine(result.GetProperty("requiredNullableList")[0].ToString());
         }
 
         [Test]
@@ -60,6 +61,8 @@ namespace FirstTestTypeSpec.Samples
             Console.WriteLine(result.GetProperty("optionalLiteralFloat").ToString());
             Console.WriteLine(result.GetProperty("optionalLiteralBool").ToString());
             Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
+            Console.WriteLine(result.GetProperty("optionalNullableList")[0].ToString());
+            Console.WriteLine(result.GetProperty("requiredNullableList")[0].ToString());
         }
 
         [Test]
@@ -79,6 +82,7 @@ namespace FirstTestTypeSpec.Samples
             Console.WriteLine(result.GetProperty("requiredLiteralFloat").ToString());
             Console.WriteLine(result.GetProperty("requiredLiteralBool").ToString());
             Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
+            Console.WriteLine(result.GetProperty("requiredNullableList")[0].ToString());
         }
 
         [Test]
@@ -102,6 +106,8 @@ namespace FirstTestTypeSpec.Samples
             Console.WriteLine(result.GetProperty("optionalLiteralFloat").ToString());
             Console.WriteLine(result.GetProperty("optionalLiteralBool").ToString());
             Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
+            Console.WriteLine(result.GetProperty("optionalNullableList")[0].ToString());
+            Console.WriteLine(result.GetProperty("requiredNullableList")[0].ToString());
         }
 
         [Test]
@@ -131,6 +137,7 @@ namespace FirstTestTypeSpec.Samples
             Console.WriteLine(result.GetProperty("requiredLiteralFloat").ToString());
             Console.WriteLine(result.GetProperty("requiredLiteralBool").ToString());
             Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
+            Console.WriteLine(result.GetProperty("requiredNullableList")[0].ToString());
         }
 
         [Test]
@@ -154,6 +161,8 @@ namespace FirstTestTypeSpec.Samples
             Console.WriteLine(result.GetProperty("optionalLiteralFloat").ToString());
             Console.WriteLine(result.GetProperty("optionalLiteralBool").ToString());
             Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
+            Console.WriteLine(result.GetProperty("optionalNullableList")[0].ToString());
+            Console.WriteLine(result.GetProperty("requiredNullableList")[0].ToString());
         }
 
         [Test]
@@ -173,6 +182,7 @@ namespace FirstTestTypeSpec.Samples
             Console.WriteLine(result.GetProperty("requiredLiteralFloat").ToString());
             Console.WriteLine(result.GetProperty("requiredLiteralBool").ToString());
             Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
+            Console.WriteLine(result.GetProperty("requiredNullableList")[0].ToString());
         }
 
         [Test]
@@ -196,6 +206,8 @@ namespace FirstTestTypeSpec.Samples
             Console.WriteLine(result.GetProperty("optionalLiteralFloat").ToString());
             Console.WriteLine(result.GetProperty("optionalLiteralBool").ToString());
             Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
+            Console.WriteLine(result.GetProperty("optionalNullableList")[0].ToString());
+            Console.WriteLine(result.GetProperty("requiredNullableList")[0].ToString());
         }
 
         [Test]
@@ -214,6 +226,9 @@ namespace FirstTestTypeSpec.Samples
                 requiredLiteralFloat = 1.23,
                 requiredLiteralBool = false,
                 requiredBadDescription = "<requiredBadDescription>",
+                requiredNullableList = new[] {
+        1234
+    },
             };
 
             Response response = client.PatchAction(RequestContent.Create(data));
@@ -226,6 +241,7 @@ namespace FirstTestTypeSpec.Samples
             Console.WriteLine(result.GetProperty("requiredLiteralFloat").ToString());
             Console.WriteLine(result.GetProperty("requiredLiteralBool").ToString());
             Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
+            Console.WriteLine(result.GetProperty("requiredNullableList")[0].ToString());
         }
 
         [Test]
@@ -248,6 +264,12 @@ namespace FirstTestTypeSpec.Samples
                 optionalLiteralFloat = 4.56,
                 optionalLiteralBool = true,
                 requiredBadDescription = "<requiredBadDescription>",
+                optionalNullableList = new[] {
+        1234
+    },
+                requiredNullableList = new[] {
+        1234
+    },
             };
 
             Response response = client.PatchAction(RequestContent.Create(data));
@@ -264,6 +286,8 @@ namespace FirstTestTypeSpec.Samples
             Console.WriteLine(result.GetProperty("optionalLiteralFloat").ToString());
             Console.WriteLine(result.GetProperty("optionalLiteralBool").ToString());
             Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
+            Console.WriteLine(result.GetProperty("optionalNullableList")[0].ToString());
+            Console.WriteLine(result.GetProperty("requiredNullableList")[0].ToString());
         }
 
         [Test]
@@ -282,6 +306,9 @@ namespace FirstTestTypeSpec.Samples
                 requiredLiteralFloat = 1.23,
                 requiredLiteralBool = false,
                 requiredBadDescription = "<requiredBadDescription>",
+                requiredNullableList = new[] {
+        1234
+    },
             };
 
             Response response = await client.PatchActionAsync(RequestContent.Create(data));
@@ -294,6 +321,7 @@ namespace FirstTestTypeSpec.Samples
             Console.WriteLine(result.GetProperty("requiredLiteralFloat").ToString());
             Console.WriteLine(result.GetProperty("requiredLiteralBool").ToString());
             Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
+            Console.WriteLine(result.GetProperty("requiredNullableList")[0].ToString());
         }
 
         [Test]
@@ -316,6 +344,12 @@ namespace FirstTestTypeSpec.Samples
                 optionalLiteralFloat = 4.56,
                 optionalLiteralBool = true,
                 requiredBadDescription = "<requiredBadDescription>",
+                optionalNullableList = new[] {
+        1234
+    },
+                requiredNullableList = new[] {
+        1234
+    },
             };
 
             Response response = await client.PatchActionAsync(RequestContent.Create(data));
@@ -332,6 +366,8 @@ namespace FirstTestTypeSpec.Samples
             Console.WriteLine(result.GetProperty("optionalLiteralFloat").ToString());
             Console.WriteLine(result.GetProperty("optionalLiteralBool").ToString());
             Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
+            Console.WriteLine(result.GetProperty("optionalNullableList")[0].ToString());
+            Console.WriteLine(result.GetProperty("requiredNullableList")[0].ToString());
         }
 
         [Test]
@@ -350,6 +386,9 @@ namespace FirstTestTypeSpec.Samples
                 requiredLiteralFloat = 1.23,
                 requiredLiteralBool = false,
                 requiredBadDescription = "<requiredBadDescription>",
+                requiredNullableList = new[] {
+        1234
+    },
             };
 
             Response response = client.AnonymousBody(RequestContent.Create(data));
@@ -362,6 +401,7 @@ namespace FirstTestTypeSpec.Samples
             Console.WriteLine(result.GetProperty("requiredLiteralFloat").ToString());
             Console.WriteLine(result.GetProperty("requiredLiteralBool").ToString());
             Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
+            Console.WriteLine(result.GetProperty("requiredNullableList")[0].ToString());
         }
 
         [Test]
@@ -384,6 +424,12 @@ namespace FirstTestTypeSpec.Samples
                 optionalLiteralFloat = 4.56,
                 optionalLiteralBool = true,
                 requiredBadDescription = "<requiredBadDescription>",
+                optionalNullableList = new[] {
+        1234
+    },
+                requiredNullableList = new[] {
+        1234
+    },
             };
 
             Response response = client.AnonymousBody(RequestContent.Create(data));
@@ -400,6 +446,8 @@ namespace FirstTestTypeSpec.Samples
             Console.WriteLine(result.GetProperty("optionalLiteralFloat").ToString());
             Console.WriteLine(result.GetProperty("optionalLiteralBool").ToString());
             Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
+            Console.WriteLine(result.GetProperty("optionalNullableList")[0].ToString());
+            Console.WriteLine(result.GetProperty("requiredNullableList")[0].ToString());
         }
 
         [Test]
@@ -418,6 +466,9 @@ namespace FirstTestTypeSpec.Samples
                 requiredLiteralFloat = 1.23,
                 requiredLiteralBool = false,
                 requiredBadDescription = "<requiredBadDescription>",
+                requiredNullableList = new[] {
+        1234
+    },
             };
 
             Response response = await client.AnonymousBodyAsync(RequestContent.Create(data));
@@ -430,6 +481,7 @@ namespace FirstTestTypeSpec.Samples
             Console.WriteLine(result.GetProperty("requiredLiteralFloat").ToString());
             Console.WriteLine(result.GetProperty("requiredLiteralBool").ToString());
             Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
+            Console.WriteLine(result.GetProperty("requiredNullableList")[0].ToString());
         }
 
         [Test]
@@ -452,6 +504,12 @@ namespace FirstTestTypeSpec.Samples
                 optionalLiteralFloat = 4.56,
                 optionalLiteralBool = true,
                 requiredBadDescription = "<requiredBadDescription>",
+                optionalNullableList = new[] {
+        1234
+    },
+                requiredNullableList = new[] {
+        1234
+    },
             };
 
             Response response = await client.AnonymousBodyAsync(RequestContent.Create(data));
@@ -468,6 +526,8 @@ namespace FirstTestTypeSpec.Samples
             Console.WriteLine(result.GetProperty("optionalLiteralFloat").ToString());
             Console.WriteLine(result.GetProperty("optionalLiteralBool").ToString());
             Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
+            Console.WriteLine(result.GetProperty("optionalNullableList")[0].ToString());
+            Console.WriteLine(result.GetProperty("requiredNullableList")[0].ToString());
         }
 
         [Test]
@@ -477,12 +537,19 @@ namespace FirstTestTypeSpec.Samples
             var endpoint = new Uri("<https://my-service.azure.com>");
             var client = new FirstTestTypeSpecClient(endpoint);
 
-            var thing = new Thing("<name>", "<requiredUnion>", "<requiredBadDescription>")
+            var thing = new Thing("<name>", "<requiredUnion>", "<requiredBadDescription>", new int[]
+            {
+    1234
+            })
             {
                 OptionalLiteralString = ThingOptionalLiteralString.Reject,
                 OptionalLiteralInt = ThingOptionalLiteralInt._456,
                 OptionalLiteralFloat = ThingOptionalLiteralFloat._456,
                 OptionalLiteralBool = true,
+                OptionalNullableList =
+{
+        1234
+    },
             };
             var result = await client.AnonymousBodyAsync(thing);
         }
@@ -710,6 +777,7 @@ namespace FirstTestTypeSpec.Samples
             Console.WriteLine(result.GetProperty("requiredLiteralFloat").ToString());
             Console.WriteLine(result.GetProperty("requiredLiteralBool").ToString());
             Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
+            Console.WriteLine(result.GetProperty("requiredNullableList")[0].ToString());
         }
 
         [Test]
@@ -733,6 +801,8 @@ namespace FirstTestTypeSpec.Samples
             Console.WriteLine(result.GetProperty("optionalLiteralFloat").ToString());
             Console.WriteLine(result.GetProperty("optionalLiteralBool").ToString());
             Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
+            Console.WriteLine(result.GetProperty("optionalNullableList")[0].ToString());
+            Console.WriteLine(result.GetProperty("requiredNullableList")[0].ToString());
         }
 
         [Test]
@@ -752,6 +822,7 @@ namespace FirstTestTypeSpec.Samples
             Console.WriteLine(result.GetProperty("requiredLiteralFloat").ToString());
             Console.WriteLine(result.GetProperty("requiredLiteralBool").ToString());
             Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
+            Console.WriteLine(result.GetProperty("requiredNullableList")[0].ToString());
         }
 
         [Test]
@@ -775,6 +846,8 @@ namespace FirstTestTypeSpec.Samples
             Console.WriteLine(result.GetProperty("optionalLiteralFloat").ToString());
             Console.WriteLine(result.GetProperty("optionalLiteralBool").ToString());
             Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
+            Console.WriteLine(result.GetProperty("optionalNullableList")[0].ToString());
+            Console.WriteLine(result.GetProperty("requiredNullableList")[0].ToString());
         }
 
         [Test]
@@ -804,6 +877,9 @@ namespace FirstTestTypeSpec.Samples
                     requiredLiteralFloat = 1.23,
                     requiredLiteralBool = false,
                     requiredBadDescription = "<requiredBadDescription>",
+                    requiredNullableList = new[] {
+            1234
+        },
                 },
                 requiredUnknown = new { },
                 requiredRecordUnknown = new
@@ -832,6 +908,7 @@ namespace FirstTestTypeSpec.Samples
             Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredLiteralFloat").ToString());
             Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredLiteralBool").ToString());
             Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredBadDescription").ToString());
+            Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredNullableList")[0].ToString());
             Console.WriteLine(result.GetProperty("requiredUnknown").ToString());
             Console.WriteLine(result.GetProperty("requiredRecordUnknown").GetProperty("<test>").ToString());
             Console.WriteLine(result.GetProperty("readOnlyRequiredRecordUnknown").GetProperty("<test>").ToString());
@@ -871,6 +948,12 @@ namespace FirstTestTypeSpec.Samples
                     optionalLiteralFloat = 4.56,
                     optionalLiteralBool = true,
                     requiredBadDescription = "<requiredBadDescription>",
+                    optionalNullableList = new[] {
+            1234
+        },
+                    requiredNullableList = new[] {
+            1234
+        },
                 },
                 intExtensibleEnum = "1",
                 intExtensibleEnumCollection = new[] {
@@ -925,6 +1008,8 @@ namespace FirstTestTypeSpec.Samples
             Console.WriteLine(result.GetProperty("requiredModel").GetProperty("optionalLiteralFloat").ToString());
             Console.WriteLine(result.GetProperty("requiredModel").GetProperty("optionalLiteralBool").ToString());
             Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredBadDescription").ToString());
+            Console.WriteLine(result.GetProperty("requiredModel").GetProperty("optionalNullableList")[0].ToString());
+            Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredNullableList")[0].ToString());
             Console.WriteLine(result.GetProperty("intExtensibleEnum").ToString());
             Console.WriteLine(result.GetProperty("intExtensibleEnumCollection")[0].ToString());
             Console.WriteLine(result.GetProperty("floatExtensibleEnum").ToString());
@@ -972,6 +1057,9 @@ namespace FirstTestTypeSpec.Samples
                     requiredLiteralFloat = 1.23,
                     requiredLiteralBool = false,
                     requiredBadDescription = "<requiredBadDescription>",
+                    requiredNullableList = new[] {
+            1234
+        },
                 },
                 requiredUnknown = new { },
                 requiredRecordUnknown = new
@@ -1000,6 +1088,7 @@ namespace FirstTestTypeSpec.Samples
             Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredLiteralFloat").ToString());
             Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredLiteralBool").ToString());
             Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredBadDescription").ToString());
+            Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredNullableList")[0].ToString());
             Console.WriteLine(result.GetProperty("requiredUnknown").ToString());
             Console.WriteLine(result.GetProperty("requiredRecordUnknown").GetProperty("<test>").ToString());
             Console.WriteLine(result.GetProperty("readOnlyRequiredRecordUnknown").GetProperty("<test>").ToString());
@@ -1039,6 +1128,12 @@ namespace FirstTestTypeSpec.Samples
                     optionalLiteralFloat = 4.56,
                     optionalLiteralBool = true,
                     requiredBadDescription = "<requiredBadDescription>",
+                    optionalNullableList = new[] {
+            1234
+        },
+                    requiredNullableList = new[] {
+            1234
+        },
                 },
                 intExtensibleEnum = "1",
                 intExtensibleEnumCollection = new[] {
@@ -1093,6 +1188,8 @@ namespace FirstTestTypeSpec.Samples
             Console.WriteLine(result.GetProperty("requiredModel").GetProperty("optionalLiteralFloat").ToString());
             Console.WriteLine(result.GetProperty("requiredModel").GetProperty("optionalLiteralBool").ToString());
             Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredBadDescription").ToString());
+            Console.WriteLine(result.GetProperty("requiredModel").GetProperty("optionalNullableList")[0].ToString());
+            Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredNullableList")[0].ToString());
             Console.WriteLine(result.GetProperty("intExtensibleEnum").ToString());
             Console.WriteLine(result.GetProperty("intExtensibleEnumCollection")[0].ToString());
             Console.WriteLine(result.GetProperty("floatExtensibleEnum").ToString());
@@ -1126,12 +1223,19 @@ namespace FirstTestTypeSpec.Samples
             }, new Dictionary<string, StringExtensibleEnum?>
             {
                 ["key"] = StringExtensibleEnum.One,
-            }, new Thing("<name>", "<requiredUnion>", "<requiredBadDescription>")
+            }, new Thing("<name>", "<requiredUnion>", "<requiredBadDescription>", new int[]
+            {
+    1234
+            })
             {
                 OptionalLiteralString = ThingOptionalLiteralString.Reject,
                 OptionalLiteralInt = ThingOptionalLiteralInt._456,
                 OptionalLiteralFloat = ThingOptionalLiteralFloat._456,
                 OptionalLiteralBool = true,
+                OptionalNullableList =
+            {
+        1234
+                },
             }, BinaryData.FromString("<your binary data content>"), new Dictionary<string, BinaryData>
             {
                 ["key"] = BinaryData.FromString("<your binary data content>"),
@@ -1194,6 +1298,9 @@ namespace FirstTestTypeSpec.Samples
                     requiredLiteralFloat = 1.23,
                     requiredLiteralBool = false,
                     requiredBadDescription = "<requiredBadDescription>",
+                    requiredNullableList = new[] {
+            1234
+        },
                 },
                 requiredUnknown = new { },
                 requiredRecordUnknown = new
@@ -1222,6 +1329,7 @@ namespace FirstTestTypeSpec.Samples
             Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredLiteralFloat").ToString());
             Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredLiteralBool").ToString());
             Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredBadDescription").ToString());
+            Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredNullableList")[0].ToString());
             Console.WriteLine(result.GetProperty("requiredUnknown").ToString());
             Console.WriteLine(result.GetProperty("requiredRecordUnknown").GetProperty("<test>").ToString());
             Console.WriteLine(result.GetProperty("readOnlyRequiredRecordUnknown").GetProperty("<test>").ToString());
@@ -1261,6 +1369,12 @@ namespace FirstTestTypeSpec.Samples
                     optionalLiteralFloat = 4.56,
                     optionalLiteralBool = true,
                     requiredBadDescription = "<requiredBadDescription>",
+                    optionalNullableList = new[] {
+            1234
+        },
+                    requiredNullableList = new[] {
+            1234
+        },
                 },
                 intExtensibleEnum = "1",
                 intExtensibleEnumCollection = new[] {
@@ -1315,6 +1429,8 @@ namespace FirstTestTypeSpec.Samples
             Console.WriteLine(result.GetProperty("requiredModel").GetProperty("optionalLiteralFloat").ToString());
             Console.WriteLine(result.GetProperty("requiredModel").GetProperty("optionalLiteralBool").ToString());
             Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredBadDescription").ToString());
+            Console.WriteLine(result.GetProperty("requiredModel").GetProperty("optionalNullableList")[0].ToString());
+            Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredNullableList")[0].ToString());
             Console.WriteLine(result.GetProperty("intExtensibleEnum").ToString());
             Console.WriteLine(result.GetProperty("intExtensibleEnumCollection")[0].ToString());
             Console.WriteLine(result.GetProperty("floatExtensibleEnum").ToString());
@@ -1362,6 +1478,9 @@ namespace FirstTestTypeSpec.Samples
                     requiredLiteralFloat = 1.23,
                     requiredLiteralBool = false,
                     requiredBadDescription = "<requiredBadDescription>",
+                    requiredNullableList = new[] {
+            1234
+        },
                 },
                 requiredUnknown = new { },
                 requiredRecordUnknown = new
@@ -1390,6 +1509,7 @@ namespace FirstTestTypeSpec.Samples
             Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredLiteralFloat").ToString());
             Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredLiteralBool").ToString());
             Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredBadDescription").ToString());
+            Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredNullableList")[0].ToString());
             Console.WriteLine(result.GetProperty("requiredUnknown").ToString());
             Console.WriteLine(result.GetProperty("requiredRecordUnknown").GetProperty("<test>").ToString());
             Console.WriteLine(result.GetProperty("readOnlyRequiredRecordUnknown").GetProperty("<test>").ToString());
@@ -1429,6 +1549,12 @@ namespace FirstTestTypeSpec.Samples
                     optionalLiteralFloat = 4.56,
                     optionalLiteralBool = true,
                     requiredBadDescription = "<requiredBadDescription>",
+                    optionalNullableList = new[] {
+            1234
+        },
+                    requiredNullableList = new[] {
+            1234
+        },
                 },
                 intExtensibleEnum = "1",
                 intExtensibleEnumCollection = new[] {
@@ -1483,6 +1609,8 @@ namespace FirstTestTypeSpec.Samples
             Console.WriteLine(result.GetProperty("requiredModel").GetProperty("optionalLiteralFloat").ToString());
             Console.WriteLine(result.GetProperty("requiredModel").GetProperty("optionalLiteralBool").ToString());
             Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredBadDescription").ToString());
+            Console.WriteLine(result.GetProperty("requiredModel").GetProperty("optionalNullableList")[0].ToString());
+            Console.WriteLine(result.GetProperty("requiredModel").GetProperty("requiredNullableList")[0].ToString());
             Console.WriteLine(result.GetProperty("intExtensibleEnum").ToString());
             Console.WriteLine(result.GetProperty("intExtensibleEnumCollection")[0].ToString());
             Console.WriteLine(result.GetProperty("floatExtensibleEnum").ToString());
@@ -1520,6 +1648,7 @@ namespace FirstTestTypeSpec.Samples
             Console.WriteLine(result.GetProperty("requiredLiteralFloat").ToString());
             Console.WriteLine(result.GetProperty("requiredLiteralBool").ToString());
             Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
+            Console.WriteLine(result.GetProperty("requiredNullableList")[0].ToString());
         }
 
         [Test]
@@ -1543,6 +1672,8 @@ namespace FirstTestTypeSpec.Samples
             Console.WriteLine(result.GetProperty("optionalLiteralFloat").ToString());
             Console.WriteLine(result.GetProperty("optionalLiteralBool").ToString());
             Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
+            Console.WriteLine(result.GetProperty("optionalNullableList")[0].ToString());
+            Console.WriteLine(result.GetProperty("requiredNullableList")[0].ToString());
         }
 
         [Test]
@@ -1562,6 +1693,7 @@ namespace FirstTestTypeSpec.Samples
             Console.WriteLine(result.GetProperty("requiredLiteralFloat").ToString());
             Console.WriteLine(result.GetProperty("requiredLiteralBool").ToString());
             Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
+            Console.WriteLine(result.GetProperty("requiredNullableList")[0].ToString());
         }
 
         [Test]
@@ -1585,6 +1717,8 @@ namespace FirstTestTypeSpec.Samples
             Console.WriteLine(result.GetProperty("optionalLiteralFloat").ToString());
             Console.WriteLine(result.GetProperty("optionalLiteralBool").ToString());
             Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
+            Console.WriteLine(result.GetProperty("optionalNullableList")[0].ToString());
+            Console.WriteLine(result.GetProperty("requiredNullableList")[0].ToString());
         }
 
         [Test]
@@ -1613,6 +1747,9 @@ namespace FirstTestTypeSpec.Samples
                 requiredLiteralFloat = 1.23,
                 requiredLiteralBool = false,
                 requiredBadDescription = "<requiredBadDescription>",
+                requiredNullableList = new[] {
+        1234
+    },
             };
 
             Response response = client.CreateLiteral(RequestContent.Create(data));
@@ -1625,6 +1762,7 @@ namespace FirstTestTypeSpec.Samples
             Console.WriteLine(result.GetProperty("requiredLiteralFloat").ToString());
             Console.WriteLine(result.GetProperty("requiredLiteralBool").ToString());
             Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
+            Console.WriteLine(result.GetProperty("requiredNullableList")[0].ToString());
         }
 
         [Test]
@@ -1647,6 +1785,12 @@ namespace FirstTestTypeSpec.Samples
                 optionalLiteralFloat = 4.56,
                 optionalLiteralBool = true,
                 requiredBadDescription = "<requiredBadDescription>",
+                optionalNullableList = new[] {
+        1234
+    },
+                requiredNullableList = new[] {
+        1234
+    },
             };
 
             Response response = client.CreateLiteral(RequestContent.Create(data));
@@ -1663,6 +1807,8 @@ namespace FirstTestTypeSpec.Samples
             Console.WriteLine(result.GetProperty("optionalLiteralFloat").ToString());
             Console.WriteLine(result.GetProperty("optionalLiteralBool").ToString());
             Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
+            Console.WriteLine(result.GetProperty("optionalNullableList")[0].ToString());
+            Console.WriteLine(result.GetProperty("requiredNullableList")[0].ToString());
         }
 
         [Test]
@@ -1681,6 +1827,9 @@ namespace FirstTestTypeSpec.Samples
                 requiredLiteralFloat = 1.23,
                 requiredLiteralBool = false,
                 requiredBadDescription = "<requiredBadDescription>",
+                requiredNullableList = new[] {
+        1234
+    },
             };
 
             Response response = await client.CreateLiteralAsync(RequestContent.Create(data));
@@ -1693,6 +1842,7 @@ namespace FirstTestTypeSpec.Samples
             Console.WriteLine(result.GetProperty("requiredLiteralFloat").ToString());
             Console.WriteLine(result.GetProperty("requiredLiteralBool").ToString());
             Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
+            Console.WriteLine(result.GetProperty("requiredNullableList")[0].ToString());
         }
 
         [Test]
@@ -1715,6 +1865,12 @@ namespace FirstTestTypeSpec.Samples
                 optionalLiteralFloat = 4.56,
                 optionalLiteralBool = true,
                 requiredBadDescription = "<requiredBadDescription>",
+                optionalNullableList = new[] {
+        1234
+    },
+                requiredNullableList = new[] {
+        1234
+    },
             };
 
             Response response = await client.CreateLiteralAsync(RequestContent.Create(data));
@@ -1731,6 +1887,8 @@ namespace FirstTestTypeSpec.Samples
             Console.WriteLine(result.GetProperty("optionalLiteralFloat").ToString());
             Console.WriteLine(result.GetProperty("optionalLiteralBool").ToString());
             Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
+            Console.WriteLine(result.GetProperty("optionalNullableList")[0].ToString());
+            Console.WriteLine(result.GetProperty("requiredNullableList")[0].ToString());
         }
 
         [Test]
@@ -1740,12 +1898,19 @@ namespace FirstTestTypeSpec.Samples
             var endpoint = new Uri("<https://my-service.azure.com>");
             var client = new FirstTestTypeSpecClient(endpoint);
 
-            var body = new Thing("<name>", "<requiredUnion>", "<requiredBadDescription>")
+            var body = new Thing("<name>", "<requiredUnion>", "<requiredBadDescription>", new int[]
+            {
+    1234
+            })
             {
                 OptionalLiteralString = ThingOptionalLiteralString.Reject,
                 OptionalLiteralInt = ThingOptionalLiteralInt._456,
                 OptionalLiteralFloat = ThingOptionalLiteralFloat._456,
                 OptionalLiteralBool = true,
+                OptionalNullableList =
+{
+        1234
+    },
             };
             var result = await client.CreateLiteralAsync(body);
         }
@@ -1767,6 +1932,7 @@ namespace FirstTestTypeSpec.Samples
             Console.WriteLine(result.GetProperty("requiredLiteralFloat").ToString());
             Console.WriteLine(result.GetProperty("requiredLiteralBool").ToString());
             Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
+            Console.WriteLine(result.GetProperty("requiredNullableList")[0].ToString());
         }
 
         [Test]
@@ -1790,6 +1956,8 @@ namespace FirstTestTypeSpec.Samples
             Console.WriteLine(result.GetProperty("optionalLiteralFloat").ToString());
             Console.WriteLine(result.GetProperty("optionalLiteralBool").ToString());
             Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
+            Console.WriteLine(result.GetProperty("optionalNullableList")[0].ToString());
+            Console.WriteLine(result.GetProperty("requiredNullableList")[0].ToString());
         }
 
         [Test]
@@ -1809,6 +1977,7 @@ namespace FirstTestTypeSpec.Samples
             Console.WriteLine(result.GetProperty("requiredLiteralFloat").ToString());
             Console.WriteLine(result.GetProperty("requiredLiteralBool").ToString());
             Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
+            Console.WriteLine(result.GetProperty("requiredNullableList")[0].ToString());
         }
 
         [Test]
@@ -1832,6 +2001,8 @@ namespace FirstTestTypeSpec.Samples
             Console.WriteLine(result.GetProperty("optionalLiteralFloat").ToString());
             Console.WriteLine(result.GetProperty("optionalLiteralBool").ToString());
             Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
+            Console.WriteLine(result.GetProperty("optionalNullableList")[0].ToString());
+            Console.WriteLine(result.GetProperty("requiredNullableList")[0].ToString());
         }
 
         [Test]
@@ -1903,12 +2074,19 @@ namespace FirstTestTypeSpec.Samples
             var endpoint = new Uri("<https://my-service.azure.com>");
             var client = new FirstTestTypeSpecClient(endpoint);
 
-            var body = new Thing("<name>", "<requiredUnion>", "<requiredBadDescription>")
+            var body = new Thing("<name>", "<requiredUnion>", "<requiredBadDescription>", new int[]
+            {
+    1234
+            })
             {
                 OptionalLiteralString = ThingOptionalLiteralString.Reject,
                 OptionalLiteralInt = ThingOptionalLiteralInt._456,
                 OptionalLiteralFloat = ThingOptionalLiteralFloat._456,
                 OptionalLiteralBool = true,
+                OptionalNullableList =
+{
+        1234
+    },
             };
             var result = await client.InternalProtocolAsync(body);
         }

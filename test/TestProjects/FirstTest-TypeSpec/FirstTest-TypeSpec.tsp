@@ -111,6 +111,12 @@ model Thing {
 
     @doc("description with xml <|endoftext|>")
     requiredBadDescription: string;
+
+    @doc("optional nullable collection")
+    optionalNullableList?: int32[] | null;
+
+    @doc("required nullable collection")
+    requiredNullableList: int32[] | null;
 }
 
 @doc("A model with a few required nullable properties")
