@@ -18,6 +18,7 @@ using AutoRest.CSharp.Output.Models.Types;
 using AutoRest.CSharp.Utilities;
 using Azure;
 using Azure.Core;
+using Azure.Core.Pipeline;
 using static AutoRest.CSharp.Output.Models.MethodSignatureModifiers;
 
 namespace AutoRest.CSharp.Generation.Writers

@@ -442,6 +442,7 @@ namespace AutoRest.CSharp.Input
                 ReadOption(root, Options.DisablePaginationTopRenaming),
                 ReadOption(root, Options.GenerateModelFactory),
                 ReadOption(root, Options.PublicDiscriminatorProperty),
+                ReadOption(root, Options.DeserializeNullCollectionAsNullValue),
                 oldModelFactoryEntries,
                 ReadEnumOption<UnreferencedTypesHandlingOption>(root, Options.UnreferencedTypesHandling),
                 ReadOption(root, Options.UseOverloadsBetweenProtocolAndConvenience),
