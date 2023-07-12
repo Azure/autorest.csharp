@@ -17,7 +17,6 @@ using AutoRest.CSharp.Utilities;
 using Azure.Core;
 using Azure.ResourceManager;
 using static AutoRest.CSharp.Mgmt.Decorator.ParameterMappingBuilder;
-using static AutoRest.CSharp.Output.Models.MethodSignatureModifiers;
 
 namespace AutoRest.CSharp.Mgmt.Output
 {
@@ -98,7 +97,7 @@ namespace AutoRest.CSharp.Mgmt.Output
               Name: Type.Name,
               null,
               Description: $"Initializes a new instance of the <see cref=\"{Type.Name}\"/> class.",
-              Modifiers: Internal,
+              Modifiers: MethodSignatureModifiers.Internal,
               Parameters: _armClientCtorParameters,
               Initializer: new(
                   isBase: true,
@@ -111,7 +110,7 @@ namespace AutoRest.CSharp.Mgmt.Output
                 Name: Type.Name,
                 null,
                 Description: $"Initializes a new instance of the <see cref = \"{Type.Name}\"/> class.",
-                Modifiers: Internal,
+                Modifiers: MethodSignatureModifiers.Internal,
                 Parameters: new[] { ArmClientParameter, ResourceDataParameter },
                 Initializer: new(
                     IsBase: false,
@@ -454,7 +453,7 @@ namespace AutoRest.CSharp.Mgmt.Output
             Name: "CreateResourceIdentifier",
             null,
             Description: $"Generate the resource identifier of a <see cref=\"{Type.Name}\"/> instance.",
-            Modifiers: Public | Static,
+            Modifiers: MethodSignatureModifiers.Public | MethodSignatureModifiers.Static,
             ReturnType: typeof(ResourceIdentifier),
             ReturnDescription: null,
             Parameters: RequestPath.Where(segment => segment.IsReference).Select(segment => CreateResourceIdentifierParameter(segment)).ToArray());

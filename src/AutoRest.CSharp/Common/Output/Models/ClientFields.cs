@@ -15,7 +15,6 @@ using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Output.Models.Types;
 using AutoRest.CSharp.Utilities;
 using Azure.Core.Pipeline;
-using static AutoRest.CSharp.Output.Models.FieldModifiers;
 
 namespace AutoRest.CSharp.Output.Models
 {
@@ -45,8 +44,8 @@ namespace AutoRest.CSharp.Output.Models
 
         private ClientFields(IEnumerable<Parameter> parameters, InputAuth? authorization)
         {
-            ClientDiagnosticsProperty = new(ClientDiagnosticsDescription, Internal | ReadOnly, typeof(ClientDiagnostics), KnownParameters.ClientDiagnostics.Name.FirstCharToUpperCase(), SerializationFormat.Default, writeAsProperty: true);
-            PipelineField = new(Private | ReadOnly, typeof(HttpPipeline), "_" + KnownParameters.Pipeline.Name);
+            ClientDiagnosticsProperty = new(ClientDiagnosticsDescription, FieldModifiers.Internal | FieldModifiers.ReadOnly, typeof(ClientDiagnostics), KnownParameters.ClientDiagnostics.Name.FirstCharToUpperCase(), SerializationFormat.Default, writeAsProperty: true);
+            PipelineField = new(FieldModifiers.Private | FieldModifiers.ReadOnly, typeof(HttpPipeline), "_" + KnownParameters.Pipeline.Name);
 
             var parameterNamesToFields = new Dictionary<string, FieldDeclaration>();
             var fields = new List<FieldDeclaration>();
@@ -60,14 +59,14 @@ namespace AutoRest.CSharp.Output.Models
 
                 if (authorization.ApiKey is not null)
                 {
-                    AuthorizationHeaderConstant = new(Private | Const, typeof(string), "AuthorizationHeader", $"{authorization.ApiKey.Name:L}", SerializationFormat.Default);
-                    _keyAuthField = new(Private | ReadOnly, KnownParameters.KeyAuth.Type.WithNullable(false), "_" + KnownParameters.KeyAuth.Name);
+                    AuthorizationHeaderConstant = new(FieldModifiers.Private | FieldModifiers.Const, typeof(string), "AuthorizationHeader", $"{authorization.ApiKey.Name:L}", SerializationFormat.Default);
+                    _keyAuthField = new(FieldModifiers.Private | FieldModifiers.ReadOnly, KnownParameters.KeyAuth.Type.WithNullable(false), "_" + KnownParameters.KeyAuth.Name);
 
                     fields.Add(AuthorizationHeaderConstant);
                     fields.Add(_keyAuthField);
                     if (authorization.ApiKey.Prefix is not null)
                     {
-                        AuthorizationApiKeyPrefixConstant = new(Private | Const, typeof(string), "AuthorizationApiKeyPrefix", $"{authorization.ApiKey.Prefix:L}", SerializationFormat.Default);
+                        AuthorizationApiKeyPrefixConstant = new(FieldModifiers.Private | FieldModifiers.Const, typeof(string), "AuthorizationApiKeyPrefix", $"{authorization.ApiKey.Prefix:L}", SerializationFormat.Default);
                         fields.Add(AuthorizationApiKeyPrefixConstant);
                     }
                     credentialFields.Add(_keyAuthField);
@@ -76,8 +75,8 @@ namespace AutoRest.CSharp.Output.Models
 
                 if (authorization.OAuth2 is not null)
                 {
-                    ScopesConstant = new(Private | Static | ReadOnly, typeof(string[]), "AuthorizationScopes", $"new string[]{{ {authorization.OAuth2.Scopes.GetLiteralsFormattable()} }}", SerializationFormat.Default);
-                    _tokenAuthField = new(Private | ReadOnly, KnownParameters.TokenAuth.Type.WithNullable(false), "_" + KnownParameters.TokenAuth.Name);
+                    ScopesConstant = new(FieldModifiers.Private | FieldModifiers.Static | FieldModifiers.ReadOnly, typeof(string[]), "AuthorizationScopes", $"new string[]{{ {authorization.OAuth2.Scopes.GetLiteralsFormattable()} }}", SerializationFormat.Default);
+                    _tokenAuthField = new(FieldModifiers.Private | FieldModifiers.ReadOnly, KnownParameters.TokenAuth.Type.WithNullable(false), "_" + KnownParameters.TokenAuth.Name);
 
                     fields.Add(ScopesConstant);
                     fields.Add(_tokenAuthField);
@@ -91,8 +90,8 @@ namespace AutoRest.CSharp.Output.Models
             foreach (Parameter parameter in parameters)
             {
                 var field = parameter == KnownParameters.ClientDiagnostics ? ClientDiagnosticsProperty : parameter == KnownParameters.Pipeline ? PipelineField : parameter.IsResourceIdentifier
-                        ? new FieldDeclaration($"{parameter.Description}", Public | ReadOnly, parameter.Type, parameter.Name.FirstCharToUpperCase(), SerializationFormat.Default, writeAsProperty: true)
-                        : new FieldDeclaration(Private | ReadOnly, parameter.Type, "_" + parameter.Name);
+                        ? new FieldDeclaration($"{parameter.Description}", FieldModifiers.Public | FieldModifiers.ReadOnly, parameter.Type, parameter.Name.FirstCharToUpperCase(), SerializationFormat.Default, writeAsProperty: true)
+                        : new FieldDeclaration(FieldModifiers.Private | FieldModifiers.ReadOnly, parameter.Type, "_" + parameter.Name);
 
                 if (field.WriteAsProperty)
                 {

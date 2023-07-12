@@ -8,7 +8,6 @@ using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Output.Models.Serialization;
 using Azure.Core;
 using Azure.ResourceManager;
-using static AutoRest.CSharp.Output.Models.MethodSignatureModifiers;
 
 namespace AutoRest.CSharp.Mgmt.Output
 {
@@ -21,7 +20,7 @@ namespace AutoRest.CSharp.Mgmt.Output
             Interface = new CSharpType(typeof(IOperationSource<>), returnType);
             Resource = resource;
             ArmClientField = new FieldDeclaration(FieldModifiers.Private | FieldModifiers.ReadOnly, typeof(ArmClient), "_client");
-            ArmClientCtor = new ConstructorSignature(TypeName, null, null, Internal, new[] { MgmtTypeProvider.ArmClientParameter });
+            ArmClientCtor = new ConstructorSignature(TypeName, null, null, MethodSignatureModifiers.Internal, new[] { MgmtTypeProvider.ArmClientParameter });
             ResponseSerialization = new SerializationBuilder().Build(KnownMediaType.Json, schema, resource?.ResourceData.Type ?? returnType);
         }
 

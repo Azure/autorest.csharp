@@ -18,7 +18,6 @@ using AutoRest.CSharp.Output.Models.Types;
 using AutoRest.CSharp.Utilities;
 using Azure.Core;
 using Microsoft.CodeAnalysis;
-using static AutoRest.CSharp.Output.Models.MethodSignatureModifiers;
 
 namespace AutoRest.CSharp.Output.Models
 {
@@ -189,7 +188,7 @@ namespace AutoRest.CSharp.Output.Models
         }
 
         private ConstructorSignature CreatePrimaryConstructor(IReadOnlyList<Parameter> parameters)
-            => new(Declaration.Name, $"Initializes a new instance of {Declaration.Name}", null, Public, parameters);
+            => new(Declaration.Name, $"Initializes a new instance of {Declaration.Name}", null, MethodSignatureModifiers.Public, parameters);
 
         private ConstructorSignature CreateSecondaryConstructor(IReadOnlyList<Parameter> parameters, FormattableString[] optionalParametersArguments)
         {
@@ -197,7 +196,7 @@ namespace AutoRest.CSharp.Output.Models
                 .Select<Parameter, FormattableString>(p => $"{p.Name}")
                 .Concat(optionalParametersArguments)
                 .ToArray();
-            return new(Declaration.Name, $"Initializes a new instance of {Declaration.Name}", null, Public, parameters, Initializer: new ConstructorInitializer(false, arguments));
+            return new(Declaration.Name, $"Initializes a new instance of {Declaration.Name}", null, MethodSignatureModifiers.Public, parameters, Initializer: new ConstructorInitializer(false, arguments));
         }
 
         private Parameter CreateCredentialParameter(CSharpType type)
@@ -212,7 +211,7 @@ namespace AutoRest.CSharp.Output.Models
         }
 
         private ConstructorSignature CreateMockingConstructor()
-            => new(Declaration.Name, $"Initializes a new instance of {Declaration.Name} for mocking.", null, Protected, Array.Empty<Parameter>());
+            => new(Declaration.Name, $"Initializes a new instance of {Declaration.Name} for mocking.", null, MethodSignatureModifiers.Protected, Array.Empty<Parameter>());
 
         private Parameter CreateOptionsParameter()
         {
@@ -226,7 +225,7 @@ namespace AutoRest.CSharp.Output.Models
                 .Select(p => p with { DefaultValue = null, Validation = ValidationType.None, Initializer = null })
                 .ToArray();
 
-            return new ConstructorSignature(Declaration.Name, $"Initializes a new instance of {Declaration.Name}", null, Internal, constructorParameters);
+            return new ConstructorSignature(Declaration.Name, $"Initializes a new instance of {Declaration.Name}", null, MethodSignatureModifiers.Internal, constructorParameters);
         }
 
         public LowLevelSubClientFactoryMethod BuildFactoryMethod(ClientFields parentFields, string libraryName)
@@ -245,7 +244,7 @@ namespace AutoRest.CSharp.Output.Models
             }
 
             var methodSignature = new MethodSignature($"Get{methodName}",
-                $"Initializes a new instance of {Type.Name}", null, Public | Virtual, Type, null,
+                $"Initializes a new instance of {Type.Name}", null, MethodSignatureModifiers.Public | MethodSignatureModifiers.Virtual, Type, null,
                 methodParameters.ToArray());
             FieldDeclaration? cachingField = methodParameters.Any()
                 ? null

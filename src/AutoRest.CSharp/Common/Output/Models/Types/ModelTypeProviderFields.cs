@@ -15,7 +15,6 @@ using AutoRest.CSharp.Output.Builders;
 using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Utilities;
 using Microsoft.CodeAnalysis;
-using static AutoRest.CSharp.Output.Models.FieldModifiers;
 
 namespace AutoRest.CSharp.Output.Models.Types
 {
@@ -142,15 +141,15 @@ namespace AutoRest.CSharp.Output.Models.Types
             FieldModifiers? setterModifiers = null;
             if (propertyIsDiscriminator)
             {
-                fieldModifiers = Configuration.PublicDiscriminatorProperty ? Public : Internal;
-                setterModifiers = Configuration.PublicDiscriminatorProperty ? Internal | Protected : null;
+                fieldModifiers = Configuration.PublicDiscriminatorProperty ? FieldModifiers.Public : FieldModifiers.Internal;
+                setterModifiers = Configuration.PublicDiscriminatorProperty ? FieldModifiers.Internal | FieldModifiers.Protected : null;
             }
             else
             {
-                fieldModifiers = Public;
+                fieldModifiers = FieldModifiers.Public;
             }
             if (propertyShouldOmitSetter)
-                fieldModifiers |= ReadOnly;
+                fieldModifiers |= FieldModifiers.ReadOnly;
 
             CodeWriterDeclaration declaration = new CodeWriterDeclaration(fieldName);
             declaration.SetActualName(fieldName);
@@ -184,9 +183,9 @@ namespace AutoRest.CSharp.Output.Models.Types
 
             var fieldModifiers = existingMember.DeclaredAccessibility switch
             {
-                Accessibility.Public => Public,
-                Accessibility.Internal => Internal,
-                Accessibility.Private => Private,
+                Accessibility.Public => FieldModifiers.Public,
+                Accessibility.Internal => FieldModifiers.Internal,
+                Accessibility.Private => FieldModifiers.Private,
                 _ => throw new ArgumentOutOfRangeException()
             };
 

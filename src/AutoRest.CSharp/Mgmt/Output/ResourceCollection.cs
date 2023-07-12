@@ -16,7 +16,6 @@ using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Utilities;
 using Azure.ResourceManager;
 using static AutoRest.CSharp.Mgmt.Decorator.ParameterMappingBuilder;
-using static AutoRest.CSharp.Output.Models.MethodSignatureModifiers;
 
 namespace AutoRest.CSharp.Mgmt.Output
 {
@@ -69,7 +68,7 @@ namespace AutoRest.CSharp.Mgmt.Output
               Name: Type.Name,
               null,
               Description: $"Initializes a new instance of the <see cref=\"{Type.Name}\"/> class.",
-              Modifiers: Internal,
+              Modifiers: MethodSignatureModifiers.Internal,
               Parameters: _armClientCtorParameters.Concat(ExtraConstructorParameters).ToArray(),
               Initializer: new(
                   isBase: true,

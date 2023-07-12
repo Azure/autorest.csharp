@@ -22,7 +22,6 @@ using AutoRest.CSharp.Utilities;
 using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
-using static AutoRest.CSharp.Output.Models.MethodSignatureModifiers;
 using Operation = Azure.Operation;
 using Response = Azure.Response;
 using StatusCodes = AutoRest.CSharp.Output.Models.Responses.StatusCodes;
@@ -606,7 +605,7 @@ namespace AutoRest.CSharp.Generation.Writers
             var defaultRequestContext = new CodeWriterDeclaration("DefaultRequestContext");
             _writer.Line($"private static {typeof(RequestContext)} {defaultRequestContext:D} = new {typeof(RequestContext)}();");
 
-            var methodSignature = new MethodSignature("FromCancellationToken", null, null, Internal | Static, typeof(RequestContext), null, new List<Parameter> { KnownParameters.CancellationTokenParameter });
+            var methodSignature = new MethodSignature("FromCancellationToken", null, null, MethodSignatureModifiers.Internal | MethodSignatureModifiers. Static, typeof(RequestContext), null, new List<Parameter> { KnownParameters.CancellationTokenParameter });
             using (_writer.WriteMethodDeclaration(methodSignature))
             {
                 using (_writer.Scope($"if (!{KnownParameters.CancellationTokenParameter.Name}.{nameof(CancellationToken.CanBeCanceled)})"))
@@ -655,7 +654,7 @@ namespace AutoRest.CSharp.Generation.Writers
             FormattableString text;
             if (clientMethod.PagingInfo != null && clientMethod.LongRunning != null)
             {
-                CSharpType pageableType = methodSignature.Modifiers.HasFlag(Async) ? typeof(AsyncPageable<>) : typeof(Pageable<>);
+                CSharpType pageableType = methodSignature.Modifiers.HasFlag(MethodSignatureModifiers.Async) ? typeof(AsyncPageable<>) : typeof(Pageable<>);
                 text = $"The <see cref=\"{nameof(Operation)}{{T}}\"/> from the service that will contain a <see cref=\"{pageableType.Name}{{T}}\"/> containing a list of <see cref=\"{nameof(BinaryData)}\"/> objects once the asynchronous operation on the service has completed. Details of the body schema for the operation's final value are in the Remarks section below.";
             }
             else if (clientMethod.PagingInfo != null)
