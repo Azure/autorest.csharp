@@ -5,8 +5,6 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
-using System.Text.Json;
-using AutoRest.CSharp.Common.Output.Models;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Output.Models.Requests;
@@ -17,7 +15,10 @@ using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Output.Models.Types;
 using AutoRest.CSharp.Utilities;
 using Azure;
+using AutoRest.CSharp.Common.Output.Models;
 using Azure.Core;
+using static AutoRest.CSharp.Output.Models.MethodSignatureModifiers;
+using System.Text.Json;
 
 namespace AutoRest.CSharp.Generation.Writers
 {
@@ -168,22 +169,22 @@ namespace AutoRest.CSharp.Generation.Writers
             }
 
             writer
-                .AppendRawIf("public ", methodBase.Modifiers.HasFlag(MethodSignatureModifiers.Public))
-                .AppendRawIf("internal ", methodBase.Modifiers.HasFlag(MethodSignatureModifiers.Internal))
-                .AppendRawIf("protected ", methodBase.Modifiers.HasFlag(MethodSignatureModifiers.Protected))
-                .AppendRawIf("private ", methodBase.Modifiers.HasFlag(MethodSignatureModifiers.Private));
+                .AppendRawIf("public ", methodBase.Modifiers.HasFlag(Public))
+                .AppendRawIf("internal ", methodBase.Modifiers.HasFlag(Internal))
+                .AppendRawIf("protected ", methodBase.Modifiers.HasFlag(Protected))
+                .AppendRawIf("private ", methodBase.Modifiers.HasFlag(Private));
 
             var method = methodBase as MethodSignature;
             if (method != null)
             {
                 writer
-                    .AppendRawIf("virtual ", methodBase.Modifiers.HasFlag(MethodSignatureModifiers.Virtual))
-                    .AppendRawIf("override ", methodBase.Modifiers.HasFlag(MethodSignatureModifiers.Override))
-                    .AppendRawIf("static ", methodBase.Modifiers.HasFlag(MethodSignatureModifiers.Static))
-                    .AppendRawIf("async ", methodBase.Modifiers.HasFlag(MethodSignatureModifiers.Async));
+                    .AppendRawIf("virtual ", methodBase.Modifiers.HasFlag(Virtual))
+                    .AppendRawIf("override ", methodBase.Modifiers.HasFlag(Override))
+                    .AppendRawIf("static ", methodBase.Modifiers.HasFlag(Static))
+                    .AppendRawIf("async ", methodBase.Modifiers.HasFlag(Async));
 
                 // SA1206: 'new' should be after static
-                writer.AppendRawIf("new ", methodBase.Modifiers.HasFlag(MethodSignatureModifiers.New));
+                writer.AppendRawIf("new ", methodBase.Modifiers.HasFlag(New));
 
                 if (method.ReturnType != null)
                 {
@@ -196,7 +197,7 @@ namespace AutoRest.CSharp.Generation.Writers
             }
             else
             {
-                writer.AppendRawIf("new ", methodBase.Modifiers.HasFlag(MethodSignatureModifiers.New));
+                writer.AppendRawIf("new ", methodBase.Modifiers.HasFlag(New));
             }
 
             writer.Append($"{methodBase.Name}");
@@ -214,7 +215,7 @@ namespace AutoRest.CSharp.Generation.Writers
 
             writer
                 .AppendRaw("(")
-                .AppendRawIf("this ", methodBase.Modifiers.HasFlag(MethodSignatureModifiers.Extension));
+                .AppendRawIf("this ", methodBase.Modifiers.HasFlag(Extension));
 
             var outerScope = writer.AmbientScope();
 

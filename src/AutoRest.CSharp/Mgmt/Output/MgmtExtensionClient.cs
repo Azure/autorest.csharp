@@ -14,6 +14,7 @@ using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Utilities;
 using Azure.Core;
 using Azure.ResourceManager;
+using static AutoRest.CSharp.Output.Models.MethodSignatureModifiers;
 
 namespace AutoRest.CSharp.Mgmt.Output
 {
@@ -41,7 +42,7 @@ namespace AutoRest.CSharp.Mgmt.Output
                 Name: Type.Name,
                 Summary: null,
                 Description: $"Initializes a new instance of the <see cref=\"{Type.Name}\"/> class.",
-                Modifiers: MethodSignatureModifiers.Internal,
+                Modifiers: Internal,
                 Parameters: new[] { ArmClientParameter, ResourceIdentifierParameter },
                 Initializer: new(
                     isBase: true,
@@ -60,7 +61,7 @@ namespace AutoRest.CSharp.Mgmt.Output
                 FactoryMethodName,
                 null,
                 null,
-               MethodSignatureModifiers.Private | MethodSignatureModifiers.Static,
+                Private | Static,
                 Type,
                 null,
                 new[] { _generalExtensionParameter });
@@ -78,7 +79,7 @@ namespace AutoRest.CSharp.Mgmt.Output
                 FactoryMethodName,
                 null,
                 null,
-                MethodSignatureModifiers.Private | MethodSignatureModifiers.Static,
+                Private | Static,
                 Type,
                 null,
                 new[] { ArmClientParameter, _scopeParameter });
