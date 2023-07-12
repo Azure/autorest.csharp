@@ -165,33 +165,35 @@ namespace SpreadTypeSpec
         }
 
         /// <summary> spread an alias as body. </summary>
-        /// <param name="name"> name of the Thing. </param>
         /// <param name="age"> age of the Thing. </param>
+        /// <param name="name"> name of the Thing. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
-        /// <include file="Docs/SpreadTypeSpecClient.xml" path="doc/members/member[@name='SpreadAliasAsync(string,int,CancellationToken)']/*" />
-        public virtual async Task<Response> SpreadAliasAsync(string name, int age, CancellationToken cancellationToken = default)
+        /// <include file="Docs/SpreadTypeSpecClient.xml" path="doc/members/member[@name='SpreadAliasAsync(int?,string,CancellationToken)']/*" />
+        public virtual async Task<Response> SpreadAliasAsync(int? age = null, string name = null, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(name, nameof(name));
-
             RequestContext context = FromCancellationToken(cancellationToken);
-            SpreadAliasRequest spreadAliasRequest = new SpreadAliasRequest(name, age);
+            SpreadAliasRequest spreadAliasRequest = new SpreadAliasRequest()
+            {
+                Age = age,
+                Name = name
+            };
             Response response = await SpreadAliasAsync(spreadAliasRequest.ToRequestContent(), context).ConfigureAwait(false);
             return response;
         }
 
         /// <summary> spread an alias as body. </summary>
-        /// <param name="name"> name of the Thing. </param>
         /// <param name="age"> age of the Thing. </param>
+        /// <param name="name"> name of the Thing. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
-        /// <include file="Docs/SpreadTypeSpecClient.xml" path="doc/members/member[@name='SpreadAlias(string,int,CancellationToken)']/*" />
-        public virtual Response SpreadAlias(string name, int age, CancellationToken cancellationToken = default)
+        /// <include file="Docs/SpreadTypeSpecClient.xml" path="doc/members/member[@name='SpreadAlias(int?,string,CancellationToken)']/*" />
+        public virtual Response SpreadAlias(int? age = null, string name = null, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(name, nameof(name));
-
             RequestContext context = FromCancellationToken(cancellationToken);
-            SpreadAliasRequest spreadAliasRequest = new SpreadAliasRequest(name, age);
+            SpreadAliasRequest spreadAliasRequest = new SpreadAliasRequest()
+            {
+                Age = age,
+                Name = name
+            };
             Response response = SpreadAlias(spreadAliasRequest.ToRequestContent(), context);
             return response;
         }
@@ -206,7 +208,7 @@ namespace SpreadTypeSpec
         /// </item>
         /// <item>
         /// <description>
-        /// Please try the simpler <see cref="SpreadAliasAsync(string,int,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// Please try the simpler <see cref="SpreadAliasAsync(int?,string,CancellationToken)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>
@@ -245,7 +247,7 @@ namespace SpreadTypeSpec
         /// </item>
         /// <item>
         /// <description>
-        /// Please try the simpler <see cref="SpreadAlias(string,int,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// Please try the simpler <see cref="SpreadAlias(int?,string,CancellationToken)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>
@@ -525,19 +527,22 @@ namespace SpreadTypeSpec
         /// <summary> spread an alias with contains another alias property as body. </summary>
         /// <param name="id"> The String to use. </param>
         /// <param name="top"> The Int32 to use. </param>
-        /// <param name="name"> name of the Thing. </param>
         /// <param name="age"> age of the Thing. </param>
+        /// <param name="name"> name of the Thing. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="id"/> or <paramref name="name"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="id"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="id"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <include file="Docs/SpreadTypeSpecClient.xml" path="doc/members/member[@name='SpreadAliasWithSpreadAliasAsync(string,int,string,int,CancellationToken)']/*" />
-        public virtual async Task<Response> SpreadAliasWithSpreadAliasAsync(string id, int top, string name, int age, CancellationToken cancellationToken = default)
+        /// <include file="Docs/SpreadTypeSpecClient.xml" path="doc/members/member[@name='SpreadAliasWithSpreadAliasAsync(string,int,int?,string,CancellationToken)']/*" />
+        public virtual async Task<Response> SpreadAliasWithSpreadAliasAsync(string id, int top, int? age = null, string name = null, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(id, nameof(id));
-            Argument.AssertNotNull(name, nameof(name));
 
             RequestContext context = FromCancellationToken(cancellationToken);
-            SpreadAliasWithSpreadAliasRequest spreadAliasWithSpreadAliasRequest = new SpreadAliasWithSpreadAliasRequest(name, age);
+            SpreadAliasWithSpreadAliasRequest spreadAliasWithSpreadAliasRequest = new SpreadAliasWithSpreadAliasRequest()
+            {
+                Age = age,
+                Name = name
+            };
             Response response = await SpreadAliasWithSpreadAliasAsync(id, top, spreadAliasWithSpreadAliasRequest.ToRequestContent(), context).ConfigureAwait(false);
             return response;
         }
@@ -545,19 +550,22 @@ namespace SpreadTypeSpec
         /// <summary> spread an alias with contains another alias property as body. </summary>
         /// <param name="id"> The String to use. </param>
         /// <param name="top"> The Int32 to use. </param>
-        /// <param name="name"> name of the Thing. </param>
         /// <param name="age"> age of the Thing. </param>
+        /// <param name="name"> name of the Thing. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="id"/> or <paramref name="name"/> is null. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="id"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="id"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <include file="Docs/SpreadTypeSpecClient.xml" path="doc/members/member[@name='SpreadAliasWithSpreadAlias(string,int,string,int,CancellationToken)']/*" />
-        public virtual Response SpreadAliasWithSpreadAlias(string id, int top, string name, int age, CancellationToken cancellationToken = default)
+        /// <include file="Docs/SpreadTypeSpecClient.xml" path="doc/members/member[@name='SpreadAliasWithSpreadAlias(string,int,int?,string,CancellationToken)']/*" />
+        public virtual Response SpreadAliasWithSpreadAlias(string id, int top, int? age = null, string name = null, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(id, nameof(id));
-            Argument.AssertNotNull(name, nameof(name));
 
             RequestContext context = FromCancellationToken(cancellationToken);
-            SpreadAliasWithSpreadAliasRequest spreadAliasWithSpreadAliasRequest = new SpreadAliasWithSpreadAliasRequest(name, age);
+            SpreadAliasWithSpreadAliasRequest spreadAliasWithSpreadAliasRequest = new SpreadAliasWithSpreadAliasRequest()
+            {
+                Age = age,
+                Name = name
+            };
             Response response = SpreadAliasWithSpreadAlias(id, top, spreadAliasWithSpreadAliasRequest.ToRequestContent(), context);
             return response;
         }
@@ -572,7 +580,7 @@ namespace SpreadTypeSpec
         /// </item>
         /// <item>
         /// <description>
-        /// Please try the simpler <see cref="SpreadAliasWithSpreadAliasAsync(string,int,string,int,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// Please try the simpler <see cref="SpreadAliasWithSpreadAliasAsync(string,int,int?,string,CancellationToken)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>
@@ -615,7 +623,7 @@ namespace SpreadTypeSpec
         /// </item>
         /// <item>
         /// <description>
-        /// Please try the simpler <see cref="SpreadAliasWithSpreadAlias(string,int,string,int,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// Please try the simpler <see cref="SpreadAliasWithSpreadAlias(string,int,int?,string,CancellationToken)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>

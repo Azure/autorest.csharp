@@ -33,10 +33,10 @@ model Thing {
 }
 
 alias ThingAlias = {
-  @doc("name of the Thing")
-  name: string;
   @doc("age of the Thing")
-  age: int32;
+  age?: int32;
+  @doc("name of the Thing")
+  name?: string;
 };
 
 alias ThingAliasWithModel = {

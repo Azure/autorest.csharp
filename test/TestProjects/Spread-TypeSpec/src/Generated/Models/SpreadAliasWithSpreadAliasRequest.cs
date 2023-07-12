@@ -5,29 +5,28 @@
 
 #nullable disable
 
-using System;
-using Azure.Core;
-
 namespace SpreadTypeSpec.Models
 {
     /// <summary> The SpreadAliasWithSpreadAliasRequest. </summary>
     internal partial class SpreadAliasWithSpreadAliasRequest
     {
         /// <summary> Initializes a new instance of SpreadAliasWithSpreadAliasRequest. </summary>
-        /// <param name="name"> name of the Thing. </param>
-        /// <param name="age"> age of the Thing. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
-        public SpreadAliasWithSpreadAliasRequest(string name, int age)
+        public SpreadAliasWithSpreadAliasRequest()
         {
-            Argument.AssertNotNull(name, nameof(name));
-
-            Name = name;
-            Age = age;
         }
 
-        /// <summary> name of the Thing. </summary>
-        public string Name { get; }
+        /// <summary> Initializes a new instance of SpreadAliasWithSpreadAliasRequest. </summary>
+        /// <param name="age"> age of the Thing. </param>
+        /// <param name="name"> name of the Thing. </param>
+        internal SpreadAliasWithSpreadAliasRequest(int? age, string name)
+        {
+            Age = age;
+            Name = name;
+        }
+
         /// <summary> age of the Thing. </summary>
-        public int Age { get; }
+        public int? Age { get; set; }
+        /// <summary> name of the Thing. </summary>
+        public string Name { get; set; }
     }
 }

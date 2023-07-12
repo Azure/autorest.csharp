@@ -53,30 +53,30 @@
    "Properties": [
     {
      "$id": "8",
-     "Name": "name",
-     "SerializedName": "name",
-     "Description": "name of the Thing",
-     "Type": {
-      "$id": "9",
-      "Name": "string",
-      "Kind": "String",
-      "IsNullable": false
-     },
-     "IsRequired": true,
-     "IsReadOnly": false
-    },
-    {
-     "$id": "10",
      "Name": "age",
      "SerializedName": "age",
      "Description": "age of the Thing",
      "Type": {
-      "$id": "11",
+      "$id": "9",
       "Name": "int32",
       "Kind": "Int32",
       "IsNullable": false
      },
-     "IsRequired": true,
+     "IsRequired": false,
+     "IsReadOnly": false
+    },
+    {
+     "$id": "10",
+     "Name": "name",
+     "SerializedName": "name",
+     "Description": "name of the Thing",
+     "Type": {
+      "$id": "11",
+      "Name": "string",
+      "Kind": "String",
+      "IsNullable": false
+     },
+     "IsRequired": false,
      "IsReadOnly": false
     }
    ]
@@ -127,30 +127,30 @@
    "Properties": [
     {
      "$id": "18",
-     "Name": "name",
-     "SerializedName": "name",
-     "Description": "name of the Thing",
-     "Type": {
-      "$id": "19",
-      "Name": "string",
-      "Kind": "String",
-      "IsNullable": false
-     },
-     "IsRequired": true,
-     "IsReadOnly": false
-    },
-    {
-     "$id": "20",
      "Name": "age",
      "SerializedName": "age",
      "Description": "age of the Thing",
      "Type": {
-      "$id": "21",
+      "$id": "19",
       "Name": "int32",
       "Kind": "Int32",
       "IsNullable": false
      },
-     "IsRequired": true,
+     "IsRequired": false,
+     "IsReadOnly": false
+    },
+    {
+     "$id": "20",
+     "Name": "name",
+     "SerializedName": "name",
+     "Description": "name of the Thing",
+     "Type": {
+      "$id": "21",
+      "Name": "string",
+      "Kind": "String",
+      "IsNullable": false
+     },
+     "IsRequired": false,
      "IsReadOnly": false
     }
    ]

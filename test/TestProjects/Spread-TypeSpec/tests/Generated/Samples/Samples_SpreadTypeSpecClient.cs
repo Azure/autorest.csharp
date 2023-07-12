@@ -106,11 +106,7 @@ namespace SpreadTypeSpec.Samples
             var endpoint = new Uri("<https://my-service.azure.com>");
             var client = new SpreadTypeSpecClient(endpoint);
 
-            var data = new
-            {
-                name = "<name>",
-                age = 1234,
-            };
+            var data = new { };
 
             Response response = client.SpreadAlias(RequestContent.Create(data));
             Console.WriteLine(response.Status);
@@ -125,8 +121,8 @@ namespace SpreadTypeSpec.Samples
 
             var data = new
             {
-                name = "<name>",
                 age = 1234,
+                name = "<name>",
             };
 
             Response response = client.SpreadAlias(RequestContent.Create(data));
@@ -140,11 +136,7 @@ namespace SpreadTypeSpec.Samples
             var endpoint = new Uri("<https://my-service.azure.com>");
             var client = new SpreadTypeSpecClient(endpoint);
 
-            var data = new
-            {
-                name = "<name>",
-                age = 1234,
-            };
+            var data = new { };
 
             Response response = await client.SpreadAliasAsync(RequestContent.Create(data));
             Console.WriteLine(response.Status);
@@ -159,8 +151,8 @@ namespace SpreadTypeSpec.Samples
 
             var data = new
             {
-                name = "<name>",
                 age = 1234,
+                name = "<name>",
             };
 
             Response response = await client.SpreadAliasAsync(RequestContent.Create(data));
@@ -174,7 +166,7 @@ namespace SpreadTypeSpec.Samples
             var endpoint = new Uri("<https://my-service.azure.com>");
             var client = new SpreadTypeSpecClient(endpoint);
 
-            var result = await client.SpreadAliasAsync("<name>", 1234);
+            var result = await client.SpreadAliasAsync(1234, "<name>");
         }
 
         [Test]
@@ -341,11 +333,7 @@ namespace SpreadTypeSpec.Samples
             var endpoint = new Uri("<https://my-service.azure.com>");
             var client = new SpreadTypeSpecClient(endpoint);
 
-            var data = new
-            {
-                name = "<name>",
-                age = 1234,
-            };
+            var data = new { };
 
             Response response = client.SpreadAliasWithSpreadAlias("<id>", 1234, RequestContent.Create(data));
             Console.WriteLine(response.Status);
@@ -360,8 +348,8 @@ namespace SpreadTypeSpec.Samples
 
             var data = new
             {
-                name = "<name>",
                 age = 1234,
+                name = "<name>",
             };
 
             Response response = client.SpreadAliasWithSpreadAlias("<id>", 1234, RequestContent.Create(data));
@@ -375,11 +363,7 @@ namespace SpreadTypeSpec.Samples
             var endpoint = new Uri("<https://my-service.azure.com>");
             var client = new SpreadTypeSpecClient(endpoint);
 
-            var data = new
-            {
-                name = "<name>",
-                age = 1234,
-            };
+            var data = new { };
 
             Response response = await client.SpreadAliasWithSpreadAliasAsync("<id>", 1234, RequestContent.Create(data));
             Console.WriteLine(response.Status);
@@ -394,8 +378,8 @@ namespace SpreadTypeSpec.Samples
 
             var data = new
             {
-                name = "<name>",
                 age = 1234,
+                name = "<name>",
             };
 
             Response response = await client.SpreadAliasWithSpreadAliasAsync("<id>", 1234, RequestContent.Create(data));
@@ -409,7 +393,7 @@ namespace SpreadTypeSpec.Samples
             var endpoint = new Uri("<https://my-service.azure.com>");
             var client = new SpreadTypeSpecClient(endpoint);
 
-            var result = await client.SpreadAliasWithSpreadAliasAsync("<id>", 1234, "<name>", 1234);
+            var result = await client.SpreadAliasWithSpreadAliasAsync("<id>", 1234, 1234, "<name>");
         }
 
         [Test]

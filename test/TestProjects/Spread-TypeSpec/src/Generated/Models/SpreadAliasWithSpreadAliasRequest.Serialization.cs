@@ -15,10 +15,16 @@ namespace SpreadTypeSpec.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            writer.WritePropertyName("name"u8);
-            writer.WriteStringValue(Name);
-            writer.WritePropertyName("age"u8);
-            writer.WriteNumberValue(Age);
+            if (Optional.IsDefined(Age))
+            {
+                writer.WritePropertyName("age"u8);
+                writer.WriteNumberValue(Age.Value);
+            }
+            if (Optional.IsDefined(Name))
+            {
+                writer.WritePropertyName("name"u8);
+                writer.WriteStringValue(Name);
+            }
             writer.WriteEndObject();
         }
 
