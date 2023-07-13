@@ -169,62 +169,50 @@ namespace AutoRest.TestServer.Tests
         });
 
         [Test]
-        [Ignore("https://github.com/Azure/autorest.csharp/issues/3554")]
         public Task HttpRedirect300Get() => TestStatus(async (host) =>
             await new HttpRedirectsClient(Key, host, null).Get300Async(new()));
 
         [Test]
-        [Ignore("https://github.com/Azure/autorest.csharp/issues/3554")]
         public Task HttpRedirect300Head() => TestStatus(async (host) =>
             await new HttpRedirectsClient(Key, host, null).Head300Async());
 
         [Test]
-        [Ignore("https://github.com/Azure/autorest.csharp/issues/3554")]
         public Task HttpRedirect301Get() => TestStatus(async (host) =>
             await new HttpRedirectsClient(Key, host, null).Get301Async());
 
         [Test]
-        [Ignore("https://github.com/Azure/autorest.csharp/issues/3554")]
         public Task HttpRedirect302Get() => TestStatus(async (host) =>
             await new HttpRedirectsClient(Key, host, null).Get302Async());
 
         [Test]
-        [Ignore("https://github.com/Azure/autorest.csharp/issues/3554")]
         public Task HttpRedirect302Head() => TestStatus(async (host) =>
             await new HttpRedirectsClient(Key, host, null).Head302Async());
 
         [Test]
-        [Ignore("https://github.com/Azure/autorest.csharp/issues/3554")]
         public Task HttpRedirect307Delete() => TestStatus(async (host) =>
             await new HttpRedirectsClient(Key, host, null).Delete307Async(RequestContent.Create(new JsonData(true)), new()));
 
         [Test]
-        [Ignore("https://github.com/Azure/autorest.csharp/issues/3554")]
         public Task HttpRedirect307Get() => TestStatus(async (host) =>
             await new HttpRedirectsClient(Key, host, null).Get307Async());
 
         [Test]
-        [Ignore("https://github.com/Azure/autorest.csharp/issues/3554")]
         public Task HttpRedirect307Head() => TestStatus(async (host) =>
             await new HttpRedirectsClient(Key, host, null).Head307Async());
 
         [Test]
-        [Ignore("https://github.com/Azure/autorest.csharp/issues/3554")]
         public Task HttpRedirect307Options() => TestStatus(async (host) =>
             await new HttpRedirectsClient(Key, host, null).Options307Async());
 
         [Test]
-        [Ignore("https://github.com/Azure/autorest.csharp/issues/3554")]
         public Task HttpRedirect307Patch() => TestStatus(async (host) =>
             await new HttpRedirectsClient(Key, host, null).Patch307Async(RequestContent.Create(new JsonData(true)), new()));
 
         [Test]
-        [Ignore("https://github.com/Azure/autorest.csharp/issues/3554")]
         public Task HttpRedirect307Post() => TestStatus(async (host) =>
             await new HttpRedirectsClient(Key, host, null).Post307Async(RequestContent.Create(new JsonData(true)), new()));
 
         [Test]
-        [Ignore("https://github.com/Azure/autorest.csharp/issues/3554")]
         public Task HttpRedirect307Put() => TestStatus(async (host) =>
             await new HttpRedirectsClient(Key, host, null).Put307Async(RequestContent.Create(new JsonData(true)), new()));
 
