@@ -53,7 +53,8 @@ namespace AutoRest.CSharp.Output.Models
             {
                 return methods with
                 {
-                    Order = this is LroPagingOperationMethodsBuilder ? 2 : 1
+                    Order = this is LroPagingOperationMethodsBuilder ? 2 : 1,
+                    CreateNextPageMessageSignature = CreateNextPageMessageMethodSignature
                 };
             }
 
@@ -74,7 +75,8 @@ namespace AutoRest.CSharp.Output.Models
                 CreateNextPageMessage = new Method(CreateNextPageMessageMethodSignature, BuildCreateNextPageRequestMethodBody().AsStatement()),
                 NextPageConvenience = BuildLegacyConvenienceMethod(methodName, nextPageParameters, invokeCreateRequestMethod, _nextPageStatusCodeSwitchBuilder, false),
                 NextPageConvenienceAsync = BuildLegacyConvenienceMethod(methodName, nextPageParameters, invokeCreateRequestMethod, _nextPageStatusCodeSwitchBuilder, true),
-                Order = this is LroPagingOperationMethodsBuilder ? 2 : 1
+                Order = this is LroPagingOperationMethodsBuilder ? 2 : 1,
+                CreateNextPageMessageSignature = CreateNextPageMessageMethodSignature
             };
         }
 
