@@ -310,7 +310,10 @@ namespace AutoRest.CSharp.Output.Models
                         : parameter.SerializationFormat;
             }
 
-            var operationParameters = Operation.Parameters.Where(rp => !RestClientBuilder.IsIgnoredHeaderParameter(rp));
+            var operationParameters = Operation.Parameters
+                .Where(p => !RestClientBuilder.IsIgnoredHeaderParameter(p))
+                // change the type to constant so that it won't show up in the method signature
+                .Select(p => RequestHeader.IsRepeatabilityRequestHeader(p.NameInRequest) ? p with { Kind = InputOperationParameterKind.Constant } : p);
 
             var requiredPathParameters = new Dictionary<string, InputParameter>();
             var optionalPathParameters = new Dictionary<string, InputParameter>();
@@ -356,7 +359,8 @@ namespace AutoRest.CSharp.Output.Models
                         if (Operation.KeepClientDefaultValue && operationParameter.DefaultValue != null)
                         {
                             optionalRequestParameters.Add(operationParameter);
-                        } else
+                        }
+                        else
                         {
                             requiredRequestParameters.Add(operationParameter);
                         }

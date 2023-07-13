@@ -11,6 +11,7 @@ using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Output.Builders;
+using AutoRest.CSharp.Output.Models.Requests;
 using AutoRest.CSharp.Utilities;
 
 namespace AutoRest.CSharp.Output.Models.Shared
@@ -40,7 +41,7 @@ namespace AutoRest.CSharp.Output.Models.Shared
             var requestLocation = operationParameter.Location;
 
             bool keepClientDefaultValue = shouldKeepClientDefaultValue || operationParameter.Kind == InputOperationParameterKind.Constant || operationParameter.IsApiVersion || operationParameter.IsContentType || operationParameter.IsEndpoint;
-            var clientDefaultValue = operationParameter.DefaultValue != null ? BuilderHelpers.ParseConstant(operationParameter.DefaultValue.Value, typeFactory.CreateType(operationParameter.DefaultValue.Type)) : (Constant?)null;
+            Constant? clientDefaultValue = GetDefaultValue(operationParameter, typeFactory);
 
             var defaultValue = keepClientDefaultValue
                 ? clientDefaultValue
@@ -78,6 +79,18 @@ namespace AutoRest.CSharp.Output.Models.Shared
                 SkipUrlEncoding: skipUrlEncoding,
                 RequestLocation: requestLocation);
         }
+
+        private static Constant? GetDefaultValue(InputParameter operationParameter, TypeFactory typeFactory) => operationParameter switch
+        {
+            { DefaultValue: not null } => BuilderHelpers.ParseConstant(operationParameter.DefaultValue.Value, typeFactory.CreateType(operationParameter.DefaultValue.Type)),
+            { NameInRequest: var nameInRequest } when nameInRequest.Equals(RequestHeader.RepeatabilityRequestId, StringComparison.OrdinalIgnoreCase) =>
+                // Guid.NewGuid()
+                Constant.ExpressionOf($"{nameof(Guid)}.{nameof(Guid.NewGuid)}()", new CSharpType(typeof(string))),
+            { NameInRequest: var nameInRequest } when nameInRequest.Equals(RequestHeader.RepeatabilityFirstSent, StringComparison.OrdinalIgnoreCase) =>
+                // DateTimeOffset.Now
+                Constant.ExpressionOf($"{nameof(DateTimeOffset)}.{nameof(DateTimeOffset.Now)}", new CSharpType(typeof(DateTimeOffset))),
+            _ => (Constant?)null,
+        };
 
         public static string CreateDescription(InputParameter operationParameter, CSharpType type, IEnumerable<string>? values, Constant? defaultValue = null)
         {
@@ -146,7 +159,7 @@ namespace AutoRest.CSharp.Output.Models.Shared
             var inputType = TypeFactory.GetInputType(type);
             return new Parameter(
                 name,
-                CreateDescription(requestParameter, type, keepClientDefaultValue ? null :clientDefaultValue),
+                CreateDescription(requestParameter, type, keepClientDefaultValue ? null : clientDefaultValue),
                 inputType,
                 defaultValue,
                 validation,
