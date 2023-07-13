@@ -1,8 +1,8 @@
 {
-  "OutputFolder": ".",
-  "Namespace": "extensible_enums_swagger",
-  "LibraryName": "PetStoreInc",
-  "SharedSourceFolders": [
+  "output-folder": ".",
+  "namespace": "extensible_enums_swagger",
+  "library-name": "PetStoreInc",
+  "shared-source-folders": [
     "..\\..\\..\\..\\artifacts\\bin\\AutoRest.CSharp\\Debug\\net6.0\\Generator.Shared",
     "..\\..\\..\\..\\artifacts\\bin\\AutoRest.CSharp\\Debug\\net6.0\\Azure.Core.Shared"
   ],

@@ -45,7 +45,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             ExistingModelFactoryMethods.UnionWith(typeof(DataFactoryModelFactory).GetMethods(BindingFlags.Static | BindingFlags.Public).ToHashSet());
         }
 
-        public static ModelFactoryTypeProvider? TryCreate(string defaultClientName, string rootNamespaceName, IEnumerable<TypeProvider> models, SourceInputModel? sourceInputModel, string? namespaceOverride = null)
+        public static ModelFactoryTypeProvider? TryCreate(IEnumerable<TypeProvider> models, SourceInputModel? sourceInputModel)
         {
             if (!Configuration.GenerateModelFactory)
                 return null;
@@ -59,9 +59,28 @@ namespace AutoRest.CSharp.Output.Models.Types
                 return null;
             }
 
-            var defaultNamespace = namespaceOverride ?? GetDefaultModelNamespace(null, rootNamespaceName);
+            var defaultNamespace = GetDefaultNamespace();
+            var defaultRPName = GetRPName(defaultNamespace);
 
-            return new ModelFactoryTypeProvider(objectTypes, defaultClientName, defaultNamespace, sourceInputModel);
+            defaultNamespace = GetDefaultModelNamespace(null, defaultNamespace);
+
+            return new ModelFactoryTypeProvider(objectTypes, defaultRPName, defaultNamespace, sourceInputModel);
+        }
+
+        public static string GetRPName(string defaultNamespace)
+        {
+            // for mgmt plane packages, we always have the prefix `Arm` on the name of model factories, except for Azure.ResourceManager
+            var prefix = Configuration.AzureArm && !Configuration.MgmtConfiguration.IsArmCore ? "Arm" : string.Empty;
+            return $"{prefix}{ClientBuilder.GetRPName(defaultNamespace)}";
+        }
+
+        private static string GetDefaultNamespace()
+        {
+            // we have this because the Azure.ResourceManager package is generated using batch, which generates multiple times, and each time Configuration.Namespace has a different value.
+            if (Configuration.AzureArm && Configuration.MgmtConfiguration.IsArmCore)
+                return "Azure.ResourceManager";
+
+            return Configuration.Namespace;
         }
 
         public HashSet<MethodInfo> ExistingModelFactoryMethods { get; }
