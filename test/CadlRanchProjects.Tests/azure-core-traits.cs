@@ -26,7 +26,7 @@ namespace CadlRanchProjects.Tests
             Assert.AreEqual("test", response.UserActionResult);
         });
 
-        [TestCase]
+        [Test]
         public void RepeatabilityHeadersNotInMethodSignature()
         {
             foreach (var m in typeof(TraitsClient).GetMethods(BindingFlags.Public | BindingFlags.Instance).Where(m => m.Name.StartsWith("RepeatableAction")))
