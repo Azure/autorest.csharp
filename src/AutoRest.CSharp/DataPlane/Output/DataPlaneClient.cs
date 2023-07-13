@@ -59,7 +59,7 @@ namespace AutoRest.CSharp.Output.Models
                 return new LroDataPlaneLegacyMethodBuilder(name, fields, restClientReference, convenienceMethod, createRequestMethod, lroType);
             }
 
-            return new DataPlaneLegacyMethodBuilder(name, fields, restClientReference, createRequestMethod);
+            return new DataPlaneLegacyMethodBuilder(name, fields, restClientReference, convenienceMethod);
         }
 
         protected override string DefaultAccessibility => "public";

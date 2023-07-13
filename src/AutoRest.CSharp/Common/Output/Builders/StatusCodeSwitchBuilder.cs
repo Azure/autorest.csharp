@@ -243,7 +243,7 @@ namespace AutoRest.CSharp.Output.Models
         {
             return (responseType, headerModelType) switch
             {
-                (not null, not null) => new CSharpType(typeof(ResponseWithHeaders<>), responseType, headerModelType),
+                (not null, not null) => new CSharpType(typeof(ResponseWithHeaders<,>), responseType, headerModelType),
                 (not null, null) => new CSharpType(typeof(Response<>), responseType),
                 (null, not null) => new CSharpType(typeof(ResponseWithHeaders<>), headerModelType),
                 _ => new CSharpType(typeof(Response))

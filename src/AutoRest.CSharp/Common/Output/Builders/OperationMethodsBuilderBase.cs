@@ -100,7 +100,7 @@ namespace AutoRest.CSharp.Output.Models
             _summary = Operation.Summary != null ? BuilderHelpers.EscapeXmlDocDescription(Operation.Summary) : null;
             _description = BuilderHelpers.EscapeXmlDocDescription(Operation.Description);
             _protocolAccessibility = Operation.GenerateProtocolMethod ? GetAccessibility(Operation.Accessibility) : MethodSignatureModifiers.Internal;
-            ConvenienceModifiers = GetAccessibility(Operation.Accessibility) | MethodSignatureModifiers.Virtual;
+            ConvenienceModifiers = GetAccessibility(Operation.Accessibility);
         }
 
         public RestClientOperationMethods BuildDpg()
@@ -152,11 +152,10 @@ namespace AutoRest.CSharp.Output.Models
 
         public virtual RestClientOperationMethods BuildLegacy()
         {
-            var createRequestMethod = BuildCreateRequestMethod(_statusCodeSwitchBuilder.ResponseClassifier);
             return new RestClientOperationMethods
             (
-                createRequestMethod,
-                null,
+                BuildCreateRequestMethod(_statusCodeSwitchBuilder.ResponseClassifier),
+                BuildCreateNextPageMessageMethod(_statusCodeSwitchBuilder.ResponseClassifier),
                 null,
                 null,
                 BuildLegacyConvenienceMethod(ProtocolMethodName, ConvenienceMethodParameters, InvokeCreateRequestMethod(), _statusCodeSwitchBuilder, false),
@@ -655,7 +654,7 @@ namespace AutoRest.CSharp.Output.Models
 
         private Method BuildConvenienceMethod(string methodName, bool async)
         {
-            var signature = CreateMethodSignature(methodName, ConvenienceModifiers, ConvenienceMethodParameters, ConvenienceMethodReturnType);
+            var signature = CreateMethodSignature(methodName, ConvenienceModifiers | MethodSignatureModifiers.Virtual, ConvenienceMethodParameters, ConvenienceMethodReturnType);
             var body = new[]
             {
                 new ParameterValidationBlock(signature.Parameters),
@@ -666,7 +665,7 @@ namespace AutoRest.CSharp.Output.Models
 
         protected Method BuildLegacyConvenienceMethod(string methodName, IReadOnlyList<Parameter> parameters, HttpMessageExpression invokeCreateRequestMethod, StatusCodeSwitchBuilder statusCodeSwitchBuilder, bool async)
         {
-            var signature = CreateMethodSignature(methodName, MethodSignatureModifiers.Public, parameters, statusCodeSwitchBuilder.RestClientConvenienceReturnType);
+            var signature = CreateMethodSignature(methodName, ConvenienceModifiers, parameters, statusCodeSwitchBuilder.RestClientConvenienceReturnType);
             var body = new[]
             {
                 new ParameterValidationBlock(signature.Parameters, IsLegacy: !Configuration.AzureArm),

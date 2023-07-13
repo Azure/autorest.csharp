@@ -49,7 +49,7 @@ namespace AutoRest.CSharp.Output.Models
         {
             var methods = base.BuildLegacy();
 
-            if (CreateNextPageMessageMethodSignature is null || Paging is not { NextLinkOperation: null, SelfNextLink: false })
+            if (methods.CreateNextPageMessage is null)
             {
                 return methods with
                 {
@@ -61,18 +61,15 @@ namespace AutoRest.CSharp.Output.Models
             var nextPageUrlParameter = new Parameter("nextLink", "The URL to the next page of results.", typeof(string), DefaultValue: null, Validation.AssertNotNull, null);
 
             var nextPageParameters = ConvenienceMethodParameters
-
-
                 .Where(p => p.Name != nextPageUrlParameter.Name)
                 .Prepend(nextPageUrlParameter)
                 .ToArray();
 
             var methodName = ProtocolMethodName + "NextPage";
-            var invokeCreateRequestMethod = InvokeCreateRequestMethod(CreateNextPageMessageMethodSignature.Name, CreateNextPageMessageMethodSignature.Parameters);
+            var invokeCreateRequestMethod = InvokeCreateRequestMethod(methods.CreateNextPageMessage.Signature.Name, methods.CreateNextPageMessage.Signature.Parameters);
 
             return methods with
             {
-                CreateNextPageMessage = new Method(CreateNextPageMessageMethodSignature, BuildCreateNextPageRequestMethodBody().AsStatement()),
                 NextPageConvenience = BuildLegacyConvenienceMethod(methodName, nextPageParameters, invokeCreateRequestMethod, _nextPageStatusCodeSwitchBuilder, false),
                 NextPageConvenienceAsync = BuildLegacyConvenienceMethod(methodName, nextPageParameters, invokeCreateRequestMethod, _nextPageStatusCodeSwitchBuilder, true),
                 Order = this is LroPagingOperationMethodsBuilder ? 2 : 1,
