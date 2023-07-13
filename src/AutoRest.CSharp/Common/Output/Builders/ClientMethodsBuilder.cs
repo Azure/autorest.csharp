@@ -66,7 +66,6 @@ namespace AutoRest.CSharp.Output.Models
 
             foreach (var (operation, parameters) in operationParameters)
             {
-                var lroType = (_library as DataPlaneOutputLibrary)?.FindLongRunningOperation(operation)?.Type;
                 var statusCodeSwitchBuilder = operation.HttpMethod == RequestMethod.Head && Configuration.HeadAsBoolean
                     ? StatusCodeSwitchBuilder.CreateHeadAsBooleanOperationSwitch()
                     : StatusCodeSwitchBuilder.CreateSwitch(operation, _library, _typeFactory);
@@ -88,12 +87,12 @@ namespace AutoRest.CSharp.Output.Models
                     var pagingParameters = new ClientPagingMethodParameters(parameters, createNextPageMessageMethodParameters);
 
                     yield return operation.LongRunning is { } longRunning
-                        ? new LroPagingOperationMethodsBuilder(args, paging, pagingParameters, longRunning, lroType)
+                        ? new LroPagingOperationMethodsBuilder(args, paging, pagingParameters, longRunning)
                         : new PagingOperationMethodsBuilder(args, paging, pagingParameters);
                 }
                 else if (operation.LongRunning is { } longRunning)
                 {
-                    yield return new LroOperationMethodsBuilder(args, parameters, longRunning, lroType);
+                    yield return new LroOperationMethodsBuilder(args, parameters, longRunning);
                 }
                 else if (operation.HttpMethod == RequestMethod.Head && Configuration.HeadAsBoolean)
                 {

@@ -580,9 +580,9 @@ namespace AutoRest.CSharp.Mgmt.Models
 
         private static PagingMethod? GetPagingMethod(Operation operation)
         {
-            var legacyMethods = MgmtContext.Library.GetOperationMethods(operation);
+            var methods = MgmtContext.Library.GetOperationMethods(operation);
             return operation.IsListMethod(out var itemType, out var valuePropertyName, out var nextLinkPropertyName)
-                ? new PagingMethod(legacyMethods.CreateRequest.Signature.Name, legacyMethods.CreateNextPageRequest?.Signature.Name, nextLinkPropertyName, valuePropertyName, itemType)
+                ? new PagingMethod(methods.CreateRequest.Signature.Name, methods.CreateNextPageMessageSignature?.Name, nextLinkPropertyName, valuePropertyName, itemType)
                 : null;
         }
 

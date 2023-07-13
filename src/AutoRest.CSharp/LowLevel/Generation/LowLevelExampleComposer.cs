@@ -47,7 +47,7 @@ namespace AutoRest.CSharp.Generation.Writers
             ClientInvocationChain = GetClientInvocationChain(client);
         }
 
-        public FormattableString ComposeProtocol(LowLevelClientMethod clientMethod, MethodSignature signature, bool async)
+        public FormattableString ComposeProtocol(RestClientOperationMethods operationMethods, MethodSignature signature, bool async)
         {
             //skip non public protocol methods
             if ((signature.Modifiers & MethodSignatureModifiers.Public) == 0)
@@ -65,34 +65,34 @@ namespace AutoRest.CSharp.Generation.Writers
             if (!_client.IsSubClient && _client.GetEffectiveCtor() is null)
                 return $"";
 
-            var requestBodyType = clientMethod.RequestBodyType;
+            var requestBodyType = operationMethods.RequestBodyType;
             var builder = new StringBuilder();
 
             if (HasNoCustomInput(signature.Parameters)) // client.GetAllItems(RequestContext context = null)
             {
-                ComposeProtocolExampleWithoutParameter(clientMethod, signature, async, true, builder);
+                ComposeProtocolExampleWithoutParameter(operationMethods, signature, async, true, builder);
             }
             else if (HasOptionalInputValue(signature.Parameters, requestBodyType, out var requestModel))
             {
                 if (signature.Parameters.All(p => p.IsOptionalInSignature))
                 {
-                    ComposeProtocolExampleWithoutParameter(clientMethod, signature, async, false, builder);
+                    ComposeProtocolExampleWithoutParameter(operationMethods, signature, async, false, builder);
                 }
                 else if (requestBodyType != null && (requestModel == null || HasRequiredAndWritablePropertyFromTop(requestModel)))
                 {
-                    ComposeProtocolExampleWithParametersAndRequestContent(clientMethod, signature, async, false, builder);
+                    ComposeProtocolExampleWithParametersAndRequestContent(operationMethods, signature, async, false, builder);
                 }
                 else
                 {
-                    ComposeProtocolExampleWithoutRequestContent(clientMethod, signature, async, builder);
+                    ComposeProtocolExampleWithoutRequestContent(operationMethods, signature, async, builder);
                 }
                 builder.AppendLine();
-                ComposeProtocolExampleWithParametersAndRequestContent(clientMethod, signature, async, true, builder);
+                ComposeProtocolExampleWithParametersAndRequestContent(operationMethods, signature, async, true, builder);
             }
             else
             {
                 // client.GetAllItems(int a, RequestContext context = null)
-                ComposeProtocolExampleWithRequiredParameters(clientMethod, signature, async, builder);
+                ComposeProtocolExampleWithRequiredParameters(operationMethods, signature, async, builder);
             }
 
             return $"{builder.ToString()}";
@@ -142,17 +142,17 @@ namespace AutoRest.CSharp.Generation.Writers
         private static bool HasNonBodyCustomParameter(IReadOnlyList<Parameter> parameters)
             => parameters.Any(p => p.RequestLocation != RequestLocation.Body && !p.Equals(KnownParameters.RequestContext));
 
-        private void ComposeProtocolExampleWithoutRequestContent(LowLevelClientMethod clientMethod, MethodSignature signature, bool async, StringBuilder builder)
+        private void ComposeProtocolExampleWithoutRequestContent(RestClientOperationMethods operationMethods, MethodSignature signature, bool async, StringBuilder builder)
         {
             var hasNonBodyParameter = HasNonBodyCustomParameter(signature.Parameters);
-            builder.AppendLine($"This sample shows how to call {signature.Name}{(hasNonBodyParameter ? " with required parameters" : "")}{(clientMethod.ResponseType is not null ? " and parse the result" : "")}.");
-            ComposeProtocolWrappedCodeSnippet(clientMethod, signature, async, false, builder);
+            builder.AppendLine($"This sample shows how to call {signature.Name}{(hasNonBodyParameter ? " with required parameters" : "")}{(operationMethods.ResponseType is not null ? " and parse the result" : "")}.");
+            ComposeProtocolWrappedCodeSnippet(operationMethods, signature, async, false, builder);
         }
 
-        private void ComposeProtocolExampleWithRequiredParameters(LowLevelClientMethod clientMethod, MethodSignature signature, bool async, StringBuilder builder)
+        private void ComposeProtocolExampleWithRequiredParameters(RestClientOperationMethods operationMethods, MethodSignature signature, bool async, StringBuilder builder)
         {
-            builder.AppendLine($"This sample shows how to call {signature.Name} with required {GenerateParameterAndRequestContentDescription(signature.Parameters)}{(clientMethod.ResponseType is not null ? " and parse the result" : "")}.");
-            ComposeProtocolWrappedCodeSnippet(clientMethod, signature, async, true, builder);
+            builder.AppendLine($"This sample shows how to call {signature.Name} with required {GenerateParameterAndRequestContentDescription(signature.Parameters)}{(operationMethods.ResponseType is not null ? " and parse the result" : "")}.");
+            ComposeProtocolWrappedCodeSnippet(operationMethods, signature, async, true, builder);
         }
 
         /// <summary>
@@ -216,10 +216,10 @@ namespace AutoRest.CSharp.Generation.Writers
             return false;
         }
 
-        private void ComposeProtocolExampleWithParametersAndRequestContent(LowLevelClientMethod clientMethod, MethodSignature signature, bool async, bool allParameters, StringBuilder builder)
+        private void ComposeProtocolExampleWithParametersAndRequestContent(RestClientOperationMethods operationMethods, MethodSignature signature, bool async, bool allParameters, StringBuilder builder)
         {
-            builder.AppendLine($"This sample shows how to call {signature.Name} with {(allParameters ? "all" : "required")} {GenerateParameterAndRequestContentDescription(signature.Parameters)}{(clientMethod.ResponseType is not null ? ", and how to parse the result" : "")}.");
-            ComposeProtocolWrappedCodeSnippet(clientMethod, signature, async, allParameters, builder);
+            builder.AppendLine($"This sample shows how to call {signature.Name} with {(allParameters ? "all" : "required")} {GenerateParameterAndRequestContentDescription(signature.Parameters)}{(operationMethods.ResponseType is not null ? ", and how to parse the result" : "")}.");
+            ComposeProtocolWrappedCodeSnippet(operationMethods, signature, async, allParameters, builder);
         }
 
         private string GenerateParameterAndRequestContentDescription(IReadOnlyList<Parameter> parameters)
@@ -238,15 +238,15 @@ namespace AutoRest.CSharp.Generation.Writers
             return "request content";
         }
 
-        private void ComposeProtocolExampleWithoutParameter(LowLevelClientMethod clientMethod, MethodSignature signature, bool async, bool allParameters, StringBuilder builder)
+        private void ComposeProtocolExampleWithoutParameter(RestClientOperationMethods operationMethods, MethodSignature signature, bool async, bool allParameters, StringBuilder builder)
         {
-            builder.AppendLine($"This sample shows how to call {signature.Name}{(clientMethod.ResponseType is not null ? " and parse the result" : "")}.");
-            ComposeProtocolWrappedCodeSnippet(clientMethod, signature, async, allParameters, builder);
+            builder.AppendLine($"This sample shows how to call {signature.Name}{(operationMethods.ResponseType is not null ? " and parse the result" : "")}.");
+            ComposeProtocolWrappedCodeSnippet(operationMethods, signature, async, allParameters, builder);
         }
 
-        private void ComposeProtocolWrappedCodeSnippet(LowLevelClientMethod clientMethod, MethodSignature signature, bool async, bool allParameters, StringBuilder builder)
+        private void ComposeProtocolWrappedCodeSnippet(RestClientOperationMethods operationMethods, MethodSignature signature, bool async, bool allParameters, StringBuilder builder)
         {
-            var statement = ComposeProtocolCodeSnippet(clientMethod, signature, allParameters, async).AsStatement();
+            var statement = ComposeProtocolCodeSnippet(operationMethods, signature, allParameters, async).AsStatement();
             WriteCodeSnippet(builder, statement);
         }
 
@@ -305,15 +305,15 @@ namespace AutoRest.CSharp.Generation.Writers
             }
         }
 
-        internal IEnumerable<MethodBodyStatement> ComposeProtocolCodeSnippet(LowLevelClientMethod restClientMethod, MethodSignature signature, bool allParameters, bool async)
+        internal IEnumerable<MethodBodyStatement> ComposeProtocolCodeSnippet(RestClientOperationMethods operationMethods, MethodSignature signature, bool allParameters, bool async)
         {
             yield return ComposeGetClient(out var client);
             yield return EmptyLine;
 
             ValueExpression? data = null;
-            if (restClientMethod.RequestBodyType != null)
+            if (operationMethods.RequestBodyType != null)
             {
-                yield return Var("data", ComposeProtocolCSharpTypeInstance(allParameters, GetTypeSerialization(restClientMethod.RequestBodyType), null, new HashSet<ObjectType>()), out data);
+                yield return Var("data", ComposeProtocolCSharpTypeInstance(allParameters, GetTypeSerialization(operationMethods.RequestBodyType), null, new HashSet<ObjectType>()), out data);
                 yield return EmptyLine;
             }
 
@@ -324,8 +324,8 @@ namespace AutoRest.CSharp.Generation.Writers
                 .Select(p => p.RequestLocation == RequestLocation.Body ? RequestContentExpression.Create(data!) : MockParameterValue(p))
                 .ToList();
 
-            var responseType = restClientMethod.ResponseType;
-            var pageItemType = restClientMethod.PageItemType;
+            var responseType = operationMethods.ResponseType;
+            var pageItemType = operationMethods.PageItemType;
             var isLongRunning = signature.ReturnType is not null && (TypeFactory.IsOperation(signature.ReturnType) || TypeFactory.IsTaskOfOperation(signature.ReturnType));
             if (isLongRunning)
             {

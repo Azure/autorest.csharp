@@ -19,10 +19,7 @@ namespace AutoRest.CSharp.Output.Models
 
         protected override bool ShouldConvenienceMethodGenerated() => ResponseType is not null || base.ShouldConvenienceMethodGenerated();
 
-        protected override IEnumerable<Method> BuildCreateRequestMethods(ResponseClassifierType responseClassifierType)
-        {
-            yield return BuildCreateRequestMethod(responseClassifierType);
-        }
+        protected override Method? BuildCreateNextPageMessageMethod(ResponseClassifierType responseClassifierType) => null;
 
         protected IEnumerable<MethodBodyStatement> AddProtocolMethodArguments(List<ValueExpression> protocolMethodArguments)
         {

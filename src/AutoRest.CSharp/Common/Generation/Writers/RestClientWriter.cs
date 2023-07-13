@@ -3,6 +3,7 @@
 
 using System.Collections.Generic;
 using System.Linq;
+using AutoRest.CSharp.Common.Output.Models;
 using AutoRest.CSharp.Common.Output.Models.Responses;
 using AutoRest.CSharp.Output.Models;
 using Parameter = AutoRest.CSharp.Output.Models.Shared.Parameter;
@@ -21,35 +22,29 @@ namespace AutoRest.CSharp.Generation.Writers
                     writer.WriteFieldDeclarations(restClient.Fields);
                     WriteClientCtor(writer, restClient);
 
-                    foreach (var legacyMethod in restClient.Methods)
+                    foreach (var methods in restClient.Methods)
                     {
-                        writer.WriteMethod(legacyMethod.CreateRequest);
+                        writer.WriteMethod(methods.CreateRequest);
 
-                        foreach (var method in legacyMethod.RestClientConvenience)
-                        {
-                            WriteDocumentation(writer, method.Signature);
-                            writer.WriteMethod(method);
-                        }
+                        WriteMethod(writer, methods.ConvenienceAsync);
+                        WriteMethod(writer, methods.Convenience);
 
-                        if (restClient.ProtocolMethods?.FirstOrDefault(m => m.Operation == legacyMethod.Operation) is {} protocolMethod)
+                        if (restClient.ProtocolMethods?.FirstOrDefault(m => m.Operation == methods.Operation) is {} protocolMethod)
                         {
                             LowLevelClientWriter.WriteProtocolMethods(writer, restClient.Fields, protocolMethod);
                             responseClassifierTypes.Add(protocolMethod.ResponseClassifier);
                         }
                     }
 
-                    foreach (var legacyMethod in restClient.Methods)
+                    foreach (var methods in restClient.Methods)
                     {
-                        if (legacyMethod.CreateNextPageRequest is {} nextPageMethod)
+                        if (methods.CreateNextPageMessage is {} nextPageMethod)
                         {
                             writer.WriteMethod(nextPageMethod);
-
-                            foreach (var method in legacyMethod.RestClientNextPageConvenience)
-                            {
-                                WriteDocumentation(writer, method.Signature);
-                                writer.WriteMethod(method);
-                            }
                         }
+
+                        WriteMethod(writer, methods.NextPageConvenienceAsync);
+                        WriteMethod(writer, methods.NextPageConvenience);
                     }
 
                     LowLevelClientWriter.WriteResponseClassifierMethod(writer, responseClassifierTypes.Distinct());
@@ -75,8 +70,14 @@ namespace AutoRest.CSharp.Generation.Writers
             writer.Line();
         }
 
-        private static void WriteDocumentation(CodeWriter writer, MethodSignatureBase signature)
+        private static void WriteMethod(CodeWriter writer, Method? method)
         {
+            if (method is null)
+            {
+                return;
+            }
+
+            var signature = method.Signature;
             writer.WriteXmlDocumentationSummary($"{signature.SummaryText}")
                 .WriteXmlDocumentationParameters(signature.Parameters)
                 .WriteXmlDocumentationRequiredParametersException(signature.Parameters)
@@ -86,6 +87,8 @@ namespace AutoRest.CSharp.Generation.Writers
             {
                 writer.WriteXmlDocumentationReturns(returnDescription);
             }
+
+            writer.WriteMethod(method);
         }
     }
 }

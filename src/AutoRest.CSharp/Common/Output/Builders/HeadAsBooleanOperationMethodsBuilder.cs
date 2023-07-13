@@ -17,19 +17,10 @@ namespace AutoRest.CSharp.Output.Models
 
         }
 
-        protected override Method BuildLegacyConvenienceMethod(bool async)
-        {
-            var signature = CreateMethodSignature(ProtocolMethodName, ConvenienceModifiers, ConvenienceMethodParameters, ConvenienceMethodReturnType);
-            var arguments = ConvenienceMethodParameters.Select(p => new ParameterReference(p)).ToList();
-            var body = WrapInDiagnosticScopeLegacy(ProtocolMethodName, Return(InvokeProtocolMethod(RestClient, arguments, async)));
-
-            return new Method(signature.WithAsync(async), body);
-        }
-
         protected override MethodBodyStatement CreateProtocolMethodBody(bool async)
         {
             return WrapInDiagnosticScope(ProtocolMethodName,
-                Declare("message", InvokeCreateRequestMethod(null), out var message),
+                Declare("message", InvokeCreateRequestMethod(), out var message),
                 Return(PipelineField.ProcessHeadAsBoolMessage(message, ClientDiagnosticsProperty, CreateMessageRequestContext, async))
             );
         }

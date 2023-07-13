@@ -1,6 +1,7 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
+using AutoRest.CSharp.Common.Output.Models;
 using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Mgmt.Output;
 using AutoRest.CSharp.Output.Models;
@@ -23,33 +24,39 @@ namespace AutoRest.CSharp.Mgmt.Generation
                     writer.WriteFieldDeclarations(restClient.Fields);
                     WriteClientCtor(writer, restClient);
 
-                    foreach (var legacyMethod in restClient.Methods)
+                    foreach (var methods in restClient.Methods)
                     {
-                        writer.WriteMethod(legacyMethod.CreateRequest);
-                        foreach (var method in legacyMethod.RestClientConvenience)
-                        {
-                            writer.WriteXmlDocumentationSummary($"{method.Signature.Description}");
-                            writer.WriteMethodDocumentationSignature(method.Signature);
-                            writer.WriteMethod(method);
-                        }
+                        writer.WriteMethod(methods.CreateRequest);
+
+                        WriteMethod(writer, methods.ConvenienceAsync);
+                        WriteMethod(writer, methods.Convenience);
                     }
 
-                    foreach (var legacyMethod in restClient.Methods)
+                    foreach (var methods in restClient.Methods)
                     {
-                        if (legacyMethod.CreateNextPageRequest is {} nextPageMethod)
+                        if (methods.CreateNextPageMessage is {} nextPageMethod)
                         {
                             writer.WriteMethod(nextPageMethod);
-
-                            foreach (var method in legacyMethod.RestClientNextPageConvenience)
-                            {
-                                writer.WriteXmlDocumentationSummary($"{method.Signature.Description}");
-                                writer.WriteMethodDocumentationSignature(method.Signature);
-                                writer.WriteMethod(method);
-                            }
                         }
+
+                        WriteMethod(writer, methods.NextPageConvenienceAsync);
+                        WriteMethod(writer, methods.NextPageConvenience);
                     }
                 }
             }
+        }
+
+        private static void WriteMethod(CodeWriter writer, Method? method)
+        {
+            if (method is null)
+            {
+                return;
+            }
+
+            writer.WriteXmlDocumentationSummary($"{method.Signature.Description}");
+            writer.WriteMethodDocumentationSignature(method.Signature);
+            writer.WriteMethod(method);
+
         }
 
         private static void WriteClientCtor(CodeWriter writer, MgmtRestClient restClient)

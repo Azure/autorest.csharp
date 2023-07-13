@@ -31,9 +31,9 @@ namespace AutoRest.CSharp.Generation.Writers
                     WriteClientFields(writer, client.RestClient, true);
                     WriteClientCtors(writer, client, library);
 
-                    foreach (var pagingMethod in client.RestClient.Methods.OrderBy(m => m.Order).SelectMany(m => m.Convenience))
+                    foreach (var method in client.Methods)
                     {
-                        WriteMethod(writer, pagingMethod);
+                        WriteMethod(writer, method);
                     }
                 }
             }

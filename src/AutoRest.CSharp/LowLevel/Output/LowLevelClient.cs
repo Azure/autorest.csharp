@@ -36,10 +36,8 @@ namespace AutoRest.CSharp.Output.Models
         public ConstructorSignature SubClientInternalConstructor => _subClientInternalConstructor ??= BuildSubClientInternalConstructor();
 
         public IReadOnlyList<LowLevelClient> SubClients { get; init; }
-        public IReadOnlyList<Method> RequestMethods { get; }
-        public IReadOnlyList<Method> RequestNextPageMethods { get; }
         public IReadOnlyList<ResponseClassifierType> ResponseClassifierTypes { get; }
-        public IReadOnlyList<LowLevelClientMethod> ClientMethods { get; }
+        public IReadOnlyList<RestClientOperationMethods> OperationMethods { get; }
         public LowLevelClient? ParentClient;
         public LowLevelSubClientFactoryMethod? FactoryMethod { get; }
 
@@ -67,19 +65,16 @@ namespace AutoRest.CSharp.Output.Models
 
             (PrimaryConstructors, SecondaryConstructors) = BuildPublicConstructors(Parameters);
 
-            var methods = new ClientMethodsBuilder(operations, null, sourceInputModel, typeFactory, false, false).Build(null, Fields, Declaration.Name, Declaration.Namespace).Select(b => b.BuildDpg()).ToList();
+            var methodsBuilder = new ClientMethodsBuilder(operations, null, sourceInputModel, typeFactory, false, false)
+                .Build(null, Fields, Declaration.Name, Declaration.Namespace)
+                .Select(b => b.BuildDpg()).ToList();
 
             // Temporary sorting to minimize amount of changes in generated code.
-            ClientMethods = methods
+            OperationMethods = methodsBuilder
                 .OrderBy(b => b.Order)
                 .ToArray();
 
-            RequestMethods = methods.Select(m => m.CreateRequest[0]).ToArray();
-
-            // Temporary sorting to minimize amount of changes in generated code.
-            RequestNextPageMethods = methods.Where(m => m.CreateRequest.Count == 2).Select(m => m.CreateRequest[1]).ToArray();
-
-            ResponseClassifierTypes = methods.Select(rm => rm.ResponseClassifier).Distinct().ToArray();
+            ResponseClassifierTypes = methodsBuilder.Select(rm => rm.ResponseClassifier).Distinct().ToArray();
 
             FactoryMethod = parentClient != null ? BuildFactoryMethod(parentClient.Fields, libraryName) : null;
 

@@ -27,7 +27,7 @@ namespace AutoRest.CSharp.Output.Models
         protected override MethodBodyStatement CreateProtocolMethodBody(bool async)
         {
             return WrapInDiagnosticScope(ProtocolMethodName,
-                Declare("message", InvokeCreateRequestMethod(null), out var message),
+                Declare("message", InvokeCreateRequestMethod(), out var message),
                 Return(PipelineField.ProcessMessage(message, CreateMessageRequestContext, null, async))
             );
         }
@@ -37,15 +37,6 @@ namespace AutoRest.CSharp.Output.Models
             return methodName != ProtocolMethodName
                 ? WrapInDiagnosticScope(methodName, CreateConvenienceMethodLogic(async).AsStatement())
                 : CreateConvenienceMethodLogic(async).AsStatement();
-        }
-
-        protected override Method BuildLegacyConvenienceMethod(bool async)
-        {
-            var signature = CreateMethodSignature(ProtocolMethodName, ConvenienceModifiers, ConvenienceMethodParameters, ConvenienceMethodReturnType);
-            var arguments = ConvenienceMethodParameters.Select(p => new ParameterReference(p)).ToList();
-            var body = WrapInDiagnosticScopeLegacy(ProtocolMethodName, Return(InvokeProtocolMethod(RestClient, arguments, async)));
-
-            return new Method(signature.WithAsync(async), body);
         }
 
         private IEnumerable<MethodBodyStatement> CreateConvenienceMethodLogic(bool async)

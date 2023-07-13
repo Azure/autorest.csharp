@@ -10,7 +10,6 @@ using AutoRest.CSharp.Common.Output.Models.KnownCodeBlocks;
 using AutoRest.CSharp.Common.Output.Models.Statements;
 using AutoRest.CSharp.Common.Output.Models.Types;
 using AutoRest.CSharp.Common.Output.Models.ValueExpressions;
-using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Output.Models.Shared;
 using Azure.Core;
 using static AutoRest.CSharp.Common.Output.Models.Snippets;
@@ -20,18 +19,16 @@ namespace AutoRest.CSharp.Output.Models
     internal class LroOperationMethodsBuilder : NonPagingOperationMethodsBuilderBase
     {
         private readonly OperationLongRunning _longRunning;
-        private readonly CSharpType? _lroType;
 
-        public LroOperationMethodsBuilder(OperationMethodsBuilderBaseArgs args, ClientMethodParameters clientMethodParameters, OperationLongRunning longRunning, CSharpType? lroType)
+        public LroOperationMethodsBuilder(OperationMethodsBuilderBaseArgs args, ClientMethodParameters clientMethodParameters, OperationLongRunning longRunning)
             : base(args, clientMethodParameters)
         {
             _longRunning = longRunning;
-            _lroType = lroType;
         }
 
         protected override MethodBodyStatement CreateProtocolMethodBody(bool async)
             => WrapInDiagnosticScope(ProtocolMethodName,
-                Declare("message", InvokeCreateRequestMethod(null), out var message),
+                Declare("message", InvokeCreateRequestMethod(), out var message),
                 Return(InvokeProtocolOperationHelpersProcessMessageMethod(CreateScopeName(ProtocolMethodName), message, _longRunning.FinalStateVia, async))
             );
 
@@ -60,29 +57,6 @@ namespace AutoRest.CSharp.Output.Models
             return methodName != ProtocolMethodName
                 ? WrapInDiagnosticScope(methodName, CreateConvenienceMethodLogic(methodName, async).AsStatement())
                 : CreateConvenienceMethodLogic(methodName, async).AsStatement();
-        }
-
-        protected override Method BuildLegacyConvenienceMethod(bool async)
-        {
-            if (_lroType is null)
-            {
-                throw new InvalidOperationException();
-            }
-
-            var methodName = $"Start{ProtocolMethodName}";
-            var arguments = ConvenienceMethodParameters.Select(p => new ParameterReference(p)).ToList();
-
-            var signature = CreateMethodSignature(methodName, ConvenienceModifiers, ConvenienceMethodParameters, _lroType);
-            var body = new[]
-            {
-                new ParameterValidationBlock(ConvenienceMethodParameters, true),
-                WrapInDiagnosticScopeLegacy(methodName,
-                    Var("originalResponse", InvokeProtocolMethod(RestClient, arguments, async), out var response),
-                    Return(New.Instance(_lroType, new MemberExpression(null, $"_{KnownParameters.ClientDiagnostics.Name}"), PipelineField, InvokeCreateRequestMethod(RestClient).Request, response))
-                )
-            };
-
-            return new Method(signature.WithAsync(async), body);
         }
 
         private IEnumerable<MethodBodyStatement> CreateConvenienceMethodLogic(string methodName, bool async)

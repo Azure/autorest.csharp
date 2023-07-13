@@ -60,7 +60,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
         /// </summary>
         private CachedDictionary<RequestPath, ResourceObjectAssociation> RequestPathToResources { get; }
 
-        private CachedDictionary<Operation, LegacyMethods> OperationMethods { get; }
+        private CachedDictionary<Operation, RestClientOperationMethods> OperationMethods { get; }
 
         private Dictionary<Schema, TypeProvider> AllSchemaMap { get; }
 
@@ -111,7 +111,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
             RawRequestPathToRestClient = new CachedDictionary<string, HashSet<MgmtRestClient>>(EnsureRestClients);
             RawRequestPathToResourceData = new CachedDictionary<string, ResourceData>(EnsureRequestPathToResourceData);
             RequestPathToResources = new CachedDictionary<RequestPath, ResourceObjectAssociation>(EnsureRequestPathToResourcesMap);
-            OperationMethods = new CachedDictionary<Operation, LegacyMethods>(EnsureRestClientMethods);
+            OperationMethods = new CachedDictionary<Operation, RestClientOperationMethods>(EnsureRestClientMethods);
             ResourceSchemaMap = new CachedDictionary<Schema, TypeProvider>(EnsureResourceSchemaMap);
             SchemaMap = new CachedDictionary<Schema, TypeProvider>(EnsureSchemaMap);
             AllEnumMap = new CachedDictionary<InputEnumType, EnumType>(EnsureAllEnumMap);
@@ -320,7 +320,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
 
         public OperationSet GetOperationSet(string requestPath) => RawRequestPathToOperationSets[requestPath];
 
-        public LegacyMethods GetOperationMethods(Operation operation)
+        public RestClientOperationMethods GetOperationMethods(Operation operation)
         {
             if (OperationMethods.TryGetValue(operation, out var legacyMethods))
             {
@@ -330,24 +330,24 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
         }
 
         public MethodSignature GetRestClientPublicMethodSignature(Operation operation)
-            => (MethodSignature)GetOperationMethods(operation).RestClientConvenience[1].Signature; // return sync version
+            => (MethodSignature)GetOperationMethods(operation).Convenience!.Signature;
 
         public RequestPath GetRequestPath(Operation operation) => OperationsToRequestPaths[operation];
 
-        private Dictionary<Operation, LegacyMethods> EnsureRestClientMethods()
+        private Dictionary<Operation, RestClientOperationMethods> EnsureRestClientMethods()
         {
-            var operationMethods = new Dictionary<Operation, LegacyMethods>();
+            var operationMethods = new Dictionary<Operation, RestClientOperationMethods>();
             foreach (var restClient in RestClients)
             {
-                foreach (var legacyMethod in restClient.Methods)
+                foreach (var restClientMethods in restClient.Methods)
                 {
-                    if (!legacyMethod.RestClientConvenience[0].Signature.Modifiers.HasFlag(MethodSignatureModifiers.Public))
+                    if (!restClientMethods.Convenience!.Signature.Modifiers.HasFlag(MethodSignatureModifiers.Public))
                     {
                         continue;
                     }
 
-                    var operation = _inputOperationToOperation[legacyMethod.Operation];
-                    if (!operationMethods.TryAdd(operation, legacyMethod))
+                    var operation = _inputOperationToOperation[restClientMethods.Operation];
+                    if (!operationMethods.TryAdd(operation, restClientMethods))
                     {
                         throw new Exception($"An rest method '{operation.OperationId}' has already been added");
                     }

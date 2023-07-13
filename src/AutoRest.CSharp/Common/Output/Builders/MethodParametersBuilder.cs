@@ -95,10 +95,31 @@ namespace AutoRest.CSharp.Output.Models
             AddRequestConditionHeaders(requestConditionHeaders, requestConditionRequestParameter, requestConditionSerializationFormat);
             AddRequestContext();
 
+            var hasAmbiguityBetweenProtocolAndConvenience = HasAmbiguityBetweenProtocolAndConvenience();
             var makeAllProtocolParametersRequired = !Configuration.KeepNonOverloadableProtocolSignature
                 && Configuration.UseOverloadsBetweenProtocolAndConvenience
-                && !ExistingProtocolMethodHasOptionalParameters(clientNamespace, clientName)
-                && HasAmbiguityBetweenProtocolAndConvenience();
+                && hasAmbiguityBetweenProtocolAndConvenience
+                && !ExistingProtocolMethodHasOptionalParameters(clientNamespace, clientName);
+
+            if (makeAllProtocolParametersRequired)
+            {
+                for (var i = 0; i < _protocolParameters.Count; i++)
+                {
+                    var updatedParameter = _protocolParameters[i] with { DefaultValue = null };
+                    if (_arguments.Remove(_protocolParameters[i], out var argument))
+                    {
+                        _arguments[updatedParameter] = argument;
+                    }
+                    if (_conversions.Remove(_protocolParameters[i], out var conversion))
+                    {
+                        _conversions[updatedParameter] = conversion;
+                    }
+                    _protocolParameters[i] = updatedParameter;
+                }
+
+                // Recalculate ambiguity
+                hasAmbiguityBetweenProtocolAndConvenience = HasAmbiguityBetweenProtocolAndConvenience();
+            }
 
             return new ClientMethodParameters
             (
@@ -107,6 +128,7 @@ namespace AutoRest.CSharp.Output.Models
                 makeAllProtocolParametersRequired ? _protocolParameters.Select(p => p with {DefaultValue = null}).ToList() : _protocolParameters,
                 _convenienceParameters,
                 true,
+                hasAmbiguityBetweenProtocolAndConvenience,
                 _arguments,
                 _conversions
             );
@@ -144,6 +166,7 @@ namespace AutoRest.CSharp.Output.Models
                 _createMessageParameters,
                 _protocolParameters,
                 _convenienceParameters,
+                false,
                 false,
                 _arguments,
                 _conversions

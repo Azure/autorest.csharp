@@ -6,7 +6,6 @@ using System.Collections.Generic;
 using System.Linq;
 using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Common.Output.Models;
-using AutoRest.CSharp.Common.Output.Models.KnownCodeBlocks;
 using AutoRest.CSharp.Common.Output.Models.Statements;
 using AutoRest.CSharp.Common.Output.Models.ValueExpressions;
 using AutoRest.CSharp.Generation.Types;
@@ -35,10 +34,10 @@ namespace AutoRest.CSharp.Output.Models
 
             CodeWriterDeclaration? createNextPageRequest = null;
             MethodBodyStatement? nextPageRequestLine = null;
-            if (CreateNextPageMessageMethodName is not null)
+            if (CreateNextPageMessageMethodSignature is not null)
             {
-                var nextPageArguments = CreateNextPageMessageMethodParameters.Select(p => new ParameterReference(p));
-                nextPageRequestLine = DeclareNextPageRequestLocalFunction(null, CreateNextPageMessageMethodName, nextPageArguments, out createNextPageRequest);
+                var nextPageArguments = CreateNextPageMessageMethodSignature.Parameters.Select(p => new ParameterReference(p));
+                nextPageRequestLine = DeclareNextPageRequestLocalFunction(null, CreateNextPageMessageMethodSignature.Name, nextPageArguments, out createNextPageRequest);
             }
 
             var returnLine = Return(CreatePageable(createFirstPageRequest, createNextPageRequest, ClientDiagnosticsProperty, PipelineField, typeof(BinaryData), CreateScopeName(ProtocolMethodName), ItemPropertyName, NextLinkName, CreateMessageRequestContext, async));
@@ -56,9 +55,9 @@ namespace AutoRest.CSharp.Output.Models
 
             CodeWriterDeclaration? createNextPageRequest = null;
             DeclarationStatement? nextPageRequestLine = null;
-            if (CreateNextPageMessageMethodName is not null)
+            if (CreateNextPageMessageMethodSignature is not null)
             {
-                nextPageRequestLine = DeclareNextPageRequestLocalFunction(RestClient, CreateNextPageMessageMethodName, createRequestArguments.Prepend(KnownParameters.NextLink), out createNextPageRequest);
+                nextPageRequestLine = DeclareNextPageRequestLocalFunction(RestClient, CreateNextPageMessageMethodSignature.Name, createRequestArguments.Prepend(KnownParameters.NextLink), out createNextPageRequest);
             }
 
             var returnLine = Return(CreatePageable(createFirstPageRequest, createNextPageRequest, ClientDiagnosticsProperty, PipelineField, PageItemType, CreateScopeName(methodName), ItemPropertyName, NextLinkName, requestContextVariable, async));
@@ -66,36 +65,6 @@ namespace AutoRest.CSharp.Output.Models
             return nextPageRequestLine is not null
                 ? new[]{parameterConversions, firstPageRequestLine, nextPageRequestLine, returnLine}
                 : new[]{parameterConversions, firstPageRequestLine, returnLine};
-        }
-
-        protected override Method BuildLegacyConvenienceMethod(bool async)
-        {
-            var signature = CreateMethodSignature(ProtocolMethodName, ConvenienceModifiers, ConvenienceMethodParameters, ConvenienceMethodReturnType);
-            var body = CreateLegacyConvenienceMethodBody(async);
-
-            return new Method(signature.WithAsync(async), body);
-        }
-
-        private MethodBodyStatement CreateLegacyConvenienceMethodBody(bool async)
-        {
-            var createRequestArguments = new List<ValueExpression>();
-            var parameterValidations = new ParameterValidationBlock(ConvenienceMethodParameters);
-            var parameterConversions = AddPageableMethodArguments(createRequestArguments, out var requestContextVariable).AsStatement();
-            var firstPageRequestLine = DeclareFirstPageRequestLocalFunction(RestClient, CreateMessageMethodName, createRequestArguments, out var createFirstPageRequest);
-
-            CodeWriterDeclaration? createNextPageRequest = null;
-            DeclarationStatement? nextPageRequestLine = null;
-            if (CreateNextPageMessageMethodName is not null)
-            {
-                var arguments = CreateNextPageMessageMethodParameters.Select(p => new ParameterReference(p));
-                nextPageRequestLine = DeclareNextPageRequestLocalFunction(RestClient, CreateNextPageMessageMethodName, arguments, out createNextPageRequest);
-            }
-
-            var returnLine = Return(CreatePageable(createFirstPageRequest, createNextPageRequest, new MemberExpression(null, $"_{KnownParameters.ClientDiagnostics.Name}"), PipelineField, PageItemType, CreateScopeName(ProtocolMethodName), ItemPropertyName, NextLinkName, requestContextVariable, async));
-
-            return nextPageRequestLine is not null
-                ? new[]{parameterValidations, parameterConversions, firstPageRequestLine, nextPageRequestLine, returnLine}
-                : new[]{parameterValidations, parameterConversions, firstPageRequestLine, returnLine};
         }
     }
 }

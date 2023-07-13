@@ -22,8 +22,8 @@ namespace AutoRest.CSharp.Output.Models
         public IReadOnlyList<Parameter> ClientParameters { get; }
         public ClientFields Fields { get; }
         public IReadOnlyList<Parameter> Parameters { get; }
-        public IReadOnlyList<LegacyMethods> Methods { get; }
-        public IReadOnlyList<LowLevelClientMethod>? ProtocolMethods { get; }
+        public IReadOnlyList<RestClientOperationMethods> Methods { get; }
+        public IReadOnlyList<RestClientOperationMethods>? ProtocolMethods { get; }
         public ConstructorSignature Constructor { get; }
 
         public string ClientPrefix { get; }

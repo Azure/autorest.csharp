@@ -41,6 +41,7 @@ namespace AutoRest.CSharp.Output.Models
         private readonly MethodSignatureModifiers _protocolAccessibility;
         private readonly StatusCodeSwitchBuilder _statusCodeSwitchBuilder;
         private readonly bool _existingProtocolMethodHasOptionalParameters;
+        private readonly bool _hasAmbiguityBetweenProtocolAndConvenience;
 
         public InputOperation Operation { get; }
 
@@ -71,6 +72,7 @@ namespace AutoRest.CSharp.Output.Models
             _clientName = args.ClientName;
             _statusCodeSwitchBuilder = args.StatusCodeSwitchBuilder;
             _existingProtocolMethodHasOptionalParameters = args.ExistingProtocolMethodHasOptionalParameters;
+            _hasAmbiguityBetweenProtocolAndConvenience = clientMethodParameters.HasAmbiguityBetweenProtocolAndConvenience;
 
             Operation = args.Operation;
             ClientDiagnosticsProperty = _fields.ClientDiagnosticsProperty;
@@ -101,71 +103,84 @@ namespace AutoRest.CSharp.Output.Models
             ConvenienceModifiers = GetAccessibility(Operation.Accessibility) | MethodSignatureModifiers.Virtual;
         }
 
-        public LowLevelClientMethod BuildDpg()
+        public RestClientOperationMethods BuildDpg()
         {
             var responseClassifier = _statusCodeSwitchBuilder.ResponseClassifier;
-            var createRequestMethods = BuildCreateRequestMethods(responseClassifier).ToArray();
+            var createMessageMethod = BuildCreateRequestMethod(responseClassifier);
+            var createNextPageMessageMethod = BuildCreateNextPageMessageMethod(responseClassifier);
 
-            var convenienceMethodName = ProtocolMethodName;
-            var convenienceMethods = Array.Empty<Method>();
+            Method? convenience = null;
+            Method? convenienceAsync = null;
 
             if (Operation.GenerateConvenienceMethod && ShouldConvenienceMethodGenerated())
             {
-                if (ConvenienceMethodParameters.All(p => p != KnownParameters.CancellationTokenParameter))
+                var convenienceMethodName = ProtocolMethodName;
+                if (_hasAmbiguityBetweenProtocolAndConvenience)
                 {
                     convenienceMethodName = ProtocolMethodName.IsLastWordSingular()
                         ? $"{ProtocolMethodName}Value"
                         : $"{ProtocolMethodName.LastWordToSingular()}Values";
                 }
 
-                convenienceMethods = new[]{ BuildConvenienceMethod(convenienceMethodName, true), BuildConvenienceMethod(convenienceMethodName, false) };
+                convenience = BuildConvenienceMethod(convenienceMethodName, false);
+                convenienceAsync = BuildConvenienceMethod(convenienceMethodName, true);
             }
-
-            var protocolMethods = new[]{ BuildProtocolMethod(true), BuildProtocolMethod(false) };
 
             var order = Operation.LongRunning is not null ? 2 : Operation.Paging is not null ? 1 : 0;
             var requestBodyType = Operation.Parameters.FirstOrDefault(p => p.Location == RequestLocation.Body)?.Type;
 
-            return new LowLevelClientMethod(createRequestMethods, protocolMethods, convenienceMethods, responseClassifier, order, Operation, requestBodyType, ResponseType, _statusCodeSwitchBuilder.PageItemType);
-        }
-
-        public virtual LegacyMethods BuildLegacy()
-        {
-            var createRequestMethod = BuildCreateRequestMethod(_statusCodeSwitchBuilder.ResponseClassifier);
-
-            var restClientMethods = new[]
-            {
-                BuildRestClientConvenienceMethod(ProtocolMethodName, ConvenienceMethodParameters, InvokeCreateRequestMethod(null), _statusCodeSwitchBuilder, true),
-                BuildRestClientConvenienceMethod(ProtocolMethodName, ConvenienceMethodParameters, InvokeCreateRequestMethod(null), _statusCodeSwitchBuilder, false)
-            };
-
-            var convenienceMethods = Configuration.PublicClients && !Configuration.AzureArm ? new[]
-            {
-                BuildLegacyConvenienceMethod(true),
-                BuildLegacyConvenienceMethod(false)
-            } : Array.Empty<Method>();
-
-            return new LegacyMethods
+            return new RestClientOperationMethods
             (
-                createRequestMethod,
+                createMessageMethod,
+                createNextPageMessageMethod,
+                BuildProtocolMethod(false),
+                BuildProtocolMethod(true),
+                convenience,
+                convenienceAsync,
                 null,
-                restClientMethods,
-                Array.Empty<Method>(),
-                convenienceMethods,
+                null,
+                responseClassifier,
 
-                this is LroOperationMethodsBuilder ? 2 : 0,
+                order,
                 Operation,
-                ResponseType
+                requestBodyType,
+                ResponseType,
+                _statusCodeSwitchBuilder.PageItemType,
+                createNextPageMessageMethod?.Signature as MethodSignature
             );
         }
 
-        protected abstract IEnumerable<Method> BuildCreateRequestMethods(ResponseClassifierType responseClassifierType);
+        public virtual RestClientOperationMethods BuildLegacy()
+        {
+            var createRequestMethod = BuildCreateRequestMethod(_statusCodeSwitchBuilder.ResponseClassifier);
+            return new RestClientOperationMethods
+            (
+                createRequestMethod,
+                null,
+                null,
+                null,
+                BuildLegacyConvenienceMethod(ProtocolMethodName, ConvenienceMethodParameters, InvokeCreateRequestMethod(), _statusCodeSwitchBuilder, false),
+                BuildLegacyConvenienceMethod(ProtocolMethodName, ConvenienceMethodParameters, InvokeCreateRequestMethod(), _statusCodeSwitchBuilder, true),
+                null,
+                null,
+                _statusCodeSwitchBuilder.ResponseClassifier,
+
+                this is LroOperationMethodsBuilder ? 2 : 0,
+                Operation,
+                null,
+                ResponseType,
+                _statusCodeSwitchBuilder.PageItemType,
+                null
+            );
+        }
 
         protected Method BuildCreateRequestMethod(ResponseClassifierType responseClassifierType)
         {
             var signature = new MethodSignature(CreateMessageMethodName, _summary, _description, MethodSignatureModifiers.Internal, typeof(HttpMessage), null, CreateMessageMethodParameters);
             return new Method(signature, BuildCreateRequestMethodBody(responseClassifierType).AsStatement());
         }
+
+        protected abstract Method? BuildCreateNextPageMessageMethod(ResponseClassifierType responseClassifierType);
 
         private IEnumerable<MethodBodyStatement> BuildCreateRequestMethodBody(ResponseClassifierType responseClassifierType)
         {
@@ -649,7 +664,7 @@ namespace AutoRest.CSharp.Output.Models
             return new Method(signature.WithAsync(async), body);
         }
 
-        protected Method BuildRestClientConvenienceMethod(string methodName, IReadOnlyList<Parameter> parameters, HttpMessageExpression invokeCreateRequestMethod, StatusCodeSwitchBuilder statusCodeSwitchBuilder, bool async)
+        protected Method BuildLegacyConvenienceMethod(string methodName, IReadOnlyList<Parameter> parameters, HttpMessageExpression invokeCreateRequestMethod, StatusCodeSwitchBuilder statusCodeSwitchBuilder, bool async)
         {
             var signature = CreateMethodSignature(methodName, MethodSignatureModifiers.Public, parameters, statusCodeSwitchBuilder.RestClientConvenienceReturnType);
             var body = new[]
@@ -662,8 +677,6 @@ namespace AutoRest.CSharp.Output.Models
 
             return new Method(signature.WithAsync(async), body);
         }
-
-        protected abstract Method BuildLegacyConvenienceMethod(bool async);
 
         protected MethodSignature CreateMethodSignature(string name, MethodSignatureModifiers accessibility, IReadOnlyList<Parameter> parameters, CSharpType returnType)
         {
@@ -681,14 +694,11 @@ namespace AutoRest.CSharp.Output.Models
         protected MethodBodyStatement WrapInDiagnosticScope(string methodName, params MethodBodyStatement[] statements)
             => new DiagnosticScopeMethodBodyBlock(new Diagnostic($"{_clientName}.{methodName}"), _fields.ClientDiagnosticsProperty, statements);
 
-        protected MethodBodyStatement WrapInDiagnosticScopeLegacy(string methodName, params MethodBodyStatement[] statements)
-            => new DiagnosticScopeMethodBodyBlock(new Diagnostic($"{_clientName}.{methodName}"), new Reference($"_{KnownParameters.ClientDiagnostics.Name}", KnownParameters.ClientDiagnostics.Type), statements);
+        protected HttpMessageExpression InvokeCreateRequestMethod()
+            => InvokeCreateRequestMethod(CreateMessageMethodName, CreateMessageMethodParameters);
 
-        protected HttpMessageExpression InvokeCreateRequestMethod(ValueExpression? instance)
-            => InvokeCreateRequestMethod(instance, CreateMessageMethodName, CreateMessageMethodParameters);
-
-        protected HttpMessageExpression InvokeCreateRequestMethod(ValueExpression? instance, string methodName, IReadOnlyList<Parameter> parameters)
-            => new(new InvokeInstanceMethodExpression(instance, methodName, parameters.Select(p => new ParameterReference(p)).ToList(), null, false));
+        protected HttpMessageExpression InvokeCreateRequestMethod(string methodName, IReadOnlyList<Parameter> parameters)
+            => new(new InvokeInstanceMethodExpression(null, methodName, parameters.Select(p => new ParameterReference(p)).ToList(), null, false));
 
         protected ResponseExpression InvokeProtocolMethod(ValueExpression? instance, IReadOnlyList<ValueExpression> arguments, bool async)
             => new(new InvokeInstanceMethodExpression(instance, async ? $"{ProtocolMethodName}Async" : ProtocolMethodName, arguments, null, async));

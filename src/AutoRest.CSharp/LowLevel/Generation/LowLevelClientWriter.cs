@@ -8,14 +8,11 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using AutoRest.CSharp.Common.Generation.Writers;
-using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Common.Output.Models.Responses;
 using AutoRest.CSharp.Generation.Types;
-using AutoRest.CSharp.Output.Builders;
 using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Output.Models.Requests;
 using AutoRest.CSharp.Output.Models.Shared;
-using AutoRest.CSharp.Output.Models.Types;
 using AutoRest.CSharp.Utilities;
 using Azure;
 using Azure.Core;
@@ -54,42 +51,27 @@ namespace AutoRest.CSharp.Generation.Writers
                     WriteClientFields();
                     WriteConstructors();
 
-                    foreach (var clientMethod in _client.ClientMethods)
+                    foreach (var clientMethod in _client.OperationMethods)
                     {
-                        if (clientMethod.Convenience.Any())
-                        {
-                            WriteConvenienceMethodDocumentationWithExternalXmlDoc(clientMethod, (MethodSignature)clientMethod.Convenience[0].Signature, true);
-                            _writer.WriteMethod(clientMethod.Convenience[0]);
-                            WriteConvenienceMethodDocumentationWithExternalXmlDoc(clientMethod, (MethodSignature)clientMethod.Convenience[1].Signature, false);
-                            _writer.WriteMethod(clientMethod.Convenience[1]);
-
-                            WriteProtocolMethodDocumentationWithExternalXmlDoc(clientMethod, (MethodSignature)clientMethod.Protocol[0].Signature, (MethodSignature)clientMethod.Convenience[0].Signature, true);
-                            _writer.WriteMethod(clientMethod.Protocol[0]);
-                            WriteProtocolMethodDocumentationWithExternalXmlDoc(clientMethod, (MethodSignature)clientMethod.Protocol[1].Signature, (MethodSignature)clientMethod.Convenience[1].Signature, false);
-                            _writer.WriteMethod(clientMethod.Protocol[1]);
-                        }
-                        else
-                        {
-                            WriteProtocolMethodDocumentationWithExternalXmlDoc(clientMethod, (MethodSignature)clientMethod.Protocol[0].Signature, null, true);
-                            _writer.WriteMethod(clientMethod.Protocol[0]);
-                            WriteProtocolMethodDocumentationWithExternalXmlDoc(clientMethod, (MethodSignature)clientMethod.Protocol[1].Signature, null, false);
-                            _writer.WriteMethod(clientMethod.Protocol[1]);
-                        }
+                        WriteConvenienceMethod(clientMethod, true);
+                        WriteConvenienceMethod(clientMethod, false);
+                        WriteProtocolMethod(clientMethod, true);
+                        WriteProtocolMethod(clientMethod, false);
                     }
 
                     WriteSubClientFactoryMethod();
 
-                    foreach (var method in _client.RequestMethods)
+                    foreach (var method in _client.OperationMethods.Select(m => m.CreateRequest))
                     {
                         _writer.WriteMethod(method);
                     }
 
-                    foreach (var method in _client.RequestNextPageMethods)
+                    foreach (var method in _client.OperationMethods.Select(m => m.CreateNextPageMessage).WhereNotNull())
                     {
                         _writer.WriteMethod(method);
                     }
 
-                    if (_client.ClientMethods.Any(cm => cm.Convenience.Any()))
+                    if (_client.OperationMethods.Any(cm => cm.Convenience is not null))
                     {
                         WriteCancellationTokenToRequestContextMethod();
                     }
@@ -98,18 +80,14 @@ namespace AutoRest.CSharp.Generation.Writers
             }
         }
 
-        public static void WriteProtocolMethods(CodeWriter writer, ClientFields fields, LowLevelClientMethod clientMethod)
+        public static void WriteProtocolMethods(CodeWriter writer, ClientFields fields, RestClientOperationMethods operationMethods)
         {
-            foreach (var requestMethod in clientMethod.CreateRequest)
-            {
-                writer.WriteMethod(requestMethod);
-            }
+            writer.WriteMethod(operationMethods.CreateRequest);
 
-            foreach (var protocolMethod in clientMethod.Protocol)
-            {
-                WriteProtocolMethodDocumentation(writer, clientMethod, (MethodSignature)protocolMethod.Signature);
-                writer.WriteMethod(protocolMethod);
-            }
+            WriteProtocolMethodDocumentation(writer, operationMethods, (MethodSignature)operationMethods.ProtocolAsync!.Signature);
+            writer.WriteMethod(operationMethods.ProtocolAsync);
+            WriteProtocolMethodDocumentation(writer, operationMethods, (MethodSignature)operationMethods.Protocol!.Signature);
+            writer.WriteMethod(operationMethods.Protocol);
         }
 
         private void WriteDPGIdentificationComment() => _writer.Line($"// Data plane generated {(_client.IsSubClient ? "sub-client" : "client")}.");
@@ -324,19 +302,47 @@ namespace AutoRest.CSharp.Generation.Writers
             }
         }
 
-        private void WriteProtocolMethodDocumentationWithExternalXmlDoc(LowLevelClientMethod clientMethod, MethodSignature protocolMethod, MethodSignature? convenienceMethod, bool async)
+        private void WriteConvenienceMethod(RestClientOperationMethods operationMethods, bool async)
         {
-            WriteMethodDocumentation(_writer, protocolMethod, convenienceMethod, clientMethod);
+            if (async && operationMethods.ConvenienceAsync is {} convenienceAsync)
+            {
+                WriteConvenienceMethodDocumentationWithExternalXmlDoc(operationMethods, (MethodSignature)convenienceAsync.Signature, true);
+                _writer.WriteMethod(convenienceAsync);
+            }
+            else if (operationMethods.Convenience is {} convenience)
+            {
+                WriteConvenienceMethodDocumentationWithExternalXmlDoc(operationMethods, (MethodSignature)convenience.Signature, false);
+                _writer.WriteMethod(convenience);
+            }
+        }
+
+        private void WriteProtocolMethod(RestClientOperationMethods operationMethods, bool async)
+        {
+            if (async && operationMethods.ProtocolAsync is {} protocolAsync)
+            {
+                WriteProtocolMethodDocumentationWithExternalXmlDoc(operationMethods, (MethodSignature)protocolAsync.Signature, null, true);
+                _writer.WriteMethod(protocolAsync);
+            }
+            else if (operationMethods.Protocol is {} protocol)
+            {
+                WriteProtocolMethodDocumentationWithExternalXmlDoc(operationMethods, (MethodSignature)protocol.Signature, null, false);
+                _writer.WriteMethod(protocol);
+            }
+        }
+
+        private void WriteProtocolMethodDocumentationWithExternalXmlDoc(RestClientOperationMethods operationMethods, MethodSignature protocolMethod, MethodSignature? convenienceMethod, bool async)
+        {
+            WriteMethodDocumentation(_writer, protocolMethod, convenienceMethod, operationMethods);
             var docRef = GetMethodSignatureString(protocolMethod);
             _writer.Line($"/// <include file=\"Docs/{_client.Type.Name}.xml\" path=\"doc/members/member[@name='{docRef}']/*\" />");
             using (_xmlDocWriter.CreateMember(docRef))
             {
-                _xmlDocWriter.WriteXmlDocumentation("example", _exampleComposer.ComposeProtocol(clientMethod, protocolMethod, async));
-                WriteDocumentationRemarks(_xmlDocWriter.WriteXmlDocumentation, clientMethod, protocolMethod, false);
+                _xmlDocWriter.WriteXmlDocumentation("example", _exampleComposer.ComposeProtocol(operationMethods, protocolMethod, async));
+                WriteDocumentationRemarks(_xmlDocWriter.WriteXmlDocumentation, operationMethods, protocolMethod, false);
             }
         }
 
-        private void WriteConvenienceMethodDocumentationWithExternalXmlDoc(LowLevelClientMethod clientMethod, MethodSignature convenienceMethod, bool async)
+        private void WriteConvenienceMethodDocumentationWithExternalXmlDoc(RestClientOperationMethods operationMethods, MethodSignature convenienceMethod, bool async)
         {
             _writer.WriteMethodDocumentation(convenienceMethod);
             _writer.WriteXmlDocumentation("remarks", $"{convenienceMethod.DescriptionText}");
@@ -345,17 +351,17 @@ namespace AutoRest.CSharp.Generation.Writers
             using (_xmlDocWriter.CreateMember(docRef))
             {
                 _xmlDocWriter.WriteXmlDocumentation("example", _exampleComposer.ComposeConvenience(convenienceMethod, async));
-                WriteDocumentationRemarks(_xmlDocWriter.WriteXmlDocumentation, clientMethod, convenienceMethod, false);
+                WriteDocumentationRemarks(_xmlDocWriter.WriteXmlDocumentation, operationMethods, convenienceMethod, false);
             }
         }
 
         private static string GetMethodSignatureString(MethodSignature signature)
             => $"{signature.Name}({string.Join(",", signature.Parameters.Select(p => p.Type.ToStringForDocs()))})";
 
-        private static void WriteProtocolMethodDocumentation(CodeWriter writer, LowLevelClientMethod clientMethod, MethodSignature methodSignature)
+        private static void WriteProtocolMethodDocumentation(CodeWriter writer, RestClientOperationMethods operationMethods, MethodSignature methodSignature)
         {
-            WriteMethodDocumentation(writer, methodSignature, null, clientMethod);
-            WriteDocumentationRemarks((tag, text) => writer.WriteXmlDocumentation(tag, text), clientMethod, methodSignature, false);
+            WriteMethodDocumentation(writer, methodSignature, null, operationMethods);
+            WriteDocumentationRemarks((tag, text) => writer.WriteXmlDocumentation(tag, text), operationMethods, methodSignature, false);
         }
 
         private void WriteCancellationTokenToRequestContextMethod()
@@ -393,7 +399,7 @@ namespace AutoRest.CSharp.Generation.Writers
             return $"{builder.ToString().Trim(Environment.NewLine.ToCharArray())}";
         }
 
-        private static void WriteMethodDocumentation(CodeWriter codeWriter, MethodSignature protocolMethod, MethodSignature? convenienceMethod, LowLevelClientMethod clientMethod)
+        private static void WriteMethodDocumentation(CodeWriter codeWriter, MethodSignature protocolMethod, MethodSignature? convenienceMethod, RestClientOperationMethods operationMethods)
         {
             codeWriter.WriteXmlDocumentationSummary(BuildProtocolMethodSummary(protocolMethod, convenienceMethod));
             codeWriter.WriteMethodDocumentationSignature(protocolMethod);
@@ -412,16 +418,16 @@ namespace AutoRest.CSharp.Generation.Writers
             var returnType = protocolMethod.ReturnType;
 
             FormattableString text;
-            if (clientMethod is { Operation.Paging: not null, Operation.LongRunning: not null })
+            if (operationMethods is { Operation.Paging: not null, Operation.LongRunning: not null })
             {
                 CSharpType pageableType = protocolMethod.Modifiers.HasFlag(Async) ? typeof(AsyncPageable<>) : typeof(Pageable<>);
                 text = $"The <see cref=\"{nameof(Operation)}{{T}}\"/> from the service that will contain a <see cref=\"{pageableType.Name}{{T}}\"/> containing a list of <see cref=\"{nameof(BinaryData)}\"/> objects once the asynchronous operation on the service has completed. Details of the body schema for the operation's final value are in the Remarks section below.";
             }
-            else if (clientMethod.Operation.Paging is not null)
+            else if (operationMethods.Operation.Paging is not null)
             {
                 text = $"The <see cref=\"{returnType.Name}{{T}}\"/> from the service containing a list of <see cref=\"{returnType.Arguments[0]}\"/> objects. Details of the body schema for each item in the collection are in the Remarks section below.";
             }
-            else if (clientMethod.Operation.LongRunning is not null)
+            else if (operationMethods.Operation.LongRunning is not null)
             {
                 text = $"The <see cref=\"{nameof(Operation)}\"/> representing an asynchronous operation on the service.";
             }
@@ -441,14 +447,14 @@ namespace AutoRest.CSharp.Generation.Writers
             codeWriter.WriteXmlDocumentationReturns(text);
         }
 
-        private static void WriteDocumentationRemarks(Action<string, FormattableString?> writeXmlDocumentation, LowLevelClientMethod clientMethod, MethodSignature methodSignature, bool addDescription)
+        private static void WriteDocumentationRemarks(Action<string, FormattableString?> writeXmlDocumentation, RestClientOperationMethods operationMethods, MethodSignature methodSignature, bool addDescription)
         {
-            if (clientMethod.Operation.ExternalDocsUrl == null)
+            if (operationMethods.Operation.ExternalDocsUrl == null)
             {
                 return;
             }
 
-            var docInfo = clientMethod.Operation.ExternalDocsUrl is {} externalDocsUrl
+            var docInfo = operationMethods.Operation.ExternalDocsUrl is {} externalDocsUrl
                 ? $"Additional information can be found in the service REST API documentation:{Environment.NewLine}{externalDocsUrl}{Environment.NewLine}"
                 : (FormattableString)$"";
 

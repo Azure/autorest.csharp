@@ -4,6 +4,7 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Linq;
 using AutoRest.CSharp.Common.Output.Models.KnownValueExpressions;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Generation.Writers;
@@ -33,6 +34,12 @@ namespace AutoRest.CSharp.Common.Output.Models.ValueExpressions
 
         public ValueExpression Invoke(string methodName, IReadOnlyList<ValueExpression> arguments)
             => new InvokeInstanceMethodExpression(this, methodName, arguments, null, false);
+
+        public ValueExpression Invoke(MethodSignature method)
+            => new InvokeInstanceMethodExpression(this, method.Name, method.Parameters.Select(p => (ValueExpression)p).ToList(), null, false);
+
+        public ValueExpression Invoke(MethodSignature method, bool async)
+            => new InvokeInstanceMethodExpression(this, method.Name, method.Parameters.Select(p => (ValueExpression)p).ToList(), null, async);
 
         public ValueExpression Invoke(string methodName, IReadOnlyList<ValueExpression> arguments, bool async)
             => new InvokeInstanceMethodExpression(this, methodName, arguments, null, async);

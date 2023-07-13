@@ -210,7 +210,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             {
                 foreach (var inputClient in _input.Clients)
                 {
-                    clients.Add(inputClient, new DataPlaneClient(inputClient, _restClients[inputClient], _defaultName, _defaultNamespace, _sourceInputModel));
+                    clients.Add(inputClient, new DataPlaneClient(inputClient, _restClients[inputClient], _defaultName, _defaultNamespace, this, _sourceInputModel));
                 }
             }
 

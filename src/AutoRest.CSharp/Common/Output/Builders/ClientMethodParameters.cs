@@ -15,6 +15,7 @@ namespace AutoRest.CSharp.Output.Models
         IReadOnlyList<Parameter> Protocol,
         IReadOnlyList<Parameter> Convenience,
         bool HasRequestContextInCreateMessage,
+        bool HasAmbiguityBetweenProtocolAndConvenience,
         IReadOnlyDictionary<Parameter, ValueExpression> Arguments,
         IReadOnlyDictionary<Parameter, MethodBodyStatement> Conversions
     );
@@ -27,13 +28,14 @@ namespace AutoRest.CSharp.Output.Models
         IReadOnlyList<Parameter> Protocol,
         IReadOnlyList<Parameter> Convenience,
         bool HasRequestContextInCreateMessage,
+        bool HasAmbiguityBetweenProtocolAndConvenience,
         IReadOnlyDictionary<Parameter, ValueExpression> Arguments,
         IReadOnlyDictionary<Parameter, MethodBodyStatement> Conversions
 
-    ) : ClientMethodParameters(RequestParts, CreateMessage, Protocol, Convenience, HasRequestContextInCreateMessage, Arguments, Conversions)
+    ) : ClientMethodParameters(RequestParts, CreateMessage, Protocol, Convenience, HasRequestContextInCreateMessage, HasAmbiguityBetweenProtocolAndConvenience, Arguments, Conversions)
     {
         public ClientPagingMethodParameters(ClientMethodParameters parameters, IReadOnlyList<Parameter> createNextPageMessage)
-            : this(parameters.RequestParts, parameters.CreateMessage, createNextPageMessage, parameters.Protocol, parameters.Convenience, parameters.HasRequestContextInCreateMessage, parameters.Arguments, parameters.Conversions)
+            : this(parameters.RequestParts, parameters.CreateMessage, createNextPageMessage, parameters.Protocol, parameters.Convenience, parameters.HasRequestContextInCreateMessage, parameters.HasAmbiguityBetweenProtocolAndConvenience, parameters.Arguments, parameters.Conversions)
         {
         }
     }

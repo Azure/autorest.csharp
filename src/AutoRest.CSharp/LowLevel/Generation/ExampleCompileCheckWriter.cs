@@ -43,12 +43,12 @@ namespace AutoRest.CSharp.LowLevel.Generation
             {
                 using (_writer.Scope($"public class Samples_{_client.Declaration.Name}"))
                 {
-                    foreach (var method in _client.ClientMethods)
+                    foreach (var method in _client.OperationMethods)
                     {
                         //TODO: we should make this more obvious to determine if something is convenience only
-                        if (method.Protocol.Any())
+                        if (method.Protocol is {} protocol)
                         {
-                            var signature = (MethodSignature)method.Protocol[0].Signature;
+                            var signature = (MethodSignature)protocol.Signature;
 
                             if (signature.Modifiers.HasFlag(MethodSignatureModifiers.Public) &&
                                 !signature.Attributes.Any(a => a.Type.Equals(typeof(ObsoleteAttribute))) &&
@@ -70,9 +70,8 @@ namespace AutoRest.CSharp.LowLevel.Generation
                             }
                         }
 
-                        if (method.Convenience.Any())
+                        if (method.ConvenienceAsync is {} convenience)
                         {
-                            var convenience = method.Convenience[0];
                             if (convenience.Signature.Modifiers.HasFlag(MethodSignatureModifiers.Public) &&
                                 (_client.IsSubClient || _client.GetEffectiveCtor() is not null) &&
                                 !_client.IsMethodSuppressed(convenience.Signature))
@@ -106,33 +105,35 @@ namespace AutoRest.CSharp.LowLevel.Generation
 
         }
 
-        private bool ShouldGenerateShortVersion(LowLevelClientMethod method)
+        private static bool ShouldGenerateShortVersion(RestClientOperationMethods method)
         {
-            if (method.Convenience.Any())
+            if (method is not { Convenience: { } convenience, Protocol: { } protocol })
             {
-                if (method.Convenience[0].Signature.Parameters.Count == method.Protocol[0].Signature.Parameters.Count - 1 &&
-                    !method.Convenience[0].Signature.Parameters.Last().Type.Equals(typeof(CancellationToken)))
+                return true;
+            }
+
+            if (convenience.Signature.Parameters.Count == protocol.Signature.Parameters.Count - 1 &&
+                !convenience.Signature.Parameters.Last().Type.Equals(typeof(CancellationToken)))
+            {
+                bool allEqual = true;
+                for (int i = 0; i < method.Convenience.Signature.Parameters.Count; i++)
                 {
-                    bool allEqual = true;
-                    for (int i = 0; i < method.Convenience[0].Signature.Parameters.Count; i++)
+                    if (!method.Convenience.Signature.Parameters[i].Type.Equals(protocol.Signature.Parameters[i].Type))
                     {
-                        if (!method.Convenience[0].Signature.Parameters[i].Type.Equals(method.Protocol[0].Signature.Parameters[i].Type))
-                        {
-                            allEqual = false;
-                            break;
-                        }
+                        allEqual = false;
+                        break;
                     }
-                    if (allEqual)
-                    {
-                        return false;
-                    }
+                }
+                if (allEqual)
+                {
+                    return false;
                 }
             }
 
             return true;
         }
 
-        private void WriteProtocolTestCompilation(LowLevelClientMethod method, MethodSignature signature, bool isAsync, bool useAllParameters)
+        private void WriteProtocolTestCompilation(RestClientOperationMethods method, MethodSignature signature, bool isAsync, bool useAllParameters)
         {
             var methodBody =_exampleComposer.ComposeProtocolCodeSnippet(method, signature, useAllParameters, isAsync).AsStatement();
             var methodName = signature.WithAsync(false).Name;
