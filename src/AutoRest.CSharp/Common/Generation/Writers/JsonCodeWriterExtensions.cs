@@ -239,12 +239,6 @@ namespace AutoRest.CSharp.Generation.Writers
 
                         case ObjectType:
                             //case ModelTypeProvider:
-                            if (valueSerialization.Type.Namespace == "Azure.Core.Expressions.DataFactory")
-                            {
-                                writer.Line($"{typeof(JsonSerializer)}.{nameof(JsonSerializer.Serialize)}(writer, {name:I});");
-                                return;
-                            }
-
                             writer.Line($"{writerName}.WriteObjectValue({name:I});");
                             return;
 
