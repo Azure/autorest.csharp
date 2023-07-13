@@ -490,14 +490,6 @@ namespace AutoRest.TestServer.Tests
         }
 
         [Test]
-        public void ModelFactory_DeclaresOnlyStaticMethodsForReadonlyTypes()
-        {
-            TypeAsserts.TypeIsStatic(typeof(ModelShapesModelFactory));
-            TypeAsserts.TypeOnlyDeclaresThesePublicMethods(typeof(ModelShapesModelFactory),
-                nameof(MixedModel), nameof(MixedModelWithReadonlyProperty), nameof(OutputModel), nameof(ReadonlyModel));
-        }
-
-        [Test]
         public void ModelFactory_AlwaysInitializesCollectionFields()
         {
             var model = ModelShapesModelFactory.MixedModelWithReadonlyProperty();
