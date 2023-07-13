@@ -51,7 +51,8 @@ namespace AutoRest.CSharp.Generation.Writers
                     WriteClientFields();
                     WriteConstructors();
 
-                    foreach (var clientMethod in _client.OperationMethods)
+                    // Temporary sorting to minimize amount of changes in generated code.
+                    foreach (var clientMethod in _client.OperationMethods.OrderBy(b => b.Order))
                     {
                         WriteConvenienceMethod(clientMethod, true);
                         WriteConvenienceMethod(clientMethod, false);

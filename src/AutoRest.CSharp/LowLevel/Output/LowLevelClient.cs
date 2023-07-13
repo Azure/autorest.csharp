@@ -65,16 +65,12 @@ namespace AutoRest.CSharp.Output.Models
 
             (PrimaryConstructors, SecondaryConstructors) = BuildPublicConstructors(Parameters);
 
-            var methodsBuilder = new ClientMethodsBuilder(operations, null, sourceInputModel, typeFactory, false, false)
+            OperationMethods = new ClientMethodsBuilder(operations, null, sourceInputModel, typeFactory, false, false)
                 .Build(null, Fields, Declaration.Name, Declaration.Namespace)
-                .Select(b => b.BuildDpg()).ToList();
+                .Select(b => b.BuildDpg())
+                .ToList();
 
-            // Temporary sorting to minimize amount of changes in generated code.
-            OperationMethods = methodsBuilder
-                .OrderBy(b => b.Order)
-                .ToArray();
-
-            ResponseClassifierTypes = methodsBuilder.Select(rm => rm.ResponseClassifier).Distinct().ToArray();
+            ResponseClassifierTypes = OperationMethods.Select(rm => rm.ResponseClassifier).Distinct().ToArray();
 
             FactoryMethod = parentClient != null ? BuildFactoryMethod(parentClient.Fields, libraryName) : null;
 
