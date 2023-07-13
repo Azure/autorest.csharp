@@ -114,14 +114,7 @@ namespace MgmtExactMatchInheritance
         /// <summary> Gets or sets the type 17. </summary>
         public DataFactoryLinkedServiceReference Type17 { get; set; }
         /// <summary> Azure Data Factory secure string definition. The string value will be masked with asterisks '*' during Get or List API calls. </summary>
-        internal DataFactorySecretString Type18 { get; set; }
-        /// <summary> Gets or sets Value. </summary>
-        public string Type18Value
-        {
-            get => Type18 is null ? default : Type18.Value;
-            set => Type18 = new DataFactorySecretString(value);
-        }
-
+        public DataFactorySecretString Type18 { get; set; }
         /// <summary> Azure Key Vault secret reference. </summary>
         public DataFactoryKeyVaultSecretReference Type19 { get; set; }
     }

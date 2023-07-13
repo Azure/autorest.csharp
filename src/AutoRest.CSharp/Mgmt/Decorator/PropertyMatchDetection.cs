@@ -53,7 +53,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             return allowExtraValue is null ? false : (bool)allowExtraValue;
         }
 
-        private static void AddInternalIncludes(Type sourceType, List<PropertyInfo> parentProperties)
+        internal static void AddInternalIncludes(Type sourceType, List<PropertyInfo> parentProperties)
         {
             // Both TypeReferenceTypeAttribute and PropertyReferenceTypeAttribute allow specifying internal properties to include
             var referenceAttribute = sourceType.GetCustomAttributes(false)

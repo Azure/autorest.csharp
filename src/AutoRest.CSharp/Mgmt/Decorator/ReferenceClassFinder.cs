@@ -107,15 +107,17 @@ namespace AutoRest.CSharp.Mgmt.Decorator
         private static bool TryConstructPropertyMetadata(Type type, [MaybeNullWhen(false)] out Dictionary<string, PropertyMetadata> dict)
         {
             var publicCtor = type.GetConstructors().Where(c => c.IsPublic).OrderBy(c => c.GetParameters().Count()).FirstOrDefault();
-            if (publicCtor == null)
+            if (publicCtor == null && !type.IsAbstract)
             {
                 dict = null;
                 return false;
             }
             dict = new Dictionary<string, PropertyMetadata>();
-            foreach (var property in type.GetProperties().Where(p => p.DeclaringType == type))
+            var internalPropertiesToInclude = new List<PropertyInfo>();
+            PropertyMatchDetection.AddInternalIncludes(type, internalPropertiesToInclude);
+            foreach (var property in type.GetProperties().Where(p => p.DeclaringType == type).Concat(internalPropertiesToInclude))
             {
-                var metadata = new PropertyMetadata(property.Name.ToVariableName(), GetRequired(publicCtor, property));
+                var metadata = new PropertyMetadata(property.Name.ToVariableName(), publicCtor != null && GetRequired(publicCtor, property));
                 dict.Add(property.Name, metadata);
             }
             return true;
