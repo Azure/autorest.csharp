@@ -14,10 +14,10 @@ namespace AutoRest.TestServer.Tests
         }
 
         [Test]
-        public void NoModelAsStringNoRequiredTwoValueDefault_HasOneDefaultCtor()
+        public void NoModelAsStringNoRequiredTwoValueDefault_HasDefaultCtor()
         {
             var constructors = typeof(NoModelAsStringNoRequiredTwoValueDefault).GetConstructors(BindingFlags.Instance | BindingFlags.NonPublic);
-            Assert.AreEqual(1, constructors.Length);
+            Assert.AreEqual(2, constructors.Length);
             Assert.AreEqual(0, constructors[0].GetParameters().Length);
         }
 
@@ -51,10 +51,10 @@ namespace AutoRest.TestServer.Tests
         }
 
         [Test]
-        public void NoModelAsStringNoRequiredTwoValueNoDefault_HasOneDefaultCtor()
+        public void NoModelAsStringNoRequiredTwoValueNoDefault_HasDefaultCtor()
         {
             var constructors = typeof(NoModelAsStringNoRequiredTwoValueNoDefault).GetConstructors(BindingFlags.Instance | BindingFlags.NonPublic);
-            Assert.AreEqual(1, constructors.Length);
+            Assert.AreEqual(2, constructors.Length);
             Assert.AreEqual(0, constructors[0].GetParameters().Length);
         }
 
@@ -88,10 +88,10 @@ namespace AutoRest.TestServer.Tests
         }
 
         [Test]
-        public void NoModelAsStringNoRequiredOneValueNoDefault_HasOneDefaultCtor()
+        public void NoModelAsStringNoRequiredOneValueNoDefault_HasDefaultCtor()
         {
             var constructors = typeof(NoModelAsStringNoRequiredOneValueNoDefault).GetConstructors(BindingFlags.Instance | BindingFlags.NonPublic);
-            Assert.AreEqual(1, constructors.Length);
+            Assert.AreEqual(2, constructors.Length);
             Assert.AreEqual(0, constructors[0].GetParameters().Length);
         }
 
@@ -114,10 +114,10 @@ namespace AutoRest.TestServer.Tests
         }
 
         [Test]
-        public void NoModelAsStringNoRequiredOneValueDefault_HasOneDefaultCtor()
+        public void NoModelAsStringNoRequiredOneValueDefault_HasDefaultCtor()
         {
             var constructors = typeof(NoModelAsStringNoRequiredOneValueDefault).GetConstructors(BindingFlags.Instance | BindingFlags.NonPublic);
-            Assert.AreEqual(1, constructors.Length);
+            Assert.AreEqual(2, constructors.Length);
             Assert.AreEqual(0, constructors[0].GetParameters().Length);
         }
 
@@ -223,10 +223,10 @@ namespace AutoRest.TestServer.Tests
         }
 
         [Test]
-        public void NoModelAsStringRequiredOneValueNoDefault_HasOneDefaultCtor()
+        public void NoModelAsStringRequiredOneValueNoDefault_HasDefaultCtor()
         {
             var constructors = typeof(NoModelAsStringRequiredOneValueNoDefault).GetConstructors(BindingFlags.Instance | BindingFlags.NonPublic);
-            Assert.AreEqual(1, constructors.Length);
+            Assert.AreEqual(2, constructors.Length);
             Assert.AreEqual(0, constructors[0].GetParameters().Length);
         }
 
@@ -256,10 +256,10 @@ namespace AutoRest.TestServer.Tests
         }
 
         [Test]
-        public void NoModelAsStringRequiredOneValueDefault_HasOneDefaultCtor()
+        public void NoModelAsStringRequiredOneValueDefault_HasDefaultCtor()
         {
             var constructors = typeof(NoModelAsStringRequiredOneValueDefault).GetConstructors(BindingFlags.Instance | BindingFlags.NonPublic);
-            Assert.AreEqual(1, constructors.Length);
+            Assert.AreEqual(2, constructors.Length);
             Assert.AreEqual(0, constructors[0].GetParameters().Length);
         }
 
@@ -289,10 +289,10 @@ namespace AutoRest.TestServer.Tests
         }
 
         [Test]
-        public void ModelAsStringNoRequiredTwoValueNoDefault_HasOneDefaultCtor()
+        public void ModelAsStringNoRequiredTwoValueNoDefault_HasDefaultCtor()
         {
             var constructors = typeof(ModelAsStringNoRequiredTwoValueNoDefault).GetConstructors(BindingFlags.Instance | BindingFlags.NonPublic);
-            Assert.AreEqual(1, constructors.Length);
+            Assert.AreEqual(2, constructors.Length);
             Assert.AreEqual(0, constructors[0].GetParameters().Length);
         }
 
@@ -326,10 +326,10 @@ namespace AutoRest.TestServer.Tests
         }
 
         [Test]
-        public void ModelAsStringNoRequiredTwoValueDefault_HasOneDefaultCtor()
+        public void ModelAsStringNoRequiredTwoValueDefault_HasDefaultCtor()
         {
             var constructors = typeof(ModelAsStringNoRequiredTwoValueDefault).GetConstructors(BindingFlags.Instance | BindingFlags.NonPublic);
-            Assert.AreEqual(1, constructors.Length);
+            Assert.AreEqual(2, constructors.Length);
             Assert.AreEqual(0, constructors[0].GetParameters().Length);
         }
 
@@ -363,10 +363,10 @@ namespace AutoRest.TestServer.Tests
         }
 
         [Test]
-        public void ModelAsStringNoRequiredOneValueDefault_HasOneDefaultCtor()
+        public void ModelAsStringNoRequiredOneValueDefault_HasDefaultCtor()
         {
             var constructors = typeof(ModelAsStringNoRequiredOneValueDefault).GetConstructors(BindingFlags.Instance | BindingFlags.NonPublic);
-            Assert.AreEqual(1, constructors.Length);
+            Assert.AreEqual(2, constructors.Length); // one default ctor, the other is the internal ctor that takes all properties as parameters.
             Assert.AreEqual(0, constructors[0].GetParameters().Length);
         }
 
@@ -440,7 +440,7 @@ namespace AutoRest.TestServer.Tests
         public void ModelAsStringRequiredTwoValueDefault_HasOneCtorWithOptionalParam()
         {
             var constructors = typeof(ModelAsStringRequiredTwoValueDefault).GetConstructors(BindingFlags.Instance | BindingFlags.NonPublic);
-            Assert.AreEqual(1, constructors.Length);
+            Assert.AreEqual(2, constructors.Length);
             Assert.AreEqual(1, constructors[0].GetParameters().Length);
             Assert.AreEqual(typeof(ModelAsStringRequiredTwoValueDefaultEnum?), constructors[0].GetParameters()[0].ParameterType);
         }
@@ -522,7 +522,7 @@ namespace AutoRest.TestServer.Tests
         public void ModelAsStringRequiredOneValueDefault_HasOneCtorWithOptionalParam()
         {
             var constructors = typeof(ModelAsStringRequiredOneValueDefault).GetConstructors(BindingFlags.Instance | BindingFlags.NonPublic);
-            Assert.AreEqual(1, constructors.Length);
+            Assert.AreEqual(2, constructors.Length);
             Assert.AreEqual(1, constructors[0].GetParameters().Length);
             Assert.AreEqual(typeof(ModelAsStringRequiredOneValueDefaultEnum?), constructors[0].GetParameters()[0].ParameterType);
         }
