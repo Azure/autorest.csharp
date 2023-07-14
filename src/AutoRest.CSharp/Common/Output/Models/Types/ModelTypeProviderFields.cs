@@ -120,7 +120,7 @@ namespace AutoRest.CSharp.Output.Models.Types
         {
             if (property.IsDiscriminator)
             {
-                // Discriminator properties should be writeable
+                // discriminator properties should be writeable because we need to set values to the discriminators in the public ctor of derived classes.
                 return false;
             }
             if (property.Type is InputLiteralType && property.IsRequired)
