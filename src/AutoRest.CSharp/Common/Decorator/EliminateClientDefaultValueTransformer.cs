@@ -18,8 +18,8 @@ namespace AutoRest.CSharp.Common.Decorator
             {
                 foreach (var property in schema.Properties)
                 {
-                    if (property.ClientDefaultValue != null)
-                        property.ClientDefaultValue = null;
+                    /* eliminate the client default value of modle property */
+                    property.ClientDefaultValue = null;
                 }
             }
         }
