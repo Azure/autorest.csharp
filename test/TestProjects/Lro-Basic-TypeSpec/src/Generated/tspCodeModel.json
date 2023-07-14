@@ -91,7 +91,7 @@
      "$id": "13",
      "Name": "createProject",
      "ResourceName": "Project",
-     "Description": "DEPRECATED: Use LongRunningResourceCreateWithServiceProvidedName from the ResourceOperations interface.\nLong-running operation signature to create a resource with a service-provided name.",
+     "Description": "Creates a project",
      "Parameters": [
       {
        "$id": "14",
@@ -282,7 +282,7 @@
      "$id": "34",
      "Name": "updateProject",
      "ResourceName": "Project",
-     "Description": "DEPRECATED: Use LongRunningResourceCreateOrReplace from the ResourceOperations interface.\nLong-running operation signature to create or replace a resource.",
+     "Description": "Updates a project",
      "Parameters": [
       {
        "$ref": "14"
