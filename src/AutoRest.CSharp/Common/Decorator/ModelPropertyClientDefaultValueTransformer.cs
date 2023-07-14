@@ -12,7 +12,7 @@ namespace AutoRest.CSharp.Common.Decorator
 {
     /// <summary>
     /// This class is used to eliminate the value of ClientDefaultValue which is defined in the "x-ms-client-default" property attribute.
-    /// We will not regonize any client default value for model property, so we remove it from the code model.
+    /// We will not generate any client default value into the SDK for model property, so we remove it from the code model.
     /// </summary>
     internal class ModelPropertyClientDefaultValueTransformer
     {
