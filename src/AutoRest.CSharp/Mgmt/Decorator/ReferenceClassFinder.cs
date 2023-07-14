@@ -6,11 +6,13 @@ using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Reflection;
+using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Utilities;
 using Azure;
 using Azure.Core.Expressions.DataFactory;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Models;
+using Operation = Azure.Operation;
 
 namespace AutoRest.CSharp.Mgmt.Decorator
 {
@@ -175,9 +177,12 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             if (assembly != null)
                 types.AddRange(assembly.GetTypes());
 
-            assembly = Assembly.GetAssembly(typeof(DataFactoryElement<>));
-            if (assembly != null)
-                types.AddRange(assembly.GetTypes());
+            if (Configuration.UseCoreDataFactoryReplacements)
+            {
+                assembly = Assembly.GetAssembly(typeof(DataFactoryElement<>));
+                if (assembly != null)
+                    types.AddRange(assembly.GetTypes());
+            }
 
             return types;
         }
