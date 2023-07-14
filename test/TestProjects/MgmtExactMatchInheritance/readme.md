@@ -18,7 +18,6 @@ format-by-name-rules:
   'location': 'azure-location'
   '*Uri': 'Uri'
   '*Uris': 'Uri'
-use-core-datafactory-replacements: true
 
 # the remover will remove this since this is not internally used or a reference type if we do not have this configuration
 keep-orphaned-models:

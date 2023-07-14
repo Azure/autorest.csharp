@@ -368,7 +368,7 @@ namespace AutoRest.CSharp.Input
                 case Options.ShouldTreatBase64AsBinaryData:
                     return true;
                 case Options.UseCoreDataFactoryReplacements:
-                    return false;
+                    return true;
                 default:
                     return null;
             }
@@ -497,6 +497,7 @@ namespace AutoRest.CSharp.Input
             WriteIfNotDefault(writer, Options.UnreferencedTypesHandling, Configuration.UnreferencedTypesHandling);
             WriteIfNotDefault(writer, Options.UseOverloadsBetweenProtocolAndConvenience, Configuration.UseOverloadsBetweenProtocolAndConvenience);
             WriteIfNotDefault(writer, Options.ProjectFolder, Configuration.RelativeProjectFolder);
+            WriteIfNotDefault(writer, Options.UseCoreDataFactoryReplacements, Configuration.UseCoreDataFactoryReplacements);
             writer.WriteNonEmptyArray(Options.ProtocolMethodList, Configuration.ProtocolMethodList);
             writer.WriteNonEmptyArray(Options.SuppressAbstractBaseClasses, Configuration.SuppressAbstractBaseClasses);
             writer.WriteNonEmptyArray(Options.ModelsToTreatEmptyStringAsNull, Configuration.ModelsToTreatEmptyStringAsNull.ToList());
