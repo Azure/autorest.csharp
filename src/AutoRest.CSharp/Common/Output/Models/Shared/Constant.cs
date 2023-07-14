@@ -52,7 +52,7 @@ namespace AutoRest.CSharp.Output.Models.Shared
             return new Constant(NewInstanceSentinel, type);
         }
 
-        public static Constant ExpressionOf(FormattableString expression, CSharpType type) => new Constant(new Constant.Expression(expression), type);
+        public static Constant FromExpression(FormattableString expression, CSharpType type) => new Constant(new Constant.Expression(expression), type);
 
         public static Constant Default(CSharpType type)
             => type.IsValueType && !type.IsNullable ? new Constant(NewInstanceSentinel, type) : new Constant(null, type);
