@@ -3,12 +3,12 @@
   <members>
     <member name="GetIntAsync(RequestContext)">
 <example>
-This sample shows how to call GetIntAsync and parse the result.
+This sample shows how to call GetIntAsync with required parameters and parse the result.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
 var client = new PrimitiveClient(credential);
 
-Response response = await client.GetIntAsync();
+Response response = await client.GetIntAsync(new RequestContext());
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("field1").ToString());
@@ -18,12 +18,12 @@ Console.WriteLine(result.GetProperty("field2").ToString());
     </member>
     <member name="GetInt(RequestContext)">
 <example>
-This sample shows how to call GetInt and parse the result.
+This sample shows how to call GetInt with required parameters and parse the result.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
 var client = new PrimitiveClient(credential);
 
-Response response = client.GetInt();
+Response response = client.GetInt(new RequestContext());
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("field1").ToString());
@@ -87,12 +87,12 @@ Console.WriteLine(response.Status);
     </member>
     <member name="GetLongAsync(RequestContext)">
 <example>
-This sample shows how to call GetLongAsync and parse the result.
+This sample shows how to call GetLongAsync with required parameters and parse the result.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
 var client = new PrimitiveClient(credential);
 
-Response response = await client.GetLongAsync();
+Response response = await client.GetLongAsync(new RequestContext());
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("field1").ToString());
@@ -102,12 +102,12 @@ Console.WriteLine(result.GetProperty("field2").ToString());
     </member>
     <member name="GetLong(RequestContext)">
 <example>
-This sample shows how to call GetLong and parse the result.
+This sample shows how to call GetLong with required parameters and parse the result.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
 var client = new PrimitiveClient(credential);
 
-Response response = client.GetLong();
+Response response = client.GetLong(new RequestContext());
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("field1").ToString());
@@ -171,12 +171,12 @@ Console.WriteLine(response.Status);
     </member>
     <member name="GetFloatAsync(RequestContext)">
 <example>
-This sample shows how to call GetFloatAsync and parse the result.
+This sample shows how to call GetFloatAsync with required parameters and parse the result.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
 var client = new PrimitiveClient(credential);
 
-Response response = await client.GetFloatAsync();
+Response response = await client.GetFloatAsync(new RequestContext());
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("field1").ToString());
@@ -186,12 +186,12 @@ Console.WriteLine(result.GetProperty("field2").ToString());
     </member>
     <member name="GetFloat(RequestContext)">
 <example>
-This sample shows how to call GetFloat and parse the result.
+This sample shows how to call GetFloat with required parameters and parse the result.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
 var client = new PrimitiveClient(credential);
 
-Response response = client.GetFloat();
+Response response = client.GetFloat(new RequestContext());
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("field1").ToString());
@@ -255,12 +255,12 @@ Console.WriteLine(response.Status);
     </member>
     <member name="GetDoubleAsync(RequestContext)">
 <example>
-This sample shows how to call GetDoubleAsync and parse the result.
+This sample shows how to call GetDoubleAsync with required parameters and parse the result.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
 var client = new PrimitiveClient(credential);
 
-Response response = await client.GetDoubleAsync();
+Response response = await client.GetDoubleAsync(new RequestContext());
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("field1").ToString());
@@ -270,12 +270,12 @@ Console.WriteLine(result.GetProperty("field_56_zeros_after_the_dot_and_negative_
     </member>
     <member name="GetDouble(RequestContext)">
 <example>
-This sample shows how to call GetDouble and parse the result.
+This sample shows how to call GetDouble with required parameters and parse the result.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
 var client = new PrimitiveClient(credential);
 
-Response response = client.GetDouble();
+Response response = client.GetDouble(new RequestContext());
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("field1").ToString());
@@ -339,12 +339,12 @@ Console.WriteLine(response.Status);
     </member>
     <member name="GetBoolAsync(RequestContext)">
 <example>
-This sample shows how to call GetBoolAsync and parse the result.
+This sample shows how to call GetBoolAsync with required parameters and parse the result.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
 var client = new PrimitiveClient(credential);
 
-Response response = await client.GetBoolAsync();
+Response response = await client.GetBoolAsync(new RequestContext());
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("field_true").ToString());
@@ -354,12 +354,12 @@ Console.WriteLine(result.GetProperty("field_false").ToString());
     </member>
     <member name="GetBool(RequestContext)">
 <example>
-This sample shows how to call GetBool and parse the result.
+This sample shows how to call GetBool with required parameters and parse the result.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
 var client = new PrimitiveClient(credential);
 
-Response response = client.GetBool();
+Response response = client.GetBool(new RequestContext());
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("field_true").ToString());
@@ -423,12 +423,12 @@ Console.WriteLine(response.Status);
     </member>
     <member name="GetStringAsync(RequestContext)">
 <example>
-This sample shows how to call GetStringAsync and parse the result.
+This sample shows how to call GetStringAsync with required parameters and parse the result.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
 var client = new PrimitiveClient(credential);
 
-Response response = await client.GetStringAsync();
+Response response = await client.GetStringAsync(new RequestContext());
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("field").ToString());
@@ -439,12 +439,12 @@ Console.WriteLine(result.GetProperty("null").ToString());
     </member>
     <member name="GetString(RequestContext)">
 <example>
-This sample shows how to call GetString and parse the result.
+This sample shows how to call GetString with required parameters and parse the result.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
 var client = new PrimitiveClient(credential);
 
-Response response = client.GetString();
+Response response = client.GetString(new RequestContext());
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("field").ToString());
@@ -511,12 +511,12 @@ Console.WriteLine(response.Status);
     </member>
     <member name="GetDateAsync(RequestContext)">
 <example>
-This sample shows how to call GetDateAsync and parse the result.
+This sample shows how to call GetDateAsync with required parameters and parse the result.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
 var client = new PrimitiveClient(credential);
 
-Response response = await client.GetDateAsync();
+Response response = await client.GetDateAsync(new RequestContext());
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("field").ToString());
@@ -526,12 +526,12 @@ Console.WriteLine(result.GetProperty("leap").ToString());
     </member>
     <member name="GetDate(RequestContext)">
 <example>
-This sample shows how to call GetDate and parse the result.
+This sample shows how to call GetDate with required parameters and parse the result.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
 var client = new PrimitiveClient(credential);
 
-Response response = client.GetDate();
+Response response = client.GetDate(new RequestContext());
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("field").ToString());
@@ -595,12 +595,12 @@ Console.WriteLine(response.Status);
     </member>
     <member name="GetDateTimeAsync(RequestContext)">
 <example>
-This sample shows how to call GetDateTimeAsync and parse the result.
+This sample shows how to call GetDateTimeAsync with required parameters and parse the result.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
 var client = new PrimitiveClient(credential);
 
-Response response = await client.GetDateTimeAsync();
+Response response = await client.GetDateTimeAsync(new RequestContext());
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("field").ToString());
@@ -610,12 +610,12 @@ Console.WriteLine(result.GetProperty("now").ToString());
     </member>
     <member name="GetDateTime(RequestContext)">
 <example>
-This sample shows how to call GetDateTime and parse the result.
+This sample shows how to call GetDateTime with required parameters and parse the result.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
 var client = new PrimitiveClient(credential);
 
-Response response = client.GetDateTime();
+Response response = client.GetDateTime(new RequestContext());
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("field").ToString());
@@ -679,12 +679,12 @@ Console.WriteLine(response.Status);
     </member>
     <member name="GetDateTimeRfc1123Async(RequestContext)">
 <example>
-This sample shows how to call GetDateTimeRfc1123Async and parse the result.
+This sample shows how to call GetDateTimeRfc1123Async with required parameters and parse the result.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
 var client = new PrimitiveClient(credential);
 
-Response response = await client.GetDateTimeRfc1123Async();
+Response response = await client.GetDateTimeRfc1123Async(new RequestContext());
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("field").ToString());
@@ -694,12 +694,12 @@ Console.WriteLine(result.GetProperty("now").ToString());
     </member>
     <member name="GetDateTimeRfc1123(RequestContext)">
 <example>
-This sample shows how to call GetDateTimeRfc1123 and parse the result.
+This sample shows how to call GetDateTimeRfc1123 with required parameters and parse the result.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
 var client = new PrimitiveClient(credential);
 
-Response response = client.GetDateTimeRfc1123();
+Response response = client.GetDateTimeRfc1123(new RequestContext());
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("field").ToString());
@@ -763,12 +763,12 @@ Console.WriteLine(response.Status);
     </member>
     <member name="GetDurationAsync(RequestContext)">
 <example>
-This sample shows how to call GetDurationAsync and parse the result.
+This sample shows how to call GetDurationAsync with required parameters and parse the result.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
 var client = new PrimitiveClient(credential);
 
-Response response = await client.GetDurationAsync();
+Response response = await client.GetDurationAsync(new RequestContext());
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("field").ToString());
@@ -777,12 +777,12 @@ Console.WriteLine(result.GetProperty("field").ToString());
     </member>
     <member name="GetDuration(RequestContext)">
 <example>
-This sample shows how to call GetDuration and parse the result.
+This sample shows how to call GetDuration with required parameters and parse the result.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
 var client = new PrimitiveClient(credential);
 
-Response response = client.GetDuration();
+Response response = client.GetDuration(new RequestContext());
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("field").ToString());
@@ -843,12 +843,12 @@ Console.WriteLine(response.Status);
     </member>
     <member name="GetByteAsync(RequestContext)">
 <example>
-This sample shows how to call GetByteAsync and parse the result.
+This sample shows how to call GetByteAsync with required parameters and parse the result.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
 var client = new PrimitiveClient(credential);
 
-Response response = await client.GetByteAsync();
+Response response = await client.GetByteAsync(new RequestContext());
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("field").ToString());
@@ -857,12 +857,12 @@ Console.WriteLine(result.GetProperty("field").ToString());
     </member>
     <member name="GetByte(RequestContext)">
 <example>
-This sample shows how to call GetByte and parse the result.
+This sample shows how to call GetByte with required parameters and parse the result.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
 var client = new PrimitiveClient(credential);
 
-Response response = client.GetByte();
+Response response = client.GetByte(new RequestContext());
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("field").ToString());

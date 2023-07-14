@@ -5,7 +5,7 @@
 
 #nullable disable
 
-namespace CustomizationsInCadl.Models
+namespace CustomizationsInTsp.Models
 {
     /// <summary> Public model made internal. </summary>
     internal partial class ModelToMakeInternal

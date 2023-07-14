@@ -3,23 +3,12 @@
   <members>
     <member name="GetPaginationParamsAsync(int?,int?,int?,RequestContext)">
 <example>
-This sample shows how to call GetPaginationParamsAsync and parse the result.
+This sample shows how to call GetPaginationParamsAsync with required parameters and parse the result.
 <code><![CDATA[
 var credential = new DefaultAzureCredential();
 var client = new PaginationParamsClient(credential);
 
-await foreach (var item in client.GetPaginationParamsAsync())
-{
-    JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
-    Console.WriteLine(result.ToString());
-}
-]]></code>
-This sample shows how to call GetPaginationParamsAsync with all parameters, and how to parse the result.
-<code><![CDATA[
-var credential = new DefaultAzureCredential();
-var client = new PaginationParamsClient(credential);
-
-await foreach (var item in client.GetPaginationParamsAsync(1234, 1234, 1234))
+await foreach (var item in client.GetPaginationParamsAsync(1234, 1234, 1234, new RequestContext()))
 {
     JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
     Console.WriteLine(result.GetProperty("id").ToString());
@@ -31,23 +20,12 @@ await foreach (var item in client.GetPaginationParamsAsync(1234, 1234, 1234))
     </member>
     <member name="GetPaginationParams(int?,int?,int?,RequestContext)">
 <example>
-This sample shows how to call GetPaginationParams and parse the result.
+This sample shows how to call GetPaginationParams with required parameters and parse the result.
 <code><![CDATA[
 var credential = new DefaultAzureCredential();
 var client = new PaginationParamsClient(credential);
 
-foreach (var item in client.GetPaginationParams())
-{
-    JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
-    Console.WriteLine(result.ToString());
-}
-]]></code>
-This sample shows how to call GetPaginationParams with all parameters, and how to parse the result.
-<code><![CDATA[
-var credential = new DefaultAzureCredential();
-var client = new PaginationParamsClient(credential);
-
-foreach (var item in client.GetPaginationParams(1234, 1234, 1234))
+foreach (var item in client.GetPaginationParams(1234, 1234, 1234, new RequestContext()))
 {
     JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
     Console.WriteLine(result.GetProperty("id").ToString());
@@ -59,23 +37,12 @@ foreach (var item in client.GetPaginationParams(1234, 1234, 1234))
     </member>
     <member name="Get2sAsync(int?,int?,long?,RequestContext)">
 <example>
-This sample shows how to call Get2sAsync and parse the result.
+This sample shows how to call Get2sAsync with required parameters and parse the result.
 <code><![CDATA[
 var credential = new DefaultAzureCredential();
 var client = new PaginationParamsClient(credential);
 
-await foreach (var item in client.Get2sAsync())
-{
-    JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
-    Console.WriteLine(result.ToString());
-}
-]]></code>
-This sample shows how to call Get2sAsync with all parameters, and how to parse the result.
-<code><![CDATA[
-var credential = new DefaultAzureCredential();
-var client = new PaginationParamsClient(credential);
-
-await foreach (var item in client.Get2sAsync(1234, 1234, 1234))
+await foreach (var item in client.Get2sAsync(1234, 1234, 1234, new RequestContext()))
 {
     JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
     Console.WriteLine(result.GetProperty("id").ToString());
@@ -87,23 +54,12 @@ await foreach (var item in client.Get2sAsync(1234, 1234, 1234))
     </member>
     <member name="Get2s(int?,int?,long?,RequestContext)">
 <example>
-This sample shows how to call Get2s and parse the result.
+This sample shows how to call Get2s with required parameters and parse the result.
 <code><![CDATA[
 var credential = new DefaultAzureCredential();
 var client = new PaginationParamsClient(credential);
 
-foreach (var item in client.Get2s())
-{
-    JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
-    Console.WriteLine(result.ToString());
-}
-]]></code>
-This sample shows how to call Get2s with all parameters, and how to parse the result.
-<code><![CDATA[
-var credential = new DefaultAzureCredential();
-var client = new PaginationParamsClient(credential);
-
-foreach (var item in client.Get2s(1234, 1234, 1234))
+foreach (var item in client.Get2s(1234, 1234, 1234, new RequestContext()))
 {
     JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
     Console.WriteLine(result.GetProperty("id").ToString());
@@ -115,23 +71,12 @@ foreach (var item in client.Get2s(1234, 1234, 1234))
     </member>
     <member name="Get3sAsync(int?,int?,int?,RequestContext)">
 <example>
-This sample shows how to call Get3sAsync and parse the result.
+This sample shows how to call Get3sAsync with required parameters and parse the result.
 <code><![CDATA[
 var credential = new DefaultAzureCredential();
 var client = new PaginationParamsClient(credential);
 
-await foreach (var item in client.Get3sAsync())
-{
-    JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
-    Console.WriteLine(result.ToString());
-}
-]]></code>
-This sample shows how to call Get3sAsync with all parameters, and how to parse the result.
-<code><![CDATA[
-var credential = new DefaultAzureCredential();
-var client = new PaginationParamsClient(credential);
-
-await foreach (var item in client.Get3sAsync(1234, 1234, 1234))
+await foreach (var item in client.Get3sAsync(1234, 1234, 1234, new RequestContext()))
 {
     JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
     Console.WriteLine(result.GetProperty("id").ToString());
@@ -143,23 +88,12 @@ await foreach (var item in client.Get3sAsync(1234, 1234, 1234))
     </member>
     <member name="Get3s(int?,int?,int?,RequestContext)">
 <example>
-This sample shows how to call Get3s and parse the result.
+This sample shows how to call Get3s with required parameters and parse the result.
 <code><![CDATA[
 var credential = new DefaultAzureCredential();
 var client = new PaginationParamsClient(credential);
 
-foreach (var item in client.Get3s())
-{
-    JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
-    Console.WriteLine(result.ToString());
-}
-]]></code>
-This sample shows how to call Get3s with all parameters, and how to parse the result.
-<code><![CDATA[
-var credential = new DefaultAzureCredential();
-var client = new PaginationParamsClient(credential);
-
-foreach (var item in client.Get3s(1234, 1234, 1234))
+foreach (var item in client.Get3s(1234, 1234, 1234, new RequestContext()))
 {
     JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
     Console.WriteLine(result.GetProperty("id").ToString());
@@ -171,23 +105,12 @@ foreach (var item in client.Get3s(1234, 1234, 1234))
     </member>
     <member name="Get4sAsync(int?,int?,float?,RequestContext)">
 <example>
-This sample shows how to call Get4sAsync and parse the result.
+This sample shows how to call Get4sAsync with required parameters and parse the result.
 <code><![CDATA[
 var credential = new DefaultAzureCredential();
 var client = new PaginationParamsClient(credential);
 
-await foreach (var item in client.Get4sAsync())
-{
-    JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
-    Console.WriteLine(result.ToString());
-}
-]]></code>
-This sample shows how to call Get4sAsync with all parameters, and how to parse the result.
-<code><![CDATA[
-var credential = new DefaultAzureCredential();
-var client = new PaginationParamsClient(credential);
-
-await foreach (var item in client.Get4sAsync(1234, 1234, 3.14f))
+await foreach (var item in client.Get4sAsync(1234, 1234, 3.14f, new RequestContext()))
 {
     JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
     Console.WriteLine(result.GetProperty("id").ToString());
@@ -199,23 +122,12 @@ await foreach (var item in client.Get4sAsync(1234, 1234, 3.14f))
     </member>
     <member name="Get4s(int?,int?,float?,RequestContext)">
 <example>
-This sample shows how to call Get4s and parse the result.
+This sample shows how to call Get4s with required parameters and parse the result.
 <code><![CDATA[
 var credential = new DefaultAzureCredential();
 var client = new PaginationParamsClient(credential);
 
-foreach (var item in client.Get4s())
-{
-    JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
-    Console.WriteLine(result.ToString());
-}
-]]></code>
-This sample shows how to call Get4s with all parameters, and how to parse the result.
-<code><![CDATA[
-var credential = new DefaultAzureCredential();
-var client = new PaginationParamsClient(credential);
-
-foreach (var item in client.Get4s(1234, 1234, 3.14f))
+foreach (var item in client.Get4s(1234, 1234, 3.14f, new RequestContext()))
 {
     JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
     Console.WriteLine(result.GetProperty("id").ToString());

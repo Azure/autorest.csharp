@@ -3,12 +3,12 @@
   <members>
     <member name="GetCachedParameterAsync(RequestContext)">
 <example>
-This sample shows how to call GetCachedParameterAsync and parse the result.
+This sample shows how to call GetCachedParameterAsync with required parameters and parse the result.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
 var client = new RootClient("<cachedParameter>", credential);
 
-Response response = await client.GetCachedParameterAsync();
+Response response = await client.GetCachedParameterAsync(new RequestContext());
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.ToString());
@@ -17,12 +17,12 @@ Console.WriteLine(result.ToString());
     </member>
     <member name="GetCachedParameter(RequestContext)">
 <example>
-This sample shows how to call GetCachedParameter and parse the result.
+This sample shows how to call GetCachedParameter with required parameters and parse the result.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
 var client = new RootClient("<cachedParameter>", credential);
 
-Response response = client.GetCachedParameter();
+Response response = client.GetCachedParameter(new RequestContext());
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.ToString());

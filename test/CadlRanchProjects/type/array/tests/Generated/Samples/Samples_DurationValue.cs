@@ -139,7 +139,10 @@ namespace _Type._Array.Samples
         {
             var client = new ArrayClient().GetDurationValueClient("1.0.0");
 
-            var body = new object();
+            var body = new TimeSpan[]
+            {
+    new TimeSpan(1, 2, 3)
+            };
             var result = await client.PutAsync(body);
         }
     }

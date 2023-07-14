@@ -56,7 +56,10 @@ namespace LroBasicTypeSpec
             _apiVersion = options.Version;
         }
 
-        /// <summary> The most basic operation. </summary>
+        /// <summary>
+        /// DEPRECATED: Use LongRunningResourceCreateWithServiceProvidedName from the ResourceOperations interface.
+        /// Long-running operation signature to create a resource with a service-provided name.
+        /// </summary>
         /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
         /// <param name="resource"> The resource instance. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -70,7 +73,10 @@ namespace LroBasicTypeSpec
             return await CreateProjectAsync(waitUntil, resource.ToRequestContent(), context).ConfigureAwait(false);
         }
 
-        /// <summary> The most basic operation. </summary>
+        /// <summary>
+        /// DEPRECATED: Use LongRunningResourceCreateWithServiceProvidedName from the ResourceOperations interface.
+        /// Long-running operation signature to create a resource with a service-provided name.
+        /// </summary>
         /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
         /// <param name="resource"> The resource instance. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -85,7 +91,8 @@ namespace LroBasicTypeSpec
         }
 
         /// <summary>
-        /// [Protocol Method] The most basic operation.
+        /// [Protocol Method] DEPRECATED: Use LongRunningResourceCreateWithServiceProvidedName from the ResourceOperations interface.
+        /// Long-running operation signature to create a resource with a service-provided name.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -125,7 +132,8 @@ namespace LroBasicTypeSpec
         }
 
         /// <summary>
-        /// [Protocol Method] The most basic operation.
+        /// [Protocol Method] DEPRECATED: Use LongRunningResourceCreateWithServiceProvidedName from the ResourceOperations interface.
+        /// Long-running operation signature to create a resource with a service-provided name.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -164,7 +172,10 @@ namespace LroBasicTypeSpec
             }
         }
 
-        /// <summary> The most basic operation. </summary>
+        /// <summary>
+        /// DEPRECATED: Use LongRunningResourceCreateOrReplace from the ResourceOperations interface.
+        /// Long-running operation signature to create or replace a resource.
+        /// </summary>
         /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
         /// <param name="id"> The String to use. </param>
         /// <param name="resource"> The resource instance. </param>
@@ -182,7 +193,10 @@ namespace LroBasicTypeSpec
             return ProtocolOperationHelpers.Convert(response, Project.FromResponse, ClientDiagnostics, "LroBasicTypeSpecClient.UpdateProject");
         }
 
-        /// <summary> The most basic operation. </summary>
+        /// <summary>
+        /// DEPRECATED: Use LongRunningResourceCreateOrReplace from the ResourceOperations interface.
+        /// Long-running operation signature to create or replace a resource.
+        /// </summary>
         /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
         /// <param name="id"> The String to use. </param>
         /// <param name="resource"> The resource instance. </param>
@@ -201,7 +215,8 @@ namespace LroBasicTypeSpec
         }
 
         /// <summary>
-        /// [Protocol Method] The most basic operation.
+        /// [Protocol Method] DEPRECATED: Use LongRunningResourceCreateOrReplace from the ResourceOperations interface.
+        /// Long-running operation signature to create or replace a resource.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -244,7 +259,8 @@ namespace LroBasicTypeSpec
         }
 
         /// <summary>
-        /// [Protocol Method] The most basic operation.
+        /// [Protocol Method] DEPRECATED: Use LongRunningResourceCreateOrReplace from the ResourceOperations interface.
+        /// Long-running operation signature to create or replace a resource.
         /// <list type="bullet">
         /// <item>
         /// <description>

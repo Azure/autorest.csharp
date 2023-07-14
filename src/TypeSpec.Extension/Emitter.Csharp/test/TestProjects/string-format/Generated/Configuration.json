@@ -1,8 +1,8 @@
 {
-  "OutputFolder": ".",
-  "Namespace": "stringFormat",
-  "LibraryName": "stringFormat",
-  "SharedSourceFolders": [
+  "output-folder": ".",
+  "namespace": "stringFormat",
+  "library-name": "stringFormat",
+  "shared-source-folders": [
     "../../../../../../../node_modules/@autorest/csharp/Generator.Shared",
     "../../../../../../../node_modules/@autorest/csharp/Azure.Core.Shared"
   ],

@@ -1,8 +1,8 @@
 {
-  "OutputFolder": ".",
-  "Namespace": "MgmtRenameRules",
-  "LibraryName": "ComputeManagementClient",
-  "SharedSourceFolders": [
+  "output-folder": ".",
+  "namespace": "MgmtRenameRules",
+  "library-name": "ComputeManagementClient",
+  "shared-source-folders": [
     "..\\..\\..\\..\\artifacts\\bin\\AutoRest.CSharp\\Debug\\net6.0\\Generator.Shared",
     "..\\..\\..\\..\\artifacts\\bin\\AutoRest.CSharp\\Debug\\net6.0\\Azure.Core.Shared"
   ],

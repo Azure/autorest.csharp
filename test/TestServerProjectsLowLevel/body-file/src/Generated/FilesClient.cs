@@ -71,7 +71,7 @@ namespace body_file_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/FilesClient.xml" path="doc/members/member[@name='GetFileAsync(RequestContext)']/*" />
-        public virtual async Task<Response> GetFileAsync(RequestContext context = null)
+        public virtual async Task<Response> GetFileAsync(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("FilesClient.GetFile");
             scope.Start();
@@ -101,7 +101,7 @@ namespace body_file_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/FilesClient.xml" path="doc/members/member[@name='GetFile(RequestContext)']/*" />
-        public virtual Response GetFile(RequestContext context = null)
+        public virtual Response GetFile(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("FilesClient.GetFile");
             scope.Start();
@@ -131,7 +131,7 @@ namespace body_file_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/FilesClient.xml" path="doc/members/member[@name='GetFileLargeAsync(RequestContext)']/*" />
-        public virtual async Task<Response> GetFileLargeAsync(RequestContext context = null)
+        public virtual async Task<Response> GetFileLargeAsync(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("FilesClient.GetFileLarge");
             scope.Start();
@@ -161,7 +161,7 @@ namespace body_file_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/FilesClient.xml" path="doc/members/member[@name='GetFileLarge(RequestContext)']/*" />
-        public virtual Response GetFileLarge(RequestContext context = null)
+        public virtual Response GetFileLarge(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("FilesClient.GetFileLarge");
             scope.Start();
@@ -191,7 +191,7 @@ namespace body_file_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/FilesClient.xml" path="doc/members/member[@name='GetEmptyFileAsync(RequestContext)']/*" />
-        public virtual async Task<Response> GetEmptyFileAsync(RequestContext context = null)
+        public virtual async Task<Response> GetEmptyFileAsync(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("FilesClient.GetEmptyFile");
             scope.Start();
@@ -221,7 +221,7 @@ namespace body_file_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/FilesClient.xml" path="doc/members/member[@name='GetEmptyFile(RequestContext)']/*" />
-        public virtual Response GetEmptyFile(RequestContext context = null)
+        public virtual Response GetEmptyFile(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("FilesClient.GetEmptyFile");
             scope.Start();

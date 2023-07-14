@@ -19,6 +19,7 @@ using AutoRest.CSharp.Common.Output.Models;
 using Azure.Core;
 using static AutoRest.CSharp.Output.Models.MethodSignatureModifiers;
 using System.Text.Json;
+using Azure.Core.Pipeline;
 
 namespace AutoRest.CSharp.Generation.Writers
 {
@@ -174,8 +175,6 @@ namespace AutoRest.CSharp.Generation.Writers
                 .AppendRawIf("protected ", methodBase.Modifiers.HasFlag(Protected))
                 .AppendRawIf("private ", methodBase.Modifiers.HasFlag(Private));
 
-            writer.AppendRawIf("new ", methodBase.Modifiers.HasFlag(New));
-
             var method = methodBase as MethodSignature;
             if (method != null)
             {
@@ -185,6 +184,9 @@ namespace AutoRest.CSharp.Generation.Writers
                     .AppendRawIf("static ", methodBase.Modifiers.HasFlag(Static))
                     .AppendRawIf("async ", methodBase.Modifiers.HasFlag(Async));
 
+                // SA1206: 'new' should be after static
+                writer.AppendRawIf("new ", methodBase.Modifiers.HasFlag(New));
+
                 if (method.ReturnType != null)
                 {
                     writer.Append($"{method.ReturnType} ");
@@ -193,6 +195,10 @@ namespace AutoRest.CSharp.Generation.Writers
                 {
                     writer.AppendRaw("void ");
                 }
+            }
+            else
+            {
+                writer.AppendRawIf("new ", methodBase.Modifiers.HasFlag(New));
             }
 
             writer.Append($"{methodBase.Name}");
@@ -641,6 +647,15 @@ namespace AutoRest.CSharp.Generation.Writers
                 writer.WriteParametersValidation(signature.Parameters);
 
             return scope;
+        }
+
+        public static CodeWriter WriteEnableHttpRedirectIfNecessary(this CodeWriter writer, RestClientMethod restClientMethod, CodeWriterDeclaration messageVariable)
+        {
+            if (restClientMethod.ShouldEnableRedirect)
+            {
+                writer.Line($"{nameof(RedirectPolicy)}.{nameof(RedirectPolicy.SetAllowAutoRedirect)}({messageVariable}, true);");
+            }
+            return writer;
         }
     }
 }

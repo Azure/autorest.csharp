@@ -33,8 +33,8 @@ namespace AutoRest.CSharp.Output.Models
         {
             _rootNamespace = rootNamespace;
             _sourceInputModel = sourceInputModel;
-            _defaultNamespace = Configuration.Namespace ?? rootNamespace.Name;
-            _libraryName = Configuration.LibraryName ?? rootNamespace.Name;
+            _defaultNamespace = Configuration.Namespace;
+            _libraryName = Configuration.LibraryName;
         }
 
         public DpgOutputLibrary Build(bool isTspInput)
@@ -54,7 +54,7 @@ namespace AutoRest.CSharp.Output.Models
             var models = new Dictionary<InputModelType, ModelTypeProvider>();
             var clients = new List<LowLevelClient>();
 
-            var library = new DpgOutputLibrary(_libraryName, _rootNamespace.Name, enums, models, clients, clientOptions, isTspInput, _sourceInputModel);
+            var library = new DpgOutputLibrary(_libraryName, enums, models, clients, clientOptions, isTspInput, _sourceInputModel);
 
             if (isTspInput)
             {
@@ -216,7 +216,7 @@ namespace AutoRest.CSharp.Output.Models
         private static ClientInfo CreateClientInfo(InputClient ns, SourceInputModel? sourceInputModel, string rootNamespaceName)
         {
             var clientNamePrefix = ClientBuilder.GetClientPrefix(ns.Name, rootNamespaceName);
-            var clientNamespace = Configuration.Namespace ?? rootNamespaceName;
+            var clientNamespace = Configuration.Namespace;
             var clientDescription = ns.Description;
             var operations = ns.Operations;
             var clientParameters = RestClientBuilder.GetParametersFromOperations(operations).ToList();
