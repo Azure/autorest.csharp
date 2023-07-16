@@ -14,7 +14,6 @@ using AutoRest.CSharp.Common.Output.Models.Types;
 using AutoRest.CSharp.Common.Output.Models.ValueExpressions;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Input;
-using AutoRest.CSharp.Input.Source;
 using AutoRest.CSharp.Output.Builders;
 using AutoRest.CSharp.Output.Models.Requests;
 using AutoRest.CSharp.Output.Models.Shared;
@@ -35,14 +34,11 @@ namespace AutoRest.CSharp.Output.Models
         private readonly MethodSignatureModifiers _protocolAccessibility;
         private readonly MethodParametersBuilder _parametersBuilder;
         private readonly StatusCodeSwitchBuilder _statusCodeSwitchBuilder;
-        private readonly TypeFactory _typeFactory;
-        private readonly SourceInputModel? _sourceInputModel;
 
         public InputOperation Operation { get; }
 
         protected ValueExpression ClientDiagnosticsProperty { get; }
         protected HttpPipelineExpression PipelineField { get; }
-        protected ValueExpression? RestClient { get; }
 
         protected MethodSignatureModifiers ConvenienceModifiers { get; }
 
@@ -61,14 +57,11 @@ namespace AutoRest.CSharp.Output.Models
             _clientName = args.ClientName;
             _clientNamespace = args.ClientNamespace;
             _statusCodeSwitchBuilder = args.StatusCodeSwitchBuilder;
-            _typeFactory = args.TypeFactory;
-            _sourceInputModel = args.SourceInputModel;
-            _parametersBuilder = new MethodParametersBuilder(args.Operation, _typeFactory, _sourceInputModel);
+            _parametersBuilder = new MethodParametersBuilder(args.Operation, args.TypeFactory, args.SourceInputModel);
 
             Operation = args.Operation;
             ClientDiagnosticsProperty = _fields.ClientDiagnosticsProperty;
             PipelineField = new HttpPipelineExpression(_fields.PipelineField.Declaration);
-            RestClient = args.RestClientReference;
 
             ProtocolMethodName = Operation.Name.ToCleanName();
             CreateMessageMethodName = $"Create{ProtocolMethodName}Request";

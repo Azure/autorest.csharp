@@ -11,7 +11,6 @@ namespace AutoRest.CSharp.Output.Models
     internal record OperationMethodsBuilderBaseArgs
     (
         InputOperation Operation,
-        ValueExpression? RestClientReference,
         ClientFields Fields,
         string ClientNamespace,
         string ClientName,

@@ -27,7 +27,7 @@ namespace AutoRest.CSharp.Output.Models
             _typeFactory = typeFactory;
         }
 
-        public IEnumerable<OperationMethodsBuilderBase> Build(ValueExpression? restClientReference, ClientFields fields, string clientName, string clientNamespace)
+        public IEnumerable<OperationMethodsBuilderBase> Build(ClientFields fields, string clientName, string clientNamespace)
         {
             foreach (var operation in _operations)
             {
@@ -35,7 +35,7 @@ namespace AutoRest.CSharp.Output.Models
                     ? StatusCodeSwitchBuilder.CreateHeadAsBooleanOperationSwitch()
                     : StatusCodeSwitchBuilder.CreateSwitch(operation, _library, _typeFactory);
 
-                var args = new OperationMethodsBuilderBaseArgs(operation, restClientReference, fields, clientNamespace, clientName, statusCodeSwitchBuilder, _typeFactory, _sourceInputModel);
+                var args = new OperationMethodsBuilderBaseArgs(operation, fields, clientNamespace, clientName, statusCodeSwitchBuilder, _typeFactory, _sourceInputModel);
 
                 yield return (operation.Paging, operation.LongRunning) switch
                 {

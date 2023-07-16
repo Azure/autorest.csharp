@@ -50,13 +50,13 @@ namespace AutoRest.CSharp.Output.Models
         {
             var createRequestArguments = new List<ValueExpression>();
             var parameterConversions = AddPageableMethodArguments(parameters, createRequestArguments, out var requestContextVariable).AsStatement();
-            var firstPageRequestLine = DeclareFirstPageRequestLocalFunction(RestClient, CreateMessageMethodName, createRequestArguments, out var createFirstPageRequest);
+            var firstPageRequestLine = DeclareFirstPageRequestLocalFunction(null, CreateMessageMethodName, createRequestArguments, out var createFirstPageRequest);
 
             CodeWriterDeclaration? createNextPageRequest = null;
             DeclarationStatement? nextPageRequestLine = null;
             if (createNextPageMessageSignature is not null)
             {
-                nextPageRequestLine = DeclareNextPageRequestLocalFunction(RestClient, createNextPageMessageSignature.Name, createRequestArguments.Prepend(KnownParameters.NextLink), out createNextPageRequest);
+                nextPageRequestLine = DeclareNextPageRequestLocalFunction(null, createNextPageMessageSignature.Name, createRequestArguments.Prepend(KnownParameters.NextLink), out createNextPageRequest);
             }
 
             var returnLine = Return(CreatePageable(createFirstPageRequest, createNextPageRequest, ClientDiagnosticsProperty, PipelineField, PageItemType, CreateScopeName(methodName), ItemPropertyName, NextLinkName, requestContextVariable, async));
