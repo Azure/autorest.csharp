@@ -8,7 +8,7 @@ This sample shows how to call GetValidAsync with required parameters and parse t
 var credential = new AzureKeyCredential("<key>");
 var client = new ReadonlypropertyClient(credential);
 
-Response response = await client.GetValidAsync(new RequestContext());
+Response response = await client.GetValidAsync(new RequestContext()).ConfigureAwait(false);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("id").ToString());
@@ -40,7 +40,7 @@ var client = new ReadonlypropertyClient(credential);
 
 var data = new {};
 
-Response response = await client.PutValidAsync(RequestContent.Create(data));
+Response response = await client.PutValidAsync(RequestContent.Create(data)).ConfigureAwait(false);
 Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call PutValidAsync with all request content.
@@ -52,7 +52,7 @@ var data = new {
     size = 1234,
 };
 
-Response response = await client.PutValidAsync(RequestContent.Create(data));
+Response response = await client.PutValidAsync(RequestContent.Create(data)).ConfigureAwait(false);
 Console.WriteLine(response.Status);
 ]]></code>
 </example>

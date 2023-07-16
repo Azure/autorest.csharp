@@ -648,7 +648,7 @@ This sample shows how to call GetMultiplePagesLROAsync with required parameters 
 var credential = new AzureKeyCredential("<key>");
 var client = new PagingClient(credential);
 
-var operation = await client.GetMultiplePagesLROAsync(WaitUntil.Completed, "<clientRequestId>", 1234, 1234, new RequestContext());
+var operation = await client.GetMultiplePagesLROAsync(WaitUntil.Completed, "<clientRequestId>", 1234, 1234, new RequestContext()).ConfigureAwait(false);
 
 await foreach (var item in operation.Value)
 {

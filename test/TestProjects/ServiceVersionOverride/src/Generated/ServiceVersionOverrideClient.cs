@@ -123,9 +123,9 @@ namespace ServiceVersionOverride
             var uri = new RawRequestUriBuilder();
             uri.Reset(_endpoint);
             uri.AppendPath("/op", false);
+            uri.AppendQuery("api-version", _apiVersion, true);
             uri.AppendQuery("not-api-version-constant", "2.0", true);
             uri.AppendQuery("not-api-version-enum", notApiVersionEnum, true);
-            uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
             return message;
         }

@@ -5,10 +5,10 @@
 <example>
 This sample shows how to call HeadAsync.
 <code><![CDATA[
-var credential = new DefaultAzureCredential();
+var credential = new Azure.Identity.DefaultAzureCredential();
 var client = new AutorestSecurityAadClient(credential);
 
-Response response = await client.HeadAsync();
+Response response = await client.HeadAsync().ConfigureAwait(false);
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
@@ -17,7 +17,7 @@ Console.WriteLine(response.Status);
 <example>
 This sample shows how to call Head.
 <code><![CDATA[
-var credential = new DefaultAzureCredential();
+var credential = new Azure.Identity.DefaultAzureCredential();
 var client = new AutorestSecurityAadClient(credential);
 
 Response response = client.Head();

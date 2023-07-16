@@ -43,7 +43,7 @@ namespace url_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new PathsClient(credential);
 
-            Response response = await client.GetBooleanTrueAsync();
+            Response response = await client.GetBooleanTrueAsync().ConfigureAwait(false);
             Console.WriteLine(response.Status);
         }
 
@@ -54,7 +54,7 @@ namespace url_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new PathsClient(credential);
 
-            Response response = await client.GetBooleanTrueAsync();
+            Response response = await client.GetBooleanTrueAsync().ConfigureAwait(false);
             Console.WriteLine(response.Status);
         }
 
@@ -87,7 +87,7 @@ namespace url_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new PathsClient(credential);
 
-            Response response = await client.GetBooleanFalseAsync();
+            Response response = await client.GetBooleanFalseAsync().ConfigureAwait(false);
             Console.WriteLine(response.Status);
         }
 
@@ -98,7 +98,7 @@ namespace url_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new PathsClient(credential);
 
-            Response response = await client.GetBooleanFalseAsync();
+            Response response = await client.GetBooleanFalseAsync().ConfigureAwait(false);
             Console.WriteLine(response.Status);
         }
 
@@ -131,7 +131,7 @@ namespace url_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new PathsClient(credential);
 
-            Response response = await client.GetIntOneMillionAsync();
+            Response response = await client.GetIntOneMillionAsync().ConfigureAwait(false);
             Console.WriteLine(response.Status);
         }
 
@@ -142,7 +142,7 @@ namespace url_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new PathsClient(credential);
 
-            Response response = await client.GetIntOneMillionAsync();
+            Response response = await client.GetIntOneMillionAsync().ConfigureAwait(false);
             Console.WriteLine(response.Status);
         }
 
@@ -175,7 +175,7 @@ namespace url_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new PathsClient(credential);
 
-            Response response = await client.GetIntNegativeOneMillionAsync();
+            Response response = await client.GetIntNegativeOneMillionAsync().ConfigureAwait(false);
             Console.WriteLine(response.Status);
         }
 
@@ -186,7 +186,7 @@ namespace url_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new PathsClient(credential);
 
-            Response response = await client.GetIntNegativeOneMillionAsync();
+            Response response = await client.GetIntNegativeOneMillionAsync().ConfigureAwait(false);
             Console.WriteLine(response.Status);
         }
 
@@ -219,7 +219,7 @@ namespace url_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new PathsClient(credential);
 
-            Response response = await client.GetTenBillionAsync();
+            Response response = await client.GetTenBillionAsync().ConfigureAwait(false);
             Console.WriteLine(response.Status);
         }
 
@@ -230,7 +230,7 @@ namespace url_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new PathsClient(credential);
 
-            Response response = await client.GetTenBillionAsync();
+            Response response = await client.GetTenBillionAsync().ConfigureAwait(false);
             Console.WriteLine(response.Status);
         }
 
@@ -263,7 +263,7 @@ namespace url_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new PathsClient(credential);
 
-            Response response = await client.GetNegativeTenBillionAsync();
+            Response response = await client.GetNegativeTenBillionAsync().ConfigureAwait(false);
             Console.WriteLine(response.Status);
         }
 
@@ -274,7 +274,7 @@ namespace url_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new PathsClient(credential);
 
-            Response response = await client.GetNegativeTenBillionAsync();
+            Response response = await client.GetNegativeTenBillionAsync().ConfigureAwait(false);
             Console.WriteLine(response.Status);
         }
 
@@ -307,7 +307,7 @@ namespace url_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new PathsClient(credential);
 
-            Response response = await client.FloatScientificPositiveAsync();
+            Response response = await client.FloatScientificPositiveAsync().ConfigureAwait(false);
             Console.WriteLine(response.Status);
         }
 
@@ -318,7 +318,7 @@ namespace url_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new PathsClient(credential);
 
-            Response response = await client.FloatScientificPositiveAsync();
+            Response response = await client.FloatScientificPositiveAsync().ConfigureAwait(false);
             Console.WriteLine(response.Status);
         }
 
@@ -351,7 +351,7 @@ namespace url_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new PathsClient(credential);
 
-            Response response = await client.FloatScientificNegativeAsync();
+            Response response = await client.FloatScientificNegativeAsync().ConfigureAwait(false);
             Console.WriteLine(response.Status);
         }
 
@@ -362,7 +362,7 @@ namespace url_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new PathsClient(credential);
 
-            Response response = await client.FloatScientificNegativeAsync();
+            Response response = await client.FloatScientificNegativeAsync().ConfigureAwait(false);
             Console.WriteLine(response.Status);
         }
 
@@ -395,7 +395,7 @@ namespace url_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new PathsClient(credential);
 
-            Response response = await client.DoubleDecimalPositiveAsync();
+            Response response = await client.DoubleDecimalPositiveAsync().ConfigureAwait(false);
             Console.WriteLine(response.Status);
         }
 
@@ -406,7 +406,7 @@ namespace url_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new PathsClient(credential);
 
-            Response response = await client.DoubleDecimalPositiveAsync();
+            Response response = await client.DoubleDecimalPositiveAsync().ConfigureAwait(false);
             Console.WriteLine(response.Status);
         }
 
@@ -439,7 +439,7 @@ namespace url_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new PathsClient(credential);
 
-            Response response = await client.DoubleDecimalNegativeAsync();
+            Response response = await client.DoubleDecimalNegativeAsync().ConfigureAwait(false);
             Console.WriteLine(response.Status);
         }
 
@@ -450,7 +450,7 @@ namespace url_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new PathsClient(credential);
 
-            Response response = await client.DoubleDecimalNegativeAsync();
+            Response response = await client.DoubleDecimalNegativeAsync().ConfigureAwait(false);
             Console.WriteLine(response.Status);
         }
 
@@ -483,7 +483,7 @@ namespace url_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new PathsClient(credential);
 
-            Response response = await client.StringUnicodeAsync();
+            Response response = await client.StringUnicodeAsync().ConfigureAwait(false);
             Console.WriteLine(response.Status);
         }
 
@@ -494,7 +494,7 @@ namespace url_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new PathsClient(credential);
 
-            Response response = await client.StringUnicodeAsync();
+            Response response = await client.StringUnicodeAsync().ConfigureAwait(false);
             Console.WriteLine(response.Status);
         }
 
@@ -527,7 +527,7 @@ namespace url_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new PathsClient(credential);
 
-            Response response = await client.StringUrlEncodedAsync();
+            Response response = await client.StringUrlEncodedAsync().ConfigureAwait(false);
             Console.WriteLine(response.Status);
         }
 
@@ -538,7 +538,7 @@ namespace url_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new PathsClient(credential);
 
-            Response response = await client.StringUrlEncodedAsync();
+            Response response = await client.StringUrlEncodedAsync().ConfigureAwait(false);
             Console.WriteLine(response.Status);
         }
 
@@ -571,7 +571,7 @@ namespace url_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new PathsClient(credential);
 
-            Response response = await client.StringUrlNonEncodedAsync();
+            Response response = await client.StringUrlNonEncodedAsync().ConfigureAwait(false);
             Console.WriteLine(response.Status);
         }
 
@@ -582,7 +582,7 @@ namespace url_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new PathsClient(credential);
 
-            Response response = await client.StringUrlNonEncodedAsync();
+            Response response = await client.StringUrlNonEncodedAsync().ConfigureAwait(false);
             Console.WriteLine(response.Status);
         }
 
@@ -615,7 +615,7 @@ namespace url_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new PathsClient(credential);
 
-            Response response = await client.StringEmptyAsync();
+            Response response = await client.StringEmptyAsync().ConfigureAwait(false);
             Console.WriteLine(response.Status);
         }
 
@@ -626,7 +626,7 @@ namespace url_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new PathsClient(credential);
 
-            Response response = await client.StringEmptyAsync();
+            Response response = await client.StringEmptyAsync().ConfigureAwait(false);
             Console.WriteLine(response.Status);
         }
 
@@ -659,7 +659,7 @@ namespace url_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new PathsClient(credential);
 
-            Response response = await client.StringNullAsync("<stringPath>");
+            Response response = await client.StringNullAsync("<stringPath>").ConfigureAwait(false);
             Console.WriteLine(response.Status);
         }
 
@@ -670,7 +670,7 @@ namespace url_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new PathsClient(credential);
 
-            Response response = await client.StringNullAsync("<stringPath>");
+            Response response = await client.StringNullAsync("<stringPath>").ConfigureAwait(false);
             Console.WriteLine(response.Status);
         }
 
@@ -703,7 +703,7 @@ namespace url_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new PathsClient(credential);
 
-            Response response = await client.EnumValidAsync("<enumPath>");
+            Response response = await client.EnumValidAsync("<enumPath>").ConfigureAwait(false);
             Console.WriteLine(response.Status);
         }
 
@@ -714,7 +714,7 @@ namespace url_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new PathsClient(credential);
 
-            Response response = await client.EnumValidAsync("<enumPath>");
+            Response response = await client.EnumValidAsync("<enumPath>").ConfigureAwait(false);
             Console.WriteLine(response.Status);
         }
 
@@ -747,7 +747,7 @@ namespace url_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new PathsClient(credential);
 
-            Response response = await client.EnumNullAsync("<enumPath>");
+            Response response = await client.EnumNullAsync("<enumPath>").ConfigureAwait(false);
             Console.WriteLine(response.Status);
         }
 
@@ -758,7 +758,7 @@ namespace url_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new PathsClient(credential);
 
-            Response response = await client.EnumNullAsync("<enumPath>");
+            Response response = await client.EnumNullAsync("<enumPath>").ConfigureAwait(false);
             Console.WriteLine(response.Status);
         }
 
@@ -791,7 +791,7 @@ namespace url_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new PathsClient(credential);
 
-            Response response = await client.ByteMultiByteAsync(BinaryData.FromString("<your binary data content>"));
+            Response response = await client.ByteMultiByteAsync(BinaryData.FromString("<your binary data content>")).ConfigureAwait(false);
             Console.WriteLine(response.Status);
         }
 
@@ -802,7 +802,7 @@ namespace url_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new PathsClient(credential);
 
-            Response response = await client.ByteMultiByteAsync(BinaryData.FromString("<your binary data content>"));
+            Response response = await client.ByteMultiByteAsync(BinaryData.FromString("<your binary data content>")).ConfigureAwait(false);
             Console.WriteLine(response.Status);
         }
 
@@ -835,7 +835,7 @@ namespace url_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new PathsClient(credential);
 
-            Response response = await client.ByteEmptyAsync();
+            Response response = await client.ByteEmptyAsync().ConfigureAwait(false);
             Console.WriteLine(response.Status);
         }
 
@@ -846,7 +846,7 @@ namespace url_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new PathsClient(credential);
 
-            Response response = await client.ByteEmptyAsync();
+            Response response = await client.ByteEmptyAsync().ConfigureAwait(false);
             Console.WriteLine(response.Status);
         }
 
@@ -879,7 +879,7 @@ namespace url_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new PathsClient(credential);
 
-            Response response = await client.ByteNullAsync(BinaryData.FromString("<your binary data content>"));
+            Response response = await client.ByteNullAsync(BinaryData.FromString("<your binary data content>")).ConfigureAwait(false);
             Console.WriteLine(response.Status);
         }
 
@@ -890,7 +890,7 @@ namespace url_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new PathsClient(credential);
 
-            Response response = await client.ByteNullAsync(BinaryData.FromString("<your binary data content>"));
+            Response response = await client.ByteNullAsync(BinaryData.FromString("<your binary data content>")).ConfigureAwait(false);
             Console.WriteLine(response.Status);
         }
 
@@ -923,7 +923,7 @@ namespace url_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new PathsClient(credential);
 
-            Response response = await client.DateValidAsync();
+            Response response = await client.DateValidAsync().ConfigureAwait(false);
             Console.WriteLine(response.Status);
         }
 
@@ -934,7 +934,7 @@ namespace url_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new PathsClient(credential);
 
-            Response response = await client.DateValidAsync();
+            Response response = await client.DateValidAsync().ConfigureAwait(false);
             Console.WriteLine(response.Status);
         }
 
@@ -967,7 +967,7 @@ namespace url_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new PathsClient(credential);
 
-            Response response = await client.DateNullAsync(DateTimeOffset.UtcNow);
+            Response response = await client.DateNullAsync(DateTimeOffset.UtcNow).ConfigureAwait(false);
             Console.WriteLine(response.Status);
         }
 
@@ -978,7 +978,7 @@ namespace url_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new PathsClient(credential);
 
-            Response response = await client.DateNullAsync(DateTimeOffset.UtcNow);
+            Response response = await client.DateNullAsync(DateTimeOffset.UtcNow).ConfigureAwait(false);
             Console.WriteLine(response.Status);
         }
 
@@ -1011,7 +1011,7 @@ namespace url_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new PathsClient(credential);
 
-            Response response = await client.DateTimeValidAsync();
+            Response response = await client.DateTimeValidAsync().ConfigureAwait(false);
             Console.WriteLine(response.Status);
         }
 
@@ -1022,7 +1022,7 @@ namespace url_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new PathsClient(credential);
 
-            Response response = await client.DateTimeValidAsync();
+            Response response = await client.DateTimeValidAsync().ConfigureAwait(false);
             Console.WriteLine(response.Status);
         }
 
@@ -1055,7 +1055,7 @@ namespace url_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new PathsClient(credential);
 
-            Response response = await client.DateTimeNullAsync(DateTimeOffset.UtcNow);
+            Response response = await client.DateTimeNullAsync(DateTimeOffset.UtcNow).ConfigureAwait(false);
             Console.WriteLine(response.Status);
         }
 
@@ -1066,7 +1066,7 @@ namespace url_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new PathsClient(credential);
 
-            Response response = await client.DateTimeNullAsync(DateTimeOffset.UtcNow);
+            Response response = await client.DateTimeNullAsync(DateTimeOffset.UtcNow).ConfigureAwait(false);
             Console.WriteLine(response.Status);
         }
 
@@ -1099,7 +1099,7 @@ namespace url_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new PathsClient(credential);
 
-            Response response = await client.Base64UrlAsync(BinaryData.FromString("<your binary data content>"));
+            Response response = await client.Base64UrlAsync(BinaryData.FromString("<your binary data content>")).ConfigureAwait(false);
             Console.WriteLine(response.Status);
         }
 
@@ -1110,7 +1110,7 @@ namespace url_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new PathsClient(credential);
 
-            Response response = await client.Base64UrlAsync(BinaryData.FromString("<your binary data content>"));
+            Response response = await client.Base64UrlAsync(BinaryData.FromString("<your binary data content>")).ConfigureAwait(false);
             Console.WriteLine(response.Status);
         }
 
@@ -1143,7 +1143,7 @@ namespace url_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new PathsClient(credential);
 
-            Response response = await client.ArrayCsvInPathAsync(new string[] { "<arrayPath>" });
+            Response response = await client.ArrayCsvInPathAsync(new string[] { "<arrayPath>" }).ConfigureAwait(false);
             Console.WriteLine(response.Status);
         }
 
@@ -1154,7 +1154,7 @@ namespace url_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new PathsClient(credential);
 
-            Response response = await client.ArrayCsvInPathAsync(new string[] { "<arrayPath>" });
+            Response response = await client.ArrayCsvInPathAsync(new string[] { "<arrayPath>" }).ConfigureAwait(false);
             Console.WriteLine(response.Status);
         }
 
@@ -1187,7 +1187,7 @@ namespace url_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new PathsClient(credential);
 
-            Response response = await client.UnixTimeUrlAsync(DateTimeOffset.UtcNow);
+            Response response = await client.UnixTimeUrlAsync(DateTimeOffset.UtcNow).ConfigureAwait(false);
             Console.WriteLine(response.Status);
         }
 
@@ -1198,7 +1198,7 @@ namespace url_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new PathsClient(credential);
 
-            Response response = await client.UnixTimeUrlAsync(DateTimeOffset.UtcNow);
+            Response response = await client.UnixTimeUrlAsync(DateTimeOffset.UtcNow).ConfigureAwait(false);
             Console.WriteLine(response.Status);
         }
     }

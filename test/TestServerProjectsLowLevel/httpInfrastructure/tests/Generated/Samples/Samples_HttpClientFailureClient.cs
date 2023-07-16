@@ -6,13 +6,9 @@
 #nullable disable
 
 using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Text.Json;
 using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
-using Azure.Identity;
 using NUnit.Framework;
 
 namespace httpInfrastructure_LowLevel.Samples
@@ -48,7 +44,7 @@ namespace httpInfrastructure_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new HttpClientFailureClient(credential);
 
-            Response response = await client.Head400Async();
+            Response response = await client.Head400Async().ConfigureAwait(false);
             Console.WriteLine(response.Status);
         }
 
@@ -59,7 +55,7 @@ namespace httpInfrastructure_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new HttpClientFailureClient(credential);
 
-            Response response = await client.Head400Async();
+            Response response = await client.Head400Async().ConfigureAwait(false);
             Console.WriteLine(response.Status);
         }
 
@@ -92,7 +88,7 @@ namespace httpInfrastructure_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new HttpClientFailureClient(credential);
 
-            Response response = await client.Get400Async();
+            Response response = await client.Get400Async().ConfigureAwait(false);
             Console.WriteLine(response.Status);
         }
 
@@ -103,7 +99,7 @@ namespace httpInfrastructure_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new HttpClientFailureClient(credential);
 
-            Response response = await client.Get400Async();
+            Response response = await client.Get400Async().ConfigureAwait(false);
             Console.WriteLine(response.Status);
         }
 
@@ -136,7 +132,7 @@ namespace httpInfrastructure_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new HttpClientFailureClient(credential);
 
-            Response response = await client.Options400Async();
+            Response response = await client.Options400Async().ConfigureAwait(false);
             Console.WriteLine(response.Status);
         }
 
@@ -147,7 +143,7 @@ namespace httpInfrastructure_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new HttpClientFailureClient(credential);
 
-            Response response = await client.Options400Async();
+            Response response = await client.Options400Async().ConfigureAwait(false);
             Console.WriteLine(response.Status);
         }
 
@@ -186,7 +182,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
             var data = true;
 
-            Response response = await client.Put400Async(RequestContent.Create(data));
+            Response response = await client.Put400Async(RequestContent.Create(data)).ConfigureAwait(false);
             Console.WriteLine(response.Status);
         }
 
@@ -199,7 +195,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
             var data = true;
 
-            Response response = await client.Put400Async(RequestContent.Create(data));
+            Response response = await client.Put400Async(RequestContent.Create(data)).ConfigureAwait(false);
             Console.WriteLine(response.Status);
         }
 
@@ -238,7 +234,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
             var data = true;
 
-            Response response = await client.Patch400Async(RequestContent.Create(data));
+            Response response = await client.Patch400Async(RequestContent.Create(data)).ConfigureAwait(false);
             Console.WriteLine(response.Status);
         }
 
@@ -251,7 +247,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
             var data = true;
 
-            Response response = await client.Patch400Async(RequestContent.Create(data));
+            Response response = await client.Patch400Async(RequestContent.Create(data)).ConfigureAwait(false);
             Console.WriteLine(response.Status);
         }
 
@@ -290,7 +286,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
             var data = true;
 
-            Response response = await client.Post400Async(RequestContent.Create(data));
+            Response response = await client.Post400Async(RequestContent.Create(data)).ConfigureAwait(false);
             Console.WriteLine(response.Status);
         }
 
@@ -303,7 +299,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
             var data = true;
 
-            Response response = await client.Post400Async(RequestContent.Create(data));
+            Response response = await client.Post400Async(RequestContent.Create(data)).ConfigureAwait(false);
             Console.WriteLine(response.Status);
         }
 
@@ -342,7 +338,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
             var data = true;
 
-            Response response = await client.Delete400Async(RequestContent.Create(data));
+            Response response = await client.Delete400Async(RequestContent.Create(data)).ConfigureAwait(false);
             Console.WriteLine(response.Status);
         }
 
@@ -355,7 +351,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
             var data = true;
 
-            Response response = await client.Delete400Async(RequestContent.Create(data));
+            Response response = await client.Delete400Async(RequestContent.Create(data)).ConfigureAwait(false);
             Console.WriteLine(response.Status);
         }
 
@@ -388,7 +384,7 @@ namespace httpInfrastructure_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new HttpClientFailureClient(credential);
 
-            Response response = await client.Head401Async();
+            Response response = await client.Head401Async().ConfigureAwait(false);
             Console.WriteLine(response.Status);
         }
 
@@ -399,7 +395,7 @@ namespace httpInfrastructure_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new HttpClientFailureClient(credential);
 
-            Response response = await client.Head401Async();
+            Response response = await client.Head401Async().ConfigureAwait(false);
             Console.WriteLine(response.Status);
         }
 
@@ -432,7 +428,7 @@ namespace httpInfrastructure_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new HttpClientFailureClient(credential);
 
-            Response response = await client.Get402Async();
+            Response response = await client.Get402Async().ConfigureAwait(false);
             Console.WriteLine(response.Status);
         }
 
@@ -443,7 +439,7 @@ namespace httpInfrastructure_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new HttpClientFailureClient(credential);
 
-            Response response = await client.Get402Async();
+            Response response = await client.Get402Async().ConfigureAwait(false);
             Console.WriteLine(response.Status);
         }
 
@@ -476,7 +472,7 @@ namespace httpInfrastructure_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new HttpClientFailureClient(credential);
 
-            Response response = await client.Options403Async();
+            Response response = await client.Options403Async().ConfigureAwait(false);
             Console.WriteLine(response.Status);
         }
 
@@ -487,7 +483,7 @@ namespace httpInfrastructure_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new HttpClientFailureClient(credential);
 
-            Response response = await client.Options403Async();
+            Response response = await client.Options403Async().ConfigureAwait(false);
             Console.WriteLine(response.Status);
         }
 
@@ -520,7 +516,7 @@ namespace httpInfrastructure_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new HttpClientFailureClient(credential);
 
-            Response response = await client.Get403Async();
+            Response response = await client.Get403Async().ConfigureAwait(false);
             Console.WriteLine(response.Status);
         }
 
@@ -531,7 +527,7 @@ namespace httpInfrastructure_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new HttpClientFailureClient(credential);
 
-            Response response = await client.Get403Async();
+            Response response = await client.Get403Async().ConfigureAwait(false);
             Console.WriteLine(response.Status);
         }
 
@@ -570,7 +566,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
             var data = true;
 
-            Response response = await client.Put404Async(RequestContent.Create(data));
+            Response response = await client.Put404Async(RequestContent.Create(data)).ConfigureAwait(false);
             Console.WriteLine(response.Status);
         }
 
@@ -583,7 +579,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
             var data = true;
 
-            Response response = await client.Put404Async(RequestContent.Create(data));
+            Response response = await client.Put404Async(RequestContent.Create(data)).ConfigureAwait(false);
             Console.WriteLine(response.Status);
         }
 
@@ -622,7 +618,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
             var data = true;
 
-            Response response = await client.Patch405Async(RequestContent.Create(data));
+            Response response = await client.Patch405Async(RequestContent.Create(data)).ConfigureAwait(false);
             Console.WriteLine(response.Status);
         }
 
@@ -635,7 +631,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
             var data = true;
 
-            Response response = await client.Patch405Async(RequestContent.Create(data));
+            Response response = await client.Patch405Async(RequestContent.Create(data)).ConfigureAwait(false);
             Console.WriteLine(response.Status);
         }
 
@@ -674,7 +670,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
             var data = true;
 
-            Response response = await client.Post406Async(RequestContent.Create(data));
+            Response response = await client.Post406Async(RequestContent.Create(data)).ConfigureAwait(false);
             Console.WriteLine(response.Status);
         }
 
@@ -687,7 +683,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
             var data = true;
 
-            Response response = await client.Post406Async(RequestContent.Create(data));
+            Response response = await client.Post406Async(RequestContent.Create(data)).ConfigureAwait(false);
             Console.WriteLine(response.Status);
         }
 
@@ -726,7 +722,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
             var data = true;
 
-            Response response = await client.Delete407Async(RequestContent.Create(data));
+            Response response = await client.Delete407Async(RequestContent.Create(data)).ConfigureAwait(false);
             Console.WriteLine(response.Status);
         }
 
@@ -739,7 +735,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
             var data = true;
 
-            Response response = await client.Delete407Async(RequestContent.Create(data));
+            Response response = await client.Delete407Async(RequestContent.Create(data)).ConfigureAwait(false);
             Console.WriteLine(response.Status);
         }
 
@@ -778,7 +774,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
             var data = true;
 
-            Response response = await client.Put409Async(RequestContent.Create(data));
+            Response response = await client.Put409Async(RequestContent.Create(data)).ConfigureAwait(false);
             Console.WriteLine(response.Status);
         }
 
@@ -791,7 +787,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
             var data = true;
 
-            Response response = await client.Put409Async(RequestContent.Create(data));
+            Response response = await client.Put409Async(RequestContent.Create(data)).ConfigureAwait(false);
             Console.WriteLine(response.Status);
         }
 
@@ -824,7 +820,7 @@ namespace httpInfrastructure_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new HttpClientFailureClient(credential);
 
-            Response response = await client.Head410Async();
+            Response response = await client.Head410Async().ConfigureAwait(false);
             Console.WriteLine(response.Status);
         }
 
@@ -835,7 +831,7 @@ namespace httpInfrastructure_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new HttpClientFailureClient(credential);
 
-            Response response = await client.Head410Async();
+            Response response = await client.Head410Async().ConfigureAwait(false);
             Console.WriteLine(response.Status);
         }
 
@@ -868,7 +864,7 @@ namespace httpInfrastructure_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new HttpClientFailureClient(credential);
 
-            Response response = await client.Get411Async();
+            Response response = await client.Get411Async().ConfigureAwait(false);
             Console.WriteLine(response.Status);
         }
 
@@ -879,7 +875,7 @@ namespace httpInfrastructure_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new HttpClientFailureClient(credential);
 
-            Response response = await client.Get411Async();
+            Response response = await client.Get411Async().ConfigureAwait(false);
             Console.WriteLine(response.Status);
         }
 
@@ -912,7 +908,7 @@ namespace httpInfrastructure_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new HttpClientFailureClient(credential);
 
-            Response response = await client.Options412Async();
+            Response response = await client.Options412Async().ConfigureAwait(false);
             Console.WriteLine(response.Status);
         }
 
@@ -923,7 +919,7 @@ namespace httpInfrastructure_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new HttpClientFailureClient(credential);
 
-            Response response = await client.Options412Async();
+            Response response = await client.Options412Async().ConfigureAwait(false);
             Console.WriteLine(response.Status);
         }
 
@@ -956,7 +952,7 @@ namespace httpInfrastructure_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new HttpClientFailureClient(credential);
 
-            Response response = await client.Get412Async();
+            Response response = await client.Get412Async().ConfigureAwait(false);
             Console.WriteLine(response.Status);
         }
 
@@ -967,7 +963,7 @@ namespace httpInfrastructure_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new HttpClientFailureClient(credential);
 
-            Response response = await client.Get412Async();
+            Response response = await client.Get412Async().ConfigureAwait(false);
             Console.WriteLine(response.Status);
         }
 
@@ -1006,7 +1002,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
             var data = true;
 
-            Response response = await client.Put413Async(RequestContent.Create(data));
+            Response response = await client.Put413Async(RequestContent.Create(data)).ConfigureAwait(false);
             Console.WriteLine(response.Status);
         }
 
@@ -1019,7 +1015,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
             var data = true;
 
-            Response response = await client.Put413Async(RequestContent.Create(data));
+            Response response = await client.Put413Async(RequestContent.Create(data)).ConfigureAwait(false);
             Console.WriteLine(response.Status);
         }
 
@@ -1058,7 +1054,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
             var data = true;
 
-            Response response = await client.Patch414Async(RequestContent.Create(data));
+            Response response = await client.Patch414Async(RequestContent.Create(data)).ConfigureAwait(false);
             Console.WriteLine(response.Status);
         }
 
@@ -1071,7 +1067,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
             var data = true;
 
-            Response response = await client.Patch414Async(RequestContent.Create(data));
+            Response response = await client.Patch414Async(RequestContent.Create(data)).ConfigureAwait(false);
             Console.WriteLine(response.Status);
         }
 
@@ -1110,7 +1106,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
             var data = true;
 
-            Response response = await client.Post415Async(RequestContent.Create(data));
+            Response response = await client.Post415Async(RequestContent.Create(data)).ConfigureAwait(false);
             Console.WriteLine(response.Status);
         }
 
@@ -1123,7 +1119,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
             var data = true;
 
-            Response response = await client.Post415Async(RequestContent.Create(data));
+            Response response = await client.Post415Async(RequestContent.Create(data)).ConfigureAwait(false);
             Console.WriteLine(response.Status);
         }
 
@@ -1156,7 +1152,7 @@ namespace httpInfrastructure_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new HttpClientFailureClient(credential);
 
-            Response response = await client.Get416Async();
+            Response response = await client.Get416Async().ConfigureAwait(false);
             Console.WriteLine(response.Status);
         }
 
@@ -1167,7 +1163,7 @@ namespace httpInfrastructure_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new HttpClientFailureClient(credential);
 
-            Response response = await client.Get416Async();
+            Response response = await client.Get416Async().ConfigureAwait(false);
             Console.WriteLine(response.Status);
         }
 
@@ -1206,7 +1202,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
             var data = true;
 
-            Response response = await client.Delete417Async(RequestContent.Create(data));
+            Response response = await client.Delete417Async(RequestContent.Create(data)).ConfigureAwait(false);
             Console.WriteLine(response.Status);
         }
 
@@ -1219,7 +1215,7 @@ namespace httpInfrastructure_LowLevel.Samples
 
             var data = true;
 
-            Response response = await client.Delete417Async(RequestContent.Create(data));
+            Response response = await client.Delete417Async(RequestContent.Create(data)).ConfigureAwait(false);
             Console.WriteLine(response.Status);
         }
 
@@ -1252,7 +1248,7 @@ namespace httpInfrastructure_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new HttpClientFailureClient(credential);
 
-            Response response = await client.Head429Async();
+            Response response = await client.Head429Async().ConfigureAwait(false);
             Console.WriteLine(response.Status);
         }
 
@@ -1263,7 +1259,7 @@ namespace httpInfrastructure_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new HttpClientFailureClient(credential);
 
-            Response response = await client.Head429Async();
+            Response response = await client.Head429Async().ConfigureAwait(false);
             Console.WriteLine(response.Status);
         }
     }

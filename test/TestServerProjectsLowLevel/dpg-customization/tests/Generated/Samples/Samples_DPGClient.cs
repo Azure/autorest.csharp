@@ -6,13 +6,10 @@
 #nullable disable
 
 using System;
-using System.Collections.Generic;
-using System.IO;
 using System.Text.Json;
 using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
-using Azure.Identity;
 using NUnit.Framework;
 
 namespace dpg_customization_LowLevel.Samples
@@ -52,7 +49,7 @@ namespace dpg_customization_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new DPGClient(credential);
 
-            Response response = await client.GetModelAsync("<mode>", new RequestContext());
+            Response response = await client.GetModelAsync("<mode>", new RequestContext()).ConfigureAwait(false);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("received").ToString());
@@ -65,7 +62,7 @@ namespace dpg_customization_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new DPGClient(credential);
 
-            Response response = await client.GetModelAsync("<mode>", new RequestContext());
+            Response response = await client.GetModelAsync("<mode>", new RequestContext()).ConfigureAwait(false);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("received").ToString());
@@ -119,7 +116,7 @@ namespace dpg_customization_LowLevel.Samples
                 hello = "<hello>",
             };
 
-            Response response = await client.PostModelAsync("<mode>", RequestContent.Create(data));
+            Response response = await client.PostModelAsync("<mode>", RequestContent.Create(data)).ConfigureAwait(false);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("received").ToString());
@@ -137,7 +134,7 @@ namespace dpg_customization_LowLevel.Samples
                 hello = "<hello>",
             };
 
-            Response response = await client.PostModelAsync("<mode>", RequestContent.Create(data));
+            Response response = await client.PostModelAsync("<mode>", RequestContent.Create(data)).ConfigureAwait(false);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("received").ToString());
@@ -236,7 +233,7 @@ namespace dpg_customization_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new DPGClient(credential);
 
-            var operation = await client.LroAsync(WaitUntil.Completed, "<mode>", new RequestContext());
+            var operation = await client.LroAsync(WaitUntil.Completed, "<mode>", new RequestContext()).ConfigureAwait(false);
 
             BinaryData responseData = operation.Value;
             JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
@@ -251,7 +248,7 @@ namespace dpg_customization_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new DPGClient(credential);
 
-            var operation = await client.LroAsync(WaitUntil.Completed, "<mode>", new RequestContext());
+            var operation = await client.LroAsync(WaitUntil.Completed, "<mode>", new RequestContext()).ConfigureAwait(false);
 
             BinaryData responseData = operation.Value;
             JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;

@@ -8,7 +8,7 @@ This sample shows how to call OperationAsync with required parameters and parse 
 var credential = new AzureKeyCredential("<key>");
 var client = new TopLevelClientWithOperationClient(credential).GetClient1Client();
 
-Response response = await client.OperationAsync(new RequestContext());
+Response response = await client.OperationAsync(new RequestContext()).ConfigureAwait(false);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.ToString());

@@ -6,13 +6,9 @@
 #nullable disable
 
 using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Text.Json;
 using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
-using Azure.Identity;
 using NUnit.Framework;
 
 namespace Accessibility_LowLevel_TokenAuth.Samples
@@ -23,7 +19,7 @@ namespace Accessibility_LowLevel_TokenAuth.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Operation()
         {
-            var credential = new DefaultAzureCredential();
+            var credential = new Azure.Identity.DefaultAzureCredential();
             var client = new AccessibilityClient(credential);
 
             var data = "<String>";
@@ -36,7 +32,7 @@ namespace Accessibility_LowLevel_TokenAuth.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Operation_AllParameters()
         {
-            var credential = new DefaultAzureCredential();
+            var credential = new Azure.Identity.DefaultAzureCredential();
             var client = new AccessibilityClient(credential);
 
             var data = "<String>";
@@ -49,12 +45,12 @@ namespace Accessibility_LowLevel_TokenAuth.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Operation_Async()
         {
-            var credential = new DefaultAzureCredential();
+            var credential = new Azure.Identity.DefaultAzureCredential();
             var client = new AccessibilityClient(credential);
 
             var data = "<String>";
 
-            Response response = await client.OperationAsync(RequestContent.Create(data), new RequestContext());
+            Response response = await client.OperationAsync(RequestContent.Create(data), new RequestContext()).ConfigureAwait(false);
             Console.WriteLine(response.Status);
         }
 
@@ -62,12 +58,12 @@ namespace Accessibility_LowLevel_TokenAuth.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Operation_AllParameters_Async()
         {
-            var credential = new DefaultAzureCredential();
+            var credential = new Azure.Identity.DefaultAzureCredential();
             var client = new AccessibilityClient(credential);
 
             var data = "<String>";
 
-            Response response = await client.OperationAsync(RequestContent.Create(data), new RequestContext());
+            Response response = await client.OperationAsync(RequestContent.Create(data), new RequestContext()).ConfigureAwait(false);
             Console.WriteLine(response.Status);
         }
     }

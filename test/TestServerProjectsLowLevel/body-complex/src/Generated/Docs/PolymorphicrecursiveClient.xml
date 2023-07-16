@@ -8,7 +8,7 @@ This sample shows how to call GetValidAsync with required parameters and parse t
 var credential = new AzureKeyCredential("<key>");
 var client = new PolymorphicrecursiveClient(credential);
 
-Response response = await client.GetValidAsync(new RequestContext());
+Response response = await client.GetValidAsync(new RequestContext()).ConfigureAwait(false);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("fishtype").ToString());
@@ -51,7 +51,7 @@ var data = new {
     length = 123.45f,
 };
 
-Response response = await client.PutValidAsync(RequestContent.Create(data));
+Response response = await client.PutValidAsync(RequestContent.Create(data)).ConfigureAwait(false);
 Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call PutValidAsync with all request content.
@@ -67,7 +67,7 @@ var data = new {
     length = 123.45f,
 };
 
-Response response = await client.PutValidAsync(RequestContent.Create(data));
+Response response = await client.PutValidAsync(RequestContent.Create(data)).ConfigureAwait(false);
 Console.WriteLine(response.Status);
 ]]></code>
 </example>

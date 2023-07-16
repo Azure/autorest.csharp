@@ -8,7 +8,7 @@ This sample shows how to call GetItemAsync with required parameters and parse th
 var credential = new AzureKeyCredential("<key>");
 var client = new ParameterSequenceClient(credential);
 
-Response response = await client.GetItemAsync("<itemName>", "<origin>", "<version>", new RequestContext());
+Response response = await client.GetItemAsync("<itemName>", "<origin>", "<version>", new RequestContext()).ConfigureAwait(false);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.ToString());
@@ -36,7 +36,7 @@ This sample shows how to call SelectItemAsync with required parameters and parse
 var credential = new AzureKeyCredential("<key>");
 var client = new ParameterSequenceClient(credential);
 
-Response response = await client.SelectItemAsync("<itemName>", "<origin>", "<version>", new RequestContext());
+Response response = await client.SelectItemAsync("<itemName>", "<origin>", "<version>", new RequestContext()).ConfigureAwait(false);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.ToString());

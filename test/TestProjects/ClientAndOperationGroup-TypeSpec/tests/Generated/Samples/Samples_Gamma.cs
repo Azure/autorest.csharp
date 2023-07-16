@@ -6,13 +6,9 @@
 #nullable disable
 
 using System;
-using System.Collections.Generic;
-using System.IO;
 using System.Text.Json;
 using System.Threading.Tasks;
 using Azure;
-using Azure.Core;
-using Azure.Identity;
 using NUnit.Framework;
 
 namespace ClientAndOperationGroup.Samples
@@ -52,7 +48,7 @@ namespace ClientAndOperationGroup.Samples
             var endpoint = new Uri("<https://my-service.azure.com>");
             var client = new ClientAndOperationGroupClient(endpoint).GetGammaClient();
 
-            Response response = await client.FourAsync(new RequestContext());
+            Response response = await client.FourAsync(new RequestContext()).ConfigureAwait(false);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());
@@ -65,7 +61,7 @@ namespace ClientAndOperationGroup.Samples
             var endpoint = new Uri("<https://my-service.azure.com>");
             var client = new ClientAndOperationGroupClient(endpoint).GetGammaClient();
 
-            Response response = await client.FourAsync(new RequestContext());
+            Response response = await client.FourAsync(new RequestContext()).ConfigureAwait(false);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());
@@ -104,7 +100,7 @@ namespace ClientAndOperationGroup.Samples
             var endpoint = new Uri("<https://my-service.azure.com>");
             var client = new ClientAndOperationGroupClient(endpoint).GetGammaClient();
 
-            Response response = await client.FiveAsync(new RequestContext());
+            Response response = await client.FiveAsync(new RequestContext()).ConfigureAwait(false);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());
@@ -117,7 +113,7 @@ namespace ClientAndOperationGroup.Samples
             var endpoint = new Uri("<https://my-service.azure.com>");
             var client = new ClientAndOperationGroupClient(endpoint).GetGammaClient();
 
-            Response response = await client.FiveAsync(new RequestContext());
+            Response response = await client.FiveAsync(new RequestContext()).ConfigureAwait(false);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());

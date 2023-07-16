@@ -6,13 +6,9 @@
 #nullable disable
 
 using System;
-using System.Collections.Generic;
-using System.IO;
 using System.Text.Json;
 using System.Threading.Tasks;
 using Azure;
-using Azure.Core;
-using Azure.Identity;
 using NUnit.Framework;
 
 namespace paging_LowLevel.Samples
@@ -1219,7 +1215,7 @@ namespace paging_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new PagingClient(credential);
 
-            var operation = await client.GetMultiplePagesLROAsync(WaitUntil.Completed, "<clientRequestId>", 1234, 1234, new RequestContext());
+            var operation = await client.GetMultiplePagesLROAsync(WaitUntil.Completed, "<clientRequestId>", 1234, 1234, new RequestContext()).ConfigureAwait(false);
 
             await foreach (var item in operation.Value)
             {
@@ -1235,7 +1231,7 @@ namespace paging_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new PagingClient(credential);
 
-            var operation = await client.GetMultiplePagesLROAsync(WaitUntil.Completed, "<clientRequestId>", 1234, 1234, new RequestContext());
+            var operation = await client.GetMultiplePagesLROAsync(WaitUntil.Completed, "<clientRequestId>", 1234, 1234, new RequestContext()).ConfigureAwait(false);
 
             await foreach (var item in operation.Value)
             {

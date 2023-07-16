@@ -8,7 +8,7 @@ This sample shows how to call HeadAsync.
 var credential = new AzureKeyCredential("<key>");
 var client = new AutorestSecurityKeyClient(credential);
 
-Response response = await client.HeadAsync();
+Response response = await client.HeadAsync().ConfigureAwait(false);
 Console.WriteLine(response.Status);
 ]]></code>
 </example>

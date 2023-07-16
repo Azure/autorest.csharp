@@ -6,13 +6,8 @@
 #nullable disable
 
 using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Text.Json;
 using System.Threading.Tasks;
 using Azure;
-using Azure.Core;
-using Azure.Identity;
 using NUnit.Framework;
 
 namespace url_LowLevel.Samples
@@ -48,7 +43,7 @@ namespace url_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new PathItemsClient("<globalStringPath>", credential);
 
-            Response response = await client.GetAllWithValuesAsync("<pathItemStringPath>", "<localStringPath>");
+            Response response = await client.GetAllWithValuesAsync("<pathItemStringPath>", "<localStringPath>").ConfigureAwait(false);
             Console.WriteLine(response.Status);
         }
 
@@ -59,7 +54,7 @@ namespace url_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new PathItemsClient("<globalStringPath>", credential);
 
-            Response response = await client.GetAllWithValuesAsync("<pathItemStringPath>", "<localStringPath>", "<pathItemStringQuery>", "<localStringQuery>");
+            Response response = await client.GetAllWithValuesAsync("<pathItemStringPath>", "<localStringPath>", "<pathItemStringQuery>", "<localStringQuery>").ConfigureAwait(false);
             Console.WriteLine(response.Status);
         }
 
@@ -92,7 +87,7 @@ namespace url_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new PathItemsClient("<globalStringPath>", credential);
 
-            Response response = await client.GetGlobalQueryNullAsync("<pathItemStringPath>", "<localStringPath>");
+            Response response = await client.GetGlobalQueryNullAsync("<pathItemStringPath>", "<localStringPath>").ConfigureAwait(false);
             Console.WriteLine(response.Status);
         }
 
@@ -103,7 +98,7 @@ namespace url_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new PathItemsClient("<globalStringPath>", credential);
 
-            Response response = await client.GetGlobalQueryNullAsync("<pathItemStringPath>", "<localStringPath>", "<pathItemStringQuery>", "<localStringQuery>");
+            Response response = await client.GetGlobalQueryNullAsync("<pathItemStringPath>", "<localStringPath>", "<pathItemStringQuery>", "<localStringQuery>").ConfigureAwait(false);
             Console.WriteLine(response.Status);
         }
 
@@ -136,7 +131,7 @@ namespace url_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new PathItemsClient("<globalStringPath>", credential);
 
-            Response response = await client.GetGlobalAndLocalQueryNullAsync("<pathItemStringPath>", "<localStringPath>");
+            Response response = await client.GetGlobalAndLocalQueryNullAsync("<pathItemStringPath>", "<localStringPath>").ConfigureAwait(false);
             Console.WriteLine(response.Status);
         }
 
@@ -147,7 +142,7 @@ namespace url_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new PathItemsClient("<globalStringPath>", credential);
 
-            Response response = await client.GetGlobalAndLocalQueryNullAsync("<pathItemStringPath>", "<localStringPath>", "<pathItemStringQuery>", "<localStringQuery>");
+            Response response = await client.GetGlobalAndLocalQueryNullAsync("<pathItemStringPath>", "<localStringPath>", "<pathItemStringQuery>", "<localStringQuery>").ConfigureAwait(false);
             Console.WriteLine(response.Status);
         }
 
@@ -180,7 +175,7 @@ namespace url_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new PathItemsClient("<globalStringPath>", credential);
 
-            Response response = await client.GetLocalPathItemQueryNullAsync("<pathItemStringPath>", "<localStringPath>");
+            Response response = await client.GetLocalPathItemQueryNullAsync("<pathItemStringPath>", "<localStringPath>").ConfigureAwait(false);
             Console.WriteLine(response.Status);
         }
 
@@ -191,7 +186,7 @@ namespace url_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new PathItemsClient("<globalStringPath>", credential);
 
-            Response response = await client.GetLocalPathItemQueryNullAsync("<pathItemStringPath>", "<localStringPath>", "<pathItemStringQuery>", "<localStringQuery>");
+            Response response = await client.GetLocalPathItemQueryNullAsync("<pathItemStringPath>", "<localStringPath>", "<pathItemStringQuery>", "<localStringQuery>").ConfigureAwait(false);
             Console.WriteLine(response.Status);
         }
     }

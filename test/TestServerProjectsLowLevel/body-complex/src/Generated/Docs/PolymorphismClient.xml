@@ -8,7 +8,7 @@ This sample shows how to call GetValidAsync with required parameters and parse t
 var credential = new AzureKeyCredential("<key>");
 var client = new PolymorphismClient(credential);
 
-Response response = await client.GetValidAsync(new RequestContext());
+Response response = await client.GetValidAsync(new RequestContext()).ConfigureAwait(false);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("fishtype").ToString());
@@ -51,7 +51,7 @@ var data = new {
     length = 123.45f,
 };
 
-Response response = await client.PutValidAsync(RequestContent.Create(data));
+Response response = await client.PutValidAsync(RequestContent.Create(data)).ConfigureAwait(false);
 Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call PutValidAsync with all request content.
@@ -67,7 +67,7 @@ var data = new {
     length = 123.45f,
 };
 
-Response response = await client.PutValidAsync(RequestContent.Create(data));
+Response response = await client.PutValidAsync(RequestContent.Create(data)).ConfigureAwait(false);
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
@@ -112,7 +112,7 @@ This sample shows how to call GetDotSyntaxAsync with required parameters and par
 var credential = new AzureKeyCredential("<key>");
 var client = new PolymorphismClient(credential);
 
-Response response = await client.GetDotSyntaxAsync(new RequestContext());
+Response response = await client.GetDotSyntaxAsync(new RequestContext()).ConfigureAwait(false);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("fish.type").ToString());
@@ -142,7 +142,7 @@ This sample shows how to call GetComposedWithDiscriminatorAsync with required pa
 var credential = new AzureKeyCredential("<key>");
 var client = new PolymorphismClient(credential);
 
-Response response = await client.GetComposedWithDiscriminatorAsync(new RequestContext());
+Response response = await client.GetComposedWithDiscriminatorAsync(new RequestContext()).ConfigureAwait(false);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("sampleSalmon").GetProperty("location").ToString());
@@ -192,7 +192,7 @@ This sample shows how to call GetComposedWithoutDiscriminatorAsync with required
 var credential = new AzureKeyCredential("<key>");
 var client = new PolymorphismClient(credential);
 
-Response response = await client.GetComposedWithoutDiscriminatorAsync(new RequestContext());
+Response response = await client.GetComposedWithoutDiscriminatorAsync(new RequestContext()).ConfigureAwait(false);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("sampleSalmon").GetProperty("location").ToString());
@@ -242,7 +242,7 @@ This sample shows how to call GetComplicatedAsync with required parameters and p
 var credential = new AzureKeyCredential("<key>");
 var client = new PolymorphismClient(credential);
 
-Response response = await client.GetComplicatedAsync(new RequestContext());
+Response response = await client.GetComplicatedAsync(new RequestContext()).ConfigureAwait(false);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("location").ToString());
@@ -289,7 +289,7 @@ var data = new {
     length = 123.45f,
 };
 
-Response response = await client.PutComplicatedAsync(RequestContent.Create(data));
+Response response = await client.PutComplicatedAsync(RequestContent.Create(data)).ConfigureAwait(false);
 Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call PutComplicatedAsync with all request content.
@@ -315,7 +315,7 @@ var data = new {
     },
 };
 
-Response response = await client.PutComplicatedAsync(RequestContent.Create(data));
+Response response = await client.PutComplicatedAsync(RequestContent.Create(data)).ConfigureAwait(false);
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
@@ -375,7 +375,7 @@ var data = new {
     length = 123.45f,
 };
 
-Response response = await client.PutMissingDiscriminatorAsync(RequestContent.Create(data));
+Response response = await client.PutMissingDiscriminatorAsync(RequestContent.Create(data)).ConfigureAwait(false);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.ToString());
@@ -403,7 +403,7 @@ var data = new {
     },
 };
 
-Response response = await client.PutMissingDiscriminatorAsync(RequestContent.Create(data));
+Response response = await client.PutMissingDiscriminatorAsync(RequestContent.Create(data)).ConfigureAwait(false);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("location").ToString());
@@ -483,7 +483,7 @@ var data = new {
     length = 123.45f,
 };
 
-Response response = await client.PutValidMissingRequiredAsync(RequestContent.Create(data));
+Response response = await client.PutValidMissingRequiredAsync(RequestContent.Create(data)).ConfigureAwait(false);
 Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call PutValidMissingRequiredAsync with all request content.
@@ -499,7 +499,7 @@ var data = new {
     length = 123.45f,
 };
 
-Response response = await client.PutValidMissingRequiredAsync(RequestContent.Create(data));
+Response response = await client.PutValidMissingRequiredAsync(RequestContent.Create(data)).ConfigureAwait(false);
 Console.WriteLine(response.Status);
 ]]></code>
 </example>

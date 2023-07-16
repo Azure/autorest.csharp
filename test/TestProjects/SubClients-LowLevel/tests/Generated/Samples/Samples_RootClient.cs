@@ -6,13 +6,9 @@
 #nullable disable
 
 using System;
-using System.Collections.Generic;
-using System.IO;
 using System.Text.Json;
 using System.Threading.Tasks;
 using Azure;
-using Azure.Core;
-using Azure.Identity;
 using NUnit.Framework;
 
 namespace SubClients_LowLevel.Samples
@@ -52,7 +48,7 @@ namespace SubClients_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new RootClient("<cachedParameter>", credential);
 
-            Response response = await client.GetCachedParameterAsync(new RequestContext());
+            Response response = await client.GetCachedParameterAsync(new RequestContext()).ConfigureAwait(false);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());
@@ -65,7 +61,7 @@ namespace SubClients_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new RootClient("<cachedParameter>", credential);
 
-            Response response = await client.GetCachedParameterAsync(new RequestContext());
+            Response response = await client.GetCachedParameterAsync(new RequestContext()).ConfigureAwait(false);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());

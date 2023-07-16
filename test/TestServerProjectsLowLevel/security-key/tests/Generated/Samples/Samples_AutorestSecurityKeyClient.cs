@@ -6,13 +6,8 @@
 #nullable disable
 
 using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Text.Json;
 using System.Threading.Tasks;
 using Azure;
-using Azure.Core;
-using Azure.Identity;
 using NUnit.Framework;
 
 namespace security_key_LowLevel.Samples
@@ -48,7 +43,7 @@ namespace security_key_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new AutorestSecurityKeyClient(credential);
 
-            Response response = await client.HeadAsync();
+            Response response = await client.HeadAsync().ConfigureAwait(false);
             Console.WriteLine(response.Status);
         }
 
@@ -59,7 +54,7 @@ namespace security_key_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new AutorestSecurityKeyClient(credential);
 
-            Response response = await client.HeadAsync();
+            Response response = await client.HeadAsync().ConfigureAwait(false);
             Console.WriteLine(response.Status);
         }
     }

@@ -7,12 +7,10 @@
 
 using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Text.Json;
 using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
-using Azure.Identity;
 using NUnit.Framework;
 
 namespace body_complex_LowLevel.Samples
@@ -52,7 +50,7 @@ namespace body_complex_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new DictionaryClient(credential);
 
-            Response response = await client.GetValidAsync(new RequestContext());
+            Response response = await client.GetValidAsync(new RequestContext()).ConfigureAwait(false);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());
@@ -65,7 +63,7 @@ namespace body_complex_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new DictionaryClient(credential);
 
-            Response response = await client.GetValidAsync(new RequestContext());
+            Response response = await client.GetValidAsync(new RequestContext()).ConfigureAwait(false);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("defaultProgram").GetProperty("<test>").ToString());
@@ -93,9 +91,9 @@ namespace body_complex_LowLevel.Samples
 
             var data = new
             {
-                defaultProgram = new
+                defaultProgram = new Dictionary<string, string>
                 {
-                    key = "<String>",
+                    ["key"] = "<String>"
                 },
             };
 
@@ -112,7 +110,7 @@ namespace body_complex_LowLevel.Samples
 
             var data = new { };
 
-            Response response = await client.PutValidAsync(RequestContent.Create(data));
+            Response response = await client.PutValidAsync(RequestContent.Create(data)).ConfigureAwait(false);
             Console.WriteLine(response.Status);
         }
 
@@ -125,13 +123,13 @@ namespace body_complex_LowLevel.Samples
 
             var data = new
             {
-                defaultProgram = new
+                defaultProgram = new Dictionary<string, string>
                 {
-                    key = "<String>",
+                    ["key"] = "<String>"
                 },
             };
 
-            Response response = await client.PutValidAsync(RequestContent.Create(data));
+            Response response = await client.PutValidAsync(RequestContent.Create(data)).ConfigureAwait(false);
             Console.WriteLine(response.Status);
         }
 
@@ -168,7 +166,7 @@ namespace body_complex_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new DictionaryClient(credential);
 
-            Response response = await client.GetEmptyAsync(new RequestContext());
+            Response response = await client.GetEmptyAsync(new RequestContext()).ConfigureAwait(false);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());
@@ -181,7 +179,7 @@ namespace body_complex_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new DictionaryClient(credential);
 
-            Response response = await client.GetEmptyAsync(new RequestContext());
+            Response response = await client.GetEmptyAsync(new RequestContext()).ConfigureAwait(false);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("defaultProgram").GetProperty("<test>").ToString());
@@ -209,9 +207,9 @@ namespace body_complex_LowLevel.Samples
 
             var data = new
             {
-                defaultProgram = new
+                defaultProgram = new Dictionary<string, string>
                 {
-                    key = "<String>",
+                    ["key"] = "<String>"
                 },
             };
 
@@ -228,7 +226,7 @@ namespace body_complex_LowLevel.Samples
 
             var data = new { };
 
-            Response response = await client.PutEmptyAsync(RequestContent.Create(data));
+            Response response = await client.PutEmptyAsync(RequestContent.Create(data)).ConfigureAwait(false);
             Console.WriteLine(response.Status);
         }
 
@@ -241,13 +239,13 @@ namespace body_complex_LowLevel.Samples
 
             var data = new
             {
-                defaultProgram = new
+                defaultProgram = new Dictionary<string, string>
                 {
-                    key = "<String>",
+                    ["key"] = "<String>"
                 },
             };
 
-            Response response = await client.PutEmptyAsync(RequestContent.Create(data));
+            Response response = await client.PutEmptyAsync(RequestContent.Create(data)).ConfigureAwait(false);
             Console.WriteLine(response.Status);
         }
 
@@ -284,7 +282,7 @@ namespace body_complex_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new DictionaryClient(credential);
 
-            Response response = await client.GetNullAsync(new RequestContext());
+            Response response = await client.GetNullAsync(new RequestContext()).ConfigureAwait(false);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());
@@ -297,7 +295,7 @@ namespace body_complex_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new DictionaryClient(credential);
 
-            Response response = await client.GetNullAsync(new RequestContext());
+            Response response = await client.GetNullAsync(new RequestContext()).ConfigureAwait(false);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("defaultProgram").GetProperty("<test>").ToString());
@@ -336,7 +334,7 @@ namespace body_complex_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new DictionaryClient(credential);
 
-            Response response = await client.GetNotProvidedAsync(new RequestContext());
+            Response response = await client.GetNotProvidedAsync(new RequestContext()).ConfigureAwait(false);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());
@@ -349,7 +347,7 @@ namespace body_complex_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new DictionaryClient(credential);
 
-            Response response = await client.GetNotProvidedAsync(new RequestContext());
+            Response response = await client.GetNotProvidedAsync(new RequestContext()).ConfigureAwait(false);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("defaultProgram").GetProperty("<test>").ToString());

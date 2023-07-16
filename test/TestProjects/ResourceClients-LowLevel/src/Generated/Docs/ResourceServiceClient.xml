@@ -8,7 +8,7 @@ This sample shows how to call GetParametersAsync with required parameters and pa
 var credential = new AzureKeyCredential("<key>");
 var client = new ResourceServiceClient(credential);
 
-Response response = await client.GetParametersAsync(new RequestContext());
+Response response = await client.GetParametersAsync(new RequestContext()).ConfigureAwait(false);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.ToString());
