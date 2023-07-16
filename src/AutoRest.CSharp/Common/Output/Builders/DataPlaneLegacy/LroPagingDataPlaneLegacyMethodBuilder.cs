@@ -32,7 +32,7 @@ namespace AutoRest.CSharp.Output.Models
 
         protected override Method BuildLegacyConvenienceMethod(bool async)
         {
-            var signature = _convenienceMethod with {Name = $"Start{_convenienceMethod}", ReturnType = _lroType};
+            var signature = _convenienceMethod with {Name = $"Start{_convenienceMethod.Name}", Modifiers = _convenienceMethod.Modifiers | MethodSignatureModifiers.Virtual, ReturnType = _lroType};
             var nextLink = new CodeWriterDeclaration(KnownParameters.NextLink.Name);
 
             var httpMessageExpression = new HttpMessageExpression(_restClient.Invoke(_createMessageMethod));

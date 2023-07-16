@@ -46,25 +46,23 @@ namespace AutoRest.CSharp.Output.Models
         private readonly ClientFields _fields;
         private readonly IReadOnlyList<RequestPartSource> _requestParts;
         private readonly IReadOnlyList<Parameter> _parameters;
-        private readonly ResponseClassifierType? _responseClassifierType;
         private readonly HttpPipelineExpression _pipeline;
         private readonly RequestContextExpression? _requestContext;
 
-        public CreateMessageMethodBuilder(ClientFields fields, IReadOnlyList<RequestPartSource> requestParts, IReadOnlyList<Parameter> parameters, ResponseClassifierType? responseClassifierType, RequestContextExpression? requestContext)
+        public CreateMessageMethodBuilder(ClientFields fields, IReadOnlyList<RequestPartSource> requestParts, IReadOnlyList<Parameter> parameters, RequestContextExpression? requestContext)
         {
             _fields = fields;
             _requestParts = requestParts;
             _parameters = parameters;
-            _responseClassifierType = responseClassifierType;
             _requestContext = requestContext;
             _pipeline  = new HttpPipelineExpression(_fields.PipelineField.Declaration);
         }
 
-        public MethodBodyStatement CreateHttpMessage(RequestMethod requestMethod, bool bufferResponse, out HttpMessageExpression message, out RequestExpression request, out RawRequestUriBuilderExpression uriBuilder)
+        public MethodBodyStatement CreateHttpMessage(RequestMethod requestMethod, bool bufferResponse, ResponseClassifierType? responseClassifierType, out HttpMessageExpression message, out RequestExpression request, out RawRequestUriBuilderExpression uriBuilder)
         {
             var callPipelineCreateMessage = _requestContext is not null
-                ? _responseClassifierType is not null
-                    ? _pipeline.CreateMessage(_requestContext, new FormattableStringToExpression($"{_responseClassifierType.Name}"))
+                ? responseClassifierType is not null
+                    ? _pipeline.CreateMessage(_requestContext, new FormattableStringToExpression($"{responseClassifierType.Name}"))
                     : _pipeline.CreateMessage(_requestContext)
                 : _pipeline.CreateMessage();
 

@@ -101,7 +101,7 @@ namespace AutoRest.CSharp.Output.Models
 
             return new[]
             {
-                builder.CreateHttpMessage(RequestMethod.Get, Operation.BufferResponse, out var message, out var request, out var uriBuilder),
+                builder.CreateHttpMessage(RequestMethod.Get, Operation.BufferResponse, _nextPageStatusCodeSwitchBuilder.ResponseClassifier, out var message, out var request, out var uriBuilder),
                 builder.AddUri(uriBuilder, Operation.Uri),
                 uriBuilder.AppendRawNextLink(KnownParameters.NextLink, false),
                 Assign(request.Uri, uriBuilder),

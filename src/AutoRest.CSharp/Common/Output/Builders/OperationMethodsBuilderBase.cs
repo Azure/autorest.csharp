@@ -87,9 +87,10 @@ namespace AutoRest.CSharp.Output.Models
 
         public RestClientOperationMethods BuildDpg()
         {
-            var parameters = _parametersBuilder.BuildParameters(_clientNamespace, _clientName, ResponseType is not null);
+            var hasResponseBody = Operation is { Paging: not null, LongRunning: null } || ResponseType is not null;
+            var parameters = _parametersBuilder.BuildParameters(_clientNamespace, _clientName, hasResponseBody);
             var requestContext = new RequestContextExpression(KnownParameters.RequestContext);
-            var createMessageBuilder = new CreateMessageMethodBuilder(_fields, parameters.RequestParts, parameters.CreateMessage, ResponseClassifier, requestContext);
+            var createMessageBuilder = new CreateMessageMethodBuilder(_fields, parameters.RequestParts, parameters.CreateMessage, requestContext);
 
             var createMessageMethod = BuildCreateRequestMethod(parameters.CreateMessage, createMessageBuilder);
             var createNextPageMessageMethodSignature = BuildCreateNextPageMessageSignature(parameters.CreateMessage);
@@ -98,7 +99,7 @@ namespace AutoRest.CSharp.Output.Models
             Method? convenience = null;
             Method? convenienceAsync = null;
 
-            if (parameters.ShouldGenerateConvenienceMethod && Operation is not { Paging: not null, LongRunning: not null})
+            if (Operation is { GenerateConvenienceMethod: true, GenerateProtocolMethod: false } && !(parameters.ProtocolAndConvenienceAreIdentical && !hasResponseBody))
             {
                 var convenienceMethodName = ProtocolMethodName;
                 if (parameters.HasAmbiguityBetweenProtocolAndConvenience)
@@ -139,7 +140,7 @@ namespace AutoRest.CSharp.Output.Models
         public virtual RestClientOperationMethods BuildLegacy()
         {
             var parameters = _parametersBuilder.BuildParametersLegacy(!Configuration.AzureArm);
-            var createMessageBuilder = new CreateMessageMethodBuilder(_fields, parameters.RequestParts, parameters.CreateMessage, _statusCodeSwitchBuilder.ResponseClassifier, null);
+            var createMessageBuilder = new CreateMessageMethodBuilder(_fields, parameters.RequestParts, parameters.CreateMessage, null);
 
             var createRequestMessageMethod = BuildCreateRequestMethod(parameters.CreateMessage, createMessageBuilder);
             var createNextPageMessageMethodSignature = BuildCreateNextPageMessageSignature(parameters.CreateMessage);
@@ -176,7 +177,7 @@ namespace AutoRest.CSharp.Output.Models
 
         private IEnumerable<MethodBodyStatement> BuildCreateRequestMethodBody(CreateMessageMethodBuilder builder)
         {
-            yield return builder.CreateHttpMessage(Operation.HttpMethod, Operation.BufferResponse, out var message, out var request, out var uriBuilder);
+            yield return builder.CreateHttpMessage(Operation.HttpMethod, Operation.BufferResponse, ResponseClassifier, out var message, out var request, out var uriBuilder);
             yield return builder.AddUri(uriBuilder, Operation.Uri);
             yield return builder.AddPath(uriBuilder, Operation.Path);
             yield return builder.AddQuery(uriBuilder).AsStatement();
@@ -196,7 +197,7 @@ namespace AutoRest.CSharp.Output.Models
                 return null;
             }
 
-            var builder = new CreateMessageMethodBuilder(_fields, parameters.RequestParts, signature.Parameters, ResponseClassifier, requestContext);
+            var builder = new CreateMessageMethodBuilder(_fields, parameters.RequestParts, signature.Parameters, requestContext);
             var body = BuildCreateNextPageMessageMethodBody(builder, signature);
             return body is not null ? new Method(signature, body) : null;
         }

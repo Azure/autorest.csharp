@@ -9,12 +9,14 @@ using AutoRest.CSharp.Output.Models.Shared;
 namespace AutoRest.CSharp.Output.Models
 {
     internal record RestClientMethodParameters
-    (IReadOnlyList<RequestPartSource> RequestParts,
+    (
+        IReadOnlyList<RequestPartSource> RequestParts,
         IReadOnlyList<Parameter> CreateMessage,
         IReadOnlyList<Parameter> Protocol,
         IReadOnlyList<Parameter> Convenience,
         IReadOnlyDictionary<Parameter, ValueExpression> Arguments,
         IReadOnlyDictionary<Parameter, MethodBodyStatement> Conversions,
-        bool ShouldGenerateConvenienceMethod,
-        bool HasAmbiguityBetweenProtocolAndConvenience);
+        bool ProtocolAndConvenienceAreIdentical,
+        bool HasAmbiguityBetweenProtocolAndConvenience
+    );
 }

@@ -71,7 +71,7 @@ namespace AutoRest.CSharp.Output.Models
                 .ToArray();
         }
 
-        public RestClientMethodParameters BuildParameters(string clientNamespace, string clientName, bool hasResponseType)
+        public RestClientMethodParameters BuildParameters(string clientNamespace, string clientName, bool hasResponseBody)
         {
             var sortedParameters = GetSortedParameters(_operation, _unsortedParameters);
             var requestConditionHeaders = RequestConditionHeaders.None;
@@ -107,7 +107,8 @@ namespace AutoRest.CSharp.Output.Models
             AddRequestConditionHeaders(requestConditionHeaders, requestConditionRequestParameter, requestConditionSerializationFormat);
             AddRequestContext();
 
-            if (!ShouldGenerateConvenienceMethod(hasResponseType))
+            var protocolAndConvenienceAreIdentical = ProtocolAndConvenienceAreIdentical();
+            if (!hasResponseBody && protocolAndConvenienceAreIdentical)
             {
                 return new RestClientMethodParameters
                 (
@@ -266,20 +267,8 @@ namespace AutoRest.CSharp.Output.Models
             return existingProtocolMethod is { Parameters: [.., {IsOptional: true}]};
         }
 
-        private bool ShouldGenerateConvenienceMethod(bool hasResponseType)
-        {
-            if (_operation is not { GenerateConvenienceMethod: true, GenerateProtocolMethod: false })
-            {
-                return false;
-            }
-
-            if (hasResponseType)
-            {
-                return true;
-            }
-
-            return _convenienceParameters.Where(p => p != KnownParameters.CancellationTokenParameter).SequenceEqual(_protocolParameters.Where(p => p != KnownParameters.RequestContext));
-        }
+        private bool ProtocolAndConvenienceAreIdentical()
+            => _convenienceParameters.Where(p => p != KnownParameters.CancellationTokenParameter).SequenceEqual(_protocolParameters.Where(p => p != KnownParameters.RequestContext));
 
         private bool HasAmbiguityBetweenProtocolAndConvenience()
         {
