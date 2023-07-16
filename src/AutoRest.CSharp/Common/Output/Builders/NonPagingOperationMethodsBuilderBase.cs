@@ -2,33 +2,35 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 using System.Collections.Generic;
-using AutoRest.CSharp.Common.Input;
+using System.Linq;
 using AutoRest.CSharp.Common.Output.Models;
-using AutoRest.CSharp.Common.Output.Models.Responses;
 using AutoRest.CSharp.Common.Output.Models.Statements;
 using AutoRest.CSharp.Common.Output.Models.ValueExpressions;
+using AutoRest.CSharp.Output.Models.Shared;
 
 namespace AutoRest.CSharp.Output.Models
 {
     internal abstract class NonPagingOperationMethodsBuilderBase : OperationMethodsBuilderBase
     {
-        protected NonPagingOperationMethodsBuilderBase(OperationMethodsBuilderBaseArgs args, ClientMethodParameters clientMethodParameters)
-            : base(args, clientMethodParameters)
+        protected NonPagingOperationMethodsBuilderBase(OperationMethodsBuilderBaseArgs args)
+            : base(args)
         {
         }
 
-        protected override bool ShouldConvenienceMethodGenerated() => ResponseType is not null || base.ShouldConvenienceMethodGenerated();
+        protected override MethodSignature? BuildCreateNextPageMessageSignature(IReadOnlyList<Parameter> createMessageParameters) => null;
 
-        protected override Method? BuildCreateNextPageMessageMethod(ResponseClassifierType responseClassifierType) => null;
+        protected override MethodBodyStatement? BuildCreateNextPageMessageMethodBody(CreateMessageMethodBuilder builder, MethodSignature methodSignature) => null;
 
-        protected IEnumerable<MethodBodyStatement> AddProtocolMethodArguments(List<ValueExpression> protocolMethodArguments)
+        protected override Method? BuildLegacyNextPageConvenienceMethod(IReadOnlyList<Parameter> parameters, Method? createRequestMethod, bool async) => null;
+
+        protected IEnumerable<MethodBodyStatement> AddProtocolMethodArguments(RestClientMethodParameters parameters, List<ValueExpression> protocolMethodArguments)
         {
-            foreach (var protocolParameter in ProtocolMethodParameters)
+            foreach (var protocolParameter in parameters.Protocol)
             {
-                if (ArgumentsMap.TryGetValue(protocolParameter, out var argument))
+                if (parameters.Arguments.TryGetValue(protocolParameter, out var argument))
                 {
                     protocolMethodArguments.Add(argument);
-                    if (ConversionsMap.TryGetValue(protocolParameter, out var conversion))
+                    if (parameters.Conversions.TryGetValue(protocolParameter, out var conversion))
                     {
                         yield return conversion;
                     }

@@ -43,7 +43,7 @@ namespace AutoRest.CSharp.LowLevel.Generation
             {
                 using (_writer.Scope($"public class Samples_{_client.Declaration.Name}"))
                 {
-                    foreach (var method in _client.OperationMethods)
+                    foreach (var method in _client.OperationMethods.OrderBy(o => o.Order))
                     {
                         //TODO: we should make this more obvious to determine if something is convenience only
                         if (method.Protocol is {} protocol)

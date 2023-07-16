@@ -3,8 +3,20 @@
 
 using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Common.Output.Models.ValueExpressions;
+using AutoRest.CSharp.Generation.Types;
+using AutoRest.CSharp.Input.Source;
 
 namespace AutoRest.CSharp.Output.Models
 {
-    internal record OperationMethodsBuilderBaseArgs(InputOperation Operation, ValueExpression? RestClientReference, ClientFields Fields, string ClientName, StatusCodeSwitchBuilder StatusCodeSwitchBuilder, bool ExistingProtocolMethodHasOptionalParameters);
+    internal record OperationMethodsBuilderBaseArgs
+    (
+        InputOperation Operation,
+        ValueExpression? RestClientReference,
+        ClientFields Fields,
+        string ClientNamespace,
+        string ClientName,
+        StatusCodeSwitchBuilder StatusCodeSwitchBuilder,
+        TypeFactory TypeFactory,
+        SourceInputModel? SourceInputModel
+    );
 }

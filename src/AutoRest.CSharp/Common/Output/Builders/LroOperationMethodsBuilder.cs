@@ -20,15 +20,15 @@ namespace AutoRest.CSharp.Output.Models
     {
         private readonly OperationLongRunning _longRunning;
 
-        public LroOperationMethodsBuilder(OperationMethodsBuilderBaseArgs args, ClientMethodParameters clientMethodParameters, OperationLongRunning longRunning)
-            : base(args, clientMethodParameters)
+        public LroOperationMethodsBuilder(OperationMethodsBuilderBaseArgs args, OperationLongRunning longRunning)
+            : base(args)
         {
             _longRunning = longRunning;
         }
 
-        protected override MethodBodyStatement CreateProtocolMethodBody(bool async)
+        protected override MethodBodyStatement CreateProtocolMethodBody(MethodSignatureBase createMessageSignature, MethodSignature? createNextPageMessageSignature, bool async)
             => WrapInDiagnosticScope(ProtocolMethodName,
-                Declare("message", InvokeCreateRequestMethod(), out var message),
+                Declare("message", InvokeCreateRequestMethod(createMessageSignature), out var message),
                 Return(InvokeProtocolOperationHelpersProcessMessageMethod(CreateScopeName(ProtocolMethodName), message, _longRunning.FinalStateVia, async))
             );
 
@@ -52,17 +52,16 @@ namespace AutoRest.CSharp.Output.Models
             return new InvokeStaticMethodExpression(typeof(ProtocolOperationHelpers), processMessageMethodName, arguments, null, false, async);
         }
 
-        protected override MethodBodyStatement CreateConvenienceMethodBody(string methodName, bool async)
-        {
-            return methodName != ProtocolMethodName
-                ? WrapInDiagnosticScope(methodName, CreateConvenienceMethodLogic(methodName, async).AsStatement())
-                : CreateConvenienceMethodLogic(methodName, async).AsStatement();
-        }
+        protected override MethodBodyStatement CreateConvenienceMethodBody(string methodName,
+            RestClientMethodParameters parameters, MethodSignature? createNextPageMessageSignature, bool async)
+            => methodName != ProtocolMethodName
+                ? WrapInDiagnosticScope(methodName, CreateConvenienceMethodLogic(methodName, parameters, async).AsStatement())
+                : CreateConvenienceMethodLogic(methodName, parameters, async).AsStatement();
 
-        private IEnumerable<MethodBodyStatement> CreateConvenienceMethodLogic(string methodName, bool async)
+        private IEnumerable<MethodBodyStatement> CreateConvenienceMethodLogic(string methodName, RestClientMethodParameters parameters, bool async)
         {
             var protocolMethodArguments = new List<ValueExpression>();
-            yield return AddProtocolMethodArguments(protocolMethodArguments).ToArray();
+            yield return AddProtocolMethodArguments(parameters, protocolMethodArguments).ToArray();
 
             if (ResponseType == null)
             {

@@ -35,9 +35,17 @@ namespace AutoRest.CSharp.Output.Models
             ["If-Unmodified-Since"] = RequestConditionHeaders.IfUnmodifiedSince
         };
 
+        private static readonly HashSet<string> IgnoredRequestHeader = new(StringComparer.OrdinalIgnoreCase)
+        {
+            "x-ms-client-request-id",
+            "tracestate",
+            "traceparent"
+        };
+
         private readonly InputOperation _operation;
         private readonly TypeFactory _typeFactory;
         private readonly SourceInputModel? _sourceInputModel;
+        private readonly IReadOnlyList<InputParameter> _unsortedParameters;
         private readonly List<RequestPartSource> _requestParts;
         private readonly List<Parameter> _createMessageParameters;
         private readonly List<Parameter> _protocolParameters;
@@ -58,10 +66,14 @@ namespace AutoRest.CSharp.Output.Models
             _arguments = new Dictionary<Parameter, ValueExpression>();
             _conversions = new Dictionary<Parameter, MethodBodyStatement>();
             _keepClientDefaultValue = Configuration.MethodsToKeepClientDefaultValue.Contains(operation.Name);
+            _unsortedParameters = operation.Parameters
+                .Where(rp => rp.Location != RequestLocation.Header || !IgnoredRequestHeader.Contains(rp.NameInRequest))
+                .ToArray();
         }
 
-        public ClientMethodParameters BuildParameters(IEnumerable<InputParameter> sortedParameters, string clientNamespace, string clientName)
+        public RestClientMethodParameters BuildParameters(string clientNamespace, string clientName, bool hasResponseType)
         {
+            var sortedParameters = GetSortedParameters(_operation, _unsortedParameters);
             var requestConditionHeaders = RequestConditionHeaders.None;
             var requestConditionSerializationFormat = SerializationFormat.Default;
             InputParameter? requestConditionRequestParameter = null;
@@ -95,13 +107,29 @@ namespace AutoRest.CSharp.Output.Models
             AddRequestConditionHeaders(requestConditionHeaders, requestConditionRequestParameter, requestConditionSerializationFormat);
             AddRequestContext();
 
-            var hasAmbiguityBetweenProtocolAndConvenience = HasAmbiguityBetweenProtocolAndConvenience();
-            var makeAllProtocolParametersRequired = !Configuration.KeepNonOverloadableProtocolSignature
-                && Configuration.UseOverloadsBetweenProtocolAndConvenience
-                && hasAmbiguityBetweenProtocolAndConvenience
-                && !ExistingProtocolMethodHasOptionalParameters(clientNamespace, clientName);
+            if (!ShouldGenerateConvenienceMethod(hasResponseType))
+            {
+                return new RestClientMethodParameters
+                (
+                    _requestParts,
+                    _createMessageParameters,
+                    _protocolParameters,
+                    _convenienceParameters,
+                    _arguments,
+                    _conversions,
+                    false,
+                    false
+                );
+            }
 
-            if (makeAllProtocolParametersRequired)
+            var makeAllProtocolParametersRequiredIfAmbiguous =
+                !Configuration.KeepNonOverloadableProtocolSignature &&
+                Configuration.UseOverloadsBetweenProtocolAndConvenience &&
+                !ExistingProtocolMethodHasOptionalParameters(clientNamespace, clientName);
+
+            var hasAmbiguityBetweenProtocolAndConvenience = HasAmbiguityBetweenProtocolAndConvenience();
+
+            if (makeAllProtocolParametersRequiredIfAmbiguous && hasAmbiguityBetweenProtocolAndConvenience)
             {
                 for (var i = 0; i < _protocolParameters.Count; i++)
                 {
@@ -117,25 +145,28 @@ namespace AutoRest.CSharp.Output.Models
                     _protocolParameters[i] = updatedParameter;
                 }
 
-                // Recalculate ambiguity
-                hasAmbiguityBetweenProtocolAndConvenience = HasAmbiguityBetweenProtocolAndConvenience();
+                hasAmbiguityBetweenProtocolAndConvenience = false;
             }
 
-            return new ClientMethodParameters
+            return new RestClientMethodParameters
             (
                 _requestParts,
                 _createMessageParameters,
-                makeAllProtocolParametersRequired ? _protocolParameters.Select(p => p with {DefaultValue = null}).ToList() : _protocolParameters,
+                _protocolParameters,
                 _convenienceParameters,
-                true,
-                hasAmbiguityBetweenProtocolAndConvenience,
                 _arguments,
-                _conversions
+                _conversions,
+                true,
+                hasAmbiguityBetweenProtocolAndConvenience
             );
         }
 
-        public ClientMethodParameters BuildParametersLegacy(IEnumerable<InputParameter> unsortedParameters, IEnumerable<InputParameter> sortedParameters)
+        public RestClientMethodParameters BuildParametersLegacy(bool legacyParameterSorting)
         {
+            var sortedParameters = legacyParameterSorting
+                ? GetLegacySortedParameters(_unsortedParameters)
+                : GetSortedParameters(_operation, _unsortedParameters);
+
             var parameters = new Dictionary<InputParameter, Parameter>();
             foreach (var inputParameter in sortedParameters)
             {
@@ -154,22 +185,22 @@ namespace AutoRest.CSharp.Output.Models
             _convenienceParameters.Add(KnownParameters.CancellationTokenParameter);
 
             // for legacy logic, adding request parts unsorted
-            foreach (var inputParameter in unsortedParameters)
+            foreach (var inputParameter in _unsortedParameters)
             {
                 var serializationFormat = SerializationBuilder.GetSerializationFormat(inputParameter.Type);
                 _requestParts.Add(new RequestPartSource(inputParameter.NameInRequest, inputParameter, parameters[inputParameter], serializationFormat));
             }
 
-            return new ClientMethodParameters
+            return new RestClientMethodParameters
             (
                 _requestParts,
                 _createMessageParameters,
                 _protocolParameters,
                 _convenienceParameters,
-                false,
-                false,
                 _arguments,
-                _conversions
+                _conversions,
+                true,
+                false
             );
         }
 
@@ -235,6 +266,21 @@ namespace AutoRest.CSharp.Output.Models
             return existingProtocolMethod is { Parameters: [.., {IsOptional: true}]};
         }
 
+        private bool ShouldGenerateConvenienceMethod(bool hasResponseType)
+        {
+            if (_operation is not { GenerateConvenienceMethod: true, GenerateProtocolMethod: false })
+            {
+                return false;
+            }
+
+            if (hasResponseType)
+            {
+                return true;
+            }
+
+            return _convenienceParameters.Where(p => p != KnownParameters.CancellationTokenParameter).SequenceEqual(_protocolParameters.Where(p => p != KnownParameters.RequestContext));
+        }
+
         private bool HasAmbiguityBetweenProtocolAndConvenience()
         {
             for (int i = 0; i < Math.Min(_protocolParameters.Count, _convenienceParameters.Count); i++)
@@ -277,6 +323,10 @@ namespace AutoRest.CSharp.Output.Models
                     {
                         return false;
                     }
+                }
+                else if (protocol == KnownParameters.RequestContent)
+                {
+                    return false;
                 }
             }
 
@@ -509,6 +559,81 @@ namespace AutoRest.CSharp.Output.Models
                 SerializableObjectType type when toType.EqualsIgnoreNullable(typeof(RequestContent)) => new SerializableObjectTypeExpression(type, fromExpression).ToRequestContent(),
                 _ => fromExpression
             };
+        }
+
+
+
+        private static IEnumerable<InputParameter> GetLegacySortedParameters(IEnumerable<InputParameter> inputParameters)
+            => inputParameters.OrderByDescending(p => p is { IsRequired: true, DefaultValue: null });
+
+        private static IEnumerable<InputParameter> GetSortedParameters(InputOperation operation, IEnumerable<InputParameter> inputParameters)
+        {
+            var keepCurrentDefaultValue = Configuration.MethodsToKeepClientDefaultValue.Contains(operation.Name);
+            var uriOrPathParameters = new Dictionary<string, InputParameter>();
+            var requiredRequestParameters = new List<InputParameter>();
+            var optionalRequestParameters = new List<InputParameter>();
+
+            InputParameter? bodyParameter = null;
+            InputParameter? contentTypeRequestParameter = null;
+
+            foreach (var operationParameter in inputParameters)
+            {
+                switch (operationParameter)
+                {
+                    case { Location: RequestLocation.Body }:
+                        bodyParameter = operationParameter;
+                        break;
+                    case { Location: RequestLocation.Header, IsContentType: true } when contentTypeRequestParameter == null:
+                        contentTypeRequestParameter = operationParameter;
+                        break;
+                    case { Location: RequestLocation.Uri or RequestLocation.Path }:
+                        uriOrPathParameters.Add(operationParameter.NameInRequest, operationParameter);
+                        break;
+                    case { IsRequired: true, DefaultValue: null }:
+                        requiredRequestParameters.Add(operationParameter);
+                        break;
+                    case { IsRequired: true } when !keepCurrentDefaultValue:
+                        requiredRequestParameters.Add(operationParameter);
+                        break;
+                    default:
+                        optionalRequestParameters.Add(operationParameter);
+                        break;
+                }
+            }
+
+            var orderedParameters = new List<InputParameter>();
+
+            SortUriOrPathParameters(operation.Uri, uriOrPathParameters, orderedParameters);
+            SortUriOrPathParameters(operation.Path, uriOrPathParameters, orderedParameters);
+            orderedParameters.AddRange(requiredRequestParameters);
+            if (bodyParameter is not null)
+            {
+                orderedParameters.Add(bodyParameter);
+                if (contentTypeRequestParameter is not null)
+                {
+                    orderedParameters.Add(contentTypeRequestParameter);
+                }
+            }
+            orderedParameters.AddRange(optionalRequestParameters);
+
+            return orderedParameters;
+        }
+
+        private static void SortUriOrPathParameters(string uriPart, IReadOnlyDictionary<string, InputParameter> requestParameters, ICollection<InputParameter> orderedParameters)
+        {
+            foreach ((ReadOnlySpan<char> span, bool isLiteral) in StringExtensions.GetPathParts(uriPart))
+            {
+                if (isLiteral)
+                {
+                    continue;
+                }
+
+                var text = span.ToString();
+                if (requestParameters.TryGetValue(text, out var requestParameter))
+                {
+                    orderedParameters.Add(requestParameter);
+                }
+            }
         }
     }
 }

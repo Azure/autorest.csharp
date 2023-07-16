@@ -4,9 +4,11 @@
 using System;
 using System.Linq;
 using AutoRest.CSharp.Common.Input;
+using AutoRest.CSharp.Common.Output.Models.KnownValueExpressions;
 using AutoRest.CSharp.Common.Output.Models.Statements;
 using AutoRest.CSharp.Common.Output.Models.ValueExpressions;
 using AutoRest.CSharp.Generation.Writers;
+using AutoRest.CSharp.Output.Models.Shared;
 using static AutoRest.CSharp.Common.Output.Models.Snippets;
 
 namespace AutoRest.CSharp.Output.Models
@@ -15,26 +17,24 @@ namespace AutoRest.CSharp.Output.Models
     {
         private readonly OperationLongRunning _longRunning;
 
-        public LroPagingOperationMethodsBuilder(OperationMethodsBuilderBaseArgs args, OperationPaging paging, ClientPagingMethodParameters parameters, OperationLongRunning longRunning)
-            : base(args, paging, args.StatusCodeSwitchBuilder.CreateLroPagingNextPageSwitch(), parameters)
+        public LroPagingOperationMethodsBuilder(OperationMethodsBuilderBaseArgs args, OperationPaging paging, OperationLongRunning longRunning)
+            : base(args, paging, args.StatusCodeSwitchBuilder.CreateLroPagingNextPageSwitch())
         {
             _longRunning = longRunning;
         }
 
-        protected override bool ShouldConvenienceMethodGenerated() => false;
-
-        protected override MethodBodyStatement CreateProtocolMethodBody(bool async)
+        protected override MethodBodyStatement CreateProtocolMethodBody(MethodSignatureBase createMessageSignature, MethodSignature? createNextPageMessageSignature, bool async)
         {
             CodeWriterDeclaration? createNextPageRequest = null;
             MethodBodyStatement? nextPageRequestLine = null;
-            if (CreateNextPageMessageMethodSignature is not null)
+            if (createNextPageMessageSignature is not null)
             {
-                var nextPageArguments = CreateNextPageMessageMethodSignature.Parameters.Select(p => new ParameterReference(p));
-                nextPageRequestLine = DeclareNextPageRequestLocalFunction(null, CreateNextPageMessageMethodSignature.Name, nextPageArguments, out createNextPageRequest);
+                var nextPageArguments = createNextPageMessageSignature.Parameters.Select(p => new ParameterReference(p));
+                nextPageRequestLine = DeclareNextPageRequestLocalFunction(null, createNextPageMessageSignature.Name, nextPageArguments, out createNextPageRequest);
             }
 
-            MethodBodyStatement declareMessageLine = Declare("message", InvokeCreateRequestMethod(), out var message);
-            MethodBodyStatement returnLine = Return(CreatePageable(message, createNextPageRequest, ClientDiagnosticsProperty, PipelineField, typeof(BinaryData), _longRunning.FinalStateVia, CreateScopeName(ProtocolMethodName), ItemPropertyName, NextLinkName, CreateMessageRequestContext, async));
+            MethodBodyStatement declareMessageLine = Declare("message", InvokeCreateRequestMethod(createMessageSignature), out var message);
+            MethodBodyStatement returnLine = Return(CreatePageable(message, createNextPageRequest, ClientDiagnosticsProperty, PipelineField, typeof(BinaryData), _longRunning.FinalStateVia, CreateScopeName(ProtocolMethodName), ItemPropertyName, NextLinkName, new RequestContextExpression(KnownParameters.RequestContext), async));
 
             var body = nextPageRequestLine is not null
                 ? new[]{nextPageRequestLine, declareMessageLine, returnLine}
@@ -43,7 +43,8 @@ namespace AutoRest.CSharp.Output.Models
             return WrapInDiagnosticScope(ProtocolMethodName, body);
         }
 
-        protected override MethodBodyStatement CreateConvenienceMethodBody(string methodName, bool async)
+        protected override MethodBodyStatement CreateConvenienceMethodBody(string methodName,
+            RestClientMethodParameters parameters, MethodSignature? createNextPageMessageSignature, bool async)
             => throw new NotSupportedException("LRO Paging isn't supported yet!");
     }
 }

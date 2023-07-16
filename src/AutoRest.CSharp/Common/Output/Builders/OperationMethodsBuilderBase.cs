@@ -3,11 +3,8 @@
 
 using System;
 using System.Collections.Generic;
-using System.Diagnostics.CodeAnalysis;
-using System.IO;
 using System.Linq;
 using AutoRest.CSharp.Common.Input;
-using AutoRest.CSharp.Common.Output.Builders;
 using AutoRest.CSharp.Common.Output.Models;
 using AutoRest.CSharp.Common.Output.Models.KnownCodeBlocks;
 using AutoRest.CSharp.Common.Output.Models.KnownValueExpressions;
@@ -17,13 +14,10 @@ using AutoRest.CSharp.Common.Output.Models.Types;
 using AutoRest.CSharp.Common.Output.Models.ValueExpressions;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Input;
+using AutoRest.CSharp.Input.Source;
 using AutoRest.CSharp.Output.Builders;
 using AutoRest.CSharp.Output.Models.Requests;
-using AutoRest.CSharp.Output.Models.Serialization;
-using AutoRest.CSharp.Output.Models.Serialization.Json;
-using AutoRest.CSharp.Output.Models.Serialization.Xml;
 using AutoRest.CSharp.Output.Models.Shared;
-using AutoRest.CSharp.Output.Models.Types;
 using AutoRest.CSharp.Utilities;
 using Azure.Core;
 using static AutoRest.CSharp.Common.Output.Models.Snippets;
@@ -34,14 +28,15 @@ namespace AutoRest.CSharp.Output.Models
     {
         private readonly ClientFields _fields;
         private readonly string _clientName;
-        private readonly IReadOnlyList<RequestPartSource> _requestParts;
+        private readonly string _clientNamespace;
 
         private readonly string? _summary;
         private readonly string? _description;
         private readonly MethodSignatureModifiers _protocolAccessibility;
+        private readonly MethodParametersBuilder _parametersBuilder;
         private readonly StatusCodeSwitchBuilder _statusCodeSwitchBuilder;
-        private readonly bool _existingProtocolMethodHasOptionalParameters;
-        private readonly bool _hasAmbiguityBetweenProtocolAndConvenience;
+        private readonly TypeFactory _typeFactory;
+        private readonly SourceInputModel? _sourceInputModel;
 
         public InputOperation Operation { get; }
 
@@ -58,21 +53,17 @@ namespace AutoRest.CSharp.Output.Models
         protected CSharpType ProtocolMethodReturnType { get; }
         protected CSharpType RestConvenienceMethodReturnType { get; }
         protected CSharpType ConvenienceMethodReturnType { get; }
+        protected ResponseClassifierType ResponseClassifier { get; }
 
-        protected IReadOnlyList<Parameter> CreateMessageMethodParameters { get; }
-        protected IReadOnlyList<Parameter> ProtocolMethodParameters { get; }
-        protected IReadOnlyList<Parameter> ConvenienceMethodParameters { get; }
-        protected IReadOnlyDictionary<Parameter, ValueExpression> ArgumentsMap { get; }
-        protected IReadOnlyDictionary<Parameter, MethodBodyStatement> ConversionsMap { get; }
-        protected RequestContextExpression? CreateMessageRequestContext { get; }
-
-        protected OperationMethodsBuilderBase(OperationMethodsBuilderBaseArgs args, ClientMethodParameters clientMethodParameters)
+        protected OperationMethodsBuilderBase(OperationMethodsBuilderBaseArgs args)
         {
             _fields = args.Fields;
             _clientName = args.ClientName;
+            _clientNamespace = args.ClientNamespace;
             _statusCodeSwitchBuilder = args.StatusCodeSwitchBuilder;
-            _existingProtocolMethodHasOptionalParameters = args.ExistingProtocolMethodHasOptionalParameters;
-            _hasAmbiguityBetweenProtocolAndConvenience = clientMethodParameters.HasAmbiguityBetweenProtocolAndConvenience;
+            _typeFactory = args.TypeFactory;
+            _sourceInputModel = args.SourceInputModel;
+            _parametersBuilder = new MethodParametersBuilder(args.Operation, _typeFactory, _sourceInputModel);
 
             Operation = args.Operation;
             ClientDiagnosticsProperty = _fields.ClientDiagnosticsProperty;
@@ -86,17 +77,8 @@ namespace AutoRest.CSharp.Output.Models
             ProtocolMethodReturnType = _statusCodeSwitchBuilder.ProtocolReturnType;
             RestConvenienceMethodReturnType = _statusCodeSwitchBuilder.RestClientConvenienceReturnType;
             ConvenienceMethodReturnType = _statusCodeSwitchBuilder.ClientConvenienceReturnType;
+            ResponseClassifier = _statusCodeSwitchBuilder.ResponseClassifier;
 
-            CreateMessageMethodParameters = clientMethodParameters.CreateMessage;
-            ProtocolMethodParameters = clientMethodParameters.Protocol;
-            ConvenienceMethodParameters = clientMethodParameters.Convenience;
-            CreateMessageRequestContext = clientMethodParameters.HasRequestContextInCreateMessage
-                    ? new RequestContextExpression(KnownParameters.RequestContext)
-                    : null;
-
-            _requestParts = clientMethodParameters.RequestParts;
-            ArgumentsMap = clientMethodParameters.Arguments;
-            ConversionsMap = clientMethodParameters.Conversions;
             _summary = Operation.Summary != null ? BuilderHelpers.EscapeXmlDocDescription(Operation.Summary) : null;
             _description = BuilderHelpers.EscapeXmlDocDescription(Operation.Description);
             _protocolAccessibility = Operation.GenerateProtocolMethod ? GetAccessibility(Operation.Accessibility) : MethodSignatureModifiers.Internal;
@@ -105,25 +87,29 @@ namespace AutoRest.CSharp.Output.Models
 
         public RestClientOperationMethods BuildDpg()
         {
-            var responseClassifier = _statusCodeSwitchBuilder.ResponseClassifier;
-            var createMessageMethod = BuildCreateRequestMethod(responseClassifier);
-            var createNextPageMessageMethod = BuildCreateNextPageMessageMethod(responseClassifier);
+            var parameters = _parametersBuilder.BuildParameters(_clientNamespace, _clientName, ResponseType is not null);
+            var requestContext = new RequestContextExpression(KnownParameters.RequestContext);
+            var createMessageBuilder = new CreateMessageMethodBuilder(_fields, parameters.RequestParts, parameters.CreateMessage, ResponseClassifier, requestContext);
+
+            var createMessageMethod = BuildCreateRequestMethod(parameters.CreateMessage, createMessageBuilder);
+            var createNextPageMessageMethodSignature = BuildCreateNextPageMessageSignature(parameters.CreateMessage);
+            var createNextPageMessageMethod = BuildCreateNextPageMessageMethod(createNextPageMessageMethodSignature, parameters, requestContext);
 
             Method? convenience = null;
             Method? convenienceAsync = null;
 
-            if (Operation.GenerateConvenienceMethod && ShouldConvenienceMethodGenerated())
+            if (parameters.ShouldGenerateConvenienceMethod && Operation is not { Paging: not null, LongRunning: not null})
             {
                 var convenienceMethodName = ProtocolMethodName;
-                if (_hasAmbiguityBetweenProtocolAndConvenience)
+                if (parameters.HasAmbiguityBetweenProtocolAndConvenience)
                 {
                     convenienceMethodName = ProtocolMethodName.IsLastWordSingular()
                         ? $"{ProtocolMethodName}Value"
                         : $"{ProtocolMethodName.LastWordToSingular()}Values";
                 }
 
-                convenience = BuildConvenienceMethod(convenienceMethodName, false);
-                convenienceAsync = BuildConvenienceMethod(convenienceMethodName, true);
+                convenience = BuildConvenienceMethod(convenienceMethodName, parameters, createNextPageMessageMethodSignature, false);
+                convenienceAsync = BuildConvenienceMethod(convenienceMethodName, parameters, createNextPageMessageMethodSignature, true);
             }
 
             var order = Operation.LongRunning is not null ? 2 : Operation.Paging is not null ? 1 : 0;
@@ -133,532 +119,112 @@ namespace AutoRest.CSharp.Output.Models
             (
                 createMessageMethod,
                 createNextPageMessageMethod,
-                BuildProtocolMethod(false),
-                BuildProtocolMethod(true),
+                BuildProtocolMethod(parameters.Protocol, createMessageMethod.Signature, createNextPageMessageMethodSignature, false),
+                BuildProtocolMethod(parameters.Protocol, createMessageMethod.Signature, createNextPageMessageMethodSignature, true),
                 convenience,
                 convenienceAsync,
                 null,
                 null,
-                responseClassifier,
+                ResponseClassifier,
 
                 order,
                 Operation,
                 requestBodyType,
                 ResponseType,
                 _statusCodeSwitchBuilder.PageItemType,
-                createNextPageMessageMethod?.Signature as MethodSignature
+                createNextPageMessageMethodSignature
             );
         }
 
         public virtual RestClientOperationMethods BuildLegacy()
         {
+            var parameters = _parametersBuilder.BuildParametersLegacy(!Configuration.AzureArm);
+            var createMessageBuilder = new CreateMessageMethodBuilder(_fields, parameters.RequestParts, parameters.CreateMessage, _statusCodeSwitchBuilder.ResponseClassifier, null);
+
+            var createRequestMessageMethod = BuildCreateRequestMethod(parameters.CreateMessage, createMessageBuilder);
+            var createNextPageMessageMethodSignature = BuildCreateNextPageMessageSignature(parameters.CreateMessage);
+            var createNextPageMessageMethod = BuildCreateNextPageMessageMethod(createNextPageMessageMethodSignature, parameters, null);
+
+            var order = Operation.LongRunning is not null ? 2 : Operation.Paging is not null ? 1 : 0;
+
             return new RestClientOperationMethods
             (
-                BuildCreateRequestMethod(_statusCodeSwitchBuilder.ResponseClassifier),
-                BuildCreateNextPageMessageMethod(_statusCodeSwitchBuilder.ResponseClassifier),
+                createRequestMessageMethod,
+                createNextPageMessageMethod,
                 null,
                 null,
-                BuildLegacyConvenienceMethod(ProtocolMethodName, ConvenienceMethodParameters, InvokeCreateRequestMethod(), _statusCodeSwitchBuilder, false),
-                BuildLegacyConvenienceMethod(ProtocolMethodName, ConvenienceMethodParameters, InvokeCreateRequestMethod(), _statusCodeSwitchBuilder, true),
-                null,
-                null,
+                BuildLegacyConvenienceMethod(ProtocolMethodName, parameters.Convenience, InvokeCreateRequestMethod(createRequestMessageMethod.Signature), _statusCodeSwitchBuilder, false),
+                BuildLegacyConvenienceMethod(ProtocolMethodName, parameters.Convenience, InvokeCreateRequestMethod(createRequestMessageMethod.Signature), _statusCodeSwitchBuilder, true),
+                BuildLegacyNextPageConvenienceMethod(parameters.Convenience, createNextPageMessageMethod, false),
+                BuildLegacyNextPageConvenienceMethod(parameters.Convenience, createNextPageMessageMethod, true),
                 _statusCodeSwitchBuilder.ResponseClassifier,
 
-                this is LroOperationMethodsBuilder ? 2 : 0,
+                order,
                 Operation,
                 null,
                 ResponseType,
                 _statusCodeSwitchBuilder.PageItemType,
-                null
+                createNextPageMessageMethodSignature
             );
         }
 
-        protected Method BuildCreateRequestMethod(ResponseClassifierType responseClassifierType)
+        protected Method BuildCreateRequestMethod(IReadOnlyList<Parameter> parameters, CreateMessageMethodBuilder builder)
         {
-            var signature = new MethodSignature(CreateMessageMethodName, _summary, _description, MethodSignatureModifiers.Internal, typeof(HttpMessage), null, CreateMessageMethodParameters);
-            return new Method(signature, BuildCreateRequestMethodBody(responseClassifierType).AsStatement());
+            var signature = new MethodSignature(CreateMessageMethodName, _summary, _description, MethodSignatureModifiers.Internal, typeof(HttpMessage), null, parameters);
+            return new Method(signature, BuildCreateRequestMethodBody(builder).AsStatement());
         }
 
-        protected abstract Method? BuildCreateNextPageMessageMethod(ResponseClassifierType responseClassifierType);
-
-        private IEnumerable<MethodBodyStatement> BuildCreateRequestMethodBody(ResponseClassifierType responseClassifierType)
+        private IEnumerable<MethodBodyStatement> BuildCreateRequestMethodBody(CreateMessageMethodBuilder builder)
         {
-            yield return CreateHttpMessage(responseClassifierType, Operation.HttpMethod, out var message, out var request, out var uriBuilder);
-            yield return AddUri(uriBuilder, Operation.Uri);
-            yield return AddPath(uriBuilder, Operation.Path);
-            yield return AddQuery(uriBuilder).AsStatement();
+            yield return builder.CreateHttpMessage(Operation.HttpMethod, Operation.BufferResponse, out var message, out var request, out var uriBuilder);
+            yield return builder.AddUri(uriBuilder, Operation.Uri);
+            yield return builder.AddPath(uriBuilder, Operation.Path);
+            yield return builder.AddQuery(uriBuilder).AsStatement();
 
             yield return Assign(request.Uri, uriBuilder);
 
-            yield return AddHeaders(request, false).AsStatement();
-            yield return AddBody(request);
-            yield return AddUserAgent(message);
+            yield return builder.AddHeaders(request, false).AsStatement();
+            yield return builder.AddBody(Operation, request);
+            yield return builder.AddUserAgent(message);
             yield return Return(message);
         }
 
-        protected List<MethodBodyStatement> CreateHttpMessage(ResponseClassifierType? responseClassifierType, RequestMethod requestMethod, out HttpMessageExpression message, out RequestExpression request, out RawRequestUriBuilderExpression uriBuilder)
+        private Method? BuildCreateNextPageMessageMethod(MethodSignature? signature, RestClientMethodParameters parameters, RequestContextExpression? requestContext)
         {
-            var callPipelineCreateMessage = CreateMessageRequestContext is not null
-                ? responseClassifierType is not null
-                    ? PipelineField.CreateMessage(CreateMessageRequestContext, new FormattableStringToExpression($"{responseClassifierType.Name}"))
-                    : PipelineField.CreateMessage(CreateMessageRequestContext)
-                : PipelineField.CreateMessage();
-
-            var statements = new List<MethodBodyStatement>
+            if (signature is null)
             {
-                Var("message", callPipelineCreateMessage, out message),
-                Var("request", message.Request, out request)
-            };
-
-            if (!Operation.BufferResponse)
-            {
-                statements.Add(Assign(message.BufferResponse, False));
+                return null;
             }
 
-            statements.Add(Assign(request.Method, new MemberExpression(typeof(RequestMethod), requestMethod.ToRequestMethodName())));
-            statements.Add(Var("uri", New.RawRequestUriBuilder(), out uriBuilder));
-
-            return statements;
+            var builder = new CreateMessageMethodBuilder(_fields, parameters.RequestParts, signature.Parameters, ResponseClassifier, requestContext);
+            var body = BuildCreateNextPageMessageMethodBody(builder, signature);
+            return body is not null ? new Method(signature, body) : null;
         }
 
-        protected List<MethodBodyStatement> AddUri(RawRequestUriBuilderExpression uriBuilder, string uri)
-        {
-            var lines = new List<MethodBodyStatement>();
-            foreach ((ReadOnlySpan<char> span, bool isLiteral) in StringExtensions.GetPathParts(uri))
-            {
-                if (isLiteral)
-                {
-                    lines.Add(uriBuilder.AppendRaw(span.ToString(), false));
-                }
-                else if (TryGetRequestPart(span, RequestLocation.Uri, out var inputParameter, out var outputParameter, out _))
-                {
-                    if (inputParameter.IsEndpoint)
-                    {
-                        lines.Add(uriBuilder.Reset(_fields.EndpointField ?? throw new InvalidOperationException("Endpoint field is missing!")));
-                    }
-                    else
-                    {
-                        var value = GetValueForRequestPart(inputParameter, outputParameter);
+        protected abstract MethodSignature? BuildCreateNextPageMessageSignature(IReadOnlyList<Parameter> createMessageParameters);
 
-                        lines.Add(outputParameter.Type.Equals(typeof(Uri))
-                            ? uriBuilder.Reset(value)
-                            : uriBuilder.AppendRaw(ConvertToRequestPartType(value, outputParameter.Type, true), !inputParameter.SkipUrlEncoding));
-                    }
-                }
-                else
-                {
-                    ErrorHelpers.ThrowError($"\n\nError while processing request '{uri}'\n\n  '{span.ToString()}' in URI is missing a matching definition in the path parameters collection{ErrorHelpers.UpdateSwaggerOrFile}");
-                }
-            }
-            return lines;
-        }
-
-        private List<MethodBodyStatement> AddPath(RawRequestUriBuilderExpression uriBuilder, string path)
-        {
-            var lines = new List<MethodBodyStatement>();
-            foreach ((ReadOnlySpan<char> span, bool isLiteral) in StringExtensions.GetPathParts(path))
-            {
-                if (isLiteral)
-                {
-                    lines.Add(uriBuilder.AppendPath(span.ToString(), false));
-                }
-                else if (TryGetRequestPart(span, RequestLocation.Path, out var inputParameter, out var outputParameter, out var format))
-                {
-                    var value = GetValueForRequestPart(inputParameter, outputParameter);
-                    lines.Add(value is not ConstantExpression && outputParameter.Name == "nextLink"
-                        ? uriBuilder.AppendRawNextLink(outputParameter, !inputParameter.SkipUrlEncoding)
-                        : uriBuilder.AppendPath(ConvertToRequestPartType(value, outputParameter.Type), format, !inputParameter.SkipUrlEncoding));
-                }
-                else
-                {
-                    ErrorHelpers.ThrowError($"\n\nError while processing request '{path}'\n\n  '{span.ToString()}' in URI is missing a matching definition in the path parameters collection{ErrorHelpers.UpdateSwaggerOrFile}");
-                }
-            }
-            return lines;
-        }
-
-        private IEnumerable<MethodBodyStatement> AddQuery(RawRequestUriBuilderExpression uriBuilder)
-        {
-            foreach (var (nameInRequest, inputParameter, outputParameter, format) in _requestParts)
-            {
-                if (inputParameter is not null && inputParameter.Location == RequestLocation.Query)
-                {
-                    yield return AddToQuery(uriBuilder, inputParameter, outputParameter, nameInRequest, format);
-                }
-            }
-        }
-
-        private MethodBodyStatement AddToQuery(RawRequestUriBuilderExpression uriBuilder, InputParameter inputParameter, Parameter outputParameter, string nameInRequest, SerializationFormat format)
-        {
-            var value = GetValueForRequestPart(inputParameter, outputParameter);
-            var convertedValue = ConvertToRequestPartType(RemoveAllNullConditional(value), outputParameter.Type);
-            var escape = !inputParameter.SkipUrlEncoding;
-
-            MethodBodyStatement addToQuery;
-            if (inputParameter.Explode)
-            {
-                addToQuery = new ForeachStatement("param", convertedValue, out var paramVariable)
-                {
-                    uriBuilder.AppendQuery(nameInRequest, paramVariable, format, escape)
-                };
-            }
-            else
-            {
-                addToQuery = inputParameter.ArraySerializationDelimiter is { } delimiter
-                    ? uriBuilder.AppendQueryDelimited(nameInRequest, convertedValue, delimiter, escape)
-                    : uriBuilder.AppendQuery(nameInRequest, convertedValue, format, escape);
-            }
-
-            if (outputParameter is { IsApiVersionParameter: true, IsOptionalInSignature: true, Initializer: { } })
-            {
-                return addToQuery;
-            }
-
-            return NullCheckRequestPartValue(value, outputParameter.Type, addToQuery);
-        }
-
-        protected MethodBodyStatement AddUserAgent(HttpMessageExpression message)
-            => _fields.UserAgentField is { } userAgent
-                ? new InvokeInstanceMethodStatement(userAgent, nameof(TelemetryDetails.Apply), message)
-                : new MethodBodyStatement();
-
-        protected IEnumerable<MethodBodyStatement> AddHeaders(RequestExpression request, bool addContentHeaders)
-        {
-            foreach (var (nameInRequest, inputParameter, outputParameter, format) in _requestParts)
-            {
-                if (inputParameter is null)
-                {
-                    if (!addContentHeaders)
-                    {
-                        yield return AddRequestConditionsHeaders(request, outputParameter, format);
-                    }
-                }
-                else if (inputParameter.Location == RequestLocation.Header && addContentHeaders == ContentHeaders.Contains(nameInRequest))
-                {
-                    yield return AddHeader(request, nameInRequest, inputParameter, outputParameter, format);
-                }
-            }
-        }
-
-        private MethodBodyStatement AddRequestConditionsHeaders(RequestExpression request, Parameter outputParameter, SerializationFormat format)
-        {
-            if (outputParameter.Type.EqualsIgnoreNullable(KnownParameters.MatchConditionsParameter.Type) && outputParameter.Name == KnownParameters.MatchConditionsParameter.Name)
-            {
-                return NullCheckRequestPartValue(outputParameter, outputParameter.Type, request.Headers.Add(outputParameter));
-            }
-
-            if (outputParameter.Type.EqualsIgnoreNullable(KnownParameters.RequestConditionsParameter.Type) && outputParameter.Name == KnownParameters.RequestConditionsParameter.Name)
-            {
-                return NullCheckRequestPartValue(outputParameter, outputParameter.Type, request.Headers.Add(outputParameter, format));
-            }
-
-            throw new InvalidOperationException();
-        }
-
-        protected MethodBodyStatement AddHeader(RequestExpression request, string nameInRequest, InputParameter inputParameter, Parameter outputParameter, SerializationFormat format)
-        {
-            var headerName = inputParameter.HeaderCollectionPrefix ?? nameInRequest;
-            var value = GetValueForRequestPart(inputParameter, outputParameter);
-            var convertedValue = ConvertToRequestPartType(RemoveAllNullConditional(value), outputParameter.Type);
-
-            var addToHeader = inputParameter.ArraySerializationDelimiter is {} delimiter
-                ? request.Headers.AddDelimited(headerName, convertedValue, delimiter)
-                : request.Headers.Add(headerName, convertedValue, format);
-
-            return NullCheckRequestPartValue(value, outputParameter.Type, addToHeader);
-        }
-
-        protected MethodBodyStatement AddBody(RequestExpression request)
-        {
-            var bodyParameters = new Dictionary<string, Parameter>();
-            foreach (var (_, inputParameter, outputParameter, _) in _requestParts)
-            {
-                if (inputParameter is null || inputParameter.Location != RequestLocation.Body)
-                {
-                    continue;
-                }
-
-                if (outputParameter == KnownParameters.RequestContent || outputParameter == KnownParameters.RequestContentNullable)
-                {
-                    return new[]
-                    {
-                        AddHeaders(request, true).AsStatement(),
-                        Assign(request.Content, new RequestContentExpression(outputParameter))
-                    };
-                }
-
-                switch (Operation.RequestBodyMediaType)
-                {
-                    case BodyMediaType.Multipart or BodyMediaType.Form:
-                        bodyParameters.Add(inputParameter.NameInRequest, outputParameter);
-                        break;
-
-                    case BodyMediaType.Binary:
-                        var binaryValue = GetValueForRequestPart(inputParameter, outputParameter);
-                        return NullCheckRequestPartValue(binaryValue, outputParameter.Type, new[]
-                        {
-                            AddHeaders(request, true).AsStatement(),
-                            Assign(request.Content, RequestContentExpression.Create(RemoveAllNullConditional(binaryValue)))
-                        });
-
-                    case BodyMediaType.Text:
-                        var stringValue = GetValueForRequestPart(inputParameter, outputParameter);
-                        return NullCheckRequestPartValue(stringValue, outputParameter.Type, new[]
-                        {
-                            AddHeaders(request, true).AsStatement(),
-                            Assign(request.Content, New.StringRequestContent(RemoveAllNullConditional(stringValue)))
-                        });
-
-                    case var _ when inputParameter.Kind == InputOperationParameterKind.Flattened:
-                        return AddFlattenedBody(request);
-
-                    default:
-                        var value = GetValueForRequestPart(inputParameter, outputParameter);
-                        var serialization = SerializationBuilder.Build(Operation.RequestBodyMediaType, inputParameter.Type, outputParameter.Type);
-                        return NullCheckRequestPartValue(value, outputParameter.Type, new[]
-                        {
-                            AddHeaders(request, true).AsStatement(),
-                            SerializeContentIntoRequest(request, serialization, RemoveAllNullConditional(value))
-                        });
-                }
-            }
-
-            if (bodyParameters.Any())
-            {
-                return Operation.RequestBodyMediaType == BodyMediaType.Multipart
-                    ? AddMultipartBody(request, bodyParameters.Values).AsStatement()
-                    : AddFormBody(request, bodyParameters).AsStatement();
-            }
-
-            return new MethodBodyStatement();
-        }
-
-        private IEnumerable<MethodBodyStatement> AddMultipartBody(RequestExpression request, IEnumerable<Parameter> bodyParameters)
-        {
-            yield return AddHeaders(request, true).AsStatement();
-            yield return Var("content", New.MultipartFormDataContent(), out var multipartContent);
-
-            foreach (var parameter in bodyParameters)
-            {
-                var bodyPartName = parameter.Name;
-                var bodyPartType = parameter.Type;
-
-                if (bodyPartType.Equals(typeof(string)))
-                {
-                    yield return NullCheckRequestPartValue(parameter, bodyPartType, multipartContent.Add(New.StringRequestContent(parameter), bodyPartName, Null));
-                }
-                else if (bodyPartType.IsFrameworkType && bodyPartType.FrameworkType == typeof(Stream))
-                {
-                    yield return NullCheckRequestPartValue(parameter, bodyPartType, multipartContent.Add(RequestContentExpression.Create(parameter), bodyPartName, Null));
-                }
-                else if (TypeFactory.IsList(bodyPartType))
-                {
-                    yield return new ForeachStatement("value", parameter, out var item)
-                    {
-                        multipartContent.Add(RequestContentExpression.Create(item), bodyPartName, Null)
-                    };
-                }
-                else
-                {
-                    throw new NotImplementedException();
-                }
-            }
-
-            yield return multipartContent.ApplyToRequest(request);
-        }
-
-        private IEnumerable<MethodBodyStatement> AddFormBody(RequestExpression request, IReadOnlyDictionary<string, Parameter> bodyParameters)
-        {
-            yield return AddHeaders(request, true).AsStatement();
-            yield return Var("content", New.FormUrlEncodedContent(), out var urlContent);
-
-            foreach (var (nameInRequest, parameter) in bodyParameters)
-            {
-                var type = parameter.Type;
-                var value = new ParameterReference(parameter);
-
-                yield return NullCheckRequestPartValue(value, type, urlContent.Add(nameInRequest, ConvertToString(value, type)));
-            }
-
-            yield return Assign(request.Content, urlContent);
-        }
-
-        private MethodBodyStatement AddFlattenedBody(RequestExpression request)
-        {
-            var conversion = new List<MethodBodyStatement>
-            {
-                Var("content", New.Utf8JsonRequestContent(), out var content),
-                content.JsonWriter.WriteStartObject()
-            };
-
-            foreach (var (_, inputParameter, outputParameter, _) in _requestParts)
-            {
-                if (inputParameter is { FlattenedBodyProperty: { } property })
-                {
-                    conversion.Add(CreatePropertySerializationStatement(property, content.JsonWriter, inputParameter, outputParameter));
-                }
-            }
-
-            conversion.Add(content.JsonWriter.WriteEndObject());
-
-            return new[]
-            {
-                AddHeaders(request, true).AsStatement(),
-                conversion,
-                Assign(request.Content, content)
-            };
-        }
-
-        private MethodBodyStatement CreatePropertySerializationStatement(InputModelProperty property, Utf8JsonWriterExpression jsonWriter, InputParameter inputParameter, Parameter outputParameter)
-        {
-            var value = GetValueForRequestPart(inputParameter, outputParameter);
-            var valueSerialization = SerializationBuilder.BuildJsonSerialization(property.Type, outputParameter.Type, false);
-
-            var propertyName = property.SerializedName ?? property.Name;
-            var writePropertyStatement = new[]
-            {
-                jsonWriter.WritePropertyName(propertyName),
-                JsonSerializationMethodsBuilder.SerializeExpression(jsonWriter, valueSerialization, value)
-            };
-
-            var writeNullStatement = property.IsRequired ? jsonWriter.WriteNull(propertyName) : null;
-            if (outputParameter.Type.IsNullable)
-            {
-                return new IfElseStatement(NotEqual(value, Null), writePropertyStatement, writeNullStatement);
-            }
-
-            return writePropertyStatement;
-        }
-
-        private static MethodBodyStatement SerializeContentIntoRequest(RequestExpression request, ObjectSerialization serialization, ValueExpression expression)
-            => serialization switch
-            {
-                JsonSerialization jsonSerialization => new[]
-                {
-                    Var("content", New.Utf8JsonRequestContent(), out var content),
-                    JsonSerializationMethodsBuilder.SerializeExpression(content.JsonWriter, jsonSerialization, expression),
-                    Assign(request.Content, content)
-                },
-                XmlElementSerialization xmlSerialization => new[]
-                {
-                    Var("content", New.XmlWriterContent(), out var content),
-                    XmlSerializationMethodsBuilder.SerializeExpression(content.XmlWriter, xmlSerialization, expression),
-                    Assign(request.Content, content)
-                },
-                _ => throw new NotImplementedException()
-            };
-
-        private bool TryGetRequestPart(in ReadOnlySpan<char> key, in RequestLocation location, [MaybeNullWhen(false)] out InputParameter inputParameter, [MaybeNullWhen(false)] out Parameter outputParameter, out SerializationFormat serializationFormat)
-        {
-            foreach (var part in _requestParts)
-            {
-                if (part.InputParameter?.Location == location && part.NameInRequest.AsSpan().Equals(key, StringComparison.InvariantCulture))
-                {
-                    inputParameter = part.InputParameter;
-                    outputParameter = part.OutputParameter;
-                    serializationFormat = part.SerializationFormat;
-                    return true;
-                }
-            }
-
-            inputParameter = null;
-            outputParameter = null;
-            serializationFormat = SerializationFormat.Default;
-            return false;
-        }
-
-        private ValueExpression GetValueForRequestPart(InputParameter inputParameter, Parameter outputParameter)
-        {
-            switch (inputParameter.Kind)
-            {
-                case InputOperationParameterKind.Client:
-                    return _fields.GetFieldByParameter(outputParameter) ?? throw new InvalidOperationException($"Parameter {outputParameter.Name} should have matching field");
-
-                case InputOperationParameterKind.Constant when outputParameter.DefaultValue is {} defaultValue:
-                    return new ConstantExpression(defaultValue);
-
-                case var _ when inputParameter.GroupedBy is {} groupedByParameter:
-                    var groupedByParameterName = groupedByParameter.Name.ToVariableName();
-                    var groupParameter = CreateMessageMethodParameters.Single(p => p.Name == groupedByParameterName);
-                    var property = ((SchemaObjectType)groupParameter.Type.Implementation).GetPropertyForGroupedParameter(inputParameter.Name);
-
-                    return new MemberExpression(NullConditional(groupParameter), property.Declaration.Name);
-
-                default:
-                    return outputParameter;
-            }
-        }
-
-        private static ValueExpression ConvertToRequestPartType(ValueExpression value, CSharpType fromType, bool convertOnlyExtendableEnumToString = false)
-        {
-            if (value is ConstantExpression)
-            {
-                return value;
-            }
-
-            if (fromType is { IsFrameworkType: false, Implementation: EnumType enumType } && (!convertOnlyExtendableEnumToString || enumType.IsExtensible))
-            {
-                return new EnumExpression(enumType, value.NullableStructValue(fromType)).ToSerial();
-            }
-
-            if (fromType.EqualsIgnoreNullable(typeof(ContentType)))
-            {
-                return value.NullableStructValue(fromType).InvokeToString();
-            }
-
-            return value.NullableStructValue(fromType);
-        }
-
-        private static StringExpression ConvertToString(ValueExpression value, CSharpType fromType)
-        {
-            if (fromType is { IsFrameworkType: false, Implementation: EnumType enumType })
-            {
-                return new EnumExpression(enumType, value.NullableStructValue(fromType)).ToSerial();
-            }
-
-            return fromType.EqualsIgnoreNullable(typeof(string))
-                ? new(value)
-                : value.NullableStructValue(fromType).InvokeToString();
-        }
-
-        private static MethodBodyStatement NullCheckRequestPartValue(ValueExpression value, CSharpType type, MethodBodyStatement inner)
-        {
-            if (value is ConstantExpression || !type.IsNullable)
-            {
-                return inner;
-            }
-
-            return type.IsCollectionType()
-                ? new IfElseStatement(And(NotEqual(value, Null), InvokeOptional.IsCollectionDefined(value)), inner, null)
-                : new IfElseStatement(NotEqual(value, Null), inner, null);
-        }
-
-        protected virtual bool ShouldConvenienceMethodGenerated()
-        {
-            return !Operation.GenerateProtocolMethod
-                || !ConvenienceMethodParameters.Where(p => p != KnownParameters.CancellationTokenParameter).SequenceEqual(ProtocolMethodParameters.Where(p => p != KnownParameters.RequestContext));
-        }
+        protected abstract MethodBodyStatement? BuildCreateNextPageMessageMethodBody(CreateMessageMethodBuilder builder, MethodSignature signature);
 
         protected string CreateScopeName(string methodName) => $"{_clientName}.{methodName}";
 
-        private Method BuildProtocolMethod(bool async)
+        private Method BuildProtocolMethod(IReadOnlyList<Parameter> parameters, MethodSignatureBase createMessageSignature, MethodSignature? createNextPageMessageSignature, bool async)
         {
-            var signature = CreateMethodSignature(ProtocolMethodName, _protocolAccessibility | MethodSignatureModifiers.Virtual, ProtocolMethodParameters, ProtocolMethodReturnType);
+            var signature = CreateMethodSignature(ProtocolMethodName, _protocolAccessibility | MethodSignatureModifiers.Virtual, parameters, ProtocolMethodReturnType);
             var body = new[]
             {
                 new ParameterValidationBlock(signature.Parameters),
-                CreateProtocolMethodBody(async)
+                CreateProtocolMethodBody(createMessageSignature, createNextPageMessageSignature, async)
             };
             return new Method(signature.WithAsync(async), body);
         }
 
-        private Method BuildConvenienceMethod(string methodName, bool async)
+        private Method BuildConvenienceMethod(string methodName, RestClientMethodParameters parameters, MethodSignature? createNextPageMessageSignature, bool async)
         {
-            var signature = CreateMethodSignature(methodName, ConvenienceModifiers | MethodSignatureModifiers.Virtual, ConvenienceMethodParameters, ConvenienceMethodReturnType);
+            var signature = CreateMethodSignature(methodName, ConvenienceModifiers | MethodSignatureModifiers.Virtual, parameters.Convenience, ConvenienceMethodReturnType);
             var body = new[]
             {
-                new ParameterValidationBlock(signature.Parameters),
-                CreateConvenienceMethodBody(methodName, async)
+                new ParameterValidationBlock(parameters.Convenience),
+                CreateConvenienceMethodBody(methodName, parameters, createNextPageMessageSignature, async)
             };
             return new Method(signature.WithAsync(async), body);
         }
@@ -677,6 +243,8 @@ namespace AutoRest.CSharp.Output.Models
             return new Method(signature.WithAsync(async), body);
         }
 
+        protected abstract Method? BuildLegacyNextPageConvenienceMethod(IReadOnlyList<Parameter> parameters, Method? createRequestMethod, bool async);
+
         protected MethodSignature CreateMethodSignature(string name, MethodSignatureModifiers accessibility, IReadOnlyList<Parameter> parameters, CSharpType returnType)
         {
             var attributes = Operation.Deprecated is { } deprecated
@@ -686,18 +254,15 @@ namespace AutoRest.CSharp.Output.Models
             return new MethodSignature(name, _summary, _description, accessibility, returnType, null, parameters, attributes);
         }
 
-        protected abstract MethodBodyStatement CreateProtocolMethodBody(bool async);
+        protected abstract MethodBodyStatement CreateProtocolMethodBody(MethodSignatureBase createMessageSignature, MethodSignature? createNextPageMessageSignature, bool async);
 
-        protected abstract MethodBodyStatement CreateConvenienceMethodBody(string methodName, bool async);
+        protected abstract MethodBodyStatement CreateConvenienceMethodBody(string methodName, RestClientMethodParameters parameters, MethodSignature? createNextPageMessageSignature, bool async);
 
         protected MethodBodyStatement WrapInDiagnosticScope(string methodName, params MethodBodyStatement[] statements)
             => new DiagnosticScopeMethodBodyBlock(new Diagnostic($"{_clientName}.{methodName}"), _fields.ClientDiagnosticsProperty, statements);
 
-        protected HttpMessageExpression InvokeCreateRequestMethod()
-            => InvokeCreateRequestMethod(CreateMessageMethodName, CreateMessageMethodParameters);
-
-        protected HttpMessageExpression InvokeCreateRequestMethod(string methodName, IReadOnlyList<Parameter> parameters)
-            => new(new InvokeInstanceMethodExpression(null, methodName, parameters.Select(p => new ParameterReference(p)).ToList(), null, false));
+        protected static HttpMessageExpression InvokeCreateRequestMethod(MethodSignatureBase signature)
+            => new(new InvokeInstanceMethodExpression(null, signature.Name, signature.Parameters.Select(p => new ParameterReference(p)).ToList(), null, false));
 
         protected ResponseExpression InvokeProtocolMethod(ValueExpression? instance, IReadOnlyList<ValueExpression> arguments, bool async)
             => new(new InvokeInstanceMethodExpression(instance, async ? $"{ProtocolMethodName}Async" : ProtocolMethodName, arguments, null, async));
@@ -716,21 +281,6 @@ namespace AutoRest.CSharp.Output.Models
             "private" => MethodSignatureModifiers.Private,
             null => MethodSignatureModifiers.Public,
             _ => throw new NotSupportedException()
-        };
-
-        private static HashSet<string> ContentHeaders = new HashSet<string>(StringComparer.OrdinalIgnoreCase)
-        {
-            "Allow",
-            "Content-Disposition",
-            "Content-Encoding",
-            "Content-Language",
-            "Content-Length",
-            "Content-Location",
-            "Content-MD5",
-            "Content-Range",
-            "Content-Type",
-            "Expires",
-            "Last-Modified",
         };
     }
 }

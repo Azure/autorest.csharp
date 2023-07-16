@@ -1,13 +1,16 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Common.Output.Models;
-using AutoRest.CSharp.Common.Output.Models.Responses;
 using AutoRest.CSharp.Common.Output.Models.Statements;
 using AutoRest.CSharp.Common.Output.Models.ValueExpressions;
+using AutoRest.CSharp.Generation.Types;
+using AutoRest.CSharp.Input;
+using AutoRest.CSharp.Input.Source;
 using AutoRest.CSharp.Output.Models.Shared;
 using Azure.Core;
 using static AutoRest.CSharp.Common.Output.Models.Snippets;
@@ -16,93 +19,106 @@ namespace AutoRest.CSharp.Output.Models
 {
     internal abstract class PagingOperationMethodsBuilderBase : OperationMethodsBuilderBase
     {
+        private static readonly Parameter NextPageUrlParameter = new("nextLink", "The URL to the next page of results.", typeof(string), DefaultValue: null, Validation.AssertNotNull, null);
         private readonly StatusCodeSwitchBuilder _nextPageStatusCodeSwitchBuilder;
+        private readonly string _clientName;
+        private readonly string _clientNamespace;
+        private readonly TypeFactory _typeFactory;
+        private readonly SourceInputModel? _sourceInputModel;
 
         protected OperationPaging Paging { get; }
 
         protected string? NextLinkName { get; }
         protected string ItemPropertyName { get; }
-        protected MethodSignature? CreateNextPageMessageMethodSignature { get; }
 
-        protected PagingOperationMethodsBuilderBase(OperationMethodsBuilderBaseArgs args, OperationPaging paging, StatusCodeSwitchBuilder nextPageStatusCodeSwitchBuilder, ClientPagingMethodParameters clientMethodsParameters)
-            : base(args, clientMethodsParameters)
+        protected PagingOperationMethodsBuilderBase(OperationMethodsBuilderBaseArgs args, OperationPaging paging, StatusCodeSwitchBuilder nextPageStatusCodeSwitchBuilder)
+            : base(args)
         {
             _nextPageStatusCodeSwitchBuilder = nextPageStatusCodeSwitchBuilder;
+            _clientName = args.ClientName;
+            _clientNamespace = args.ClientNamespace;
+            _typeFactory = args.TypeFactory;
+            _sourceInputModel = args.SourceInputModel;
             Paging = paging;
-
-            var createNextPageMessageMethodName = paging switch {
-                { SelfNextLink: true } => $"Create{Operation.CleanName}Request",
-                { NextLinkOperation: { } nextLinkOperation } => $"Create{nextLinkOperation.CleanName}Request",
-                { NextLinkName: { }} => $"Create{ProtocolMethodName}NextPageRequest",
-                _ => null
-            };
-
-            CreateNextPageMessageMethodSignature = createNextPageMessageMethodName is not null
-                ? new MethodSignature(createNextPageMessageMethodName, null, null, MethodSignatureModifiers.Internal, typeof(HttpMessage), null, clientMethodsParameters.CreateNextPageMessage)
-                : null;
 
             ItemPropertyName = paging.ItemName ?? "value";
             NextLinkName = paging.NextLinkName;
         }
 
-        public override RestClientOperationMethods BuildLegacy()
+        protected override Method? BuildLegacyNextPageConvenienceMethod(IReadOnlyList<Parameter> parameters, Method? createRequestMethod, bool async)
         {
-            var methods = base.BuildLegacy();
-
-            if (methods.CreateNextPageMessage is null)
+            if (createRequestMethod is null)
             {
-                return methods with
-                {
-                    Order = this is LroPagingOperationMethodsBuilder ? 2 : 1,
-                    CreateNextPageMessageSignature = CreateNextPageMessageMethodSignature
-                };
+                return null;
             }
 
-            var nextPageUrlParameter = new Parameter("nextLink", "The URL to the next page of results.", typeof(string), DefaultValue: null, Validation.AssertNotNull, null);
-
-            var nextPageParameters = ConvenienceMethodParameters
-                .Where(p => p.Name != nextPageUrlParameter.Name)
-                .Prepend(nextPageUrlParameter)
+            var nextPageMethodName = ProtocolMethodName + "NextPage";
+            var nextPageParameters = parameters
+                .Where(p => p.Name != NextPageUrlParameter.Name)
+                .Prepend(NextPageUrlParameter)
                 .ToArray();
 
-            var methodName = ProtocolMethodName + "NextPage";
-            var invokeCreateRequestMethod = InvokeCreateRequestMethod(methods.CreateNextPageMessage.Signature.Name, methods.CreateNextPageMessage.Signature.Parameters);
-
-            return methods with
-            {
-                NextPageConvenience = BuildLegacyConvenienceMethod(methodName, nextPageParameters, invokeCreateRequestMethod, _nextPageStatusCodeSwitchBuilder, false),
-                NextPageConvenienceAsync = BuildLegacyConvenienceMethod(methodName, nextPageParameters, invokeCreateRequestMethod, _nextPageStatusCodeSwitchBuilder, true),
-                Order = this is LroPagingOperationMethodsBuilder ? 2 : 1,
-                CreateNextPageMessageSignature = CreateNextPageMessageMethodSignature
-            };
+            var invokeCreateRequestMethod = InvokeCreateRequestMethod(createRequestMethod.Signature);
+            return BuildLegacyConvenienceMethod(nextPageMethodName, nextPageParameters, invokeCreateRequestMethod, _nextPageStatusCodeSwitchBuilder, async);
         }
 
-        protected override Method? BuildCreateNextPageMessageMethod(ResponseClassifierType responseClassifierType)
+        protected override MethodSignature? BuildCreateNextPageMessageSignature(IReadOnlyList<Parameter> createMessageParameters)
         {
-            return CreateNextPageMessageMethodSignature is not null && Paging is { NextLinkOperation: null, SelfNextLink: false }
-                ? new Method(CreateNextPageMessageMethodSignature, BuildCreateNextPageRequestMethodBody().AsStatement())
+            var (methodName, parameters) = Paging switch {
+                { SelfNextLink: true } => ($"Create{Operation.CleanName}Request", createMessageParameters),
+                { NextLinkOperation: { } nextLinkOperation } => ($"Create{nextLinkOperation.CleanName}Request", BuildNextLinkOperationCreateMessageParameters(nextLinkOperation)),
+                { NextLinkName: { }} => ($"Create{ProtocolMethodName}NextPageRequest", createMessageParameters.Prepend(KnownParameters.NextLink).ToArray()),
+                _ => (null, Array.Empty<Parameter>())
+            };
+
+            return methodName is not null
+                ? new MethodSignature(methodName, null, null, MethodSignatureModifiers.Internal, typeof(HttpMessage), null, parameters)
                 : null;
         }
 
-        private IEnumerable<MethodBodyStatement> BuildCreateNextPageRequestMethodBody()
+        private IReadOnlyList<Parameter> BuildNextLinkOperationCreateMessageParameters(InputOperation nextLinkOperation)
         {
-            yield return CreateHttpMessage(_nextPageStatusCodeSwitchBuilder.ResponseClassifier, RequestMethod.Get, out var message, out var request, out var uriBuilder);
-            yield return AddUri(uriBuilder, Operation.Uri);
-            yield return uriBuilder.AppendRawNextLink(KnownParameters.NextLink, false);
-            yield return Assign(request.Uri, uriBuilder);
+            var builder = new MethodParametersBuilder(nextLinkOperation, _typeFactory, _sourceInputModel);
+            if (Configuration.AzureArm)
+            {
+                return builder.BuildParametersLegacy(false).CreateMessage;
+            }
 
-            yield return AddHeaders(request, false).AsStatement();
-            yield return AddUserAgent(message);
-            yield return Return(message);
+            if (Configuration.Generation1ConvenienceClient)
+            {
+                return builder.BuildParametersLegacy(true).CreateMessage;
+            }
+
+            return builder.BuildParameters(_clientName, _clientNamespace, true).CreateMessage;
         }
 
-        protected IEnumerable<MethodBodyStatement> AddPageableMethodArguments(List<ValueExpression> createRequestArguments, out ValueExpression? requestContextVariable)
+        protected override MethodBodyStatement? BuildCreateNextPageMessageMethodBody(CreateMessageMethodBuilder builder, MethodSignature signature)
+        {
+            if (Paging is not { NextLinkOperation: null, SelfNextLink: false })
+            {
+                return null;
+            }
+
+            return new[]
+            {
+                builder.CreateHttpMessage(RequestMethod.Get, Operation.BufferResponse, out var message, out var request, out var uriBuilder),
+                builder.AddUri(uriBuilder, Operation.Uri),
+                uriBuilder.AppendRawNextLink(KnownParameters.NextLink, false),
+                Assign(request.Uri, uriBuilder),
+
+                builder.AddHeaders(request, false).AsStatement(),
+                builder.AddUserAgent(message),
+                Return(message)
+            };
+        }
+
+        protected IEnumerable<MethodBodyStatement> AddPageableMethodArguments(RestClientMethodParameters parameters, List<ValueExpression> createRequestArguments, out ValueExpression? requestContextVariable)
         {
             var conversions = new List<MethodBodyStatement>();
             requestContextVariable = null;
-            foreach (var protocolParameter in ProtocolMethodParameters)
+            foreach (var protocolParameter in parameters.Protocol)
             {
-                if (ArgumentsMap.TryGetValue(protocolParameter, out var argument))
+                if (parameters.Arguments.TryGetValue(protocolParameter, out var argument))
                 {
                     createRequestArguments.Add(argument);
                     if (protocolParameter == KnownParameters.RequestContext)
@@ -110,7 +126,7 @@ namespace AutoRest.CSharp.Output.Models
                         requestContextVariable = argument;
                     }
 
-                    if (ConversionsMap.TryGetValue(protocolParameter, out var conversion))
+                    if (parameters.Conversions.TryGetValue(protocolParameter, out var conversion))
                     {
                         conversions.Add(conversion);
                     }
@@ -121,7 +137,7 @@ namespace AutoRest.CSharp.Output.Models
                 }
             }
 
-            if (requestContextVariable == null && ConvenienceMethodParameters.Contains(KnownParameters.CancellationTokenParameter))
+            if (requestContextVariable == null && parameters.Convenience.Contains(KnownParameters.CancellationTokenParameter))
             {
                 requestContextVariable = KnownParameters.CancellationTokenParameter;
             }

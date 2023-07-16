@@ -1,181 +1,51 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
-using System;
 using System.Collections.Generic;
-using System.Linq;
 using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Common.Output.Models.ValueExpressions;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Input.Source;
-using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Output.Models.Types;
 using Azure.Core;
-using StringExtensions = AutoRest.CSharp.Utilities.StringExtensions;
 
 namespace AutoRest.CSharp.Output.Models
 {
     internal class ClientMethodsBuilder
     {
-        private static readonly HashSet<string> IgnoredRequestHeader = new(StringComparer.OrdinalIgnoreCase)
-        {
-            "x-ms-client-request-id",
-            "tracestate",
-            "traceparent"
-        };
-
         private readonly IEnumerable<InputOperation> _operations;
         private readonly TypeFactory _typeFactory;
         private readonly OutputLibrary? _library;
         private readonly SourceInputModel? _sourceInputModel;
-        private readonly bool _legacyParameterSorting;
-        private readonly bool _legacyParameterBuilding;
 
-        public ClientMethodsBuilder(IEnumerable<InputOperation> operations, OutputLibrary? library, SourceInputModel? sourceInputModel, TypeFactory typeFactory, bool legacyParameterSorting, bool legacyParameterBuilding)
+        public ClientMethodsBuilder(IEnumerable<InputOperation> operations, OutputLibrary? library, SourceInputModel? sourceInputModel, TypeFactory typeFactory)
         {
             _operations = operations;
             _library = library;
             _sourceInputModel = sourceInputModel;
             _typeFactory = typeFactory;
-            _legacyParameterSorting = legacyParameterSorting;
-            _legacyParameterBuilding = legacyParameterBuilding;
         }
 
         public IEnumerable<OperationMethodsBuilderBase> Build(ValueExpression? restClientReference, ClientFields fields, string clientName, string clientNamespace)
         {
-            var operationParameters = new Dictionary<InputOperation, ClientMethodParameters>();
-
-            foreach (var inputOperation in _operations)
-            {
-                var unsortedParameters = inputOperation.Parameters
-                    .Where(rp => rp.Location != RequestLocation.Header || !IgnoredRequestHeader.Contains(rp.NameInRequest))
-                    .ToArray();
-
-                var sortedParameters = _legacyParameterSorting
-                    ? GetLegacySortedParameters(unsortedParameters)
-                    : GetSortedParameters(inputOperation, unsortedParameters);
-
-                var builder = new MethodParametersBuilder(inputOperation, _typeFactory, _sourceInputModel);
-                var parameters = _legacyParameterBuilding
-                    ? builder.BuildParametersLegacy(unsortedParameters, sortedParameters)
-                    : builder.BuildParameters(sortedParameters, clientName, clientNamespace);
-
-                operationParameters[inputOperation] = parameters;
-            }
-
-            foreach (var (operation, parameters) in operationParameters)
+            foreach (var operation in _operations)
             {
                 var statusCodeSwitchBuilder = operation.HttpMethod == RequestMethod.Head && Configuration.HeadAsBoolean
                     ? StatusCodeSwitchBuilder.CreateHeadAsBooleanOperationSwitch()
                     : StatusCodeSwitchBuilder.CreateSwitch(operation, _library, _typeFactory);
 
-                var existingProtocolMethod = _sourceInputModel?.FindMethod(clientNamespace, clientName, operation.CleanName, parameters.Protocol.Select(p => p.Type));
-                var protocolMethodHasOptionalParameters = existingProtocolMethod is { Parameters: [.., {IsOptional: true}]};
-                var args = new OperationMethodsBuilderBaseArgs(operation, restClientReference, fields, clientName, statusCodeSwitchBuilder, protocolMethodHasOptionalParameters);
+                var args = new OperationMethodsBuilderBaseArgs(operation, restClientReference, fields, clientNamespace, clientName, statusCodeSwitchBuilder, _typeFactory, _sourceInputModel);
 
-                if (operation.Paging is {} paging)
+                yield return (operation.Paging, operation.LongRunning) switch
                 {
-                    var createNextPageMessageMethodParameters = paging switch
-                    {
-                        { SelfNextLink: true } => parameters.CreateMessage,
-                        { NextLinkOperation: {} nextLinkOperation } => operationParameters[nextLinkOperation].CreateMessage,
-                        { NextLinkName: {}} => parameters.CreateMessage.Prepend(KnownParameters.NextLink).ToArray(),
-                        _ => Array.Empty<Parameter>()
-                    };
-
-                    var pagingParameters = new ClientPagingMethodParameters(parameters, createNextPageMessageMethodParameters);
-
-                    yield return operation.LongRunning is { } longRunning
-                        ? new LroPagingOperationMethodsBuilder(args, paging, pagingParameters, longRunning)
-                        : new PagingOperationMethodsBuilder(args, paging, pagingParameters);
-                }
-                else if (operation.LongRunning is { } longRunning)
-                {
-                    yield return new LroOperationMethodsBuilder(args, parameters, longRunning);
-                }
-                else if (operation.HttpMethod == RequestMethod.Head && Configuration.HeadAsBoolean)
-                {
-                    yield return new HeadAsBooleanOperationMethodsBuilder(args, parameters);
-                }
-                else
-                {
-                    yield return new OperationMethodsBuilder(args, parameters);
-                }
+                    (not null, not null) => new LroPagingOperationMethodsBuilder(args, operation.Paging, operation.LongRunning),
+                    (not null, null) => new PagingOperationMethodsBuilder(args, operation.Paging),
+                    (null, not null) => new LroOperationMethodsBuilder(args, operation.LongRunning),
+                    (null, null) when operation.HttpMethod == RequestMethod.Head && Configuration.HeadAsBoolean => new HeadAsBooleanOperationMethodsBuilder(args),
+                    _ => new OperationMethodsBuilder(args)
+                };
             }
         }
-
-        private static IEnumerable<InputParameter> GetSortedParameters(InputOperation operation, IEnumerable<InputParameter> inputParameters)
-        {
-            var keepCurrentDefaultValue = Configuration.MethodsToKeepClientDefaultValue.Contains(operation.Name);
-            var uriOrPathParameters = new Dictionary<string, InputParameter>();
-            var requiredRequestParameters = new List<InputParameter>();
-            var optionalRequestParameters = new List<InputParameter>();
-
-            InputParameter? bodyParameter = null;
-            InputParameter? contentTypeRequestParameter = null;
-
-            foreach (var operationParameter in inputParameters)
-            {
-                switch (operationParameter)
-                {
-                    case { Location: RequestLocation.Body }:
-                        bodyParameter = operationParameter;
-                        break;
-                    case { Location: RequestLocation.Header, IsContentType: true } when contentTypeRequestParameter == null:
-                        contentTypeRequestParameter = operationParameter;
-                        break;
-                    case { Location: RequestLocation.Uri or RequestLocation.Path }:
-                        uriOrPathParameters.Add(operationParameter.NameInRequest, operationParameter);
-                        break;
-                    case { IsRequired: true, DefaultValue: null }:
-                        requiredRequestParameters.Add(operationParameter);
-                        break;
-                    case { IsRequired: true } when !keepCurrentDefaultValue:
-                        requiredRequestParameters.Add(operationParameter);
-                        break;
-                    default:
-                        optionalRequestParameters.Add(operationParameter);
-                        break;
-                }
-            }
-
-            var orderedParameters = new List<InputParameter>();
-
-            SortUriOrPathParameters(operation.Uri, uriOrPathParameters, orderedParameters);
-            SortUriOrPathParameters(operation.Path, uriOrPathParameters, orderedParameters);
-            orderedParameters.AddRange(requiredRequestParameters);
-            if (bodyParameter is not null)
-            {
-                orderedParameters.Add(bodyParameter);
-                if (contentTypeRequestParameter is not null)
-                {
-                    orderedParameters.Add(contentTypeRequestParameter);
-                }
-            }
-            orderedParameters.AddRange(optionalRequestParameters);
-
-            return orderedParameters;
-        }
-
-        private static void SortUriOrPathParameters(string uriPart, IReadOnlyDictionary<string, InputParameter> requestParameters, ICollection<InputParameter> orderedParameters)
-        {
-            foreach ((ReadOnlySpan<char> span, bool isLiteral) in StringExtensions.GetPathParts(uriPart))
-            {
-                if (isLiteral)
-                {
-                    continue;
-                }
-
-                var text = span.ToString();
-                if (requestParameters.TryGetValue(text, out var requestParameter))
-                {
-                    orderedParameters.Add(requestParameter);
-                }
-            }
-        }
-
-        private static IEnumerable<InputParameter> GetLegacySortedParameters(IEnumerable<InputParameter> inputParameters)
-            => inputParameters.OrderByDescending(p => p is { IsRequired: true, DefaultValue: null });
     }
 }

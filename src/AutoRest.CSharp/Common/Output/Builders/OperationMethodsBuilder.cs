@@ -4,7 +4,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using AutoRest.CSharp.Generation.Types;
-using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Common.Output.Builders;
 using AutoRest.CSharp.Common.Output.Models;
 using AutoRest.CSharp.Common.Output.Models.KnownValueExpressions;
@@ -12,38 +11,37 @@ using AutoRest.CSharp.Common.Output.Models.Statements;
 using AutoRest.CSharp.Common.Output.Models.Types;
 using AutoRest.CSharp.Common.Output.Models.ValueExpressions;
 using AutoRest.CSharp.Output.Builders;
-using Azure;
+using AutoRest.CSharp.Output.Models.Shared;
 using static AutoRest.CSharp.Common.Output.Models.Snippets;
 
 namespace AutoRest.CSharp.Output.Models
 {
     internal class OperationMethodsBuilder : NonPagingOperationMethodsBuilderBase
     {
-        public OperationMethodsBuilder(OperationMethodsBuilderBaseArgs args, ClientMethodParameters clientMethodParameters)
-            : base(args, clientMethodParameters)
+        public OperationMethodsBuilder(OperationMethodsBuilderBaseArgs args)
+            : base(args)
         {
         }
 
-        protected override MethodBodyStatement CreateProtocolMethodBody(bool async)
-        {
-            return WrapInDiagnosticScope(ProtocolMethodName,
-                Declare("message", InvokeCreateRequestMethod(), out var message),
-                Return(PipelineField.ProcessMessage(message, CreateMessageRequestContext, null, async))
+        protected override MethodBodyStatement CreateProtocolMethodBody(MethodSignatureBase createMessageSignature, MethodSignature? createNextPageMessageSignature, bool async)
+            => WrapInDiagnosticScope(ProtocolMethodName,
+                Declare("message", InvokeCreateRequestMethod(createMessageSignature), out var message),
+                Return(PipelineField.ProcessMessage(message, new RequestContextExpression(KnownParameters.RequestContext), null, async))
             );
-        }
 
-        protected override MethodBodyStatement CreateConvenienceMethodBody(string methodName, bool async)
+        protected override MethodBodyStatement CreateConvenienceMethodBody(string methodName,
+            RestClientMethodParameters parameters, MethodSignature? createNextPageMessageSignature, bool async)
         {
             return methodName != ProtocolMethodName
-                ? WrapInDiagnosticScope(methodName, CreateConvenienceMethodLogic(async).AsStatement())
-                : CreateConvenienceMethodLogic(async).AsStatement();
+                ? WrapInDiagnosticScope(methodName, CreateConvenienceMethodLogic(parameters, async).AsStatement())
+                : CreateConvenienceMethodLogic(parameters, async).AsStatement();
         }
 
-        private IEnumerable<MethodBodyStatement> CreateConvenienceMethodLogic(bool async)
+        private IEnumerable<MethodBodyStatement> CreateConvenienceMethodLogic(RestClientMethodParameters parameters, bool async)
         {
             var protocolMethodArguments = new List<ValueExpression>();
 
-            yield return AddProtocolMethodArguments(protocolMethodArguments).ToArray();
+            yield return AddProtocolMethodArguments(parameters, protocolMethodArguments).ToArray();
             yield return Declare(ProtocolMethodReturnType, "response", InvokeProtocolMethod(null, protocolMethodArguments, async), out var response);
 
             if (ResponseType is null)
