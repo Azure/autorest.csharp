@@ -9,7 +9,7 @@ var credential = new AzureKeyCredential("<key>");
 var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new ApiVersionInTspClient(endpoint, credential);
 
-var result = await client.GetBatchDetectionResultAsync(Guid.NewGuid());
+var result = await client.GetBatchDetectionResultAsync(Guid.NewGuid()).ConfigureAwait(false);
 ]]></code>
 </example>
     </member>
@@ -33,7 +33,7 @@ var credential = new AzureKeyCredential("<key>");
 var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new ApiVersionInTspClient(endpoint, credential);
 
-Response response = await client.GetBatchDetectionResultAsync(Guid.NewGuid(), new RequestContext());
+Response response = await client.GetBatchDetectionResultAsync(Guid.NewGuid(), new RequestContext()).ConfigureAwait(false);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("resultId").ToString());

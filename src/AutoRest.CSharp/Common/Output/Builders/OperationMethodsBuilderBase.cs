@@ -92,7 +92,7 @@ namespace AutoRest.CSharp.Output.Models
             Method? convenience = null;
             Method? convenienceAsync = null;
 
-            if (Operation is { GenerateConvenienceMethod: true, GenerateProtocolMethod: false } && !(parameters.ProtocolAndConvenienceAreIdentical && !hasResponseBody))
+            if (Operation.GenerateConvenienceMethod && (!Operation.GenerateProtocolMethod || !parameters.ProtocolAndConvenienceAreIdentical || hasResponseBody))
             {
                 var convenienceMethodName = ProtocolMethodName;
                 if (parameters.HasAmbiguityBetweenProtocolAndConvenience)

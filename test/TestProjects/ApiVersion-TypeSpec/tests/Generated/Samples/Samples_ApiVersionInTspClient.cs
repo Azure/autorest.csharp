@@ -6,14 +6,9 @@
 #nullable disable
 
 using System;
-using System.Collections.Generic;
-using System.IO;
 using System.Text.Json;
 using System.Threading.Tasks;
-using ApiVersionInTsp.Models;
 using Azure;
-using Azure.Core;
-using Azure.Identity;
 using NUnit.Framework;
 
 namespace ApiVersionInTsp.Samples
@@ -56,7 +51,7 @@ namespace ApiVersionInTsp.Samples
             var endpoint = new Uri("<https://my-service.azure.com>");
             var client = new ApiVersionInTspClient(endpoint, credential);
 
-            Response response = await client.GetBatchDetectionResultAsync(Guid.NewGuid(), new RequestContext());
+            Response response = await client.GetBatchDetectionResultAsync(Guid.NewGuid(), new RequestContext()).ConfigureAwait(false);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("resultId").ToString());
@@ -70,7 +65,7 @@ namespace ApiVersionInTsp.Samples
             var endpoint = new Uri("<https://my-service.azure.com>");
             var client = new ApiVersionInTspClient(endpoint, credential);
 
-            Response response = await client.GetBatchDetectionResultAsync(Guid.NewGuid(), new RequestContext());
+            Response response = await client.GetBatchDetectionResultAsync(Guid.NewGuid(), new RequestContext()).ConfigureAwait(false);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("resultId").ToString());
@@ -84,7 +79,7 @@ namespace ApiVersionInTsp.Samples
             var endpoint = new Uri("<https://my-service.azure.com>");
             var client = new ApiVersionInTspClient(endpoint, credential);
 
-            var result = await client.GetBatchDetectionResultAsync(Guid.NewGuid());
+            var result = await client.GetBatchDetectionResultAsync(Guid.NewGuid()).ConfigureAwait(false);
         }
     }
 }

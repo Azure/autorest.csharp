@@ -321,12 +321,12 @@ namespace AutoRest.CSharp.Generation.Writers
         {
             if (async && operationMethods.ProtocolAsync is {} protocolAsync)
             {
-                WriteProtocolMethodDocumentationWithExternalXmlDoc(operationMethods, (MethodSignature)protocolAsync.Signature, null, true);
+                WriteProtocolMethodDocumentationWithExternalXmlDoc(operationMethods, (MethodSignature)protocolAsync.Signature, operationMethods.ConvenienceAsync?.Signature as MethodSignature, true);
                 _writer.WriteMethod(protocolAsync);
             }
             else if (operationMethods.Protocol is {} protocol)
             {
-                WriteProtocolMethodDocumentationWithExternalXmlDoc(operationMethods, (MethodSignature)protocol.Signature, null, false);
+                WriteProtocolMethodDocumentationWithExternalXmlDoc(operationMethods, (MethodSignature)protocol.Signature, operationMethods.Convenience?.Signature as MethodSignature, false);
                 _writer.WriteMethod(protocol);
             }
         }
@@ -383,7 +383,7 @@ namespace AutoRest.CSharp.Generation.Writers
             _writer.Line();
         }
 
-        private static FormattableString BuildProtocolMethodSummary(MethodSignature protocolMethod, MethodSignature? convenienceMethod)
+        private static FormattableString BuildProtocolMethodSummary(MethodSignatureBase protocolMethod, MethodSignature? convenienceMethod)
         {
             var builder = new StringBuilder();
             builder.AppendLine($"[Protocol Method] {protocolMethod.SummaryText}");
