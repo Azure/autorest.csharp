@@ -659,14 +659,14 @@ namespace AutoRest.CSharp.Generation.Writers
                 {
                     return format is null
                         ? new MemberExpression(typeof(DateTimeOffset), nameof(DateTimeOffset.UtcNow))
-                        : Literal(TypeFormatters.ToString(DateTimeOffset.UtcNow, format));
+                        : Literal(TypeFormatters.ToString(new DateTimeOffset(2022, 05, 11, 10, 14, 57, 31, TimeSpan.FromHours(-4)), format));
                 }
 
                 if (type == typeof(DateTime))
                 {
                     return format is null
                         ? new MemberExpression(typeof(DateTimeOffset), nameof(DateTime.UtcNow))
-                        : Literal(TypeFormatters.ToString(DateTime.UtcNow, format));
+                        : Literal(TypeFormatters.ToString(new DateTimeOffset(2022, 05, 11, 10, 14, 57, 31, TimeSpan.FromHours(-4)), format));
                 }
 
                 if (type == typeof(TimeSpan))
@@ -690,7 +690,9 @@ namespace AutoRest.CSharp.Generation.Writers
 
                 if (type == typeof(Uri))
                 {
-                    return New.Uri("http://localhost:3000");
+                    return serializationFormat.HasValue
+                        ? Literal("http://localhost:3000")
+                        : New.Uri("http://localhost:3000");
                 }
 
                 if (type == typeof(WaitUntil))
@@ -789,7 +791,11 @@ namespace AutoRest.CSharp.Generation.Writers
                 return includeCollectionInitialization ? New.Array(elementType) : New.Anonymous(null);
             }
 
-            return New.Array(elementType, ComposeConvenienceCSharpTypeInstance(allProperties, elementType, null, includeCollectionInitialization, visitedModels));
+            var arrayElement = ComposeConvenienceCSharpTypeInstance(allProperties, elementType, null, includeCollectionInitialization, visitedModels);
+            var isInline = arrayElement is not NewInstanceExpression { Properties.Properties.Count: > 0 };
+            return includeCollectionInitialization
+                ? New.Array(elementType, isInline, arrayElement)
+                : new ArrayInitializerExpression(new[]{arrayElement}, isInline);
         }
 
         private ValueExpression ComposeProtocolArrayCSharpType(bool allProperties, JsonArraySerialization serialization, HashSet<ObjectType> visitedModels)
@@ -819,7 +825,9 @@ namespace AutoRest.CSharp.Generation.Writers
 
             var keyExpr = keyType.Equals(typeof(int)) ? Int(0) : Literal("key"); //handle dictionary with int key
             var valueExpr = ComposeConvenienceCSharpTypeInstance(allProperties, valueType, null, includeCollectionInitialization, visitedModels);
-            return New.Dictionary(keyType, valueType, (keyExpr, valueExpr));
+            return includeCollectionInitialization
+                ? New.Dictionary(keyType, valueType, (keyExpr, valueExpr))
+                : new DictionaryInitializerExpression(new[]{(keyExpr, valueExpr)});
         }
 
         private ValueExpression ComposeProtocolDictionaryInstance(bool allProperties, JsonDictionarySerialization serialization, HashSet<ObjectType> visitedModels)

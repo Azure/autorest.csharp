@@ -370,6 +370,63 @@ namespace AutoRest.CSharp.Generation.Writers
 
                     break;
 
+                case DictionaryInitializerExpression(var values):
+                    if (values is not { Count: > 0 })
+                    {
+                        writer.AppendRaw("{}");
+                        break;
+                    }
+
+                    writer.LineRaw("{");
+                    foreach (var (key, value) in values)
+                    {
+                        writer.AppendRaw("[");
+                        writer.WriteValueExpression(key);
+                        writer.AppendRaw("] = ");
+                        writer.WriteValueExpression(value);
+                        writer.LineRaw(",");
+                    }
+
+                    writer.RemoveTrailingComma();
+                    writer.Line();
+                    writer.AppendRaw("}");
+                    break;
+
+                case ArrayInitializerExpression(var items, var isInline):
+                    if (items is not { Count: > 0 })
+                    {
+                        writer.AppendRaw("{}");
+                        break;
+                    }
+
+                    if (isInline)
+                    {
+                        writer.AppendRaw("{");
+                        foreach (var item in items)
+                        {
+                            writer.WriteValueExpression(item);
+                            writer.AppendRaw(", ");
+                        }
+
+                        writer.RemoveTrailingComma();
+                        writer.AppendRaw("}");
+                    }
+                    else
+                    {
+                        writer.Line();
+                        writer.LineRaw("{");
+                        foreach (var item in items)
+                        {
+                            writer.WriteValueExpression(item);
+                            writer.LineRaw(",");
+                        }
+
+                        writer.RemoveTrailingComma();
+                        writer.Line();
+                        writer.AppendRaw("}");
+                    }
+                    break;
+
                 case ObjectInitializerExpression(var properties, var isInline):
                     if (properties is not { Count: > 0 })
                     {
@@ -422,76 +479,40 @@ namespace AutoRest.CSharp.Generation.Writers
 
                 case NewDictionaryExpression(var type, var values):
                     writer.Append($"new {type}");
-                    if (values is not { Count: > 0 })
+                    if (values is { Values.Count: > 0 })
                     {
-                        writer.AppendRaw("()");
+                        writer.WriteValueExpression(values);
                     }
                     else
                     {
-                        writer.LineRaw("{");
-                        foreach (var (key, value) in values)
-                        {
-                            writer.AppendRaw("[");
-                            writer.WriteValueExpression(key);
-                            writer.AppendRaw("] = ");
-                            writer.WriteValueExpression(value);
-                            writer.LineRaw(",");
-                        }
-
-                        writer.RemoveTrailingComma();
-                        writer.Line();
-                        writer.AppendRaw("}");
+                        writer.AppendRaw("()");
                     }
 
                     break;
 
-                case NewArrayExpression(var type, not { Count: > 0 }, _):
-                    if (type is null)
+                case NewArrayExpression(var type, var items):
+                    if (items is { Elements.Count: > 0 })
                     {
-                        writer.AppendRaw("new[] {}");
+                        if (type is null)
+                        {
+                            writer.AppendRaw("new[]");
+                        }
+                        else
+                        {
+                            writer.Append($"new {type}[]");
+                        }
+
+                        writer.WriteValueExpression(items);
+                    }
+                    else if (type is null)
+                    {
+                        writer.AppendRaw("new[]{}");
                     }
                     else
                     {
                         writer.Append($"Array.Empty<{type}>()");
                     }
-                    break;
 
-                case NewArrayExpression(var type, var items, var isInline) when items.Count > 0:
-                    if (type is null)
-                    {
-                        writer.AppendRaw($"new[]");
-                    }
-                    else
-                    {
-                        writer.Append($"new {type}[] ");
-                    }
-
-                    if (isInline)
-                    {
-                        writer.AppendRaw(" { ");
-                        foreach (var item in items)
-                        {
-                            writer.WriteValueExpression(item);
-                            writer.AppendRaw(", ");
-                        }
-
-                        writer.RemoveTrailingComma();
-                        writer.AppendRaw(" }");
-                    }
-                    else
-                    {
-                        writer.Line();
-                        writer.LineRaw("{");
-                        foreach (var item in items)
-                        {
-                            writer.WriteValueExpression(item);
-                            writer.LineRaw(",");
-                        }
-
-                        writer.RemoveTrailingComma();
-                        writer.Line();
-                        writer.AppendRaw("}");
-                    }
 
                     break;
 

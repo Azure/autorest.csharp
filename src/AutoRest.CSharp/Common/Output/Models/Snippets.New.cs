@@ -24,13 +24,13 @@ namespace AutoRest.CSharp.Common.Output.Models
                 => Instance(typeof(ArgumentOutOfRangeException), Nameof(valueParameter), valueParameter, Literal($"Unknown {enumType.Declaration.Name} value."));
 
             public static EnumerableExpression Array(CSharpType? elementType) => new(new NewArrayExpression(elementType));
-            public static EnumerableExpression Array(CSharpType? elementType, params ValueExpression[] items) => new(new NewArrayExpression(elementType, items));
-            public static EnumerableExpression Array(CSharpType? elementType, bool isInline, params ValueExpression[] items) => new(new NewArrayExpression(elementType, items, isInline));
+            public static EnumerableExpression Array(CSharpType? elementType, params ValueExpression[] items) => new(new NewArrayExpression(elementType, new ArrayInitializerExpression(items)));
+            public static EnumerableExpression Array(CSharpType? elementType, bool isInline, params ValueExpression[] items) => new(new NewArrayExpression(elementType, new ArrayInitializerExpression(items, isInline)));
 
             public static DictionaryExpression Dictionary(CSharpType dictionaryType) => new(new NewDictionaryExpression(dictionaryType));
             public static DictionaryExpression Dictionary(CSharpType keyType, CSharpType valueType) => Dictionary(new CSharpType(typeof(Dictionary<,>), keyType, valueType));
             public static DictionaryExpression Dictionary(CSharpType keyType, CSharpType valueType, params (ValueExpression Key, ValueExpression Value)[] values)
-                => new(new NewDictionaryExpression(new CSharpType(typeof(Dictionary<,>), keyType, valueType), values));
+                => new(new NewDictionaryExpression(new CSharpType(typeof(Dictionary<,>), keyType, valueType), new DictionaryInitializerExpression(values)));
 
             public static ValueExpression JsonSerializerOptions()
                 => Instance(typeof(JsonSerializerOptions), new Dictionary<string, ValueExpression>{ [nameof(System.Text.Json.JsonSerializerOptions.Converters)] = new CollectionInitializerExpression(Instance(typeof(ManagedServiceIdentityTypeV3Converter))) });
