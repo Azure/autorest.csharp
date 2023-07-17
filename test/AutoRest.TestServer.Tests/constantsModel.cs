@@ -189,7 +189,7 @@ namespace AutoRest.TestServer.Tests
         [Test]
         public void NoModelAsStringRequiredTwoValueDefault_HasCtorWithDefaultValue()
         {
-            var model = new NoModelAsStringRequiredTwoValueDefault();
+            var model = new NoModelAsStringRequiredTwoValueDefault(NoModelAsStringRequiredTwoValueDefaultEnum.Value1);
             Assert.AreEqual(NoModelAsStringRequiredTwoValueDefaultEnum.Value1, model.Parameter);
         }
 
@@ -442,13 +442,14 @@ namespace AutoRest.TestServer.Tests
             var constructors = typeof(ModelAsStringRequiredTwoValueDefault).GetConstructors(BindingFlags.Instance | BindingFlags.NonPublic);
             Assert.AreEqual(1, constructors.Length);
             Assert.AreEqual(1, constructors[0].GetParameters().Length);
-            Assert.AreEqual(typeof(ModelAsStringRequiredTwoValueDefaultEnum?), constructors[0].GetParameters()[0].ParameterType);
+            /* eliminate the default value for the parameter property, so the type is not Nullable. */
+            Assert.AreEqual(typeof(ModelAsStringRequiredTwoValueDefaultEnum), constructors[0].GetParameters()[0].ParameterType);
         }
 
         [Test]
         public void ModelAsStringRequiredTwoValueDefault_HasCtorWithDefaultValue()
         {
-            var model = new ModelAsStringRequiredTwoValueDefault();
+            var model = new ModelAsStringRequiredTwoValueDefault(ModelAsStringRequiredTwoValueDefaultEnum.Value1);
             Assert.AreEqual(ModelAsStringRequiredTwoValueDefaultEnum.Value1, model.Parameter);
         }
 
@@ -524,13 +525,14 @@ namespace AutoRest.TestServer.Tests
             var constructors = typeof(ModelAsStringRequiredOneValueDefault).GetConstructors(BindingFlags.Instance | BindingFlags.NonPublic);
             Assert.AreEqual(1, constructors.Length);
             Assert.AreEqual(1, constructors[0].GetParameters().Length);
-            Assert.AreEqual(typeof(ModelAsStringRequiredOneValueDefaultEnum?), constructors[0].GetParameters()[0].ParameterType);
+            /* eliminate the default value for the parameter property, so the type is not Nullable. */
+            Assert.AreEqual(typeof(ModelAsStringRequiredOneValueDefaultEnum), constructors[0].GetParameters()[0].ParameterType);
         }
 
         [Test]
         public void ModelAsStringRequiredOneValueDefault_HasCtorWithDefaultValue()
         {
-            var model = new ModelAsStringRequiredOneValueDefault();
+            var model = new ModelAsStringRequiredOneValueDefault(ModelAsStringRequiredOneValueDefaultEnum.Value1);
             Assert.AreEqual(ModelAsStringRequiredOneValueDefaultEnum.Value1, model.Parameter);
         }
 

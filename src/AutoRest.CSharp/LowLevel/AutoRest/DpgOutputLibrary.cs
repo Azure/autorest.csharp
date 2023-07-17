@@ -33,8 +33,8 @@ namespace AutoRest.CSharp.Output.Models.Types
         {
             TypeFactory = new TypeFactory(this);
 
-            var defaultNamespace = Configuration.Namespace ?? rootNamespace.Name;
-            var libraryName = Configuration.LibraryName ?? rootNamespace.Name;
+            var defaultNamespace = Configuration.Namespace;
+            var libraryName = Configuration.LibraryName;
             var defaultModelNamespace = TypeProvider.GetDefaultModelNamespace(null, defaultNamespace);
 
             _enums = CreateEnums(rootNamespace.Enums, defaultModelNamespace, TypeFactory, sourceInputModel);
@@ -47,8 +47,8 @@ namespace AutoRest.CSharp.Output.Models.Types
             AllModels = isTspInput ? allModels : Array.Empty<TypeProvider>();
             RestClients = CreateClients(topLevelClientInfos, clientOptions, rootNamespace, TypeFactory, libraryName, sourceInputModel);
             ClientOptions = clientOptions;
-            ModelFactory = ModelFactoryTypeProvider.TryCreate(ClientBuilder.GetClientPrefix(Configuration.LibraryName, libraryName), defaultNamespace, AllModels, sourceInputModel);
-            AspDotNetExtension = new AspDotNetExtensionTypeProvider(RestClients, defaultNamespace, sourceInputModel);
+            ModelFactory = ModelFactoryTypeProvider.TryCreate(AllModels, sourceInputModel);
+            AspDotNetExtension = new AspDotNetExtensionTypeProvider(RestClients, Configuration.Namespace, sourceInputModel);
         }
 
         public override CSharpType ResolveEnum(InputEnumType enumType)

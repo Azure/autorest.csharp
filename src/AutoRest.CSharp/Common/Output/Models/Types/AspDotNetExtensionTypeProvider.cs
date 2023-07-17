@@ -24,13 +24,11 @@ namespace AutoRest.CSharp.Common.Output.Models.Types
 
         internal string FullName => $"{Type.Namespace}.{Type.Name}";
 
-        private IReadOnlyList<LowLevelClient> _clients;
+        private readonly IReadOnlyList<LowLevelClient> _clients;
 
         public AspDotNetExtensionTypeProvider(IReadOnlyList<LowLevelClient> clients, string clientNamespace, SourceInputModel? sourceInputModel) : base(AspDotNetExtensionNamespace, sourceInputModel)
         {
-            DefaultName = $"{ClientBuilder.GetClientPrefix(Configuration.LibraryName, clientNamespace)}ClientBuilderExtensions".ToCleanName();
-            //TODO: very bad design that this list is empty when we leave the constructor and is filled in at some point in the future.
-            //creates lots of opportunity run into issues with iterators
+            DefaultName = $"{ClientBuilder.GetRPName(clientNamespace)}ClientBuilderExtensions".ToCleanName();
             _clients = clients;
         }
 

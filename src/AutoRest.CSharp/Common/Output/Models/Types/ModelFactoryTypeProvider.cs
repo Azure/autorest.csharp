@@ -14,6 +14,7 @@ using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Input.Source;
 using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Utilities;
+using Azure.Core.Expressions.DataFactory;
 using Azure.ResourceManager.Models;
 using Humanizer;
 using static AutoRest.CSharp.Output.Models.MethodSignatureModifiers;
@@ -40,9 +41,11 @@ namespace AutoRest.CSharp.Output.Models.Types
 
             DefaultName = $"{defaultClientName}ModelFactory".ToCleanName();
             DefaultAccessibility = "public";
+            ExistingModelFactoryMethods = typeof(ResourceManagerModelFactory).GetMethods(BindingFlags.Static | BindingFlags.Public).ToHashSet();
+            ExistingModelFactoryMethods.UnionWith(typeof(DataFactoryModelFactory).GetMethods(BindingFlags.Static | BindingFlags.Public).ToHashSet());
         }
 
-        public static ModelFactoryTypeProvider? TryCreate(string defaultClientName, string rootNamespaceName, IEnumerable<TypeProvider> models, SourceInputModel? sourceInputModel, string? namespaceOverride = null)
+        public static ModelFactoryTypeProvider? TryCreate(IEnumerable<TypeProvider> models, SourceInputModel? sourceInputModel)
         {
             if (!Configuration.GenerateModelFactory)
                 return null;
@@ -56,13 +59,31 @@ namespace AutoRest.CSharp.Output.Models.Types
                 return null;
             }
 
-            var defaultNamespace = namespaceOverride ?? GetDefaultModelNamespace(null, rootNamespaceName);
+            var defaultNamespace = GetDefaultNamespace();
+            var defaultRPName = GetRPName(defaultNamespace);
 
-            return new ModelFactoryTypeProvider(objectTypes, defaultClientName, defaultNamespace, sourceInputModel);
+            defaultNamespace = GetDefaultModelNamespace(null, defaultNamespace);
+
+            return new ModelFactoryTypeProvider(objectTypes, defaultRPName, defaultNamespace, sourceInputModel);
         }
 
-        private HashSet<MethodInfo>? _existingModelFactoryMethods;
-        public HashSet<MethodInfo> ExistingModelFactoryMethods => _existingModelFactoryMethods ??= typeof(ResourceManagerModelFactory).GetMethods(BindingFlags.Static | BindingFlags.Public).ToHashSet();
+        public static string GetRPName(string defaultNamespace)
+        {
+            // for mgmt plane packages, we always have the prefix `Arm` on the name of model factories, except for Azure.ResourceManager
+            var prefix = Configuration.AzureArm && !Configuration.MgmtConfiguration.IsArmCore ? "Arm" : string.Empty;
+            return $"{prefix}{ClientBuilder.GetRPName(defaultNamespace)}";
+        }
+
+        private static string GetDefaultNamespace()
+        {
+            // we have this because the Azure.ResourceManager package is generated using batch, which generates multiple times, and each time Configuration.Namespace has a different value.
+            if (Configuration.AzureArm && Configuration.MgmtConfiguration.IsArmCore)
+                return "Azure.ResourceManager";
+
+            return Configuration.Namespace;
+        }
+
+        public HashSet<MethodInfo> ExistingModelFactoryMethods { get; }
 
         private (ObjectTypeProperty Property, FormattableString Assignment) GetPropertyAssignmentForSimpleProperty(CodeWriter writer, SerializableObjectType model, Parameter parameter, ObjectTypeProperty property)
         {

@@ -51,14 +51,12 @@ namespace AutoRest.CSharp.Output.Models.Types
                 isAbstract: IsAbstract);
         }
 
-        public static string GetDefaultModelNamespace(string? namespaceExtension, string rootNamespaceName)
+        public static string GetDefaultModelNamespace(string? namespaceExtension, string defaultNamespace)
         {
             if (namespaceExtension != default)
             {
                 return namespaceExtension;
             }
-
-            var defaultNamespace = Configuration.Namespace ?? rootNamespaceName;
 
             if (Configuration.ModelNamespace)
             {

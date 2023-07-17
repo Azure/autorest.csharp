@@ -131,7 +131,10 @@ namespace AutoRest.CSharp.Output.Models.Types
 
         protected override IEnumerable<ObjectTypeProperty> BuildProperties()
         {
-            foreach (var property in _type.GetProperties().Where(p => p.DeclaringType == _type))
+            var internalPropertiesToInclude = new List<PropertyInfo>();
+            PropertyMatchDetection.AddInternalIncludes(_type, internalPropertiesToInclude);
+
+            foreach (var property in _type.GetProperties().Where(p => p.DeclaringType == _type).Concat(internalPropertiesToInclude))
             {
                 var getter = property.GetGetMethod();
                 var setter = property.GetSetMethod();
