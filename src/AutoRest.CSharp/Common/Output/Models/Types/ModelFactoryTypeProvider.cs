@@ -14,6 +14,7 @@ using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Input.Source;
 using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Utilities;
+using Azure.Core.Expressions.DataFactory;
 using Azure.ResourceManager.Models;
 using Humanizer;
 using static AutoRest.CSharp.Output.Models.MethodSignatureModifiers;
@@ -40,6 +41,8 @@ namespace AutoRest.CSharp.Output.Models.Types
 
             DefaultName = $"{defaultClientName}ModelFactory".ToCleanName();
             DefaultAccessibility = "public";
+            ExistingModelFactoryMethods = typeof(ResourceManagerModelFactory).GetMethods(BindingFlags.Static | BindingFlags.Public).ToHashSet();
+            ExistingModelFactoryMethods.UnionWith(typeof(DataFactoryModelFactory).GetMethods(BindingFlags.Static | BindingFlags.Public).ToHashSet());
         }
 
         public static ModelFactoryTypeProvider? TryCreate(IEnumerable<TypeProvider> models, SourceInputModel? sourceInputModel)
@@ -80,8 +83,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             return Configuration.Namespace;
         }
 
-        private HashSet<MethodInfo>? _existingModelFactoryMethods;
-        public HashSet<MethodInfo> ExistingModelFactoryMethods => _existingModelFactoryMethods ??= typeof(ResourceManagerModelFactory).GetMethods(BindingFlags.Static | BindingFlags.Public).ToHashSet();
+        public HashSet<MethodInfo> ExistingModelFactoryMethods { get; }
 
         private (ObjectTypeProperty Property, FormattableString Assignment) GetPropertyAssignmentForSimpleProperty(CodeWriter writer, SerializableObjectType model, Parameter parameter, ObjectTypeProperty property)
         {
