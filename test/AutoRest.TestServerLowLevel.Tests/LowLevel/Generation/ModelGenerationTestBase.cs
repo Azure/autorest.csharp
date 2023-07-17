@@ -52,6 +52,7 @@ namespace AutoRest.CSharp.Generation.Writers.Tests
                 generateModelFactory: true,
                 publicDiscriminatorProperty: false,
                 deserializeNullCollectionAsNullValue: false,
+                useCoreDataFactoryReplacements: true,
                 modelFactoryForHlc: Array.Empty<string>(),
                 unreferencedTypesHandling: Configuration.UnreferencedTypesHandlingOption.RemoveOrInternalize,
                 useOverloadsBetweenProtocolAndConvenience: true,
