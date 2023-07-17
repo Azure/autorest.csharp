@@ -6,7 +6,6 @@
 #nullable disable
 
 using System;
-using System.Collections.Generic;
 using System.Text.Json;
 using System.Threading.Tasks;
 using Azure;
@@ -91,9 +90,9 @@ namespace body_complex_LowLevel.Samples
 
             var data = new
             {
-                defaultProgram = new Dictionary<string, string>
+                defaultProgram = new
                 {
-                    ["key"] = "<String>"
+                    key = "<String>",
                 },
             };
 
@@ -123,9 +122,9 @@ namespace body_complex_LowLevel.Samples
 
             var data = new
             {
-                defaultProgram = new Dictionary<string, string>
+                defaultProgram = new
                 {
-                    ["key"] = "<String>"
+                    key = "<String>",
                 },
             };
 
@@ -207,9 +206,9 @@ namespace body_complex_LowLevel.Samples
 
             var data = new
             {
-                defaultProgram = new Dictionary<string, string>
+                defaultProgram = new
                 {
-                    ["key"] = "<String>"
+                    key = "<String>",
                 },
             };
 
@@ -239,9 +238,9 @@ namespace body_complex_LowLevel.Samples
 
             var data = new
             {
-                defaultProgram = new Dictionary<string, string>
+                defaultProgram = new
                 {
-                    ["key"] = "<String>"
+                    key = "<String>",
                 },
             };
 

@@ -7,12 +7,10 @@
 
 using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Text.Json;
 using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
-using Azure.Identity;
 using NUnit.Framework;
 
 namespace body_complex_LowLevel.Samples
@@ -53,7 +51,7 @@ namespace body_complex_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new PrimitiveClient(credential);
 
-            Response response = await client.GetIntAsync(new RequestContext());
+            Response response = await client.GetIntAsync(new RequestContext()).ConfigureAwait(false);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());
@@ -66,7 +64,7 @@ namespace body_complex_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new PrimitiveClient(credential);
 
-            Response response = await client.GetIntAsync(new RequestContext());
+            Response response = await client.GetIntAsync(new RequestContext()).ConfigureAwait(false);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("field1").ToString());
@@ -112,7 +110,7 @@ namespace body_complex_LowLevel.Samples
 
             var data = new { };
 
-            Response response = await client.PutIntAsync(RequestContent.Create(data));
+            Response response = await client.PutIntAsync(RequestContent.Create(data)).ConfigureAwait(false);
             Console.WriteLine(response.Status);
         }
 
@@ -129,7 +127,7 @@ namespace body_complex_LowLevel.Samples
                 field2 = 1234,
             };
 
-            Response response = await client.PutIntAsync(RequestContent.Create(data));
+            Response response = await client.PutIntAsync(RequestContent.Create(data)).ConfigureAwait(false);
             Console.WriteLine(response.Status);
         }
 
@@ -167,7 +165,7 @@ namespace body_complex_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new PrimitiveClient(credential);
 
-            Response response = await client.GetLongAsync(new RequestContext());
+            Response response = await client.GetLongAsync(new RequestContext()).ConfigureAwait(false);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());
@@ -180,7 +178,7 @@ namespace body_complex_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new PrimitiveClient(credential);
 
-            Response response = await client.GetLongAsync(new RequestContext());
+            Response response = await client.GetLongAsync(new RequestContext()).ConfigureAwait(false);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("field1").ToString());
@@ -226,7 +224,7 @@ namespace body_complex_LowLevel.Samples
 
             var data = new { };
 
-            Response response = await client.PutLongAsync(RequestContent.Create(data));
+            Response response = await client.PutLongAsync(RequestContent.Create(data)).ConfigureAwait(false);
             Console.WriteLine(response.Status);
         }
 
@@ -243,7 +241,7 @@ namespace body_complex_LowLevel.Samples
                 field2 = 1234L,
             };
 
-            Response response = await client.PutLongAsync(RequestContent.Create(data));
+            Response response = await client.PutLongAsync(RequestContent.Create(data)).ConfigureAwait(false);
             Console.WriteLine(response.Status);
         }
 
@@ -281,7 +279,7 @@ namespace body_complex_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new PrimitiveClient(credential);
 
-            Response response = await client.GetFloatAsync(new RequestContext());
+            Response response = await client.GetFloatAsync(new RequestContext()).ConfigureAwait(false);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());
@@ -294,7 +292,7 @@ namespace body_complex_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new PrimitiveClient(credential);
 
-            Response response = await client.GetFloatAsync(new RequestContext());
+            Response response = await client.GetFloatAsync(new RequestContext()).ConfigureAwait(false);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("field1").ToString());
@@ -323,8 +321,8 @@ namespace body_complex_LowLevel.Samples
 
             var data = new
             {
-                field1 = 123.45f,
-                field2 = 123.45f,
+                field1 = 3.14f,
+                field2 = 3.14f,
             };
 
             Response response = client.PutFloat(RequestContent.Create(data));
@@ -340,7 +338,7 @@ namespace body_complex_LowLevel.Samples
 
             var data = new { };
 
-            Response response = await client.PutFloatAsync(RequestContent.Create(data));
+            Response response = await client.PutFloatAsync(RequestContent.Create(data)).ConfigureAwait(false);
             Console.WriteLine(response.Status);
         }
 
@@ -353,11 +351,11 @@ namespace body_complex_LowLevel.Samples
 
             var data = new
             {
-                field1 = 123.45f,
-                field2 = 123.45f,
+                field1 = 3.14f,
+                field2 = 3.14f,
             };
 
-            Response response = await client.PutFloatAsync(RequestContent.Create(data));
+            Response response = await client.PutFloatAsync(RequestContent.Create(data)).ConfigureAwait(false);
             Console.WriteLine(response.Status);
         }
 
@@ -395,7 +393,7 @@ namespace body_complex_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new PrimitiveClient(credential);
 
-            Response response = await client.GetDoubleAsync(new RequestContext());
+            Response response = await client.GetDoubleAsync(new RequestContext()).ConfigureAwait(false);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());
@@ -408,7 +406,7 @@ namespace body_complex_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new PrimitiveClient(credential);
 
-            Response response = await client.GetDoubleAsync(new RequestContext());
+            Response response = await client.GetDoubleAsync(new RequestContext()).ConfigureAwait(false);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("field1").ToString());
@@ -437,8 +435,8 @@ namespace body_complex_LowLevel.Samples
 
             var data = new
             {
-                field1 = 123.45d,
-                field_56_zeros_after_the_dot_and_negative_zero_before_dot_and_this_is_a_long_field_name_on_purpose = 123.45d,
+                field1 = 3.14d,
+                field_56_zeros_after_the_dot_and_negative_zero_before_dot_and_this_is_a_long_field_name_on_purpose = 3.14d,
             };
 
             Response response = client.PutDouble(RequestContent.Create(data));
@@ -454,7 +452,7 @@ namespace body_complex_LowLevel.Samples
 
             var data = new { };
 
-            Response response = await client.PutDoubleAsync(RequestContent.Create(data));
+            Response response = await client.PutDoubleAsync(RequestContent.Create(data)).ConfigureAwait(false);
             Console.WriteLine(response.Status);
         }
 
@@ -467,11 +465,11 @@ namespace body_complex_LowLevel.Samples
 
             var data = new
             {
-                field1 = 123.45d,
-                field_56_zeros_after_the_dot_and_negative_zero_before_dot_and_this_is_a_long_field_name_on_purpose = 123.45d,
+                field1 = 3.14d,
+                field_56_zeros_after_the_dot_and_negative_zero_before_dot_and_this_is_a_long_field_name_on_purpose = 3.14d,
             };
 
-            Response response = await client.PutDoubleAsync(RequestContent.Create(data));
+            Response response = await client.PutDoubleAsync(RequestContent.Create(data)).ConfigureAwait(false);
             Console.WriteLine(response.Status);
         }
 
@@ -509,7 +507,7 @@ namespace body_complex_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new PrimitiveClient(credential);
 
-            Response response = await client.GetBoolAsync(new RequestContext());
+            Response response = await client.GetBoolAsync(new RequestContext()).ConfigureAwait(false);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());
@@ -522,7 +520,7 @@ namespace body_complex_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new PrimitiveClient(credential);
 
-            Response response = await client.GetBoolAsync(new RequestContext());
+            Response response = await client.GetBoolAsync(new RequestContext()).ConfigureAwait(false);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("field_true").ToString());
@@ -568,7 +566,7 @@ namespace body_complex_LowLevel.Samples
 
             var data = new { };
 
-            Response response = await client.PutBoolAsync(RequestContent.Create(data));
+            Response response = await client.PutBoolAsync(RequestContent.Create(data)).ConfigureAwait(false);
             Console.WriteLine(response.Status);
         }
 
@@ -585,7 +583,7 @@ namespace body_complex_LowLevel.Samples
                 field_false = true,
             };
 
-            Response response = await client.PutBoolAsync(RequestContent.Create(data));
+            Response response = await client.PutBoolAsync(RequestContent.Create(data)).ConfigureAwait(false);
             Console.WriteLine(response.Status);
         }
 
@@ -624,7 +622,7 @@ namespace body_complex_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new PrimitiveClient(credential);
 
-            Response response = await client.GetStringAsync(new RequestContext());
+            Response response = await client.GetStringAsync(new RequestContext()).ConfigureAwait(false);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());
@@ -637,7 +635,7 @@ namespace body_complex_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new PrimitiveClient(credential);
 
-            Response response = await client.GetStringAsync(new RequestContext());
+            Response response = await client.GetStringAsync(new RequestContext()).ConfigureAwait(false);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("field").ToString());
@@ -665,11 +663,11 @@ namespace body_complex_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new PrimitiveClient(credential);
 
-            var data = new
+            var data = new Dictionary<string, object>
             {
-                field = "<field>",
-                empty = "<empty>",
-                @null = "<null>",
+                ["field"] = "<field>",
+                ["empty"] = "<empty>",
+                ["null"] = "<null>"
             };
 
             Response response = client.PutString(RequestContent.Create(data));
@@ -685,7 +683,7 @@ namespace body_complex_LowLevel.Samples
 
             var data = new { };
 
-            Response response = await client.PutStringAsync(RequestContent.Create(data));
+            Response response = await client.PutStringAsync(RequestContent.Create(data)).ConfigureAwait(false);
             Console.WriteLine(response.Status);
         }
 
@@ -696,14 +694,14 @@ namespace body_complex_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new PrimitiveClient(credential);
 
-            var data = new
+            var data = new Dictionary<string, object>
             {
-                field = "<field>",
-                empty = "<empty>",
-                @null = "<null>",
+                ["field"] = "<field>",
+                ["empty"] = "<empty>",
+                ["null"] = "<null>"
             };
 
-            Response response = await client.PutStringAsync(RequestContent.Create(data));
+            Response response = await client.PutStringAsync(RequestContent.Create(data)).ConfigureAwait(false);
             Console.WriteLine(response.Status);
         }
 
@@ -741,7 +739,7 @@ namespace body_complex_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new PrimitiveClient(credential);
 
-            Response response = await client.GetDateAsync(new RequestContext());
+            Response response = await client.GetDateAsync(new RequestContext()).ConfigureAwait(false);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());
@@ -754,7 +752,7 @@ namespace body_complex_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new PrimitiveClient(credential);
 
-            Response response = await client.GetDateAsync(new RequestContext());
+            Response response = await client.GetDateAsync(new RequestContext()).ConfigureAwait(false);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("field").ToString());
@@ -783,8 +781,8 @@ namespace body_complex_LowLevel.Samples
 
             var data = new
             {
-                field = "2022-05-10",
-                leap = "2022-05-10",
+                field = "2022-05-11",
+                leap = "2022-05-11",
             };
 
             Response response = client.PutDate(RequestContent.Create(data));
@@ -800,7 +798,7 @@ namespace body_complex_LowLevel.Samples
 
             var data = new { };
 
-            Response response = await client.PutDateAsync(RequestContent.Create(data));
+            Response response = await client.PutDateAsync(RequestContent.Create(data)).ConfigureAwait(false);
             Console.WriteLine(response.Status);
         }
 
@@ -813,11 +811,11 @@ namespace body_complex_LowLevel.Samples
 
             var data = new
             {
-                field = "2022-05-10",
-                leap = "2022-05-10",
+                field = "2022-05-11",
+                leap = "2022-05-11",
             };
 
-            Response response = await client.PutDateAsync(RequestContent.Create(data));
+            Response response = await client.PutDateAsync(RequestContent.Create(data)).ConfigureAwait(false);
             Console.WriteLine(response.Status);
         }
 
@@ -855,7 +853,7 @@ namespace body_complex_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new PrimitiveClient(credential);
 
-            Response response = await client.GetDateTimeAsync(new RequestContext());
+            Response response = await client.GetDateTimeAsync(new RequestContext()).ConfigureAwait(false);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());
@@ -868,7 +866,7 @@ namespace body_complex_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new PrimitiveClient(credential);
 
-            Response response = await client.GetDateTimeAsync(new RequestContext());
+            Response response = await client.GetDateTimeAsync(new RequestContext()).ConfigureAwait(false);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("field").ToString());
@@ -897,8 +895,8 @@ namespace body_complex_LowLevel.Samples
 
             var data = new
             {
-                field = "2022-05-10T18:57:31.2311892Z",
-                now = "2022-05-10T18:57:31.2311892Z",
+                field = "2022-05-11T14:14:57.0310000Z",
+                now = "2022-05-11T14:14:57.0310000Z",
             };
 
             Response response = client.PutDateTime(RequestContent.Create(data));
@@ -914,7 +912,7 @@ namespace body_complex_LowLevel.Samples
 
             var data = new { };
 
-            Response response = await client.PutDateTimeAsync(RequestContent.Create(data));
+            Response response = await client.PutDateTimeAsync(RequestContent.Create(data)).ConfigureAwait(false);
             Console.WriteLine(response.Status);
         }
 
@@ -927,11 +925,11 @@ namespace body_complex_LowLevel.Samples
 
             var data = new
             {
-                field = "2022-05-10T18:57:31.2311892Z",
-                now = "2022-05-10T18:57:31.2311892Z",
+                field = "2022-05-11T14:14:57.0310000Z",
+                now = "2022-05-11T14:14:57.0310000Z",
             };
 
-            Response response = await client.PutDateTimeAsync(RequestContent.Create(data));
+            Response response = await client.PutDateTimeAsync(RequestContent.Create(data)).ConfigureAwait(false);
             Console.WriteLine(response.Status);
         }
 
@@ -969,7 +967,7 @@ namespace body_complex_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new PrimitiveClient(credential);
 
-            Response response = await client.GetDateTimeRfc1123Async(new RequestContext());
+            Response response = await client.GetDateTimeRfc1123Async(new RequestContext()).ConfigureAwait(false);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());
@@ -982,7 +980,7 @@ namespace body_complex_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new PrimitiveClient(credential);
 
-            Response response = await client.GetDateTimeRfc1123Async(new RequestContext());
+            Response response = await client.GetDateTimeRfc1123Async(new RequestContext()).ConfigureAwait(false);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("field").ToString());
@@ -1011,8 +1009,8 @@ namespace body_complex_LowLevel.Samples
 
             var data = new
             {
-                field = "Tue, 10 May 2022 18:57:31 GMT",
-                now = "Tue, 10 May 2022 18:57:31 GMT",
+                field = "Wed, 11 May 2022 14:14:57 GMT",
+                now = "Wed, 11 May 2022 14:14:57 GMT",
             };
 
             Response response = client.PutDateTimeRfc1123(RequestContent.Create(data));
@@ -1028,7 +1026,7 @@ namespace body_complex_LowLevel.Samples
 
             var data = new { };
 
-            Response response = await client.PutDateTimeRfc1123Async(RequestContent.Create(data));
+            Response response = await client.PutDateTimeRfc1123Async(RequestContent.Create(data)).ConfigureAwait(false);
             Console.WriteLine(response.Status);
         }
 
@@ -1041,11 +1039,11 @@ namespace body_complex_LowLevel.Samples
 
             var data = new
             {
-                field = "Tue, 10 May 2022 18:57:31 GMT",
-                now = "Tue, 10 May 2022 18:57:31 GMT",
+                field = "Wed, 11 May 2022 14:14:57 GMT",
+                now = "Wed, 11 May 2022 14:14:57 GMT",
             };
 
-            Response response = await client.PutDateTimeRfc1123Async(RequestContent.Create(data));
+            Response response = await client.PutDateTimeRfc1123Async(RequestContent.Create(data)).ConfigureAwait(false);
             Console.WriteLine(response.Status);
         }
 
@@ -1082,7 +1080,7 @@ namespace body_complex_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new PrimitiveClient(credential);
 
-            Response response = await client.GetDurationAsync(new RequestContext());
+            Response response = await client.GetDurationAsync(new RequestContext()).ConfigureAwait(false);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());
@@ -1095,7 +1093,7 @@ namespace body_complex_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new PrimitiveClient(credential);
 
-            Response response = await client.GetDurationAsync(new RequestContext());
+            Response response = await client.GetDurationAsync(new RequestContext()).ConfigureAwait(false);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("field").ToString());
@@ -1139,7 +1137,7 @@ namespace body_complex_LowLevel.Samples
 
             var data = new { };
 
-            Response response = await client.PutDurationAsync(RequestContent.Create(data));
+            Response response = await client.PutDurationAsync(RequestContent.Create(data)).ConfigureAwait(false);
             Console.WriteLine(response.Status);
         }
 
@@ -1155,7 +1153,7 @@ namespace body_complex_LowLevel.Samples
                 field = "PT1H23M45S",
             };
 
-            Response response = await client.PutDurationAsync(RequestContent.Create(data));
+            Response response = await client.PutDurationAsync(RequestContent.Create(data)).ConfigureAwait(false);
             Console.WriteLine(response.Status);
         }
 
@@ -1192,7 +1190,7 @@ namespace body_complex_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new PrimitiveClient(credential);
 
-            Response response = await client.GetByteAsync(new RequestContext());
+            Response response = await client.GetByteAsync(new RequestContext()).ConfigureAwait(false);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());
@@ -1205,7 +1203,7 @@ namespace body_complex_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new PrimitiveClient(credential);
 
-            Response response = await client.GetByteAsync(new RequestContext());
+            Response response = await client.GetByteAsync(new RequestContext()).ConfigureAwait(false);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("field").ToString());
@@ -1233,7 +1231,7 @@ namespace body_complex_LowLevel.Samples
 
             var data = new
             {
-                field = new { },
+                field = BinaryData.FromString("<your binary data content>"),
             };
 
             Response response = client.PutByte(RequestContent.Create(data));
@@ -1249,7 +1247,7 @@ namespace body_complex_LowLevel.Samples
 
             var data = new { };
 
-            Response response = await client.PutByteAsync(RequestContent.Create(data));
+            Response response = await client.PutByteAsync(RequestContent.Create(data)).ConfigureAwait(false);
             Console.WriteLine(response.Status);
         }
 
@@ -1262,10 +1260,10 @@ namespace body_complex_LowLevel.Samples
 
             var data = new
             {
-                field = new { },
+                field = BinaryData.FromString("<your binary data content>"),
             };
 
-            Response response = await client.PutByteAsync(RequestContent.Create(data));
+            Response response = await client.PutByteAsync(RequestContent.Create(data)).ConfigureAwait(false);
             Console.WriteLine(response.Status);
         }
     }

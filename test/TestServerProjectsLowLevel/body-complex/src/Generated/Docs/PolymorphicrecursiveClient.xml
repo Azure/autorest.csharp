@@ -47,8 +47,8 @@ var credential = new AzureKeyCredential("<key>");
 var client = new PolymorphicrecursiveClient(credential);
 
 var data = new {
-    fishtype = "salmon",
-    length = 123.45f,
+    fishtype = "<fishtype>",
+    length = 3.14f,
 };
 
 Response response = await client.PutValidAsync(RequestContent.Create(data)).ConfigureAwait(false);
