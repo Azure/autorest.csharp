@@ -66,7 +66,7 @@ namespace AuthoringTypeSpec
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="projectName"> The String to use. </param>
+        /// <param name="projectName"> The string to use. </param>
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="projectName"/> or <paramref name="content"/> is null. </exception>
@@ -103,7 +103,7 @@ namespace AuthoringTypeSpec
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="projectName"> The String to use. </param>
+        /// <param name="projectName"> The string to use. </param>
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="projectName"/> or <paramref name="content"/> is null. </exception>
@@ -140,7 +140,7 @@ namespace AuthoringTypeSpec
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="projectName"> The String to use. </param>
+        /// <param name="projectName"> The string to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="projectName"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="projectName"/> is an empty string, and was expected to be non-empty. </exception>
@@ -175,7 +175,7 @@ namespace AuthoringTypeSpec
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="projectName"> The String to use. </param>
+        /// <param name="projectName"> The string to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="projectName"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="projectName"/> is an empty string, and was expected to be non-empty. </exception>
@@ -210,7 +210,7 @@ namespace AuthoringTypeSpec
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="projectName"> The String to use. </param>
+        /// <param name="projectName"> The string to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="projectName"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="projectName"/> is an empty string, and was expected to be non-empty. </exception>
@@ -245,7 +245,7 @@ namespace AuthoringTypeSpec
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="projectName"> The String to use. </param>
+        /// <param name="projectName"> The string to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="projectName"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="projectName"/> is an empty string, and was expected to be non-empty. </exception>
@@ -280,8 +280,8 @@ namespace AuthoringTypeSpec
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="projectName"> The String to use. </param>
-        /// <param name="projectFileVersion"> The String to use. </param>
+        /// <param name="projectName"> The string to use. </param>
+        /// <param name="projectFileVersion"> The string to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="projectName"/> or <paramref name="projectFileVersion"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="projectName"/> is an empty string, and was expected to be non-empty. </exception>
@@ -317,8 +317,8 @@ namespace AuthoringTypeSpec
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="projectName"> The String to use. </param>
-        /// <param name="projectFileVersion"> The String to use. </param>
+        /// <param name="projectName"> The string to use. </param>
+        /// <param name="projectFileVersion"> The string to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="projectName"/> or <paramref name="projectFileVersion"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="projectName"/> is an empty string, and was expected to be non-empty. </exception>
@@ -354,7 +354,7 @@ namespace AuthoringTypeSpec
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="projectName"> The String to use. </param>
+        /// <param name="projectName"> The string to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="projectName"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="projectName"/> is an empty string, and was expected to be non-empty. </exception>
@@ -389,7 +389,7 @@ namespace AuthoringTypeSpec
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="projectName"> The String to use. </param>
+        /// <param name="projectName"> The string to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="projectName"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="projectName"/> is an empty string, and was expected to be non-empty. </exception>
@@ -424,7 +424,7 @@ namespace AuthoringTypeSpec
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="projectName"> The String to use. </param>
+        /// <param name="projectName"> The string to use. </param>
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="projectName"/> or <paramref name="content"/> is null. </exception>
@@ -461,7 +461,7 @@ namespace AuthoringTypeSpec
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="projectName"> The String to use. </param>
+        /// <param name="projectName"> The string to use. </param>
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="projectName"/> or <paramref name="content"/> is null. </exception>
@@ -498,8 +498,8 @@ namespace AuthoringTypeSpec
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="projectName"> The String to use. </param>
-        /// <param name="deploymentName"> The String to use. </param>
+        /// <param name="projectName"> The string to use. </param>
+        /// <param name="deploymentName"> The string to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="projectName"/> or <paramref name="deploymentName"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="projectName"/> or <paramref name="deploymentName"/> is an empty string, and was expected to be non-empty. </exception>
@@ -535,8 +535,8 @@ namespace AuthoringTypeSpec
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="projectName"> The String to use. </param>
-        /// <param name="deploymentName"> The String to use. </param>
+        /// <param name="projectName"> The string to use. </param>
+        /// <param name="deploymentName"> The string to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="projectName"/> or <paramref name="deploymentName"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="projectName"/> or <paramref name="deploymentName"/> is an empty string, and was expected to be non-empty. </exception>
@@ -572,8 +572,8 @@ namespace AuthoringTypeSpec
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="projectName"> The String to use. </param>
-        /// <param name="deploymentName"> The String to use. </param>
+        /// <param name="projectName"> The string to use. </param>
+        /// <param name="deploymentName"> The string to use. </param>
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="projectName"/>, <paramref name="deploymentName"/> or <paramref name="content"/> is null. </exception>
@@ -611,8 +611,8 @@ namespace AuthoringTypeSpec
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="projectName"> The String to use. </param>
-        /// <param name="deploymentName"> The String to use. </param>
+        /// <param name="projectName"> The string to use. </param>
+        /// <param name="deploymentName"> The string to use. </param>
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="projectName"/>, <paramref name="deploymentName"/> or <paramref name="content"/> is null. </exception>
@@ -650,8 +650,8 @@ namespace AuthoringTypeSpec
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="projectName"> The String to use. </param>
-        /// <param name="deploymentName"> The String to use. </param>
+        /// <param name="projectName"> The string to use. </param>
+        /// <param name="deploymentName"> The string to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="projectName"/> or <paramref name="deploymentName"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="projectName"/> or <paramref name="deploymentName"/> is an empty string, and was expected to be non-empty. </exception>
@@ -687,8 +687,8 @@ namespace AuthoringTypeSpec
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="projectName"> The String to use. </param>
-        /// <param name="deploymentName"> The String to use. </param>
+        /// <param name="projectName"> The string to use. </param>
+        /// <param name="deploymentName"> The string to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="projectName"/> or <paramref name="deploymentName"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="projectName"/> or <paramref name="deploymentName"/> is an empty string, and was expected to be non-empty. </exception>
@@ -724,7 +724,7 @@ namespace AuthoringTypeSpec
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="projectName"> The String to use. </param>
+        /// <param name="projectName"> The string to use. </param>
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="projectName"/> or <paramref name="content"/> is null. </exception>
@@ -761,7 +761,7 @@ namespace AuthoringTypeSpec
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="projectName"> The String to use. </param>
+        /// <param name="projectName"> The string to use. </param>
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="projectName"/> or <paramref name="content"/> is null. </exception>
@@ -789,9 +789,9 @@ namespace AuthoringTypeSpec
         }
 
         /// <summary> Gets the status of an existing deployment job. </summary>
-        /// <param name="projectName"> The String to use. </param>
-        /// <param name="deploymentName"> The String to use. </param>
-        /// <param name="jobId"> The String to use. </param>
+        /// <param name="projectName"> The string to use. </param>
+        /// <param name="deploymentName"> The string to use. </param>
+        /// <param name="jobId"> The string to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="projectName"/>, <paramref name="deploymentName"/> or <paramref name="jobId"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="projectName"/>, <paramref name="deploymentName"/> or <paramref name="jobId"/> is an empty string, and was expected to be non-empty. </exception>
@@ -818,9 +818,9 @@ namespace AuthoringTypeSpec
         }
 
         /// <summary> Gets the status of an existing deployment job. </summary>
-        /// <param name="projectName"> The String to use. </param>
-        /// <param name="deploymentName"> The String to use. </param>
-        /// <param name="jobId"> The String to use. </param>
+        /// <param name="projectName"> The string to use. </param>
+        /// <param name="deploymentName"> The string to use. </param>
+        /// <param name="jobId"> The string to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="projectName"/>, <paramref name="deploymentName"/> or <paramref name="jobId"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="projectName"/>, <paramref name="deploymentName"/> or <paramref name="jobId"/> is an empty string, and was expected to be non-empty. </exception>
@@ -861,9 +861,9 @@ namespace AuthoringTypeSpec
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="projectName"> The String to use. </param>
-        /// <param name="deploymentName"> The String to use. </param>
-        /// <param name="jobId"> The String to use. </param>
+        /// <param name="projectName"> The string to use. </param>
+        /// <param name="deploymentName"> The string to use. </param>
+        /// <param name="jobId"> The string to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="projectName"/>, <paramref name="deploymentName"/> or <paramref name="jobId"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="projectName"/>, <paramref name="deploymentName"/> or <paramref name="jobId"/> is an empty string, and was expected to be non-empty. </exception>
@@ -905,9 +905,9 @@ namespace AuthoringTypeSpec
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="projectName"> The String to use. </param>
-        /// <param name="deploymentName"> The String to use. </param>
-        /// <param name="jobId"> The String to use. </param>
+        /// <param name="projectName"> The string to use. </param>
+        /// <param name="deploymentName"> The string to use. </param>
+        /// <param name="jobId"> The string to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="projectName"/>, <paramref name="deploymentName"/> or <paramref name="jobId"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="projectName"/>, <paramref name="deploymentName"/> or <paramref name="jobId"/> is an empty string, and was expected to be non-empty. </exception>
@@ -935,9 +935,9 @@ namespace AuthoringTypeSpec
         }
 
         /// <summary> Gets the status of an existing swap deployment job. </summary>
-        /// <param name="projectName"> The String to use. </param>
-        /// <param name="deploymentName"> The String to use. </param>
-        /// <param name="jobId"> The String to use. </param>
+        /// <param name="projectName"> The string to use. </param>
+        /// <param name="deploymentName"> The string to use. </param>
+        /// <param name="jobId"> The string to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="projectName"/>, <paramref name="deploymentName"/> or <paramref name="jobId"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="projectName"/>, <paramref name="deploymentName"/> or <paramref name="jobId"/> is an empty string, and was expected to be non-empty. </exception>
@@ -964,9 +964,9 @@ namespace AuthoringTypeSpec
         }
 
         /// <summary> Gets the status of an existing swap deployment job. </summary>
-        /// <param name="projectName"> The String to use. </param>
-        /// <param name="deploymentName"> The String to use. </param>
-        /// <param name="jobId"> The String to use. </param>
+        /// <param name="projectName"> The string to use. </param>
+        /// <param name="deploymentName"> The string to use. </param>
+        /// <param name="jobId"> The string to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="projectName"/>, <paramref name="deploymentName"/> or <paramref name="jobId"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="projectName"/>, <paramref name="deploymentName"/> or <paramref name="jobId"/> is an empty string, and was expected to be non-empty. </exception>
@@ -1007,9 +1007,9 @@ namespace AuthoringTypeSpec
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="projectName"> The String to use. </param>
-        /// <param name="deploymentName"> The String to use. </param>
-        /// <param name="jobId"> The String to use. </param>
+        /// <param name="projectName"> The string to use. </param>
+        /// <param name="deploymentName"> The string to use. </param>
+        /// <param name="jobId"> The string to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="projectName"/>, <paramref name="deploymentName"/> or <paramref name="jobId"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="projectName"/>, <paramref name="deploymentName"/> or <paramref name="jobId"/> is an empty string, and was expected to be non-empty. </exception>
@@ -1051,9 +1051,9 @@ namespace AuthoringTypeSpec
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="projectName"> The String to use. </param>
-        /// <param name="deploymentName"> The String to use. </param>
-        /// <param name="jobId"> The String to use. </param>
+        /// <param name="projectName"> The string to use. </param>
+        /// <param name="deploymentName"> The string to use. </param>
+        /// <param name="jobId"> The string to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="projectName"/>, <paramref name="deploymentName"/> or <paramref name="jobId"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="projectName"/>, <paramref name="deploymentName"/> or <paramref name="jobId"/> is an empty string, and was expected to be non-empty. </exception>
@@ -1132,7 +1132,7 @@ namespace AuthoringTypeSpec
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="projectName"> The String to use. </param>
+        /// <param name="projectName"> The string to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="projectName"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="projectName"/> is an empty string, and was expected to be non-empty. </exception>
@@ -1158,7 +1158,7 @@ namespace AuthoringTypeSpec
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="projectName"> The String to use. </param>
+        /// <param name="projectName"> The string to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="projectName"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="projectName"/> is an empty string, and was expected to be non-empty. </exception>
@@ -1184,9 +1184,9 @@ namespace AuthoringTypeSpec
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="maxCount"> The Int32 to use. </param>
-        /// <param name="skip"> The Int32 to use. </param>
-        /// <param name="maxpagesize"> The Int32 to use. </param>
+        /// <param name="maxCount"> The int? to use. </param>
+        /// <param name="skip"> The int? to use. </param>
+        /// <param name="maxpagesize"> The int? to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="AsyncPageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
@@ -1208,9 +1208,9 @@ namespace AuthoringTypeSpec
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="maxCount"> The Int32 to use. </param>
-        /// <param name="skip"> The Int32 to use. </param>
-        /// <param name="maxpagesize"> The Int32 to use. </param>
+        /// <param name="maxCount"> The int? to use. </param>
+        /// <param name="skip"> The int? to use. </param>
+        /// <param name="maxpagesize"> The int? to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="Pageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
@@ -1232,9 +1232,9 @@ namespace AuthoringTypeSpec
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="maxCount"> The Int32 to use. </param>
-        /// <param name="skip"> The Int32 to use. </param>
-        /// <param name="maxpagesize"> The Int32 to use. </param>
+        /// <param name="maxCount"> The int? to use. </param>
+        /// <param name="skip"> The int? to use. </param>
+        /// <param name="maxpagesize"> The int? to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="AsyncPageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
@@ -1256,9 +1256,9 @@ namespace AuthoringTypeSpec
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="maxCount"> The Int32 to use. </param>
-        /// <param name="skip"> The Int32 to use. </param>
-        /// <param name="maxpagesize"> The Int32 to use. </param>
+        /// <param name="maxCount"> The int? to use. </param>
+        /// <param name="skip"> The int? to use. </param>
+        /// <param name="maxpagesize"> The int? to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="Pageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
@@ -1346,8 +1346,8 @@ namespace AuthoringTypeSpec
             uri.AppendPath("/authoring/analyze-text/projects/", false);
             uri.AppendPath(projectName, true);
             uri.AppendPath(":export", false);
-            uri.AppendQuery("projectFileVersion", projectFileVersion, true);
             uri.AppendQuery("api-version", _apiVersion, true);
+            uri.AppendQuery("projectFileVersion", projectFileVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             return message;
@@ -1530,6 +1530,7 @@ namespace AuthoringTypeSpec
             uri.Reset(_endpoint);
             uri.AppendRaw("/language", false);
             uri.AppendPath("/authoring/analyze-text/projects/global/languages", false);
+            uri.AppendQuery("api-version", _apiVersion, true);
             if (maxCount != null)
             {
                 uri.AppendQuery("top", maxCount.Value, true);
@@ -1542,7 +1543,6 @@ namespace AuthoringTypeSpec
             {
                 uri.AppendQuery("maxpagesize", maxpagesize.Value, true);
             }
-            uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             return message;
@@ -1557,6 +1557,7 @@ namespace AuthoringTypeSpec
             uri.Reset(_endpoint);
             uri.AppendRaw("/language", false);
             uri.AppendPath("/authoring/analyze-text/projects/global/training-config-versions", false);
+            uri.AppendQuery("api-version", _apiVersion, true);
             if (maxCount != null)
             {
                 uri.AppendQuery("top", maxCount.Value, true);
@@ -1569,7 +1570,6 @@ namespace AuthoringTypeSpec
             {
                 uri.AppendQuery("maxpagesize", maxpagesize.Value, true);
             }
-            uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             return message;

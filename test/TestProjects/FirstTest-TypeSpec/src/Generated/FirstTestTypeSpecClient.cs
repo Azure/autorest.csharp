@@ -534,7 +534,7 @@ namespace FirstTestTypeSpec
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="repeatabilityFirstSent"> The DateTimeOffset to use. </param>
+        /// <param name="repeatabilityFirstSent"> The DateTimeOffset? to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
@@ -565,7 +565,7 @@ namespace FirstTestTypeSpec
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="repeatabilityFirstSent"> The DateTimeOffset to use. </param>
+        /// <param name="repeatabilityFirstSent"> The DateTimeOffset? to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
@@ -706,9 +706,9 @@ namespace FirstTestTypeSpec
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="headParameter"> The String to use. </param>
-        /// <param name="queryParameter"> The String to use. </param>
-        /// <param name="optionalQuery"> The String to use. </param>
+        /// <param name="headParameter"> The string to use. </param>
+        /// <param name="queryParameter"> The string to use. </param>
+        /// <param name="optionalQuery"> The string to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="headParameter"/> or <paramref name="queryParameter"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
@@ -743,9 +743,9 @@ namespace FirstTestTypeSpec
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="headParameter"> The String to use. </param>
-        /// <param name="queryParameter"> The String to use. </param>
-        /// <param name="optionalQuery"> The String to use. </param>
+        /// <param name="headParameter"> The string to use. </param>
+        /// <param name="queryParameter"> The string to use. </param>
+        /// <param name="optionalQuery"> The string to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="headParameter"/> or <paramref name="queryParameter"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
@@ -771,8 +771,8 @@ namespace FirstTestTypeSpec
         }
 
         /// <summary> Return hi again. </summary>
-        /// <param name="p2"> The String to use. </param>
-        /// <param name="p1"> The String to use. </param>
+        /// <param name="p2"> The string to use. </param>
+        /// <param name="p1"> The string to use. </param>
         /// <param name="action"> The RoundTripModel to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="p2"/>, <paramref name="p1"/> or <paramref name="action"/> is null. </exception>
@@ -790,8 +790,8 @@ namespace FirstTestTypeSpec
         }
 
         /// <summary> Return hi again. </summary>
-        /// <param name="p2"> The String to use. </param>
-        /// <param name="p1"> The String to use. </param>
+        /// <param name="p2"> The string to use. </param>
+        /// <param name="p1"> The string to use. </param>
         /// <param name="action"> The RoundTripModel to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="p2"/>, <paramref name="p1"/> or <paramref name="action"/> is null. </exception>
@@ -823,8 +823,8 @@ namespace FirstTestTypeSpec
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="p2"> The String to use. </param>
-        /// <param name="p1"> The String to use. </param>
+        /// <param name="p2"> The string to use. </param>
+        /// <param name="p1"> The string to use. </param>
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="p2"/>, <paramref name="p1"/> or <paramref name="content"/> is null. </exception>
@@ -867,8 +867,8 @@ namespace FirstTestTypeSpec
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="p2"> The String to use. </param>
-        /// <param name="p1"> The String to use. </param>
+        /// <param name="p2"> The string to use. </param>
+        /// <param name="p1"> The string to use. </param>
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="p2"/>, <paramref name="p1"/> or <paramref name="content"/> is null. </exception>
@@ -906,8 +906,8 @@ namespace FirstTestTypeSpec
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="p2"> The String to use. </param>
-        /// <param name="p1"> The String to use. </param>
+        /// <param name="p2"> The string to use. </param>
+        /// <param name="p1"> The string to use. </param>
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="p2"/>, <paramref name="p1"/> or <paramref name="content"/> is null. </exception>
@@ -945,8 +945,8 @@ namespace FirstTestTypeSpec
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="p2"> The String to use. </param>
-        /// <param name="p1"> The String to use. </param>
+        /// <param name="p2"> The string to use. </param>
+        /// <param name="p1"> The string to use. </param>
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="p2"/>, <paramref name="p1"/> or <paramref name="content"/> is null. </exception>
@@ -1657,11 +1657,11 @@ namespace FirstTestTypeSpec
             uri.Reset(_endpoint);
             uri.AppendPath("/hello", false);
             uri.AppendQuery("queryParameter", queryParameter, true);
+            uri.AppendQuery("api-version", _apiVersion, true);
             if (optionalQuery != null)
             {
                 uri.AppendQuery("optionalQuery", optionalQuery, true);
             }
-            uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("head-parameter", headParameter);
             request.Headers.Add("Accept", "application/json");
