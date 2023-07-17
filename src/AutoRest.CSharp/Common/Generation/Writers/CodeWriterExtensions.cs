@@ -189,9 +189,6 @@ namespace AutoRest.CSharp.Generation.Writers
                     .AppendRawIf("new ", methodBase.Modifiers.HasFlag(New))
                     .AppendRawIf("async ", methodBase.Modifiers.HasFlag(Async));
 
-                // SA1206: 'new' should be after static
-                writer.AppendRawIf("new ", methodBase.Modifiers.HasFlag(New));
-
                 if (method.ReturnType != null)
                 {
                     writer.Append($"{method.ReturnType} ");

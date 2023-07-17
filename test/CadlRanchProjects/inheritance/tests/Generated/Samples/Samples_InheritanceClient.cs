@@ -6,13 +6,10 @@
 #nullable disable
 
 using System;
-using System.Collections.Generic;
-using System.IO;
 using System.Text.Json;
 using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
-using Azure.Identity;
 using NUnit.Framework;
 using _Type.Model.Inheritance.Models;
 
@@ -67,7 +64,7 @@ namespace _Type.Model.Inheritance.Samples
                 name = "<name>",
             };
 
-            Response response = await client.PostValidAsync(RequestContent.Create(data));
+            Response response = await client.PostValidAsync(RequestContent.Create(data)).ConfigureAwait(false);
             Console.WriteLine(response.Status);
         }
 
@@ -84,7 +81,7 @@ namespace _Type.Model.Inheritance.Samples
                 name = "<name>",
             };
 
-            Response response = await client.PostValidAsync(RequestContent.Create(data));
+            Response response = await client.PostValidAsync(RequestContent.Create(data)).ConfigureAwait(false);
             Console.WriteLine(response.Status);
         }
 
@@ -95,7 +92,7 @@ namespace _Type.Model.Inheritance.Samples
             var client = new InheritanceClient();
 
             var input = new Siamese("<name>", 1234, true);
-            var result = await client.PostValidAsync(input);
+            var result = await client.PostValidAsync(input).ConfigureAwait(false);
         }
 
         [Test]
@@ -132,7 +129,7 @@ namespace _Type.Model.Inheritance.Samples
         {
             var client = new InheritanceClient();
 
-            Response response = await client.GetValidAsync(new RequestContext());
+            Response response = await client.GetValidAsync(new RequestContext()).ConfigureAwait(false);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("smart").ToString());
@@ -146,7 +143,7 @@ namespace _Type.Model.Inheritance.Samples
         {
             var client = new InheritanceClient();
 
-            Response response = await client.GetValidAsync(new RequestContext());
+            Response response = await client.GetValidAsync(new RequestContext()).ConfigureAwait(false);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("smart").ToString());
@@ -160,7 +157,7 @@ namespace _Type.Model.Inheritance.Samples
         {
             var client = new InheritanceClient();
 
-            var result = await client.GetValidAsync();
+            var result = await client.GetValidAsync().ConfigureAwait(false);
         }
 
         [Test]
@@ -218,7 +215,7 @@ namespace _Type.Model.Inheritance.Samples
                 name = "<name>",
             };
 
-            Response response = await client.PutValidAsync(RequestContent.Create(data));
+            Response response = await client.PutValidAsync(RequestContent.Create(data)).ConfigureAwait(false);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("smart").ToString());
@@ -239,7 +236,7 @@ namespace _Type.Model.Inheritance.Samples
                 name = "<name>",
             };
 
-            Response response = await client.PutValidAsync(RequestContent.Create(data));
+            Response response = await client.PutValidAsync(RequestContent.Create(data)).ConfigureAwait(false);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("smart").ToString());
@@ -254,7 +251,7 @@ namespace _Type.Model.Inheritance.Samples
             var client = new InheritanceClient();
 
             var input = new Siamese("<name>", 1234, true);
-            var result = await client.PutValidAsync(input);
+            var result = await client.PutValidAsync(input).ConfigureAwait(false);
         }
 
         [Test]
@@ -287,7 +284,7 @@ namespace _Type.Model.Inheritance.Samples
         {
             var client = new InheritanceClient();
 
-            Response response = await client.GetDuplicateAsync(new RequestContext());
+            Response response = await client.GetDuplicateAsync(new RequestContext()).ConfigureAwait(false);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("kind").ToString());
@@ -299,7 +296,7 @@ namespace _Type.Model.Inheritance.Samples
         {
             var client = new InheritanceClient();
 
-            Response response = await client.GetDuplicateAsync(new RequestContext());
+            Response response = await client.GetDuplicateAsync(new RequestContext()).ConfigureAwait(false);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("kind").ToString());
@@ -311,7 +308,7 @@ namespace _Type.Model.Inheritance.Samples
         {
             var client = new InheritanceClient();
 
-            var result = await client.GetDuplicateAsync();
+            var result = await client.GetDuplicateAsync().ConfigureAwait(false);
         }
 
         [Test]
@@ -346,7 +343,7 @@ namespace _Type.Model.Inheritance.Samples
         {
             var client = new InheritanceClient();
 
-            Response response = await client.GetModelAsync(new RequestContext());
+            Response response = await client.GetModelAsync(new RequestContext()).ConfigureAwait(false);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("kind").ToString());
@@ -359,7 +356,7 @@ namespace _Type.Model.Inheritance.Samples
         {
             var client = new InheritanceClient();
 
-            Response response = await client.GetModelAsync(new RequestContext());
+            Response response = await client.GetModelAsync(new RequestContext()).ConfigureAwait(false);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("kind").ToString());
@@ -372,7 +369,7 @@ namespace _Type.Model.Inheritance.Samples
         {
             var client = new InheritanceClient();
 
-            var result = await client.GetModelAsync();
+            var result = await client.GetModelAsync().ConfigureAwait(false);
         }
 
         [Test]
@@ -383,7 +380,7 @@ namespace _Type.Model.Inheritance.Samples
 
             var data = new
             {
-                kind = "",
+                kind = "<kind>",
                 age = 1234,
             };
 
@@ -399,7 +396,7 @@ namespace _Type.Model.Inheritance.Samples
 
             var data = new
             {
-                kind = "",
+                kind = "<kind>",
                 age = 1234,
             };
 
@@ -415,11 +412,11 @@ namespace _Type.Model.Inheritance.Samples
 
             var data = new
             {
-                kind = "",
+                kind = "<kind>",
                 age = 1234,
             };
 
-            Response response = await client.PutModelAsync(RequestContent.Create(data));
+            Response response = await client.PutModelAsync(RequestContent.Create(data)).ConfigureAwait(false);
             Console.WriteLine(response.Status);
         }
 
@@ -431,11 +428,11 @@ namespace _Type.Model.Inheritance.Samples
 
             var data = new
             {
-                kind = "",
+                kind = "<kind>",
                 age = 1234,
             };
 
-            Response response = await client.PutModelAsync(RequestContent.Create(data));
+            Response response = await client.PutModelAsync(RequestContent.Create(data)).ConfigureAwait(false);
             Console.WriteLine(response.Status);
         }
 
@@ -446,7 +443,7 @@ namespace _Type.Model.Inheritance.Samples
             var client = new InheritanceClient();
 
             var input = new Shark(1234);
-            var result = await client.PutModelAsync(input);
+            var result = await client.PutModelAsync(input).ConfigureAwait(false);
         }
 
         [Test]
@@ -481,7 +478,7 @@ namespace _Type.Model.Inheritance.Samples
         {
             var client = new InheritanceClient();
 
-            Response response = await client.GetRecursiveModelAsync(new RequestContext());
+            Response response = await client.GetRecursiveModelAsync(new RequestContext()).ConfigureAwait(false);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("kind").ToString());
@@ -494,7 +491,7 @@ namespace _Type.Model.Inheritance.Samples
         {
             var client = new InheritanceClient();
 
-            Response response = await client.GetRecursiveModelAsync(new RequestContext());
+            Response response = await client.GetRecursiveModelAsync(new RequestContext()).ConfigureAwait(false);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("kind").ToString());
@@ -507,7 +504,7 @@ namespace _Type.Model.Inheritance.Samples
         {
             var client = new InheritanceClient();
 
-            var result = await client.GetRecursiveModelAsync();
+            var result = await client.GetRecursiveModelAsync().ConfigureAwait(false);
         }
 
         [Test]
@@ -518,7 +515,7 @@ namespace _Type.Model.Inheritance.Samples
 
             var data = new
             {
-                kind = "",
+                kind = "<kind>",
                 age = 1234,
             };
 
@@ -534,7 +531,7 @@ namespace _Type.Model.Inheritance.Samples
 
             var data = new
             {
-                kind = "",
+                kind = "<kind>",
                 age = 1234,
             };
 
@@ -550,11 +547,11 @@ namespace _Type.Model.Inheritance.Samples
 
             var data = new
             {
-                kind = "",
+                kind = "<kind>",
                 age = 1234,
             };
 
-            Response response = await client.PutRecursiveModelAsync(RequestContent.Create(data));
+            Response response = await client.PutRecursiveModelAsync(RequestContent.Create(data)).ConfigureAwait(false);
             Console.WriteLine(response.Status);
         }
 
@@ -566,11 +563,11 @@ namespace _Type.Model.Inheritance.Samples
 
             var data = new
             {
-                kind = "",
+                kind = "<kind>",
                 age = 1234,
             };
 
-            Response response = await client.PutRecursiveModelAsync(RequestContent.Create(data));
+            Response response = await client.PutRecursiveModelAsync(RequestContent.Create(data)).ConfigureAwait(false);
             Console.WriteLine(response.Status);
         }
 
@@ -581,7 +578,7 @@ namespace _Type.Model.Inheritance.Samples
             var client = new InheritanceClient();
 
             var input = new Shark(1234);
-            var result = await client.PutRecursiveModelAsync(input);
+            var result = await client.PutRecursiveModelAsync(input).ConfigureAwait(false);
         }
 
         [Test]
@@ -616,7 +613,7 @@ namespace _Type.Model.Inheritance.Samples
         {
             var client = new InheritanceClient();
 
-            Response response = await client.GetMissingDiscriminatorAsync(new RequestContext());
+            Response response = await client.GetMissingDiscriminatorAsync(new RequestContext()).ConfigureAwait(false);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("kind").ToString());
@@ -629,7 +626,7 @@ namespace _Type.Model.Inheritance.Samples
         {
             var client = new InheritanceClient();
 
-            Response response = await client.GetMissingDiscriminatorAsync(new RequestContext());
+            Response response = await client.GetMissingDiscriminatorAsync(new RequestContext()).ConfigureAwait(false);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("kind").ToString());
@@ -642,7 +639,7 @@ namespace _Type.Model.Inheritance.Samples
         {
             var client = new InheritanceClient();
 
-            var result = await client.GetMissingDiscriminatorAsync();
+            var result = await client.GetMissingDiscriminatorAsync().ConfigureAwait(false);
         }
 
         [Test]
@@ -677,7 +674,7 @@ namespace _Type.Model.Inheritance.Samples
         {
             var client = new InheritanceClient();
 
-            Response response = await client.GetWrongDiscriminatorAsync(new RequestContext());
+            Response response = await client.GetWrongDiscriminatorAsync(new RequestContext()).ConfigureAwait(false);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("kind").ToString());
@@ -690,7 +687,7 @@ namespace _Type.Model.Inheritance.Samples
         {
             var client = new InheritanceClient();
 
-            Response response = await client.GetWrongDiscriminatorAsync(new RequestContext());
+            Response response = await client.GetWrongDiscriminatorAsync(new RequestContext()).ConfigureAwait(false);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("kind").ToString());
@@ -703,7 +700,7 @@ namespace _Type.Model.Inheritance.Samples
         {
             var client = new InheritanceClient();
 
-            var result = await client.GetWrongDiscriminatorAsync();
+            var result = await client.GetWrongDiscriminatorAsync().ConfigureAwait(false);
         }
     }
 }
