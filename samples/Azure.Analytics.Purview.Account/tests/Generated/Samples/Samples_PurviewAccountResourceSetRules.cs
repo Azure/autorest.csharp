@@ -6,13 +6,9 @@
 #nullable disable
 
 using System;
-using System.Collections.Generic;
-using System.IO;
 using System.Text.Json;
 using System.Threading.Tasks;
-using Azure;
 using Azure.Core;
-using Azure.Identity;
 using NUnit.Framework;
 
 namespace Azure.Analytics.Purview.Account.Samples
@@ -23,7 +19,7 @@ namespace Azure.Analytics.Purview.Account.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_GetResourceSetRule()
         {
-            var credential = new DefaultAzureCredential();
+            var credential = new Azure.Identity.DefaultAzureCredential();
             var endpoint = new Uri("<https://my-service.azure.com>");
             var client = new PurviewAccountsClient(endpoint, credential).GetResourceSetRulesClient();
 
@@ -37,7 +33,7 @@ namespace Azure.Analytics.Purview.Account.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_GetResourceSetRule_AllParameters()
         {
-            var credential = new DefaultAzureCredential();
+            var credential = new Azure.Identity.DefaultAzureCredential();
             var endpoint = new Uri("<https://my-service.azure.com>");
             var client = new PurviewAccountsClient(endpoint, credential).GetResourceSetRulesClient();
 
@@ -135,11 +131,11 @@ namespace Azure.Analytics.Purview.Account.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_GetResourceSetRule_Async()
         {
-            var credential = new DefaultAzureCredential();
+            var credential = new Azure.Identity.DefaultAzureCredential();
             var endpoint = new Uri("<https://my-service.azure.com>");
             var client = new PurviewAccountsClient(endpoint, credential).GetResourceSetRulesClient();
 
-            Response response = await client.GetResourceSetRuleAsync(new RequestContext());
+            Response response = await client.GetResourceSetRuleAsync(new RequestContext()).ConfigureAwait(false);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());
@@ -149,11 +145,11 @@ namespace Azure.Analytics.Purview.Account.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_GetResourceSetRule_AllParameters_Async()
         {
-            var credential = new DefaultAzureCredential();
+            var credential = new Azure.Identity.DefaultAzureCredential();
             var endpoint = new Uri("<https://my-service.azure.com>");
             var client = new PurviewAccountsClient(endpoint, credential).GetResourceSetRulesClient();
 
-            Response response = await client.GetResourceSetRuleAsync(new RequestContext());
+            Response response = await client.GetResourceSetRuleAsync(new RequestContext()).ConfigureAwait(false);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("advancedResourceSet").GetProperty("modifiedAt").ToString());
@@ -247,7 +243,7 @@ namespace Azure.Analytics.Purview.Account.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_CreateOrUpdateResourceSetRule()
         {
-            var credential = new DefaultAzureCredential();
+            var credential = new Azure.Identity.DefaultAzureCredential();
             var endpoint = new Uri("<https://my-service.azure.com>");
             var client = new PurviewAccountsClient(endpoint, credential).GetResourceSetRulesClient();
 
@@ -263,7 +259,7 @@ namespace Azure.Analytics.Purview.Account.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_CreateOrUpdateResourceSetRule_AllParameters()
         {
-            var credential = new DefaultAzureCredential();
+            var credential = new Azure.Identity.DefaultAzureCredential();
             var endpoint = new Uri("<https://my-service.azure.com>");
             var client = new PurviewAccountsClient(endpoint, credential).GetResourceSetRulesClient();
 
@@ -271,7 +267,7 @@ namespace Azure.Analytics.Purview.Account.Samples
             {
                 advancedResourceSet = new
                 {
-                    modifiedAt = "2022-05-10T18:57:31.2311892Z",
+                    modifiedAt = "2023-07-17T01:58:28.0848681Z",
                     resourceSetProcessing = "Default",
                 },
                 pathPatternConfig = new
@@ -326,7 +322,7 @@ namespace Azure.Analytics.Purview.Account.Samples
                     regexStr = "<regexStr>",
                 },
                 replaceWith = "<replaceWith>",
-                version = 123.45d,
+                version = 3.14d,
             }
         },
                     regexReplacers = new[] {
@@ -465,13 +461,13 @@ namespace Azure.Analytics.Purview.Account.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_CreateOrUpdateResourceSetRule_Async()
         {
-            var credential = new DefaultAzureCredential();
+            var credential = new Azure.Identity.DefaultAzureCredential();
             var endpoint = new Uri("<https://my-service.azure.com>");
             var client = new PurviewAccountsClient(endpoint, credential).GetResourceSetRulesClient();
 
             var data = new { };
 
-            Response response = await client.CreateOrUpdateResourceSetRuleAsync(RequestContent.Create(data));
+            Response response = await client.CreateOrUpdateResourceSetRuleAsync(RequestContent.Create(data)).ConfigureAwait(false);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());
@@ -481,7 +477,7 @@ namespace Azure.Analytics.Purview.Account.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_CreateOrUpdateResourceSetRule_AllParameters_Async()
         {
-            var credential = new DefaultAzureCredential();
+            var credential = new Azure.Identity.DefaultAzureCredential();
             var endpoint = new Uri("<https://my-service.azure.com>");
             var client = new PurviewAccountsClient(endpoint, credential).GetResourceSetRulesClient();
 
@@ -489,7 +485,7 @@ namespace Azure.Analytics.Purview.Account.Samples
             {
                 advancedResourceSet = new
                 {
-                    modifiedAt = "2022-05-10T18:57:31.2311892Z",
+                    modifiedAt = "2023-07-17T01:58:28.0895085Z",
                     resourceSetProcessing = "Default",
                 },
                 pathPatternConfig = new
@@ -544,7 +540,7 @@ namespace Azure.Analytics.Purview.Account.Samples
                     regexStr = "<regexStr>",
                 },
                 replaceWith = "<replaceWith>",
-                version = 123.45d,
+                version = 3.14d,
             }
         },
                     regexReplacers = new[] {
@@ -589,7 +585,7 @@ namespace Azure.Analytics.Purview.Account.Samples
                 },
             };
 
-            Response response = await client.CreateOrUpdateResourceSetRuleAsync(RequestContent.Create(data));
+            Response response = await client.CreateOrUpdateResourceSetRuleAsync(RequestContent.Create(data)).ConfigureAwait(false);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("advancedResourceSet").GetProperty("modifiedAt").ToString());
@@ -683,7 +679,7 @@ namespace Azure.Analytics.Purview.Account.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_DeleteResourceSetRule()
         {
-            var credential = new DefaultAzureCredential();
+            var credential = new Azure.Identity.DefaultAzureCredential();
             var endpoint = new Uri("<https://my-service.azure.com>");
             var client = new PurviewAccountsClient(endpoint, credential).GetResourceSetRulesClient();
 
@@ -695,7 +691,7 @@ namespace Azure.Analytics.Purview.Account.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_DeleteResourceSetRule_AllParameters()
         {
-            var credential = new DefaultAzureCredential();
+            var credential = new Azure.Identity.DefaultAzureCredential();
             var endpoint = new Uri("<https://my-service.azure.com>");
             var client = new PurviewAccountsClient(endpoint, credential).GetResourceSetRulesClient();
 
@@ -707,11 +703,11 @@ namespace Azure.Analytics.Purview.Account.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_DeleteResourceSetRule_Async()
         {
-            var credential = new DefaultAzureCredential();
+            var credential = new Azure.Identity.DefaultAzureCredential();
             var endpoint = new Uri("<https://my-service.azure.com>");
             var client = new PurviewAccountsClient(endpoint, credential).GetResourceSetRulesClient();
 
-            Response response = await client.DeleteResourceSetRuleAsync();
+            Response response = await client.DeleteResourceSetRuleAsync().ConfigureAwait(false);
             Console.WriteLine(response.Status);
         }
 
@@ -719,11 +715,11 @@ namespace Azure.Analytics.Purview.Account.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_DeleteResourceSetRule_AllParameters_Async()
         {
-            var credential = new DefaultAzureCredential();
+            var credential = new Azure.Identity.DefaultAzureCredential();
             var endpoint = new Uri("<https://my-service.azure.com>");
             var client = new PurviewAccountsClient(endpoint, credential).GetResourceSetRulesClient();
 
-            Response response = await client.DeleteResourceSetRuleAsync();
+            Response response = await client.DeleteResourceSetRuleAsync().ConfigureAwait(false);
             Console.WriteLine(response.Status);
         }
     }

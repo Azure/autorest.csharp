@@ -6,13 +6,9 @@
 #nullable disable
 
 using System;
-using System.Collections.Generic;
-using System.IO;
 using System.Text.Json;
 using System.Threading.Tasks;
-using Azure;
 using Azure.Core;
-using Azure.Identity;
 using NUnit.Framework;
 
 namespace Azure.Analytics.Purview.Account.Samples
@@ -23,7 +19,7 @@ namespace Azure.Analytics.Purview.Account.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_GetAccountProperties()
         {
-            var credential = new DefaultAzureCredential();
+            var credential = new Azure.Identity.DefaultAzureCredential();
             var endpoint = new Uri("<https://my-service.azure.com>");
             var client = new PurviewAccountsClient(endpoint, credential);
 
@@ -37,7 +33,7 @@ namespace Azure.Analytics.Purview.Account.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_GetAccountProperties_AllParameters()
         {
-            var credential = new DefaultAzureCredential();
+            var credential = new Azure.Identity.DefaultAzureCredential();
             var endpoint = new Uri("<https://my-service.azure.com>");
             var client = new PurviewAccountsClient(endpoint, credential);
 
@@ -88,11 +84,11 @@ namespace Azure.Analytics.Purview.Account.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_GetAccountProperties_Async()
         {
-            var credential = new DefaultAzureCredential();
+            var credential = new Azure.Identity.DefaultAzureCredential();
             var endpoint = new Uri("<https://my-service.azure.com>");
             var client = new PurviewAccountsClient(endpoint, credential);
 
-            Response response = await client.GetAccountPropertiesAsync(new RequestContext());
+            Response response = await client.GetAccountPropertiesAsync(new RequestContext()).ConfigureAwait(false);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());
@@ -102,11 +98,11 @@ namespace Azure.Analytics.Purview.Account.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_GetAccountProperties_AllParameters_Async()
         {
-            var credential = new DefaultAzureCredential();
+            var credential = new Azure.Identity.DefaultAzureCredential();
             var endpoint = new Uri("<https://my-service.azure.com>");
             var client = new PurviewAccountsClient(endpoint, credential);
 
-            Response response = await client.GetAccountPropertiesAsync(new RequestContext());
+            Response response = await client.GetAccountPropertiesAsync(new RequestContext()).ConfigureAwait(false);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("id").ToString());
@@ -153,7 +149,7 @@ namespace Azure.Analytics.Purview.Account.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_UpdateAccountProperties()
         {
-            var credential = new DefaultAzureCredential();
+            var credential = new Azure.Identity.DefaultAzureCredential();
             var endpoint = new Uri("<https://my-service.azure.com>");
             var client = new PurviewAccountsClient(endpoint, credential);
 
@@ -169,7 +165,7 @@ namespace Azure.Analytics.Purview.Account.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_UpdateAccountProperties_AllParameters()
         {
-            var credential = new DefaultAzureCredential();
+            var credential = new Azure.Identity.DefaultAzureCredential();
             var endpoint = new Uri("<https://my-service.azure.com>");
             var client = new PurviewAccountsClient(endpoint, credential);
 
@@ -225,13 +221,13 @@ namespace Azure.Analytics.Purview.Account.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_UpdateAccountProperties_Async()
         {
-            var credential = new DefaultAzureCredential();
+            var credential = new Azure.Identity.DefaultAzureCredential();
             var endpoint = new Uri("<https://my-service.azure.com>");
             var client = new PurviewAccountsClient(endpoint, credential);
 
             var data = new { };
 
-            Response response = await client.UpdateAccountPropertiesAsync(RequestContent.Create(data));
+            Response response = await client.UpdateAccountPropertiesAsync(RequestContent.Create(data)).ConfigureAwait(false);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());
@@ -241,7 +237,7 @@ namespace Azure.Analytics.Purview.Account.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_UpdateAccountProperties_AllParameters_Async()
         {
-            var credential = new DefaultAzureCredential();
+            var credential = new Azure.Identity.DefaultAzureCredential();
             var endpoint = new Uri("<https://my-service.azure.com>");
             var client = new PurviewAccountsClient(endpoint, credential);
 
@@ -250,7 +246,7 @@ namespace Azure.Analytics.Purview.Account.Samples
                 friendlyName = "<friendlyName>",
             };
 
-            Response response = await client.UpdateAccountPropertiesAsync(RequestContent.Create(data));
+            Response response = await client.UpdateAccountPropertiesAsync(RequestContent.Create(data)).ConfigureAwait(false);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("id").ToString());
@@ -297,7 +293,7 @@ namespace Azure.Analytics.Purview.Account.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_GetAccessKeys()
         {
-            var credential = new DefaultAzureCredential();
+            var credential = new Azure.Identity.DefaultAzureCredential();
             var endpoint = new Uri("<https://my-service.azure.com>");
             var client = new PurviewAccountsClient(endpoint, credential);
 
@@ -311,7 +307,7 @@ namespace Azure.Analytics.Purview.Account.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_GetAccessKeys_AllParameters()
         {
-            var credential = new DefaultAzureCredential();
+            var credential = new Azure.Identity.DefaultAzureCredential();
             var endpoint = new Uri("<https://my-service.azure.com>");
             var client = new PurviewAccountsClient(endpoint, credential);
 
@@ -326,11 +322,11 @@ namespace Azure.Analytics.Purview.Account.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_GetAccessKeys_Async()
         {
-            var credential = new DefaultAzureCredential();
+            var credential = new Azure.Identity.DefaultAzureCredential();
             var endpoint = new Uri("<https://my-service.azure.com>");
             var client = new PurviewAccountsClient(endpoint, credential);
 
-            Response response = await client.GetAccessKeysAsync(new RequestContext());
+            Response response = await client.GetAccessKeysAsync(new RequestContext()).ConfigureAwait(false);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());
@@ -340,11 +336,11 @@ namespace Azure.Analytics.Purview.Account.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_GetAccessKeys_AllParameters_Async()
         {
-            var credential = new DefaultAzureCredential();
+            var credential = new Azure.Identity.DefaultAzureCredential();
             var endpoint = new Uri("<https://my-service.azure.com>");
             var client = new PurviewAccountsClient(endpoint, credential);
 
-            Response response = await client.GetAccessKeysAsync(new RequestContext());
+            Response response = await client.GetAccessKeysAsync(new RequestContext()).ConfigureAwait(false);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("atlasKafkaPrimaryEndpoint").ToString());
@@ -355,7 +351,7 @@ namespace Azure.Analytics.Purview.Account.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_RegenerateAccessKey()
         {
-            var credential = new DefaultAzureCredential();
+            var credential = new Azure.Identity.DefaultAzureCredential();
             var endpoint = new Uri("<https://my-service.azure.com>");
             var client = new PurviewAccountsClient(endpoint, credential);
 
@@ -371,7 +367,7 @@ namespace Azure.Analytics.Purview.Account.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_RegenerateAccessKey_AllParameters()
         {
-            var credential = new DefaultAzureCredential();
+            var credential = new Azure.Identity.DefaultAzureCredential();
             var endpoint = new Uri("<https://my-service.azure.com>");
             var client = new PurviewAccountsClient(endpoint, credential);
 
@@ -391,13 +387,13 @@ namespace Azure.Analytics.Purview.Account.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_RegenerateAccessKey_Async()
         {
-            var credential = new DefaultAzureCredential();
+            var credential = new Azure.Identity.DefaultAzureCredential();
             var endpoint = new Uri("<https://my-service.azure.com>");
             var client = new PurviewAccountsClient(endpoint, credential);
 
             var data = new { };
 
-            Response response = await client.RegenerateAccessKeyAsync(RequestContent.Create(data));
+            Response response = await client.RegenerateAccessKeyAsync(RequestContent.Create(data)).ConfigureAwait(false);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());
@@ -407,7 +403,7 @@ namespace Azure.Analytics.Purview.Account.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_RegenerateAccessKey_AllParameters_Async()
         {
-            var credential = new DefaultAzureCredential();
+            var credential = new Azure.Identity.DefaultAzureCredential();
             var endpoint = new Uri("<https://my-service.azure.com>");
             var client = new PurviewAccountsClient(endpoint, credential);
 
@@ -416,7 +412,7 @@ namespace Azure.Analytics.Purview.Account.Samples
                 keyType = "PrimaryAtlasKafkaKey",
             };
 
-            Response response = await client.RegenerateAccessKeyAsync(RequestContent.Create(data));
+            Response response = await client.RegenerateAccessKeyAsync(RequestContent.Create(data)).ConfigureAwait(false);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("atlasKafkaPrimaryEndpoint").ToString());
@@ -427,7 +423,7 @@ namespace Azure.Analytics.Purview.Account.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_GetResourceSetRules()
         {
-            var credential = new DefaultAzureCredential();
+            var credential = new Azure.Identity.DefaultAzureCredential();
             var endpoint = new Uri("<https://my-service.azure.com>");
             var client = new PurviewAccountsClient(endpoint, credential);
 
@@ -442,7 +438,7 @@ namespace Azure.Analytics.Purview.Account.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_GetResourceSetRules_AllParameters()
         {
-            var credential = new DefaultAzureCredential();
+            var credential = new Azure.Identity.DefaultAzureCredential();
             var endpoint = new Uri("<https://my-service.azure.com>");
             var client = new PurviewAccountsClient(endpoint, credential);
 
@@ -541,7 +537,7 @@ namespace Azure.Analytics.Purview.Account.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_GetResourceSetRules_Async()
         {
-            var credential = new DefaultAzureCredential();
+            var credential = new Azure.Identity.DefaultAzureCredential();
             var endpoint = new Uri("<https://my-service.azure.com>");
             var client = new PurviewAccountsClient(endpoint, credential);
 
@@ -556,7 +552,7 @@ namespace Azure.Analytics.Purview.Account.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_GetResourceSetRules_AllParameters_Async()
         {
-            var credential = new DefaultAzureCredential();
+            var credential = new Azure.Identity.DefaultAzureCredential();
             var endpoint = new Uri("<https://my-service.azure.com>");
             var client = new PurviewAccountsClient(endpoint, credential);
 

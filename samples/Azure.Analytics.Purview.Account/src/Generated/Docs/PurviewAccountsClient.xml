@@ -109,20 +109,20 @@ Console.WriteLine(result.GetProperty("type").ToString());
 <example>
 This sample shows how to call UpdateAccountPropertiesAsync and parse the result.
 <code><![CDATA[
-var credential = new DefaultAzureCredential();
+var credential = new Azure.Identity.DefaultAzureCredential();
 var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new PurviewAccountsClient(endpoint, credential);
 
 var data = new {};
 
-Response response = await client.UpdateAccountPropertiesAsync(RequestContent.Create(data));
+Response response = await client.UpdateAccountPropertiesAsync(RequestContent.Create(data)).ConfigureAwait(false);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.ToString());
 ]]></code>
 This sample shows how to call UpdateAccountPropertiesAsync with all request content, and how to parse the result.
 <code><![CDATA[
-var credential = new DefaultAzureCredential();
+var credential = new Azure.Identity.DefaultAzureCredential();
 var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new PurviewAccountsClient(endpoint, credential);
 
@@ -345,7 +345,7 @@ Console.WriteLine(result.GetProperty("atlasKafkaSecondaryEndpoint").ToString());
 <example>
 This sample shows how to call GetResourceSetRulesAsync with required parameters and parse the result.
 <code><![CDATA[
-var credential = new DefaultAzureCredential();
+var credential = new Azure.Identity.DefaultAzureCredential();
 var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new PurviewAccountsClient(endpoint, credential);
 
@@ -445,7 +445,7 @@ await foreach (var item in client.GetResourceSetRulesAsync("<skipToken>", new Re
 <example>
 This sample shows how to call GetResourceSetRules with required parameters and parse the result.
 <code><![CDATA[
-var credential = new DefaultAzureCredential();
+var credential = new Azure.Identity.DefaultAzureCredential();
 var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new PurviewAccountsClient(endpoint, credential);
 
