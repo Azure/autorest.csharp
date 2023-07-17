@@ -53,16 +53,16 @@ namespace AutoRest.CSharp.Output.Models.Types
 
         public override CSharpType ResolveEnum(InputEnumType enumType)
         {
-            if (_enums.TryGetValue(enumType, out var typeProvider))
+            if (_enums.TryGetValue(enumType with {IsNullable = false}, out var typeProvider))
             {
-                return typeProvider.Type;
+                return typeProvider.Type.WithNullable(enumType.IsNullable);
             }
 
             throw new InvalidOperationException($"No {nameof(EnumType)} has been created for `{enumType.Name}` {nameof(InputEnumType)}.");
         }
 
         public override CSharpType ResolveModel(InputModelType model)
-            => _models.TryGetValue(model, out var modelTypeProvider) ? modelTypeProvider.Type : new CSharpType(typeof(object), model.IsNullable);
+            => _models.TryGetValue(model with {IsNullable = false}, out var modelTypeProvider) ? modelTypeProvider.Type.WithNullable(model.IsNullable) : new CSharpType(typeof(object), model.IsNullable);
 
         public override CSharpType? FindTypeByName(string originalName) => _privateAllModels.Where(m => m.Declaration.Name == originalName)?.Select(m => m.Type).FirstOrDefault();
 

@@ -835,9 +835,13 @@ namespace AutoRest.CSharp.Generation.Writers
             var keyType = serialization.Type.Arguments[0];  // IDictionary<K, V> is guaranteed to have two generic parameters
             var valueType = serialization.Type.Arguments[1];
 
-            var keyExpr = keyType.Equals(typeof(int)) ? Int(0) : Literal("key"); //handle dictionary with int key
             var valueExpr = ComposeProtocolCSharpTypeInstance(allProperties, serialization.ValueSerialization, null, visitedModels);
-            return New.Dictionary(keyType, valueType, (keyExpr, valueExpr));
+            if (keyType.Equals(typeof(int))) //handle dictionary with int key
+            {
+                return New.Dictionary(keyType, valueType, (Int(0), valueExpr));
+            }
+
+            return New.Anonymous("key", valueExpr);
         }
 
         private static bool IsVisitedModel(JsonSerialization? serialization, IReadOnlySet<ObjectType> visitedModels) => serialization switch
