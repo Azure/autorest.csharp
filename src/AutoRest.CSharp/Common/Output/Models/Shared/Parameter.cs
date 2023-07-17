@@ -85,10 +85,10 @@ namespace AutoRest.CSharp.Output.Models.Shared
             { DefaultValue: not null } => BuilderHelpers.ParseConstant(operationParameter.DefaultValue.Value, typeFactory.CreateType(operationParameter.DefaultValue.Type)),
             { NameInRequest: var nameInRequest } when nameInRequest.Equals(RequestHeader.RepeatabilityRequestId, StringComparison.OrdinalIgnoreCase) =>
                 // Guid.NewGuid()
-                Constant.ExpressionOf($"{nameof(Guid)}.{nameof(Guid.NewGuid)}()", new CSharpType(typeof(string))),
+                Constant.FromExpression($"{nameof(Guid)}.{nameof(Guid.NewGuid)}()", new CSharpType(typeof(string))),
             { NameInRequest: var nameInRequest } when nameInRequest.Equals(RequestHeader.RepeatabilityFirstSent, StringComparison.OrdinalIgnoreCase) =>
                 // DateTimeOffset.Now
-                Constant.ExpressionOf($"{nameof(DateTimeOffset)}.{nameof(DateTimeOffset.Now)}", new CSharpType(typeof(DateTimeOffset))),
+                Constant.FromExpression($"{nameof(DateTimeOffset)}.{nameof(DateTimeOffset.Now)}", new CSharpType(typeof(DateTimeOffset))),
             _ => (Constant?)null,
         };
 
