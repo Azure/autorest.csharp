@@ -178,8 +178,9 @@ This sample shows how to call UpdateAsync with all parameters and request conten
 var credential = new AzureKeyCredential("<key>");
 var client = new BodyAndPathClient(credential);
 
-var data = new {
-    invalid_int_name = 1234,
+var data = new Dictionary<string, object>
+{
+    ["invalid-int-name"] = 1234
 };
 
 Response response = await client.UpdateAsync("<item3>", "<item2>", "<item1>", "<item4>", RequestContent.Create(data), "<item5>").ConfigureAwait(false);
@@ -204,8 +205,9 @@ This sample shows how to call Update with all parameters and request content.
 var credential = new AzureKeyCredential("<key>");
 var client = new BodyAndPathClient(credential);
 
-var data = new {
-    invalid_int_name = 1234,
+var data = new Dictionary<string, object>
+{
+    ["invalid-int-name"] = 1234
 };
 
 Response response = client.Update("<item3>", "<item2>", "<item1>", "<item4>", RequestContent.Create(data), "<item5>");

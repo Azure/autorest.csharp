@@ -735,6 +735,13 @@ namespace AutoRest.CSharp.Generation.Writers
                     return InvokeFileOpenRead(Literal("<filePath>"));
                 }
 
+                if (type == typeof(JsonElement))
+                {
+                    return serializationFormat.HasValue
+                        ? Literal("{}")
+                        : Default;
+                }
+
                 if (type.GetConstructor(Type.EmptyTypes) is not null)
                 {
                     return New.Instance(type);

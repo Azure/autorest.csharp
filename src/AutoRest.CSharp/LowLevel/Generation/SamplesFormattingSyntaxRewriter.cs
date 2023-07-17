@@ -60,10 +60,19 @@ namespace AutoRest.CSharp.Generation.Writers
 
         public override SyntaxNode? VisitObjectCreationExpression(ObjectCreationExpressionSyntax node)
         {
+            if (IsSingleLine(node))
+            {
+                return node;
+            }
+
             var parentLeadingTrivia = GetParentLeadingTrivia(node);
 
-            if (node.Initializer is { } initializer)
+            if (node.Initializer is {Expressions.Count: > 0} initializer)
             {
+                node = node.ArgumentList is {} argumentList
+                    ? node.WithArgumentList(argumentList.WithTrailingTrivia(SyntaxFactory.CarriageReturnLineFeed))
+                    : node.WithType(node.Type.WithTrailingTrivia(SyntaxFactory.CarriageReturnLineFeed));
+
                 node = node.WithInitializer(FixInitializerBeforeVisit(initializer, parentLeadingTrivia));
             }
 
@@ -105,6 +114,11 @@ namespace AutoRest.CSharp.Generation.Writers
 
         public override SyntaxNode? VisitArrayCreationExpression(ArrayCreationExpressionSyntax node)
         {
+            if (IsSingleLine(node))
+            {
+                return node;
+            }
+
             var parentLeadingTrivia = GetParentLeadingTrivia(node);
 
             if (node.Initializer is { } initializer)
@@ -134,6 +148,13 @@ namespace AutoRest.CSharp.Generation.Writers
             => newInitializer
                 .WithExpressions(SyntaxFactory.SeparatedList<ExpressionSyntax>(FixInitializerTrailingTrivia(newInitializer.Expressions.GetWithSeparators())))
                 .WithCloseBraceToken(FixCloseBraceTrivia(newInitializer.CloseBraceToken, newInitializer.Expressions.Any() ? parentLeadingTrivia : SyntaxTriviaList.Empty));
+
+        private static bool IsSingleLine(SyntaxNode node)
+        {
+            var lines = node.SyntaxTree.GetText().Lines;
+            var fullSpan = node.FullSpan;
+            return lines.GetLinePosition(fullSpan.Start).Line == lines.GetLinePosition(fullSpan.End).Line;
+        }
 
         private static SyntaxTriviaList GetParentLeadingTrivia(SyntaxNode node)
         {
