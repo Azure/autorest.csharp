@@ -17,7 +17,11 @@ namespace AutoRest.CSharp.Common.Output.Models
             => Declare(name, value, d => new FrameworkTypeExpression(responseType, d), out variable);
 
         public static DeclarationStatement Declare(CSharpType responseType, string name, ResponseExpression value, out ResponseExpression variable)
-            => Declare(name, value, d => new ResponseExpression(d), out variable);
+        {
+            var declare = new DeclareVariableStatement(responseType, name, value, out var untypedVariable);
+            variable = new ResponseExpression(untypedVariable);
+            return declare;
+        }
 
         public static DeclarationStatement Declare(RequestContextExpression value, out RequestContextExpression variable)
             => Declare(KnownParameters.RequestContext.Name, value, d => new RequestContextExpression(d), out variable);

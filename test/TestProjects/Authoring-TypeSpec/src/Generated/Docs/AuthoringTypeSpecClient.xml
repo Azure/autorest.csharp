@@ -124,7 +124,7 @@ This sample shows how to call GetProjectAsync with required parameters and parse
 var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new AuthoringTypeSpecClient(endpoint);
 
-Response response = await client.GetProjectAsync("<projectName>");
+Response response = await client.GetProjectAsync("<projectName>").ConfigureAwait(false);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("projectName").ToString());
@@ -172,7 +172,7 @@ This sample shows how to call DeleteAsync with required parameters and parse the
 var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new AuthoringTypeSpecClient(endpoint);
 
-Response response = await client.DeleteAsync("<projectName>");
+Response response = await client.DeleteAsync("<projectName>").ConfigureAwait(false);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("projectName").ToString());
@@ -220,7 +220,7 @@ This sample shows how to call ExportAsync with required parameters.
 var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new AuthoringTypeSpecClient(endpoint);
 
-Response response = await client.ExportAsync("<projectName>", "<projectFileVersion>");
+Response response = await client.ExportAsync("<projectName>", "<projectFileVersion>").ConfigureAwait(false);
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
@@ -244,7 +244,7 @@ This sample shows how to call ImportxAsync with required parameters.
 var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new AuthoringTypeSpecClient(endpoint);
 
-Response response = await client.ImportxAsync("<projectName>");
+Response response = await client.ImportxAsync("<projectName>").ConfigureAwait(false);
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
@@ -272,7 +272,7 @@ var data = new {
     modelLabel = "<modelLabel>",
 };
 
-Response response = await client.TrainAsync("<projectName>", RequestContent.Create(data));
+Response response = await client.TrainAsync("<projectName>", RequestContent.Create(data)).ConfigureAwait(false);
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
@@ -300,7 +300,7 @@ This sample shows how to call GetDeploymentAsync with required parameters and pa
 var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new AuthoringTypeSpecClient(endpoint);
 
-Response response = await client.GetDeploymentAsync("<projectName>", "<deploymentName>");
+Response response = await client.GetDeploymentAsync("<projectName>", "<deploymentName>").ConfigureAwait(false);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("name").ToString());
@@ -330,7 +330,7 @@ var client = new AuthoringTypeSpecClient(endpoint);
 
 var data = new {};
 
-Response response = await client.DeployProjectAsync("<projectName>", "<deploymentName>", RequestContent.Create(data));
+Response response = await client.DeployProjectAsync("<projectName>", "<deploymentName>", RequestContent.Create(data)).ConfigureAwait(false);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("name").ToString());
@@ -360,7 +360,7 @@ This sample shows how to call DeleteDeploymentAsync with required parameters and
 var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new AuthoringTypeSpecClient(endpoint);
 
-Response response = await client.DeleteDeploymentAsync("<projectName>", "<deploymentName>");
+Response response = await client.DeleteDeploymentAsync("<projectName>", "<deploymentName>").ConfigureAwait(false);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("name").ToString());
@@ -393,7 +393,7 @@ var data = new {
     secondDeploymentName = "<secondDeploymentName>",
 };
 
-Response response = await client.SwapDeploymentsAsync("<projectName>", RequestContent.Create(data));
+Response response = await client.SwapDeploymentsAsync("<projectName>", RequestContent.Create(data)).ConfigureAwait(false);
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
@@ -422,7 +422,7 @@ This sample shows how to call GetDeploymentStatusValueAsync with required parame
 var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new AuthoringTypeSpecClient(endpoint);
 
-var result = await client.GetDeploymentStatusValueAsync("<projectName>", "<deploymentName>", "<jobId>");
+var result = await client.GetDeploymentStatusValueAsync("<projectName>", "<deploymentName>", "<jobId>").ConfigureAwait(false);
 ]]></code>
 </example>
     </member>
@@ -444,7 +444,7 @@ This sample shows how to call GetDeploymentStatusAsync with required parameters 
 var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new AuthoringTypeSpecClient(endpoint);
 
-Response response = await client.GetDeploymentStatusAsync("<projectName>", "<deploymentName>", "<jobId>");
+Response response = await client.GetDeploymentStatusAsync("<projectName>", "<deploymentName>", "<jobId>").ConfigureAwait(false);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("jobId").ToString());
@@ -494,7 +494,7 @@ This sample shows how to call GetSwapDeploymentsStatusValueAsync with required p
 var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new AuthoringTypeSpecClient(endpoint);
 
-var result = await client.GetSwapDeploymentsStatusValueAsync("<projectName>", "<deploymentName>", "<jobId>");
+var result = await client.GetSwapDeploymentsStatusValueAsync("<projectName>", "<deploymentName>", "<jobId>").ConfigureAwait(false);
 ]]></code>
 </example>
     </member>
@@ -516,7 +516,7 @@ This sample shows how to call GetSwapDeploymentsStatusAsync with required parame
 var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new AuthoringTypeSpecClient(endpoint);
 
-Response response = await client.GetSwapDeploymentsStatusAsync("<projectName>", "<deploymentName>", "<jobId>");
+Response response = await client.GetSwapDeploymentsStatusAsync("<projectName>", "<deploymentName>", "<jobId>").ConfigureAwait(false);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("jobId").ToString());

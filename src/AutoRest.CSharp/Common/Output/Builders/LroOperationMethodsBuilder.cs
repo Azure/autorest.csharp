@@ -52,8 +52,7 @@ namespace AutoRest.CSharp.Output.Models
             return new InvokeStaticMethodExpression(typeof(ProtocolOperationHelpers), processMessageMethodName, arguments, null, false, async);
         }
 
-        protected override MethodBodyStatement CreateConvenienceMethodBody(string methodName,
-            RestClientMethodParameters parameters, MethodSignature? createNextPageMessageSignature, bool async)
+        protected override MethodBodyStatement CreateConvenienceMethodBody(string methodName, RestClientMethodParameters parameters, MethodSignature? createNextPageMessageSignature, bool async)
             => methodName != ProtocolMethodName
                 ? WrapInDiagnosticScope(methodName, CreateConvenienceMethodLogic(methodName, parameters, async).AsStatement())
                 : CreateConvenienceMethodLogic(methodName, parameters, async).AsStatement();

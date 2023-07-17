@@ -6,14 +6,10 @@
 #nullable disable
 
 using System;
-using System.Collections.Generic;
-using System.IO;
 using System.Text.Json;
 using System.Threading.Tasks;
-using AuthoringTypeSpec.Models;
 using Azure;
 using Azure.Core;
-using Azure.Identity;
 using NUnit.Framework;
 
 namespace AuthoringTypeSpec.Samples
@@ -97,7 +93,7 @@ namespace AuthoringTypeSpec.Samples
                 language = "<language>",
             };
 
-            Response response = await client.CreateOrUpdateAsync("<projectName>", RequestContent.Create(data));
+            Response response = await client.CreateOrUpdateAsync("<projectName>", RequestContent.Create(data)).ConfigureAwait(false);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("projectName").ToString());
@@ -130,7 +126,7 @@ namespace AuthoringTypeSpec.Samples
                 language = "<language>",
             };
 
-            Response response = await client.CreateOrUpdateAsync("<projectName>", RequestContent.Create(data));
+            Response response = await client.CreateOrUpdateAsync("<projectName>", RequestContent.Create(data)).ConfigureAwait(false);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("projectName").ToString());
@@ -196,7 +192,7 @@ namespace AuthoringTypeSpec.Samples
             var endpoint = new Uri("<https://my-service.azure.com>");
             var client = new AuthoringTypeSpecClient(endpoint);
 
-            Response response = await client.GetProjectAsync("<projectName>");
+            Response response = await client.GetProjectAsync("<projectName>").ConfigureAwait(false);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("projectName").ToString());
@@ -216,7 +212,7 @@ namespace AuthoringTypeSpec.Samples
             var endpoint = new Uri("<https://my-service.azure.com>");
             var client = new AuthoringTypeSpecClient(endpoint);
 
-            Response response = await client.GetProjectAsync("<projectName>");
+            Response response = await client.GetProjectAsync("<projectName>").ConfigureAwait(false);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("projectName").ToString());
@@ -282,7 +278,7 @@ namespace AuthoringTypeSpec.Samples
             var endpoint = new Uri("<https://my-service.azure.com>");
             var client = new AuthoringTypeSpecClient(endpoint);
 
-            Response response = await client.DeleteAsync("<projectName>");
+            Response response = await client.DeleteAsync("<projectName>").ConfigureAwait(false);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("projectName").ToString());
@@ -302,7 +298,7 @@ namespace AuthoringTypeSpec.Samples
             var endpoint = new Uri("<https://my-service.azure.com>");
             var client = new AuthoringTypeSpecClient(endpoint);
 
-            Response response = await client.DeleteAsync("<projectName>");
+            Response response = await client.DeleteAsync("<projectName>").ConfigureAwait(false);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("projectName").ToString());
@@ -347,7 +343,7 @@ namespace AuthoringTypeSpec.Samples
             var endpoint = new Uri("<https://my-service.azure.com>");
             var client = new AuthoringTypeSpecClient(endpoint);
 
-            Response response = await client.ExportAsync("<projectName>", "<projectFileVersion>");
+            Response response = await client.ExportAsync("<projectName>", "<projectFileVersion>").ConfigureAwait(false);
             Console.WriteLine(response.Status);
         }
 
@@ -358,7 +354,7 @@ namespace AuthoringTypeSpec.Samples
             var endpoint = new Uri("<https://my-service.azure.com>");
             var client = new AuthoringTypeSpecClient(endpoint);
 
-            Response response = await client.ExportAsync("<projectName>", "<projectFileVersion>");
+            Response response = await client.ExportAsync("<projectName>", "<projectFileVersion>").ConfigureAwait(false);
             Console.WriteLine(response.Status);
         }
 
@@ -391,7 +387,7 @@ namespace AuthoringTypeSpec.Samples
             var endpoint = new Uri("<https://my-service.azure.com>");
             var client = new AuthoringTypeSpecClient(endpoint);
 
-            Response response = await client.ImportxAsync("<projectName>");
+            Response response = await client.ImportxAsync("<projectName>").ConfigureAwait(false);
             Console.WriteLine(response.Status);
         }
 
@@ -402,7 +398,7 @@ namespace AuthoringTypeSpec.Samples
             var endpoint = new Uri("<https://my-service.azure.com>");
             var client = new AuthoringTypeSpecClient(endpoint);
 
-            Response response = await client.ImportxAsync("<projectName>");
+            Response response = await client.ImportxAsync("<projectName>").ConfigureAwait(false);
             Console.WriteLine(response.Status);
         }
 
@@ -450,7 +446,7 @@ namespace AuthoringTypeSpec.Samples
                 modelLabel = "<modelLabel>",
             };
 
-            Response response = await client.TrainAsync("<projectName>", RequestContent.Create(data));
+            Response response = await client.TrainAsync("<projectName>", RequestContent.Create(data)).ConfigureAwait(false);
             Console.WriteLine(response.Status);
         }
 
@@ -466,7 +462,7 @@ namespace AuthoringTypeSpec.Samples
                 modelLabel = "<modelLabel>",
             };
 
-            Response response = await client.TrainAsync("<projectName>", RequestContent.Create(data));
+            Response response = await client.TrainAsync("<projectName>", RequestContent.Create(data)).ConfigureAwait(false);
             Console.WriteLine(response.Status);
         }
 
@@ -503,7 +499,7 @@ namespace AuthoringTypeSpec.Samples
             var endpoint = new Uri("<https://my-service.azure.com>");
             var client = new AuthoringTypeSpecClient(endpoint);
 
-            Response response = await client.GetDeploymentAsync("<projectName>", "<deploymentName>");
+            Response response = await client.GetDeploymentAsync("<projectName>", "<deploymentName>").ConfigureAwait(false);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("name").ToString());
@@ -516,7 +512,7 @@ namespace AuthoringTypeSpec.Samples
             var endpoint = new Uri("<https://my-service.azure.com>");
             var client = new AuthoringTypeSpecClient(endpoint);
 
-            Response response = await client.GetDeploymentAsync("<projectName>", "<deploymentName>");
+            Response response = await client.GetDeploymentAsync("<projectName>", "<deploymentName>").ConfigureAwait(false);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("name").ToString());
@@ -561,7 +557,7 @@ namespace AuthoringTypeSpec.Samples
 
             var data = new { };
 
-            Response response = await client.DeployProjectAsync("<projectName>", "<deploymentName>", RequestContent.Create(data));
+            Response response = await client.DeployProjectAsync("<projectName>", "<deploymentName>", RequestContent.Create(data)).ConfigureAwait(false);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("name").ToString());
@@ -576,7 +572,7 @@ namespace AuthoringTypeSpec.Samples
 
             var data = new { };
 
-            Response response = await client.DeployProjectAsync("<projectName>", "<deploymentName>", RequestContent.Create(data));
+            Response response = await client.DeployProjectAsync("<projectName>", "<deploymentName>", RequestContent.Create(data)).ConfigureAwait(false);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("name").ToString());
@@ -615,7 +611,7 @@ namespace AuthoringTypeSpec.Samples
             var endpoint = new Uri("<https://my-service.azure.com>");
             var client = new AuthoringTypeSpecClient(endpoint);
 
-            Response response = await client.DeleteDeploymentAsync("<projectName>", "<deploymentName>");
+            Response response = await client.DeleteDeploymentAsync("<projectName>", "<deploymentName>").ConfigureAwait(false);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("name").ToString());
@@ -628,7 +624,7 @@ namespace AuthoringTypeSpec.Samples
             var endpoint = new Uri("<https://my-service.azure.com>");
             var client = new AuthoringTypeSpecClient(endpoint);
 
-            Response response = await client.DeleteDeploymentAsync("<projectName>", "<deploymentName>");
+            Response response = await client.DeleteDeploymentAsync("<projectName>", "<deploymentName>").ConfigureAwait(false);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("name").ToString());
@@ -681,7 +677,7 @@ namespace AuthoringTypeSpec.Samples
                 secondDeploymentName = "<secondDeploymentName>",
             };
 
-            Response response = await client.SwapDeploymentsAsync("<projectName>", RequestContent.Create(data));
+            Response response = await client.SwapDeploymentsAsync("<projectName>", RequestContent.Create(data)).ConfigureAwait(false);
             Console.WriteLine(response.Status);
         }
 
@@ -698,7 +694,7 @@ namespace AuthoringTypeSpec.Samples
                 secondDeploymentName = "<secondDeploymentName>",
             };
 
-            Response response = await client.SwapDeploymentsAsync("<projectName>", RequestContent.Create(data));
+            Response response = await client.SwapDeploymentsAsync("<projectName>", RequestContent.Create(data)).ConfigureAwait(false);
             Console.WriteLine(response.Status);
         }
 
@@ -755,7 +751,7 @@ namespace AuthoringTypeSpec.Samples
             var endpoint = new Uri("<https://my-service.azure.com>");
             var client = new AuthoringTypeSpecClient(endpoint);
 
-            Response response = await client.GetDeploymentStatusAsync("<projectName>", "<deploymentName>", "<jobId>");
+            Response response = await client.GetDeploymentStatusAsync("<projectName>", "<deploymentName>", "<jobId>").ConfigureAwait(false);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("jobId").ToString());
@@ -777,7 +773,7 @@ namespace AuthoringTypeSpec.Samples
             var endpoint = new Uri("<https://my-service.azure.com>");
             var client = new AuthoringTypeSpecClient(endpoint);
 
-            Response response = await client.GetDeploymentStatusAsync("<projectName>", "<deploymentName>", "<jobId>");
+            Response response = await client.GetDeploymentStatusAsync("<projectName>", "<deploymentName>", "<jobId>").ConfigureAwait(false);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("jobId").ToString());
@@ -801,7 +797,7 @@ namespace AuthoringTypeSpec.Samples
             var endpoint = new Uri("<https://my-service.azure.com>");
             var client = new AuthoringTypeSpecClient(endpoint);
 
-            var result = await client.GetDeploymentStatusValueAsync("<projectName>", "<deploymentName>", "<jobId>");
+            var result = await client.GetDeploymentStatusValueAsync("<projectName>", "<deploymentName>", "<jobId>").ConfigureAwait(false);
         }
 
         [Test]
@@ -857,7 +853,7 @@ namespace AuthoringTypeSpec.Samples
             var endpoint = new Uri("<https://my-service.azure.com>");
             var client = new AuthoringTypeSpecClient(endpoint);
 
-            Response response = await client.GetSwapDeploymentsStatusAsync("<projectName>", "<deploymentName>", "<jobId>");
+            Response response = await client.GetSwapDeploymentsStatusAsync("<projectName>", "<deploymentName>", "<jobId>").ConfigureAwait(false);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("jobId").ToString());
@@ -879,7 +875,7 @@ namespace AuthoringTypeSpec.Samples
             var endpoint = new Uri("<https://my-service.azure.com>");
             var client = new AuthoringTypeSpecClient(endpoint);
 
-            Response response = await client.GetSwapDeploymentsStatusAsync("<projectName>", "<deploymentName>", "<jobId>");
+            Response response = await client.GetSwapDeploymentsStatusAsync("<projectName>", "<deploymentName>", "<jobId>").ConfigureAwait(false);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("jobId").ToString());
@@ -903,7 +899,7 @@ namespace AuthoringTypeSpec.Samples
             var endpoint = new Uri("<https://my-service.azure.com>");
             var client = new AuthoringTypeSpecClient(endpoint);
 
-            var result = await client.GetSwapDeploymentsStatusValueAsync("<projectName>", "<deploymentName>", "<jobId>");
+            var result = await client.GetSwapDeploymentsStatusValueAsync("<projectName>", "<deploymentName>", "<jobId>").ConfigureAwait(false);
         }
 
         [Test]

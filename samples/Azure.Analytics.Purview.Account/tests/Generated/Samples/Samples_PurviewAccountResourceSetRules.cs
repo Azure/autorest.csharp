@@ -267,7 +267,7 @@ namespace Azure.Analytics.Purview.Account.Samples
             {
                 advancedResourceSet = new
                 {
-                    modifiedAt = "2023-07-17T01:58:28.0848681Z",
+                    modifiedAt = "2022-05-11T14:14:57.0310000Z",
                     resourceSetProcessing = "Default",
                 },
                 pathPatternConfig = new
@@ -336,16 +336,6 @@ namespace Azure.Analytics.Purview.Account.Samples
                 modifiedBy = "<modifiedBy>",
                 name = "<name>",
                 replaceWith = "<replaceWith>",
-            }
-        },
-                    rejectedPatterns = new[] {
-            new {
-                createdBy = "<createdBy>",
-                filterType = "Pattern",
-                lastUpdatedTimestamp = 1234L,
-                modifiedBy = "<modifiedBy>",
-                name = "<name>",
-                path = "<path>",
             }
         },
                     scopedRules = new[] {
@@ -485,7 +475,7 @@ namespace Azure.Analytics.Purview.Account.Samples
             {
                 advancedResourceSet = new
                 {
-                    modifiedAt = "2023-07-17T01:58:28.0895085Z",
+                    modifiedAt = "2022-05-11T14:14:57.0310000Z",
                     resourceSetProcessing = "Default",
                 },
                 pathPatternConfig = new
@@ -554,16 +544,6 @@ namespace Azure.Analytics.Purview.Account.Samples
                 modifiedBy = "<modifiedBy>",
                 name = "<name>",
                 replaceWith = "<replaceWith>",
-            }
-        },
-                    rejectedPatterns = new[] {
-            new {
-                createdBy = "<createdBy>",
-                filterType = "Pattern",
-                lastUpdatedTimestamp = 1234L,
-                modifiedBy = "<modifiedBy>",
-                name = "<name>",
-                path = "<path>",
             }
         },
                     scopedRules = new[] {

@@ -792,10 +792,9 @@ namespace AutoRest.CSharp.Generation.Writers
             }
 
             var arrayElement = ComposeConvenienceCSharpTypeInstance(allProperties, elementType, null, includeCollectionInitialization, visitedModels);
-            var isInline = arrayElement is not NewInstanceExpression { Properties.Properties.Count: > 0 };
             return includeCollectionInitialization
-                ? New.Array(elementType, isInline, arrayElement)
-                : new ArrayInitializerExpression(new[]{arrayElement}, isInline);
+                ? New.Array(elementType, false, arrayElement)
+                : new ArrayInitializerExpression(new[]{arrayElement}, false);
         }
 
         private ValueExpression ComposeProtocolArrayCSharpType(bool allProperties, JsonArraySerialization serialization, HashSet<ObjectType> visitedModels)

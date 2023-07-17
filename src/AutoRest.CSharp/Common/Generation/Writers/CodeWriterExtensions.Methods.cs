@@ -487,7 +487,6 @@ namespace AutoRest.CSharp.Generation.Writers
                     {
                         writer.AppendRaw("()");
                     }
-
                     break;
 
                 case NewArrayExpression(var type, var items):
@@ -512,8 +511,6 @@ namespace AutoRest.CSharp.Generation.Writers
                     {
                         writer.Append($"Array.Empty<{type}>()");
                     }
-
-
                     break;
 
                 case NullConditionalExpression nullConditional:

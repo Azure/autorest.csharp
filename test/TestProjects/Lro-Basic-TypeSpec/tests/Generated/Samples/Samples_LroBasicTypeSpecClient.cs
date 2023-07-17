@@ -6,13 +6,10 @@
 #nullable disable
 
 using System;
-using System.Collections.Generic;
-using System.IO;
 using System.Text.Json;
 using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
-using Azure.Identity;
 using LroBasicTypeSpec.Models;
 using NUnit.Framework;
 
@@ -61,7 +58,7 @@ namespace LroBasicTypeSpec.Samples
 
             var data = new { };
 
-            var operation = await client.CreateProjectAsync(WaitUntil.Completed, RequestContent.Create(data));
+            var operation = await client.CreateProjectAsync(WaitUntil.Completed, RequestContent.Create(data)).ConfigureAwait(false);
 
             Console.WriteLine(operation.GetRawResponse().Status);
         }
@@ -79,7 +76,7 @@ namespace LroBasicTypeSpec.Samples
                 name = "<name>",
             };
 
-            var operation = await client.CreateProjectAsync(WaitUntil.Completed, RequestContent.Create(data));
+            var operation = await client.CreateProjectAsync(WaitUntil.Completed, RequestContent.Create(data)).ConfigureAwait(false);
 
             Console.WriteLine(operation.GetRawResponse().Status);
         }
@@ -91,12 +88,12 @@ namespace LroBasicTypeSpec.Samples
             var endpoint = new Uri("<https://my-service.azure.com>");
             var client = new LroBasicTypeSpecClient(endpoint);
 
-            var resource = new Project()
+            var resource = new Project
             {
                 Description = "<Description>",
                 Name = "<Name>",
             };
-            var operation = await client.CreateProjectAsync(WaitUntil.Completed, resource);
+            var result = await client.CreateProjectAsync(WaitUntil.Completed, resource).ConfigureAwait(false);
         }
 
         [Test]
@@ -146,7 +143,7 @@ namespace LroBasicTypeSpec.Samples
 
             var data = new { };
 
-            var operation = await client.UpdateProjectAsync(WaitUntil.Completed, "<id>", RequestContent.Create(data));
+            var operation = await client.UpdateProjectAsync(WaitUntil.Completed, "<id>", RequestContent.Create(data)).ConfigureAwait(false);
 
             BinaryData responseData = operation.Value;
             JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
@@ -166,7 +163,7 @@ namespace LroBasicTypeSpec.Samples
                 name = "<name>",
             };
 
-            var operation = await client.UpdateProjectAsync(WaitUntil.Completed, "<id>", RequestContent.Create(data));
+            var operation = await client.UpdateProjectAsync(WaitUntil.Completed, "<id>", RequestContent.Create(data)).ConfigureAwait(false);
 
             BinaryData responseData = operation.Value;
             JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
@@ -182,12 +179,12 @@ namespace LroBasicTypeSpec.Samples
             var endpoint = new Uri("<https://my-service.azure.com>");
             var client = new LroBasicTypeSpecClient(endpoint);
 
-            var resource = new Project()
+            var resource = new Project
             {
                 Description = "<Description>",
                 Name = "<Name>",
             };
-            var operation = await client.UpdateProjectAsync(WaitUntil.Completed, "<id>", resource);
+            var result = await client.UpdateProjectAsync(WaitUntil.Completed, "<id>", resource).ConfigureAwait(false);
         }
 
         [Test]
@@ -240,7 +237,7 @@ namespace LroBasicTypeSpec.Samples
                 name = "<name>",
             };
 
-            var operation = await client.CreateThingAsync(WaitUntil.Completed, RequestContent.Create(data));
+            var operation = await client.CreateThingAsync(WaitUntil.Completed, RequestContent.Create(data)).ConfigureAwait(false);
 
             BinaryData responseData = operation.Value;
             JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
@@ -259,7 +256,7 @@ namespace LroBasicTypeSpec.Samples
                 name = "<name>",
             };
 
-            var operation = await client.CreateThingAsync(WaitUntil.Completed, RequestContent.Create(data));
+            var operation = await client.CreateThingAsync(WaitUntil.Completed, RequestContent.Create(data)).ConfigureAwait(false);
 
             BinaryData responseData = operation.Value;
             JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
@@ -274,7 +271,7 @@ namespace LroBasicTypeSpec.Samples
             var client = new LroBasicTypeSpecClient(endpoint);
 
             var thing = new Thing("<name>");
-            var operation = await client.CreateThingAsync(WaitUntil.Completed, thing);
+            var result = await client.CreateThingAsync(WaitUntil.Completed, thing).ConfigureAwait(false);
         }
     }
 }

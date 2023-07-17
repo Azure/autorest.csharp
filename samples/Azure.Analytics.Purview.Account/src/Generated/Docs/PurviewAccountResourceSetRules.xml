@@ -222,7 +222,7 @@ var client = new PurviewAccountsClient(endpoint, credential).GetResourceSetRules
 
 var data = new {
     advancedResourceSet = new {
-        modifiedAt = "2023-07-17T01:58:28.0304422Z",
+        modifiedAt = "2022-05-11T14:14:57.0310000Z",
         resourceSetProcessing = "Default",
     },
     pathPatternConfig = new {
@@ -290,16 +290,6 @@ var data = new {
                 modifiedBy = "<modifiedBy>",
                 name = "<name>",
                 replaceWith = "<replaceWith>",
-            }
-        },
-        rejectedPatterns = new[] {
-            new {
-                createdBy = "<createdBy>",
-                filterType = "Pattern",
-                lastUpdatedTimestamp = 1234L,
-                modifiedBy = "<modifiedBy>",
-                name = "<name>",
-                path = "<path>",
             }
         },
         scopedRules = new[] {
@@ -435,7 +425,7 @@ var client = new PurviewAccountsClient(endpoint, credential).GetResourceSetRules
 
 var data = new {
     advancedResourceSet = new {
-        modifiedAt = "2023-07-17T01:58:28.0646551Z",
+        modifiedAt = "2022-05-11T14:14:57.0310000Z",
         resourceSetProcessing = "Default",
     },
     pathPatternConfig = new {
@@ -503,16 +493,6 @@ var data = new {
                 modifiedBy = "<modifiedBy>",
                 name = "<name>",
                 replaceWith = "<replaceWith>",
-            }
-        },
-        rejectedPatterns = new[] {
-            new {
-                createdBy = "<createdBy>",
-                filterType = "Pattern",
-                lastUpdatedTimestamp = 1234L,
-                modifiedBy = "<modifiedBy>",
-                name = "<name>",
-                path = "<path>",
             }
         },
         scopedRules = new[] {
