@@ -8,7 +8,7 @@ This sample shows how to call GetProjectAsync with required parameters and parse
 var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new RenameGetListClient(endpoint);
 
-Response response = await client.GetProjectAsync("<projectName>", new RequestContext());
+Response response = await client.GetProjectAsync("<projectName>", new RequestContext()).ConfigureAwait(false);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("projectName").ToString());
@@ -56,7 +56,7 @@ This sample shows how to call GetDeploymentAsync with required parameters and pa
 var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new RenameGetListClient(endpoint);
 
-Response response = await client.GetDeploymentAsync("<projectName>", "<deploymentName>", new RequestContext());
+Response response = await client.GetDeploymentAsync("<projectName>", "<deploymentName>", new RequestContext()).ConfigureAwait(false);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("name").ToString());

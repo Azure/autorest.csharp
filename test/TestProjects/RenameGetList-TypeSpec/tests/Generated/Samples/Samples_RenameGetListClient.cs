@@ -6,13 +6,9 @@
 #nullable disable
 
 using System;
-using System.Collections.Generic;
-using System.IO;
 using System.Text.Json;
 using System.Threading.Tasks;
 using Azure;
-using Azure.Core;
-using Azure.Identity;
 using NUnit.Framework;
 
 namespace RenameGetList.Samples
@@ -69,7 +65,7 @@ namespace RenameGetList.Samples
             var endpoint = new Uri("<https://my-service.azure.com>");
             var client = new RenameGetListClient(endpoint);
 
-            Response response = await client.GetProjectAsync("<projectName>", new RequestContext());
+            Response response = await client.GetProjectAsync("<projectName>", new RequestContext()).ConfigureAwait(false);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("projectName").ToString());
@@ -89,7 +85,7 @@ namespace RenameGetList.Samples
             var endpoint = new Uri("<https://my-service.azure.com>");
             var client = new RenameGetListClient(endpoint);
 
-            Response response = await client.GetProjectAsync("<projectName>", new RequestContext());
+            Response response = await client.GetProjectAsync("<projectName>", new RequestContext()).ConfigureAwait(false);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("projectName").ToString());
@@ -138,7 +134,7 @@ namespace RenameGetList.Samples
             var endpoint = new Uri("<https://my-service.azure.com>");
             var client = new RenameGetListClient(endpoint);
 
-            Response response = await client.GetDeploymentAsync("<projectName>", "<deploymentName>", new RequestContext());
+            Response response = await client.GetDeploymentAsync("<projectName>", "<deploymentName>", new RequestContext()).ConfigureAwait(false);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("name").ToString());
@@ -151,7 +147,7 @@ namespace RenameGetList.Samples
             var endpoint = new Uri("<https://my-service.azure.com>");
             var client = new RenameGetListClient(endpoint);
 
-            Response response = await client.GetDeploymentAsync("<projectName>", "<deploymentName>", new RequestContext());
+            Response response = await client.GetDeploymentAsync("<projectName>", "<deploymentName>", new RequestContext()).ConfigureAwait(false);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("name").ToString());

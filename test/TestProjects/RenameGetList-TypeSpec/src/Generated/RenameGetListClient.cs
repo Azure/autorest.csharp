@@ -64,7 +64,7 @@ namespace RenameGetList
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="projectName"> The String to use. </param>
+        /// <param name="projectName"> The string to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="projectName"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="projectName"/> is an empty string, and was expected to be non-empty. </exception>
@@ -99,7 +99,7 @@ namespace RenameGetList
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="projectName"> The String to use. </param>
+        /// <param name="projectName"> The string to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="projectName"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="projectName"/> is an empty string, and was expected to be non-empty. </exception>
@@ -134,8 +134,8 @@ namespace RenameGetList
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="projectName"> The String to use. </param>
-        /// <param name="deploymentName"> The String to use. </param>
+        /// <param name="projectName"> The string to use. </param>
+        /// <param name="deploymentName"> The string to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="projectName"/> or <paramref name="deploymentName"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="projectName"/> or <paramref name="deploymentName"/> is an empty string, and was expected to be non-empty. </exception>
@@ -171,8 +171,8 @@ namespace RenameGetList
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="projectName"> The String to use. </param>
-        /// <param name="deploymentName"> The String to use. </param>
+        /// <param name="projectName"> The string to use. </param>
+        /// <param name="deploymentName"> The string to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="projectName"/> or <paramref name="deploymentName"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="projectName"/> or <paramref name="deploymentName"/> is an empty string, and was expected to be non-empty. </exception>
@@ -250,7 +250,7 @@ namespace RenameGetList
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="projectName"> The String to use. </param>
+        /// <param name="projectName"> The string to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="projectName"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="projectName"/> is an empty string, and was expected to be non-empty. </exception>
@@ -276,7 +276,7 @@ namespace RenameGetList
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="projectName"> The String to use. </param>
+        /// <param name="projectName"> The string to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="projectName"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="projectName"/> is an empty string, and was expected to be non-empty. </exception>
