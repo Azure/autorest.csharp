@@ -16,7 +16,36 @@ namespace AutoRest.CSharp.Output.Models
         IReadOnlyList<Parameter> Convenience,
         IReadOnlyDictionary<Parameter, ValueExpression> Arguments,
         IReadOnlyDictionary<Parameter, MethodBodyStatement> Conversions,
-        bool ProtocolAndConvenienceAreIdentical,
         bool HasAmbiguityBetweenProtocolAndConvenience
-    );
+    )
+    {
+        public RestClientMethodParameters MakeAllProtocolParametersRequired()
+        {
+            var protocol = new List<Parameter>();
+            var arguments = new Dictionary<Parameter, ValueExpression>();
+            var conversions = new Dictionary<Parameter, MethodBodyStatement>();
+
+            foreach (var parameter in Protocol)
+            {
+                var updatedParameter = parameter with { DefaultValue = null };
+                if (Arguments.TryGetValue(parameter, out var argument))
+                {
+                    arguments[updatedParameter] = argument;
+                }
+                if (Conversions.TryGetValue(parameter, out var conversion))
+                {
+                    conversions[updatedParameter] = conversion;
+                }
+                protocol.Add(updatedParameter);
+            }
+
+            return this with
+            {
+                Protocol = protocol,
+                Arguments = arguments,
+                Conversions = conversions,
+                HasAmbiguityBetweenProtocolAndConvenience = false
+            };
+        }
+    }
 }

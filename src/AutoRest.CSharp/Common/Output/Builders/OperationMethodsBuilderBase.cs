@@ -14,6 +14,7 @@ using AutoRest.CSharp.Common.Output.Models.Types;
 using AutoRest.CSharp.Common.Output.Models.ValueExpressions;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Input;
+using AutoRest.CSharp.Input.Source;
 using AutoRest.CSharp.Output.Builders;
 using AutoRest.CSharp.Output.Models.Requests;
 using AutoRest.CSharp.Output.Models.Shared;
@@ -34,6 +35,7 @@ namespace AutoRest.CSharp.Output.Models
         private readonly MethodSignatureModifiers _protocolAccessibility;
         private readonly MethodParametersBuilder _parametersBuilder;
         private readonly StatusCodeSwitchBuilder _statusCodeSwitchBuilder;
+        private readonly SourceInputModel? _sourceInputModel;
 
         public InputOperation Operation { get; }
 
@@ -57,7 +59,8 @@ namespace AutoRest.CSharp.Output.Models
             _clientName = args.ClientName;
             _clientNamespace = args.ClientNamespace;
             _statusCodeSwitchBuilder = args.StatusCodeSwitchBuilder;
-            _parametersBuilder = new MethodParametersBuilder(args.Operation, args.TypeFactory, args.SourceInputModel);
+            _parametersBuilder = new MethodParametersBuilder(args.Operation, args.TypeFactory);
+            _sourceInputModel = args.SourceInputModel;
 
             Operation = args.Operation;
             ClientDiagnosticsProperty = _fields.ClientDiagnosticsProperty;
@@ -81,7 +84,23 @@ namespace AutoRest.CSharp.Output.Models
         public RestClientOperationMethods BuildDpg()
         {
             var hasResponseBody = Operation is { Paging: not null, LongRunning: null } || ResponseType is not null;
-            var parameters = _parametersBuilder.BuildParameters(_clientNamespace, _clientName, hasResponseBody);
+            var parameters = _parametersBuilder.BuildParameters(_clientNamespace, _clientName);
+
+            var convenienceMethodIsMeaningless = parameters.Convenience.Where(p => p != KnownParameters.CancellationTokenParameter)
+                .SequenceEqual(parameters.Protocol.Where(p => p != KnownParameters.RequestContext)) && !hasResponseBody;
+
+            var makeAllProtocolParametersRequired =
+                !Configuration.KeepNonOverloadableProtocolSignature &&
+                Configuration.UseOverloadsBetweenProtocolAndConvenience &&
+                !ExistingProtocolMethodHasOptionalParameters(_clientNamespace, _clientName, parameters.Protocol) &&
+                !convenienceMethodIsMeaningless &&
+                parameters.HasAmbiguityBetweenProtocolAndConvenience;
+
+            if (makeAllProtocolParametersRequired)
+            {
+                parameters = parameters.MakeAllProtocolParametersRequired();
+            }
+
             var requestContext = new RequestContextExpression(KnownParameters.RequestContext);
             var createMessageBuilder = new CreateMessageMethodBuilder(_fields, parameters.RequestParts, parameters.CreateMessage, requestContext);
 
@@ -92,7 +111,7 @@ namespace AutoRest.CSharp.Output.Models
             Method? convenience = null;
             Method? convenienceAsync = null;
 
-            if (Operation.GenerateConvenienceMethod && (!Operation.GenerateProtocolMethod || !parameters.ProtocolAndConvenienceAreIdentical || hasResponseBody))
+            if (Operation.GenerateConvenienceMethod && (!Operation.GenerateProtocolMethod || !convenienceMethodIsMeaningless))
             {
                 var convenienceMethodName = ProtocolMethodName;
                 if (parameters.HasAmbiguityBetweenProtocolAndConvenience)
@@ -166,6 +185,12 @@ namespace AutoRest.CSharp.Output.Models
         {
             var signature = new MethodSignature(CreateMessageMethodName, _summary, _description, MethodSignatureModifiers.Internal, typeof(HttpMessage), null, parameters);
             return new Method(signature, BuildCreateRequestMethodBody(builder).AsStatement());
+        }
+
+        private bool ExistingProtocolMethodHasOptionalParameters(string clientNamespace, string clientName, IEnumerable<Parameter> parameters)
+        {
+            var existingProtocolMethod = _sourceInputModel?.FindMethod(clientNamespace, clientName, Operation.CleanName, parameters.Select(p => p.Type));
+            return existingProtocolMethod is { Parameters: [.., {IsOptional: true}]};
         }
 
         private IEnumerable<MethodBodyStatement> BuildCreateRequestMethodBody(CreateMessageMethodBuilder builder)

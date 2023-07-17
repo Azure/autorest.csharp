@@ -13,7 +13,6 @@ using AutoRest.CSharp.Common.Output.Models.Types;
 using AutoRest.CSharp.Common.Output.Models.ValueExpressions;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Input;
-using AutoRest.CSharp.Input.Source;
 using AutoRest.CSharp.Output.Builders;
 using AutoRest.CSharp.Output.Models.Serialization;
 using AutoRest.CSharp.Output.Models.Shared;
@@ -44,7 +43,6 @@ namespace AutoRest.CSharp.Output.Models
 
         private readonly InputOperation _operation;
         private readonly TypeFactory _typeFactory;
-        private readonly SourceInputModel? _sourceInputModel;
         private readonly IReadOnlyList<InputParameter> _unsortedParameters;
         private readonly List<RequestPartSource> _requestParts;
         private readonly List<Parameter> _createMessageParameters;
@@ -54,11 +52,10 @@ namespace AutoRest.CSharp.Output.Models
         private readonly Dictionary<Parameter, MethodBodyStatement> _conversions;
         private readonly bool _keepClientDefaultValue;
 
-        public MethodParametersBuilder(InputOperation operation, TypeFactory typeFactory, SourceInputModel? sourceInputModel)
+        public MethodParametersBuilder(InputOperation operation, TypeFactory typeFactory)
         {
             _operation = operation;
             _typeFactory = typeFactory;
-            _sourceInputModel = sourceInputModel;
             _requestParts = new List<RequestPartSource>();
             _createMessageParameters = new List<Parameter>();
             _protocolParameters = new List<Parameter>();
@@ -71,7 +68,7 @@ namespace AutoRest.CSharp.Output.Models
                 .ToArray();
         }
 
-        public RestClientMethodParameters BuildParameters(string clientNamespace, string clientName, bool hasResponseBody)
+        public RestClientMethodParameters BuildParameters(string clientNamespace, string clientName)
         {
             var sortedParameters = GetSortedParameters(_operation, _unsortedParameters);
             var requestConditionHeaders = RequestConditionHeaders.None;
@@ -107,48 +104,6 @@ namespace AutoRest.CSharp.Output.Models
             AddRequestConditionHeaders(requestConditionHeaders, requestConditionRequestParameter, requestConditionSerializationFormat);
             AddRequestContext();
 
-            var protocolAndConvenienceAreIdentical = ProtocolAndConvenienceAreIdentical();
-            if (!hasResponseBody && protocolAndConvenienceAreIdentical)
-            {
-                return new RestClientMethodParameters
-                (
-                    _requestParts,
-                    _createMessageParameters,
-                    _protocolParameters,
-                    _convenienceParameters,
-                    _arguments,
-                    _conversions,
-                    false,
-                    false
-                );
-            }
-
-            var makeAllProtocolParametersRequiredIfAmbiguous =
-                !Configuration.KeepNonOverloadableProtocolSignature &&
-                Configuration.UseOverloadsBetweenProtocolAndConvenience &&
-                !ExistingProtocolMethodHasOptionalParameters(clientNamespace, clientName);
-
-            var hasAmbiguityBetweenProtocolAndConvenience = HasAmbiguityBetweenProtocolAndConvenience();
-
-            if (makeAllProtocolParametersRequiredIfAmbiguous && hasAmbiguityBetweenProtocolAndConvenience)
-            {
-                for (var i = 0; i < _protocolParameters.Count; i++)
-                {
-                    var updatedParameter = _protocolParameters[i] with { DefaultValue = null };
-                    if (_arguments.Remove(_protocolParameters[i], out var argument))
-                    {
-                        _arguments[updatedParameter] = argument;
-                    }
-                    if (_conversions.Remove(_protocolParameters[i], out var conversion))
-                    {
-                        _conversions[updatedParameter] = conversion;
-                    }
-                    _protocolParameters[i] = updatedParameter;
-                }
-
-                hasAmbiguityBetweenProtocolAndConvenience = false;
-            }
-
             return new RestClientMethodParameters
             (
                 _requestParts,
@@ -157,8 +112,7 @@ namespace AutoRest.CSharp.Output.Models
                 _convenienceParameters,
                 _arguments,
                 _conversions,
-                true,
-                hasAmbiguityBetweenProtocolAndConvenience
+                HasAmbiguityBetweenProtocolAndConvenience()
             );
         }
 
@@ -200,7 +154,6 @@ namespace AutoRest.CSharp.Output.Models
                 _convenienceParameters,
                 _arguments,
                 _conversions,
-                true,
                 false
             );
         }
@@ -260,15 +213,6 @@ namespace AutoRest.CSharp.Output.Models
                 _arguments[KnownParameters.RequestContext] = requestContext;
             }
         }
-
-        private bool ExistingProtocolMethodHasOptionalParameters(string clientNamespace, string clientName)
-        {
-            var existingProtocolMethod = _sourceInputModel?.FindMethod(clientNamespace, clientName, _operation.CleanName, _protocolParameters.Select(p => p.Type));
-            return existingProtocolMethod is { Parameters: [.., {IsOptional: true}]};
-        }
-
-        private bool ProtocolAndConvenienceAreIdentical()
-            => _convenienceParameters.Where(p => p != KnownParameters.CancellationTokenParameter).SequenceEqual(_protocolParameters.Where(p => p != KnownParameters.RequestContext));
 
         private bool HasAmbiguityBetweenProtocolAndConvenience()
         {

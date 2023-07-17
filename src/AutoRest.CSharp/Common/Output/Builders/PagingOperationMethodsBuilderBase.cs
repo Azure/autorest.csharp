@@ -78,7 +78,7 @@ namespace AutoRest.CSharp.Output.Models
 
         private IReadOnlyList<Parameter> BuildNextLinkOperationCreateMessageParameters(InputOperation nextLinkOperation)
         {
-            var builder = new MethodParametersBuilder(nextLinkOperation, _typeFactory, _sourceInputModel);
+            var builder = new MethodParametersBuilder(nextLinkOperation, _typeFactory);
             if (Configuration.AzureArm)
             {
                 return builder.BuildParametersLegacy(false).CreateMessage;
@@ -89,7 +89,7 @@ namespace AutoRest.CSharp.Output.Models
                 return builder.BuildParametersLegacy(true).CreateMessage;
             }
 
-            return builder.BuildParameters(_clientName, _clientNamespace, true).CreateMessage;
+            return builder.BuildParameters(_clientName, _clientNamespace).CreateMessage;
         }
 
         protected override MethodBodyStatement? BuildCreateNextPageMessageMethodBody(CreateMessageMethodBuilder builder, MethodSignature signature)
