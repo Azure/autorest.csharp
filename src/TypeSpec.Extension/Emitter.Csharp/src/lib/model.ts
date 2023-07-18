@@ -559,15 +559,19 @@ export function getInputType(
 
             // Temporary part. Derived types may not be referenced directly by any operation
             // We should be able to remove it when https://github.com/Azure/typespec-azure/issues/1733 is closed
+            // the low confident part in derived types will pollute it back to the base class - if any derived class has low confident part (like union types), we will set the base as "not confident", but other derived types are not affected.
             if (model.DiscriminatorPropertyName && m.derivedModels) {
+                let isBaseConfident = model.IsConfident;
                 for (const dm of m.derivedModels) {
-                    getInputType(
+                    const derivedModel = getInputType(
                         context,
                         getFormattedType(program, dm),
                         models,
                         enums
                     );
+                    isBaseConfident &&= derivedModel.IsConfident ?? true;
                 }
+                model.IsConfident = isBaseConfident;
             }
         }
 

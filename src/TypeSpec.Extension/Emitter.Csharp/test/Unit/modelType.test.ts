@@ -27,7 +27,7 @@ model Pet {
 }
 
 @doc("The cat")
-model Cat {
+model Cat extends Pet {
     kind: "cat";
 
     @doc("Meow")
@@ -35,7 +35,7 @@ model Cat {
 }
 
 @doc("The dog")
-model Dog {
+model Dog extends Pet {
     kind: "dog";
 
     @doc("Woof")
