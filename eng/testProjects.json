@@ -8,6 +8,7 @@
         "type/property/nullable",
         "type/property/optional",
         "type/property/value-types",
+        "type/union",
         "authentication/api-key",
         "authentication/http/custom",
         "authentication/oauth2",
