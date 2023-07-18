@@ -811,7 +811,10 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
         public override CSharpType? FindTypeByName(string originalName)
         {
             _schemaOrNameToModels.TryGetValue(originalName, out TypeProvider? provider);
-            provider ??= ResourceSchemaMap.Values.FirstOrDefault(m => m.Type.Name == originalName);
+
+            // Try to search declaration name too if no key matches. i.e. Resource Data Type will be appended a 'Data' in the name and won't be found through key
+            provider ??= _schemaOrNameToModels.FirstOrDefault(s => s.Value is MgmtObjectType mot && mot.Declaration.Name == originalName).Value;
+
             return provider?.Type;
         }
 
