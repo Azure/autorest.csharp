@@ -510,7 +510,7 @@ namespace Azure.Storage.Tables
             request.Headers.Add("x-ms-version", _version.ToString());
             request.Headers.Add("DataServiceVersion", dataServiceVersion.ToString());
             request.Headers.Add("Accept", "application/json;odata=nometadata");
-            if (tableEntityProperties != null)
+            if (tableEntityProperties != null && Optional.IsCollectionDefined(tableEntityProperties))
             {
                 request.Headers.Add("Content-Type", "application/json;odata=nometadata");
                 var content = new Utf8JsonRequestContent();
@@ -727,7 +727,7 @@ namespace Azure.Storage.Tables
             request.Headers.Add("x-ms-version", _version.ToString());
             request.Headers.Add("DataServiceVersion", dataServiceVersion.ToString());
             request.Headers.Add("Accept", "application/json;odata=nometadata");
-            if (tableEntityProperties != null)
+            if (tableEntityProperties != null && Optional.IsCollectionDefined(tableEntityProperties))
             {
                 request.Headers.Add("Content-Type", "application/json;odata=nometadata");
                 var content = new Utf8JsonRequestContent();
@@ -949,7 +949,7 @@ namespace Azure.Storage.Tables
             request.Uri = uri;
             request.Headers.Add("x-ms-version", _version.ToString());
             request.Headers.Add("Accept", "application/xml");
-            if (tableAcl != null)
+            if (tableAcl != null && Optional.IsCollectionDefined(tableAcl))
             {
                 request.Headers.Add("Content-Type", "application/xml");
                 var content = new XmlWriterContent();

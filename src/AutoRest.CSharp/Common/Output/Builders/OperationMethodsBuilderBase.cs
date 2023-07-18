@@ -86,11 +86,10 @@ namespace AutoRest.CSharp.Output.Models
 
         public RestClientOperationMethods BuildDpg()
         {
-            var hasResponseBody = Operation is { Paging: not null, LongRunning: null } || ResponseType is not null;
             var parameters = _parametersBuilder.BuildParameters(_clientNamespace, _clientName);
 
             var convenienceMethodIsMeaningless = parameters.Convenience.Where(p => p != KnownParameters.CancellationTokenParameter)
-                .SequenceEqual(parameters.Protocol.Where(p => p != KnownParameters.RequestContext)) && !hasResponseBody;
+                .SequenceEqual(parameters.Protocol.Where(p => p != KnownParameters.RequestContext)) && ConvenienceMethodReturnType.Equals(ProtocolMethodReturnType);
 
             var makeAllProtocolParametersRequired =
                 !Configuration.KeepNonOverloadableProtocolSignature &&
