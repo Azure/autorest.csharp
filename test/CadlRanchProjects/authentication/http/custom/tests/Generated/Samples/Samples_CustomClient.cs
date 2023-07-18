@@ -6,13 +6,8 @@
 #nullable disable
 
 using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Text.Json;
 using System.Threading.Tasks;
 using Azure;
-using Azure.Core;
-using Azure.Identity;
 using NUnit.Framework;
 
 namespace Authentication.Http.Custom.Samples
@@ -48,7 +43,7 @@ namespace Authentication.Http.Custom.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new CustomClient(credential);
 
-            Response response = await client.ValidAsync();
+            Response response = await client.ValidAsync().ConfigureAwait(false);
             Console.WriteLine(response.Status);
         }
 
@@ -59,7 +54,7 @@ namespace Authentication.Http.Custom.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new CustomClient(credential);
 
-            Response response = await client.ValidAsync();
+            Response response = await client.ValidAsync().ConfigureAwait(false);
             Console.WriteLine(response.Status);
         }
 
@@ -92,7 +87,7 @@ namespace Authentication.Http.Custom.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new CustomClient(credential);
 
-            Response response = await client.InvalidAsync();
+            Response response = await client.InvalidAsync().ConfigureAwait(false);
             Console.WriteLine(response.Status);
         }
 
@@ -103,7 +98,7 @@ namespace Authentication.Http.Custom.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new CustomClient(credential);
 
-            Response response = await client.InvalidAsync();
+            Response response = await client.InvalidAsync().ConfigureAwait(false);
             Console.WriteLine(response.Status);
         }
     }

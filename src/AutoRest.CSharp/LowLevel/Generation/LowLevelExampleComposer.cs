@@ -734,7 +734,7 @@ namespace AutoRest.CSharp.Generation.Writers
                         ? Literal("http://localhost:3000")
                         : New.Uri("http://localhost:3000");
                 }
-                
+
                 if (type == typeof(WaitUntil))
                 {
                     // use `Completed`, since we will not generate `operation.WaitForCompletion()` afterwards
