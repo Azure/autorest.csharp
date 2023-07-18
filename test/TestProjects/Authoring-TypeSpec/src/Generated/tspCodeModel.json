@@ -1,6 +1,6 @@
 {
  "$id": "1",
- "Name": "Azure.Language.Authoring",
+ "Name": "AuthoringTypeSpec",
  "ApiVersions": [
   "2022-05-15-preview"
  ],
@@ -8,7 +8,7 @@
   {
    "$id": "2",
    "Name": "ProjectKind",
-   "Namespace": "Azure.Language.Authoring",
+   "Namespace": "AuthoringTypeSpec",
    "Description": "Represents the project kind.",
    "EnumValueType": "String",
    "AllowedValues": [
@@ -38,7 +38,7 @@
   {
    "$id": "6",
    "Name": "JobStatus",
-   "Namespace": "Azure.Language.Authoring",
+   "Namespace": "AuthoringTypeSpec",
    "Description": "Represents the job status values.",
    "EnumValueType": "String",
    "AllowedValues": [
@@ -87,7 +87,7 @@
   {
    "$id": "14",
    "Name": "Project",
-   "Namespace": "Azure.Language.Authoring",
+   "Namespace": "AuthoringTypeSpec",
    "IsNullable": false,
    "Usage": "None",
    "Properties": [
@@ -103,8 +103,7 @@
       "IsNullable": false
      },
      "IsRequired": true,
-     "IsReadOnly": true,
-     "IsDiscriminator": false
+     "IsReadOnly": true
     },
     {
      "$id": "17",
@@ -115,8 +114,7 @@
       "$ref": "2"
      },
      "IsRequired": true,
-     "IsReadOnly": false,
-     "IsDiscriminator": false
+     "IsReadOnly": false
     },
     {
      "$id": "18",
@@ -130,8 +128,7 @@
       "IsNullable": false
      },
      "IsRequired": true,
-     "IsReadOnly": false,
-     "IsDiscriminator": false
+     "IsReadOnly": false
     },
     {
      "$id": "20",
@@ -156,8 +153,7 @@
       "IsNullable": false
      },
      "IsRequired": false,
-     "IsReadOnly": false,
-     "IsDiscriminator": false
+     "IsReadOnly": false
     },
     {
      "$id": "24",
@@ -171,8 +167,7 @@
       "IsNullable": false
      },
      "IsRequired": false,
-     "IsReadOnly": false,
-     "IsDiscriminator": false
+     "IsReadOnly": false
     },
     {
      "$id": "26",
@@ -186,8 +181,7 @@
       "IsNullable": false
      },
      "IsRequired": false,
-     "IsReadOnly": false,
-     "IsDiscriminator": false
+     "IsReadOnly": false
     },
     {
      "$id": "28",
@@ -201,8 +195,7 @@
       "IsNullable": false
      },
      "IsRequired": true,
-     "IsReadOnly": false,
-     "IsDiscriminator": false
+     "IsReadOnly": false
     },
     {
      "$id": "30",
@@ -216,8 +209,7 @@
       "IsNullable": false
      },
      "IsRequired": true,
-     "IsReadOnly": true,
-     "IsDiscriminator": false
+     "IsReadOnly": true
     },
     {
      "$id": "32",
@@ -231,8 +223,7 @@
       "IsNullable": false
      },
      "IsRequired": true,
-     "IsReadOnly": true,
-     "IsDiscriminator": false
+     "IsReadOnly": true
     },
     {
      "$id": "34",
@@ -246,8 +237,7 @@
       "IsNullable": false
      },
      "IsRequired": true,
-     "IsReadOnly": true,
-     "IsDiscriminator": false
+     "IsReadOnly": true
     },
     {
      "$id": "36",
@@ -261,8 +251,7 @@
       "IsNullable": false
      },
      "IsRequired": true,
-     "IsReadOnly": true,
-     "IsDiscriminator": false
+     "IsReadOnly": true
     }
    ]
   },
@@ -288,8 +277,7 @@
       "IsNullable": false
      },
      "IsRequired": true,
-     "IsReadOnly": false,
-     "IsDiscriminator": false
+     "IsReadOnly": false
     },
     {
      "$id": "41",
@@ -303,15 +291,14 @@
       "IsNullable": false
      },
      "IsRequired": false,
-     "IsReadOnly": false,
-     "IsDiscriminator": false
+     "IsReadOnly": false
     }
    ]
   },
   {
    "$id": "43",
    "Name": "TrainingJobOptions",
-   "Namespace": "Azure.Language.Authoring",
+   "Namespace": "AuthoringTypeSpec",
    "Description": "Training job parameters.",
    "IsNullable": false,
    "Usage": "None",
@@ -328,15 +315,14 @@
       "IsNullable": false
      },
      "IsRequired": true,
-     "IsReadOnly": false,
-     "IsDiscriminator": false
+     "IsReadOnly": false
     }
    ]
   },
   {
    "$id": "46",
    "Name": "Deployment",
-   "Namespace": "Azure.Language.Authoring",
+   "Namespace": "AuthoringTypeSpec",
    "IsNullable": false,
    "Usage": "None",
    "Properties": [
@@ -352,8 +338,7 @@
       "IsNullable": false
      },
      "IsRequired": true,
-     "IsReadOnly": true,
-     "IsDiscriminator": false
+     "IsReadOnly": true
     }
    ]
   },
@@ -379,8 +364,7 @@
       "IsNullable": false
      },
      "IsRequired": true,
-     "IsReadOnly": false,
-     "IsDiscriminator": false
+     "IsReadOnly": false
     },
     {
      "$id": "52",
@@ -394,15 +378,14 @@
       "IsNullable": false
      },
      "IsRequired": false,
-     "IsReadOnly": false,
-     "IsDiscriminator": false
+     "IsReadOnly": false
     }
    ]
   },
   {
    "$id": "54",
    "Name": "SwapDeploymentsOptions",
-   "Namespace": "Azure.Language.Authoring",
+   "Namespace": "AuthoringTypeSpec",
    "IsNullable": false,
    "Usage": "None",
    "Properties": [
@@ -418,8 +401,7 @@
       "IsNullable": false
      },
      "IsRequired": true,
-     "IsReadOnly": false,
-     "IsDiscriminator": false
+     "IsReadOnly": false
     },
     {
      "$id": "57",
@@ -433,15 +415,14 @@
       "IsNullable": false
      },
      "IsRequired": true,
-     "IsReadOnly": false,
-     "IsDiscriminator": false
+     "IsReadOnly": false
     }
    ]
   },
   {
    "$id": "59",
    "Name": "DeploymentJob",
-   "Namespace": "Azure.Language.Authoring",
+   "Namespace": "AuthoringTypeSpec",
    "IsNullable": false,
    "Usage": "Output",
    "Properties": [
@@ -457,8 +438,7 @@
       "IsNullable": false
      },
      "IsRequired": true,
-     "IsReadOnly": false,
-     "IsDiscriminator": false
+     "IsReadOnly": false
     },
     {
      "$id": "62",
@@ -472,8 +452,7 @@
       "IsNullable": false
      },
      "IsRequired": true,
-     "IsReadOnly": true,
-     "IsDiscriminator": false
+     "IsReadOnly": true
     },
     {
      "$id": "64",
@@ -487,8 +466,7 @@
       "IsNullable": false
      },
      "IsRequired": true,
-     "IsReadOnly": true,
-     "IsDiscriminator": false
+     "IsReadOnly": true
     },
     {
      "$id": "66",
@@ -502,8 +480,7 @@
       "IsNullable": false
      },
      "IsRequired": true,
-     "IsReadOnly": true,
-     "IsDiscriminator": false
+     "IsReadOnly": true
     },
     {
      "$id": "68",
@@ -514,8 +491,7 @@
       "$ref": "6"
      },
      "IsRequired": true,
-     "IsReadOnly": false,
-     "IsDiscriminator": false
+     "IsReadOnly": false
     },
     {
      "$id": "69",
@@ -528,7 +504,7 @@
       "ElementType": {
        "$id": "71",
        "Name": "JobWarning",
-       "Namespace": "Azure.Language.Authoring",
+       "Namespace": "AuthoringTypeSpec",
        "Description": "Represents a warning that was encountered while executing the request.",
        "IsNullable": false,
        "Usage": "Output",
@@ -545,8 +521,7 @@
           "IsNullable": false
          },
          "IsRequired": true,
-         "IsReadOnly": false,
-         "IsDiscriminator": false
+         "IsReadOnly": false
         },
         {
          "$id": "74",
@@ -560,16 +535,14 @@
           "IsNullable": false
          },
          "IsRequired": true,
-         "IsReadOnly": false,
-         "IsDiscriminator": false
+         "IsReadOnly": false
         }
        ]
       },
       "IsNullable": false
      },
      "IsRequired": true,
-     "IsReadOnly": false,
-     "IsDiscriminator": false
+     "IsReadOnly": false
     },
     {
      "$id": "76",
@@ -596,8 +569,7 @@
          "IsNullable": false
         },
         "IsRequired": true,
-        "IsReadOnly": false,
-        "IsDiscriminator": false
+        "IsReadOnly": false
        },
        {
         "$id": "80",
@@ -611,8 +583,7 @@
          "IsNullable": false
         },
         "IsRequired": true,
-        "IsReadOnly": false,
-        "IsDiscriminator": false
+        "IsReadOnly": false
        },
        {
         "$id": "82",
@@ -626,8 +597,7 @@
          "IsNullable": false
         },
         "IsRequired": false,
-        "IsReadOnly": false,
-        "IsDiscriminator": false
+        "IsReadOnly": false
        },
        {
         "$id": "84",
@@ -642,9 +612,8 @@
          },
          "IsNullable": false
         },
-        "IsRequired": true,
-        "IsReadOnly": false,
-        "IsDiscriminator": false
+        "IsRequired": false,
+        "IsReadOnly": false
        },
        {
         "$id": "86",
@@ -670,9 +639,8 @@
             "Kind": "String",
             "IsNullable": false
            },
-           "IsRequired": true,
-           "IsReadOnly": false,
-           "IsDiscriminator": false
+           "IsRequired": false,
+           "IsReadOnly": false
           },
           {
            "$id": "90",
@@ -683,20 +651,17 @@
             "$ref": "87"
            },
            "IsRequired": false,
-           "IsReadOnly": false,
-           "IsDiscriminator": false
+           "IsReadOnly": false
           }
          ]
         },
         "IsRequired": false,
-        "IsReadOnly": false,
-        "IsDiscriminator": false
+        "IsReadOnly": false
        }
       ]
      },
      "IsRequired": true,
-     "IsReadOnly": false,
-     "IsDiscriminator": false
+     "IsReadOnly": false
     },
     {
      "$id": "91",
@@ -710,8 +675,7 @@
       "IsNullable": false
      },
      "IsRequired": true,
-     "IsReadOnly": true,
-     "IsDiscriminator": false
+     "IsReadOnly": true
     }
    ]
   },
@@ -727,7 +691,7 @@
   {
    "$id": "93",
    "Name": "SwapDeploymentsJob",
-   "Namespace": "Azure.Language.Authoring",
+   "Namespace": "AuthoringTypeSpec",
    "IsNullable": false,
    "Usage": "Output",
    "Properties": [
@@ -743,8 +707,7 @@
       "IsNullable": false
      },
      "IsRequired": true,
-     "IsReadOnly": false,
-     "IsDiscriminator": false
+     "IsReadOnly": false
     },
     {
      "$id": "96",
@@ -758,8 +721,7 @@
       "IsNullable": false
      },
      "IsRequired": true,
-     "IsReadOnly": true,
-     "IsDiscriminator": false
+     "IsReadOnly": true
     },
     {
      "$id": "98",
@@ -773,8 +735,7 @@
       "IsNullable": false
      },
      "IsRequired": true,
-     "IsReadOnly": true,
-     "IsDiscriminator": false
+     "IsReadOnly": true
     },
     {
      "$id": "100",
@@ -788,8 +749,7 @@
       "IsNullable": false
      },
      "IsRequired": true,
-     "IsReadOnly": true,
-     "IsDiscriminator": false
+     "IsReadOnly": true
     },
     {
      "$id": "102",
@@ -800,8 +760,7 @@
       "$ref": "6"
      },
      "IsRequired": true,
-     "IsReadOnly": false,
-     "IsDiscriminator": false
+     "IsReadOnly": false
     },
     {
      "$id": "103",
@@ -817,8 +776,7 @@
       "IsNullable": false
      },
      "IsRequired": true,
-     "IsReadOnly": false,
-     "IsDiscriminator": false
+     "IsReadOnly": false
     },
     {
      "$id": "105",
@@ -829,8 +787,7 @@
       "$ref": "77"
      },
      "IsRequired": true,
-     "IsReadOnly": false,
-     "IsDiscriminator": false
+     "IsReadOnly": false
     },
     {
      "$id": "106",
@@ -844,15 +801,14 @@
       "IsNullable": false
      },
      "IsRequired": true,
-     "IsReadOnly": true,
-     "IsDiscriminator": false
+     "IsReadOnly": true
     }
    ]
   },
   {
    "$id": "108",
    "Name": "PagedSupportedLanguage",
-   "Namespace": "Azure.Language.Authoring",
+   "Namespace": "AuthoringTypeSpec",
    "Description": "Paged collection of SupportedLanguage items",
    "IsNullable": false,
    "Usage": "None",
@@ -868,7 +824,7 @@
       "ElementType": {
        "$id": "111",
        "Name": "SupportedLanguage",
-       "Namespace": "Azure.Language.Authoring",
+       "Namespace": "AuthoringTypeSpec",
        "Description": "Represents a supported language.",
        "IsNullable": false,
        "Usage": "None",
@@ -885,8 +841,7 @@
           "IsNullable": false
          },
          "IsRequired": true,
-         "IsReadOnly": false,
-         "IsDiscriminator": false
+         "IsReadOnly": false
         },
         {
          "$id": "114",
@@ -900,16 +855,14 @@
           "IsNullable": false
          },
          "IsRequired": true,
-         "IsReadOnly": false,
-         "IsDiscriminator": false
+         "IsReadOnly": false
         }
        ]
       },
       "IsNullable": false
      },
      "IsRequired": true,
-     "IsReadOnly": false,
-     "IsDiscriminator": false
+     "IsReadOnly": false
     },
     {
      "$id": "116",
@@ -923,8 +876,7 @@
       "IsNullable": false
      },
      "IsRequired": false,
-     "IsReadOnly": false,
-     "IsDiscriminator": false
+     "IsReadOnly": false
     }
    ]
   },
@@ -934,7 +886,7 @@
   {
    "$id": "118",
    "Name": "PagedTrainingConfigVersion",
-   "Namespace": "Azure.Language.Authoring",
+   "Namespace": "AuthoringTypeSpec",
    "Description": "Paged collection of TrainingConfigVersion items",
    "IsNullable": false,
    "Usage": "None",
@@ -950,7 +902,7 @@
       "ElementType": {
        "$id": "121",
        "Name": "TrainingConfigVersion",
-       "Namespace": "Azure.Language.Authoring",
+       "Namespace": "AuthoringTypeSpec",
        "Description": "Represents a training config version.",
        "IsNullable": false,
        "Usage": "None",
@@ -967,8 +919,7 @@
           "IsNullable": false
          },
          "IsRequired": true,
-         "IsReadOnly": false,
-         "IsDiscriminator": false
+         "IsReadOnly": false
         },
         {
          "$id": "124",
@@ -982,16 +933,14 @@
           "IsNullable": false
          },
          "IsRequired": true,
-         "IsReadOnly": false,
-         "IsDiscriminator": false
+         "IsReadOnly": false
         }
        ]
       },
       "IsNullable": false
      },
      "IsRequired": true,
-     "IsReadOnly": false,
-     "IsDiscriminator": false
+     "IsReadOnly": false
     },
     {
      "$id": "126",
@@ -1005,8 +954,7 @@
       "IsNullable": false
      },
      "IsRequired": false,
-     "IsReadOnly": false,
-     "IsDiscriminator": false
+     "IsReadOnly": false
     }
    ]
   },
@@ -1017,7 +965,7 @@
  "Clients": [
   {
    "$id": "128",
-   "Name": "AuthoringClient",
+   "Name": "AuthoringTypeSpecClient",
    "Description": "",
    "Operations": [
     {

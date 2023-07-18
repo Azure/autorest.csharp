@@ -77,7 +77,7 @@ namespace AutoRest.TestServer.Tests
         [Test]
         public Task PutStringNull() => Test(async (host) =>
         {
-            var result = await new StringClient(Key, host, null).PutNullAsync(null);
+            var result = await new StringClient(Key, host, null).PutNullAsync(null, new());
             Assert.AreEqual(200, result.Status);
         });
 

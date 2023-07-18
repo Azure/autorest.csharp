@@ -31,6 +31,7 @@ namespace AutoRest.CSharp.Common.Input
             options.Converters.Add(new TypeSpecInputConstantConverter(referenceHandler));
             options.Converters.Add(new TypeSpecInputLiteralTypeConverter(referenceHandler));
             options.Converters.Add(new TypeSpecInputUnionTypeConverter(referenceHandler));
+            options.Converters.Add(new TypeSpecInputParameterConverter(referenceHandler));
             return JsonSerializer.Deserialize<InputNamespace>(json, options);
         }
 

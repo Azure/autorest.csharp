@@ -222,7 +222,8 @@ namespace AutoRest.CSharp.Generation.Writers
                         _writer.Line($"{fieldName:I} = {credentialParameter.Name:I};");
                         if (credentialField.Type.Equals(typeof(AzureKeyCredential)))
                         {
-                            perRetryPolicies = $"new {typeof(HttpPipelinePolicy)}[] {{new {typeof(AzureKeyCredentialPolicy)}({fieldName:I}, {_client.Fields.AuthorizationHeaderConstant!.Name})}}";
+                            string prefixString = _client.Fields.AuthorizationApiKeyPrefixConstant != null ? $", {_client.Fields.AuthorizationApiKeyPrefixConstant.Name}" : "";
+                            perRetryPolicies = $"new {typeof(HttpPipelinePolicy)}[] {{new {typeof(AzureKeyCredentialPolicy)}({fieldName:I}, {_client.Fields.AuthorizationHeaderConstant!.Name}{prefixString})}}";
                         }
                         else if (credentialField.Type.Equals(typeof(TokenCredential)))
                         {
@@ -413,7 +414,9 @@ namespace AutoRest.CSharp.Generation.Writers
                 using (writer.WriteDiagnosticScope(clientMethod.ProtocolMethodDiagnostic, fields.ClientDiagnosticsProperty))
                 {
                     var messageVariable = new CodeWriterDeclaration("message");
-                    writer.Line($"using {typeof(HttpMessage)} {messageVariable:D} = {RequestWriterHelpers.CreateRequestMethodName(restMethod.Name)}({restMethod.Parameters.GetIdentifiersFormattable()});");
+                    writer
+                        .Line($"using {typeof(HttpMessage)} {messageVariable:D} = {RequestWriterHelpers.CreateRequestMethodName(restMethod.Name)}({restMethod.Parameters.GetIdentifiersFormattable()});")
+                        .WriteEnableHttpRedirectIfNecessary(clientMethod.RequestMethod, messageVariable);
 
                     var methodName = async
                         ? headAsBoolean ? nameof(HttpPipelineExtensions.ProcessHeadAsBoolMessageAsync) : nameof(HttpPipelineExtensions.ProcessMessageAsync)
@@ -891,7 +894,7 @@ namespace AutoRest.CSharp.Generation.Writers
                                         property.SerializedName ?? property.Name,
                                         modelType.DiscriminatorValue,
                                         property.IsRequired,
-                                        BuilderHelpers.EscapeXmlDescription(property.Description)));
+                                        BuilderHelpers.EscapeXmlDocDescription(property.Description)));
 
                                     typesToExplore.Enqueue(property.Type);
                                     continue;
@@ -899,15 +902,15 @@ namespace AutoRest.CSharp.Generation.Writers
 
                                 propertyDocumentation.Add(new SchemaDocumentation.DocumentationRow(
                                     property.SerializedName ?? property.Name,
-                                    BuilderHelpers.EscapeXmlDescription(StringifyTypeForTable(property.Type)),
+                                    BuilderHelpers.EscapeXmlDocDescription(StringifyTypeForTable(property.Type)),
                                     property.IsRequired,
-                                    BuilderHelpers.EscapeXmlDescription(property.Description)));
+                                    BuilderHelpers.EscapeXmlDocDescription(property.Description)));
 
                                 typesToExplore.Enqueue(property.Type);
                             }
                         }
 
-                        documentationObjects.Add(new(toExplore == type ? schemaName : BuilderHelpers.EscapeXmlDescription(StringifyTypeForTable(toExplore)), propertyDocumentation));
+                        documentationObjects.Add(new(toExplore == type ? schemaName : BuilderHelpers.EscapeXmlDocDescription(StringifyTypeForTable(toExplore)), propertyDocumentation));
                         break;
                     case InputListType listType:
                         typesToExplore.Enqueue(listType.ElementType);

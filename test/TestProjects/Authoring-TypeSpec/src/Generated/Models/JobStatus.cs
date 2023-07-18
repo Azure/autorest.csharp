@@ -8,7 +8,7 @@
 using System;
 using System.ComponentModel;
 
-namespace Azure.Language.Authoring.Models
+namespace AuthoringTypeSpec.Models
 {
     /// <summary> Represents the job status values. </summary>
     public readonly partial struct JobStatus : IEquatable<JobStatus>

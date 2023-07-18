@@ -35,6 +35,8 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             {
                 SerializedNamesUpdater.Update();
             }
+            //eliminate client default value from property
+            ModelPropertyClientDefaultValueTransformer.Transform(MgmtContext.CodeModel);
 
             CodeModelValidator.Validate();
         }

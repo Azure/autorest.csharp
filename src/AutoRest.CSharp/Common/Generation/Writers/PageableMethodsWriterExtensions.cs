@@ -75,8 +75,8 @@ namespace AutoRest.CSharp.Generation.Writers
             {
                 writer.WriteParametersValidation(convenienceMethod.Signature.Parameters);
 
-                var firstPageRequest = GetCreateRequestCall(null, createFirstPageRequestMethod);
-                var nextPageRequest = GetCreateRequestCall(null, createNextPageRequestMethod);
+                var firstPageRequest = GetCreateRequestCall(null, createFirstPageRequestMethod, convenienceMethod.ProtocolToConvenienceParameterConverters);
+                var nextPageRequest = GetCreateRequestCall(null, createNextPageRequestMethod, convenienceMethod.ProtocolToConvenienceParameterConverters);
                 var parameters = new List<Parameter>();
 
                 foreach ((Parameter protocolParameter, Parameter? convenienceParameter, _) in convenienceMethod.ProtocolToConvenienceParameterConverters)
@@ -191,7 +191,7 @@ namespace AutoRest.CSharp.Generation.Writers
         private static bool ContainsRequestContext(IReadOnlyCollection<Parameter>? parameters) =>
             parameters != null && (parameters.Contains(KnownParameters.RequestContext) || parameters.Contains(KnownParameters.RequestContextRequired));
 
-        private static FormattableString? GetCreateRequestCall(Reference? restClientReference, RestClientMethod? createRequestMethod)
+        private static FormattableString? GetCreateRequestCall(Reference? restClientReference, RestClientMethod? createRequestMethod, IReadOnlyList<ProtocolToConvenienceParameterConverter>? ProtocolToConvenienceParameterConverters = null)
         {
             if (createRequestMethod == null)
             {
@@ -204,7 +204,29 @@ namespace AutoRest.CSharp.Generation.Writers
                 return $"{restClientReference.Value.GetReferenceFormattable()}.{methodName}({createRequestMethod.Parameters.GetIdentifiersFormattable()})";
             }
 
-            return $"{methodName}({createRequestMethod.Parameters.GetIdentifiersFormattable()})";
+            if (ProtocolToConvenienceParameterConverters == null)
+            {
+                return $"{methodName}({createRequestMethod.Parameters.GetIdentifiersFormattable()})";
+            }
+
+            var parameters = new List<FormattableString>();
+            foreach (var parameter in createRequestMethod.Parameters)
+            {
+                if (parameter == KnownParameters.RequestContext || parameter == KnownParameters.RequestContextRequired || parameter.Name == "nextLink" || parameter.Type.EqualsIgnoreNullable(typeof(RequestContent)))
+                {
+                    parameters.Add($"{parameter.Name}");
+                    continue;
+                }
+
+                var convenienceParameter = ProtocolToConvenienceParameterConverters.FirstOrDefault(convert => convert.Convenience.Name == parameter.Name)?.Convenience;
+                if (convenienceParameter == null)
+                {
+                    throw new InvalidOperationException($"Cannot find corresponding convenience parameter for create request method parameter {parameter.Name}.");
+                }
+
+                parameters.Add(convenienceParameter.GetConversionFormattable(parameter.Type));
+            }
+            return $"{methodName}({parameters.Join(" ,")})";
         }
 
         private static FormattableString GetValueFactory(CSharpType? pageItemType)

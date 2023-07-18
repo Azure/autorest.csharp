@@ -19,7 +19,7 @@ using Azure.Core;
     }
 )
 
-namespace Spread;
+namespace SpreadTypeSpec;
 
 enum QueryApiVersion {
   v2022_01_01_preview: "2022-01-01-preview"

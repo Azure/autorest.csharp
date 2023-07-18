@@ -11,7 +11,7 @@ using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
 
-namespace Azure.RenameGetList
+namespace RenameGetList
 {
     // Data plane generated client.
     /// <summary> The RenameGetList service client. </summary>
@@ -71,7 +71,7 @@ namespace Azure.RenameGetList
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/RenameGetListClient.xml" path="doc/members/member[@name='GetProjectAsync(string,RequestContext)']/*" />
-        public virtual async Task<Response> GetProjectAsync(string projectName, RequestContext context = null)
+        public virtual async Task<Response> GetProjectAsync(string projectName, RequestContext context)
         {
             Argument.AssertNotNullOrEmpty(projectName, nameof(projectName));
 
@@ -106,7 +106,7 @@ namespace Azure.RenameGetList
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/RenameGetListClient.xml" path="doc/members/member[@name='GetProject(string,RequestContext)']/*" />
-        public virtual Response GetProject(string projectName, RequestContext context = null)
+        public virtual Response GetProject(string projectName, RequestContext context)
         {
             Argument.AssertNotNullOrEmpty(projectName, nameof(projectName));
 
@@ -142,7 +142,7 @@ namespace Azure.RenameGetList
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/RenameGetListClient.xml" path="doc/members/member[@name='GetDeploymentAsync(string,string,RequestContext)']/*" />
-        public virtual async Task<Response> GetDeploymentAsync(string projectName, string deploymentName, RequestContext context = null)
+        public virtual async Task<Response> GetDeploymentAsync(string projectName, string deploymentName, RequestContext context)
         {
             Argument.AssertNotNullOrEmpty(projectName, nameof(projectName));
             Argument.AssertNotNullOrEmpty(deploymentName, nameof(deploymentName));
@@ -179,7 +179,7 @@ namespace Azure.RenameGetList
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/RenameGetListClient.xml" path="doc/members/member[@name='GetDeployment(string,string,RequestContext)']/*" />
-        public virtual Response GetDeployment(string projectName, string deploymentName, RequestContext context = null)
+        public virtual Response GetDeployment(string projectName, string deploymentName, RequestContext context)
         {
             Argument.AssertNotNullOrEmpty(projectName, nameof(projectName));
             Argument.AssertNotNullOrEmpty(deploymentName, nameof(deploymentName));
@@ -212,7 +212,7 @@ namespace Azure.RenameGetList
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="AsyncPageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
         /// <include file="Docs/RenameGetListClient.xml" path="doc/members/member[@name='GetProjectsAsync(RequestContext)']/*" />
-        public virtual AsyncPageable<BinaryData> GetProjectsAsync(RequestContext context = null)
+        public virtual AsyncPageable<BinaryData> GetProjectsAsync(RequestContext context)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetProjectsRequest(context);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => CreateGetProjectsNextPageRequest(nextLink, context);
@@ -233,7 +233,7 @@ namespace Azure.RenameGetList
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="Pageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
         /// <include file="Docs/RenameGetListClient.xml" path="doc/members/member[@name='GetProjects(RequestContext)']/*" />
-        public virtual Pageable<BinaryData> GetProjects(RequestContext context = null)
+        public virtual Pageable<BinaryData> GetProjects(RequestContext context)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetProjectsRequest(context);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => CreateGetProjectsNextPageRequest(nextLink, context);
@@ -257,7 +257,7 @@ namespace Azure.RenameGetList
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="AsyncPageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
         /// <include file="Docs/RenameGetListClient.xml" path="doc/members/member[@name='GetDeploymentsAsync(string,RequestContext)']/*" />
-        public virtual AsyncPageable<BinaryData> GetDeploymentsAsync(string projectName, RequestContext context = null)
+        public virtual AsyncPageable<BinaryData> GetDeploymentsAsync(string projectName, RequestContext context)
         {
             Argument.AssertNotNullOrEmpty(projectName, nameof(projectName));
 
@@ -283,7 +283,7 @@ namespace Azure.RenameGetList
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="Pageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
         /// <include file="Docs/RenameGetListClient.xml" path="doc/members/member[@name='GetDeployments(string,RequestContext)']/*" />
-        public virtual Pageable<BinaryData> GetDeployments(string projectName, RequestContext context = null)
+        public virtual Pageable<BinaryData> GetDeployments(string projectName, RequestContext context)
         {
             Argument.AssertNotNullOrEmpty(projectName, nameof(projectName));
 

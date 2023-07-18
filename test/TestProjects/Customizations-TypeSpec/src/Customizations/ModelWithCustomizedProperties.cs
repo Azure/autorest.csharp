@@ -6,7 +6,7 @@ using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
 
-namespace CustomizationsInCadl.Models
+namespace CustomizationsInTsp.Models
 {
     public partial class ModelWithCustomizedProperties
     {

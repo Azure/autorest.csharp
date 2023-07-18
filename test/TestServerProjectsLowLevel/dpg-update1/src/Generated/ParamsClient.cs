@@ -67,12 +67,12 @@ namespace dpg_update1_LowLevel
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="newParameter"> I&apos;m a new input optional parameter. </param>
+        /// <param name="newParameter"> I'm a new input optional parameter. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/ParamsClient.xml" path="doc/members/member[@name='HeadNoParamsAsync(string,RequestContext)']/*" />
-        public virtual async Task<Response> HeadNoParamsAsync(string newParameter = null, RequestContext context = null)
+        public virtual async Task<Response> HeadNoParamsAsync(string newParameter, RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("ParamsClient.HeadNoParams");
             scope.Start();
@@ -98,12 +98,12 @@ namespace dpg_update1_LowLevel
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="newParameter"> I&apos;m a new input optional parameter. </param>
+        /// <param name="newParameter"> I'm a new input optional parameter. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/ParamsClient.xml" path="doc/members/member[@name='HeadNoParams(string,RequestContext)']/*" />
-        public virtual Response HeadNoParams(string newParameter = null, RequestContext context = null)
+        public virtual Response HeadNoParams(string newParameter, RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("ParamsClient.HeadNoParams");
             scope.Start();
@@ -131,13 +131,13 @@ namespace dpg_update1_LowLevel
         /// </list>
         /// </summary>
         /// <param name="parameter"> I am a required parameter. </param>
-        /// <param name="newParameter"> I&apos;m a new input optional parameter. </param>
+        /// <param name="newParameter"> I'm a new input optional parameter. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="parameter"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/ParamsClient.xml" path="doc/members/member[@name='GetRequiredAsync(string,string,RequestContext)']/*" />
-        public virtual async Task<Response> GetRequiredAsync(string parameter, string newParameter = null, RequestContext context = null)
+        public virtual async Task<Response> GetRequiredAsync(string parameter, string newParameter, RequestContext context)
         {
             Argument.AssertNotNull(parameter, nameof(parameter));
 
@@ -167,13 +167,13 @@ namespace dpg_update1_LowLevel
         /// </list>
         /// </summary>
         /// <param name="parameter"> I am a required parameter. </param>
-        /// <param name="newParameter"> I&apos;m a new input optional parameter. </param>
+        /// <param name="newParameter"> I'm a new input optional parameter. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="parameter"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/ParamsClient.xml" path="doc/members/member[@name='GetRequired(string,string,RequestContext)']/*" />
-        public virtual Response GetRequired(string parameter, string newParameter = null, RequestContext context = null)
+        public virtual Response GetRequired(string parameter, string newParameter, RequestContext context)
         {
             Argument.AssertNotNull(parameter, nameof(parameter));
 
@@ -203,13 +203,13 @@ namespace dpg_update1_LowLevel
         /// </summary>
         /// <param name="requiredParam"> I am a required parameter. </param>
         /// <param name="optionalParam"> I am an optional parameter. </param>
-        /// <param name="newParameter"> I&apos;m a new input optional parameter. </param>
+        /// <param name="newParameter"> I'm a new input optional parameter. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="requiredParam"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/ParamsClient.xml" path="doc/members/member[@name='PutRequiredOptionalAsync(string,string,string,RequestContext)']/*" />
-        public virtual async Task<Response> PutRequiredOptionalAsync(string requiredParam, string optionalParam = null, string newParameter = null, RequestContext context = null)
+        public virtual async Task<Response> PutRequiredOptionalAsync(string requiredParam, string optionalParam, string newParameter, RequestContext context)
         {
             Argument.AssertNotNull(requiredParam, nameof(requiredParam));
 
@@ -239,13 +239,13 @@ namespace dpg_update1_LowLevel
         /// </summary>
         /// <param name="requiredParam"> I am a required parameter. </param>
         /// <param name="optionalParam"> I am an optional parameter. </param>
-        /// <param name="newParameter"> I&apos;m a new input optional parameter. </param>
+        /// <param name="newParameter"> I'm a new input optional parameter. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="requiredParam"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/ParamsClient.xml" path="doc/members/member[@name='PutRequiredOptional(string,string,string,RequestContext)']/*" />
-        public virtual Response PutRequiredOptional(string requiredParam, string optionalParam = null, string newParameter = null, RequestContext context = null)
+        public virtual Response PutRequiredOptional(string requiredParam, string optionalParam, string newParameter, RequestContext context)
         {
             Argument.AssertNotNull(requiredParam, nameof(requiredParam));
 
@@ -274,7 +274,7 @@ namespace dpg_update1_LowLevel
         /// </list>
         /// </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="contentType"> Body Parameter content-type. Allowed values: &quot;application/json&quot; | &quot;image/jpeg&quot;. </param>
+        /// <param name="contentType"> Body Parameter content-type. Allowed values: "application/json" | "image/jpeg". </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
@@ -309,7 +309,7 @@ namespace dpg_update1_LowLevel
         /// </list>
         /// </summary>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="contentType"> Body Parameter content-type. Allowed values: &quot;application/json&quot; | &quot;image/jpeg&quot;. </param>
+        /// <param name="contentType"> Body Parameter content-type. Allowed values: "application/json" | "image/jpeg". </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
@@ -407,12 +407,12 @@ namespace dpg_update1_LowLevel
         /// </list>
         /// </summary>
         /// <param name="optionalParam"> I am an optional parameter. </param>
-        /// <param name="newParameter"> I&apos;m a new input optional parameter. </param>
+        /// <param name="newParameter"> I'm a new input optional parameter. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/ParamsClient.xml" path="doc/members/member[@name='GetOptionalAsync(string,string,RequestContext)']/*" />
-        public virtual async Task<Response> GetOptionalAsync(string optionalParam = null, string newParameter = null, RequestContext context = null)
+        public virtual async Task<Response> GetOptionalAsync(string optionalParam, string newParameter, RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("ParamsClient.GetOptional");
             scope.Start();
@@ -440,12 +440,12 @@ namespace dpg_update1_LowLevel
         /// </list>
         /// </summary>
         /// <param name="optionalParam"> I am an optional parameter. </param>
-        /// <param name="newParameter"> I&apos;m a new input optional parameter. </param>
+        /// <param name="newParameter"> I'm a new input optional parameter. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/ParamsClient.xml" path="doc/members/member[@name='GetOptional(string,string,RequestContext)']/*" />
-        public virtual Response GetOptional(string optionalParam = null, string newParameter = null, RequestContext context = null)
+        public virtual Response GetOptional(string optionalParam, string newParameter, RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("ParamsClient.GetOptional");
             scope.Start();
@@ -462,7 +462,7 @@ namespace dpg_update1_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method] I&apos;m a new operation.
+        /// [Protocol Method] I'm a new operation.
         ///  Initiallty neither path or method exist for this operation. After evolution, this is a new method in a new path
         /// <list type="bullet">
         /// <item>
@@ -476,7 +476,7 @@ namespace dpg_update1_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/ParamsClient.xml" path="doc/members/member[@name='GetNewOperationAsync(RequestContext)']/*" />
-        public virtual async Task<Response> GetNewOperationAsync(RequestContext context = null)
+        public virtual async Task<Response> GetNewOperationAsync(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("ParamsClient.GetNewOperation");
             scope.Start();
@@ -493,7 +493,7 @@ namespace dpg_update1_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method] I&apos;m a new operation.
+        /// [Protocol Method] I'm a new operation.
         ///  Initiallty neither path or method exist for this operation. After evolution, this is a new method in a new path
         /// <list type="bullet">
         /// <item>
@@ -507,7 +507,7 @@ namespace dpg_update1_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/ParamsClient.xml" path="doc/members/member[@name='GetNewOperation(RequestContext)']/*" />
-        public virtual Response GetNewOperation(RequestContext context = null)
+        public virtual Response GetNewOperation(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("ParamsClient.GetNewOperation");
             scope.Start();

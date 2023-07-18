@@ -16,7 +16,6 @@ namespace AutoRest.CSharp.Output.Models.Types
     internal class DpgOutputLibrary : OutputLibrary
     {
         private readonly string _libraryName;
-        private readonly string _rootNamespace;
         private readonly IReadOnlyDictionary<InputEnumType, EnumType> _enums;
         private readonly IReadOnlyDictionary<InputModelType, ModelTypeProvider> _models;
         private readonly bool _isTspInput;
@@ -29,11 +28,10 @@ namespace AutoRest.CSharp.Output.Models.Types
         public ClientOptionsTypeProvider ClientOptions { get; }
         public IEnumerable<TypeProvider> AllModels => new List<TypeProvider>(_enums.Values).Concat(_models.Values);
 
-        public DpgOutputLibrary(string libraryName, string rootNamespace, IReadOnlyDictionary<InputEnumType, EnumType> enums, IReadOnlyDictionary<InputModelType, ModelTypeProvider> models, IReadOnlyList<LowLevelClient> restClients, ClientOptionsTypeProvider clientOptions, bool isTspInput, SourceInputModel? sourceInputModel)
+        public DpgOutputLibrary(string libraryName, IReadOnlyDictionary<InputEnumType, EnumType> enums, IReadOnlyDictionary<InputModelType, ModelTypeProvider> models, IReadOnlyList<LowLevelClient> restClients, ClientOptionsTypeProvider clientOptions, bool isTspInput, SourceInputModel? sourceInputModel)
         {
             TypeFactory = new TypeFactory(this);
             _libraryName = libraryName;
-            _rootNamespace = rootNamespace;
             _enums = enums;
             _models = models;
             _isTspInput = isTspInput;
@@ -43,11 +41,10 @@ namespace AutoRest.CSharp.Output.Models.Types
         }
 
         private AspDotNetExtensionTypeProvider? _aspDotNetExtension;
-        public AspDotNetExtensionTypeProvider AspDotNetExtension => _aspDotNetExtension ??= new AspDotNetExtensionTypeProvider(RestClients, _rootNamespace, _sourceInputModel);
+        public AspDotNetExtensionTypeProvider AspDotNetExtension => _aspDotNetExtension ??= new AspDotNetExtensionTypeProvider(RestClients, Configuration.Namespace, _sourceInputModel);
 
         private ModelFactoryTypeProvider? _modelFactoryProvider;
-        public ModelFactoryTypeProvider? ModelFactory => _modelFactoryProvider ??= ModelFactoryTypeProvider.TryCreate(ClientBuilder.GetClientPrefix(Configuration.LibraryName, _libraryName), _rootNamespace, AllModels, _sourceInputModel);
-
+        public ModelFactoryTypeProvider? ModelFactory => _modelFactoryProvider ??= ModelFactoryTypeProvider.TryCreate(AllModels, _sourceInputModel);
 
         public override CSharpType ResolveEnum(InputEnumType enumType)
         {
@@ -67,7 +64,22 @@ namespace AutoRest.CSharp.Output.Models.Types
         public override CSharpType ResolveModel(InputModelType model)
             => _models.TryGetValue(model, out var modelTypeProvider) ? modelTypeProvider.Type : new CSharpType(typeof(object), model.IsNullable);
 
-        public override CSharpType? FindTypeByName(string originalName) => Models.Where(m => m.Declaration.Name == originalName)?.Select(m => m.Type).FirstOrDefault();
+        public override CSharpType? FindTypeByName(string originalName)
+        {
+            foreach (var model in Models)
+            {
+                if (model.Declaration.Name == originalName)
+                    return model.Type;
+            }
+
+            foreach (var e in Enums)
+            {
+                if (e.Declaration.Name == originalName)
+                    return e.Type;
+            }
+
+            return null;
+        }
 
         public override CSharpType FindTypeForSchema(Schema schema) => throw new NotImplementedException($"{nameof(FindTypeForSchema)} shouldn't be called for DPG!");
 

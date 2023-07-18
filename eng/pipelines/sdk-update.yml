@@ -6,7 +6,7 @@ parameters:
     default: false
 
 variables:
-  NugetSecurityAnalysisWarningLevel: 'none'
+  nugetMultiFeedWarnLevel: 'none'
 
 resources:
   repositories:
@@ -66,6 +66,10 @@ stages:
           - script: |
               npm ci
             displayName: "Install packages"
+            workingDirectory: $(Build.SourcesDirectory)/autorest.csharp
+          - script: |
+              npm ls -a
+            displayName: "List packages"
             workingDirectory: $(Build.SourcesDirectory)/autorest.csharp
           - script: |
               npm run prettier

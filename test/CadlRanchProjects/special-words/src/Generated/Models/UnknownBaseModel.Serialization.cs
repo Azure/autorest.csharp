@@ -34,7 +34,7 @@ namespace SpecialWords.Models
 
         /// <summary> Deserializes the model from a raw response. </summary>
         /// <param name="response"> The response to deserialize the model from. </param>
-        internal new static UnknownBaseModel FromResponse(Response response)
+        internal static new UnknownBaseModel FromResponse(Response response)
         {
             using var document = JsonDocument.Parse(response.Content);
             return DeserializeUnknownBaseModel(document.RootElement);

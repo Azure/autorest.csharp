@@ -11,7 +11,7 @@ using Azure;
 using Azure.Core;
 using Azure.Core.Serialization;
 
-namespace ApiVersionInCadl.Models
+namespace ApiVersionInTsp.Models
 {
     public partial class DetectionResult
     {

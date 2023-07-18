@@ -14,7 +14,6 @@ namespace Pagination.Models
     /// <summary> Model factory for models. </summary>
     public static partial class PaginationModelFactory
     {
-
         /// <summary> Initializes a new instance of LedgerEntry. </summary>
         /// <param name="contents"> Contents of the ledger entry. </param>
         /// <param name="collectionId"></param>
@@ -23,6 +22,16 @@ namespace Pagination.Models
         public static LedgerEntry LedgerEntry(string contents = null, string collectionId = null, string transactionId = null)
         {
             return new LedgerEntry(contents, collectionId, transactionId);
+        }
+
+        /// <summary> Initializes a new instance of DimensionValueListItem. </summary>
+        /// <param name="value"></param>
+        /// <returns> A new <see cref="Models.DimensionValueListItem"/> instance for mocking. </returns>
+        public static DimensionValueListItem DimensionValueListItem(IEnumerable<string> value = null)
+        {
+            value ??= new List<string>();
+
+            return new DimensionValueListItem(value?.ToList());
         }
 
         /// <summary> Initializes a new instance of TextBlocklist. </summary>

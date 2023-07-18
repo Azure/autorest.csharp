@@ -12,7 +12,7 @@ using Azure;
 using Azure.Core;
 using Azure.Core.Serialization;
 
-namespace Azure.Language.Authoring.Models
+namespace AuthoringTypeSpec.Models
 {
     public partial class SwapDeploymentsJob
     {

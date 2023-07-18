@@ -66,7 +66,7 @@ namespace SubClients_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method] 
+        /// [Protocol Method]
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -79,7 +79,7 @@ namespace SubClients_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/RootClient.xml" path="doc/members/member[@name='GetCachedParameterAsync(RequestContext)']/*" />
-        public virtual async Task<Response> GetCachedParameterAsync(RequestContext context = null)
+        public virtual async Task<Response> GetCachedParameterAsync(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("RootClient.GetCachedParameter");
             scope.Start();
@@ -96,7 +96,7 @@ namespace SubClients_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method] 
+        /// [Protocol Method]
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -109,7 +109,7 @@ namespace SubClients_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/RootClient.xml" path="doc/members/member[@name='GetCachedParameter(RequestContext)']/*" />
-        public virtual Response GetCachedParameter(RequestContext context = null)
+        public virtual Response GetCachedParameter(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("RootClient.GetCachedParameter");
             scope.Start();

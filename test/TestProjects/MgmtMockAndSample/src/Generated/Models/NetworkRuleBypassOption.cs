@@ -10,7 +10,7 @@ using System.ComponentModel;
 
 namespace MgmtMockAndSample.Models
 {
-    /// <summary> Tells what traffic can bypass network rules. This can be &apos;AzureServices&apos; or &apos;None&apos;.  If not specified the default is &apos;AzureServices&apos;. </summary>
+    /// <summary> Tells what traffic can bypass network rules. This can be 'AzureServices' or 'None'.  If not specified the default is 'AzureServices'. </summary>
     public readonly partial struct NetworkRuleBypassOption : IEquatable<NetworkRuleBypassOption>
     {
         private readonly string _value;

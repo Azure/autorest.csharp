@@ -1,8 +1,8 @@
 {
-  "OutputFolder": ".",
-  "Namespace": "TypeSpec.visibility",
-  "LibraryName": "TypeSpec.visibility",
-  "SharedSourceFolders": [
+  "output-folder": ".",
+  "namespace": "TypeSpec.visibility",
+  "library-name": "TypeSpec.visibility",
+  "shared-source-folders": [
     "../../../../../../../node_modules/@autorest/csharp/Generator.Shared",
     "../../../../../../../node_modules/@autorest/csharp/Azure.Core.Shared"
   ],

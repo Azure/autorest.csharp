@@ -16,7 +16,7 @@ using lro.Models;
 
 namespace lro
 {
-    /// <summary> Long running put request, service returns a 202 to the initial request, with a location header that points to a polling URL that returns a 200 and an entity that doesn&apos;t contains ProvisioningState. </summary>
+    /// <summary> Long running put request, service returns a 202 to the initial request, with a location header that points to a polling URL that returns a 200 and an entity that doesn't contains ProvisioningState. </summary>
     public partial class LROsPut202Retry200Operation : Operation<Product>, IOperationSource<Product>
     {
         private readonly OperationInternal<Product> _operation;

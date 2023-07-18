@@ -11,7 +11,7 @@ using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
 
-namespace Azure.ClientAndOperationGroupService
+namespace ClientAndOperationGroup
 {
     // Data plane generated sub-client.
     /// <summary> The Gamma sub-client. </summary>
@@ -46,7 +46,7 @@ namespace Azure.ClientAndOperationGroupService
         }
 
         /// <summary>
-        /// [Protocol Method] 
+        /// [Protocol Method]
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -59,7 +59,7 @@ namespace Azure.ClientAndOperationGroupService
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/Gamma.xml" path="doc/members/member[@name='FourAsync(RequestContext)']/*" />
-        public virtual async Task<Response> FourAsync(RequestContext context = null)
+        public virtual async Task<Response> FourAsync(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("Gamma.Four");
             scope.Start();
@@ -76,7 +76,7 @@ namespace Azure.ClientAndOperationGroupService
         }
 
         /// <summary>
-        /// [Protocol Method] 
+        /// [Protocol Method]
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -89,7 +89,7 @@ namespace Azure.ClientAndOperationGroupService
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/Gamma.xml" path="doc/members/member[@name='Four(RequestContext)']/*" />
-        public virtual Response Four(RequestContext context = null)
+        public virtual Response Four(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("Gamma.Four");
             scope.Start();
@@ -106,7 +106,7 @@ namespace Azure.ClientAndOperationGroupService
         }
 
         /// <summary>
-        /// [Protocol Method] 
+        /// [Protocol Method]
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -119,7 +119,7 @@ namespace Azure.ClientAndOperationGroupService
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/Gamma.xml" path="doc/members/member[@name='FiveAsync(RequestContext)']/*" />
-        public virtual async Task<Response> FiveAsync(RequestContext context = null)
+        public virtual async Task<Response> FiveAsync(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("Gamma.Five");
             scope.Start();
@@ -136,7 +136,7 @@ namespace Azure.ClientAndOperationGroupService
         }
 
         /// <summary>
-        /// [Protocol Method] 
+        /// [Protocol Method]
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -149,7 +149,7 @@ namespace Azure.ClientAndOperationGroupService
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/Gamma.xml" path="doc/members/member[@name='Five(RequestContext)']/*" />
-        public virtual Response Five(RequestContext context = null)
+        public virtual Response Five(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("Gamma.Five");
             scope.Start();

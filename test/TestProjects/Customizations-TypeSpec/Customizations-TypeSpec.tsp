@@ -10,7 +10,7 @@ import "@azure-tools/typespec-azure-core";
     }
 )
 @doc("CADL project to test various types of models.")
-namespace CustomizationsInCadl;
+namespace CustomizationsInTsp;
 
 using TypeSpec.Http;
 using TypeSpec.Rest;
@@ -106,6 +106,13 @@ enum EnumToBeMadeExtensible {
     ExThree: "3"
 }
 
+@doc("A normal enum")
+enum NormalEnum
+{
+    A: "a",
+    B: "b"
+}
+
 @doc("Root RoundTrip model to reference all other types to ensure generation")
 model RootModel {  
   @doc("ModelToMakeInternal")
@@ -131,6 +138,9 @@ model RootModel {
 
   @doc("ModelToAddAdditionalSerializableProperty")
   propertyModelToAddAdditionalSerializableProperty?: ModelToAddAdditionalSerializableProperty;
+
+  @doc("Enum type property to move to customization code")
+  propertyToMoveToCustomization?: NormalEnum;
 }
 
 @route("/inputToRoundTrip")

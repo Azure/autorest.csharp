@@ -50,7 +50,7 @@ namespace AutoRest.CSharp.MgmtTest.Models
             // TODO -- find a way to determine which parent to use. Only for prototype, here we use the first
             // Only when this resource is a "scope resource", we could have multiple parents
             // We could use the value of the scope variable, get the resource type from it to know which resource we should use as a parent here
-            return parents.First();
+            return parents.FirstOrDefault();
         }
 
         private static string GetRequestParameterName(RequestParameter requestParameter)

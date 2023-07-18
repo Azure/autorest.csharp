@@ -12,9 +12,9 @@ namespace constants.Models
     {
         /// <summary> Initializes a new instance of ModelAsStringRequiredTwoValueDefault. </summary>
         /// <param name="parameter"></param>
-        internal ModelAsStringRequiredTwoValueDefault(ModelAsStringRequiredTwoValueDefaultEnum? parameter = null)
+        internal ModelAsStringRequiredTwoValueDefault(ModelAsStringRequiredTwoValueDefaultEnum parameter)
         {
-            Parameter = parameter ?? ModelAsStringRequiredTwoValueDefaultEnum.Value1;
+            Parameter = parameter;
         }
 
         /// <summary> Gets the parameter. </summary>

@@ -33,21 +33,22 @@ namespace custom_baseUrl_paging_LowLevel
         }
 
         /// <summary> Initializes a new instance of PagingClient. </summary>
+        /// <param name="host"> A string value that is used as a global part of the parameterized host. The default value is "host". </param>
         /// <param name="credential"> A credential used to authenticate to an Azure Service. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="credential"/> is null. </exception>
-        public PagingClient(AzureKeyCredential credential) : this(credential, "host", new PagingClientOptions())
+        /// <exception cref="ArgumentNullException"> <paramref name="host"/> or <paramref name="credential"/> is null. </exception>
+        public PagingClient(string host, AzureKeyCredential credential) : this(host, credential, new PagingClientOptions())
         {
         }
 
         /// <summary> Initializes a new instance of PagingClient. </summary>
+        /// <param name="host"> A string value that is used as a global part of the parameterized host. The default value is "host". </param>
         /// <param name="credential"> A credential used to authenticate to an Azure Service. </param>
-        /// <param name="host"> A string value that is used as a global part of the parameterized host. </param>
         /// <param name="options"> The options for configuring the client. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="credential"/> or <paramref name="host"/> is null. </exception>
-        public PagingClient(AzureKeyCredential credential, string host, PagingClientOptions options)
+        /// <exception cref="ArgumentNullException"> <paramref name="host"/> or <paramref name="credential"/> is null. </exception>
+        public PagingClient(string host, AzureKeyCredential credential, PagingClientOptions options)
         {
-            Argument.AssertNotNull(credential, nameof(credential));
             Argument.AssertNotNull(host, nameof(host));
+            Argument.AssertNotNull(credential, nameof(credential));
             options ??= new PagingClientOptions();
 
             ClientDiagnostics = new ClientDiagnostics(options, true);
@@ -72,7 +73,7 @@ namespace custom_baseUrl_paging_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="AsyncPageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
         /// <include file="Docs/PagingClient.xml" path="doc/members/member[@name='GetPagesPartialUrlAsync(string,RequestContext)']/*" />
-        public virtual AsyncPageable<BinaryData> GetPagesPartialUrlAsync(string accountName, RequestContext context = null)
+        public virtual AsyncPageable<BinaryData> GetPagesPartialUrlAsync(string accountName, RequestContext context)
         {
             Argument.AssertNotNull(accountName, nameof(accountName));
 
@@ -97,7 +98,7 @@ namespace custom_baseUrl_paging_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="Pageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
         /// <include file="Docs/PagingClient.xml" path="doc/members/member[@name='GetPagesPartialUrl(string,RequestContext)']/*" />
-        public virtual Pageable<BinaryData> GetPagesPartialUrl(string accountName, RequestContext context = null)
+        public virtual Pageable<BinaryData> GetPagesPartialUrl(string accountName, RequestContext context)
         {
             Argument.AssertNotNull(accountName, nameof(accountName));
 
@@ -122,7 +123,7 @@ namespace custom_baseUrl_paging_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="AsyncPageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
         /// <include file="Docs/PagingClient.xml" path="doc/members/member[@name='GetPagesPartialUrlOperationAsync(string,RequestContext)']/*" />
-        public virtual AsyncPageable<BinaryData> GetPagesPartialUrlOperationAsync(string accountName, RequestContext context = null)
+        public virtual AsyncPageable<BinaryData> GetPagesPartialUrlOperationAsync(string accountName, RequestContext context)
         {
             Argument.AssertNotNull(accountName, nameof(accountName));
 
@@ -147,7 +148,7 @@ namespace custom_baseUrl_paging_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="Pageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
         /// <include file="Docs/PagingClient.xml" path="doc/members/member[@name='GetPagesPartialUrlOperation(string,RequestContext)']/*" />
-        public virtual Pageable<BinaryData> GetPagesPartialUrlOperation(string accountName, RequestContext context = null)
+        public virtual Pageable<BinaryData> GetPagesPartialUrlOperation(string accountName, RequestContext context)
         {
             Argument.AssertNotNull(accountName, nameof(accountName));
 
@@ -173,7 +174,7 @@ namespace custom_baseUrl_paging_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="AsyncPageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
         /// <include file="Docs/PagingClient.xml" path="doc/members/member[@name='GetPagesPartialUrlOperationNextAsync(string,string,RequestContext)']/*" />
-        public virtual AsyncPageable<BinaryData> GetPagesPartialUrlOperationNextAsync(string accountName, string nextLink, RequestContext context = null)
+        public virtual AsyncPageable<BinaryData> GetPagesPartialUrlOperationNextAsync(string accountName, string nextLink, RequestContext context)
         {
             Argument.AssertNotNull(accountName, nameof(accountName));
             Argument.AssertNotNull(nextLink, nameof(nextLink));
@@ -200,7 +201,7 @@ namespace custom_baseUrl_paging_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="Pageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
         /// <include file="Docs/PagingClient.xml" path="doc/members/member[@name='GetPagesPartialUrlOperationNext(string,string,RequestContext)']/*" />
-        public virtual Pageable<BinaryData> GetPagesPartialUrlOperationNext(string accountName, string nextLink, RequestContext context = null)
+        public virtual Pageable<BinaryData> GetPagesPartialUrlOperationNext(string accountName, string nextLink, RequestContext context)
         {
             Argument.AssertNotNull(accountName, nameof(accountName));
             Argument.AssertNotNull(nextLink, nameof(nextLink));

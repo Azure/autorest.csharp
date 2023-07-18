@@ -12,7 +12,7 @@ using Azure;
 using Azure.Core;
 using Azure.Core.Serialization;
 
-namespace CustomizationsInCadl.Models
+namespace CustomizationsInTsp.Models
 {
     public partial class ModelWithCustomizedProperties : IUtf8JsonSerializable, IModelSerializable
     {

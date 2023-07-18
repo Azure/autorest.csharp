@@ -7,7 +7,7 @@
 
 namespace MgmtSupersetInheritance.Models
 {
-    /// <summary> This model does not have id property, it&apos;s Non-Resource. </summary>
+    /// <summary> This model does not have id property, it's Non-Resource. </summary>
     public partial class SupersetModel2
     {
         /// <summary> Initializes a new instance of SupersetModel2. </summary>

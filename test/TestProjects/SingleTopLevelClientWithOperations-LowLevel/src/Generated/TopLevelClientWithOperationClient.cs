@@ -59,7 +59,7 @@ namespace SingleTopLevelClientWithOperations_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method] 
+        /// [Protocol Method]
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -72,7 +72,7 @@ namespace SingleTopLevelClientWithOperations_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/TopLevelClientWithOperationClient.xml" path="doc/members/member[@name='OperationAsync(RequestContext)']/*" />
-        public virtual async Task<Response> OperationAsync(RequestContext context = null)
+        public virtual async Task<Response> OperationAsync(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("TopLevelClientWithOperationClient.Operation");
             scope.Start();
@@ -89,7 +89,7 @@ namespace SingleTopLevelClientWithOperations_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method] 
+        /// [Protocol Method]
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -102,7 +102,7 @@ namespace SingleTopLevelClientWithOperations_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/TopLevelClientWithOperationClient.xml" path="doc/members/member[@name='Operation(RequestContext)']/*" />
-        public virtual Response Operation(RequestContext context = null)
+        public virtual Response Operation(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("TopLevelClientWithOperationClient.Operation");
             scope.Start();
@@ -119,7 +119,7 @@ namespace SingleTopLevelClientWithOperations_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method] Operation defined in resource client, but must be promoted to the top level client because it doesn&apos;t have a parameter with `x-ms-resource-identifier: true`.
+        /// [Protocol Method] Operation defined in resource client, but must be promoted to the top level client because it doesn't have a parameter with `x-ms-resource-identifier: true`.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -134,7 +134,7 @@ namespace SingleTopLevelClientWithOperations_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="AsyncPageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
         /// <include file="Docs/TopLevelClientWithOperationClient.xml" path="doc/members/member[@name='GetAllAsync(string,RequestContext)']/*" />
-        public virtual AsyncPageable<BinaryData> GetAllAsync(string filter, RequestContext context = null)
+        public virtual AsyncPageable<BinaryData> GetAllAsync(string filter, RequestContext context)
         {
             Argument.AssertNotNull(filter, nameof(filter));
 
@@ -144,7 +144,7 @@ namespace SingleTopLevelClientWithOperations_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method] Operation defined in resource client, but must be promoted to the top level client because it doesn&apos;t have a parameter with `x-ms-resource-identifier: true`.
+        /// [Protocol Method] Operation defined in resource client, but must be promoted to the top level client because it doesn't have a parameter with `x-ms-resource-identifier: true`.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -159,7 +159,7 @@ namespace SingleTopLevelClientWithOperations_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="Pageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
         /// <include file="Docs/TopLevelClientWithOperationClient.xml" path="doc/members/member[@name='GetAll(string,RequestContext)']/*" />
-        public virtual Pageable<BinaryData> GetAll(string filter, RequestContext context = null)
+        public virtual Pageable<BinaryData> GetAll(string filter, RequestContext context)
         {
             Argument.AssertNotNull(filter, nameof(filter));
 

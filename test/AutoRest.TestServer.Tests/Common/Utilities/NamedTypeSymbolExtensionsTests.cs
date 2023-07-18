@@ -92,9 +92,11 @@ namespace NamedTypeSymbolExtensionsTests
                 disablePaginationTopRenaming: false,
                 generateModelFactory: false,
                 publicDiscriminatorProperty: false,
+                useCoreDataFactoryReplacements: true,
                 modelFactoryForHlc: Array.Empty<string>(),
                 unreferencedTypesHandling: Configuration.UnreferencedTypesHandlingOption.RemoveOrInternalize,
                 useOverloadsBetweenProtocolAndConvenience: true,
+                keepNonOverloadableProtocolSignature: false,
                 projectFolder: "/..",
                 existingProjectFolder: null,
                 protocolMethodList: Array.Empty<string>(),
@@ -102,6 +104,7 @@ namespace NamedTypeSymbolExtensionsTests
                 modelsToTreatEmptyStringAsNull: Array.Empty<string>(),
                 additionalIntrinsicTypesToTreatEmptyStringAsNull: Array.Empty<string>(),
                 shouldTreatBase64AsBinaryData: true,
+                methodsToKeepClientDefaultValue: Array.Empty<string>(),
                 mgmtConfiguration: null,
                 mgmtTestConfiguration: null);
         }

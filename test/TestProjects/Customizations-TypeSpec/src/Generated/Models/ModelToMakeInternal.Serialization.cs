@@ -10,7 +10,7 @@ using Azure;
 using Azure.Core;
 using Azure.Core.Serialization;
 
-namespace CustomizationsInCadl.Models
+namespace CustomizationsInTsp.Models
 {
     internal partial class ModelToMakeInternal : IUtf8JsonSerializable, IModelSerializable
     {

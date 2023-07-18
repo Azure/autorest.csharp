@@ -58,7 +58,7 @@ namespace paging_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method] A paging operation that must return result of the default &apos;value&apos; node.
+        /// [Protocol Method] A paging operation that must return result of the default 'value' node.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -71,7 +71,7 @@ namespace paging_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="AsyncPageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
         /// <include file="Docs/PagingClient.xml" path="doc/members/member[@name='GetNoItemNamePagesAsync(RequestContext)']/*" />
-        public virtual AsyncPageable<BinaryData> GetNoItemNamePagesAsync(RequestContext context = null)
+        public virtual AsyncPageable<BinaryData> GetNoItemNamePagesAsync(RequestContext context)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetNoItemNamePagesRequest(context);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => CreateGetNoItemNamePagesNextPageRequest(nextLink, context);
@@ -79,7 +79,7 @@ namespace paging_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method] A paging operation that must return result of the default &apos;value&apos; node.
+        /// [Protocol Method] A paging operation that must return result of the default 'value' node.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -92,7 +92,7 @@ namespace paging_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="Pageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
         /// <include file="Docs/PagingClient.xml" path="doc/members/member[@name='GetNoItemNamePages(RequestContext)']/*" />
-        public virtual Pageable<BinaryData> GetNoItemNamePages(RequestContext context = null)
+        public virtual Pageable<BinaryData> GetNoItemNamePages(RequestContext context)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetNoItemNamePagesRequest(context);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => CreateGetNoItemNamePagesNextPageRequest(nextLink, context);
@@ -113,7 +113,7 @@ namespace paging_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="AsyncPageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
         /// <include file="Docs/PagingClient.xml" path="doc/members/member[@name='GetNullNextLinkNamePagesAsync(RequestContext)']/*" />
-        public virtual AsyncPageable<BinaryData> GetNullNextLinkNamePagesAsync(RequestContext context = null)
+        public virtual AsyncPageable<BinaryData> GetNullNextLinkNamePagesAsync(RequestContext context)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetNullNextLinkNamePagesRequest(context);
             return PageableHelpers.CreateAsyncPageable(FirstPageRequest, null, (e, o) => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "PagingClient.GetNullNextLinkNamePages", "values", null, context);
@@ -133,7 +133,7 @@ namespace paging_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="Pageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
         /// <include file="Docs/PagingClient.xml" path="doc/members/member[@name='GetNullNextLinkNamePages(RequestContext)']/*" />
-        public virtual Pageable<BinaryData> GetNullNextLinkNamePages(RequestContext context = null)
+        public virtual Pageable<BinaryData> GetNullNextLinkNamePages(RequestContext context)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetNullNextLinkNamePagesRequest(context);
             return PageableHelpers.CreatePageable(FirstPageRequest, null, (e, o) => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "PagingClient.GetNullNextLinkNamePages", "values", null, context);
@@ -153,7 +153,7 @@ namespace paging_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="AsyncPageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
         /// <include file="Docs/PagingClient.xml" path="doc/members/member[@name='GetSinglePagesAsync(RequestContext)']/*" />
-        public virtual AsyncPageable<BinaryData> GetSinglePagesAsync(RequestContext context = null)
+        public virtual AsyncPageable<BinaryData> GetSinglePagesAsync(RequestContext context)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetSinglePagesRequest(context);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => CreateGetSinglePagesNextPageRequest(nextLink, context);
@@ -174,7 +174,7 @@ namespace paging_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="Pageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
         /// <include file="Docs/PagingClient.xml" path="doc/members/member[@name='GetSinglePages(RequestContext)']/*" />
-        public virtual Pageable<BinaryData> GetSinglePages(RequestContext context = null)
+        public virtual Pageable<BinaryData> GetSinglePages(RequestContext context)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetSinglePagesRequest(context);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => CreateGetSinglePagesNextPageRequest(nextLink, context);
@@ -182,7 +182,7 @@ namespace paging_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method] A paging operation whose first response&apos;s items list is empty, but still returns a next link. Second (and final) call, will give you an items list of 1.
+        /// [Protocol Method] A paging operation whose first response's items list is empty, but still returns a next link. Second (and final) call, will give you an items list of 1.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -195,7 +195,7 @@ namespace paging_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="AsyncPageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
         /// <include file="Docs/PagingClient.xml" path="doc/members/member[@name='FirstResponseEmptyAsync(RequestContext)']/*" />
-        public virtual AsyncPageable<BinaryData> FirstResponseEmptyAsync(RequestContext context = null)
+        public virtual AsyncPageable<BinaryData> FirstResponseEmptyAsync(RequestContext context)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => CreateFirstResponseEmptyRequest(context);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => CreateFirstResponseEmptyNextPageRequest(nextLink, context);
@@ -203,7 +203,7 @@ namespace paging_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method] A paging operation whose first response&apos;s items list is empty, but still returns a next link. Second (and final) call, will give you an items list of 1.
+        /// [Protocol Method] A paging operation whose first response's items list is empty, but still returns a next link. Second (and final) call, will give you an items list of 1.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -216,7 +216,7 @@ namespace paging_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="Pageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
         /// <include file="Docs/PagingClient.xml" path="doc/members/member[@name='FirstResponseEmpty(RequestContext)']/*" />
-        public virtual Pageable<BinaryData> FirstResponseEmpty(RequestContext context = null)
+        public virtual Pageable<BinaryData> FirstResponseEmpty(RequestContext context)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => CreateFirstResponseEmptyRequest(context);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => CreateFirstResponseEmptyNextPageRequest(nextLink, context);
@@ -240,7 +240,7 @@ namespace paging_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="AsyncPageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
         /// <include file="Docs/PagingClient.xml" path="doc/members/member[@name='GetMultiplePagesAsync(string,int?,int?,RequestContext)']/*" />
-        public virtual AsyncPageable<BinaryData> GetMultiplePagesAsync(string clientRequestId = null, int? maxresults = null, int? timeout = null, RequestContext context = null)
+        public virtual AsyncPageable<BinaryData> GetMultiplePagesAsync(string clientRequestId, int? maxresults, int? timeout, RequestContext context)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetMultiplePagesRequest(clientRequestId, maxresults, timeout, context);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => CreateGetMultiplePagesNextPageRequest(nextLink, clientRequestId, maxresults, timeout, context);
@@ -264,7 +264,7 @@ namespace paging_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="Pageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
         /// <include file="Docs/PagingClient.xml" path="doc/members/member[@name='GetMultiplePages(string,int?,int?,RequestContext)']/*" />
-        public virtual Pageable<BinaryData> GetMultiplePages(string clientRequestId = null, int? maxresults = null, int? timeout = null, RequestContext context = null)
+        public virtual Pageable<BinaryData> GetMultiplePages(string clientRequestId, int? maxresults, int? timeout, RequestContext context)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetMultiplePagesRequest(clientRequestId, maxresults, timeout, context);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => CreateGetMultiplePagesNextPageRequest(nextLink, clientRequestId, maxresults, timeout, context);
@@ -272,7 +272,7 @@ namespace paging_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method] A paging operation that includes a next operation. It has a different query parameter from it&apos;s next operation nextOperationWithQueryParams. Returns a ProductResult
+        /// [Protocol Method] A paging operation that includes a next operation. It has a different query parameter from it's next operation nextOperationWithQueryParams. Returns a ProductResult
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -281,12 +281,12 @@ namespace paging_LowLevel
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="requiredQueryParameter"> A required integer query parameter. Put in value &apos;100&apos; to pass test. </param>
+        /// <param name="requiredQueryParameter"> A required integer query parameter. Put in value '100' to pass test. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="AsyncPageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
         /// <include file="Docs/PagingClient.xml" path="doc/members/member[@name='GetWithQueryParamsAsync(int,RequestContext)']/*" />
-        public virtual AsyncPageable<BinaryData> GetWithQueryParamsAsync(int requiredQueryParameter, RequestContext context = null)
+        public virtual AsyncPageable<BinaryData> GetWithQueryParamsAsync(int requiredQueryParameter, RequestContext context)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetWithQueryParamsRequest(requiredQueryParameter, context);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => CreateNextOperationWithQueryParamsRequest(context);
@@ -294,7 +294,7 @@ namespace paging_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method] A paging operation that includes a next operation. It has a different query parameter from it&apos;s next operation nextOperationWithQueryParams. Returns a ProductResult
+        /// [Protocol Method] A paging operation that includes a next operation. It has a different query parameter from it's next operation nextOperationWithQueryParams. Returns a ProductResult
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -303,12 +303,12 @@ namespace paging_LowLevel
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="requiredQueryParameter"> A required integer query parameter. Put in value &apos;100&apos; to pass test. </param>
+        /// <param name="requiredQueryParameter"> A required integer query parameter. Put in value '100' to pass test. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="Pageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
         /// <include file="Docs/PagingClient.xml" path="doc/members/member[@name='GetWithQueryParams(int,RequestContext)']/*" />
-        public virtual Pageable<BinaryData> GetWithQueryParams(int requiredQueryParameter, RequestContext context = null)
+        public virtual Pageable<BinaryData> GetWithQueryParams(int requiredQueryParameter, RequestContext context)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetWithQueryParamsRequest(requiredQueryParameter, context);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => CreateNextOperationWithQueryParamsRequest(context);
@@ -316,7 +316,7 @@ namespace paging_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method] Define `filter` as a query param for all calls. However, the returned next link will also include the `filter` as part of it. Make sure you don&apos;t end up duplicating the `filter` param in the url sent.
+        /// [Protocol Method] Define `filter` as a query param for all calls. However, the returned next link will also include the `filter` as part of it. Make sure you don't end up duplicating the `filter` param in the url sent.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -325,12 +325,12 @@ namespace paging_LowLevel
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="filter"> OData filter options. Pass in &apos;foo&apos;. </param>
+        /// <param name="filter"> OData filter options. Pass in 'foo'. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="AsyncPageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
         /// <include file="Docs/PagingClient.xml" path="doc/members/member[@name='DuplicateParamsAsync(string,RequestContext)']/*" />
-        public virtual AsyncPageable<BinaryData> DuplicateParamsAsync(string filter = null, RequestContext context = null)
+        public virtual AsyncPageable<BinaryData> DuplicateParamsAsync(string filter, RequestContext context)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => CreateDuplicateParamsRequest(filter, context);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => CreateDuplicateParamsNextPageRequest(nextLink, filter, context);
@@ -338,7 +338,7 @@ namespace paging_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method] Define `filter` as a query param for all calls. However, the returned next link will also include the `filter` as part of it. Make sure you don&apos;t end up duplicating the `filter` param in the url sent.
+        /// [Protocol Method] Define `filter` as a query param for all calls. However, the returned next link will also include the `filter` as part of it. Make sure you don't end up duplicating the `filter` param in the url sent.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -347,12 +347,12 @@ namespace paging_LowLevel
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="filter"> OData filter options. Pass in &apos;foo&apos;. </param>
+        /// <param name="filter"> OData filter options. Pass in 'foo'. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="Pageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
         /// <include file="Docs/PagingClient.xml" path="doc/members/member[@name='DuplicateParams(string,RequestContext)']/*" />
-        public virtual Pageable<BinaryData> DuplicateParams(string filter = null, RequestContext context = null)
+        public virtual Pageable<BinaryData> DuplicateParams(string filter, RequestContext context)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => CreateDuplicateParamsRequest(filter, context);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => CreateDuplicateParamsNextPageRequest(nextLink, filter, context);
@@ -373,7 +373,7 @@ namespace paging_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="AsyncPageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
         /// <include file="Docs/PagingClient.xml" path="doc/members/member[@name='NextOperationWithQueryParamsAsync(RequestContext)']/*" />
-        public virtual AsyncPageable<BinaryData> NextOperationWithQueryParamsAsync(RequestContext context = null)
+        public virtual AsyncPageable<BinaryData> NextOperationWithQueryParamsAsync(RequestContext context)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => CreateNextOperationWithQueryParamsRequest(context);
             return PageableHelpers.CreateAsyncPageable(FirstPageRequest, null, (e, o) => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "PagingClient.NextOperationWithQueryParams", "values", null, context);
@@ -393,7 +393,7 @@ namespace paging_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="Pageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
         /// <include file="Docs/PagingClient.xml" path="doc/members/member[@name='NextOperationWithQueryParams(RequestContext)']/*" />
-        public virtual Pageable<BinaryData> NextOperationWithQueryParams(RequestContext context = null)
+        public virtual Pageable<BinaryData> NextOperationWithQueryParams(RequestContext context)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => CreateNextOperationWithQueryParamsRequest(context);
             return PageableHelpers.CreatePageable(FirstPageRequest, null, (e, o) => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "PagingClient.NextOperationWithQueryParams", "values", null, context);
@@ -416,7 +416,7 @@ namespace paging_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="AsyncPageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
         /// <include file="Docs/PagingClient.xml" path="doc/members/member[@name='GetOdataMultiplePagesAsync(string,int?,int?,RequestContext)']/*" />
-        public virtual AsyncPageable<BinaryData> GetOdataMultiplePagesAsync(string clientRequestId = null, int? maxresults = null, int? timeout = null, RequestContext context = null)
+        public virtual AsyncPageable<BinaryData> GetOdataMultiplePagesAsync(string clientRequestId, int? maxresults, int? timeout, RequestContext context)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetOdataMultiplePagesRequest(clientRequestId, maxresults, timeout, context);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => CreateGetOdataMultiplePagesNextPageRequest(nextLink, clientRequestId, maxresults, timeout, context);
@@ -440,7 +440,7 @@ namespace paging_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="Pageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
         /// <include file="Docs/PagingClient.xml" path="doc/members/member[@name='GetOdataMultiplePages(string,int?,int?,RequestContext)']/*" />
-        public virtual Pageable<BinaryData> GetOdataMultiplePages(string clientRequestId = null, int? maxresults = null, int? timeout = null, RequestContext context = null)
+        public virtual Pageable<BinaryData> GetOdataMultiplePages(string clientRequestId, int? maxresults, int? timeout, RequestContext context)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetOdataMultiplePagesRequest(clientRequestId, maxresults, timeout, context);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => CreateGetOdataMultiplePagesNextPageRequest(nextLink, clientRequestId, maxresults, timeout, context);
@@ -465,7 +465,7 @@ namespace paging_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="AsyncPageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
         /// <include file="Docs/PagingClient.xml" path="doc/members/member[@name='GetMultiplePagesWithOffsetAsync(int,string,int?,int?,RequestContext)']/*" />
-        public virtual AsyncPageable<BinaryData> GetMultiplePagesWithOffsetAsync(int offset, string clientRequestId = null, int? maxresults = null, int? timeout = null, RequestContext context = null)
+        public virtual AsyncPageable<BinaryData> GetMultiplePagesWithOffsetAsync(int offset, string clientRequestId, int? maxresults, int? timeout, RequestContext context)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetMultiplePagesWithOffsetRequest(offset, clientRequestId, maxresults, timeout, context);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => CreateGetMultiplePagesWithOffsetNextPageRequest(nextLink, offset, clientRequestId, maxresults, timeout, context);
@@ -490,7 +490,7 @@ namespace paging_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="Pageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
         /// <include file="Docs/PagingClient.xml" path="doc/members/member[@name='GetMultiplePagesWithOffset(int,string,int?,int?,RequestContext)']/*" />
-        public virtual Pageable<BinaryData> GetMultiplePagesWithOffset(int offset, string clientRequestId = null, int? maxresults = null, int? timeout = null, RequestContext context = null)
+        public virtual Pageable<BinaryData> GetMultiplePagesWithOffset(int offset, string clientRequestId, int? maxresults, int? timeout, RequestContext context)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetMultiplePagesWithOffsetRequest(offset, clientRequestId, maxresults, timeout, context);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => CreateGetMultiplePagesWithOffsetNextPageRequest(nextLink, offset, clientRequestId, maxresults, timeout, context);
@@ -511,7 +511,7 @@ namespace paging_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="AsyncPageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
         /// <include file="Docs/PagingClient.xml" path="doc/members/member[@name='GetMultiplePagesRetryFirstAsync(RequestContext)']/*" />
-        public virtual AsyncPageable<BinaryData> GetMultiplePagesRetryFirstAsync(RequestContext context = null)
+        public virtual AsyncPageable<BinaryData> GetMultiplePagesRetryFirstAsync(RequestContext context)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetMultiplePagesRetryFirstRequest(context);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => CreateGetMultiplePagesRetryFirstNextPageRequest(nextLink, context);
@@ -532,7 +532,7 @@ namespace paging_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="Pageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
         /// <include file="Docs/PagingClient.xml" path="doc/members/member[@name='GetMultiplePagesRetryFirst(RequestContext)']/*" />
-        public virtual Pageable<BinaryData> GetMultiplePagesRetryFirst(RequestContext context = null)
+        public virtual Pageable<BinaryData> GetMultiplePagesRetryFirst(RequestContext context)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetMultiplePagesRetryFirstRequest(context);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => CreateGetMultiplePagesRetryFirstNextPageRequest(nextLink, context);
@@ -553,7 +553,7 @@ namespace paging_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="AsyncPageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
         /// <include file="Docs/PagingClient.xml" path="doc/members/member[@name='GetMultiplePagesRetrySecondAsync(RequestContext)']/*" />
-        public virtual AsyncPageable<BinaryData> GetMultiplePagesRetrySecondAsync(RequestContext context = null)
+        public virtual AsyncPageable<BinaryData> GetMultiplePagesRetrySecondAsync(RequestContext context)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetMultiplePagesRetrySecondRequest(context);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => CreateGetMultiplePagesRetrySecondNextPageRequest(nextLink, context);
@@ -574,7 +574,7 @@ namespace paging_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="Pageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
         /// <include file="Docs/PagingClient.xml" path="doc/members/member[@name='GetMultiplePagesRetrySecond(RequestContext)']/*" />
-        public virtual Pageable<BinaryData> GetMultiplePagesRetrySecond(RequestContext context = null)
+        public virtual Pageable<BinaryData> GetMultiplePagesRetrySecond(RequestContext context)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetMultiplePagesRetrySecondRequest(context);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => CreateGetMultiplePagesRetrySecondNextPageRequest(nextLink, context);
@@ -595,7 +595,7 @@ namespace paging_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="AsyncPageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
         /// <include file="Docs/PagingClient.xml" path="doc/members/member[@name='GetSinglePagesFailureAsync(RequestContext)']/*" />
-        public virtual AsyncPageable<BinaryData> GetSinglePagesFailureAsync(RequestContext context = null)
+        public virtual AsyncPageable<BinaryData> GetSinglePagesFailureAsync(RequestContext context)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetSinglePagesFailureRequest(context);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => CreateGetSinglePagesFailureNextPageRequest(nextLink, context);
@@ -616,7 +616,7 @@ namespace paging_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="Pageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
         /// <include file="Docs/PagingClient.xml" path="doc/members/member[@name='GetSinglePagesFailure(RequestContext)']/*" />
-        public virtual Pageable<BinaryData> GetSinglePagesFailure(RequestContext context = null)
+        public virtual Pageable<BinaryData> GetSinglePagesFailure(RequestContext context)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetSinglePagesFailureRequest(context);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => CreateGetSinglePagesFailureNextPageRequest(nextLink, context);
@@ -637,7 +637,7 @@ namespace paging_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="AsyncPageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
         /// <include file="Docs/PagingClient.xml" path="doc/members/member[@name='GetMultiplePagesFailureAsync(RequestContext)']/*" />
-        public virtual AsyncPageable<BinaryData> GetMultiplePagesFailureAsync(RequestContext context = null)
+        public virtual AsyncPageable<BinaryData> GetMultiplePagesFailureAsync(RequestContext context)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetMultiplePagesFailureRequest(context);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => CreateGetMultiplePagesFailureNextPageRequest(nextLink, context);
@@ -658,7 +658,7 @@ namespace paging_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="Pageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
         /// <include file="Docs/PagingClient.xml" path="doc/members/member[@name='GetMultiplePagesFailure(RequestContext)']/*" />
-        public virtual Pageable<BinaryData> GetMultiplePagesFailure(RequestContext context = null)
+        public virtual Pageable<BinaryData> GetMultiplePagesFailure(RequestContext context)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetMultiplePagesFailureRequest(context);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => CreateGetMultiplePagesFailureNextPageRequest(nextLink, context);
@@ -679,7 +679,7 @@ namespace paging_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="AsyncPageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
         /// <include file="Docs/PagingClient.xml" path="doc/members/member[@name='GetMultiplePagesFailureUriAsync(RequestContext)']/*" />
-        public virtual AsyncPageable<BinaryData> GetMultiplePagesFailureUriAsync(RequestContext context = null)
+        public virtual AsyncPageable<BinaryData> GetMultiplePagesFailureUriAsync(RequestContext context)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetMultiplePagesFailureUriRequest(context);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => CreateGetMultiplePagesFailureUriNextPageRequest(nextLink, context);
@@ -700,7 +700,7 @@ namespace paging_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="Pageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
         /// <include file="Docs/PagingClient.xml" path="doc/members/member[@name='GetMultiplePagesFailureUri(RequestContext)']/*" />
-        public virtual Pageable<BinaryData> GetMultiplePagesFailureUri(RequestContext context = null)
+        public virtual Pageable<BinaryData> GetMultiplePagesFailureUri(RequestContext context)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetMultiplePagesFailureUriRequest(context);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => CreateGetMultiplePagesFailureUriNextPageRequest(nextLink, context);
@@ -708,7 +708,7 @@ namespace paging_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method] A paging operation that doesn&apos;t return a full URL, just a fragment
+        /// [Protocol Method] A paging operation that doesn't return a full URL, just a fragment
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -725,7 +725,7 @@ namespace paging_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="AsyncPageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
         /// <include file="Docs/PagingClient.xml" path="doc/members/member[@name='GetMultiplePagesFragmentNextLinkAsync(string,string,RequestContext)']/*" />
-        public virtual AsyncPageable<BinaryData> GetMultiplePagesFragmentNextLinkAsync(string tenant, string apiVersion, RequestContext context = null)
+        public virtual AsyncPageable<BinaryData> GetMultiplePagesFragmentNextLinkAsync(string tenant, string apiVersion, RequestContext context)
         {
             Argument.AssertNotNullOrEmpty(tenant, nameof(tenant));
             Argument.AssertNotNull(apiVersion, nameof(apiVersion));
@@ -736,7 +736,7 @@ namespace paging_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method] A paging operation that doesn&apos;t return a full URL, just a fragment
+        /// [Protocol Method] A paging operation that doesn't return a full URL, just a fragment
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -753,7 +753,7 @@ namespace paging_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="Pageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
         /// <include file="Docs/PagingClient.xml" path="doc/members/member[@name='GetMultiplePagesFragmentNextLink(string,string,RequestContext)']/*" />
-        public virtual Pageable<BinaryData> GetMultiplePagesFragmentNextLink(string tenant, string apiVersion, RequestContext context = null)
+        public virtual Pageable<BinaryData> GetMultiplePagesFragmentNextLink(string tenant, string apiVersion, RequestContext context)
         {
             Argument.AssertNotNullOrEmpty(tenant, nameof(tenant));
             Argument.AssertNotNull(apiVersion, nameof(apiVersion));
@@ -764,7 +764,7 @@ namespace paging_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method] A paging operation that doesn&apos;t return a full URL, just a fragment with parameters grouped
+        /// [Protocol Method] A paging operation that doesn't return a full URL, just a fragment with parameters grouped
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -781,7 +781,7 @@ namespace paging_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="AsyncPageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
         /// <include file="Docs/PagingClient.xml" path="doc/members/member[@name='GetMultiplePagesFragmentWithGroupingNextLinkAsync(string,string,RequestContext)']/*" />
-        public virtual AsyncPageable<BinaryData> GetMultiplePagesFragmentWithGroupingNextLinkAsync(string tenant, string apiVersion, RequestContext context = null)
+        public virtual AsyncPageable<BinaryData> GetMultiplePagesFragmentWithGroupingNextLinkAsync(string tenant, string apiVersion, RequestContext context)
         {
             Argument.AssertNotNullOrEmpty(tenant, nameof(tenant));
             Argument.AssertNotNull(apiVersion, nameof(apiVersion));
@@ -792,7 +792,7 @@ namespace paging_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method] A paging operation that doesn&apos;t return a full URL, just a fragment with parameters grouped
+        /// [Protocol Method] A paging operation that doesn't return a full URL, just a fragment with parameters grouped
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -809,7 +809,7 @@ namespace paging_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="Pageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
         /// <include file="Docs/PagingClient.xml" path="doc/members/member[@name='GetMultiplePagesFragmentWithGroupingNextLink(string,string,RequestContext)']/*" />
-        public virtual Pageable<BinaryData> GetMultiplePagesFragmentWithGroupingNextLink(string tenant, string apiVersion, RequestContext context = null)
+        public virtual Pageable<BinaryData> GetMultiplePagesFragmentWithGroupingNextLink(string tenant, string apiVersion, RequestContext context)
         {
             Argument.AssertNotNullOrEmpty(tenant, nameof(tenant));
             Argument.AssertNotNull(apiVersion, nameof(apiVersion));
@@ -820,7 +820,7 @@ namespace paging_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method] A paging operation that doesn&apos;t return a full URL, just a fragment
+        /// [Protocol Method] A paging operation that doesn't return a full URL, just a fragment
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -838,7 +838,7 @@ namespace paging_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="AsyncPageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
         /// <include file="Docs/PagingClient.xml" path="doc/members/member[@name='NextFragmentAsync(string,string,string,RequestContext)']/*" />
-        public virtual AsyncPageable<BinaryData> NextFragmentAsync(string tenant, string nextLink, string apiVersion, RequestContext context = null)
+        public virtual AsyncPageable<BinaryData> NextFragmentAsync(string tenant, string nextLink, string apiVersion, RequestContext context)
         {
             Argument.AssertNotNullOrEmpty(tenant, nameof(tenant));
             Argument.AssertNotNull(nextLink, nameof(nextLink));
@@ -850,7 +850,7 @@ namespace paging_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method] A paging operation that doesn&apos;t return a full URL, just a fragment
+        /// [Protocol Method] A paging operation that doesn't return a full URL, just a fragment
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -868,7 +868,7 @@ namespace paging_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="Pageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
         /// <include file="Docs/PagingClient.xml" path="doc/members/member[@name='NextFragment(string,string,string,RequestContext)']/*" />
-        public virtual Pageable<BinaryData> NextFragment(string tenant, string nextLink, string apiVersion, RequestContext context = null)
+        public virtual Pageable<BinaryData> NextFragment(string tenant, string nextLink, string apiVersion, RequestContext context)
         {
             Argument.AssertNotNullOrEmpty(tenant, nameof(tenant));
             Argument.AssertNotNull(nextLink, nameof(nextLink));
@@ -880,7 +880,7 @@ namespace paging_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method] A paging operation that doesn&apos;t return a full URL, just a fragment
+        /// [Protocol Method] A paging operation that doesn't return a full URL, just a fragment
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -898,7 +898,7 @@ namespace paging_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="AsyncPageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
         /// <include file="Docs/PagingClient.xml" path="doc/members/member[@name='NextFragmentWithGroupingAsync(string,string,string,RequestContext)']/*" />
-        public virtual AsyncPageable<BinaryData> NextFragmentWithGroupingAsync(string tenant, string nextLink, string apiVersion, RequestContext context = null)
+        public virtual AsyncPageable<BinaryData> NextFragmentWithGroupingAsync(string tenant, string nextLink, string apiVersion, RequestContext context)
         {
             Argument.AssertNotNullOrEmpty(tenant, nameof(tenant));
             Argument.AssertNotNull(nextLink, nameof(nextLink));
@@ -910,7 +910,7 @@ namespace paging_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method] A paging operation that doesn&apos;t return a full URL, just a fragment
+        /// [Protocol Method] A paging operation that doesn't return a full URL, just a fragment
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -928,7 +928,7 @@ namespace paging_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="Pageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
         /// <include file="Docs/PagingClient.xml" path="doc/members/member[@name='NextFragmentWithGrouping(string,string,string,RequestContext)']/*" />
-        public virtual Pageable<BinaryData> NextFragmentWithGrouping(string tenant, string nextLink, string apiVersion, RequestContext context = null)
+        public virtual Pageable<BinaryData> NextFragmentWithGrouping(string tenant, string nextLink, string apiVersion, RequestContext context)
         {
             Argument.AssertNotNullOrEmpty(tenant, nameof(tenant));
             Argument.AssertNotNull(nextLink, nameof(nextLink));
@@ -940,7 +940,7 @@ namespace paging_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method] A paging operation that returns a paging model whose item name is is overriden by x-ms-client-name &apos;indexes&apos;.
+        /// [Protocol Method] A paging operation that returns a paging model whose item name is is overriden by x-ms-client-name 'indexes'.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -953,7 +953,7 @@ namespace paging_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="AsyncPageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
         /// <include file="Docs/PagingClient.xml" path="doc/members/member[@name='GetPagingModelWithItemNameWithXMSClientNameAsync(RequestContext)']/*" />
-        public virtual AsyncPageable<BinaryData> GetPagingModelWithItemNameWithXMSClientNameAsync(RequestContext context = null)
+        public virtual AsyncPageable<BinaryData> GetPagingModelWithItemNameWithXMSClientNameAsync(RequestContext context)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetPagingModelWithItemNameWithXMSClientNameRequest(context);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => CreateGetPagingModelWithItemNameWithXMSClientNameNextPageRequest(nextLink, context);
@@ -961,7 +961,7 @@ namespace paging_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method] A paging operation that returns a paging model whose item name is is overriden by x-ms-client-name &apos;indexes&apos;.
+        /// [Protocol Method] A paging operation that returns a paging model whose item name is is overriden by x-ms-client-name 'indexes'.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -974,7 +974,7 @@ namespace paging_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="Pageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
         /// <include file="Docs/PagingClient.xml" path="doc/members/member[@name='GetPagingModelWithItemNameWithXMSClientName(RequestContext)']/*" />
-        public virtual Pageable<BinaryData> GetPagingModelWithItemNameWithXMSClientName(RequestContext context = null)
+        public virtual Pageable<BinaryData> GetPagingModelWithItemNameWithXMSClientName(RequestContext context)
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetPagingModelWithItemNameWithXMSClientNameRequest(context);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => CreateGetPagingModelWithItemNameWithXMSClientNameNextPageRequest(nextLink, context);
@@ -999,7 +999,7 @@ namespace paging_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="Operation{T}"/> from the service that will contain a <see cref="AsyncPageable{T}"/> containing a list of <see cref="BinaryData"/> objects once the asynchronous operation on the service has completed. Details of the body schema for the operation's final value are in the Remarks section below. </returns>
         /// <include file="Docs/PagingClient.xml" path="doc/members/member[@name='GetMultiplePagesLROAsync(WaitUntil,string,int?,int?,RequestContext)']/*" />
-        public virtual async Task<Operation<AsyncPageable<BinaryData>>> GetMultiplePagesLROAsync(WaitUntil waitUntil, string clientRequestId = null, int? maxresults = null, int? timeout = null, RequestContext context = null)
+        public virtual async Task<Operation<AsyncPageable<BinaryData>>> GetMultiplePagesLROAsync(WaitUntil waitUntil, string clientRequestId, int? maxresults, int? timeout, RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("PagingClient.GetMultiplePagesLRO");
             scope.Start();
@@ -1034,7 +1034,7 @@ namespace paging_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="Operation{T}"/> from the service that will contain a <see cref="Pageable{T}"/> containing a list of <see cref="BinaryData"/> objects once the asynchronous operation on the service has completed. Details of the body schema for the operation's final value are in the Remarks section below. </returns>
         /// <include file="Docs/PagingClient.xml" path="doc/members/member[@name='GetMultiplePagesLRO(WaitUntil,string,int?,int?,RequestContext)']/*" />
-        public virtual Operation<Pageable<BinaryData>> GetMultiplePagesLRO(WaitUntil waitUntil, string clientRequestId = null, int? maxresults = null, int? timeout = null, RequestContext context = null)
+        public virtual Operation<Pageable<BinaryData>> GetMultiplePagesLRO(WaitUntil waitUntil, string clientRequestId, int? maxresults, int? timeout, RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("PagingClient.GetMultiplePagesLRO");
             scope.Start();
@@ -1112,6 +1112,7 @@ namespace paging_LowLevel
             uri.Reset(_endpoint);
             uri.AppendPath("/paging/multiple", false);
             request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
             if (clientRequestId != null)
             {
                 request.Headers.Add("client-request-id", clientRequestId);
@@ -1124,7 +1125,6 @@ namespace paging_LowLevel
             {
                 request.Headers.Add("timeout", timeout.Value);
             }
-            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -1183,6 +1183,7 @@ namespace paging_LowLevel
             uri.Reset(_endpoint);
             uri.AppendPath("/paging/multiple/odata", false);
             request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
             if (clientRequestId != null)
             {
                 request.Headers.Add("client-request-id", clientRequestId);
@@ -1195,7 +1196,6 @@ namespace paging_LowLevel
             {
                 request.Headers.Add("timeout", timeout.Value);
             }
-            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -1209,6 +1209,7 @@ namespace paging_LowLevel
             uri.AppendPath("/paging/multiple/withpath/", false);
             uri.AppendPath(offset, true);
             request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
             if (clientRequestId != null)
             {
                 request.Headers.Add("client-request-id", clientRequestId);
@@ -1221,7 +1222,6 @@ namespace paging_LowLevel
             {
                 request.Headers.Add("timeout", timeout.Value);
             }
-            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -1329,6 +1329,7 @@ namespace paging_LowLevel
             uri.Reset(_endpoint);
             uri.AppendPath("/paging/multiple/lro", false);
             request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
             if (clientRequestId != null)
             {
                 request.Headers.Add("client-request-id", clientRequestId);
@@ -1341,7 +1342,6 @@ namespace paging_LowLevel
             {
                 request.Headers.Add("timeout", timeout.Value);
             }
-            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -1440,6 +1440,7 @@ namespace paging_LowLevel
             uri.Reset(_endpoint);
             uri.AppendRawNextLink(nextLink, false);
             request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
             if (clientRequestId != null)
             {
                 request.Headers.Add("client-request-id", clientRequestId);
@@ -1452,7 +1453,6 @@ namespace paging_LowLevel
             {
                 request.Headers.Add("timeout", timeout.Value);
             }
-            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -1478,6 +1478,7 @@ namespace paging_LowLevel
             uri.Reset(_endpoint);
             uri.AppendRawNextLink(nextLink, false);
             request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
             if (clientRequestId != null)
             {
                 request.Headers.Add("client-request-id", clientRequestId);
@@ -1490,7 +1491,6 @@ namespace paging_LowLevel
             {
                 request.Headers.Add("timeout", timeout.Value);
             }
-            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -1503,6 +1503,7 @@ namespace paging_LowLevel
             uri.Reset(_endpoint);
             uri.AppendRawNextLink(nextLink, false);
             request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
             if (clientRequestId != null)
             {
                 request.Headers.Add("client-request-id", clientRequestId);
@@ -1515,7 +1516,6 @@ namespace paging_LowLevel
             {
                 request.Headers.Add("timeout", timeout.Value);
             }
-            request.Headers.Add("Accept", "application/json");
             return message;
         }
 
@@ -1606,6 +1606,7 @@ namespace paging_LowLevel
             uri.Reset(_endpoint);
             uri.AppendRawNextLink(nextLink, false);
             request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
             if (clientRequestId != null)
             {
                 request.Headers.Add("client-request-id", clientRequestId);
@@ -1618,7 +1619,6 @@ namespace paging_LowLevel
             {
                 request.Headers.Add("timeout", timeout.Value);
             }
-            request.Headers.Add("Accept", "application/json");
             return message;
         }
 

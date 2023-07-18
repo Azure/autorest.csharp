@@ -70,6 +70,8 @@ namespace AutoRest.TestServer.Tests.Mgmt.Unit
                 modelFactoryForHlc: Array.Empty<string>(),
                 unreferencedTypesHandling: Configuration.UnreferencedTypesHandlingOption.RemoveOrInternalize,
                 useOverloadsBetweenProtocolAndConvenience: true,
+                keepNonOverloadableProtocolSignature: false,
+                useCoreDataFactoryReplacements: true,
                 projectFolder: "/..",
                 existingProjectFolder: null,
                 protocolMethodList: Array.Empty<string>(),
@@ -77,6 +79,7 @@ namespace AutoRest.TestServer.Tests.Mgmt.Unit
                 modelsToTreatEmptyStringAsNull: Array.Empty<string>(),
                 additionalIntrinsicTypesToTreatEmptyStringAsNull: Array.Empty<string>(),
                 shouldTreatBase64AsBinaryData: true,
+                methodsToKeepClientDefaultValue: Array.Empty<string>(),
                 mgmtConfiguration: mgmtConfiguration,
                 mgmtTestConfiguration: null);
         }

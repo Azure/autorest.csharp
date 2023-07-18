@@ -18,7 +18,7 @@ namespace AnomalyDetector.Models
         /// <summary> Initializes a new instance of AlignPolicy. </summary>
         /// <param name="alignMode">
         /// An optional field, indicating how to align different variables to the same
-        /// time-range. Either Inner or Outer. 
+        /// time-range. Either Inner or Outer.
         /// </param>
         /// <param name="fillNAMethod">
         /// An optional field, indicating how missing values will be filled. One of
@@ -34,7 +34,7 @@ namespace AnomalyDetector.Models
 
         /// <summary>
         /// An optional field, indicating how to align different variables to the same
-        /// time-range. Either Inner or Outer. 
+        /// time-range. Either Inner or Outer.
         /// </summary>
         public AlignMode? AlignMode { get; set; }
         /// <summary>

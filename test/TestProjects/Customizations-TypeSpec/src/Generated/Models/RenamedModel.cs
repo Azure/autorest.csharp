@@ -5,7 +5,7 @@
 
 #nullable disable
 
-namespace CustomizationsInCadl.Models
+namespace CustomizationsInTsp.Models
 {
     /// <summary> Renamed model (original name: ModelToRename). </summary>
     public partial class RenamedModel

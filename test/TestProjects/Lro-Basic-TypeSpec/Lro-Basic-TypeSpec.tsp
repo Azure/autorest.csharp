@@ -45,10 +45,12 @@ interface Authoring {
 
   @convenientAPI(true)
   @Azure.Core.pollingOperation(Authoring.createProjectStatusMonitor)
+  @doc("Creates a project")
   createProject is Azure.Core.LongRunningResourceCreateWithServiceProvidedName<Project>;
   
   @convenientAPI(true)
   @Azure.Core.pollingOperation(Authoring.createProjectStatusMonitor)
+  @doc("Updates a project")
   op updateProject is Azure.Core.LongRunningResourceCreateOrReplace<Project, Project>;
 
   @convenientAPI(true)
@@ -57,7 +59,7 @@ interface Authoring {
 }
 
 namespace CustomCore {
-  @parentResource(T)
+  @parentResource(Project)
   @resource("operations")
   model OperationStatusResource<T> is Azure.Core.Foundations.OperationStatus {
     operationId: string;

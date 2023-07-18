@@ -14,7 +14,7 @@ namespace model_flattening.Models
     public partial class FlattenParameterGroup
     {
         /// <summary> Initializes a new instance of FlattenParameterGroup. </summary>
-        /// <param name="name"> Product name with value &apos;groupproduct&apos;. </param>
+        /// <param name="name"> Product name with value 'groupproduct'. </param>
         /// <param name="productId"> Unique identifier representing a specific product for a given latitude &amp; longitude. For example, uberX in San Francisco will have a different product_id than uberX in Los Angeles. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> or <paramref name="productId"/> is null. </exception>
         public FlattenParameterGroup(string name, string productId)
@@ -26,7 +26,7 @@ namespace model_flattening.Models
             ProductId = productId;
         }
 
-        /// <summary> Product name with value &apos;groupproduct&apos;. </summary>
+        /// <summary> Product name with value 'groupproduct'. </summary>
         public string Name { get; }
         /// <summary> Simple body product to put. </summary>
         public SimpleProduct SimpleBodyProduct { get; set; }
