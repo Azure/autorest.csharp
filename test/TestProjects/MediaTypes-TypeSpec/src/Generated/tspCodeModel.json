@@ -13,6 +13,7 @@
    "Namespace": "MultipleMediaTypes",
    "IsNullable": false,
    "Usage": "Input",
+   "IsConfident": true,
    "Properties": [
     {
      "$id": "3",
@@ -23,6 +24,7 @@
       "$id": "4",
       "Name": "string",
       "Kind": "String",
+      "IsConfident": true,
       "IsNullable": false
      },
      "IsRequired": true,
@@ -50,7 +52,8 @@
         "$id": "8",
         "Name": "Uri",
         "Kind": "Uri",
-        "IsNullable": false
+        "IsNullable": false,
+        "IsConfident": true
        },
        "Location": "Uri",
        "IsApiVersion": false,
@@ -77,9 +80,11 @@
            "$id": "12",
            "Name": "String",
            "Kind": "String",
+           "IsConfident": true,
            "IsNullable": false
           },
           "Value": "application/json",
+          "IsConfident": true,
           "IsNullable": false
          },
          {
@@ -89,12 +94,15 @@
            "$id": "14",
            "Name": "String",
            "Kind": "String",
+           "IsConfident": true,
            "IsNullable": false
           },
           "Value": "application/octet-stream",
+          "IsConfident": true,
           "IsNullable": false
          }
         ],
+        "IsConfident": true,
         "IsNullable": false
        },
        "Location": "Header",
@@ -115,6 +123,7 @@
         "$id": "16",
         "Name": "bytes",
         "Kind": "Bytes",
+        "IsConfident": true,
         "IsNullable": false
        },
        "Location": "Body",
@@ -135,6 +144,7 @@
         "$id": "18",
         "Name": "String",
         "Kind": "String",
+        "IsConfident": true,
         "IsNullable": false
        },
        "Location": "Header",
@@ -163,6 +173,7 @@
         "$id": "21",
         "Name": "String",
         "Kind": "String",
+        "IsConfident": true,
         "IsNullable": false
        },
        "Location": "Query",
@@ -180,6 +191,7 @@
          "$id": "23",
          "Name": "String",
          "Kind": "String",
+         "IsConfident": true,
          "IsNullable": false
         },
         "Value": "2021-03-25"
@@ -207,7 +219,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "IsConfident": true
     },
     {
      "$id": "25",
@@ -232,9 +245,11 @@
            "$id": "29",
            "Name": "String",
            "Kind": "String",
+           "IsConfident": true,
            "IsNullable": false
           },
           "Value": "application/json",
+          "IsConfident": true,
           "IsNullable": false
          },
          {
@@ -244,9 +259,11 @@
            "$id": "31",
            "Name": "String",
            "Kind": "String",
+           "IsConfident": true,
            "IsNullable": false
           },
           "Value": "application/octet-stream",
+          "IsConfident": true,
           "IsNullable": false
          },
          {
@@ -256,12 +273,15 @@
            "$id": "33",
            "Name": "String",
            "Kind": "String",
+           "IsConfident": true,
            "IsNullable": false
           },
           "Value": "text/plain",
+          "IsConfident": true,
           "IsNullable": false
          }
         ],
+        "IsConfident": true,
         "IsNullable": false
        },
        "Location": "Header",
@@ -282,6 +302,7 @@
         "$id": "35",
         "Name": "string",
         "Kind": "String",
+        "IsConfident": true,
         "IsNullable": false
        },
        "Location": "Body",
@@ -302,6 +323,7 @@
         "$id": "37",
         "Name": "String",
         "Kind": "String",
+        "IsConfident": true,
         "IsNullable": false
        },
        "Location": "Header",
@@ -347,7 +369,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "IsConfident": true
     },
     {
      "$id": "40",
@@ -368,9 +391,11 @@
          "$id": "43",
          "Name": "String",
          "Kind": "String",
+         "IsConfident": true,
          "IsNullable": false
         },
         "Value": "application/json",
+        "IsConfident": true,
         "IsNullable": false
        },
        "Location": "Header",
@@ -415,6 +440,7 @@
         "$id": "47",
         "Name": "String",
         "Kind": "String",
+        "IsConfident": true,
         "IsNullable": false
        },
        "Location": "Header",
@@ -458,7 +484,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "IsConfident": true
     }
    ],
    "Protocol": {

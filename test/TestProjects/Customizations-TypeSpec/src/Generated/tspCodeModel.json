@@ -30,6 +30,7 @@
     }
    ],
    "IsExtensible": false,
+   "IsConfident": true,
    "IsNullable": false,
    "Usage": "RoundTrip"
   },
@@ -57,6 +58,7 @@
     }
    ],
    "IsExtensible": false,
+   "IsConfident": true,
    "IsNullable": false,
    "Usage": "RoundTrip"
   },
@@ -84,6 +86,7 @@
     }
    ],
    "IsExtensible": true,
+   "IsConfident": true,
    "IsNullable": false,
    "Usage": "RoundTrip"
   },
@@ -106,6 +109,7 @@
     }
    ],
    "IsExtensible": true,
+   "IsConfident": true,
    "IsNullable": false,
    "Usage": "RoundTrip"
   }
@@ -118,6 +122,7 @@
    "Description": "Root RoundTrip model to reference all other types to ensure generation",
    "IsNullable": false,
    "Usage": "RoundTrip",
+   "IsConfident": true,
    "Properties": [
     {
      "$id": "18",
@@ -131,6 +136,7 @@
       "Description": "Public model made internal",
       "IsNullable": false,
       "Usage": "RoundTrip",
+      "IsConfident": true,
       "Properties": [
        {
         "$id": "20",
@@ -141,6 +147,7 @@
          "$id": "21",
          "Name": "int32",
          "Kind": "Int32",
+         "IsConfident": true,
          "IsNullable": false
         },
         "IsRequired": true,
@@ -163,6 +170,7 @@
       "Description": "Renamed model (original name: ModelToRename)",
       "IsNullable": false,
       "Usage": "RoundTrip",
+      "IsConfident": true,
       "Properties": [
        {
         "$id": "24",
@@ -173,6 +181,7 @@
          "$id": "25",
          "Name": "int32",
          "Kind": "Int32",
+         "IsConfident": true,
          "IsNullable": false
         },
         "IsRequired": true,
@@ -187,6 +196,7 @@
          "$id": "27",
          "Name": "int32",
          "Kind": "Int32",
+         "IsConfident": true,
          "IsNullable": false
         },
         "IsRequired": false,
@@ -209,6 +219,7 @@
       "Description": "Model moved into custom namespace",
       "IsNullable": false,
       "Usage": "RoundTrip",
+      "IsConfident": true,
       "Properties": [
        {
         "$id": "30",
@@ -219,6 +230,7 @@
          "$id": "31",
          "Name": "int32",
          "Kind": "Int32",
+         "IsConfident": true,
          "IsNullable": false
         },
         "IsRequired": true,
@@ -241,6 +253,7 @@
       "Description": "Model with customized properties",
       "IsNullable": false,
       "Usage": "RoundTrip",
+      "IsConfident": true,
       "Properties": [
        {
         "$id": "34",
@@ -251,6 +264,7 @@
          "$id": "35",
          "Name": "int32",
          "Kind": "Int32",
+         "IsConfident": true,
          "IsNullable": false
         },
         "IsRequired": true,
@@ -265,6 +279,7 @@
          "$id": "37",
          "Name": "int32",
          "Kind": "Int32",
+         "IsConfident": true,
          "IsNullable": false
         },
         "IsRequired": true,
@@ -279,6 +294,7 @@
          "$id": "39",
          "Name": "int32",
          "Kind": "Int32",
+         "IsConfident": true,
          "IsNullable": false
         },
         "IsRequired": true,
@@ -293,6 +309,7 @@
          "$id": "41",
          "Name": "float32",
          "Kind": "Float32",
+         "IsConfident": true,
          "IsNullable": false
         },
         "IsRequired": true,
@@ -307,6 +324,7 @@
          "$id": "43",
          "Name": "string",
          "Kind": "String",
+         "IsConfident": true,
          "IsNullable": false
         },
         "IsRequired": true,
@@ -321,6 +339,7 @@
          "$id": "45",
          "Name": "duration",
          "Kind": "DurationISO8601",
+         "IsConfident": true,
          "IsNullable": false
         },
         "IsRequired": true,
@@ -335,6 +354,7 @@
          "$id": "47",
          "Name": "string",
          "Kind": "String",
+         "IsConfident": true,
          "IsNullable": false
         },
         "IsRequired": true,
@@ -349,6 +369,7 @@
          "$id": "49",
          "Name": "string",
          "Kind": "String",
+         "IsConfident": true,
          "IsNullable": false
         },
         "IsRequired": true,
@@ -366,6 +387,7 @@
           "$id": "52",
           "Name": "string",
           "Kind": "String",
+          "IsConfident": true,
           "IsNullable": false
          },
          "IsNullable": false
@@ -385,12 +407,14 @@
           "$id": "55",
           "Name": "string",
           "Kind": "String",
+          "IsConfident": true,
           "IsNullable": false
          },
          "ValueType": {
           "$id": "56",
           "Name": "string",
           "Kind": "String",
+          "IsConfident": true,
           "IsNullable": false
          },
          "IsNullable": false
@@ -413,6 +437,7 @@
            "$id": "60",
            "Name": "string",
            "Kind": "String",
+           "IsConfident": true,
            "IsNullable": false
           },
           "IsNullable": false
@@ -437,12 +462,14 @@
            "$id": "64",
            "Name": "string",
            "Kind": "String",
+           "IsConfident": true,
            "IsNullable": false
           },
           "ValueType": {
            "$id": "65",
            "Name": "string",
            "Kind": "String",
+           "IsConfident": true,
            "IsNullable": false
           },
           "IsNullable": false
@@ -502,6 +529,7 @@
       "Description": "Model to add additional serializable property",
       "IsNullable": false,
       "Usage": "RoundTrip",
+      "IsConfident": true,
       "Properties": [
        {
         "$id": "71",
@@ -512,6 +540,7 @@
          "$id": "72",
          "Name": "int32",
          "Kind": "Int32",
+         "IsConfident": true,
          "IsNullable": false
         },
         "IsRequired": true,
@@ -588,6 +617,7 @@
         "$id": "78",
         "Name": "String",
         "Kind": "String",
+        "IsConfident": true,
         "IsNullable": false
        },
        "Location": "Header",
@@ -615,6 +645,7 @@
         "$id": "81",
         "Name": "String",
         "Kind": "String",
+        "IsConfident": true,
         "IsNullable": false
        },
        "Location": "Header",
@@ -643,6 +674,7 @@
         "$id": "84",
         "Name": "String",
         "Kind": "String",
+        "IsConfident": true,
         "IsNullable": false
        },
        "Location": "Query",
@@ -660,6 +692,7 @@
          "$id": "86",
          "Name": "String",
          "Kind": "String",
+         "IsConfident": true,
          "IsNullable": false
         },
         "Value": "0.1.0"
@@ -689,7 +722,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "IsConfident": true
     }
    ],
    "Protocol": {

@@ -20,6 +20,7 @@
     }
    ],
    "IsExtensible": true,
+   "IsConfident": true,
    "IsNullable": false,
    "Usage": "None"
   }
@@ -45,7 +46,8 @@
         "$id": "7",
         "Name": "Uri",
         "Kind": "Uri",
-        "IsNullable": false
+        "IsNullable": false,
+        "IsConfident": true
        },
        "Location": "Uri",
        "IsApiVersion": false,
@@ -80,6 +82,7 @@
          "$id": "10",
          "Name": "String",
          "Kind": "String",
+         "IsConfident": true,
          "IsNullable": false
         },
         "Value": "v1.0"
@@ -93,6 +96,7 @@
         "$id": "12",
         "Name": "String",
         "Kind": "String",
+        "IsConfident": true,
         "IsNullable": false
        },
        "Location": "Header",
@@ -130,7 +134,8 @@
      "Path": "/",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "IsConfident": true
     },
     {
      "$id": "15",
@@ -151,6 +156,7 @@
         "$id": "17",
         "Name": "string",
         "Kind": "String",
+        "IsConfident": true,
         "IsNullable": false
        },
        "Location": "Path",
@@ -171,6 +177,7 @@
         "$id": "19",
         "Name": "String",
         "Kind": "String",
+        "IsConfident": true,
         "IsNullable": false
        },
        "Location": "Header",
@@ -208,7 +215,8 @@
      "Path": "/{keyword}",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "IsConfident": true
     }
    ],
    "Protocol": {

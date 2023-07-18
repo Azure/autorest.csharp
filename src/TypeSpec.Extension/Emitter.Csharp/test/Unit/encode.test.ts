@@ -49,6 +49,7 @@ describe("Test encode duration", () => {
                 {
                     Name: "duration",
                     Kind: "DurationISO8601",
+                    IsConfident: true,
                     IsNullable: false
                 },
                 operation.Parameters[0].Type
@@ -86,6 +87,7 @@ describe("Test encode duration", () => {
                 {
                     Name: "duration",
                     Kind: "DurationSeconds",
+                    IsConfident: true,
                     IsNullable: false
                 },
                 operation.Parameters[0].Type
@@ -123,6 +125,7 @@ describe("Test encode duration", () => {
                 {
                     Name: "duration",
                     Kind: "DurationSecondsFloat",
+                    IsConfident: true,
                     IsNullable: false
                 },
                 operation.Parameters[0].Type
@@ -154,6 +157,7 @@ describe("Test encode duration", () => {
                 {
                     Name: "duration",
                     Kind: "DurationISO8601",
+                    IsConfident: true,
                     IsNullable: false
                 },
                 durationProperty.Properties[0].Type
@@ -185,6 +189,7 @@ describe("Test encode duration", () => {
                 {
                     Name: "duration",
                     Kind: "DurationISO8601",
+                    IsConfident: true,
                     IsNullable: false
                 },
                 durationProperty.Properties[0].Type
@@ -216,6 +221,7 @@ describe("Test encode duration", () => {
                 {
                     Name: "duration",
                     Kind: "DurationSeconds",
+                    IsConfident: true,
                     IsNullable: false
                 },
                 durationProperty.Properties[0].Type
@@ -247,6 +253,7 @@ describe("Test encode duration", () => {
                 {
                     Name: "duration",
                     Kind: "DurationSecondsFloat",
+                    IsConfident: true,
                     IsNullable: false
                 },
                 durationProperty.Properties[0].Type

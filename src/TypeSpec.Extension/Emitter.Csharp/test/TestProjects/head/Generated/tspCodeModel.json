@@ -13,6 +13,7 @@
    "Namespace": "TypeSpec.HeadClient",
    "IsNullable": false,
    "Usage": "Input",
+   "IsConfident": true,
    "Properties": [
     {
      "$id": "3",
@@ -23,6 +24,7 @@
       "$id": "4",
       "Name": "string",
       "Kind": "String",
+      "IsConfident": true,
       "IsNullable": false
      },
      "IsRequired": true,
@@ -51,7 +53,8 @@
         "$id": "8",
         "Name": "String",
         "Kind": "String",
-        "IsNullable": false
+        "IsNullable": false,
+        "IsConfident": true
        },
        "Location": "Uri",
        "IsApiVersion": false,
@@ -81,6 +84,7 @@
         "$id": "12",
         "Name": "string",
         "Kind": "String",
+        "IsConfident": true,
         "IsNullable": false
        },
        "Location": "Header",
@@ -118,6 +122,7 @@
         "$id": "15",
         "Name": "String",
         "Kind": "String",
+        "IsConfident": true,
         "IsNullable": false
        },
        "Location": "Header",
@@ -145,6 +150,7 @@
         "$id": "18",
         "Name": "String",
         "Kind": "String",
+        "IsConfident": true,
         "IsNullable": false
        },
        "Location": "Header",
@@ -173,6 +179,7 @@
         "$id": "21",
         "Name": "String",
         "Kind": "String",
+        "IsConfident": true,
         "IsNullable": false
        },
        "Location": "Query",
@@ -190,6 +197,7 @@
          "$id": "23",
          "Name": "String",
          "Kind": "String",
+         "IsConfident": true,
          "IsNullable": false
         },
         "Value": "1.0.0"
@@ -216,7 +224,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "IsConfident": true
     },
     {
      "$id": "25",
@@ -237,9 +246,11 @@
          "$id": "28",
          "Name": "String",
          "Kind": "String",
+         "IsConfident": true,
          "IsNullable": false
         },
         "Value": "text/plain",
+        "IsConfident": true,
         "IsNullable": false
        },
        "Location": "Header",
@@ -284,6 +295,7 @@
         "$id": "32",
         "Name": "String",
         "Kind": "String",
+        "IsConfident": true,
         "IsNullable": false
        },
        "Location": "Header",
@@ -327,7 +339,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "IsConfident": true
     }
    ],
    "Protocol": {

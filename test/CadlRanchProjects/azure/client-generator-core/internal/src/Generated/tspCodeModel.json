@@ -14,6 +14,7 @@
    "Description": "This is a model only used by public operation. It should be generated and exported.",
    "IsNullable": false,
    "Usage": "Output",
+   "IsConfident": true,
    "Properties": [
     {
      "$id": "3",
@@ -24,6 +25,7 @@
       "$id": "4",
       "Name": "string",
       "Kind": "String",
+      "IsConfident": true,
       "IsNullable": false
      },
      "IsRequired": true,
@@ -39,6 +41,7 @@
    "Description": "This is a model only used by internal operation. It should be generated but not exported.",
    "IsNullable": false,
    "Usage": "Output",
+   "IsConfident": true,
    "Properties": [
     {
      "$id": "6",
@@ -49,6 +52,7 @@
       "$id": "7",
       "Name": "string",
       "Kind": "String",
+      "IsConfident": true,
       "IsNullable": false
      },
      "IsRequired": true,
@@ -63,6 +67,7 @@
    "Description": "This is a model used by both public and internal operation. It should be generated and exported.",
    "IsNullable": false,
    "Usage": "Output",
+   "IsConfident": true,
    "Properties": [
     {
      "$id": "9",
@@ -73,6 +78,7 @@
       "$id": "10",
       "Name": "string",
       "Kind": "String",
+      "IsConfident": true,
       "IsNullable": false
      },
      "IsRequired": true,
@@ -101,7 +107,8 @@
         "$id": "14",
         "Name": "String",
         "Kind": "String",
-        "IsNullable": false
+        "IsNullable": false,
+        "IsConfident": true
        },
        "Location": "Uri",
        "IsApiVersion": false,
@@ -131,6 +138,7 @@
         "$id": "18",
         "Name": "string",
         "Kind": "String",
+        "IsConfident": true,
         "IsNullable": false
        },
        "Location": "Query",
@@ -151,6 +159,7 @@
         "$id": "20",
         "Name": "String",
         "Kind": "String",
+        "IsConfident": true,
         "IsNullable": false
        },
        "Location": "Header",
@@ -179,6 +188,7 @@
         "$id": "23",
         "Name": "String",
         "Kind": "String",
+        "IsConfident": true,
         "IsNullable": false
        },
        "Location": "Query",
@@ -196,6 +206,7 @@
          "$id": "25",
          "Name": "String",
          "Kind": "String",
+         "IsConfident": true,
          "IsNullable": false
         },
         "Value": "1.0.0"
@@ -222,7 +233,8 @@
      "Path": "/azure/client-generator-core/internal/public",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "IsConfident": true
     },
     {
      "$id": "27",
@@ -241,6 +253,7 @@
         "$id": "29",
         "Name": "string",
         "Kind": "String",
+        "IsConfident": true,
         "IsNullable": false
        },
        "Location": "Query",
@@ -261,6 +274,7 @@
         "$id": "31",
         "Name": "String",
         "Kind": "String",
+        "IsConfident": true,
         "IsNullable": false
        },
        "Location": "Header",
@@ -304,7 +318,8 @@
      "Path": "/azure/client-generator-core/internal/internal",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "IsConfident": true
     }
    ],
    "Protocol": {
@@ -333,6 +348,7 @@
         "$id": "38",
         "Name": "string",
         "Kind": "String",
+        "IsConfident": true,
         "IsNullable": false
        },
        "Location": "Query",
@@ -353,6 +369,7 @@
         "$id": "40",
         "Name": "String",
         "Kind": "String",
+        "IsConfident": true,
         "IsNullable": false
        },
        "Location": "Header",
@@ -396,7 +413,8 @@
      "Path": "/azure/client-generator-core/internal/shared/public",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "IsConfident": true
     },
     {
      "$id": "43",
@@ -415,6 +433,7 @@
         "$id": "45",
         "Name": "string",
         "Kind": "String",
+        "IsConfident": true,
         "IsNullable": false
        },
        "Location": "Query",
@@ -435,6 +454,7 @@
         "$id": "47",
         "Name": "String",
         "Kind": "String",
+        "IsConfident": true,
         "IsNullable": false
        },
        "Location": "Header",
@@ -478,7 +498,8 @@
      "Path": "/azure/client-generator-core/internal/shared/internal",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "IsConfident": true
     }
    ],
    "Protocol": {

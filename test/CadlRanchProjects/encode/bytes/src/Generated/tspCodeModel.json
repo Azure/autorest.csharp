@@ -13,6 +13,7 @@
    "Namespace": "Encode.Bytes",
    "IsNullable": false,
    "Usage": "RoundTrip",
+   "IsConfident": true,
    "Properties": [
     {
      "$id": "3",
@@ -23,6 +24,7 @@
       "$id": "4",
       "Name": "bytes",
       "Kind": "Bytes",
+      "IsConfident": true,
       "IsNullable": false
      },
      "IsRequired": true,
@@ -36,6 +38,7 @@
    "Namespace": "Encode.Bytes",
    "IsNullable": false,
    "Usage": "RoundTrip",
+   "IsConfident": true,
    "Properties": [
     {
      "$id": "6",
@@ -46,6 +49,7 @@
       "$id": "7",
       "Name": "bytes",
       "Kind": "Bytes",
+      "IsConfident": true,
       "IsNullable": false
      },
      "IsRequired": true,
@@ -59,6 +63,7 @@
    "Namespace": "Encode.Bytes",
    "IsNullable": false,
    "Usage": "RoundTrip",
+   "IsConfident": true,
    "Properties": [
     {
      "$id": "9",
@@ -69,6 +74,7 @@
       "$id": "10",
       "Name": "bytes",
       "Kind": "BytesBase64Url",
+      "IsConfident": true,
       "IsNullable": false
      },
      "IsRequired": true,
@@ -82,6 +88,7 @@
    "Namespace": "Encode.Bytes",
    "IsNullable": false,
    "Usage": "RoundTrip",
+   "IsConfident": true,
    "Properties": [
     {
      "$id": "12",
@@ -95,6 +102,7 @@
        "$id": "14",
        "Name": "base64urlBytes",
        "Kind": "BytesBase64Url",
+       "IsConfident": true,
        "IsNullable": false
       },
       "IsNullable": false
@@ -135,7 +143,8 @@
         "$id": "20",
         "Name": "String",
         "Kind": "String",
-        "IsNullable": false
+        "IsNullable": false,
+        "IsConfident": true
        },
        "Location": "Uri",
        "IsApiVersion": false,
@@ -165,6 +174,7 @@
         "$id": "24",
         "Name": "bytes",
         "Kind": "Bytes",
+        "IsConfident": true,
         "IsNullable": false
        },
        "Location": "Query",
@@ -185,6 +195,7 @@
         "$id": "26",
         "Name": "String",
         "Kind": "String",
+        "IsConfident": true,
         "IsNullable": false
        },
        "Location": "Header",
@@ -213,6 +224,7 @@
         "$id": "29",
         "Name": "String",
         "Kind": "String",
+        "IsConfident": true,
         "IsNullable": false
        },
        "Location": "Query",
@@ -230,6 +242,7 @@
          "$id": "31",
          "Name": "String",
          "Kind": "String",
+         "IsConfident": true,
          "IsNullable": false
         },
         "Value": "1.0.0"
@@ -253,7 +266,8 @@
      "Path": "/encode/bytes/query/default",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "IsConfident": true
     },
     {
      "$id": "33",
@@ -271,6 +285,7 @@
         "$id": "35",
         "Name": "bytes",
         "Kind": "Bytes",
+        "IsConfident": true,
         "IsNullable": false
        },
        "Location": "Query",
@@ -291,6 +306,7 @@
         "$id": "37",
         "Name": "String",
         "Kind": "String",
+        "IsConfident": true,
         "IsNullable": false
        },
        "Location": "Header",
@@ -331,7 +347,8 @@
      "Path": "/encode/bytes/query/base64",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "IsConfident": true
     },
     {
      "$id": "40",
@@ -349,6 +366,7 @@
         "$id": "42",
         "Name": "bytes",
         "Kind": "BytesBase64Url",
+        "IsConfident": true,
         "IsNullable": false
        },
        "Location": "Query",
@@ -369,6 +387,7 @@
         "$id": "44",
         "Name": "String",
         "Kind": "String",
+        "IsConfident": true,
         "IsNullable": false
        },
        "Location": "Header",
@@ -409,7 +428,8 @@
      "Path": "/encode/bytes/query/base64url",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "IsConfident": true
     },
     {
      "$id": "47",
@@ -430,6 +450,7 @@
          "$id": "50",
          "Name": "base64urlBytes",
          "Kind": "BytesBase64Url",
+         "IsConfident": true,
          "IsNullable": false
         },
         "IsNullable": false
@@ -453,6 +474,7 @@
         "$id": "52",
         "Name": "String",
         "Kind": "String",
+        "IsConfident": true,
         "IsNullable": false
        },
        "Location": "Header",
@@ -493,7 +515,8 @@
      "Path": "/encode/bytes/query/base64url-array",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "IsConfident": true
     }
    ],
    "Protocol": {
@@ -540,6 +563,7 @@
         "$id": "60",
         "Name": "String",
         "Kind": "String",
+        "IsConfident": true,
         "IsNullable": false
        },
        "Location": "Header",
@@ -567,6 +591,7 @@
         "$id": "63",
         "Name": "String",
         "Kind": "String",
+        "IsConfident": true,
         "IsNullable": false
        },
        "Location": "Header",
@@ -613,7 +638,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "IsConfident": true
     },
     {
      "$id": "66",
@@ -648,6 +674,7 @@
         "$id": "69",
         "Name": "String",
         "Kind": "String",
+        "IsConfident": true,
         "IsNullable": false
        },
        "Location": "Header",
@@ -675,6 +702,7 @@
         "$id": "72",
         "Name": "String",
         "Kind": "String",
+        "IsConfident": true,
         "IsNullable": false
        },
        "Location": "Header",
@@ -721,7 +749,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "IsConfident": true
     },
     {
      "$id": "75",
@@ -756,6 +785,7 @@
         "$id": "78",
         "Name": "String",
         "Kind": "String",
+        "IsConfident": true,
         "IsNullable": false
        },
        "Location": "Header",
@@ -783,6 +813,7 @@
         "$id": "81",
         "Name": "String",
         "Kind": "String",
+        "IsConfident": true,
         "IsNullable": false
        },
        "Location": "Header",
@@ -829,7 +860,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "IsConfident": true
     },
     {
      "$id": "84",
@@ -864,6 +896,7 @@
         "$id": "87",
         "Name": "String",
         "Kind": "String",
+        "IsConfident": true,
         "IsNullable": false
        },
        "Location": "Header",
@@ -891,6 +924,7 @@
         "$id": "90",
         "Name": "String",
         "Kind": "String",
+        "IsConfident": true,
         "IsNullable": false
        },
        "Location": "Header",
@@ -937,7 +971,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "IsConfident": true
     }
    ],
    "Protocol": {
@@ -967,6 +1002,7 @@
         "$id": "97",
         "Name": "bytes",
         "Kind": "Bytes",
+        "IsConfident": true,
         "IsNullable": false
        },
        "Location": "Header",
@@ -987,6 +1023,7 @@
         "$id": "99",
         "Name": "String",
         "Kind": "String",
+        "IsConfident": true,
         "IsNullable": false
        },
        "Location": "Header",
@@ -1027,7 +1064,8 @@
      "Path": "/encode/bytes/header/default",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "IsConfident": true
     },
     {
      "$id": "102",
@@ -1045,6 +1083,7 @@
         "$id": "104",
         "Name": "bytes",
         "Kind": "Bytes",
+        "IsConfident": true,
         "IsNullable": false
        },
        "Location": "Header",
@@ -1065,6 +1104,7 @@
         "$id": "106",
         "Name": "String",
         "Kind": "String",
+        "IsConfident": true,
         "IsNullable": false
        },
        "Location": "Header",
@@ -1105,7 +1145,8 @@
      "Path": "/encode/bytes/header/base64",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "IsConfident": true
     },
     {
      "$id": "109",
@@ -1123,6 +1164,7 @@
         "$id": "111",
         "Name": "bytes",
         "Kind": "BytesBase64Url",
+        "IsConfident": true,
         "IsNullable": false
        },
        "Location": "Header",
@@ -1143,6 +1185,7 @@
         "$id": "113",
         "Name": "String",
         "Kind": "String",
+        "IsConfident": true,
         "IsNullable": false
        },
        "Location": "Header",
@@ -1183,7 +1226,8 @@
      "Path": "/encode/bytes/header/base64url",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "IsConfident": true
     },
     {
      "$id": "116",
@@ -1204,6 +1248,7 @@
          "$id": "119",
          "Name": "base64urlBytes",
          "Kind": "BytesBase64Url",
+         "IsConfident": true,
          "IsNullable": false
         },
         "IsNullable": false
@@ -1227,6 +1272,7 @@
         "$id": "121",
         "Name": "String",
         "Kind": "String",
+        "IsConfident": true,
         "IsNullable": false
        },
        "Location": "Header",
@@ -1267,7 +1313,8 @@
      "Path": "/encode/bytes/header/base64url-array",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "IsConfident": true
     }
    ],
    "Protocol": {

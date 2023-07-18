@@ -14,6 +14,7 @@
    "Description": "Details about a user.",
    "IsNullable": false,
    "Usage": "RoundTrip",
+   "IsConfident": true,
    "Properties": [
     {
      "$id": "3",
@@ -24,6 +25,7 @@
       "$id": "4",
       "Name": "int32",
       "Kind": "Int32",
+      "IsConfident": true,
       "IsNullable": false
      },
      "IsRequired": true,
@@ -38,6 +40,7 @@
       "$id": "6",
       "Name": "string",
       "Kind": "String",
+      "IsConfident": true,
       "IsNullable": false
      },
      "IsRequired": true,
@@ -58,6 +61,7 @@
        "Description": "UserOrder for testing list with expand.",
        "IsNullable": false,
        "Usage": "RoundTrip",
+       "IsConfident": true,
        "Properties": [
         {
          "$id": "10",
@@ -68,6 +72,7 @@
           "$id": "11",
           "Name": "int32",
           "Kind": "Int32",
+          "IsConfident": true,
           "IsNullable": false
          },
          "IsRequired": true,
@@ -82,6 +87,7 @@
           "$id": "13",
           "Name": "int32",
           "Kind": "Int32",
+          "IsConfident": true,
           "IsNullable": false
          },
          "IsRequired": true,
@@ -96,6 +102,7 @@
           "$id": "15",
           "Name": "string",
           "Kind": "String",
+          "IsConfident": true,
           "IsNullable": false
          },
          "IsRequired": true,
@@ -117,6 +124,7 @@
       "$id": "17",
       "Name": "eTag",
       "Kind": "String",
+      "IsConfident": true,
       "IsNullable": false
      },
      "IsRequired": true,
@@ -134,6 +142,7 @@
    "Description": "Paged collection of User items",
    "IsNullable": false,
    "Usage": "None",
+   "IsConfident": true,
    "Properties": [
     {
      "$id": "19",
@@ -160,6 +169,7 @@
       "$id": "22",
       "Name": "ResourceLocation",
       "Kind": "Uri",
+      "IsConfident": true,
       "IsNullable": false
      },
      "IsRequired": false,
@@ -174,6 +184,7 @@
    "Description": "Paged collection of User items",
    "IsNullable": false,
    "Usage": "Output",
+   "IsConfident": true,
    "Properties": [
     {
      "$id": "24",
@@ -200,6 +211,7 @@
       "$id": "27",
       "Name": "ResourceLocation",
       "Kind": "Uri",
+      "IsConfident": true,
       "IsNullable": false
      },
      "IsRequired": false,
@@ -213,6 +225,7 @@
    "Namespace": "_Specs_.Azure.Core.Basic",
    "IsNullable": false,
    "Usage": "Output",
+   "IsConfident": true,
    "Properties": [
     {
      "$id": "29",
@@ -239,6 +252,7 @@
       "$id": "32",
       "Name": "string",
       "Kind": "String",
+      "IsConfident": true,
       "IsNullable": false
      },
      "IsRequired": false,
@@ -269,7 +283,8 @@
         "$id": "36",
         "Name": "String",
         "Kind": "String",
-        "IsNullable": false
+        "IsNullable": false,
+        "IsConfident": true
        },
        "Location": "Uri",
        "IsApiVersion": false,
@@ -300,6 +315,7 @@
         "$id": "40",
         "Name": "String",
         "Kind": "String",
+        "IsConfident": true,
         "IsNullable": false
        },
        "Location": "Query",
@@ -317,6 +333,7 @@
          "$id": "42",
          "Name": "String",
          "Kind": "String",
+         "IsConfident": true,
          "IsNullable": false
         },
         "Value": "2022-12-01-preview"
@@ -331,6 +348,7 @@
         "$id": "44",
         "Name": "int32",
         "Kind": "Int32",
+        "IsConfident": true,
         "IsNullable": false
        },
        "Location": "Path",
@@ -355,9 +373,11 @@
          "$id": "47",
          "Name": "String",
          "Kind": "String",
+         "IsConfident": true,
          "IsNullable": false
         },
         "Value": "application/merge-patch+json",
+        "IsConfident": true,
         "IsNullable": false
        },
        "Location": "Header",
@@ -403,6 +423,7 @@
         "$id": "51",
         "Name": "String",
         "Kind": "String",
+        "IsConfident": true,
         "IsNullable": false
        },
        "Location": "Header",
@@ -458,7 +479,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": false
+     "GenerateConvenienceMethod": false,
+     "IsConfident": true
     },
     {
      "$id": "55",
@@ -482,6 +504,7 @@
         "$id": "57",
         "Name": "int32",
         "Kind": "Int32",
+        "IsConfident": true,
         "IsNullable": false
        },
        "Location": "Path",
@@ -520,6 +543,7 @@
         "$id": "60",
         "Name": "String",
         "Kind": "String",
+        "IsConfident": true,
         "IsNullable": false
        },
        "Location": "Header",
@@ -547,6 +571,7 @@
         "$id": "63",
         "Name": "String",
         "Kind": "String",
+        "IsConfident": true,
         "IsNullable": false
        },
        "Location": "Header",
@@ -602,7 +627,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "IsConfident": true
     },
     {
      "$id": "67",
@@ -626,6 +652,7 @@
         "$id": "69",
         "Name": "int32",
         "Kind": "Int32",
+        "IsConfident": true,
         "IsNullable": false
        },
        "Location": "Path",
@@ -646,6 +673,7 @@
         "$id": "71",
         "Name": "String",
         "Kind": "String",
+        "IsConfident": true,
         "IsNullable": false
        },
        "Location": "Header",
@@ -686,7 +714,8 @@
      "Path": "/azure/core/basic/users/{id}",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "IsConfident": true
     },
     {
      "$id": "74",
@@ -710,6 +739,7 @@
         "$id": "76",
         "Name": "int32",
         "Kind": "Int32",
+        "IsConfident": true,
         "IsNullable": false
        },
        "Location": "Query",
@@ -731,6 +761,7 @@
         "$id": "78",
         "Name": "int32",
         "Kind": "Int32",
+        "IsConfident": true,
         "IsNullable": false
        },
        "Location": "Query",
@@ -752,6 +783,7 @@
         "$id": "80",
         "Name": "int32",
         "Kind": "Int32",
+        "IsConfident": true,
         "IsNullable": false
        },
        "Location": "Query",
@@ -776,6 +808,7 @@
          "$id": "83",
          "Name": "string",
          "Kind": "String",
+         "IsConfident": true,
          "IsNullable": false
         },
         "IsNullable": false
@@ -799,6 +832,7 @@
         "$id": "85",
         "Name": "string",
         "Kind": "String",
+        "IsConfident": true,
         "IsNullable": false
        },
        "Location": "Query",
@@ -823,6 +857,7 @@
          "$id": "88",
          "Name": "string",
          "Kind": "String",
+         "IsConfident": true,
          "IsNullable": false
         },
         "IsNullable": false
@@ -849,6 +884,7 @@
          "$id": "91",
          "Name": "string",
          "Kind": "String",
+         "IsConfident": true,
          "IsNullable": false
         },
         "IsNullable": false
@@ -871,6 +907,7 @@
         "$id": "93",
         "Name": "String",
         "Kind": "String",
+        "IsConfident": true,
         "IsNullable": false
        },
        "Location": "Header",
@@ -916,7 +953,8 @@
       "ItemName": "value"
      },
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "IsConfident": true
     },
     {
      "$id": "97",
@@ -938,6 +976,7 @@
         "$id": "99",
         "Name": "String",
         "Kind": "String",
+        "IsConfident": true,
         "IsNullable": false
        },
        "Location": "Header",
@@ -983,7 +1022,8 @@
       "ItemName": "value"
      },
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "IsConfident": true
     },
     {
      "$id": "103",
@@ -1005,6 +1045,7 @@
         "$id": "105",
         "Name": "String",
         "Kind": "String",
+        "IsConfident": true,
         "IsNullable": false
        },
        "Location": "Header",
@@ -1050,7 +1091,8 @@
       "ItemName": "items"
      },
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "IsConfident": true
     },
     {
      "$id": "109",
@@ -1074,6 +1116,7 @@
         "$id": "111",
         "Name": "int32",
         "Kind": "Int32",
+        "IsConfident": true,
         "IsNullable": false
        },
        "Location": "Path",
@@ -1094,6 +1137,7 @@
         "$id": "113",
         "Name": "String",
         "Kind": "String",
+        "IsConfident": true,
         "IsNullable": false
        },
        "Location": "Header",
@@ -1131,7 +1175,8 @@
      "Path": "/azure/core/basic/users/{id}",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "IsConfident": true
     },
     {
      "$id": "116",
@@ -1155,6 +1200,7 @@
         "$id": "118",
         "Name": "int32",
         "Kind": "Int32",
+        "IsConfident": true,
         "IsNullable": false
        },
        "Location": "Path",
@@ -1176,6 +1222,7 @@
         "$id": "120",
         "Name": "string",
         "Kind": "String",
+        "IsConfident": true,
         "IsNullable": false
        },
        "Location": "Query",
@@ -1196,6 +1243,7 @@
         "$id": "122",
         "Name": "String",
         "Kind": "String",
+        "IsConfident": true,
         "IsNullable": false
        },
        "Location": "Header",
@@ -1236,7 +1284,8 @@
      "Path": "/azure/core/basic/users/{id}:export",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "IsConfident": true
     }
    ],
    "Protocol": {

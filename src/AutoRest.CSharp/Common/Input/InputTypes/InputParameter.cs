@@ -31,7 +31,7 @@ internal record InputParameter(
         Name: string.Empty,
         NameInRequest: string.Empty,
         Description: null,
-        Type: new InputPrimitiveType(InputTypeKind.Object),
+        Type: InputPrimitiveType.Object,// an empty parameter is low confident
         Location: RequestLocation.None,
         DefaultValue: null,
         VirtualParameter: null,

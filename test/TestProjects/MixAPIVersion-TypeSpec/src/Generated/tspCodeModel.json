@@ -14,6 +14,7 @@
    "Description": "Pet",
    "IsNullable": false,
    "Usage": "None",
+   "IsConfident": true,
    "Properties": [
     {
      "$id": "3",
@@ -24,6 +25,7 @@
       "$id": "4",
       "Name": "string",
       "Kind": "String",
+      "IsConfident": true,
       "IsNullable": false
      },
      "IsRequired": true,
@@ -38,6 +40,7 @@
       "$id": "6",
       "Name": "string",
       "Kind": "String",
+      "IsConfident": true,
       "IsNullable": false
      },
      "IsRequired": false,
@@ -52,6 +55,7 @@
       "$id": "8",
       "Name": "int32",
       "Kind": "Int32",
+      "IsConfident": true,
       "IsNullable": false
      },
      "IsRequired": true,
@@ -66,6 +70,7 @@
    "Description": "Paged collection of Toy items",
    "IsNullable": false,
    "Usage": "None",
+   "IsConfident": true,
    "Properties": [
     {
      "$id": "10",
@@ -81,6 +86,7 @@
        "Namespace": "MixApiVersion",
        "IsNullable": false,
        "Usage": "None",
+       "IsConfident": true,
        "Properties": [
         {
          "$id": "13",
@@ -91,6 +97,7 @@
           "$id": "14",
           "Name": "int64",
           "Kind": "Int64",
+          "IsConfident": true,
           "IsNullable": false
          },
          "IsRequired": true,
@@ -105,6 +112,7 @@
           "$id": "16",
           "Name": "int64",
           "Kind": "Int64",
+          "IsConfident": true,
           "IsNullable": false
          },
          "IsRequired": true,
@@ -119,6 +127,7 @@
           "$id": "18",
           "Name": "string",
           "Kind": "String",
+          "IsConfident": true,
           "IsNullable": false
          },
          "IsRequired": true,
@@ -140,6 +149,7 @@
       "$id": "20",
       "Name": "ResourceLocation",
       "Kind": "Uri",
+      "IsConfident": true,
       "IsNullable": false
      },
      "IsRequired": false,
@@ -172,7 +182,8 @@
         "$id": "24",
         "Name": "Uri",
         "Kind": "Uri",
-        "IsNullable": false
+        "IsNullable": false,
+        "IsConfident": true
        },
        "Location": "Uri",
        "IsApiVersion": false,
@@ -193,6 +204,7 @@
         "$id": "26",
         "Name": "String",
         "Kind": "String",
+        "IsConfident": true,
         "IsNullable": false
        },
        "Location": "Query",
@@ -210,6 +222,7 @@
          "$id": "28",
          "Name": "String",
          "Kind": "String",
+         "IsConfident": true,
          "IsNullable": false
         },
         "Value": "2022-11-30-preview"
@@ -224,6 +237,7 @@
         "$id": "30",
         "Name": "string",
         "Kind": "String",
+        "IsConfident": true,
         "IsNullable": false
        },
        "Location": "Path",
@@ -244,6 +258,7 @@
         "$id": "32",
         "Name": "String",
         "Kind": "String",
+        "IsConfident": true,
         "IsNullable": false
        },
        "Location": "Header",
@@ -281,7 +296,8 @@
      "Path": "/pets/Pet/{name}",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": false
+     "GenerateConvenienceMethod": false,
+     "IsConfident": true
     },
     {
      "$id": "35",
@@ -301,6 +317,7 @@
         "$id": "37",
         "Name": "int32",
         "Kind": "Int32",
+        "IsConfident": true,
         "IsNullable": false
        },
        "Location": "Path",
@@ -321,6 +338,7 @@
         "$id": "39",
         "Name": "String",
         "Kind": "String",
+        "IsConfident": true,
         "IsNullable": false
        },
        "Location": "Header",
@@ -376,7 +394,8 @@
      "Path": "/pets/{petId}",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": false
+     "GenerateConvenienceMethod": false,
+     "IsConfident": true
     },
     {
      "$id": "43",
@@ -397,9 +416,11 @@
          "$id": "46",
          "Name": "String",
          "Kind": "String",
+         "IsConfident": true,
          "IsNullable": false
         },
         "Value": "2022-07-09",
+        "IsConfident": true,
         "IsNullable": false
        },
        "Location": "Query",
@@ -444,6 +465,7 @@
         "$id": "50",
         "Name": "String",
         "Kind": "String",
+        "IsConfident": true,
         "IsNullable": false
        },
        "Location": "Header",
@@ -471,6 +493,7 @@
         "$id": "53",
         "Name": "String",
         "Kind": "String",
+        "IsConfident": true,
         "IsNullable": false
        },
        "Location": "Header",
@@ -514,7 +537,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": false
+     "GenerateConvenienceMethod": false,
+     "IsConfident": true
     },
     {
      "$id": "56",
@@ -537,6 +561,7 @@
         "$id": "58",
         "Name": "String",
         "Kind": "String",
+        "IsConfident": true,
         "IsNullable": false
        },
        "Location": "Header",
@@ -582,7 +607,8 @@
       "ItemName": "value"
      },
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": false
+     "GenerateConvenienceMethod": false,
+     "IsConfident": true
     }
    ],
    "Protocol": {

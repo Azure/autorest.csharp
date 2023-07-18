@@ -27,11 +27,15 @@ namespace AutoRest.CSharp.Common.Input
         public static InputUnionType CreateInputUnionType(ref Utf8JsonReader reader, string? id, string? name, JsonSerializerOptions options, ReferenceResolver resolver)
         {
             var isFirstProperty = id == null;
+            bool isConfident = true;
+            bool isNullable = false;
             var unionItemTypes = new List<InputType>();
             while (reader.TokenType != JsonTokenType.EndObject)
             {
                 var isKnownProperty = reader.TryReadReferenceId(ref isFirstProperty, ref id)
-                    || reader.TryReadString(nameof(InputEnumTypeValue.Name), ref name);
+                    || reader.TryReadString(nameof(InputUnionType.Name), ref name)
+                    || reader.TryReadBoolean(nameof(InputUnionType.IsConfident), ref isConfident)
+                    || reader.TryReadBoolean(nameof(InputUnionType.IsNullable), ref isNullable);
 
                 if (isKnownProperty)
                 {
@@ -55,7 +59,7 @@ namespace AutoRest.CSharp.Common.Input
                 throw new JsonException("Union must have a least one union type");
             }
 
-            var unionType = new InputUnionType(name, unionItemTypes, false);
+            var unionType = new InputUnionType(name, unionItemTypes, isConfident, IsNullable: isNullable);
             if (id != null)
             {
                 resolver.AddReference(id, unionType);

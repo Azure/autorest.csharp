@@ -70,6 +70,7 @@ op test(@body input: Pet): Pet;
                     Type: {
                         Name: "string",
                         Kind: "String",
+                        IsConfident: true,
                         IsNullable: false
                     },
                     IsNullable: false,

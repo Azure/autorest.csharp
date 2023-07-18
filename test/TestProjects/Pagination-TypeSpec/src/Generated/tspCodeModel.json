@@ -44,6 +44,7 @@
     }
    ],
    "IsExtensible": true,
+   "IsConfident": true,
    "IsNullable": false,
    "Usage": "Input"
   }
@@ -56,6 +57,7 @@
    "Description": "Type for input model body",
    "IsNullable": false,
    "Usage": "Input",
+   "IsConfident": true,
    "Properties": [
     {
      "$id": "9",
@@ -66,6 +68,7 @@
       "$id": "10",
       "Name": "string",
       "Kind": "String",
+      "IsConfident": true,
       "IsNullable": false
      },
      "IsRequired": true,
@@ -80,6 +83,7 @@
       "$id": "12",
       "Name": "int32",
       "Kind": "Int32",
+      "IsConfident": true,
       "IsNullable": false
      },
      "IsRequired": true,
@@ -94,6 +98,7 @@
    "Description": "Paginated ledger entries",
    "IsNullable": false,
    "Usage": "Output",
+   "IsConfident": true,
    "Properties": [
     {
      "$id": "14",
@@ -109,6 +114,7 @@
        "Namespace": "Pagination",
        "IsNullable": false,
        "Usage": "Output",
+       "IsConfident": true,
        "Properties": [
         {
          "$id": "17",
@@ -119,6 +125,7 @@
           "$id": "18",
           "Name": "string",
           "Kind": "String",
+          "IsConfident": true,
           "IsNullable": false
          },
          "IsRequired": true,
@@ -133,6 +140,7 @@
           "$id": "20",
           "Name": "string",
           "Kind": "String",
+          "IsConfident": true,
           "IsNullable": false
          },
          "IsRequired": true,
@@ -147,6 +155,7 @@
           "$id": "22",
           "Name": "string",
           "Kind": "String",
+          "IsConfident": true,
           "IsNullable": false
          },
          "IsRequired": true,
@@ -168,6 +177,7 @@
       "$id": "24",
       "Name": "ResourceLocation",
       "Kind": "Uri",
+      "IsConfident": true,
       "IsNullable": false
      },
      "IsRequired": false,
@@ -185,6 +195,7 @@
    "Description": "Paged collection of DimensionValueListItem items",
    "IsNullable": false,
    "Usage": "None",
+   "IsConfident": true,
    "Properties": [
     {
      "$id": "26",
@@ -200,6 +211,7 @@
        "Namespace": "Pagination",
        "IsNullable": false,
        "Usage": "Output",
+       "IsConfident": true,
        "Properties": [
         {
          "$id": "29",
@@ -213,6 +225,7 @@
            "$id": "31",
            "Name": "string",
            "Kind": "String",
+           "IsConfident": true,
            "IsNullable": false
           },
           "IsNullable": false
@@ -236,6 +249,7 @@
       "$id": "33",
       "Name": "ResourceLocation",
       "Kind": "Uri",
+      "IsConfident": true,
       "IsNullable": false
      },
      "IsRequired": false,
@@ -253,6 +267,7 @@
    "Description": "Paged collection of LedgerEntry items",
    "IsNullable": false,
    "Usage": "Output",
+   "IsConfident": true,
    "Properties": [
     {
      "$id": "35",
@@ -279,6 +294,7 @@
       "$id": "38",
       "Name": "ResourceLocation",
       "Kind": "Uri",
+      "IsConfident": true,
       "IsNullable": false
      },
      "IsRequired": false,
@@ -293,6 +309,7 @@
    "Description": "Paged collection of TextBlocklist items",
    "IsNullable": false,
    "Usage": "None",
+   "IsConfident": true,
    "Properties": [
     {
      "$id": "40",
@@ -309,6 +326,7 @@
        "Description": "Text Blocklist.",
        "IsNullable": false,
        "Usage": "Output",
+       "IsConfident": true,
        "Properties": [
         {
          "$id": "43",
@@ -319,6 +337,7 @@
           "$id": "44",
           "Name": "string",
           "Kind": "String",
+          "IsConfident": true,
           "IsNullable": false
          },
          "IsRequired": true,
@@ -333,6 +352,7 @@
           "$id": "46",
           "Name": "string",
           "Kind": "String",
+          "IsConfident": true,
           "IsNullable": false
          },
          "IsRequired": false,
@@ -354,6 +374,7 @@
       "$id": "48",
       "Name": "ResourceLocation",
       "Kind": "Uri",
+      "IsConfident": true,
       "IsNullable": false
      },
      "IsRequired": false,
@@ -371,6 +392,7 @@
    "Description": "Paged collection of TextBlockItem items",
    "IsNullable": false,
    "Usage": "None",
+   "IsConfident": true,
    "Properties": [
     {
      "$id": "50",
@@ -387,6 +409,7 @@
        "Description": "Item in TextBlocklist.",
        "IsNullable": false,
        "Usage": "Output",
+       "IsConfident": true,
        "Properties": [
         {
          "$id": "53",
@@ -397,6 +420,7 @@
           "$id": "54",
           "Name": "string",
           "Kind": "String",
+          "IsConfident": true,
           "IsNullable": false
          },
          "IsRequired": true,
@@ -411,6 +435,7 @@
           "$id": "56",
           "Name": "string",
           "Kind": "String",
+          "IsConfident": true,
           "IsNullable": false
          },
          "IsRequired": false,
@@ -425,6 +450,7 @@
           "$id": "58",
           "Name": "string",
           "Kind": "String",
+          "IsConfident": true,
           "IsNullable": false
          },
          "IsRequired": true,
@@ -446,6 +472,7 @@
       "$id": "60",
       "Name": "ResourceLocation",
       "Kind": "Uri",
+      "IsConfident": true,
       "IsNullable": false
      },
      "IsRequired": false,
@@ -478,7 +505,8 @@
         "$id": "64",
         "Name": "Uri",
         "Kind": "Uri",
-        "IsNullable": false
+        "IsNullable": false,
+        "IsConfident": true
        },
        "Location": "Uri",
        "IsApiVersion": false,
@@ -499,6 +527,7 @@
         "$id": "66",
         "Name": "String",
         "Kind": "String",
+        "IsConfident": true,
         "IsNullable": false
        },
        "Location": "Query",
@@ -516,6 +545,7 @@
          "$id": "68",
          "Name": "String",
          "Kind": "String",
+         "IsConfident": true,
          "IsNullable": false
         },
         "Value": "2022-05-13"
@@ -547,6 +577,7 @@
         "$id": "71",
         "Name": "String",
         "Kind": "String",
+        "IsConfident": true,
         "IsNullable": false
        },
        "Location": "Header",
@@ -574,6 +605,7 @@
         "$id": "74",
         "Name": "String",
         "Kind": "String",
+        "IsConfident": true,
         "IsNullable": false
        },
        "Location": "Header",
@@ -622,7 +654,8 @@
       "ItemName": "entries"
      },
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "IsConfident": true
     },
     {
      "$id": "78",
@@ -646,6 +679,7 @@
         "$id": "80",
         "Name": "string",
         "Kind": "String",
+        "IsConfident": true,
         "IsNullable": false
        },
        "Location": "Path",
@@ -667,6 +701,7 @@
         "$id": "82",
         "Name": "string",
         "Kind": "String",
+        "IsConfident": true,
         "IsNullable": false
        },
        "Location": "Path",
@@ -706,6 +741,7 @@
         "$id": "85",
         "Name": "string",
         "Kind": "String",
+        "IsConfident": true,
         "IsNullable": false
        },
        "Location": "Query",
@@ -727,6 +763,7 @@
         "$id": "87",
         "Name": "string",
         "Kind": "String",
+        "IsConfident": true,
         "IsNullable": false
        },
        "Location": "Query",
@@ -748,6 +785,7 @@
         "$id": "89",
         "Name": "string",
         "Kind": "String",
+        "IsConfident": true,
         "IsNullable": false
        },
        "Location": "Query",
@@ -768,6 +806,7 @@
         "$id": "91",
         "Name": "String",
         "Kind": "String",
+        "IsConfident": true,
         "IsNullable": false
        },
        "Location": "Header",
@@ -813,7 +852,8 @@
       "ItemName": "value"
      },
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "IsConfident": true
     },
     {
      "$id": "95",
@@ -835,6 +875,7 @@
         "$id": "97",
         "Name": "String",
         "Kind": "String",
+        "IsConfident": true,
         "IsNullable": false
        },
        "Location": "Header",
@@ -880,7 +921,8 @@
       "ItemName": "value"
      },
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "IsConfident": true
     },
     {
      "$id": "101",
@@ -903,6 +945,7 @@
         "$id": "103",
         "Name": "String",
         "Kind": "String",
+        "IsConfident": true,
         "IsNullable": false
        },
        "Location": "Header",
@@ -948,7 +991,8 @@
       "ItemName": "value"
      },
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "IsConfident": true
     },
     {
      "$id": "107",
@@ -972,6 +1016,7 @@
         "$id": "109",
         "Name": "string",
         "Kind": "String",
+        "IsConfident": true,
         "IsNullable": false
        },
        "Location": "Path",
@@ -993,6 +1038,7 @@
         "$id": "111",
         "Name": "int32",
         "Kind": "Int32",
+        "IsConfident": true,
         "IsNullable": false
        },
        "Location": "Query",
@@ -1014,6 +1060,7 @@
         "$id": "113",
         "Name": "int32",
         "Kind": "Int32",
+        "IsConfident": true,
         "IsNullable": false
        },
        "Location": "Query",
@@ -1035,6 +1082,7 @@
         "$id": "115",
         "Name": "int32",
         "Kind": "Int32",
+        "IsConfident": true,
         "IsNullable": false
        },
        "Location": "Query",
@@ -1055,6 +1103,7 @@
         "$id": "117",
         "Name": "String",
         "Kind": "String",
+        "IsConfident": true,
         "IsNullable": false
        },
        "Location": "Header",
@@ -1100,7 +1149,8 @@
       "ItemName": "value"
      },
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "IsConfident": true
     }
    ],
    "Protocol": {

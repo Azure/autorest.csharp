@@ -14,6 +14,7 @@
    "Description": "This is base model for non-discriminator normal multiple levels inheritance.",
    "IsNullable": false,
    "Usage": "None",
+   "IsConfident": true,
    "Properties": [
     {
      "$id": "3",
@@ -24,6 +25,7 @@
       "$id": "4",
       "Name": "string",
       "Kind": "String",
+      "IsConfident": true,
       "IsNullable": false
      },
      "IsRequired": true,
@@ -41,6 +43,7 @@
     "$ref": "2"
    },
    "Usage": "None",
+   "IsConfident": true,
    "Properties": [
     {
      "$id": "6",
@@ -51,6 +54,7 @@
       "$id": "7",
       "Name": "int32",
       "Kind": "Int32",
+      "IsConfident": true,
       "IsNullable": false
      },
      "IsRequired": true,
@@ -68,6 +72,7 @@
     "$ref": "5"
    },
    "Usage": "RoundTrip",
+   "IsConfident": true,
    "Properties": [
     {
      "$id": "9",
@@ -78,6 +83,7 @@
       "$id": "10",
       "Name": "boolean",
       "Kind": "Boolean",
+      "IsConfident": true,
       "IsNullable": false
      },
      "IsRequired": true,
@@ -93,6 +99,7 @@
    "IsNullable": false,
    "DiscriminatorPropertyName": "kind",
    "Usage": "Output",
+   "IsConfident": true,
    "Properties": [
     {
      "$id": "12",
@@ -103,6 +110,7 @@
       "$id": "13",
       "Name": "string",
       "Kind": "String",
+      "IsConfident": true,
       "IsNullable": false
      },
      "IsRequired": true,
@@ -122,6 +130,7 @@
     "$ref": "11"
    },
    "Usage": "Output",
+   "IsConfident": true,
    "Properties": [
     {
      "$id": "15",
@@ -132,6 +141,7 @@
       "$id": "16",
       "Name": "int32",
       "Kind": "Int32",
+      "IsConfident": true,
       "IsNullable": false
      },
      "IsRequired": true,
@@ -147,6 +157,7 @@
    "IsNullable": false,
    "DiscriminatorPropertyName": "kind",
    "Usage": "RoundTrip",
+   "IsConfident": true,
    "Properties": [
     {
      "$id": "18",
@@ -160,6 +171,7 @@
       "$id": "19",
       "Name": "string",
       "Kind": "String",
+      "IsConfident": true,
       "IsNullable": false
      },
      "IsDiscriminator": true
@@ -173,6 +185,7 @@
       "$id": "21",
       "Name": "int32",
       "Kind": "Int32",
+      "IsConfident": true,
       "IsNullable": false
      },
      "IsRequired": true,
@@ -191,6 +204,7 @@
     "$ref": "17"
    },
    "Usage": "RoundTrip",
+   "IsConfident": true,
    "Properties": []
   },
   {
@@ -204,6 +218,7 @@
     "$ref": "17"
    },
    "Usage": "RoundTrip",
+   "IsConfident": true,
    "Properties": [
     {
      "$id": "24",
@@ -233,6 +248,7 @@
        "$id": "28",
        "Name": "string",
        "Kind": "String",
+       "IsConfident": true,
        "IsNullable": false
       },
       "ValueType": {
@@ -277,7 +293,8 @@
         "$id": "33",
         "Name": "String",
         "Kind": "String",
-        "IsNullable": false
+        "IsNullable": false,
+        "IsConfident": true
        },
        "Location": "Uri",
        "IsApiVersion": false,
@@ -324,6 +341,7 @@
         "$id": "38",
         "Name": "String",
         "Kind": "String",
+        "IsConfident": true,
         "IsNullable": false
        },
        "Location": "Header",
@@ -351,6 +369,7 @@
         "$id": "41",
         "Name": "String",
         "Kind": "String",
+        "IsConfident": true,
         "IsNullable": false
        },
        "Location": "Header",
@@ -379,6 +398,7 @@
         "$id": "44",
         "Name": "String",
         "Kind": "String",
+        "IsConfident": true,
         "IsNullable": false
        },
        "Location": "Query",
@@ -396,6 +416,7 @@
          "$id": "46",
          "Name": "String",
          "Kind": "String",
+         "IsConfident": true,
          "IsNullable": false
         },
         "Value": "1.0.0"
@@ -422,7 +443,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "IsConfident": true
     },
     {
      "$id": "48",
@@ -440,6 +462,7 @@
         "$id": "50",
         "Name": "String",
         "Kind": "String",
+        "IsConfident": true,
         "IsNullable": false
        },
        "Location": "Header",
@@ -483,7 +506,8 @@
      "Path": "/type/model/inheritance/valid",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "IsConfident": true
     },
     {
      "$id": "53",
@@ -518,6 +542,7 @@
         "$id": "56",
         "Name": "String",
         "Kind": "String",
+        "IsConfident": true,
         "IsNullable": false
        },
        "Location": "Header",
@@ -545,6 +570,7 @@
         "$id": "59",
         "Name": "String",
         "Kind": "String",
+        "IsConfident": true,
         "IsNullable": false
        },
        "Location": "Header",
@@ -591,7 +617,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "IsConfident": true
     },
     {
      "$id": "62",
@@ -609,6 +636,7 @@
         "$id": "64",
         "Name": "String",
         "Kind": "String",
+        "IsConfident": true,
         "IsNullable": false
        },
        "Location": "Header",
@@ -652,7 +680,8 @@
      "Path": "/type/model/inheritance/duplicate",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "IsConfident": true
     },
     {
      "$id": "67",
@@ -670,6 +699,7 @@
         "$id": "69",
         "Name": "String",
         "Kind": "String",
+        "IsConfident": true,
         "IsNullable": false
        },
        "Location": "Header",
@@ -713,7 +743,8 @@
      "Path": "/type/model/inheritance/discriminated/model",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "IsConfident": true
     },
     {
      "$id": "72",
@@ -748,6 +779,7 @@
         "$id": "75",
         "Name": "String",
         "Kind": "String",
+        "IsConfident": true,
         "IsNullable": false
        },
        "Location": "Header",
@@ -775,6 +807,7 @@
         "$id": "78",
         "Name": "String",
         "Kind": "String",
+        "IsConfident": true,
         "IsNullable": false
        },
        "Location": "Header",
@@ -818,7 +851,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "IsConfident": true
     },
     {
      "$id": "81",
@@ -836,6 +870,7 @@
         "$id": "83",
         "Name": "String",
         "Kind": "String",
+        "IsConfident": true,
         "IsNullable": false
        },
        "Location": "Header",
@@ -879,7 +914,8 @@
      "Path": "/type/model/inheritance/discriminated/recursivemodel",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "IsConfident": true
     },
     {
      "$id": "86",
@@ -914,6 +950,7 @@
         "$id": "89",
         "Name": "String",
         "Kind": "String",
+        "IsConfident": true,
         "IsNullable": false
        },
        "Location": "Header",
@@ -941,6 +978,7 @@
         "$id": "92",
         "Name": "String",
         "Kind": "String",
+        "IsConfident": true,
         "IsNullable": false
        },
        "Location": "Header",
@@ -984,7 +1022,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "IsConfident": true
     },
     {
      "$id": "95",
@@ -1002,6 +1041,7 @@
         "$id": "97",
         "Name": "String",
         "Kind": "String",
+        "IsConfident": true,
         "IsNullable": false
        },
        "Location": "Header",
@@ -1045,7 +1085,8 @@
      "Path": "/type/model/inheritance/discriminated/missingdiscriminator",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "IsConfident": true
     },
     {
      "$id": "100",
@@ -1063,6 +1104,7 @@
         "$id": "102",
         "Name": "String",
         "Kind": "String",
+        "IsConfident": true,
         "IsNullable": false
        },
        "Location": "Header",
@@ -1106,7 +1148,8 @@
      "Path": "/type/model/inheritance/discriminated/wrongdiscriminator",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "IsConfident": true
     }
    ],
    "Protocol": {

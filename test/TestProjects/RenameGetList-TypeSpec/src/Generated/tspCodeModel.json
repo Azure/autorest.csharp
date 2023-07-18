@@ -32,6 +32,7 @@
     }
    ],
    "IsExtensible": true,
+   "IsConfident": true,
    "IsNullable": false,
    "Usage": "None"
   }
@@ -43,6 +44,7 @@
    "Namespace": "RenameGetList",
    "IsNullable": false,
    "Usage": "None",
+   "IsConfident": true,
    "Properties": [
     {
      "$id": "7",
@@ -53,6 +55,7 @@
       "$id": "8",
       "Name": "string",
       "Kind": "String",
+      "IsConfident": true,
       "IsNullable": false
      },
      "IsRequired": true,
@@ -78,6 +81,7 @@
       "$id": "11",
       "Name": "string",
       "Kind": "String",
+      "IsConfident": true,
       "IsNullable": false
      },
      "IsRequired": true,
@@ -95,12 +99,14 @@
        "$id": "14",
        "Name": "string",
        "Kind": "String",
+       "IsConfident": true,
        "IsNullable": false
       },
       "ValueType": {
        "$id": "15",
        "Name": "string",
        "Kind": "String",
+       "IsConfident": true,
        "IsNullable": false
       },
       "IsNullable": false
@@ -117,6 +123,7 @@
       "$id": "17",
       "Name": "boolean",
       "Kind": "Boolean",
+      "IsConfident": true,
       "IsNullable": false
      },
      "IsRequired": false,
@@ -131,6 +138,7 @@
       "$id": "19",
       "Name": "string",
       "Kind": "String",
+      "IsConfident": true,
       "IsNullable": false
      },
      "IsRequired": false,
@@ -145,6 +153,7 @@
       "$id": "21",
       "Name": "string",
       "Kind": "String",
+      "IsConfident": true,
       "IsNullable": false
      },
      "IsRequired": true,
@@ -159,6 +168,7 @@
       "$id": "23",
       "Name": "utcDateTime",
       "Kind": "DateTime",
+      "IsConfident": true,
       "IsNullable": false
      },
      "IsRequired": true,
@@ -173,6 +183,7 @@
       "$id": "25",
       "Name": "utcDateTime",
       "Kind": "DateTime",
+      "IsConfident": true,
       "IsNullable": false
      },
      "IsRequired": true,
@@ -187,6 +198,7 @@
       "$id": "27",
       "Name": "utcDateTime",
       "Kind": "DateTime",
+      "IsConfident": true,
       "IsNullable": false
      },
      "IsRequired": true,
@@ -201,6 +213,7 @@
       "$id": "29",
       "Name": "utcDateTime",
       "Kind": "DateTime",
+      "IsConfident": true,
       "IsNullable": false
      },
      "IsRequired": true,
@@ -215,6 +228,7 @@
    "Description": "Paged collection of Project items",
    "IsNullable": false,
    "Usage": "None",
+   "IsConfident": true,
    "Properties": [
     {
      "$id": "31",
@@ -241,6 +255,7 @@
       "$id": "34",
       "Name": "ResourceLocation",
       "Kind": "Uri",
+      "IsConfident": true,
       "IsNullable": false
      },
      "IsRequired": false,
@@ -254,6 +269,7 @@
    "Namespace": "RenameGetList",
    "IsNullable": false,
    "Usage": "None",
+   "IsConfident": true,
    "Properties": [
     {
      "$id": "36",
@@ -264,6 +280,7 @@
       "$id": "37",
       "Name": "string",
       "Kind": "String",
+      "IsConfident": true,
       "IsNullable": false
      },
      "IsRequired": true,
@@ -278,6 +295,7 @@
    "Description": "Paged collection of Deployment items",
    "IsNullable": false,
    "Usage": "None",
+   "IsConfident": true,
    "Properties": [
     {
      "$id": "39",
@@ -304,6 +322,7 @@
       "$id": "42",
       "Name": "ResourceLocation",
       "Kind": "Uri",
+      "IsConfident": true,
       "IsNullable": false
      },
      "IsRequired": false,
@@ -332,7 +351,8 @@
         "$id": "46",
         "Name": "Uri",
         "Kind": "Uri",
-        "IsNullable": false
+        "IsNullable": false,
+        "IsConfident": true
        },
        "Location": "Uri",
        "IsApiVersion": false,
@@ -353,6 +373,7 @@
         "$id": "48",
         "Name": "String",
         "Kind": "String",
+        "IsConfident": true,
         "IsNullable": false
        },
        "Location": "Query",
@@ -370,6 +391,7 @@
          "$id": "50",
          "Name": "String",
          "Kind": "String",
+         "IsConfident": true,
          "IsNullable": false
         },
         "Value": "2022-05-15-preview"
@@ -383,6 +405,7 @@
         "$id": "52",
         "Name": "string",
         "Kind": "String",
+        "IsConfident": true,
         "IsNullable": false
        },
        "Location": "Path",
@@ -403,6 +426,7 @@
         "$id": "54",
         "Name": "String",
         "Kind": "String",
+        "IsConfident": true,
         "IsNullable": false
        },
        "Location": "Header",
@@ -443,7 +467,8 @@
      "Path": "/authoring/analyze-text/projects/{projectName}",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": false
+     "GenerateConvenienceMethod": false,
+     "IsConfident": true
     },
     {
      "$id": "57",
@@ -465,6 +490,7 @@
         "$id": "59",
         "Name": "String",
         "Kind": "String",
+        "IsConfident": true,
         "IsNullable": false
        },
        "Location": "Header",
@@ -510,7 +536,8 @@
       "ItemName": "value"
      },
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": false
+     "GenerateConvenienceMethod": false,
+     "IsConfident": true
     },
     {
      "$id": "63",
@@ -532,6 +559,7 @@
         "$id": "65",
         "Name": "string",
         "Kind": "String",
+        "IsConfident": true,
         "IsNullable": false
        },
        "Location": "Path",
@@ -552,6 +580,7 @@
         "$id": "67",
         "Name": "string",
         "Kind": "String",
+        "IsConfident": true,
         "IsNullable": false
        },
        "Location": "Path",
@@ -572,6 +601,7 @@
         "$id": "69",
         "Name": "String",
         "Kind": "String",
+        "IsConfident": true,
         "IsNullable": false
        },
        "Location": "Header",
@@ -612,7 +642,8 @@
      "Path": "/authoring/analyze-text/projects/{projectName}/deployments/{deploymentName}",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": false
+     "GenerateConvenienceMethod": false,
+     "IsConfident": true
     },
     {
      "$id": "72",
@@ -634,6 +665,7 @@
         "$id": "74",
         "Name": "string",
         "Kind": "String",
+        "IsConfident": true,
         "IsNullable": false
        },
        "Location": "Path",
@@ -654,6 +686,7 @@
         "$id": "76",
         "Name": "String",
         "Kind": "String",
+        "IsConfident": true,
         "IsNullable": false
        },
        "Location": "Header",
@@ -699,7 +732,8 @@
       "ItemName": "value"
      },
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": false
+     "GenerateConvenienceMethod": false,
+     "IsConfident": true
     }
    ],
    "Protocol": {

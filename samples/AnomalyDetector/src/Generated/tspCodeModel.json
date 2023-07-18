@@ -19,6 +19,7 @@
     }
    ],
    "IsExtensible": true,
+   "IsConfident": true,
    "IsNullable": false,
    "Usage": "None"
   },
@@ -76,6 +77,7 @@
     }
    ],
    "IsExtensible": false,
+   "IsConfident": true,
    "IsNullable": false,
    "Usage": "Input"
   },
@@ -118,6 +120,7 @@
     }
    ],
    "IsExtensible": true,
+   "IsConfident": true,
    "IsNullable": false,
    "Usage": "Input"
   },
@@ -150,6 +153,7 @@
     }
    ],
    "IsExtensible": false,
+   "IsConfident": true,
    "IsNullable": false,
    "Usage": "Output"
   },
@@ -174,6 +178,7 @@
     }
    ],
    "IsExtensible": true,
+   "IsConfident": true,
    "IsNullable": false,
    "Usage": "RoundTrip"
   },
@@ -196,6 +201,7 @@
     }
    ],
    "IsExtensible": false,
+   "IsConfident": true,
    "IsNullable": false,
    "Usage": "RoundTrip"
   },
@@ -233,6 +239,7 @@
     }
    ],
    "IsExtensible": true,
+   "IsConfident": true,
    "IsNullable": false,
    "Usage": "RoundTrip"
   },
@@ -265,6 +272,7 @@
     }
    ],
    "IsExtensible": false,
+   "IsConfident": true,
    "IsNullable": false,
    "Usage": "RoundTrip"
   }
@@ -277,6 +285,7 @@
    "Description": "The request of entire or last anomaly detection.",
    "IsNullable": false,
    "Usage": "Input",
+   "IsConfident": true,
    "Properties": [
     {
      "$id": "44",
@@ -293,6 +302,7 @@
        "Description": "The definition of input timeseries points.",
        "IsNullable": false,
        "Usage": "Input",
+       "IsConfident": true,
        "Properties": [
         {
          "$id": "47",
@@ -303,6 +313,7 @@
           "$id": "48",
           "Name": "utcDateTime",
           "Kind": "DateTime",
+          "IsConfident": true,
           "IsNullable": false
          },
          "IsRequired": false,
@@ -317,6 +328,7 @@
           "$id": "50",
           "Name": "float32",
           "Kind": "Float32",
+          "IsConfident": true,
           "IsNullable": false
          },
          "IsRequired": true,
@@ -349,6 +361,7 @@
       "$id": "53",
       "Name": "int32",
       "Kind": "Int32",
+      "IsConfident": true,
       "IsNullable": false
      },
      "IsRequired": false,
@@ -363,6 +376,7 @@
       "$id": "55",
       "Name": "int32",
       "Kind": "Int32",
+      "IsConfident": true,
       "IsNullable": false
      },
      "IsRequired": false,
@@ -377,6 +391,7 @@
       "$id": "57",
       "Name": "float32",
       "Kind": "Float32",
+      "IsConfident": true,
       "IsNullable": false
      },
      "IsRequired": false,
@@ -391,6 +406,7 @@
       "$id": "59",
       "Name": "int32",
       "Kind": "Int32",
+      "IsConfident": true,
       "IsNullable": false
      },
      "IsRequired": false,
@@ -416,6 +432,7 @@
       "$id": "62",
       "Name": "float32",
       "Kind": "Float32",
+      "IsConfident": true,
       "IsNullable": false
      },
      "IsRequired": false,
@@ -433,6 +450,7 @@
    "Description": "The response of entire anomaly detection.",
    "IsNullable": false,
    "Usage": "Output",
+   "IsConfident": true,
    "Properties": [
     {
      "$id": "64",
@@ -443,6 +461,7 @@
       "$id": "65",
       "Name": "int32",
       "Kind": "Int32",
+      "IsConfident": true,
       "IsNullable": false
      },
      "IsRequired": true,
@@ -460,6 +479,7 @@
        "$id": "68",
        "Name": "float32",
        "Kind": "Float32",
+       "IsConfident": true,
        "IsNullable": false
       },
       "IsNullable": false
@@ -479,6 +499,7 @@
        "$id": "71",
        "Name": "float32",
        "Kind": "Float32",
+       "IsConfident": true,
        "IsNullable": false
       },
       "IsNullable": false
@@ -498,6 +519,7 @@
        "$id": "74",
        "Name": "float32",
        "Kind": "Float32",
+       "IsConfident": true,
        "IsNullable": false
       },
       "IsNullable": false
@@ -517,6 +539,7 @@
        "$id": "77",
        "Name": "boolean",
        "Kind": "Boolean",
+       "IsConfident": true,
        "IsNullable": false
       },
       "IsNullable": false
@@ -536,6 +559,7 @@
        "$id": "80",
        "Name": "boolean",
        "Kind": "Boolean",
+       "IsConfident": true,
        "IsNullable": false
       },
       "IsNullable": false
@@ -555,6 +579,7 @@
        "$id": "83",
        "Name": "boolean",
        "Kind": "Boolean",
+       "IsConfident": true,
        "IsNullable": false
       },
       "IsNullable": false
@@ -574,6 +599,7 @@
        "$id": "86",
        "Name": "float32",
        "Kind": "Float32",
+       "IsConfident": true,
        "IsNullable": false
       },
       "IsNullable": false
@@ -590,6 +616,7 @@
    "Description": "The response of last anomaly detection.",
    "IsNullable": false,
    "Usage": "Output",
+   "IsConfident": true,
    "Properties": [
     {
      "$id": "88",
@@ -600,6 +627,7 @@
       "$id": "89",
       "Name": "int32",
       "Kind": "Int32",
+      "IsConfident": true,
       "IsNullable": false
      },
      "IsRequired": true,
@@ -614,6 +642,7 @@
       "$id": "91",
       "Name": "int32",
       "Kind": "Int32",
+      "IsConfident": true,
       "IsNullable": false
      },
      "IsRequired": true,
@@ -628,6 +657,7 @@
       "$id": "93",
       "Name": "float32",
       "Kind": "Float32",
+      "IsConfident": true,
       "IsNullable": false
      },
      "IsRequired": true,
@@ -642,6 +672,7 @@
       "$id": "95",
       "Name": "float32",
       "Kind": "Float32",
+      "IsConfident": true,
       "IsNullable": false
      },
      "IsRequired": true,
@@ -656,6 +687,7 @@
       "$id": "97",
       "Name": "float32",
       "Kind": "Float32",
+      "IsConfident": true,
       "IsNullable": false
      },
      "IsRequired": true,
@@ -670,6 +702,7 @@
       "$id": "99",
       "Name": "boolean",
       "Kind": "Boolean",
+      "IsConfident": true,
       "IsNullable": false
      },
      "IsRequired": true,
@@ -684,6 +717,7 @@
       "$id": "101",
       "Name": "boolean",
       "Kind": "Boolean",
+      "IsConfident": true,
       "IsNullable": false
      },
      "IsRequired": true,
@@ -698,6 +732,7 @@
       "$id": "103",
       "Name": "boolean",
       "Kind": "Boolean",
+      "IsConfident": true,
       "IsNullable": false
      },
      "IsRequired": true,
@@ -712,6 +747,7 @@
       "$id": "105",
       "Name": "float32",
       "Kind": "Float32",
+      "IsConfident": true,
       "IsNullable": false
      },
      "IsRequired": false,
@@ -726,6 +762,7 @@
    "Description": "The request of change point detection.",
    "IsNullable": false,
    "Usage": "Input",
+   "IsConfident": true,
    "Properties": [
     {
      "$id": "107",
@@ -763,6 +800,7 @@
       "$id": "111",
       "Name": "int32",
       "Kind": "Int32",
+      "IsConfident": true,
       "IsNullable": false
      },
      "IsRequired": false,
@@ -777,6 +815,7 @@
       "$id": "113",
       "Name": "int32",
       "Kind": "Int32",
+      "IsConfident": true,
       "IsNullable": false
      },
      "IsRequired": false,
@@ -791,6 +830,7 @@
       "$id": "115",
       "Name": "int32",
       "Kind": "Int32",
+      "IsConfident": true,
       "IsNullable": false
      },
      "IsRequired": false,
@@ -805,6 +845,7 @@
       "$id": "117",
       "Name": "float32",
       "Kind": "Float32",
+      "IsConfident": true,
       "IsNullable": false
      },
      "IsRequired": false,
@@ -819,6 +860,7 @@
    "Description": "The response of change point detection.",
    "IsNullable": false,
    "Usage": "Output",
+   "IsConfident": true,
    "Properties": [
     {
      "$id": "119",
@@ -829,6 +871,7 @@
       "$id": "120",
       "Name": "int32",
       "Kind": "Int32",
+      "IsConfident": true,
       "IsNullable": false
      },
      "IsRequired": false,
@@ -846,6 +889,7 @@
        "$id": "123",
        "Name": "boolean",
        "Kind": "Boolean",
+       "IsConfident": true,
        "IsNullable": false
       },
       "IsNullable": false
@@ -865,6 +909,7 @@
        "$id": "126",
        "Name": "float32",
        "Kind": "Float32",
+       "IsConfident": true,
        "IsNullable": false
       },
       "IsNullable": false
@@ -881,6 +926,7 @@
    "Description": "Detection results for the given resultId.",
    "IsNullable": false,
    "Usage": "Output",
+   "IsConfident": true,
    "Properties": [
     {
      "$id": "128",
@@ -891,6 +937,7 @@
       "$id": "129",
       "Name": "string",
       "Kind": "Guid",
+      "IsConfident": true,
       "IsNullable": false
      },
      "IsRequired": true,
@@ -908,6 +955,7 @@
       "Description": "Multivariate anomaly detection status.",
       "IsNullable": false,
       "Usage": "Output",
+      "IsConfident": true,
       "Properties": [
        {
         "$id": "132",
@@ -935,6 +983,7 @@
           "Description": "ErrorResponse contains code and message that shows the error information.",
           "IsNullable": false,
           "Usage": "RoundTrip",
+          "IsConfident": true,
           "Properties": [
            {
             "$id": "136",
@@ -945,6 +994,7 @@
              "$id": "137",
              "Name": "string",
              "Kind": "String",
+             "IsConfident": true,
              "IsNullable": false
             },
             "IsRequired": true,
@@ -959,6 +1009,7 @@
              "$id": "139",
              "Name": "string",
              "Kind": "String",
+             "IsConfident": true,
              "IsNullable": false
             },
             "IsRequired": true,
@@ -986,6 +1037,7 @@
           "Description": "Variable Status.",
           "IsNullable": false,
           "Usage": "RoundTrip",
+          "IsConfident": true,
           "Properties": [
            {
             "$id": "143",
@@ -996,6 +1048,7 @@
              "$id": "144",
              "Name": "string",
              "Kind": "String",
+             "IsConfident": true,
              "IsNullable": false
             },
             "IsRequired": false,
@@ -1010,6 +1063,7 @@
              "$id": "146",
              "Name": "float32",
              "Kind": "Float32",
+             "IsConfident": true,
              "IsNullable": false
             },
             "IsRequired": false,
@@ -1024,6 +1078,7 @@
              "$id": "148",
              "Name": "int32",
              "Kind": "Int32",
+             "IsConfident": true,
              "IsNullable": false
             },
             "IsRequired": false,
@@ -1038,6 +1093,7 @@
              "$id": "150",
              "Name": "utcDateTime",
              "Kind": "DateTime",
+             "IsConfident": true,
              "IsNullable": false
             },
             "IsRequired": false,
@@ -1052,6 +1108,7 @@
              "$id": "152",
              "Name": "utcDateTime",
              "Kind": "DateTime",
+             "IsConfident": true,
              "IsNullable": false
             },
             "IsRequired": false,
@@ -1076,6 +1133,7 @@
          "Description": "Detection request for batch inference. This is an asynchronous inference which\nwill need another API to get detection results.",
          "IsNullable": false,
          "Usage": "RoundTrip",
+         "IsConfident": true,
          "Properties": [
           {
            "$id": "155",
@@ -1086,6 +1144,7 @@
             "$id": "156",
             "Name": "url",
             "Kind": "Uri",
+            "IsConfident": true,
             "IsNullable": false
            },
            "IsRequired": true,
@@ -1100,6 +1159,7 @@
             "$id": "158",
             "Name": "int32",
             "Kind": "Int32",
+            "IsConfident": true,
             "IsNullable": false
            },
            "IsRequired": true,
@@ -1114,6 +1174,7 @@
             "$id": "160",
             "Name": "utcDateTime",
             "Kind": "DateTime",
+            "IsConfident": true,
             "IsNullable": false
            },
            "IsRequired": true,
@@ -1128,6 +1189,7 @@
             "$id": "162",
             "Name": "utcDateTime",
             "Kind": "DateTime",
+            "IsConfident": true,
             "IsNullable": false
            },
            "IsRequired": true,
@@ -1158,6 +1220,7 @@
        "Description": "Anomaly status and information.",
        "IsNullable": false,
        "Usage": "Output",
+       "IsConfident": true,
        "Properties": [
         {
          "$id": "166",
@@ -1168,6 +1231,7 @@
           "$id": "167",
           "Name": "utcDateTime",
           "Kind": "DateTime",
+          "IsConfident": true,
           "IsNullable": false
          },
          "IsRequired": true,
@@ -1185,6 +1249,7 @@
           "Description": "Detailed information of the anomalous timestamp.",
           "IsNullable": false,
           "Usage": "Output",
+          "IsConfident": true,
           "Properties": [
            {
             "$id": "170",
@@ -1195,6 +1260,7 @@
              "$id": "171",
              "Name": "boolean",
              "Kind": "Boolean",
+             "IsConfident": true,
              "IsNullable": false
             },
             "IsRequired": true,
@@ -1209,6 +1275,7 @@
              "$id": "173",
              "Name": "float32",
              "Kind": "Float32",
+             "IsConfident": true,
              "IsNullable": false
             },
             "IsRequired": true,
@@ -1223,6 +1290,7 @@
              "$id": "175",
              "Name": "float32",
              "Kind": "Float32",
+             "IsConfident": true,
              "IsNullable": false
             },
             "IsRequired": true,
@@ -1243,6 +1311,7 @@
               "Description": "Interpretation of the anomalous timestamp.",
               "IsNullable": false,
               "Usage": "Output",
+              "IsConfident": true,
               "Properties": [
                {
                 "$id": "179",
@@ -1253,6 +1322,7 @@
                  "$id": "180",
                  "Name": "string",
                  "Kind": "String",
+                 "IsConfident": true,
                  "IsNullable": false
                 },
                 "IsRequired": false,
@@ -1267,6 +1337,7 @@
                  "$id": "182",
                  "Name": "float32",
                  "Kind": "Float32",
+                 "IsConfident": true,
                  "IsNullable": false
                 },
                 "IsRequired": false,
@@ -1284,6 +1355,7 @@
                  "Description": "Correlation changes among the anomalous variables",
                  "IsNullable": false,
                  "Usage": "Output",
+                 "IsConfident": true,
                  "Properties": [
                   {
                    "$id": "185",
@@ -1297,6 +1369,7 @@
                      "$id": "187",
                      "Name": "string",
                      "Kind": "String",
+                     "IsConfident": true,
                      "IsNullable": false
                     },
                     "IsNullable": false
@@ -1377,6 +1450,7 @@
    "Description": "Training result of a model including its status, errors and diagnostics\ninformation.",
    "IsNullable": false,
    "Usage": "RoundTrip",
+   "IsConfident": true,
    "Properties": [
     {
      "$id": "191",
@@ -1387,6 +1461,7 @@
       "$id": "192",
       "Name": "string",
       "Kind": "String",
+      "IsConfident": true,
       "IsNullable": false
      },
      "IsRequired": true,
@@ -1412,6 +1487,7 @@
       "$id": "195",
       "Name": "utcDateTime",
       "Kind": "DateTime",
+      "IsConfident": true,
       "IsNullable": false
      },
      "IsRequired": true,
@@ -1426,6 +1502,7 @@
       "$id": "197",
       "Name": "utcDateTime",
       "Kind": "DateTime",
+      "IsConfident": true,
       "IsNullable": false
      },
      "IsRequired": true,
@@ -1440,6 +1517,7 @@
       "$id": "199",
       "Name": "string",
       "Kind": "String",
+      "IsConfident": true,
       "IsNullable": false
      },
      "IsRequired": false,
@@ -1454,6 +1532,7 @@
       "$id": "201",
       "Name": "int32",
       "Kind": "Int32",
+      "IsConfident": true,
       "IsNullable": false
      },
      "IsRequired": false,
@@ -1471,6 +1550,7 @@
       "Description": "An optional field, indicating the manner to align multiple variables.",
       "IsNullable": false,
       "Usage": "RoundTrip",
+      "IsConfident": true,
       "Properties": [
        {
         "$id": "204",
@@ -1503,6 +1583,7 @@
          "$id": "207",
          "Name": "float32",
          "Kind": "Float32",
+         "IsConfident": true,
          "IsNullable": false
         },
         "IsRequired": false,
@@ -1552,6 +1633,7 @@
       "Description": "Diagnostics information to help inspect the states of model or variable.",
       "IsNullable": false,
       "Usage": "RoundTrip",
+      "IsConfident": true,
       "Properties": [
        {
         "$id": "213",
@@ -1565,6 +1647,7 @@
          "Description": "Model status.",
          "IsNullable": false,
          "Usage": "RoundTrip",
+         "IsConfident": true,
          "Properties": [
           {
            "$id": "215",
@@ -1578,6 +1661,7 @@
              "$id": "217",
              "Name": "int32",
              "Kind": "Int32",
+             "IsConfident": true,
              "IsNullable": false
             },
             "IsNullable": false
@@ -1597,6 +1681,7 @@
              "$id": "220",
              "Name": "float32",
              "Kind": "Float32",
+             "IsConfident": true,
              "IsNullable": false
             },
             "IsNullable": false
@@ -1616,6 +1701,7 @@
              "$id": "223",
              "Name": "float32",
              "Kind": "Float32",
+             "IsConfident": true,
              "IsNullable": false
             },
             "IsNullable": false
@@ -1635,6 +1721,7 @@
              "$id": "226",
              "Name": "float32",
              "Kind": "Float32",
+             "IsConfident": true,
              "IsNullable": false
             },
             "IsNullable": false
@@ -1686,6 +1773,7 @@
    "Description": "Response of getting a model.",
    "IsNullable": false,
    "Usage": "Output",
+   "IsConfident": true,
    "Properties": [
     {
      "$id": "230",
@@ -1696,6 +1784,7 @@
       "$id": "231",
       "Name": "string",
       "Kind": "Guid",
+      "IsConfident": true,
       "IsNullable": false
      },
      "IsRequired": true,
@@ -1710,6 +1799,7 @@
       "$id": "233",
       "Name": "utcDateTime",
       "Kind": "DateTime",
+      "IsConfident": true,
       "IsNullable": false
      },
      "IsRequired": true,
@@ -1724,6 +1814,7 @@
       "$id": "235",
       "Name": "utcDateTime",
       "Kind": "DateTime",
+      "IsConfident": true,
       "IsNullable": false
      },
      "IsRequired": true,
@@ -1749,6 +1840,7 @@
    "Description": "Response of listing models.",
    "IsNullable": false,
    "Usage": "Output",
+   "IsConfident": true,
    "Properties": [
     {
      "$id": "238",
@@ -1775,6 +1867,7 @@
       "$id": "241",
       "Name": "int32",
       "Kind": "Int32",
+      "IsConfident": true,
       "IsNullable": false
      },
      "IsRequired": true,
@@ -1789,6 +1882,7 @@
       "$id": "243",
       "Name": "int32",
       "Kind": "Int32",
+      "IsConfident": true,
       "IsNullable": false
      },
      "IsRequired": true,
@@ -1803,6 +1897,7 @@
       "$id": "245",
       "Name": "string",
       "Kind": "String",
+      "IsConfident": true,
       "IsNullable": false
      },
      "IsRequired": false,
@@ -1817,6 +1912,7 @@
    "Description": "Request of last detection.",
    "IsNullable": false,
    "Usage": "Input",
+   "IsConfident": true,
    "Properties": [
     {
      "$id": "247",
@@ -1833,6 +1929,7 @@
        "Description": "Variable values.",
        "IsNullable": false,
        "Usage": "Input",
+       "IsConfident": true,
        "Properties": [
         {
          "$id": "250",
@@ -1843,6 +1940,7 @@
           "$id": "251",
           "Name": "string",
           "Kind": "String",
+          "IsConfident": true,
           "IsNullable": false
          },
          "IsRequired": true,
@@ -1860,6 +1958,7 @@
            "$id": "254",
            "Name": "string",
            "Kind": "String",
+           "IsConfident": true,
            "IsNullable": false
           },
           "IsNullable": false
@@ -1879,6 +1978,7 @@
            "$id": "257",
            "Name": "float32",
            "Kind": "Float32",
+           "IsConfident": true,
            "IsNullable": false
           },
           "IsNullable": false
@@ -1902,6 +2002,7 @@
       "$id": "259",
       "Name": "int32",
       "Kind": "Int32",
+      "IsConfident": true,
       "IsNullable": false
      },
      "IsRequired": true,
@@ -1919,6 +2020,7 @@
    "Description": "Results of last detection.",
    "IsNullable": false,
    "Usage": "Output",
+   "IsConfident": true,
    "Properties": [
     {
      "$id": "261",
@@ -1977,7 +2079,8 @@
         "$id": "268",
         "Name": "Uri",
         "Kind": "Uri",
-        "IsNullable": false
+        "IsNullable": false,
+        "IsConfident": true
        },
        "Location": "Uri",
        "IsApiVersion": false,
@@ -2012,6 +2115,7 @@
          "$id": "271",
          "Name": "String",
          "Kind": "String",
+         "IsConfident": true,
          "IsNullable": false
         },
         "Value": "v1.1"
@@ -2043,6 +2147,7 @@
         "$id": "274",
         "Name": "String",
         "Kind": "String",
+        "IsConfident": true,
         "IsNullable": false
        },
        "Location": "Header",
@@ -2070,6 +2175,7 @@
         "$id": "277",
         "Name": "String",
         "Kind": "String",
+        "IsConfident": true,
         "IsNullable": false
        },
        "Location": "Header",
@@ -2113,7 +2219,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "IsConfident": true
     },
     {
      "$id": "280",
@@ -2154,6 +2261,7 @@
         "$id": "283",
         "Name": "String",
         "Kind": "String",
+        "IsConfident": true,
         "IsNullable": false
        },
        "Location": "Header",
@@ -2181,6 +2289,7 @@
         "$id": "286",
         "Name": "String",
         "Kind": "String",
+        "IsConfident": true,
         "IsNullable": false
        },
        "Location": "Header",
@@ -2224,7 +2333,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "IsConfident": true
     },
     {
      "$id": "289",
@@ -2265,6 +2375,7 @@
         "$id": "292",
         "Name": "String",
         "Kind": "String",
+        "IsConfident": true,
         "IsNullable": false
        },
        "Location": "Header",
@@ -2292,6 +2403,7 @@
         "$id": "295",
         "Name": "String",
         "Kind": "String",
+        "IsConfident": true,
         "IsNullable": false
        },
        "Location": "Header",
@@ -2335,7 +2447,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "IsConfident": true
     },
     {
      "$id": "298",
@@ -2359,6 +2472,7 @@
         "$id": "300",
         "Name": "string",
         "Kind": "Guid",
+        "IsConfident": true,
         "IsNullable": false
        },
        "Location": "Path",
@@ -2379,6 +2493,7 @@
         "$id": "302",
         "Name": "String",
         "Kind": "String",
+        "IsConfident": true,
         "IsNullable": false
        },
        "Location": "Header",
@@ -2419,7 +2534,8 @@
      "Path": "/multivariate/detect-batch/{resultId}",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "IsConfident": true
     },
     {
      "$id": "305",
@@ -2460,6 +2576,7 @@
         "$id": "308",
         "Name": "String",
         "Kind": "String",
+        "IsConfident": true,
         "IsNullable": false
        },
        "Location": "Header",
@@ -2487,6 +2604,7 @@
         "$id": "311",
         "Name": "String",
         "Kind": "String",
+        "IsConfident": true,
         "IsNullable": false
        },
        "Location": "Header",
@@ -2527,6 +2645,7 @@
           "$id": "315",
           "Name": "string",
           "Kind": "String",
+          "IsConfident": true,
           "IsNullable": false
          }
         }
@@ -2543,7 +2662,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "IsConfident": true
     },
     {
      "$id": "316",
@@ -2567,6 +2687,7 @@
         "$id": "318",
         "Name": "int32",
         "Kind": "Int32",
+        "IsConfident": true,
         "IsNullable": false
        },
        "Location": "Query",
@@ -2588,6 +2709,7 @@
         "$id": "320",
         "Name": "int32",
         "Kind": "Int32",
+        "IsConfident": true,
         "IsNullable": false
        },
        "Location": "Query",
@@ -2608,6 +2730,7 @@
         "$id": "322",
         "Name": "String",
         "Kind": "String",
+        "IsConfident": true,
         "IsNullable": false
        },
        "Location": "Header",
@@ -2653,7 +2776,8 @@
       "ItemName": "models"
      },
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "IsConfident": true
     },
     {
      "$id": "326",
@@ -2677,6 +2801,7 @@
         "$id": "328",
         "Name": "string",
         "Kind": "String",
+        "IsConfident": true,
         "IsNullable": false
        },
        "Location": "Path",
@@ -2697,6 +2822,7 @@
         "$id": "330",
         "Name": "String",
         "Kind": "String",
+        "IsConfident": true,
         "IsNullable": false
        },
        "Location": "Header",
@@ -2734,7 +2860,8 @@
      "Path": "/multivariate/models/{modelId}",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "IsConfident": true
     },
     {
      "$id": "333",
@@ -2758,6 +2885,7 @@
         "$id": "335",
         "Name": "string",
         "Kind": "String",
+        "IsConfident": true,
         "IsNullable": false
        },
        "Location": "Path",
@@ -2778,6 +2906,7 @@
         "$id": "337",
         "Name": "String",
         "Kind": "String",
+        "IsConfident": true,
         "IsNullable": false
        },
        "Location": "Header",
@@ -2818,7 +2947,8 @@
      "Path": "/multivariate/models/{modelId}",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "IsConfident": true
     },
     {
      "$id": "340",
@@ -2842,6 +2972,7 @@
         "$id": "342",
         "Name": "string",
         "Kind": "String",
+        "IsConfident": true,
         "IsNullable": false
        },
        "Location": "Path",
@@ -2880,6 +3011,7 @@
         "$id": "345",
         "Name": "String",
         "Kind": "String",
+        "IsConfident": true,
         "IsNullable": false
        },
        "Location": "Header",
@@ -2907,6 +3039,7 @@
         "$id": "348",
         "Name": "String",
         "Kind": "String",
+        "IsConfident": true,
         "IsNullable": false
        },
        "Location": "Header",
@@ -2947,6 +3080,7 @@
           "$id": "352",
           "Name": "string",
           "Kind": "String",
+          "IsConfident": true,
           "IsNullable": false
          }
         },
@@ -2959,6 +3093,7 @@
           "$id": "354",
           "Name": "string",
           "Kind": "String",
+          "IsConfident": true,
           "IsNullable": false
          }
         }
@@ -2975,7 +3110,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "IsConfident": true
     },
     {
      "$id": "355",
@@ -2999,6 +3135,7 @@
         "$id": "357",
         "Name": "string",
         "Kind": "String",
+        "IsConfident": true,
         "IsNullable": false
        },
        "Location": "Path",
@@ -3037,6 +3174,7 @@
         "$id": "360",
         "Name": "String",
         "Kind": "String",
+        "IsConfident": true,
         "IsNullable": false
        },
        "Location": "Header",
@@ -3064,6 +3202,7 @@
         "$id": "363",
         "Name": "String",
         "Kind": "String",
+        "IsConfident": true,
         "IsNullable": false
        },
        "Location": "Header",
@@ -3107,7 +3246,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "IsConfident": true
     }
    ],
    "Protocol": {

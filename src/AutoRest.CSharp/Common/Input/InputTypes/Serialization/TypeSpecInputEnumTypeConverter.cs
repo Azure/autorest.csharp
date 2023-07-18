@@ -33,6 +33,7 @@ namespace AutoRest.CSharp.Common.Input
             InputModelTypeUsage usage = InputModelTypeUsage.None;
             string? usageString = null;
             bool isExtendable = false;
+            bool isConfident = true;
             InputPrimitiveType? valueType = null;
             IReadOnlyList<InputEnumTypeValue>? allowedValues = null;
             while (reader.TokenType != JsonTokenType.EndObject)
@@ -45,6 +46,7 @@ namespace AutoRest.CSharp.Common.Input
                     || reader.TryReadString(nameof(InputEnumType.Description), ref description)
                     || reader.TryReadString(nameof(InputEnumType.Usage), ref usageString)
                     || reader.TryReadBoolean(nameof(InputEnumType.IsExtensible), ref isExtendable)
+                    || reader.TryReadBoolean(nameof(InputEnumType.IsConfident), ref isConfident)
                     || reader.TryReadPrimitiveType(nameof(InputEnumType.EnumValueType), ref valueType)
                     || reader.TryReadWithConverter(nameof(InputEnumType.AllowedValues), options, ref allowedValues);
 
@@ -81,7 +83,8 @@ namespace AutoRest.CSharp.Common.Input
                     case int i:
                         if (currentType == InputPrimitiveType.String)
                             throw new JsonException($"Enum value types are not consistent.");
-                        if (currentType != InputPrimitiveType.Float32) currentType = InputPrimitiveType.Int32;
+                        if (currentType != InputPrimitiveType.Float32)
+                            currentType = InputPrimitiveType.Int32;
                         break;
                     case float f:
                         if (currentType == InputPrimitiveType.String)
@@ -89,7 +92,8 @@ namespace AutoRest.CSharp.Common.Input
                         currentType = InputPrimitiveType.Float32;
                         break;
                     case string:
-                        if (currentType == InputPrimitiveType.Int32 || currentType == InputPrimitiveType.Float32) throw new JsonException($"Enum value types are not consistent.");
+                        if (currentType == InputPrimitiveType.Int32 || currentType == InputPrimitiveType.Float32)
+                            throw new JsonException($"Enum value types are not consistent.");
                         currentType = InputPrimitiveType.String;
                         break;
                     default:
@@ -98,7 +102,7 @@ namespace AutoRest.CSharp.Common.Input
             }
             valueType = currentType ?? throw new JsonException("Enum value type must be set.");
 
-            var enumType = new InputEnumType(name, ns, accessibility, deprecated, description, usage, valueType, NormalizeValues(allowedValues, valueType), isExtendable);
+            var enumType = new InputEnumType(name, ns, accessibility, deprecated, description, usage, valueType, NormalizeValues(allowedValues, valueType), isExtendable, isConfident);
             if (id != null)
             {
                 resolver.AddReference(id, enumType);
@@ -146,17 +150,5 @@ namespace AutoRest.CSharp.Common.Input
 
             return concreteValues;
         }
-
-        //private static IReadOnlyList<InputEnumTypeValue> convertToConcreteValues<EnumType, ValueType>(IReadOnlyList<InputEnumTypeValue> allowedValues) where EnumType : InputEnumTypeValue
-        //{
-        //    var concreteValues = new List<InputEnumTypeValue>(allowedValues.Count);
-
-        //    foreach (var value in allowedValues)
-        //    {
-        //        concreteValues.Add(new EnumType(value.Name, (ValueType)value.Value, value.Description));
-        //    }
-
-        //    return concreteValues;
-        //}
     }
 }

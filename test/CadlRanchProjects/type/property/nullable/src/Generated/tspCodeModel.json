@@ -14,6 +14,7 @@
    "Description": "Template type for testing models with nullable property. Pass in the type of the property you are looking for",
    "IsNullable": false,
    "Usage": "Output",
+   "IsConfident": true,
    "Properties": [
     {
      "$id": "3",
@@ -24,6 +25,7 @@
       "$id": "4",
       "Name": "string",
       "Kind": "String",
+      "IsConfident": true,
       "IsNullable": false
      },
      "IsRequired": true,
@@ -38,6 +40,7 @@
       "$id": "6",
       "Name": "string",
       "Kind": "String",
+      "IsConfident": true,
       "IsNullable": true
      },
      "IsRequired": true,
@@ -52,6 +55,7 @@
    "Description": "Template type for testing models with nullable property. Pass in the type of the property you are looking for",
    "IsNullable": false,
    "Usage": "Output",
+   "IsConfident": true,
    "Properties": [
     {
      "$id": "8",
@@ -62,6 +66,7 @@
       "$id": "9",
       "Name": "string",
       "Kind": "String",
+      "IsConfident": true,
       "IsNullable": false
      },
      "IsRequired": true,
@@ -76,6 +81,7 @@
       "$id": "11",
       "Name": "bytes",
       "Kind": "Bytes",
+      "IsConfident": true,
       "IsNullable": true
      },
      "IsRequired": true,
@@ -90,6 +96,7 @@
    "Description": "Model with a datetime property",
    "IsNullable": false,
    "Usage": "Output",
+   "IsConfident": true,
    "Properties": [
     {
      "$id": "13",
@@ -100,6 +107,7 @@
       "$id": "14",
       "Name": "string",
       "Kind": "String",
+      "IsConfident": true,
       "IsNullable": false
      },
      "IsRequired": true,
@@ -114,6 +122,7 @@
       "$id": "16",
       "Name": "utcDateTime",
       "Kind": "DateTime",
+      "IsConfident": true,
       "IsNullable": true
      },
      "IsRequired": true,
@@ -128,6 +137,7 @@
    "Description": "Model with a duration property",
    "IsNullable": false,
    "Usage": "Output",
+   "IsConfident": true,
    "Properties": [
     {
      "$id": "18",
@@ -138,6 +148,7 @@
       "$id": "19",
       "Name": "string",
       "Kind": "String",
+      "IsConfident": true,
       "IsNullable": false
      },
      "IsRequired": true,
@@ -152,6 +163,7 @@
       "$id": "21",
       "Name": "duration",
       "Kind": "DurationISO8601",
+      "IsConfident": true,
       "IsNullable": true
      },
      "IsRequired": true,
@@ -166,6 +178,7 @@
    "Description": "Model with collection bytes properties",
    "IsNullable": false,
    "Usage": "Output",
+   "IsConfident": true,
    "Properties": [
     {
      "$id": "23",
@@ -176,6 +189,7 @@
       "$id": "24",
       "Name": "string",
       "Kind": "String",
+      "IsConfident": true,
       "IsNullable": false
      },
      "IsRequired": true,
@@ -193,6 +207,7 @@
        "$id": "27",
        "Name": "bytes",
        "Kind": "Bytes",
+       "IsConfident": true,
        "IsNullable": false
       },
       "IsNullable": true
@@ -209,6 +224,7 @@
    "Description": "Model with collection models properties",
    "IsNullable": false,
    "Usage": "Output",
+   "IsConfident": true,
    "Properties": [
     {
      "$id": "29",
@@ -219,6 +235,7 @@
       "$id": "30",
       "Name": "string",
       "Kind": "String",
+      "IsConfident": true,
       "IsNullable": false
      },
      "IsRequired": true,
@@ -239,6 +256,7 @@
        "Description": "Inner model used in collections model property",
        "IsNullable": false,
        "Usage": "Output",
+       "IsConfident": true,
        "Properties": [
         {
          "$id": "34",
@@ -249,6 +267,7 @@
           "$id": "35",
           "Name": "string",
           "Kind": "String",
+          "IsConfident": true,
           "IsNullable": false
          },
          "IsRequired": true,
@@ -298,7 +317,8 @@
         "$id": "41",
         "Name": "String",
         "Kind": "String",
-        "IsNullable": false
+        "IsNullable": false,
+        "IsConfident": true
        },
        "Location": "Uri",
        "IsApiVersion": false,
@@ -328,6 +348,7 @@
         "$id": "45",
         "Name": "String",
         "Kind": "String",
+        "IsConfident": true,
         "IsNullable": false
        },
        "Location": "Header",
@@ -356,6 +377,7 @@
         "$id": "48",
         "Name": "String",
         "Kind": "String",
+        "IsConfident": true,
         "IsNullable": false
        },
        "Location": "Query",
@@ -373,6 +395,7 @@
          "$id": "50",
          "Name": "String",
          "Kind": "String",
+         "IsConfident": true,
          "IsNullable": false
         },
         "Value": "1.0.0"
@@ -399,7 +422,8 @@
      "Path": "/type/property/nullable/string/non-null",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "IsConfident": true
     },
     {
      "$id": "52",
@@ -418,6 +442,7 @@
         "$id": "54",
         "Name": "String",
         "Kind": "String",
+        "IsConfident": true,
         "IsNullable": false
        },
        "Location": "Header",
@@ -461,7 +486,8 @@
      "Path": "/type/property/nullable/string/null",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "IsConfident": true
     },
     {
      "$id": "57",
@@ -484,9 +510,11 @@
          "$id": "60",
          "Name": "String",
          "Kind": "String",
+         "IsConfident": true,
          "IsNullable": false
         },
         "Value": "application/merge-patch+json",
+        "IsConfident": true,
         "IsNullable": false
        },
        "Location": "Header",
@@ -531,6 +559,7 @@
         "$id": "64",
         "Name": "String",
         "Kind": "String",
+        "IsConfident": true,
         "IsNullable": false
        },
        "Location": "Header",
@@ -574,7 +603,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": false
+     "GenerateConvenienceMethod": false,
+     "IsConfident": true
     },
     {
      "$id": "67",
@@ -597,9 +627,11 @@
          "$id": "70",
          "Name": "String",
          "Kind": "String",
+         "IsConfident": true,
          "IsNullable": false
         },
         "Value": "application/merge-patch+json",
+        "IsConfident": true,
         "IsNullable": false
        },
        "Location": "Header",
@@ -644,6 +676,7 @@
         "$id": "74",
         "Name": "String",
         "Kind": "String",
+        "IsConfident": true,
         "IsNullable": false
        },
        "Location": "Header",
@@ -687,7 +720,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": false
+     "GenerateConvenienceMethod": false,
+     "IsConfident": true
     }
    ],
    "Protocol": {
@@ -718,6 +752,7 @@
         "$id": "81",
         "Name": "String",
         "Kind": "String",
+        "IsConfident": true,
         "IsNullable": false
        },
        "Location": "Header",
@@ -761,7 +796,8 @@
      "Path": "/type/property/nullable/bytes/non-null",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "IsConfident": true
     },
     {
      "$id": "84",
@@ -780,6 +816,7 @@
         "$id": "86",
         "Name": "String",
         "Kind": "String",
+        "IsConfident": true,
         "IsNullable": false
        },
        "Location": "Header",
@@ -823,7 +860,8 @@
      "Path": "/type/property/nullable/bytes/null",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "IsConfident": true
     },
     {
      "$id": "89",
@@ -846,9 +884,11 @@
          "$id": "92",
          "Name": "String",
          "Kind": "String",
+         "IsConfident": true,
          "IsNullable": false
         },
         "Value": "application/merge-patch+json",
+        "IsConfident": true,
         "IsNullable": false
        },
        "Location": "Header",
@@ -893,6 +933,7 @@
         "$id": "96",
         "Name": "String",
         "Kind": "String",
+        "IsConfident": true,
         "IsNullable": false
        },
        "Location": "Header",
@@ -936,7 +977,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": false
+     "GenerateConvenienceMethod": false,
+     "IsConfident": true
     },
     {
      "$id": "99",
@@ -959,9 +1001,11 @@
          "$id": "102",
          "Name": "String",
          "Kind": "String",
+         "IsConfident": true,
          "IsNullable": false
         },
         "Value": "application/merge-patch+json",
+        "IsConfident": true,
         "IsNullable": false
        },
        "Location": "Header",
@@ -1006,6 +1050,7 @@
         "$id": "106",
         "Name": "String",
         "Kind": "String",
+        "IsConfident": true,
         "IsNullable": false
        },
        "Location": "Header",
@@ -1049,7 +1094,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": false
+     "GenerateConvenienceMethod": false,
+     "IsConfident": true
     }
    ],
    "Protocol": {
@@ -1080,6 +1126,7 @@
         "$id": "113",
         "Name": "String",
         "Kind": "String",
+        "IsConfident": true,
         "IsNullable": false
        },
        "Location": "Header",
@@ -1123,7 +1170,8 @@
      "Path": "/type/property/nullable/datetime/non-null",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "IsConfident": true
     },
     {
      "$id": "116",
@@ -1142,6 +1190,7 @@
         "$id": "118",
         "Name": "String",
         "Kind": "String",
+        "IsConfident": true,
         "IsNullable": false
        },
        "Location": "Header",
@@ -1185,7 +1234,8 @@
      "Path": "/type/property/nullable/datetime/null",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "IsConfident": true
     },
     {
      "$id": "121",
@@ -1208,9 +1258,11 @@
          "$id": "124",
          "Name": "String",
          "Kind": "String",
+         "IsConfident": true,
          "IsNullable": false
         },
         "Value": "application/merge-patch+json",
+        "IsConfident": true,
         "IsNullable": false
        },
        "Location": "Header",
@@ -1255,6 +1307,7 @@
         "$id": "128",
         "Name": "String",
         "Kind": "String",
+        "IsConfident": true,
         "IsNullable": false
        },
        "Location": "Header",
@@ -1298,7 +1351,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": false
+     "GenerateConvenienceMethod": false,
+     "IsConfident": true
     },
     {
      "$id": "131",
@@ -1321,9 +1375,11 @@
          "$id": "134",
          "Name": "String",
          "Kind": "String",
+         "IsConfident": true,
          "IsNullable": false
         },
         "Value": "application/merge-patch+json",
+        "IsConfident": true,
         "IsNullable": false
        },
        "Location": "Header",
@@ -1368,6 +1424,7 @@
         "$id": "138",
         "Name": "String",
         "Kind": "String",
+        "IsConfident": true,
         "IsNullable": false
        },
        "Location": "Header",
@@ -1411,7 +1468,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": false
+     "GenerateConvenienceMethod": false,
+     "IsConfident": true
     }
    ],
    "Protocol": {
@@ -1442,6 +1500,7 @@
         "$id": "145",
         "Name": "String",
         "Kind": "String",
+        "IsConfident": true,
         "IsNullable": false
        },
        "Location": "Header",
@@ -1485,7 +1544,8 @@
      "Path": "/type/property/nullable/duration/non-null",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "IsConfident": true
     },
     {
      "$id": "148",
@@ -1504,6 +1564,7 @@
         "$id": "150",
         "Name": "String",
         "Kind": "String",
+        "IsConfident": true,
         "IsNullable": false
        },
        "Location": "Header",
@@ -1547,7 +1608,8 @@
      "Path": "/type/property/nullable/duration/null",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "IsConfident": true
     },
     {
      "$id": "153",
@@ -1570,9 +1632,11 @@
          "$id": "156",
          "Name": "String",
          "Kind": "String",
+         "IsConfident": true,
          "IsNullable": false
         },
         "Value": "application/merge-patch+json",
+        "IsConfident": true,
         "IsNullable": false
        },
        "Location": "Header",
@@ -1617,6 +1681,7 @@
         "$id": "160",
         "Name": "String",
         "Kind": "String",
+        "IsConfident": true,
         "IsNullable": false
        },
        "Location": "Header",
@@ -1660,7 +1725,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": false
+     "GenerateConvenienceMethod": false,
+     "IsConfident": true
     },
     {
      "$id": "163",
@@ -1683,9 +1749,11 @@
          "$id": "166",
          "Name": "String",
          "Kind": "String",
+         "IsConfident": true,
          "IsNullable": false
         },
         "Value": "application/merge-patch+json",
+        "IsConfident": true,
         "IsNullable": false
        },
        "Location": "Header",
@@ -1730,6 +1798,7 @@
         "$id": "170",
         "Name": "String",
         "Kind": "String",
+        "IsConfident": true,
         "IsNullable": false
        },
        "Location": "Header",
@@ -1773,7 +1842,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": false
+     "GenerateConvenienceMethod": false,
+     "IsConfident": true
     }
    ],
    "Protocol": {
@@ -1804,6 +1874,7 @@
         "$id": "177",
         "Name": "String",
         "Kind": "String",
+        "IsConfident": true,
         "IsNullable": false
        },
        "Location": "Header",
@@ -1847,7 +1918,8 @@
      "Path": "/type/property/nullable/collections/bytes/non-null",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "IsConfident": true
     },
     {
      "$id": "180",
@@ -1866,6 +1938,7 @@
         "$id": "182",
         "Name": "String",
         "Kind": "String",
+        "IsConfident": true,
         "IsNullable": false
        },
        "Location": "Header",
@@ -1909,7 +1982,8 @@
      "Path": "/type/property/nullable/collections/bytes/null",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "IsConfident": true
     },
     {
      "$id": "185",
@@ -1932,9 +2006,11 @@
          "$id": "188",
          "Name": "String",
          "Kind": "String",
+         "IsConfident": true,
          "IsNullable": false
         },
         "Value": "application/merge-patch+json",
+        "IsConfident": true,
         "IsNullable": false
        },
        "Location": "Header",
@@ -1979,6 +2055,7 @@
         "$id": "192",
         "Name": "String",
         "Kind": "String",
+        "IsConfident": true,
         "IsNullable": false
        },
        "Location": "Header",
@@ -2022,7 +2099,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": false
+     "GenerateConvenienceMethod": false,
+     "IsConfident": true
     },
     {
      "$id": "195",
@@ -2045,9 +2123,11 @@
          "$id": "198",
          "Name": "String",
          "Kind": "String",
+         "IsConfident": true,
          "IsNullable": false
         },
         "Value": "application/merge-patch+json",
+        "IsConfident": true,
         "IsNullable": false
        },
        "Location": "Header",
@@ -2092,6 +2172,7 @@
         "$id": "202",
         "Name": "String",
         "Kind": "String",
+        "IsConfident": true,
         "IsNullable": false
        },
        "Location": "Header",
@@ -2135,7 +2216,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": false
+     "GenerateConvenienceMethod": false,
+     "IsConfident": true
     }
    ],
    "Protocol": {
@@ -2166,6 +2248,7 @@
         "$id": "209",
         "Name": "String",
         "Kind": "String",
+        "IsConfident": true,
         "IsNullable": false
        },
        "Location": "Header",
@@ -2209,7 +2292,8 @@
      "Path": "/type/property/nullable/collections/model/non-null",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "IsConfident": true
     },
     {
      "$id": "212",
@@ -2228,6 +2312,7 @@
         "$id": "214",
         "Name": "String",
         "Kind": "String",
+        "IsConfident": true,
         "IsNullable": false
        },
        "Location": "Header",
@@ -2271,7 +2356,8 @@
      "Path": "/type/property/nullable/collections/model/null",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "IsConfident": true
     },
     {
      "$id": "217",
@@ -2294,9 +2380,11 @@
          "$id": "220",
          "Name": "String",
          "Kind": "String",
+         "IsConfident": true,
          "IsNullable": false
         },
         "Value": "application/merge-patch+json",
+        "IsConfident": true,
         "IsNullable": false
        },
        "Location": "Header",
@@ -2341,6 +2429,7 @@
         "$id": "224",
         "Name": "String",
         "Kind": "String",
+        "IsConfident": true,
         "IsNullable": false
        },
        "Location": "Header",
@@ -2384,7 +2473,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": false
+     "GenerateConvenienceMethod": false,
+     "IsConfident": true
     },
     {
      "$id": "227",
@@ -2407,9 +2497,11 @@
          "$id": "230",
          "Name": "String",
          "Kind": "String",
+         "IsConfident": true,
          "IsNullable": false
         },
         "Value": "application/merge-patch+json",
+        "IsConfident": true,
         "IsNullable": false
        },
        "Location": "Header",
@@ -2454,6 +2546,7 @@
         "$id": "234",
         "Name": "String",
         "Kind": "String",
+        "IsConfident": true,
         "IsNullable": false
        },
        "Location": "Header",
@@ -2497,7 +2590,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": false
+     "GenerateConvenienceMethod": false,
+     "IsConfident": true
     }
    ],
    "Protocol": {

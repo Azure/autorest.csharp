@@ -14,6 +14,7 @@
    "Description": "Dictionary inner model",
    "IsNullable": false,
    "Usage": "RoundTrip",
+   "IsConfident": true,
    "Properties": [
     {
      "$id": "3",
@@ -24,6 +25,7 @@
       "$id": "4",
       "Name": "string",
       "Kind": "String",
+      "IsConfident": true,
       "IsNullable": false
      },
      "IsRequired": true,
@@ -41,6 +43,7 @@
        "$id": "7",
        "Name": "string",
        "Kind": "String",
+       "IsConfident": true,
        "IsNullable": false
       },
       "ValueType": {
@@ -84,7 +87,8 @@
         "$id": "13",
         "Name": "String",
         "Kind": "String",
-        "IsNullable": false
+        "IsNullable": false,
+        "IsConfident": true
        },
        "Location": "Uri",
        "IsApiVersion": false,
@@ -114,6 +118,7 @@
         "$id": "17",
         "Name": "String",
         "Kind": "String",
+        "IsConfident": true,
         "IsNullable": false
        },
        "Location": "Header",
@@ -142,6 +147,7 @@
         "$id": "20",
         "Name": "String",
         "Kind": "String",
+        "IsConfident": true,
         "IsNullable": false
        },
        "Location": "Query",
@@ -159,6 +165,7 @@
          "$id": "22",
          "Name": "String",
          "Kind": "String",
+         "IsConfident": true,
          "IsNullable": false
         },
         "Value": "1.0.0"
@@ -178,12 +185,14 @@
          "$id": "25",
          "Name": "string",
          "Kind": "String",
+         "IsConfident": true,
          "IsNullable": false
         },
         "ValueType": {
          "$id": "26",
          "Name": "int32",
          "Kind": "Int32",
+         "IsConfident": true,
          "IsNullable": false
         },
         "IsNullable": false
@@ -199,7 +208,8 @@
      "Path": "/type/dictionary/int32",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "IsConfident": true
     },
     {
      "$id": "27",
@@ -220,12 +230,14 @@
          "$id": "30",
          "Name": "string",
          "Kind": "String",
+         "IsConfident": true,
          "IsNullable": false
         },
         "ValueType": {
          "$id": "31",
          "Name": "int32",
          "Kind": "Int32",
+         "IsConfident": true,
          "IsNullable": false
         },
         "IsNullable": false
@@ -248,6 +260,7 @@
         "$id": "33",
         "Name": "String",
         "Kind": "String",
+        "IsConfident": true,
         "IsNullable": false
        },
        "Location": "Header",
@@ -275,6 +288,7 @@
         "$id": "36",
         "Name": "String",
         "Kind": "String",
+        "IsConfident": true,
         "IsNullable": false
        },
        "Location": "Header",
@@ -318,7 +332,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "IsConfident": true
     }
    ],
    "Protocol": {
@@ -348,6 +363,7 @@
         "$id": "43",
         "Name": "String",
         "Kind": "String",
+        "IsConfident": true,
         "IsNullable": false
        },
        "Location": "Header",
@@ -384,12 +400,14 @@
          "$id": "47",
          "Name": "string",
          "Kind": "String",
+         "IsConfident": true,
          "IsNullable": false
         },
         "ValueType": {
          "$id": "48",
          "Name": "int64",
          "Kind": "Int64",
+         "IsConfident": true,
          "IsNullable": false
         },
         "IsNullable": false
@@ -405,7 +423,8 @@
      "Path": "/type/dictionary/int64",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "IsConfident": true
     },
     {
      "$id": "49",
@@ -426,12 +445,14 @@
          "$id": "52",
          "Name": "string",
          "Kind": "String",
+         "IsConfident": true,
          "IsNullable": false
         },
         "ValueType": {
          "$id": "53",
          "Name": "int64",
          "Kind": "Int64",
+         "IsConfident": true,
          "IsNullable": false
         },
         "IsNullable": false
@@ -454,6 +475,7 @@
         "$id": "55",
         "Name": "String",
         "Kind": "String",
+        "IsConfident": true,
         "IsNullable": false
        },
        "Location": "Header",
@@ -481,6 +503,7 @@
         "$id": "58",
         "Name": "String",
         "Kind": "String",
+        "IsConfident": true,
         "IsNullable": false
        },
        "Location": "Header",
@@ -524,7 +547,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "IsConfident": true
     }
    ],
    "Protocol": {
@@ -554,6 +578,7 @@
         "$id": "65",
         "Name": "String",
         "Kind": "String",
+        "IsConfident": true,
         "IsNullable": false
        },
        "Location": "Header",
@@ -590,12 +615,14 @@
          "$id": "69",
          "Name": "string",
          "Kind": "String",
+         "IsConfident": true,
          "IsNullable": false
         },
         "ValueType": {
          "$id": "70",
          "Name": "boolean",
          "Kind": "Boolean",
+         "IsConfident": true,
          "IsNullable": false
         },
         "IsNullable": false
@@ -611,7 +638,8 @@
      "Path": "/type/dictionary/boolean",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "IsConfident": true
     },
     {
      "$id": "71",
@@ -632,12 +660,14 @@
          "$id": "74",
          "Name": "string",
          "Kind": "String",
+         "IsConfident": true,
          "IsNullable": false
         },
         "ValueType": {
          "$id": "75",
          "Name": "boolean",
          "Kind": "Boolean",
+         "IsConfident": true,
          "IsNullable": false
         },
         "IsNullable": false
@@ -660,6 +690,7 @@
         "$id": "77",
         "Name": "String",
         "Kind": "String",
+        "IsConfident": true,
         "IsNullable": false
        },
        "Location": "Header",
@@ -687,6 +718,7 @@
         "$id": "80",
         "Name": "String",
         "Kind": "String",
+        "IsConfident": true,
         "IsNullable": false
        },
        "Location": "Header",
@@ -730,7 +762,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "IsConfident": true
     }
    ],
    "Protocol": {
@@ -760,6 +793,7 @@
         "$id": "87",
         "Name": "String",
         "Kind": "String",
+        "IsConfident": true,
         "IsNullable": false
        },
        "Location": "Header",
@@ -796,12 +830,14 @@
          "$id": "91",
          "Name": "string",
          "Kind": "String",
+         "IsConfident": true,
          "IsNullable": false
         },
         "ValueType": {
          "$id": "92",
          "Name": "string",
          "Kind": "String",
+         "IsConfident": true,
          "IsNullable": false
         },
         "IsNullable": false
@@ -817,7 +853,8 @@
      "Path": "/type/dictionary/string",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "IsConfident": true
     },
     {
      "$id": "93",
@@ -838,12 +875,14 @@
          "$id": "96",
          "Name": "string",
          "Kind": "String",
+         "IsConfident": true,
          "IsNullable": false
         },
         "ValueType": {
          "$id": "97",
          "Name": "string",
          "Kind": "String",
+         "IsConfident": true,
          "IsNullable": false
         },
         "IsNullable": false
@@ -866,6 +905,7 @@
         "$id": "99",
         "Name": "String",
         "Kind": "String",
+        "IsConfident": true,
         "IsNullable": false
        },
        "Location": "Header",
@@ -893,6 +933,7 @@
         "$id": "102",
         "Name": "String",
         "Kind": "String",
+        "IsConfident": true,
         "IsNullable": false
        },
        "Location": "Header",
@@ -936,7 +977,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "IsConfident": true
     }
    ],
    "Protocol": {
@@ -966,6 +1008,7 @@
         "$id": "109",
         "Name": "String",
         "Kind": "String",
+        "IsConfident": true,
         "IsNullable": false
        },
        "Location": "Header",
@@ -1002,12 +1045,14 @@
          "$id": "113",
          "Name": "string",
          "Kind": "String",
+         "IsConfident": true,
          "IsNullable": false
         },
         "ValueType": {
          "$id": "114",
          "Name": "float32",
          "Kind": "Float32",
+         "IsConfident": true,
          "IsNullable": false
         },
         "IsNullable": false
@@ -1023,7 +1068,8 @@
      "Path": "/type/dictionary/float32",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "IsConfident": true
     },
     {
      "$id": "115",
@@ -1044,12 +1090,14 @@
          "$id": "118",
          "Name": "string",
          "Kind": "String",
+         "IsConfident": true,
          "IsNullable": false
         },
         "ValueType": {
          "$id": "119",
          "Name": "float32",
          "Kind": "Float32",
+         "IsConfident": true,
          "IsNullable": false
         },
         "IsNullable": false
@@ -1072,6 +1120,7 @@
         "$id": "121",
         "Name": "String",
         "Kind": "String",
+        "IsConfident": true,
         "IsNullable": false
        },
        "Location": "Header",
@@ -1099,6 +1148,7 @@
         "$id": "124",
         "Name": "String",
         "Kind": "String",
+        "IsConfident": true,
         "IsNullable": false
        },
        "Location": "Header",
@@ -1142,7 +1192,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "IsConfident": true
     }
    ],
    "Protocol": {
@@ -1172,6 +1223,7 @@
         "$id": "131",
         "Name": "String",
         "Kind": "String",
+        "IsConfident": true,
         "IsNullable": false
        },
        "Location": "Header",
@@ -1208,12 +1260,14 @@
          "$id": "135",
          "Name": "string",
          "Kind": "String",
+         "IsConfident": true,
          "IsNullable": false
         },
         "ValueType": {
          "$id": "136",
          "Name": "utcDateTime",
          "Kind": "DateTime",
+         "IsConfident": true,
          "IsNullable": false
         },
         "IsNullable": false
@@ -1229,7 +1283,8 @@
      "Path": "/type/dictionary/datetime",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "IsConfident": true
     },
     {
      "$id": "137",
@@ -1250,12 +1305,14 @@
          "$id": "140",
          "Name": "string",
          "Kind": "String",
+         "IsConfident": true,
          "IsNullable": false
         },
         "ValueType": {
          "$id": "141",
          "Name": "utcDateTime",
          "Kind": "DateTime",
+         "IsConfident": true,
          "IsNullable": false
         },
         "IsNullable": false
@@ -1278,6 +1335,7 @@
         "$id": "143",
         "Name": "String",
         "Kind": "String",
+        "IsConfident": true,
         "IsNullable": false
        },
        "Location": "Header",
@@ -1305,6 +1363,7 @@
         "$id": "146",
         "Name": "String",
         "Kind": "String",
+        "IsConfident": true,
         "IsNullable": false
        },
        "Location": "Header",
@@ -1348,7 +1407,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "IsConfident": true
     }
    ],
    "Protocol": {
@@ -1378,6 +1438,7 @@
         "$id": "153",
         "Name": "String",
         "Kind": "String",
+        "IsConfident": true,
         "IsNullable": false
        },
        "Location": "Header",
@@ -1414,12 +1475,14 @@
          "$id": "157",
          "Name": "string",
          "Kind": "String",
+         "IsConfident": true,
          "IsNullable": false
         },
         "ValueType": {
          "$id": "158",
          "Name": "duration",
          "Kind": "DurationISO8601",
+         "IsConfident": true,
          "IsNullable": false
         },
         "IsNullable": false
@@ -1435,7 +1498,8 @@
      "Path": "/type/dictionary/duration",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "IsConfident": true
     },
     {
      "$id": "159",
@@ -1456,12 +1520,14 @@
          "$id": "162",
          "Name": "string",
          "Kind": "String",
+         "IsConfident": true,
          "IsNullable": false
         },
         "ValueType": {
          "$id": "163",
          "Name": "duration",
          "Kind": "DurationISO8601",
+         "IsConfident": true,
          "IsNullable": false
         },
         "IsNullable": false
@@ -1484,6 +1550,7 @@
         "$id": "165",
         "Name": "String",
         "Kind": "String",
+        "IsConfident": true,
         "IsNullable": false
        },
        "Location": "Header",
@@ -1511,6 +1578,7 @@
         "$id": "168",
         "Name": "String",
         "Kind": "String",
+        "IsConfident": true,
         "IsNullable": false
        },
        "Location": "Header",
@@ -1554,7 +1622,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "IsConfident": true
     }
    ],
    "Protocol": {
@@ -1584,6 +1653,7 @@
         "$id": "175",
         "Name": "String",
         "Kind": "String",
+        "IsConfident": true,
         "IsNullable": false
        },
        "Location": "Header",
@@ -1620,12 +1690,14 @@
          "$id": "179",
          "Name": "string",
          "Kind": "String",
+         "IsConfident": true,
          "IsNullable": false
         },
         "ValueType": {
          "$id": "180",
          "Name": "Intrinsic",
          "Kind": "unknown",
+         "IsConfident": true,
          "IsNullable": false
         },
         "IsNullable": false
@@ -1641,7 +1713,8 @@
      "Path": "/type/dictionary/unknown",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "IsConfident": true
     },
     {
      "$id": "181",
@@ -1662,12 +1735,14 @@
          "$id": "184",
          "Name": "string",
          "Kind": "String",
+         "IsConfident": true,
          "IsNullable": false
         },
         "ValueType": {
          "$id": "185",
          "Name": "Intrinsic",
          "Kind": "unknown",
+         "IsConfident": true,
          "IsNullable": false
         },
         "IsNullable": false
@@ -1690,6 +1765,7 @@
         "$id": "187",
         "Name": "String",
         "Kind": "String",
+        "IsConfident": true,
         "IsNullable": false
        },
        "Location": "Header",
@@ -1717,6 +1793,7 @@
         "$id": "190",
         "Name": "String",
         "Kind": "String",
+        "IsConfident": true,
         "IsNullable": false
        },
        "Location": "Header",
@@ -1760,7 +1837,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "IsConfident": true
     }
    ],
    "Protocol": {
@@ -1790,6 +1868,7 @@
         "$id": "197",
         "Name": "String",
         "Kind": "String",
+        "IsConfident": true,
         "IsNullable": false
        },
        "Location": "Header",
@@ -1826,6 +1905,7 @@
          "$id": "201",
          "Name": "string",
          "Kind": "String",
+         "IsConfident": true,
          "IsNullable": false
         },
         "ValueType": {
@@ -1844,7 +1924,8 @@
      "Path": "/type/dictionary/model",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "IsConfident": true
     },
     {
      "$id": "202",
@@ -1865,6 +1946,7 @@
          "$id": "205",
          "Name": "string",
          "Kind": "String",
+         "IsConfident": true,
          "IsNullable": false
         },
         "ValueType": {
@@ -1890,6 +1972,7 @@
         "$id": "207",
         "Name": "String",
         "Kind": "String",
+        "IsConfident": true,
         "IsNullable": false
        },
        "Location": "Header",
@@ -1917,6 +2000,7 @@
         "$id": "210",
         "Name": "String",
         "Kind": "String",
+        "IsConfident": true,
         "IsNullable": false
        },
        "Location": "Header",
@@ -1960,7 +2044,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "IsConfident": true
     }
    ],
    "Protocol": {
@@ -1990,6 +2075,7 @@
         "$id": "217",
         "Name": "String",
         "Kind": "String",
+        "IsConfident": true,
         "IsNullable": false
        },
        "Location": "Header",
@@ -2026,6 +2112,7 @@
          "$id": "221",
          "Name": "string",
          "Kind": "String",
+         "IsConfident": true,
          "IsNullable": false
         },
         "ValueType": {
@@ -2044,7 +2131,8 @@
      "Path": "/type/dictionary/model/recursive",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "IsConfident": true
     },
     {
      "$id": "222",
@@ -2065,6 +2153,7 @@
          "$id": "225",
          "Name": "string",
          "Kind": "String",
+         "IsConfident": true,
          "IsNullable": false
         },
         "ValueType": {
@@ -2090,6 +2179,7 @@
         "$id": "227",
         "Name": "String",
         "Kind": "String",
+        "IsConfident": true,
         "IsNullable": false
        },
        "Location": "Header",
@@ -2117,6 +2207,7 @@
         "$id": "230",
         "Name": "String",
         "Kind": "String",
+        "IsConfident": true,
         "IsNullable": false
        },
        "Location": "Header",
@@ -2160,7 +2251,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "IsConfident": true
     }
    ],
    "Protocol": {
@@ -2190,6 +2282,7 @@
         "$id": "237",
         "Name": "String",
         "Kind": "String",
+        "IsConfident": true,
         "IsNullable": false
        },
        "Location": "Header",
@@ -2226,12 +2319,14 @@
          "$id": "241",
          "Name": "string",
          "Kind": "String",
+         "IsConfident": true,
          "IsNullable": false
         },
         "ValueType": {
          "$id": "242",
          "Name": "float32",
          "Kind": "Float32",
+         "IsConfident": true,
          "IsNullable": true
         },
         "IsNullable": false
@@ -2247,7 +2342,8 @@
      "Path": "/type/dictionary/nullable-float",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "IsConfident": true
     },
     {
      "$id": "243",
@@ -2268,12 +2364,14 @@
          "$id": "246",
          "Name": "string",
          "Kind": "String",
+         "IsConfident": true,
          "IsNullable": false
         },
         "ValueType": {
          "$id": "247",
          "Name": "float32",
          "Kind": "Float32",
+         "IsConfident": true,
          "IsNullable": true
         },
         "IsNullable": false
@@ -2296,6 +2394,7 @@
         "$id": "249",
         "Name": "String",
         "Kind": "String",
+        "IsConfident": true,
         "IsNullable": false
        },
        "Location": "Header",
@@ -2323,6 +2422,7 @@
         "$id": "252",
         "Name": "String",
         "Kind": "String",
+        "IsConfident": true,
         "IsNullable": false
        },
        "Location": "Header",
@@ -2366,7 +2466,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "IsConfident": true
     }
    ],
    "Protocol": {

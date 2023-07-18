@@ -12,6 +12,7 @@
    "Namespace": "LroBasicTypeSpec",
    "IsNullable": false,
    "Usage": "RoundTrip",
+   "IsConfident": true,
    "Properties": [
     {
      "$id": "3",
@@ -22,6 +23,7 @@
       "$id": "4",
       "Name": "string",
       "Kind": "String",
+      "IsConfident": true,
       "IsNullable": false
      },
      "IsRequired": true,
@@ -36,6 +38,7 @@
       "$id": "6",
       "Name": "string",
       "Kind": "String",
+      "IsConfident": true,
       "IsNullable": false
      },
      "IsRequired": false,
@@ -50,6 +53,7 @@
       "$id": "8",
       "Name": "string",
       "Kind": "String",
+      "IsConfident": true,
       "IsNullable": false
      },
      "IsRequired": false,
@@ -63,6 +67,7 @@
    "Namespace": "LroBasicTypeSpec",
    "IsNullable": false,
    "Usage": "RoundTrip",
+   "IsConfident": true,
    "Properties": [
     {
      "$id": "10",
@@ -73,6 +78,7 @@
       "$id": "11",
       "Name": "string",
       "Kind": "String",
+      "IsConfident": true,
       "IsNullable": false
      },
      "IsRequired": true,
@@ -101,7 +107,8 @@
         "$id": "15",
         "Name": "Uri",
         "Kind": "Uri",
-        "IsNullable": false
+        "IsNullable": false,
+        "IsConfident": true
        },
        "Location": "Uri",
        "IsApiVersion": false,
@@ -122,6 +129,7 @@
         "$id": "17",
         "Name": "String",
         "Kind": "String",
+        "IsConfident": true,
         "IsNullable": false
        },
        "Location": "Query",
@@ -139,6 +147,7 @@
          "$id": "19",
          "Name": "String",
          "Kind": "String",
+         "IsConfident": true,
          "IsNullable": false
         },
         "Value": "2022-05-15-preview"
@@ -170,6 +179,7 @@
         "$id": "22",
         "Name": "String",
         "Kind": "String",
+        "IsConfident": true,
         "IsNullable": false
        },
        "Location": "Header",
@@ -197,6 +207,7 @@
         "$id": "25",
         "Name": "String",
         "Kind": "String",
+        "IsConfident": true,
         "IsNullable": false
        },
        "Location": "Header",
@@ -234,6 +245,7 @@
           "$id": "29",
           "Name": "ResourceLocation",
           "Kind": "Uri",
+          "IsConfident": true,
           "IsNullable": false
          }
         }
@@ -268,6 +280,7 @@
           "$id": "33",
           "Name": "ResourceLocation",
           "Kind": "Uri",
+          "IsConfident": true,
           "IsNullable": false
          }
         }
@@ -276,7 +289,8 @@
       }
      },
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "IsConfident": true
     },
     {
      "$id": "34",
@@ -298,6 +312,7 @@
         "$id": "36",
         "Name": "string",
         "Kind": "String",
+        "IsConfident": true,
         "IsNullable": false
        },
        "Location": "Path",
@@ -336,6 +351,7 @@
         "$id": "39",
         "Name": "String",
         "Kind": "String",
+        "IsConfident": true,
         "IsNullable": false
        },
        "Location": "Header",
@@ -363,6 +379,7 @@
         "$id": "42",
         "Name": "String",
         "Kind": "String",
+        "IsConfident": true,
         "IsNullable": false
        },
        "Location": "Header",
@@ -403,6 +420,7 @@
           "$id": "46",
           "Name": "ResourceLocation",
           "Kind": "Uri",
+          "IsConfident": true,
           "IsNullable": false
          }
         }
@@ -428,6 +446,7 @@
           "$id": "49",
           "Name": "ResourceLocation",
           "Kind": "Uri",
+          "IsConfident": true,
           "IsNullable": false
          }
         }
@@ -465,6 +484,7 @@
           "$id": "53",
           "Name": "ResourceLocation",
           "Kind": "Uri",
+          "IsConfident": true,
           "IsNullable": false
          }
         }
@@ -473,7 +493,8 @@
       }
      },
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "IsConfident": true
     },
     {
      "$id": "54",
@@ -512,6 +533,7 @@
         "$id": "57",
         "Name": "String",
         "Kind": "String",
+        "IsConfident": true,
         "IsNullable": false
        },
        "Location": "Header",
@@ -539,6 +561,7 @@
         "$id": "60",
         "Name": "String",
         "Kind": "String",
+        "IsConfident": true,
         "IsNullable": false
        },
        "Location": "Header",
@@ -579,6 +602,7 @@
           "$id": "64",
           "Name": "ResourceLocation",
           "Kind": "Uri",
+          "IsConfident": true,
           "IsNullable": false
          }
         }
@@ -616,6 +640,7 @@
           "$id": "68",
           "Name": "ResourceLocation",
           "Kind": "Uri",
+          "IsConfident": true,
           "IsNullable": false
          }
         }
@@ -624,7 +649,8 @@
       }
      },
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "IsConfident": true
     }
    ],
    "Protocol": {

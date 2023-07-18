@@ -26,13 +26,15 @@ namespace AutoRest.CSharp.Common.Input
         public static InputLiteralType CreateInputLiteralType(ref Utf8JsonReader reader, string? id, string? name, JsonSerializerOptions options, ReferenceResolver resolver)
         {
             var isFirstProperty = id == null && name == null;
-            Object? value = null;
+            bool isConfident = true;
+            object? value = null;
             InputType? type = null;
 
             while (reader.TokenType != JsonTokenType.EndObject)
             {
                 var isKnownProperty = reader.TryReadReferenceId(ref isFirstProperty, ref id)
-                    || reader.TryReadString(nameof(InputListType.Name), ref name)
+                    || reader.TryReadString(nameof(InputLiteralType.Name), ref name)
+                    || reader.TryReadBoolean(nameof(InputLiteralType.IsConfident), ref isConfident)
                     || reader.TryReadWithConverter(nameof(InputLiteralType.LiteralValueType), options, ref type);
 
                 if (isKnownProperty)
@@ -56,7 +58,7 @@ namespace AutoRest.CSharp.Common.Input
 
             value = value ?? throw new JsonException("InputConstant must have value");
 
-            var literalType = new InputLiteralType(name, type, value);
+            var literalType = new InputLiteralType(name, type, value, isConfident);
 
             if (id != null)
             {

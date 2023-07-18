@@ -8,8 +8,7 @@ import {
     listOperationGroups,
     listOperationsInOperationGroup,
     SdkOperationGroup,
-    SdkContext,
-    createStateSymbol
+    SdkContext
 } from "@azure-tools/typespec-client-generator-core";
 import {
     EmitContext,
@@ -55,6 +54,7 @@ import { loadOperation } from "./operation.js";
 import { mockApiVersion } from "../constants.js";
 import { logger } from "./logger.js";
 import { $lib } from "../emitter.js";
+import { isConfident } from "./confidentLevels.js";
 
 export function createModel(
     context: EmitContext<NetEmitterOptions>
@@ -113,6 +113,7 @@ export function createModelForService(
         Type: {
             Name: "String",
             Kind: InputTypeKind.String,
+            IsConfident: true,
             IsNullable: false
         } as InputPrimitiveType,
         Location: RequestLocation.Query,
@@ -128,6 +129,7 @@ export function createModelForService(
             Type: {
                 Name: "String",
                 Kind: InputTypeKind.String,
+                IsConfident: true,
                 IsNullable: false
             } as InputPrimitiveType,
             Value: version
@@ -195,7 +197,7 @@ export function createModelForService(
                         apiVersionParam.DefaultValue;
                 }
                 /**
-                 * replace to the global apiVerison parameter if the apiVersion defined in the operation is the same as the global service apiVersion parameter.
+                 * replace to the global apiVersion parameter if the apiVersion defined in the operation is the same as the global service apiVersion parameter.
                  * Three checkpoints:
                  * the parameter is query parameter,
                  * it is client parameter
@@ -220,6 +222,30 @@ export function createModelForService(
     const usages = getUsages(sdkContext, convenienceOperations, modelMap);
     setUsage(usages, modelMap);
     setUsage(usages, enumMap);
+
+    // propagate the isConfident from the types to the operations
+    for (const client of clients) {
+        for (const op of client.Operations) {
+            let isOperationConfident = true;
+            for (const parameter of op.Parameters) {
+                // skip the special parameters
+                if (
+                    parameter.IsApiVersion ||
+                    parameter.IsEndpoint ||
+                    parameter.IsContentType
+                ) {
+                    parameter.Type.IsConfident = true; // we never recognize these as low confident level
+                    continue;
+                }
+                isOperationConfident &&= isConfident(parameter.Type);
+            }
+            for (const response of op.Responses) {
+                isOperationConfident &&= isConfident(response.BodyType);
+            }
+            // TODO -- headers?
+            op.IsConfident = isOperationConfident;
+        }
+    }
 
     const clientModel = {
         Name: namespace,
@@ -362,6 +388,7 @@ function createContentTypeOrAcceptParameter(
     const inputType: InputType = {
         Name: "String",
         Kind: InputTypeKind.String,
+        IsConfident: true,
         IsNullable: false
     } as InputPrimitiveType;
     return {

@@ -38,6 +38,7 @@ describe("Test GetInputType for array", () => {
                     ElementType: {
                         Name: "string",
                         Kind: "String",
+                        IsConfident: true,
                         IsNullable: false
                     },
                     IsNullable: false
@@ -67,6 +68,7 @@ describe("Test GetInputType for array", () => {
                     ElementType: {
                         Name: "string",
                         Kind: "String",
+                        IsConfident: true,
                         IsNullable: false
                     },
                     IsNullable: false
@@ -135,6 +137,7 @@ describe("Test GetInputType for enum", () => {
                         }
                     ],
                     IsExtensible: false,
+                    IsConfident: true,
                     IsNullable: false,
                     Usage: "Input"
                 },
@@ -198,6 +201,7 @@ describe("Test GetInputType for enum", () => {
                         }
                     ],
                     IsExtensible: false,
+                    IsConfident: true,
                     IsNullable: false,
                     Usage: "Input"
                 },
@@ -241,6 +245,7 @@ describe("Test GetInputType for enum", () => {
                         { Name: "Four", Value: "4", Description: undefined }
                     ],
                     IsExtensible: true,
+                    IsConfident: true,
                     IsNullable: false,
                     Usage: "Input"
                 },

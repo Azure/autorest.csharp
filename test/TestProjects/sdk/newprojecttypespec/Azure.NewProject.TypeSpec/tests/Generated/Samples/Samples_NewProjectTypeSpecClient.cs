@@ -110,17 +110,6 @@ namespace Azure.NewProject.TypeSpec.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_TopAction_Convenience_Async()
-        {
-            var credential = new AzureKeyCredential("<key>");
-            var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new NewProjectTypeSpecClient(endpoint, credential);
-
-            var result = await client.TopActionAsync(DateTimeOffset.UtcNow);
-        }
-
-        [Test]
-        [Ignore("Only validating compilation of examples")]
         public void Example_TopAction2()
         {
             var credential = new AzureKeyCredential("<key>");
@@ -485,24 +474,6 @@ namespace Azure.NewProject.TypeSpec.Samples
             Console.WriteLine(result.GetProperty("optionalLiteralFloat").ToString());
             Console.WriteLine(result.GetProperty("optionalLiteralBool").ToString());
             Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
-        }
-
-        [Test]
-        [Ignore("Only validating compilation of examples")]
-        public async Task Example_AnonymousBody_Convenience_Async()
-        {
-            var credential = new AzureKeyCredential("<key>");
-            var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new NewProjectTypeSpecClient(endpoint, credential);
-
-            var thing = new Thing("<name>", "<requiredUnion>", "<requiredBadDescription>")
-            {
-                OptionalLiteralString = ThingOptionalLiteralString.Reject,
-                OptionalLiteralInt = ThingOptionalLiteralInt._456,
-                OptionalLiteralFloat = ThingOptionalLiteralFloat._456,
-                OptionalLiteralBool = true,
-            };
-            var result = await client.AnonymousBodyAsync(thing);
         }
 
         [Test]
@@ -1119,61 +1090,6 @@ namespace Azure.NewProject.TypeSpec.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_HelloAgain_Convenience_Async()
-        {
-            var credential = new AzureKeyCredential("<key>");
-            var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new NewProjectTypeSpecClient(endpoint, credential);
-
-            var action = new RoundTripModel("<requiredString>", 1234, new StringFixedEnum[]
-            {
-    StringFixedEnum.One
-            }, new Dictionary<string, StringExtensibleEnum>
-            {
-                ["key"] = StringExtensibleEnum.One,
-            }, new Thing("<name>", "<requiredUnion>", "<requiredBadDescription>")
-            {
-                OptionalLiteralString = ThingOptionalLiteralString.Reject,
-                OptionalLiteralInt = ThingOptionalLiteralInt._456,
-                OptionalLiteralFloat = ThingOptionalLiteralFloat._456,
-                OptionalLiteralBool = true,
-            }, BinaryData.FromString("<your binary data content>"), new Dictionary<string, BinaryData>
-            {
-                ["key"] = BinaryData.FromString("<your binary data content>"),
-            })
-            {
-                IntExtensibleEnum = IntExtensibleEnum.One,
-                IntExtensibleEnumCollection =
-{
-        IntExtensibleEnum.One
-    },
-                FloatExtensibleEnum = FloatExtensibleEnum.One,
-                FloatExtensibleEnumCollection =
-{
-        FloatExtensibleEnum.One
-    },
-                FloatFixedEnum = FloatFixedEnum.One,
-                FloatFixedEnumCollection =
-{
-        FloatFixedEnum.One
-    },
-                IntFixedEnum = IntFixedEnum.One,
-                IntFixedEnumCollection =
-{
-        IntFixedEnum.One
-    },
-                StringFixedEnum = StringFixedEnum.One,
-                OptionalUnknown = BinaryData.FromString("<your binary data content>"),
-                OptionalRecordUnknown =
-{
-        ["key"] = BinaryData.FromString("<your binary data content>"),
-    },
-            };
-            var result = await client.HelloAgainAsync("<p2>", "<p1>", action);
-        }
-
-        [Test]
-        [Ignore("Only validating compilation of examples")]
         public void Example_NoContentType()
         {
             var credential = new AzureKeyCredential("<key>");
@@ -1566,17 +1482,6 @@ namespace Azure.NewProject.TypeSpec.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_HelloDemo2_Convenience_Async()
-        {
-            var credential = new AzureKeyCredential("<key>");
-            var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new NewProjectTypeSpecClient(endpoint, credential);
-
-            var result = await client.HelloDemo2Async();
-        }
-
-        [Test]
-        [Ignore("Only validating compilation of examples")]
         public void Example_CreateLiteral()
         {
             var credential = new AzureKeyCredential("<key>");
@@ -1717,24 +1622,6 @@ namespace Azure.NewProject.TypeSpec.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_CreateLiteral_Convenience_Async()
-        {
-            var credential = new AzureKeyCredential("<key>");
-            var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new NewProjectTypeSpecClient(endpoint, credential);
-
-            var body = new Thing("<name>", "<requiredUnion>", "<requiredBadDescription>")
-            {
-                OptionalLiteralString = ThingOptionalLiteralString.Reject,
-                OptionalLiteralInt = ThingOptionalLiteralInt._456,
-                OptionalLiteralFloat = ThingOptionalLiteralFloat._456,
-                OptionalLiteralBool = true,
-            };
-            var result = await client.CreateLiteralAsync(body);
-        }
-
-        [Test]
-        [Ignore("Only validating compilation of examples")]
         public void Example_HelloLiteral()
         {
             var credential = new AzureKeyCredential("<key>");
@@ -1823,17 +1710,6 @@ namespace Azure.NewProject.TypeSpec.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_HelloLiteral_Convenience_Async()
-        {
-            var credential = new AzureKeyCredential("<key>");
-            var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new NewProjectTypeSpecClient(endpoint, credential);
-
-            var result = await client.HelloLiteralAsync();
-        }
-
-        [Test]
-        [Ignore("Only validating compilation of examples")]
         public void Example_GetUnknownValue()
         {
             var credential = new AzureKeyCredential("<key>");
@@ -1886,24 +1762,6 @@ namespace Azure.NewProject.TypeSpec.Samples
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());
-        }
-
-        [Test]
-        [Ignore("Only validating compilation of examples")]
-        public async Task Example_InternalProtocol_Convenience_Async()
-        {
-            var credential = new AzureKeyCredential("<key>");
-            var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new NewProjectTypeSpecClient(endpoint, credential);
-
-            var body = new Thing("<name>", "<requiredUnion>", "<requiredBadDescription>")
-            {
-                OptionalLiteralString = ThingOptionalLiteralString.Reject,
-                OptionalLiteralInt = ThingOptionalLiteralInt._456,
-                OptionalLiteralFloat = ThingOptionalLiteralFloat._456,
-                OptionalLiteralBool = true,
-            };
-            var result = await client.InternalProtocolAsync(body);
         }
 
         [Test]

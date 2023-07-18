@@ -58,7 +58,9 @@ import {
     InputUnionType,
     InputNullType,
     InputIntrinsicType,
-    InputUnknownType
+    InputUnknownType,
+    isInputEnumType,
+    isInputLiteralType
 } from "../type/inputType.js";
 import { InputTypeKind } from "../type/inputTypeKind.js";
 import { Usage } from "../type/usage.js";
@@ -71,6 +73,7 @@ import {
 import { capitalize, getNameForTemplate } from "./utils.js";
 import { FormattedType } from "../type/formattedType.js";
 import { LiteralTypeContext } from "../type/literalTypeContext.js";
+import { getConfident } from "./confidentLevels.js";
 /**
  * Map calType to csharp InputTypeKind
  */
@@ -237,8 +240,8 @@ function isSchemaProperty(context: SdkContext, property: ModelProperty) {
     const headerInfo = getHeaderFieldName(program, property);
     const queryInfo = getQueryParamName(program, property);
     const pathInfo = getPathParamName(program, property);
-    const statusCodeinfo = isStatusCode(program, property);
-    return !(headerInfo || queryInfo || pathInfo || statusCodeinfo);
+    const statusCodeInfo = isStatusCode(program, property);
+    return !(headerInfo || queryInfo || pathInfo || statusCodeInfo);
 }
 
 export function getDefaultValue(type: Type): any {
@@ -258,14 +261,6 @@ export function getDefaultValue(type: Type): any {
 
 export function isNeverType(type: Type): type is NeverType {
     return type.kind === "Intrinsic" && type.name === "never";
-}
-
-function isInputEnumType(x: any): x is InputEnumType {
-    return x.AllowedValues !== undefined;
-}
-
-function isInputLiteralType(x: any): x is InputLiteralType {
-    return x.Name === "Literal";
 }
 
 export function getInputType(
@@ -321,6 +316,7 @@ export function getInputType(
                         sdkType.format ?? formattedType.format,
                         formattedType.encode
                     ),
+                    IsConfident: true,
                     IsNullable: false
                 } as InputPrimitiveType;
         }
@@ -363,6 +359,7 @@ export function getInputType(
                 EnumValueType: innerEnum.EnumValueType,
                 AllowedValues: innerEnum.AllowedValues,
                 IsExtensible: !isFixed(program, e),
+                IsConfident: true,
                 IsNullable: false
             } as InputEnumType;
             enums.set(m.name, extensibleEnum);
@@ -385,6 +382,7 @@ export function getInputType(
         const rawValueType = {
             Name: type.kind,
             Kind: builtInKind,
+            IsConfident: true,
             IsNullable: false
         } as InputPrimitiveType;
         const literalValue = getDefaultValue(type);
@@ -398,12 +396,12 @@ export function getInputType(
             Name: "Literal",
             LiteralValueType: newValueType,
             Value: literalValue,
+            IsConfident: newValueType.IsConfident,
             IsNullable: false
         } as InputLiteralType;
 
         function getLiteralValueType(): InputPrimitiveType | InputEnumType {
             // we will not wrap it if it comes from outside a model or it is a boolean
-            // TODO -- we need to wrap it into extensible enum when it comes from an operation
             if (literalContext === undefined || rawValueType.Kind === "Boolean")
                 return rawValueType;
 
@@ -419,7 +417,6 @@ export function getInputType(
                     Description: literalValue.toString()
                 } as InputEnumTypeValue
             ];
-            // TODO -- we need to make it low confident if the enum is not string
             const enumType = {
                 Name: enumName,
                 Namespace: literalContext.Namespace,
@@ -429,6 +426,7 @@ export function getInputType(
                 EnumValueType: enumValueType,
                 AllowedValues: allowValues,
                 IsExtensible: true,
+                IsConfident: rawValueType.Kind === "String" ? true : false, // when the literal is not a string, it should be low confident because the name of its values are not properly assigned
                 IsNullable: false
             } as InputEnumType;
             return enumType;
@@ -478,6 +476,7 @@ export function getInputType(
                 EnumValueType: enumValueType,
                 AllowedValues: allowValues,
                 IsExtensible: !isFixed(program, e),
+                IsConfident: true, // properly defined enum types are always confident
                 IsNullable: false
             } as InputEnumType;
             if (addToCollection) enums.set(e.name, enumType);
@@ -544,6 +543,9 @@ export function getInputType(
                 DiscriminatorValue: getDiscriminatorValue(m, baseModel),
                 BaseModel: baseModel,
                 Usage: Usage.None,
+                // we put null here to first take this place and the calculation of this property should happen later to avoid cyclic references
+                // we cannot put it undefined otherwise the `IsLowConfident` property will appear after `Properties`
+                IsConfident: null,
                 Properties: properties // Properties should be the last assigned to model
             } as InputModelType;
 
@@ -551,6 +553,9 @@ export function getInputType(
 
             // Resolve properties after model is added to the map to resolve possible circular dependencies
             addModelProperties(model, m.properties, properties);
+
+            // Resolve the confident level of this model
+            model.IsConfident = getConfident(model, new Set<InputModelType>());
 
             // Temporary part. Derived types may not be referenced directly by any operation
             // We should be able to remove it when https://github.com/Azure/typespec-azure/issues/1733 is closed
@@ -651,6 +656,7 @@ export function getInputType(
                 Type: {
                     Name: "string",
                     Kind: InputTypeKind.String,
+                    IsConfident: true,
                     IsNullable: false
                 } as InputPrimitiveType,
                 IsDiscriminator: true
@@ -697,12 +703,14 @@ export function getInputType(
                 return {
                     Name: "Intrinsic",
                     Kind: "unknown",
+                    IsConfident: true,
                     IsNullable: false
                 } as InputUnknownType;
             case "null":
                 return {
                     Name: "Intrinsic",
                     Kind: "null",
+                    IsConfident: true,
                     IsNullable: false
                 } as InputNullType;
             default:
@@ -743,6 +751,7 @@ export function getInputType(
             ? ({
                   Name: "Union",
                   UnionItemTypes: ItemTypes,
+                  IsConfident: false, // unions are always low confident now
                   IsNullable: false
               } as InputUnionType)
             : ItemTypes[0];
@@ -810,7 +819,11 @@ export function getUsages(
 
     for (const op of ops) {
         const resourceOperation = getResourceOperation(program, op.operation);
-        if (!op.parameters.bodyParameter && op.parameters.bodyType) {
+        if (
+            op.parameters.body &&
+            !op.parameters.body.parameter &&
+            op.parameters.body.type
+        ) {
             let bodyTypeName = "";
             if (resourceOperation) {
                 /* handle resource operation. */
@@ -819,7 +832,7 @@ export function getUsages(
                 /* handle spread. */
                 const effectiveBodyType = getEffectiveSchemaType(
                     context,
-                    op.parameters.bodyType
+                    op.parameters.body.type
                 );
                 if (effectiveBodyType.kind === "Model") {
                     if (effectiveBodyType.name !== "") {

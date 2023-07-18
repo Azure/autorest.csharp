@@ -104,7 +104,7 @@ namespace AutoRest.CSharp.Output.Models
 
         private bool ShouldGenerateConvenienceMethod()
         {
-            return Operation.GenerateConvenienceMethod
+            return Operation.GenerateConvenienceMethod && Operation.IsConfident
                 && (!Operation.GenerateProtocolMethod
                 || IsConvenienceMethodMeaningful());
         }
@@ -356,7 +356,8 @@ namespace AutoRest.CSharp.Output.Models
                         if (Operation.KeepClientDefaultValue && operationParameter.DefaultValue != null)
                         {
                             optionalRequestParameters.Add(operationParameter);
-                        } else
+                        }
+                        else
                         {
                             requiredRequestParameters.Add(operationParameter);
                         }

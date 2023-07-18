@@ -143,7 +143,8 @@ namespace AutoRest.CSharp.Output.Models
                     LongRunning: null,
                     Paging: CreateOperationPaging(operation),
                     GenerateProtocolMethod: true,
-                    GenerateConvenienceMethod: false);
+                    GenerateConvenienceMethod: false,
+                    IsConfident: true);
             }
             return new InputOperation();
         }
@@ -179,7 +180,8 @@ namespace AutoRest.CSharp.Output.Models
                     SkipUrlEncoding: requestParameter.Extensions?.SkipEncoding ?? false,
                     HeaderCollectionPrefix: requestParameter.Extensions?.HeaderCollectionPrefix,
                     VirtualParameter: requestParameter is VirtualParameter { Schema: not ConstantSchema } vp ? vp : null,
-                    SerializationFormat: BuilderHelpers.GetSerializationFormat(requestParameter.Schema));
+                    SerializationFormat: BuilderHelpers.GetSerializationFormat(requestParameter.Schema)
+                );
         }
 
         private static InputConstant? GetDefaultValue(RequestParameter parameter)

@@ -13,6 +13,7 @@
    "Namespace": "Encode.Duration.Property",
    "IsNullable": false,
    "Usage": "RoundTrip",
+   "IsConfident": true,
    "Properties": [
     {
      "$id": "3",
@@ -23,6 +24,7 @@
       "$id": "4",
       "Name": "duration",
       "Kind": "DurationISO8601",
+      "IsConfident": true,
       "IsNullable": false
      },
      "IsRequired": true,
@@ -36,6 +38,7 @@
    "Namespace": "Encode.Duration.Property",
    "IsNullable": false,
    "Usage": "RoundTrip",
+   "IsConfident": true,
    "Properties": [
     {
      "$id": "6",
@@ -46,6 +49,7 @@
       "$id": "7",
       "Name": "duration",
       "Kind": "DurationISO8601",
+      "IsConfident": true,
       "IsNullable": false
      },
      "IsRequired": true,
@@ -59,6 +63,7 @@
    "Namespace": "Encode.Duration.Property",
    "IsNullable": false,
    "Usage": "RoundTrip",
+   "IsConfident": true,
    "Properties": [
     {
      "$id": "9",
@@ -69,6 +74,7 @@
       "$id": "10",
       "Name": "duration",
       "Kind": "DurationSeconds",
+      "IsConfident": true,
       "IsNullable": false
      },
      "IsRequired": true,
@@ -82,6 +88,7 @@
    "Namespace": "Encode.Duration.Property",
    "IsNullable": false,
    "Usage": "RoundTrip",
+   "IsConfident": true,
    "Properties": [
     {
      "$id": "12",
@@ -92,6 +99,7 @@
       "$id": "13",
       "Name": "duration",
       "Kind": "DurationSecondsFloat",
+      "IsConfident": true,
       "IsNullable": false
      },
      "IsRequired": true,
@@ -105,6 +113,7 @@
    "Namespace": "Encode.Duration.Property",
    "IsNullable": false,
    "Usage": "RoundTrip",
+   "IsConfident": true,
    "Properties": [
     {
      "$id": "15",
@@ -118,6 +127,7 @@
        "$id": "17",
        "Name": "Float32Duration",
        "Kind": "DurationSecondsFloat",
+       "IsConfident": true,
        "IsNullable": false
       },
       "IsNullable": false
@@ -158,7 +168,8 @@
         "$id": "23",
         "Name": "String",
         "Kind": "String",
-        "IsNullable": false
+        "IsNullable": false,
+        "IsConfident": true
        },
        "Location": "Uri",
        "IsApiVersion": false,
@@ -188,6 +199,7 @@
         "$id": "27",
         "Name": "duration",
         "Kind": "DurationISO8601",
+        "IsConfident": true,
         "IsNullable": false
        },
        "Location": "Query",
@@ -208,6 +220,7 @@
         "$id": "29",
         "Name": "String",
         "Kind": "String",
+        "IsConfident": true,
         "IsNullable": false
        },
        "Location": "Header",
@@ -236,6 +249,7 @@
         "$id": "32",
         "Name": "String",
         "Kind": "String",
+        "IsConfident": true,
         "IsNullable": false
        },
        "Location": "Query",
@@ -253,6 +267,7 @@
          "$id": "34",
          "Name": "String",
          "Kind": "String",
+         "IsConfident": true,
          "IsNullable": false
         },
         "Value": "1.0.0"
@@ -276,7 +291,8 @@
      "Path": "/encode/duration/query/default",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "IsConfident": true
     },
     {
      "$id": "36",
@@ -294,6 +310,7 @@
         "$id": "38",
         "Name": "duration",
         "Kind": "DurationISO8601",
+        "IsConfident": true,
         "IsNullable": false
        },
        "Location": "Query",
@@ -314,6 +331,7 @@
         "$id": "40",
         "Name": "String",
         "Kind": "String",
+        "IsConfident": true,
         "IsNullable": false
        },
        "Location": "Header",
@@ -354,7 +372,8 @@
      "Path": "/encode/duration/query/iso8601",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "IsConfident": true
     },
     {
      "$id": "43",
@@ -372,6 +391,7 @@
         "$id": "45",
         "Name": "duration",
         "Kind": "DurationSeconds",
+        "IsConfident": true,
         "IsNullable": false
        },
        "Location": "Query",
@@ -392,6 +412,7 @@
         "$id": "47",
         "Name": "String",
         "Kind": "String",
+        "IsConfident": true,
         "IsNullable": false
        },
        "Location": "Header",
@@ -432,7 +453,8 @@
      "Path": "/encode/duration/query/int32-seconds",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "IsConfident": true
     },
     {
      "$id": "50",
@@ -450,6 +472,7 @@
         "$id": "52",
         "Name": "duration",
         "Kind": "DurationSecondsFloat",
+        "IsConfident": true,
         "IsNullable": false
        },
        "Location": "Query",
@@ -470,6 +493,7 @@
         "$id": "54",
         "Name": "String",
         "Kind": "String",
+        "IsConfident": true,
         "IsNullable": false
        },
        "Location": "Header",
@@ -510,7 +534,8 @@
      "Path": "/encode/duration/query/float-seconds",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "IsConfident": true
     },
     {
      "$id": "57",
@@ -531,6 +556,7 @@
          "$id": "60",
          "Name": "Int32Duration",
          "Kind": "DurationSeconds",
+         "IsConfident": true,
          "IsNullable": false
         },
         "IsNullable": false
@@ -554,6 +580,7 @@
         "$id": "62",
         "Name": "String",
         "Kind": "String",
+        "IsConfident": true,
         "IsNullable": false
        },
        "Location": "Header",
@@ -594,7 +621,8 @@
      "Path": "/encode/duration/query/int32-seconds-array",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "IsConfident": true
     }
    ],
    "Protocol": {
@@ -641,6 +669,7 @@
         "$id": "70",
         "Name": "String",
         "Kind": "String",
+        "IsConfident": true,
         "IsNullable": false
        },
        "Location": "Header",
@@ -668,6 +697,7 @@
         "$id": "73",
         "Name": "String",
         "Kind": "String",
+        "IsConfident": true,
         "IsNullable": false
        },
        "Location": "Header",
@@ -714,7 +744,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "IsConfident": true
     },
     {
      "$id": "76",
@@ -749,6 +780,7 @@
         "$id": "79",
         "Name": "String",
         "Kind": "String",
+        "IsConfident": true,
         "IsNullable": false
        },
        "Location": "Header",
@@ -776,6 +808,7 @@
         "$id": "82",
         "Name": "String",
         "Kind": "String",
+        "IsConfident": true,
         "IsNullable": false
        },
        "Location": "Header",
@@ -822,7 +855,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "IsConfident": true
     },
     {
      "$id": "85",
@@ -857,6 +891,7 @@
         "$id": "88",
         "Name": "String",
         "Kind": "String",
+        "IsConfident": true,
         "IsNullable": false
        },
        "Location": "Header",
@@ -884,6 +919,7 @@
         "$id": "91",
         "Name": "String",
         "Kind": "String",
+        "IsConfident": true,
         "IsNullable": false
        },
        "Location": "Header",
@@ -930,7 +966,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "IsConfident": true
     },
     {
      "$id": "94",
@@ -965,6 +1002,7 @@
         "$id": "97",
         "Name": "String",
         "Kind": "String",
+        "IsConfident": true,
         "IsNullable": false
        },
        "Location": "Header",
@@ -992,6 +1030,7 @@
         "$id": "100",
         "Name": "String",
         "Kind": "String",
+        "IsConfident": true,
         "IsNullable": false
        },
        "Location": "Header",
@@ -1038,7 +1077,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "IsConfident": true
     },
     {
      "$id": "103",
@@ -1073,6 +1113,7 @@
         "$id": "106",
         "Name": "String",
         "Kind": "String",
+        "IsConfident": true,
         "IsNullable": false
        },
        "Location": "Header",
@@ -1100,6 +1141,7 @@
         "$id": "109",
         "Name": "String",
         "Kind": "String",
+        "IsConfident": true,
         "IsNullable": false
        },
        "Location": "Header",
@@ -1146,7 +1188,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "IsConfident": true
     }
    ],
    "Protocol": {
@@ -1176,6 +1219,7 @@
         "$id": "116",
         "Name": "duration",
         "Kind": "DurationISO8601",
+        "IsConfident": true,
         "IsNullable": false
        },
        "Location": "Header",
@@ -1196,6 +1240,7 @@
         "$id": "118",
         "Name": "String",
         "Kind": "String",
+        "IsConfident": true,
         "IsNullable": false
        },
        "Location": "Header",
@@ -1236,7 +1281,8 @@
      "Path": "/encode/duration/header/default",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "IsConfident": true
     },
     {
      "$id": "121",
@@ -1254,6 +1300,7 @@
         "$id": "123",
         "Name": "duration",
         "Kind": "DurationISO8601",
+        "IsConfident": true,
         "IsNullable": false
        },
        "Location": "Header",
@@ -1274,6 +1321,7 @@
         "$id": "125",
         "Name": "String",
         "Kind": "String",
+        "IsConfident": true,
         "IsNullable": false
        },
        "Location": "Header",
@@ -1314,7 +1362,8 @@
      "Path": "/encode/duration/header/iso8601",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "IsConfident": true
     },
     {
      "$id": "128",
@@ -1335,6 +1384,7 @@
          "$id": "131",
          "Name": "Iso8601Duration",
          "Kind": "DurationISO8601",
+         "IsConfident": true,
          "IsNullable": false
         },
         "IsNullable": false
@@ -1358,6 +1408,7 @@
         "$id": "133",
         "Name": "String",
         "Kind": "String",
+        "IsConfident": true,
         "IsNullable": false
        },
        "Location": "Header",
@@ -1398,7 +1449,8 @@
      "Path": "/encode/duration/header/iso8601-array",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "IsConfident": true
     },
     {
      "$id": "136",
@@ -1416,6 +1468,7 @@
         "$id": "138",
         "Name": "duration",
         "Kind": "DurationSeconds",
+        "IsConfident": true,
         "IsNullable": false
        },
        "Location": "Header",
@@ -1436,6 +1489,7 @@
         "$id": "140",
         "Name": "String",
         "Kind": "String",
+        "IsConfident": true,
         "IsNullable": false
        },
        "Location": "Header",
@@ -1476,7 +1530,8 @@
      "Path": "/encode/duration/header/int32-seconds",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "IsConfident": true
     },
     {
      "$id": "143",
@@ -1494,6 +1549,7 @@
         "$id": "145",
         "Name": "duration",
         "Kind": "DurationSecondsFloat",
+        "IsConfident": true,
         "IsNullable": false
        },
        "Location": "Header",
@@ -1514,6 +1570,7 @@
         "$id": "147",
         "Name": "String",
         "Kind": "String",
+        "IsConfident": true,
         "IsNullable": false
        },
        "Location": "Header",
@@ -1554,7 +1611,8 @@
      "Path": "/encode/duration/header/float-seconds",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "IsConfident": true
     }
    ],
    "Protocol": {
