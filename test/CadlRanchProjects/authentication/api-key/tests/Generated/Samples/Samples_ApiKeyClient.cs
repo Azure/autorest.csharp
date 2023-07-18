@@ -6,13 +6,8 @@
 #nullable disable
 
 using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Text.Json;
 using System.Threading.Tasks;
 using Azure;
-using Azure.Core;
-using Azure.Identity;
 using NUnit.Framework;
 
 namespace Authentication.ApiKey.Samples
@@ -48,7 +43,7 @@ namespace Authentication.ApiKey.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new ApiKeyClient(credential);
 
-            Response response = await client.ValidAsync();
+            Response response = await client.ValidAsync().ConfigureAwait(false);
             Console.WriteLine(response.Status);
         }
 
@@ -59,7 +54,7 @@ namespace Authentication.ApiKey.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new ApiKeyClient(credential);
 
-            Response response = await client.ValidAsync();
+            Response response = await client.ValidAsync().ConfigureAwait(false);
             Console.WriteLine(response.Status);
         }
 
@@ -92,7 +87,7 @@ namespace Authentication.ApiKey.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new ApiKeyClient(credential);
 
-            Response response = await client.InvalidAsync();
+            Response response = await client.InvalidAsync().ConfigureAwait(false);
             Console.WriteLine(response.Status);
         }
 
@@ -103,7 +98,7 @@ namespace Authentication.ApiKey.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new ApiKeyClient(credential);
 
-            Response response = await client.InvalidAsync();
+            Response response = await client.InvalidAsync().ConfigureAwait(false);
             Console.WriteLine(response.Status);
         }
     }

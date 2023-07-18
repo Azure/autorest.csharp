@@ -8,12 +8,12 @@ This sample shows how to call CreateProjectAsync with required parameters.
 var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new LroBasicTypeSpecClient(endpoint);
 
-var resource = new Project()
+var resource = new Project
 {
     Description = "<Description>",
     Name = "<Name>",
 };
-var operation = await client.CreateProjectAsync(WaitUntil.Completed, resource);
+var result = await client.CreateProjectAsync(WaitUntil.Completed, resource).ConfigureAwait(false);
 ]]></code>
 </example>
     </member>
@@ -24,7 +24,7 @@ This sample shows how to call CreateProject with required parameters.
 var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new LroBasicTypeSpecClient(endpoint);
 
-var resource = new Project()
+var resource = new Project
 {
     Description = "<Description>",
     Name = "<Name>",
@@ -42,7 +42,7 @@ var client = new LroBasicTypeSpecClient(endpoint);
 
 var data = new {};
 
-var operation = await client.CreateProjectAsync(WaitUntil.Completed, RequestContent.Create(data));
+var operation = await client.CreateProjectAsync(WaitUntil.Completed, RequestContent.Create(data)).ConfigureAwait(false);
 
 Console.WriteLine(operation.GetRawResponse().Status);
 ]]></code>
@@ -56,7 +56,7 @@ var data = new {
     name = "<name>",
 };
 
-var operation = await client.CreateProjectAsync(WaitUntil.Completed, RequestContent.Create(data));
+var operation = await client.CreateProjectAsync(WaitUntil.Completed, RequestContent.Create(data)).ConfigureAwait(false);
 
 Console.WriteLine(operation.GetRawResponse().Status);
 ]]></code>
@@ -98,12 +98,12 @@ This sample shows how to call UpdateProjectAsync with required parameters.
 var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new LroBasicTypeSpecClient(endpoint);
 
-var resource = new Project()
+var resource = new Project
 {
     Description = "<Description>",
     Name = "<Name>",
 };
-var operation = await client.UpdateProjectAsync(WaitUntil.Completed, "<id>", resource);
+var result = await client.UpdateProjectAsync(WaitUntil.Completed, "<id>", resource).ConfigureAwait(false);
 ]]></code>
 </example>
     </member>
@@ -114,7 +114,7 @@ This sample shows how to call UpdateProject with required parameters.
 var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new LroBasicTypeSpecClient(endpoint);
 
-var resource = new Project()
+var resource = new Project
 {
     Description = "<Description>",
     Name = "<Name>",
@@ -132,7 +132,7 @@ var client = new LroBasicTypeSpecClient(endpoint);
 
 var data = new {};
 
-var operation = await client.UpdateProjectAsync(WaitUntil.Completed, "<id>", RequestContent.Create(data));
+var operation = await client.UpdateProjectAsync(WaitUntil.Completed, "<id>", RequestContent.Create(data)).ConfigureAwait(false);
 
 BinaryData responseData = operation.Value;
 JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
@@ -148,7 +148,7 @@ var data = new {
     name = "<name>",
 };
 
-var operation = await client.UpdateProjectAsync(WaitUntil.Completed, "<id>", RequestContent.Create(data));
+var operation = await client.UpdateProjectAsync(WaitUntil.Completed, "<id>", RequestContent.Create(data)).ConfigureAwait(false);
 
 BinaryData responseData = operation.Value;
 JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
@@ -201,7 +201,7 @@ var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new LroBasicTypeSpecClient(endpoint);
 
 var thing = new Thing("<name>");
-var operation = await client.CreateThingAsync(WaitUntil.Completed, thing);
+var result = await client.CreateThingAsync(WaitUntil.Completed, thing).ConfigureAwait(false);
 ]]></code>
 </example>
     </member>
@@ -228,7 +228,7 @@ var data = new {
     name = "<name>",
 };
 
-var operation = await client.CreateThingAsync(WaitUntil.Completed, RequestContent.Create(data));
+var operation = await client.CreateThingAsync(WaitUntil.Completed, RequestContent.Create(data)).ConfigureAwait(false);
 
 BinaryData responseData = operation.Value;
 JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;

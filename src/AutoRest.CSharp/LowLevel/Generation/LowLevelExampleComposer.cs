@@ -552,12 +552,40 @@ namespace AutoRest.CSharp.Generation.Writers
                     : Array.Empty<MethodBodyStatement>();
             }
 
-            if (expectedJsonElementType is { IsFrameworkType: false, Implementation: SerializableObjectType objectType })
+            if (expectedJsonElementType is { IsFrameworkType: false, Implementation: {} implementation })
             {
-                return ComposeResponseParsing(jsonElement, objectType, allProperties, visitedTypes);
+                switch (implementation)
+                {
+                    case SerializableObjectType objectType: return ComposeResponseParsing(jsonElement, objectType, allProperties, visitedTypes); 
+                    case SystemObjectType objectType: return ComposeResponseParsing(jsonElement, objectType, allProperties, visitedTypes); 
+                }
             }
 
             return new[]{InvokeConsoleWriteLine(jsonElement.InvokeToString())};
+        }
+
+        private IReadOnlyList<MethodBodyStatement> ComposeResponseParsing(JsonElementExpression jsonElement, SystemObjectType systemObjectType, bool allProperties, HashSet<CSharpType> visitedTypes)
+        {
+            var propertiesToExplore = allProperties
+                ? systemObjectType.Properties
+                : systemObjectType.Properties.Where(p => p.IsRequired).ToArray();
+
+            var statements = new List<MethodBodyStatement>();
+            foreach (var property in propertiesToExplore)
+            {
+                var propertyType = property.ValueType;
+                if (property.SchemaProperty is null || visitedTypes.Contains(propertyType))
+                {
+                    continue;
+                }
+
+                var propertyName = property.SchemaProperty.SerializedName;
+                visitedTypes.Add(propertyType);
+                statements.AddRange(ComposeResponseParsing(jsonElement.GetProperty(propertyName), propertyType, allProperties, visitedTypes));
+                visitedTypes.Remove(propertyType);
+            }
+
+            return statements;
         }
 
         private IReadOnlyList<MethodBodyStatement> ComposeResponseParsing(JsonElementExpression jsonElement, SerializableObjectType model, bool allProperties, HashSet<CSharpType> visitedTypes)
@@ -659,14 +687,14 @@ namespace AutoRest.CSharp.Generation.Writers
                 {
                     return format is null
                         ? new MemberExpression(typeof(DateTimeOffset), nameof(DateTimeOffset.UtcNow))
-                        : Literal(TypeFormatters.ToString(new DateTimeOffset(2022, 05, 11, 10, 14, 57, 31, TimeSpan.FromHours(-4)), format));
+                        : Literal(TypeFormatters.ToString(new DateTimeOffset(2022, 05, 10, 10, 14, 57, 31, TimeSpan.FromHours(-4)), format));
                 }
 
                 if (type == typeof(DateTime))
                 {
                     return format is null
-                        ? new MemberExpression(typeof(DateTimeOffset), nameof(DateTime.UtcNow))
-                        : Literal(TypeFormatters.ToString(new DateTimeOffset(2022, 05, 11, 10, 14, 57, 31, TimeSpan.FromHours(-4)), format));
+                        ? new MemberExpression(typeof(DateTime), nameof(DateTime.UtcNow))
+                        : Literal(TypeFormatters.ToString(new DateTime(2022, 05, 10, 10, 14, 57, 31), format));
                 }
 
                 if (type == typeof(TimeSpan))
@@ -684,7 +712,7 @@ namespace AutoRest.CSharp.Generation.Writers
                 if (type == typeof(Guid))
                 {
                     return serializationFormat.HasValue
-                        ? Literal(Guid.NewGuid().ToString())
+                        ? Literal("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a")
                         : new InvokeStaticMethodExpression(typeof(Guid), nameof(Guid.NewGuid));
                 }
 
@@ -694,7 +722,7 @@ namespace AutoRest.CSharp.Generation.Writers
                         ? Literal("http://localhost:3000")
                         : New.Uri("http://localhost:3000");
                 }
-
+                
                 if (type == typeof(WaitUntil))
                 {
                     // use `Completed`, since we will not generate `operation.WaitForCompletion()` afterwards
@@ -779,8 +807,12 @@ namespace AutoRest.CSharp.Generation.Writers
             JsonArraySerialization array => ComposeProtocolArrayCSharpType(allProperties, array, visitedModels),
             JsonDictionarySerialization dictionary => ComposeProtocolDictionaryInstance(allProperties, dictionary, visitedModels),
             JsonValueSerialization { Type.IsFrameworkType: true } value => MockParameterTypeValue(propertyDescription, value.Type, value.Format),
-            JsonValueSerialization { Type.IsFrameworkType: false, Type.Implementation: SerializableObjectType model } => ComposeAnonymousObjectType(GetMostConcreteModel(model), allProperties, visitedModels),
-            JsonValueSerialization { Type.IsFrameworkType: false, Type.Implementation: EnumType enumType } => new ConstantExpression(enumType.Values.First().Value),
+            JsonValueSerialization { Type: {IsFrameworkType: false} type }  => type.Implementation switch
+            {
+                SerializableObjectType model => ComposeAnonymousObjectType(GetMostConcreteModel(model), allProperties, visitedModels),
+                EnumType enumType => new ConstantExpression(enumType.Values.First().Value),
+                _ => Null
+            },
             _ => Null
         };
 

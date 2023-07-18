@@ -6,13 +6,9 @@
 #nullable disable
 
 using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Text.Json;
 using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
-using Azure.Identity;
 using MultipleMediaTypes.Models;
 using NUnit.Framework;
 
@@ -27,7 +23,7 @@ namespace MultipleMediaTypes.Samples
             var endpoint = new Uri("<https://my-service.azure.com>");
             var client = new MultipleMediaTypesClient(endpoint);
 
-            var data = new { };
+            var data = BinaryData.FromString("<your binary data content>");
 
             Response response = client.OneBinaryBodyTwoContentTypes(RequestContent.Create(data), ContentType.ApplicationOctetStream);
             Console.WriteLine(response.Status);
@@ -40,7 +36,7 @@ namespace MultipleMediaTypes.Samples
             var endpoint = new Uri("<https://my-service.azure.com>");
             var client = new MultipleMediaTypesClient(endpoint);
 
-            var data = new { };
+            var data = BinaryData.FromString("<your binary data content>");
 
             Response response = client.OneBinaryBodyTwoContentTypes(RequestContent.Create(data), ContentType.ApplicationOctetStream);
             Console.WriteLine(response.Status);
@@ -53,9 +49,9 @@ namespace MultipleMediaTypes.Samples
             var endpoint = new Uri("<https://my-service.azure.com>");
             var client = new MultipleMediaTypesClient(endpoint);
 
-            var data = new { };
+            var data = BinaryData.FromString("<your binary data content>");
 
-            Response response = await client.OneBinaryBodyTwoContentTypesAsync(RequestContent.Create(data), ContentType.ApplicationOctetStream);
+            Response response = await client.OneBinaryBodyTwoContentTypesAsync(RequestContent.Create(data), ContentType.ApplicationOctetStream).ConfigureAwait(false);
             Console.WriteLine(response.Status);
         }
 
@@ -66,9 +62,9 @@ namespace MultipleMediaTypes.Samples
             var endpoint = new Uri("<https://my-service.azure.com>");
             var client = new MultipleMediaTypesClient(endpoint);
 
-            var data = new { };
+            var data = BinaryData.FromString("<your binary data content>");
 
-            Response response = await client.OneBinaryBodyTwoContentTypesAsync(RequestContent.Create(data), ContentType.ApplicationOctetStream);
+            Response response = await client.OneBinaryBodyTwoContentTypesAsync(RequestContent.Create(data), ContentType.ApplicationOctetStream).ConfigureAwait(false);
             Console.WriteLine(response.Status);
         }
 
@@ -80,7 +76,7 @@ namespace MultipleMediaTypes.Samples
             var client = new MultipleMediaTypesClient(endpoint);
 
             var body = BinaryData.FromString("<your binary data content>");
-            var result = await client.OneBinaryBodyTwoContentTypesAsync(body, ContentType.ApplicationOctetStream);
+            var result = await client.OneBinaryBodyTwoContentTypesAsync(body, ContentType.ApplicationOctetStream).ConfigureAwait(false);
         }
 
         [Test]
@@ -118,7 +114,7 @@ namespace MultipleMediaTypes.Samples
 
             var data = "<String>";
 
-            Response response = await client.OneStringBodyThreeContentTypesAsync(RequestContent.Create(data), ContentType.ApplicationOctetStream);
+            Response response = await client.OneStringBodyThreeContentTypesAsync(RequestContent.Create(data), ContentType.ApplicationOctetStream).ConfigureAwait(false);
             Console.WriteLine(response.Status);
         }
 
@@ -131,7 +127,7 @@ namespace MultipleMediaTypes.Samples
 
             var data = "<String>";
 
-            Response response = await client.OneStringBodyThreeContentTypesAsync(RequestContent.Create(data), ContentType.ApplicationOctetStream);
+            Response response = await client.OneStringBodyThreeContentTypesAsync(RequestContent.Create(data), ContentType.ApplicationOctetStream).ConfigureAwait(false);
             Console.WriteLine(response.Status);
         }
 
@@ -190,7 +186,7 @@ namespace MultipleMediaTypes.Samples
                 id = "<id>",
             };
 
-            Response response = await client.OneModelBodyOneContentTypeAsync(RequestContent.Create(data));
+            Response response = await client.OneModelBodyOneContentTypeAsync(RequestContent.Create(data)).ConfigureAwait(false);
             Console.WriteLine(response.Status);
         }
 
@@ -206,7 +202,7 @@ namespace MultipleMediaTypes.Samples
                 id = "<id>",
             };
 
-            Response response = await client.OneModelBodyOneContentTypeAsync(RequestContent.Create(data));
+            Response response = await client.OneModelBodyOneContentTypeAsync(RequestContent.Create(data)).ConfigureAwait(false);
             Console.WriteLine(response.Status);
         }
 
@@ -218,7 +214,7 @@ namespace MultipleMediaTypes.Samples
             var client = new MultipleMediaTypesClient(endpoint);
 
             var body = new Body("<id>");
-            var result = await client.OneModelBodyOneContentTypeAsync(body);
+            var result = await client.OneModelBodyOneContentTypeAsync(body).ConfigureAwait(false);
         }
     }
 }
