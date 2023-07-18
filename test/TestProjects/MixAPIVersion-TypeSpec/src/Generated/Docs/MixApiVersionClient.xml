@@ -8,7 +8,7 @@ This sample shows how to call DeleteAsync with required parameters.
 var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new MixApiVersionClient(endpoint);
 
-Response response = await client.DeleteAsync("<name>");
+Response response = await client.DeleteAsync("<name>").ConfigureAwait(false);
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
@@ -32,7 +32,7 @@ This sample shows how to call ReadAsync with required parameters and parse the r
 var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new MixApiVersionClient(endpoint);
 
-Response response = await client.ReadAsync(1234, new RequestContext());
+Response response = await client.ReadAsync(1234, new RequestContext()).ConfigureAwait(false);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("name").ToString());
@@ -68,7 +68,7 @@ var data = new {
     age = 1234,
 };
 
-Response response = await client.CreateAsync(RequestContent.Create(data));
+Response response = await client.CreateAsync(RequestContent.Create(data)).ConfigureAwait(false);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("name").ToString());
@@ -84,7 +84,7 @@ var data = new {
     age = 1234,
 };
 
-Response response = await client.CreateAsync(RequestContent.Create(data));
+Response response = await client.CreateAsync(RequestContent.Create(data)).ConfigureAwait(false);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("name").ToString());

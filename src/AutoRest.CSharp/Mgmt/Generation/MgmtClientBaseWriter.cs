@@ -815,7 +815,17 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
                 _writer.Append($"{diagnosticsVariableName}, {pipelineVariableName}, {GetRestClientName(operation)}.Create{operation.MethodName}Request(");
                 WriteArguments(_writer, parameterMapping.Where(p => p.Parameter != KnownParameters.CancellationTokenParameter));
-                _writer.Append($").Request, response, {typeof(OperationFinalStateVia)}.{operation.FinalStateVia!}");
+                _writer.Append($").Request, response, {typeof(OperationFinalStateVia)}.{operation.FinalStateVia!},");
+
+                if (Configuration.MgmtConfiguration.OperationsToSkipLroApiVersionOverride.Contains(operation.OperationId))
+                {
+                    _writer.AppendRaw("skipApiVersionOverride: true,");
+                }
+
+                if (Configuration.MgmtConfiguration.OperationsToLroApiVersionOverride.TryGetValue(operation.OperationId, out var apiVersionOverrideValue))
+                {
+                    _writer.Append($"apiVersionOverrideValue: {apiVersionOverrideValue:L}");
+                }
             }
             _writer.RemoveTrailingComma();
             _writer.Line($");");

@@ -6,13 +6,10 @@
 #nullable disable
 
 using System;
-using System.Collections.Generic;
-using System.IO;
 using System.Text.Json;
 using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
-using Azure.Identity;
 using NUnit.Framework;
 
 namespace MixApiVersion.Samples
@@ -48,7 +45,7 @@ namespace MixApiVersion.Samples
             var endpoint = new Uri("<https://my-service.azure.com>");
             var client = new MixApiVersionClient(endpoint);
 
-            Response response = await client.DeleteAsync("<name>");
+            Response response = await client.DeleteAsync("<name>").ConfigureAwait(false);
             Console.WriteLine(response.Status);
         }
 
@@ -59,7 +56,7 @@ namespace MixApiVersion.Samples
             var endpoint = new Uri("<https://my-service.azure.com>");
             var client = new MixApiVersionClient(endpoint);
 
-            Response response = await client.DeleteAsync("<name>");
+            Response response = await client.DeleteAsync("<name>").ConfigureAwait(false);
             Console.WriteLine(response.Status);
         }
 
@@ -99,7 +96,7 @@ namespace MixApiVersion.Samples
             var endpoint = new Uri("<https://my-service.azure.com>");
             var client = new MixApiVersionClient(endpoint);
 
-            Response response = await client.ReadAsync(1234, new RequestContext());
+            Response response = await client.ReadAsync(1234, new RequestContext()).ConfigureAwait(false);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("name").ToString());
@@ -113,7 +110,7 @@ namespace MixApiVersion.Samples
             var endpoint = new Uri("<https://my-service.azure.com>");
             var client = new MixApiVersionClient(endpoint);
 
-            Response response = await client.ReadAsync(1234, new RequestContext());
+            Response response = await client.ReadAsync(1234, new RequestContext()).ConfigureAwait(false);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("name").ToString());
@@ -173,7 +170,7 @@ namespace MixApiVersion.Samples
                 age = 1234,
             };
 
-            Response response = await client.CreateAsync(RequestContent.Create(data));
+            Response response = await client.CreateAsync(RequestContent.Create(data)).ConfigureAwait(false);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("name").ToString());
@@ -193,7 +190,7 @@ namespace MixApiVersion.Samples
                 age = 1234,
             };
 
-            Response response = await client.CreateAsync(RequestContent.Create(data));
+            Response response = await client.CreateAsync(RequestContent.Create(data)).ConfigureAwait(false);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("name").ToString());
