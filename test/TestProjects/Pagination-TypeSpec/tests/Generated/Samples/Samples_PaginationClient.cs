@@ -6,15 +6,11 @@
 #nullable disable
 
 using System;
-using System.Collections.Generic;
-using System.IO;
 using System.Text.Json;
 using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
-using Azure.Identity;
 using NUnit.Framework;
-using Pagination;
 using Pagination.Models;
 
 namespace Pagination.Samples
@@ -25,7 +21,7 @@ namespace Pagination.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_GetPaginationLedgerEntries()
         {
-            var credential = new DefaultAzureCredential();
+            var credential = new Azure.Identity.DefaultAzureCredential();
             var endpoint = new Uri("<https://my-service.azure.com>");
             var client = new PaginationClient(endpoint, credential);
 
@@ -48,7 +44,7 @@ namespace Pagination.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_GetPaginationLedgerEntries_AllParameters()
         {
-            var credential = new DefaultAzureCredential();
+            var credential = new Azure.Identity.DefaultAzureCredential();
             var endpoint = new Uri("<https://my-service.azure.com>");
             var client = new PaginationClient(endpoint, credential);
 
@@ -71,7 +67,7 @@ namespace Pagination.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_GetPaginationLedgerEntries_Async()
         {
-            var credential = new DefaultAzureCredential();
+            var credential = new Azure.Identity.DefaultAzureCredential();
             var endpoint = new Uri("<https://my-service.azure.com>");
             var client = new PaginationClient(endpoint, credential);
 
@@ -94,7 +90,7 @@ namespace Pagination.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_GetPaginationLedgerEntries_AllParameters_Async()
         {
-            var credential = new DefaultAzureCredential();
+            var credential = new Azure.Identity.DefaultAzureCredential();
             var endpoint = new Uri("<https://my-service.azure.com>");
             var client = new PaginationClient(endpoint, credential);
 
@@ -117,7 +113,7 @@ namespace Pagination.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_GetPaginationLedgerEntries_Convenience_Async()
         {
-            var credential = new DefaultAzureCredential();
+            var credential = new Azure.Identity.DefaultAzureCredential();
             var endpoint = new Uri("<https://my-service.azure.com>");
             var client = new PaginationClient(endpoint, credential);
 
@@ -131,7 +127,7 @@ namespace Pagination.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_GetMetricDimensionValues()
         {
-            var credential = new DefaultAzureCredential();
+            var credential = new Azure.Identity.DefaultAzureCredential();
             var endpoint = new Uri("<https://my-service.azure.com>");
             var client = new PaginationClient(endpoint, credential);
 
@@ -146,7 +142,7 @@ namespace Pagination.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_GetMetricDimensionValues_AllParameters()
         {
-            var credential = new DefaultAzureCredential();
+            var credential = new Azure.Identity.DefaultAzureCredential();
             var endpoint = new Uri("<https://my-service.azure.com>");
             var client = new PaginationClient(endpoint, credential);
 
@@ -161,7 +157,7 @@ namespace Pagination.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_GetMetricDimensionValues_Async()
         {
-            var credential = new DefaultAzureCredential();
+            var credential = new Azure.Identity.DefaultAzureCredential();
             var endpoint = new Uri("<https://my-service.azure.com>");
             var client = new PaginationClient(endpoint, credential);
 
@@ -176,7 +172,7 @@ namespace Pagination.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_GetMetricDimensionValues_AllParameters_Async()
         {
-            var credential = new DefaultAzureCredential();
+            var credential = new Azure.Identity.DefaultAzureCredential();
             var endpoint = new Uri("<https://my-service.azure.com>");
             var client = new PaginationClient(endpoint, credential);
 
@@ -191,7 +187,7 @@ namespace Pagination.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_GetMetricDimensionValues_Convenience_Async()
         {
-            var credential = new DefaultAzureCredential();
+            var credential = new Azure.Identity.DefaultAzureCredential();
             var endpoint = new Uri("<https://my-service.azure.com>");
             var client = new PaginationClient(endpoint, credential);
 
@@ -204,7 +200,7 @@ namespace Pagination.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_GetLedgerEntries()
         {
-            var credential = new DefaultAzureCredential();
+            var credential = new Azure.Identity.DefaultAzureCredential();
             var endpoint = new Uri("<https://my-service.azure.com>");
             var client = new PaginationClient(endpoint, credential);
 
@@ -221,7 +217,7 @@ namespace Pagination.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_GetLedgerEntries_AllParameters()
         {
-            var credential = new DefaultAzureCredential();
+            var credential = new Azure.Identity.DefaultAzureCredential();
             var endpoint = new Uri("<https://my-service.azure.com>");
             var client = new PaginationClient(endpoint, credential);
 
@@ -238,7 +234,7 @@ namespace Pagination.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_GetLedgerEntries_Async()
         {
-            var credential = new DefaultAzureCredential();
+            var credential = new Azure.Identity.DefaultAzureCredential();
             var endpoint = new Uri("<https://my-service.azure.com>");
             var client = new PaginationClient(endpoint, credential);
 
@@ -255,7 +251,7 @@ namespace Pagination.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_GetLedgerEntries_AllParameters_Async()
         {
-            var credential = new DefaultAzureCredential();
+            var credential = new Azure.Identity.DefaultAzureCredential();
             var endpoint = new Uri("<https://my-service.azure.com>");
             var client = new PaginationClient(endpoint, credential);
 
@@ -272,7 +268,7 @@ namespace Pagination.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_GetLedgerEntries_Convenience_Async()
         {
-            var credential = new DefaultAzureCredential();
+            var credential = new Azure.Identity.DefaultAzureCredential();
             var endpoint = new Uri("<https://my-service.azure.com>");
             var client = new PaginationClient(endpoint, credential);
 
@@ -285,7 +281,7 @@ namespace Pagination.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_GetTextBlocklists()
         {
-            var credential = new DefaultAzureCredential();
+            var credential = new Azure.Identity.DefaultAzureCredential();
             var endpoint = new Uri("<https://my-service.azure.com>");
             var client = new PaginationClient(endpoint, credential);
 
@@ -300,7 +296,7 @@ namespace Pagination.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_GetTextBlocklists_AllParameters()
         {
-            var credential = new DefaultAzureCredential();
+            var credential = new Azure.Identity.DefaultAzureCredential();
             var endpoint = new Uri("<https://my-service.azure.com>");
             var client = new PaginationClient(endpoint, credential);
 
@@ -316,7 +312,7 @@ namespace Pagination.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_GetTextBlocklists_Async()
         {
-            var credential = new DefaultAzureCredential();
+            var credential = new Azure.Identity.DefaultAzureCredential();
             var endpoint = new Uri("<https://my-service.azure.com>");
             var client = new PaginationClient(endpoint, credential);
 
@@ -331,7 +327,7 @@ namespace Pagination.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_GetTextBlocklists_AllParameters_Async()
         {
-            var credential = new DefaultAzureCredential();
+            var credential = new Azure.Identity.DefaultAzureCredential();
             var endpoint = new Uri("<https://my-service.azure.com>");
             var client = new PaginationClient(endpoint, credential);
 
@@ -347,7 +343,7 @@ namespace Pagination.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_GetTextBlocklists_Convenience_Async()
         {
-            var credential = new DefaultAzureCredential();
+            var credential = new Azure.Identity.DefaultAzureCredential();
             var endpoint = new Uri("<https://my-service.azure.com>");
             var client = new PaginationClient(endpoint, credential);
 
@@ -360,7 +356,7 @@ namespace Pagination.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_GetTextBlocklistItems()
         {
-            var credential = new DefaultAzureCredential();
+            var credential = new Azure.Identity.DefaultAzureCredential();
             var endpoint = new Uri("<https://my-service.azure.com>");
             var client = new PaginationClient(endpoint, credential);
 
@@ -376,7 +372,7 @@ namespace Pagination.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_GetTextBlocklistItems_AllParameters()
         {
-            var credential = new DefaultAzureCredential();
+            var credential = new Azure.Identity.DefaultAzureCredential();
             var endpoint = new Uri("<https://my-service.azure.com>");
             var client = new PaginationClient(endpoint, credential);
 
@@ -393,7 +389,7 @@ namespace Pagination.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_GetTextBlocklistItems_Async()
         {
-            var credential = new DefaultAzureCredential();
+            var credential = new Azure.Identity.DefaultAzureCredential();
             var endpoint = new Uri("<https://my-service.azure.com>");
             var client = new PaginationClient(endpoint, credential);
 
@@ -409,7 +405,7 @@ namespace Pagination.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_GetTextBlocklistItems_AllParameters_Async()
         {
-            var credential = new DefaultAzureCredential();
+            var credential = new Azure.Identity.DefaultAzureCredential();
             var endpoint = new Uri("<https://my-service.azure.com>");
             var client = new PaginationClient(endpoint, credential);
 
@@ -426,7 +422,7 @@ namespace Pagination.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_GetTextBlocklistItems_Convenience_Async()
         {
-            var credential = new DefaultAzureCredential();
+            var credential = new Azure.Identity.DefaultAzureCredential();
             var endpoint = new Uri("<https://my-service.azure.com>");
             var client = new PaginationClient(endpoint, credential);
 

@@ -121,7 +121,7 @@ namespace AutoRest.CSharp.Output.Models
                 if (parameters.Arguments.TryGetValue(protocolParameter, out var argument))
                 {
                     createRequestArguments.Add(argument);
-                    if (protocolParameter == KnownParameters.RequestContext)
+                    if (protocolParameter.Type.EqualsIgnoreNullable(KnownParameters.RequestContext.Type))
                     {
                         requestContextVariable = argument;
                     }
