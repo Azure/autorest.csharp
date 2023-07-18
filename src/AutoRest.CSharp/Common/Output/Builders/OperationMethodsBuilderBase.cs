@@ -20,12 +20,15 @@ using AutoRest.CSharp.Output.Models.Requests;
 using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Utilities;
 using Azure.Core;
+using Azure.Core.Pipeline;
 using static AutoRest.CSharp.Common.Output.Models.Snippets;
 
 namespace AutoRest.CSharp.Output.Models
 {
     internal abstract class OperationMethodsBuilderBase
     {
+        private static readonly int[] RedirectResponseCodes = { 300, 301, 302, 303, 307, 308 };
+
         private readonly ClientFields _fields;
         private readonly string _clientName;
         private readonly string _clientNamespace;
@@ -255,6 +258,7 @@ namespace AutoRest.CSharp.Output.Models
             {
                 new ParameterValidationBlock(signature.Parameters, IsLegacy: !Configuration.AzureArm),
                 UsingVar("message", invokeCreateRequestMethod, out var message),
+                EnableHttpRedirectIfSupported(message),
                 PipelineField.Send(message, new CancellationTokenExpression(KnownParameters.CancellationTokenParameter), async),
                 statusCodeSwitchBuilder.Build(message, async)
             };
@@ -276,6 +280,11 @@ namespace AutoRest.CSharp.Output.Models
         protected abstract MethodBodyStatement CreateProtocolMethodBody(MethodSignatureBase createMessageSignature, MethodSignature? createNextPageMessageSignature, bool async);
 
         protected abstract MethodBodyStatement CreateConvenienceMethodBody(string methodName, RestClientMethodParameters parameters, MethodSignature? createNextPageMessageSignature, bool async);
+
+        protected MethodBodyStatement EnableHttpRedirectIfSupported(HttpMessageExpression message)
+            => Operation.Responses.Any(r => RedirectResponseCodes.Any(r.StatusCodes.Contains))
+                ? new InvokeStaticMethodStatement(typeof(RedirectPolicy), nameof(RedirectPolicy.SetAllowAutoRedirect), message, True)
+                : new MethodBodyStatement();
 
         protected MethodBodyStatement WrapInDiagnosticScope(string methodName, params MethodBodyStatement[] statements)
             => new DiagnosticScopeMethodBodyBlock(new Diagnostic($"{_clientName}.{methodName}"), _fields.ClientDiagnosticsProperty, statements);

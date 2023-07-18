@@ -43,7 +43,7 @@ namespace constants
         }
 
         /// <summary> Puts constants to the testserver. </summary>
-        /// <param name="input"> The NoModelAsStringNoRequiredTwoValueNoDefaultOpEnum to use. </param>
+        /// <param name="input"> The NoModelAsStringNoRequiredTwoValueNoDefaultOpEnum? to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response> PutNoModelAsStringNoRequiredTwoValueNoDefaultAsync(NoModelAsStringNoRequiredTwoValueNoDefaultOpEnum? input = null, CancellationToken cancellationToken = default)
         {
@@ -61,7 +61,7 @@ namespace constants
         }
 
         /// <summary> Puts constants to the testserver. </summary>
-        /// <param name="input"> The NoModelAsStringNoRequiredTwoValueNoDefaultOpEnum to use. </param>
+        /// <param name="input"> The NoModelAsStringNoRequiredTwoValueNoDefaultOpEnum? to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response PutNoModelAsStringNoRequiredTwoValueNoDefault(NoModelAsStringNoRequiredTwoValueNoDefaultOpEnum? input = null, CancellationToken cancellationToken = default)
         {
@@ -79,7 +79,7 @@ namespace constants
         }
 
         /// <summary> Puts constants to the testserver. </summary>
-        /// <param name="input"> The NoModelAsStringNoRequiredTwoValueDefaultOpEnum to use. The default value is AutoRest.CSharp.Output.Models.Types.EnumTypeValue. </param>
+        /// <param name="input"> The NoModelAsStringNoRequiredTwoValueDefaultOpEnum? to use. The default value is AutoRest.CSharp.Output.Models.Types.EnumTypeValue. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual async Task<Response> PutNoModelAsStringNoRequiredTwoValueDefaultAsync(NoModelAsStringNoRequiredTwoValueDefaultOpEnum? input = null, CancellationToken cancellationToken = default)
         {
@@ -97,7 +97,7 @@ namespace constants
         }
 
         /// <summary> Puts constants to the testserver. </summary>
-        /// <param name="input"> The NoModelAsStringNoRequiredTwoValueDefaultOpEnum to use. The default value is AutoRest.CSharp.Output.Models.Types.EnumTypeValue. </param>
+        /// <param name="input"> The NoModelAsStringNoRequiredTwoValueDefaultOpEnum? to use. The default value is AutoRest.CSharp.Output.Models.Types.EnumTypeValue. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public virtual Response PutNoModelAsStringNoRequiredTwoValueDefault(NoModelAsStringNoRequiredTwoValueDefaultOpEnum? input = null, CancellationToken cancellationToken = default)
         {

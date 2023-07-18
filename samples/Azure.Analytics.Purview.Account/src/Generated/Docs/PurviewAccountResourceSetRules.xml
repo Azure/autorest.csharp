@@ -222,7 +222,7 @@ var client = new PurviewAccountsClient(endpoint, credential).GetResourceSetRules
 
 var data = new {
     advancedResourceSet = new {
-        modifiedAt = "2022-05-11T14:14:57.0310000Z",
+        modifiedAt = "2022-05-10T14:14:57.0310000Z",
         resourceSetProcessing = "Default",
     },
     pathPatternConfig = new {
@@ -425,7 +425,7 @@ var client = new PurviewAccountsClient(endpoint, credential).GetResourceSetRules
 
 var data = new {
     advancedResourceSet = new {
-        modifiedAt = "2022-05-11T14:14:57.0310000Z",
+        modifiedAt = "2022-05-10T14:14:57.0310000Z",
         resourceSetProcessing = "Default",
     },
     pathPatternConfig = new {

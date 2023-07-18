@@ -53,7 +53,7 @@ namespace ModelsTypeSpec.Samples
             var endpoint = new Uri("<https://my-service.azure.com>");
             var client = new ModelsTypeSpecClient(endpoint);
 
-            Response response = await client.GetOutputDiscriminatorModelAsync(new RequestContext());
+            Response response = await client.GetOutputDiscriminatorModelAsync(new RequestContext()).ConfigureAwait(false);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("kind").ToString());
@@ -66,7 +66,7 @@ namespace ModelsTypeSpec.Samples
             var endpoint = new Uri("<https://my-service.azure.com>");
             var client = new ModelsTypeSpecClient(endpoint);
 
-            Response response = await client.GetOutputDiscriminatorModelAsync(new RequestContext());
+            Response response = await client.GetOutputDiscriminatorModelAsync(new RequestContext()).ConfigureAwait(false);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("kind").ToString());
@@ -79,7 +79,7 @@ namespace ModelsTypeSpec.Samples
             var endpoint = new Uri("<https://my-service.azure.com>");
             var client = new ModelsTypeSpecClient(endpoint);
 
-            var result = await client.GetOutputDiscriminatorModelAsync();
+            var result = await client.GetOutputDiscriminatorModelAsync().ConfigureAwait(false);
         }
 
         [Test]

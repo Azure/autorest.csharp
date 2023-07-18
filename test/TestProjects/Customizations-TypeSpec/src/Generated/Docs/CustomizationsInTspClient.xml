@@ -43,7 +43,7 @@ var input = new RootModel()
     },
     PropertyToMoveToCustomization = NormalEnum.A,
 };
-var result = await client.RoundTripAsync(input);
+var result = await client.RoundTripAsync(input).ConfigureAwait(false);
 ]]></code>
 </example>
     </member>

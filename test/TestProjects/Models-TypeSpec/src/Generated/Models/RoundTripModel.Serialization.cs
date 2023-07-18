@@ -62,11 +62,19 @@ namespace ModelsTypeSpec.Models
             }
             writer.WriteEndObject();
             writer.WritePropertyName("requiredBytes"u8);
-            writer.WriteBase64StringValue(RequiredBytes.ToArray(), "D");
+#if NET6_0_OR_GREATER
+				writer.WriteRawValue(RequiredBytes);
+#else
+            JsonSerializer.Serialize(writer, JsonDocument.Parse(RequiredBytes.ToString()).RootElement);
+#endif
             if (Optional.IsDefined(OptionalBytes))
             {
                 writer.WritePropertyName("optionalBytes"u8);
-                writer.WriteBase64StringValue(OptionalBytes.ToArray(), "D");
+#if NET6_0_OR_GREATER
+				writer.WriteRawValue(OptionalBytes);
+#else
+                JsonSerializer.Serialize(writer, JsonDocument.Parse(OptionalBytes.ToString()).RootElement);
+#endif
             }
             writer.WritePropertyName("requiredUint8Array"u8);
             writer.WriteStartArray();
@@ -218,7 +226,7 @@ namespace ModelsTypeSpec.Models
                 }
                 if (property.NameEquals("requiredBytes"u8))
                 {
-                    requiredBytes = BinaryData.FromBytes(property.Value.GetBytesFromBase64("D"));
+                    requiredBytes = BinaryData.FromString(property.Value.GetRawText());
                     continue;
                 }
                 if (property.NameEquals("optionalBytes"u8))
@@ -227,7 +235,7 @@ namespace ModelsTypeSpec.Models
                     {
                         continue;
                     }
-                    optionalBytes = BinaryData.FromBytes(property.Value.GetBytesFromBase64("D"));
+                    optionalBytes = BinaryData.FromString(property.Value.GetRawText());
                     continue;
                 }
                 if (property.NameEquals("requiredUint8Array"u8))

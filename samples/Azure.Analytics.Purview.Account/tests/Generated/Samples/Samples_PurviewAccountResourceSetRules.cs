@@ -267,7 +267,7 @@ namespace Azure.Analytics.Purview.Account.Samples
             {
                 advancedResourceSet = new
                 {
-                    modifiedAt = "2022-05-11T14:14:57.0310000Z",
+                    modifiedAt = "2022-05-10T14:14:57.0310000Z",
                     resourceSetProcessing = "Default",
                 },
                 pathPatternConfig = new
@@ -475,7 +475,7 @@ namespace Azure.Analytics.Purview.Account.Samples
             {
                 advancedResourceSet = new
                 {
-                    modifiedAt = "2022-05-11T14:14:57.0310000Z",
+                    modifiedAt = "2022-05-10T14:14:57.0310000Z",
                     resourceSetProcessing = "Default",
                 },
                 pathPatternConfig = new

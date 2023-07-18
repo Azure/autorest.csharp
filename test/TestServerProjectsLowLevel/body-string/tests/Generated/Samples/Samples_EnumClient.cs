@@ -6,13 +6,10 @@
 #nullable disable
 
 using System;
-using System.Collections.Generic;
-using System.IO;
 using System.Text.Json;
 using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
-using Azure.Identity;
 using NUnit.Framework;
 
 namespace body_string_LowLevel.Samples
@@ -52,7 +49,7 @@ namespace body_string_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new EnumClient(credential);
 
-            Response response = await client.GetNotExpandableAsync(new RequestContext());
+            Response response = await client.GetNotExpandableAsync(new RequestContext()).ConfigureAwait(false);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());
@@ -65,7 +62,7 @@ namespace body_string_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new EnumClient(credential);
 
-            Response response = await client.GetNotExpandableAsync(new RequestContext());
+            Response response = await client.GetNotExpandableAsync(new RequestContext()).ConfigureAwait(false);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());
@@ -106,7 +103,7 @@ namespace body_string_LowLevel.Samples
 
             var data = "red color";
 
-            Response response = await client.PutNotExpandableAsync(RequestContent.Create(data));
+            Response response = await client.PutNotExpandableAsync(RequestContent.Create(data)).ConfigureAwait(false);
             Console.WriteLine(response.Status);
         }
 
@@ -119,7 +116,7 @@ namespace body_string_LowLevel.Samples
 
             var data = "red color";
 
-            Response response = await client.PutNotExpandableAsync(RequestContent.Create(data));
+            Response response = await client.PutNotExpandableAsync(RequestContent.Create(data)).ConfigureAwait(false);
             Console.WriteLine(response.Status);
         }
 
@@ -156,7 +153,7 @@ namespace body_string_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new EnumClient(credential);
 
-            Response response = await client.GetReferencedAsync(new RequestContext());
+            Response response = await client.GetReferencedAsync(new RequestContext()).ConfigureAwait(false);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());
@@ -169,7 +166,7 @@ namespace body_string_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new EnumClient(credential);
 
-            Response response = await client.GetReferencedAsync(new RequestContext());
+            Response response = await client.GetReferencedAsync(new RequestContext()).ConfigureAwait(false);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());
@@ -210,7 +207,7 @@ namespace body_string_LowLevel.Samples
 
             var data = "red color";
 
-            Response response = await client.PutReferencedAsync(RequestContent.Create(data));
+            Response response = await client.PutReferencedAsync(RequestContent.Create(data)).ConfigureAwait(false);
             Console.WriteLine(response.Status);
         }
 
@@ -223,7 +220,7 @@ namespace body_string_LowLevel.Samples
 
             var data = "red color";
 
-            Response response = await client.PutReferencedAsync(RequestContent.Create(data));
+            Response response = await client.PutReferencedAsync(RequestContent.Create(data)).ConfigureAwait(false);
             Console.WriteLine(response.Status);
         }
 
@@ -261,7 +258,7 @@ namespace body_string_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new EnumClient(credential);
 
-            Response response = await client.GetReferencedConstantAsync(new RequestContext());
+            Response response = await client.GetReferencedConstantAsync(new RequestContext()).ConfigureAwait(false);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("ColorConstant").ToString());
@@ -274,7 +271,7 @@ namespace body_string_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new EnumClient(credential);
 
-            Response response = await client.GetReferencedConstantAsync(new RequestContext());
+            Response response = await client.GetReferencedConstantAsync(new RequestContext()).ConfigureAwait(false);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("ColorConstant").ToString());

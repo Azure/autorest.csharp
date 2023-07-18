@@ -781,8 +781,8 @@ namespace body_complex_LowLevel.Samples
 
             var data = new
             {
-                field = "2022-05-11",
-                leap = "2022-05-11",
+                field = "2022-05-10",
+                leap = "2022-05-10",
             };
 
             Response response = client.PutDate(RequestContent.Create(data));
@@ -811,8 +811,8 @@ namespace body_complex_LowLevel.Samples
 
             var data = new
             {
-                field = "2022-05-11",
-                leap = "2022-05-11",
+                field = "2022-05-10",
+                leap = "2022-05-10",
             };
 
             Response response = await client.PutDateAsync(RequestContent.Create(data)).ConfigureAwait(false);
@@ -895,8 +895,8 @@ namespace body_complex_LowLevel.Samples
 
             var data = new
             {
-                field = "2022-05-11T14:14:57.0310000Z",
-                now = "2022-05-11T14:14:57.0310000Z",
+                field = "2022-05-10T14:14:57.0310000Z",
+                now = "2022-05-10T14:14:57.0310000Z",
             };
 
             Response response = client.PutDateTime(RequestContent.Create(data));
@@ -925,8 +925,8 @@ namespace body_complex_LowLevel.Samples
 
             var data = new
             {
-                field = "2022-05-11T14:14:57.0310000Z",
-                now = "2022-05-11T14:14:57.0310000Z",
+                field = "2022-05-10T14:14:57.0310000Z",
+                now = "2022-05-10T14:14:57.0310000Z",
             };
 
             Response response = await client.PutDateTimeAsync(RequestContent.Create(data)).ConfigureAwait(false);
@@ -1009,8 +1009,8 @@ namespace body_complex_LowLevel.Samples
 
             var data = new
             {
-                field = "Wed, 11 May 2022 14:14:57 GMT",
-                now = "Wed, 11 May 2022 14:14:57 GMT",
+                field = "Tue, 10 May 2022 14:14:57 GMT",
+                now = "Tue, 10 May 2022 14:14:57 GMT",
             };
 
             Response response = client.PutDateTimeRfc1123(RequestContent.Create(data));
@@ -1039,8 +1039,8 @@ namespace body_complex_LowLevel.Samples
 
             var data = new
             {
-                field = "Wed, 11 May 2022 14:14:57 GMT",
-                now = "Wed, 11 May 2022 14:14:57 GMT",
+                field = "Tue, 10 May 2022 14:14:57 GMT",
+                now = "Tue, 10 May 2022 14:14:57 GMT",
             };
 
             Response response = await client.PutDateTimeRfc1123Async(RequestContent.Create(data)).ConfigureAwait(false);

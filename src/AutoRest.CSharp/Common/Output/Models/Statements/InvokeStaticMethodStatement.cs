@@ -12,6 +12,7 @@ namespace AutoRest.CSharp.Common.Output.Models.Statements
     {
         public InvokeStaticMethodStatement(CSharpType? methodType, string methodName) : this(methodType, methodName, Array.Empty<ValueExpression>()) {}
         public InvokeStaticMethodStatement(CSharpType? methodType, string methodName, ValueExpression arg) : this(methodType, methodName, new[]{arg}) {}
+        public InvokeStaticMethodStatement(CSharpType? methodType, string methodName, ValueExpression arg1, ValueExpression arg2) : this(methodType, methodName, new[]{arg1, arg2}) {}
         public static InvokeStaticMethodStatement Extension(CSharpType? methodType, string methodName, ValueExpression instanceReference) => new(methodType, methodName, new[]{ instanceReference }, CallAsExtension: true);
         public static InvokeStaticMethodStatement Extension(CSharpType? methodType, string methodName, ValueExpression instanceReference, ValueExpression arg) => new(methodType, methodName, new[]{ instanceReference, arg }, CallAsExtension: true);
     }
