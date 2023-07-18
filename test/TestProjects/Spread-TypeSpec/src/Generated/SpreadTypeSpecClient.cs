@@ -7,7 +7,6 @@
 
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Azure;
@@ -169,14 +168,22 @@ namespace SpreadTypeSpec
         /// <param name="age"> age of the Thing. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="name"/> is an empty string, and was expected to be non-empty. </exception>
         /// <include file="Docs/SpreadTypeSpecClient.xml" path="doc/members/member[@name='SpreadAliasAsync(string,int,CancellationToken)']/*" />
         public virtual async Task<Response> SpreadAliasAsync(string name, int age, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(name, nameof(name));
+            Argument.AssertNotNullOrEmpty(name, nameof(name));
 
+            var content = new Utf8JsonRequestContent();
+            var writer = content.JsonWriter;
+            writer.WriteStartObject();
+            writer.WritePropertyName("name"u8);
+            writer.WriteStringValue(name);
+            writer.WritePropertyName("age"u8);
+            writer.WriteNumberValue(age);
+            writer.WriteEndObject();
             RequestContext context = FromCancellationToken(cancellationToken);
-            SpreadAliasRequest spreadAliasRequest = new SpreadAliasRequest(name, age);
-            Response response = await SpreadAliasAsync(spreadAliasRequest.ToRequestContent(), context).ConfigureAwait(false);
+            Response response = await SpreadAliasAsync(content, context).ConfigureAwait(false);
             return response;
         }
 
@@ -185,14 +192,22 @@ namespace SpreadTypeSpec
         /// <param name="age"> age of the Thing. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="name"/> is an empty string, and was expected to be non-empty. </exception>
         /// <include file="Docs/SpreadTypeSpecClient.xml" path="doc/members/member[@name='SpreadAlias(string,int,CancellationToken)']/*" />
         public virtual Response SpreadAlias(string name, int age, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(name, nameof(name));
+            Argument.AssertNotNullOrEmpty(name, nameof(name));
 
+            var content = new Utf8JsonRequestContent();
+            var writer = content.JsonWriter;
+            writer.WriteStartObject();
+            writer.WritePropertyName("name"u8);
+            writer.WriteStringValue(name);
+            writer.WritePropertyName("age"u8);
+            writer.WriteNumberValue(age);
+            writer.WriteEndObject();
             RequestContext context = FromCancellationToken(cancellationToken);
-            SpreadAliasRequest spreadAliasRequest = new SpreadAliasRequest(name, age);
-            Response response = SpreadAlias(spreadAliasRequest.ToRequestContent(), context);
+            Response response = SpreadAlias(content, context);
             return response;
         }
 
@@ -275,42 +290,56 @@ namespace SpreadTypeSpec
         }
 
         /// <summary> spread an alias which has multiple target property as body. </summary>
-        /// <param name="id"> The String to use. </param>
-        /// <param name="top"> The Int32 to use. </param>
+        /// <param name="id"> The string to use. </param>
+        /// <param name="top"> The int to use. </param>
         /// <param name="name"> name of the Thing. </param>
         /// <param name="age"> age of the Thing. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="id"/> or <paramref name="name"/> is null. </exception>
-        /// <exception cref="ArgumentException"> <paramref name="id"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="id"/> or <paramref name="name"/> is an empty string, and was expected to be non-empty. </exception>
         /// <include file="Docs/SpreadTypeSpecClient.xml" path="doc/members/member[@name='SpreadMultiTargetAliasAsync(string,int,string,int,CancellationToken)']/*" />
         public virtual async Task<Response> SpreadMultiTargetAliasAsync(string id, int top, string name, int age, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(id, nameof(id));
-            Argument.AssertNotNull(name, nameof(name));
+            Argument.AssertNotNullOrEmpty(name, nameof(name));
 
+            var content = new Utf8JsonRequestContent();
+            var writer = content.JsonWriter;
+            writer.WriteStartObject();
+            writer.WritePropertyName("name"u8);
+            writer.WriteStringValue(name);
+            writer.WritePropertyName("age"u8);
+            writer.WriteNumberValue(age);
+            writer.WriteEndObject();
             RequestContext context = FromCancellationToken(cancellationToken);
-            SpreadMultiTargetAliasRequest spreadMultiTargetAliasRequest = new SpreadMultiTargetAliasRequest(name, age);
-            Response response = await SpreadMultiTargetAliasAsync(id, top, spreadMultiTargetAliasRequest.ToRequestContent(), context).ConfigureAwait(false);
+            Response response = await SpreadMultiTargetAliasAsync(id, top, content, context).ConfigureAwait(false);
             return response;
         }
 
         /// <summary> spread an alias which has multiple target property as body. </summary>
-        /// <param name="id"> The String to use. </param>
-        /// <param name="top"> The Int32 to use. </param>
+        /// <param name="id"> The string to use. </param>
+        /// <param name="top"> The int to use. </param>
         /// <param name="name"> name of the Thing. </param>
         /// <param name="age"> age of the Thing. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="id"/> or <paramref name="name"/> is null. </exception>
-        /// <exception cref="ArgumentException"> <paramref name="id"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="id"/> or <paramref name="name"/> is an empty string, and was expected to be non-empty. </exception>
         /// <include file="Docs/SpreadTypeSpecClient.xml" path="doc/members/member[@name='SpreadMultiTargetAlias(string,int,string,int,CancellationToken)']/*" />
         public virtual Response SpreadMultiTargetAlias(string id, int top, string name, int age, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(id, nameof(id));
-            Argument.AssertNotNull(name, nameof(name));
+            Argument.AssertNotNullOrEmpty(name, nameof(name));
 
+            var content = new Utf8JsonRequestContent();
+            var writer = content.JsonWriter;
+            writer.WriteStartObject();
+            writer.WritePropertyName("name"u8);
+            writer.WriteStringValue(name);
+            writer.WritePropertyName("age"u8);
+            writer.WriteNumberValue(age);
+            writer.WriteEndObject();
             RequestContext context = FromCancellationToken(cancellationToken);
-            SpreadMultiTargetAliasRequest spreadMultiTargetAliasRequest = new SpreadMultiTargetAliasRequest(name, age);
-            Response response = SpreadMultiTargetAlias(id, top, spreadMultiTargetAliasRequest.ToRequestContent(), context);
+            Response response = SpreadMultiTargetAlias(id, top, content, context);
             return response;
         }
 
@@ -329,8 +358,8 @@ namespace SpreadTypeSpec
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="id"> The String to use. </param>
-        /// <param name="top"> The Int32 to use. </param>
+        /// <param name="id"> The string to use. </param>
+        /// <param name="top"> The int to use. </param>
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="id"/> or <paramref name="content"/> is null. </exception>
@@ -372,8 +401,8 @@ namespace SpreadTypeSpec
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="id"> The String to use. </param>
-        /// <param name="top"> The Int32 to use. </param>
+        /// <param name="id"> The string to use. </param>
+        /// <param name="top"> The int to use. </param>
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="id"/> or <paramref name="content"/> is null. </exception>
@@ -401,8 +430,8 @@ namespace SpreadTypeSpec
         }
 
         /// <summary> spread an alias which contains a complex model property as body. </summary>
-        /// <param name="id"> The String to use. </param>
-        /// <param name="top"> The Int32 to use. </param>
+        /// <param name="id"> The string to use. </param>
+        /// <param name="top"> The int to use. </param>
         /// <param name="thing"> The Thing to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="id"/> or <paramref name="thing"/> is null. </exception>
@@ -419,8 +448,8 @@ namespace SpreadTypeSpec
         }
 
         /// <summary> spread an alias which contains a complex model property as body. </summary>
-        /// <param name="id"> The String to use. </param>
-        /// <param name="top"> The Int32 to use. </param>
+        /// <param name="id"> The string to use. </param>
+        /// <param name="top"> The int to use. </param>
         /// <param name="thing"> The Thing to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="id"/> or <paramref name="thing"/> is null. </exception>
@@ -451,8 +480,8 @@ namespace SpreadTypeSpec
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="id"> The String to use. </param>
-        /// <param name="top"> The Int32 to use. </param>
+        /// <param name="id"> The string to use. </param>
+        /// <param name="top"> The int to use. </param>
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="id"/> or <paramref name="content"/> is null. </exception>
@@ -494,8 +523,8 @@ namespace SpreadTypeSpec
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="id"> The String to use. </param>
-        /// <param name="top"> The Int32 to use. </param>
+        /// <param name="id"> The string to use. </param>
+        /// <param name="top"> The int to use. </param>
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="id"/> or <paramref name="content"/> is null. </exception>
@@ -523,42 +552,56 @@ namespace SpreadTypeSpec
         }
 
         /// <summary> spread an alias with contains another alias property as body. </summary>
-        /// <param name="id"> The String to use. </param>
-        /// <param name="top"> The Int32 to use. </param>
+        /// <param name="id"> The string to use. </param>
+        /// <param name="top"> The int to use. </param>
         /// <param name="name"> name of the Thing. </param>
         /// <param name="age"> age of the Thing. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="id"/> or <paramref name="name"/> is null. </exception>
-        /// <exception cref="ArgumentException"> <paramref name="id"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="id"/> or <paramref name="name"/> is an empty string, and was expected to be non-empty. </exception>
         /// <include file="Docs/SpreadTypeSpecClient.xml" path="doc/members/member[@name='SpreadAliasWithSpreadAliasAsync(string,int,string,int,CancellationToken)']/*" />
         public virtual async Task<Response> SpreadAliasWithSpreadAliasAsync(string id, int top, string name, int age, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(id, nameof(id));
-            Argument.AssertNotNull(name, nameof(name));
+            Argument.AssertNotNullOrEmpty(name, nameof(name));
 
+            var content = new Utf8JsonRequestContent();
+            var writer = content.JsonWriter;
+            writer.WriteStartObject();
+            writer.WritePropertyName("name"u8);
+            writer.WriteStringValue(name);
+            writer.WritePropertyName("age"u8);
+            writer.WriteNumberValue(age);
+            writer.WriteEndObject();
             RequestContext context = FromCancellationToken(cancellationToken);
-            SpreadAliasWithSpreadAliasRequest spreadAliasWithSpreadAliasRequest = new SpreadAliasWithSpreadAliasRequest(name, age);
-            Response response = await SpreadAliasWithSpreadAliasAsync(id, top, spreadAliasWithSpreadAliasRequest.ToRequestContent(), context).ConfigureAwait(false);
+            Response response = await SpreadAliasWithSpreadAliasAsync(id, top, content, context).ConfigureAwait(false);
             return response;
         }
 
         /// <summary> spread an alias with contains another alias property as body. </summary>
-        /// <param name="id"> The String to use. </param>
-        /// <param name="top"> The Int32 to use. </param>
+        /// <param name="id"> The string to use. </param>
+        /// <param name="top"> The int to use. </param>
         /// <param name="name"> name of the Thing. </param>
         /// <param name="age"> age of the Thing. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="id"/> or <paramref name="name"/> is null. </exception>
-        /// <exception cref="ArgumentException"> <paramref name="id"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="id"/> or <paramref name="name"/> is an empty string, and was expected to be non-empty. </exception>
         /// <include file="Docs/SpreadTypeSpecClient.xml" path="doc/members/member[@name='SpreadAliasWithSpreadAlias(string,int,string,int,CancellationToken)']/*" />
         public virtual Response SpreadAliasWithSpreadAlias(string id, int top, string name, int age, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(id, nameof(id));
-            Argument.AssertNotNull(name, nameof(name));
+            Argument.AssertNotNullOrEmpty(name, nameof(name));
 
+            var content = new Utf8JsonRequestContent();
+            var writer = content.JsonWriter;
+            writer.WriteStartObject();
+            writer.WritePropertyName("name"u8);
+            writer.WriteStringValue(name);
+            writer.WritePropertyName("age"u8);
+            writer.WriteNumberValue(age);
+            writer.WriteEndObject();
             RequestContext context = FromCancellationToken(cancellationToken);
-            SpreadAliasWithSpreadAliasRequest spreadAliasWithSpreadAliasRequest = new SpreadAliasWithSpreadAliasRequest(name, age);
-            Response response = SpreadAliasWithSpreadAlias(id, top, spreadAliasWithSpreadAliasRequest.ToRequestContent(), context);
+            Response response = SpreadAliasWithSpreadAlias(id, top, content, context);
             return response;
         }
 
@@ -577,8 +620,8 @@ namespace SpreadTypeSpec
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="id"> The String to use. </param>
-        /// <param name="top"> The Int32 to use. </param>
+        /// <param name="id"> The string to use. </param>
+        /// <param name="top"> The int to use. </param>
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="id"/> or <paramref name="content"/> is null. </exception>
@@ -620,8 +663,8 @@ namespace SpreadTypeSpec
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="id"> The String to use. </param>
-        /// <param name="top"> The Int32 to use. </param>
+        /// <param name="id"> The string to use. </param>
+        /// <param name="top"> The int to use. </param>
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="id"/> or <paramref name="content"/> is null. </exception>
@@ -649,8 +692,8 @@ namespace SpreadTypeSpec
         }
 
         /// <summary> spread an alias with contains optional properties as body. </summary>
-        /// <param name="id"> The String to use. </param>
-        /// <param name="top"> The Int32 to use. </param>
+        /// <param name="id"> The string to use. </param>
+        /// <param name="top"> The int to use. </param>
         /// <param name="name"> name of the Thing. </param>
         /// <param name="items"> required array. </param>
         /// <param name="color"> optional property of the Thing. </param>
@@ -658,35 +701,55 @@ namespace SpreadTypeSpec
         /// <param name="elements"> optional array. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="id"/>, <paramref name="name"/> or <paramref name="items"/> is null. </exception>
-        /// <exception cref="ArgumentException"> <paramref name="id"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="id"/> or <paramref name="name"/> is an empty string, and was expected to be non-empty. </exception>
         /// <include file="Docs/SpreadTypeSpecClient.xml" path="doc/members/member[@name='SpreadAliasWithOptionalPropsAsync(string,int,string,IEnumerable{int},string,int?,IEnumerable{string},CancellationToken)']/*" />
         public virtual async Task<Response> SpreadAliasWithOptionalPropsAsync(string id, int top, string name, IEnumerable<int> items, string color = null, int? age = null, IEnumerable<string> elements = null, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(id, nameof(id));
-            Argument.AssertNotNull(name, nameof(name));
+            Argument.AssertNotNullOrEmpty(name, nameof(name));
             Argument.AssertNotNull(items, nameof(items));
 
-            RequestContext context = FromCancellationToken(cancellationToken);
-            SpreadAliasWithOptionalPropsRequest spreadAliasWithOptionalPropsRequest = new SpreadAliasWithOptionalPropsRequest(name, items.ToList())
+            var content = new Utf8JsonRequestContent();
+            var writer = content.JsonWriter;
+            writer.WriteStartObject();
+            writer.WritePropertyName("name"u8);
+            writer.WriteStringValue(name);
+            if (color != null)
             {
-                Color = color,
-                Age = age
-            };
+                writer.WritePropertyName("color"u8);
+                writer.WriteStringValue(color);
+            }
+            if (age != null)
+            {
+                writer.WritePropertyName("age"u8);
+                writer.WriteNumberValue(age.Value);
+            }
+            writer.WritePropertyName("items"u8);
+            writer.WriteStartArray();
+            foreach (var item in items)
+            {
+                writer.WriteNumberValue(item);
+            }
+            writer.WriteEndArray();
             if (elements != null)
             {
-                foreach (var value in elements)
+                writer.WritePropertyName("elements"u8);
+                writer.WriteStartArray();
+                foreach (var item in elements)
                 {
-                    spreadAliasWithOptionalPropsRequest.Elements.Add(value);
+                    writer.WriteStringValue(item);
                 }
+                writer.WriteEndArray();
             }
-            SpreadAliasWithOptionalPropsRequest spreadAliasWithOptionalPropsRequest0 = spreadAliasWithOptionalPropsRequest;
-            Response response = await SpreadAliasWithOptionalPropsAsync(id, top, spreadAliasWithOptionalPropsRequest0.ToRequestContent(), context).ConfigureAwait(false);
+            writer.WriteEndObject();
+            RequestContext context = FromCancellationToken(cancellationToken);
+            Response response = await SpreadAliasWithOptionalPropsAsync(id, top, content, context).ConfigureAwait(false);
             return response;
         }
 
         /// <summary> spread an alias with contains optional properties as body. </summary>
-        /// <param name="id"> The String to use. </param>
-        /// <param name="top"> The Int32 to use. </param>
+        /// <param name="id"> The string to use. </param>
+        /// <param name="top"> The int to use. </param>
         /// <param name="name"> name of the Thing. </param>
         /// <param name="items"> required array. </param>
         /// <param name="color"> optional property of the Thing. </param>
@@ -694,29 +757,49 @@ namespace SpreadTypeSpec
         /// <param name="elements"> optional array. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="id"/>, <paramref name="name"/> or <paramref name="items"/> is null. </exception>
-        /// <exception cref="ArgumentException"> <paramref name="id"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentException"> <paramref name="id"/> or <paramref name="name"/> is an empty string, and was expected to be non-empty. </exception>
         /// <include file="Docs/SpreadTypeSpecClient.xml" path="doc/members/member[@name='SpreadAliasWithOptionalProps(string,int,string,IEnumerable{int},string,int?,IEnumerable{string},CancellationToken)']/*" />
         public virtual Response SpreadAliasWithOptionalProps(string id, int top, string name, IEnumerable<int> items, string color = null, int? age = null, IEnumerable<string> elements = null, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNullOrEmpty(id, nameof(id));
-            Argument.AssertNotNull(name, nameof(name));
+            Argument.AssertNotNullOrEmpty(name, nameof(name));
             Argument.AssertNotNull(items, nameof(items));
 
-            RequestContext context = FromCancellationToken(cancellationToken);
-            SpreadAliasWithOptionalPropsRequest spreadAliasWithOptionalPropsRequest = new SpreadAliasWithOptionalPropsRequest(name, items.ToList())
+            var content = new Utf8JsonRequestContent();
+            var writer = content.JsonWriter;
+            writer.WriteStartObject();
+            writer.WritePropertyName("name"u8);
+            writer.WriteStringValue(name);
+            if (color != null)
             {
-                Color = color,
-                Age = age
-            };
+                writer.WritePropertyName("color"u8);
+                writer.WriteStringValue(color);
+            }
+            if (age != null)
+            {
+                writer.WritePropertyName("age"u8);
+                writer.WriteNumberValue(age.Value);
+            }
+            writer.WritePropertyName("items"u8);
+            writer.WriteStartArray();
+            foreach (var item in items)
+            {
+                writer.WriteNumberValue(item);
+            }
+            writer.WriteEndArray();
             if (elements != null)
             {
-                foreach (var value in elements)
+                writer.WritePropertyName("elements"u8);
+                writer.WriteStartArray();
+                foreach (var item in elements)
                 {
-                    spreadAliasWithOptionalPropsRequest.Elements.Add(value);
+                    writer.WriteStringValue(item);
                 }
+                writer.WriteEndArray();
             }
-            SpreadAliasWithOptionalPropsRequest spreadAliasWithOptionalPropsRequest0 = spreadAliasWithOptionalPropsRequest;
-            Response response = SpreadAliasWithOptionalProps(id, top, spreadAliasWithOptionalPropsRequest0.ToRequestContent(), context);
+            writer.WriteEndObject();
+            RequestContext context = FromCancellationToken(cancellationToken);
+            Response response = SpreadAliasWithOptionalProps(id, top, content, context);
             return response;
         }
 
@@ -735,8 +818,8 @@ namespace SpreadTypeSpec
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="id"> The String to use. </param>
-        /// <param name="top"> The Int32 to use. </param>
+        /// <param name="id"> The string to use. </param>
+        /// <param name="top"> The int to use. </param>
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="id"/> or <paramref name="content"/> is null. </exception>
@@ -778,8 +861,8 @@ namespace SpreadTypeSpec
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="id"> The String to use. </param>
-        /// <param name="top"> The Int32 to use. </param>
+        /// <param name="id"> The string to use. </param>
+        /// <param name="top"> The int to use. </param>
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="id"/> or <paramref name="content"/> is null. </exception>

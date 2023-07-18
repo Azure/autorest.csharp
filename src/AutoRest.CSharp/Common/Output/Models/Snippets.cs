@@ -65,6 +65,9 @@ namespace AutoRest.CSharp.Common.Output.Models
 
         public static ValueExpression InvokeToEnum(CSharpType enumType, ValueExpression stringValue)
             => new InvokeStaticMethodExpression(enumType, $"To{enumType.Implementation.Declaration.Name}", new[]{stringValue}, null, true);
+
+        public static InvokeStaticMethodExpression InvokeDateTimeOffsetFromUnixTimeSeconds(ValueExpression expression)
+            => new InvokeStaticMethodExpression(typeof(DateTimeOffset), nameof(DateTimeOffset.FromUnixTimeSeconds), new[]{expression});
         public static ValueExpression InvokeFileOpenRead(ValueExpression expression)
             => new InvokeStaticMethodExpression(typeof(System.IO.File), nameof(System.IO.File.OpenRead), new[]{expression});
         public static ValueExpression InvokeFileOpenWrite(ValueExpression expression)

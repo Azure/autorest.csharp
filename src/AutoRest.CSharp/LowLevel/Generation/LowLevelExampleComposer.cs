@@ -100,6 +100,18 @@ namespace AutoRest.CSharp.Generation.Writers
 
         public FormattableString ComposeConvenience(MethodSignature signature, bool async)
         {
+            // Skip deprecated
+            if (signature.Attributes.Any(c => c.Type.Equals(typeof(ObsoleteAttribute))))
+            {
+                return $"";
+            }
+
+            // Skip with deprecated parameters
+            if (signature.Parameters.Any(p => p.Type is {IsFrameworkType: false, Implementation: ModelTypeProvider {Deprecated: not null}}))
+            {
+                return $"";
+            }
+
             //skip if not public
             if (!signature.Modifiers.HasFlag(MethodSignatureModifiers.Public))
                 return $"";
@@ -556,8 +568,8 @@ namespace AutoRest.CSharp.Generation.Writers
             {
                 switch (implementation)
                 {
-                    case SerializableObjectType objectType: return ComposeResponseParsing(jsonElement, objectType, allProperties, visitedTypes); 
-                    case SystemObjectType objectType: return ComposeResponseParsing(jsonElement, objectType, allProperties, visitedTypes); 
+                    case SerializableObjectType objectType: return ComposeResponseParsing(jsonElement, objectType, allProperties, visitedTypes);
+                    case SystemObjectType objectType: return ComposeResponseParsing(jsonElement, objectType, allProperties, visitedTypes);
                 }
             }
 

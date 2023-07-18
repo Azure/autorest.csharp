@@ -800,8 +800,14 @@ namespace AutoRest.CSharp.Common.Output.Builders
                 return element.GetGuid();
             if (frameworkType == typeof(byte[]))
                 return element.GetBytesFromBase64(format.ToFormatSpecifier());
+
             if (frameworkType == typeof(DateTimeOffset))
-                return element.GetDateTimeOffset(format.ToFormatSpecifier());
+            {
+                return format == SerializationFormat.DateTime_Unix
+                    ? InvokeDateTimeOffsetFromUnixTimeSeconds(element.GetInt64())
+                    : element.GetDateTimeOffset(format.ToFormatSpecifier());
+            }
+
             if (frameworkType == typeof(DateTime))
                 return element.GetDateTime();
             if (frameworkType == typeof(TimeSpan))

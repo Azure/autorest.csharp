@@ -270,6 +270,7 @@ namespace AutoRest.CSharp.Common.Input
         {
             { Implementation: ImplementationLocation.Client } => InputOperationParameterKind.Client,
             { Schema: ConstantSchema, IsRequired: true } => InputOperationParameterKind.Constant,
+            { Schema: ConstantSchema, IsRequired: false } when !Configuration.AzureArm => InputOperationParameterKind.Constant,
 
             // Grouped and flattened parameters shouldn't be added to methods
             { IsFlattened: true } => InputOperationParameterKind.Flattened,
@@ -461,7 +462,7 @@ namespace AutoRest.CSharp.Common.Input
                 return new InputConstant(Value: parameter.ClientDefaultValue, Type: CreateType(parameter.Schema, _modelsCache, parameter.IsNullable));
             }
 
-            if (parameter is { Schema: ConstantSchema constantSchema, IsRequired: true })
+            if (parameter is { Schema: ConstantSchema constantSchema } && (!Configuration.AzureArm || parameter.IsRequired))
             {
                 return new InputConstant(Value: constantSchema.Value.Value, Type: CreateType(constantSchema.ValueType, _modelsCache, constantSchema.Value.Value == null));
             }
