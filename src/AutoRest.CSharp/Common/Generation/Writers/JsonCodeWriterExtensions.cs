@@ -124,7 +124,6 @@ namespace AutoRest.CSharp.Generation.Writers
                                  frameworkType == typeof(Guid) ||
                                  frameworkType == typeof(Azure.Core.ResourceIdentifier) ||
                                  frameworkType == typeof(Azure.Core.ResourceType) ||
-                                 frameworkType == typeof(Azure.Core.RequestMethod) ||
                                  frameworkType == typeof(Azure.Core.AzureLocation))
                         {
                             writer.AppendRaw("WriteStringValue");
@@ -156,7 +155,8 @@ namespace AutoRest.CSharp.Generation.Writers
                         }
                         else if (frameworkType == typeof(ETag) ||
                             frameworkType == typeof(Azure.Core.ContentType) ||
-                            frameworkType == typeof(IPAddress))
+                            frameworkType == typeof(IPAddress) ||
+                            frameworkType == typeof(Azure.Core.RequestMethod))
                         {
                             writer.Line($"WriteStringValue({name:I}.ToString());");
                             return;
