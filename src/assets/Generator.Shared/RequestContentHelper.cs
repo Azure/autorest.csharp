@@ -11,6 +11,43 @@ namespace Azure.Core
 {
     internal static class RequestContentHelper
     {
+        public static RequestContent FromEnumerable<T>(IEnumerable<T> enumerable) where T: notnull
+        {
+            var content = new Utf8JsonRequestContent();
+            content.JsonWriter.WriteStartArray();
+            foreach (var item in enumerable)
+            {
+                content.JsonWriter.WriteObjectValue(item);
+            }
+            content.JsonWriter.WriteEndArray();
+
+            return content;
+        }
+
+        public static RequestContent FromEnumerable(IEnumerable<BinaryData> enumerable)
+        {
+            var content = new Utf8JsonRequestContent();
+            content.JsonWriter.WriteStartArray();
+            foreach (var item in enumerable)
+            {
+                if (item == null)
+                {
+                    content.JsonWriter.WriteNullValue();
+                }
+                else
+                {
+#if NET6_0_OR_GREATER
+                    content.JsonWriter.WriteRawValue(item);
+#else
+                    JsonSerializer.Serialize(content.JsonWriter, JsonDocument.Parse(item.ToString()).RootElement);
+#endif
+                }
+            }
+            content.JsonWriter.WriteEndArray();
+
+            return content;
+        }
+
         public static RequestContent FromDictionary<T>(IDictionary<string, T> dictionary) where T : notnull
         {
             var content = new Utf8JsonRequestContent();

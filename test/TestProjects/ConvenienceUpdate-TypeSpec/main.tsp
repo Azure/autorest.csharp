@@ -32,3 +32,21 @@ op updateConvenience(): Model;
 @post
 @convenientAPI(true)
 op convenienceOptionalBeforeRequired(@query optional?: int32, @body required: Model): Response<200>;
+
+@route("/noConvenience")
+@doc("No convenience method. But if we add the convenientAPI decorator, there will be ambiguity.")
+@get
+@convenientAPI(false)
+op noConvenience(): Model;
+
+@route("/noConvenienceRequiredBody")
+@doc("No convenience method. But if we add the convenientAPI decorator, there will be no ambiguity.")
+@get
+@convenientAPI(false)
+op noConvenienceRequiredBody(@body required: Model): Response<200>;
+
+@route("/noConvenienceOptionalBody")
+@doc("No convenience method. But if we add the convenientAPI decorator, there will be ambiguity.")
+@get
+@convenientAPI(false)
+op noConvenienceOptionalBody(@body optional?: Model): Response<200>;

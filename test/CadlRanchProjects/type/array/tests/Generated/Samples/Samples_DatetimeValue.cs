@@ -139,7 +139,10 @@ namespace _Type._Array.Samples
         {
             var client = new ArrayClient().GetDatetimeValueClient("1.0.0");
 
-            var body = new object();
+            var body = new DateTimeOffset[]
+            {
+    DateTimeOffset.UtcNow
+            };
             var result = await client.PutAsync(body);
         }
     }

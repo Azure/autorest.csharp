@@ -5,7 +5,7 @@
 
 #nullable disable
 
-namespace CustomizationsInCadl.Models
+namespace CustomizationsInTsp.Models
 {
     /// <summary> Model moved into custom namespace. </summary>
     public partial class ModelToChangeNamespace

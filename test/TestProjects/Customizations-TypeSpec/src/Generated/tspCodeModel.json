@@ -1,6 +1,6 @@
 {
  "$id": "1",
- "Name": "CustomizationsInCadl",
+ "Name": "CustomizationsInTsp",
  "Description": "CADL project to test various types of models.",
  "ApiVersions": [
   "0.1.0"
@@ -9,7 +9,7 @@
   {
    "$id": "2",
    "Name": "EnumToRename",
-   "Namespace": "CustomizationsInCadl",
+   "Namespace": "CustomizationsInTsp",
    "Description": "Renamed enum (original name: EnumToRename)",
    "EnumValueType": "String",
    "AllowedValues": [
@@ -36,7 +36,7 @@
   {
    "$id": "6",
    "Name": "EnumWithValueToRename",
-   "Namespace": "CustomizationsInCadl",
+   "Namespace": "CustomizationsInTsp",
    "Description": "Enum with renamed value (original name: ValueToRename)",
    "EnumValueType": "String",
    "AllowedValues": [
@@ -63,7 +63,7 @@
   {
    "$id": "10",
    "Name": "EnumToBeMadeExtensible",
-   "Namespace": "CustomizationsInCadl",
+   "Namespace": "CustomizationsInTsp",
    "Description": "Extensible enum",
    "EnumValueType": "String",
    "AllowedValues": [
@@ -90,7 +90,7 @@
   {
    "$id": "14",
    "Name": "NormalEnum",
-   "Namespace": "CustomizationsInCadl",
+   "Namespace": "CustomizationsInTsp",
    "Description": "A normal enum",
    "EnumValueType": "String",
    "AllowedValues": [
@@ -114,7 +114,7 @@
   {
    "$id": "17",
    "Name": "RootModel",
-   "Namespace": "CustomizationsInCadl",
+   "Namespace": "CustomizationsInTsp",
    "Description": "Root RoundTrip model to reference all other types to ensure generation",
    "IsNullable": false,
    "Usage": "RoundTrip",
@@ -127,7 +127,7 @@
      "Type": {
       "$id": "19",
       "Name": "ModelToMakeInternal",
-      "Namespace": "CustomizationsInCadl",
+      "Namespace": "CustomizationsInTsp",
       "Description": "Public model made internal",
       "IsNullable": false,
       "Usage": "RoundTrip",
@@ -144,14 +144,12 @@
          "IsNullable": false
         },
         "IsRequired": true,
-        "IsReadOnly": false,
-        "IsDiscriminator": false
+        "IsReadOnly": false
        }
       ]
      },
      "IsRequired": false,
-     "IsReadOnly": false,
-     "IsDiscriminator": false
+     "IsReadOnly": false
     },
     {
      "$id": "22",
@@ -161,7 +159,7 @@
      "Type": {
       "$id": "23",
       "Name": "ModelToRename",
-      "Namespace": "CustomizationsInCadl",
+      "Namespace": "CustomizationsInTsp",
       "Description": "Renamed model (original name: ModelToRename)",
       "IsNullable": false,
       "Usage": "RoundTrip",
@@ -178,8 +176,7 @@
          "IsNullable": false
         },
         "IsRequired": true,
-        "IsReadOnly": false,
-        "IsDiscriminator": false
+        "IsReadOnly": false
        },
        {
         "$id": "26",
@@ -193,14 +190,12 @@
          "IsNullable": false
         },
         "IsRequired": false,
-        "IsReadOnly": false,
-        "IsDiscriminator": false
+        "IsReadOnly": false
        }
       ]
      },
      "IsRequired": false,
-     "IsReadOnly": false,
-     "IsDiscriminator": false
+     "IsReadOnly": false
     },
     {
      "$id": "28",
@@ -210,7 +205,7 @@
      "Type": {
       "$id": "29",
       "Name": "ModelToChangeNamespace",
-      "Namespace": "CustomizationsInCadl",
+      "Namespace": "CustomizationsInTsp",
       "Description": "Model moved into custom namespace",
       "IsNullable": false,
       "Usage": "RoundTrip",
@@ -227,14 +222,12 @@
          "IsNullable": false
         },
         "IsRequired": true,
-        "IsReadOnly": false,
-        "IsDiscriminator": false
+        "IsReadOnly": false
        }
       ]
      },
      "IsRequired": false,
-     "IsReadOnly": false,
-     "IsDiscriminator": false
+     "IsReadOnly": false
     },
     {
      "$id": "32",
@@ -244,7 +237,7 @@
      "Type": {
       "$id": "33",
       "Name": "ModelWithCustomizedProperties",
-      "Namespace": "CustomizationsInCadl",
+      "Namespace": "CustomizationsInTsp",
       "Description": "Model with customized properties",
       "IsNullable": false,
       "Usage": "RoundTrip",
@@ -261,8 +254,7 @@
          "IsNullable": false
         },
         "IsRequired": true,
-        "IsReadOnly": false,
-        "IsDiscriminator": false
+        "IsReadOnly": false
        },
        {
         "$id": "36",
@@ -276,8 +268,7 @@
          "IsNullable": false
         },
         "IsRequired": true,
-        "IsReadOnly": false,
-        "IsDiscriminator": false
+        "IsReadOnly": false
        },
        {
         "$id": "38",
@@ -291,8 +282,7 @@
          "IsNullable": false
         },
         "IsRequired": true,
-        "IsReadOnly": false,
-        "IsDiscriminator": false
+        "IsReadOnly": false
        },
        {
         "$id": "40",
@@ -306,8 +296,7 @@
          "IsNullable": false
         },
         "IsRequired": true,
-        "IsReadOnly": false,
-        "IsDiscriminator": false
+        "IsReadOnly": false
        },
        {
         "$id": "42",
@@ -321,8 +310,7 @@
          "IsNullable": false
         },
         "IsRequired": true,
-        "IsReadOnly": false,
-        "IsDiscriminator": false
+        "IsReadOnly": false
        },
        {
         "$id": "44",
@@ -336,8 +324,7 @@
          "IsNullable": false
         },
         "IsRequired": true,
-        "IsReadOnly": false,
-        "IsDiscriminator": false
+        "IsReadOnly": false
        },
        {
         "$id": "46",
@@ -351,8 +338,7 @@
          "IsNullable": false
         },
         "IsRequired": true,
-        "IsReadOnly": false,
-        "IsDiscriminator": false
+        "IsReadOnly": false
        },
        {
         "$id": "48",
@@ -366,8 +352,7 @@
          "IsNullable": false
         },
         "IsRequired": true,
-        "IsReadOnly": false,
-        "IsDiscriminator": false
+        "IsReadOnly": false
        },
        {
         "$id": "50",
@@ -386,8 +371,7 @@
          "IsNullable": false
         },
         "IsRequired": true,
-        "IsReadOnly": false,
-        "IsDiscriminator": false
+        "IsReadOnly": false
        },
        {
         "$id": "53",
@@ -412,8 +396,7 @@
          "IsNullable": false
         },
         "IsRequired": true,
-        "IsReadOnly": false,
-        "IsDiscriminator": false
+        "IsReadOnly": false
        },
        {
         "$id": "57",
@@ -437,8 +420,7 @@
          "IsNullable": false
         },
         "IsRequired": true,
-        "IsReadOnly": false,
-        "IsDiscriminator": false
+        "IsReadOnly": false
        },
        {
         "$id": "61",
@@ -468,14 +450,12 @@
          "IsNullable": false
         },
         "IsRequired": true,
-        "IsReadOnly": false,
-        "IsDiscriminator": false
+        "IsReadOnly": false
        }
       ]
      },
      "IsRequired": false,
-     "IsReadOnly": false,
-     "IsDiscriminator": false
+     "IsReadOnly": false
     },
     {
      "$id": "66",
@@ -486,8 +466,7 @@
       "$ref": "2"
      },
      "IsRequired": false,
-     "IsReadOnly": false,
-     "IsDiscriminator": false
+     "IsReadOnly": false
     },
     {
      "$id": "67",
@@ -498,8 +477,7 @@
       "$ref": "6"
      },
      "IsRequired": false,
-     "IsReadOnly": false,
-     "IsDiscriminator": false
+     "IsReadOnly": false
     },
     {
      "$id": "68",
@@ -510,8 +488,7 @@
       "$ref": "10"
      },
      "IsRequired": false,
-     "IsReadOnly": false,
-     "IsDiscriminator": false
+     "IsReadOnly": false
     },
     {
      "$id": "69",
@@ -521,7 +498,7 @@
      "Type": {
       "$id": "70",
       "Name": "ModelToAddAdditionalSerializableProperty",
-      "Namespace": "CustomizationsInCadl",
+      "Namespace": "CustomizationsInTsp",
       "Description": "Model to add additional serializable property",
       "IsNullable": false,
       "Usage": "RoundTrip",
@@ -538,14 +515,12 @@
          "IsNullable": false
         },
         "IsRequired": true,
-        "IsReadOnly": false,
-        "IsDiscriminator": false
+        "IsReadOnly": false
        }
       ]
      },
      "IsRequired": false,
-     "IsReadOnly": false,
-     "IsDiscriminator": false
+     "IsReadOnly": false
     },
     {
      "$id": "73",
@@ -556,8 +531,7 @@
       "$ref": "14"
      },
      "IsRequired": false,
-     "IsReadOnly": false,
-     "IsDiscriminator": false
+     "IsReadOnly": false
     }
    ]
   },
@@ -580,13 +554,13 @@
  "Clients": [
   {
    "$id": "74",
-   "Name": "CustomizationsInCadlClient",
+   "Name": "CustomizationsInTspClient",
    "Description": "CADL project to test various types of models.",
    "Operations": [
     {
      "$id": "75",
      "Name": "roundTrip",
-     "ResourceName": "CustomizationsInCadl",
+     "ResourceName": "CustomizationsInTsp",
      "Description": "RoundTrip operation to make RootModel round-trip",
      "Parameters": [
       {

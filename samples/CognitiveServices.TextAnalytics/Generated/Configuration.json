@@ -1,8 +1,8 @@
 {
-  "OutputFolder": ".",
-  "Namespace": "CognitiveServices.TextAnalytics",
-  "LibraryName": "CognitiveServicesTextAnalytics",
-  "SharedSourceFolders": [
+  "output-folder": ".",
+  "namespace": "CognitiveServices.TextAnalytics",
+  "library-name": "CognitiveServicesTextAnalytics",
+  "shared-source-folders": [
     "..\\..\\..\\artifacts\\bin\\AutoRest.CSharp\\Debug\\net6.0\\Generator.Shared",
     "..\\..\\..\\artifacts\\bin\\AutoRest.CSharp\\Debug\\net6.0\\Azure.Core.Shared"
   ],

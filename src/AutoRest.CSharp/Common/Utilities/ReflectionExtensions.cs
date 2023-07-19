@@ -8,14 +8,16 @@ namespace AutoRest.CSharp.Common.Utilities
 {
     internal static class ReflectionExtensions
     {
-        internal static bool IsReadOnly(this PropertyInfo property)
+        internal static bool IsReadOnly(this PropertyInfo property, bool allowInternal = false)
         {
             if (TypeFactory.IsCollectionType(property.PropertyType))
             {
                 return TypeFactory.IsReadOnlyDictionary(property.PropertyType) || TypeFactory.IsReadOnlyList(property.PropertyType);
             }
 
-            return property.GetSetMethod() == null;
+            var setMethod = property.GetSetMethod(nonPublic: allowInternal);
+
+            return setMethod == null || setMethod is { IsPublic: false, IsAssembly: false };
         }
     }
 }

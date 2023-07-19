@@ -33,7 +33,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
 ";
         private string _coreCsProjContent = @"
   <ItemGroup>
-    <PackageReference Include=""Azure.Core"" Version=""1.32.0"" />
+    <PackageReference Include=""Azure.Core"" Version=""1.34.0"" />
   </ItemGroup>";
 
         private string _armCsProjContent = @"
@@ -126,7 +126,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             {
                 _coreCsProjContent += @"
   <ItemGroup>
-    <PackageReference Include=""Azure.Core.Expressions.DataFactory"" Version=""1.0.0-beta.2"" />
+    <PackageReference Include=""Azure.Core.Expressions.DataFactory"" Version=""1.0.0-beta.4"" />
   </ItemGroup>";
             }
             var isTestProject = Configuration.MgmtTestConfiguration is not null;

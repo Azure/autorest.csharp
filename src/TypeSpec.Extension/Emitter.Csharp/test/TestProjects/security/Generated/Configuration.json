@@ -1,8 +1,8 @@
 {
-  "OutputFolder": ".",
-  "Namespace": "SecurityClient",
-  "LibraryName": "SecurityClient",
-  "SharedSourceFolders": [
+  "output-folder": ".",
+  "namespace": "SecurityClient",
+  "library-name": "SecurityClient",
+  "shared-source-folders": [
     "../../../../../../../node_modules/@autorest/csharp/Generator.Shared",
     "../../../../../../../node_modules/@autorest/csharp/Azure.Core.Shared"
   ],

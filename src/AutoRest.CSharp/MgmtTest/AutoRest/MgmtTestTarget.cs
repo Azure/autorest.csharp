@@ -102,6 +102,9 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             if (Configuration.MgmtTestConfiguration?.SourceCodePath != null)
                 return Configuration.MgmtTestConfiguration.SourceCodePath;
 
+            // try to find the sdk source code path according to the default folder structure
+            // Azure.ResourceManager.XXX \ src <- default sdk source folder
+            //                           \ samples \ Generated <- default sample output folder defined in msbuild
             return Path.Combine(Configuration.OutputFolder, "../../src");
         }
 

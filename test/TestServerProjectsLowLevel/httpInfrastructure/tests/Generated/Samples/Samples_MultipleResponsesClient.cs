@@ -26,7 +26,7 @@ namespace httpInfrastructure_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new MultipleResponsesClient(credential);
 
-            Response response = client.Get200Model204NoModelDefaultError200Valid();
+            Response response = client.Get200Model204NoModelDefaultError200Valid(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());
@@ -39,7 +39,7 @@ namespace httpInfrastructure_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new MultipleResponsesClient(credential);
 
-            Response response = client.Get200Model204NoModelDefaultError200Valid();
+            Response response = client.Get200Model204NoModelDefaultError200Valid(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("statusCode").ToString());
@@ -52,7 +52,7 @@ namespace httpInfrastructure_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new MultipleResponsesClient(credential);
 
-            Response response = await client.Get200Model204NoModelDefaultError200ValidAsync();
+            Response response = await client.Get200Model204NoModelDefaultError200ValidAsync(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());
@@ -65,7 +65,7 @@ namespace httpInfrastructure_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new MultipleResponsesClient(credential);
 
-            Response response = await client.Get200Model204NoModelDefaultError200ValidAsync();
+            Response response = await client.Get200Model204NoModelDefaultError200ValidAsync(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("statusCode").ToString());
@@ -78,7 +78,7 @@ namespace httpInfrastructure_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new MultipleResponsesClient(credential);
 
-            Response response = client.Get200Model204NoModelDefaultError204Valid();
+            Response response = client.Get200Model204NoModelDefaultError204Valid(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());
@@ -91,7 +91,7 @@ namespace httpInfrastructure_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new MultipleResponsesClient(credential);
 
-            Response response = client.Get200Model204NoModelDefaultError204Valid();
+            Response response = client.Get200Model204NoModelDefaultError204Valid(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("statusCode").ToString());
@@ -104,7 +104,7 @@ namespace httpInfrastructure_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new MultipleResponsesClient(credential);
 
-            Response response = await client.Get200Model204NoModelDefaultError204ValidAsync();
+            Response response = await client.Get200Model204NoModelDefaultError204ValidAsync(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());
@@ -117,7 +117,7 @@ namespace httpInfrastructure_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new MultipleResponsesClient(credential);
 
-            Response response = await client.Get200Model204NoModelDefaultError204ValidAsync();
+            Response response = await client.Get200Model204NoModelDefaultError204ValidAsync(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("statusCode").ToString());
@@ -130,7 +130,7 @@ namespace httpInfrastructure_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new MultipleResponsesClient(credential);
 
-            Response response = client.Get200Model204NoModelDefaultError201Invalid();
+            Response response = client.Get200Model204NoModelDefaultError201Invalid(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());
@@ -143,7 +143,7 @@ namespace httpInfrastructure_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new MultipleResponsesClient(credential);
 
-            Response response = client.Get200Model204NoModelDefaultError201Invalid();
+            Response response = client.Get200Model204NoModelDefaultError201Invalid(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("statusCode").ToString());
@@ -156,7 +156,7 @@ namespace httpInfrastructure_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new MultipleResponsesClient(credential);
 
-            Response response = await client.Get200Model204NoModelDefaultError201InvalidAsync();
+            Response response = await client.Get200Model204NoModelDefaultError201InvalidAsync(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());
@@ -169,7 +169,7 @@ namespace httpInfrastructure_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new MultipleResponsesClient(credential);
 
-            Response response = await client.Get200Model204NoModelDefaultError201InvalidAsync();
+            Response response = await client.Get200Model204NoModelDefaultError201InvalidAsync(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("statusCode").ToString());
@@ -182,7 +182,7 @@ namespace httpInfrastructure_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new MultipleResponsesClient(credential);
 
-            Response response = client.Get200Model204NoModelDefaultError202None();
+            Response response = client.Get200Model204NoModelDefaultError202None(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());
@@ -195,7 +195,7 @@ namespace httpInfrastructure_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new MultipleResponsesClient(credential);
 
-            Response response = client.Get200Model204NoModelDefaultError202None();
+            Response response = client.Get200Model204NoModelDefaultError202None(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("statusCode").ToString());
@@ -208,7 +208,7 @@ namespace httpInfrastructure_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new MultipleResponsesClient(credential);
 
-            Response response = await client.Get200Model204NoModelDefaultError202NoneAsync();
+            Response response = await client.Get200Model204NoModelDefaultError202NoneAsync(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());
@@ -221,7 +221,7 @@ namespace httpInfrastructure_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new MultipleResponsesClient(credential);
 
-            Response response = await client.Get200Model204NoModelDefaultError202NoneAsync();
+            Response response = await client.Get200Model204NoModelDefaultError202NoneAsync(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("statusCode").ToString());
@@ -234,7 +234,7 @@ namespace httpInfrastructure_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new MultipleResponsesClient(credential);
 
-            Response response = client.Get200Model204NoModelDefaultError400Valid();
+            Response response = client.Get200Model204NoModelDefaultError400Valid(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());
@@ -247,7 +247,7 @@ namespace httpInfrastructure_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new MultipleResponsesClient(credential);
 
-            Response response = client.Get200Model204NoModelDefaultError400Valid();
+            Response response = client.Get200Model204NoModelDefaultError400Valid(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("statusCode").ToString());
@@ -260,7 +260,7 @@ namespace httpInfrastructure_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new MultipleResponsesClient(credential);
 
-            Response response = await client.Get200Model204NoModelDefaultError400ValidAsync();
+            Response response = await client.Get200Model204NoModelDefaultError400ValidAsync(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());
@@ -273,7 +273,7 @@ namespace httpInfrastructure_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new MultipleResponsesClient(credential);
 
-            Response response = await client.Get200Model204NoModelDefaultError400ValidAsync();
+            Response response = await client.Get200Model204NoModelDefaultError400ValidAsync(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("statusCode").ToString());
@@ -286,7 +286,7 @@ namespace httpInfrastructure_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new MultipleResponsesClient(credential);
 
-            Response response = client.Get200Model201ModelDefaultError200Valid();
+            Response response = client.Get200Model201ModelDefaultError200Valid(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());
@@ -299,7 +299,7 @@ namespace httpInfrastructure_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new MultipleResponsesClient(credential);
 
-            Response response = client.Get200Model201ModelDefaultError200Valid();
+            Response response = client.Get200Model201ModelDefaultError200Valid(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("statusCode").ToString());
@@ -312,7 +312,7 @@ namespace httpInfrastructure_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new MultipleResponsesClient(credential);
 
-            Response response = await client.Get200Model201ModelDefaultError200ValidAsync();
+            Response response = await client.Get200Model201ModelDefaultError200ValidAsync(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());
@@ -325,7 +325,7 @@ namespace httpInfrastructure_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new MultipleResponsesClient(credential);
 
-            Response response = await client.Get200Model201ModelDefaultError200ValidAsync();
+            Response response = await client.Get200Model201ModelDefaultError200ValidAsync(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("statusCode").ToString());
@@ -338,7 +338,7 @@ namespace httpInfrastructure_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new MultipleResponsesClient(credential);
 
-            Response response = client.Get200Model201ModelDefaultError201Valid();
+            Response response = client.Get200Model201ModelDefaultError201Valid(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());
@@ -351,7 +351,7 @@ namespace httpInfrastructure_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new MultipleResponsesClient(credential);
 
-            Response response = client.Get200Model201ModelDefaultError201Valid();
+            Response response = client.Get200Model201ModelDefaultError201Valid(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("statusCode").ToString());
@@ -364,7 +364,7 @@ namespace httpInfrastructure_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new MultipleResponsesClient(credential);
 
-            Response response = await client.Get200Model201ModelDefaultError201ValidAsync();
+            Response response = await client.Get200Model201ModelDefaultError201ValidAsync(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());
@@ -377,7 +377,7 @@ namespace httpInfrastructure_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new MultipleResponsesClient(credential);
 
-            Response response = await client.Get200Model201ModelDefaultError201ValidAsync();
+            Response response = await client.Get200Model201ModelDefaultError201ValidAsync(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("statusCode").ToString());
@@ -390,7 +390,7 @@ namespace httpInfrastructure_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new MultipleResponsesClient(credential);
 
-            Response response = client.Get200Model201ModelDefaultError400Valid();
+            Response response = client.Get200Model201ModelDefaultError400Valid(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());
@@ -403,7 +403,7 @@ namespace httpInfrastructure_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new MultipleResponsesClient(credential);
 
-            Response response = client.Get200Model201ModelDefaultError400Valid();
+            Response response = client.Get200Model201ModelDefaultError400Valid(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("statusCode").ToString());
@@ -416,7 +416,7 @@ namespace httpInfrastructure_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new MultipleResponsesClient(credential);
 
-            Response response = await client.Get200Model201ModelDefaultError400ValidAsync();
+            Response response = await client.Get200Model201ModelDefaultError400ValidAsync(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());
@@ -429,7 +429,7 @@ namespace httpInfrastructure_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new MultipleResponsesClient(credential);
 
-            Response response = await client.Get200Model201ModelDefaultError400ValidAsync();
+            Response response = await client.Get200Model201ModelDefaultError400ValidAsync(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("statusCode").ToString());
@@ -442,7 +442,7 @@ namespace httpInfrastructure_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new MultipleResponsesClient(credential);
 
-            Response response = client.Get200ModelA201ModelC404ModelDDefaultError200Valid();
+            Response response = client.Get200ModelA201ModelC404ModelDDefaultError200Valid(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());
@@ -455,7 +455,7 @@ namespace httpInfrastructure_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new MultipleResponsesClient(credential);
 
-            Response response = client.Get200ModelA201ModelC404ModelDDefaultError200Valid();
+            Response response = client.Get200ModelA201ModelC404ModelDDefaultError200Valid(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("statusCode").ToString());
@@ -468,7 +468,7 @@ namespace httpInfrastructure_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new MultipleResponsesClient(credential);
 
-            Response response = await client.Get200ModelA201ModelC404ModelDDefaultError200ValidAsync();
+            Response response = await client.Get200ModelA201ModelC404ModelDDefaultError200ValidAsync(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());
@@ -481,7 +481,7 @@ namespace httpInfrastructure_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new MultipleResponsesClient(credential);
 
-            Response response = await client.Get200ModelA201ModelC404ModelDDefaultError200ValidAsync();
+            Response response = await client.Get200ModelA201ModelC404ModelDDefaultError200ValidAsync(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("statusCode").ToString());
@@ -494,7 +494,7 @@ namespace httpInfrastructure_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new MultipleResponsesClient(credential);
 
-            Response response = client.Get200ModelA201ModelC404ModelDDefaultError201Valid();
+            Response response = client.Get200ModelA201ModelC404ModelDDefaultError201Valid(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());
@@ -507,7 +507,7 @@ namespace httpInfrastructure_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new MultipleResponsesClient(credential);
 
-            Response response = client.Get200ModelA201ModelC404ModelDDefaultError201Valid();
+            Response response = client.Get200ModelA201ModelC404ModelDDefaultError201Valid(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("statusCode").ToString());
@@ -520,7 +520,7 @@ namespace httpInfrastructure_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new MultipleResponsesClient(credential);
 
-            Response response = await client.Get200ModelA201ModelC404ModelDDefaultError201ValidAsync();
+            Response response = await client.Get200ModelA201ModelC404ModelDDefaultError201ValidAsync(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());
@@ -533,7 +533,7 @@ namespace httpInfrastructure_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new MultipleResponsesClient(credential);
 
-            Response response = await client.Get200ModelA201ModelC404ModelDDefaultError201ValidAsync();
+            Response response = await client.Get200ModelA201ModelC404ModelDDefaultError201ValidAsync(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("statusCode").ToString());
@@ -546,7 +546,7 @@ namespace httpInfrastructure_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new MultipleResponsesClient(credential);
 
-            Response response = client.Get200ModelA201ModelC404ModelDDefaultError404Valid();
+            Response response = client.Get200ModelA201ModelC404ModelDDefaultError404Valid(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());
@@ -559,7 +559,7 @@ namespace httpInfrastructure_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new MultipleResponsesClient(credential);
 
-            Response response = client.Get200ModelA201ModelC404ModelDDefaultError404Valid();
+            Response response = client.Get200ModelA201ModelC404ModelDDefaultError404Valid(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("statusCode").ToString());
@@ -572,7 +572,7 @@ namespace httpInfrastructure_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new MultipleResponsesClient(credential);
 
-            Response response = await client.Get200ModelA201ModelC404ModelDDefaultError404ValidAsync();
+            Response response = await client.Get200ModelA201ModelC404ModelDDefaultError404ValidAsync(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());
@@ -585,7 +585,7 @@ namespace httpInfrastructure_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new MultipleResponsesClient(credential);
 
-            Response response = await client.Get200ModelA201ModelC404ModelDDefaultError404ValidAsync();
+            Response response = await client.Get200ModelA201ModelC404ModelDDefaultError404ValidAsync(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("statusCode").ToString());
@@ -598,7 +598,7 @@ namespace httpInfrastructure_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new MultipleResponsesClient(credential);
 
-            Response response = client.Get200ModelA201ModelC404ModelDDefaultError400Valid();
+            Response response = client.Get200ModelA201ModelC404ModelDDefaultError400Valid(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());
@@ -611,7 +611,7 @@ namespace httpInfrastructure_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new MultipleResponsesClient(credential);
 
-            Response response = client.Get200ModelA201ModelC404ModelDDefaultError400Valid();
+            Response response = client.Get200ModelA201ModelC404ModelDDefaultError400Valid(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("statusCode").ToString());
@@ -624,7 +624,7 @@ namespace httpInfrastructure_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new MultipleResponsesClient(credential);
 
-            Response response = await client.Get200ModelA201ModelC404ModelDDefaultError400ValidAsync();
+            Response response = await client.Get200ModelA201ModelC404ModelDDefaultError400ValidAsync(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());
@@ -637,7 +637,7 @@ namespace httpInfrastructure_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new MultipleResponsesClient(credential);
 
-            Response response = await client.Get200ModelA201ModelC404ModelDDefaultError400ValidAsync();
+            Response response = await client.Get200ModelA201ModelC404ModelDDefaultError400ValidAsync(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("statusCode").ToString());
@@ -958,7 +958,7 @@ namespace httpInfrastructure_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new MultipleResponsesClient(credential);
 
-            Response response = client.GetDefaultModelA200Valid();
+            Response response = client.GetDefaultModelA200Valid(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());
@@ -971,7 +971,7 @@ namespace httpInfrastructure_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new MultipleResponsesClient(credential);
 
-            Response response = client.GetDefaultModelA200Valid();
+            Response response = client.GetDefaultModelA200Valid(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("statusCode").ToString());
@@ -984,7 +984,7 @@ namespace httpInfrastructure_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new MultipleResponsesClient(credential);
 
-            Response response = await client.GetDefaultModelA200ValidAsync();
+            Response response = await client.GetDefaultModelA200ValidAsync(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());
@@ -997,7 +997,7 @@ namespace httpInfrastructure_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new MultipleResponsesClient(credential);
 
-            Response response = await client.GetDefaultModelA200ValidAsync();
+            Response response = await client.GetDefaultModelA200ValidAsync(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("statusCode").ToString());
@@ -1010,7 +1010,7 @@ namespace httpInfrastructure_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new MultipleResponsesClient(credential);
 
-            Response response = client.GetDefaultModelA200None();
+            Response response = client.GetDefaultModelA200None(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());
@@ -1023,7 +1023,7 @@ namespace httpInfrastructure_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new MultipleResponsesClient(credential);
 
-            Response response = client.GetDefaultModelA200None();
+            Response response = client.GetDefaultModelA200None(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("statusCode").ToString());
@@ -1036,7 +1036,7 @@ namespace httpInfrastructure_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new MultipleResponsesClient(credential);
 
-            Response response = await client.GetDefaultModelA200NoneAsync();
+            Response response = await client.GetDefaultModelA200NoneAsync(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());
@@ -1049,7 +1049,7 @@ namespace httpInfrastructure_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new MultipleResponsesClient(credential);
 
-            Response response = await client.GetDefaultModelA200NoneAsync();
+            Response response = await client.GetDefaultModelA200NoneAsync(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("statusCode").ToString());
@@ -1326,7 +1326,7 @@ namespace httpInfrastructure_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new MultipleResponsesClient(credential);
 
-            Response response = client.Get200ModelA200None();
+            Response response = client.Get200ModelA200None(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());
@@ -1339,7 +1339,7 @@ namespace httpInfrastructure_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new MultipleResponsesClient(credential);
 
-            Response response = client.Get200ModelA200None();
+            Response response = client.Get200ModelA200None(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("statusCode").ToString());
@@ -1352,7 +1352,7 @@ namespace httpInfrastructure_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new MultipleResponsesClient(credential);
 
-            Response response = await client.Get200ModelA200NoneAsync();
+            Response response = await client.Get200ModelA200NoneAsync(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());
@@ -1365,7 +1365,7 @@ namespace httpInfrastructure_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new MultipleResponsesClient(credential);
 
-            Response response = await client.Get200ModelA200NoneAsync();
+            Response response = await client.Get200ModelA200NoneAsync(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("statusCode").ToString());
@@ -1378,7 +1378,7 @@ namespace httpInfrastructure_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new MultipleResponsesClient(credential);
 
-            Response response = client.Get200ModelA200Valid();
+            Response response = client.Get200ModelA200Valid(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());
@@ -1391,7 +1391,7 @@ namespace httpInfrastructure_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new MultipleResponsesClient(credential);
 
-            Response response = client.Get200ModelA200Valid();
+            Response response = client.Get200ModelA200Valid(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("statusCode").ToString());
@@ -1404,7 +1404,7 @@ namespace httpInfrastructure_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new MultipleResponsesClient(credential);
 
-            Response response = await client.Get200ModelA200ValidAsync();
+            Response response = await client.Get200ModelA200ValidAsync(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());
@@ -1417,7 +1417,7 @@ namespace httpInfrastructure_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new MultipleResponsesClient(credential);
 
-            Response response = await client.Get200ModelA200ValidAsync();
+            Response response = await client.Get200ModelA200ValidAsync(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("statusCode").ToString());
@@ -1430,7 +1430,7 @@ namespace httpInfrastructure_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new MultipleResponsesClient(credential);
 
-            Response response = client.Get200ModelA200Invalid();
+            Response response = client.Get200ModelA200Invalid(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());
@@ -1443,7 +1443,7 @@ namespace httpInfrastructure_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new MultipleResponsesClient(credential);
 
-            Response response = client.Get200ModelA200Invalid();
+            Response response = client.Get200ModelA200Invalid(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("statusCode").ToString());
@@ -1456,7 +1456,7 @@ namespace httpInfrastructure_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new MultipleResponsesClient(credential);
 
-            Response response = await client.Get200ModelA200InvalidAsync();
+            Response response = await client.Get200ModelA200InvalidAsync(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());
@@ -1469,7 +1469,7 @@ namespace httpInfrastructure_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new MultipleResponsesClient(credential);
 
-            Response response = await client.Get200ModelA200InvalidAsync();
+            Response response = await client.Get200ModelA200InvalidAsync(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("statusCode").ToString());
@@ -1482,7 +1482,7 @@ namespace httpInfrastructure_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new MultipleResponsesClient(credential);
 
-            Response response = client.Get200ModelA400None();
+            Response response = client.Get200ModelA400None(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());
@@ -1495,7 +1495,7 @@ namespace httpInfrastructure_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new MultipleResponsesClient(credential);
 
-            Response response = client.Get200ModelA400None();
+            Response response = client.Get200ModelA400None(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("statusCode").ToString());
@@ -1508,7 +1508,7 @@ namespace httpInfrastructure_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new MultipleResponsesClient(credential);
 
-            Response response = await client.Get200ModelA400NoneAsync();
+            Response response = await client.Get200ModelA400NoneAsync(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());
@@ -1521,7 +1521,7 @@ namespace httpInfrastructure_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new MultipleResponsesClient(credential);
 
-            Response response = await client.Get200ModelA400NoneAsync();
+            Response response = await client.Get200ModelA400NoneAsync(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("statusCode").ToString());
@@ -1534,7 +1534,7 @@ namespace httpInfrastructure_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new MultipleResponsesClient(credential);
 
-            Response response = client.Get200ModelA400Valid();
+            Response response = client.Get200ModelA400Valid(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());
@@ -1547,7 +1547,7 @@ namespace httpInfrastructure_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new MultipleResponsesClient(credential);
 
-            Response response = client.Get200ModelA400Valid();
+            Response response = client.Get200ModelA400Valid(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("statusCode").ToString());
@@ -1560,7 +1560,7 @@ namespace httpInfrastructure_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new MultipleResponsesClient(credential);
 
-            Response response = await client.Get200ModelA400ValidAsync();
+            Response response = await client.Get200ModelA400ValidAsync(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());
@@ -1573,7 +1573,7 @@ namespace httpInfrastructure_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new MultipleResponsesClient(credential);
 
-            Response response = await client.Get200ModelA400ValidAsync();
+            Response response = await client.Get200ModelA400ValidAsync(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("statusCode").ToString());
@@ -1586,7 +1586,7 @@ namespace httpInfrastructure_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new MultipleResponsesClient(credential);
 
-            Response response = client.Get200ModelA400Invalid();
+            Response response = client.Get200ModelA400Invalid(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());
@@ -1599,7 +1599,7 @@ namespace httpInfrastructure_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new MultipleResponsesClient(credential);
 
-            Response response = client.Get200ModelA400Invalid();
+            Response response = client.Get200ModelA400Invalid(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("statusCode").ToString());
@@ -1612,7 +1612,7 @@ namespace httpInfrastructure_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new MultipleResponsesClient(credential);
 
-            Response response = await client.Get200ModelA400InvalidAsync();
+            Response response = await client.Get200ModelA400InvalidAsync(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());
@@ -1625,7 +1625,7 @@ namespace httpInfrastructure_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new MultipleResponsesClient(credential);
 
-            Response response = await client.Get200ModelA400InvalidAsync();
+            Response response = await client.Get200ModelA400InvalidAsync(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("statusCode").ToString());
@@ -1638,7 +1638,7 @@ namespace httpInfrastructure_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new MultipleResponsesClient(credential);
 
-            Response response = client.Get200ModelA202Valid();
+            Response response = client.Get200ModelA202Valid(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());
@@ -1651,7 +1651,7 @@ namespace httpInfrastructure_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new MultipleResponsesClient(credential);
 
-            Response response = client.Get200ModelA202Valid();
+            Response response = client.Get200ModelA202Valid(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("statusCode").ToString());
@@ -1664,7 +1664,7 @@ namespace httpInfrastructure_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new MultipleResponsesClient(credential);
 
-            Response response = await client.Get200ModelA202ValidAsync();
+            Response response = await client.Get200ModelA202ValidAsync(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());
@@ -1677,7 +1677,7 @@ namespace httpInfrastructure_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new MultipleResponsesClient(credential);
 
-            Response response = await client.Get200ModelA202ValidAsync();
+            Response response = await client.Get200ModelA202ValidAsync(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("statusCode").ToString());

@@ -68,20 +68,20 @@ namespace Parameters_LowLevel
         /// </list>
         /// </summary>
         /// <param name="id"> Query parameter Id. </param>
+        /// <param name="skip"> Query parameter skip. The default value is 12. </param>
         /// <param name="top"> Query parameter top. </param>
-        /// <param name="skip"> Query parameter skip. </param>
-        /// <param name="status"> Query parameter status. </param>
+        /// <param name="status"> Query parameter status. The default value is "start". </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/ParametersLowlevelClient.xml" path="doc/members/member[@name='NoRequestBodyResponseBodyAsync(int,int?,int,string,RequestContext)']/*" />
-        public virtual async Task<Response> NoRequestBodyResponseBodyAsync(int id, int? top = null, int skip = 12, string status = "start", RequestContext context = null)
+        /// <include file="Docs/ParametersLowlevelClient.xml" path="doc/members/member[@name='NoRequestBodyResponseBodyAsync(int,int,int?,string,RequestContext)']/*" />
+        public virtual async Task<Response> NoRequestBodyResponseBodyAsync(int id, int skip, int? top, string status, RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("ParametersLowlevelClient.NoRequestBodyResponseBody");
             scope.Start();
             try
             {
-                using HttpMessage message = CreateNoRequestBodyResponseBodyRequest(id, top, skip, status, context);
+                using HttpMessage message = CreateNoRequestBodyResponseBodyRequest(id, skip, top, status, context);
                 return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -102,20 +102,20 @@ namespace Parameters_LowLevel
         /// </list>
         /// </summary>
         /// <param name="id"> Query parameter Id. </param>
+        /// <param name="skip"> Query parameter skip. The default value is 12. </param>
         /// <param name="top"> Query parameter top. </param>
-        /// <param name="skip"> Query parameter skip. </param>
-        /// <param name="status"> Query parameter status. </param>
+        /// <param name="status"> Query parameter status. The default value is "start". </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/ParametersLowlevelClient.xml" path="doc/members/member[@name='NoRequestBodyResponseBody(int,int?,int,string,RequestContext)']/*" />
-        public virtual Response NoRequestBodyResponseBody(int id, int? top = null, int skip = 12, string status = "start", RequestContext context = null)
+        /// <include file="Docs/ParametersLowlevelClient.xml" path="doc/members/member[@name='NoRequestBodyResponseBody(int,int,int?,string,RequestContext)']/*" />
+        public virtual Response NoRequestBodyResponseBody(int id, int skip, int? top, string status, RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("ParametersLowlevelClient.NoRequestBodyResponseBody");
             scope.Start();
             try
             {
-                using HttpMessage message = CreateNoRequestBodyResponseBodyRequest(id, top, skip, status, context);
+                using HttpMessage message = CreateNoRequestBodyResponseBodyRequest(id, skip, top, status, context);
                 return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
@@ -140,7 +140,7 @@ namespace Parameters_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/ParametersLowlevelClient.xml" path="doc/members/member[@name='RequestBodyResponseBodyAsync(RequestContent,RequestContext)']/*" />
-        public virtual async Task<Response> RequestBodyResponseBodyAsync(RequestContent content, RequestContext context = null)
+        public virtual async Task<Response> RequestBodyResponseBodyAsync(RequestContent content, RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("ParametersLowlevelClient.RequestBodyResponseBody");
             scope.Start();
@@ -171,7 +171,7 @@ namespace Parameters_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/ParametersLowlevelClient.xml" path="doc/members/member[@name='RequestBodyResponseBody(RequestContent,RequestContext)']/*" />
-        public virtual Response RequestBodyResponseBody(RequestContent content, RequestContext context = null)
+        public virtual Response RequestBodyResponseBody(RequestContent content, RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("ParametersLowlevelClient.RequestBodyResponseBody");
             scope.Start();
@@ -203,7 +203,7 @@ namespace Parameters_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/ParametersLowlevelClient.xml" path="doc/members/member[@name='DeleteNoRequestBodyResponseBodyAsync(string,RequestContext)']/*" />
-        public virtual async Task<Response> DeleteNoRequestBodyResponseBodyAsync(string resourceName, RequestContext context = null)
+        public virtual async Task<Response> DeleteNoRequestBodyResponseBodyAsync(string resourceName, RequestContext context)
         {
             Argument.AssertNotNull(resourceName, nameof(resourceName));
 
@@ -237,7 +237,7 @@ namespace Parameters_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/ParametersLowlevelClient.xml" path="doc/members/member[@name='DeleteNoRequestBodyResponseBody(string,RequestContext)']/*" />
-        public virtual Response DeleteNoRequestBodyResponseBody(string resourceName, RequestContext context = null)
+        public virtual Response DeleteNoRequestBodyResponseBody(string resourceName, RequestContext context)
         {
             Argument.AssertNotNull(resourceName, nameof(resourceName));
 
@@ -330,7 +330,7 @@ namespace Parameters_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/ParametersLowlevelClient.xml" path="doc/members/member[@name='RequestBodyNoResponseBodyAsync(RequestContent,RequestContext)']/*" />
-        public virtual async Task<Response> RequestBodyNoResponseBodyAsync(RequestContent content, RequestContext context = null)
+        public virtual async Task<Response> RequestBodyNoResponseBodyAsync(RequestContent content, RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("ParametersLowlevelClient.RequestBodyNoResponseBody");
             scope.Start();
@@ -361,7 +361,7 @@ namespace Parameters_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/ParametersLowlevelClient.xml" path="doc/members/member[@name='RequestBodyNoResponseBody(RequestContent,RequestContext)']/*" />
-        public virtual Response RequestBodyNoResponseBody(RequestContent content, RequestContext context = null)
+        public virtual Response RequestBodyNoResponseBody(RequestContent content, RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("ParametersLowlevelClient.RequestBodyNoResponseBody");
             scope.Start();
@@ -388,15 +388,15 @@ namespace Parameters_LowLevel
         /// </list>
         /// </summary>
         /// <param name="id"> Query parameter Id. </param>
+        /// <param name="name"> Query parameter status. The default value is "start". </param>
         /// <param name="skip"> Query parameter skip. </param>
-        /// <param name="name"> Query parameter status. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="name"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/ParametersLowlevelClient.xml" path="doc/members/member[@name='OptionalPathParametersAsync(int,int,string,RequestContext)']/*" />
-        public virtual async Task<Response> OptionalPathParametersAsync(int id, int skip, string name = "start", RequestContext context = null)
+        /// <include file="Docs/ParametersLowlevelClient.xml" path="doc/members/member[@name='OptionalPathParametersAsync(int,string,int,RequestContext)']/*" />
+        public virtual async Task<Response> OptionalPathParametersAsync(int id, string name, int skip, RequestContext context = null)
         {
             Argument.AssertNotNullOrEmpty(name, nameof(name));
 
@@ -404,7 +404,7 @@ namespace Parameters_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreateOptionalPathParametersRequest(id, skip, name, context);
+                using HttpMessage message = CreateOptionalPathParametersRequest(id, name, skip, context);
                 return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -425,15 +425,15 @@ namespace Parameters_LowLevel
         /// </list>
         /// </summary>
         /// <param name="id"> Query parameter Id. </param>
+        /// <param name="name"> Query parameter status. The default value is "start". </param>
         /// <param name="skip"> Query parameter skip. </param>
-        /// <param name="name"> Query parameter status. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="name"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/ParametersLowlevelClient.xml" path="doc/members/member[@name='OptionalPathParameters(int,int,string,RequestContext)']/*" />
-        public virtual Response OptionalPathParameters(int id, int skip, string name = "start", RequestContext context = null)
+        /// <include file="Docs/ParametersLowlevelClient.xml" path="doc/members/member[@name='OptionalPathParameters(int,string,int,RequestContext)']/*" />
+        public virtual Response OptionalPathParameters(int id, string name, int skip, RequestContext context = null)
         {
             Argument.AssertNotNullOrEmpty(name, nameof(name));
 
@@ -441,7 +441,7 @@ namespace Parameters_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreateOptionalPathParametersRequest(id, skip, name, context);
+                using HttpMessage message = CreateOptionalPathParametersRequest(id, name, skip, context);
                 return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
@@ -462,15 +462,15 @@ namespace Parameters_LowLevel
         /// </list>
         /// </summary>
         /// <param name="id"> Query parameter Id. </param>
-        /// <param name="name"> Query parameter status. </param>
-        /// <param name="skip"> Query parameter skip. </param>
+        /// <param name="name"> Query parameter status. The default value is "start". </param>
+        /// <param name="skip"> Query parameter skip. The default value is 12. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="name"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/ParametersLowlevelClient.xml" path="doc/members/member[@name='OptionalPathParametersWithMixedSequenceAsync(int,string,int,RequestContext)']/*" />
-        public virtual async Task<Response> OptionalPathParametersWithMixedSequenceAsync(int id, string name = "start", int skip = 12, RequestContext context = null)
+        public virtual async Task<Response> OptionalPathParametersWithMixedSequenceAsync(int id, string name, int skip, RequestContext context = null)
         {
             Argument.AssertNotNullOrEmpty(name, nameof(name));
 
@@ -499,15 +499,15 @@ namespace Parameters_LowLevel
         /// </list>
         /// </summary>
         /// <param name="id"> Query parameter Id. </param>
-        /// <param name="name"> Query parameter status. </param>
-        /// <param name="skip"> Query parameter skip. </param>
+        /// <param name="name"> Query parameter status. The default value is "start". </param>
+        /// <param name="skip"> Query parameter skip. The default value is 12. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="name"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/ParametersLowlevelClient.xml" path="doc/members/member[@name='OptionalPathParametersWithMixedSequence(int,string,int,RequestContext)']/*" />
-        public virtual Response OptionalPathParametersWithMixedSequence(int id, string name = "start", int skip = 12, RequestContext context = null)
+        public virtual Response OptionalPathParametersWithMixedSequence(int id, string name, int skip, RequestContext context = null)
         {
             Argument.AssertNotNullOrEmpty(name, nameof(name));
 
@@ -535,19 +535,19 @@ namespace Parameters_LowLevel
         /// </item>
         /// </list>
         /// </summary>
+        /// <param name="id"> Query parameter Id. The default value is 123. </param>
         /// <param name="name"> Query parameter status. </param>
         /// <param name="skip"> Query parameter skip. </param>
+        /// <param name="max"> Query parameter max. The default value is 50. </param>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="id"> Query parameter Id. </param>
         /// <param name="top"> Query parameter top. </param>
-        /// <param name="max"> Query parameter max. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="name"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/ParametersLowlevelClient.xml" path="doc/members/member[@name='OptionalPathBodyParametersWithMixedSequenceAsync(string,int,RequestContent,int,int?,int,RequestContext)']/*" />
-        public virtual async Task<Response> OptionalPathBodyParametersWithMixedSequenceAsync(string name, int skip, RequestContent content, int id = 123, int? top = null, int max = 50, RequestContext context = null)
+        /// <include file="Docs/ParametersLowlevelClient.xml" path="doc/members/member[@name='OptionalPathBodyParametersWithMixedSequenceAsync(int,string,int,int,RequestContent,int?,RequestContext)']/*" />
+        public virtual async Task<Response> OptionalPathBodyParametersWithMixedSequenceAsync(int id, string name, int skip, int max, RequestContent content, int? top, RequestContext context)
         {
             Argument.AssertNotNullOrEmpty(name, nameof(name));
 
@@ -555,7 +555,7 @@ namespace Parameters_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreateOptionalPathBodyParametersWithMixedSequenceRequest(name, skip, content, id, top, max, context);
+                using HttpMessage message = CreateOptionalPathBodyParametersWithMixedSequenceRequest(id, name, skip, max, content, top, context);
                 return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -575,19 +575,19 @@ namespace Parameters_LowLevel
         /// </item>
         /// </list>
         /// </summary>
+        /// <param name="id"> Query parameter Id. The default value is 123. </param>
         /// <param name="name"> Query parameter status. </param>
         /// <param name="skip"> Query parameter skip. </param>
+        /// <param name="max"> Query parameter max. The default value is 50. </param>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="id"> Query parameter Id. </param>
         /// <param name="top"> Query parameter top. </param>
-        /// <param name="max"> Query parameter max. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="name"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/ParametersLowlevelClient.xml" path="doc/members/member[@name='OptionalPathBodyParametersWithMixedSequence(string,int,RequestContent,int,int?,int,RequestContext)']/*" />
-        public virtual Response OptionalPathBodyParametersWithMixedSequence(string name, int skip, RequestContent content, int id = 123, int? top = null, int max = 50, RequestContext context = null)
+        /// <include file="Docs/ParametersLowlevelClient.xml" path="doc/members/member[@name='OptionalPathBodyParametersWithMixedSequence(int,string,int,int,RequestContent,int?,RequestContext)']/*" />
+        public virtual Response OptionalPathBodyParametersWithMixedSequence(int id, string name, int skip, int max, RequestContent content, int? top, RequestContext context)
         {
             Argument.AssertNotNullOrEmpty(name, nameof(name));
 
@@ -595,7 +595,7 @@ namespace Parameters_LowLevel
             scope.Start();
             try
             {
-                using HttpMessage message = CreateOptionalPathBodyParametersWithMixedSequenceRequest(name, skip, content, id, top, max, context);
+                using HttpMessage message = CreateOptionalPathBodyParametersWithMixedSequenceRequest(id, name, skip, max, content, top, context);
                 return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
@@ -605,7 +605,7 @@ namespace Parameters_LowLevel
             }
         }
 
-        internal HttpMessage CreateNoRequestBodyResponseBodyRequest(int id, int? top, int skip, string status, RequestContext context)
+        internal HttpMessage CreateNoRequestBodyResponseBodyRequest(int id, int skip, int? top, string status, RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier200);
             var request = message.Request;
@@ -614,11 +614,11 @@ namespace Parameters_LowLevel
             uri.Reset(_endpoint);
             uri.AppendPath("/test1", false);
             uri.AppendQuery("id", id, true);
+            uri.AppendQuery("skip", skip, true);
             if (top != null)
             {
                 uri.AppendQuery("$top", top.Value, true);
             }
-            uri.AppendQuery("skip", skip, true);
             if (status != null)
             {
                 uri.AppendQuery("status", status, true);
@@ -683,7 +683,7 @@ namespace Parameters_LowLevel
             return message;
         }
 
-        internal HttpMessage CreateOptionalPathParametersRequest(int id, int skip, string name, RequestContext context)
+        internal HttpMessage CreateOptionalPathParametersRequest(int id, string name, int skip, RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier200);
             var request = message.Request;
@@ -715,7 +715,7 @@ namespace Parameters_LowLevel
             return message;
         }
 
-        internal HttpMessage CreateOptionalPathBodyParametersWithMixedSequenceRequest(string name, int skip, RequestContent content, int id, int? top, int max, RequestContext context)
+        internal HttpMessage CreateOptionalPathBodyParametersWithMixedSequenceRequest(int id, string name, int skip, int max, RequestContent content, int? top, RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier200);
             var request = message.Request;
@@ -727,11 +727,11 @@ namespace Parameters_LowLevel
             uri.AppendPath("/", false);
             uri.AppendPath(name, true);
             uri.AppendQuery("skip", skip, true);
+            uri.AppendQuery("max", max, true);
             if (top != null)
             {
                 uri.AppendQuery("top", top.Value, true);
             }
-            uri.AppendQuery("max", max, true);
             request.Uri = uri;
             request.Headers.Add("Content-Type", "application/json");
             request.Content = content;

@@ -1,8 +1,8 @@
 {
-  "OutputFolder": ".",
-  "Namespace": "PetStore",
-  "LibraryName": "PetStore",
-  "SharedSourceFolders": [
+  "output-folder": ".",
+  "namespace": "PetStore",
+  "library-name": "PetStore",
+  "shared-source-folders": [
     "../../../../../../node_modules/@autorest/csharp/Generator.Shared",
     "../../../../../../node_modules/@autorest/csharp/Azure.Core.Shared"
   ],
