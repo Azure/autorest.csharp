@@ -328,7 +328,7 @@ namespace AutoRest.CSharp.Output.Models.Types
         {
             // Serialization uses field and property names that first need to verified for uniqueness
             // For that, FieldDeclaration instances must be written in the main partial class before JsonObjectSerialization is created for the serialization partial class
-            return new(Type, SerializationConstructorSignature, CreatePropertySerializations().ToArray(), null, Discriminator, false, true, true);
+            return new(Type, SerializationConstructorSignature, CreatePropertySerializations().ToArray(), null, Discriminator, false);
         }
 
         protected override XmlObjectSerialization? EnsureXmlSerialization()

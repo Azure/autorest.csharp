@@ -4,7 +4,6 @@
 #nullable enable
 
 using System.Text.Json;
-using Azure.Core.Serialization;
 
 namespace Azure.Core
 {

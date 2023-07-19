@@ -196,7 +196,7 @@ namespace AutoRest.TestServer.Tests
             Assert.NotNull(type.GetMethod("Deserialize" + type.Name,
                 BindingFlags.Static | BindingFlags.NonPublic,
                 null,
-                new[] { typeof(JsonElement), typeof(SerializableOptions) },
+                new[] { typeof(JsonElement), typeof(ModelSerializerOptions) },
                 null));
             Assert.NotNull(type.GetMethod("Deserialize" + type.Name,
                 BindingFlags.Static | BindingFlags.NonPublic,

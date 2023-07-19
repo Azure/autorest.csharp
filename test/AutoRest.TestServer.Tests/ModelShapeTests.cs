@@ -494,7 +494,7 @@ namespace AutoRest.TestServer.Tests
         {
             TypeAsserts.TypeIsStatic(typeof(ModelShapesModelFactory));
             TypeAsserts.TypeOnlyDeclaresThesePublicMethods(typeof(ModelShapesModelFactory),
-                nameof(MixedModel), nameof(MixedModelWithReadonlyProperty), nameof(OutputModel), nameof(ReadonlyModel));
+                nameof(MixedModel), nameof(MixedModelWithReadonlyProperty), nameof(OutputModel), nameof(ReadonlyModel), nameof(InputModel));
         }
 
         [Test]

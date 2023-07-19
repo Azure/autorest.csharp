@@ -10,7 +10,7 @@ namespace AutoRest.CSharp.Output.Models.Serialization.Json
 {
     internal class JsonObjectSerialization
     {
-        public JsonObjectSerialization(CSharpType type, ConstructorSignature constructor, JsonPropertySerialization[] properties, JsonAdditionalPropertiesSerialization? additionalProperties, ObjectTypeDiscriminator? discriminator, bool includeConverter, bool writeToRequestContent, bool writeIncludeFromResponse)
+        public JsonObjectSerialization(CSharpType type, ConstructorSignature constructor, JsonPropertySerialization[] properties, JsonAdditionalPropertiesSerialization? additionalProperties, ObjectTypeDiscriminator? discriminator, bool includeConverter)
         {
             Type = type;
             Constructor = constructor;
@@ -18,8 +18,6 @@ namespace AutoRest.CSharp.Output.Models.Serialization.Json
             AdditionalProperties = additionalProperties;
             Discriminator = discriminator;
             IncludeConverter = includeConverter;
-            WriteToRequestContent = writeToRequestContent;
-            WriteIncludeFromResponse = writeIncludeFromResponse;
         }
 
         public CSharpType Type { get; }
@@ -28,7 +26,5 @@ namespace AutoRest.CSharp.Output.Models.Serialization.Json
         public JsonAdditionalPropertiesSerialization? AdditionalProperties { get; }
         public ObjectTypeDiscriminator? Discriminator { get; }
         public bool IncludeConverter { get; }
-        public bool WriteToRequestContent { get; }
-        public bool WriteIncludeFromResponse { get; }
     }
 }

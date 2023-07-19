@@ -305,7 +305,7 @@ namespace AutoRest.CSharp.Output.Builders
             PopulatePropertyBag(propertyBag, 0);
             var properties = GetPropertySerializationsFromBag(propertyBag, objectType).ToArray();
             var additionalProperties = CreateAdditionalProperties(objectSchema, objectType);
-            return new JsonObjectSerialization(objectType.Type, objectType.SerializationConstructor.Signature, properties, additionalProperties, objectType.Discriminator, objectType.IncludeConverter, false, false);
+            return new JsonObjectSerialization(objectType.Type, objectType.SerializationConstructor.Signature, properties, additionalProperties, objectType.Discriminator, objectType.IncludeConverter);
         }
 
         private class SerializationPropertyBag
