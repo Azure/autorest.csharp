@@ -29,11 +29,11 @@ namespace AutoRest.CSharp.Output.Models.Types
         private ModelTypeProviderFields? _fields;
         private ConstructorSignature? _publicConstructor;
         private ConstructorSignature? _serializationConstructor;
-        private InputModelType _inputModel;
-        private TypeFactory _typeFactory;
-        private SourceInputModel? _sourceInputModel;
-        private InputModelType[]? _derivedTypes;
-        private ObjectType? _defaultDerivedType;
+        private readonly InputModelType _inputModel;
+        private readonly TypeFactory _typeFactory;
+        private readonly SourceInputModel? _sourceInputModel;
+        private readonly InputModelType[]? _derivedTypes;
+        private readonly ObjectType? _defaultDerivedType;
 
         protected override string DefaultName { get; }
         protected override string DefaultAccessibility { get; }
@@ -60,6 +60,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             _derivedTypes = derivedTypes;
             _defaultDerivedType = defaultDerivedType ?? (inputModel.IsUnknownDiscriminatorModel ? this : null);
         }
+
         private MethodSignatureModifiers GetFromResponseModifiers()
         {
             var signatures = MethodSignatureModifiers.Internal | MethodSignatureModifiers.Static;
@@ -308,7 +309,7 @@ namespace AutoRest.CSharp.Output.Models.Types
         protected override IEnumerable<ObjectTypeConstructor> BuildConstructors()
         {
             yield return InitializationConstructor;
-            if (SerializationConstructor != InitializationConstructor)
+            if (SerializationConstructor != InitializationConstructor && (!Configuration.Generation1ConvenienceClient || IncludeDeserializer))
             {
                 yield return SerializationConstructor;
             }

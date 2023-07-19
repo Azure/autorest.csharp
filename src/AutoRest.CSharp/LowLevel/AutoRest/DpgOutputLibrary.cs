@@ -70,10 +70,10 @@ namespace AutoRest.CSharp.Output.Models.Types
 
         public override TypeProvider FindTypeProviderForSchema(Schema schema) => throw new NotImplementedException($"{nameof(FindTypeForSchema)} shouldn't be called for DPG!");
 
-        private static IReadOnlyDictionary<InputEnumType, EnumType> CreateEnums(IReadOnlyList<InputEnumType> inputEnums, string defaultNamespace, TypeFactory typeFactory, SourceInputModel? sourceInputModel)
+        public static IReadOnlyDictionary<InputEnumType, EnumType> CreateEnums(IReadOnlyList<InputEnumType> inputEnums, string defaultNamespace, TypeFactory typeFactory, SourceInputModel? sourceInputModel)
             => inputEnums.ToDictionary(e => e, e => new EnumType(e, defaultNamespace, "public", typeFactory, sourceInputModel), InputEnumType.IgnoreNullabilityComparer);
 
-        private static IReadOnlyDictionary<InputModelType, ModelTypeProvider> CreateModels(IReadOnlyList<InputModelType> inputModels, string defaultNamespace, TypeFactory typeFactory, SourceInputModel? sourceInputModel)
+        public static IReadOnlyDictionary<InputModelType, ModelTypeProvider> CreateModels(IReadOnlyList<InputModelType> inputModels, string defaultNamespace, TypeFactory typeFactory, SourceInputModel? sourceInputModel)
         {
             var models = new Dictionary<InputModelType, ModelTypeProvider>();
             var derivedTypesLookup = new Dictionary<InputModelType, List<InputModelType>>();

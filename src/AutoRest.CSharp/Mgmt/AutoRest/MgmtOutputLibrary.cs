@@ -74,6 +74,8 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
 
         private readonly InputNamespace _input;
 
+        private readonly IReadOnlyDictionary<Schema, InputEnumType> _schemaToInputEnumMap;
+
         private readonly IReadOnlyDictionary<InputOperation, Operation> _inputOperationToOperation;
 
         private readonly LookupDictionary<Schema, string, TypeProvider> _schemaOrNameToModels = new(schema => schema.Name);
@@ -102,8 +104,9 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
             ResourceDataSchemaNameToOperationSets = DecorateOperationSets();
             AllSchemaMap = InitializeModels(codeModel);
 
-            var codeModelConverter = new CodeModelConverter();
-            _input = codeModelConverter.CreateNamespace(codeModel, schemaUsages);
+            var codeModelConverter = new CodeModelConverter(codeModel, schemaUsages);
+            _input = codeModelConverter.CreateNamespace();
+            _schemaToInputEnumMap = codeModelConverter.GetCurrentSchemaToInputEnumMap();
             _inputOperationToOperation = codeModelConverter.GetCurrentInputOperationToOperationMap();
 
             // others are populated later
@@ -425,7 +428,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
             return AllSchemaMap.Where(kv => !(kv.Value is ResourceData)).ToDictionary(kv => kv.Key, kv => kv.Value);
         }
 
-        public Dictionary<InputEnumType, EnumType> EnsureAllEnumMap()
+        private Dictionary<InputEnumType, EnumType> EnsureAllEnumMap()
         {
             var dictionary = new Dictionary<InputEnumType, EnumType>(InputEnumType.IgnoreNullabilityComparer);
             foreach (var (schema, typeProvider) in AllSchemaMap)
@@ -433,10 +436,10 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
                 switch (schema)
                 {
                     case SealedChoiceSchema sealedChoiceSchema:
-                        dictionary.Add(CodeModelConverter.CreateEnumType(sealedChoiceSchema), (EnumType)typeProvider);
+                        dictionary.Add(_schemaToInputEnumMap[sealedChoiceSchema], (EnumType)typeProvider);
                         break;
                     case ChoiceSchema choiceSchema:
-                        dictionary.Add(CodeModelConverter.CreateEnumType(choiceSchema), (EnumType)typeProvider);
+                        dictionary.Add(_schemaToInputEnumMap[choiceSchema], (EnumType)typeProvider);
                         break;
                 }
             }
@@ -838,8 +841,8 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
 
         private TypeProvider BuildModel(Schema schema) => schema switch
         {
-            SealedChoiceSchema sealedChoiceSchema => new EnumType(CodeModelConverter.CreateEnumType(sealedChoiceSchema), schema, TypeFactory, MgmtContext.Context),
-            ChoiceSchema choiceSchema => new EnumType(CodeModelConverter.CreateEnumType(choiceSchema), schema, TypeFactory, MgmtContext.Context),
+            SealedChoiceSchema sealedChoiceSchema => new EnumType(_schemaToInputEnumMap[sealedChoiceSchema], schema, TypeFactory, MgmtContext.Context),
+            ChoiceSchema choiceSchema => new EnumType(_schemaToInputEnumMap[choiceSchema], schema, TypeFactory, MgmtContext.Context),
             ObjectSchema objectSchema => schema.Extensions != null && (schema.Extensions.MgmtReferenceType || schema.Extensions.MgmtPropertyReferenceType || schema.Extensions.MgmtTypeReferenceType)
                 ? new MgmtReferenceType(objectSchema, TypeFactory)
                 : new MgmtObjectType(objectSchema, TypeFactory),

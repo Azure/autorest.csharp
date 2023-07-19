@@ -13,10 +13,9 @@ namespace constants.Models
         /// <summary> Initializes a new instance of NoModelAsStringRequiredOneValueNoDefault. </summary>
         internal NoModelAsStringRequiredOneValueNoDefault()
         {
-            Parameter = NoModelAsStringRequiredOneValueNoDefaultEnum.Value1;
         }
 
         /// <summary> Gets the parameter. </summary>
-        public NoModelAsStringRequiredOneValueNoDefaultEnum Parameter { get; }
+        public NoModelAsStringRequiredOneValueNoDefaultEnum Parameter { get; } = NoModelAsStringRequiredOneValueNoDefaultEnum.Value1;
     }
 }

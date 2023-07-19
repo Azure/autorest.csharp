@@ -13,37 +13,46 @@ namespace AutoRest.CSharp.Common.Input
 {
     internal class CodeModelConverter
     {
+        private readonly CodeModel _codeModel;
+        private readonly SchemaUsageProvider _schemaUsages;
         private readonly Dictionary<ServiceRequest, Func<InputOperation>> _operationsCache;
         private readonly Dictionary<RequestParameter, Func<InputParameter>> _parametersCache;
         private readonly Dictionary<ObjectSchema, InputModelType> _modelsCache;
         private readonly Dictionary<ObjectSchema, List<InputModelProperty>> _modelPropertiesCache;
         private readonly Dictionary<ObjectSchema, List<InputModelType>> _derivedModelsCache;
         private readonly Dictionary<InputOperation, Operation> _inputOperationToOperationMap;
+        private readonly Dictionary<Schema, InputEnumType> _schemaToInputEnumMap;
 
-        public CodeModelConverter()
+        public CodeModelConverter(CodeModel codeModel, SchemaUsageProvider schemaUsages)
         {
+            _codeModel = codeModel;
+            _schemaUsages = schemaUsages;
             _operationsCache = new Dictionary<ServiceRequest, Func<InputOperation>>();
             _parametersCache = new Dictionary<RequestParameter, Func<InputParameter>>();
             _modelsCache = new Dictionary<ObjectSchema, InputModelType>();
             _modelPropertiesCache = new Dictionary<ObjectSchema, List<InputModelProperty>>();
             _derivedModelsCache = new Dictionary<ObjectSchema, List<InputModelType>>();
             _inputOperationToOperationMap = new Dictionary<InputOperation, Operation>();
+            _schemaToInputEnumMap = new Dictionary<Schema, InputEnumType>();
         }
 
-        public InputNamespace CreateNamespace(CodeModel codeModel, SchemaUsageProvider schemaUsages)
+        public InputNamespace CreateNamespace()
         {
-            var enums = CreateEnums(codeModel.Schemas.Choices, codeModel.Schemas.SealedChoices);
-            var models = CreateModels(codeModel.Schemas.Objects, schemaUsages);
-            var clients = CreateClients(codeModel.OperationGroups);
+            var enums = CreateEnums(_codeModel.Schemas.Choices, _codeModel.Schemas.SealedChoices);
+            var models = CreateModels(_codeModel.Schemas.Objects);
+            var clients = CreateClients(_codeModel.OperationGroups);
 
-            return new(Name: codeModel.Language.Default.Name,
-                Description: codeModel.Language.Default.Description,
+            return new(Name: _codeModel.Language.Default.Name,
+                Description: _codeModel.Language.Default.Description,
                 Clients: clients,
                 Models: models,
                 Enums: enums,
-                ApiVersions: GetApiVersions(codeModel),
-                Auth: GetAuth(codeModel.Security.Schemes.OfType<SecurityScheme>()));
+                ApiVersions: GetApiVersions(),
+                Auth: GetAuth(_codeModel.Security.Schemes.OfType<SecurityScheme>()));
         }
+
+        public IReadOnlyDictionary<Schema, InputEnumType> GetCurrentSchemaToInputEnumMap()
+            => new Dictionary<Schema, InputEnumType>(_schemaToInputEnumMap);
 
         public IReadOnlyDictionary<InputOperation, Operation> GetCurrentInputOperationToOperationMap()
             => new Dictionary<InputOperation, Operation>(_inputOperationToOperationMap);
@@ -189,16 +198,31 @@ namespace AutoRest.CSharp.Common.Input
         }
 
         private IReadOnlyList<InputEnumType> CreateEnums(IEnumerable<ChoiceSchema> schemasChoices, IEnumerable<SealedChoiceSchema> schemasSealedChoices)
-            => schemasChoices.Select(c => CreateType(c, null, null))
-                .Concat(schemasSealedChoices.Select(c => CreateType(c, null, null)))
-                .OfType<InputEnumType>()
-                .ToList();
+        {
+            var enums = new List<InputEnumType>();
 
-        private IReadOnlyList<InputModelType> CreateModels(ICollection<ObjectSchema> schemas, SchemaUsageProvider schemaUsages)
+            foreach (var choiceSchema in schemasChoices)
+            {
+                var enumType = CreateEnumType(choiceSchema);
+                enums.Add(enumType);
+                _schemaToInputEnumMap[choiceSchema] = enumType;
+            }
+
+            foreach (var sealedChoiceSchema in schemasSealedChoices)
+            {
+                var enumType = CreateEnumType(sealedChoiceSchema);
+                enums.Add(enumType);
+                _schemaToInputEnumMap[sealedChoiceSchema] = enumType;
+            }
+
+            return enums;
+        }
+
+        private IReadOnlyList<InputModelType> CreateModels(ICollection<ObjectSchema> schemas)
         {
             foreach (var schema in schemas)
             {
-                GetOrCreateModel(schema, schemaUsages);
+                GetOrCreateModel(schema);
             }
 
             foreach (var (schema, properties) in _modelPropertiesCache)
@@ -218,22 +242,23 @@ namespace AutoRest.CSharp.Common.Input
             return schemas.Select(s => _modelsCache[s]).ToList();
         }
 
-        private InputModelType GetOrCreateModel(ObjectSchema schema, SchemaUsageProvider schemaUsages)
+        private InputModelType GetOrCreateModel(ObjectSchema schema)
         {
             if (_modelsCache.TryGetValue(schema, out var model))
             {
                 return model;
             }
 
+            var usage = _schemaUsages.GetUsage(schema);
             var properties = new List<InputModelProperty>();
             var derived = new List<InputModelType>();
             model = new InputModelType(
                 Name: schema.Language.Default.Name,
                 Namespace: schema.Extensions?.Namespace,
-                Accessibility: schema.Extensions?.Accessibility,
+                Accessibility: schema.Extensions?.Accessibility ?? (usage.HasFlag(SchemaTypeUsage.Model) ? "public" : "internal"),
                 Deprecated: schema.Deprecated?.Reason,
                 Description: schema.CreateDescription(),
-                Usage: (schemaUsages.GetUsage(schema) & (SchemaTypeUsage.Input | SchemaTypeUsage.Output)) switch
+                Usage: (usage & (SchemaTypeUsage.Input | SchemaTypeUsage.Output)) switch
                 {
                     SchemaTypeUsage.Input => InputModelTypeUsage.Input,
                     SchemaTypeUsage.Output => InputModelTypeUsage.Output,
@@ -242,7 +267,7 @@ namespace AutoRest.CSharp.Common.Input
                 },
                 Properties: properties,
                 BaseModel: schema.Parents?.Immediate.FirstOrDefault() is ObjectSchema parent
-                    ? GetOrCreateModel(parent, schemaUsages)
+                    ? GetOrCreateModel(parent)
                     : null,
                 DerivedModels: derived,
                 DiscriminatorValue: schema.DiscriminatorValue,
@@ -332,13 +357,13 @@ namespace AutoRest.CSharp.Common.Input
             return CreateType(sc, requestParameter.Extensions?.Format, _modelsCache, requestParameter.IsNullable || !requestParameter.IsRequired);
         }
 
-        private static InputType CreateType(Schema schema, IReadOnlyDictionary<ObjectSchema, InputModelType>? modelsCache, bool isNullable)
+        private InputType CreateType(Schema schema, IReadOnlyDictionary<ObjectSchema, InputModelType>? modelsCache, bool isNullable)
             => CreateType(schema, schema.Extensions?.Format, modelsCache, isNullable);
 
-        private static InputType CreateType(Schema schema, string? format, IReadOnlyDictionary<ObjectSchema, InputModelType>? modelsCache, bool isNullable)
+        private InputType CreateType(Schema schema, string? format, IReadOnlyDictionary<ObjectSchema, InputModelType>? modelsCache, bool isNullable)
             => CreateType(schema, format, modelsCache) with { IsNullable = isNullable };
 
-        public static InputType CreateType(Schema schema, string? format, IReadOnlyDictionary<ObjectSchema, InputModelType>? modelsCache) => schema switch
+        private InputType CreateType(Schema schema, string? format, IReadOnlyDictionary<ObjectSchema, InputModelType>? modelsCache) => schema switch
         {
             BinarySchema => InputPrimitiveType.Stream,
 
@@ -398,7 +423,7 @@ namespace AutoRest.CSharp.Common.Input
             _ => new CodeModelType(schema)
         };
 
-        private static InputConstant CreateConstant(ConstantSchema constantSchema, string? format, IReadOnlyDictionary<ObjectSchema, InputModelType>? modelsCache)
+        private InputConstant CreateConstant(ConstantSchema constantSchema, string? format, IReadOnlyDictionary<ObjectSchema, InputModelType>? modelsCache)
         {
             var valueType = CreateType(constantSchema.ValueType, format, modelsCache);
             // normalize the value, because the "value" coming from the code model is always a string
@@ -422,20 +447,25 @@ namespace AutoRest.CSharp.Common.Input
             return new InputConstant(normalizedValue, valueType);
         }
 
-        public static InputEnumType CreateEnumType(ChoiceSchema choiceSchema) => CreateEnumType(choiceSchema, choiceSchema.ChoiceType, choiceSchema.Choices, true);
+        public InputEnumType CreateEnumType(ChoiceSchema choiceSchema) => CreateEnumType(choiceSchema, choiceSchema.ChoiceType, choiceSchema.Choices, true);
 
-        public static InputEnumType CreateEnumType(SealedChoiceSchema choiceSchema) => CreateEnumType(choiceSchema, choiceSchema.ChoiceType, choiceSchema.Choices, false);
+        public InputEnumType CreateEnumType(SealedChoiceSchema choiceSchema) => CreateEnumType(choiceSchema, choiceSchema.ChoiceType, choiceSchema.Choices, false);
 
-        private static InputEnumType CreateEnumType(Schema schema, PrimitiveSchema choiceType, IEnumerable<ChoiceValue> choices, bool isExtensible) => new(
-            Name: schema.Name,
-            Namespace: schema.Extensions?.Namespace,
-            Accessibility: schema.Extensions?.Accessibility,
-            Deprecated: schema.Deprecated?.Reason,
-            Description: schema.CreateDescription(),
-            EnumValueType: (InputPrimitiveType)CreateType(choiceType, schema.Extensions?.Format, null),
-            AllowedValues: choices.Select(CreateEnumValue).ToList(),
-            IsExtensible: isExtensible
-        );
+        private InputEnumType CreateEnumType(Schema schema, PrimitiveSchema choiceType, IEnumerable<ChoiceValue> choices, bool isExtensible)
+        {
+            var usage = _schemaUsages.GetUsage(schema);
+
+            return new(
+                Name: schema.Name,
+                Namespace: schema.Extensions?.Namespace,
+                Accessibility: schema.Extensions?.Accessibility ?? (usage.HasFlag(SchemaTypeUsage.Model) ? "public" : "internal"),
+                Deprecated: schema.Deprecated?.Reason,
+                Description: schema.CreateDescription(),
+                EnumValueType: (InputPrimitiveType)CreateType(choiceType, schema.Extensions?.Format, null),
+                AllowedValues: choices.Select(CreateEnumValue).ToList(),
+                IsExtensible: isExtensible
+            );
+        }
 
         private static InputEnumTypeValue CreateEnumValue(ChoiceValue choiceValue) => new(
             Name: choiceValue.Language.Default.Name,
@@ -470,8 +500,8 @@ namespace AutoRest.CSharp.Common.Input
             return null;
         }
 
-        public static IReadOnlyList<string> GetApiVersions(CodeModel codeModel)
-            => codeModel.OperationGroups
+        private IReadOnlyList<string> GetApiVersions()
+            => _codeModel.OperationGroups
                 .SelectMany(g => g.Operations.SelectMany(o => o.ApiVersions))
                 .Select(v => v.Version)
                 .Distinct()

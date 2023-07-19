@@ -477,11 +477,6 @@ namespace AutoRest.CSharp.Output.Models
 
         private static ValueExpression ConvertToRequestPartType(ValueExpression value, CSharpType fromType, bool convertOnlyExtendableEnumToString = false)
         {
-            if (value is ConstantExpression)
-            {
-                return value;
-            }
-
             if (fromType is { IsFrameworkType: false, Implementation: EnumType enumType } && (!convertOnlyExtendableEnumToString || enumType.IsExtensible))
             {
                 return new EnumExpression(enumType, value.NullableStructValue(fromType)).ToSerial();

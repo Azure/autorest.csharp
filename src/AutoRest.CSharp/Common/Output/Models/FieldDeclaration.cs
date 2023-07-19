@@ -8,7 +8,7 @@ using AutoRest.CSharp.Input.Source;
 
 namespace AutoRest.CSharp.Output.Models
 {
-    internal record FieldDeclaration(FormattableString? Description, FieldModifiers Modifiers, CSharpType Type, CodeWriterDeclaration Declaration, FormattableString? DefaultValue, bool IsRequired, bool IsField = false, bool WriteAsProperty = false, bool OptionalViaNullability = false, FieldModifiers? GetterModifiers = null, FieldModifiers? SetterModifiers = null, SourcePropertySerializationMapping? SerializationMapping = null)
+    internal record FieldDeclaration(FormattableString? Description, FieldModifiers Modifiers, CSharpType Type, CodeWriterDeclaration Declaration, FormattableString? DefaultValue, bool IsRequired, bool WriteAsProperty = false, bool OptionalViaNullability = false, FieldModifiers? GetterModifiers = null, FieldModifiers? SetterModifiers = null, SourcePropertySerializationMapping? SerializationMapping = null)
     {
         public string Name => Declaration.ActualName;
         public string Accessibility => (Modifiers & FieldModifiers.Public) > 0 ? "public" : "internal";
@@ -28,7 +28,6 @@ namespace AutoRest.CSharp.Output.Models
                   Declaration: new CodeWriterDeclaration(name),
                   DefaultValue: defaultValue,
                   IsRequired: false,
-                  IsField: false,
                   WriteAsProperty: writeAsProperty,
                   GetterModifiers: null,
                   SetterModifiers: null)
@@ -41,7 +40,6 @@ namespace AutoRest.CSharp.Output.Models
                   Declaration: new CodeWriterDeclaration(name),
                   DefaultValue: null,
                   IsRequired: false,
-                  IsField: false,
                   WriteAsProperty: writeAsProperty)
         { }
     }

@@ -151,7 +151,7 @@ namespace AutoRest.CSharp.Output.Models
             );
         }
 
-        public virtual RestClientOperationMethods BuildLegacy()
+        public RestClientOperationMethods BuildLegacy()
         {
             var parameters = _parametersBuilder.BuildParametersLegacy(!Configuration.AzureArm);
             var createMessageBuilder = new CreateMessageMethodBuilder(_fields, parameters.RequestParts, parameters.CreateMessage, null);

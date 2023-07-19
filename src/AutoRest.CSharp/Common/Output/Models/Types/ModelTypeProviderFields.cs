@@ -122,8 +122,10 @@ namespace AutoRest.CSharp.Output.Models.Types
             var propertyIsOptionalInOutputModel = inputModel.Usage is InputModelTypeUsage.Output && !inputModelProperty.IsRequired;
             var propertyIsConstant = inputModelProperty.ConstantValue is not null;
             var propertyIsDiscriminator = inputModelProperty.IsDiscriminator;
+
             var propertyShouldOmitSetter = !propertyIsDiscriminator && // if a property is a discriminator, it should always has its setter
                 (inputModelProperty.IsReadOnly || // a property will not have setter when it is readonly
+                (!inputModel.Usage.HasFlag(InputModelTypeUsage.Input) && Configuration.Generation1ConvenienceClient) || // In Legacy DataPlane, non-input models have read-only properties
                 (propertyIsConstant && inputModelProperty.IsRequired) || // a property will not have setter when it is required literal type
                 propertyIsCollection || // a property will not have setter when it is a collection
                 propertyIsRequiredInNonRoundTripModel || // a property will explicitly omit its setter when it is useless
@@ -161,7 +163,6 @@ namespace AutoRest.CSharp.Output.Models.Types
                 GetPropertyDefaultValue(originalType, inputModelProperty),
                 inputModelProperty.IsRequired,
                 OptionalViaNullability: optionalViaNullability,
-                IsField: false,
                 WriteAsProperty: true,
                 SetterModifiers: setterModifiers);
         }
@@ -198,7 +199,6 @@ namespace AutoRest.CSharp.Output.Models.Types
                 Declaration: declaration,
                 DefaultValue: GetPropertyDefaultValue(originalType, inputModelProperty),
                 IsRequired: inputModelProperty.IsRequired,
-                IsField: existingMember is IFieldSymbol,
                 WriteAsProperty: writeAsProperty,
                 OptionalViaNullability: optionalViaNullability,
                 SerializationMapping: serialization);
