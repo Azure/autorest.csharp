@@ -482,6 +482,11 @@ namespace AutoRest.CSharp.Output.Models
                 return new EnumExpression(enumType, value.NullableStructValue(fromType)).ToSerial();
             }
 
+            if (value is ConstantExpression)
+            {
+                return value;
+            }
+
             if (fromType.EqualsIgnoreNullable(typeof(ContentType)))
             {
                 return value.NullableStructValue(fromType).InvokeToString();

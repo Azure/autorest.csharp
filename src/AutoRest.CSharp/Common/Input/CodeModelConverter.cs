@@ -413,12 +413,12 @@ namespace AutoRest.CSharp.Common.Input
             ChoiceSchema choiceSchema => CreateEnumType(choiceSchema, choiceSchema.ChoiceType, choiceSchema.Choices, true),
             SealedChoiceSchema choiceSchema => CreateEnumType(choiceSchema, choiceSchema.ChoiceType, choiceSchema.Choices, false),
 
-            ArraySchema array when IsDPG => new InputListType(array.Name, CreateType(array.ElementType, modelsCache, array.NullableItems ?? false)),
-            DictionarySchema dictionary when IsDPG => new InputDictionaryType(dictionary.Name, InputPrimitiveType.String, CreateType(dictionary.ElementType, modelsCache, dictionary.NullableItems ?? false)),
-            ObjectSchema objectSchema when IsDPG && modelsCache != null => modelsCache[objectSchema],
+            ArraySchema array when !Configuration.AzureArm => new InputListType(array.Name, CreateType(array.ElementType, modelsCache, array.NullableItems ?? false)),
+            DictionarySchema dictionary when !Configuration.AzureArm => new InputDictionaryType(dictionary.Name, InputPrimitiveType.String, CreateType(dictionary.ElementType, modelsCache, dictionary.NullableItems ?? false)),
+            ObjectSchema objectSchema when !Configuration.AzureArm && modelsCache != null => modelsCache[objectSchema],
 
-            AnySchema when IsDPG => InputIntrinsicType.Unknown,
-            AnyObjectSchema when IsDPG => InputIntrinsicType.Unknown,
+            AnySchema when !Configuration.AzureArm => InputIntrinsicType.Unknown,
+            AnyObjectSchema when !Configuration.AzureArm => InputIntrinsicType.Unknown,
 
             _ => new CodeModelType(schema)
         };
@@ -482,8 +482,6 @@ namespace AutoRest.CSharp.Common.Input
             HttpParameterIn.Body => RequestLocation.Body,
             _ => RequestLocation.None
         };
-
-        private static bool IsDPG => !Configuration.Generation1ConvenienceClient && !Configuration.AzureArm;
 
         private InputConstant? GetDefaultValue(RequestParameter parameter)
         {
