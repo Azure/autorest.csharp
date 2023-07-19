@@ -324,21 +324,11 @@ namespace AutoRest.CSharp.Output.Models.Types
             return false;
         }
 
-        protected override bool EnsureIncludeSerializer()
-        {
-            return _inputModel.Usage.HasFlag(InputModelTypeUsage.Input);
-        }
-
-        protected override bool EnsureIncludeDeserializer()
-        {
-            return _inputModel.Usage.HasFlag(InputModelTypeUsage.Output);
-        }
-
         protected override JsonObjectSerialization EnsureJsonSerialization()
         {
             // Serialization uses field and property names that first need to verified for uniqueness
             // For that, FieldDeclaration instances must be written in the main partial class before JsonObjectSerialization is created for the serialization partial class
-            return new(Type, SerializationConstructorSignature, CreatePropertySerializations().ToArray(), null, Discriminator, false, EnsureIncludeSerializer(), EnsureIncludeDeserializer());
+            return new(Type, SerializationConstructorSignature, CreatePropertySerializations().ToArray(), null, Discriminator, false, true, true);
         }
 
         protected override XmlObjectSerialization? EnsureXmlSerialization()
@@ -348,10 +338,8 @@ namespace AutoRest.CSharp.Output.Models.Types
 
         protected override IEnumerable<ModelMethodDefinition> BuildMethods()
         {
-            if (EnsureIncludeDeserializer())
-                yield return new ModelMethodDefinition(FromResponseSignature, SerializationWriter.JsonFromResponseMethod);
-            if (EnsureIncludeSerializer())
-                yield return new ModelMethodDefinition(ToRequestContentSignature, SerializationWriter.JsonToRequestContentMethod);
+            yield return new ModelMethodDefinition(FromResponseSignature, SerializationWriter.JsonFromResponseMethod);
+            yield return new ModelMethodDefinition(ToRequestContentSignature, SerializationWriter.JsonToRequestContentMethod);
         }
 
         public ObjectTypeProperty GetPropertyBySerializedName(string serializedName, bool includeParents = false)

@@ -19,8 +19,8 @@ Write-Host "git sparse-checkout init"
 git sparse-checkout init
 Write-Host "git sparse-checkout set --no-cone $azCoreSharedPath $armCoreSharedPath"
 git sparse-checkout set --no-cone $azCoreSharedPath $armCoreSharedPath
-Write-Host "git checkout mnash-hideStuff"
-git checkout mnash-hideStuff
+Write-Host "git checkout mnash-perfChecks"
+git checkout mnash-perfChecks
 Pop-Location
 
 function CopyAll([string[]]$files, [string]$source, [string]$destination)

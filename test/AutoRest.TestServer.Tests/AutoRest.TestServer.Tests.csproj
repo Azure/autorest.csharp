@@ -15,7 +15,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Azure.Core" Version="1.33.0-alpha.20230612.4" />
+    <PackageReference Include="Azure.Core" Version="1.35.0-alpha.20230718.3" />
     <PackageReference Include="Azure.Core.Experimental" Version="0.1.0-preview.18" />
     <PackageReference Include="Azure.Identity" Version="1.0.0" />
     <PackageReference Include="Azure.ResourceManager" Version="1.6.0" />

@@ -19,7 +19,7 @@ namespace AutoRest.CSharp.Generation.Writers
         public static void ToSerializeCall(this CodeWriter writer, XmlObjectSerialization objectSerialization, CodeWriterDeclaration nameHint)
         {
             FormattableString writerName = $"writer";
-            writer.Line($"{writerName}.WriteStartElement({nameHint} ?? {objectSerialization.Name:L});");
+            writer.Line($"{writerName}.WriteStartElement({objectSerialization.Name:L});");
 
             foreach (XmlObjectAttributeSerialization property in objectSerialization.Attributes)
             {
