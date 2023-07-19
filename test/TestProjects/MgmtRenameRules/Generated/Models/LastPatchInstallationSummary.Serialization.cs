@@ -12,10 +12,25 @@ using Azure.Core.Serialization;
 
 namespace MgmtRenameRules.Models
 {
-    public partial class LastPatchInstallationSummary
+    public partial class LastPatchInstallationSummary : IUtf8JsonSerializable, IJsonModelSerializable
     {
-        internal static LastPatchInstallationSummary DeserializeLastPatchInstallationSummary(JsonElement element, SerializableOptions options = default)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModelSerializable)this).Serialize(writer, ModelSerializerOptions.AzureServiceDefault);
+
+        void IJsonModelSerializable.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
+            writer.WriteStartObject();
+            writer.WriteEndObject();
+        }
+
+        object IModelSerializable.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            using var doc = JsonDocument.Parse(data);
+            return DeserializeLastPatchInstallationSummary(doc.RootElement, options);
+        }
+
+        internal static LastPatchInstallationSummary DeserializeLastPatchInstallationSummary(JsonElement element, ModelSerializerOptions options = default)
+        {
+            options ??= ModelSerializerOptions.AzureServiceDefault;
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
@@ -146,6 +161,12 @@ namespace MgmtRenameRules.Models
                 }
             }
             return new LastPatchInstallationSummary(Optional.ToNullable(status), installationActivityId.Value, Optional.ToNullable(maintenanceWindowExceeded), Optional.ToNullable(rebootStatus), Optional.ToNullable(notSelectedPatchCount), Optional.ToNullable(excludedPatchCount), Optional.ToNullable(pendingPatchCount), Optional.ToNullable(installedPatchCount), Optional.ToNullable(failedPatchCount), Optional.ToNullable(startTime), Optional.ToNullable(lastModifiedTime), startedBy.Value, error.Value);
+        }
+
+        object IJsonModelSerializable.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        {
+            using var doc = JsonDocument.ParseValue(ref reader);
+            return DeserializeLastPatchInstallationSummary(doc.RootElement, options);
         }
     }
 }

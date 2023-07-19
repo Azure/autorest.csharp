@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
@@ -12,10 +13,25 @@ using Azure.Core.Serialization;
 
 namespace MgmtSupersetFlattenInheritance.Models
 {
-    internal partial class SubResourceModel1ListResult
+    internal partial class SubResourceModel1ListResult : IUtf8JsonSerializable, IJsonModelSerializable
     {
-        internal static SubResourceModel1ListResult DeserializeSubResourceModel1ListResult(JsonElement element, SerializableOptions options = default)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModelSerializable)this).Serialize(writer, ModelSerializerOptions.AzureServiceDefault);
+
+        void IJsonModelSerializable.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
+            writer.WriteStartObject();
+            writer.WriteEndObject();
+        }
+
+        object IModelSerializable.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            using var doc = JsonDocument.Parse(data);
+            return DeserializeSubResourceModel1ListResult(doc.RootElement, options);
+        }
+
+        internal static SubResourceModel1ListResult DeserializeSubResourceModel1ListResult(JsonElement element, ModelSerializerOptions options = default)
+        {
+            options ??= ModelSerializerOptions.AzureServiceDefault;
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
@@ -45,6 +61,12 @@ namespace MgmtSupersetFlattenInheritance.Models
                 }
             }
             return new SubResourceModel1ListResult(Optional.ToList(value), nextLink.Value);
+        }
+
+        object IJsonModelSerializable.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        {
+            using var doc = JsonDocument.ParseValue(ref reader);
+            return DeserializeSubResourceModel1ListResult(doc.RootElement, options);
         }
     }
 }

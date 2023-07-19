@@ -5,16 +5,37 @@
 
 #nullable disable
 
+using System;
 using System.Text.Json;
 using Azure.Core;
 using Azure.Core.Serialization;
 
 namespace TypeSchemaMapping.Models
 {
-    internal partial class InternalModel
+    internal partial class InternalModel : IUtf8JsonSerializable, IJsonModelSerializable
     {
-        internal static InternalModel DeserializeInternalModel(JsonElement element, SerializableOptions options = default)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModelSerializable)this).Serialize(writer, ModelSerializerOptions.AzureServiceDefault);
+
+        void IJsonModelSerializable.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
+            writer.WriteStartObject();
+            if (Optional.IsDefined(StringProperty))
+            {
+                writer.WritePropertyName("StringProperty"u8);
+                writer.WriteStringValue(StringProperty);
+            }
+            writer.WriteEndObject();
+        }
+
+        object IModelSerializable.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            using var doc = JsonDocument.Parse(data);
+            return DeserializeInternalModel(doc.RootElement, options);
+        }
+
+        internal static InternalModel DeserializeInternalModel(JsonElement element, ModelSerializerOptions options = default)
+        {
+            options ??= ModelSerializerOptions.AzureServiceDefault;
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
@@ -29,6 +50,12 @@ namespace TypeSchemaMapping.Models
                 }
             }
             return new InternalModel(stringProperty.Value);
+        }
+
+        object IJsonModelSerializable.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        {
+            using var doc = JsonDocument.ParseValue(ref reader);
+            return DeserializeInternalModel(doc.RootElement, options);
         }
     }
 }

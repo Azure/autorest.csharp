@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
@@ -13,10 +14,35 @@ using MgmtOperations;
 
 namespace MgmtOperations.Models
 {
-    internal partial class UnpatchableResourceListResult
+    internal partial class UnpatchableResourceListResult : IUtf8JsonSerializable, IJsonModelSerializable
     {
-        internal static UnpatchableResourceListResult DeserializeUnpatchableResourceListResult(JsonElement element, SerializableOptions options = default)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModelSerializable)this).Serialize(writer, ModelSerializerOptions.AzureServiceDefault);
+
+        void IJsonModelSerializable.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
+            writer.WriteStartObject();
+            if (Optional.IsCollectionDefined(Value))
+            {
+                writer.WritePropertyName("value"u8);
+                writer.WriteStartArray();
+                foreach (var item in Value)
+                {
+                    writer.WriteObjectValue(item);
+                }
+                writer.WriteEndArray();
+            }
+            writer.WriteEndObject();
+        }
+
+        object IModelSerializable.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            using var doc = JsonDocument.Parse(data);
+            return DeserializeUnpatchableResourceListResult(doc.RootElement, options);
+        }
+
+        internal static UnpatchableResourceListResult DeserializeUnpatchableResourceListResult(JsonElement element, ModelSerializerOptions options = default)
+        {
+            options ??= ModelSerializerOptions.AzureServiceDefault;
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
@@ -40,6 +66,12 @@ namespace MgmtOperations.Models
                 }
             }
             return new UnpatchableResourceListResult(Optional.ToList(value));
+        }
+
+        object IJsonModelSerializable.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        {
+            using var doc = JsonDocument.ParseValue(ref reader);
+            return DeserializeUnpatchableResourceListResult(doc.RootElement, options);
         }
     }
 }

@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Text.Json;
 using Azure.Core;
 using Azure.Core.Serialization;
@@ -12,10 +13,48 @@ using Azure.ResourceManager.Models;
 
 namespace MgmtMockAndSample
 {
-    public partial class RoleAssignmentData
+    public partial class RoleAssignmentData : IUtf8JsonSerializable, IJsonModelSerializable
     {
-        internal static RoleAssignmentData DeserializeRoleAssignmentData(JsonElement element, SerializableOptions options = default)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModelSerializable)this).Serialize(writer, ModelSerializerOptions.AzureServiceDefault);
+
+        void IJsonModelSerializable.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
+            writer.WriteStartObject();
+            writer.WritePropertyName("properties"u8);
+            writer.WriteStartObject();
+            if (Optional.IsDefined(Scope))
+            {
+                writer.WritePropertyName("scope"u8);
+                writer.WriteStringValue(Scope);
+            }
+            if (Optional.IsDefined(RoleDefinitionId))
+            {
+                writer.WritePropertyName("roleDefinitionId"u8);
+                writer.WriteStringValue(RoleDefinitionId);
+            }
+            if (Optional.IsDefined(PrincipalId))
+            {
+                writer.WritePropertyName("principalId"u8);
+                writer.WriteStringValue(PrincipalId);
+            }
+            if (Optional.IsDefined(CanDelegate))
+            {
+                writer.WritePropertyName("canDelegate"u8);
+                writer.WriteBooleanValue(CanDelegate.Value);
+            }
+            writer.WriteEndObject();
+            writer.WriteEndObject();
+        }
+
+        object IModelSerializable.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            using var doc = JsonDocument.Parse(data);
+            return DeserializeRoleAssignmentData(doc.RootElement, options);
+        }
+
+        internal static RoleAssignmentData DeserializeRoleAssignmentData(JsonElement element, ModelSerializerOptions options = default)
+        {
+            options ??= ModelSerializerOptions.AzureServiceDefault;
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
@@ -92,6 +131,12 @@ namespace MgmtMockAndSample
                 }
             }
             return new RoleAssignmentData(id, name, type, systemData.Value, scope.Value, roleDefinitionId.Value, principalId.Value, Optional.ToNullable(canDelegate));
+        }
+
+        object IJsonModelSerializable.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        {
+            using var doc = JsonDocument.ParseValue(ref reader);
+            return DeserializeRoleAssignmentData(doc.RootElement, options);
         }
     }
 }

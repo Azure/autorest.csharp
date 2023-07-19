@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure;
@@ -13,10 +14,79 @@ using Azure.Core.Serialization;
 
 namespace AnomalyDetector.Models
 {
-    public partial class UnivariateEntireDetectionResult
+    public partial class UnivariateEntireDetectionResult : IUtf8JsonSerializable, IJsonModelSerializable
     {
-        internal static UnivariateEntireDetectionResult DeserializeUnivariateEntireDetectionResult(JsonElement element, SerializableOptions options = default)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModelSerializable)this).Serialize(writer, ModelSerializerOptions.AzureServiceDefault);
+
+        void IJsonModelSerializable.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
+            writer.WriteStartObject();
+            writer.WritePropertyName("period"u8);
+            writer.WriteNumberValue(Period);
+            writer.WritePropertyName("expectedValues"u8);
+            writer.WriteStartArray();
+            foreach (var item in ExpectedValues)
+            {
+                writer.WriteNumberValue(item);
+            }
+            writer.WriteEndArray();
+            writer.WritePropertyName("upperMargins"u8);
+            writer.WriteStartArray();
+            foreach (var item in UpperMargins)
+            {
+                writer.WriteNumberValue(item);
+            }
+            writer.WriteEndArray();
+            writer.WritePropertyName("lowerMargins"u8);
+            writer.WriteStartArray();
+            foreach (var item in LowerMargins)
+            {
+                writer.WriteNumberValue(item);
+            }
+            writer.WriteEndArray();
+            writer.WritePropertyName("isAnomaly"u8);
+            writer.WriteStartArray();
+            foreach (var item in IsAnomaly)
+            {
+                writer.WriteBooleanValue(item);
+            }
+            writer.WriteEndArray();
+            writer.WritePropertyName("isNegativeAnomaly"u8);
+            writer.WriteStartArray();
+            foreach (var item in IsNegativeAnomaly)
+            {
+                writer.WriteBooleanValue(item);
+            }
+            writer.WriteEndArray();
+            writer.WritePropertyName("isPositiveAnomaly"u8);
+            writer.WriteStartArray();
+            foreach (var item in IsPositiveAnomaly)
+            {
+                writer.WriteBooleanValue(item);
+            }
+            writer.WriteEndArray();
+            if (Optional.IsCollectionDefined(Severity))
+            {
+                writer.WritePropertyName("severity"u8);
+                writer.WriteStartArray();
+                foreach (var item in Severity)
+                {
+                    writer.WriteNumberValue(item);
+                }
+                writer.WriteEndArray();
+            }
+            writer.WriteEndObject();
+        }
+
+        object IModelSerializable.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            using var doc = JsonDocument.Parse(data);
+            return DeserializeUnivariateEntireDetectionResult(doc.RootElement, options);
+        }
+
+        internal static UnivariateEntireDetectionResult DeserializeUnivariateEntireDetectionResult(JsonElement element, ModelSerializerOptions options = default)
+        {
+            options ??= ModelSerializerOptions.AzureServiceDefault;
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
@@ -114,12 +184,26 @@ namespace AnomalyDetector.Models
             return new UnivariateEntireDetectionResult(period, expectedValues, upperMargins, lowerMargins, isAnomaly, isNegativeAnomaly, isPositiveAnomaly, Optional.ToList(severity));
         }
 
+        object IJsonModelSerializable.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        {
+            using var doc = JsonDocument.ParseValue(ref reader);
+            return DeserializeUnivariateEntireDetectionResult(doc.RootElement, options);
+        }
+
         /// <summary> Deserializes the model from a raw response. </summary>
         /// <param name="response"> The response to deserialize the model from. </param>
         internal static UnivariateEntireDetectionResult FromResponse(Response response)
         {
             using var document = JsonDocument.Parse(response.Content);
             return DeserializeUnivariateEntireDetectionResult(document.RootElement);
+        }
+
+        /// <summary> Convert into a Utf8JsonRequestContent. </summary>
+        internal virtual RequestContent ToRequestContent()
+        {
+            var content = new Utf8JsonRequestContent();
+            content.JsonWriter.WriteObjectValue(this);
+            return content;
         }
     }
 }

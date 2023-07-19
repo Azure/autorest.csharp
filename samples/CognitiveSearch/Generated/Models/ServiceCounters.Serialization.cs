@@ -5,16 +5,46 @@
 
 #nullable disable
 
+using System;
 using System.Text.Json;
 using Azure.Core;
 using Azure.Core.Serialization;
 
 namespace CognitiveSearch.Models
 {
-    public partial class ServiceCounters
+    public partial class ServiceCounters : IUtf8JsonSerializable, IJsonModelSerializable
     {
-        internal static ServiceCounters DeserializeServiceCounters(JsonElement element, SerializableOptions options = default)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModelSerializable)this).Serialize(writer, ModelSerializerOptions.AzureServiceDefault);
+
+        void IJsonModelSerializable.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
+            writer.WriteStartObject();
+            writer.WritePropertyName("documentCount"u8);
+            writer.WriteObjectValue(DocumentCounter);
+            writer.WritePropertyName("indexesCount"u8);
+            writer.WriteObjectValue(IndexCounter);
+            writer.WritePropertyName("indexersCount"u8);
+            writer.WriteObjectValue(IndexerCounter);
+            writer.WritePropertyName("dataSourcesCount"u8);
+            writer.WriteObjectValue(DataSourceCounter);
+            writer.WritePropertyName("storageSize"u8);
+            writer.WriteObjectValue(StorageSizeCounter);
+            writer.WritePropertyName("synonymMaps"u8);
+            writer.WriteObjectValue(SynonymMapCounter);
+            writer.WritePropertyName("skillsetCount"u8);
+            writer.WriteObjectValue(SkillsetCounter);
+            writer.WriteEndObject();
+        }
+
+        object IModelSerializable.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            using var doc = JsonDocument.Parse(data);
+            return DeserializeServiceCounters(doc.RootElement, options);
+        }
+
+        internal static ServiceCounters DeserializeServiceCounters(JsonElement element, ModelSerializerOptions options = default)
+        {
+            options ??= ModelSerializerOptions.AzureServiceDefault;
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
@@ -65,6 +95,12 @@ namespace CognitiveSearch.Models
                 }
             }
             return new ServiceCounters(documentCount, indexesCount, indexersCount, dataSourcesCount, storageSize, synonymMaps, skillsetCount);
+        }
+
+        object IJsonModelSerializable.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        {
+            using var doc = JsonDocument.ParseValue(ref reader);
+            return DeserializeServiceCounters(doc.RootElement, options);
         }
     }
 }

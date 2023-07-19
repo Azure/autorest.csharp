@@ -5,16 +5,52 @@
 
 #nullable disable
 
+using System;
 using System.Text.Json;
 using Azure.Core;
 using Azure.Core.Serialization;
 
 namespace Azure.Storage.Tables.Models
 {
-    public partial class TableResponseProperties
+    public partial class TableResponseProperties : IUtf8JsonSerializable, IJsonModelSerializable
     {
-        internal static TableResponseProperties DeserializeTableResponseProperties(JsonElement element, SerializableOptions options = default)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModelSerializable)this).Serialize(writer, ModelSerializerOptions.AzureServiceDefault);
+
+        void IJsonModelSerializable.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
+            writer.WriteStartObject();
+            if (Optional.IsDefined(TableName))
+            {
+                writer.WritePropertyName("TableName"u8);
+                writer.WriteStringValue(TableName);
+            }
+            if (Optional.IsDefined(OdataType))
+            {
+                writer.WritePropertyName("odata.type"u8);
+                writer.WriteStringValue(OdataType);
+            }
+            if (Optional.IsDefined(OdataId))
+            {
+                writer.WritePropertyName("odata.id"u8);
+                writer.WriteStringValue(OdataId);
+            }
+            if (Optional.IsDefined(OdataEditLink))
+            {
+                writer.WritePropertyName("odata.editLink"u8);
+                writer.WriteStringValue(OdataEditLink);
+            }
+            writer.WriteEndObject();
+        }
+
+        object IModelSerializable.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            using var doc = JsonDocument.Parse(data);
+            return DeserializeTableResponseProperties(doc.RootElement, options);
+        }
+
+        internal static TableResponseProperties DeserializeTableResponseProperties(JsonElement element, ModelSerializerOptions options = default)
+        {
+            options ??= ModelSerializerOptions.AzureServiceDefault;
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
@@ -47,6 +83,12 @@ namespace Azure.Storage.Tables.Models
                 }
             }
             return new TableResponseProperties(tableName.Value, odataType.Value, odataId.Value, odataEditLink.Value);
+        }
+
+        object IJsonModelSerializable.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        {
+            using var doc = JsonDocument.ParseValue(ref reader);
+            return DeserializeTableResponseProperties(doc.RootElement, options);
         }
     }
 }

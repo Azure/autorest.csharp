@@ -5,18 +5,22 @@
 
 #nullable disable
 
+using System;
 using System.Collections.Generic;
 using System.Xml;
 using System.Xml.Linq;
 using Azure.Core;
+using Azure.Core.Serialization;
 
 namespace Azure.Storage.Tables.Models
 {
-    public partial class StorageServiceProperties : IXmlSerializable
+    public partial class StorageServiceProperties : IXmlSerializable, IXmlModelSerializable
     {
-        void IXmlSerializable.Write(XmlWriter writer, string nameHint)
+        void IXmlSerializable.Write(XmlWriter writer, string nameHint) => ((IXmlModelSerializable)this).Serialize(writer, ModelSerializerOptions.AzureServiceDefault);
+
+        void IXmlModelSerializable.Serialize(XmlWriter writer, ModelSerializerOptions options)
         {
-            writer.WriteStartElement(nameHint ?? "StorageServiceProperties");
+            writer.WriteStartElement("StorageServiceProperties");
             if (Optional.IsDefined(Logging))
             {
                 writer.WriteObjectValue(Logging, "Logging");
@@ -41,8 +45,14 @@ namespace Azure.Storage.Tables.Models
             writer.WriteEndElement();
         }
 
-        internal static StorageServiceProperties DeserializeStorageServiceProperties(XElement element)
+        object IModelSerializable.Deserialize(BinaryData data, ModelSerializerOptions options)
         {
+            return DeserializeStorageServiceProperties(XElement.Load(data.ToStream()), options);
+        }
+
+        internal static StorageServiceProperties DeserializeStorageServiceProperties(XElement element, ModelSerializerOptions options = default)
+        {
+            options ??= ModelSerializerOptions.AzureServiceDefault;
             Logging logging = default;
             Metrics hourMetrics = default;
             Metrics minuteMetrics = default;

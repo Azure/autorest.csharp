@@ -14,11 +14,11 @@ using Azure.Core.Serialization;
 namespace ModelWithConverterUsage.Models
 {
     [JsonConverter(typeof(ModelStructConverter))]
-    public partial struct ModelStruct : IUtf8JsonSerializable, IModelSerializable
+    public partial struct ModelStruct : IUtf8JsonSerializable, IJsonModelSerializable
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelSerializable)this).Serialize(writer, new SerializableOptions());
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModelSerializable)this).Serialize(writer, ModelSerializerOptions.AzureServiceDefault);
 
-        void IModelSerializable.Serialize(Utf8JsonWriter writer, SerializableOptions options)
+        void IJsonModelSerializable.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
             writer.WriteStartObject();
             if (Optional.IsDefined(ModelProperty))
@@ -29,8 +29,15 @@ namespace ModelWithConverterUsage.Models
             writer.WriteEndObject();
         }
 
-        internal static ModelStruct DeserializeModelStruct(JsonElement element, SerializableOptions options = default)
+        object IModelSerializable.Deserialize(BinaryData data, ModelSerializerOptions options)
         {
+            using var doc = JsonDocument.Parse(data);
+            return DeserializeModelStruct(doc.RootElement, options);
+        }
+
+        internal static ModelStruct DeserializeModelStruct(JsonElement element, ModelSerializerOptions options = default)
+        {
+            options ??= ModelSerializerOptions.AzureServiceDefault;
             Optional<string> modelProperty = default;
             foreach (var property in element.EnumerateObject())
             {
@@ -41,6 +48,12 @@ namespace ModelWithConverterUsage.Models
                 }
             }
             return new ModelStruct(modelProperty.Value);
+        }
+
+        object IJsonModelSerializable.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        {
+            using var doc = JsonDocument.ParseValue(ref reader);
+            return DeserializeModelStruct(doc.RootElement, options);
         }
 
         internal partial class ModelStructConverter : JsonConverter<ModelStruct>

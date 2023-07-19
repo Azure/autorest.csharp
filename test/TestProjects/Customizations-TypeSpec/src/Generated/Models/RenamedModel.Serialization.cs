@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Text.Json;
 using Azure;
 using Azure.Core;
@@ -12,11 +13,11 @@ using Azure.Core.Serialization;
 
 namespace CustomizationsInTsp.Models
 {
-    public partial class RenamedModel : IUtf8JsonSerializable, IModelSerializable
+    public partial class RenamedModel : IUtf8JsonSerializable, IJsonModelSerializable
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelSerializable)this).Serialize(writer, new SerializableOptions());
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModelSerializable)this).Serialize(writer, ModelSerializerOptions.AzureServiceDefault);
 
-        void IModelSerializable.Serialize(Utf8JsonWriter writer, SerializableOptions options)
+        void IJsonModelSerializable.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
             writer.WriteStartObject();
             writer.WritePropertyName("requiredInt"u8);
@@ -29,8 +30,15 @@ namespace CustomizationsInTsp.Models
             writer.WriteEndObject();
         }
 
-        internal static RenamedModel DeserializeRenamedModel(JsonElement element, SerializableOptions options = default)
+        object IModelSerializable.Deserialize(BinaryData data, ModelSerializerOptions options)
         {
+            using var doc = JsonDocument.Parse(data);
+            return DeserializeRenamedModel(doc.RootElement, options);
+        }
+
+        internal static RenamedModel DeserializeRenamedModel(JsonElement element, ModelSerializerOptions options = default)
+        {
+            options ??= ModelSerializerOptions.AzureServiceDefault;
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
@@ -55,6 +63,12 @@ namespace CustomizationsInTsp.Models
                 }
             }
             return new RenamedModel(requiredInt, Optional.ToNullable(optionalInt));
+        }
+
+        object IJsonModelSerializable.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        {
+            using var doc = JsonDocument.ParseValue(ref reader);
+            return DeserializeRenamedModel(doc.RootElement, options);
         }
 
         /// <summary> Deserializes the model from a raw response. </summary>

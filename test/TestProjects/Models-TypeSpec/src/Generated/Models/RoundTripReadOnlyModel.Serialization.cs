@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure;
@@ -13,10 +14,68 @@ using Azure.Core.Serialization;
 
 namespace ModelsTypeSpec.Models
 {
-    public partial class RoundTripReadOnlyModel
+    public partial class RoundTripReadOnlyModel : IUtf8JsonSerializable, IJsonModelSerializable
     {
-        internal static RoundTripReadOnlyModel DeserializeRoundTripReadOnlyModel(JsonElement element, SerializableOptions options = default)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModelSerializable)this).Serialize(writer, ModelSerializerOptions.AzureServiceDefault);
+
+        void IJsonModelSerializable.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
+            writer.WriteStartObject();
+            writer.WritePropertyName("optionalReadOnlyIntRecord"u8);
+            writer.WriteStartObject();
+            foreach (var item in OptionalReadOnlyIntRecord)
+            {
+                writer.WritePropertyName(item.Key);
+                writer.WriteNumberValue(item.Value);
+            }
+            writer.WriteEndObject();
+            writer.WritePropertyName("optionalReadOnlyStringRecord"u8);
+            writer.WriteStartObject();
+            foreach (var item in OptionalReadOnlyStringRecord)
+            {
+                writer.WritePropertyName(item.Key);
+                writer.WriteStringValue(item.Value);
+            }
+            writer.WriteEndObject();
+            writer.WritePropertyName("requiredCollectionWithNullableIntElement"u8);
+            writer.WriteStartArray();
+            foreach (var item in RequiredCollectionWithNullableIntElement)
+            {
+                if (item == null)
+                {
+                    writer.WriteNullValue();
+                    continue;
+                }
+                writer.WriteNumberValue(item.Value);
+            }
+            writer.WriteEndArray();
+            if (Optional.IsCollectionDefined(OptionalCollectionWithNullableBooleanElement))
+            {
+                writer.WritePropertyName("optionalCollectionWithNullableBooleanElement"u8);
+                writer.WriteStartArray();
+                foreach (var item in OptionalCollectionWithNullableBooleanElement)
+                {
+                    if (item == null)
+                    {
+                        writer.WriteNullValue();
+                        continue;
+                    }
+                    writer.WriteBooleanValue(item.Value);
+                }
+                writer.WriteEndArray();
+            }
+            writer.WriteEndObject();
+        }
+
+        object IModelSerializable.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            using var doc = JsonDocument.Parse(data);
+            return DeserializeRoundTripReadOnlyModel(doc.RootElement, options);
+        }
+
+        internal static RoundTripReadOnlyModel DeserializeRoundTripReadOnlyModel(JsonElement element, ModelSerializerOptions options = default)
+        {
+            options ??= ModelSerializerOptions.AzureServiceDefault;
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
@@ -283,12 +342,26 @@ namespace ModelsTypeSpec.Models
             return new RoundTripReadOnlyModel(requiredReadonlyString, requiredReadonlyInt, optionalReadonlyString.Value, Optional.ToNullable(optionalReadonlyInt), requiredReadonlyModel, optionalReadonlyModel.Value, requiredReadonlyFixedStringEnum, requiredReadonlyExtensibleEnum, optionalReadonlyFixedStringEnum, optionalReadonlyExtensibleEnum, requiredReadonlyStringList, requiredReadonlyIntList, requiredReadOnlyModelCollection, requiredReadOnlyIntRecord, requiredStringRecord, requiredReadOnlyModelRecord, Optional.ToList(optionalReadonlyStringList), Optional.ToList(optionalReadonlyIntList), Optional.ToList(optionalReadOnlyModelCollection), optionalReadOnlyIntRecord, optionalReadOnlyStringRecord, Optional.ToDictionary(optionalModelRecord), requiredCollectionWithNullableIntElement, Optional.ToList(optionalCollectionWithNullableBooleanElement));
         }
 
+        object IJsonModelSerializable.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        {
+            using var doc = JsonDocument.ParseValue(ref reader);
+            return DeserializeRoundTripReadOnlyModel(doc.RootElement, options);
+        }
+
         /// <summary> Deserializes the model from a raw response. </summary>
         /// <param name="response"> The response to deserialize the model from. </param>
         internal static RoundTripReadOnlyModel FromResponse(Response response)
         {
             using var document = JsonDocument.Parse(response.Content);
             return DeserializeRoundTripReadOnlyModel(document.RootElement);
+        }
+
+        /// <summary> Convert into a Utf8JsonRequestContent. </summary>
+        internal virtual RequestContent ToRequestContent()
+        {
+            var content = new Utf8JsonRequestContent();
+            content.JsonWriter.WriteObjectValue(this);
+            return content;
         }
     }
 }

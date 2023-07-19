@@ -13,11 +13,11 @@ using Azure.ResourceManager.Resources.Models;
 
 namespace Azure.ResourceManager.Sample.Models
 {
-    public partial class ImageDisk : IUtf8JsonSerializable, IModelSerializable
+    public partial class ImageDisk : IUtf8JsonSerializable, IJsonModelSerializable
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelSerializable)this).Serialize(writer, new SerializableOptions());
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModelSerializable)this).Serialize(writer, ModelSerializerOptions.AzureServiceDefault);
 
-        void IModelSerializable.Serialize(Utf8JsonWriter writer, SerializableOptions options)
+        void IJsonModelSerializable.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
             writer.WriteStartObject();
             if (Optional.IsDefined(Snapshot))
@@ -58,8 +58,15 @@ namespace Azure.ResourceManager.Sample.Models
             writer.WriteEndObject();
         }
 
-        internal static ImageDisk DeserializeImageDisk(JsonElement element, SerializableOptions options = default)
+        object IModelSerializable.Deserialize(BinaryData data, ModelSerializerOptions options)
         {
+            using var doc = JsonDocument.Parse(data);
+            return DeserializeImageDisk(doc.RootElement, options);
+        }
+
+        internal static ImageDisk DeserializeImageDisk(JsonElement element, ModelSerializerOptions options = default)
+        {
+            options ??= ModelSerializerOptions.AzureServiceDefault;
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
@@ -138,6 +145,12 @@ namespace Azure.ResourceManager.Sample.Models
                 }
             }
             return new ImageDisk(snapshot, managedDisk, blobUri.Value, Optional.ToNullable(caching), Optional.ToNullable(diskSizeGB), Optional.ToNullable(storageAccountType), diskEncryptionSet);
+        }
+
+        object IJsonModelSerializable.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        {
+            using var doc = JsonDocument.ParseValue(ref reader);
+            return DeserializeImageDisk(doc.RootElement, options);
         }
     }
 }

@@ -5,16 +5,49 @@
 
 #nullable disable
 
+using System;
 using System.Text.Json;
 using Azure.Core;
 using Azure.Core.Serialization;
 
 namespace xms_error_responses.Models
 {
-    public partial class PetSadError
+    public partial class PetSadError : IUtf8JsonSerializable, IJsonModelSerializable
     {
-        internal static PetSadError DeserializePetSadError(JsonElement element, SerializableOptions options = default)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModelSerializable)this).Serialize(writer, ModelSerializerOptions.AzureServiceDefault);
+
+        void IJsonModelSerializable.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
+            writer.WriteStartObject();
+            if (Optional.IsDefined(Reason))
+            {
+                writer.WritePropertyName("reason"u8);
+                writer.WriteStringValue(Reason);
+            }
+            writer.WritePropertyName("errorType"u8);
+            writer.WriteStringValue(ErrorType);
+            if (Optional.IsDefined(ErrorMessage))
+            {
+                writer.WritePropertyName("errorMessage"u8);
+                writer.WriteStringValue(ErrorMessage);
+            }
+            if (Optional.IsDefined(ActionResponse))
+            {
+                writer.WritePropertyName("actionResponse"u8);
+                writer.WriteStringValue(ActionResponse);
+            }
+            writer.WriteEndObject();
+        }
+
+        object IModelSerializable.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            using var doc = JsonDocument.Parse(data);
+            return DeserializePetSadError(doc.RootElement, options);
+        }
+
+        internal static PetSadError DeserializePetSadError(JsonElement element, ModelSerializerOptions options = default)
+        {
+            options ??= ModelSerializerOptions.AzureServiceDefault;
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
@@ -54,6 +87,12 @@ namespace xms_error_responses.Models
                 }
             }
             return new PetSadError(actionResponse.Value, errorType, errorMessage.Value, reason.Value);
+        }
+
+        object IJsonModelSerializable.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        {
+            using var doc = JsonDocument.ParseValue(ref reader);
+            return DeserializePetSadError(doc.RootElement, options);
         }
     }
 }

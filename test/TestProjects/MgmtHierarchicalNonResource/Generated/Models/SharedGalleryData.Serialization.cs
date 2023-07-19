@@ -5,16 +5,40 @@
 
 #nullable disable
 
+using System;
 using System.Text.Json;
 using Azure.Core;
 using Azure.Core.Serialization;
 
 namespace MgmtHierarchicalNonResource
 {
-    public partial class SharedGalleryData
+    public partial class SharedGalleryData : IUtf8JsonSerializable, IJsonModelSerializable
     {
-        internal static SharedGalleryData DeserializeSharedGalleryData(JsonElement element, SerializableOptions options = default)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModelSerializable)this).Serialize(writer, ModelSerializerOptions.AzureServiceDefault);
+
+        void IJsonModelSerializable.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
+            writer.WriteStartObject();
+            writer.WritePropertyName("identifier"u8);
+            writer.WriteStartObject();
+            if (Optional.IsDefined(UniqueId))
+            {
+                writer.WritePropertyName("uniqueId"u8);
+                writer.WriteStringValue(UniqueId);
+            }
+            writer.WriteEndObject();
+            writer.WriteEndObject();
+        }
+
+        object IModelSerializable.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            using var doc = JsonDocument.Parse(data);
+            return DeserializeSharedGalleryData(doc.RootElement, options);
+        }
+
+        internal static SharedGalleryData DeserializeSharedGalleryData(JsonElement element, ModelSerializerOptions options = default)
+        {
+            options ??= ModelSerializerOptions.AzureServiceDefault;
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
@@ -53,6 +77,12 @@ namespace MgmtHierarchicalNonResource
                 }
             }
             return new SharedGalleryData(name.Value, location.Value, uniqueId.Value);
+        }
+
+        object IJsonModelSerializable.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        {
+            using var doc = JsonDocument.ParseValue(ref reader);
+            return DeserializeSharedGalleryData(doc.RootElement, options);
         }
     }
 }

@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
@@ -12,10 +13,36 @@ using Azure.Core.Serialization;
 
 namespace Azure.AI.FormRecognizer.Models
 {
-    public partial class DataTable
+    public partial class DataTable : IUtf8JsonSerializable, IJsonModelSerializable
     {
-        internal static DataTable DeserializeDataTable(JsonElement element, SerializableOptions options = default)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModelSerializable)this).Serialize(writer, ModelSerializerOptions.AzureServiceDefault);
+
+        void IJsonModelSerializable.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
+            writer.WriteStartObject();
+            writer.WritePropertyName("rows"u8);
+            writer.WriteNumberValue(Rows);
+            writer.WritePropertyName("columns"u8);
+            writer.WriteNumberValue(Columns);
+            writer.WritePropertyName("cells"u8);
+            writer.WriteStartArray();
+            foreach (var item in Cells)
+            {
+                writer.WriteObjectValue(item);
+            }
+            writer.WriteEndArray();
+            writer.WriteEndObject();
+        }
+
+        object IModelSerializable.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            using var doc = JsonDocument.Parse(data);
+            return DeserializeDataTable(doc.RootElement, options);
+        }
+
+        internal static DataTable DeserializeDataTable(JsonElement element, ModelSerializerOptions options = default)
+        {
+            options ??= ModelSerializerOptions.AzureServiceDefault;
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
@@ -47,6 +74,12 @@ namespace Azure.AI.FormRecognizer.Models
                 }
             }
             return new DataTable(rows, columns, cells);
+        }
+
+        object IJsonModelSerializable.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        {
+            using var doc = JsonDocument.ParseValue(ref reader);
+            return DeserializeDataTable(doc.RootElement, options);
         }
     }
 }

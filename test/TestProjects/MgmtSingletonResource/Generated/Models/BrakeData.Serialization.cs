@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Text.Json;
 using Azure.Core;
 using Azure.Core.Serialization;
@@ -12,10 +13,30 @@ using Azure.ResourceManager.Models;
 
 namespace MgmtSingletonResource
 {
-    public partial class BrakeData
+    public partial class BrakeData : IUtf8JsonSerializable, IJsonModelSerializable
     {
-        internal static BrakeData DeserializeBrakeData(JsonElement element, SerializableOptions options = default)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModelSerializable)this).Serialize(writer, ModelSerializerOptions.AzureServiceDefault);
+
+        void IJsonModelSerializable.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
+            writer.WriteStartObject();
+            if (Optional.IsDefined(HitBrake))
+            {
+                writer.WritePropertyName("hitBrake"u8);
+                writer.WriteBooleanValue(HitBrake.Value);
+            }
+            writer.WriteEndObject();
+        }
+
+        object IModelSerializable.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            using var doc = JsonDocument.Parse(data);
+            return DeserializeBrakeData(doc.RootElement, options);
+        }
+
+        internal static BrakeData DeserializeBrakeData(JsonElement element, ModelSerializerOptions options = default)
+        {
+            options ??= ModelSerializerOptions.AzureServiceDefault;
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
@@ -62,6 +83,12 @@ namespace MgmtSingletonResource
                 }
             }
             return new BrakeData(id, name, type, systemData.Value, Optional.ToNullable(hitBrake));
+        }
+
+        object IJsonModelSerializable.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        {
+            using var doc = JsonDocument.ParseValue(ref reader);
+            return DeserializeBrakeData(doc.RootElement, options);
         }
     }
 }

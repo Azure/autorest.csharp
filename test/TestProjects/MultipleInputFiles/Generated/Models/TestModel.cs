@@ -15,6 +15,15 @@ namespace MultipleInputFiles.Models
         {
         }
 
+        /// <summary> Initializes a new instance of TestModel. </summary>
+        /// <param name="code"></param>
+        /// <param name="status"></param>
+        internal TestModel(string code, string status)
+        {
+            Code = code;
+            Status = status;
+        }
+
         /// <summary> Gets or sets the code. </summary>
         public string Code { get; set; }
         /// <summary> Gets or sets the status. </summary>

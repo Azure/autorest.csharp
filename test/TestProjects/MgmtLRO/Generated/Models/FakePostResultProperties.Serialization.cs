@@ -5,16 +5,37 @@
 
 #nullable disable
 
+using System;
 using System.Text.Json;
 using Azure.Core;
 using Azure.Core.Serialization;
 
 namespace MgmtLRO.Models
 {
-    internal partial class FakePostResultProperties
+    internal partial class FakePostResultProperties : IUtf8JsonSerializable, IJsonModelSerializable
     {
-        internal static FakePostResultProperties DeserializeFakePostResultProperties(JsonElement element, SerializableOptions options = default)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModelSerializable)this).Serialize(writer, ModelSerializerOptions.AzureServiceDefault);
+
+        void IJsonModelSerializable.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
+            writer.WriteStartObject();
+            if (Optional.IsDefined(Bar))
+            {
+                writer.WritePropertyName("bar"u8);
+                writer.WriteStringValue(Bar);
+            }
+            writer.WriteEndObject();
+        }
+
+        object IModelSerializable.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            using var doc = JsonDocument.Parse(data);
+            return DeserializeFakePostResultProperties(doc.RootElement, options);
+        }
+
+        internal static FakePostResultProperties DeserializeFakePostResultProperties(JsonElement element, ModelSerializerOptions options = default)
+        {
+            options ??= ModelSerializerOptions.AzureServiceDefault;
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
@@ -29,6 +50,12 @@ namespace MgmtLRO.Models
                 }
             }
             return new FakePostResultProperties(bar.Value);
+        }
+
+        object IJsonModelSerializable.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        {
+            using var doc = JsonDocument.ParseValue(ref reader);
+            return DeserializeFakePostResultProperties(doc.RootElement, options);
         }
     }
 }

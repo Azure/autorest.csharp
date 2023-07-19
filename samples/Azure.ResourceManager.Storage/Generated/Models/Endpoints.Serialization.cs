@@ -5,16 +5,42 @@
 
 #nullable disable
 
+using System;
 using System.Text.Json;
 using Azure.Core;
 using Azure.Core.Serialization;
 
 namespace Azure.ResourceManager.Storage.Models
 {
-    public partial class Endpoints
+    public partial class Endpoints : IUtf8JsonSerializable, IJsonModelSerializable
     {
-        internal static Endpoints DeserializeEndpoints(JsonElement element, SerializableOptions options = default)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModelSerializable)this).Serialize(writer, ModelSerializerOptions.AzureServiceDefault);
+
+        void IJsonModelSerializable.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
+            writer.WriteStartObject();
+            if (Optional.IsDefined(MicrosoftEndpoints))
+            {
+                writer.WritePropertyName("microsoftEndpoints"u8);
+                writer.WriteObjectValue(MicrosoftEndpoints);
+            }
+            if (Optional.IsDefined(InternetEndpoints))
+            {
+                writer.WritePropertyName("internetEndpoints"u8);
+                writer.WriteObjectValue(InternetEndpoints);
+            }
+            writer.WriteEndObject();
+        }
+
+        object IModelSerializable.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            using var doc = JsonDocument.Parse(data);
+            return DeserializeEndpoints(doc.RootElement, options);
+        }
+
+        internal static Endpoints DeserializeEndpoints(JsonElement element, ModelSerializerOptions options = default)
+        {
+            options ??= ModelSerializerOptions.AzureServiceDefault;
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
@@ -79,6 +105,12 @@ namespace Azure.ResourceManager.Storage.Models
                 }
             }
             return new Endpoints(blob.Value, queue.Value, table.Value, file.Value, web.Value, dfs.Value, microsoftEndpoints.Value, internetEndpoints.Value);
+        }
+
+        object IJsonModelSerializable.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        {
+            using var doc = JsonDocument.ParseValue(ref reader);
+            return DeserializeEndpoints(doc.RootElement, options);
         }
     }
 }

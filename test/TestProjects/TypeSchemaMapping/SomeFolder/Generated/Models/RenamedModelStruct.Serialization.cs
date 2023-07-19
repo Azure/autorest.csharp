@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Text.Json;
 using Azure.Core;
 using Azure.Core.Serialization;
@@ -12,11 +13,11 @@ using NamespaceForEnums;
 
 namespace CustomNamespace
 {
-    internal partial struct RenamedModelStruct : IUtf8JsonSerializable, IModelSerializable
+    internal partial struct RenamedModelStruct : IUtf8JsonSerializable, IJsonModelSerializable
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelSerializable)this).Serialize(writer, new SerializableOptions());
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModelSerializable)this).Serialize(writer, ModelSerializerOptions.AzureServiceDefault);
 
-        void IModelSerializable.Serialize(Utf8JsonWriter writer, SerializableOptions options)
+        void IJsonModelSerializable.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
             writer.WriteStartObject();
             writer.WritePropertyName("ModelProperty"u8);
@@ -45,8 +46,15 @@ namespace CustomNamespace
             writer.WriteEndObject();
         }
 
-        internal static RenamedModelStruct DeserializeRenamedModelStruct(JsonElement element, SerializableOptions options = default)
+        object IModelSerializable.Deserialize(BinaryData data, ModelSerializerOptions options)
         {
+            using var doc = JsonDocument.Parse(data);
+            return DeserializeRenamedModelStruct(doc.RootElement, options);
+        }
+
+        internal static RenamedModelStruct DeserializeRenamedModelStruct(JsonElement element, ModelSerializerOptions options = default)
+        {
+            options ??= ModelSerializerOptions.AzureServiceDefault;
             Optional<string> modelProperty = default;
             Optional<string> propertyToField = default;
             Optional<CustomFruitEnum> fruit = default;
@@ -95,6 +103,12 @@ namespace CustomNamespace
                 }
             }
             return new RenamedModelStruct(modelProperty.Value, propertyToField.Value, Optional.ToNullable(fruit), Optional.ToNullable(daysOfWeek));
+        }
+
+        object IJsonModelSerializable.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        {
+            using var doc = JsonDocument.ParseValue(ref reader);
+            return DeserializeRenamedModelStruct(doc.RootElement, options);
         }
     }
 }

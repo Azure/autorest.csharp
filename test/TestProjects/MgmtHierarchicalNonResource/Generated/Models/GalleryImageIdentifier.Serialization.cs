@@ -5,16 +5,38 @@
 
 #nullable disable
 
+using System;
 using System.Text.Json;
 using Azure.Core;
 using Azure.Core.Serialization;
 
 namespace MgmtHierarchicalNonResource.Models
 {
-    public partial class GalleryImageIdentifier
+    public partial class GalleryImageIdentifier : IUtf8JsonSerializable, IJsonModelSerializable
     {
-        internal static GalleryImageIdentifier DeserializeGalleryImageIdentifier(JsonElement element, SerializableOptions options = default)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModelSerializable)this).Serialize(writer, ModelSerializerOptions.AzureServiceDefault);
+
+        void IJsonModelSerializable.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
+            writer.WriteStartObject();
+            writer.WritePropertyName("publisher"u8);
+            writer.WriteStringValue(Publisher);
+            writer.WritePropertyName("offer"u8);
+            writer.WriteStringValue(Offer);
+            writer.WritePropertyName("sku"u8);
+            writer.WriteStringValue(Sku);
+            writer.WriteEndObject();
+        }
+
+        object IModelSerializable.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            using var doc = JsonDocument.Parse(data);
+            return DeserializeGalleryImageIdentifier(doc.RootElement, options);
+        }
+
+        internal static GalleryImageIdentifier DeserializeGalleryImageIdentifier(JsonElement element, ModelSerializerOptions options = default)
+        {
+            options ??= ModelSerializerOptions.AzureServiceDefault;
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
@@ -41,6 +63,12 @@ namespace MgmtHierarchicalNonResource.Models
                 }
             }
             return new GalleryImageIdentifier(publisher, offer, sku);
+        }
+
+        object IJsonModelSerializable.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        {
+            using var doc = JsonDocument.ParseValue(ref reader);
+            return DeserializeGalleryImageIdentifier(doc.RootElement, options);
         }
     }
 }

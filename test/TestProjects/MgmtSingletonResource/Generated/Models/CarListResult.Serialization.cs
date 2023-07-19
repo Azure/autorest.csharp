@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
@@ -13,10 +14,25 @@ using MgmtSingletonResource;
 
 namespace MgmtSingletonResource.Models
 {
-    internal partial class CarListResult
+    internal partial class CarListResult : IUtf8JsonSerializable, IJsonModelSerializable
     {
-        internal static CarListResult DeserializeCarListResult(JsonElement element, SerializableOptions options = default)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModelSerializable)this).Serialize(writer, ModelSerializerOptions.AzureServiceDefault);
+
+        void IJsonModelSerializable.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
+            writer.WriteStartObject();
+            writer.WriteEndObject();
+        }
+
+        object IModelSerializable.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            using var doc = JsonDocument.Parse(data);
+            return DeserializeCarListResult(doc.RootElement, options);
+        }
+
+        internal static CarListResult DeserializeCarListResult(JsonElement element, ModelSerializerOptions options = default)
+        {
+            options ??= ModelSerializerOptions.AzureServiceDefault;
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
@@ -46,6 +62,12 @@ namespace MgmtSingletonResource.Models
                 }
             }
             return new CarListResult(Optional.ToList(value), nextLink.Value);
+        }
+
+        object IJsonModelSerializable.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        {
+            using var doc = JsonDocument.ParseValue(ref reader);
+            return DeserializeCarListResult(doc.RootElement, options);
         }
     }
 }

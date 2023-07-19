@@ -5,15 +5,35 @@
 
 #nullable disable
 
+using System;
+using System.Xml;
 using System.Xml.Linq;
 using Azure.Core;
+using Azure.Core.Serialization;
 
 namespace xml_service.Models
 {
-    public partial class BlobPrefix
+    public partial class BlobPrefix : IXmlSerializable, IXmlModelSerializable
     {
-        internal static BlobPrefix DeserializeBlobPrefix(XElement element)
+        void IXmlSerializable.Write(XmlWriter writer, string nameHint) => ((IXmlModelSerializable)this).Serialize(writer, ModelSerializerOptions.AzureServiceDefault);
+
+        void IXmlModelSerializable.Serialize(XmlWriter writer, ModelSerializerOptions options)
         {
+            writer.WriteStartElement("BlobPrefix");
+            writer.WriteStartElement("Name");
+            writer.WriteValue(Name);
+            writer.WriteEndElement();
+            writer.WriteEndElement();
+        }
+
+        object IModelSerializable.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            return DeserializeBlobPrefix(XElement.Load(data.ToStream()), options);
+        }
+
+        internal static BlobPrefix DeserializeBlobPrefix(XElement element, ModelSerializerOptions options = default)
+        {
+            options ??= ModelSerializerOptions.AzureServiceDefault;
             string name = default;
             if (element.Element("Name") is XElement nameElement)
             {

@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
@@ -14,10 +15,53 @@ using MgmtScopeResource.Models;
 
 namespace MgmtScopeResource
 {
-    public partial class VMInsightsOnboardingStatusData
+    public partial class VMInsightsOnboardingStatusData : IUtf8JsonSerializable, IJsonModelSerializable
     {
-        internal static VMInsightsOnboardingStatusData DeserializeVMInsightsOnboardingStatusData(JsonElement element, SerializableOptions options = default)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModelSerializable)this).Serialize(writer, ModelSerializerOptions.AzureServiceDefault);
+
+        void IJsonModelSerializable.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
+            writer.WriteStartObject();
+            writer.WritePropertyName("properties"u8);
+            writer.WriteStartObject();
+            if (Optional.IsDefined(ResourceId))
+            {
+                writer.WritePropertyName("resourceId"u8);
+                writer.WriteStringValue(ResourceId);
+            }
+            if (Optional.IsDefined(OnboardingStatus))
+            {
+                writer.WritePropertyName("onboardingStatus"u8);
+                writer.WriteStringValue(OnboardingStatus.Value.ToString());
+            }
+            if (Optional.IsDefined(DataStatus))
+            {
+                writer.WritePropertyName("dataStatus"u8);
+                writer.WriteStringValue(DataStatus.Value.ToString());
+            }
+            if (Optional.IsCollectionDefined(Data))
+            {
+                writer.WritePropertyName("data"u8);
+                writer.WriteStartArray();
+                foreach (var item in Data)
+                {
+                    writer.WriteObjectValue(item);
+                }
+                writer.WriteEndArray();
+            }
+            writer.WriteEndObject();
+            writer.WriteEndObject();
+        }
+
+        object IModelSerializable.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            using var doc = JsonDocument.Parse(data);
+            return DeserializeVMInsightsOnboardingStatusData(doc.RootElement, options);
+        }
+
+        internal static VMInsightsOnboardingStatusData DeserializeVMInsightsOnboardingStatusData(JsonElement element, ModelSerializerOptions options = default)
+        {
+            options ??= ModelSerializerOptions.AzureServiceDefault;
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
@@ -107,6 +151,12 @@ namespace MgmtScopeResource
                 }
             }
             return new VMInsightsOnboardingStatusData(id, name, type, systemData.Value, resourceId.Value, Optional.ToNullable(onboardingStatus), Optional.ToNullable(dataStatus), Optional.ToList(data));
+        }
+
+        object IJsonModelSerializable.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        {
+            using var doc = JsonDocument.ParseValue(ref reader);
+            return DeserializeVMInsightsOnboardingStatusData(doc.RootElement, options);
         }
     }
 }

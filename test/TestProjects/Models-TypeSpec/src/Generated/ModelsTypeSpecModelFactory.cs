@@ -90,6 +90,15 @@ namespace ModelsTypeSpec.Models
             return new OutputModel(requiredString, requiredInt, requiredModel, requiredCollection?.ToList(), requiredModelRecord);
         }
 
+        /// <summary> Initializes a new instance of InputRecursiveModel. </summary>
+        /// <param name="message"> Message. </param>
+        /// <param name="inner"> Required Record. </param>
+        /// <returns> A new <see cref="Models.InputRecursiveModel"/> instance for mocking. </returns>
+        public static InputRecursiveModel InputRecursiveModel(string message = null, InputRecursiveModel inner = null)
+        {
+            return new InputRecursiveModel(message, inner);
+        }
+
         /// <summary> Initializes a new instance of ErrorModel. </summary>
         /// <param name="message"> Error message. </param>
         /// <param name="innerError"> Required Record. </param>

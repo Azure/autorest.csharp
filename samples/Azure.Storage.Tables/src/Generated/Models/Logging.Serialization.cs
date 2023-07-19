@@ -5,17 +5,21 @@
 
 #nullable disable
 
+using System;
 using System.Xml;
 using System.Xml.Linq;
 using Azure.Core;
+using Azure.Core.Serialization;
 
 namespace Azure.Storage.Tables.Models
 {
-    public partial class Logging : IXmlSerializable
+    public partial class Logging : IXmlSerializable, IXmlModelSerializable
     {
-        void IXmlSerializable.Write(XmlWriter writer, string nameHint)
+        void IXmlSerializable.Write(XmlWriter writer, string nameHint) => ((IXmlModelSerializable)this).Serialize(writer, ModelSerializerOptions.AzureServiceDefault);
+
+        void IXmlModelSerializable.Serialize(XmlWriter writer, ModelSerializerOptions options)
         {
-            writer.WriteStartElement(nameHint ?? "Logging");
+            writer.WriteStartElement("Logging");
             writer.WriteStartElement("Version");
             writer.WriteValue(Version);
             writer.WriteEndElement();
@@ -32,8 +36,14 @@ namespace Azure.Storage.Tables.Models
             writer.WriteEndElement();
         }
 
-        internal static Logging DeserializeLogging(XElement element)
+        object IModelSerializable.Deserialize(BinaryData data, ModelSerializerOptions options)
         {
+            return DeserializeLogging(XElement.Load(data.ToStream()), options);
+        }
+
+        internal static Logging DeserializeLogging(XElement element, ModelSerializerOptions options = default)
+        {
+            options ??= ModelSerializerOptions.AzureServiceDefault;
             string version = default;
             bool delete = default;
             bool read = default;

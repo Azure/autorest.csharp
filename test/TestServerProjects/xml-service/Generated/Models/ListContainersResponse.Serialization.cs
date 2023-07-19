@@ -5,16 +5,60 @@
 
 #nullable disable
 
+using System;
 using System.Collections.Generic;
+using System.Xml;
 using System.Xml.Linq;
 using Azure.Core;
+using Azure.Core.Serialization;
 
 namespace xml_service.Models
 {
-    public partial class ListContainersResponse
+    public partial class ListContainersResponse : IXmlSerializable, IXmlModelSerializable
     {
-        internal static ListContainersResponse DeserializeListContainersResponse(XElement element)
+        void IXmlSerializable.Write(XmlWriter writer, string nameHint) => ((IXmlModelSerializable)this).Serialize(writer, ModelSerializerOptions.AzureServiceDefault);
+
+        void IXmlModelSerializable.Serialize(XmlWriter writer, ModelSerializerOptions options)
         {
+            writer.WriteStartElement("EnumerationResults");
+            writer.WriteStartAttribute("ServiceEndpoint");
+            writer.WriteValue(ServiceEndpoint);
+            writer.WriteEndAttribute();
+            writer.WriteStartElement("Prefix");
+            writer.WriteValue(Prefix);
+            writer.WriteEndElement();
+            if (Optional.IsDefined(Marker))
+            {
+                writer.WriteStartElement("Marker");
+                writer.WriteValue(Marker);
+                writer.WriteEndElement();
+            }
+            writer.WriteStartElement("MaxResults");
+            writer.WriteValue(MaxResults);
+            writer.WriteEndElement();
+            writer.WriteStartElement("NextMarker");
+            writer.WriteValue(NextMarker);
+            writer.WriteEndElement();
+            if (Optional.IsCollectionDefined(Containers))
+            {
+                writer.WriteStartElement("Containers");
+                foreach (var item in Containers)
+                {
+                    writer.WriteObjectValue(item, "Container");
+                }
+                writer.WriteEndElement();
+            }
+            writer.WriteEndElement();
+        }
+
+        object IModelSerializable.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            return DeserializeListContainersResponse(XElement.Load(data.ToStream()), options);
+        }
+
+        internal static ListContainersResponse DeserializeListContainersResponse(XElement element, ModelSerializerOptions options = default)
+        {
+            options ??= ModelSerializerOptions.AzureServiceDefault;
             string serviceEndpoint = default;
             string prefix = default;
             string marker = default;

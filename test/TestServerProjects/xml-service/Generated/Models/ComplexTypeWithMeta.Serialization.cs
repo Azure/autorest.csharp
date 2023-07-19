@@ -5,17 +5,21 @@
 
 #nullable disable
 
+using System;
 using System.Xml;
 using System.Xml.Linq;
 using Azure.Core;
+using Azure.Core.Serialization;
 
 namespace xml_service.Models
 {
-    public partial class ComplexTypeWithMeta : IXmlSerializable
+    public partial class ComplexTypeWithMeta : IXmlSerializable, IXmlModelSerializable
     {
-        void IXmlSerializable.Write(XmlWriter writer, string nameHint)
+        void IXmlSerializable.Write(XmlWriter writer, string nameHint) => ((IXmlModelSerializable)this).Serialize(writer, ModelSerializerOptions.AzureServiceDefault);
+
+        void IXmlModelSerializable.Serialize(XmlWriter writer, ModelSerializerOptions options)
         {
-            writer.WriteStartElement(nameHint ?? "XMLComplexTypeWithMeta");
+            writer.WriteStartElement("XMLComplexTypeWithMeta");
             if (Optional.IsDefined(ID))
             {
                 writer.WriteStartElement("ID");
@@ -25,8 +29,14 @@ namespace xml_service.Models
             writer.WriteEndElement();
         }
 
-        internal static ComplexTypeWithMeta DeserializeComplexTypeWithMeta(XElement element)
+        object IModelSerializable.Deserialize(BinaryData data, ModelSerializerOptions options)
         {
+            return DeserializeComplexTypeWithMeta(XElement.Load(data.ToStream()), options);
+        }
+
+        internal static ComplexTypeWithMeta DeserializeComplexTypeWithMeta(XElement element, ModelSerializerOptions options = default)
+        {
+            options ??= ModelSerializerOptions.AzureServiceDefault;
             string id = default;
             if (element.Element("ID") is XElement idElement)
             {

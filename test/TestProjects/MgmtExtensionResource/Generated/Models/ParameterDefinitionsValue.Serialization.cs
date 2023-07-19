@@ -13,11 +13,11 @@ using Azure.Core.Serialization;
 
 namespace MgmtExtensionResource.Models
 {
-    public partial class ParameterDefinitionsValue : IUtf8JsonSerializable, IModelSerializable
+    public partial class ParameterDefinitionsValue : IUtf8JsonSerializable, IJsonModelSerializable
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelSerializable)this).Serialize(writer, new SerializableOptions());
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModelSerializable)this).Serialize(writer, ModelSerializerOptions.AzureServiceDefault);
 
-        void IModelSerializable.Serialize(Utf8JsonWriter writer, SerializableOptions options)
+        void IJsonModelSerializable.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
             writer.WriteStartObject();
             if (Optional.IsDefined(ParameterType))
@@ -61,8 +61,15 @@ namespace MgmtExtensionResource.Models
             writer.WriteEndObject();
         }
 
-        internal static ParameterDefinitionsValue DeserializeParameterDefinitionsValue(JsonElement element, SerializableOptions options = default)
+        object IModelSerializable.Deserialize(BinaryData data, ModelSerializerOptions options)
         {
+            using var doc = JsonDocument.Parse(data);
+            return DeserializeParameterDefinitionsValue(doc.RootElement, options);
+        }
+
+        internal static ParameterDefinitionsValue DeserializeParameterDefinitionsValue(JsonElement element, ModelSerializerOptions options = default)
+        {
+            options ??= ModelSerializerOptions.AzureServiceDefault;
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
@@ -123,6 +130,12 @@ namespace MgmtExtensionResource.Models
                 }
             }
             return new ParameterDefinitionsValue(Optional.ToNullable(type), Optional.ToList(allowedValues), defaultValue.Value, metadata.Value);
+        }
+
+        object IJsonModelSerializable.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        {
+            using var doc = JsonDocument.ParseValue(ref reader);
+            return DeserializeParameterDefinitionsValue(doc.RootElement, options);
         }
     }
 }

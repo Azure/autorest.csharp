@@ -13,10 +13,25 @@ using Azure.Core.Serialization;
 
 namespace CognitiveSearch.Models
 {
-    public partial class IndexerExecutionResult
+    public partial class IndexerExecutionResult : IUtf8JsonSerializable, IJsonModelSerializable
     {
-        internal static IndexerExecutionResult DeserializeIndexerExecutionResult(JsonElement element, SerializableOptions options = default)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModelSerializable)this).Serialize(writer, ModelSerializerOptions.AzureServiceDefault);
+
+        void IJsonModelSerializable.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
+            writer.WriteStartObject();
+            writer.WriteEndObject();
+        }
+
+        object IModelSerializable.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            using var doc = JsonDocument.Parse(data);
+            return DeserializeIndexerExecutionResult(doc.RootElement, options);
+        }
+
+        internal static IndexerExecutionResult DeserializeIndexerExecutionResult(JsonElement element, ModelSerializerOptions options = default)
+        {
+            options ??= ModelSerializerOptions.AzureServiceDefault;
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
@@ -103,6 +118,12 @@ namespace CognitiveSearch.Models
                 }
             }
             return new IndexerExecutionResult(status, errorMessage.Value, Optional.ToNullable(startTime), Optional.ToNullable(endTime), errors, warnings, itemsProcessed, itemsFailed, initialTrackingState.Value, finalTrackingState.Value);
+        }
+
+        object IJsonModelSerializable.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        {
+            using var doc = JsonDocument.ParseValue(ref reader);
+            return DeserializeIndexerExecutionResult(doc.RootElement, options);
         }
     }
 }

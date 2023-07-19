@@ -14,7 +14,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Azure.Core" Version="1.33.0-alpha.20230612.4" />
+    <PackageReference Include="Azure.Core" Version="1.35.0-alpha.20230718.3" />
   </ItemGroup>
 
 </Project>

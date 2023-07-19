@@ -5,17 +5,20 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
 using System.Text.Json;
+using Azure;
 using Azure.Core;
 using Azure.Core.Serialization;
 
 namespace AnomalyDetector.Models
 {
-    public partial class UnivariateDetectionOptions : IUtf8JsonSerializable, IModelSerializable
+    public partial class UnivariateDetectionOptions : IUtf8JsonSerializable, IJsonModelSerializable
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelSerializable)this).Serialize(writer, new SerializableOptions());
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModelSerializable)this).Serialize(writer, ModelSerializerOptions.AzureServiceDefault);
 
-        void IModelSerializable.Serialize(Utf8JsonWriter writer, SerializableOptions options)
+        void IJsonModelSerializable.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
             writer.WriteStartObject();
             writer.WritePropertyName("series"u8);
@@ -61,6 +64,120 @@ namespace AnomalyDetector.Models
                 writer.WriteNumberValue(ImputeFixedValue.Value);
             }
             writer.WriteEndObject();
+        }
+
+        object IModelSerializable.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            using var doc = JsonDocument.Parse(data);
+            return DeserializeUnivariateDetectionOptions(doc.RootElement, options);
+        }
+
+        internal static UnivariateDetectionOptions DeserializeUnivariateDetectionOptions(JsonElement element, ModelSerializerOptions options = default)
+        {
+            options ??= ModelSerializerOptions.AzureServiceDefault;
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
+            IList<TimeSeriesPoint> series = default;
+            Optional<TimeGranularity> granularity = default;
+            Optional<int> customInterval = default;
+            Optional<int> period = default;
+            Optional<float> maxAnomalyRatio = default;
+            Optional<int> sensitivity = default;
+            Optional<ImputeMode> imputeMode = default;
+            Optional<float> imputeFixedValue = default;
+            foreach (var property in element.EnumerateObject())
+            {
+                if (property.NameEquals("series"u8))
+                {
+                    List<TimeSeriesPoint> array = new List<TimeSeriesPoint>();
+                    foreach (var item in property.Value.EnumerateArray())
+                    {
+                        array.Add(TimeSeriesPoint.DeserializeTimeSeriesPoint(item));
+                    }
+                    series = array;
+                    continue;
+                }
+                if (property.NameEquals("granularity"u8))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        continue;
+                    }
+                    granularity = property.Value.GetString().ToTimeGranularity();
+                    continue;
+                }
+                if (property.NameEquals("customInterval"u8))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        continue;
+                    }
+                    customInterval = property.Value.GetInt32();
+                    continue;
+                }
+                if (property.NameEquals("period"u8))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        continue;
+                    }
+                    period = property.Value.GetInt32();
+                    continue;
+                }
+                if (property.NameEquals("maxAnomalyRatio"u8))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        continue;
+                    }
+                    maxAnomalyRatio = property.Value.GetSingle();
+                    continue;
+                }
+                if (property.NameEquals("sensitivity"u8))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        continue;
+                    }
+                    sensitivity = property.Value.GetInt32();
+                    continue;
+                }
+                if (property.NameEquals("imputeMode"u8))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        continue;
+                    }
+                    imputeMode = new ImputeMode(property.Value.GetString());
+                    continue;
+                }
+                if (property.NameEquals("imputeFixedValue"u8))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        continue;
+                    }
+                    imputeFixedValue = property.Value.GetSingle();
+                    continue;
+                }
+            }
+            return new UnivariateDetectionOptions(series, Optional.ToNullable(granularity), Optional.ToNullable(customInterval), Optional.ToNullable(period), Optional.ToNullable(maxAnomalyRatio), Optional.ToNullable(sensitivity), Optional.ToNullable(imputeMode), Optional.ToNullable(imputeFixedValue));
+        }
+
+        object IJsonModelSerializable.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        {
+            using var doc = JsonDocument.ParseValue(ref reader);
+            return DeserializeUnivariateDetectionOptions(doc.RootElement, options);
+        }
+
+        /// <summary> Deserializes the model from a raw response. </summary>
+        /// <param name="response"> The response to deserialize the model from. </param>
+        internal static UnivariateDetectionOptions FromResponse(Response response)
+        {
+            using var document = JsonDocument.Parse(response.Content);
+            return DeserializeUnivariateDetectionOptions(document.RootElement);
         }
 
         /// <summary> Convert into a Utf8JsonRequestContent. </summary>

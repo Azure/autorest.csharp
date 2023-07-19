@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
@@ -13,10 +14,25 @@ using MgmtSupersetInheritance;
 
 namespace MgmtSupersetInheritance.Models
 {
-    internal partial class SupersetModel6ListResult
+    internal partial class SupersetModel6ListResult : IUtf8JsonSerializable, IJsonModelSerializable
     {
-        internal static SupersetModel6ListResult DeserializeSupersetModel6ListResult(JsonElement element, SerializableOptions options = default)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModelSerializable)this).Serialize(writer, ModelSerializerOptions.AzureServiceDefault);
+
+        void IJsonModelSerializable.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
+            writer.WriteStartObject();
+            writer.WriteEndObject();
+        }
+
+        object IModelSerializable.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            using var doc = JsonDocument.Parse(data);
+            return DeserializeSupersetModel6ListResult(doc.RootElement, options);
+        }
+
+        internal static SupersetModel6ListResult DeserializeSupersetModel6ListResult(JsonElement element, ModelSerializerOptions options = default)
+        {
+            options ??= ModelSerializerOptions.AzureServiceDefault;
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
@@ -46,6 +62,12 @@ namespace MgmtSupersetInheritance.Models
                 }
             }
             return new SupersetModel6ListResult(Optional.ToList(value), nextLink.Value);
+        }
+
+        object IJsonModelSerializable.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        {
+            using var doc = JsonDocument.ParseValue(ref reader);
+            return DeserializeSupersetModel6ListResult(doc.RootElement, options);
         }
     }
 }

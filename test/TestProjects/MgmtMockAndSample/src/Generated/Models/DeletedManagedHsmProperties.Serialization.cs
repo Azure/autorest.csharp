@@ -13,10 +13,25 @@ using Azure.Core.Serialization;
 
 namespace MgmtMockAndSample.Models
 {
-    public partial class DeletedManagedHsmProperties
+    public partial class DeletedManagedHsmProperties : IUtf8JsonSerializable, IJsonModelSerializable
     {
-        internal static DeletedManagedHsmProperties DeserializeDeletedManagedHsmProperties(JsonElement element, SerializableOptions options = default)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModelSerializable)this).Serialize(writer, ModelSerializerOptions.AzureServiceDefault);
+
+        void IJsonModelSerializable.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
+            writer.WriteStartObject();
+            writer.WriteEndObject();
+        }
+
+        object IModelSerializable.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            using var doc = JsonDocument.Parse(data);
+            return DeserializeDeletedManagedHsmProperties(doc.RootElement, options);
+        }
+
+        internal static DeletedManagedHsmProperties DeserializeDeletedManagedHsmProperties(JsonElement element, ModelSerializerOptions options = default)
+        {
+            options ??= ModelSerializerOptions.AzureServiceDefault;
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
@@ -86,6 +101,12 @@ namespace MgmtMockAndSample.Models
                 }
             }
             return new DeletedManagedHsmProperties(mhsmId.Value, Optional.ToNullable(location), Optional.ToNullable(deletionDate), Optional.ToNullable(scheduledPurgeDate), Optional.ToNullable(purgeProtectionEnabled), Optional.ToDictionary(tags));
+        }
+
+        object IJsonModelSerializable.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        {
+            using var doc = JsonDocument.ParseValue(ref reader);
+            return DeserializeDeletedManagedHsmProperties(doc.RootElement, options);
         }
     }
 }

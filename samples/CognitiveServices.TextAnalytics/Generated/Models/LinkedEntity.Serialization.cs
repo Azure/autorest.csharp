@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
@@ -12,10 +13,45 @@ using Azure.Core.Serialization;
 
 namespace CognitiveServices.TextAnalytics.Models
 {
-    public partial class LinkedEntity
+    public partial class LinkedEntity : IUtf8JsonSerializable, IJsonModelSerializable
     {
-        internal static LinkedEntity DeserializeLinkedEntity(JsonElement element, SerializableOptions options = default)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModelSerializable)this).Serialize(writer, ModelSerializerOptions.AzureServiceDefault);
+
+        void IJsonModelSerializable.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
+            writer.WriteStartObject();
+            writer.WritePropertyName("name"u8);
+            writer.WriteStringValue(Name);
+            writer.WritePropertyName("matches"u8);
+            writer.WriteStartArray();
+            foreach (var item in Matches)
+            {
+                writer.WriteObjectValue(item);
+            }
+            writer.WriteEndArray();
+            writer.WritePropertyName("language"u8);
+            writer.WriteStringValue(Language);
+            if (Optional.IsDefined(Id))
+            {
+                writer.WritePropertyName("id"u8);
+                writer.WriteStringValue(Id);
+            }
+            writer.WritePropertyName("url"u8);
+            writer.WriteStringValue(Url);
+            writer.WritePropertyName("dataSource"u8);
+            writer.WriteStringValue(DataSource);
+            writer.WriteEndObject();
+        }
+
+        object IModelSerializable.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            using var doc = JsonDocument.Parse(data);
+            return DeserializeLinkedEntity(doc.RootElement, options);
+        }
+
+        internal static LinkedEntity DeserializeLinkedEntity(JsonElement element, ModelSerializerOptions options = default)
+        {
+            options ??= ModelSerializerOptions.AzureServiceDefault;
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
@@ -65,6 +101,12 @@ namespace CognitiveServices.TextAnalytics.Models
                 }
             }
             return new LinkedEntity(name, matches, language, id.Value, url, dataSource);
+        }
+
+        object IJsonModelSerializable.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        {
+            using var doc = JsonDocument.ParseValue(ref reader);
+            return DeserializeLinkedEntity(doc.RootElement, options);
         }
     }
 }

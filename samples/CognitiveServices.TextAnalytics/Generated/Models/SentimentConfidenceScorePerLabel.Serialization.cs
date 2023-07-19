@@ -5,16 +5,38 @@
 
 #nullable disable
 
+using System;
 using System.Text.Json;
 using Azure.Core;
 using Azure.Core.Serialization;
 
 namespace CognitiveServices.TextAnalytics.Models
 {
-    public partial class SentimentConfidenceScorePerLabel
+    public partial class SentimentConfidenceScorePerLabel : IUtf8JsonSerializable, IJsonModelSerializable
     {
-        internal static SentimentConfidenceScorePerLabel DeserializeSentimentConfidenceScorePerLabel(JsonElement element, SerializableOptions options = default)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModelSerializable)this).Serialize(writer, ModelSerializerOptions.AzureServiceDefault);
+
+        void IJsonModelSerializable.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
+            writer.WriteStartObject();
+            writer.WritePropertyName("positive"u8);
+            writer.WriteNumberValue(Positive);
+            writer.WritePropertyName("neutral"u8);
+            writer.WriteNumberValue(Neutral);
+            writer.WritePropertyName("negative"u8);
+            writer.WriteNumberValue(Negative);
+            writer.WriteEndObject();
+        }
+
+        object IModelSerializable.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            using var doc = JsonDocument.Parse(data);
+            return DeserializeSentimentConfidenceScorePerLabel(doc.RootElement, options);
+        }
+
+        internal static SentimentConfidenceScorePerLabel DeserializeSentimentConfidenceScorePerLabel(JsonElement element, ModelSerializerOptions options = default)
+        {
+            options ??= ModelSerializerOptions.AzureServiceDefault;
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
@@ -41,6 +63,12 @@ namespace CognitiveServices.TextAnalytics.Models
                 }
             }
             return new SentimentConfidenceScorePerLabel(positive, neutral, negative);
+        }
+
+        object IJsonModelSerializable.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        {
+            using var doc = JsonDocument.ParseValue(ref reader);
+            return DeserializeSentimentConfidenceScorePerLabel(doc.RootElement, options);
         }
     }
 }

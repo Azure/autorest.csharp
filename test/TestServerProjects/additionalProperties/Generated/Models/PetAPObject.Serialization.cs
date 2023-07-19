@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
@@ -12,11 +13,11 @@ using Azure.Core.Serialization;
 
 namespace additionalProperties.Models
 {
-    public partial class PetAPObject : IUtf8JsonSerializable, IModelSerializable
+    public partial class PetAPObject : IUtf8JsonSerializable, IJsonModelSerializable
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelSerializable)this).Serialize(writer, new SerializableOptions());
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModelSerializable)this).Serialize(writer, ModelSerializerOptions.AzureServiceDefault);
 
-        void IModelSerializable.Serialize(Utf8JsonWriter writer, SerializableOptions options)
+        void IJsonModelSerializable.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
             writer.WriteStartObject();
             writer.WritePropertyName("id"u8);
@@ -34,8 +35,15 @@ namespace additionalProperties.Models
             writer.WriteEndObject();
         }
 
-        internal static PetAPObject DeserializePetAPObject(JsonElement element, SerializableOptions options = default)
+        object IModelSerializable.Deserialize(BinaryData data, ModelSerializerOptions options)
         {
+            using var doc = JsonDocument.Parse(data);
+            return DeserializePetAPObject(doc.RootElement, options);
+        }
+
+        internal static PetAPObject DeserializePetAPObject(JsonElement element, ModelSerializerOptions options = default)
+        {
+            options ??= ModelSerializerOptions.AzureServiceDefault;
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
@@ -70,6 +78,12 @@ namespace additionalProperties.Models
             }
             additionalProperties = additionalPropertiesDictionary;
             return new PetAPObject(id, name.Value, Optional.ToNullable(status), additionalProperties);
+        }
+
+        object IJsonModelSerializable.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        {
+            using var doc = JsonDocument.ParseValue(ref reader);
+            return DeserializePetAPObject(doc.RootElement, options);
         }
     }
 }

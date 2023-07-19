@@ -12,10 +12,52 @@ using Azure.Core.Serialization;
 
 namespace MgmtScopeResource.Models
 {
-    public partial class WhatIfChange
+    public partial class WhatIfChange : IUtf8JsonSerializable, IJsonModelSerializable
     {
-        internal static WhatIfChange DeserializeWhatIfChange(JsonElement element, SerializableOptions options = default)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModelSerializable)this).Serialize(writer, ModelSerializerOptions.AzureServiceDefault);
+
+        void IJsonModelSerializable.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
+            writer.WriteStartObject();
+            writer.WritePropertyName("resourceId"u8);
+            writer.WriteStringValue(ResourceId);
+            writer.WritePropertyName("changeType"u8);
+            writer.WriteStringValue(ChangeType.ToSerialString());
+            if (Optional.IsDefined(UnsupportedReason))
+            {
+                writer.WritePropertyName("unsupportedReason"u8);
+                writer.WriteStringValue(UnsupportedReason);
+            }
+            if (Optional.IsDefined(Before))
+            {
+                writer.WritePropertyName("before"u8);
+#if NET6_0_OR_GREATER
+				writer.WriteRawValue(Before);
+#else
+                JsonSerializer.Serialize(writer, JsonDocument.Parse(Before.ToString()).RootElement);
+#endif
+            }
+            if (Optional.IsDefined(After))
+            {
+                writer.WritePropertyName("after"u8);
+#if NET6_0_OR_GREATER
+				writer.WriteRawValue(After);
+#else
+                JsonSerializer.Serialize(writer, JsonDocument.Parse(After.ToString()).RootElement);
+#endif
+            }
+            writer.WriteEndObject();
+        }
+
+        object IModelSerializable.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            using var doc = JsonDocument.Parse(data);
+            return DeserializeWhatIfChange(doc.RootElement, options);
+        }
+
+        internal static WhatIfChange DeserializeWhatIfChange(JsonElement element, ModelSerializerOptions options = default)
+        {
+            options ??= ModelSerializerOptions.AzureServiceDefault;
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
@@ -62,6 +104,12 @@ namespace MgmtScopeResource.Models
                 }
             }
             return new WhatIfChange(resourceId, changeType, unsupportedReason.Value, before.Value, after.Value);
+        }
+
+        object IJsonModelSerializable.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        {
+            using var doc = JsonDocument.ParseValue(ref reader);
+            return DeserializeWhatIfChange(doc.RootElement, options);
         }
     }
 }

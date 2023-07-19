@@ -5,16 +5,47 @@
 
 #nullable disable
 
+using System;
 using System.Text.Json;
 using Azure.Core;
 using Azure.Core.Serialization;
 
 namespace Azure.ResourceManager.Sample.Models
 {
-    public partial class VirtualMachineExtensionHandlerInstanceView
+    public partial class VirtualMachineExtensionHandlerInstanceView : IUtf8JsonSerializable, IJsonModelSerializable
     {
-        internal static VirtualMachineExtensionHandlerInstanceView DeserializeVirtualMachineExtensionHandlerInstanceView(JsonElement element, SerializableOptions options = default)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModelSerializable)this).Serialize(writer, ModelSerializerOptions.AzureServiceDefault);
+
+        void IJsonModelSerializable.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
+            writer.WriteStartObject();
+            if (Optional.IsDefined(VirtualMachineExtensionHandlerInstanceViewType))
+            {
+                writer.WritePropertyName("type"u8);
+                writer.WriteStringValue(VirtualMachineExtensionHandlerInstanceViewType);
+            }
+            if (Optional.IsDefined(TypeHandlerVersion))
+            {
+                writer.WritePropertyName("typeHandlerVersion"u8);
+                writer.WriteStringValue(TypeHandlerVersion);
+            }
+            if (Optional.IsDefined(Status))
+            {
+                writer.WritePropertyName("status"u8);
+                writer.WriteObjectValue(Status);
+            }
+            writer.WriteEndObject();
+        }
+
+        object IModelSerializable.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            using var doc = JsonDocument.Parse(data);
+            return DeserializeVirtualMachineExtensionHandlerInstanceView(doc.RootElement, options);
+        }
+
+        internal static VirtualMachineExtensionHandlerInstanceView DeserializeVirtualMachineExtensionHandlerInstanceView(JsonElement element, ModelSerializerOptions options = default)
+        {
+            options ??= ModelSerializerOptions.AzureServiceDefault;
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
@@ -45,6 +76,12 @@ namespace Azure.ResourceManager.Sample.Models
                 }
             }
             return new VirtualMachineExtensionHandlerInstanceView(type.Value, typeHandlerVersion.Value, status.Value);
+        }
+
+        object IJsonModelSerializable.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        {
+            using var doc = JsonDocument.ParseValue(ref reader);
+            return DeserializeVirtualMachineExtensionHandlerInstanceView(doc.RootElement, options);
         }
     }
 }

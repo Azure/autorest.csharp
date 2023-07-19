@@ -9,14 +9,17 @@ using System;
 using System.Xml;
 using System.Xml.Linq;
 using Azure.Core;
+using Azure.Core.Serialization;
 
 namespace Azure.Storage.Tables.Models
 {
-    public partial class AccessPolicy : IXmlSerializable
+    public partial class AccessPolicy : IXmlSerializable, IXmlModelSerializable
     {
-        void IXmlSerializable.Write(XmlWriter writer, string nameHint)
+        void IXmlSerializable.Write(XmlWriter writer, string nameHint) => ((IXmlModelSerializable)this).Serialize(writer, ModelSerializerOptions.AzureServiceDefault);
+
+        void IXmlModelSerializable.Serialize(XmlWriter writer, ModelSerializerOptions options)
         {
-            writer.WriteStartElement(nameHint ?? "AccessPolicy");
+            writer.WriteStartElement("AccessPolicy");
             writer.WriteStartElement("Start");
             writer.WriteValue(Start, "O");
             writer.WriteEndElement();
@@ -29,8 +32,14 @@ namespace Azure.Storage.Tables.Models
             writer.WriteEndElement();
         }
 
-        internal static AccessPolicy DeserializeAccessPolicy(XElement element)
+        object IModelSerializable.Deserialize(BinaryData data, ModelSerializerOptions options)
         {
+            return DeserializeAccessPolicy(XElement.Load(data.ToStream()), options);
+        }
+
+        internal static AccessPolicy DeserializeAccessPolicy(XElement element, ModelSerializerOptions options = default)
+        {
+            options ??= ModelSerializerOptions.AzureServiceDefault;
             DateTimeOffset start = default;
             DateTimeOffset expiry = default;
             string permission = default;

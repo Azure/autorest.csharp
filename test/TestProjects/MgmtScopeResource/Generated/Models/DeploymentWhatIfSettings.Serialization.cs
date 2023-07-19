@@ -5,17 +5,18 @@
 
 #nullable disable
 
+using System;
 using System.Text.Json;
 using Azure.Core;
 using Azure.Core.Serialization;
 
 namespace MgmtScopeResource.Models
 {
-    internal partial class DeploymentWhatIfSettings : IUtf8JsonSerializable, IModelSerializable
+    internal partial class DeploymentWhatIfSettings : IUtf8JsonSerializable, IJsonModelSerializable
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelSerializable)this).Serialize(writer, new SerializableOptions());
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModelSerializable)this).Serialize(writer, ModelSerializerOptions.AzureServiceDefault);
 
-        void IModelSerializable.Serialize(Utf8JsonWriter writer, SerializableOptions options)
+        void IJsonModelSerializable.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
             writer.WriteStartObject();
             if (Optional.IsDefined(ResultFormat))
@@ -24,6 +25,41 @@ namespace MgmtScopeResource.Models
                 writer.WriteStringValue(ResultFormat.Value.ToSerialString());
             }
             writer.WriteEndObject();
+        }
+
+        object IModelSerializable.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            using var doc = JsonDocument.Parse(data);
+            return DeserializeDeploymentWhatIfSettings(doc.RootElement, options);
+        }
+
+        internal static DeploymentWhatIfSettings DeserializeDeploymentWhatIfSettings(JsonElement element, ModelSerializerOptions options = default)
+        {
+            options ??= ModelSerializerOptions.AzureServiceDefault;
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
+            Optional<WhatIfResultFormat> resultFormat = default;
+            foreach (var property in element.EnumerateObject())
+            {
+                if (property.NameEquals("resultFormat"u8))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        continue;
+                    }
+                    resultFormat = property.Value.GetString().ToWhatIfResultFormat();
+                    continue;
+                }
+            }
+            return new DeploymentWhatIfSettings(Optional.ToNullable(resultFormat));
+        }
+
+        object IJsonModelSerializable.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        {
+            using var doc = JsonDocument.ParseValue(ref reader);
+            return DeserializeDeploymentWhatIfSettings(doc.RootElement, options);
         }
     }
 }

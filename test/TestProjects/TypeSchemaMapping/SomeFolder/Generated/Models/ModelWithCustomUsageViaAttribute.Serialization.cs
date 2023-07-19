@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Text.Json;
 using System.Xml;
 using System.Xml.Linq;
@@ -13,11 +14,13 @@ using Azure.Core.Serialization;
 
 namespace TypeSchemaMapping.Models
 {
-    public partial class ModelWithCustomUsageViaAttribute : IUtf8JsonSerializable, IModelSerializable, IXmlSerializable
+    public partial class ModelWithCustomUsageViaAttribute : IUtf8JsonSerializable, IJsonModelSerializable, IXmlSerializable, IXmlModelSerializable
     {
-        void IXmlSerializable.Write(XmlWriter writer, string nameHint)
+        void IXmlSerializable.Write(XmlWriter writer, string nameHint) => ((IXmlModelSerializable)this).Serialize(writer, ModelSerializerOptions.AzureServiceDefault);
+
+        void IXmlModelSerializable.Serialize(XmlWriter writer, ModelSerializerOptions options)
         {
-            writer.WriteStartElement(nameHint ?? "ModelWithCustomUsageViaAttribute");
+            writer.WriteStartElement("ModelWithCustomUsageViaAttribute");
             if (Optional.IsDefined(ModelProperty))
             {
                 writer.WriteStartElement("ModelProperty");
@@ -27,8 +30,9 @@ namespace TypeSchemaMapping.Models
             writer.WriteEndElement();
         }
 
-        internal static ModelWithCustomUsageViaAttribute DeserializeModelWithCustomUsageViaAttribute(XElement element)
+        internal static ModelWithCustomUsageViaAttribute DeserializeModelWithCustomUsageViaAttribute(XElement element, ModelSerializerOptions options = default)
         {
+            options ??= ModelSerializerOptions.AzureServiceDefault;
             string modelProperty = default;
             if (element.Element("ModelProperty") is XElement modelPropertyElement)
             {
@@ -37,9 +41,9 @@ namespace TypeSchemaMapping.Models
             return new ModelWithCustomUsageViaAttribute(modelProperty);
         }
 
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelSerializable)this).Serialize(writer, new SerializableOptions());
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModelSerializable)this).Serialize(writer, ModelSerializerOptions.AzureServiceDefault);
 
-        void IModelSerializable.Serialize(Utf8JsonWriter writer, SerializableOptions options)
+        void IJsonModelSerializable.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
             writer.WriteStartObject();
             if (Optional.IsDefined(ModelProperty))
@@ -50,8 +54,22 @@ namespace TypeSchemaMapping.Models
             writer.WriteEndObject();
         }
 
-        internal static ModelWithCustomUsageViaAttribute DeserializeModelWithCustomUsageViaAttribute(JsonElement element, SerializableOptions options = default)
+        object IModelSerializable.Deserialize(BinaryData data, ModelSerializerOptions options)
         {
+            if (data.ToMemory().Span.StartsWith("{"u8))
+            {
+                using var doc = JsonDocument.Parse(data);
+                return DeserializeModelWithCustomUsageViaAttribute(doc.RootElement, options);
+            }
+            else
+            {
+                return DeserializeModelWithCustomUsageViaAttribute(XElement.Load(data.ToStream()), options);
+            }
+        }
+
+        internal static ModelWithCustomUsageViaAttribute DeserializeModelWithCustomUsageViaAttribute(JsonElement element, ModelSerializerOptions options = default)
+        {
+            options ??= ModelSerializerOptions.AzureServiceDefault;
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
@@ -66,6 +84,12 @@ namespace TypeSchemaMapping.Models
                 }
             }
             return new ModelWithCustomUsageViaAttribute(modelProperty.Value);
+        }
+
+        object IJsonModelSerializable.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        {
+            using var doc = JsonDocument.ParseValue(ref reader);
+            return DeserializeModelWithCustomUsageViaAttribute(doc.RootElement, options);
         }
     }
 }

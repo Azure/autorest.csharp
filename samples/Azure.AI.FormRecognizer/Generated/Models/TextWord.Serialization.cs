@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
@@ -12,10 +13,39 @@ using Azure.Core.Serialization;
 
 namespace Azure.AI.FormRecognizer.Models
 {
-    public partial class TextWord
+    public partial class TextWord : IUtf8JsonSerializable, IJsonModelSerializable
     {
-        internal static TextWord DeserializeTextWord(JsonElement element, SerializableOptions options = default)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModelSerializable)this).Serialize(writer, ModelSerializerOptions.AzureServiceDefault);
+
+        void IJsonModelSerializable.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
+            writer.WriteStartObject();
+            writer.WritePropertyName("text"u8);
+            writer.WriteStringValue(Text);
+            writer.WritePropertyName("boundingBox"u8);
+            writer.WriteStartArray();
+            foreach (var item in BoundingBox)
+            {
+                writer.WriteNumberValue(item);
+            }
+            writer.WriteEndArray();
+            if (Optional.IsDefined(Confidence))
+            {
+                writer.WritePropertyName("confidence"u8);
+                writer.WriteNumberValue(Confidence.Value);
+            }
+            writer.WriteEndObject();
+        }
+
+        object IModelSerializable.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            using var doc = JsonDocument.Parse(data);
+            return DeserializeTextWord(doc.RootElement, options);
+        }
+
+        internal static TextWord DeserializeTextWord(JsonElement element, ModelSerializerOptions options = default)
+        {
+            options ??= ModelSerializerOptions.AzureServiceDefault;
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
@@ -51,6 +81,12 @@ namespace Azure.AI.FormRecognizer.Models
                 }
             }
             return new TextWord(text, boundingBox, Optional.ToNullable(confidence));
+        }
+
+        object IJsonModelSerializable.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        {
+            using var doc = JsonDocument.ParseValue(ref reader);
+            return DeserializeTextWord(doc.RootElement, options);
         }
     }
 }

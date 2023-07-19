@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
@@ -13,11 +14,11 @@ using Azure.ResourceManager.Models;
 
 namespace MgmtMockAndSample.Models
 {
-    public partial class MhsmPrivateLinkResource : IUtf8JsonSerializable, IModelSerializable
+    public partial class MhsmPrivateLinkResource : IUtf8JsonSerializable, IJsonModelSerializable
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelSerializable)this).Serialize(writer, new SerializableOptions());
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModelSerializable)this).Serialize(writer, ModelSerializerOptions.AzureServiceDefault);
 
-        void IModelSerializable.Serialize(Utf8JsonWriter writer, SerializableOptions options)
+        void IJsonModelSerializable.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
             writer.WriteStartObject();
             if (Optional.IsDefined(Sku))
@@ -54,8 +55,15 @@ namespace MgmtMockAndSample.Models
             writer.WriteEndObject();
         }
 
-        internal static MhsmPrivateLinkResource DeserializeMhsmPrivateLinkResource(JsonElement element, SerializableOptions options = default)
+        object IModelSerializable.Deserialize(BinaryData data, ModelSerializerOptions options)
         {
+            using var doc = JsonDocument.Parse(data);
+            return DeserializeMhsmPrivateLinkResource(doc.RootElement, options);
+        }
+
+        internal static MhsmPrivateLinkResource DeserializeMhsmPrivateLinkResource(JsonElement element, ModelSerializerOptions options = default)
+        {
+            options ??= ModelSerializerOptions.AzureServiceDefault;
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
@@ -171,6 +179,12 @@ namespace MgmtMockAndSample.Models
                 }
             }
             return new MhsmPrivateLinkResource(id, name, type, systemData.Value, Optional.ToDictionary(tags), location, groupId.Value, Optional.ToList(requiredMembers), Optional.ToList(requiredZoneNames), sku.Value);
+        }
+
+        object IJsonModelSerializable.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        {
+            using var doc = JsonDocument.ParseValue(ref reader);
+            return DeserializeMhsmPrivateLinkResource(doc.RootElement, options);
         }
     }
 }

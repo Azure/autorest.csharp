@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Text.Json;
 using Azure;
 using Azure.Core;
@@ -12,11 +13,11 @@ using Azure.Core.Serialization;
 
 namespace _Type.Property.Optional.Models
 {
-    public partial class StringProperty : IUtf8JsonSerializable, IModelSerializable
+    public partial class StringProperty : IUtf8JsonSerializable, IJsonModelSerializable
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelSerializable)this).Serialize(writer, new SerializableOptions());
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModelSerializable)this).Serialize(writer, ModelSerializerOptions.AzureServiceDefault);
 
-        void IModelSerializable.Serialize(Utf8JsonWriter writer, SerializableOptions options)
+        void IJsonModelSerializable.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
             writer.WriteStartObject();
             if (Azure.Core.Optional.IsDefined(Property))
@@ -27,8 +28,15 @@ namespace _Type.Property.Optional.Models
             writer.WriteEndObject();
         }
 
-        internal static StringProperty DeserializeStringProperty(JsonElement element, SerializableOptions options = default)
+        object IModelSerializable.Deserialize(BinaryData data, ModelSerializerOptions options)
         {
+            using var doc = JsonDocument.Parse(data);
+            return DeserializeStringProperty(doc.RootElement, options);
+        }
+
+        internal static StringProperty DeserializeStringProperty(JsonElement element, ModelSerializerOptions options = default)
+        {
+            options ??= ModelSerializerOptions.AzureServiceDefault;
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
@@ -43,6 +51,12 @@ namespace _Type.Property.Optional.Models
                 }
             }
             return new StringProperty(property.Value);
+        }
+
+        object IJsonModelSerializable.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        {
+            using var doc = JsonDocument.ParseValue(ref reader);
+            return DeserializeStringProperty(doc.RootElement, options);
         }
 
         /// <summary> Deserializes the model from a raw response. </summary>

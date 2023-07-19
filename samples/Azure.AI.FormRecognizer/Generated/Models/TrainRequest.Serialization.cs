@@ -5,17 +5,18 @@
 
 #nullable disable
 
+using System;
 using System.Text.Json;
 using Azure.Core;
 using Azure.Core.Serialization;
 
 namespace Azure.AI.FormRecognizer.Models
 {
-    public partial class TrainRequest : IUtf8JsonSerializable, IModelSerializable
+    public partial class TrainRequest : IUtf8JsonSerializable, IJsonModelSerializable
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelSerializable)this).Serialize(writer, new SerializableOptions());
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModelSerializable)this).Serialize(writer, ModelSerializerOptions.AzureServiceDefault);
 
-        void IModelSerializable.Serialize(Utf8JsonWriter writer, SerializableOptions options)
+        void IJsonModelSerializable.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
             writer.WriteStartObject();
             writer.WritePropertyName("source"u8);
@@ -31,6 +32,57 @@ namespace Azure.AI.FormRecognizer.Models
                 writer.WriteBooleanValue(UseLabelFile.Value);
             }
             writer.WriteEndObject();
+        }
+
+        object IModelSerializable.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            using var doc = JsonDocument.Parse(data);
+            return DeserializeTrainRequest(doc.RootElement, options);
+        }
+
+        internal static TrainRequest DeserializeTrainRequest(JsonElement element, ModelSerializerOptions options = default)
+        {
+            options ??= ModelSerializerOptions.AzureServiceDefault;
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
+            string source = default;
+            Optional<TrainSourceFilter> sourceFilter = default;
+            Optional<bool> useLabelFile = default;
+            foreach (var property in element.EnumerateObject())
+            {
+                if (property.NameEquals("source"u8))
+                {
+                    source = property.Value.GetString();
+                    continue;
+                }
+                if (property.NameEquals("sourceFilter"u8))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        continue;
+                    }
+                    sourceFilter = TrainSourceFilter.DeserializeTrainSourceFilter(property.Value);
+                    continue;
+                }
+                if (property.NameEquals("useLabelFile"u8))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        continue;
+                    }
+                    useLabelFile = property.Value.GetBoolean();
+                    continue;
+                }
+            }
+            return new TrainRequest(source, sourceFilter.Value, Optional.ToNullable(useLabelFile));
+        }
+
+        object IJsonModelSerializable.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        {
+            using var doc = JsonDocument.ParseValue(ref reader);
+            return DeserializeTrainRequest(doc.RootElement, options);
         }
     }
 }

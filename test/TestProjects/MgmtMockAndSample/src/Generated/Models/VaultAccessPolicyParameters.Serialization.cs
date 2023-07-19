@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Text.Json;
 using Azure.Core;
 using Azure.Core.Serialization;
@@ -12,11 +13,11 @@ using Azure.ResourceManager.Models;
 
 namespace MgmtMockAndSample.Models
 {
-    public partial class VaultAccessPolicyParameters : IUtf8JsonSerializable, IModelSerializable
+    public partial class VaultAccessPolicyParameters : IUtf8JsonSerializable, IJsonModelSerializable
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelSerializable)this).Serialize(writer, new SerializableOptions());
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModelSerializable)this).Serialize(writer, ModelSerializerOptions.AzureServiceDefault);
 
-        void IModelSerializable.Serialize(Utf8JsonWriter writer, SerializableOptions options)
+        void IJsonModelSerializable.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
             writer.WriteStartObject();
             writer.WritePropertyName("properties"u8);
@@ -24,8 +25,15 @@ namespace MgmtMockAndSample.Models
             writer.WriteEndObject();
         }
 
-        internal static VaultAccessPolicyParameters DeserializeVaultAccessPolicyParameters(JsonElement element, SerializableOptions options = default)
+        object IModelSerializable.Deserialize(BinaryData data, ModelSerializerOptions options)
         {
+            using var doc = JsonDocument.Parse(data);
+            return DeserializeVaultAccessPolicyParameters(doc.RootElement, options);
+        }
+
+        internal static VaultAccessPolicyParameters DeserializeVaultAccessPolicyParameters(JsonElement element, ModelSerializerOptions options = default)
+        {
+            options ??= ModelSerializerOptions.AzureServiceDefault;
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
@@ -78,6 +86,12 @@ namespace MgmtMockAndSample.Models
                 }
             }
             return new VaultAccessPolicyParameters(id, name, type, systemData.Value, Optional.ToNullable(location), properties);
+        }
+
+        object IJsonModelSerializable.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        {
+            using var doc = JsonDocument.ParseValue(ref reader);
+            return DeserializeVaultAccessPolicyParameters(doc.RootElement, options);
         }
     }
 }

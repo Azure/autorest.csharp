@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
@@ -12,10 +13,64 @@ using Azure.Core.Serialization;
 
 namespace Azure.AI.FormRecognizer.Models
 {
-    public partial class AnalyzeResult
+    public partial class AnalyzeResult : IUtf8JsonSerializable, IJsonModelSerializable
     {
-        internal static AnalyzeResult DeserializeAnalyzeResult(JsonElement element, SerializableOptions options = default)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModelSerializable)this).Serialize(writer, ModelSerializerOptions.AzureServiceDefault);
+
+        void IJsonModelSerializable.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
+            writer.WriteStartObject();
+            writer.WritePropertyName("version"u8);
+            writer.WriteStringValue(Version);
+            writer.WritePropertyName("readResults"u8);
+            writer.WriteStartArray();
+            foreach (var item in ReadResults)
+            {
+                writer.WriteObjectValue(item);
+            }
+            writer.WriteEndArray();
+            if (Optional.IsCollectionDefined(PageResults))
+            {
+                writer.WritePropertyName("pageResults"u8);
+                writer.WriteStartArray();
+                foreach (var item in PageResults)
+                {
+                    writer.WriteObjectValue(item);
+                }
+                writer.WriteEndArray();
+            }
+            if (Optional.IsCollectionDefined(DocumentResults))
+            {
+                writer.WritePropertyName("documentResults"u8);
+                writer.WriteStartArray();
+                foreach (var item in DocumentResults)
+                {
+                    writer.WriteObjectValue(item);
+                }
+                writer.WriteEndArray();
+            }
+            if (Optional.IsCollectionDefined(Errors))
+            {
+                writer.WritePropertyName("errors"u8);
+                writer.WriteStartArray();
+                foreach (var item in Errors)
+                {
+                    writer.WriteObjectValue(item);
+                }
+                writer.WriteEndArray();
+            }
+            writer.WriteEndObject();
+        }
+
+        object IModelSerializable.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            using var doc = JsonDocument.Parse(data);
+            return DeserializeAnalyzeResult(doc.RootElement, options);
+        }
+
+        internal static AnalyzeResult DeserializeAnalyzeResult(JsonElement element, ModelSerializerOptions options = default)
+        {
+            options ??= ModelSerializerOptions.AzureServiceDefault;
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
@@ -86,6 +141,12 @@ namespace Azure.AI.FormRecognizer.Models
                 }
             }
             return new AnalyzeResult(version, readResults, Optional.ToList(pageResults), Optional.ToList(documentResults), Optional.ToList(errors));
+        }
+
+        object IJsonModelSerializable.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        {
+            using var doc = JsonDocument.ParseValue(ref reader);
+            return DeserializeAnalyzeResult(doc.RootElement, options);
         }
     }
 }

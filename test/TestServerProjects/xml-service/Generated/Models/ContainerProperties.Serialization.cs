@@ -6,15 +6,61 @@
 #nullable disable
 
 using System;
+using System.Xml;
 using System.Xml.Linq;
 using Azure.Core;
+using Azure.Core.Serialization;
 
 namespace xml_service.Models
 {
-    public partial class ContainerProperties
+    public partial class ContainerProperties : IXmlSerializable, IXmlModelSerializable
     {
-        internal static ContainerProperties DeserializeContainerProperties(XElement element)
+        void IXmlSerializable.Write(XmlWriter writer, string nameHint) => ((IXmlModelSerializable)this).Serialize(writer, ModelSerializerOptions.AzureServiceDefault);
+
+        void IXmlModelSerializable.Serialize(XmlWriter writer, ModelSerializerOptions options)
         {
+            writer.WriteStartElement("ContainerProperties");
+            writer.WriteStartElement("Last-Modified");
+            writer.WriteValue(LastModified, "R");
+            writer.WriteEndElement();
+            writer.WriteStartElement("Etag");
+            writer.WriteValue(Etag);
+            writer.WriteEndElement();
+            if (Optional.IsDefined(LeaseStatus))
+            {
+                writer.WriteStartElement("LeaseStatus");
+                writer.WriteValue(LeaseStatus.Value.ToSerialString());
+                writer.WriteEndElement();
+            }
+            if (Optional.IsDefined(LeaseState))
+            {
+                writer.WriteStartElement("LeaseState");
+                writer.WriteValue(LeaseState.Value.ToSerialString());
+                writer.WriteEndElement();
+            }
+            if (Optional.IsDefined(LeaseDuration))
+            {
+                writer.WriteStartElement("LeaseDuration");
+                writer.WriteValue(LeaseDuration.Value.ToSerialString());
+                writer.WriteEndElement();
+            }
+            if (Optional.IsDefined(PublicAccess))
+            {
+                writer.WriteStartElement("PublicAccess");
+                writer.WriteValue(PublicAccess.Value.ToString());
+                writer.WriteEndElement();
+            }
+            writer.WriteEndElement();
+        }
+
+        object IModelSerializable.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            return DeserializeContainerProperties(XElement.Load(data.ToStream()), options);
+        }
+
+        internal static ContainerProperties DeserializeContainerProperties(XElement element, ModelSerializerOptions options = default)
+        {
+            options ??= ModelSerializerOptions.AzureServiceDefault;
             DateTimeOffset lastModified = default;
             string etag = default;
             LeaseStatusType? leaseStatus = default;

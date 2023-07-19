@@ -12,10 +12,34 @@ using Azure.Core.Serialization;
 
 namespace MgmtScopeResource.Models
 {
-    internal partial class HttpMessage
+    internal partial class HttpMessage : IUtf8JsonSerializable, IJsonModelSerializable
     {
-        internal static HttpMessage DeserializeHttpMessage(JsonElement element, SerializableOptions options = default)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModelSerializable)this).Serialize(writer, ModelSerializerOptions.AzureServiceDefault);
+
+        void IJsonModelSerializable.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
+            writer.WriteStartObject();
+            if (Optional.IsDefined(Content))
+            {
+                writer.WritePropertyName("content"u8);
+#if NET6_0_OR_GREATER
+				writer.WriteRawValue(Content);
+#else
+                JsonSerializer.Serialize(writer, JsonDocument.Parse(Content.ToString()).RootElement);
+#endif
+            }
+            writer.WriteEndObject();
+        }
+
+        object IModelSerializable.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            using var doc = JsonDocument.Parse(data);
+            return DeserializeHttpMessage(doc.RootElement, options);
+        }
+
+        internal static HttpMessage DeserializeHttpMessage(JsonElement element, ModelSerializerOptions options = default)
+        {
+            options ??= ModelSerializerOptions.AzureServiceDefault;
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
@@ -34,6 +58,12 @@ namespace MgmtScopeResource.Models
                 }
             }
             return new HttpMessage(content.Value);
+        }
+
+        object IJsonModelSerializable.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        {
+            using var doc = JsonDocument.ParseValue(ref reader);
+            return DeserializeHttpMessage(doc.RootElement, options);
         }
     }
 }

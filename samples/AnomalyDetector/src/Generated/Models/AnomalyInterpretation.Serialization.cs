@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Text.Json;
 using Azure;
 using Azure.Core;
@@ -12,10 +13,40 @@ using Azure.Core.Serialization;
 
 namespace AnomalyDetector.Models
 {
-    public partial class AnomalyInterpretation
+    public partial class AnomalyInterpretation : IUtf8JsonSerializable, IJsonModelSerializable
     {
-        internal static AnomalyInterpretation DeserializeAnomalyInterpretation(JsonElement element, SerializableOptions options = default)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModelSerializable)this).Serialize(writer, ModelSerializerOptions.AzureServiceDefault);
+
+        void IJsonModelSerializable.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
+            writer.WriteStartObject();
+            if (Optional.IsDefined(Variable))
+            {
+                writer.WritePropertyName("variable"u8);
+                writer.WriteStringValue(Variable);
+            }
+            if (Optional.IsDefined(ContributionScore))
+            {
+                writer.WritePropertyName("contributionScore"u8);
+                writer.WriteNumberValue(ContributionScore.Value);
+            }
+            if (Optional.IsDefined(CorrelationChanges))
+            {
+                writer.WritePropertyName("correlationChanges"u8);
+                writer.WriteObjectValue(CorrelationChanges);
+            }
+            writer.WriteEndObject();
+        }
+
+        object IModelSerializable.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            using var doc = JsonDocument.Parse(data);
+            return DeserializeAnomalyInterpretation(doc.RootElement, options);
+        }
+
+        internal static AnomalyInterpretation DeserializeAnomalyInterpretation(JsonElement element, ModelSerializerOptions options = default)
+        {
+            options ??= ModelSerializerOptions.AzureServiceDefault;
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
@@ -52,12 +83,26 @@ namespace AnomalyDetector.Models
             return new AnomalyInterpretation(variable.Value, Optional.ToNullable(contributionScore), correlationChanges.Value);
         }
 
+        object IJsonModelSerializable.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        {
+            using var doc = JsonDocument.ParseValue(ref reader);
+            return DeserializeAnomalyInterpretation(doc.RootElement, options);
+        }
+
         /// <summary> Deserializes the model from a raw response. </summary>
         /// <param name="response"> The response to deserialize the model from. </param>
         internal static AnomalyInterpretation FromResponse(Response response)
         {
             using var document = JsonDocument.Parse(response.Content);
             return DeserializeAnomalyInterpretation(document.RootElement);
+        }
+
+        /// <summary> Convert into a Utf8JsonRequestContent. </summary>
+        internal virtual RequestContent ToRequestContent()
+        {
+            var content = new Utf8JsonRequestContent();
+            content.JsonWriter.WriteObjectValue(this);
+            return content;
         }
     }
 }

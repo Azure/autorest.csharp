@@ -5,16 +5,47 @@
 
 #nullable disable
 
+using System;
 using System.Text.Json;
 using Azure.Core;
 using Azure.Core.Serialization;
 
 namespace body_complex.Models
 {
-    internal partial class UnknownMyBaseType
+    internal partial class UnknownMyBaseType : IUtf8JsonSerializable, IJsonModelSerializable
     {
-        internal static UnknownMyBaseType DeserializeUnknownMyBaseType(JsonElement element, SerializableOptions options = default)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModelSerializable)this).Serialize(writer, ModelSerializerOptions.AzureServiceDefault);
+
+        void IJsonModelSerializable.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
+            writer.WriteStartObject();
+            writer.WritePropertyName("kind"u8);
+            writer.WriteStringValue(Kind.ToString());
+            if (Optional.IsDefined(PropB1))
+            {
+                writer.WritePropertyName("propB1"u8);
+                writer.WriteStringValue(PropB1);
+            }
+            writer.WritePropertyName("helper"u8);
+            writer.WriteStartObject();
+            if (Optional.IsDefined(PropBH1))
+            {
+                writer.WritePropertyName("propBH1"u8);
+                writer.WriteStringValue(PropBH1);
+            }
+            writer.WriteEndObject();
+            writer.WriteEndObject();
+        }
+
+        object IModelSerializable.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            using var doc = JsonDocument.Parse(data);
+            return DeserializeUnknownMyBaseType(doc.RootElement, options);
+        }
+
+        internal static UnknownMyBaseType DeserializeUnknownMyBaseType(JsonElement element, ModelSerializerOptions options = default)
+        {
+            options ??= ModelSerializerOptions.AzureServiceDefault;
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
@@ -53,6 +84,12 @@ namespace body_complex.Models
                 }
             }
             return new UnknownMyBaseType(kind, propB1.Value, propBH1.Value);
+        }
+
+        object IJsonModelSerializable.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        {
+            using var doc = JsonDocument.ParseValue(ref reader);
+            return DeserializeUnknownMyBaseType(doc.RootElement, options);
         }
     }
 }

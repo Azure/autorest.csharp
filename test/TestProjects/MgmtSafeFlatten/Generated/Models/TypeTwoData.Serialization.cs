@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
@@ -14,11 +15,11 @@ using MgmtSafeFlatten.Models;
 
 namespace MgmtSafeFlatten
 {
-    public partial class TypeTwoData : IUtf8JsonSerializable, IModelSerializable
+    public partial class TypeTwoData : IUtf8JsonSerializable, IJsonModelSerializable
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelSerializable)this).Serialize(writer, new SerializableOptions());
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModelSerializable)this).Serialize(writer, ModelSerializerOptions.AzureServiceDefault);
 
-        void IModelSerializable.Serialize(Utf8JsonWriter writer, SerializableOptions options)
+        void IJsonModelSerializable.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
             writer.WriteStartObject();
             if (Optional.IsDefined(MyType))
@@ -47,8 +48,15 @@ namespace MgmtSafeFlatten
             writer.WriteEndObject();
         }
 
-        internal static TypeTwoData DeserializeTypeTwoData(JsonElement element, SerializableOptions options = default)
+        object IModelSerializable.Deserialize(BinaryData data, ModelSerializerOptions options)
         {
+            using var doc = JsonDocument.Parse(data);
+            return DeserializeTypeTwoData(doc.RootElement, options);
+        }
+
+        internal static TypeTwoData DeserializeTypeTwoData(JsonElement element, ModelSerializerOptions options = default)
+        {
+            options ??= ModelSerializerOptions.AzureServiceDefault;
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
@@ -122,6 +130,12 @@ namespace MgmtSafeFlatten
                 }
             }
             return new TypeTwoData(id, name, type, systemData.Value, Optional.ToDictionary(tags), location, myType.Value, properties.Value);
+        }
+
+        object IJsonModelSerializable.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        {
+            using var doc = JsonDocument.ParseValue(ref reader);
+            return DeserializeTypeTwoData(doc.RootElement, options);
         }
     }
 }

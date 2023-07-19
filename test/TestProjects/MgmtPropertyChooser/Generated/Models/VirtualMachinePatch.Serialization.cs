@@ -5,17 +5,20 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
 using Azure.Core.Serialization;
+using Azure.ResourceManager.Models;
 
 namespace MgmtPropertyChooser.Models
 {
-    public partial class VirtualMachinePatch : IUtf8JsonSerializable, IModelSerializable
+    public partial class VirtualMachinePatch : IUtf8JsonSerializable, IJsonModelSerializable
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelSerializable)this).Serialize(writer, new SerializableOptions());
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModelSerializable)this).Serialize(writer, ModelSerializerOptions.AzureServiceDefault);
 
-        void IModelSerializable.Serialize(Utf8JsonWriter writer, SerializableOptions options)
+        void IJsonModelSerializable.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
             writer.WriteStartObject();
             if (Optional.IsDefined(Plan))
@@ -63,6 +66,117 @@ namespace MgmtPropertyChooser.Models
             }
             writer.WriteEndObject();
             writer.WriteEndObject();
+        }
+
+        object IModelSerializable.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            using var doc = JsonDocument.Parse(data);
+            return DeserializeVirtualMachinePatch(doc.RootElement, options);
+        }
+
+        internal static VirtualMachinePatch DeserializeVirtualMachinePatch(JsonElement element, ModelSerializerOptions options = default)
+        {
+            options ??= ModelSerializerOptions.AzureServiceDefault;
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
+            Optional<ArmPlan> plan = default;
+            Optional<ManagedServiceIdentity> identity = default;
+            Optional<IList<string>> zones = default;
+            Optional<IDictionary<string, string>> tags = default;
+            Optional<string> provisioningState = default;
+            Optional<string> licenseType = default;
+            Optional<string> vmId = default;
+            Optional<string> extensionsTimeBudget = default;
+            foreach (var property in element.EnumerateObject())
+            {
+                if (property.NameEquals("plan"u8))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        continue;
+                    }
+                    plan = JsonSerializer.Deserialize<ArmPlan>(property.Value.GetRawText());
+                    continue;
+                }
+                if (property.NameEquals("identity"u8))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        continue;
+                    }
+                    identity = JsonSerializer.Deserialize<ManagedServiceIdentity>(property.Value.GetRawText());
+                    continue;
+                }
+                if (property.NameEquals("zones"u8))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        continue;
+                    }
+                    List<string> array = new List<string>();
+                    foreach (var item in property.Value.EnumerateArray())
+                    {
+                        array.Add(item.GetString());
+                    }
+                    zones = array;
+                    continue;
+                }
+                if (property.NameEquals("tags"u8))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        continue;
+                    }
+                    Dictionary<string, string> dictionary = new Dictionary<string, string>();
+                    foreach (var property0 in property.Value.EnumerateObject())
+                    {
+                        dictionary.Add(property0.Name, property0.Value.GetString());
+                    }
+                    tags = dictionary;
+                    continue;
+                }
+                if (property.NameEquals("properties"u8))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        property.ThrowNonNullablePropertyIsNull();
+                        continue;
+                    }
+                    foreach (var property0 in property.Value.EnumerateObject())
+                    {
+                        if (property0.NameEquals("provisioningState"u8))
+                        {
+                            provisioningState = property0.Value.GetString();
+                            continue;
+                        }
+                        if (property0.NameEquals("licenseType"u8))
+                        {
+                            licenseType = property0.Value.GetString();
+                            continue;
+                        }
+                        if (property0.NameEquals("vmId"u8))
+                        {
+                            vmId = property0.Value.GetString();
+                            continue;
+                        }
+                        if (property0.NameEquals("extensionsTimeBudget"u8))
+                        {
+                            extensionsTimeBudget = property0.Value.GetString();
+                            continue;
+                        }
+                    }
+                    continue;
+                }
+            }
+            return new VirtualMachinePatch(Optional.ToDictionary(tags), plan, identity, Optional.ToList(zones), provisioningState.Value, licenseType.Value, vmId.Value, extensionsTimeBudget.Value);
+        }
+
+        object IJsonModelSerializable.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        {
+            using var doc = JsonDocument.ParseValue(ref reader);
+            return DeserializeVirtualMachinePatch(doc.RootElement, options);
         }
     }
 }

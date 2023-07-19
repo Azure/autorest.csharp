@@ -5,16 +5,41 @@
 
 #nullable disable
 
+using System;
 using System.Text.Json;
 using Azure.Core;
 using Azure.Core.Serialization;
 
 namespace CognitiveServices.TextAnalytics.Models
 {
-    public partial class TextAnalyticsWarning
+    public partial class TextAnalyticsWarning : IUtf8JsonSerializable, IJsonModelSerializable
     {
-        internal static TextAnalyticsWarning DeserializeTextAnalyticsWarning(JsonElement element, SerializableOptions options = default)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModelSerializable)this).Serialize(writer, ModelSerializerOptions.AzureServiceDefault);
+
+        void IJsonModelSerializable.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
+            writer.WriteStartObject();
+            writer.WritePropertyName("code"u8);
+            writer.WriteStringValue(Code.ToSerialString());
+            writer.WritePropertyName("message"u8);
+            writer.WriteStringValue(Message);
+            if (Optional.IsDefined(TargetRef))
+            {
+                writer.WritePropertyName("targetRef"u8);
+                writer.WriteStringValue(TargetRef);
+            }
+            writer.WriteEndObject();
+        }
+
+        object IModelSerializable.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            using var doc = JsonDocument.Parse(data);
+            return DeserializeTextAnalyticsWarning(doc.RootElement, options);
+        }
+
+        internal static TextAnalyticsWarning DeserializeTextAnalyticsWarning(JsonElement element, ModelSerializerOptions options = default)
+        {
+            options ??= ModelSerializerOptions.AzureServiceDefault;
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
@@ -41,6 +66,12 @@ namespace CognitiveServices.TextAnalytics.Models
                 }
             }
             return new TextAnalyticsWarning(code, message, targetRef.Value);
+        }
+
+        object IJsonModelSerializable.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        {
+            using var doc = JsonDocument.ParseValue(ref reader);
+            return DeserializeTextAnalyticsWarning(doc.RootElement, options);
         }
     }
 }

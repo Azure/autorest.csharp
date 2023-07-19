@@ -5,17 +5,19 @@
 
 #nullable disable
 
+using System;
 using System.Text.Json;
+using Azure;
 using Azure.Core;
 using Azure.Core.Serialization;
 
 namespace Parameters.Spread.Models
 {
-    internal partial class SpreadWithMultipleParametersRequest : IUtf8JsonSerializable, IModelSerializable
+    internal partial class SpreadWithMultipleParametersRequest : IUtf8JsonSerializable, IJsonModelSerializable
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelSerializable)this).Serialize(writer, new SerializableOptions());
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModelSerializable)this).Serialize(writer, ModelSerializerOptions.AzureServiceDefault);
 
-        void IModelSerializable.Serialize(Utf8JsonWriter writer, SerializableOptions options)
+        void IJsonModelSerializable.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
             writer.WriteStartObject();
             writer.WritePropertyName("prop1"u8);
@@ -31,6 +33,75 @@ namespace Parameters.Spread.Models
             writer.WritePropertyName("prop6"u8);
             writer.WriteStringValue(Prop6);
             writer.WriteEndObject();
+        }
+
+        object IModelSerializable.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            using var doc = JsonDocument.Parse(data);
+            return DeserializeSpreadWithMultipleParametersRequest(doc.RootElement, options);
+        }
+
+        internal static SpreadWithMultipleParametersRequest DeserializeSpreadWithMultipleParametersRequest(JsonElement element, ModelSerializerOptions options = default)
+        {
+            options ??= ModelSerializerOptions.AzureServiceDefault;
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
+            string prop1 = default;
+            string prop2 = default;
+            string prop3 = default;
+            string prop4 = default;
+            string prop5 = default;
+            string prop6 = default;
+            foreach (var property in element.EnumerateObject())
+            {
+                if (property.NameEquals("prop1"u8))
+                {
+                    prop1 = property.Value.GetString();
+                    continue;
+                }
+                if (property.NameEquals("prop2"u8))
+                {
+                    prop2 = property.Value.GetString();
+                    continue;
+                }
+                if (property.NameEquals("prop3"u8))
+                {
+                    prop3 = property.Value.GetString();
+                    continue;
+                }
+                if (property.NameEquals("prop4"u8))
+                {
+                    prop4 = property.Value.GetString();
+                    continue;
+                }
+                if (property.NameEquals("prop5"u8))
+                {
+                    prop5 = property.Value.GetString();
+                    continue;
+                }
+                if (property.NameEquals("prop6"u8))
+                {
+                    prop6 = property.Value.GetString();
+                    continue;
+                }
+            }
+            return new SpreadWithMultipleParametersRequest(prop1, prop2, prop3, prop4, prop5, prop6);
+        }
+
+        object IJsonModelSerializable.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        {
+            using var doc = JsonDocument.ParseValue(ref reader);
+            return DeserializeSpreadWithMultipleParametersRequest(doc.RootElement, options);
+        }
+
+        /// <summary> Deserializes the model from a raw response. </summary>
+        /// <param name="response"> The response to deserialize the model from. </param>
+        internal static SpreadWithMultipleParametersRequest FromResponse(Response response)
+        {
+            using var document = JsonDocument.Parse(response.Content);
+            return DeserializeSpreadWithMultipleParametersRequest(document.RootElement);
         }
 
         /// <summary> Convert into a Utf8JsonRequestContent. </summary>

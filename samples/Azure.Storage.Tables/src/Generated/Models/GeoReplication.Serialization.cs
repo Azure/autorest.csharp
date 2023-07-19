@@ -6,15 +6,37 @@
 #nullable disable
 
 using System;
+using System.Xml;
 using System.Xml.Linq;
 using Azure.Core;
+using Azure.Core.Serialization;
 
 namespace Azure.Storage.Tables.Models
 {
-    public partial class GeoReplication
+    public partial class GeoReplication : IXmlSerializable, IXmlModelSerializable
     {
-        internal static GeoReplication DeserializeGeoReplication(XElement element)
+        void IXmlSerializable.Write(XmlWriter writer, string nameHint) => ((IXmlModelSerializable)this).Serialize(writer, ModelSerializerOptions.AzureServiceDefault);
+
+        void IXmlModelSerializable.Serialize(XmlWriter writer, ModelSerializerOptions options)
         {
+            writer.WriteStartElement("GeoReplication");
+            writer.WriteStartElement("Status");
+            writer.WriteValue(Status.ToString());
+            writer.WriteEndElement();
+            writer.WriteStartElement("LastSyncTime");
+            writer.WriteValue(LastSyncTime, "R");
+            writer.WriteEndElement();
+            writer.WriteEndElement();
+        }
+
+        object IModelSerializable.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            return DeserializeGeoReplication(XElement.Load(data.ToStream()), options);
+        }
+
+        internal static GeoReplication DeserializeGeoReplication(XElement element, ModelSerializerOptions options = default)
+        {
+            options ??= ModelSerializerOptions.AzureServiceDefault;
             GeoReplicationStatusType status = default;
             DateTimeOffset lastSyncTime = default;
             if (element.Element("Status") is XElement statusElement)

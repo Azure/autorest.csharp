@@ -5,16 +5,46 @@
 
 #nullable disable
 
+using System;
 using System.Text.Json;
 using Azure.Core;
 using Azure.Core.Serialization;
 
 namespace CognitiveSearch.Models
 {
-    public partial class ResourceCounter
+    public partial class ResourceCounter : IUtf8JsonSerializable, IJsonModelSerializable
     {
-        internal static ResourceCounter DeserializeResourceCounter(JsonElement element, SerializableOptions options = default)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModelSerializable)this).Serialize(writer, ModelSerializerOptions.AzureServiceDefault);
+
+        void IJsonModelSerializable.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
+            writer.WriteStartObject();
+            writer.WritePropertyName("usage"u8);
+            writer.WriteNumberValue(Usage);
+            if (Optional.IsDefined(Quota))
+            {
+                if (Quota != null)
+                {
+                    writer.WritePropertyName("quota"u8);
+                    writer.WriteNumberValue(Quota.Value);
+                }
+                else
+                {
+                    writer.WriteNull("quota");
+                }
+            }
+            writer.WriteEndObject();
+        }
+
+        object IModelSerializable.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            using var doc = JsonDocument.Parse(data);
+            return DeserializeResourceCounter(doc.RootElement, options);
+        }
+
+        internal static ResourceCounter DeserializeResourceCounter(JsonElement element, ModelSerializerOptions options = default)
+        {
+            options ??= ModelSerializerOptions.AzureServiceDefault;
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
@@ -40,6 +70,12 @@ namespace CognitiveSearch.Models
                 }
             }
             return new ResourceCounter(usage, Optional.ToNullable(quota));
+        }
+
+        object IJsonModelSerializable.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        {
+            using var doc = JsonDocument.ParseValue(ref reader);
+            return DeserializeResourceCounter(doc.RootElement, options);
         }
     }
 }

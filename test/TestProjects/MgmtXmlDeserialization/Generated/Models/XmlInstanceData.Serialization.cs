@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Text.Json;
 using System.Xml;
 using System.Xml.Linq;
@@ -14,11 +15,13 @@ using Azure.ResourceManager.Models;
 
 namespace MgmtXmlDeserialization
 {
-    public partial class XmlInstanceData : IUtf8JsonSerializable, IModelSerializable, IXmlSerializable
+    public partial class XmlInstanceData : IUtf8JsonSerializable, IJsonModelSerializable, IXmlSerializable, IXmlModelSerializable
     {
-        void IXmlSerializable.Write(XmlWriter writer, string nameHint)
+        void IXmlSerializable.Write(XmlWriter writer, string nameHint) => ((IXmlModelSerializable)this).Serialize(writer, ModelSerializerOptions.AzureServiceDefault);
+
+        void IXmlModelSerializable.Serialize(XmlWriter writer, ModelSerializerOptions options)
         {
-            writer.WriteStartElement(nameHint ?? "XmlInstance");
+            writer.WriteStartElement("XmlInstance");
             writer.WriteStartElement("id");
             writer.WriteValue(Id);
             writer.WriteEndElement();
@@ -37,16 +40,30 @@ namespace MgmtXmlDeserialization
             writer.WriteEndElement();
         }
 
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelSerializable)this).Serialize(writer, new SerializableOptions());
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModelSerializable)this).Serialize(writer, ModelSerializerOptions.AzureServiceDefault);
 
-        void IModelSerializable.Serialize(Utf8JsonWriter writer, SerializableOptions options)
+        void IJsonModelSerializable.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
             writer.WriteStartObject();
             writer.WriteEndObject();
         }
 
-        internal static XmlInstanceData DeserializeXmlInstanceData(JsonElement element, SerializableOptions options = default)
+        object IModelSerializable.Deserialize(BinaryData data, ModelSerializerOptions options)
         {
+            if (data.ToMemory().Span.StartsWith("{"u8))
+            {
+                using var doc = JsonDocument.Parse(data);
+                return DeserializeXmlInstanceData(doc.RootElement, options);
+            }
+            else
+            {
+                return DeserializeXmlInstanceData(XElement.Load(data.ToStream()), options);
+            }
+        }
+
+        internal static XmlInstanceData DeserializeXmlInstanceData(JsonElement element, ModelSerializerOptions options = default)
+        {
+            options ??= ModelSerializerOptions.AzureServiceDefault;
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
@@ -83,6 +100,12 @@ namespace MgmtXmlDeserialization
                 }
             }
             return new XmlInstanceData(id, name, type, systemData.Value);
+        }
+
+        object IJsonModelSerializable.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        {
+            using var doc = JsonDocument.ParseValue(ref reader);
+            return DeserializeXmlInstanceData(doc.RootElement, options);
         }
     }
 }

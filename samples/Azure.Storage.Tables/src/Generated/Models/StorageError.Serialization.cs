@@ -5,17 +5,34 @@
 
 #nullable disable
 
+using System;
 using System.Text.Json;
+using System.Xml;
 using System.Xml.Linq;
 using Azure.Core;
 using Azure.Core.Serialization;
 
 namespace Azure.Storage.Tables.Models
 {
-    internal partial class StorageError
+    internal partial class StorageError : IUtf8JsonSerializable, IJsonModelSerializable, IXmlSerializable, IXmlModelSerializable
     {
-        internal static StorageError DeserializeStorageError(XElement element)
+        void IXmlSerializable.Write(XmlWriter writer, string nameHint) => ((IXmlModelSerializable)this).Serialize(writer, ModelSerializerOptions.AzureServiceDefault);
+
+        void IXmlModelSerializable.Serialize(XmlWriter writer, ModelSerializerOptions options)
         {
+            writer.WriteStartElement("StorageError");
+            if (Optional.IsDefined(Message))
+            {
+                writer.WriteStartElement("Message");
+                writer.WriteValue(Message);
+                writer.WriteEndElement();
+            }
+            writer.WriteEndElement();
+        }
+
+        internal static StorageError DeserializeStorageError(XElement element, ModelSerializerOptions options = default)
+        {
+            options ??= ModelSerializerOptions.AzureServiceDefault;
             string message = default;
             if (element.Element("Message") is XElement messageElement)
             {
@@ -24,8 +41,35 @@ namespace Azure.Storage.Tables.Models
             return new StorageError(message);
         }
 
-        internal static StorageError DeserializeStorageError(JsonElement element, SerializableOptions options = default)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModelSerializable)this).Serialize(writer, ModelSerializerOptions.AzureServiceDefault);
+
+        void IJsonModelSerializable.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
+            writer.WriteStartObject();
+            if (Optional.IsDefined(Message))
+            {
+                writer.WritePropertyName("Message"u8);
+                writer.WriteStringValue(Message);
+            }
+            writer.WriteEndObject();
+        }
+
+        object IModelSerializable.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            if (data.ToMemory().Span.StartsWith("{"u8))
+            {
+                using var doc = JsonDocument.Parse(data);
+                return DeserializeStorageError(doc.RootElement, options);
+            }
+            else
+            {
+                return DeserializeStorageError(XElement.Load(data.ToStream()), options);
+            }
+        }
+
+        internal static StorageError DeserializeStorageError(JsonElement element, ModelSerializerOptions options = default)
+        {
+            options ??= ModelSerializerOptions.AzureServiceDefault;
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
@@ -40,6 +84,12 @@ namespace Azure.Storage.Tables.Models
                 }
             }
             return new StorageError(message.Value);
+        }
+
+        object IJsonModelSerializable.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        {
+            using var doc = JsonDocument.ParseValue(ref reader);
+            return DeserializeStorageError(doc.RootElement, options);
         }
     }
 }

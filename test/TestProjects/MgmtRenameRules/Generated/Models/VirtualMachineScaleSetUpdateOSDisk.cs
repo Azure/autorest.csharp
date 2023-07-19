@@ -23,6 +23,41 @@ namespace MgmtRenameRules.Models
             VhdContainers = new ChangeTrackingList<string>();
         }
 
+        /// <summary> Initializes a new instance of VirtualMachineScaleSetUpdateOSDisk. </summary>
+        /// <param name="caching">
+        /// The caching type.
+        /// Serialized Name: VirtualMachineScaleSetUpdateOSDisk.caching
+        /// </param>
+        /// <param name="writeAcceleratorEnabled">
+        /// Specifies whether writeAccelerator should be enabled or disabled on the disk.
+        /// Serialized Name: VirtualMachineScaleSetUpdateOSDisk.writeAcceleratorEnabled
+        /// </param>
+        /// <param name="diskSizeGB">
+        /// Specifies the size of the operating system disk in gigabytes. This element can be used to overwrite the size of the disk in a virtual machine image. &lt;br&gt;&lt;br&gt; This value cannot be larger than 1023 GB
+        /// Serialized Name: VirtualMachineScaleSetUpdateOSDisk.diskSizeGB
+        /// </param>
+        /// <param name="image">
+        /// The Source User Image VirtualHardDisk. This VirtualHardDisk will be copied before using it to attach to the Virtual Machine. If SourceImage is provided, the destination VirtualHardDisk should not exist.
+        /// Serialized Name: VirtualMachineScaleSetUpdateOSDisk.image
+        /// </param>
+        /// <param name="vhdContainers">
+        /// The list of virtual hard disk container uris.
+        /// Serialized Name: VirtualMachineScaleSetUpdateOSDisk.vhdContainers
+        /// </param>
+        /// <param name="managedDisk">
+        /// The managed disk parameters.
+        /// Serialized Name: VirtualMachineScaleSetUpdateOSDisk.managedDisk
+        /// </param>
+        internal VirtualMachineScaleSetUpdateOSDisk(CachingType? caching, bool? writeAcceleratorEnabled, int? diskSizeGB, VirtualHardDisk image, IList<string> vhdContainers, VirtualMachineScaleSetManagedDiskParameters managedDisk)
+        {
+            Caching = caching;
+            WriteAcceleratorEnabled = writeAcceleratorEnabled;
+            DiskSizeGB = diskSizeGB;
+            Image = image;
+            VhdContainers = vhdContainers;
+            ManagedDisk = managedDisk;
+        }
+
         /// <summary>
         /// The caching type.
         /// Serialized Name: VirtualMachineScaleSetUpdateOSDisk.caching

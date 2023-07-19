@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Text.Json;
 using Azure.Core;
 using Azure.Core.Serialization;
@@ -12,11 +13,11 @@ using Azure.ResourceManager.Resources.Models;
 
 namespace MgmtDiscriminator.Models
 {
-    public partial class OriginGroupOverrideActionParameters : IUtf8JsonSerializable, IModelSerializable
+    public partial class OriginGroupOverrideActionParameters : IUtf8JsonSerializable, IJsonModelSerializable
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelSerializable)this).Serialize(writer, new SerializableOptions());
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModelSerializable)this).Serialize(writer, ModelSerializerOptions.AzureServiceDefault);
 
-        void IModelSerializable.Serialize(Utf8JsonWriter writer, SerializableOptions options)
+        void IJsonModelSerializable.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
             writer.WriteStartObject();
             writer.WritePropertyName("typeName"u8);
@@ -25,8 +26,15 @@ namespace MgmtDiscriminator.Models
             JsonSerializer.Serialize(writer, OriginGroup); writer.WriteEndObject();
         }
 
-        internal static OriginGroupOverrideActionParameters DeserializeOriginGroupOverrideActionParameters(JsonElement element, SerializableOptions options = default)
+        object IModelSerializable.Deserialize(BinaryData data, ModelSerializerOptions options)
         {
+            using var doc = JsonDocument.Parse(data);
+            return DeserializeOriginGroupOverrideActionParameters(doc.RootElement, options);
+        }
+
+        internal static OriginGroupOverrideActionParameters DeserializeOriginGroupOverrideActionParameters(JsonElement element, ModelSerializerOptions options = default)
+        {
+            options ??= ModelSerializerOptions.AzureServiceDefault;
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
@@ -47,6 +55,12 @@ namespace MgmtDiscriminator.Models
                 }
             }
             return new OriginGroupOverrideActionParameters(typeName, originGroup);
+        }
+
+        object IJsonModelSerializable.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        {
+            using var doc = JsonDocument.ParseValue(ref reader);
+            return DeserializeOriginGroupOverrideActionParameters(doc.RootElement, options);
         }
     }
 }

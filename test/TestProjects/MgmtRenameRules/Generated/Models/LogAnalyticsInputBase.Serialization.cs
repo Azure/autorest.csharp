@@ -5,17 +5,18 @@
 
 #nullable disable
 
+using System;
 using System.Text.Json;
 using Azure.Core;
 using Azure.Core.Serialization;
 
 namespace MgmtRenameRules.Models
 {
-    public partial class LogAnalyticsInputBase : IUtf8JsonSerializable, IModelSerializable
+    public partial class LogAnalyticsInputBase : IUtf8JsonSerializable, IJsonModelSerializable
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelSerializable)this).Serialize(writer, new SerializableOptions());
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModelSerializable)this).Serialize(writer, ModelSerializerOptions.AzureServiceDefault);
 
-        void IModelSerializable.Serialize(Utf8JsonWriter writer, SerializableOptions options)
+        void IJsonModelSerializable.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
             writer.WriteStartObject();
             writer.WritePropertyName("blobContainerSasUri"u8);
@@ -40,6 +41,79 @@ namespace MgmtRenameRules.Models
                 writer.WriteBooleanValue(GroupByResourceName.Value);
             }
             writer.WriteEndObject();
+        }
+
+        object IModelSerializable.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            using var doc = JsonDocument.Parse(data);
+            return DeserializeLogAnalyticsInputBase(doc.RootElement, options);
+        }
+
+        internal static LogAnalyticsInputBase DeserializeLogAnalyticsInputBase(JsonElement element, ModelSerializerOptions options = default)
+        {
+            options ??= ModelSerializerOptions.AzureServiceDefault;
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
+            Uri blobContainerSasUri = default;
+            DateTimeOffset fromTime = default;
+            DateTimeOffset toTime = default;
+            Optional<bool> groupByThrottlePolicy = default;
+            Optional<bool> groupByOperationName = default;
+            Optional<bool> groupByResourceName = default;
+            foreach (var property in element.EnumerateObject())
+            {
+                if (property.NameEquals("blobContainerSasUri"u8))
+                {
+                    blobContainerSasUri = new Uri(property.Value.GetString());
+                    continue;
+                }
+                if (property.NameEquals("fromTime"u8))
+                {
+                    fromTime = property.Value.GetDateTimeOffset("O");
+                    continue;
+                }
+                if (property.NameEquals("toTime"u8))
+                {
+                    toTime = property.Value.GetDateTimeOffset("O");
+                    continue;
+                }
+                if (property.NameEquals("groupByThrottlePolicy"u8))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        continue;
+                    }
+                    groupByThrottlePolicy = property.Value.GetBoolean();
+                    continue;
+                }
+                if (property.NameEquals("groupByOperationName"u8))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        continue;
+                    }
+                    groupByOperationName = property.Value.GetBoolean();
+                    continue;
+                }
+                if (property.NameEquals("groupByResourceName"u8))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        continue;
+                    }
+                    groupByResourceName = property.Value.GetBoolean();
+                    continue;
+                }
+            }
+            return new LogAnalyticsInputBase(blobContainerSasUri, fromTime, toTime, Optional.ToNullable(groupByThrottlePolicy), Optional.ToNullable(groupByOperationName), Optional.ToNullable(groupByResourceName));
+        }
+
+        object IJsonModelSerializable.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        {
+            using var doc = JsonDocument.ParseValue(ref reader);
+            return DeserializeLogAnalyticsInputBase(doc.RootElement, options);
         }
     }
 }

@@ -5,15 +5,36 @@
 
 #nullable disable
 
+using System;
+using System.Xml;
 using System.Xml.Linq;
 using Azure.Core;
+using Azure.Core.Serialization;
 
 namespace Azure.Storage.Tables.Models
 {
-    public partial class StorageServiceStats
+    public partial class StorageServiceStats : IXmlSerializable, IXmlModelSerializable
     {
-        internal static StorageServiceStats DeserializeStorageServiceStats(XElement element)
+        void IXmlSerializable.Write(XmlWriter writer, string nameHint) => ((IXmlModelSerializable)this).Serialize(writer, ModelSerializerOptions.AzureServiceDefault);
+
+        void IXmlModelSerializable.Serialize(XmlWriter writer, ModelSerializerOptions options)
         {
+            writer.WriteStartElement("StorageServiceStats");
+            if (Optional.IsDefined(GeoReplication))
+            {
+                writer.WriteObjectValue(GeoReplication, "GeoReplication");
+            }
+            writer.WriteEndElement();
+        }
+
+        object IModelSerializable.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            return DeserializeStorageServiceStats(XElement.Load(data.ToStream()), options);
+        }
+
+        internal static StorageServiceStats DeserializeStorageServiceStats(XElement element, ModelSerializerOptions options = default)
+        {
+            options ??= ModelSerializerOptions.AzureServiceDefault;
             GeoReplication geoReplication = default;
             if (element.Element("GeoReplication") is XElement geoReplicationElement)
             {

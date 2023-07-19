@@ -9,14 +9,17 @@ using System;
 using System.Xml;
 using System.Xml.Linq;
 using Azure.Core;
+using Azure.Core.Serialization;
 
 namespace TypeSchemaMapping.Models
 {
-    public partial class ModelWithGuidProperty : IXmlSerializable
+    public partial class ModelWithGuidProperty : IXmlSerializable, IXmlModelSerializable
     {
-        void IXmlSerializable.Write(XmlWriter writer, string nameHint)
+        void IXmlSerializable.Write(XmlWriter writer, string nameHint) => ((IXmlModelSerializable)this).Serialize(writer, ModelSerializerOptions.AzureServiceDefault);
+
+        void IXmlModelSerializable.Serialize(XmlWriter writer, ModelSerializerOptions options)
         {
-            writer.WriteStartElement(nameHint ?? "ModelWithGuidProperty");
+            writer.WriteStartElement("ModelWithGuidProperty");
             if (Optional.IsDefined(ModelProperty))
             {
                 writer.WriteStartElement("ModelProperty");
@@ -26,8 +29,14 @@ namespace TypeSchemaMapping.Models
             writer.WriteEndElement();
         }
 
-        internal static ModelWithGuidProperty DeserializeModelWithGuidProperty(XElement element)
+        object IModelSerializable.Deserialize(BinaryData data, ModelSerializerOptions options)
         {
+            return DeserializeModelWithGuidProperty(XElement.Load(data.ToStream()), options);
+        }
+
+        internal static ModelWithGuidProperty DeserializeModelWithGuidProperty(XElement element, ModelSerializerOptions options = default)
+        {
+            options ??= ModelSerializerOptions.AzureServiceDefault;
             Guid? modelProperty = default;
             if (element.Element("ModelProperty") is XElement modelPropertyElement)
             {

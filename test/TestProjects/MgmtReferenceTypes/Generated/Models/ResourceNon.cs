@@ -15,6 +15,17 @@ namespace MgmtReferenceTypes.Models
         {
         }
 
+        /// <summary> Initializes a new instance of ResourceNon. </summary>
+        /// <param name="id"> Fully qualified resource ID for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}. </param>
+        /// <param name="name"> The name of the resource. </param>
+        /// <param name="resourceType"> The type of the resource. E.g. "Microsoft.Compute/virtualMachines" or "Microsoft.Storage/storageAccounts". </param>
+        internal ResourceNon(string id, string name, string resourceType)
+        {
+            Id = id;
+            Name = name;
+            ResourceType = resourceType;
+        }
+
         /// <summary> Fully qualified resource ID for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}. </summary>
         public string Id { get; }
         /// <summary> The name of the resource. </summary>

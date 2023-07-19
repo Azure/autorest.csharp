@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
@@ -12,10 +13,30 @@ using Azure.Core.Serialization;
 
 namespace CognitiveSearch.Models
 {
-    public partial class FacetResult
+    public partial class FacetResult : IUtf8JsonSerializable, IJsonModelSerializable
     {
-        internal static FacetResult DeserializeFacetResult(JsonElement element, SerializableOptions options = default)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModelSerializable)this).Serialize(writer, ModelSerializerOptions.AzureServiceDefault);
+
+        void IJsonModelSerializable.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
+            writer.WriteStartObject();
+            foreach (var item in AdditionalProperties)
+            {
+                writer.WritePropertyName(item.Key);
+                writer.WriteObjectValue(item.Value);
+            }
+            writer.WriteEndObject();
+        }
+
+        object IModelSerializable.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            using var doc = JsonDocument.Parse(data);
+            return DeserializeFacetResult(doc.RootElement, options);
+        }
+
+        internal static FacetResult DeserializeFacetResult(JsonElement element, ModelSerializerOptions options = default)
+        {
+            options ??= ModelSerializerOptions.AzureServiceDefault;
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
@@ -38,6 +59,12 @@ namespace CognitiveSearch.Models
             }
             additionalProperties = additionalPropertiesDictionary;
             return new FacetResult(Optional.ToNullable(count), additionalProperties);
+        }
+
+        object IJsonModelSerializable.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        {
+            using var doc = JsonDocument.ParseValue(ref reader);
+            return DeserializeFacetResult(doc.RootElement, options);
         }
     }
 }

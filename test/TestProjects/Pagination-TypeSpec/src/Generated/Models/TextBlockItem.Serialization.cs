@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Text.Json;
 using Azure;
 using Azure.Core;
@@ -12,10 +13,34 @@ using Azure.Core.Serialization;
 
 namespace Pagination.Models
 {
-    public partial class TextBlockItem
+    public partial class TextBlockItem : IUtf8JsonSerializable, IJsonModelSerializable
     {
-        internal static TextBlockItem DeserializeTextBlockItem(JsonElement element, SerializableOptions options = default)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModelSerializable)this).Serialize(writer, ModelSerializerOptions.AzureServiceDefault);
+
+        void IJsonModelSerializable.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
+            writer.WriteStartObject();
+            writer.WritePropertyName("blockItemId"u8);
+            writer.WriteStringValue(BlockItemId);
+            if (Optional.IsDefined(Description))
+            {
+                writer.WritePropertyName("description"u8);
+                writer.WriteStringValue(Description);
+            }
+            writer.WritePropertyName("text"u8);
+            writer.WriteStringValue(Text);
+            writer.WriteEndObject();
+        }
+
+        object IModelSerializable.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            using var doc = JsonDocument.Parse(data);
+            return DeserializeTextBlockItem(doc.RootElement, options);
+        }
+
+        internal static TextBlockItem DeserializeTextBlockItem(JsonElement element, ModelSerializerOptions options = default)
+        {
+            options ??= ModelSerializerOptions.AzureServiceDefault;
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
@@ -44,12 +69,26 @@ namespace Pagination.Models
             return new TextBlockItem(blockItemId, description.Value, text);
         }
 
+        object IJsonModelSerializable.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        {
+            using var doc = JsonDocument.ParseValue(ref reader);
+            return DeserializeTextBlockItem(doc.RootElement, options);
+        }
+
         /// <summary> Deserializes the model from a raw response. </summary>
         /// <param name="response"> The response to deserialize the model from. </param>
         internal static TextBlockItem FromResponse(Response response)
         {
             using var document = JsonDocument.Parse(response.Content);
             return DeserializeTextBlockItem(document.RootElement);
+        }
+
+        /// <summary> Convert into a Utf8JsonRequestContent. </summary>
+        internal virtual RequestContent ToRequestContent()
+        {
+            var content = new Utf8JsonRequestContent();
+            content.JsonWriter.WriteObjectValue(this);
+            return content;
         }
     }
 }

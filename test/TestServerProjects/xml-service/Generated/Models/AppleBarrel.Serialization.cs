@@ -5,18 +5,22 @@
 
 #nullable disable
 
+using System;
 using System.Collections.Generic;
 using System.Xml;
 using System.Xml.Linq;
 using Azure.Core;
+using Azure.Core.Serialization;
 
 namespace xml_service.Models
 {
-    public partial class AppleBarrel : IXmlSerializable
+    public partial class AppleBarrel : IXmlSerializable, IXmlModelSerializable
     {
-        void IXmlSerializable.Write(XmlWriter writer, string nameHint)
+        void IXmlSerializable.Write(XmlWriter writer, string nameHint) => ((IXmlModelSerializable)this).Serialize(writer, ModelSerializerOptions.AzureServiceDefault);
+
+        void IXmlModelSerializable.Serialize(XmlWriter writer, ModelSerializerOptions options)
         {
-            writer.WriteStartElement(nameHint ?? "AppleBarrel");
+            writer.WriteStartElement("AppleBarrel");
             if (Optional.IsCollectionDefined(GoodApples))
             {
                 writer.WriteStartElement("GoodApples");
@@ -42,8 +46,14 @@ namespace xml_service.Models
             writer.WriteEndElement();
         }
 
-        internal static AppleBarrel DeserializeAppleBarrel(XElement element)
+        object IModelSerializable.Deserialize(BinaryData data, ModelSerializerOptions options)
         {
+            return DeserializeAppleBarrel(XElement.Load(data.ToStream()), options);
+        }
+
+        internal static AppleBarrel DeserializeAppleBarrel(XElement element, ModelSerializerOptions options = default)
+        {
+            options ??= ModelSerializerOptions.AzureServiceDefault;
             IList<string> goodApples = default;
             IList<string> badApples = default;
             if (element.Element("GoodApples") is XElement goodApplesElement)

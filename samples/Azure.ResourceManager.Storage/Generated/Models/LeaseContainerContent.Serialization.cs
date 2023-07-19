@@ -5,17 +5,18 @@
 
 #nullable disable
 
+using System;
 using System.Text.Json;
 using Azure.Core;
 using Azure.Core.Serialization;
 
 namespace Azure.ResourceManager.Storage.Models
 {
-    public partial class LeaseContainerContent : IUtf8JsonSerializable, IModelSerializable
+    public partial class LeaseContainerContent : IUtf8JsonSerializable, IJsonModelSerializable
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelSerializable)this).Serialize(writer, new SerializableOptions());
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModelSerializable)this).Serialize(writer, ModelSerializerOptions.AzureServiceDefault);
 
-        void IModelSerializable.Serialize(Utf8JsonWriter writer, SerializableOptions options)
+        void IJsonModelSerializable.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
             writer.WriteStartObject();
             writer.WritePropertyName("action"u8);
@@ -41,6 +42,69 @@ namespace Azure.ResourceManager.Storage.Models
                 writer.WriteStringValue(ProposedLeaseId);
             }
             writer.WriteEndObject();
+        }
+
+        object IModelSerializable.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            using var doc = JsonDocument.Parse(data);
+            return DeserializeLeaseContainerContent(doc.RootElement, options);
+        }
+
+        internal static LeaseContainerContent DeserializeLeaseContainerContent(JsonElement element, ModelSerializerOptions options = default)
+        {
+            options ??= ModelSerializerOptions.AzureServiceDefault;
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
+            LeaseContainerRequestAction action = default;
+            Optional<string> leaseId = default;
+            Optional<int> breakPeriod = default;
+            Optional<int> leaseDuration = default;
+            Optional<string> proposedLeaseId = default;
+            foreach (var property in element.EnumerateObject())
+            {
+                if (property.NameEquals("action"u8))
+                {
+                    action = new LeaseContainerRequestAction(property.Value.GetString());
+                    continue;
+                }
+                if (property.NameEquals("leaseId"u8))
+                {
+                    leaseId = property.Value.GetString();
+                    continue;
+                }
+                if (property.NameEquals("breakPeriod"u8))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        continue;
+                    }
+                    breakPeriod = property.Value.GetInt32();
+                    continue;
+                }
+                if (property.NameEquals("leaseDuration"u8))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        continue;
+                    }
+                    leaseDuration = property.Value.GetInt32();
+                    continue;
+                }
+                if (property.NameEquals("proposedLeaseId"u8))
+                {
+                    proposedLeaseId = property.Value.GetString();
+                    continue;
+                }
+            }
+            return new LeaseContainerContent(action, leaseId.Value, Optional.ToNullable(breakPeriod), Optional.ToNullable(leaseDuration), proposedLeaseId.Value);
+        }
+
+        object IJsonModelSerializable.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        {
+            using var doc = JsonDocument.ParseValue(ref reader);
+            return DeserializeLeaseContainerContent(doc.RootElement, options);
         }
     }
 }

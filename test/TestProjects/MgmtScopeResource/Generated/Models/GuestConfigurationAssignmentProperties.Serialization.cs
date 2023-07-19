@@ -12,11 +12,11 @@ using Azure.Core.Serialization;
 
 namespace MgmtScopeResource.Models
 {
-    public partial class GuestConfigurationAssignmentProperties : IUtf8JsonSerializable, IModelSerializable
+    public partial class GuestConfigurationAssignmentProperties : IUtf8JsonSerializable, IJsonModelSerializable
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelSerializable)this).Serialize(writer, new SerializableOptions());
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModelSerializable)this).Serialize(writer, ModelSerializerOptions.AzureServiceDefault);
 
-        void IModelSerializable.Serialize(Utf8JsonWriter writer, SerializableOptions options)
+        void IJsonModelSerializable.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
             writer.WriteStartObject();
             if (Optional.IsDefined(Context))
@@ -27,8 +27,15 @@ namespace MgmtScopeResource.Models
             writer.WriteEndObject();
         }
 
-        internal static GuestConfigurationAssignmentProperties DeserializeGuestConfigurationAssignmentProperties(JsonElement element, SerializableOptions options = default)
+        object IModelSerializable.Deserialize(BinaryData data, ModelSerializerOptions options)
         {
+            using var doc = JsonDocument.Parse(data);
+            return DeserializeGuestConfigurationAssignmentProperties(doc.RootElement, options);
+        }
+
+        internal static GuestConfigurationAssignmentProperties DeserializeGuestConfigurationAssignmentProperties(JsonElement element, ModelSerializerOptions options = default)
+        {
+            options ??= ModelSerializerOptions.AzureServiceDefault;
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
@@ -130,6 +137,12 @@ namespace MgmtScopeResource.Models
                 }
             }
             return new GuestConfigurationAssignmentProperties(targetResourceId.Value, Optional.ToNullable(complianceStatus), Optional.ToNullable(lastComplianceStatusChecked), latestReportId.Value, parameterHash.Value, context.Value, assignmentHash.Value, Optional.ToNullable(provisioningState), resourceType.Value);
+        }
+
+        object IJsonModelSerializable.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        {
+            using var doc = JsonDocument.ParseValue(ref reader);
+            return DeserializeGuestConfigurationAssignmentProperties(doc.RootElement, options);
         }
     }
 }

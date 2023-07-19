@@ -5,16 +5,42 @@
 
 #nullable disable
 
+using System;
 using System.Text.Json;
 using Azure.Core;
 using Azure.Core.Serialization;
 
 namespace Azure.ResourceManager.Sample.Models
 {
-    public partial class DedicatedHostAllocatableVM
+    public partial class DedicatedHostAllocatableVM : IUtf8JsonSerializable, IJsonModelSerializable
     {
-        internal static DedicatedHostAllocatableVM DeserializeDedicatedHostAllocatableVM(JsonElement element, SerializableOptions options = default)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModelSerializable)this).Serialize(writer, ModelSerializerOptions.AzureServiceDefault);
+
+        void IJsonModelSerializable.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
+            writer.WriteStartObject();
+            if (Optional.IsDefined(VmSize))
+            {
+                writer.WritePropertyName("vmSize"u8);
+                writer.WriteStringValue(VmSize);
+            }
+            if (Optional.IsDefined(Count))
+            {
+                writer.WritePropertyName("count"u8);
+                writer.WriteNumberValue(Count.Value);
+            }
+            writer.WriteEndObject();
+        }
+
+        object IModelSerializable.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            using var doc = JsonDocument.Parse(data);
+            return DeserializeDedicatedHostAllocatableVM(doc.RootElement, options);
+        }
+
+        internal static DedicatedHostAllocatableVM DeserializeDedicatedHostAllocatableVM(JsonElement element, ModelSerializerOptions options = default)
+        {
+            options ??= ModelSerializerOptions.AzureServiceDefault;
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
@@ -39,6 +65,12 @@ namespace Azure.ResourceManager.Sample.Models
                 }
             }
             return new DedicatedHostAllocatableVM(vmSize.Value, Optional.ToNullable(count));
+        }
+
+        object IJsonModelSerializable.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        {
+            using var doc = JsonDocument.ParseValue(ref reader);
+            return DeserializeDedicatedHostAllocatableVM(doc.RootElement, options);
         }
     }
 }

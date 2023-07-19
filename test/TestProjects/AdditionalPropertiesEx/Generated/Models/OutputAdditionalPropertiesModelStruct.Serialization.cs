@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
@@ -12,10 +13,32 @@ using Azure.Core.Serialization;
 
 namespace AdditionalPropertiesEx.Models
 {
-    public partial struct OutputAdditionalPropertiesModelStruct
+    public partial struct OutputAdditionalPropertiesModelStruct : IUtf8JsonSerializable, IJsonModelSerializable
     {
-        internal static OutputAdditionalPropertiesModelStruct DeserializeOutputAdditionalPropertiesModelStruct(JsonElement element, SerializableOptions options = default)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModelSerializable)this).Serialize(writer, ModelSerializerOptions.AzureServiceDefault);
+
+        void IJsonModelSerializable.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
+            writer.WriteStartObject();
+            writer.WritePropertyName("id"u8);
+            writer.WriteNumberValue(Id);
+            foreach (var item in AdditionalProperties)
+            {
+                writer.WritePropertyName(item.Key);
+                writer.WriteStringValue(item.Value);
+            }
+            writer.WriteEndObject();
+        }
+
+        object IModelSerializable.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            using var doc = JsonDocument.Parse(data);
+            return DeserializeOutputAdditionalPropertiesModelStruct(doc.RootElement, options);
+        }
+
+        internal static OutputAdditionalPropertiesModelStruct DeserializeOutputAdditionalPropertiesModelStruct(JsonElement element, ModelSerializerOptions options = default)
+        {
+            options ??= ModelSerializerOptions.AzureServiceDefault;
             int id = default;
             IReadOnlyDictionary<string, string> additionalProperties = default;
             Dictionary<string, string> additionalPropertiesDictionary = new Dictionary<string, string>();
@@ -30,6 +53,12 @@ namespace AdditionalPropertiesEx.Models
             }
             additionalProperties = additionalPropertiesDictionary;
             return new OutputAdditionalPropertiesModelStruct(id, additionalProperties);
+        }
+
+        object IJsonModelSerializable.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        {
+            using var doc = JsonDocument.ParseValue(ref reader);
+            return DeserializeOutputAdditionalPropertiesModelStruct(doc.RootElement, options);
         }
     }
 }

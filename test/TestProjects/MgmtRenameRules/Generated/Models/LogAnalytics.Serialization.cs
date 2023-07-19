@@ -12,10 +12,49 @@ using Azure.Core.Serialization;
 
 namespace MgmtRenameRules.Models
 {
-    public partial class LogAnalytics
+    public partial class LogAnalytics : IUtf8JsonSerializable, IJsonModelSerializable
     {
-        internal static LogAnalytics DeserializeLogAnalytics(JsonElement element, SerializableOptions options = default)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModelSerializable)this).Serialize(writer, ModelSerializerOptions.AzureServiceDefault);
+
+        void IJsonModelSerializable.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
+            writer.WriteStartObject();
+            if (Optional.IsDefined(ContentType))
+            {
+                writer.WritePropertyName("contentType"u8);
+                writer.WriteStringValue(ContentType.Value.ToString());
+            }
+            if (Optional.IsDefined(Content))
+            {
+                writer.WritePropertyName("content"u8);
+#if NET6_0_OR_GREATER
+				writer.WriteRawValue(Content);
+#else
+                JsonSerializer.Serialize(writer, JsonDocument.Parse(Content.ToString()).RootElement);
+#endif
+            }
+            if (Optional.IsDefined(RequestMethod))
+            {
+                writer.WritePropertyName("method"u8);
+                writer.WriteStringValue(RequestMethod.Value.ToString());
+            }
+            if (Optional.IsDefined(BasePathUri))
+            {
+                writer.WritePropertyName("basePath"u8);
+                writer.WriteStringValue(BasePathUri.AbsoluteUri);
+            }
+            writer.WriteEndObject();
+        }
+
+        object IModelSerializable.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            using var doc = JsonDocument.Parse(data);
+            return DeserializeLogAnalytics(doc.RootElement, options);
+        }
+
+        internal static LogAnalytics DeserializeLogAnalytics(JsonElement element, ModelSerializerOptions options = default)
+        {
+            options ??= ModelSerializerOptions.AzureServiceDefault;
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
@@ -74,6 +113,12 @@ namespace MgmtRenameRules.Models
                 }
             }
             return new LogAnalytics(properties.Value, Optional.ToNullable(contentType), content.Value, Optional.ToNullable(method), basePath.Value);
+        }
+
+        object IJsonModelSerializable.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        {
+            using var doc = JsonDocument.ParseValue(ref reader);
+            return DeserializeLogAnalytics(doc.RootElement, options);
         }
     }
 }

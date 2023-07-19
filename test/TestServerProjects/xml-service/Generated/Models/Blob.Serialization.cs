@@ -5,16 +5,52 @@
 
 #nullable disable
 
+using System;
 using System.Collections.Generic;
+using System.Xml;
 using System.Xml.Linq;
 using Azure.Core;
+using Azure.Core.Serialization;
 
 namespace xml_service.Models
 {
-    public partial class Blob
+    public partial class Blob : IXmlSerializable, IXmlModelSerializable
     {
-        internal static Blob DeserializeBlob(XElement element)
+        void IXmlSerializable.Write(XmlWriter writer, string nameHint) => ((IXmlModelSerializable)this).Serialize(writer, ModelSerializerOptions.AzureServiceDefault);
+
+        void IXmlModelSerializable.Serialize(XmlWriter writer, ModelSerializerOptions options)
         {
+            writer.WriteStartElement("Blob");
+            writer.WriteStartElement("Name");
+            writer.WriteValue(Name);
+            writer.WriteEndElement();
+            writer.WriteStartElement("Deleted");
+            writer.WriteValue(Deleted);
+            writer.WriteEndElement();
+            writer.WriteStartElement("Snapshot");
+            writer.WriteValue(Snapshot);
+            writer.WriteEndElement();
+            writer.WriteObjectValue(Properties, "Properties");
+            if (Optional.IsCollectionDefined(Metadata))
+            {
+                foreach (var pair in Metadata)
+                {
+                    writer.WriteStartElement("String");
+                    writer.WriteValue(pair.Value);
+                    writer.WriteEndElement();
+                }
+            }
+            writer.WriteEndElement();
+        }
+
+        object IModelSerializable.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            return DeserializeBlob(XElement.Load(data.ToStream()), options);
+        }
+
+        internal static Blob DeserializeBlob(XElement element, ModelSerializerOptions options = default)
+        {
+            options ??= ModelSerializerOptions.AzureServiceDefault;
             string name = default;
             bool deleted = default;
             string snapshot = default;

@@ -5,17 +5,19 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
 using Azure.Core.Serialization;
 
 namespace MgmtListMethods.Models
 {
-    public partial class QuotaUpdateContent : IUtf8JsonSerializable, IModelSerializable
+    public partial class QuotaUpdateContent : IUtf8JsonSerializable, IJsonModelSerializable
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelSerializable)this).Serialize(writer, new SerializableOptions());
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModelSerializable)this).Serialize(writer, ModelSerializerOptions.AzureServiceDefault);
 
-        void IModelSerializable.Serialize(Utf8JsonWriter writer, SerializableOptions options)
+        void IJsonModelSerializable.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
             writer.WriteStartObject();
             if (Optional.IsCollectionDefined(Value))
@@ -34,6 +36,52 @@ namespace MgmtListMethods.Models
                 writer.WriteStringValue(Location);
             }
             writer.WriteEndObject();
+        }
+
+        object IModelSerializable.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            using var doc = JsonDocument.Parse(data);
+            return DeserializeQuotaUpdateContent(doc.RootElement, options);
+        }
+
+        internal static QuotaUpdateContent DeserializeQuotaUpdateContent(JsonElement element, ModelSerializerOptions options = default)
+        {
+            options ??= ModelSerializerOptions.AzureServiceDefault;
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
+            Optional<IList<QuotaBaseProperties>> value = default;
+            Optional<string> location = default;
+            foreach (var property in element.EnumerateObject())
+            {
+                if (property.NameEquals("value"u8))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        continue;
+                    }
+                    List<QuotaBaseProperties> array = new List<QuotaBaseProperties>();
+                    foreach (var item in property.Value.EnumerateArray())
+                    {
+                        array.Add(QuotaBaseProperties.DeserializeQuotaBaseProperties(item));
+                    }
+                    value = array;
+                    continue;
+                }
+                if (property.NameEquals("location"u8))
+                {
+                    location = property.Value.GetString();
+                    continue;
+                }
+            }
+            return new QuotaUpdateContent(Optional.ToList(value), location.Value);
+        }
+
+        object IJsonModelSerializable.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        {
+            using var doc = JsonDocument.ParseValue(ref reader);
+            return DeserializeQuotaUpdateContent(doc.RootElement, options);
         }
     }
 }

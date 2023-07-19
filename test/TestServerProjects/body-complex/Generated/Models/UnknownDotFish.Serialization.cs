@@ -5,16 +5,39 @@
 
 #nullable disable
 
+using System;
 using System.Text.Json;
 using Azure.Core;
 using Azure.Core.Serialization;
 
 namespace body_complex.Models
 {
-    internal partial class UnknownDotFish
+    internal partial class UnknownDotFish : IUtf8JsonSerializable, IJsonModelSerializable
     {
-        internal static UnknownDotFish DeserializeUnknownDotFish(JsonElement element, SerializableOptions options = default)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModelSerializable)this).Serialize(writer, ModelSerializerOptions.AzureServiceDefault);
+
+        void IJsonModelSerializable.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
+            writer.WriteStartObject();
+            writer.WritePropertyName("fish.type"u8);
+            writer.WriteStringValue(FishType);
+            if (Optional.IsDefined(Species))
+            {
+                writer.WritePropertyName("species"u8);
+                writer.WriteStringValue(Species);
+            }
+            writer.WriteEndObject();
+        }
+
+        object IModelSerializable.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            using var doc = JsonDocument.Parse(data);
+            return DeserializeUnknownDotFish(doc.RootElement, options);
+        }
+
+        internal static UnknownDotFish DeserializeUnknownDotFish(JsonElement element, ModelSerializerOptions options = default)
+        {
+            options ??= ModelSerializerOptions.AzureServiceDefault;
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
@@ -35,6 +58,12 @@ namespace body_complex.Models
                 }
             }
             return new UnknownDotFish(fishType, species.Value);
+        }
+
+        object IJsonModelSerializable.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        {
+            using var doc = JsonDocument.ParseValue(ref reader);
+            return DeserializeUnknownDotFish(doc.RootElement, options);
         }
     }
 }

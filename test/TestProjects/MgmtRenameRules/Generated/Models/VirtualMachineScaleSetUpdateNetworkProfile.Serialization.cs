@@ -5,17 +5,20 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
 using Azure.Core.Serialization;
+using Azure.ResourceManager.Resources.Models;
 
 namespace MgmtRenameRules.Models
 {
-    public partial class VirtualMachineScaleSetUpdateNetworkProfile : IUtf8JsonSerializable, IModelSerializable
+    public partial class VirtualMachineScaleSetUpdateNetworkProfile : IUtf8JsonSerializable, IJsonModelSerializable
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelSerializable)this).Serialize(writer, new SerializableOptions());
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModelSerializable)this).Serialize(writer, ModelSerializerOptions.AzureServiceDefault);
 
-        void IModelSerializable.Serialize(Utf8JsonWriter writer, SerializableOptions options)
+        void IJsonModelSerializable.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
             writer.WriteStartObject();
             if (Optional.IsDefined(HealthProbe))
@@ -34,6 +37,56 @@ namespace MgmtRenameRules.Models
                 writer.WriteEndArray();
             }
             writer.WriteEndObject();
+        }
+
+        object IModelSerializable.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            using var doc = JsonDocument.Parse(data);
+            return DeserializeVirtualMachineScaleSetUpdateNetworkProfile(doc.RootElement, options);
+        }
+
+        internal static VirtualMachineScaleSetUpdateNetworkProfile DeserializeVirtualMachineScaleSetUpdateNetworkProfile(JsonElement element, ModelSerializerOptions options = default)
+        {
+            options ??= ModelSerializerOptions.AzureServiceDefault;
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
+            Optional<WritableSubResource> healthProbe = default;
+            Optional<IList<VirtualMachineScaleSetUpdateNetworkConfiguration>> networkInterfaceConfigurations = default;
+            foreach (var property in element.EnumerateObject())
+            {
+                if (property.NameEquals("healthProbe"u8))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        continue;
+                    }
+                    healthProbe = JsonSerializer.Deserialize<WritableSubResource>(property.Value.GetRawText());
+                    continue;
+                }
+                if (property.NameEquals("networkInterfaceConfigurations"u8))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        continue;
+                    }
+                    List<VirtualMachineScaleSetUpdateNetworkConfiguration> array = new List<VirtualMachineScaleSetUpdateNetworkConfiguration>();
+                    foreach (var item in property.Value.EnumerateArray())
+                    {
+                        array.Add(VirtualMachineScaleSetUpdateNetworkConfiguration.DeserializeVirtualMachineScaleSetUpdateNetworkConfiguration(item));
+                    }
+                    networkInterfaceConfigurations = array;
+                    continue;
+                }
+            }
+            return new VirtualMachineScaleSetUpdateNetworkProfile(healthProbe, Optional.ToList(networkInterfaceConfigurations));
+        }
+
+        object IJsonModelSerializable.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        {
+            using var doc = JsonDocument.ParseValue(ref reader);
+            return DeserializeVirtualMachineScaleSetUpdateNetworkProfile(doc.RootElement, options);
         }
     }
 }

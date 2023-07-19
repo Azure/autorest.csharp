@@ -5,16 +5,34 @@
 
 #nullable disable
 
+using System;
 using System.Text.Json;
 using Azure.Core;
 using Azure.Core.Serialization;
 
 namespace TypeSchemaMapping.Models
 {
-    public partial class DerivedFromAbstractModel
+    public partial class DerivedFromAbstractModel : IUtf8JsonSerializable, IJsonModelSerializable
     {
-        internal static DerivedFromAbstractModel DeserializeDerivedFromAbstractModel(JsonElement element, SerializableOptions options = default)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModelSerializable)this).Serialize(writer, ModelSerializerOptions.AzureServiceDefault);
+
+        void IJsonModelSerializable.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
+            writer.WriteStartObject();
+            writer.WritePropertyName("DiscriminatorProperty"u8);
+            writer.WriteStringValue(DiscriminatorProperty);
+            writer.WriteEndObject();
+        }
+
+        object IModelSerializable.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            using var doc = JsonDocument.Parse(data);
+            return DeserializeDerivedFromAbstractModel(doc.RootElement, options);
+        }
+
+        internal static DerivedFromAbstractModel DeserializeDerivedFromAbstractModel(JsonElement element, ModelSerializerOptions options = default)
+        {
+            options ??= ModelSerializerOptions.AzureServiceDefault;
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
@@ -29,6 +47,12 @@ namespace TypeSchemaMapping.Models
                 }
             }
             return new DerivedFromAbstractModel(discriminatorProperty);
+        }
+
+        object IJsonModelSerializable.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        {
+            using var doc = JsonDocument.ParseValue(ref reader);
+            return DeserializeDerivedFromAbstractModel(doc.RootElement, options);
         }
     }
 }

@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
@@ -13,10 +14,37 @@ using MgmtListMethods;
 
 namespace MgmtListMethods.Models
 {
-    internal partial class MgmtGrpParentWithNonResChListResult
+    internal partial class MgmtGrpParentWithNonResChListResult : IUtf8JsonSerializable, IJsonModelSerializable
     {
-        internal static MgmtGrpParentWithNonResChListResult DeserializeMgmtGrpParentWithNonResChListResult(JsonElement element, SerializableOptions options = default)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModelSerializable)this).Serialize(writer, ModelSerializerOptions.AzureServiceDefault);
+
+        void IJsonModelSerializable.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
+            writer.WriteStartObject();
+            writer.WritePropertyName("value"u8);
+            writer.WriteStartArray();
+            foreach (var item in Value)
+            {
+                writer.WriteObjectValue(item);
+            }
+            writer.WriteEndArray();
+            if (Optional.IsDefined(NextLink))
+            {
+                writer.WritePropertyName("nextLink"u8);
+                writer.WriteStringValue(NextLink);
+            }
+            writer.WriteEndObject();
+        }
+
+        object IModelSerializable.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            using var doc = JsonDocument.Parse(data);
+            return DeserializeMgmtGrpParentWithNonResChListResult(doc.RootElement, options);
+        }
+
+        internal static MgmtGrpParentWithNonResChListResult DeserializeMgmtGrpParentWithNonResChListResult(JsonElement element, ModelSerializerOptions options = default)
+        {
+            options ??= ModelSerializerOptions.AzureServiceDefault;
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
@@ -42,6 +70,12 @@ namespace MgmtListMethods.Models
                 }
             }
             return new MgmtGrpParentWithNonResChListResult(value, nextLink.Value);
+        }
+
+        object IJsonModelSerializable.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        {
+            using var doc = JsonDocument.ParseValue(ref reader);
+            return DeserializeMgmtGrpParentWithNonResChListResult(doc.RootElement, options);
         }
     }
 }

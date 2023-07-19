@@ -5,17 +5,18 @@
 
 #nullable disable
 
+using System;
 using System.Text.Json;
 using Azure.Core;
 using Azure.Core.Serialization;
 
 namespace MgmtExactMatchInheritance.Models
 {
-    public partial class ExactMatchModel9 : IUtf8JsonSerializable, IModelSerializable
+    public partial class ExactMatchModel9 : IUtf8JsonSerializable, IJsonModelSerializable
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelSerializable)this).Serialize(writer, new SerializableOptions());
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModelSerializable)this).Serialize(writer, ModelSerializerOptions.AzureServiceDefault);
 
-        void IModelSerializable.Serialize(Utf8JsonWriter writer, SerializableOptions options)
+        void IJsonModelSerializable.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
             writer.WriteStartObject();
             if (Optional.IsDefined(Id))
@@ -36,8 +37,15 @@ namespace MgmtExactMatchInheritance.Models
             writer.WriteEndObject();
         }
 
-        internal static ExactMatchModel9 DeserializeExactMatchModel9(JsonElement element, SerializableOptions options = default)
+        object IModelSerializable.Deserialize(BinaryData data, ModelSerializerOptions options)
         {
+            using var doc = JsonDocument.Parse(data);
+            return DeserializeExactMatchModel9(doc.RootElement, options);
+        }
+
+        internal static ExactMatchModel9 DeserializeExactMatchModel9(JsonElement element, ModelSerializerOptions options = default)
+        {
+            options ??= ModelSerializerOptions.AzureServiceDefault;
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
@@ -68,6 +76,12 @@ namespace MgmtExactMatchInheritance.Models
                 }
             }
             return new ExactMatchModel9(Optional.ToNullable(id), name.Value, type.Value);
+        }
+
+        object IJsonModelSerializable.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        {
+            using var doc = JsonDocument.ParseValue(ref reader);
+            return DeserializeExactMatchModel9(doc.RootElement, options);
         }
     }
 }

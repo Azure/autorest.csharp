@@ -7,14 +7,16 @@ using System.Text.Json;
 using System.Xml;
 using System.Xml.Linq;
 using Azure.Core;
+using Azure.Core.Serialization;
 using Azure.ResourceManager.Models;
 
 namespace MgmtXmlDeserialization
 {
     public partial class XmlInstanceData : IUtf8JsonSerializable, IXmlSerializable
     {
-        internal static XmlInstanceData DeserializeXmlInstanceData(XElement element)
+        internal static XmlInstanceData DeserializeXmlInstanceData(XElement element, ModelSerializerOptions options = default)
         {
+            options ??= ModelSerializerOptions.AzureServiceDefault;
             ResourceIdentifier id = default;
             string name = default;
             ResourceType type = default;

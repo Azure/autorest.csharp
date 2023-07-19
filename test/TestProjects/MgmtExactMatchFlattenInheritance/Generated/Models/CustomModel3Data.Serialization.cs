@@ -5,17 +5,18 @@
 
 #nullable disable
 
+using System;
 using System.Text.Json;
 using Azure.Core;
 using Azure.Core.Serialization;
 
 namespace MgmtExactMatchFlattenInheritance
 {
-    public partial class CustomModel3Data : IUtf8JsonSerializable, IModelSerializable
+    public partial class CustomModel3Data : IUtf8JsonSerializable, IJsonModelSerializable
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelSerializable)this).Serialize(writer, new SerializableOptions());
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModelSerializable)this).Serialize(writer, ModelSerializerOptions.AzureServiceDefault);
 
-        void IModelSerializable.Serialize(Utf8JsonWriter writer, SerializableOptions options)
+        void IJsonModelSerializable.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
             writer.WriteStartObject();
             if (Optional.IsDefined(Foo))
@@ -41,8 +42,15 @@ namespace MgmtExactMatchFlattenInheritance
             writer.WriteEndObject();
         }
 
-        internal static CustomModel3Data DeserializeCustomModel3Data(JsonElement element, SerializableOptions options = default)
+        object IModelSerializable.Deserialize(BinaryData data, ModelSerializerOptions options)
         {
+            using var doc = JsonDocument.Parse(data);
+            return DeserializeCustomModel3Data(doc.RootElement, options);
+        }
+
+        internal static CustomModel3Data DeserializeCustomModel3Data(JsonElement element, ModelSerializerOptions options = default)
+        {
+            options ??= ModelSerializerOptions.AzureServiceDefault;
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
@@ -75,6 +83,12 @@ namespace MgmtExactMatchFlattenInheritance
                 }
             }
             return new CustomModel3Data(id.Value, name.Value, type.Value, foo.Value);
+        }
+
+        object IJsonModelSerializable.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        {
+            using var doc = JsonDocument.ParseValue(ref reader);
+            return DeserializeCustomModel3Data(doc.RootElement, options);
         }
     }
 }

@@ -5,17 +5,18 @@
 
 #nullable disable
 
+using System;
 using System.Text.Json;
 using Azure.Core;
 using Azure.Core.Serialization;
 
 namespace Azure.AI.FormRecognizer.Models
 {
-    public partial class TrainSourceFilter : IUtf8JsonSerializable, IModelSerializable
+    public partial class TrainSourceFilter : IUtf8JsonSerializable, IJsonModelSerializable
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelSerializable)this).Serialize(writer, new SerializableOptions());
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModelSerializable)this).Serialize(writer, ModelSerializerOptions.AzureServiceDefault);
 
-        void IModelSerializable.Serialize(Utf8JsonWriter writer, SerializableOptions options)
+        void IJsonModelSerializable.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
             writer.WriteStartObject();
             if (Optional.IsDefined(Prefix))
@@ -29,6 +30,47 @@ namespace Azure.AI.FormRecognizer.Models
                 writer.WriteBooleanValue(IncludeSubFolders.Value);
             }
             writer.WriteEndObject();
+        }
+
+        object IModelSerializable.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            using var doc = JsonDocument.Parse(data);
+            return DeserializeTrainSourceFilter(doc.RootElement, options);
+        }
+
+        internal static TrainSourceFilter DeserializeTrainSourceFilter(JsonElement element, ModelSerializerOptions options = default)
+        {
+            options ??= ModelSerializerOptions.AzureServiceDefault;
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
+            Optional<string> prefix = default;
+            Optional<bool> includeSubFolders = default;
+            foreach (var property in element.EnumerateObject())
+            {
+                if (property.NameEquals("prefix"u8))
+                {
+                    prefix = property.Value.GetString();
+                    continue;
+                }
+                if (property.NameEquals("includeSubFolders"u8))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        continue;
+                    }
+                    includeSubFolders = property.Value.GetBoolean();
+                    continue;
+                }
+            }
+            return new TrainSourceFilter(prefix.Value, Optional.ToNullable(includeSubFolders));
+        }
+
+        object IJsonModelSerializable.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        {
+            using var doc = JsonDocument.ParseValue(ref reader);
+            return DeserializeTrainSourceFilter(doc.RootElement, options);
         }
     }
 }

@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Text.Json;
 using Azure.Core;
 using Azure.Core.Serialization;
@@ -13,11 +14,11 @@ using MgmtCustomizations.Models;
 
 namespace MgmtCustomizations
 {
-    public partial class PetStoreData : IUtf8JsonSerializable, IModelSerializable
+    public partial class PetStoreData : IUtf8JsonSerializable, IJsonModelSerializable
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelSerializable)this).Serialize(writer, new SerializableOptions());
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModelSerializable)this).Serialize(writer, ModelSerializerOptions.AzureServiceDefault);
 
-        void IModelSerializable.Serialize(Utf8JsonWriter writer, SerializableOptions options)
+        void IJsonModelSerializable.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
             writer.WriteStartObject();
             if (Optional.IsDefined(Properties))
@@ -28,8 +29,15 @@ namespace MgmtCustomizations
             writer.WriteEndObject();
         }
 
-        internal static PetStoreData DeserializePetStoreData(JsonElement element, SerializableOptions options = default)
+        object IModelSerializable.Deserialize(BinaryData data, ModelSerializerOptions options)
         {
+            using var doc = JsonDocument.Parse(data);
+            return DeserializePetStoreData(doc.RootElement, options);
+        }
+
+        internal static PetStoreData DeserializePetStoreData(JsonElement element, ModelSerializerOptions options = default)
+        {
+            options ??= ModelSerializerOptions.AzureServiceDefault;
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
@@ -76,6 +84,12 @@ namespace MgmtCustomizations
                 }
             }
             return new PetStoreData(id, name, type, systemData.Value, properties.Value);
+        }
+
+        object IJsonModelSerializable.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        {
+            using var doc = JsonDocument.ParseValue(ref reader);
+            return DeserializePetStoreData(doc.RootElement, options);
         }
     }
 }

@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
@@ -12,10 +13,70 @@ using Azure.Core.Serialization;
 
 namespace Azure.Network.Management.Interface.Models
 {
-    public partial class EffectiveRoute
+    public partial class EffectiveRoute : IUtf8JsonSerializable, IJsonModelSerializable
     {
-        internal static EffectiveRoute DeserializeEffectiveRoute(JsonElement element, SerializableOptions options = default)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModelSerializable)this).Serialize(writer, ModelSerializerOptions.AzureServiceDefault);
+
+        void IJsonModelSerializable.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
+            writer.WriteStartObject();
+            if (Optional.IsDefined(Name))
+            {
+                writer.WritePropertyName("name"u8);
+                writer.WriteStringValue(Name);
+            }
+            if (Optional.IsDefined(DisableBgpRoutePropagation))
+            {
+                writer.WritePropertyName("disableBgpRoutePropagation"u8);
+                writer.WriteBooleanValue(DisableBgpRoutePropagation.Value);
+            }
+            if (Optional.IsDefined(Source))
+            {
+                writer.WritePropertyName("source"u8);
+                writer.WriteStringValue(Source.Value.ToString());
+            }
+            if (Optional.IsDefined(State))
+            {
+                writer.WritePropertyName("state"u8);
+                writer.WriteStringValue(State.Value.ToString());
+            }
+            if (Optional.IsCollectionDefined(AddressPrefix))
+            {
+                writer.WritePropertyName("addressPrefix"u8);
+                writer.WriteStartArray();
+                foreach (var item in AddressPrefix)
+                {
+                    writer.WriteStringValue(item);
+                }
+                writer.WriteEndArray();
+            }
+            if (Optional.IsCollectionDefined(NextHopIpAddress))
+            {
+                writer.WritePropertyName("nextHopIpAddress"u8);
+                writer.WriteStartArray();
+                foreach (var item in NextHopIpAddress)
+                {
+                    writer.WriteStringValue(item);
+                }
+                writer.WriteEndArray();
+            }
+            if (Optional.IsDefined(NextHopType))
+            {
+                writer.WritePropertyName("nextHopType"u8);
+                writer.WriteStringValue(NextHopType.Value.ToString());
+            }
+            writer.WriteEndObject();
+        }
+
+        object IModelSerializable.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            using var doc = JsonDocument.Parse(data);
+            return DeserializeEffectiveRoute(doc.RootElement, options);
+        }
+
+        internal static EffectiveRoute DeserializeEffectiveRoute(JsonElement element, ModelSerializerOptions options = default)
+        {
+            options ??= ModelSerializerOptions.AzureServiceDefault;
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
@@ -100,6 +161,12 @@ namespace Azure.Network.Management.Interface.Models
                 }
             }
             return new EffectiveRoute(name.Value, Optional.ToNullable(disableBgpRoutePropagation), Optional.ToNullable(source), Optional.ToNullable(state), Optional.ToList(addressPrefix), Optional.ToList(nextHopIpAddress), Optional.ToNullable(nextHopType));
+        }
+
+        object IJsonModelSerializable.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        {
+            using var doc = JsonDocument.ParseValue(ref reader);
+            return DeserializeEffectiveRoute(doc.RootElement, options);
         }
     }
 }

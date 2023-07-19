@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
@@ -14,11 +15,11 @@ using MgmtParamOrdering.Models;
 
 namespace MgmtParamOrdering
 {
-    public partial class EnvironmentContainerResourceData : IUtf8JsonSerializable, IModelSerializable
+    public partial class EnvironmentContainerResourceData : IUtf8JsonSerializable, IJsonModelSerializable
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelSerializable)this).Serialize(writer, new SerializableOptions());
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModelSerializable)this).Serialize(writer, ModelSerializerOptions.AzureServiceDefault);
 
-        void IModelSerializable.Serialize(Utf8JsonWriter writer, SerializableOptions options)
+        void IJsonModelSerializable.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
             writer.WriteStartObject();
             writer.WritePropertyName("properties"u8);
@@ -39,8 +40,15 @@ namespace MgmtParamOrdering
             writer.WriteEndObject();
         }
 
-        internal static EnvironmentContainerResourceData DeserializeEnvironmentContainerResourceData(JsonElement element, SerializableOptions options = default)
+        object IModelSerializable.Deserialize(BinaryData data, ModelSerializerOptions options)
         {
+            using var doc = JsonDocument.Parse(data);
+            return DeserializeEnvironmentContainerResourceData(doc.RootElement, options);
+        }
+
+        internal static EnvironmentContainerResourceData DeserializeEnvironmentContainerResourceData(JsonElement element, ModelSerializerOptions options = default)
+        {
+            options ??= ModelSerializerOptions.AzureServiceDefault;
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
@@ -104,6 +112,12 @@ namespace MgmtParamOrdering
                 }
             }
             return new EnvironmentContainerResourceData(id, name, type, systemData.Value, Optional.ToDictionary(tags), location, properties);
+        }
+
+        object IJsonModelSerializable.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        {
+            using var doc = JsonDocument.ParseValue(ref reader);
+            return DeserializeEnvironmentContainerResourceData(doc.RootElement, options);
         }
     }
 }

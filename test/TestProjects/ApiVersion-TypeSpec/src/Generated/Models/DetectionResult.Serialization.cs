@@ -13,10 +13,27 @@ using Azure.Core.Serialization;
 
 namespace ApiVersionInTsp.Models
 {
-    public partial class DetectionResult
+    public partial class DetectionResult : IUtf8JsonSerializable, IJsonModelSerializable
     {
-        internal static DetectionResult DeserializeDetectionResult(JsonElement element, SerializableOptions options = default)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModelSerializable)this).Serialize(writer, ModelSerializerOptions.AzureServiceDefault);
+
+        void IJsonModelSerializable.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
+            writer.WriteStartObject();
+            writer.WritePropertyName("resultId"u8);
+            writer.WriteStringValue(ResultId);
+            writer.WriteEndObject();
+        }
+
+        object IModelSerializable.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            using var doc = JsonDocument.Parse(data);
+            return DeserializeDetectionResult(doc.RootElement, options);
+        }
+
+        internal static DetectionResult DeserializeDetectionResult(JsonElement element, ModelSerializerOptions options = default)
+        {
+            options ??= ModelSerializerOptions.AzureServiceDefault;
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
@@ -33,12 +50,26 @@ namespace ApiVersionInTsp.Models
             return new DetectionResult(resultId);
         }
 
+        object IJsonModelSerializable.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        {
+            using var doc = JsonDocument.ParseValue(ref reader);
+            return DeserializeDetectionResult(doc.RootElement, options);
+        }
+
         /// <summary> Deserializes the model from a raw response. </summary>
         /// <param name="response"> The response to deserialize the model from. </param>
         internal static DetectionResult FromResponse(Response response)
         {
             using var document = JsonDocument.Parse(response.Content);
             return DeserializeDetectionResult(document.RootElement);
+        }
+
+        /// <summary> Convert into a Utf8JsonRequestContent. </summary>
+        internal virtual RequestContent ToRequestContent()
+        {
+            var content = new Utf8JsonRequestContent();
+            content.JsonWriter.WriteObjectValue(this);
+            return content;
         }
     }
 }

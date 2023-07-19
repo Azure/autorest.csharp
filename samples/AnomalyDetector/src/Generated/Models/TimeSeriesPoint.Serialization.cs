@@ -5,17 +5,19 @@
 
 #nullable disable
 
+using System;
 using System.Text.Json;
+using Azure;
 using Azure.Core;
 using Azure.Core.Serialization;
 
 namespace AnomalyDetector.Models
 {
-    public partial class TimeSeriesPoint : IUtf8JsonSerializable, IModelSerializable
+    public partial class TimeSeriesPoint : IUtf8JsonSerializable, IJsonModelSerializable
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelSerializable)this).Serialize(writer, new SerializableOptions());
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModelSerializable)this).Serialize(writer, ModelSerializerOptions.AzureServiceDefault);
 
-        void IModelSerializable.Serialize(Utf8JsonWriter writer, SerializableOptions options)
+        void IJsonModelSerializable.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
             writer.WriteStartObject();
             if (Optional.IsDefined(Timestamp))
@@ -26,6 +28,55 @@ namespace AnomalyDetector.Models
             writer.WritePropertyName("value"u8);
             writer.WriteNumberValue(Value);
             writer.WriteEndObject();
+        }
+
+        object IModelSerializable.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            using var doc = JsonDocument.Parse(data);
+            return DeserializeTimeSeriesPoint(doc.RootElement, options);
+        }
+
+        internal static TimeSeriesPoint DeserializeTimeSeriesPoint(JsonElement element, ModelSerializerOptions options = default)
+        {
+            options ??= ModelSerializerOptions.AzureServiceDefault;
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
+            Optional<DateTimeOffset> timestamp = default;
+            float value = default;
+            foreach (var property in element.EnumerateObject())
+            {
+                if (property.NameEquals("timestamp"u8))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        continue;
+                    }
+                    timestamp = property.Value.GetDateTimeOffset("O");
+                    continue;
+                }
+                if (property.NameEquals("value"u8))
+                {
+                    value = property.Value.GetSingle();
+                    continue;
+                }
+            }
+            return new TimeSeriesPoint(Optional.ToNullable(timestamp), value);
+        }
+
+        object IJsonModelSerializable.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        {
+            using var doc = JsonDocument.ParseValue(ref reader);
+            return DeserializeTimeSeriesPoint(doc.RootElement, options);
+        }
+
+        /// <summary> Deserializes the model from a raw response. </summary>
+        /// <param name="response"> The response to deserialize the model from. </param>
+        internal static TimeSeriesPoint FromResponse(Response response)
+        {
+            using var document = JsonDocument.Parse(response.Content);
+            return DeserializeTimeSeriesPoint(document.RootElement);
         }
 
         /// <summary> Convert into a Utf8JsonRequestContent. </summary>

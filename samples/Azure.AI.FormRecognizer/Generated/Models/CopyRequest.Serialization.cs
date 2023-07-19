@@ -5,17 +5,18 @@
 
 #nullable disable
 
+using System;
 using System.Text.Json;
 using Azure.Core;
 using Azure.Core.Serialization;
 
 namespace Azure.AI.FormRecognizer.Models
 {
-    public partial class CopyRequest : IUtf8JsonSerializable, IModelSerializable
+    public partial class CopyRequest : IUtf8JsonSerializable, IJsonModelSerializable
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelSerializable)this).Serialize(writer, new SerializableOptions());
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModelSerializable)this).Serialize(writer, ModelSerializerOptions.AzureServiceDefault);
 
-        void IModelSerializable.Serialize(Utf8JsonWriter writer, SerializableOptions options)
+        void IJsonModelSerializable.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
             writer.WriteStartObject();
             writer.WritePropertyName("targetResourceId"u8);
@@ -25,6 +26,49 @@ namespace Azure.AI.FormRecognizer.Models
             writer.WritePropertyName("copyAuthorization"u8);
             writer.WriteObjectValue(CopyAuthorization);
             writer.WriteEndObject();
+        }
+
+        object IModelSerializable.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            using var doc = JsonDocument.Parse(data);
+            return DeserializeCopyRequest(doc.RootElement, options);
+        }
+
+        internal static CopyRequest DeserializeCopyRequest(JsonElement element, ModelSerializerOptions options = default)
+        {
+            options ??= ModelSerializerOptions.AzureServiceDefault;
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
+            string targetResourceId = default;
+            string targetResourceRegion = default;
+            CopyAuthorizationResult copyAuthorization = default;
+            foreach (var property in element.EnumerateObject())
+            {
+                if (property.NameEquals("targetResourceId"u8))
+                {
+                    targetResourceId = property.Value.GetString();
+                    continue;
+                }
+                if (property.NameEquals("targetResourceRegion"u8))
+                {
+                    targetResourceRegion = property.Value.GetString();
+                    continue;
+                }
+                if (property.NameEquals("copyAuthorization"u8))
+                {
+                    copyAuthorization = CopyAuthorizationResult.DeserializeCopyAuthorizationResult(property.Value);
+                    continue;
+                }
+            }
+            return new CopyRequest(targetResourceId, targetResourceRegion, copyAuthorization);
+        }
+
+        object IJsonModelSerializable.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        {
+            using var doc = JsonDocument.ParseValue(ref reader);
+            return DeserializeCopyRequest(doc.RootElement, options);
         }
     }
 }

@@ -5,17 +5,19 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
 using Azure.Core.Serialization;
 
 namespace CognitiveServices.TextAnalytics.Models
 {
-    public partial class MultiLanguageBatchInput : IUtf8JsonSerializable, IModelSerializable
+    public partial class MultiLanguageBatchInput : IUtf8JsonSerializable, IJsonModelSerializable
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelSerializable)this).Serialize(writer, new SerializableOptions());
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModelSerializable)this).Serialize(writer, ModelSerializerOptions.AzureServiceDefault);
 
-        void IModelSerializable.Serialize(Utf8JsonWriter writer, SerializableOptions options)
+        void IJsonModelSerializable.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
             writer.WriteStartObject();
             writer.WritePropertyName("documents"u8);
@@ -26,6 +28,42 @@ namespace CognitiveServices.TextAnalytics.Models
             }
             writer.WriteEndArray();
             writer.WriteEndObject();
+        }
+
+        object IModelSerializable.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            using var doc = JsonDocument.Parse(data);
+            return DeserializeMultiLanguageBatchInput(doc.RootElement, options);
+        }
+
+        internal static MultiLanguageBatchInput DeserializeMultiLanguageBatchInput(JsonElement element, ModelSerializerOptions options = default)
+        {
+            options ??= ModelSerializerOptions.AzureServiceDefault;
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
+            IList<MultiLanguageInput> documents = default;
+            foreach (var property in element.EnumerateObject())
+            {
+                if (property.NameEquals("documents"u8))
+                {
+                    List<MultiLanguageInput> array = new List<MultiLanguageInput>();
+                    foreach (var item in property.Value.EnumerateArray())
+                    {
+                        array.Add(MultiLanguageInput.DeserializeMultiLanguageInput(item));
+                    }
+                    documents = array;
+                    continue;
+                }
+            }
+            return new MultiLanguageBatchInput(documents);
+        }
+
+        object IJsonModelSerializable.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        {
+            using var doc = JsonDocument.ParseValue(ref reader);
+            return DeserializeMultiLanguageBatchInput(doc.RootElement, options);
         }
     }
 }

@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
@@ -12,10 +13,46 @@ using Azure.Core.Serialization;
 
 namespace Azure.AI.FormRecognizer.Models
 {
-    public partial class TextLine
+    public partial class TextLine : IUtf8JsonSerializable, IJsonModelSerializable
     {
-        internal static TextLine DeserializeTextLine(JsonElement element, SerializableOptions options = default)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModelSerializable)this).Serialize(writer, ModelSerializerOptions.AzureServiceDefault);
+
+        void IJsonModelSerializable.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
+            writer.WriteStartObject();
+            writer.WritePropertyName("text"u8);
+            writer.WriteStringValue(Text);
+            writer.WritePropertyName("boundingBox"u8);
+            writer.WriteStartArray();
+            foreach (var item in BoundingBox)
+            {
+                writer.WriteNumberValue(item);
+            }
+            writer.WriteEndArray();
+            if (Optional.IsDefined(Language))
+            {
+                writer.WritePropertyName("language"u8);
+                writer.WriteStringValue(Language.Value.ToString());
+            }
+            writer.WritePropertyName("words"u8);
+            writer.WriteStartArray();
+            foreach (var item in Words)
+            {
+                writer.WriteObjectValue(item);
+            }
+            writer.WriteEndArray();
+            writer.WriteEndObject();
+        }
+
+        object IModelSerializable.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            using var doc = JsonDocument.Parse(data);
+            return DeserializeTextLine(doc.RootElement, options);
+        }
+
+        internal static TextLine DeserializeTextLine(JsonElement element, ModelSerializerOptions options = default)
+        {
+            options ??= ModelSerializerOptions.AzureServiceDefault;
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
@@ -62,6 +99,12 @@ namespace Azure.AI.FormRecognizer.Models
                 }
             }
             return new TextLine(text, boundingBox, Optional.ToNullable(language), words);
+        }
+
+        object IJsonModelSerializable.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        {
+            using var doc = JsonDocument.ParseValue(ref reader);
+            return DeserializeTextLine(doc.RootElement, options);
         }
     }
 }

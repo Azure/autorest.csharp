@@ -5,17 +5,20 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
 using System.Text.Json;
+using Azure;
 using Azure.Core;
 using Azure.Core.Serialization;
 
 namespace AnomalyDetector.Models
 {
-    public partial class MultivariateLastDetectionOptions : IUtf8JsonSerializable, IModelSerializable
+    public partial class MultivariateLastDetectionOptions : IUtf8JsonSerializable, IJsonModelSerializable
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelSerializable)this).Serialize(writer, new SerializableOptions());
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModelSerializable)this).Serialize(writer, ModelSerializerOptions.AzureServiceDefault);
 
-        void IModelSerializable.Serialize(Utf8JsonWriter writer, SerializableOptions options)
+        void IJsonModelSerializable.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
             writer.WriteStartObject();
             writer.WritePropertyName("variables"u8);
@@ -28,6 +31,56 @@ namespace AnomalyDetector.Models
             writer.WritePropertyName("topContributorCount"u8);
             writer.WriteNumberValue(TopContributorCount);
             writer.WriteEndObject();
+        }
+
+        object IModelSerializable.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            using var doc = JsonDocument.Parse(data);
+            return DeserializeMultivariateLastDetectionOptions(doc.RootElement, options);
+        }
+
+        internal static MultivariateLastDetectionOptions DeserializeMultivariateLastDetectionOptions(JsonElement element, ModelSerializerOptions options = default)
+        {
+            options ??= ModelSerializerOptions.AzureServiceDefault;
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
+            IList<VariableValues> variables = default;
+            int topContributorCount = default;
+            foreach (var property in element.EnumerateObject())
+            {
+                if (property.NameEquals("variables"u8))
+                {
+                    List<VariableValues> array = new List<VariableValues>();
+                    foreach (var item in property.Value.EnumerateArray())
+                    {
+                        array.Add(VariableValues.DeserializeVariableValues(item));
+                    }
+                    variables = array;
+                    continue;
+                }
+                if (property.NameEquals("topContributorCount"u8))
+                {
+                    topContributorCount = property.Value.GetInt32();
+                    continue;
+                }
+            }
+            return new MultivariateLastDetectionOptions(variables, topContributorCount);
+        }
+
+        object IJsonModelSerializable.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        {
+            using var doc = JsonDocument.ParseValue(ref reader);
+            return DeserializeMultivariateLastDetectionOptions(doc.RootElement, options);
+        }
+
+        /// <summary> Deserializes the model from a raw response. </summary>
+        /// <param name="response"> The response to deserialize the model from. </param>
+        internal static MultivariateLastDetectionOptions FromResponse(Response response)
+        {
+            using var document = JsonDocument.Parse(response.Content);
+            return DeserializeMultivariateLastDetectionOptions(document.RootElement);
         }
 
         /// <summary> Convert into a Utf8JsonRequestContent. </summary>

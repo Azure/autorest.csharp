@@ -5,16 +5,44 @@
 
 #nullable disable
 
+using System;
 using System.Text.Json;
 using Azure.Core;
 using Azure.Core.Serialization;
 
 namespace xms_error_responses.Models
 {
-    internal partial class NotFoundErrorBase
+    internal partial class NotFoundErrorBase : IUtf8JsonSerializable, IJsonModelSerializable
     {
-        internal static NotFoundErrorBase DeserializeNotFoundErrorBase(JsonElement element, SerializableOptions options = default)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModelSerializable)this).Serialize(writer, ModelSerializerOptions.AzureServiceDefault);
+
+        void IJsonModelSerializable.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
+            writer.WriteStartObject();
+            if (Optional.IsDefined(Reason))
+            {
+                writer.WritePropertyName("reason"u8);
+                writer.WriteStringValue(Reason);
+            }
+            writer.WritePropertyName("whatNotFound"u8);
+            writer.WriteStringValue(WhatNotFound);
+            if (Optional.IsDefined(SomeBaseProp))
+            {
+                writer.WritePropertyName("someBaseProp"u8);
+                writer.WriteStringValue(SomeBaseProp);
+            }
+            writer.WriteEndObject();
+        }
+
+        object IModelSerializable.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            using var doc = JsonDocument.Parse(data);
+            return DeserializeNotFoundErrorBase(doc.RootElement, options);
+        }
+
+        internal static NotFoundErrorBase DeserializeNotFoundErrorBase(JsonElement element, ModelSerializerOptions options = default)
+        {
+            options ??= ModelSerializerOptions.AzureServiceDefault;
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
@@ -49,6 +77,12 @@ namespace xms_error_responses.Models
                 }
             }
             return new NotFoundErrorBase(someBaseProp.Value, reason.Value, whatNotFound);
+        }
+
+        object IJsonModelSerializable.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        {
+            using var doc = JsonDocument.ParseValue(ref reader);
+            return DeserializeNotFoundErrorBase(doc.RootElement, options);
         }
     }
 }

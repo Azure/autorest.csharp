@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
@@ -12,10 +13,40 @@ using Azure.Core.Serialization;
 
 namespace AppConfiguration.Models
 {
-    internal partial class KeyListResult
+    internal partial class KeyListResult : IUtf8JsonSerializable, IJsonModelSerializable
     {
-        internal static KeyListResult DeserializeKeyListResult(JsonElement element, SerializableOptions options = default)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModelSerializable)this).Serialize(writer, ModelSerializerOptions.AzureServiceDefault);
+
+        void IJsonModelSerializable.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
+            writer.WriteStartObject();
+            if (Optional.IsCollectionDefined(Items))
+            {
+                writer.WritePropertyName("items"u8);
+                writer.WriteStartArray();
+                foreach (var item in Items)
+                {
+                    writer.WriteObjectValue(item);
+                }
+                writer.WriteEndArray();
+            }
+            if (Optional.IsDefined(NextLink))
+            {
+                writer.WritePropertyName("@nextLink"u8);
+                writer.WriteStringValue(NextLink);
+            }
+            writer.WriteEndObject();
+        }
+
+        object IModelSerializable.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            using var doc = JsonDocument.Parse(data);
+            return DeserializeKeyListResult(doc.RootElement, options);
+        }
+
+        internal static KeyListResult DeserializeKeyListResult(JsonElement element, ModelSerializerOptions options = default)
+        {
+            options ??= ModelSerializerOptions.AzureServiceDefault;
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
@@ -45,6 +76,12 @@ namespace AppConfiguration.Models
                 }
             }
             return new KeyListResult(Optional.ToList(items), nextLink.Value);
+        }
+
+        object IJsonModelSerializable.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        {
+            using var doc = JsonDocument.ParseValue(ref reader);
+            return DeserializeKeyListResult(doc.RootElement, options);
         }
     }
 }

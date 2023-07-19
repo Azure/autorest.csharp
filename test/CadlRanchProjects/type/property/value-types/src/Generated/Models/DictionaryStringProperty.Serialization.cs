@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure;
@@ -13,11 +14,11 @@ using Azure.Core.Serialization;
 
 namespace _Type.Property.ValueTypes.Models
 {
-    public partial class DictionaryStringProperty : IUtf8JsonSerializable, IModelSerializable
+    public partial class DictionaryStringProperty : IUtf8JsonSerializable, IJsonModelSerializable
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelSerializable)this).Serialize(writer, new SerializableOptions());
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModelSerializable)this).Serialize(writer, ModelSerializerOptions.AzureServiceDefault);
 
-        void IModelSerializable.Serialize(Utf8JsonWriter writer, SerializableOptions options)
+        void IJsonModelSerializable.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
             writer.WriteStartObject();
             writer.WritePropertyName("property"u8);
@@ -31,8 +32,15 @@ namespace _Type.Property.ValueTypes.Models
             writer.WriteEndObject();
         }
 
-        internal static DictionaryStringProperty DeserializeDictionaryStringProperty(JsonElement element, SerializableOptions options = default)
+        object IModelSerializable.Deserialize(BinaryData data, ModelSerializerOptions options)
         {
+            using var doc = JsonDocument.Parse(data);
+            return DeserializeDictionaryStringProperty(doc.RootElement, options);
+        }
+
+        internal static DictionaryStringProperty DeserializeDictionaryStringProperty(JsonElement element, ModelSerializerOptions options = default)
+        {
+            options ??= ModelSerializerOptions.AzureServiceDefault;
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
@@ -52,6 +60,12 @@ namespace _Type.Property.ValueTypes.Models
                 }
             }
             return new DictionaryStringProperty(property);
+        }
+
+        object IJsonModelSerializable.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        {
+            using var doc = JsonDocument.ParseValue(ref reader);
+            return DeserializeDictionaryStringProperty(doc.RootElement, options);
         }
 
         /// <summary> Deserializes the model from a raw response. </summary>

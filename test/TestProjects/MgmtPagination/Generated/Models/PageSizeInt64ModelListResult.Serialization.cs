@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
@@ -13,10 +14,25 @@ using MgmtPagination;
 
 namespace MgmtPagination.Models
 {
-    internal partial class PageSizeInt64ModelListResult
+    internal partial class PageSizeInt64ModelListResult : IUtf8JsonSerializable, IJsonModelSerializable
     {
-        internal static PageSizeInt64ModelListResult DeserializePageSizeInt64ModelListResult(JsonElement element, SerializableOptions options = default)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModelSerializable)this).Serialize(writer, ModelSerializerOptions.AzureServiceDefault);
+
+        void IJsonModelSerializable.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
+            writer.WriteStartObject();
+            writer.WriteEndObject();
+        }
+
+        object IModelSerializable.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            using var doc = JsonDocument.Parse(data);
+            return DeserializePageSizeInt64ModelListResult(doc.RootElement, options);
+        }
+
+        internal static PageSizeInt64ModelListResult DeserializePageSizeInt64ModelListResult(JsonElement element, ModelSerializerOptions options = default)
+        {
+            options ??= ModelSerializerOptions.AzureServiceDefault;
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
@@ -46,6 +62,12 @@ namespace MgmtPagination.Models
                 }
             }
             return new PageSizeInt64ModelListResult(Optional.ToList(value), nextLink.Value);
+        }
+
+        object IJsonModelSerializable.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        {
+            using var doc = JsonDocument.ParseValue(ref reader);
+            return DeserializePageSizeInt64ModelListResult(doc.RootElement, options);
         }
     }
 }

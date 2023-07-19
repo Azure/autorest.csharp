@@ -13,10 +13,113 @@ using Azure.Core.Serialization;
 
 namespace Azure.AI.FormRecognizer.Models
 {
-    public partial class FieldValue
+    public partial class FieldValue : IUtf8JsonSerializable, IJsonModelSerializable
     {
-        internal static FieldValue DeserializeFieldValue(JsonElement element, SerializableOptions options = default)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModelSerializable)this).Serialize(writer, ModelSerializerOptions.AzureServiceDefault);
+
+        void IJsonModelSerializable.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
+            writer.WriteStartObject();
+            writer.WritePropertyName("type"u8);
+            writer.WriteStringValue(Type.ToSerialString());
+            if (Optional.IsDefined(ValueString))
+            {
+                writer.WritePropertyName("valueString"u8);
+                writer.WriteStringValue(ValueString);
+            }
+            if (Optional.IsDefined(ValueDate))
+            {
+                writer.WritePropertyName("valueDate"u8);
+                writer.WriteStringValue(ValueDate.Value, "D");
+            }
+            if (Optional.IsDefined(ValueTime))
+            {
+                writer.WritePropertyName("valueTime"u8);
+                writer.WriteStringValue(ValueTime.Value, "T");
+            }
+            if (Optional.IsDefined(ValuePhoneNumber))
+            {
+                writer.WritePropertyName("valuePhoneNumber"u8);
+                writer.WriteStringValue(ValuePhoneNumber);
+            }
+            if (Optional.IsDefined(ValueNumber))
+            {
+                writer.WritePropertyName("valueNumber"u8);
+                writer.WriteNumberValue(ValueNumber.Value);
+            }
+            if (Optional.IsDefined(ValueInteger))
+            {
+                writer.WritePropertyName("valueInteger"u8);
+                writer.WriteNumberValue(ValueInteger.Value);
+            }
+            if (Optional.IsCollectionDefined(ValueArray))
+            {
+                writer.WritePropertyName("valueArray"u8);
+                writer.WriteStartArray();
+                foreach (var item in ValueArray)
+                {
+                    writer.WriteObjectValue(item);
+                }
+                writer.WriteEndArray();
+            }
+            if (Optional.IsCollectionDefined(ValueObject))
+            {
+                writer.WritePropertyName("valueObject"u8);
+                writer.WriteStartObject();
+                foreach (var item in ValueObject)
+                {
+                    writer.WritePropertyName(item.Key);
+                    writer.WriteObjectValue(item.Value);
+                }
+                writer.WriteEndObject();
+            }
+            if (Optional.IsDefined(Text))
+            {
+                writer.WritePropertyName("text"u8);
+                writer.WriteStringValue(Text);
+            }
+            if (Optional.IsCollectionDefined(BoundingBox))
+            {
+                writer.WritePropertyName("boundingBox"u8);
+                writer.WriteStartArray();
+                foreach (var item in BoundingBox)
+                {
+                    writer.WriteNumberValue(item);
+                }
+                writer.WriteEndArray();
+            }
+            if (Optional.IsDefined(Confidence))
+            {
+                writer.WritePropertyName("confidence"u8);
+                writer.WriteNumberValue(Confidence.Value);
+            }
+            if (Optional.IsCollectionDefined(Elements))
+            {
+                writer.WritePropertyName("elements"u8);
+                writer.WriteStartArray();
+                foreach (var item in Elements)
+                {
+                    writer.WriteStringValue(item);
+                }
+                writer.WriteEndArray();
+            }
+            if (Optional.IsDefined(Page))
+            {
+                writer.WritePropertyName("page"u8);
+                writer.WriteNumberValue(Page.Value);
+            }
+            writer.WriteEndObject();
+        }
+
+        object IModelSerializable.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            using var doc = JsonDocument.Parse(data);
+            return DeserializeFieldValue(doc.RootElement, options);
+        }
+
+        internal static FieldValue DeserializeFieldValue(JsonElement element, ModelSerializerOptions options = default)
+        {
+            options ??= ModelSerializerOptions.AzureServiceDefault;
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
@@ -169,6 +272,12 @@ namespace Azure.AI.FormRecognizer.Models
                 }
             }
             return new FieldValue(type, valueString.Value, Optional.ToNullable(valueDate), Optional.ToNullable(valueTime), valuePhoneNumber.Value, Optional.ToNullable(valueNumber), Optional.ToNullable(valueInteger), Optional.ToList(valueArray), Optional.ToDictionary(valueObject), text.Value, Optional.ToList(boundingBox), Optional.ToNullable(confidence), Optional.ToList(elements), Optional.ToNullable(page));
+        }
+
+        object IJsonModelSerializable.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        {
+            using var doc = JsonDocument.ParseValue(ref reader);
+            return DeserializeFieldValue(doc.RootElement, options);
         }
     }
 }

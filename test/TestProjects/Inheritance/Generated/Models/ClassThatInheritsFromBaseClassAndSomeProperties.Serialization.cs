@@ -14,11 +14,11 @@ using Azure.Core.Serialization;
 
 namespace Inheritance.Models
 {
-    public partial class ClassThatInheritsFromBaseClassAndSomeProperties : IUtf8JsonSerializable, IModelSerializable
+    public partial class ClassThatInheritsFromBaseClassAndSomeProperties : IUtf8JsonSerializable, IJsonModelSerializable
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelSerializable)this).Serialize(writer, new SerializableOptions());
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModelSerializable)this).Serialize(writer, ModelSerializerOptions.AzureServiceDefault);
 
-        void IModelSerializable.Serialize(Utf8JsonWriter writer, SerializableOptions options)
+        void IJsonModelSerializable.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
             writer.WriteStartObject();
             if (Optional.IsDefined(SomeProperty))
@@ -94,8 +94,15 @@ namespace Inheritance.Models
             writer.WriteEndObject();
         }
 
-        internal static ClassThatInheritsFromBaseClassAndSomeProperties DeserializeClassThatInheritsFromBaseClassAndSomeProperties(JsonElement element, SerializableOptions options = default)
+        object IModelSerializable.Deserialize(BinaryData data, ModelSerializerOptions options)
         {
+            using var doc = JsonDocument.Parse(data);
+            return DeserializeClassThatInheritsFromBaseClassAndSomeProperties(doc.RootElement, options);
+        }
+
+        internal static ClassThatInheritsFromBaseClassAndSomeProperties DeserializeClassThatInheritsFromBaseClassAndSomeProperties(JsonElement element, ModelSerializerOptions options = default)
+        {
+            options ??= ModelSerializerOptions.AzureServiceDefault;
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
@@ -232,6 +239,12 @@ namespace Inheritance.Models
                 }
             }
             return new ClassThatInheritsFromBaseClassAndSomeProperties(baseClassProperty.Value, dfeString.Value, dfeDouble.Value, dfeBool.Value, dfeInt.Value, dfeObject.Value, dfeListOfT.Value, dfeListOfString.Value, dfeKeyValuePairs.Value, dfeDateTime.Value, dfeDuration.Value, dfeUri.Value, someProperty.Value, someOtherProperty.Value);
+        }
+
+        object IJsonModelSerializable.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        {
+            using var doc = JsonDocument.ParseValue(ref reader);
+            return DeserializeClassThatInheritsFromBaseClassAndSomeProperties(doc.RootElement, options);
         }
     }
 }

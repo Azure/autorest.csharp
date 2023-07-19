@@ -14,11 +14,11 @@ using Azure.ResourceManager.Models;
 
 namespace MgmtMultipleParentResource
 {
-    public partial class AnotherParentData : IUtf8JsonSerializable, IModelSerializable
+    public partial class AnotherParentData : IUtf8JsonSerializable, IJsonModelSerializable
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelSerializable)this).Serialize(writer, new SerializableOptions());
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModelSerializable)this).Serialize(writer, ModelSerializerOptions.AzureServiceDefault);
 
-        void IModelSerializable.Serialize(Utf8JsonWriter writer, SerializableOptions options)
+        void IJsonModelSerializable.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
             writer.WriteStartObject();
             if (Optional.IsCollectionDefined(Tags))
@@ -70,8 +70,15 @@ namespace MgmtMultipleParentResource
             writer.WriteEndObject();
         }
 
-        internal static AnotherParentData DeserializeAnotherParentData(JsonElement element, SerializableOptions options = default)
+        object IModelSerializable.Deserialize(BinaryData data, ModelSerializerOptions options)
         {
+            using var doc = JsonDocument.Parse(data);
+            return DeserializeAnotherParentData(doc.RootElement, options);
+        }
+
+        internal static AnotherParentData DeserializeAnotherParentData(JsonElement element, ModelSerializerOptions options = default)
+        {
+            options ??= ModelSerializerOptions.AzureServiceDefault;
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
@@ -199,6 +206,12 @@ namespace MgmtMultipleParentResource
                 }
             }
             return new AnotherParentData(id, name, type, systemData.Value, Optional.ToDictionary(tags), location, Optional.ToNullable(asyncExecution), runAsUser.Value, runAsPassword.Value, Optional.ToNullable(timeoutInSeconds), outputBlobUri.Value, errorBlobUri.Value, provisioningState.Value);
+        }
+
+        object IJsonModelSerializable.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        {
+            using var doc = JsonDocument.ParseValue(ref reader);
+            return DeserializeAnotherParentData(doc.RootElement, options);
         }
     }
 }

@@ -5,16 +5,44 @@
 
 #nullable disable
 
+using System;
 using System.Text.Json;
 using Azure.Core;
 using Azure.Core.Serialization;
 
 namespace Azure.AI.FormRecognizer.Models
 {
-    public partial class Model
+    public partial class Model : IUtf8JsonSerializable, IJsonModelSerializable
     {
-        internal static Model DeserializeModel(JsonElement element, SerializableOptions options = default)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModelSerializable)this).Serialize(writer, ModelSerializerOptions.AzureServiceDefault);
+
+        void IJsonModelSerializable.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
+            writer.WriteStartObject();
+            writer.WritePropertyName("modelInfo"u8);
+            writer.WriteObjectValue(ModelInfo);
+            if (Optional.IsDefined(Keys))
+            {
+                writer.WritePropertyName("keys"u8);
+                writer.WriteObjectValue(Keys);
+            }
+            if (Optional.IsDefined(TrainResult))
+            {
+                writer.WritePropertyName("trainResult"u8);
+                writer.WriteObjectValue(TrainResult);
+            }
+            writer.WriteEndObject();
+        }
+
+        object IModelSerializable.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            using var doc = JsonDocument.Parse(data);
+            return DeserializeModel(doc.RootElement, options);
+        }
+
+        internal static Model DeserializeModel(JsonElement element, ModelSerializerOptions options = default)
+        {
+            options ??= ModelSerializerOptions.AzureServiceDefault;
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
@@ -49,6 +77,12 @@ namespace Azure.AI.FormRecognizer.Models
                 }
             }
             return new Model(modelInfo, keys.Value, trainResult.Value);
+        }
+
+        object IJsonModelSerializable.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        {
+            using var doc = JsonDocument.ParseValue(ref reader);
+            return DeserializeModel(doc.RootElement, options);
         }
     }
 }

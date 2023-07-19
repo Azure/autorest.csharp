@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Text.Json;
 using Azure.Core;
 using Azure.Core.Serialization;
@@ -12,10 +13,30 @@ using Azure.ResourceManager.Models;
 
 namespace MgmtSingletonResource
 {
-    public partial class IgnitionData
+    public partial class IgnitionData : IUtf8JsonSerializable, IJsonModelSerializable
     {
-        internal static IgnitionData DeserializeIgnitionData(JsonElement element, SerializableOptions options = default)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModelSerializable)this).Serialize(writer, ModelSerializerOptions.AzureServiceDefault);
+
+        void IJsonModelSerializable.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
+            writer.WriteStartObject();
+            if (Optional.IsDefined(PushButton))
+            {
+                writer.WritePropertyName("pushButton"u8);
+                writer.WriteBooleanValue(PushButton.Value);
+            }
+            writer.WriteEndObject();
+        }
+
+        object IModelSerializable.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            using var doc = JsonDocument.Parse(data);
+            return DeserializeIgnitionData(doc.RootElement, options);
+        }
+
+        internal static IgnitionData DeserializeIgnitionData(JsonElement element, ModelSerializerOptions options = default)
+        {
+            options ??= ModelSerializerOptions.AzureServiceDefault;
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
@@ -62,6 +83,12 @@ namespace MgmtSingletonResource
                 }
             }
             return new IgnitionData(id, name, type, systemData.Value, Optional.ToNullable(pushButton));
+        }
+
+        object IJsonModelSerializable.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        {
+            using var doc = JsonDocument.ParseValue(ref reader);
+            return DeserializeIgnitionData(doc.RootElement, options);
         }
     }
 }

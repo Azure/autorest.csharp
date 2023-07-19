@@ -5,17 +5,19 @@
 
 #nullable disable
 
+using System;
 using System.Text.Json;
+using Azure;
 using Azure.Core;
 using Azure.Core.Serialization;
 
 namespace ModelsTypeSpec.Models
 {
-    public partial class InputRecursiveModel : IUtf8JsonSerializable, IModelSerializable
+    public partial class InputRecursiveModel : IUtf8JsonSerializable, IJsonModelSerializable
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelSerializable)this).Serialize(writer, new SerializableOptions());
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModelSerializable)this).Serialize(writer, ModelSerializerOptions.AzureServiceDefault);
 
-        void IModelSerializable.Serialize(Utf8JsonWriter writer, SerializableOptions options)
+        void IJsonModelSerializable.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
             writer.WriteStartObject();
             writer.WritePropertyName("message"u8);
@@ -26,6 +28,55 @@ namespace ModelsTypeSpec.Models
                 writer.WriteObjectValue(Inner);
             }
             writer.WriteEndObject();
+        }
+
+        object IModelSerializable.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            using var doc = JsonDocument.Parse(data);
+            return DeserializeInputRecursiveModel(doc.RootElement, options);
+        }
+
+        internal static InputRecursiveModel DeserializeInputRecursiveModel(JsonElement element, ModelSerializerOptions options = default)
+        {
+            options ??= ModelSerializerOptions.AzureServiceDefault;
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
+            string message = default;
+            Optional<InputRecursiveModel> inner = default;
+            foreach (var property in element.EnumerateObject())
+            {
+                if (property.NameEquals("message"u8))
+                {
+                    message = property.Value.GetString();
+                    continue;
+                }
+                if (property.NameEquals("inner"u8))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        continue;
+                    }
+                    inner = DeserializeInputRecursiveModel(property.Value);
+                    continue;
+                }
+            }
+            return new InputRecursiveModel(message, inner.Value);
+        }
+
+        object IJsonModelSerializable.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        {
+            using var doc = JsonDocument.ParseValue(ref reader);
+            return DeserializeInputRecursiveModel(doc.RootElement, options);
+        }
+
+        /// <summary> Deserializes the model from a raw response. </summary>
+        /// <param name="response"> The response to deserialize the model from. </param>
+        internal static InputRecursiveModel FromResponse(Response response)
+        {
+            using var document = JsonDocument.Parse(response.Content);
+            return DeserializeInputRecursiveModel(document.RootElement);
         }
 
         /// <summary> Convert into a Utf8JsonRequestContent. </summary>

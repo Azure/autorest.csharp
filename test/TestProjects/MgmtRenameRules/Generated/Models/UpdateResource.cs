@@ -22,6 +22,16 @@ namespace MgmtRenameRules.Models
             Tags = new ChangeTrackingDictionary<string, string>();
         }
 
+        /// <summary> Initializes a new instance of UpdateResource. </summary>
+        /// <param name="tags">
+        /// Resource tags
+        /// Serialized Name: UpdateResource.tags
+        /// </param>
+        internal UpdateResource(IDictionary<string, string> tags)
+        {
+            Tags = tags;
+        }
+
         /// <summary>
         /// Resource tags
         /// Serialized Name: UpdateResource.tags

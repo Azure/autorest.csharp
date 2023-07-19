@@ -13,10 +13,36 @@ using Azure.Core.Serialization;
 
 namespace _Type.Property.Nullable.Models
 {
-    public partial class BytesProperty
+    public partial class BytesProperty : IUtf8JsonSerializable, IJsonModelSerializable
     {
-        internal static BytesProperty DeserializeBytesProperty(JsonElement element, SerializableOptions options = default)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModelSerializable)this).Serialize(writer, ModelSerializerOptions.AzureServiceDefault);
+
+        void IJsonModelSerializable.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
+            writer.WriteStartObject();
+            writer.WritePropertyName("requiredProperty"u8);
+            writer.WriteStringValue(RequiredProperty);
+            if (NullableProperty != null)
+            {
+                writer.WritePropertyName("nullableProperty"u8);
+                writer.WriteBase64StringValue(NullableProperty.ToArray(), "D");
+            }
+            else
+            {
+                writer.WriteNull("nullableProperty");
+            }
+            writer.WriteEndObject();
+        }
+
+        object IModelSerializable.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            using var doc = JsonDocument.Parse(data);
+            return DeserializeBytesProperty(doc.RootElement, options);
+        }
+
+        internal static BytesProperty DeserializeBytesProperty(JsonElement element, ModelSerializerOptions options = default)
+        {
+            options ??= ModelSerializerOptions.AzureServiceDefault;
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
@@ -44,12 +70,26 @@ namespace _Type.Property.Nullable.Models
             return new BytesProperty(requiredProperty, nullableProperty);
         }
 
+        object IJsonModelSerializable.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        {
+            using var doc = JsonDocument.ParseValue(ref reader);
+            return DeserializeBytesProperty(doc.RootElement, options);
+        }
+
         /// <summary> Deserializes the model from a raw response. </summary>
         /// <param name="response"> The response to deserialize the model from. </param>
         internal static BytesProperty FromResponse(Response response)
         {
             using var document = JsonDocument.Parse(response.Content);
             return DeserializeBytesProperty(document.RootElement);
+        }
+
+        /// <summary> Convert into a Utf8JsonRequestContent. </summary>
+        internal virtual RequestContent ToRequestContent()
+        {
+            var content = new Utf8JsonRequestContent();
+            content.JsonWriter.WriteObjectValue(this);
+            return content;
         }
     }
 }

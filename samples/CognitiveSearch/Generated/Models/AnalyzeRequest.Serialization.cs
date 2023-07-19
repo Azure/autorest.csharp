@@ -5,17 +5,19 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
 using Azure.Core.Serialization;
 
 namespace CognitiveSearch.Models
 {
-    public partial class AnalyzeRequest : IUtf8JsonSerializable, IModelSerializable
+    public partial class AnalyzeRequest : IUtf8JsonSerializable, IJsonModelSerializable
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelSerializable)this).Serialize(writer, new SerializableOptions());
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModelSerializable)this).Serialize(writer, ModelSerializerOptions.AzureServiceDefault);
 
-        void IModelSerializable.Serialize(Utf8JsonWriter writer, SerializableOptions options)
+        void IJsonModelSerializable.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
             writer.WriteStartObject();
             writer.WritePropertyName("text"u8);
@@ -51,6 +53,87 @@ namespace CognitiveSearch.Models
                 writer.WriteEndArray();
             }
             writer.WriteEndObject();
+        }
+
+        object IModelSerializable.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            using var doc = JsonDocument.Parse(data);
+            return DeserializeAnalyzeRequest(doc.RootElement, options);
+        }
+
+        internal static AnalyzeRequest DeserializeAnalyzeRequest(JsonElement element, ModelSerializerOptions options = default)
+        {
+            options ??= ModelSerializerOptions.AzureServiceDefault;
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
+            string text = default;
+            Optional<AnalyzerName> analyzer = default;
+            Optional<TokenizerName> tokenizer = default;
+            Optional<IList<TokenFilterName>> tokenFilters = default;
+            Optional<IList<CharFilterName>> charFilters = default;
+            foreach (var property in element.EnumerateObject())
+            {
+                if (property.NameEquals("text"u8))
+                {
+                    text = property.Value.GetString();
+                    continue;
+                }
+                if (property.NameEquals("analyzer"u8))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        continue;
+                    }
+                    analyzer = new AnalyzerName(property.Value.GetString());
+                    continue;
+                }
+                if (property.NameEquals("tokenizer"u8))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        continue;
+                    }
+                    tokenizer = new TokenizerName(property.Value.GetString());
+                    continue;
+                }
+                if (property.NameEquals("tokenFilters"u8))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        continue;
+                    }
+                    List<TokenFilterName> array = new List<TokenFilterName>();
+                    foreach (var item in property.Value.EnumerateArray())
+                    {
+                        array.Add(new TokenFilterName(item.GetString()));
+                    }
+                    tokenFilters = array;
+                    continue;
+                }
+                if (property.NameEquals("charFilters"u8))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        continue;
+                    }
+                    List<CharFilterName> array = new List<CharFilterName>();
+                    foreach (var item in property.Value.EnumerateArray())
+                    {
+                        array.Add(new CharFilterName(item.GetString()));
+                    }
+                    charFilters = array;
+                    continue;
+                }
+            }
+            return new AnalyzeRequest(text, Optional.ToNullable(analyzer), Optional.ToNullable(tokenizer), Optional.ToList(tokenFilters), Optional.ToList(charFilters));
+        }
+
+        object IJsonModelSerializable.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        {
+            using var doc = JsonDocument.ParseValue(ref reader);
+            return DeserializeAnalyzeRequest(doc.RootElement, options);
         }
     }
 }

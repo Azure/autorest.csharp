@@ -12,10 +12,46 @@ using Azure.Core.Serialization;
 
 namespace MgmtHierarchicalNonResource.Models
 {
-    public partial class SharedGalleryImageVersion
+    public partial class SharedGalleryImageVersion : IUtf8JsonSerializable, IJsonModelSerializable
     {
-        internal static SharedGalleryImageVersion DeserializeSharedGalleryImageVersion(JsonElement element, SerializableOptions options = default)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModelSerializable)this).Serialize(writer, ModelSerializerOptions.AzureServiceDefault);
+
+        void IJsonModelSerializable.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
+            writer.WriteStartObject();
+            writer.WritePropertyName("properties"u8);
+            writer.WriteStartObject();
+            if (Optional.IsDefined(PublishedOn))
+            {
+                writer.WritePropertyName("publishedDate"u8);
+                writer.WriteStringValue(PublishedOn.Value, "O");
+            }
+            if (Optional.IsDefined(EndOfLifeOn))
+            {
+                writer.WritePropertyName("endOfLifeDate"u8);
+                writer.WriteStringValue(EndOfLifeOn.Value, "O");
+            }
+            writer.WriteEndObject();
+            writer.WritePropertyName("identifier"u8);
+            writer.WriteStartObject();
+            if (Optional.IsDefined(UniqueId))
+            {
+                writer.WritePropertyName("uniqueId"u8);
+                writer.WriteStringValue(UniqueId);
+            }
+            writer.WriteEndObject();
+            writer.WriteEndObject();
+        }
+
+        object IModelSerializable.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            using var doc = JsonDocument.Parse(data);
+            return DeserializeSharedGalleryImageVersion(doc.RootElement, options);
+        }
+
+        internal static SharedGalleryImageVersion DeserializeSharedGalleryImageVersion(JsonElement element, ModelSerializerOptions options = default)
+        {
+            options ??= ModelSerializerOptions.AzureServiceDefault;
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
@@ -86,6 +122,12 @@ namespace MgmtHierarchicalNonResource.Models
                 }
             }
             return new SharedGalleryImageVersion(name.Value, location.Value, uniqueId.Value, Optional.ToNullable(publishedDate), Optional.ToNullable(endOfLifeDate));
+        }
+
+        object IJsonModelSerializable.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        {
+            using var doc = JsonDocument.ParseValue(ref reader);
+            return DeserializeSharedGalleryImageVersion(doc.RootElement, options);
         }
     }
 }

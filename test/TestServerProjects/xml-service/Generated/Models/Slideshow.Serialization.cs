@@ -5,18 +5,22 @@
 
 #nullable disable
 
+using System;
 using System.Collections.Generic;
 using System.Xml;
 using System.Xml.Linq;
 using Azure.Core;
+using Azure.Core.Serialization;
 
 namespace xml_service.Models
 {
-    public partial class Slideshow : IXmlSerializable
+    public partial class Slideshow : IXmlSerializable, IXmlModelSerializable
     {
-        void IXmlSerializable.Write(XmlWriter writer, string nameHint)
+        void IXmlSerializable.Write(XmlWriter writer, string nameHint) => ((IXmlModelSerializable)this).Serialize(writer, ModelSerializerOptions.AzureServiceDefault);
+
+        void IXmlModelSerializable.Serialize(XmlWriter writer, ModelSerializerOptions options)
         {
-            writer.WriteStartElement(nameHint ?? "slideshow");
+            writer.WriteStartElement("slideshow");
             if (Optional.IsDefined(Title))
             {
                 writer.WriteStartAttribute("title");
@@ -45,8 +49,14 @@ namespace xml_service.Models
             writer.WriteEndElement();
         }
 
-        internal static Slideshow DeserializeSlideshow(XElement element)
+        object IModelSerializable.Deserialize(BinaryData data, ModelSerializerOptions options)
         {
+            return DeserializeSlideshow(XElement.Load(data.ToStream()), options);
+        }
+
+        internal static Slideshow DeserializeSlideshow(XElement element, ModelSerializerOptions options = default)
+        {
+            options ??= ModelSerializerOptions.AzureServiceDefault;
             string title = default;
             string date = default;
             string author = default;

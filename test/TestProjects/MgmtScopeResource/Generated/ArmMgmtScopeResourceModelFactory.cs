@@ -43,6 +43,28 @@ namespace MgmtScopeResource.Models
             return new FakePolicyAssignmentData(id, name, resourceType, systemData, location, identity, displayName, policyDefinitionId, scope, notScopes?.ToList(), parameters, description, metadata, enforcementMode, nonComplianceMessages?.ToList());
         }
 
+        /// <summary> Initializes a new instance of Deployment. </summary>
+        /// <param name="location"> The location to store the deployment data. </param>
+        /// <param name="properties"> The deployment properties. </param>
+        /// <param name="tags"> Deployment tags. </param>
+        /// <returns> A new <see cref="Models.Deployment"/> instance for mocking. </returns>
+        public static Deployment Deployment(string location = null, DeploymentProperties properties = null, IDictionary<string, string> tags = null)
+        {
+            tags ??= new Dictionary<string, string>();
+
+            return new Deployment(location, properties, tags);
+        }
+
+        /// <summary> Initializes a new instance of DeploymentProperties. </summary>
+        /// <param name="template"> The template content. You use this element when you want to pass the template syntax directly in the request rather than link to an existing template. It can be a JObject or well-formed JSON string. Use either the templateLink property or the template property, but not both. </param>
+        /// <param name="parameters"> Name and value pairs that define the deployment parameters for the template. You use this element when you want to provide the parameter values directly in the request rather than link to an existing parameter file. Use either the parametersLink property or the parameters property, but not both. It can be a JObject or a well formed JSON string. </param>
+        /// <param name="mode"> The mode that is used to deploy resources. This value can be either Incremental or Complete. In Incremental mode, resources are deployed without deleting existing resources that are not included in the template. In Complete mode, resources are deployed and existing resources in the resource group that are not included in the template are deleted. Be careful when using Complete mode as you may unintentionally delete resources. </param>
+        /// <returns> A new <see cref="Models.DeploymentProperties"/> instance for mocking. </returns>
+        public static DeploymentProperties DeploymentProperties(BinaryData template = null, BinaryData parameters = null, DeploymentMode mode = default)
+        {
+            return new DeploymentProperties(template, parameters, mode);
+        }
+
         /// <summary> Initializes a new instance of DeploymentExtendedData. </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
@@ -89,6 +111,26 @@ namespace MgmtScopeResource.Models
         public static DeploymentExportResult DeploymentExportResult(BinaryData template = null)
         {
             return new DeploymentExportResult(template);
+        }
+
+        /// <summary> Initializes a new instance of DeploymentWhatIf. </summary>
+        /// <param name="location"> The location to store the deployment data. </param>
+        /// <param name="properties"> The deployment properties. </param>
+        /// <returns> A new <see cref="Models.DeploymentWhatIf"/> instance for mocking. </returns>
+        public static DeploymentWhatIf DeploymentWhatIf(string location = null, DeploymentWhatIfProperties properties = null)
+        {
+            return new DeploymentWhatIf(location, properties);
+        }
+
+        /// <summary> Initializes a new instance of DeploymentWhatIfProperties. </summary>
+        /// <param name="template"> The template content. You use this element when you want to pass the template syntax directly in the request rather than link to an existing template. It can be a JObject or well-formed JSON string. Use either the templateLink property or the template property, but not both. </param>
+        /// <param name="parameters"> Name and value pairs that define the deployment parameters for the template. You use this element when you want to provide the parameter values directly in the request rather than link to an existing parameter file. Use either the parametersLink property or the parameters property, but not both. It can be a JObject or a well formed JSON string. </param>
+        /// <param name="mode"> The mode that is used to deploy resources. This value can be either Incremental or Complete. In Incremental mode, resources are deployed without deleting existing resources that are not included in the template. In Complete mode, resources are deployed and existing resources in the resource group that are not included in the template are deleted. Be careful when using Complete mode as you may unintentionally delete resources. </param>
+        /// <param name="whatIfResultFormat"> Optional What-If operation settings. </param>
+        /// <returns> A new <see cref="Models.DeploymentWhatIfProperties"/> instance for mocking. </returns>
+        public static DeploymentWhatIfProperties DeploymentWhatIfProperties(BinaryData template = null, BinaryData parameters = null, DeploymentMode mode = default, WhatIfResultFormat? whatIfResultFormat = null)
+        {
+            return new DeploymentWhatIfProperties(template, parameters, mode, whatIfResultFormat != null ? new DeploymentWhatIfSettings(whatIfResultFormat) : null);
         }
 
         /// <summary> Initializes a new instance of WhatIfOperationResult. </summary>

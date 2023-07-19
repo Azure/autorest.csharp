@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
@@ -12,10 +13,50 @@ using Azure.Core.Serialization;
 
 namespace Azure.AI.FormRecognizer.Models
 {
-    public partial class ReadResult
+    public partial class ReadResult : IUtf8JsonSerializable, IJsonModelSerializable
     {
-        internal static ReadResult DeserializeReadResult(JsonElement element, SerializableOptions options = default)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModelSerializable)this).Serialize(writer, ModelSerializerOptions.AzureServiceDefault);
+
+        void IJsonModelSerializable.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
+            writer.WriteStartObject();
+            writer.WritePropertyName("page"u8);
+            writer.WriteNumberValue(Page);
+            writer.WritePropertyName("angle"u8);
+            writer.WriteNumberValue(Angle);
+            writer.WritePropertyName("width"u8);
+            writer.WriteNumberValue(Width);
+            writer.WritePropertyName("height"u8);
+            writer.WriteNumberValue(Height);
+            writer.WritePropertyName("unit"u8);
+            writer.WriteStringValue(Unit.ToSerialString());
+            if (Optional.IsDefined(Language))
+            {
+                writer.WritePropertyName("language"u8);
+                writer.WriteStringValue(Language.Value.ToString());
+            }
+            if (Optional.IsCollectionDefined(Lines))
+            {
+                writer.WritePropertyName("lines"u8);
+                writer.WriteStartArray();
+                foreach (var item in Lines)
+                {
+                    writer.WriteObjectValue(item);
+                }
+                writer.WriteEndArray();
+            }
+            writer.WriteEndObject();
+        }
+
+        object IModelSerializable.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            using var doc = JsonDocument.Parse(data);
+            return DeserializeReadResult(doc.RootElement, options);
+        }
+
+        internal static ReadResult DeserializeReadResult(JsonElement element, ModelSerializerOptions options = default)
+        {
+            options ??= ModelSerializerOptions.AzureServiceDefault;
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
@@ -79,6 +120,12 @@ namespace Azure.AI.FormRecognizer.Models
                 }
             }
             return new ReadResult(page, angle, width, height, unit, Optional.ToNullable(language), Optional.ToList(lines));
+        }
+
+        object IJsonModelSerializable.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        {
+            using var doc = JsonDocument.ParseValue(ref reader);
+            return DeserializeReadResult(doc.RootElement, options);
         }
     }
 }

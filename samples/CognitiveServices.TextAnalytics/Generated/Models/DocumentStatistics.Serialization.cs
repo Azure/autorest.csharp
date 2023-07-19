@@ -5,16 +5,36 @@
 
 #nullable disable
 
+using System;
 using System.Text.Json;
 using Azure.Core;
 using Azure.Core.Serialization;
 
 namespace CognitiveServices.TextAnalytics.Models
 {
-    public partial class DocumentStatistics
+    public partial class DocumentStatistics : IUtf8JsonSerializable, IJsonModelSerializable
     {
-        internal static DocumentStatistics DeserializeDocumentStatistics(JsonElement element, SerializableOptions options = default)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModelSerializable)this).Serialize(writer, ModelSerializerOptions.AzureServiceDefault);
+
+        void IJsonModelSerializable.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
+            writer.WriteStartObject();
+            writer.WritePropertyName("charactersCount"u8);
+            writer.WriteNumberValue(CharactersCount);
+            writer.WritePropertyName("transactionsCount"u8);
+            writer.WriteNumberValue(TransactionsCount);
+            writer.WriteEndObject();
+        }
+
+        object IModelSerializable.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            using var doc = JsonDocument.Parse(data);
+            return DeserializeDocumentStatistics(doc.RootElement, options);
+        }
+
+        internal static DocumentStatistics DeserializeDocumentStatistics(JsonElement element, ModelSerializerOptions options = default)
+        {
+            options ??= ModelSerializerOptions.AzureServiceDefault;
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
@@ -35,6 +55,12 @@ namespace CognitiveServices.TextAnalytics.Models
                 }
             }
             return new DocumentStatistics(charactersCount, transactionsCount);
+        }
+
+        object IJsonModelSerializable.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        {
+            using var doc = JsonDocument.ParseValue(ref reader);
+            return DeserializeDocumentStatistics(doc.RootElement, options);
         }
     }
 }

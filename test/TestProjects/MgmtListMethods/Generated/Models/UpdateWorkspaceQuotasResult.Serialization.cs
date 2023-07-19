@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
@@ -12,10 +13,25 @@ using Azure.Core.Serialization;
 
 namespace MgmtListMethods.Models
 {
-    internal partial class UpdateWorkspaceQuotasResult
+    internal partial class UpdateWorkspaceQuotasResult : IUtf8JsonSerializable, IJsonModelSerializable
     {
-        internal static UpdateWorkspaceQuotasResult DeserializeUpdateWorkspaceQuotasResult(JsonElement element, SerializableOptions options = default)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModelSerializable)this).Serialize(writer, ModelSerializerOptions.AzureServiceDefault);
+
+        void IJsonModelSerializable.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
+            writer.WriteStartObject();
+            writer.WriteEndObject();
+        }
+
+        object IModelSerializable.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            using var doc = JsonDocument.Parse(data);
+            return DeserializeUpdateWorkspaceQuotasResult(doc.RootElement, options);
+        }
+
+        internal static UpdateWorkspaceQuotasResult DeserializeUpdateWorkspaceQuotasResult(JsonElement element, ModelSerializerOptions options = default)
+        {
+            options ??= ModelSerializerOptions.AzureServiceDefault;
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
@@ -45,6 +61,12 @@ namespace MgmtListMethods.Models
                 }
             }
             return new UpdateWorkspaceQuotasResult(Optional.ToList(value), nextLink.Value);
+        }
+
+        object IJsonModelSerializable.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        {
+            using var doc = JsonDocument.ParseValue(ref reader);
+            return DeserializeUpdateWorkspaceQuotasResult(doc.RootElement, options);
         }
     }
 }

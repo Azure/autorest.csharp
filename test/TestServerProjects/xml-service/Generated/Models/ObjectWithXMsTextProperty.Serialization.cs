@@ -5,14 +5,39 @@
 
 #nullable disable
 
+using System;
+using System.Xml;
 using System.Xml.Linq;
+using Azure.Core;
+using Azure.Core.Serialization;
 
 namespace xml_service.Models
 {
-    public partial class ObjectWithXMsTextProperty
+    public partial class ObjectWithXMsTextProperty : IXmlSerializable, IXmlModelSerializable
     {
-        internal static ObjectWithXMsTextProperty DeserializeObjectWithXMsTextProperty(XElement element)
+        void IXmlSerializable.Write(XmlWriter writer, string nameHint) => ((IXmlModelSerializable)this).Serialize(writer, ModelSerializerOptions.AzureServiceDefault);
+
+        void IXmlModelSerializable.Serialize(XmlWriter writer, ModelSerializerOptions options)
         {
+            writer.WriteStartElement("Data");
+            if (Optional.IsDefined(Language))
+            {
+                writer.WriteStartAttribute("language");
+                writer.WriteValue(Language);
+                writer.WriteEndAttribute();
+            }
+            writer.WriteValue(Content);
+            writer.WriteEndElement();
+        }
+
+        object IModelSerializable.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            return DeserializeObjectWithXMsTextProperty(XElement.Load(data.ToStream()), options);
+        }
+
+        internal static ObjectWithXMsTextProperty DeserializeObjectWithXMsTextProperty(XElement element, ModelSerializerOptions options = default)
+        {
+            options ??= ModelSerializerOptions.AzureServiceDefault;
             string language = default;
             string content = default;
             if (element.Attribute("language") is XAttribute languageAttribute)

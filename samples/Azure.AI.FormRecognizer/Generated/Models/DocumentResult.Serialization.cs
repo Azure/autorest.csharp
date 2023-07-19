@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
@@ -12,10 +13,42 @@ using Azure.Core.Serialization;
 
 namespace Azure.AI.FormRecognizer.Models
 {
-    public partial class DocumentResult
+    public partial class DocumentResult : IUtf8JsonSerializable, IJsonModelSerializable
     {
-        internal static DocumentResult DeserializeDocumentResult(JsonElement element, SerializableOptions options = default)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModelSerializable)this).Serialize(writer, ModelSerializerOptions.AzureServiceDefault);
+
+        void IJsonModelSerializable.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
+            writer.WriteStartObject();
+            writer.WritePropertyName("docType"u8);
+            writer.WriteStringValue(DocType);
+            writer.WritePropertyName("pageRange"u8);
+            writer.WriteStartArray();
+            foreach (var item in PageRange)
+            {
+                writer.WriteNumberValue(item);
+            }
+            writer.WriteEndArray();
+            writer.WritePropertyName("fields"u8);
+            writer.WriteStartObject();
+            foreach (var item in Fields)
+            {
+                writer.WritePropertyName(item.Key);
+                writer.WriteObjectValue(item.Value);
+            }
+            writer.WriteEndObject();
+            writer.WriteEndObject();
+        }
+
+        object IModelSerializable.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            using var doc = JsonDocument.Parse(data);
+            return DeserializeDocumentResult(doc.RootElement, options);
+        }
+
+        internal static DocumentResult DeserializeDocumentResult(JsonElement element, ModelSerializerOptions options = default)
+        {
+            options ??= ModelSerializerOptions.AzureServiceDefault;
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
@@ -52,6 +85,12 @@ namespace Azure.AI.FormRecognizer.Models
                 }
             }
             return new DocumentResult(docType, pageRange, fields);
+        }
+
+        object IJsonModelSerializable.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        {
+            using var doc = JsonDocument.ParseValue(ref reader);
+            return DeserializeDocumentResult(doc.RootElement, options);
         }
     }
 }

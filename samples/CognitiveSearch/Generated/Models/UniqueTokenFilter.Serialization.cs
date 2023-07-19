@@ -5,17 +5,18 @@
 
 #nullable disable
 
+using System;
 using System.Text.Json;
 using Azure.Core;
 using Azure.Core.Serialization;
 
 namespace CognitiveSearch.Models
 {
-    public partial class UniqueTokenFilter : IUtf8JsonSerializable, IModelSerializable
+    public partial class UniqueTokenFilter : IUtf8JsonSerializable, IJsonModelSerializable
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelSerializable)this).Serialize(writer, new SerializableOptions());
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModelSerializable)this).Serialize(writer, ModelSerializerOptions.AzureServiceDefault);
 
-        void IModelSerializable.Serialize(Utf8JsonWriter writer, SerializableOptions options)
+        void IJsonModelSerializable.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
             writer.WriteStartObject();
             if (Optional.IsDefined(OnlyOnSamePosition))
@@ -30,8 +31,15 @@ namespace CognitiveSearch.Models
             writer.WriteEndObject();
         }
 
-        internal static UniqueTokenFilter DeserializeUniqueTokenFilter(JsonElement element, SerializableOptions options = default)
+        object IModelSerializable.Deserialize(BinaryData data, ModelSerializerOptions options)
         {
+            using var doc = JsonDocument.Parse(data);
+            return DeserializeUniqueTokenFilter(doc.RootElement, options);
+        }
+
+        internal static UniqueTokenFilter DeserializeUniqueTokenFilter(JsonElement element, ModelSerializerOptions options = default)
+        {
+            options ??= ModelSerializerOptions.AzureServiceDefault;
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
@@ -62,6 +70,12 @@ namespace CognitiveSearch.Models
                 }
             }
             return new UniqueTokenFilter(odataType, name, Optional.ToNullable(onlyOnSamePosition));
+        }
+
+        object IJsonModelSerializable.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        {
+            using var doc = JsonDocument.ParseValue(ref reader);
+            return DeserializeUniqueTokenFilter(doc.RootElement, options);
         }
     }
 }

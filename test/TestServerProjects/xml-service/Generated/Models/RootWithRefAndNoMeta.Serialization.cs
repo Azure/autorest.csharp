@@ -5,17 +5,21 @@
 
 #nullable disable
 
+using System;
 using System.Xml;
 using System.Xml.Linq;
 using Azure.Core;
+using Azure.Core.Serialization;
 
 namespace xml_service.Models
 {
-    public partial class RootWithRefAndNoMeta : IXmlSerializable
+    public partial class RootWithRefAndNoMeta : IXmlSerializable, IXmlModelSerializable
     {
-        void IXmlSerializable.Write(XmlWriter writer, string nameHint)
+        void IXmlSerializable.Write(XmlWriter writer, string nameHint) => ((IXmlModelSerializable)this).Serialize(writer, ModelSerializerOptions.AzureServiceDefault);
+
+        void IXmlModelSerializable.Serialize(XmlWriter writer, ModelSerializerOptions options)
         {
-            writer.WriteStartElement(nameHint ?? "RootWithRefAndNoMeta");
+            writer.WriteStartElement("RootWithRefAndNoMeta");
             if (Optional.IsDefined(RefToModel))
             {
                 writer.WriteObjectValue(RefToModel, "RefToModel");
@@ -29,8 +33,14 @@ namespace xml_service.Models
             writer.WriteEndElement();
         }
 
-        internal static RootWithRefAndNoMeta DeserializeRootWithRefAndNoMeta(XElement element)
+        object IModelSerializable.Deserialize(BinaryData data, ModelSerializerOptions options)
         {
+            return DeserializeRootWithRefAndNoMeta(XElement.Load(data.ToStream()), options);
+        }
+
+        internal static RootWithRefAndNoMeta DeserializeRootWithRefAndNoMeta(XElement element, ModelSerializerOptions options = default)
+        {
+            options ??= ModelSerializerOptions.AzureServiceDefault;
             ComplexTypeNoMeta refToModel = default;
             string something = default;
             if (element.Element("RefToModel") is XElement refToModelElement)

@@ -12,10 +12,31 @@ using Azure.Core.Serialization;
 
 namespace Azure.AI.FormRecognizer.Models
 {
-    public partial class ModelsSummary
+    public partial class ModelsSummary : IUtf8JsonSerializable, IJsonModelSerializable
     {
-        internal static ModelsSummary DeserializeModelsSummary(JsonElement element, SerializableOptions options = default)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModelSerializable)this).Serialize(writer, ModelSerializerOptions.AzureServiceDefault);
+
+        void IJsonModelSerializable.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
+            writer.WriteStartObject();
+            writer.WritePropertyName("count"u8);
+            writer.WriteNumberValue(Count);
+            writer.WritePropertyName("limit"u8);
+            writer.WriteNumberValue(Limit);
+            writer.WritePropertyName("lastUpdatedDateTime"u8);
+            writer.WriteStringValue(LastUpdatedDateTime, "O");
+            writer.WriteEndObject();
+        }
+
+        object IModelSerializable.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            using var doc = JsonDocument.Parse(data);
+            return DeserializeModelsSummary(doc.RootElement, options);
+        }
+
+        internal static ModelsSummary DeserializeModelsSummary(JsonElement element, ModelSerializerOptions options = default)
+        {
+            options ??= ModelSerializerOptions.AzureServiceDefault;
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
@@ -42,6 +63,12 @@ namespace Azure.AI.FormRecognizer.Models
                 }
             }
             return new ModelsSummary(count, limit, lastUpdatedDateTime);
+        }
+
+        object IJsonModelSerializable.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        {
+            using var doc = JsonDocument.ParseValue(ref reader);
+            return DeserializeModelsSummary(doc.RootElement, options);
         }
     }
 }

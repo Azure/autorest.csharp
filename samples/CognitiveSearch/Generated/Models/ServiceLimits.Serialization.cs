@@ -5,16 +5,80 @@
 
 #nullable disable
 
+using System;
 using System.Text.Json;
 using Azure.Core;
 using Azure.Core.Serialization;
 
 namespace CognitiveSearch.Models
 {
-    public partial class ServiceLimits
+    public partial class ServiceLimits : IUtf8JsonSerializable, IJsonModelSerializable
     {
-        internal static ServiceLimits DeserializeServiceLimits(JsonElement element, SerializableOptions options = default)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModelSerializable)this).Serialize(writer, ModelSerializerOptions.AzureServiceDefault);
+
+        void IJsonModelSerializable.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
+            writer.WriteStartObject();
+            if (Optional.IsDefined(MaxFieldsPerIndex))
+            {
+                if (MaxFieldsPerIndex != null)
+                {
+                    writer.WritePropertyName("maxFieldsPerIndex"u8);
+                    writer.WriteNumberValue(MaxFieldsPerIndex.Value);
+                }
+                else
+                {
+                    writer.WriteNull("maxFieldsPerIndex");
+                }
+            }
+            if (Optional.IsDefined(MaxFieldNestingDepthPerIndex))
+            {
+                if (MaxFieldNestingDepthPerIndex != null)
+                {
+                    writer.WritePropertyName("maxFieldNestingDepthPerIndex"u8);
+                    writer.WriteNumberValue(MaxFieldNestingDepthPerIndex.Value);
+                }
+                else
+                {
+                    writer.WriteNull("maxFieldNestingDepthPerIndex");
+                }
+            }
+            if (Optional.IsDefined(MaxComplexCollectionFieldsPerIndex))
+            {
+                if (MaxComplexCollectionFieldsPerIndex != null)
+                {
+                    writer.WritePropertyName("maxComplexCollectionFieldsPerIndex"u8);
+                    writer.WriteNumberValue(MaxComplexCollectionFieldsPerIndex.Value);
+                }
+                else
+                {
+                    writer.WriteNull("maxComplexCollectionFieldsPerIndex");
+                }
+            }
+            if (Optional.IsDefined(MaxComplexObjectsInCollectionsPerDocument))
+            {
+                if (MaxComplexObjectsInCollectionsPerDocument != null)
+                {
+                    writer.WritePropertyName("maxComplexObjectsInCollectionsPerDocument"u8);
+                    writer.WriteNumberValue(MaxComplexObjectsInCollectionsPerDocument.Value);
+                }
+                else
+                {
+                    writer.WriteNull("maxComplexObjectsInCollectionsPerDocument");
+                }
+            }
+            writer.WriteEndObject();
+        }
+
+        object IModelSerializable.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            using var doc = JsonDocument.Parse(data);
+            return DeserializeServiceLimits(doc.RootElement, options);
+        }
+
+        internal static ServiceLimits DeserializeServiceLimits(JsonElement element, ModelSerializerOptions options = default)
+        {
+            options ??= ModelSerializerOptions.AzureServiceDefault;
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
@@ -67,6 +131,12 @@ namespace CognitiveSearch.Models
                 }
             }
             return new ServiceLimits(Optional.ToNullable(maxFieldsPerIndex), Optional.ToNullable(maxFieldNestingDepthPerIndex), Optional.ToNullable(maxComplexCollectionFieldsPerIndex), Optional.ToNullable(maxComplexObjectsInCollectionsPerDocument));
+        }
+
+        object IJsonModelSerializable.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        {
+            using var doc = JsonDocument.ParseValue(ref reader);
+            return DeserializeServiceLimits(doc.RootElement, options);
         }
     }
 }

@@ -12,10 +12,35 @@ using Azure.Core.Serialization;
 
 namespace Azure.ResourceManager.Storage.Models
 {
-    public partial class UpdateHistoryProperty
+    public partial class UpdateHistoryProperty : IUtf8JsonSerializable, IJsonModelSerializable
     {
-        internal static UpdateHistoryProperty DeserializeUpdateHistoryProperty(JsonElement element, SerializableOptions options = default)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModelSerializable)this).Serialize(writer, ModelSerializerOptions.AzureServiceDefault);
+
+        void IJsonModelSerializable.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
+            writer.WriteStartObject();
+            if (Optional.IsDefined(AllowProtectedAppendWrites))
+            {
+                writer.WritePropertyName("allowProtectedAppendWrites"u8);
+                writer.WriteBooleanValue(AllowProtectedAppendWrites.Value);
+            }
+            if (Optional.IsDefined(AllowProtectedAppendWritesAll))
+            {
+                writer.WritePropertyName("allowProtectedAppendWritesAll"u8);
+                writer.WriteBooleanValue(AllowProtectedAppendWritesAll.Value);
+            }
+            writer.WriteEndObject();
+        }
+
+        object IModelSerializable.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            using var doc = JsonDocument.Parse(data);
+            return DeserializeUpdateHistoryProperty(doc.RootElement, options);
+        }
+
+        internal static UpdateHistoryProperty DeserializeUpdateHistoryProperty(JsonElement element, ModelSerializerOptions options = default)
+        {
+            options ??= ModelSerializerOptions.AzureServiceDefault;
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
@@ -96,6 +121,12 @@ namespace Azure.ResourceManager.Storage.Models
                 }
             }
             return new UpdateHistoryProperty(Optional.ToNullable(update), Optional.ToNullable(immutabilityPeriodSinceCreationInDays), Optional.ToNullable(timestamp), objectIdentifier.Value, Optional.ToNullable(tenantId), upn.Value, Optional.ToNullable(allowProtectedAppendWrites), Optional.ToNullable(allowProtectedAppendWritesAll));
+        }
+
+        object IJsonModelSerializable.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        {
+            using var doc = JsonDocument.ParseValue(ref reader);
+            return DeserializeUpdateHistoryProperty(doc.RootElement, options);
         }
     }
 }

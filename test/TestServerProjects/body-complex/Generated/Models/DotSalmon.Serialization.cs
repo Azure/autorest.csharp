@@ -5,16 +5,49 @@
 
 #nullable disable
 
+using System;
 using System.Text.Json;
 using Azure.Core;
 using Azure.Core.Serialization;
 
 namespace body_complex.Models
 {
-    public partial class DotSalmon
+    public partial class DotSalmon : IUtf8JsonSerializable, IJsonModelSerializable
     {
-        internal static DotSalmon DeserializeDotSalmon(JsonElement element, SerializableOptions options = default)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModelSerializable)this).Serialize(writer, ModelSerializerOptions.AzureServiceDefault);
+
+        void IJsonModelSerializable.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
+            writer.WriteStartObject();
+            if (Optional.IsDefined(Location))
+            {
+                writer.WritePropertyName("location"u8);
+                writer.WriteStringValue(Location);
+            }
+            if (Optional.IsDefined(Iswild))
+            {
+                writer.WritePropertyName("iswild"u8);
+                writer.WriteBooleanValue(Iswild.Value);
+            }
+            writer.WritePropertyName("fish.type"u8);
+            writer.WriteStringValue(FishType);
+            if (Optional.IsDefined(Species))
+            {
+                writer.WritePropertyName("species"u8);
+                writer.WriteStringValue(Species);
+            }
+            writer.WriteEndObject();
+        }
+
+        object IModelSerializable.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            using var doc = JsonDocument.Parse(data);
+            return DeserializeDotSalmon(doc.RootElement, options);
+        }
+
+        internal static DotSalmon DeserializeDotSalmon(JsonElement element, ModelSerializerOptions options = default)
+        {
+            options ??= ModelSerializerOptions.AzureServiceDefault;
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
@@ -51,6 +84,12 @@ namespace body_complex.Models
                 }
             }
             return new DotSalmon(fishType, species.Value, location.Value, Optional.ToNullable(iswild));
+        }
+
+        object IJsonModelSerializable.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        {
+            using var doc = JsonDocument.ParseValue(ref reader);
+            return DeserializeDotSalmon(doc.RootElement, options);
         }
     }
 }

@@ -5,17 +5,18 @@
 
 #nullable disable
 
+using System;
 using System.Text.Json;
 using Azure.Core;
 using Azure.Core.Serialization;
 
 namespace Azure.ResourceManager.Storage.Models
 {
-    public partial class AccountSasContent : IUtf8JsonSerializable, IModelSerializable
+    public partial class AccountSasContent : IUtf8JsonSerializable, IJsonModelSerializable
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelSerializable)this).Serialize(writer, new SerializableOptions());
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModelSerializable)this).Serialize(writer, ModelSerializerOptions.AzureServiceDefault);
 
-        void IModelSerializable.Serialize(Utf8JsonWriter writer, SerializableOptions options)
+        void IJsonModelSerializable.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
             writer.WriteStartObject();
             writer.WritePropertyName("signedServices"u8);
@@ -47,6 +48,87 @@ namespace Azure.ResourceManager.Storage.Models
                 writer.WriteStringValue(KeyToSign);
             }
             writer.WriteEndObject();
+        }
+
+        object IModelSerializable.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            using var doc = JsonDocument.Parse(data);
+            return DeserializeAccountSasContent(doc.RootElement, options);
+        }
+
+        internal static AccountSasContent DeserializeAccountSasContent(JsonElement element, ModelSerializerOptions options = default)
+        {
+            options ??= ModelSerializerOptions.AzureServiceDefault;
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
+            Service signedServices = default;
+            SignedResourceType signedResourceTypes = default;
+            Permission signedPermission = default;
+            Optional<string> signedIp = default;
+            Optional<HttpProtocol> signedProtocol = default;
+            Optional<DateTimeOffset> signedStart = default;
+            DateTimeOffset signedExpiry = default;
+            Optional<string> keyToSign = default;
+            foreach (var property in element.EnumerateObject())
+            {
+                if (property.NameEquals("signedServices"u8))
+                {
+                    signedServices = new Service(property.Value.GetString());
+                    continue;
+                }
+                if (property.NameEquals("signedResourceTypes"u8))
+                {
+                    signedResourceTypes = new SignedResourceType(property.Value.GetString());
+                    continue;
+                }
+                if (property.NameEquals("signedPermission"u8))
+                {
+                    signedPermission = new Permission(property.Value.GetString());
+                    continue;
+                }
+                if (property.NameEquals("signedIp"u8))
+                {
+                    signedIp = property.Value.GetString();
+                    continue;
+                }
+                if (property.NameEquals("signedProtocol"u8))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        continue;
+                    }
+                    signedProtocol = property.Value.GetString().ToHttpProtocol();
+                    continue;
+                }
+                if (property.NameEquals("signedStart"u8))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        continue;
+                    }
+                    signedStart = property.Value.GetDateTimeOffset("O");
+                    continue;
+                }
+                if (property.NameEquals("signedExpiry"u8))
+                {
+                    signedExpiry = property.Value.GetDateTimeOffset("O");
+                    continue;
+                }
+                if (property.NameEquals("keyToSign"u8))
+                {
+                    keyToSign = property.Value.GetString();
+                    continue;
+                }
+            }
+            return new AccountSasContent(signedServices, signedResourceTypes, signedPermission, signedIp.Value, Optional.ToNullable(signedProtocol), Optional.ToNullable(signedStart), signedExpiry, keyToSign.Value);
+        }
+
+        object IJsonModelSerializable.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        {
+            using var doc = JsonDocument.ParseValue(ref reader);
+            return DeserializeAccountSasContent(doc.RootElement, options);
         }
     }
 }

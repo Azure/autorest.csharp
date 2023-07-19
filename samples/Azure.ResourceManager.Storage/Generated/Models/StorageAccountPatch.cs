@@ -20,6 +20,53 @@ namespace Azure.ResourceManager.Storage.Models
             Tags = new ChangeTrackingDictionary<string, string>();
         }
 
+        /// <summary> Initializes a new instance of StorageAccountPatch. </summary>
+        /// <param name="sku"> Gets or sets the SKU name. Note that the SKU name cannot be updated to Standard_ZRS, Premium_LRS or Premium_ZRS, nor can accounts of those SKU names be updated to any other value. </param>
+        /// <param name="tags"> Gets or sets a list of key value pairs that describe the resource. These tags can be used in viewing and grouping this resource (across resource groups). A maximum of 15 tags can be provided for a resource. Each tag must have a key no greater in length than 128 characters and a value no greater in length than 256 characters. </param>
+        /// <param name="identity"> The identity of the resource. </param>
+        /// <param name="kind"> Optional. Indicates the type of storage account. Currently only StorageV2 value supported by server. </param>
+        /// <param name="customDomain"> Custom domain assigned to the storage account by the user. Name is the CNAME source. Only one custom domain is supported per storage account at this time. To clear the existing custom domain, use an empty string for the custom domain name property. </param>
+        /// <param name="encryption"> Provides the encryption settings on the account. The default setting is unencrypted. </param>
+        /// <param name="sasPolicy"> SasPolicy assigned to the storage account. </param>
+        /// <param name="keyPolicy"> KeyPolicy assigned to the storage account. </param>
+        /// <param name="accessTier"> Required for storage accounts where kind = BlobStorage. The access tier used for billing. </param>
+        /// <param name="azureFilesIdentityBasedAuthentication"> Provides the identity based authentication settings for Azure Files. </param>
+        /// <param name="enableHttpsTrafficOnly"> Allows https traffic only to storage service if sets to true. </param>
+        /// <param name="networkRuleSet"> Network rule set. </param>
+        /// <param name="largeFileSharesState"> Allow large file shares if sets to Enabled. It cannot be disabled once it is enabled. </param>
+        /// <param name="routingPreference"> Maintains information about the network routing choice opted by the user for data transfer. </param>
+        /// <param name="allowBlobPublicAccess"> Allow or disallow public access to all blobs or containers in the storage account. The default interpretation is true for this property. </param>
+        /// <param name="minimumTlsVersion"> Set the minimum TLS version to be permitted on requests to storage. The default interpretation is TLS 1.0 for this property. </param>
+        /// <param name="allowSharedKeyAccess"> Indicates whether the storage account permits requests to be authorized with the account access key via Shared Key. If false, then all requests, including shared access signatures, must be authorized with Azure Active Directory (Azure AD). The default value is null, which is equivalent to true. </param>
+        /// <param name="allowCrossTenantReplication"> Allow or disallow cross AAD tenant object replication. The default interpretation is true for this property. </param>
+        /// <param name="defaultToOAuthAuthentication"> A boolean flag which indicates whether the default authentication is OAuth or not. The default interpretation is false for this property. </param>
+        /// <param name="publicNetworkAccess"> Allow or disallow public network access to Storage Account. Value is optional but if passed in, must be 'Enabled' or 'Disabled'. </param>
+        /// <param name="immutableStorageWithVersioning"> The property is immutable and can only be set to true at the account creation time. When set to true, it enables object level immutability for all the containers in the account by default. </param>
+        internal StorageAccountPatch(StorageSku sku, IDictionary<string, string> tags, ManagedServiceIdentity identity, StorageKind? kind, CustomDomain customDomain, Encryption encryption, SasPolicy sasPolicy, KeyPolicy keyPolicy, AccessTier? accessTier, AzureFilesIdentityBasedAuthentication azureFilesIdentityBasedAuthentication, bool? enableHttpsTrafficOnly, NetworkRuleSet networkRuleSet, LargeFileSharesState? largeFileSharesState, RoutingPreference routingPreference, bool? allowBlobPublicAccess, MinimumTlsVersion? minimumTlsVersion, bool? allowSharedKeyAccess, bool? allowCrossTenantReplication, bool? defaultToOAuthAuthentication, PublicNetworkAccess? publicNetworkAccess, ImmutableStorageAccount immutableStorageWithVersioning)
+        {
+            Sku = sku;
+            Tags = tags;
+            Identity = identity;
+            Kind = kind;
+            CustomDomain = customDomain;
+            Encryption = encryption;
+            SasPolicy = sasPolicy;
+            KeyPolicy = keyPolicy;
+            AccessTier = accessTier;
+            AzureFilesIdentityBasedAuthentication = azureFilesIdentityBasedAuthentication;
+            EnableHttpsTrafficOnly = enableHttpsTrafficOnly;
+            NetworkRuleSet = networkRuleSet;
+            LargeFileSharesState = largeFileSharesState;
+            RoutingPreference = routingPreference;
+            AllowBlobPublicAccess = allowBlobPublicAccess;
+            MinimumTlsVersion = minimumTlsVersion;
+            AllowSharedKeyAccess = allowSharedKeyAccess;
+            AllowCrossTenantReplication = allowCrossTenantReplication;
+            DefaultToOAuthAuthentication = defaultToOAuthAuthentication;
+            PublicNetworkAccess = publicNetworkAccess;
+            ImmutableStorageWithVersioning = immutableStorageWithVersioning;
+        }
+
         /// <summary> Gets or sets the SKU name. Note that the SKU name cannot be updated to Standard_ZRS, Premium_LRS or Premium_ZRS, nor can accounts of those SKU names be updated to any other value. </summary>
         public StorageSku Sku { get; set; }
         /// <summary> Gets or sets a list of key value pairs that describe the resource. These tags can be used in viewing and grouping this resource (across resource groups). A maximum of 15 tags can be provided for a resource. Each tag must have a key no greater in length than 128 characters and a value no greater in length than 256 characters. </summary>

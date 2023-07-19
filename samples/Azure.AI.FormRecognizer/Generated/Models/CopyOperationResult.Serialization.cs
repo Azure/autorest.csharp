@@ -12,10 +12,36 @@ using Azure.Core.Serialization;
 
 namespace Azure.AI.FormRecognizer.Models
 {
-    public partial class CopyOperationResult
+    public partial class CopyOperationResult : IUtf8JsonSerializable, IJsonModelSerializable
     {
-        internal static CopyOperationResult DeserializeCopyOperationResult(JsonElement element, SerializableOptions options = default)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModelSerializable)this).Serialize(writer, ModelSerializerOptions.AzureServiceDefault);
+
+        void IJsonModelSerializable.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
+            writer.WriteStartObject();
+            writer.WritePropertyName("status"u8);
+            writer.WriteStringValue(Status.ToSerialString());
+            writer.WritePropertyName("createdDateTime"u8);
+            writer.WriteStringValue(CreatedDateTime, "O");
+            writer.WritePropertyName("lastUpdatedDateTime"u8);
+            writer.WriteStringValue(LastUpdatedDateTime, "O");
+            if (Optional.IsDefined(CopyResult))
+            {
+                writer.WritePropertyName("copyResult"u8);
+                writer.WriteObjectValue(CopyResult);
+            }
+            writer.WriteEndObject();
+        }
+
+        object IModelSerializable.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            using var doc = JsonDocument.Parse(data);
+            return DeserializeCopyOperationResult(doc.RootElement, options);
+        }
+
+        internal static CopyOperationResult DeserializeCopyOperationResult(JsonElement element, ModelSerializerOptions options = default)
+        {
+            options ??= ModelSerializerOptions.AzureServiceDefault;
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
@@ -52,6 +78,12 @@ namespace Azure.AI.FormRecognizer.Models
                 }
             }
             return new CopyOperationResult(status, createdDateTime, lastUpdatedDateTime, copyResult.Value);
+        }
+
+        object IJsonModelSerializable.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        {
+            using var doc = JsonDocument.ParseValue(ref reader);
+            return DeserializeCopyOperationResult(doc.RootElement, options);
         }
     }
 }

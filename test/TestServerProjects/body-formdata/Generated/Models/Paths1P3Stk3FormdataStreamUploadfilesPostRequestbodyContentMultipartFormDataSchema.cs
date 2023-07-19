@@ -26,6 +26,13 @@ namespace body_formdata.Models
             FileContent = fileContent.ToList();
         }
 
+        /// <summary> Initializes a new instance of Paths1P3Stk3FormdataStreamUploadfilesPostRequestbodyContentMultipartFormDataSchema. </summary>
+        /// <param name="fileContent"> Files to upload. </param>
+        internal Paths1P3Stk3FormdataStreamUploadfilesPostRequestbodyContentMultipartFormDataSchema(IReadOnlyList<Stream> fileContent)
+        {
+            FileContent = fileContent;
+        }
+
         /// <summary> Files to upload. </summary>
         public IReadOnlyList<Stream> FileContent { get; }
     }

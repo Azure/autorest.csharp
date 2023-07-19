@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
@@ -13,10 +14,40 @@ using Azure.ResourceManager.Resources.Models;
 
 namespace MgmtExpandResourceTypes.Models
 {
-    public partial class DnsResourceReference
+    public partial class DnsResourceReference : IUtf8JsonSerializable, IJsonModelSerializable
     {
-        internal static DnsResourceReference DeserializeDnsResourceReference(JsonElement element, SerializableOptions options = default)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModelSerializable)this).Serialize(writer, ModelSerializerOptions.AzureServiceDefault);
+
+        void IJsonModelSerializable.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
+            writer.WriteStartObject();
+            if (Optional.IsCollectionDefined(DnsResources))
+            {
+                writer.WritePropertyName("dnsResources"u8);
+                writer.WriteStartArray();
+                foreach (var item in DnsResources)
+                {
+                    JsonSerializer.Serialize(writer, item);
+                }
+                writer.WriteEndArray();
+            }
+            if (Optional.IsDefined(TargetResource))
+            {
+                writer.WritePropertyName("targetResource"u8);
+                JsonSerializer.Serialize(writer, TargetResource);
+            }
+            writer.WriteEndObject();
+        }
+
+        object IModelSerializable.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            using var doc = JsonDocument.Parse(data);
+            return DeserializeDnsResourceReference(doc.RootElement, options);
+        }
+
+        internal static DnsResourceReference DeserializeDnsResourceReference(JsonElement element, ModelSerializerOptions options = default)
+        {
+            options ??= ModelSerializerOptions.AzureServiceDefault;
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
@@ -50,6 +81,12 @@ namespace MgmtExpandResourceTypes.Models
                 }
             }
             return new DnsResourceReference(Optional.ToList(dnsResources), targetResource);
+        }
+
+        object IJsonModelSerializable.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        {
+            using var doc = JsonDocument.ParseValue(ref reader);
+            return DeserializeDnsResourceReference(doc.RootElement, options);
         }
     }
 }

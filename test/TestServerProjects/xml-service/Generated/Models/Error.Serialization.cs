@@ -5,15 +5,44 @@
 
 #nullable disable
 
+using System;
+using System.Xml;
 using System.Xml.Linq;
 using Azure.Core;
+using Azure.Core.Serialization;
 
 namespace xml_service.Models
 {
-    internal partial class Error
+    internal partial class Error : IXmlSerializable, IXmlModelSerializable
     {
-        internal static Error DeserializeError(XElement element)
+        void IXmlSerializable.Write(XmlWriter writer, string nameHint) => ((IXmlModelSerializable)this).Serialize(writer, ModelSerializerOptions.AzureServiceDefault);
+
+        void IXmlModelSerializable.Serialize(XmlWriter writer, ModelSerializerOptions options)
         {
+            writer.WriteStartElement("Error");
+            if (Optional.IsDefined(Status))
+            {
+                writer.WriteStartElement("status");
+                writer.WriteValue(Status.Value);
+                writer.WriteEndElement();
+            }
+            if (Optional.IsDefined(Message))
+            {
+                writer.WriteStartElement("message");
+                writer.WriteValue(Message);
+                writer.WriteEndElement();
+            }
+            writer.WriteEndElement();
+        }
+
+        object IModelSerializable.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            return DeserializeError(XElement.Load(data.ToStream()), options);
+        }
+
+        internal static Error DeserializeError(XElement element, ModelSerializerOptions options = default)
+        {
+            options ??= ModelSerializerOptions.AzureServiceDefault;
             int? status = default;
             string message = default;
             if (element.Element("status") is XElement statusElement)

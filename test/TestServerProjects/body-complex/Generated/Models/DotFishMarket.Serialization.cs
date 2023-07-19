@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
@@ -12,10 +13,55 @@ using Azure.Core.Serialization;
 
 namespace body_complex.Models
 {
-    public partial class DotFishMarket
+    public partial class DotFishMarket : IUtf8JsonSerializable, IJsonModelSerializable
     {
-        internal static DotFishMarket DeserializeDotFishMarket(JsonElement element, SerializableOptions options = default)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModelSerializable)this).Serialize(writer, ModelSerializerOptions.AzureServiceDefault);
+
+        void IJsonModelSerializable.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
+            writer.WriteStartObject();
+            if (Optional.IsDefined(SampleSalmon))
+            {
+                writer.WritePropertyName("sampleSalmon"u8);
+                writer.WriteObjectValue(SampleSalmon);
+            }
+            if (Optional.IsCollectionDefined(Salmons))
+            {
+                writer.WritePropertyName("salmons"u8);
+                writer.WriteStartArray();
+                foreach (var item in Salmons)
+                {
+                    writer.WriteObjectValue(item);
+                }
+                writer.WriteEndArray();
+            }
+            if (Optional.IsDefined(SampleFish))
+            {
+                writer.WritePropertyName("sampleFish"u8);
+                writer.WriteObjectValue(SampleFish);
+            }
+            if (Optional.IsCollectionDefined(Fishes))
+            {
+                writer.WritePropertyName("fishes"u8);
+                writer.WriteStartArray();
+                foreach (var item in Fishes)
+                {
+                    writer.WriteObjectValue(item);
+                }
+                writer.WriteEndArray();
+            }
+            writer.WriteEndObject();
+        }
+
+        object IModelSerializable.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            using var doc = JsonDocument.Parse(data);
+            return DeserializeDotFishMarket(doc.RootElement, options);
+        }
+
+        internal static DotFishMarket DeserializeDotFishMarket(JsonElement element, ModelSerializerOptions options = default)
+        {
+            options ??= ModelSerializerOptions.AzureServiceDefault;
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
@@ -74,6 +120,12 @@ namespace body_complex.Models
                 }
             }
             return new DotFishMarket(sampleSalmon.Value, Optional.ToList(salmons), sampleFish.Value, Optional.ToList(fishes));
+        }
+
+        object IJsonModelSerializable.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        {
+            using var doc = JsonDocument.ParseValue(ref reader);
+            return DeserializeDotFishMarket(doc.RootElement, options);
         }
     }
 }

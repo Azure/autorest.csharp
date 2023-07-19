@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Text.Json;
 using Azure;
 using Azure.Core;
@@ -12,10 +13,34 @@ using Azure.Core.Serialization;
 
 namespace ModelsTypeSpec.Models
 {
-    internal partial class UnknownBaseModelWithDiscriminator
+    internal partial class UnknownBaseModelWithDiscriminator : IUtf8JsonSerializable, IJsonModelSerializable
     {
-        internal static UnknownBaseModelWithDiscriminator DeserializeUnknownBaseModelWithDiscriminator(JsonElement element, SerializableOptions options = default)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModelSerializable)this).Serialize(writer, ModelSerializerOptions.AzureServiceDefault);
+
+        void IJsonModelSerializable.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
+            writer.WriteStartObject();
+            writer.WritePropertyName("discriminatorProperty"u8);
+            writer.WriteStringValue(DiscriminatorProperty);
+            if (Optional.IsDefined(OptionalPropertyOnBase))
+            {
+                writer.WritePropertyName("optionalPropertyOnBase"u8);
+                writer.WriteStringValue(OptionalPropertyOnBase);
+            }
+            writer.WritePropertyName("requiredPropertyOnBase"u8);
+            writer.WriteNumberValue(RequiredPropertyOnBase);
+            writer.WriteEndObject();
+        }
+
+        object IModelSerializable.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            using var doc = JsonDocument.Parse(data);
+            return DeserializeUnknownBaseModelWithDiscriminator(doc.RootElement, options);
+        }
+
+        internal static UnknownBaseModelWithDiscriminator DeserializeUnknownBaseModelWithDiscriminator(JsonElement element, ModelSerializerOptions options = default)
+        {
+            options ??= ModelSerializerOptions.AzureServiceDefault;
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
@@ -44,12 +69,26 @@ namespace ModelsTypeSpec.Models
             return new UnknownBaseModelWithDiscriminator(discriminatorProperty, optionalPropertyOnBase.Value, requiredPropertyOnBase);
         }
 
+        object IJsonModelSerializable.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        {
+            using var doc = JsonDocument.ParseValue(ref reader);
+            return DeserializeUnknownBaseModelWithDiscriminator(doc.RootElement, options);
+        }
+
         /// <summary> Deserializes the model from a raw response. </summary>
         /// <param name="response"> The response to deserialize the model from. </param>
         internal static new UnknownBaseModelWithDiscriminator FromResponse(Response response)
         {
             using var document = JsonDocument.Parse(response.Content);
             return DeserializeUnknownBaseModelWithDiscriminator(document.RootElement);
+        }
+
+        /// <summary> Convert into a Utf8JsonRequestContent. </summary>
+        internal override RequestContent ToRequestContent()
+        {
+            var content = new Utf8JsonRequestContent();
+            content.JsonWriter.WriteObjectValue(this);
+            return content;
         }
     }
 }

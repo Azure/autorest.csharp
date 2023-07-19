@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
@@ -13,11 +14,11 @@ using Azure.ResourceManager.Models;
 
 namespace MgmtListMethods
 {
-    public partial class MgmtGrpParentWithLocData : IUtf8JsonSerializable, IModelSerializable
+    public partial class MgmtGrpParentWithLocData : IUtf8JsonSerializable, IJsonModelSerializable
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelSerializable)this).Serialize(writer, new SerializableOptions());
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModelSerializable)this).Serialize(writer, ModelSerializerOptions.AzureServiceDefault);
 
-        void IModelSerializable.Serialize(Utf8JsonWriter writer, SerializableOptions options)
+        void IJsonModelSerializable.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
             writer.WriteStartObject();
             if (Optional.IsDefined(Bar))
@@ -41,8 +42,15 @@ namespace MgmtListMethods
             writer.WriteEndObject();
         }
 
-        internal static MgmtGrpParentWithLocData DeserializeMgmtGrpParentWithLocData(JsonElement element, SerializableOptions options = default)
+        object IModelSerializable.Deserialize(BinaryData data, ModelSerializerOptions options)
         {
+            using var doc = JsonDocument.Parse(data);
+            return DeserializeMgmtGrpParentWithLocData(doc.RootElement, options);
+        }
+
+        internal static MgmtGrpParentWithLocData DeserializeMgmtGrpParentWithLocData(JsonElement element, ModelSerializerOptions options = default)
+        {
+            options ??= ModelSerializerOptions.AzureServiceDefault;
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
@@ -106,6 +114,12 @@ namespace MgmtListMethods
                 }
             }
             return new MgmtGrpParentWithLocData(id, name, type, systemData.Value, Optional.ToDictionary(tags), location, bar.Value);
+        }
+
+        object IJsonModelSerializable.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        {
+            using var doc = JsonDocument.ParseValue(ref reader);
+            return DeserializeMgmtGrpParentWithLocData(doc.RootElement, options);
         }
     }
 }

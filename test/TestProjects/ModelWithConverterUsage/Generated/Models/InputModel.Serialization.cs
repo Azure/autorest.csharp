@@ -14,11 +14,11 @@ using Azure.Core.Serialization;
 namespace ModelWithConverterUsage.Models
 {
     [JsonConverter(typeof(InputModelConverter))]
-    public partial class InputModel : IUtf8JsonSerializable, IModelSerializable
+    public partial class InputModel : IUtf8JsonSerializable, IJsonModelSerializable
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelSerializable)this).Serialize(writer, new SerializableOptions());
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModelSerializable)this).Serialize(writer, ModelSerializerOptions.AzureServiceDefault);
 
-        void IModelSerializable.Serialize(Utf8JsonWriter writer, SerializableOptions options)
+        void IJsonModelSerializable.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
             writer.WriteStartObject();
             if (Optional.IsDefined(InputModelProperty))
@@ -29,6 +29,37 @@ namespace ModelWithConverterUsage.Models
             writer.WriteEndObject();
         }
 
+        object IModelSerializable.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            using var doc = JsonDocument.Parse(data);
+            return DeserializeInputModel(doc.RootElement, options);
+        }
+
+        internal static InputModel DeserializeInputModel(JsonElement element, ModelSerializerOptions options = default)
+        {
+            options ??= ModelSerializerOptions.AzureServiceDefault;
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
+            Optional<string> inputModelProperty = default;
+            foreach (var property in element.EnumerateObject())
+            {
+                if (property.NameEquals("Input_Model_Property"u8))
+                {
+                    inputModelProperty = property.Value.GetString();
+                    continue;
+                }
+            }
+            return new InputModel(inputModelProperty.Value);
+        }
+
+        object IJsonModelSerializable.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        {
+            using var doc = JsonDocument.ParseValue(ref reader);
+            return DeserializeInputModel(doc.RootElement, options);
+        }
+
         internal partial class InputModelConverter : JsonConverter<InputModel>
         {
             public override void Write(Utf8JsonWriter writer, InputModel model, JsonSerializerOptions options)
@@ -37,7 +68,8 @@ namespace ModelWithConverterUsage.Models
             }
             public override InputModel Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
             {
-                throw new NotImplementedException();
+                using var document = JsonDocument.ParseValue(ref reader);
+                return DeserializeInputModel(document.RootElement);
             }
         }
     }

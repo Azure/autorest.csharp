@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Text.Json;
 using Azure;
 using Azure.Core;
@@ -12,11 +13,11 @@ using Azure.Core.Serialization;
 
 namespace ModelsTypeSpec.Models
 {
-    public partial class RoundTripRecursiveModel : IUtf8JsonSerializable, IModelSerializable
+    public partial class RoundTripRecursiveModel : IUtf8JsonSerializable, IJsonModelSerializable
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelSerializable)this).Serialize(writer, new SerializableOptions());
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModelSerializable)this).Serialize(writer, ModelSerializerOptions.AzureServiceDefault);
 
-        void IModelSerializable.Serialize(Utf8JsonWriter writer, SerializableOptions options)
+        void IJsonModelSerializable.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
             writer.WriteStartObject();
             writer.WritePropertyName("message"u8);
@@ -29,8 +30,15 @@ namespace ModelsTypeSpec.Models
             writer.WriteEndObject();
         }
 
-        internal static RoundTripRecursiveModel DeserializeRoundTripRecursiveModel(JsonElement element, SerializableOptions options = default)
+        object IModelSerializable.Deserialize(BinaryData data, ModelSerializerOptions options)
         {
+            using var doc = JsonDocument.Parse(data);
+            return DeserializeRoundTripRecursiveModel(doc.RootElement, options);
+        }
+
+        internal static RoundTripRecursiveModel DeserializeRoundTripRecursiveModel(JsonElement element, ModelSerializerOptions options = default)
+        {
+            options ??= ModelSerializerOptions.AzureServiceDefault;
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
@@ -55,6 +63,12 @@ namespace ModelsTypeSpec.Models
                 }
             }
             return new RoundTripRecursiveModel(message, inner.Value);
+        }
+
+        object IJsonModelSerializable.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        {
+            using var doc = JsonDocument.ParseValue(ref reader);
+            return DeserializeRoundTripRecursiveModel(doc.RootElement, options);
         }
 
         /// <summary> Deserializes the model from a raw response. </summary>

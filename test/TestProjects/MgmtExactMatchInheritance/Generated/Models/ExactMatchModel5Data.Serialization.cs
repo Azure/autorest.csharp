@@ -16,11 +16,11 @@ using Azure.ResourceManager.Models;
 namespace MgmtExactMatchInheritance
 {
     [JsonConverter(typeof(ExactMatchModel5DataConverter))]
-    public partial class ExactMatchModel5Data : IUtf8JsonSerializable, IModelSerializable
+    public partial class ExactMatchModel5Data : IUtf8JsonSerializable, IJsonModelSerializable
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelSerializable)this).Serialize(writer, new SerializableOptions());
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModelSerializable)this).Serialize(writer, ModelSerializerOptions.AzureServiceDefault);
 
-        void IModelSerializable.Serialize(Utf8JsonWriter writer, SerializableOptions options)
+        void IJsonModelSerializable.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
             writer.WriteStartObject();
             if (Optional.IsDefined(New))
@@ -44,8 +44,15 @@ namespace MgmtExactMatchInheritance
             writer.WriteEndObject();
         }
 
-        internal static ExactMatchModel5Data DeserializeExactMatchModel5Data(JsonElement element, SerializableOptions options = default)
+        object IModelSerializable.Deserialize(BinaryData data, ModelSerializerOptions options)
         {
+            using var doc = JsonDocument.Parse(data);
+            return DeserializeExactMatchModel5Data(doc.RootElement, options);
+        }
+
+        internal static ExactMatchModel5Data DeserializeExactMatchModel5Data(JsonElement element, ModelSerializerOptions options = default)
+        {
+            options ??= ModelSerializerOptions.AzureServiceDefault;
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
@@ -109,6 +116,12 @@ namespace MgmtExactMatchInheritance
                 }
             }
             return new ExactMatchModel5Data(id, name, type, systemData.Value, Optional.ToDictionary(tags), location, @new.Value);
+        }
+
+        object IJsonModelSerializable.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        {
+            using var doc = JsonDocument.ParseValue(ref reader);
+            return DeserializeExactMatchModel5Data(doc.RootElement, options);
         }
 
         internal partial class ExactMatchModel5DataConverter : JsonConverter<ExactMatchModel5Data>

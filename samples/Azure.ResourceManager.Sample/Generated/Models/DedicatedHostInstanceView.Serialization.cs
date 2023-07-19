@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
@@ -12,10 +13,40 @@ using Azure.Core.Serialization;
 
 namespace Azure.ResourceManager.Sample.Models
 {
-    public partial class DedicatedHostInstanceView
+    public partial class DedicatedHostInstanceView : IUtf8JsonSerializable, IJsonModelSerializable
     {
-        internal static DedicatedHostInstanceView DeserializeDedicatedHostInstanceView(JsonElement element, SerializableOptions options = default)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModelSerializable)this).Serialize(writer, ModelSerializerOptions.AzureServiceDefault);
+
+        void IJsonModelSerializable.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
+            writer.WriteStartObject();
+            if (Optional.IsDefined(AvailableCapacity))
+            {
+                writer.WritePropertyName("availableCapacity"u8);
+                writer.WriteObjectValue(AvailableCapacity);
+            }
+            if (Optional.IsCollectionDefined(Statuses))
+            {
+                writer.WritePropertyName("statuses"u8);
+                writer.WriteStartArray();
+                foreach (var item in Statuses)
+                {
+                    writer.WriteObjectValue(item);
+                }
+                writer.WriteEndArray();
+            }
+            writer.WriteEndObject();
+        }
+
+        object IModelSerializable.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            using var doc = JsonDocument.Parse(data);
+            return DeserializeDedicatedHostInstanceView(doc.RootElement, options);
+        }
+
+        internal static DedicatedHostInstanceView DeserializeDedicatedHostInstanceView(JsonElement element, ModelSerializerOptions options = default)
+        {
+            options ??= ModelSerializerOptions.AzureServiceDefault;
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
@@ -55,6 +86,12 @@ namespace Azure.ResourceManager.Sample.Models
                 }
             }
             return new DedicatedHostInstanceView(assetId.Value, availableCapacity.Value, Optional.ToList(statuses));
+        }
+
+        object IJsonModelSerializable.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        {
+            using var doc = JsonDocument.ParseValue(ref reader);
+            return DeserializeDedicatedHostInstanceView(doc.RootElement, options);
         }
     }
 }

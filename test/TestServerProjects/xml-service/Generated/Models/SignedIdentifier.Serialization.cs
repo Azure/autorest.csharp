@@ -5,17 +5,21 @@
 
 #nullable disable
 
+using System;
 using System.Xml;
 using System.Xml.Linq;
 using Azure.Core;
+using Azure.Core.Serialization;
 
 namespace xml_service.Models
 {
-    public partial class SignedIdentifier : IXmlSerializable
+    public partial class SignedIdentifier : IXmlSerializable, IXmlModelSerializable
     {
-        void IXmlSerializable.Write(XmlWriter writer, string nameHint)
+        void IXmlSerializable.Write(XmlWriter writer, string nameHint) => ((IXmlModelSerializable)this).Serialize(writer, ModelSerializerOptions.AzureServiceDefault);
+
+        void IXmlModelSerializable.Serialize(XmlWriter writer, ModelSerializerOptions options)
         {
-            writer.WriteStartElement(nameHint ?? "SignedIdentifier");
+            writer.WriteStartElement("SignedIdentifier");
             writer.WriteStartElement("Id");
             writer.WriteValue(Id);
             writer.WriteEndElement();
@@ -23,8 +27,14 @@ namespace xml_service.Models
             writer.WriteEndElement();
         }
 
-        internal static SignedIdentifier DeserializeSignedIdentifier(XElement element)
+        object IModelSerializable.Deserialize(BinaryData data, ModelSerializerOptions options)
         {
+            return DeserializeSignedIdentifier(XElement.Load(data.ToStream()), options);
+        }
+
+        internal static SignedIdentifier DeserializeSignedIdentifier(XElement element, ModelSerializerOptions options = default)
+        {
+            options ??= ModelSerializerOptions.AzureServiceDefault;
             string id = default;
             AccessPolicy accessPolicy = default;
             if (element.Element("Id") is XElement idElement)

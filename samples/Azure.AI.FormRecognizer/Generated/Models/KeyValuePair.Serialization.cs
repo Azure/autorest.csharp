@@ -5,16 +5,43 @@
 
 #nullable disable
 
+using System;
 using System.Text.Json;
 using Azure.Core;
 using Azure.Core.Serialization;
 
 namespace Azure.AI.FormRecognizer.Models
 {
-    public partial class KeyValuePair
+    public partial class KeyValuePair : IUtf8JsonSerializable, IJsonModelSerializable
     {
-        internal static KeyValuePair DeserializeKeyValuePair(JsonElement element, SerializableOptions options = default)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModelSerializable)this).Serialize(writer, ModelSerializerOptions.AzureServiceDefault);
+
+        void IJsonModelSerializable.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
+            writer.WriteStartObject();
+            if (Optional.IsDefined(Label))
+            {
+                writer.WritePropertyName("label"u8);
+                writer.WriteStringValue(Label);
+            }
+            writer.WritePropertyName("key"u8);
+            writer.WriteObjectValue(Key);
+            writer.WritePropertyName("value"u8);
+            writer.WriteObjectValue(Value);
+            writer.WritePropertyName("confidence"u8);
+            writer.WriteNumberValue(Confidence);
+            writer.WriteEndObject();
+        }
+
+        object IModelSerializable.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            using var doc = JsonDocument.Parse(data);
+            return DeserializeKeyValuePair(doc.RootElement, options);
+        }
+
+        internal static KeyValuePair DeserializeKeyValuePair(JsonElement element, ModelSerializerOptions options = default)
+        {
+            options ??= ModelSerializerOptions.AzureServiceDefault;
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
@@ -47,6 +74,12 @@ namespace Azure.AI.FormRecognizer.Models
                 }
             }
             return new KeyValuePair(label.Value, key, value, confidence);
+        }
+
+        object IJsonModelSerializable.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        {
+            using var doc = JsonDocument.ParseValue(ref reader);
+            return DeserializeKeyValuePair(doc.RootElement, options);
         }
     }
 }

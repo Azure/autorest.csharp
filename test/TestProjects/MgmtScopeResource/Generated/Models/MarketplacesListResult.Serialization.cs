@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
@@ -12,10 +13,25 @@ using Azure.Core.Serialization;
 
 namespace MgmtScopeResource.Models
 {
-    internal partial class MarketplacesListResult
+    internal partial class MarketplacesListResult : IUtf8JsonSerializable, IJsonModelSerializable
     {
-        internal static MarketplacesListResult DeserializeMarketplacesListResult(JsonElement element, SerializableOptions options = default)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModelSerializable)this).Serialize(writer, ModelSerializerOptions.AzureServiceDefault);
+
+        void IJsonModelSerializable.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
+            writer.WriteStartObject();
+            writer.WriteEndObject();
+        }
+
+        object IModelSerializable.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            using var doc = JsonDocument.Parse(data);
+            return DeserializeMarketplacesListResult(doc.RootElement, options);
+        }
+
+        internal static MarketplacesListResult DeserializeMarketplacesListResult(JsonElement element, ModelSerializerOptions options = default)
+        {
+            options ??= ModelSerializerOptions.AzureServiceDefault;
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
@@ -45,6 +61,12 @@ namespace MgmtScopeResource.Models
                 }
             }
             return new MarketplacesListResult(Optional.ToList(value), nextLink.Value);
+        }
+
+        object IJsonModelSerializable.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        {
+            using var doc = JsonDocument.ParseValue(ref reader);
+            return DeserializeMarketplacesListResult(doc.RootElement, options);
         }
     }
 }

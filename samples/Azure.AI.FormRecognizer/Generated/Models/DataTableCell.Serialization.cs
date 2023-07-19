@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
@@ -12,10 +13,70 @@ using Azure.Core.Serialization;
 
 namespace Azure.AI.FormRecognizer.Models
 {
-    public partial class DataTableCell
+    public partial class DataTableCell : IUtf8JsonSerializable, IJsonModelSerializable
     {
-        internal static DataTableCell DeserializeDataTableCell(JsonElement element, SerializableOptions options = default)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModelSerializable)this).Serialize(writer, ModelSerializerOptions.AzureServiceDefault);
+
+        void IJsonModelSerializable.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
+            writer.WriteStartObject();
+            writer.WritePropertyName("rowIndex"u8);
+            writer.WriteNumberValue(RowIndex);
+            writer.WritePropertyName("columnIndex"u8);
+            writer.WriteNumberValue(ColumnIndex);
+            if (Optional.IsDefined(RowSpan))
+            {
+                writer.WritePropertyName("rowSpan"u8);
+                writer.WriteNumberValue(RowSpan.Value);
+            }
+            if (Optional.IsDefined(ColumnSpan))
+            {
+                writer.WritePropertyName("columnSpan"u8);
+                writer.WriteNumberValue(ColumnSpan.Value);
+            }
+            writer.WritePropertyName("text"u8);
+            writer.WriteStringValue(Text);
+            writer.WritePropertyName("boundingBox"u8);
+            writer.WriteStartArray();
+            foreach (var item in BoundingBox)
+            {
+                writer.WriteNumberValue(item);
+            }
+            writer.WriteEndArray();
+            writer.WritePropertyName("confidence"u8);
+            writer.WriteNumberValue(Confidence);
+            if (Optional.IsCollectionDefined(Elements))
+            {
+                writer.WritePropertyName("elements"u8);
+                writer.WriteStartArray();
+                foreach (var item in Elements)
+                {
+                    writer.WriteStringValue(item);
+                }
+                writer.WriteEndArray();
+            }
+            if (Optional.IsDefined(IsHeader))
+            {
+                writer.WritePropertyName("isHeader"u8);
+                writer.WriteBooleanValue(IsHeader.Value);
+            }
+            if (Optional.IsDefined(IsFooter))
+            {
+                writer.WritePropertyName("isFooter"u8);
+                writer.WriteBooleanValue(IsFooter.Value);
+            }
+            writer.WriteEndObject();
+        }
+
+        object IModelSerializable.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            using var doc = JsonDocument.Parse(data);
+            return DeserializeDataTableCell(doc.RootElement, options);
+        }
+
+        internal static DataTableCell DeserializeDataTableCell(JsonElement element, ModelSerializerOptions options = default)
+        {
+            options ??= ModelSerializerOptions.AzureServiceDefault;
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
@@ -114,6 +175,12 @@ namespace Azure.AI.FormRecognizer.Models
                 }
             }
             return new DataTableCell(rowIndex, columnIndex, Optional.ToNullable(rowSpan), Optional.ToNullable(columnSpan), text, boundingBox, confidence, Optional.ToList(elements), Optional.ToNullable(isHeader), Optional.ToNullable(isFooter));
+        }
+
+        object IJsonModelSerializable.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        {
+            using var doc = JsonDocument.ParseValue(ref reader);
+            return DeserializeDataTableCell(doc.RootElement, options);
         }
     }
 }

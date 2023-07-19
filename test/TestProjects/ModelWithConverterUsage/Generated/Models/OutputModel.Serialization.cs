@@ -14,10 +14,30 @@ using Azure.Core.Serialization;
 namespace ModelWithConverterUsage.Models
 {
     [JsonConverter(typeof(OutputModelConverter))]
-    public partial class OutputModel
+    public partial class OutputModel : IUtf8JsonSerializable, IJsonModelSerializable
     {
-        internal static OutputModel DeserializeOutputModel(JsonElement element, SerializableOptions options = default)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModelSerializable)this).Serialize(writer, ModelSerializerOptions.AzureServiceDefault);
+
+        void IJsonModelSerializable.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
+            writer.WriteStartObject();
+            if (Optional.IsDefined(OutputModelProperty))
+            {
+                writer.WritePropertyName("Output_Model_Property"u8);
+                writer.WriteStringValue(OutputModelProperty);
+            }
+            writer.WriteEndObject();
+        }
+
+        object IModelSerializable.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            using var doc = JsonDocument.Parse(data);
+            return DeserializeOutputModel(doc.RootElement, options);
+        }
+
+        internal static OutputModel DeserializeOutputModel(JsonElement element, ModelSerializerOptions options = default)
+        {
+            options ??= ModelSerializerOptions.AzureServiceDefault;
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
@@ -34,11 +54,17 @@ namespace ModelWithConverterUsage.Models
             return new OutputModel(outputModelProperty.Value);
         }
 
+        object IJsonModelSerializable.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        {
+            using var doc = JsonDocument.ParseValue(ref reader);
+            return DeserializeOutputModel(doc.RootElement, options);
+        }
+
         internal partial class OutputModelConverter : JsonConverter<OutputModel>
         {
             public override void Write(Utf8JsonWriter writer, OutputModel model, JsonSerializerOptions options)
             {
-                throw new NotImplementedException();
+                writer.WriteObjectValue(model);
             }
             public override OutputModel Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
             {

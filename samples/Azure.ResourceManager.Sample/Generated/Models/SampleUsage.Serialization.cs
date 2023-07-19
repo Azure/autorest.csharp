@@ -5,16 +5,40 @@
 
 #nullable disable
 
+using System;
 using System.Text.Json;
 using Azure.Core;
 using Azure.Core.Serialization;
 
 namespace Azure.ResourceManager.Sample.Models
 {
-    public partial class SampleUsage
+    public partial class SampleUsage : IUtf8JsonSerializable, IJsonModelSerializable
     {
-        internal static SampleUsage DeserializeSampleUsage(JsonElement element, SerializableOptions options = default)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModelSerializable)this).Serialize(writer, ModelSerializerOptions.AzureServiceDefault);
+
+        void IJsonModelSerializable.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
+            writer.WriteStartObject();
+            writer.WritePropertyName("unit"u8);
+            writer.WriteStringValue(Unit.ToString());
+            writer.WritePropertyName("currentValue"u8);
+            writer.WriteNumberValue(CurrentValue);
+            writer.WritePropertyName("limit"u8);
+            writer.WriteNumberValue(Limit);
+            writer.WritePropertyName("name"u8);
+            writer.WriteObjectValue(Name);
+            writer.WriteEndObject();
+        }
+
+        object IModelSerializable.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            using var doc = JsonDocument.Parse(data);
+            return DeserializeSampleUsage(doc.RootElement, options);
+        }
+
+        internal static SampleUsage DeserializeSampleUsage(JsonElement element, ModelSerializerOptions options = default)
+        {
+            options ??= ModelSerializerOptions.AzureServiceDefault;
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
@@ -47,6 +71,12 @@ namespace Azure.ResourceManager.Sample.Models
                 }
             }
             return new SampleUsage(unit, currentValue, limit, name);
+        }
+
+        object IJsonModelSerializable.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        {
+            using var doc = JsonDocument.ParseValue(ref reader);
+            return DeserializeSampleUsage(doc.RootElement, options);
         }
     }
 }

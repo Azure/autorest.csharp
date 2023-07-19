@@ -12,10 +12,54 @@ using Azure.Core.Serialization;
 
 namespace MgmtResourceName.Models
 {
-    public partial class ResourceOperation
+    public partial class ResourceOperation : IUtf8JsonSerializable, IJsonModelSerializable
     {
-        internal static ResourceOperation DeserializeResourceOperation(JsonElement element, SerializableOptions options = default)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModelSerializable)this).Serialize(writer, ModelSerializerOptions.AzureServiceDefault);
+
+        void IJsonModelSerializable.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
+            writer.WriteStartObject();
+            if (Optional.IsDefined(Name))
+            {
+                writer.WritePropertyName("name"u8);
+                writer.WriteStringValue(Name);
+            }
+            if (Optional.IsDefined(DisplayName))
+            {
+                writer.WritePropertyName("displayName"u8);
+                writer.WriteStringValue(DisplayName);
+            }
+            if (Optional.IsDefined(Description))
+            {
+                writer.WritePropertyName("description"u8);
+                writer.WriteStringValue(Description);
+            }
+            if (Optional.IsDefined(Origin))
+            {
+                writer.WritePropertyName("origin"u8);
+                writer.WriteStringValue(Origin);
+            }
+            if (Optional.IsDefined(Properties))
+            {
+                writer.WritePropertyName("properties"u8);
+#if NET6_0_OR_GREATER
+				writer.WriteRawValue(Properties);
+#else
+                JsonSerializer.Serialize(writer, JsonDocument.Parse(Properties.ToString()).RootElement);
+#endif
+            }
+            writer.WriteEndObject();
+        }
+
+        object IModelSerializable.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            using var doc = JsonDocument.Parse(data);
+            return DeserializeResourceOperation(doc.RootElement, options);
+        }
+
+        internal static ResourceOperation DeserializeResourceOperation(JsonElement element, ModelSerializerOptions options = default)
+        {
+            options ??= ModelSerializerOptions.AzureServiceDefault;
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
@@ -58,6 +102,12 @@ namespace MgmtResourceName.Models
                 }
             }
             return new ResourceOperation(name.Value, displayName.Value, description.Value, origin.Value, properties.Value);
+        }
+
+        object IJsonModelSerializable.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        {
+            using var doc = JsonDocument.ParseValue(ref reader);
+            return DeserializeResourceOperation(doc.RootElement, options);
         }
     }
 }

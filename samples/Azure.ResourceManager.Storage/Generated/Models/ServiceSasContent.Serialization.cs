@@ -5,17 +5,18 @@
 
 #nullable disable
 
+using System;
 using System.Text.Json;
 using Azure.Core;
 using Azure.Core.Serialization;
 
 namespace Azure.ResourceManager.Storage.Models
 {
-    public partial class ServiceSasContent : IUtf8JsonSerializable, IModelSerializable
+    public partial class ServiceSasContent : IUtf8JsonSerializable, IJsonModelSerializable
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelSerializable)this).Serialize(writer, new SerializableOptions());
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModelSerializable)this).Serialize(writer, ModelSerializerOptions.AzureServiceDefault);
 
-        void IModelSerializable.Serialize(Utf8JsonWriter writer, SerializableOptions options)
+        void IJsonModelSerializable.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
             writer.WriteStartObject();
             writer.WritePropertyName("canonicalizedResource"u8);
@@ -106,6 +107,159 @@ namespace Azure.ResourceManager.Storage.Models
                 writer.WriteStringValue(ContentType);
             }
             writer.WriteEndObject();
+        }
+
+        object IModelSerializable.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            using var doc = JsonDocument.Parse(data);
+            return DeserializeServiceSasContent(doc.RootElement, options);
+        }
+
+        internal static ServiceSasContent DeserializeServiceSasContent(JsonElement element, ModelSerializerOptions options = default)
+        {
+            options ??= ModelSerializerOptions.AzureServiceDefault;
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
+            string canonicalizedResource = default;
+            Optional<SignedResource> signedResource = default;
+            Optional<Permission> signedPermission = default;
+            Optional<string> signedIp = default;
+            Optional<HttpProtocol> signedProtocol = default;
+            Optional<DateTimeOffset> signedStart = default;
+            Optional<DateTimeOffset> signedExpiry = default;
+            Optional<string> signedIdentifier = default;
+            Optional<string> startPk = default;
+            Optional<string> endPk = default;
+            Optional<string> startRk = default;
+            Optional<string> endRk = default;
+            Optional<string> keyToSign = default;
+            Optional<string> rscc = default;
+            Optional<string> rscd = default;
+            Optional<string> rsce = default;
+            Optional<string> rscl = default;
+            Optional<string> rsct = default;
+            foreach (var property in element.EnumerateObject())
+            {
+                if (property.NameEquals("canonicalizedResource"u8))
+                {
+                    canonicalizedResource = property.Value.GetString();
+                    continue;
+                }
+                if (property.NameEquals("signedResource"u8))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        continue;
+                    }
+                    signedResource = new SignedResource(property.Value.GetString());
+                    continue;
+                }
+                if (property.NameEquals("signedPermission"u8))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        continue;
+                    }
+                    signedPermission = new Permission(property.Value.GetString());
+                    continue;
+                }
+                if (property.NameEquals("signedIp"u8))
+                {
+                    signedIp = property.Value.GetString();
+                    continue;
+                }
+                if (property.NameEquals("signedProtocol"u8))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        continue;
+                    }
+                    signedProtocol = property.Value.GetString().ToHttpProtocol();
+                    continue;
+                }
+                if (property.NameEquals("signedStart"u8))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        continue;
+                    }
+                    signedStart = property.Value.GetDateTimeOffset("O");
+                    continue;
+                }
+                if (property.NameEquals("signedExpiry"u8))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        continue;
+                    }
+                    signedExpiry = property.Value.GetDateTimeOffset("O");
+                    continue;
+                }
+                if (property.NameEquals("signedIdentifier"u8))
+                {
+                    signedIdentifier = property.Value.GetString();
+                    continue;
+                }
+                if (property.NameEquals("startPk"u8))
+                {
+                    startPk = property.Value.GetString();
+                    continue;
+                }
+                if (property.NameEquals("endPk"u8))
+                {
+                    endPk = property.Value.GetString();
+                    continue;
+                }
+                if (property.NameEquals("startRk"u8))
+                {
+                    startRk = property.Value.GetString();
+                    continue;
+                }
+                if (property.NameEquals("endRk"u8))
+                {
+                    endRk = property.Value.GetString();
+                    continue;
+                }
+                if (property.NameEquals("keyToSign"u8))
+                {
+                    keyToSign = property.Value.GetString();
+                    continue;
+                }
+                if (property.NameEquals("rscc"u8))
+                {
+                    rscc = property.Value.GetString();
+                    continue;
+                }
+                if (property.NameEquals("rscd"u8))
+                {
+                    rscd = property.Value.GetString();
+                    continue;
+                }
+                if (property.NameEquals("rsce"u8))
+                {
+                    rsce = property.Value.GetString();
+                    continue;
+                }
+                if (property.NameEquals("rscl"u8))
+                {
+                    rscl = property.Value.GetString();
+                    continue;
+                }
+                if (property.NameEquals("rsct"u8))
+                {
+                    rsct = property.Value.GetString();
+                    continue;
+                }
+            }
+            return new ServiceSasContent(canonicalizedResource, Optional.ToNullable(signedResource), Optional.ToNullable(signedPermission), signedIp.Value, Optional.ToNullable(signedProtocol), Optional.ToNullable(signedStart), Optional.ToNullable(signedExpiry), signedIdentifier.Value, startPk.Value, endPk.Value, startRk.Value, endRk.Value, keyToSign.Value, rscc.Value, rscd.Value, rsce.Value, rscl.Value, rsct.Value);
+        }
+
+        object IJsonModelSerializable.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        {
+            using var doc = JsonDocument.ParseValue(ref reader);
+            return DeserializeServiceSasContent(doc.RootElement, options);
         }
     }
 }

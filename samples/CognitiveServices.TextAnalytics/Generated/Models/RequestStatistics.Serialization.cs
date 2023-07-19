@@ -5,16 +5,40 @@
 
 #nullable disable
 
+using System;
 using System.Text.Json;
 using Azure.Core;
 using Azure.Core.Serialization;
 
 namespace CognitiveServices.TextAnalytics.Models
 {
-    public partial class RequestStatistics
+    public partial class RequestStatistics : IUtf8JsonSerializable, IJsonModelSerializable
     {
-        internal static RequestStatistics DeserializeRequestStatistics(JsonElement element, SerializableOptions options = default)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModelSerializable)this).Serialize(writer, ModelSerializerOptions.AzureServiceDefault);
+
+        void IJsonModelSerializable.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
+            writer.WriteStartObject();
+            writer.WritePropertyName("documentsCount"u8);
+            writer.WriteNumberValue(DocumentsCount);
+            writer.WritePropertyName("validDocumentsCount"u8);
+            writer.WriteNumberValue(ValidDocumentsCount);
+            writer.WritePropertyName("erroneousDocumentsCount"u8);
+            writer.WriteNumberValue(ErroneousDocumentsCount);
+            writer.WritePropertyName("transactionsCount"u8);
+            writer.WriteNumberValue(TransactionsCount);
+            writer.WriteEndObject();
+        }
+
+        object IModelSerializable.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            using var doc = JsonDocument.Parse(data);
+            return DeserializeRequestStatistics(doc.RootElement, options);
+        }
+
+        internal static RequestStatistics DeserializeRequestStatistics(JsonElement element, ModelSerializerOptions options = default)
+        {
+            options ??= ModelSerializerOptions.AzureServiceDefault;
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
@@ -47,6 +71,12 @@ namespace CognitiveServices.TextAnalytics.Models
                 }
             }
             return new RequestStatistics(documentsCount, validDocumentsCount, erroneousDocumentsCount, transactionsCount);
+        }
+
+        object IJsonModelSerializable.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        {
+            using var doc = JsonDocument.ParseValue(ref reader);
+            return DeserializeRequestStatistics(doc.RootElement, options);
         }
     }
 }

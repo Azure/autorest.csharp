@@ -17,11 +17,11 @@ using MgmtExactMatchInheritance.Models;
 
 namespace MgmtExactMatchInheritance
 {
-    public partial class ExactMatchModel1Data : IUtf8JsonSerializable, IModelSerializable
+    public partial class ExactMatchModel1Data : IUtf8JsonSerializable, IJsonModelSerializable
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelSerializable)this).Serialize(writer, new SerializableOptions());
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModelSerializable)this).Serialize(writer, ModelSerializerOptions.AzureServiceDefault);
 
-        void IModelSerializable.Serialize(Utf8JsonWriter writer, SerializableOptions options)
+        void IJsonModelSerializable.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
             writer.WriteStartObject();
             if (Optional.IsDefined(New))
@@ -142,8 +142,15 @@ namespace MgmtExactMatchInheritance
             writer.WriteEndObject();
         }
 
-        internal static ExactMatchModel1Data DeserializeExactMatchModel1Data(JsonElement element, SerializableOptions options = default)
+        object IModelSerializable.Deserialize(BinaryData data, ModelSerializerOptions options)
         {
+            using var doc = JsonDocument.Parse(data);
+            return DeserializeExactMatchModel1Data(doc.RootElement, options);
+        }
+
+        internal static ExactMatchModel1Data DeserializeExactMatchModel1Data(JsonElement element, ModelSerializerOptions options = default)
+        {
+            options ??= ModelSerializerOptions.AzureServiceDefault;
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
@@ -398,6 +405,12 @@ namespace MgmtExactMatchInheritance
                 }
             }
             return new ExactMatchModel1Data(id, name, type, systemData.Value, @new.Value, Optional.ToList(supportingUris), Optional.ToNullable(type1), Optional.ToNullable(type2), type3.Value, type4.Value, type5.Value, type6.Value, type7.Value, type8.Value, type9.Value, type10.Value, type11.Value, type12.Value, type13.Value, type14.Value, type15.Value, type16.Value, type17, type18, type19);
+        }
+
+        object IJsonModelSerializable.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        {
+            using var doc = JsonDocument.ParseValue(ref reader);
+            return DeserializeExactMatchModel1Data(doc.RootElement, options);
         }
     }
 }

@@ -5,16 +5,47 @@
 
 #nullable disable
 
+using System;
 using System.Collections.Generic;
+using System.Xml;
 using System.Xml.Linq;
 using Azure.Core;
+using Azure.Core.Serialization;
 
 namespace xml_service.Models
 {
-    public partial class Blobs
+    public partial class Blobs : IXmlSerializable, IXmlModelSerializable
     {
-        internal static Blobs DeserializeBlobs(XElement element)
+        void IXmlSerializable.Write(XmlWriter writer, string nameHint) => ((IXmlModelSerializable)this).Serialize(writer, ModelSerializerOptions.AzureServiceDefault);
+
+        void IXmlModelSerializable.Serialize(XmlWriter writer, ModelSerializerOptions options)
         {
+            writer.WriteStartElement("Blobs");
+            if (Optional.IsCollectionDefined(BlobPrefix))
+            {
+                foreach (var item in BlobPrefix)
+                {
+                    writer.WriteObjectValue(item, "BlobPrefix");
+                }
+            }
+            if (Optional.IsCollectionDefined(Blob))
+            {
+                foreach (var item in Blob)
+                {
+                    writer.WriteObjectValue(item, "Blob");
+                }
+            }
+            writer.WriteEndElement();
+        }
+
+        object IModelSerializable.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            return DeserializeBlobs(XElement.Load(data.ToStream()), options);
+        }
+
+        internal static Blobs DeserializeBlobs(XElement element, ModelSerializerOptions options = default)
+        {
+            options ??= ModelSerializerOptions.AzureServiceDefault;
             IReadOnlyList<BlobPrefix> blobPrefix = default;
             IReadOnlyList<Blob> blob = default;
             var array = new List<BlobPrefix>();

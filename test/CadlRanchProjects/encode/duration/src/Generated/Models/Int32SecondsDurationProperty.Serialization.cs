@@ -13,11 +13,11 @@ using Azure.Core.Serialization;
 
 namespace Encode.Duration.Models
 {
-    public partial class Int32SecondsDurationProperty : IUtf8JsonSerializable, IModelSerializable
+    public partial class Int32SecondsDurationProperty : IUtf8JsonSerializable, IJsonModelSerializable
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelSerializable)this).Serialize(writer, new SerializableOptions());
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModelSerializable)this).Serialize(writer, ModelSerializerOptions.AzureServiceDefault);
 
-        void IModelSerializable.Serialize(Utf8JsonWriter writer, SerializableOptions options)
+        void IJsonModelSerializable.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
             writer.WriteStartObject();
             writer.WritePropertyName("value"u8);
@@ -25,8 +25,15 @@ namespace Encode.Duration.Models
             writer.WriteEndObject();
         }
 
-        internal static Int32SecondsDurationProperty DeserializeInt32SecondsDurationProperty(JsonElement element, SerializableOptions options = default)
+        object IModelSerializable.Deserialize(BinaryData data, ModelSerializerOptions options)
         {
+            using var doc = JsonDocument.Parse(data);
+            return DeserializeInt32SecondsDurationProperty(doc.RootElement, options);
+        }
+
+        internal static Int32SecondsDurationProperty DeserializeInt32SecondsDurationProperty(JsonElement element, ModelSerializerOptions options = default)
+        {
+            options ??= ModelSerializerOptions.AzureServiceDefault;
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
@@ -41,6 +48,12 @@ namespace Encode.Duration.Models
                 }
             }
             return new Int32SecondsDurationProperty(value);
+        }
+
+        object IJsonModelSerializable.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        {
+            using var doc = JsonDocument.ParseValue(ref reader);
+            return DeserializeInt32SecondsDurationProperty(doc.RootElement, options);
         }
 
         /// <summary> Deserializes the model from a raw response. </summary>

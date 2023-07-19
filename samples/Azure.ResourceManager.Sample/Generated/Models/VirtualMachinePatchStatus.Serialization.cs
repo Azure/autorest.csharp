@@ -5,16 +5,42 @@
 
 #nullable disable
 
+using System;
 using System.Text.Json;
 using Azure.Core;
 using Azure.Core.Serialization;
 
 namespace Azure.ResourceManager.Sample.Models
 {
-    public partial class VirtualMachinePatchStatus
+    public partial class VirtualMachinePatchStatus : IUtf8JsonSerializable, IJsonModelSerializable
     {
-        internal static VirtualMachinePatchStatus DeserializeVirtualMachinePatchStatus(JsonElement element, SerializableOptions options = default)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModelSerializable)this).Serialize(writer, ModelSerializerOptions.AzureServiceDefault);
+
+        void IJsonModelSerializable.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
+            writer.WriteStartObject();
+            if (Optional.IsDefined(AvailablePatchSummary))
+            {
+                writer.WritePropertyName("availablePatchSummary"u8);
+                writer.WriteObjectValue(AvailablePatchSummary);
+            }
+            if (Optional.IsDefined(LastPatchInstallationSummary))
+            {
+                writer.WritePropertyName("lastPatchInstallationSummary"u8);
+                writer.WriteObjectValue(LastPatchInstallationSummary);
+            }
+            writer.WriteEndObject();
+        }
+
+        object IModelSerializable.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            using var doc = JsonDocument.Parse(data);
+            return DeserializeVirtualMachinePatchStatus(doc.RootElement, options);
+        }
+
+        internal static VirtualMachinePatchStatus DeserializeVirtualMachinePatchStatus(JsonElement element, ModelSerializerOptions options = default)
+        {
+            options ??= ModelSerializerOptions.AzureServiceDefault;
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
@@ -43,6 +69,12 @@ namespace Azure.ResourceManager.Sample.Models
                 }
             }
             return new VirtualMachinePatchStatus(availablePatchSummary.Value, lastPatchInstallationSummary.Value);
+        }
+
+        object IJsonModelSerializable.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        {
+            using var doc = JsonDocument.ParseValue(ref reader);
+            return DeserializeVirtualMachinePatchStatus(doc.RootElement, options);
         }
     }
 }

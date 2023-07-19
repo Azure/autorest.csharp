@@ -12,10 +12,40 @@ using Azure.Core.Serialization;
 
 namespace MgmtSupersetInheritance.Models
 {
-    public partial class SupersetModel7SystemData
+    public partial class SupersetModel7SystemData : IUtf8JsonSerializable, IJsonModelSerializable
     {
-        internal static SupersetModel7SystemData DeserializeSupersetModel7SystemData(JsonElement element, SerializableOptions options = default)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModelSerializable)this).Serialize(writer, ModelSerializerOptions.AzureServiceDefault);
+
+        void IJsonModelSerializable.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
+            writer.WriteStartObject();
+            if (Optional.IsDefined(CreatedBy))
+            {
+                writer.WritePropertyName("createdBy"u8);
+                writer.WriteStringValue(CreatedBy);
+            }
+            if (Optional.IsDefined(CreatedOn))
+            {
+                writer.WritePropertyName("createdAt"u8);
+                writer.WriteStringValue(CreatedOn.Value, "O");
+            }
+            if (Optional.IsDefined(LastModifiedBy))
+            {
+                writer.WritePropertyName("lastModifiedBy"u8);
+                writer.WriteStringValue(LastModifiedBy);
+            }
+            writer.WriteEndObject();
+        }
+
+        object IModelSerializable.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            using var doc = JsonDocument.Parse(data);
+            return DeserializeSupersetModel7SystemData(doc.RootElement, options);
+        }
+
+        internal static SupersetModel7SystemData DeserializeSupersetModel7SystemData(JsonElement element, ModelSerializerOptions options = default)
+        {
+            options ??= ModelSerializerOptions.AzureServiceDefault;
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
@@ -46,6 +76,12 @@ namespace MgmtSupersetInheritance.Models
                 }
             }
             return new SupersetModel7SystemData(createdBy.Value, Optional.ToNullable(createdAt), lastModifiedBy.Value);
+        }
+
+        object IJsonModelSerializable.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        {
+            using var doc = JsonDocument.ParseValue(ref reader);
+            return DeserializeSupersetModel7SystemData(doc.RootElement, options);
         }
     }
 }

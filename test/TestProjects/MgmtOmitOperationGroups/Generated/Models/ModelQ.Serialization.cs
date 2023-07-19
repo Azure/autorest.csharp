@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Text.Json;
 using Azure.Core;
 using Azure.Core.Serialization;
@@ -12,11 +13,11 @@ using Azure.ResourceManager.Models;
 
 namespace MgmtOmitOperationGroups.Models
 {
-    public partial class ModelQ : IUtf8JsonSerializable, IModelSerializable
+    public partial class ModelQ : IUtf8JsonSerializable, IJsonModelSerializable
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelSerializable)this).Serialize(writer, new SerializableOptions());
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModelSerializable)this).Serialize(writer, ModelSerializerOptions.AzureServiceDefault);
 
-        void IModelSerializable.Serialize(Utf8JsonWriter writer, SerializableOptions options)
+        void IJsonModelSerializable.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
             writer.WriteStartObject();
             if (Optional.IsDefined(M))
@@ -27,8 +28,15 @@ namespace MgmtOmitOperationGroups.Models
             writer.WriteEndObject();
         }
 
-        internal static ModelQ DeserializeModelQ(JsonElement element, SerializableOptions options = default)
+        object IModelSerializable.Deserialize(BinaryData data, ModelSerializerOptions options)
         {
+            using var doc = JsonDocument.Parse(data);
+            return DeserializeModelQ(doc.RootElement, options);
+        }
+
+        internal static ModelQ DeserializeModelQ(JsonElement element, ModelSerializerOptions options = default)
+        {
+            options ??= ModelSerializerOptions.AzureServiceDefault;
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
@@ -71,6 +79,12 @@ namespace MgmtOmitOperationGroups.Models
                 }
             }
             return new ModelQ(id, name, type, systemData.Value, m.Value);
+        }
+
+        object IJsonModelSerializable.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        {
+            using var doc = JsonDocument.ParseValue(ref reader);
+            return DeserializeModelQ(doc.RootElement, options);
         }
     }
 }

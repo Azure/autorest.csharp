@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
@@ -12,11 +13,11 @@ using Azure.Core.Serialization;
 
 namespace MgmtMockAndSample.Models
 {
-    public partial class FirewallPolicyIntrusionDetectionBypassTrafficSpecifications : IUtf8JsonSerializable, IModelSerializable
+    public partial class FirewallPolicyIntrusionDetectionBypassTrafficSpecifications : IUtf8JsonSerializable, IJsonModelSerializable
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelSerializable)this).Serialize(writer, new SerializableOptions());
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModelSerializable)this).Serialize(writer, ModelSerializerOptions.AzureServiceDefault);
 
-        void IModelSerializable.Serialize(Utf8JsonWriter writer, SerializableOptions options)
+        void IJsonModelSerializable.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
             writer.WriteStartObject();
             if (Optional.IsDefined(Name))
@@ -87,8 +88,15 @@ namespace MgmtMockAndSample.Models
             writer.WriteEndObject();
         }
 
-        internal static FirewallPolicyIntrusionDetectionBypassTrafficSpecifications DeserializeFirewallPolicyIntrusionDetectionBypassTrafficSpecifications(JsonElement element, SerializableOptions options = default)
+        object IModelSerializable.Deserialize(BinaryData data, ModelSerializerOptions options)
         {
+            using var doc = JsonDocument.Parse(data);
+            return DeserializeFirewallPolicyIntrusionDetectionBypassTrafficSpecifications(doc.RootElement, options);
+        }
+
+        internal static FirewallPolicyIntrusionDetectionBypassTrafficSpecifications DeserializeFirewallPolicyIntrusionDetectionBypassTrafficSpecifications(JsonElement element, ModelSerializerOptions options = default)
+        {
+            options ??= ModelSerializerOptions.AzureServiceDefault;
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
@@ -194,6 +202,12 @@ namespace MgmtMockAndSample.Models
                 }
             }
             return new FirewallPolicyIntrusionDetectionBypassTrafficSpecifications(name.Value, description.Value, Optional.ToNullable(protocol), Optional.ToList(sourceAddresses), Optional.ToList(destinationAddresses), Optional.ToList(destinationPorts), Optional.ToList(sourceIpGroups), Optional.ToList(destinationIpGroups));
+        }
+
+        object IJsonModelSerializable.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        {
+            using var doc = JsonDocument.ParseValue(ref reader);
+            return DeserializeFirewallPolicyIntrusionDetectionBypassTrafficSpecifications(doc.RootElement, options);
         }
     }
 }

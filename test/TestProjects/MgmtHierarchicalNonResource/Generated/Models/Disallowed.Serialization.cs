@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
@@ -12,10 +13,35 @@ using Azure.Core.Serialization;
 
 namespace MgmtHierarchicalNonResource.Models
 {
-    internal partial class Disallowed
+    internal partial class Disallowed : IUtf8JsonSerializable, IJsonModelSerializable
     {
-        internal static Disallowed DeserializeDisallowed(JsonElement element, SerializableOptions options = default)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModelSerializable)this).Serialize(writer, ModelSerializerOptions.AzureServiceDefault);
+
+        void IJsonModelSerializable.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
+            writer.WriteStartObject();
+            if (Optional.IsCollectionDefined(DiskTypes))
+            {
+                writer.WritePropertyName("diskTypes"u8);
+                writer.WriteStartArray();
+                foreach (var item in DiskTypes)
+                {
+                    writer.WriteStringValue(item);
+                }
+                writer.WriteEndArray();
+            }
+            writer.WriteEndObject();
+        }
+
+        object IModelSerializable.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            using var doc = JsonDocument.Parse(data);
+            return DeserializeDisallowed(doc.RootElement, options);
+        }
+
+        internal static Disallowed DeserializeDisallowed(JsonElement element, ModelSerializerOptions options = default)
+        {
+            options ??= ModelSerializerOptions.AzureServiceDefault;
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
@@ -39,6 +65,12 @@ namespace MgmtHierarchicalNonResource.Models
                 }
             }
             return new Disallowed(Optional.ToList(diskTypes));
+        }
+
+        object IJsonModelSerializable.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        {
+            using var doc = JsonDocument.ParseValue(ref reader);
+            return DeserializeDisallowed(doc.RootElement, options);
         }
     }
 }

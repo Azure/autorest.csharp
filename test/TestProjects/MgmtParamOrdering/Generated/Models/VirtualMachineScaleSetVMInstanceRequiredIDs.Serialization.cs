@@ -5,17 +5,19 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
 using Azure.Core.Serialization;
 
 namespace MgmtParamOrdering.Models
 {
-    public partial class VirtualMachineScaleSetVMInstanceRequiredIDs : IUtf8JsonSerializable, IModelSerializable
+    public partial class VirtualMachineScaleSetVMInstanceRequiredIDs : IUtf8JsonSerializable, IJsonModelSerializable
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelSerializable)this).Serialize(writer, new SerializableOptions());
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModelSerializable)this).Serialize(writer, ModelSerializerOptions.AzureServiceDefault);
 
-        void IModelSerializable.Serialize(Utf8JsonWriter writer, SerializableOptions options)
+        void IJsonModelSerializable.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
             writer.WriteStartObject();
             writer.WritePropertyName("instanceIds"u8);
@@ -26,6 +28,42 @@ namespace MgmtParamOrdering.Models
             }
             writer.WriteEndArray();
             writer.WriteEndObject();
+        }
+
+        object IModelSerializable.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            using var doc = JsonDocument.Parse(data);
+            return DeserializeVirtualMachineScaleSetVMInstanceRequiredIDs(doc.RootElement, options);
+        }
+
+        internal static VirtualMachineScaleSetVMInstanceRequiredIDs DeserializeVirtualMachineScaleSetVMInstanceRequiredIDs(JsonElement element, ModelSerializerOptions options = default)
+        {
+            options ??= ModelSerializerOptions.AzureServiceDefault;
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
+            IList<string> instanceIds = default;
+            foreach (var property in element.EnumerateObject())
+            {
+                if (property.NameEquals("instanceIds"u8))
+                {
+                    List<string> array = new List<string>();
+                    foreach (var item in property.Value.EnumerateArray())
+                    {
+                        array.Add(item.GetString());
+                    }
+                    instanceIds = array;
+                    continue;
+                }
+            }
+            return new VirtualMachineScaleSetVMInstanceRequiredIDs(instanceIds);
+        }
+
+        object IJsonModelSerializable.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        {
+            using var doc = JsonDocument.ParseValue(ref reader);
+            return DeserializeVirtualMachineScaleSetVMInstanceRequiredIDs(doc.RootElement, options);
         }
     }
 }

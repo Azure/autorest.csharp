@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Text.Json;
 using Azure.Core;
 using Azure.Core.Serialization;
@@ -12,10 +13,30 @@ using Azure.ResourceManager.Models;
 
 namespace MgmtExtensionResource
 {
-    public partial class SubSingletonData
+    public partial class SubSingletonData : IUtf8JsonSerializable, IJsonModelSerializable
     {
-        internal static SubSingletonData DeserializeSubSingletonData(JsonElement element, SerializableOptions options = default)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModelSerializable)this).Serialize(writer, ModelSerializerOptions.AzureServiceDefault);
+
+        void IJsonModelSerializable.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
+            writer.WriteStartObject();
+            if (Optional.IsDefined(Something))
+            {
+                writer.WritePropertyName("something"u8);
+                writer.WriteStringValue(Something);
+            }
+            writer.WriteEndObject();
+        }
+
+        object IModelSerializable.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            using var doc = JsonDocument.Parse(data);
+            return DeserializeSubSingletonData(doc.RootElement, options);
+        }
+
+        internal static SubSingletonData DeserializeSubSingletonData(JsonElement element, ModelSerializerOptions options = default)
+        {
+            options ??= ModelSerializerOptions.AzureServiceDefault;
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
@@ -58,6 +79,12 @@ namespace MgmtExtensionResource
                 }
             }
             return new SubSingletonData(id, name, type, systemData.Value, something.Value);
+        }
+
+        object IJsonModelSerializable.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        {
+            using var doc = JsonDocument.ParseValue(ref reader);
+            return DeserializeSubSingletonData(doc.RootElement, options);
         }
     }
 }

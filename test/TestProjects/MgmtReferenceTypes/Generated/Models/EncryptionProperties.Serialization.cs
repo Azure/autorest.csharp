@@ -14,11 +14,11 @@ using Azure.Core.Serialization;
 namespace Azure.ResourceManager.Fake.Models
 {
     [JsonConverter(typeof(EncryptionPropertiesConverter))]
-    public partial class EncryptionProperties : IUtf8JsonSerializable, IModelSerializable
+    public partial class EncryptionProperties : IUtf8JsonSerializable, IJsonModelSerializable
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelSerializable)this).Serialize(writer, new SerializableOptions());
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModelSerializable)this).Serialize(writer, ModelSerializerOptions.AzureServiceDefault);
 
-        void IModelSerializable.Serialize(Utf8JsonWriter writer, SerializableOptions options)
+        void IJsonModelSerializable.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
             writer.WriteStartObject();
             if (Optional.IsDefined(Status))
@@ -34,8 +34,15 @@ namespace Azure.ResourceManager.Fake.Models
             writer.WriteEndObject();
         }
 
-        internal static EncryptionProperties DeserializeEncryptionProperties(JsonElement element, SerializableOptions options = default)
+        object IModelSerializable.Deserialize(BinaryData data, ModelSerializerOptions options)
         {
+            using var doc = JsonDocument.Parse(data);
+            return DeserializeEncryptionProperties(doc.RootElement, options);
+        }
+
+        internal static EncryptionProperties DeserializeEncryptionProperties(JsonElement element, ModelSerializerOptions options = default)
+        {
+            options ??= ModelSerializerOptions.AzureServiceDefault;
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
@@ -64,6 +71,12 @@ namespace Azure.ResourceManager.Fake.Models
                 }
             }
             return new EncryptionProperties(Optional.ToNullable(status), keyVaultProperties.Value);
+        }
+
+        object IJsonModelSerializable.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        {
+            using var doc = JsonDocument.ParseValue(ref reader);
+            return DeserializeEncryptionProperties(doc.RootElement, options);
         }
 
         internal partial class EncryptionPropertiesConverter : JsonConverter<EncryptionProperties>

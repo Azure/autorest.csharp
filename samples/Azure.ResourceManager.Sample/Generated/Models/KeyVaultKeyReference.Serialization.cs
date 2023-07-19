@@ -13,11 +13,11 @@ using Azure.ResourceManager.Resources.Models;
 
 namespace Azure.ResourceManager.Sample.Models
 {
-    public partial class KeyVaultKeyReference : IUtf8JsonSerializable, IModelSerializable
+    public partial class KeyVaultKeyReference : IUtf8JsonSerializable, IJsonModelSerializable
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelSerializable)this).Serialize(writer, new SerializableOptions());
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModelSerializable)this).Serialize(writer, ModelSerializerOptions.AzureServiceDefault);
 
-        void IModelSerializable.Serialize(Utf8JsonWriter writer, SerializableOptions options)
+        void IJsonModelSerializable.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
             writer.WriteStartObject();
             writer.WritePropertyName("keyUrl"u8);
@@ -26,8 +26,15 @@ namespace Azure.ResourceManager.Sample.Models
             JsonSerializer.Serialize(writer, SourceVault); writer.WriteEndObject();
         }
 
-        internal static KeyVaultKeyReference DeserializeKeyVaultKeyReference(JsonElement element, SerializableOptions options = default)
+        object IModelSerializable.Deserialize(BinaryData data, ModelSerializerOptions options)
         {
+            using var doc = JsonDocument.Parse(data);
+            return DeserializeKeyVaultKeyReference(doc.RootElement, options);
+        }
+
+        internal static KeyVaultKeyReference DeserializeKeyVaultKeyReference(JsonElement element, ModelSerializerOptions options = default)
+        {
+            options ??= ModelSerializerOptions.AzureServiceDefault;
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
@@ -48,6 +55,12 @@ namespace Azure.ResourceManager.Sample.Models
                 }
             }
             return new KeyVaultKeyReference(keyUrl, sourceVault);
+        }
+
+        object IJsonModelSerializable.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        {
+            using var doc = JsonDocument.ParseValue(ref reader);
+            return DeserializeKeyVaultKeyReference(doc.RootElement, options);
         }
     }
 }

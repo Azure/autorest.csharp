@@ -5,17 +5,18 @@
 
 #nullable disable
 
+using System;
 using System.Text.Json;
 using Azure.Core;
 using Azure.Core.Serialization;
 
 namespace MgmtRenameRules.Models
 {
-    public partial class OrchestrationServiceStateContent : IUtf8JsonSerializable, IModelSerializable
+    public partial class OrchestrationServiceStateContent : IUtf8JsonSerializable, IJsonModelSerializable
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelSerializable)this).Serialize(writer, new SerializableOptions());
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModelSerializable)this).Serialize(writer, ModelSerializerOptions.AzureServiceDefault);
 
-        void IModelSerializable.Serialize(Utf8JsonWriter writer, SerializableOptions options)
+        void IJsonModelSerializable.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
             writer.WriteStartObject();
             writer.WritePropertyName("serviceName"u8);
@@ -23,6 +24,43 @@ namespace MgmtRenameRules.Models
             writer.WritePropertyName("action"u8);
             writer.WriteStringValue(Action.ToString());
             writer.WriteEndObject();
+        }
+
+        object IModelSerializable.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            using var doc = JsonDocument.Parse(data);
+            return DeserializeOrchestrationServiceStateContent(doc.RootElement, options);
+        }
+
+        internal static OrchestrationServiceStateContent DeserializeOrchestrationServiceStateContent(JsonElement element, ModelSerializerOptions options = default)
+        {
+            options ??= ModelSerializerOptions.AzureServiceDefault;
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
+            OrchestrationServiceName serviceName = default;
+            OrchestrationServiceStateAction action = default;
+            foreach (var property in element.EnumerateObject())
+            {
+                if (property.NameEquals("serviceName"u8))
+                {
+                    serviceName = new OrchestrationServiceName(property.Value.GetString());
+                    continue;
+                }
+                if (property.NameEquals("action"u8))
+                {
+                    action = new OrchestrationServiceStateAction(property.Value.GetString());
+                    continue;
+                }
+            }
+            return new OrchestrationServiceStateContent(serviceName, action);
+        }
+
+        object IJsonModelSerializable.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        {
+            using var doc = JsonDocument.ParseValue(ref reader);
+            return DeserializeOrchestrationServiceStateContent(doc.RootElement, options);
         }
     }
 }

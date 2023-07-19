@@ -15,11 +15,11 @@ using Azure.Core.Serialization;
 namespace Azure.ResourceManager.Fake.Models
 {
     [JsonConverter(typeof(ErrorResponseConverter))]
-    public partial class ErrorResponse : IUtf8JsonSerializable, IModelSerializable
+    public partial class ErrorResponse : IUtf8JsonSerializable, IJsonModelSerializable
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelSerializable)this).Serialize(writer, new SerializableOptions());
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModelSerializable)this).Serialize(writer, ModelSerializerOptions.AzureServiceDefault);
 
-        void IModelSerializable.Serialize(Utf8JsonWriter writer, SerializableOptions options)
+        void IJsonModelSerializable.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
             writer.WriteStartObject();
             if (Optional.IsDefined(Error))
@@ -30,8 +30,15 @@ namespace Azure.ResourceManager.Fake.Models
             writer.WriteEndObject();
         }
 
-        internal static ErrorResponse DeserializeErrorResponse(JsonElement element, SerializableOptions options = default)
+        object IModelSerializable.Deserialize(BinaryData data, ModelSerializerOptions options)
         {
+            using var doc = JsonDocument.Parse(data);
+            return DeserializeErrorResponse(doc.RootElement, options);
+        }
+
+        internal static ErrorResponse DeserializeErrorResponse(JsonElement element, ModelSerializerOptions options = default)
+        {
+            options ??= ModelSerializerOptions.AzureServiceDefault;
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
@@ -50,6 +57,12 @@ namespace Azure.ResourceManager.Fake.Models
                 }
             }
             return new ErrorResponse(error.Value);
+        }
+
+        object IJsonModelSerializable.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        {
+            using var doc = JsonDocument.ParseValue(ref reader);
+            return DeserializeErrorResponse(doc.RootElement, options);
         }
 
         internal partial class ErrorResponseConverter : JsonConverter<ErrorResponse>

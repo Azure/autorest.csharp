@@ -15,11 +15,11 @@ using MgmtExtensionResource.Models;
 
 namespace MgmtExtensionResource
 {
-    public partial class PolicyDefinitionData : IUtf8JsonSerializable, IModelSerializable
+    public partial class PolicyDefinitionData : IUtf8JsonSerializable, IJsonModelSerializable
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelSerializable)this).Serialize(writer, new SerializableOptions());
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModelSerializable)this).Serialize(writer, ModelSerializerOptions.AzureServiceDefault);
 
-        void IModelSerializable.Serialize(Utf8JsonWriter writer, SerializableOptions options)
+        void IJsonModelSerializable.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
             writer.WriteStartObject();
             writer.WritePropertyName("properties"u8);
@@ -77,8 +77,15 @@ namespace MgmtExtensionResource
             writer.WriteEndObject();
         }
 
-        internal static PolicyDefinitionData DeserializePolicyDefinitionData(JsonElement element, SerializableOptions options = default)
+        object IModelSerializable.Deserialize(BinaryData data, ModelSerializerOptions options)
         {
+            using var doc = JsonDocument.Parse(data);
+            return DeserializePolicyDefinitionData(doc.RootElement, options);
+        }
+
+        internal static PolicyDefinitionData DeserializePolicyDefinitionData(JsonElement element, ModelSerializerOptions options = default)
+        {
+            options ??= ModelSerializerOptions.AzureServiceDefault;
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
@@ -190,6 +197,12 @@ namespace MgmtExtensionResource
                 }
             }
             return new PolicyDefinitionData(id, name, type, systemData.Value, Optional.ToNullable(policyType), mode.Value, displayName.Value, description.Value, policyRule.Value, metadata.Value, Optional.ToDictionary(parameters));
+        }
+
+        object IJsonModelSerializable.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        {
+            using var doc = JsonDocument.ParseValue(ref reader);
+            return DeserializePolicyDefinitionData(doc.RootElement, options);
         }
     }
 }

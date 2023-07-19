@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure;
@@ -13,11 +14,11 @@ using Azure.Core.Serialization;
 
 namespace _Specs_.Azure.Core.Basic.Models
 {
-    public partial class User : IUtf8JsonSerializable, IModelSerializable
+    public partial class User : IUtf8JsonSerializable, IJsonModelSerializable
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelSerializable)this).Serialize(writer, new SerializableOptions());
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModelSerializable)this).Serialize(writer, ModelSerializerOptions.AzureServiceDefault);
 
-        void IModelSerializable.Serialize(Utf8JsonWriter writer, SerializableOptions options)
+        void IJsonModelSerializable.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
             writer.WriteStartObject();
             writer.WritePropertyName("name"u8);
@@ -35,8 +36,15 @@ namespace _Specs_.Azure.Core.Basic.Models
             writer.WriteEndObject();
         }
 
-        internal static User DeserializeUser(JsonElement element, SerializableOptions options = default)
+        object IModelSerializable.Deserialize(BinaryData data, ModelSerializerOptions options)
         {
+            using var doc = JsonDocument.Parse(data);
+            return DeserializeUser(doc.RootElement, options);
+        }
+
+        internal static User DeserializeUser(JsonElement element, ModelSerializerOptions options = default)
+        {
+            options ??= ModelSerializerOptions.AzureServiceDefault;
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
@@ -78,6 +86,12 @@ namespace _Specs_.Azure.Core.Basic.Models
                 }
             }
             return new User(id, name, Optional.ToList(orders), etag);
+        }
+
+        object IJsonModelSerializable.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        {
+            using var doc = JsonDocument.ParseValue(ref reader);
+            return DeserializeUser(doc.RootElement, options);
         }
 
         /// <summary> Deserializes the model from a raw response. </summary>

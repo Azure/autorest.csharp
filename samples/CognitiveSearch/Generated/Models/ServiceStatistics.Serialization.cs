@@ -5,16 +5,36 @@
 
 #nullable disable
 
+using System;
 using System.Text.Json;
 using Azure.Core;
 using Azure.Core.Serialization;
 
 namespace CognitiveSearch.Models
 {
-    public partial class ServiceStatistics
+    public partial class ServiceStatistics : IUtf8JsonSerializable, IJsonModelSerializable
     {
-        internal static ServiceStatistics DeserializeServiceStatistics(JsonElement element, SerializableOptions options = default)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModelSerializable)this).Serialize(writer, ModelSerializerOptions.AzureServiceDefault);
+
+        void IJsonModelSerializable.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
+            writer.WriteStartObject();
+            writer.WritePropertyName("counters"u8);
+            writer.WriteObjectValue(Counters);
+            writer.WritePropertyName("limits"u8);
+            writer.WriteObjectValue(Limits);
+            writer.WriteEndObject();
+        }
+
+        object IModelSerializable.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            using var doc = JsonDocument.Parse(data);
+            return DeserializeServiceStatistics(doc.RootElement, options);
+        }
+
+        internal static ServiceStatistics DeserializeServiceStatistics(JsonElement element, ModelSerializerOptions options = default)
+        {
+            options ??= ModelSerializerOptions.AzureServiceDefault;
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
@@ -35,6 +55,12 @@ namespace CognitiveSearch.Models
                 }
             }
             return new ServiceStatistics(counters, limits);
+        }
+
+        object IJsonModelSerializable.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        {
+            using var doc = JsonDocument.ParseValue(ref reader);
+            return DeserializeServiceStatistics(doc.RootElement, options);
         }
     }
 }

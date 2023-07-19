@@ -14,11 +14,11 @@ using Azure.Core.Serialization;
 namespace Inheritance.Models
 {
     [JsonConverter(typeof(DerivedClassWithExtensibleEnumDiscriminatorConverter))]
-    public partial class DerivedClassWithExtensibleEnumDiscriminator : IUtf8JsonSerializable, IModelSerializable
+    public partial class DerivedClassWithExtensibleEnumDiscriminator : IUtf8JsonSerializable, IJsonModelSerializable
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelSerializable)this).Serialize(writer, new SerializableOptions());
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModelSerializable)this).Serialize(writer, ModelSerializerOptions.AzureServiceDefault);
 
-        void IModelSerializable.Serialize(Utf8JsonWriter writer, SerializableOptions options)
+        void IJsonModelSerializable.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
             writer.WriteStartObject();
             writer.WritePropertyName("DiscriminatorProperty"u8);
@@ -26,8 +26,15 @@ namespace Inheritance.Models
             writer.WriteEndObject();
         }
 
-        internal static DerivedClassWithExtensibleEnumDiscriminator DeserializeDerivedClassWithExtensibleEnumDiscriminator(JsonElement element, SerializableOptions options = default)
+        object IModelSerializable.Deserialize(BinaryData data, ModelSerializerOptions options)
         {
+            using var doc = JsonDocument.Parse(data);
+            return DeserializeDerivedClassWithExtensibleEnumDiscriminator(doc.RootElement, options);
+        }
+
+        internal static DerivedClassWithExtensibleEnumDiscriminator DeserializeDerivedClassWithExtensibleEnumDiscriminator(JsonElement element, ModelSerializerOptions options = default)
+        {
+            options ??= ModelSerializerOptions.AzureServiceDefault;
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
@@ -42,6 +49,12 @@ namespace Inheritance.Models
                 }
             }
             return new DerivedClassWithExtensibleEnumDiscriminator(discriminatorProperty);
+        }
+
+        object IJsonModelSerializable.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        {
+            using var doc = JsonDocument.ParseValue(ref reader);
+            return DeserializeDerivedClassWithExtensibleEnumDiscriminator(doc.RootElement, options);
         }
 
         internal partial class DerivedClassWithExtensibleEnumDiscriminatorConverter : JsonConverter<DerivedClassWithExtensibleEnumDiscriminator>

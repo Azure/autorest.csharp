@@ -12,10 +12,25 @@ using Azure.Core.Serialization;
 
 namespace MgmtCollectionParent.Models
 {
-    public partial class StageDetails
+    public partial class StageDetails : IUtf8JsonSerializable, IJsonModelSerializable
     {
-        internal static StageDetails DeserializeStageDetails(JsonElement element, SerializableOptions options = default)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModelSerializable)this).Serialize(writer, ModelSerializerOptions.AzureServiceDefault);
+
+        void IJsonModelSerializable.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
+            writer.WriteStartObject();
+            writer.WriteEndObject();
+        }
+
+        object IModelSerializable.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            using var doc = JsonDocument.Parse(data);
+            return DeserializeStageDetails(doc.RootElement, options);
+        }
+
+        internal static StageDetails DeserializeStageDetails(JsonElement element, ModelSerializerOptions options = default)
+        {
+            options ??= ModelSerializerOptions.AzureServiceDefault;
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
@@ -60,6 +75,12 @@ namespace MgmtCollectionParent.Models
                 }
             }
             return new StageDetails(Optional.ToNullable(stageStatus), Optional.ToNullable(stageName), displayName.Value, Optional.ToNullable(startTime));
+        }
+
+        object IJsonModelSerializable.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        {
+            using var doc = JsonDocument.ParseValue(ref reader);
+            return DeserializeStageDetails(doc.RootElement, options);
         }
     }
 }

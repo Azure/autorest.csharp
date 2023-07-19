@@ -51,5 +51,20 @@ namespace model_flattening.Models
         {
             return new ProductWrapper(value);
         }
+
+        /// <summary> Initializes a new instance of FlattenParameterGroup. </summary>
+        /// <param name="name"> Product name with value 'groupproduct'. </param>
+        /// <param name="simpleBodyProduct"> Simple body product to put. </param>
+        /// <param name="productId"> Unique identifier representing a specific product for a given latitude &amp; longitude. For example, uberX in San Francisco will have a different product_id than uberX in Los Angeles. </param>
+        /// <param name="description"> Description of product. </param>
+        /// <param name="maxProductDisplayName"> Display name of product. </param>
+        /// <param name="capacity"> Capacity of product. For example, 4 people. </param>
+        /// <param name="genericValue"> Generic URL value. </param>
+        /// <param name="odataValue"> URL value. </param>
+        /// <returns> A new <see cref="Models.FlattenParameterGroup"/> instance for mocking. </returns>
+        public static FlattenParameterGroup FlattenParameterGroup(string name = null, SimpleProduct simpleBodyProduct = null, string productId = null, string description = null, string maxProductDisplayName = null, SimpleProductPropertiesMaxProductCapacity? capacity = null, string genericValue = null, string odataValue = null)
+        {
+            return new FlattenParameterGroup(name, simpleBodyProduct, productId, description, maxProductDisplayName, capacity, genericValue, odataValue);
+        }
     }
 }

@@ -92,9 +92,9 @@ namespace Azure.Core.Tests
         {
             internal bool didWrite = false;
 
-            public void Write(Utf8JsonWriter writer) => Write(writer, new SerializableOptions());
+            public void Write(Utf8JsonWriter writer) => Write(writer, new ModelSerializerOptions());
 
-            public void Write(Utf8JsonWriter writer, SerializableOptions options)
+            public void Write(Utf8JsonWriter writer, ModelSerializerOptions options)
             {
                 didWrite = true;
             }

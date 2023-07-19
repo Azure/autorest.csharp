@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
@@ -12,10 +13,32 @@ using Azure.Core.Serialization;
 
 namespace CognitiveSearch.Models
 {
-    public partial class AnalyzeResult
+    public partial class AnalyzeResult : IUtf8JsonSerializable, IJsonModelSerializable
     {
-        internal static AnalyzeResult DeserializeAnalyzeResult(JsonElement element, SerializableOptions options = default)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModelSerializable)this).Serialize(writer, ModelSerializerOptions.AzureServiceDefault);
+
+        void IJsonModelSerializable.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
+            writer.WriteStartObject();
+            writer.WritePropertyName("tokens"u8);
+            writer.WriteStartArray();
+            foreach (var item in Tokens)
+            {
+                writer.WriteObjectValue(item);
+            }
+            writer.WriteEndArray();
+            writer.WriteEndObject();
+        }
+
+        object IModelSerializable.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            using var doc = JsonDocument.Parse(data);
+            return DeserializeAnalyzeResult(doc.RootElement, options);
+        }
+
+        internal static AnalyzeResult DeserializeAnalyzeResult(JsonElement element, ModelSerializerOptions options = default)
+        {
+            options ??= ModelSerializerOptions.AzureServiceDefault;
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
@@ -35,6 +58,12 @@ namespace CognitiveSearch.Models
                 }
             }
             return new AnalyzeResult(tokens);
+        }
+
+        object IJsonModelSerializable.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        {
+            using var doc = JsonDocument.ParseValue(ref reader);
+            return DeserializeAnalyzeResult(doc.RootElement, options);
         }
     }
 }

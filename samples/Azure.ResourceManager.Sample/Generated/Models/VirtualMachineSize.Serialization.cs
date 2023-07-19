@@ -5,16 +5,62 @@
 
 #nullable disable
 
+using System;
 using System.Text.Json;
 using Azure.Core;
 using Azure.Core.Serialization;
 
 namespace Azure.ResourceManager.Sample.Models
 {
-    public partial class VirtualMachineSize
+    public partial class VirtualMachineSize : IUtf8JsonSerializable, IJsonModelSerializable
     {
-        internal static VirtualMachineSize DeserializeVirtualMachineSize(JsonElement element, SerializableOptions options = default)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModelSerializable)this).Serialize(writer, ModelSerializerOptions.AzureServiceDefault);
+
+        void IJsonModelSerializable.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
+            writer.WriteStartObject();
+            if (Optional.IsDefined(Name))
+            {
+                writer.WritePropertyName("name"u8);
+                writer.WriteStringValue(Name);
+            }
+            if (Optional.IsDefined(NumberOfCores))
+            {
+                writer.WritePropertyName("numberOfCores"u8);
+                writer.WriteNumberValue(NumberOfCores.Value);
+            }
+            if (Optional.IsDefined(OsDiskSizeInMB))
+            {
+                writer.WritePropertyName("osDiskSizeInMB"u8);
+                writer.WriteNumberValue(OsDiskSizeInMB.Value);
+            }
+            if (Optional.IsDefined(ResourceDiskSizeInMB))
+            {
+                writer.WritePropertyName("resourceDiskSizeInMB"u8);
+                writer.WriteNumberValue(ResourceDiskSizeInMB.Value);
+            }
+            if (Optional.IsDefined(MemoryInMB))
+            {
+                writer.WritePropertyName("memoryInMB"u8);
+                writer.WriteNumberValue(MemoryInMB.Value);
+            }
+            if (Optional.IsDefined(MaxDataDiskCount))
+            {
+                writer.WritePropertyName("maxDataDiskCount"u8);
+                writer.WriteNumberValue(MaxDataDiskCount.Value);
+            }
+            writer.WriteEndObject();
+        }
+
+        object IModelSerializable.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            using var doc = JsonDocument.Parse(data);
+            return DeserializeVirtualMachineSize(doc.RootElement, options);
+        }
+
+        internal static VirtualMachineSize DeserializeVirtualMachineSize(JsonElement element, ModelSerializerOptions options = default)
+        {
+            options ??= ModelSerializerOptions.AzureServiceDefault;
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
@@ -79,6 +125,12 @@ namespace Azure.ResourceManager.Sample.Models
                 }
             }
             return new VirtualMachineSize(name.Value, Optional.ToNullable(numberOfCores), Optional.ToNullable(osDiskSizeInMB), Optional.ToNullable(resourceDiskSizeInMB), Optional.ToNullable(memoryInMB), Optional.ToNullable(maxDataDiskCount));
+        }
+
+        object IJsonModelSerializable.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        {
+            using var doc = JsonDocument.ParseValue(ref reader);
+            return DeserializeVirtualMachineSize(doc.RootElement, options);
         }
     }
 }

@@ -5,16 +5,42 @@
 
 #nullable disable
 
+using System;
 using System.Text.Json;
 using Azure.Core;
 using Azure.Core.Serialization;
 
 namespace MgmtHierarchicalNonResource.Models
 {
-    public partial class ResourceRange
+    public partial class ResourceRange : IUtf8JsonSerializable, IJsonModelSerializable
     {
-        internal static ResourceRange DeserializeResourceRange(JsonElement element, SerializableOptions options = default)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModelSerializable)this).Serialize(writer, ModelSerializerOptions.AzureServiceDefault);
+
+        void IJsonModelSerializable.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
+            writer.WriteStartObject();
+            if (Optional.IsDefined(Min))
+            {
+                writer.WritePropertyName("min"u8);
+                writer.WriteNumberValue(Min.Value);
+            }
+            if (Optional.IsDefined(Max))
+            {
+                writer.WritePropertyName("max"u8);
+                writer.WriteNumberValue(Max.Value);
+            }
+            writer.WriteEndObject();
+        }
+
+        object IModelSerializable.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            using var doc = JsonDocument.Parse(data);
+            return DeserializeResourceRange(doc.RootElement, options);
+        }
+
+        internal static ResourceRange DeserializeResourceRange(JsonElement element, ModelSerializerOptions options = default)
+        {
+            options ??= ModelSerializerOptions.AzureServiceDefault;
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
@@ -43,6 +69,12 @@ namespace MgmtHierarchicalNonResource.Models
                 }
             }
             return new ResourceRange(Optional.ToNullable(min), Optional.ToNullable(max));
+        }
+
+        object IJsonModelSerializable.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        {
+            using var doc = JsonDocument.ParseValue(ref reader);
+            return DeserializeResourceRange(doc.RootElement, options);
         }
     }
 }

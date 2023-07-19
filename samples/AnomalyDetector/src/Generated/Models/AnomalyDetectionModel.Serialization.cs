@@ -13,10 +13,34 @@ using Azure.Core.Serialization;
 
 namespace AnomalyDetector.Models
 {
-    public partial class AnomalyDetectionModel
+    public partial class AnomalyDetectionModel : IUtf8JsonSerializable, IJsonModelSerializable
     {
-        internal static AnomalyDetectionModel DeserializeAnomalyDetectionModel(JsonElement element, SerializableOptions options = default)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModelSerializable)this).Serialize(writer, ModelSerializerOptions.AzureServiceDefault);
+
+        void IJsonModelSerializable.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
+            writer.WriteStartObject();
+            writer.WritePropertyName("createdTime"u8);
+            writer.WriteStringValue(CreatedTime, "O");
+            writer.WritePropertyName("lastUpdatedTime"u8);
+            writer.WriteStringValue(LastUpdatedTime, "O");
+            if (Optional.IsDefined(ModelInfo))
+            {
+                writer.WritePropertyName("modelInfo"u8);
+                writer.WriteObjectValue(ModelInfo);
+            }
+            writer.WriteEndObject();
+        }
+
+        object IModelSerializable.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            using var doc = JsonDocument.Parse(data);
+            return DeserializeAnomalyDetectionModel(doc.RootElement, options);
+        }
+
+        internal static AnomalyDetectionModel DeserializeAnomalyDetectionModel(JsonElement element, ModelSerializerOptions options = default)
+        {
+            options ??= ModelSerializerOptions.AzureServiceDefault;
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
@@ -55,12 +79,26 @@ namespace AnomalyDetector.Models
             return new AnomalyDetectionModel(modelId, createdTime, lastUpdatedTime, modelInfo.Value);
         }
 
+        object IJsonModelSerializable.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        {
+            using var doc = JsonDocument.ParseValue(ref reader);
+            return DeserializeAnomalyDetectionModel(doc.RootElement, options);
+        }
+
         /// <summary> Deserializes the model from a raw response. </summary>
         /// <param name="response"> The response to deserialize the model from. </param>
         internal static AnomalyDetectionModel FromResponse(Response response)
         {
             using var document = JsonDocument.Parse(response.Content);
             return DeserializeAnomalyDetectionModel(document.RootElement);
+        }
+
+        /// <summary> Convert into a Utf8JsonRequestContent. </summary>
+        internal virtual RequestContent ToRequestContent()
+        {
+            var content = new Utf8JsonRequestContent();
+            content.JsonWriter.WriteObjectValue(this);
+            return content;
         }
     }
 }

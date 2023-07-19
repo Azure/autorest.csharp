@@ -5,22 +5,63 @@
 
 #nullable disable
 
+using System;
 using System.Text.Json;
+using Azure;
 using Azure.Core;
 using Azure.Core.Serialization;
 
 namespace Projection.ProjectedName.Models
 {
-    public partial class LanguageProjectedNameModel : IUtf8JsonSerializable, IModelSerializable
+    public partial class LanguageProjectedNameModel : IUtf8JsonSerializable, IJsonModelSerializable
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelSerializable)this).Serialize(writer, new SerializableOptions());
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModelSerializable)this).Serialize(writer, ModelSerializerOptions.AzureServiceDefault);
 
-        void IModelSerializable.Serialize(Utf8JsonWriter writer, SerializableOptions options)
+        void IJsonModelSerializable.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
             writer.WriteStartObject();
             writer.WritePropertyName("defaultName"u8);
             writer.WriteBooleanValue(CSName);
             writer.WriteEndObject();
+        }
+
+        object IModelSerializable.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            using var doc = JsonDocument.Parse(data);
+            return DeserializeLanguageProjectedNameModel(doc.RootElement, options);
+        }
+
+        internal static LanguageProjectedNameModel DeserializeLanguageProjectedNameModel(JsonElement element, ModelSerializerOptions options = default)
+        {
+            options ??= ModelSerializerOptions.AzureServiceDefault;
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
+            bool defaultName = default;
+            foreach (var property in element.EnumerateObject())
+            {
+                if (property.NameEquals("defaultName"u8))
+                {
+                    defaultName = property.Value.GetBoolean();
+                    continue;
+                }
+            }
+            return new LanguageProjectedNameModel(defaultName);
+        }
+
+        object IJsonModelSerializable.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        {
+            using var doc = JsonDocument.ParseValue(ref reader);
+            return DeserializeLanguageProjectedNameModel(doc.RootElement, options);
+        }
+
+        /// <summary> Deserializes the model from a raw response. </summary>
+        /// <param name="response"> The response to deserialize the model from. </param>
+        internal static LanguageProjectedNameModel FromResponse(Response response)
+        {
+            using var document = JsonDocument.Parse(response.Content);
+            return DeserializeLanguageProjectedNameModel(document.RootElement);
         }
 
         /// <summary> Convert into a Utf8JsonRequestContent. </summary>

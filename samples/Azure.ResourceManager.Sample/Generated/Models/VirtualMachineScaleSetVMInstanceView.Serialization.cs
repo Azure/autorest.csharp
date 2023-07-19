@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
@@ -12,10 +13,90 @@ using Azure.Core.Serialization;
 
 namespace Azure.ResourceManager.Sample.Models
 {
-    public partial class VirtualMachineScaleSetVMInstanceView
+    public partial class VirtualMachineScaleSetVMInstanceView : IUtf8JsonSerializable, IJsonModelSerializable
     {
-        internal static VirtualMachineScaleSetVMInstanceView DeserializeVirtualMachineScaleSetVMInstanceView(JsonElement element, SerializableOptions options = default)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModelSerializable)this).Serialize(writer, ModelSerializerOptions.AzureServiceDefault);
+
+        void IJsonModelSerializable.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
+            writer.WriteStartObject();
+            if (Optional.IsDefined(PlatformUpdateDomain))
+            {
+                writer.WritePropertyName("platformUpdateDomain"u8);
+                writer.WriteNumberValue(PlatformUpdateDomain.Value);
+            }
+            if (Optional.IsDefined(PlatformFaultDomain))
+            {
+                writer.WritePropertyName("platformFaultDomain"u8);
+                writer.WriteNumberValue(PlatformFaultDomain.Value);
+            }
+            if (Optional.IsDefined(RdpThumbPrint))
+            {
+                writer.WritePropertyName("rdpThumbPrint"u8);
+                writer.WriteStringValue(RdpThumbPrint);
+            }
+            if (Optional.IsDefined(VmAgent))
+            {
+                writer.WritePropertyName("vmAgent"u8);
+                writer.WriteObjectValue(VmAgent);
+            }
+            if (Optional.IsDefined(MaintenanceRedeployStatus))
+            {
+                writer.WritePropertyName("maintenanceRedeployStatus"u8);
+                writer.WriteObjectValue(MaintenanceRedeployStatus);
+            }
+            if (Optional.IsCollectionDefined(Disks))
+            {
+                writer.WritePropertyName("disks"u8);
+                writer.WriteStartArray();
+                foreach (var item in Disks)
+                {
+                    writer.WriteObjectValue(item);
+                }
+                writer.WriteEndArray();
+            }
+            if (Optional.IsCollectionDefined(Extensions))
+            {
+                writer.WritePropertyName("extensions"u8);
+                writer.WriteStartArray();
+                foreach (var item in Extensions)
+                {
+                    writer.WriteObjectValue(item);
+                }
+                writer.WriteEndArray();
+            }
+            if (Optional.IsDefined(BootDiagnostics))
+            {
+                writer.WritePropertyName("bootDiagnostics"u8);
+                writer.WriteObjectValue(BootDiagnostics);
+            }
+            if (Optional.IsCollectionDefined(Statuses))
+            {
+                writer.WritePropertyName("statuses"u8);
+                writer.WriteStartArray();
+                foreach (var item in Statuses)
+                {
+                    writer.WriteObjectValue(item);
+                }
+                writer.WriteEndArray();
+            }
+            if (Optional.IsDefined(PlacementGroupId))
+            {
+                writer.WritePropertyName("placementGroupId"u8);
+                writer.WriteStringValue(PlacementGroupId);
+            }
+            writer.WriteEndObject();
+        }
+
+        object IModelSerializable.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            using var doc = JsonDocument.Parse(data);
+            return DeserializeVirtualMachineScaleSetVMInstanceView(doc.RootElement, options);
+        }
+
+        internal static VirtualMachineScaleSetVMInstanceView DeserializeVirtualMachineScaleSetVMInstanceView(JsonElement element, ModelSerializerOptions options = default)
+        {
+            options ??= ModelSerializerOptions.AzureServiceDefault;
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
@@ -147,6 +228,12 @@ namespace Azure.ResourceManager.Sample.Models
                 }
             }
             return new VirtualMachineScaleSetVMInstanceView(Optional.ToNullable(platformUpdateDomain), Optional.ToNullable(platformFaultDomain), rdpThumbPrint.Value, vmAgent.Value, maintenanceRedeployStatus.Value, Optional.ToList(disks), Optional.ToList(extensions), vmHealth.Value, bootDiagnostics.Value, Optional.ToList(statuses), assignedHost.Value, placementGroupId.Value);
+        }
+
+        object IJsonModelSerializable.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        {
+            using var doc = JsonDocument.ParseValue(ref reader);
+            return DeserializeVirtualMachineScaleSetVMInstanceView(doc.RootElement, options);
         }
     }
 }

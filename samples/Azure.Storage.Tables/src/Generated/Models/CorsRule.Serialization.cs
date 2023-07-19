@@ -5,17 +5,21 @@
 
 #nullable disable
 
+using System;
 using System.Xml;
 using System.Xml.Linq;
 using Azure.Core;
+using Azure.Core.Serialization;
 
 namespace Azure.Storage.Tables.Models
 {
-    public partial class CorsRule : IXmlSerializable
+    public partial class CorsRule : IXmlSerializable, IXmlModelSerializable
     {
-        void IXmlSerializable.Write(XmlWriter writer, string nameHint)
+        void IXmlSerializable.Write(XmlWriter writer, string nameHint) => ((IXmlModelSerializable)this).Serialize(writer, ModelSerializerOptions.AzureServiceDefault);
+
+        void IXmlModelSerializable.Serialize(XmlWriter writer, ModelSerializerOptions options)
         {
-            writer.WriteStartElement(nameHint ?? "CorsRule");
+            writer.WriteStartElement("CorsRule");
             writer.WriteStartElement("AllowedOrigins");
             writer.WriteValue(AllowedOrigins);
             writer.WriteEndElement();
@@ -34,8 +38,14 @@ namespace Azure.Storage.Tables.Models
             writer.WriteEndElement();
         }
 
-        internal static CorsRule DeserializeCorsRule(XElement element)
+        object IModelSerializable.Deserialize(BinaryData data, ModelSerializerOptions options)
         {
+            return DeserializeCorsRule(XElement.Load(data.ToStream()), options);
+        }
+
+        internal static CorsRule DeserializeCorsRule(XElement element, ModelSerializerOptions options = default)
+        {
+            options ??= ModelSerializerOptions.AzureServiceDefault;
             string allowedOrigins = default;
             string allowedMethods = default;
             string allowedHeaders = default;

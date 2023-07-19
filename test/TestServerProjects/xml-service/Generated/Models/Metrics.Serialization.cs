@@ -5,17 +5,21 @@
 
 #nullable disable
 
+using System;
 using System.Xml;
 using System.Xml.Linq;
 using Azure.Core;
+using Azure.Core.Serialization;
 
 namespace xml_service.Models
 {
-    public partial class Metrics : IXmlSerializable
+    public partial class Metrics : IXmlSerializable, IXmlModelSerializable
     {
-        void IXmlSerializable.Write(XmlWriter writer, string nameHint)
+        void IXmlSerializable.Write(XmlWriter writer, string nameHint) => ((IXmlModelSerializable)this).Serialize(writer, ModelSerializerOptions.AzureServiceDefault);
+
+        void IXmlModelSerializable.Serialize(XmlWriter writer, ModelSerializerOptions options)
         {
-            writer.WriteStartElement(nameHint ?? "Metrics");
+            writer.WriteStartElement("Metrics");
             if (Optional.IsDefined(Version))
             {
                 writer.WriteStartElement("Version");
@@ -38,8 +42,14 @@ namespace xml_service.Models
             writer.WriteEndElement();
         }
 
-        internal static Metrics DeserializeMetrics(XElement element)
+        object IModelSerializable.Deserialize(BinaryData data, ModelSerializerOptions options)
         {
+            return DeserializeMetrics(XElement.Load(data.ToStream()), options);
+        }
+
+        internal static Metrics DeserializeMetrics(XElement element, ModelSerializerOptions options = default)
+        {
+            options ??= ModelSerializerOptions.AzureServiceDefault;
             string version = default;
             bool enabled = default;
             bool? includeAPIs = default;

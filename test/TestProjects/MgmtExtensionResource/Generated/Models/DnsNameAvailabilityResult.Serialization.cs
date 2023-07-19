@@ -5,16 +5,37 @@
 
 #nullable disable
 
+using System;
 using System.Text.Json;
 using Azure.Core;
 using Azure.Core.Serialization;
 
 namespace MgmtExtensionResource.Models
 {
-    public partial class DnsNameAvailabilityResult
+    public partial class DnsNameAvailabilityResult : IUtf8JsonSerializable, IJsonModelSerializable
     {
-        internal static DnsNameAvailabilityResult DeserializeDnsNameAvailabilityResult(JsonElement element, SerializableOptions options = default)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModelSerializable)this).Serialize(writer, ModelSerializerOptions.AzureServiceDefault);
+
+        void IJsonModelSerializable.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
+            writer.WriteStartObject();
+            if (Optional.IsDefined(Available))
+            {
+                writer.WritePropertyName("available"u8);
+                writer.WriteBooleanValue(Available.Value);
+            }
+            writer.WriteEndObject();
+        }
+
+        object IModelSerializable.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            using var doc = JsonDocument.Parse(data);
+            return DeserializeDnsNameAvailabilityResult(doc.RootElement, options);
+        }
+
+        internal static DnsNameAvailabilityResult DeserializeDnsNameAvailabilityResult(JsonElement element, ModelSerializerOptions options = default)
+        {
+            options ??= ModelSerializerOptions.AzureServiceDefault;
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
@@ -33,6 +54,12 @@ namespace MgmtExtensionResource.Models
                 }
             }
             return new DnsNameAvailabilityResult(Optional.ToNullable(available));
+        }
+
+        object IJsonModelSerializable.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        {
+            using var doc = JsonDocument.ParseValue(ref reader);
+            return DeserializeDnsNameAvailabilityResult(doc.RootElement, options);
         }
     }
 }
