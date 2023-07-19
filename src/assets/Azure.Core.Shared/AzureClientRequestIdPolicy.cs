@@ -1,14 +1,16 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
-namespace Azure.Core.Pipeline
+using Azure.Core.Pipeline;
+
+namespace Azure.Core
 {
     internal class AzureClientRequestIdPolicy : HttpPipelineSynchronousPolicy
     {
         internal const string ClientRequestIdHeader = "client-request-id";
         internal const string EchoClientRequestId = "return-client-request-id";
 
-        protected AzureClientRequestIdPolicy()
+        public AzureClientRequestIdPolicy()
         {
         }
 
