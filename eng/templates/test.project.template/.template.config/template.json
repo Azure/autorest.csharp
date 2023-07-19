@@ -1,0 +1,19 @@
+{
+  "$schema": "http://json.schemastore.org/template",
+  "author": "mingzhehuang@microsoft.com",
+  "classifications": [ "Azure", "Test", "ClassLibrary" ],
+  "identity": "Test.Project",
+  "name": "Test project template",
+  "shortName": "test.project",
+  "tags": {
+    "language": "C#",
+    "type": "project"
+  },
+  "sourceName": "test.project.template",
+  "preferNameDirectory": true,
+  "guids": [
+    "FAE04EC0-301F-11D3-BF4B-00C04F79EFBC",
+    "FD392C29-C15F-4CB6-A16F-C09FBCB694A3",
+    "86D654E0-FA63-4BC1-B245-3854B0964144"
+  ]
+}
