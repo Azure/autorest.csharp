@@ -6,6 +6,7 @@
     <IsTestProject Condition="$(MSBuildProjectName.EndsWith('.Tests'))">true</IsTestProject>
     <CentralPackagesFile>$(MSBuildThisFileDirectory)Packages.Data.props</CentralPackagesFile>
     <AzureCoreSharedSources>$(MSBuildThisFileDirectory)/src/assets/Azure.Core.Shared/</AzureCoreSharedSources>
+    <ShouldUseCentralVersions Condition="'$(ShouldUseCentralVersions)' == ''">true</ShouldUseCentralVersions>
   </PropertyGroup>
 
   <!-- Setup default project properties -->
