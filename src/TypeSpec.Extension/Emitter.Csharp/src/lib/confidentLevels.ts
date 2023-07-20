@@ -27,21 +27,21 @@ function getModelConfident(
     type: InputModelType,
     visitedModels: Set<InputModelType>
 ): boolean {
-    if (visitedModels.has(type)) return true; // this means this has been calculated before or being calculated right now, return
+    if (visitedModels.has(type)) return type.IsConfident ?? true; // this means this has been calculated before or being calculated right now, return
     visitedModels.add(type);
 
     if (type.IsConfident !== null) return type.IsConfident;
 
-    const isBaseLowConfident = type.BaseModel
+    const isBaseConfident = type.BaseModel
         ? getModelConfident(type.BaseModel, visitedModels)
         : true;
 
-    let isModelLowConfident = isBaseLowConfident;
+    let isModelConfident = isBaseConfident;
     for (const prop of type.Properties) {
-        isModelLowConfident &&= getConfident(prop.Type, visitedModels);
+        isModelConfident &&= getConfident(prop.Type, visitedModels);
     }
 
-    return isModelLowConfident;
+    return isModelConfident;
 }
 
 function getListConfident(
