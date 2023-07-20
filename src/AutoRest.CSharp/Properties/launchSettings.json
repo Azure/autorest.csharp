@@ -300,10 +300,6 @@
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestServerProjects\\lro\\Generated"
     },
-    "Lro-Basic-TypeSpec": {
-      "commandName": "Project",
-      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\Lro-Basic-TypeSpec\\src\\Generated -n"
-    },
     "lro-LowLevel": {
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestServerProjectsLowLevel\\lro\\src\\Generated"
@@ -623,6 +619,10 @@
     "typespec-azure/core/basic": {
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\CadlRanchProjects\\azure\\core\\basic\\src\\Generated -n"
+    },
+    "typespec-azure/core/lro/rpc/legacy": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\CadlRanchProjects\\azure\\core\\lro\\rpc\\legacy\\src\\Generated -n"
     },
     "typespec-azure/core/lro/standard": {
       "commandName": "Project",

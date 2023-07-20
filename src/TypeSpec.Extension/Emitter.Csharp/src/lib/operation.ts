@@ -43,10 +43,7 @@ import {
     isInputLiteralType,
     isInputUnionType
 } from "../type/inputType.js";
-import {
-    OperationFinalStateVia,
-    convertLroFinalStateVia
-} from "../type/operationFinalStateVia.js";
+import { convertLroFinalStateVia } from "../type/operationFinalStateVia.js";
 import { OperationLongRunning } from "../type/operationLongRunning.js";
 import { OperationPaging } from "../type/operationPaging.js";
 import { OperationResponse } from "../type/operationResponse.js";
