@@ -48,7 +48,7 @@ namespace ServiceVersionOverride
         }
 
         /// <summary>
-        /// [Protocol Method] 
+        /// [Protocol Method]
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -82,7 +82,7 @@ namespace ServiceVersionOverride
         }
 
         /// <summary>
-        /// [Protocol Method] 
+        /// [Protocol Method]
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -123,9 +123,9 @@ namespace ServiceVersionOverride
             var uri = new RawRequestUriBuilder();
             uri.Reset(_endpoint);
             uri.AppendPath("/op", false);
+            uri.AppendQuery("not-api-version-constant", "2.0", true);
             uri.AppendQuery("not-api-version-enum", notApiVersionEnum, true);
             uri.AppendQuery("api-version", _apiVersion, true);
-            uri.AppendQuery("not-api-version-constant", "2.0", true);
             request.Uri = uri;
             return message;
         }

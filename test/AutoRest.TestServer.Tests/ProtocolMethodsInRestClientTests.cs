@@ -3,6 +3,7 @@
 
 using System;
 using System.Linq;
+using System.Reflection;
 using Azure;
 using Azure.Core;
 using NUnit.Framework;
@@ -93,6 +94,15 @@ namespace AutoRest.TestServer.Tests
                     new("first", typeof(string)),
                     new("context", typeof(RequestContext))
                 });
+        }
+
+        [Test]
+        public void RepeatabilityHeadersNotInMethodSignature()
+        {
+            foreach (var m in typeof(TestServiceRestClient).GetMethods(BindingFlags.Public | BindingFlags.Instance).Where(m => m.Name.StartsWith("Create")))
+            {
+                Assert.False(m.GetParameters().Any(p => p.Name == "repeatabilityRequestId" || p.Name == "repeatabilityFirstSent"));
+            }
         }
     }
 }

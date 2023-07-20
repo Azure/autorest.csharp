@@ -24,6 +24,17 @@ namespace AutoRest.CSharp.Output.Models.Requests
             "Last-Modified",
         };
 
+        public const string RepeatabilityRequestId = "Repeatability-Request-ID";
+        public const string RepeatabilityFirstSent = "Repeatability-First-Sent";
+
+        public static HashSet<string> RepeatabilityRequestHeaders = new HashSet<string>(StringComparer.OrdinalIgnoreCase)
+        {
+            RepeatabilityRequestId,
+            RepeatabilityFirstSent,
+        };
+
+        public static bool IsRepeatabilityRequestHeader(string headerName) => RepeatabilityRequestHeaders.Contains(headerName);
+
         public string Name { get; }
         public ReferenceOrConstant Value { get; }
         public string? Delimiter { get; }

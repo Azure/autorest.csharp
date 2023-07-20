@@ -7,7 +7,7 @@
 
 using System;
 
-namespace CustomizationsInCadl.Models
+namespace CustomizationsInTsp.Models
 {
     internal static partial class EnumWithValueToRenameExtensions
     {

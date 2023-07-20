@@ -10,7 +10,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Azure.Core;
 
-namespace Spread.Models
+namespace SpreadTypeSpec.Models
 {
     /// <summary> The SpreadAliasWithOptionalPropsRequest. </summary>
     internal partial class SpreadAliasWithOptionalPropsRequest

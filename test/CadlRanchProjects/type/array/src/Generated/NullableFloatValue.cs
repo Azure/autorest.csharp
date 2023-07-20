@@ -97,7 +97,7 @@ namespace _Type._Array
         }
 
         /// <summary>
-        /// [Protocol Method] 
+        /// [Protocol Method]
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -132,7 +132,7 @@ namespace _Type._Array
         }
 
         /// <summary>
-        /// [Protocol Method] 
+        /// [Protocol Method]
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -169,31 +169,31 @@ namespace _Type._Array
         /// <param name="body"> The Array to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
-        /// <include file="Docs/NullableFloatValue.xml" path="doc/members/member[@name='PutAsync(object,CancellationToken)']/*" />
-        public virtual async Task<Response> PutAsync(object body, CancellationToken cancellationToken = default)
+        /// <include file="Docs/NullableFloatValue.xml" path="doc/members/member[@name='PutAsync(IEnumerable{float?},CancellationToken)']/*" />
+        public virtual async Task<Response> PutAsync(IEnumerable<float?> body, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(body, nameof(body));
 
             RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = await PutAsync(RequestContent.Create(body), context).ConfigureAwait(false);
+            Response response = await PutAsync(RequestContentHelper.FromEnumerable(body), context).ConfigureAwait(false);
             return response;
         }
 
         /// <param name="body"> The Array to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
-        /// <include file="Docs/NullableFloatValue.xml" path="doc/members/member[@name='Put(object,CancellationToken)']/*" />
-        public virtual Response Put(object body, CancellationToken cancellationToken = default)
+        /// <include file="Docs/NullableFloatValue.xml" path="doc/members/member[@name='Put(IEnumerable{float?},CancellationToken)']/*" />
+        public virtual Response Put(IEnumerable<float?> body, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(body, nameof(body));
 
             RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = Put(RequestContent.Create(body), context);
+            Response response = Put(RequestContentHelper.FromEnumerable(body), context);
             return response;
         }
 
         /// <summary>
-        /// [Protocol Method] 
+        /// [Protocol Method]
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -202,7 +202,7 @@ namespace _Type._Array
         /// </item>
         /// <item>
         /// <description>
-        /// Please try the simpler <see cref="PutAsync(object,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// Please try the simpler <see cref="PutAsync(IEnumerable{float?},CancellationToken)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>
@@ -232,7 +232,7 @@ namespace _Type._Array
         }
 
         /// <summary>
-        /// [Protocol Method] 
+        /// [Protocol Method]
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -241,7 +241,7 @@ namespace _Type._Array
         /// </item>
         /// <item>
         /// <description>
-        /// Please try the simpler <see cref="Put(object,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// Please try the simpler <see cref="Put(IEnumerable{float?},CancellationToken)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>

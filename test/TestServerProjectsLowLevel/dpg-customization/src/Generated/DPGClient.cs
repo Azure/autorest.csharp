@@ -73,7 +73,7 @@ namespace dpg_customization_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/DPGClient.xml" path="doc/members/member[@name='GetModelAsync(string,RequestContext)']/*" />
-        public virtual async Task<Response> GetModelAsync(string mode, RequestContext context = null)
+        public virtual async Task<Response> GetModelAsync(string mode, RequestContext context)
         {
             Argument.AssertNotNull(mode, nameof(mode));
 
@@ -107,7 +107,7 @@ namespace dpg_customization_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/DPGClient.xml" path="doc/members/member[@name='GetModel(string,RequestContext)']/*" />
-        public virtual Response GetModel(string mode, RequestContext context = null)
+        public virtual Response GetModel(string mode, RequestContext context)
         {
             Argument.AssertNotNull(mode, nameof(mode));
 
@@ -126,7 +126,7 @@ namespace dpg_customization_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method] Post either raw response as a model and pass in 'raw' for mode, or grow up your operation to take a model instead, and put in 'model' as mode. 
+        /// [Protocol Method] Post either raw response as a model and pass in 'raw' for mode, or grow up your operation to take a model instead, and put in 'model' as mode.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -162,7 +162,7 @@ namespace dpg_customization_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method] Post either raw response as a model and pass in 'raw' for mode, or grow up your operation to take a model instead, and put in 'model' as mode. 
+        /// [Protocol Method] Post either raw response as a model and pass in 'raw' for mode, or grow up your operation to take a model instead, and put in 'model' as mode.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -213,7 +213,7 @@ namespace dpg_customization_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="AsyncPageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
         /// <include file="Docs/DPGClient.xml" path="doc/members/member[@name='GetPagesAsync(string,RequestContext)']/*" />
-        public virtual AsyncPageable<BinaryData> GetPagesAsync(string mode, RequestContext context = null)
+        public virtual AsyncPageable<BinaryData> GetPagesAsync(string mode, RequestContext context)
         {
             Argument.AssertNotNull(mode, nameof(mode));
 
@@ -238,7 +238,7 @@ namespace dpg_customization_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="Pageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
         /// <include file="Docs/DPGClient.xml" path="doc/members/member[@name='GetPages(string,RequestContext)']/*" />
-        public virtual Pageable<BinaryData> GetPages(string mode, RequestContext context = null)
+        public virtual Pageable<BinaryData> GetPages(string mode, RequestContext context)
         {
             Argument.AssertNotNull(mode, nameof(mode));
 
@@ -264,7 +264,7 @@ namespace dpg_customization_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="Operation"/> representing an asynchronous operation on the service. </returns>
         /// <include file="Docs/DPGClient.xml" path="doc/members/member[@name='LroAsync(WaitUntil,string,RequestContext)']/*" />
-        public virtual async Task<Operation<BinaryData>> LroAsync(WaitUntil waitUntil, string mode, RequestContext context = null)
+        public virtual async Task<Operation<BinaryData>> LroAsync(WaitUntil waitUntil, string mode, RequestContext context)
         {
             Argument.AssertNotNull(mode, nameof(mode));
 
@@ -299,7 +299,7 @@ namespace dpg_customization_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="Operation"/> representing an asynchronous operation on the service. </returns>
         /// <include file="Docs/DPGClient.xml" path="doc/members/member[@name='Lro(WaitUntil,string,RequestContext)']/*" />
-        public virtual Operation<BinaryData> Lro(WaitUntil waitUntil, string mode, RequestContext context = null)
+        public virtual Operation<BinaryData> Lro(WaitUntil waitUntil, string mode, RequestContext context)
         {
             Argument.AssertNotNull(mode, nameof(mode));
 

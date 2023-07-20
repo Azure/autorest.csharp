@@ -16,7 +16,7 @@ namespace AutoRest.TestServer.Tests
         [Test]
         public Task GetRawModel() => Test(async (host) =>
         {
-            Response result = await new DPGClient(Key, host, null).GetModelAsync("raw");
+            Response result = await new DPGClient(Key, host, null).GetModelAsync("raw", new());
             JsonData responseBody = JsonData.FromBytes(result.Content.ToMemory());
             Assert.AreEqual("raw", (string)responseBody["received"]);
         });
@@ -66,7 +66,7 @@ namespace AutoRest.TestServer.Tests
         [Test]
         public Task GetRawPages() => Test(async (host) =>
         {
-            AsyncPageable<BinaryData> allPages = new DPGClient(Key, host, null).GetPagesAsync("raw");
+            AsyncPageable<BinaryData> allPages = new DPGClient(Key, host, null).GetPagesAsync("raw", new());
             await foreach (Page<BinaryData> page in allPages.AsPages())
             {
                 var firstItem = JsonData.FromBytes(page.Values.First());
@@ -97,7 +97,7 @@ namespace AutoRest.TestServer.Tests
             using var diagnosticListener = new ClientDiagnosticListener("dpg_customization_LowLevel", asyncLocal: true);
             CollectionAssert.IsEmpty(diagnosticListener.Scopes);
 
-            Operation<BinaryData> result = await new DPGClient(Key, host, null).LroAsync(WaitUntil.Started, "raw");
+            Operation<BinaryData> result = await new DPGClient(Key, host, null).LroAsync(WaitUntil.Started, "raw", new());
             diagnosticListener.AssertAndRemoveScope("DPGClient.Lro");
             CollectionAssert.IsEmpty(diagnosticListener.Scopes);
 

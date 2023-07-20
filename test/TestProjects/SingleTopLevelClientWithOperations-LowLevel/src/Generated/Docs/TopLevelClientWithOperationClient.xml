@@ -3,12 +3,12 @@
   <members>
     <member name="OperationAsync(RequestContext)">
 <example>
-This sample shows how to call OperationAsync and parse the result.
+This sample shows how to call OperationAsync with required parameters and parse the result.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
 var client = new TopLevelClientWithOperationClient(credential);
 
-Response response = await client.OperationAsync();
+Response response = await client.OperationAsync(new RequestContext());
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.ToString());
@@ -17,12 +17,12 @@ Console.WriteLine(result.ToString());
     </member>
     <member name="Operation(RequestContext)">
 <example>
-This sample shows how to call Operation and parse the result.
+This sample shows how to call Operation with required parameters and parse the result.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
 var client = new TopLevelClientWithOperationClient(credential);
 
-Response response = client.Operation();
+Response response = client.Operation(new RequestContext());
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.ToString());
@@ -36,7 +36,7 @@ This sample shows how to call GetAllAsync with required parameters and parse the
 var credential = new AzureKeyCredential("<key>");
 var client = new TopLevelClientWithOperationClient(credential);
 
-await foreach (var item in client.GetAllAsync("<filter>"))
+await foreach (var item in client.GetAllAsync("<filter>", new RequestContext()))
 {
     JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
     Console.WriteLine(result.ToString());
@@ -51,7 +51,7 @@ This sample shows how to call GetAll with required parameters and parse the resu
 var credential = new AzureKeyCredential("<key>");
 var client = new TopLevelClientWithOperationClient(credential);
 
-foreach (var item in client.GetAll("<filter>"))
+foreach (var item in client.GetAll("<filter>", new RequestContext()))
 {
     JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
     Console.WriteLine(result.ToString());

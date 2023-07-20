@@ -46,10 +46,11 @@ namespace AutoRest.CSharp.Output.Models.Types
             SchemaUsageTransformer.Transform(codeModel);
             DefaultDerivedSchema.AddDefaultDerivedSchemas(codeModel);
             ConstantSchemaTransformer.Transform(codeModel);
+            ModelPropertyClientDefaultValueTransformer.Transform(codeModel);
             _input = new CodeModelConverter().CreateNamespace(codeModel, _context.SchemaUsageProvider);
 
-            _defaultNamespace = Configuration.Namespace ?? _input.Name;
-            _libraryName = Configuration.LibraryName ?? _input.Name;
+            _defaultNamespace = Configuration.Namespace;
+            _libraryName = Configuration.LibraryName;
 
             _restClients = new CachedDictionary<InputClient, DataPlaneRestClient>(EnsureRestClients);
             _clients = new CachedDictionary<InputClient, DataPlaneClient>(EnsureClients);
@@ -57,7 +58,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             _headerModels = new CachedDictionary<InputOperation, DataPlaneResponseHeaderGroupType>(EnsureHeaderModels);
             _enums = new CachedDictionary<InputEnumType, EnumType>(BuildEnums);
             _models = new CachedDictionary<Schema, TypeProvider>(() => BuildModels(codeModel));
-            _modelFactory = new Lazy<ModelFactoryTypeProvider?>(() => ModelFactoryTypeProvider.TryCreate(ClientBuilder.GetClientPrefix(Configuration.LibraryName, _libraryName), _input.Name, Models, _sourceInputModel));
+            _modelFactory = new Lazy<ModelFactoryTypeProvider?>(() => ModelFactoryTypeProvider.TryCreate(Models, _sourceInputModel));
             _protocolMethodsDictionary = new CachedDictionary<string, List<string>>(GetProtocolMethodsDictionary);
 
             ClientOptions = CreateClientOptions();

@@ -57,10 +57,10 @@ namespace AutoRest.TestServer.Tests
                 new TypeAsserts.Parameter[] {
                     new("item3", typeof(string)),
                     new("item2", typeof(string)),
+                    new("item1", typeof(string)),
                     new("item4", typeof(string)),
                     new("content", typeof(RequestContent)),
                     new("item5", typeof(string), null),
-                    new("item1", typeof(string), "value"),
                     new("context", typeof(RequestContext), null)
                 });
         }

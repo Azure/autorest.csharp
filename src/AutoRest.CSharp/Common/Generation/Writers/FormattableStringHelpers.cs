@@ -92,7 +92,7 @@ namespace AutoRest.CSharp.Generation.Writers
 
             if (TypeFactory.IsList(parameter.Type) && toType.EqualsIgnoreNullable(typeof(RequestContent)))
             {
-                return $"{typeof(RequestContent)}.{nameof(RequestContent.Create)}({parameter.Name})";
+                return $"{typeof(RequestContentHelper)}.{nameof(RequestContentHelper.FromEnumerable)}({parameter.Name})";
             }
 
             if (parameter.Type is { IsFrameworkType: false, Implementation: EnumType enumType } && toType.EqualsIgnoreNullable(typeof(RequestContent)))
@@ -144,6 +144,11 @@ namespace AutoRest.CSharp.Generation.Writers
             if (constant.IsNewInstanceSentinel)
             {
                 return $"new {constant.Type}()";
+            }
+
+            if (constant.Value is Constant.Expression expression)
+            {
+                return expression.ExpressionValue;
             }
 
             if (constant is { Type: { IsFrameworkType: false }, Value: EnumTypeValue enumTypeValue })

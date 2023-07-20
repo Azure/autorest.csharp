@@ -106,7 +106,7 @@ namespace AutoRest.CSharp.Output.Models
             var allParameters = GetOperationAllParameters(operation);
             var methodParameters = BuildMethodParameters(allParameters);
             var requestParts = allParameters
-                .Select(kvp => new RequestPartSource(kvp.Key.NameInRequest, (InputParameter?)kvp.Key, CreateReference(kvp.Key, kvp.Value), SerializationBuilder.GetSerializationFormat(kvp.Key.Type)))
+                .Select(kvp => new RequestPartSource(kvp.Key.NameInRequest, (InputParameter?)kvp.Key, CreateReference(kvp.Key, kvp.Value), kvp.Key.SerializationFormat))
                 .ToList();
 
             var request = BuildRequest(operation, requestParts, null, _library);
@@ -128,11 +128,14 @@ namespace AutoRest.CSharp.Output.Models
         }
 
         private Dictionary<InputParameter, Parameter> GetOperationAllParameters(InputOperation operation)
-        {
-            return operation.Parameters
-                .Where(rp => !IsIgnoredHeaderParameter(rp))
+            => FilterOperationAllParameters(operation.Parameters)
                 .ToDictionary(p => p, parameter => BuildParameter(parameter));
-        }
+
+        public static IEnumerable<InputParameter> FilterOperationAllParameters(IReadOnlyList<InputParameter> parameters)
+            => parameters
+                .Where(rp => !IsIgnoredHeaderParameter(rp))
+                // change the type to constant so that it won't show up in the method signature
+                .Select(p => RequestHeader.IsRepeatabilityRequestHeader(p.NameInRequest) ? p with { Kind = InputOperationParameterKind.Constant } : p);
 
         public static Response[] BuildResponses(InputOperation operation, TypeFactory typeFactory, out CSharpType? responseType)
         {

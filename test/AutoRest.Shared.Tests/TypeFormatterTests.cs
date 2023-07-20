@@ -33,6 +33,22 @@ namespace Azure.Core.Tests
             new object[] { "c", new TimeSpan(1, 2, 59, 59, 500), "1.02:59:59.5000000" }
         };
 
+        public static object[] BinaryDataCases =
+        {
+            new object[] { "D", BinaryData.FromString("test"), "dGVzdA==" },
+            new object[] { "U", BinaryData.FromString("test"), "dGVzdA" }
+        };
+
+        public static object[] TimeSpanWithoutFormatCases =
+        {
+            new object[] { null, new TimeSpan(1, 2, 59, 59), "P1DT2H59M59S" },
+        };
+
+        private static readonly object[] GuidCases = new object[]
+        {
+            new object[] { null, Guid.Parse("11111111-1111-1111-1111-111112111111"), "11111111-1111-1111-1111-111112111111" }
+        };
+
         [TestCaseSource(nameof(DateTimeOffsetCases))]
         public void FormatsDatesAsString(string format, DateTimeOffset date, string expected)
         {
@@ -95,6 +111,33 @@ namespace Azure.Core.Tests
             var formatted = JsonDocument.Parse(memoryStream.ToArray()).RootElement;
             Assert.AreEqual(expected, formatted.ToString());
             Assert.AreEqual(duration, formatted.GetTimeSpan(format));
+        }
+
+        [TestCase(null, null, "null")]
+        [TestCase(null, "str", "str")]
+        [TestCase(null, true, "true")]
+        [TestCase(null, false, "false")]
+        [TestCase(null, 42, "42")]
+        [TestCase(null, -42, "-42")]
+        [TestCase(null, 3.14f, "3.14")]
+        [TestCase(null, -3.14f, "-3.14")]
+        [TestCase(null, 3.14, "3.14")]
+        [TestCase(null, -3.14, "-3.14")]
+        [TestCase(null, 299792458L, "299792458")]
+        [TestCase(null, -299792458L, "-299792458")]
+        [TestCase("D", new byte[] { 1, 2, 3 }, "AQID")]
+        [TestCase("U", new byte[] { 4, 5, 6 }, "BAUG")]
+        [TestCase(null, new string[] { "a", "b" }, "a,b")]
+        [TestCaseSource(nameof(DateTimeOffsetCases))]
+        [TestCaseSource(nameof(TimeSpanWithoutFormatCases))]
+        [TestCaseSource(nameof(TimeSpanCases))]
+        [TestCaseSource(nameof(GuidCases))]
+        [TestCaseSource(nameof(BinaryDataCases))]
+        public void ValidateConvertToString(string? format, object? value, string expected)
+        {
+            var result = TypeFormatters.ConvertToString(value, format);
+
+            Assert.AreEqual(expected, result);
         }
     }
 }

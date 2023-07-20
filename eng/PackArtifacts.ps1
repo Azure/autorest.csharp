@@ -1,4 +1,7 @@
-param($BuildNumber, $StagingDirectory)
+param(
+    [string] $BuildNumber,
+    [string] $StagingDirectory
+)
 
 $repoRoot = Resolve-Path (Join-Path $PSScriptRoot '..')
 

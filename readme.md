@@ -1739,7 +1739,7 @@ namespace Azure.Service.Models
 
 ```yaml
 # autorest-core version
-version: 3.9.3
+version: 3.9.6
 save-inputs: true
 use: $(this-folder)/artifacts/bin/AutoRest.CSharp/Debug/net6.0/
 clear-output-folder: true

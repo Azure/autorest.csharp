@@ -47,7 +47,7 @@ namespace SingleTopLevelClientWithoutOperations_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method] 
+        /// [Protocol Method]
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -60,7 +60,7 @@ namespace SingleTopLevelClientWithoutOperations_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/Client5.xml" path="doc/members/member[@name='OperationAsync(RequestContext)']/*" />
-        public virtual async Task<Response> OperationAsync(RequestContext context = null)
+        public virtual async Task<Response> OperationAsync(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("Client5.Operation");
             scope.Start();
@@ -77,7 +77,7 @@ namespace SingleTopLevelClientWithoutOperations_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method] 
+        /// [Protocol Method]
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -90,7 +90,7 @@ namespace SingleTopLevelClientWithoutOperations_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/Client5.xml" path="doc/members/member[@name='Operation(RequestContext)']/*" />
-        public virtual Response Operation(RequestContext context = null)
+        public virtual Response Operation(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("Client5.Operation");
             scope.Start();

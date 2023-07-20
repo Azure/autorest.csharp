@@ -8,7 +8,7 @@
 using System;
 using Azure.Core;
 
-namespace Azure.RenameGetList
+namespace RenameGetList
 {
     /// <summary> Client options for RenameGetListClient. </summary>
     public partial class RenameGetListClientOptions : ClientOptions

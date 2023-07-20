@@ -5,11 +5,13 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Output.Builders;
+using AutoRest.CSharp.Output.Models.Requests;
 using AutoRest.CSharp.Utilities;
 
 namespace AutoRest.CSharp.Output.Models.Shared
@@ -32,14 +34,17 @@ namespace AutoRest.CSharp.Output.Models.Shared
             return new Parameter(name, property.Description, propertyType, null, validation, null);
         }
 
-        public static Parameter FromInputParameter(in InputParameter operationParameter, CSharpType type, TypeFactory typeFactory)
+        public static Parameter FromInputParameter(in InputParameter operationParameter, CSharpType type, TypeFactory typeFactory, bool shouldKeepClientDefaultValue = false)
         {
             var name = operationParameter.Name.ToVariableName();
             var skipUrlEncoding = operationParameter.SkipUrlEncoding;
             var requestLocation = operationParameter.Location;
 
-            var defaultValue = operationParameter.DefaultValue != null
-                ? BuilderHelpers.ParseConstant(operationParameter.DefaultValue.Value, typeFactory.CreateType(operationParameter.DefaultValue.Type))
+            bool keepClientDefaultValue = shouldKeepClientDefaultValue || operationParameter.Kind == InputOperationParameterKind.Constant || operationParameter.IsApiVersion || operationParameter.IsContentType || operationParameter.IsEndpoint;
+            Constant? clientDefaultValue = GetDefaultValue(operationParameter, typeFactory);
+
+            var defaultValue = keepClientDefaultValue
+                ? clientDefaultValue
                 : (Constant?)null;
 
             var initializer = (FormattableString?)null;
@@ -64,7 +69,7 @@ namespace AutoRest.CSharp.Output.Models.Shared
             var inputType = TypeFactory.GetInputType(type);
             return new Parameter(
                 name,
-                CreateDescription(operationParameter, type, (operationParameter.Type as InputEnumType)?.AllowedValues.Select(c => c.GetValueString())),
+                CreateDescription(operationParameter, type, (operationParameter.Type as InputEnumType)?.AllowedValues.Select(c => c.GetValueString()), keepClientDefaultValue ? null : clientDefaultValue),
                 inputType,
                 defaultValue,
                 validation,
@@ -75,11 +80,28 @@ namespace AutoRest.CSharp.Output.Models.Shared
                 RequestLocation: requestLocation);
         }
 
-        public static string CreateDescription(InputParameter operationParameter, CSharpType type, IEnumerable<string>? values)
+        private static Constant? GetDefaultValue(InputParameter operationParameter, TypeFactory typeFactory) => operationParameter switch
+        {
+            { DefaultValue: not null } => BuilderHelpers.ParseConstant(operationParameter.DefaultValue.Value, typeFactory.CreateType(operationParameter.DefaultValue.Type)),
+            { NameInRequest: var nameInRequest } when nameInRequest.Equals(RequestHeader.RepeatabilityRequestId, StringComparison.OrdinalIgnoreCase) =>
+                // Guid.NewGuid()
+                Constant.FromExpression($"{nameof(Guid)}.{nameof(Guid.NewGuid)}()", new CSharpType(typeof(string))),
+            { NameInRequest: var nameInRequest } when nameInRequest.Equals(RequestHeader.RepeatabilityFirstSent, StringComparison.OrdinalIgnoreCase) =>
+                // DateTimeOffset.Now
+                Constant.FromExpression($"{nameof(DateTimeOffset)}.{nameof(DateTimeOffset.Now)}", new CSharpType(typeof(DateTimeOffset))),
+            _ => (Constant?)null,
+        };
+
+        public static string CreateDescription(InputParameter operationParameter, CSharpType type, IEnumerable<string>? values, Constant? defaultValue = null)
         {
             string description = string.IsNullOrWhiteSpace(operationParameter.Description)
                 ? $"The {operationParameter.Type.Name} to use."
                 : BuilderHelpers.EscapeXmlDocDescription(operationParameter.Description);
+            if (defaultValue != null)
+            {
+                var defaultValueString = defaultValue?.Value is string s ? $"\"{s}\"" : $"{defaultValue?.Value}";
+                description = $"{description}{(description.EndsWith(".") ? "" : ".")} The default value is {defaultValueString}";
+            }
 
             if (!type.IsFrameworkType || values == null)
             {
@@ -105,13 +127,17 @@ namespace AutoRest.CSharp.Output.Models.Shared
             return ValidationType.None;
         }
 
-        public static Parameter FromRequestParameter(in RequestParameter requestParameter, CSharpType type, TypeFactory typeFactory)
+        public static Parameter FromRequestParameter(in RequestParameter requestParameter, CSharpType type, TypeFactory typeFactory, bool shouldKeepClientDefaultValue = false)
         {
             var name = requestParameter.CSharpName();
             var skipUrlEncoding = requestParameter.Extensions?.SkipEncoding ?? false;
             var requestLocation = GetRequestLocation(requestParameter);
 
-            var defaultValue = GetClientDefaultValue(requestParameter, typeFactory) ?? ParseConstant(requestParameter, typeFactory);
+            var clientDefaultValue = GetClientDefaultValue(requestParameter, typeFactory);
+            bool keepClientDefaultValue = shouldKeepClientDefaultValue || IsApiVersionParameter(requestParameter) || IsContentTypeParameter(requestParameter) || IsEndpointParameter(requestParameter);
+            var defaultValue = keepClientDefaultValue
+                ? clientDefaultValue ?? ParseConstant(requestParameter, typeFactory)
+                : ParseConstant(requestParameter, typeFactory);
             var initializer = (FormattableString?)null;
 
             if (defaultValue != null && !TypeFactory.CanBeInitializedInline(type, defaultValue))
@@ -133,7 +159,7 @@ namespace AutoRest.CSharp.Output.Models.Shared
             var inputType = TypeFactory.GetInputType(type);
             return new Parameter(
                 name,
-                CreateDescription(requestParameter, type),
+                CreateDescription(requestParameter, type, keepClientDefaultValue ? null : clientDefaultValue),
                 inputType,
                 defaultValue,
                 validation,
@@ -142,6 +168,12 @@ namespace AutoRest.CSharp.Output.Models.Shared
                 IsResourceIdentifier: requestParameter.IsResourceParameter,
                 SkipUrlEncoding: skipUrlEncoding,
                 RequestLocation: requestLocation);
+            static bool IsApiVersionParameter(RequestParameter requestParameter)
+                => requestParameter.Origin == "modelerfour:synthesized/api-version";
+            static bool IsEndpointParameter(RequestParameter requestParameter)
+                => requestParameter.Origin == "modelerfour:synthesized/host";
+            static bool IsContentTypeParameter(RequestParameter requestParameter)
+                => requestParameter.Origin == "modelerfour:synthesized/content-type";
         }
 
         private static RequestLocation GetRequestLocation(RequestParameter requestParameter)
@@ -155,11 +187,16 @@ namespace AutoRest.CSharp.Output.Models.Shared
                 _ => RequestLocation.None
             };
 
-        private static string CreateDescription(RequestParameter requestParameter, CSharpType type)
+        private static string CreateDescription(RequestParameter requestParameter, CSharpType type, Constant? defaultValue = null)
         {
             var description = string.IsNullOrWhiteSpace(requestParameter.Language.Default.Description) ?
                 $"The {requestParameter.Schema.Name} to use." :
                 BuilderHelpers.EscapeXmlDocDescription(requestParameter.Language.Default.Description);
+            if (defaultValue != null)
+            {
+                var defaultValueString = defaultValue?.Value is string s ? $"\"{s}\"" : $"{defaultValue?.Value}";
+                description = $"{description}{(description.EndsWith(".") ? "" : ".")} The default value is {defaultValueString}";
+            }
 
             return requestParameter.Schema switch
             {

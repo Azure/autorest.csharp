@@ -58,7 +58,7 @@ namespace CollapseRequestCondition_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method] 
+        /// [Protocol Method]
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -90,7 +90,7 @@ namespace CollapseRequestCondition_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method] 
+        /// [Protocol Method]
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -122,7 +122,7 @@ namespace CollapseRequestCondition_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method] 
+        /// [Protocol Method]
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -137,7 +137,7 @@ namespace CollapseRequestCondition_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/MatchConditionCollapseClient.xml" path="doc/members/member[@name='CollapsePutAsync(RequestContent,MatchConditions,RequestContext)']/*" />
-        public virtual async Task<Response> CollapsePutAsync(RequestContent content, MatchConditions matchConditions = null, RequestContext context = null)
+        public virtual async Task<Response> CollapsePutAsync(RequestContent content, MatchConditions matchConditions, RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("MatchConditionCollapseClient.CollapsePut");
             scope.Start();
@@ -154,7 +154,7 @@ namespace CollapseRequestCondition_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method] 
+        /// [Protocol Method]
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -169,7 +169,7 @@ namespace CollapseRequestCondition_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/MatchConditionCollapseClient.xml" path="doc/members/member[@name='CollapsePut(RequestContent,MatchConditions,RequestContext)']/*" />
-        public virtual Response CollapsePut(RequestContent content, MatchConditions matchConditions = null, RequestContext context = null)
+        public virtual Response CollapsePut(RequestContent content, MatchConditions matchConditions, RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("MatchConditionCollapseClient.CollapsePut");
             scope.Start();
@@ -186,7 +186,7 @@ namespace CollapseRequestCondition_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method] 
+        /// [Protocol Method]
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -217,7 +217,7 @@ namespace CollapseRequestCondition_LowLevel
         }
 
         /// <summary>
-        /// [Protocol Method] 
+        /// [Protocol Method]
         /// <list type="bullet">
         /// <item>
         /// <description>
