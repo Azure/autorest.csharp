@@ -4,11 +4,12 @@
 #nullable enable
 
 using System.Xml;
+using Azure.Core.Serialization;
 
 namespace Azure.Core
 {
     internal interface IXmlSerializable
     {
-        void Write(XmlWriter writer, string? nameHint);
+        void Write(XmlWriter writer, string? nameHint, ModelSerializerOptions options);
     }
 }

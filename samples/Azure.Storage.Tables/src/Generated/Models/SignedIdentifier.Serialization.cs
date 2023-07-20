@@ -15,15 +15,15 @@ namespace Azure.Storage.Tables.Models
 {
     public partial class SignedIdentifier : IXmlSerializable, IXmlModelSerializable
     {
-        void IXmlSerializable.Write(XmlWriter writer, string nameHint) => ((IXmlModelSerializable)this).Serialize(writer, ModelSerializerOptions.AzureServiceDefault);
+        void IXmlModelSerializable.Serialize(XmlWriter writer, ModelSerializerOptions options) => ((IXmlSerializable)this).Write(writer, null, options);
 
-        void IXmlModelSerializable.Serialize(XmlWriter writer, ModelSerializerOptions options)
+        void IXmlSerializable.Write(XmlWriter writer, string nameHint, ModelSerializerOptions options)
         {
             writer.WriteStartElement("SignedIdentifier");
             writer.WriteStartElement("Id");
             writer.WriteValue(Id);
             writer.WriteEndElement();
-            writer.WriteObjectValue(AccessPolicy, "AccessPolicy");
+            writer.WriteObjectValue(AccessPolicy, "AccessPolicy", options);
             writer.WriteEndElement();
         }
 

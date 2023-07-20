@@ -58,7 +58,7 @@ namespace Azure.Storage.Tables
             request.Headers.Add("Accept", "application/xml");
             request.Headers.Add("Content-Type", "application/xml");
             var content = new XmlWriterContent();
-            content.XmlWriter.WriteObjectValue(storageServiceProperties, "StorageServiceProperties");
+            content.XmlWriter.WriteObjectValue(storageServiceProperties, "StorageServiceProperties", options);
             request.Content = content;
             return message;
         }

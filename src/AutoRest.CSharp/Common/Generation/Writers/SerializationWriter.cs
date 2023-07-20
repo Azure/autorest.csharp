@@ -123,10 +123,10 @@ namespace AutoRest.CSharp.Generation.Writers
         private static void WriteXmlSerialize(CodeWriter writer, XmlObjectSerialization serialization)
         {
             var nameHint = new CodeWriterDeclaration("nameHint");
-            writer.Append($"void {typeof(IXmlSerializable)}.{nameof(IXmlSerializable.Write)}({typeof(XmlWriter)} writer, {typeof(string)} {nameHint:D})");
-            writer.Line($" => (({typeof(IXmlModelSerializable)})this).{nameof(IXmlModelSerializable.Serialize)}(writer, {typeof(ModelSerializerOptions)}.{nameof(ModelSerializerOptions.AzureServiceDefault)});");
-            writer.Line();
             writer.Append($"void {typeof(IXmlModelSerializable)}.{nameof(IXmlModelSerializable.Serialize)}({typeof(XmlWriter)} writer, {typeof(ModelSerializerOptions)} options)");
+            writer.Line($" => (({typeof(IXmlSerializable)})this).{nameof(IXmlSerializable.Write)}(writer, null, options);");
+            writer.Line();
+            writer.Append($"void {typeof(IXmlSerializable)}.{nameof(IXmlSerializable.Write)}({typeof(XmlWriter)} writer, {typeof(string)} {nameHint:D}, {typeof(ModelSerializerOptions)} options)");
             using (writer.Scope())
             {
                 writer.ToSerializeCall(serialization, nameHint);

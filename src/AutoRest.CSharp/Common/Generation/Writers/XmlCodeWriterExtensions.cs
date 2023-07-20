@@ -100,7 +100,7 @@ namespace AutoRest.CSharp.Generation.Writers
                     if ((!type.IsFrameworkType && type.Implementation is ObjectType) ||
                         (type.IsFrameworkType && type.FrameworkType == typeof(object)))
                     {
-                        writer.Line($"{writerName}.WriteObjectValue({name}, {elementName:L});");
+                        writer.Line($"{writerName}.WriteObjectValue({name}, {elementName:L}, options);");
                         return;
                     }
 

@@ -15,14 +15,14 @@ namespace Azure.Storage.Tables.Models
 {
     public partial class StorageServiceStats : IXmlSerializable, IXmlModelSerializable
     {
-        void IXmlSerializable.Write(XmlWriter writer, string nameHint) => ((IXmlModelSerializable)this).Serialize(writer, ModelSerializerOptions.AzureServiceDefault);
+        void IXmlModelSerializable.Serialize(XmlWriter writer, ModelSerializerOptions options) => ((IXmlSerializable)this).Write(writer, null, options);
 
-        void IXmlModelSerializable.Serialize(XmlWriter writer, ModelSerializerOptions options)
+        void IXmlSerializable.Write(XmlWriter writer, string nameHint, ModelSerializerOptions options)
         {
             writer.WriteStartElement("StorageServiceStats");
             if (Optional.IsDefined(GeoReplication))
             {
-                writer.WriteObjectValue(GeoReplication, "GeoReplication");
+                writer.WriteObjectValue(GeoReplication, "GeoReplication", options);
             }
             writer.WriteEndElement();
         }

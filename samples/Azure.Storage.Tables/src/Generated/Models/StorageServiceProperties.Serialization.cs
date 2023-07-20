@@ -16,29 +16,29 @@ namespace Azure.Storage.Tables.Models
 {
     public partial class StorageServiceProperties : IXmlSerializable, IXmlModelSerializable
     {
-        void IXmlSerializable.Write(XmlWriter writer, string nameHint) => ((IXmlModelSerializable)this).Serialize(writer, ModelSerializerOptions.AzureServiceDefault);
+        void IXmlModelSerializable.Serialize(XmlWriter writer, ModelSerializerOptions options) => ((IXmlSerializable)this).Write(writer, null, options);
 
-        void IXmlModelSerializable.Serialize(XmlWriter writer, ModelSerializerOptions options)
+        void IXmlSerializable.Write(XmlWriter writer, string nameHint, ModelSerializerOptions options)
         {
             writer.WriteStartElement("StorageServiceProperties");
             if (Optional.IsDefined(Logging))
             {
-                writer.WriteObjectValue(Logging, "Logging");
+                writer.WriteObjectValue(Logging, "Logging", options);
             }
             if (Optional.IsDefined(HourMetrics))
             {
-                writer.WriteObjectValue(HourMetrics, "HourMetrics");
+                writer.WriteObjectValue(HourMetrics, "HourMetrics", options);
             }
             if (Optional.IsDefined(MinuteMetrics))
             {
-                writer.WriteObjectValue(MinuteMetrics, "MinuteMetrics");
+                writer.WriteObjectValue(MinuteMetrics, "MinuteMetrics", options);
             }
             if (Optional.IsCollectionDefined(Cors))
             {
                 writer.WriteStartElement("Cors");
                 foreach (var item in Cors)
                 {
-                    writer.WriteObjectValue(item, "CorsRule");
+                    writer.WriteObjectValue(item, "CorsRule", options);
                 }
                 writer.WriteEndElement();
             }

@@ -5,17 +5,18 @@
 
 using System;
 using System.Xml;
+using Azure.Core.Serialization;
 
 namespace Azure.Core
 {
     internal static class XmlWriterExtensions
     {
-        public static void WriteObjectValue(this XmlWriter writer, object value, string? nameHint)
+        public static void WriteObjectValue(this XmlWriter writer, object value, string? nameHint, ModelSerializerOptions? options = default)
         {
             switch (value)
             {
                 case IXmlSerializable serializable:
-                    serializable.Write(writer, nameHint);
+                    serializable.Write(writer, nameHint, options ?? ModelSerializerOptions.AzureServiceDefault);
                     return;
                 default:
                     throw new NotImplementedException();
