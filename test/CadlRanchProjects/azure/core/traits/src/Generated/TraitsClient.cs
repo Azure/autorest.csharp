@@ -166,34 +166,30 @@ namespace _Specs_.Azure.Core.Traits
         /// <summary> Test for repeatable requests. </summary>
         /// <param name="id"> The user's id. </param>
         /// <param name="userActionParam"> User action param. </param>
-        /// <param name="repeatabilityRequestId"> An opaque, globally-unique, client-generated string identifier for the request. </param>
-        /// <param name="repeatabilityFirstSent"> Specifies the date and time at which the request was first created. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="userActionParam"/> is null. </exception>
-        /// <include file="Docs/TraitsClient.xml" path="doc/members/member[@name='RepeatableActionAsync(int,UserActionParam,string,DateTimeOffset?,CancellationToken)']/*" />
-        public virtual async Task<Response<UserActionResponse>> RepeatableActionAsync(int id, UserActionParam userActionParam, string repeatabilityRequestId = null, DateTimeOffset? repeatabilityFirstSent = null, CancellationToken cancellationToken = default)
+        /// <include file="Docs/TraitsClient.xml" path="doc/members/member[@name='RepeatableActionAsync(int,UserActionParam,CancellationToken)']/*" />
+        public virtual async Task<Response<UserActionResponse>> RepeatableActionAsync(int id, UserActionParam userActionParam, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(userActionParam, nameof(userActionParam));
 
             RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = await RepeatableActionAsync(id, userActionParam.ToRequestContent(), repeatabilityRequestId, repeatabilityFirstSent, context).ConfigureAwait(false);
+            Response response = await RepeatableActionAsync(id, userActionParam.ToRequestContent(), context).ConfigureAwait(false);
             return Response.FromValue(UserActionResponse.FromResponse(response), response);
         }
 
         /// <summary> Test for repeatable requests. </summary>
         /// <param name="id"> The user's id. </param>
         /// <param name="userActionParam"> User action param. </param>
-        /// <param name="repeatabilityRequestId"> An opaque, globally-unique, client-generated string identifier for the request. </param>
-        /// <param name="repeatabilityFirstSent"> Specifies the date and time at which the request was first created. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="userActionParam"/> is null. </exception>
-        /// <include file="Docs/TraitsClient.xml" path="doc/members/member[@name='RepeatableAction(int,UserActionParam,string,DateTimeOffset?,CancellationToken)']/*" />
-        public virtual Response<UserActionResponse> RepeatableAction(int id, UserActionParam userActionParam, string repeatabilityRequestId = null, DateTimeOffset? repeatabilityFirstSent = null, CancellationToken cancellationToken = default)
+        /// <include file="Docs/TraitsClient.xml" path="doc/members/member[@name='RepeatableAction(int,UserActionParam,CancellationToken)']/*" />
+        public virtual Response<UserActionResponse> RepeatableAction(int id, UserActionParam userActionParam, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(userActionParam, nameof(userActionParam));
 
             RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = RepeatableAction(id, userActionParam.ToRequestContent(), repeatabilityRequestId, repeatabilityFirstSent, context);
+            Response response = RepeatableAction(id, userActionParam.ToRequestContent(), context);
             return Response.FromValue(UserActionResponse.FromResponse(response), response);
         }
 
@@ -207,21 +203,19 @@ namespace _Specs_.Azure.Core.Traits
         /// </item>
         /// <item>
         /// <description>
-        /// Please try the simpler <see cref="RepeatableActionAsync(int,UserActionParam,string,DateTimeOffset?,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// Please try the simpler <see cref="RepeatableActionAsync(int,UserActionParam,CancellationToken)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>
         /// </summary>
         /// <param name="id"> The user's id. </param>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="repeatabilityRequestId"> An opaque, globally-unique, client-generated string identifier for the request. </param>
-        /// <param name="repeatabilityFirstSent"> Specifies the date and time at which the request was first created. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/TraitsClient.xml" path="doc/members/member[@name='RepeatableActionAsync(int,RequestContent,string,DateTimeOffset?,RequestContext)']/*" />
-        public virtual async Task<Response> RepeatableActionAsync(int id, RequestContent content, string repeatabilityRequestId = null, DateTimeOffset? repeatabilityFirstSent = null, RequestContext context = null)
+        /// <include file="Docs/TraitsClient.xml" path="doc/members/member[@name='RepeatableActionAsync(int,RequestContent,RequestContext)']/*" />
+        public virtual async Task<Response> RepeatableActionAsync(int id, RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
 
@@ -229,7 +223,7 @@ namespace _Specs_.Azure.Core.Traits
             scope.Start();
             try
             {
-                using HttpMessage message = CreateRepeatableActionRequest(id, content, repeatabilityRequestId, repeatabilityFirstSent, context);
+                using HttpMessage message = CreateRepeatableActionRequest(id, content, context);
                 return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -249,21 +243,19 @@ namespace _Specs_.Azure.Core.Traits
         /// </item>
         /// <item>
         /// <description>
-        /// Please try the simpler <see cref="RepeatableAction(int,UserActionParam,string,DateTimeOffset?,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// Please try the simpler <see cref="RepeatableAction(int,UserActionParam,CancellationToken)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>
         /// </summary>
         /// <param name="id"> The user's id. </param>
         /// <param name="content"> The content to send as the body of the request. </param>
-        /// <param name="repeatabilityRequestId"> An opaque, globally-unique, client-generated string identifier for the request. </param>
-        /// <param name="repeatabilityFirstSent"> Specifies the date and time at which the request was first created. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/TraitsClient.xml" path="doc/members/member[@name='RepeatableAction(int,RequestContent,string,DateTimeOffset?,RequestContext)']/*" />
-        public virtual Response RepeatableAction(int id, RequestContent content, string repeatabilityRequestId = null, DateTimeOffset? repeatabilityFirstSent = null, RequestContext context = null)
+        /// <include file="Docs/TraitsClient.xml" path="doc/members/member[@name='RepeatableAction(int,RequestContent,RequestContext)']/*" />
+        public virtual Response RepeatableAction(int id, RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
 
@@ -271,7 +263,7 @@ namespace _Specs_.Azure.Core.Traits
             scope.Start();
             try
             {
-                using HttpMessage message = CreateRepeatableActionRequest(id, content, repeatabilityRequestId, repeatabilityFirstSent, context);
+                using HttpMessage message = CreateRepeatableActionRequest(id, content, context);
                 return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
@@ -301,7 +293,7 @@ namespace _Specs_.Azure.Core.Traits
             return message;
         }
 
-        internal HttpMessage CreateRepeatableActionRequest(int id, RequestContent content, string repeatabilityRequestId, DateTimeOffset? repeatabilityFirstSent, RequestContext context)
+        internal HttpMessage CreateRepeatableActionRequest(int id, RequestContent content, RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier200);
             var request = message.Request;
@@ -314,14 +306,8 @@ namespace _Specs_.Azure.Core.Traits
             uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
-            if (repeatabilityRequestId != null)
-            {
-                request.Headers.Add("Repeatability-Request-ID", repeatabilityRequestId);
-            }
-            if (repeatabilityFirstSent != null)
-            {
-                request.Headers.Add("Repeatability-First-Sent", repeatabilityFirstSent.Value, "R");
-            }
+            request.Headers.Add("Repeatability-Request-ID", Guid.NewGuid());
+            request.Headers.Add("Repeatability-First-Sent", DateTimeOffset.Now, "R");
             request.Headers.Add("Content-Type", "application/json");
             request.Content = content;
             return message;
