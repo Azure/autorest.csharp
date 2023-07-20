@@ -275,5 +275,59 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
+    <member name="RepeatableActionAsync(int,string,RequestContent,RequestContext)">
+<example>
+This sample shows how to call RepeatableActionAsync with required parameters.
+<code><![CDATA[
+var credential = new AzureKeyCredential("<key>");
+var client = new ParametersLowlevelClient(credential);
+
+var data = new {};
+
+Response response = await client.RepeatableActionAsync(1234, "<name>", RequestContent.Create(data), new RequestContext());
+Console.WriteLine(response.Status);
+]]></code>
+This sample shows how to call RepeatableActionAsync with all parameters and request content.
+<code><![CDATA[
+var credential = new AzureKeyCredential("<key>");
+var client = new ParametersLowlevelClient(credential);
+
+var data = new {
+    Code = "<Code>",
+    Status = "<Status>",
+};
+
+Response response = await client.RepeatableActionAsync(1234, "<name>", RequestContent.Create(data), new RequestContext());
+Console.WriteLine(response.Status);
+]]></code>
+</example>
+    </member>
+    <member name="RepeatableAction(int,string,RequestContent,RequestContext)">
+<example>
+This sample shows how to call RepeatableAction with required parameters.
+<code><![CDATA[
+var credential = new AzureKeyCredential("<key>");
+var client = new ParametersLowlevelClient(credential);
+
+var data = new {};
+
+Response response = client.RepeatableAction(1234, "<name>", RequestContent.Create(data), new RequestContext());
+Console.WriteLine(response.Status);
+]]></code>
+This sample shows how to call RepeatableAction with all parameters and request content.
+<code><![CDATA[
+var credential = new AzureKeyCredential("<key>");
+var client = new ParametersLowlevelClient(credential);
+
+var data = new {
+    Code = "<Code>",
+    Status = "<Status>",
+};
+
+Response response = client.RepeatableAction(1234, "<name>", RequestContent.Create(data), new RequestContext());
+Console.WriteLine(response.Status);
+]]></code>
+</example>
+    </member>
   </members>
 </doc>

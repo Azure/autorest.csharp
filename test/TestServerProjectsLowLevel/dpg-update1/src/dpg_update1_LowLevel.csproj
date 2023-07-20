@@ -10,11 +10,11 @@
     <DefineConstants>$(DefineConstants);EXPERIMENTAL</DefineConstants>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="Azure.Core.Experimental" Version="0.1.0-preview.18" />
+    <PackageReference Include="Azure.Core.Experimental" />
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Azure.Core" Version="1.35.0-alpha.20230718.3" />
+    <PackageReference Include="Azure.Core" />
   </ItemGroup>
 
 </Project>

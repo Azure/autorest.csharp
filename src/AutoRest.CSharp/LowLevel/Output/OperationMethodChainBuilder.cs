@@ -310,7 +310,7 @@ namespace AutoRest.CSharp.Output.Models
                         : parameter.SerializationFormat;
             }
 
-            var operationParameters = Operation.Parameters.Where(rp => !RestClientBuilder.IsIgnoredHeaderParameter(rp));
+            var operationParameters = RestClientBuilder.FilterOperationAllParameters(Operation.Parameters);
 
             var requiredPathParameters = new Dictionary<string, InputParameter>();
             var optionalPathParameters = new Dictionary<string, InputParameter>();
@@ -356,7 +356,8 @@ namespace AutoRest.CSharp.Output.Models
                         if (Operation.KeepClientDefaultValue && operationParameter.DefaultValue != null)
                         {
                             optionalRequestParameters.Add(operationParameter);
-                        } else
+                        }
+                        else
                         {
                             requiredRequestParameters.Add(operationParameter);
                         }

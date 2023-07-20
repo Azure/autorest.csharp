@@ -588,7 +588,7 @@ namespace FirstTestTypeSpec.Samples
             var endpoint = new Uri("<https://my-service.azure.com>");
             var client = new FirstTestTypeSpecClient(endpoint);
 
-            Response response = client.AddTimeHeader(DateTimeOffset.UtcNow);
+            Response response = client.AddTimeHeader();
             Console.WriteLine(response.Status);
         }
 
@@ -610,7 +610,7 @@ namespace FirstTestTypeSpec.Samples
             var endpoint = new Uri("<https://my-service.azure.com>");
             var client = new FirstTestTypeSpecClient(endpoint);
 
-            Response response = await client.AddTimeHeaderAsync(DateTimeOffset.UtcNow);
+            Response response = await client.AddTimeHeaderAsync();
             Console.WriteLine(response.Status);
         }
 

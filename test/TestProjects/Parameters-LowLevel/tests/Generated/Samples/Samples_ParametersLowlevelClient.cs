@@ -436,5 +436,65 @@ namespace Parameters_LowLevel.Samples
             Response response = await client.OptionalPathBodyParametersWithMixedSequenceAsync(1234, "<name>", 1234, 1234, RequestContent.Create(data), 1234, new RequestContext());
             Console.WriteLine(response.Status);
         }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_RepeatableAction()
+        {
+            var credential = new AzureKeyCredential("<key>");
+            var client = new ParametersLowlevelClient(credential);
+
+            var data = new { };
+
+            Response response = client.RepeatableAction(1234, "<name>", RequestContent.Create(data), new RequestContext());
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_RepeatableAction_AllParameters()
+        {
+            var credential = new AzureKeyCredential("<key>");
+            var client = new ParametersLowlevelClient(credential);
+
+            var data = new
+            {
+                Code = "<Code>",
+                Status = "<Status>",
+            };
+
+            Response response = client.RepeatableAction(1234, "<name>", RequestContent.Create(data), new RequestContext());
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_RepeatableAction_Async()
+        {
+            var credential = new AzureKeyCredential("<key>");
+            var client = new ParametersLowlevelClient(credential);
+
+            var data = new { };
+
+            Response response = await client.RepeatableActionAsync(1234, "<name>", RequestContent.Create(data), new RequestContext());
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_RepeatableAction_AllParameters_Async()
+        {
+            var credential = new AzureKeyCredential("<key>");
+            var client = new ParametersLowlevelClient(credential);
+
+            var data = new
+            {
+                Code = "<Code>",
+                Status = "<Status>",
+            };
+
+            Response response = await client.RepeatableActionAsync(1234, "<name>", RequestContent.Create(data), new RequestContext());
+            Console.WriteLine(response.Status);
+        }
     }
 }

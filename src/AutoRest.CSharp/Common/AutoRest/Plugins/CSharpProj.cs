@@ -33,7 +33,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
 ";
         private string _coreCsProjContent = @"
   <ItemGroup>
-    <PackageReference Include=""Azure.Core"" Version=""1.35.0-alpha.20230718.3"" />
+    <PackageReference Include=""Azure.Core"" />
   </ItemGroup>";
 
         private string _armCsProjContent = @"
@@ -42,7 +42,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include=""Azure.ResourceManager"" Version=""1.6.0"" />
+    <PackageReference Include=""Azure.ResourceManager"" />
   </ItemGroup>
 ";
 
@@ -63,7 +63,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
     <DefineConstants>$(DefineConstants);EXPERIMENTAL</DefineConstants>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include=""Azure.Core.Experimental"" Version=""0.1.0-preview.18"" />
+    <PackageReference Include=""Azure.Core.Experimental"" />
   </ItemGroup>
 ";
 
@@ -126,7 +126,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             {
                 _coreCsProjContent += @"
   <ItemGroup>
-    <PackageReference Include=""Azure.Core.Expressions.DataFactory"" Version=""1.0.0-beta.4"" />
+    <PackageReference Include=""Azure.Core.Expressions.DataFactory"" />
   </ItemGroup>";
             }
             var isTestProject = Configuration.MgmtTestConfiguration is not null;
@@ -139,8 +139,8 @@ namespace AutoRest.CSharp.AutoRest.Plugins
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include=""NUnit"" Version=""3.12.0"" />
-    <PackageReference Include=""Azure.Identity"" Version=""1.6.0"" />
+    <PackageReference Include=""NUnit"" />
+    <PackageReference Include=""Azure.Identity"" />
   </ItemGroup>
 
   <ItemGroup>

@@ -534,18 +534,17 @@ namespace FirstTestTypeSpec
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="repeatabilityFirstSent"> The DateTime to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/FirstTestTypeSpecClient.xml" path="doc/members/member[@name='AddTimeHeaderAsync(DateTimeOffset?,RequestContext)']/*" />
-        public virtual async Task<Response> AddTimeHeaderAsync(DateTimeOffset? repeatabilityFirstSent = null, RequestContext context = null)
+        /// <include file="Docs/FirstTestTypeSpecClient.xml" path="doc/members/member[@name='AddTimeHeaderAsync(RequestContext)']/*" />
+        public virtual async Task<Response> AddTimeHeaderAsync(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("FirstTestTypeSpecClient.AddTimeHeader");
             scope.Start();
             try
             {
-                using HttpMessage message = CreateAddTimeHeaderRequest(repeatabilityFirstSent, context);
+                using HttpMessage message = CreateAddTimeHeaderRequest(context);
                 return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -565,18 +564,17 @@ namespace FirstTestTypeSpec
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="repeatabilityFirstSent"> The DateTime to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/FirstTestTypeSpecClient.xml" path="doc/members/member[@name='AddTimeHeader(DateTimeOffset?,RequestContext)']/*" />
-        public virtual Response AddTimeHeader(DateTimeOffset? repeatabilityFirstSent = null, RequestContext context = null)
+        /// <include file="Docs/FirstTestTypeSpecClient.xml" path="doc/members/member[@name='AddTimeHeader(RequestContext)']/*" />
+        public virtual Response AddTimeHeader(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("FirstTestTypeSpecClient.AddTimeHeader");
             scope.Start();
             try
             {
-                using HttpMessage message = CreateAddTimeHeaderRequest(repeatabilityFirstSent, context);
+                using HttpMessage message = CreateAddTimeHeaderRequest(context);
                 return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
@@ -1613,7 +1611,7 @@ namespace FirstTestTypeSpec
             return message;
         }
 
-        internal HttpMessage CreateAddTimeHeaderRequest(DateTimeOffset? repeatabilityFirstSent, RequestContext context)
+        internal HttpMessage CreateAddTimeHeaderRequest(RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier204);
             var request = message.Request;
@@ -1624,10 +1622,7 @@ namespace FirstTestTypeSpec
             uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
-            if (repeatabilityFirstSent != null)
-            {
-                request.Headers.Add("Repeatability-First-Sent", repeatabilityFirstSent.Value, "R");
-            }
+            request.Headers.Add("Repeatability-First-Sent", DateTimeOffset.Now, "R");
             return message;
         }
 

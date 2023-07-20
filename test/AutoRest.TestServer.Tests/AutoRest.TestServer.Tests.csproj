@@ -15,14 +15,14 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Azure.Core" Version="1.35.0-alpha.20230718.3" />
-    <PackageReference Include="Azure.Core.Experimental" Version="0.1.0-preview.18" />
-    <PackageReference Include="Azure.Identity" Version="1.0.0" />
-    <PackageReference Include="Azure.ResourceManager" Version="1.6.0" />
-    <PackageReference Include="Microsoft.AspNetCore.Server.Kestrel" Version="2.2.0" />
-    <PackageReference Include="nunit" Version="3.12.0" />
-    <PackageReference Include="NUnit3TestAdapter" Version="3.15.1" />
-    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.2.0" />
+    <PackageReference Include="Azure.Core" />
+    <PackageReference Include="Azure.Core.Experimental" />
+    <PackageReference Include="Azure.Identity" />
+    <PackageReference Include="Azure.ResourceManager" />
+    <PackageReference Include="Microsoft.AspNetCore.Server.Kestrel" />
+    <PackageReference Include="nunit" />
+    <PackageReference Include="NUnit3TestAdapter" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" />
 
     <ProjectReference Include="../../src/AutoRest.CSharp/AutoRest.CSharp.csproj" />
   </ItemGroup>
@@ -30,7 +30,7 @@
   <ItemGroup>
     <None Include="../swaggers/*.json" LinkBase="swaggers" />
     <Compile Include="../TestServerProjects/**/*.cs" LinkBase="TestServerProjects" />
-    <Compile Include="../TestProjects/**/*.cs" Exclude="../TestProjects/ConvenienceInitial-TypeSpec/**/*.cs" LinkBase="TestProjects" />
+    <Compile Include="../TestProjects/**/*.cs" Exclude="../TestProjects/ConvenienceInitial-TypeSpec/**/*.cs;../TestProjects/sdk/core/**" LinkBase="TestProjects" />
     <None Include="../TestServerProjects/**/*.yaml" LinkBase="TestServerProjects" />
     <Compile Update="..\TestProjects\TypeSchemaMapping\Customized\ModelWithCustomUsageViaAttribute.cs">
       <Link>TestProjects\TypeSchemaMapping\Customized\ModelWithCustomUsageViaAttribute.cs</Link>
