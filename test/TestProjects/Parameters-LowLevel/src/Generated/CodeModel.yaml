@@ -74,6 +74,29 @@ schemas: !Schemas
           name: ApplicationJson
           description: Content Type 'application/json'
       protocol: !Protocols {}
+  dateTimes:
+    - !DateTimeSchema &ref_32
+      type: date-time
+      format: date-time-rfc1123
+      apiVersions:
+        - !ApiVersion 
+          version: 1.0.0
+      language: !Languages 
+        default:
+          name: DateTime
+          description: ''
+      protocol: !Protocols {}
+  uuids:
+    - !UuidSchema &ref_31
+      type: uuid
+      apiVersions:
+        - !ApiVersion 
+          version: 1.0.0
+      language: !Languages 
+        default:
+          name: Uuid
+          description: ''
+      protocol: !Protocols {}
   objects:
     - !ObjectSchema &ref_12
       type: object
@@ -783,6 +806,130 @@ operationGroups:
           default:
             name: OptionalPathBodyParametersWithMixedSequence
             description: Optional path/body parameters with mixed sequence
+        protocol: !Protocols {}
+      - !Operation 
+        operationId: repeatableAction
+        apiVersions:
+          - !ApiVersion 
+            version: 1.0.0
+        parameters:
+          - *ref_3
+          - !Parameter &ref_35
+            schema: *ref_4
+            clientDefaultValue: 123
+            implementation: Method
+            required: true
+            extensions:
+              x-ms-client-default: 123
+            language: !Languages 
+              default:
+                name: id
+                description: Query parameter Id
+                serializedName: id
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: path
+          - !Parameter &ref_36
+            schema: *ref_5
+            implementation: Method
+            required: true
+            language: !Languages 
+              default:
+                name: name
+                description: Query parameter status
+                serializedName: name
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: path
+          - !Parameter &ref_37
+            schema: *ref_31
+            implementation: Method
+            language: !Languages 
+              default:
+                name: repeatabilityRequestID
+                description: >-
+                  If specified, the client directs that the request is repeatable; that is, that the client can make the request multiple times with the same Repeatability-Request-Id and get back an appropriate response without the server
+                  executing the request multiple times. The value of the Repeatability-Request-Id is an opaque string representing a client-generated unique identifier for the request. It is a version 4 (random) UUID.
+                serializedName: Repeatability-Request-ID
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: header
+          - !Parameter &ref_38
+            schema: *ref_32
+            implementation: Method
+            language: !Languages 
+              default:
+                name: repeatabilityFirstSent
+                description: >-
+                  If Repeatability-Request-ID header is specified, then Repeatability-First-Sent header must also be specified. The value should be the date and time at which the request was first created, expressed using the IMF-fixdate
+                  form of HTTP-date. Example: Sun, 06 Nov 1994 08:49:37 GMT.
+                serializedName: Repeatability-First-Sent
+            protocol: !Protocols 
+              http: !HttpParameter 
+                in: header
+        requestMediaTypes:
+          application/json: !Request &ref_34
+            parameters:
+              - !Parameter 
+                schema: *ref_11
+                implementation: Method
+                origin: modelerfour:synthesized/content-type
+                required: true
+                language: !Languages 
+                  default:
+                    name: contentType
+                    description: Body Parameter content-type
+                    serializedName: Content-Type
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: header
+              - !Parameter &ref_33
+                schema: *ref_12
+                implementation: Method
+                required: false
+                language: !Languages 
+                  default:
+                    name: content
+                    description: Request content
+                protocol: !Protocols 
+                  http: !HttpParameter 
+                    in: body
+                    style: json
+            signatureParameters:
+              - *ref_33
+            language: !Languages 
+              default:
+                name: ''
+                description: ''
+            protocol: !Protocols 
+              http: !HttpWithBodyRequest 
+                path: /test6/{id}/{name}
+                method: post
+                knownMediaType: json
+                mediaTypes:
+                  - application/json
+                uri: '{$host}'
+        requests:
+          - *ref_34
+        signatureParameters:
+          - *ref_35
+          - *ref_36
+          - *ref_37
+          - *ref_38
+        responses:
+          - !Response 
+            language: !Languages 
+              default:
+                name: ''
+                description: Empty Response
+            protocol: !Protocols 
+              http: !HttpResponse 
+                statusCodes:
+                  - '200'
+        language: !Languages 
+          default:
+            name: RepeatableAction
+            description: OASIS repeatable action
         protocol: !Protocols {}
     language: !Languages 
       default:

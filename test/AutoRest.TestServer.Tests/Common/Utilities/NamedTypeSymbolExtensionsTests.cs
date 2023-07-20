@@ -92,6 +92,7 @@ namespace NamedTypeSymbolExtensionsTests
                 disablePaginationTopRenaming: false,
                 generateModelFactory: false,
                 publicDiscriminatorProperty: false,
+                useCoreDataFactoryReplacements: true,
                 modelFactoryForHlc: Array.Empty<string>(),
                 unreferencedTypesHandling: Configuration.UnreferencedTypesHandlingOption.RemoveOrInternalize,
                 useOverloadsBetweenProtocolAndConvenience: true,

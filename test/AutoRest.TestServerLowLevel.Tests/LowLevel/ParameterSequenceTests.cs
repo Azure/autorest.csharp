@@ -9,6 +9,7 @@ using NUnit.Framework;
 using Azure.Core;
 using Azure;
 using System.Threading;
+using System.Reflection;
 
 namespace AutoRest.LowLevel.Tests
 {
@@ -26,6 +27,15 @@ namespace AutoRest.LowLevel.Tests
             var method = type.GetMethod(methodName, types);
             Assert.AreEqual(parameterNames, method.GetParameters().Select(p => p.Name).ToArray());
             Assert.AreEqual(isOptional, method.GetParameters().Select(p => p.HasDefaultValue).ToArray());
+        }
+
+        [Test]
+        public void RepeatabilityHeadersNotInMethodSignature()
+        {
+            foreach (var m in typeof(ParametersLowlevelClient).GetMethods(BindingFlags.Public | BindingFlags.Instance).Where(m => m.Name.StartsWith("RepeatableAction")))
+            {
+                Assert.False(m.GetParameters().Any(p => p.Name == "repeatabilityRequestId" || p.Name == "repeatabilityFirstSent"));
+            }
         }
     }
 }
