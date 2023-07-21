@@ -75,6 +75,13 @@ alias ThingAliasWithOptionalProps = {
   elements?: string[];
 };
 
+alias AliasWithRequiredAndOptionalCollections = {
+  @doc("required list")
+  requiredStringList: string[];
+  @doc("optional list")
+  optionalStringList?: string[];
+};
+
 @route("/spreadModel")
 @doc("spread a model as body.")
 @post
@@ -110,3 +117,9 @@ op spreadAliasWithSpreadAlias( ...ThingAliasWithSpreadAlias ): void;
 @post
 @convenientAPI(true)
 op spreadAliasWithOptionalProps( ...ThingAliasWithOptionalProps ): void;
+
+@route("/spreadAliasWithCollections")
+@doc("spread an alias with required and optional collections")
+@post
+@convenientAPI(true)
+op spreadAliasWithCollections( ...AliasWithRequiredAndOptionalCollections ): void;

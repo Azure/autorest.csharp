@@ -49,6 +49,7 @@ namespace AutoRest.CSharp.Input
             public const string PublicDiscriminatorProperty = "public-discriminator-property";
             public const string ShouldTreatBase64AsBinaryData = "should-treat-base64-as-binary-data";
             public const string MethodsToKeepClientDefaultValue = "methods-to-keep-client-default-value";
+            public const string DeserializeNullCollectionAsNullValue = "deserialize-null-collection-as-null-value";
             public const string UseCoreDataFactoryReplacements = "use-core-datafactory-replacements";
         }
 
@@ -76,6 +77,7 @@ namespace AutoRest.CSharp.Input
             bool disablePaginationTopRenaming,
             bool generateModelFactory,
             bool publicDiscriminatorProperty,
+            bool deserializeNullCollectionAsNullValue,
             bool useCoreDataFactoryReplacements,
             IReadOnlyList<string> modelFactoryForHlc,
             UnreferencedTypesHandlingOption unreferencedTypesHandling,
@@ -106,6 +108,7 @@ namespace AutoRest.CSharp.Input
             SingleTopLevelClient = singleTopLevelClient;
             GenerateModelFactory = generateModelFactory;
             PublicDiscriminatorProperty = publicDiscriminatorProperty;
+            DeserializeNullCollectionAsNullValue = deserializeNullCollectionAsNullValue;
             UnreferencedTypesHandling = unreferencedTypesHandling;
             UseOverloadsBetweenProtocolAndConvenience = useOverloadsBetweenProtocolAndConvenience;
             KeepNonOverloadableProtocolSignature = keepNonOverloadableProtocolSignature;
@@ -237,6 +240,12 @@ namespace AutoRest.CSharp.Input
         /// If true, the discriminator property will be public. If false (default), the discriminator property will be internal.
         /// </summary>
         public static bool PublicDiscriminatorProperty { get; private set; }
+
+        /// <summary>
+        /// Whether we should deserialize null collections in the payload as null values if this sets to true.
+        /// Default value is false, where we will construct an empty collection (ChangeTrackingList or ChangeTrackingDictionary) if we get null value for collections in the payload
+        /// </summary>
+        public static bool DeserializeNullCollectionAsNullValue { get; private set; }
         public static bool UseOverloadsBetweenProtocolAndConvenience { get; private set; }
         public static bool KeepNonOverloadableProtocolSignature { get; private set; }
 
@@ -288,6 +297,7 @@ namespace AutoRest.CSharp.Input
                 disablePaginationTopRenaming: GetOptionBoolValue(autoRest, Options.DisablePaginationTopRenaming),
                 generateModelFactory: GetOptionBoolValue(autoRest, Options.GenerateModelFactory),
                 publicDiscriminatorProperty: GetOptionBoolValue(autoRest, Options.PublicDiscriminatorProperty),
+                deserializeNullCollectionAsNullValue: GetOptionBoolValue(autoRest, Options.DeserializeNullCollectionAsNullValue),
                 modelFactoryForHlc: autoRest.GetValue<string[]?>(Options.ModelFactoryForHlc).GetAwaiter().GetResult() ?? Array.Empty<string>(),
                 unreferencedTypesHandling: GetOptionEnumValue<UnreferencedTypesHandlingOption>(autoRest, Options.UnreferencedTypesHandling),
                 useOverloadsBetweenProtocolAndConvenience: GetOptionBoolValue(autoRest, Options.UseOverloadsBetweenProtocolAndConvenience),
@@ -367,6 +377,8 @@ namespace AutoRest.CSharp.Input
                     return false;
                 case Options.ShouldTreatBase64AsBinaryData:
                     return true;
+                case Options.DeserializeNullCollectionAsNullValue:
+                    return false;
                 case Options.UseCoreDataFactoryReplacements:
                     return true;
                 default:
@@ -438,6 +450,7 @@ namespace AutoRest.CSharp.Input
                 ReadOption(root, Options.DisablePaginationTopRenaming),
                 ReadOption(root, Options.GenerateModelFactory),
                 ReadOption(root, Options.PublicDiscriminatorProperty),
+                ReadOption(root, Options.DeserializeNullCollectionAsNullValue),
                 ReadOption(root, Options.UseCoreDataFactoryReplacements),
                 oldModelFactoryEntries,
                 ReadEnumOption<UnreferencedTypesHandlingOption>(root, Options.UnreferencedTypesHandling),
