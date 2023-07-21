@@ -24,6 +24,18 @@ namespace AutoRest.CSharp.Output.Models.Requests
             "Last-Modified",
         };
 
+        public static HashSet<string> ClientRequestIdHeaders = new HashSet<string>(StringComparer.OrdinalIgnoreCase)
+        {
+            "x-ms-client-request-id",
+            "client-request-id",
+        };
+
+        public static HashSet<string> ReturnClientRequestIdResponseHeaders = new HashSet<string>(StringComparer.OrdinalIgnoreCase)
+        {
+            "x-ms-return-client-request-id",
+            "return-client-request-id",
+        };
+
         public const string RepeatabilityRequestId = "Repeatability-Request-ID";
         public const string RepeatabilityFirstSent = "Repeatability-First-Sent";
 

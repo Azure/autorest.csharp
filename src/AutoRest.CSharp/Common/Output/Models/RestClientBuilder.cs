@@ -30,9 +30,11 @@ namespace AutoRest.CSharp.Output.Models
     {
         private static readonly HashSet<string> IgnoredRequestHeader = new(StringComparer.OrdinalIgnoreCase)
         {
+            /*
             "x-ms-client-request-id",
             "client-request-id",
             "return-client-request-id",
+            */
             "tracestate",
             "traceparent"
         };
@@ -132,12 +134,22 @@ namespace AutoRest.CSharp.Output.Models
         private Dictionary<InputParameter, Parameter> GetOperationAllParameters(InputOperation operation)
             => FilterOperationAllParameters(operation.Parameters)
                 .ToDictionary(p => p, parameter => BuildParameter(parameter));
-
+        /*
         public static IEnumerable<InputParameter> FilterOperationAllParameters(IReadOnlyList<InputParameter> parameters)
             => parameters
                 .Where(rp => !IsIgnoredHeaderParameter(rp))
                 // change the type to constant so that it won't show up in the method signature
-                .Select(p => RequestHeader.IsRepeatabilityRequestHeader(p.NameInRequest) ? p with { Kind = InputOperationParameterKind.Constant } : p);
+                .Select(p => RequestHeader.IsRepeatabilityRequestHeader(p.NameInRequest) || RequestHeader.ClientRequestIdHeaders.Contains(p.NameInRequest) ? p with { Kind = InputOperationParameterKind.Constant } : p)
+                .Any(h => RequestHeader.ClientRequestIdHeaders.Contains(h.NameInRequest)) ? parameters : parameters.Concat(new List<InputParameter>() { new InputParameter("clientRequestId", "x-ms-client-request-id", "the client request id header", InputPrimitiveType.String, RequestLocation.Header, null, null, null, InputOperationParameterKind.Constant, true, false, false, false, false, false, false, null, null, SerializationFormat.Default),
+                    new InputParameter("returnClientRequestId", "x-ms-return-client-request-id", "the x-ms-return-client-request-id header", InputPrimitiveType.String, RequestLocation.Header, null, null, null, InputOperationParameterKind.Constant, true, false, false, false, false, false, false, null,null, SerializationFormat.Default)});
+        //.Any(h => RequestHeader.ReturnClientRequestIdResponseHeaders.Contains(h.NameInRequest)) ? parameters : parameters.Append(new InputParameter("returnClientRequestId", "x-ms-return-client-request-id", "the x-ms-return-client-request-id header", InputPrimitiveType.String, RequestLocation.Header, null, null, null, InputOperationParameterKind.Constant, true, false, false, false, false, false, false, null,null, SerializationFormat.Default));
+        */
+        public static IEnumerable<InputParameter> FilterOperationAllParameters(IReadOnlyList<InputParameter> parameters)
+            => parameters
+                .Where(rp => !IsIgnoredHeaderParameter(rp))
+                // change the type to constant so that it won't show up in the method signature
+                .Select(p => RequestHeader.IsRepeatabilityRequestHeader(p.NameInRequest) || RequestHeader.ClientRequestIdHeaders.Contains(p.NameInRequest) ? p with { Kind = InputOperationParameterKind.Constant } : p)
+                .Any(h => RequestHeader.ClientRequestIdHeaders.Contains(h.NameInRequest)) ? parameters : parameters.Concat(KnownParameters.ClientRequestIDInputParamters);
 
         public static Response[] BuildResponses(InputOperation operation, TypeFactory typeFactory, out CSharpType? responseType)
         {
@@ -207,6 +219,14 @@ namespace AutoRest.CSharp.Output.Models
                 }
             }
 
+            /* add x-ms-client-request-id header if not already present */
+            /*
+            if (!headerParameters.Any(h => h.Name == KnownParameters.ClientRequestIdParameter.Name))
+            {
+                headerParameters.Add(new RequestHeader(KnownParameters.ClientRequestIdParameter.Name, CreateReference(new InputParameter(), KnownParameters.ClientRequestIdParameter), null, SerializationFormat.Default));
+            }
+            */
+
             var uriParameters = GetPathSegments(operation.Uri, uriParametersMap, isRaw: true);
             var pathParameters = GetPathSegments(operation.Path, pathParametersMap, isRaw: false);
 
@@ -236,6 +256,19 @@ namespace AutoRest.CSharp.Output.Models
                     methodParameters.Add(parameter);
                 }
             }
+
+            // add client request id parameter if not exists
+            /*
+            if (!methodParameters.Any(p => RequestHeader.ClientRequestIdHeaders.Contains(p.Name)))
+            {
+                methodParameters.Add(KnownParameters.ClientRequestIdParameter);
+            }
+
+            if (!methodParameters.Any(p => RequestHeader.ReturnClientRequestIdResponseHeaders.Contains(p.Name)))
+            {
+                methodParameters.Add(KnownParameters.ReturnClientRequestIdParameter);
+            }
+            */
 
             return OrderParametersByRequired(methodParameters);
         }

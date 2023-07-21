@@ -82,6 +82,8 @@ namespace AutoRest.CSharp.Output.Models.Shared
 
         private static Constant? GetDefaultValue(InputParameter operationParameter, TypeFactory typeFactory) => operationParameter switch
         {
+            { NameInRequest: var nameInRequest} when RequestHeader.ClientRequestIdHeaders.Contains(nameInRequest) => Constant.FromExpression($"message.Request.ClientRequestId", new CSharpType(typeof(string))),
+            { NameInRequest: var nameInRequest } when RequestHeader.ReturnClientRequestIdResponseHeaders.Contains(nameInRequest) => new Constant(true, new CSharpType(typeof(bool))),
             { DefaultValue: not null } => BuilderHelpers.ParseConstant(operationParameter.DefaultValue.Value, typeFactory.CreateType(operationParameter.DefaultValue.Type)),
             { NameInRequest: var nameInRequest } when nameInRequest.Equals(RequestHeader.RepeatabilityRequestId, StringComparison.OrdinalIgnoreCase) =>
                 // Guid.NewGuid()
@@ -217,6 +219,14 @@ namespace AutoRest.CSharp.Output.Models.Shared
 
         private static Constant? GetClientDefaultValue(RequestParameter parameter, TypeFactory typeFactory)
         {
+            if (parameter.In == HttpParameterIn.Header && RequestHeader.ClientRequestIdHeaders.Contains(parameter.Language.Default.Name))
+            {
+                return Constant.FromExpression($"message.Request.ClientRequestId", new CSharpType(typeof(string)));
+            }
+            if (parameter.In == HttpParameterIn.Header && RequestHeader.ReturnClientRequestIdResponseHeaders.Contains(parameter.Language.Default.Name))
+            {
+                return new Constant(true, new CSharpType(typeof(bool)));
+            }
             if (parameter.ClientDefaultValue != null)
             {
                 CSharpType constantTypeReference = typeFactory.CreateType(parameter.Schema, parameter.IsNullable);

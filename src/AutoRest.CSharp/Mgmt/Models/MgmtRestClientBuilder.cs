@@ -12,6 +12,7 @@ using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Mgmt.AutoRest;
 using AutoRest.CSharp.Output.Builders;
 using AutoRest.CSharp.Output.Models;
+using AutoRest.CSharp.Output.Models.Requests;
 using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Output.Models.Types;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
@@ -91,6 +92,18 @@ namespace AutoRest.CSharp.Mgmt.Models
             requiredParameters.AddRange(bodyParameters.OrderBy(p => p.IsOptionalInSignature)); // move required body parameters at the beginning
             requiredParameters.AddRange(optionalParameters);
 
+            // add client request id parameter if not exists
+            /*
+            if (!requiredParameters.Any(p => RequestHeader.ClientRequestIdHeaders.Contains(p.Name)))
+            {
+                requiredParameters.Add(KnownParameters.ClientRequestIdParameter);
+            }
+
+            if (!requiredParameters.Any(p => RequestHeader.ReturnClientRequestIdResponseHeaders.Contains(p.Name)))
+            {
+                requiredParameters.Add(KnownParameters.ReturnClientRequestIdParameter);
+            }
+            */
             return requiredParameters.ToArray();
         }
     }
