@@ -122,11 +122,6 @@ namespace AutoRest.CSharp.Input
 
             if (schema is ObjectSchema objectSchema)
             {
-                foreach (var parent in objectSchema.Parents!.All)
-                {
-                    Apply(usages, parent, usage);
-                }
-
                 foreach (var child in objectSchema.Children!.All)
                 {
                     Apply(usages, child, usage);
