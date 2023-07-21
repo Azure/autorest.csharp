@@ -82,7 +82,7 @@ namespace AutoRest.CSharp.Common.Input
             return model ?? CreateInputModelTypeInstance(id, name, ns, accessibility, deprecated, description, usageString, discriminatorValue, discriminatorPropertyName, baseModel, properties, isConfident, isNullable, resolver);
         }
 
-        private static InputModelType CreateInputModelTypeInstance(string? id, string? name, string? ns, string? accessibility, string? deprecated, string? description, string? usageString, string? discriminatorValue, string? discriminatorPropertyValue, InputModelType? baseModel, List<InputModelProperty> properties, bool isConfident, bool isNullable, ReferenceResolver resolver)
+        private static InputModelType CreateInputModelTypeInstance(string? id, string? name, string? ns, string? accessibility, string? deprecated, string? description, string? usageString, string? discriminatorValue, string? discriminatorPropertyName, InputModelType? baseModel, List<InputModelProperty> properties, bool isConfident, bool isNullable, ReferenceResolver resolver)
         {
             name = name ?? throw new JsonException("Model must have name");
             InputModelTypeUsage usage = InputModelTypeUsage.None;
@@ -90,7 +90,7 @@ namespace AutoRest.CSharp.Common.Input
             {
                 Enum.TryParse<InputModelTypeUsage>(usageString, ignoreCase: true, out usage);
             }
-            var model = new InputModelType(name, ns, accessibility, deprecated, description, usage, properties, baseModel, new List<InputModelType>(), discriminatorValue, discriminatorPropertyValue, isConfident, isNullable);
+            var model = new InputModelType(name, ns, accessibility, deprecated, description, usage, properties, baseModel, new List<InputModelType>(), discriminatorValue, discriminatorPropertyName, isConfident, isNullable);
             if (id != null)
             {
                 resolver.AddReference(id, model);

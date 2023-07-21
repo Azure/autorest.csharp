@@ -238,9 +238,13 @@ export function createModelForService(
                     continue;
                 }
                 isOperationConfident &&= isConfident(parameter.Type);
+                // we do not need to check more parameters if the operation is already not confident
+                if (!isOperationConfident) break;
             }
             for (const response of op.Responses) {
                 isOperationConfident &&= isConfident(response.BodyType);
+                // we do not need to check more responses if the operation is already not confident
+                if (!isOperationConfident) break;
             }
             // TODO -- headers?
             op.IsConfident = isOperationConfident;
