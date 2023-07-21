@@ -1,6 +1,7 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
+using System;
 using System.Text.Json;
 using System.Threading.Tasks;
 using AutoRest.TestServer.Tests.Infrastructure;
@@ -59,6 +60,7 @@ namespace CadlRanchProjects.Tests
                 optionalLiteralInt = 456,
                 optionalLiteralFloat = 4.56,
                 optionalLiteralBool = true,
+                requiredNullableList = Array.Empty<int>(),
             };
             Response response = await new FirstTestTypeSpecClient(host).CreateLiteralAsync(RequestContent.Create(data));
             var result = JsonDocument.Parse(response.ContentStream).RootElement;

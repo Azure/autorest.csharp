@@ -268,6 +268,7 @@
    "Namespace": "SpreadTypeSpec",
    "IsNullable": false,
    "Usage": "Input",
+   "IsConfident": true,
    "Properties": [
     {
      "$id": "36",
@@ -281,6 +282,7 @@
        "$id": "38",
        "Name": "string",
        "Kind": "String",
+       "IsConfident": true,
        "IsNullable": false
       },
       "IsNullable": false
@@ -300,6 +302,7 @@
        "$id": "41",
        "Name": "string",
        "Kind": "String",
+       "IsConfident": true,
        "IsNullable": false
       },
       "IsNullable": false
@@ -1183,11 +1186,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-<<<<<<< HEAD
      "GenerateConvenienceMethod": true,
      "IsConfident": true
-=======
-     "GenerateConvenienceMethod": true
     },
     {
      "$id": "119",
@@ -1223,6 +1223,7 @@
         "$id": "122",
         "Name": "String",
         "Kind": "String",
+        "IsConfident": true,
         "IsNullable": false
        },
        "Location": "Header",
@@ -1250,6 +1251,7 @@
         "$id": "125",
         "Name": "String",
         "Kind": "String",
+        "IsConfident": true,
         "IsNullable": false
        },
        "Location": "Header",
@@ -1293,8 +1295,8 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
->>>>>>> origin/feature/v3
+     "GenerateConvenienceMethod": true,
+     "IsConfident": true
     }
    ],
    "Protocol": {

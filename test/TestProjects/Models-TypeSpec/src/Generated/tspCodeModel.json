@@ -231,6 +231,7 @@
       "$id": "29",
       "Name": "int32",
       "Kind": "Int32",
+      "IsConfident": true,
       "IsNullable": true
      },
      "IsRequired": true,
@@ -245,6 +246,7 @@
       "$id": "31",
       "Name": "string",
       "Kind": "String",
+      "IsConfident": true,
       "IsNullable": true
      },
      "IsRequired": true,
@@ -259,6 +261,7 @@
       "$id": "33",
       "Name": "int32",
       "Kind": "Int32",
+      "IsConfident": true,
       "IsNullable": true
      },
      "IsRequired": false,
@@ -273,6 +276,7 @@
       "$id": "35",
       "Name": "string",
       "Kind": "String",
+      "IsConfident": true,
       "IsNullable": true
      },
      "IsRequired": false,
@@ -511,6 +515,7 @@
        "$id": "67",
        "Name": "string",
        "Kind": "String",
+       "IsConfident": true,
        "IsNullable": false
       },
       "IsNullable": true
@@ -530,6 +535,7 @@
        "$id": "70",
        "Name": "int32",
        "Kind": "Int32",
+       "IsConfident": true,
        "IsNullable": false
       },
       "IsNullable": true
@@ -565,6 +571,7 @@
        "$id": "75",
        "Name": "string",
        "Kind": "String",
+       "IsConfident": true,
        "IsNullable": false
       },
       "IsNullable": false
@@ -584,6 +591,7 @@
        "$id": "78",
        "Name": "int32",
        "Kind": "Int32",
+       "IsConfident": true,
        "IsNullable": false
       },
       "IsNullable": false
@@ -619,6 +627,7 @@
        "$id": "83",
        "Name": "string",
        "Kind": "String",
+       "IsConfident": true,
        "IsNullable": false
       },
       "IsNullable": true
@@ -638,6 +647,7 @@
        "$id": "86",
        "Name": "int32",
        "Kind": "Int32",
+       "IsConfident": true,
        "IsNullable": false
       },
       "IsNullable": true
@@ -710,6 +720,7 @@
       "$id": "93",
       "Name": "string",
       "Kind": "String",
+      "IsConfident": true,
       "IsNullable": false
      },
      "IsRequired": false,
@@ -724,6 +735,7 @@
       "$id": "95",
       "Name": "int32",
       "Kind": "Int32",
+      "IsConfident": true,
       "IsNullable": false
      },
      "IsRequired": false,
@@ -738,6 +750,7 @@
       "$id": "97",
       "Name": "int32",
       "Kind": "Int32",
+      "IsConfident": true,
       "IsNullable": true
      },
      "IsRequired": true,
@@ -752,6 +765,7 @@
       "$id": "99",
       "Name": "string",
       "Kind": "String",
+      "IsConfident": true,
       "IsNullable": true
      },
      "IsRequired": true,
@@ -766,6 +780,7 @@
       "$id": "101",
       "Name": "int32",
       "Kind": "Int32",
+      "IsConfident": true,
       "IsNullable": true
      },
      "IsRequired": false,
@@ -780,6 +795,7 @@
       "$id": "103",
       "Name": "string",
       "Kind": "String",
+      "IsConfident": true,
       "IsNullable": true
      },
      "IsRequired": false,
@@ -794,6 +810,7 @@
       "$id": "105",
       "Name": "int32",
       "Kind": "Int32",
+      "IsConfident": true,
       "IsNullable": false
      },
      "IsRequired": true,
@@ -808,6 +825,7 @@
       "$id": "107",
       "Name": "int32",
       "Kind": "Int32",
+      "IsConfident": true,
       "IsNullable": false
      },
      "IsRequired": false,
@@ -1158,6 +1176,7 @@
        "$id": "154",
        "Name": "int32",
        "Kind": "Int32",
+       "IsConfident": true,
        "IsNullable": false
       },
       "IsNullable": true
@@ -1177,6 +1196,7 @@
        "$id": "157",
        "Name": "string",
        "Kind": "String",
+       "IsConfident": true,
        "IsNullable": false
       },
       "IsNullable": true
@@ -1196,6 +1216,7 @@
        "$id": "160",
        "Name": "int32",
        "Kind": "Int32",
+       "IsConfident": true,
        "IsNullable": false
       },
       "IsNullable": true
@@ -1215,6 +1236,7 @@
        "$id": "163",
        "Name": "string",
        "Kind": "String",
+       "IsConfident": true,
        "IsNullable": false
       },
       "IsNullable": true
@@ -1652,468 +1674,6 @@
      "SerializedName": "optionalIntRecord",
      "Description": "Optional int record",
      "Type": {
-<<<<<<< HEAD
-      "$id": "156",
-      "Name": "Dictionary",
-      "KeyType": {
-       "$id": "157",
-       "Name": "string",
-       "Kind": "String",
-       "IsConfident": true,
-       "IsNullable": false
-      },
-      "ValueType": {
-       "$id": "158",
-       "Name": "int32",
-       "Kind": "Int32",
-       "IsConfident": true,
-       "IsNullable": false
-      },
-      "IsNullable": false
-     },
-     "IsRequired": false,
-     "IsReadOnly": false
-    },
-    {
-     "$id": "159",
-     "Name": "optionalStringRecord",
-     "SerializedName": "optionalStringRecord",
-     "Description": "Optional string record",
-     "Type": {
-      "$id": "160",
-      "Name": "Dictionary",
-      "KeyType": {
-       "$id": "161",
-       "Name": "string",
-       "Kind": "String",
-       "IsConfident": true,
-       "IsNullable": false
-      },
-      "ValueType": {
-       "$id": "162",
-       "Name": "string",
-       "Kind": "String",
-       "IsConfident": true,
-       "IsNullable": false
-      },
-      "IsNullable": false
-     },
-     "IsRequired": false,
-     "IsReadOnly": false
-    },
-    {
-     "$id": "163",
-     "Name": "optionalModelRecord",
-     "SerializedName": "optionalModelRecord",
-     "Description": "Optional model record",
-     "Type": {
-      "$id": "164",
-      "Name": "Dictionary",
-      "KeyType": {
-       "$id": "165",
-       "Name": "string",
-       "Kind": "String",
-       "IsConfident": true,
-       "IsNullable": false
-      },
-      "ValueType": {
-       "$ref": "42"
-      },
-      "IsNullable": false
-     },
-     "IsRequired": false,
-     "IsReadOnly": false
-    },
-    {
-     "$id": "166",
-     "Name": "optionalPlainDate",
-     "SerializedName": "optionalPlainDate",
-     "Description": "Optional plainDate",
-     "Type": {
-      "$id": "167",
-      "Name": "plainDate",
-      "Kind": "Date",
-      "IsConfident": true,
-      "IsNullable": false
-     },
-     "IsRequired": false,
-     "IsReadOnly": false
-    },
-    {
-     "$id": "168",
-     "Name": "optionalPlainTime",
-     "SerializedName": "optionalPlainTime",
-     "Description": "Optional plainTime",
-     "Type": {
-      "$id": "169",
-      "Name": "plainTime",
-      "Kind": "Time",
-      "IsConfident": true,
-      "IsNullable": false
-     },
-     "IsRequired": false,
-     "IsReadOnly": false
-    },
-    {
-     "$id": "170",
-     "Name": "optionalCollectionWithNullableIntElement",
-     "SerializedName": "optionalCollectionWithNullableIntElement",
-     "Description": "Optional collection of which the element is a nullable int",
-     "Type": {
-      "$id": "171",
-      "Name": "Array",
-      "ElementType": {
-       "$id": "172",
-       "Name": "int32",
-       "Kind": "Int32",
-       "IsConfident": true,
-       "IsNullable": true
-      },
-      "IsNullable": false
-     },
-     "IsRequired": false,
-     "IsReadOnly": false
-    }
-   ]
-  },
-  {
-   "$ref": "148"
-  },
-  {
-   "$ref": "147"
-  },
-  {
-   "$id": "173",
-   "Name": "RoundTripReadOnlyModel",
-   "Namespace": "ModelsTypeSpec",
-   "Description": "Output model with readonly properties.",
-   "IsNullable": false,
-   "Usage": "Output",
-   "IsConfident": true,
-   "Properties": [
-    {
-     "$id": "174",
-     "Name": "requiredReadonlyString",
-     "SerializedName": "requiredReadonlyString",
-     "Description": "Required string, illustrating a readonly reference type property.",
-     "Type": {
-      "$id": "175",
-      "Name": "string",
-      "Kind": "String",
-      "IsConfident": true,
-      "IsNullable": false
-     },
-     "IsRequired": true,
-     "IsReadOnly": true
-    },
-    {
-     "$id": "176",
-     "Name": "requiredReadonlyInt",
-     "SerializedName": "requiredReadonlyInt",
-     "Description": "Required int, illustrating a readonly value type property.",
-     "Type": {
-      "$id": "177",
-      "Name": "int32",
-      "Kind": "Int32",
-      "IsConfident": true,
-      "IsNullable": false
-     },
-     "IsRequired": true,
-     "IsReadOnly": true
-    },
-    {
-     "$id": "178",
-     "Name": "optionalReadonlyString",
-     "SerializedName": "optionalReadonlyString",
-     "Description": "Optional string, illustrating a readonly reference type property.",
-     "Type": {
-      "$id": "179",
-      "Name": "string",
-      "Kind": "String",
-      "IsConfident": true,
-      "IsNullable": false
-     },
-     "IsRequired": false,
-     "IsReadOnly": true
-    },
-    {
-     "$id": "180",
-     "Name": "optionalReadonlyInt",
-     "SerializedName": "optionalReadonlyInt",
-     "Description": "Optional int, illustrating a readonly value type property.",
-     "Type": {
-      "$id": "181",
-      "Name": "int32",
-      "Kind": "Int32",
-      "IsConfident": true,
-      "IsNullable": false
-     },
-     "IsRequired": false,
-     "IsReadOnly": true
-    },
-    {
-     "$id": "182",
-     "Name": "requiredReadonlyModel",
-     "SerializedName": "requiredReadonlyModel",
-     "Description": "Required readonly model.",
-     "Type": {
-      "$ref": "43"
-     },
-     "IsRequired": true,
-     "IsReadOnly": true
-    },
-    {
-     "$id": "183",
-     "Name": "optionalReadonlyModel",
-     "SerializedName": "optionalReadonlyModel",
-     "Description": "Optional readonly model.",
-     "Type": {
-      "$ref": "43"
-     },
-     "IsRequired": false,
-     "IsReadOnly": true
-    },
-    {
-     "$id": "184",
-     "Name": "requiredReadonlyFixedStringEnum",
-     "SerializedName": "requiredReadonlyFixedStringEnum",
-     "Description": "Required readonly fixed string enum",
-     "Type": {
-      "$ref": "2"
-     },
-     "IsRequired": true,
-     "IsReadOnly": true
-    },
-    {
-     "$id": "185",
-     "Name": "requiredReadonlyExtensibleEnum",
-     "SerializedName": "requiredReadonlyExtensibleEnum",
-     "Description": "Required readonly extensible enum",
-     "Type": {
-      "$ref": "10"
-     },
-     "IsRequired": true,
-     "IsReadOnly": true
-    },
-    {
-     "$id": "186",
-     "Name": "optionalReadonlyFixedStringEnum",
-     "SerializedName": "optionalReadonlyFixedStringEnum",
-     "Description": "Optional readonly fixed string enum",
-     "Type": {
-      "$ref": "2"
-     },
-     "IsRequired": true,
-     "IsReadOnly": true
-    },
-    {
-     "$id": "187",
-     "Name": "optionalReadonlyExtensibleEnum",
-     "SerializedName": "optionalReadonlyExtensibleEnum",
-     "Description": "Optional readonly extensible enum",
-     "Type": {
-      "$ref": "10"
-     },
-     "IsRequired": true,
-     "IsReadOnly": true
-    },
-    {
-     "$id": "188",
-     "Name": "requiredReadonlyStringList",
-     "SerializedName": "requiredReadonlyStringList",
-     "Description": "Required readonly string collection.",
-     "Type": {
-      "$id": "189",
-      "Name": "Array",
-      "ElementType": {
-       "$id": "190",
-       "Name": "string",
-       "Kind": "String",
-       "IsConfident": true,
-       "IsNullable": false
-      },
-      "IsNullable": false
-     },
-     "IsRequired": true,
-     "IsReadOnly": true
-    },
-    {
-     "$id": "191",
-     "Name": "requiredReadonlyIntList",
-     "SerializedName": "requiredReadonlyIntList",
-     "Description": "Required readonly int collection.",
-     "Type": {
-      "$id": "192",
-      "Name": "Array",
-      "ElementType": {
-       "$id": "193",
-       "Name": "int32",
-       "Kind": "Int32",
-       "IsConfident": true,
-       "IsNullable": false
-      },
-      "IsNullable": false
-     },
-     "IsRequired": true,
-     "IsReadOnly": true
-    },
-    {
-     "$id": "194",
-     "Name": "requiredReadOnlyModelCollection",
-     "SerializedName": "requiredReadOnlyModelCollection",
-     "Description": "Required model collection",
-     "Type": {
-      "$id": "195",
-      "Name": "Array",
-      "ElementType": {
-       "$ref": "38"
-      },
-      "IsNullable": false
-     },
-     "IsRequired": true,
-     "IsReadOnly": true
-    },
-    {
-     "$id": "196",
-     "Name": "requiredReadOnlyIntRecord",
-     "SerializedName": "requiredReadOnlyIntRecord",
-     "Description": "Required int record",
-     "Type": {
-      "$id": "197",
-      "Name": "Dictionary",
-      "KeyType": {
-       "$id": "198",
-       "Name": "string",
-       "Kind": "String",
-       "IsConfident": true,
-       "IsNullable": false
-      },
-      "ValueType": {
-       "$id": "199",
-       "Name": "int32",
-       "Kind": "Int32",
-       "IsConfident": true,
-       "IsNullable": false
-      },
-      "IsNullable": false
-     },
-     "IsRequired": true,
-     "IsReadOnly": true
-    },
-    {
-     "$id": "200",
-     "Name": "requiredStringRecord",
-     "SerializedName": "requiredStringRecord",
-     "Description": "Required string record",
-     "Type": {
-      "$id": "201",
-      "Name": "Dictionary",
-      "KeyType": {
-       "$id": "202",
-       "Name": "string",
-       "Kind": "String",
-       "IsConfident": true,
-       "IsNullable": false
-      },
-      "ValueType": {
-       "$id": "203",
-       "Name": "string",
-       "Kind": "String",
-       "IsConfident": true,
-       "IsNullable": false
-      },
-      "IsNullable": false
-     },
-     "IsRequired": true,
-     "IsReadOnly": true
-    },
-    {
-     "$id": "204",
-     "Name": "requiredReadOnlyModelRecord",
-     "SerializedName": "requiredReadOnlyModelRecord",
-     "Description": "Required model record",
-     "Type": {
-      "$id": "205",
-      "Name": "Dictionary",
-      "KeyType": {
-       "$id": "206",
-       "Name": "string",
-       "Kind": "String",
-       "IsConfident": true,
-       "IsNullable": false
-      },
-      "ValueType": {
-       "$ref": "42"
-      },
-      "IsNullable": false
-     },
-     "IsRequired": true,
-     "IsReadOnly": true
-    },
-    {
-     "$id": "207",
-     "Name": "optionalReadonlyStringList",
-     "SerializedName": "optionalReadonlyStringList",
-     "Description": "Optional readonly string collection.",
-     "Type": {
-      "$id": "208",
-      "Name": "Array",
-      "ElementType": {
-       "$id": "209",
-       "Name": "string",
-       "Kind": "String",
-       "IsConfident": true,
-       "IsNullable": false
-      },
-      "IsNullable": false
-     },
-     "IsRequired": false,
-     "IsReadOnly": true
-    },
-    {
-     "$id": "210",
-     "Name": "optionalReadonlyIntList",
-     "SerializedName": "optionalReadonlyIntList",
-     "Description": "Optional readonly int collection.",
-     "Type": {
-      "$id": "211",
-      "Name": "Array",
-      "ElementType": {
-       "$id": "212",
-       "Name": "int32",
-       "Kind": "Int32",
-       "IsConfident": true,
-       "IsNullable": false
-      },
-      "IsNullable": false
-     },
-     "IsRequired": false,
-     "IsReadOnly": true
-    },
-    {
-     "$id": "213",
-     "Name": "optionalReadOnlyModelCollection",
-     "SerializedName": "optionalReadOnlyModelCollection",
-     "Description": "Optional model collection",
-     "Type": {
-      "$id": "214",
-      "Name": "Array",
-      "ElementType": {
-       "$ref": "38"
-      },
-      "IsNullable": false
-     },
-     "IsRequired": false,
-     "IsReadOnly": true
-    },
-    {
-     "$id": "215",
-     "Name": "optionalReadOnlyIntRecord",
-     "SerializedName": "optionalReadOnlyIntRecord",
-     "Description": "Optional int record",
-     "Type": {
-=======
->>>>>>> origin/feature/v3
       "$id": "216",
       "Name": "Dictionary",
       "KeyType": {
@@ -2194,6 +1754,7 @@
       "$id": "227",
       "Name": "plainDate",
       "Kind": "Date",
+      "IsConfident": true,
       "IsNullable": false
      },
      "IsRequired": false,
@@ -2208,6 +1769,7 @@
       "$id": "229",
       "Name": "plainTime",
       "Kind": "Time",
+      "IsConfident": true,
       "IsNullable": false
      },
      "IsRequired": false,
@@ -2225,6 +1787,7 @@
        "$id": "232",
        "Name": "int32",
        "Kind": "Int32",
+       "IsConfident": true,
        "IsNullable": true
       },
       "IsNullable": false
@@ -2247,6 +1810,7 @@
    "Description": "Output model with readonly properties.",
    "IsNullable": false,
    "Usage": "Output",
+   "IsConfident": true,
    "Properties": [
     {
      "$id": "234",
@@ -2257,6 +1821,7 @@
       "$id": "235",
       "Name": "string",
       "Kind": "String",
+      "IsConfident": true,
       "IsNullable": false
      },
      "IsRequired": true,
@@ -2271,6 +1836,7 @@
       "$id": "237",
       "Name": "int32",
       "Kind": "Int32",
+      "IsConfident": true,
       "IsNullable": false
      },
      "IsRequired": true,
@@ -2285,6 +1851,7 @@
       "$id": "239",
       "Name": "string",
       "Kind": "String",
+      "IsConfident": true,
       "IsNullable": false
      },
      "IsRequired": false,
@@ -2299,6 +1866,7 @@
       "$id": "241",
       "Name": "int32",
       "Kind": "Int32",
+      "IsConfident": true,
       "IsNullable": false
      },
      "IsRequired": false,
@@ -2382,6 +1950,7 @@
        "$id": "250",
        "Name": "string",
        "Kind": "String",
+       "IsConfident": true,
        "IsNullable": false
       },
       "IsNullable": false
@@ -2401,6 +1970,7 @@
        "$id": "253",
        "Name": "int32",
        "Kind": "Int32",
+       "IsConfident": true,
        "IsNullable": false
       },
       "IsNullable": false
@@ -2436,12 +2006,14 @@
        "$id": "258",
        "Name": "string",
        "Kind": "String",
+       "IsConfident": true,
        "IsNullable": false
       },
       "ValueType": {
        "$id": "259",
        "Name": "int32",
        "Kind": "Int32",
+       "IsConfident": true,
        "IsNullable": false
       },
       "IsNullable": false
@@ -2461,12 +2033,14 @@
        "$id": "262",
        "Name": "string",
        "Kind": "String",
+       "IsConfident": true,
        "IsNullable": false
       },
       "ValueType": {
        "$id": "263",
        "Name": "string",
        "Kind": "String",
+       "IsConfident": true,
        "IsNullable": false
       },
       "IsNullable": false
@@ -2486,6 +2060,7 @@
        "$id": "266",
        "Name": "string",
        "Kind": "String",
+       "IsConfident": true,
        "IsNullable": false
       },
       "ValueType": {
@@ -2508,6 +2083,7 @@
        "$id": "269",
        "Name": "string",
        "Kind": "String",
+       "IsConfident": true,
        "IsNullable": false
       },
       "IsNullable": false
@@ -2527,6 +2103,7 @@
        "$id": "272",
        "Name": "int32",
        "Kind": "Int32",
+       "IsConfident": true,
        "IsNullable": false
       },
       "IsNullable": false
@@ -2562,12 +2139,14 @@
        "$id": "277",
        "Name": "string",
        "Kind": "String",
+       "IsConfident": true,
        "IsNullable": false
       },
       "ValueType": {
        "$id": "278",
        "Name": "int32",
        "Kind": "Int32",
+       "IsConfident": true,
        "IsNullable": false
       },
       "IsNullable": false
@@ -2587,12 +2166,14 @@
        "$id": "281",
        "Name": "string",
        "Kind": "String",
+       "IsConfident": true,
        "IsNullable": false
       },
       "ValueType": {
        "$id": "282",
        "Name": "string",
        "Kind": "String",
+       "IsConfident": true,
        "IsNullable": false
       },
       "IsNullable": false
@@ -2612,6 +2193,7 @@
        "$id": "285",
        "Name": "string",
        "Kind": "String",
+       "IsConfident": true,
        "IsNullable": false
       },
       "ValueType": {
@@ -2797,6 +2379,7 @@
        "$id": "309",
        "Name": "string",
        "Kind": "String",
+       "IsConfident": true,
        "IsNullable": false
       },
       "ValueType": {
@@ -2819,6 +2402,7 @@
        "$id": "312",
        "Name": "string",
        "Kind": "String",
+       "IsConfident": true,
        "IsNullable": false
       },
       "ValueType": {
