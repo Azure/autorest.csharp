@@ -148,7 +148,9 @@ export async function $onEmit(context: EmitContext<NetEmitterOptions>) {
                       )
                     : undefined,
                 "methods-to-keep-client-default-value":
-                    options["methods-to-keep-client-default-value"]
+                    options["methods-to-keep-client-default-value"],
+                "deserialize-null-collection-as-null-value":
+                    options["deserialize-null-collection-as-null-value"]
             } as Configuration;
 
             await program.host.writeFile(

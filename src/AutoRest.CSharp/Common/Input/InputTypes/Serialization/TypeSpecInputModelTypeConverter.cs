@@ -31,7 +31,7 @@ namespace AutoRest.CSharp.Common.Input
         {
             var isFirstProperty = id == null && name == null;
             var properties = new List<InputModelProperty>();
-
+            bool isNullable = false;
             string? ns = null;
             string? accessibility = null;
             string? deprecated = null;
@@ -39,7 +39,6 @@ namespace AutoRest.CSharp.Common.Input
             string? usageString = null;
             string? discriminatorPropertyName = null;
             string? discriminatorValue = null;
-            bool isNullable = false;
             bool isConfident = false;
             InputModelType? baseModel = null;
             InputModelType? model = null;
@@ -47,6 +46,7 @@ namespace AutoRest.CSharp.Common.Input
             {
                 var isKnownProperty = reader.TryReadReferenceId(ref isFirstProperty, ref id)
                     || reader.TryReadString(nameof(InputType.Name), ref name)
+                    || reader.TryReadBoolean(nameof(InputModelType.IsNullable), ref isNullable)
                     || reader.TryReadString(nameof(InputModelType.Namespace), ref ns)
                     || reader.TryReadString(nameof(InputModelType.Accessibility), ref accessibility)
                     || reader.TryReadString(nameof(InputModelType.Deprecated), ref deprecated)

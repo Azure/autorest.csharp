@@ -27,6 +27,7 @@ namespace AutoRest.CSharp.Common.Input
         {
             var isFirstProperty = id == null && name == null;
             bool isConfident = true;
+            bool isNullable = false;
             object? value = null;
             InputType? type = null;
 
@@ -35,6 +36,7 @@ namespace AutoRest.CSharp.Common.Input
                 var isKnownProperty = reader.TryReadReferenceId(ref isFirstProperty, ref id)
                     || reader.TryReadString(nameof(InputLiteralType.Name), ref name)
                     || reader.TryReadBoolean(nameof(InputLiteralType.IsConfident), ref isConfident)
+                    || reader.TryReadBoolean(nameof(InputListType.IsNullable), ref isNullable)
                     || reader.TryReadWithConverter(nameof(InputLiteralType.LiteralValueType), options, ref type);
 
                 if (isKnownProperty)
@@ -58,7 +60,7 @@ namespace AutoRest.CSharp.Common.Input
 
             value = value ?? throw new JsonException("InputConstant must have value");
 
-            var literalType = new InputLiteralType(name, type, value, isConfident);
+            var literalType = new InputLiteralType(name, type, value, isConfident, isNullable);
 
             if (id != null)
             {

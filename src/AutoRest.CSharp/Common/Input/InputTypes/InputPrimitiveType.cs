@@ -3,8 +3,10 @@
 
 namespace AutoRest.CSharp.Common.Input;
 
-internal record InputPrimitiveType(InputTypeKind Kind, bool IsConfident, bool IsNullable = false) : InputType(Kind.ToString(), IsConfident, IsNullable: IsNullable)
+internal record InputPrimitiveType(InputTypeKind Kind, bool IsConfident, bool IsNullable) : InputType(Kind.ToString(), IsConfident, IsNullable)
 {
+    private InputPrimitiveType(InputTypeKind kind, bool isConfident) : this(kind, isConfident, false) { }
+
     public static InputPrimitiveType AzureLocation { get; } = new(InputTypeKind.AzureLocation, true);
     public static InputPrimitiveType BinaryData { get; } = new(InputTypeKind.BinaryData, true);
     public static InputPrimitiveType Boolean { get; } = new(InputTypeKind.Boolean, true);

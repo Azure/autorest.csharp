@@ -5,4 +5,4 @@ using System.Collections.Generic;
 
 namespace AutoRest.CSharp.Common.Input;
 
-internal record InputUnionType(string Name, IReadOnlyList<InputType> UnionItemTypes, bool IsConfident, bool IsNullable = false) : InputType(Name, IsConfident, IsNullable: IsNullable);
+internal record InputUnionType(string Name, IReadOnlyList<InputType> UnionItemTypes, bool IsConfident, bool IsNullable) : InputType(Name, IsConfident, IsNullable);
