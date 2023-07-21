@@ -27,6 +27,7 @@ export type NetEmitterOptions = {
     "models-to-treat-empty-string-as-null"?: string[];
     "additional-intrinsic-types-to-treat-empty-string-as-null"?: string[];
     "methods-to-keep-client-default-value"?: string[];
+    "deserialize-null-collection-as-null-value"?: boolean;
     logLevel?: string;
     "package-dir"?: string;
 } & SdkEmitterOptions;
@@ -84,6 +85,10 @@ export const NetEmitterOptionsSchema: JSONSchemaType<NetEmitterOptions> = {
             nullable: true,
             items: { type: "string" }
         },
+        "deserialize-null-collection-as-null-value": {
+            type: "boolean",
+            nullable: true
+        },
         logLevel: {
             type: "string",
             enum: [
@@ -116,6 +121,7 @@ const defaultOptions = {
     "models-to-treat-empty-string-as-null": undefined,
     "additional-intrinsic-types-to-treat-empty-string-as-null": [],
     "methods-to-keep-client-default-value": undefined,
+    "deserialize-null-collection-as-null-value": undefined,
     logLevel: LoggerLevel.INFO
 };
 

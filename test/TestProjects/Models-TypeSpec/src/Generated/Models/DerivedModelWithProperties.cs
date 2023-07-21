@@ -16,24 +16,24 @@ namespace ModelsTypeSpec.Models
     public partial class DerivedModelWithProperties : BaseModelWithProperties
     {
         /// <summary> Initializes a new instance of DerivedModelWithProperties. </summary>
-        /// <param name="requiredCollection"> Required collection. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="requiredCollection"/> is null. </exception>
-        public DerivedModelWithProperties(IEnumerable<CollectionItem> requiredCollection)
+        /// <param name="requiredList"> Required collection. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="requiredList"/> is null. </exception>
+        public DerivedModelWithProperties(IEnumerable<CollectionItem> requiredList)
         {
-            Argument.AssertNotNull(requiredCollection, nameof(requiredCollection));
+            Argument.AssertNotNull(requiredList, nameof(requiredList));
 
-            RequiredCollection = requiredCollection.ToList();
+            RequiredList = requiredList.ToList();
         }
 
         /// <summary> Initializes a new instance of DerivedModelWithProperties. </summary>
         /// <param name="optionalPropertyOnBase"> Optional properties on base. </param>
-        /// <param name="requiredCollection"> Required collection. </param>
-        internal DerivedModelWithProperties(string optionalPropertyOnBase, IList<CollectionItem> requiredCollection) : base(optionalPropertyOnBase)
+        /// <param name="requiredList"> Required collection. </param>
+        internal DerivedModelWithProperties(string optionalPropertyOnBase, IList<CollectionItem> requiredList) : base(optionalPropertyOnBase)
         {
-            RequiredCollection = requiredCollection;
+            RequiredList = requiredList;
         }
 
         /// <summary> Required collection. </summary>
-        public IList<CollectionItem> RequiredCollection { get; }
+        public IList<CollectionItem> RequiredList { get; }
     }
 }

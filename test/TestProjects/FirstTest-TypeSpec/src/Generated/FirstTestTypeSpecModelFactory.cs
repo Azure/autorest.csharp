@@ -26,10 +26,15 @@ namespace FirstTestTypeSpec.Models
         /// <param name="optionalLiteralFloat"> optional literal float. </param>
         /// <param name="optionalLiteralBool"> optional literal bool. </param>
         /// <param name="requiredBadDescription"> description with xml &lt;|endoftext|&gt;. </param>
+        /// <param name="optionalNullableList"> optional nullable collection. </param>
+        /// <param name="requiredNullableList"> required nullable collection. </param>
         /// <returns> A new <see cref="Models.Thing"/> instance for mocking. </returns>
-        public static Thing Thing(string name = null, string requiredUnion = null, ThingRequiredLiteralString requiredLiteralString = default, ThingRequiredLiteralInt requiredLiteralInt = default, ThingRequiredLiteralFloat requiredLiteralFloat = default, bool requiredLiteralBool = default, ThingOptionalLiteralString? optionalLiteralString = null, ThingOptionalLiteralInt? optionalLiteralInt = null, ThingOptionalLiteralFloat? optionalLiteralFloat = null, bool? optionalLiteralBool = null, string requiredBadDescription = null)
+        public static Thing Thing(string name = null, string requiredUnion = null, ThingRequiredLiteralString requiredLiteralString = default, ThingRequiredLiteralInt requiredLiteralInt = default, ThingRequiredLiteralFloat requiredLiteralFloat = default, bool requiredLiteralBool = default, ThingOptionalLiteralString? optionalLiteralString = null, ThingOptionalLiteralInt? optionalLiteralInt = null, ThingOptionalLiteralFloat? optionalLiteralFloat = null, bool? optionalLiteralBool = null, string requiredBadDescription = null, IEnumerable<int> optionalNullableList = null, IEnumerable<int> requiredNullableList = null)
         {
-            return new Thing(name, requiredUnion, requiredLiteralString, requiredLiteralInt, requiredLiteralFloat, requiredLiteralBool, optionalLiteralString, optionalLiteralInt, optionalLiteralFloat, optionalLiteralBool, requiredBadDescription);
+            optionalNullableList ??= new List<int>();
+            requiredNullableList ??= new List<int>();
+
+            return new Thing(name, requiredUnion, requiredLiteralString, requiredLiteralInt, requiredLiteralFloat, requiredLiteralBool, optionalLiteralString, optionalLiteralInt, optionalLiteralFloat, optionalLiteralBool, requiredBadDescription, optionalNullableList?.ToList(), requiredNullableList?.ToList());
         }
 
         /// <summary> Initializes a new instance of RoundTripModel. </summary>
@@ -53,11 +58,12 @@ namespace FirstTestTypeSpec.Models
         /// <param name="optionalRecordUnknown"> optional record of unknown. </param>
         /// <param name="readOnlyRequiredRecordUnknown"> required readonly record of unknown. </param>
         /// <param name="readOnlyOptionalRecordUnknown"> optional readonly record of unknown. </param>
+        /// <param name="modelWithRequiredNullable"> this is a model with required nullable properties. </param>
         /// <returns> A new <see cref="Models.RoundTripModel"/> instance for mocking. </returns>
-        public static RoundTripModel RoundTripModel(string requiredString = null, int requiredInt = default, IEnumerable<StringFixedEnum> requiredCollection = null, IDictionary<string, StringExtensibleEnum> requiredDictionary = null, Thing requiredModel = null, IntExtensibleEnum? intExtensibleEnum = null, IEnumerable<IntExtensibleEnum> intExtensibleEnumCollection = null, FloatExtensibleEnum? floatExtensibleEnum = null, IEnumerable<FloatExtensibleEnum> floatExtensibleEnumCollection = null, FloatFixedEnum? floatFixedEnum = null, IEnumerable<FloatFixedEnum> floatFixedEnumCollection = null, IntFixedEnum? intFixedEnum = null, IEnumerable<IntFixedEnum> intFixedEnumCollection = null, StringFixedEnum? stringFixedEnum = null, BinaryData requiredUnknown = null, BinaryData optionalUnknown = null, IDictionary<string, BinaryData> requiredRecordUnknown = null, IDictionary<string, BinaryData> optionalRecordUnknown = null, IReadOnlyDictionary<string, BinaryData> readOnlyRequiredRecordUnknown = null, IReadOnlyDictionary<string, BinaryData> readOnlyOptionalRecordUnknown = null)
+        public static RoundTripModel RoundTripModel(string requiredString = null, int requiredInt = default, IEnumerable<StringFixedEnum?> requiredCollection = null, IDictionary<string, StringExtensibleEnum?> requiredDictionary = null, Thing requiredModel = null, IntExtensibleEnum? intExtensibleEnum = null, IEnumerable<IntExtensibleEnum> intExtensibleEnumCollection = null, FloatExtensibleEnum? floatExtensibleEnum = null, IEnumerable<FloatExtensibleEnum> floatExtensibleEnumCollection = null, FloatFixedEnum? floatFixedEnum = null, IEnumerable<FloatFixedEnum> floatFixedEnumCollection = null, IntFixedEnum? intFixedEnum = null, IEnumerable<IntFixedEnum> intFixedEnumCollection = null, StringFixedEnum? stringFixedEnum = null, BinaryData requiredUnknown = null, BinaryData optionalUnknown = null, IDictionary<string, BinaryData> requiredRecordUnknown = null, IDictionary<string, BinaryData> optionalRecordUnknown = null, IReadOnlyDictionary<string, BinaryData> readOnlyRequiredRecordUnknown = null, IReadOnlyDictionary<string, BinaryData> readOnlyOptionalRecordUnknown = null, ModelWithRequiredNullableProperties modelWithRequiredNullable = null)
         {
-            requiredCollection ??= new List<StringFixedEnum>();
-            requiredDictionary ??= new Dictionary<string, StringExtensibleEnum>();
+            requiredCollection ??= new List<StringFixedEnum?>();
+            requiredDictionary ??= new Dictionary<string, StringExtensibleEnum?>();
             intExtensibleEnumCollection ??= new List<IntExtensibleEnum>();
             floatExtensibleEnumCollection ??= new List<FloatExtensibleEnum>();
             floatFixedEnumCollection ??= new List<FloatFixedEnum>();
@@ -67,7 +73,7 @@ namespace FirstTestTypeSpec.Models
             readOnlyRequiredRecordUnknown ??= new Dictionary<string, BinaryData>();
             readOnlyOptionalRecordUnknown ??= new Dictionary<string, BinaryData>();
 
-            return new RoundTripModel(requiredString, requiredInt, requiredCollection?.ToList(), requiredDictionary, requiredModel, intExtensibleEnum, intExtensibleEnumCollection?.ToList(), floatExtensibleEnum, floatExtensibleEnumCollection?.ToList(), floatFixedEnum, floatFixedEnumCollection?.ToList(), intFixedEnum, intFixedEnumCollection?.ToList(), stringFixedEnum, requiredUnknown, optionalUnknown, requiredRecordUnknown, optionalRecordUnknown, readOnlyRequiredRecordUnknown, readOnlyOptionalRecordUnknown);
+            return new RoundTripModel(requiredString, requiredInt, requiredCollection?.ToList(), requiredDictionary, requiredModel, intExtensibleEnum, intExtensibleEnumCollection?.ToList(), floatExtensibleEnum, floatExtensibleEnumCollection?.ToList(), floatFixedEnum, floatFixedEnumCollection?.ToList(), intFixedEnum, intFixedEnumCollection?.ToList(), stringFixedEnum, requiredUnknown, optionalUnknown, requiredRecordUnknown, optionalRecordUnknown, readOnlyRequiredRecordUnknown, readOnlyOptionalRecordUnknown, modelWithRequiredNullable);
         }
     }
 }

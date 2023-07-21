@@ -15,16 +15,16 @@ namespace ModelsTypeSpec.Models
     public partial class RecordItem : DerivedModel
     {
         /// <summary> Initializes a new instance of RecordItem. </summary>
-        /// <param name="requiredCollection"> Required collection. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="requiredCollection"/> is null. </exception>
-        public RecordItem(IEnumerable<CollectionItem> requiredCollection) : base(requiredCollection)
+        /// <param name="requiredList"> Required collection. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="requiredList"/> is null. </exception>
+        public RecordItem(IEnumerable<CollectionItem> requiredList) : base(requiredList)
         {
-            Argument.AssertNotNull(requiredCollection, nameof(requiredCollection));
+            Argument.AssertNotNull(requiredList, nameof(requiredList));
         }
 
         /// <summary> Initializes a new instance of RecordItem. </summary>
-        /// <param name="requiredCollection"> Required collection. </param>
-        internal RecordItem(IList<CollectionItem> requiredCollection) : base(requiredCollection)
+        /// <param name="requiredList"> Required collection. </param>
+        internal RecordItem(IList<CollectionItem> requiredList) : base(requiredList)
         {
         }
     }

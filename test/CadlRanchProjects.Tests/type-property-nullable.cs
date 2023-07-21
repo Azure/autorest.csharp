@@ -10,7 +10,7 @@ using NUnit.Framework;
 
 namespace CadlRanchProjects.Tests
 {
-    public class TypePropertyNullableTests  : CadlRanchTestBase
+    public class TypePropertyNullableTests : CadlRanchTestBase
     {
         [Test]
         public Task Type_Property_Nullable_String_getNonNull() => Test(async (host) =>
@@ -166,12 +166,13 @@ namespace CadlRanchProjects.Tests
         });
 
         [Test]
-        [Ignore("https://github.com/Azure/autorest.csharp/issues/3363")]
         public Task Type_Property_Nullable_CollectionsByte_getNull() => Test(async (host) =>
         {
             var response = await new NullableClient(host, null).GetCollectionsByteClient().GetNullAsync();
             Assert.AreEqual("foo", response.Value.RequiredProperty);
-            Assert.AreEqual(null, response.Value.NullableProperty);
+            // we will never construct a null collection therefore this property is actually undefined here.
+            Assert.IsNotNull(response.Value.NullableProperty);
+            Assert.IsFalse(Optional.IsCollectionDefined(response.Value.NullableProperty));
         });
 
         [Test]
@@ -204,12 +205,13 @@ namespace CadlRanchProjects.Tests
         });
 
         [Test]
-        [Ignore("https://github.com/Azure/autorest.csharp/issues/3363")]
         public Task Type_Property_Nullable_CollectionsModel_getNull() => Test(async (host) =>
         {
             var response = await new NullableClient(host, null).GetCollectionsModelClient().GetNullAsync();
             Assert.AreEqual("foo", response.Value.RequiredProperty);
-            Assert.AreEqual(null, response.Value.NullableProperty);
+            // we will never construct a null collection therefore this property is actually undefined here.
+            Assert.IsNotNull(response.Value.NullableProperty);
+            Assert.IsFalse(Optional.IsCollectionDefined(response.Value.NullableProperty));
         });
 
         [Test]

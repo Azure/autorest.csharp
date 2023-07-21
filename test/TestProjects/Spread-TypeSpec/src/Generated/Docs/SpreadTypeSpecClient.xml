@@ -385,5 +385,97 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
+    <member name="SpreadAliasWithCollectionsAsync(IEnumerable{string},IEnumerable{string},CancellationToken)">
+<example>
+This sample shows how to call SpreadAliasWithCollectionsAsync with required parameters.
+<code><![CDATA[
+var endpoint = new Uri("<https://my-service.azure.com>");
+var client = new SpreadTypeSpecClient(endpoint);
+
+var result = await client.SpreadAliasWithCollectionsAsync(new String[]{"<requiredStringList>"}, new String[]{"<optionalStringList>"});
+]]></code>
+</example>
+    </member>
+    <member name="SpreadAliasWithCollections(IEnumerable{string},IEnumerable{string},CancellationToken)">
+<example>
+This sample shows how to call SpreadAliasWithCollections with required parameters.
+<code><![CDATA[
+var endpoint = new Uri("<https://my-service.azure.com>");
+var client = new SpreadTypeSpecClient(endpoint);
+
+var result = client.SpreadAliasWithCollections(new String[]{"<requiredStringList>"}, new String[]{"<optionalStringList>"});
+]]></code>
+</example>
+    </member>
+    <member name="SpreadAliasWithCollectionsAsync(RequestContent,RequestContext)">
+<example>
+This sample shows how to call SpreadAliasWithCollectionsAsync with required request content.
+<code><![CDATA[
+var endpoint = new Uri("<https://my-service.azure.com>");
+var client = new SpreadTypeSpecClient(endpoint);
+
+var data = new {
+    requiredStringList = new[] {
+        "<String>"
+    },
+};
+
+Response response = await client.SpreadAliasWithCollectionsAsync(RequestContent.Create(data));
+Console.WriteLine(response.Status);
+]]></code>
+This sample shows how to call SpreadAliasWithCollectionsAsync with all request content.
+<code><![CDATA[
+var endpoint = new Uri("<https://my-service.azure.com>");
+var client = new SpreadTypeSpecClient(endpoint);
+
+var data = new {
+    requiredStringList = new[] {
+        "<String>"
+    },
+    optionalStringList = new[] {
+        "<String>"
+    },
+};
+
+Response response = await client.SpreadAliasWithCollectionsAsync(RequestContent.Create(data));
+Console.WriteLine(response.Status);
+]]></code>
+</example>
+    </member>
+    <member name="SpreadAliasWithCollections(RequestContent,RequestContext)">
+<example>
+This sample shows how to call SpreadAliasWithCollections with required request content.
+<code><![CDATA[
+var endpoint = new Uri("<https://my-service.azure.com>");
+var client = new SpreadTypeSpecClient(endpoint);
+
+var data = new {
+    requiredStringList = new[] {
+        "<String>"
+    },
+};
+
+Response response = client.SpreadAliasWithCollections(RequestContent.Create(data));
+Console.WriteLine(response.Status);
+]]></code>
+This sample shows how to call SpreadAliasWithCollections with all request content.
+<code><![CDATA[
+var endpoint = new Uri("<https://my-service.azure.com>");
+var client = new SpreadTypeSpecClient(endpoint);
+
+var data = new {
+    requiredStringList = new[] {
+        "<String>"
+    },
+    optionalStringList = new[] {
+        "<String>"
+    },
+};
+
+Response response = client.SpreadAliasWithCollections(RequestContent.Create(data));
+Console.WriteLine(response.Status);
+]]></code>
+</example>
+    </member>
   </members>
 </doc>
