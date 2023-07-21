@@ -33,7 +33,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
 ";
         private string _coreCsProjContent = @"
   <ItemGroup>
-    <PackageReference Include=""Azure.Core"" Version=""1.26.0"" />
+    <PackageReference Include=""Azure.Core"" />
   </ItemGroup>";
 
         private string _armCsProjContent = @"
@@ -42,13 +42,13 @@ namespace AutoRest.CSharp.AutoRest.Plugins
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include=""Azure.ResourceManager"" Version=""1.3.1"" />
+    <PackageReference Include=""Azure.ResourceManager"" />
   </ItemGroup>
 ";
 
         private string _csProjPackageReference = @"
   <PropertyGroup>
-    <LangVersion>9.0</LangVersion>
+    <LangVersion>11.0</LangVersion>
     <IncludeGeneratorSharedCode>true</IncludeGeneratorSharedCode>
     <RestoreAdditionalProjectSources>https://pkgs.dev.azure.com/azure-sdk/public/_packaging/azure-sdk-for-net/nuget/v3/index.json</RestoreAdditionalProjectSources>
   </PropertyGroup>
@@ -63,7 +63,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
     <DefineConstants>$(DefineConstants);EXPERIMENTAL</DefineConstants>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include=""Azure.Core.Experimental"" Version=""0.1.0-preview.18"" />
+    <PackageReference Include=""Azure.Core.Experimental"" />
   </ItemGroup>
 ";
 
@@ -89,14 +89,14 @@ namespace AutoRest.CSharp.AutoRest.Plugins
         }
         public async Task<bool> Execute(IPluginCommunication autoRest)
         {
-            string codeModelFileName = (await autoRest.ListInputs()).FirstOrDefault();
+            string? codeModelFileName = (await autoRest.ListInputs()).FirstOrDefault();
             if (string.IsNullOrEmpty(codeModelFileName))
                 throw new Exception("Generator did not receive the code model file.");
 
             var codeModelYaml = await autoRest.ReadFile(codeModelFileName);
             var codeModel = CodeModelSerialization.DeserializeCodeModel(codeModelYaml);
 
-            Configuration.Initialize(autoRest);
+            Configuration.Initialize(autoRest, codeModel.Language.Default.Name, codeModel.Language.Default.Name);
 
             var context = new BuildContext(codeModel, null);
             Execute(context.DefaultNamespace, async (filename, text) =>
@@ -126,10 +126,10 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             {
                 _coreCsProjContent += @"
   <ItemGroup>
-    <PackageReference Include=""Azure.Core.Expressions.DataFactory"" Version=""1.0.0-alpha.20221121.1"" />
+    <PackageReference Include=""Azure.Core.Expressions.DataFactory"" />
   </ItemGroup>";
             }
-            var isTestProject = Configuration.MgmtConfiguration.TestGen is not null;
+            var isTestProject = Configuration.MgmtTestConfiguration is not null;
             if (isTestProject)
             {
                 _coreCsProjContent += string.Format(@"
@@ -139,8 +139,8 @@ namespace AutoRest.CSharp.AutoRest.Plugins
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include=""NUnit"" Version=""3.12.0"" />
-    <PackageReference Include=""Azure.Identity"" Version=""1.6.0"" />
+    <PackageReference Include=""NUnit"" />
+    <PackageReference Include=""Azure.Identity"" />
   </ItemGroup>
 
   <ItemGroup>

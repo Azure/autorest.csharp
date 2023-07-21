@@ -26,12 +26,12 @@ namespace AutoRest.CSharp.Generation.Writers.Tests
         public void RoundTripEnumProperties(string expectedModelCodes, string expectedSerializationCodes)
         {
             // refer to the original CADL file: https://github.com/Azure/cadl-ranch/blob/c4f41f483eac812527f7b6dc837bd22d255a18ed/packages/cadl-ranch-specs/http/models/enum-properties/main.cadl#L67-L75
-            var modelType = new InputModelType("RoundTripModel", "Cadl.TestServer.EnumPropertiesBasic", "public", "Round-trip model with enum properties", InputModelTypeUsage.RoundTrip,
+            var modelType = new InputModelType("RoundTripModel", "Cadl.TestServer.EnumPropertiesBasic", "public", null, "Round-trip model with enum properties", InputModelTypeUsage.RoundTrip,
                     new List<InputModelProperty>{
                         new InputModelProperty("Day", "Day", "Required standard enum value.", FixedEnumType, true, false, false),
                         new InputModelProperty("Language", "Language", "Required string enum value.", ExtensibleEnumType, true, false, false)
                     },
-                    null, new List<InputModelType>(), null, null);
+                    null, new List<InputModelType>(), null, null, false);
             var library = new DpgOutputLibraryBuilder(new InputNamespace("Cadl.TestServer.EnumPropertiesBasic", null, new List<string>(),
                 new List<InputEnumType> { FixedEnumType, ExtensibleEnumType }, new List<InputModelType> { modelType }, new List<InputClient>(), new InputAuth()), default).Build(true);
 
@@ -42,12 +42,12 @@ namespace AutoRest.CSharp.Generation.Writers.Tests
         public void InputEnumProperties(string expectedModelCodes, string expectedSerializationCodes)
         {
             // refer to the original CADL file: https://github.com/Azure/cadl-ranch/blob/c4f41f483eac812527f7b6dc837bd22d255a18ed/packages/cadl-ranch-specs/http/models/enum-properties/main.cadl#L47-L55
-            var modelType = new InputModelType("InputModel", "Cadl.TestServer.EnumPropertiesBasic", "public", "Input model with enum properties", InputModelTypeUsage.Input,
+            var modelType = new InputModelType("InputModel", "Cadl.TestServer.EnumPropertiesBasic", "public", null, "Input model with enum properties", InputModelTypeUsage.Input,
                     new List<InputModelProperty>{
                         new InputModelProperty("Day", "Day", "Required standard enum value.", FixedEnumType, true, false, false),
                         new InputModelProperty("Language", "Language", "Required string enum value.", ExtensibleEnumType, true, false, false)
                     },
-                    null, new List<InputModelType>(), null, null);
+                    null, new List<InputModelType>(), null, null, false);
             var library = new DpgOutputLibraryBuilder(new InputNamespace("Cadl.TestServer.EnumPropertiesBasic", null, new List<string>(),
                 new List<InputEnumType> { FixedEnumType, ExtensibleEnumType }, new List<InputModelType> { modelType }, new List<InputClient>(), new InputAuth()), default).Build(true);
 
@@ -58,12 +58,12 @@ namespace AutoRest.CSharp.Generation.Writers.Tests
         public void OutputEnumProperties(string expectedModelCodes, string expectedSerializationCodes)
         {
             // refer to the original CADL file: https://github.com/Azure/cadl-ranch/blob/c4f41f483eac812527f7b6dc837bd22d255a18ed/packages/cadl-ranch-specs/http/models/enum-properties/main.cadl#L57-L65
-            var modelType = new InputModelType("OutputModel", "Cadl.TestServer.EnumPropertiesBasic", "public", "Output model with enum properties", InputModelTypeUsage.Output,
+            var modelType = new InputModelType("OutputModel", "Cadl.TestServer.EnumPropertiesBasic", "public", null, "Output model with enum properties", InputModelTypeUsage.Output,
                     new List<InputModelProperty>{
                         new InputModelProperty("Day", "Day", "Required standard enum value.", FixedEnumType, true, false, false),
                         new InputModelProperty("Language", "Language", "Required string enum value.", ExtensibleEnumType, true, false, false)
                     },
-                    null, new List<InputModelType>(), null, null);
+                    null, new List<InputModelType>(), null, null, false);
             var library = new DpgOutputLibraryBuilder(new InputNamespace("Cadl.TestServer.EnumPropertiesBasic", null, new List<string>(),
                 new List<InputEnumType> { FixedEnumType, ExtensibleEnumType }, new List<InputModelType> { modelType }, new List<InputClient>(), new InputAuth()), default).Build(true);
 
@@ -100,7 +100,7 @@ namespace AutoRest.CSharp.Generation.Writers.Tests
             internal EnumWrapper(EnumType enumType) => this.EnumType = enumType;
         }
 
-        private static readonly InputEnumType ExtensibleEnumType = new InputEnumType("TranslationLanguageValues", "Cadl.TestServer.EnumPropertiesBasic", "public", "The supported languages to translate input text into.", InputModelTypeUsage.RoundTrip, InputPrimitiveType.String,
+        private static readonly InputEnumType ExtensibleEnumType = new InputEnumType("TranslationLanguageValues", "Cadl.TestServer.EnumPropertiesBasic", "public", null, "The supported languages to translate input text into.", InputModelTypeUsage.RoundTrip, InputPrimitiveType.String,
                     new List<InputEnumTypeValue>() {
                         new("English", "English", "Translate to English"),
                         new("Spanish", "Spanish", "Translate to Spanish"),
@@ -108,7 +108,7 @@ namespace AutoRest.CSharp.Generation.Writers.Tests
                         new("Undocumented", "Undocumented", null)
                     }, true);
 
-        private static readonly InputEnumType FixedEnumType = new InputEnumType("DayOfTheWeek", "Cadl.TestServer.EnumPropertiesBasic", "public", "Represents the days of the week using a standard, non-string enum.", InputModelTypeUsage.RoundTrip, InputPrimitiveType.String,
+        private static readonly InputEnumType FixedEnumType = new InputEnumType("DayOfTheWeek", "Cadl.TestServer.EnumPropertiesBasic", "public", null, "Represents the days of the week using a standard, non-string enum.", InputModelTypeUsage.RoundTrip, InputPrimitiveType.String,
                     new List<InputEnumTypeValue>() {
                         new("Monday", "Monday", null),
                         new("Tuesday", "Tuesday", null),
@@ -208,8 +208,7 @@ public override string ToString() => _value;
 namespace Cadl.TestServer.EnumPropertiesBasic
 {
 /// <summary> Represents the days of the week using a standard, non-string enum. </summary>
-public enum DayOfTheWeek
-{
+public enum DayOfTheWeek{
 /// <summary> Monday. </summary>
 Monday,
 /// <summary> Tuesday. </summary>
@@ -253,13 +252,13 @@ _ => throw new global::System.ArgumentOutOfRangeException(nameof(value), value, 
 
 public static DayOfTheWeek ToDayOfTheWeek(this string value)
 {
-if (string.Equals(value, ""Monday"", global::System.StringComparison.InvariantCultureIgnoreCase)) return DayOfTheWeek.Monday;
-if (string.Equals(value, ""Tuesday"", global::System.StringComparison.InvariantCultureIgnoreCase)) return DayOfTheWeek.Tuesday;
-if (string.Equals(value, ""Wednesday"", global::System.StringComparison.InvariantCultureIgnoreCase)) return DayOfTheWeek.Wednesday;
-if (string.Equals(value, ""Thursday"", global::System.StringComparison.InvariantCultureIgnoreCase)) return DayOfTheWeek.Thursday;
-if (string.Equals(value, ""Friday"", global::System.StringComparison.InvariantCultureIgnoreCase)) return DayOfTheWeek.Friday;
-if (string.Equals(value, ""Saturday"", global::System.StringComparison.InvariantCultureIgnoreCase)) return DayOfTheWeek.Saturday;
-if (string.Equals(value, ""Sunday"", global::System.StringComparison.InvariantCultureIgnoreCase)) return DayOfTheWeek.Sunday;
+if (global::System.StringComparer.OrdinalIgnoreCase.Equals(value, ""Monday"")) return DayOfTheWeek.Monday;
+if (global::System.StringComparer.OrdinalIgnoreCase.Equals(value, ""Tuesday"")) return DayOfTheWeek.Tuesday;
+if (global::System.StringComparer.OrdinalIgnoreCase.Equals(value, ""Wednesday"")) return DayOfTheWeek.Wednesday;
+if (global::System.StringComparer.OrdinalIgnoreCase.Equals(value, ""Thursday"")) return DayOfTheWeek.Thursday;
+if (global::System.StringComparer.OrdinalIgnoreCase.Equals(value, ""Friday"")) return DayOfTheWeek.Friday;
+if (global::System.StringComparer.OrdinalIgnoreCase.Equals(value, ""Saturday"")) return DayOfTheWeek.Saturday;
+if (global::System.StringComparer.OrdinalIgnoreCase.Equals(value, ""Sunday"")) return DayOfTheWeek.Sunday;
 throw new global::System.ArgumentOutOfRangeException(nameof(value), value, ""Unknown DayOfTheWeek value."");
 }
 }

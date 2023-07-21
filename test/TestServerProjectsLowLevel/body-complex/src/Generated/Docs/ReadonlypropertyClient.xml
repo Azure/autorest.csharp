@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <members>
+    <member name="GetValidAsync(RequestContext)">
+<example>
+This sample shows how to call GetValidAsync with required parameters and parse the result.
+<code><![CDATA[
+var credential = new AzureKeyCredential("<key>");
+var client = new ReadonlypropertyClient(credential);
+
+Response response = await client.GetValidAsync(new RequestContext());
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("id").ToString());
+Console.WriteLine(result.GetProperty("size").ToString());
+]]></code>
+</example>
+    </member>
+    <member name="GetValid(RequestContext)">
+<example>
+This sample shows how to call GetValid with required parameters and parse the result.
+<code><![CDATA[
+var credential = new AzureKeyCredential("<key>");
+var client = new ReadonlypropertyClient(credential);
+
+Response response = client.GetValid(new RequestContext());
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("id").ToString());
+Console.WriteLine(result.GetProperty("size").ToString());
+]]></code>
+</example>
+    </member>
+    <member name="PutValidAsync(RequestContent,RequestContext)">
+<example>
+This sample shows how to call PutValidAsync.
+<code><![CDATA[
+var credential = new AzureKeyCredential("<key>");
+var client = new ReadonlypropertyClient(credential);
+
+var data = new {};
+
+Response response = await client.PutValidAsync(RequestContent.Create(data));
+Console.WriteLine(response.Status);
+]]></code>
+This sample shows how to call PutValidAsync with all request content.
+<code><![CDATA[
+var credential = new AzureKeyCredential("<key>");
+var client = new ReadonlypropertyClient(credential);
+
+var data = new {
+    size = 1234,
+};
+
+Response response = await client.PutValidAsync(RequestContent.Create(data));
+Console.WriteLine(response.Status);
+]]></code>
+</example>
+    </member>
+    <member name="PutValid(RequestContent,RequestContext)">
+<example>
+This sample shows how to call PutValid.
+<code><![CDATA[
+var credential = new AzureKeyCredential("<key>");
+var client = new ReadonlypropertyClient(credential);
+
+var data = new {};
+
+Response response = client.PutValid(RequestContent.Create(data));
+Console.WriteLine(response.Status);
+]]></code>
+This sample shows how to call PutValid with all request content.
+<code><![CDATA[
+var credential = new AzureKeyCredential("<key>");
+var client = new ReadonlypropertyClient(credential);
+
+var data = new {
+    size = 1234,
+};
+
+Response response = client.PutValid(RequestContent.Create(data));
+Console.WriteLine(response.Status);
+]]></code>
+</example>
+    </member>
+  </members>
+</doc>

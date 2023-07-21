@@ -8,6 +8,7 @@ using System.Reflection;
 using System.Xml.Linq;
 using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Common.Output.Builders;
+using AutoRest.CSharp.Common.Output.Models.Types;
 using AutoRest.CSharp.Common.Utilities;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Input.Source;
@@ -32,11 +33,11 @@ namespace AutoRest.CSharp.Output.Models
         {
             _rootNamespace = rootNamespace;
             _sourceInputModel = sourceInputModel;
-            _defaultNamespace = Configuration.Namespace ?? rootNamespace.Name;
-            _libraryName = Configuration.LibraryName ?? rootNamespace.Name;
+            _defaultNamespace = Configuration.Namespace;
+            _libraryName = Configuration.LibraryName;
         }
 
-        public DpgOutputLibrary Build(bool isCadlInput)
+        public DpgOutputLibrary Build(bool isTspInput)
         {
             var inputClients = UpdateOperations();
 
@@ -53,9 +54,9 @@ namespace AutoRest.CSharp.Output.Models
             var models = new Dictionary<InputModelType, ModelTypeProvider>();
             var clients = new List<LowLevelClient>();
 
-            var library = new DpgOutputLibrary(enums, models, clients, clientOptions, isCadlInput);
+            var library = new DpgOutputLibrary(_libraryName, enums, models, clients, clientOptions, isTspInput, _sourceInputModel);
 
-            if (isCadlInput)
+            if (isTspInput)
             {
                 CreateEnums(enums, library.TypeFactory);
                 CreateModels(models, library.TypeFactory);
@@ -69,10 +70,7 @@ namespace AutoRest.CSharp.Output.Models
         {
             foreach (var inputEnum in _rootNamespace.Enums)
             {
-                if (inputEnum.Usage != InputModelTypeUsage.None)
-                {
-                    dictionary.Add(inputEnum, new EnumType(inputEnum, TypeProvider.GetDefaultModelNamespace(null,_defaultNamespace), "public", typeFactory, _sourceInputModel));
-                }
+                dictionary.Add(inputEnum, new EnumType(inputEnum, TypeProvider.GetDefaultModelNamespace(null, _defaultNamespace), "public", typeFactory, _sourceInputModel));
             }
         }
 
@@ -96,13 +94,10 @@ namespace AutoRest.CSharp.Output.Models
 
             foreach (var model in _rootNamespace.Models)
             {
-                if (model.Usage != InputModelTypeUsage.None)
-                {
-                    derivedTypesLookup.TryGetValue(model, out var children);
-                    InputModelType[] derivedTypesArray = children?.ToArray() ?? Array.Empty<InputModelType>();
-                    ModelTypeProvider? defaultDerivedType = GetDefaultDerivedType(models, typeFactory, model, derivedTypesArray, defaultDerivedTypes);
-                    models.Add(model, new ModelTypeProvider(model, TypeProvider.GetDefaultModelNamespace(null, _defaultNamespace), _sourceInputModel, typeFactory, derivedTypesArray, defaultDerivedType));
-                }
+                derivedTypesLookup.TryGetValue(model, out var children);
+                InputModelType[] derivedTypesArray = children?.ToArray() ?? Array.Empty<InputModelType>();
+                ModelTypeProvider? defaultDerivedType = GetDefaultDerivedType(models, typeFactory, model, derivedTypesArray, defaultDerivedTypes);
+                models.Add(model, new ModelTypeProvider(model, TypeProvider.GetDefaultModelNamespace(null, _defaultNamespace), _sourceInputModel, typeFactory, derivedTypesArray, defaultDerivedType));
             }
         }
 
@@ -111,8 +106,8 @@ namespace AutoRest.CSharp.Output.Models
             //only want to create one instance of the default derived per polymorphic set
             ModelTypeProvider? defaultDerivedType = null;
             bool isBasePolyType = derivedTypesArray.Length > 0 && model.DiscriminatorPropertyName is not null;
-            bool isChildPolyTYpe = model.DiscriminatorValue is not null;
-            if (isBasePolyType || isChildPolyTYpe)
+            bool isChildPolyType = model.DiscriminatorValue is not null;
+            if (isBasePolyType || isChildPolyType)
             {
                 InputModelType actualBase = isBasePolyType ? model : model.BaseModel!;
 
@@ -128,6 +123,7 @@ namespace AutoRest.CSharp.Output.Models
                         defaultDerivedName,
                         actualBase.Namespace,
                         "internal",
+                        null,
                         $"Unknown version of {actualBase.Name}",
                         InputModelTypeUsage.Output,
                         Array.Empty<InputModelProperty>(),
@@ -135,7 +131,10 @@ namespace AutoRest.CSharp.Output.Models
                         Array.Empty<InputModelType>(),
                         "Unknown", //TODO: do we need to support extensible enum / int values?
                         null,
-                        true);
+                        false)
+                    {
+                        IsUnknownDiscriminatorModel = true
+                    };
                     defaultDerivedType = new ModelTypeProvider(unknownDerviedType, TypeProvider.GetDefaultModelNamespace(null, _defaultNamespace), _sourceInputModel, typeFactory, Array.Empty<InputModelType>(), null);
                     defaultDerivedTypes.Add(defaultDerivedName, defaultDerivedType);
                     models.Add(unknownDerviedType, defaultDerivedType);
@@ -164,7 +163,7 @@ namespace AutoRest.CSharp.Output.Models
             {
                 updatedOperation = operation with
                 {
-                    Name = UpdateOperationName(operation, clientName),
+                    Name = UpdateOperationName(operation, operation.ResourceName ?? clientName),
                     Parameters = UpdateOperationParameters(operation.Parameters),
                     // to update the lazy initialization of `Paging.NextLinkOperation`
                     Paging = operation.Paging with { NextLinkOperationRef = operation.Paging.NextLinkOperation != null ? () => operationsMap[operation.Paging.NextLinkOperation] : null }
@@ -172,7 +171,7 @@ namespace AutoRest.CSharp.Output.Models
             }
             else
             {
-                updatedOperation = operation with { Name = UpdateOperationName(operation, clientName) };
+                updatedOperation = operation with { Name = UpdateOperationName(operation, operation.ResourceName ?? clientName) };
             }
             operationsMap.Add(operation, updatedOperation);
 
@@ -181,7 +180,7 @@ namespace AutoRest.CSharp.Output.Models
         }
 
         private static string UpdateOperationName(InputOperation operation, string clientName)
-            => operation.Name.ToCleanName().RenameGetMethod(clientName).RenameListToGet(clientName);
+            => operation.CleanName.RenameGetMethod(clientName).RenameListToGet(clientName);
 
         private static IReadOnlyList<InputParameter> UpdateOperationParameters(IReadOnlyList<InputParameter> operationParameters)
         {
@@ -218,7 +217,7 @@ namespace AutoRest.CSharp.Output.Models
         private static ClientInfo CreateClientInfo(InputClient ns, SourceInputModel? sourceInputModel, string rootNamespaceName)
         {
             var clientNamePrefix = ClientBuilder.GetClientPrefix(ns.Name, rootNamespaceName);
-            var clientNamespace = Configuration.Namespace ?? rootNamespaceName;
+            var clientNamespace = Configuration.Namespace;
             var clientDescription = ns.Description;
             var operations = ns.Operations;
             var clientParameters = RestClientBuilder.GetParametersFromOperations(operations).ToList();
@@ -377,7 +376,7 @@ namespace AutoRest.CSharp.Output.Models
             {
                 var description = string.IsNullOrWhiteSpace(clientInfo.Description)
                     ? $"The {ClientBuilder.GetClientPrefix(clientInfo.Name, _rootNamespace.Name)} {(parentClient == null ? "service client" : "sub-client")}."
-                    : BuilderHelpers.EscapeXmlDescription(clientInfo.Description);
+                    : BuilderHelpers.EscapeXmlDocDescription(clientInfo.Description);
 
                 var subClients = new List<LowLevelClient>();
 

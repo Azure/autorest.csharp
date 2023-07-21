@@ -11,7 +11,10 @@ using Azure.ResourceManager.Models;
 
 namespace MgmtListMethods
 {
-    /// <summary> A class representing the FakeConfiguration data model. </summary>
+    /// <summary>
+    /// A class representing the FakeConfiguration data model.
+    /// Describes the properties of a Fake Configuration.
+    /// </summary>
     public partial class FakeConfigurationData : TrackedResourceData
     {
         /// <summary> Initializes a new instance of FakeConfigurationData. </summary>

@@ -245,24 +245,26 @@ namespace AutoRest.TestServer.Tests
         public void NullablePropertiesDeserializedAsNullsWithUndefined()
         {
             var model = MixedModel.DeserializeMixedModel(JsonDocument.Parse("{}").RootElement);
-            Assert.Null(model.RequiredNullableIntList);
-            Assert.Null(model.RequiredNullableStringList);
+            Assert.IsNull(model.RequiredNullableIntList);
+            Assert.IsNull(model.RequiredNullableStringList);
         }
 
         [Test]
-        public void NullablePropertiesDeserializedAsNullsWithNulls()
+        public void NullablePropertiesDeserializedAsUndefinedWithNulls()
         {
             var model = MixedModel.DeserializeMixedModel(JsonDocument.Parse("{\"RequiredNullableIntList\":null, \"RequiredNullableStringList\": null}").RootElement);
-            Assert.Null(model.RequiredNullableIntList);
-            Assert.Null(model.RequiredNullableStringList);
+            Assert.IsNotNull(model.RequiredNullableIntList);
+            Assert.IsFalse(Optional.IsCollectionDefined(model.RequiredNullableIntList));
+            Assert.IsNotNull(model.RequiredNullableStringList);
+            Assert.IsFalse(Optional.IsCollectionDefined(model.RequiredNullableStringList));
         }
 
         [Test]
         public void NullablePropertiesDeserializedAsValues()
         {
             var model = MixedModel.DeserializeMixedModel(JsonDocument.Parse("{\"RequiredNullableIntList\":[1,2,3], \"RequiredNullableStringList\": [\"a\", \"b\"]}").RootElement);
-            Assert.AreEqual(new[] {1, 2, 3}, model.RequiredNullableIntList);
-            Assert.AreEqual(new[] {"a", "b"}, model.RequiredNullableStringList);
+            Assert.AreEqual(new[] { 1, 2, 3 }, model.RequiredNullableIntList);
+            Assert.AreEqual(new[] { "a", "b" }, model.RequiredNullableStringList);
         }
 
         [Test]
@@ -436,21 +438,13 @@ namespace AutoRest.TestServer.Tests
             Assert.Null(typeof(ReadonlyModel).GetMethod("DeserializeParametersModel", BindingFlags.Static | BindingFlags.NonPublic));
         }
 
-#if DEBUG
-        [Test]
-        public void OptionalPropertyWithNullFailsInDebug()
-        {
-            Assert.Throws<JsonException>(() => MixedModel.DeserializeMixedModel(JsonDocument.Parse("{\"RequiredReadonlyInt\":1, \"NonRequiredReadonlyInt\": 2,\"NonRequiredInt\": null}").RootElement));
-        }
-#else
 
         [Test]
-        public void OptionalPropertyWithNullWorksInRelease()
+        public void OptionalPropertyWithNullIsAccepted()
         {
             var model = MixedModel.DeserializeMixedModel(JsonDocument.Parse("{\"RequiredReadonlyInt\":1, \"NonRequiredReadonlyInt\": 2,\"NonRequiredInt\": null}").RootElement);
             Assert.Null(model.NonRequiredInt);
         }
-#endif
 
         [Test]
         public void ModelWithCustomizedNullableJsonElementPropertyDeserializesNull()
@@ -482,33 +476,33 @@ namespace AutoRest.TestServer.Tests
         [Test]
         public void ModelWithCustomizedNullableJsonElementPropertySerializesNull()
         {
-            JsonAsserts.AssertSerialization("{\"ModelProperty\":null}", new ModelWithNullableObjectProperty() { ModelProperty = JsonDocument.Parse("null").RootElement});
+            JsonAsserts.AssertSerialization("{\"ModelProperty\":null}", new ModelWithNullableObjectProperty() { ModelProperty = JsonDocument.Parse("null").RootElement });
         }
 
         [Test]
         public void ModelWithCustomizedNullableJsonElementPropertySerializesUndefined()
         {
-            JsonAsserts.AssertSerialization("{}", new ModelWithNullableObjectProperty() { ModelProperty = default});
+            JsonAsserts.AssertSerialization("{}", new ModelWithNullableObjectProperty() { ModelProperty = default });
         }
 
         [Test]
         public void ModelWithCustomizedNullableJsonElementPropertySerializesValue()
         {
-            JsonAsserts.AssertSerialization("{\"ModelProperty\":1}", new ModelWithNullableObjectProperty() { ModelProperty = JsonDocument.Parse("1").RootElement});
+            JsonAsserts.AssertSerialization("{\"ModelProperty\":1}", new ModelWithNullableObjectProperty() { ModelProperty = JsonDocument.Parse("1").RootElement });
         }
 
         [Test]
         public void ModelFactory_DeclaresOnlyStaticMethodsForReadonlyTypes()
         {
-            TypeAsserts.TypeIsStatic(typeof(SchemaMappingModelFactory));
-            TypeAsserts.TypeOnlyDeclaresThesePublicMethods(typeof(SchemaMappingModelFactory),
+            TypeAsserts.TypeIsStatic(typeof(ModelShapesModelFactory));
+            TypeAsserts.TypeOnlyDeclaresThesePublicMethods(typeof(ModelShapesModelFactory),
                 nameof(MixedModel), nameof(MixedModelWithReadonlyProperty), nameof(OutputModel), nameof(ReadonlyModel));
         }
 
         [Test]
         public void ModelFactory_AlwaysInitializesCollectionFields()
         {
-            var model = SchemaMappingModelFactory.MixedModelWithReadonlyProperty();
+            var model = ModelShapesModelFactory.MixedModelWithReadonlyProperty();
             Assert.NotNull(model.ReadonlyListProperty);
         }
 
@@ -518,7 +512,7 @@ namespace AutoRest.TestServer.Tests
             const string stringValue = "stringValue";
 
             var expectedModel = new ReadonlyModel(stringValue);
-            var actualModel = SchemaMappingModelFactory.ReadonlyModel(stringValue);
+            var actualModel = ModelShapesModelFactory.ReadonlyModel(stringValue);
 
             Assert.AreEqual(expectedModel.Name, actualModel.Name);
         }
@@ -528,10 +522,10 @@ namespace AutoRest.TestServer.Tests
         {
             const string stringValue = "stringValue";
             var readonlyModel = new ReadonlyModel(stringValue);
-            var readonlyModelList = new List<ReadonlyModel> {readonlyModel};
+            var readonlyModelList = new List<ReadonlyModel> { readonlyModel };
 
             var expectedModel = new MixedModelWithReadonlyProperty(readonlyModel, readonlyModelList.ToList());
-            var actualModel = SchemaMappingModelFactory.MixedModelWithReadonlyProperty(readonlyModel, readonlyModelList);
+            var actualModel = ModelShapesModelFactory.MixedModelWithReadonlyProperty(readonlyModel, readonlyModelList);
 
             Assert.AreEqual(expectedModel.ReadonlyProperty, actualModel.ReadonlyProperty);
             Assert.AreEqual(expectedModel.ReadonlyProperty.Name, actualModel.ReadonlyProperty.Name);

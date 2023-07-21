@@ -17,6 +17,10 @@ namespace MgmtResourceName
     {
         internal static ProviderOperationData DeserializeProviderOperationData(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<string> displayName = default;
             Optional<IReadOnlyList<Models.ResourceType>> resourceTypes = default;
             Optional<IReadOnlyList<ResourceOperation>> operations = default;
@@ -26,16 +30,15 @@ namespace MgmtResourceName
             Optional<SystemData> systemData = default;
             foreach (var property in element.EnumerateObject())
             {
-                if (property.NameEquals("displayName"))
+                if (property.NameEquals("displayName"u8))
                 {
                     displayName = property.Value.GetString();
                     continue;
                 }
-                if (property.NameEquals("resourceTypes"))
+                if (property.NameEquals("resourceTypes"u8))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     List<Models.ResourceType> array = new List<Models.ResourceType>();
@@ -46,11 +49,10 @@ namespace MgmtResourceName
                     resourceTypes = array;
                     continue;
                 }
-                if (property.NameEquals("operations"))
+                if (property.NameEquals("operations"u8))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     List<ResourceOperation> array = new List<ResourceOperation>();
@@ -61,26 +63,25 @@ namespace MgmtResourceName
                     operations = array;
                     continue;
                 }
-                if (property.NameEquals("id"))
+                if (property.NameEquals("id"u8))
                 {
                     id = new ResourceIdentifier(property.Value.GetString());
                     continue;
                 }
-                if (property.NameEquals("name"))
+                if (property.NameEquals("name"u8))
                 {
                     name = property.Value.GetString();
                     continue;
                 }
-                if (property.NameEquals("type"))
+                if (property.NameEquals("type"u8))
                 {
                     type = new Azure.Core.ResourceType(property.Value.GetString());
                     continue;
                 }
-                if (property.NameEquals("systemData"))
+                if (property.NameEquals("systemData"u8))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     systemData = JsonSerializer.Deserialize<SystemData>(property.Value.GetRawText());

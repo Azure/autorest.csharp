@@ -142,9 +142,6 @@ namespace AutoRest.CSharp.Generation.Writers
                     case FormattableString fs:
                         Append(fs);
                         break;
-                    case CodeWriterDelegate d:
-                        Append(d);
-                        break;
                     case Type t:
                         AppendType(new CSharpType(t));
                         break;
@@ -358,7 +355,7 @@ namespace AutoRest.CSharp.Generation.Writers
             }
         }
 
-        private static string? GetTypeNameMapping(Type? type) => type switch
+        internal static string? GetTypeNameMapping(Type? type) => type switch
         {
             null => null,
             var t when t.IsGenericParameter => t.Name,
@@ -392,6 +389,7 @@ namespace AutoRest.CSharp.Generation.Writers
                 double d => SyntaxFactory.Literal(d).ToString(),
                 float f => SyntaxFactory.Literal(f).ToString(),
                 bool b => b ? "true" : "false",
+                BinaryData bd => bd.ToArray().Length == 0 ? "new byte[] { }" : SyntaxFactory.Literal(bd.ToString()).ToString(),
                 _ => throw new NotImplementedException()
             });
         }
@@ -540,12 +538,6 @@ namespace AutoRest.CSharp.Generation.Writers
             return Declaration(declaration.ActualName);
         }
 
-        public CodeWriter Append(CodeWriterDelegate writerDelegate)
-        {
-            writerDelegate(this);
-            return this;
-        }
-
         public override string ToString()
         {
             return ToString(true);
@@ -562,7 +554,7 @@ namespace AutoRest.CSharp.Generation.Writers
             string[] namespaces = _usingNamespaces
                     .Distinct()
                     .OrderByDescending(ns => ns.StartsWith("System"))
-                    .ThenBy(ns => ns)
+                    .ThenBy(ns => ns,StringComparer.Ordinal)
                     .ToArray();
             if (header)
             {
@@ -588,7 +580,8 @@ namespace AutoRest.CSharp.Generation.Writers
             // Normalize newlines
             builder.AppendLine(new string(_builder.AsSpan(0, _length).Trim()).Replace(_newLine, Environment.NewLine));
 
-            return builder.ToString();
+            // remove any trailing whitespace, for SA1028. can roll back this change after Roslyn fixes https://github.com/dotnet/roslyn/issues/28818
+            return string.Join(Environment.NewLine, builder.ToString().Split(Environment.NewLine).Select(l => l.TrimEnd()));
         }
 
         internal class CodeWriterScope : IDisposable

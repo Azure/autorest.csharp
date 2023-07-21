@@ -14,7 +14,11 @@ using Azure.ResourceManager.Sample.Models;
 
 namespace Azure.ResourceManager.Sample
 {
-    /// <summary> A class representing the DedicatedHost data model. </summary>
+    /// <summary>
+    /// A class representing the DedicatedHost data model.
+    /// Specifies information about the Dedicated host.
+    /// Serialized Name: DedicatedHost
+    /// </summary>
     public partial class DedicatedHostData : TrackedResourceData
     {
         /// <summary> Initializes a new instance of DedicatedHostData. </summary>
@@ -48,7 +52,7 @@ namespace Azure.ResourceManager.Sample
         /// Serialized Name: DedicatedHost.properties.platformFaultDomain
         /// </param>
         /// <param name="autoReplaceOnFailure">
-        /// Specifies whether the dedicated host should be replaced automatically in case of a failure. The value is defaulted to &apos;true&apos; when not provided.
+        /// Specifies whether the dedicated host should be replaced automatically in case of a failure. The value is defaulted to 'true' when not provided.
         /// Serialized Name: DedicatedHost.properties.autoReplaceOnFailure
         /// </param>
         /// <param name="hostId">
@@ -99,7 +103,7 @@ namespace Azure.ResourceManager.Sample
         /// </summary>
         public int? PlatformFaultDomain { get; set; }
         /// <summary>
-        /// Specifies whether the dedicated host should be replaced automatically in case of a failure. The value is defaulted to &apos;true&apos; when not provided.
+        /// Specifies whether the dedicated host should be replaced automatically in case of a failure. The value is defaulted to 'true' when not provided.
         /// Serialized Name: DedicatedHost.properties.autoReplaceOnFailure
         /// </summary>
         public bool? AutoReplaceOnFailure { get; set; }

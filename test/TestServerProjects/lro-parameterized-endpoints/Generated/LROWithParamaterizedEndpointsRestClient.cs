@@ -8,6 +8,7 @@
 using System;
 using System.Threading;
 using System.Threading.Tasks;
+using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
 
@@ -24,9 +25,9 @@ namespace lro_parameterized_endpoints
         /// <summary> Initializes a new instance of LROWithParamaterizedEndpointsRestClient. </summary>
         /// <param name="clientDiagnostics"> The handler for diagnostic messaging in the client. </param>
         /// <param name="pipeline"> The HTTP pipeline for sending and receiving REST requests and responses. </param>
-        /// <param name="host"> A string value that is used as a global part of the parameterized host. Pass in &apos;host:3000&apos; to pass test. </param>
+        /// <param name="host"> A string value that is used as a global part of the parameterized host. Pass in 'host:3000' to pass test. The default value is "host". </param>
         /// <exception cref="ArgumentNullException"> <paramref name="clientDiagnostics"/>, <paramref name="pipeline"/> or <paramref name="host"/> is null. </exception>
-        public LROWithParamaterizedEndpointsRestClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host = "host")
+        public LROWithParamaterizedEndpointsRestClient(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, string host)
         {
             ClientDiagnostics = clientDiagnostics ?? throw new ArgumentNullException(nameof(clientDiagnostics));
             _pipeline = pipeline ?? throw new ArgumentNullException(nameof(pipeline));
@@ -49,7 +50,7 @@ namespace lro_parameterized_endpoints
         }
 
         /// <summary> Poll with method and client level parameters in endpoint. </summary>
-        /// <param name="accountName"> Account Name. Pass in &apos;local&apos; to pass test. </param>
+        /// <param name="accountName"> Account Name. Pass in 'local' to pass test. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="accountName"/> is null. </exception>
         public async Task<ResponseWithHeaders<LROWithParamaterizedEndpointsPollWithParameterizedEndpointsHeaders>> PollWithParameterizedEndpointsAsync(string accountName, CancellationToken cancellationToken = default)
@@ -68,12 +69,12 @@ namespace lro_parameterized_endpoints
                 case 202:
                     return ResponseWithHeaders.FromValue(headers, message.Response);
                 default:
-                    throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    throw new RequestFailedException(message.Response);
             }
         }
 
         /// <summary> Poll with method and client level parameters in endpoint. </summary>
-        /// <param name="accountName"> Account Name. Pass in &apos;local&apos; to pass test. </param>
+        /// <param name="accountName"> Account Name. Pass in 'local' to pass test. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="accountName"/> is null. </exception>
         public ResponseWithHeaders<LROWithParamaterizedEndpointsPollWithParameterizedEndpointsHeaders> PollWithParameterizedEndpoints(string accountName, CancellationToken cancellationToken = default)
@@ -92,7 +93,7 @@ namespace lro_parameterized_endpoints
                 case 202:
                     return ResponseWithHeaders.FromValue(headers, message.Response);
                 default:
-                    throw ClientDiagnostics.CreateRequestFailedException(message.Response);
+                    throw new RequestFailedException(message.Response);
             }
         }
 
@@ -113,7 +114,7 @@ namespace lro_parameterized_endpoints
         }
 
         /// <summary> Poll with method and client level parameters in endpoint, with a constant value. </summary>
-        /// <param name="accountName"> Account Name. Pass in &apos;local&apos; to pass test. </param>
+        /// <param name="accountName"> Account Name. Pass in 'local' to pass test. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="accountName"/> is null. </exception>
         public async Task<ResponseWithHeaders<LROWithParamaterizedEndpointsPollWithConstantParameterizedEndpointsHeaders>> PollWithConstantParameterizedEndpointsAsync(string accountName, CancellationToken cancellationToken = default)
@@ -132,12 +133,12 @@ namespace lro_parameterized_endpoints
                 case 202:
                     return ResponseWithHeaders.FromValue(headers, message.Response);
                 default:
-                    throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    throw new RequestFailedException(message.Response);
             }
         }
 
         /// <summary> Poll with method and client level parameters in endpoint, with a constant value. </summary>
-        /// <param name="accountName"> Account Name. Pass in &apos;local&apos; to pass test. </param>
+        /// <param name="accountName"> Account Name. Pass in 'local' to pass test. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="accountName"/> is null. </exception>
         public ResponseWithHeaders<LROWithParamaterizedEndpointsPollWithConstantParameterizedEndpointsHeaders> PollWithConstantParameterizedEndpoints(string accountName, CancellationToken cancellationToken = default)
@@ -156,7 +157,7 @@ namespace lro_parameterized_endpoints
                 case 202:
                     return ResponseWithHeaders.FromValue(headers, message.Response);
                 default:
-                    throw ClientDiagnostics.CreateRequestFailedException(message.Response);
+                    throw new RequestFailedException(message.Response);
             }
         }
     }

@@ -27,8 +27,9 @@ namespace AutoRest.TestServer.Tests.Mgmt.Unit
                 noResourceSuffix: Array.Empty<string>(),
                 schemasToPrependRPPrefix: Array.Empty<string>(),
                 generateArmResourceExtensions: Array.Empty<string>(),
-                preventWrappingReturnType: Array.Empty<string>(),
+                parameterizedScopes: Array.Empty<string>(),
                 mgmtDebug: new MgmtConfiguration.MgmtDebugConfiguration(),
+                operationsToSkipLroApiVersionOverride: default,
                 requestPathToParent: default,
                 requestPathToResourceName: default,
                 requestPathToResourceData: default,
@@ -47,13 +48,12 @@ namespace AutoRest.TestServer.Tests.Mgmt.Unit
                 resourceModelRequiresType: default,
                 resourceModelRequiresName: default,
                 singletonRequiresKeyword: default,
-                testGen: default,
                 operationIdMappings: default,
                 updateRequiredCopy: default,
                 patchInitializerCustomization: default);
             Configuration.Initialize(outputFolder: ".",
-                ns: null,
-                name: null,
+                ns: "",
+                libraryName: "",
                 sharedSourceFolders: Array.Empty<string>(),
                 saveInputs: true,
                 azureArm: true,
@@ -65,28 +65,30 @@ namespace AutoRest.TestServer.Tests.Mgmt.Unit
                 singleTopLevelClient: false,
                 skipSerializationFormatXml: false,
                 disablePaginationTopRenaming: false,
+                generateModelFactory: true,
+                publicDiscriminatorProperty: false,
+                deserializeNullCollectionAsNullValue: false,
+                modelFactoryForHlc: Array.Empty<string>(),
                 unreferencedTypesHandling: Configuration.UnreferencedTypesHandlingOption.RemoveOrInternalize,
+                useOverloadsBetweenProtocolAndConvenience: true,
+                keepNonOverloadableProtocolSignature: false,
+                useCoreDataFactoryReplacements: true,
                 projectFolder: "/..",
+                existingProjectFolder: null,
                 protocolMethodList: Array.Empty<string>(),
                 suppressAbstractBaseClasses: Array.Empty<string>(),
-                mgmtConfiguration: mgmtConfiguration);
+                modelsToTreatEmptyStringAsNull: Array.Empty<string>(),
+                additionalIntrinsicTypesToTreatEmptyStringAsNull: Array.Empty<string>(),
+                shouldTreatBase64AsBinaryData: true,
+                methodsToKeepClientDefaultValue: Array.Empty<string>(),
+                mgmtConfiguration: mgmtConfiguration,
+                mgmtTestConfiguration: null);
         }
-
-        private static RequestPath GetFromString(string path) => new RequestPath(path.Split('/', StringSplitOptions.RemoveEmptyEntries).Select(segment => GetSegmentFromString(segment)).ToList());
-
-        private static Segment GetSegmentFromString(string str)
-        {
-            var trimmed = TrimRawSegment(str);
-            var isScope = trimmed == "scope";
-            return new Segment(trimmed, escape: !isScope, isConstant: !isScope && !str.Contains('{'));
-        }
-
-        private static string TrimRawSegment(string segment) => segment.TrimStart('{').TrimEnd('}');
 
         private void TestPair(ResourceMatchType expected, HttpMethod httpMethod, string resourcePathStr, string requestPathStr, bool isList)
         {
-            RequestPath resourcePath = GetFromString(resourcePathStr);
-            RequestPath requestPath = GetFromString(requestPathStr);
+            RequestPath resourcePath = RequestPath.FromString(resourcePathStr);
+            RequestPath requestPath = RequestPath.FromString(requestPathStr);
             Assert.AreEqual(expected, MgmtRestOperation.GetMatchType(httpMethod, resourcePath, requestPath, isList));
         }
 

@@ -1,6 +1,7 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
+using System;
 using System.Linq;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Input;
@@ -26,7 +27,9 @@ namespace AutoRest.CSharp.Mgmt.Output
 
         protected override string CreateDescription()
         {
-            return BuilderHelpers.EscapeXmlDescription($"A class representing the {_clientPrefix} data model.") + CreateExtraDescriptionWithDiscriminator();
+            return BuilderHelpers.EscapeXmlDocDescription($"A class representing the {_clientPrefix} data model.") + (string.IsNullOrWhiteSpace(ObjectSchema.Language.Default.Description) ?
+                string.Empty :
+                $"{Environment.NewLine}{BuilderHelpers.EscapeXmlDocDescription(ObjectSchema.Language.Default.Description)}");
         }
 
         private string _clientPrefix;
@@ -62,6 +65,6 @@ namespace AutoRest.CSharp.Mgmt.Output
             return nameProperty?.Declaration.Type;
         }
 
-        internal bool ShouldSetResourceIdentifier => TypeOfId == null;
+        internal virtual bool ShouldSetResourceIdentifier => TypeOfId == null;
     }
 }

@@ -14,22 +14,26 @@ namespace CognitiveServices.TextAnalytics.Models
     {
         internal static TextAnalyticsWarning DeserializeTextAnalyticsWarning(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             WarningCodeValue code = default;
             string message = default;
             Optional<string> targetRef = default;
             foreach (var property in element.EnumerateObject())
             {
-                if (property.NameEquals("code"))
+                if (property.NameEquals("code"u8))
                 {
                     code = property.Value.GetString().ToWarningCodeValue();
                     continue;
                 }
-                if (property.NameEquals("message"))
+                if (property.NameEquals("message"u8))
                 {
                     message = property.Value.GetString();
                     continue;
                 }
-                if (property.NameEquals("targetRef"))
+                if (property.NameEquals("targetRef"u8))
                 {
                     targetRef = property.Value.GetString();
                     continue;

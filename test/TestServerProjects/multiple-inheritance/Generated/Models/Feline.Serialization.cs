@@ -17,12 +17,12 @@ namespace multiple_inheritance.Models
             writer.WriteStartObject();
             if (Optional.IsDefined(Meows))
             {
-                writer.WritePropertyName("meows");
+                writer.WritePropertyName("meows"u8);
                 writer.WriteBooleanValue(Meows.Value);
             }
             if (Optional.IsDefined(Hisses))
             {
-                writer.WritePropertyName("hisses");
+                writer.WritePropertyName("hisses"u8);
                 writer.WriteBooleanValue(Hisses.Value);
             }
             writer.WriteEndObject();
@@ -30,25 +30,27 @@ namespace multiple_inheritance.Models
 
         internal static Feline DeserializeFeline(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<bool> meows = default;
             Optional<bool> hisses = default;
             foreach (var property in element.EnumerateObject())
             {
-                if (property.NameEquals("meows"))
+                if (property.NameEquals("meows"u8))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     meows = property.Value.GetBoolean();
                     continue;
                 }
-                if (property.NameEquals("hisses"))
+                if (property.NameEquals("hisses"u8))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     hisses = property.Value.GetBoolean();

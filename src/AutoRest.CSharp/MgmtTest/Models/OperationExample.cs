@@ -69,7 +69,7 @@ namespace AutoRest.CSharp.MgmtTest.Models
         public IEnumerable<ResourceIdentifierInitializer> ComposeResourceIdentifierExpressionValues(RequestPath resourcePath)
         {
             var scopePath = resourcePath.GetScopePath();
-            if (scopePath.IsParameterizedScope())
+            if (scopePath.IsRawParameterizedScope())
             {
                 var trimmedPath = resourcePath.TrimScope();
                 return ComposeResourceIdentifierForScopePath(scopePath, trimmedPath);
@@ -105,13 +105,15 @@ namespace AutoRest.CSharp.MgmtTest.Models
 
         private IEnumerable<ResourceIdentifierInitializer> ComposeResourceIdentifierForUsualPath(RequestPath requestPath, RequestPath resourcePath)
         {
-            // we first take the same amount of segments from my own request path, in case there is a case that the parameter names from these two paths are different
-            var piecesFromMyOwn = requestPath.Take(resourcePath.Count);
-            // there should be a contract that we will never have two parameters with the same name in one path
-            foreach (var referenceSegment in piecesFromMyOwn.Where(segment => segment.IsReference))
-            {
-                yield return new ResourceIdentifierInitializer(FindExampleParameterValueFromReference(referenceSegment.Reference));
-            }
+            // try to figure out ref segments from requestPath according the ones from resource Path
+            // Dont match the path side-by-side because
+            // 1. there is a case that the parameter names are different
+            // 2. the path structure may be different totally when customized,
+            //    i.e. in ResourceManager, parent of /subscriptions/{subscriptionId}/providers/Microsoft.Features/providers/{resourceProviderNamespace}/features/{featureName}
+            //         is configured to /subscriptions/{subscriptionId}/providers/{resourceProviderNamespace}
+            var myRefs = requestPath.Where(s => s.IsReference);
+            var resourceRefCount = resourcePath.Where(s => s.IsReference).Count();
+            return myRefs.Take(resourceRefCount).Select(refSeg => new ResourceIdentifierInitializer(FindExampleParameterValueFromReference(refSeg.Reference)));
         }
 
         private ExampleParameterValue FindExampleParameterValueFromReference(Reference reference)

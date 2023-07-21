@@ -15,15 +15,18 @@ namespace MgmtMockAndSample.Models
     {
         internal static VaultValidationResult DeserializeVaultValidationResult(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<IReadOnlyList<VaultIssue>> issues = default;
             Optional<string> result = default;
             foreach (var property in element.EnumerateObject())
             {
-                if (property.NameEquals("issues"))
+                if (property.NameEquals("issues"u8))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     List<VaultIssue> array = new List<VaultIssue>();
@@ -34,7 +37,7 @@ namespace MgmtMockAndSample.Models
                     issues = array;
                     continue;
                 }
-                if (property.NameEquals("result"))
+                if (property.NameEquals("result"u8))
                 {
                     result = property.Value.GetString();
                     continue;

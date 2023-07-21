@@ -3,7 +3,6 @@
 
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Input;
@@ -35,6 +34,7 @@ namespace AutoRest.CSharp.Output.Models.Types
         {
             _allowedValues = input.AllowedValues;
             _typeFactory = typeFactory;
+            _deprecated = input.Deprecated;
 
             DefaultName = input.Name.ToCleanName();
             DefaultAccessibility = input.Accessibility ?? defaultAccessibility;
@@ -54,16 +54,21 @@ namespace AutoRest.CSharp.Output.Models.Types
                 _typeMapping = sourceInputModel?.CreateForModel(ExistingType);
             }
 
-            ValueType = typeFactory.CreateType(input.EnumValueType);
-            Description = input.Description;
             IsExtensible = isExtensible;
+            ValueType = typeFactory.CreateType(input.EnumValueType);
+            IsStringValueType = ValueType.Equals(typeof(string));
+            IsIntValueType = ValueType.Equals(typeof(int)) || ValueType.Equals(typeof(long));
+            SerializationMethodName = IsStringValueType && IsExtensible ? "ToString" : $"ToSerial{ValueType.Name.FirstCharToUpperCase()}";
+
+            Description = input.Description;
         }
 
         public CSharpType ValueType { get; }
         public bool IsExtensible { get; }
-        public bool IsStringValueType => ValueType.Equals(typeof(string));
-        public bool IsIntValueType => ValueType.Equals(typeof(Int32)) || IsLongValueType;
-        public bool IsLongValueType => ValueType.Equals(typeof(Int64));
+        public bool IsStringValueType { get; }
+        public bool IsIntValueType { get; }
+        public string SerializationMethodName { get; }
+
         public string? Description { get; }
         protected override string DefaultName { get; }
         protected override string DefaultAccessibility { get; }
@@ -92,7 +97,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             var description = string.IsNullOrWhiteSpace(value.Description)
                 ? value.GetValueString()
                 : value.Description;
-            return BuilderHelpers.EscapeXmlDescription(description);
+            return BuilderHelpers.EscapeXmlDocDescription(description);
         }
 
         public static string GetAccessibility(Schema schema, BuildContext context)

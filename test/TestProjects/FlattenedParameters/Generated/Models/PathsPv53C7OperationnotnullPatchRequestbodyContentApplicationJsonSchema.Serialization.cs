@@ -17,7 +17,7 @@ namespace FlattenedParameters.Models
             writer.WriteStartObject();
             if (Optional.IsCollectionDefined(Items))
             {
-                writer.WritePropertyName("items");
+                writer.WritePropertyName("items"u8);
                 writer.WriteStartArray();
                 foreach (var item in Items)
                 {

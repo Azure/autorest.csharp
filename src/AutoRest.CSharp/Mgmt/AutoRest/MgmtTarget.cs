@@ -82,15 +82,15 @@ namespace AutoRest.CSharp.AutoRest.Plugins
 
             foreach (var resourceCollection in MgmtContext.Library.ResourceCollections)
             {
-                var codeWriter = new CodeWriter();
-                new ResourceCollectionWriter(codeWriter, resourceCollection).Write();
+                var writer = new ResourceCollectionWriter(resourceCollection);
+                writer.Write();
 
-                AddGeneratedFile(project, $"{resourceCollection.Type.Name}.cs", codeWriter.ToString());
+                AddGeneratedFile(project, $"{resourceCollection.Type.Name}.cs", writer.ToString());
             }
 
             foreach (var model in MgmtContext.Library.ResourceData)
             {
-                if (TypeReferenceTypeChooser.HasMatch(model.ObjectSchema))
+                if (model is EmptyResourceData)
                     continue;
 
                 var name = model.Type.Name;
@@ -99,26 +99,14 @@ namespace AutoRest.CSharp.AutoRest.Plugins
 
             foreach (var resource in MgmtContext.Library.ArmResources)
             {
-                var writer = new ResourceWriter(resource);
+                var writer = ResourceWriter.GetWriter(resource);
                 writer.Write();
 
                 AddGeneratedFile(project, $"{resource.Type.Name}.cs", writer.ToString());
             }
 
             // write extension class
-            if (!isArmCore && !MgmtContext.Library.ExtensionWrapper.IsEmpty)
-                WriteExtensionPiece(project, new MgmtExtensionWrapperWriter(MgmtContext.Library.ExtensionWrapper));
-
-            WriteExtensionClient(project, MgmtContext.Library.ResourceGroupExtensions.ExtensionClient);
-            WriteExtensionClient(project, MgmtContext.Library.SubscriptionExtensions.ExtensionClient);
-            WriteExtensionClient(project, MgmtContext.Library.ManagementGroupExtensions.ExtensionClient);
-            WriteExtensionClient(project, MgmtContext.Library.TenantExtensions.ExtensionClient);
-            WriteExtensionClient(project, MgmtContext.Library.ArmResourceExtensions.ExtensionClient);
-
-            if (isArmCore && !MgmtContext.Library.ArmClientExtensions.IsEmpty)
-            {
-                WriteExtensionPiece(project, new ArmClientExtensionsWriter(MgmtContext.Library.ArmClientExtensions));
-            }
+            WriteExtensions(project, isArmCore, MgmtContext.Library.ExtensionWrapper, MgmtContext.Library.Extensions, MgmtContext.Library.ExtensionClients);
 
             var lroWriter = new MgmtLongRunningOperationWriter(true);
             lroWriter.Write();
@@ -141,22 +129,54 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                 AddGeneratedFile(project, $"LongRunningOperation/{operationSource.TypeName}.cs", writer.ToString());
             }
 
+            foreach (var model in MgmtContext.Library.PropertyBagModels)
+            {
+                var name = model.Type.Name;
+                WriteArmModel(project, model, serializeWriter, $"Models/{name}.cs", $"Models/{name}.Serialization.cs");
+            }
+
+            var modelFactoryProvider = MgmtContext.Library.ModelFactory;
+            if (modelFactoryProvider != null)
+            {
+                var modelFactoryWriter = new ModelFactoryWriter(modelFactoryProvider);
+                modelFactoryWriter.Write();
+                AddGeneratedFile(project, $"{modelFactoryProvider.Type.Name}.cs", modelFactoryWriter.ToString());
+            }
+
             if (_overriddenProjectFilenames.TryGetValue(project, out var overriddenFilenames))
                 throw new InvalidOperationException($"At least one file was overridden during the generation process. Filenames are: {string.Join(", ", overriddenFilenames)}");
 
             var modelsToKeep = Configuration.MgmtConfiguration.KeepOrphanedModels.ToImmutableHashSet();
-            await project.PostProcessAsync(new MgmtPostProcessor(modelsToKeep));
+            await project.PostProcessAsync(new MgmtPostProcessor(modelsToKeep, modelFactoryProvider?.FullName));
         }
 
-        private static void WriteExtensionClient(GeneratedCodeWorkspace project, MgmtExtensionClient extensionClient)
+        private static void WriteExtensions(GeneratedCodeWorkspace project, bool isArmCore, MgmtExtensionWrapper extensionWrapper, IEnumerable<MgmtExtension> extensions, IEnumerable<MgmtExtensionClient> extensionClients)
         {
-            if (Configuration.MgmtConfiguration.IsArmCore && !extensionClient.Extension.IsEmpty)
-                WriteExtensionPiece(project, new MgmtExtensionWriter(extensionClient.Extension));
-            if (!Configuration.MgmtConfiguration.IsArmCore && !extensionClient.IsEmpty)
-                WriteExtensionPiece(project, new ResourceExtensionWriter(extensionClient));
+            if (isArmCore)
+            {
+                // for Azure.ResourceManager (ArmCore), we write the individual extension type providers into their individual files
+                foreach (var extension in extensions)
+                {
+                    if (!extension.IsEmpty)
+                        WriteExtensionFile(project, MgmtExtensionWriter.GetWriter(extension));
+                }
+            }
+            else
+            {
+                // for other packages (not ArmCore), we write extension wrapper (a big class that contains all the extension methods) and do not write the individual extension classes
+                if (!extensionWrapper.IsEmpty)
+                    WriteExtensionFile(project, new MgmtExtensionWrapperWriter(extensionWrapper));
+
+                // and we write ExtensionClients
+                foreach (var extensionClient in extensionClients)
+                {
+                    if (!extensionClient.IsEmpty)
+                        WriteExtensionFile(project, new MgmtExtensionClientWriter(extensionClient));
+                }
+            }
         }
 
-        private static void WriteExtensionPiece(GeneratedCodeWorkspace project, MgmtClientBaseWriter extensionWriter)
+        private static void WriteExtensionFile(GeneratedCodeWorkspace project, MgmtClientBaseWriter extensionWriter)
         {
             extensionWriter.Write();
             AddGeneratedFile(project, $"Extensions/{extensionWriter.FileName}.cs", extensionWriter.ToString());

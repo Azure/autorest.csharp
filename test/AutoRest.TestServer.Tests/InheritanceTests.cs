@@ -7,7 +7,6 @@ using System.Linq;
 using System.Reflection;
 using System.Text.Json.Serialization;
 using Azure.Core.Expressions.DataFactory;
-using ExactMatchInheritance;
 using Inheritance.Models;
 using NUnit.Framework;
 
@@ -137,19 +136,19 @@ namespace AutoRest.TestServer.Tests
         }
 
         [Test]
-        public void DataFactoryExpressionProperties()
+        public void DataFactoryElementProperties()
         {
-            Assert.AreEqual(typeof(DataFactoryExpression<string>), typeof(BaseClass).GetProperty("DfeString").PropertyType);
-            Assert.AreEqual(typeof(DataFactoryExpression<double>), typeof(BaseClass).GetProperty("DfeDouble").PropertyType);
-            Assert.AreEqual(typeof(DataFactoryExpression<bool>), typeof(BaseClass).GetProperty("DfeBool").PropertyType);
-            Assert.AreEqual(typeof(DataFactoryExpression<int>), typeof(BaseClass).GetProperty("DfeInt").PropertyType);
-            Assert.AreEqual(typeof(DataFactoryExpression<BinaryData>), typeof(BaseClass).GetProperty("DfeObject").PropertyType);
-            Assert.AreEqual(typeof(DataFactoryExpression<IList<SeparateClass>>), typeof(BaseClass).GetProperty("DfeListOfT").PropertyType);
-            Assert.AreEqual(typeof(DataFactoryExpression<IList<string>>), typeof(BaseClass).GetProperty("DfeListOfString").PropertyType);
-            Assert.AreEqual(typeof(DataFactoryExpression<IDictionary<string, string>>), typeof(BaseClass).GetProperty("DfeKeyValuePairs").PropertyType);
-            Assert.AreEqual(typeof(DataFactoryExpression<DateTimeOffset>), typeof(BaseClass).GetProperty("DfeDateTime").PropertyType);
-            Assert.AreEqual(typeof(DataFactoryExpression<TimeSpan>), typeof(BaseClass).GetProperty("DfeDuration").PropertyType);
-            Assert.AreEqual(typeof(DataFactoryExpression<Uri>), typeof(BaseClass).GetProperty("DfeUri").PropertyType);
+            Assert.AreEqual(typeof(DataFactoryElement<string>), typeof(BaseClass).GetProperty("DfeString").PropertyType);
+            Assert.AreEqual(typeof(DataFactoryElement<double>), typeof(BaseClass).GetProperty("DfeDouble").PropertyType);
+            Assert.AreEqual(typeof(DataFactoryElement<bool>), typeof(BaseClass).GetProperty("DfeBool").PropertyType);
+            Assert.AreEqual(typeof(DataFactoryElement<int>), typeof(BaseClass).GetProperty("DfeInt").PropertyType);
+            Assert.AreEqual(typeof(DataFactoryElement<BinaryData>), typeof(BaseClass).GetProperty("DfeObject").PropertyType);
+            Assert.AreEqual(typeof(DataFactoryElement<IList<SeparateClass>>), typeof(BaseClass).GetProperty("DfeListOfT").PropertyType);
+            Assert.AreEqual(typeof(DataFactoryElement<IList<string>>), typeof(BaseClass).GetProperty("DfeListOfString").PropertyType);
+            Assert.AreEqual(typeof(DataFactoryElement<IDictionary<string, string>>), typeof(BaseClass).GetProperty("DfeKeyValuePairs").PropertyType);
+            Assert.AreEqual(typeof(DataFactoryElement<DateTimeOffset>), typeof(BaseClass).GetProperty("DfeDateTime").PropertyType);
+            Assert.AreEqual(typeof(DataFactoryElement<TimeSpan>), typeof(BaseClass).GetProperty("DfeDuration").PropertyType);
+            Assert.AreEqual(typeof(DataFactoryElement<Uri>), typeof(BaseClass).GetProperty("DfeUri").PropertyType);
             Assert.IsTrue(typeof(SeparateClass).GetCustomAttributes().Any(a => a.GetType() == typeof(JsonConverterAttribute)));
         }
     }

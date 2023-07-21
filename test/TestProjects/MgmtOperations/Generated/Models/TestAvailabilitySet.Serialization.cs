@@ -14,10 +14,14 @@ namespace MgmtOperations.Models
     {
         internal static TestAvailabilitySet DeserializeTestAvailabilitySet(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<string> bar = default;
             foreach (var property in element.EnumerateObject())
             {
-                if (property.NameEquals("bar"))
+                if (property.NameEquals("bar"u8))
                 {
                     bar = property.Value.GetString();
                     continue;

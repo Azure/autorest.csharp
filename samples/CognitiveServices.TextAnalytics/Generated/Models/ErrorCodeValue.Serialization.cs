@@ -22,10 +22,10 @@ namespace CognitiveServices.TextAnalytics.Models
 
         public static ErrorCodeValue ToErrorCodeValue(this string value)
         {
-            if (string.Equals(value, "invalidRequest", StringComparison.InvariantCultureIgnoreCase)) return ErrorCodeValue.InvalidRequest;
-            if (string.Equals(value, "invalidArgument", StringComparison.InvariantCultureIgnoreCase)) return ErrorCodeValue.InvalidArgument;
-            if (string.Equals(value, "internalServerError", StringComparison.InvariantCultureIgnoreCase)) return ErrorCodeValue.InternalServerError;
-            if (string.Equals(value, "serviceUnavailable", StringComparison.InvariantCultureIgnoreCase)) return ErrorCodeValue.ServiceUnavailable;
+            if (StringComparer.OrdinalIgnoreCase.Equals(value, "invalidRequest")) return ErrorCodeValue.InvalidRequest;
+            if (StringComparer.OrdinalIgnoreCase.Equals(value, "invalidArgument")) return ErrorCodeValue.InvalidArgument;
+            if (StringComparer.OrdinalIgnoreCase.Equals(value, "internalServerError")) return ErrorCodeValue.InternalServerError;
+            if (StringComparer.OrdinalIgnoreCase.Equals(value, "serviceUnavailable")) return ErrorCodeValue.ServiceUnavailable;
             throw new ArgumentOutOfRangeException(nameof(value), value, "Unknown ErrorCodeValue value.");
         }
     }

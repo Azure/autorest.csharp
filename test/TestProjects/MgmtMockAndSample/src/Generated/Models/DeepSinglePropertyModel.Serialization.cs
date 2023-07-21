@@ -17,7 +17,7 @@ namespace MgmtMockAndSample.Models
             writer.WriteStartObject();
             if (Optional.IsDefined(Deep))
             {
-                writer.WritePropertyName("deep");
+                writer.WritePropertyName("deep"u8);
                 writer.WriteObjectValue(Deep);
             }
             writer.WriteEndObject();
@@ -25,14 +25,17 @@ namespace MgmtMockAndSample.Models
 
         internal static DeepSinglePropertyModel DeserializeDeepSinglePropertyModel(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<SinglePropertyModel> deep = default;
             foreach (var property in element.EnumerateObject())
             {
-                if (property.NameEquals("deep"))
+                if (property.NameEquals("deep"u8))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     deep = SinglePropertyModel.DeserializeSinglePropertyModel(property.Value);

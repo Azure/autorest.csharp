@@ -14,10 +14,14 @@ namespace httpInfrastructure.Models
     {
         internal static MyException DeserializeMyException(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<string> statusCode = default;
             foreach (var property in element.EnumerateObject())
             {
-                if (property.NameEquals("statusCode"))
+                if (property.NameEquals("statusCode"u8))
                 {
                     statusCode = property.Value.GetString();
                     continue;

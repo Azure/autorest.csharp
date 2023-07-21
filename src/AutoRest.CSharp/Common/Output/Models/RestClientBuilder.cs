@@ -81,9 +81,9 @@ namespace AutoRest.CSharp.Output.Models
             Response[] responses = BuildResponses(operation, typeFactory, out var responseType);
 
             return new RestClientMethod(
-                operation.Name.ToCleanName(),
-                operation.Summary != null ? BuilderHelpers.EscapeXmlDescription(operation.Summary) : null,
-                BuilderHelpers.EscapeXmlDescription(operation.Description),
+                operation.CleanName,
+                operation.Summary != null ? BuilderHelpers.EscapeXmlDocDescription(operation.Summary) : null,
+                BuilderHelpers.EscapeXmlDocDescription(operation.Description),
                 responseType,
                 request,
                 parameters,
@@ -106,16 +106,16 @@ namespace AutoRest.CSharp.Output.Models
             var allParameters = GetOperationAllParameters(operation);
             var methodParameters = BuildMethodParameters(allParameters);
             var requestParts = allParameters
-                .Select(kvp => new RequestPartSource(kvp.Key.NameInRequest, (InputParameter?)kvp.Key, CreateReference(kvp.Key, kvp.Value), SerializationBuilder.GetSerializationFormat(kvp.Key.Type)))
+                .Select(kvp => new RequestPartSource(kvp.Key.NameInRequest, (InputParameter?)kvp.Key, CreateReference(kvp.Key, kvp.Value), kvp.Key.SerializationFormat))
                 .ToList();
 
             var request = BuildRequest(operation, requestParts, null, _library);
             Response[] responses = BuildResponses(operation, _typeFactory, out var responseType);
 
             return new RestClientMethod(
-                operation.Name.ToCleanName(),
-                operation.Summary != null ? BuilderHelpers.EscapeXmlDescription(operation.Summary) : null,
-                BuilderHelpers.EscapeXmlDescription(operation.Description),
+                operation.CleanName,
+                operation.Summary != null ? BuilderHelpers.EscapeXmlDocDescription(operation.Summary) : null,
+                BuilderHelpers.EscapeXmlDocDescription(operation.Description),
                 responseType,
                 request,
                 methodParameters,
@@ -128,11 +128,14 @@ namespace AutoRest.CSharp.Output.Models
         }
 
         private Dictionary<InputParameter, Parameter> GetOperationAllParameters(InputOperation operation)
-        {
-            return operation.Parameters
-                .Where(rp => !IsIgnoredHeaderParameter(rp))
+            => FilterOperationAllParameters(operation.Parameters)
                 .ToDictionary(p => p, parameter => BuildParameter(parameter));
-        }
+
+        public static IEnumerable<InputParameter> FilterOperationAllParameters(IReadOnlyList<InputParameter> parameters)
+            => parameters
+                .Where(rp => !IsIgnoredHeaderParameter(rp))
+                // change the type to constant so that it won't show up in the method signature
+                .Select(p => RequestHeader.IsRepeatabilityRequestHeader(p.NameInRequest) ? p with { Kind = InputOperationParameterKind.Constant } : p);
 
         public static Response[] BuildResponses(InputOperation operation, TypeFactory typeFactory, out CSharpType? responseType)
         {
@@ -315,7 +318,8 @@ namespace AutoRest.CSharp.Output.Models
                         var serialization = SerializationBuilder.Build(
                             bodyMediaType,
                             bodyRequestParameter.Type,
-                            bodyParameterValue.Type);
+                            bodyParameterValue.Type,
+                            null);
 
                         // This method has a flattened body
                         if (bodyRequestParameter.Kind == InputOperationParameterKind.Flattened && library != null)
@@ -351,7 +355,7 @@ namespace AutoRest.CSharp.Output.Models
                 return (ReferenceOrConstant)_parameters[operationParameter.Name];
             }
 
-            if (operationParameter.Kind == InputOperationParameterKind.Constant && parameter.DefaultValue != null)
+            if (operationParameter is { Kind:InputOperationParameterKind.Constant } && parameter.DefaultValue is not null)
             {
                 return (ReferenceOrConstant)parameter.DefaultValue;
             }
@@ -387,7 +391,7 @@ namespace AutoRest.CSharp.Output.Models
             }
 
             CSharpType responseType = TypeFactory.GetOutputType(typeFactory.CreateType(bodyType));
-            ObjectSerialization serialization = SerializationBuilder.Build(response.BodyMediaType, bodyType, responseType);
+            ObjectSerialization serialization = SerializationBuilder.Build(response.BodyMediaType, bodyType, responseType, null);
 
             return new ObjectResponseBody(responseType, serialization);
         }

@@ -102,10 +102,16 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
                 : methodInfo.ReturnType.Equals(typeof(ArmOperation));
         }
 
+        private static bool IsModelFactory(Type type)
+        {
+            return type.IsPublic && type.IsSealed && type.IsAbstract && type.Name.EndsWith("ModelFactory");
+        }
+
         [Test]
         public void ValidateNoParametersNamedParameter()
         {
-            foreach (var type in MyTypes())
+            // we should exclude the model factory class here, because this is validating all the APIs in our clients not to have a parameter name of `parameters`
+            foreach (var type in MyTypes().Where(type => !IsModelFactory(type)))
             {
                 foreach (var method in type.GetMethods())
                 {
@@ -186,8 +192,12 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
         {
             foreach (var resource in FindAllResources())
             {
-                VerifyMethodReturnType(resource, resource, "Get");
                 var resourceData = GetResourceDataByResource(resource);
+                if (resourceData == null)
+                {
+                    continue;
+                }
+                VerifyMethodReturnType(resource, resource, "Get");
                 if (IsTaggable(resourceData, resource))
                 {
                     VerifyMethodReturnType(resource, resource, "AddTag");
@@ -208,7 +218,7 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
                 VerifyMethodReturnType(collection, resource, "Get");
 
                 if (!ListExceptionCollections.Contains(collection))
-                    VerifyMethodReturnType(collection, resource, collection.GetMethods().First(m => m.Name == "GetAll" && !m.GetParameters().Any(p => !p.IsOptional)));
+                    VerifyMethodReturnType(collection, resource, collection.GetMethods().First(m => m.Name == "GetAll" && !m.GetParameters().Any(p => !p.IsOptional && !p.ParameterType.Name.EndsWith("GetAllOptions"))));
 
                 if (collection.GetMethod("CreateOrUpdate") is not null)
                     VerifyMethodReturnType(collection, resource, "CreateOrUpdate");
@@ -391,7 +401,7 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
             foreach (var type in FindAllResources())
             {
                 var resourceData = GetResourceDataByResource(type);
-                if (!IsTaggable(resourceData, type))
+                if (resourceData == null || !IsTaggable(resourceData, type))
                 {
                     continue;
                 }
@@ -427,7 +437,7 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
             foreach (var type in FindAllResources())
             {
                 var resourceData = GetResourceDataByResource(type);
-                if (!IsTaggable(resourceData, type))
+                if (resourceData == null || !IsTaggable(resourceData, type))
                 {
                     continue;
                 }
@@ -448,7 +458,7 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
             foreach (var type in FindAllResources())
             {
                 var resourceData = GetResourceDataByResource(type);
-                if (!IsTaggable(resourceData, type))
+                if (resourceData == null || !IsTaggable(resourceData, type))
                 {
                     continue;
                 }
@@ -474,7 +484,7 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
         [Test]
         public void ValidateResourceGroupExtensions()
         {
-            if (_projectName.Equals("") || _projectName.Equals("ReferenceTypes")) // arm-core is true for ReferenceTypes and it has no ResourceGroupExtension.
+            if (_projectName.Equals("") || _projectName.Equals("MgmtReferenceTypes")) // arm-core is true for ReferenceTypes and it has no ResourceGroupExtension.
             {
                 return;
             }
@@ -484,7 +494,7 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
 
             if (resourceExtensions == null)
             {
-                Assert.IsTrue(resourceCollections.Any(), $"The extension class is not found while there are{resourceCollections.Count()} resource collections");
+                Assert.IsTrue(resourceCollections.Any(), $"The extension class is not found while there are {resourceCollections.Count()} resource collections");
             }
 
             foreach (var type in resourceCollections)
@@ -495,7 +505,7 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
                 {
                     var getCollectionMethods = resourceExtensions.GetMethods()
                         .Where(m => m.Name == $"Get{resourceName.ResourceNameToPlural()}")
-                        .Where(m => ParameterMatch(m.GetParameters(), new[] {typeof(ResourceGroupResource)}));
+                        .Where(m => ParameterMatch(m.GetParameters(), new[] { typeof(ResourceGroupResource) }));
                     Assert.AreEqual(1, getCollectionMethods.Count(), $"Cannot find {resourceExtensions.Name}.Get{resourceName.ResourceNameToPlural()}");
                 }
             }
@@ -620,7 +630,9 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
         {
             // CLR does not have a concept of "static class". CLR will treat static class as both abstract and sealed.
             // therefore using this to find all the static class (which are the extension classes)
-            var extensionClasses = MyTypes().Where(type => type.IsAbstract && type.IsSealed && type.IsPublic);
+            // and we currently have two public static classes now: one of them is the extension class for resource group resource, the other is the model factory
+            // we must exclude the model factory here
+            var extensionClasses = MyTypes().Where(type => type.IsAbstract && type.IsSealed && type.IsPublic && !IsModelFactory(type));
             Assert.LessOrEqual(extensionClasses.Count(), 1);
 
             return extensionClasses.FirstOrDefault();
@@ -629,7 +641,7 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
         [Test]
         public void ValidateSubscriptionResourceExtensionsGetResourceCollection()
         {
-            if (_projectName.Equals("") || _projectName.Equals("ReferenceTypes")) // arm-core is true for ReferenceTypes and it has no SubscriptionExtension.
+            if (_projectName.Equals("") || _projectName.Equals("MgmtReferenceTypes")) // arm-core is true for ReferenceTypes and it has no SubscriptionExtension.
             {
                 return;
             }
@@ -664,7 +676,7 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
         [Test]
         public void ValidateSubscriptionResourceExtensionsListResource()
         {
-            if (_projectName.Equals("") || _projectName.Equals("ReferenceTypes")) // arm-core is true for ReferenceTypes and it has no SubscriptionExtension.
+            if (_projectName.Equals("") || _projectName.Equals("MgmtReferenceTypes")) // arm-core is true for ReferenceTypes and it has no SubscriptionExtension.
             {
                 return;
             }
@@ -711,6 +723,8 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
                 var operationTypeProperty = operation.GetField("ResourceType");
                 ResourceType operationType = (ResourceType)operationTypeProperty.GetValue(operation);
                 ResourceIdentifier resourceIdentifier = GetSampleResourceId(operation);
+                if (resourceIdentifier == null)
+                    continue;
                 foreach (var collection in FindAllCollections())
                 {
                     if (IsParent(collection, resourceIdentifier))
@@ -755,6 +769,9 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
         private ResourceIdentifier GetSampleResourceId(Type operation)
         {
             var createIdMethod = operation.GetMethod("CreateResourceIdentifier", BindingFlags.Static | BindingFlags.Public);
+            // partial resources only have an internal version of this
+            if (createIdMethod == null)
+                return null;
             List<object> keys = new List<object>();
             foreach (var p in createIdMethod.GetParameters())
             {
@@ -833,8 +850,8 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
                 bool matches = false;
                 foreach (var candidate in candidates)
                 {
-                    var parameters = candidate.GetParameters().Skip(1).ToArray(); // skip the first since it is the instance we are extending on
-                    matches |= ValidateParameters(expectedParameters, parameters);
+                    var parameters = candidate.GetParameters();
+                    matches |= ValidateExtensionMethod(expectedParameters, candidate);
                 }
                 Assert.IsTrue(matches, $"Method {method.Name} is defined in extension client class {method.DeclaringType} but not found in extension class with all the same parameters");
             }
@@ -843,6 +860,24 @@ namespace AutoRest.TestServer.Tests.Mgmt.TestProjects
         private static IEnumerable<MethodInfo> GetMethodDefinedByMyself(Type type)
         {
             return type.GetMethods(BindingFlags.Public | BindingFlags.Instance).Where(m => m.DeclaringType == type);
+        }
+
+        private static bool ValidateExtensionMethod(ParameterInfo[] expected, MethodInfo extensionMethod)
+        {
+            var parameters = extensionMethod.GetParameters();
+            // try to skip the first and see if this matches
+            // skip the first since it is the instance we are extending on
+            var result = ValidateParameters(expected, parameters.Skip(1).ToArray());
+            if (result)
+                return result;
+            // if not match, we do some more testing
+            // for the scope resource, we usually have this: public XXXCollection GetXXXs(this ArmClient client, ResourceIdentifier scope, ...) to replace the extension on ArmResource
+            if (parameters.Length >= 2 && parameters[0].ParameterType == typeof(ArmClient) && parameters[1].ParameterType == typeof(ResourceIdentifier))
+            {
+                return ValidateParameters(expected, parameters.Skip(2).ToArray());
+            }
+
+            return false;
         }
 
         private static bool ValidateParameters(ParameterInfo[] expected, ParameterInfo[] parameters)

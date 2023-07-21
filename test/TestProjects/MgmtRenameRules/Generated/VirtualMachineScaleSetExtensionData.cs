@@ -12,7 +12,11 @@ using MgmtRenameRules.Models;
 
 namespace MgmtRenameRules
 {
-    /// <summary> A class representing the VirtualMachineScaleSetExtension data model. </summary>
+    /// <summary>
+    /// A class representing the VirtualMachineScaleSetExtension data model.
+    /// Describes a Virtual Machine Scale Set Extension.
+    /// Serialized Name: VirtualMachineScaleSetExtension
+    /// </summary>
     public partial class VirtualMachineScaleSetExtensionData : SubResourceReadOnly
     {
         /// <summary> Initializes a new instance of VirtualMachineScaleSetExtensionData. </summary>
@@ -43,7 +47,7 @@ namespace MgmtRenameRules
         /// Serialized Name: VirtualMachineScaleSetExtension.properties.publisher
         /// </param>
         /// <param name="typePropertiesType">
-        /// Specifies the type of the extension; an example is &quot;CustomScriptExtension&quot;.
+        /// Specifies the type of the extension; an example is "CustomScriptExtension".
         /// Serialized Name: VirtualMachineScaleSetExtension.properties.type
         /// </param>
         /// <param name="typeHandlerVersion">
@@ -111,7 +115,7 @@ namespace MgmtRenameRules
         /// </summary>
         public string Publisher { get; set; }
         /// <summary>
-        /// Specifies the type of the extension; an example is &quot;CustomScriptExtension&quot;.
+        /// Specifies the type of the extension; an example is "CustomScriptExtension".
         /// Serialized Name: VirtualMachineScaleSetExtension.properties.type
         /// </summary>
         public string TypePropertiesType { get; set; }

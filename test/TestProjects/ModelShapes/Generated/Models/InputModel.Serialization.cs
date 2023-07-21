@@ -15,18 +15,18 @@ namespace ModelShapes.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            writer.WritePropertyName("RequiredString");
+            writer.WritePropertyName("RequiredString"u8);
             writer.WriteStringValue(RequiredString);
-            writer.WritePropertyName("RequiredInt");
+            writer.WritePropertyName("RequiredInt"u8);
             writer.WriteNumberValue(RequiredInt);
-            writer.WritePropertyName("RequiredStringList");
+            writer.WritePropertyName("RequiredStringList"u8);
             writer.WriteStartArray();
             foreach (var item in RequiredStringList)
             {
                 writer.WriteStringValue(item);
             }
             writer.WriteEndArray();
-            writer.WritePropertyName("RequiredIntList");
+            writer.WritePropertyName("RequiredIntList"u8);
             writer.WriteStartArray();
             foreach (var item in RequiredIntList)
             {
@@ -35,17 +35,17 @@ namespace ModelShapes.Models
             writer.WriteEndArray();
             if (Optional.IsDefined(NonRequiredString))
             {
-                writer.WritePropertyName("NonRequiredString");
+                writer.WritePropertyName("NonRequiredString"u8);
                 writer.WriteStringValue(NonRequiredString);
             }
             if (Optional.IsDefined(NonRequiredInt))
             {
-                writer.WritePropertyName("NonRequiredInt");
+                writer.WritePropertyName("NonRequiredInt"u8);
                 writer.WriteNumberValue(NonRequiredInt.Value);
             }
             if (Optional.IsCollectionDefined(NonRequiredStringList))
             {
-                writer.WritePropertyName("NonRequiredStringList");
+                writer.WritePropertyName("NonRequiredStringList"u8);
                 writer.WriteStartArray();
                 foreach (var item in NonRequiredStringList)
                 {
@@ -55,7 +55,7 @@ namespace ModelShapes.Models
             }
             if (Optional.IsCollectionDefined(NonRequiredIntList))
             {
-                writer.WritePropertyName("NonRequiredIntList");
+                writer.WritePropertyName("NonRequiredIntList"u8);
                 writer.WriteStartArray();
                 foreach (var item in NonRequiredIntList)
                 {
@@ -65,7 +65,7 @@ namespace ModelShapes.Models
             }
             if (RequiredNullableString != null)
             {
-                writer.WritePropertyName("RequiredNullableString");
+                writer.WritePropertyName("RequiredNullableString"u8);
                 writer.WriteStringValue(RequiredNullableString);
             }
             else
@@ -74,16 +74,16 @@ namespace ModelShapes.Models
             }
             if (RequiredNullableInt != null)
             {
-                writer.WritePropertyName("RequiredNullableInt");
+                writer.WritePropertyName("RequiredNullableInt"u8);
                 writer.WriteNumberValue(RequiredNullableInt.Value);
             }
             else
             {
                 writer.WriteNull("RequiredNullableInt");
             }
-            if (RequiredNullableStringList != null)
+            if (RequiredNullableStringList != null && Optional.IsCollectionDefined(RequiredNullableStringList))
             {
-                writer.WritePropertyName("RequiredNullableStringList");
+                writer.WritePropertyName("RequiredNullableStringList"u8);
                 writer.WriteStartArray();
                 foreach (var item in RequiredNullableStringList)
                 {
@@ -95,9 +95,9 @@ namespace ModelShapes.Models
             {
                 writer.WriteNull("RequiredNullableStringList");
             }
-            if (RequiredNullableIntList != null)
+            if (RequiredNullableIntList != null && Optional.IsCollectionDefined(RequiredNullableIntList))
             {
-                writer.WritePropertyName("RequiredNullableIntList");
+                writer.WritePropertyName("RequiredNullableIntList"u8);
                 writer.WriteStartArray();
                 foreach (var item in RequiredNullableIntList)
                 {
@@ -113,7 +113,7 @@ namespace ModelShapes.Models
             {
                 if (NonRequiredNullableString != null)
                 {
-                    writer.WritePropertyName("NonRequiredNullableString");
+                    writer.WritePropertyName("NonRequiredNullableString"u8);
                     writer.WriteStringValue(NonRequiredNullableString);
                 }
                 else
@@ -125,7 +125,7 @@ namespace ModelShapes.Models
             {
                 if (NonRequiredNullableInt != null)
                 {
-                    writer.WritePropertyName("NonRequiredNullableInt");
+                    writer.WritePropertyName("NonRequiredNullableInt"u8);
                     writer.WriteNumberValue(NonRequiredNullableInt.Value);
                 }
                 else
@@ -137,7 +137,7 @@ namespace ModelShapes.Models
             {
                 if (NonRequiredNullableStringList != null)
                 {
-                    writer.WritePropertyName("NonRequiredNullableStringList");
+                    writer.WritePropertyName("NonRequiredNullableStringList"u8);
                     writer.WriteStartArray();
                     foreach (var item in NonRequiredNullableStringList)
                     {
@@ -154,7 +154,7 @@ namespace ModelShapes.Models
             {
                 if (NonRequiredNullableIntList != null)
                 {
-                    writer.WritePropertyName("NonRequiredNullableIntList");
+                    writer.WritePropertyName("NonRequiredNullableIntList"u8);
                     writer.WriteStartArray();
                     foreach (var item in NonRequiredNullableIntList)
                     {

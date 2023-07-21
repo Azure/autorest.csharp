@@ -124,6 +124,17 @@ Priority = 100,
         }
 
         [RecordedTest]
+        public async Task CreateOrUpdate_CreateFirewallPolicyRuleCollectionGroupWithAllDefaultValues()
+        {
+            // Example: Create FirewallPolicyRuleCollectionGroup With All Default Values
+
+            ResourceIdentifier firewallPolicyResourceId = FirewallPolicyResource.CreateResourceIdentifier("00000000-0000-0000-0000-000000000000", "rg1", "firewallPolicy");
+            FirewallPolicyResource firewallPolicy = GetArmClient().GetFirewallPolicyResource(firewallPolicyResourceId);
+            var collection = firewallPolicy.GetFirewallPolicyRuleCollectionGroups();
+            await collection.CreateOrUpdateAsync(WaitUntil.Completed, "ruleCollectionGroup1", new FirewallPolicyRuleCollectionGroupData());
+        }
+
+        [RecordedTest]
         public async Task CreateOrUpdate_CreateFirewallPolicyRuleCollectionGroupWithIpGroups()
         {
             // Example: Create FirewallPolicyRuleCollectionGroup With IpGroups

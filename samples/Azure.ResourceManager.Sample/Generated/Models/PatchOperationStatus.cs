@@ -11,7 +11,7 @@ using System.ComponentModel;
 namespace Azure.ResourceManager.Sample.Models
 {
     /// <summary>
-    /// The overall success or failure status of the operation. It remains &quot;InProgress&quot; until the operation completes. At that point it will become &quot;Failed&quot;, &quot;Succeeded&quot;, or &quot;CompletedWithWarnings.&quot;
+    /// The overall success or failure status of the operation. It remains "InProgress" until the operation completes. At that point it will become "Failed", "Succeeded", or "CompletedWithWarnings."
     /// Serialized Name: PatchOperationStatus
     /// </summary>
     public readonly partial struct PatchOperationStatus : IEquatable<PatchOperationStatus>

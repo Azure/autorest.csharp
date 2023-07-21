@@ -9,10 +9,9 @@ using System;
 
 namespace TypeSchemaMapping.Models
 {
-    /// <summary> Model factory for read-only models. </summary>
+    /// <summary> Model factory for models. </summary>
     internal static partial class MainModelFactory
     {
-
         /// <summary> Initializes a new instance of ModelWithGuidProperty. </summary>
         /// <param name="modelProperty"> . </param>
         /// <returns> A new <see cref="Models.ModelWithGuidProperty"/> instance for mocking. </returns>

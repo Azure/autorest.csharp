@@ -1,20 +1,23 @@
-param($AutorestCSharpVersion, $CadlEmitterVersion, $SdkRepoRoot)
+param(
+    [Parameter(Mandatory)]
+    [string]$AutorestCSharpVersion,
 
-$SdkRepoRoot = Resolve-Path $SdkRepoRoot
+    [Parameter(Mandatory)]
+    [string]$TypeSpecEmitterVersion,
 
-Write-Host "Running Autorest.CSharp($AutorestCSharpVersion) and Cadl Emitter($CadlEmitterVersion) under $SdkRepoRoot"
+    [Parameter(Mandatory)]
+    [string]$SdkRepoRoot,
+    
+    [string[]]$ServiceDirectoryFilters = @("*"),
 
-$PackagesProps = "$SdkRepoRoot\eng\Packages.Data.props"
-(Get-Content -Raw $PackagesProps) -replace`
-    '<PackageReference Update="Microsoft.Azure.AutoRest.CSharp" Version=".*?" />',
-    "<PackageReference Update=`"Microsoft.Azure.AutoRest.CSharp`" Version=`"$AutorestCSharpVersion`" PrivateAssets=`"All`" />" | `
-    Set-Content $PackagesProps -NoNewline
+    [string]$ProjectListOverrideFile,
 
-$CadlEmitterProps = "$SdkRepoRoot\eng\csharp-emitter-package.json"
-(Get-Content -Raw $CadlEmitterProps) -replace`
-    '"@azure-tools/cadl-csharp": ".*?"',
-    "`"@azure-tools/cadl-csharp`": `"$CadlEmitterVersion`"" | `
-    Set-Content $CadlEmitterProps -NoNewline
+    [switch]$ShowSummary,
 
-dotnet msbuild /restore /t:GenerateCode "$SdkRepoRoot\eng\service.proj"
-dotnet msbuild /restore /t:GenerateTests "$SdkRepoRoot\eng\service.proj"
+    [bool]$UseInternalFeed = $false)
+
+$ErrorActionPreference = 'Stop'
+
+Invoke-Expression "$PSScriptRoot\UpdateGeneratorMetadata.ps1 -AutorestCSharpVersion $AutorestCSharpVersion -TypeSpecEmitterVersion $TypeSpecEmitterVersion -SdkRepoRoot $SdkRepoRoot -UseInternalFeed `$$UseInternalFeed"
+
+Invoke-Expression "$PSScriptRoot\UpdateAzureSdkCodes.ps1 -SdkRepoRoot $SdkRepoRoot -ServiceDirectoryFilters $($ServiceDirectoryFilters -Join ',') -ProjectListOverrideFile $ProjectListOverrideFile $(if ($ShowSummary) {'-ShowSummary'})"

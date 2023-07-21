@@ -27,7 +27,7 @@ namespace azure_special_properties
         /// <summary> Initializes a new instance of SubscriptionInCredentialsRestClient. </summary>
         /// <param name="clientDiagnostics"> The handler for diagnostic messaging in the client. </param>
         /// <param name="pipeline"> The HTTP pipeline for sending and receiving REST requests and responses. </param>
-        /// <param name="subscriptionId"> The subscription id, which appears in the path, always modeled in credentials. The value is always &apos;1234-5678-9012-3456&apos;. </param>
+        /// <param name="subscriptionId"> The subscription id, which appears in the path, always modeled in credentials. The value is always '1234-5678-9012-3456'. </param>
         /// <param name="endpoint"> server parameter. </param>
         /// <param name="apiVersion"> Api Version. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="clientDiagnostics"/>, <paramref name="pipeline"/>, <paramref name="subscriptionId"/> or <paramref name="apiVersion"/> is null. </exception>
@@ -55,7 +55,7 @@ namespace azure_special_properties
             return message;
         }
 
-        /// <summary> POST method with subscriptionId modeled in credentials.  Set the credential subscriptionId to &apos;1234-5678-9012-3456&apos; to succeed. </summary>
+        /// <summary> POST method with subscriptionId modeled in credentials.  Set the credential subscriptionId to '1234-5678-9012-3456' to succeed. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async Task<Response> PostMethodGlobalValidAsync(CancellationToken cancellationToken = default)
         {
@@ -66,11 +66,11 @@ namespace azure_special_properties
                 case 200:
                     return message.Response;
                 default:
-                    throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    throw new RequestFailedException(message.Response);
             }
         }
 
-        /// <summary> POST method with subscriptionId modeled in credentials.  Set the credential subscriptionId to &apos;1234-5678-9012-3456&apos; to succeed. </summary>
+        /// <summary> POST method with subscriptionId modeled in credentials.  Set the credential subscriptionId to '1234-5678-9012-3456' to succeed. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response PostMethodGlobalValid(CancellationToken cancellationToken = default)
         {
@@ -81,7 +81,7 @@ namespace azure_special_properties
                 case 200:
                     return message.Response;
                 default:
-                    throw ClientDiagnostics.CreateRequestFailedException(message.Response);
+                    throw new RequestFailedException(message.Response);
             }
         }
 
@@ -110,7 +110,7 @@ namespace azure_special_properties
                 case 200:
                     return message.Response;
                 default:
-                    throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    throw new RequestFailedException(message.Response);
             }
         }
 
@@ -125,7 +125,7 @@ namespace azure_special_properties
                 case 200:
                     return message.Response;
                 default:
-                    throw ClientDiagnostics.CreateRequestFailedException(message.Response);
+                    throw new RequestFailedException(message.Response);
             }
         }
 
@@ -144,7 +144,7 @@ namespace azure_special_properties
             return message;
         }
 
-        /// <summary> POST method with subscriptionId modeled in credentials.  Set the credential subscriptionId to &apos;1234-5678-9012-3456&apos; to succeed. </summary>
+        /// <summary> POST method with subscriptionId modeled in credentials.  Set the credential subscriptionId to '1234-5678-9012-3456' to succeed. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async Task<Response> PostMethodGlobalNotProvidedValidAsync(CancellationToken cancellationToken = default)
         {
@@ -155,11 +155,11 @@ namespace azure_special_properties
                 case 200:
                     return message.Response;
                 default:
-                    throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    throw new RequestFailedException(message.Response);
             }
         }
 
-        /// <summary> POST method with subscriptionId modeled in credentials.  Set the credential subscriptionId to &apos;1234-5678-9012-3456&apos; to succeed. </summary>
+        /// <summary> POST method with subscriptionId modeled in credentials.  Set the credential subscriptionId to '1234-5678-9012-3456' to succeed. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response PostMethodGlobalNotProvidedValid(CancellationToken cancellationToken = default)
         {
@@ -170,7 +170,7 @@ namespace azure_special_properties
                 case 200:
                     return message.Response;
                 default:
-                    throw ClientDiagnostics.CreateRequestFailedException(message.Response);
+                    throw new RequestFailedException(message.Response);
             }
         }
 
@@ -188,7 +188,7 @@ namespace azure_special_properties
             return message;
         }
 
-        /// <summary> POST method with subscriptionId modeled in credentials.  Set the credential subscriptionId to &apos;1234-5678-9012-3456&apos; to succeed. </summary>
+        /// <summary> POST method with subscriptionId modeled in credentials.  Set the credential subscriptionId to '1234-5678-9012-3456' to succeed. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async Task<Response> PostPathGlobalValidAsync(CancellationToken cancellationToken = default)
         {
@@ -199,11 +199,11 @@ namespace azure_special_properties
                 case 200:
                     return message.Response;
                 default:
-                    throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    throw new RequestFailedException(message.Response);
             }
         }
 
-        /// <summary> POST method with subscriptionId modeled in credentials.  Set the credential subscriptionId to &apos;1234-5678-9012-3456&apos; to succeed. </summary>
+        /// <summary> POST method with subscriptionId modeled in credentials.  Set the credential subscriptionId to '1234-5678-9012-3456' to succeed. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response PostPathGlobalValid(CancellationToken cancellationToken = default)
         {
@@ -214,7 +214,7 @@ namespace azure_special_properties
                 case 200:
                     return message.Response;
                 default:
-                    throw ClientDiagnostics.CreateRequestFailedException(message.Response);
+                    throw new RequestFailedException(message.Response);
             }
         }
 
@@ -232,7 +232,7 @@ namespace azure_special_properties
             return message;
         }
 
-        /// <summary> POST method with subscriptionId modeled in credentials.  Set the credential subscriptionId to &apos;1234-5678-9012-3456&apos; to succeed. </summary>
+        /// <summary> POST method with subscriptionId modeled in credentials.  Set the credential subscriptionId to '1234-5678-9012-3456' to succeed. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async Task<Response> PostSwaggerGlobalValidAsync(CancellationToken cancellationToken = default)
         {
@@ -243,11 +243,11 @@ namespace azure_special_properties
                 case 200:
                     return message.Response;
                 default:
-                    throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    throw new RequestFailedException(message.Response);
             }
         }
 
-        /// <summary> POST method with subscriptionId modeled in credentials.  Set the credential subscriptionId to &apos;1234-5678-9012-3456&apos; to succeed. </summary>
+        /// <summary> POST method with subscriptionId modeled in credentials.  Set the credential subscriptionId to '1234-5678-9012-3456' to succeed. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response PostSwaggerGlobalValid(CancellationToken cancellationToken = default)
         {
@@ -258,7 +258,7 @@ namespace azure_special_properties
                 case 200:
                     return message.Response;
                 default:
-                    throw ClientDiagnostics.CreateRequestFailedException(message.Response);
+                    throw new RequestFailedException(message.Response);
             }
         }
     }

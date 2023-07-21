@@ -17,31 +17,35 @@ namespace multiple_inheritance.Models
             writer.WriteStartObject();
             if (Optional.IsDefined(EatsMiceYet))
             {
-                writer.WritePropertyName("eatsMiceYet");
+                writer.WritePropertyName("eatsMiceYet"u8);
                 writer.WriteBooleanValue(EatsMiceYet.Value);
             }
             if (Optional.IsDefined(LikesMilk))
             {
-                writer.WritePropertyName("likesMilk");
+                writer.WritePropertyName("likesMilk"u8);
                 writer.WriteBooleanValue(LikesMilk.Value);
             }
             if (Optional.IsDefined(Meows))
             {
-                writer.WritePropertyName("meows");
+                writer.WritePropertyName("meows"u8);
                 writer.WriteBooleanValue(Meows.Value);
             }
             if (Optional.IsDefined(Hisses))
             {
-                writer.WritePropertyName("hisses");
+                writer.WritePropertyName("hisses"u8);
                 writer.WriteBooleanValue(Hisses.Value);
             }
-            writer.WritePropertyName("name");
+            writer.WritePropertyName("name"u8);
             writer.WriteStringValue(Name);
             writer.WriteEndObject();
         }
 
         internal static Kitten DeserializeKitten(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<bool> eatsMiceYet = default;
             Optional<bool> likesMilk = default;
             Optional<bool> meows = default;
@@ -49,47 +53,43 @@ namespace multiple_inheritance.Models
             string name = default;
             foreach (var property in element.EnumerateObject())
             {
-                if (property.NameEquals("eatsMiceYet"))
+                if (property.NameEquals("eatsMiceYet"u8))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     eatsMiceYet = property.Value.GetBoolean();
                     continue;
                 }
-                if (property.NameEquals("likesMilk"))
+                if (property.NameEquals("likesMilk"u8))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     likesMilk = property.Value.GetBoolean();
                     continue;
                 }
-                if (property.NameEquals("meows"))
+                if (property.NameEquals("meows"u8))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     meows = property.Value.GetBoolean();
                     continue;
                 }
-                if (property.NameEquals("hisses"))
+                if (property.NameEquals("hisses"u8))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     hisses = property.Value.GetBoolean();
                     continue;
                 }
-                if (property.NameEquals("name"))
+                if (property.NameEquals("name"u8))
                 {
                     name = property.Value.GetString();
                     continue;

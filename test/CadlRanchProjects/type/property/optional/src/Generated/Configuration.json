@@ -1,0 +1,21 @@
+{
+  "output-folder": ".",
+  "namespace": "_Type.Property.Optional",
+  "library-name": "_Type.Property.Optional",
+  "shared-source-folders": [
+    "../../../../../../../artifacts/bin/AutoRest.CSharp/Debug/net6.0/Generator.Shared",
+    "../../../../../../../artifacts/bin/AutoRest.CSharp/Debug/net6.0/Azure.Core.Shared"
+  ],
+  "use-overloads-between-protocol-and-convenience": true,
+  "models-to-treat-empty-string-as-null": [
+    "DurationProperty",
+    "DatetimeProperty"
+  ],
+  "intrinsic-types-to-treat-empty-string-as-null": [
+    "TimeSpan",
+    "Uri",
+    "Guid",
+    "ResourceIdentifier",
+    "DateTimeOffset"
+  ]
+}

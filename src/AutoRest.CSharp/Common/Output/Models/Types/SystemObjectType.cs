@@ -15,6 +15,7 @@ using AutoRest.CSharp.Input.Source;
 using AutoRest.CSharp.Mgmt.Decorator;
 using AutoRest.CSharp.Output.Models.Requests;
 using AutoRest.CSharp.Output.Models.Shared;
+using AutoRest.CSharp.Utilities;
 using Azure.Core;
 using Azure.ResourceManager.Models;
 using static AutoRest.CSharp.Output.Models.MethodSignatureModifiers;
@@ -93,19 +94,6 @@ namespace AutoRest.CSharp.Output.Models.Types
             _ => null,
         };
 
-        internal IEnumerable<PropertyInfo> GetAllProperties()
-        {
-            var type = _type;
-            while (type != null)
-            {
-                foreach (var property in type.GetProperties())
-                {
-                    yield return property;
-                }
-                type = type.BaseType;
-            }
-        }
-
         private static string GetNameWithoutGeneric(Type t)
         {
             if (!t.IsGenericType)
@@ -122,11 +110,15 @@ namespace AutoRest.CSharp.Output.Models.Types
                 .Select(param => new Parameter(ToCamelCase(param.Name!), $"The {param.Name}", new CSharpType(param.ParameterType), null, ValidationType.None, null))
                 .ToArray();
 
+            // we should only add initializers when there is a corresponding parameter
             List<ObjectPropertyInitializer> initializers = new List<ObjectPropertyInitializer>();
             foreach (var autoRestProperty in Properties)
             {
-                Reference reference = new Reference(ToCamelCase(autoRestProperty.Declaration.Name), autoRestProperty.ValueType);
-                initializers.Add(new ObjectPropertyInitializer(autoRestProperty, reference));
+                if (parameters.Any(parameter => parameter.Name == autoRestProperty.Declaration.Name.ToVariableName()))
+                {
+                    Reference reference = new Reference(ToCamelCase(autoRestProperty.Declaration.Name), autoRestProperty.ValueType);
+                    initializers.Add(new ObjectPropertyInitializer(autoRestProperty, reference));
+                }
             }
 
             var modifiers = ctor.IsFamily ? Protected : Public;
@@ -139,7 +131,10 @@ namespace AutoRest.CSharp.Output.Models.Types
 
         protected override IEnumerable<ObjectTypeProperty> BuildProperties()
         {
-            foreach (var property in _type.GetProperties().Where(p => p.DeclaringType == _type))
+            var internalPropertiesToInclude = new List<PropertyInfo>();
+            PropertyMatchDetection.AddInternalIncludes(_type, internalPropertiesToInclude);
+
+            foreach (var property in _type.GetProperties().Where(p => p.DeclaringType == _type).Concat(internalPropertiesToInclude))
             {
                 var getter = property.GetGetMethod();
                 var setter = property.GetSetMethod();

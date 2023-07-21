@@ -78,7 +78,7 @@ namespace CognitiveSearch
                         return Response.FromValue(value, message.Response);
                     }
                 default:
-                    throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    throw new RequestFailedException(message.Response);
             }
         }
 
@@ -99,7 +99,7 @@ namespace CognitiveSearch
                         return Response.FromValue(value, message.Response);
                     }
                 default:
-                    throw ClientDiagnostics.CreateRequestFailedException(message.Response);
+                    throw new RequestFailedException(message.Response);
             }
         }
 
@@ -122,15 +122,21 @@ namespace CognitiveSearch
             {
                 uri.AppendQuery("$count", searchOptions.IncludeTotalResultCount.Value, true);
             }
-            foreach (var param in searchOptions.Facets)
+            if (searchOptions?.Facets != null && Optional.IsCollectionDefined(searchOptions?.Facets))
             {
-                uri.AppendQuery("facet", param, true);
+                foreach (var param in searchOptions.Facets)
+                {
+                    uri.AppendQuery("facet", param, true);
+                }
             }
             if (searchOptions?.Filter != null)
             {
                 uri.AppendQuery("$filter", searchOptions.Filter, true);
             }
-            uri.AppendQueryDelimited("highlight", searchOptions.HighlightFields, ",", true);
+            if (searchOptions?.HighlightFields != null && Optional.IsCollectionDefined(searchOptions?.HighlightFields))
+            {
+                uri.AppendQueryDelimited("highlight", searchOptions.HighlightFields, ",", true);
+            }
             if (searchOptions?.HighlightPostTag != null)
             {
                 uri.AppendQuery("highlightPostTag", searchOptions.HighlightPostTag, true);
@@ -143,25 +149,37 @@ namespace CognitiveSearch
             {
                 uri.AppendQuery("minimumCoverage", searchOptions.MinimumCoverage.Value, true);
             }
-            uri.AppendQueryDelimited("$orderby", searchOptions.OrderBy, ",", true);
+            if (searchOptions?.OrderBy != null && Optional.IsCollectionDefined(searchOptions?.OrderBy))
+            {
+                uri.AppendQueryDelimited("$orderby", searchOptions.OrderBy, ",", true);
+            }
             if (searchOptions?.QueryType != null)
             {
                 uri.AppendQuery("queryType", searchOptions.QueryType.Value.ToSerialString(), true);
             }
-            foreach (var param0 in searchOptions.ScoringParameters)
+            if (searchOptions?.ScoringParameters != null && Optional.IsCollectionDefined(searchOptions?.ScoringParameters))
             {
-                uri.AppendQuery("scoringParameter", param0, true);
+                foreach (var param in searchOptions.ScoringParameters)
+                {
+                    uri.AppendQuery("scoringParameter", param, true);
+                }
             }
             if (searchOptions?.ScoringProfile != null)
             {
                 uri.AppendQuery("scoringProfile", searchOptions.ScoringProfile, true);
             }
-            uri.AppendQueryDelimited("searchFields", searchOptions.SearchFields, ",", true);
+            if (searchOptions?.SearchFields != null && Optional.IsCollectionDefined(searchOptions?.SearchFields))
+            {
+                uri.AppendQueryDelimited("searchFields", searchOptions.SearchFields, ",", true);
+            }
             if (searchOptions?.SearchMode != null)
             {
                 uri.AppendQuery("searchMode", searchOptions.SearchMode.Value.ToSerialString(), true);
             }
-            uri.AppendQueryDelimited("$select", searchOptions.Select, ",", true);
+            if (searchOptions?.Select != null && Optional.IsCollectionDefined(searchOptions?.Select))
+            {
+                uri.AppendQueryDelimited("$select", searchOptions.Select, ",", true);
+            }
             if (searchOptions?.Skip != null)
             {
                 uri.AppendQuery("$skip", searchOptions.Skip.Value, true);
@@ -177,7 +195,7 @@ namespace CognitiveSearch
         }
 
         /// <summary> Searches for documents in the index. </summary>
-        /// <param name="searchText"> A full-text search query expression; Use &quot;*&quot; or omit this parameter to match all documents. </param>
+        /// <param name="searchText"> A full-text search query expression; Use "*" or omit this parameter to match all documents. </param>
         /// <param name="searchOptions"> Parameter group. </param>
         /// <param name="requestOptions"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -195,12 +213,12 @@ namespace CognitiveSearch
                         return Response.FromValue(value, message.Response);
                     }
                 default:
-                    throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    throw new RequestFailedException(message.Response);
             }
         }
 
         /// <summary> Searches for documents in the index. </summary>
-        /// <param name="searchText"> A full-text search query expression; Use &quot;*&quot; or omit this parameter to match all documents. </param>
+        /// <param name="searchText"> A full-text search query expression; Use "*" or omit this parameter to match all documents. </param>
         /// <param name="searchOptions"> Parameter group. </param>
         /// <param name="requestOptions"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -218,7 +236,7 @@ namespace CognitiveSearch
                         return Response.FromValue(value, message.Response);
                     }
                 default:
-                    throw ClientDiagnostics.CreateRequestFailedException(message.Response);
+                    throw new RequestFailedException(message.Response);
             }
         }
 
@@ -267,7 +285,7 @@ namespace CognitiveSearch
                         return Response.FromValue(value, message.Response);
                     }
                 default:
-                    throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    throw new RequestFailedException(message.Response);
             }
         }
 
@@ -295,7 +313,7 @@ namespace CognitiveSearch
                         return Response.FromValue(value, message.Response);
                     }
                 default:
-                    throw ClientDiagnostics.CreateRequestFailedException(message.Response);
+                    throw new RequestFailedException(message.Response);
             }
         }
 
@@ -312,7 +330,7 @@ namespace CognitiveSearch
             uri.AppendPath("/docs('", false);
             uri.AppendPath(key, true);
             uri.AppendPath("')", false);
-            if (selectedFields != null)
+            if (selectedFields != null && Optional.IsCollectionDefined(selectedFields))
             {
                 uri.AppendQueryDelimited("$select", selectedFields, ",", true);
             }
@@ -347,7 +365,7 @@ namespace CognitiveSearch
                         return Response.FromValue(value, message.Response);
                     }
                 default:
-                    throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    throw new RequestFailedException(message.Response);
             }
         }
 
@@ -376,7 +394,7 @@ namespace CognitiveSearch
                         return Response.FromValue(value, message.Response);
                     }
                 default:
-                    throw ClientDiagnostics.CreateRequestFailedException(message.Response);
+                    throw new RequestFailedException(message.Response);
             }
         }
 
@@ -413,9 +431,18 @@ namespace CognitiveSearch
             {
                 uri.AppendQuery("minimumCoverage", suggestOptions.MinimumCoverage.Value, true);
             }
-            uri.AppendQueryDelimited("$orderby", suggestOptions.OrderBy, ",", true);
-            uri.AppendQueryDelimited("searchFields", suggestOptions.SearchFields, ",", true);
-            uri.AppendQueryDelimited("$select", suggestOptions.Select, ",", true);
+            if (suggestOptions?.OrderBy != null && Optional.IsCollectionDefined(suggestOptions?.OrderBy))
+            {
+                uri.AppendQueryDelimited("$orderby", suggestOptions.OrderBy, ",", true);
+            }
+            if (suggestOptions?.SearchFields != null && Optional.IsCollectionDefined(suggestOptions?.SearchFields))
+            {
+                uri.AppendQueryDelimited("searchFields", suggestOptions.SearchFields, ",", true);
+            }
+            if (suggestOptions?.Select != null && Optional.IsCollectionDefined(suggestOptions?.Select))
+            {
+                uri.AppendQueryDelimited("$select", suggestOptions.Select, ",", true);
+            }
             if (suggestOptions?.Top != null)
             {
                 uri.AppendQuery("$top", suggestOptions.Top.Value, true);
@@ -428,7 +455,7 @@ namespace CognitiveSearch
 
         /// <summary> Suggests documents in the index that match the given partial query text. </summary>
         /// <param name="searchText"> The search text to use to suggest documents. Must be at least 1 character, and no more than 100 characters. </param>
-        /// <param name="suggesterName"> The name of the suggester as specified in the suggesters collection that&apos;s part of the index definition. </param>
+        /// <param name="suggesterName"> The name of the suggester as specified in the suggesters collection that's part of the index definition. </param>
         /// <param name="suggestOptions"> Parameter group. </param>
         /// <param name="requestOptions"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -456,13 +483,13 @@ namespace CognitiveSearch
                         return Response.FromValue(value, message.Response);
                     }
                 default:
-                    throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    throw new RequestFailedException(message.Response);
             }
         }
 
         /// <summary> Suggests documents in the index that match the given partial query text. </summary>
         /// <param name="searchText"> The search text to use to suggest documents. Must be at least 1 character, and no more than 100 characters. </param>
-        /// <param name="suggesterName"> The name of the suggester as specified in the suggesters collection that&apos;s part of the index definition. </param>
+        /// <param name="suggesterName"> The name of the suggester as specified in the suggesters collection that's part of the index definition. </param>
         /// <param name="suggestOptions"> Parameter group. </param>
         /// <param name="requestOptions"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -490,7 +517,7 @@ namespace CognitiveSearch
                         return Response.FromValue(value, message.Response);
                     }
                 default:
-                    throw ClientDiagnostics.CreateRequestFailedException(message.Response);
+                    throw new RequestFailedException(message.Response);
             }
         }
 
@@ -539,7 +566,7 @@ namespace CognitiveSearch
                         return Response.FromValue(value, message.Response);
                     }
                 default:
-                    throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    throw new RequestFailedException(message.Response);
             }
         }
 
@@ -567,7 +594,7 @@ namespace CognitiveSearch
                         return Response.FromValue(value, message.Response);
                     }
                 default:
-                    throw ClientDiagnostics.CreateRequestFailedException(message.Response);
+                    throw new RequestFailedException(message.Response);
             }
         }
 
@@ -617,7 +644,7 @@ namespace CognitiveSearch
                         return Response.FromValue(value, message.Response);
                     }
                 default:
-                    throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    throw new RequestFailedException(message.Response);
             }
         }
 
@@ -646,7 +673,7 @@ namespace CognitiveSearch
                         return Response.FromValue(value, message.Response);
                     }
                 default:
-                    throw ClientDiagnostics.CreateRequestFailedException(message.Response);
+                    throw new RequestFailedException(message.Response);
             }
         }
 
@@ -688,7 +715,10 @@ namespace CognitiveSearch
             {
                 uri.AppendQuery("minimumCoverage", autocompleteOptions.MinimumCoverage.Value, true);
             }
-            uri.AppendQueryDelimited("searchFields", autocompleteOptions.SearchFields, ",", true);
+            if (autocompleteOptions?.SearchFields != null && Optional.IsCollectionDefined(autocompleteOptions?.SearchFields))
+            {
+                uri.AppendQueryDelimited("searchFields", autocompleteOptions.SearchFields, ",", true);
+            }
             if (autocompleteOptions?.Top != null)
             {
                 uri.AppendQuery("$top", autocompleteOptions.Top.Value, true);
@@ -700,7 +730,7 @@ namespace CognitiveSearch
 
         /// <summary> Autocompletes incomplete query terms based on input text and matching terms in the index. </summary>
         /// <param name="searchText"> The incomplete term which should be auto-completed. </param>
-        /// <param name="suggesterName"> The name of the suggester as specified in the suggesters collection that&apos;s part of the index definition. </param>
+        /// <param name="suggesterName"> The name of the suggester as specified in the suggesters collection that's part of the index definition. </param>
         /// <param name="requestOptions"> Parameter group. </param>
         /// <param name="autocompleteOptions"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -728,13 +758,13 @@ namespace CognitiveSearch
                         return Response.FromValue(value, message.Response);
                     }
                 default:
-                    throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    throw new RequestFailedException(message.Response);
             }
         }
 
         /// <summary> Autocompletes incomplete query terms based on input text and matching terms in the index. </summary>
         /// <param name="searchText"> The incomplete term which should be auto-completed. </param>
-        /// <param name="suggesterName"> The name of the suggester as specified in the suggesters collection that&apos;s part of the index definition. </param>
+        /// <param name="suggesterName"> The name of the suggester as specified in the suggesters collection that's part of the index definition. </param>
         /// <param name="requestOptions"> Parameter group. </param>
         /// <param name="autocompleteOptions"> Parameter group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -762,7 +792,7 @@ namespace CognitiveSearch
                         return Response.FromValue(value, message.Response);
                     }
                 default:
-                    throw ClientDiagnostics.CreateRequestFailedException(message.Response);
+                    throw new RequestFailedException(message.Response);
             }
         }
 
@@ -811,7 +841,7 @@ namespace CognitiveSearch
                         return Response.FromValue(value, message.Response);
                     }
                 default:
-                    throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    throw new RequestFailedException(message.Response);
             }
         }
 
@@ -839,7 +869,7 @@ namespace CognitiveSearch
                         return Response.FromValue(value, message.Response);
                     }
                 default:
-                    throw ClientDiagnostics.CreateRequestFailedException(message.Response);
+                    throw new RequestFailedException(message.Response);
             }
         }
     }

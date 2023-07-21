@@ -1,15 +1,15 @@
 {
-  "OutputFolder": ".",
-  "Namespace": "ProtocolMethodsInRestClient",
-  "LibraryName": null,
-  "SharedSourceFolders": [
-    "..\\..\\..\\..\\artifacts\\bin\\AutoRest.CSharp\\Debug\\netcoreapp3.1\\Generator.Shared",
-    "..\\..\\..\\..\\artifacts\\bin\\AutoRest.CSharp\\Debug\\netcoreapp3.1\\Azure.Core.Shared"
+  "output-folder": ".",
+  "namespace": "ProtocolMethodsInRestClient",
+  "library-name": "TestService",
+  "shared-source-folders": [
+    "..\\..\\..\\..\\artifacts\\bin\\AutoRest.CSharp\\Debug\\net6.0\\Generator.Shared",
+    "..\\..\\..\\..\\artifacts\\bin\\AutoRest.CSharp\\Debug\\net6.0\\Azure.Core.Shared"
   ],
   "public-clients": true,
   "skip-csproj-packagereference": true,
   "generation1-convenience-client": true,
-  "ProtocolMethodList": [
+  "protocol-method-list": [
     "Create",
     "Delete",
     "firstTemplate_Create",

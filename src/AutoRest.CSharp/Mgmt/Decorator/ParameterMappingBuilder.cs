@@ -3,17 +3,21 @@
 
 using System;
 using System.Collections.Generic;
+using System.Collections.Immutable;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Mgmt.AutoRest;
 using AutoRest.CSharp.Mgmt.Models;
+using AutoRest.CSharp.Mgmt.Output;
 using AutoRest.CSharp.Output.Models.Requests;
 using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Output.Models.Types;
 using AutoRest.CSharp.Utilities;
+using static AutoRest.CSharp.Mgmt.Decorator.ParameterMappingBuilder;
 
 namespace AutoRest.CSharp.Mgmt.Decorator
 {
@@ -38,7 +42,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
         private static void BuildContextualParameterMappingHierarchy(RequestPath current, Stack<ContextualParameterMapping> parameterMappingStack, string idVariableName = "Id", string invocationSuffix = "")
         {
             // Check if the current path is a scope parameter
-            if (current.IsParameterizedScope())
+            if (current.IsRawParameterizedScope())
             {
                 // in this case, we should only have one segment in this current path
                 parameterMappingStack.Push(new ContextualParameterMapping(string.Empty, current.Last(), $"{idVariableName}{invocationSuffix}"));
@@ -73,6 +77,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
                 // get the segment in pairs
                 var segmentPairs = SplitDiffIntoPairs(diffPath).ToList();
                 var indexOfProvidersPair = segmentPairs.FindIndex(pair => pair[0] == Segment.Providers);
+                var resourceTypeIdVariableName = idVariableName;
                 // from the tail, check these segments in pairs
                 for (int i = 0; i < segmentPairs.Count; i++)
                 {
@@ -95,7 +100,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
                                 }
                                 else
                                 {
-                                    parameterMappingStack.Push(new ContextualParameterMapping(keySegment.ConstantValue, valueSegment, $"{idVariableName}.ResourceType.Namespace"));
+                                    parameterMappingStack.Push(new ContextualParameterMapping(keySegment.ConstantValue, valueSegment, $"{resourceTypeIdVariableName}.ResourceType.Namespace"));
                                 }
                                 // do not append a new .Parent to the id
                             }
@@ -116,6 +121,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
                         if (keySegment.IsReference)
                         {
                             parameterMappingStack.Push(new ContextualParameterMapping(string.Empty, keySegment, $"{idVariableName}{invocationSuffix}.ResourceType.GetLastType()", new[] { "System.Linq" }));
+                            resourceTypeIdVariableName = $"{idVariableName}{invocationSuffix}";
                             appendParent = true;
                         }
                         else if (keySegment.IsExpandable)
@@ -349,7 +355,7 @@ namespace AutoRest.CSharp.Mgmt.Decorator
                 contextualParameterMappings.Remove(result);
             if (result is null && pathParameter.Type.IsEnum)
             {
-                var requestSegment = requestPath.Where(s => s.IsExpandable && s.Type.Equals(pathParameter.Type));
+                var requestSegment = requestPath.Where(s => s.IsExpandable && s.Type.Equals(pathParameter.Type) && s.IsConstant);
                 if (requestSegment.Any())
                 {
                     var keySegment = requestSegment.First();
@@ -388,6 +394,11 @@ namespace AutoRest.CSharp.Mgmt.Decorator
         public static List<Parameter> GetPassThroughParameters(this IEnumerable<ParameterMapping> parameterMappings)
         {
             return parameterMappings.Where(p => p.IsPassThru).Select(p => p.Parameter).ToList();
+        }
+
+        public static string GetPropertyBagValueExpression(this Parameter parameter)
+        {
+            return $"options.{parameter.Name.FirstCharToUpperCase()}";
         }
     }
 }

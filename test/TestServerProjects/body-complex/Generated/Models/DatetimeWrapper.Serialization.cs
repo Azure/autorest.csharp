@@ -18,12 +18,12 @@ namespace body_complex.Models
             writer.WriteStartObject();
             if (Optional.IsDefined(Field))
             {
-                writer.WritePropertyName("field");
+                writer.WritePropertyName("field"u8);
                 writer.WriteStringValue(Field.Value, "O");
             }
             if (Optional.IsDefined(Now))
             {
-                writer.WritePropertyName("now");
+                writer.WritePropertyName("now"u8);
                 writer.WriteStringValue(Now.Value, "O");
             }
             writer.WriteEndObject();
@@ -31,25 +31,27 @@ namespace body_complex.Models
 
         internal static DatetimeWrapper DeserializeDatetimeWrapper(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<DateTimeOffset> field = default;
             Optional<DateTimeOffset> now = default;
             foreach (var property in element.EnumerateObject())
             {
-                if (property.NameEquals("field"))
+                if (property.NameEquals("field"u8))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     field = property.Value.GetDateTimeOffset("O");
                     continue;
                 }
-                if (property.NameEquals("now"))
+                if (property.NameEquals("now"u8))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     now = property.Value.GetDateTimeOffset("O");

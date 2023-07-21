@@ -28,7 +28,7 @@ namespace MgmtMockAndSample.Models
         /// <param name="tenantId"> The Azure Active Directory tenant ID that should be used for authenticating requests to the managed HSM pool. </param>
         /// <param name="initialAdminObjectIds"> Array of initial administrators object ids for this managed hsm pool. </param>
         /// <param name="hsmUri"> The URI of the managed hsm pool for performing operations on keys. </param>
-        /// <param name="enableSoftDelete"> Property to specify whether the &apos;soft delete&apos; functionality is enabled for this managed HSM pool. If it&apos;s not set to any value(true or false) when creating new managed HSM pool, it will be set to true by default. Once set to true, it cannot be reverted to false. </param>
+        /// <param name="enableSoftDelete"> Property to specify whether the 'soft delete' functionality is enabled for this managed HSM pool. If it's not set to any value(true or false) when creating new managed HSM pool, it will be set to true by default. Once set to true, it cannot be reverted to false. </param>
         /// <param name="softDeleteRetentionInDays"> softDelete data retention days. It accepts &gt;=7 and &lt;=90. </param>
         /// <param name="enablePurgeProtection"> Property specifying whether protection against purge is enabled for this managed HSM pool. Setting this property to true activates protection against purge for this managed HSM pool and its content - only the Managed HSM service may initiate a hard, irrecoverable deletion. The setting is effective only if soft delete is also enabled. Enabling this functionality is irreversible. </param>
         /// <param name="createMode"> The create mode to indicate whether the resource is being created or is being recovered from a deleted resource. </param>
@@ -128,7 +128,7 @@ namespace MgmtMockAndSample.Models
         public IList<string> InitialAdminObjectIds { get; }
         /// <summary> The URI of the managed hsm pool for performing operations on keys. </summary>
         public Uri HsmUri { get; }
-        /// <summary> Property to specify whether the &apos;soft delete&apos; functionality is enabled for this managed HSM pool. If it&apos;s not set to any value(true or false) when creating new managed HSM pool, it will be set to true by default. Once set to true, it cannot be reverted to false. </summary>
+        /// <summary> Property to specify whether the 'soft delete' functionality is enabled for this managed HSM pool. If it's not set to any value(true or false) when creating new managed HSM pool, it will be set to true by default. Once set to true, it cannot be reverted to false. </summary>
         public bool? EnableSoftDelete { get; set; }
         /// <summary> softDelete data retention days. It accepts &gt;=7 and &lt;=90. </summary>
         public int? SoftDeleteRetentionInDays { get; set; }

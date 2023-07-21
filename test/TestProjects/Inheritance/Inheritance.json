@@ -69,7 +69,7 @@
         "DfeListOfT": {
           "type": "object",
           "x-ms-format": "dfe-list-generic",
-          "x-ms-format-element-definition": "SeparateClass"
+          "x-ms-format-element-type": "SeparateClass"
         },
         "DfeListOfString": {
           "type": "object",
@@ -81,7 +81,7 @@
         },
         "DfeDateTime": {
           "type": "object",
-          "x-ms-format": "dfe-date-time-rfc1123"
+          "x-ms-format": "dfe-date-time"
         },
         "DfeDuration": {
             "type": "object",

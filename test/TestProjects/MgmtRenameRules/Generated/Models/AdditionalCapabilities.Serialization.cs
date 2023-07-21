@@ -17,7 +17,7 @@ namespace MgmtRenameRules.Models
             writer.WriteStartObject();
             if (Optional.IsDefined(UltraSSDEnabled))
             {
-                writer.WritePropertyName("ultraSSDEnabled");
+                writer.WritePropertyName("ultraSSDEnabled"u8);
                 writer.WriteBooleanValue(UltraSSDEnabled.Value);
             }
             writer.WriteEndObject();
@@ -25,14 +25,17 @@ namespace MgmtRenameRules.Models
 
         internal static AdditionalCapabilities DeserializeAdditionalCapabilities(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<bool> ultraSSDEnabled = default;
             foreach (var property in element.EnumerateObject())
             {
-                if (property.NameEquals("ultraSSDEnabled"))
+                if (property.NameEquals("ultraSSDEnabled"u8))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     ultraSSDEnabled = property.Value.GetBoolean();

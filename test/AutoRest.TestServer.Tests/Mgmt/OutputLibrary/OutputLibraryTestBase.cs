@@ -46,7 +46,7 @@ namespace AutoRest.TestServer.Tests.Mgmt.OutputLibrary
                 basePath = Path.Combine(basePath.Substring(0, basePath.IndexOf("autorest.csharp")), "autorest.csharp", "test", "TestProjects", _projectName, _subFolder, "Generated");
             }
 
-            StandaloneGeneratorRunner.LoadConfiguration(null, basePath, File.ReadAllText(Path.Combine(basePath, "Configuration.json")));
+            StandaloneGeneratorRunner.LoadConfiguration(null, basePath, null, File.ReadAllText(Path.Combine(basePath, "Configuration.json")));
             var codeModelTask = Task.Run(() => CodeModelSerialization.DeserializeCodeModel(File.ReadAllText(Path.Combine(basePath, "CodeModel.yaml"))));
             var project = await GeneratedCodeWorkspace.Create(Configuration.AbsoluteProjectFolder, Configuration.OutputFolder, Configuration.SharedSourceFolders);
             var sourceInputModel = new SourceInputModel(await project.GetCompilationAsync());
@@ -136,8 +136,10 @@ namespace AutoRest.TestServer.Tests.Mgmt.OutputLibrary
             foreach (var resource in MgmtContext.Library.ArmResources)
             {
                 var name = $"{_projectName}.{resource.Type.Name}";
+                Console.WriteLine(name);
                 var generatedResourceType = Assembly.GetExecutingAssembly().GetType(name);
-                if (IsSingletonOperation(generatedResourceType))
+                Assert.NotNull(generatedResourceType, $"class {name} is not found in {MgmtContext.RPName}");
+                if (IsSingletonOperation(generatedResourceType) || resource is PartialResource)
                 {
                     continue;
                 }
@@ -163,7 +165,8 @@ namespace AutoRest.TestServer.Tests.Mgmt.OutputLibrary
             {
                 var name = $"{_projectName}.{resource.Type.Name}";
                 var generatedResourceType = Assembly.GetExecutingAssembly().GetType(name);
-                if (IsSingletonOperation(generatedResourceType))
+                Assert.NotNull(generatedResourceType, $"class {name} is not found");
+                if (IsSingletonOperation(generatedResourceType) || resource is PartialResource)
                 {
                     continue;
                 }

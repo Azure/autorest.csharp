@@ -12,9 +12,10 @@ using Azure.Core;
 using Azure.Identity;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Resources;
+using MgmtMockAndSample;
 using MgmtMockAndSample.Models;
 
-namespace MgmtMockAndSample
+namespace MgmtMockAndSample.Samples
 {
     public partial class Sample_ManagedHsmResource
     {
@@ -23,11 +24,13 @@ namespace MgmtMockAndSample
         [NUnit.Framework.Ignore("Only verifying that the sample builds")]
         public async Task Update_UpdateAnExistingManagedHSMPool()
         {
-            // Generated from example definition: 
+            // Generated from example definition:
             // this example is just showing the usage of "ManagedHsms_Update" operation, for the dependent resources, they will have to be created separately.
 
+            // get your azure access token, for more details of how Azure SDK get your access token, please refer to https://learn.microsoft.com/en-us/dotnet/azure/sdk/authentication?tabs=command-line
+            TokenCredential cred = new DefaultAzureCredential();
             // authenticate your client
-            ArmClient client = new ArmClient(new DefaultAzureCredential());
+            ArmClient client = new ArmClient(cred);
 
             // this example assumes you already have this ManagedHsmResource created on azure
             // for more information of creating ManagedHsmResource, please refer to the document of ManagedHsmResource
@@ -62,11 +65,13 @@ namespace MgmtMockAndSample
         [NUnit.Framework.Ignore("Only verifying that the sample builds")]
         public async Task Delete_DeleteAManagedHSMPool()
         {
-            // Generated from example definition: 
+            // Generated from example definition:
             // this example is just showing the usage of "ManagedHsms_Delete" operation, for the dependent resources, they will have to be created separately.
 
+            // get your azure access token, for more details of how Azure SDK get your access token, please refer to https://learn.microsoft.com/en-us/dotnet/azure/sdk/authentication?tabs=command-line
+            TokenCredential cred = new DefaultAzureCredential();
             // authenticate your client
-            ArmClient client = new ArmClient(new DefaultAzureCredential());
+            ArmClient client = new ArmClient(cred);
 
             // this example assumes you already have this ManagedHsmResource created on azure
             // for more information of creating ManagedHsmResource, please refer to the document of ManagedHsmResource
@@ -87,11 +92,13 @@ namespace MgmtMockAndSample
         [NUnit.Framework.Ignore("Only verifying that the sample builds")]
         public async Task Get_RetrieveAManagedHSMPool()
         {
-            // Generated from example definition: 
+            // Generated from example definition:
             // this example is just showing the usage of "ManagedHsms_Get" operation, for the dependent resources, they will have to be created separately.
 
+            // get your azure access token, for more details of how Azure SDK get your access token, please refer to https://learn.microsoft.com/en-us/dotnet/azure/sdk/authentication?tabs=command-line
+            TokenCredential cred = new DefaultAzureCredential();
             // authenticate your client
-            ArmClient client = new ArmClient(new DefaultAzureCredential());
+            ArmClient client = new ArmClient(cred);
 
             // this example assumes you already have this ManagedHsmResource created on azure
             // for more information of creating ManagedHsmResource, please refer to the document of ManagedHsmResource
@@ -116,11 +123,13 @@ namespace MgmtMockAndSample
         [NUnit.Framework.Ignore("Only verifying that the sample builds")]
         public async Task GetManagedHsms_ListManagedHSMPoolsInASubscription()
         {
-            // Generated from example definition: 
+            // Generated from example definition:
             // this example is just showing the usage of "ManagedHsms_ListBySubscription" operation, for the dependent resources, they will have to be created separately.
 
+            // get your azure access token, for more details of how Azure SDK get your access token, please refer to https://learn.microsoft.com/en-us/dotnet/azure/sdk/authentication?tabs=command-line
+            TokenCredential cred = new DefaultAzureCredential();
             // authenticate your client
-            ArmClient client = new ArmClient(new DefaultAzureCredential());
+            ArmClient client = new ArmClient(cred);
 
             // this example assumes you already have this SubscriptionResource created on azure
             // for more information of creating SubscriptionResource, please refer to the document of SubscriptionResource
@@ -146,11 +155,13 @@ namespace MgmtMockAndSample
         [NUnit.Framework.Ignore("Only verifying that the sample builds")]
         public async Task GetMHSMPrivateLinkResourcesByMhsmResource_KeyVaultListPrivateLinkResources()
         {
-            // Generated from example definition: 
+            // Generated from example definition:
             // this example is just showing the usage of "MHSMPrivateLinkResources_ListByMHSMResource" operation, for the dependent resources, they will have to be created separately.
 
+            // get your azure access token, for more details of how Azure SDK get your access token, please refer to https://learn.microsoft.com/en-us/dotnet/azure/sdk/authentication?tabs=command-line
+            TokenCredential cred = new DefaultAzureCredential();
             // authenticate your client
-            ArmClient client = new ArmClient(new DefaultAzureCredential());
+            ArmClient client = new ArmClient(cred);
 
             // this example assumes you already have this ManagedHsmResource created on azure
             // for more information of creating ManagedHsmResource, please refer to the document of ManagedHsmResource

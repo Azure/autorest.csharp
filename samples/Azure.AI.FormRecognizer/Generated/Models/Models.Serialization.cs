@@ -15,26 +15,28 @@ namespace Azure.AI.FormRecognizer.Models
     {
         internal static Models DeserializeModels(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<ModelsSummary> summary = default;
             Optional<IReadOnlyList<ModelInfo>> modelList = default;
             Optional<string> nextLink = default;
             foreach (var property in element.EnumerateObject())
             {
-                if (property.NameEquals("summary"))
+                if (property.NameEquals("summary"u8))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     summary = ModelsSummary.DeserializeModelsSummary(property.Value);
                     continue;
                 }
-                if (property.NameEquals("modelList"))
+                if (property.NameEquals("modelList"u8))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     List<ModelInfo> array = new List<ModelInfo>();
@@ -45,7 +47,7 @@ namespace Azure.AI.FormRecognizer.Models
                     modelList = array;
                     continue;
                 }
-                if (property.NameEquals("nextLink"))
+                if (property.NameEquals("nextLink"u8))
                 {
                     nextLink = property.Value.GetString();
                     continue;

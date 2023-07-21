@@ -10,6 +10,7 @@ using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Input;
+using AutoRest.CSharp.Output.Models.Serialization;
 using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Output.Models.Types;
 using AutoRest.CSharp.Utilities;
@@ -21,6 +22,7 @@ namespace AutoRest.CSharp.Output.Models
     internal class ClientFields : IReadOnlyCollection<FieldDeclaration>
     {
         public FieldDeclaration? AuthorizationHeaderConstant { get; }
+        public FieldDeclaration? AuthorizationApiKeyPrefixConstant { get; }
         public FieldDeclaration? ScopesConstant { get; }
 
         public FieldDeclaration ClientDiagnosticsProperty { get; }
@@ -43,7 +45,7 @@ namespace AutoRest.CSharp.Output.Models
 
         private ClientFields(IEnumerable<Parameter> parameters, InputAuth? authorization)
         {
-            ClientDiagnosticsProperty = new(ClientDiagnosticsDescription, Internal | ReadOnly, typeof(ClientDiagnostics), KnownParameters.ClientDiagnostics.Name.FirstCharToUpperCase(), writeAsProperty: true);
+            ClientDiagnosticsProperty = new(ClientDiagnosticsDescription, Internal | ReadOnly, typeof(ClientDiagnostics), KnownParameters.ClientDiagnostics.Name.FirstCharToUpperCase(), SerializationFormat.Default, writeAsProperty: true);
             PipelineField = new(Private | ReadOnly, typeof(HttpPipeline), "_" + KnownParameters.Pipeline.Name);
 
             var parameterNamesToFields = new Dictionary<string, FieldDeclaration>();
@@ -58,18 +60,23 @@ namespace AutoRest.CSharp.Output.Models
 
                 if (authorization.ApiKey is not null)
                 {
-                    AuthorizationHeaderConstant = new(Private | Const, typeof(string), "AuthorizationHeader", $"{authorization.ApiKey.Name:L}");
+                    AuthorizationHeaderConstant = new(Private | Const, typeof(string), "AuthorizationHeader", $"{authorization.ApiKey.Name:L}", SerializationFormat.Default);
                     _keyAuthField = new(Private | ReadOnly, KnownParameters.KeyAuth.Type.WithNullable(false), "_" + KnownParameters.KeyAuth.Name);
 
                     fields.Add(AuthorizationHeaderConstant);
                     fields.Add(_keyAuthField);
+                    if (authorization.ApiKey.Prefix is not null)
+                    {
+                        AuthorizationApiKeyPrefixConstant = new(Private | Const, typeof(string), "AuthorizationApiKeyPrefix", $"{authorization.ApiKey.Prefix:L}", SerializationFormat.Default);
+                        fields.Add(AuthorizationApiKeyPrefixConstant);
+                    }
                     credentialFields.Add(_keyAuthField);
                     parameterNamesToFields[KnownParameters.KeyAuth.Name] = _keyAuthField;
                 }
 
                 if (authorization.OAuth2 is not null)
                 {
-                    ScopesConstant = new(Private | Static | ReadOnly, typeof(string[]), "AuthorizationScopes", $"new string[]{{ {authorization.OAuth2.Scopes.GetLiteralsFormattable()} }}");
+                    ScopesConstant = new(Private | Static | ReadOnly, typeof(string[]), "AuthorizationScopes", $"new string[]{{ {authorization.OAuth2.Scopes.GetLiteralsFormattable()} }}", SerializationFormat.Default);
                     _tokenAuthField = new(Private | ReadOnly, KnownParameters.TokenAuth.Type.WithNullable(false), "_" + KnownParameters.TokenAuth.Name);
 
                     fields.Add(ScopesConstant);
@@ -84,7 +91,7 @@ namespace AutoRest.CSharp.Output.Models
             foreach (Parameter parameter in parameters)
             {
                 var field = parameter == KnownParameters.ClientDiagnostics ? ClientDiagnosticsProperty : parameter == KnownParameters.Pipeline ? PipelineField : parameter.IsResourceIdentifier
-                        ? new FieldDeclaration($"{parameter.Description}", Public | ReadOnly, parameter.Type, parameter.Name.FirstCharToUpperCase(), writeAsProperty: true)
+                        ? new FieldDeclaration($"{parameter.Description}", Public | ReadOnly, parameter.Type, parameter.Name.FirstCharToUpperCase(), SerializationFormat.Default, writeAsProperty: true)
                         : new FieldDeclaration(Private | ReadOnly, parameter.Type, "_" + parameter.Name);
 
                 if (field.WriteAsProperty)

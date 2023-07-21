@@ -21,9 +21,9 @@ namespace xml_service.Models
 
         public static BlobType ToBlobType(this string value)
         {
-            if (string.Equals(value, "BlockBlob", StringComparison.InvariantCultureIgnoreCase)) return BlobType.BlockBlob;
-            if (string.Equals(value, "PageBlob", StringComparison.InvariantCultureIgnoreCase)) return BlobType.PageBlob;
-            if (string.Equals(value, "AppendBlob", StringComparison.InvariantCultureIgnoreCase)) return BlobType.AppendBlob;
+            if (StringComparer.OrdinalIgnoreCase.Equals(value, "BlockBlob")) return BlobType.BlockBlob;
+            if (StringComparer.OrdinalIgnoreCase.Equals(value, "PageBlob")) return BlobType.PageBlob;
+            if (StringComparer.OrdinalIgnoreCase.Equals(value, "AppendBlob")) return BlobType.AppendBlob;
             throw new ArgumentOutOfRangeException(nameof(value), value, "Unknown BlobType value.");
         }
     }

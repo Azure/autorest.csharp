@@ -26,7 +26,7 @@ namespace AutoRest.CSharp.Output.Models.Types
                      null,
                      modifiers,
                      parameters,
-                     new(isBase: true, baseConstructor?.Signature.Parameters ?? Array.Empty<Parameter>())),
+                     Initializer: new(isBase: true, baseConstructor?.Signature.Parameters ?? Array.Empty<Parameter>())),
                  initializers,
                  baseConstructor)
         {

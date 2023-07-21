@@ -43,7 +43,7 @@ namespace url_multi_collectionFormat
             var uri = new RawRequestUriBuilder();
             uri.Reset(_endpoint);
             uri.AppendPath("/queries/array/multi/string/null", false);
-            if (arrayQuery != null)
+            if (arrayQuery != null && Optional.IsCollectionDefined(arrayQuery))
             {
                 foreach (var param in arrayQuery)
                 {
@@ -67,7 +67,7 @@ namespace url_multi_collectionFormat
                 case 200:
                     return message.Response;
                 default:
-                    throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    throw new RequestFailedException(message.Response);
             }
         }
 
@@ -83,7 +83,7 @@ namespace url_multi_collectionFormat
                 case 200:
                     return message.Response;
                 default:
-                    throw ClientDiagnostics.CreateRequestFailedException(message.Response);
+                    throw new RequestFailedException(message.Response);
             }
         }
 
@@ -95,7 +95,7 @@ namespace url_multi_collectionFormat
             var uri = new RawRequestUriBuilder();
             uri.Reset(_endpoint);
             uri.AppendPath("/queries/array/multi/string/empty", false);
-            if (arrayQuery != null)
+            if (arrayQuery != null && Optional.IsCollectionDefined(arrayQuery))
             {
                 foreach (var param in arrayQuery)
                 {
@@ -119,7 +119,7 @@ namespace url_multi_collectionFormat
                 case 200:
                     return message.Response;
                 default:
-                    throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    throw new RequestFailedException(message.Response);
             }
         }
 
@@ -135,7 +135,7 @@ namespace url_multi_collectionFormat
                 case 200:
                     return message.Response;
                 default:
-                    throw ClientDiagnostics.CreateRequestFailedException(message.Response);
+                    throw new RequestFailedException(message.Response);
             }
         }
 
@@ -147,7 +147,7 @@ namespace url_multi_collectionFormat
             var uri = new RawRequestUriBuilder();
             uri.Reset(_endpoint);
             uri.AppendPath("/queries/array/multi/string/valid", false);
-            if (arrayQuery != null)
+            if (arrayQuery != null && Optional.IsCollectionDefined(arrayQuery))
             {
                 foreach (var param in arrayQuery)
                 {
@@ -159,8 +159,8 @@ namespace url_multi_collectionFormat
             return message;
         }
 
-        /// <summary> Get an array of string [&apos;ArrayQuery1&apos;, &apos;begin!*&apos;();:@ &amp;=+$,/?#[]end&apos; , null, &apos;&apos;] using the mult-array format. </summary>
-        /// <param name="arrayQuery"> an array of string [&apos;ArrayQuery1&apos;, &apos;begin!*&apos;();:@ &amp;=+$,/?#[]end&apos; , null, &apos;&apos;] using the mult-array format. </param>
+        /// <summary> Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the mult-array format. </summary>
+        /// <param name="arrayQuery"> an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the mult-array format. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public async Task<Response> ArrayStringMultiValidAsync(IEnumerable<string> arrayQuery = null, CancellationToken cancellationToken = default)
         {
@@ -171,12 +171,12 @@ namespace url_multi_collectionFormat
                 case 200:
                     return message.Response;
                 default:
-                    throw await ClientDiagnostics.CreateRequestFailedExceptionAsync(message.Response).ConfigureAwait(false);
+                    throw new RequestFailedException(message.Response);
             }
         }
 
-        /// <summary> Get an array of string [&apos;ArrayQuery1&apos;, &apos;begin!*&apos;();:@ &amp;=+$,/?#[]end&apos; , null, &apos;&apos;] using the mult-array format. </summary>
-        /// <param name="arrayQuery"> an array of string [&apos;ArrayQuery1&apos;, &apos;begin!*&apos;();:@ &amp;=+$,/?#[]end&apos; , null, &apos;&apos;] using the mult-array format. </param>
+        /// <summary> Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the mult-array format. </summary>
+        /// <param name="arrayQuery"> an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the mult-array format. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         public Response ArrayStringMultiValid(IEnumerable<string> arrayQuery = null, CancellationToken cancellationToken = default)
         {
@@ -187,7 +187,7 @@ namespace url_multi_collectionFormat
                 case 200:
                     return message.Response;
                 default:
-                    throw ClientDiagnostics.CreateRequestFailedException(message.Response);
+                    throw new RequestFailedException(message.Response);
             }
         }
     }

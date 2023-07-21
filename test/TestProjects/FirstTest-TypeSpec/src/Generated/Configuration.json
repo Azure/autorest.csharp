@@ -1,0 +1,11 @@
+{
+  "output-folder": ".",
+  "namespace": "FirstTestTypeSpec",
+  "library-name": "FirstTestTypeSpec",
+  "shared-source-folders": [
+    "../../../../../artifacts/bin/AutoRest.CSharp/Debug/net6.0/Generator.Shared",
+    "../../../../../artifacts/bin/AutoRest.CSharp/Debug/net6.0/Azure.Core.Shared"
+  ],
+  "use-overloads-between-protocol-and-convenience": true,
+  "deserialize-null-collection-as-null-value": true
+}

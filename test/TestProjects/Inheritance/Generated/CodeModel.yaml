@@ -527,7 +527,7 @@ schemas: !Schemas
           serializedName: DfeListOfT
           extensions:
             x-ms-format: dfe-list-generic
-            x-ms-format-element-definition: SeparateClass
+            x-ms-format-element-type: SeparateClass
           language: !Languages 
             default:
               name: dfeListOfT
@@ -557,7 +557,7 @@ schemas: !Schemas
           schema: *ref_17
           serializedName: DfeDateTime
           extensions:
-            x-ms-format: dfe-date-time-rfc1123
+            x-ms-format: dfe-date-time
           language: !Languages 
             default:
               name: dfeDateTime

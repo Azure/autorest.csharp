@@ -14,22 +14,26 @@ namespace xms_error_responses.Models
     {
         internal static UnknownPetActionError DeserializeUnknownPetActionError(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             string errorType = "Unknown";
             Optional<string> errorMessage = default;
             Optional<string> actionResponse = default;
             foreach (var property in element.EnumerateObject())
             {
-                if (property.NameEquals("errorType"))
+                if (property.NameEquals("errorType"u8))
                 {
                     errorType = property.Value.GetString();
                     continue;
                 }
-                if (property.NameEquals("errorMessage"))
+                if (property.NameEquals("errorMessage"u8))
                 {
                     errorMessage = property.Value.GetString();
                     continue;
                 }
-                if (property.NameEquals("actionResponse"))
+                if (property.NameEquals("actionResponse"u8))
                 {
                     actionResponse = property.Value.GetString();
                     continue;

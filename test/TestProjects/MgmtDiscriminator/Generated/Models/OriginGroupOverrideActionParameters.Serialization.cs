@@ -16,24 +16,28 @@ namespace MgmtDiscriminator.Models
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
-            writer.WritePropertyName("typeName");
+            writer.WritePropertyName("typeName"u8);
             writer.WriteStringValue(TypeName.ToString());
-            writer.WritePropertyName("originGroup");
+            writer.WritePropertyName("originGroup"u8);
             JsonSerializer.Serialize(writer, OriginGroup); writer.WriteEndObject();
         }
 
         internal static OriginGroupOverrideActionParameters DeserializeOriginGroupOverrideActionParameters(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             OriginGroupOverrideActionParametersTypeName typeName = default;
             WritableSubResource originGroup = default;
             foreach (var property in element.EnumerateObject())
             {
-                if (property.NameEquals("typeName"))
+                if (property.NameEquals("typeName"u8))
                 {
                     typeName = new OriginGroupOverrideActionParametersTypeName(property.Value.GetString());
                     continue;
                 }
-                if (property.NameEquals("originGroup"))
+                if (property.NameEquals("originGroup"u8))
                 {
                     originGroup = JsonSerializer.Deserialize<WritableSubResource>(property.Value.GetRawText());
                     continue;

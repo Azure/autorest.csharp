@@ -132,6 +132,10 @@ namespace AutoRest.CSharp.Output.Models.Types
 
             foreach (var property in Properties)
             {
+                // skip the flattened properties, we should never include them in serialization
+                if (property is FlattenedObjectTypeProperty)
+                    continue;
+
                 var type = property.Declaration.Type;
 
                 var deserializationParameter = new Parameter(
@@ -206,7 +210,8 @@ namespace AutoRest.CSharp.Output.Models.Types
             foreach (var property in Properties)
             {
                 // Only required properties that are not discriminators go into default ctor
-                if (property == Discriminator?.Property)
+                // skip the flattened properties, we should never include them in the constructors
+                if (property == Discriminator?.Property || property is FlattenedObjectTypeProperty)
                 {
                     continue;
                 }
@@ -215,7 +220,7 @@ namespace AutoRest.CSharp.Output.Models.Types
                 Constant? defaultInitializationValue = null;
 
                 var propertyType = property.Declaration.Type;
-                if (property.SchemaProperty?.Schema is ConstantSchema constantSchema)
+                if (property.SchemaProperty?.Schema is ConstantSchema constantSchema && property.IsRequired)
                 {
                     // Turn constants into initializers
                     initializationValue = constantSchema.Value.Value != null ?
@@ -418,6 +423,8 @@ namespace AutoRest.CSharp.Output.Models.Types
             var name = BuilderHelpers.DisambiguateName(Type, property.CSharpName());
             SourceMemberMapping? memberMapping = _sourceTypeMapping?.GetForMember(name);
 
+            var serializationMapping = _sourceTypeMapping?.GetForMemberSerialization(memberMapping?.ExistingMember);
+
             var accessibility = property.IsDiscriminator == true ? "internal" : "public";
 
             var propertyType = GetDefaultPropertyType(property);
@@ -450,35 +457,43 @@ namespace AutoRest.CSharp.Output.Models.Types
 
             bool isCollection = TypeFactory.IsCollectionType(type);
 
-            bool isReadOnly = IsStruct ||
+            bool propertyShouldOmitSetter = IsStruct ||
                               !_usage.HasFlag(SchemaTypeUsage.Input) ||
                               property.IsReadOnly;
 
+
             if (isCollection)
             {
-                isReadOnly |= !property.IsNullable;
+                propertyShouldOmitSetter |= !property.IsNullable;
             }
             else
             {
                 // In mixed models required properties are not readonly
-                isReadOnly |= property.IsRequired &&
+                propertyShouldOmitSetter |= property.IsRequired &&
                               _usage.HasFlag(SchemaTypeUsage.Input) &&
                               !_usage.HasFlag(SchemaTypeUsage.Output);
+            }
+
+            // we should remove the setter of required constant
+            if (property.Schema is ConstantSchema && property.IsRequired)
+            {
+                propertyShouldOmitSetter = true;
             }
 
             if (property.IsDiscriminator == true)
             {
                 // Discriminator properties should be writeable
-                isReadOnly = false;
+                propertyShouldOmitSetter = false;
             }
 
             var objectTypeProperty = new ObjectTypeProperty(
                 memberDeclaration,
-                BuilderHelpers.EscapeXmlDescription(property.Language.Default.Description),
-                isReadOnly,
+                BuilderHelpers.EscapeXmlDocDescription(property.Language.Default.Description),
+                propertyShouldOmitSetter,
                 property,
                 valueType,
-                optionalViaNullability);
+                optionalViaNullability,
+                serializationMapping);
             return objectTypeProperty;
         }
 
@@ -496,7 +511,7 @@ namespace AutoRest.CSharp.Output.Models.Types
         }
 
         // Enumerates all schemas that were merged into this one, excludes the inherited schema
-        protected IEnumerable<ObjectSchema> GetCombinedSchemas()
+        protected internal IEnumerable<ObjectSchema> GetCombinedSchemas()
         {
             yield return ObjectSchema;
 

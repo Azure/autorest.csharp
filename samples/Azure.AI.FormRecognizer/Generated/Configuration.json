@@ -1,10 +1,10 @@
 {
-  "OutputFolder": ".",
-  "Namespace": "Azure.AI.FormRecognizer",
-  "LibraryName": null,
-  "SharedSourceFolders": [
-    "..\\..\\..\\artifacts\\bin\\AutoRest.CSharp\\Debug\\netcoreapp3.1\\Generator.Shared",
-    "..\\..\\..\\artifacts\\bin\\AutoRest.CSharp\\Debug\\netcoreapp3.1\\Azure.Core.Shared"
+  "output-folder": ".",
+  "namespace": "Azure.AI.FormRecognizer",
+  "library-name": "AzureAIFormRecognizer",
+  "shared-source-folders": [
+    "..\\..\\..\\artifacts\\bin\\AutoRest.CSharp\\Debug\\net6.0\\Generator.Shared",
+    "..\\..\\..\\artifacts\\bin\\AutoRest.CSharp\\Debug\\net6.0\\Azure.Core.Shared"
   ],
   "skip-csproj-packagereference": true,
   "generation1-convenience-client": true

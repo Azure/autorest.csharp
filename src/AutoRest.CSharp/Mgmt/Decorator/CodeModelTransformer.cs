@@ -16,8 +16,9 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             SchemaUsageTransformer.Transform(MgmtContext.CodeModel);
             DefaultDerivedSchema.AddDefaultDerivedSchemas(MgmtContext.CodeModel);
             OmitOperationGroups.RemoveOperationGroups();
+            PartialResourceResolver.Update();
             SubscriptionIdUpdater.Update();
-            ConstantSchemaTransformer.TransformToChoice();
+            ConstantSchemaTransformer.Transform(MgmtContext.CodeModel);
             SchemaNameAndFormatUpdater.ApplyRenameMapping();
             SchemaNameAndFormatUpdater.UpdateAcronyms();
             UrlToUri.UpdateSuffix();
@@ -34,6 +35,8 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             {
                 SerializedNamesUpdater.Update();
             }
+            //eliminate client default value from property
+            ModelPropertyClientDefaultValueTransformer.Transform(MgmtContext.CodeModel);
 
             CodeModelValidator.Validate();
         }

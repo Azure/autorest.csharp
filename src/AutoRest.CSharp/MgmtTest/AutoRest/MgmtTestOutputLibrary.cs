@@ -22,6 +22,7 @@ namespace AutoRest.CSharp.MgmtTest.AutoRest
     internal class MgmtTestOutputLibrary
     {
         private readonly MockTestDefinitionModel _mockTestModel;
+        private readonly MgmtTestConfiguration _mgmtTestConfiguration;
         public MgmtTestOutputLibrary(CodeModel codeModel, SourceInputModel sourceInputModel)
         {
             MgmtContext.Initialize(new BuildContext<MgmtOutputLibrary>(codeModel, sourceInputModel));
@@ -32,6 +33,7 @@ namespace AutoRest.CSharp.MgmtTest.AutoRest
             }
 
             _mockTestModel = MgmtContext.CodeModel.TestModel!.MockTest;
+            _mgmtTestConfiguration = Configuration.MgmtTestConfiguration!;
         }
 
         private IEnumerable<MgmtSampleProvider>? _samples;
@@ -58,12 +60,17 @@ namespace AutoRest.CSharp.MgmtTest.AutoRest
                 {
                     // we need to find which resource or resource collection this test case belongs
                     var operationId = exampleGroup.OperationId;
+
+                    // skip this operation if we find it in the `skipped-operations` configuration
+                    if (_mgmtTestConfiguration.SkippedOperations.Contains(operationId))
+                        continue;
+
                     var providerAndOperations = FindCarriersFromOperationId(operationId);
                     foreach (var providerForExample in providerAndOperations)
                     {
                         // the operations on ArmClientExtensions are the same as the tenant extension, therefore we skip it here
                         // the source code generator will never write them if it is not in arm core
-                        if (providerForExample.Carrier is ArmClientExtensions)
+                        if (providerForExample.Carrier is ArmClientExtension)
                             continue;
                         var mockTestCase = new MockTestCase(operationId, providerForExample.Carrier, providerForExample.Operation, example);
                         result.AddInList(mockTestCase.Owner, mockTestCase);
@@ -110,11 +117,11 @@ namespace AutoRest.CSharp.MgmtTest.AutoRest
             return _operationIdToProviders;
         }
 
-        private MgmtMockTestProvider<MgmtExtensionsWrapper>? _extensionWrapperMockTest;
-        public MgmtMockTestProvider<MgmtExtensionsWrapper> ExtensionWrapperMockTest => _extensionWrapperMockTest ??= new MgmtMockTestProvider<MgmtExtensionsWrapper>(MgmtContext.Library.ExtensionWrapper, Enumerable.Empty<MockTestCase>());
+        private MgmtMockTestProvider<MgmtExtensionWrapper>? _extensionWrapperMockTest;
+        public MgmtMockTestProvider<MgmtExtensionWrapper> ExtensionWrapperMockTest => _extensionWrapperMockTest ??= new MgmtMockTestProvider<MgmtExtensionWrapper>(MgmtContext.Library.ExtensionWrapper, Enumerable.Empty<MockTestCase>());
 
-        private IEnumerable<MgmtMockTestProvider<MgmtExtensions>>? _extensionMockTests;
-        public IEnumerable<MgmtMockTestProvider<MgmtExtensions>> ExtensionMockTests => _extensionMockTests ??= EnsureMockTestProviders<MgmtExtensions>();
+        private IEnumerable<MgmtMockTestProvider<MgmtExtension>>? _extensionMockTests;
+        public IEnumerable<MgmtMockTestProvider<MgmtExtension>> ExtensionMockTests => _extensionMockTests ??= EnsureMockTestProviders<MgmtExtension>();
 
         private IEnumerable<MgmtMockTestProvider<ResourceCollection>>? _resourceCollectionMockTests;
         public IEnumerable<MgmtMockTestProvider<ResourceCollection>> ResourceCollectionMockTests => _resourceCollectionMockTests ??= EnsureMockTestProviders<ResourceCollection>();

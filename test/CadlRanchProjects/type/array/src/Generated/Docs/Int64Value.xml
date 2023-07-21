@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <members>
+    <member name="GetInt64ValueAsync(CancellationToken)">
+<example>
+This sample shows how to call GetInt64ValueAsync.
+<code><![CDATA[
+var client = new ArrayClient().GetInt64ValueClient("1.0.0");
+
+var result = await client.GetInt64ValueAsync();
+]]></code>
+</example>
+    </member>
+    <member name="GetInt64Value(CancellationToken)">
+<example>
+This sample shows how to call GetInt64Value.
+<code><![CDATA[
+var client = new ArrayClient().GetInt64ValueClient("1.0.0");
+
+var result = client.GetInt64Value();
+]]></code>
+</example>
+    </member>
+    <member name="GetInt64ValueAsync(RequestContext)">
+<example>
+This sample shows how to call GetInt64ValueAsync with required parameters and parse the result.
+<code><![CDATA[
+var client = new ArrayClient().GetInt64ValueClient("1.0.0");
+
+Response response = await client.GetInt64ValueAsync(new RequestContext());
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result[0].ToString());
+]]></code>
+</example>
+    </member>
+    <member name="GetInt64Value(RequestContext)">
+<example>
+This sample shows how to call GetInt64Value with required parameters and parse the result.
+<code><![CDATA[
+var client = new ArrayClient().GetInt64ValueClient("1.0.0");
+
+Response response = client.GetInt64Value(new RequestContext());
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result[0].ToString());
+]]></code>
+</example>
+    </member>
+    <member name="PutAsync(IEnumerable{long},CancellationToken)">
+<example>
+This sample shows how to call PutAsync with required parameters.
+<code><![CDATA[
+var client = new ArrayClient().GetInt64ValueClient("1.0.0");
+
+var body = new long[] 
+{
+    1234
+};
+var result = await client.PutAsync(body);
+]]></code>
+</example>
+    </member>
+    <member name="Put(IEnumerable{long},CancellationToken)">
+<example>
+This sample shows how to call Put with required parameters.
+<code><![CDATA[
+var client = new ArrayClient().GetInt64ValueClient("1.0.0");
+
+var body = new long[] 
+{
+    1234
+};
+var result = client.Put(body);
+]]></code>
+</example>
+    </member>
+    <member name="PutAsync(RequestContent,RequestContext)">
+<example>
+This sample shows how to call PutAsync with required request content.
+<code><![CDATA[
+var client = new ArrayClient().GetInt64ValueClient("1.0.0");
+
+var data = new[] {
+    1234L
+};
+
+Response response = await client.PutAsync(RequestContent.Create(data));
+Console.WriteLine(response.Status);
+]]></code>
+</example>
+    </member>
+    <member name="Put(RequestContent,RequestContext)">
+<example>
+This sample shows how to call Put with required request content.
+<code><![CDATA[
+var client = new ArrayClient().GetInt64ValueClient("1.0.0");
+
+var data = new[] {
+    1234L
+};
+
+Response response = client.Put(RequestContent.Create(data));
+Console.WriteLine(response.Status);
+]]></code>
+</example>
+    </member>
+  </members>
+</doc>

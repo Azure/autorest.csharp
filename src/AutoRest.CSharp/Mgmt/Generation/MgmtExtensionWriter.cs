@@ -1,31 +1,43 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
-using System;
 using System.Linq;
 using AutoRest.CSharp.Generation.Writers;
+using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Mgmt.Models;
-using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Mgmt.Output;
+using AutoRest.CSharp.Output.Models;
+using AutoRest.CSharp.Output.Models.Requests;
 using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Utilities;
-using AutoRest.CSharp.Output.Models.Requests;
+using Azure.Core;
+using Azure.ResourceManager;
 using static AutoRest.CSharp.Output.Models.MethodSignatureModifiers;
 
 namespace AutoRest.CSharp.Mgmt.Generation
 {
     internal class MgmtExtensionWriter : MgmtClientBaseWriter
     {
-        private MgmtExtensions This { get; }
+        public static MgmtExtensionWriter GetWriter(MgmtExtension extension) => GetWriter(new CodeWriter(), extension);
+
+        public static MgmtExtensionWriter GetWriter(CodeWriter writer, MgmtExtension extension) => extension switch
+        {
+            ArmClientExtension armClientExtension => new ArmClientExtensionWriter(writer, armClientExtension),
+            // the class ArmResourceExtensionWriter is created to handle scope resources, but in ArmCore we do not have that problem, therefore for ArmCore we just let the regular MgmtExtension class handle that
+            ArmResourceExtension armResourceExtension when !Configuration.MgmtConfiguration.IsArmCore => new ArmResourceExtensionWriter(writer, armResourceExtension),
+            _ => new MgmtExtensionWriter(writer, extension)
+        };
+
+        private MgmtExtension This { get; }
         protected delegate void WriteResourceGetBody(MethodSignature signature, bool isAsync, bool isPaging);
 
-        public MgmtExtensionWriter(MgmtExtensions extensions)
+        public MgmtExtensionWriter(MgmtExtension extensions)
             : this(new CodeWriter(), extensions)
         {
             This = extensions;
         }
 
-        public MgmtExtensionWriter(CodeWriter writer, MgmtExtensions extensions) : base(writer, extensions)
+        public MgmtExtensionWriter(CodeWriter writer, MgmtExtension extensions) : base(writer, extensions)
         {
             This = extensions;
         }
@@ -36,35 +48,13 @@ namespace AutoRest.CSharp.Mgmt.Generation
         private void GetMethodWrapperImpl(MgmtClientOperation clientOperation, Diagnostic diagnostic, bool isAsync)
             => WriteMethodBodyWrapper(clientOperation.MethodSignature, isAsync, clientOperation.IsPagingOperation);
 
-        protected override void WritePrivateHelpers()
-        {
-            if (IsArmCore)
-                return;
-
-            _writer.Line();
-            var extensionClientSignature = new MethodSignature(
-                "GetExtensionClient",
-                null,
-                null,
-                Private | Static,
-                This.ExtensionClient.Type,
-                null,
-                new[] { This.ExtensionParameter });
-            using (_writer.WriteMethodDeclaration(extensionClientSignature))
-            {
-                using (_writer.Scope($"return {This.ExtensionParameter.Name}.GetCachedClient(({ArmClientReference.ToVariableName()}) =>"))
-                {
-                    _writer.Line($"return new {extensionClientSignature.ReturnType}({ArmClientReference.ToVariableName()}, {This.ExtensionParameter.Name}.Id);");
-                }
-                _writer.Line($");");
-            }
-        }
-
         private void WriteMethodBodyWrapper(MethodSignature signature, bool isAsync, bool isPaging)
         {
+            var extensionClient = This.GetExtensionClient(null);
+
             _writer.AppendRaw("return ")
                 .AppendRawIf("await ", isAsync && !isPaging)
-                .Append($"GetExtensionClient({This.ExtensionParameter.Name}).{CreateMethodName(signature.Name, isAsync)}(");
+                .Append($"{extensionClient.FactoryMethodName}({This.ExtensionParameter.Name}).{CreateMethodName(signature.Name, isAsync)}(");
 
             foreach (var parameter in signature.Parameters.Skip(1))
             {
@@ -89,8 +79,9 @@ namespace AutoRest.CSharp.Mgmt.Generation
             }
         }
 
-        protected override void WriteSingletonResourceEntry(Resource resource, string singletonResourceSuffix, MethodSignature signature)
+        protected override void WriteSingletonResourceEntry(Resource resource, SingletonResourceSuffix singletonResourceSuffix, MethodSignature signature)
         {
+            _writer.UseNamespace(typeof(ResourceIdentifier).Namespace!);
             if (IsArmCore)
             {
                 base.WriteSingletonResourceEntry(resource, singletonResourceSuffix, signature);

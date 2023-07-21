@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <members>
+    <member name="GetNullableFloatValueAsync(CancellationToken)">
+<example>
+This sample shows how to call GetNullableFloatValueAsync.
+<code><![CDATA[
+var client = new DictionaryClient().GetNullableFloatValueClient("1.0.0");
+
+var result = await client.GetNullableFloatValueAsync();
+]]></code>
+</example>
+    </member>
+    <member name="GetNullableFloatValue(CancellationToken)">
+<example>
+This sample shows how to call GetNullableFloatValue.
+<code><![CDATA[
+var client = new DictionaryClient().GetNullableFloatValueClient("1.0.0");
+
+var result = client.GetNullableFloatValue();
+]]></code>
+</example>
+    </member>
+    <member name="GetNullableFloatValueAsync(RequestContext)">
+<example>
+This sample shows how to call GetNullableFloatValueAsync with required parameters and parse the result.
+<code><![CDATA[
+var client = new DictionaryClient().GetNullableFloatValueClient("1.0.0");
+
+Response response = await client.GetNullableFloatValueAsync(new RequestContext());
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("<test>").ToString());
+]]></code>
+</example>
+    </member>
+    <member name="GetNullableFloatValue(RequestContext)">
+<example>
+This sample shows how to call GetNullableFloatValue with required parameters and parse the result.
+<code><![CDATA[
+var client = new DictionaryClient().GetNullableFloatValueClient("1.0.0");
+
+Response response = client.GetNullableFloatValue(new RequestContext());
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("<test>").ToString());
+]]></code>
+</example>
+    </member>
+    <member name="PutAsync(IDictionary{string,float?},CancellationToken)">
+<example>
+This sample shows how to call PutAsync with required parameters.
+<code><![CDATA[
+var client = new DictionaryClient().GetNullableFloatValueClient("1.0.0");
+
+var body = new Dictionary<string, float?>
+{
+    ["key"] = 3.14f,
+};
+var result = await client.PutAsync(body);
+]]></code>
+</example>
+    </member>
+    <member name="Put(IDictionary{string,float?},CancellationToken)">
+<example>
+This sample shows how to call Put with required parameters.
+<code><![CDATA[
+var client = new DictionaryClient().GetNullableFloatValueClient("1.0.0");
+
+var body = new Dictionary<string, float?>
+{
+    ["key"] = 3.14f,
+};
+var result = client.Put(body);
+]]></code>
+</example>
+    </member>
+    <member name="PutAsync(RequestContent,RequestContext)">
+<example>
+This sample shows how to call PutAsync with required request content.
+<code><![CDATA[
+var client = new DictionaryClient().GetNullableFloatValueClient("1.0.0");
+
+var data = new {
+    key = 123.45f,
+};
+
+Response response = await client.PutAsync(RequestContent.Create(data));
+Console.WriteLine(response.Status);
+]]></code>
+</example>
+    </member>
+    <member name="Put(RequestContent,RequestContext)">
+<example>
+This sample shows how to call Put with required request content.
+<code><![CDATA[
+var client = new DictionaryClient().GetNullableFloatValueClient("1.0.0");
+
+var data = new {
+    key = 123.45f,
+};
+
+Response response = client.Put(RequestContent.Create(data));
+Console.WriteLine(response.Status);
+]]></code>
+</example>
+    </member>
+  </members>
+</doc>

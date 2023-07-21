@@ -17,7 +17,7 @@ namespace MgmtRenameRules.Models
             writer.WriteStartObject();
             if (Optional.IsDefined(PatchMode))
             {
-                writer.WritePropertyName("patchMode");
+                writer.WritePropertyName("patchMode"u8);
                 writer.WriteStringValue(PatchMode.Value.ToString());
             }
             writer.WriteEndObject();
@@ -25,14 +25,17 @@ namespace MgmtRenameRules.Models
 
         internal static PatchSettings DeserializePatchSettings(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<InGuestPatchMode> patchMode = default;
             foreach (var property in element.EnumerateObject())
             {
-                if (property.NameEquals("patchMode"))
+                if (property.NameEquals("patchMode"u8))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     patchMode = new InGuestPatchMode(property.Value.GetString());

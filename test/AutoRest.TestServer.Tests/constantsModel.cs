@@ -102,16 +102,9 @@ namespace AutoRest.TestServer.Tests
             Assert.AreEqual(1, modelType.GetProperties().Length);
 
             var prop = TypeAsserts.HasProperty(modelType, "Parameter", BindingFlags.Public | BindingFlags.Instance);
-            Assert.AreEqual(typeof(string), prop.PropertyType);
+            Assert.AreEqual(typeof(NoModelAsStringNoRequiredOneValueNoDefaultEnum?), prop.PropertyType);
             Assert.Null(prop.SetMethod);
             Assert.NotNull(prop.GetMethod);
-        }
-
-        [Test]
-        public void NoModelAsStringNoRequiredOneValueNoDefault_GetPropertyValue()
-        {
-            var model = new NoModelAsStringNoRequiredOneValueNoDefault();
-            Assert.AreEqual("value1", model.Parameter);
         }
 
         [Test]
@@ -135,16 +128,9 @@ namespace AutoRest.TestServer.Tests
             Assert.AreEqual(1, modelType.GetProperties().Length);
 
             var prop = TypeAsserts.HasProperty(modelType, "Parameter", BindingFlags.Public | BindingFlags.Instance);
-            Assert.AreEqual(typeof(string), prop.PropertyType);
+            Assert.AreEqual(typeof(NoModelAsStringNoRequiredOneValueDefaultEnum?), prop.PropertyType);
             Assert.Null(prop.SetMethod);
             Assert.NotNull(prop.GetMethod);
-        }
-
-        [Test]
-        public void NoModelAsStringNoRequiredOneValueDefault_GetPropertyValue()
-        {
-            var model = new NoModelAsStringNoRequiredOneValueDefault();
-            Assert.AreEqual("value1", model.Parameter);
         }
 
         [Test]
@@ -203,7 +189,7 @@ namespace AutoRest.TestServer.Tests
         [Test]
         public void NoModelAsStringRequiredTwoValueDefault_HasCtorWithDefaultValue()
         {
-            var model = new NoModelAsStringRequiredTwoValueDefault();
+            var model = new NoModelAsStringRequiredTwoValueDefault(NoModelAsStringRequiredTwoValueDefaultEnum.Value1);
             Assert.AreEqual(NoModelAsStringRequiredTwoValueDefaultEnum.Value1, model.Parameter);
         }
 
@@ -251,7 +237,7 @@ namespace AutoRest.TestServer.Tests
             Assert.AreEqual(1, modelType.GetProperties().Length);
 
             var prop = TypeAsserts.HasProperty(modelType, "Parameter", BindingFlags.Public | BindingFlags.Instance);
-            Assert.AreEqual(typeof(string), prop.PropertyType);
+            Assert.AreEqual(typeof(NoModelAsStringRequiredOneValueNoDefaultEnum), prop.PropertyType);
             Assert.Null(prop.SetMethod);
             Assert.NotNull(prop.GetMethod);
         }
@@ -260,7 +246,7 @@ namespace AutoRest.TestServer.Tests
         public void NoModelAsStringRequiredOneValueNoDefault_GetPropertyValue()
         {
             var model = new NoModelAsStringRequiredOneValueNoDefault();
-            Assert.AreEqual("value1", model.Parameter);
+            Assert.AreEqual(NoModelAsStringRequiredOneValueNoDefaultEnum.Value1, model.Parameter);
         }
 
         [Test]
@@ -284,7 +270,7 @@ namespace AutoRest.TestServer.Tests
             Assert.AreEqual(1, modelType.GetProperties().Length);
 
             var prop = TypeAsserts.HasProperty(modelType, "Parameter", BindingFlags.Public | BindingFlags.Instance);
-            Assert.AreEqual(typeof(string), prop.PropertyType);
+            Assert.AreEqual(typeof(NoModelAsStringRequiredOneValueDefaultEnum), prop.PropertyType);
             Assert.Null(prop.SetMethod);
             Assert.NotNull(prop.GetMethod);
         }
@@ -293,7 +279,7 @@ namespace AutoRest.TestServer.Tests
         public void NoModelAsStringRequiredOneValueDefault_GetPropertyValue()
         {
             var model = new NoModelAsStringRequiredOneValueDefault();
-            Assert.AreEqual("value1", model.Parameter);
+            Assert.AreEqual(NoModelAsStringRequiredOneValueDefaultEnum.Value1, model.Parameter);
         }
 
         [Test]
@@ -456,13 +442,14 @@ namespace AutoRest.TestServer.Tests
             var constructors = typeof(ModelAsStringRequiredTwoValueDefault).GetConstructors(BindingFlags.Instance | BindingFlags.NonPublic);
             Assert.AreEqual(1, constructors.Length);
             Assert.AreEqual(1, constructors[0].GetParameters().Length);
-            Assert.AreEqual(typeof(ModelAsStringRequiredTwoValueDefaultEnum?), constructors[0].GetParameters()[0].ParameterType);
+            /* eliminate the default value for the parameter property, so the type is not Nullable. */
+            Assert.AreEqual(typeof(ModelAsStringRequiredTwoValueDefaultEnum), constructors[0].GetParameters()[0].ParameterType);
         }
 
         [Test]
         public void ModelAsStringRequiredTwoValueDefault_HasCtorWithDefaultValue()
         {
-            var model = new ModelAsStringRequiredTwoValueDefault();
+            var model = new ModelAsStringRequiredTwoValueDefault(ModelAsStringRequiredTwoValueDefaultEnum.Value1);
             Assert.AreEqual(ModelAsStringRequiredTwoValueDefaultEnum.Value1, model.Parameter);
         }
 
@@ -538,13 +525,14 @@ namespace AutoRest.TestServer.Tests
             var constructors = typeof(ModelAsStringRequiredOneValueDefault).GetConstructors(BindingFlags.Instance | BindingFlags.NonPublic);
             Assert.AreEqual(1, constructors.Length);
             Assert.AreEqual(1, constructors[0].GetParameters().Length);
-            Assert.AreEqual(typeof(ModelAsStringRequiredOneValueDefaultEnum?), constructors[0].GetParameters()[0].ParameterType);
+            /* eliminate the default value for the parameter property, so the type is not Nullable. */
+            Assert.AreEqual(typeof(ModelAsStringRequiredOneValueDefaultEnum), constructors[0].GetParameters()[0].ParameterType);
         }
 
         [Test]
         public void ModelAsStringRequiredOneValueDefault_HasCtorWithDefaultValue()
         {
-            var model = new ModelAsStringRequiredOneValueDefault();
+            var model = new ModelAsStringRequiredOneValueDefault(ModelAsStringRequiredOneValueDefaultEnum.Value1);
             Assert.AreEqual(ModelAsStringRequiredOneValueDefaultEnum.Value1, model.Parameter);
         }
 

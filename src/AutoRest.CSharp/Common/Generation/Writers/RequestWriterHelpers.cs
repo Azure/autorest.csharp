@@ -102,7 +102,7 @@ namespace AutoRest.CSharp.Generation.Writers
                         using (WriteValueNullCheck(writer, body.Value))
                         {
                             WriteHeaders(writer, clientMethod, request, content: true, fields);
-                            WriteSerializeContent(writer, request, body.Serialization, GetConstantOrParameter(body.Value, ignoreNullability: true));
+                            WriteSerializeContent(writer, request, body.Serialization, GetConstantOrParameter(body.Value, ignoreNullability: true, convertBinaryDataToArray: false));
                         }
 
                         break;
@@ -227,6 +227,7 @@ namespace AutoRest.CSharp.Generation.Writers
             }
         }
 
+        public static string CreateRequestMethodName(RestClientMethod method) => CreateRequestMethodName(method.Name);
         public static string CreateRequestMethodName(string name) => $"Create{name}Request";
 
         private static void WriteSerializeContent(CodeWriter writer, CodeWriterDeclaration request, ObjectSerialization bodySerialization, FormattableString value)
@@ -322,7 +323,7 @@ namespace AutoRest.CSharp.Generation.Writers
             }
         }
 
-        private static FormattableString GetConstantOrParameter(ReferenceOrConstant constantOrReference, bool ignoreNullability = false)
+        private static FormattableString GetConstantOrParameter(ReferenceOrConstant constantOrReference, bool ignoreNullability = false, bool convertBinaryDataToArray = true)
         {
             if (constantOrReference.IsConstant)
             {
@@ -332,6 +333,11 @@ namespace AutoRest.CSharp.Generation.Writers
             if (!ignoreNullability && constantOrReference.Type.IsNullable && constantOrReference.Type.IsValueType)
             {
                 return $"{constantOrReference.Reference.Name:I}.Value";
+            }
+
+            if (constantOrReference.Type.Equals(typeof(BinaryData)) && convertBinaryDataToArray)
+            {
+                return $"{constantOrReference.Reference.Name:I}.ToArray()";
             }
 
             return $"{constantOrReference.Reference.Name:I}";
@@ -356,7 +362,7 @@ namespace AutoRest.CSharp.Generation.Writers
 
             var value = GetFieldReference(fields, queryParameter.Value);
             var parameter = parameters != null && queryParameter.Name == "api-version" ? parameters.FirstOrDefault(p => p.Name == "apiVersion") : null;
-            using (parameter != null && parameter.IsOptionalInSignature ? null : WriteValueNullCheck(writer, value))
+            using (parameter != null && parameter.IsOptionalInSignature ? null : WriteValueNullCheck(writer, value, checkUndefinedCollection: true))
             {
                 if (explode)
                 {
@@ -386,36 +392,50 @@ namespace AutoRest.CSharp.Generation.Writers
             }
         }
 
-        private static CodeWriter.CodeWriterScope? WriteValueNullCheck(CodeWriter writer, ReferenceOrConstant value)
+        private static CodeWriter.CodeWriterScope? WriteValueNullCheck(CodeWriter writer, ReferenceOrConstant value, bool checkUndefinedCollection = false)
         {
             if (value.IsConstant)
                 return default;
 
             var type = value.Type;
-            if (type.IsNullable)
+            if (checkUndefinedCollection && TypeFactory.IsCollectionType(type))
             {
-                // turn "object.Property" into "object?.Property"
-                var parts = value.Reference.Name.Split(".");
-
                 writer.Append($"if (");
-                bool first = true;
-                foreach (var part in parts)
-                {
-                    if (first)
-                    {
-                        first = false;
-                    }
-                    else
-                    {
-                        writer.AppendRaw("?.");
-                    }
-                    writer.Identifier(part);
-                }
+
+                WriteValueExpression(writer, value);
+
+                writer.Append($" != null && {typeof(Optional)}.{nameof(Optional.IsCollectionDefined)}(");
+
+                WriteValueExpression(writer, value);
+
+                return writer.LineRaw("))").Scope();
+            }
+            else if (type.IsNullable)
+            {
+                writer.Append($"if (");
+
+                WriteValueExpression(writer, value);
 
                 return writer.Line($" != null)").Scope();
             }
 
             return default;
+        }
+
+        private static void WriteValueExpression(CodeWriter writer, ReferenceOrConstant value)
+        {
+            // turn "object.Property" into "object?.Property"
+            var parts = value.Reference.Name.Split(".");
+            bool first = true;
+            foreach (var part in parts)
+            {
+                if (first)
+                    first = false;
+                else
+                    writer.AppendRaw("?.");
+
+                writer.Identifier(part);
+            }
         }
     }
 }

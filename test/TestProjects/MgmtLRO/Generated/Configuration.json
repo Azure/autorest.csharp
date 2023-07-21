@@ -1,13 +1,16 @@
 {
-  "OutputFolder": ".",
-  "Namespace": "MgmtLRO",
-  "LibraryName": null,
-  "SharedSourceFolders": [
-    "..\\..\\..\\..\\artifacts\\bin\\AutoRest.CSharp\\Debug\\netcoreapp3.1\\Generator.Shared",
-    "..\\..\\..\\..\\artifacts\\bin\\AutoRest.CSharp\\Debug\\netcoreapp3.1\\Azure.Core.Shared"
+  "output-folder": ".",
+  "namespace": "MgmtLRO",
+  "library-name": "ManagementOperations",
+  "shared-source-folders": [
+    "..\\..\\..\\..\\artifacts\\bin\\AutoRest.CSharp\\Debug\\net6.0\\Generator.Shared",
+    "..\\..\\..\\..\\artifacts\\bin\\AutoRest.CSharp\\Debug\\net6.0\\Azure.Core.Shared"
   ],
   "azure-arm": true,
   "public-clients": true,
   "head-as-boolean": true,
-  "skip-csproj-packagereference": true
+  "skip-csproj-packagereference": true,
+  "OperationsToLroApiVersionOverride": {
+    "Fakes_Update": "2021-06-01"
+  }
 }

@@ -18,7 +18,7 @@ namespace MgmtRenameRules.Models
             writer.WriteStartObject();
             if (Optional.IsCollectionDefined(NetworkInterfaces))
             {
-                writer.WritePropertyName("networkInterfaces");
+                writer.WritePropertyName("networkInterfaces"u8);
                 writer.WriteStartArray();
                 foreach (var item in NetworkInterfaces)
                 {
@@ -31,14 +31,17 @@ namespace MgmtRenameRules.Models
 
         internal static NetworkProfile DeserializeNetworkProfile(JsonElement element)
         {
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
             Optional<IList<NetworkInterfaceReference>> networkInterfaces = default;
             foreach (var property in element.EnumerateObject())
             {
-                if (property.NameEquals("networkInterfaces"))
+                if (property.NameEquals("networkInterfaces"u8))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        property.ThrowNonNullablePropertyIsNull();
                         continue;
                     }
                     List<NetworkInterfaceReference> array = new List<NetworkInterfaceReference>();

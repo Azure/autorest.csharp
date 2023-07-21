@@ -17,7 +17,7 @@ namespace header
         {
             _response = response;
         }
-        /// <summary> response with header value &quot;value&quot;: true or false. </summary>
+        /// <summary> response with header value "value": true or false. </summary>
         public bool? Value => _response.Headers.TryGetValue("value", out bool? value) ? value : null;
     }
 }
