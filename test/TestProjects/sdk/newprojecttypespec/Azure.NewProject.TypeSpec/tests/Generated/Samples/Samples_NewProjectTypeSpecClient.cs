@@ -584,7 +584,7 @@ namespace Azure.NewProject.TypeSpec.Samples
             var endpoint = new Uri("<https://my-service.azure.com>");
             var client = new NewProjectTypeSpecClient(endpoint, credential);
 
-            Response response = client.AddTimeHeader(DateTimeOffset.UtcNow);
+            Response response = client.AddTimeHeader();
             Console.WriteLine(response.Status);
         }
 
@@ -608,7 +608,7 @@ namespace Azure.NewProject.TypeSpec.Samples
             var endpoint = new Uri("<https://my-service.azure.com>");
             var client = new NewProjectTypeSpecClient(endpoint, credential);
 
-            Response response = await client.AddTimeHeaderAsync(DateTimeOffset.UtcNow);
+            Response response = await client.AddTimeHeaderAsync();
             Console.WriteLine(response.Status);
         }
 

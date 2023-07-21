@@ -107,7 +107,7 @@ namespace _Specs_.Azure.Core.Traits.Samples
                 userActionValue = "<userActionValue>",
             };
 
-            Response response = client.RepeatableAction(1234, RequestContent.Create(data), "<repeatabilityRequestId>", DateTimeOffset.UtcNow);
+            Response response = client.RepeatableAction(1234, RequestContent.Create(data));
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("userActionResult").ToString());
@@ -141,7 +141,7 @@ namespace _Specs_.Azure.Core.Traits.Samples
                 userActionValue = "<userActionValue>",
             };
 
-            Response response = await client.RepeatableActionAsync(1234, RequestContent.Create(data), "<repeatabilityRequestId>", DateTimeOffset.UtcNow);
+            Response response = await client.RepeatableActionAsync(1234, RequestContent.Create(data));
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("userActionResult").ToString());
@@ -154,7 +154,7 @@ namespace _Specs_.Azure.Core.Traits.Samples
             var client = new TraitsClient();
 
             var userActionParam = new UserActionParam("<userActionValue>");
-            var result = await client.RepeatableActionAsync(1234, userActionParam, "<repeatabilityRequestId>", DateTimeOffset.UtcNow);
+            var result = await client.RepeatableActionAsync(1234, userActionParam);
         }
     }
 }
