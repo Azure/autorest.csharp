@@ -80,8 +80,8 @@
         "$id": "12",
         "Name": "String",
         "Kind": "String",
-        "IsNullable": false,
-        "IsConfident": true
+        "IsConfident": true,
+        "IsNullable": false
        },
        "Location": "Uri",
        "IsApiVersion": false,
@@ -98,6 +98,7 @@
          "$id": "14",
          "Name": "String",
          "Kind": "String",
+         "IsConfident": true,
          "IsNullable": false
         },
         "Value": "http://localhost:3000"

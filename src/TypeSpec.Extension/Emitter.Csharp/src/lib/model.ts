@@ -751,11 +751,19 @@ export function getInputType(
             });
         }
 
+        let isConfident = false; // unions are always low confident now
+        // but some cases we do not recognize them as actual union types, for instance, it is a union of literal types, which should be recognize as enum
+        // TODO -- we should also generate this case as InputEnumType instead of here.
+        if (ItemTypes.every((i) => isInputLiteralType(i))) {
+            isConfident = true; // this should be an enum type instead of regular union type, therefore we put its IsConfident as true here as a workaround.
+            // TODO -- change the implementation here to return a real InputEnumType.
+        }
+
         return ItemTypes.length > 1
             ? ({
                   Name: "Union",
                   UnionItemTypes: ItemTypes,
-                  IsConfident: false, // unions are always low confident now
+                  IsConfident: true,
                   IsNullable: false
               } as InputUnionType)
             : ItemTypes[0];

@@ -398,7 +398,7 @@
         "IsNullable": false
        }
       ],
-      "IsConfident": false,
+      "IsConfident": true,
       "IsNullable": false
      },
      "IsRequired": true,
@@ -1008,8 +1008,8 @@
         "$id": "130",
         "Name": "Uri",
         "Kind": "Uri",
-        "IsNullable": false,
-        "IsConfident": true
+        "IsConfident": true,
+        "IsNullable": false
        },
        "Location": "Uri",
        "IsApiVersion": false,

@@ -234,7 +234,6 @@ export function createModelForService(
                     parameter.IsEndpoint ||
                     parameter.IsContentType
                 ) {
-                    parameter.Type.IsConfident = true; // we never recognize these as low confident level
                     continue;
                 }
                 isOperationConfident &&= isConfident(parameter.Type);

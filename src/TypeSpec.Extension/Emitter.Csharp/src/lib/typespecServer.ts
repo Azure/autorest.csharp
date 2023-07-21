@@ -59,6 +59,7 @@ export function resolveServers(
                 ? ({
                       Name: "Uri",
                       Kind: InputTypeKind.Uri,
+                      IsConfident: true,
                       IsNullable: false
                   } as InputPrimitiveType)
                 : getInputType(
@@ -104,6 +105,7 @@ export function resolveServers(
                 Type: {
                     Name: "String",
                     Kind: InputTypeKind.String,
+                    IsConfident: true,
                     IsNullable: false
                 } as InputPrimitiveType,
                 Location: RequestLocation.Uri,
@@ -119,6 +121,7 @@ export function resolveServers(
                     Type: {
                         Name: "String",
                         Kind: InputTypeKind.String,
+                        IsConfident: true,
                         IsNullable: false
                     } as InputPrimitiveType,
                     Value: server.url

@@ -28,6 +28,7 @@
         "$id": "5",
         "Name": "String",
         "Kind": "String",
+        "IsConfident": true,
         "IsNullable": false
        },
        "Location": "Uri",
@@ -45,6 +46,7 @@
          "$id": "7",
          "Name": "String",
          "Kind": "String",
+         "IsConfident": true,
          "IsNullable": false
         },
         "Value": "http://localhost:3000"
@@ -58,6 +60,7 @@
         "$id": "9",
         "Name": "string",
         "Kind": "String",
+        "IsConfident": true,
         "IsNullable": false
        },
        "Location": "Header",
@@ -78,6 +81,7 @@
         "$id": "11",
         "Name": "utcDateTime",
         "Kind": "DateTime",
+        "IsConfident": true,
         "IsNullable": false
        },
        "Location": "Header",
@@ -98,6 +102,7 @@
         "$id": "13",
         "Name": "String",
         "Kind": "String",
+        "IsConfident": true,
         "IsNullable": false
        },
        "Location": "Header",
@@ -126,6 +131,7 @@
         "$id": "16",
         "Name": "String",
         "Kind": "String",
+        "IsConfident": true,
         "IsNullable": false
        },
        "Location": "Query",
@@ -143,6 +149,7 @@
          "$id": "18",
          "Name": "String",
          "Kind": "String",
+         "IsConfident": true,
          "IsNullable": false
         },
         "Value": "1.0.0"
@@ -173,9 +180,11 @@
              "$id": "23",
              "Name": "String",
              "Kind": "String",
+             "IsConfident": true,
              "IsNullable": false
             },
             "Value": "accepted",
+            "IsConfident": true,
             "IsNullable": false
            },
            {
@@ -185,12 +194,15 @@
              "$id": "25",
              "Name": "String",
              "Kind": "String",
+             "IsConfident": true,
              "IsNullable": false
             },
             "Value": "rejected",
+            "IsConfident": true,
             "IsNullable": false
            }
           ],
+          "IsConfident": true,
           "IsNullable": false
          }
         }
@@ -204,7 +216,8 @@
      "Path": "/special-headers/repeatability/immediateSuccess",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
+     "GenerateConvenienceMethod": true,
+     "IsConfident": true
     }
    ],
    "Protocol": {

@@ -27,8 +27,8 @@
         "$id": "5",
         "Name": "Uri",
         "Kind": "Uri",
-        "IsNullable": false,
-        "IsConfident": true
+        "IsConfident": true,
+        "IsNullable": false
        },
        "Location": "Uri",
        "IsApiVersion": false,
