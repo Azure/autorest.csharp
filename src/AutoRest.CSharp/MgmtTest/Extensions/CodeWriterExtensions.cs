@@ -39,7 +39,7 @@ namespace AutoRest.CSharp.MgmtTest.Extensions
             // get the type from TypeFactory cannot get the replaced types, therefore we need to put an argument in the signature as a hint in case this might happen in the replaced type case
             type ??= MgmtContext.Context.TypeFactory.CreateType(exampleValue.Schema, false);
 
-            if (ReferenceTypePropertyChooser.TryGetCachedExactMatch(exampleValue.Schema, out CSharpType? replaceType) && replaceType != null)
+            if (exampleValue.Schema != null && ReferenceTypePropertyChooser.TryGetCachedExactMatch(exampleValue.Schema, out CSharpType? replaceType) && replaceType != null)
                 type = replaceType;
 
             return type.IsFrameworkType ?
