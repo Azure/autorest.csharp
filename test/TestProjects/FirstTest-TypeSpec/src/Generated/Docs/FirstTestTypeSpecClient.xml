@@ -541,7 +541,7 @@ Console.WriteLine(result.GetProperty("name").ToString());
 ]]></code>
 </example>
     </member>
-    <member name="AddTimeHeaderAsync(DateTimeOffset?,RequestContext)">
+    <member name="AddTimeHeaderAsync(RequestContext)">
 <example>
 This sample shows how to call AddTimeHeaderAsync.
 <code><![CDATA[
@@ -551,17 +551,9 @@ var client = new FirstTestTypeSpecClient(endpoint);
 Response response = await client.AddTimeHeaderAsync();
 Console.WriteLine(response.Status);
 ]]></code>
-This sample shows how to call AddTimeHeaderAsync with all parameters.
-<code><![CDATA[
-var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new FirstTestTypeSpecClient(endpoint);
-
-Response response = await client.AddTimeHeaderAsync(DateTimeOffset.UtcNow);
-Console.WriteLine(response.Status);
-]]></code>
 </example>
     </member>
-    <member name="AddTimeHeader(DateTimeOffset?,RequestContext)">
+    <member name="AddTimeHeader(RequestContext)">
 <example>
 This sample shows how to call AddTimeHeader.
 <code><![CDATA[
@@ -569,14 +561,6 @@ var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new FirstTestTypeSpecClient(endpoint);
 
 Response response = client.AddTimeHeader();
-Console.WriteLine(response.Status);
-]]></code>
-This sample shows how to call AddTimeHeader with all parameters.
-<code><![CDATA[
-var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new FirstTestTypeSpecClient(endpoint);
-
-Response response = client.AddTimeHeader(DateTimeOffset.UtcNow);
 Console.WriteLine(response.Status);
 ]]></code>
 </example>

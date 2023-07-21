@@ -3,6 +3,8 @@
     <IncludeStyleCopAnalyzers>true</IncludeStyleCopAnalyzers>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <NoWarn>CS1591</NoWarn>
+    <IsTestGenerationSrcProject Condition="!$(MSBuildProjectName.EndsWith('.Tests'))">true</IsTestGenerationSrcProject>
+    <IsTestGenerationTestProjet Condition="$(MSBuildProjectName.EndsWith('.Tests'))">true</IsTestGenerationTestProjet>
   </PropertyGroup>
   <Import Project="..\Directory.Build.props" />
 </Project>

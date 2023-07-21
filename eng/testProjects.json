@@ -21,6 +21,7 @@
         "projection/projected-name",
         "server/path/multiple",
         "server/path/single",
+        "special-headers/repeatability",
         "special-words",
         "parameters/collection-format",
         "parameters/spread"

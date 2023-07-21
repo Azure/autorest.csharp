@@ -74,6 +74,9 @@ namespace AutoRest.CSharp.Common.AutoRest.Plugins
             {
                 Directory.CreateDirectory(Path.Combine(_testDirectory, "SessionRecords"));
             }
+            if (!Directory.Exists(_testDirectory))
+                Directory.CreateDirectory(_testDirectory);
+
             await File.WriteAllBytesAsync(Path.Combine(_testDirectory, $"{Configuration.Namespace}.Tests.csproj"), Encoding.ASCII.GetBytes(GetTestCsproj()));
             //TODO WriteTestBaseClass(autoRest);
             //TODO WriteTestEnvironment(autoRest);
