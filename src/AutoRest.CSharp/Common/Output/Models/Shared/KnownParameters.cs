@@ -48,7 +48,7 @@ namespace AutoRest.CSharp.Output.Models.Shared
         public static readonly Parameter EnumeratorCancellationTokenParameter = new("cancellationToken", "Enumerator cancellation token", typeof(CancellationToken), Constant.NewInstanceOf(typeof(CancellationToken)), ValidationType.None, null) { Attributes = new[] { new CSharpAttribute(typeof(EnumeratorCancellationAttribute)) } };
 
         public static readonly Parameter ClientRequestIdParameter = new("x-ms-client-request-id", "The client request id header parameter.", new CSharpType(typeof(string)), Constant.FromExpression($"message.Request.ClientRequestId", new CSharpType(typeof(string))), ValidationType.None, null);
-        public static readonly Parameter ReturnClientRequestIdParameter = new("x-ms-return-client-request-id", "The headert parameter to indicate if return client request id in response.", new CSharpType(typeof(string)), new Constant(true, new CSharpType(typeof(bool))), ValidationType.None, null);
+        public static readonly Parameter ReturnClientRequestIdParameter = new("x-ms-return-client-request-id", "The headert parameter to indicate if return client request id in response.", new CSharpType(typeof(string)), new Constant("true", new CSharpType(typeof(string))), ValidationType.None, null);
 
         public static readonly InputParameter[] ClientRequestIDInputParamters = new[] {
             new InputParameter("clientRequestId", "x-ms-client-request-id", "the client request id header", InputPrimitiveType.String, RequestLocation.Header, null, null, null, InputOperationParameterKind.Constant, true, false, false, false, false, false, false, null, null, SerializationFormat.Default),
