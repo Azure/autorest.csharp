@@ -763,7 +763,7 @@ export function getInputType(
             ? ({
                   Name: "Union",
                   UnionItemTypes: ItemTypes,
-                  IsConfident: true,
+                  IsConfident: isConfident,
                   IsNullable: false
               } as InputUnionType)
             : ItemTypes[0];

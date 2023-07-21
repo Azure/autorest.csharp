@@ -11,6 +11,12 @@ import {
     isInputModelType
 } from "../type/inputType.js";
 
+/**
+ * The function calculates if the type passing in is confident or not.
+ * @param type the type to calculate confident level
+ * @param visitedModels a cache for visited models, to avoid infinite loop in those cases that a model contains direct or indirect reference to itself
+ * @returns true if the type is confident, otherwise false
+ */
 export function getConfident(
     type: InputType,
     visitedModels: Set<InputModelType>
@@ -30,7 +36,11 @@ function getModelConfident(
     type: InputModelType,
     visitedModels: Set<InputModelType>
 ): boolean {
-    if (visitedModels.has(type)) return type.IsConfident ?? true; // this means this has been calculated before or being calculated right now, return
+    // check if the type is visited before, if so, there are two cases:
+    // 1. it already has a value, true or false, we return that.
+    // 2. it is being calculated right now, which means its value now is null (undefined is prohibited by the definition of the interface)
+    //    in this case we return true to skip the calculation, because the calculation of `IsConfident` is trying to find if there is a false (we are using && to do that)
+    if (visitedModels.has(type)) return type.IsConfident ?? true;
     visitedModels.add(type);
 
     if (type.IsConfident !== null) return type.IsConfident;
@@ -39,9 +49,12 @@ function getModelConfident(
         ? getModelConfident(type.BaseModel, visitedModels)
         : true;
 
-    let isModelConfident = isBaseConfident;
+    if (!isBaseConfident) return false;
+
+    let isModelConfident: boolean = isBaseConfident;
     for (const prop of type.Properties) {
         isModelConfident &&= getConfident(prop.Type, visitedModels);
+        if (!isModelConfident) break; // if one of the property is not confident, we could stop here and return false which means the model is not confident
     }
 
     return isModelConfident;

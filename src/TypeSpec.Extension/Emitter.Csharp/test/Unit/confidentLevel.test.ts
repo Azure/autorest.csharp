@@ -71,6 +71,7 @@ op test(@body input: Cat): Cat;
         const models = root.Models;
         const catModel = models.find((m) => m.Name === "Cat");
         // assert Cat is not confident
+        assert(isEqual(true, catModel !== undefined));
         assert(
             isEqual(false, catModel?.IsConfident),
             `Cat should not be confident`
@@ -168,6 +169,127 @@ op test(@body input: Cat): Cat;
         assert(
             isEqual(true, operation.IsConfident),
             `Operation should be confident`
+        );
+    });
+
+    it("IsConfident should be properly calculated when self reference exists", async () => {
+        const program = await typeSpecCompile(
+            `
+    @doc("The model that contains self reference")
+    model ModelWithSelfReference {
+        @doc("The name")
+        name: string;
+
+        @doc("The self reference")
+        selfReference: ModelWithSelfReference[];
+    }
+
+    @doc("Non-confident model that contains self reference")
+    model NonConfidentModelWithSelfReference {
+        @doc("The name")
+        name: string;
+
+        @doc("The self reference")
+        selfReference: NonConfidentModelWithSelfReference[];
+
+        @doc("The non-confident part")
+        unionProperty: string | int32[]; // put a union here so that it is not confident any more
+    }
+
+    @route("/test1")
+    op test1(@body input: ModelWithSelfReference): void;
+
+    @route("/test2")
+    op test2(@body input: NonConfidentModelWithSelfReference): void;
+    `,
+            runner
+        );
+        runner.compileAndDiagnose;
+        const context = createEmitterContext(program);
+        const root: CodeModel = createModel(context);
+        const models = root.Models;
+        const model = models.find((m) => m.Name === "ModelWithSelfReference");
+        // assert it is confident
+        assert(isEqual(true, model !== undefined));
+        assert(
+            isEqual(true, model?.IsConfident),
+            `This model should be confident`
+        );
+        const anotherModel = models.find(
+            (m) => m.Name === "NonConfidentModelWithSelfReference"
+        );
+        // assert it is not confident
+        assert(isEqual(true, anotherModel !== undefined));
+        assert(
+            isEqual(false, anotherModel?.IsConfident),
+            `This model should not be confident`
+        );
+        const client = root.Clients[0];
+        const first = client.Operations.find((o) => o.Name === "test1");
+        // the operation `test1` should be confident as well
+        assert(isEqual(true, first !== undefined));
+        assert(
+            isEqual(true, first?.IsConfident),
+            `Operation should be confident`
+        );
+        const second = client.Operations.find((o) => o.Name === "test2");
+        // the operation `test2` should be confident as well
+        assert(isEqual(true, second !== undefined));
+        assert(
+            isEqual(false, second?.IsConfident),
+            `Operation should not be confident`
+        );
+    });
+
+    it("IsConfident should be properly calculated when indirect self reference exists", async () => {
+        const program = await typeSpecCompile(
+            `
+    @doc("The model that contains self reference")
+    model NonConfidentModelWithSelfReference {
+        @doc("The name")
+        name: string;
+
+        @doc("The self reference")
+        reference: IndirectSelfReferenceModel[];
+    }
+
+    @doc("Indirect self reference model")
+    model IndirectSelfReferenceModel {
+        @doc("Something not important")
+        something: string;
+
+        @doc("Reference back")
+        reference: NonConfidentModelWithSelfReference;
+
+        @doc("The non-confident part")
+        unionProperty: string | int32[]; // put a union here so that it is not confident any more
+    }
+
+    @route("/test1")
+    op test1(@body input: NonConfidentModelWithSelfReference): void;
+    `,
+            runner
+        );
+        runner.compileAndDiagnose;
+        const context = createEmitterContext(program);
+        const root: CodeModel = createModel(context);
+        const models = root.Models;
+        const anotherModel = models.find(
+            (m) => m.Name === "NonConfidentModelWithSelfReference"
+        );
+        // assert it is not confident
+        assert(isEqual(true, anotherModel !== undefined));
+        assert(
+            isEqual(false, anotherModel?.IsConfident),
+            `This model should not be confident`
+        );
+        const client = root.Clients[0];
+        const op = client.Operations.find((o) => o.Name === "test1");
+        // the operation `test1` should be confident as well
+        assert(isEqual(true, op !== undefined));
+        assert(
+            isEqual(false, op?.IsConfident),
+            `Operation should not be confident`
         );
     });
 
