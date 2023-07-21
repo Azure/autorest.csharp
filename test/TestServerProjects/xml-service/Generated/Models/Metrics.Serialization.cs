@@ -15,9 +15,9 @@ namespace xml_service.Models
 {
     public partial class Metrics : IXmlSerializable, IXmlModelSerializable
     {
-        void IXmlSerializable.Write(XmlWriter writer, string nameHint) => ((IXmlModelSerializable)this).Serialize(writer, ModelSerializerOptions.AzureServiceDefault);
+        void IXmlModelSerializable.Serialize(XmlWriter writer, ModelSerializerOptions options) => ((IXmlSerializable)this).Write(writer, null, options);
 
-        void IXmlModelSerializable.Serialize(XmlWriter writer, ModelSerializerOptions options)
+        void IXmlSerializable.Write(XmlWriter writer, string nameHint, ModelSerializerOptions options)
         {
             writer.WriteStartElement("Metrics");
             if (Optional.IsDefined(Version))
@@ -37,7 +37,7 @@ namespace xml_service.Models
             }
             if (Optional.IsDefined(RetentionPolicy))
             {
-                writer.WriteObjectValue(RetentionPolicy, "RetentionPolicy");
+                writer.WriteObjectValue(RetentionPolicy, "RetentionPolicy", options);
             }
             writer.WriteEndElement();
         }

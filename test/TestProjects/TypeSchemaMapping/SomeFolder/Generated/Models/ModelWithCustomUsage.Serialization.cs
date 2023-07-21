@@ -16,9 +16,9 @@ namespace TypeSchemaMapping.Models
 {
     public partial class ModelWithCustomUsage : IUtf8JsonSerializable, IJsonModelSerializable, IXmlSerializable, IXmlModelSerializable
     {
-        void IXmlSerializable.Write(XmlWriter writer, string nameHint) => ((IXmlModelSerializable)this).Serialize(writer, ModelSerializerOptions.AzureServiceDefault);
+        void IXmlModelSerializable.Serialize(XmlWriter writer, ModelSerializerOptions options) => ((IXmlSerializable)this).Write(writer, null, options);
 
-        void IXmlModelSerializable.Serialize(XmlWriter writer, ModelSerializerOptions options)
+        void IXmlSerializable.Write(XmlWriter writer, string nameHint, ModelSerializerOptions options)
         {
             writer.WriteStartElement("ModelWithCustomUsage");
             if (Optional.IsDefined(ModelProperty))

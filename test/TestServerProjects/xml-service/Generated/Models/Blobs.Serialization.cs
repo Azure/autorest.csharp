@@ -16,23 +16,23 @@ namespace xml_service.Models
 {
     public partial class Blobs : IXmlSerializable, IXmlModelSerializable
     {
-        void IXmlSerializable.Write(XmlWriter writer, string nameHint) => ((IXmlModelSerializable)this).Serialize(writer, ModelSerializerOptions.AzureServiceDefault);
+        void IXmlModelSerializable.Serialize(XmlWriter writer, ModelSerializerOptions options) => ((IXmlSerializable)this).Write(writer, null, options);
 
-        void IXmlModelSerializable.Serialize(XmlWriter writer, ModelSerializerOptions options)
+        void IXmlSerializable.Write(XmlWriter writer, string nameHint, ModelSerializerOptions options)
         {
             writer.WriteStartElement("Blobs");
             if (Optional.IsCollectionDefined(BlobPrefix))
             {
                 foreach (var item in BlobPrefix)
                 {
-                    writer.WriteObjectValue(item, "BlobPrefix");
+                    writer.WriteObjectValue(item, "BlobPrefix", options);
                 }
             }
             if (Optional.IsCollectionDefined(Blob))
             {
                 foreach (var item in Blob)
                 {
-                    writer.WriteObjectValue(item, "Blob");
+                    writer.WriteObjectValue(item, "Blob", options);
                 }
             }
             writer.WriteEndElement();

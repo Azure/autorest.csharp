@@ -16,9 +16,9 @@ namespace xml_service.Models
 {
     public partial class ListContainersResponse : IXmlSerializable, IXmlModelSerializable
     {
-        void IXmlSerializable.Write(XmlWriter writer, string nameHint) => ((IXmlModelSerializable)this).Serialize(writer, ModelSerializerOptions.AzureServiceDefault);
+        void IXmlModelSerializable.Serialize(XmlWriter writer, ModelSerializerOptions options) => ((IXmlSerializable)this).Write(writer, null, options);
 
-        void IXmlModelSerializable.Serialize(XmlWriter writer, ModelSerializerOptions options)
+        void IXmlSerializable.Write(XmlWriter writer, string nameHint, ModelSerializerOptions options)
         {
             writer.WriteStartElement("EnumerationResults");
             writer.WriteStartAttribute("ServiceEndpoint");
@@ -44,7 +44,7 @@ namespace xml_service.Models
                 writer.WriteStartElement("Containers");
                 foreach (var item in Containers)
                 {
-                    writer.WriteObjectValue(item, "Container");
+                    writer.WriteObjectValue(item, "Container", options);
                 }
                 writer.WriteEndElement();
             }

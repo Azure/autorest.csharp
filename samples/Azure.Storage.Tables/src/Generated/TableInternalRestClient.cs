@@ -957,7 +957,7 @@ namespace Azure.Storage.Tables
                 content.XmlWriter.WriteStartElement("SignedIdentifiers");
                 foreach (var item in tableAcl)
                 {
-                    content.XmlWriter.WriteObjectValue(item, "SignedIdentifier", options);
+                    content.XmlWriter.WriteObjectValue(item, "SignedIdentifier");
                 }
                 content.XmlWriter.WriteEndElement();
                 request.Content = content;

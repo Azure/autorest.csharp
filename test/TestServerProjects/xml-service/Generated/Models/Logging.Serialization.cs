@@ -15,9 +15,9 @@ namespace xml_service.Models
 {
     public partial class Logging : IXmlSerializable, IXmlModelSerializable
     {
-        void IXmlSerializable.Write(XmlWriter writer, string nameHint) => ((IXmlModelSerializable)this).Serialize(writer, ModelSerializerOptions.AzureServiceDefault);
+        void IXmlModelSerializable.Serialize(XmlWriter writer, ModelSerializerOptions options) => ((IXmlSerializable)this).Write(writer, null, options);
 
-        void IXmlModelSerializable.Serialize(XmlWriter writer, ModelSerializerOptions options)
+        void IXmlSerializable.Write(XmlWriter writer, string nameHint, ModelSerializerOptions options)
         {
             writer.WriteStartElement("Logging");
             writer.WriteStartElement("Version");
@@ -32,7 +32,7 @@ namespace xml_service.Models
             writer.WriteStartElement("Write");
             writer.WriteValue(Write);
             writer.WriteEndElement();
-            writer.WriteObjectValue(RetentionPolicy, "RetentionPolicy");
+            writer.WriteObjectValue(RetentionPolicy, "RetentionPolicy", options);
             writer.WriteEndElement();
         }
 

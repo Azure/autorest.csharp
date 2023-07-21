@@ -16,15 +16,15 @@ namespace xml_service.Models
 {
     public partial class Container : IXmlSerializable, IXmlModelSerializable
     {
-        void IXmlSerializable.Write(XmlWriter writer, string nameHint) => ((IXmlModelSerializable)this).Serialize(writer, ModelSerializerOptions.AzureServiceDefault);
+        void IXmlModelSerializable.Serialize(XmlWriter writer, ModelSerializerOptions options) => ((IXmlSerializable)this).Write(writer, null, options);
 
-        void IXmlModelSerializable.Serialize(XmlWriter writer, ModelSerializerOptions options)
+        void IXmlSerializable.Write(XmlWriter writer, string nameHint, ModelSerializerOptions options)
         {
             writer.WriteStartElement("Container");
             writer.WriteStartElement("Name");
             writer.WriteValue(Name);
             writer.WriteEndElement();
-            writer.WriteObjectValue(Properties, "Properties");
+            writer.WriteObjectValue(Properties, "Properties", options);
             if (Optional.IsCollectionDefined(Metadata))
             {
                 foreach (var pair in Metadata)

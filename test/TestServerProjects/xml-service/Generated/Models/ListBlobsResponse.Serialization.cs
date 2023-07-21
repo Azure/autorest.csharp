@@ -15,9 +15,9 @@ namespace xml_service.Models
 {
     public partial class ListBlobsResponse : IXmlSerializable, IXmlModelSerializable
     {
-        void IXmlSerializable.Write(XmlWriter writer, string nameHint) => ((IXmlModelSerializable)this).Serialize(writer, ModelSerializerOptions.AzureServiceDefault);
+        void IXmlModelSerializable.Serialize(XmlWriter writer, ModelSerializerOptions options) => ((IXmlSerializable)this).Write(writer, null, options);
 
-        void IXmlModelSerializable.Serialize(XmlWriter writer, ModelSerializerOptions options)
+        void IXmlSerializable.Write(XmlWriter writer, string nameHint, ModelSerializerOptions options)
         {
             writer.WriteStartElement("EnumerationResults");
             if (Optional.IsDefined(ServiceEndpoint))
@@ -41,7 +41,7 @@ namespace xml_service.Models
             writer.WriteStartElement("Delimiter");
             writer.WriteValue(Delimiter);
             writer.WriteEndElement();
-            writer.WriteObjectValue(Blobs, "Blobs");
+            writer.WriteObjectValue(Blobs, "Blobs", options);
             writer.WriteStartElement("NextMarker");
             writer.WriteValue(NextMarker);
             writer.WriteEndElement();

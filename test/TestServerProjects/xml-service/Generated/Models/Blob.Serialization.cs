@@ -16,9 +16,9 @@ namespace xml_service.Models
 {
     public partial class Blob : IXmlSerializable, IXmlModelSerializable
     {
-        void IXmlSerializable.Write(XmlWriter writer, string nameHint) => ((IXmlModelSerializable)this).Serialize(writer, ModelSerializerOptions.AzureServiceDefault);
+        void IXmlModelSerializable.Serialize(XmlWriter writer, ModelSerializerOptions options) => ((IXmlSerializable)this).Write(writer, null, options);
 
-        void IXmlModelSerializable.Serialize(XmlWriter writer, ModelSerializerOptions options)
+        void IXmlSerializable.Write(XmlWriter writer, string nameHint, ModelSerializerOptions options)
         {
             writer.WriteStartElement("Blob");
             writer.WriteStartElement("Name");
@@ -30,7 +30,7 @@ namespace xml_service.Models
             writer.WriteStartElement("Snapshot");
             writer.WriteValue(Snapshot);
             writer.WriteEndElement();
-            writer.WriteObjectValue(Properties, "Properties");
+            writer.WriteObjectValue(Properties, "Properties", options);
             if (Optional.IsCollectionDefined(Metadata))
             {
                 foreach (var pair in Metadata)

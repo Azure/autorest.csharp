@@ -15,14 +15,14 @@ namespace xml_service.Models
 {
     public partial class RootWithRefAndNoMeta : IXmlSerializable, IXmlModelSerializable
     {
-        void IXmlSerializable.Write(XmlWriter writer, string nameHint) => ((IXmlModelSerializable)this).Serialize(writer, ModelSerializerOptions.AzureServiceDefault);
+        void IXmlModelSerializable.Serialize(XmlWriter writer, ModelSerializerOptions options) => ((IXmlSerializable)this).Write(writer, null, options);
 
-        void IXmlModelSerializable.Serialize(XmlWriter writer, ModelSerializerOptions options)
+        void IXmlSerializable.Write(XmlWriter writer, string nameHint, ModelSerializerOptions options)
         {
             writer.WriteStartElement("RootWithRefAndNoMeta");
             if (Optional.IsDefined(RefToModel))
             {
-                writer.WriteObjectValue(RefToModel, "RefToModel");
+                writer.WriteObjectValue(RefToModel, "RefToModel", options);
             }
             if (Optional.IsDefined(Something))
             {
