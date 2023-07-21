@@ -11,7 +11,6 @@ using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Mgmt.AutoRest;
 using AutoRest.CSharp.Mgmt.Decorator;
-using AutoRest.CSharp.Mgmt.Output;
 using AutoRest.CSharp.MgmtTest.Models;
 using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Output.Models.Types;
@@ -39,6 +38,9 @@ namespace AutoRest.CSharp.MgmtTest.Extensions
             // get the type of this schema in the type factory if the type is not specified
             // get the type from TypeFactory cannot get the replaced types, therefore we need to put an argument in the signature as a hint in case this might happen in the replaced type case
             type ??= MgmtContext.Context.TypeFactory.CreateType(exampleValue.Schema, false);
+
+            if (ReferenceTypePropertyChooser.TryGetCachedExactMatch(exampleValue.Schema, out CSharpType? replaceType) && replaceType != null)
+                type = replaceType;
 
             return type.IsFrameworkType ?
                 writer.AppendFrameworkTypeValue(type, exampleValue, includeCollectionInitialization) :
@@ -125,25 +127,24 @@ namespace AutoRest.CSharp.MgmtTest.Extensions
             {
                 const string DFE_OBJECT_PROPERTY_TYPE = "type";
                 const string DFE_OBJECT_PROPERTY_VALUE = "value";
-                Dictionary<string, string> DFE_FACTORY_METHOD_MAPPING = new Dictionary<string, string>()
-                {
-                    ["Expression"] = "FromExpression",
-                    ["SecureString"] = "FromSecretString",
-                    ["AzureKeyVaultSecretReference"] = "FromKeyVaultSecretReference"
-                };
 
                 string dfeType = (string)exampleValue.Properties![DFE_OBJECT_PROPERTY_TYPE].RawValue!;
-                string dfeValue = (string)exampleValue.Properties![DFE_OBJECT_PROPERTY_VALUE].RawValue!;
+                ExampleValue dfeValue = exampleValue.Properties![DFE_OBJECT_PROPERTY_VALUE]!;
+                string createMethodName = dfeType switch
+                {
+                    "Expression" => nameof(DataFactoryElement<string>.FromExpression),
+                    "SecureString" => nameof(DataFactoryElement<string>.FromSecretString),
+                    "AzureKeyVaultSecretReference" => nameof(DataFactoryElement<string>.FromKeyVaultSecretReference),
+                    _ => throw new InvalidOperationException("Unknown DataFactoryElement type: " + dfeType)
+                };
 
-                writer.UseNamespace(type.Namespace!);
-                writer.AppendRaw($"{type.ToString().Trim()}.{DFE_FACTORY_METHOD_MAPPING[dfeType]}(");
-                writer.AppendRawValue(dfeValue, typeof(string));
+                writer.Append($"{type: L}.{createMethodName}(");
+                writer.AppendExampleValue(dfeValue, typeof(DataFactoryKeyVaultSecretReference));
                 writer.AppendRaw(")");
             }
             else
             {
-                const int DFE_LITERAL_TYPE_ARG_INDEX = 0;
-                CSharpType literlType = type.Arguments[DFE_LITERAL_TYPE_ARG_INDEX];
+                CSharpType literlType = type.Arguments.First();
                 writer.AppendExampleValue(exampleValue, literlType);
             }
             return writer;
@@ -416,7 +417,7 @@ namespace AutoRest.CSharp.MgmtTest.Extensions
             // need to get the actual ObjectType if this type has a discrinimator
             objectType = GetActualImplementation(objectType, valueDict);
             // get all the properties on this type, including the properties from its base type
-            var properties = new HashSet<ObjectTypeProperty>(objectType.EnumerateHierarchy().SelectMany(objectType => objectType.Properties));
+            var properties = new HashSet<ObjectTypeProperty>(objectType.EnumerateHierarchy().SelectMany(objectType => objectType.Properties).Where(prop => prop.Declaration.Accessibility == "public"));
             var constructor = objectType.InitializationConstructor;
             writer.Append($"new {objectType.Type}(");
             // build a map from parameter name to property
