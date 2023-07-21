@@ -416,8 +416,8 @@ namespace AutoRest.CSharp.MgmtTest.Extensions
             }
             // need to get the actual ObjectType if this type has a discrinimator
             objectType = GetActualImplementation(objectType, valueDict);
-            // get all the properties on this type, including the properties from its base type
-            var properties = new HashSet<ObjectTypeProperty>(objectType.EnumerateHierarchy().SelectMany(objectType => objectType.Properties).Where(prop => prop.Declaration.Accessibility == "public"));
+            // get all the properties on this type, including the properties from its base type. Distinct is needed when the type is replaced with additional property included
+            var properties = new HashSet<ObjectTypeProperty>(objectType.EnumerateHierarchy().SelectMany(objectType => objectType.Properties).DistinctBy(p => p.Declaration.Name));
             var constructor = objectType.InitializationConstructor;
             writer.Append($"new {objectType.Type}(");
             // build a map from parameter name to property
