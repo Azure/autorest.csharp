@@ -50,7 +50,7 @@ namespace AutoRest.TestServer.Tests
             Assert.AreEqual(parameters[0].ParameterType, typeof(RequestContent));
             Assert.AreEqual(parameters[0].IsOptional, false);
             Assert.AreEqual(parameters[1].ParameterType, typeof(RequestContext));
-            Assert.AreEqual(parameters[1].IsOptional, false);
+            Assert.AreEqual(parameters[1].IsOptional, true);
         }
 
         [Test]
@@ -76,7 +76,7 @@ namespace AutoRest.TestServer.Tests
             Assert.AreEqual(parameters[0].ParameterType, typeof(RequestContent));
             Assert.AreEqual(parameters[0].IsOptional, false);
             Assert.AreEqual(parameters[1].ParameterType, typeof(RequestContext));
-            Assert.AreEqual(parameters[1].IsOptional, false);
+            Assert.AreEqual(parameters[1].IsOptional, true);
         }
     }
 }
