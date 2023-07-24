@@ -49,31 +49,31 @@ Console.WriteLine(result.GetProperty("name").ToString());
 ]]></code>
 </example>
     </member>
-    <member name="RepeatableActionAsync(int,UserActionParam,string,DateTimeOffset?,CancellationToken)">
+    <member name="RepeatableActionAsync(int,UserActionParam,CancellationToken)">
 <example>
 This sample shows how to call RepeatableActionAsync with required parameters.
 <code><![CDATA[
 var client = new TraitsClient();
 
 var userActionParam = new UserActionParam("<userActionValue>");
-var result = await client.RepeatableActionAsync(1234, userActionParam, "<repeatabilityRequestId>", DateTimeOffset.UtcNow);
+var result = await client.RepeatableActionAsync(1234, userActionParam);
 ]]></code>
 </example>
     </member>
-    <member name="RepeatableAction(int,UserActionParam,string,DateTimeOffset?,CancellationToken)">
+    <member name="RepeatableAction(int,UserActionParam,CancellationToken)">
 <example>
 This sample shows how to call RepeatableAction with required parameters.
 <code><![CDATA[
 var client = new TraitsClient();
 
 var userActionParam = new UserActionParam("<userActionValue>");
-var result = client.RepeatableAction(1234, userActionParam, "<repeatabilityRequestId>", DateTimeOffset.UtcNow);
+var result = client.RepeatableAction(1234, userActionParam);
 ]]></code>
 </example>
     </member>
-    <member name="RepeatableActionAsync(int,RequestContent,string,DateTimeOffset?,RequestContext)">
+    <member name="RepeatableActionAsync(int,RequestContent,RequestContext)">
 <example>
-This sample shows how to call RepeatableActionAsync with required parameters and request content, and how to parse the result.
+This sample shows how to call RepeatableActionAsync with required parameters and request content and parse the result.
 <code><![CDATA[
 var client = new TraitsClient();
 
@@ -86,24 +86,11 @@ Response response = await client.RepeatableActionAsync(1234, RequestContent.Crea
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("userActionResult").ToString());
 ]]></code>
-This sample shows how to call RepeatableActionAsync with all parameters and request content, and how to parse the result.
-<code><![CDATA[
-var client = new TraitsClient();
-
-var data = new {
-    userActionValue = "<userActionValue>",
-};
-
-Response response = await client.RepeatableActionAsync(1234, RequestContent.Create(data), "<repeatabilityRequestId>", DateTimeOffset.UtcNow);
-
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(result.GetProperty("userActionResult").ToString());
-]]></code>
 </example>
     </member>
-    <member name="RepeatableAction(int,RequestContent,string,DateTimeOffset?,RequestContext)">
+    <member name="RepeatableAction(int,RequestContent,RequestContext)">
 <example>
-This sample shows how to call RepeatableAction with required parameters and request content, and how to parse the result.
+This sample shows how to call RepeatableAction with required parameters and request content and parse the result.
 <code><![CDATA[
 var client = new TraitsClient();
 
@@ -112,19 +99,6 @@ var data = new {
 };
 
 Response response = client.RepeatableAction(1234, RequestContent.Create(data));
-
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(result.GetProperty("userActionResult").ToString());
-]]></code>
-This sample shows how to call RepeatableAction with all parameters and request content, and how to parse the result.
-<code><![CDATA[
-var client = new TraitsClient();
-
-var data = new {
-    userActionValue = "<userActionValue>",
-};
-
-Response response = client.RepeatableAction(1234, RequestContent.Create(data), "<repeatabilityRequestId>", DateTimeOffset.UtcNow);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("userActionResult").ToString());
