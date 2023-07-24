@@ -73,7 +73,7 @@ namespace media_types_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/MediaTypesClient.xml" path="doc/members/member[@name='AnalyzeBodyAsync(RequestContent,ContentType,RequestContext)']/*" />
-        public virtual async Task<Response> AnalyzeBodyAsync(RequestContent content, ContentType contentType, RequestContext context)
+        public virtual async Task<Response> AnalyzeBodyAsync(RequestContent content, ContentType contentType, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("MediaTypesClient.AnalyzeBody");
             scope.Start();
@@ -105,7 +105,7 @@ namespace media_types_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/MediaTypesClient.xml" path="doc/members/member[@name='AnalyzeBody(RequestContent,ContentType,RequestContext)']/*" />
-        public virtual Response AnalyzeBody(RequestContent content, ContentType contentType, RequestContext context)
+        public virtual Response AnalyzeBody(RequestContent content, ContentType contentType, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("MediaTypesClient.AnalyzeBody");
             scope.Start();
@@ -137,7 +137,7 @@ namespace media_types_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/MediaTypesClient.xml" path="doc/members/member[@name='AnalyzeBodyNoAcceptHeaderAsync(RequestContent,ContentType,RequestContext)']/*" />
-        public virtual async Task<Response> AnalyzeBodyNoAcceptHeaderAsync(RequestContent content, ContentType contentType, RequestContext context)
+        public virtual async Task<Response> AnalyzeBodyNoAcceptHeaderAsync(RequestContent content, ContentType contentType, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("MediaTypesClient.AnalyzeBodyNoAcceptHeader");
             scope.Start();
@@ -169,7 +169,7 @@ namespace media_types_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/MediaTypesClient.xml" path="doc/members/member[@name='AnalyzeBodyNoAcceptHeader(RequestContent,ContentType,RequestContext)']/*" />
-        public virtual Response AnalyzeBodyNoAcceptHeader(RequestContent content, ContentType contentType, RequestContext context)
+        public virtual Response AnalyzeBodyNoAcceptHeader(RequestContent content, ContentType contentType, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("MediaTypesClient.AnalyzeBodyNoAcceptHeader");
             scope.Start();
@@ -200,7 +200,7 @@ namespace media_types_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/MediaTypesClient.xml" path="doc/members/member[@name='ContentTypeWithEncodingAsync(RequestContent,RequestContext)']/*" />
-        public virtual async Task<Response> ContentTypeWithEncodingAsync(RequestContent content, RequestContext context)
+        public virtual async Task<Response> ContentTypeWithEncodingAsync(RequestContent content, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("MediaTypesClient.ContentTypeWithEncoding");
             scope.Start();
@@ -231,7 +231,7 @@ namespace media_types_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/MediaTypesClient.xml" path="doc/members/member[@name='ContentTypeWithEncoding(RequestContent,RequestContext)']/*" />
-        public virtual Response ContentTypeWithEncoding(RequestContent content, RequestContext context)
+        public virtual Response ContentTypeWithEncoding(RequestContent content, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("MediaTypesClient.ContentTypeWithEncoding");
             scope.Start();
