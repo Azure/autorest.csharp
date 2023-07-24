@@ -8,7 +8,7 @@
 using System.Text.Json;
 using Azure.Core;
 
-namespace _Specs_.Azure.Core.Lro.Rpc.Legacy.Models
+namespace _Azure.Lro.Rpc.Legacy.Models
 {
     public partial class JobData : IUtf8JsonSerializable
     {

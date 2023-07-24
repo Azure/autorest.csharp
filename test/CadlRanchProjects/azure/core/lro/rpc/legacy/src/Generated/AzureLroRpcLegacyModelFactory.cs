@@ -10,10 +10,10 @@ using System.Collections.Generic;
 using System.Linq;
 using Azure;
 
-namespace _Specs_.Azure.Core.Lro.Rpc.Legacy.Models
+namespace _Azure.Lro.Rpc.Legacy.Models
 {
     /// <summary> Model factory for models. </summary>
-    public static partial class SpecsAzureCoreLroRpcLegacyModelFactory
+    public static partial class AzureLroRpcLegacyModelFactory
     {
         /// <summary> Initializes a new instance of JobResult. </summary>
         /// <param name="jobId"> A processing job identifier. </param>

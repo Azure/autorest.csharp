@@ -8,7 +8,7 @@
 using System;
 using Azure.Core;
 
-namespace _Specs_.Azure.Core.Lro.Standard.Models
+namespace _Azure.Lro.Standard.Models
 {
     /// <summary> Details about a user. </summary>
     public partial class User

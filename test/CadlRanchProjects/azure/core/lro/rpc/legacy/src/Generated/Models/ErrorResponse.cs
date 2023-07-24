@@ -9,7 +9,7 @@ using System;
 using Azure;
 using Azure.Core;
 
-namespace _Specs_.Azure.Core.Lro.Rpc.Legacy.Models
+namespace _Azure.Lro.Rpc.Legacy.Models
 {
     /// <summary> A response containing error details. </summary>
     public partial class ErrorResponse

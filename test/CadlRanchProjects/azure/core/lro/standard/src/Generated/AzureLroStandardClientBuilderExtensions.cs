@@ -7,12 +7,12 @@
 
 using System;
 using Azure.Core.Extensions;
-using _Specs_.Azure.Core.Lro.Standard;
+using _Azure.Lro.Standard;
 
 namespace Microsoft.Extensions.Azure
 {
     /// <summary> Extension methods to add <see cref="StandardClient"/> to client builder. </summary>
-    public static partial class SpecsAzureCoreLroStandardClientBuilderExtensions
+    public static partial class AzureLroStandardClientBuilderExtensions
     {
         /// <summary> Registers a <see cref="StandardClient"/> instance. </summary>
         /// <param name="builder"> The builder to register with. </param>

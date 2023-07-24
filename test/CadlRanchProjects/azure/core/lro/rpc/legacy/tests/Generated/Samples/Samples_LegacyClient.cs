@@ -14,9 +14,9 @@ using Azure;
 using Azure.Core;
 using Azure.Identity;
 using NUnit.Framework;
-using _Specs_.Azure.Core.Lro.Rpc.Legacy.Models;
+using _Azure.Lro.Rpc.Legacy.Models;
 
-namespace _Specs_.Azure.Core.Lro.Rpc.Legacy.Samples
+namespace _Azure.Lro.Rpc.Legacy.Samples
 {
     public class Samples_LegacyClient
     {

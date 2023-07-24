@@ -10,10 +10,10 @@ using System.Collections.Generic;
 using System.Linq;
 using Azure;
 
-namespace _Specs_.Azure.Core.Lro.Standard.Models
+namespace _Azure.Lro.Standard.Models
 {
     /// <summary> Model factory for models. </summary>
-    public static partial class SpecsAzureCoreLroStandardModelFactory
+    public static partial class AzureLroStandardModelFactory
     {
         /// <summary> Initializes a new instance of User. </summary>
         /// <param name="name"> The name of user. </param>

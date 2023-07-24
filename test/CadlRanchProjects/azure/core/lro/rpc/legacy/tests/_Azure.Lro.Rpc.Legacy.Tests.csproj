@@ -8,7 +8,7 @@
 
   <!-- Reference the Client Library -->
   <ItemGroup>
-    <ProjectReference Include="..\src\_Specs_.Azure.Core.Lro.Rpc.Legacy.csproj" />
+    <ProjectReference Include="..\src\_Azure.Lro.Rpc.Legacy.csproj" />
   </ItemGroup>
   
   <ItemGroup>

@@ -8,7 +8,7 @@
 using System;
 using Azure.Core;
 
-namespace _Specs_.Azure.Core.Lro.Rpc.Legacy
+namespace _Azure.Lro.Rpc.Legacy
 {
     /// <summary> Client options for LegacyClient. </summary>
     public partial class LegacyClientOptions : ClientOptions

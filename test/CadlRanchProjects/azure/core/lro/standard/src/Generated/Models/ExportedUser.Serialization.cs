@@ -9,7 +9,7 @@ using System.Text.Json;
 using Azure;
 using Azure.Core;
 
-namespace _Specs_.Azure.Core.Lro.Standard.Models
+namespace _Azure.Lro.Standard.Models
 {
     public partial class ExportedUser
     {

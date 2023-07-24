@@ -8,7 +8,7 @@
 using System;
 using Azure.Core;
 
-namespace _Specs_.Azure.Core.Lro.Standard
+namespace _Azure.Lro.Standard
 {
     /// <summary> Client options for StandardClient. </summary>
     public partial class StandardClientOptions : ClientOptions

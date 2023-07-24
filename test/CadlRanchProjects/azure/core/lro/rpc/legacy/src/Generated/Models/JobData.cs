@@ -8,7 +8,7 @@
 using System;
 using Azure.Core;
 
-namespace _Specs_.Azure.Core.Lro.Rpc.Legacy.Models
+namespace _Azure.Lro.Rpc.Legacy.Models
 {
     /// <summary> Data of the job. </summary>
     public partial class JobData

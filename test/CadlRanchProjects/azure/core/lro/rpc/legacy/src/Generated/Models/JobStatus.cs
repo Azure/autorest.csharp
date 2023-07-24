@@ -8,7 +8,7 @@
 using System;
 using System.ComponentModel;
 
-namespace _Specs_.Azure.Core.Lro.Rpc.Legacy.Models
+namespace _Azure.Lro.Rpc.Legacy.Models
 {
     /// <summary> The status of the processing job. </summary>
     public readonly partial struct JobStatus : IEquatable<JobStatus>

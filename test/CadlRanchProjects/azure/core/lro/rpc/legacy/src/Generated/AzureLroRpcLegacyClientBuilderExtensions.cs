@@ -7,12 +7,12 @@
 
 using System;
 using Azure.Core.Extensions;
-using _Specs_.Azure.Core.Lro.Rpc.Legacy;
+using _Azure.Lro.Rpc.Legacy;
 
 namespace Microsoft.Extensions.Azure
 {
     /// <summary> Extension methods to add <see cref="LegacyClient"/> to client builder. </summary>
-    public static partial class SpecsAzureCoreLroRpcLegacyClientBuilderExtensions
+    public static partial class AzureLroRpcLegacyClientBuilderExtensions
     {
         /// <summary> Registers a <see cref="LegacyClient"/> instance. </summary>
         /// <param name="builder"> The builder to register with. </param>

@@ -1,7 +1,7 @@
 {
   "output-folder": ".",
-  "namespace": "_Specs_.Azure.Core.Lro.Rpc.Legacy",
-  "library-name": "_Specs_.Azure.Core.Lro.Rpc.Legacy",
+  "namespace": "_Azure.Lro.Rpc.Legacy",
+  "library-name": "_Azure.Lro.Rpc.Legacy",
   "shared-source-folders": [
     "../../../../../../../../../artifacts/bin/AutoRest.CSharp/Debug/net6.0/Generator.Shared",
     "../../../../../../../../../artifacts/bin/AutoRest.CSharp/Debug/net6.0/Azure.Core.Shared"

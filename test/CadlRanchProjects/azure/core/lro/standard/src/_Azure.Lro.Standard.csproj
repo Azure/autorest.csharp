@@ -1,9 +1,9 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <Description>This is the _Specs_.Azure.Core.Lro.Rpc.Legacy client library for developing .NET applications with rich experience.</Description>
-    <AssemblyTitle>Azure SDK Code Generation _Specs_.Azure.Core.Lro.Rpc.Legacy for Azure Data Plane</AssemblyTitle>
+    <Description>This is the _Azure.Lro.Standard client library for developing .NET applications with rich experience.</Description>
+    <AssemblyTitle>Azure SDK Code Generation _Azure.Lro.Standard for Azure Data Plane</AssemblyTitle>
     <Version>1.0.0-beta.1</Version>
-    <PackageTags>_Specs_.Azure.Core.Lro.Rpc.Legacy</PackageTags>
+    <PackageTags>_Azure.Lro.Standard</PackageTags>
     <TargetFrameworks>$(RequiredTargetFrameworks)</TargetFrameworks>
     <IncludeOperationsSharedSource>true</IncludeOperationsSharedSource>
   </PropertyGroup>

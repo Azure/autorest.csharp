@@ -14,9 +14,9 @@ using Azure;
 using Azure.Core;
 using Azure.Identity;
 using NUnit.Framework;
-using _Specs_.Azure.Core.Lro.Standard.Models;
+using _Azure.Lro.Standard.Models;
 
-namespace _Specs_.Azure.Core.Lro.Standard.Samples
+namespace _Azure.Lro.Standard.Samples
 {
     public class Samples_StandardClient
     {
