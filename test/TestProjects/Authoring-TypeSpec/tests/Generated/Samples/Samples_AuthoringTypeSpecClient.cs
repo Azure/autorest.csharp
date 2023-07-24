@@ -1158,7 +1158,9 @@ namespace AuthoringTypeSpec.Samples
             var operation = client.SwapDeployments(WaitUntil.Completed, "<projectName>", RequestContent.Create(data));
 
             BinaryData responseData = operation.Value;
-            Console.WriteLine(responseData.ToString());
+            JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
+            Console.WriteLine(result.GetProperty("id").ToString());
+            Console.WriteLine(result.GetProperty("status").ToString());
         }
 
         [Test]
@@ -1177,7 +1179,13 @@ namespace AuthoringTypeSpec.Samples
             var operation = client.SwapDeployments(WaitUntil.Completed, "<projectName>", RequestContent.Create(data));
 
             BinaryData responseData = operation.Value;
-            Console.WriteLine(responseData.ToString());
+            JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
+            Console.WriteLine(result.GetProperty("id").ToString());
+            Console.WriteLine(result.GetProperty("status").ToString());
+            Console.WriteLine(result.GetProperty("error").GetProperty("code").ToString());
+            Console.WriteLine(result.GetProperty("error").GetProperty("message").ToString());
+            Console.WriteLine(result.GetProperty("error").GetProperty("target").ToString());
+            Console.WriteLine(result.GetProperty("error").GetProperty("innererror").GetProperty("code").ToString());
         }
 
         [Test]
@@ -1196,7 +1204,9 @@ namespace AuthoringTypeSpec.Samples
             var operation = await client.SwapDeploymentsAsync(WaitUntil.Completed, "<projectName>", RequestContent.Create(data));
 
             BinaryData responseData = operation.Value;
-            Console.WriteLine(responseData.ToString());
+            JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
+            Console.WriteLine(result.GetProperty("id").ToString());
+            Console.WriteLine(result.GetProperty("status").ToString());
         }
 
         [Test]
@@ -1215,7 +1225,13 @@ namespace AuthoringTypeSpec.Samples
             var operation = await client.SwapDeploymentsAsync(WaitUntil.Completed, "<projectName>", RequestContent.Create(data));
 
             BinaryData responseData = operation.Value;
-            Console.WriteLine(responseData.ToString());
+            JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
+            Console.WriteLine(result.GetProperty("id").ToString());
+            Console.WriteLine(result.GetProperty("status").ToString());
+            Console.WriteLine(result.GetProperty("error").GetProperty("code").ToString());
+            Console.WriteLine(result.GetProperty("error").GetProperty("message").ToString());
+            Console.WriteLine(result.GetProperty("error").GetProperty("target").ToString());
+            Console.WriteLine(result.GetProperty("error").GetProperty("innererror").GetProperty("code").ToString());
         }
     }
 }
