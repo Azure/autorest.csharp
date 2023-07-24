@@ -79,6 +79,12 @@ namespace AutoRest.CSharp.Mgmt.Decorator
                 ["Message"] = new PropertyMetadata("message", true),
                 ["Target"] = new PropertyMetadata("target"),
                 ["Details"] = new PropertyMetadata("details")
+            },
+            [typeof(DataFactoryLinkedServiceReference)] = new()
+            {
+                ["ReferenceType"] = new PropertyMetadata("type", true),
+                ["ReferenceName"] = new PropertyMetadata("referenceName", true),
+                ["Parameters"] = new PropertyMetadata("parameters")
             }
         };
 
