@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System.Collections.Generic;
 using System.Text.Json;
 using Azure;
 using Azure.Core;
@@ -50,6 +51,37 @@ namespace FirstTestTypeSpec.Models
             }
             writer.WritePropertyName("requiredBadDescription"u8);
             writer.WriteStringValue(RequiredBadDescription);
+            if (Optional.IsCollectionDefined(OptionalNullableList))
+            {
+                if (OptionalNullableList != null)
+                {
+                    writer.WritePropertyName("optionalNullableList"u8);
+                    writer.WriteStartArray();
+                    foreach (var item in OptionalNullableList)
+                    {
+                        writer.WriteNumberValue(item);
+                    }
+                    writer.WriteEndArray();
+                }
+                else
+                {
+                    writer.WriteNull("optionalNullableList");
+                }
+            }
+            if (RequiredNullableList != null && Optional.IsCollectionDefined(RequiredNullableList))
+            {
+                writer.WritePropertyName("requiredNullableList"u8);
+                writer.WriteStartArray();
+                foreach (var item in RequiredNullableList)
+                {
+                    writer.WriteNumberValue(item);
+                }
+                writer.WriteEndArray();
+            }
+            else
+            {
+                writer.WriteNull("requiredNullableList");
+            }
             writer.WriteEndObject();
         }
 
@@ -70,6 +102,8 @@ namespace FirstTestTypeSpec.Models
             Optional<ThingOptionalLiteralFloat> optionalLiteralFloat = default;
             Optional<bool> optionalLiteralBool = default;
             string requiredBadDescription = default;
+            Optional<IList<int>> optionalNullableList = default;
+            IList<int> requiredNullableList = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("name"u8))
@@ -143,8 +177,38 @@ namespace FirstTestTypeSpec.Models
                     requiredBadDescription = property.Value.GetString();
                     continue;
                 }
+                if (property.NameEquals("optionalNullableList"u8))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        optionalNullableList = null;
+                        continue;
+                    }
+                    List<int> array = new List<int>();
+                    foreach (var item in property.Value.EnumerateArray())
+                    {
+                        array.Add(item.GetInt32());
+                    }
+                    optionalNullableList = array;
+                    continue;
+                }
+                if (property.NameEquals("requiredNullableList"u8))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        requiredNullableList = null;
+                        continue;
+                    }
+                    List<int> array = new List<int>();
+                    foreach (var item in property.Value.EnumerateArray())
+                    {
+                        array.Add(item.GetInt32());
+                    }
+                    requiredNullableList = array;
+                    continue;
+                }
             }
-            return new Thing(name, requiredUnion, requiredLiteralString, requiredLiteralInt, requiredLiteralFloat, requiredLiteralBool, Optional.ToNullable(optionalLiteralString), Optional.ToNullable(optionalLiteralInt), Optional.ToNullable(optionalLiteralFloat), Optional.ToNullable(optionalLiteralBool), requiredBadDescription);
+            return new Thing(name, requiredUnion, requiredLiteralString, requiredLiteralInt, requiredLiteralFloat, requiredLiteralBool, Optional.ToNullable(optionalLiteralString), Optional.ToNullable(optionalLiteralInt), Optional.ToNullable(optionalLiteralFloat), Optional.ToNullable(optionalLiteralBool), requiredBadDescription, Optional.ToList(optionalNullableList), requiredNullableList);
         }
 
         /// <summary> Deserializes the model from a raw response. </summary>

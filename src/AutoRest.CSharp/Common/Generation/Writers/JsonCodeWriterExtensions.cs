@@ -124,7 +124,6 @@ namespace AutoRest.CSharp.Generation.Writers
                                  frameworkType == typeof(Guid) ||
                                  frameworkType == typeof(Azure.Core.ResourceIdentifier) ||
                                  frameworkType == typeof(Azure.Core.ResourceType) ||
-                                 frameworkType == typeof(Azure.Core.RequestMethod) ||
                                  frameworkType == typeof(Azure.Core.AzureLocation))
                         {
                             writer.AppendRaw("WriteStringValue");
@@ -156,7 +155,8 @@ namespace AutoRest.CSharp.Generation.Writers
                         }
                         else if (frameworkType == typeof(ETag) ||
                             frameworkType == typeof(Azure.Core.ContentType) ||
-                            frameworkType == typeof(IPAddress))
+                            frameworkType == typeof(IPAddress) ||
+                            frameworkType == typeof(Azure.Core.RequestMethod))
                         {
                             writer.Line($"WriteStringValue({name:I}.ToString());");
                             return;
@@ -365,7 +365,24 @@ namespace AutoRest.CSharp.Generation.Writers
                         var emptyStringCheck = GetEmptyStringCheckClause(property, itemVariable, shouldTreatEmptyStringAsNull);
                         using (writer.Scope($"if ({itemVariable}.Value.ValueKind == {typeof(JsonValueKind)}.Null{emptyStringCheck})"))
                         {
-                            writer.Line($"{propertyVariables[property].Declaration} = null;");
+                            if (Configuration.DeserializeNullCollectionAsNullValue)
+                            {
+                                // we will assign null to everything if we have this configuration on
+                                writer.Line($"{propertyVariables[property].Declaration} = null;");
+                            }
+                            else
+                            {
+                                // we only assign null when it is not a collection if we have this configuration off
+                                if (!TypeFactory.IsCollectionType(property.ValueType))
+                                {
+                                    writer.Line($"{propertyVariables[property].Declaration} = null;");
+                                }
+                                else if (property.IsRequired)
+                                {
+                                    // specially when it is required, we assign ChangeTrackingList because for optional lists we are already doing that
+                                    writer.Line($"{propertyVariables[property].Declaration} = new {TypeFactory.GetPropertyImplementationType(property.ValueType)}();");
+                                }
+                            }
                             writer.Append($"continue;");
                         }
                     }

@@ -19,36 +19,48 @@ namespace ModelsTypeSpec.Models
         /// <param name="requiredString"> Required string. </param>
         /// <param name="requiredInt"> Required int. </param>
         /// <param name="requiredModel"> Required model. </param>
-        /// <param name="requiredCollection"> Required collection. </param>
+        /// <param name="requiredList"> Required collection. </param>
         /// <param name="requiredModelRecord"> Required model record. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="requiredString"/>, <paramref name="requiredModel"/>, <paramref name="requiredCollection"/> or <paramref name="requiredModelRecord"/> is null. </exception>
-        internal OutputModel(string requiredString, int requiredInt, DerivedModel requiredModel, IEnumerable<CollectionItem> requiredCollection, IReadOnlyDictionary<string, RecordItem> requiredModelRecord)
+        /// <exception cref="ArgumentNullException"> <paramref name="requiredString"/>, <paramref name="requiredModel"/>, <paramref name="requiredList"/> or <paramref name="requiredModelRecord"/> is null. </exception>
+        internal OutputModel(string requiredString, int requiredInt, DerivedModel requiredModel, IEnumerable<CollectionItem> requiredList, IReadOnlyDictionary<string, RecordItem> requiredModelRecord)
         {
             Argument.AssertNotNull(requiredString, nameof(requiredString));
             Argument.AssertNotNull(requiredModel, nameof(requiredModel));
-            Argument.AssertNotNull(requiredCollection, nameof(requiredCollection));
+            Argument.AssertNotNull(requiredList, nameof(requiredList));
             Argument.AssertNotNull(requiredModelRecord, nameof(requiredModelRecord));
 
             RequiredString = requiredString;
             RequiredInt = requiredInt;
             RequiredModel = requiredModel;
-            RequiredCollection = requiredCollection.ToList();
+            RequiredList = requiredList.ToList();
             RequiredModelRecord = requiredModelRecord;
+            OptionalList = new ChangeTrackingList<CollectionItem>();
+            OptionalNullableList = new ChangeTrackingList<CollectionItem>();
+            OptionalRecord = new ChangeTrackingDictionary<string, RecordItem>();
+            OptionalNullableRecord = new ChangeTrackingDictionary<string, RecordItem>();
         }
 
         /// <summary> Initializes a new instance of OutputModel. </summary>
         /// <param name="requiredString"> Required string. </param>
         /// <param name="requiredInt"> Required int. </param>
         /// <param name="requiredModel"> Required model. </param>
-        /// <param name="requiredCollection"> Required collection. </param>
+        /// <param name="requiredList"> Required collection. </param>
         /// <param name="requiredModelRecord"> Required model record. </param>
-        internal OutputModel(string requiredString, int requiredInt, DerivedModel requiredModel, IReadOnlyList<CollectionItem> requiredCollection, IReadOnlyDictionary<string, RecordItem> requiredModelRecord)
+        /// <param name="optionalList"> Optional model collection. </param>
+        /// <param name="optionalNullableList"> Optional model nullable collection. </param>
+        /// <param name="optionalRecord"> Optional model record. </param>
+        /// <param name="optionalNullableRecord"> Optional model nullable record. </param>
+        internal OutputModel(string requiredString, int requiredInt, DerivedModel requiredModel, IReadOnlyList<CollectionItem> requiredList, IReadOnlyDictionary<string, RecordItem> requiredModelRecord, IReadOnlyList<CollectionItem> optionalList, IReadOnlyList<CollectionItem> optionalNullableList, IReadOnlyDictionary<string, RecordItem> optionalRecord, IReadOnlyDictionary<string, RecordItem> optionalNullableRecord)
         {
             RequiredString = requiredString;
             RequiredInt = requiredInt;
             RequiredModel = requiredModel;
-            RequiredCollection = requiredCollection;
+            RequiredList = requiredList;
             RequiredModelRecord = requiredModelRecord;
+            OptionalList = optionalList;
+            OptionalNullableList = optionalNullableList;
+            OptionalRecord = optionalRecord;
+            OptionalNullableRecord = optionalNullableRecord;
         }
 
         /// <summary> Required string. </summary>
@@ -58,8 +70,16 @@ namespace ModelsTypeSpec.Models
         /// <summary> Required model. </summary>
         public DerivedModel RequiredModel { get; }
         /// <summary> Required collection. </summary>
-        public IReadOnlyList<CollectionItem> RequiredCollection { get; }
+        public IReadOnlyList<CollectionItem> RequiredList { get; }
         /// <summary> Required model record. </summary>
         public IReadOnlyDictionary<string, RecordItem> RequiredModelRecord { get; }
+        /// <summary> Optional model collection. </summary>
+        public IReadOnlyList<CollectionItem> OptionalList { get; }
+        /// <summary> Optional model nullable collection. </summary>
+        public IReadOnlyList<CollectionItem> OptionalNullableList { get; }
+        /// <summary> Optional model record. </summary>
+        public IReadOnlyDictionary<string, RecordItem> OptionalRecord { get; }
+        /// <summary> Optional model nullable record. </summary>
+        public IReadOnlyDictionary<string, RecordItem> OptionalNullableRecord { get; }
     }
 }
