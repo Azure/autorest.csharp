@@ -10,8 +10,8 @@ using AutoRest.TestServer.Tests.Infrastructure;
 using Azure;
 using Azure.Core;
 using NUnit.Framework;
-using _Specs_.Azure.Core.Lro.Standard;
-using _Specs_.Azure.Core.Lro.Standard.Models;
+using _Azure.Lro.Standard;
+using _Azure.Lro.Standard.Models;
 using System.Net;
 
 namespace CadlRanchProjects.Tests
