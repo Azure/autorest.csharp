@@ -624,7 +624,7 @@ namespace Parameters_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/ParametersLowlevelClient.xml" path="doc/members/member[@name='RepeatableActionAsync(int,string,RequestContent,RequestContext)']/*" />
-        public virtual async Task<Response> RepeatableActionAsync(int id, string name, RequestContent content, RequestContext context)
+        public virtual async Task<Response> RepeatableActionAsync(int id, string name, RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNullOrEmpty(name, nameof(name));
 
@@ -661,7 +661,7 @@ namespace Parameters_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/ParametersLowlevelClient.xml" path="doc/members/member[@name='RepeatableAction(int,string,RequestContent,RequestContext)']/*" />
-        public virtual Response RepeatableAction(int id, string name, RequestContent content, RequestContext context)
+        public virtual Response RepeatableAction(int id, string name, RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNullOrEmpty(name, nameof(name));
 

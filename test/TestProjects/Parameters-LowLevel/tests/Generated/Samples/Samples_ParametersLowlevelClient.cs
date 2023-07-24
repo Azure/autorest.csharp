@@ -446,7 +446,7 @@ namespace Parameters_LowLevel.Samples
 
             var data = new { };
 
-            Response response = client.RepeatableAction(1234, "<name>", RequestContent.Create(data), new RequestContext());
+            Response response = client.RepeatableAction(1234, "<name>", RequestContent.Create(data));
             Console.WriteLine(response.Status);
         }
 
@@ -463,7 +463,7 @@ namespace Parameters_LowLevel.Samples
                 Status = "<Status>",
             };
 
-            Response response = client.RepeatableAction(1234, "<name>", RequestContent.Create(data), new RequestContext());
+            Response response = client.RepeatableAction(1234, "<name>", RequestContent.Create(data));
             Console.WriteLine(response.Status);
         }
 
@@ -476,7 +476,7 @@ namespace Parameters_LowLevel.Samples
 
             var data = new { };
 
-            Response response = await client.RepeatableActionAsync(1234, "<name>", RequestContent.Create(data), new RequestContext());
+            Response response = await client.RepeatableActionAsync(1234, "<name>", RequestContent.Create(data));
             Console.WriteLine(response.Status);
         }
 
@@ -493,7 +493,7 @@ namespace Parameters_LowLevel.Samples
                 Status = "<Status>",
             };
 
-            Response response = await client.RepeatableActionAsync(1234, "<name>", RequestContent.Create(data), new RequestContext());
+            Response response = await client.RepeatableActionAsync(1234, "<name>", RequestContent.Create(data));
             Console.WriteLine(response.Status);
         }
     }
