@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <members>
+    <member name="PutEmptyAsync(EmptyInput,CancellationToken)">
+<example>
+This sample shows how to call PutEmptyAsync with required parameters.
+<code><![CDATA[
+var client = new EmptyClient();
+
+var input = new EmptyInput();
+var result = await client.PutEmptyAsync(input);
+]]></code>
+</example>
+    </member>
+    <member name="PutEmpty(EmptyInput,CancellationToken)">
+<example>
+This sample shows how to call PutEmpty with required parameters.
+<code><![CDATA[
+var client = new EmptyClient();
+
+var input = new EmptyInput();
+var result = client.PutEmpty(input);
+]]></code>
+</example>
+    </member>
+    <member name="PutEmptyAsync(RequestContent,RequestContext)">
+<example>
+This sample shows how to call PutEmptyAsync with required request content.
+<code><![CDATA[
+var client = new EmptyClient();
+
+var data = new {};
+
+Response response = await client.PutEmptyAsync(RequestContent.Create(data));
+Console.WriteLine(response.Status);
+]]></code>
+</example>
+    </member>
+    <member name="PutEmpty(RequestContent,RequestContext)">
+<example>
+This sample shows how to call PutEmpty with required request content.
+<code><![CDATA[
+var client = new EmptyClient();
+
+var data = new {};
+
+Response response = client.PutEmpty(RequestContent.Create(data));
+Console.WriteLine(response.Status);
+]]></code>
+</example>
+    </member>
+    <member name="GetEmptyAsync(CancellationToken)">
+<example>
+This sample shows how to call GetEmptyAsync.
+<code><![CDATA[
+var client = new EmptyClient();
+
+var result = await client.GetEmptyAsync();
+]]></code>
+</example>
+    </member>
+    <member name="GetEmpty(CancellationToken)">
+<example>
+This sample shows how to call GetEmpty.
+<code><![CDATA[
+var client = new EmptyClient();
+
+var result = client.GetEmpty();
+]]></code>
+</example>
+    </member>
+    <member name="GetEmptyAsync(RequestContext)">
+<example>
+This sample shows how to call GetEmptyAsync with required parameters and parse the result.
+<code><![CDATA[
+var client = new EmptyClient();
+
+Response response = await client.GetEmptyAsync(new RequestContext());
+
+Console.WriteLine(response.ToString());
+]]></code>
+</example>
+    </member>
+    <member name="GetEmpty(RequestContext)">
+<example>
+This sample shows how to call GetEmpty with required parameters and parse the result.
+<code><![CDATA[
+var client = new EmptyClient();
+
+Response response = client.GetEmpty(new RequestContext());
+
+Console.WriteLine(response.ToString());
+]]></code>
+</example>
+    </member>
+    <member name="PostRoundTripEmptyAsync(EmptyInputOutput,CancellationToken)">
+<example>
+This sample shows how to call PostRoundTripEmptyAsync with required parameters.
+<code><![CDATA[
+var client = new EmptyClient();
+
+var body = new EmptyInputOutput();
+var result = await client.PostRoundTripEmptyAsync(body);
+]]></code>
+</example>
+    </member>
+    <member name="PostRoundTripEmpty(EmptyInputOutput,CancellationToken)">
+<example>
+This sample shows how to call PostRoundTripEmpty with required parameters.
+<code><![CDATA[
+var client = new EmptyClient();
+
+var body = new EmptyInputOutput();
+var result = client.PostRoundTripEmpty(body);
+]]></code>
+</example>
+    </member>
+    <member name="PostRoundTripEmptyAsync(RequestContent,RequestContext)">
+<example>
+This sample shows how to call PostRoundTripEmptyAsync with required request content and parse the result.
+<code><![CDATA[
+var client = new EmptyClient();
+
+var data = new {};
+
+Response response = await client.PostRoundTripEmptyAsync(RequestContent.Create(data));
+
+Console.WriteLine(response.ToString());
+]]></code>
+</example>
+    </member>
+    <member name="PostRoundTripEmpty(RequestContent,RequestContext)">
+<example>
+This sample shows how to call PostRoundTripEmpty with required request content and parse the result.
+<code><![CDATA[
+var client = new EmptyClient();
+
+var data = new {};
+
+Response response = client.PostRoundTripEmpty(RequestContent.Create(data));
+
+Console.WriteLine(response.ToString());
+]]></code>
+</example>
+    </member>
+  </members>
+</doc>
