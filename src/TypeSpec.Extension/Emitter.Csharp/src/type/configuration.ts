@@ -2,11 +2,11 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 export interface Configuration {
-    OutputFolder: string;
-    Namespace: string;
-    LibraryName: string | null;
-    SharedSourceFolders: string[];
-    SingleTopLevelClient?: boolean;
+    "output-folder": string;
+    namespace: string;
+    "library-name": string | null;
+    "shared-source-folders": string[];
+    "single-top-level-client"?: boolean;
     "unreferenced-types-handling"?:
         | "removeOrInternalize"
         | "internalize"
@@ -15,4 +15,5 @@ export interface Configuration {
     "models-to-treat-empty-string-as-null"?: string[];
     "additional-intrinsic-types-to-treat-empty-string-as-null"?: string[];
     "methods-to-keep-client-default-value"?: string[];
+    "deserialize-null-collection-as-null-value"?: boolean;
 }

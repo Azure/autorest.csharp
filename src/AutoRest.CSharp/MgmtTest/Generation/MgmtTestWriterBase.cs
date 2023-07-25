@@ -5,6 +5,7 @@ using System;
 using System.Linq;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Generation.Writers;
+using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Mgmt.Decorator;
 using AutoRest.CSharp.Mgmt.Models;
 using AutoRest.CSharp.Mgmt.Output;
@@ -129,22 +130,42 @@ namespace AutoRest.CSharp.MgmtTest.Generation
 
         protected CodeWriterDeclaration WriteGetFromResource(Resource carrierResource, OperationExample example, FormattableString client)
         {
-            var idVar = new CodeWriterDeclaration($"{carrierResource.Type.Name}Id".ToVariableName());
-            WriteCreateResourceIdentifier(example, idVar, carrierResource.RequestPath, carrierResource.Type);
-            var resourceVar = new CodeWriterDeclaration(carrierResource.ResourceName.ToVariableName());
-            _writer.Line($"{carrierResource.Type} {resourceVar:D} = {client}.Get{carrierResource.Type.Name}({idVar});");
+            // Can't use CSharpType.Equals(typeof(...)) because the CSharpType.Equals(Type) would assume itself is a FrameworkType, but here it's generated when IsArmCore=true
+            if (Configuration.MgmtConfiguration.IsArmCore && carrierResource.Type.Name == nameof(TenantResource))
+            {
+                return WriteGetTenantResource(carrierResource, example, client);
+            }
+            else
+            {
+                var idVar = new CodeWriterDeclaration($"{carrierResource.Type.Name}Id".ToVariableName());
+                WriteCreateResourceIdentifier(example, idVar, carrierResource.RequestPath, carrierResource.Type);
+                var resourceVar = new CodeWriterDeclaration(carrierResource.ResourceName.ToVariableName());
+                _writer.Line($"{carrierResource.Type} {resourceVar:D} = {client}.Get{carrierResource.Type.Name}({idVar});");
 
-            return resourceVar;
+                return resourceVar;
+            }
         }
 
         protected CodeWriterDeclaration WriteGetExtension(MgmtExtension parentExtension, OperationExample example, FormattableString client) => parentExtension.ArmCoreType switch
         {
             _ when parentExtension.ArmCoreType == typeof(TenantResource) => WriteGetTenantResource(parentExtension, example, client),
-            _ when parentExtension.ArmCoreType == typeof(ArmResource) => throw new InvalidOperationException($"The method `{example.OperationId}` that extends ArmResource might not exist, we should always use the client.GetXXXs(scope) to get the collection, this does not have to be invoked on a resource"),
+            _ when parentExtension.ArmCoreType == typeof(ArmResource) => WriteForArmResourceExtension(parentExtension, example, client),
             _ => WriteGetOtherExtension(parentExtension, example, client)
         };
 
-        private CodeWriterDeclaration WriteGetTenantResource(MgmtExtension parentExtension, OperationExample example, FormattableString client)
+        private CodeWriterDeclaration WriteForArmResourceExtension(MgmtTypeProvider parentExtension, OperationExample example, FormattableString client)
+        {
+            // For Extension against ArmResource the operation will be re-formatted to Operation(this ArmClient, ResourceIdentifier scope, ...)
+            // so just return armclient here and the scope part will be handled when generate the operation invoke code
+
+            // we should have defined the ArmClient before, try to figure it out from the formattableString instead of creating a new one
+            var clientVar = client.GetArguments()?.FirstOrDefault(a => a is CodeWriterDeclaration d && d.RequestedName == "client") as CodeWriterDeclaration;
+            if (clientVar == null)
+                throw new InvalidOperationException("Failed to figure out ArmClient Var for calling ArmResource Extension method");
+            return clientVar;
+        }
+
+        private CodeWriterDeclaration WriteGetTenantResource(MgmtTypeProvider parentExtension, OperationExample example, FormattableString client)
         {
             var resourceVar = new CodeWriterDeclaration(parentExtension.ResourceName.ToVariableName());
             _writer.Line($"var {resourceVar:D} = {client}.GetTenants().GetAllAsync().GetAsyncEnumerator().Current;");

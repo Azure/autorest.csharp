@@ -8,7 +8,7 @@
 using System;
 using Azure.Core;
 
-namespace Spread.Models
+namespace SpreadTypeSpec.Models
 {
     /// <summary> The SpreadAliasWithSpreadAliasRequest. </summary>
     internal partial class SpreadAliasWithSpreadAliasRequest

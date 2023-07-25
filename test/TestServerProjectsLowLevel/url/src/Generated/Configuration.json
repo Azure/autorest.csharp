@@ -1,8 +1,8 @@
 {
-  "OutputFolder": ".",
-  "Namespace": "url_LowLevel",
-  "LibraryName": "AutoRestUrlTestService",
-  "SharedSourceFolders": [
+  "output-folder": ".",
+  "namespace": "url_LowLevel",
+  "library-name": "AutoRestUrlTestService",
+  "shared-source-folders": [
     "..\\..\\..\\..\\..\\artifacts\\bin\\AutoRest.CSharp\\Debug\\net6.0\\Generator.Shared",
     "..\\..\\..\\..\\..\\artifacts\\bin\\AutoRest.CSharp\\Debug\\net6.0\\Azure.Core.Shared"
   ],

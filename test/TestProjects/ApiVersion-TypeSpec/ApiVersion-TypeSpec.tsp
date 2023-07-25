@@ -27,7 +27,7 @@ https://westus2.api.cognitive.microsoft.com).
   }
 )
 @doc("CADL project to test api versions.")
-namespace ApiVersionInCadl;
+namespace ApiVersionInTsp;
 
 enum Versions {
   v1_1: "v1.1",

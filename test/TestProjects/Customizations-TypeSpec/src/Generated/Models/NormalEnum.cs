@@ -8,7 +8,7 @@
 using System;
 using System.ComponentModel;
 
-namespace CustomizationsInCadl.Models
+namespace CustomizationsInTsp.Models
 {
     /// <summary> A normal enum. </summary>
     public readonly partial struct NormalEnum : IEquatable<NormalEnum>

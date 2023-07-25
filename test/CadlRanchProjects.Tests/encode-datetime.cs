@@ -46,6 +46,15 @@ namespace CadlRanchProjects.Tests
         });
 
         [Test]
+        public Task Encode_DateTime_Header_unixTimestampArray() => Test(async (host) =>
+        {
+            DateTimeOffset data1 = DateTimeOffset.FromUnixTimeSeconds(1686566864);
+            DateTimeOffset data2 = DateTimeOffset.FromUnixTimeSeconds(1686734256);
+            Response response = await new DatetimeClient(host, null).GetHeaderClient().UnixTimestampArrayAsync(new[] { data1, data2 });
+            Assert.AreEqual(204, response.Status);
+        });
+
+        [Test]
         public Task Encode_DateTime_Query_Default() => Test(async (host) =>
         {
             DateTimeOffset data = DateTimeOffset.Parse("2022-08-26T18:38:00.000Z");

@@ -105,8 +105,10 @@ namespace AutoRest.CSharp.Mgmt.Output
 
         private static bool HandleSystemObjectType(SystemObjectType objType)
         {
-            var properties = objType.EnumerateHierarchy().SelectMany(obj => obj.Properties);
-            return properties.Count() == 1;
+            var properties = objType.EnumerateHierarchy().SelectMany(obj => obj.Properties).ToArray();
+
+            // only bother flattening if the single property is public
+            return properties.Length == 1 && properties[0].Declaration.Accessibility == "public";
         }
 
         private IEnumerable<ObjectTypeProperty> BuildMyProperties()

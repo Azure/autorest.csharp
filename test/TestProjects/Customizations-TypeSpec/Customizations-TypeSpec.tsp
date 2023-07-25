@@ -10,7 +10,7 @@ import "@azure-tools/typespec-azure-core";
     }
 )
 @doc("CADL project to test various types of models.")
-namespace CustomizationsInCadl;
+namespace CustomizationsInTsp;
 
 using TypeSpec.Http;
 using TypeSpec.Rest;

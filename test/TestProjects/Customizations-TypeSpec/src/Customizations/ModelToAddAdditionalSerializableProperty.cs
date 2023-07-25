@@ -6,7 +6,7 @@
 using System.Text.Json;
 using Azure.Core;
 
-namespace CustomizationsInCadl.Models
+namespace CustomizationsInTsp.Models
 {
     /// <summary> Model to add additional serializable property. </summary>
     public partial class ModelToAddAdditionalSerializableProperty

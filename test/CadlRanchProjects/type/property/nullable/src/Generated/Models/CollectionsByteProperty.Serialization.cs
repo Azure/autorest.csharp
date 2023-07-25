@@ -32,6 +32,11 @@ namespace _Type.Property.Nullable.Models
                 }
                 if (property.NameEquals("nullableProperty"u8))
                 {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        nullableProperty = new ChangeTrackingList<BinaryData>();
+                        continue;
+                    }
                     List<BinaryData> array = new List<BinaryData>();
                     foreach (var item in property.Value.EnumerateArray())
                     {

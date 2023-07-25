@@ -41,8 +41,7 @@
           "IsNullable": false
          },
          "IsRequired": true,
-         "IsReadOnly": false,
-         "IsDiscriminator": false
+         "IsReadOnly": false
         },
         {
          "$id": "8",
@@ -56,8 +55,7 @@
           "IsNullable": false
          },
          "IsRequired": true,
-         "IsReadOnly": true,
-         "IsDiscriminator": false
+         "IsReadOnly": true
         },
         {
          "$id": "10",
@@ -71,16 +69,14 @@
           "IsNullable": false
          },
          "IsRequired": true,
-         "IsReadOnly": true,
-         "IsDiscriminator": false
+         "IsReadOnly": true
         }
        ]
       },
       "IsNullable": false
      },
      "IsRequired": true,
-     "IsReadOnly": false,
-     "IsDiscriminator": false
+     "IsReadOnly": false
     },
     {
      "$id": "12",
@@ -94,8 +90,7 @@
       "IsNullable": false
      },
      "IsRequired": false,
-     "IsReadOnly": false,
-     "IsDiscriminator": false
+     "IsReadOnly": false
     }
    ]
   },

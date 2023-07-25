@@ -50,7 +50,6 @@ namespace body_complex.Models
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        defaultProgram = null;
                         continue;
                     }
                     Dictionary<string, string> dictionary = new Dictionary<string, string>();

@@ -6,7 +6,7 @@ parameters:
     default: false
 
 variables:
-  NugetSecurityAnalysisWarningLevel: 'none'
+  nugetMultiFeedWarnLevel: 'none'
 
 resources:
   repositories:
