@@ -141,7 +141,7 @@ namespace AutoRest.CSharp.Generation.Writers
             return writer.Line();
         }
 
-        public static IDisposable WriteMethodDeclaration(this CodeWriter writer, MethodSignatureBase methodBase, params string[] disabledWarnings)
+        public static IDisposable WriteMethodDeclaration(this CodeWriter writer, MethodSignatureBase methodBase, string[]? disabledWarnings = null)
         {
             if (methodBase.Attributes is { } attributes)
             {
@@ -164,9 +164,12 @@ namespace AutoRest.CSharp.Generation.Writers
                 }
             }
 
-            foreach (var disabledWarning in disabledWarnings)
+            if (disabledWarnings != null)
             {
-                writer.Line($"#pragma warning disable {disabledWarning}");
+                foreach (var disabledWarning in disabledWarnings)
+                {
+                    writer.Line($"#pragma warning disable {disabledWarning}");
+                }
             }
 
             writer
@@ -254,9 +257,13 @@ namespace AutoRest.CSharp.Generation.Writers
             }
 
             writer.Line();
-            foreach (var disabledWarning in disabledWarnings)
+
+            if (disabledWarnings != null)
             {
-                writer.Line($"#pragma warning restore {disabledWarning}");
+                foreach (var disabledWarning in disabledWarnings)
+                {
+                    writer.Line($"#pragma warning restore {disabledWarning}");
+                }
             }
 
             var innerScope = writer.Scope();

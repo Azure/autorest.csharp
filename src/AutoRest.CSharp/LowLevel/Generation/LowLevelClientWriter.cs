@@ -117,19 +117,20 @@ namespace AutoRest.CSharp.Generation.Writers
 
         private static void WriteProtocolMethod(CodeWriter writer, LowLevelClientMethod clientMethod, ClientFields fields, OperationLongRunning? longRunning, ProtocolMethodPaging? pagingInfo, bool async)
         {
+            string[]? disableWarning = clientMethod.ShouldOverloadProtocol && Configuration.KeepNonOverloadableProtocolSignature ? new string[] { "AZC0019" } : null;
             switch (longRunning, pagingInfo)
             {
                 case { longRunning: not null, pagingInfo: not null }:
-                    WriteProtocolPageableLroMethod(writer, clientMethod, fields, pagingInfo, longRunning, async);
+                    WriteProtocolPageableLroMethod(writer, clientMethod, fields, pagingInfo, longRunning, async, disableWarning);
                     break;
                 case { longRunning: null, pagingInfo: not null }:
-                    WriteProtocolPageableMethod(writer, clientMethod, fields, pagingInfo, async);
+                    WriteProtocolPageableMethod(writer, clientMethod, fields, pagingInfo, async, disableWarning);
                     break;
                 case { longRunning: not null, pagingInfo: null }:
-                    WriteProtocolLroMethod(writer, clientMethod, fields, longRunning, async);
+                    WriteProtocolLroMethod(writer, clientMethod, fields, longRunning, async, disableWarning);
                     break;
                 default:
-                    WriteProtocolMethod(writer, clientMethod, fields, async);
+                    WriteProtocolMethod(writer, clientMethod, fields, async, disableWarning);
                     break;
             }
         }
@@ -364,19 +365,19 @@ namespace AutoRest.CSharp.Generation.Writers
             _writer.WritePageable(convenienceMethod, clientMethod.RequestMethod, pagingInfo.NextPageMethod, fields.ClientDiagnosticsProperty, fields.PipelineField, clientMethod.ProtocolMethodDiagnostic.ScopeName, pagingInfo.ItemName, pagingInfo.NextLinkName, async);
         }
 
-        private static void WriteProtocolPageableMethod(CodeWriter writer, LowLevelClientMethod clientMethod, ClientFields fields, ProtocolMethodPaging pagingInfo, bool async)
+        private static void WriteProtocolPageableMethod(CodeWriter writer, LowLevelClientMethod clientMethod, ClientFields fields, ProtocolMethodPaging pagingInfo, bool async, string[]? disabledWarnings)
         {
-            writer.WritePageable(clientMethod.ProtocolMethodSignature, typeof(BinaryData), null, clientMethod.RequestMethod, pagingInfo.NextPageMethod, fields.ClientDiagnosticsProperty, fields.PipelineField, clientMethod.ProtocolMethodDiagnostic.ScopeName, pagingInfo.ItemName, pagingInfo.NextLinkName, async);
+            writer.WritePageable(clientMethod.ProtocolMethodSignature, typeof(BinaryData), null, clientMethod.RequestMethod, pagingInfo.NextPageMethod, fields.ClientDiagnosticsProperty, fields.PipelineField, clientMethod.ProtocolMethodDiagnostic.ScopeName, pagingInfo.ItemName, pagingInfo.NextLinkName, async, disabledWarnings);
         }
 
-        private static void WriteProtocolPageableLroMethod(CodeWriter writer, LowLevelClientMethod clientMethod, ClientFields fields, ProtocolMethodPaging pagingInfo, OperationLongRunning longRunning, bool async)
+        private static void WriteProtocolPageableLroMethod(CodeWriter writer, LowLevelClientMethod clientMethod, ClientFields fields, ProtocolMethodPaging pagingInfo, OperationLongRunning longRunning, bool async, string[]? disabledWarnings)
         {
-            writer.WriteLongRunningPageable(clientMethod.ProtocolMethodSignature, typeof(BinaryData), null, clientMethod.RequestMethod, pagingInfo.NextPageMethod, fields.ClientDiagnosticsProperty, fields.PipelineField, clientMethod.ProtocolMethodDiagnostic, longRunning.FinalStateVia, pagingInfo.ItemName, pagingInfo.NextLinkName, async);
+            writer.WriteLongRunningPageable(clientMethod.ProtocolMethodSignature, typeof(BinaryData), null, clientMethod.RequestMethod, pagingInfo.NextPageMethod, fields.ClientDiagnosticsProperty, fields.PipelineField, clientMethod.ProtocolMethodDiagnostic, longRunning.FinalStateVia, pagingInfo.ItemName, pagingInfo.NextLinkName, async, disabledWarnings);
         }
 
-        private static void WriteProtocolLroMethod(CodeWriter writer, LowLevelClientMethod clientMethod, ClientFields fields, OperationLongRunning longRunning, bool async)
+        private static void WriteProtocolLroMethod(CodeWriter writer, LowLevelClientMethod clientMethod, ClientFields fields, OperationLongRunning longRunning, bool async, string[]? disabledWarnings)
         {
-            using (writer.WriteMethodDeclaration(clientMethod.ProtocolMethodSignature.WithAsync(async)))
+            using (writer.WriteMethodDeclaration(clientMethod.ProtocolMethodSignature.WithAsync(async), disabledWarnings))
             {
                 writer.WriteParametersValidation(clientMethod.ProtocolMethodSignature.Parameters);
                 var startMethod = clientMethod.RequestMethod;
@@ -397,9 +398,9 @@ namespace AutoRest.CSharp.Generation.Writers
             writer.Line();
         }
 
-        public static void WriteProtocolMethod(CodeWriter writer, LowLevelClientMethod clientMethod, ClientFields fields, bool async)
+        public static void WriteProtocolMethod(CodeWriter writer, LowLevelClientMethod clientMethod, ClientFields fields, bool async, string[]? disabledWarnings)
         {
-            using (writer.WriteMethodDeclaration(clientMethod.ProtocolMethodSignature.WithAsync(async)))
+            using (writer.WriteMethodDeclaration(clientMethod.ProtocolMethodSignature.WithAsync(async), disabledWarnings))
             {
                 writer.WriteParametersValidation(clientMethod.ProtocolMethodSignature.Parameters);
                 var restMethod = clientMethod.RequestMethod;

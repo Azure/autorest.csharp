@@ -296,7 +296,7 @@ namespace AutoRest.CSharp.Generation.Writers
 
             writer.WriteXmlDocumentationRequiredParametersException(parameters);
             writer.WriteXmlDocumentation("remarks", $"{pagingMethod.Method.DescriptionText}");
-            writer.WritePageable(signature, pageType, new Reference(RestClientField, client.RestClient.Type), pagingMethod.Method, pagingMethod.NextPageMethod, ClientDiagnosticsField, pipelineReference, scopeName, itemName, nextLinkName, async);
+            writer.WritePageable(signature, pageType, new Reference(RestClientField, client.RestClient.Type), pagingMethod.Method, pagingMethod.NextPageMethod, ClientDiagnosticsField, pipelineReference, scopeName, itemName, nextLinkName, async, null);
         }
 
         private void WriteStartOperationOperation(CodeWriter writer, LongRunningOperationMethod lroMethod, bool async)

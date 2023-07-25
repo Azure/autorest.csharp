@@ -45,6 +45,51 @@ namespace AutoRest.CSharp.Output.Models
         private ProtocolMethodPaging? _protocolMethodPaging;
         private RequestConditionHeaders _conditionHeaderFlag = RequestConditionHeaders.None;
 
+        private bool? _shouldRequestContextOptional;
+        private bool ShouldRequestContextOptional
+        {
+            get
+            {
+                CheckNecessaryField(_returnType);
+
+                if (_shouldRequestContextOptional == null)
+                {
+                    _shouldRequestContextOptional = GetShouldRequestContextOptional();
+                }
+                return _shouldRequestContextOptional.Value;
+            }            
+        }
+
+        private bool? _isConvenienceMethodMeaningful;
+        private bool IsConvenienceMethodMeaningful
+        {
+            get
+            {
+                CheckNecessaryField(_returnType);
+
+                if (_isConvenienceMethodMeaningful == null)
+                {
+                    _isConvenienceMethodMeaningful = GetIsConvenienceMethodMeaningful();
+                }
+                return _isConvenienceMethodMeaningful.Value;
+            }
+        }
+
+        private bool? _hasAmbiguityBetweenProtocolAndConvenience;
+        private bool HasAmbiguityBetweenProtocolAndConvenience
+        {
+            get
+            {
+                CheckNecessaryField(_orderedParameters);
+
+                if (_hasAmbiguityBetweenProtocolAndConvenience == null)
+                {
+                    _hasAmbiguityBetweenProtocolAndConvenience = GetHasAmbiguityBetweenProtocolAndConvenience();
+                }
+                return _hasAmbiguityBetweenProtocolAndConvenience.Value;
+            }
+        }
+
         private InputOperation Operation { get; }
 
         public OperationMethodChainBuilder(InputOperation operation, string namespaceName, string clientName, ClientFields fields, TypeFactory typeFactory, SourceInputModel? sourceInputModel)
@@ -89,34 +134,41 @@ namespace AutoRest.CSharp.Output.Models
                 ? new[] { new CSharpAttribute(typeof(ObsoleteAttribute), deprecated) }
                 : Array.Empty<CSharpAttribute>();
 
-            var shouldRequestContextOptional = ShouldRequestContextOptional();
-            var protocolMethodParameters = _orderedParameters.Select(p => p.Protocol).WhereNotNull().Select(p => p != KnownParameters.RequestContentNullable && !shouldRequestContextOptional ? p.ToRequired() : p).ToArray();
+            var protocolMethodParameters = _orderedParameters.Select(p => p.Protocol).WhereNotNull().Select(p => p != KnownParameters.RequestContentNullable && !ShouldRequestContextOptional ? p.ToRequired() : p).ToArray();
             var protocolMethodModifiers = (Operation.GenerateProtocolMethod ? _restClientMethod.Accessibility : MethodSignatureModifiers.Internal) | Virtual;
             var protocolMethodSignature = new MethodSignature(_restClientMethod.Name, _restClientMethod.Summary, _restClientMethod.Description, protocolMethodModifiers, _returnType.Protocol, null, protocolMethodParameters, protocolMethodAttributes);
-            var convenienceMethod = ShouldGenerateConvenienceMethod() ? BuildConvenienceMethod(shouldRequestContextOptional) : null;
+            var convenienceMethod = ShouldGenerateConvenienceMethod() ? BuildConvenienceMethod(ShouldRequestContextOptional) : null;
 
             var diagnostic = new Diagnostic($"{_clientName}.{_restClientMethod.Name}");
 
             var requestBodyType = Operation.Parameters.FirstOrDefault(p => p.Location == RequestLocation.Body)?.Type;
             var responseBodyType = Operation.Responses.FirstOrDefault()?.BodyType;
-            return new LowLevelClientMethod(protocolMethodSignature, convenienceMethod, _restClientMethod, requestBodyType, responseBodyType, diagnostic, _protocolMethodPaging, Operation.LongRunning, _conditionHeaderFlag);
+            return new LowLevelClientMethod(protocolMethodSignature, convenienceMethod, _restClientMethod, requestBodyType, responseBodyType, diagnostic, _protocolMethodPaging, Operation.LongRunning, _conditionHeaderFlag, !ShouldRequestContextOptional);
+        }
+
+        private void CheckNecessaryField(object field)
+        {
+            if (field == null)
+            {
+                throw new InvalidOperationException($"ShouldRequestContextOptional cannot be called before {nameof(field)} is built.");
+            }
         }
 
         private bool ShouldGenerateConvenienceMethod()
         {
             return Operation.GenerateConvenienceMethod
                 && (!Operation.GenerateProtocolMethod
-                || IsConvenienceMethodMeaningful());
+                || IsConvenienceMethodMeaningful);
         }
 
         // If all the corresponding parameters and return types of convenience method and protocol method have the same type, it does not make sense to generate the convenience method.
-        private bool IsConvenienceMethodMeaningful()
+        private bool GetIsConvenienceMethodMeaningful()
         {
             return _orderedParameters.Where(parameter => parameter.Convenience != KnownParameters.CancellationTokenParameter).Any(parameter => !IsParameterTypeSame(parameter.Convenience, parameter.Protocol))
                 || !_returnType.Convenience.Equals(_returnType.Protocol);
         }
 
-        private bool HasAmbiguityBetweenProtocolAndConvenience()
+        private bool GetHasAmbiguityBetweenProtocolAndConvenience()
         {
             var userDefinedParameters = _orderedParameters.Where(parameter => parameter.Convenience != KnownParameters.CancellationTokenParameter);
             int protocolRequired = userDefinedParameters.Select(p => p.Protocol).WhereNotNull().Where(p => !p.IsOptionalInSignature).Count();
@@ -128,9 +180,9 @@ namespace AutoRest.CSharp.Output.Models
             return userDefinedParameters.Where(p => p.Protocol != null && !p.Protocol.IsOptionalInSignature).All(parameter => IsParameterTypeSame(parameter.Convenience, parameter.Protocol));
         }
 
-        private bool ShouldRequestContextOptional()
+        private bool GetShouldRequestContextOptional()
         {
-            if (Configuration.KeepNonOverloadableProtocolSignature || !IsConvenienceMethodMeaningful())
+            if (Configuration.KeepNonOverloadableProtocolSignature || !IsConvenienceMethodMeaningful)
             {
                 return true;
             }
@@ -144,7 +196,7 @@ namespace AutoRest.CSharp.Output.Models
                 }
             }
 
-            if (HasAmbiguityBetweenProtocolAndConvenience() && Configuration.UseOverloadsBetweenProtocolAndConvenience)
+            if (HasAmbiguityBetweenProtocolAndConvenience && Configuration.UseOverloadsBetweenProtocolAndConvenience)
             {
                 return false;
             }
@@ -228,7 +280,7 @@ namespace AutoRest.CSharp.Output.Models
 
         private ConvenienceMethod BuildConvenienceMethod(bool shouldRequestContextOptional)
         {
-            bool needNameChange = shouldRequestContextOptional && HasAmbiguityBetweenProtocolAndConvenience();
+            bool needNameChange = shouldRequestContextOptional && HasAmbiguityBetweenProtocolAndConvenience;
             string name = _restClientMethod.Name;
             if (needNameChange)
             {
@@ -460,7 +512,7 @@ namespace AutoRest.CSharp.Output.Models
         {
             _orderedParameters.Add(new ParameterChain(
                 KnownParameters.CancellationTokenParameter,
-                ShouldRequestContextOptional() ? KnownParameters.RequestContext : KnownParameters.RequestContextRequired,
+                ShouldRequestContextOptional ? KnownParameters.RequestContext : KnownParameters.RequestContextRequired,
                 KnownParameters.RequestContext));
         }
 
