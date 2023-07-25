@@ -28,9 +28,19 @@ namespace AutoRest.CSharp.Mgmt.Output
         {
             foreach (var extension in _extensions)
             {
-                foreach (var operation in extension.ClientOperations)
-                    yield return operation;
+                foreach (var clientOperation in extension.ClientOperations)
+                {
+                    var requestPaths = clientOperation.Select(restOperation => restOperation.RequestPath);
+                    if (ShouldGenerateArmResourceExtensionMethod(requestPaths))
+                        yield return clientOperation;
+                }
             }
         }
+
+        private static bool ShouldGenerateArmResourceExtensionMethod(IEnumerable<RequestPath> requestPaths)
+            => requestPaths.Any(ShouldGenerateArmResourceExtensionMethod);
+
+        private static bool ShouldGenerateArmResourceExtensionMethod(RequestPath requestPath)
+            => Configuration.MgmtConfiguration.GenerateArmResourceExtensions.Contains(requestPath);
     }
 }

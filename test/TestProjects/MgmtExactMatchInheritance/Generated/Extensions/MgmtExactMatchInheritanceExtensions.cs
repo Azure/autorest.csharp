@@ -20,6 +20,14 @@ namespace MgmtExactMatchInheritance
     /// <summary> A class to add extension methods to MgmtExactMatchInheritance. </summary>
     public static partial class MgmtExactMatchInheritanceExtensions
     {
+        private static MgmtExactMatchInheritanceArmClientMockingExtension GetMgmtExactMatchInheritanceArmClientMockingExtension(ArmClient client)
+        {
+            return client.GetCachedClient(client =>
+            {
+                return new MgmtExactMatchInheritanceArmClientMockingExtension(client);
+            });
+        }
+
         private static MgmtExactMatchInheritanceResourceGroupMockingExtension GetMgmtExactMatchInheritanceResourceGroupMockingExtension(ArmResource resource)
         {
             return resource.GetCachedClient(client =>
@@ -27,6 +35,7 @@ namespace MgmtExactMatchInheritance
                 return new MgmtExactMatchInheritanceResourceGroupMockingExtension(client, resource.Id);
             });
         }
+
         #region ExactMatchModel1Resource
         /// <summary>
         /// Gets an object representing an <see cref="ExactMatchModel1Resource" /> along with the instance operations that can be performed on it but with no data.
@@ -37,12 +46,7 @@ namespace MgmtExactMatchInheritance
         /// <returns> Returns a <see cref="ExactMatchModel1Resource" /> object. </returns>
         public static ExactMatchModel1Resource GetExactMatchModel1Resource(this ArmClient client, ResourceIdentifier id)
         {
-            return client.GetResourceClient(() =>
-            {
-                ExactMatchModel1Resource.ValidateResourceId(id);
-                return new ExactMatchModel1Resource(client, id);
-            }
-            );
+            return GetMgmtExactMatchInheritanceArmClientMockingExtension(client).GetExactMatchModel1Resource(id);
         }
         #endregion
 
@@ -56,12 +60,7 @@ namespace MgmtExactMatchInheritance
         /// <returns> Returns a <see cref="ExactMatchModel5Resource" /> object. </returns>
         public static ExactMatchModel5Resource GetExactMatchModel5Resource(this ArmClient client, ResourceIdentifier id)
         {
-            return client.GetResourceClient(() =>
-            {
-                ExactMatchModel5Resource.ValidateResourceId(id);
-                return new ExactMatchModel5Resource(client, id);
-            }
-            );
+            return GetMgmtExactMatchInheritanceArmClientMockingExtension(client).GetExactMatchModel5Resource(id);
         }
         #endregion
 

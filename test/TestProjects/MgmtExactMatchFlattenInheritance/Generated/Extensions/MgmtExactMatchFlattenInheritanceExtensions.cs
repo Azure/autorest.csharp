@@ -20,6 +20,14 @@ namespace MgmtExactMatchFlattenInheritance
     /// <summary> A class to add extension methods to MgmtExactMatchFlattenInheritance. </summary>
     public static partial class MgmtExactMatchFlattenInheritanceExtensions
     {
+        private static MgmtExactMatchFlattenInheritanceArmClientMockingExtension GetMgmtExactMatchFlattenInheritanceArmClientMockingExtension(ArmClient client)
+        {
+            return client.GetCachedClient(client =>
+            {
+                return new MgmtExactMatchFlattenInheritanceArmClientMockingExtension(client);
+            });
+        }
+
         private static MgmtExactMatchFlattenInheritanceResourceGroupMockingExtension GetMgmtExactMatchFlattenInheritanceResourceGroupMockingExtension(ArmResource resource)
         {
             return resource.GetCachedClient(client =>
@@ -27,6 +35,7 @@ namespace MgmtExactMatchFlattenInheritance
                 return new MgmtExactMatchFlattenInheritanceResourceGroupMockingExtension(client, resource.Id);
             });
         }
+
         #region AzureResourceFlattenModel1Resource
         /// <summary>
         /// Gets an object representing an <see cref="AzureResourceFlattenModel1Resource" /> along with the instance operations that can be performed on it but with no data.
@@ -37,12 +46,7 @@ namespace MgmtExactMatchFlattenInheritance
         /// <returns> Returns a <see cref="AzureResourceFlattenModel1Resource" /> object. </returns>
         public static AzureResourceFlattenModel1Resource GetAzureResourceFlattenModel1Resource(this ArmClient client, ResourceIdentifier id)
         {
-            return client.GetResourceClient(() =>
-            {
-                AzureResourceFlattenModel1Resource.ValidateResourceId(id);
-                return new AzureResourceFlattenModel1Resource(client, id);
-            }
-            );
+            return GetMgmtExactMatchFlattenInheritanceArmClientMockingExtension(client).GetAzureResourceFlattenModel1Resource(id);
         }
         #endregion
 
@@ -56,12 +60,7 @@ namespace MgmtExactMatchFlattenInheritance
         /// <returns> Returns a <see cref="CustomModel2Resource" /> object. </returns>
         public static CustomModel2Resource GetCustomModel2Resource(this ArmClient client, ResourceIdentifier id)
         {
-            return client.GetResourceClient(() =>
-            {
-                CustomModel2Resource.ValidateResourceId(id);
-                return new CustomModel2Resource(client, id);
-            }
-            );
+            return GetMgmtExactMatchFlattenInheritanceArmClientMockingExtension(client).GetCustomModel2Resource(id);
         }
         #endregion
 
@@ -75,12 +74,7 @@ namespace MgmtExactMatchFlattenInheritance
         /// <returns> Returns a <see cref="CustomModel3Resource" /> object. </returns>
         public static CustomModel3Resource GetCustomModel3Resource(this ArmClient client, ResourceIdentifier id)
         {
-            return client.GetResourceClient(() =>
-            {
-                CustomModel3Resource.ValidateResourceId(id);
-                return new CustomModel3Resource(client, id);
-            }
-            );
+            return GetMgmtExactMatchFlattenInheritanceArmClientMockingExtension(client).GetCustomModel3Resource(id);
         }
         #endregion
 

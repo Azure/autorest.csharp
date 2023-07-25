@@ -19,6 +19,14 @@ namespace MgmtNonStringPathVariable
     /// <summary> A class to add extension methods to MgmtNonStringPathVariable. </summary>
     public static partial class MgmtNonStringPathVariableExtensions
     {
+        private static MgmtNonStringPathVariableArmClientMockingExtension GetMgmtNonStringPathVariableArmClientMockingExtension(ArmClient client)
+        {
+            return client.GetCachedClient(client =>
+            {
+                return new MgmtNonStringPathVariableArmClientMockingExtension(client);
+            });
+        }
+
         private static MgmtNonStringPathVariableResourceGroupMockingExtension GetMgmtNonStringPathVariableResourceGroupMockingExtension(ArmResource resource)
         {
             return resource.GetCachedClient(client =>
@@ -26,6 +34,7 @@ namespace MgmtNonStringPathVariable
                 return new MgmtNonStringPathVariableResourceGroupMockingExtension(client, resource.Id);
             });
         }
+
         #region FakeResource
         /// <summary>
         /// Gets an object representing a <see cref="FakeResource" /> along with the instance operations that can be performed on it but with no data.
@@ -36,12 +45,7 @@ namespace MgmtNonStringPathVariable
         /// <returns> Returns a <see cref="FakeResource" /> object. </returns>
         public static FakeResource GetFakeResource(this ArmClient client, ResourceIdentifier id)
         {
-            return client.GetResourceClient(() =>
-            {
-                FakeResource.ValidateResourceId(id);
-                return new FakeResource(client, id);
-            }
-            );
+            return GetMgmtNonStringPathVariableArmClientMockingExtension(client).GetFakeResource(id);
         }
         #endregion
 
@@ -55,12 +59,7 @@ namespace MgmtNonStringPathVariable
         /// <returns> Returns a <see cref="BarResource" /> object. </returns>
         public static BarResource GetBarResource(this ArmClient client, ResourceIdentifier id)
         {
-            return client.GetResourceClient(() =>
-            {
-                BarResource.ValidateResourceId(id);
-                return new BarResource(client, id);
-            }
-            );
+            return GetMgmtNonStringPathVariableArmClientMockingExtension(client).GetBarResource(id);
         }
         #endregion
 

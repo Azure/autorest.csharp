@@ -21,6 +21,14 @@ namespace MgmtExtensionResource
     /// <summary> A class to add extension methods to MgmtExtensionResource. </summary>
     public static partial class MgmtExtensionResourceExtensions
     {
+        private static MgmtExtensionResourceArmClientMockingExtension GetMgmtExtensionResourceArmClientMockingExtension(ArmClient client)
+        {
+            return client.GetCachedClient(client =>
+            {
+                return new MgmtExtensionResourceArmClientMockingExtension(client);
+            });
+        }
+
         private static MgmtExtensionResourceManagementGroupMockingExtension GetMgmtExtensionResourceManagementGroupMockingExtension(ArmResource resource)
         {
             return resource.GetCachedClient(client =>
@@ -44,6 +52,7 @@ namespace MgmtExtensionResource
                 return new MgmtExtensionResourceTenantMockingExtension(client, resource.Id);
             });
         }
+
         #region SubSingletonResource
         /// <summary>
         /// Gets an object representing a <see cref="SubSingletonResource" /> along with the instance operations that can be performed on it but with no data.
@@ -54,12 +63,7 @@ namespace MgmtExtensionResource
         /// <returns> Returns a <see cref="SubSingletonResource" /> object. </returns>
         public static SubSingletonResource GetSubSingletonResource(this ArmClient client, ResourceIdentifier id)
         {
-            return client.GetResourceClient(() =>
-            {
-                SubSingletonResource.ValidateResourceId(id);
-                return new SubSingletonResource(client, id);
-            }
-            );
+            return GetMgmtExtensionResourceArmClientMockingExtension(client).GetSubSingletonResource(id);
         }
         #endregion
 
@@ -73,12 +77,7 @@ namespace MgmtExtensionResource
         /// <returns> Returns a <see cref="SubscriptionPolicyDefinitionResource" /> object. </returns>
         public static SubscriptionPolicyDefinitionResource GetSubscriptionPolicyDefinitionResource(this ArmClient client, ResourceIdentifier id)
         {
-            return client.GetResourceClient(() =>
-            {
-                SubscriptionPolicyDefinitionResource.ValidateResourceId(id);
-                return new SubscriptionPolicyDefinitionResource(client, id);
-            }
-            );
+            return GetMgmtExtensionResourceArmClientMockingExtension(client).GetSubscriptionPolicyDefinitionResource(id);
         }
         #endregion
 
@@ -92,12 +91,7 @@ namespace MgmtExtensionResource
         /// <returns> Returns a <see cref="BuiltInPolicyDefinitionResource" /> object. </returns>
         public static BuiltInPolicyDefinitionResource GetBuiltInPolicyDefinitionResource(this ArmClient client, ResourceIdentifier id)
         {
-            return client.GetResourceClient(() =>
-            {
-                BuiltInPolicyDefinitionResource.ValidateResourceId(id);
-                return new BuiltInPolicyDefinitionResource(client, id);
-            }
-            );
+            return GetMgmtExtensionResourceArmClientMockingExtension(client).GetBuiltInPolicyDefinitionResource(id);
         }
         #endregion
 
@@ -111,12 +105,7 @@ namespace MgmtExtensionResource
         /// <returns> Returns a <see cref="ManagementGroupPolicyDefinitionResource" /> object. </returns>
         public static ManagementGroupPolicyDefinitionResource GetManagementGroupPolicyDefinitionResource(this ArmClient client, ResourceIdentifier id)
         {
-            return client.GetResourceClient(() =>
-            {
-                ManagementGroupPolicyDefinitionResource.ValidateResourceId(id);
-                return new ManagementGroupPolicyDefinitionResource(client, id);
-            }
-            );
+            return GetMgmtExtensionResourceArmClientMockingExtension(client).GetManagementGroupPolicyDefinitionResource(id);
         }
         #endregion
 

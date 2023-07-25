@@ -19,6 +19,14 @@ namespace MgmtCustomizations
     /// <summary> A class to add extension methods to MgmtCustomizations. </summary>
     public static partial class MgmtCustomizationsExtensions
     {
+        private static MgmtCustomizationsArmClientMockingExtension GetMgmtCustomizationsArmClientMockingExtension(ArmClient client)
+        {
+            return client.GetCachedClient(client =>
+            {
+                return new MgmtCustomizationsArmClientMockingExtension(client);
+            });
+        }
+
         private static MgmtCustomizationsResourceGroupMockingExtension GetMgmtCustomizationsResourceGroupMockingExtension(ArmResource resource)
         {
             return resource.GetCachedClient(client =>
@@ -26,6 +34,7 @@ namespace MgmtCustomizations
                 return new MgmtCustomizationsResourceGroupMockingExtension(client, resource.Id);
             });
         }
+
         #region PetStoreResource
         /// <summary>
         /// Gets an object representing a <see cref="PetStoreResource" /> along with the instance operations that can be performed on it but with no data.
@@ -36,12 +45,7 @@ namespace MgmtCustomizations
         /// <returns> Returns a <see cref="PetStoreResource" /> object. </returns>
         public static PetStoreResource GetPetStoreResource(this ArmClient client, ResourceIdentifier id)
         {
-            return client.GetResourceClient(() =>
-            {
-                PetStoreResource.ValidateResourceId(id);
-                return new PetStoreResource(client, id);
-            }
-            );
+            return GetMgmtCustomizationsArmClientMockingExtension(client).GetPetStoreResource(id);
         }
         #endregion
 

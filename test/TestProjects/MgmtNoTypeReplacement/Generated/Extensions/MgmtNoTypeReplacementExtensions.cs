@@ -19,6 +19,14 @@ namespace MgmtNoTypeReplacement
     /// <summary> A class to add extension methods to MgmtNoTypeReplacement. </summary>
     public static partial class MgmtNoTypeReplacementExtensions
     {
+        private static MgmtNoTypeReplacementArmClientMockingExtension GetMgmtNoTypeReplacementArmClientMockingExtension(ArmClient client)
+        {
+            return client.GetCachedClient(client =>
+            {
+                return new MgmtNoTypeReplacementArmClientMockingExtension(client);
+            });
+        }
+
         private static MgmtNoTypeReplacementResourceGroupMockingExtension GetMgmtNoTypeReplacementResourceGroupMockingExtension(ArmResource resource)
         {
             return resource.GetCachedClient(client =>
@@ -26,6 +34,7 @@ namespace MgmtNoTypeReplacement
                 return new MgmtNoTypeReplacementResourceGroupMockingExtension(client, resource.Id);
             });
         }
+
         #region NoTypeReplacementModel1Resource
         /// <summary>
         /// Gets an object representing a <see cref="NoTypeReplacementModel1Resource" /> along with the instance operations that can be performed on it but with no data.
@@ -36,12 +45,7 @@ namespace MgmtNoTypeReplacement
         /// <returns> Returns a <see cref="NoTypeReplacementModel1Resource" /> object. </returns>
         public static NoTypeReplacementModel1Resource GetNoTypeReplacementModel1Resource(this ArmClient client, ResourceIdentifier id)
         {
-            return client.GetResourceClient(() =>
-            {
-                NoTypeReplacementModel1Resource.ValidateResourceId(id);
-                return new NoTypeReplacementModel1Resource(client, id);
-            }
-            );
+            return GetMgmtNoTypeReplacementArmClientMockingExtension(client).GetNoTypeReplacementModel1Resource(id);
         }
         #endregion
 
@@ -55,12 +59,7 @@ namespace MgmtNoTypeReplacement
         /// <returns> Returns a <see cref="NoTypeReplacementModel2Resource" /> object. </returns>
         public static NoTypeReplacementModel2Resource GetNoTypeReplacementModel2Resource(this ArmClient client, ResourceIdentifier id)
         {
-            return client.GetResourceClient(() =>
-            {
-                NoTypeReplacementModel2Resource.ValidateResourceId(id);
-                return new NoTypeReplacementModel2Resource(client, id);
-            }
-            );
+            return GetMgmtNoTypeReplacementArmClientMockingExtension(client).GetNoTypeReplacementModel2Resource(id);
         }
         #endregion
 
@@ -74,12 +73,7 @@ namespace MgmtNoTypeReplacement
         /// <returns> Returns a <see cref="NoTypeReplacementModel3Resource" /> object. </returns>
         public static NoTypeReplacementModel3Resource GetNoTypeReplacementModel3Resource(this ArmClient client, ResourceIdentifier id)
         {
-            return client.GetResourceClient(() =>
-            {
-                NoTypeReplacementModel3Resource.ValidateResourceId(id);
-                return new NoTypeReplacementModel3Resource(client, id);
-            }
-            );
+            return GetMgmtNoTypeReplacementArmClientMockingExtension(client).GetNoTypeReplacementModel3Resource(id);
         }
         #endregion
 

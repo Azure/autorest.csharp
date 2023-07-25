@@ -20,6 +20,14 @@ namespace MgmtOmitOperationGroups
     /// <summary> A class to add extension methods to MgmtOmitOperationGroups. </summary>
     public static partial class MgmtOmitOperationGroupsExtensions
     {
+        private static MgmtOmitOperationGroupsArmClientMockingExtension GetMgmtOmitOperationGroupsArmClientMockingExtension(ArmClient client)
+        {
+            return client.GetCachedClient(client =>
+            {
+                return new MgmtOmitOperationGroupsArmClientMockingExtension(client);
+            });
+        }
+
         private static MgmtOmitOperationGroupsResourceGroupMockingExtension GetMgmtOmitOperationGroupsResourceGroupMockingExtension(ArmResource resource)
         {
             return resource.GetCachedClient(client =>
@@ -27,6 +35,7 @@ namespace MgmtOmitOperationGroups
                 return new MgmtOmitOperationGroupsResourceGroupMockingExtension(client, resource.Id);
             });
         }
+
         #region Model2Resource
         /// <summary>
         /// Gets an object representing a <see cref="Model2Resource" /> along with the instance operations that can be performed on it but with no data.
@@ -37,12 +46,7 @@ namespace MgmtOmitOperationGroups
         /// <returns> Returns a <see cref="Model2Resource" /> object. </returns>
         public static Model2Resource GetModel2Resource(this ArmClient client, ResourceIdentifier id)
         {
-            return client.GetResourceClient(() =>
-            {
-                Model2Resource.ValidateResourceId(id);
-                return new Model2Resource(client, id);
-            }
-            );
+            return GetMgmtOmitOperationGroupsArmClientMockingExtension(client).GetModel2Resource(id);
         }
         #endregion
 

@@ -19,6 +19,14 @@ namespace MgmtPagination
     /// <summary> A class to add extension methods to MgmtPagination. </summary>
     public static partial class MgmtPaginationExtensions
     {
+        private static MgmtPaginationArmClientMockingExtension GetMgmtPaginationArmClientMockingExtension(ArmClient client)
+        {
+            return client.GetCachedClient(client =>
+            {
+                return new MgmtPaginationArmClientMockingExtension(client);
+            });
+        }
+
         private static MgmtPaginationResourceGroupMockingExtension GetMgmtPaginationResourceGroupMockingExtension(ArmResource resource)
         {
             return resource.GetCachedClient(client =>
@@ -26,6 +34,7 @@ namespace MgmtPagination
                 return new MgmtPaginationResourceGroupMockingExtension(client, resource.Id);
             });
         }
+
         #region PageSizeIntegerModelResource
         /// <summary>
         /// Gets an object representing a <see cref="PageSizeIntegerModelResource" /> along with the instance operations that can be performed on it but with no data.
@@ -36,12 +45,7 @@ namespace MgmtPagination
         /// <returns> Returns a <see cref="PageSizeIntegerModelResource" /> object. </returns>
         public static PageSizeIntegerModelResource GetPageSizeIntegerModelResource(this ArmClient client, ResourceIdentifier id)
         {
-            return client.GetResourceClient(() =>
-            {
-                PageSizeIntegerModelResource.ValidateResourceId(id);
-                return new PageSizeIntegerModelResource(client, id);
-            }
-            );
+            return GetMgmtPaginationArmClientMockingExtension(client).GetPageSizeIntegerModelResource(id);
         }
         #endregion
 
@@ -55,12 +59,7 @@ namespace MgmtPagination
         /// <returns> Returns a <see cref="PageSizeInt64ModelResource" /> object. </returns>
         public static PageSizeInt64ModelResource GetPageSizeInt64ModelResource(this ArmClient client, ResourceIdentifier id)
         {
-            return client.GetResourceClient(() =>
-            {
-                PageSizeInt64ModelResource.ValidateResourceId(id);
-                return new PageSizeInt64ModelResource(client, id);
-            }
-            );
+            return GetMgmtPaginationArmClientMockingExtension(client).GetPageSizeInt64ModelResource(id);
         }
         #endregion
 
@@ -74,12 +73,7 @@ namespace MgmtPagination
         /// <returns> Returns a <see cref="PageSizeInt32ModelResource" /> object. </returns>
         public static PageSizeInt32ModelResource GetPageSizeInt32ModelResource(this ArmClient client, ResourceIdentifier id)
         {
-            return client.GetResourceClient(() =>
-            {
-                PageSizeInt32ModelResource.ValidateResourceId(id);
-                return new PageSizeInt32ModelResource(client, id);
-            }
-            );
+            return GetMgmtPaginationArmClientMockingExtension(client).GetPageSizeInt32ModelResource(id);
         }
         #endregion
 
@@ -93,12 +87,7 @@ namespace MgmtPagination
         /// <returns> Returns a <see cref="PageSizeNumericModelResource" /> object. </returns>
         public static PageSizeNumericModelResource GetPageSizeNumericModelResource(this ArmClient client, ResourceIdentifier id)
         {
-            return client.GetResourceClient(() =>
-            {
-                PageSizeNumericModelResource.ValidateResourceId(id);
-                return new PageSizeNumericModelResource(client, id);
-            }
-            );
+            return GetMgmtPaginationArmClientMockingExtension(client).GetPageSizeNumericModelResource(id);
         }
         #endregion
 
@@ -112,12 +101,7 @@ namespace MgmtPagination
         /// <returns> Returns a <see cref="PageSizeFloatModelResource" /> object. </returns>
         public static PageSizeFloatModelResource GetPageSizeFloatModelResource(this ArmClient client, ResourceIdentifier id)
         {
-            return client.GetResourceClient(() =>
-            {
-                PageSizeFloatModelResource.ValidateResourceId(id);
-                return new PageSizeFloatModelResource(client, id);
-            }
-            );
+            return GetMgmtPaginationArmClientMockingExtension(client).GetPageSizeFloatModelResource(id);
         }
         #endregion
 
@@ -131,12 +115,7 @@ namespace MgmtPagination
         /// <returns> Returns a <see cref="PageSizeDoubleModelResource" /> object. </returns>
         public static PageSizeDoubleModelResource GetPageSizeDoubleModelResource(this ArmClient client, ResourceIdentifier id)
         {
-            return client.GetResourceClient(() =>
-            {
-                PageSizeDoubleModelResource.ValidateResourceId(id);
-                return new PageSizeDoubleModelResource(client, id);
-            }
-            );
+            return GetMgmtPaginationArmClientMockingExtension(client).GetPageSizeDoubleModelResource(id);
         }
         #endregion
 
@@ -150,12 +129,7 @@ namespace MgmtPagination
         /// <returns> Returns a <see cref="PageSizeDecimalModelResource" /> object. </returns>
         public static PageSizeDecimalModelResource GetPageSizeDecimalModelResource(this ArmClient client, ResourceIdentifier id)
         {
-            return client.GetResourceClient(() =>
-            {
-                PageSizeDecimalModelResource.ValidateResourceId(id);
-                return new PageSizeDecimalModelResource(client, id);
-            }
-            );
+            return GetMgmtPaginationArmClientMockingExtension(client).GetPageSizeDecimalModelResource(id);
         }
         #endregion
 
@@ -169,12 +143,7 @@ namespace MgmtPagination
         /// <returns> Returns a <see cref="PageSizeStringModelResource" /> object. </returns>
         public static PageSizeStringModelResource GetPageSizeStringModelResource(this ArmClient client, ResourceIdentifier id)
         {
-            return client.GetResourceClient(() =>
-            {
-                PageSizeStringModelResource.ValidateResourceId(id);
-                return new PageSizeStringModelResource(client, id);
-            }
-            );
+            return GetMgmtPaginationArmClientMockingExtension(client).GetPageSizeStringModelResource(id);
         }
         #endregion
 

@@ -19,6 +19,14 @@ namespace MgmtExtensionCommonRestOperation
     /// <summary> A class to add extension methods to MgmtExtensionCommonRestOperation. </summary>
     public static partial class MgmtExtensionCommonRestOperationExtensions
     {
+        private static MgmtExtensionCommonRestOperationArmClientMockingExtension GetMgmtExtensionCommonRestOperationArmClientMockingExtension(ArmClient client)
+        {
+            return client.GetCachedClient(client =>
+            {
+                return new MgmtExtensionCommonRestOperationArmClientMockingExtension(client);
+            });
+        }
+
         private static MgmtExtensionCommonRestOperationResourceGroupMockingExtension GetMgmtExtensionCommonRestOperationResourceGroupMockingExtension(ArmResource resource)
         {
             return resource.GetCachedClient(client =>
@@ -34,6 +42,7 @@ namespace MgmtExtensionCommonRestOperation
                 return new MgmtExtensionCommonRestOperationSubscriptionMockingExtension(client, resource.Id);
             });
         }
+
         #region TypeOneResource
         /// <summary>
         /// Gets an object representing a <see cref="TypeOneResource" /> along with the instance operations that can be performed on it but with no data.
@@ -44,12 +53,7 @@ namespace MgmtExtensionCommonRestOperation
         /// <returns> Returns a <see cref="TypeOneResource" /> object. </returns>
         public static TypeOneResource GetTypeOneResource(this ArmClient client, ResourceIdentifier id)
         {
-            return client.GetResourceClient(() =>
-            {
-                TypeOneResource.ValidateResourceId(id);
-                return new TypeOneResource(client, id);
-            }
-            );
+            return GetMgmtExtensionCommonRestOperationArmClientMockingExtension(client).GetTypeOneResource(id);
         }
         #endregion
 
@@ -63,12 +67,7 @@ namespace MgmtExtensionCommonRestOperation
         /// <returns> Returns a <see cref="TypeTwoResource" /> object. </returns>
         public static TypeTwoResource GetTypeTwoResource(this ArmClient client, ResourceIdentifier id)
         {
-            return client.GetResourceClient(() =>
-            {
-                TypeTwoResource.ValidateResourceId(id);
-                return new TypeTwoResource(client, id);
-            }
-            );
+            return GetMgmtExtensionCommonRestOperationArmClientMockingExtension(client).GetTypeTwoResource(id);
         }
         #endregion
 

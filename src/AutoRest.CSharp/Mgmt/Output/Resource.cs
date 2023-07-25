@@ -157,7 +157,7 @@ namespace AutoRest.CSharp.Mgmt.Output
                 result.Add(restOperation);
             }
 
-            return MgmtClientOperation.FromOperations(result);
+            return MgmtClientOperation.FromOperations(result, IdVariableName);
         }
 
         public virtual Resource GetResource() => this;
@@ -251,7 +251,8 @@ namespace AutoRest.CSharp.Mgmt.Output
                         "Update",
                         createOrUpdateOperation.MgmtReturnType,
                         createOrUpdateOperation.Description ?? $"Update this {ResourceName}.",
-                        createOrUpdateOperation.RequestPath));
+                        createOrUpdateOperation.RequestPath),
+                    IdVariableName);
             }
 
             return null;
@@ -292,7 +293,9 @@ namespace AutoRest.CSharp.Mgmt.Output
                         getOperation.MgmtReturnType,
                         "Add a tag to the current resource.",
                         TagKeyParameter,
-                        TagValueParameter), isConvenientOperation: true));
+                        TagValueParameter),
+                    IdVariableName,
+                    isConvenientOperation: true));
 
                 result.Add(MgmtClientOperation.FromOperation(
                     new MgmtRestOperation(
@@ -300,7 +303,9 @@ namespace AutoRest.CSharp.Mgmt.Output
                         "SetTags",
                         getOperation.MgmtReturnType,
                         "Replace the tags on the resource with the given set.",
-                        TagSetParameter), isConvenientOperation: true));
+                        TagSetParameter),
+                    IdVariableName,
+                    isConvenientOperation: true));
 
                 result.Add(MgmtClientOperation.FromOperation(
                     new MgmtRestOperation(
@@ -308,12 +313,14 @@ namespace AutoRest.CSharp.Mgmt.Output
                         "RemoveTag",
                         getOperation.MgmtReturnType,
                         "Removes a tag by key from the resource.",
-                        TagKeyParameter), isConvenientOperation: true));
+                        TagKeyParameter),
+                    IdVariableName,
+                    isConvenientOperation: true));
             }
             return result;
         }
 
-        public override string BranchIdVariableName => "Id.Parent";
+        public override FormattableString BranchIdVariableName => $"Id.Parent";
 
         public override ResourceTypeSegment GetBranchResourceType(RequestPath branch)
         {
@@ -377,7 +384,7 @@ namespace AutoRest.CSharp.Mgmt.Output
             // TODO -- what if the response type is not the same? Also we need to verify they have the same parameters before we could union those together
             _clientOperationMap = result.Where(pair => pair.Value.Count > 0).ToDictionary(
                 pair => pair.Key,
-                pair => MgmtClientOperation.FromOperations(pair.Value)!); // We first filtered the ones with at least one operation, therefore this will never be null
+                pair => MgmtClientOperation.FromOperations(pair.Value, IdVariableName)!); // We first filtered the ones with at least one operation, therefore this will never be null
             return _clientOperationMap;
         }
 

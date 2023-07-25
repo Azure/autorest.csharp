@@ -20,6 +20,14 @@ namespace Azure.ResourceManager.Sample
     /// <summary> A class to add extension methods to Azure.ResourceManager.Sample. </summary>
     public static partial class SampleExtensions
     {
+        private static SampleArmClientMockingExtension GetSampleArmClientMockingExtension(ArmClient client)
+        {
+            return client.GetCachedClient(client =>
+            {
+                return new SampleArmClientMockingExtension(client);
+            });
+        }
+
         private static SampleResourceGroupMockingExtension GetSampleResourceGroupMockingExtension(ArmResource resource)
         {
             return resource.GetCachedClient(client =>
@@ -35,6 +43,7 @@ namespace Azure.ResourceManager.Sample
                 return new SampleSubscriptionMockingExtension(client, resource.Id);
             });
         }
+
         #region AvailabilitySetResource
         /// <summary>
         /// Gets an object representing an <see cref="AvailabilitySetResource" /> along with the instance operations that can be performed on it but with no data.
@@ -45,12 +54,7 @@ namespace Azure.ResourceManager.Sample
         /// <returns> Returns a <see cref="AvailabilitySetResource" /> object. </returns>
         public static AvailabilitySetResource GetAvailabilitySetResource(this ArmClient client, ResourceIdentifier id)
         {
-            return client.GetResourceClient(() =>
-            {
-                AvailabilitySetResource.ValidateResourceId(id);
-                return new AvailabilitySetResource(client, id);
-            }
-            );
+            return GetSampleArmClientMockingExtension(client).GetAvailabilitySetResource(id);
         }
         #endregion
 
@@ -64,12 +68,7 @@ namespace Azure.ResourceManager.Sample
         /// <returns> Returns a <see cref="ProximityPlacementGroupResource" /> object. </returns>
         public static ProximityPlacementGroupResource GetProximityPlacementGroupResource(this ArmClient client, ResourceIdentifier id)
         {
-            return client.GetResourceClient(() =>
-            {
-                ProximityPlacementGroupResource.ValidateResourceId(id);
-                return new ProximityPlacementGroupResource(client, id);
-            }
-            );
+            return GetSampleArmClientMockingExtension(client).GetProximityPlacementGroupResource(id);
         }
         #endregion
 
@@ -83,12 +82,7 @@ namespace Azure.ResourceManager.Sample
         /// <returns> Returns a <see cref="DedicatedHostGroupResource" /> object. </returns>
         public static DedicatedHostGroupResource GetDedicatedHostGroupResource(this ArmClient client, ResourceIdentifier id)
         {
-            return client.GetResourceClient(() =>
-            {
-                DedicatedHostGroupResource.ValidateResourceId(id);
-                return new DedicatedHostGroupResource(client, id);
-            }
-            );
+            return GetSampleArmClientMockingExtension(client).GetDedicatedHostGroupResource(id);
         }
         #endregion
 
@@ -102,12 +96,7 @@ namespace Azure.ResourceManager.Sample
         /// <returns> Returns a <see cref="DedicatedHostResource" /> object. </returns>
         public static DedicatedHostResource GetDedicatedHostResource(this ArmClient client, ResourceIdentifier id)
         {
-            return client.GetResourceClient(() =>
-            {
-                DedicatedHostResource.ValidateResourceId(id);
-                return new DedicatedHostResource(client, id);
-            }
-            );
+            return GetSampleArmClientMockingExtension(client).GetDedicatedHostResource(id);
         }
         #endregion
 
@@ -121,12 +110,7 @@ namespace Azure.ResourceManager.Sample
         /// <returns> Returns a <see cref="SshPublicKeyResource" /> object. </returns>
         public static SshPublicKeyResource GetSshPublicKeyResource(this ArmClient client, ResourceIdentifier id)
         {
-            return client.GetResourceClient(() =>
-            {
-                SshPublicKeyResource.ValidateResourceId(id);
-                return new SshPublicKeyResource(client, id);
-            }
-            );
+            return GetSampleArmClientMockingExtension(client).GetSshPublicKeyResource(id);
         }
         #endregion
 
@@ -140,12 +124,7 @@ namespace Azure.ResourceManager.Sample
         /// <returns> Returns a <see cref="VirtualMachineExtensionImageResource" /> object. </returns>
         public static VirtualMachineExtensionImageResource GetVirtualMachineExtensionImageResource(this ArmClient client, ResourceIdentifier id)
         {
-            return client.GetResourceClient(() =>
-            {
-                VirtualMachineExtensionImageResource.ValidateResourceId(id);
-                return new VirtualMachineExtensionImageResource(client, id);
-            }
-            );
+            return GetSampleArmClientMockingExtension(client).GetVirtualMachineExtensionImageResource(id);
         }
         #endregion
 
@@ -159,12 +138,7 @@ namespace Azure.ResourceManager.Sample
         /// <returns> Returns a <see cref="VirtualMachineExtensionResource" /> object. </returns>
         public static VirtualMachineExtensionResource GetVirtualMachineExtensionResource(this ArmClient client, ResourceIdentifier id)
         {
-            return client.GetResourceClient(() =>
-            {
-                VirtualMachineExtensionResource.ValidateResourceId(id);
-                return new VirtualMachineExtensionResource(client, id);
-            }
-            );
+            return GetSampleArmClientMockingExtension(client).GetVirtualMachineExtensionResource(id);
         }
         #endregion
 
@@ -178,12 +152,7 @@ namespace Azure.ResourceManager.Sample
         /// <returns> Returns a <see cref="VirtualMachineScaleSetVirtualMachineExtensionResource" /> object. </returns>
         public static VirtualMachineScaleSetVirtualMachineExtensionResource GetVirtualMachineScaleSetVirtualMachineExtensionResource(this ArmClient client, ResourceIdentifier id)
         {
-            return client.GetResourceClient(() =>
-            {
-                VirtualMachineScaleSetVirtualMachineExtensionResource.ValidateResourceId(id);
-                return new VirtualMachineScaleSetVirtualMachineExtensionResource(client, id);
-            }
-            );
+            return GetSampleArmClientMockingExtension(client).GetVirtualMachineScaleSetVirtualMachineExtensionResource(id);
         }
         #endregion
 
@@ -197,12 +166,7 @@ namespace Azure.ResourceManager.Sample
         /// <returns> Returns a <see cref="VirtualMachineResource" /> object. </returns>
         public static VirtualMachineResource GetVirtualMachineResource(this ArmClient client, ResourceIdentifier id)
         {
-            return client.GetResourceClient(() =>
-            {
-                VirtualMachineResource.ValidateResourceId(id);
-                return new VirtualMachineResource(client, id);
-            }
-            );
+            return GetSampleArmClientMockingExtension(client).GetVirtualMachineResource(id);
         }
         #endregion
 
@@ -216,12 +180,7 @@ namespace Azure.ResourceManager.Sample
         /// <returns> Returns a <see cref="ImageResource" /> object. </returns>
         public static ImageResource GetImageResource(this ArmClient client, ResourceIdentifier id)
         {
-            return client.GetResourceClient(() =>
-            {
-                ImageResource.ValidateResourceId(id);
-                return new ImageResource(client, id);
-            }
-            );
+            return GetSampleArmClientMockingExtension(client).GetImageResource(id);
         }
         #endregion
 
@@ -235,12 +194,7 @@ namespace Azure.ResourceManager.Sample
         /// <returns> Returns a <see cref="VirtualMachineScaleSetResource" /> object. </returns>
         public static VirtualMachineScaleSetResource GetVirtualMachineScaleSetResource(this ArmClient client, ResourceIdentifier id)
         {
-            return client.GetResourceClient(() =>
-            {
-                VirtualMachineScaleSetResource.ValidateResourceId(id);
-                return new VirtualMachineScaleSetResource(client, id);
-            }
-            );
+            return GetSampleArmClientMockingExtension(client).GetVirtualMachineScaleSetResource(id);
         }
         #endregion
 
@@ -254,12 +208,7 @@ namespace Azure.ResourceManager.Sample
         /// <returns> Returns a <see cref="VirtualMachineScaleSetExtensionResource" /> object. </returns>
         public static VirtualMachineScaleSetExtensionResource GetVirtualMachineScaleSetExtensionResource(this ArmClient client, ResourceIdentifier id)
         {
-            return client.GetResourceClient(() =>
-            {
-                VirtualMachineScaleSetExtensionResource.ValidateResourceId(id);
-                return new VirtualMachineScaleSetExtensionResource(client, id);
-            }
-            );
+            return GetSampleArmClientMockingExtension(client).GetVirtualMachineScaleSetExtensionResource(id);
         }
         #endregion
 
@@ -273,12 +222,7 @@ namespace Azure.ResourceManager.Sample
         /// <returns> Returns a <see cref="VirtualMachineScaleSetRollingUpgradeResource" /> object. </returns>
         public static VirtualMachineScaleSetRollingUpgradeResource GetVirtualMachineScaleSetRollingUpgradeResource(this ArmClient client, ResourceIdentifier id)
         {
-            return client.GetResourceClient(() =>
-            {
-                VirtualMachineScaleSetRollingUpgradeResource.ValidateResourceId(id);
-                return new VirtualMachineScaleSetRollingUpgradeResource(client, id);
-            }
-            );
+            return GetSampleArmClientMockingExtension(client).GetVirtualMachineScaleSetRollingUpgradeResource(id);
         }
         #endregion
 
@@ -292,12 +236,7 @@ namespace Azure.ResourceManager.Sample
         /// <returns> Returns a <see cref="VirtualMachineScaleSetVMResource" /> object. </returns>
         public static VirtualMachineScaleSetVMResource GetVirtualMachineScaleSetVMResource(this ArmClient client, ResourceIdentifier id)
         {
-            return client.GetResourceClient(() =>
-            {
-                VirtualMachineScaleSetVMResource.ValidateResourceId(id);
-                return new VirtualMachineScaleSetVMResource(client, id);
-            }
-            );
+            return GetSampleArmClientMockingExtension(client).GetVirtualMachineScaleSetVMResource(id);
         }
         #endregion
 

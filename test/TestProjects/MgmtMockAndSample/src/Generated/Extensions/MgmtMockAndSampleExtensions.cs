@@ -20,19 +20,19 @@ namespace MgmtMockAndSample
     /// <summary> A class to add extension methods to MgmtMockAndSample. </summary>
     public static partial class MgmtMockAndSampleExtensions
     {
+        private static MgmtMockAndSampleArmClientMockingExtension GetMgmtMockAndSampleArmClientMockingExtension(ArmClient client)
+        {
+            return client.GetCachedClient(client =>
+            {
+                return new MgmtMockAndSampleArmClientMockingExtension(client);
+            });
+        }
+
         private static MgmtMockAndSampleArmResourceMockingExtension GetMgmtMockAndSampleArmResourceMockingExtension(ArmResource resource)
         {
             return resource.GetCachedClient(client =>
             {
                 return new MgmtMockAndSampleArmResourceMockingExtension(client, resource.Id);
-            });
-        }
-
-        private static MgmtMockAndSampleArmResourceMockingExtension GetMgmtMockAndSampleArmResourceMockingExtension(ArmClient client, ResourceIdentifier scope)
-        {
-            return client.GetResourceClient(() =>
-            {
-                return new MgmtMockAndSampleArmResourceMockingExtension(client, scope);
             });
         }
 
@@ -59,6 +59,7 @@ namespace MgmtMockAndSample
                 return new MgmtMockAndSampleTenantMockingExtension(client, resource.Id);
             });
         }
+
         #region VaultResource
         /// <summary>
         /// Gets an object representing a <see cref="VaultResource" /> along with the instance operations that can be performed on it but with no data.
@@ -69,12 +70,7 @@ namespace MgmtMockAndSample
         /// <returns> Returns a <see cref="VaultResource" /> object. </returns>
         public static VaultResource GetVaultResource(this ArmClient client, ResourceIdentifier id)
         {
-            return client.GetResourceClient(() =>
-            {
-                VaultResource.ValidateResourceId(id);
-                return new VaultResource(client, id);
-            }
-            );
+            return GetMgmtMockAndSampleArmClientMockingExtension(client).GetVaultResource(id);
         }
         #endregion
 
@@ -88,12 +84,7 @@ namespace MgmtMockAndSample
         /// <returns> Returns a <see cref="DeletedVaultResource" /> object. </returns>
         public static DeletedVaultResource GetDeletedVaultResource(this ArmClient client, ResourceIdentifier id)
         {
-            return client.GetResourceClient(() =>
-            {
-                DeletedVaultResource.ValidateResourceId(id);
-                return new DeletedVaultResource(client, id);
-            }
-            );
+            return GetMgmtMockAndSampleArmClientMockingExtension(client).GetDeletedVaultResource(id);
         }
         #endregion
 
@@ -107,12 +98,7 @@ namespace MgmtMockAndSample
         /// <returns> Returns a <see cref="MgmtMockAndSamplePrivateEndpointConnectionResource" /> object. </returns>
         public static MgmtMockAndSamplePrivateEndpointConnectionResource GetMgmtMockAndSamplePrivateEndpointConnectionResource(this ArmClient client, ResourceIdentifier id)
         {
-            return client.GetResourceClient(() =>
-            {
-                MgmtMockAndSamplePrivateEndpointConnectionResource.ValidateResourceId(id);
-                return new MgmtMockAndSamplePrivateEndpointConnectionResource(client, id);
-            }
-            );
+            return GetMgmtMockAndSampleArmClientMockingExtension(client).GetMgmtMockAndSamplePrivateEndpointConnectionResource(id);
         }
         #endregion
 
@@ -126,12 +112,7 @@ namespace MgmtMockAndSample
         /// <returns> Returns a <see cref="VirtualMachineExtensionImageResource" /> object. </returns>
         public static VirtualMachineExtensionImageResource GetVirtualMachineExtensionImageResource(this ArmClient client, ResourceIdentifier id)
         {
-            return client.GetResourceClient(() =>
-            {
-                VirtualMachineExtensionImageResource.ValidateResourceId(id);
-                return new VirtualMachineExtensionImageResource(client, id);
-            }
-            );
+            return GetMgmtMockAndSampleArmClientMockingExtension(client).GetVirtualMachineExtensionImageResource(id);
         }
         #endregion
 
@@ -145,12 +126,7 @@ namespace MgmtMockAndSample
         /// <returns> Returns a <see cref="DiskEncryptionSetResource" /> object. </returns>
         public static DiskEncryptionSetResource GetDiskEncryptionSetResource(this ArmClient client, ResourceIdentifier id)
         {
-            return client.GetResourceClient(() =>
-            {
-                DiskEncryptionSetResource.ValidateResourceId(id);
-                return new DiskEncryptionSetResource(client, id);
-            }
-            );
+            return GetMgmtMockAndSampleArmClientMockingExtension(client).GetDiskEncryptionSetResource(id);
         }
         #endregion
 
@@ -164,12 +140,7 @@ namespace MgmtMockAndSample
         /// <returns> Returns a <see cref="ManagedHsmResource" /> object. </returns>
         public static ManagedHsmResource GetManagedHsmResource(this ArmClient client, ResourceIdentifier id)
         {
-            return client.GetResourceClient(() =>
-            {
-                ManagedHsmResource.ValidateResourceId(id);
-                return new ManagedHsmResource(client, id);
-            }
-            );
+            return GetMgmtMockAndSampleArmClientMockingExtension(client).GetManagedHsmResource(id);
         }
         #endregion
 
@@ -183,12 +154,7 @@ namespace MgmtMockAndSample
         /// <returns> Returns a <see cref="DeletedManagedHsmResource" /> object. </returns>
         public static DeletedManagedHsmResource GetDeletedManagedHsmResource(this ArmClient client, ResourceIdentifier id)
         {
-            return client.GetResourceClient(() =>
-            {
-                DeletedManagedHsmResource.ValidateResourceId(id);
-                return new DeletedManagedHsmResource(client, id);
-            }
-            );
+            return GetMgmtMockAndSampleArmClientMockingExtension(client).GetDeletedManagedHsmResource(id);
         }
         #endregion
 
@@ -202,12 +168,7 @@ namespace MgmtMockAndSample
         /// <returns> Returns a <see cref="MhsmPrivateEndpointConnectionResource" /> object. </returns>
         public static MhsmPrivateEndpointConnectionResource GetMhsmPrivateEndpointConnectionResource(this ArmClient client, ResourceIdentifier id)
         {
-            return client.GetResourceClient(() =>
-            {
-                MhsmPrivateEndpointConnectionResource.ValidateResourceId(id);
-                return new MhsmPrivateEndpointConnectionResource(client, id);
-            }
-            );
+            return GetMgmtMockAndSampleArmClientMockingExtension(client).GetMhsmPrivateEndpointConnectionResource(id);
         }
         #endregion
 
@@ -221,12 +182,7 @@ namespace MgmtMockAndSample
         /// <returns> Returns a <see cref="FirewallPolicyResource" /> object. </returns>
         public static FirewallPolicyResource GetFirewallPolicyResource(this ArmClient client, ResourceIdentifier id)
         {
-            return client.GetResourceClient(() =>
-            {
-                FirewallPolicyResource.ValidateResourceId(id);
-                return new FirewallPolicyResource(client, id);
-            }
-            );
+            return GetMgmtMockAndSampleArmClientMockingExtension(client).GetFirewallPolicyResource(id);
         }
         #endregion
 
@@ -240,12 +196,7 @@ namespace MgmtMockAndSample
         /// <returns> Returns a <see cref="FirewallPolicyRuleCollectionGroupResource" /> object. </returns>
         public static FirewallPolicyRuleCollectionGroupResource GetFirewallPolicyRuleCollectionGroupResource(this ArmClient client, ResourceIdentifier id)
         {
-            return client.GetResourceClient(() =>
-            {
-                FirewallPolicyRuleCollectionGroupResource.ValidateResourceId(id);
-                return new FirewallPolicyRuleCollectionGroupResource(client, id);
-            }
-            );
+            return GetMgmtMockAndSampleArmClientMockingExtension(client).GetFirewallPolicyRuleCollectionGroupResource(id);
         }
         #endregion
 
@@ -259,12 +210,7 @@ namespace MgmtMockAndSample
         /// <returns> Returns a <see cref="RoleAssignmentResource" /> object. </returns>
         public static RoleAssignmentResource GetRoleAssignmentResource(this ArmClient client, ResourceIdentifier id)
         {
-            return client.GetResourceClient(() =>
-            {
-                RoleAssignmentResource.ValidateResourceId(id);
-                return new RoleAssignmentResource(client, id);
-            }
-            );
+            return GetMgmtMockAndSampleArmClientMockingExtension(client).GetRoleAssignmentResource(id);
         }
         #endregion
 
@@ -278,12 +224,7 @@ namespace MgmtMockAndSample
         /// <returns> Returns a <see cref="GuestConfigurationAssignmentResource" /> object. </returns>
         public static GuestConfigurationAssignmentResource GetGuestConfigurationAssignmentResource(this ArmClient client, ResourceIdentifier id)
         {
-            return client.GetResourceClient(() =>
-            {
-                GuestConfigurationAssignmentResource.ValidateResourceId(id);
-                return new GuestConfigurationAssignmentResource(client, id);
-            }
-            );
+            return GetMgmtMockAndSampleArmClientMockingExtension(client).GetGuestConfigurationAssignmentResource(id);
         }
         #endregion
 
@@ -293,15 +234,6 @@ namespace MgmtMockAndSample
         public static RoleAssignmentCollection GetRoleAssignments(this ArmResource armResource)
         {
             return GetMgmtMockAndSampleArmResourceMockingExtension(armResource).GetRoleAssignments();
-        }
-
-        /// <summary> Gets a collection of RoleAssignmentResources in the ArmResource. </summary>
-        /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
-        /// <param name="scope"> The scope that the resource will apply against. </param>
-        /// <returns> An object representing collection of RoleAssignmentResources and their operations over a RoleAssignmentResource. </returns>
-        public static RoleAssignmentCollection GetRoleAssignments(this ArmClient client, ResourceIdentifier scope)
-        {
-            return GetMgmtMockAndSampleArmResourceMockingExtension(client, scope).GetRoleAssignments();
         }
 
         /// <summary>
@@ -341,31 +273,6 @@ namespace MgmtMockAndSample
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
-        /// <param name="scope"> The scope that the resource will apply against. </param>
-        /// <param name="roleAssignmentName"> The name of the role assignment to get. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="roleAssignmentName"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="roleAssignmentName"/> is null. </exception>
-        [ForwardsClientCalls]
-        public static async Task<Response<RoleAssignmentResource>> GetRoleAssignmentAsync(this ArmClient client, ResourceIdentifier scope, string roleAssignmentName, CancellationToken cancellationToken = default)
-        {
-            return await client.GetRoleAssignments(scope).GetAsync(roleAssignmentName, cancellationToken).ConfigureAwait(false);
-        }
-
-        /// <summary>
-        /// Get the specified role assignment.
-        /// <list type="bullet">
-        /// <item>
-        /// <term>Request Path</term>
-        /// <description>/{scope}/providers/Microsoft.Authorization/roleAssignments/{roleAssignmentName}</description>
-        /// </item>
-        /// <item>
-        /// <term>Operation Id</term>
-        /// <description>RoleAssignments_Get</description>
-        /// </item>
-        /// </list>
-        /// </summary>
         /// <param name="armResource"> The <see cref="ArmResource" /> instance the method will execute against. </param>
         /// <param name="roleAssignmentName"> The name of the role assignment to get. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -377,42 +284,12 @@ namespace MgmtMockAndSample
             return GetMgmtMockAndSampleArmResourceMockingExtension(armResource).GetRoleAssignment(roleAssignmentName, cancellationToken);
         }
 
-        /// <summary>
-        /// Get the specified role assignment.
-        /// <list type="bullet">
-        /// <item>
-        /// <term>Request Path</term>
-        /// <description>/{scope}/providers/Microsoft.Authorization/roleAssignments/{roleAssignmentName}</description>
-        /// </item>
-        /// <item>
-        /// <term>Operation Id</term>
-        /// <description>RoleAssignments_Get</description>
-        /// </item>
-        /// </list>
-        /// </summary>
-        /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
-        /// <param name="scope"> The scope that the resource will apply against. </param>
-        /// <param name="roleAssignmentName"> The name of the role assignment to get. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="roleAssignmentName"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="roleAssignmentName"/> is null. </exception>
-        [ForwardsClientCalls]
-        public static Response<RoleAssignmentResource> GetRoleAssignment(this ArmClient client, ResourceIdentifier scope, string roleAssignmentName, CancellationToken cancellationToken = default)
-        {
-            return client.GetRoleAssignments(scope).Get(roleAssignmentName, cancellationToken);
-        }
-
         /// <summary> Gets a collection of GuestConfigurationAssignmentResources in the ArmResource. </summary>
-        /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
-        /// <param name="scope"> The scope that the resource will apply against. Expected resource type includes the following: Microsoft.Compute/virtualMachines. </param>
+        /// <param name="armResource"> The <see cref="ArmResource" /> instance the method will execute against. </param>
         /// <returns> An object representing collection of GuestConfigurationAssignmentResources and their operations over a GuestConfigurationAssignmentResource. </returns>
-        public static GuestConfigurationAssignmentCollection GetGuestConfigurationAssignments(this ArmClient client, ResourceIdentifier scope)
+        public static GuestConfigurationAssignmentCollection GetGuestConfigurationAssignments(this ArmResource armResource)
         {
-            if (!scope.ResourceType.Equals("Microsoft.Compute/virtualMachines"))
-            {
-                throw new ArgumentException(string.Format("Invalid resource type {0} expected Microsoft.Compute/virtualMachines", scope.ResourceType));
-            }
-            return GetMgmtMockAndSampleArmResourceMockingExtension(client, scope).GetGuestConfigurationAssignments();
+            return GetMgmtMockAndSampleArmResourceMockingExtension(armResource).GetGuestConfigurationAssignments();
         }
 
         /// <summary>
@@ -428,20 +305,15 @@ namespace MgmtMockAndSample
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
-        /// <param name="scope"> The scope that the resource will apply against. Expected resource type includes the following: Microsoft.Compute/virtualMachines. </param>
+        /// <param name="armResource"> The <see cref="ArmResource" /> instance the method will execute against. </param>
         /// <param name="guestConfigurationAssignmentName"> The guest configuration assignment name. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="guestConfigurationAssignmentName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="guestConfigurationAssignmentName"/> is null. </exception>
         [ForwardsClientCalls]
-        public static async Task<Response<GuestConfigurationAssignmentResource>> GetGuestConfigurationAssignmentAsync(this ArmClient client, ResourceIdentifier scope, string guestConfigurationAssignmentName, CancellationToken cancellationToken = default)
+        public static async Task<Response<GuestConfigurationAssignmentResource>> GetGuestConfigurationAssignmentAsync(this ArmResource armResource, string guestConfigurationAssignmentName, CancellationToken cancellationToken = default)
         {
-            if (!scope.ResourceType.Equals("Microsoft.Compute/virtualMachines"))
-            {
-                throw new ArgumentException(string.Format("Invalid resource type {0} expected Microsoft.Compute/virtualMachines", scope.ResourceType));
-            }
-            return await client.GetGuestConfigurationAssignments(scope).GetAsync(guestConfigurationAssignmentName, cancellationToken).ConfigureAwait(false);
+            return await GetMgmtMockAndSampleArmResourceMockingExtension(armResource).GetGuestConfigurationAssignmentAsync(guestConfigurationAssignmentName, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -457,20 +329,15 @@ namespace MgmtMockAndSample
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="client"> The <see cref="ArmClient" /> instance the method will execute against. </param>
-        /// <param name="scope"> The scope that the resource will apply against. Expected resource type includes the following: Microsoft.Compute/virtualMachines. </param>
+        /// <param name="armResource"> The <see cref="ArmResource" /> instance the method will execute against. </param>
         /// <param name="guestConfigurationAssignmentName"> The guest configuration assignment name. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentException"> <paramref name="guestConfigurationAssignmentName"/> is an empty string, and was expected to be non-empty. </exception>
         /// <exception cref="ArgumentNullException"> <paramref name="guestConfigurationAssignmentName"/> is null. </exception>
         [ForwardsClientCalls]
-        public static Response<GuestConfigurationAssignmentResource> GetGuestConfigurationAssignment(this ArmClient client, ResourceIdentifier scope, string guestConfigurationAssignmentName, CancellationToken cancellationToken = default)
+        public static Response<GuestConfigurationAssignmentResource> GetGuestConfigurationAssignment(this ArmResource armResource, string guestConfigurationAssignmentName, CancellationToken cancellationToken = default)
         {
-            if (!scope.ResourceType.Equals("Microsoft.Compute/virtualMachines"))
-            {
-                throw new ArgumentException(string.Format("Invalid resource type {0} expected Microsoft.Compute/virtualMachines", scope.ResourceType));
-            }
-            return client.GetGuestConfigurationAssignments(scope).Get(guestConfigurationAssignmentName, cancellationToken);
+            return GetMgmtMockAndSampleArmResourceMockingExtension(armResource).GetGuestConfigurationAssignment(guestConfigurationAssignmentName, cancellationToken);
         }
 
         /// <summary> Gets a collection of VaultResources in the ResourceGroupResource. </summary>

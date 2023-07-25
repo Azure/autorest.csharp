@@ -22,14 +22,12 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 if (extensionClient.IsEmpty)
                     continue;
 
-                foreach (var method in extensionClient.FactoryMethods)
-                {
-                    _writer.Line();
+                _writer.Line();
 
-                    using (_writer.WriteMethodDeclaration(method.Signature))
-                    {
-                        method.MethodBodyImplementation(_writer);
-                    }
+                var method = extensionClient.FactoryMethod;
+                using (_writer.WriteMethodDeclaration(method.Signature))
+                {
+                    method.MethodBodyImplementation(_writer);
                 }
             }
 

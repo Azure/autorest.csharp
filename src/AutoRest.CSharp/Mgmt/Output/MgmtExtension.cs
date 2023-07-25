@@ -40,7 +40,7 @@ namespace AutoRest.CSharp.Mgmt.Output
             return IsArmCore ? null : base.EnsureMockingCtor();
         }
 
-        public override string BranchIdVariableName => $"{ExtensionParameter.Name}.Id";
+        public override FormattableString BranchIdVariableName => $"{ExtensionParameter.Name}.Id";
 
         private Parameter? _extensionParameter;
         public Parameter ExtensionParameter => _extensionParameter ??= EnsureExtensionParameter();
@@ -98,6 +98,7 @@ namespace AutoRest.CSharp.Mgmt.Output
                         ContextualPath,
                         operationName,
                         propertyBagName: ResourceName),
+                    BranchIdVariableName,
                     extensionParamToUse);
             });
         }

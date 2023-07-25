@@ -21,16 +21,13 @@ namespace AutoRest.CSharp.Mgmt.Generation
         public static MgmtExtensionWriter GetWriter(CodeWriter writer, MgmtExtension extension) => extension switch
         {
             ArmClientExtension armClientExtension => new ArmClientExtensionWriter(writer, armClientExtension),
-            // the class ArmResourceExtensionWriter is created to handle scope resources, but in ArmCore we do not have that problem, therefore for ArmCore we just let the regular MgmtExtension class handle that
-            ArmResourceExtension armResourceExtension when !Configuration.MgmtConfiguration.IsArmCore => new ArmResourceExtensionWriter(writer, armResourceExtension),
             _ => new MgmtExtensionWriter(writer, extension)
         };
 
         private MgmtExtension This { get; }
         protected delegate void WriteResourceGetBody(MethodSignature signature, bool isAsync, bool isPaging);
 
-        public MgmtExtensionWriter(MgmtExtension extensions)
-            : this(new CodeWriter(), extensions)
+        public MgmtExtensionWriter(MgmtExtension extensions) : this(new CodeWriter(), extensions)
         {
             This = extensions;
         }
@@ -46,7 +43,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
         private void GetMethodWrapperImpl(MgmtClientOperation clientOperation, Diagnostic diagnostic, bool isAsync)
             => WriteMethodBodyWrapper(clientOperation.MethodSignature, isAsync, clientOperation.IsPagingOperation);
 
-        private void WriteMethodBodyWrapper(MethodSignature signature, bool isAsync, bool isPaging)
+        protected void WriteMethodBodyWrapper(MethodSignature signature, bool isAsync, bool isPaging)
         {
             _writer.AppendRaw("return ")
                 .AppendRawIf("await ", isAsync && !isPaging)

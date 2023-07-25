@@ -19,6 +19,14 @@ namespace MgmtCollectionParent
     /// <summary> A class to add extension methods to MgmtCollectionParent. </summary>
     public static partial class MgmtCollectionParentExtensions
     {
+        private static MgmtCollectionParentArmClientMockingExtension GetMgmtCollectionParentArmClientMockingExtension(ArmClient client)
+        {
+            return client.GetCachedClient(client =>
+            {
+                return new MgmtCollectionParentArmClientMockingExtension(client);
+            });
+        }
+
         private static MgmtCollectionParentResourceGroupMockingExtension GetMgmtCollectionParentResourceGroupMockingExtension(ArmResource resource)
         {
             return resource.GetCachedClient(client =>
@@ -34,6 +42,7 @@ namespace MgmtCollectionParent
                 return new MgmtCollectionParentSubscriptionMockingExtension(client, resource.Id);
             });
         }
+
         #region OrderResource
         /// <summary>
         /// Gets an object representing an <see cref="OrderResource" /> along with the instance operations that can be performed on it but with no data.
@@ -44,12 +53,7 @@ namespace MgmtCollectionParent
         /// <returns> Returns a <see cref="OrderResource" /> object. </returns>
         public static OrderResource GetOrderResource(this ArmClient client, ResourceIdentifier id)
         {
-            return client.GetResourceClient(() =>
-            {
-                OrderResource.ValidateResourceId(id);
-                return new OrderResource(client, id);
-            }
-            );
+            return GetMgmtCollectionParentArmClientMockingExtension(client).GetOrderResource(id);
         }
         #endregion
 

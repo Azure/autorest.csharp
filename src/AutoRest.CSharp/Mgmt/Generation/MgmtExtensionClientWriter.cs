@@ -3,23 +3,25 @@
 
 using System;
 using AutoRest.CSharp.Generation.Writers;
-using AutoRest.CSharp.Mgmt.AutoRest;
-using AutoRest.CSharp.Mgmt.Models;
 using AutoRest.CSharp.Mgmt.Output;
-using AutoRest.CSharp.Output.Models.Types;
 using Azure.Core;
 using Azure.Core.Pipeline;
 
 namespace AutoRest.CSharp.Mgmt.Generation
 {
-    internal sealed class MgmtExtensionClientWriter : MgmtClientBaseWriter
+    internal class MgmtExtensionClientWriter : MgmtClientBaseWriter
     {
+        public static MgmtExtensionClientWriter GetWriter(MgmtExtensionClient extensionClient) => extensionClient switch
+        {
+            ArmClientExtensionClient armClientExtensionClient => new ArmClientExtensionClientWriter(armClientExtensionClient),
+            _ => new MgmtExtensionClientWriter(extensionClient)
+        };
+
         protected override bool UseField => false;
 
         private MgmtExtensionClient This { get; }
 
-        public MgmtExtensionClientWriter(MgmtExtensionClient extensions)
-            : base(new CodeWriter(), extensions)
+        public MgmtExtensionClientWriter(MgmtExtensionClient extensions) : base(new CodeWriter(), extensions)
         {
             This = extensions;
         }

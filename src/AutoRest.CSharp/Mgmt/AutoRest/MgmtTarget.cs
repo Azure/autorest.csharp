@@ -171,7 +171,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                 foreach (var extensionClient in extensionClients)
                 {
                     if (!extensionClient.IsEmpty)
-                        WriteExtensionFile(project, new MgmtExtensionClientWriter(extensionClient));
+                        WriteExtensionFile(project, MgmtExtensionClientWriter.GetWriter(extensionClient));
                 }
             }
         }

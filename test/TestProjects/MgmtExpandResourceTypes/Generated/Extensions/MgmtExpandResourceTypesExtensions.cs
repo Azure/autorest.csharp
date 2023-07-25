@@ -20,6 +20,14 @@ namespace MgmtExpandResourceTypes
     /// <summary> A class to add extension methods to MgmtExpandResourceTypes. </summary>
     public static partial class MgmtExpandResourceTypesExtensions
     {
+        private static MgmtExpandResourceTypesArmClientMockingExtension GetMgmtExpandResourceTypesArmClientMockingExtension(ArmClient client)
+        {
+            return client.GetCachedClient(client =>
+            {
+                return new MgmtExpandResourceTypesArmClientMockingExtension(client);
+            });
+        }
+
         private static MgmtExpandResourceTypesResourceGroupMockingExtension GetMgmtExpandResourceTypesResourceGroupMockingExtension(ArmResource resource)
         {
             return resource.GetCachedClient(client =>
@@ -35,6 +43,7 @@ namespace MgmtExpandResourceTypes
                 return new MgmtExpandResourceTypesSubscriptionMockingExtension(client, resource.Id);
             });
         }
+
         #region RecordSetAResource
         /// <summary>
         /// Gets an object representing a <see cref="RecordSetAResource" /> along with the instance operations that can be performed on it but with no data.
@@ -45,12 +54,7 @@ namespace MgmtExpandResourceTypes
         /// <returns> Returns a <see cref="RecordSetAResource" /> object. </returns>
         public static RecordSetAResource GetRecordSetAResource(this ArmClient client, ResourceIdentifier id)
         {
-            return client.GetResourceClient(() =>
-            {
-                RecordSetAResource.ValidateResourceId(id);
-                return new RecordSetAResource(client, id);
-            }
-            );
+            return GetMgmtExpandResourceTypesArmClientMockingExtension(client).GetRecordSetAResource(id);
         }
         #endregion
 
@@ -64,12 +68,7 @@ namespace MgmtExpandResourceTypes
         /// <returns> Returns a <see cref="RecordSetAaaaResource" /> object. </returns>
         public static RecordSetAaaaResource GetRecordSetAaaaResource(this ArmClient client, ResourceIdentifier id)
         {
-            return client.GetResourceClient(() =>
-            {
-                RecordSetAaaaResource.ValidateResourceId(id);
-                return new RecordSetAaaaResource(client, id);
-            }
-            );
+            return GetMgmtExpandResourceTypesArmClientMockingExtension(client).GetRecordSetAaaaResource(id);
         }
         #endregion
 
@@ -83,12 +82,7 @@ namespace MgmtExpandResourceTypes
         /// <returns> Returns a <see cref="RecordSetCaaResource" /> object. </returns>
         public static RecordSetCaaResource GetRecordSetCaaResource(this ArmClient client, ResourceIdentifier id)
         {
-            return client.GetResourceClient(() =>
-            {
-                RecordSetCaaResource.ValidateResourceId(id);
-                return new RecordSetCaaResource(client, id);
-            }
-            );
+            return GetMgmtExpandResourceTypesArmClientMockingExtension(client).GetRecordSetCaaResource(id);
         }
         #endregion
 
@@ -102,12 +96,7 @@ namespace MgmtExpandResourceTypes
         /// <returns> Returns a <see cref="RecordSetCNameResource" /> object. </returns>
         public static RecordSetCNameResource GetRecordSetCNameResource(this ArmClient client, ResourceIdentifier id)
         {
-            return client.GetResourceClient(() =>
-            {
-                RecordSetCNameResource.ValidateResourceId(id);
-                return new RecordSetCNameResource(client, id);
-            }
-            );
+            return GetMgmtExpandResourceTypesArmClientMockingExtension(client).GetRecordSetCNameResource(id);
         }
         #endregion
 
@@ -121,12 +110,7 @@ namespace MgmtExpandResourceTypes
         /// <returns> Returns a <see cref="RecordSetMxResource" /> object. </returns>
         public static RecordSetMxResource GetRecordSetMxResource(this ArmClient client, ResourceIdentifier id)
         {
-            return client.GetResourceClient(() =>
-            {
-                RecordSetMxResource.ValidateResourceId(id);
-                return new RecordSetMxResource(client, id);
-            }
-            );
+            return GetMgmtExpandResourceTypesArmClientMockingExtension(client).GetRecordSetMxResource(id);
         }
         #endregion
 
@@ -140,12 +124,7 @@ namespace MgmtExpandResourceTypes
         /// <returns> Returns a <see cref="RecordSetNsResource" /> object. </returns>
         public static RecordSetNsResource GetRecordSetNsResource(this ArmClient client, ResourceIdentifier id)
         {
-            return client.GetResourceClient(() =>
-            {
-                RecordSetNsResource.ValidateResourceId(id);
-                return new RecordSetNsResource(client, id);
-            }
-            );
+            return GetMgmtExpandResourceTypesArmClientMockingExtension(client).GetRecordSetNsResource(id);
         }
         #endregion
 
@@ -159,12 +138,7 @@ namespace MgmtExpandResourceTypes
         /// <returns> Returns a <see cref="RecordSetPtrResource" /> object. </returns>
         public static RecordSetPtrResource GetRecordSetPtrResource(this ArmClient client, ResourceIdentifier id)
         {
-            return client.GetResourceClient(() =>
-            {
-                RecordSetPtrResource.ValidateResourceId(id);
-                return new RecordSetPtrResource(client, id);
-            }
-            );
+            return GetMgmtExpandResourceTypesArmClientMockingExtension(client).GetRecordSetPtrResource(id);
         }
         #endregion
 
@@ -178,12 +152,7 @@ namespace MgmtExpandResourceTypes
         /// <returns> Returns a <see cref="RecordSetSoaResource" /> object. </returns>
         public static RecordSetSoaResource GetRecordSetSoaResource(this ArmClient client, ResourceIdentifier id)
         {
-            return client.GetResourceClient(() =>
-            {
-                RecordSetSoaResource.ValidateResourceId(id);
-                return new RecordSetSoaResource(client, id);
-            }
-            );
+            return GetMgmtExpandResourceTypesArmClientMockingExtension(client).GetRecordSetSoaResource(id);
         }
         #endregion
 
@@ -197,12 +166,7 @@ namespace MgmtExpandResourceTypes
         /// <returns> Returns a <see cref="RecordSetSrvResource" /> object. </returns>
         public static RecordSetSrvResource GetRecordSetSrvResource(this ArmClient client, ResourceIdentifier id)
         {
-            return client.GetResourceClient(() =>
-            {
-                RecordSetSrvResource.ValidateResourceId(id);
-                return new RecordSetSrvResource(client, id);
-            }
-            );
+            return GetMgmtExpandResourceTypesArmClientMockingExtension(client).GetRecordSetSrvResource(id);
         }
         #endregion
 
@@ -216,12 +180,7 @@ namespace MgmtExpandResourceTypes
         /// <returns> Returns a <see cref="RecordSetTxtResource" /> object. </returns>
         public static RecordSetTxtResource GetRecordSetTxtResource(this ArmClient client, ResourceIdentifier id)
         {
-            return client.GetResourceClient(() =>
-            {
-                RecordSetTxtResource.ValidateResourceId(id);
-                return new RecordSetTxtResource(client, id);
-            }
-            );
+            return GetMgmtExpandResourceTypesArmClientMockingExtension(client).GetRecordSetTxtResource(id);
         }
         #endregion
 
@@ -235,12 +194,7 @@ namespace MgmtExpandResourceTypes
         /// <returns> Returns a <see cref="ZoneResource" /> object. </returns>
         public static ZoneResource GetZoneResource(this ArmClient client, ResourceIdentifier id)
         {
-            return client.GetResourceClient(() =>
-            {
-                ZoneResource.ValidateResourceId(id);
-                return new ZoneResource(client, id);
-            }
-            );
+            return GetMgmtExpandResourceTypesArmClientMockingExtension(client).GetZoneResource(id);
         }
         #endregion
 

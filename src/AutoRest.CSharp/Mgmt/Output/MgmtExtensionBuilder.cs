@@ -59,17 +59,14 @@ namespace AutoRest.CSharp.Mgmt.Output
             }
             // add ArmResourceExtension methods
             extensionDict.Add(typeof(ArmResource), new ArmResourceExtension(_armResourceExtensionOperations, extensionClients));
-            // add the ArmClientExtension
-            extensionDict.Add(typeof(ArmClient), new ArmClientExtension(_extensionOperations[typeof(TenantResource)]));
+            // add ArmClientExtension methods (which is also the TenantResource extension methods)
+            extensionDict.Add(typeof(ArmClient), new ArmClientExtension(_armResourceExtensionOperations, extensionClients));
 
             // construct all possible extension clients
             // first we collection all possible combinations of the resource on operations
             var resourceToOperationsDict = new Dictionary<CSharpType, List<MgmtClientOperation>>();
             foreach (var (type, extension) in extensionDict)
             {
-                // explicitly skip ArmClient because it should not have an extension client
-                if (type.Equals(typeof(ArmClient)))
-                    continue;
                 // we add an empty list for the type to ensure that the corresponding extension client will always be constructed, even empty
                 resourceToOperationsDict.Add(type, new());
                 foreach (var operation in extension.AllOperations)
@@ -82,7 +79,10 @@ namespace AutoRest.CSharp.Mgmt.Output
             {
                 // find the extension if the resource type here is a framework type (when it is ResourceGroupResource, SubscriptionResource, etc) to ensure the ExtensionClient could property have the child resources
                 extensionDict.TryGetValue(resourceType, out var extensionForChildResources);
-                extensionClients.Add(new MgmtExtensionClient(resourceType, operations, extensionForChildResources));
+                var extensionClient = resourceType.Equals(typeof(ArmClient)) ?
+                    new ArmClientExtensionClient(resourceType, operations, extensionForChildResources) :
+                    new MgmtExtensionClient(resourceType, operations, extensionForChildResources);
+                extensionClients.Add(extensionClient);
             }
 
             return new(extensionDict, extensionClients);

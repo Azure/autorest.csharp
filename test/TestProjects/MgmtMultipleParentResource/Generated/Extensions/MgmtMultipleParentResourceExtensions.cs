@@ -19,6 +19,14 @@ namespace MgmtMultipleParentResource
     /// <summary> A class to add extension methods to MgmtMultipleParentResource. </summary>
     public static partial class MgmtMultipleParentResourceExtensions
     {
+        private static MgmtMultipleParentResourceArmClientMockingExtension GetMgmtMultipleParentResourceArmClientMockingExtension(ArmClient client)
+        {
+            return client.GetCachedClient(client =>
+            {
+                return new MgmtMultipleParentResourceArmClientMockingExtension(client);
+            });
+        }
+
         private static MgmtMultipleParentResourceResourceGroupMockingExtension GetMgmtMultipleParentResourceResourceGroupMockingExtension(ArmResource resource)
         {
             return resource.GetCachedClient(client =>
@@ -26,6 +34,7 @@ namespace MgmtMultipleParentResource
                 return new MgmtMultipleParentResourceResourceGroupMockingExtension(client, resource.Id);
             });
         }
+
         #region AnotherParentResource
         /// <summary>
         /// Gets an object representing an <see cref="AnotherParentResource" /> along with the instance operations that can be performed on it but with no data.
@@ -36,12 +45,7 @@ namespace MgmtMultipleParentResource
         /// <returns> Returns a <see cref="AnotherParentResource" /> object. </returns>
         public static AnotherParentResource GetAnotherParentResource(this ArmClient client, ResourceIdentifier id)
         {
-            return client.GetResourceClient(() =>
-            {
-                AnotherParentResource.ValidateResourceId(id);
-                return new AnotherParentResource(client, id);
-            }
-            );
+            return GetMgmtMultipleParentResourceArmClientMockingExtension(client).GetAnotherParentResource(id);
         }
         #endregion
 
@@ -55,12 +59,7 @@ namespace MgmtMultipleParentResource
         /// <returns> Returns a <see cref="AnotherParentChildResource" /> object. </returns>
         public static AnotherParentChildResource GetAnotherParentChildResource(this ArmClient client, ResourceIdentifier id)
         {
-            return client.GetResourceClient(() =>
-            {
-                AnotherParentChildResource.ValidateResourceId(id);
-                return new AnotherParentChildResource(client, id);
-            }
-            );
+            return GetMgmtMultipleParentResourceArmClientMockingExtension(client).GetAnotherParentChildResource(id);
         }
         #endregion
 
@@ -74,12 +73,7 @@ namespace MgmtMultipleParentResource
         /// <returns> Returns a <see cref="TheParentSubParentChildResource" /> object. </returns>
         public static TheParentSubParentChildResource GetTheParentSubParentChildResource(this ArmClient client, ResourceIdentifier id)
         {
-            return client.GetResourceClient(() =>
-            {
-                TheParentSubParentChildResource.ValidateResourceId(id);
-                return new TheParentSubParentChildResource(client, id);
-            }
-            );
+            return GetMgmtMultipleParentResourceArmClientMockingExtension(client).GetTheParentSubParentChildResource(id);
         }
         #endregion
 
@@ -93,12 +87,7 @@ namespace MgmtMultipleParentResource
         /// <returns> Returns a <see cref="TheParentResource" /> object. </returns>
         public static TheParentResource GetTheParentResource(this ArmClient client, ResourceIdentifier id)
         {
-            return client.GetResourceClient(() =>
-            {
-                TheParentResource.ValidateResourceId(id);
-                return new TheParentResource(client, id);
-            }
-            );
+            return GetMgmtMultipleParentResourceArmClientMockingExtension(client).GetTheParentResource(id);
         }
         #endregion
 
@@ -112,12 +101,7 @@ namespace MgmtMultipleParentResource
         /// <returns> Returns a <see cref="SubParentResource" /> object. </returns>
         public static SubParentResource GetSubParentResource(this ArmClient client, ResourceIdentifier id)
         {
-            return client.GetResourceClient(() =>
-            {
-                SubParentResource.ValidateResourceId(id);
-                return new SubParentResource(client, id);
-            }
-            );
+            return GetMgmtMultipleParentResourceArmClientMockingExtension(client).GetSubParentResource(id);
         }
         #endregion
 

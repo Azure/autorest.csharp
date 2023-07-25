@@ -19,6 +19,14 @@ namespace MgmtHierarchicalNonResource
     /// <summary> A class to add extension methods to MgmtHierarchicalNonResource. </summary>
     public static partial class MgmtHierarchicalNonResourceExtensions
     {
+        private static MgmtHierarchicalNonResourceArmClientMockingExtension GetMgmtHierarchicalNonResourceArmClientMockingExtension(ArmClient client)
+        {
+            return client.GetCachedClient(client =>
+            {
+                return new MgmtHierarchicalNonResourceArmClientMockingExtension(client);
+            });
+        }
+
         private static MgmtHierarchicalNonResourceSubscriptionMockingExtension GetMgmtHierarchicalNonResourceSubscriptionMockingExtension(ArmResource resource)
         {
             return resource.GetCachedClient(client =>
@@ -26,6 +34,7 @@ namespace MgmtHierarchicalNonResource
                 return new MgmtHierarchicalNonResourceSubscriptionMockingExtension(client, resource.Id);
             });
         }
+
         #region SharedGalleryResource
         /// <summary>
         /// Gets an object representing a <see cref="SharedGalleryResource" /> along with the instance operations that can be performed on it but with no data.
@@ -36,12 +45,7 @@ namespace MgmtHierarchicalNonResource
         /// <returns> Returns a <see cref="SharedGalleryResource" /> object. </returns>
         public static SharedGalleryResource GetSharedGalleryResource(this ArmClient client, ResourceIdentifier id)
         {
-            return client.GetResourceClient(() =>
-            {
-                SharedGalleryResource.ValidateResourceId(id);
-                return new SharedGalleryResource(client, id);
-            }
-            );
+            return GetMgmtHierarchicalNonResourceArmClientMockingExtension(client).GetSharedGalleryResource(id);
         }
         #endregion
 

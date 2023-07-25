@@ -20,6 +20,14 @@ namespace MgmtParamOrdering
     /// <summary> A class to add extension methods to MgmtParamOrdering. </summary>
     public static partial class MgmtParamOrderingExtensions
     {
+        private static MgmtParamOrderingArmClientMockingExtension GetMgmtParamOrderingArmClientMockingExtension(ArmClient client)
+        {
+            return client.GetCachedClient(client =>
+            {
+                return new MgmtParamOrderingArmClientMockingExtension(client);
+            });
+        }
+
         private static MgmtParamOrderingResourceGroupMockingExtension GetMgmtParamOrderingResourceGroupMockingExtension(ArmResource resource)
         {
             return resource.GetCachedClient(client =>
@@ -35,6 +43,7 @@ namespace MgmtParamOrdering
                 return new MgmtParamOrderingSubscriptionMockingExtension(client, resource.Id);
             });
         }
+
         #region AvailabilitySetResource
         /// <summary>
         /// Gets an object representing an <see cref="AvailabilitySetResource" /> along with the instance operations that can be performed on it but with no data.
@@ -45,12 +54,7 @@ namespace MgmtParamOrdering
         /// <returns> Returns a <see cref="AvailabilitySetResource" /> object. </returns>
         public static AvailabilitySetResource GetAvailabilitySetResource(this ArmClient client, ResourceIdentifier id)
         {
-            return client.GetResourceClient(() =>
-            {
-                AvailabilitySetResource.ValidateResourceId(id);
-                return new AvailabilitySetResource(client, id);
-            }
-            );
+            return GetMgmtParamOrderingArmClientMockingExtension(client).GetAvailabilitySetResource(id);
         }
         #endregion
 
@@ -64,12 +68,7 @@ namespace MgmtParamOrdering
         /// <returns> Returns a <see cref="DedicatedHostGroupResource" /> object. </returns>
         public static DedicatedHostGroupResource GetDedicatedHostGroupResource(this ArmClient client, ResourceIdentifier id)
         {
-            return client.GetResourceClient(() =>
-            {
-                DedicatedHostGroupResource.ValidateResourceId(id);
-                return new DedicatedHostGroupResource(client, id);
-            }
-            );
+            return GetMgmtParamOrderingArmClientMockingExtension(client).GetDedicatedHostGroupResource(id);
         }
         #endregion
 
@@ -83,12 +82,7 @@ namespace MgmtParamOrdering
         /// <returns> Returns a <see cref="DedicatedHostResource" /> object. </returns>
         public static DedicatedHostResource GetDedicatedHostResource(this ArmClient client, ResourceIdentifier id)
         {
-            return client.GetResourceClient(() =>
-            {
-                DedicatedHostResource.ValidateResourceId(id);
-                return new DedicatedHostResource(client, id);
-            }
-            );
+            return GetMgmtParamOrderingArmClientMockingExtension(client).GetDedicatedHostResource(id);
         }
         #endregion
 
@@ -102,12 +96,7 @@ namespace MgmtParamOrdering
         /// <returns> Returns a <see cref="VirtualMachineExtensionImageResource" /> object. </returns>
         public static VirtualMachineExtensionImageResource GetVirtualMachineExtensionImageResource(this ArmClient client, ResourceIdentifier id)
         {
-            return client.GetResourceClient(() =>
-            {
-                VirtualMachineExtensionImageResource.ValidateResourceId(id);
-                return new VirtualMachineExtensionImageResource(client, id);
-            }
-            );
+            return GetMgmtParamOrderingArmClientMockingExtension(client).GetVirtualMachineExtensionImageResource(id);
         }
         #endregion
 
@@ -121,12 +110,7 @@ namespace MgmtParamOrdering
         /// <returns> Returns a <see cref="EnvironmentContainerResource" /> object. </returns>
         public static EnvironmentContainerResource GetEnvironmentContainerResource(this ArmClient client, ResourceIdentifier id)
         {
-            return client.GetResourceClient(() =>
-            {
-                EnvironmentContainerResource.ValidateResourceId(id);
-                return new EnvironmentContainerResource(client, id);
-            }
-            );
+            return GetMgmtParamOrderingArmClientMockingExtension(client).GetEnvironmentContainerResource(id);
         }
         #endregion
 
@@ -140,12 +124,7 @@ namespace MgmtParamOrdering
         /// <returns> Returns a <see cref="WorkspaceResource" /> object. </returns>
         public static WorkspaceResource GetWorkspaceResource(this ArmClient client, ResourceIdentifier id)
         {
-            return client.GetResourceClient(() =>
-            {
-                WorkspaceResource.ValidateResourceId(id);
-                return new WorkspaceResource(client, id);
-            }
-            );
+            return GetMgmtParamOrderingArmClientMockingExtension(client).GetWorkspaceResource(id);
         }
         #endregion
 
@@ -159,12 +138,7 @@ namespace MgmtParamOrdering
         /// <returns> Returns a <see cref="VirtualMachineScaleSetResource" /> object. </returns>
         public static VirtualMachineScaleSetResource GetVirtualMachineScaleSetResource(this ArmClient client, ResourceIdentifier id)
         {
-            return client.GetResourceClient(() =>
-            {
-                VirtualMachineScaleSetResource.ValidateResourceId(id);
-                return new VirtualMachineScaleSetResource(client, id);
-            }
-            );
+            return GetMgmtParamOrderingArmClientMockingExtension(client).GetVirtualMachineScaleSetResource(id);
         }
         #endregion
 

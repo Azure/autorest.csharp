@@ -3,17 +3,26 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using AutoRest.CSharp.Generation.Writers;
+using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Mgmt.AutoRest;
 using AutoRest.CSharp.Mgmt.Decorator;
+using AutoRest.CSharp.Mgmt.Models;
 using AutoRest.CSharp.Mgmt.Output;
+using AutoRest.CSharp.Output.Models;
+using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Utilities;
 using Azure.Core;
+using Azure.ResourceManager;
 
 namespace AutoRest.CSharp.Mgmt.Generation
 {
     internal sealed class ArmClientExtensionWriter : MgmtExtensionWriter
     {
+        private readonly Parameter _armClientParameter;
+        private readonly Parameter _scopeParameter;
+
         private MgmtExtension This { get; }
 
         public ArmClientExtensionWriter(ArmClientExtension extension) : this(new CodeWriter(), extension)
@@ -23,10 +32,25 @@ namespace AutoRest.CSharp.Mgmt.Generation
         public ArmClientExtensionWriter(CodeWriter writer, ArmClientExtension extension) : base(writer, extension)
         {
             This = extension;
+            _armClientParameter = This.ExtensionParameter with
+            {
+                Name = "client",
+                Description = $"The <see cref=\"{typeof(ArmClient)}\" /> instance the method will execute against.",
+                Type = typeof(ArmClient),
+            };
+            _scopeParameter = new Parameter(
+                Name: "scope",
+                Description: $"The scope that the resource will apply against.",
+                Type: typeof(ResourceIdentifier),
+                DefaultValue: null,
+                Validation: ValidationType.None,
+                Initializer: null);
         }
 
         protected internal override void WriteImplementations()
         {
+            base.WriteImplementations();
+
             foreach (var resource in MgmtContext.Library.ArmResources)
             {
                 _writer.Line($"#region {resource.Type.Name}");
@@ -34,6 +58,77 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 _writer.LineRaw("#endregion");
                 _writer.Line();
             }
+        }
+
+        protected override void WriteMethod(MgmtClientOperation clientOperation, bool isAsync)
+        {
+            var requestPaths = clientOperation.Select(restOperation => restOperation.RequestPath);
+            var scopeResourceTypes = requestPaths.Select(requestPath => requestPath.GetParameterizedScopeResourceTypes() ?? Enumerable.Empty<ResourceTypeSegment>()).SelectMany(types => types).Distinct();
+            var scopeTypes = GetScopeTypeStrings(scopeResourceTypes);
+            var originalSignature = clientOperation.MethodSignature;
+            var signature = originalSignature with
+            {
+                Parameters = GetScopeVersionMethodParameters(originalSignature.Parameters.Skip(1), scopeTypes)
+            };
+            using (_writer.WriteCommonMethod(signature, null, isAsync, This.Accessibility == "public"))
+            {
+                WriteMethodBodyWrapper(signature, isAsync, clientOperation.IsPagingOperation, scopeTypes);
+            }
+            _writer.Line();
+        }
+
+        private void WriteMethodBodyWrapper(MethodSignature signature, bool isAsync, bool isPaging, ICollection<FormattableString>? scopeTypes)
+        {
+            WriteScopeResourceTypesValidation(_scopeParameter.Name, scopeTypes);
+
+            WriteMethodBodyWrapper(signature, isAsync, isPaging);
+        }
+
+        private ICollection<FormattableString>? GetScopeTypeStrings(IEnumerable<ResourceTypeSegment>? scopeTypes)
+        {
+            if (scopeTypes == null || !scopeTypes.Any() || scopeTypes.Contains(ResourceTypeSegment.Any))
+                return null;
+
+            return scopeTypes.Select(type => (FormattableString)$"{type}").ToArray();
+        }
+
+        private void WriteScopeResourceTypesValidation(string parameterName, ICollection<FormattableString>? types)
+        {
+            if (types == null)
+                return;
+            // validate the scope types
+            var typeAssertions = types.Select(type => (FormattableString)$"!{parameterName:I}.ResourceType.Equals(\"{type}\")").ToArray();
+            var assertion = typeAssertions.Join(" || ");
+            using (_writer.Scope($"if ({assertion})"))
+            {
+                _writer.Line($"throw new {typeof(ArgumentException)}({typeof(string)}.{nameof(string.Format)}(\"Invalid resource type {{0}} expected {types.Join(", ", " or ")}\", {parameterName:I}.ResourceType));");
+            }
+        }
+
+        /// <summary>
+        /// Returns the parameters by the specific scope
+        /// </summary>
+        /// <param name="parameters"></param>
+        /// <returns></returns>
+        private Parameter[] GetScopeVersionMethodParameters(IEnumerable<Parameter> parameters, ICollection<FormattableString>? types)
+        {
+            var scopeParameter = GetScopeParameter(types);
+            return parameters.Prepend(scopeParameter).Prepend(_armClientParameter).ToArray();
+        }
+
+        private Parameter[] GetParametersForSingletonEntry(ICollection<FormattableString>? types) => GetScopeVersionMethodParameters(Enumerable.Empty<Parameter>(), types);
+
+        private Parameter[] GetParametersForCollectionEntry(ResourceCollection resourceCollection, ICollection<FormattableString>? types) => GetScopeVersionMethodParameters(resourceCollection.ExtraConstructorParameters, types);
+
+        private Parameter GetScopeParameter(ICollection<FormattableString>? types)
+        {
+            if (types == null)
+                return _scopeParameter;
+
+            return _scopeParameter with
+            {
+                Description = $"{_scopeParameter.Description} Expected resource type includes the following: {types.Join(", ", " or ")}"
+            };
         }
 
         private void WriteGetResourceFromIdMethod(Resource resource)
@@ -55,11 +150,8 @@ namespace AutoRest.CSharp.Mgmt.Generation
             {
                 if (!IsArmCore)
                 {
-                    using (_writer.Scope($"return {This.ExtensionParameter.Name}.GetResourceClient<{resource.Type}>(() =>"))
-                    {
-                        WriteGetter(resource, $"{ArmClientReference.ToVariableName()}");
-                    }
-                    _writer.Line($");");
+                    _writer.AppendRaw("return ")
+                        .Append($"{This.ExtensionClient.FactoryMethodName}({This.ExtensionParameter.Name}).Get{resource.Type.Name}(id);");
                 }
                 else
                 {

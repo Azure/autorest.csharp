@@ -20,6 +20,14 @@ namespace Azure.ResourceManager.Storage
     /// <summary> A class to add extension methods to Azure.ResourceManager.Storage. </summary>
     public static partial class StorageExtensions
     {
+        private static StorageArmClientMockingExtension GetStorageArmClientMockingExtension(ArmClient client)
+        {
+            return client.GetCachedClient(client =>
+            {
+                return new StorageArmClientMockingExtension(client);
+            });
+        }
+
         private static StorageResourceGroupMockingExtension GetStorageResourceGroupMockingExtension(ArmResource resource)
         {
             return resource.GetCachedClient(client =>
@@ -35,6 +43,7 @@ namespace Azure.ResourceManager.Storage
                 return new StorageSubscriptionMockingExtension(client, resource.Id);
             });
         }
+
         #region BlobServiceResource
         /// <summary>
         /// Gets an object representing a <see cref="BlobServiceResource" /> along with the instance operations that can be performed on it but with no data.
@@ -45,12 +54,7 @@ namespace Azure.ResourceManager.Storage
         /// <returns> Returns a <see cref="BlobServiceResource" /> object. </returns>
         public static BlobServiceResource GetBlobServiceResource(this ArmClient client, ResourceIdentifier id)
         {
-            return client.GetResourceClient(() =>
-            {
-                BlobServiceResource.ValidateResourceId(id);
-                return new BlobServiceResource(client, id);
-            }
-            );
+            return GetStorageArmClientMockingExtension(client).GetBlobServiceResource(id);
         }
         #endregion
 
@@ -64,12 +68,7 @@ namespace Azure.ResourceManager.Storage
         /// <returns> Returns a <see cref="BlobContainerResource" /> object. </returns>
         public static BlobContainerResource GetBlobContainerResource(this ArmClient client, ResourceIdentifier id)
         {
-            return client.GetResourceClient(() =>
-            {
-                BlobContainerResource.ValidateResourceId(id);
-                return new BlobContainerResource(client, id);
-            }
-            );
+            return GetStorageArmClientMockingExtension(client).GetBlobContainerResource(id);
         }
         #endregion
 
@@ -83,12 +82,7 @@ namespace Azure.ResourceManager.Storage
         /// <returns> Returns a <see cref="ImmutabilityPolicyResource" /> object. </returns>
         public static ImmutabilityPolicyResource GetImmutabilityPolicyResource(this ArmClient client, ResourceIdentifier id)
         {
-            return client.GetResourceClient(() =>
-            {
-                ImmutabilityPolicyResource.ValidateResourceId(id);
-                return new ImmutabilityPolicyResource(client, id);
-            }
-            );
+            return GetStorageArmClientMockingExtension(client).GetImmutabilityPolicyResource(id);
         }
         #endregion
 
@@ -102,12 +96,7 @@ namespace Azure.ResourceManager.Storage
         /// <returns> Returns a <see cref="FileServiceResource" /> object. </returns>
         public static FileServiceResource GetFileServiceResource(this ArmClient client, ResourceIdentifier id)
         {
-            return client.GetResourceClient(() =>
-            {
-                FileServiceResource.ValidateResourceId(id);
-                return new FileServiceResource(client, id);
-            }
-            );
+            return GetStorageArmClientMockingExtension(client).GetFileServiceResource(id);
         }
         #endregion
 
@@ -121,12 +110,7 @@ namespace Azure.ResourceManager.Storage
         /// <returns> Returns a <see cref="FileShareResource" /> object. </returns>
         public static FileShareResource GetFileShareResource(this ArmClient client, ResourceIdentifier id)
         {
-            return client.GetResourceClient(() =>
-            {
-                FileShareResource.ValidateResourceId(id);
-                return new FileShareResource(client, id);
-            }
-            );
+            return GetStorageArmClientMockingExtension(client).GetFileShareResource(id);
         }
         #endregion
 
@@ -140,12 +124,7 @@ namespace Azure.ResourceManager.Storage
         /// <returns> Returns a <see cref="StorageAccountResource" /> object. </returns>
         public static StorageAccountResource GetStorageAccountResource(this ArmClient client, ResourceIdentifier id)
         {
-            return client.GetResourceClient(() =>
-            {
-                StorageAccountResource.ValidateResourceId(id);
-                return new StorageAccountResource(client, id);
-            }
-            );
+            return GetStorageArmClientMockingExtension(client).GetStorageAccountResource(id);
         }
         #endregion
 
@@ -159,12 +138,7 @@ namespace Azure.ResourceManager.Storage
         /// <returns> Returns a <see cref="DeletedAccountResource" /> object. </returns>
         public static DeletedAccountResource GetDeletedAccountResource(this ArmClient client, ResourceIdentifier id)
         {
-            return client.GetResourceClient(() =>
-            {
-                DeletedAccountResource.ValidateResourceId(id);
-                return new DeletedAccountResource(client, id);
-            }
-            );
+            return GetStorageArmClientMockingExtension(client).GetDeletedAccountResource(id);
         }
         #endregion
 
@@ -178,12 +152,7 @@ namespace Azure.ResourceManager.Storage
         /// <returns> Returns a <see cref="ManagementPolicyResource" /> object. </returns>
         public static ManagementPolicyResource GetManagementPolicyResource(this ArmClient client, ResourceIdentifier id)
         {
-            return client.GetResourceClient(() =>
-            {
-                ManagementPolicyResource.ValidateResourceId(id);
-                return new ManagementPolicyResource(client, id);
-            }
-            );
+            return GetStorageArmClientMockingExtension(client).GetManagementPolicyResource(id);
         }
         #endregion
 
@@ -197,12 +166,7 @@ namespace Azure.ResourceManager.Storage
         /// <returns> Returns a <see cref="BlobInventoryPolicyResource" /> object. </returns>
         public static BlobInventoryPolicyResource GetBlobInventoryPolicyResource(this ArmClient client, ResourceIdentifier id)
         {
-            return client.GetResourceClient(() =>
-            {
-                BlobInventoryPolicyResource.ValidateResourceId(id);
-                return new BlobInventoryPolicyResource(client, id);
-            }
-            );
+            return GetStorageArmClientMockingExtension(client).GetBlobInventoryPolicyResource(id);
         }
         #endregion
 
@@ -216,12 +180,7 @@ namespace Azure.ResourceManager.Storage
         /// <returns> Returns a <see cref="StoragePrivateEndpointConnectionResource" /> object. </returns>
         public static StoragePrivateEndpointConnectionResource GetStoragePrivateEndpointConnectionResource(this ArmClient client, ResourceIdentifier id)
         {
-            return client.GetResourceClient(() =>
-            {
-                StoragePrivateEndpointConnectionResource.ValidateResourceId(id);
-                return new StoragePrivateEndpointConnectionResource(client, id);
-            }
-            );
+            return GetStorageArmClientMockingExtension(client).GetStoragePrivateEndpointConnectionResource(id);
         }
         #endregion
 
@@ -235,12 +194,7 @@ namespace Azure.ResourceManager.Storage
         /// <returns> Returns a <see cref="ObjectReplicationPolicyResource" /> object. </returns>
         public static ObjectReplicationPolicyResource GetObjectReplicationPolicyResource(this ArmClient client, ResourceIdentifier id)
         {
-            return client.GetResourceClient(() =>
-            {
-                ObjectReplicationPolicyResource.ValidateResourceId(id);
-                return new ObjectReplicationPolicyResource(client, id);
-            }
-            );
+            return GetStorageArmClientMockingExtension(client).GetObjectReplicationPolicyResource(id);
         }
         #endregion
 
@@ -254,12 +208,7 @@ namespace Azure.ResourceManager.Storage
         /// <returns> Returns a <see cref="EncryptionScopeResource" /> object. </returns>
         public static EncryptionScopeResource GetEncryptionScopeResource(this ArmClient client, ResourceIdentifier id)
         {
-            return client.GetResourceClient(() =>
-            {
-                EncryptionScopeResource.ValidateResourceId(id);
-                return new EncryptionScopeResource(client, id);
-            }
-            );
+            return GetStorageArmClientMockingExtension(client).GetEncryptionScopeResource(id);
         }
         #endregion
 

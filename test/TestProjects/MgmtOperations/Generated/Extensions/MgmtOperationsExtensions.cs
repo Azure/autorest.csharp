@@ -20,6 +20,14 @@ namespace MgmtOperations
     /// <summary> A class to add extension methods to MgmtOperations. </summary>
     public static partial class MgmtOperationsExtensions
     {
+        private static MgmtOperationsArmClientMockingExtension GetMgmtOperationsArmClientMockingExtension(ArmClient client)
+        {
+            return client.GetCachedClient(client =>
+            {
+                return new MgmtOperationsArmClientMockingExtension(client);
+            });
+        }
+
         private static MgmtOperationsResourceGroupMockingExtension GetMgmtOperationsResourceGroupMockingExtension(ArmResource resource)
         {
             return resource.GetCachedClient(client =>
@@ -27,6 +35,7 @@ namespace MgmtOperations
                 return new MgmtOperationsResourceGroupMockingExtension(client, resource.Id);
             });
         }
+
         #region AvailabilitySetResource
         /// <summary>
         /// Gets an object representing an <see cref="AvailabilitySetResource" /> along with the instance operations that can be performed on it but with no data.
@@ -37,12 +46,7 @@ namespace MgmtOperations
         /// <returns> Returns a <see cref="AvailabilitySetResource" /> object. </returns>
         public static AvailabilitySetResource GetAvailabilitySetResource(this ArmClient client, ResourceIdentifier id)
         {
-            return client.GetResourceClient(() =>
-            {
-                AvailabilitySetResource.ValidateResourceId(id);
-                return new AvailabilitySetResource(client, id);
-            }
-            );
+            return GetMgmtOperationsArmClientMockingExtension(client).GetAvailabilitySetResource(id);
         }
         #endregion
 
@@ -56,12 +60,7 @@ namespace MgmtOperations
         /// <returns> Returns a <see cref="AvailabilitySetChildResource" /> object. </returns>
         public static AvailabilitySetChildResource GetAvailabilitySetChildResource(this ArmClient client, ResourceIdentifier id)
         {
-            return client.GetResourceClient(() =>
-            {
-                AvailabilitySetChildResource.ValidateResourceId(id);
-                return new AvailabilitySetChildResource(client, id);
-            }
-            );
+            return GetMgmtOperationsArmClientMockingExtension(client).GetAvailabilitySetChildResource(id);
         }
         #endregion
 
@@ -75,12 +74,7 @@ namespace MgmtOperations
         /// <returns> Returns a <see cref="AvailabilitySetGrandChildResource" /> object. </returns>
         public static AvailabilitySetGrandChildResource GetAvailabilitySetGrandChildResource(this ArmClient client, ResourceIdentifier id)
         {
-            return client.GetResourceClient(() =>
-            {
-                AvailabilitySetGrandChildResource.ValidateResourceId(id);
-                return new AvailabilitySetGrandChildResource(client, id);
-            }
-            );
+            return GetMgmtOperationsArmClientMockingExtension(client).GetAvailabilitySetGrandChildResource(id);
         }
         #endregion
 
@@ -94,12 +88,7 @@ namespace MgmtOperations
         /// <returns> Returns a <see cref="UnpatchableResource" /> object. </returns>
         public static UnpatchableResource GetUnpatchableResource(this ArmClient client, ResourceIdentifier id)
         {
-            return client.GetResourceClient(() =>
-            {
-                UnpatchableResource.ValidateResourceId(id);
-                return new UnpatchableResource(client, id);
-            }
-            );
+            return GetMgmtOperationsArmClientMockingExtension(client).GetUnpatchableResource(id);
         }
         #endregion
 

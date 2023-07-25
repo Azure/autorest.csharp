@@ -21,6 +21,14 @@ namespace MgmtListMethods
     /// <summary> A class to add extension methods to MgmtListMethods. </summary>
     public static partial class MgmtListMethodsExtensions
     {
+        private static MgmtListMethodsArmClientMockingExtension GetMgmtListMethodsArmClientMockingExtension(ArmClient client)
+        {
+            return client.GetCachedClient(client =>
+            {
+                return new MgmtListMethodsArmClientMockingExtension(client);
+            });
+        }
+
         private static MgmtListMethodsManagementGroupMockingExtension GetMgmtListMethodsManagementGroupMockingExtension(ArmResource resource)
         {
             return resource.GetCachedClient(client =>
@@ -52,6 +60,7 @@ namespace MgmtListMethods
                 return new MgmtListMethodsTenantMockingExtension(client, resource.Id);
             });
         }
+
         #region FakeResource
         /// <summary>
         /// Gets an object representing a <see cref="FakeResource" /> along with the instance operations that can be performed on it but with no data.
@@ -62,12 +71,7 @@ namespace MgmtListMethods
         /// <returns> Returns a <see cref="FakeResource" /> object. </returns>
         public static FakeResource GetFakeResource(this ArmClient client, ResourceIdentifier id)
         {
-            return client.GetResourceClient(() =>
-            {
-                FakeResource.ValidateResourceId(id);
-                return new FakeResource(client, id);
-            }
-            );
+            return GetMgmtListMethodsArmClientMockingExtension(client).GetFakeResource(id);
         }
         #endregion
 
@@ -81,12 +85,7 @@ namespace MgmtListMethods
         /// <returns> Returns a <see cref="FakeParentWithAncestorWithNonResChWithLocResource" /> object. </returns>
         public static FakeParentWithAncestorWithNonResChWithLocResource GetFakeParentWithAncestorWithNonResChWithLocResource(this ArmClient client, ResourceIdentifier id)
         {
-            return client.GetResourceClient(() =>
-            {
-                FakeParentWithAncestorWithNonResChWithLocResource.ValidateResourceId(id);
-                return new FakeParentWithAncestorWithNonResChWithLocResource(client, id);
-            }
-            );
+            return GetMgmtListMethodsArmClientMockingExtension(client).GetFakeParentWithAncestorWithNonResChWithLocResource(id);
         }
         #endregion
 
@@ -100,12 +99,7 @@ namespace MgmtListMethods
         /// <returns> Returns a <see cref="FakeParentWithAncestorWithNonResChResource" /> object. </returns>
         public static FakeParentWithAncestorWithNonResChResource GetFakeParentWithAncestorWithNonResChResource(this ArmClient client, ResourceIdentifier id)
         {
-            return client.GetResourceClient(() =>
-            {
-                FakeParentWithAncestorWithNonResChResource.ValidateResourceId(id);
-                return new FakeParentWithAncestorWithNonResChResource(client, id);
-            }
-            );
+            return GetMgmtListMethodsArmClientMockingExtension(client).GetFakeParentWithAncestorWithNonResChResource(id);
         }
         #endregion
 
@@ -119,12 +113,7 @@ namespace MgmtListMethods
         /// <returns> Returns a <see cref="FakeParentWithAncestorWithLocResource" /> object. </returns>
         public static FakeParentWithAncestorWithLocResource GetFakeParentWithAncestorWithLocResource(this ArmClient client, ResourceIdentifier id)
         {
-            return client.GetResourceClient(() =>
-            {
-                FakeParentWithAncestorWithLocResource.ValidateResourceId(id);
-                return new FakeParentWithAncestorWithLocResource(client, id);
-            }
-            );
+            return GetMgmtListMethodsArmClientMockingExtension(client).GetFakeParentWithAncestorWithLocResource(id);
         }
         #endregion
 
@@ -138,12 +127,7 @@ namespace MgmtListMethods
         /// <returns> Returns a <see cref="FakeParentWithAncestorResource" /> object. </returns>
         public static FakeParentWithAncestorResource GetFakeParentWithAncestorResource(this ArmClient client, ResourceIdentifier id)
         {
-            return client.GetResourceClient(() =>
-            {
-                FakeParentWithAncestorResource.ValidateResourceId(id);
-                return new FakeParentWithAncestorResource(client, id);
-            }
-            );
+            return GetMgmtListMethodsArmClientMockingExtension(client).GetFakeParentWithAncestorResource(id);
         }
         #endregion
 
@@ -157,12 +141,7 @@ namespace MgmtListMethods
         /// <returns> Returns a <see cref="FakeParentWithNonResChResource" /> object. </returns>
         public static FakeParentWithNonResChResource GetFakeParentWithNonResChResource(this ArmClient client, ResourceIdentifier id)
         {
-            return client.GetResourceClient(() =>
-            {
-                FakeParentWithNonResChResource.ValidateResourceId(id);
-                return new FakeParentWithNonResChResource(client, id);
-            }
-            );
+            return GetMgmtListMethodsArmClientMockingExtension(client).GetFakeParentWithNonResChResource(id);
         }
         #endregion
 
@@ -176,12 +155,7 @@ namespace MgmtListMethods
         /// <returns> Returns a <see cref="FakeParentResource" /> object. </returns>
         public static FakeParentResource GetFakeParentResource(this ArmClient client, ResourceIdentifier id)
         {
-            return client.GetResourceClient(() =>
-            {
-                FakeParentResource.ValidateResourceId(id);
-                return new FakeParentResource(client, id);
-            }
-            );
+            return GetMgmtListMethodsArmClientMockingExtension(client).GetFakeParentResource(id);
         }
         #endregion
 
@@ -195,12 +169,7 @@ namespace MgmtListMethods
         /// <returns> Returns a <see cref="ResGrpParentWithAncestorWithNonResChWithLocResource" /> object. </returns>
         public static ResGrpParentWithAncestorWithNonResChWithLocResource GetResGrpParentWithAncestorWithNonResChWithLocResource(this ArmClient client, ResourceIdentifier id)
         {
-            return client.GetResourceClient(() =>
-            {
-                ResGrpParentWithAncestorWithNonResChWithLocResource.ValidateResourceId(id);
-                return new ResGrpParentWithAncestorWithNonResChWithLocResource(client, id);
-            }
-            );
+            return GetMgmtListMethodsArmClientMockingExtension(client).GetResGrpParentWithAncestorWithNonResChWithLocResource(id);
         }
         #endregion
 
@@ -214,12 +183,7 @@ namespace MgmtListMethods
         /// <returns> Returns a <see cref="ResGrpParentWithAncestorWithNonResChResource" /> object. </returns>
         public static ResGrpParentWithAncestorWithNonResChResource GetResGrpParentWithAncestorWithNonResChResource(this ArmClient client, ResourceIdentifier id)
         {
-            return client.GetResourceClient(() =>
-            {
-                ResGrpParentWithAncestorWithNonResChResource.ValidateResourceId(id);
-                return new ResGrpParentWithAncestorWithNonResChResource(client, id);
-            }
-            );
+            return GetMgmtListMethodsArmClientMockingExtension(client).GetResGrpParentWithAncestorWithNonResChResource(id);
         }
         #endregion
 
@@ -233,12 +197,7 @@ namespace MgmtListMethods
         /// <returns> Returns a <see cref="ResGrpParentWithAncestorWithLocResource" /> object. </returns>
         public static ResGrpParentWithAncestorWithLocResource GetResGrpParentWithAncestorWithLocResource(this ArmClient client, ResourceIdentifier id)
         {
-            return client.GetResourceClient(() =>
-            {
-                ResGrpParentWithAncestorWithLocResource.ValidateResourceId(id);
-                return new ResGrpParentWithAncestorWithLocResource(client, id);
-            }
-            );
+            return GetMgmtListMethodsArmClientMockingExtension(client).GetResGrpParentWithAncestorWithLocResource(id);
         }
         #endregion
 
@@ -252,12 +211,7 @@ namespace MgmtListMethods
         /// <returns> Returns a <see cref="ResGrpParentWithAncestorResource" /> object. </returns>
         public static ResGrpParentWithAncestorResource GetResGrpParentWithAncestorResource(this ArmClient client, ResourceIdentifier id)
         {
-            return client.GetResourceClient(() =>
-            {
-                ResGrpParentWithAncestorResource.ValidateResourceId(id);
-                return new ResGrpParentWithAncestorResource(client, id);
-            }
-            );
+            return GetMgmtListMethodsArmClientMockingExtension(client).GetResGrpParentWithAncestorResource(id);
         }
         #endregion
 
@@ -271,12 +225,7 @@ namespace MgmtListMethods
         /// <returns> Returns a <see cref="ResGrpParentWithNonResChResource" /> object. </returns>
         public static ResGrpParentWithNonResChResource GetResGrpParentWithNonResChResource(this ArmClient client, ResourceIdentifier id)
         {
-            return client.GetResourceClient(() =>
-            {
-                ResGrpParentWithNonResChResource.ValidateResourceId(id);
-                return new ResGrpParentWithNonResChResource(client, id);
-            }
-            );
+            return GetMgmtListMethodsArmClientMockingExtension(client).GetResGrpParentWithNonResChResource(id);
         }
         #endregion
 
@@ -290,12 +239,7 @@ namespace MgmtListMethods
         /// <returns> Returns a <see cref="ResGrpParentResource" /> object. </returns>
         public static ResGrpParentResource GetResGrpParentResource(this ArmClient client, ResourceIdentifier id)
         {
-            return client.GetResourceClient(() =>
-            {
-                ResGrpParentResource.ValidateResourceId(id);
-                return new ResGrpParentResource(client, id);
-            }
-            );
+            return GetMgmtListMethodsArmClientMockingExtension(client).GetResGrpParentResource(id);
         }
         #endregion
 
@@ -309,12 +253,7 @@ namespace MgmtListMethods
         /// <returns> Returns a <see cref="SubParentWithNonResChWithLocResource" /> object. </returns>
         public static SubParentWithNonResChWithLocResource GetSubParentWithNonResChWithLocResource(this ArmClient client, ResourceIdentifier id)
         {
-            return client.GetResourceClient(() =>
-            {
-                SubParentWithNonResChWithLocResource.ValidateResourceId(id);
-                return new SubParentWithNonResChWithLocResource(client, id);
-            }
-            );
+            return GetMgmtListMethodsArmClientMockingExtension(client).GetSubParentWithNonResChWithLocResource(id);
         }
         #endregion
 
@@ -328,12 +267,7 @@ namespace MgmtListMethods
         /// <returns> Returns a <see cref="SubParentWithNonResChResource" /> object. </returns>
         public static SubParentWithNonResChResource GetSubParentWithNonResChResource(this ArmClient client, ResourceIdentifier id)
         {
-            return client.GetResourceClient(() =>
-            {
-                SubParentWithNonResChResource.ValidateResourceId(id);
-                return new SubParentWithNonResChResource(client, id);
-            }
-            );
+            return GetMgmtListMethodsArmClientMockingExtension(client).GetSubParentWithNonResChResource(id);
         }
         #endregion
 
@@ -347,12 +281,7 @@ namespace MgmtListMethods
         /// <returns> Returns a <see cref="SubParentWithLocResource" /> object. </returns>
         public static SubParentWithLocResource GetSubParentWithLocResource(this ArmClient client, ResourceIdentifier id)
         {
-            return client.GetResourceClient(() =>
-            {
-                SubParentWithLocResource.ValidateResourceId(id);
-                return new SubParentWithLocResource(client, id);
-            }
-            );
+            return GetMgmtListMethodsArmClientMockingExtension(client).GetSubParentWithLocResource(id);
         }
         #endregion
 
@@ -366,12 +295,7 @@ namespace MgmtListMethods
         /// <returns> Returns a <see cref="SubParentResource" /> object. </returns>
         public static SubParentResource GetSubParentResource(this ArmClient client, ResourceIdentifier id)
         {
-            return client.GetResourceClient(() =>
-            {
-                SubParentResource.ValidateResourceId(id);
-                return new SubParentResource(client, id);
-            }
-            );
+            return GetMgmtListMethodsArmClientMockingExtension(client).GetSubParentResource(id);
         }
         #endregion
 
@@ -385,12 +309,7 @@ namespace MgmtListMethods
         /// <returns> Returns a <see cref="MgmtGrpParentWithNonResChWithLocResource" /> object. </returns>
         public static MgmtGrpParentWithNonResChWithLocResource GetMgmtGrpParentWithNonResChWithLocResource(this ArmClient client, ResourceIdentifier id)
         {
-            return client.GetResourceClient(() =>
-            {
-                MgmtGrpParentWithNonResChWithLocResource.ValidateResourceId(id);
-                return new MgmtGrpParentWithNonResChWithLocResource(client, id);
-            }
-            );
+            return GetMgmtListMethodsArmClientMockingExtension(client).GetMgmtGrpParentWithNonResChWithLocResource(id);
         }
         #endregion
 
@@ -404,12 +323,7 @@ namespace MgmtListMethods
         /// <returns> Returns a <see cref="MgmtGrpParentWithNonResChResource" /> object. </returns>
         public static MgmtGrpParentWithNonResChResource GetMgmtGrpParentWithNonResChResource(this ArmClient client, ResourceIdentifier id)
         {
-            return client.GetResourceClient(() =>
-            {
-                MgmtGrpParentWithNonResChResource.ValidateResourceId(id);
-                return new MgmtGrpParentWithNonResChResource(client, id);
-            }
-            );
+            return GetMgmtListMethodsArmClientMockingExtension(client).GetMgmtGrpParentWithNonResChResource(id);
         }
         #endregion
 
@@ -423,12 +337,7 @@ namespace MgmtListMethods
         /// <returns> Returns a <see cref="MgmtGrpParentWithLocResource" /> object. </returns>
         public static MgmtGrpParentWithLocResource GetMgmtGrpParentWithLocResource(this ArmClient client, ResourceIdentifier id)
         {
-            return client.GetResourceClient(() =>
-            {
-                MgmtGrpParentWithLocResource.ValidateResourceId(id);
-                return new MgmtGrpParentWithLocResource(client, id);
-            }
-            );
+            return GetMgmtListMethodsArmClientMockingExtension(client).GetMgmtGrpParentWithLocResource(id);
         }
         #endregion
 
@@ -442,12 +351,7 @@ namespace MgmtListMethods
         /// <returns> Returns a <see cref="MgmtGroupParentResource" /> object. </returns>
         public static MgmtGroupParentResource GetMgmtGroupParentResource(this ArmClient client, ResourceIdentifier id)
         {
-            return client.GetResourceClient(() =>
-            {
-                MgmtGroupParentResource.ValidateResourceId(id);
-                return new MgmtGroupParentResource(client, id);
-            }
-            );
+            return GetMgmtListMethodsArmClientMockingExtension(client).GetMgmtGroupParentResource(id);
         }
         #endregion
 
@@ -461,12 +365,7 @@ namespace MgmtListMethods
         /// <returns> Returns a <see cref="TenantTestResource" /> object. </returns>
         public static TenantTestResource GetTenantTestResource(this ArmClient client, ResourceIdentifier id)
         {
-            return client.GetResourceClient(() =>
-            {
-                TenantTestResource.ValidateResourceId(id);
-                return new TenantTestResource(client, id);
-            }
-            );
+            return GetMgmtListMethodsArmClientMockingExtension(client).GetTenantTestResource(id);
         }
         #endregion
 
@@ -480,12 +379,7 @@ namespace MgmtListMethods
         /// <returns> Returns a <see cref="TenantParentWithNonResChWithLocResource" /> object. </returns>
         public static TenantParentWithNonResChWithLocResource GetTenantParentWithNonResChWithLocResource(this ArmClient client, ResourceIdentifier id)
         {
-            return client.GetResourceClient(() =>
-            {
-                TenantParentWithNonResChWithLocResource.ValidateResourceId(id);
-                return new TenantParentWithNonResChWithLocResource(client, id);
-            }
-            );
+            return GetMgmtListMethodsArmClientMockingExtension(client).GetTenantParentWithNonResChWithLocResource(id);
         }
         #endregion
 
@@ -499,12 +393,7 @@ namespace MgmtListMethods
         /// <returns> Returns a <see cref="TenantParentWithNonResChResource" /> object. </returns>
         public static TenantParentWithNonResChResource GetTenantParentWithNonResChResource(this ArmClient client, ResourceIdentifier id)
         {
-            return client.GetResourceClient(() =>
-            {
-                TenantParentWithNonResChResource.ValidateResourceId(id);
-                return new TenantParentWithNonResChResource(client, id);
-            }
-            );
+            return GetMgmtListMethodsArmClientMockingExtension(client).GetTenantParentWithNonResChResource(id);
         }
         #endregion
 
@@ -518,12 +407,7 @@ namespace MgmtListMethods
         /// <returns> Returns a <see cref="TenantParentWithLocResource" /> object. </returns>
         public static TenantParentWithLocResource GetTenantParentWithLocResource(this ArmClient client, ResourceIdentifier id)
         {
-            return client.GetResourceClient(() =>
-            {
-                TenantParentWithLocResource.ValidateResourceId(id);
-                return new TenantParentWithLocResource(client, id);
-            }
-            );
+            return GetMgmtListMethodsArmClientMockingExtension(client).GetTenantParentWithLocResource(id);
         }
         #endregion
 
@@ -537,12 +421,7 @@ namespace MgmtListMethods
         /// <returns> Returns a <see cref="TenantParentResource" /> object. </returns>
         public static TenantParentResource GetTenantParentResource(this ArmClient client, ResourceIdentifier id)
         {
-            return client.GetResourceClient(() =>
-            {
-                TenantParentResource.ValidateResourceId(id);
-                return new TenantParentResource(client, id);
-            }
-            );
+            return GetMgmtListMethodsArmClientMockingExtension(client).GetTenantParentResource(id);
         }
         #endregion
 
@@ -556,12 +435,7 @@ namespace MgmtListMethods
         /// <returns> Returns a <see cref="FakeConfigurationResource" /> object. </returns>
         public static FakeConfigurationResource GetFakeConfigurationResource(this ArmClient client, ResourceIdentifier id)
         {
-            return client.GetResourceClient(() =>
-            {
-                FakeConfigurationResource.ValidateResourceId(id);
-                return new FakeConfigurationResource(client, id);
-            }
-            );
+            return GetMgmtListMethodsArmClientMockingExtension(client).GetFakeConfigurationResource(id);
         }
         #endregion
 

@@ -19,6 +19,14 @@ namespace MgmtPartialResource
     /// <summary> A class to add extension methods to MgmtPartialResource. </summary>
     public static partial class MgmtPartialResourceExtensions
     {
+        private static MgmtPartialResourceArmClientMockingExtension GetMgmtPartialResourceArmClientMockingExtension(ArmClient client)
+        {
+            return client.GetCachedClient(client =>
+            {
+                return new MgmtPartialResourceArmClientMockingExtension(client);
+            });
+        }
+
         private static MgmtPartialResourceResourceGroupMockingExtension GetMgmtPartialResourceResourceGroupMockingExtension(ArmResource resource)
         {
             return resource.GetCachedClient(client =>
@@ -34,6 +42,7 @@ namespace MgmtPartialResource
                 return new MgmtPartialResourceSubscriptionMockingExtension(client, resource.Id);
             });
         }
+
         #region PublicIPAddressResource
         /// <summary>
         /// Gets an object representing a <see cref="PublicIPAddressResource" /> along with the instance operations that can be performed on it but with no data.
@@ -44,12 +53,7 @@ namespace MgmtPartialResource
         /// <returns> Returns a <see cref="PublicIPAddressResource" /> object. </returns>
         public static PublicIPAddressResource GetPublicIPAddressResource(this ArmClient client, ResourceIdentifier id)
         {
-            return client.GetResourceClient(() =>
-            {
-                PublicIPAddressResource.ValidateResourceId(id);
-                return new PublicIPAddressResource(client, id);
-            }
-            );
+            return GetMgmtPartialResourceArmClientMockingExtension(client).GetPublicIPAddressResource(id);
         }
         #endregion
 
@@ -63,12 +67,7 @@ namespace MgmtPartialResource
         /// <returns> Returns a <see cref="ConfigurationProfileAssignmentResource" /> object. </returns>
         public static ConfigurationProfileAssignmentResource GetConfigurationProfileAssignmentResource(this ArmClient client, ResourceIdentifier id)
         {
-            return client.GetResourceClient(() =>
-            {
-                ConfigurationProfileAssignmentResource.ValidateResourceId(id);
-                return new ConfigurationProfileAssignmentResource(client, id);
-            }
-            );
+            return GetMgmtPartialResourceArmClientMockingExtension(client).GetConfigurationProfileAssignmentResource(id);
         }
         #endregion
 
@@ -82,12 +81,7 @@ namespace MgmtPartialResource
         /// <returns> Returns a <see cref="PartialVmssResource" /> object. </returns>
         public static PartialVmssResource GetPartialVmssResource(this ArmClient client, ResourceIdentifier id)
         {
-            return client.GetResourceClient(() =>
-            {
-                PartialVmssResource.ValidateResourceId(id);
-                return new PartialVmssResource(client, id);
-            }
-            );
+            return GetMgmtPartialResourceArmClientMockingExtension(client).GetPartialVmssResource(id);
         }
         #endregion
 
@@ -101,12 +95,7 @@ namespace MgmtPartialResource
         /// <returns> Returns a <see cref="VirtualMachineMgmtPartialResource" /> object. </returns>
         public static VirtualMachineMgmtPartialResource GetVirtualMachineMgmtPartialResource(this ArmClient client, ResourceIdentifier id)
         {
-            return client.GetResourceClient(() =>
-            {
-                VirtualMachineMgmtPartialResource.ValidateResourceId(id);
-                return new VirtualMachineMgmtPartialResource(client, id);
-            }
-            );
+            return GetMgmtPartialResourceArmClientMockingExtension(client).GetVirtualMachineMgmtPartialResource(id);
         }
         #endregion
 

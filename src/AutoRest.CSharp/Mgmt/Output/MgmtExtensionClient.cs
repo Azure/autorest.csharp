@@ -64,10 +64,10 @@ namespace AutoRest.CSharp.Mgmt.Output
         private string? _factoryMethodName;
         public string FactoryMethodName => _factoryMethodName ??= $"Get{Declaration.Name}";
 
-        private IEnumerable<MgmtExtensionClientFactoryMethod>? _factoryMethods;
-        public IEnumerable<MgmtExtensionClientFactoryMethod> FactoryMethods => _factoryMethods ??= EnsureFactoryMethods();
+        private MgmtExtensionClientFactoryMethod? _factoryMethod;
+        public MgmtExtensionClientFactoryMethod FactoryMethod => _factoryMethod ??= EnsureFactoryMethod();
 
-        private IEnumerable<MgmtExtensionClientFactoryMethod> EnsureFactoryMethods()
+        protected virtual MgmtExtensionClientFactoryMethod EnsureFactoryMethod()
         {
             var resourceExtensionMethod = new MethodSignature(
                 FactoryMethodName,
@@ -85,43 +85,13 @@ namespace AutoRest.CSharp.Mgmt.Output
                 }
                 writer.LineRaw(");");
             };
-            yield return new(resourceExtensionMethod, resourceExtensionMethodBody);
-
-            // only ArmResourceExtensionClient needs this factory method
-            if (ExtendedResourceType.Equals(typeof(ArmResource)))
-            {
-                var scopeExtensionMethod = new MethodSignature(
-                    FactoryMethodName,
-                    null,
-                    null,
-                    Private | Static,
-                    Type,
-                    null,
-                    new[] { ArmClientParameter, _scopeParameter });
-                Action<CodeWriter> scopeExtensionMethodBody = writer =>
-                {
-                    using (writer.Scope($"return {ArmClientParameter.Name}.GetResourceClient(() => ", newLine: false))
-                    {
-                        writer.Line($"return new {Type}({ArmClientParameter.Name}, {_scopeParameter.Name});");
-                    }
-                    writer.LineRaw(");");
-                };
-                yield return new(scopeExtensionMethod, scopeExtensionMethodBody);
-            }
+            return new(resourceExtensionMethod, resourceExtensionMethodBody);
         }
 
         private Parameter _generalExtensionParameter = new Parameter(
             "resource",
             $"The resource parameters to use in these operations.",
             typeof(ArmResource),
-            null,
-            ValidationType.None,
-            null);
-
-        private Parameter _scopeParameter = new Parameter(
-            "scope",
-            $"The scope to use in these operations",
-            typeof(ResourceIdentifier),
             null,
             ValidationType.None,
             null);
@@ -138,7 +108,7 @@ namespace AutoRest.CSharp.Mgmt.Output
 
             foreach (var (_, operations) in operationDict)
             {
-                yield return MgmtClientOperation.FromOperations(operations.SelectMany(clientOperation => clientOperation).ToList())!;
+                yield return MgmtClientOperation.FromOperations(operations.SelectMany(clientOperation => clientOperation).ToList(), IdVariableName)!;
             }
         }
 
@@ -156,7 +126,7 @@ namespace AutoRest.CSharp.Mgmt.Output
 
         public override string DiagnosticNamespace => base.DefaultNamespace;
 
-        public bool IsEmpty => !ClientOperations.Any() && !ChildResources.Any();
+        public virtual bool IsEmpty => !ClientOperations.Any() && !ChildResources.Any();
 
         public override IEnumerable<Resource> ChildResources => _extensionForChildResources?.ChildResources ?? Enumerable.Empty<Resource>();
 

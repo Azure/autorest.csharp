@@ -13,13 +13,33 @@ namespace AutoRest.CSharp.Mgmt.Output
 {
     internal class ArmClientExtension : MgmtExtension
     {
-        public ArmClientExtension(IEnumerable<Operation> allOperations)
-            : base(allOperations, Enumerable.Empty<MgmtExtensionClient>(), typeof(ArmClient), RequestPath.Tenant)
+        private readonly List<MgmtExtension> _extensions;
+        public ArmClientExtension(IReadOnlyDictionary<RequestPath, IEnumerable<Operation>> armResourceExtensionOperations, IEnumerable<MgmtExtensionClient> extensionClients)
+            : base(Enumerable.Empty<Operation>(), extensionClients, typeof(ArmClient), RequestPath.Tenant)
         {
+            _extensions = new();
+            foreach (var (parentRequestPath, operations) in armResourceExtensionOperations)
+            {
+                _extensions.Add(new(operations, extensionClients, typeof(ArmResource), parentRequestPath));
+            }
         }
 
         public override bool IsEmpty => !MgmtContext.Library.ArmResources.Any();
 
         protected override string VariableName => Configuration.MgmtConfiguration.IsArmCore ? "this" : "client";
+
+        public override FormattableString IdVariableName => $"scope";
+        public override FormattableString BranchIdVariableName => $"scope";
+
+        protected override IEnumerable<MgmtClientOperation> EnsureClientOperations()
+        {
+            foreach (var extension in _extensions)
+            {
+                foreach (var clientOperation in extension.ClientOperations)
+                {
+                    yield return clientOperation;
+                }
+            }
+        }
     }
 }

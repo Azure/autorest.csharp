@@ -19,6 +19,14 @@ namespace MgmtDiscriminator
     /// <summary> A class to add extension methods to MgmtDiscriminator. </summary>
     public static partial class MgmtDiscriminatorExtensions
     {
+        private static MgmtDiscriminatorArmClientMockingExtension GetMgmtDiscriminatorArmClientMockingExtension(ArmClient client)
+        {
+            return client.GetCachedClient(client =>
+            {
+                return new MgmtDiscriminatorArmClientMockingExtension(client);
+            });
+        }
+
         private static MgmtDiscriminatorResourceGroupMockingExtension GetMgmtDiscriminatorResourceGroupMockingExtension(ArmResource resource)
         {
             return resource.GetCachedClient(client =>
@@ -26,6 +34,7 @@ namespace MgmtDiscriminator
                 return new MgmtDiscriminatorResourceGroupMockingExtension(client, resource.Id);
             });
         }
+
         #region DeliveryRuleResource
         /// <summary>
         /// Gets an object representing a <see cref="DeliveryRuleResource" /> along with the instance operations that can be performed on it but with no data.
@@ -36,12 +45,7 @@ namespace MgmtDiscriminator
         /// <returns> Returns a <see cref="DeliveryRuleResource" /> object. </returns>
         public static DeliveryRuleResource GetDeliveryRuleResource(this ArmClient client, ResourceIdentifier id)
         {
-            return client.GetResourceClient(() =>
-            {
-                DeliveryRuleResource.ValidateResourceId(id);
-                return new DeliveryRuleResource(client, id);
-            }
-            );
+            return GetMgmtDiscriminatorArmClientMockingExtension(client).GetDeliveryRuleResource(id);
         }
         #endregion
 

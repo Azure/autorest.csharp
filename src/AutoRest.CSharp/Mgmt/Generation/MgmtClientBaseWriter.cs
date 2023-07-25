@@ -539,7 +539,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
             throw new NotImplementedException($"Pageable LRO is not implemented yet, please use `remove-operation` directive to remove the following operationIds: {string.Join(", ", clientOperation.Select(o => o.OperationId))}");
         }
 
-        protected IDisposable WriteCommonMethod(MgmtClientOperation clientOperation, bool isAsync)
+        protected virtual IDisposable WriteCommonMethod(MgmtClientOperation clientOperation, bool isAsync)
         {
             _writer.Line();
             var returnDescription = clientOperation.ReturnsDescription?.Invoke(isAsync);

@@ -20,6 +20,14 @@ namespace MgmtConstants
     /// <summary> A class to add extension methods to MgmtConstants. </summary>
     public static partial class MgmtConstantsExtensions
     {
+        private static MgmtConstantsArmClientMockingExtension GetMgmtConstantsArmClientMockingExtension(ArmClient client)
+        {
+            return client.GetCachedClient(client =>
+            {
+                return new MgmtConstantsArmClientMockingExtension(client);
+            });
+        }
+
         private static MgmtConstantsResourceGroupMockingExtension GetMgmtConstantsResourceGroupMockingExtension(ArmResource resource)
         {
             return resource.GetCachedClient(client =>
@@ -35,6 +43,7 @@ namespace MgmtConstants
                 return new MgmtConstantsSubscriptionMockingExtension(client, resource.Id);
             });
         }
+
         #region OptionalMachineResource
         /// <summary>
         /// Gets an object representing an <see cref="OptionalMachineResource" /> along with the instance operations that can be performed on it but with no data.
@@ -45,12 +54,7 @@ namespace MgmtConstants
         /// <returns> Returns a <see cref="OptionalMachineResource" /> object. </returns>
         public static OptionalMachineResource GetOptionalMachineResource(this ArmClient client, ResourceIdentifier id)
         {
-            return client.GetResourceClient(() =>
-            {
-                OptionalMachineResource.ValidateResourceId(id);
-                return new OptionalMachineResource(client, id);
-            }
-            );
+            return GetMgmtConstantsArmClientMockingExtension(client).GetOptionalMachineResource(id);
         }
         #endregion
 
