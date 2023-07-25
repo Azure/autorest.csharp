@@ -12,25 +12,18 @@ using Azure;
 using Azure.Core;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Resources;
+using MgmtSingletonResource.Mocking;
 
 namespace MgmtSingletonResource
 {
     /// <summary> A class to add extension methods to MgmtSingletonResource. </summary>
     public static partial class MgmtSingletonResourceExtensions
     {
-        private static ResourceGroupResourceExtensionClient GetResourceGroupResourceExtensionClient(ArmResource resource)
+        private static MgmtSingletonResourceResourceGroupMockingExtension GetMgmtSingletonResourceResourceGroupMockingExtension(ArmResource resource)
         {
             return resource.GetCachedClient(client =>
             {
-                return new ResourceGroupResourceExtensionClient(client, resource.Id);
-            });
-        }
-
-        private static ResourceGroupResourceExtensionClient GetResourceGroupResourceExtensionClient(ArmClient client, ResourceIdentifier scope)
-        {
-            return client.GetResourceClient(() =>
-            {
-                return new ResourceGroupResourceExtensionClient(client, scope);
+                return new MgmtSingletonResourceResourceGroupMockingExtension(client, resource.Id);
             });
         }
         #region CarResource
@@ -133,7 +126,7 @@ namespace MgmtSingletonResource
         /// <returns> An object representing collection of CarResources and their operations over a CarResource. </returns>
         public static CarCollection GetCars(this ResourceGroupResource resourceGroupResource)
         {
-            return GetResourceGroupResourceExtensionClient(resourceGroupResource).GetCars();
+            return GetMgmtSingletonResourceResourceGroupMockingExtension(resourceGroupResource).GetCars();
         }
 
         /// <summary>
@@ -156,7 +149,7 @@ namespace MgmtSingletonResource
         [ForwardsClientCalls]
         public static async Task<Response<CarResource>> GetCarAsync(this ResourceGroupResource resourceGroupResource, string carName, CancellationToken cancellationToken = default)
         {
-            return await resourceGroupResource.GetCars().GetAsync(carName, cancellationToken).ConfigureAwait(false);
+            return await GetMgmtSingletonResourceResourceGroupMockingExtension(resourceGroupResource).GetCarAsync(carName, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -179,7 +172,7 @@ namespace MgmtSingletonResource
         [ForwardsClientCalls]
         public static Response<CarResource> GetCar(this ResourceGroupResource resourceGroupResource, string carName, CancellationToken cancellationToken = default)
         {
-            return resourceGroupResource.GetCars().Get(carName, cancellationToken);
+            return GetMgmtSingletonResourceResourceGroupMockingExtension(resourceGroupResource).GetCar(carName, cancellationToken);
         }
 
         /// <summary> Gets a collection of ParentResources in the ResourceGroupResource. </summary>
@@ -187,7 +180,7 @@ namespace MgmtSingletonResource
         /// <returns> An object representing collection of ParentResources and their operations over a ParentResource. </returns>
         public static ParentResourceCollection GetParentResources(this ResourceGroupResource resourceGroupResource)
         {
-            return GetResourceGroupResourceExtensionClient(resourceGroupResource).GetParentResources();
+            return GetMgmtSingletonResourceResourceGroupMockingExtension(resourceGroupResource).GetParentResources();
         }
 
         /// <summary>
@@ -211,7 +204,7 @@ namespace MgmtSingletonResource
         [ForwardsClientCalls]
         public static async Task<Response<ParentResource>> GetParentResourceAsync(this ResourceGroupResource resourceGroupResource, string parentName, CancellationToken cancellationToken = default)
         {
-            return await resourceGroupResource.GetParentResources().GetAsync(parentName, cancellationToken).ConfigureAwait(false);
+            return await GetMgmtSingletonResourceResourceGroupMockingExtension(resourceGroupResource).GetParentResourceAsync(parentName, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -235,7 +228,7 @@ namespace MgmtSingletonResource
         [ForwardsClientCalls]
         public static Response<ParentResource> GetParentResource(this ResourceGroupResource resourceGroupResource, string parentName, CancellationToken cancellationToken = default)
         {
-            return resourceGroupResource.GetParentResources().Get(parentName, cancellationToken);
+            return GetMgmtSingletonResourceResourceGroupMockingExtension(resourceGroupResource).GetParentResource(parentName, cancellationToken);
         }
     }
 }

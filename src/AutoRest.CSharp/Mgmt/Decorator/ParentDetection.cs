@@ -27,7 +27,6 @@ namespace AutoRest.CSharp.Mgmt.Decorator
         /// This is not initialized while the TypeProviders are constructing and can only be used in the writers.
         /// </summary>
         /// <param name="resource"></param>
-        /// <param name="context"></param>
         /// <returns></returns>
         public static IEnumerable<MgmtTypeProvider> GetParents(this Resource resource)
         {

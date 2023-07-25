@@ -12,6 +12,7 @@ using Azure;
 using Azure.Core;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Resources;
+using MgmtOperations.Mocking;
 using MgmtOperations.Models;
 
 namespace MgmtOperations
@@ -19,19 +20,11 @@ namespace MgmtOperations
     /// <summary> A class to add extension methods to MgmtOperations. </summary>
     public static partial class MgmtOperationsExtensions
     {
-        private static ResourceGroupResourceExtensionClient GetResourceGroupResourceExtensionClient(ArmResource resource)
+        private static MgmtOperationsResourceGroupMockingExtension GetMgmtOperationsResourceGroupMockingExtension(ArmResource resource)
         {
             return resource.GetCachedClient(client =>
             {
-                return new ResourceGroupResourceExtensionClient(client, resource.Id);
-            });
-        }
-
-        private static ResourceGroupResourceExtensionClient GetResourceGroupResourceExtensionClient(ArmClient client, ResourceIdentifier scope)
-        {
-            return client.GetResourceClient(() =>
-            {
-                return new ResourceGroupResourceExtensionClient(client, scope);
+                return new MgmtOperationsResourceGroupMockingExtension(client, resource.Id);
             });
         }
         #region AvailabilitySetResource
@@ -115,7 +108,7 @@ namespace MgmtOperations
         /// <returns> An object representing collection of AvailabilitySetResources and their operations over a AvailabilitySetResource. </returns>
         public static AvailabilitySetCollection GetAvailabilitySets(this ResourceGroupResource resourceGroupResource)
         {
-            return GetResourceGroupResourceExtensionClient(resourceGroupResource).GetAvailabilitySets();
+            return GetMgmtOperationsResourceGroupMockingExtension(resourceGroupResource).GetAvailabilitySets();
         }
 
         /// <summary>
@@ -140,7 +133,7 @@ namespace MgmtOperations
         [ForwardsClientCalls]
         public static async Task<Response<AvailabilitySetResource>> GetAvailabilitySetAsync(this ResourceGroupResource resourceGroupResource, string availabilitySetName, string expand = null, CancellationToken cancellationToken = default)
         {
-            return await resourceGroupResource.GetAvailabilitySets().GetAsync(availabilitySetName, expand, cancellationToken).ConfigureAwait(false);
+            return await GetMgmtOperationsResourceGroupMockingExtension(resourceGroupResource).GetAvailabilitySetAsync(availabilitySetName, expand, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -165,7 +158,7 @@ namespace MgmtOperations
         [ForwardsClientCalls]
         public static Response<AvailabilitySetResource> GetAvailabilitySet(this ResourceGroupResource resourceGroupResource, string availabilitySetName, string expand = null, CancellationToken cancellationToken = default)
         {
-            return resourceGroupResource.GetAvailabilitySets().Get(availabilitySetName, expand, cancellationToken);
+            return GetMgmtOperationsResourceGroupMockingExtension(resourceGroupResource).GetAvailabilitySet(availabilitySetName, expand, cancellationToken);
         }
 
         /// <summary> Gets a collection of UnpatchableResources in the ResourceGroupResource. </summary>
@@ -173,7 +166,7 @@ namespace MgmtOperations
         /// <returns> An object representing collection of UnpatchableResources and their operations over a UnpatchableResource. </returns>
         public static UnpatchableResourceCollection GetUnpatchableResources(this ResourceGroupResource resourceGroupResource)
         {
-            return GetResourceGroupResourceExtensionClient(resourceGroupResource).GetUnpatchableResources();
+            return GetMgmtOperationsResourceGroupMockingExtension(resourceGroupResource).GetUnpatchableResources();
         }
 
         /// <summary>
@@ -198,7 +191,7 @@ namespace MgmtOperations
         [ForwardsClientCalls]
         public static async Task<Response<UnpatchableResource>> GetUnpatchableResourceAsync(this ResourceGroupResource resourceGroupResource, string name, string expand = null, CancellationToken cancellationToken = default)
         {
-            return await resourceGroupResource.GetUnpatchableResources().GetAsync(name, expand, cancellationToken).ConfigureAwait(false);
+            return await GetMgmtOperationsResourceGroupMockingExtension(resourceGroupResource).GetUnpatchableResourceAsync(name, expand, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -223,7 +216,7 @@ namespace MgmtOperations
         [ForwardsClientCalls]
         public static Response<UnpatchableResource> GetUnpatchableResource(this ResourceGroupResource resourceGroupResource, string name, string expand = null, CancellationToken cancellationToken = default)
         {
-            return resourceGroupResource.GetUnpatchableResources().Get(name, expand, cancellationToken);
+            return GetMgmtOperationsResourceGroupMockingExtension(resourceGroupResource).GetUnpatchableResource(name, expand, cancellationToken);
         }
 
         /// <summary>
@@ -248,7 +241,7 @@ namespace MgmtOperations
         {
             Argument.AssertNotNull(availabilitySetUpdate, nameof(availabilitySetUpdate));
 
-            return await GetResourceGroupResourceExtensionClient(resourceGroupResource).TestLROMethodAvailabilitySetAsync(waitUntil, availabilitySetUpdate, cancellationToken).ConfigureAwait(false);
+            return await GetMgmtOperationsResourceGroupMockingExtension(resourceGroupResource).TestLROMethodAvailabilitySetAsync(waitUntil, availabilitySetUpdate, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -273,7 +266,7 @@ namespace MgmtOperations
         {
             Argument.AssertNotNull(availabilitySetUpdate, nameof(availabilitySetUpdate));
 
-            return GetResourceGroupResourceExtensionClient(resourceGroupResource).TestLROMethodAvailabilitySet(waitUntil, availabilitySetUpdate, cancellationToken);
+            return GetMgmtOperationsResourceGroupMockingExtension(resourceGroupResource).TestLROMethodAvailabilitySet(waitUntil, availabilitySetUpdate, cancellationToken);
         }
     }
 }

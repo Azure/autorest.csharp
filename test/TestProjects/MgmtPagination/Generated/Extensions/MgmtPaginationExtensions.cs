@@ -12,25 +12,18 @@ using Azure;
 using Azure.Core;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Resources;
+using MgmtPagination.Mocking;
 
 namespace MgmtPagination
 {
     /// <summary> A class to add extension methods to MgmtPagination. </summary>
     public static partial class MgmtPaginationExtensions
     {
-        private static ResourceGroupResourceExtensionClient GetResourceGroupResourceExtensionClient(ArmResource resource)
+        private static MgmtPaginationResourceGroupMockingExtension GetMgmtPaginationResourceGroupMockingExtension(ArmResource resource)
         {
             return resource.GetCachedClient(client =>
             {
-                return new ResourceGroupResourceExtensionClient(client, resource.Id);
-            });
-        }
-
-        private static ResourceGroupResourceExtensionClient GetResourceGroupResourceExtensionClient(ArmClient client, ResourceIdentifier scope)
-        {
-            return client.GetResourceClient(() =>
-            {
-                return new ResourceGroupResourceExtensionClient(client, scope);
+                return new MgmtPaginationResourceGroupMockingExtension(client, resource.Id);
             });
         }
         #region PageSizeIntegerModelResource
@@ -190,7 +183,7 @@ namespace MgmtPagination
         /// <returns> An object representing collection of PageSizeIntegerModelResources and their operations over a PageSizeIntegerModelResource. </returns>
         public static PageSizeIntegerModelCollection GetPageSizeIntegerModels(this ResourceGroupResource resourceGroupResource)
         {
-            return GetResourceGroupResourceExtensionClient(resourceGroupResource).GetPageSizeIntegerModels();
+            return GetMgmtPaginationResourceGroupMockingExtension(resourceGroupResource).GetPageSizeIntegerModels();
         }
 
         /// <summary>
@@ -213,7 +206,7 @@ namespace MgmtPagination
         [ForwardsClientCalls]
         public static async Task<Response<PageSizeIntegerModelResource>> GetPageSizeIntegerModelAsync(this ResourceGroupResource resourceGroupResource, string name, CancellationToken cancellationToken = default)
         {
-            return await resourceGroupResource.GetPageSizeIntegerModels().GetAsync(name, cancellationToken).ConfigureAwait(false);
+            return await GetMgmtPaginationResourceGroupMockingExtension(resourceGroupResource).GetPageSizeIntegerModelAsync(name, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -236,7 +229,7 @@ namespace MgmtPagination
         [ForwardsClientCalls]
         public static Response<PageSizeIntegerModelResource> GetPageSizeIntegerModel(this ResourceGroupResource resourceGroupResource, string name, CancellationToken cancellationToken = default)
         {
-            return resourceGroupResource.GetPageSizeIntegerModels().Get(name, cancellationToken);
+            return GetMgmtPaginationResourceGroupMockingExtension(resourceGroupResource).GetPageSizeIntegerModel(name, cancellationToken);
         }
 
         /// <summary> Gets a collection of PageSizeInt64ModelResources in the ResourceGroupResource. </summary>
@@ -244,7 +237,7 @@ namespace MgmtPagination
         /// <returns> An object representing collection of PageSizeInt64ModelResources and their operations over a PageSizeInt64ModelResource. </returns>
         public static PageSizeInt64ModelCollection GetPageSizeInt64Models(this ResourceGroupResource resourceGroupResource)
         {
-            return GetResourceGroupResourceExtensionClient(resourceGroupResource).GetPageSizeInt64Models();
+            return GetMgmtPaginationResourceGroupMockingExtension(resourceGroupResource).GetPageSizeInt64Models();
         }
 
         /// <summary>
@@ -267,7 +260,7 @@ namespace MgmtPagination
         [ForwardsClientCalls]
         public static async Task<Response<PageSizeInt64ModelResource>> GetPageSizeInt64ModelAsync(this ResourceGroupResource resourceGroupResource, string name, CancellationToken cancellationToken = default)
         {
-            return await resourceGroupResource.GetPageSizeInt64Models().GetAsync(name, cancellationToken).ConfigureAwait(false);
+            return await GetMgmtPaginationResourceGroupMockingExtension(resourceGroupResource).GetPageSizeInt64ModelAsync(name, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -290,7 +283,7 @@ namespace MgmtPagination
         [ForwardsClientCalls]
         public static Response<PageSizeInt64ModelResource> GetPageSizeInt64Model(this ResourceGroupResource resourceGroupResource, string name, CancellationToken cancellationToken = default)
         {
-            return resourceGroupResource.GetPageSizeInt64Models().Get(name, cancellationToken);
+            return GetMgmtPaginationResourceGroupMockingExtension(resourceGroupResource).GetPageSizeInt64Model(name, cancellationToken);
         }
 
         /// <summary> Gets a collection of PageSizeInt32ModelResources in the ResourceGroupResource. </summary>
@@ -298,7 +291,7 @@ namespace MgmtPagination
         /// <returns> An object representing collection of PageSizeInt32ModelResources and their operations over a PageSizeInt32ModelResource. </returns>
         public static PageSizeInt32ModelCollection GetPageSizeInt32Models(this ResourceGroupResource resourceGroupResource)
         {
-            return GetResourceGroupResourceExtensionClient(resourceGroupResource).GetPageSizeInt32Models();
+            return GetMgmtPaginationResourceGroupMockingExtension(resourceGroupResource).GetPageSizeInt32Models();
         }
 
         /// <summary>
@@ -321,7 +314,7 @@ namespace MgmtPagination
         [ForwardsClientCalls]
         public static async Task<Response<PageSizeInt32ModelResource>> GetPageSizeInt32ModelAsync(this ResourceGroupResource resourceGroupResource, string name, CancellationToken cancellationToken = default)
         {
-            return await resourceGroupResource.GetPageSizeInt32Models().GetAsync(name, cancellationToken).ConfigureAwait(false);
+            return await GetMgmtPaginationResourceGroupMockingExtension(resourceGroupResource).GetPageSizeInt32ModelAsync(name, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -344,7 +337,7 @@ namespace MgmtPagination
         [ForwardsClientCalls]
         public static Response<PageSizeInt32ModelResource> GetPageSizeInt32Model(this ResourceGroupResource resourceGroupResource, string name, CancellationToken cancellationToken = default)
         {
-            return resourceGroupResource.GetPageSizeInt32Models().Get(name, cancellationToken);
+            return GetMgmtPaginationResourceGroupMockingExtension(resourceGroupResource).GetPageSizeInt32Model(name, cancellationToken);
         }
 
         /// <summary> Gets a collection of PageSizeNumericModelResources in the ResourceGroupResource. </summary>
@@ -352,7 +345,7 @@ namespace MgmtPagination
         /// <returns> An object representing collection of PageSizeNumericModelResources and their operations over a PageSizeNumericModelResource. </returns>
         public static PageSizeNumericModelCollection GetPageSizeNumericModels(this ResourceGroupResource resourceGroupResource)
         {
-            return GetResourceGroupResourceExtensionClient(resourceGroupResource).GetPageSizeNumericModels();
+            return GetMgmtPaginationResourceGroupMockingExtension(resourceGroupResource).GetPageSizeNumericModels();
         }
 
         /// <summary>
@@ -375,7 +368,7 @@ namespace MgmtPagination
         [ForwardsClientCalls]
         public static async Task<Response<PageSizeNumericModelResource>> GetPageSizeNumericModelAsync(this ResourceGroupResource resourceGroupResource, string name, CancellationToken cancellationToken = default)
         {
-            return await resourceGroupResource.GetPageSizeNumericModels().GetAsync(name, cancellationToken).ConfigureAwait(false);
+            return await GetMgmtPaginationResourceGroupMockingExtension(resourceGroupResource).GetPageSizeNumericModelAsync(name, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -398,7 +391,7 @@ namespace MgmtPagination
         [ForwardsClientCalls]
         public static Response<PageSizeNumericModelResource> GetPageSizeNumericModel(this ResourceGroupResource resourceGroupResource, string name, CancellationToken cancellationToken = default)
         {
-            return resourceGroupResource.GetPageSizeNumericModels().Get(name, cancellationToken);
+            return GetMgmtPaginationResourceGroupMockingExtension(resourceGroupResource).GetPageSizeNumericModel(name, cancellationToken);
         }
 
         /// <summary> Gets a collection of PageSizeFloatModelResources in the ResourceGroupResource. </summary>
@@ -406,7 +399,7 @@ namespace MgmtPagination
         /// <returns> An object representing collection of PageSizeFloatModelResources and their operations over a PageSizeFloatModelResource. </returns>
         public static PageSizeFloatModelCollection GetPageSizeFloatModels(this ResourceGroupResource resourceGroupResource)
         {
-            return GetResourceGroupResourceExtensionClient(resourceGroupResource).GetPageSizeFloatModels();
+            return GetMgmtPaginationResourceGroupMockingExtension(resourceGroupResource).GetPageSizeFloatModels();
         }
 
         /// <summary>
@@ -429,7 +422,7 @@ namespace MgmtPagination
         [ForwardsClientCalls]
         public static async Task<Response<PageSizeFloatModelResource>> GetPageSizeFloatModelAsync(this ResourceGroupResource resourceGroupResource, string name, CancellationToken cancellationToken = default)
         {
-            return await resourceGroupResource.GetPageSizeFloatModels().GetAsync(name, cancellationToken).ConfigureAwait(false);
+            return await GetMgmtPaginationResourceGroupMockingExtension(resourceGroupResource).GetPageSizeFloatModelAsync(name, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -452,7 +445,7 @@ namespace MgmtPagination
         [ForwardsClientCalls]
         public static Response<PageSizeFloatModelResource> GetPageSizeFloatModel(this ResourceGroupResource resourceGroupResource, string name, CancellationToken cancellationToken = default)
         {
-            return resourceGroupResource.GetPageSizeFloatModels().Get(name, cancellationToken);
+            return GetMgmtPaginationResourceGroupMockingExtension(resourceGroupResource).GetPageSizeFloatModel(name, cancellationToken);
         }
 
         /// <summary> Gets a collection of PageSizeDoubleModelResources in the ResourceGroupResource. </summary>
@@ -460,7 +453,7 @@ namespace MgmtPagination
         /// <returns> An object representing collection of PageSizeDoubleModelResources and their operations over a PageSizeDoubleModelResource. </returns>
         public static PageSizeDoubleModelCollection GetPageSizeDoubleModels(this ResourceGroupResource resourceGroupResource)
         {
-            return GetResourceGroupResourceExtensionClient(resourceGroupResource).GetPageSizeDoubleModels();
+            return GetMgmtPaginationResourceGroupMockingExtension(resourceGroupResource).GetPageSizeDoubleModels();
         }
 
         /// <summary>
@@ -483,7 +476,7 @@ namespace MgmtPagination
         [ForwardsClientCalls]
         public static async Task<Response<PageSizeDoubleModelResource>> GetPageSizeDoubleModelAsync(this ResourceGroupResource resourceGroupResource, string name, CancellationToken cancellationToken = default)
         {
-            return await resourceGroupResource.GetPageSizeDoubleModels().GetAsync(name, cancellationToken).ConfigureAwait(false);
+            return await GetMgmtPaginationResourceGroupMockingExtension(resourceGroupResource).GetPageSizeDoubleModelAsync(name, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -506,7 +499,7 @@ namespace MgmtPagination
         [ForwardsClientCalls]
         public static Response<PageSizeDoubleModelResource> GetPageSizeDoubleModel(this ResourceGroupResource resourceGroupResource, string name, CancellationToken cancellationToken = default)
         {
-            return resourceGroupResource.GetPageSizeDoubleModels().Get(name, cancellationToken);
+            return GetMgmtPaginationResourceGroupMockingExtension(resourceGroupResource).GetPageSizeDoubleModel(name, cancellationToken);
         }
 
         /// <summary> Gets a collection of PageSizeDecimalModelResources in the ResourceGroupResource. </summary>
@@ -514,7 +507,7 @@ namespace MgmtPagination
         /// <returns> An object representing collection of PageSizeDecimalModelResources and their operations over a PageSizeDecimalModelResource. </returns>
         public static PageSizeDecimalModelCollection GetPageSizeDecimalModels(this ResourceGroupResource resourceGroupResource)
         {
-            return GetResourceGroupResourceExtensionClient(resourceGroupResource).GetPageSizeDecimalModels();
+            return GetMgmtPaginationResourceGroupMockingExtension(resourceGroupResource).GetPageSizeDecimalModels();
         }
 
         /// <summary>
@@ -537,7 +530,7 @@ namespace MgmtPagination
         [ForwardsClientCalls]
         public static async Task<Response<PageSizeDecimalModelResource>> GetPageSizeDecimalModelAsync(this ResourceGroupResource resourceGroupResource, string name, CancellationToken cancellationToken = default)
         {
-            return await resourceGroupResource.GetPageSizeDecimalModels().GetAsync(name, cancellationToken).ConfigureAwait(false);
+            return await GetMgmtPaginationResourceGroupMockingExtension(resourceGroupResource).GetPageSizeDecimalModelAsync(name, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -560,7 +553,7 @@ namespace MgmtPagination
         [ForwardsClientCalls]
         public static Response<PageSizeDecimalModelResource> GetPageSizeDecimalModel(this ResourceGroupResource resourceGroupResource, string name, CancellationToken cancellationToken = default)
         {
-            return resourceGroupResource.GetPageSizeDecimalModels().Get(name, cancellationToken);
+            return GetMgmtPaginationResourceGroupMockingExtension(resourceGroupResource).GetPageSizeDecimalModel(name, cancellationToken);
         }
 
         /// <summary> Gets a collection of PageSizeStringModelResources in the ResourceGroupResource. </summary>
@@ -568,7 +561,7 @@ namespace MgmtPagination
         /// <returns> An object representing collection of PageSizeStringModelResources and their operations over a PageSizeStringModelResource. </returns>
         public static PageSizeStringModelCollection GetPageSizeStringModels(this ResourceGroupResource resourceGroupResource)
         {
-            return GetResourceGroupResourceExtensionClient(resourceGroupResource).GetPageSizeStringModels();
+            return GetMgmtPaginationResourceGroupMockingExtension(resourceGroupResource).GetPageSizeStringModels();
         }
 
         /// <summary>
@@ -591,7 +584,7 @@ namespace MgmtPagination
         [ForwardsClientCalls]
         public static async Task<Response<PageSizeStringModelResource>> GetPageSizeStringModelAsync(this ResourceGroupResource resourceGroupResource, string name, CancellationToken cancellationToken = default)
         {
-            return await resourceGroupResource.GetPageSizeStringModels().GetAsync(name, cancellationToken).ConfigureAwait(false);
+            return await GetMgmtPaginationResourceGroupMockingExtension(resourceGroupResource).GetPageSizeStringModelAsync(name, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -614,7 +607,7 @@ namespace MgmtPagination
         [ForwardsClientCalls]
         public static Response<PageSizeStringModelResource> GetPageSizeStringModel(this ResourceGroupResource resourceGroupResource, string name, CancellationToken cancellationToken = default)
         {
-            return resourceGroupResource.GetPageSizeStringModels().Get(name, cancellationToken);
+            return GetMgmtPaginationResourceGroupMockingExtension(resourceGroupResource).GetPageSizeStringModel(name, cancellationToken);
         }
     }
 }

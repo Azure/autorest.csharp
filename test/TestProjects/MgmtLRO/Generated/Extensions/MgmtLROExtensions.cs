@@ -12,25 +12,18 @@ using Azure;
 using Azure.Core;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Resources;
+using MgmtLRO.Mocking;
 
 namespace MgmtLRO
 {
     /// <summary> A class to add extension methods to MgmtLRO. </summary>
     public static partial class MgmtLROExtensions
     {
-        private static ResourceGroupResourceExtensionClient GetResourceGroupResourceExtensionClient(ArmResource resource)
+        private static MgmtLROResourceGroupMockingExtension GetMgmtLROResourceGroupMockingExtension(ArmResource resource)
         {
             return resource.GetCachedClient(client =>
             {
-                return new ResourceGroupResourceExtensionClient(client, resource.Id);
-            });
-        }
-
-        private static ResourceGroupResourceExtensionClient GetResourceGroupResourceExtensionClient(ArmClient client, ResourceIdentifier scope)
-        {
-            return client.GetResourceClient(() =>
-            {
-                return new ResourceGroupResourceExtensionClient(client, scope);
+                return new MgmtLROResourceGroupMockingExtension(client, resource.Id);
             });
         }
         #region FakeResource
@@ -76,7 +69,7 @@ namespace MgmtLRO
         /// <returns> An object representing collection of FakeResources and their operations over a FakeResource. </returns>
         public static FakeCollection GetFakes(this ResourceGroupResource resourceGroupResource)
         {
-            return GetResourceGroupResourceExtensionClient(resourceGroupResource).GetFakes();
+            return GetMgmtLROResourceGroupMockingExtension(resourceGroupResource).GetFakes();
         }
 
         /// <summary>
@@ -101,7 +94,7 @@ namespace MgmtLRO
         [ForwardsClientCalls]
         public static async Task<Response<FakeResource>> GetFakeAsync(this ResourceGroupResource resourceGroupResource, string fakeName, string expand = null, CancellationToken cancellationToken = default)
         {
-            return await resourceGroupResource.GetFakes().GetAsync(fakeName, expand, cancellationToken).ConfigureAwait(false);
+            return await GetMgmtLROResourceGroupMockingExtension(resourceGroupResource).GetFakeAsync(fakeName, expand, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -126,7 +119,7 @@ namespace MgmtLRO
         [ForwardsClientCalls]
         public static Response<FakeResource> GetFake(this ResourceGroupResource resourceGroupResource, string fakeName, string expand = null, CancellationToken cancellationToken = default)
         {
-            return resourceGroupResource.GetFakes().Get(fakeName, expand, cancellationToken);
+            return GetMgmtLROResourceGroupMockingExtension(resourceGroupResource).GetFake(fakeName, expand, cancellationToken);
         }
 
         /// <summary> Gets a collection of BarResources in the ResourceGroupResource. </summary>
@@ -134,7 +127,7 @@ namespace MgmtLRO
         /// <returns> An object representing collection of BarResources and their operations over a BarResource. </returns>
         public static BarCollection GetBars(this ResourceGroupResource resourceGroupResource)
         {
-            return GetResourceGroupResourceExtensionClient(resourceGroupResource).GetBars();
+            return GetMgmtLROResourceGroupMockingExtension(resourceGroupResource).GetBars();
         }
 
         /// <summary>
@@ -158,7 +151,7 @@ namespace MgmtLRO
         [ForwardsClientCalls]
         public static async Task<Response<BarResource>> GetBarAsync(this ResourceGroupResource resourceGroupResource, string barName, CancellationToken cancellationToken = default)
         {
-            return await resourceGroupResource.GetBars().GetAsync(barName, cancellationToken).ConfigureAwait(false);
+            return await GetMgmtLROResourceGroupMockingExtension(resourceGroupResource).GetBarAsync(barName, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -182,7 +175,7 @@ namespace MgmtLRO
         [ForwardsClientCalls]
         public static Response<BarResource> GetBar(this ResourceGroupResource resourceGroupResource, string barName, CancellationToken cancellationToken = default)
         {
-            return resourceGroupResource.GetBars().Get(barName, cancellationToken);
+            return GetMgmtLROResourceGroupMockingExtension(resourceGroupResource).GetBar(barName, cancellationToken);
         }
     }
 }

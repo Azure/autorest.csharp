@@ -12,6 +12,7 @@ using Azure;
 using Azure.Core;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Resources;
+using MgmtSupersetFlattenInheritance.Mocking;
 using MgmtSupersetFlattenInheritance.Models;
 
 namespace MgmtSupersetFlattenInheritance
@@ -19,19 +20,11 @@ namespace MgmtSupersetFlattenInheritance
     /// <summary> A class to add extension methods to MgmtSupersetFlattenInheritance. </summary>
     public static partial class MgmtSupersetFlattenInheritanceExtensions
     {
-        private static ResourceGroupResourceExtensionClient GetResourceGroupResourceExtensionClient(ArmResource resource)
+        private static MgmtSupersetFlattenInheritanceResourceGroupMockingExtension GetMgmtSupersetFlattenInheritanceResourceGroupMockingExtension(ArmResource resource)
         {
             return resource.GetCachedClient(client =>
             {
-                return new ResourceGroupResourceExtensionClient(client, resource.Id);
-            });
-        }
-
-        private static ResourceGroupResourceExtensionClient GetResourceGroupResourceExtensionClient(ArmClient client, ResourceIdentifier scope)
-        {
-            return client.GetResourceClient(() =>
-            {
-                return new ResourceGroupResourceExtensionClient(client, scope);
+                return new MgmtSupersetFlattenInheritanceResourceGroupMockingExtension(client, resource.Id);
             });
         }
         #region ResourceModel1Resource
@@ -77,7 +70,7 @@ namespace MgmtSupersetFlattenInheritance
         /// <returns> An object representing collection of ResourceModel1Resources and their operations over a ResourceModel1Resource. </returns>
         public static ResourceModel1Collection GetResourceModel1s(this ResourceGroupResource resourceGroupResource)
         {
-            return GetResourceGroupResourceExtensionClient(resourceGroupResource).GetResourceModel1s();
+            return GetMgmtSupersetFlattenInheritanceResourceGroupMockingExtension(resourceGroupResource).GetResourceModel1s();
         }
 
         /// <summary>
@@ -100,7 +93,7 @@ namespace MgmtSupersetFlattenInheritance
         [ForwardsClientCalls]
         public static async Task<Response<ResourceModel1Resource>> GetResourceModel1Async(this ResourceGroupResource resourceGroupResource, string resourceModel1SName, CancellationToken cancellationToken = default)
         {
-            return await resourceGroupResource.GetResourceModel1s().GetAsync(resourceModel1SName, cancellationToken).ConfigureAwait(false);
+            return await GetMgmtSupersetFlattenInheritanceResourceGroupMockingExtension(resourceGroupResource).GetResourceModel1Async(resourceModel1SName, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -123,7 +116,7 @@ namespace MgmtSupersetFlattenInheritance
         [ForwardsClientCalls]
         public static Response<ResourceModel1Resource> GetResourceModel1(this ResourceGroupResource resourceGroupResource, string resourceModel1SName, CancellationToken cancellationToken = default)
         {
-            return resourceGroupResource.GetResourceModel1s().Get(resourceModel1SName, cancellationToken);
+            return GetMgmtSupersetFlattenInheritanceResourceGroupMockingExtension(resourceGroupResource).GetResourceModel1(resourceModel1SName, cancellationToken);
         }
 
         /// <summary> Gets a collection of TrackedResourceModel1Resources in the ResourceGroupResource. </summary>
@@ -131,7 +124,7 @@ namespace MgmtSupersetFlattenInheritance
         /// <returns> An object representing collection of TrackedResourceModel1Resources and their operations over a TrackedResourceModel1Resource. </returns>
         public static TrackedResourceModel1Collection GetTrackedResourceModel1s(this ResourceGroupResource resourceGroupResource)
         {
-            return GetResourceGroupResourceExtensionClient(resourceGroupResource).GetTrackedResourceModel1s();
+            return GetMgmtSupersetFlattenInheritanceResourceGroupMockingExtension(resourceGroupResource).GetTrackedResourceModel1s();
         }
 
         /// <summary>
@@ -154,7 +147,7 @@ namespace MgmtSupersetFlattenInheritance
         [ForwardsClientCalls]
         public static async Task<Response<TrackedResourceModel1Resource>> GetTrackedResourceModel1Async(this ResourceGroupResource resourceGroupResource, string trackedResourceModel1SName, CancellationToken cancellationToken = default)
         {
-            return await resourceGroupResource.GetTrackedResourceModel1s().GetAsync(trackedResourceModel1SName, cancellationToken).ConfigureAwait(false);
+            return await GetMgmtSupersetFlattenInheritanceResourceGroupMockingExtension(resourceGroupResource).GetTrackedResourceModel1Async(trackedResourceModel1SName, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -177,7 +170,7 @@ namespace MgmtSupersetFlattenInheritance
         [ForwardsClientCalls]
         public static Response<TrackedResourceModel1Resource> GetTrackedResourceModel1(this ResourceGroupResource resourceGroupResource, string trackedResourceModel1SName, CancellationToken cancellationToken = default)
         {
-            return resourceGroupResource.GetTrackedResourceModel1s().Get(trackedResourceModel1SName, cancellationToken);
+            return GetMgmtSupersetFlattenInheritanceResourceGroupMockingExtension(resourceGroupResource).GetTrackedResourceModel1(trackedResourceModel1SName, cancellationToken);
         }
 
         /// <summary>
@@ -197,7 +190,7 @@ namespace MgmtSupersetFlattenInheritance
         /// <returns> An async collection of <see cref="CustomModel1" /> that may take multiple service requests to iterate over. </returns>
         public static AsyncPageable<CustomModel1> GetCustomModel1sAsync(this ResourceGroupResource resourceGroupResource, CancellationToken cancellationToken = default)
         {
-            return GetResourceGroupResourceExtensionClient(resourceGroupResource).GetCustomModel1sAsync(cancellationToken);
+            return GetMgmtSupersetFlattenInheritanceResourceGroupMockingExtension(resourceGroupResource).GetCustomModel1sAsync(cancellationToken);
         }
 
         /// <summary>
@@ -217,7 +210,7 @@ namespace MgmtSupersetFlattenInheritance
         /// <returns> A collection of <see cref="CustomModel1" /> that may take multiple service requests to iterate over. </returns>
         public static Pageable<CustomModel1> GetCustomModel1s(this ResourceGroupResource resourceGroupResource, CancellationToken cancellationToken = default)
         {
-            return GetResourceGroupResourceExtensionClient(resourceGroupResource).GetCustomModel1s(cancellationToken);
+            return GetMgmtSupersetFlattenInheritanceResourceGroupMockingExtension(resourceGroupResource).GetCustomModel1s(cancellationToken);
         }
 
         /// <summary>
@@ -243,7 +236,7 @@ namespace MgmtSupersetFlattenInheritance
             Argument.AssertNotNullOrEmpty(customModel1SName, nameof(customModel1SName));
             Argument.AssertNotNull(customModel1, nameof(customModel1));
 
-            return await GetResourceGroupResourceExtensionClient(resourceGroupResource).PutCustomModel1Async(customModel1SName, customModel1, cancellationToken).ConfigureAwait(false);
+            return await GetMgmtSupersetFlattenInheritanceResourceGroupMockingExtension(resourceGroupResource).PutCustomModel1Async(customModel1SName, customModel1, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -269,7 +262,7 @@ namespace MgmtSupersetFlattenInheritance
             Argument.AssertNotNullOrEmpty(customModel1SName, nameof(customModel1SName));
             Argument.AssertNotNull(customModel1, nameof(customModel1));
 
-            return GetResourceGroupResourceExtensionClient(resourceGroupResource).PutCustomModel1(customModel1SName, customModel1, cancellationToken);
+            return GetMgmtSupersetFlattenInheritanceResourceGroupMockingExtension(resourceGroupResource).PutCustomModel1(customModel1SName, customModel1, cancellationToken);
         }
 
         /// <summary>
@@ -293,7 +286,7 @@ namespace MgmtSupersetFlattenInheritance
         {
             Argument.AssertNotNullOrEmpty(customModel1SName, nameof(customModel1SName));
 
-            return await GetResourceGroupResourceExtensionClient(resourceGroupResource).GetCustomModel1Async(customModel1SName, cancellationToken).ConfigureAwait(false);
+            return await GetMgmtSupersetFlattenInheritanceResourceGroupMockingExtension(resourceGroupResource).GetCustomModel1Async(customModel1SName, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -317,7 +310,7 @@ namespace MgmtSupersetFlattenInheritance
         {
             Argument.AssertNotNullOrEmpty(customModel1SName, nameof(customModel1SName));
 
-            return GetResourceGroupResourceExtensionClient(resourceGroupResource).GetCustomModel1(customModel1SName, cancellationToken);
+            return GetMgmtSupersetFlattenInheritanceResourceGroupMockingExtension(resourceGroupResource).GetCustomModel1(customModel1SName, cancellationToken);
         }
 
         /// <summary>
@@ -337,7 +330,7 @@ namespace MgmtSupersetFlattenInheritance
         /// <returns> An async collection of <see cref="CustomModel2" /> that may take multiple service requests to iterate over. </returns>
         public static AsyncPageable<CustomModel2> GetCustomModel2sAsync(this ResourceGroupResource resourceGroupResource, CancellationToken cancellationToken = default)
         {
-            return GetResourceGroupResourceExtensionClient(resourceGroupResource).GetCustomModel2sAsync(cancellationToken);
+            return GetMgmtSupersetFlattenInheritanceResourceGroupMockingExtension(resourceGroupResource).GetCustomModel2sAsync(cancellationToken);
         }
 
         /// <summary>
@@ -357,7 +350,7 @@ namespace MgmtSupersetFlattenInheritance
         /// <returns> A collection of <see cref="CustomModel2" /> that may take multiple service requests to iterate over. </returns>
         public static Pageable<CustomModel2> GetCustomModel2s(this ResourceGroupResource resourceGroupResource, CancellationToken cancellationToken = default)
         {
-            return GetResourceGroupResourceExtensionClient(resourceGroupResource).GetCustomModel2s(cancellationToken);
+            return GetMgmtSupersetFlattenInheritanceResourceGroupMockingExtension(resourceGroupResource).GetCustomModel2s(cancellationToken);
         }
 
         /// <summary>
@@ -383,7 +376,7 @@ namespace MgmtSupersetFlattenInheritance
             Argument.AssertNotNullOrEmpty(customModel2SName, nameof(customModel2SName));
             Argument.AssertNotNull(customModel2, nameof(customModel2));
 
-            return await GetResourceGroupResourceExtensionClient(resourceGroupResource).PutCustomModel2Async(customModel2SName, customModel2, cancellationToken).ConfigureAwait(false);
+            return await GetMgmtSupersetFlattenInheritanceResourceGroupMockingExtension(resourceGroupResource).PutCustomModel2Async(customModel2SName, customModel2, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -409,7 +402,7 @@ namespace MgmtSupersetFlattenInheritance
             Argument.AssertNotNullOrEmpty(customModel2SName, nameof(customModel2SName));
             Argument.AssertNotNull(customModel2, nameof(customModel2));
 
-            return GetResourceGroupResourceExtensionClient(resourceGroupResource).PutCustomModel2(customModel2SName, customModel2, cancellationToken);
+            return GetMgmtSupersetFlattenInheritanceResourceGroupMockingExtension(resourceGroupResource).PutCustomModel2(customModel2SName, customModel2, cancellationToken);
         }
 
         /// <summary>
@@ -433,7 +426,7 @@ namespace MgmtSupersetFlattenInheritance
         {
             Argument.AssertNotNullOrEmpty(customModel2SName, nameof(customModel2SName));
 
-            return await GetResourceGroupResourceExtensionClient(resourceGroupResource).GetCustomModel2Async(customModel2SName, cancellationToken).ConfigureAwait(false);
+            return await GetMgmtSupersetFlattenInheritanceResourceGroupMockingExtension(resourceGroupResource).GetCustomModel2Async(customModel2SName, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -457,7 +450,7 @@ namespace MgmtSupersetFlattenInheritance
         {
             Argument.AssertNotNullOrEmpty(customModel2SName, nameof(customModel2SName));
 
-            return GetResourceGroupResourceExtensionClient(resourceGroupResource).GetCustomModel2(customModel2SName, cancellationToken);
+            return GetMgmtSupersetFlattenInheritanceResourceGroupMockingExtension(resourceGroupResource).GetCustomModel2(customModel2SName, cancellationToken);
         }
 
         /// <summary>
@@ -477,7 +470,7 @@ namespace MgmtSupersetFlattenInheritance
         /// <returns> An async collection of <see cref="SubResourceModel1" /> that may take multiple service requests to iterate over. </returns>
         public static AsyncPageable<SubResourceModel1> GetSubResourceModel1sAsync(this ResourceGroupResource resourceGroupResource, CancellationToken cancellationToken = default)
         {
-            return GetResourceGroupResourceExtensionClient(resourceGroupResource).GetSubResourceModel1sAsync(cancellationToken);
+            return GetMgmtSupersetFlattenInheritanceResourceGroupMockingExtension(resourceGroupResource).GetSubResourceModel1sAsync(cancellationToken);
         }
 
         /// <summary>
@@ -497,7 +490,7 @@ namespace MgmtSupersetFlattenInheritance
         /// <returns> A collection of <see cref="SubResourceModel1" /> that may take multiple service requests to iterate over. </returns>
         public static Pageable<SubResourceModel1> GetSubResourceModel1s(this ResourceGroupResource resourceGroupResource, CancellationToken cancellationToken = default)
         {
-            return GetResourceGroupResourceExtensionClient(resourceGroupResource).GetSubResourceModel1s(cancellationToken);
+            return GetMgmtSupersetFlattenInheritanceResourceGroupMockingExtension(resourceGroupResource).GetSubResourceModel1s(cancellationToken);
         }
 
         /// <summary>
@@ -523,7 +516,7 @@ namespace MgmtSupersetFlattenInheritance
             Argument.AssertNotNullOrEmpty(subResourceModel1SName, nameof(subResourceModel1SName));
             Argument.AssertNotNull(subResourceModel1, nameof(subResourceModel1));
 
-            return await GetResourceGroupResourceExtensionClient(resourceGroupResource).PutSubResourceModel1Async(subResourceModel1SName, subResourceModel1, cancellationToken).ConfigureAwait(false);
+            return await GetMgmtSupersetFlattenInheritanceResourceGroupMockingExtension(resourceGroupResource).PutSubResourceModel1Async(subResourceModel1SName, subResourceModel1, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -549,7 +542,7 @@ namespace MgmtSupersetFlattenInheritance
             Argument.AssertNotNullOrEmpty(subResourceModel1SName, nameof(subResourceModel1SName));
             Argument.AssertNotNull(subResourceModel1, nameof(subResourceModel1));
 
-            return GetResourceGroupResourceExtensionClient(resourceGroupResource).PutSubResourceModel1(subResourceModel1SName, subResourceModel1, cancellationToken);
+            return GetMgmtSupersetFlattenInheritanceResourceGroupMockingExtension(resourceGroupResource).PutSubResourceModel1(subResourceModel1SName, subResourceModel1, cancellationToken);
         }
 
         /// <summary>
@@ -573,7 +566,7 @@ namespace MgmtSupersetFlattenInheritance
         {
             Argument.AssertNotNullOrEmpty(subResourceModel1SName, nameof(subResourceModel1SName));
 
-            return await GetResourceGroupResourceExtensionClient(resourceGroupResource).GetSubResourceModel1Async(subResourceModel1SName, cancellationToken).ConfigureAwait(false);
+            return await GetMgmtSupersetFlattenInheritanceResourceGroupMockingExtension(resourceGroupResource).GetSubResourceModel1Async(subResourceModel1SName, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -597,7 +590,7 @@ namespace MgmtSupersetFlattenInheritance
         {
             Argument.AssertNotNullOrEmpty(subResourceModel1SName, nameof(subResourceModel1SName));
 
-            return GetResourceGroupResourceExtensionClient(resourceGroupResource).GetSubResourceModel1(subResourceModel1SName, cancellationToken);
+            return GetMgmtSupersetFlattenInheritanceResourceGroupMockingExtension(resourceGroupResource).GetSubResourceModel1(subResourceModel1SName, cancellationToken);
         }
 
         /// <summary>
@@ -617,7 +610,7 @@ namespace MgmtSupersetFlattenInheritance
         /// <returns> An async collection of <see cref="SubResourceModel2" /> that may take multiple service requests to iterate over. </returns>
         public static AsyncPageable<SubResourceModel2> GetSubResourceModel2sAsync(this ResourceGroupResource resourceGroupResource, CancellationToken cancellationToken = default)
         {
-            return GetResourceGroupResourceExtensionClient(resourceGroupResource).GetSubResourceModel2sAsync(cancellationToken);
+            return GetMgmtSupersetFlattenInheritanceResourceGroupMockingExtension(resourceGroupResource).GetSubResourceModel2sAsync(cancellationToken);
         }
 
         /// <summary>
@@ -637,7 +630,7 @@ namespace MgmtSupersetFlattenInheritance
         /// <returns> A collection of <see cref="SubResourceModel2" /> that may take multiple service requests to iterate over. </returns>
         public static Pageable<SubResourceModel2> GetSubResourceModel2s(this ResourceGroupResource resourceGroupResource, CancellationToken cancellationToken = default)
         {
-            return GetResourceGroupResourceExtensionClient(resourceGroupResource).GetSubResourceModel2s(cancellationToken);
+            return GetMgmtSupersetFlattenInheritanceResourceGroupMockingExtension(resourceGroupResource).GetSubResourceModel2s(cancellationToken);
         }
 
         /// <summary>
@@ -663,7 +656,7 @@ namespace MgmtSupersetFlattenInheritance
             Argument.AssertNotNullOrEmpty(subResourceModel2SName, nameof(subResourceModel2SName));
             Argument.AssertNotNull(subResourceModel2, nameof(subResourceModel2));
 
-            return await GetResourceGroupResourceExtensionClient(resourceGroupResource).PutSubResourceModel2Async(subResourceModel2SName, subResourceModel2, cancellationToken).ConfigureAwait(false);
+            return await GetMgmtSupersetFlattenInheritanceResourceGroupMockingExtension(resourceGroupResource).PutSubResourceModel2Async(subResourceModel2SName, subResourceModel2, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -689,7 +682,7 @@ namespace MgmtSupersetFlattenInheritance
             Argument.AssertNotNullOrEmpty(subResourceModel2SName, nameof(subResourceModel2SName));
             Argument.AssertNotNull(subResourceModel2, nameof(subResourceModel2));
 
-            return GetResourceGroupResourceExtensionClient(resourceGroupResource).PutSubResourceModel2(subResourceModel2SName, subResourceModel2, cancellationToken);
+            return GetMgmtSupersetFlattenInheritanceResourceGroupMockingExtension(resourceGroupResource).PutSubResourceModel2(subResourceModel2SName, subResourceModel2, cancellationToken);
         }
 
         /// <summary>
@@ -713,7 +706,7 @@ namespace MgmtSupersetFlattenInheritance
         {
             Argument.AssertNotNullOrEmpty(subResourceModel2SName, nameof(subResourceModel2SName));
 
-            return await GetResourceGroupResourceExtensionClient(resourceGroupResource).GetSubResourceModel2Async(subResourceModel2SName, cancellationToken).ConfigureAwait(false);
+            return await GetMgmtSupersetFlattenInheritanceResourceGroupMockingExtension(resourceGroupResource).GetSubResourceModel2Async(subResourceModel2SName, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -737,7 +730,7 @@ namespace MgmtSupersetFlattenInheritance
         {
             Argument.AssertNotNullOrEmpty(subResourceModel2SName, nameof(subResourceModel2SName));
 
-            return GetResourceGroupResourceExtensionClient(resourceGroupResource).GetSubResourceModel2(subResourceModel2SName, cancellationToken);
+            return GetMgmtSupersetFlattenInheritanceResourceGroupMockingExtension(resourceGroupResource).GetSubResourceModel2(subResourceModel2SName, cancellationToken);
         }
 
         /// <summary>
@@ -757,7 +750,7 @@ namespace MgmtSupersetFlattenInheritance
         /// <returns> An async collection of <see cref="WritableSubResourceModel1" /> that may take multiple service requests to iterate over. </returns>
         public static AsyncPageable<WritableSubResourceModel1> GetWritableSubResourceModel1sAsync(this ResourceGroupResource resourceGroupResource, CancellationToken cancellationToken = default)
         {
-            return GetResourceGroupResourceExtensionClient(resourceGroupResource).GetWritableSubResourceModel1sAsync(cancellationToken);
+            return GetMgmtSupersetFlattenInheritanceResourceGroupMockingExtension(resourceGroupResource).GetWritableSubResourceModel1sAsync(cancellationToken);
         }
 
         /// <summary>
@@ -777,7 +770,7 @@ namespace MgmtSupersetFlattenInheritance
         /// <returns> A collection of <see cref="WritableSubResourceModel1" /> that may take multiple service requests to iterate over. </returns>
         public static Pageable<WritableSubResourceModel1> GetWritableSubResourceModel1s(this ResourceGroupResource resourceGroupResource, CancellationToken cancellationToken = default)
         {
-            return GetResourceGroupResourceExtensionClient(resourceGroupResource).GetWritableSubResourceModel1s(cancellationToken);
+            return GetMgmtSupersetFlattenInheritanceResourceGroupMockingExtension(resourceGroupResource).GetWritableSubResourceModel1s(cancellationToken);
         }
 
         /// <summary>
@@ -803,7 +796,7 @@ namespace MgmtSupersetFlattenInheritance
             Argument.AssertNotNullOrEmpty(writableSubResourceModel1SName, nameof(writableSubResourceModel1SName));
             Argument.AssertNotNull(writableSubResourceModel1, nameof(writableSubResourceModel1));
 
-            return await GetResourceGroupResourceExtensionClient(resourceGroupResource).PutWritableSubResourceModel1Async(writableSubResourceModel1SName, writableSubResourceModel1, cancellationToken).ConfigureAwait(false);
+            return await GetMgmtSupersetFlattenInheritanceResourceGroupMockingExtension(resourceGroupResource).PutWritableSubResourceModel1Async(writableSubResourceModel1SName, writableSubResourceModel1, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -829,7 +822,7 @@ namespace MgmtSupersetFlattenInheritance
             Argument.AssertNotNullOrEmpty(writableSubResourceModel1SName, nameof(writableSubResourceModel1SName));
             Argument.AssertNotNull(writableSubResourceModel1, nameof(writableSubResourceModel1));
 
-            return GetResourceGroupResourceExtensionClient(resourceGroupResource).PutWritableSubResourceModel1(writableSubResourceModel1SName, writableSubResourceModel1, cancellationToken);
+            return GetMgmtSupersetFlattenInheritanceResourceGroupMockingExtension(resourceGroupResource).PutWritableSubResourceModel1(writableSubResourceModel1SName, writableSubResourceModel1, cancellationToken);
         }
 
         /// <summary>
@@ -853,7 +846,7 @@ namespace MgmtSupersetFlattenInheritance
         {
             Argument.AssertNotNullOrEmpty(writableSubResourceModel1SName, nameof(writableSubResourceModel1SName));
 
-            return await GetResourceGroupResourceExtensionClient(resourceGroupResource).GetWritableSubResourceModel1Async(writableSubResourceModel1SName, cancellationToken).ConfigureAwait(false);
+            return await GetMgmtSupersetFlattenInheritanceResourceGroupMockingExtension(resourceGroupResource).GetWritableSubResourceModel1Async(writableSubResourceModel1SName, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -877,7 +870,7 @@ namespace MgmtSupersetFlattenInheritance
         {
             Argument.AssertNotNullOrEmpty(writableSubResourceModel1SName, nameof(writableSubResourceModel1SName));
 
-            return GetResourceGroupResourceExtensionClient(resourceGroupResource).GetWritableSubResourceModel1(writableSubResourceModel1SName, cancellationToken);
+            return GetMgmtSupersetFlattenInheritanceResourceGroupMockingExtension(resourceGroupResource).GetWritableSubResourceModel1(writableSubResourceModel1SName, cancellationToken);
         }
 
         /// <summary>
@@ -897,7 +890,7 @@ namespace MgmtSupersetFlattenInheritance
         /// <returns> An async collection of <see cref="WritableSubResourceModel2" /> that may take multiple service requests to iterate over. </returns>
         public static AsyncPageable<WritableSubResourceModel2> GetWritableSubResourceModel2sAsync(this ResourceGroupResource resourceGroupResource, CancellationToken cancellationToken = default)
         {
-            return GetResourceGroupResourceExtensionClient(resourceGroupResource).GetWritableSubResourceModel2sAsync(cancellationToken);
+            return GetMgmtSupersetFlattenInheritanceResourceGroupMockingExtension(resourceGroupResource).GetWritableSubResourceModel2sAsync(cancellationToken);
         }
 
         /// <summary>
@@ -917,7 +910,7 @@ namespace MgmtSupersetFlattenInheritance
         /// <returns> A collection of <see cref="WritableSubResourceModel2" /> that may take multiple service requests to iterate over. </returns>
         public static Pageable<WritableSubResourceModel2> GetWritableSubResourceModel2s(this ResourceGroupResource resourceGroupResource, CancellationToken cancellationToken = default)
         {
-            return GetResourceGroupResourceExtensionClient(resourceGroupResource).GetWritableSubResourceModel2s(cancellationToken);
+            return GetMgmtSupersetFlattenInheritanceResourceGroupMockingExtension(resourceGroupResource).GetWritableSubResourceModel2s(cancellationToken);
         }
 
         /// <summary>
@@ -943,7 +936,7 @@ namespace MgmtSupersetFlattenInheritance
             Argument.AssertNotNullOrEmpty(writableSubResourceModel2SName, nameof(writableSubResourceModel2SName));
             Argument.AssertNotNull(writableSubResourceModel2, nameof(writableSubResourceModel2));
 
-            return await GetResourceGroupResourceExtensionClient(resourceGroupResource).PutWritableSubResourceModel2Async(writableSubResourceModel2SName, writableSubResourceModel2, cancellationToken).ConfigureAwait(false);
+            return await GetMgmtSupersetFlattenInheritanceResourceGroupMockingExtension(resourceGroupResource).PutWritableSubResourceModel2Async(writableSubResourceModel2SName, writableSubResourceModel2, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -969,7 +962,7 @@ namespace MgmtSupersetFlattenInheritance
             Argument.AssertNotNullOrEmpty(writableSubResourceModel2SName, nameof(writableSubResourceModel2SName));
             Argument.AssertNotNull(writableSubResourceModel2, nameof(writableSubResourceModel2));
 
-            return GetResourceGroupResourceExtensionClient(resourceGroupResource).PutWritableSubResourceModel2(writableSubResourceModel2SName, writableSubResourceModel2, cancellationToken);
+            return GetMgmtSupersetFlattenInheritanceResourceGroupMockingExtension(resourceGroupResource).PutWritableSubResourceModel2(writableSubResourceModel2SName, writableSubResourceModel2, cancellationToken);
         }
 
         /// <summary>
@@ -993,7 +986,7 @@ namespace MgmtSupersetFlattenInheritance
         {
             Argument.AssertNotNullOrEmpty(writableSubResourceModel2SName, nameof(writableSubResourceModel2SName));
 
-            return await GetResourceGroupResourceExtensionClient(resourceGroupResource).GetWritableSubResourceModel2Async(writableSubResourceModel2SName, cancellationToken).ConfigureAwait(false);
+            return await GetMgmtSupersetFlattenInheritanceResourceGroupMockingExtension(resourceGroupResource).GetWritableSubResourceModel2Async(writableSubResourceModel2SName, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -1017,7 +1010,7 @@ namespace MgmtSupersetFlattenInheritance
         {
             Argument.AssertNotNullOrEmpty(writableSubResourceModel2SName, nameof(writableSubResourceModel2SName));
 
-            return GetResourceGroupResourceExtensionClient(resourceGroupResource).GetWritableSubResourceModel2(writableSubResourceModel2SName, cancellationToken);
+            return GetMgmtSupersetFlattenInheritanceResourceGroupMockingExtension(resourceGroupResource).GetWritableSubResourceModel2(writableSubResourceModel2SName, cancellationToken);
         }
 
         /// <summary>
@@ -1037,7 +1030,7 @@ namespace MgmtSupersetFlattenInheritance
         /// <returns> An async collection of <see cref="ResourceModel2" /> that may take multiple service requests to iterate over. </returns>
         public static AsyncPageable<ResourceModel2> GetResourceModel2sAsync(this ResourceGroupResource resourceGroupResource, CancellationToken cancellationToken = default)
         {
-            return GetResourceGroupResourceExtensionClient(resourceGroupResource).GetResourceModel2sAsync(cancellationToken);
+            return GetMgmtSupersetFlattenInheritanceResourceGroupMockingExtension(resourceGroupResource).GetResourceModel2sAsync(cancellationToken);
         }
 
         /// <summary>
@@ -1057,7 +1050,7 @@ namespace MgmtSupersetFlattenInheritance
         /// <returns> A collection of <see cref="ResourceModel2" /> that may take multiple service requests to iterate over. </returns>
         public static Pageable<ResourceModel2> GetResourceModel2s(this ResourceGroupResource resourceGroupResource, CancellationToken cancellationToken = default)
         {
-            return GetResourceGroupResourceExtensionClient(resourceGroupResource).GetResourceModel2s(cancellationToken);
+            return GetMgmtSupersetFlattenInheritanceResourceGroupMockingExtension(resourceGroupResource).GetResourceModel2s(cancellationToken);
         }
 
         /// <summary>
@@ -1083,7 +1076,7 @@ namespace MgmtSupersetFlattenInheritance
             Argument.AssertNotNullOrEmpty(resourceModel2SName, nameof(resourceModel2SName));
             Argument.AssertNotNull(resourceModel2, nameof(resourceModel2));
 
-            return await GetResourceGroupResourceExtensionClient(resourceGroupResource).PutResourceModel2Async(resourceModel2SName, resourceModel2, cancellationToken).ConfigureAwait(false);
+            return await GetMgmtSupersetFlattenInheritanceResourceGroupMockingExtension(resourceGroupResource).PutResourceModel2Async(resourceModel2SName, resourceModel2, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -1109,7 +1102,7 @@ namespace MgmtSupersetFlattenInheritance
             Argument.AssertNotNullOrEmpty(resourceModel2SName, nameof(resourceModel2SName));
             Argument.AssertNotNull(resourceModel2, nameof(resourceModel2));
 
-            return GetResourceGroupResourceExtensionClient(resourceGroupResource).PutResourceModel2(resourceModel2SName, resourceModel2, cancellationToken);
+            return GetMgmtSupersetFlattenInheritanceResourceGroupMockingExtension(resourceGroupResource).PutResourceModel2(resourceModel2SName, resourceModel2, cancellationToken);
         }
 
         /// <summary>
@@ -1133,7 +1126,7 @@ namespace MgmtSupersetFlattenInheritance
         {
             Argument.AssertNotNullOrEmpty(resourceModel2SName, nameof(resourceModel2SName));
 
-            return await GetResourceGroupResourceExtensionClient(resourceGroupResource).GetResourceModel2Async(resourceModel2SName, cancellationToken).ConfigureAwait(false);
+            return await GetMgmtSupersetFlattenInheritanceResourceGroupMockingExtension(resourceGroupResource).GetResourceModel2Async(resourceModel2SName, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -1157,7 +1150,7 @@ namespace MgmtSupersetFlattenInheritance
         {
             Argument.AssertNotNullOrEmpty(resourceModel2SName, nameof(resourceModel2SName));
 
-            return GetResourceGroupResourceExtensionClient(resourceGroupResource).GetResourceModel2(resourceModel2SName, cancellationToken);
+            return GetMgmtSupersetFlattenInheritanceResourceGroupMockingExtension(resourceGroupResource).GetResourceModel2(resourceModel2SName, cancellationToken);
         }
 
         /// <summary>
@@ -1177,7 +1170,7 @@ namespace MgmtSupersetFlattenInheritance
         /// <returns> An async collection of <see cref="TrackedResourceModel2" /> that may take multiple service requests to iterate over. </returns>
         public static AsyncPageable<TrackedResourceModel2> GetTrackedResourceModel2sAsync(this ResourceGroupResource resourceGroupResource, CancellationToken cancellationToken = default)
         {
-            return GetResourceGroupResourceExtensionClient(resourceGroupResource).GetTrackedResourceModel2sAsync(cancellationToken);
+            return GetMgmtSupersetFlattenInheritanceResourceGroupMockingExtension(resourceGroupResource).GetTrackedResourceModel2sAsync(cancellationToken);
         }
 
         /// <summary>
@@ -1197,7 +1190,7 @@ namespace MgmtSupersetFlattenInheritance
         /// <returns> A collection of <see cref="TrackedResourceModel2" /> that may take multiple service requests to iterate over. </returns>
         public static Pageable<TrackedResourceModel2> GetTrackedResourceModel2s(this ResourceGroupResource resourceGroupResource, CancellationToken cancellationToken = default)
         {
-            return GetResourceGroupResourceExtensionClient(resourceGroupResource).GetTrackedResourceModel2s(cancellationToken);
+            return GetMgmtSupersetFlattenInheritanceResourceGroupMockingExtension(resourceGroupResource).GetTrackedResourceModel2s(cancellationToken);
         }
 
         /// <summary>
@@ -1223,7 +1216,7 @@ namespace MgmtSupersetFlattenInheritance
             Argument.AssertNotNullOrEmpty(trackedResourceModel2SName, nameof(trackedResourceModel2SName));
             Argument.AssertNotNull(trackedResourceModel2, nameof(trackedResourceModel2));
 
-            return await GetResourceGroupResourceExtensionClient(resourceGroupResource).PutTrackedResourceModel2Async(trackedResourceModel2SName, trackedResourceModel2, cancellationToken).ConfigureAwait(false);
+            return await GetMgmtSupersetFlattenInheritanceResourceGroupMockingExtension(resourceGroupResource).PutTrackedResourceModel2Async(trackedResourceModel2SName, trackedResourceModel2, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -1249,7 +1242,7 @@ namespace MgmtSupersetFlattenInheritance
             Argument.AssertNotNullOrEmpty(trackedResourceModel2SName, nameof(trackedResourceModel2SName));
             Argument.AssertNotNull(trackedResourceModel2, nameof(trackedResourceModel2));
 
-            return GetResourceGroupResourceExtensionClient(resourceGroupResource).PutTrackedResourceModel2(trackedResourceModel2SName, trackedResourceModel2, cancellationToken);
+            return GetMgmtSupersetFlattenInheritanceResourceGroupMockingExtension(resourceGroupResource).PutTrackedResourceModel2(trackedResourceModel2SName, trackedResourceModel2, cancellationToken);
         }
 
         /// <summary>
@@ -1273,7 +1266,7 @@ namespace MgmtSupersetFlattenInheritance
         {
             Argument.AssertNotNullOrEmpty(trackedResourceModel2SName, nameof(trackedResourceModel2SName));
 
-            return await GetResourceGroupResourceExtensionClient(resourceGroupResource).GetTrackedResourceModel2Async(trackedResourceModel2SName, cancellationToken).ConfigureAwait(false);
+            return await GetMgmtSupersetFlattenInheritanceResourceGroupMockingExtension(resourceGroupResource).GetTrackedResourceModel2Async(trackedResourceModel2SName, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -1297,7 +1290,7 @@ namespace MgmtSupersetFlattenInheritance
         {
             Argument.AssertNotNullOrEmpty(trackedResourceModel2SName, nameof(trackedResourceModel2SName));
 
-            return GetResourceGroupResourceExtensionClient(resourceGroupResource).GetTrackedResourceModel2(trackedResourceModel2SName, cancellationToken);
+            return GetMgmtSupersetFlattenInheritanceResourceGroupMockingExtension(resourceGroupResource).GetTrackedResourceModel2(trackedResourceModel2SName, cancellationToken);
         }
 
         /// <summary>
@@ -1323,7 +1316,7 @@ namespace MgmtSupersetFlattenInheritance
             Argument.AssertNotNullOrEmpty(nonResourceModel1SName, nameof(nonResourceModel1SName));
             Argument.AssertNotNull(nonResourceModel1, nameof(nonResourceModel1));
 
-            return await GetResourceGroupResourceExtensionClient(resourceGroupResource).PutNonResourceModel1Async(nonResourceModel1SName, nonResourceModel1, cancellationToken).ConfigureAwait(false);
+            return await GetMgmtSupersetFlattenInheritanceResourceGroupMockingExtension(resourceGroupResource).PutNonResourceModel1Async(nonResourceModel1SName, nonResourceModel1, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -1349,7 +1342,7 @@ namespace MgmtSupersetFlattenInheritance
             Argument.AssertNotNullOrEmpty(nonResourceModel1SName, nameof(nonResourceModel1SName));
             Argument.AssertNotNull(nonResourceModel1, nameof(nonResourceModel1));
 
-            return GetResourceGroupResourceExtensionClient(resourceGroupResource).PutNonResourceModel1(nonResourceModel1SName, nonResourceModel1, cancellationToken);
+            return GetMgmtSupersetFlattenInheritanceResourceGroupMockingExtension(resourceGroupResource).PutNonResourceModel1(nonResourceModel1SName, nonResourceModel1, cancellationToken);
         }
 
         /// <summary>
@@ -1373,7 +1366,7 @@ namespace MgmtSupersetFlattenInheritance
         {
             Argument.AssertNotNullOrEmpty(nonResourceModel1SName, nameof(nonResourceModel1SName));
 
-            return await GetResourceGroupResourceExtensionClient(resourceGroupResource).GetNonResourceModel1Async(nonResourceModel1SName, cancellationToken).ConfigureAwait(false);
+            return await GetMgmtSupersetFlattenInheritanceResourceGroupMockingExtension(resourceGroupResource).GetNonResourceModel1Async(nonResourceModel1SName, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -1397,7 +1390,7 @@ namespace MgmtSupersetFlattenInheritance
         {
             Argument.AssertNotNullOrEmpty(nonResourceModel1SName, nameof(nonResourceModel1SName));
 
-            return GetResourceGroupResourceExtensionClient(resourceGroupResource).GetNonResourceModel1(nonResourceModel1SName, cancellationToken);
+            return GetMgmtSupersetFlattenInheritanceResourceGroupMockingExtension(resourceGroupResource).GetNonResourceModel1(nonResourceModel1SName, cancellationToken);
         }
     }
 }

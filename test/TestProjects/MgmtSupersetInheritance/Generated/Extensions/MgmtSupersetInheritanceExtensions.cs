@@ -12,6 +12,7 @@ using Azure;
 using Azure.Core;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Resources;
+using MgmtSupersetInheritance.Mocking;
 using MgmtSupersetInheritance.Models;
 
 namespace MgmtSupersetInheritance
@@ -19,19 +20,11 @@ namespace MgmtSupersetInheritance
     /// <summary> A class to add extension methods to MgmtSupersetInheritance. </summary>
     public static partial class MgmtSupersetInheritanceExtensions
     {
-        private static ResourceGroupResourceExtensionClient GetResourceGroupResourceExtensionClient(ArmResource resource)
+        private static MgmtSupersetInheritanceResourceGroupMockingExtension GetMgmtSupersetInheritanceResourceGroupMockingExtension(ArmResource resource)
         {
             return resource.GetCachedClient(client =>
             {
-                return new ResourceGroupResourceExtensionClient(client, resource.Id);
-            });
-        }
-
-        private static ResourceGroupResourceExtensionClient GetResourceGroupResourceExtensionClient(ArmClient client, ResourceIdentifier scope)
-        {
-            return client.GetResourceClient(() =>
-            {
-                return new ResourceGroupResourceExtensionClient(client, scope);
+                return new MgmtSupersetInheritanceResourceGroupMockingExtension(client, resource.Id);
             });
         }
         #region SupersetModel1Resource
@@ -115,7 +108,7 @@ namespace MgmtSupersetInheritance
         /// <returns> An object representing collection of SupersetModel1Resources and their operations over a SupersetModel1Resource. </returns>
         public static SupersetModel1Collection GetSupersetModel1s(this ResourceGroupResource resourceGroupResource)
         {
-            return GetResourceGroupResourceExtensionClient(resourceGroupResource).GetSupersetModel1s();
+            return GetMgmtSupersetInheritanceResourceGroupMockingExtension(resourceGroupResource).GetSupersetModel1s();
         }
 
         /// <summary>
@@ -138,7 +131,7 @@ namespace MgmtSupersetInheritance
         [ForwardsClientCalls]
         public static async Task<Response<SupersetModel1Resource>> GetSupersetModel1Async(this ResourceGroupResource resourceGroupResource, string supersetModel1SName, CancellationToken cancellationToken = default)
         {
-            return await resourceGroupResource.GetSupersetModel1s().GetAsync(supersetModel1SName, cancellationToken).ConfigureAwait(false);
+            return await GetMgmtSupersetInheritanceResourceGroupMockingExtension(resourceGroupResource).GetSupersetModel1Async(supersetModel1SName, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -161,7 +154,7 @@ namespace MgmtSupersetInheritance
         [ForwardsClientCalls]
         public static Response<SupersetModel1Resource> GetSupersetModel1(this ResourceGroupResource resourceGroupResource, string supersetModel1SName, CancellationToken cancellationToken = default)
         {
-            return resourceGroupResource.GetSupersetModel1s().Get(supersetModel1SName, cancellationToken);
+            return GetMgmtSupersetInheritanceResourceGroupMockingExtension(resourceGroupResource).GetSupersetModel1(supersetModel1SName, cancellationToken);
         }
 
         /// <summary> Gets a collection of SupersetModel4Resources in the ResourceGroupResource. </summary>
@@ -169,7 +162,7 @@ namespace MgmtSupersetInheritance
         /// <returns> An object representing collection of SupersetModel4Resources and their operations over a SupersetModel4Resource. </returns>
         public static SupersetModel4Collection GetSupersetModel4s(this ResourceGroupResource resourceGroupResource)
         {
-            return GetResourceGroupResourceExtensionClient(resourceGroupResource).GetSupersetModel4s();
+            return GetMgmtSupersetInheritanceResourceGroupMockingExtension(resourceGroupResource).GetSupersetModel4s();
         }
 
         /// <summary>
@@ -192,7 +185,7 @@ namespace MgmtSupersetInheritance
         [ForwardsClientCalls]
         public static async Task<Response<SupersetModel4Resource>> GetSupersetModel4Async(this ResourceGroupResource resourceGroupResource, string supersetModel4SName, CancellationToken cancellationToken = default)
         {
-            return await resourceGroupResource.GetSupersetModel4s().GetAsync(supersetModel4SName, cancellationToken).ConfigureAwait(false);
+            return await GetMgmtSupersetInheritanceResourceGroupMockingExtension(resourceGroupResource).GetSupersetModel4Async(supersetModel4SName, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -215,7 +208,7 @@ namespace MgmtSupersetInheritance
         [ForwardsClientCalls]
         public static Response<SupersetModel4Resource> GetSupersetModel4(this ResourceGroupResource resourceGroupResource, string supersetModel4SName, CancellationToken cancellationToken = default)
         {
-            return resourceGroupResource.GetSupersetModel4s().Get(supersetModel4SName, cancellationToken);
+            return GetMgmtSupersetInheritanceResourceGroupMockingExtension(resourceGroupResource).GetSupersetModel4(supersetModel4SName, cancellationToken);
         }
 
         /// <summary> Gets a collection of SupersetModel6Resources in the ResourceGroupResource. </summary>
@@ -223,7 +216,7 @@ namespace MgmtSupersetInheritance
         /// <returns> An object representing collection of SupersetModel6Resources and their operations over a SupersetModel6Resource. </returns>
         public static SupersetModel6Collection GetSupersetModel6s(this ResourceGroupResource resourceGroupResource)
         {
-            return GetResourceGroupResourceExtensionClient(resourceGroupResource).GetSupersetModel6s();
+            return GetMgmtSupersetInheritanceResourceGroupMockingExtension(resourceGroupResource).GetSupersetModel6s();
         }
 
         /// <summary>
@@ -246,7 +239,7 @@ namespace MgmtSupersetInheritance
         [ForwardsClientCalls]
         public static async Task<Response<SupersetModel6Resource>> GetSupersetModel6Async(this ResourceGroupResource resourceGroupResource, string supersetModel6SName, CancellationToken cancellationToken = default)
         {
-            return await resourceGroupResource.GetSupersetModel6s().GetAsync(supersetModel6SName, cancellationToken).ConfigureAwait(false);
+            return await GetMgmtSupersetInheritanceResourceGroupMockingExtension(resourceGroupResource).GetSupersetModel6Async(supersetModel6SName, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -269,7 +262,7 @@ namespace MgmtSupersetInheritance
         [ForwardsClientCalls]
         public static Response<SupersetModel6Resource> GetSupersetModel6(this ResourceGroupResource resourceGroupResource, string supersetModel6SName, CancellationToken cancellationToken = default)
         {
-            return resourceGroupResource.GetSupersetModel6s().Get(supersetModel6SName, cancellationToken);
+            return GetMgmtSupersetInheritanceResourceGroupMockingExtension(resourceGroupResource).GetSupersetModel6(supersetModel6SName, cancellationToken);
         }
 
         /// <summary> Gets a collection of SupersetModel7Resources in the ResourceGroupResource. </summary>
@@ -277,7 +270,7 @@ namespace MgmtSupersetInheritance
         /// <returns> An object representing collection of SupersetModel7Resources and their operations over a SupersetModel7Resource. </returns>
         public static SupersetModel7Collection GetSupersetModel7s(this ResourceGroupResource resourceGroupResource)
         {
-            return GetResourceGroupResourceExtensionClient(resourceGroupResource).GetSupersetModel7s();
+            return GetMgmtSupersetInheritanceResourceGroupMockingExtension(resourceGroupResource).GetSupersetModel7s();
         }
 
         /// <summary>
@@ -300,7 +293,7 @@ namespace MgmtSupersetInheritance
         [ForwardsClientCalls]
         public static async Task<Response<SupersetModel7Resource>> GetSupersetModel7Async(this ResourceGroupResource resourceGroupResource, string supersetModel7SName, CancellationToken cancellationToken = default)
         {
-            return await resourceGroupResource.GetSupersetModel7s().GetAsync(supersetModel7SName, cancellationToken).ConfigureAwait(false);
+            return await GetMgmtSupersetInheritanceResourceGroupMockingExtension(resourceGroupResource).GetSupersetModel7Async(supersetModel7SName, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -323,7 +316,7 @@ namespace MgmtSupersetInheritance
         [ForwardsClientCalls]
         public static Response<SupersetModel7Resource> GetSupersetModel7(this ResourceGroupResource resourceGroupResource, string supersetModel7SName, CancellationToken cancellationToken = default)
         {
-            return resourceGroupResource.GetSupersetModel7s().Get(supersetModel7SName, cancellationToken);
+            return GetMgmtSupersetInheritanceResourceGroupMockingExtension(resourceGroupResource).GetSupersetModel7(supersetModel7SName, cancellationToken);
         }
 
         /// <summary>
@@ -349,7 +342,7 @@ namespace MgmtSupersetInheritance
             Argument.AssertNotNullOrEmpty(supersetModel2SName, nameof(supersetModel2SName));
             Argument.AssertNotNull(supersetModel2, nameof(supersetModel2));
 
-            return await GetResourceGroupResourceExtensionClient(resourceGroupResource).PutSupersetModel2Async(supersetModel2SName, supersetModel2, cancellationToken).ConfigureAwait(false);
+            return await GetMgmtSupersetInheritanceResourceGroupMockingExtension(resourceGroupResource).PutSupersetModel2Async(supersetModel2SName, supersetModel2, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -375,7 +368,7 @@ namespace MgmtSupersetInheritance
             Argument.AssertNotNullOrEmpty(supersetModel2SName, nameof(supersetModel2SName));
             Argument.AssertNotNull(supersetModel2, nameof(supersetModel2));
 
-            return GetResourceGroupResourceExtensionClient(resourceGroupResource).PutSupersetModel2(supersetModel2SName, supersetModel2, cancellationToken);
+            return GetMgmtSupersetInheritanceResourceGroupMockingExtension(resourceGroupResource).PutSupersetModel2(supersetModel2SName, supersetModel2, cancellationToken);
         }
 
         /// <summary>
@@ -399,7 +392,7 @@ namespace MgmtSupersetInheritance
         {
             Argument.AssertNotNullOrEmpty(supersetModel2SName, nameof(supersetModel2SName));
 
-            return await GetResourceGroupResourceExtensionClient(resourceGroupResource).GetSupersetModel2Async(supersetModel2SName, cancellationToken).ConfigureAwait(false);
+            return await GetMgmtSupersetInheritanceResourceGroupMockingExtension(resourceGroupResource).GetSupersetModel2Async(supersetModel2SName, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -423,7 +416,7 @@ namespace MgmtSupersetInheritance
         {
             Argument.AssertNotNullOrEmpty(supersetModel2SName, nameof(supersetModel2SName));
 
-            return GetResourceGroupResourceExtensionClient(resourceGroupResource).GetSupersetModel2(supersetModel2SName, cancellationToken);
+            return GetMgmtSupersetInheritanceResourceGroupMockingExtension(resourceGroupResource).GetSupersetModel2(supersetModel2SName, cancellationToken);
         }
 
         /// <summary>
@@ -449,7 +442,7 @@ namespace MgmtSupersetInheritance
             Argument.AssertNotNullOrEmpty(supersetModel3SName, nameof(supersetModel3SName));
             Argument.AssertNotNull(supersetModel3, nameof(supersetModel3));
 
-            return await GetResourceGroupResourceExtensionClient(resourceGroupResource).PutSupersetModel3Async(supersetModel3SName, supersetModel3, cancellationToken).ConfigureAwait(false);
+            return await GetMgmtSupersetInheritanceResourceGroupMockingExtension(resourceGroupResource).PutSupersetModel3Async(supersetModel3SName, supersetModel3, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -475,7 +468,7 @@ namespace MgmtSupersetInheritance
             Argument.AssertNotNullOrEmpty(supersetModel3SName, nameof(supersetModel3SName));
             Argument.AssertNotNull(supersetModel3, nameof(supersetModel3));
 
-            return GetResourceGroupResourceExtensionClient(resourceGroupResource).PutSupersetModel3(supersetModel3SName, supersetModel3, cancellationToken);
+            return GetMgmtSupersetInheritanceResourceGroupMockingExtension(resourceGroupResource).PutSupersetModel3(supersetModel3SName, supersetModel3, cancellationToken);
         }
 
         /// <summary>
@@ -499,7 +492,7 @@ namespace MgmtSupersetInheritance
         {
             Argument.AssertNotNullOrEmpty(supersetModel3SName, nameof(supersetModel3SName));
 
-            return await GetResourceGroupResourceExtensionClient(resourceGroupResource).GetSupersetModel3Async(supersetModel3SName, cancellationToken).ConfigureAwait(false);
+            return await GetMgmtSupersetInheritanceResourceGroupMockingExtension(resourceGroupResource).GetSupersetModel3Async(supersetModel3SName, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -523,7 +516,7 @@ namespace MgmtSupersetInheritance
         {
             Argument.AssertNotNullOrEmpty(supersetModel3SName, nameof(supersetModel3SName));
 
-            return GetResourceGroupResourceExtensionClient(resourceGroupResource).GetSupersetModel3(supersetModel3SName, cancellationToken);
+            return GetMgmtSupersetInheritanceResourceGroupMockingExtension(resourceGroupResource).GetSupersetModel3(supersetModel3SName, cancellationToken);
         }
     }
 }

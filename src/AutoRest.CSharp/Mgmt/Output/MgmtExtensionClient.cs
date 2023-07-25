@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Generation.Writers;
+using AutoRest.CSharp.Mgmt.AutoRest;
 using AutoRest.CSharp.Mgmt.Decorator;
 using AutoRest.CSharp.Mgmt.Models;
 using AutoRest.CSharp.Output.Models;
@@ -29,12 +30,23 @@ namespace AutoRest.CSharp.Mgmt.Output
             _operations = operations;
             _extensionForChildResources = extensionForChildResources;
             ExtendedResourceType = resourceType;
-            DefaultName = $"{ResourceName}ExtensionClient";
+            // name of this class is like "ComputeResourceGroupResourceExtension"
+            DefaultName = GetExtensionClientDefaultName(resourceType.Name);
+        }
+
+        private static string GetExtensionClientDefaultName(string resourceName)
+        {
+            // trim the Resource suffix if it has one. Actually it should always have one, eg, SubscriptionResource, ResourceGroupResource, etc.
+            // an exception for this is ArmResource, we would not like to trim this suffix
+            if (resourceName.EndsWith("Resource") && resourceName != "ArmResource")
+            {
+                resourceName = resourceName[..^8];
+            }
+
+            return $"{MgmtContext.RPName}{resourceName}MockingExtension";
         }
 
         public override bool IsInitializedByProperties => true;
-
-        public override bool HasChildResourceGetMethods => false;
 
         protected override ConstructorSignature? EnsureArmClientCtor()
         {
@@ -75,23 +87,27 @@ namespace AutoRest.CSharp.Mgmt.Output
             };
             yield return new(resourceExtensionMethod, resourceExtensionMethodBody);
 
-            var scopeExtensionMethod = new MethodSignature(
-                FactoryMethodName,
-                null,
-                null,
-                Private | Static,
-                Type,
-                null,
-                new[] { ArmClientParameter, _scopeParameter });
-            Action<CodeWriter> scopeExtensionMethodBody = writer =>
+            // only ArmResourceExtensionClient needs this factory method
+            if (ExtendedResourceType.Equals(typeof(ArmResource)))
             {
-                using (writer.Scope($"return {ArmClientParameter.Name}.GetResourceClient(() => ", newLine: false))
+                var scopeExtensionMethod = new MethodSignature(
+                    FactoryMethodName,
+                    null,
+                    null,
+                    Private | Static,
+                    Type,
+                    null,
+                    new[] { ArmClientParameter, _scopeParameter });
+                Action<CodeWriter> scopeExtensionMethodBody = writer =>
                 {
-                    writer.Line($"return new {Type}({ArmClientParameter.Name}, {_scopeParameter.Name});");
-                }
-                writer.LineRaw(");");
-            };
-            yield return new(scopeExtensionMethod, scopeExtensionMethodBody);
+                    using (writer.Scope($"return {ArmClientParameter.Name}.GetResourceClient(() => ", newLine: false))
+                    {
+                        writer.Line($"return new {Type}({ArmClientParameter.Name}, {_scopeParameter.Name});");
+                    }
+                    writer.LineRaw(");");
+                };
+                yield return new(scopeExtensionMethod, scopeExtensionMethodBody);
+            }
         }
 
         private Parameter _generalExtensionParameter = new Parameter(
@@ -136,6 +152,9 @@ namespace AutoRest.CSharp.Mgmt.Output
         public override CSharpType? BaseType => typeof(ArmResource);
 
         protected override string DefaultName { get; }
+        protected override string DefaultNamespace => $"{base.DefaultNamespace}.Mocking";
+
+        public override string DiagnosticNamespace => base.DefaultNamespace;
 
         public bool IsEmpty => !ClientOperations.Any() && !ChildResources.Any();
 
@@ -144,7 +163,7 @@ namespace AutoRest.CSharp.Mgmt.Output
         private FormattableString? _description;
         public override FormattableString Description => _description ??= $"A class to add extension methods to {ResourceName}.";
 
-        protected override string DefaultAccessibility => "internal";
+        protected override string DefaultAccessibility => "public";
 
         /// <summary>
         /// Construct a key for overload of this method signature.
@@ -162,7 +181,7 @@ namespace AutoRest.CSharp.Mgmt.Output
 
             return builder.ToString();
         }
-
-        internal record MgmtExtensionClientFactoryMethod(MethodSignature Signature, Action<CodeWriter> MethodBodyImplementation);
     }
+
+    internal record MgmtExtensionClientFactoryMethod(MethodSignature Signature, Action<CodeWriter> MethodBodyImplementation);
 }

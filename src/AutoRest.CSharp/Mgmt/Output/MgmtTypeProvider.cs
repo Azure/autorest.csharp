@@ -56,6 +56,9 @@ namespace AutoRest.CSharp.Mgmt.Output
         public virtual string BranchIdVariableName => "Id";
 
         public string Namespace => DefaultNamespace;
+
+        public virtual string DiagnosticNamespace => Namespace;
+
         public abstract CSharpType? BaseType { get; }
 
         protected internal virtual CSharpType TypeAsResource => Type;

@@ -196,11 +196,9 @@ namespace AutoRest.CSharp.Mgmt.Generation
         {
             WriteScopeResourceTypesValidation(_scopeParameter.Name, scopeTypes);
 
-            var extensionClient = This.GetExtensionClient(null);
-
             _writer.AppendRaw("return ")
                 .AppendRawIf("await ", isAsync && !isPaging)
-                .Append($"{extensionClient.FactoryMethodName}({_armClientParameter.Name}, {_scopeParameter.Name}).{CreateMethodName(signature.Name, isAsync)}(");
+                .Append($"{This.ExtensionClient.FactoryMethodName}({_armClientParameter.Name}, {_scopeParameter.Name}).{CreateMethodName(signature.Name, isAsync)}(");
 
             foreach (var parameter in signature.Parameters.Skip(2))
             {

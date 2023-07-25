@@ -12,41 +12,26 @@ using Azure;
 using Azure.Core;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Resources;
+using MgmtCollectionParent.Mocking;
 
 namespace MgmtCollectionParent
 {
     /// <summary> A class to add extension methods to MgmtCollectionParent. </summary>
     public static partial class MgmtCollectionParentExtensions
     {
-        private static ResourceGroupResourceExtensionClient GetResourceGroupResourceExtensionClient(ArmResource resource)
+        private static MgmtCollectionParentResourceGroupMockingExtension GetMgmtCollectionParentResourceGroupMockingExtension(ArmResource resource)
         {
             return resource.GetCachedClient(client =>
             {
-                return new ResourceGroupResourceExtensionClient(client, resource.Id);
+                return new MgmtCollectionParentResourceGroupMockingExtension(client, resource.Id);
             });
         }
 
-        private static ResourceGroupResourceExtensionClient GetResourceGroupResourceExtensionClient(ArmClient client, ResourceIdentifier scope)
-        {
-            return client.GetResourceClient(() =>
-            {
-                return new ResourceGroupResourceExtensionClient(client, scope);
-            });
-        }
-
-        private static SubscriptionResourceExtensionClient GetSubscriptionResourceExtensionClient(ArmResource resource)
+        private static MgmtCollectionParentSubscriptionMockingExtension GetMgmtCollectionParentSubscriptionMockingExtension(ArmResource resource)
         {
             return resource.GetCachedClient(client =>
             {
-                return new SubscriptionResourceExtensionClient(client, resource.Id);
-            });
-        }
-
-        private static SubscriptionResourceExtensionClient GetSubscriptionResourceExtensionClient(ArmClient client, ResourceIdentifier scope)
-        {
-            return client.GetResourceClient(() =>
-            {
-                return new SubscriptionResourceExtensionClient(client, scope);
+                return new MgmtCollectionParentSubscriptionMockingExtension(client, resource.Id);
             });
         }
         #region OrderResource
@@ -73,7 +58,7 @@ namespace MgmtCollectionParent
         /// <returns> An object representing collection of OrderResources and their operations over a OrderResource. </returns>
         public static OrderResourceCollection GetOrderResources(this ResourceGroupResource resourceGroupResource)
         {
-            return GetResourceGroupResourceExtensionClient(resourceGroupResource).GetOrderResources();
+            return GetMgmtCollectionParentResourceGroupMockingExtension(resourceGroupResource).GetOrderResources();
         }
 
         /// <summary>
@@ -98,7 +83,7 @@ namespace MgmtCollectionParent
         [ForwardsClientCalls]
         public static async Task<Response<OrderResource>> GetOrderResourceAsync(this ResourceGroupResource resourceGroupResource, string location, string orderName, CancellationToken cancellationToken = default)
         {
-            return await resourceGroupResource.GetOrderResources().GetAsync(location, orderName, cancellationToken).ConfigureAwait(false);
+            return await GetMgmtCollectionParentResourceGroupMockingExtension(resourceGroupResource).GetOrderResourceAsync(location, orderName, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -123,7 +108,7 @@ namespace MgmtCollectionParent
         [ForwardsClientCalls]
         public static Response<OrderResource> GetOrderResource(this ResourceGroupResource resourceGroupResource, string location, string orderName, CancellationToken cancellationToken = default)
         {
-            return resourceGroupResource.GetOrderResources().Get(location, orderName, cancellationToken);
+            return GetMgmtCollectionParentResourceGroupMockingExtension(resourceGroupResource).GetOrderResource(location, orderName, cancellationToken);
         }
 
         /// <summary>
@@ -145,7 +130,7 @@ namespace MgmtCollectionParent
         /// <returns> An async collection of <see cref="OrderResource" /> that may take multiple service requests to iterate over. </returns>
         public static AsyncPageable<OrderResource> GetOrderResourcesAsync(this SubscriptionResource subscriptionResource, string skipToken = null, CancellationToken cancellationToken = default)
         {
-            return GetSubscriptionResourceExtensionClient(subscriptionResource).GetOrderResourcesAsync(skipToken, cancellationToken);
+            return GetMgmtCollectionParentSubscriptionMockingExtension(subscriptionResource).GetOrderResourcesAsync(skipToken, cancellationToken);
         }
 
         /// <summary>
@@ -167,7 +152,7 @@ namespace MgmtCollectionParent
         /// <returns> A collection of <see cref="OrderResource" /> that may take multiple service requests to iterate over. </returns>
         public static Pageable<OrderResource> GetOrderResources(this SubscriptionResource subscriptionResource, string skipToken = null, CancellationToken cancellationToken = default)
         {
-            return GetSubscriptionResourceExtensionClient(subscriptionResource).GetOrderResources(skipToken, cancellationToken);
+            return GetMgmtCollectionParentSubscriptionMockingExtension(subscriptionResource).GetOrderResources(skipToken, cancellationToken);
         }
     }
 }

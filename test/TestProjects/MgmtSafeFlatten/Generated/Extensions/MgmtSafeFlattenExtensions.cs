@@ -12,41 +12,26 @@ using Azure;
 using Azure.Core;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Resources;
+using MgmtSafeFlatten.Mocking;
 
 namespace MgmtSafeFlatten
 {
     /// <summary> A class to add extension methods to MgmtSafeFlatten. </summary>
     public static partial class MgmtSafeFlattenExtensions
     {
-        private static ResourceGroupResourceExtensionClient GetResourceGroupResourceExtensionClient(ArmResource resource)
+        private static MgmtSafeFlattenResourceGroupMockingExtension GetMgmtSafeFlattenResourceGroupMockingExtension(ArmResource resource)
         {
             return resource.GetCachedClient(client =>
             {
-                return new ResourceGroupResourceExtensionClient(client, resource.Id);
+                return new MgmtSafeFlattenResourceGroupMockingExtension(client, resource.Id);
             });
         }
 
-        private static ResourceGroupResourceExtensionClient GetResourceGroupResourceExtensionClient(ArmClient client, ResourceIdentifier scope)
-        {
-            return client.GetResourceClient(() =>
-            {
-                return new ResourceGroupResourceExtensionClient(client, scope);
-            });
-        }
-
-        private static SubscriptionResourceExtensionClient GetSubscriptionResourceExtensionClient(ArmResource resource)
+        private static MgmtSafeFlattenSubscriptionMockingExtension GetMgmtSafeFlattenSubscriptionMockingExtension(ArmResource resource)
         {
             return resource.GetCachedClient(client =>
             {
-                return new SubscriptionResourceExtensionClient(client, resource.Id);
-            });
-        }
-
-        private static SubscriptionResourceExtensionClient GetSubscriptionResourceExtensionClient(ArmClient client, ResourceIdentifier scope)
-        {
-            return client.GetResourceClient(() =>
-            {
-                return new SubscriptionResourceExtensionClient(client, scope);
+                return new MgmtSafeFlattenSubscriptionMockingExtension(client, resource.Id);
             });
         }
         #region TypeOneResource
@@ -92,7 +77,7 @@ namespace MgmtSafeFlatten
         /// <returns> An object representing collection of TypeOneResources and their operations over a TypeOneResource. </returns>
         public static TypeOneCollection GetTypeOnes(this ResourceGroupResource resourceGroupResource)
         {
-            return GetResourceGroupResourceExtensionClient(resourceGroupResource).GetTypeOnes();
+            return GetMgmtSafeFlattenResourceGroupMockingExtension(resourceGroupResource).GetTypeOnes();
         }
 
         /// <summary>
@@ -116,7 +101,7 @@ namespace MgmtSafeFlatten
         [ForwardsClientCalls]
         public static async Task<Response<TypeOneResource>> GetTypeOneAsync(this ResourceGroupResource resourceGroupResource, string typeOneName, CancellationToken cancellationToken = default)
         {
-            return await resourceGroupResource.GetTypeOnes().GetAsync(typeOneName, cancellationToken).ConfigureAwait(false);
+            return await GetMgmtSafeFlattenResourceGroupMockingExtension(resourceGroupResource).GetTypeOneAsync(typeOneName, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -140,7 +125,7 @@ namespace MgmtSafeFlatten
         [ForwardsClientCalls]
         public static Response<TypeOneResource> GetTypeOne(this ResourceGroupResource resourceGroupResource, string typeOneName, CancellationToken cancellationToken = default)
         {
-            return resourceGroupResource.GetTypeOnes().Get(typeOneName, cancellationToken);
+            return GetMgmtSafeFlattenResourceGroupMockingExtension(resourceGroupResource).GetTypeOne(typeOneName, cancellationToken);
         }
 
         /// <summary> Gets a collection of TypeTwoResources in the ResourceGroupResource. </summary>
@@ -148,7 +133,7 @@ namespace MgmtSafeFlatten
         /// <returns> An object representing collection of TypeTwoResources and their operations over a TypeTwoResource. </returns>
         public static TypeTwoCollection GetTypeTwos(this ResourceGroupResource resourceGroupResource)
         {
-            return GetResourceGroupResourceExtensionClient(resourceGroupResource).GetTypeTwos();
+            return GetMgmtSafeFlattenResourceGroupMockingExtension(resourceGroupResource).GetTypeTwos();
         }
 
         /// <summary>
@@ -172,7 +157,7 @@ namespace MgmtSafeFlatten
         [ForwardsClientCalls]
         public static async Task<Response<TypeTwoResource>> GetTypeTwoAsync(this ResourceGroupResource resourceGroupResource, string typeTwoName, CancellationToken cancellationToken = default)
         {
-            return await resourceGroupResource.GetTypeTwos().GetAsync(typeTwoName, cancellationToken).ConfigureAwait(false);
+            return await GetMgmtSafeFlattenResourceGroupMockingExtension(resourceGroupResource).GetTypeTwoAsync(typeTwoName, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -196,7 +181,7 @@ namespace MgmtSafeFlatten
         [ForwardsClientCalls]
         public static Response<TypeTwoResource> GetTypeTwo(this ResourceGroupResource resourceGroupResource, string typeTwoName, CancellationToken cancellationToken = default)
         {
-            return resourceGroupResource.GetTypeTwos().Get(typeTwoName, cancellationToken);
+            return GetMgmtSafeFlattenResourceGroupMockingExtension(resourceGroupResource).GetTypeTwo(typeTwoName, cancellationToken);
         }
 
         /// <summary>
@@ -217,7 +202,7 @@ namespace MgmtSafeFlatten
         /// <returns> An async collection of <see cref="TypeOneResource" /> that may take multiple service requests to iterate over. </returns>
         public static AsyncPageable<TypeOneResource> GetTypeOnesAsync(this SubscriptionResource subscriptionResource, CancellationToken cancellationToken = default)
         {
-            return GetSubscriptionResourceExtensionClient(subscriptionResource).GetTypeOnesAsync(cancellationToken);
+            return GetMgmtSafeFlattenSubscriptionMockingExtension(subscriptionResource).GetTypeOnesAsync(cancellationToken);
         }
 
         /// <summary>
@@ -238,7 +223,7 @@ namespace MgmtSafeFlatten
         /// <returns> A collection of <see cref="TypeOneResource" /> that may take multiple service requests to iterate over. </returns>
         public static Pageable<TypeOneResource> GetTypeOnes(this SubscriptionResource subscriptionResource, CancellationToken cancellationToken = default)
         {
-            return GetSubscriptionResourceExtensionClient(subscriptionResource).GetTypeOnes(cancellationToken);
+            return GetMgmtSafeFlattenSubscriptionMockingExtension(subscriptionResource).GetTypeOnes(cancellationToken);
         }
 
         /// <summary>
@@ -259,7 +244,7 @@ namespace MgmtSafeFlatten
         /// <returns> An async collection of <see cref="TypeTwoResource" /> that may take multiple service requests to iterate over. </returns>
         public static AsyncPageable<TypeTwoResource> GetTypeTwosAsync(this SubscriptionResource subscriptionResource, CancellationToken cancellationToken = default)
         {
-            return GetSubscriptionResourceExtensionClient(subscriptionResource).GetTypeTwosAsync(cancellationToken);
+            return GetMgmtSafeFlattenSubscriptionMockingExtension(subscriptionResource).GetTypeTwosAsync(cancellationToken);
         }
 
         /// <summary>
@@ -280,7 +265,7 @@ namespace MgmtSafeFlatten
         /// <returns> A collection of <see cref="TypeTwoResource" /> that may take multiple service requests to iterate over. </returns>
         public static Pageable<TypeTwoResource> GetTypeTwos(this SubscriptionResource subscriptionResource, CancellationToken cancellationToken = default)
         {
-            return GetSubscriptionResourceExtensionClient(subscriptionResource).GetTypeTwos(cancellationToken);
+            return GetMgmtSafeFlattenSubscriptionMockingExtension(subscriptionResource).GetTypeTwos(cancellationToken);
         }
     }
 }

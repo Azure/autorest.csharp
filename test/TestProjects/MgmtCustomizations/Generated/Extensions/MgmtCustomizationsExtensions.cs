@@ -12,25 +12,18 @@ using Azure;
 using Azure.Core;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Resources;
+using MgmtCustomizations.Mocking;
 
 namespace MgmtCustomizations
 {
     /// <summary> A class to add extension methods to MgmtCustomizations. </summary>
     public static partial class MgmtCustomizationsExtensions
     {
-        private static ResourceGroupResourceExtensionClient GetResourceGroupResourceExtensionClient(ArmResource resource)
+        private static MgmtCustomizationsResourceGroupMockingExtension GetMgmtCustomizationsResourceGroupMockingExtension(ArmResource resource)
         {
             return resource.GetCachedClient(client =>
             {
-                return new ResourceGroupResourceExtensionClient(client, resource.Id);
-            });
-        }
-
-        private static ResourceGroupResourceExtensionClient GetResourceGroupResourceExtensionClient(ArmClient client, ResourceIdentifier scope)
-        {
-            return client.GetResourceClient(() =>
-            {
-                return new ResourceGroupResourceExtensionClient(client, scope);
+                return new MgmtCustomizationsResourceGroupMockingExtension(client, resource.Id);
             });
         }
         #region PetStoreResource
@@ -57,7 +50,7 @@ namespace MgmtCustomizations
         /// <returns> An object representing collection of PetStoreResources and their operations over a PetStoreResource. </returns>
         public static PetStoreCollection GetPetStores(this ResourceGroupResource resourceGroupResource)
         {
-            return GetResourceGroupResourceExtensionClient(resourceGroupResource).GetPetStores();
+            return GetMgmtCustomizationsResourceGroupMockingExtension(resourceGroupResource).GetPetStores();
         }
 
         /// <summary>
@@ -81,7 +74,7 @@ namespace MgmtCustomizations
         [ForwardsClientCalls]
         public static async Task<Response<PetStoreResource>> GetPetStoreAsync(this ResourceGroupResource resourceGroupResource, string name, CancellationToken cancellationToken = default)
         {
-            return await resourceGroupResource.GetPetStores().GetAsync(name, cancellationToken).ConfigureAwait(false);
+            return await GetMgmtCustomizationsResourceGroupMockingExtension(resourceGroupResource).GetPetStoreAsync(name, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -105,7 +98,7 @@ namespace MgmtCustomizations
         [ForwardsClientCalls]
         public static Response<PetStoreResource> GetPetStore(this ResourceGroupResource resourceGroupResource, string name, CancellationToken cancellationToken = default)
         {
-            return resourceGroupResource.GetPetStores().Get(name, cancellationToken);
+            return GetMgmtCustomizationsResourceGroupMockingExtension(resourceGroupResource).GetPetStore(name, cancellationToken);
         }
     }
 }

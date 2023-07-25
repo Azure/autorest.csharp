@@ -12,41 +12,26 @@ using Azure;
 using Azure.Core;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Resources;
+using MgmtExtensionCommonRestOperation.Mocking;
 
 namespace MgmtExtensionCommonRestOperation
 {
     /// <summary> A class to add extension methods to MgmtExtensionCommonRestOperation. </summary>
     public static partial class MgmtExtensionCommonRestOperationExtensions
     {
-        private static ResourceGroupResourceExtensionClient GetResourceGroupResourceExtensionClient(ArmResource resource)
+        private static MgmtExtensionCommonRestOperationResourceGroupMockingExtension GetMgmtExtensionCommonRestOperationResourceGroupMockingExtension(ArmResource resource)
         {
             return resource.GetCachedClient(client =>
             {
-                return new ResourceGroupResourceExtensionClient(client, resource.Id);
+                return new MgmtExtensionCommonRestOperationResourceGroupMockingExtension(client, resource.Id);
             });
         }
 
-        private static ResourceGroupResourceExtensionClient GetResourceGroupResourceExtensionClient(ArmClient client, ResourceIdentifier scope)
-        {
-            return client.GetResourceClient(() =>
-            {
-                return new ResourceGroupResourceExtensionClient(client, scope);
-            });
-        }
-
-        private static SubscriptionResourceExtensionClient GetSubscriptionResourceExtensionClient(ArmResource resource)
+        private static MgmtExtensionCommonRestOperationSubscriptionMockingExtension GetMgmtExtensionCommonRestOperationSubscriptionMockingExtension(ArmResource resource)
         {
             return resource.GetCachedClient(client =>
             {
-                return new SubscriptionResourceExtensionClient(client, resource.Id);
-            });
-        }
-
-        private static SubscriptionResourceExtensionClient GetSubscriptionResourceExtensionClient(ArmClient client, ResourceIdentifier scope)
-        {
-            return client.GetResourceClient(() =>
-            {
-                return new SubscriptionResourceExtensionClient(client, scope);
+                return new MgmtExtensionCommonRestOperationSubscriptionMockingExtension(client, resource.Id);
             });
         }
         #region TypeOneResource
@@ -92,7 +77,7 @@ namespace MgmtExtensionCommonRestOperation
         /// <returns> An object representing collection of TypeOneResources and their operations over a TypeOneResource. </returns>
         public static TypeOneCollection GetTypeOnes(this ResourceGroupResource resourceGroupResource)
         {
-            return GetResourceGroupResourceExtensionClient(resourceGroupResource).GetTypeOnes();
+            return GetMgmtExtensionCommonRestOperationResourceGroupMockingExtension(resourceGroupResource).GetTypeOnes();
         }
 
         /// <summary>
@@ -116,7 +101,7 @@ namespace MgmtExtensionCommonRestOperation
         [ForwardsClientCalls]
         public static async Task<Response<TypeOneResource>> GetTypeOneAsync(this ResourceGroupResource resourceGroupResource, string typeOneName, CancellationToken cancellationToken = default)
         {
-            return await resourceGroupResource.GetTypeOnes().GetAsync(typeOneName, cancellationToken).ConfigureAwait(false);
+            return await GetMgmtExtensionCommonRestOperationResourceGroupMockingExtension(resourceGroupResource).GetTypeOneAsync(typeOneName, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -140,7 +125,7 @@ namespace MgmtExtensionCommonRestOperation
         [ForwardsClientCalls]
         public static Response<TypeOneResource> GetTypeOne(this ResourceGroupResource resourceGroupResource, string typeOneName, CancellationToken cancellationToken = default)
         {
-            return resourceGroupResource.GetTypeOnes().Get(typeOneName, cancellationToken);
+            return GetMgmtExtensionCommonRestOperationResourceGroupMockingExtension(resourceGroupResource).GetTypeOne(typeOneName, cancellationToken);
         }
 
         /// <summary> Gets a collection of TypeTwoResources in the ResourceGroupResource. </summary>
@@ -148,7 +133,7 @@ namespace MgmtExtensionCommonRestOperation
         /// <returns> An object representing collection of TypeTwoResources and their operations over a TypeTwoResource. </returns>
         public static TypeTwoCollection GetTypeTwos(this ResourceGroupResource resourceGroupResource)
         {
-            return GetResourceGroupResourceExtensionClient(resourceGroupResource).GetTypeTwos();
+            return GetMgmtExtensionCommonRestOperationResourceGroupMockingExtension(resourceGroupResource).GetTypeTwos();
         }
 
         /// <summary>
@@ -172,7 +157,7 @@ namespace MgmtExtensionCommonRestOperation
         [ForwardsClientCalls]
         public static async Task<Response<TypeTwoResource>> GetTypeTwoAsync(this ResourceGroupResource resourceGroupResource, string typeTwoName, CancellationToken cancellationToken = default)
         {
-            return await resourceGroupResource.GetTypeTwos().GetAsync(typeTwoName, cancellationToken).ConfigureAwait(false);
+            return await GetMgmtExtensionCommonRestOperationResourceGroupMockingExtension(resourceGroupResource).GetTypeTwoAsync(typeTwoName, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -196,7 +181,7 @@ namespace MgmtExtensionCommonRestOperation
         [ForwardsClientCalls]
         public static Response<TypeTwoResource> GetTypeTwo(this ResourceGroupResource resourceGroupResource, string typeTwoName, CancellationToken cancellationToken = default)
         {
-            return resourceGroupResource.GetTypeTwos().Get(typeTwoName, cancellationToken);
+            return GetMgmtExtensionCommonRestOperationResourceGroupMockingExtension(resourceGroupResource).GetTypeTwo(typeTwoName, cancellationToken);
         }
 
         /// <summary>
@@ -217,7 +202,7 @@ namespace MgmtExtensionCommonRestOperation
         /// <returns> An async collection of <see cref="TypeOneResource" /> that may take multiple service requests to iterate over. </returns>
         public static AsyncPageable<TypeOneResource> GetTypeOnesAsync(this SubscriptionResource subscriptionResource, CancellationToken cancellationToken = default)
         {
-            return GetSubscriptionResourceExtensionClient(subscriptionResource).GetTypeOnesAsync(cancellationToken);
+            return GetMgmtExtensionCommonRestOperationSubscriptionMockingExtension(subscriptionResource).GetTypeOnesAsync(cancellationToken);
         }
 
         /// <summary>
@@ -238,7 +223,7 @@ namespace MgmtExtensionCommonRestOperation
         /// <returns> A collection of <see cref="TypeOneResource" /> that may take multiple service requests to iterate over. </returns>
         public static Pageable<TypeOneResource> GetTypeOnes(this SubscriptionResource subscriptionResource, CancellationToken cancellationToken = default)
         {
-            return GetSubscriptionResourceExtensionClient(subscriptionResource).GetTypeOnes(cancellationToken);
+            return GetMgmtExtensionCommonRestOperationSubscriptionMockingExtension(subscriptionResource).GetTypeOnes(cancellationToken);
         }
 
         /// <summary>
@@ -259,7 +244,7 @@ namespace MgmtExtensionCommonRestOperation
         /// <returns> An async collection of <see cref="TypeTwoResource" /> that may take multiple service requests to iterate over. </returns>
         public static AsyncPageable<TypeTwoResource> GetTypeTwosAsync(this SubscriptionResource subscriptionResource, CancellationToken cancellationToken = default)
         {
-            return GetSubscriptionResourceExtensionClient(subscriptionResource).GetTypeTwosAsync(cancellationToken);
+            return GetMgmtExtensionCommonRestOperationSubscriptionMockingExtension(subscriptionResource).GetTypeTwosAsync(cancellationToken);
         }
 
         /// <summary>
@@ -280,7 +265,7 @@ namespace MgmtExtensionCommonRestOperation
         /// <returns> A collection of <see cref="TypeTwoResource" /> that may take multiple service requests to iterate over. </returns>
         public static Pageable<TypeTwoResource> GetTypeTwos(this SubscriptionResource subscriptionResource, CancellationToken cancellationToken = default)
         {
-            return GetSubscriptionResourceExtensionClient(subscriptionResource).GetTypeTwos(cancellationToken);
+            return GetMgmtExtensionCommonRestOperationSubscriptionMockingExtension(subscriptionResource).GetTypeTwos(cancellationToken);
         }
     }
 }

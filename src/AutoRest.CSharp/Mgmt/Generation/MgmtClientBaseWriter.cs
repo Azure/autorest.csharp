@@ -22,7 +22,6 @@ using AutoRest.CSharp.Utilities;
 using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
-using Azure.ResourceManager;
 using Azure.ResourceManager.ManagementGroups;
 using Azure.ResourceManager.Resources;
 using static AutoRest.CSharp.Mgmt.Decorator.ParameterMappingBuilder;
@@ -319,11 +318,11 @@ namespace AutoRest.CSharp.Mgmt.Generation
             _writer.Line();
             using (_writer.WriteCommonMethodWithoutValidation(methodSignature, getOperation.ReturnsDescription?.Invoke(isAsync), isAsync, This.Accessibility == "public"))
             {
-                WriteResourceEntry(resourceCollection, isAsync);
+                WriteResourceEntry(resourceCollection, methodSignature, isAsync);
             }
         }
 
-        protected virtual void WriteResourceEntry(ResourceCollection resourceCollection, bool isAsync)
+        protected virtual void WriteResourceEntry(ResourceCollection resourceCollection, MethodSignature methodSignature, bool isAsync)
         {
             var operation = resourceCollection.GetOperation;
             string awaitText = isAsync & !operation.IsPagingOperation ? " await" : string.Empty;
@@ -419,7 +418,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
         protected FormattableString ConstructClientDiagnostic(CodeWriter writer, FormattableString providerNamespace, string diagnosticsOptionsVariable)
         {
-            return $"new {typeof(ClientDiagnostics)}(\"{This.Type.Namespace}\", {providerNamespace}, {diagnosticsOptionsVariable})";
+            return $"new {typeof(ClientDiagnostics)}(\"{This.DiagnosticNamespace}\", {providerNamespace}, {diagnosticsOptionsVariable})";
         }
 
         protected FormattableString GetRestConstructorString(MgmtRestClient restClient, FormattableString? apiVersionExpression)

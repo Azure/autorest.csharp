@@ -9,9 +9,7 @@ using AutoRest.CSharp.Mgmt.Output;
 using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Output.Models.Requests;
 using AutoRest.CSharp.Output.Models.Shared;
-using AutoRest.CSharp.Utilities;
 using Azure.Core;
-using Azure.ResourceManager;
 using static AutoRest.CSharp.Output.Models.MethodSignatureModifiers;
 
 namespace AutoRest.CSharp.Mgmt.Generation
@@ -50,11 +48,9 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
         private void WriteMethodBodyWrapper(MethodSignature signature, bool isAsync, bool isPaging)
         {
-            var extensionClient = This.GetExtensionClient(null);
-
             _writer.AppendRaw("return ")
                 .AppendRawIf("await ", isAsync && !isPaging)
-                .Append($"{extensionClient.FactoryMethodName}({This.ExtensionParameter.Name}).{CreateMethodName(signature.Name, isAsync)}(");
+                .Append($"{This.ExtensionClient.FactoryMethodName}({This.ExtensionParameter.Name}).{CreateMethodName(signature.Name, isAsync)}(");
 
             foreach (var parameter in signature.Parameters.Skip(1))
             {
@@ -92,26 +88,15 @@ namespace AutoRest.CSharp.Mgmt.Generation
             }
         }
 
-        protected override void WriteResourceEntry(ResourceCollection resourceCollection, bool isAsync)
+        protected override void WriteResourceEntry(ResourceCollection resourceCollection, MethodSignature methodSignature, bool isAsync)
         {
             if (IsArmCore)
             {
-                base.WriteResourceEntry(resourceCollection, isAsync);
+                base.WriteResourceEntry(resourceCollection, methodSignature, isAsync);
             }
             else
             {
-                var operation = resourceCollection.GetOperation;
-                string awaitText = isAsync & !operation.IsPagingOperation ? " await" : string.Empty;
-                string configureAwait = isAsync & !operation.IsPagingOperation ? ".ConfigureAwait(false)" : string.Empty;
-                _writer.Append($"return{awaitText} {GetResourceCollectionMethodName(resourceCollection)}({GetResourceCollectionMethodArgumentList(resourceCollection)}).{operation.MethodSignature.WithAsync(isAsync).Name}(");
-
-                foreach (var parameter in operation.MethodSignature.Parameters)
-                {
-                    _writer.Append($"{parameter.Name},");
-                }
-
-                _writer.RemoveTrailingComma();
-                _writer.Line($"){configureAwait};");
+                WriteMethodBodyWrapper(methodSignature, isAsync, false);
             }
         }
 

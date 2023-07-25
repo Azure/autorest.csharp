@@ -12,6 +12,7 @@ using Azure;
 using Azure.Core;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Resources;
+using MgmtConstants.Mocking;
 using MgmtConstants.Models;
 
 namespace MgmtConstants
@@ -19,35 +20,19 @@ namespace MgmtConstants
     /// <summary> A class to add extension methods to MgmtConstants. </summary>
     public static partial class MgmtConstantsExtensions
     {
-        private static ResourceGroupResourceExtensionClient GetResourceGroupResourceExtensionClient(ArmResource resource)
+        private static MgmtConstantsResourceGroupMockingExtension GetMgmtConstantsResourceGroupMockingExtension(ArmResource resource)
         {
             return resource.GetCachedClient(client =>
             {
-                return new ResourceGroupResourceExtensionClient(client, resource.Id);
+                return new MgmtConstantsResourceGroupMockingExtension(client, resource.Id);
             });
         }
 
-        private static ResourceGroupResourceExtensionClient GetResourceGroupResourceExtensionClient(ArmClient client, ResourceIdentifier scope)
-        {
-            return client.GetResourceClient(() =>
-            {
-                return new ResourceGroupResourceExtensionClient(client, scope);
-            });
-        }
-
-        private static SubscriptionResourceExtensionClient GetSubscriptionResourceExtensionClient(ArmResource resource)
+        private static MgmtConstantsSubscriptionMockingExtension GetMgmtConstantsSubscriptionMockingExtension(ArmResource resource)
         {
             return resource.GetCachedClient(client =>
             {
-                return new SubscriptionResourceExtensionClient(client, resource.Id);
-            });
-        }
-
-        private static SubscriptionResourceExtensionClient GetSubscriptionResourceExtensionClient(ArmClient client, ResourceIdentifier scope)
-        {
-            return client.GetResourceClient(() =>
-            {
-                return new SubscriptionResourceExtensionClient(client, scope);
+                return new MgmtConstantsSubscriptionMockingExtension(client, resource.Id);
             });
         }
         #region OptionalMachineResource
@@ -74,7 +59,7 @@ namespace MgmtConstants
         /// <returns> An object representing collection of OptionalMachineResources and their operations over a OptionalMachineResource. </returns>
         public static OptionalMachineCollection GetOptionalMachines(this ResourceGroupResource resourceGroupResource)
         {
-            return GetResourceGroupResourceExtensionClient(resourceGroupResource).GetOptionalMachines();
+            return GetMgmtConstantsResourceGroupMockingExtension(resourceGroupResource).GetOptionalMachines();
         }
 
         /// <summary>
@@ -99,7 +84,7 @@ namespace MgmtConstants
         [ForwardsClientCalls]
         public static async Task<Response<OptionalMachineResource>> GetOptionalMachineAsync(this ResourceGroupResource resourceGroupResource, string name, OptionalMachineExpand? expand = null, CancellationToken cancellationToken = default)
         {
-            return await resourceGroupResource.GetOptionalMachines().GetAsync(name, expand, cancellationToken).ConfigureAwait(false);
+            return await GetMgmtConstantsResourceGroupMockingExtension(resourceGroupResource).GetOptionalMachineAsync(name, expand, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -124,7 +109,7 @@ namespace MgmtConstants
         [ForwardsClientCalls]
         public static Response<OptionalMachineResource> GetOptionalMachine(this ResourceGroupResource resourceGroupResource, string name, OptionalMachineExpand? expand = null, CancellationToken cancellationToken = default)
         {
-            return resourceGroupResource.GetOptionalMachines().Get(name, expand, cancellationToken);
+            return GetMgmtConstantsResourceGroupMockingExtension(resourceGroupResource).GetOptionalMachine(name, expand, cancellationToken);
         }
 
         /// <summary>
@@ -146,7 +131,7 @@ namespace MgmtConstants
         /// <returns> An async collection of <see cref="OptionalMachineResource" /> that may take multiple service requests to iterate over. </returns>
         public static AsyncPageable<OptionalMachineResource> GetOptionalMachinesAsync(this SubscriptionResource subscriptionResource, string statusOnly = null, CancellationToken cancellationToken = default)
         {
-            return GetSubscriptionResourceExtensionClient(subscriptionResource).GetOptionalMachinesAsync(statusOnly, cancellationToken);
+            return GetMgmtConstantsSubscriptionMockingExtension(subscriptionResource).GetOptionalMachinesAsync(statusOnly, cancellationToken);
         }
 
         /// <summary>
@@ -168,7 +153,7 @@ namespace MgmtConstants
         /// <returns> A collection of <see cref="OptionalMachineResource" /> that may take multiple service requests to iterate over. </returns>
         public static Pageable<OptionalMachineResource> GetOptionalMachines(this SubscriptionResource subscriptionResource, string statusOnly = null, CancellationToken cancellationToken = default)
         {
-            return GetSubscriptionResourceExtensionClient(subscriptionResource).GetOptionalMachines(statusOnly, cancellationToken);
+            return GetMgmtConstantsSubscriptionMockingExtension(subscriptionResource).GetOptionalMachines(statusOnly, cancellationToken);
         }
     }
 }

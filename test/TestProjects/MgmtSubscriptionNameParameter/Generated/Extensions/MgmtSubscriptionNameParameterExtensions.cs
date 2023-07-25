@@ -12,25 +12,18 @@ using Azure;
 using Azure.Core;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Resources;
+using MgmtSubscriptionNameParameter.Mocking;
 
 namespace MgmtSubscriptionNameParameter
 {
     /// <summary> A class to add extension methods to MgmtSubscriptionNameParameter. </summary>
     public static partial class MgmtSubscriptionNameParameterExtensions
     {
-        private static ResourceGroupResourceExtensionClient GetResourceGroupResourceExtensionClient(ArmResource resource)
+        private static MgmtSubscriptionNameParameterResourceGroupMockingExtension GetMgmtSubscriptionNameParameterResourceGroupMockingExtension(ArmResource resource)
         {
             return resource.GetCachedClient(client =>
             {
-                return new ResourceGroupResourceExtensionClient(client, resource.Id);
-            });
-        }
-
-        private static ResourceGroupResourceExtensionClient GetResourceGroupResourceExtensionClient(ArmClient client, ResourceIdentifier scope)
-        {
-            return client.GetResourceClient(() =>
-            {
-                return new ResourceGroupResourceExtensionClient(client, scope);
+                return new MgmtSubscriptionNameParameterResourceGroupMockingExtension(client, resource.Id);
             });
         }
         #region SBSubscriptionResource
@@ -57,7 +50,7 @@ namespace MgmtSubscriptionNameParameter
         /// <returns> An object representing collection of SBSubscriptionResources and their operations over a SBSubscriptionResource. </returns>
         public static SBSubscriptionCollection GetSBSubscriptions(this ResourceGroupResource resourceGroupResource)
         {
-            return GetResourceGroupResourceExtensionClient(resourceGroupResource).GetSBSubscriptions();
+            return GetMgmtSubscriptionNameParameterResourceGroupMockingExtension(resourceGroupResource).GetSBSubscriptions();
         }
 
         /// <summary>
@@ -81,7 +74,7 @@ namespace MgmtSubscriptionNameParameter
         [ForwardsClientCalls]
         public static async Task<Response<SBSubscriptionResource>> GetSBSubscriptionAsync(this ResourceGroupResource resourceGroupResource, string subscriptionName, CancellationToken cancellationToken = default)
         {
-            return await resourceGroupResource.GetSBSubscriptions().GetAsync(subscriptionName, cancellationToken).ConfigureAwait(false);
+            return await GetMgmtSubscriptionNameParameterResourceGroupMockingExtension(resourceGroupResource).GetSBSubscriptionAsync(subscriptionName, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -105,7 +98,7 @@ namespace MgmtSubscriptionNameParameter
         [ForwardsClientCalls]
         public static Response<SBSubscriptionResource> GetSBSubscription(this ResourceGroupResource resourceGroupResource, string subscriptionName, CancellationToken cancellationToken = default)
         {
-            return resourceGroupResource.GetSBSubscriptions().Get(subscriptionName, cancellationToken);
+            return GetMgmtSubscriptionNameParameterResourceGroupMockingExtension(resourceGroupResource).GetSBSubscription(subscriptionName, cancellationToken);
         }
     }
 }

@@ -11,6 +11,7 @@ using Azure;
 using Azure.Core;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Resources;
+using MgmtNonStringPathVariable.Mocking;
 using MgmtNonStringPathVariable.Models;
 
 namespace MgmtNonStringPathVariable
@@ -18,19 +19,11 @@ namespace MgmtNonStringPathVariable
     /// <summary> A class to add extension methods to MgmtNonStringPathVariable. </summary>
     public static partial class MgmtNonStringPathVariableExtensions
     {
-        private static ResourceGroupResourceExtensionClient GetResourceGroupResourceExtensionClient(ArmResource resource)
+        private static MgmtNonStringPathVariableResourceGroupMockingExtension GetMgmtNonStringPathVariableResourceGroupMockingExtension(ArmResource resource)
         {
             return resource.GetCachedClient(client =>
             {
-                return new ResourceGroupResourceExtensionClient(client, resource.Id);
-            });
-        }
-
-        private static ResourceGroupResourceExtensionClient GetResourceGroupResourceExtensionClient(ArmClient client, ResourceIdentifier scope)
-        {
-            return client.GetResourceClient(() =>
-            {
-                return new ResourceGroupResourceExtensionClient(client, scope);
+                return new MgmtNonStringPathVariableResourceGroupMockingExtension(client, resource.Id);
             });
         }
         #region FakeResource
@@ -76,7 +69,7 @@ namespace MgmtNonStringPathVariable
         /// <returns> An object representing collection of FakeResources and their operations over a FakeResource. </returns>
         public static FakeCollection GetFakes(this ResourceGroupResource resourceGroupResource)
         {
-            return GetResourceGroupResourceExtensionClient(resourceGroupResource).GetFakes();
+            return GetMgmtNonStringPathVariableResourceGroupMockingExtension(resourceGroupResource).GetFakes();
         }
 
         /// <summary>
@@ -99,7 +92,7 @@ namespace MgmtNonStringPathVariable
         [ForwardsClientCalls]
         public static async Task<Response<FakeResource>> GetFakeAsync(this ResourceGroupResource resourceGroupResource, FakeNameAsEnum fakeName, string expand = null, CancellationToken cancellationToken = default)
         {
-            return await resourceGroupResource.GetFakes().GetAsync(fakeName, expand, cancellationToken).ConfigureAwait(false);
+            return await GetMgmtNonStringPathVariableResourceGroupMockingExtension(resourceGroupResource).GetFakeAsync(fakeName, expand, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -122,7 +115,7 @@ namespace MgmtNonStringPathVariable
         [ForwardsClientCalls]
         public static Response<FakeResource> GetFake(this ResourceGroupResource resourceGroupResource, FakeNameAsEnum fakeName, string expand = null, CancellationToken cancellationToken = default)
         {
-            return resourceGroupResource.GetFakes().Get(fakeName, expand, cancellationToken);
+            return GetMgmtNonStringPathVariableResourceGroupMockingExtension(resourceGroupResource).GetFake(fakeName, expand, cancellationToken);
         }
 
         /// <summary> Gets a collection of BarResources in the ResourceGroupResource. </summary>
@@ -130,7 +123,7 @@ namespace MgmtNonStringPathVariable
         /// <returns> An object representing collection of BarResources and their operations over a BarResource. </returns>
         public static BarCollection GetBars(this ResourceGroupResource resourceGroupResource)
         {
-            return GetResourceGroupResourceExtensionClient(resourceGroupResource).GetBars();
+            return GetMgmtNonStringPathVariableResourceGroupMockingExtension(resourceGroupResource).GetBars();
         }
 
         /// <summary>
@@ -152,7 +145,7 @@ namespace MgmtNonStringPathVariable
         [ForwardsClientCalls]
         public static async Task<Response<BarResource>> GetBarAsync(this ResourceGroupResource resourceGroupResource, int barName, CancellationToken cancellationToken = default)
         {
-            return await resourceGroupResource.GetBars().GetAsync(barName, cancellationToken).ConfigureAwait(false);
+            return await GetMgmtNonStringPathVariableResourceGroupMockingExtension(resourceGroupResource).GetBarAsync(barName, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -174,7 +167,7 @@ namespace MgmtNonStringPathVariable
         [ForwardsClientCalls]
         public static Response<BarResource> GetBar(this ResourceGroupResource resourceGroupResource, int barName, CancellationToken cancellationToken = default)
         {
-            return resourceGroupResource.GetBars().Get(barName, cancellationToken);
+            return GetMgmtNonStringPathVariableResourceGroupMockingExtension(resourceGroupResource).GetBar(barName, cancellationToken);
         }
     }
 }

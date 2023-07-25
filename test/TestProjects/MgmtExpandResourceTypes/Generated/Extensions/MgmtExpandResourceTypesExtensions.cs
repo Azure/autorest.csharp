@@ -12,6 +12,7 @@ using Azure;
 using Azure.Core;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Resources;
+using MgmtExpandResourceTypes.Mocking;
 using MgmtExpandResourceTypes.Models;
 
 namespace MgmtExpandResourceTypes
@@ -19,35 +20,19 @@ namespace MgmtExpandResourceTypes
     /// <summary> A class to add extension methods to MgmtExpandResourceTypes. </summary>
     public static partial class MgmtExpandResourceTypesExtensions
     {
-        private static ResourceGroupResourceExtensionClient GetResourceGroupResourceExtensionClient(ArmResource resource)
+        private static MgmtExpandResourceTypesResourceGroupMockingExtension GetMgmtExpandResourceTypesResourceGroupMockingExtension(ArmResource resource)
         {
             return resource.GetCachedClient(client =>
             {
-                return new ResourceGroupResourceExtensionClient(client, resource.Id);
+                return new MgmtExpandResourceTypesResourceGroupMockingExtension(client, resource.Id);
             });
         }
 
-        private static ResourceGroupResourceExtensionClient GetResourceGroupResourceExtensionClient(ArmClient client, ResourceIdentifier scope)
-        {
-            return client.GetResourceClient(() =>
-            {
-                return new ResourceGroupResourceExtensionClient(client, scope);
-            });
-        }
-
-        private static SubscriptionResourceExtensionClient GetSubscriptionResourceExtensionClient(ArmResource resource)
+        private static MgmtExpandResourceTypesSubscriptionMockingExtension GetMgmtExpandResourceTypesSubscriptionMockingExtension(ArmResource resource)
         {
             return resource.GetCachedClient(client =>
             {
-                return new SubscriptionResourceExtensionClient(client, resource.Id);
-            });
-        }
-
-        private static SubscriptionResourceExtensionClient GetSubscriptionResourceExtensionClient(ArmClient client, ResourceIdentifier scope)
-        {
-            return client.GetResourceClient(() =>
-            {
-                return new SubscriptionResourceExtensionClient(client, scope);
+                return new MgmtExpandResourceTypesSubscriptionMockingExtension(client, resource.Id);
             });
         }
         #region RecordSetAResource
@@ -264,7 +249,7 @@ namespace MgmtExpandResourceTypes
         /// <returns> An object representing collection of ZoneResources and their operations over a ZoneResource. </returns>
         public static ZoneCollection GetZones(this ResourceGroupResource resourceGroupResource)
         {
-            return GetResourceGroupResourceExtensionClient(resourceGroupResource).GetZones();
+            return GetMgmtExpandResourceTypesResourceGroupMockingExtension(resourceGroupResource).GetZones();
         }
 
         /// <summary>
@@ -288,7 +273,7 @@ namespace MgmtExpandResourceTypes
         [ForwardsClientCalls]
         public static async Task<Response<ZoneResource>> GetZoneAsync(this ResourceGroupResource resourceGroupResource, string zoneName, CancellationToken cancellationToken = default)
         {
-            return await resourceGroupResource.GetZones().GetAsync(zoneName, cancellationToken).ConfigureAwait(false);
+            return await GetMgmtExpandResourceTypesResourceGroupMockingExtension(resourceGroupResource).GetZoneAsync(zoneName, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -312,7 +297,7 @@ namespace MgmtExpandResourceTypes
         [ForwardsClientCalls]
         public static Response<ZoneResource> GetZone(this ResourceGroupResource resourceGroupResource, string zoneName, CancellationToken cancellationToken = default)
         {
-            return resourceGroupResource.GetZones().Get(zoneName, cancellationToken);
+            return GetMgmtExpandResourceTypesResourceGroupMockingExtension(resourceGroupResource).GetZone(zoneName, cancellationToken);
         }
 
         /// <summary>
@@ -334,7 +319,7 @@ namespace MgmtExpandResourceTypes
         /// <returns> An async collection of <see cref="ZoneResource" /> that may take multiple service requests to iterate over. </returns>
         public static AsyncPageable<ZoneResource> GetZonesByDnszoneAsync(this SubscriptionResource subscriptionResource, int? top = null, CancellationToken cancellationToken = default)
         {
-            return GetSubscriptionResourceExtensionClient(subscriptionResource).GetZonesByDnszoneAsync(top, cancellationToken);
+            return GetMgmtExpandResourceTypesSubscriptionMockingExtension(subscriptionResource).GetZonesByDnszoneAsync(top, cancellationToken);
         }
 
         /// <summary>
@@ -356,7 +341,7 @@ namespace MgmtExpandResourceTypes
         /// <returns> A collection of <see cref="ZoneResource" /> that may take multiple service requests to iterate over. </returns>
         public static Pageable<ZoneResource> GetZonesByDnszone(this SubscriptionResource subscriptionResource, int? top = null, CancellationToken cancellationToken = default)
         {
-            return GetSubscriptionResourceExtensionClient(subscriptionResource).GetZonesByDnszone(top, cancellationToken);
+            return GetMgmtExpandResourceTypesSubscriptionMockingExtension(subscriptionResource).GetZonesByDnszone(top, cancellationToken);
         }
 
         /// <summary>
@@ -380,7 +365,7 @@ namespace MgmtExpandResourceTypes
         {
             Argument.AssertNotNull(content, nameof(content));
 
-            return await GetSubscriptionResourceExtensionClient(subscriptionResource).GetByTargetResourcesDnsResourceReferenceAsync(content, cancellationToken).ConfigureAwait(false);
+            return await GetMgmtExpandResourceTypesSubscriptionMockingExtension(subscriptionResource).GetByTargetResourcesDnsResourceReferenceAsync(content, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -404,7 +389,7 @@ namespace MgmtExpandResourceTypes
         {
             Argument.AssertNotNull(content, nameof(content));
 
-            return GetSubscriptionResourceExtensionClient(subscriptionResource).GetByTargetResourcesDnsResourceReference(content, cancellationToken);
+            return GetMgmtExpandResourceTypesSubscriptionMockingExtension(subscriptionResource).GetByTargetResourcesDnsResourceReference(content, cancellationToken);
         }
     }
 }

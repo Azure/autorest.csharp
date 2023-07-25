@@ -12,6 +12,7 @@ using Azure;
 using Azure.Core;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Resources;
+using MgmtExactMatchInheritance.Mocking;
 using MgmtExactMatchInheritance.Models;
 
 namespace MgmtExactMatchInheritance
@@ -19,19 +20,11 @@ namespace MgmtExactMatchInheritance
     /// <summary> A class to add extension methods to MgmtExactMatchInheritance. </summary>
     public static partial class MgmtExactMatchInheritanceExtensions
     {
-        private static ResourceGroupResourceExtensionClient GetResourceGroupResourceExtensionClient(ArmResource resource)
+        private static MgmtExactMatchInheritanceResourceGroupMockingExtension GetMgmtExactMatchInheritanceResourceGroupMockingExtension(ArmResource resource)
         {
             return resource.GetCachedClient(client =>
             {
-                return new ResourceGroupResourceExtensionClient(client, resource.Id);
-            });
-        }
-
-        private static ResourceGroupResourceExtensionClient GetResourceGroupResourceExtensionClient(ArmClient client, ResourceIdentifier scope)
-        {
-            return client.GetResourceClient(() =>
-            {
-                return new ResourceGroupResourceExtensionClient(client, scope);
+                return new MgmtExactMatchInheritanceResourceGroupMockingExtension(client, resource.Id);
             });
         }
         #region ExactMatchModel1Resource
@@ -77,7 +70,7 @@ namespace MgmtExactMatchInheritance
         /// <returns> An object representing collection of ExactMatchModel1Resources and their operations over a ExactMatchModel1Resource. </returns>
         public static ExactMatchModel1Collection GetExactMatchModel1s(this ResourceGroupResource resourceGroupResource)
         {
-            return GetResourceGroupResourceExtensionClient(resourceGroupResource).GetExactMatchModel1s();
+            return GetMgmtExactMatchInheritanceResourceGroupMockingExtension(resourceGroupResource).GetExactMatchModel1s();
         }
 
         /// <summary>
@@ -100,7 +93,7 @@ namespace MgmtExactMatchInheritance
         [ForwardsClientCalls]
         public static async Task<Response<ExactMatchModel1Resource>> GetExactMatchModel1Async(this ResourceGroupResource resourceGroupResource, string exactMatchModel1SName, CancellationToken cancellationToken = default)
         {
-            return await resourceGroupResource.GetExactMatchModel1s().GetAsync(exactMatchModel1SName, cancellationToken).ConfigureAwait(false);
+            return await GetMgmtExactMatchInheritanceResourceGroupMockingExtension(resourceGroupResource).GetExactMatchModel1Async(exactMatchModel1SName, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -123,7 +116,7 @@ namespace MgmtExactMatchInheritance
         [ForwardsClientCalls]
         public static Response<ExactMatchModel1Resource> GetExactMatchModel1(this ResourceGroupResource resourceGroupResource, string exactMatchModel1SName, CancellationToken cancellationToken = default)
         {
-            return resourceGroupResource.GetExactMatchModel1s().Get(exactMatchModel1SName, cancellationToken);
+            return GetMgmtExactMatchInheritanceResourceGroupMockingExtension(resourceGroupResource).GetExactMatchModel1(exactMatchModel1SName, cancellationToken);
         }
 
         /// <summary> Gets a collection of ExactMatchModel5Resources in the ResourceGroupResource. </summary>
@@ -131,7 +124,7 @@ namespace MgmtExactMatchInheritance
         /// <returns> An object representing collection of ExactMatchModel5Resources and their operations over a ExactMatchModel5Resource. </returns>
         public static ExactMatchModel5Collection GetExactMatchModel5s(this ResourceGroupResource resourceGroupResource)
         {
-            return GetResourceGroupResourceExtensionClient(resourceGroupResource).GetExactMatchModel5s();
+            return GetMgmtExactMatchInheritanceResourceGroupMockingExtension(resourceGroupResource).GetExactMatchModel5s();
         }
 
         /// <summary>
@@ -154,7 +147,7 @@ namespace MgmtExactMatchInheritance
         [ForwardsClientCalls]
         public static async Task<Response<ExactMatchModel5Resource>> GetExactMatchModel5Async(this ResourceGroupResource resourceGroupResource, string exactMatchModel5SName, CancellationToken cancellationToken = default)
         {
-            return await resourceGroupResource.GetExactMatchModel5s().GetAsync(exactMatchModel5SName, cancellationToken).ConfigureAwait(false);
+            return await GetMgmtExactMatchInheritanceResourceGroupMockingExtension(resourceGroupResource).GetExactMatchModel5Async(exactMatchModel5SName, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -177,7 +170,7 @@ namespace MgmtExactMatchInheritance
         [ForwardsClientCalls]
         public static Response<ExactMatchModel5Resource> GetExactMatchModel5(this ResourceGroupResource resourceGroupResource, string exactMatchModel5SName, CancellationToken cancellationToken = default)
         {
-            return resourceGroupResource.GetExactMatchModel5s().Get(exactMatchModel5SName, cancellationToken);
+            return GetMgmtExactMatchInheritanceResourceGroupMockingExtension(resourceGroupResource).GetExactMatchModel5(exactMatchModel5SName, cancellationToken);
         }
 
         /// <summary>
@@ -203,7 +196,7 @@ namespace MgmtExactMatchInheritance
             Argument.AssertNotNullOrEmpty(exactMatchModel2SName, nameof(exactMatchModel2SName));
             Argument.AssertNotNull(exactMatchModel2, nameof(exactMatchModel2));
 
-            return await GetResourceGroupResourceExtensionClient(resourceGroupResource).PutExactMatchModel2Async(exactMatchModel2SName, exactMatchModel2, cancellationToken).ConfigureAwait(false);
+            return await GetMgmtExactMatchInheritanceResourceGroupMockingExtension(resourceGroupResource).PutExactMatchModel2Async(exactMatchModel2SName, exactMatchModel2, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -229,7 +222,7 @@ namespace MgmtExactMatchInheritance
             Argument.AssertNotNullOrEmpty(exactMatchModel2SName, nameof(exactMatchModel2SName));
             Argument.AssertNotNull(exactMatchModel2, nameof(exactMatchModel2));
 
-            return GetResourceGroupResourceExtensionClient(resourceGroupResource).PutExactMatchModel2(exactMatchModel2SName, exactMatchModel2, cancellationToken);
+            return GetMgmtExactMatchInheritanceResourceGroupMockingExtension(resourceGroupResource).PutExactMatchModel2(exactMatchModel2SName, exactMatchModel2, cancellationToken);
         }
 
         /// <summary>
@@ -249,7 +242,7 @@ namespace MgmtExactMatchInheritance
         /// <returns> An async collection of <see cref="ExactMatchModel3" /> that may take multiple service requests to iterate over. </returns>
         public static AsyncPageable<ExactMatchModel3> GetExactMatchModel3sAsync(this ResourceGroupResource resourceGroupResource, CancellationToken cancellationToken = default)
         {
-            return GetResourceGroupResourceExtensionClient(resourceGroupResource).GetExactMatchModel3sAsync(cancellationToken);
+            return GetMgmtExactMatchInheritanceResourceGroupMockingExtension(resourceGroupResource).GetExactMatchModel3sAsync(cancellationToken);
         }
 
         /// <summary>
@@ -269,7 +262,7 @@ namespace MgmtExactMatchInheritance
         /// <returns> A collection of <see cref="ExactMatchModel3" /> that may take multiple service requests to iterate over. </returns>
         public static Pageable<ExactMatchModel3> GetExactMatchModel3s(this ResourceGroupResource resourceGroupResource, CancellationToken cancellationToken = default)
         {
-            return GetResourceGroupResourceExtensionClient(resourceGroupResource).GetExactMatchModel3s(cancellationToken);
+            return GetMgmtExactMatchInheritanceResourceGroupMockingExtension(resourceGroupResource).GetExactMatchModel3s(cancellationToken);
         }
 
         /// <summary>
@@ -295,7 +288,7 @@ namespace MgmtExactMatchInheritance
             Argument.AssertNotNullOrEmpty(exactMatchModel3SName, nameof(exactMatchModel3SName));
             Argument.AssertNotNull(exactMatchModel3, nameof(exactMatchModel3));
 
-            return await GetResourceGroupResourceExtensionClient(resourceGroupResource).PutExactMatchModel3Async(exactMatchModel3SName, exactMatchModel3, cancellationToken).ConfigureAwait(false);
+            return await GetMgmtExactMatchInheritanceResourceGroupMockingExtension(resourceGroupResource).PutExactMatchModel3Async(exactMatchModel3SName, exactMatchModel3, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -321,7 +314,7 @@ namespace MgmtExactMatchInheritance
             Argument.AssertNotNullOrEmpty(exactMatchModel3SName, nameof(exactMatchModel3SName));
             Argument.AssertNotNull(exactMatchModel3, nameof(exactMatchModel3));
 
-            return GetResourceGroupResourceExtensionClient(resourceGroupResource).PutExactMatchModel3(exactMatchModel3SName, exactMatchModel3, cancellationToken);
+            return GetMgmtExactMatchInheritanceResourceGroupMockingExtension(resourceGroupResource).PutExactMatchModel3(exactMatchModel3SName, exactMatchModel3, cancellationToken);
         }
 
         /// <summary>
@@ -345,7 +338,7 @@ namespace MgmtExactMatchInheritance
         {
             Argument.AssertNotNullOrEmpty(exactMatchModel3SName, nameof(exactMatchModel3SName));
 
-            return await GetResourceGroupResourceExtensionClient(resourceGroupResource).GetExactMatchModel3Async(exactMatchModel3SName, cancellationToken).ConfigureAwait(false);
+            return await GetMgmtExactMatchInheritanceResourceGroupMockingExtension(resourceGroupResource).GetExactMatchModel3Async(exactMatchModel3SName, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -369,7 +362,7 @@ namespace MgmtExactMatchInheritance
         {
             Argument.AssertNotNullOrEmpty(exactMatchModel3SName, nameof(exactMatchModel3SName));
 
-            return GetResourceGroupResourceExtensionClient(resourceGroupResource).GetExactMatchModel3(exactMatchModel3SName, cancellationToken);
+            return GetMgmtExactMatchInheritanceResourceGroupMockingExtension(resourceGroupResource).GetExactMatchModel3(exactMatchModel3SName, cancellationToken);
         }
 
         /// <summary>
@@ -395,7 +388,7 @@ namespace MgmtExactMatchInheritance
             Argument.AssertNotNullOrEmpty(exactMatchModel4SName, nameof(exactMatchModel4SName));
             Argument.AssertNotNull(exactMatchModel4, nameof(exactMatchModel4));
 
-            return await GetResourceGroupResourceExtensionClient(resourceGroupResource).PutExactMatchModel4Async(exactMatchModel4SName, exactMatchModel4, cancellationToken).ConfigureAwait(false);
+            return await GetMgmtExactMatchInheritanceResourceGroupMockingExtension(resourceGroupResource).PutExactMatchModel4Async(exactMatchModel4SName, exactMatchModel4, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -421,7 +414,7 @@ namespace MgmtExactMatchInheritance
             Argument.AssertNotNullOrEmpty(exactMatchModel4SName, nameof(exactMatchModel4SName));
             Argument.AssertNotNull(exactMatchModel4, nameof(exactMatchModel4));
 
-            return GetResourceGroupResourceExtensionClient(resourceGroupResource).PutExactMatchModel4(exactMatchModel4SName, exactMatchModel4, cancellationToken);
+            return GetMgmtExactMatchInheritanceResourceGroupMockingExtension(resourceGroupResource).PutExactMatchModel4(exactMatchModel4SName, exactMatchModel4, cancellationToken);
         }
     }
 }

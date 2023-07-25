@@ -12,25 +12,18 @@ using Azure;
 using Azure.Core;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Resources;
+using MgmtMultipleParentResource.Mocking;
 
 namespace MgmtMultipleParentResource
 {
     /// <summary> A class to add extension methods to MgmtMultipleParentResource. </summary>
     public static partial class MgmtMultipleParentResourceExtensions
     {
-        private static ResourceGroupResourceExtensionClient GetResourceGroupResourceExtensionClient(ArmResource resource)
+        private static MgmtMultipleParentResourceResourceGroupMockingExtension GetMgmtMultipleParentResourceResourceGroupMockingExtension(ArmResource resource)
         {
             return resource.GetCachedClient(client =>
             {
-                return new ResourceGroupResourceExtensionClient(client, resource.Id);
-            });
-        }
-
-        private static ResourceGroupResourceExtensionClient GetResourceGroupResourceExtensionClient(ArmClient client, ResourceIdentifier scope)
-        {
-            return client.GetResourceClient(() =>
-            {
-                return new ResourceGroupResourceExtensionClient(client, scope);
+                return new MgmtMultipleParentResourceResourceGroupMockingExtension(client, resource.Id);
             });
         }
         #region AnotherParentResource
@@ -133,7 +126,7 @@ namespace MgmtMultipleParentResource
         /// <returns> An object representing collection of AnotherParentResources and their operations over a AnotherParentResource. </returns>
         public static AnotherParentCollection GetAnotherParents(this ResourceGroupResource resourceGroupResource)
         {
-            return GetResourceGroupResourceExtensionClient(resourceGroupResource).GetAnotherParents();
+            return GetMgmtMultipleParentResourceResourceGroupMockingExtension(resourceGroupResource).GetAnotherParents();
         }
 
         /// <summary>
@@ -158,7 +151,7 @@ namespace MgmtMultipleParentResource
         [ForwardsClientCalls]
         public static async Task<Response<AnotherParentResource>> GetAnotherParentAsync(this ResourceGroupResource resourceGroupResource, string anotherName, string expand = null, CancellationToken cancellationToken = default)
         {
-            return await resourceGroupResource.GetAnotherParents().GetAsync(anotherName, expand, cancellationToken).ConfigureAwait(false);
+            return await GetMgmtMultipleParentResourceResourceGroupMockingExtension(resourceGroupResource).GetAnotherParentAsync(anotherName, expand, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -183,7 +176,7 @@ namespace MgmtMultipleParentResource
         [ForwardsClientCalls]
         public static Response<AnotherParentResource> GetAnotherParent(this ResourceGroupResource resourceGroupResource, string anotherName, string expand = null, CancellationToken cancellationToken = default)
         {
-            return resourceGroupResource.GetAnotherParents().Get(anotherName, expand, cancellationToken);
+            return GetMgmtMultipleParentResourceResourceGroupMockingExtension(resourceGroupResource).GetAnotherParent(anotherName, expand, cancellationToken);
         }
 
         /// <summary> Gets a collection of TheParentResources in the ResourceGroupResource. </summary>
@@ -191,7 +184,7 @@ namespace MgmtMultipleParentResource
         /// <returns> An object representing collection of TheParentResources and their operations over a TheParentResource. </returns>
         public static TheParentCollection GetTheParents(this ResourceGroupResource resourceGroupResource)
         {
-            return GetResourceGroupResourceExtensionClient(resourceGroupResource).GetTheParents();
+            return GetMgmtMultipleParentResourceResourceGroupMockingExtension(resourceGroupResource).GetTheParents();
         }
 
         /// <summary>
@@ -216,7 +209,7 @@ namespace MgmtMultipleParentResource
         [ForwardsClientCalls]
         public static async Task<Response<TheParentResource>> GetTheParentAsync(this ResourceGroupResource resourceGroupResource, string theParentName, string expand = null, CancellationToken cancellationToken = default)
         {
-            return await resourceGroupResource.GetTheParents().GetAsync(theParentName, expand, cancellationToken).ConfigureAwait(false);
+            return await GetMgmtMultipleParentResourceResourceGroupMockingExtension(resourceGroupResource).GetTheParentAsync(theParentName, expand, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -241,7 +234,7 @@ namespace MgmtMultipleParentResource
         [ForwardsClientCalls]
         public static Response<TheParentResource> GetTheParent(this ResourceGroupResource resourceGroupResource, string theParentName, string expand = null, CancellationToken cancellationToken = default)
         {
-            return resourceGroupResource.GetTheParents().Get(theParentName, expand, cancellationToken);
+            return GetMgmtMultipleParentResourceResourceGroupMockingExtension(resourceGroupResource).GetTheParent(theParentName, expand, cancellationToken);
         }
     }
 }

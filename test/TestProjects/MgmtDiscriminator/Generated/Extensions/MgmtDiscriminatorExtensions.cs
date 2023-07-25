@@ -12,25 +12,18 @@ using Azure;
 using Azure.Core;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Resources;
+using MgmtDiscriminator.Mocking;
 
 namespace MgmtDiscriminator
 {
     /// <summary> A class to add extension methods to MgmtDiscriminator. </summary>
     public static partial class MgmtDiscriminatorExtensions
     {
-        private static ResourceGroupResourceExtensionClient GetResourceGroupResourceExtensionClient(ArmResource resource)
+        private static MgmtDiscriminatorResourceGroupMockingExtension GetMgmtDiscriminatorResourceGroupMockingExtension(ArmResource resource)
         {
             return resource.GetCachedClient(client =>
             {
-                return new ResourceGroupResourceExtensionClient(client, resource.Id);
-            });
-        }
-
-        private static ResourceGroupResourceExtensionClient GetResourceGroupResourceExtensionClient(ArmClient client, ResourceIdentifier scope)
-        {
-            return client.GetResourceClient(() =>
-            {
-                return new ResourceGroupResourceExtensionClient(client, scope);
+                return new MgmtDiscriminatorResourceGroupMockingExtension(client, resource.Id);
             });
         }
         #region DeliveryRuleResource
@@ -57,7 +50,7 @@ namespace MgmtDiscriminator
         /// <returns> An object representing collection of DeliveryRuleResources and their operations over a DeliveryRuleResource. </returns>
         public static DeliveryRuleCollection GetDeliveryRules(this ResourceGroupResource resourceGroupResource)
         {
-            return GetResourceGroupResourceExtensionClient(resourceGroupResource).GetDeliveryRules();
+            return GetMgmtDiscriminatorResourceGroupMockingExtension(resourceGroupResource).GetDeliveryRules();
         }
 
         /// <summary>
@@ -81,7 +74,7 @@ namespace MgmtDiscriminator
         [ForwardsClientCalls]
         public static async Task<Response<DeliveryRuleResource>> GetDeliveryRuleAsync(this ResourceGroupResource resourceGroupResource, string name, CancellationToken cancellationToken = default)
         {
-            return await resourceGroupResource.GetDeliveryRules().GetAsync(name, cancellationToken).ConfigureAwait(false);
+            return await GetMgmtDiscriminatorResourceGroupMockingExtension(resourceGroupResource).GetDeliveryRuleAsync(name, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -105,7 +98,7 @@ namespace MgmtDiscriminator
         [ForwardsClientCalls]
         public static Response<DeliveryRuleResource> GetDeliveryRule(this ResourceGroupResource resourceGroupResource, string name, CancellationToken cancellationToken = default)
         {
-            return resourceGroupResource.GetDeliveryRules().Get(name, cancellationToken);
+            return GetMgmtDiscriminatorResourceGroupMockingExtension(resourceGroupResource).GetDeliveryRule(name, cancellationToken);
         }
     }
 }

@@ -13,6 +13,7 @@ using Azure.Core;
 using Azure.ResourceManager;
 using Azure.ResourceManager.ManagementGroups;
 using Azure.ResourceManager.Resources;
+using MgmtListMethods.Mocking;
 using MgmtListMethods.Models;
 
 namespace MgmtListMethods
@@ -20,67 +21,35 @@ namespace MgmtListMethods
     /// <summary> A class to add extension methods to MgmtListMethods. </summary>
     public static partial class MgmtListMethodsExtensions
     {
-        private static ManagementGroupResourceExtensionClient GetManagementGroupResourceExtensionClient(ArmResource resource)
+        private static MgmtListMethodsManagementGroupMockingExtension GetMgmtListMethodsManagementGroupMockingExtension(ArmResource resource)
         {
             return resource.GetCachedClient(client =>
             {
-                return new ManagementGroupResourceExtensionClient(client, resource.Id);
+                return new MgmtListMethodsManagementGroupMockingExtension(client, resource.Id);
             });
         }
 
-        private static ManagementGroupResourceExtensionClient GetManagementGroupResourceExtensionClient(ArmClient client, ResourceIdentifier scope)
-        {
-            return client.GetResourceClient(() =>
-            {
-                return new ManagementGroupResourceExtensionClient(client, scope);
-            });
-        }
-
-        private static ResourceGroupResourceExtensionClient GetResourceGroupResourceExtensionClient(ArmResource resource)
+        private static MgmtListMethodsResourceGroupMockingExtension GetMgmtListMethodsResourceGroupMockingExtension(ArmResource resource)
         {
             return resource.GetCachedClient(client =>
             {
-                return new ResourceGroupResourceExtensionClient(client, resource.Id);
+                return new MgmtListMethodsResourceGroupMockingExtension(client, resource.Id);
             });
         }
 
-        private static ResourceGroupResourceExtensionClient GetResourceGroupResourceExtensionClient(ArmClient client, ResourceIdentifier scope)
-        {
-            return client.GetResourceClient(() =>
-            {
-                return new ResourceGroupResourceExtensionClient(client, scope);
-            });
-        }
-
-        private static SubscriptionResourceExtensionClient GetSubscriptionResourceExtensionClient(ArmResource resource)
+        private static MgmtListMethodsSubscriptionMockingExtension GetMgmtListMethodsSubscriptionMockingExtension(ArmResource resource)
         {
             return resource.GetCachedClient(client =>
             {
-                return new SubscriptionResourceExtensionClient(client, resource.Id);
+                return new MgmtListMethodsSubscriptionMockingExtension(client, resource.Id);
             });
         }
 
-        private static SubscriptionResourceExtensionClient GetSubscriptionResourceExtensionClient(ArmClient client, ResourceIdentifier scope)
-        {
-            return client.GetResourceClient(() =>
-            {
-                return new SubscriptionResourceExtensionClient(client, scope);
-            });
-        }
-
-        private static TenantResourceExtensionClient GetTenantResourceExtensionClient(ArmResource resource)
+        private static MgmtListMethodsTenantMockingExtension GetMgmtListMethodsTenantMockingExtension(ArmResource resource)
         {
             return resource.GetCachedClient(client =>
             {
-                return new TenantResourceExtensionClient(client, resource.Id);
-            });
-        }
-
-        private static TenantResourceExtensionClient GetTenantResourceExtensionClient(ArmClient client, ResourceIdentifier scope)
-        {
-            return client.GetResourceClient(() =>
-            {
-                return new TenantResourceExtensionClient(client, scope);
+                return new MgmtListMethodsTenantMockingExtension(client, resource.Id);
             });
         }
         #region FakeResource
@@ -601,7 +570,7 @@ namespace MgmtListMethods
         /// <returns> An object representing collection of MgmtGrpParentWithNonResChWithLocResources and their operations over a MgmtGrpParentWithNonResChWithLocResource. </returns>
         public static MgmtGrpParentWithNonResChWithLocCollection GetMgmtGrpParentWithNonResChWithLocs(this ManagementGroupResource managementGroupResource)
         {
-            return GetManagementGroupResourceExtensionClient(managementGroupResource).GetMgmtGrpParentWithNonResChWithLocs();
+            return GetMgmtListMethodsManagementGroupMockingExtension(managementGroupResource).GetMgmtGrpParentWithNonResChWithLocs();
         }
 
         /// <summary>
@@ -625,7 +594,7 @@ namespace MgmtListMethods
         [ForwardsClientCalls]
         public static async Task<Response<MgmtGrpParentWithNonResChWithLocResource>> GetMgmtGrpParentWithNonResChWithLocAsync(this ManagementGroupResource managementGroupResource, string mgmtGrpParentWithNonResChWithLocName, CancellationToken cancellationToken = default)
         {
-            return await managementGroupResource.GetMgmtGrpParentWithNonResChWithLocs().GetAsync(mgmtGrpParentWithNonResChWithLocName, cancellationToken).ConfigureAwait(false);
+            return await GetMgmtListMethodsManagementGroupMockingExtension(managementGroupResource).GetMgmtGrpParentWithNonResChWithLocAsync(mgmtGrpParentWithNonResChWithLocName, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -649,7 +618,7 @@ namespace MgmtListMethods
         [ForwardsClientCalls]
         public static Response<MgmtGrpParentWithNonResChWithLocResource> GetMgmtGrpParentWithNonResChWithLoc(this ManagementGroupResource managementGroupResource, string mgmtGrpParentWithNonResChWithLocName, CancellationToken cancellationToken = default)
         {
-            return managementGroupResource.GetMgmtGrpParentWithNonResChWithLocs().Get(mgmtGrpParentWithNonResChWithLocName, cancellationToken);
+            return GetMgmtListMethodsManagementGroupMockingExtension(managementGroupResource).GetMgmtGrpParentWithNonResChWithLoc(mgmtGrpParentWithNonResChWithLocName, cancellationToken);
         }
 
         /// <summary> Gets a collection of MgmtGrpParentWithNonResChResources in the ManagementGroupResource. </summary>
@@ -657,7 +626,7 @@ namespace MgmtListMethods
         /// <returns> An object representing collection of MgmtGrpParentWithNonResChResources and their operations over a MgmtGrpParentWithNonResChResource. </returns>
         public static MgmtGrpParentWithNonResChCollection GetMgmtGrpParentWithNonResChes(this ManagementGroupResource managementGroupResource)
         {
-            return GetManagementGroupResourceExtensionClient(managementGroupResource).GetMgmtGrpParentWithNonResChes();
+            return GetMgmtListMethodsManagementGroupMockingExtension(managementGroupResource).GetMgmtGrpParentWithNonResChes();
         }
 
         /// <summary>
@@ -681,7 +650,7 @@ namespace MgmtListMethods
         [ForwardsClientCalls]
         public static async Task<Response<MgmtGrpParentWithNonResChResource>> GetMgmtGrpParentWithNonResChAsync(this ManagementGroupResource managementGroupResource, string mgmtGrpParentWithNonResChName, CancellationToken cancellationToken = default)
         {
-            return await managementGroupResource.GetMgmtGrpParentWithNonResChes().GetAsync(mgmtGrpParentWithNonResChName, cancellationToken).ConfigureAwait(false);
+            return await GetMgmtListMethodsManagementGroupMockingExtension(managementGroupResource).GetMgmtGrpParentWithNonResChAsync(mgmtGrpParentWithNonResChName, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -705,7 +674,7 @@ namespace MgmtListMethods
         [ForwardsClientCalls]
         public static Response<MgmtGrpParentWithNonResChResource> GetMgmtGrpParentWithNonResCh(this ManagementGroupResource managementGroupResource, string mgmtGrpParentWithNonResChName, CancellationToken cancellationToken = default)
         {
-            return managementGroupResource.GetMgmtGrpParentWithNonResChes().Get(mgmtGrpParentWithNonResChName, cancellationToken);
+            return GetMgmtListMethodsManagementGroupMockingExtension(managementGroupResource).GetMgmtGrpParentWithNonResCh(mgmtGrpParentWithNonResChName, cancellationToken);
         }
 
         /// <summary> Gets a collection of MgmtGrpParentWithLocResources in the ManagementGroupResource. </summary>
@@ -713,7 +682,7 @@ namespace MgmtListMethods
         /// <returns> An object representing collection of MgmtGrpParentWithLocResources and their operations over a MgmtGrpParentWithLocResource. </returns>
         public static MgmtGrpParentWithLocCollection GetMgmtGrpParentWithLocs(this ManagementGroupResource managementGroupResource)
         {
-            return GetManagementGroupResourceExtensionClient(managementGroupResource).GetMgmtGrpParentWithLocs();
+            return GetMgmtListMethodsManagementGroupMockingExtension(managementGroupResource).GetMgmtGrpParentWithLocs();
         }
 
         /// <summary>
@@ -737,7 +706,7 @@ namespace MgmtListMethods
         [ForwardsClientCalls]
         public static async Task<Response<MgmtGrpParentWithLocResource>> GetMgmtGrpParentWithLocAsync(this ManagementGroupResource managementGroupResource, string mgmtGrpParentWithLocName, CancellationToken cancellationToken = default)
         {
-            return await managementGroupResource.GetMgmtGrpParentWithLocs().GetAsync(mgmtGrpParentWithLocName, cancellationToken).ConfigureAwait(false);
+            return await GetMgmtListMethodsManagementGroupMockingExtension(managementGroupResource).GetMgmtGrpParentWithLocAsync(mgmtGrpParentWithLocName, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -761,7 +730,7 @@ namespace MgmtListMethods
         [ForwardsClientCalls]
         public static Response<MgmtGrpParentWithLocResource> GetMgmtGrpParentWithLoc(this ManagementGroupResource managementGroupResource, string mgmtGrpParentWithLocName, CancellationToken cancellationToken = default)
         {
-            return managementGroupResource.GetMgmtGrpParentWithLocs().Get(mgmtGrpParentWithLocName, cancellationToken);
+            return GetMgmtListMethodsManagementGroupMockingExtension(managementGroupResource).GetMgmtGrpParentWithLoc(mgmtGrpParentWithLocName, cancellationToken);
         }
 
         /// <summary> Gets a collection of MgmtGroupParentResources in the ManagementGroupResource. </summary>
@@ -769,7 +738,7 @@ namespace MgmtListMethods
         /// <returns> An object representing collection of MgmtGroupParentResources and their operations over a MgmtGroupParentResource. </returns>
         public static MgmtGroupParentCollection GetMgmtGroupParents(this ManagementGroupResource managementGroupResource)
         {
-            return GetManagementGroupResourceExtensionClient(managementGroupResource).GetMgmtGroupParents();
+            return GetMgmtListMethodsManagementGroupMockingExtension(managementGroupResource).GetMgmtGroupParents();
         }
 
         /// <summary>
@@ -793,7 +762,7 @@ namespace MgmtListMethods
         [ForwardsClientCalls]
         public static async Task<Response<MgmtGroupParentResource>> GetMgmtGroupParentAsync(this ManagementGroupResource managementGroupResource, string mgmtGroupParentName, CancellationToken cancellationToken = default)
         {
-            return await managementGroupResource.GetMgmtGroupParents().GetAsync(mgmtGroupParentName, cancellationToken).ConfigureAwait(false);
+            return await GetMgmtListMethodsManagementGroupMockingExtension(managementGroupResource).GetMgmtGroupParentAsync(mgmtGroupParentName, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -817,7 +786,7 @@ namespace MgmtListMethods
         [ForwardsClientCalls]
         public static Response<MgmtGroupParentResource> GetMgmtGroupParent(this ManagementGroupResource managementGroupResource, string mgmtGroupParentName, CancellationToken cancellationToken = default)
         {
-            return managementGroupResource.GetMgmtGroupParents().Get(mgmtGroupParentName, cancellationToken);
+            return GetMgmtListMethodsManagementGroupMockingExtension(managementGroupResource).GetMgmtGroupParent(mgmtGroupParentName, cancellationToken);
         }
 
         /// <summary> Gets a collection of ResGrpParentWithAncestorWithNonResChWithLocResources in the ResourceGroupResource. </summary>
@@ -825,7 +794,7 @@ namespace MgmtListMethods
         /// <returns> An object representing collection of ResGrpParentWithAncestorWithNonResChWithLocResources and their operations over a ResGrpParentWithAncestorWithNonResChWithLocResource. </returns>
         public static ResGrpParentWithAncestorWithNonResChWithLocCollection GetResGrpParentWithAncestorWithNonResChWithLocs(this ResourceGroupResource resourceGroupResource)
         {
-            return GetResourceGroupResourceExtensionClient(resourceGroupResource).GetResGrpParentWithAncestorWithNonResChWithLocs();
+            return GetMgmtListMethodsResourceGroupMockingExtension(resourceGroupResource).GetResGrpParentWithAncestorWithNonResChWithLocs();
         }
 
         /// <summary>
@@ -849,7 +818,7 @@ namespace MgmtListMethods
         [ForwardsClientCalls]
         public static async Task<Response<ResGrpParentWithAncestorWithNonResChWithLocResource>> GetResGrpParentWithAncestorWithNonResChWithLocAsync(this ResourceGroupResource resourceGroupResource, string resGrpParentWithAncestorWithNonResChWithLocName, CancellationToken cancellationToken = default)
         {
-            return await resourceGroupResource.GetResGrpParentWithAncestorWithNonResChWithLocs().GetAsync(resGrpParentWithAncestorWithNonResChWithLocName, cancellationToken).ConfigureAwait(false);
+            return await GetMgmtListMethodsResourceGroupMockingExtension(resourceGroupResource).GetResGrpParentWithAncestorWithNonResChWithLocAsync(resGrpParentWithAncestorWithNonResChWithLocName, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -873,7 +842,7 @@ namespace MgmtListMethods
         [ForwardsClientCalls]
         public static Response<ResGrpParentWithAncestorWithNonResChWithLocResource> GetResGrpParentWithAncestorWithNonResChWithLoc(this ResourceGroupResource resourceGroupResource, string resGrpParentWithAncestorWithNonResChWithLocName, CancellationToken cancellationToken = default)
         {
-            return resourceGroupResource.GetResGrpParentWithAncestorWithNonResChWithLocs().Get(resGrpParentWithAncestorWithNonResChWithLocName, cancellationToken);
+            return GetMgmtListMethodsResourceGroupMockingExtension(resourceGroupResource).GetResGrpParentWithAncestorWithNonResChWithLoc(resGrpParentWithAncestorWithNonResChWithLocName, cancellationToken);
         }
 
         /// <summary> Gets a collection of ResGrpParentWithAncestorWithNonResChResources in the ResourceGroupResource. </summary>
@@ -881,7 +850,7 @@ namespace MgmtListMethods
         /// <returns> An object representing collection of ResGrpParentWithAncestorWithNonResChResources and their operations over a ResGrpParentWithAncestorWithNonResChResource. </returns>
         public static ResGrpParentWithAncestorWithNonResChCollection GetResGrpParentWithAncestorWithNonResChes(this ResourceGroupResource resourceGroupResource)
         {
-            return GetResourceGroupResourceExtensionClient(resourceGroupResource).GetResGrpParentWithAncestorWithNonResChes();
+            return GetMgmtListMethodsResourceGroupMockingExtension(resourceGroupResource).GetResGrpParentWithAncestorWithNonResChes();
         }
 
         /// <summary>
@@ -905,7 +874,7 @@ namespace MgmtListMethods
         [ForwardsClientCalls]
         public static async Task<Response<ResGrpParentWithAncestorWithNonResChResource>> GetResGrpParentWithAncestorWithNonResChAsync(this ResourceGroupResource resourceGroupResource, string resGrpParentWithAncestorWithNonResChName, CancellationToken cancellationToken = default)
         {
-            return await resourceGroupResource.GetResGrpParentWithAncestorWithNonResChes().GetAsync(resGrpParentWithAncestorWithNonResChName, cancellationToken).ConfigureAwait(false);
+            return await GetMgmtListMethodsResourceGroupMockingExtension(resourceGroupResource).GetResGrpParentWithAncestorWithNonResChAsync(resGrpParentWithAncestorWithNonResChName, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -929,7 +898,7 @@ namespace MgmtListMethods
         [ForwardsClientCalls]
         public static Response<ResGrpParentWithAncestorWithNonResChResource> GetResGrpParentWithAncestorWithNonResCh(this ResourceGroupResource resourceGroupResource, string resGrpParentWithAncestorWithNonResChName, CancellationToken cancellationToken = default)
         {
-            return resourceGroupResource.GetResGrpParentWithAncestorWithNonResChes().Get(resGrpParentWithAncestorWithNonResChName, cancellationToken);
+            return GetMgmtListMethodsResourceGroupMockingExtension(resourceGroupResource).GetResGrpParentWithAncestorWithNonResCh(resGrpParentWithAncestorWithNonResChName, cancellationToken);
         }
 
         /// <summary> Gets a collection of ResGrpParentWithAncestorWithLocResources in the ResourceGroupResource. </summary>
@@ -937,7 +906,7 @@ namespace MgmtListMethods
         /// <returns> An object representing collection of ResGrpParentWithAncestorWithLocResources and their operations over a ResGrpParentWithAncestorWithLocResource. </returns>
         public static ResGrpParentWithAncestorWithLocCollection GetResGrpParentWithAncestorWithLocs(this ResourceGroupResource resourceGroupResource)
         {
-            return GetResourceGroupResourceExtensionClient(resourceGroupResource).GetResGrpParentWithAncestorWithLocs();
+            return GetMgmtListMethodsResourceGroupMockingExtension(resourceGroupResource).GetResGrpParentWithAncestorWithLocs();
         }
 
         /// <summary>
@@ -961,7 +930,7 @@ namespace MgmtListMethods
         [ForwardsClientCalls]
         public static async Task<Response<ResGrpParentWithAncestorWithLocResource>> GetResGrpParentWithAncestorWithLocAsync(this ResourceGroupResource resourceGroupResource, string resGrpParentWithAncestorWithLocName, CancellationToken cancellationToken = default)
         {
-            return await resourceGroupResource.GetResGrpParentWithAncestorWithLocs().GetAsync(resGrpParentWithAncestorWithLocName, cancellationToken).ConfigureAwait(false);
+            return await GetMgmtListMethodsResourceGroupMockingExtension(resourceGroupResource).GetResGrpParentWithAncestorWithLocAsync(resGrpParentWithAncestorWithLocName, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -985,7 +954,7 @@ namespace MgmtListMethods
         [ForwardsClientCalls]
         public static Response<ResGrpParentWithAncestorWithLocResource> GetResGrpParentWithAncestorWithLoc(this ResourceGroupResource resourceGroupResource, string resGrpParentWithAncestorWithLocName, CancellationToken cancellationToken = default)
         {
-            return resourceGroupResource.GetResGrpParentWithAncestorWithLocs().Get(resGrpParentWithAncestorWithLocName, cancellationToken);
+            return GetMgmtListMethodsResourceGroupMockingExtension(resourceGroupResource).GetResGrpParentWithAncestorWithLoc(resGrpParentWithAncestorWithLocName, cancellationToken);
         }
 
         /// <summary> Gets a collection of ResGrpParentWithAncestorResources in the ResourceGroupResource. </summary>
@@ -993,7 +962,7 @@ namespace MgmtListMethods
         /// <returns> An object representing collection of ResGrpParentWithAncestorResources and their operations over a ResGrpParentWithAncestorResource. </returns>
         public static ResGrpParentWithAncestorCollection GetResGrpParentWithAncestors(this ResourceGroupResource resourceGroupResource)
         {
-            return GetResourceGroupResourceExtensionClient(resourceGroupResource).GetResGrpParentWithAncestors();
+            return GetMgmtListMethodsResourceGroupMockingExtension(resourceGroupResource).GetResGrpParentWithAncestors();
         }
 
         /// <summary>
@@ -1017,7 +986,7 @@ namespace MgmtListMethods
         [ForwardsClientCalls]
         public static async Task<Response<ResGrpParentWithAncestorResource>> GetResGrpParentWithAncestorAsync(this ResourceGroupResource resourceGroupResource, string resGrpParentWithAncestorName, CancellationToken cancellationToken = default)
         {
-            return await resourceGroupResource.GetResGrpParentWithAncestors().GetAsync(resGrpParentWithAncestorName, cancellationToken).ConfigureAwait(false);
+            return await GetMgmtListMethodsResourceGroupMockingExtension(resourceGroupResource).GetResGrpParentWithAncestorAsync(resGrpParentWithAncestorName, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -1041,7 +1010,7 @@ namespace MgmtListMethods
         [ForwardsClientCalls]
         public static Response<ResGrpParentWithAncestorResource> GetResGrpParentWithAncestor(this ResourceGroupResource resourceGroupResource, string resGrpParentWithAncestorName, CancellationToken cancellationToken = default)
         {
-            return resourceGroupResource.GetResGrpParentWithAncestors().Get(resGrpParentWithAncestorName, cancellationToken);
+            return GetMgmtListMethodsResourceGroupMockingExtension(resourceGroupResource).GetResGrpParentWithAncestor(resGrpParentWithAncestorName, cancellationToken);
         }
 
         /// <summary> Gets a collection of ResGrpParentWithNonResChResources in the ResourceGroupResource. </summary>
@@ -1049,7 +1018,7 @@ namespace MgmtListMethods
         /// <returns> An object representing collection of ResGrpParentWithNonResChResources and their operations over a ResGrpParentWithNonResChResource. </returns>
         public static ResGrpParentWithNonResChCollection GetResGrpParentWithNonResChes(this ResourceGroupResource resourceGroupResource)
         {
-            return GetResourceGroupResourceExtensionClient(resourceGroupResource).GetResGrpParentWithNonResChes();
+            return GetMgmtListMethodsResourceGroupMockingExtension(resourceGroupResource).GetResGrpParentWithNonResChes();
         }
 
         /// <summary>
@@ -1073,7 +1042,7 @@ namespace MgmtListMethods
         [ForwardsClientCalls]
         public static async Task<Response<ResGrpParentWithNonResChResource>> GetResGrpParentWithNonResChAsync(this ResourceGroupResource resourceGroupResource, string resGrpParentWithNonResChName, CancellationToken cancellationToken = default)
         {
-            return await resourceGroupResource.GetResGrpParentWithNonResChes().GetAsync(resGrpParentWithNonResChName, cancellationToken).ConfigureAwait(false);
+            return await GetMgmtListMethodsResourceGroupMockingExtension(resourceGroupResource).GetResGrpParentWithNonResChAsync(resGrpParentWithNonResChName, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -1097,7 +1066,7 @@ namespace MgmtListMethods
         [ForwardsClientCalls]
         public static Response<ResGrpParentWithNonResChResource> GetResGrpParentWithNonResCh(this ResourceGroupResource resourceGroupResource, string resGrpParentWithNonResChName, CancellationToken cancellationToken = default)
         {
-            return resourceGroupResource.GetResGrpParentWithNonResChes().Get(resGrpParentWithNonResChName, cancellationToken);
+            return GetMgmtListMethodsResourceGroupMockingExtension(resourceGroupResource).GetResGrpParentWithNonResCh(resGrpParentWithNonResChName, cancellationToken);
         }
 
         /// <summary> Gets a collection of ResGrpParentResources in the ResourceGroupResource. </summary>
@@ -1105,7 +1074,7 @@ namespace MgmtListMethods
         /// <returns> An object representing collection of ResGrpParentResources and their operations over a ResGrpParentResource. </returns>
         public static ResGrpParentCollection GetResGrpParents(this ResourceGroupResource resourceGroupResource)
         {
-            return GetResourceGroupResourceExtensionClient(resourceGroupResource).GetResGrpParents();
+            return GetMgmtListMethodsResourceGroupMockingExtension(resourceGroupResource).GetResGrpParents();
         }
 
         /// <summary>
@@ -1129,7 +1098,7 @@ namespace MgmtListMethods
         [ForwardsClientCalls]
         public static async Task<Response<ResGrpParentResource>> GetResGrpParentAsync(this ResourceGroupResource resourceGroupResource, string resGrpParentName, CancellationToken cancellationToken = default)
         {
-            return await resourceGroupResource.GetResGrpParents().GetAsync(resGrpParentName, cancellationToken).ConfigureAwait(false);
+            return await GetMgmtListMethodsResourceGroupMockingExtension(resourceGroupResource).GetResGrpParentAsync(resGrpParentName, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -1153,7 +1122,7 @@ namespace MgmtListMethods
         [ForwardsClientCalls]
         public static Response<ResGrpParentResource> GetResGrpParent(this ResourceGroupResource resourceGroupResource, string resGrpParentName, CancellationToken cancellationToken = default)
         {
-            return resourceGroupResource.GetResGrpParents().Get(resGrpParentName, cancellationToken);
+            return GetMgmtListMethodsResourceGroupMockingExtension(resourceGroupResource).GetResGrpParent(resGrpParentName, cancellationToken);
         }
 
         /// <summary> Gets a collection of FakeResources in the SubscriptionResource. </summary>
@@ -1161,7 +1130,7 @@ namespace MgmtListMethods
         /// <returns> An object representing collection of FakeResources and their operations over a FakeResource. </returns>
         public static FakeCollection GetFakes(this SubscriptionResource subscriptionResource)
         {
-            return GetSubscriptionResourceExtensionClient(subscriptionResource).GetFakes();
+            return GetMgmtListMethodsSubscriptionMockingExtension(subscriptionResource).GetFakes();
         }
 
         /// <summary>
@@ -1186,7 +1155,7 @@ namespace MgmtListMethods
         [ForwardsClientCalls]
         public static async Task<Response<FakeResource>> GetFakeAsync(this SubscriptionResource subscriptionResource, string fakeName, string expand = null, CancellationToken cancellationToken = default)
         {
-            return await subscriptionResource.GetFakes().GetAsync(fakeName, expand, cancellationToken).ConfigureAwait(false);
+            return await GetMgmtListMethodsSubscriptionMockingExtension(subscriptionResource).GetFakeAsync(fakeName, expand, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -1211,7 +1180,7 @@ namespace MgmtListMethods
         [ForwardsClientCalls]
         public static Response<FakeResource> GetFake(this SubscriptionResource subscriptionResource, string fakeName, string expand = null, CancellationToken cancellationToken = default)
         {
-            return subscriptionResource.GetFakes().Get(fakeName, expand, cancellationToken);
+            return GetMgmtListMethodsSubscriptionMockingExtension(subscriptionResource).GetFake(fakeName, expand, cancellationToken);
         }
 
         /// <summary> Gets a collection of SubParentWithNonResChWithLocResources in the SubscriptionResource. </summary>
@@ -1219,7 +1188,7 @@ namespace MgmtListMethods
         /// <returns> An object representing collection of SubParentWithNonResChWithLocResources and their operations over a SubParentWithNonResChWithLocResource. </returns>
         public static SubParentWithNonResChWithLocCollection GetSubParentWithNonResChWithLocs(this SubscriptionResource subscriptionResource)
         {
-            return GetSubscriptionResourceExtensionClient(subscriptionResource).GetSubParentWithNonResChWithLocs();
+            return GetMgmtListMethodsSubscriptionMockingExtension(subscriptionResource).GetSubParentWithNonResChWithLocs();
         }
 
         /// <summary>
@@ -1243,7 +1212,7 @@ namespace MgmtListMethods
         [ForwardsClientCalls]
         public static async Task<Response<SubParentWithNonResChWithLocResource>> GetSubParentWithNonResChWithLocAsync(this SubscriptionResource subscriptionResource, string subParentWithNonResChWithLocName, CancellationToken cancellationToken = default)
         {
-            return await subscriptionResource.GetSubParentWithNonResChWithLocs().GetAsync(subParentWithNonResChWithLocName, cancellationToken).ConfigureAwait(false);
+            return await GetMgmtListMethodsSubscriptionMockingExtension(subscriptionResource).GetSubParentWithNonResChWithLocAsync(subParentWithNonResChWithLocName, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -1267,7 +1236,7 @@ namespace MgmtListMethods
         [ForwardsClientCalls]
         public static Response<SubParentWithNonResChWithLocResource> GetSubParentWithNonResChWithLoc(this SubscriptionResource subscriptionResource, string subParentWithNonResChWithLocName, CancellationToken cancellationToken = default)
         {
-            return subscriptionResource.GetSubParentWithNonResChWithLocs().Get(subParentWithNonResChWithLocName, cancellationToken);
+            return GetMgmtListMethodsSubscriptionMockingExtension(subscriptionResource).GetSubParentWithNonResChWithLoc(subParentWithNonResChWithLocName, cancellationToken);
         }
 
         /// <summary> Gets a collection of SubParentWithNonResChResources in the SubscriptionResource. </summary>
@@ -1275,7 +1244,7 @@ namespace MgmtListMethods
         /// <returns> An object representing collection of SubParentWithNonResChResources and their operations over a SubParentWithNonResChResource. </returns>
         public static SubParentWithNonResChCollection GetSubParentWithNonResChes(this SubscriptionResource subscriptionResource)
         {
-            return GetSubscriptionResourceExtensionClient(subscriptionResource).GetSubParentWithNonResChes();
+            return GetMgmtListMethodsSubscriptionMockingExtension(subscriptionResource).GetSubParentWithNonResChes();
         }
 
         /// <summary>
@@ -1299,7 +1268,7 @@ namespace MgmtListMethods
         [ForwardsClientCalls]
         public static async Task<Response<SubParentWithNonResChResource>> GetSubParentWithNonResChAsync(this SubscriptionResource subscriptionResource, string subParentWithNonResChName, CancellationToken cancellationToken = default)
         {
-            return await subscriptionResource.GetSubParentWithNonResChes().GetAsync(subParentWithNonResChName, cancellationToken).ConfigureAwait(false);
+            return await GetMgmtListMethodsSubscriptionMockingExtension(subscriptionResource).GetSubParentWithNonResChAsync(subParentWithNonResChName, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -1323,7 +1292,7 @@ namespace MgmtListMethods
         [ForwardsClientCalls]
         public static Response<SubParentWithNonResChResource> GetSubParentWithNonResCh(this SubscriptionResource subscriptionResource, string subParentWithNonResChName, CancellationToken cancellationToken = default)
         {
-            return subscriptionResource.GetSubParentWithNonResChes().Get(subParentWithNonResChName, cancellationToken);
+            return GetMgmtListMethodsSubscriptionMockingExtension(subscriptionResource).GetSubParentWithNonResCh(subParentWithNonResChName, cancellationToken);
         }
 
         /// <summary> Gets a collection of SubParentWithLocResources in the SubscriptionResource. </summary>
@@ -1331,7 +1300,7 @@ namespace MgmtListMethods
         /// <returns> An object representing collection of SubParentWithLocResources and their operations over a SubParentWithLocResource. </returns>
         public static SubParentWithLocCollection GetSubParentWithLocs(this SubscriptionResource subscriptionResource)
         {
-            return GetSubscriptionResourceExtensionClient(subscriptionResource).GetSubParentWithLocs();
+            return GetMgmtListMethodsSubscriptionMockingExtension(subscriptionResource).GetSubParentWithLocs();
         }
 
         /// <summary>
@@ -1355,7 +1324,7 @@ namespace MgmtListMethods
         [ForwardsClientCalls]
         public static async Task<Response<SubParentWithLocResource>> GetSubParentWithLocAsync(this SubscriptionResource subscriptionResource, string subParentWithLocName, CancellationToken cancellationToken = default)
         {
-            return await subscriptionResource.GetSubParentWithLocs().GetAsync(subParentWithLocName, cancellationToken).ConfigureAwait(false);
+            return await GetMgmtListMethodsSubscriptionMockingExtension(subscriptionResource).GetSubParentWithLocAsync(subParentWithLocName, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -1379,7 +1348,7 @@ namespace MgmtListMethods
         [ForwardsClientCalls]
         public static Response<SubParentWithLocResource> GetSubParentWithLoc(this SubscriptionResource subscriptionResource, string subParentWithLocName, CancellationToken cancellationToken = default)
         {
-            return subscriptionResource.GetSubParentWithLocs().Get(subParentWithLocName, cancellationToken);
+            return GetMgmtListMethodsSubscriptionMockingExtension(subscriptionResource).GetSubParentWithLoc(subParentWithLocName, cancellationToken);
         }
 
         /// <summary> Gets a collection of SubParentResources in the SubscriptionResource. </summary>
@@ -1387,7 +1356,7 @@ namespace MgmtListMethods
         /// <returns> An object representing collection of SubParentResources and their operations over a SubParentResource. </returns>
         public static SubParentCollection GetSubParents(this SubscriptionResource subscriptionResource)
         {
-            return GetSubscriptionResourceExtensionClient(subscriptionResource).GetSubParents();
+            return GetMgmtListMethodsSubscriptionMockingExtension(subscriptionResource).GetSubParents();
         }
 
         /// <summary>
@@ -1411,7 +1380,7 @@ namespace MgmtListMethods
         [ForwardsClientCalls]
         public static async Task<Response<SubParentResource>> GetSubParentAsync(this SubscriptionResource subscriptionResource, string subParentName, CancellationToken cancellationToken = default)
         {
-            return await subscriptionResource.GetSubParents().GetAsync(subParentName, cancellationToken).ConfigureAwait(false);
+            return await GetMgmtListMethodsSubscriptionMockingExtension(subscriptionResource).GetSubParentAsync(subParentName, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -1435,7 +1404,7 @@ namespace MgmtListMethods
         [ForwardsClientCalls]
         public static Response<SubParentResource> GetSubParent(this SubscriptionResource subscriptionResource, string subParentName, CancellationToken cancellationToken = default)
         {
-            return subscriptionResource.GetSubParents().Get(subParentName, cancellationToken);
+            return GetMgmtListMethodsSubscriptionMockingExtension(subscriptionResource).GetSubParent(subParentName, cancellationToken);
         }
 
         /// <summary>
@@ -1456,7 +1425,7 @@ namespace MgmtListMethods
         /// <returns> An async collection of <see cref="FakeParentWithAncestorWithNonResChWithLocResource" /> that may take multiple service requests to iterate over. </returns>
         public static AsyncPageable<FakeParentWithAncestorWithNonResChWithLocResource> GetFakeParentWithAncestorWithNonResourceChWithLocAsync(this SubscriptionResource subscriptionResource, CancellationToken cancellationToken = default)
         {
-            return GetSubscriptionResourceExtensionClient(subscriptionResource).GetFakeParentWithAncestorWithNonResourceChWithLocAsync(cancellationToken);
+            return GetMgmtListMethodsSubscriptionMockingExtension(subscriptionResource).GetFakeParentWithAncestorWithNonResourceChWithLocAsync(cancellationToken);
         }
 
         /// <summary>
@@ -1477,7 +1446,7 @@ namespace MgmtListMethods
         /// <returns> A collection of <see cref="FakeParentWithAncestorWithNonResChWithLocResource" /> that may take multiple service requests to iterate over. </returns>
         public static Pageable<FakeParentWithAncestorWithNonResChWithLocResource> GetFakeParentWithAncestorWithNonResourceChWithLoc(this SubscriptionResource subscriptionResource, CancellationToken cancellationToken = default)
         {
-            return GetSubscriptionResourceExtensionClient(subscriptionResource).GetFakeParentWithAncestorWithNonResourceChWithLoc(cancellationToken);
+            return GetMgmtListMethodsSubscriptionMockingExtension(subscriptionResource).GetFakeParentWithAncestorWithNonResourceChWithLoc(cancellationToken);
         }
 
         /// <summary>
@@ -1503,7 +1472,7 @@ namespace MgmtListMethods
         {
             Argument.AssertNotNullOrEmpty(location, nameof(location));
 
-            return GetSubscriptionResourceExtensionClient(subscriptionResource).GetTestByLocationsFakeParentWithAncestorWithNonResChWithLocsAsync(location, cancellationToken);
+            return GetMgmtListMethodsSubscriptionMockingExtension(subscriptionResource).GetTestByLocationsFakeParentWithAncestorWithNonResChWithLocsAsync(location, cancellationToken);
         }
 
         /// <summary>
@@ -1529,7 +1498,7 @@ namespace MgmtListMethods
         {
             Argument.AssertNotNullOrEmpty(location, nameof(location));
 
-            return GetSubscriptionResourceExtensionClient(subscriptionResource).GetTestByLocationsFakeParentWithAncestorWithNonResChWithLocs(location, cancellationToken);
+            return GetMgmtListMethodsSubscriptionMockingExtension(subscriptionResource).GetTestByLocationsFakeParentWithAncestorWithNonResChWithLocs(location, cancellationToken);
         }
 
         /// <summary>
@@ -1550,7 +1519,7 @@ namespace MgmtListMethods
         /// <returns> An async collection of <see cref="FakeParentWithAncestorWithNonResChResource" /> that may take multiple service requests to iterate over. </returns>
         public static AsyncPageable<FakeParentWithAncestorWithNonResChResource> GetFakeParentWithAncestorWithNonResChesAsync(this SubscriptionResource subscriptionResource, CancellationToken cancellationToken = default)
         {
-            return GetSubscriptionResourceExtensionClient(subscriptionResource).GetFakeParentWithAncestorWithNonResChesAsync(cancellationToken);
+            return GetMgmtListMethodsSubscriptionMockingExtension(subscriptionResource).GetFakeParentWithAncestorWithNonResChesAsync(cancellationToken);
         }
 
         /// <summary>
@@ -1571,7 +1540,7 @@ namespace MgmtListMethods
         /// <returns> A collection of <see cref="FakeParentWithAncestorWithNonResChResource" /> that may take multiple service requests to iterate over. </returns>
         public static Pageable<FakeParentWithAncestorWithNonResChResource> GetFakeParentWithAncestorWithNonResChes(this SubscriptionResource subscriptionResource, CancellationToken cancellationToken = default)
         {
-            return GetSubscriptionResourceExtensionClient(subscriptionResource).GetFakeParentWithAncestorWithNonResChes(cancellationToken);
+            return GetMgmtListMethodsSubscriptionMockingExtension(subscriptionResource).GetFakeParentWithAncestorWithNonResChes(cancellationToken);
         }
 
         /// <summary>
@@ -1592,7 +1561,7 @@ namespace MgmtListMethods
         /// <returns> An async collection of <see cref="FakeParentWithAncestorWithLocResource" /> that may take multiple service requests to iterate over. </returns>
         public static AsyncPageable<FakeParentWithAncestorWithLocResource> GetFakeParentWithAncestorWithLocsAsync(this SubscriptionResource subscriptionResource, CancellationToken cancellationToken = default)
         {
-            return GetSubscriptionResourceExtensionClient(subscriptionResource).GetFakeParentWithAncestorWithLocsAsync(cancellationToken);
+            return GetMgmtListMethodsSubscriptionMockingExtension(subscriptionResource).GetFakeParentWithAncestorWithLocsAsync(cancellationToken);
         }
 
         /// <summary>
@@ -1613,7 +1582,7 @@ namespace MgmtListMethods
         /// <returns> A collection of <see cref="FakeParentWithAncestorWithLocResource" /> that may take multiple service requests to iterate over. </returns>
         public static Pageable<FakeParentWithAncestorWithLocResource> GetFakeParentWithAncestorWithLocs(this SubscriptionResource subscriptionResource, CancellationToken cancellationToken = default)
         {
-            return GetSubscriptionResourceExtensionClient(subscriptionResource).GetFakeParentWithAncestorWithLocs(cancellationToken);
+            return GetMgmtListMethodsSubscriptionMockingExtension(subscriptionResource).GetFakeParentWithAncestorWithLocs(cancellationToken);
         }
 
         /// <summary>
@@ -1639,7 +1608,7 @@ namespace MgmtListMethods
         {
             Argument.AssertNotNullOrEmpty(location, nameof(location));
 
-            return GetSubscriptionResourceExtensionClient(subscriptionResource).GetFakeParentWithAncestorWithLocsByLocationAsync(location, cancellationToken);
+            return GetMgmtListMethodsSubscriptionMockingExtension(subscriptionResource).GetFakeParentWithAncestorWithLocsByLocationAsync(location, cancellationToken);
         }
 
         /// <summary>
@@ -1665,7 +1634,7 @@ namespace MgmtListMethods
         {
             Argument.AssertNotNullOrEmpty(location, nameof(location));
 
-            return GetSubscriptionResourceExtensionClient(subscriptionResource).GetFakeParentWithAncestorWithLocsByLocation(location, cancellationToken);
+            return GetMgmtListMethodsSubscriptionMockingExtension(subscriptionResource).GetFakeParentWithAncestorWithLocsByLocation(location, cancellationToken);
         }
 
         /// <summary>
@@ -1686,7 +1655,7 @@ namespace MgmtListMethods
         /// <returns> An async collection of <see cref="FakeParentWithAncestorResource" /> that may take multiple service requests to iterate over. </returns>
         public static AsyncPageable<FakeParentWithAncestorResource> GetFakeParentWithAncestorsAsync(this SubscriptionResource subscriptionResource, CancellationToken cancellationToken = default)
         {
-            return GetSubscriptionResourceExtensionClient(subscriptionResource).GetFakeParentWithAncestorsAsync(cancellationToken);
+            return GetMgmtListMethodsSubscriptionMockingExtension(subscriptionResource).GetFakeParentWithAncestorsAsync(cancellationToken);
         }
 
         /// <summary>
@@ -1707,7 +1676,7 @@ namespace MgmtListMethods
         /// <returns> A collection of <see cref="FakeParentWithAncestorResource" /> that may take multiple service requests to iterate over. </returns>
         public static Pageable<FakeParentWithAncestorResource> GetFakeParentWithAncestors(this SubscriptionResource subscriptionResource, CancellationToken cancellationToken = default)
         {
-            return GetSubscriptionResourceExtensionClient(subscriptionResource).GetFakeParentWithAncestors(cancellationToken);
+            return GetMgmtListMethodsSubscriptionMockingExtension(subscriptionResource).GetFakeParentWithAncestors(cancellationToken);
         }
 
         /// <summary>
@@ -1729,7 +1698,7 @@ namespace MgmtListMethods
         /// <returns> An async collection of <see cref="ResGrpParentWithAncestorWithNonResChWithLocResource" /> that may take multiple service requests to iterate over. </returns>
         public static AsyncPageable<ResGrpParentWithAncestorWithNonResChWithLocResource> GetResGrpParentWithAncestorWithNonResChWithLocsAsync(this SubscriptionResource subscriptionResource, string expand = null, CancellationToken cancellationToken = default)
         {
-            return GetSubscriptionResourceExtensionClient(subscriptionResource).GetResGrpParentWithAncestorWithNonResChWithLocsAsync(expand, cancellationToken);
+            return GetMgmtListMethodsSubscriptionMockingExtension(subscriptionResource).GetResGrpParentWithAncestorWithNonResChWithLocsAsync(expand, cancellationToken);
         }
 
         /// <summary>
@@ -1751,7 +1720,7 @@ namespace MgmtListMethods
         /// <returns> A collection of <see cref="ResGrpParentWithAncestorWithNonResChWithLocResource" /> that may take multiple service requests to iterate over. </returns>
         public static Pageable<ResGrpParentWithAncestorWithNonResChWithLocResource> GetResGrpParentWithAncestorWithNonResChWithLocs(this SubscriptionResource subscriptionResource, string expand = null, CancellationToken cancellationToken = default)
         {
-            return GetSubscriptionResourceExtensionClient(subscriptionResource).GetResGrpParentWithAncestorWithNonResChWithLocs(expand, cancellationToken);
+            return GetMgmtListMethodsSubscriptionMockingExtension(subscriptionResource).GetResGrpParentWithAncestorWithNonResChWithLocs(expand, cancellationToken);
         }
 
         /// <summary>
@@ -1773,7 +1742,7 @@ namespace MgmtListMethods
         /// <returns> An async collection of <see cref="ResGrpParentWithAncestorWithNonResChResource" /> that may take multiple service requests to iterate over. </returns>
         public static AsyncPageable<ResGrpParentWithAncestorWithNonResChResource> GetResGrpParentWithAncestorWithNonResChesAsync(this SubscriptionResource subscriptionResource, string expand = null, CancellationToken cancellationToken = default)
         {
-            return GetSubscriptionResourceExtensionClient(subscriptionResource).GetResGrpParentWithAncestorWithNonResChesAsync(expand, cancellationToken);
+            return GetMgmtListMethodsSubscriptionMockingExtension(subscriptionResource).GetResGrpParentWithAncestorWithNonResChesAsync(expand, cancellationToken);
         }
 
         /// <summary>
@@ -1795,7 +1764,7 @@ namespace MgmtListMethods
         /// <returns> A collection of <see cref="ResGrpParentWithAncestorWithNonResChResource" /> that may take multiple service requests to iterate over. </returns>
         public static Pageable<ResGrpParentWithAncestorWithNonResChResource> GetResGrpParentWithAncestorWithNonResChes(this SubscriptionResource subscriptionResource, string expand = null, CancellationToken cancellationToken = default)
         {
-            return GetSubscriptionResourceExtensionClient(subscriptionResource).GetResGrpParentWithAncestorWithNonResChes(expand, cancellationToken);
+            return GetMgmtListMethodsSubscriptionMockingExtension(subscriptionResource).GetResGrpParentWithAncestorWithNonResChes(expand, cancellationToken);
         }
 
         /// <summary>
@@ -1816,7 +1785,7 @@ namespace MgmtListMethods
         /// <returns> An async collection of <see cref="ResGrpParentWithAncestorWithLocResource" /> that may take multiple service requests to iterate over. </returns>
         public static AsyncPageable<ResGrpParentWithAncestorWithLocResource> GetResGrpParentWithAncestorWithLocsAsync(this SubscriptionResource subscriptionResource, CancellationToken cancellationToken = default)
         {
-            return GetSubscriptionResourceExtensionClient(subscriptionResource).GetResGrpParentWithAncestorWithLocsAsync(cancellationToken);
+            return GetMgmtListMethodsSubscriptionMockingExtension(subscriptionResource).GetResGrpParentWithAncestorWithLocsAsync(cancellationToken);
         }
 
         /// <summary>
@@ -1837,7 +1806,7 @@ namespace MgmtListMethods
         /// <returns> A collection of <see cref="ResGrpParentWithAncestorWithLocResource" /> that may take multiple service requests to iterate over. </returns>
         public static Pageable<ResGrpParentWithAncestorWithLocResource> GetResGrpParentWithAncestorWithLocs(this SubscriptionResource subscriptionResource, CancellationToken cancellationToken = default)
         {
-            return GetSubscriptionResourceExtensionClient(subscriptionResource).GetResGrpParentWithAncestorWithLocs(cancellationToken);
+            return GetMgmtListMethodsSubscriptionMockingExtension(subscriptionResource).GetResGrpParentWithAncestorWithLocs(cancellationToken);
         }
 
         /// <summary>
@@ -1863,7 +1832,7 @@ namespace MgmtListMethods
         {
             Argument.AssertNotNullOrEmpty(location, nameof(location));
 
-            return GetSubscriptionResourceExtensionClient(subscriptionResource).GetResGrpParentWithAncestorWithNonResChWithLocsByLocationResGrpParentWithAncestorWithLocAsync(location, cancellationToken);
+            return GetMgmtListMethodsSubscriptionMockingExtension(subscriptionResource).GetResGrpParentWithAncestorWithNonResChWithLocsByLocationResGrpParentWithAncestorWithLocAsync(location, cancellationToken);
         }
 
         /// <summary>
@@ -1889,7 +1858,7 @@ namespace MgmtListMethods
         {
             Argument.AssertNotNullOrEmpty(location, nameof(location));
 
-            return GetSubscriptionResourceExtensionClient(subscriptionResource).GetResGrpParentWithAncestorWithNonResChWithLocsByLocationResGrpParentWithAncestorWithLoc(location, cancellationToken);
+            return GetMgmtListMethodsSubscriptionMockingExtension(subscriptionResource).GetResGrpParentWithAncestorWithNonResChWithLocsByLocationResGrpParentWithAncestorWithLoc(location, cancellationToken);
         }
 
         /// <summary>
@@ -1910,7 +1879,7 @@ namespace MgmtListMethods
         /// <returns> An async collection of <see cref="ResGrpParentWithAncestorResource" /> that may take multiple service requests to iterate over. </returns>
         public static AsyncPageable<ResGrpParentWithAncestorResource> GetResGrpParentWithAncestorsAsync(this SubscriptionResource subscriptionResource, CancellationToken cancellationToken = default)
         {
-            return GetSubscriptionResourceExtensionClient(subscriptionResource).GetResGrpParentWithAncestorsAsync(cancellationToken);
+            return GetMgmtListMethodsSubscriptionMockingExtension(subscriptionResource).GetResGrpParentWithAncestorsAsync(cancellationToken);
         }
 
         /// <summary>
@@ -1931,7 +1900,7 @@ namespace MgmtListMethods
         /// <returns> A collection of <see cref="ResGrpParentWithAncestorResource" /> that may take multiple service requests to iterate over. </returns>
         public static Pageable<ResGrpParentWithAncestorResource> GetResGrpParentWithAncestors(this SubscriptionResource subscriptionResource, CancellationToken cancellationToken = default)
         {
-            return GetSubscriptionResourceExtensionClient(subscriptionResource).GetResGrpParentWithAncestors(cancellationToken);
+            return GetMgmtListMethodsSubscriptionMockingExtension(subscriptionResource).GetResGrpParentWithAncestors(cancellationToken);
         }
 
         /// <summary>
@@ -1959,7 +1928,7 @@ namespace MgmtListMethods
             Argument.AssertNotNullOrEmpty(location, nameof(location));
             Argument.AssertNotNull(content, nameof(content));
 
-            return GetSubscriptionResourceExtensionClient(subscriptionResource).UpdateAllQuotaAsync(location, content, cancellationToken);
+            return GetMgmtListMethodsSubscriptionMockingExtension(subscriptionResource).UpdateAllQuotaAsync(location, content, cancellationToken);
         }
 
         /// <summary>
@@ -1987,7 +1956,7 @@ namespace MgmtListMethods
             Argument.AssertNotNullOrEmpty(location, nameof(location));
             Argument.AssertNotNull(content, nameof(content));
 
-            return GetSubscriptionResourceExtensionClient(subscriptionResource).UpdateAllQuota(location, content, cancellationToken);
+            return GetMgmtListMethodsSubscriptionMockingExtension(subscriptionResource).UpdateAllQuota(location, content, cancellationToken);
         }
 
         /// <summary> Gets a collection of TenantTestResources in the TenantResource. </summary>
@@ -1995,7 +1964,7 @@ namespace MgmtListMethods
         /// <returns> An object representing collection of TenantTestResources and their operations over a TenantTestResource. </returns>
         public static TenantTestCollection GetTenantTests(this TenantResource tenantResource)
         {
-            return GetTenantResourceExtensionClient(tenantResource).GetTenantTests();
+            return GetMgmtListMethodsTenantMockingExtension(tenantResource).GetTenantTests();
         }
 
         /// <summary>
@@ -2020,7 +1989,7 @@ namespace MgmtListMethods
         [ForwardsClientCalls]
         public static async Task<Response<TenantTestResource>> GetTenantTestAsync(this TenantResource tenantResource, string tenantTestName, string expand = null, CancellationToken cancellationToken = default)
         {
-            return await tenantResource.GetTenantTests().GetAsync(tenantTestName, expand, cancellationToken).ConfigureAwait(false);
+            return await GetMgmtListMethodsTenantMockingExtension(tenantResource).GetTenantTestAsync(tenantTestName, expand, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -2045,7 +2014,7 @@ namespace MgmtListMethods
         [ForwardsClientCalls]
         public static Response<TenantTestResource> GetTenantTest(this TenantResource tenantResource, string tenantTestName, string expand = null, CancellationToken cancellationToken = default)
         {
-            return tenantResource.GetTenantTests().Get(tenantTestName, expand, cancellationToken);
+            return GetMgmtListMethodsTenantMockingExtension(tenantResource).GetTenantTest(tenantTestName, expand, cancellationToken);
         }
     }
 }

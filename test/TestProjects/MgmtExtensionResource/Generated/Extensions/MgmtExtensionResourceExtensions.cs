@@ -13,6 +13,7 @@ using Azure.Core;
 using Azure.ResourceManager;
 using Azure.ResourceManager.ManagementGroups;
 using Azure.ResourceManager.Resources;
+using MgmtExtensionResource.Mocking;
 using MgmtExtensionResource.Models;
 
 namespace MgmtExtensionResource
@@ -20,51 +21,27 @@ namespace MgmtExtensionResource
     /// <summary> A class to add extension methods to MgmtExtensionResource. </summary>
     public static partial class MgmtExtensionResourceExtensions
     {
-        private static ManagementGroupResourceExtensionClient GetManagementGroupResourceExtensionClient(ArmResource resource)
+        private static MgmtExtensionResourceManagementGroupMockingExtension GetMgmtExtensionResourceManagementGroupMockingExtension(ArmResource resource)
         {
             return resource.GetCachedClient(client =>
             {
-                return new ManagementGroupResourceExtensionClient(client, resource.Id);
+                return new MgmtExtensionResourceManagementGroupMockingExtension(client, resource.Id);
             });
         }
 
-        private static ManagementGroupResourceExtensionClient GetManagementGroupResourceExtensionClient(ArmClient client, ResourceIdentifier scope)
-        {
-            return client.GetResourceClient(() =>
-            {
-                return new ManagementGroupResourceExtensionClient(client, scope);
-            });
-        }
-
-        private static SubscriptionResourceExtensionClient GetSubscriptionResourceExtensionClient(ArmResource resource)
+        private static MgmtExtensionResourceSubscriptionMockingExtension GetMgmtExtensionResourceSubscriptionMockingExtension(ArmResource resource)
         {
             return resource.GetCachedClient(client =>
             {
-                return new SubscriptionResourceExtensionClient(client, resource.Id);
+                return new MgmtExtensionResourceSubscriptionMockingExtension(client, resource.Id);
             });
         }
 
-        private static SubscriptionResourceExtensionClient GetSubscriptionResourceExtensionClient(ArmClient client, ResourceIdentifier scope)
-        {
-            return client.GetResourceClient(() =>
-            {
-                return new SubscriptionResourceExtensionClient(client, scope);
-            });
-        }
-
-        private static TenantResourceExtensionClient GetTenantResourceExtensionClient(ArmResource resource)
+        private static MgmtExtensionResourceTenantMockingExtension GetMgmtExtensionResourceTenantMockingExtension(ArmResource resource)
         {
             return resource.GetCachedClient(client =>
             {
-                return new TenantResourceExtensionClient(client, resource.Id);
-            });
-        }
-
-        private static TenantResourceExtensionClient GetTenantResourceExtensionClient(ArmClient client, ResourceIdentifier scope)
-        {
-            return client.GetResourceClient(() =>
-            {
-                return new TenantResourceExtensionClient(client, scope);
+                return new MgmtExtensionResourceTenantMockingExtension(client, resource.Id);
             });
         }
         #region SubSingletonResource
@@ -148,7 +125,7 @@ namespace MgmtExtensionResource
         /// <returns> An object representing collection of ManagementGroupPolicyDefinitionResources and their operations over a ManagementGroupPolicyDefinitionResource. </returns>
         public static ManagementGroupPolicyDefinitionCollection GetManagementGroupPolicyDefinitions(this ManagementGroupResource managementGroupResource)
         {
-            return GetManagementGroupResourceExtensionClient(managementGroupResource).GetManagementGroupPolicyDefinitions();
+            return GetMgmtExtensionResourceManagementGroupMockingExtension(managementGroupResource).GetManagementGroupPolicyDefinitions();
         }
 
         /// <summary>
@@ -172,7 +149,7 @@ namespace MgmtExtensionResource
         [ForwardsClientCalls]
         public static async Task<Response<ManagementGroupPolicyDefinitionResource>> GetManagementGroupPolicyDefinitionAsync(this ManagementGroupResource managementGroupResource, string policyDefinitionName, CancellationToken cancellationToken = default)
         {
-            return await GetManagementGroupPolicyDefinitions(managementGroupResource).GetAsync(policyDefinitionName, cancellationToken).ConfigureAwait(false);
+            return await GetMgmtExtensionResourceManagementGroupMockingExtension(managementGroupResource).GetManagementGroupPolicyDefinitionAsync(policyDefinitionName, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -196,7 +173,7 @@ namespace MgmtExtensionResource
         [ForwardsClientCalls]
         public static Response<ManagementGroupPolicyDefinitionResource> GetManagementGroupPolicyDefinition(this ManagementGroupResource managementGroupResource, string policyDefinitionName, CancellationToken cancellationToken = default)
         {
-            return GetManagementGroupPolicyDefinitions(managementGroupResource).Get(policyDefinitionName, cancellationToken);
+            return GetMgmtExtensionResourceManagementGroupMockingExtension(managementGroupResource).GetManagementGroupPolicyDefinition(policyDefinitionName, cancellationToken);
         }
 
         /// <summary> Gets an object representing a SubSingletonResource along with the instance operations that can be performed on it in the SubscriptionResource. </summary>
@@ -204,7 +181,7 @@ namespace MgmtExtensionResource
         /// <returns> Returns a <see cref="SubSingletonResource" /> object. </returns>
         public static SubSingletonResource GetSubSingleton(this SubscriptionResource subscriptionResource)
         {
-            return GetSubscriptionResourceExtensionClient(subscriptionResource).GetSubSingleton();
+            return GetMgmtExtensionResourceSubscriptionMockingExtension(subscriptionResource).GetSubSingleton();
         }
 
         /// <summary> Gets a collection of SubscriptionPolicyDefinitionResources in the SubscriptionResource. </summary>
@@ -212,7 +189,7 @@ namespace MgmtExtensionResource
         /// <returns> An object representing collection of SubscriptionPolicyDefinitionResources and their operations over a SubscriptionPolicyDefinitionResource. </returns>
         public static SubscriptionPolicyDefinitionCollection GetSubscriptionPolicyDefinitions(this SubscriptionResource subscriptionResource)
         {
-            return GetSubscriptionResourceExtensionClient(subscriptionResource).GetSubscriptionPolicyDefinitions();
+            return GetMgmtExtensionResourceSubscriptionMockingExtension(subscriptionResource).GetSubscriptionPolicyDefinitions();
         }
 
         /// <summary>
@@ -236,7 +213,7 @@ namespace MgmtExtensionResource
         [ForwardsClientCalls]
         public static async Task<Response<SubscriptionPolicyDefinitionResource>> GetSubscriptionPolicyDefinitionAsync(this SubscriptionResource subscriptionResource, string policyDefinitionName, CancellationToken cancellationToken = default)
         {
-            return await GetSubscriptionPolicyDefinitions(subscriptionResource).GetAsync(policyDefinitionName, cancellationToken).ConfigureAwait(false);
+            return await GetMgmtExtensionResourceSubscriptionMockingExtension(subscriptionResource).GetSubscriptionPolicyDefinitionAsync(policyDefinitionName, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -260,7 +237,7 @@ namespace MgmtExtensionResource
         [ForwardsClientCalls]
         public static Response<SubscriptionPolicyDefinitionResource> GetSubscriptionPolicyDefinition(this SubscriptionResource subscriptionResource, string policyDefinitionName, CancellationToken cancellationToken = default)
         {
-            return GetSubscriptionPolicyDefinitions(subscriptionResource).Get(policyDefinitionName, cancellationToken);
+            return GetMgmtExtensionResourceSubscriptionMockingExtension(subscriptionResource).GetSubscriptionPolicyDefinition(policyDefinitionName, cancellationToken);
         }
 
         /// <summary>
@@ -287,7 +264,7 @@ namespace MgmtExtensionResource
             Argument.AssertNotNullOrEmpty(location, nameof(location));
             Argument.AssertNotNull(domainNameLabel, nameof(domainNameLabel));
 
-            return await GetSubscriptionResourceExtensionClient(subscriptionResource).CheckDnsNameAvailabilityAsync(location, domainNameLabel, cancellationToken).ConfigureAwait(false);
+            return await GetMgmtExtensionResourceSubscriptionMockingExtension(subscriptionResource).CheckDnsNameAvailabilityAsync(location, domainNameLabel, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -314,7 +291,7 @@ namespace MgmtExtensionResource
             Argument.AssertNotNullOrEmpty(location, nameof(location));
             Argument.AssertNotNull(domainNameLabel, nameof(domainNameLabel));
 
-            return GetSubscriptionResourceExtensionClient(subscriptionResource).CheckDnsNameAvailability(location, domainNameLabel, cancellationToken);
+            return GetMgmtExtensionResourceSubscriptionMockingExtension(subscriptionResource).CheckDnsNameAvailability(location, domainNameLabel, cancellationToken);
         }
 
         /// <summary>
@@ -338,7 +315,7 @@ namespace MgmtExtensionResource
         {
             Argument.AssertNotNull(content, nameof(content));
 
-            return await GetSubscriptionResourceExtensionClient(subscriptionResource).ValidateSomethingOrphanedPostAsync(content, cancellationToken).ConfigureAwait(false);
+            return await GetMgmtExtensionResourceSubscriptionMockingExtension(subscriptionResource).ValidateSomethingOrphanedPostAsync(content, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -362,7 +339,7 @@ namespace MgmtExtensionResource
         {
             Argument.AssertNotNull(content, nameof(content));
 
-            return GetSubscriptionResourceExtensionClient(subscriptionResource).ValidateSomethingOrphanedPost(content, cancellationToken);
+            return GetMgmtExtensionResourceSubscriptionMockingExtension(subscriptionResource).ValidateSomethingOrphanedPost(content, cancellationToken);
         }
 
         /// <summary> Gets a collection of BuiltInPolicyDefinitionResources in the TenantResource. </summary>
@@ -370,7 +347,7 @@ namespace MgmtExtensionResource
         /// <returns> An object representing collection of BuiltInPolicyDefinitionResources and their operations over a BuiltInPolicyDefinitionResource. </returns>
         public static BuiltInPolicyDefinitionCollection GetBuiltInPolicyDefinitions(this TenantResource tenantResource)
         {
-            return GetTenantResourceExtensionClient(tenantResource).GetBuiltInPolicyDefinitions();
+            return GetMgmtExtensionResourceTenantMockingExtension(tenantResource).GetBuiltInPolicyDefinitions();
         }
 
         /// <summary>
@@ -394,7 +371,7 @@ namespace MgmtExtensionResource
         [ForwardsClientCalls]
         public static async Task<Response<BuiltInPolicyDefinitionResource>> GetBuiltInPolicyDefinitionAsync(this TenantResource tenantResource, string policyDefinitionName, CancellationToken cancellationToken = default)
         {
-            return await tenantResource.GetBuiltInPolicyDefinitions().GetAsync(policyDefinitionName, cancellationToken).ConfigureAwait(false);
+            return await GetMgmtExtensionResourceTenantMockingExtension(tenantResource).GetBuiltInPolicyDefinitionAsync(policyDefinitionName, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -418,7 +395,7 @@ namespace MgmtExtensionResource
         [ForwardsClientCalls]
         public static Response<BuiltInPolicyDefinitionResource> GetBuiltInPolicyDefinition(this TenantResource tenantResource, string policyDefinitionName, CancellationToken cancellationToken = default)
         {
-            return tenantResource.GetBuiltInPolicyDefinitions().Get(policyDefinitionName, cancellationToken);
+            return GetMgmtExtensionResourceTenantMockingExtension(tenantResource).GetBuiltInPolicyDefinition(policyDefinitionName, cancellationToken);
         }
     }
 }

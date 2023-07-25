@@ -12,6 +12,7 @@ using Azure;
 using Azure.Core;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Resources;
+using MgmtPropertyChooser.Mocking;
 using MgmtPropertyChooser.Models;
 
 namespace MgmtPropertyChooser
@@ -19,19 +20,11 @@ namespace MgmtPropertyChooser
     /// <summary> A class to add extension methods to MgmtPropertyChooser. </summary>
     public static partial class MgmtPropertyChooserExtensions
     {
-        private static ResourceGroupResourceExtensionClient GetResourceGroupResourceExtensionClient(ArmResource resource)
+        private static MgmtPropertyChooserResourceGroupMockingExtension GetMgmtPropertyChooserResourceGroupMockingExtension(ArmResource resource)
         {
             return resource.GetCachedClient(client =>
             {
-                return new ResourceGroupResourceExtensionClient(client, resource.Id);
-            });
-        }
-
-        private static ResourceGroupResourceExtensionClient GetResourceGroupResourceExtensionClient(ArmClient client, ResourceIdentifier scope)
-        {
-            return client.GetResourceClient(() =>
-            {
-                return new ResourceGroupResourceExtensionClient(client, scope);
+                return new MgmtPropertyChooserResourceGroupMockingExtension(client, resource.Id);
             });
         }
         #region VirtualMachineResource
@@ -58,7 +51,7 @@ namespace MgmtPropertyChooser
         /// <returns> An object representing collection of VirtualMachineResources and their operations over a VirtualMachineResource. </returns>
         public static VirtualMachineCollection GetVirtualMachines(this ResourceGroupResource resourceGroupResource)
         {
-            return GetResourceGroupResourceExtensionClient(resourceGroupResource).GetVirtualMachines();
+            return GetMgmtPropertyChooserResourceGroupMockingExtension(resourceGroupResource).GetVirtualMachines();
         }
 
         /// <summary>
@@ -83,7 +76,7 @@ namespace MgmtPropertyChooser
         [ForwardsClientCalls]
         public static async Task<Response<VirtualMachineResource>> GetVirtualMachineAsync(this ResourceGroupResource resourceGroupResource, string vmName, InstanceViewType? expand = null, CancellationToken cancellationToken = default)
         {
-            return await resourceGroupResource.GetVirtualMachines().GetAsync(vmName, expand, cancellationToken).ConfigureAwait(false);
+            return await GetMgmtPropertyChooserResourceGroupMockingExtension(resourceGroupResource).GetVirtualMachineAsync(vmName, expand, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -108,7 +101,7 @@ namespace MgmtPropertyChooser
         [ForwardsClientCalls]
         public static Response<VirtualMachineResource> GetVirtualMachine(this ResourceGroupResource resourceGroupResource, string vmName, InstanceViewType? expand = null, CancellationToken cancellationToken = default)
         {
-            return resourceGroupResource.GetVirtualMachines().Get(vmName, expand, cancellationToken);
+            return GetMgmtPropertyChooserResourceGroupMockingExtension(resourceGroupResource).GetVirtualMachine(vmName, expand, cancellationToken);
         }
     }
 }

@@ -12,6 +12,7 @@ using Azure;
 using Azure.Core;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Resources;
+using MgmtParamOrdering.Mocking;
 using MgmtParamOrdering.Models;
 
 namespace MgmtParamOrdering
@@ -19,35 +20,19 @@ namespace MgmtParamOrdering
     /// <summary> A class to add extension methods to MgmtParamOrdering. </summary>
     public static partial class MgmtParamOrderingExtensions
     {
-        private static ResourceGroupResourceExtensionClient GetResourceGroupResourceExtensionClient(ArmResource resource)
+        private static MgmtParamOrderingResourceGroupMockingExtension GetMgmtParamOrderingResourceGroupMockingExtension(ArmResource resource)
         {
             return resource.GetCachedClient(client =>
             {
-                return new ResourceGroupResourceExtensionClient(client, resource.Id);
+                return new MgmtParamOrderingResourceGroupMockingExtension(client, resource.Id);
             });
         }
 
-        private static ResourceGroupResourceExtensionClient GetResourceGroupResourceExtensionClient(ArmClient client, ResourceIdentifier scope)
-        {
-            return client.GetResourceClient(() =>
-            {
-                return new ResourceGroupResourceExtensionClient(client, scope);
-            });
-        }
-
-        private static SubscriptionResourceExtensionClient GetSubscriptionResourceExtensionClient(ArmResource resource)
+        private static MgmtParamOrderingSubscriptionMockingExtension GetMgmtParamOrderingSubscriptionMockingExtension(ArmResource resource)
         {
             return resource.GetCachedClient(client =>
             {
-                return new SubscriptionResourceExtensionClient(client, resource.Id);
-            });
-        }
-
-        private static SubscriptionResourceExtensionClient GetSubscriptionResourceExtensionClient(ArmClient client, ResourceIdentifier scope)
-        {
-            return client.GetResourceClient(() =>
-            {
-                return new SubscriptionResourceExtensionClient(client, scope);
+                return new MgmtParamOrderingSubscriptionMockingExtension(client, resource.Id);
             });
         }
         #region AvailabilitySetResource
@@ -188,7 +173,7 @@ namespace MgmtParamOrdering
         /// <returns> An object representing collection of AvailabilitySetResources and their operations over a AvailabilitySetResource. </returns>
         public static AvailabilitySetCollection GetAvailabilitySets(this ResourceGroupResource resourceGroupResource)
         {
-            return GetResourceGroupResourceExtensionClient(resourceGroupResource).GetAvailabilitySets();
+            return GetMgmtParamOrderingResourceGroupMockingExtension(resourceGroupResource).GetAvailabilitySets();
         }
 
         /// <summary>
@@ -212,7 +197,7 @@ namespace MgmtParamOrdering
         [ForwardsClientCalls]
         public static async Task<Response<AvailabilitySetResource>> GetAvailabilitySetAsync(this ResourceGroupResource resourceGroupResource, string availabilitySetName, CancellationToken cancellationToken = default)
         {
-            return await resourceGroupResource.GetAvailabilitySets().GetAsync(availabilitySetName, cancellationToken).ConfigureAwait(false);
+            return await GetMgmtParamOrderingResourceGroupMockingExtension(resourceGroupResource).GetAvailabilitySetAsync(availabilitySetName, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -236,7 +221,7 @@ namespace MgmtParamOrdering
         [ForwardsClientCalls]
         public static Response<AvailabilitySetResource> GetAvailabilitySet(this ResourceGroupResource resourceGroupResource, string availabilitySetName, CancellationToken cancellationToken = default)
         {
-            return resourceGroupResource.GetAvailabilitySets().Get(availabilitySetName, cancellationToken);
+            return GetMgmtParamOrderingResourceGroupMockingExtension(resourceGroupResource).GetAvailabilitySet(availabilitySetName, cancellationToken);
         }
 
         /// <summary> Gets a collection of DedicatedHostGroupResources in the ResourceGroupResource. </summary>
@@ -244,7 +229,7 @@ namespace MgmtParamOrdering
         /// <returns> An object representing collection of DedicatedHostGroupResources and their operations over a DedicatedHostGroupResource. </returns>
         public static DedicatedHostGroupCollection GetDedicatedHostGroups(this ResourceGroupResource resourceGroupResource)
         {
-            return GetResourceGroupResourceExtensionClient(resourceGroupResource).GetDedicatedHostGroups();
+            return GetMgmtParamOrderingResourceGroupMockingExtension(resourceGroupResource).GetDedicatedHostGroups();
         }
 
         /// <summary>
@@ -269,7 +254,7 @@ namespace MgmtParamOrdering
         [ForwardsClientCalls]
         public static async Task<Response<DedicatedHostGroupResource>> GetDedicatedHostGroupAsync(this ResourceGroupResource resourceGroupResource, string hostGroupName, InstanceViewType? expand = null, CancellationToken cancellationToken = default)
         {
-            return await resourceGroupResource.GetDedicatedHostGroups().GetAsync(hostGroupName, expand, cancellationToken).ConfigureAwait(false);
+            return await GetMgmtParamOrderingResourceGroupMockingExtension(resourceGroupResource).GetDedicatedHostGroupAsync(hostGroupName, expand, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -294,7 +279,7 @@ namespace MgmtParamOrdering
         [ForwardsClientCalls]
         public static Response<DedicatedHostGroupResource> GetDedicatedHostGroup(this ResourceGroupResource resourceGroupResource, string hostGroupName, InstanceViewType? expand = null, CancellationToken cancellationToken = default)
         {
-            return resourceGroupResource.GetDedicatedHostGroups().Get(hostGroupName, expand, cancellationToken);
+            return GetMgmtParamOrderingResourceGroupMockingExtension(resourceGroupResource).GetDedicatedHostGroup(hostGroupName, expand, cancellationToken);
         }
 
         /// <summary> Gets a collection of WorkspaceResources in the ResourceGroupResource. </summary>
@@ -302,7 +287,7 @@ namespace MgmtParamOrdering
         /// <returns> An object representing collection of WorkspaceResources and their operations over a WorkspaceResource. </returns>
         public static WorkspaceCollection GetWorkspaces(this ResourceGroupResource resourceGroupResource)
         {
-            return GetResourceGroupResourceExtensionClient(resourceGroupResource).GetWorkspaces();
+            return GetMgmtParamOrderingResourceGroupMockingExtension(resourceGroupResource).GetWorkspaces();
         }
 
         /// <summary>
@@ -326,7 +311,7 @@ namespace MgmtParamOrdering
         [ForwardsClientCalls]
         public static async Task<Response<WorkspaceResource>> GetWorkspaceAsync(this ResourceGroupResource resourceGroupResource, string workspaceName, CancellationToken cancellationToken = default)
         {
-            return await resourceGroupResource.GetWorkspaces().GetAsync(workspaceName, cancellationToken).ConfigureAwait(false);
+            return await GetMgmtParamOrderingResourceGroupMockingExtension(resourceGroupResource).GetWorkspaceAsync(workspaceName, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -350,7 +335,7 @@ namespace MgmtParamOrdering
         [ForwardsClientCalls]
         public static Response<WorkspaceResource> GetWorkspace(this ResourceGroupResource resourceGroupResource, string workspaceName, CancellationToken cancellationToken = default)
         {
-            return resourceGroupResource.GetWorkspaces().Get(workspaceName, cancellationToken);
+            return GetMgmtParamOrderingResourceGroupMockingExtension(resourceGroupResource).GetWorkspace(workspaceName, cancellationToken);
         }
 
         /// <summary> Gets a collection of VirtualMachineScaleSetResources in the ResourceGroupResource. </summary>
@@ -358,7 +343,7 @@ namespace MgmtParamOrdering
         /// <returns> An object representing collection of VirtualMachineScaleSetResources and their operations over a VirtualMachineScaleSetResource. </returns>
         public static VirtualMachineScaleSetCollection GetVirtualMachineScaleSets(this ResourceGroupResource resourceGroupResource)
         {
-            return GetResourceGroupResourceExtensionClient(resourceGroupResource).GetVirtualMachineScaleSets();
+            return GetMgmtParamOrderingResourceGroupMockingExtension(resourceGroupResource).GetVirtualMachineScaleSets();
         }
 
         /// <summary>
@@ -383,7 +368,7 @@ namespace MgmtParamOrdering
         [ForwardsClientCalls]
         public static async Task<Response<VirtualMachineScaleSetResource>> GetVirtualMachineScaleSetAsync(this ResourceGroupResource resourceGroupResource, string vmScaleSetName, ExpandTypesForGetVMScaleSet? expand = null, CancellationToken cancellationToken = default)
         {
-            return await resourceGroupResource.GetVirtualMachineScaleSets().GetAsync(vmScaleSetName, expand, cancellationToken).ConfigureAwait(false);
+            return await GetMgmtParamOrderingResourceGroupMockingExtension(resourceGroupResource).GetVirtualMachineScaleSetAsync(vmScaleSetName, expand, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -408,7 +393,7 @@ namespace MgmtParamOrdering
         [ForwardsClientCalls]
         public static Response<VirtualMachineScaleSetResource> GetVirtualMachineScaleSet(this ResourceGroupResource resourceGroupResource, string vmScaleSetName, ExpandTypesForGetVMScaleSet? expand = null, CancellationToken cancellationToken = default)
         {
-            return resourceGroupResource.GetVirtualMachineScaleSets().Get(vmScaleSetName, expand, cancellationToken);
+            return GetMgmtParamOrderingResourceGroupMockingExtension(resourceGroupResource).GetVirtualMachineScaleSet(vmScaleSetName, expand, cancellationToken);
         }
 
         /// <summary> Gets a collection of VirtualMachineExtensionImageResources in the SubscriptionResource. </summary>
@@ -422,7 +407,7 @@ namespace MgmtParamOrdering
         {
             Argument.AssertNotNullOrEmpty(publisherName, nameof(publisherName));
 
-            return GetSubscriptionResourceExtensionClient(subscriptionResource).GetVirtualMachineExtensionImages(location, publisherName);
+            return GetMgmtParamOrderingSubscriptionMockingExtension(subscriptionResource).GetVirtualMachineExtensionImages(location, publisherName);
         }
 
         /// <summary>
@@ -449,7 +434,7 @@ namespace MgmtParamOrdering
         [ForwardsClientCalls]
         public static async Task<Response<VirtualMachineExtensionImageResource>> GetVirtualMachineExtensionImageAsync(this SubscriptionResource subscriptionResource, AzureLocation location, string publisherName, string type, string version, CancellationToken cancellationToken = default)
         {
-            return await subscriptionResource.GetVirtualMachineExtensionImages(location, publisherName).GetAsync(type, version, cancellationToken).ConfigureAwait(false);
+            return await GetMgmtParamOrderingSubscriptionMockingExtension(subscriptionResource).GetVirtualMachineExtensionImageAsync(location, publisherName, type, version, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -476,7 +461,7 @@ namespace MgmtParamOrdering
         [ForwardsClientCalls]
         public static Response<VirtualMachineExtensionImageResource> GetVirtualMachineExtensionImage(this SubscriptionResource subscriptionResource, AzureLocation location, string publisherName, string type, string version, CancellationToken cancellationToken = default)
         {
-            return subscriptionResource.GetVirtualMachineExtensionImages(location, publisherName).Get(type, version, cancellationToken);
+            return GetMgmtParamOrderingSubscriptionMockingExtension(subscriptionResource).GetVirtualMachineExtensionImage(location, publisherName, type, version, cancellationToken);
         }
 
         /// <summary>
@@ -498,7 +483,7 @@ namespace MgmtParamOrdering
         /// <returns> An async collection of <see cref="AvailabilitySetResource" /> that may take multiple service requests to iterate over. </returns>
         public static AsyncPageable<AvailabilitySetResource> GetAvailabilitySetsAsync(this SubscriptionResource subscriptionResource, string expand = null, CancellationToken cancellationToken = default)
         {
-            return GetSubscriptionResourceExtensionClient(subscriptionResource).GetAvailabilitySetsAsync(expand, cancellationToken);
+            return GetMgmtParamOrderingSubscriptionMockingExtension(subscriptionResource).GetAvailabilitySetsAsync(expand, cancellationToken);
         }
 
         /// <summary>
@@ -520,7 +505,7 @@ namespace MgmtParamOrdering
         /// <returns> A collection of <see cref="AvailabilitySetResource" /> that may take multiple service requests to iterate over. </returns>
         public static Pageable<AvailabilitySetResource> GetAvailabilitySets(this SubscriptionResource subscriptionResource, string expand = null, CancellationToken cancellationToken = default)
         {
-            return GetSubscriptionResourceExtensionClient(subscriptionResource).GetAvailabilitySets(expand, cancellationToken);
+            return GetMgmtParamOrderingSubscriptionMockingExtension(subscriptionResource).GetAvailabilitySets(expand, cancellationToken);
         }
     }
 }

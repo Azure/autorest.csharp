@@ -12,6 +12,7 @@ using Azure;
 using Azure.Core;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Resources;
+using MgmtOmitOperationGroups.Mocking;
 using MgmtOmitOperationGroups.Models;
 
 namespace MgmtOmitOperationGroups
@@ -19,19 +20,11 @@ namespace MgmtOmitOperationGroups
     /// <summary> A class to add extension methods to MgmtOmitOperationGroups. </summary>
     public static partial class MgmtOmitOperationGroupsExtensions
     {
-        private static ResourceGroupResourceExtensionClient GetResourceGroupResourceExtensionClient(ArmResource resource)
+        private static MgmtOmitOperationGroupsResourceGroupMockingExtension GetMgmtOmitOperationGroupsResourceGroupMockingExtension(ArmResource resource)
         {
             return resource.GetCachedClient(client =>
             {
-                return new ResourceGroupResourceExtensionClient(client, resource.Id);
-            });
-        }
-
-        private static ResourceGroupResourceExtensionClient GetResourceGroupResourceExtensionClient(ArmClient client, ResourceIdentifier scope)
-        {
-            return client.GetResourceClient(() =>
-            {
-                return new ResourceGroupResourceExtensionClient(client, scope);
+                return new MgmtOmitOperationGroupsResourceGroupMockingExtension(client, resource.Id);
             });
         }
         #region Model2Resource
@@ -58,7 +51,7 @@ namespace MgmtOmitOperationGroups
         /// <returns> An object representing collection of Model2Resources and their operations over a Model2Resource. </returns>
         public static Model2Collection GetModel2s(this ResourceGroupResource resourceGroupResource)
         {
-            return GetResourceGroupResourceExtensionClient(resourceGroupResource).GetModel2s();
+            return GetMgmtOmitOperationGroupsResourceGroupMockingExtension(resourceGroupResource).GetModel2s();
         }
 
         /// <summary>
@@ -81,7 +74,7 @@ namespace MgmtOmitOperationGroups
         [ForwardsClientCalls]
         public static async Task<Response<Model2Resource>> GetModel2Async(this ResourceGroupResource resourceGroupResource, string model2SName, CancellationToken cancellationToken = default)
         {
-            return await resourceGroupResource.GetModel2s().GetAsync(model2SName, cancellationToken).ConfigureAwait(false);
+            return await GetMgmtOmitOperationGroupsResourceGroupMockingExtension(resourceGroupResource).GetModel2Async(model2SName, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -104,7 +97,7 @@ namespace MgmtOmitOperationGroups
         [ForwardsClientCalls]
         public static Response<Model2Resource> GetModel2(this ResourceGroupResource resourceGroupResource, string model2SName, CancellationToken cancellationToken = default)
         {
-            return resourceGroupResource.GetModel2s().Get(model2SName, cancellationToken);
+            return GetMgmtOmitOperationGroupsResourceGroupMockingExtension(resourceGroupResource).GetModel2(model2SName, cancellationToken);
         }
 
         /// <summary>
@@ -124,7 +117,7 @@ namespace MgmtOmitOperationGroups
         /// <returns> An async collection of <see cref="Model5" /> that may take multiple service requests to iterate over. </returns>
         public static AsyncPageable<Model5> GetModel5sAsync(this ResourceGroupResource resourceGroupResource, CancellationToken cancellationToken = default)
         {
-            return GetResourceGroupResourceExtensionClient(resourceGroupResource).GetModel5sAsync(cancellationToken);
+            return GetMgmtOmitOperationGroupsResourceGroupMockingExtension(resourceGroupResource).GetModel5sAsync(cancellationToken);
         }
 
         /// <summary>
@@ -144,7 +137,7 @@ namespace MgmtOmitOperationGroups
         /// <returns> A collection of <see cref="Model5" /> that may take multiple service requests to iterate over. </returns>
         public static Pageable<Model5> GetModel5s(this ResourceGroupResource resourceGroupResource, CancellationToken cancellationToken = default)
         {
-            return GetResourceGroupResourceExtensionClient(resourceGroupResource).GetModel5s(cancellationToken);
+            return GetMgmtOmitOperationGroupsResourceGroupMockingExtension(resourceGroupResource).GetModel5s(cancellationToken);
         }
 
         /// <summary>
@@ -170,7 +163,7 @@ namespace MgmtOmitOperationGroups
             Argument.AssertNotNullOrEmpty(model5SName, nameof(model5SName));
             Argument.AssertNotNull(model5, nameof(model5));
 
-            return await GetResourceGroupResourceExtensionClient(resourceGroupResource).CreateOrUpdateModel5Async(model5SName, model5, cancellationToken).ConfigureAwait(false);
+            return await GetMgmtOmitOperationGroupsResourceGroupMockingExtension(resourceGroupResource).CreateOrUpdateModel5Async(model5SName, model5, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -196,7 +189,7 @@ namespace MgmtOmitOperationGroups
             Argument.AssertNotNullOrEmpty(model5SName, nameof(model5SName));
             Argument.AssertNotNull(model5, nameof(model5));
 
-            return GetResourceGroupResourceExtensionClient(resourceGroupResource).CreateOrUpdateModel5(model5SName, model5, cancellationToken);
+            return GetMgmtOmitOperationGroupsResourceGroupMockingExtension(resourceGroupResource).CreateOrUpdateModel5(model5SName, model5, cancellationToken);
         }
 
         /// <summary>
@@ -220,7 +213,7 @@ namespace MgmtOmitOperationGroups
         {
             Argument.AssertNotNullOrEmpty(model5SName, nameof(model5SName));
 
-            return await GetResourceGroupResourceExtensionClient(resourceGroupResource).GetModel5Async(model5SName, cancellationToken).ConfigureAwait(false);
+            return await GetMgmtOmitOperationGroupsResourceGroupMockingExtension(resourceGroupResource).GetModel5Async(model5SName, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -244,7 +237,7 @@ namespace MgmtOmitOperationGroups
         {
             Argument.AssertNotNullOrEmpty(model5SName, nameof(model5SName));
 
-            return GetResourceGroupResourceExtensionClient(resourceGroupResource).GetModel5(model5SName, cancellationToken);
+            return GetMgmtOmitOperationGroupsResourceGroupMockingExtension(resourceGroupResource).GetModel5(model5SName, cancellationToken);
         }
     }
 }

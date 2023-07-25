@@ -12,25 +12,18 @@ using Azure;
 using Azure.Core;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Resources;
+using MgmtHierarchicalNonResource.Mocking;
 
 namespace MgmtHierarchicalNonResource
 {
     /// <summary> A class to add extension methods to MgmtHierarchicalNonResource. </summary>
     public static partial class MgmtHierarchicalNonResourceExtensions
     {
-        private static SubscriptionResourceExtensionClient GetSubscriptionResourceExtensionClient(ArmResource resource)
+        private static MgmtHierarchicalNonResourceSubscriptionMockingExtension GetMgmtHierarchicalNonResourceSubscriptionMockingExtension(ArmResource resource)
         {
             return resource.GetCachedClient(client =>
             {
-                return new SubscriptionResourceExtensionClient(client, resource.Id);
-            });
-        }
-
-        private static SubscriptionResourceExtensionClient GetSubscriptionResourceExtensionClient(ArmClient client, ResourceIdentifier scope)
-        {
-            return client.GetResourceClient(() =>
-            {
-                return new SubscriptionResourceExtensionClient(client, scope);
+                return new MgmtHierarchicalNonResourceSubscriptionMockingExtension(client, resource.Id);
             });
         }
         #region SharedGalleryResource
@@ -62,7 +55,7 @@ namespace MgmtHierarchicalNonResource
         {
             Argument.AssertNotNullOrEmpty(location, nameof(location));
 
-            return GetSubscriptionResourceExtensionClient(subscriptionResource).GetSharedGalleries(location);
+            return GetMgmtHierarchicalNonResourceSubscriptionMockingExtension(subscriptionResource).GetSharedGalleries(location);
         }
 
         /// <summary>
@@ -87,7 +80,7 @@ namespace MgmtHierarchicalNonResource
         [ForwardsClientCalls]
         public static async Task<Response<SharedGalleryResource>> GetSharedGalleryAsync(this SubscriptionResource subscriptionResource, string location, string galleryUniqueName, CancellationToken cancellationToken = default)
         {
-            return await subscriptionResource.GetSharedGalleries(location).GetAsync(galleryUniqueName, cancellationToken).ConfigureAwait(false);
+            return await GetMgmtHierarchicalNonResourceSubscriptionMockingExtension(subscriptionResource).GetSharedGalleryAsync(location, galleryUniqueName, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -112,7 +105,7 @@ namespace MgmtHierarchicalNonResource
         [ForwardsClientCalls]
         public static Response<SharedGalleryResource> GetSharedGallery(this SubscriptionResource subscriptionResource, string location, string galleryUniqueName, CancellationToken cancellationToken = default)
         {
-            return subscriptionResource.GetSharedGalleries(location).Get(galleryUniqueName, cancellationToken);
+            return GetMgmtHierarchicalNonResourceSubscriptionMockingExtension(subscriptionResource).GetSharedGallery(location, galleryUniqueName, cancellationToken);
         }
     }
 }

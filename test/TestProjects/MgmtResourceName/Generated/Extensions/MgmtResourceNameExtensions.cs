@@ -12,41 +12,26 @@ using Azure;
 using Azure.Core;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Resources;
+using MgmtResourceName.Mocking;
 
 namespace MgmtResourceName
 {
     /// <summary> A class to add extension methods to MgmtResourceName. </summary>
     public static partial class MgmtResourceNameExtensions
     {
-        private static ResourceGroupResourceExtensionClient GetResourceGroupResourceExtensionClient(ArmResource resource)
+        private static MgmtResourceNameResourceGroupMockingExtension GetMgmtResourceNameResourceGroupMockingExtension(ArmResource resource)
         {
             return resource.GetCachedClient(client =>
             {
-                return new ResourceGroupResourceExtensionClient(client, resource.Id);
+                return new MgmtResourceNameResourceGroupMockingExtension(client, resource.Id);
             });
         }
 
-        private static ResourceGroupResourceExtensionClient GetResourceGroupResourceExtensionClient(ArmClient client, ResourceIdentifier scope)
-        {
-            return client.GetResourceClient(() =>
-            {
-                return new ResourceGroupResourceExtensionClient(client, scope);
-            });
-        }
-
-        private static TenantResourceExtensionClient GetTenantResourceExtensionClient(ArmResource resource)
+        private static MgmtResourceNameTenantMockingExtension GetMgmtResourceNameTenantMockingExtension(ArmResource resource)
         {
             return resource.GetCachedClient(client =>
             {
-                return new TenantResourceExtensionClient(client, resource.Id);
-            });
-        }
-
-        private static TenantResourceExtensionClient GetTenantResourceExtensionClient(ArmClient client, ResourceIdentifier scope)
-        {
-            return client.GetResourceClient(() =>
-            {
-                return new TenantResourceExtensionClient(client, scope);
+                return new MgmtResourceNameTenantMockingExtension(client, resource.Id);
             });
         }
         #region MachineResource
@@ -168,7 +153,7 @@ namespace MgmtResourceName
         /// <returns> An object representing collection of MachineResources and their operations over a MachineResource. </returns>
         public static MachineCollection GetMachines(this ResourceGroupResource resourceGroupResource)
         {
-            return GetResourceGroupResourceExtensionClient(resourceGroupResource).GetMachines();
+            return GetMgmtResourceNameResourceGroupMockingExtension(resourceGroupResource).GetMachines();
         }
 
         /// <summary>
@@ -191,7 +176,7 @@ namespace MgmtResourceName
         [ForwardsClientCalls]
         public static async Task<Response<MachineResource>> GetMachineAsync(this ResourceGroupResource resourceGroupResource, string machineName, CancellationToken cancellationToken = default)
         {
-            return await resourceGroupResource.GetMachines().GetAsync(machineName, cancellationToken).ConfigureAwait(false);
+            return await GetMgmtResourceNameResourceGroupMockingExtension(resourceGroupResource).GetMachineAsync(machineName, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -214,7 +199,7 @@ namespace MgmtResourceName
         [ForwardsClientCalls]
         public static Response<MachineResource> GetMachine(this ResourceGroupResource resourceGroupResource, string machineName, CancellationToken cancellationToken = default)
         {
-            return resourceGroupResource.GetMachines().Get(machineName, cancellationToken);
+            return GetMgmtResourceNameResourceGroupMockingExtension(resourceGroupResource).GetMachine(machineName, cancellationToken);
         }
 
         /// <summary> Gets a collection of Disks in the ResourceGroupResource. </summary>
@@ -222,7 +207,7 @@ namespace MgmtResourceName
         /// <returns> An object representing collection of Disks and their operations over a Disk. </returns>
         public static DiskCollection GetDisks(this ResourceGroupResource resourceGroupResource)
         {
-            return GetResourceGroupResourceExtensionClient(resourceGroupResource).GetDisks();
+            return GetMgmtResourceNameResourceGroupMockingExtension(resourceGroupResource).GetDisks();
         }
 
         /// <summary>
@@ -245,7 +230,7 @@ namespace MgmtResourceName
         [ForwardsClientCalls]
         public static async Task<Response<Disk>> GetDiskAsync(this ResourceGroupResource resourceGroupResource, string diskResourceName, CancellationToken cancellationToken = default)
         {
-            return await resourceGroupResource.GetDisks().GetAsync(diskResourceName, cancellationToken).ConfigureAwait(false);
+            return await GetMgmtResourceNameResourceGroupMockingExtension(resourceGroupResource).GetDiskAsync(diskResourceName, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -268,7 +253,7 @@ namespace MgmtResourceName
         [ForwardsClientCalls]
         public static Response<Disk> GetDisk(this ResourceGroupResource resourceGroupResource, string diskResourceName, CancellationToken cancellationToken = default)
         {
-            return resourceGroupResource.GetDisks().Get(diskResourceName, cancellationToken);
+            return GetMgmtResourceNameResourceGroupMockingExtension(resourceGroupResource).GetDisk(diskResourceName, cancellationToken);
         }
 
         /// <summary> Gets a collection of Memories in the ResourceGroupResource. </summary>
@@ -276,7 +261,7 @@ namespace MgmtResourceName
         /// <returns> An object representing collection of Memories and their operations over a Memory. </returns>
         public static MemoryCollection GetMemories(this ResourceGroupResource resourceGroupResource)
         {
-            return GetResourceGroupResourceExtensionClient(resourceGroupResource).GetMemories();
+            return GetMgmtResourceNameResourceGroupMockingExtension(resourceGroupResource).GetMemories();
         }
 
         /// <summary>
@@ -299,7 +284,7 @@ namespace MgmtResourceName
         [ForwardsClientCalls]
         public static async Task<Response<Memory>> GetMemoryAsync(this ResourceGroupResource resourceGroupResource, string memoryResourceName, CancellationToken cancellationToken = default)
         {
-            return await resourceGroupResource.GetMemories().GetAsync(memoryResourceName, cancellationToken).ConfigureAwait(false);
+            return await GetMgmtResourceNameResourceGroupMockingExtension(resourceGroupResource).GetMemoryAsync(memoryResourceName, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -322,7 +307,7 @@ namespace MgmtResourceName
         [ForwardsClientCalls]
         public static Response<Memory> GetMemory(this ResourceGroupResource resourceGroupResource, string memoryResourceName, CancellationToken cancellationToken = default)
         {
-            return resourceGroupResource.GetMemories().Get(memoryResourceName, cancellationToken);
+            return GetMgmtResourceNameResourceGroupMockingExtension(resourceGroupResource).GetMemory(memoryResourceName, cancellationToken);
         }
 
         /// <summary> Gets a collection of NetworkResources in the ResourceGroupResource. </summary>
@@ -330,7 +315,7 @@ namespace MgmtResourceName
         /// <returns> An object representing collection of NetworkResources and their operations over a NetworkResource. </returns>
         public static NetworkCollection GetNetworks(this ResourceGroupResource resourceGroupResource)
         {
-            return GetResourceGroupResourceExtensionClient(resourceGroupResource).GetNetworks();
+            return GetMgmtResourceNameResourceGroupMockingExtension(resourceGroupResource).GetNetworks();
         }
 
         /// <summary>
@@ -353,7 +338,7 @@ namespace MgmtResourceName
         [ForwardsClientCalls]
         public static async Task<Response<NetworkResource>> GetNetworkAsync(this ResourceGroupResource resourceGroupResource, string networkResourceName, CancellationToken cancellationToken = default)
         {
-            return await resourceGroupResource.GetNetworks().GetAsync(networkResourceName, cancellationToken).ConfigureAwait(false);
+            return await GetMgmtResourceNameResourceGroupMockingExtension(resourceGroupResource).GetNetworkAsync(networkResourceName, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -376,7 +361,7 @@ namespace MgmtResourceName
         [ForwardsClientCalls]
         public static Response<NetworkResource> GetNetwork(this ResourceGroupResource resourceGroupResource, string networkResourceName, CancellationToken cancellationToken = default)
         {
-            return resourceGroupResource.GetNetworks().Get(networkResourceName, cancellationToken);
+            return GetMgmtResourceNameResourceGroupMockingExtension(resourceGroupResource).GetNetwork(networkResourceName, cancellationToken);
         }
 
         /// <summary> Gets a collection of DisplayResources in the ResourceGroupResource. </summary>
@@ -384,7 +369,7 @@ namespace MgmtResourceName
         /// <returns> An object representing collection of DisplayResources and their operations over a DisplayResource. </returns>
         public static DisplayResourceCollection GetDisplayResources(this ResourceGroupResource resourceGroupResource)
         {
-            return GetResourceGroupResourceExtensionClient(resourceGroupResource).GetDisplayResources();
+            return GetMgmtResourceNameResourceGroupMockingExtension(resourceGroupResource).GetDisplayResources();
         }
 
         /// <summary>
@@ -407,7 +392,7 @@ namespace MgmtResourceName
         [ForwardsClientCalls]
         public static async Task<Response<DisplayResource>> GetDisplayResourceAsync(this ResourceGroupResource resourceGroupResource, string displayResourceName, CancellationToken cancellationToken = default)
         {
-            return await resourceGroupResource.GetDisplayResources().GetAsync(displayResourceName, cancellationToken).ConfigureAwait(false);
+            return await GetMgmtResourceNameResourceGroupMockingExtension(resourceGroupResource).GetDisplayResourceAsync(displayResourceName, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -430,7 +415,7 @@ namespace MgmtResourceName
         [ForwardsClientCalls]
         public static Response<DisplayResource> GetDisplayResource(this ResourceGroupResource resourceGroupResource, string displayResourceName, CancellationToken cancellationToken = default)
         {
-            return resourceGroupResource.GetDisplayResources().Get(displayResourceName, cancellationToken);
+            return GetMgmtResourceNameResourceGroupMockingExtension(resourceGroupResource).GetDisplayResource(displayResourceName, cancellationToken);
         }
 
         /// <summary> Gets a collection of ProviderOperationResources in the TenantResource. </summary>
@@ -438,7 +423,7 @@ namespace MgmtResourceName
         /// <returns> An object representing collection of ProviderOperationResources and their operations over a ProviderOperationResource. </returns>
         public static ProviderOperationCollection GetProviderOperations(this TenantResource tenantResource)
         {
-            return GetTenantResourceExtensionClient(tenantResource).GetProviderOperations();
+            return GetMgmtResourceNameTenantMockingExtension(tenantResource).GetProviderOperations();
         }
 
         /// <summary>
@@ -463,7 +448,7 @@ namespace MgmtResourceName
         [ForwardsClientCalls]
         public static async Task<Response<ProviderOperationResource>> GetProviderOperationAsync(this TenantResource tenantResource, string resourceProviderNamespace, string expand = null, CancellationToken cancellationToken = default)
         {
-            return await tenantResource.GetProviderOperations().GetAsync(resourceProviderNamespace, expand, cancellationToken).ConfigureAwait(false);
+            return await GetMgmtResourceNameTenantMockingExtension(tenantResource).GetProviderOperationAsync(resourceProviderNamespace, expand, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -488,7 +473,7 @@ namespace MgmtResourceName
         [ForwardsClientCalls]
         public static Response<ProviderOperationResource> GetProviderOperation(this TenantResource tenantResource, string resourceProviderNamespace, string expand = null, CancellationToken cancellationToken = default)
         {
-            return tenantResource.GetProviderOperations().Get(resourceProviderNamespace, expand, cancellationToken);
+            return GetMgmtResourceNameTenantMockingExtension(tenantResource).GetProviderOperation(resourceProviderNamespace, expand, cancellationToken);
         }
     }
 }

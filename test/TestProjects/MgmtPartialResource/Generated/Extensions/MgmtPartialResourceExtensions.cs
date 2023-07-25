@@ -12,41 +12,26 @@ using Azure;
 using Azure.Core;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Resources;
+using MgmtPartialResource.Mocking;
 
 namespace MgmtPartialResource
 {
     /// <summary> A class to add extension methods to MgmtPartialResource. </summary>
     public static partial class MgmtPartialResourceExtensions
     {
-        private static ResourceGroupResourceExtensionClient GetResourceGroupResourceExtensionClient(ArmResource resource)
+        private static MgmtPartialResourceResourceGroupMockingExtension GetMgmtPartialResourceResourceGroupMockingExtension(ArmResource resource)
         {
             return resource.GetCachedClient(client =>
             {
-                return new ResourceGroupResourceExtensionClient(client, resource.Id);
+                return new MgmtPartialResourceResourceGroupMockingExtension(client, resource.Id);
             });
         }
 
-        private static ResourceGroupResourceExtensionClient GetResourceGroupResourceExtensionClient(ArmClient client, ResourceIdentifier scope)
-        {
-            return client.GetResourceClient(() =>
-            {
-                return new ResourceGroupResourceExtensionClient(client, scope);
-            });
-        }
-
-        private static SubscriptionResourceExtensionClient GetSubscriptionResourceExtensionClient(ArmResource resource)
+        private static MgmtPartialResourceSubscriptionMockingExtension GetMgmtPartialResourceSubscriptionMockingExtension(ArmResource resource)
         {
             return resource.GetCachedClient(client =>
             {
-                return new SubscriptionResourceExtensionClient(client, resource.Id);
-            });
-        }
-
-        private static SubscriptionResourceExtensionClient GetSubscriptionResourceExtensionClient(ArmClient client, ResourceIdentifier scope)
-        {
-            return client.GetResourceClient(() =>
-            {
-                return new SubscriptionResourceExtensionClient(client, scope);
+                return new MgmtPartialResourceSubscriptionMockingExtension(client, resource.Id);
             });
         }
         #region PublicIPAddressResource
@@ -130,7 +115,7 @@ namespace MgmtPartialResource
         /// <returns> An object representing collection of PublicIPAddressResources and their operations over a PublicIPAddressResource. </returns>
         public static PublicIPAddressCollection GetPublicIPAddresses(this ResourceGroupResource resourceGroupResource)
         {
-            return GetResourceGroupResourceExtensionClient(resourceGroupResource).GetPublicIPAddresses();
+            return GetMgmtPartialResourceResourceGroupMockingExtension(resourceGroupResource).GetPublicIPAddresses();
         }
 
         /// <summary>
@@ -155,7 +140,7 @@ namespace MgmtPartialResource
         [ForwardsClientCalls]
         public static async Task<Response<PublicIPAddressResource>> GetPublicIPAddressAsync(this ResourceGroupResource resourceGroupResource, string publicIpAddressName, string expand = null, CancellationToken cancellationToken = default)
         {
-            return await resourceGroupResource.GetPublicIPAddresses().GetAsync(publicIpAddressName, expand, cancellationToken).ConfigureAwait(false);
+            return await GetMgmtPartialResourceResourceGroupMockingExtension(resourceGroupResource).GetPublicIPAddressAsync(publicIpAddressName, expand, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -180,7 +165,7 @@ namespace MgmtPartialResource
         [ForwardsClientCalls]
         public static Response<PublicIPAddressResource> GetPublicIPAddress(this ResourceGroupResource resourceGroupResource, string publicIpAddressName, string expand = null, CancellationToken cancellationToken = default)
         {
-            return resourceGroupResource.GetPublicIPAddresses().Get(publicIpAddressName, expand, cancellationToken);
+            return GetMgmtPartialResourceResourceGroupMockingExtension(resourceGroupResource).GetPublicIPAddress(publicIpAddressName, expand, cancellationToken);
         }
 
         /// <summary>
@@ -201,7 +186,7 @@ namespace MgmtPartialResource
         /// <returns> An async collection of <see cref="PublicIPAddressResource" /> that may take multiple service requests to iterate over. </returns>
         public static AsyncPageable<PublicIPAddressResource> GetPublicIPAddressesAsync(this SubscriptionResource subscriptionResource, CancellationToken cancellationToken = default)
         {
-            return GetSubscriptionResourceExtensionClient(subscriptionResource).GetPublicIPAddressesAsync(cancellationToken);
+            return GetMgmtPartialResourceSubscriptionMockingExtension(subscriptionResource).GetPublicIPAddressesAsync(cancellationToken);
         }
 
         /// <summary>
@@ -222,7 +207,7 @@ namespace MgmtPartialResource
         /// <returns> A collection of <see cref="PublicIPAddressResource" /> that may take multiple service requests to iterate over. </returns>
         public static Pageable<PublicIPAddressResource> GetPublicIPAddresses(this SubscriptionResource subscriptionResource, CancellationToken cancellationToken = default)
         {
-            return GetSubscriptionResourceExtensionClient(subscriptionResource).GetPublicIPAddresses(cancellationToken);
+            return GetMgmtPartialResourceSubscriptionMockingExtension(subscriptionResource).GetPublicIPAddresses(cancellationToken);
         }
     }
 }

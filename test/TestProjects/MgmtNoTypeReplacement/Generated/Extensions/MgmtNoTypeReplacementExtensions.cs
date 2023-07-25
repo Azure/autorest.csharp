@@ -12,25 +12,18 @@ using Azure;
 using Azure.Core;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Resources;
+using MgmtNoTypeReplacement.Mocking;
 
 namespace MgmtNoTypeReplacement
 {
     /// <summary> A class to add extension methods to MgmtNoTypeReplacement. </summary>
     public static partial class MgmtNoTypeReplacementExtensions
     {
-        private static ResourceGroupResourceExtensionClient GetResourceGroupResourceExtensionClient(ArmResource resource)
+        private static MgmtNoTypeReplacementResourceGroupMockingExtension GetMgmtNoTypeReplacementResourceGroupMockingExtension(ArmResource resource)
         {
             return resource.GetCachedClient(client =>
             {
-                return new ResourceGroupResourceExtensionClient(client, resource.Id);
-            });
-        }
-
-        private static ResourceGroupResourceExtensionClient GetResourceGroupResourceExtensionClient(ArmClient client, ResourceIdentifier scope)
-        {
-            return client.GetResourceClient(() =>
-            {
-                return new ResourceGroupResourceExtensionClient(client, scope);
+                return new MgmtNoTypeReplacementResourceGroupMockingExtension(client, resource.Id);
             });
         }
         #region NoTypeReplacementModel1Resource
@@ -95,7 +88,7 @@ namespace MgmtNoTypeReplacement
         /// <returns> An object representing collection of NoTypeReplacementModel1Resources and their operations over a NoTypeReplacementModel1Resource. </returns>
         public static NoTypeReplacementModel1Collection GetNoTypeReplacementModel1s(this ResourceGroupResource resourceGroupResource)
         {
-            return GetResourceGroupResourceExtensionClient(resourceGroupResource).GetNoTypeReplacementModel1s();
+            return GetMgmtNoTypeReplacementResourceGroupMockingExtension(resourceGroupResource).GetNoTypeReplacementModel1s();
         }
 
         /// <summary>
@@ -118,7 +111,7 @@ namespace MgmtNoTypeReplacement
         [ForwardsClientCalls]
         public static async Task<Response<NoTypeReplacementModel1Resource>> GetNoTypeReplacementModel1Async(this ResourceGroupResource resourceGroupResource, string noTypeReplacementModel1SName, CancellationToken cancellationToken = default)
         {
-            return await resourceGroupResource.GetNoTypeReplacementModel1s().GetAsync(noTypeReplacementModel1SName, cancellationToken).ConfigureAwait(false);
+            return await GetMgmtNoTypeReplacementResourceGroupMockingExtension(resourceGroupResource).GetNoTypeReplacementModel1Async(noTypeReplacementModel1SName, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -141,7 +134,7 @@ namespace MgmtNoTypeReplacement
         [ForwardsClientCalls]
         public static Response<NoTypeReplacementModel1Resource> GetNoTypeReplacementModel1(this ResourceGroupResource resourceGroupResource, string noTypeReplacementModel1SName, CancellationToken cancellationToken = default)
         {
-            return resourceGroupResource.GetNoTypeReplacementModel1s().Get(noTypeReplacementModel1SName, cancellationToken);
+            return GetMgmtNoTypeReplacementResourceGroupMockingExtension(resourceGroupResource).GetNoTypeReplacementModel1(noTypeReplacementModel1SName, cancellationToken);
         }
 
         /// <summary> Gets a collection of NoTypeReplacementModel2Resources in the ResourceGroupResource. </summary>
@@ -149,7 +142,7 @@ namespace MgmtNoTypeReplacement
         /// <returns> An object representing collection of NoTypeReplacementModel2Resources and their operations over a NoTypeReplacementModel2Resource. </returns>
         public static NoTypeReplacementModel2Collection GetNoTypeReplacementModel2s(this ResourceGroupResource resourceGroupResource)
         {
-            return GetResourceGroupResourceExtensionClient(resourceGroupResource).GetNoTypeReplacementModel2s();
+            return GetMgmtNoTypeReplacementResourceGroupMockingExtension(resourceGroupResource).GetNoTypeReplacementModel2s();
         }
 
         /// <summary>
@@ -172,7 +165,7 @@ namespace MgmtNoTypeReplacement
         [ForwardsClientCalls]
         public static async Task<Response<NoTypeReplacementModel2Resource>> GetNoTypeReplacementModel2Async(this ResourceGroupResource resourceGroupResource, string noTypeReplacementModel2SName, CancellationToken cancellationToken = default)
         {
-            return await resourceGroupResource.GetNoTypeReplacementModel2s().GetAsync(noTypeReplacementModel2SName, cancellationToken).ConfigureAwait(false);
+            return await GetMgmtNoTypeReplacementResourceGroupMockingExtension(resourceGroupResource).GetNoTypeReplacementModel2Async(noTypeReplacementModel2SName, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -195,7 +188,7 @@ namespace MgmtNoTypeReplacement
         [ForwardsClientCalls]
         public static Response<NoTypeReplacementModel2Resource> GetNoTypeReplacementModel2(this ResourceGroupResource resourceGroupResource, string noTypeReplacementModel2SName, CancellationToken cancellationToken = default)
         {
-            return resourceGroupResource.GetNoTypeReplacementModel2s().Get(noTypeReplacementModel2SName, cancellationToken);
+            return GetMgmtNoTypeReplacementResourceGroupMockingExtension(resourceGroupResource).GetNoTypeReplacementModel2(noTypeReplacementModel2SName, cancellationToken);
         }
 
         /// <summary> Gets a collection of NoTypeReplacementModel3Resources in the ResourceGroupResource. </summary>
@@ -203,7 +196,7 @@ namespace MgmtNoTypeReplacement
         /// <returns> An object representing collection of NoTypeReplacementModel3Resources and their operations over a NoTypeReplacementModel3Resource. </returns>
         public static NoTypeReplacementModel3Collection GetNoTypeReplacementModel3s(this ResourceGroupResource resourceGroupResource)
         {
-            return GetResourceGroupResourceExtensionClient(resourceGroupResource).GetNoTypeReplacementModel3s();
+            return GetMgmtNoTypeReplacementResourceGroupMockingExtension(resourceGroupResource).GetNoTypeReplacementModel3s();
         }
 
         /// <summary>
@@ -226,7 +219,7 @@ namespace MgmtNoTypeReplacement
         [ForwardsClientCalls]
         public static async Task<Response<NoTypeReplacementModel3Resource>> GetNoTypeReplacementModel3Async(this ResourceGroupResource resourceGroupResource, string noTypeReplacementModel3SName, CancellationToken cancellationToken = default)
         {
-            return await resourceGroupResource.GetNoTypeReplacementModel3s().GetAsync(noTypeReplacementModel3SName, cancellationToken).ConfigureAwait(false);
+            return await GetMgmtNoTypeReplacementResourceGroupMockingExtension(resourceGroupResource).GetNoTypeReplacementModel3Async(noTypeReplacementModel3SName, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -249,7 +242,7 @@ namespace MgmtNoTypeReplacement
         [ForwardsClientCalls]
         public static Response<NoTypeReplacementModel3Resource> GetNoTypeReplacementModel3(this ResourceGroupResource resourceGroupResource, string noTypeReplacementModel3SName, CancellationToken cancellationToken = default)
         {
-            return resourceGroupResource.GetNoTypeReplacementModel3s().Get(noTypeReplacementModel3SName, cancellationToken);
+            return GetMgmtNoTypeReplacementResourceGroupMockingExtension(resourceGroupResource).GetNoTypeReplacementModel3(noTypeReplacementModel3SName, cancellationToken);
         }
     }
 }

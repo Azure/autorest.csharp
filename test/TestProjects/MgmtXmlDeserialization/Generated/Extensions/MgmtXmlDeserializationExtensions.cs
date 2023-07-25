@@ -12,25 +12,18 @@ using Azure;
 using Azure.Core;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Resources;
+using MgmtXmlDeserialization.Mocking;
 
 namespace MgmtXmlDeserialization
 {
     /// <summary> A class to add extension methods to MgmtXmlDeserialization. </summary>
     public static partial class MgmtXmlDeserializationExtensions
     {
-        private static ResourceGroupResourceExtensionClient GetResourceGroupResourceExtensionClient(ArmResource resource)
+        private static MgmtXmlDeserializationResourceGroupMockingExtension GetMgmtXmlDeserializationResourceGroupMockingExtension(ArmResource resource)
         {
             return resource.GetCachedClient(client =>
             {
-                return new ResourceGroupResourceExtensionClient(client, resource.Id);
-            });
-        }
-
-        private static ResourceGroupResourceExtensionClient GetResourceGroupResourceExtensionClient(ArmClient client, ResourceIdentifier scope)
-        {
-            return client.GetResourceClient(() =>
-            {
-                return new ResourceGroupResourceExtensionClient(client, scope);
+                return new MgmtXmlDeserializationResourceGroupMockingExtension(client, resource.Id);
             });
         }
         #region XmlInstanceResource
@@ -57,7 +50,7 @@ namespace MgmtXmlDeserialization
         /// <returns> An object representing collection of XmlInstanceResources and their operations over a XmlInstanceResource. </returns>
         public static XmlInstanceCollection GetXmlInstances(this ResourceGroupResource resourceGroupResource)
         {
-            return GetResourceGroupResourceExtensionClient(resourceGroupResource).GetXmlInstances();
+            return GetMgmtXmlDeserializationResourceGroupMockingExtension(resourceGroupResource).GetXmlInstances();
         }
 
         /// <summary>
@@ -81,7 +74,7 @@ namespace MgmtXmlDeserialization
         [ForwardsClientCalls]
         public static async Task<Response<XmlInstanceResource>> GetXmlInstanceAsync(this ResourceGroupResource resourceGroupResource, string xmlName, CancellationToken cancellationToken = default)
         {
-            return await resourceGroupResource.GetXmlInstances().GetAsync(xmlName, cancellationToken).ConfigureAwait(false);
+            return await GetMgmtXmlDeserializationResourceGroupMockingExtension(resourceGroupResource).GetXmlInstanceAsync(xmlName, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -105,7 +98,7 @@ namespace MgmtXmlDeserialization
         [ForwardsClientCalls]
         public static Response<XmlInstanceResource> GetXmlInstance(this ResourceGroupResource resourceGroupResource, string xmlName, CancellationToken cancellationToken = default)
         {
-            return resourceGroupResource.GetXmlInstances().Get(xmlName, cancellationToken);
+            return GetMgmtXmlDeserializationResourceGroupMockingExtension(resourceGroupResource).GetXmlInstance(xmlName, cancellationToken);
         }
     }
 }

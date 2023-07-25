@@ -12,6 +12,7 @@ using Azure;
 using Azure.Core;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Resources;
+using MgmtPropertyBag.Mocking;
 using MgmtPropertyBag.Models;
 
 namespace MgmtPropertyBag
@@ -19,35 +20,19 @@ namespace MgmtPropertyBag
     /// <summary> A class to add extension methods to MgmtPropertyBag. </summary>
     public static partial class MgmtPropertyBagExtensions
     {
-        private static ResourceGroupResourceExtensionClient GetResourceGroupResourceExtensionClient(ArmResource resource)
+        private static MgmtPropertyBagResourceGroupMockingExtension GetMgmtPropertyBagResourceGroupMockingExtension(ArmResource resource)
         {
             return resource.GetCachedClient(client =>
             {
-                return new ResourceGroupResourceExtensionClient(client, resource.Id);
+                return new MgmtPropertyBagResourceGroupMockingExtension(client, resource.Id);
             });
         }
 
-        private static ResourceGroupResourceExtensionClient GetResourceGroupResourceExtensionClient(ArmClient client, ResourceIdentifier scope)
-        {
-            return client.GetResourceClient(() =>
-            {
-                return new ResourceGroupResourceExtensionClient(client, scope);
-            });
-        }
-
-        private static SubscriptionResourceExtensionClient GetSubscriptionResourceExtensionClient(ArmResource resource)
+        private static MgmtPropertyBagSubscriptionMockingExtension GetMgmtPropertyBagSubscriptionMockingExtension(ArmResource resource)
         {
             return resource.GetCachedClient(client =>
             {
-                return new SubscriptionResourceExtensionClient(client, resource.Id);
-            });
-        }
-
-        private static SubscriptionResourceExtensionClient GetSubscriptionResourceExtensionClient(ArmClient client, ResourceIdentifier scope)
-        {
-            return client.GetResourceClient(() =>
-            {
-                return new SubscriptionResourceExtensionClient(client, scope);
+                return new MgmtPropertyBagSubscriptionMockingExtension(client, resource.Id);
             });
         }
         #region FooResource
@@ -93,7 +78,7 @@ namespace MgmtPropertyBag
         /// <returns> An object representing collection of FooResources and their operations over a FooResource. </returns>
         public static FooCollection GetFoos(this ResourceGroupResource resourceGroupResource)
         {
-            return GetResourceGroupResourceExtensionClient(resourceGroupResource).GetFoos();
+            return GetMgmtPropertyBagResourceGroupMockingExtension(resourceGroupResource).GetFoos();
         }
 
         /// <summary>
@@ -116,7 +101,7 @@ namespace MgmtPropertyBag
         [ForwardsClientCalls]
         public static async Task<Response<FooResource>> GetFooAsync(this ResourceGroupResource resourceGroupResource, FooCollectionGetOptions options, CancellationToken cancellationToken = default)
         {
-            return await resourceGroupResource.GetFoos().GetAsync(options, cancellationToken).ConfigureAwait(false);
+            return await GetMgmtPropertyBagResourceGroupMockingExtension(resourceGroupResource).GetFooAsync(options, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -139,7 +124,7 @@ namespace MgmtPropertyBag
         [ForwardsClientCalls]
         public static Response<FooResource> GetFoo(this ResourceGroupResource resourceGroupResource, FooCollectionGetOptions options, CancellationToken cancellationToken = default)
         {
-            return resourceGroupResource.GetFoos().Get(options, cancellationToken);
+            return GetMgmtPropertyBagResourceGroupMockingExtension(resourceGroupResource).GetFoo(options, cancellationToken);
         }
 
         /// <summary> Gets a collection of BarResources in the ResourceGroupResource. </summary>
@@ -147,7 +132,7 @@ namespace MgmtPropertyBag
         /// <returns> An object representing collection of BarResources and their operations over a BarResource. </returns>
         public static BarCollection GetBars(this ResourceGroupResource resourceGroupResource)
         {
-            return GetResourceGroupResourceExtensionClient(resourceGroupResource).GetBars();
+            return GetMgmtPropertyBagResourceGroupMockingExtension(resourceGroupResource).GetBars();
         }
 
         /// <summary>
@@ -170,7 +155,7 @@ namespace MgmtPropertyBag
         [ForwardsClientCalls]
         public static async Task<Response<BarResource>> GetBarAsync(this ResourceGroupResource resourceGroupResource, BarCollectionGetOptions options, CancellationToken cancellationToken = default)
         {
-            return await resourceGroupResource.GetBars().GetAsync(options, cancellationToken).ConfigureAwait(false);
+            return await GetMgmtPropertyBagResourceGroupMockingExtension(resourceGroupResource).GetBarAsync(options, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -193,7 +178,7 @@ namespace MgmtPropertyBag
         [ForwardsClientCalls]
         public static Response<BarResource> GetBar(this ResourceGroupResource resourceGroupResource, BarCollectionGetOptions options, CancellationToken cancellationToken = default)
         {
-            return resourceGroupResource.GetBars().Get(options, cancellationToken);
+            return GetMgmtPropertyBagResourceGroupMockingExtension(resourceGroupResource).GetBar(options, cancellationToken);
         }
 
         /// <summary>
@@ -216,7 +201,7 @@ namespace MgmtPropertyBag
         /// <returns> An async collection of <see cref="FooResource" /> that may take multiple service requests to iterate over. </returns>
         public static AsyncPageable<FooResource> GetFoosAsync(this SubscriptionResource subscriptionResource, string filter = null, int? top = null, CancellationToken cancellationToken = default)
         {
-            return GetSubscriptionResourceExtensionClient(subscriptionResource).GetFoosAsync(filter, top, cancellationToken);
+            return GetMgmtPropertyBagSubscriptionMockingExtension(subscriptionResource).GetFoosAsync(filter, top, cancellationToken);
         }
 
         /// <summary>
@@ -239,7 +224,7 @@ namespace MgmtPropertyBag
         /// <returns> A collection of <see cref="FooResource" /> that may take multiple service requests to iterate over. </returns>
         public static Pageable<FooResource> GetFoos(this SubscriptionResource subscriptionResource, string filter = null, int? top = null, CancellationToken cancellationToken = default)
         {
-            return GetSubscriptionResourceExtensionClient(subscriptionResource).GetFoos(filter, top, cancellationToken);
+            return GetMgmtPropertyBagSubscriptionMockingExtension(subscriptionResource).GetFoos(filter, top, cancellationToken);
         }
 
         /// <summary>
@@ -262,7 +247,7 @@ namespace MgmtPropertyBag
         /// <returns> An async collection of <see cref="BarResource" /> that may take multiple service requests to iterate over. </returns>
         public static AsyncPageable<BarResource> GetBarsAsync(this SubscriptionResource subscriptionResource, ETag? ifMatch = null, int? top = null, CancellationToken cancellationToken = default)
         {
-            return GetSubscriptionResourceExtensionClient(subscriptionResource).GetBarsAsync(ifMatch, top, cancellationToken);
+            return GetMgmtPropertyBagSubscriptionMockingExtension(subscriptionResource).GetBarsAsync(ifMatch, top, cancellationToken);
         }
 
         /// <summary>
@@ -285,7 +270,7 @@ namespace MgmtPropertyBag
         /// <returns> A collection of <see cref="BarResource" /> that may take multiple service requests to iterate over. </returns>
         public static Pageable<BarResource> GetBars(this SubscriptionResource subscriptionResource, ETag? ifMatch = null, int? top = null, CancellationToken cancellationToken = default)
         {
-            return GetSubscriptionResourceExtensionClient(subscriptionResource).GetBars(ifMatch, top, cancellationToken);
+            return GetMgmtPropertyBagSubscriptionMockingExtension(subscriptionResource).GetBars(ifMatch, top, cancellationToken);
         }
     }
 }
