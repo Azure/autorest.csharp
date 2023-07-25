@@ -57,7 +57,7 @@ namespace AutoRest.CSharp.Output.Models
                     _shouldRequestContextOptional = GetShouldRequestContextOptional();
                 }
                 return _shouldRequestContextOptional.Value;
-            }            
+            }
         }
 
         private bool? _isConvenienceMethodMeaningful;
