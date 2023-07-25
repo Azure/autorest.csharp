@@ -13,7 +13,7 @@ using Parameters_LowLevel;
 namespace Microsoft.Extensions.Azure
 {
     /// <summary> Extension methods to add <see cref="ParametersLowlevelClient"/> to client builder. </summary>
-    public static partial class ParametersLowlevelClientBuilderExtensions
+    public static partial class ParametersLowLevelClientBuilderExtensions
     {
         /// <summary> Registers a <see cref="ParametersLowlevelClient"/> instance. </summary>
         /// <param name="builder"> The builder to register with. </param>

@@ -2,13 +2,12 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
-using System.Threading;
+using System.Xml.Linq;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Generation.Writers;
+using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Mgmt.Decorator;
 using AutoRest.CSharp.Mgmt.Models;
 using AutoRest.CSharp.Mgmt.Output;
@@ -16,9 +15,9 @@ using AutoRest.CSharp.MgmtTest.Extensions;
 using AutoRest.CSharp.MgmtTest.Models;
 using AutoRest.CSharp.MgmtTest.Output.Samples;
 using AutoRest.CSharp.Output.Models.Shared;
-using AutoRest.CSharp.Utilities;
 using Azure.Core;
 using Azure.ResourceManager;
+using Azure.ResourceManager.Resources;
 
 namespace AutoRest.CSharp.MgmtTest.Generation.Samples
 {
@@ -205,8 +204,12 @@ namespace AutoRest.CSharp.MgmtTest.Generation.Samples
             _writer.Line();
 
             var resourceName = GetResourceName(extension);
-            _writer.Line($"// this example assumes you already have this {resourceName} created on azure");
-            _writer.Line($"// for more information of creating {resourceName}, please refer to the document of {resourceName}");
+            if (extension is not ArmResourceExtension)
+            {
+                // the method will be available on client directly for ArmResourceExtension's operations, so dont need these comment in that case
+                _writer.Line($"// this example assumes you already have this {resourceName} created on azure");
+                _writer.Line($"// for more information of creating {resourceName}, please refer to the document of {resourceName}");
+            }
             var resourceResult = WriteGetExtension(extension, sample, $"{clientVar.Declaration}");
             var result = WriteSampleOperation(new CodeWriterVariableDeclaration(resourceResult, extension.ArmCoreType), sample);
 
@@ -221,10 +224,25 @@ namespace AutoRest.CSharp.MgmtTest.Generation.Samples
             return WriteGetResource(parent, testCase, clientExpression);
         }
 
+        private CodeWriterVariableDeclaration WriteGetCollectionWithoutParent(CodeWriterVariableDeclaration clientResult, ResourceCollection collection)
+        {
+            CodeWriterVariableDeclaration col = new CodeWriterVariableDeclaration("collection", collection.Type);
+            // Can't use CSharpType.Equals(typeof(...)) because the CSharpType.Equals(Type) would assume itself is a FrameworkType, but here it's generated when IsArmCore=true
+            if (Configuration.MgmtConfiguration.IsArmCore && collection.Type.Name == nameof(TenantCollection))
+                _writer.Line($"{col.Type} {col.Declaration:D} = {clientResult.Declaration}.GetTenants();");
+            else
+                // TODO: add support when we found any other case
+                throw new NotSupportedException("Unsupported type to get collection without parent: " + collection.Type.Name);
+            return col;
+        }
+
         private CodeWriterVariableDeclaration WriteGetCollection(CodeWriterVariableDeclaration clientResult, ResourceCollection collection, Sample sample)
         {
             var parent = sample.Parent;
-            Debug.Assert(parent != null);
+
+            if (parent == null)
+                // i.e. Tenant doesnt have parent
+                return WriteGetCollectionWithoutParent(clientResult, collection);
 
             var parentName = GetResourceName(parent);
             _writer.Line($"// this example assumes you already have this {parentName} created on azure");
@@ -264,7 +282,16 @@ namespace AutoRest.CSharp.MgmtTest.Generation.Samples
             _writer.AppendDeclaration(collectionResult).AppendRaw(" = ");
             if (parentVar == null)
             {
-                _writer.Append($"{clientResult.Declaration}.{getResourceCollectionMethodName}({idVar}, ");
+                // Can't use CSharpType.Equals(typeof(...)) because the CSharpType.Equals(Type) would assume itself is a FrameworkType, but here it's generated when IsArmCore=true
+                if (Configuration.MgmtConfiguration.IsArmCore && parent.Type.Name == nameof(ArmResource))
+                {
+                    // Retrive the generic resource first for the methods of ArmResource directly which don't have extnsion methods under ArmClient
+                    _writer.Append($"{clientResult.Declaration}.GetGenericResource({idVar}).{getResourceCollectionMethodName}(");
+                }
+                else
+                {
+                    _writer.Append($"{clientResult.Declaration}.{getResourceCollectionMethodName}({idVar}, ");
+                }
             }
             else
             {
@@ -395,6 +422,16 @@ namespace AutoRest.CSharp.MgmtTest.Generation.Samples
                 // some parameters are always inline
                 if (IsInlineParameter(parameter))
                     continue;
+
+                if (sample.Carrier is ArmResourceExtension && parameter.Type.Equals(typeof(ArmResource)))
+                {
+                    // this is an extension operation against ArmResource
+                    // For Extension against ArmResource the operation will be re-formatted to Operation(this ArmClient, ResourceIdentifier scope, ...)
+                    // so insert a scope parameter instead of ArmResource here
+                    var scope = new CodeWriterVariableDeclaration("scope", new CSharpType(typeof(ResourceIdentifier)));
+                    WriteCreateScopeResourceIdentifier(sample, scope.Declaration, sample.RequestPath.GetScopePath());
+                    result.Add(parameter.Name, scope);
+                }
 
                 if (sample.ParameterValueMapping.TryGetValue(parameter.Name, out var parameterValue))
                 {

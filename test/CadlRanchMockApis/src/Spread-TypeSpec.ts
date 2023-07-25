@@ -40,6 +40,11 @@ const spreadAliasWithOptionalPropRequest = {
     elements: ["a", "b"]
 };
 
+const spreadAliasWithRequiredAndOptionalCollections = {
+    requiredStringList: ["a", "b"],
+    optionalStringList: ["c", "d"]
+};
+
 Scenarios.Spread_SpreadModel = passOnSuccess(
     mockapi.post("/spreadModel", (req) => {
         req.expect.bodyEquals(spreadModelRequest);
@@ -102,6 +107,15 @@ Scenarios.Spread_SpreadAliasWithOptionalProps = passOnSuccess(
     mockapi.post("/spreadAliasWithOptionalProps/2", (req) => {
         req.expect.bodyEquals(spreadAliasWithOptionalPropRequest);
         req.expect.containsHeader("top", "1");
+        return {
+            status: 204
+          };
+    }),
+);
+
+Scenarios.Spread_SpreadAliasWithRequiredAndOptionalCollections = passOnSuccess(
+    mockapi.post("/spreadAliasWithCollections", (req) => {
+        req.expect.bodyEquals(spreadAliasWithRequiredAndOptionalCollections);
         return {
             status: 204
           };

@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using System.Text;
 using System.Text.Json;
 using AutoRest.CSharp.AutoRest.Communication;
 using Azure.Core;
@@ -43,10 +44,13 @@ namespace AutoRest.CSharp.Input
             public const string ModelFactoryForHlc = "model-factory-for-hlc";
             public const string GenerateModelFactory = "generate-model-factory";
             public const string ModelsToTreatEmptyStringAsNull = "models-to-treat-empty-string-as-null";
+            public const string IntrinsicTypesToTreatEmptyStringAsNull = "intrinsic-types-to-treat-empty-string-as-null";
             public const string AdditionalIntrinsicTypesToTreatEmptyStringAsNull = "additional-intrinsic-types-to-treat-empty-string-as-null";
             public const string PublicDiscriminatorProperty = "public-discriminator-property";
             public const string ShouldTreatBase64AsBinaryData = "should-treat-base64-as-binary-data";
             public const string MethodsToKeepClientDefaultValue = "methods-to-keep-client-default-value";
+            public const string DeserializeNullCollectionAsNullValue = "deserialize-null-collection-as-null-value";
+            public const string UseCoreDataFactoryReplacements = "use-core-datafactory-replacements";
         }
 
         public enum UnreferencedTypesHandlingOption
@@ -73,6 +77,8 @@ namespace AutoRest.CSharp.Input
             bool disablePaginationTopRenaming,
             bool generateModelFactory,
             bool publicDiscriminatorProperty,
+            bool deserializeNullCollectionAsNullValue,
+            bool useCoreDataFactoryReplacements,
             IReadOnlyList<string> modelFactoryForHlc,
             UnreferencedTypesHandlingOption unreferencedTypesHandling,
             bool useOverloadsBetweenProtocolAndConvenience,
@@ -102,10 +108,12 @@ namespace AutoRest.CSharp.Input
             SingleTopLevelClient = singleTopLevelClient;
             GenerateModelFactory = generateModelFactory;
             PublicDiscriminatorProperty = publicDiscriminatorProperty;
+            DeserializeNullCollectionAsNullValue = deserializeNullCollectionAsNullValue;
             UnreferencedTypesHandling = unreferencedTypesHandling;
             UseOverloadsBetweenProtocolAndConvenience = useOverloadsBetweenProtocolAndConvenience;
             KeepNonOverloadableProtocolSignature = keepNonOverloadableProtocolSignature;
             ShouldTreatBase64AsBinaryData = (!azureArm && !generation1ConvenienceClient) ? shouldTreatBase64AsBinaryData : false;
+            UseCoreDataFactoryReplacements = useCoreDataFactoryReplacements;
             projectFolder ??= ProjectFolderDefault;
             if (Path.IsPathRooted(projectFolder))
             {
@@ -196,6 +204,8 @@ namespace AutoRest.CSharp.Input
 
         public static bool ShouldTreatBase64AsBinaryData { get; private set; }
 
+        public static bool UseCoreDataFactoryReplacements { get; private set; }
+
         private static string? _outputFolder;
         public static string OutputFolder => _outputFolder ?? throw new InvalidOperationException("Configuration has not been initialized");
         public static string? ExistingProjectFolder { get; private set; }
@@ -230,6 +240,12 @@ namespace AutoRest.CSharp.Input
         /// If true, the discriminator property will be public. If false (default), the discriminator property will be internal.
         /// </summary>
         public static bool PublicDiscriminatorProperty { get; private set; }
+
+        /// <summary>
+        /// Whether we should deserialize null collections in the payload as null values if this sets to true.
+        /// Default value is false, where we will construct an empty collection (ChangeTrackingList or ChangeTrackingDictionary) if we get null value for collections in the payload
+        /// </summary>
+        public static bool DeserializeNullCollectionAsNullValue { get; private set; }
         public static bool UseOverloadsBetweenProtocolAndConvenience { get; private set; }
         public static bool KeepNonOverloadableProtocolSignature { get; private set; }
 
@@ -281,10 +297,12 @@ namespace AutoRest.CSharp.Input
                 disablePaginationTopRenaming: GetOptionBoolValue(autoRest, Options.DisablePaginationTopRenaming),
                 generateModelFactory: GetOptionBoolValue(autoRest, Options.GenerateModelFactory),
                 publicDiscriminatorProperty: GetOptionBoolValue(autoRest, Options.PublicDiscriminatorProperty),
+                deserializeNullCollectionAsNullValue: GetOptionBoolValue(autoRest, Options.DeserializeNullCollectionAsNullValue),
                 modelFactoryForHlc: autoRest.GetValue<string[]?>(Options.ModelFactoryForHlc).GetAwaiter().GetResult() ?? Array.Empty<string>(),
                 unreferencedTypesHandling: GetOptionEnumValue<UnreferencedTypesHandlingOption>(autoRest, Options.UnreferencedTypesHandling),
                 useOverloadsBetweenProtocolAndConvenience: GetOptionBoolValue(autoRest, Options.UseOverloadsBetweenProtocolAndConvenience),
                 keepNonOverloadableProtocolSignature: GetOptionBoolValue(autoRest, Options.KeepNonOverloadableProtocolSignature),
+                useCoreDataFactoryReplacements: GetOptionBoolValue(autoRest, Options.UseCoreDataFactoryReplacements),
                 projectFolder: autoRest.GetValue<string?>(Options.ProjectFolder).GetAwaiter().GetResult(),
                 existingProjectFolder: autoRest.GetValue<string?>(Options.ExistingProjectfolder).GetAwaiter().GetResult(),
                 protocolMethodList: autoRest.GetValue<string[]?>(Options.ProtocolMethodList).GetAwaiter().GetResult() ?? Array.Empty<string>(),
@@ -359,6 +377,10 @@ namespace AutoRest.CSharp.Input
                     return false;
                 case Options.ShouldTreatBase64AsBinaryData:
                     return true;
+                case Options.DeserializeNullCollectionAsNullValue:
+                    return false;
+                case Options.UseCoreDataFactoryReplacements:
+                    return true;
                 default:
                     return null;
             }
@@ -389,5 +411,190 @@ namespace AutoRest.CSharp.Input
 
         public static IReadOnlyList<string> DeserializeArray(JsonElement jsonElement)
             => jsonElement.ValueKind != JsonValueKind.Array ? Array.Empty<string>() : jsonElement.EnumerateArray().Select(t => t.ToString()).ToArray();
+
+        internal static void LoadConfiguration(JsonElement root, string? projectPath, string outputPath, string? existingProjectFolder)
+        {
+            var sharedSourceFolders = new List<string>();
+            foreach (var sharedSourceFolder in root.GetProperty(Options.SharedSourceFolders).EnumerateArray())
+            {
+                sharedSourceFolders.Add(Path.Combine(outputPath, sharedSourceFolder.GetString()!));
+            }
+
+            root.TryGetProperty(Options.ProtocolMethodList, out var protocolMethodList);
+            var protocolMethods = Configuration.DeserializeArray(protocolMethodList);
+            root.TryGetProperty(Options.SuppressAbstractBaseClasses, out var suppressAbstractBaseClassesElement);
+            var suppressAbstractBaseClasses = Configuration.DeserializeArray(suppressAbstractBaseClassesElement);
+            root.TryGetProperty(Options.ModelsToTreatEmptyStringAsNull, out var modelsToTreatEmptyStringAsNullElement);
+            var modelsToTreatEmptyStringAsNull = Configuration.DeserializeArray(modelsToTreatEmptyStringAsNullElement);
+            root.TryGetProperty(Options.IntrinsicTypesToTreatEmptyStringAsNull, out var intrinsicTypesToTreatEmptyStringAsNullElement);
+            var intrinsicTypesToTreatEmptyStringAsNull = Configuration.DeserializeArray(intrinsicTypesToTreatEmptyStringAsNullElement);
+            root.TryGetProperty(Options.ModelFactoryForHlc, out var oldModelFactoryEntriesElement);
+            var oldModelFactoryEntries = Configuration.DeserializeArray(oldModelFactoryEntriesElement);
+            root.TryGetProperty(Options.MethodsToKeepClientDefaultValue, out var methodsToKeepClientDefaultValueElement);
+            var methodsToKeepClientDefaultValue = Configuration.DeserializeArray(methodsToKeepClientDefaultValueElement);
+
+            Configuration.Initialize(
+                Path.Combine(outputPath, root.GetProperty(Options.OutputFolder).GetString()!),
+                root.GetProperty(Options.Namespace).GetString()!,
+                root.GetProperty(Options.LibraryName).GetString()!,
+                sharedSourceFolders.ToArray(),
+                saveInputs: false,
+                ReadOption(root, Options.AzureArm),
+                ReadOption(root, Options.PublicClients),
+                ReadOption(root, Options.ModelNamespace),
+                ReadOption(root, Options.HeadAsBoolean),
+                ReadOption(root, Options.SkipCSProjPackageReference),
+                ReadOption(root, Options.Generation1ConvenienceClient),
+                ReadOption(root, Options.SingleTopLevelClient),
+                ReadOption(root, Options.SkipSerializationFormatXml),
+                ReadOption(root, Options.DisablePaginationTopRenaming),
+                ReadOption(root, Options.GenerateModelFactory),
+                ReadOption(root, Options.PublicDiscriminatorProperty),
+                ReadOption(root, Options.DeserializeNullCollectionAsNullValue),
+                ReadOption(root, Options.UseCoreDataFactoryReplacements),
+                oldModelFactoryEntries,
+                ReadEnumOption<UnreferencedTypesHandlingOption>(root, Options.UnreferencedTypesHandling),
+                ReadOption(root, Options.UseOverloadsBetweenProtocolAndConvenience),
+                ReadOption(root, Options.KeepNonOverloadableProtocolSignature),
+                projectPath ?? ReadStringOption(root, Options.ProjectFolder),
+                existingProjectFolder,
+                protocolMethods,
+                suppressAbstractBaseClasses,
+                modelsToTreatEmptyStringAsNull,
+                intrinsicTypesToTreatEmptyStringAsNull,
+                ReadOption(root, Options.ShouldTreatBase64AsBinaryData),
+                methodsToKeepClientDefaultValue,
+                MgmtConfiguration.LoadConfiguration(root),
+                MgmtTestConfiguration.LoadConfiguration(root)
+            );
+        }
+
+        internal static string SaveConfiguration()
+        {
+            using (var memoryStream = new MemoryStream())
+            {
+                var options = new JsonWriterOptions()
+                {
+                    Indented = true,
+                };
+                using (var writer = new Utf8JsonWriter(memoryStream, options))
+                {
+                    WriteConfiguration(writer);
+                }
+
+                return Encoding.UTF8.GetString(memoryStream.ToArray());
+            }
+        }
+
+        private static void WriteConfiguration(Utf8JsonWriter writer)
+        {
+            writer.WriteStartObject();
+            writer.WriteString(Options.OutputFolder, Path.GetRelativePath(Configuration.OutputFolder, Configuration.OutputFolder));
+            writer.WriteString(Options.Namespace, Configuration.Namespace);
+            writer.WriteString(Options.LibraryName, Configuration.LibraryName);
+            writer.WriteStartArray(Options.SharedSourceFolders);
+            foreach (var sharedSourceFolder in Configuration.SharedSourceFolders)
+            {
+                writer.WriteStringValue(NormalizePath(sharedSourceFolder));
+            }
+            writer.WriteEndArray();
+            WriteIfNotDefault(writer, Options.AzureArm, Configuration.AzureArm);
+            WriteIfNotDefault(writer, Options.PublicClients, Configuration.PublicClients);
+            WriteIfNotDefault(writer, Options.ModelNamespace, Configuration.ModelNamespace);
+            WriteIfNotDefault(writer, Options.HeadAsBoolean, Configuration.HeadAsBoolean);
+            WriteIfNotDefault(writer, Options.SkipCSProjPackageReference, Configuration.SkipCSProjPackageReference);
+            WriteIfNotDefault(writer, Options.Generation1ConvenienceClient, Configuration.Generation1ConvenienceClient);
+            WriteIfNotDefault(writer, Options.SingleTopLevelClient, Configuration.SingleTopLevelClient);
+            WriteIfNotDefault(writer, Options.GenerateModelFactory, Configuration.GenerateModelFactory);
+            writer.WriteNonEmptyArray(Options.ModelFactoryForHlc, Configuration.ModelFactoryForHlc);
+            WriteIfNotDefault(writer, Options.UnreferencedTypesHandling, Configuration.UnreferencedTypesHandling);
+            WriteIfNotDefault(writer, Options.UseOverloadsBetweenProtocolAndConvenience, Configuration.UseOverloadsBetweenProtocolAndConvenience);
+            WriteIfNotDefault(writer, Options.ProjectFolder, Configuration.RelativeProjectFolder);
+            WriteIfNotDefault(writer, Options.UseCoreDataFactoryReplacements, Configuration.UseCoreDataFactoryReplacements);
+            writer.WriteNonEmptyArray(Options.ProtocolMethodList, Configuration.ProtocolMethodList);
+            writer.WriteNonEmptyArray(Options.SuppressAbstractBaseClasses, Configuration.SuppressAbstractBaseClasses);
+            writer.WriteNonEmptyArray(Options.ModelsToTreatEmptyStringAsNull, Configuration.ModelsToTreatEmptyStringAsNull.ToList());
+            if (Configuration.ModelsToTreatEmptyStringAsNull.Any())
+            {
+                writer.WriteNonEmptyArray(Options.IntrinsicTypesToTreatEmptyStringAsNull, Configuration.IntrinsicTypesToTreatEmptyStringAsNull.ToList());
+            }
+
+            Configuration.MgmtConfiguration.SaveConfiguration(writer);
+
+            if (Configuration.MgmtTestConfiguration != null)
+            {
+                Configuration.MgmtTestConfiguration.SaveConfiguration(writer);
+            }
+
+            writer.WriteEndObject();
+        }
+
+        private static string NormalizePath(string sharedSourceFolder)
+        {
+            return Path.GetRelativePath(Configuration.OutputFolder, sharedSourceFolder);
+        }
+
+        private static void WriteIfNotDefault<T>(Utf8JsonWriter writer, string option, T enumValue) where T : struct, Enum
+        {
+            var defaultValue = Configuration.GetDefaultEnumOptionValue(option);
+            if (!enumValue.Equals(defaultValue))
+            {
+                writer.WriteString(option, enumValue.ToString());
+            }
+        }
+
+        private static void WriteIfNotDefault(Utf8JsonWriter writer, string option, bool value)
+        {
+            var defaultValue = Configuration.GetDefaultBoolOptionValue(option);
+            if (!defaultValue.HasValue || defaultValue.Value != value)
+            {
+                writer.WriteBoolean(option, value);
+            }
+        }
+
+        private static void WriteIfNotDefault(Utf8JsonWriter writer, string option, string? value)
+        {
+            if (value == null)
+            {
+                return;
+            }
+
+            switch (option)
+            {
+                case Configuration.Options.ProjectFolder:
+                    if (value != Configuration.ProjectFolderDefault)
+                        writer.WriteString(option, value);
+                    break;
+                default:
+                    writer.WriteString(option, value);
+                    break;
+            }
+        }
+
+        private static bool ReadOption(JsonElement root, string option)
+        {
+            if (root.TryGetProperty(option, out JsonElement value))
+            {
+                return value.GetBoolean();
+            }
+            else
+            {
+                return Configuration.GetDefaultBoolOptionValue(option)!.Value;
+            }
+        }
+
+        private static T ReadEnumOption<T>(JsonElement root, string option) where T : struct, Enum
+        {
+            var enumStr = ReadStringOption(root, option);
+            return Configuration.GetOptionEnumValueFromString<T>(option, enumStr);
+        }
+
+        private static string? ReadStringOption(JsonElement root, string option)
+        {
+            if (root.TryGetProperty(option, out JsonElement value))
+                return value.GetString();
+
+            return null;
+        }
     }
 }

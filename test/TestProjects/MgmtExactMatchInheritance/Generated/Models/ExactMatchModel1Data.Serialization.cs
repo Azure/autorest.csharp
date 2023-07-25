@@ -121,6 +121,21 @@ namespace MgmtExactMatchInheritance
                 writer.WritePropertyName("type16"u8);
                 JsonSerializer.Serialize(writer, Type16);
             }
+            if (Optional.IsDefined(Type17))
+            {
+                writer.WritePropertyName("type17"u8);
+                JsonSerializer.Serialize(writer, Type17);
+            }
+            if (Optional.IsDefined(Type18))
+            {
+                writer.WritePropertyName("type18"u8);
+                JsonSerializer.Serialize(writer, Type18);
+            }
+            if (Optional.IsDefined(Type19))
+            {
+                writer.WritePropertyName("type19"u8);
+                JsonSerializer.Serialize(writer, Type19);
+            }
             writer.WriteEndObject();
         }
 
@@ -148,6 +163,9 @@ namespace MgmtExactMatchInheritance
             Optional<DataFactoryElement<DateTimeOffset>> type14 = default;
             Optional<DataFactoryElement<TimeSpan>> type15 = default;
             Optional<DataFactoryElement<Uri>> type16 = default;
+            Optional<DataFactoryLinkedServiceReference> type17 = default;
+            Optional<DataFactorySecretString> type18 = default;
+            Optional<DataFactoryKeyVaultSecretReference> type19 = default;
             ResourceIdentifier id = default;
             string name = default;
             ResourceType type = default;
@@ -324,6 +342,33 @@ namespace MgmtExactMatchInheritance
                     type16 = JsonSerializer.Deserialize<DataFactoryElement<Uri>>(property.Value.GetRawText());
                     continue;
                 }
+                if (property.NameEquals("type17"u8))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        continue;
+                    }
+                    type17 = JsonSerializer.Deserialize<DataFactoryLinkedServiceReference>(property.Value.GetRawText());
+                    continue;
+                }
+                if (property.NameEquals("type18"u8))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        continue;
+                    }
+                    type18 = JsonSerializer.Deserialize<DataFactorySecretString>(property.Value.GetRawText());
+                    continue;
+                }
+                if (property.NameEquals("type19"u8))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        continue;
+                    }
+                    type19 = JsonSerializer.Deserialize<DataFactoryKeyVaultSecretReference>(property.Value.GetRawText());
+                    continue;
+                }
                 if (property.NameEquals("id"u8))
                 {
                     id = new ResourceIdentifier(property.Value.GetString());
@@ -349,7 +394,7 @@ namespace MgmtExactMatchInheritance
                     continue;
                 }
             }
-            return new ExactMatchModel1Data(id, name, type, systemData.Value, @new.Value, Optional.ToList(supportingUris), Optional.ToNullable(type1), Optional.ToNullable(type2), type3.Value, type4.Value, type5.Value, type6.Value, type7.Value, type8.Value, type9.Value, type10.Value, type11.Value, type12.Value, type13.Value, type14.Value, type15.Value, type16.Value);
+            return new ExactMatchModel1Data(id, name, type, systemData.Value, @new.Value, Optional.ToList(supportingUris), Optional.ToNullable(type1), Optional.ToNullable(type2), type3.Value, type4.Value, type5.Value, type6.Value, type7.Value, type8.Value, type9.Value, type10.Value, type11.Value, type12.Value, type13.Value, type14.Value, type15.Value, type16.Value, type17, type18, type19);
         }
     }
 }

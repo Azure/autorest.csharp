@@ -1,8 +1,8 @@
 {
-  "OutputFolder": ".",
-  "Namespace": "_Specs_.Azure.ClientGenerator.Core.Internal",
-  "LibraryName": "_Specs_.Azure.ClientGenerator.Core.Internal",
-  "SharedSourceFolders": [
+  "output-folder": ".",
+  "namespace": "_Specs_.Azure.ClientGenerator.Core.Internal",
+  "library-name": "_Specs_.Azure.ClientGenerator.Core.Internal",
+  "shared-source-folders": [
     "../../../../../../../artifacts/bin/AutoRest.CSharp/Debug/net6.0/Generator.Shared",
     "../../../../../../../artifacts/bin/AutoRest.CSharp/Debug/net6.0/Azure.Core.Shared"
   ],

@@ -16,23 +16,23 @@ namespace ModelsTypeSpec.Models
     public partial class DerivedModel : BaseModel
     {
         /// <summary> Initializes a new instance of DerivedModel. </summary>
-        /// <param name="requiredCollection"> Required collection. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="requiredCollection"/> is null. </exception>
-        public DerivedModel(IEnumerable<CollectionItem> requiredCollection)
+        /// <param name="requiredList"> Required collection. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="requiredList"/> is null. </exception>
+        public DerivedModel(IEnumerable<CollectionItem> requiredList)
         {
-            Argument.AssertNotNull(requiredCollection, nameof(requiredCollection));
+            Argument.AssertNotNull(requiredList, nameof(requiredList));
 
-            RequiredCollection = requiredCollection.ToList();
+            RequiredList = requiredList.ToList();
         }
 
         /// <summary> Initializes a new instance of DerivedModel. </summary>
-        /// <param name="requiredCollection"> Required collection. </param>
-        internal DerivedModel(IList<CollectionItem> requiredCollection)
+        /// <param name="requiredList"> Required collection. </param>
+        internal DerivedModel(IList<CollectionItem> requiredList)
         {
-            RequiredCollection = requiredCollection;
+            RequiredList = requiredList;
         }
 
         /// <summary> Required collection. </summary>
-        public IList<CollectionItem> RequiredCollection { get; }
+        public IList<CollectionItem> RequiredList { get; }
     }
 }

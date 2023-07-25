@@ -1,8 +1,8 @@
 {
-  "OutputFolder": ".",
-  "Namespace": "Pagination",
-  "LibraryName": "Pagination",
-  "SharedSourceFolders": [
+  "output-folder": ".",
+  "namespace": "Pagination",
+  "library-name": "Pagination",
+  "shared-source-folders": [
     "../../../../../../../node_modules/@autorest/csharp/Generator.Shared",
     "../../../../../../../node_modules/@autorest/csharp/Azure.Core.Shared"
   ],

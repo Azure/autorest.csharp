@@ -378,18 +378,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
         }
 
         private ModelFactoryTypeProvider? _modelFactory;
-        public ModelFactoryTypeProvider? ModelFactory => _modelFactory ??= ModelFactoryTypeProvider.TryCreate(GetModelFactoryName(), MgmtContext.Context.DefaultNamespace, AllSchemaMap.Values.Where(ShouldIncludeModel), MgmtContext.Context.SourceInputModel, GetModelFactoryNamespaceOverride());
-
-        private static string GetModelFactoryName()
-        {
-            var baseName = MgmtContext.Context.DefaultNamespace.Split('.').Last();
-            if (Configuration.MgmtConfiguration.IsArmCore)
-                return "ResourceManager";
-
-            return $"Arm{baseName}";
-        }
-
-        private static string? GetModelFactoryNamespaceOverride() => Configuration.MgmtConfiguration.IsArmCore ? "Azure.ResourceManager.Models" : null;
+        public ModelFactoryTypeProvider? ModelFactory => _modelFactory ??= ModelFactoryTypeProvider.TryCreate(AllSchemaMap.Values.Where(ShouldIncludeModel), MgmtContext.Context.SourceInputModel);
 
         private bool ShouldIncludeModel(TypeProvider model)
         {
@@ -822,7 +811,10 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
         public override CSharpType? FindTypeByName(string originalName)
         {
             _schemaOrNameToModels.TryGetValue(originalName, out TypeProvider? provider);
-            provider ??= ResourceSchemaMap.Values.FirstOrDefault(m => m.Type.Name == originalName);
+
+            // Try to search declaration name too if no key matches. i.e. Resource Data Type will be appended a 'Data' in the name and won't be found through key
+            provider ??= _schemaOrNameToModels.FirstOrDefault(s => s.Value is MgmtObjectType mot && mot.Declaration.Name == originalName).Value;
+
             return provider?.Type;
         }
 
