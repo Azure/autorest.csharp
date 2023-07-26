@@ -20,6 +20,14 @@ namespace MgmtPropertyChooser
     /// <summary> A class to add extension methods to MgmtPropertyChooser. </summary>
     public static partial class MgmtPropertyChooserExtensions
     {
+        private static MgmtPropertyChooserArmClientMockingExtension GetMgmtPropertyChooserArmClientMockingExtension(ArmClient client)
+        {
+            return client.GetCachedClient(client =>
+            {
+                return new MgmtPropertyChooserArmClientMockingExtension(client);
+            });
+        }
+
         private static MgmtPropertyChooserResourceGroupMockingExtension GetMgmtPropertyChooserResourceGroupMockingExtension(ArmResource resource)
         {
             return resource.GetCachedClient(client =>
@@ -27,6 +35,7 @@ namespace MgmtPropertyChooser
                 return new MgmtPropertyChooserResourceGroupMockingExtension(client, resource.Id);
             });
         }
+
         #region VirtualMachineResource
         /// <summary>
         /// Gets an object representing a <see cref="VirtualMachineResource" /> along with the instance operations that can be performed on it but with no data.
@@ -37,12 +46,7 @@ namespace MgmtPropertyChooser
         /// <returns> Returns a <see cref="VirtualMachineResource" /> object. </returns>
         public static VirtualMachineResource GetVirtualMachineResource(this ArmClient client, ResourceIdentifier id)
         {
-            return client.GetResourceClient(() =>
-            {
-                VirtualMachineResource.ValidateResourceId(id);
-                return new VirtualMachineResource(client, id);
-            }
-            );
+            return GetMgmtPropertyChooserArmClientMockingExtension(client).GetVirtualMachineResource(id);
         }
         #endregion
 

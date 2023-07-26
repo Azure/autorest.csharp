@@ -19,6 +19,14 @@ namespace MgmtResourceName
     /// <summary> A class to add extension methods to MgmtResourceName. </summary>
     public static partial class MgmtResourceNameExtensions
     {
+        private static MgmtResourceNameArmClientMockingExtension GetMgmtResourceNameArmClientMockingExtension(ArmClient client)
+        {
+            return client.GetCachedClient(client =>
+            {
+                return new MgmtResourceNameArmClientMockingExtension(client);
+            });
+        }
+
         private static MgmtResourceNameResourceGroupMockingExtension GetMgmtResourceNameResourceGroupMockingExtension(ArmResource resource)
         {
             return resource.GetCachedClient(client =>
@@ -34,6 +42,7 @@ namespace MgmtResourceName
                 return new MgmtResourceNameTenantMockingExtension(client, resource.Id);
             });
         }
+
         #region MachineResource
         /// <summary>
         /// Gets an object representing a <see cref="MachineResource" /> along with the instance operations that can be performed on it but with no data.
@@ -44,12 +53,7 @@ namespace MgmtResourceName
         /// <returns> Returns a <see cref="MachineResource" /> object. </returns>
         public static MachineResource GetMachineResource(this ArmClient client, ResourceIdentifier id)
         {
-            return client.GetResourceClient(() =>
-            {
-                MachineResource.ValidateResourceId(id);
-                return new MachineResource(client, id);
-            }
-            );
+            return GetMgmtResourceNameArmClientMockingExtension(client).GetMachineResource(id);
         }
         #endregion
 
@@ -63,12 +67,7 @@ namespace MgmtResourceName
         /// <returns> Returns a <see cref="Disk" /> object. </returns>
         public static Disk GetDisk(this ArmClient client, ResourceIdentifier id)
         {
-            return client.GetResourceClient(() =>
-            {
-                Disk.ValidateResourceId(id);
-                return new Disk(client, id);
-            }
-            );
+            return GetMgmtResourceNameArmClientMockingExtension(client).GetDisk(id);
         }
         #endregion
 
@@ -82,12 +81,7 @@ namespace MgmtResourceName
         /// <returns> Returns a <see cref="Memory" /> object. </returns>
         public static Memory GetMemory(this ArmClient client, ResourceIdentifier id)
         {
-            return client.GetResourceClient(() =>
-            {
-                Memory.ValidateResourceId(id);
-                return new Memory(client, id);
-            }
-            );
+            return GetMgmtResourceNameArmClientMockingExtension(client).GetMemory(id);
         }
         #endregion
 
@@ -101,12 +95,7 @@ namespace MgmtResourceName
         /// <returns> Returns a <see cref="NetworkResource" /> object. </returns>
         public static NetworkResource GetNetworkResource(this ArmClient client, ResourceIdentifier id)
         {
-            return client.GetResourceClient(() =>
-            {
-                NetworkResource.ValidateResourceId(id);
-                return new NetworkResource(client, id);
-            }
-            );
+            return GetMgmtResourceNameArmClientMockingExtension(client).GetNetworkResource(id);
         }
         #endregion
 
@@ -120,12 +109,7 @@ namespace MgmtResourceName
         /// <returns> Returns a <see cref="DisplayResource" /> object. </returns>
         public static DisplayResource GetDisplayResource(this ArmClient client, ResourceIdentifier id)
         {
-            return client.GetResourceClient(() =>
-            {
-                DisplayResource.ValidateResourceId(id);
-                return new DisplayResource(client, id);
-            }
-            );
+            return GetMgmtResourceNameArmClientMockingExtension(client).GetDisplayResource(id);
         }
         #endregion
 
@@ -139,12 +123,7 @@ namespace MgmtResourceName
         /// <returns> Returns a <see cref="ProviderOperationResource" /> object. </returns>
         public static ProviderOperationResource GetProviderOperationResource(this ArmClient client, ResourceIdentifier id)
         {
-            return client.GetResourceClient(() =>
-            {
-                ProviderOperationResource.ValidateResourceId(id);
-                return new ProviderOperationResource(client, id);
-            }
-            );
+            return GetMgmtResourceNameArmClientMockingExtension(client).GetProviderOperationResource(id);
         }
         #endregion
 

@@ -19,6 +19,14 @@ namespace MgmtXmlDeserialization
     /// <summary> A class to add extension methods to MgmtXmlDeserialization. </summary>
     public static partial class MgmtXmlDeserializationExtensions
     {
+        private static MgmtXmlDeserializationArmClientMockingExtension GetMgmtXmlDeserializationArmClientMockingExtension(ArmClient client)
+        {
+            return client.GetCachedClient(client =>
+            {
+                return new MgmtXmlDeserializationArmClientMockingExtension(client);
+            });
+        }
+
         private static MgmtXmlDeserializationResourceGroupMockingExtension GetMgmtXmlDeserializationResourceGroupMockingExtension(ArmResource resource)
         {
             return resource.GetCachedClient(client =>
@@ -26,6 +34,7 @@ namespace MgmtXmlDeserialization
                 return new MgmtXmlDeserializationResourceGroupMockingExtension(client, resource.Id);
             });
         }
+
         #region XmlInstanceResource
         /// <summary>
         /// Gets an object representing a <see cref="XmlInstanceResource" /> along with the instance operations that can be performed on it but with no data.
@@ -36,12 +45,7 @@ namespace MgmtXmlDeserialization
         /// <returns> Returns a <see cref="XmlInstanceResource" /> object. </returns>
         public static XmlInstanceResource GetXmlInstanceResource(this ArmClient client, ResourceIdentifier id)
         {
-            return client.GetResourceClient(() =>
-            {
-                XmlInstanceResource.ValidateResourceId(id);
-                return new XmlInstanceResource(client, id);
-            }
-            );
+            return GetMgmtXmlDeserializationArmClientMockingExtension(client).GetXmlInstanceResource(id);
         }
         #endregion
 

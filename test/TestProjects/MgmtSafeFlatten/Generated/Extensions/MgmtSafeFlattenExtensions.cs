@@ -19,6 +19,14 @@ namespace MgmtSafeFlatten
     /// <summary> A class to add extension methods to MgmtSafeFlatten. </summary>
     public static partial class MgmtSafeFlattenExtensions
     {
+        private static MgmtSafeFlattenArmClientMockingExtension GetMgmtSafeFlattenArmClientMockingExtension(ArmClient client)
+        {
+            return client.GetCachedClient(client =>
+            {
+                return new MgmtSafeFlattenArmClientMockingExtension(client);
+            });
+        }
+
         private static MgmtSafeFlattenResourceGroupMockingExtension GetMgmtSafeFlattenResourceGroupMockingExtension(ArmResource resource)
         {
             return resource.GetCachedClient(client =>
@@ -34,6 +42,7 @@ namespace MgmtSafeFlatten
                 return new MgmtSafeFlattenSubscriptionMockingExtension(client, resource.Id);
             });
         }
+
         #region TypeOneResource
         /// <summary>
         /// Gets an object representing a <see cref="TypeOneResource" /> along with the instance operations that can be performed on it but with no data.
@@ -44,12 +53,7 @@ namespace MgmtSafeFlatten
         /// <returns> Returns a <see cref="TypeOneResource" /> object. </returns>
         public static TypeOneResource GetTypeOneResource(this ArmClient client, ResourceIdentifier id)
         {
-            return client.GetResourceClient(() =>
-            {
-                TypeOneResource.ValidateResourceId(id);
-                return new TypeOneResource(client, id);
-            }
-            );
+            return GetMgmtSafeFlattenArmClientMockingExtension(client).GetTypeOneResource(id);
         }
         #endregion
 
@@ -63,12 +67,7 @@ namespace MgmtSafeFlatten
         /// <returns> Returns a <see cref="TypeTwoResource" /> object. </returns>
         public static TypeTwoResource GetTypeTwoResource(this ArmClient client, ResourceIdentifier id)
         {
-            return client.GetResourceClient(() =>
-            {
-                TypeTwoResource.ValidateResourceId(id);
-                return new TypeTwoResource(client, id);
-            }
-            );
+            return GetMgmtSafeFlattenArmClientMockingExtension(client).GetTypeTwoResource(id);
         }
         #endregion
 

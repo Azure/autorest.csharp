@@ -84,6 +84,82 @@ namespace AutoRest.CSharp.Mgmt.Generation
             WriteMethodBodyWrapper(signature, isAsync, isPaging);
         }
 
+        protected override void WriteSingletonResourceGetMethod(Resource resource)
+        {
+            if (IsArmCore)
+            {
+                base.WriteSingletonResourceGetMethod(resource);
+            }
+            else
+            {
+                var scopeTypes = GetScopeTypeStrings(resource.RequestPath.GetParameterizedScopeResourceTypes());
+                var signature = new MethodSignature(
+                    $"Get{resource.ResourceName}",
+                    null,
+                    $"Gets an object representing a {resource.Type.Name} along with the instance operations that can be performed on it in the {This.ResourceName}.",
+                    GetMethodModifiers(),
+                    resource.Type,
+                    $"Returns a <see cref=\"{resource.Type}\" /> object.",
+                    GetParametersForSingletonEntry(scopeTypes));
+                using (_writer.WriteCommonMethod(signature, null, false, This.Accessibility == "public"))
+                {
+                    WriteMethodBodyWrapper(signature, false, false, scopeTypes);
+                }
+            }
+        }
+        protected override void WriteResourceCollectionGetMethod(Resource resource)
+        {
+            if (IsArmCore)
+            {
+                base.WriteResourceCollectionGetMethod(resource);
+            }
+            else
+            {
+                var scopeTypes = GetScopeTypeStrings(resource.RequestPath.GetParameterizedScopeResourceTypes());
+                var resourceCollection = resource.ResourceCollection!;
+                var signature = new MethodSignature(
+                    $"{GetResourceCollectionMethodName(resourceCollection)}",
+                    null,
+                    $"Gets a collection of {resource.Type.Name.LastWordToPlural()} in the {This.ResourceName}.",
+                    GetMethodModifiers(),
+                    resourceCollection.Type,
+                    $"An object representing collection of {resource.Type.Name.LastWordToPlural()} and their operations over a {resource.Type.Name}.",
+                    GetParametersForCollectionEntry(resourceCollection, scopeTypes));
+                using (_writer.WriteCommonMethod(signature, null, false, This.Accessibility == "public"))
+                {
+                    WriteMethodBodyWrapper(signature, false, false, scopeTypes);
+                }
+            }
+        }
+
+        protected override void WriteChildResourceGetMethod(ResourceCollection resourceCollection, bool isAsync)
+        {
+            if (IsArmCore)
+            {
+                base.WriteChildResourceGetMethod(resourceCollection, isAsync);
+            }
+            else
+            {
+                var scopeTypes = GetScopeTypeStrings(resourceCollection.RequestPath.GetParameterizedScopeResourceTypes());
+                var getOperation = resourceCollection.GetOperation;
+                // Copy the original method signature with changes in name and modifier (e.g. when adding into extension class, the modifier should be static)
+                var signature = getOperation.MethodSignature with
+                {
+                    // name after `Get{ResourceName}`
+                    Name = $"{getOperation.MethodSignature.Name}{resourceCollection.Resource.ResourceName}",
+                    Modifiers = GetMethodModifiers(),
+                    // There could be parameters to get resource collection
+                    Parameters = GetParametersForCollectionEntry(resourceCollection, scopeTypes).Concat(GetParametersForResourceEntry(resourceCollection)).ToArray(),
+                    Attributes = new[] { new CSharpAttribute(typeof(ForwardsClientCallsAttribute)) }
+                };
+
+                using (_writer.WriteCommonMethodWithoutValidation(signature, getOperation.ReturnsDescription != null ? getOperation.ReturnsDescription(isAsync) : null, isAsync, This.Accessibility == "public"))
+                {
+                    WriteMethodBodyWrapper(signature, isAsync, false, scopeTypes);
+                }
+            }
+        }
+
         private ICollection<FormattableString>? GetScopeTypeStrings(IEnumerable<ResourceTypeSegment>? scopeTypes)
         {
             if (scopeTypes == null || !scopeTypes.Any() || scopeTypes.Contains(ResourceTypeSegment.Any))

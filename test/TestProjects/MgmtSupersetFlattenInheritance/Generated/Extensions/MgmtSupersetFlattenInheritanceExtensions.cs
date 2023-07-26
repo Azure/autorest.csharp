@@ -20,6 +20,14 @@ namespace MgmtSupersetFlattenInheritance
     /// <summary> A class to add extension methods to MgmtSupersetFlattenInheritance. </summary>
     public static partial class MgmtSupersetFlattenInheritanceExtensions
     {
+        private static MgmtSupersetFlattenInheritanceArmClientMockingExtension GetMgmtSupersetFlattenInheritanceArmClientMockingExtension(ArmClient client)
+        {
+            return client.GetCachedClient(client =>
+            {
+                return new MgmtSupersetFlattenInheritanceArmClientMockingExtension(client);
+            });
+        }
+
         private static MgmtSupersetFlattenInheritanceResourceGroupMockingExtension GetMgmtSupersetFlattenInheritanceResourceGroupMockingExtension(ArmResource resource)
         {
             return resource.GetCachedClient(client =>
@@ -27,6 +35,7 @@ namespace MgmtSupersetFlattenInheritance
                 return new MgmtSupersetFlattenInheritanceResourceGroupMockingExtension(client, resource.Id);
             });
         }
+
         #region ResourceModel1Resource
         /// <summary>
         /// Gets an object representing a <see cref="ResourceModel1Resource" /> along with the instance operations that can be performed on it but with no data.
@@ -37,12 +46,7 @@ namespace MgmtSupersetFlattenInheritance
         /// <returns> Returns a <see cref="ResourceModel1Resource" /> object. </returns>
         public static ResourceModel1Resource GetResourceModel1Resource(this ArmClient client, ResourceIdentifier id)
         {
-            return client.GetResourceClient(() =>
-            {
-                ResourceModel1Resource.ValidateResourceId(id);
-                return new ResourceModel1Resource(client, id);
-            }
-            );
+            return GetMgmtSupersetFlattenInheritanceArmClientMockingExtension(client).GetResourceModel1Resource(id);
         }
         #endregion
 
@@ -56,12 +60,7 @@ namespace MgmtSupersetFlattenInheritance
         /// <returns> Returns a <see cref="TrackedResourceModel1Resource" /> object. </returns>
         public static TrackedResourceModel1Resource GetTrackedResourceModel1Resource(this ArmClient client, ResourceIdentifier id)
         {
-            return client.GetResourceClient(() =>
-            {
-                TrackedResourceModel1Resource.ValidateResourceId(id);
-                return new TrackedResourceModel1Resource(client, id);
-            }
-            );
+            return GetMgmtSupersetFlattenInheritanceArmClientMockingExtension(client).GetTrackedResourceModel1Resource(id);
         }
         #endregion
 

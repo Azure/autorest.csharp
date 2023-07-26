@@ -20,6 +20,14 @@ namespace MgmtSupersetInheritance
     /// <summary> A class to add extension methods to MgmtSupersetInheritance. </summary>
     public static partial class MgmtSupersetInheritanceExtensions
     {
+        private static MgmtSupersetInheritanceArmClientMockingExtension GetMgmtSupersetInheritanceArmClientMockingExtension(ArmClient client)
+        {
+            return client.GetCachedClient(client =>
+            {
+                return new MgmtSupersetInheritanceArmClientMockingExtension(client);
+            });
+        }
+
         private static MgmtSupersetInheritanceResourceGroupMockingExtension GetMgmtSupersetInheritanceResourceGroupMockingExtension(ArmResource resource)
         {
             return resource.GetCachedClient(client =>
@@ -27,6 +35,7 @@ namespace MgmtSupersetInheritance
                 return new MgmtSupersetInheritanceResourceGroupMockingExtension(client, resource.Id);
             });
         }
+
         #region SupersetModel1Resource
         /// <summary>
         /// Gets an object representing a <see cref="SupersetModel1Resource" /> along with the instance operations that can be performed on it but with no data.
@@ -37,12 +46,7 @@ namespace MgmtSupersetInheritance
         /// <returns> Returns a <see cref="SupersetModel1Resource" /> object. </returns>
         public static SupersetModel1Resource GetSupersetModel1Resource(this ArmClient client, ResourceIdentifier id)
         {
-            return client.GetResourceClient(() =>
-            {
-                SupersetModel1Resource.ValidateResourceId(id);
-                return new SupersetModel1Resource(client, id);
-            }
-            );
+            return GetMgmtSupersetInheritanceArmClientMockingExtension(client).GetSupersetModel1Resource(id);
         }
         #endregion
 
@@ -56,12 +60,7 @@ namespace MgmtSupersetInheritance
         /// <returns> Returns a <see cref="SupersetModel4Resource" /> object. </returns>
         public static SupersetModel4Resource GetSupersetModel4Resource(this ArmClient client, ResourceIdentifier id)
         {
-            return client.GetResourceClient(() =>
-            {
-                SupersetModel4Resource.ValidateResourceId(id);
-                return new SupersetModel4Resource(client, id);
-            }
-            );
+            return GetMgmtSupersetInheritanceArmClientMockingExtension(client).GetSupersetModel4Resource(id);
         }
         #endregion
 
@@ -75,12 +74,7 @@ namespace MgmtSupersetInheritance
         /// <returns> Returns a <see cref="SupersetModel6Resource" /> object. </returns>
         public static SupersetModel6Resource GetSupersetModel6Resource(this ArmClient client, ResourceIdentifier id)
         {
-            return client.GetResourceClient(() =>
-            {
-                SupersetModel6Resource.ValidateResourceId(id);
-                return new SupersetModel6Resource(client, id);
-            }
-            );
+            return GetMgmtSupersetInheritanceArmClientMockingExtension(client).GetSupersetModel6Resource(id);
         }
         #endregion
 
@@ -94,12 +88,7 @@ namespace MgmtSupersetInheritance
         /// <returns> Returns a <see cref="SupersetModel7Resource" /> object. </returns>
         public static SupersetModel7Resource GetSupersetModel7Resource(this ArmClient client, ResourceIdentifier id)
         {
-            return client.GetResourceClient(() =>
-            {
-                SupersetModel7Resource.ValidateResourceId(id);
-                return new SupersetModel7Resource(client, id);
-            }
-            );
+            return GetMgmtSupersetInheritanceArmClientMockingExtension(client).GetSupersetModel7Resource(id);
         }
         #endregion
 

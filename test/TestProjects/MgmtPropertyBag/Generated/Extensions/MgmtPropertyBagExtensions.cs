@@ -20,6 +20,14 @@ namespace MgmtPropertyBag
     /// <summary> A class to add extension methods to MgmtPropertyBag. </summary>
     public static partial class MgmtPropertyBagExtensions
     {
+        private static MgmtPropertyBagArmClientMockingExtension GetMgmtPropertyBagArmClientMockingExtension(ArmClient client)
+        {
+            return client.GetCachedClient(client =>
+            {
+                return new MgmtPropertyBagArmClientMockingExtension(client);
+            });
+        }
+
         private static MgmtPropertyBagResourceGroupMockingExtension GetMgmtPropertyBagResourceGroupMockingExtension(ArmResource resource)
         {
             return resource.GetCachedClient(client =>
@@ -35,6 +43,7 @@ namespace MgmtPropertyBag
                 return new MgmtPropertyBagSubscriptionMockingExtension(client, resource.Id);
             });
         }
+
         #region FooResource
         /// <summary>
         /// Gets an object representing a <see cref="FooResource" /> along with the instance operations that can be performed on it but with no data.
@@ -45,12 +54,7 @@ namespace MgmtPropertyBag
         /// <returns> Returns a <see cref="FooResource" /> object. </returns>
         public static FooResource GetFooResource(this ArmClient client, ResourceIdentifier id)
         {
-            return client.GetResourceClient(() =>
-            {
-                FooResource.ValidateResourceId(id);
-                return new FooResource(client, id);
-            }
-            );
+            return GetMgmtPropertyBagArmClientMockingExtension(client).GetFooResource(id);
         }
         #endregion
 
@@ -64,12 +68,7 @@ namespace MgmtPropertyBag
         /// <returns> Returns a <see cref="BarResource" /> object. </returns>
         public static BarResource GetBarResource(this ArmClient client, ResourceIdentifier id)
         {
-            return client.GetResourceClient(() =>
-            {
-                BarResource.ValidateResourceId(id);
-                return new BarResource(client, id);
-            }
-            );
+            return GetMgmtPropertyBagArmClientMockingExtension(client).GetBarResource(id);
         }
         #endregion
 

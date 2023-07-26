@@ -20,6 +20,14 @@ namespace MgmtParent
     /// <summary> A class to add extension methods to MgmtParent. </summary>
     public static partial class MgmtParentExtensions
     {
+        private static MgmtParentArmClientMockingExtension GetMgmtParentArmClientMockingExtension(ArmClient client)
+        {
+            return client.GetCachedClient(client =>
+            {
+                return new MgmtParentArmClientMockingExtension(client);
+            });
+        }
+
         private static MgmtParentResourceGroupMockingExtension GetMgmtParentResourceGroupMockingExtension(ArmResource resource)
         {
             return resource.GetCachedClient(client =>
@@ -35,6 +43,7 @@ namespace MgmtParent
                 return new MgmtParentSubscriptionMockingExtension(client, resource.Id);
             });
         }
+
         #region AvailabilitySetResource
         /// <summary>
         /// Gets an object representing an <see cref="AvailabilitySetResource" /> along with the instance operations that can be performed on it but with no data.
@@ -45,12 +54,7 @@ namespace MgmtParent
         /// <returns> Returns a <see cref="AvailabilitySetResource" /> object. </returns>
         public static AvailabilitySetResource GetAvailabilitySetResource(this ArmClient client, ResourceIdentifier id)
         {
-            return client.GetResourceClient(() =>
-            {
-                AvailabilitySetResource.ValidateResourceId(id);
-                return new AvailabilitySetResource(client, id);
-            }
-            );
+            return GetMgmtParentArmClientMockingExtension(client).GetAvailabilitySetResource(id);
         }
         #endregion
 
@@ -64,12 +68,7 @@ namespace MgmtParent
         /// <returns> Returns a <see cref="DedicatedHostGroupResource" /> object. </returns>
         public static DedicatedHostGroupResource GetDedicatedHostGroupResource(this ArmClient client, ResourceIdentifier id)
         {
-            return client.GetResourceClient(() =>
-            {
-                DedicatedHostGroupResource.ValidateResourceId(id);
-                return new DedicatedHostGroupResource(client, id);
-            }
-            );
+            return GetMgmtParentArmClientMockingExtension(client).GetDedicatedHostGroupResource(id);
         }
         #endregion
 
@@ -83,12 +82,7 @@ namespace MgmtParent
         /// <returns> Returns a <see cref="DedicatedHostResource" /> object. </returns>
         public static DedicatedHostResource GetDedicatedHostResource(this ArmClient client, ResourceIdentifier id)
         {
-            return client.GetResourceClient(() =>
-            {
-                DedicatedHostResource.ValidateResourceId(id);
-                return new DedicatedHostResource(client, id);
-            }
-            );
+            return GetMgmtParentArmClientMockingExtension(client).GetDedicatedHostResource(id);
         }
         #endregion
 
@@ -102,12 +96,7 @@ namespace MgmtParent
         /// <returns> Returns a <see cref="VirtualMachineExtensionImageResource" /> object. </returns>
         public static VirtualMachineExtensionImageResource GetVirtualMachineExtensionImageResource(this ArmClient client, ResourceIdentifier id)
         {
-            return client.GetResourceClient(() =>
-            {
-                VirtualMachineExtensionImageResource.ValidateResourceId(id);
-                return new VirtualMachineExtensionImageResource(client, id);
-            }
-            );
+            return GetMgmtParentArmClientMockingExtension(client).GetVirtualMachineExtensionImageResource(id);
         }
         #endregion
 

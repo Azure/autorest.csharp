@@ -19,6 +19,14 @@ namespace MgmtSubscriptionNameParameter
     /// <summary> A class to add extension methods to MgmtSubscriptionNameParameter. </summary>
     public static partial class MgmtSubscriptionNameParameterExtensions
     {
+        private static MgmtSubscriptionNameParameterArmClientMockingExtension GetMgmtSubscriptionNameParameterArmClientMockingExtension(ArmClient client)
+        {
+            return client.GetCachedClient(client =>
+            {
+                return new MgmtSubscriptionNameParameterArmClientMockingExtension(client);
+            });
+        }
+
         private static MgmtSubscriptionNameParameterResourceGroupMockingExtension GetMgmtSubscriptionNameParameterResourceGroupMockingExtension(ArmResource resource)
         {
             return resource.GetCachedClient(client =>
@@ -26,6 +34,7 @@ namespace MgmtSubscriptionNameParameter
                 return new MgmtSubscriptionNameParameterResourceGroupMockingExtension(client, resource.Id);
             });
         }
+
         #region SBSubscriptionResource
         /// <summary>
         /// Gets an object representing a <see cref="SBSubscriptionResource" /> along with the instance operations that can be performed on it but with no data.
@@ -36,12 +45,7 @@ namespace MgmtSubscriptionNameParameter
         /// <returns> Returns a <see cref="SBSubscriptionResource" /> object. </returns>
         public static SBSubscriptionResource GetSBSubscriptionResource(this ArmClient client, ResourceIdentifier id)
         {
-            return client.GetResourceClient(() =>
-            {
-                SBSubscriptionResource.ValidateResourceId(id);
-                return new SBSubscriptionResource(client, id);
-            }
-            );
+            return GetMgmtSubscriptionNameParameterArmClientMockingExtension(client).GetSBSubscriptionResource(id);
         }
         #endregion
 

@@ -19,6 +19,14 @@ namespace MgmtSingletonResource
     /// <summary> A class to add extension methods to MgmtSingletonResource. </summary>
     public static partial class MgmtSingletonResourceExtensions
     {
+        private static MgmtSingletonResourceArmClientMockingExtension GetMgmtSingletonResourceArmClientMockingExtension(ArmClient client)
+        {
+            return client.GetCachedClient(client =>
+            {
+                return new MgmtSingletonResourceArmClientMockingExtension(client);
+            });
+        }
+
         private static MgmtSingletonResourceResourceGroupMockingExtension GetMgmtSingletonResourceResourceGroupMockingExtension(ArmResource resource)
         {
             return resource.GetCachedClient(client =>
@@ -26,6 +34,7 @@ namespace MgmtSingletonResource
                 return new MgmtSingletonResourceResourceGroupMockingExtension(client, resource.Id);
             });
         }
+
         #region CarResource
         /// <summary>
         /// Gets an object representing a <see cref="CarResource" /> along with the instance operations that can be performed on it but with no data.
@@ -36,12 +45,7 @@ namespace MgmtSingletonResource
         /// <returns> Returns a <see cref="CarResource" /> object. </returns>
         public static CarResource GetCarResource(this ArmClient client, ResourceIdentifier id)
         {
-            return client.GetResourceClient(() =>
-            {
-                CarResource.ValidateResourceId(id);
-                return new CarResource(client, id);
-            }
-            );
+            return GetMgmtSingletonResourceArmClientMockingExtension(client).GetCarResource(id);
         }
         #endregion
 
@@ -55,12 +59,7 @@ namespace MgmtSingletonResource
         /// <returns> Returns a <see cref="IgnitionResource" /> object. </returns>
         public static IgnitionResource GetIgnitionResource(this ArmClient client, ResourceIdentifier id)
         {
-            return client.GetResourceClient(() =>
-            {
-                IgnitionResource.ValidateResourceId(id);
-                return new IgnitionResource(client, id);
-            }
-            );
+            return GetMgmtSingletonResourceArmClientMockingExtension(client).GetIgnitionResource(id);
         }
         #endregion
 
@@ -74,12 +73,7 @@ namespace MgmtSingletonResource
         /// <returns> Returns a <see cref="BrakeResource" /> object. </returns>
         public static BrakeResource GetBrakeResource(this ArmClient client, ResourceIdentifier id)
         {
-            return client.GetResourceClient(() =>
-            {
-                BrakeResource.ValidateResourceId(id);
-                return new BrakeResource(client, id);
-            }
-            );
+            return GetMgmtSingletonResourceArmClientMockingExtension(client).GetBrakeResource(id);
         }
         #endregion
 
@@ -93,12 +87,7 @@ namespace MgmtSingletonResource
         /// <returns> Returns a <see cref="SingletonResource" /> object. </returns>
         public static SingletonResource GetSingletonResource(this ArmClient client, ResourceIdentifier id)
         {
-            return client.GetResourceClient(() =>
-            {
-                SingletonResource.ValidateResourceId(id);
-                return new SingletonResource(client, id);
-            }
-            );
+            return GetMgmtSingletonResourceArmClientMockingExtension(client).GetSingletonResource(id);
         }
         #endregion
 
@@ -112,12 +101,7 @@ namespace MgmtSingletonResource
         /// <returns> Returns a <see cref="ParentResource" /> object. </returns>
         public static ParentResource GetParentResource(this ArmClient client, ResourceIdentifier id)
         {
-            return client.GetResourceClient(() =>
-            {
-                ParentResource.ValidateResourceId(id);
-                return new ParentResource(client, id);
-            }
-            );
+            return GetMgmtSingletonResourceArmClientMockingExtension(client).GetParentResource(id);
         }
         #endregion
 

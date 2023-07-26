@@ -270,7 +270,6 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
         protected virtual void WriteSingletonResourceGetMethod(Resource resource)
         {
-            // TODO -- refactor this so that we have a method getting this signature from the Resource
             var signature = new MethodSignature(
                 $"Get{resource.ResourceName}",
                 null,
@@ -287,7 +286,6 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
         protected virtual void WriteResourceCollectionGetMethod(Resource resource)
         {
-            // TODO -- refactor this so that we have a method getting this signature from the Resource
             var resourceCollection = resource.ResourceCollection!;
             var signature = new MethodSignature(
                 $"{GetResourceCollectionMethodName(resourceCollection)}",
@@ -345,9 +343,6 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
         protected virtual void WriteSingletonResourceEntry(Resource resource, SingletonResourceSuffix singletonResourceIdSuffix, MethodSignature signature)
         {
-            // we cannot guarantee that the singleResourceSuffix can only have two segments (it has many different cases),
-            // therefore instead of using the extension method of ResourceIdentifier, we are just concatting this as a string
-            _writer.UseNamespace(typeof(ResourceIdentifier).Namespace!);
             _writer.Line($"return new {resource.Type.Name}({ArmClientReference}, {singletonResourceIdSuffix.BuildResourceIdentifier($"Id")});");
         }
 

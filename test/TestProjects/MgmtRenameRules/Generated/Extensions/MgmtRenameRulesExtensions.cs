@@ -20,6 +20,14 @@ namespace MgmtRenameRules
     /// <summary> A class to add extension methods to MgmtRenameRules. </summary>
     public static partial class MgmtRenameRulesExtensions
     {
+        private static MgmtRenameRulesArmClientMockingExtension GetMgmtRenameRulesArmClientMockingExtension(ArmClient client)
+        {
+            return client.GetCachedClient(client =>
+            {
+                return new MgmtRenameRulesArmClientMockingExtension(client);
+            });
+        }
+
         private static MgmtRenameRulesResourceGroupMockingExtension GetMgmtRenameRulesResourceGroupMockingExtension(ArmResource resource)
         {
             return resource.GetCachedClient(client =>
@@ -35,6 +43,7 @@ namespace MgmtRenameRules
                 return new MgmtRenameRulesSubscriptionMockingExtension(client, resource.Id);
             });
         }
+
         #region VirtualMachineResource
         /// <summary>
         /// Gets an object representing a <see cref="VirtualMachineResource" /> along with the instance operations that can be performed on it but with no data.
@@ -45,12 +54,7 @@ namespace MgmtRenameRules
         /// <returns> Returns a <see cref="VirtualMachineResource" /> object. </returns>
         public static VirtualMachineResource GetVirtualMachineResource(this ArmClient client, ResourceIdentifier id)
         {
-            return client.GetResourceClient(() =>
-            {
-                VirtualMachineResource.ValidateResourceId(id);
-                return new VirtualMachineResource(client, id);
-            }
-            );
+            return GetMgmtRenameRulesArmClientMockingExtension(client).GetVirtualMachineResource(id);
         }
         #endregion
 
@@ -64,12 +68,7 @@ namespace MgmtRenameRules
         /// <returns> Returns a <see cref="ImageResource" /> object. </returns>
         public static ImageResource GetImageResource(this ArmClient client, ResourceIdentifier id)
         {
-            return client.GetResourceClient(() =>
-            {
-                ImageResource.ValidateResourceId(id);
-                return new ImageResource(client, id);
-            }
-            );
+            return GetMgmtRenameRulesArmClientMockingExtension(client).GetImageResource(id);
         }
         #endregion
 
@@ -83,12 +82,7 @@ namespace MgmtRenameRules
         /// <returns> Returns a <see cref="VirtualMachineScaleSetResource" /> object. </returns>
         public static VirtualMachineScaleSetResource GetVirtualMachineScaleSetResource(this ArmClient client, ResourceIdentifier id)
         {
-            return client.GetResourceClient(() =>
-            {
-                VirtualMachineScaleSetResource.ValidateResourceId(id);
-                return new VirtualMachineScaleSetResource(client, id);
-            }
-            );
+            return GetMgmtRenameRulesArmClientMockingExtension(client).GetVirtualMachineScaleSetResource(id);
         }
         #endregion
 
@@ -102,12 +96,7 @@ namespace MgmtRenameRules
         /// <returns> Returns a <see cref="VirtualMachineScaleSetExtensionResource" /> object. </returns>
         public static VirtualMachineScaleSetExtensionResource GetVirtualMachineScaleSetExtensionResource(this ArmClient client, ResourceIdentifier id)
         {
-            return client.GetResourceClient(() =>
-            {
-                VirtualMachineScaleSetExtensionResource.ValidateResourceId(id);
-                return new VirtualMachineScaleSetExtensionResource(client, id);
-            }
-            );
+            return GetMgmtRenameRulesArmClientMockingExtension(client).GetVirtualMachineScaleSetExtensionResource(id);
         }
         #endregion
 
@@ -121,12 +110,7 @@ namespace MgmtRenameRules
         /// <returns> Returns a <see cref="VirtualMachineScaleSetRollingUpgradeResource" /> object. </returns>
         public static VirtualMachineScaleSetRollingUpgradeResource GetVirtualMachineScaleSetRollingUpgradeResource(this ArmClient client, ResourceIdentifier id)
         {
-            return client.GetResourceClient(() =>
-            {
-                VirtualMachineScaleSetRollingUpgradeResource.ValidateResourceId(id);
-                return new VirtualMachineScaleSetRollingUpgradeResource(client, id);
-            }
-            );
+            return GetMgmtRenameRulesArmClientMockingExtension(client).GetVirtualMachineScaleSetRollingUpgradeResource(id);
         }
         #endregion
 
@@ -140,12 +124,7 @@ namespace MgmtRenameRules
         /// <returns> Returns a <see cref="VirtualMachineScaleSetVmResource" /> object. </returns>
         public static VirtualMachineScaleSetVmResource GetVirtualMachineScaleSetVmResource(this ArmClient client, ResourceIdentifier id)
         {
-            return client.GetResourceClient(() =>
-            {
-                VirtualMachineScaleSetVmResource.ValidateResourceId(id);
-                return new VirtualMachineScaleSetVmResource(client, id);
-            }
-            );
+            return GetMgmtRenameRulesArmClientMockingExtension(client).GetVirtualMachineScaleSetVmResource(id);
         }
         #endregion
 
