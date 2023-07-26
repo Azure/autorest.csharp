@@ -289,8 +289,7 @@
       }
      },
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true,
-     "IsConfident": true
+     "GenerateConvenienceMethod": true
     },
     {
      "$id": "34",
@@ -493,8 +492,7 @@
       }
      },
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true,
-     "IsConfident": true
+     "GenerateConvenienceMethod": true
     },
     {
      "$id": "54",
@@ -649,8 +647,7 @@
       }
      },
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true,
-     "IsConfident": true
+     "GenerateConvenienceMethod": true
     }
    ],
    "Protocol": {

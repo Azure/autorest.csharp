@@ -262,8 +262,6 @@ export function createModelForService(
                 if (!isOperationConfident) {
                     op.ConvenienceMethodOmitReason =
                         ConvenienceMethodOmitReason.TypeNotConfident;
-                    // when it is not confident, instead of not generating it, we still generate the method as an internal method
-                    op.Accessibility = "internal";
                 }
             }
         }

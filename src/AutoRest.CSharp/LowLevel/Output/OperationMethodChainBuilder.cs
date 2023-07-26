@@ -104,7 +104,7 @@ namespace AutoRest.CSharp.Output.Models
 
         private bool ShouldGenerateConvenienceMethod()
         {
-            return Operation.GenerateConvenienceMethod && Operation.IsConfident
+            return Operation.GenerateConvenienceMethod
                 && (!Operation.GenerateProtocolMethod
                 || IsConvenienceMethodMeaningful());
         }
@@ -268,7 +268,13 @@ namespace AutoRest.CSharp.Output.Models
                     }
                 }
             }
-            var convenienceSignature = new MethodSignature(name, _restClientMethod.Summary, _restClientMethod.Description, _restClientMethod.Accessibility | Virtual, _returnType.Convenience, null, parameterList, attributes);
+            var accessibility = _restClientMethod.Accessibility | Virtual;
+            if (Operation.ConvenienceMethodOmitReason == ConvenienceMethodOmitReason.TypeNotConfident)
+            {
+                accessibility &= ~Public; // removes public if any
+                accessibility |= Internal; // add internal
+            }
+            var convenienceSignature = new MethodSignature(name, _restClientMethod.Summary, _restClientMethod.Description, accessibility, _returnType.Convenience, null, parameterList, attributes);
             var diagnostic = name != _restClientMethod.Name ? new Diagnostic($"{_clientName}.{convenienceSignature.Name}") : null;
             return new ConvenienceMethod(convenienceSignature, protocolToConvenience, _returnType.ConvenienceResponseType, diagnostic, _protocolMethodPaging is not null, Operation.LongRunning is not null, Operation.Deprecated);
         }

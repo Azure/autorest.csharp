@@ -11,8 +11,16 @@ using Azure.Core;
 
 namespace _Type.Property.Nullable.Models
 {
-    public partial class InnerModel
+    public partial class InnerModel : IUtf8JsonSerializable
     {
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
+        {
+            writer.WriteStartObject();
+            writer.WritePropertyName("property"u8);
+            writer.WriteStringValue(Property);
+            writer.WriteEndObject();
+        }
+
         internal static InnerModel DeserializeInnerModel(JsonElement element)
         {
             if (element.ValueKind == JsonValueKind.Null)
@@ -37,6 +45,14 @@ namespace _Type.Property.Nullable.Models
         {
             using var document = JsonDocument.Parse(response.Content);
             return DeserializeInnerModel(document.RootElement);
+        }
+
+        /// <summary> Convert into a Utf8JsonRequestContent. </summary>
+        internal virtual RequestContent ToRequestContent()
+        {
+            var content = new Utf8JsonRequestContent();
+            content.JsonWriter.WriteObjectValue(this);
+            return content;
         }
     }
 }

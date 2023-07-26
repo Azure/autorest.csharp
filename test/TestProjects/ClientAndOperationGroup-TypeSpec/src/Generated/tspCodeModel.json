@@ -125,7 +125,7 @@
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
      "GenerateConvenienceMethod": false,
-     "IsConfident": true
+     "ConvenienceMethodOmitReason": "SuppressedInTypeSpec"
     },
     {
      "$id": "15",
@@ -192,7 +192,7 @@
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
      "GenerateConvenienceMethod": false,
-     "IsConfident": true
+     "ConvenienceMethodOmitReason": "SuppressedInTypeSpec"
     }
    ],
    "Protocol": {
@@ -270,7 +270,7 @@
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
      "GenerateConvenienceMethod": false,
-     "IsConfident": true
+     "ConvenienceMethodOmitReason": "SuppressedInTypeSpec"
     },
     {
      "$id": "29",
@@ -337,7 +337,7 @@
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
      "GenerateConvenienceMethod": false,
-     "IsConfident": true
+     "ConvenienceMethodOmitReason": "SuppressedInTypeSpec"
     }
    ],
    "Protocol": {
@@ -416,7 +416,7 @@
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
      "GenerateConvenienceMethod": false,
-     "IsConfident": true
+     "ConvenienceMethodOmitReason": "SuppressedInTypeSpec"
     },
     {
      "$id": "43",
@@ -483,7 +483,7 @@
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
      "GenerateConvenienceMethod": false,
-     "IsConfident": true
+     "ConvenienceMethodOmitReason": "SuppressedInTypeSpec"
     }
    ],
    "Protocol": {

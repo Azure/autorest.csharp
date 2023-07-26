@@ -234,8 +234,7 @@
      "Path": "/azure/client-generator-core/internal/public",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true,
-     "IsConfident": true
+     "GenerateConvenienceMethod": true
     },
     {
      "$id": "27",
@@ -319,8 +318,7 @@
      "Path": "/azure/client-generator-core/internal/internal",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true,
-     "IsConfident": true
+     "GenerateConvenienceMethod": true
     }
    ],
    "Protocol": {
@@ -414,8 +412,7 @@
      "Path": "/azure/client-generator-core/internal/shared/public",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true,
-     "IsConfident": true
+     "GenerateConvenienceMethod": true
     },
     {
      "$id": "43",
@@ -499,8 +496,7 @@
      "Path": "/azure/client-generator-core/internal/shared/internal",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true,
-     "IsConfident": true
+     "GenerateConvenienceMethod": true
     }
    ],
    "Protocol": {

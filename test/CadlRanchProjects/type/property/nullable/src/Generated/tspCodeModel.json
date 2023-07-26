@@ -13,7 +13,7 @@
    "Namespace": "Type.Property.Nullable",
    "Description": "Template type for testing models with nullable property. Pass in the type of the property you are looking for",
    "IsNullable": false,
-   "Usage": "Output",
+   "Usage": "RoundTrip",
    "IsConfident": true,
    "Properties": [
     {
@@ -54,7 +54,7 @@
    "Namespace": "Type.Property.Nullable",
    "Description": "Template type for testing models with nullable property. Pass in the type of the property you are looking for",
    "IsNullable": false,
-   "Usage": "Output",
+   "Usage": "RoundTrip",
    "IsConfident": true,
    "Properties": [
     {
@@ -95,7 +95,7 @@
    "Namespace": "Type.Property.Nullable",
    "Description": "Model with a datetime property",
    "IsNullable": false,
-   "Usage": "Output",
+   "Usage": "RoundTrip",
    "IsConfident": true,
    "Properties": [
     {
@@ -136,7 +136,7 @@
    "Namespace": "Type.Property.Nullable",
    "Description": "Model with a duration property",
    "IsNullable": false,
-   "Usage": "Output",
+   "Usage": "RoundTrip",
    "IsConfident": true,
    "Properties": [
     {
@@ -177,7 +177,7 @@
    "Namespace": "Type.Property.Nullable",
    "Description": "Model with collection bytes properties",
    "IsNullable": false,
-   "Usage": "Output",
+   "Usage": "RoundTrip",
    "IsConfident": true,
    "Properties": [
     {
@@ -223,7 +223,7 @@
    "Namespace": "Type.Property.Nullable",
    "Description": "Model with collection models properties",
    "IsNullable": false,
-   "Usage": "Output",
+   "Usage": "RoundTrip",
    "IsConfident": true,
    "Properties": [
     {
@@ -255,7 +255,7 @@
        "Namespace": "Type.Property.Nullable",
        "Description": "Inner model used in collections model property",
        "IsNullable": false,
-       "Usage": "Output",
+       "Usage": "RoundTrip",
        "IsConfident": true,
        "Properties": [
         {
@@ -423,8 +423,7 @@
      "Path": "/type/property/nullable/string/non-null",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true,
-     "IsConfident": true
+     "GenerateConvenienceMethod": true
     },
     {
      "$id": "52",
@@ -487,8 +486,7 @@
      "Path": "/type/property/nullable/string/null",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true,
-     "IsConfident": true
+     "GenerateConvenienceMethod": true
     },
     {
      "$id": "57",
@@ -605,7 +603,7 @@
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
      "GenerateConvenienceMethod": false,
-     "IsConfident": true
+     "ConvenienceMethodOmitReason": "PatchOperation"
     },
     {
      "$id": "67",
@@ -722,7 +720,7 @@
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
      "GenerateConvenienceMethod": false,
-     "IsConfident": true
+     "ConvenienceMethodOmitReason": "PatchOperation"
     }
    ],
    "Protocol": {
@@ -797,8 +795,7 @@
      "Path": "/type/property/nullable/bytes/non-null",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true,
-     "IsConfident": true
+     "GenerateConvenienceMethod": true
     },
     {
      "$id": "84",
@@ -861,8 +858,7 @@
      "Path": "/type/property/nullable/bytes/null",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true,
-     "IsConfident": true
+     "GenerateConvenienceMethod": true
     },
     {
      "$id": "89",
@@ -979,7 +975,7 @@
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
      "GenerateConvenienceMethod": false,
-     "IsConfident": true
+     "ConvenienceMethodOmitReason": "PatchOperation"
     },
     {
      "$id": "99",
@@ -1096,7 +1092,7 @@
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
      "GenerateConvenienceMethod": false,
-     "IsConfident": true
+     "ConvenienceMethodOmitReason": "PatchOperation"
     }
    ],
    "Protocol": {
@@ -1171,8 +1167,7 @@
      "Path": "/type/property/nullable/datetime/non-null",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true,
-     "IsConfident": true
+     "GenerateConvenienceMethod": true
     },
     {
      "$id": "116",
@@ -1235,8 +1230,7 @@
      "Path": "/type/property/nullable/datetime/null",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true,
-     "IsConfident": true
+     "GenerateConvenienceMethod": true
     },
     {
      "$id": "121",
@@ -1353,7 +1347,7 @@
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
      "GenerateConvenienceMethod": false,
-     "IsConfident": true
+     "ConvenienceMethodOmitReason": "PatchOperation"
     },
     {
      "$id": "131",
@@ -1470,7 +1464,7 @@
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
      "GenerateConvenienceMethod": false,
-     "IsConfident": true
+     "ConvenienceMethodOmitReason": "PatchOperation"
     }
    ],
    "Protocol": {
@@ -1545,8 +1539,7 @@
      "Path": "/type/property/nullable/duration/non-null",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true,
-     "IsConfident": true
+     "GenerateConvenienceMethod": true
     },
     {
      "$id": "148",
@@ -1609,8 +1602,7 @@
      "Path": "/type/property/nullable/duration/null",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true,
-     "IsConfident": true
+     "GenerateConvenienceMethod": true
     },
     {
      "$id": "153",
@@ -1727,7 +1719,7 @@
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
      "GenerateConvenienceMethod": false,
-     "IsConfident": true
+     "ConvenienceMethodOmitReason": "PatchOperation"
     },
     {
      "$id": "163",
@@ -1844,7 +1836,7 @@
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
      "GenerateConvenienceMethod": false,
-     "IsConfident": true
+     "ConvenienceMethodOmitReason": "PatchOperation"
     }
    ],
    "Protocol": {
@@ -1919,8 +1911,7 @@
      "Path": "/type/property/nullable/collections/bytes/non-null",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true,
-     "IsConfident": true
+     "GenerateConvenienceMethod": true
     },
     {
      "$id": "180",
@@ -1983,8 +1974,7 @@
      "Path": "/type/property/nullable/collections/bytes/null",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true,
-     "IsConfident": true
+     "GenerateConvenienceMethod": true
     },
     {
      "$id": "185",
@@ -2101,7 +2091,7 @@
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
      "GenerateConvenienceMethod": false,
-     "IsConfident": true
+     "ConvenienceMethodOmitReason": "PatchOperation"
     },
     {
      "$id": "195",
@@ -2218,7 +2208,7 @@
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
      "GenerateConvenienceMethod": false,
-     "IsConfident": true
+     "ConvenienceMethodOmitReason": "PatchOperation"
     }
    ],
    "Protocol": {
@@ -2293,8 +2283,7 @@
      "Path": "/type/property/nullable/collections/model/non-null",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true,
-     "IsConfident": true
+     "GenerateConvenienceMethod": true
     },
     {
      "$id": "212",
@@ -2357,8 +2346,7 @@
      "Path": "/type/property/nullable/collections/model/null",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true,
-     "IsConfident": true
+     "GenerateConvenienceMethod": true
     },
     {
      "$id": "217",
@@ -2475,7 +2463,7 @@
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
      "GenerateConvenienceMethod": false,
-     "IsConfident": true
+     "ConvenienceMethodOmitReason": "PatchOperation"
     },
     {
      "$id": "227",
@@ -2592,7 +2580,7 @@
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
      "GenerateConvenienceMethod": false,
-     "IsConfident": true
+     "ConvenienceMethodOmitReason": "PatchOperation"
     }
    ],
    "Protocol": {

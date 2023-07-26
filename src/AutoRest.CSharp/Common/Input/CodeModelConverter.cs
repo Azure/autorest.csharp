@@ -104,7 +104,7 @@ namespace AutoRest.CSharp.Common.Input
                 Paging: CreateOperationPaging(operation),
                 GenerateProtocolMethod: true,
                 GenerateConvenienceMethod: false,
-                IsConfident: true)
+                ConvenienceMethodOmitReason: null)
             {
                 KeepClientDefaultValue = Configuration.MethodsToKeepClientDefaultValue.Contains(operation.OperationId)
             };

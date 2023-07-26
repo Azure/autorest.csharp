@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <doc>
   <members>
+    <member name="TopActionAsync(DateTimeOffset,CancellationToken)">
+    </member>
+    <member name="TopAction(DateTimeOffset,CancellationToken)">
+    </member>
     <member name="TopActionAsync(DateTimeOffset,RequestContext)">
 <example>
 This sample shows how to call TopActionAsync with required parameters and parse the result.
@@ -232,6 +236,10 @@ Console.WriteLine(result.GetProperty("optionalLiteralBool").ToString());
 Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
 ]]></code>
 </example>
+    </member>
+    <member name="AnonymousBodyAsync(Thing,CancellationToken)">
+    </member>
+    <member name="AnonymousBody(Thing,CancellationToken)">
     </member>
     <member name="AnonymousBodyAsync(RequestContent,RequestContext)">
 <example>
@@ -566,6 +574,10 @@ Console.WriteLine(result.GetProperty("optionalLiteralBool").ToString());
 Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
 ]]></code>
 </example>
+    </member>
+    <member name="HelloAgainAsync(string,string,RoundTripModel,CancellationToken)">
+    </member>
+    <member name="HelloAgain(string,string,RoundTripModel,CancellationToken)">
     </member>
     <member name="HelloAgainAsync(string,string,RequestContent,RequestContext)">
 <example>
@@ -1131,6 +1143,10 @@ Console.WriteLine(result.GetProperty("readOnlyOptionalRecordUnknown").GetPropert
 ]]></code>
 </example>
     </member>
+    <member name="HelloDemo2Async(CancellationToken)">
+    </member>
+    <member name="HelloDemo2(CancellationToken)">
+    </member>
     <member name="HelloDemo2Async(RequestContext)">
 <example>
 This sample shows how to call HelloDemo2Async with required parameters and parse the result.
@@ -1180,6 +1196,10 @@ Console.WriteLine(result.GetProperty("optionalLiteralBool").ToString());
 Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
 ]]></code>
 </example>
+    </member>
+    <member name="CreateLiteralAsync(Thing,CancellationToken)">
+    </member>
+    <member name="CreateLiteral(Thing,CancellationToken)">
     </member>
     <member name="CreateLiteralAsync(RequestContent,RequestContext)">
 <example>
@@ -1313,6 +1333,10 @@ Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
 ]]></code>
 </example>
     </member>
+    <member name="HelloLiteralAsync(CancellationToken)">
+    </member>
+    <member name="HelloLiteral(CancellationToken)">
+    </member>
     <member name="HelloLiteralAsync(RequestContext)">
 <example>
 This sample shows how to call HelloLiteralAsync with required parameters and parse the result.
@@ -1392,6 +1416,10 @@ JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.ToString());
 ]]></code>
 </example>
+    </member>
+    <member name="InternalProtocolAsync(Thing,CancellationToken)">
+    </member>
+    <member name="InternalProtocol(Thing,CancellationToken)">
     </member>
     <member name="InternalProtocolAsync(RequestContent,RequestContext)">
     </member>

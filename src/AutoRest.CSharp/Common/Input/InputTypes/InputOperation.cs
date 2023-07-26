@@ -31,7 +31,7 @@ internal record InputOperation(
     OperationPaging? Paging,
     bool GenerateProtocolMethod,
     bool GenerateConvenienceMethod,
-    bool IsConfident)
+    ConvenienceMethodOmitReason? ConvenienceMethodOmitReason)
 {
     public InputOperation() : this(
         Name: string.Empty,
@@ -53,7 +53,7 @@ internal record InputOperation(
         Paging: null,
         GenerateProtocolMethod: true,
         GenerateConvenienceMethod: false,
-        IsConfident: false)
+        ConvenienceMethodOmitReason: null)
     { }
 
     private string? _cleanName;

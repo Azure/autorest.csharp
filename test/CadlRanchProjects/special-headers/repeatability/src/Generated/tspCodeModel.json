@@ -216,8 +216,7 @@
      "Path": "/special-headers/repeatability/immediateSuccess",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true,
-     "IsConfident": true
+     "GenerateConvenienceMethod": true
     }
    ],
    "Protocol": {

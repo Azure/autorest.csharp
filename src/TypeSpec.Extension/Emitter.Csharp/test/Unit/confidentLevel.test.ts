@@ -7,7 +7,6 @@ import {
     createEmitterContext,
     createEmitterTestHost
 } from "./utils/TestUtil.js";
-import isEqual from "lodash.isequal";
 import { ConvenienceMethodOmitReason } from "../../src/type/convenienceMethodOmitReason.js";
 
 describe("Confidence on types", () => {
@@ -54,10 +53,6 @@ op test(@body input: Cat): Cat;
             operation.ConvenienceMethodOmitReason === undefined,
             `There should be no reason to omit this convenience method`
         );
-        assert(
-            operation.Accessibility !== "internal",
-            `The convenience method should be public`
-        );
     });
 
     it("Union types should never be confident", async () => {
@@ -100,10 +95,6 @@ op test(@body input: Cat): Cat;
             operation.ConvenienceMethodOmitReason ===
                 ConvenienceMethodOmitReason.TypeNotConfident,
             `The convenience method should be omitted because of TypeNotConfident`
-        );
-        assert(
-            operation.Accessibility === "internal",
-            `The convenience method should be internal`
         );
     });
 
@@ -150,10 +141,6 @@ op test(@body input: Cat): Cat;
             operation.ConvenienceMethodOmitReason ===
                 ConvenienceMethodOmitReason.TypeNotConfident,
             `The convenience method should be omitted because of TypeNotConfident`
-        );
-        assert(
-            operation.Accessibility === "internal",
-            `The convenience method should be internal`
         );
     });
 
@@ -214,10 +201,6 @@ op test(@body input: Pet): Pet;
         assert(
             operation.ConvenienceMethodOmitReason === undefined,
             `The convenience method should have no reason to be omitted`
-        );
-        assert(
-            operation.Accessibility !== "internal",
-            `The convenience method should be public`
         );
     });
 
@@ -285,10 +268,6 @@ op test2(@body input: NonConfidentModelWithSelfReference): void;
             first.ConvenienceMethodOmitReason === undefined,
             `The convenience method for first operation should have no reason to be omitted`
         );
-        assert(
-            first.Accessibility !== "internal",
-            `The convenience method for first operation should be public`
-        );
         const second = client.Operations.find((o) => o.Name === "test2");
         // the operation `test2` should be confident as well
         assert(second !== undefined);
@@ -300,10 +279,6 @@ op test2(@body input: NonConfidentModelWithSelfReference): void;
             second.ConvenienceMethodOmitReason ===
                 ConvenienceMethodOmitReason.TypeNotConfident,
             `The convenience method for second operation should have no reason to be omitted`
-        );
-        assert(
-            second.Accessibility === "internal",
-            `The convenience method for second operation should be public`
         );
     });
 
@@ -363,10 +338,6 @@ op test1(@body input: NonConfidentModelWithSelfReference): void;
             operation.ConvenienceMethodOmitReason ===
                 ConvenienceMethodOmitReason.TypeNotConfident,
             `The convenience method should be omitted because of TypeNotConfident`
-        );
-        assert(
-            operation.Accessibility === "internal",
-            `The convenience method should be public`
         );
     });
 
@@ -451,10 +422,6 @@ op dogOp(@body input: Dog): Dog;
                 ConvenienceMethodOmitReason.TypeNotConfident,
             `The convenience method for pet should be omitted because of TypeNotConfident`
         );
-        assert(
-            petOperation.Accessibility === "internal",
-            `The convenience method for pet should be internal`
-        );
         const catOperation = client.Operations.find((o) => o.Name === "catOp");
         assert(catOperation !== undefined);
         assert(
@@ -466,10 +433,6 @@ op dogOp(@body input: Dog): Dog;
                 ConvenienceMethodOmitReason.TypeNotConfident,
             `The convenience method for cat should be omitted because of TypeNotConfident`
         );
-        assert(
-            catOperation.Accessibility === "internal",
-            `The convenience method for cat should be internal`
-        );
         const dogOperation = client.Operations.find((o) => o.Name === "dogOp");
         assert(dogOperation !== undefined);
         assert(
@@ -480,10 +443,6 @@ op dogOp(@body input: Dog): Dog;
             dogOperation.ConvenienceMethodOmitReason ===
                 undefined,
             `The convenience method for dog should not be omitted`
-        );
-        assert(
-            dogOperation.Accessibility !== "internal",
-            `The convenience method for dog should be public`
         );
     });
 });

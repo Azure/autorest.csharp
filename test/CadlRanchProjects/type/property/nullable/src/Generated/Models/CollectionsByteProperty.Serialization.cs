@@ -13,8 +13,35 @@ using Azure.Core;
 
 namespace _Type.Property.Nullable.Models
 {
-    public partial class CollectionsByteProperty
+    public partial class CollectionsByteProperty : IUtf8JsonSerializable
     {
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
+        {
+            writer.WriteStartObject();
+            writer.WritePropertyName("requiredProperty"u8);
+            writer.WriteStringValue(RequiredProperty);
+            if (NullableProperty != null && Optional.IsCollectionDefined(NullableProperty))
+            {
+                writer.WritePropertyName("nullableProperty"u8);
+                writer.WriteStartArray();
+                foreach (var item in NullableProperty)
+                {
+                    if (item == null)
+                    {
+                        writer.WriteNullValue();
+                        continue;
+                    }
+                    writer.WriteBase64StringValue(item.ToArray(), "D");
+                }
+                writer.WriteEndArray();
+            }
+            else
+            {
+                writer.WriteNull("nullableProperty");
+            }
+            writer.WriteEndObject();
+        }
+
         internal static CollectionsByteProperty DeserializeCollectionsByteProperty(JsonElement element)
         {
             if (element.ValueKind == JsonValueKind.Null)
@@ -22,7 +49,7 @@ namespace _Type.Property.Nullable.Models
                 return null;
             }
             string requiredProperty = default;
-            IReadOnlyList<BinaryData> nullableProperty = default;
+            IList<BinaryData> nullableProperty = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("requiredProperty"u8))
@@ -62,6 +89,14 @@ namespace _Type.Property.Nullable.Models
         {
             using var document = JsonDocument.Parse(response.Content);
             return DeserializeCollectionsByteProperty(document.RootElement);
+        }
+
+        /// <summary> Convert into a Utf8JsonRequestContent. </summary>
+        internal virtual RequestContent ToRequestContent()
+        {
+            var content = new Utf8JsonRequestContent();
+            content.JsonWriter.WriteObjectValue(this);
+            return content;
         }
     }
 }

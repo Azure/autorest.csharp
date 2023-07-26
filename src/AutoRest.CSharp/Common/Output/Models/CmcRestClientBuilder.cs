@@ -144,7 +144,7 @@ namespace AutoRest.CSharp.Output.Models
                     Paging: CreateOperationPaging(operation),
                     GenerateProtocolMethod: true,
                     GenerateConvenienceMethod: false,
-                    IsConfident: true);
+                    ConvenienceMethodOmitReason: null);
             }
             return new InputOperation();
         }
