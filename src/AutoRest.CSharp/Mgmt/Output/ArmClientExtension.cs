@@ -44,6 +44,7 @@ namespace AutoRest.CSharp.Mgmt.Output
             }
         }
 
-        public override IEnumerable<Resource> ChildResources => _armResourceExtensionForChildResources.ChildResources;
+        // only when in usual packages other than arm core, we need to generate the ArmClient, scope pattern for those scope resources
+        public override IEnumerable<Resource> ChildResources => Configuration.MgmtConfiguration.IsArmCore ? Enumerable.Empty<Resource>() : _armResourceExtensionForChildResources.ChildResources;
     }
 }
