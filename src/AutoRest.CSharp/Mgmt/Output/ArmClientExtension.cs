@@ -14,9 +14,11 @@ namespace AutoRest.CSharp.Mgmt.Output
     internal class ArmClientExtension : MgmtExtension
     {
         private readonly List<MgmtExtension> _extensions;
-        public ArmClientExtension(IReadOnlyDictionary<RequestPath, IEnumerable<Operation>> armResourceExtensionOperations, IEnumerable<MgmtExtensionClient> extensionClients)
+        private readonly ArmResourceExtension _armResourceExtensionForChildResources;
+        public ArmClientExtension(IReadOnlyDictionary<RequestPath, IEnumerable<Operation>> armResourceExtensionOperations, IEnumerable<MgmtExtensionClient> extensionClients, ArmResourceExtension armResourceExtensionForChildResources)
             : base(Enumerable.Empty<Operation>(), extensionClients, typeof(ArmClient), RequestPath.Tenant)
         {
+            _armResourceExtensionForChildResources = armResourceExtensionForChildResources;
             _extensions = new();
             foreach (var (parentRequestPath, operations) in armResourceExtensionOperations)
             {
@@ -41,5 +43,7 @@ namespace AutoRest.CSharp.Mgmt.Output
                 }
             }
         }
+
+        public override IEnumerable<Resource> ChildResources => _armResourceExtensionForChildResources.ChildResources;
     }
 }

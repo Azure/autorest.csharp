@@ -58,9 +58,11 @@ namespace AutoRest.CSharp.Mgmt.Output
                 extensionDict.Add(type, extension);
             }
             // add ArmResourceExtension methods
-            extensionDict.Add(typeof(ArmResource), new ArmResourceExtension(_armResourceExtensionOperations, extensionClients));
+            var armResourceExtension = new ArmResourceExtension(_armResourceExtensionOperations, extensionClients);
             // add ArmClientExtension methods (which is also the TenantResource extension methods)
-            extensionDict.Add(typeof(ArmClient), new ArmClientExtension(_armResourceExtensionOperations, extensionClients));
+            var armClientExtension = new ArmClientExtension(_armResourceExtensionOperations, extensionClients, armResourceExtension);
+            extensionDict.Add(typeof(ArmResource), armResourceExtension);
+            extensionDict.Add(typeof(ArmClient), armClientExtension);
 
             // construct all possible extension clients
             // first we collection all possible combinations of the resource on operations
