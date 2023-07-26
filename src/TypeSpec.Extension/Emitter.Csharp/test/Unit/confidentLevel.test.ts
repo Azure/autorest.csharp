@@ -405,10 +405,7 @@ op dogOp(@body input: Dog): Dog;
             catModel.IsConfident === false,
             `Cat should not be confident because it contains union types`
         );
-        assert(
-            dogModel.IsConfident === true,
-            `Dog should still be confident`
-        );
+        assert(dogModel.IsConfident === true, `Dog should still be confident`);
         // operation should be confident as well
         const client = root.Clients[0];
         const petOperation = client.Operations.find((o) => o.Name === "petOp");
@@ -440,8 +437,7 @@ op dogOp(@body input: Dog): Dog;
             `The convenience method for dog should be generated`
         );
         assert(
-            dogOperation.ConvenienceMethodOmitReason ===
-                undefined,
+            dogOperation.ConvenienceMethodOmitReason === undefined,
             `The convenience method for dog should not be omitted`
         );
     });
