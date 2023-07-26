@@ -8,6 +8,7 @@ import {
     createEmitterTestHost
 } from "./utils/TestUtil.js";
 import isEqual from "lodash.isequal";
+import { ConvenienceMethodOmitReason } from "../../src/type/convenienceMethodOmitReason.js";
 
 describe("Confidence on types", () => {
     let runner: TestHost;
@@ -27,23 +28,35 @@ model Cat {
     meow: string;
 }
 
+@convenientAPI(true)
 op test(@body input: Cat): Cat;
 `,
-            runner
+            runner,
+            { IsTCGCNeeded: true }
         );
         runner.compileAndDiagnose;
         const context = createEmitterContext(program);
         const root: CodeModel = createModel(context);
         const models = root.Models;
         const catModel = models.find((m) => m.Name === "Cat");
+        // assert Cat exists
+        assert(catModel !== undefined);
         // assert Cat is not confident
-        assert(isEqual(true, catModel?.IsConfident), `Cat should be confident`);
+        assert(catModel.IsConfident === true, `Cat should be confident`);
         // operation should not be confident as well
         const client = root.Clients[0];
         const operation = client.Operations[0];
         assert(
-            isEqual(true, operation.IsConfident),
-            `Operation should be confident`
+            operation.GenerateConvenienceMethod === true,
+            `The convenience method should be generated`
+        );
+        assert(
+            operation.ConvenienceMethodOmitReason === undefined,
+            `There should be no reason to omit this convenience method`
+        );
+        assert(
+            operation.Accessibility !== "internal",
+            `The convenience method should be public`
         );
     });
 
@@ -61,27 +74,36 @@ model Cat {
     color: string | int32[];
 }
 
+@convenientAPI(true)
 op test(@body input: Cat): Cat;
 `,
-            runner
+            runner,
+            { IsTCGCNeeded: true }
         );
         runner.compileAndDiagnose;
         const context = createEmitterContext(program);
         const root: CodeModel = createModel(context);
         const models = root.Models;
         const catModel = models.find((m) => m.Name === "Cat");
+        // assert Cat exists
+        assert(catModel !== undefined);
         // assert Cat is not confident
-        assert(isEqual(true, catModel !== undefined));
-        assert(
-            isEqual(false, catModel?.IsConfident),
-            `Cat should not be confident`
-        );
+        assert(catModel.IsConfident === false, `Cat should not be confident`);
         // operation should not be confident as well
         const client = root.Clients[0];
         const operation = client.Operations[0];
         assert(
-            isEqual(false, operation.IsConfident),
-            `Operation should not be confident`
+            operation.GenerateConvenienceMethod === true,
+            `The convenience method should be generated`
+        );
+        assert(
+            operation.ConvenienceMethodOmitReason ===
+                ConvenienceMethodOmitReason.TypeNotConfident,
+            `The convenience method should be omitted because of TypeNotConfident`
+        );
+        assert(
+            operation.Accessibility === "internal",
+            `The convenience method should be internal`
         );
     });
 
@@ -99,58 +121,73 @@ model Cat {
     id: 1;
 }
 
+@convenientAPI(true)
 op test(@body input: Cat): Cat;
 `,
-            runner
+            runner,
+            { IsTCGCNeeded: true }
         );
         runner.compileAndDiagnose;
         const context = createEmitterContext(program);
         const root: CodeModel = createModel(context);
         const models = root.Models;
         const catModel = models.find((m) => m.Name === "Cat");
+        // assert Cat exists
+        assert(catModel !== undefined);
         // assert Cat is not confident
         assert(
-            isEqual(false, catModel?.IsConfident),
-            `Cat should not be confident`
+            catModel.IsConfident === false,
+            `Cat should not be confident because of the number literal`
         );
         // operation should not be confident as well
         const client = root.Clients[0];
         const operation = client.Operations[0];
         assert(
-            isEqual(false, operation.IsConfident),
-            `Operation should not be confident`
+            operation.GenerateConvenienceMethod === true,
+            `The convenience method should be generated`
+        );
+        assert(
+            operation.ConvenienceMethodOmitReason ===
+                ConvenienceMethodOmitReason.TypeNotConfident,
+            `The convenience method should be omitted because of TypeNotConfident`
+        );
+        assert(
+            operation.Accessibility === "internal",
+            `The convenience method should be internal`
         );
     });
 
     it("Model types with discriminator should all be confident", async () => {
         const program = await typeSpecCompile(
             `
-    @doc("The base Pet model")
-    @discriminator("kind")
-    model Pet {
-        @doc("The name of the pet")
-        name: string;
-    }
+@doc("The base Pet model")
+@discriminator("kind")
+model Pet {
+    @doc("The name of the pet")
+    name: string;
+}
 
-    @doc("The cat")
-    model Cat extends Pet {
-        kind: "cat";
+@doc("The cat")
+model Cat extends Pet {
+    kind: "cat";
 
-        @doc("Meow")
-        meow: string;
-    }
+    @doc("Meow")
+    meow: string;
+}
 
-    @doc("The dog")
-    model Dog extends Pet {
-        kind: "dog";
+@doc("The dog")
+model Dog extends Pet {
+    kind: "dog";
 
-        @doc("Woof")
-        woof: string;
-    }
+    @doc("Woof")
+    woof: string;
+}
 
-    op test(@body input: Pet): Pet;
-    `,
-            runner
+@convenientAPI(true)
+op test(@body input: Pet): Pet;
+`,
+            runner,
+            { IsTCGCNeeded: true }
         );
         runner.compileAndDiagnose;
         const context = createEmitterContext(program);
@@ -159,50 +196,65 @@ op test(@body input: Cat): Cat;
         const petModel = models.find((m) => m.Name === "Pet");
         const catModel = models.find((m) => m.Name === "Cat");
         const dogModel = models.find((m) => m.Name === "Dog");
-        // assert the they are all confident
-        assert(isEqual(true, petModel?.IsConfident), `Pet should be confident`);
-        assert(isEqual(true, catModel?.IsConfident), `Cat should be confident`);
-        assert(isEqual(true, dogModel?.IsConfident), `Dog should be confident`);
+        // assert they all exist
+        assert(petModel !== undefined);
+        assert(catModel !== undefined);
+        assert(dogModel !== undefined);
+        // assert they are all confident
+        assert(petModel.IsConfident === true, `Pet should be confident`);
+        assert(catModel.IsConfident === true, `Cat should be confident`);
+        assert(dogModel.IsConfident === true, `Dog should be confident`);
         // operation should be confident as well
         const client = root.Clients[0];
         const operation = client.Operations[0];
         assert(
-            isEqual(true, operation.IsConfident),
-            `Operation should be confident`
+            operation.GenerateConvenienceMethod === true,
+            `The convenience method should be generated`
+        );
+        assert(
+            operation.ConvenienceMethodOmitReason === undefined,
+            `The convenience method should have no reason to be omitted`
+        );
+        assert(
+            operation.Accessibility !== "internal",
+            `The convenience method should be public`
         );
     });
 
     it("IsConfident should be properly calculated when self reference exists", async () => {
         const program = await typeSpecCompile(
             `
-    @doc("The model that contains self reference")
-    model ModelWithSelfReference {
-        @doc("The name")
-        name: string;
+@doc("The model that contains self reference")
+model ModelWithSelfReference {
+    @doc("The name")
+    name: string;
 
-        @doc("The self reference")
-        selfReference: ModelWithSelfReference[];
-    }
+    @doc("The self reference")
+    selfReference: ModelWithSelfReference[];
+}
 
-    @doc("Non-confident model that contains self reference")
-    model NonConfidentModelWithSelfReference {
-        @doc("The name")
-        name: string;
+@doc("Non-confident model that contains self reference")
+model NonConfidentModelWithSelfReference {
+    @doc("The name")
+    name: string;
 
-        @doc("The self reference")
-        selfReference: NonConfidentModelWithSelfReference[];
+    @doc("The self reference")
+    selfReference: NonConfidentModelWithSelfReference[];
 
-        @doc("The non-confident part")
-        unionProperty: string | int32[]; // put a union here so that it is not confident any more
-    }
+    @doc("The non-confident part")
+    unionProperty: string | int32[]; // put a union here so that it is not confident any more
+}
 
-    @route("/test1")
-    op test1(@body input: ModelWithSelfReference): void;
+@route("/test1")
+@convenientAPI(true)
+op test1(@body input: ModelWithSelfReference): void;
 
-    @route("/test2")
-    op test2(@body input: NonConfidentModelWithSelfReference): void;
-    `,
-            runner
+@route("/test2")
+@convenientAPI(true)
+op test2(@body input: NonConfidentModelWithSelfReference): void;
+`,
+            runner,
+            { IsTCGCNeeded: true }
         );
         runner.compileAndDiagnose;
         const context = createEmitterContext(program);
@@ -210,65 +262,81 @@ op test(@body input: Cat): Cat;
         const models = root.Models;
         const model = models.find((m) => m.Name === "ModelWithSelfReference");
         // assert it is confident
-        assert(isEqual(true, model !== undefined));
-        assert(
-            isEqual(true, model?.IsConfident),
-            `This model should be confident`
-        );
+        assert(model !== undefined);
+        assert(model.IsConfident === true, `This model should be confident`);
         const anotherModel = models.find(
             (m) => m.Name === "NonConfidentModelWithSelfReference"
         );
         // assert it is not confident
-        assert(isEqual(true, anotherModel !== undefined));
+        assert(anotherModel !== undefined);
         assert(
-            isEqual(false, anotherModel?.IsConfident),
+            anotherModel.IsConfident === false,
             `This model should not be confident`
         );
         const client = root.Clients[0];
         const first = client.Operations.find((o) => o.Name === "test1");
         // the operation `test1` should be confident as well
-        assert(isEqual(true, first !== undefined));
+        assert(first !== undefined);
         assert(
-            isEqual(true, first?.IsConfident),
-            `Operation should be confident`
+            first.GenerateConvenienceMethod === true,
+            `The convenience method for first operation should be generated`
+        );
+        assert(
+            first.ConvenienceMethodOmitReason === undefined,
+            `The convenience method for first operation should have no reason to be omitted`
+        );
+        assert(
+            first.Accessibility !== "internal",
+            `The convenience method for first operation should be public`
         );
         const second = client.Operations.find((o) => o.Name === "test2");
         // the operation `test2` should be confident as well
-        assert(isEqual(true, second !== undefined));
+        assert(second !== undefined);
         assert(
-            isEqual(false, second?.IsConfident),
-            `Operation should not be confident`
+            second.GenerateConvenienceMethod === true,
+            `The convenience method for second operation should be generated`
+        );
+        assert(
+            second.ConvenienceMethodOmitReason ===
+                ConvenienceMethodOmitReason.TypeNotConfident,
+            `The convenience method for second operation should have no reason to be omitted`
+        );
+        assert(
+            second.Accessibility === "internal",
+            `The convenience method for second operation should be public`
         );
     });
 
     it("IsConfident should be properly calculated when indirect self reference exists", async () => {
         const program = await typeSpecCompile(
             `
-    @doc("The model that contains self reference")
-    model NonConfidentModelWithSelfReference {
-        @doc("The name")
-        name: string;
+@doc("The model that contains self reference")
+model NonConfidentModelWithSelfReference {
+    @doc("The name")
+    name: string;
 
-        @doc("The self reference")
-        reference: IndirectSelfReferenceModel[];
-    }
+    @doc("The self reference")
+    reference: IndirectSelfReferenceModel[];
+}
 
-    @doc("Indirect self reference model")
-    model IndirectSelfReferenceModel {
-        @doc("Something not important")
-        something: string;
+@doc("Indirect self reference model")
+model IndirectSelfReferenceModel {
+    @doc("Something not important")
+    something: string;
 
-        @doc("Reference back")
-        reference: NonConfidentModelWithSelfReference;
+    @doc("Reference back")
+    reference: NonConfidentModelWithSelfReference;
 
-        @doc("The non-confident part")
-        unionProperty: string | int32[]; // put a union here so that it is not confident any more
-    }
+    @doc("The non-confident part")
+    unionProperty: string | int32[]; // put a union here so that it is not confident any more
+}
 
-    @route("/test1")
-    op test1(@body input: NonConfidentModelWithSelfReference): void;
-    `,
-            runner
+@route("/test1")
+@convenientAPI(true)
+op test1(@body input: NonConfidentModelWithSelfReference): void;
+`,
+            runner,
+            { IsTCGCNeeded: true }
         );
         runner.compileAndDiagnose;
         const context = createEmitterContext(program);
@@ -278,60 +346,73 @@ op test(@body input: Cat): Cat;
             (m) => m.Name === "NonConfidentModelWithSelfReference"
         );
         // assert it is not confident
-        assert(isEqual(true, anotherModel !== undefined));
+        assert(anotherModel !== undefined);
         assert(
-            isEqual(false, anotherModel?.IsConfident),
+            anotherModel.IsConfident === false,
             `This model should not be confident`
         );
         const client = root.Clients[0];
-        const op = client.Operations.find((o) => o.Name === "test1");
+        const operation = client.Operations.find((o) => o.Name === "test1");
         // the operation `test1` should be confident as well
-        assert(isEqual(true, op !== undefined));
+        assert(operation !== undefined);
         assert(
-            isEqual(false, op?.IsConfident),
-            `Operation should not be confident`
+            operation.GenerateConvenienceMethod === true,
+            `The convenience method should be generated`
+        );
+        assert(
+            operation.ConvenienceMethodOmitReason ===
+                ConvenienceMethodOmitReason.TypeNotConfident,
+            `The convenience method should be omitted because of TypeNotConfident`
+        );
+        assert(
+            operation.Accessibility === "internal",
+            `The convenience method should be public`
         );
     });
 
     it("Base type with discriminator should be polluted to be not confident any more if a derived class is not", async () => {
         const program = await typeSpecCompile(
             `
-    @doc("The base Pet model")
-    @discriminator("kind")
-    model Pet {
-        @doc("The name of the pet")
-        name: string;
-    }
+@doc("The base Pet model")
+@discriminator("kind")
+model Pet {
+    @doc("The name of the pet")
+    name: string;
+}
 
-    @doc("The cat")
-    model Cat extends Pet {
-        kind: "cat";
+@doc("The cat")
+model Cat extends Pet {
+    kind: "cat";
 
-        @doc("Meow")
-        meow: string;
+    @doc("Meow")
+    meow: string;
 
-        @doc("Color, could be specified by a string or by an array of int as RGB")
-        color: string | int32[];
-    }
+    @doc("Color, could be specified by a string or by an array of int as RGB")
+    color: string | int32[];
+}
 
-    @doc("The dog")
-    model Dog extends Pet {
-        kind: "dog";
+@doc("The dog")
+model Dog extends Pet {
+    kind: "dog";
 
-        @doc("Woof")
-        woof: string;
-    }
+    @doc("Woof")
+    woof: string;
+}
 
-    @route("/")
-    op petOp(@body input: Pet): Pet;
+@route("/")
+@convenientAPI(true)
+op petOp(@body input: Pet): Pet;
 
-    @route("/cat")
-    op catOp(@body input: Cat): Cat;
+@route("/cat")
+@convenientAPI(true)
+op catOp(@body input: Cat): Cat;
 
-    @route("/dog")
-    op dogOp(@body input: Dog): Dog;
-    `,
-            runner
+@route("/dog")
+@convenientAPI(true)
+op dogOp(@body input: Dog): Dog;
+`,
+            runner,
+            { IsTCGCNeeded: true }
         );
         runner.compileAndDiagnose;
         const context = createEmitterContext(program);
@@ -340,17 +421,21 @@ op test(@body input: Cat): Cat;
         const petModel = models.find((m) => m.Name === "Pet");
         const catModel = models.find((m) => m.Name === "Cat");
         const dogModel = models.find((m) => m.Name === "Dog");
+        // assert they all exist
+        assert(petModel !== undefined);
+        assert(catModel !== undefined);
+        assert(dogModel !== undefined);
         // assert the they are all confident
         assert(
-            isEqual(false, petModel?.IsConfident),
+            petModel.IsConfident === false,
             `Pet should not be confident because one of its derived types is not confident`
         );
         assert(
-            isEqual(false, catModel?.IsConfident),
+            catModel.IsConfident === false,
             `Cat should not be confident because it contains union types`
         );
         assert(
-            isEqual(true, dogModel?.IsConfident),
+            dogModel.IsConfident === true,
             `Dog should still be confident`
         );
         // operation should be confident as well
@@ -358,20 +443,47 @@ op test(@body input: Cat): Cat;
         const petOperation = client.Operations.find((o) => o.Name === "petOp");
         assert(petOperation !== undefined);
         assert(
-            isEqual(false, petOperation.IsConfident),
-            `petOp should not be confident`
+            petOperation.GenerateConvenienceMethod === true,
+            `The convenience method for pet should be generated`
+        );
+        assert(
+            petOperation.ConvenienceMethodOmitReason ===
+                ConvenienceMethodOmitReason.TypeNotConfident,
+            `The convenience method for pet should be omitted because of TypeNotConfident`
+        );
+        assert(
+            petOperation.Accessibility === "internal",
+            `The convenience method for pet should be internal`
         );
         const catOperation = client.Operations.find((o) => o.Name === "catOp");
         assert(catOperation !== undefined);
         assert(
-            isEqual(false, catOperation.IsConfident),
-            `catOp should not be confident`
+            catOperation.GenerateConvenienceMethod === true,
+            `The convenience method for cat should be generated`
+        );
+        assert(
+            catOperation.ConvenienceMethodOmitReason ===
+                ConvenienceMethodOmitReason.TypeNotConfident,
+            `The convenience method for cat should be omitted because of TypeNotConfident`
+        );
+        assert(
+            catOperation.Accessibility === "internal",
+            `The convenience method for cat should be internal`
         );
         const dogOperation = client.Operations.find((o) => o.Name === "dogOp");
         assert(dogOperation !== undefined);
         assert(
-            isEqual(true, dogOperation.IsConfident),
-            `dogOp should still be confident`
+            dogOperation.GenerateConvenienceMethod === true,
+            `The convenience method for dog should be generated`
+        );
+        assert(
+            dogOperation.ConvenienceMethodOmitReason ===
+                undefined,
+            `The convenience method for dog should not be omitted`
+        );
+        assert(
+            dogOperation.Accessibility !== "internal",
+            `The convenience method for dog should be public`
         );
     });
 });

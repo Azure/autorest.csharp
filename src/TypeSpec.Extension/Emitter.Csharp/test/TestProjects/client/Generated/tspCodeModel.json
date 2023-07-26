@@ -25,7 +25,6 @@
         "$id": "5",
         "Name": "Uri",
         "Kind": "Uri",
-        "IsConfident": true,
         "IsNullable": false
        },
        "Location": "Uri",
@@ -46,7 +45,6 @@
         "$id": "7",
         "Name": "String",
         "Kind": "String",
-        "IsConfident": true,
         "IsNullable": false
        },
        "Location": "Header",
@@ -75,7 +73,6 @@
         "$id": "10",
         "Name": "String",
         "Kind": "String",
-        "IsConfident": true,
         "IsNullable": false
        },
        "Location": "Query",
@@ -93,7 +90,6 @@
          "$id": "12",
          "Name": "String",
          "Kind": "String",
-         "IsConfident": true,
          "IsNullable": false
         },
         "Value": "2015-06-18"
@@ -110,7 +106,6 @@
         "$id": "14",
         "Name": "string",
         "Kind": "String",
-        "IsConfident": true,
         "IsNullable": false
        },
        "BodyMediaType": "Json",
@@ -124,8 +119,7 @@
      "Path": "/Alpha",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true,
-     "IsConfident": true
+     "GenerateConvenienceMethod": true
     }
    ],
    "Protocol": {
@@ -154,7 +148,6 @@
         "$id": "19",
         "Name": "String",
         "Kind": "String",
-        "IsConfident": true,
         "IsNullable": false
        },
        "Location": "Header",
@@ -188,7 +181,6 @@
         "$id": "22",
         "Name": "string",
         "Kind": "String",
-        "IsConfident": true,
         "IsNullable": false
        },
        "BodyMediaType": "Json",
@@ -202,8 +194,7 @@
      "Path": "/Beta",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true,
-     "IsConfident": true
+     "GenerateConvenienceMethod": true
     }
    ],
    "Protocol": {
@@ -232,7 +223,6 @@
         "$id": "27",
         "Name": "String",
         "Kind": "String",
-        "IsConfident": true,
         "IsNullable": false
        },
        "Location": "Header",
@@ -266,7 +256,6 @@
         "$id": "30",
         "Name": "string",
         "Kind": "String",
-        "IsConfident": true,
         "IsNullable": false
        },
        "BodyMediaType": "Json",
@@ -280,8 +269,7 @@
      "Path": "/Gamma",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true,
-     "IsConfident": true
+     "GenerateConvenienceMethod": true
     },
     {
      "$id": "31",
@@ -299,7 +287,6 @@
         "$id": "33",
         "Name": "String",
         "Kind": "String",
-        "IsConfident": true,
         "IsNullable": false
        },
        "Location": "Header",
@@ -333,7 +320,6 @@
         "$id": "36",
         "Name": "string",
         "Kind": "String",
-        "IsConfident": true,
         "IsNullable": false
        },
        "BodyMediaType": "Json",
@@ -347,8 +333,7 @@
      "Path": "/Gamma",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true,
-     "IsConfident": true
+     "GenerateConvenienceMethod": true
     }
    ],
    "Protocol": {

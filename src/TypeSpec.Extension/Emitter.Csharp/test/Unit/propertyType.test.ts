@@ -105,8 +105,7 @@ describe("Test GetInputType for enum", () => {
         op test(@doc("fixed enum as input.")@body input: SimpleEnum): string[];
       `,
             runner,
-            true,
-            true
+            { IsNamespaceNeeded: true, IsAzureCoreNeeded: true }
         );
         const context = createEmitterContext(program);
         const root: CodeModel = createModel(context);
@@ -169,8 +168,7 @@ describe("Test GetInputType for enum", () => {
       op test(@doc("fixed enum as input.")@body input: FixedIntEnum): string[];
     `,
             runner,
-            true,
-            true
+            { IsNamespaceNeeded: true, IsAzureCoreNeeded: true }
         );
         const context = createEmitterContext(program);
         const root: CodeModel = createModel(context);

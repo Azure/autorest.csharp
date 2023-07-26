@@ -55,6 +55,8 @@ import { mockApiVersion } from "../constants.js";
 import { logger } from "./logger.js";
 import { $lib } from "../emitter.js";
 import { isConfident } from "./confidentLevels.js";
+import { ConvenienceMethodOmitReason } from "../type/convenienceMethodOmitReason.js";
+import { RequestMethod } from "../type/requestMethod.js";
 
 export function createModel(
     context: EmitContext<NetEmitterOptions>
@@ -226,27 +228,44 @@ export function createModelForService(
     // propagate the isConfident from the types to the operations
     for (const client of clients) {
         for (const op of client.Operations) {
-            let isOperationConfident = true;
-            for (const parameter of op.Parameters) {
-                // skip the special parameters
-                if (
-                    parameter.IsApiVersion ||
-                    parameter.IsEndpoint ||
-                    parameter.IsContentType
-                ) {
-                    continue;
+            if (!op.GenerateConvenienceMethod) {
+                // this means the convenience method is suppressed by the typespec
+                op.ConvenienceMethodOmitReason =
+                    ConvenienceMethodOmitReason.SuppressedInTypeSpec;
+            } else if (op.HttpMethod === RequestMethod.PATCH) {
+                // this means the convenience method is omitted because it is a patch and we do not support that yet
+                op.ConvenienceMethodOmitReason =
+                    ConvenienceMethodOmitReason.PatchOperation;
+                op.GenerateConvenienceMethod = false;
+            } else {
+                // otherwise we see if there is anything not confident in the operation
+                let isOperationConfident = true;
+                for (const parameter of op.Parameters) {
+                    // skip the special parameters
+                    if (
+                        parameter.IsApiVersion ||
+                        parameter.IsEndpoint ||
+                        parameter.IsContentType
+                    ) {
+                        continue;
+                    }
+                    isOperationConfident &&= isConfident(parameter.Type);
+                    // we do not need to check more parameters if the operation is already not confident
+                    if (!isOperationConfident) break;
                 }
-                isOperationConfident &&= isConfident(parameter.Type);
-                // we do not need to check more parameters if the operation is already not confident
-                if (!isOperationConfident) break;
+                for (const response of op.Responses) {
+                    isOperationConfident &&= isConfident(response.BodyType);
+                    // we do not need to check more responses if the operation is already not confident
+                    if (!isOperationConfident) break;
+                }
+                // TODO -- headers?
+                if (!isOperationConfident) {
+                    op.ConvenienceMethodOmitReason =
+                        ConvenienceMethodOmitReason.TypeNotConfident;
+                    // when it is not confident, instead of not generating it, we still generate the method as an internal method
+                    op.Accessibility = "internal";
+                }
             }
-            for (const response of op.Responses) {
-                isOperationConfident &&= isConfident(response.BodyType);
-                // we do not need to check more responses if the operation is already not confident
-                if (!isOperationConfident) break;
-            }
-            // TODO -- headers?
-            op.IsConfident = isOperationConfident;
         }
     }
 

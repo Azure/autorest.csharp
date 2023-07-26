@@ -14,7 +14,6 @@
    "Description": "Simple model.",
    "IsNullable": false,
    "Usage": "RoundTrip",
-   "IsConfident": true,
    "Properties": [
     {
      "$id": "3",
@@ -25,7 +24,6 @@
       "$id": "4",
       "Name": "string",
       "Kind": "String",
-      "IsConfident": true,
       "IsNullable": false
      },
      "IsRequired": true,
@@ -40,7 +38,6 @@
    "Description": "Simple model.",
    "IsNullable": false,
    "Usage": "RoundTrip",
-   "IsConfident": true,
    "Properties": [
     {
      "$id": "6",
@@ -51,7 +48,6 @@
       "$id": "7",
       "Name": "string",
       "Kind": "String",
-      "IsConfident": true,
       "IsNullable": false
      },
      "IsRequired": true,
@@ -81,7 +77,6 @@
         "$id": "11",
         "Name": "String",
         "Kind": "String",
-        "IsConfident": true,
         "IsNullable": false
        },
        "Location": "Uri",
@@ -99,7 +94,6 @@
          "$id": "13",
          "Name": "String",
          "Kind": "String",
-         "IsConfident": true,
          "IsNullable": false
         },
         "Value": "http://localhost:3000"
@@ -113,7 +107,6 @@
         "$id": "15",
         "Name": "String",
         "Kind": "String",
-        "IsConfident": true,
         "IsNullable": false
        },
        "Location": "Header",
@@ -142,7 +135,6 @@
         "$id": "18",
         "Name": "String",
         "Kind": "String",
-        "IsConfident": true,
         "IsNullable": false
        },
        "Location": "Query",
@@ -160,7 +152,6 @@
          "$id": "20",
          "Name": "String",
          "Kind": "String",
-         "IsConfident": true,
          "IsNullable": false
         },
         "Value": "1.0.0"
@@ -187,8 +178,7 @@
      "Path": "/dogs",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true,
-     "IsConfident": true
+     "GenerateConvenienceMethod": true
     },
     {
      "$id": "22",
@@ -224,7 +214,6 @@
         "$id": "25",
         "Name": "String",
         "Kind": "String",
-        "IsConfident": true,
         "IsNullable": false
        },
        "Location": "Header",
@@ -252,7 +241,6 @@
         "$id": "28",
         "Name": "String",
         "Kind": "String",
-        "IsConfident": true,
         "IsNullable": false
        },
        "Location": "Header",
@@ -299,8 +287,7 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true,
-     "IsConfident": true
+     "GenerateConvenienceMethod": true
     },
     {
      "$id": "31",
@@ -319,7 +306,6 @@
         "$id": "33",
         "Name": "String",
         "Kind": "String",
-        "IsConfident": true,
         "IsNullable": false
        },
        "Location": "Header",
@@ -363,8 +349,7 @@
      "Path": "/cats",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true,
-     "IsConfident": true
+     "GenerateConvenienceMethod": true
     },
     {
      "$id": "36",
@@ -400,7 +385,6 @@
         "$id": "39",
         "Name": "String",
         "Kind": "String",
-        "IsConfident": true,
         "IsNullable": false
        },
        "Location": "Header",
@@ -428,7 +412,6 @@
         "$id": "42",
         "Name": "String",
         "Kind": "String",
-        "IsConfident": true,
         "IsNullable": false
        },
        "Location": "Header",
@@ -475,8 +458,7 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true,
-     "IsConfident": true
+     "GenerateConvenienceMethod": true
     }
    ],
    "Protocol": {

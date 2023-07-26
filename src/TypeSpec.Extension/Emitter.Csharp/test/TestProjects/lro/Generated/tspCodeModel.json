@@ -12,7 +12,6 @@
    "Namespace": "LroOperation",
    "IsNullable": false,
    "Usage": "None",
-   "IsConfident": true,
    "Properties": [
     {
      "$id": "3",
@@ -23,7 +22,6 @@
       "$id": "4",
       "Name": "string",
       "Kind": "String",
-      "IsConfident": true,
       "IsNullable": false
      },
      "IsRequired": true,
@@ -38,7 +36,6 @@
       "$id": "6",
       "Name": "string",
       "Kind": "String",
-      "IsConfident": true,
       "IsNullable": false
      },
      "IsRequired": false,
@@ -53,7 +50,6 @@
       "$id": "8",
       "Name": "int32",
       "Kind": "Int32",
-      "IsConfident": true,
       "IsNullable": false
      },
      "IsRequired": true,
@@ -82,7 +78,6 @@
         "$id": "12",
         "Name": "Uri",
         "Kind": "Uri",
-        "IsConfident": true,
         "IsNullable": false
        },
        "Location": "Uri",
@@ -104,7 +99,6 @@
         "$id": "14",
         "Name": "String",
         "Kind": "String",
-        "IsConfident": true,
         "IsNullable": false
        },
        "Location": "Query",
@@ -122,7 +116,6 @@
          "$id": "16",
          "Name": "String",
          "Kind": "String",
-         "IsConfident": true,
          "IsNullable": false
         },
         "Value": "2022-05-15-preview"
@@ -136,7 +129,6 @@
         "$id": "18",
         "Name": "string",
         "Kind": "String",
-        "IsConfident": true,
         "IsNullable": false
        },
        "Location": "Path",
@@ -161,11 +153,9 @@
          "$id": "21",
          "Name": "String",
          "Kind": "String",
-         "IsConfident": true,
          "IsNullable": false
         },
         "Value": "application/merge-patch+json",
-        "IsConfident": true,
         "IsNullable": false
        },
        "Location": "Header",
@@ -211,7 +201,6 @@
         "$id": "25",
         "Name": "String",
         "Kind": "String",
-        "IsConfident": true,
         "IsNullable": false
        },
        "Location": "Header",
@@ -252,7 +241,6 @@
           "$id": "29",
           "Name": "ResourceLocation",
           "Kind": "Uri",
-          "IsConfident": true,
           "IsNullable": false
          }
         }
@@ -278,7 +266,6 @@
           "$id": "32",
           "Name": "ResourceLocation",
           "Kind": "Uri",
-          "IsConfident": true,
           "IsNullable": false
          }
         }
@@ -295,8 +282,7 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": false,
-     "IsConfident": true
+     "GenerateConvenienceMethod": false
     }
    ],
    "Protocol": {

@@ -29,7 +29,6 @@
     }
    ],
    "IsExtensible": false,
-   "IsConfident": true,
    "IsNullable": false,
    "Usage": "Input"
   },
@@ -57,7 +56,6 @@
     }
    ],
    "IsExtensible": true,
-   "IsConfident": true,
    "IsNullable": false,
    "Usage": "Input"
   }
@@ -69,7 +67,6 @@
    "Namespace": "Demo.HelloWorld",
    "IsNullable": false,
    "Usage": "RoundTrip",
-   "IsConfident": true,
    "Properties": [
     {
      "$id": "11",
@@ -80,7 +77,6 @@
       "$id": "12",
       "Name": "string",
       "Kind": "String",
-      "IsConfident": true,
       "IsNullable": false
      },
      "IsRequired": true,
@@ -94,7 +90,6 @@
    "Namespace": "Demo.HelloWorld",
    "IsNullable": false,
    "Usage": "Input",
-   "IsConfident": true,
    "Properties": [
     {
      "$id": "14",
@@ -105,7 +100,6 @@
       "$id": "15",
       "Name": "string",
       "Kind": "String",
-      "IsConfident": true,
       "IsNullable": false
      },
      "IsRequired": true,
@@ -120,7 +114,6 @@
       "$id": "17",
       "Name": "int32",
       "Kind": "Int32",
-      "IsConfident": true,
       "IsNullable": false
      },
      "IsRequired": true,
@@ -154,7 +147,6 @@
        "$id": "22",
        "Name": "string",
        "Kind": "String",
-       "IsConfident": true,
        "IsNullable": false
       },
       "ValueType": {
@@ -188,7 +180,6 @@
         "$id": "26",
         "Name": "string",
         "Kind": "DateTime",
-        "IsConfident": true,
         "IsNullable": false
        },
        "Location": "Path",
@@ -209,7 +200,6 @@
         "$id": "28",
         "Name": "String",
         "Kind": "String",
-        "IsConfident": true,
         "IsNullable": false
        },
        "Location": "Header",
@@ -238,7 +228,6 @@
         "$id": "31",
         "Name": "String",
         "Kind": "String",
-        "IsConfident": true,
         "IsNullable": false
        },
        "Location": "Query",
@@ -256,7 +245,6 @@
          "$id": "33",
          "Name": "String",
          "Kind": "String",
-         "IsConfident": true,
          "IsNullable": false
         },
         "Value": "0.1.0"
@@ -283,8 +271,7 @@
      "Path": "/top/{action}",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true,
-     "IsConfident": true
+     "GenerateConvenienceMethod": true
     },
     {
      "$id": "35",
@@ -300,7 +287,6 @@
         "$id": "37",
         "Name": "String",
         "Kind": "String",
-        "IsConfident": true,
         "IsNullable": false
        },
        "Location": "Header",
@@ -344,8 +330,7 @@
      "Path": "/top2",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true,
-     "IsConfident": true
+     "GenerateConvenienceMethod": true
     },
     {
      "$id": "40",
@@ -378,7 +363,6 @@
         "$id": "43",
         "Name": "String",
         "Kind": "String",
-        "IsConfident": true,
         "IsNullable": false
        },
        "Location": "Header",
@@ -406,7 +390,6 @@
         "$id": "46",
         "Name": "String",
         "Kind": "String",
-        "IsConfident": true,
         "IsNullable": false
        },
        "Location": "Header",
@@ -453,8 +436,7 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true,
-     "IsConfident": true
+     "GenerateConvenienceMethod": true
     },
     {
      "$id": "49",
@@ -470,7 +452,6 @@
         "$id": "51",
         "Name": "String",
         "Kind": "String",
-        "IsConfident": true,
         "IsNullable": false
        },
        "Location": "Header",
@@ -514,8 +495,7 @@
      "Path": "/hello",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true,
-     "IsConfident": true
+     "GenerateConvenienceMethod": true
     },
     {
      "$id": "54",
@@ -548,7 +528,6 @@
         "$id": "57",
         "Name": "String",
         "Kind": "String",
-        "IsConfident": true,
         "IsNullable": false
        },
        "Location": "Header",
@@ -576,7 +555,6 @@
         "$id": "60",
         "Name": "String",
         "Kind": "String",
-        "IsConfident": true,
         "IsNullable": false
        },
        "Location": "Header",
@@ -623,8 +601,7 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true,
-     "IsConfident": true
+     "GenerateConvenienceMethod": true
     },
     {
      "$id": "63",
@@ -640,7 +617,6 @@
         "$id": "65",
         "Name": "String",
         "Kind": "String",
-        "IsConfident": true,
         "IsNullable": false
        },
        "Location": "Header",
@@ -684,8 +660,7 @@
      "Path": "/demoHi",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true,
-     "IsConfident": true
+     "GenerateConvenienceMethod": true
     }
    ],
    "Protocol": {

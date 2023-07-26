@@ -7,6 +7,7 @@ import { OperationPaging } from "./operationPaging";
 import { InputParameter } from "./inputParameter";
 import { OperationResponse } from "./operationResponse";
 import { RequestMethod } from "./requestMethod";
+import { ConvenienceMethodOmitReason } from "./convenienceMethodOmitReason";
 
 export interface Paging {
     NextLinkName?: string;
@@ -34,5 +35,5 @@ export interface InputOperation {
     Paging?: OperationPaging;
     GenerateProtocolMethod: boolean;
     GenerateConvenienceMethod: boolean;
-    IsConfident?: boolean;
+    ConvenienceMethodOmitReason?: ConvenienceMethodOmitReason;
 }
