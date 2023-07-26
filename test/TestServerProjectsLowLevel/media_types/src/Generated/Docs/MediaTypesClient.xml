@@ -10,7 +10,7 @@ var client = new MediaTypesClient(credential);
 
 var data = File.OpenRead("<filePath>");
 
-Response response = await client.AnalyzeBodyAsync(RequestContent.Create(data), ContentType.ApplicationOctetStream, new RequestContext());
+Response response = await client.AnalyzeBodyAsync(RequestContent.Create(data), ContentType.ApplicationOctetStream);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.ToString());
@@ -26,7 +26,7 @@ var client = new MediaTypesClient(credential);
 
 var data = File.OpenRead("<filePath>");
 
-Response response = client.AnalyzeBody(RequestContent.Create(data), ContentType.ApplicationOctetStream, new RequestContext());
+Response response = client.AnalyzeBody(RequestContent.Create(data), ContentType.ApplicationOctetStream);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.ToString());
@@ -42,7 +42,7 @@ var client = new MediaTypesClient(credential);
 
 var data = File.OpenRead("<filePath>");
 
-Response response = await client.AnalyzeBodyNoAcceptHeaderAsync(RequestContent.Create(data), ContentType.ApplicationOctetStream, new RequestContext());
+Response response = await client.AnalyzeBodyNoAcceptHeaderAsync(RequestContent.Create(data), ContentType.ApplicationOctetStream);
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
@@ -56,21 +56,21 @@ var client = new MediaTypesClient(credential);
 
 var data = File.OpenRead("<filePath>");
 
-Response response = client.AnalyzeBodyNoAcceptHeader(RequestContent.Create(data), ContentType.ApplicationOctetStream, new RequestContext());
+Response response = client.AnalyzeBodyNoAcceptHeader(RequestContent.Create(data), ContentType.ApplicationOctetStream);
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
     <member name="ContentTypeWithEncodingAsync(RequestContent,RequestContext)">
 <example>
-This sample shows how to call ContentTypeWithEncodingAsync with required parameters and request content and parse the result.
+This sample shows how to call ContentTypeWithEncodingAsync with required request content and parse the result.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
 var client = new MediaTypesClient(credential);
 
 var data = "<String>";
 
-Response response = await client.ContentTypeWithEncodingAsync(RequestContent.Create(data), new RequestContext());
+Response response = await client.ContentTypeWithEncodingAsync(RequestContent.Create(data));
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.ToString());
@@ -79,14 +79,14 @@ Console.WriteLine(result.ToString());
     </member>
     <member name="ContentTypeWithEncoding(RequestContent,RequestContext)">
 <example>
-This sample shows how to call ContentTypeWithEncoding with required parameters and request content and parse the result.
+This sample shows how to call ContentTypeWithEncoding with required request content and parse the result.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
 var client = new MediaTypesClient(credential);
 
 var data = "<String>";
 
-Response response = client.ContentTypeWithEncoding(RequestContent.Create(data), new RequestContext());
+Response response = client.ContentTypeWithEncoding(RequestContent.Create(data));
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.ToString());
