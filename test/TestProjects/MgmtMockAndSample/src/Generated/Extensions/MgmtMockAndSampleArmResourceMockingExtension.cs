@@ -88,58 +88,5 @@ namespace MgmtMockAndSample.Mocking
         {
             return GetRoleAssignments().Get(roleAssignmentName, cancellationToken);
         }
-
-        /// <summary> Gets a collection of GuestConfigurationAssignmentResources in the ArmResource. </summary>
-        /// <returns> An object representing collection of GuestConfigurationAssignmentResources and their operations over a GuestConfigurationAssignmentResource. </returns>
-        public virtual GuestConfigurationAssignmentCollection GetGuestConfigurationAssignments()
-        {
-            return GetCachedClient(Client => new GuestConfigurationAssignmentCollection(Client, Id));
-        }
-
-        /// <summary>
-        /// Get information about a guest configuration assignment
-        /// <list type="bullet">
-        /// <item>
-        /// <term>Request Path</term>
-        /// <description>/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{vmName}/providers/Microsoft.GuestConfiguration/guestConfigurationAssignments/{guestConfigurationAssignmentName}</description>
-        /// </item>
-        /// <item>
-        /// <term>Operation Id</term>
-        /// <description>GuestConfigurationAssignments_Get</description>
-        /// </item>
-        /// </list>
-        /// </summary>
-        /// <param name="guestConfigurationAssignmentName"> The guest configuration assignment name. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="guestConfigurationAssignmentName"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="guestConfigurationAssignmentName"/> is null. </exception>
-        [ForwardsClientCalls]
-        public virtual async Task<Response<GuestConfigurationAssignmentResource>> GetGuestConfigurationAssignmentAsync(string guestConfigurationAssignmentName, CancellationToken cancellationToken = default)
-        {
-            return await GetGuestConfigurationAssignments().GetAsync(guestConfigurationAssignmentName, cancellationToken).ConfigureAwait(false);
-        }
-
-        /// <summary>
-        /// Get information about a guest configuration assignment
-        /// <list type="bullet">
-        /// <item>
-        /// <term>Request Path</term>
-        /// <description>/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{vmName}/providers/Microsoft.GuestConfiguration/guestConfigurationAssignments/{guestConfigurationAssignmentName}</description>
-        /// </item>
-        /// <item>
-        /// <term>Operation Id</term>
-        /// <description>GuestConfigurationAssignments_Get</description>
-        /// </item>
-        /// </list>
-        /// </summary>
-        /// <param name="guestConfigurationAssignmentName"> The guest configuration assignment name. </param>
-        /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="guestConfigurationAssignmentName"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="guestConfigurationAssignmentName"/> is null. </exception>
-        [ForwardsClientCalls]
-        public virtual Response<GuestConfigurationAssignmentResource> GetGuestConfigurationAssignment(string guestConfigurationAssignmentName, CancellationToken cancellationToken = default)
-        {
-            return GetGuestConfigurationAssignments().Get(guestConfigurationAssignmentName, cancellationToken);
-        }
     }
 }
