@@ -244,6 +244,7 @@ namespace ConvenienceInCadl
             }
         }
 
+        // The convenience method of this operation is not generated because the convenience method is not turned on in typespec file.
         /// <summary>
         /// [Protocol Method] No convenience method. But if we add the convenientAPI decorator, there will be ambiguity.
         /// <list type="bullet">
@@ -274,6 +275,7 @@ namespace ConvenienceInCadl
             }
         }
 
+        // The convenience method of this operation is not generated because the convenience method is not turned on in typespec file.
         /// <summary>
         /// [Protocol Method] No convenience method. But if we add the convenientAPI decorator, there will be ambiguity.
         /// <list type="bullet">
@@ -304,6 +306,7 @@ namespace ConvenienceInCadl
             }
         }
 
+        // The convenience method of this operation is not generated because the convenience method is not turned on in typespec file.
         /// <summary>
         /// [Protocol Method] No convenience method. But if we add the convenientAPI decorator, there will be no ambiguity.
         /// <list type="bullet">
@@ -338,6 +341,7 @@ namespace ConvenienceInCadl
             }
         }
 
+        // The convenience method of this operation is not generated because the convenience method is not turned on in typespec file.
         /// <summary>
         /// [Protocol Method] No convenience method. But if we add the convenientAPI decorator, there will be no ambiguity.
         /// <list type="bullet">
@@ -372,6 +376,7 @@ namespace ConvenienceInCadl
             }
         }
 
+        // The convenience method of this operation is not generated because the convenience method is not turned on in typespec file.
         /// <summary>
         /// [Protocol Method] No convenience method. But if we add the convenientAPI decorator, there will be ambiguity.
         /// <list type="bullet">
@@ -403,6 +408,7 @@ namespace ConvenienceInCadl
             }
         }
 
+        // The convenience method of this operation is not generated because the convenience method is not turned on in typespec file.
         /// <summary>
         /// [Protocol Method] No convenience method. But if we add the convenientAPI decorator, there will be ambiguity.
         /// <list type="bullet">

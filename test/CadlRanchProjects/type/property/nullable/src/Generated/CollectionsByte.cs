@@ -227,6 +227,7 @@ namespace _Type.Property.Nullable
             }
         }
 
+        // The convenience method of this operation is not generated because this operation has a http verb of PATCH which we do not support yet.
         /// <summary>
         /// [Protocol Method] Put a body with all properties present.
         /// <list type="bullet">
@@ -261,6 +262,7 @@ namespace _Type.Property.Nullable
             }
         }
 
+        // The convenience method of this operation is not generated because this operation has a http verb of PATCH which we do not support yet.
         /// <summary>
         /// [Protocol Method] Put a body with all properties present.
         /// <list type="bullet">
@@ -295,6 +297,7 @@ namespace _Type.Property.Nullable
             }
         }
 
+        // The convenience method of this operation is not generated because this operation has a http verb of PATCH which we do not support yet.
         /// <summary>
         /// [Protocol Method] Put a body with default properties.
         /// <list type="bullet">
@@ -329,6 +332,7 @@ namespace _Type.Property.Nullable
             }
         }
 
+        // The convenience method of this operation is not generated because this operation has a http verb of PATCH which we do not support yet.
         /// <summary>
         /// [Protocol Method] Put a body with default properties.
         /// <list type="bullet">

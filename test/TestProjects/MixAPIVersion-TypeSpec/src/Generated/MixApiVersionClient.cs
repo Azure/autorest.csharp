@@ -54,6 +54,7 @@ namespace MixApiVersion
             _apiVersion = options.Version;
         }
 
+        // The convenience method of this operation is not generated because the convenience method is not turned on in typespec file.
         /// <summary>
         /// [Protocol Method] delete.
         /// <list type="bullet">
@@ -89,6 +90,7 @@ namespace MixApiVersion
             }
         }
 
+        // The convenience method of this operation is not generated because the convenience method is not turned on in typespec file.
         /// <summary>
         /// [Protocol Method] delete.
         /// <list type="bullet">
@@ -124,6 +126,7 @@ namespace MixApiVersion
             }
         }
 
+        // The convenience method of this operation is not generated because the convenience method is not turned on in typespec file.
         /// <summary>
         /// [Protocol Method] Returns a pet. Supports eTags.
         /// <list type="bullet">
@@ -155,6 +158,7 @@ namespace MixApiVersion
             }
         }
 
+        // The convenience method of this operation is not generated because the convenience method is not turned on in typespec file.
         /// <summary>
         /// [Protocol Method] Returns a pet. Supports eTags.
         /// <list type="bullet">
@@ -186,6 +190,7 @@ namespace MixApiVersion
             }
         }
 
+        // The convenience method of this operation is not generated because the convenience method is not turned on in typespec file.
         /// <summary>
         /// [Protocol Method]
         /// <list type="bullet">
@@ -220,6 +225,7 @@ namespace MixApiVersion
             }
         }
 
+        // The convenience method of this operation is not generated because the convenience method is not turned on in typespec file.
         /// <summary>
         /// [Protocol Method]
         /// <list type="bullet">
@@ -254,6 +260,7 @@ namespace MixApiVersion
             }
         }
 
+        // The convenience method of this operation is not generated because the convenience method is not turned on in typespec file.
         /// <summary>
         /// [Protocol Method] Gets ledger entries from a collection corresponding to a range.
         /// <list type="bullet">
@@ -275,6 +282,7 @@ namespace MixApiVersion
             return PageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "MixApiVersionClient.GetPets", "value", "nextLink", context);
         }
 
+        // The convenience method of this operation is not generated because the convenience method is not turned on in typespec file.
         /// <summary>
         /// [Protocol Method] Gets ledger entries from a collection corresponding to a range.
         /// <list type="bullet">

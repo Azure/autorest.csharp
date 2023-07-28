@@ -56,6 +56,7 @@ namespace AuthoringTypeSpec
             _apiVersion = options.Version;
         }
 
+        // The convenience method of this operation is not generated because this operation has a http verb of PATCH which we do not support yet.
         /// <summary>
         /// [Protocol Method] Creates a new project or updates an existing one.
         /// <list type="bullet">
@@ -93,6 +94,7 @@ namespace AuthoringTypeSpec
             }
         }
 
+        // The convenience method of this operation is not generated because this operation has a http verb of PATCH which we do not support yet.
         /// <summary>
         /// [Protocol Method] Creates a new project or updates an existing one.
         /// <list type="bullet">
@@ -130,6 +132,7 @@ namespace AuthoringTypeSpec
             }
         }
 
+        // The convenience method of this operation is not generated because the convenience method is not turned on in typespec file.
         /// <summary>
         /// [Protocol Method] Gets the details of a project.
         /// <list type="bullet">
@@ -165,6 +168,7 @@ namespace AuthoringTypeSpec
             }
         }
 
+        // The convenience method of this operation is not generated because the convenience method is not turned on in typespec file.
         /// <summary>
         /// [Protocol Method] Gets the details of a project.
         /// <list type="bullet">
@@ -200,6 +204,7 @@ namespace AuthoringTypeSpec
             }
         }
 
+        // The convenience method of this operation is not generated because the convenience method is not turned on in typespec file.
         /// <summary>
         /// [Protocol Method] Deletes a project.
         /// <list type="bullet">
@@ -235,6 +240,7 @@ namespace AuthoringTypeSpec
             }
         }
 
+        // The convenience method of this operation is not generated because the convenience method is not turned on in typespec file.
         /// <summary>
         /// [Protocol Method] Deletes a project.
         /// <list type="bullet">
@@ -270,6 +276,7 @@ namespace AuthoringTypeSpec
             }
         }
 
+        // The convenience method of this operation is not generated because the convenience method is not turned on in typespec file.
         /// <summary>
         /// [Protocol Method] Triggers a job to export a project's data.
         /// <list type="bullet">
@@ -307,6 +314,7 @@ namespace AuthoringTypeSpec
             }
         }
 
+        // The convenience method of this operation is not generated because the convenience method is not turned on in typespec file.
         /// <summary>
         /// [Protocol Method] Triggers a job to export a project's data.
         /// <list type="bullet">
@@ -344,6 +352,7 @@ namespace AuthoringTypeSpec
             }
         }
 
+        // The convenience method of this operation is not generated because the convenience method is not turned on in typespec file.
         /// <summary>
         /// [Protocol Method] Triggers a job to export a project's data.
         /// <list type="bullet">
@@ -379,6 +388,7 @@ namespace AuthoringTypeSpec
             }
         }
 
+        // The convenience method of this operation is not generated because the convenience method is not turned on in typespec file.
         /// <summary>
         /// [Protocol Method] Triggers a job to export a project's data.
         /// <list type="bullet">
@@ -414,6 +424,7 @@ namespace AuthoringTypeSpec
             }
         }
 
+        // The convenience method of this operation is not generated because the convenience method is not turned on in typespec file.
         /// <summary>
         /// [Protocol Method] Triggers a training job for a project.
         /// <list type="bullet">
@@ -451,6 +462,7 @@ namespace AuthoringTypeSpec
             }
         }
 
+        // The convenience method of this operation is not generated because the convenience method is not turned on in typespec file.
         /// <summary>
         /// [Protocol Method] Triggers a training job for a project.
         /// <list type="bullet">
@@ -488,6 +500,7 @@ namespace AuthoringTypeSpec
             }
         }
 
+        // The convenience method of this operation is not generated because the convenience method is not turned on in typespec file.
         /// <summary>
         /// [Protocol Method] Gets the details of a deployment.
         /// <list type="bullet">
@@ -525,6 +538,7 @@ namespace AuthoringTypeSpec
             }
         }
 
+        // The convenience method of this operation is not generated because the convenience method is not turned on in typespec file.
         /// <summary>
         /// [Protocol Method] Gets the details of a deployment.
         /// <list type="bullet">
@@ -562,6 +576,7 @@ namespace AuthoringTypeSpec
             }
         }
 
+        // The convenience method of this operation is not generated because the convenience method is not turned on in typespec file.
         /// <summary>
         /// [Protocol Method] Creates a new deployment or replaces an existing one.
         /// <list type="bullet">
@@ -601,6 +616,7 @@ namespace AuthoringTypeSpec
             }
         }
 
+        // The convenience method of this operation is not generated because the convenience method is not turned on in typespec file.
         /// <summary>
         /// [Protocol Method] Creates a new deployment or replaces an existing one.
         /// <list type="bullet">
@@ -640,6 +656,7 @@ namespace AuthoringTypeSpec
             }
         }
 
+        // The convenience method of this operation is not generated because the convenience method is not turned on in typespec file.
         /// <summary>
         /// [Protocol Method] Deletes a project deployment.
         /// <list type="bullet">
@@ -677,6 +694,7 @@ namespace AuthoringTypeSpec
             }
         }
 
+        // The convenience method of this operation is not generated because the convenience method is not turned on in typespec file.
         /// <summary>
         /// [Protocol Method] Deletes a project deployment.
         /// <list type="bullet">
@@ -714,6 +732,7 @@ namespace AuthoringTypeSpec
             }
         }
 
+        // The convenience method of this operation is not generated because the convenience method is not turned on in typespec file.
         /// <summary>
         /// [Protocol Method] Swaps two existing deployments with each other.
         /// <list type="bullet">
@@ -751,6 +770,7 @@ namespace AuthoringTypeSpec
             }
         }
 
+        // The convenience method of this operation is not generated because the convenience method is not turned on in typespec file.
         /// <summary>
         /// [Protocol Method] Swaps two existing deployments with each other.
         /// <list type="bullet">
@@ -1080,6 +1100,7 @@ namespace AuthoringTypeSpec
             }
         }
 
+        // The convenience method of this operation is not generated because the convenience method is not turned on in typespec file.
         /// <summary>
         /// [Protocol Method] Lists the existing projects.
         /// <list type="bullet">
@@ -1101,6 +1122,7 @@ namespace AuthoringTypeSpec
             return PageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "AuthoringTypeSpecClient.GetProjects", "value", "nextLink", context);
         }
 
+        // The convenience method of this operation is not generated because the convenience method is not turned on in typespec file.
         /// <summary>
         /// [Protocol Method] Lists the existing projects.
         /// <list type="bullet">
@@ -1122,6 +1144,7 @@ namespace AuthoringTypeSpec
             return PageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "AuthoringTypeSpecClient.GetProjects", "value", "nextLink", context);
         }
 
+        // The convenience method of this operation is not generated because the convenience method is not turned on in typespec file.
         /// <summary>
         /// [Protocol Method] Lists the existing deployments.
         /// <list type="bullet">
@@ -1148,6 +1171,7 @@ namespace AuthoringTypeSpec
             return PageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "AuthoringTypeSpecClient.GetDeployments", "value", "nextLink", context);
         }
 
+        // The convenience method of this operation is not generated because the convenience method is not turned on in typespec file.
         /// <summary>
         /// [Protocol Method] Lists the existing deployments.
         /// <list type="bullet">
@@ -1174,6 +1198,7 @@ namespace AuthoringTypeSpec
             return PageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "AuthoringTypeSpecClient.GetDeployments", "value", "nextLink", context);
         }
 
+        // The convenience method of this operation is not generated because the convenience method is not turned on in typespec file.
         /// <summary>
         /// [Protocol Method]
         /// <list type="bullet">
@@ -1198,6 +1223,7 @@ namespace AuthoringTypeSpec
             return PageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "AuthoringTypeSpecClient.GetSupportedLanguages", "value", "nextLink", context);
         }
 
+        // The convenience method of this operation is not generated because the convenience method is not turned on in typespec file.
         /// <summary>
         /// [Protocol Method]
         /// <list type="bullet">
@@ -1222,6 +1248,7 @@ namespace AuthoringTypeSpec
             return PageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "AuthoringTypeSpecClient.GetSupportedLanguages", "value", "nextLink", context);
         }
 
+        // The convenience method of this operation is not generated because the convenience method is not turned on in typespec file.
         /// <summary>
         /// [Protocol Method]
         /// <list type="bullet">
@@ -1246,6 +1273,7 @@ namespace AuthoringTypeSpec
             return PageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "AuthoringTypeSpecClient.GetTrainingConfigVersions", "value", "nextLink", context);
         }
 
+        // The convenience method of this operation is not generated because the convenience method is not turned on in typespec file.
         /// <summary>
         /// [Protocol Method]
         /// <list type="bullet">

@@ -534,6 +534,11 @@ namespace AutoRest.CSharp.Generation.Writers
         {
             var methodSignature = clientMethod.ProtocolMethodSignature.WithAsync(async);
 
+            if (clientMethod.ConvenienceMethodOmitReason is { } reason)
+            {
+                WriteConvenienceMethodOmitReason(reason);
+            }
+
             WriteMethodDocumentation(_writer, methodSignature, clientMethod, async);
             var docRef = GetMethodSignatureString(methodSignature);
             _writer.Line($"/// <include file=\"Docs/{_client.Type.Name}.xml\" path=\"doc/members/member[@name='{docRef}']/*\" />");
@@ -541,6 +546,26 @@ namespace AutoRest.CSharp.Generation.Writers
             {
                 _xmlDocWriter.WriteXmlDocumentation("example", _exampleComposer.Compose(clientMethod, async));
                 WriteDocumentationRemarks(_xmlDocWriter.WriteXmlDocumentation, clientMethod.RequestMethod, clientMethod.PagingInfo != null, methodSignature, Array.Empty<FormattableString>(), false, false, false);
+            }
+        }
+
+        private void WriteConvenienceMethodOmitReason(ConvenienceMethodOmitReason reason)
+        {
+            // TODO -- create wiki links to provide guidance here: https://github.com/Azure/autorest.csharp/issues/3624
+            switch (reason)
+            {
+                case ConvenienceMethodOmitReason.SuppressedInTypeSpec:
+                    _writer.Line($"// The convenience method of this operation is not generated because the convenience method is not turned on in typespec file.");
+                    break;
+                case ConvenienceMethodOmitReason.PatchOperation:
+                    _writer.Line($"// The convenience method of this operation is not generated because this operation has a http verb of PATCH which we do not support yet.");
+                    break;
+                case ConvenienceMethodOmitReason.TypeNotConfident:
+                    _writer.Line($"// The convenience method of this operation is made internal because this operation directly or indirectly uses a low confident type, for instance, unions, literal types with number values, etc.");
+                    break;
+                default:
+                    _writer.Line($"//  The convenience method of this operation is not generated because of {reason}");
+                    break;
             }
         }
 

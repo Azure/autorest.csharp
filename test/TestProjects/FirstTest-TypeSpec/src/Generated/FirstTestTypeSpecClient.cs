@@ -112,6 +112,7 @@ namespace FirstTestTypeSpec
             return Response.FromValue(Thing.FromResponse(response), response);
         }
 
+        // The convenience method of this operation is made internal because this operation directly or indirectly uses a low confident type, for instance, unions, literal types with number values, etc.
         /// <summary>
         /// [Protocol Method] top level method
         /// <list type="bullet">
@@ -143,6 +144,7 @@ namespace FirstTestTypeSpec
             }
         }
 
+        // The convenience method of this operation is made internal because this operation directly or indirectly uses a low confident type, for instance, unions, literal types with number values, etc.
         /// <summary>
         /// [Protocol Method] top level method
         /// <list type="bullet">
@@ -174,6 +176,7 @@ namespace FirstTestTypeSpec
             }
         }
 
+        // The convenience method of this operation is not generated because the convenience method is not turned on in typespec file.
         /// <summary>
         /// [Protocol Method] top level method2
         /// <list type="bullet">
@@ -204,6 +207,7 @@ namespace FirstTestTypeSpec
             }
         }
 
+        // The convenience method of this operation is not generated because the convenience method is not turned on in typespec file.
         /// <summary>
         /// [Protocol Method] top level method2
         /// <list type="bullet">
@@ -234,6 +238,7 @@ namespace FirstTestTypeSpec
             }
         }
 
+        // The convenience method of this operation is not generated because this operation has a http verb of PATCH which we do not support yet.
         /// <summary>
         /// [Protocol Method] top level patch
         /// <list type="bullet">
@@ -268,6 +273,7 @@ namespace FirstTestTypeSpec
             }
         }
 
+        // The convenience method of this operation is not generated because this operation has a http verb of PATCH which we do not support yet.
         /// <summary>
         /// [Protocol Method] top level patch
         /// <list type="bullet">
@@ -330,6 +336,7 @@ namespace FirstTestTypeSpec
             return Response.FromValue(Thing.FromResponse(response), response);
         }
 
+        // The convenience method of this operation is made internal because this operation directly or indirectly uses a low confident type, for instance, unions, literal types with number values, etc.
         /// <summary>
         /// [Protocol Method] body parameter without body decorator
         /// <list type="bullet">
@@ -364,6 +371,7 @@ namespace FirstTestTypeSpec
             }
         }
 
+        // The convenience method of this operation is made internal because this operation directly or indirectly uses a low confident type, for instance, unions, literal types with number values, etc.
         /// <summary>
         /// [Protocol Method] body parameter without body decorator
         /// <list type="bullet">
@@ -504,6 +512,7 @@ namespace FirstTestTypeSpec
             }
         }
 
+        // The convenience method of this operation is not generated because the convenience method is not turned on in typespec file.
         /// <summary>
         /// [Protocol Method]
         /// <list type="bullet">
@@ -534,6 +543,7 @@ namespace FirstTestTypeSpec
             }
         }
 
+        // The convenience method of this operation is not generated because the convenience method is not turned on in typespec file.
         /// <summary>
         /// [Protocol Method]
         /// <list type="bullet">
@@ -674,6 +684,7 @@ namespace FirstTestTypeSpec
             }
         }
 
+        // The convenience method of this operation is not generated because the convenience method is not turned on in typespec file.
         /// <summary>
         /// [Protocol Method] Return hi
         /// <list type="bullet">
@@ -711,6 +722,7 @@ namespace FirstTestTypeSpec
             }
         }
 
+        // The convenience method of this operation is not generated because the convenience method is not turned on in typespec file.
         /// <summary>
         /// [Protocol Method] Return hi
         /// <list type="bullet">
@@ -786,6 +798,7 @@ namespace FirstTestTypeSpec
             return Response.FromValue(RoundTripModel.FromResponse(response), response);
         }
 
+        // The convenience method of this operation is made internal because this operation directly or indirectly uses a low confident type, for instance, unions, literal types with number values, etc.
         /// <summary>
         /// [Protocol Method] Return hi again
         /// <list type="bullet">
@@ -825,6 +838,7 @@ namespace FirstTestTypeSpec
             }
         }
 
+        // The convenience method of this operation is made internal because this operation directly or indirectly uses a low confident type, for instance, unions, literal types with number values, etc.
         /// <summary>
         /// [Protocol Method] Return hi again
         /// <list type="bullet">
@@ -864,6 +878,7 @@ namespace FirstTestTypeSpec
             }
         }
 
+        // The convenience method of this operation is not generated because the convenience method is not turned on in typespec file.
         /// <summary>
         /// [Protocol Method] Return hi again
         /// <list type="bullet">
@@ -903,6 +918,7 @@ namespace FirstTestTypeSpec
             }
         }
 
+        // The convenience method of this operation is not generated because the convenience method is not turned on in typespec file.
         /// <summary>
         /// [Protocol Method] Return hi again
         /// <list type="bullet">
@@ -962,6 +978,7 @@ namespace FirstTestTypeSpec
             return Response.FromValue(Thing.FromResponse(response), response);
         }
 
+        // The convenience method of this operation is made internal because this operation directly or indirectly uses a low confident type, for instance, unions, literal types with number values, etc.
         /// <summary>
         /// [Protocol Method] Return hi in demo2
         /// <list type="bullet">
@@ -992,6 +1009,7 @@ namespace FirstTestTypeSpec
             }
         }
 
+        // The convenience method of this operation is made internal because this operation directly or indirectly uses a low confident type, for instance, unions, literal types with number values, etc.
         /// <summary>
         /// [Protocol Method] Return hi in demo2
         /// <list type="bullet">
@@ -1050,6 +1068,7 @@ namespace FirstTestTypeSpec
             return Response.FromValue(Thing.FromResponse(response), response);
         }
 
+        // The convenience method of this operation is made internal because this operation directly or indirectly uses a low confident type, for instance, unions, literal types with number values, etc.
         /// <summary>
         /// [Protocol Method] Create with literal value
         /// <list type="bullet">
@@ -1084,6 +1103,7 @@ namespace FirstTestTypeSpec
             }
         }
 
+        // The convenience method of this operation is made internal because this operation directly or indirectly uses a low confident type, for instance, unions, literal types with number values, etc.
         /// <summary>
         /// [Protocol Method] Create with literal value
         /// <list type="bullet">
@@ -1138,6 +1158,7 @@ namespace FirstTestTypeSpec
             return Response.FromValue(Thing.FromResponse(response), response);
         }
 
+        // The convenience method of this operation is made internal because this operation directly or indirectly uses a low confident type, for instance, unions, literal types with number values, etc.
         /// <summary>
         /// [Protocol Method] Send literal parameters
         /// <list type="bullet">
@@ -1168,6 +1189,7 @@ namespace FirstTestTypeSpec
             }
         }
 
+        // The convenience method of this operation is made internal because this operation directly or indirectly uses a low confident type, for instance, unions, literal types with number values, etc.
         /// <summary>
         /// [Protocol Method] Send literal parameters
         /// <list type="bullet">
@@ -1198,6 +1220,7 @@ namespace FirstTestTypeSpec
             }
         }
 
+        // The convenience method of this operation is not generated because the convenience method is not turned on in typespec file.
         /// <summary>
         /// [Protocol Method] get extensible enum
         /// <list type="bullet">
@@ -1228,6 +1251,7 @@ namespace FirstTestTypeSpec
             }
         }
 
+        // The convenience method of this operation is not generated because the convenience method is not turned on in typespec file.
         /// <summary>
         /// [Protocol Method] get extensible enum
         /// <list type="bullet">
@@ -1286,6 +1310,7 @@ namespace FirstTestTypeSpec
             return Response.FromValue(Thing.FromResponse(response), response);
         }
 
+        // The convenience method of this operation is made internal because this operation directly or indirectly uses a low confident type, for instance, unions, literal types with number values, etc.
         /// <summary>
         /// [Protocol Method] When set protocol false and convenient true, then the protocol method should be internal
         /// <list type="bullet">
@@ -1320,6 +1345,7 @@ namespace FirstTestTypeSpec
             }
         }
 
+        // The convenience method of this operation is made internal because this operation directly or indirectly uses a low confident type, for instance, unions, literal types with number values, etc.
         /// <summary>
         /// [Protocol Method] When set protocol false and convenient true, then the protocol method should be internal
         /// <list type="bullet">

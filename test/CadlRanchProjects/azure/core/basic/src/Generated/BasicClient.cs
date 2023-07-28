@@ -50,6 +50,7 @@ namespace _Specs_.Azure.Core.Basic
             _apiVersion = options.Version;
         }
 
+        // The convenience method of this operation is not generated because this operation has a http verb of PATCH which we do not support yet.
         /// <summary>
         /// [Protocol Method] Adds a user or updates a user's fields.
         /// <list type="bullet">
@@ -85,6 +86,7 @@ namespace _Specs_.Azure.Core.Basic
             }
         }
 
+        // The convenience method of this operation is not generated because this operation has a http verb of PATCH which we do not support yet.
         /// <summary>
         /// [Protocol Method] Adds a user or updates a user's fields.
         /// <list type="bullet">
