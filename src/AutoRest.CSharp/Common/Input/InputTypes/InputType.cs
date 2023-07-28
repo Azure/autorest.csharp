@@ -3,4 +3,4 @@
 
 namespace AutoRest.CSharp.Common.Input;
 
-internal abstract record InputType(string Name, bool IsConfident, bool IsNullable) { }
+internal abstract record InputType(string Name, bool IsNullable) { }

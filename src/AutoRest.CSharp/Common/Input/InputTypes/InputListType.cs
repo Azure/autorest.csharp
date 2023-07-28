@@ -3,4 +3,4 @@
 
 namespace AutoRest.CSharp.Common.Input;
 
-internal record InputListType(string Name, InputType ElementType, bool IsNullable) : InputType(Name, false, IsNullable) { }
+internal record InputListType(string Name, InputType ElementType, bool IsNullable) : InputType(Name, IsNullable) { }

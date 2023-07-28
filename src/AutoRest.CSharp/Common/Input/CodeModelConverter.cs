@@ -248,7 +248,6 @@ namespace AutoRest.CSharp.Common.Input
                 DerivedModels: derived,
                 DiscriminatorValue: schema.DiscriminatorValue,
                 DiscriminatorPropertyName: schema.Discriminator?.Property.SerializedName,
-                IsConfident: true,
                 IsNullable: false);
 
             _modelsCache[schema] = model;
@@ -414,7 +413,7 @@ namespace AutoRest.CSharp.Common.Input
                 _ => rawValue
             };
 
-            return new InputLiteralType("Literal", valueType, normalizedValue, true, false);
+            return new InputLiteralType("Literal", valueType, normalizedValue, false);
         }
 
         public static InputEnumType CreateEnumType(Schema schema, PrimitiveSchema choiceType, IEnumerable<ChoiceValue> choices, bool isExtensible) => new(
@@ -427,7 +426,6 @@ namespace AutoRest.CSharp.Common.Input
             EnumValueType: (InputPrimitiveType)CreateType(choiceType, schema.Extensions?.Format, null),
             AllowedValues: choices.Select(CreateEnumValue).ToList(),
             IsExtensible: isExtensible,
-            IsConfident: true,
             IsNullable: false
         );
 

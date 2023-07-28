@@ -34,7 +34,6 @@ namespace AutoRest.CSharp.Common.Input
             InputModelTypeUsage usage = InputModelTypeUsage.None;
             string? usageString = null;
             bool isExtendable = false;
-            bool isConfident = true;
             InputPrimitiveType? valueType = null;
             IReadOnlyList<InputEnumTypeValue>? allowedValues = null;
             while (reader.TokenType != JsonTokenType.EndObject)
@@ -48,7 +47,6 @@ namespace AutoRest.CSharp.Common.Input
                     || reader.TryReadString(nameof(InputEnumType.Description), ref description)
                     || reader.TryReadString(nameof(InputEnumType.Usage), ref usageString)
                     || reader.TryReadBoolean(nameof(InputEnumType.IsExtensible), ref isExtendable)
-                    || reader.TryReadBoolean(nameof(InputEnumType.IsConfident), ref isConfident)
                     || reader.TryReadPrimitiveType(nameof(InputEnumType.EnumValueType), ref valueType)
                     || reader.TryReadWithConverter(nameof(InputEnumType.AllowedValues), options, ref allowedValues);
 
@@ -104,7 +102,7 @@ namespace AutoRest.CSharp.Common.Input
             }
             valueType = currentType ?? throw new JsonException("Enum value type must be set.");
 
-            var enumType = new InputEnumType(name, ns, accessibility, deprecated, description, usage, valueType, NormalizeValues(allowedValues, valueType), isExtendable, isConfident, isNullable);
+            var enumType = new InputEnumType(name, ns, accessibility, deprecated, description, usage, valueType, NormalizeValues(allowedValues, valueType), isExtendable, isNullable);
             if (id != null)
             {
                 resolver.AddReference(id, enumType);

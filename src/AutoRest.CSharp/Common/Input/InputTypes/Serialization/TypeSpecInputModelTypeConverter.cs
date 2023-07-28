@@ -39,7 +39,6 @@ namespace AutoRest.CSharp.Common.Input
             string? usageString = null;
             string? discriminatorPropertyName = null;
             string? discriminatorValue = null;
-            bool isConfident = false;
             InputModelType? baseModel = null;
             InputModelType? model = null;
             while (reader.TokenType != JsonTokenType.EndObject)
@@ -55,8 +54,7 @@ namespace AutoRest.CSharp.Common.Input
                     || reader.TryReadString(nameof(InputModelType.DiscriminatorPropertyName), ref discriminatorPropertyName)
                     || reader.TryReadString(nameof(InputModelType.DiscriminatorValue), ref discriminatorValue)
                     || reader.TryReadWithConverter(nameof(InputModelType.BaseModel), options, ref baseModel)
-                    || reader.TryReadBoolean(nameof(InputModelType.IsNullable), ref isNullable)
-                    || reader.TryReadBoolean(nameof(InputModelType.IsConfident), ref isConfident);
+                    || reader.TryReadBoolean(nameof(InputModelType.IsNullable), ref isNullable);
 
                 if (isKnownProperty)
                 {
@@ -65,7 +63,7 @@ namespace AutoRest.CSharp.Common.Input
 
                 if (reader.GetString() == nameof(InputModelType.Properties))
                 {
-                    model = CreateInputModelTypeInstance(id, name, ns, accessibility, deprecated, description, usageString, discriminatorValue, discriminatorPropertyName, baseModel, properties, isConfident, isNullable, resolver);
+                    model = CreateInputModelTypeInstance(id, name, ns, accessibility, deprecated, description, usageString, discriminatorValue, discriminatorPropertyName, baseModel, properties, isNullable, resolver);
                     reader.Read();
                     CreateProperties(ref reader, properties, options);
                     if (reader.TokenType != JsonTokenType.EndObject)
@@ -79,10 +77,10 @@ namespace AutoRest.CSharp.Common.Input
                 }
             }
 
-            return model ?? CreateInputModelTypeInstance(id, name, ns, accessibility, deprecated, description, usageString, discriminatorValue, discriminatorPropertyName, baseModel, properties, isConfident, isNullable, resolver);
+            return model ?? CreateInputModelTypeInstance(id, name, ns, accessibility, deprecated, description, usageString, discriminatorValue, discriminatorPropertyName, baseModel, properties, isNullable, resolver);
         }
 
-        private static InputModelType CreateInputModelTypeInstance(string? id, string? name, string? ns, string? accessibility, string? deprecated, string? description, string? usageString, string? discriminatorValue, string? discriminatorPropertyName, InputModelType? baseModel, List<InputModelProperty> properties, bool isConfident, bool isNullable, ReferenceResolver resolver)
+        private static InputModelType CreateInputModelTypeInstance(string? id, string? name, string? ns, string? accessibility, string? deprecated, string? description, string? usageString, string? discriminatorValue, string? discriminatorPropertyName, InputModelType? baseModel, List<InputModelProperty> properties, bool isNullable, ReferenceResolver resolver)
         {
             name = name ?? throw new JsonException("Model must have name");
             InputModelTypeUsage usage = InputModelTypeUsage.None;
@@ -90,7 +88,7 @@ namespace AutoRest.CSharp.Common.Input
             {
                 Enum.TryParse<InputModelTypeUsage>(usageString, ignoreCase: true, out usage);
             }
-            var model = new InputModelType(name, ns, accessibility, deprecated, description, usage, properties, baseModel, new List<InputModelType>(), discriminatorValue, discriminatorPropertyName, isConfident, isNullable);
+            var model = new InputModelType(name, ns, accessibility, deprecated, description, usage, properties, baseModel, new List<InputModelType>(), discriminatorValue, discriminatorPropertyName, isNullable);
             if (id != null)
             {
                 resolver.AddReference(id, model);

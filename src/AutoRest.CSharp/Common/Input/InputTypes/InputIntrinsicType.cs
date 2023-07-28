@@ -3,7 +3,7 @@
 
 namespace AutoRest.CSharp.Common.Input;
 
-internal record InputIntrinsicType(InputIntrinsicTypeKind Kind) : InputType(InputIntrinsicTypeName, false, false)
+internal record InputIntrinsicType(InputIntrinsicTypeKind Kind) : InputType(InputIntrinsicTypeName, false)
 {
     public const string InputIntrinsicTypeName = "Intrinsic";
 
