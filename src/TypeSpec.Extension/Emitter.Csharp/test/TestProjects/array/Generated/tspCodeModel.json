@@ -13,6 +13,7 @@
    "Namespace": "TypeSpec.TestServer.ArrayBasic",
    "IsNullable": false,
    "Usage": "Output",
+   "IsConfident": true,
    "Properties": [
     {
      "$id": "3",
@@ -23,6 +24,7 @@
       "$id": "4",
       "Name": "string",
       "Kind": "String",
+      "IsConfident": true,
       "IsNullable": false
      },
      "IsRequired": true,
@@ -37,6 +39,7 @@
       "$id": "6",
       "Name": "string",
       "Kind": "String",
+      "IsConfident": true,
       "IsNullable": false
      },
      "IsRequired": false,
@@ -51,6 +54,7 @@
       "$id": "8",
       "Name": "int32",
       "Kind": "Int32",
+      "IsConfident": true,
       "IsNullable": false
      },
      "IsRequired": true,
@@ -81,6 +85,7 @@
         "$id": "12",
         "Name": "String",
         "Kind": "String",
+        "IsConfident": true,
         "IsNullable": false
        },
        "Location": "Uri",
@@ -98,6 +103,7 @@
          "$id": "14",
          "Name": "String",
          "Kind": "String",
+         "IsConfident": true,
          "IsNullable": false
         },
         "Value": "http://localhost:3000"
@@ -111,6 +117,7 @@
         "$id": "16",
         "Name": "string",
         "Kind": "String",
+        "IsConfident": true,
         "IsNullable": false
        },
        "Location": "Query",
@@ -131,6 +138,7 @@
         "$id": "18",
         "Name": "String",
         "Kind": "String",
+        "IsConfident": true,
         "IsNullable": false
        },
        "Location": "Header",
@@ -159,6 +167,7 @@
         "$id": "21",
         "Name": "String",
         "Kind": "String",
+        "IsConfident": true,
         "IsNullable": false
        },
        "Location": "Query",
@@ -176,6 +185,7 @@
          "$id": "23",
          "Name": "String",
          "Kind": "String",
+         "IsConfident": true,
          "IsNullable": false
         },
         "Value": "1.0.0"

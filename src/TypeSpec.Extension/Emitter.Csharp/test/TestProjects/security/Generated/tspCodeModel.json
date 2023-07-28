@@ -28,6 +28,7 @@
         "$id": "5",
         "Name": "String",
         "Kind": "String",
+        "IsConfident": true,
         "IsNullable": false
        },
        "Location": "Uri",
@@ -45,6 +46,7 @@
          "$id": "7",
          "Name": "String",
          "Kind": "String",
+         "IsConfident": true,
          "IsNullable": false
         },
         "Value": "http://localhost:3000"
@@ -58,6 +60,7 @@
         "$id": "9",
         "Name": "String",
         "Kind": "String",
+        "IsConfident": true,
         "IsNullable": false
        },
        "Location": "Header",
@@ -86,6 +89,7 @@
         "$id": "12",
         "Name": "String",
         "Kind": "String",
+        "IsConfident": true,
         "IsNullable": false
        },
        "Location": "Query",
@@ -103,6 +107,7 @@
          "$id": "14",
          "Name": "String",
          "Kind": "String",
+         "IsConfident": true,
          "IsNullable": false
         },
         "Value": "1.0.0"

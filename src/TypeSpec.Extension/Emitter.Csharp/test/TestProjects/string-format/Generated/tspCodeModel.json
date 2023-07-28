@@ -26,6 +26,7 @@
         "$id": "5",
         "Name": "utcDateTime",
         "Kind": "DateTime",
+        "IsConfident": true,
         "IsNullable": false
        },
        "Location": "Path",
@@ -46,6 +47,7 @@
         "$id": "7",
         "Name": "String",
         "Kind": "String",
+        "IsConfident": true,
         "IsNullable": false
        },
        "Location": "Header",
@@ -74,6 +76,7 @@
         "$id": "10",
         "Name": "String",
         "Kind": "String",
+        "IsConfident": true,
         "IsNullable": false
        },
        "Location": "Query",
@@ -91,6 +94,7 @@
          "$id": "12",
          "Name": "String",
          "Kind": "String",
+         "IsConfident": true,
          "IsNullable": false
         },
         "Value": "2015-06-18"
@@ -130,6 +134,7 @@
         "$id": "16",
         "Name": "string",
         "Kind": "Uri",
+        "IsConfident": true,
         "IsNullable": false
        },
        "Location": "Path",
@@ -150,6 +155,7 @@
         "$id": "18",
         "Name": "String",
         "Kind": "String",
+        "IsConfident": true,
         "IsNullable": false
        },
        "Location": "Header",

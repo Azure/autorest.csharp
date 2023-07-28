@@ -26,6 +26,7 @@
         "$id": "5",
         "Name": "Uri",
         "Kind": "Uri",
+        "IsConfident": true,
         "IsNullable": false
        },
        "Location": "Uri",
@@ -46,6 +47,7 @@
         "$id": "7",
         "Name": "string",
         "Kind": "String",
+        "IsConfident": true,
         "IsNullable": false
        },
        "Location": "Uri",
@@ -66,6 +68,7 @@
         "$id": "9",
         "Name": "string",
         "Kind": "String",
+        "IsConfident": true,
         "IsNullable": false
        },
        "Location": "Path",
@@ -86,6 +89,7 @@
         "$id": "11",
         "Name": "String",
         "Kind": "String",
+        "IsConfident": true,
         "IsNullable": false
        },
        "Location": "Header",
@@ -114,6 +118,7 @@
         "$id": "14",
         "Name": "String",
         "Kind": "String",
+        "IsConfident": true,
         "IsNullable": false
        },
        "Location": "Query",
@@ -131,6 +136,7 @@
          "$id": "16",
          "Name": "String",
          "Kind": "String",
+         "IsConfident": true,
          "IsNullable": false
         },
         "Value": "2015-06-18"

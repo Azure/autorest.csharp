@@ -51,6 +51,7 @@
     }
    ],
    "IsExtensible": true,
+   "IsConfident": true,
    "IsNullable": false,
    "Usage": "Input"
   },
@@ -99,6 +100,7 @@
     }
    ],
    "IsExtensible": false,
+   "IsConfident": true,
    "IsNullable": false,
    "Usage": "Input"
   },
@@ -134,6 +136,7 @@
     }
    ],
    "IsExtensible": true,
+   "IsConfident": true,
    "IsNullable": false,
    "Usage": "None"
   },
@@ -161,6 +164,7 @@
     }
    ],
    "IsExtensible": true,
+   "IsConfident": true,
    "IsNullable": false,
    "Usage": "Input"
   }
@@ -173,6 +177,7 @@
    "Description": "Input model with enum properties.",
    "IsNullable": false,
    "Usage": "Input",
+   "IsConfident": true,
    "Properties": [
     {
      "$id": "28",
@@ -241,6 +246,7 @@
         "$id": "35",
         "Name": "String",
         "Kind": "String",
+        "IsConfident": true,
         "IsNullable": false
        },
        "Location": "Uri",
@@ -258,6 +264,7 @@
          "$id": "37",
          "Name": "String",
          "Kind": "String",
+         "IsConfident": true,
          "IsNullable": false
         },
         "Value": "http://localhost:3000"
@@ -288,6 +295,7 @@
         "$id": "40",
         "Name": "String",
         "Kind": "String",
+        "IsConfident": true,
         "IsNullable": false
        },
        "Location": "Header",
@@ -315,6 +323,7 @@
         "$id": "43",
         "Name": "String",
         "Kind": "String",
+        "IsConfident": true,
         "IsNullable": false
        },
        "Location": "Header",
@@ -343,6 +352,7 @@
         "$id": "46",
         "Name": "String",
         "Kind": "String",
+        "IsConfident": true,
         "IsNullable": false
        },
        "Location": "Query",
@@ -360,6 +370,7 @@
          "$id": "48",
          "Name": "String",
          "Kind": "String",
+         "IsConfident": true,
          "IsNullable": false
         },
         "Value": "1.0.0"

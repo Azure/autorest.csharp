@@ -14,6 +14,7 @@
    "IsNullable": false,
    "DiscriminatorPropertyName": "kind",
    "Usage": "RoundTrip",
+   "IsConfident": true,
    "Properties": [
     {
      "$id": "3",
@@ -27,6 +28,7 @@
       "$id": "4",
       "Name": "string",
       "Kind": "String",
+      "IsConfident": true,
       "IsNullable": false
      },
      "IsDiscriminator": true
@@ -40,6 +42,7 @@
       "$id": "6",
       "Name": "int32",
       "Kind": "Int32",
+      "IsConfident": true,
       "IsNullable": false
      },
      "IsRequired": true,
@@ -59,6 +62,7 @@
     "$ref": "2"
    },
    "Usage": "RoundTrip",
+   "IsConfident": true,
    "Properties": [
     {
      "$id": "8",
@@ -72,6 +76,7 @@
       "$id": "9",
       "Name": "string",
       "Kind": "String",
+      "IsConfident": true,
       "IsNullable": false
      },
      "IsDiscriminator": true
@@ -89,6 +94,7 @@
     "$ref": "7"
    },
    "Usage": "RoundTrip",
+   "IsConfident": true,
    "Properties": []
   },
   {
@@ -102,6 +108,7 @@
     "$ref": "7"
    },
    "Usage": "RoundTrip",
+   "IsConfident": true,
    "Properties": []
   },
   {
@@ -115,6 +122,7 @@
     "$ref": "2"
    },
    "Usage": "RoundTrip",
+   "IsConfident": true,
    "Properties": [
     {
      "$id": "13",
@@ -144,6 +152,7 @@
        "$id": "17",
        "Name": "string",
        "Kind": "String",
+       "IsConfident": true,
        "IsNullable": false
       },
       "ValueType": {
@@ -188,6 +197,7 @@
         "$id": "22",
         "Name": "Uri",
         "Kind": "Uri",
+        "IsConfident": true,
         "IsNullable": false
        },
        "Location": "Uri",
@@ -225,6 +235,7 @@
         "$id": "25",
         "Name": "String",
         "Kind": "String",
+        "IsConfident": true,
         "IsNullable": false
        },
        "Location": "Header",
@@ -252,6 +263,7 @@
         "$id": "28",
         "Name": "String",
         "Kind": "String",
+        "IsConfident": true,
         "IsNullable": false
        },
        "Location": "Header",
@@ -280,6 +292,7 @@
         "$id": "31",
         "Name": "String",
         "Kind": "String",
+        "IsConfident": true,
         "IsNullable": false
        },
        "Location": "Query",
@@ -297,6 +310,7 @@
          "$id": "33",
          "Name": "String",
          "Kind": "String",
+         "IsConfident": true,
          "IsNullable": false
         },
         "Value": "2022-05-15-preview"
@@ -342,6 +356,7 @@
         "$id": "37",
         "Name": "String",
         "Kind": "String",
+        "IsConfident": true,
         "IsNullable": false
        },
        "Location": "Header",
@@ -421,6 +436,7 @@
         "$id": "43",
         "Name": "String",
         "Kind": "String",
+        "IsConfident": true,
         "IsNullable": false
        },
        "Location": "Header",
@@ -448,6 +464,7 @@
         "$id": "46",
         "Name": "String",
         "Kind": "String",
+        "IsConfident": true,
         "IsNullable": false
        },
        "Location": "Header",
@@ -510,6 +527,7 @@
         "$id": "51",
         "Name": "String",
         "Kind": "String",
+        "IsConfident": true,
         "IsNullable": false
        },
        "Location": "Header",
@@ -572,6 +590,7 @@
         "$id": "56",
         "Name": "String",
         "Kind": "String",
+        "IsConfident": true,
         "IsNullable": false
        },
        "Location": "Header",

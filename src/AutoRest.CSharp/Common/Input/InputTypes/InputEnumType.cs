@@ -7,8 +7,8 @@ using System.Linq;
 
 namespace AutoRest.CSharp.Common.Input;
 
-internal record InputEnumType(string Name, string? Namespace, string? Accessibility, string? Deprecated, string Description, InputModelTypeUsage Usage, InputPrimitiveType EnumValueType, IReadOnlyList<InputEnumTypeValue> AllowedValues, bool IsExtensible, bool IsConfident, bool IsNullable = false)
-    : InputType(Name, IsConfident, IsNullable: IsNullable)
+internal record InputEnumType(string Name, string? Namespace, string? Accessibility, string? Deprecated, string Description, InputModelTypeUsage Usage, InputPrimitiveType EnumValueType, IReadOnlyList<InputEnumTypeValue> AllowedValues, bool IsExtensible, bool IsConfident, bool IsNullable)
+    : InputType(Name, IsConfident, IsNullable)
 {
     public static IEqualityComparer<InputEnumType> IgnoreNullabilityComparer { get; } = new IgnoreNullabilityComparerImplementation();
 

@@ -13,6 +13,7 @@
    "Namespace": "TypeSpec.HeadClient",
    "IsNullable": false,
    "Usage": "Input",
+   "IsConfident": true,
    "Properties": [
     {
      "$id": "3",
@@ -23,6 +24,7 @@
       "$id": "4",
       "Name": "string",
       "Kind": "String",
+      "IsConfident": true,
       "IsNullable": false
      },
      "IsRequired": true,
@@ -51,6 +53,7 @@
         "$id": "8",
         "Name": "String",
         "Kind": "String",
+        "IsConfident": true,
         "IsNullable": false
        },
        "Location": "Uri",
@@ -68,6 +71,7 @@
          "$id": "10",
          "Name": "String",
          "Kind": "String",
+         "IsConfident": true,
          "IsNullable": false
         },
         "Value": "http://localhost:3000"
@@ -81,6 +85,7 @@
         "$id": "12",
         "Name": "string",
         "Kind": "String",
+        "IsConfident": true,
         "IsNullable": false
        },
        "Location": "Header",
@@ -118,6 +123,7 @@
         "$id": "15",
         "Name": "String",
         "Kind": "String",
+        "IsConfident": true,
         "IsNullable": false
        },
        "Location": "Header",
@@ -145,6 +151,7 @@
         "$id": "18",
         "Name": "String",
         "Kind": "String",
+        "IsConfident": true,
         "IsNullable": false
        },
        "Location": "Header",
@@ -173,6 +180,7 @@
         "$id": "21",
         "Name": "String",
         "Kind": "String",
+        "IsConfident": true,
         "IsNullable": false
        },
        "Location": "Query",
@@ -190,6 +198,7 @@
          "$id": "23",
          "Name": "String",
          "Kind": "String",
+         "IsConfident": true,
          "IsNullable": false
         },
         "Value": "1.0.0"
@@ -237,9 +246,11 @@
          "$id": "28",
          "Name": "String",
          "Kind": "String",
+         "IsConfident": true,
          "IsNullable": false
         },
         "Value": "text/plain",
+        "IsConfident": true,
         "IsNullable": false
        },
        "Location": "Header",
@@ -284,6 +295,7 @@
         "$id": "32",
         "Name": "String",
         "Kind": "String",
+        "IsConfident": true,
         "IsNullable": false
        },
        "Location": "Header",
