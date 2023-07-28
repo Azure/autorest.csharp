@@ -17,7 +17,7 @@ namespace _Type.Property.Nullable.Models
         /// <param name="requiredProperty"> Required property. </param>
         /// <param name="nullableProperty"> Property. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="requiredProperty"/> is null. </exception>
-        public StringProperty(string requiredProperty, string nullableProperty)
+        internal StringProperty(string requiredProperty, string nullableProperty)
         {
             Argument.AssertNotNull(requiredProperty, nameof(requiredProperty));
 
@@ -26,8 +26,8 @@ namespace _Type.Property.Nullable.Models
         }
 
         /// <summary> Required property. </summary>
-        public string RequiredProperty { get; set; }
+        public string RequiredProperty { get; }
         /// <summary> Property. </summary>
-        public string NullableProperty { get; set; }
+        public string NullableProperty { get; }
     }
 }

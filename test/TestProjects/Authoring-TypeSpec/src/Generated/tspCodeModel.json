@@ -1252,7 +1252,7 @@
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
      "GenerateConvenienceMethod": false,
-     "ConvenienceMethodOmitReason": "SuppressedInTypeSpec"
+     "ConvenienceMethodOmitReason": "PatchOperation"
     },
     {
      "$id": "152",

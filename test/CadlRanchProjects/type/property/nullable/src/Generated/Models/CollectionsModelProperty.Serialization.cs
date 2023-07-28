@@ -12,30 +12,8 @@ using Azure.Core;
 
 namespace _Type.Property.Nullable.Models
 {
-    public partial class CollectionsModelProperty : IUtf8JsonSerializable
+    public partial class CollectionsModelProperty
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
-        {
-            writer.WriteStartObject();
-            writer.WritePropertyName("requiredProperty"u8);
-            writer.WriteStringValue(RequiredProperty);
-            if (NullableProperty != null && Optional.IsCollectionDefined(NullableProperty))
-            {
-                writer.WritePropertyName("nullableProperty"u8);
-                writer.WriteStartArray();
-                foreach (var item in NullableProperty)
-                {
-                    writer.WriteObjectValue(item);
-                }
-                writer.WriteEndArray();
-            }
-            else
-            {
-                writer.WriteNull("nullableProperty");
-            }
-            writer.WriteEndObject();
-        }
-
         internal static CollectionsModelProperty DeserializeCollectionsModelProperty(JsonElement element)
         {
             if (element.ValueKind == JsonValueKind.Null)
@@ -43,7 +21,7 @@ namespace _Type.Property.Nullable.Models
                 return null;
             }
             string requiredProperty = default;
-            IList<InnerModel> nullableProperty = default;
+            IReadOnlyList<InnerModel> nullableProperty = default;
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("requiredProperty"u8))
@@ -76,14 +54,6 @@ namespace _Type.Property.Nullable.Models
         {
             using var document = JsonDocument.Parse(response.Content);
             return DeserializeCollectionsModelProperty(document.RootElement);
-        }
-
-        /// <summary> Convert into a Utf8JsonRequestContent. </summary>
-        internal virtual RequestContent ToRequestContent()
-        {
-            var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue(this);
-            return content;
         }
     }
 }

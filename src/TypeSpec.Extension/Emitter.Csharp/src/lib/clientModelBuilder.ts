@@ -229,14 +229,15 @@ export function createModelForService(
     for (const client of clients) {
         for (const op of client.Operations) {
             if (!op.GenerateConvenienceMethod) {
-                // this means the convenience method is suppressed by the typespec
-                op.ConvenienceMethodOmitReason =
-                    ConvenienceMethodOmitReason.SuppressedInTypeSpec;
-            } else if (op.HttpMethod === RequestMethod.PATCH) {
-                // this means the convenience method is omitted because it is a patch and we do not support that yet
-                op.ConvenienceMethodOmitReason =
-                    ConvenienceMethodOmitReason.PatchOperation;
-                op.GenerateConvenienceMethod = false;
+                if (op.HttpMethod === RequestMethod.PATCH) {
+                    // this means the convenience method is omitted because it is a patch and we do not support that yet
+                    op.ConvenienceMethodOmitReason =
+                        ConvenienceMethodOmitReason.PatchOperation;
+                } else {
+                    // this means the convenience method is suppressed by the typespec
+                    op.ConvenienceMethodOmitReason =
+                        ConvenienceMethodOmitReason.SuppressedInTypeSpec;
+                }
             } else {
                 // otherwise we see if there is anything not confident in the operation
                 let isOperationConfident = true;

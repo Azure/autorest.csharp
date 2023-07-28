@@ -16,7 +16,7 @@ namespace _Type.Property.Nullable.Models
         /// <summary> Initializes a new instance of InnerModel. </summary>
         /// <param name="property"> Inner model property. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="property"/> is null. </exception>
-        public InnerModel(string property)
+        internal InnerModel(string property)
         {
             Argument.AssertNotNull(property, nameof(property));
 
@@ -24,6 +24,6 @@ namespace _Type.Property.Nullable.Models
         }
 
         /// <summary> Inner model property. </summary>
-        public string Property { get; set; }
+        public string Property { get; }
     }
 }

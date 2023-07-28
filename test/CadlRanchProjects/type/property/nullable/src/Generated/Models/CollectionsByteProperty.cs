@@ -19,7 +19,7 @@ namespace _Type.Property.Nullable.Models
         /// <param name="requiredProperty"> Required property. </param>
         /// <param name="nullableProperty"> Property. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="requiredProperty"/> is null. </exception>
-        public CollectionsByteProperty(string requiredProperty, IEnumerable<BinaryData> nullableProperty)
+        internal CollectionsByteProperty(string requiredProperty, IEnumerable<BinaryData> nullableProperty)
         {
             Argument.AssertNotNull(requiredProperty, nameof(requiredProperty));
 
@@ -30,14 +30,14 @@ namespace _Type.Property.Nullable.Models
         /// <summary> Initializes a new instance of CollectionsByteProperty. </summary>
         /// <param name="requiredProperty"> Required property. </param>
         /// <param name="nullableProperty"> Property. </param>
-        internal CollectionsByteProperty(string requiredProperty, IList<BinaryData> nullableProperty)
+        internal CollectionsByteProperty(string requiredProperty, IReadOnlyList<BinaryData> nullableProperty)
         {
             RequiredProperty = requiredProperty;
             NullableProperty = nullableProperty;
         }
 
         /// <summary> Required property. </summary>
-        public string RequiredProperty { get; set; }
+        public string RequiredProperty { get; }
         /// <summary>
         /// Property
         /// <para>
@@ -68,6 +68,6 @@ namespace _Type.Property.Nullable.Models
         /// </list>
         /// </para>
         /// </summary>
-        public IList<BinaryData> NullableProperty { get; set; }
+        public IReadOnlyList<BinaryData> NullableProperty { get; }
     }
 }

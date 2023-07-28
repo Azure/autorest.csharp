@@ -12,25 +12,8 @@ using Azure.Core;
 
 namespace _Type.Property.Nullable.Models
 {
-    public partial class BytesProperty : IUtf8JsonSerializable
+    public partial class BytesProperty
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
-        {
-            writer.WriteStartObject();
-            writer.WritePropertyName("requiredProperty"u8);
-            writer.WriteStringValue(RequiredProperty);
-            if (NullableProperty != null)
-            {
-                writer.WritePropertyName("nullableProperty"u8);
-                writer.WriteBase64StringValue(NullableProperty.ToArray(), "D");
-            }
-            else
-            {
-                writer.WriteNull("nullableProperty");
-            }
-            writer.WriteEndObject();
-        }
-
         internal static BytesProperty DeserializeBytesProperty(JsonElement element)
         {
             if (element.ValueKind == JsonValueKind.Null)
@@ -66,14 +49,6 @@ namespace _Type.Property.Nullable.Models
         {
             using var document = JsonDocument.Parse(response.Content);
             return DeserializeBytesProperty(document.RootElement);
-        }
-
-        /// <summary> Convert into a Utf8JsonRequestContent. </summary>
-        internal virtual RequestContent ToRequestContent()
-        {
-            var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue(this);
-            return content;
         }
     }
 }

@@ -162,10 +162,9 @@ export function loadOperation(
     }
     const requestMethod = parseHttpRequestMethod(verb);
     const generateProtocol: boolean = shouldGenerateProtocol(sdkContext, op);
-    const generateConvenience: boolean = shouldGenerateConvenient(
-        sdkContext,
-        op
-    );
+    const generateConvenience: boolean =
+        requestMethod !== RequestMethod.PATCH &&
+        shouldGenerateConvenient(sdkContext, op);
 
     /* handle lro */
     /* handle paging. */
