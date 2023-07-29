@@ -12,7 +12,7 @@ using MgmtExpandResourceTypes;
 namespace MgmtExpandResourceTypes.Mocking
 {
     /// <summary> A class to add extension methods to ArmClient. </summary>
-    public partial class MgmtExpandResourceTypesArmClientMockingExtension : ArmResource
+    internal partial class MgmtExpandResourceTypesArmClientMockingExtension : ArmResource
     {
         /// <summary> Initializes a new instance of the <see cref="MgmtExpandResourceTypesArmClientMockingExtension"/> class for mocking. </summary>
         protected MgmtExpandResourceTypesArmClientMockingExtension()

@@ -5,7 +5,6 @@
 
 #nullable disable
 
-using System;
 using System.Threading;
 using System.Threading.Tasks;
 using Azure;
@@ -16,7 +15,7 @@ using MgmtMockAndSample;
 namespace MgmtMockAndSample.Mocking
 {
     /// <summary> A class to add extension methods to ArmResource. </summary>
-    public partial class MgmtMockAndSampleArmResourceMockingExtension : ArmResource
+    internal partial class MgmtMockAndSampleArmResourceMockingExtension : ArmResource
     {
         /// <summary> Initializes a new instance of the <see cref="MgmtMockAndSampleArmResourceMockingExtension"/> class for mocking. </summary>
         protected MgmtMockAndSampleArmResourceMockingExtension()
@@ -58,8 +57,6 @@ namespace MgmtMockAndSample.Mocking
         /// </summary>
         /// <param name="roleAssignmentName"> The name of the role assignment to get. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="roleAssignmentName"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="roleAssignmentName"/> is null. </exception>
         [ForwardsClientCalls]
         public virtual async Task<Response<RoleAssignmentResource>> GetRoleAssignmentAsync(string roleAssignmentName, CancellationToken cancellationToken = default)
         {
@@ -81,8 +78,6 @@ namespace MgmtMockAndSample.Mocking
         /// </summary>
         /// <param name="roleAssignmentName"> The name of the role assignment to get. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="roleAssignmentName"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="roleAssignmentName"/> is null. </exception>
         [ForwardsClientCalls]
         public virtual Response<RoleAssignmentResource> GetRoleAssignment(string roleAssignmentName, CancellationToken cancellationToken = default)
         {

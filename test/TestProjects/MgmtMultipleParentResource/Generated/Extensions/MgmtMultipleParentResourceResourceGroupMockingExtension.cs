@@ -5,7 +5,6 @@
 
 #nullable disable
 
-using System;
 using System.Threading;
 using System.Threading.Tasks;
 using Azure;
@@ -16,7 +15,7 @@ using MgmtMultipleParentResource;
 namespace MgmtMultipleParentResource.Mocking
 {
     /// <summary> A class to add extension methods to ResourceGroupResource. </summary>
-    public partial class MgmtMultipleParentResourceResourceGroupMockingExtension : ArmResource
+    internal partial class MgmtMultipleParentResourceResourceGroupMockingExtension : ArmResource
     {
         /// <summary> Initializes a new instance of the <see cref="MgmtMultipleParentResourceResourceGroupMockingExtension"/> class for mocking. </summary>
         protected MgmtMultipleParentResourceResourceGroupMockingExtension()
@@ -59,8 +58,6 @@ namespace MgmtMultipleParentResource.Mocking
         /// <param name="anotherName"> The name of the virtual machine containing the run command. </param>
         /// <param name="expand"> The expand expression to apply on the operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="anotherName"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="anotherName"/> is null. </exception>
         [ForwardsClientCalls]
         public virtual async Task<Response<AnotherParentResource>> GetAnotherParentAsync(string anotherName, string expand = null, CancellationToken cancellationToken = default)
         {
@@ -83,8 +80,6 @@ namespace MgmtMultipleParentResource.Mocking
         /// <param name="anotherName"> The name of the virtual machine containing the run command. </param>
         /// <param name="expand"> The expand expression to apply on the operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="anotherName"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="anotherName"/> is null. </exception>
         [ForwardsClientCalls]
         public virtual Response<AnotherParentResource> GetAnotherParent(string anotherName, string expand = null, CancellationToken cancellationToken = default)
         {
@@ -114,8 +109,6 @@ namespace MgmtMultipleParentResource.Mocking
         /// <param name="theParentName"> The name of the VM scale set. </param>
         /// <param name="expand"> The expand expression to apply on the operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="theParentName"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="theParentName"/> is null. </exception>
         [ForwardsClientCalls]
         public virtual async Task<Response<TheParentResource>> GetTheParentAsync(string theParentName, string expand = null, CancellationToken cancellationToken = default)
         {
@@ -138,8 +131,6 @@ namespace MgmtMultipleParentResource.Mocking
         /// <param name="theParentName"> The name of the VM scale set. </param>
         /// <param name="expand"> The expand expression to apply on the operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="theParentName"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="theParentName"/> is null. </exception>
         [ForwardsClientCalls]
         public virtual Response<TheParentResource> GetTheParent(string theParentName, string expand = null, CancellationToken cancellationToken = default)
         {

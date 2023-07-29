@@ -12,7 +12,7 @@ using Azure.ResourceManager.Sample;
 namespace Azure.ResourceManager.Sample.Mocking
 {
     /// <summary> A class to add extension methods to ArmClient. </summary>
-    public partial class SampleArmClientMockingExtension : ArmResource
+    internal partial class SampleArmClientMockingExtension : ArmResource
     {
         /// <summary> Initializes a new instance of the <see cref="SampleArmClientMockingExtension"/> class for mocking. </summary>
         protected SampleArmClientMockingExtension()

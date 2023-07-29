@@ -12,7 +12,7 @@ using MgmtExactMatchInheritance;
 namespace MgmtExactMatchInheritance.Mocking
 {
     /// <summary> A class to add extension methods to ArmClient. </summary>
-    public partial class MgmtExactMatchInheritanceArmClientMockingExtension : ArmResource
+    internal partial class MgmtExactMatchInheritanceArmClientMockingExtension : ArmResource
     {
         /// <summary> Initializes a new instance of the <see cref="MgmtExactMatchInheritanceArmClientMockingExtension"/> class for mocking. </summary>
         protected MgmtExactMatchInheritanceArmClientMockingExtension()

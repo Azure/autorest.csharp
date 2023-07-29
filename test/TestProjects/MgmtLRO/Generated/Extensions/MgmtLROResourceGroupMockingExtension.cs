@@ -5,7 +5,6 @@
 
 #nullable disable
 
-using System;
 using System.Threading;
 using System.Threading.Tasks;
 using Azure;
@@ -16,7 +15,7 @@ using MgmtLRO;
 namespace MgmtLRO.Mocking
 {
     /// <summary> A class to add extension methods to ResourceGroupResource. </summary>
-    public partial class MgmtLROResourceGroupMockingExtension : ArmResource
+    internal partial class MgmtLROResourceGroupMockingExtension : ArmResource
     {
         /// <summary> Initializes a new instance of the <see cref="MgmtLROResourceGroupMockingExtension"/> class for mocking. </summary>
         protected MgmtLROResourceGroupMockingExtension()
@@ -59,8 +58,6 @@ namespace MgmtLRO.Mocking
         /// <param name="fakeName"> The name of the fake. </param>
         /// <param name="expand"> May be used to expand the participants. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="fakeName"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="fakeName"/> is null. </exception>
         [ForwardsClientCalls]
         public virtual async Task<Response<FakeResource>> GetFakeAsync(string fakeName, string expand = null, CancellationToken cancellationToken = default)
         {
@@ -83,8 +80,6 @@ namespace MgmtLRO.Mocking
         /// <param name="fakeName"> The name of the fake. </param>
         /// <param name="expand"> May be used to expand the participants. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="fakeName"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="fakeName"/> is null. </exception>
         [ForwardsClientCalls]
         public virtual Response<FakeResource> GetFake(string fakeName, string expand = null, CancellationToken cancellationToken = default)
         {
@@ -113,8 +108,6 @@ namespace MgmtLRO.Mocking
         /// </summary>
         /// <param name="barName"> The name of the fake. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="barName"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="barName"/> is null. </exception>
         [ForwardsClientCalls]
         public virtual async Task<Response<BarResource>> GetBarAsync(string barName, CancellationToken cancellationToken = default)
         {
@@ -136,8 +129,6 @@ namespace MgmtLRO.Mocking
         /// </summary>
         /// <param name="barName"> The name of the fake. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="barName"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="barName"/> is null. </exception>
         [ForwardsClientCalls]
         public virtual Response<BarResource> GetBar(string barName, CancellationToken cancellationToken = default)
         {

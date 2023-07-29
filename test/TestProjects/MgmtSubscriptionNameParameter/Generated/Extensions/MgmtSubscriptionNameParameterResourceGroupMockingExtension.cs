@@ -5,7 +5,6 @@
 
 #nullable disable
 
-using System;
 using System.Threading;
 using System.Threading.Tasks;
 using Azure;
@@ -16,7 +15,7 @@ using MgmtSubscriptionNameParameter;
 namespace MgmtSubscriptionNameParameter.Mocking
 {
     /// <summary> A class to add extension methods to ResourceGroupResource. </summary>
-    public partial class MgmtSubscriptionNameParameterResourceGroupMockingExtension : ArmResource
+    internal partial class MgmtSubscriptionNameParameterResourceGroupMockingExtension : ArmResource
     {
         /// <summary> Initializes a new instance of the <see cref="MgmtSubscriptionNameParameterResourceGroupMockingExtension"/> class for mocking. </summary>
         protected MgmtSubscriptionNameParameterResourceGroupMockingExtension()
@@ -58,8 +57,6 @@ namespace MgmtSubscriptionNameParameter.Mocking
         /// </summary>
         /// <param name="subscriptionName"> The subscription name. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="subscriptionName"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionName"/> is null. </exception>
         [ForwardsClientCalls]
         public virtual async Task<Response<SBSubscriptionResource>> GetSBSubscriptionAsync(string subscriptionName, CancellationToken cancellationToken = default)
         {
@@ -81,8 +78,6 @@ namespace MgmtSubscriptionNameParameter.Mocking
         /// </summary>
         /// <param name="subscriptionName"> The subscription name. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="subscriptionName"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="subscriptionName"/> is null. </exception>
         [ForwardsClientCalls]
         public virtual Response<SBSubscriptionResource> GetSBSubscription(string subscriptionName, CancellationToken cancellationToken = default)
         {

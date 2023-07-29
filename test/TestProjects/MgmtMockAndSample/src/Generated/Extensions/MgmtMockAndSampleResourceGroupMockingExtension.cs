@@ -5,7 +5,6 @@
 
 #nullable disable
 
-using System;
 using System.Threading;
 using System.Threading.Tasks;
 using Azure;
@@ -16,7 +15,7 @@ using MgmtMockAndSample;
 namespace MgmtMockAndSample.Mocking
 {
     /// <summary> A class to add extension methods to ResourceGroupResource. </summary>
-    public partial class MgmtMockAndSampleResourceGroupMockingExtension : ArmResource
+    internal partial class MgmtMockAndSampleResourceGroupMockingExtension : ArmResource
     {
         /// <summary> Initializes a new instance of the <see cref="MgmtMockAndSampleResourceGroupMockingExtension"/> class for mocking. </summary>
         protected MgmtMockAndSampleResourceGroupMockingExtension()
@@ -58,8 +57,6 @@ namespace MgmtMockAndSample.Mocking
         /// </summary>
         /// <param name="vaultName"> The name of the vault. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="vaultName"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="vaultName"/> is null. </exception>
         [ForwardsClientCalls]
         public virtual async Task<Response<VaultResource>> GetVaultAsync(string vaultName, CancellationToken cancellationToken = default)
         {
@@ -81,8 +78,6 @@ namespace MgmtMockAndSample.Mocking
         /// </summary>
         /// <param name="vaultName"> The name of the vault. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="vaultName"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="vaultName"/> is null. </exception>
         [ForwardsClientCalls]
         public virtual Response<VaultResource> GetVault(string vaultName, CancellationToken cancellationToken = default)
         {
@@ -111,8 +106,6 @@ namespace MgmtMockAndSample.Mocking
         /// </summary>
         /// <param name="diskEncryptionSetName"> The name of the disk encryption set that is being created. The name can't be changed after the disk encryption set is created. Supported characters for the name are a-z, A-Z, 0-9, _ and -. The maximum name length is 80 characters. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="diskEncryptionSetName"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="diskEncryptionSetName"/> is null. </exception>
         [ForwardsClientCalls]
         public virtual async Task<Response<DiskEncryptionSetResource>> GetDiskEncryptionSetAsync(string diskEncryptionSetName, CancellationToken cancellationToken = default)
         {
@@ -134,8 +127,6 @@ namespace MgmtMockAndSample.Mocking
         /// </summary>
         /// <param name="diskEncryptionSetName"> The name of the disk encryption set that is being created. The name can't be changed after the disk encryption set is created. Supported characters for the name are a-z, A-Z, 0-9, _ and -. The maximum name length is 80 characters. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="diskEncryptionSetName"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="diskEncryptionSetName"/> is null. </exception>
         [ForwardsClientCalls]
         public virtual Response<DiskEncryptionSetResource> GetDiskEncryptionSet(string diskEncryptionSetName, CancellationToken cancellationToken = default)
         {
@@ -164,8 +155,6 @@ namespace MgmtMockAndSample.Mocking
         /// </summary>
         /// <param name="name"> The name of the managed HSM Pool. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="name"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
         [ForwardsClientCalls]
         public virtual async Task<Response<ManagedHsmResource>> GetManagedHsmAsync(string name, CancellationToken cancellationToken = default)
         {
@@ -187,8 +176,6 @@ namespace MgmtMockAndSample.Mocking
         /// </summary>
         /// <param name="name"> The name of the managed HSM Pool. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="name"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
         [ForwardsClientCalls]
         public virtual Response<ManagedHsmResource> GetManagedHsm(string name, CancellationToken cancellationToken = default)
         {
@@ -218,8 +205,6 @@ namespace MgmtMockAndSample.Mocking
         /// <param name="firewallPolicyName"> The name of the Firewall Policy. </param>
         /// <param name="expand"> Expands referenced resources. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="firewallPolicyName"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="firewallPolicyName"/> is null. </exception>
         [ForwardsClientCalls]
         public virtual async Task<Response<FirewallPolicyResource>> GetFirewallPolicyAsync(string firewallPolicyName, string expand = null, CancellationToken cancellationToken = default)
         {
@@ -242,8 +227,6 @@ namespace MgmtMockAndSample.Mocking
         /// <param name="firewallPolicyName"> The name of the Firewall Policy. </param>
         /// <param name="expand"> Expands referenced resources. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="firewallPolicyName"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="firewallPolicyName"/> is null. </exception>
         [ForwardsClientCalls]
         public virtual Response<FirewallPolicyResource> GetFirewallPolicy(string firewallPolicyName, string expand = null, CancellationToken cancellationToken = default)
         {

@@ -5,7 +5,6 @@
 
 #nullable disable
 
-using System;
 using System.Threading;
 using System.Threading.Tasks;
 using Azure;
@@ -16,7 +15,7 @@ using MgmtResourceName;
 namespace MgmtResourceName.Mocking
 {
     /// <summary> A class to add extension methods to TenantResource. </summary>
-    public partial class MgmtResourceNameTenantMockingExtension : ArmResource
+    internal partial class MgmtResourceNameTenantMockingExtension : ArmResource
     {
         /// <summary> Initializes a new instance of the <see cref="MgmtResourceNameTenantMockingExtension"/> class for mocking. </summary>
         protected MgmtResourceNameTenantMockingExtension()
@@ -59,8 +58,6 @@ namespace MgmtResourceName.Mocking
         /// <param name="resourceProviderNamespace"> The namespace of the resource provider. </param>
         /// <param name="expand"> Specifies whether to expand the values. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="resourceProviderNamespace"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="resourceProviderNamespace"/> is null. </exception>
         [ForwardsClientCalls]
         public virtual async Task<Response<ProviderOperationResource>> GetProviderOperationAsync(string resourceProviderNamespace, string expand = null, CancellationToken cancellationToken = default)
         {
@@ -83,8 +80,6 @@ namespace MgmtResourceName.Mocking
         /// <param name="resourceProviderNamespace"> The namespace of the resource provider. </param>
         /// <param name="expand"> Specifies whether to expand the values. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="resourceProviderNamespace"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="resourceProviderNamespace"/> is null. </exception>
         [ForwardsClientCalls]
         public virtual Response<ProviderOperationResource> GetProviderOperation(string resourceProviderNamespace, string expand = null, CancellationToken cancellationToken = default)
         {

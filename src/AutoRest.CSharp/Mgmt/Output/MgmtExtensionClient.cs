@@ -133,7 +133,7 @@ namespace AutoRest.CSharp.Mgmt.Output
         private FormattableString? _description;
         public override FormattableString Description => _description ??= $"A class to add extension methods to {ResourceName}.";
 
-        protected override string DefaultAccessibility => "public";
+        protected override string DefaultAccessibility => "internal";
 
         /// <summary>
         /// Construct a key for overload of this method signature.

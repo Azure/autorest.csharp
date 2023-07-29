@@ -5,7 +5,6 @@
 
 #nullable disable
 
-using System;
 using System.Threading;
 using System.Threading.Tasks;
 using Azure;
@@ -16,7 +15,7 @@ using MgmtListMethods;
 namespace MgmtListMethods.Mocking
 {
     /// <summary> A class to add extension methods to ManagementGroupResource. </summary>
-    public partial class MgmtListMethodsManagementGroupMockingExtension : ArmResource
+    internal partial class MgmtListMethodsManagementGroupMockingExtension : ArmResource
     {
         /// <summary> Initializes a new instance of the <see cref="MgmtListMethodsManagementGroupMockingExtension"/> class for mocking. </summary>
         protected MgmtListMethodsManagementGroupMockingExtension()
@@ -58,8 +57,6 @@ namespace MgmtListMethods.Mocking
         /// </summary>
         /// <param name="mgmtGrpParentWithNonResChWithLocName"> Name. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="mgmtGrpParentWithNonResChWithLocName"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="mgmtGrpParentWithNonResChWithLocName"/> is null. </exception>
         [ForwardsClientCalls]
         public virtual async Task<Response<MgmtGrpParentWithNonResChWithLocResource>> GetMgmtGrpParentWithNonResChWithLocAsync(string mgmtGrpParentWithNonResChWithLocName, CancellationToken cancellationToken = default)
         {
@@ -81,8 +78,6 @@ namespace MgmtListMethods.Mocking
         /// </summary>
         /// <param name="mgmtGrpParentWithNonResChWithLocName"> Name. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="mgmtGrpParentWithNonResChWithLocName"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="mgmtGrpParentWithNonResChWithLocName"/> is null. </exception>
         [ForwardsClientCalls]
         public virtual Response<MgmtGrpParentWithNonResChWithLocResource> GetMgmtGrpParentWithNonResChWithLoc(string mgmtGrpParentWithNonResChWithLocName, CancellationToken cancellationToken = default)
         {
@@ -111,8 +106,6 @@ namespace MgmtListMethods.Mocking
         /// </summary>
         /// <param name="mgmtGrpParentWithNonResChName"> Name. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="mgmtGrpParentWithNonResChName"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="mgmtGrpParentWithNonResChName"/> is null. </exception>
         [ForwardsClientCalls]
         public virtual async Task<Response<MgmtGrpParentWithNonResChResource>> GetMgmtGrpParentWithNonResChAsync(string mgmtGrpParentWithNonResChName, CancellationToken cancellationToken = default)
         {
@@ -134,8 +127,6 @@ namespace MgmtListMethods.Mocking
         /// </summary>
         /// <param name="mgmtGrpParentWithNonResChName"> Name. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="mgmtGrpParentWithNonResChName"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="mgmtGrpParentWithNonResChName"/> is null. </exception>
         [ForwardsClientCalls]
         public virtual Response<MgmtGrpParentWithNonResChResource> GetMgmtGrpParentWithNonResCh(string mgmtGrpParentWithNonResChName, CancellationToken cancellationToken = default)
         {
@@ -164,8 +155,6 @@ namespace MgmtListMethods.Mocking
         /// </summary>
         /// <param name="mgmtGrpParentWithLocName"> Name. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="mgmtGrpParentWithLocName"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="mgmtGrpParentWithLocName"/> is null. </exception>
         [ForwardsClientCalls]
         public virtual async Task<Response<MgmtGrpParentWithLocResource>> GetMgmtGrpParentWithLocAsync(string mgmtGrpParentWithLocName, CancellationToken cancellationToken = default)
         {
@@ -187,8 +176,6 @@ namespace MgmtListMethods.Mocking
         /// </summary>
         /// <param name="mgmtGrpParentWithLocName"> Name. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="mgmtGrpParentWithLocName"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="mgmtGrpParentWithLocName"/> is null. </exception>
         [ForwardsClientCalls]
         public virtual Response<MgmtGrpParentWithLocResource> GetMgmtGrpParentWithLoc(string mgmtGrpParentWithLocName, CancellationToken cancellationToken = default)
         {
@@ -217,8 +204,6 @@ namespace MgmtListMethods.Mocking
         /// </summary>
         /// <param name="mgmtGroupParentName"> Name. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="mgmtGroupParentName"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="mgmtGroupParentName"/> is null. </exception>
         [ForwardsClientCalls]
         public virtual async Task<Response<MgmtGroupParentResource>> GetMgmtGroupParentAsync(string mgmtGroupParentName, CancellationToken cancellationToken = default)
         {
@@ -240,8 +225,6 @@ namespace MgmtListMethods.Mocking
         /// </summary>
         /// <param name="mgmtGroupParentName"> Name. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="mgmtGroupParentName"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="mgmtGroupParentName"/> is null. </exception>
         [ForwardsClientCalls]
         public virtual Response<MgmtGroupParentResource> GetMgmtGroupParent(string mgmtGroupParentName, CancellationToken cancellationToken = default)
         {

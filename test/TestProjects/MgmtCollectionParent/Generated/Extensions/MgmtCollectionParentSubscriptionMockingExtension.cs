@@ -15,7 +15,7 @@ using MgmtCollectionParent;
 namespace MgmtCollectionParent.Mocking
 {
     /// <summary> A class to add extension methods to SubscriptionResource. </summary>
-    public partial class MgmtCollectionParentSubscriptionMockingExtension : ArmResource
+    internal partial class MgmtCollectionParentSubscriptionMockingExtension : ArmResource
     {
         private ClientDiagnostics _orderResourceClientDiagnostics;
         private ComputeManagementRestOperations _orderResourceRestClient;

@@ -15,7 +15,7 @@ using MgmtConstants;
 namespace MgmtConstants.Mocking
 {
     /// <summary> A class to add extension methods to SubscriptionResource. </summary>
-    public partial class MgmtConstantsSubscriptionMockingExtension : ArmResource
+    internal partial class MgmtConstantsSubscriptionMockingExtension : ArmResource
     {
         private ClientDiagnostics _optionalMachineOptionalsClientDiagnostics;
         private OptionalsRestOperations _optionalMachineOptionalsRestClient;

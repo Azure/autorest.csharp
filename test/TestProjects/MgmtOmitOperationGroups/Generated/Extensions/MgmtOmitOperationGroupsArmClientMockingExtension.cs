@@ -12,7 +12,7 @@ using MgmtOmitOperationGroups;
 namespace MgmtOmitOperationGroups.Mocking
 {
     /// <summary> A class to add extension methods to ArmClient. </summary>
-    public partial class MgmtOmitOperationGroupsArmClientMockingExtension : ArmResource
+    internal partial class MgmtOmitOperationGroupsArmClientMockingExtension : ArmResource
     {
         /// <summary> Initializes a new instance of the <see cref="MgmtOmitOperationGroupsArmClientMockingExtension"/> class for mocking. </summary>
         protected MgmtOmitOperationGroupsArmClientMockingExtension()

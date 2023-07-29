@@ -5,7 +5,6 @@
 
 #nullable disable
 
-using System;
 using System.Threading;
 using System.Threading.Tasks;
 using Azure;
@@ -17,7 +16,7 @@ using MgmtScopeResource;
 namespace MgmtScopeResource.Mocking
 {
     /// <summary> A class to add extension methods to SubscriptionResource. </summary>
-    public partial class MgmtScopeResourceSubscriptionMockingExtension : ArmResource
+    internal partial class MgmtScopeResourceSubscriptionMockingExtension : ArmResource
     {
         private ClientDiagnostics _resourceLinkClientDiagnostics;
         private ResourceLinksRestOperations _resourceLinkRestClient;
@@ -65,8 +64,6 @@ namespace MgmtScopeResource.Mocking
         /// </summary>
         /// <param name="deploymentName"> The name of the deployment. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="deploymentName"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="deploymentName"/> is null. </exception>
         [ForwardsClientCalls]
         public virtual async Task<Response<DeploymentExtendedResource>> GetDeploymentExtendedAsync(string deploymentName, CancellationToken cancellationToken = default)
         {
@@ -88,8 +85,6 @@ namespace MgmtScopeResource.Mocking
         /// </summary>
         /// <param name="deploymentName"> The name of the deployment. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="deploymentName"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="deploymentName"/> is null. </exception>
         [ForwardsClientCalls]
         public virtual Response<DeploymentExtendedResource> GetDeploymentExtended(string deploymentName, CancellationToken cancellationToken = default)
         {

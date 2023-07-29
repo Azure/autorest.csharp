@@ -5,7 +5,6 @@
 
 #nullable disable
 
-using System;
 using System.Threading;
 using System.Threading.Tasks;
 using Azure;
@@ -17,7 +16,7 @@ using MgmtPropertyBag.Models;
 namespace MgmtPropertyBag.Mocking
 {
     /// <summary> A class to add extension methods to ResourceGroupResource. </summary>
-    public partial class MgmtPropertyBagResourceGroupMockingExtension : ArmResource
+    internal partial class MgmtPropertyBagResourceGroupMockingExtension : ArmResource
     {
         /// <summary> Initializes a new instance of the <see cref="MgmtPropertyBagResourceGroupMockingExtension"/> class for mocking. </summary>
         protected MgmtPropertyBagResourceGroupMockingExtension()
@@ -59,7 +58,6 @@ namespace MgmtPropertyBag.Mocking
         /// </summary>
         /// <param name="options"> A property bag which contains all the parameters of this method except the LRO qualifier and request context parameter. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="options"/> is null. </exception>
         [ForwardsClientCalls]
         public virtual async Task<Response<FooResource>> GetFooAsync(FooCollectionGetOptions options, CancellationToken cancellationToken = default)
         {
@@ -81,7 +79,6 @@ namespace MgmtPropertyBag.Mocking
         /// </summary>
         /// <param name="options"> A property bag which contains all the parameters of this method except the LRO qualifier and request context parameter. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="options"/> is null. </exception>
         [ForwardsClientCalls]
         public virtual Response<FooResource> GetFoo(FooCollectionGetOptions options, CancellationToken cancellationToken = default)
         {
@@ -110,7 +107,6 @@ namespace MgmtPropertyBag.Mocking
         /// </summary>
         /// <param name="options"> A property bag which contains all the parameters of this method except the LRO qualifier and request context parameter. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="options"/> is null. </exception>
         [ForwardsClientCalls]
         public virtual async Task<Response<BarResource>> GetBarAsync(BarCollectionGetOptions options, CancellationToken cancellationToken = default)
         {
@@ -132,7 +128,6 @@ namespace MgmtPropertyBag.Mocking
         /// </summary>
         /// <param name="options"> A property bag which contains all the parameters of this method except the LRO qualifier and request context parameter. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="options"/> is null. </exception>
         [ForwardsClientCalls]
         public virtual Response<BarResource> GetBar(BarCollectionGetOptions options, CancellationToken cancellationToken = default)
         {

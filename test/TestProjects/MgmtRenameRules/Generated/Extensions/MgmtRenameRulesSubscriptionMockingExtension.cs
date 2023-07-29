@@ -18,7 +18,7 @@ using MgmtRenameRules.Models;
 namespace MgmtRenameRules.Mocking
 {
     /// <summary> A class to add extension methods to SubscriptionResource. </summary>
-    public partial class MgmtRenameRulesSubscriptionMockingExtension : ArmResource
+    internal partial class MgmtRenameRulesSubscriptionMockingExtension : ArmResource
     {
         private ClientDiagnostics _virtualMachineClientDiagnostics;
         private VirtualMachinesRestOperations _virtualMachineRestClient;
@@ -253,11 +253,8 @@ namespace MgmtRenameRules.Mocking
         /// <param name="location"> The location upon which virtual-machine-sizes is queried. </param>
         /// <param name="content"> Parameters supplied to the LogAnalytics getRequestRateByInterval Api. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         public virtual async Task<ArmOperation<LogAnalytics>> ExportRequestRateByIntervalLogAnalyticAsync(WaitUntil waitUntil, AzureLocation location, RequestRateByIntervalContent content, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(content, nameof(content));
-
             using var scope = LogAnalyticsClientDiagnostics.CreateScope("MgmtRenameRulesSubscriptionMockingExtension.ExportRequestRateByIntervalLogAnalytic");
             scope.Start();
             try
@@ -292,11 +289,8 @@ namespace MgmtRenameRules.Mocking
         /// <param name="location"> The location upon which virtual-machine-sizes is queried. </param>
         /// <param name="content"> Parameters supplied to the LogAnalytics getRequestRateByInterval Api. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         public virtual ArmOperation<LogAnalytics> ExportRequestRateByIntervalLogAnalytic(WaitUntil waitUntil, AzureLocation location, RequestRateByIntervalContent content, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(content, nameof(content));
-
             using var scope = LogAnalyticsClientDiagnostics.CreateScope("MgmtRenameRulesSubscriptionMockingExtension.ExportRequestRateByIntervalLogAnalytic");
             scope.Start();
             try
@@ -331,11 +325,8 @@ namespace MgmtRenameRules.Mocking
         /// <param name="location"> The location upon which virtual-machine-sizes is queried. </param>
         /// <param name="content"> Parameters supplied to the LogAnalytics getThrottledRequests Api. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         public virtual async Task<ArmOperation<LogAnalytics>> ExportThrottledRequestsLogAnalyticAsync(WaitUntil waitUntil, AzureLocation location, ThrottledRequestsContent content, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(content, nameof(content));
-
             using var scope = LogAnalyticsClientDiagnostics.CreateScope("MgmtRenameRulesSubscriptionMockingExtension.ExportThrottledRequestsLogAnalytic");
             scope.Start();
             try
@@ -370,11 +361,8 @@ namespace MgmtRenameRules.Mocking
         /// <param name="location"> The location upon which virtual-machine-sizes is queried. </param>
         /// <param name="content"> Parameters supplied to the LogAnalytics getThrottledRequests Api. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         public virtual ArmOperation<LogAnalytics> ExportThrottledRequestsLogAnalytic(WaitUntil waitUntil, AzureLocation location, ThrottledRequestsContent content, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(content, nameof(content));
-
             using var scope = LogAnalyticsClientDiagnostics.CreateScope("MgmtRenameRulesSubscriptionMockingExtension.ExportThrottledRequestsLogAnalytic");
             scope.Start();
             try

@@ -12,7 +12,7 @@ using MgmtDiscriminator;
 namespace MgmtDiscriminator.Mocking
 {
     /// <summary> A class to add extension methods to ArmClient. </summary>
-    public partial class MgmtDiscriminatorArmClientMockingExtension : ArmResource
+    internal partial class MgmtDiscriminatorArmClientMockingExtension : ArmResource
     {
         /// <summary> Initializes a new instance of the <see cref="MgmtDiscriminatorArmClientMockingExtension"/> class for mocking. </summary>
         protected MgmtDiscriminatorArmClientMockingExtension()

@@ -12,7 +12,7 @@ using MgmtPropertyChooser;
 namespace MgmtPropertyChooser.Mocking
 {
     /// <summary> A class to add extension methods to ArmClient. </summary>
-    public partial class MgmtPropertyChooserArmClientMockingExtension : ArmResource
+    internal partial class MgmtPropertyChooserArmClientMockingExtension : ArmResource
     {
         /// <summary> Initializes a new instance of the <see cref="MgmtPropertyChooserArmClientMockingExtension"/> class for mocking. </summary>
         protected MgmtPropertyChooserArmClientMockingExtension()

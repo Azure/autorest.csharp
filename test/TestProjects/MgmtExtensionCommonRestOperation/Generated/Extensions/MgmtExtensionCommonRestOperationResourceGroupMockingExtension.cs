@@ -5,7 +5,6 @@
 
 #nullable disable
 
-using System;
 using System.Threading;
 using System.Threading.Tasks;
 using Azure;
@@ -16,7 +15,7 @@ using MgmtExtensionCommonRestOperation;
 namespace MgmtExtensionCommonRestOperation.Mocking
 {
     /// <summary> A class to add extension methods to ResourceGroupResource. </summary>
-    public partial class MgmtExtensionCommonRestOperationResourceGroupMockingExtension : ArmResource
+    internal partial class MgmtExtensionCommonRestOperationResourceGroupMockingExtension : ArmResource
     {
         /// <summary> Initializes a new instance of the <see cref="MgmtExtensionCommonRestOperationResourceGroupMockingExtension"/> class for mocking. </summary>
         protected MgmtExtensionCommonRestOperationResourceGroupMockingExtension()
@@ -58,8 +57,6 @@ namespace MgmtExtensionCommonRestOperation.Mocking
         /// </summary>
         /// <param name="typeOneName"> The name. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="typeOneName"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="typeOneName"/> is null. </exception>
         [ForwardsClientCalls]
         public virtual async Task<Response<TypeOneResource>> GetTypeOneAsync(string typeOneName, CancellationToken cancellationToken = default)
         {
@@ -81,8 +78,6 @@ namespace MgmtExtensionCommonRestOperation.Mocking
         /// </summary>
         /// <param name="typeOneName"> The name. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="typeOneName"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="typeOneName"/> is null. </exception>
         [ForwardsClientCalls]
         public virtual Response<TypeOneResource> GetTypeOne(string typeOneName, CancellationToken cancellationToken = default)
         {
@@ -111,8 +106,6 @@ namespace MgmtExtensionCommonRestOperation.Mocking
         /// </summary>
         /// <param name="typeTwoName"> The name. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="typeTwoName"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="typeTwoName"/> is null. </exception>
         [ForwardsClientCalls]
         public virtual async Task<Response<TypeTwoResource>> GetTypeTwoAsync(string typeTwoName, CancellationToken cancellationToken = default)
         {
@@ -134,8 +127,6 @@ namespace MgmtExtensionCommonRestOperation.Mocking
         /// </summary>
         /// <param name="typeTwoName"> The name. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="typeTwoName"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="typeTwoName"/> is null. </exception>
         [ForwardsClientCalls]
         public virtual Response<TypeTwoResource> GetTypeTwo(string typeTwoName, CancellationToken cancellationToken = default)
         {

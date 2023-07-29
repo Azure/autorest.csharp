@@ -12,7 +12,7 @@ using MgmtExtensionCommonRestOperation;
 namespace MgmtExtensionCommonRestOperation.Mocking
 {
     /// <summary> A class to add extension methods to ArmClient. </summary>
-    public partial class MgmtExtensionCommonRestOperationArmClientMockingExtension : ArmResource
+    internal partial class MgmtExtensionCommonRestOperationArmClientMockingExtension : ArmResource
     {
         /// <summary> Initializes a new instance of the <see cref="MgmtExtensionCommonRestOperationArmClientMockingExtension"/> class for mocking. </summary>
         protected MgmtExtensionCommonRestOperationArmClientMockingExtension()

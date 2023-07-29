@@ -5,7 +5,6 @@
 
 #nullable disable
 
-using System;
 using System.Threading;
 using System.Threading.Tasks;
 using Azure;
@@ -16,7 +15,7 @@ using MgmtMockAndSample;
 namespace MgmtMockAndSample.Mocking
 {
     /// <summary> A class to add extension methods to ArmClient. </summary>
-    public partial class MgmtMockAndSampleArmClientMockingExtension : ArmResource
+    internal partial class MgmtMockAndSampleArmClientMockingExtension : ArmResource
     {
         /// <summary> Initializes a new instance of the <see cref="MgmtMockAndSampleArmClientMockingExtension"/> class for mocking. </summary>
         protected MgmtMockAndSampleArmClientMockingExtension()
@@ -64,8 +63,6 @@ namespace MgmtMockAndSample.Mocking
         /// <param name="scope"> The scope to use. </param>
         /// <param name="roleAssignmentName"> The name of the role assignment to get. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="roleAssignmentName"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="roleAssignmentName"/> is null. </exception>
         [ForwardsClientCalls]
         public virtual async Task<Response<RoleAssignmentResource>> GetRoleAssignmentAsync(ResourceIdentifier scope, string roleAssignmentName, CancellationToken cancellationToken = default)
         {
@@ -88,8 +85,6 @@ namespace MgmtMockAndSample.Mocking
         /// <param name="scope"> The scope to use. </param>
         /// <param name="roleAssignmentName"> The name of the role assignment to get. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="roleAssignmentName"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="roleAssignmentName"/> is null. </exception>
         [ForwardsClientCalls]
         public virtual Response<RoleAssignmentResource> GetRoleAssignment(ResourceIdentifier scope, string roleAssignmentName, CancellationToken cancellationToken = default)
         {
@@ -120,8 +115,6 @@ namespace MgmtMockAndSample.Mocking
         /// <param name="scope"> The scope to use. </param>
         /// <param name="guestConfigurationAssignmentName"> The guest configuration assignment name. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="guestConfigurationAssignmentName"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="guestConfigurationAssignmentName"/> is null. </exception>
         [ForwardsClientCalls]
         public virtual async Task<Response<GuestConfigurationAssignmentResource>> GetGuestConfigurationAssignmentAsync(ResourceIdentifier scope, string guestConfigurationAssignmentName, CancellationToken cancellationToken = default)
         {
@@ -144,8 +137,6 @@ namespace MgmtMockAndSample.Mocking
         /// <param name="scope"> The scope to use. </param>
         /// <param name="guestConfigurationAssignmentName"> The guest configuration assignment name. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="guestConfigurationAssignmentName"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="guestConfigurationAssignmentName"/> is null. </exception>
         [ForwardsClientCalls]
         public virtual Response<GuestConfigurationAssignmentResource> GetGuestConfigurationAssignment(ResourceIdentifier scope, string guestConfigurationAssignmentName, CancellationToken cancellationToken = default)
         {

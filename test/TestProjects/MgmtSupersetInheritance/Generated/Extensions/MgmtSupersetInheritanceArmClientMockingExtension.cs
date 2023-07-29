@@ -12,7 +12,7 @@ using MgmtSupersetInheritance;
 namespace MgmtSupersetInheritance.Mocking
 {
     /// <summary> A class to add extension methods to ArmClient. </summary>
-    public partial class MgmtSupersetInheritanceArmClientMockingExtension : ArmResource
+    internal partial class MgmtSupersetInheritanceArmClientMockingExtension : ArmResource
     {
         /// <summary> Initializes a new instance of the <see cref="MgmtSupersetInheritanceArmClientMockingExtension"/> class for mocking. </summary>
         protected MgmtSupersetInheritanceArmClientMockingExtension()

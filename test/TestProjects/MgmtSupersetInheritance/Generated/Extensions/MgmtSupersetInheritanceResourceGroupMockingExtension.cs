@@ -18,7 +18,7 @@ using MgmtSupersetInheritance.Models;
 namespace MgmtSupersetInheritance.Mocking
 {
     /// <summary> A class to add extension methods to ResourceGroupResource. </summary>
-    public partial class MgmtSupersetInheritanceResourceGroupMockingExtension : ArmResource
+    internal partial class MgmtSupersetInheritanceResourceGroupMockingExtension : ArmResource
     {
         private ClientDiagnostics _supersetModel2sClientDiagnostics;
         private SupersetModel2SRestOperations _supersetModel2sRestClient;
@@ -69,8 +69,6 @@ namespace MgmtSupersetInheritance.Mocking
         /// </summary>
         /// <param name="supersetModel1SName"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="supersetModel1SName"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="supersetModel1SName"/> is null. </exception>
         [ForwardsClientCalls]
         public virtual async Task<Response<SupersetModel1Resource>> GetSupersetModel1Async(string supersetModel1SName, CancellationToken cancellationToken = default)
         {
@@ -91,8 +89,6 @@ namespace MgmtSupersetInheritance.Mocking
         /// </summary>
         /// <param name="supersetModel1SName"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="supersetModel1SName"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="supersetModel1SName"/> is null. </exception>
         [ForwardsClientCalls]
         public virtual Response<SupersetModel1Resource> GetSupersetModel1(string supersetModel1SName, CancellationToken cancellationToken = default)
         {
@@ -120,8 +116,6 @@ namespace MgmtSupersetInheritance.Mocking
         /// </summary>
         /// <param name="supersetModel4SName"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="supersetModel4SName"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="supersetModel4SName"/> is null. </exception>
         [ForwardsClientCalls]
         public virtual async Task<Response<SupersetModel4Resource>> GetSupersetModel4Async(string supersetModel4SName, CancellationToken cancellationToken = default)
         {
@@ -142,8 +136,6 @@ namespace MgmtSupersetInheritance.Mocking
         /// </summary>
         /// <param name="supersetModel4SName"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="supersetModel4SName"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="supersetModel4SName"/> is null. </exception>
         [ForwardsClientCalls]
         public virtual Response<SupersetModel4Resource> GetSupersetModel4(string supersetModel4SName, CancellationToken cancellationToken = default)
         {
@@ -171,8 +163,6 @@ namespace MgmtSupersetInheritance.Mocking
         /// </summary>
         /// <param name="supersetModel6SName"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="supersetModel6SName"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="supersetModel6SName"/> is null. </exception>
         [ForwardsClientCalls]
         public virtual async Task<Response<SupersetModel6Resource>> GetSupersetModel6Async(string supersetModel6SName, CancellationToken cancellationToken = default)
         {
@@ -193,8 +183,6 @@ namespace MgmtSupersetInheritance.Mocking
         /// </summary>
         /// <param name="supersetModel6SName"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="supersetModel6SName"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="supersetModel6SName"/> is null. </exception>
         [ForwardsClientCalls]
         public virtual Response<SupersetModel6Resource> GetSupersetModel6(string supersetModel6SName, CancellationToken cancellationToken = default)
         {
@@ -222,8 +210,6 @@ namespace MgmtSupersetInheritance.Mocking
         /// </summary>
         /// <param name="supersetModel7SName"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="supersetModel7SName"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="supersetModel7SName"/> is null. </exception>
         [ForwardsClientCalls]
         public virtual async Task<Response<SupersetModel7Resource>> GetSupersetModel7Async(string supersetModel7SName, CancellationToken cancellationToken = default)
         {
@@ -244,8 +230,6 @@ namespace MgmtSupersetInheritance.Mocking
         /// </summary>
         /// <param name="supersetModel7SName"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="supersetModel7SName"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="supersetModel7SName"/> is null. </exception>
         [ForwardsClientCalls]
         public virtual Response<SupersetModel7Resource> GetSupersetModel7(string supersetModel7SName, CancellationToken cancellationToken = default)
         {
@@ -267,13 +251,8 @@ namespace MgmtSupersetInheritance.Mocking
         /// <param name="supersetModel2SName"> The String to use. </param>
         /// <param name="supersetModel2"> The SupersetModel2 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="supersetModel2SName"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="supersetModel2SName"/> or <paramref name="supersetModel2"/> is null. </exception>
         public virtual async Task<Response<SupersetModel2>> PutSupersetModel2Async(string supersetModel2SName, SupersetModel2 supersetModel2, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(supersetModel2SName, nameof(supersetModel2SName));
-            Argument.AssertNotNull(supersetModel2, nameof(supersetModel2));
-
             using var scope = SupersetModel2sClientDiagnostics.CreateScope("MgmtSupersetInheritanceResourceGroupMockingExtension.PutSupersetModel2");
             scope.Start();
             try
@@ -303,13 +282,8 @@ namespace MgmtSupersetInheritance.Mocking
         /// <param name="supersetModel2SName"> The String to use. </param>
         /// <param name="supersetModel2"> The SupersetModel2 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="supersetModel2SName"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="supersetModel2SName"/> or <paramref name="supersetModel2"/> is null. </exception>
         public virtual Response<SupersetModel2> PutSupersetModel2(string supersetModel2SName, SupersetModel2 supersetModel2, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(supersetModel2SName, nameof(supersetModel2SName));
-            Argument.AssertNotNull(supersetModel2, nameof(supersetModel2));
-
             using var scope = SupersetModel2sClientDiagnostics.CreateScope("MgmtSupersetInheritanceResourceGroupMockingExtension.PutSupersetModel2");
             scope.Start();
             try
@@ -338,12 +312,8 @@ namespace MgmtSupersetInheritance.Mocking
         /// </summary>
         /// <param name="supersetModel2SName"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="supersetModel2SName"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="supersetModel2SName"/> is null. </exception>
         public virtual async Task<Response<SupersetModel2>> GetSupersetModel2Async(string supersetModel2SName, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(supersetModel2SName, nameof(supersetModel2SName));
-
             using var scope = SupersetModel2sClientDiagnostics.CreateScope("MgmtSupersetInheritanceResourceGroupMockingExtension.GetSupersetModel2");
             scope.Start();
             try
@@ -372,12 +342,8 @@ namespace MgmtSupersetInheritance.Mocking
         /// </summary>
         /// <param name="supersetModel2SName"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="supersetModel2SName"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="supersetModel2SName"/> is null. </exception>
         public virtual Response<SupersetModel2> GetSupersetModel2(string supersetModel2SName, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(supersetModel2SName, nameof(supersetModel2SName));
-
             using var scope = SupersetModel2sClientDiagnostics.CreateScope("MgmtSupersetInheritanceResourceGroupMockingExtension.GetSupersetModel2");
             scope.Start();
             try
@@ -407,13 +373,8 @@ namespace MgmtSupersetInheritance.Mocking
         /// <param name="supersetModel3SName"> The String to use. </param>
         /// <param name="supersetModel3"> The SupersetModel3 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="supersetModel3SName"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="supersetModel3SName"/> or <paramref name="supersetModel3"/> is null. </exception>
         public virtual async Task<Response<SupersetModel3>> PutSupersetModel3Async(string supersetModel3SName, SupersetModel3 supersetModel3, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(supersetModel3SName, nameof(supersetModel3SName));
-            Argument.AssertNotNull(supersetModel3, nameof(supersetModel3));
-
             using var scope = SupersetModel3sClientDiagnostics.CreateScope("MgmtSupersetInheritanceResourceGroupMockingExtension.PutSupersetModel3");
             scope.Start();
             try
@@ -443,13 +404,8 @@ namespace MgmtSupersetInheritance.Mocking
         /// <param name="supersetModel3SName"> The String to use. </param>
         /// <param name="supersetModel3"> The SupersetModel3 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="supersetModel3SName"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="supersetModel3SName"/> or <paramref name="supersetModel3"/> is null. </exception>
         public virtual Response<SupersetModel3> PutSupersetModel3(string supersetModel3SName, SupersetModel3 supersetModel3, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(supersetModel3SName, nameof(supersetModel3SName));
-            Argument.AssertNotNull(supersetModel3, nameof(supersetModel3));
-
             using var scope = SupersetModel3sClientDiagnostics.CreateScope("MgmtSupersetInheritanceResourceGroupMockingExtension.PutSupersetModel3");
             scope.Start();
             try
@@ -478,12 +434,8 @@ namespace MgmtSupersetInheritance.Mocking
         /// </summary>
         /// <param name="supersetModel3SName"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="supersetModel3SName"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="supersetModel3SName"/> is null. </exception>
         public virtual async Task<Response<SupersetModel3>> GetSupersetModel3Async(string supersetModel3SName, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(supersetModel3SName, nameof(supersetModel3SName));
-
             using var scope = SupersetModel3sClientDiagnostics.CreateScope("MgmtSupersetInheritanceResourceGroupMockingExtension.GetSupersetModel3");
             scope.Start();
             try
@@ -512,12 +464,8 @@ namespace MgmtSupersetInheritance.Mocking
         /// </summary>
         /// <param name="supersetModel3SName"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="supersetModel3SName"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="supersetModel3SName"/> is null. </exception>
         public virtual Response<SupersetModel3> GetSupersetModel3(string supersetModel3SName, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(supersetModel3SName, nameof(supersetModel3SName));
-
             using var scope = SupersetModel3sClientDiagnostics.CreateScope("MgmtSupersetInheritanceResourceGroupMockingExtension.GetSupersetModel3");
             scope.Start();
             try

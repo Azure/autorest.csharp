@@ -12,7 +12,7 @@ using MgmtSubscriptionNameParameter;
 namespace MgmtSubscriptionNameParameter.Mocking
 {
     /// <summary> A class to add extension methods to ArmClient. </summary>
-    public partial class MgmtSubscriptionNameParameterArmClientMockingExtension : ArmResource
+    internal partial class MgmtSubscriptionNameParameterArmClientMockingExtension : ArmResource
     {
         /// <summary> Initializes a new instance of the <see cref="MgmtSubscriptionNameParameterArmClientMockingExtension"/> class for mocking. </summary>
         protected MgmtSubscriptionNameParameterArmClientMockingExtension()

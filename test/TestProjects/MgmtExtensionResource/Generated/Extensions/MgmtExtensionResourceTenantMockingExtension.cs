@@ -5,7 +5,6 @@
 
 #nullable disable
 
-using System;
 using System.Threading;
 using System.Threading.Tasks;
 using Azure;
@@ -16,7 +15,7 @@ using MgmtExtensionResource;
 namespace MgmtExtensionResource.Mocking
 {
     /// <summary> A class to add extension methods to TenantResource. </summary>
-    public partial class MgmtExtensionResourceTenantMockingExtension : ArmResource
+    internal partial class MgmtExtensionResourceTenantMockingExtension : ArmResource
     {
         /// <summary> Initializes a new instance of the <see cref="MgmtExtensionResourceTenantMockingExtension"/> class for mocking. </summary>
         protected MgmtExtensionResourceTenantMockingExtension()
@@ -58,8 +57,6 @@ namespace MgmtExtensionResource.Mocking
         /// </summary>
         /// <param name="policyDefinitionName"> The name of the built-in policy definition to get. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="policyDefinitionName"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="policyDefinitionName"/> is null. </exception>
         [ForwardsClientCalls]
         public virtual async Task<Response<BuiltInPolicyDefinitionResource>> GetBuiltInPolicyDefinitionAsync(string policyDefinitionName, CancellationToken cancellationToken = default)
         {
@@ -81,8 +78,6 @@ namespace MgmtExtensionResource.Mocking
         /// </summary>
         /// <param name="policyDefinitionName"> The name of the built-in policy definition to get. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <exception cref="ArgumentException"> <paramref name="policyDefinitionName"/> is an empty string, and was expected to be non-empty. </exception>
-        /// <exception cref="ArgumentNullException"> <paramref name="policyDefinitionName"/> is null. </exception>
         [ForwardsClientCalls]
         public virtual Response<BuiltInPolicyDefinitionResource> GetBuiltInPolicyDefinition(string policyDefinitionName, CancellationToken cancellationToken = default)
         {

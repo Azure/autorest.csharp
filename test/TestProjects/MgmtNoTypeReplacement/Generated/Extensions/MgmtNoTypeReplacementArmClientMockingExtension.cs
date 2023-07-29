@@ -12,7 +12,7 @@ using MgmtNoTypeReplacement;
 namespace MgmtNoTypeReplacement.Mocking
 {
     /// <summary> A class to add extension methods to ArmClient. </summary>
-    public partial class MgmtNoTypeReplacementArmClientMockingExtension : ArmResource
+    internal partial class MgmtNoTypeReplacementArmClientMockingExtension : ArmResource
     {
         /// <summary> Initializes a new instance of the <see cref="MgmtNoTypeReplacementArmClientMockingExtension"/> class for mocking. </summary>
         protected MgmtNoTypeReplacementArmClientMockingExtension()
