@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Threading;
 using System.Threading.Tasks;
 using Azure;
@@ -15,7 +16,7 @@ using MgmtExtensionResource;
 namespace MgmtExtensionResource.Mocking
 {
     /// <summary> A class to add extension methods to ManagementGroupResource. </summary>
-    internal partial class MgmtExtensionResourceManagementGroupMockingExtension : ArmResource
+    public partial class MgmtExtensionResourceManagementGroupMockingExtension : ArmResource
     {
         /// <summary> Initializes a new instance of the <see cref="MgmtExtensionResourceManagementGroupMockingExtension"/> class for mocking. </summary>
         protected MgmtExtensionResourceManagementGroupMockingExtension()
@@ -57,6 +58,8 @@ namespace MgmtExtensionResource.Mocking
         /// </summary>
         /// <param name="policyDefinitionName"> The name of the policy definition to get. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="policyDefinitionName"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="policyDefinitionName"/> is null. </exception>
         [ForwardsClientCalls]
         public virtual async Task<Response<ManagementGroupPolicyDefinitionResource>> GetManagementGroupPolicyDefinitionAsync(string policyDefinitionName, CancellationToken cancellationToken = default)
         {
@@ -78,6 +81,8 @@ namespace MgmtExtensionResource.Mocking
         /// </summary>
         /// <param name="policyDefinitionName"> The name of the policy definition to get. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="policyDefinitionName"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="policyDefinitionName"/> is null. </exception>
         [ForwardsClientCalls]
         public virtual Response<ManagementGroupPolicyDefinitionResource> GetManagementGroupPolicyDefinition(string policyDefinitionName, CancellationToken cancellationToken = default)
         {

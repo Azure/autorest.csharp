@@ -18,7 +18,7 @@ using MgmtExpandResourceTypes.Models;
 namespace MgmtExpandResourceTypes.Mocking
 {
     /// <summary> A class to add extension methods to SubscriptionResource. </summary>
-    internal partial class MgmtExpandResourceTypesSubscriptionMockingExtension : ArmResource
+    public partial class MgmtExpandResourceTypesSubscriptionMockingExtension : ArmResource
     {
         private ClientDiagnostics _zoneClientDiagnostics;
         private ZonesRestOperations _zoneRestClient;
@@ -109,8 +109,11 @@ namespace MgmtExpandResourceTypes.Mocking
         /// </summary>
         /// <param name="content"> Properties for dns resource reference request. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         public virtual async Task<Response<DnsResourceReferenceResult>> GetByTargetResourcesDnsResourceReferenceAsync(DnsResourceReferenceContent content, CancellationToken cancellationToken = default)
         {
+            Argument.AssertNotNull(content, nameof(content));
+
             using var scope = DnsResourceReferenceClientDiagnostics.CreateScope("MgmtExpandResourceTypesSubscriptionMockingExtension.GetByTargetResourcesDnsResourceReference");
             scope.Start();
             try
@@ -140,8 +143,11 @@ namespace MgmtExpandResourceTypes.Mocking
         /// </summary>
         /// <param name="content"> Properties for dns resource reference request. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         public virtual Response<DnsResourceReferenceResult> GetByTargetResourcesDnsResourceReference(DnsResourceReferenceContent content, CancellationToken cancellationToken = default)
         {
+            Argument.AssertNotNull(content, nameof(content));
+
             using var scope = DnsResourceReferenceClientDiagnostics.CreateScope("MgmtExpandResourceTypesSubscriptionMockingExtension.GetByTargetResourcesDnsResourceReference");
             scope.Start();
             try

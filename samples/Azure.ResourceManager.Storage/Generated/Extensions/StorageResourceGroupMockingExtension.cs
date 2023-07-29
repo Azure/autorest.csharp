@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Threading;
 using System.Threading.Tasks;
 using Azure;
@@ -16,7 +17,7 @@ using Azure.ResourceManager.Storage.Models;
 namespace Azure.ResourceManager.Storage.Mocking
 {
     /// <summary> A class to add extension methods to ResourceGroupResource. </summary>
-    internal partial class StorageResourceGroupMockingExtension : ArmResource
+    public partial class StorageResourceGroupMockingExtension : ArmResource
     {
         /// <summary> Initializes a new instance of the <see cref="StorageResourceGroupMockingExtension"/> class for mocking. </summary>
         protected StorageResourceGroupMockingExtension()
@@ -59,6 +60,8 @@ namespace Azure.ResourceManager.Storage.Mocking
         /// <param name="accountName"> The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only. </param>
         /// <param name="expand"> May be used to expand the properties within account's properties. By default, data is not included when fetching properties. Currently we only support geoReplicationStats and blobRestoreStatus. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="accountName"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="accountName"/> is null. </exception>
         [ForwardsClientCalls]
         public virtual async Task<Response<StorageAccountResource>> GetStorageAccountAsync(string accountName, StorageAccountExpand? expand = null, CancellationToken cancellationToken = default)
         {
@@ -81,6 +84,8 @@ namespace Azure.ResourceManager.Storage.Mocking
         /// <param name="accountName"> The name of the storage account within the specified resource group. Storage account names must be between 3 and 24 characters in length and use numbers and lower-case letters only. </param>
         /// <param name="expand"> May be used to expand the properties within account's properties. By default, data is not included when fetching properties. Currently we only support geoReplicationStats and blobRestoreStatus. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="accountName"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="accountName"/> is null. </exception>
         [ForwardsClientCalls]
         public virtual Response<StorageAccountResource> GetStorageAccount(string accountName, StorageAccountExpand? expand = null, CancellationToken cancellationToken = default)
         {

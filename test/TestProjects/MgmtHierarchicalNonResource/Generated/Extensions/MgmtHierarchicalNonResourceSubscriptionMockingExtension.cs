@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Threading;
 using System.Threading.Tasks;
 using Azure;
@@ -15,7 +16,7 @@ using MgmtHierarchicalNonResource;
 namespace MgmtHierarchicalNonResource.Mocking
 {
     /// <summary> A class to add extension methods to SubscriptionResource. </summary>
-    internal partial class MgmtHierarchicalNonResourceSubscriptionMockingExtension : ArmResource
+    public partial class MgmtHierarchicalNonResourceSubscriptionMockingExtension : ArmResource
     {
         /// <summary> Initializes a new instance of the <see cref="MgmtHierarchicalNonResourceSubscriptionMockingExtension"/> class for mocking. </summary>
         protected MgmtHierarchicalNonResourceSubscriptionMockingExtension()
@@ -37,9 +38,13 @@ namespace MgmtHierarchicalNonResource.Mocking
 
         /// <summary> Gets a collection of SharedGalleryResources in the SubscriptionResource. </summary>
         /// <param name="location"> Resource location. </param>
+        /// <exception cref="ArgumentException"> <paramref name="location"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="location"/> is null. </exception>
         /// <returns> An object representing collection of SharedGalleryResources and their operations over a SharedGalleryResource. </returns>
         public virtual SharedGalleryCollection GetSharedGalleries(string location)
         {
+            Argument.AssertNotNullOrEmpty(location, nameof(location));
+
             return new SharedGalleryCollection(Client, Id, location);
         }
 
@@ -59,6 +64,8 @@ namespace MgmtHierarchicalNonResource.Mocking
         /// <param name="location"> Resource location. </param>
         /// <param name="galleryUniqueName"> The unique name of the Shared Gallery. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="location"/> or <paramref name="galleryUniqueName"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="location"/> or <paramref name="galleryUniqueName"/> is null. </exception>
         [ForwardsClientCalls]
         public virtual async Task<Response<SharedGalleryResource>> GetSharedGalleryAsync(string location, string galleryUniqueName, CancellationToken cancellationToken = default)
         {
@@ -81,6 +88,8 @@ namespace MgmtHierarchicalNonResource.Mocking
         /// <param name="location"> Resource location. </param>
         /// <param name="galleryUniqueName"> The unique name of the Shared Gallery. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="location"/> or <paramref name="galleryUniqueName"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="location"/> or <paramref name="galleryUniqueName"/> is null. </exception>
         [ForwardsClientCalls]
         public virtual Response<SharedGalleryResource> GetSharedGallery(string location, string galleryUniqueName, CancellationToken cancellationToken = default)
         {

@@ -18,7 +18,7 @@ using MgmtOmitOperationGroups.Models;
 namespace MgmtOmitOperationGroups.Mocking
 {
     /// <summary> A class to add extension methods to ResourceGroupResource. </summary>
-    internal partial class MgmtOmitOperationGroupsResourceGroupMockingExtension : ArmResource
+    public partial class MgmtOmitOperationGroupsResourceGroupMockingExtension : ArmResource
     {
         private ClientDiagnostics _model5sClientDiagnostics;
         private Model5SRestOperations _model5sRestClient;
@@ -65,6 +65,8 @@ namespace MgmtOmitOperationGroups.Mocking
         /// </summary>
         /// <param name="model2SName"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="model2SName"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="model2SName"/> is null. </exception>
         [ForwardsClientCalls]
         public virtual async Task<Response<Model2Resource>> GetModel2Async(string model2SName, CancellationToken cancellationToken = default)
         {
@@ -85,6 +87,8 @@ namespace MgmtOmitOperationGroups.Mocking
         /// </summary>
         /// <param name="model2SName"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="model2SName"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="model2SName"/> is null. </exception>
         [ForwardsClientCalls]
         public virtual Response<Model2Resource> GetModel2(string model2SName, CancellationToken cancellationToken = default)
         {
@@ -146,8 +150,13 @@ namespace MgmtOmitOperationGroups.Mocking
         /// <param name="model5SName"> The String to use. </param>
         /// <param name="model5"> The Model5 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="model5SName"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="model5SName"/> or <paramref name="model5"/> is null. </exception>
         public virtual async Task<Response<Model5>> CreateOrUpdateModel5Async(string model5SName, Model5 model5, CancellationToken cancellationToken = default)
         {
+            Argument.AssertNotNullOrEmpty(model5SName, nameof(model5SName));
+            Argument.AssertNotNull(model5, nameof(model5));
+
             using var scope = Model5sClientDiagnostics.CreateScope("MgmtOmitOperationGroupsResourceGroupMockingExtension.CreateOrUpdateModel5");
             scope.Start();
             try
@@ -177,8 +186,13 @@ namespace MgmtOmitOperationGroups.Mocking
         /// <param name="model5SName"> The String to use. </param>
         /// <param name="model5"> The Model5 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="model5SName"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="model5SName"/> or <paramref name="model5"/> is null. </exception>
         public virtual Response<Model5> CreateOrUpdateModel5(string model5SName, Model5 model5, CancellationToken cancellationToken = default)
         {
+            Argument.AssertNotNullOrEmpty(model5SName, nameof(model5SName));
+            Argument.AssertNotNull(model5, nameof(model5));
+
             using var scope = Model5sClientDiagnostics.CreateScope("MgmtOmitOperationGroupsResourceGroupMockingExtension.CreateOrUpdateModel5");
             scope.Start();
             try
@@ -207,8 +221,12 @@ namespace MgmtOmitOperationGroups.Mocking
         /// </summary>
         /// <param name="model5SName"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="model5SName"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="model5SName"/> is null. </exception>
         public virtual async Task<Response<Model5>> GetModel5Async(string model5SName, CancellationToken cancellationToken = default)
         {
+            Argument.AssertNotNullOrEmpty(model5SName, nameof(model5SName));
+
             using var scope = Model5sClientDiagnostics.CreateScope("MgmtOmitOperationGroupsResourceGroupMockingExtension.GetModel5");
             scope.Start();
             try
@@ -237,8 +255,12 @@ namespace MgmtOmitOperationGroups.Mocking
         /// </summary>
         /// <param name="model5SName"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="model5SName"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="model5SName"/> is null. </exception>
         public virtual Response<Model5> GetModel5(string model5SName, CancellationToken cancellationToken = default)
         {
+            Argument.AssertNotNullOrEmpty(model5SName, nameof(model5SName));
+
             using var scope = Model5sClientDiagnostics.CreateScope("MgmtOmitOperationGroupsResourceGroupMockingExtension.GetModel5");
             scope.Start();
             try

@@ -12,7 +12,7 @@ using MgmtSafeFlatten;
 namespace MgmtSafeFlatten.Mocking
 {
     /// <summary> A class to add extension methods to ArmClient. </summary>
-    internal partial class MgmtSafeFlattenArmClientMockingExtension : ArmResource
+    public partial class MgmtSafeFlattenArmClientMockingExtension : ArmResource
     {
         /// <summary> Initializes a new instance of the <see cref="MgmtSafeFlattenArmClientMockingExtension"/> class for mocking. </summary>
         protected MgmtSafeFlattenArmClientMockingExtension()

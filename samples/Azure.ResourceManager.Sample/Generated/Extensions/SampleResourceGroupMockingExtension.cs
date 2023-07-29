@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Threading;
 using System.Threading.Tasks;
 using Azure;
@@ -16,7 +17,7 @@ using Azure.ResourceManager.Sample.Models;
 namespace Azure.ResourceManager.Sample.Mocking
 {
     /// <summary> A class to add extension methods to ResourceGroupResource. </summary>
-    internal partial class SampleResourceGroupMockingExtension : ArmResource
+    public partial class SampleResourceGroupMockingExtension : ArmResource
     {
         /// <summary> Initializes a new instance of the <see cref="SampleResourceGroupMockingExtension"/> class for mocking. </summary>
         protected SampleResourceGroupMockingExtension()
@@ -58,6 +59,8 @@ namespace Azure.ResourceManager.Sample.Mocking
         /// </summary>
         /// <param name="availabilitySetName"> The name of the availability set. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="availabilitySetName"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="availabilitySetName"/> is null. </exception>
         [ForwardsClientCalls]
         public virtual async Task<Response<AvailabilitySetResource>> GetAvailabilitySetAsync(string availabilitySetName, CancellationToken cancellationToken = default)
         {
@@ -79,6 +82,8 @@ namespace Azure.ResourceManager.Sample.Mocking
         /// </summary>
         /// <param name="availabilitySetName"> The name of the availability set. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="availabilitySetName"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="availabilitySetName"/> is null. </exception>
         [ForwardsClientCalls]
         public virtual Response<AvailabilitySetResource> GetAvailabilitySet(string availabilitySetName, CancellationToken cancellationToken = default)
         {
@@ -108,6 +113,8 @@ namespace Azure.ResourceManager.Sample.Mocking
         /// <param name="proximityPlacementGroupName"> The name of the proximity placement group. </param>
         /// <param name="includeColocationStatus"> includeColocationStatus=true enables fetching the colocation status of all the resources in the proximity placement group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="proximityPlacementGroupName"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="proximityPlacementGroupName"/> is null. </exception>
         [ForwardsClientCalls]
         public virtual async Task<Response<ProximityPlacementGroupResource>> GetProximityPlacementGroupAsync(string proximityPlacementGroupName, string includeColocationStatus = null, CancellationToken cancellationToken = default)
         {
@@ -130,6 +137,8 @@ namespace Azure.ResourceManager.Sample.Mocking
         /// <param name="proximityPlacementGroupName"> The name of the proximity placement group. </param>
         /// <param name="includeColocationStatus"> includeColocationStatus=true enables fetching the colocation status of all the resources in the proximity placement group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="proximityPlacementGroupName"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="proximityPlacementGroupName"/> is null. </exception>
         [ForwardsClientCalls]
         public virtual Response<ProximityPlacementGroupResource> GetProximityPlacementGroup(string proximityPlacementGroupName, string includeColocationStatus = null, CancellationToken cancellationToken = default)
         {
@@ -159,6 +168,8 @@ namespace Azure.ResourceManager.Sample.Mocking
         /// <param name="hostGroupName"> The name of the dedicated host group. </param>
         /// <param name="expand"> The expand expression to apply on the operation. The response shows the list of instance view of the dedicated hosts under the dedicated host group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="hostGroupName"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="hostGroupName"/> is null. </exception>
         [ForwardsClientCalls]
         public virtual async Task<Response<DedicatedHostGroupResource>> GetDedicatedHostGroupAsync(string hostGroupName, InstanceViewType? expand = null, CancellationToken cancellationToken = default)
         {
@@ -181,6 +192,8 @@ namespace Azure.ResourceManager.Sample.Mocking
         /// <param name="hostGroupName"> The name of the dedicated host group. </param>
         /// <param name="expand"> The expand expression to apply on the operation. The response shows the list of instance view of the dedicated hosts under the dedicated host group. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="hostGroupName"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="hostGroupName"/> is null. </exception>
         [ForwardsClientCalls]
         public virtual Response<DedicatedHostGroupResource> GetDedicatedHostGroup(string hostGroupName, InstanceViewType? expand = null, CancellationToken cancellationToken = default)
         {
@@ -209,6 +222,8 @@ namespace Azure.ResourceManager.Sample.Mocking
         /// </summary>
         /// <param name="sshPublicKeyName"> The name of the SSH public key. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="sshPublicKeyName"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="sshPublicKeyName"/> is null. </exception>
         [ForwardsClientCalls]
         public virtual async Task<Response<SshPublicKeyResource>> GetSshPublicKeyAsync(string sshPublicKeyName, CancellationToken cancellationToken = default)
         {
@@ -230,6 +245,8 @@ namespace Azure.ResourceManager.Sample.Mocking
         /// </summary>
         /// <param name="sshPublicKeyName"> The name of the SSH public key. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="sshPublicKeyName"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="sshPublicKeyName"/> is null. </exception>
         [ForwardsClientCalls]
         public virtual Response<SshPublicKeyResource> GetSshPublicKey(string sshPublicKeyName, CancellationToken cancellationToken = default)
         {
@@ -259,6 +276,8 @@ namespace Azure.ResourceManager.Sample.Mocking
         /// <param name="vmName"> The name of the virtual machine. </param>
         /// <param name="expand"> The expand expression to apply on the operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="vmName"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="vmName"/> is null. </exception>
         [ForwardsClientCalls]
         public virtual async Task<Response<VirtualMachineResource>> GetVirtualMachineAsync(string vmName, InstanceViewType? expand = null, CancellationToken cancellationToken = default)
         {
@@ -281,6 +300,8 @@ namespace Azure.ResourceManager.Sample.Mocking
         /// <param name="vmName"> The name of the virtual machine. </param>
         /// <param name="expand"> The expand expression to apply on the operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="vmName"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="vmName"/> is null. </exception>
         [ForwardsClientCalls]
         public virtual Response<VirtualMachineResource> GetVirtualMachine(string vmName, InstanceViewType? expand = null, CancellationToken cancellationToken = default)
         {
@@ -310,6 +331,8 @@ namespace Azure.ResourceManager.Sample.Mocking
         /// <param name="imageName"> The name of the image. </param>
         /// <param name="expand"> The expand expression to apply on the operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="imageName"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="imageName"/> is null. </exception>
         [ForwardsClientCalls]
         public virtual async Task<Response<ImageResource>> GetImageAsync(string imageName, string expand = null, CancellationToken cancellationToken = default)
         {
@@ -332,6 +355,8 @@ namespace Azure.ResourceManager.Sample.Mocking
         /// <param name="imageName"> The name of the image. </param>
         /// <param name="expand"> The expand expression to apply on the operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="imageName"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="imageName"/> is null. </exception>
         [ForwardsClientCalls]
         public virtual Response<ImageResource> GetImage(string imageName, string expand = null, CancellationToken cancellationToken = default)
         {
@@ -360,6 +385,8 @@ namespace Azure.ResourceManager.Sample.Mocking
         /// </summary>
         /// <param name="vmScaleSetName"> The name of the VM scale set. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="vmScaleSetName"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="vmScaleSetName"/> is null. </exception>
         [ForwardsClientCalls]
         public virtual async Task<Response<VirtualMachineScaleSetResource>> GetVirtualMachineScaleSetAsync(string vmScaleSetName, CancellationToken cancellationToken = default)
         {
@@ -381,6 +408,8 @@ namespace Azure.ResourceManager.Sample.Mocking
         /// </summary>
         /// <param name="vmScaleSetName"> The name of the VM scale set. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="vmScaleSetName"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="vmScaleSetName"/> is null. </exception>
         [ForwardsClientCalls]
         public virtual Response<VirtualMachineScaleSetResource> GetVirtualMachineScaleSet(string vmScaleSetName, CancellationToken cancellationToken = default)
         {

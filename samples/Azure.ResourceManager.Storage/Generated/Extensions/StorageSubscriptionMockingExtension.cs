@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Threading;
 using System.Threading.Tasks;
 using Azure;
@@ -17,7 +18,7 @@ using Azure.ResourceManager.Storage.Models;
 namespace Azure.ResourceManager.Storage.Mocking
 {
     /// <summary> A class to add extension methods to SubscriptionResource. </summary>
-    internal partial class StorageSubscriptionMockingExtension : ArmResource
+    public partial class StorageSubscriptionMockingExtension : ArmResource
     {
         private ClientDiagnostics _skusClientDiagnostics;
         private SkusRestOperations _skusRestClient;
@@ -74,6 +75,8 @@ namespace Azure.ResourceManager.Storage.Mocking
         /// <param name="location"> The location of the deleted storage account. </param>
         /// <param name="deletedAccountName"> Name of the deleted storage account. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="deletedAccountName"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="deletedAccountName"/> is null. </exception>
         [ForwardsClientCalls]
         public virtual async Task<Response<DeletedAccountResource>> GetDeletedAccountAsync(AzureLocation location, string deletedAccountName, CancellationToken cancellationToken = default)
         {
@@ -96,6 +99,8 @@ namespace Azure.ResourceManager.Storage.Mocking
         /// <param name="location"> The location of the deleted storage account. </param>
         /// <param name="deletedAccountName"> Name of the deleted storage account. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="deletedAccountName"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="deletedAccountName"/> is null. </exception>
         [ForwardsClientCalls]
         public virtual Response<DeletedAccountResource> GetDeletedAccount(AzureLocation location, string deletedAccountName, CancellationToken cancellationToken = default)
         {

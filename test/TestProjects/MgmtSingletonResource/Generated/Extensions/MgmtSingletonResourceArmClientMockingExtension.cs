@@ -12,7 +12,7 @@ using MgmtSingletonResource;
 namespace MgmtSingletonResource.Mocking
 {
     /// <summary> A class to add extension methods to ArmClient. </summary>
-    internal partial class MgmtSingletonResourceArmClientMockingExtension : ArmResource
+    public partial class MgmtSingletonResourceArmClientMockingExtension : ArmResource
     {
         /// <summary> Initializes a new instance of the <see cref="MgmtSingletonResourceArmClientMockingExtension"/> class for mocking. </summary>
         protected MgmtSingletonResourceArmClientMockingExtension()

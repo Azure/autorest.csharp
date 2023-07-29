@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Threading;
 using System.Threading.Tasks;
 using Azure;
@@ -16,7 +17,7 @@ using MgmtPropertyChooser.Models;
 namespace MgmtPropertyChooser.Mocking
 {
     /// <summary> A class to add extension methods to ResourceGroupResource. </summary>
-    internal partial class MgmtPropertyChooserResourceGroupMockingExtension : ArmResource
+    public partial class MgmtPropertyChooserResourceGroupMockingExtension : ArmResource
     {
         /// <summary> Initializes a new instance of the <see cref="MgmtPropertyChooserResourceGroupMockingExtension"/> class for mocking. </summary>
         protected MgmtPropertyChooserResourceGroupMockingExtension()
@@ -59,6 +60,8 @@ namespace MgmtPropertyChooser.Mocking
         /// <param name="vmName"> The name of the virtual machine. </param>
         /// <param name="expand"> The expand expression to apply on the operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="vmName"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="vmName"/> is null. </exception>
         [ForwardsClientCalls]
         public virtual async Task<Response<VirtualMachineResource>> GetVirtualMachineAsync(string vmName, InstanceViewType? expand = null, CancellationToken cancellationToken = default)
         {
@@ -81,6 +84,8 @@ namespace MgmtPropertyChooser.Mocking
         /// <param name="vmName"> The name of the virtual machine. </param>
         /// <param name="expand"> The expand expression to apply on the operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="vmName"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="vmName"/> is null. </exception>
         [ForwardsClientCalls]
         public virtual Response<VirtualMachineResource> GetVirtualMachine(string vmName, InstanceViewType? expand = null, CancellationToken cancellationToken = default)
         {

@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Threading;
 using System.Threading.Tasks;
 using Azure;
@@ -16,7 +17,7 @@ using MgmtRenameRules.Models;
 namespace MgmtRenameRules.Mocking
 {
     /// <summary> A class to add extension methods to ResourceGroupResource. </summary>
-    internal partial class MgmtRenameRulesResourceGroupMockingExtension : ArmResource
+    public partial class MgmtRenameRulesResourceGroupMockingExtension : ArmResource
     {
         /// <summary> Initializes a new instance of the <see cref="MgmtRenameRulesResourceGroupMockingExtension"/> class for mocking. </summary>
         protected MgmtRenameRulesResourceGroupMockingExtension()
@@ -59,6 +60,8 @@ namespace MgmtRenameRules.Mocking
         /// <param name="vmName"> The name of the virtual machine. </param>
         /// <param name="expand"> The expand expression to apply on the operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="vmName"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="vmName"/> is null. </exception>
         [ForwardsClientCalls]
         public virtual async Task<Response<VirtualMachineResource>> GetVirtualMachineAsync(string vmName, InstanceViewType? expand = null, CancellationToken cancellationToken = default)
         {
@@ -81,6 +84,8 @@ namespace MgmtRenameRules.Mocking
         /// <param name="vmName"> The name of the virtual machine. </param>
         /// <param name="expand"> The expand expression to apply on the operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="vmName"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="vmName"/> is null. </exception>
         [ForwardsClientCalls]
         public virtual Response<VirtualMachineResource> GetVirtualMachine(string vmName, InstanceViewType? expand = null, CancellationToken cancellationToken = default)
         {
@@ -110,6 +115,8 @@ namespace MgmtRenameRules.Mocking
         /// <param name="imageName"> The name of the image. </param>
         /// <param name="expand"> The expand expression to apply on the operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="imageName"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="imageName"/> is null. </exception>
         [ForwardsClientCalls]
         public virtual async Task<Response<ImageResource>> GetImageAsync(string imageName, string expand = null, CancellationToken cancellationToken = default)
         {
@@ -132,6 +139,8 @@ namespace MgmtRenameRules.Mocking
         /// <param name="imageName"> The name of the image. </param>
         /// <param name="expand"> The expand expression to apply on the operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="imageName"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="imageName"/> is null. </exception>
         [ForwardsClientCalls]
         public virtual Response<ImageResource> GetImage(string imageName, string expand = null, CancellationToken cancellationToken = default)
         {
@@ -160,6 +169,8 @@ namespace MgmtRenameRules.Mocking
         /// </summary>
         /// <param name="vmScaleSetName"> The name of the VM scale set. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="vmScaleSetName"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="vmScaleSetName"/> is null. </exception>
         [ForwardsClientCalls]
         public virtual async Task<Response<VirtualMachineScaleSetResource>> GetVirtualMachineScaleSetAsync(string vmScaleSetName, CancellationToken cancellationToken = default)
         {
@@ -181,6 +192,8 @@ namespace MgmtRenameRules.Mocking
         /// </summary>
         /// <param name="vmScaleSetName"> The name of the VM scale set. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="vmScaleSetName"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="vmScaleSetName"/> is null. </exception>
         [ForwardsClientCalls]
         public virtual Response<VirtualMachineScaleSetResource> GetVirtualMachineScaleSet(string vmScaleSetName, CancellationToken cancellationToken = default)
         {

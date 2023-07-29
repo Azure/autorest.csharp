@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Threading;
 using System.Threading.Tasks;
 using Azure;
@@ -15,7 +16,7 @@ using MgmtCollectionParent;
 namespace MgmtCollectionParent.Mocking
 {
     /// <summary> A class to add extension methods to ResourceGroupResource. </summary>
-    internal partial class MgmtCollectionParentResourceGroupMockingExtension : ArmResource
+    public partial class MgmtCollectionParentResourceGroupMockingExtension : ArmResource
     {
         /// <summary> Initializes a new instance of the <see cref="MgmtCollectionParentResourceGroupMockingExtension"/> class for mocking. </summary>
         protected MgmtCollectionParentResourceGroupMockingExtension()
@@ -58,6 +59,8 @@ namespace MgmtCollectionParent.Mocking
         /// <param name="location"> The name of Azure region. </param>
         /// <param name="orderName"> The name of the order. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="location"/> or <paramref name="orderName"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="location"/> or <paramref name="orderName"/> is null. </exception>
         [ForwardsClientCalls]
         public virtual async Task<Response<OrderResource>> GetOrderResourceAsync(string location, string orderName, CancellationToken cancellationToken = default)
         {
@@ -80,6 +83,8 @@ namespace MgmtCollectionParent.Mocking
         /// <param name="location"> The name of Azure region. </param>
         /// <param name="orderName"> The name of the order. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="location"/> or <paramref name="orderName"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="location"/> or <paramref name="orderName"/> is null. </exception>
         [ForwardsClientCalls]
         public virtual Response<OrderResource> GetOrderResource(string location, string orderName, CancellationToken cancellationToken = default)
         {

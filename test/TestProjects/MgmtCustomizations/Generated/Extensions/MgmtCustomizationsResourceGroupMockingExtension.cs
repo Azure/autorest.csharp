@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Threading;
 using System.Threading.Tasks;
 using Azure;
@@ -15,7 +16,7 @@ using MgmtCustomizations;
 namespace MgmtCustomizations.Mocking
 {
     /// <summary> A class to add extension methods to ResourceGroupResource. </summary>
-    internal partial class MgmtCustomizationsResourceGroupMockingExtension : ArmResource
+    public partial class MgmtCustomizationsResourceGroupMockingExtension : ArmResource
     {
         /// <summary> Initializes a new instance of the <see cref="MgmtCustomizationsResourceGroupMockingExtension"/> class for mocking. </summary>
         protected MgmtCustomizationsResourceGroupMockingExtension()
@@ -57,6 +58,8 @@ namespace MgmtCustomizations.Mocking
         /// </summary>
         /// <param name="name"> Name of the endpoint under the profile which is unique globally. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="name"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
         [ForwardsClientCalls]
         public virtual async Task<Response<PetStoreResource>> GetPetStoreAsync(string name, CancellationToken cancellationToken = default)
         {
@@ -78,6 +81,8 @@ namespace MgmtCustomizations.Mocking
         /// </summary>
         /// <param name="name"> Name of the endpoint under the profile which is unique globally. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="name"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
         [ForwardsClientCalls]
         public virtual Response<PetStoreResource> GetPetStore(string name, CancellationToken cancellationToken = default)
         {

@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Threading;
 using System.Threading.Tasks;
 using Azure;
@@ -15,7 +16,7 @@ using MgmtXmlDeserialization;
 namespace MgmtXmlDeserialization.Mocking
 {
     /// <summary> A class to add extension methods to ResourceGroupResource. </summary>
-    internal partial class MgmtXmlDeserializationResourceGroupMockingExtension : ArmResource
+    public partial class MgmtXmlDeserializationResourceGroupMockingExtension : ArmResource
     {
         /// <summary> Initializes a new instance of the <see cref="MgmtXmlDeserializationResourceGroupMockingExtension"/> class for mocking. </summary>
         protected MgmtXmlDeserializationResourceGroupMockingExtension()
@@ -57,6 +58,8 @@ namespace MgmtXmlDeserialization.Mocking
         /// </summary>
         /// <param name="xmlName"> The name of the API Management service. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="xmlName"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="xmlName"/> is null. </exception>
         [ForwardsClientCalls]
         public virtual async Task<Response<XmlInstanceResource>> GetXmlInstanceAsync(string xmlName, CancellationToken cancellationToken = default)
         {
@@ -78,6 +81,8 @@ namespace MgmtXmlDeserialization.Mocking
         /// </summary>
         /// <param name="xmlName"> The name of the API Management service. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="xmlName"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="xmlName"/> is null. </exception>
         [ForwardsClientCalls]
         public virtual Response<XmlInstanceResource> GetXmlInstance(string xmlName, CancellationToken cancellationToken = default)
         {

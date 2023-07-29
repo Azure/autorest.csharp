@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Threading;
 using System.Threading.Tasks;
 using Azure;
@@ -15,7 +16,7 @@ using MgmtNoTypeReplacement;
 namespace MgmtNoTypeReplacement.Mocking
 {
     /// <summary> A class to add extension methods to ResourceGroupResource. </summary>
-    internal partial class MgmtNoTypeReplacementResourceGroupMockingExtension : ArmResource
+    public partial class MgmtNoTypeReplacementResourceGroupMockingExtension : ArmResource
     {
         /// <summary> Initializes a new instance of the <see cref="MgmtNoTypeReplacementResourceGroupMockingExtension"/> class for mocking. </summary>
         protected MgmtNoTypeReplacementResourceGroupMockingExtension()
@@ -56,6 +57,8 @@ namespace MgmtNoTypeReplacement.Mocking
         /// </summary>
         /// <param name="noTypeReplacementModel1SName"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="noTypeReplacementModel1SName"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="noTypeReplacementModel1SName"/> is null. </exception>
         [ForwardsClientCalls]
         public virtual async Task<Response<NoTypeReplacementModel1Resource>> GetNoTypeReplacementModel1Async(string noTypeReplacementModel1SName, CancellationToken cancellationToken = default)
         {
@@ -76,6 +79,8 @@ namespace MgmtNoTypeReplacement.Mocking
         /// </summary>
         /// <param name="noTypeReplacementModel1SName"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="noTypeReplacementModel1SName"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="noTypeReplacementModel1SName"/> is null. </exception>
         [ForwardsClientCalls]
         public virtual Response<NoTypeReplacementModel1Resource> GetNoTypeReplacementModel1(string noTypeReplacementModel1SName, CancellationToken cancellationToken = default)
         {
@@ -103,6 +108,8 @@ namespace MgmtNoTypeReplacement.Mocking
         /// </summary>
         /// <param name="noTypeReplacementModel2SName"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="noTypeReplacementModel2SName"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="noTypeReplacementModel2SName"/> is null. </exception>
         [ForwardsClientCalls]
         public virtual async Task<Response<NoTypeReplacementModel2Resource>> GetNoTypeReplacementModel2Async(string noTypeReplacementModel2SName, CancellationToken cancellationToken = default)
         {
@@ -123,6 +130,8 @@ namespace MgmtNoTypeReplacement.Mocking
         /// </summary>
         /// <param name="noTypeReplacementModel2SName"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="noTypeReplacementModel2SName"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="noTypeReplacementModel2SName"/> is null. </exception>
         [ForwardsClientCalls]
         public virtual Response<NoTypeReplacementModel2Resource> GetNoTypeReplacementModel2(string noTypeReplacementModel2SName, CancellationToken cancellationToken = default)
         {
@@ -150,6 +159,8 @@ namespace MgmtNoTypeReplacement.Mocking
         /// </summary>
         /// <param name="noTypeReplacementModel3SName"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="noTypeReplacementModel3SName"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="noTypeReplacementModel3SName"/> is null. </exception>
         [ForwardsClientCalls]
         public virtual async Task<Response<NoTypeReplacementModel3Resource>> GetNoTypeReplacementModel3Async(string noTypeReplacementModel3SName, CancellationToken cancellationToken = default)
         {
@@ -170,6 +181,8 @@ namespace MgmtNoTypeReplacement.Mocking
         /// </summary>
         /// <param name="noTypeReplacementModel3SName"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="noTypeReplacementModel3SName"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="noTypeReplacementModel3SName"/> is null. </exception>
         [ForwardsClientCalls]
         public virtual Response<NoTypeReplacementModel3Resource> GetNoTypeReplacementModel3(string noTypeReplacementModel3SName, CancellationToken cancellationToken = default)
         {
