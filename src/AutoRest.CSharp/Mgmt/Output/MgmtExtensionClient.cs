@@ -137,7 +137,7 @@ namespace AutoRest.CSharp.Mgmt.Output
 
         /// <summary>
         /// Construct a key for overload of this method signature.
-        /// The format of this key is like "MethodName(TypeOfParamter1,TypeOfParamter2,...,TypeOfLastParameter)"
+        /// The format of this key is like "MethodName(TypeOfParameter1,TypeOfParameter2,...,TypeOfLastParameter)"
         /// </summary>
         /// <param name="methodSignature"></param>
         /// <returns></returns>
