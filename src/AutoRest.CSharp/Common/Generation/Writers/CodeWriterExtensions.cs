@@ -5,6 +5,8 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Text.Json;
+using AutoRest.CSharp.Common.Output.Models;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Output.Models.Requests;
@@ -15,11 +17,9 @@ using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Output.Models.Types;
 using AutoRest.CSharp.Utilities;
 using Azure;
-using AutoRest.CSharp.Common.Output.Models;
 using Azure.Core;
-using static AutoRest.CSharp.Output.Models.MethodSignatureModifiers;
-using System.Text.Json;
 using Azure.Core.Pipeline;
+using static AutoRest.CSharp.Output.Models.MethodSignatureModifiers;
 
 namespace AutoRest.CSharp.Generation.Writers
 {
@@ -143,7 +143,7 @@ namespace AutoRest.CSharp.Generation.Writers
 
         public static IDisposable WriteMethodDeclaration(this CodeWriter writer, MethodSignatureBase methodBase, params string[] disabledWarnings)
         {
-            if (methodBase.Attributes is {} attributes)
+            if (methodBase.Attributes is { } attributes)
             {
                 foreach (var attribute in attributes)
                 {
@@ -620,6 +620,9 @@ namespace AutoRest.CSharp.Generation.Writers
             }
 
             var propertyName = property.PropertyName;
+            if (TypeFactory.IsCollectionType(property.ValueType) && property.IsRequired)
+                return writer.Scope($"if ({propertyName} != null && {typeof(Optional)}.{nameof(Optional.IsCollectionDefined)}({propertyName}))");
+
             return writer.Scope($"if ({propertyName} != null)");
         }
 

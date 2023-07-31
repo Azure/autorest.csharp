@@ -806,6 +806,132 @@ namespace SpreadTypeSpec
             }
         }
 
+        /// <summary> spread an alias with required and optional collections. </summary>
+        /// <param name="requiredStringList"> required list. </param>
+        /// <param name="optionalStringList"> optional list. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="requiredStringList"/> is null. </exception>
+        /// <include file="Docs/SpreadTypeSpecClient.xml" path="doc/members/member[@name='SpreadAliasWithCollectionsAsync(IEnumerable{string},IEnumerable{string},CancellationToken)']/*" />
+        public virtual async Task<Response> SpreadAliasWithCollectionsAsync(IEnumerable<string> requiredStringList, IEnumerable<string> optionalStringList = null, CancellationToken cancellationToken = default)
+        {
+            Argument.AssertNotNull(requiredStringList, nameof(requiredStringList));
+
+            RequestContext context = FromCancellationToken(cancellationToken);
+            SpreadAliasWithCollectionsRequest spreadAliasWithCollectionsRequest = new SpreadAliasWithCollectionsRequest(requiredStringList.ToList());
+            if (optionalStringList != null)
+            {
+                foreach (var value in optionalStringList)
+                {
+                    spreadAliasWithCollectionsRequest.OptionalStringList.Add(value);
+                }
+            }
+            SpreadAliasWithCollectionsRequest spreadAliasWithCollectionsRequest0 = spreadAliasWithCollectionsRequest;
+            Response response = await SpreadAliasWithCollectionsAsync(spreadAliasWithCollectionsRequest0.ToRequestContent(), context).ConfigureAwait(false);
+            return response;
+        }
+
+        /// <summary> spread an alias with required and optional collections. </summary>
+        /// <param name="requiredStringList"> required list. </param>
+        /// <param name="optionalStringList"> optional list. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="requiredStringList"/> is null. </exception>
+        /// <include file="Docs/SpreadTypeSpecClient.xml" path="doc/members/member[@name='SpreadAliasWithCollections(IEnumerable{string},IEnumerable{string},CancellationToken)']/*" />
+        public virtual Response SpreadAliasWithCollections(IEnumerable<string> requiredStringList, IEnumerable<string> optionalStringList = null, CancellationToken cancellationToken = default)
+        {
+            Argument.AssertNotNull(requiredStringList, nameof(requiredStringList));
+
+            RequestContext context = FromCancellationToken(cancellationToken);
+            SpreadAliasWithCollectionsRequest spreadAliasWithCollectionsRequest = new SpreadAliasWithCollectionsRequest(requiredStringList.ToList());
+            if (optionalStringList != null)
+            {
+                foreach (var value in optionalStringList)
+                {
+                    spreadAliasWithCollectionsRequest.OptionalStringList.Add(value);
+                }
+            }
+            SpreadAliasWithCollectionsRequest spreadAliasWithCollectionsRequest0 = spreadAliasWithCollectionsRequest;
+            Response response = SpreadAliasWithCollections(spreadAliasWithCollectionsRequest0.ToRequestContent(), context);
+            return response;
+        }
+
+        /// <summary>
+        /// [Protocol Method] spread an alias with required and optional collections
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
+        /// <item>
+        /// <description>
+        /// Please try the simpler <see cref="SpreadAliasWithCollectionsAsync(IEnumerable{string},IEnumerable{string},CancellationToken)"/> convenience overload with strongly typed models first.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
+        /// <param name="content"> The content to send as the body of the request. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <include file="Docs/SpreadTypeSpecClient.xml" path="doc/members/member[@name='SpreadAliasWithCollectionsAsync(RequestContent,RequestContext)']/*" />
+        public virtual async Task<Response> SpreadAliasWithCollectionsAsync(RequestContent content, RequestContext context = null)
+        {
+            Argument.AssertNotNull(content, nameof(content));
+
+            using var scope = ClientDiagnostics.CreateScope("SpreadTypeSpecClient.SpreadAliasWithCollections");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateSpreadAliasWithCollectionsRequest(content, context);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// [Protocol Method] spread an alias with required and optional collections
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
+        /// <item>
+        /// <description>
+        /// Please try the simpler <see cref="SpreadAliasWithCollections(IEnumerable{string},IEnumerable{string},CancellationToken)"/> convenience overload with strongly typed models first.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
+        /// <param name="content"> The content to send as the body of the request. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <include file="Docs/SpreadTypeSpecClient.xml" path="doc/members/member[@name='SpreadAliasWithCollections(RequestContent,RequestContext)']/*" />
+        public virtual Response SpreadAliasWithCollections(RequestContent content, RequestContext context = null)
+        {
+            Argument.AssertNotNull(content, nameof(content));
+
+            using var scope = ClientDiagnostics.CreateScope("SpreadTypeSpecClient.SpreadAliasWithCollections");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateSpreadAliasWithCollectionsRequest(content, context);
+                return _pipeline.ProcessMessage(message, context);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
         internal HttpMessage CreateSpreadModelRequest(RequestContent content, RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier204);
@@ -904,6 +1030,22 @@ namespace SpreadTypeSpec
             uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("top", top);
+            request.Headers.Add("Accept", "application/json");
+            request.Headers.Add("Content-Type", "application/json");
+            request.Content = content;
+            return message;
+        }
+
+        internal HttpMessage CreateSpreadAliasWithCollectionsRequest(RequestContent content, RequestContext context)
+        {
+            var message = _pipeline.CreateMessage(context, ResponseClassifier204);
+            var request = message.Request;
+            request.Method = RequestMethod.Post;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/spreadAliasWithCollections", false);
+            uri.AppendQuery("api-version", _apiVersion, true);
+            request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
             request.Content = content;

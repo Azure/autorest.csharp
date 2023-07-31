@@ -118,7 +118,14 @@ namespace AutoRest.CSharp.Output.Models
 
         private bool HasAmbiguityBetweenProtocolAndConvenience()
         {
-            return _orderedParameters.Where(parameter => parameter.Convenience != KnownParameters.CancellationTokenParameter).All(parameter => IsParameterTypeHasValueOverlap(parameter.Convenience, parameter.Protocol));
+            var userDefinedParameters = _orderedParameters.Where(parameter => parameter.Convenience != KnownParameters.CancellationTokenParameter);
+            int protocolRequired = userDefinedParameters.Select(p => p.Protocol).WhereNotNull().Where(p => !p.IsOptionalInSignature).Count();
+            int convenienceRequired = userDefinedParameters.Select(p => p.Convenience).WhereNotNull().Where(p => !p.IsOptionalInSignature).Count();
+            if (protocolRequired != convenienceRequired)
+            {
+                return false;
+            }
+            return userDefinedParameters.Where(p => p.Protocol != null && !p.Protocol.IsOptionalInSignature).All(parameter => IsParameterTypeSame(parameter.Convenience, parameter.Protocol));
         }
 
         private bool ShouldRequestContextOptional()
@@ -148,21 +155,6 @@ namespace AutoRest.CSharp.Output.Models
         private bool IsParameterTypeSame(Parameter? first, Parameter? second)
         {
             return object.Equals(first?.Type, second?.Type);
-        }
-
-        private bool IsParameterTypeHasValueOverlap(Parameter? first, Parameter? second)
-        {
-            if (IsParameterTypeSame(first, second))
-            {
-                return true;
-            }
-
-            if (first != null && second != null && first.Type.IsNullable && second.Type.IsNullable)
-            {
-                return true;
-            }
-
-            return false;
         }
 
         private ReturnTypeChain BuildReturnTypes()
@@ -310,7 +302,7 @@ namespace AutoRest.CSharp.Output.Models
                         : parameter.SerializationFormat;
             }
 
-            var operationParameters = Operation.Parameters.Where(rp => !RestClientBuilder.IsIgnoredHeaderParameter(rp));
+            var operationParameters = RestClientBuilder.FilterOperationAllParameters(Operation.Parameters);
 
             var requiredPathParameters = new Dictionary<string, InputParameter>();
             var optionalPathParameters = new Dictionary<string, InputParameter>();
@@ -356,7 +348,8 @@ namespace AutoRest.CSharp.Output.Models
                         if (Operation.KeepClientDefaultValue && operationParameter.DefaultValue != null)
                         {
                             optionalRequestParameters.Add(operationParameter);
-                        } else
+                        }
+                        else
                         {
                             requiredRequestParameters.Add(operationParameter);
                         }

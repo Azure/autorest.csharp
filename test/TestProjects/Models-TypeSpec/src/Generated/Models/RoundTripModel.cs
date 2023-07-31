@@ -18,11 +18,13 @@ namespace ModelsTypeSpec.Models
         /// <summary> Initializes a new instance of RoundTripModel. </summary>
         /// <param name="requiredString"> Required string, illustrating a reference type property. </param>
         /// <param name="requiredInt"> Required int, illustrating a value type property. </param>
+        /// <param name="requiredNullableInt"> Required nullable int. </param>
+        /// <param name="requiredNullableString"> Required nullable string. </param>
         /// <param name="requiredModel"> Required model with discriminator. </param>
         /// <param name="requiredFixedStringEnum"> Required fixed string enum. </param>
         /// <param name="requiredFixedIntEnum"> Required fixed int enum. </param>
         /// <param name="requiredExtensibleEnum"> Required extensible enum. </param>
-        /// <param name="requiredCollection"> Required collection. </param>
+        /// <param name="requiredList"> Required collection. </param>
         /// <param name="requiredIntRecord"> Required int record. </param>
         /// <param name="requiredStringRecord"> Required string record. </param>
         /// <param name="requiredModelRecord"> Required Model Record. </param>
@@ -30,12 +32,14 @@ namespace ModelsTypeSpec.Models
         /// <param name="requiredUint8Array"> Required uint8[]. </param>
         /// <param name="requiredUnknown"> Required unknown. </param>
         /// <param name="requiredInt8Array"> Required int8[]. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="requiredString"/>, <paramref name="requiredModel"/>, <paramref name="requiredCollection"/>, <paramref name="requiredIntRecord"/>, <paramref name="requiredStringRecord"/>, <paramref name="requiredModelRecord"/>, <paramref name="requiredBytes"/>, <paramref name="requiredUint8Array"/>, <paramref name="requiredUnknown"/> or <paramref name="requiredInt8Array"/> is null. </exception>
-        public RoundTripModel(string requiredString, int requiredInt, BaseModelWithDiscriminator requiredModel, FixedStringEnum requiredFixedStringEnum, FixedIntEnum requiredFixedIntEnum, ExtensibleEnum requiredExtensibleEnum, IEnumerable<CollectionItem> requiredCollection, IDictionary<string, int> requiredIntRecord, IDictionary<string, string> requiredStringRecord, IDictionary<string, RecordItem> requiredModelRecord, BinaryData requiredBytes, IEnumerable<int> requiredUint8Array, BinaryData requiredUnknown, IEnumerable<int> requiredInt8Array)
+        /// <param name="requiredNullableIntList"> Required nullable int list. </param>
+        /// <param name="requiredNullableStringList"> Required nullable string list. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="requiredString"/>, <paramref name="requiredModel"/>, <paramref name="requiredList"/>, <paramref name="requiredIntRecord"/>, <paramref name="requiredStringRecord"/>, <paramref name="requiredModelRecord"/>, <paramref name="requiredBytes"/>, <paramref name="requiredUint8Array"/>, <paramref name="requiredUnknown"/> or <paramref name="requiredInt8Array"/> is null. </exception>
+        public RoundTripModel(string requiredString, int requiredInt, int? requiredNullableInt, string requiredNullableString, BaseModelWithDiscriminator requiredModel, FixedStringEnum requiredFixedStringEnum, FixedIntEnum requiredFixedIntEnum, ExtensibleEnum requiredExtensibleEnum, IEnumerable<CollectionItem> requiredList, IDictionary<string, int> requiredIntRecord, IDictionary<string, string> requiredStringRecord, IDictionary<string, RecordItem> requiredModelRecord, BinaryData requiredBytes, IEnumerable<int> requiredUint8Array, BinaryData requiredUnknown, IEnumerable<int> requiredInt8Array, IEnumerable<int> requiredNullableIntList, IEnumerable<string> requiredNullableStringList)
         {
             Argument.AssertNotNull(requiredString, nameof(requiredString));
             Argument.AssertNotNull(requiredModel, nameof(requiredModel));
-            Argument.AssertNotNull(requiredCollection, nameof(requiredCollection));
+            Argument.AssertNotNull(requiredList, nameof(requiredList));
             Argument.AssertNotNull(requiredIntRecord, nameof(requiredIntRecord));
             Argument.AssertNotNull(requiredStringRecord, nameof(requiredStringRecord));
             Argument.AssertNotNull(requiredModelRecord, nameof(requiredModelRecord));
@@ -46,11 +50,13 @@ namespace ModelsTypeSpec.Models
 
             RequiredString = requiredString;
             RequiredInt = requiredInt;
+            RequiredNullableInt = requiredNullableInt;
+            RequiredNullableString = requiredNullableString;
             RequiredModel = requiredModel;
             RequiredFixedStringEnum = requiredFixedStringEnum;
             RequiredFixedIntEnum = requiredFixedIntEnum;
             RequiredExtensibleEnum = requiredExtensibleEnum;
-            RequiredCollection = requiredCollection.ToList();
+            RequiredList = requiredList.ToList();
             RequiredIntRecord = requiredIntRecord;
             RequiredStringRecord = requiredStringRecord;
             RequiredModelRecord = requiredModelRecord;
@@ -60,16 +66,28 @@ namespace ModelsTypeSpec.Models
             RequiredUnknown = requiredUnknown;
             RequiredInt8Array = requiredInt8Array.ToList();
             OptionalInt8Array = new ChangeTrackingList<int>();
+            RequiredNullableIntList = requiredNullableIntList?.ToList();
+            RequiredNullableStringList = requiredNullableStringList?.ToList();
+            NonRequiredNullableIntList = new ChangeTrackingList<int>();
+            NonRequiredNullableStringList = new ChangeTrackingList<string>();
         }
 
         /// <summary> Initializes a new instance of RoundTripModel. </summary>
         /// <param name="requiredString"> Required string, illustrating a reference type property. </param>
         /// <param name="requiredInt"> Required int, illustrating a value type property. </param>
+        /// <param name="nonRequiredString"> Optional string. </param>
+        /// <param name="nonRequiredInt"> Optional int. </param>
+        /// <param name="requiredNullableInt"> Required nullable int. </param>
+        /// <param name="requiredNullableString"> Required nullable string. </param>
+        /// <param name="nonRequiredNullableInt"> Optional nullable int. </param>
+        /// <param name="nonRequiredNullableString"> Optional nullable string. </param>
+        /// <param name="requiredReadonlyInt"> Required readonly int. </param>
+        /// <param name="nonRequiredReadonlyInt"> Optional readonly int. </param>
         /// <param name="requiredModel"> Required model with discriminator. </param>
         /// <param name="requiredFixedStringEnum"> Required fixed string enum. </param>
         /// <param name="requiredFixedIntEnum"> Required fixed int enum. </param>
         /// <param name="requiredExtensibleEnum"> Required extensible enum. </param>
-        /// <param name="requiredCollection"> Required collection. </param>
+        /// <param name="requiredList"> Required collection. </param>
         /// <param name="requiredIntRecord"> Required int record. </param>
         /// <param name="requiredStringRecord"> Required string record. </param>
         /// <param name="requiredModelRecord"> Required Model Record. </param>
@@ -81,15 +99,27 @@ namespace ModelsTypeSpec.Models
         /// <param name="optionalUnknown"> Optional unknown. </param>
         /// <param name="requiredInt8Array"> Required int8[]. </param>
         /// <param name="optionalInt8Array"> Optional int8[]. </param>
-        internal RoundTripModel(string requiredString, int requiredInt, BaseModelWithDiscriminator requiredModel, FixedStringEnum requiredFixedStringEnum, FixedIntEnum requiredFixedIntEnum, ExtensibleEnum requiredExtensibleEnum, IList<CollectionItem> requiredCollection, IDictionary<string, int> requiredIntRecord, IDictionary<string, string> requiredStringRecord, IDictionary<string, RecordItem> requiredModelRecord, BinaryData requiredBytes, BinaryData optionalBytes, IList<int> requiredUint8Array, IList<int> optionalUint8Array, BinaryData requiredUnknown, BinaryData optionalUnknown, IList<int> requiredInt8Array, IList<int> optionalInt8Array)
+        /// <param name="requiredNullableIntList"> Required nullable int list. </param>
+        /// <param name="requiredNullableStringList"> Required nullable string list. </param>
+        /// <param name="nonRequiredNullableIntList"> Optional nullable model list. </param>
+        /// <param name="nonRequiredNullableStringList"> Optional nullable string list. </param>
+        internal RoundTripModel(string requiredString, int requiredInt, string nonRequiredString, int? nonRequiredInt, int? requiredNullableInt, string requiredNullableString, int? nonRequiredNullableInt, string nonRequiredNullableString, int requiredReadonlyInt, int? nonRequiredReadonlyInt, BaseModelWithDiscriminator requiredModel, FixedStringEnum requiredFixedStringEnum, FixedIntEnum requiredFixedIntEnum, ExtensibleEnum requiredExtensibleEnum, IList<CollectionItem> requiredList, IDictionary<string, int> requiredIntRecord, IDictionary<string, string> requiredStringRecord, IDictionary<string, RecordItem> requiredModelRecord, BinaryData requiredBytes, BinaryData optionalBytes, IList<int> requiredUint8Array, IList<int> optionalUint8Array, BinaryData requiredUnknown, BinaryData optionalUnknown, IList<int> requiredInt8Array, IList<int> optionalInt8Array, IList<int> requiredNullableIntList, IList<string> requiredNullableStringList, IList<int> nonRequiredNullableIntList, IList<string> nonRequiredNullableStringList)
         {
             RequiredString = requiredString;
             RequiredInt = requiredInt;
+            NonRequiredString = nonRequiredString;
+            NonRequiredInt = nonRequiredInt;
+            RequiredNullableInt = requiredNullableInt;
+            RequiredNullableString = requiredNullableString;
+            NonRequiredNullableInt = nonRequiredNullableInt;
+            NonRequiredNullableString = nonRequiredNullableString;
+            RequiredReadonlyInt = requiredReadonlyInt;
+            NonRequiredReadonlyInt = nonRequiredReadonlyInt;
             RequiredModel = requiredModel;
             RequiredFixedStringEnum = requiredFixedStringEnum;
             RequiredFixedIntEnum = requiredFixedIntEnum;
             RequiredExtensibleEnum = requiredExtensibleEnum;
-            RequiredCollection = requiredCollection;
+            RequiredList = requiredList;
             RequiredIntRecord = requiredIntRecord;
             RequiredStringRecord = requiredStringRecord;
             RequiredModelRecord = requiredModelRecord;
@@ -101,12 +131,32 @@ namespace ModelsTypeSpec.Models
             OptionalUnknown = optionalUnknown;
             RequiredInt8Array = requiredInt8Array;
             OptionalInt8Array = optionalInt8Array;
+            RequiredNullableIntList = requiredNullableIntList;
+            RequiredNullableStringList = requiredNullableStringList;
+            NonRequiredNullableIntList = nonRequiredNullableIntList;
+            NonRequiredNullableStringList = nonRequiredNullableStringList;
         }
 
         /// <summary> Required string, illustrating a reference type property. </summary>
         public string RequiredString { get; set; }
         /// <summary> Required int, illustrating a value type property. </summary>
         public int RequiredInt { get; set; }
+        /// <summary> Optional string. </summary>
+        public string NonRequiredString { get; set; }
+        /// <summary> Optional int. </summary>
+        public int? NonRequiredInt { get; set; }
+        /// <summary> Required nullable int. </summary>
+        public int? RequiredNullableInt { get; set; }
+        /// <summary> Required nullable string. </summary>
+        public string RequiredNullableString { get; set; }
+        /// <summary> Optional nullable int. </summary>
+        public int? NonRequiredNullableInt { get; set; }
+        /// <summary> Optional nullable string. </summary>
+        public string NonRequiredNullableString { get; set; }
+        /// <summary> Required readonly int. </summary>
+        public int RequiredReadonlyInt { get; }
+        /// <summary> Optional readonly int. </summary>
+        public int? NonRequiredReadonlyInt { get; }
         /// <summary>
         /// Required model with discriminator
         /// Please note <see cref="BaseModelWithDiscriminator"/> is the base class. According to the scenario, a derived class of the base class might need to be assigned here, or this property needs to be casted to one of the possible derived classes.
@@ -120,7 +170,7 @@ namespace ModelsTypeSpec.Models
         /// <summary> Required extensible enum. </summary>
         public ExtensibleEnum RequiredExtensibleEnum { get; set; }
         /// <summary> Required collection. </summary>
-        public IList<CollectionItem> RequiredCollection { get; }
+        public IList<CollectionItem> RequiredList { get; }
         /// <summary> Required int record. </summary>
         public IDictionary<string, int> RequiredIntRecord { get; }
         /// <summary> Required string record. </summary>
@@ -231,5 +281,13 @@ namespace ModelsTypeSpec.Models
         public IList<int> RequiredInt8Array { get; }
         /// <summary> Optional int8[]. </summary>
         public IList<int> OptionalInt8Array { get; }
+        /// <summary> Required nullable int list. </summary>
+        public IList<int> RequiredNullableIntList { get; set; }
+        /// <summary> Required nullable string list. </summary>
+        public IList<string> RequiredNullableStringList { get; set; }
+        /// <summary> Optional nullable model list. </summary>
+        public IList<int> NonRequiredNullableIntList { get; set; }
+        /// <summary> Optional nullable string list. </summary>
+        public IList<string> NonRequiredNullableStringList { get; set; }
     }
 }
