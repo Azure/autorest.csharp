@@ -65,7 +65,7 @@ import { Usage } from "../type/usage.js";
 import { logger } from "./logger.js";
 import {
     SdkContext,
-    getSdkSimpleType,
+    getSdkBuiltInType
     isInternal
 } from "@azure-tools/typespec-client-generator-core";
 import { capitalize, getNameForTemplate } from "./utils.js";
@@ -313,12 +313,12 @@ export function getInputType(
             // In such cases, we don't want to emit a ref and instead just
             // emit the base type directly.
             default:
-                const sdkType = getSdkSimpleType(context, type);
+                const sdkType = getSdkBuiltInType(context, type);
                 return {
                     Name: type.name,
                     Kind: getCSharpInputTypeKindByIntrinsicModelName(
                         sdkType.kind,
-                        sdkType.format ?? formattedType.format,
+                        formattedType.format,
                         formattedType.encode
                     ),
                     IsNullable: false
