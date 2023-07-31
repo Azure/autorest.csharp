@@ -920,4 +920,3 @@ export function getFormattedType(program: Program, type: Type): FormattedType {
         encode: encodeData
     } as FormattedType;
 }
-
