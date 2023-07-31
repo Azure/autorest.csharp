@@ -65,7 +65,7 @@ import { Usage } from "../type/usage.js";
 import { logger } from "./logger.js";
 import {
     SdkContext,
-    getSdkBuiltInType
+    getSdkBuiltInType,
     isInternal
 } from "@azure-tools/typespec-client-generator-core";
 import { capitalize, getNameForTemplate } from "./utils.js";
@@ -920,3 +920,4 @@ export function getFormattedType(program: Program, type: Type): FormattedType {
         encode: encodeData
     } as FormattedType;
 }
+
