@@ -222,7 +222,7 @@ namespace lro_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new LRORetrysClient(credential);
 
-            var operation = client.DeleteProvisioning202Accepted200Succeeded(WaitUntil.Completed);
+            var operation = client.DeleteProvisioning202Accepted200Succeeded(WaitUntil.Completed, new RequestContext());
 
             BinaryData responseData = operation.Value;
             JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
@@ -236,7 +236,7 @@ namespace lro_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new LRORetrysClient(credential);
 
-            var operation = client.DeleteProvisioning202Accepted200Succeeded(WaitUntil.Completed);
+            var operation = client.DeleteProvisioning202Accepted200Succeeded(WaitUntil.Completed, new RequestContext());
 
             BinaryData responseData = operation.Value;
             JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
@@ -256,7 +256,7 @@ namespace lro_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new LRORetrysClient(credential);
 
-            var operation = await client.DeleteProvisioning202Accepted200SucceededAsync(WaitUntil.Completed);
+            var operation = await client.DeleteProvisioning202Accepted200SucceededAsync(WaitUntil.Completed, new RequestContext());
 
             BinaryData responseData = operation.Value;
             JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
@@ -270,7 +270,7 @@ namespace lro_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new LRORetrysClient(credential);
 
-            var operation = await client.DeleteProvisioning202Accepted200SucceededAsync(WaitUntil.Completed);
+            var operation = await client.DeleteProvisioning202Accepted200SucceededAsync(WaitUntil.Completed, new RequestContext());
 
             BinaryData responseData = operation.Value;
             JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;

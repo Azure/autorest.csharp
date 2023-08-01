@@ -1,8 +1,8 @@
 {
-  "OutputFolder": ".",
-  "Namespace": "body_datetime_rfc1123",
-  "LibraryName": "AutoRestRFC1123DateTimeTestService",
-  "SharedSourceFolders": [
+  "output-folder": ".",
+  "namespace": "body_datetime_rfc1123",
+  "library-name": "AutoRestRFC1123DateTimeTestService",
+  "shared-source-folders": [
     "..\\..\\..\\..\\artifacts\\bin\\AutoRest.CSharp\\Debug\\net6.0\\Generator.Shared",
     "..\\..\\..\\..\\artifacts\\bin\\AutoRest.CSharp\\Debug\\net6.0\\Azure.Core.Shared"
   ],

@@ -9,7 +9,7 @@ schedules:
 
 variables:
   OfficialBuildId: $(Build.BuildNumber)
-  NugetSecurityAnalysisWarningLevel: 'none'
+  nugetMultiFeedWarnLevel: 'none'
 
 resources:
   repositories:

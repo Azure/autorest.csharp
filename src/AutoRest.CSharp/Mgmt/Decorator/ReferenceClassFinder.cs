@@ -6,11 +6,13 @@ using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Reflection;
+using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Utilities;
 using Azure;
 using Azure.Core.Expressions.DataFactory;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Models;
+using Operation = Azure.Operation;
 
 namespace AutoRest.CSharp.Mgmt.Decorator
 {
@@ -77,6 +79,12 @@ namespace AutoRest.CSharp.Mgmt.Decorator
                 ["Message"] = new PropertyMetadata("message", true),
                 ["Target"] = new PropertyMetadata("target"),
                 ["Details"] = new PropertyMetadata("details")
+            },
+            [typeof(DataFactoryLinkedServiceReference)] = new()
+            {
+                ["ReferenceType"] = new PropertyMetadata("type", true),
+                ["ReferenceName"] = new PropertyMetadata("referenceName", true),
+                ["Parameters"] = new PropertyMetadata("parameters")
             }
         };
 
@@ -107,15 +115,17 @@ namespace AutoRest.CSharp.Mgmt.Decorator
         private static bool TryConstructPropertyMetadata(Type type, [MaybeNullWhen(false)] out Dictionary<string, PropertyMetadata> dict)
         {
             var publicCtor = type.GetConstructors().Where(c => c.IsPublic).OrderBy(c => c.GetParameters().Count()).FirstOrDefault();
-            if (publicCtor == null)
+            if (publicCtor == null && !type.IsAbstract)
             {
                 dict = null;
                 return false;
             }
             dict = new Dictionary<string, PropertyMetadata>();
-            foreach (var property in type.GetProperties().Where(p => p.DeclaringType == type))
+            var internalPropertiesToInclude = new List<PropertyInfo>();
+            PropertyMatchDetection.AddInternalIncludes(type, internalPropertiesToInclude);
+            foreach (var property in type.GetProperties().Where(p => p.DeclaringType == type).Concat(internalPropertiesToInclude))
             {
-                var metadata = new PropertyMetadata(property.Name.ToVariableName(), GetRequired(publicCtor, property));
+                var metadata = new PropertyMetadata(property.Name.ToVariableName(), publicCtor != null && GetRequired(publicCtor, property));
                 dict.Add(property.Name, metadata);
             }
             return true;
@@ -173,9 +183,12 @@ namespace AutoRest.CSharp.Mgmt.Decorator
             if (assembly != null)
                 types.AddRange(assembly.GetTypes());
 
-            assembly = Assembly.GetAssembly(typeof(DataFactoryElement<>));
-            if (assembly != null)
-                types.AddRange(assembly.GetTypes());
+            if (Configuration.UseCoreDataFactoryReplacements)
+            {
+                assembly = Assembly.GetAssembly(typeof(DataFactoryElement<>));
+                if (assembly != null)
+                    types.AddRange(assembly.GetTypes());
+            }
 
             return types;
         }

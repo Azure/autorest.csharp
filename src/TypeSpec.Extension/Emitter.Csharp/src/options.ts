@@ -22,10 +22,12 @@ export type NetEmitterOptions = {
     "model-namespace"?: boolean;
     "existing-project-folder"?: string;
     "use-overloads-between-protocol-and-convenience"?: boolean;
+    "keep-non-overloadable-protocol-signature"?: boolean;
     debug?: boolean;
     "models-to-treat-empty-string-as-null"?: string[];
     "additional-intrinsic-types-to-treat-empty-string-as-null"?: string[];
     "methods-to-keep-client-default-value"?: string[];
+    "deserialize-null-collection-as-null-value"?: boolean;
     logLevel?: string;
     "package-dir"?: string;
 } & SdkEmitterOptions;
@@ -63,6 +65,10 @@ export const NetEmitterOptionsSchema: JSONSchemaType<NetEmitterOptions> = {
             type: "boolean",
             nullable: true
         },
+        "keep-non-overloadable-protocol-signature": {
+            type: "boolean",
+            nullable: true
+        },
         debug: { type: "boolean", nullable: true },
         "models-to-treat-empty-string-as-null": {
             type: "array",
@@ -78,6 +84,10 @@ export const NetEmitterOptionsSchema: JSONSchemaType<NetEmitterOptions> = {
             type: "array",
             nullable: true,
             items: { type: "string" }
+        },
+        "deserialize-null-collection-as-null-value": {
+            type: "boolean",
+            nullable: true
         },
         logLevel: {
             type: "string",
@@ -111,6 +121,7 @@ const defaultOptions = {
     "models-to-treat-empty-string-as-null": undefined,
     "additional-intrinsic-types-to-treat-empty-string-as-null": [],
     "methods-to-keep-client-default-value": undefined,
+    "deserialize-null-collection-as-null-value": undefined,
     logLevel: LoggerLevel.INFO
 };
 

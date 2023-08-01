@@ -516,7 +516,7 @@ namespace lro_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new LROsClient(credential);
 
-            var operation = client.Post202List(WaitUntil.Completed);
+            var operation = client.Post202List(WaitUntil.Completed, new RequestContext());
 
             BinaryData responseData = operation.Value;
             JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
@@ -530,7 +530,7 @@ namespace lro_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new LROsClient(credential);
 
-            var operation = client.Post202List(WaitUntil.Completed);
+            var operation = client.Post202List(WaitUntil.Completed, new RequestContext());
 
             BinaryData responseData = operation.Value;
             JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
@@ -550,7 +550,7 @@ namespace lro_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new LROsClient(credential);
 
-            var operation = await client.Post202ListAsync(WaitUntil.Completed);
+            var operation = await client.Post202ListAsync(WaitUntil.Completed, new RequestContext());
 
             BinaryData responseData = operation.Value;
             JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
@@ -564,7 +564,7 @@ namespace lro_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new LROsClient(credential);
 
-            var operation = await client.Post202ListAsync(WaitUntil.Completed);
+            var operation = await client.Post202ListAsync(WaitUntil.Completed, new RequestContext());
 
             BinaryData responseData = operation.Value;
             JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
@@ -2068,7 +2068,7 @@ namespace lro_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new LROsClient(credential);
 
-            var operation = client.DeleteProvisioning202Accepted200Succeeded(WaitUntil.Completed);
+            var operation = client.DeleteProvisioning202Accepted200Succeeded(WaitUntil.Completed, new RequestContext());
 
             BinaryData responseData = operation.Value;
             JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
@@ -2082,7 +2082,7 @@ namespace lro_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new LROsClient(credential);
 
-            var operation = client.DeleteProvisioning202Accepted200Succeeded(WaitUntil.Completed);
+            var operation = client.DeleteProvisioning202Accepted200Succeeded(WaitUntil.Completed, new RequestContext());
 
             BinaryData responseData = operation.Value;
             JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
@@ -2102,7 +2102,7 @@ namespace lro_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new LROsClient(credential);
 
-            var operation = await client.DeleteProvisioning202Accepted200SucceededAsync(WaitUntil.Completed);
+            var operation = await client.DeleteProvisioning202Accepted200SucceededAsync(WaitUntil.Completed, new RequestContext());
 
             BinaryData responseData = operation.Value;
             JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
@@ -2116,7 +2116,7 @@ namespace lro_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new LROsClient(credential);
 
-            var operation = await client.DeleteProvisioning202Accepted200SucceededAsync(WaitUntil.Completed);
+            var operation = await client.DeleteProvisioning202Accepted200SucceededAsync(WaitUntil.Completed, new RequestContext());
 
             BinaryData responseData = operation.Value;
             JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
@@ -2136,7 +2136,7 @@ namespace lro_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new LROsClient(credential);
 
-            var operation = client.DeleteProvisioning202DeletingFailed200(WaitUntil.Completed);
+            var operation = client.DeleteProvisioning202DeletingFailed200(WaitUntil.Completed, new RequestContext());
 
             BinaryData responseData = operation.Value;
             JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
@@ -2150,7 +2150,7 @@ namespace lro_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new LROsClient(credential);
 
-            var operation = client.DeleteProvisioning202DeletingFailed200(WaitUntil.Completed);
+            var operation = client.DeleteProvisioning202DeletingFailed200(WaitUntil.Completed, new RequestContext());
 
             BinaryData responseData = operation.Value;
             JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
@@ -2170,7 +2170,7 @@ namespace lro_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new LROsClient(credential);
 
-            var operation = await client.DeleteProvisioning202DeletingFailed200Async(WaitUntil.Completed);
+            var operation = await client.DeleteProvisioning202DeletingFailed200Async(WaitUntil.Completed, new RequestContext());
 
             BinaryData responseData = operation.Value;
             JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
@@ -2184,7 +2184,7 @@ namespace lro_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new LROsClient(credential);
 
-            var operation = await client.DeleteProvisioning202DeletingFailed200Async(WaitUntil.Completed);
+            var operation = await client.DeleteProvisioning202DeletingFailed200Async(WaitUntil.Completed, new RequestContext());
 
             BinaryData responseData = operation.Value;
             JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
@@ -2204,7 +2204,7 @@ namespace lro_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new LROsClient(credential);
 
-            var operation = client.DeleteProvisioning202Deletingcanceled200(WaitUntil.Completed);
+            var operation = client.DeleteProvisioning202Deletingcanceled200(WaitUntil.Completed, new RequestContext());
 
             BinaryData responseData = operation.Value;
             JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
@@ -2218,7 +2218,7 @@ namespace lro_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new LROsClient(credential);
 
-            var operation = client.DeleteProvisioning202Deletingcanceled200(WaitUntil.Completed);
+            var operation = client.DeleteProvisioning202Deletingcanceled200(WaitUntil.Completed, new RequestContext());
 
             BinaryData responseData = operation.Value;
             JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
@@ -2238,7 +2238,7 @@ namespace lro_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new LROsClient(credential);
 
-            var operation = await client.DeleteProvisioning202Deletingcanceled200Async(WaitUntil.Completed);
+            var operation = await client.DeleteProvisioning202Deletingcanceled200Async(WaitUntil.Completed, new RequestContext());
 
             BinaryData responseData = operation.Value;
             JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
@@ -2252,7 +2252,7 @@ namespace lro_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new LROsClient(credential);
 
-            var operation = await client.DeleteProvisioning202Deletingcanceled200Async(WaitUntil.Completed);
+            var operation = await client.DeleteProvisioning202Deletingcanceled200Async(WaitUntil.Completed, new RequestContext());
 
             BinaryData responseData = operation.Value;
             JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
@@ -2320,7 +2320,7 @@ namespace lro_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new LROsClient(credential);
 
-            var operation = client.Delete202Retry200(WaitUntil.Completed);
+            var operation = client.Delete202Retry200(WaitUntil.Completed, new RequestContext());
 
             BinaryData responseData = operation.Value;
             JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
@@ -2334,7 +2334,7 @@ namespace lro_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new LROsClient(credential);
 
-            var operation = client.Delete202Retry200(WaitUntil.Completed);
+            var operation = client.Delete202Retry200(WaitUntil.Completed, new RequestContext());
 
             BinaryData responseData = operation.Value;
             JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
@@ -2354,7 +2354,7 @@ namespace lro_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new LROsClient(credential);
 
-            var operation = await client.Delete202Retry200Async(WaitUntil.Completed);
+            var operation = await client.Delete202Retry200Async(WaitUntil.Completed, new RequestContext());
 
             BinaryData responseData = operation.Value;
             JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
@@ -2368,7 +2368,7 @@ namespace lro_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new LROsClient(credential);
 
-            var operation = await client.Delete202Retry200Async(WaitUntil.Completed);
+            var operation = await client.Delete202Retry200Async(WaitUntil.Completed, new RequestContext());
 
             BinaryData responseData = operation.Value;
             JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
@@ -2388,7 +2388,7 @@ namespace lro_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new LROsClient(credential);
 
-            var operation = client.Delete202NoRetry204(WaitUntil.Completed);
+            var operation = client.Delete202NoRetry204(WaitUntil.Completed, new RequestContext());
 
             BinaryData responseData = operation.Value;
             JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
@@ -2402,7 +2402,7 @@ namespace lro_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new LROsClient(credential);
 
-            var operation = client.Delete202NoRetry204(WaitUntil.Completed);
+            var operation = client.Delete202NoRetry204(WaitUntil.Completed, new RequestContext());
 
             BinaryData responseData = operation.Value;
             JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
@@ -2422,7 +2422,7 @@ namespace lro_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new LROsClient(credential);
 
-            var operation = await client.Delete202NoRetry204Async(WaitUntil.Completed);
+            var operation = await client.Delete202NoRetry204Async(WaitUntil.Completed, new RequestContext());
 
             BinaryData responseData = operation.Value;
             JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
@@ -2436,7 +2436,7 @@ namespace lro_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new LROsClient(credential);
 
-            var operation = await client.Delete202NoRetry204Async(WaitUntil.Completed);
+            var operation = await client.Delete202NoRetry204Async(WaitUntil.Completed, new RequestContext());
 
             BinaryData responseData = operation.Value;
             JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
@@ -2744,7 +2744,7 @@ namespace lro_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new LROsClient(credential);
 
-            var operation = client.Post200WithPayload(WaitUntil.Completed);
+            var operation = client.Post200WithPayload(WaitUntil.Completed, new RequestContext());
 
             BinaryData responseData = operation.Value;
             JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
@@ -2758,7 +2758,7 @@ namespace lro_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new LROsClient(credential);
 
-            var operation = client.Post200WithPayload(WaitUntil.Completed);
+            var operation = client.Post200WithPayload(WaitUntil.Completed, new RequestContext());
 
             BinaryData responseData = operation.Value;
             JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
@@ -2773,7 +2773,7 @@ namespace lro_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new LROsClient(credential);
 
-            var operation = await client.Post200WithPayloadAsync(WaitUntil.Completed);
+            var operation = await client.Post200WithPayloadAsync(WaitUntil.Completed, new RequestContext());
 
             BinaryData responseData = operation.Value;
             JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
@@ -2787,7 +2787,7 @@ namespace lro_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new LROsClient(credential);
 
-            var operation = await client.Post200WithPayloadAsync(WaitUntil.Completed);
+            var operation = await client.Post200WithPayloadAsync(WaitUntil.Completed, new RequestContext());
 
             BinaryData responseData = operation.Value;
             JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
@@ -2978,7 +2978,7 @@ namespace lro_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new LROsClient(credential);
 
-            var operation = client.PostDoubleHeadersFinalLocationGet(WaitUntil.Completed);
+            var operation = client.PostDoubleHeadersFinalLocationGet(WaitUntil.Completed, new RequestContext());
 
             BinaryData responseData = operation.Value;
             JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
@@ -2992,7 +2992,7 @@ namespace lro_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new LROsClient(credential);
 
-            var operation = client.PostDoubleHeadersFinalLocationGet(WaitUntil.Completed);
+            var operation = client.PostDoubleHeadersFinalLocationGet(WaitUntil.Completed, new RequestContext());
 
             BinaryData responseData = operation.Value;
             JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
@@ -3012,7 +3012,7 @@ namespace lro_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new LROsClient(credential);
 
-            var operation = await client.PostDoubleHeadersFinalLocationGetAsync(WaitUntil.Completed);
+            var operation = await client.PostDoubleHeadersFinalLocationGetAsync(WaitUntil.Completed, new RequestContext());
 
             BinaryData responseData = operation.Value;
             JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
@@ -3026,7 +3026,7 @@ namespace lro_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new LROsClient(credential);
 
-            var operation = await client.PostDoubleHeadersFinalLocationGetAsync(WaitUntil.Completed);
+            var operation = await client.PostDoubleHeadersFinalLocationGetAsync(WaitUntil.Completed, new RequestContext());
 
             BinaryData responseData = operation.Value;
             JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
@@ -3046,7 +3046,7 @@ namespace lro_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new LROsClient(credential);
 
-            var operation = client.PostDoubleHeadersFinalAzureHeaderGet(WaitUntil.Completed);
+            var operation = client.PostDoubleHeadersFinalAzureHeaderGet(WaitUntil.Completed, new RequestContext());
 
             BinaryData responseData = operation.Value;
             JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
@@ -3060,7 +3060,7 @@ namespace lro_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new LROsClient(credential);
 
-            var operation = client.PostDoubleHeadersFinalAzureHeaderGet(WaitUntil.Completed);
+            var operation = client.PostDoubleHeadersFinalAzureHeaderGet(WaitUntil.Completed, new RequestContext());
 
             BinaryData responseData = operation.Value;
             JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
@@ -3080,7 +3080,7 @@ namespace lro_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new LROsClient(credential);
 
-            var operation = await client.PostDoubleHeadersFinalAzureHeaderGetAsync(WaitUntil.Completed);
+            var operation = await client.PostDoubleHeadersFinalAzureHeaderGetAsync(WaitUntil.Completed, new RequestContext());
 
             BinaryData responseData = operation.Value;
             JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
@@ -3094,7 +3094,7 @@ namespace lro_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new LROsClient(credential);
 
-            var operation = await client.PostDoubleHeadersFinalAzureHeaderGetAsync(WaitUntil.Completed);
+            var operation = await client.PostDoubleHeadersFinalAzureHeaderGetAsync(WaitUntil.Completed, new RequestContext());
 
             BinaryData responseData = operation.Value;
             JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
@@ -3114,7 +3114,7 @@ namespace lro_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new LROsClient(credential);
 
-            var operation = client.PostDoubleHeadersFinalAzureHeaderGetDefault(WaitUntil.Completed);
+            var operation = client.PostDoubleHeadersFinalAzureHeaderGetDefault(WaitUntil.Completed, new RequestContext());
 
             BinaryData responseData = operation.Value;
             JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
@@ -3128,7 +3128,7 @@ namespace lro_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new LROsClient(credential);
 
-            var operation = client.PostDoubleHeadersFinalAzureHeaderGetDefault(WaitUntil.Completed);
+            var operation = client.PostDoubleHeadersFinalAzureHeaderGetDefault(WaitUntil.Completed, new RequestContext());
 
             BinaryData responseData = operation.Value;
             JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
@@ -3148,7 +3148,7 @@ namespace lro_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new LROsClient(credential);
 
-            var operation = await client.PostDoubleHeadersFinalAzureHeaderGetDefaultAsync(WaitUntil.Completed);
+            var operation = await client.PostDoubleHeadersFinalAzureHeaderGetDefaultAsync(WaitUntil.Completed, new RequestContext());
 
             BinaryData responseData = operation.Value;
             JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
@@ -3162,7 +3162,7 @@ namespace lro_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new LROsClient(credential);
 
-            var operation = await client.PostDoubleHeadersFinalAzureHeaderGetDefaultAsync(WaitUntil.Completed);
+            var operation = await client.PostDoubleHeadersFinalAzureHeaderGetDefaultAsync(WaitUntil.Completed, new RequestContext());
 
             BinaryData responseData = operation.Value;
             JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;

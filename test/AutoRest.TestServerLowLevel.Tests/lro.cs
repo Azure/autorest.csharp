@@ -23,7 +23,7 @@ namespace AutoRest.TestServer.Tests
             var options = new AutoRestLongRunningOperationTestServiceClientOptions();
             options.AddPolicy(new CustomClientRequestIdPolicy(), HttpPipelinePosition.PerCall);
             var value = RequestContent.Create(new object());
-            var operation = await new LROsCustomHeaderClient(Key, endpoint, options).PostAsyncRetrySucceededAsync(waitUntil, value);
+            var operation = await new LROsCustomHeaderClient(Key, endpoint, options).PostAsyncRetrySucceededAsync(waitUntil, value, new());
             Assert.Throws<InvalidCastException>(() => { Operation<BinaryData> castedOperation = (Operation<BinaryData>)operation; });
             return await WaitForCompletionAsync(operation, waitUntil).ConfigureAwait(false);
         });
@@ -35,7 +35,7 @@ namespace AutoRest.TestServer.Tests
             var options = new AutoRestLongRunningOperationTestServiceClientOptions();
             options.AddPolicy(new CustomClientRequestIdPolicy(), HttpPipelinePosition.PerCall);
             var value = RequestContent.Create(new object());
-            var operation = new LROsCustomHeaderClient(Key, endpoint, options).PostAsyncRetrySucceeded(waitUntil, value);
+            var operation = new LROsCustomHeaderClient(Key, endpoint, options).PostAsyncRetrySucceeded(waitUntil, value, new());
             Assert.Throws<InvalidCastException>(() => { Operation<BinaryData> castedOperation = (Operation<BinaryData>)operation; });
             return WaitForCompletion(operation, waitUntil);
         });
@@ -47,7 +47,7 @@ namespace AutoRest.TestServer.Tests
             var options = new AutoRestLongRunningOperationTestServiceClientOptions();
             options.AddPolicy(new CustomClientRequestIdPolicy(), HttpPipelinePosition.PerCall);
             var value = RequestContent.Create(new object());
-            var operation = await new LROsCustomHeaderClient(Key, endpoint, options).Post202Retry200Async(waitUntil, value);
+            var operation = await new LROsCustomHeaderClient(Key, endpoint, options).Post202Retry200Async(waitUntil, value, new());
             Assert.Throws<InvalidCastException>(() => { Operation<BinaryData> castedOperation = (Operation<BinaryData>)operation; });
             return await WaitForCompletionAsync(operation, waitUntil).ConfigureAwait(false);
         });
@@ -59,7 +59,7 @@ namespace AutoRest.TestServer.Tests
             var options = new AutoRestLongRunningOperationTestServiceClientOptions();
             options.AddPolicy(new CustomClientRequestIdPolicy(), HttpPipelinePosition.PerCall);
             var value = RequestContent.Create(new object());
-            var operation = new LROsCustomHeaderClient(Key, endpoint, options).Post202Retry200(waitUntil, value);
+            var operation = new LROsCustomHeaderClient(Key, endpoint, options).Post202Retry200(waitUntil, value, new());
             Assert.Throws<InvalidCastException>(() => { Operation<BinaryData> castedOperation = (Operation<BinaryData>)operation; });
             return WaitForCompletion(operation, waitUntil);
         });
@@ -71,7 +71,7 @@ namespace AutoRest.TestServer.Tests
             var options = new AutoRestLongRunningOperationTestServiceClientOptions();
             options.AddPolicy(new CustomClientRequestIdPolicy(), HttpPipelinePosition.PerCall);
             var value = RequestContent.Create(new object());
-            var operation = await new LROsCustomHeaderClient(Key, endpoint, options).PutAsyncRetrySucceededAsync(waitUntil, value);
+            var operation = await new LROsCustomHeaderClient(Key, endpoint, options).PutAsyncRetrySucceededAsync(waitUntil, value, new());
             var result = await WaitForCompletionWithValueAsync(operation, waitUntil).ConfigureAwait(false);
             Assert.AreEqual("100", GetResultValue(result.Value, "Id"));
             Assert.AreEqual("foo", GetResultValue(result.Value, "Name"));
@@ -85,7 +85,7 @@ namespace AutoRest.TestServer.Tests
             var options = new AutoRestLongRunningOperationTestServiceClientOptions();
             options.AddPolicy(new CustomClientRequestIdPolicy(), HttpPipelinePosition.PerCall);
             var value = RequestContent.Create(new object());
-            var operation = new LROsCustomHeaderClient(Key, endpoint, options).PutAsyncRetrySucceeded(waitUntil, value);
+            var operation = new LROsCustomHeaderClient(Key, endpoint, options).PutAsyncRetrySucceeded(waitUntil, value, new());
             var result = WaitForCompletionWithValue(operation, waitUntil);
             Assert.AreEqual("100", GetResultValue(result.Value, "Id"));
             Assert.AreEqual("foo", GetResultValue(result.Value, "Name"));
@@ -99,7 +99,7 @@ namespace AutoRest.TestServer.Tests
             var options = new AutoRestLongRunningOperationTestServiceClientOptions();
             options.AddPolicy(new CustomClientRequestIdPolicy(), HttpPipelinePosition.PerCall);
             var value = RequestContent.Create(new object());
-            var operation = await new LROsCustomHeaderClient(Key, endpoint, options).Put201CreatingSucceeded200Async(waitUntil, value);
+            var operation = await new LROsCustomHeaderClient(Key, endpoint, options).Put201CreatingSucceeded200Async(waitUntil, value, new());
             var result = await WaitForCompletionWithValueAsync(operation, waitUntil).ConfigureAwait(false);
             Assert.AreEqual("100", GetResultValue(result.Value, "Id"));
             Assert.AreEqual("foo", GetResultValue(result.Value, "Name"));
@@ -114,7 +114,7 @@ namespace AutoRest.TestServer.Tests
             var options = new AutoRestLongRunningOperationTestServiceClientOptions();
             options.AddPolicy(new CustomClientRequestIdPolicy(), HttpPipelinePosition.PerCall);
             var value = RequestContent.Create(new object());
-            var operation = await new LROsCustomHeaderClient(Key, endpoint, options).Put201CreatingSucceeded200Async(waitUntil, value);
+            var operation = await new LROsCustomHeaderClient(Key, endpoint, options).Put201CreatingSucceeded200Async(waitUntil, value, new());
             BinaryData data = await WaitForCompletionWithValueAsync(operation, waitUntil).ConfigureAwait(false);
             JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
             Assert.AreEqual("100", result.GetProperty("id").GetString());
@@ -129,7 +129,7 @@ namespace AutoRest.TestServer.Tests
             var options = new AutoRestLongRunningOperationTestServiceClientOptions();
             options.AddPolicy(new CustomClientRequestIdPolicy(), HttpPipelinePosition.PerCall);
             var value = RequestContent.Create(new object());
-            var operation = new LROsCustomHeaderClient(Key, endpoint, options).Put201CreatingSucceeded200(waitUntil, value);
+            var operation = new LROsCustomHeaderClient(Key, endpoint, options).Put201CreatingSucceeded200(waitUntil, value, new());
             var result = WaitForCompletionWithValue(operation, waitUntil);
             Assert.AreEqual("100", GetResultValue(result.Value, "Id"));
             Assert.AreEqual("foo", GetResultValue(result.Value, "Name"));
@@ -144,7 +144,7 @@ namespace AutoRest.TestServer.Tests
             var options = new AutoRestLongRunningOperationTestServiceClientOptions();
             options.AddPolicy(new CustomClientRequestIdPolicy(), HttpPipelinePosition.PerCall);
             var value = RequestContent.Create(new object());
-            var operation = new LROsCustomHeaderClient(Key, endpoint, options).Put201CreatingSucceeded200(waitUntil, value);
+            var operation = new LROsCustomHeaderClient(Key, endpoint, options).Put201CreatingSucceeded200(waitUntil, value, new());
             BinaryData data = operation.WaitForCompletion();
             JsonElement result = JsonDocument.Parse(data.ToStream()).RootElement;
             Assert.AreEqual("100", result.GetProperty("id").GetString());
@@ -155,7 +155,7 @@ namespace AutoRest.TestServer.Tests
         [Test]
         public Task LRODelete200([Values(WaitUntil.Started, WaitUntil.Completed)] WaitUntil waitUntil) => Test(async endpoint =>
         {
-            var operation = await new LROsClient(Key, endpoint, null).Delete202Retry200Async(waitUntil);
+            var operation = await new LROsClient(Key, endpoint, null).Delete202Retry200Async(waitUntil, new());
             // Empty response body
             Assert.AreEqual(0, (await WaitForCompletionWithValueAsync(operation, waitUntil).ConfigureAwait(false)).Value.ToMemory().Length);
         });
@@ -163,7 +163,7 @@ namespace AutoRest.TestServer.Tests
         [Test]
         public Task LRODelete200_Sync([Values(WaitUntil.Started, WaitUntil.Completed)] WaitUntil waitUntil) => Test(endpoint =>
         {
-            var operation = new LROsClient(Key, endpoint, null).Delete202Retry200(waitUntil);
+            var operation = new LROsClient(Key, endpoint, null).Delete202Retry200(waitUntil, new());
             // Empty response body
             Assert.AreEqual(0, WaitForCompletion(operation, waitUntil).Content.ToMemory().Length);
         });
@@ -171,7 +171,7 @@ namespace AutoRest.TestServer.Tests
         [Test]
         public Task LRODelete204([Values(WaitUntil.Started, WaitUntil.Completed)] WaitUntil waitUntil) => Test(async endpoint =>
         {
-            var operation = await new LROsClient(Key, endpoint, null).Delete202NoRetry204Async(waitUntil);
+            var operation = await new LROsClient(Key, endpoint, null).Delete202NoRetry204Async(waitUntil, new());
             // Empty response body
             Assert.AreEqual(0, (await WaitForCompletionWithValueAsync(operation, waitUntil).ConfigureAwait(false)).Value.ToMemory().Length);
         });
@@ -179,7 +179,7 @@ namespace AutoRest.TestServer.Tests
         [Test]
         public Task LRODelete204_Sync([Values(WaitUntil.Started, WaitUntil.Completed)] WaitUntil waitUntil) => Test(endpoint =>
         {
-            var operation = new LROsClient(Key, endpoint, null).Delete202NoRetry204(waitUntil);
+            var operation = new LROsClient(Key, endpoint, null).Delete202NoRetry204(waitUntil, new());
             // Empty response body
             Assert.AreEqual(0, WaitForCompletion(operation, waitUntil).Content.ToMemory().Length);
         });
@@ -327,7 +327,7 @@ namespace AutoRest.TestServer.Tests
         [Test]
         public Task LRODeleteProvisioningCanceled([Values(WaitUntil.Started, WaitUntil.Completed)] WaitUntil waitUntil) => Test(async endpoint =>
         {
-            var operation = await new LROsClient(Key, endpoint, null).DeleteProvisioning202Deletingcanceled200Async(waitUntil);
+            var operation = await new LROsClient(Key, endpoint, null).DeleteProvisioning202Deletingcanceled200Async(waitUntil, new());
             var result = await WaitForCompletionWithValueAsync(operation, waitUntil).ConfigureAwait(false);
             Assert.AreEqual("100", GetResultValue(result.Value, "Id"));
             Assert.AreEqual("foo", GetResultValue(result.Value, "Name"));
@@ -337,7 +337,7 @@ namespace AutoRest.TestServer.Tests
         [Test]
         public Task LRODeleteProvisioningCanceled_Sync([Values(WaitUntil.Started, WaitUntil.Completed)] WaitUntil waitUntil) => Test(endpoint =>
         {
-            var operation = new LROsClient(Key, endpoint, null).DeleteProvisioning202Deletingcanceled200(waitUntil);
+            var operation = new LROsClient(Key, endpoint, null).DeleteProvisioning202Deletingcanceled200(waitUntil, new());
             var result = WaitForCompletionWithValue(operation, waitUntil);
             Assert.AreEqual("100", GetResultValue(result.Value, "Id"));
             Assert.AreEqual("foo", GetResultValue(result.Value, "Name"));
@@ -347,7 +347,7 @@ namespace AutoRest.TestServer.Tests
         [Test]
         public Task LRODeleteProvisioningFailed([Values(WaitUntil.Started, WaitUntil.Completed)] WaitUntil waitUntil) => Test(async endpoint =>
         {
-            var operation = await new LROsClient(Key, endpoint, null).DeleteProvisioning202DeletingFailed200Async(waitUntil);
+            var operation = await new LROsClient(Key, endpoint, null).DeleteProvisioning202DeletingFailed200Async(waitUntil, new());
             var result = await WaitForCompletionWithValueAsync(operation, waitUntil).ConfigureAwait(false);
             Assert.AreEqual("100", GetResultValue(result.Value, "Id"));
             Assert.AreEqual("foo", GetResultValue(result.Value, "Name"));
@@ -357,7 +357,7 @@ namespace AutoRest.TestServer.Tests
         [Test]
         public Task LRODeleteProvisioningFailed_Sync([Values(WaitUntil.Started, WaitUntil.Completed)] WaitUntil waitUntil) => Test(endpoint =>
         {
-            var operation = new LROsClient(Key, endpoint, null).DeleteProvisioning202DeletingFailed200(waitUntil);
+            var operation = new LROsClient(Key, endpoint, null).DeleteProvisioning202DeletingFailed200(waitUntil, new());
             var result = WaitForCompletionWithValue(operation, waitUntil);
             Assert.AreEqual("100", GetResultValue(result.Value, "Id"));
             Assert.AreEqual("foo", GetResultValue(result.Value, "Name"));
@@ -367,7 +367,7 @@ namespace AutoRest.TestServer.Tests
         [Test]
         public Task LRODeleteProvisioningSucceededWithBody([Values(WaitUntil.Started, WaitUntil.Completed)] WaitUntil waitUntil) => Test(async endpoint =>
         {
-            var operation = await new LROsClient(Key, endpoint, null).DeleteProvisioning202Accepted200SucceededAsync(waitUntil);
+            var operation = await new LROsClient(Key, endpoint, null).DeleteProvisioning202Accepted200SucceededAsync(waitUntil, new());
             var result = await WaitForCompletionWithValueAsync(operation, waitUntil).ConfigureAwait(false);
             Assert.AreEqual("100", GetResultValue(result.Value, "Id"));
             Assert.AreEqual("foo", GetResultValue(result.Value, "Name"));
@@ -377,7 +377,7 @@ namespace AutoRest.TestServer.Tests
         [Test]
         public Task LRODeleteProvisioningSucceededWithBody_Sync([Values(WaitUntil.Started, WaitUntil.Completed)] WaitUntil waitUntil) => Test(endpoint =>
         {
-            var operation = new LROsClient(Key, endpoint, null).DeleteProvisioning202Accepted200Succeeded(waitUntil);
+            var operation = new LROsClient(Key, endpoint, null).DeleteProvisioning202Accepted200Succeeded(waitUntil, new());
             var result = WaitForCompletionWithValue(operation, waitUntil);
             Assert.AreEqual("100", GetResultValue(result.Value, "Id"));
             Assert.AreEqual("foo", GetResultValue(result.Value, "Name"));
@@ -484,7 +484,7 @@ namespace AutoRest.TestServer.Tests
             var value = RequestContent.Create(new object());
             Assert.ThrowsAsync<RequestFailedException>(async () =>
             {
-                var operation = await new LrosaDsClient(Key, endpoint, null).Post202RetryInvalidHeaderAsync(waitUntil, value);
+                var operation = await new LrosaDsClient(Key, endpoint, null).Post202RetryInvalidHeaderAsync(waitUntil, value, new());
                 await WaitForCompletionAsync(operation, waitUntil).ConfigureAwait(false);
             });
         });
@@ -495,7 +495,7 @@ namespace AutoRest.TestServer.Tests
             var value = RequestContent.Create(new object());
             Assert.Throws<RequestFailedException>(() =>
             {
-                var operation = new LrosaDsClient(Key, endpoint, null).Post202RetryInvalidHeader(waitUntil, value);
+                var operation = new LrosaDsClient(Key, endpoint, null).Post202RetryInvalidHeader(waitUntil, value, new());
                 WaitForCompletion(operation, waitUntil);
             });
         });
@@ -506,7 +506,7 @@ namespace AutoRest.TestServer.Tests
             var value = RequestContent.Create(new object());
             Assert.ThrowsAsync<RequestFailedException>(async () =>
             {
-                var operation = await new LrosaDsClient(Key, endpoint, null).PostAsyncRelativeRetryInvalidHeaderAsync(waitUntil, value);
+                var operation = await new LrosaDsClient(Key, endpoint, null).PostAsyncRelativeRetryInvalidHeaderAsync(waitUntil, value, new());
                 await WaitForCompletionAsync(operation, waitUntil).ConfigureAwait(false);
             });
         });
@@ -517,7 +517,7 @@ namespace AutoRest.TestServer.Tests
             var value = RequestContent.Create(new object());
             Assert.Throws<RequestFailedException>(() =>
             {
-                var operation = new LrosaDsClient(Key, endpoint, null).PostAsyncRelativeRetryInvalidHeader(waitUntil, value);
+                var operation = new LrosaDsClient(Key, endpoint, null).PostAsyncRelativeRetryInvalidHeader(waitUntil, value, new());
                 WaitForCompletion(operation, waitUntil);
             });
         });
@@ -528,7 +528,7 @@ namespace AutoRest.TestServer.Tests
             var value = RequestContent.Create(new object());
             Assert.CatchAsync<JsonException>(async () =>
             {
-                var operation = await new LrosaDsClient(Key, endpoint, null).PostAsyncRelativeRetryInvalidJsonPollingAsync(waitUntil, value);
+                var operation = await new LrosaDsClient(Key, endpoint, null).PostAsyncRelativeRetryInvalidJsonPollingAsync(waitUntil, value, new());
                 await WaitForCompletionAsync(operation, waitUntil).ConfigureAwait(false);
             });
         });
@@ -539,7 +539,7 @@ namespace AutoRest.TestServer.Tests
             var value = RequestContent.Create(new object());
             Assert.Catch<JsonException>(() =>
             {
-                var operation = new LrosaDsClient(Key, endpoint, null).PostAsyncRelativeRetryInvalidJsonPolling(waitUntil, value);
+                var operation = new LrosaDsClient(Key, endpoint, null).PostAsyncRelativeRetryInvalidJsonPolling(waitUntil, value, new());
                 WaitForCompletion(operation, waitUntil);
             });
         });
@@ -550,7 +550,7 @@ namespace AutoRest.TestServer.Tests
             var value = RequestContent.Create(new object());
             Assert.ThrowsAsync<RequestFailedException>(async () =>
             {
-                var operation = await new LrosaDsClient(Key, endpoint, null).PostAsyncRelativeRetryNoPayloadAsync(waitUntil, value);
+                var operation = await new LrosaDsClient(Key, endpoint, null).PostAsyncRelativeRetryNoPayloadAsync(waitUntil, value, new());
                 await WaitForCompletionAsync(operation, waitUntil).ConfigureAwait(false);
             });
         });
@@ -561,7 +561,7 @@ namespace AutoRest.TestServer.Tests
             var value = RequestContent.Create(new object());
             Assert.Throws<RequestFailedException>(() =>
             {
-                var operation = new LrosaDsClient(Key, endpoint, null).PostAsyncRelativeRetryNoPayload(waitUntil, value);
+                var operation = new LrosaDsClient(Key, endpoint, null).PostAsyncRelativeRetryNoPayload(waitUntil, value, new());
                 WaitForCompletion(operation, waitUntil);
             });
         });
@@ -572,7 +572,7 @@ namespace AutoRest.TestServer.Tests
             var value = RequestContent.Create(new object());
             Assert.ThrowsAsync<RequestFailedException>(async () =>
             {
-                var operation = await new LrosaDsClient(Key, endpoint, null).Post202NoLocationAsync(waitUntil, value);
+                var operation = await new LrosaDsClient(Key, endpoint, null).Post202NoLocationAsync(waitUntil, value, new());
                 await WaitForCompletionAsync(operation, waitUntil).ConfigureAwait(false);
             });
         });
@@ -583,7 +583,7 @@ namespace AutoRest.TestServer.Tests
             var value = RequestContent.Create(new object());
             Assert.Throws<RequestFailedException>(() =>
             {
-                var operation = new LrosaDsClient(Key, endpoint, null).Post202NoLocation(waitUntil, value);
+                var operation = new LrosaDsClient(Key, endpoint, null).Post202NoLocation(waitUntil, value, new());
                 WaitForCompletion(operation, waitUntil);
             });
         });
@@ -592,21 +592,21 @@ namespace AutoRest.TestServer.Tests
         public Task LROErrorPut200InvalidJson([Values(WaitUntil.Started, WaitUntil.Completed)] WaitUntil waitUntil) => Test(endpoint =>
         {
             var value = RequestContent.Create(new object());
-            Assert.CatchAsync<JsonException>(async () => await WaitForCompletionWithValueAsync(await new LrosaDsClient(Key, endpoint, null).Put200InvalidJsonAsync(waitUntil, value), waitUntil));
+            Assert.CatchAsync<JsonException>(async () => await WaitForCompletionWithValueAsync(await new LrosaDsClient(Key, endpoint, null).Put200InvalidJsonAsync(waitUntil, value, new()), waitUntil));
         });
 
         [Test]
         public Task LROErrorPut200InvalidJson_Sync([Values(WaitUntil.Started, WaitUntil.Completed)] WaitUntil waitUntil) => Test(endpoint =>
         {
             var value = RequestContent.Create(new object());
-            Assert.Catch<JsonException>(() => WaitForCompletion(new LrosaDsClient(Key, endpoint, null).Put200InvalidJson(waitUntil, value), waitUntil));
+            Assert.Catch<JsonException>(() => WaitForCompletion(new LrosaDsClient(Key, endpoint, null).Put200InvalidJson(waitUntil, value, new()), waitUntil));
         });
 
         [Test]
         public Task LROErrorPut201NoProvisioningStatePayload([Values(WaitUntil.Started, WaitUntil.Completed)] WaitUntil waitUntil) => Test(async endpoint =>
         {
             var value = RequestContent.Create(new object());
-            var operation = await new LrosaDsClient(Key, endpoint, null).PutError201NoProvisioningStatePayloadAsync(waitUntil, value);
+            var operation = await new LrosaDsClient(Key, endpoint, null).PutError201NoProvisioningStatePayloadAsync(waitUntil, value, new());
             // Empty response body
             Assert.AreEqual(0, (await WaitForCompletionWithValueAsync(operation, waitUntil).ConfigureAwait(false)).Value.ToMemory().Length);
         });
@@ -615,7 +615,7 @@ namespace AutoRest.TestServer.Tests
         public Task LROErrorPut201NoProvisioningStatePayload_Sync([Values(WaitUntil.Started, WaitUntil.Completed)] WaitUntil waitUntil) => Test(endpoint =>
         {
             var value = RequestContent.Create(new object());
-            var operation = new LrosaDsClient(Key, endpoint, null).PutError201NoProvisioningStatePayload(waitUntil, value);
+            var operation = new LrosaDsClient(Key, endpoint, null).PutError201NoProvisioningStatePayload(waitUntil, value, new());
             // Empty response body
             Assert.AreEqual(0, WaitForCompletion(operation, waitUntil).Content.ToMemory().Length);
         });
@@ -627,7 +627,7 @@ namespace AutoRest.TestServer.Tests
             var client = new LrosaDsClient(Key, endpoint, null);
             Assert.ThrowsAsync<RequestFailedException>(async () =>
             {
-                var operation = await client.PutAsyncRelativeRetryInvalidHeaderAsync(waitUntil, value);
+                var operation = await client.PutAsyncRelativeRetryInvalidHeaderAsync(waitUntil, value, new());
                 await WaitForCompletionWithValueAsync(operation, waitUntil).ConfigureAwait(false);
             });
         });
@@ -639,7 +639,7 @@ namespace AutoRest.TestServer.Tests
             var client = new LrosaDsClient(Key, endpoint, null);
             Assert.Throws<RequestFailedException>(() =>
             {
-                var operation = client.PutAsyncRelativeRetryInvalidHeader(waitUntil, value);
+                var operation = client.PutAsyncRelativeRetryInvalidHeader(waitUntil, value, new());
                 WaitForCompletion(operation, waitUntil);
             });
         });
@@ -651,7 +651,7 @@ namespace AutoRest.TestServer.Tests
             var client = new LrosaDsClient(Key, endpoint, null);
             Assert.CatchAsync<JsonException>(async () =>
             {
-                var operation = await client.PutAsyncRelativeRetryInvalidJsonPollingAsync(waitUntil, value);
+                var operation = await client.PutAsyncRelativeRetryInvalidJsonPollingAsync(waitUntil, value, new());
                 await WaitForCompletionWithValueAsync(operation, waitUntil).ConfigureAwait(false);
             });
         });
@@ -663,7 +663,7 @@ namespace AutoRest.TestServer.Tests
             var client = new LrosaDsClient(Key, endpoint, null);
             Assert.Catch<JsonException>(() =>
             {
-                var operation = client.PutAsyncRelativeRetryInvalidJsonPolling(waitUntil, value);
+                var operation = client.PutAsyncRelativeRetryInvalidJsonPolling(waitUntil, value, new());
                 WaitForCompletionWithValue(operation, waitUntil);
             });
         });
@@ -675,7 +675,7 @@ namespace AutoRest.TestServer.Tests
             var client = new LrosaDsClient(Key, endpoint, null);
             Assert.ThrowsAsync<RequestFailedException>(async () =>
             {
-                var operation = await client.PutAsyncRelativeRetryNoStatusAsync(waitUntil, value);
+                var operation = await client.PutAsyncRelativeRetryNoStatusAsync(waitUntil, value, new());
                 await WaitForCompletionWithValueAsync(operation, waitUntil).ConfigureAwait(false);
             });
         });
@@ -687,7 +687,7 @@ namespace AutoRest.TestServer.Tests
             var client = new LrosaDsClient(Key, endpoint, null);
             Assert.Throws<RequestFailedException>(() =>
             {
-                var operation = client.PutAsyncRelativeRetryNoStatus(waitUntil, value);
+                var operation = client.PutAsyncRelativeRetryNoStatus(waitUntil, value, new());
                 WaitForCompletion(operation, waitUntil);
             });
         });
@@ -699,7 +699,7 @@ namespace AutoRest.TestServer.Tests
             var client = new LrosaDsClient(Key, endpoint, null);
             Assert.ThrowsAsync<RequestFailedException>(async () =>
             {
-                var operation = await client.PutAsyncRelativeRetryNoStatusPayloadAsync(waitUntil, value);
+                var operation = await client.PutAsyncRelativeRetryNoStatusPayloadAsync(waitUntil, value, new());
                 await WaitForCompletionWithValueAsync(operation, waitUntil).ConfigureAwait(false);
             });
         });
@@ -711,7 +711,7 @@ namespace AutoRest.TestServer.Tests
             var client = new LrosaDsClient(Key, endpoint, null);
             Assert.Throws<RequestFailedException>(() =>
             {
-                var operation = client.PutAsyncRelativeRetryNoStatusPayload(waitUntil, value);
+                var operation = client.PutAsyncRelativeRetryNoStatusPayload(waitUntil, value, new());
                 WaitForCompletion(operation, waitUntil);
             });
         });
@@ -779,7 +779,7 @@ namespace AutoRest.TestServer.Tests
             var client = new LrosaDsClient(Key, endpoint, null);
             Assert.ThrowsAsync<RequestFailedException>(async () =>
             {
-                var operation = await client.Post202NonRetry400Async(waitUntil, value);
+                var operation = await client.Post202NonRetry400Async(waitUntil, value, new());
                 await WaitForCompletionAsync(operation, waitUntil).ConfigureAwait(false);
             });
         });
@@ -791,7 +791,7 @@ namespace AutoRest.TestServer.Tests
             var client = new LrosaDsClient(Key, endpoint, null);
             Assert.Throws<RequestFailedException>(() =>
             {
-                var operation = client.Post202NonRetry400(waitUntil, value);
+                var operation = client.Post202NonRetry400(waitUntil, value, new());
                 WaitForCompletion(operation, waitUntil);
             });
         });
@@ -800,14 +800,14 @@ namespace AutoRest.TestServer.Tests
         public Task LRONonRetryPost400([Values(WaitUntil.Started, WaitUntil.Completed)] WaitUntil waitUntil) => Test(endpoint =>
         {
             var value = RequestContent.Create(new object());
-            Assert.ThrowsAsync<RequestFailedException>(async () => await new LrosaDsClient(Key, endpoint, null).PostNonRetry400Async(waitUntil, value));
+            Assert.ThrowsAsync<RequestFailedException>(async () => await new LrosaDsClient(Key, endpoint, null).PostNonRetry400Async(waitUntil, value, new()));
         });
 
         [Test]
         public Task LRONonRetryPost400_Sync([Values(WaitUntil.Started, WaitUntil.Completed)] WaitUntil waitUntil) => Test(endpoint =>
         {
             var value = RequestContent.Create(new object());
-            Assert.Throws<RequestFailedException>(() => new LrosaDsClient(Key, endpoint, null).PostNonRetry400(waitUntil, value));
+            Assert.Throws<RequestFailedException>(() => new LrosaDsClient(Key, endpoint, null).PostNonRetry400(waitUntil, value, new()));
         });
 
         [Test]
@@ -817,7 +817,7 @@ namespace AutoRest.TestServer.Tests
             var client = new LrosaDsClient(Key, endpoint, null);
             Assert.ThrowsAsync<RequestFailedException>(async () =>
             {
-                var operation = await client.PostAsyncRelativeRetry400Async(waitUntil, value);
+                var operation = await client.PostAsyncRelativeRetry400Async(waitUntil, value, new());
                 await WaitForCompletionAsync(operation, waitUntil).ConfigureAwait(false);
             });
         });
@@ -829,7 +829,7 @@ namespace AutoRest.TestServer.Tests
             var client = new LrosaDsClient(Key, endpoint, null);
             Assert.Throws<RequestFailedException>(() =>
             {
-                var operation = client.PostAsyncRelativeRetry400(waitUntil, value);
+                var operation = client.PostAsyncRelativeRetry400(waitUntil, value, new());
                 WaitForCompletion(operation, waitUntil);
             });
         });
@@ -841,7 +841,7 @@ namespace AutoRest.TestServer.Tests
             var client = new LrosaDsClient(Key, endpoint, null);
             Assert.ThrowsAsync<RequestFailedException>(async () =>
             {
-                var operation = await client.PutNonRetry201Creating400Async(waitUntil, value);
+                var operation = await client.PutNonRetry201Creating400Async(waitUntil, value, new());
                 await WaitForCompletionWithValueAsync(operation, waitUntil).ConfigureAwait(false);
             });
         });
@@ -853,7 +853,7 @@ namespace AutoRest.TestServer.Tests
             var client = new LrosaDsClient(Key, endpoint, null);
             Assert.Throws<RequestFailedException>(() =>
             {
-                var operation = client.PutNonRetry201Creating400(waitUntil, value);
+                var operation = client.PutNonRetry201Creating400(waitUntil, value, new());
                 WaitForCompletion(operation, waitUntil);
             });
         });
@@ -865,7 +865,7 @@ namespace AutoRest.TestServer.Tests
             var client = new LrosaDsClient(Key, endpoint, null);
             Assert.ThrowsAsync<RequestFailedException>(async () =>
             {
-                var operation = await client.PutNonRetry201Creating400InvalidJsonAsync(waitUntil, value);
+                var operation = await client.PutNonRetry201Creating400InvalidJsonAsync(waitUntil, value, new());
                 await WaitForCompletionWithValueAsync(operation, waitUntil).ConfigureAwait(false);
             });
         });
@@ -877,7 +877,7 @@ namespace AutoRest.TestServer.Tests
             var client = new LrosaDsClient(Key, endpoint, null);
             Assert.Throws<RequestFailedException>(() =>
             {
-                var operation = client.PutNonRetry201Creating400InvalidJson(waitUntil, value);
+                var operation = client.PutNonRetry201Creating400InvalidJson(waitUntil, value, new());
                 WaitForCompletion(operation, waitUntil);
             });
         });
@@ -886,14 +886,14 @@ namespace AutoRest.TestServer.Tests
         public Task LRONonRetryPut400([Values(WaitUntil.Started, WaitUntil.Completed)] WaitUntil waitUntil) => Test(endpoint =>
         {
             var value = RequestContent.Create(new object());
-            Assert.ThrowsAsync<RequestFailedException>(async () => await new LrosaDsClient(Key, endpoint, null).PutNonRetry400Async(waitUntil, value));
+            Assert.ThrowsAsync<RequestFailedException>(async () => await new LrosaDsClient(Key, endpoint, null).PutNonRetry400Async(waitUntil, value, new()));
         });
 
         [Test]
         public Task LRONonRetryPut400_Sync([Values(WaitUntil.Started, WaitUntil.Completed)] WaitUntil waitUntil) => Test(endpoint =>
         {
             var value = RequestContent.Create(new object());
-            Assert.Throws<RequestFailedException>(() => new LrosaDsClient(Key, endpoint, null).PutNonRetry400(waitUntil, value));
+            Assert.Throws<RequestFailedException>(() => new LrosaDsClient(Key, endpoint, null).PutNonRetry400(waitUntil, value, new()));
         });
 
         [Test]
@@ -903,7 +903,7 @@ namespace AutoRest.TestServer.Tests
             var client = new LrosaDsClient(Key, endpoint, null);
             Assert.ThrowsAsync<RequestFailedException>(async () =>
             {
-                var operation = await client.PutAsyncRelativeRetry400Async(waitUntil, value);
+                var operation = await client.PutAsyncRelativeRetry400Async(waitUntil, value, new());
                 await WaitForCompletionWithValueAsync(operation, waitUntil).ConfigureAwait(false);
             });
         });
@@ -915,7 +915,7 @@ namespace AutoRest.TestServer.Tests
             var client = new LrosaDsClient(Key, endpoint, null);
             Assert.Throws<RequestFailedException>(() =>
             {
-                var operation = client.PutAsyncRelativeRetry400(waitUntil, value);
+                var operation = client.PutAsyncRelativeRetry400(waitUntil, value, new());
                 WaitForCompletion(operation, waitUntil);
             });
         });
@@ -923,7 +923,7 @@ namespace AutoRest.TestServer.Tests
         [Test]
         public Task LROPost200([Values(WaitUntil.Started, WaitUntil.Completed)] WaitUntil waitUntil) => Test(async endpoint =>
         {
-            var operation = await new LROsClient(Key, endpoint, null).Post200WithPayloadAsync(waitUntil);
+            var operation = await new LROsClient(Key, endpoint, null).Post200WithPayloadAsync(waitUntil, new());
             var result = await WaitForCompletionWithValueAsync(operation, waitUntil).ConfigureAwait(false);
             Assert.AreEqual("1", GetResultValue(result.Value, "Id"));
             Assert.AreEqual("product", GetResultValue(result.Value, "Name"));
@@ -932,7 +932,7 @@ namespace AutoRest.TestServer.Tests
         [Test]
         public Task LROPost200_Sync([Values(WaitUntil.Started, WaitUntil.Completed)] WaitUntil waitUntil) => Test(endpoint =>
         {
-            var operation = new LROsClient(Key, endpoint, null).Post200WithPayload(waitUntil);
+            var operation = new LROsClient(Key, endpoint, null).Post200WithPayload(waitUntil, new());
             var result = WaitForCompletionWithValue(operation, waitUntil);
             Assert.AreEqual("1", GetResultValue(result.Value, "Id"));
             Assert.AreEqual("product", GetResultValue(result.Value, "Name"));
@@ -942,7 +942,7 @@ namespace AutoRest.TestServer.Tests
         public Task LROPostAsyncNoRetrySucceeded([Values(WaitUntil.Started, WaitUntil.Completed)] WaitUntil waitUntil) => Test(async endpoint =>
         {
             var value = RequestContent.Create(new object());
-            var operation = await new LROsClient(Key, endpoint, null).PostAsyncNoRetrySucceededAsync(waitUntil, value);
+            var operation = await new LROsClient(Key, endpoint, null).PostAsyncNoRetrySucceededAsync(waitUntil, value, new());
             var result = await WaitForCompletionWithValueAsync(operation, waitUntil).ConfigureAwait(false);
             Assert.AreEqual("100", GetResultValue(result.Value, "Id"));
             Assert.AreEqual("foo", GetResultValue(result.Value, "Name"));
@@ -952,7 +952,7 @@ namespace AutoRest.TestServer.Tests
         [Test]
         public Task LROPostAndGetList([Values(WaitUntil.Started, WaitUntil.Completed)] WaitUntil waitUntil) => Test(async endpoint =>
         {
-            var operation = await new LROsClient(Key, endpoint, null).Post202ListAsync(waitUntil);
+            var operation = await new LROsClient(Key, endpoint, null).Post202ListAsync(waitUntil, new());
             var result = await WaitForCompletionWithValueAsync(operation, waitUntil).ConfigureAwait(false);
             Assert.AreEqual(1, GetArrayLength(result.Value));
             Assert.AreEqual("100", GetResultArrayValue(result.Value, 0, "Id"));
@@ -962,7 +962,7 @@ namespace AutoRest.TestServer.Tests
         [Test]
         public Task LROPostAndGetList_Sync([Values(WaitUntil.Started, WaitUntil.Completed)] WaitUntil waitUntil) => Test(endpoint =>
         {
-            var operation = new LROsClient(Key, endpoint, null).Post202List(waitUntil);
+            var operation = new LROsClient(Key, endpoint, null).Post202List(waitUntil, new());
             var result = WaitForCompletionWithValue(operation, waitUntil);
             Assert.AreEqual(1, GetArrayLength(result.Value));
             Assert.AreEqual("100", GetResultArrayValue(result.Value, 0, "Id"));
@@ -973,7 +973,7 @@ namespace AutoRest.TestServer.Tests
         public Task LROPostAsyncNoRetrySucceeded_Sync([Values(WaitUntil.Started, WaitUntil.Completed)] WaitUntil waitUntil) => Test(endpoint =>
         {
             var value = RequestContent.Create(new object());
-            var operation = new LROsClient(Key, endpoint, null).PostAsyncNoRetrySucceeded(waitUntil, value);
+            var operation = new LROsClient(Key, endpoint, null).PostAsyncNoRetrySucceeded(waitUntil, value, new());
             var result = WaitForCompletionWithValue(operation, waitUntil);
             Assert.AreEqual("100", GetResultValue(result.Value, "Id"));
             Assert.AreEqual("foo", GetResultValue(result.Value, "Name"));
@@ -986,7 +986,7 @@ namespace AutoRest.TestServer.Tests
             var value = RequestContent.Create(new object());
             Assert.ThrowsAsync<RequestFailedException>(async () =>
             {
-                var operation = await new LROsClient(Key, endpoint, null).PostAsyncRetrycanceledAsync(waitUntil, value);
+                var operation = await new LROsClient(Key, endpoint, null).PostAsyncRetrycanceledAsync(waitUntil, value, new());
                 await WaitForCompletionAsync(operation, waitUntil).ConfigureAwait(false);
             });
         });
@@ -997,7 +997,7 @@ namespace AutoRest.TestServer.Tests
             var value = RequestContent.Create(new object());
             Assert.Throws<RequestFailedException>(() =>
             {
-                var operation = new LROsClient(Key, endpoint, null).PostAsyncRetrycanceled(waitUntil, value);
+                var operation = new LROsClient(Key, endpoint, null).PostAsyncRetrycanceled(waitUntil, value, new());
                 WaitForCompletion(operation, waitUntil);
             });
         });
@@ -1008,7 +1008,7 @@ namespace AutoRest.TestServer.Tests
             var value = RequestContent.Create(new object());
             Assert.ThrowsAsync<RequestFailedException>(async () =>
             {
-                var operation = await new LROsClient(Key, endpoint, null).PostAsyncRetryFailedAsync(waitUntil, value);
+                var operation = await new LROsClient(Key, endpoint, null).PostAsyncRetryFailedAsync(waitUntil, value, new());
                 await WaitForCompletionAsync(operation, waitUntil).ConfigureAwait(false);
             });
         });
@@ -1019,7 +1019,7 @@ namespace AutoRest.TestServer.Tests
             var value = RequestContent.Create(new object());
             Assert.Throws<RequestFailedException>(() =>
             {
-                var operation = new LROsClient(Key, endpoint, null).PostAsyncRetryFailed(waitUntil, value);
+                var operation = new LROsClient(Key, endpoint, null).PostAsyncRetryFailed(waitUntil, value, new());
                 WaitForCompletion(operation, waitUntil);
             });
         });
@@ -1028,7 +1028,7 @@ namespace AutoRest.TestServer.Tests
         public Task LROPostAsyncRetrySucceeded([Values(WaitUntil.Started, WaitUntil.Completed)] WaitUntil waitUntil) => Test(async endpoint =>
         {
             var value = RequestContent.Create(new object());
-            var operation = await new LROsClient(Key, endpoint, null).PostAsyncRetrySucceededAsync(waitUntil, value);
+            var operation = await new LROsClient(Key, endpoint, null).PostAsyncRetrySucceededAsync(waitUntil, value, new());
             var result = await WaitForCompletionWithValueAsync(operation, waitUntil).ConfigureAwait(false);
             Assert.AreEqual("100", GetResultValue(result.Value, "Id"));
             Assert.AreEqual("foo", GetResultValue(result.Value, "Name"));
@@ -1039,7 +1039,7 @@ namespace AutoRest.TestServer.Tests
         public Task LROPostAsyncRetrySucceeded_Sync([Values(WaitUntil.Started, WaitUntil.Completed)] WaitUntil waitUntil) => Test(endpoint =>
         {
             var value = RequestContent.Create(new object());
-            var operation = new LROsClient(Key, endpoint, null).PostAsyncRetrySucceeded(waitUntil, value);
+            var operation = new LROsClient(Key, endpoint, null).PostAsyncRetrySucceeded(waitUntil, value, new());
             var result = WaitForCompletionWithValue(operation, waitUntil);
             Assert.AreEqual("100", GetResultValue(result.Value, "Id"));
             Assert.AreEqual("foo", GetResultValue(result.Value, "Name"));
@@ -1049,7 +1049,7 @@ namespace AutoRest.TestServer.Tests
         [Test]
         public Task LROPostDoubleHeadersFinalAzureHeaderGet([Values(WaitUntil.Started, WaitUntil.Completed)] WaitUntil waitUntil) => Test(async endpoint =>
         {
-            var operation = await new LROsClient(Key, endpoint, null).PostDoubleHeadersFinalAzureHeaderGetAsync(waitUntil);
+            var operation = await new LROsClient(Key, endpoint, null).PostDoubleHeadersFinalAzureHeaderGetAsync(waitUntil, new());
             var result = await WaitForCompletionWithValueAsync(operation, waitUntil).ConfigureAwait(false);
             Assert.AreEqual("100", GetResultValue(result.Value, "Id"));
             Assert.AreEqual(null, GetResultValue(result.Value, "Name"));
@@ -1059,7 +1059,7 @@ namespace AutoRest.TestServer.Tests
         [Test]
         public Task LROPostDoubleHeadersFinalAzureHeaderGet_Sync([Values(WaitUntil.Started, WaitUntil.Completed)] WaitUntil waitUntil) => Test(endpoint =>
         {
-            var operation = new LROsClient(Key, endpoint, null).PostDoubleHeadersFinalAzureHeaderGet(waitUntil);
+            var operation = new LROsClient(Key, endpoint, null).PostDoubleHeadersFinalAzureHeaderGet(waitUntil, new());
             var result = WaitForCompletionWithValue(operation, waitUntil);
             Assert.AreEqual("100", GetResultValue(result.Value, "Id"));
             Assert.AreEqual(null, GetResultValue(result.Value, "Name"));
@@ -1069,7 +1069,7 @@ namespace AutoRest.TestServer.Tests
         [Test]
         public Task LROPostDoubleHeadersFinalAzureHeaderGetDefault([Values(WaitUntil.Started, WaitUntil.Completed)] WaitUntil waitUntil) => Test(async endpoint =>
         {
-            var operation = await new LROsClient(Key, endpoint, null).PostDoubleHeadersFinalAzureHeaderGetDefaultAsync(waitUntil);
+            var operation = await new LROsClient(Key, endpoint, null).PostDoubleHeadersFinalAzureHeaderGetDefaultAsync(waitUntil, new());
             var result = await WaitForCompletionWithValueAsync(operation, waitUntil).ConfigureAwait(false);
             Assert.AreEqual("100", GetResultValue(result.Value, "Id"));
             Assert.AreEqual("foo", GetResultValue(result.Value, "Name"));
@@ -1079,7 +1079,7 @@ namespace AutoRest.TestServer.Tests
         [Test]
         public Task LROPostDoubleHeadersFinalAzureHeaderGetDefault_Sync([Values(WaitUntil.Started, WaitUntil.Completed)] WaitUntil waitUntil) => Test(endpoint =>
         {
-            var operation = new LROsClient(Key, endpoint, null).PostDoubleHeadersFinalAzureHeaderGetDefault(waitUntil);
+            var operation = new LROsClient(Key, endpoint, null).PostDoubleHeadersFinalAzureHeaderGetDefault(waitUntil, new());
             var result = WaitForCompletionWithValue(operation, waitUntil);
             Assert.AreEqual("100", GetResultValue(result.Value, "Id"));
             Assert.AreEqual("foo", GetResultValue(result.Value, "Name"));
@@ -1089,7 +1089,7 @@ namespace AutoRest.TestServer.Tests
         [Test]
         public Task LROPostDoubleHeadersFinalLocationGet([Values(WaitUntil.Started, WaitUntil.Completed)] WaitUntil waitUntil) => Test(async endpoint =>
         {
-            var operation = await new LROsClient(Key, endpoint, null).PostDoubleHeadersFinalLocationGetAsync(waitUntil);
+            var operation = await new LROsClient(Key, endpoint, null).PostDoubleHeadersFinalLocationGetAsync(waitUntil, new());
             var result = await WaitForCompletionWithValueAsync(operation, waitUntil).ConfigureAwait(false);
             Assert.AreEqual("100", GetResultValue(result.Value, "Id"));
             Assert.AreEqual("foo", GetResultValue(result.Value, "Name"));
@@ -1099,7 +1099,7 @@ namespace AutoRest.TestServer.Tests
         [Test]
         public Task LROPostDoubleHeadersFinalLocationGet_Sync([Values(WaitUntil.Started, WaitUntil.Completed)] WaitUntil waitUntil) => Test(endpoint =>
         {
-            var operation = new LROsClient(Key, endpoint, null).PostDoubleHeadersFinalLocationGet(waitUntil);
+            var operation = new LROsClient(Key, endpoint, null).PostDoubleHeadersFinalLocationGet(waitUntil, new());
             var result = WaitForCompletionWithValue(operation, waitUntil);
             Assert.AreEqual("100", GetResultValue(result.Value, "Id"));
             Assert.AreEqual("foo", GetResultValue(result.Value, "Name"));
@@ -1110,7 +1110,7 @@ namespace AutoRest.TestServer.Tests
         public Task LROPostSuccededNoBody([Values(WaitUntil.Started, WaitUntil.Completed)] WaitUntil waitUntil) => Test(async endpoint =>
         {
             var value = RequestContent.Create(new object());
-            var operation = await new LROsClient(Key, endpoint, null).Post202NoRetry204Async(waitUntil, value);
+            var operation = await new LROsClient(Key, endpoint, null).Post202NoRetry204Async(waitUntil, value, new());
             // Empty response body
             Assert.AreEqual(0, (await WaitForCompletionWithValueAsync(operation, waitUntil).ConfigureAwait(false)).Value.ToMemory().Length);
         });
@@ -1119,7 +1119,7 @@ namespace AutoRest.TestServer.Tests
         public Task LROPostSuccededNoBody_Sync([Values(WaitUntil.Started, WaitUntil.Completed)] WaitUntil waitUntil) => Test(endpoint =>
         {
             var value = RequestContent.Create(new object());
-            var operation = new LROsClient(Key, endpoint, null).Post202NoRetry204(waitUntil, value);
+            var operation = new LROsClient(Key, endpoint, null).Post202NoRetry204(waitUntil, value, new());
             // Empty response body
             Assert.AreEqual(0, WaitForCompletion(operation, waitUntil).Content.ToMemory().Length);
         });
@@ -1128,7 +1128,7 @@ namespace AutoRest.TestServer.Tests
         public Task LROPostSuccededWithBody([Values(WaitUntil.Started, WaitUntil.Completed)] WaitUntil waitUntil) => TestStatus(async endpoint =>
         {
             var value = RequestContent.Create(new object());
-            var operation = await new LROsClient(Key, endpoint, null).Post202Retry200Async(waitUntil, value);
+            var operation = await new LROsClient(Key, endpoint, null).Post202Retry200Async(waitUntil, value, new());
             return await WaitForCompletionAsync(operation, waitUntil).ConfigureAwait(false);
         });
 
@@ -1136,7 +1136,7 @@ namespace AutoRest.TestServer.Tests
         public Task LROPostSuccededWithBody_Sync([Values(WaitUntil.Started, WaitUntil.Completed)] WaitUntil waitUntil) => TestStatus(endpoint =>
         {
             var value = RequestContent.Create(new object());
-            var operation = new LROsClient(Key, endpoint, null).Post202Retry200(waitUntil, value);
+            var operation = new LROsClient(Key, endpoint, null).Post202Retry200(waitUntil, value, new());
             return WaitForCompletion(operation, waitUntil);
         });
 
@@ -1144,7 +1144,7 @@ namespace AutoRest.TestServer.Tests
         public Task LROPut200InlineCompleteNoState([Values(WaitUntil.Started, WaitUntil.Completed)] WaitUntil waitUntil) => Test(async endpoint =>
         {
             var value = RequestContent.Create(new object());
-            var operation = await new LROsClient(Key, endpoint, null).Put200SucceededNoStateAsync(waitUntil, value);
+            var operation = await new LROsClient(Key, endpoint, null).Put200SucceededNoStateAsync(waitUntil, value, new());
             var result = await WaitForCompletionWithValueAsync(operation, waitUntil).ConfigureAwait(false);
             Assert.AreEqual("100", GetResultValue(result.Value, "Id"));
             Assert.AreEqual("foo", GetResultValue(result.Value, "Name"));
@@ -1155,7 +1155,7 @@ namespace AutoRest.TestServer.Tests
         public Task LROPut200InlineCompleteNoState_Sync([Values(WaitUntil.Started, WaitUntil.Completed)] WaitUntil waitUntil) => Test(endpoint =>
         {
             var value = RequestContent.Create(new object());
-            var operation = new LROsClient(Key, endpoint, null).Put200SucceededNoState(waitUntil, value);
+            var operation = new LROsClient(Key, endpoint, null).Put200SucceededNoState(waitUntil, value, new());
             var result = WaitForCompletionWithValue(operation, waitUntil);
             Assert.AreEqual("100", GetResultValue(result.Value, "Id"));
             Assert.AreEqual("foo", GetResultValue(result.Value, "Name"));
@@ -1166,7 +1166,7 @@ namespace AutoRest.TestServer.Tests
         public Task LROPut202Retry200([Values(WaitUntil.Started, WaitUntil.Completed)] WaitUntil waitUntil) => Test(async endpoint =>
         {
             var value = RequestContent.Create(new object());
-            var operation = await new LROsClient(Key, endpoint, null).Put202Retry200Async(waitUntil, value);
+            var operation = await new LROsClient(Key, endpoint, null).Put202Retry200Async(waitUntil, value, new());
             var result = await WaitForCompletionWithValueAsync(operation, waitUntil).ConfigureAwait(false);
             Assert.AreEqual("100", GetResultValue(result.Value, "Id"));
             Assert.AreEqual("foo", GetResultValue(result.Value, "Name"));
@@ -1177,7 +1177,7 @@ namespace AutoRest.TestServer.Tests
         public Task LROPut202Retry200_Sync([Values(WaitUntil.Started, WaitUntil.Completed)] WaitUntil waitUntil) => Test(endpoint =>
         {
             var value = RequestContent.Create(new object());
-            var operation = new LROsClient(Key, endpoint, null).Put202Retry200(waitUntil, value);
+            var operation = new LROsClient(Key, endpoint, null).Put202Retry200(waitUntil, value, new());
             var result = WaitForCompletionWithValue(operation, waitUntil);
             Assert.AreEqual("100", GetResultValue(result.Value, "Id"));
             Assert.AreEqual("foo", GetResultValue(result.Value, "Name"));
@@ -1188,7 +1188,7 @@ namespace AutoRest.TestServer.Tests
         public Task LROPutAsyncNoHeaderInRetry([Values(WaitUntil.Started, WaitUntil.Completed)] WaitUntil waitUntil) => Test(async endpoint =>
         {
             var value = RequestContent.Create(new object());
-            var operation = await new LROsClient(Key, endpoint, null).PutAsyncNoHeaderInRetryAsync(waitUntil, value);
+            var operation = await new LROsClient(Key, endpoint, null).PutAsyncNoHeaderInRetryAsync(waitUntil, value, new());
             var result = await WaitForCompletionWithValueAsync(operation, waitUntil).ConfigureAwait(false);
             Assert.AreEqual("100", GetResultValue(result.Value, "Id"));
             Assert.AreEqual("foo", GetResultValue(result.Value, "Name"));
@@ -1199,7 +1199,7 @@ namespace AutoRest.TestServer.Tests
         public Task LROPutAsyncNoHeaderInRetry_Sync([Values(WaitUntil.Started, WaitUntil.Completed)] WaitUntil waitUntil) => Test(endpoint =>
         {
             var value = RequestContent.Create(new object());
-            var operation = new LROsClient(Key, endpoint, null).PutAsyncNoHeaderInRetry(waitUntil, value);
+            var operation = new LROsClient(Key, endpoint, null).PutAsyncNoHeaderInRetry(waitUntil, value, new());
             var result = WaitForCompletionWithValue(operation, waitUntil);
             Assert.AreEqual("100", GetResultValue(result.Value, "Id"));
             Assert.AreEqual("foo", GetResultValue(result.Value, "Name"));
@@ -1212,7 +1212,7 @@ namespace AutoRest.TestServer.Tests
             var value = RequestContent.Create(new object());
             Assert.ThrowsAsync<RequestFailedException>(async () =>
             {
-                var operation = await new LROsClient(Key, endpoint, null).PutAsyncNoRetrycanceledAsync(waitUntil, value);
+                var operation = await new LROsClient(Key, endpoint, null).PutAsyncNoRetrycanceledAsync(waitUntil, value, new());
                 await WaitForCompletionWithValueAsync(operation, waitUntil).ConfigureAwait(false);
             });
         });
@@ -1223,7 +1223,7 @@ namespace AutoRest.TestServer.Tests
             var value = RequestContent.Create(new object());
             Assert.Throws<RequestFailedException>(() =>
             {
-                var operation = new LROsClient(Key, endpoint, null).PutAsyncNoRetrycanceled(waitUntil, value);
+                var operation = new LROsClient(Key, endpoint, null).PutAsyncNoRetrycanceled(waitUntil, value, new());
                 WaitForCompletion(operation, waitUntil);
             });
         });
@@ -1232,7 +1232,7 @@ namespace AutoRest.TestServer.Tests
         public Task LROPutAsyncNoRetrySucceeded([Values(WaitUntil.Started, WaitUntil.Completed)] WaitUntil waitUntil) => Test(async endpoint =>
         {
             var value = RequestContent.Create(new object());
-            var operation = await new LROsClient(Key, endpoint, null).PutAsyncNoRetrySucceededAsync(waitUntil, value);
+            var operation = await new LROsClient(Key, endpoint, null).PutAsyncNoRetrySucceededAsync(waitUntil, value, new());
             var result = await WaitForCompletionWithValueAsync(operation, waitUntil).ConfigureAwait(false);
             Assert.AreEqual("100", GetResultValue(result.Value, "Id"));
             Assert.AreEqual("foo", GetResultValue(result.Value, "Name"));
@@ -1243,7 +1243,7 @@ namespace AutoRest.TestServer.Tests
         public Task LROPutAsyncNoRetrySucceeded_Sync([Values(WaitUntil.Started, WaitUntil.Completed)] WaitUntil waitUntil) => Test(endpoint =>
         {
             var value = RequestContent.Create(new object());
-            var operation = new LROsClient(Key, endpoint, null).PutAsyncNoRetrySucceeded(waitUntil, value);
+            var operation = new LROsClient(Key, endpoint, null).PutAsyncNoRetrySucceeded(waitUntil, value, new());
             var result = WaitForCompletionWithValue(operation, waitUntil);
             Assert.AreEqual("100", GetResultValue(result.Value, "Id"));
             Assert.AreEqual("foo", GetResultValue(result.Value, "Name"));
@@ -1256,7 +1256,7 @@ namespace AutoRest.TestServer.Tests
             var value = RequestContent.Create(new object());
             Assert.ThrowsAsync<RequestFailedException>(async () =>
             {
-                var operation = await new LROsClient(Key, endpoint, null).PutAsyncRetryFailedAsync(waitUntil, value);
+                var operation = await new LROsClient(Key, endpoint, null).PutAsyncRetryFailedAsync(waitUntil, value, new());
                 await WaitForCompletionWithValueAsync(operation, waitUntil).ConfigureAwait(false);
             });
         });
@@ -1267,7 +1267,7 @@ namespace AutoRest.TestServer.Tests
             var value = RequestContent.Create(new object());
             Assert.Throws<RequestFailedException>(() =>
             {
-                var operation = new LROsClient(Key, endpoint, null).PutAsyncRetryFailed(waitUntil, value);
+                var operation = new LROsClient(Key, endpoint, null).PutAsyncRetryFailed(waitUntil, value, new());
                 WaitForCompletion(operation, waitUntil);
             });
         });
@@ -1276,7 +1276,7 @@ namespace AutoRest.TestServer.Tests
         public Task LROPutAsyncRetrySucceeded([Values(WaitUntil.Started, WaitUntil.Completed)] WaitUntil waitUntil) => Test(async endpoint =>
         {
             var value = RequestContent.Create(new object());
-            var operation = await new LROsClient(Key, endpoint, null).PutAsyncRetrySucceededAsync(waitUntil, value);
+            var operation = await new LROsClient(Key, endpoint, null).PutAsyncRetrySucceededAsync(waitUntil, value, new());
             var result = await WaitForCompletionWithValueAsync(operation, waitUntil).ConfigureAwait(false);
             Assert.AreEqual("100", GetResultValue(result.Value, "Id"));
             Assert.AreEqual("foo", GetResultValue(result.Value, "Name"));
@@ -1287,7 +1287,7 @@ namespace AutoRest.TestServer.Tests
         public Task LROPutAsyncRetrySucceeded_Sync([Values(WaitUntil.Started, WaitUntil.Completed)] WaitUntil waitUntil) => Test(endpoint =>
         {
             var value = RequestContent.Create(new object());
-            var operation = new LROsClient(Key, endpoint, null).PutAsyncRetrySucceeded(waitUntil, value);
+            var operation = new LROsClient(Key, endpoint, null).PutAsyncRetrySucceeded(waitUntil, value, new());
             var result = WaitForCompletionWithValue(operation, waitUntil);
             Assert.AreEqual("100", GetResultValue(result.Value, "Id"));
             Assert.AreEqual("foo", GetResultValue(result.Value, "Name"));
@@ -1300,7 +1300,7 @@ namespace AutoRest.TestServer.Tests
             var value = RequestContent.Create(new object());
             Assert.ThrowsAsync<RequestFailedException>(async () =>
             {
-                var operation = await new LROsClient(Key, endpoint, null).Put200Acceptedcanceled200Async(waitUntil, value);
+                var operation = await new LROsClient(Key, endpoint, null).Put200Acceptedcanceled200Async(waitUntil, value, new());
                 await WaitForCompletionWithValueAsync(operation, waitUntil).ConfigureAwait(false);
             });
         });
@@ -1311,7 +1311,7 @@ namespace AutoRest.TestServer.Tests
             var value = RequestContent.Create(new object());
             Assert.Throws<RequestFailedException>(() =>
             {
-                var operation = new LROsClient(Key, endpoint, null).Put200Acceptedcanceled200(waitUntil, value);
+                var operation = new LROsClient(Key, endpoint, null).Put200Acceptedcanceled200(waitUntil, value, new());
                 WaitForCompletion(operation, waitUntil);
             });
         });
@@ -1322,7 +1322,7 @@ namespace AutoRest.TestServer.Tests
             var value = RequestContent.Create(new object());
             Assert.ThrowsAsync<RequestFailedException>(async () =>
             {
-                var operation = await new LROsClient(Key, endpoint, null).Put201CreatingFailed200Async(waitUntil, value);
+                var operation = await new LROsClient(Key, endpoint, null).Put201CreatingFailed200Async(waitUntil, value, new());
                 await WaitForCompletionWithValueAsync(operation, waitUntil).ConfigureAwait(false);
             });
         });
@@ -1333,7 +1333,7 @@ namespace AutoRest.TestServer.Tests
             var value = RequestContent.Create(new object());
             Assert.Throws<RequestFailedException>(() =>
             {
-                var operation = new LROsClient(Key, endpoint, null).Put201CreatingFailed200(waitUntil, value);
+                var operation = new LROsClient(Key, endpoint, null).Put201CreatingFailed200(waitUntil, value, new());
                 WaitForCompletion(operation, waitUntil);
             });
         });
@@ -1342,7 +1342,7 @@ namespace AutoRest.TestServer.Tests
         public Task LROPutInlineComplete([Values(WaitUntil.Started, WaitUntil.Completed)] WaitUntil waitUntil) => Test(async endpoint =>
         {
             var value = RequestContent.Create(new object());
-            var operation = await new LROsClient(Key, endpoint, null).Put200SucceededAsync(waitUntil, value);
+            var operation = await new LROsClient(Key, endpoint, null).Put200SucceededAsync(waitUntil, value, new());
             var result = await WaitForCompletionWithValueAsync(operation, waitUntil).ConfigureAwait(false);
             Assert.AreEqual("100", GetResultValue(result.Value, "Id"));
             Assert.AreEqual("foo", GetResultValue(result.Value, "Name"));
@@ -1353,7 +1353,7 @@ namespace AutoRest.TestServer.Tests
         public Task LROPutInlineComplete_Sync([Values(WaitUntil.Started, WaitUntil.Completed)] WaitUntil waitUntil) => Test(endpoint =>
         {
             var value = RequestContent.Create(new object());
-            var operation = new LROsClient(Key, endpoint, null).Put200Succeeded(waitUntil, value);
+            var operation = new LROsClient(Key, endpoint, null).Put200Succeeded(waitUntil, value, new());
             var result = WaitForCompletionWithValue(operation, waitUntil);
             Assert.AreEqual("100", GetResultValue(result.Value, "Id"));
             Assert.AreEqual("foo", GetResultValue(result.Value, "Name"));
@@ -1364,7 +1364,7 @@ namespace AutoRest.TestServer.Tests
         public Task LROPutInlineComplete201([Values(WaitUntil.Started, WaitUntil.Completed)] WaitUntil waitUntil) => Test(async endpoint =>
         {
             var value = RequestContent.Create(new object());
-            var operation = await new LROsClient(Key, endpoint, null).Put201SucceededAsync(waitUntil, value);
+            var operation = await new LROsClient(Key, endpoint, null).Put201SucceededAsync(waitUntil, value, new());
             var result = await WaitForCompletionWithValueAsync(operation, waitUntil).ConfigureAwait(false);
             Assert.AreEqual("100", GetResultValue(result.Value, "Id"));
             Assert.AreEqual("foo", GetResultValue(result.Value, "Name"));
@@ -1375,7 +1375,7 @@ namespace AutoRest.TestServer.Tests
         public Task LROPutInlineComplete201_Sync([Values(WaitUntil.Started, WaitUntil.Completed)] WaitUntil waitUntil) => Test(endpoint =>
         {
             var value = RequestContent.Create(new object());
-            var operation = new LROsClient(Key, endpoint, null).Put201Succeeded(waitUntil, value);
+            var operation = new LROsClient(Key, endpoint, null).Put201Succeeded(waitUntil, value, new());
             var result = WaitForCompletionWithValue(operation, waitUntil);
             Assert.AreEqual("100", GetResultValue(result.Value, "Id"));
             Assert.AreEqual("foo", GetResultValue(result.Value, "Name"));
@@ -1386,7 +1386,7 @@ namespace AutoRest.TestServer.Tests
         public Task LROPutNoHeaderInRetry([Values(WaitUntil.Started, WaitUntil.Completed)] WaitUntil waitUntil) => Test(async endpoint =>
         {
             var value = RequestContent.Create(new object());
-            var operation = await new LROsClient(Key, endpoint, null).PutNoHeaderInRetryAsync(waitUntil, value);
+            var operation = await new LROsClient(Key, endpoint, null).PutNoHeaderInRetryAsync(waitUntil, value, new());
             var result = await WaitForCompletionWithValueAsync(operation, waitUntil).ConfigureAwait(false);
             Assert.AreEqual("100", GetResultValue(result.Value, "Id"));
             Assert.AreEqual("foo", GetResultValue(result.Value, "Name"));
@@ -1397,7 +1397,7 @@ namespace AutoRest.TestServer.Tests
         public Task LROPutNoHeaderInRetry_Sync([Values(WaitUntil.Started, WaitUntil.Completed)] WaitUntil waitUntil) => Test(endpoint =>
         {
             var value = RequestContent.Create(new object());
-            var operation = new LROsClient(Key, endpoint, null).PutNoHeaderInRetry(waitUntil, value);
+            var operation = new LROsClient(Key, endpoint, null).PutNoHeaderInRetry(waitUntil, value, new());
             var result = WaitForCompletionWithValue(operation, waitUntil);
             Assert.AreEqual("100", GetResultValue(result.Value, "Id"));
             Assert.AreEqual("foo", GetResultValue(result.Value, "Name"));
@@ -1408,7 +1408,7 @@ namespace AutoRest.TestServer.Tests
         public Task LROPutNonResourceAsyncInRetry([Values(WaitUntil.Started, WaitUntil.Completed)] WaitUntil waitUntil) => Test(async endpoint =>
         {
             var value = RequestContent.Create(new object());
-            var operation = await new LROsClient(Key, endpoint, null).PutAsyncNonResourceAsync(waitUntil, value);
+            var operation = await new LROsClient(Key, endpoint, null).PutAsyncNonResourceAsync(waitUntil, value, new());
             var result = await WaitForCompletionWithValueAsync(operation, waitUntil).ConfigureAwait(false);
             Assert.AreEqual("100", GetResultValue(result.Value, "Id"));
             Assert.AreEqual("sku", GetResultValue(result.Value, "Name"));
@@ -1418,7 +1418,7 @@ namespace AutoRest.TestServer.Tests
         public Task LROPutNonResourceAsyncInRetry_Sync([Values(WaitUntil.Started, WaitUntil.Completed)] WaitUntil waitUntil) => Test(endpoint =>
         {
             var value = RequestContent.Create(new object());
-            var operation = new LROsClient(Key, endpoint, null).PutAsyncNonResource(waitUntil, value);
+            var operation = new LROsClient(Key, endpoint, null).PutAsyncNonResource(waitUntil, value, new());
             var result = WaitForCompletionWithValue(operation, waitUntil);
             Assert.AreEqual("100", GetResultValue(result.Value, "Id"));
             Assert.AreEqual("sku", GetResultValue(result.Value, "Name"));
@@ -1428,7 +1428,7 @@ namespace AutoRest.TestServer.Tests
         public Task LROPutNonResourceInRetry([Values(WaitUntil.Started, WaitUntil.Completed)] WaitUntil waitUntil) => Test(async endpoint =>
         {
             var value = RequestContent.Create(new object());
-            var operation = await new LROsClient(Key, endpoint, null).PutNonResourceAsync(waitUntil, value);
+            var operation = await new LROsClient(Key, endpoint, null).PutNonResourceAsync(waitUntil, value, new());
             var result = await WaitForCompletionWithValueAsync(operation, waitUntil).ConfigureAwait(false);
             Assert.AreEqual("100", GetResultValue(result.Value, "Id"));
             Assert.AreEqual("sku", GetResultValue(result.Value, "Name"));
@@ -1438,7 +1438,7 @@ namespace AutoRest.TestServer.Tests
         public Task LROPutNonResourceInRetry_Sync([Values(WaitUntil.Started, WaitUntil.Completed)] WaitUntil waitUntil) => Test(endpoint =>
         {
             var value = RequestContent.Create(new object());
-            var operation = new LROsClient(Key, endpoint, null).PutNonResource(waitUntil, value);
+            var operation = new LROsClient(Key, endpoint, null).PutNonResource(waitUntil, value, new());
             var result = WaitForCompletionWithValue(operation, waitUntil);
             Assert.AreEqual("100", GetResultValue(result.Value, "Id"));
             Assert.AreEqual("sku", GetResultValue(result.Value, "Name"));
@@ -1448,7 +1448,7 @@ namespace AutoRest.TestServer.Tests
         public Task LROPutSubResourceAsyncInRetry([Values(WaitUntil.Started, WaitUntil.Completed)] WaitUntil waitUntil) => Test(async endpoint =>
         {
             var value = RequestContent.Create(new object());
-            var operation = await new LROsClient(Key, endpoint, null).PutAsyncSubResourceAsync(waitUntil, value);
+            var operation = await new LROsClient(Key, endpoint, null).PutAsyncSubResourceAsync(waitUntil, value, new());
             var result = await WaitForCompletionWithValueAsync(operation, waitUntil).ConfigureAwait(false);
             Assert.AreEqual("100", GetResultValue(result.Value, "Id"));
             Assert.AreEqual("Succeeded", GetResultValue(result.Value, "ProvisioningState"));
@@ -1458,7 +1458,7 @@ namespace AutoRest.TestServer.Tests
         public Task LROPutSubResourceAsyncInRetry_Sync([Values(WaitUntil.Started, WaitUntil.Completed)] WaitUntil waitUntil) => Test(endpoint =>
         {
             var value = RequestContent.Create(new object());
-            var operation = new LROsClient(Key, endpoint, null).PutAsyncSubResource(waitUntil, value);
+            var operation = new LROsClient(Key, endpoint, null).PutAsyncSubResource(waitUntil, value, new());
             var result = WaitForCompletionWithValue(operation, waitUntil);
             Assert.AreEqual("100", GetResultValue(result.Value, "Id"));
             Assert.AreEqual("Succeeded", GetResultValue(result.Value, "ProvisioningState"));
@@ -1468,7 +1468,7 @@ namespace AutoRest.TestServer.Tests
         public Task LROPutSubResourceInRetry([Values(WaitUntil.Started, WaitUntil.Completed)] WaitUntil waitUntil) => Test(async endpoint =>
         {
             var value = RequestContent.Create(new object());
-            var operation = await new LROsClient(Key, endpoint, null).PutSubResourceAsync(waitUntil, value);
+            var operation = await new LROsClient(Key, endpoint, null).PutSubResourceAsync(waitUntil, value, new());
             var result = await WaitForCompletionWithValueAsync(operation, waitUntil).ConfigureAwait(false);
             Assert.AreEqual("100", GetResultValue(result.Value, "Id"));
             Assert.AreEqual("Succeeded", GetResultValue(result.Value, "ProvisioningState"));
@@ -1478,7 +1478,7 @@ namespace AutoRest.TestServer.Tests
         public Task LROPutSubResourceInRetry_Sync([Values(WaitUntil.Started, WaitUntil.Completed)] WaitUntil waitUntil) => Test(endpoint =>
         {
             var value = RequestContent.Create(new object());
-            var operation = new LROsClient(Key, endpoint, null).PutSubResource(waitUntil, value);
+            var operation = new LROsClient(Key, endpoint, null).PutSubResource(waitUntil, value, new());
             var result = WaitForCompletionWithValue(operation, waitUntil);
             Assert.AreEqual("100", GetResultValue(result.Value, "Id"));
             Assert.AreEqual("Succeeded", GetResultValue(result.Value, "ProvisioningState"));
@@ -1488,7 +1488,7 @@ namespace AutoRest.TestServer.Tests
         public Task LROPutSucceededNoBody([Values(WaitUntil.Started, WaitUntil.Completed)] WaitUntil waitUntil) => Test(async endpoint =>
         {
             var value = RequestContent.Create(new object());
-            var operation = await new LROsClient(Key, endpoint, null).Put200UpdatingSucceeded204Async(waitUntil, value);
+            var operation = await new LROsClient(Key, endpoint, null).Put200UpdatingSucceeded204Async(waitUntil, value, new());
             var result = await WaitForCompletionWithValueAsync(operation, waitUntil).ConfigureAwait(false);
             Assert.AreEqual("100", GetResultValue(result.Value, "Id"));
             Assert.AreEqual("foo", GetResultValue(result.Value, "Name"));
@@ -1499,7 +1499,7 @@ namespace AutoRest.TestServer.Tests
         public Task LROPutSucceededNoBody_Sync([Values(WaitUntil.Started, WaitUntil.Completed)] WaitUntil waitUntil) => Test(endpoint =>
         {
             var value = RequestContent.Create(new object());
-            var operation = new LROsClient(Key, endpoint, null).Put200UpdatingSucceeded204(waitUntil, value);
+            var operation = new LROsClient(Key, endpoint, null).Put200UpdatingSucceeded204(waitUntil, value, new());
             var result = WaitForCompletionWithValue(operation, waitUntil);
             Assert.AreEqual("100", GetResultValue(result.Value, "Id"));
             Assert.AreEqual("foo", GetResultValue(result.Value, "Name"));
@@ -1510,7 +1510,7 @@ namespace AutoRest.TestServer.Tests
         public Task LROPutSucceededWithBody([Values(WaitUntil.Started, WaitUntil.Completed)] WaitUntil waitUntil) => Test(async endpoint =>
         {
             var value = RequestContent.Create(new object());
-            var operation = await new LROsClient(Key, endpoint, null).Put201CreatingSucceeded200Async(waitUntil, value);
+            var operation = await new LROsClient(Key, endpoint, null).Put201CreatingSucceeded200Async(waitUntil, value, new());
             var result = await WaitForCompletionWithValueAsync(operation, waitUntil).ConfigureAwait(false);
             Assert.AreEqual("100", GetResultValue(result.Value, "Id"));
             Assert.AreEqual("foo", GetResultValue(result.Value, "Name"));
@@ -1521,7 +1521,7 @@ namespace AutoRest.TestServer.Tests
         public Task LROPutSucceededWithBody_Sync([Values(WaitUntil.Started, WaitUntil.Completed)] WaitUntil waitUntil) => Test(endpoint =>
         {
             var value = RequestContent.Create(new object());
-            var operation = new LROsClient(Key, endpoint, null).Put201CreatingSucceeded200(waitUntil, value);
+            var operation = new LROsClient(Key, endpoint, null).Put201CreatingSucceeded200(waitUntil, value, new());
             var result = WaitForCompletionWithValue(operation, waitUntil);
             Assert.AreEqual("100", GetResultValue(result.Value, "Id"));
             Assert.AreEqual("foo", GetResultValue(result.Value, "Name"));
@@ -1531,7 +1531,7 @@ namespace AutoRest.TestServer.Tests
         [Test]
         public Task LRORetryErrorDelete202Accepted200Succeeded([Values(WaitUntil.Started, WaitUntil.Completed)] WaitUntil waitUntil) => Test(async endpoint =>
         {
-            var operation = await new LRORetrysClient(Key, endpoint, null).DeleteProvisioning202Accepted200SucceededAsync(waitUntil);
+            var operation = await new LRORetrysClient(Key, endpoint, null).DeleteProvisioning202Accepted200SucceededAsync(waitUntil, new());
             var result = await WaitForCompletionWithValueAsync(operation, waitUntil).ConfigureAwait(false);
             Assert.AreEqual("100", GetResultValue(result.Value, "Id"));
             Assert.AreEqual("foo", GetResultValue(result.Value, "Name"));
@@ -1541,7 +1541,7 @@ namespace AutoRest.TestServer.Tests
         [Test]
         public Task LRORetryErrorDelete202Accepted200Succeeded_Sync([Values(WaitUntil.Started, WaitUntil.Completed)] WaitUntil waitUntil) => Test(endpoint =>
         {
-            var operation = new LRORetrysClient(Key, endpoint, null).DeleteProvisioning202Accepted200Succeeded(waitUntil);
+            var operation = new LRORetrysClient(Key, endpoint, null).DeleteProvisioning202Accepted200Succeeded(waitUntil, new());
             var result = WaitForCompletionWithValue(operation, waitUntil);
             Assert.AreEqual("100", GetResultValue(result.Value, "Id"));
             Assert.AreEqual("foo", GetResultValue(result.Value, "Name"));
@@ -1580,7 +1580,7 @@ namespace AutoRest.TestServer.Tests
         public Task LRORetryErrorPost202Retry200Succeeded([Values(WaitUntil.Started, WaitUntil.Completed)] WaitUntil waitUntil) => TestStatus(async endpoint =>
         {
             var value = RequestContent.Create(new object());
-            var operation = await new LRORetrysClient(Key, endpoint, null).Post202Retry200Async(waitUntil, value);
+            var operation = await new LRORetrysClient(Key, endpoint, null).Post202Retry200Async(waitUntil, value, new());
             return await WaitForCompletionAsync(operation, waitUntil).ConfigureAwait(false);
         });
 
@@ -1588,7 +1588,7 @@ namespace AutoRest.TestServer.Tests
         public Task LRORetryErrorPost202Retry200Succeeded_Sync([Values(WaitUntil.Started, WaitUntil.Completed)] WaitUntil waitUntil) => TestStatus(endpoint =>
         {
             var value = RequestContent.Create(new object());
-            var operation = new LRORetrysClient(Key, endpoint, null).Post202Retry200(waitUntil, value);
+            var operation = new LRORetrysClient(Key, endpoint, null).Post202Retry200(waitUntil, value, new());
             return WaitForCompletion(operation, waitUntil);
         });
 
@@ -1596,7 +1596,7 @@ namespace AutoRest.TestServer.Tests
         public Task LRORetryErrorPostAsyncRetrySucceeded([Values(WaitUntil.Started, WaitUntil.Completed)] WaitUntil waitUntil) => TestStatus(async endpoint =>
         {
             var value = RequestContent.Create(new object());
-            var operation = await new LRORetrysClient(Key, endpoint, null).PostAsyncRelativeRetrySucceededAsync(waitUntil, value);
+            var operation = await new LRORetrysClient(Key, endpoint, null).PostAsyncRelativeRetrySucceededAsync(waitUntil, value, new());
             return await WaitForCompletionAsync(operation, waitUntil).ConfigureAwait(false);
         });
 
@@ -1604,7 +1604,7 @@ namespace AutoRest.TestServer.Tests
         public Task LRORetryErrorPostAsyncRetrySucceeded_Sync([Values(WaitUntil.Started, WaitUntil.Completed)] WaitUntil waitUntil) => TestStatus(endpoint =>
         {
             var value = RequestContent.Create(new object());
-            var operation = new LRORetrysClient(Key, endpoint, null).PostAsyncRelativeRetrySucceeded(waitUntil, value);
+            var operation = new LRORetrysClient(Key, endpoint, null).PostAsyncRelativeRetrySucceeded(waitUntil, value, new());
             return WaitForCompletion(operation, waitUntil);
         });
 
@@ -1612,7 +1612,7 @@ namespace AutoRest.TestServer.Tests
         public Task LRORetryErrorPutAsyncSucceeded([Values(WaitUntil.Started, WaitUntil.Completed)] WaitUntil waitUntil) => Test(async endpoint =>
         {
             var value = RequestContent.Create(new object());
-            var operation = await new LRORetrysClient(Key, endpoint, null).PutAsyncRelativeRetrySucceededAsync(waitUntil, value);
+            var operation = await new LRORetrysClient(Key, endpoint, null).PutAsyncRelativeRetrySucceededAsync(waitUntil, value, new());
             var result = await WaitForCompletionWithValueAsync(operation, waitUntil).ConfigureAwait(false);
             Assert.AreEqual("100", GetResultValue(result.Value, "Id"));
             Assert.AreEqual("foo", GetResultValue(result.Value, "Name"));
@@ -1623,7 +1623,7 @@ namespace AutoRest.TestServer.Tests
         public Task LRORetryErrorPutAsyncSucceeded_Sync([Values(WaitUntil.Started, WaitUntil.Completed)] WaitUntil waitUntil) => Test(endpoint =>
         {
             var value = RequestContent.Create(new object());
-            var operation = new LRORetrysClient(Key, endpoint, null).PutAsyncRelativeRetrySucceeded(waitUntil, value);
+            var operation = new LRORetrysClient(Key, endpoint, null).PutAsyncRelativeRetrySucceeded(waitUntil, value, new());
             var result = WaitForCompletionWithValue(operation, waitUntil);
             Assert.AreEqual("100", GetResultValue(result.Value, "Id"));
             Assert.AreEqual("foo", GetResultValue(result.Value, "Name"));
@@ -1634,7 +1634,7 @@ namespace AutoRest.TestServer.Tests
         public Task LRORetryErrorPutAsyncSucceededPolling([Values(WaitUntil.Started, WaitUntil.Completed)] WaitUntil waitUntil) => Test(async endpoint =>
         {
             var value = RequestContent.Create(new object());
-            var operation = await new LRORetrysClient(Key, endpoint, null).PutAsyncRelativeRetrySucceededAsync(waitUntil, value);
+            var operation = await new LRORetrysClient(Key, endpoint, null).PutAsyncRelativeRetrySucceededAsync(waitUntil, value, new());
             var result = await WaitForCompletionWithValueAsync(operation, waitUntil).ConfigureAwait(false);
             Assert.AreEqual("100", GetResultValue(result.Value, "Id"));
             Assert.AreEqual("foo", GetResultValue(result.Value, "Name"));
@@ -1645,7 +1645,7 @@ namespace AutoRest.TestServer.Tests
         public Task LRORetryErrorPutAsyncSucceededPolling_Sync([Values(WaitUntil.Started, WaitUntil.Completed)] WaitUntil waitUntil) => Test(endpoint =>
         {
             var value = RequestContent.Create(new object());
-            var operation = new LRORetrysClient(Key, endpoint, null).PutAsyncRelativeRetrySucceeded(waitUntil, value);
+            var operation = new LRORetrysClient(Key, endpoint, null).PutAsyncRelativeRetrySucceeded(waitUntil, value, new());
             var result = WaitForCompletionWithValue(operation, waitUntil);
             Assert.AreEqual("100", GetResultValue(result.Value, "Id"));
             Assert.AreEqual("foo", GetResultValue(result.Value, "Name"));
@@ -1656,7 +1656,7 @@ namespace AutoRest.TestServer.Tests
         public Task LRORetryPutSucceededWithBody([Values(WaitUntil.Started, WaitUntil.Completed)] WaitUntil waitUntil) => Test(async endpoint =>
         {
             var value = RequestContent.Create(new object());
-            var operation = await new LRORetrysClient(Key, endpoint, null).Put201CreatingSucceeded200Async(waitUntil, value);
+            var operation = await new LRORetrysClient(Key, endpoint, null).Put201CreatingSucceeded200Async(waitUntil, value, new());
             var result = await WaitForCompletionWithValueAsync(operation, waitUntil).ConfigureAwait(false);
             Assert.AreEqual("100", GetResultValue(result.Value, "Id"));
             Assert.AreEqual("foo", GetResultValue(result.Value, "Name"));
@@ -1667,7 +1667,7 @@ namespace AutoRest.TestServer.Tests
         public Task LRORetryPutSucceededWithBody_Sync([Values(WaitUntil.Started, WaitUntil.Completed)] WaitUntil waitUntil) => Test(endpoint =>
         {
             var value = RequestContent.Create(new object());
-            var operation = new LRORetrysClient(Key, endpoint, null).Put201CreatingSucceeded200(waitUntil, value);
+            var operation = new LRORetrysClient(Key, endpoint, null).Put201CreatingSucceeded200(waitUntil, value, new());
             var result = WaitForCompletionWithValue(operation, waitUntil);
             Assert.AreEqual("100", GetResultValue(result.Value, "Id"));
             Assert.AreEqual("foo", GetResultValue(result.Value, "Name"));

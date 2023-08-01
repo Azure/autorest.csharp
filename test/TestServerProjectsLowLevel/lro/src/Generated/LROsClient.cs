@@ -392,7 +392,7 @@ namespace lro_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="Operation"/> representing an asynchronous operation on the service. </returns>
         /// <include file="Docs/LROsClient.xml" path="doc/members/member[@name='Post202ListAsync(WaitUntil,RequestContext)']/*" />
-        public virtual async Task<Operation<BinaryData>> Post202ListAsync(WaitUntil waitUntil, RequestContext context = null)
+        public virtual async Task<Operation<BinaryData>> Post202ListAsync(WaitUntil waitUntil, RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("LROsClient.Post202List");
             scope.Start();
@@ -423,7 +423,7 @@ namespace lro_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="Operation"/> representing an asynchronous operation on the service. </returns>
         /// <include file="Docs/LROsClient.xml" path="doc/members/member[@name='Post202List(WaitUntil,RequestContext)']/*" />
-        public virtual Operation<BinaryData> Post202List(WaitUntil waitUntil, RequestContext context = null)
+        public virtual Operation<BinaryData> Post202List(WaitUntil waitUntil, RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("LROsClient.Post202List");
             scope.Start();
@@ -1478,7 +1478,7 @@ namespace lro_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="Operation"/> representing an asynchronous operation on the service. </returns>
         /// <include file="Docs/LROsClient.xml" path="doc/members/member[@name='DeleteProvisioning202Accepted200SucceededAsync(WaitUntil,RequestContext)']/*" />
-        public virtual async Task<Operation<BinaryData>> DeleteProvisioning202Accepted200SucceededAsync(WaitUntil waitUntil, RequestContext context = null)
+        public virtual async Task<Operation<BinaryData>> DeleteProvisioning202Accepted200SucceededAsync(WaitUntil waitUntil, RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("LROsClient.DeleteProvisioning202Accepted200Succeeded");
             scope.Start();
@@ -1509,7 +1509,7 @@ namespace lro_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="Operation"/> representing an asynchronous operation on the service. </returns>
         /// <include file="Docs/LROsClient.xml" path="doc/members/member[@name='DeleteProvisioning202Accepted200Succeeded(WaitUntil,RequestContext)']/*" />
-        public virtual Operation<BinaryData> DeleteProvisioning202Accepted200Succeeded(WaitUntil waitUntil, RequestContext context = null)
+        public virtual Operation<BinaryData> DeleteProvisioning202Accepted200Succeeded(WaitUntil waitUntil, RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("LROsClient.DeleteProvisioning202Accepted200Succeeded");
             scope.Start();
@@ -1540,7 +1540,7 @@ namespace lro_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="Operation"/> representing an asynchronous operation on the service. </returns>
         /// <include file="Docs/LROsClient.xml" path="doc/members/member[@name='DeleteProvisioning202DeletingFailed200Async(WaitUntil,RequestContext)']/*" />
-        public virtual async Task<Operation<BinaryData>> DeleteProvisioning202DeletingFailed200Async(WaitUntil waitUntil, RequestContext context = null)
+        public virtual async Task<Operation<BinaryData>> DeleteProvisioning202DeletingFailed200Async(WaitUntil waitUntil, RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("LROsClient.DeleteProvisioning202DeletingFailed200");
             scope.Start();
@@ -1571,7 +1571,7 @@ namespace lro_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="Operation"/> representing an asynchronous operation on the service. </returns>
         /// <include file="Docs/LROsClient.xml" path="doc/members/member[@name='DeleteProvisioning202DeletingFailed200(WaitUntil,RequestContext)']/*" />
-        public virtual Operation<BinaryData> DeleteProvisioning202DeletingFailed200(WaitUntil waitUntil, RequestContext context = null)
+        public virtual Operation<BinaryData> DeleteProvisioning202DeletingFailed200(WaitUntil waitUntil, RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("LROsClient.DeleteProvisioning202DeletingFailed200");
             scope.Start();
@@ -1602,7 +1602,7 @@ namespace lro_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="Operation"/> representing an asynchronous operation on the service. </returns>
         /// <include file="Docs/LROsClient.xml" path="doc/members/member[@name='DeleteProvisioning202Deletingcanceled200Async(WaitUntil,RequestContext)']/*" />
-        public virtual async Task<Operation<BinaryData>> DeleteProvisioning202Deletingcanceled200Async(WaitUntil waitUntil, RequestContext context = null)
+        public virtual async Task<Operation<BinaryData>> DeleteProvisioning202Deletingcanceled200Async(WaitUntil waitUntil, RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("LROsClient.DeleteProvisioning202Deletingcanceled200");
             scope.Start();
@@ -1633,7 +1633,7 @@ namespace lro_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="Operation"/> representing an asynchronous operation on the service. </returns>
         /// <include file="Docs/LROsClient.xml" path="doc/members/member[@name='DeleteProvisioning202Deletingcanceled200(WaitUntil,RequestContext)']/*" />
-        public virtual Operation<BinaryData> DeleteProvisioning202Deletingcanceled200(WaitUntil waitUntil, RequestContext context = null)
+        public virtual Operation<BinaryData> DeleteProvisioning202Deletingcanceled200(WaitUntil waitUntil, RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("LROsClient.DeleteProvisioning202Deletingcanceled200");
             scope.Start();
@@ -1726,7 +1726,7 @@ namespace lro_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="Operation"/> representing an asynchronous operation on the service. </returns>
         /// <include file="Docs/LROsClient.xml" path="doc/members/member[@name='Delete202Retry200Async(WaitUntil,RequestContext)']/*" />
-        public virtual async Task<Operation<BinaryData>> Delete202Retry200Async(WaitUntil waitUntil, RequestContext context = null)
+        public virtual async Task<Operation<BinaryData>> Delete202Retry200Async(WaitUntil waitUntil, RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("LROsClient.Delete202Retry200");
             scope.Start();
@@ -1757,7 +1757,7 @@ namespace lro_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="Operation"/> representing an asynchronous operation on the service. </returns>
         /// <include file="Docs/LROsClient.xml" path="doc/members/member[@name='Delete202Retry200(WaitUntil,RequestContext)']/*" />
-        public virtual Operation<BinaryData> Delete202Retry200(WaitUntil waitUntil, RequestContext context = null)
+        public virtual Operation<BinaryData> Delete202Retry200(WaitUntil waitUntil, RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("LROsClient.Delete202Retry200");
             scope.Start();
@@ -1788,7 +1788,7 @@ namespace lro_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="Operation"/> representing an asynchronous operation on the service. </returns>
         /// <include file="Docs/LROsClient.xml" path="doc/members/member[@name='Delete202NoRetry204Async(WaitUntil,RequestContext)']/*" />
-        public virtual async Task<Operation<BinaryData>> Delete202NoRetry204Async(WaitUntil waitUntil, RequestContext context = null)
+        public virtual async Task<Operation<BinaryData>> Delete202NoRetry204Async(WaitUntil waitUntil, RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("LROsClient.Delete202NoRetry204");
             scope.Start();
@@ -1819,7 +1819,7 @@ namespace lro_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="Operation"/> representing an asynchronous operation on the service. </returns>
         /// <include file="Docs/LROsClient.xml" path="doc/members/member[@name='Delete202NoRetry204(WaitUntil,RequestContext)']/*" />
-        public virtual Operation<BinaryData> Delete202NoRetry204(WaitUntil waitUntil, RequestContext context = null)
+        public virtual Operation<BinaryData> Delete202NoRetry204(WaitUntil waitUntil, RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("LROsClient.Delete202NoRetry204");
             scope.Start();
@@ -2222,7 +2222,7 @@ namespace lro_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="Operation"/> representing an asynchronous operation on the service. </returns>
         /// <include file="Docs/LROsClient.xml" path="doc/members/member[@name='Post200WithPayloadAsync(WaitUntil,RequestContext)']/*" />
-        public virtual async Task<Operation<BinaryData>> Post200WithPayloadAsync(WaitUntil waitUntil, RequestContext context = null)
+        public virtual async Task<Operation<BinaryData>> Post200WithPayloadAsync(WaitUntil waitUntil, RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("LROsClient.Post200WithPayload");
             scope.Start();
@@ -2253,7 +2253,7 @@ namespace lro_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="Operation"/> representing an asynchronous operation on the service. </returns>
         /// <include file="Docs/LROsClient.xml" path="doc/members/member[@name='Post200WithPayload(WaitUntil,RequestContext)']/*" />
-        public virtual Operation<BinaryData> Post200WithPayload(WaitUntil waitUntil, RequestContext context = null)
+        public virtual Operation<BinaryData> Post200WithPayload(WaitUntil waitUntil, RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("LROsClient.Post200WithPayload");
             scope.Start();
@@ -2412,7 +2412,7 @@ namespace lro_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="Operation"/> representing an asynchronous operation on the service. </returns>
         /// <include file="Docs/LROsClient.xml" path="doc/members/member[@name='PostDoubleHeadersFinalLocationGetAsync(WaitUntil,RequestContext)']/*" />
-        public virtual async Task<Operation<BinaryData>> PostDoubleHeadersFinalLocationGetAsync(WaitUntil waitUntil, RequestContext context = null)
+        public virtual async Task<Operation<BinaryData>> PostDoubleHeadersFinalLocationGetAsync(WaitUntil waitUntil, RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("LROsClient.PostDoubleHeadersFinalLocationGet");
             scope.Start();
@@ -2443,7 +2443,7 @@ namespace lro_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="Operation"/> representing an asynchronous operation on the service. </returns>
         /// <include file="Docs/LROsClient.xml" path="doc/members/member[@name='PostDoubleHeadersFinalLocationGet(WaitUntil,RequestContext)']/*" />
-        public virtual Operation<BinaryData> PostDoubleHeadersFinalLocationGet(WaitUntil waitUntil, RequestContext context = null)
+        public virtual Operation<BinaryData> PostDoubleHeadersFinalLocationGet(WaitUntil waitUntil, RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("LROsClient.PostDoubleHeadersFinalLocationGet");
             scope.Start();
@@ -2474,7 +2474,7 @@ namespace lro_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="Operation"/> representing an asynchronous operation on the service. </returns>
         /// <include file="Docs/LROsClient.xml" path="doc/members/member[@name='PostDoubleHeadersFinalAzureHeaderGetAsync(WaitUntil,RequestContext)']/*" />
-        public virtual async Task<Operation<BinaryData>> PostDoubleHeadersFinalAzureHeaderGetAsync(WaitUntil waitUntil, RequestContext context = null)
+        public virtual async Task<Operation<BinaryData>> PostDoubleHeadersFinalAzureHeaderGetAsync(WaitUntil waitUntil, RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("LROsClient.PostDoubleHeadersFinalAzureHeaderGet");
             scope.Start();
@@ -2505,7 +2505,7 @@ namespace lro_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="Operation"/> representing an asynchronous operation on the service. </returns>
         /// <include file="Docs/LROsClient.xml" path="doc/members/member[@name='PostDoubleHeadersFinalAzureHeaderGet(WaitUntil,RequestContext)']/*" />
-        public virtual Operation<BinaryData> PostDoubleHeadersFinalAzureHeaderGet(WaitUntil waitUntil, RequestContext context = null)
+        public virtual Operation<BinaryData> PostDoubleHeadersFinalAzureHeaderGet(WaitUntil waitUntil, RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("LROsClient.PostDoubleHeadersFinalAzureHeaderGet");
             scope.Start();
@@ -2536,7 +2536,7 @@ namespace lro_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="Operation"/> representing an asynchronous operation on the service. </returns>
         /// <include file="Docs/LROsClient.xml" path="doc/members/member[@name='PostDoubleHeadersFinalAzureHeaderGetDefaultAsync(WaitUntil,RequestContext)']/*" />
-        public virtual async Task<Operation<BinaryData>> PostDoubleHeadersFinalAzureHeaderGetDefaultAsync(WaitUntil waitUntil, RequestContext context = null)
+        public virtual async Task<Operation<BinaryData>> PostDoubleHeadersFinalAzureHeaderGetDefaultAsync(WaitUntil waitUntil, RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("LROsClient.PostDoubleHeadersFinalAzureHeaderGetDefault");
             scope.Start();
@@ -2567,7 +2567,7 @@ namespace lro_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="Operation"/> representing an asynchronous operation on the service. </returns>
         /// <include file="Docs/LROsClient.xml" path="doc/members/member[@name='PostDoubleHeadersFinalAzureHeaderGetDefault(WaitUntil,RequestContext)']/*" />
-        public virtual Operation<BinaryData> PostDoubleHeadersFinalAzureHeaderGetDefault(WaitUntil waitUntil, RequestContext context = null)
+        public virtual Operation<BinaryData> PostDoubleHeadersFinalAzureHeaderGetDefault(WaitUntil waitUntil, RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("LROsClient.PostDoubleHeadersFinalAzureHeaderGetDefault");
             scope.Start();

@@ -628,6 +628,10 @@
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\CadlRanchProjects\\azure\\core\\traits\\src\\Generated -n"
     },
+    "typespec-encode/bytes": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\CadlRanchProjects\\encode\\bytes\\src\\Generated -n"
+    },
     "typespec-encode/datetime": {
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\CadlRanchProjects\\encode\\datetime\\src\\Generated -n"
@@ -655,6 +659,10 @@
     "typespec-server/path/single": {
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\CadlRanchProjects\\server\\path\\single\\src\\Generated -n"
+    },
+    "typespec-special-headers/repeatability": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\CadlRanchProjects\\special-headers\\repeatability\\src\\Generated -n"
     },
     "typespec-special-words": {
       "commandName": "Project",

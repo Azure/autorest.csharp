@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
+using System.Linq;
 using System.Threading.Tasks;
 using AutoRest.CSharp.AutoRest.Plugins;
 using Microsoft.CodeAnalysis;
@@ -41,9 +42,12 @@ namespace AutoRest.CSharp.MgmtTest.AutoRest
         private static Project CreateSourceCodeProject(string sourceCodePath, string[] sharedSourceFolders)
         {
             var sourceCodeProject = CreateGeneratedCodeProject();
-            var sourceCodeGeneratedDirectory = Path.Join(sourceCodePath, GeneratedCodeWorkspace.GeneratedFolder);
+            DirectoryInfo di = new DirectoryInfo(sourceCodePath);
+            var genFolders = di.EnumerateDirectories(GeneratedCodeWorkspace.GeneratedFolder, SearchOption.AllDirectories).ToList();
 
-            sourceCodeProject = GeneratedCodeWorkspace.AddDirectory(sourceCodeProject, sourceCodePath, skipPredicate: sourceFile => sourceFile.StartsWith(sourceCodeGeneratedDirectory));
+            sourceCodeProject = GeneratedCodeWorkspace.AddDirectory(sourceCodeProject, sourceCodePath,
+                // Skip adding the generated sdk code to the project
+                skipPredicate: sourceFile => genFolders.Exists(f => sourceFile.StartsWith(f.FullName)));
 
             foreach (var sharedSourceFolder in sharedSourceFolders)
             {

@@ -13,4 +13,5 @@ data-plane: true
 security: AzureKey
 security-header-name: Ocp-Apim-Subscription-Key
 disable-pagination-top-renaming: true
+keep-non-overloadable-protocol-signature: true
 ```

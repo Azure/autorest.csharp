@@ -7,6 +7,7 @@ using Azure;
 using Azure.Core;
 using ConvenienceInCadl;
 using ConvenienceInCadl.Models;
+using MixApiVersion;
 using NUnit.Framework;
 
 namespace AutoRest.TestServer.Tests
@@ -98,8 +99,8 @@ namespace AutoRest.TestServer.Tests
         [Test]
         public void ProtocolOptionalModelScenario()
         {
-            var protocolInUpdate = typeof(ConvenienceInCadlClient).GetMethod("ProtocolOptionalModel");
-            var convenienceInUpdate = typeof(ConvenienceInCadlClient).GetMethod("ProtocolOptionalModelValue");
+            var protocolInUpdate = typeof(ConvenienceInCadlClient).GetMethod("ProtocolOptionalModel", new[] { typeof(RequestContent), typeof(RequestContext) });
+            var convenienceInUpdate = typeof(ConvenienceInCadlClient).GetMethod("ProtocolOptionalModel", new[] { typeof(Model), typeof(CancellationToken) });
             Assert.AreEqual(true, protocolInUpdate.GetParameters().Last().IsOptional);
             Assert.AreEqual(false, protocolInUpdate.GetParameters().First().IsOptional); // This is RequestContent, which is actually optional.
             Assert.AreEqual(true, convenienceInUpdate.GetParameters().First().IsOptional);
@@ -164,8 +165,8 @@ namespace AutoRest.TestServer.Tests
         [Test]
         public void ConvenienceOptionalModelWithOptionalScenario()
         {
-            var protocolInUpdate = typeof(ConvenienceInCadlClient).GetMethod("ConvenienceOptionalModelWithOptional");
-            var convenienceInUpdate = typeof(ConvenienceInCadlClient).GetMethod("ConvenienceOptionalModelWithOptionalValue");
+            var protocolInUpdate = typeof(ConvenienceInCadlClient).GetMethod("ConvenienceOptionalModelWithOptional", new[] { typeof(RequestContent), typeof(RequestContext) });
+            var convenienceInUpdate = typeof(ConvenienceInCadlClient).GetMethod("ConvenienceOptionalModelWithOptional", new[] { typeof(Model), typeof(CancellationToken) });
             Assert.AreEqual(true, protocolInUpdate.GetParameters().Last().IsOptional);
             Assert.AreEqual(false, protocolInUpdate.GetParameters().First().IsOptional); // This is RequestContent, which is actually optional.
             Assert.AreEqual(true, convenienceInUpdate.GetParameters().First().IsOptional);
@@ -188,7 +189,7 @@ namespace AutoRest.TestServer.Tests
         {
             var protocolInUpdate = typeof(ConvenienceInCadlClient).GetMethod("ConvenienceOptionalModelWithRequired", new[] { typeof(RequestContent), typeof(RequestContext) });
             var convenienceInUpdate = typeof(ConvenienceInCadlClient).GetMethod("ConvenienceOptionalModelWithRequired", new[] { typeof(Model), typeof(CancellationToken) });
-            Assert.AreEqual(false, protocolInUpdate.GetParameters().Last().IsOptional);
+            Assert.AreEqual(true, protocolInUpdate.GetParameters().Last().IsOptional);
             Assert.AreEqual(false, protocolInUpdate.GetParameters().First().IsOptional); // This is RequestContent, which is actually optional.
             Assert.AreEqual(true, convenienceInUpdate.GetParameters().First().IsOptional);
         }
@@ -211,6 +212,37 @@ namespace AutoRest.TestServer.Tests
             Assert.AreEqual(true, protocolInUpdate.GetParameters().Last().IsOptional);
             Assert.AreEqual(false, protocolInUpdate.GetParameters().First().IsOptional);
             Assert.AreEqual(false, convenienceInUpdate.GetParameters().First().IsOptional);
+        }
+
+        [Test]
+        public void NoConvenienceScenario()
+        {
+            var protocolInUpdate = typeof(ConvenienceInCadlClient).GetMethod("NoConvenience");
+            Assert.AreEqual(false, protocolInUpdate.GetParameters().Last().IsOptional);
+        }
+
+        [Test]
+        public void NoConvenienceRequiredBodyScenario()
+        {
+            var protocolInUpdate = typeof(ConvenienceInCadlClient).GetMethod("NoConvenienceRequiredBody");
+            Assert.AreEqual(true, protocolInUpdate.GetParameters().Last().IsOptional);
+        }
+
+        [Test]
+        public void NoConvenienceOptionalBodyScenario()
+        {
+            var protocolInUpdate = typeof(ConvenienceInCadlClient).GetMethod("NoConvenienceOptionalBody");
+            Assert.AreEqual(true, protocolInUpdate.GetParameters().Last().IsOptional);
+        }
+
+        [Test]
+        public void SetKeepNonOverloadableProtocolSignature()
+        {
+            var method = typeof(MixApiVersionClient).GetMethod("Delete");
+            Assert.AreEqual(true, method.GetParameters().Last().IsOptional);
+
+            method = typeof(MixApiVersionClient).GetMethod("Read");
+            Assert.AreEqual(false, method.GetParameters().Last().IsOptional);
         }
     }
 }

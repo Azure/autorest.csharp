@@ -198,7 +198,7 @@ namespace Azure.NewProject.TypeSpec
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/NewProjectTypeSpecClient.xml" path="doc/members/member[@name='TopAction2Async(RequestContext)']/*" />
-        public virtual async Task<Response> TopAction2Async(RequestContext context = null)
+        public virtual async Task<Response> TopAction2Async(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("NewProjectTypeSpecClient.TopAction2");
             scope.Start();
@@ -228,7 +228,7 @@ namespace Azure.NewProject.TypeSpec
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/NewProjectTypeSpecClient.xml" path="doc/members/member[@name='TopAction2(RequestContext)']/*" />
-        public virtual Response TopAction2(RequestContext context = null)
+        public virtual Response TopAction2(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("NewProjectTypeSpecClient.TopAction2");
             scope.Start();
@@ -534,18 +534,17 @@ namespace Azure.NewProject.TypeSpec
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="repeatabilityFirstSent"> The DateTime to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/NewProjectTypeSpecClient.xml" path="doc/members/member[@name='AddTimeHeaderAsync(DateTimeOffset?,RequestContext)']/*" />
-        public virtual async Task<Response> AddTimeHeaderAsync(DateTimeOffset? repeatabilityFirstSent = null, RequestContext context = null)
+        /// <include file="Docs/NewProjectTypeSpecClient.xml" path="doc/members/member[@name='AddTimeHeaderAsync(RequestContext)']/*" />
+        public virtual async Task<Response> AddTimeHeaderAsync(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("NewProjectTypeSpecClient.AddTimeHeader");
             scope.Start();
             try
             {
-                using HttpMessage message = CreateAddTimeHeaderRequest(repeatabilityFirstSent, context);
+                using HttpMessage message = CreateAddTimeHeaderRequest(context);
                 return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -565,18 +564,17 @@ namespace Azure.NewProject.TypeSpec
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="repeatabilityFirstSent"> The DateTime to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/NewProjectTypeSpecClient.xml" path="doc/members/member[@name='AddTimeHeader(DateTimeOffset?,RequestContext)']/*" />
-        public virtual Response AddTimeHeader(DateTimeOffset? repeatabilityFirstSent = null, RequestContext context = null)
+        /// <include file="Docs/NewProjectTypeSpecClient.xml" path="doc/members/member[@name='AddTimeHeader(RequestContext)']/*" />
+        public virtual Response AddTimeHeader(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("NewProjectTypeSpecClient.AddTimeHeader");
             scope.Start();
             try
             {
-                using HttpMessage message = CreateAddTimeHeaderRequest(repeatabilityFirstSent, context);
+                using HttpMessage message = CreateAddTimeHeaderRequest(context);
                 return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
@@ -714,7 +712,7 @@ namespace Azure.NewProject.TypeSpec
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/NewProjectTypeSpecClient.xml" path="doc/members/member[@name='SayHiAsync(string,string,string,RequestContext)']/*" />
-        public virtual async Task<Response> SayHiAsync(string headParameter, string queryParameter, string optionalQuery = null, RequestContext context = null)
+        public virtual async Task<Response> SayHiAsync(string headParameter, string queryParameter, string optionalQuery, RequestContext context)
         {
             Argument.AssertNotNull(headParameter, nameof(headParameter));
             Argument.AssertNotNull(queryParameter, nameof(queryParameter));
@@ -751,7 +749,7 @@ namespace Azure.NewProject.TypeSpec
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/NewProjectTypeSpecClient.xml" path="doc/members/member[@name='SayHi(string,string,string,RequestContext)']/*" />
-        public virtual Response SayHi(string headParameter, string queryParameter, string optionalQuery = null, RequestContext context = null)
+        public virtual Response SayHi(string headParameter, string queryParameter, string optionalQuery, RequestContext context)
         {
             Argument.AssertNotNull(headParameter, nameof(headParameter));
             Argument.AssertNotNull(queryParameter, nameof(queryParameter));
@@ -1274,7 +1272,7 @@ namespace Azure.NewProject.TypeSpec
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/NewProjectTypeSpecClient.xml" path="doc/members/member[@name='GetUnknownValueAsync(RequestContext)']/*" />
-        public virtual async Task<Response> GetUnknownValueAsync(RequestContext context = null)
+        public virtual async Task<Response> GetUnknownValueAsync(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("NewProjectTypeSpecClient.GetUnknownValue");
             scope.Start();
@@ -1304,7 +1302,7 @@ namespace Azure.NewProject.TypeSpec
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/NewProjectTypeSpecClient.xml" path="doc/members/member[@name='GetUnknownValue(RequestContext)']/*" />
-        public virtual Response GetUnknownValue(RequestContext context = null)
+        public virtual Response GetUnknownValue(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("NewProjectTypeSpecClient.GetUnknownValue");
             scope.Start();
@@ -1428,22 +1426,42 @@ namespace Azure.NewProject.TypeSpec
 
         /// <summary> When set protocol false and convenient true, the convenient method should be generated even it has the same signature as protocol one. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <include file="Docs/NewProjectTypeSpecClient.xml" path="doc/members/member[@name='StillConvenientAsync(CancellationToken)']/*" />
-        public virtual async Task<Response> StillConvenientAsync(CancellationToken cancellationToken = default)
+        /// <include file="Docs/NewProjectTypeSpecClient.xml" path="doc/members/member[@name='StillConvenientValueAsync(CancellationToken)']/*" />
+        public virtual async Task<Response> StillConvenientValueAsync(CancellationToken cancellationToken = default)
         {
-            RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = await StillConvenientAsync(context).ConfigureAwait(false);
-            return response;
+            using var scope = ClientDiagnostics.CreateScope("NewProjectTypeSpecClient.StillConvenientValue");
+            scope.Start();
+            try
+            {
+                RequestContext context = FromCancellationToken(cancellationToken);
+                Response response = await StillConvenientAsync(context).ConfigureAwait(false);
+                return response;
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary> When set protocol false and convenient true, the convenient method should be generated even it has the same signature as protocol one. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <include file="Docs/NewProjectTypeSpecClient.xml" path="doc/members/member[@name='StillConvenient(CancellationToken)']/*" />
-        public virtual Response StillConvenient(CancellationToken cancellationToken = default)
+        /// <include file="Docs/NewProjectTypeSpecClient.xml" path="doc/members/member[@name='StillConvenientValue(CancellationToken)']/*" />
+        public virtual Response StillConvenientValue(CancellationToken cancellationToken = default)
         {
-            RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = StillConvenient(context);
-            return response;
+            using var scope = ClientDiagnostics.CreateScope("NewProjectTypeSpecClient.StillConvenientValue");
+            scope.Start();
+            try
+            {
+                RequestContext context = FromCancellationToken(cancellationToken);
+                Response response = StillConvenient(context);
+                return response;
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
         }
 
         /// <summary>
@@ -1456,7 +1474,7 @@ namespace Azure.NewProject.TypeSpec
         /// </item>
         /// <item>
         /// <description>
-        /// Please try the simpler <see cref="StillConvenientAsync(CancellationToken)"/> convenience overload with strongly typed models first.
+        /// Please try the simpler <see cref="StillConvenientValueAsync(CancellationToken)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>
@@ -1465,7 +1483,7 @@ namespace Azure.NewProject.TypeSpec
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/NewProjectTypeSpecClient.xml" path="doc/members/member[@name='StillConvenientAsync(RequestContext)']/*" />
-        internal virtual async Task<Response> StillConvenientAsync(RequestContext context)
+        internal virtual async Task<Response> StillConvenientAsync(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("NewProjectTypeSpecClient.StillConvenient");
             scope.Start();
@@ -1491,7 +1509,7 @@ namespace Azure.NewProject.TypeSpec
         /// </item>
         /// <item>
         /// <description>
-        /// Please try the simpler <see cref="StillConvenient(CancellationToken)"/> convenience overload with strongly typed models first.
+        /// Please try the simpler <see cref="StillConvenientValue(CancellationToken)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>
@@ -1500,7 +1518,7 @@ namespace Azure.NewProject.TypeSpec
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/NewProjectTypeSpecClient.xml" path="doc/members/member[@name='StillConvenient(RequestContext)']/*" />
-        internal virtual Response StillConvenient(RequestContext context)
+        internal virtual Response StillConvenient(RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("NewProjectTypeSpecClient.StillConvenient");
             scope.Start();
@@ -1593,7 +1611,7 @@ namespace Azure.NewProject.TypeSpec
             return message;
         }
 
-        internal HttpMessage CreateAddTimeHeaderRequest(DateTimeOffset? repeatabilityFirstSent, RequestContext context)
+        internal HttpMessage CreateAddTimeHeaderRequest(RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier204);
             var request = message.Request;
@@ -1604,10 +1622,7 @@ namespace Azure.NewProject.TypeSpec
             uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
-            if (repeatabilityFirstSent != null)
-            {
-                request.Headers.Add("Repeatability-First-Sent", repeatabilityFirstSent.Value, "R");
-            }
+            request.Headers.Add("Repeatability-First-Sent", DateTimeOffset.Now, "R");
             return message;
         }
 

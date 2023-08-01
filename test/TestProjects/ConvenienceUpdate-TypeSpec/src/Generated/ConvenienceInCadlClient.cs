@@ -244,6 +244,196 @@ namespace ConvenienceInCadl
             }
         }
 
+        /// <summary>
+        /// [Protocol Method] No convenience method. But if we add the convenientAPI decorator, there will be ambiguity.
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <include file="Docs/ConvenienceInCadlClient.xml" path="doc/members/member[@name='NoConvenienceAsync(RequestContext)']/*" />
+        public virtual async Task<Response> NoConvenienceAsync(RequestContext context)
+        {
+            using var scope = ClientDiagnostics.CreateScope("ConvenienceInCadlClient.NoConvenience");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateNoConvenienceRequest(context);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// [Protocol Method] No convenience method. But if we add the convenientAPI decorator, there will be ambiguity.
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <include file="Docs/ConvenienceInCadlClient.xml" path="doc/members/member[@name='NoConvenience(RequestContext)']/*" />
+        public virtual Response NoConvenience(RequestContext context)
+        {
+            using var scope = ClientDiagnostics.CreateScope("ConvenienceInCadlClient.NoConvenience");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateNoConvenienceRequest(context);
+                return _pipeline.ProcessMessage(message, context);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// [Protocol Method] No convenience method. But if we add the convenientAPI decorator, there will be no ambiguity.
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
+        /// <param name="content"> The content to send as the body of the request. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <include file="Docs/ConvenienceInCadlClient.xml" path="doc/members/member[@name='NoConvenienceRequiredBodyAsync(RequestContent,RequestContext)']/*" />
+        public virtual async Task<Response> NoConvenienceRequiredBodyAsync(RequestContent content, RequestContext context = null)
+        {
+            Argument.AssertNotNull(content, nameof(content));
+
+            using var scope = ClientDiagnostics.CreateScope("ConvenienceInCadlClient.NoConvenienceRequiredBody");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateNoConvenienceRequiredBodyRequest(content, context);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// [Protocol Method] No convenience method. But if we add the convenientAPI decorator, there will be no ambiguity.
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
+        /// <param name="content"> The content to send as the body of the request. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <include file="Docs/ConvenienceInCadlClient.xml" path="doc/members/member[@name='NoConvenienceRequiredBody(RequestContent,RequestContext)']/*" />
+        public virtual Response NoConvenienceRequiredBody(RequestContent content, RequestContext context = null)
+        {
+            Argument.AssertNotNull(content, nameof(content));
+
+            using var scope = ClientDiagnostics.CreateScope("ConvenienceInCadlClient.NoConvenienceRequiredBody");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateNoConvenienceRequiredBodyRequest(content, context);
+                return _pipeline.ProcessMessage(message, context);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// [Protocol Method] No convenience method. But if we add the convenientAPI decorator, there will be ambiguity.
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
+        /// <param name="content"> The content to send as the body of the request. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <include file="Docs/ConvenienceInCadlClient.xml" path="doc/members/member[@name='NoConvenienceOptionalBodyAsync(RequestContent,RequestContext)']/*" />
+        public virtual async Task<Response> NoConvenienceOptionalBodyAsync(RequestContent content, RequestContext context = null)
+        {
+            using var scope = ClientDiagnostics.CreateScope("ConvenienceInCadlClient.NoConvenienceOptionalBody");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateNoConvenienceOptionalBodyRequest(content, context);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// [Protocol Method] No convenience method. But if we add the convenientAPI decorator, there will be ambiguity.
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
+        /// <param name="content"> The content to send as the body of the request. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <include file="Docs/ConvenienceInCadlClient.xml" path="doc/members/member[@name='NoConvenienceOptionalBody(RequestContent,RequestContext)']/*" />
+        public virtual Response NoConvenienceOptionalBody(RequestContent content, RequestContext context = null)
+        {
+            using var scope = ClientDiagnostics.CreateScope("ConvenienceInCadlClient.NoConvenienceOptionalBody");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateNoConvenienceOptionalBodyRequest(content, context);
+                return _pipeline.ProcessMessage(message, context);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
         /// <summary> Initial operation only has protocol method. In the updated version, we add the convenience method. </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <include file="Docs/ConvenienceInCadlClient.xml" path="doc/members/member[@name='ProtocolValueAsync(CancellationToken)']/*" />
@@ -905,43 +1095,23 @@ namespace ConvenienceInCadl
         /// <summary> Initial operation only has protocol method with optional model parameter. In the updated version, we add the convenience method. </summary>
         /// <param name="optional"> The Model to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <include file="Docs/ConvenienceInCadlClient.xml" path="doc/members/member[@name='ProtocolOptionalModelValueAsync(Model,CancellationToken)']/*" />
-        public virtual async Task<Response> ProtocolOptionalModelValueAsync(Model optional = null, CancellationToken cancellationToken = default)
+        /// <include file="Docs/ConvenienceInCadlClient.xml" path="doc/members/member[@name='ProtocolOptionalModelAsync(Model,CancellationToken)']/*" />
+        public virtual async Task<Response> ProtocolOptionalModelAsync(Model optional = null, CancellationToken cancellationToken = default)
         {
-            using var scope = ClientDiagnostics.CreateScope("ConvenienceInCadlClient.ProtocolOptionalModelValue");
-            scope.Start();
-            try
-            {
-                RequestContext context = FromCancellationToken(cancellationToken);
-                Response response = await ProtocolOptionalModelAsync(optional?.ToRequestContent(), context).ConfigureAwait(false);
-                return response;
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
+            RequestContext context = FromCancellationToken(cancellationToken);
+            Response response = await ProtocolOptionalModelAsync(optional?.ToRequestContent(), context).ConfigureAwait(false);
+            return response;
         }
 
         /// <summary> Initial operation only has protocol method with optional model parameter. In the updated version, we add the convenience method. </summary>
         /// <param name="optional"> The Model to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <include file="Docs/ConvenienceInCadlClient.xml" path="doc/members/member[@name='ProtocolOptionalModelValue(Model,CancellationToken)']/*" />
-        public virtual Response ProtocolOptionalModelValue(Model optional = null, CancellationToken cancellationToken = default)
+        /// <include file="Docs/ConvenienceInCadlClient.xml" path="doc/members/member[@name='ProtocolOptionalModel(Model,CancellationToken)']/*" />
+        public virtual Response ProtocolOptionalModel(Model optional = null, CancellationToken cancellationToken = default)
         {
-            using var scope = ClientDiagnostics.CreateScope("ConvenienceInCadlClient.ProtocolOptionalModelValue");
-            scope.Start();
-            try
-            {
-                RequestContext context = FromCancellationToken(cancellationToken);
-                Response response = ProtocolOptionalModel(optional?.ToRequestContent(), context);
-                return response;
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
+            RequestContext context = FromCancellationToken(cancellationToken);
+            Response response = ProtocolOptionalModel(optional?.ToRequestContent(), context);
+            return response;
         }
 
         /// <summary>
@@ -954,7 +1124,7 @@ namespace ConvenienceInCadl
         /// </item>
         /// <item>
         /// <description>
-        /// Please try the simpler <see cref="ProtocolOptionalModelValueAsync(Model,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// Please try the simpler <see cref="ProtocolOptionalModelAsync(Model,CancellationToken)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>
@@ -990,7 +1160,7 @@ namespace ConvenienceInCadl
         /// </item>
         /// <item>
         /// <description>
-        /// Please try the simpler <see cref="ProtocolOptionalModelValue(Model,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// Please try the simpler <see cref="ProtocolOptionalModel(Model,CancellationToken)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>
@@ -1541,43 +1711,23 @@ namespace ConvenienceInCadl
         /// <summary> Operation has protocol method with optional body parameter and optional RequestContext and convenience method. </summary>
         /// <param name="optional"> The Model to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <include file="Docs/ConvenienceInCadlClient.xml" path="doc/members/member[@name='ConvenienceOptionalModelWithOptionalValueAsync(Model,CancellationToken)']/*" />
-        public virtual async Task<Response> ConvenienceOptionalModelWithOptionalValueAsync(Model optional = null, CancellationToken cancellationToken = default)
+        /// <include file="Docs/ConvenienceInCadlClient.xml" path="doc/members/member[@name='ConvenienceOptionalModelWithOptionalAsync(Model,CancellationToken)']/*" />
+        public virtual async Task<Response> ConvenienceOptionalModelWithOptionalAsync(Model optional = null, CancellationToken cancellationToken = default)
         {
-            using var scope = ClientDiagnostics.CreateScope("ConvenienceInCadlClient.ConvenienceOptionalModelWithOptionalValue");
-            scope.Start();
-            try
-            {
-                RequestContext context = FromCancellationToken(cancellationToken);
-                Response response = await ConvenienceOptionalModelWithOptionalAsync(optional?.ToRequestContent(), context).ConfigureAwait(false);
-                return response;
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
+            RequestContext context = FromCancellationToken(cancellationToken);
+            Response response = await ConvenienceOptionalModelWithOptionalAsync(optional?.ToRequestContent(), context).ConfigureAwait(false);
+            return response;
         }
 
         /// <summary> Operation has protocol method with optional body parameter and optional RequestContext and convenience method. </summary>
         /// <param name="optional"> The Model to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <include file="Docs/ConvenienceInCadlClient.xml" path="doc/members/member[@name='ConvenienceOptionalModelWithOptionalValue(Model,CancellationToken)']/*" />
-        public virtual Response ConvenienceOptionalModelWithOptionalValue(Model optional = null, CancellationToken cancellationToken = default)
+        /// <include file="Docs/ConvenienceInCadlClient.xml" path="doc/members/member[@name='ConvenienceOptionalModelWithOptional(Model,CancellationToken)']/*" />
+        public virtual Response ConvenienceOptionalModelWithOptional(Model optional = null, CancellationToken cancellationToken = default)
         {
-            using var scope = ClientDiagnostics.CreateScope("ConvenienceInCadlClient.ConvenienceOptionalModelWithOptionalValue");
-            scope.Start();
-            try
-            {
-                RequestContext context = FromCancellationToken(cancellationToken);
-                Response response = ConvenienceOptionalModelWithOptional(optional?.ToRequestContent(), context);
-                return response;
-            }
-            catch (Exception e)
-            {
-                scope.Failed(e);
-                throw;
-            }
+            RequestContext context = FromCancellationToken(cancellationToken);
+            Response response = ConvenienceOptionalModelWithOptional(optional?.ToRequestContent(), context);
+            return response;
         }
 
         /// <summary>
@@ -1590,7 +1740,7 @@ namespace ConvenienceInCadl
         /// </item>
         /// <item>
         /// <description>
-        /// Please try the simpler <see cref="ConvenienceOptionalModelWithOptionalValueAsync(Model,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// Please try the simpler <see cref="ConvenienceOptionalModelWithOptionalAsync(Model,CancellationToken)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>
@@ -1626,7 +1776,7 @@ namespace ConvenienceInCadl
         /// </item>
         /// <item>
         /// <description>
-        /// Please try the simpler <see cref="ConvenienceOptionalModelWithOptionalValue(Model,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// Please try the simpler <see cref="ConvenienceOptionalModelWithOptional(Model,CancellationToken)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>
@@ -1800,7 +1950,7 @@ namespace ConvenienceInCadl
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/ConvenienceInCadlClient.xml" path="doc/members/member[@name='ConvenienceOptionalModelWithRequiredAsync(RequestContent,RequestContext)']/*" />
-        public virtual async Task<Response> ConvenienceOptionalModelWithRequiredAsync(RequestContent content, RequestContext context)
+        public virtual async Task<Response> ConvenienceOptionalModelWithRequiredAsync(RequestContent content, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("ConvenienceInCadlClient.ConvenienceOptionalModelWithRequired");
             scope.Start();
@@ -1836,7 +1986,7 @@ namespace ConvenienceInCadl
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/ConvenienceInCadlClient.xml" path="doc/members/member[@name='ConvenienceOptionalModelWithRequired(RequestContent,RequestContext)']/*" />
-        public virtual Response ConvenienceOptionalModelWithRequired(RequestContent content, RequestContext context)
+        public virtual Response ConvenienceOptionalModelWithRequired(RequestContent content, RequestContext context = null)
         {
             using var scope = ClientDiagnostics.CreateScope("ConvenienceInCadlClient.ConvenienceOptionalModelWithRequired");
             scope.Start();
@@ -1986,6 +2136,49 @@ namespace ConvenienceInCadl
             {
                 uri.AppendQuery("optional", optional.Value, true);
             }
+            uri.AppendQuery("api-version", _apiVersion, true);
+            request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
+            request.Headers.Add("Content-Type", "application/json");
+            request.Content = content;
+            return message;
+        }
+
+        internal HttpMessage CreateNoConvenienceRequest(RequestContext context)
+        {
+            var message = _pipeline.CreateMessage(context, ResponseClassifier200);
+            var request = message.Request;
+            request.Method = RequestMethod.Get;
+            var uri = new RawRequestUriBuilder();
+            uri.AppendPath("/noConvenience", false);
+            uri.AppendQuery("api-version", _apiVersion, true);
+            request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
+            return message;
+        }
+
+        internal HttpMessage CreateNoConvenienceRequiredBodyRequest(RequestContent content, RequestContext context)
+        {
+            var message = _pipeline.CreateMessage(context, ResponseClassifier200);
+            var request = message.Request;
+            request.Method = RequestMethod.Get;
+            var uri = new RawRequestUriBuilder();
+            uri.AppendPath("/noConvenienceRequiredBody", false);
+            uri.AppendQuery("api-version", _apiVersion, true);
+            request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
+            request.Headers.Add("Content-Type", "application/json");
+            request.Content = content;
+            return message;
+        }
+
+        internal HttpMessage CreateNoConvenienceOptionalBodyRequest(RequestContent content, RequestContext context)
+        {
+            var message = _pipeline.CreateMessage(context, ResponseClassifier200);
+            var request = message.Request;
+            request.Method = RequestMethod.Get;
+            var uri = new RawRequestUriBuilder();
+            uri.AppendPath("/noConvenienceOptionalBody", false);
             uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");

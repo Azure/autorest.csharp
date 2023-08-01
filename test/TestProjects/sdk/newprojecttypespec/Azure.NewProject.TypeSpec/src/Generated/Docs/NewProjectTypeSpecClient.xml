@@ -77,13 +77,13 @@ Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
     </member>
     <member name="TopAction2Async(RequestContext)">
 <example>
-This sample shows how to call TopAction2Async and parse the result.
+This sample shows how to call TopAction2Async with required parameters and parse the result.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
 var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new NewProjectTypeSpecClient(endpoint, credential);
 
-Response response = await client.TopAction2Async();
+Response response = await client.TopAction2Async(new RequestContext());
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("name").ToString());
@@ -102,13 +102,13 @@ Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
     </member>
     <member name="TopAction2(RequestContext)">
 <example>
-This sample shows how to call TopAction2 and parse the result.
+This sample shows how to call TopAction2 with required parameters and parse the result.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
 var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new NewProjectTypeSpecClient(endpoint, credential);
 
-Response response = client.TopAction2();
+Response response = client.TopAction2(new RequestContext());
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("name").ToString());
@@ -491,7 +491,7 @@ Console.WriteLine(result.GetProperty("name").ToString());
 ]]></code>
 </example>
     </member>
-    <member name="AddTimeHeaderAsync(DateTimeOffset?,RequestContext)">
+    <member name="AddTimeHeaderAsync(RequestContext)">
 <example>
 This sample shows how to call AddTimeHeaderAsync.
 <code><![CDATA[
@@ -502,18 +502,9 @@ var client = new NewProjectTypeSpecClient(endpoint, credential);
 Response response = await client.AddTimeHeaderAsync();
 Console.WriteLine(response.Status);
 ]]></code>
-This sample shows how to call AddTimeHeaderAsync with all parameters.
-<code><![CDATA[
-var credential = new AzureKeyCredential("<key>");
-var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new NewProjectTypeSpecClient(endpoint, credential);
-
-Response response = await client.AddTimeHeaderAsync(DateTimeOffset.UtcNow);
-Console.WriteLine(response.Status);
-]]></code>
 </example>
     </member>
-    <member name="AddTimeHeader(DateTimeOffset?,RequestContext)">
+    <member name="AddTimeHeader(RequestContext)">
 <example>
 This sample shows how to call AddTimeHeader.
 <code><![CDATA[
@@ -522,15 +513,6 @@ var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new NewProjectTypeSpecClient(endpoint, credential);
 
 Response response = client.AddTimeHeader();
-Console.WriteLine(response.Status);
-]]></code>
-This sample shows how to call AddTimeHeader with all parameters.
-<code><![CDATA[
-var credential = new AzureKeyCredential("<key>");
-var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new NewProjectTypeSpecClient(endpoint, credential);
-
-Response response = client.AddTimeHeader(DateTimeOffset.UtcNow);
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
@@ -605,24 +587,7 @@ var credential = new AzureKeyCredential("<key>");
 var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new NewProjectTypeSpecClient(endpoint, credential);
 
-Response response = await client.SayHiAsync("<headParameter>", "<queryParameter>");
-
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(result.GetProperty("name").ToString());
-Console.WriteLine(result.GetProperty("requiredUnion").ToString());
-Console.WriteLine(result.GetProperty("requiredLiteralString").ToString());
-Console.WriteLine(result.GetProperty("requiredLiteralInt").ToString());
-Console.WriteLine(result.GetProperty("requiredLiteralFloat").ToString());
-Console.WriteLine(result.GetProperty("requiredLiteralBool").ToString());
-Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
-]]></code>
-This sample shows how to call SayHiAsync with all parameters, and how to parse the result.
-<code><![CDATA[
-var credential = new AzureKeyCredential("<key>");
-var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new NewProjectTypeSpecClient(endpoint, credential);
-
-Response response = await client.SayHiAsync("<headParameter>", "<queryParameter>", "<optionalQuery>");
+Response response = await client.SayHiAsync("<headParameter>", "<queryParameter>", "<optionalQuery>", new RequestContext());
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("name").ToString());
@@ -647,24 +612,7 @@ var credential = new AzureKeyCredential("<key>");
 var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new NewProjectTypeSpecClient(endpoint, credential);
 
-Response response = client.SayHi("<headParameter>", "<queryParameter>");
-
-JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-Console.WriteLine(result.GetProperty("name").ToString());
-Console.WriteLine(result.GetProperty("requiredUnion").ToString());
-Console.WriteLine(result.GetProperty("requiredLiteralString").ToString());
-Console.WriteLine(result.GetProperty("requiredLiteralInt").ToString());
-Console.WriteLine(result.GetProperty("requiredLiteralFloat").ToString());
-Console.WriteLine(result.GetProperty("requiredLiteralBool").ToString());
-Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
-]]></code>
-This sample shows how to call SayHi with all parameters, and how to parse the result.
-<code><![CDATA[
-var credential = new AzureKeyCredential("<key>");
-var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new NewProjectTypeSpecClient(endpoint, credential);
-
-Response response = client.SayHi("<headParameter>", "<queryParameter>", "<optionalQuery>");
+Response response = client.SayHi("<headParameter>", "<queryParameter>", "<optionalQuery>", new RequestContext());
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("name").ToString());
@@ -1677,13 +1625,13 @@ Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
     </member>
     <member name="GetUnknownValueAsync(RequestContext)">
 <example>
-This sample shows how to call GetUnknownValueAsync and parse the result.
+This sample shows how to call GetUnknownValueAsync with required parameters and parse the result.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
 var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new NewProjectTypeSpecClient(endpoint, credential);
 
-Response response = await client.GetUnknownValueAsync();
+Response response = await client.GetUnknownValueAsync(new RequestContext());
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.ToString());
@@ -1692,13 +1640,13 @@ Console.WriteLine(result.ToString());
     </member>
     <member name="GetUnknownValue(RequestContext)">
 <example>
-This sample shows how to call GetUnknownValue and parse the result.
+This sample shows how to call GetUnknownValue with required parameters and parse the result.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
 var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new NewProjectTypeSpecClient(endpoint, credential);
 
-Response response = client.GetUnknownValue();
+Response response = client.GetUnknownValue(new RequestContext());
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.ToString());
@@ -1747,27 +1695,27 @@ var result = client.InternalProtocol(body);
     </member>
     <member name="InternalProtocol(RequestContent,RequestContext)">
     </member>
-    <member name="StillConvenientAsync(CancellationToken)">
+    <member name="StillConvenientValueAsync(CancellationToken)">
 <example>
-This sample shows how to call StillConvenientAsync.
+This sample shows how to call StillConvenientValueAsync.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
 var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new NewProjectTypeSpecClient(endpoint, credential);
 
-var result = await client.StillConvenientAsync();
+var result = await client.StillConvenientValueAsync();
 ]]></code>
 </example>
     </member>
-    <member name="StillConvenient(CancellationToken)">
+    <member name="StillConvenientValue(CancellationToken)">
 <example>
-This sample shows how to call StillConvenient.
+This sample shows how to call StillConvenientValue.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
 var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new NewProjectTypeSpecClient(endpoint, credential);
 
-var result = client.StillConvenient();
+var result = client.StillConvenientValue();
 ]]></code>
 </example>
     </member>

@@ -184,7 +184,7 @@ This sample shows how to call DeleteProvisioning202Accepted200SucceededAsync wit
 var credential = new AzureKeyCredential("<key>");
 var client = new LRORetrysClient(credential);
 
-var operation = await client.DeleteProvisioning202Accepted200SucceededAsync(WaitUntil.Completed);
+var operation = await client.DeleteProvisioning202Accepted200SucceededAsync(WaitUntil.Completed, new RequestContext());
 
 BinaryData responseData = operation.Value;
 JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
@@ -205,7 +205,7 @@ This sample shows how to call DeleteProvisioning202Accepted200Succeeded with req
 var credential = new AzureKeyCredential("<key>");
 var client = new LRORetrysClient(credential);
 
-var operation = client.DeleteProvisioning202Accepted200Succeeded(WaitUntil.Completed);
+var operation = client.DeleteProvisioning202Accepted200Succeeded(WaitUntil.Completed, new RequestContext());
 
 BinaryData responseData = operation.Value;
 JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;

@@ -200,7 +200,7 @@ namespace lro_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="Operation"/> representing an asynchronous operation on the service. </returns>
         /// <include file="Docs/LRORetrysClient.xml" path="doc/members/member[@name='DeleteProvisioning202Accepted200SucceededAsync(WaitUntil,RequestContext)']/*" />
-        public virtual async Task<Operation<BinaryData>> DeleteProvisioning202Accepted200SucceededAsync(WaitUntil waitUntil, RequestContext context = null)
+        public virtual async Task<Operation<BinaryData>> DeleteProvisioning202Accepted200SucceededAsync(WaitUntil waitUntil, RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("LRORetrysClient.DeleteProvisioning202Accepted200Succeeded");
             scope.Start();
@@ -231,7 +231,7 @@ namespace lro_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="Operation"/> representing an asynchronous operation on the service. </returns>
         /// <include file="Docs/LRORetrysClient.xml" path="doc/members/member[@name='DeleteProvisioning202Accepted200Succeeded(WaitUntil,RequestContext)']/*" />
-        public virtual Operation<BinaryData> DeleteProvisioning202Accepted200Succeeded(WaitUntil waitUntil, RequestContext context = null)
+        public virtual Operation<BinaryData> DeleteProvisioning202Accepted200Succeeded(WaitUntil waitUntil, RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("LRORetrysClient.DeleteProvisioning202Accepted200Succeeded");
             scope.Start();

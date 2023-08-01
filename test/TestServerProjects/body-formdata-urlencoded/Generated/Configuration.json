@@ -1,8 +1,8 @@
 {
-  "OutputFolder": ".",
-  "Namespace": "body_formdata_urlencoded",
-  "LibraryName": "BodyFormsDataURLEncoded",
-  "SharedSourceFolders": [
+  "output-folder": ".",
+  "namespace": "body_formdata_urlencoded",
+  "library-name": "BodyFormsDataURLEncoded",
+  "shared-source-folders": [
     "..\\..\\..\\..\\artifacts\\bin\\AutoRest.CSharp\\Debug\\net6.0\\Generator.Shared",
     "..\\..\\..\\..\\artifacts\\bin\\AutoRest.CSharp\\Debug\\net6.0\\Azure.Core.Shared"
   ],

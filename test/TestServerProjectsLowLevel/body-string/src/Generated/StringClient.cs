@@ -71,7 +71,7 @@ namespace body_string_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/StringClient.xml" path="doc/members/member[@name='GetNullAsync(RequestContext)']/*" />
-        public virtual async Task<Response> GetNullAsync(RequestContext context = null)
+        public virtual async Task<Response> GetNullAsync(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("StringClient.GetNull");
             scope.Start();
@@ -101,7 +101,7 @@ namespace body_string_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/StringClient.xml" path="doc/members/member[@name='GetNull(RequestContext)']/*" />
-        public virtual Response GetNull(RequestContext context = null)
+        public virtual Response GetNull(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("StringClient.GetNull");
             scope.Start();
@@ -193,7 +193,7 @@ namespace body_string_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/StringClient.xml" path="doc/members/member[@name='GetEmptyAsync(RequestContext)']/*" />
-        public virtual async Task<Response> GetEmptyAsync(RequestContext context = null)
+        public virtual async Task<Response> GetEmptyAsync(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("StringClient.GetEmpty");
             scope.Start();
@@ -223,7 +223,7 @@ namespace body_string_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/StringClient.xml" path="doc/members/member[@name='GetEmpty(RequestContext)']/*" />
-        public virtual Response GetEmpty(RequestContext context = null)
+        public virtual Response GetEmpty(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("StringClient.GetEmpty");
             scope.Start();
@@ -321,7 +321,7 @@ namespace body_string_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/StringClient.xml" path="doc/members/member[@name='GetMbcsAsync(RequestContext)']/*" />
-        public virtual async Task<Response> GetMbcsAsync(RequestContext context = null)
+        public virtual async Task<Response> GetMbcsAsync(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("StringClient.GetMbcs");
             scope.Start();
@@ -351,7 +351,7 @@ namespace body_string_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/StringClient.xml" path="doc/members/member[@name='GetMbcs(RequestContext)']/*" />
-        public virtual Response GetMbcs(RequestContext context = null)
+        public virtual Response GetMbcs(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("StringClient.GetMbcs");
             scope.Start();
@@ -449,7 +449,7 @@ namespace body_string_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/StringClient.xml" path="doc/members/member[@name='GetWhitespaceAsync(RequestContext)']/*" />
-        public virtual async Task<Response> GetWhitespaceAsync(RequestContext context = null)
+        public virtual async Task<Response> GetWhitespaceAsync(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("StringClient.GetWhitespace");
             scope.Start();
@@ -479,7 +479,7 @@ namespace body_string_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/StringClient.xml" path="doc/members/member[@name='GetWhitespace(RequestContext)']/*" />
-        public virtual Response GetWhitespace(RequestContext context = null)
+        public virtual Response GetWhitespace(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("StringClient.GetWhitespace");
             scope.Start();
@@ -577,7 +577,7 @@ namespace body_string_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/StringClient.xml" path="doc/members/member[@name='GetNotProvidedAsync(RequestContext)']/*" />
-        public virtual async Task<Response> GetNotProvidedAsync(RequestContext context = null)
+        public virtual async Task<Response> GetNotProvidedAsync(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("StringClient.GetNotProvided");
             scope.Start();
@@ -607,7 +607,7 @@ namespace body_string_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/StringClient.xml" path="doc/members/member[@name='GetNotProvided(RequestContext)']/*" />
-        public virtual Response GetNotProvided(RequestContext context = null)
+        public virtual Response GetNotProvided(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("StringClient.GetNotProvided");
             scope.Start();
@@ -637,7 +637,7 @@ namespace body_string_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/StringClient.xml" path="doc/members/member[@name='GetBase64EncodedAsync(RequestContext)']/*" />
-        public virtual async Task<Response> GetBase64EncodedAsync(RequestContext context = null)
+        public virtual async Task<Response> GetBase64EncodedAsync(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("StringClient.GetBase64Encoded");
             scope.Start();
@@ -667,7 +667,7 @@ namespace body_string_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/StringClient.xml" path="doc/members/member[@name='GetBase64Encoded(RequestContext)']/*" />
-        public virtual Response GetBase64Encoded(RequestContext context = null)
+        public virtual Response GetBase64Encoded(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("StringClient.GetBase64Encoded");
             scope.Start();
@@ -697,7 +697,7 @@ namespace body_string_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/StringClient.xml" path="doc/members/member[@name='GetBase64UrlEncodedAsync(RequestContext)']/*" />
-        public virtual async Task<Response> GetBase64UrlEncodedAsync(RequestContext context = null)
+        public virtual async Task<Response> GetBase64UrlEncodedAsync(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("StringClient.GetBase64UrlEncoded");
             scope.Start();
@@ -727,7 +727,7 @@ namespace body_string_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/StringClient.xml" path="doc/members/member[@name='GetBase64UrlEncoded(RequestContext)']/*" />
-        public virtual Response GetBase64UrlEncoded(RequestContext context = null)
+        public virtual Response GetBase64UrlEncoded(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("StringClient.GetBase64UrlEncoded");
             scope.Start();
@@ -825,7 +825,7 @@ namespace body_string_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/StringClient.xml" path="doc/members/member[@name='GetNullBase64UrlEncodedAsync(RequestContext)']/*" />
-        public virtual async Task<Response> GetNullBase64UrlEncodedAsync(RequestContext context = null)
+        public virtual async Task<Response> GetNullBase64UrlEncodedAsync(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("StringClient.GetNullBase64UrlEncoded");
             scope.Start();
@@ -855,7 +855,7 @@ namespace body_string_LowLevel
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
         /// <include file="Docs/StringClient.xml" path="doc/members/member[@name='GetNullBase64UrlEncoded(RequestContext)']/*" />
-        public virtual Response GetNullBase64UrlEncoded(RequestContext context = null)
+        public virtual Response GetNullBase64UrlEncoded(RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("StringClient.GetNullBase64UrlEncoded");
             scope.Start();

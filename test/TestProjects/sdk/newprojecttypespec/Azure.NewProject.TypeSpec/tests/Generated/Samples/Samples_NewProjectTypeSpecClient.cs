@@ -127,7 +127,7 @@ namespace Azure.NewProject.TypeSpec.Samples
             var endpoint = new Uri("<https://my-service.azure.com>");
             var client = new NewProjectTypeSpecClient(endpoint, credential);
 
-            Response response = client.TopAction2();
+            Response response = client.TopAction2(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("name").ToString());
@@ -147,7 +147,7 @@ namespace Azure.NewProject.TypeSpec.Samples
             var endpoint = new Uri("<https://my-service.azure.com>");
             var client = new NewProjectTypeSpecClient(endpoint, credential);
 
-            Response response = client.TopAction2();
+            Response response = client.TopAction2(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("name").ToString());
@@ -171,7 +171,7 @@ namespace Azure.NewProject.TypeSpec.Samples
             var endpoint = new Uri("<https://my-service.azure.com>");
             var client = new NewProjectTypeSpecClient(endpoint, credential);
 
-            Response response = await client.TopAction2Async();
+            Response response = await client.TopAction2Async(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("name").ToString());
@@ -191,7 +191,7 @@ namespace Azure.NewProject.TypeSpec.Samples
             var endpoint = new Uri("<https://my-service.azure.com>");
             var client = new NewProjectTypeSpecClient(endpoint, credential);
 
-            Response response = await client.TopAction2Async();
+            Response response = await client.TopAction2Async(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("name").ToString());
@@ -613,7 +613,7 @@ namespace Azure.NewProject.TypeSpec.Samples
             var endpoint = new Uri("<https://my-service.azure.com>");
             var client = new NewProjectTypeSpecClient(endpoint, credential);
 
-            Response response = client.AddTimeHeader(DateTimeOffset.UtcNow);
+            Response response = client.AddTimeHeader();
             Console.WriteLine(response.Status);
         }
 
@@ -637,7 +637,7 @@ namespace Azure.NewProject.TypeSpec.Samples
             var endpoint = new Uri("<https://my-service.azure.com>");
             var client = new NewProjectTypeSpecClient(endpoint, credential);
 
-            Response response = await client.AddTimeHeaderAsync(DateTimeOffset.UtcNow);
+            Response response = await client.AddTimeHeaderAsync();
             Console.WriteLine(response.Status);
         }
 
@@ -733,7 +733,7 @@ namespace Azure.NewProject.TypeSpec.Samples
             var endpoint = new Uri("<https://my-service.azure.com>");
             var client = new NewProjectTypeSpecClient(endpoint, credential);
 
-            Response response = client.SayHi("<headParameter>", "<queryParameter>");
+            Response response = client.SayHi("<headParameter>", "<queryParameter>", "<optionalQuery>", new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("name").ToString());
@@ -753,7 +753,7 @@ namespace Azure.NewProject.TypeSpec.Samples
             var endpoint = new Uri("<https://my-service.azure.com>");
             var client = new NewProjectTypeSpecClient(endpoint, credential);
 
-            Response response = client.SayHi("<headParameter>", "<queryParameter>", "<optionalQuery>");
+            Response response = client.SayHi("<headParameter>", "<queryParameter>", "<optionalQuery>", new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("name").ToString());
@@ -777,7 +777,7 @@ namespace Azure.NewProject.TypeSpec.Samples
             var endpoint = new Uri("<https://my-service.azure.com>");
             var client = new NewProjectTypeSpecClient(endpoint, credential);
 
-            Response response = await client.SayHiAsync("<headParameter>", "<queryParameter>");
+            Response response = await client.SayHiAsync("<headParameter>", "<queryParameter>", "<optionalQuery>", new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("name").ToString());
@@ -797,7 +797,7 @@ namespace Azure.NewProject.TypeSpec.Samples
             var endpoint = new Uri("<https://my-service.azure.com>");
             var client = new NewProjectTypeSpecClient(endpoint, credential);
 
-            Response response = await client.SayHiAsync("<headParameter>", "<queryParameter>", "<optionalQuery>");
+            Response response = await client.SayHiAsync("<headParameter>", "<queryParameter>", "<optionalQuery>", new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("name").ToString());
@@ -1840,7 +1840,7 @@ namespace Azure.NewProject.TypeSpec.Samples
             var endpoint = new Uri("<https://my-service.azure.com>");
             var client = new NewProjectTypeSpecClient(endpoint, credential);
 
-            Response response = client.GetUnknownValue();
+            Response response = client.GetUnknownValue(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());
@@ -1854,7 +1854,7 @@ namespace Azure.NewProject.TypeSpec.Samples
             var endpoint = new Uri("<https://my-service.azure.com>");
             var client = new NewProjectTypeSpecClient(endpoint, credential);
 
-            Response response = client.GetUnknownValue();
+            Response response = client.GetUnknownValue(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());
@@ -1868,7 +1868,7 @@ namespace Azure.NewProject.TypeSpec.Samples
             var endpoint = new Uri("<https://my-service.azure.com>");
             var client = new NewProjectTypeSpecClient(endpoint, credential);
 
-            Response response = await client.GetUnknownValueAsync();
+            Response response = await client.GetUnknownValueAsync(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());
@@ -1882,7 +1882,7 @@ namespace Azure.NewProject.TypeSpec.Samples
             var endpoint = new Uri("<https://my-service.azure.com>");
             var client = new NewProjectTypeSpecClient(endpoint, credential);
 
-            Response response = await client.GetUnknownValueAsync();
+            Response response = await client.GetUnknownValueAsync(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());
@@ -1908,13 +1908,13 @@ namespace Azure.NewProject.TypeSpec.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_StillConvenient_Convenience_Async()
+        public async Task Example_StillConvenientValue_Convenience_Async()
         {
             var credential = new AzureKeyCredential("<key>");
             var endpoint = new Uri("<https://my-service.azure.com>");
             var client = new NewProjectTypeSpecClient(endpoint, credential);
 
-            var result = await client.StillConvenientAsync();
+            var result = await client.StillConvenientValueAsync();
         }
     }
 }

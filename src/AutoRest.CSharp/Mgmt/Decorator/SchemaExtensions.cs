@@ -75,7 +75,7 @@ internal static class SchemaExtensions
             switch (property.SerializedName)
             {
                 case "id":
-                    if (property.Schema.Type == AllSchemaTypes.String)
+                    if (property.Schema.Type == AllSchemaTypes.String || property.Schema.Type == AllSchemaTypes.ArmId)
                         idPropertyFound = true;
                     continue;
                 case "type":
