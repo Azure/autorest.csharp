@@ -149,9 +149,21 @@ namespace AutoRest.CSharp.MgmtTest.Generation
         protected CodeWriterDeclaration WriteGetExtension(MgmtExtension parentExtension, OperationExample example, FormattableString client) => parentExtension.ArmCoreType switch
         {
             _ when parentExtension.ArmCoreType == typeof(TenantResource) => WriteGetTenantResource(parentExtension, example, client),
-            _ when parentExtension.ArmCoreType == typeof(ArmResource) => throw new InvalidOperationException($"The method `{example.OperationId}` that extends ArmResource might not exist, we should always use the client.GetXXXs(scope) to get the collection, this does not have to be invoked on a resource"),
+            _ when parentExtension.ArmCoreType == typeof(ArmResource) => WriteForArmResourceExtension(parentExtension, example, client),
             _ => WriteGetOtherExtension(parentExtension, example, client)
         };
+
+        private CodeWriterDeclaration WriteForArmResourceExtension(MgmtTypeProvider parentExtension, OperationExample example, FormattableString client)
+        {
+            // For Extension against ArmResource the operation will be re-formatted to Operation(this ArmClient, ResourceIdentifier scope, ...)
+            // so just return armclient here and the scope part will be handled when generate the operation invoke code
+
+            // we should have defined the ArmClient before, try to figure it out from the formattableString instead of creating a new one
+            var clientVar = client.GetArguments()?.FirstOrDefault(a => a is CodeWriterDeclaration d && d.RequestedName == "client") as CodeWriterDeclaration;
+            if (clientVar == null)
+                throw new InvalidOperationException("Failed to figure out ArmClient Var for calling ArmResource Extension method");
+            return clientVar;
+        }
 
         private CodeWriterDeclaration WriteGetTenantResource(MgmtTypeProvider parentExtension, OperationExample example, FormattableString client)
         {

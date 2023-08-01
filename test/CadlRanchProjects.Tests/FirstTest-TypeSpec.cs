@@ -1,6 +1,7 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
+using System;
 using System.Threading.Tasks;
 using AutoRest.TestServer.Tests.Infrastructure;
 using FirstTestTypeSpec;
@@ -17,7 +18,7 @@ namespace CadlRanchProjects.Tests
         [Test]
         public async Task FirstTest_CreateLiteral() => await Test(async (host) =>
         {
-            Thing result = await new FirstTestTypeSpecClient(host).CreateLiteralAsync(new Thing("test", "test", "abc")
+            Thing result = await new FirstTestTypeSpecClient(host).CreateLiteralAsync(new Thing("test", "test", "abc", Array.Empty<int>())
             {
                 OptionalLiteralString = ThingOptionalLiteralString.Reject,
                 OptionalLiteralInt = ThingOptionalLiteralInt._456,

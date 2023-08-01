@@ -10,6 +10,7 @@ using System.Text.Json;
 using System.Threading.Tasks;
 using System.Xml;
 using AutoRest.TestServer.Tests.Infrastructure;
+using Azure.Core;
 using Azure.Core.Pipeline;
 using body_complex;
 using body_complex.Models;
@@ -412,7 +413,9 @@ namespace AutoRest.TestServer.Tests
         {
             var result = await new DictionaryClient(ClientDiagnostics, pipeline, host).GetNullAsync();
             Assert.AreEqual(200, result.GetRawResponse().Status);
-            Assert.AreEqual(null, result.Value.DefaultProgram);
+            // the DefaultProgram should be undefined here
+            Assert.IsNotNull(result.Value.DefaultProgram);
+            Assert.IsFalse(Optional.IsCollectionDefined(result.Value.DefaultProgram));
         });
 
         [Test]

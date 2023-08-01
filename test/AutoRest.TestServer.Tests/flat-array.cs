@@ -14,7 +14,7 @@ namespace AutoRest.TestServer.Tests
 {
     public class FlatArray : InProcTestBase
     {
-        private async Task<JsonDocument> TestCore (Func<FlattenedParametersClient, Task> testProc)
+        private async Task<JsonDocument> TestCore(Func<FlattenedParametersClient, Task> testProc)
         {
             var requestMemoryStream = new MemoryStream();
             using var testServer = new InProcTestServer(async content =>
@@ -32,7 +32,7 @@ namespace AutoRest.TestServer.Tests
         [Test]
         public async Task FlatArray_NullSerialized()
         {
-            var doc = await TestCore (async c => await c.OperationAsync ());
+            var doc = await TestCore(async c => await c.OperationAsync());
             JsonElement items = doc.RootElement.GetProperty("items");
             Assert.NotNull(items);
             Assert.AreEqual(JsonValueKind.Null, items.ValueKind);
@@ -41,7 +41,7 @@ namespace AutoRest.TestServer.Tests
         [Test]
         public async Task FlatArray_EmptySerialized()
         {
-            var doc = await TestCore (async c => await c.OperationAsync(Enumerable.Empty<string>()));
+            var doc = await TestCore(async c => await c.OperationAsync(Enumerable.Empty<string>()));
             JsonElement items = doc.RootElement.GetProperty("items");
             Assert.NotNull(items);
             Assert.AreEqual(0, items.GetArrayLength());
@@ -50,15 +50,15 @@ namespace AutoRest.TestServer.Tests
         [Test]
         public async Task FlatArray_NullSerializedNotNullable()
         {
-            var doc = await TestCore (async c => await c.OperationNotNullAsync ());
-            Assert.IsFalse(doc.RootElement.TryGetProperty ("items", out JsonElement value));
+            var doc = await TestCore(async c => await c.OperationNotNullAsync());
+            Assert.IsFalse(doc.RootElement.TryGetProperty("items", out JsonElement value));
         }
 
         [Test]
         public async Task FlatArray_EmptySerializedNotNullable()
         {
-            var doc = await TestCore (async c => await c.OperationNotNullAsync(Enumerable.Empty<string>()));
-            Assert.IsFalse(doc.RootElement.TryGetProperty ("items", out JsonElement value));
+            var doc = await TestCore(async c => await c.OperationNotNullAsync(Enumerable.Empty<string>()));
+            Assert.IsFalse(doc.RootElement.TryGetProperty("items", out JsonElement value));
         }
     }
 }

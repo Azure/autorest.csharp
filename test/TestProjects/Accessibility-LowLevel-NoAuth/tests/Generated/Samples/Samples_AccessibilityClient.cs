@@ -27,7 +27,7 @@ namespace Accessibility_LowLevel_NoAuth.Samples
 
             var data = "<String>";
 
-            Response response = client.Operation(RequestContent.Create(data), new RequestContext());
+            Response response = client.Operation(RequestContent.Create(data));
             Console.WriteLine(response.Status);
         }
 
@@ -39,7 +39,7 @@ namespace Accessibility_LowLevel_NoAuth.Samples
 
             var data = "<String>";
 
-            Response response = client.Operation(RequestContent.Create(data), new RequestContext());
+            Response response = client.Operation(RequestContent.Create(data));
             Console.WriteLine(response.Status);
         }
 
@@ -51,7 +51,7 @@ namespace Accessibility_LowLevel_NoAuth.Samples
 
             var data = "<String>";
 
-            Response response = await client.OperationAsync(RequestContent.Create(data), new RequestContext());
+            Response response = await client.OperationAsync(RequestContent.Create(data));
             Console.WriteLine(response.Status);
         }
 
@@ -63,7 +63,7 @@ namespace Accessibility_LowLevel_NoAuth.Samples
 
             var data = "<String>";
 
-            Response response = await client.OperationAsync(RequestContent.Create(data), new RequestContext());
+            Response response = await client.OperationAsync(RequestContent.Create(data));
             Console.WriteLine(response.Status);
         }
     }

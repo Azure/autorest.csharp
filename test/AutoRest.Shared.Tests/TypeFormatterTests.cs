@@ -33,6 +33,12 @@ namespace Azure.Core.Tests
             new object[] { "c", new TimeSpan(1, 2, 59, 59, 500), "1.02:59:59.5000000" }
         };
 
+        public static object[] BinaryDataCases =
+        {
+            new object[] { "D", BinaryData.FromString("test"), "dGVzdA==" },
+            new object[] { "U", BinaryData.FromString("test"), "dGVzdA" }
+        };
+
         public static object[] TimeSpanWithoutFormatCases =
         {
             new object[] { null, new TimeSpan(1, 2, 59, 59), "P1DT2H59M59S" },
@@ -126,6 +132,7 @@ namespace Azure.Core.Tests
         [TestCaseSource(nameof(TimeSpanWithoutFormatCases))]
         [TestCaseSource(nameof(TimeSpanCases))]
         [TestCaseSource(nameof(GuidCases))]
+        [TestCaseSource(nameof(BinaryDataCases))]
         public void ValidateConvertToString(string? format, object? value, string expected)
         {
             var result = TypeFormatters.ConvertToString(value, format);

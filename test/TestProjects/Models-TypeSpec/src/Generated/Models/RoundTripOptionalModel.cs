@@ -20,7 +20,7 @@ namespace ModelsTypeSpec.Models
         {
             OptionalStringList = new ChangeTrackingList<string>();
             OptionalIntList = new ChangeTrackingList<int>();
-            OptionalModelCollection = new ChangeTrackingList<CollectionItem>();
+            OptionalModelList = new ChangeTrackingList<CollectionItem>();
             OptionalIntRecord = new ChangeTrackingDictionary<string, int>();
             OptionalStringRecord = new ChangeTrackingDictionary<string, string>();
             OptionalModelRecord = new ChangeTrackingDictionary<string, RecordItem>();
@@ -32,7 +32,7 @@ namespace ModelsTypeSpec.Models
         /// <param name="optionalInt"> Optional int, illustrating an optional value type property. </param>
         /// <param name="optionalStringList"> Optional string collection. </param>
         /// <param name="optionalIntList"> Optional int collection. </param>
-        /// <param name="optionalModelCollection"> Optional model collection. </param>
+        /// <param name="optionalModelList"> Optional model collection. </param>
         /// <param name="optionalModel"> Optional model. </param>
         /// <param name="optionalModelWithPropertiesOnBase"> Optional model with properties on base. </param>
         /// <param name="optionalFixedStringEnum"> Optional fixed string enum. </param>
@@ -43,13 +43,13 @@ namespace ModelsTypeSpec.Models
         /// <param name="optionalPlainDate"> Optional plainDate. </param>
         /// <param name="optionalPlainTime"> Optional plainTime. </param>
         /// <param name="optionalCollectionWithNullableIntElement"> Optional collection of which the element is a nullable int. </param>
-        internal RoundTripOptionalModel(string optionalString, int? optionalInt, IList<string> optionalStringList, IList<int> optionalIntList, IList<CollectionItem> optionalModelCollection, DerivedModel optionalModel, DerivedModelWithProperties optionalModelWithPropertiesOnBase, FixedStringEnum? optionalFixedStringEnum, ExtensibleEnum? optionalExtensibleEnum, IDictionary<string, int> optionalIntRecord, IDictionary<string, string> optionalStringRecord, IDictionary<string, RecordItem> optionalModelRecord, DateTimeOffset? optionalPlainDate, TimeSpan? optionalPlainTime, IList<int?> optionalCollectionWithNullableIntElement)
+        internal RoundTripOptionalModel(string optionalString, int? optionalInt, IList<string> optionalStringList, IList<int> optionalIntList, IList<CollectionItem> optionalModelList, DerivedModel optionalModel, DerivedModelWithProperties optionalModelWithPropertiesOnBase, FixedStringEnum? optionalFixedStringEnum, ExtensibleEnum? optionalExtensibleEnum, IDictionary<string, int> optionalIntRecord, IDictionary<string, string> optionalStringRecord, IDictionary<string, RecordItem> optionalModelRecord, DateTimeOffset? optionalPlainDate, TimeSpan? optionalPlainTime, IList<int?> optionalCollectionWithNullableIntElement)
         {
             OptionalString = optionalString;
             OptionalInt = optionalInt;
             OptionalStringList = optionalStringList;
             OptionalIntList = optionalIntList;
-            OptionalModelCollection = optionalModelCollection;
+            OptionalModelList = optionalModelList;
             OptionalModel = optionalModel;
             OptionalModelWithPropertiesOnBase = optionalModelWithPropertiesOnBase;
             OptionalFixedStringEnum = optionalFixedStringEnum;
@@ -71,7 +71,7 @@ namespace ModelsTypeSpec.Models
         /// <summary> Optional int collection. </summary>
         public IList<int> OptionalIntList { get; }
         /// <summary> Optional model collection. </summary>
-        public IList<CollectionItem> OptionalModelCollection { get; }
+        public IList<CollectionItem> OptionalModelList { get; }
         /// <summary> Optional model. </summary>
         public DerivedModel OptionalModel { get; set; }
         /// <summary> Optional model with properties on base. </summary>
