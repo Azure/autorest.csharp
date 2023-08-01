@@ -34,7 +34,7 @@ namespace AutoRest.CSharp.Common.Input
             {
                 var isKnownProperty = reader.TryReadReferenceId(ref isFirstProperty, ref id)
                     || reader.TryReadString(nameof(InputLiteralType.Name), ref name)
-                    || reader.TryReadBoolean(nameof(InputListType.IsNullable), ref isNullable)
+                    || reader.TryReadBoolean(nameof(InputLiteralType.IsNullable), ref isNullable)
                     || reader.TryReadWithConverter(nameof(InputLiteralType.LiteralValueType), options, ref type);
 
                 if (isKnownProperty)

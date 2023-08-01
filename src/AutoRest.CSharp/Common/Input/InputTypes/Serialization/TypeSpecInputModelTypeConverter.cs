@@ -5,7 +5,6 @@ using System;
 using System.Collections.Generic;
 using System.Text.Json;
 using System.Text.Json.Serialization;
-using NUnit.Framework.Internal;
 
 namespace AutoRest.CSharp.Common.Input
 {
@@ -94,37 +93,6 @@ namespace AutoRest.CSharp.Common.Input
                 resolver.AddReference(id, model);
             }
             return model;
-        }
-
-        private static bool TryReadArrayWithConverter<T>(ref Utf8JsonReader reader, string propertyName, JsonSerializerOptions options, ref ICollection<T> array)
-        {
-            if (reader.TokenType != JsonTokenType.PropertyName)
-            {
-                throw new JsonException();
-            }
-
-            if (reader.GetString() != propertyName)
-            {
-                return false;
-            }
-
-            reader.Read();
-
-            // read the array
-            if (reader.TokenType != JsonTokenType.StartArray)
-            {
-                throw new JsonException();
-            }
-            reader.Read(); // get next token
-
-            while (reader.TokenType != JsonTokenType.EndArray)
-            {
-                var item = reader.ReadWithConverter<T>(options);
-                array.Add(item ?? throw new JsonException($"null {nameof(T)} isn't allowed"));
-            }
-
-            reader.Read();
-            return true;
         }
 
         private static void CreateProperties(ref Utf8JsonReader reader, ICollection<InputModelProperty> properties, JsonSerializerOptions options)
