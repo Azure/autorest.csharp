@@ -5,7 +5,6 @@ namespace AutoRest.CSharp.Common.Input;
 
 internal enum ConvenienceMethodOmitReason
 {
-    SuppressedInTypeSpec = 0,
-    PatchOperation = 1,
-    TypeNotConfident = 2
+    PatchOperation = 0,
+    TypeNotConfident = 1
 }

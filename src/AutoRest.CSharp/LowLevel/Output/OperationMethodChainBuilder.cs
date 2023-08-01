@@ -99,7 +99,7 @@ namespace AutoRest.CSharp.Output.Models
 
             var requestBodyType = Operation.Parameters.FirstOrDefault(p => p.Location == RequestLocation.Body)?.Type;
             var responseBodyType = Operation.Responses.FirstOrDefault()?.BodyType;
-            return new LowLevelClientMethod(protocolMethodSignature, convenienceMethod, _restClientMethod, requestBodyType, responseBodyType, diagnostic, _protocolMethodPaging, Operation.LongRunning, _conditionHeaderFlag, Operation.ConvenienceMethodOmitReason);
+            return new LowLevelClientMethod(protocolMethodSignature, convenienceMethod, _restClientMethod, requestBodyType, responseBodyType, diagnostic, _protocolMethodPaging, Operation.LongRunning, _conditionHeaderFlag, ConvenienceMethodOmittingMessage.Create(Operation.ConvenienceMethodOmitReason));
         }
 
         private bool ShouldGenerateConvenienceMethod()

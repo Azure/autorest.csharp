@@ -176,7 +176,6 @@ namespace FirstTestTypeSpec
             }
         }
 
-        // The convenience method of this operation is not generated because the convenience method is not turned on in typespec file.
         /// <summary>
         /// [Protocol Method] top level method2
         /// <list type="bullet">
@@ -207,7 +206,6 @@ namespace FirstTestTypeSpec
             }
         }
 
-        // The convenience method of this operation is not generated because the convenience method is not turned on in typespec file.
         /// <summary>
         /// [Protocol Method] top level method2
         /// <list type="bullet">
@@ -512,7 +510,6 @@ namespace FirstTestTypeSpec
             }
         }
 
-        // The convenience method of this operation is not generated because the convenience method is not turned on in typespec file.
         /// <summary>
         /// [Protocol Method]
         /// <list type="bullet">
@@ -543,7 +540,6 @@ namespace FirstTestTypeSpec
             }
         }
 
-        // The convenience method of this operation is not generated because the convenience method is not turned on in typespec file.
         /// <summary>
         /// [Protocol Method]
         /// <list type="bullet">
@@ -684,7 +680,6 @@ namespace FirstTestTypeSpec
             }
         }
 
-        // The convenience method of this operation is not generated because the convenience method is not turned on in typespec file.
         /// <summary>
         /// [Protocol Method] Return hi
         /// <list type="bullet">
@@ -722,7 +717,6 @@ namespace FirstTestTypeSpec
             }
         }
 
-        // The convenience method of this operation is not generated because the convenience method is not turned on in typespec file.
         /// <summary>
         /// [Protocol Method] Return hi
         /// <list type="bullet">
@@ -878,7 +872,6 @@ namespace FirstTestTypeSpec
             }
         }
 
-        // The convenience method of this operation is not generated because the convenience method is not turned on in typespec file.
         /// <summary>
         /// [Protocol Method] Return hi again
         /// <list type="bullet">
@@ -918,7 +911,6 @@ namespace FirstTestTypeSpec
             }
         }
 
-        // The convenience method of this operation is not generated because the convenience method is not turned on in typespec file.
         /// <summary>
         /// [Protocol Method] Return hi again
         /// <list type="bullet">
@@ -1220,7 +1212,6 @@ namespace FirstTestTypeSpec
             }
         }
 
-        // The convenience method of this operation is not generated because the convenience method is not turned on in typespec file.
         /// <summary>
         /// [Protocol Method] get extensible enum
         /// <list type="bullet">
@@ -1251,7 +1242,6 @@ namespace FirstTestTypeSpec
             }
         }
 
-        // The convenience method of this operation is not generated because the convenience method is not turned on in typespec file.
         /// <summary>
         /// [Protocol Method] get extensible enum
         /// <list type="bullet">

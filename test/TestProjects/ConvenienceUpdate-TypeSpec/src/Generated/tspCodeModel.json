@@ -314,8 +314,7 @@
      "Path": "/noConvenience",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": false,
-     "ConvenienceMethodOmitReason": "SuppressedInTypeSpec"
+     "GenerateConvenienceMethod": false
     },
     {
      "$id": "31",
@@ -420,8 +419,7 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": false,
-     "ConvenienceMethodOmitReason": "SuppressedInTypeSpec"
+     "GenerateConvenienceMethod": false
     },
     {
      "$id": "40",
@@ -526,8 +524,7 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": false,
-     "ConvenienceMethodOmitReason": "SuppressedInTypeSpec"
+     "GenerateConvenienceMethod": false
     },
     {
      "$id": "49",

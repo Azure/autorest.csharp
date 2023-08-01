@@ -17,5 +17,5 @@ namespace AutoRest.CSharp.Output.Models
         ProtocolMethodPaging? PagingInfo,
         OperationLongRunning? LongRunning,
         RequestConditionHeaders ConditionHeaderFlag,
-        ConvenienceMethodOmitReason? ConvenienceMethodOmitReason);
+        ConvenienceMethodOmittingMessage? ConvenienceMethodOmittingMessage);
 }

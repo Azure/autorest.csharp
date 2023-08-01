@@ -534,10 +534,7 @@ namespace AutoRest.CSharp.Generation.Writers
         {
             var methodSignature = clientMethod.ProtocolMethodSignature.WithAsync(async);
 
-            if (clientMethod.ConvenienceMethodOmitReason is { } reason)
-            {
-                WriteConvenienceMethodOmitReason(reason);
-            }
+            WriteConvenienceMethodOmitReason(clientMethod.ConvenienceMethodOmittingMessage);
 
             WriteMethodDocumentation(_writer, methodSignature, clientMethod, async);
             var docRef = GetMethodSignatureString(methodSignature);
@@ -549,24 +546,13 @@ namespace AutoRest.CSharp.Generation.Writers
             }
         }
 
-        private void WriteConvenienceMethodOmitReason(ConvenienceMethodOmitReason reason)
+        private void WriteConvenienceMethodOmitReason(ConvenienceMethodOmittingMessage? message)
         {
             // TODO -- create wiki links to provide guidance here: https://github.com/Azure/autorest.csharp/issues/3624
-            switch (reason)
-            {
-                case ConvenienceMethodOmitReason.SuppressedInTypeSpec:
-                    _writer.Line($"// The convenience method of this operation is not generated because the convenience method is not turned on in typespec file.");
-                    break;
-                case ConvenienceMethodOmitReason.PatchOperation:
-                    _writer.Line($"// The convenience method of this operation is not generated because this operation has a http verb of PATCH which we do not support yet.");
-                    break;
-                case ConvenienceMethodOmitReason.TypeNotConfident:
-                    _writer.Line($"// The convenience method of this operation is made internal because this operation directly or indirectly uses a low confident type, for instance, unions, literal types with number values, etc.");
-                    break;
-                default:
-                    _writer.Line($"//  The convenience method of this operation is not generated because of {reason}");
-                    break;
-            }
+            if (message == null)
+                return;
+
+            _writer.Line($"// {message.Message}");
         }
 
         private void WriteConvenienceMethodDocumentationWithExternalXmlDoc(ConvenienceMethod convenienceMethod, RestClientMethod restMethod, bool async)

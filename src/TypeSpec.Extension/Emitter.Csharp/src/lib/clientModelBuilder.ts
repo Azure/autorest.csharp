@@ -233,10 +233,6 @@ export function createModelForService(
                     // this means the convenience method is omitted because it is a patch and we do not support that yet
                     op.ConvenienceMethodOmitReason =
                         ConvenienceMethodOmitReason.PatchOperation;
-                } else {
-                    // this means the convenience method is suppressed by the typespec
-                    op.ConvenienceMethodOmitReason =
-                        ConvenienceMethodOmitReason.SuppressedInTypeSpec;
                 }
             } else {
                 // otherwise we see if there is anything not confident in the operation

@@ -54,7 +54,6 @@ namespace RenameGetList
             _apiVersion = options.Version;
         }
 
-        // The convenience method of this operation is not generated because the convenience method is not turned on in typespec file.
         /// <summary>
         /// [Protocol Method] Gets the details of a project.
         /// <list type="bullet">
@@ -90,7 +89,6 @@ namespace RenameGetList
             }
         }
 
-        // The convenience method of this operation is not generated because the convenience method is not turned on in typespec file.
         /// <summary>
         /// [Protocol Method] Gets the details of a project.
         /// <list type="bullet">
@@ -126,7 +124,6 @@ namespace RenameGetList
             }
         }
 
-        // The convenience method of this operation is not generated because the convenience method is not turned on in typespec file.
         /// <summary>
         /// [Protocol Method] Gets the details of a deployment.
         /// <list type="bullet">
@@ -164,7 +161,6 @@ namespace RenameGetList
             }
         }
 
-        // The convenience method of this operation is not generated because the convenience method is not turned on in typespec file.
         /// <summary>
         /// [Protocol Method] Gets the details of a deployment.
         /// <list type="bullet">
@@ -202,7 +198,6 @@ namespace RenameGetList
             }
         }
 
-        // The convenience method of this operation is not generated because the convenience method is not turned on in typespec file.
         /// <summary>
         /// [Protocol Method] Lists the existing projects.
         /// <list type="bullet">
@@ -224,7 +219,6 @@ namespace RenameGetList
             return PageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "RenameGetListClient.GetProjects", "value", "nextLink", context);
         }
 
-        // The convenience method of this operation is not generated because the convenience method is not turned on in typespec file.
         /// <summary>
         /// [Protocol Method] Lists the existing projects.
         /// <list type="bullet">
@@ -246,7 +240,6 @@ namespace RenameGetList
             return PageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "RenameGetListClient.GetProjects", "value", "nextLink", context);
         }
 
-        // The convenience method of this operation is not generated because the convenience method is not turned on in typespec file.
         /// <summary>
         /// [Protocol Method] Lists the existing deployments.
         /// <list type="bullet">
@@ -273,7 +266,6 @@ namespace RenameGetList
             return PageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "RenameGetListClient.GetDeployments", "value", "nextLink", context);
         }
 
-        // The convenience method of this operation is not generated because the convenience method is not turned on in typespec file.
         /// <summary>
         /// [Protocol Method] Lists the existing deployments.
         /// <list type="bullet">

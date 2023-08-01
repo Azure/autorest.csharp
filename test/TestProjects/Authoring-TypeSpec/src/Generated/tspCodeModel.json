@@ -1336,8 +1336,7 @@
      "Path": "/authoring/analyze-text/projects/{projectName}",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": false,
-     "ConvenienceMethodOmitReason": "SuppressedInTypeSpec"
+     "GenerateConvenienceMethod": false
     },
     {
      "$id": "159",
@@ -1435,8 +1434,7 @@
      "Path": "/authoring/analyze-text/projects/{projectName}",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": false,
-     "ConvenienceMethodOmitReason": "SuppressedInTypeSpec"
+     "GenerateConvenienceMethod": false
     },
     {
      "$id": "168",
@@ -1504,8 +1502,7 @@
       "ItemName": "value"
      },
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": false,
-     "ConvenienceMethodOmitReason": "SuppressedInTypeSpec"
+     "GenerateConvenienceMethod": false
     },
     {
      "$id": "174",
@@ -1621,8 +1618,7 @@
      "Path": "/authoring/analyze-text/projects/{projectName}:export",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": false,
-     "ConvenienceMethodOmitReason": "SuppressedInTypeSpec"
+     "GenerateConvenienceMethod": false
     },
     {
      "$id": "185",
@@ -1717,8 +1713,7 @@
      "Path": "/authoring/analyze-text/projects/{projectName}:importx",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": false,
-     "ConvenienceMethodOmitReason": "SuppressedInTypeSpec"
+     "GenerateConvenienceMethod": false
     },
     {
      "$id": "194",
@@ -1861,8 +1856,7 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": false,
-     "ConvenienceMethodOmitReason": "SuppressedInTypeSpec"
+     "GenerateConvenienceMethod": false
     },
     {
      "$id": "207",
@@ -1967,8 +1961,7 @@
      "Path": "/authoring/analyze-text/projects/{projectName}/deployments/{deploymentName}",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": false,
-     "ConvenienceMethodOmitReason": "SuppressedInTypeSpec"
+     "GenerateConvenienceMethod": false
     },
     {
      "$id": "216",
@@ -2162,8 +2155,7 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": false,
-     "ConvenienceMethodOmitReason": "SuppressedInTypeSpec"
+     "GenerateConvenienceMethod": false
     },
     {
      "$id": "234",
@@ -2282,8 +2274,7 @@
      "Path": "/authoring/analyze-text/projects/{projectName}/deployments/{deploymentName}",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": false,
-     "ConvenienceMethodOmitReason": "SuppressedInTypeSpec"
+     "GenerateConvenienceMethod": false
     },
     {
      "$id": "245",
@@ -2372,8 +2363,7 @@
       "ItemName": "value"
      },
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": false,
-     "ConvenienceMethodOmitReason": "SuppressedInTypeSpec"
+     "GenerateConvenienceMethod": false
     },
     {
      "$id": "253",
@@ -2517,8 +2507,7 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": false,
-     "ConvenienceMethodOmitReason": "SuppressedInTypeSpec"
+     "GenerateConvenienceMethod": false
     },
     {
      "$id": "266",
@@ -2900,8 +2889,7 @@
       "ItemName": "value"
      },
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": false,
-     "ConvenienceMethodOmitReason": "SuppressedInTypeSpec"
+     "GenerateConvenienceMethod": false
     },
     {
      "$id": "300",
@@ -3031,8 +3019,7 @@
       "ItemName": "value"
      },
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": false,
-     "ConvenienceMethodOmitReason": "SuppressedInTypeSpec"
+     "GenerateConvenienceMethod": false
     }
    ],
    "Protocol": {

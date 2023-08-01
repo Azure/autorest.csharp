@@ -4,6 +4,5 @@
 // since the convenience method could be omitted by multiple reasons, should we use flags here?
 export enum ConvenienceMethodOmitReason {
     TypeNotConfident = "TypeNotConfident",
-    PatchOperation = "PatchOperation",
-    SuppressedInTypeSpec = "SuppressedInTypeSpec"
+    PatchOperation = "PatchOperation"
 }

@@ -45,7 +45,6 @@ namespace ClientAndOperationGroup
             _apiVersion = apiVersion;
         }
 
-        // The convenience method of this operation is not generated because the convenience method is not turned on in typespec file.
         /// <summary>
         /// [Protocol Method]
         /// <list type="bullet">
@@ -76,7 +75,6 @@ namespace ClientAndOperationGroup
             }
         }
 
-        // The convenience method of this operation is not generated because the convenience method is not turned on in typespec file.
         /// <summary>
         /// [Protocol Method]
         /// <list type="bullet">
@@ -107,7 +105,6 @@ namespace ClientAndOperationGroup
             }
         }
 
-        // The convenience method of this operation is not generated because the convenience method is not turned on in typespec file.
         /// <summary>
         /// [Protocol Method]
         /// <list type="bullet">
@@ -138,7 +135,6 @@ namespace ClientAndOperationGroup
             }
         }
 
-        // The convenience method of this operation is not generated because the convenience method is not turned on in typespec file.
         /// <summary>
         /// [Protocol Method]
         /// <list type="bullet">

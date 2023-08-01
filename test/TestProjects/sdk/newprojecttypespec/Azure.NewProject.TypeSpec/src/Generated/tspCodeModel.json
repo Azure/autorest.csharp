@@ -1188,8 +1188,7 @@
      "Path": "/top2",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": false,
-     "ConvenienceMethodOmitReason": "SuppressedInTypeSpec"
+     "GenerateConvenienceMethod": false
     },
     {
      "$id": "146",
@@ -1606,8 +1605,7 @@
      "Path": "/",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": false,
-     "ConvenienceMethodOmitReason": "SuppressedInTypeSpec"
+     "GenerateConvenienceMethod": false
     },
     {
      "$id": "180",
@@ -1862,8 +1860,7 @@
      "Path": "/hello",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": false,
-     "ConvenienceMethodOmitReason": "SuppressedInTypeSpec"
+     "GenerateConvenienceMethod": false
     },
     {
      "$id": "202",
@@ -2177,8 +2174,7 @@
      ],
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": false,
-     "ConvenienceMethodOmitReason": "SuppressedInTypeSpec"
+     "GenerateConvenienceMethod": false
     },
     {
      "$id": "229",
@@ -2586,8 +2582,7 @@
      "Path": "/unknown-value",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": false,
-     "ConvenienceMethodOmitReason": "SuppressedInTypeSpec"
+     "GenerateConvenienceMethod": false
     },
     {
      "$id": "265",
