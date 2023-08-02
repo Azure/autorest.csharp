@@ -134,38 +134,18 @@ namespace AutoRest.CSharp.Output.Models
         private Dictionary<InputParameter, Parameter> GetOperationAllParameters(InputOperation operation)
             => FilterOperationAllParameters(operation.Parameters)
                 .ToDictionary(p => p, parameter => BuildParameter(parameter));
-        /*
-        public static IEnumerable<InputParameter> FilterOperationAllParameters(IReadOnlyList<InputParameter> parameters)
-            => parameters
-                .Where(rp => !IsIgnoredHeaderParameter(rp))
-                // change the type to constant so that it won't show up in the method signature
-                .Select(p => RequestHeader.IsRepeatabilityRequestHeader(p.NameInRequest) || RequestHeader.ClientRequestIdHeaders.Contains(p.NameInRequest) ? p with { Kind = InputOperationParameterKind.Constant } : p)
-                .Any(h => RequestHeader.ClientRequestIdHeaders.Contains(h.NameInRequest)) ? parameters : parameters.Concat(KnownParameters.ClientRequestIDInputParamters);
-        */
         public static IEnumerable<InputParameter> FilterOperationAllParameters(IReadOnlyList<InputParameter> parameters)
         {
-            List<InputParameter> parameterList = new List<InputParameter>();
-            foreach (var parameter in parameters)
+            var allParameters = parameters
+                .Where(rp => !IsIgnoredHeaderParameter(rp))
+                // change the type to constant so that it won't show up in the method signature
+                .Select(p => RequestHeader.IsRepeatabilityRequestHeader(p.NameInRequest) || RequestHeader.ClientRequestIdHeaders.Contains(p.NameInRequest) ? p with { Kind = InputOperationParameterKind.Constant } : p);
+            if (!allParameters.Any(h => RequestHeader.ClientRequestIdHeaders.Contains(h.NameInRequest)))
             {
-                if (IsIgnoredHeaderParameter(parameter))
-                {
-                    continue;
-                }
-                if (RequestHeader.IsRepeatabilityRequestHeader(parameter.NameInRequest) || RequestHeader.ClientRequestIdHeaders.Contains(parameter.NameInRequest))
-                {
-                    parameterList.Add(parameter with { Kind = InputOperationParameterKind.Constant });
-                }
-                else
-                {
-                    parameterList.Add(parameter);
-                }
-            }
-            if (!parameterList.Any(h => RequestHeader.ClientRequestIdHeaders.Contains(h.NameInRequest)))
-            {
-                parameterList.Concat(KnownParameters.ClientRequestIDInputParamters);
+                allParameters.Concat(KnownParameters.ClientRequestIDInputParamters);
             }
 
-            return parameterList;
+            return allParameters;
         }
         public static Response[] BuildResponses(InputOperation operation, TypeFactory typeFactory, out CSharpType? responseType)
         {
