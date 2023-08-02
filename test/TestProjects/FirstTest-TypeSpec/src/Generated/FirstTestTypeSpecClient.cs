@@ -25,6 +25,7 @@ namespace FirstTestTypeSpec
         private readonly TokenCredential _tokenCredential;
         private readonly HttpPipeline _pipeline;
         private readonly Uri _endpoint;
+        private readonly string _clientRequestId;
         private readonly string _apiVersion;
 
         /// <summary> The ClientDiagnostics is used to provide tracing support for the client library. </summary>
@@ -70,8 +71,9 @@ namespace FirstTestTypeSpec
 
             ClientDiagnostics = new ClientDiagnostics(options, true);
             _keyCredential = credential;
-            _pipeline = HttpPipelineBuilder.Build(options, new HttpPipelinePolicy[] { AzureClientRequestIdPolicy.Shared }, new HttpPipelinePolicy[] { new AzureKeyCredentialPolicy(_keyCredential, AuthorizationHeader) }, new ResponseClassifier());
+            _pipeline = HttpPipelineBuilder.Build(options, Array.Empty<HttpPipelinePolicy>(), new HttpPipelinePolicy[] { new AzureKeyCredentialPolicy(_keyCredential, AuthorizationHeader) }, new ResponseClassifier());
             _endpoint = endpoint;
+            _clientRequestId = clientRequestId;
             _apiVersion = options.Version;
         }
 
@@ -89,8 +91,9 @@ namespace FirstTestTypeSpec
 
             ClientDiagnostics = new ClientDiagnostics(options, true);
             _tokenCredential = credential;
-            _pipeline = HttpPipelineBuilder.Build(options, new HttpPipelinePolicy[] { AzureClientRequestIdPolicy.Shared }, new HttpPipelinePolicy[] { new BearerTokenAuthenticationPolicy(_tokenCredential, AuthorizationScopes) }, new ResponseClassifier());
+            _pipeline = HttpPipelineBuilder.Build(options, Array.Empty<HttpPipelinePolicy>(), new HttpPipelinePolicy[] { new BearerTokenAuthenticationPolicy(_tokenCredential, AuthorizationScopes) }, new ResponseClassifier());
             _endpoint = endpoint;
+            _clientRequestId = clientRequestId;
             _apiVersion = options.Version;
         }
 
@@ -703,13 +706,13 @@ namespace FirstTestTypeSpec
         /// <param name="body"> The ModelWithFormat to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
-        /// <include file="Docs/FirstTestTypeSpecClient.xml" path="doc/members/member[@name='IgnoreHeadersAsync(Guid,ModelWithFormat,CancellationToken)']/*" />
-        public virtual async Task<Response> IgnoreHeadersAsync(Guid subscriptionId, ModelWithFormat body, CancellationToken cancellationToken = default)
+        /// <include file="Docs/FirstTestTypeSpecClient.xml" path="doc/members/member[@name='ClientRequestIdHeadersAsync(Guid,ModelWithFormat,CancellationToken)']/*" />
+        public virtual async Task<Response> ClientRequestIdHeadersAsync(Guid subscriptionId, ModelWithFormat body, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(body, nameof(body));
 
             RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = await IgnoreHeadersAsync(subscriptionId, body.ToRequestContent(), context).ConfigureAwait(false);
+            Response response = await ClientRequestIdHeadersAsync(subscriptionId, body.ToRequestContent(), context).ConfigureAwait(false);
             return response;
         }
 
@@ -718,13 +721,13 @@ namespace FirstTestTypeSpec
         /// <param name="body"> The ModelWithFormat to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
-        /// <include file="Docs/FirstTestTypeSpecClient.xml" path="doc/members/member[@name='IgnoreHeaders(Guid,ModelWithFormat,CancellationToken)']/*" />
-        public virtual Response IgnoreHeaders(Guid subscriptionId, ModelWithFormat body, CancellationToken cancellationToken = default)
+        /// <include file="Docs/FirstTestTypeSpecClient.xml" path="doc/members/member[@name='ClientRequestIdHeaders(Guid,ModelWithFormat,CancellationToken)']/*" />
+        public virtual Response ClientRequestIdHeaders(Guid subscriptionId, ModelWithFormat body, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(body, nameof(body));
 
             RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = IgnoreHeaders(subscriptionId, body.ToRequestContent(), context);
+            Response response = ClientRequestIdHeaders(subscriptionId, body.ToRequestContent(), context);
             return response;
         }
 
@@ -738,7 +741,7 @@ namespace FirstTestTypeSpec
         /// </item>
         /// <item>
         /// <description>
-        /// Please try the simpler <see cref="IgnoreHeadersAsync(Guid,ModelWithFormat,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// Please try the simpler <see cref="ClientRequestIdHeadersAsync(Guid,ModelWithFormat,CancellationToken)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>
@@ -749,16 +752,16 @@ namespace FirstTestTypeSpec
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/FirstTestTypeSpecClient.xml" path="doc/members/member[@name='IgnoreHeadersAsync(Guid,RequestContent,RequestContext)']/*" />
-        public virtual async Task<Response> IgnoreHeadersAsync(Guid subscriptionId, RequestContent content, RequestContext context = null)
+        /// <include file="Docs/FirstTestTypeSpecClient.xml" path="doc/members/member[@name='ClientRequestIdHeadersAsync(Guid,RequestContent,RequestContext)']/*" />
+        public virtual async Task<Response> ClientRequestIdHeadersAsync(Guid subscriptionId, RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
 
-            using var scope = ClientDiagnostics.CreateScope("FirstTestTypeSpecClient.IgnoreHeaders");
+            using var scope = ClientDiagnostics.CreateScope("FirstTestTypeSpecClient.ClientRequestIdHeaders");
             scope.Start();
             try
             {
-                using HttpMessage message = CreateIgnoreHeadersRequest(subscriptionId, content, context);
+                using HttpMessage message = CreateClientRequestIdHeadersRequest(subscriptionId, content, context);
                 return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -778,7 +781,7 @@ namespace FirstTestTypeSpec
         /// </item>
         /// <item>
         /// <description>
-        /// Please try the simpler <see cref="IgnoreHeaders(Guid,ModelWithFormat,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// Please try the simpler <see cref="ClientRequestIdHeaders(Guid,ModelWithFormat,CancellationToken)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>
@@ -789,16 +792,16 @@ namespace FirstTestTypeSpec
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/FirstTestTypeSpecClient.xml" path="doc/members/member[@name='IgnoreHeaders(Guid,RequestContent,RequestContext)']/*" />
-        public virtual Response IgnoreHeaders(Guid subscriptionId, RequestContent content, RequestContext context = null)
+        /// <include file="Docs/FirstTestTypeSpecClient.xml" path="doc/members/member[@name='ClientRequestIdHeaders(Guid,RequestContent,RequestContext)']/*" />
+        public virtual Response ClientRequestIdHeaders(Guid subscriptionId, RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
 
-            using var scope = ClientDiagnostics.CreateScope("FirstTestTypeSpecClient.IgnoreHeaders");
+            using var scope = ClientDiagnostics.CreateScope("FirstTestTypeSpecClient.ClientRequestIdHeaders");
             scope.Start();
             try
             {
-                using HttpMessage message = CreateIgnoreHeadersRequest(subscriptionId, content, context);
+                using HttpMessage message = CreateClientRequestIdHeadersRequest(subscriptionId, content, context);
                 return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
@@ -1757,14 +1760,14 @@ namespace FirstTestTypeSpec
             return message;
         }
 
-        internal HttpMessage CreateIgnoreHeadersRequest(Guid subscriptionId, RequestContent content, RequestContext context)
+        internal HttpMessage CreateClientRequestIdHeadersRequest(Guid subscriptionId, RequestContent content, RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier204);
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
             uri.Reset(_endpoint);
-            uri.AppendPath("/ignoreHeaders/", false);
+            uri.AppendPath("/clientRequestIdHeaders/", false);
             uri.AppendPath(subscriptionId, true);
             uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;

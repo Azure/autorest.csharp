@@ -91,22 +91,9 @@ namespace AutoRest.CSharp.Output.Models
 
             foreach (Parameter parameter in parameters)
             {
-                if (parameter == KnownParameters.ClientRequestId)
-                {
-                    continue;
-                }
                 var field = parameter == KnownParameters.ClientDiagnostics ? ClientDiagnosticsProperty : parameter == KnownParameters.Pipeline ? PipelineField : parameter.IsResourceIdentifier
                         ? new FieldDeclaration($"{parameter.Description}", Public | ReadOnly, parameter.Type, parameter.Name.FirstCharToUpperCase(), SerializationFormat.Default, writeAsProperty: true)
                         : new FieldDeclaration(Private | ReadOnly, parameter.Type, "_" + parameter.Name);
-                /*
-                var field =parameter switch
-                {
-                    _ when parameter.IsResourceIdentifier => new FieldDeclaration($"{parameter.Description}", Public | ReadOnly, parameter.Type, parameter.Name.FirstCharToUpperCase(), SerializationFormat.Default, writeAsProperty: true),
-                    _ when parameter == KnownParameters.ClientDiagnostics => ClientDiagnosticsProperty,
-                    _ when parameter == KnownParameters.Pipeline => PipelineField,
-                    _ => new FieldDeclaration(Private | ReadOnly, parameter.Type, "_" + parameter.Name)
-                };
-                */
                 if (field.WriteAsProperty)
                 {
                     properties.Add(field);

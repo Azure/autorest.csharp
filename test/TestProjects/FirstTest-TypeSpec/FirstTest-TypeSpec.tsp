@@ -342,8 +342,8 @@ namespace ProtocolAndConvenient {
     op stillConvenient(): void;
 }
 
-@route("/ignoreHeaders")
+@route("/clientRequestIdHeaders")
 @doc("paramete has string format.")
 @post
 @convenientAPI(true)
-op ignoreHeaders(@path @format("uuid") subscriptionId: string, @header("client-request-id") clientRequestId:string, @body body: ModelWithFormat): void;
+op clientRequestIdHeaders(@path @format("uuid") subscriptionId: string, @header("client-request-id") clientRequestId:string, @body body: ModelWithFormat): void;

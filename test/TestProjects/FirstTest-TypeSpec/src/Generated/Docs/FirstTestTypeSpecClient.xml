@@ -623,33 +623,33 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="IgnoreHeadersAsync(Guid,ModelWithFormat,CancellationToken)">
+    <member name="ClientRequestIdHeadersAsync(Guid,ModelWithFormat,CancellationToken)">
 <example>
-This sample shows how to call IgnoreHeadersAsync with required parameters.
+This sample shows how to call ClientRequestIdHeadersAsync with required parameters.
 <code><![CDATA[
 var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new FirstTestTypeSpecClient(endpoint);
 
 var body = new ModelWithFormat(new Uri("http://localhost:3000"), Guid.NewGuid());
-var result = await client.IgnoreHeadersAsync(Guid.NewGuid(), body);
+var result = await client.ClientRequestIdHeadersAsync(Guid.NewGuid(), body);
 ]]></code>
 </example>
     </member>
-    <member name="IgnoreHeaders(Guid,ModelWithFormat,CancellationToken)">
+    <member name="ClientRequestIdHeaders(Guid,ModelWithFormat,CancellationToken)">
 <example>
-This sample shows how to call IgnoreHeaders with required parameters.
+This sample shows how to call ClientRequestIdHeaders with required parameters.
 <code><![CDATA[
 var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new FirstTestTypeSpecClient(endpoint);
 
 var body = new ModelWithFormat(new Uri("http://localhost:3000"), Guid.NewGuid());
-var result = client.IgnoreHeaders(Guid.NewGuid(), body);
+var result = client.ClientRequestIdHeaders(Guid.NewGuid(), body);
 ]]></code>
 </example>
     </member>
-    <member name="IgnoreHeadersAsync(Guid,RequestContent,RequestContext)">
+    <member name="ClientRequestIdHeadersAsync(Guid,RequestContent,RequestContext)">
 <example>
-This sample shows how to call IgnoreHeadersAsync with required parameters and request content.
+This sample shows how to call ClientRequestIdHeadersAsync with required parameters and request content.
 <code><![CDATA[
 var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new FirstTestTypeSpecClient(endpoint);
@@ -659,14 +659,14 @@ var data = new {
     guid = "73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a",
 };
 
-Response response = await client.IgnoreHeadersAsync(Guid.NewGuid(), RequestContent.Create(data));
+Response response = await client.ClientRequestIdHeadersAsync(Guid.NewGuid(), RequestContent.Create(data));
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
-    <member name="IgnoreHeaders(Guid,RequestContent,RequestContext)">
+    <member name="ClientRequestIdHeaders(Guid,RequestContent,RequestContext)">
 <example>
-This sample shows how to call IgnoreHeaders with required parameters and request content.
+This sample shows how to call ClientRequestIdHeaders with required parameters and request content.
 <code><![CDATA[
 var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new FirstTestTypeSpecClient(endpoint);
@@ -676,7 +676,7 @@ var data = new {
     guid = "73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a",
 };
 
-Response response = client.IgnoreHeaders(Guid.NewGuid(), RequestContent.Create(data));
+Response response = client.ClientRequestIdHeaders(Guid.NewGuid(), RequestContent.Create(data));
 Console.WriteLine(response.Status);
 ]]></code>
 </example>

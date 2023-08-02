@@ -762,7 +762,7 @@ namespace FirstTestTypeSpec.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_IgnoreHeaders()
+        public void Example_ClientRequestIdHeaders()
         {
             var endpoint = new Uri("<https://my-service.azure.com>");
             var client = new FirstTestTypeSpecClient(endpoint);
@@ -773,13 +773,13 @@ namespace FirstTestTypeSpec.Samples
                 guid = "73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a",
             };
 
-            Response response = client.IgnoreHeaders(Guid.NewGuid(), RequestContent.Create(data));
+            Response response = client.ClientRequestIdHeaders(Guid.NewGuid(), RequestContent.Create(data));
             Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_IgnoreHeaders_AllParameters()
+        public void Example_ClientRequestIdHeaders_AllParameters()
         {
             var endpoint = new Uri("<https://my-service.azure.com>");
             var client = new FirstTestTypeSpecClient(endpoint);
@@ -790,13 +790,13 @@ namespace FirstTestTypeSpec.Samples
                 guid = "73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a",
             };
 
-            Response response = client.IgnoreHeaders(Guid.NewGuid(), RequestContent.Create(data));
+            Response response = client.ClientRequestIdHeaders(Guid.NewGuid(), RequestContent.Create(data));
             Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_IgnoreHeaders_Async()
+        public async Task Example_ClientRequestIdHeaders_Async()
         {
             var endpoint = new Uri("<https://my-service.azure.com>");
             var client = new FirstTestTypeSpecClient(endpoint);
@@ -807,13 +807,13 @@ namespace FirstTestTypeSpec.Samples
                 guid = "73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a",
             };
 
-            Response response = await client.IgnoreHeadersAsync(Guid.NewGuid(), RequestContent.Create(data));
+            Response response = await client.ClientRequestIdHeadersAsync(Guid.NewGuid(), RequestContent.Create(data));
             Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_IgnoreHeaders_AllParameters_Async()
+        public async Task Example_ClientRequestIdHeaders_AllParameters_Async()
         {
             var endpoint = new Uri("<https://my-service.azure.com>");
             var client = new FirstTestTypeSpecClient(endpoint);
@@ -824,19 +824,19 @@ namespace FirstTestTypeSpec.Samples
                 guid = "73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a",
             };
 
-            Response response = await client.IgnoreHeadersAsync(Guid.NewGuid(), RequestContent.Create(data));
+            Response response = await client.ClientRequestIdHeadersAsync(Guid.NewGuid(), RequestContent.Create(data));
             Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_IgnoreHeaders_Convenience_Async()
+        public async Task Example_ClientRequestIdHeaders_Convenience_Async()
         {
             var endpoint = new Uri("<https://my-service.azure.com>");
             var client = new FirstTestTypeSpecClient(endpoint);
 
             var body = new ModelWithFormat(new Uri("http://localhost:3000"), Guid.NewGuid());
-            var result = await client.IgnoreHeadersAsync(Guid.NewGuid(), body);
+            var result = await client.ClientRequestIdHeadersAsync(Guid.NewGuid(), body);
         }
 
         [Test]

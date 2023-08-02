@@ -219,16 +219,6 @@ namespace AutoRest.CSharp.Output.Models.Shared
 
         private static Constant? GetClientDefaultValue(RequestParameter parameter, TypeFactory typeFactory)
         {
-            /*
-            if (parameter.In == HttpParameterIn.Header && RequestHeader.ClientRequestIdHeaders.Contains(parameter.Language.Default.Name))
-            {
-                return Constant.FromExpression($"message.Request.ClientRequestId", new CSharpType(typeof(string)));
-            }
-            if (parameter.In == HttpParameterIn.Header && RequestHeader.ReturnClientRequestIdResponseHeaders.Contains(parameter.Language.Default.SerializedName ?? parameter.Language.Default.Name))
-            {
-                return new Constant("true", new CSharpType(typeof(string)));
-            }
-            */
             if (parameter.ClientDefaultValue != null)
             {
                 CSharpType constantTypeReference = typeFactory.CreateType(parameter.Schema, parameter.IsNullable);

@@ -1764,7 +1764,7 @@
     },
     {
      "$id": "203",
-     "Name": "ignoreHeaders",
+     "Name": "clientRequestIdHeaders",
      "ResourceName": "FirstTestTypeSpec",
      "Description": "paramete has string format.",
      "Parameters": [
@@ -1900,7 +1900,7 @@
      "HttpMethod": "POST",
      "RequestBodyMediaType": "Json",
      "Uri": "{firstTestTypeSpecUrl}",
-     "Path": "/ignoreHeaders/{subscriptionId}",
+     "Path": "/clientRequestIdHeaders/{subscriptionId}",
      "RequestMediaTypes": [
       "application/json"
      ],

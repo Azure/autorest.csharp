@@ -31,7 +31,6 @@ namespace AutoRest.CSharp.Output.Models
     {
         private static readonly HashSet<string> IgnoredRequestHeader = new(StringComparer.OrdinalIgnoreCase)
         {
-            //"x-ms-client-request-id",
             "tracestate",
             "traceparent"
         };

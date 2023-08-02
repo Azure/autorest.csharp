@@ -19,6 +19,7 @@ namespace paging
     internal partial class PagingRestClient
     {
         private readonly HttpPipeline _pipeline;
+        private readonly string _clientRequestId;
         private readonly Uri _endpoint;
 
         /// <summary> The ClientDiagnostics is used to provide tracing support for the client library. </summary>
@@ -34,6 +35,7 @@ namespace paging
         {
             ClientDiagnostics = clientDiagnostics ?? throw new ArgumentNullException(nameof(clientDiagnostics));
             _pipeline = pipeline ?? throw new ArgumentNullException(nameof(pipeline));
+            _clientRequestId = clientRequestId;
             _endpoint = endpoint ?? new Uri("http://localhost:3000");
         }
 

@@ -92,18 +92,6 @@ namespace AutoRest.CSharp.Mgmt.Models
             requiredParameters.AddRange(bodyParameters.OrderBy(p => p.IsOptionalInSignature)); // move required body parameters at the beginning
             requiredParameters.AddRange(optionalParameters);
 
-            // add client request id parameter if not exists
-            /*
-            if (!requiredParameters.Any(p => RequestHeader.ClientRequestIdHeaders.Contains(p.Name)))
-            {
-                requiredParameters.Add(KnownParameters.ClientRequestIdParameter);
-            }
-
-            if (!requiredParameters.Any(p => RequestHeader.ReturnClientRequestIdResponseHeaders.Contains(p.Name)))
-            {
-                requiredParameters.Add(KnownParameters.ReturnClientRequestIdParameter);
-            }
-            */
             return requiredParameters.ToArray();
         }
     }
