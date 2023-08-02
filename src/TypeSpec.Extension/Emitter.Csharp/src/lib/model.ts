@@ -85,7 +85,6 @@ export function mapTypeSpecTypeToCSharpInputTypeKind(
         case "Model":
             return getCSharpInputTypeKindByIntrinsicModelName(
                 typespecType.name,
-                format,
                 encode
             );
         case "ModelProperty":
@@ -111,7 +110,6 @@ export function mapTypeSpecTypeToCSharpInputTypeKind(
 
 function getCSharpInputTypeKindByIntrinsicModelName(
     name: string,
-    format?: string,
     encode?: EncodeData
 ): InputTypeKind {
     switch (name) {
@@ -140,21 +138,13 @@ function getCSharpInputTypeKindByIntrinsicModelName(
             return InputTypeKind.Float32;
         case "float64":
             return InputTypeKind.Float64;
+        case "uri":
+        case "url":
+            return InputTypeKind.Uri;
+        case "uuid":
+            return InputTypeKind.Guid;
         case "string":
-            switch (format?.toLowerCase()) {
-                case "date":
-                    return InputTypeKind.DateTime;
-                case "uri":
-                case "url":
-                    return InputTypeKind.Uri;
-                case "uuid":
-                    return InputTypeKind.Guid;
-                default:
-                    if (format) {
-                        logger.warn(`invalid format ${format}`);
-                    }
-                    return InputTypeKind.String;
-            }
+            return InputTypeKind.String;
         case "boolean":
             return InputTypeKind.Boolean;
         case "date":
@@ -318,7 +308,6 @@ export function getInputType(
                     Name: type.name,
                     Kind: getCSharpInputTypeKindByIntrinsicModelName(
                         sdkType.kind,
-                        formattedType.format,
                         formattedType.encode
                     ),
                     IsNullable: false
