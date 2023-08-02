@@ -7,6 +7,7 @@ using System.Runtime.CompilerServices;
 using System.Threading;
 using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Generation.Types;
+using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Output.Models.Serialization;
 using Azure;
 using Azure.Core;
@@ -54,5 +55,72 @@ namespace AutoRest.CSharp.Output.Models.Shared
             new InputParameter("clientRequestId", "x-ms-client-request-id", "the client request id header", InputPrimitiveType.String, RequestLocation.Header, null, null, null, InputOperationParameterKind.Constant, true, false, false, false, false, false, false, null, null, SerializationFormat.Default),
             new InputParameter("returnClientRequestId", "x-ms-return-client-request-id", "the x-ms-return-client-request-id header", InputPrimitiveType.String, RequestLocation.Header, null, null, null, InputOperationParameterKind.Constant, true, false, false, false, false, false, false, null, null, SerializationFormat.Default)
         };
+        public static readonly RequestParameter clientRequestIdRequestParameter = new RequestParameter()
+        {
+            Language = new()
+            {
+                Default = new()
+                {
+                    Name = "clientRequestId",
+                    SerializedName = "x-ms-client-request-id"
+                }
+            },
+            Protocol = new()
+            {
+                Http = new HttpParameter()
+                {
+                    In = HttpParameterIn.Header
+                }
+            },
+            Implementation = ImplementationLocation.Method,
+            Required = true,
+            Schema = new ConstantSchema()
+            {
+                Type = AllSchemaTypes.String,
+                ValueType = new StringSchema()
+                {
+                    Type = AllSchemaTypes.String,
+                },
+                Value = new ConstantValue()
+                {
+                    Value = "clientRequestId",
+                }
+            }
+        };
+
+        public static readonly RequestParameter returnClientRequestIdRequestParameter = new RequestParameter()
+        {
+            Language = new()
+            {
+                Default = new()
+                {
+                    Name = "returnClientRequestId",
+                    SerializedName = "x-ms-return-client-request-id"
+                }
+            },
+            Protocol = new()
+            {
+                Http = new HttpParameter()
+                {
+                    In = HttpParameterIn.Header
+                }
+            },
+            Implementation = ImplementationLocation.Method,
+            Required = true,
+            Schema = new ConstantSchema()
+            {
+                Type = AllSchemaTypes.String,
+                ValueType = new BooleanSchema()
+                {
+                    Type = AllSchemaTypes.String,
+                },
+                Value = new ConstantValue()
+                {
+                    Value = "true",
+                }
+            }
+        };
+
+        public static readonly RequestParameter[] ClientRequestIDRequestParamters = new[] { clientRequestIdRequestParameter, returnClientRequestIdRequestParameter };
     }
 }

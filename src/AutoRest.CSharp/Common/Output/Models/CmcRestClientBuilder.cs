@@ -293,7 +293,7 @@ namespace AutoRest.CSharp.Output.Models
                 }
             };
             if (!parameters.Any(h => RequestHeader.ClientRequestIdHeaders.Contains(h.Language.Default.SerializedName ?? h.Language.Default.Name))){
-                parameters = parameters.Concat(new[] { clientRequestIdParameter, returnClientRequestIdParameter });
+                parameters = parameters.Concat(KnownParameters.ClientRequestIDRequestParamters);
             }
             return parameters.ToArray().ToDictionary(rp => rp, requestParameter => BuildParameter(requestParameter, null, operation.KeepClientDefaultValue));
         }
