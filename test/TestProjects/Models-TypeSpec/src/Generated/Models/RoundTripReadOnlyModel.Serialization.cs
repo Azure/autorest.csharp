@@ -32,13 +32,13 @@ namespace ModelsTypeSpec.Models
             ExtensibleEnum optionalReadonlyExtensibleEnum = default;
             IReadOnlyList<string> requiredReadonlyStringList = default;
             IReadOnlyList<int> requiredReadonlyIntList = default;
-            IReadOnlyList<CollectionItem> requiredReadOnlyModelCollection = default;
+            IReadOnlyList<CollectionItem> requiredReadOnlyModelList = default;
             IReadOnlyDictionary<string, int> requiredReadOnlyIntRecord = default;
             IReadOnlyDictionary<string, string> requiredStringRecord = default;
             IReadOnlyDictionary<string, RecordItem> requiredReadOnlyModelRecord = default;
             Optional<IReadOnlyList<string>> optionalReadonlyStringList = default;
             Optional<IReadOnlyList<int>> optionalReadonlyIntList = default;
-            Optional<IReadOnlyList<CollectionItem>> optionalReadOnlyModelCollection = default;
+            Optional<IReadOnlyList<CollectionItem>> optionalReadOnlyModelList = default;
             IReadOnlyDictionary<string, int> optionalReadOnlyIntRecord = default;
             IReadOnlyDictionary<string, string> optionalReadOnlyStringRecord = default;
             Optional<IReadOnlyDictionary<string, RecordItem>> optionalModelRecord = default;
@@ -124,14 +124,14 @@ namespace ModelsTypeSpec.Models
                     requiredReadonlyIntList = array;
                     continue;
                 }
-                if (property.NameEquals("requiredReadOnlyModelCollection"u8))
+                if (property.NameEquals("requiredReadOnlyModelList"u8))
                 {
                     List<CollectionItem> array = new List<CollectionItem>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
                         array.Add(CollectionItem.DeserializeCollectionItem(item));
                     }
-                    requiredReadOnlyModelCollection = array;
+                    requiredReadOnlyModelList = array;
                     continue;
                 }
                 if (property.NameEquals("requiredReadOnlyIntRecord"u8))
@@ -192,7 +192,7 @@ namespace ModelsTypeSpec.Models
                     optionalReadonlyIntList = array;
                     continue;
                 }
-                if (property.NameEquals("optionalReadOnlyModelCollection"u8))
+                if (property.NameEquals("optionalReadOnlyModelList"u8))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
@@ -203,7 +203,7 @@ namespace ModelsTypeSpec.Models
                     {
                         array.Add(CollectionItem.DeserializeCollectionItem(item));
                     }
-                    optionalReadOnlyModelCollection = array;
+                    optionalReadOnlyModelList = array;
                     continue;
                 }
                 if (property.NameEquals("optionalReadOnlyIntRecord"u8))
@@ -279,7 +279,7 @@ namespace ModelsTypeSpec.Models
                     continue;
                 }
             }
-            return new RoundTripReadOnlyModel(requiredReadonlyString, requiredReadonlyInt, optionalReadonlyString.Value, Optional.ToNullable(optionalReadonlyInt), requiredReadonlyModel, optionalReadonlyModel.Value, requiredReadonlyFixedStringEnum, requiredReadonlyExtensibleEnum, optionalReadonlyFixedStringEnum, optionalReadonlyExtensibleEnum, requiredReadonlyStringList, requiredReadonlyIntList, requiredReadOnlyModelCollection, requiredReadOnlyIntRecord, requiredStringRecord, requiredReadOnlyModelRecord, Optional.ToList(optionalReadonlyStringList), Optional.ToList(optionalReadonlyIntList), Optional.ToList(optionalReadOnlyModelCollection), optionalReadOnlyIntRecord, optionalReadOnlyStringRecord, Optional.ToDictionary(optionalModelRecord), requiredCollectionWithNullableIntElement, Optional.ToList(optionalCollectionWithNullableBooleanElement));
+            return new RoundTripReadOnlyModel(requiredReadonlyString, requiredReadonlyInt, optionalReadonlyString.Value, Optional.ToNullable(optionalReadonlyInt), requiredReadonlyModel, optionalReadonlyModel.Value, requiredReadonlyFixedStringEnum, requiredReadonlyExtensibleEnum, optionalReadonlyFixedStringEnum, optionalReadonlyExtensibleEnum, requiredReadonlyStringList, requiredReadonlyIntList, requiredReadOnlyModelList, requiredReadOnlyIntRecord, requiredStringRecord, requiredReadOnlyModelRecord, Optional.ToList(optionalReadonlyStringList), Optional.ToList(optionalReadonlyIntList), Optional.ToList(optionalReadOnlyModelList), optionalReadOnlyIntRecord, optionalReadOnlyStringRecord, Optional.ToDictionary(optionalModelRecord), requiredCollectionWithNullableIntElement, Optional.ToList(optionalCollectionWithNullableBooleanElement));
         }
 
         /// <summary> Deserializes the model from a raw response. </summary>

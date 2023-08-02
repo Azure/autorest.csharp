@@ -24,6 +24,6 @@ namespace ModelsTypeSpec.Models
         }
 
         /// <summary> base model property. </summary>
-        public string BaseModelProp { get; set; }
+        public string BaseModelProp { get; }
     }
 }

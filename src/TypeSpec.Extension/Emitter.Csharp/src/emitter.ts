@@ -151,6 +151,8 @@ export async function $onEmit(context: EmitContext<NetEmitterOptions>) {
                 "methods-to-keep-client-default-value":
                     options["methods-to-keep-client-default-value"],
                 "head-as-boolean": options["head-as-boolean"],
+                "deserialize-null-collection-as-null-value":
+                    options["deserialize-null-collection-as-null-value"]
             } as Configuration;
 
             await program.host.writeFile(
