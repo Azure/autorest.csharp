@@ -55,6 +55,8 @@ namespace Azure.ResourceManager.Sample
             uri.AppendPath("/reimage", false);
             uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
+            request.Headers.Add("x-ms-client-request-id", message.Request.ClientRequestId);
+            request.Headers.Add("x-ms-return-client-request-id", "true");
             if (content != null)
             {
                 request.Headers.Add("Content-Type", "application/json");
@@ -140,6 +142,8 @@ namespace Azure.ResourceManager.Sample
             uri.AppendPath("/reimageall", false);
             uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
+            request.Headers.Add("x-ms-client-request-id", message.Request.ClientRequestId);
+            request.Headers.Add("x-ms-return-client-request-id", "true");
             _userAgent.Apply(message);
             return message;
         }
@@ -216,6 +220,8 @@ namespace Azure.ResourceManager.Sample
             uri.AppendPath("/deallocate", false);
             uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
+            request.Headers.Add("x-ms-client-request-id", message.Request.ClientRequestId);
+            request.Headers.Add("x-ms-return-client-request-id", "true");
             _userAgent.Apply(message);
             return message;
         }
@@ -292,6 +298,8 @@ namespace Azure.ResourceManager.Sample
             uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
+            request.Headers.Add("x-ms-client-request-id", message.Request.ClientRequestId);
+            request.Headers.Add("x-ms-return-client-request-id", "true");
             request.Headers.Add("Content-Type", "application/json");
             var content = new Utf8JsonRequestContent();
             content.JsonWriter.WriteObjectValue(data);
@@ -375,6 +383,8 @@ namespace Azure.ResourceManager.Sample
             uri.AppendPath(instanceId, true);
             uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
+            request.Headers.Add("x-ms-client-request-id", message.Request.ClientRequestId);
+            request.Headers.Add("x-ms-return-client-request-id", "true");
             _userAgent.Apply(message);
             return message;
         }
@@ -457,6 +467,8 @@ namespace Azure.ResourceManager.Sample
             uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
+            request.Headers.Add("x-ms-client-request-id", message.Request.ClientRequestId);
+            request.Headers.Add("x-ms-return-client-request-id", "true");
             _userAgent.Apply(message);
             return message;
         }
@@ -548,6 +560,8 @@ namespace Azure.ResourceManager.Sample
             uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
+            request.Headers.Add("x-ms-client-request-id", message.Request.ClientRequestId);
+            request.Headers.Add("x-ms-return-client-request-id", "true");
             _userAgent.Apply(message);
             return message;
         }
@@ -643,6 +657,8 @@ namespace Azure.ResourceManager.Sample
             uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
+            request.Headers.Add("x-ms-client-request-id", message.Request.ClientRequestId);
+            request.Headers.Add("x-ms-return-client-request-id", "true");
             _userAgent.Apply(message);
             return message;
         }
@@ -733,6 +749,8 @@ namespace Azure.ResourceManager.Sample
             }
             uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
+            request.Headers.Add("x-ms-client-request-id", message.Request.ClientRequestId);
+            request.Headers.Add("x-ms-return-client-request-id", "true");
             _userAgent.Apply(message);
             return message;
         }
@@ -811,6 +829,8 @@ namespace Azure.ResourceManager.Sample
             uri.AppendPath("/restart", false);
             uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
+            request.Headers.Add("x-ms-client-request-id", message.Request.ClientRequestId);
+            request.Headers.Add("x-ms-return-client-request-id", "true");
             _userAgent.Apply(message);
             return message;
         }
@@ -887,6 +907,8 @@ namespace Azure.ResourceManager.Sample
             uri.AppendPath("/start", false);
             uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
+            request.Headers.Add("x-ms-client-request-id", message.Request.ClientRequestId);
+            request.Headers.Add("x-ms-return-client-request-id", "true");
             _userAgent.Apply(message);
             return message;
         }
@@ -963,6 +985,8 @@ namespace Azure.ResourceManager.Sample
             uri.AppendPath("/redeploy", false);
             uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
+            request.Headers.Add("x-ms-client-request-id", message.Request.ClientRequestId);
+            request.Headers.Add("x-ms-return-client-request-id", "true");
             _userAgent.Apply(message);
             return message;
         }
@@ -1044,6 +1068,8 @@ namespace Azure.ResourceManager.Sample
             uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
+            request.Headers.Add("x-ms-client-request-id", message.Request.ClientRequestId);
+            request.Headers.Add("x-ms-return-client-request-id", "true");
             _userAgent.Apply(message);
             return message;
         }
@@ -1130,6 +1156,8 @@ namespace Azure.ResourceManager.Sample
             uri.AppendPath("/performMaintenance", false);
             uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
+            request.Headers.Add("x-ms-client-request-id", message.Request.ClientRequestId);
+            request.Headers.Add("x-ms-return-client-request-id", "true");
             _userAgent.Apply(message);
             return message;
         }
@@ -1206,6 +1234,8 @@ namespace Azure.ResourceManager.Sample
             uri.AppendPath("/simulateEviction", false);
             uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
+            request.Headers.Add("x-ms-client-request-id", message.Request.ClientRequestId);
+            request.Headers.Add("x-ms-return-client-request-id", "true");
             _userAgent.Apply(message);
             return message;
         }
@@ -1272,6 +1302,8 @@ namespace Azure.ResourceManager.Sample
             uri.AppendRawNextLink(nextLink, false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
+            request.Headers.Add("x-ms-client-request-id", message.Request.ClientRequestId);
+            request.Headers.Add("x-ms-return-client-request-id", "true");
             _userAgent.Apply(message);
             return message;
         }

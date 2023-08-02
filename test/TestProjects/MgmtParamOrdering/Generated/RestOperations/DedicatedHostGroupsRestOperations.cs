@@ -56,6 +56,8 @@ namespace MgmtParamOrdering
             uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
+            request.Headers.Add("x-ms-client-request-id", message.Request.ClientRequestId);
+            request.Headers.Add("x-ms-return-client-request-id", "true");
             _userAgent.Apply(message);
             return message;
         }
@@ -132,6 +134,8 @@ namespace MgmtParamOrdering
             uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
+            request.Headers.Add("x-ms-client-request-id", message.Request.ClientRequestId);
+            request.Headers.Add("x-ms-return-client-request-id", "true");
             request.Headers.Add("Content-Type", "application/json");
             var content = new Utf8JsonRequestContent();
             content.JsonWriter.WriteObjectValue(data);
@@ -220,6 +224,8 @@ namespace MgmtParamOrdering
             uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
+            request.Headers.Add("x-ms-client-request-id", message.Request.ClientRequestId);
+            request.Headers.Add("x-ms-return-client-request-id", "true");
             request.Headers.Add("Content-Type", "application/json");
             var content = new Utf8JsonRequestContent();
             content.JsonWriter.WriteObjectValue(patch);
@@ -305,6 +311,8 @@ namespace MgmtParamOrdering
             uri.AppendPath(hostGroupName, true);
             uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
+            request.Headers.Add("x-ms-client-request-id", message.Request.ClientRequestId);
+            request.Headers.Add("x-ms-return-client-request-id", "true");
             _userAgent.Apply(message);
             return message;
         }
@@ -379,6 +387,8 @@ namespace MgmtParamOrdering
             uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
+            request.Headers.Add("x-ms-client-request-id", message.Request.ClientRequestId);
+            request.Headers.Add("x-ms-return-client-request-id", "true");
             _userAgent.Apply(message);
             return message;
         }

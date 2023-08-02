@@ -31,7 +31,7 @@ namespace AutoRest.CSharp.Output.Models
     {
         private static readonly HashSet<string> IgnoredRequestHeader = new(StringComparer.OrdinalIgnoreCase)
         {
-            "x-ms-client-request-id",
+            //"x-ms-client-request-id",
             "tracestate",
             "traceparent"
         };
@@ -216,10 +216,86 @@ namespace AutoRest.CSharp.Output.Models
         {
             var parameters = operation.Parameters
                 .Concat(requestParameters)
-                .Where(rp => !IsIgnoredHeaderParameter(rp))
-                .ToArray();
+                .Where(rp => !IsIgnoredHeaderParameter(rp));
+            RequestParameter p = new RequestParameter();
+            p.Language.Default.Name = "clientRequestId";
+            p.Language.Default.SerializedName = "x-ms-client-request-id";
+            HttpParameter para = new HttpParameter();
+            para.In = HttpParameterIn.Header;
+            p.Protocol.Http = para;
+            p.Implementation = ImplementationLocation.Method;
+            p.Required = true;
+            p.Schema = new ConstantSchema();
 
-            return parameters.ToDictionary(rp => rp, requestParameter => BuildParameter(requestParameter, null, operation.KeepClientDefaultValue));
+            RequestParameter clientRequestIdParameter = new RequestParameter()
+            {
+                Language = new()
+                {
+                    Default = new()
+                    {
+                        Name = "clientRequestId",
+                        SerializedName = "x-ms-client-request-id"
+                    }
+                },
+                Protocol = new()
+                {
+                    Http = new HttpParameter()
+                    {
+                        In = HttpParameterIn.Header
+                    }
+                },
+                Implementation = ImplementationLocation.Method,
+                Required = true,
+                Schema = new ConstantSchema()
+                {
+                    Type = AllSchemaTypes.String,
+                    ValueType = new StringSchema()
+                    {
+                        Type = AllSchemaTypes.String,
+                    },
+                    Value = new ConstantValue()
+                    {
+                        Value = "clientRequestId",
+                    }
+                }
+            };
+
+            RequestParameter returnClientRequestIdParameter = new RequestParameter()
+            {
+                Language = new()
+                {
+                    Default = new()
+                    {
+                        Name = "returnClientRequestId",
+                        SerializedName = "x-ms-return-client-request-id"
+                    }
+                },
+                Protocol = new()
+                {
+                    Http = new HttpParameter()
+                    {
+                        In = HttpParameterIn.Header
+                    }
+                },
+                Implementation = ImplementationLocation.Method,
+                Required = true,
+                Schema = new ConstantSchema()
+                {
+                    Type = AllSchemaTypes.String,
+                    ValueType = new BooleanSchema()
+                    {
+                        Type = AllSchemaTypes.String,
+                    },
+                    Value = new ConstantValue()
+                    {
+                        Value = "true",
+                    }
+                }
+            };
+            if (!parameters.Any(h => RequestHeader.ClientRequestIdHeaders.Contains(h.Language.Default.SerializedName ?? h.Language.Default.Name))){
+                parameters = parameters.Concat(new[] { clientRequestIdParameter, returnClientRequestIdParameter });
+            }
+            return parameters.ToArray().ToDictionary(rp => rp, requestParameter => BuildParameter(requestParameter, null, operation.KeepClientDefaultValue));
         }
 
         private Response[] BuildResponses(Operation operation, bool headAsBoolean, out CSharpType? responseType, Func<string?, bool>? returnNullOn404Func = null)
@@ -443,6 +519,15 @@ namespace AutoRest.CSharp.Output.Models
             if (requestParameter.Implementation != ImplementationLocation.Method)
             {
                 return (ReferenceOrConstant)_parameters[requestParameter.Language.Default.Name];
+            }
+
+            if (requestParameter.In == HttpParameterIn.Header && RequestHeader.ClientRequestIdHeaders.Contains(requestParameter.Language.Default.SerializedName ?? requestParameter.Language.Default.Name))
+            {
+                return Constant.FromExpression($"message.Request.ClientRequestId", new CSharpType(typeof(string)));
+            }
+            if (requestParameter.In == HttpParameterIn.Header && RequestHeader.ReturnClientRequestIdResponseHeaders.Contains(requestParameter.Language.Default.SerializedName ?? requestParameter.Language.Default.Name))
+            {
+                return new Constant("true", new CSharpType(typeof(string)));
             }
 
             if (requestParameter.Schema is ConstantSchema constant && requestParameter.IsRequired)

@@ -53,6 +53,8 @@ namespace MgmtParent
             uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
+            request.Headers.Add("x-ms-client-request-id", message.Request.ClientRequestId);
+            request.Headers.Add("x-ms-return-client-request-id", "true");
             request.Headers.Add("Content-Type", "application/json");
             var content = new Utf8JsonRequestContent();
             content.JsonWriter.WriteObjectValue(data);
@@ -139,6 +141,8 @@ namespace MgmtParent
             uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
+            request.Headers.Add("x-ms-client-request-id", message.Request.ClientRequestId);
+            request.Headers.Add("x-ms-return-client-request-id", "true");
             request.Headers.Add("Content-Type", "application/json");
             var content = new Utf8JsonRequestContent();
             content.JsonWriter.WriteObjectValue(patch);
@@ -224,6 +228,8 @@ namespace MgmtParent
             uri.AppendPath(availabilitySetName, true);
             uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
+            request.Headers.Add("x-ms-client-request-id", message.Request.ClientRequestId);
+            request.Headers.Add("x-ms-return-client-request-id", "true");
             _userAgent.Apply(message);
             return message;
         }
@@ -294,6 +300,8 @@ namespace MgmtParent
             uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
+            request.Headers.Add("x-ms-client-request-id", message.Request.ClientRequestId);
+            request.Headers.Add("x-ms-return-client-request-id", "true");
             _userAgent.Apply(message);
             return message;
         }
@@ -377,6 +385,8 @@ namespace MgmtParent
             }
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
+            request.Headers.Add("x-ms-client-request-id", message.Request.ClientRequestId);
+            request.Headers.Add("x-ms-return-client-request-id", "true");
             _userAgent.Apply(message);
             return message;
         }
@@ -448,6 +458,8 @@ namespace MgmtParent
             uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
+            request.Headers.Add("x-ms-client-request-id", message.Request.ClientRequestId);
+            request.Headers.Add("x-ms-return-client-request-id", "true");
             _userAgent.Apply(message);
             return message;
         }
@@ -516,6 +528,8 @@ namespace MgmtParent
             uri.AppendRawNextLink(nextLink, false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
+            request.Headers.Add("x-ms-client-request-id", message.Request.ClientRequestId);
+            request.Headers.Add("x-ms-return-client-request-id", "true");
             _userAgent.Apply(message);
             return message;
         }
@@ -586,6 +600,8 @@ namespace MgmtParent
             uri.AppendRawNextLink(nextLink, false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
+            request.Headers.Add("x-ms-client-request-id", message.Request.ClientRequestId);
+            request.Headers.Add("x-ms-return-client-request-id", "true");
             _userAgent.Apply(message);
             return message;
         }

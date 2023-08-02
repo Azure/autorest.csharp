@@ -53,6 +53,8 @@ namespace MgmtResourceName
             }
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
+            request.Headers.Add("x-ms-client-request-id", message.Request.ClientRequestId);
+            request.Headers.Add("x-ms-return-client-request-id", "true");
             _userAgent.Apply(message);
             return message;
         }
@@ -128,6 +130,8 @@ namespace MgmtResourceName
             }
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
+            request.Headers.Add("x-ms-client-request-id", message.Request.ClientRequestId);
+            request.Headers.Add("x-ms-return-client-request-id", "true");
             _userAgent.Apply(message);
             return message;
         }
@@ -184,6 +188,8 @@ namespace MgmtResourceName
             uri.AppendRawNextLink(nextLink, false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
+            request.Headers.Add("x-ms-client-request-id", message.Request.ClientRequestId);
+            request.Headers.Add("x-ms-return-client-request-id", "true");
             _userAgent.Apply(message);
             return message;
         }

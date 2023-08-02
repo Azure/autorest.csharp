@@ -6,7 +6,7 @@
 This sample shows how to call GetNoItemNamePagesAsync with required parameters and parse the result.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
-var client = new PagingClient(credential);
+var client = new PagingClient("<clientRequestId>", credential);
 
 await foreach (var item in client.GetNoItemNamePagesAsync(new RequestContext()))
 {
@@ -22,7 +22,7 @@ await foreach (var item in client.GetNoItemNamePagesAsync(new RequestContext()))
 This sample shows how to call GetNoItemNamePages with required parameters and parse the result.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
-var client = new PagingClient(credential);
+var client = new PagingClient("<clientRequestId>", credential);
 
 foreach (var item in client.GetNoItemNamePages(new RequestContext()))
 {
@@ -38,7 +38,7 @@ foreach (var item in client.GetNoItemNamePages(new RequestContext()))
 This sample shows how to call GetNullNextLinkNamePagesAsync with required parameters and parse the result.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
-var client = new PagingClient(credential);
+var client = new PagingClient("<clientRequestId>", credential);
 
 await foreach (var item in client.GetNullNextLinkNamePagesAsync(new RequestContext()))
 {
@@ -54,7 +54,7 @@ await foreach (var item in client.GetNullNextLinkNamePagesAsync(new RequestConte
 This sample shows how to call GetNullNextLinkNamePages with required parameters and parse the result.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
-var client = new PagingClient(credential);
+var client = new PagingClient("<clientRequestId>", credential);
 
 foreach (var item in client.GetNullNextLinkNamePages(new RequestContext()))
 {
@@ -70,7 +70,7 @@ foreach (var item in client.GetNullNextLinkNamePages(new RequestContext()))
 This sample shows how to call GetSinglePagesAsync with required parameters and parse the result.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
-var client = new PagingClient(credential);
+var client = new PagingClient("<clientRequestId>", credential);
 
 await foreach (var item in client.GetSinglePagesAsync(new RequestContext()))
 {
@@ -86,7 +86,7 @@ await foreach (var item in client.GetSinglePagesAsync(new RequestContext()))
 This sample shows how to call GetSinglePages with required parameters and parse the result.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
-var client = new PagingClient(credential);
+var client = new PagingClient("<clientRequestId>", credential);
 
 foreach (var item in client.GetSinglePages(new RequestContext()))
 {
@@ -102,7 +102,7 @@ foreach (var item in client.GetSinglePages(new RequestContext()))
 This sample shows how to call FirstResponseEmptyAsync with required parameters and parse the result.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
-var client = new PagingClient(credential);
+var client = new PagingClient("<clientRequestId>", credential);
 
 await foreach (var item in client.FirstResponseEmptyAsync(new RequestContext()))
 {
@@ -118,7 +118,7 @@ await foreach (var item in client.FirstResponseEmptyAsync(new RequestContext()))
 This sample shows how to call FirstResponseEmpty with required parameters and parse the result.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
-var client = new PagingClient(credential);
+var client = new PagingClient("<clientRequestId>", credential);
 
 foreach (var item in client.FirstResponseEmpty(new RequestContext()))
 {
@@ -129,14 +129,14 @@ foreach (var item in client.FirstResponseEmpty(new RequestContext()))
 ]]></code>
 </example>
     </member>
-    <member name="GetMultiplePagesAsync(string,int?,int?,RequestContext)">
+    <member name="GetMultiplePagesAsync(int?,int?,RequestContext)">
 <example>
 This sample shows how to call GetMultiplePagesAsync with required parameters and parse the result.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
-var client = new PagingClient(credential);
+var client = new PagingClient("<clientRequestId>", credential);
 
-await foreach (var item in client.GetMultiplePagesAsync("<clientRequestId>", 1234, 1234, new RequestContext()))
+await foreach (var item in client.GetMultiplePagesAsync(1234, 1234, new RequestContext()))
 {
     JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
     Console.WriteLine(result.GetProperty("properties").GetProperty("id").ToString());
@@ -145,14 +145,14 @@ await foreach (var item in client.GetMultiplePagesAsync("<clientRequestId>", 123
 ]]></code>
 </example>
     </member>
-    <member name="GetMultiplePages(string,int?,int?,RequestContext)">
+    <member name="GetMultiplePages(int?,int?,RequestContext)">
 <example>
 This sample shows how to call GetMultiplePages with required parameters and parse the result.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
-var client = new PagingClient(credential);
+var client = new PagingClient("<clientRequestId>", credential);
 
-foreach (var item in client.GetMultiplePages("<clientRequestId>", 1234, 1234, new RequestContext()))
+foreach (var item in client.GetMultiplePages(1234, 1234, new RequestContext()))
 {
     JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
     Console.WriteLine(result.GetProperty("properties").GetProperty("id").ToString());
@@ -166,7 +166,7 @@ foreach (var item in client.GetMultiplePages("<clientRequestId>", 1234, 1234, ne
 This sample shows how to call GetWithQueryParamsAsync with required parameters and parse the result.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
-var client = new PagingClient(credential);
+var client = new PagingClient("<clientRequestId>", credential);
 
 await foreach (var item in client.GetWithQueryParamsAsync(1234, new RequestContext()))
 {
@@ -182,7 +182,7 @@ await foreach (var item in client.GetWithQueryParamsAsync(1234, new RequestConte
 This sample shows how to call GetWithQueryParams with required parameters and parse the result.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
-var client = new PagingClient(credential);
+var client = new PagingClient("<clientRequestId>", credential);
 
 foreach (var item in client.GetWithQueryParams(1234, new RequestContext()))
 {
@@ -198,7 +198,7 @@ foreach (var item in client.GetWithQueryParams(1234, new RequestContext()))
 This sample shows how to call DuplicateParamsAsync with required parameters and parse the result.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
-var client = new PagingClient(credential);
+var client = new PagingClient("<clientRequestId>", credential);
 
 await foreach (var item in client.DuplicateParamsAsync("<filter>", new RequestContext()))
 {
@@ -214,7 +214,7 @@ await foreach (var item in client.DuplicateParamsAsync("<filter>", new RequestCo
 This sample shows how to call DuplicateParams with required parameters and parse the result.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
-var client = new PagingClient(credential);
+var client = new PagingClient("<clientRequestId>", credential);
 
 foreach (var item in client.DuplicateParams("<filter>", new RequestContext()))
 {
@@ -230,7 +230,7 @@ foreach (var item in client.DuplicateParams("<filter>", new RequestContext()))
 This sample shows how to call NextOperationWithQueryParamsAsync with required parameters and parse the result.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
-var client = new PagingClient(credential);
+var client = new PagingClient("<clientRequestId>", credential);
 
 await foreach (var item in client.NextOperationWithQueryParamsAsync(new RequestContext()))
 {
@@ -246,7 +246,7 @@ await foreach (var item in client.NextOperationWithQueryParamsAsync(new RequestC
 This sample shows how to call NextOperationWithQueryParams with required parameters and parse the result.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
-var client = new PagingClient(credential);
+var client = new PagingClient("<clientRequestId>", credential);
 
 foreach (var item in client.NextOperationWithQueryParams(new RequestContext()))
 {
@@ -257,14 +257,14 @@ foreach (var item in client.NextOperationWithQueryParams(new RequestContext()))
 ]]></code>
 </example>
     </member>
-    <member name="GetOdataMultiplePagesAsync(string,int?,int?,RequestContext)">
+    <member name="GetOdataMultiplePagesAsync(int?,int?,RequestContext)">
 <example>
 This sample shows how to call GetOdataMultiplePagesAsync with required parameters and parse the result.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
-var client = new PagingClient(credential);
+var client = new PagingClient("<clientRequestId>", credential);
 
-await foreach (var item in client.GetOdataMultiplePagesAsync("<clientRequestId>", 1234, 1234, new RequestContext()))
+await foreach (var item in client.GetOdataMultiplePagesAsync(1234, 1234, new RequestContext()))
 {
     JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
     Console.WriteLine(result.GetProperty("properties").GetProperty("id").ToString());
@@ -273,14 +273,14 @@ await foreach (var item in client.GetOdataMultiplePagesAsync("<clientRequestId>"
 ]]></code>
 </example>
     </member>
-    <member name="GetOdataMultiplePages(string,int?,int?,RequestContext)">
+    <member name="GetOdataMultiplePages(int?,int?,RequestContext)">
 <example>
 This sample shows how to call GetOdataMultiplePages with required parameters and parse the result.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
-var client = new PagingClient(credential);
+var client = new PagingClient("<clientRequestId>", credential);
 
-foreach (var item in client.GetOdataMultiplePages("<clientRequestId>", 1234, 1234, new RequestContext()))
+foreach (var item in client.GetOdataMultiplePages(1234, 1234, new RequestContext()))
 {
     JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
     Console.WriteLine(result.GetProperty("properties").GetProperty("id").ToString());
@@ -289,14 +289,14 @@ foreach (var item in client.GetOdataMultiplePages("<clientRequestId>", 1234, 123
 ]]></code>
 </example>
     </member>
-    <member name="GetMultiplePagesWithOffsetAsync(int,string,int?,int?,RequestContext)">
+    <member name="GetMultiplePagesWithOffsetAsync(int,int?,int?,RequestContext)">
 <example>
 This sample shows how to call GetMultiplePagesWithOffsetAsync with required parameters and parse the result.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
-var client = new PagingClient(credential);
+var client = new PagingClient("<clientRequestId>", credential);
 
-await foreach (var item in client.GetMultiplePagesWithOffsetAsync(1234, "<clientRequestId>", 1234, 1234, new RequestContext()))
+await foreach (var item in client.GetMultiplePagesWithOffsetAsync(1234, 1234, 1234, new RequestContext()))
 {
     JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
     Console.WriteLine(result.GetProperty("properties").GetProperty("id").ToString());
@@ -305,14 +305,14 @@ await foreach (var item in client.GetMultiplePagesWithOffsetAsync(1234, "<client
 ]]></code>
 </example>
     </member>
-    <member name="GetMultiplePagesWithOffset(int,string,int?,int?,RequestContext)">
+    <member name="GetMultiplePagesWithOffset(int,int?,int?,RequestContext)">
 <example>
 This sample shows how to call GetMultiplePagesWithOffset with required parameters and parse the result.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
-var client = new PagingClient(credential);
+var client = new PagingClient("<clientRequestId>", credential);
 
-foreach (var item in client.GetMultiplePagesWithOffset(1234, "<clientRequestId>", 1234, 1234, new RequestContext()))
+foreach (var item in client.GetMultiplePagesWithOffset(1234, 1234, 1234, new RequestContext()))
 {
     JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
     Console.WriteLine(result.GetProperty("properties").GetProperty("id").ToString());
@@ -326,7 +326,7 @@ foreach (var item in client.GetMultiplePagesWithOffset(1234, "<clientRequestId>"
 This sample shows how to call GetMultiplePagesRetryFirstAsync with required parameters and parse the result.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
-var client = new PagingClient(credential);
+var client = new PagingClient("<clientRequestId>", credential);
 
 await foreach (var item in client.GetMultiplePagesRetryFirstAsync(new RequestContext()))
 {
@@ -342,7 +342,7 @@ await foreach (var item in client.GetMultiplePagesRetryFirstAsync(new RequestCon
 This sample shows how to call GetMultiplePagesRetryFirst with required parameters and parse the result.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
-var client = new PagingClient(credential);
+var client = new PagingClient("<clientRequestId>", credential);
 
 foreach (var item in client.GetMultiplePagesRetryFirst(new RequestContext()))
 {
@@ -358,7 +358,7 @@ foreach (var item in client.GetMultiplePagesRetryFirst(new RequestContext()))
 This sample shows how to call GetMultiplePagesRetrySecondAsync with required parameters and parse the result.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
-var client = new PagingClient(credential);
+var client = new PagingClient("<clientRequestId>", credential);
 
 await foreach (var item in client.GetMultiplePagesRetrySecondAsync(new RequestContext()))
 {
@@ -374,7 +374,7 @@ await foreach (var item in client.GetMultiplePagesRetrySecondAsync(new RequestCo
 This sample shows how to call GetMultiplePagesRetrySecond with required parameters and parse the result.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
-var client = new PagingClient(credential);
+var client = new PagingClient("<clientRequestId>", credential);
 
 foreach (var item in client.GetMultiplePagesRetrySecond(new RequestContext()))
 {
@@ -390,7 +390,7 @@ foreach (var item in client.GetMultiplePagesRetrySecond(new RequestContext()))
 This sample shows how to call GetSinglePagesFailureAsync with required parameters and parse the result.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
-var client = new PagingClient(credential);
+var client = new PagingClient("<clientRequestId>", credential);
 
 await foreach (var item in client.GetSinglePagesFailureAsync(new RequestContext()))
 {
@@ -406,7 +406,7 @@ await foreach (var item in client.GetSinglePagesFailureAsync(new RequestContext(
 This sample shows how to call GetSinglePagesFailure with required parameters and parse the result.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
-var client = new PagingClient(credential);
+var client = new PagingClient("<clientRequestId>", credential);
 
 foreach (var item in client.GetSinglePagesFailure(new RequestContext()))
 {
@@ -422,7 +422,7 @@ foreach (var item in client.GetSinglePagesFailure(new RequestContext()))
 This sample shows how to call GetMultiplePagesFailureAsync with required parameters and parse the result.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
-var client = new PagingClient(credential);
+var client = new PagingClient("<clientRequestId>", credential);
 
 await foreach (var item in client.GetMultiplePagesFailureAsync(new RequestContext()))
 {
@@ -438,7 +438,7 @@ await foreach (var item in client.GetMultiplePagesFailureAsync(new RequestContex
 This sample shows how to call GetMultiplePagesFailure with required parameters and parse the result.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
-var client = new PagingClient(credential);
+var client = new PagingClient("<clientRequestId>", credential);
 
 foreach (var item in client.GetMultiplePagesFailure(new RequestContext()))
 {
@@ -454,7 +454,7 @@ foreach (var item in client.GetMultiplePagesFailure(new RequestContext()))
 This sample shows how to call GetMultiplePagesFailureUriAsync with required parameters and parse the result.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
-var client = new PagingClient(credential);
+var client = new PagingClient("<clientRequestId>", credential);
 
 await foreach (var item in client.GetMultiplePagesFailureUriAsync(new RequestContext()))
 {
@@ -470,7 +470,7 @@ await foreach (var item in client.GetMultiplePagesFailureUriAsync(new RequestCon
 This sample shows how to call GetMultiplePagesFailureUri with required parameters and parse the result.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
-var client = new PagingClient(credential);
+var client = new PagingClient("<clientRequestId>", credential);
 
 foreach (var item in client.GetMultiplePagesFailureUri(new RequestContext()))
 {
@@ -486,7 +486,7 @@ foreach (var item in client.GetMultiplePagesFailureUri(new RequestContext()))
 This sample shows how to call GetMultiplePagesFragmentNextLinkAsync with required parameters and parse the result.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
-var client = new PagingClient(credential);
+var client = new PagingClient("<clientRequestId>", credential);
 
 await foreach (var item in client.GetMultiplePagesFragmentNextLinkAsync("<tenant>", "<apiVersion>", new RequestContext()))
 {
@@ -502,7 +502,7 @@ await foreach (var item in client.GetMultiplePagesFragmentNextLinkAsync("<tenant
 This sample shows how to call GetMultiplePagesFragmentNextLink with required parameters and parse the result.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
-var client = new PagingClient(credential);
+var client = new PagingClient("<clientRequestId>", credential);
 
 foreach (var item in client.GetMultiplePagesFragmentNextLink("<tenant>", "<apiVersion>", new RequestContext()))
 {
@@ -518,7 +518,7 @@ foreach (var item in client.GetMultiplePagesFragmentNextLink("<tenant>", "<apiVe
 This sample shows how to call GetMultiplePagesFragmentWithGroupingNextLinkAsync with required parameters and parse the result.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
-var client = new PagingClient(credential);
+var client = new PagingClient("<clientRequestId>", credential);
 
 await foreach (var item in client.GetMultiplePagesFragmentWithGroupingNextLinkAsync("<tenant>", "<apiVersion>", new RequestContext()))
 {
@@ -534,7 +534,7 @@ await foreach (var item in client.GetMultiplePagesFragmentWithGroupingNextLinkAs
 This sample shows how to call GetMultiplePagesFragmentWithGroupingNextLink with required parameters and parse the result.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
-var client = new PagingClient(credential);
+var client = new PagingClient("<clientRequestId>", credential);
 
 foreach (var item in client.GetMultiplePagesFragmentWithGroupingNextLink("<tenant>", "<apiVersion>", new RequestContext()))
 {
@@ -550,7 +550,7 @@ foreach (var item in client.GetMultiplePagesFragmentWithGroupingNextLink("<tenan
 This sample shows how to call NextFragmentAsync with required parameters and parse the result.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
-var client = new PagingClient(credential);
+var client = new PagingClient("<clientRequestId>", credential);
 
 await foreach (var item in client.NextFragmentAsync("<tenant>", "<nextLink>", "<apiVersion>", new RequestContext()))
 {
@@ -566,7 +566,7 @@ await foreach (var item in client.NextFragmentAsync("<tenant>", "<nextLink>", "<
 This sample shows how to call NextFragment with required parameters and parse the result.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
-var client = new PagingClient(credential);
+var client = new PagingClient("<clientRequestId>", credential);
 
 foreach (var item in client.NextFragment("<tenant>", "<nextLink>", "<apiVersion>", new RequestContext()))
 {
@@ -582,7 +582,7 @@ foreach (var item in client.NextFragment("<tenant>", "<nextLink>", "<apiVersion>
 This sample shows how to call NextFragmentWithGroupingAsync with required parameters and parse the result.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
-var client = new PagingClient(credential);
+var client = new PagingClient("<clientRequestId>", credential);
 
 await foreach (var item in client.NextFragmentWithGroupingAsync("<tenant>", "<nextLink>", "<apiVersion>", new RequestContext()))
 {
@@ -598,7 +598,7 @@ await foreach (var item in client.NextFragmentWithGroupingAsync("<tenant>", "<ne
 This sample shows how to call NextFragmentWithGrouping with required parameters and parse the result.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
-var client = new PagingClient(credential);
+var client = new PagingClient("<clientRequestId>", credential);
 
 foreach (var item in client.NextFragmentWithGrouping("<tenant>", "<nextLink>", "<apiVersion>", new RequestContext()))
 {
@@ -614,7 +614,7 @@ foreach (var item in client.NextFragmentWithGrouping("<tenant>", "<nextLink>", "
 This sample shows how to call GetPagingModelWithItemNameWithXMSClientNameAsync with required parameters and parse the result.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
-var client = new PagingClient(credential);
+var client = new PagingClient("<clientRequestId>", credential);
 
 await foreach (var item in client.GetPagingModelWithItemNameWithXMSClientNameAsync(new RequestContext()))
 {
@@ -630,7 +630,7 @@ await foreach (var item in client.GetPagingModelWithItemNameWithXMSClientNameAsy
 This sample shows how to call GetPagingModelWithItemNameWithXMSClientName with required parameters and parse the result.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
-var client = new PagingClient(credential);
+var client = new PagingClient("<clientRequestId>", credential);
 
 foreach (var item in client.GetPagingModelWithItemNameWithXMSClientName(new RequestContext()))
 {
@@ -641,14 +641,14 @@ foreach (var item in client.GetPagingModelWithItemNameWithXMSClientName(new Requ
 ]]></code>
 </example>
     </member>
-    <member name="GetMultiplePagesLROAsync(WaitUntil,string,int?,int?,RequestContext)">
+    <member name="GetMultiplePagesLROAsync(WaitUntil,int?,int?,RequestContext)">
 <example>
 This sample shows how to call GetMultiplePagesLROAsync with required parameters and parse the result.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
-var client = new PagingClient(credential);
+var client = new PagingClient("<clientRequestId>", credential);
 
-var operation = await client.GetMultiplePagesLROAsync(WaitUntil.Completed, "<clientRequestId>", 1234, 1234, new RequestContext());
+var operation = await client.GetMultiplePagesLROAsync(WaitUntil.Completed, 1234, 1234, new RequestContext());
 
 await foreach (var item in operation.Value)
 {
@@ -659,14 +659,14 @@ await foreach (var item in operation.Value)
 ]]></code>
 </example>
     </member>
-    <member name="GetMultiplePagesLRO(WaitUntil,string,int?,int?,RequestContext)">
+    <member name="GetMultiplePagesLRO(WaitUntil,int?,int?,RequestContext)">
 <example>
 This sample shows how to call GetMultiplePagesLRO with required parameters and parse the result.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
-var client = new PagingClient(credential);
+var client = new PagingClient("<clientRequestId>", credential);
 
-var operation = client.GetMultiplePagesLRO(WaitUntil.Completed, "<clientRequestId>", 1234, 1234, new RequestContext());
+var operation = client.GetMultiplePagesLRO(WaitUntil.Completed, 1234, 1234, new RequestContext());
 
 foreach (var item in operation.Value)
 {

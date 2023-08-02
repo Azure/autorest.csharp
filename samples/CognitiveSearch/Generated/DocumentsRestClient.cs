@@ -57,6 +57,7 @@ namespace CognitiveSearch
             uri.AppendPath("/docs/$count", false);
             uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
+            request.Headers.Add("x-ms-client-request-id", message.Request.ClientRequestId);
             request.Headers.Add("Accept", "application/json");
             return message;
         }
@@ -190,6 +191,7 @@ namespace CognitiveSearch
             }
             uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
+            request.Headers.Add("x-ms-client-request-id", message.Request.ClientRequestId);
             request.Headers.Add("Accept", "application/json");
             return message;
         }
@@ -253,6 +255,7 @@ namespace CognitiveSearch
             uri.AppendPath("/docs/search.post.search", false);
             uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
+            request.Headers.Add("x-ms-client-request-id", message.Request.ClientRequestId);
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
             var content = new Utf8JsonRequestContent();
@@ -336,6 +339,7 @@ namespace CognitiveSearch
             }
             uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
+            request.Headers.Add("x-ms-client-request-id", message.Request.ClientRequestId);
             request.Headers.Add("Accept", "application/json");
             return message;
         }
@@ -449,6 +453,7 @@ namespace CognitiveSearch
             }
             uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
+            request.Headers.Add("x-ms-client-request-id", message.Request.ClientRequestId);
             request.Headers.Add("Accept", "application/json");
             return message;
         }
@@ -534,6 +539,7 @@ namespace CognitiveSearch
             uri.AppendPath("/docs/search.post.suggest", false);
             uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
+            request.Headers.Add("x-ms-client-request-id", message.Request.ClientRequestId);
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
             var content = new Utf8JsonRequestContent();
@@ -611,6 +617,7 @@ namespace CognitiveSearch
             uri.AppendPath("/docs/search.index", false);
             uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
+            request.Headers.Add("x-ms-client-request-id", message.Request.ClientRequestId);
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
             var content = new Utf8JsonRequestContent();
@@ -724,6 +731,7 @@ namespace CognitiveSearch
                 uri.AppendQuery("$top", autocompleteOptions.Top.Value, true);
             }
             request.Uri = uri;
+            request.Headers.Add("x-ms-client-request-id", message.Request.ClientRequestId);
             request.Headers.Add("Accept", "application/json");
             return message;
         }
@@ -809,6 +817,7 @@ namespace CognitiveSearch
             uri.AppendPath("/docs/search.post.autocomplete", false);
             uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
+            request.Headers.Add("x-ms-client-request-id", message.Request.ClientRequestId);
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
             var content = new Utf8JsonRequestContent();

@@ -1768,6 +1768,7 @@ namespace FirstTestTypeSpec
             uri.AppendPath(subscriptionId, true);
             uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
+            request.Headers.Add("client-request-id", message.Request.ClientRequestId);
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
             request.Content = content;

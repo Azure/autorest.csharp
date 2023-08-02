@@ -55,6 +55,7 @@ namespace Azure.Storage.Tables
             }
             request.Uri = uri;
             request.Headers.Add("x-ms-version", _version.ToString());
+            request.Headers.Add("x-ms-client-request-id", message.Request.ClientRequestId);
             request.Headers.Add("Accept", "application/xml");
             request.Headers.Add("Content-Type", "application/xml");
             var content = new XmlWriterContent();
@@ -131,6 +132,7 @@ namespace Azure.Storage.Tables
             }
             request.Uri = uri;
             request.Headers.Add("x-ms-version", _version.ToString());
+            request.Headers.Add("x-ms-client-request-id", message.Request.ClientRequestId);
             request.Headers.Add("Accept", "application/xml");
             return message;
         }
@@ -205,6 +207,7 @@ namespace Azure.Storage.Tables
             }
             request.Uri = uri;
             request.Headers.Add("x-ms-version", _version.ToString());
+            request.Headers.Add("x-ms-client-request-id", message.Request.ClientRequestId);
             request.Headers.Add("Accept", "application/xml");
             return message;
         }

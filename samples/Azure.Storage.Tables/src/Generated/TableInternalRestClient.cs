@@ -67,6 +67,7 @@ namespace Azure.Storage.Tables
             }
             request.Uri = uri;
             request.Headers.Add("x-ms-version", _version.ToString());
+            request.Headers.Add("x-ms-client-request-id", message.Request.ClientRequestId);
             request.Headers.Add("DataServiceVersion", dataServiceVersion.ToString());
             request.Headers.Add("Accept", "application/json;odata=nometadata");
             return message;
@@ -132,6 +133,7 @@ namespace Azure.Storage.Tables
             }
             request.Uri = uri;
             request.Headers.Add("x-ms-version", _version.ToString());
+            request.Headers.Add("x-ms-client-request-id", message.Request.ClientRequestId);
             request.Headers.Add("DataServiceVersion", dataServiceVersion.ToString());
             request.Headers.Add("Accept", "application/json;odata=nometadata");
             request.Headers.Add("Content-Type", "application/json;odata=nometadata");
@@ -217,6 +219,7 @@ namespace Azure.Storage.Tables
             uri.AppendPath("')", false);
             request.Uri = uri;
             request.Headers.Add("x-ms-version", _version.ToString());
+            request.Headers.Add("x-ms-client-request-id", message.Request.ClientRequestId);
             request.Headers.Add("Accept", "application/json;odata=nometadata");
             return message;
         }
@@ -299,6 +302,7 @@ namespace Azure.Storage.Tables
             }
             request.Uri = uri;
             request.Headers.Add("x-ms-version", _version.ToString());
+            request.Headers.Add("x-ms-client-request-id", message.Request.ClientRequestId);
             request.Headers.Add("DataServiceVersion", dataServiceVersion.ToString());
             request.Headers.Add("Accept", "application/json;odata=nometadata");
             return message;
@@ -398,6 +402,7 @@ namespace Azure.Storage.Tables
             }
             request.Uri = uri;
             request.Headers.Add("x-ms-version", _version.ToString());
+            request.Headers.Add("x-ms-client-request-id", message.Request.ClientRequestId);
             request.Headers.Add("DataServiceVersion", dataServiceVersion.ToString());
             request.Headers.Add("Accept", "application/json;odata=nometadata");
             return message;
@@ -509,6 +514,7 @@ namespace Azure.Storage.Tables
             }
             request.Uri = uri;
             request.Headers.Add("x-ms-version", _version.ToString());
+            request.Headers.Add("x-ms-client-request-id", message.Request.ClientRequestId);
             request.Headers.Add("DataServiceVersion", dataServiceVersion.ToString());
             request.Headers.Add("Accept", "application/json;odata=nometadata");
             if (tableEntityProperties != null)
@@ -630,6 +636,7 @@ namespace Azure.Storage.Tables
             }
             request.Uri = uri;
             request.Headers.Add("x-ms-version", _version.ToString());
+            request.Headers.Add("x-ms-client-request-id", message.Request.ClientRequestId);
             request.Headers.Add("DataServiceVersion", dataServiceVersion.ToString());
             request.Headers.Add("Accept", "application/json;odata=nometadata");
             return message;
@@ -726,6 +733,7 @@ namespace Azure.Storage.Tables
             }
             request.Uri = uri;
             request.Headers.Add("x-ms-version", _version.ToString());
+            request.Headers.Add("x-ms-client-request-id", message.Request.ClientRequestId);
             request.Headers.Add("DataServiceVersion", dataServiceVersion.ToString());
             request.Headers.Add("Accept", "application/json;odata=nometadata");
             if (tableEntityProperties != null)
@@ -853,6 +861,7 @@ namespace Azure.Storage.Tables
             uri.AppendQuery("comp", comp.ToString(), true);
             request.Uri = uri;
             request.Headers.Add("x-ms-version", _version.ToString());
+            request.Headers.Add("x-ms-client-request-id", message.Request.ClientRequestId);
             request.Headers.Add("Accept", "application/xml");
             return message;
         }
@@ -949,6 +958,7 @@ namespace Azure.Storage.Tables
             uri.AppendQuery("comp", comp.ToString(), true);
             request.Uri = uri;
             request.Headers.Add("x-ms-version", _version.ToString());
+            request.Headers.Add("x-ms-client-request-id", message.Request.ClientRequestId);
             request.Headers.Add("Accept", "application/xml");
             if (tableAcl != null)
             {

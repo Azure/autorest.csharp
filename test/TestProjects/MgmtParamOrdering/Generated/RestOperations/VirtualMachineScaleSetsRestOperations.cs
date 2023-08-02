@@ -57,6 +57,8 @@ namespace MgmtParamOrdering
                 request.Headers.Add("quick", quick);
             }
             request.Headers.Add("Accept", "application/json");
+            request.Headers.Add("x-ms-client-request-id", message.Request.ClientRequestId);
+            request.Headers.Add("x-ms-return-client-request-id", "true");
             request.Headers.Add("Content-Type", "application/json");
             var content = new Utf8JsonRequestContent();
             content.JsonWriter.WriteObjectValue(data);
@@ -137,6 +139,8 @@ namespace MgmtParamOrdering
             uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
+            request.Headers.Add("x-ms-client-request-id", message.Request.ClientRequestId);
+            request.Headers.Add("x-ms-return-client-request-id", "true");
             request.Headers.Add("Content-Type", "application/json");
             var content = new Utf8JsonRequestContent();
             content.JsonWriter.WriteObjectValue(patch);
@@ -213,6 +217,8 @@ namespace MgmtParamOrdering
             uri.AppendQuery("forceDeletion", forceDeletion, true);
             uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
+            request.Headers.Add("x-ms-client-request-id", message.Request.ClientRequestId);
+            request.Headers.Add("x-ms-return-client-request-id", "true");
             _userAgent.Apply(message);
             return message;
         }
@@ -291,6 +297,8 @@ namespace MgmtParamOrdering
             }
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
+            request.Headers.Add("x-ms-client-request-id", message.Request.ClientRequestId);
+            request.Headers.Add("x-ms-return-client-request-id", "true");
             _userAgent.Apply(message);
             return message;
         }
@@ -379,6 +387,8 @@ namespace MgmtParamOrdering
             }
             uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
+            request.Headers.Add("x-ms-client-request-id", message.Request.ClientRequestId);
+            request.Headers.Add("x-ms-return-client-request-id", "true");
             if (vmInstanceIDs != null)
             {
                 request.Headers.Add("Content-Type", "application/json");
@@ -464,6 +474,8 @@ namespace MgmtParamOrdering
             }
             uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
+            request.Headers.Add("x-ms-client-request-id", message.Request.ClientRequestId);
+            request.Headers.Add("x-ms-return-client-request-id", "true");
             request.Headers.Add("Content-Type", "application/json");
             var content = new Utf8JsonRequestContent();
             content.JsonWriter.WriteObjectValue(vmInstanceIDs);
@@ -550,6 +562,8 @@ namespace MgmtParamOrdering
             uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
+            request.Headers.Add("x-ms-client-request-id", message.Request.ClientRequestId);
+            request.Headers.Add("x-ms-return-client-request-id", "true");
             _userAgent.Apply(message);
             return message;
         }
@@ -633,6 +647,8 @@ namespace MgmtParamOrdering
             uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
+            request.Headers.Add("x-ms-client-request-id", message.Request.ClientRequestId);
+            request.Headers.Add("x-ms-return-client-request-id", "true");
             _userAgent.Apply(message);
             return message;
         }
@@ -701,6 +717,8 @@ namespace MgmtParamOrdering
             uri.AppendRawNextLink(nextLink, false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
+            request.Headers.Add("x-ms-client-request-id", message.Request.ClientRequestId);
+            request.Headers.Add("x-ms-return-client-request-id", "true");
             _userAgent.Apply(message);
             return message;
         }

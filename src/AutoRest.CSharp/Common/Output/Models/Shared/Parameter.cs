@@ -240,18 +240,18 @@ namespace AutoRest.CSharp.Output.Models.Shared
 
         private static Constant? ParseConstant(RequestParameter parameter, TypeFactory typeFactory)
         {
-            if (parameter.Schema is ConstantSchema constantSchema && parameter.IsRequired)
-            {
-                return BuilderHelpers.ParseConstant(constantSchema.Value.Value, typeFactory.CreateType(constantSchema.ValueType, constantSchema.Value.Value == null));
-            }
-
-            if (parameter.In == HttpParameterIn.Header && RequestHeader.ClientRequestIdHeaders.Contains(parameter.Language.Default.Name))
+            if (parameter.In == HttpParameterIn.Header && RequestHeader.ClientRequestIdHeaders.Contains(parameter.Language.Default.SerializedName ?? parameter.Language.Default.Name))
             {
                 return Constant.FromExpression($"message.Request.ClientRequestId", new CSharpType(typeof(string)));
             }
             if (parameter.In == HttpParameterIn.Header && RequestHeader.ReturnClientRequestIdResponseHeaders.Contains(parameter.Language.Default.SerializedName ?? parameter.Language.Default.Name))
             {
                 return new Constant("true", new CSharpType(typeof(string)));
+            }
+
+            if (parameter.Schema is ConstantSchema constantSchema && parameter.IsRequired)
+            {
+                return BuilderHelpers.ParseConstant(constantSchema.Value.Value, typeFactory.CreateType(constantSchema.ValueType, constantSchema.Value.Value == null));
             }
 
             return null;

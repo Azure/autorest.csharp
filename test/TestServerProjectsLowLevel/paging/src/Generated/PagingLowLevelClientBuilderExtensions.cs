@@ -17,12 +17,13 @@ namespace Microsoft.Extensions.Azure
     {
         /// <summary> Registers a <see cref="PagingClient"/> instance. </summary>
         /// <param name="builder"> The builder to register with. </param>
+        /// <param name="clientRequestId"> The request id. </param>
         /// <param name="credential"> A credential used to authenticate to an Azure Service. </param>
         /// <param name="endpoint"> server parameter. </param>
-        public static IAzureClientBuilder<PagingClient, PagingClientOptions> AddPagingClient<TBuilder>(this TBuilder builder, AzureKeyCredential credential, Uri endpoint)
+        public static IAzureClientBuilder<PagingClient, PagingClientOptions> AddPagingClient<TBuilder>(this TBuilder builder, string clientRequestId, AzureKeyCredential credential, Uri endpoint)
         where TBuilder : IAzureClientFactoryBuilder
         {
-            return builder.RegisterClientFactory<PagingClient, PagingClientOptions>((options) => new PagingClient(credential, endpoint, options));
+            return builder.RegisterClientFactory<PagingClient, PagingClientOptions>((options) => new PagingClient(clientRequestId, credential, endpoint, options));
         }
 
         /// <summary> Registers a <see cref="PagingClient"/> instance. </summary>

@@ -286,6 +286,7 @@ namespace _Specs_.Azure.Core.Traits
             request.Uri = uri;
             request.Headers.Add("foo", foo);
             request.Headers.Add("Accept", "application/json");
+            request.Headers.Add("x-ms-client-request-id", message.Request.ClientRequestId);
             if (requestConditions != null)
             {
                 request.Headers.Add(requestConditions, "R");

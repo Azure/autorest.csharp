@@ -85,6 +85,7 @@ namespace azure_special_properties
             uri.Reset(_endpoint);
             uri.AppendPath("/azurespecials/overwrite/x-ms-client-request-id/via-param/method/", false);
             request.Uri = uri;
+            request.Headers.Add("x-ms-client-request-id", message.Request.ClientRequestId);
             request.Headers.Add("Accept", "application/json");
             return message;
         }
