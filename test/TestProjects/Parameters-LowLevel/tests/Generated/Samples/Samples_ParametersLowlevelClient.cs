@@ -80,7 +80,7 @@ namespace Parameters_LowLevel.Samples
 
             var data = new { };
 
-            Response response = client.RequestBodyResponseBody(RequestContent.Create(data), new RequestContext());
+            Response response = client.RequestBodyResponseBody(RequestContent.Create(data));
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());
@@ -99,7 +99,7 @@ namespace Parameters_LowLevel.Samples
                 Status = "<Status>",
             };
 
-            Response response = client.RequestBodyResponseBody(RequestContent.Create(data), new RequestContext());
+            Response response = client.RequestBodyResponseBody(RequestContent.Create(data));
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("Code").ToString());
@@ -115,7 +115,7 @@ namespace Parameters_LowLevel.Samples
 
             var data = new { };
 
-            Response response = await client.RequestBodyResponseBodyAsync(RequestContent.Create(data), new RequestContext());
+            Response response = await client.RequestBodyResponseBodyAsync(RequestContent.Create(data));
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());
@@ -134,7 +134,7 @@ namespace Parameters_LowLevel.Samples
                 Status = "<Status>",
             };
 
-            Response response = await client.RequestBodyResponseBodyAsync(RequestContent.Create(data), new RequestContext());
+            Response response = await client.RequestBodyResponseBodyAsync(RequestContent.Create(data));
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("Code").ToString());
@@ -246,7 +246,7 @@ namespace Parameters_LowLevel.Samples
 
             var data = "<String>";
 
-            Response response = client.RequestBodyNoResponseBody(RequestContent.Create(data), new RequestContext());
+            Response response = client.RequestBodyNoResponseBody(RequestContent.Create(data));
             Console.WriteLine(response.Status);
         }
 
@@ -259,7 +259,7 @@ namespace Parameters_LowLevel.Samples
 
             var data = "<String>";
 
-            Response response = client.RequestBodyNoResponseBody(RequestContent.Create(data), new RequestContext());
+            Response response = client.RequestBodyNoResponseBody(RequestContent.Create(data));
             Console.WriteLine(response.Status);
         }
 
@@ -272,7 +272,7 @@ namespace Parameters_LowLevel.Samples
 
             var data = "<String>";
 
-            Response response = await client.RequestBodyNoResponseBodyAsync(RequestContent.Create(data), new RequestContext());
+            Response response = await client.RequestBodyNoResponseBodyAsync(RequestContent.Create(data));
             Console.WriteLine(response.Status);
         }
 
@@ -285,7 +285,7 @@ namespace Parameters_LowLevel.Samples
 
             var data = "<String>";
 
-            Response response = await client.RequestBodyNoResponseBodyAsync(RequestContent.Create(data), new RequestContext());
+            Response response = await client.RequestBodyNoResponseBodyAsync(RequestContent.Create(data));
             Console.WriteLine(response.Status);
         }
 
@@ -386,7 +386,7 @@ namespace Parameters_LowLevel.Samples
 
             var data = new { };
 
-            Response response = client.OptionalPathBodyParametersWithMixedSequence(1234, "<name>", 1234, 1234, RequestContent.Create(data), 1234, new RequestContext());
+            Response response = client.OptionalPathBodyParametersWithMixedSequence(1234, "<name>", 1234, 1234, RequestContent.Create(data));
             Console.WriteLine(response.Status);
         }
 
@@ -403,7 +403,7 @@ namespace Parameters_LowLevel.Samples
                 Status = "<Status>",
             };
 
-            Response response = client.OptionalPathBodyParametersWithMixedSequence(1234, "<name>", 1234, 1234, RequestContent.Create(data), 1234, new RequestContext());
+            Response response = client.OptionalPathBodyParametersWithMixedSequence(1234, "<name>", 1234, 1234, RequestContent.Create(data), 1234);
             Console.WriteLine(response.Status);
         }
 
@@ -416,7 +416,7 @@ namespace Parameters_LowLevel.Samples
 
             var data = new { };
 
-            Response response = await client.OptionalPathBodyParametersWithMixedSequenceAsync(1234, "<name>", 1234, 1234, RequestContent.Create(data), 1234, new RequestContext());
+            Response response = await client.OptionalPathBodyParametersWithMixedSequenceAsync(1234, "<name>", 1234, 1234, RequestContent.Create(data));
             Console.WriteLine(response.Status);
         }
 
@@ -433,7 +433,7 @@ namespace Parameters_LowLevel.Samples
                 Status = "<Status>",
             };
 
-            Response response = await client.OptionalPathBodyParametersWithMixedSequenceAsync(1234, "<name>", 1234, 1234, RequestContent.Create(data), 1234, new RequestContext());
+            Response response = await client.OptionalPathBodyParametersWithMixedSequenceAsync(1234, "<name>", 1234, 1234, RequestContent.Create(data), 1234);
             Console.WriteLine(response.Status);
         }
 
@@ -446,7 +446,7 @@ namespace Parameters_LowLevel.Samples
 
             var data = new { };
 
-            Response response = client.RepeatableAction(1234, "<name>", RequestContent.Create(data), new RequestContext());
+            Response response = client.RepeatableAction(1234, "<name>", RequestContent.Create(data));
             Console.WriteLine(response.Status);
         }
 
@@ -463,7 +463,7 @@ namespace Parameters_LowLevel.Samples
                 Status = "<Status>",
             };
 
-            Response response = client.RepeatableAction(1234, "<name>", RequestContent.Create(data), new RequestContext());
+            Response response = client.RepeatableAction(1234, "<name>", RequestContent.Create(data));
             Console.WriteLine(response.Status);
         }
 
@@ -476,7 +476,7 @@ namespace Parameters_LowLevel.Samples
 
             var data = new { };
 
-            Response response = await client.RepeatableActionAsync(1234, "<name>", RequestContent.Create(data), new RequestContext());
+            Response response = await client.RepeatableActionAsync(1234, "<name>", RequestContent.Create(data));
             Console.WriteLine(response.Status);
         }
 
@@ -493,7 +493,7 @@ namespace Parameters_LowLevel.Samples
                 Status = "<Status>",
             };
 
-            Response response = await client.RepeatableActionAsync(1234, "<name>", RequestContent.Create(data), new RequestContext());
+            Response response = await client.RepeatableActionAsync(1234, "<name>", RequestContent.Create(data));
             Console.WriteLine(response.Status);
         }
     }
