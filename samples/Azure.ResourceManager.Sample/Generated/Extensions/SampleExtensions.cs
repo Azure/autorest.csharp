@@ -649,8 +649,6 @@ namespace Azure.ResourceManager.Sample
         /// <returns> An object representing collection of VirtualMachineExtensionImageResources and their operations over a VirtualMachineExtensionImageResource. </returns>
         public static VirtualMachineExtensionImageCollection GetVirtualMachineExtensionImages(this SubscriptionResource subscriptionResource, AzureLocation location, string publisherName)
         {
-            Argument.AssertNotNullOrEmpty(publisherName, nameof(publisherName));
-
             return GetSampleSubscriptionMockingExtension(subscriptionResource).GetVirtualMachineExtensionImages(location, publisherName);
         }
 

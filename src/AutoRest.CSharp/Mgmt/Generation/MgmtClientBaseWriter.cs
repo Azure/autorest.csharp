@@ -280,7 +280,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 resource.Type,
                 $"Returns a <see cref=\"{resource.Type}\" /> object.",
                 GetParametersForSingletonEntry());
-            using (_writer.WriteCommonMethod(signature, null, false, This.Accessibility == "public"))
+            using (_writer.WriteCommonMethod(signature, null, false, This.Accessibility == "public", SkipParameterValidation))
             {
                 WriteSingletonResourceEntry(resource, resource.SingletonResourceIdSuffix!, signature);
             }
@@ -297,7 +297,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                 resourceCollection.Type,
                 $"An object representing collection of {resource.Type.Name.LastWordToPlural()} and their operations over a {resource.Type.Name}.",
                 GetParametersForCollectionEntry(resourceCollection));
-            using (_writer.WriteCommonMethod(signature, null, false, This.Accessibility == "public"))
+            using (_writer.WriteCommonMethod(signature, null, false, This.Accessibility == "public", SkipParameterValidation))
             {
                 WriteResourceCollectionEntry(resourceCollection, signature);
             }
