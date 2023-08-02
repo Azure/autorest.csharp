@@ -831,8 +831,6 @@ namespace MgmtScopeResource
         /// <exception cref="ArgumentNullException"> <paramref name="template"/> is null. </exception>
         public static async Task<Response<TemplateHashResult>> CalculateTemplateHashDeploymentAsync(this TenantResource tenantResource, BinaryData template, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(template, nameof(template));
-
             return await GetMgmtScopeResourceTenantMockingExtension(tenantResource).CalculateTemplateHashDeploymentAsync(template, cancellationToken).ConfigureAwait(false);
         }
 
@@ -855,8 +853,6 @@ namespace MgmtScopeResource
         /// <exception cref="ArgumentNullException"> <paramref name="template"/> is null. </exception>
         public static Response<TemplateHashResult> CalculateTemplateHashDeployment(this TenantResource tenantResource, BinaryData template, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(template, nameof(template));
-
             return GetMgmtScopeResourceTenantMockingExtension(tenantResource).CalculateTemplateHashDeployment(template, cancellationToken);
         }
     }

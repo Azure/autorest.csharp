@@ -328,9 +328,6 @@ namespace MgmtSupersetInheritance
         /// <exception cref="ArgumentNullException"> <paramref name="supersetModel2SName"/> or <paramref name="supersetModel2"/> is null. </exception>
         public static async Task<Response<SupersetModel2>> PutSupersetModel2Async(this ResourceGroupResource resourceGroupResource, string supersetModel2SName, SupersetModel2 supersetModel2, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(supersetModel2SName, nameof(supersetModel2SName));
-            Argument.AssertNotNull(supersetModel2, nameof(supersetModel2));
-
             return await GetMgmtSupersetInheritanceResourceGroupMockingExtension(resourceGroupResource).PutSupersetModel2Async(supersetModel2SName, supersetModel2, cancellationToken).ConfigureAwait(false);
         }
 
@@ -354,9 +351,6 @@ namespace MgmtSupersetInheritance
         /// <exception cref="ArgumentNullException"> <paramref name="supersetModel2SName"/> or <paramref name="supersetModel2"/> is null. </exception>
         public static Response<SupersetModel2> PutSupersetModel2(this ResourceGroupResource resourceGroupResource, string supersetModel2SName, SupersetModel2 supersetModel2, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(supersetModel2SName, nameof(supersetModel2SName));
-            Argument.AssertNotNull(supersetModel2, nameof(supersetModel2));
-
             return GetMgmtSupersetInheritanceResourceGroupMockingExtension(resourceGroupResource).PutSupersetModel2(supersetModel2SName, supersetModel2, cancellationToken);
         }
 
@@ -379,8 +373,6 @@ namespace MgmtSupersetInheritance
         /// <exception cref="ArgumentNullException"> <paramref name="supersetModel2SName"/> is null. </exception>
         public static async Task<Response<SupersetModel2>> GetSupersetModel2Async(this ResourceGroupResource resourceGroupResource, string supersetModel2SName, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(supersetModel2SName, nameof(supersetModel2SName));
-
             return await GetMgmtSupersetInheritanceResourceGroupMockingExtension(resourceGroupResource).GetSupersetModel2Async(supersetModel2SName, cancellationToken).ConfigureAwait(false);
         }
 
@@ -403,8 +395,6 @@ namespace MgmtSupersetInheritance
         /// <exception cref="ArgumentNullException"> <paramref name="supersetModel2SName"/> is null. </exception>
         public static Response<SupersetModel2> GetSupersetModel2(this ResourceGroupResource resourceGroupResource, string supersetModel2SName, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(supersetModel2SName, nameof(supersetModel2SName));
-
             return GetMgmtSupersetInheritanceResourceGroupMockingExtension(resourceGroupResource).GetSupersetModel2(supersetModel2SName, cancellationToken);
         }
 
@@ -428,9 +418,6 @@ namespace MgmtSupersetInheritance
         /// <exception cref="ArgumentNullException"> <paramref name="supersetModel3SName"/> or <paramref name="supersetModel3"/> is null. </exception>
         public static async Task<Response<SupersetModel3>> PutSupersetModel3Async(this ResourceGroupResource resourceGroupResource, string supersetModel3SName, SupersetModel3 supersetModel3, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(supersetModel3SName, nameof(supersetModel3SName));
-            Argument.AssertNotNull(supersetModel3, nameof(supersetModel3));
-
             return await GetMgmtSupersetInheritanceResourceGroupMockingExtension(resourceGroupResource).PutSupersetModel3Async(supersetModel3SName, supersetModel3, cancellationToken).ConfigureAwait(false);
         }
 
@@ -454,9 +441,6 @@ namespace MgmtSupersetInheritance
         /// <exception cref="ArgumentNullException"> <paramref name="supersetModel3SName"/> or <paramref name="supersetModel3"/> is null. </exception>
         public static Response<SupersetModel3> PutSupersetModel3(this ResourceGroupResource resourceGroupResource, string supersetModel3SName, SupersetModel3 supersetModel3, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(supersetModel3SName, nameof(supersetModel3SName));
-            Argument.AssertNotNull(supersetModel3, nameof(supersetModel3));
-
             return GetMgmtSupersetInheritanceResourceGroupMockingExtension(resourceGroupResource).PutSupersetModel3(supersetModel3SName, supersetModel3, cancellationToken);
         }
 
@@ -479,8 +463,6 @@ namespace MgmtSupersetInheritance
         /// <exception cref="ArgumentNullException"> <paramref name="supersetModel3SName"/> is null. </exception>
         public static async Task<Response<SupersetModel3>> GetSupersetModel3Async(this ResourceGroupResource resourceGroupResource, string supersetModel3SName, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(supersetModel3SName, nameof(supersetModel3SName));
-
             return await GetMgmtSupersetInheritanceResourceGroupMockingExtension(resourceGroupResource).GetSupersetModel3Async(supersetModel3SName, cancellationToken).ConfigureAwait(false);
         }
 
@@ -503,8 +485,6 @@ namespace MgmtSupersetInheritance
         /// <exception cref="ArgumentNullException"> <paramref name="supersetModel3SName"/> is null. </exception>
         public static Response<SupersetModel3> GetSupersetModel3(this ResourceGroupResource resourceGroupResource, string supersetModel3SName, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(supersetModel3SName, nameof(supersetModel3SName));
-
             return GetMgmtSupersetInheritanceResourceGroupMockingExtension(resourceGroupResource).GetSupersetModel3(supersetModel3SName, cancellationToken);
         }
     }

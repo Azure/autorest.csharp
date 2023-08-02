@@ -228,8 +228,6 @@ namespace MgmtOperations
         /// <exception cref="ArgumentNullException"> <paramref name="availabilitySetUpdate"/> is null. </exception>
         public static async Task<ArmOperation<TestAvailabilitySet>> TestLROMethodAvailabilitySetAsync(this ResourceGroupResource resourceGroupResource, WaitUntil waitUntil, AvailabilitySetUpdate availabilitySetUpdate, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(availabilitySetUpdate, nameof(availabilitySetUpdate));
-
             return await GetMgmtOperationsResourceGroupMockingExtension(resourceGroupResource).TestLROMethodAvailabilitySetAsync(waitUntil, availabilitySetUpdate, cancellationToken).ConfigureAwait(false);
         }
 
@@ -253,8 +251,6 @@ namespace MgmtOperations
         /// <exception cref="ArgumentNullException"> <paramref name="availabilitySetUpdate"/> is null. </exception>
         public static ArmOperation<TestAvailabilitySet> TestLROMethodAvailabilitySet(this ResourceGroupResource resourceGroupResource, WaitUntil waitUntil, AvailabilitySetUpdate availabilitySetUpdate, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(availabilitySetUpdate, nameof(availabilitySetUpdate));
-
             return GetMgmtOperationsResourceGroupMockingExtension(resourceGroupResource).TestLROMethodAvailabilitySet(waitUntil, availabilitySetUpdate, cancellationToken);
         }
     }

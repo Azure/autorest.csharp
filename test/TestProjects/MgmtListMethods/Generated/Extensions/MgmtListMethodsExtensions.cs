@@ -1344,8 +1344,6 @@ namespace MgmtListMethods
         /// <returns> An async collection of <see cref="NonResourceChild" /> that may take multiple service requests to iterate over. </returns>
         public static AsyncPageable<NonResourceChild> GetTestByLocationsFakeParentWithAncestorWithNonResChWithLocsAsync(this SubscriptionResource subscriptionResource, string location, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(location, nameof(location));
-
             return GetMgmtListMethodsSubscriptionMockingExtension(subscriptionResource).GetTestByLocationsFakeParentWithAncestorWithNonResChWithLocsAsync(location, cancellationToken);
         }
 
@@ -1370,8 +1368,6 @@ namespace MgmtListMethods
         /// <returns> A collection of <see cref="NonResourceChild" /> that may take multiple service requests to iterate over. </returns>
         public static Pageable<NonResourceChild> GetTestByLocationsFakeParentWithAncestorWithNonResChWithLocs(this SubscriptionResource subscriptionResource, string location, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(location, nameof(location));
-
             return GetMgmtListMethodsSubscriptionMockingExtension(subscriptionResource).GetTestByLocationsFakeParentWithAncestorWithNonResChWithLocs(location, cancellationToken);
         }
 
@@ -1480,8 +1476,6 @@ namespace MgmtListMethods
         /// <returns> An async collection of <see cref="FakeParentWithAncestorWithLocResource" /> that may take multiple service requests to iterate over. </returns>
         public static AsyncPageable<FakeParentWithAncestorWithLocResource> GetFakeParentWithAncestorWithLocsByLocationAsync(this SubscriptionResource subscriptionResource, string location, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(location, nameof(location));
-
             return GetMgmtListMethodsSubscriptionMockingExtension(subscriptionResource).GetFakeParentWithAncestorWithLocsByLocationAsync(location, cancellationToken);
         }
 
@@ -1506,8 +1500,6 @@ namespace MgmtListMethods
         /// <returns> A collection of <see cref="FakeParentWithAncestorWithLocResource" /> that may take multiple service requests to iterate over. </returns>
         public static Pageable<FakeParentWithAncestorWithLocResource> GetFakeParentWithAncestorWithLocsByLocation(this SubscriptionResource subscriptionResource, string location, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(location, nameof(location));
-
             return GetMgmtListMethodsSubscriptionMockingExtension(subscriptionResource).GetFakeParentWithAncestorWithLocsByLocation(location, cancellationToken);
         }
 
@@ -1704,8 +1696,6 @@ namespace MgmtListMethods
         /// <returns> An async collection of <see cref="ResGrpParentWithAncestorWithNonResChWithLocResource" /> that may take multiple service requests to iterate over. </returns>
         public static AsyncPageable<ResGrpParentWithAncestorWithNonResChWithLocResource> GetResGrpParentWithAncestorWithNonResChWithLocsByLocationResGrpParentWithAncestorWithLocAsync(this SubscriptionResource subscriptionResource, string location, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(location, nameof(location));
-
             return GetMgmtListMethodsSubscriptionMockingExtension(subscriptionResource).GetResGrpParentWithAncestorWithNonResChWithLocsByLocationResGrpParentWithAncestorWithLocAsync(location, cancellationToken);
         }
 
@@ -1730,8 +1720,6 @@ namespace MgmtListMethods
         /// <returns> A collection of <see cref="ResGrpParentWithAncestorWithNonResChWithLocResource" /> that may take multiple service requests to iterate over. </returns>
         public static Pageable<ResGrpParentWithAncestorWithNonResChWithLocResource> GetResGrpParentWithAncestorWithNonResChWithLocsByLocationResGrpParentWithAncestorWithLoc(this SubscriptionResource subscriptionResource, string location, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(location, nameof(location));
-
             return GetMgmtListMethodsSubscriptionMockingExtension(subscriptionResource).GetResGrpParentWithAncestorWithNonResChWithLocsByLocationResGrpParentWithAncestorWithLoc(location, cancellationToken);
         }
 
@@ -1799,9 +1787,6 @@ namespace MgmtListMethods
         /// <returns> An async collection of <see cref="UpdateWorkspaceQuotas" /> that may take multiple service requests to iterate over. </returns>
         public static AsyncPageable<UpdateWorkspaceQuotas> UpdateAllQuotaAsync(this SubscriptionResource subscriptionResource, string location, QuotaUpdateContent content, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(location, nameof(location));
-            Argument.AssertNotNull(content, nameof(content));
-
             return GetMgmtListMethodsSubscriptionMockingExtension(subscriptionResource).UpdateAllQuotaAsync(location, content, cancellationToken);
         }
 
@@ -1827,9 +1812,6 @@ namespace MgmtListMethods
         /// <returns> A collection of <see cref="UpdateWorkspaceQuotas" /> that may take multiple service requests to iterate over. </returns>
         public static Pageable<UpdateWorkspaceQuotas> UpdateAllQuota(this SubscriptionResource subscriptionResource, string location, QuotaUpdateContent content, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(location, nameof(location));
-            Argument.AssertNotNull(content, nameof(content));
-
             return GetMgmtListMethodsSubscriptionMockingExtension(subscriptionResource).UpdateAllQuota(location, content, cancellationToken);
         }
 

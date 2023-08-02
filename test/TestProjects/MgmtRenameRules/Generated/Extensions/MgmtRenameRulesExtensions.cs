@@ -493,8 +493,6 @@ namespace MgmtRenameRules
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         public static async Task<ArmOperation<LogAnalytics>> ExportRequestRateByIntervalLogAnalyticAsync(this SubscriptionResource subscriptionResource, WaitUntil waitUntil, AzureLocation location, RequestRateByIntervalContent content, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(content, nameof(content));
-
             return await GetMgmtRenameRulesSubscriptionMockingExtension(subscriptionResource).ExportRequestRateByIntervalLogAnalyticAsync(waitUntil, location, content, cancellationToken).ConfigureAwait(false);
         }
 
@@ -519,8 +517,6 @@ namespace MgmtRenameRules
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         public static ArmOperation<LogAnalytics> ExportRequestRateByIntervalLogAnalytic(this SubscriptionResource subscriptionResource, WaitUntil waitUntil, AzureLocation location, RequestRateByIntervalContent content, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(content, nameof(content));
-
             return GetMgmtRenameRulesSubscriptionMockingExtension(subscriptionResource).ExportRequestRateByIntervalLogAnalytic(waitUntil, location, content, cancellationToken);
         }
 
@@ -545,8 +541,6 @@ namespace MgmtRenameRules
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         public static async Task<ArmOperation<LogAnalytics>> ExportThrottledRequestsLogAnalyticAsync(this SubscriptionResource subscriptionResource, WaitUntil waitUntil, AzureLocation location, ThrottledRequestsContent content, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(content, nameof(content));
-
             return await GetMgmtRenameRulesSubscriptionMockingExtension(subscriptionResource).ExportThrottledRequestsLogAnalyticAsync(waitUntil, location, content, cancellationToken).ConfigureAwait(false);
         }
 
@@ -571,8 +565,6 @@ namespace MgmtRenameRules
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         public static ArmOperation<LogAnalytics> ExportThrottledRequestsLogAnalytic(this SubscriptionResource subscriptionResource, WaitUntil waitUntil, AzureLocation location, ThrottledRequestsContent content, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(content, nameof(content));
-
             return GetMgmtRenameRulesSubscriptionMockingExtension(subscriptionResource).ExportThrottledRequestsLogAnalytic(waitUntil, location, content, cancellationToken);
         }
     }

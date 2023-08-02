@@ -902,11 +902,6 @@ namespace Azure.ResourceManager.Sample
         /// <exception cref="ArgumentNullException"> <paramref name="publisherName"/>, <paramref name="offer"/>, <paramref name="skus"/> or <paramref name="version"/> is null. </exception>
         public static async Task<Response<VirtualMachineImage>> GetVirtualMachineImageAsync(this SubscriptionResource subscriptionResource, AzureLocation location, string publisherName, string offer, string skus, string version, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(publisherName, nameof(publisherName));
-            Argument.AssertNotNullOrEmpty(offer, nameof(offer));
-            Argument.AssertNotNullOrEmpty(skus, nameof(skus));
-            Argument.AssertNotNullOrEmpty(version, nameof(version));
-
             return await GetSampleSubscriptionMockingExtension(subscriptionResource).GetVirtualMachineImageAsync(location, publisherName, offer, skus, version, cancellationToken).ConfigureAwait(false);
         }
 
@@ -934,11 +929,6 @@ namespace Azure.ResourceManager.Sample
         /// <exception cref="ArgumentNullException"> <paramref name="publisherName"/>, <paramref name="offer"/>, <paramref name="skus"/> or <paramref name="version"/> is null. </exception>
         public static Response<VirtualMachineImage> GetVirtualMachineImage(this SubscriptionResource subscriptionResource, AzureLocation location, string publisherName, string offer, string skus, string version, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(publisherName, nameof(publisherName));
-            Argument.AssertNotNullOrEmpty(offer, nameof(offer));
-            Argument.AssertNotNullOrEmpty(skus, nameof(skus));
-            Argument.AssertNotNullOrEmpty(version, nameof(version));
-
             return GetSampleSubscriptionMockingExtension(subscriptionResource).GetVirtualMachineImage(location, publisherName, offer, skus, version, cancellationToken);
         }
 
@@ -962,8 +952,6 @@ namespace Azure.ResourceManager.Sample
         /// <returns> An async collection of <see cref="VirtualMachineImageResource" /> that may take multiple service requests to iterate over. </returns>
         public static AsyncPageable<VirtualMachineImageResource> GetVirtualMachineImagesAsync(this SubscriptionResource subscriptionResource, SubscriptionResourceGetVirtualMachineImagesOptions options, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(options, nameof(options));
-
             return GetSampleSubscriptionMockingExtension(subscriptionResource).GetVirtualMachineImagesAsync(options, cancellationToken);
         }
 
@@ -987,8 +975,6 @@ namespace Azure.ResourceManager.Sample
         /// <returns> A collection of <see cref="VirtualMachineImageResource" /> that may take multiple service requests to iterate over. </returns>
         public static Pageable<VirtualMachineImageResource> GetVirtualMachineImages(this SubscriptionResource subscriptionResource, SubscriptionResourceGetVirtualMachineImagesOptions options, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(options, nameof(options));
-
             return GetSampleSubscriptionMockingExtension(subscriptionResource).GetVirtualMachineImages(options, cancellationToken);
         }
 
@@ -1014,8 +1000,6 @@ namespace Azure.ResourceManager.Sample
         /// <returns> An async collection of <see cref="VirtualMachineImageResource" /> that may take multiple service requests to iterate over. </returns>
         public static AsyncPageable<VirtualMachineImageResource> GetOffersVirtualMachineImagesAsync(this SubscriptionResource subscriptionResource, AzureLocation location, string publisherName, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(publisherName, nameof(publisherName));
-
             return GetSampleSubscriptionMockingExtension(subscriptionResource).GetOffersVirtualMachineImagesAsync(location, publisherName, cancellationToken);
         }
 
@@ -1041,8 +1025,6 @@ namespace Azure.ResourceManager.Sample
         /// <returns> A collection of <see cref="VirtualMachineImageResource" /> that may take multiple service requests to iterate over. </returns>
         public static Pageable<VirtualMachineImageResource> GetOffersVirtualMachineImages(this SubscriptionResource subscriptionResource, AzureLocation location, string publisherName, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(publisherName, nameof(publisherName));
-
             return GetSampleSubscriptionMockingExtension(subscriptionResource).GetOffersVirtualMachineImages(location, publisherName, cancellationToken);
         }
 
@@ -1113,9 +1095,6 @@ namespace Azure.ResourceManager.Sample
         /// <returns> An async collection of <see cref="VirtualMachineImageResource" /> that may take multiple service requests to iterate over. </returns>
         public static AsyncPageable<VirtualMachineImageResource> GetSkusVirtualMachineImagesAsync(this SubscriptionResource subscriptionResource, AzureLocation location, string publisherName, string offer, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(publisherName, nameof(publisherName));
-            Argument.AssertNotNullOrEmpty(offer, nameof(offer));
-
             return GetSampleSubscriptionMockingExtension(subscriptionResource).GetSkusVirtualMachineImagesAsync(location, publisherName, offer, cancellationToken);
         }
 
@@ -1142,9 +1121,6 @@ namespace Azure.ResourceManager.Sample
         /// <returns> A collection of <see cref="VirtualMachineImageResource" /> that may take multiple service requests to iterate over. </returns>
         public static Pageable<VirtualMachineImageResource> GetSkusVirtualMachineImages(this SubscriptionResource subscriptionResource, AzureLocation location, string publisherName, string offer, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(publisherName, nameof(publisherName));
-            Argument.AssertNotNullOrEmpty(offer, nameof(offer));
-
             return GetSampleSubscriptionMockingExtension(subscriptionResource).GetSkusVirtualMachineImages(location, publisherName, offer, cancellationToken);
         }
 
@@ -1429,8 +1405,6 @@ namespace Azure.ResourceManager.Sample
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         public static async Task<ArmOperation<LogAnalytics>> ExportRequestRateByIntervalLogAnalyticAsync(this SubscriptionResource subscriptionResource, WaitUntil waitUntil, AzureLocation location, RequestRateByIntervalContent content, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(content, nameof(content));
-
             return await GetSampleSubscriptionMockingExtension(subscriptionResource).ExportRequestRateByIntervalLogAnalyticAsync(waitUntil, location, content, cancellationToken).ConfigureAwait(false);
         }
 
@@ -1455,8 +1429,6 @@ namespace Azure.ResourceManager.Sample
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         public static ArmOperation<LogAnalytics> ExportRequestRateByIntervalLogAnalytic(this SubscriptionResource subscriptionResource, WaitUntil waitUntil, AzureLocation location, RequestRateByIntervalContent content, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(content, nameof(content));
-
             return GetSampleSubscriptionMockingExtension(subscriptionResource).ExportRequestRateByIntervalLogAnalytic(waitUntil, location, content, cancellationToken);
         }
 
@@ -1481,8 +1453,6 @@ namespace Azure.ResourceManager.Sample
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         public static async Task<ArmOperation<LogAnalytics>> ExportThrottledRequestsLogAnalyticAsync(this SubscriptionResource subscriptionResource, WaitUntil waitUntil, AzureLocation location, ThrottledRequestsContent content, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(content, nameof(content));
-
             return await GetSampleSubscriptionMockingExtension(subscriptionResource).ExportThrottledRequestsLogAnalyticAsync(waitUntil, location, content, cancellationToken).ConfigureAwait(false);
         }
 
@@ -1507,8 +1477,6 @@ namespace Azure.ResourceManager.Sample
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         public static ArmOperation<LogAnalytics> ExportThrottledRequestsLogAnalytic(this SubscriptionResource subscriptionResource, WaitUntil waitUntil, AzureLocation location, ThrottledRequestsContent content, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(content, nameof(content));
-
             return GetSampleSubscriptionMockingExtension(subscriptionResource).ExportThrottledRequestsLogAnalytic(waitUntil, location, content, cancellationToken);
         }
     }

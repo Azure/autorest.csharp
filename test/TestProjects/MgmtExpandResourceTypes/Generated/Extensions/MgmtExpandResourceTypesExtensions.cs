@@ -317,8 +317,6 @@ namespace MgmtExpandResourceTypes
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         public static async Task<Response<DnsResourceReferenceResult>> GetByTargetResourcesDnsResourceReferenceAsync(this SubscriptionResource subscriptionResource, DnsResourceReferenceContent content, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(content, nameof(content));
-
             return await GetMgmtExpandResourceTypesSubscriptionMockingExtension(subscriptionResource).GetByTargetResourcesDnsResourceReferenceAsync(content, cancellationToken).ConfigureAwait(false);
         }
 
@@ -341,8 +339,6 @@ namespace MgmtExpandResourceTypes
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         public static Response<DnsResourceReferenceResult> GetByTargetResourcesDnsResourceReference(this SubscriptionResource subscriptionResource, DnsResourceReferenceContent content, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(content, nameof(content));
-
             return GetMgmtExpandResourceTypesSubscriptionMockingExtension(subscriptionResource).GetByTargetResourcesDnsResourceReference(content, cancellationToken);
         }
     }

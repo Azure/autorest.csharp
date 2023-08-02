@@ -925,8 +925,6 @@ namespace MgmtMockAndSample
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         public static async Task<Response<CheckNameAvailabilityResult>> CheckNameAvailabilityVaultAsync(this SubscriptionResource subscriptionResource, VaultCheckNameAvailabilityContent content, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(content, nameof(content));
-
             return await GetMgmtMockAndSampleSubscriptionMockingExtension(subscriptionResource).CheckNameAvailabilityVaultAsync(content, cancellationToken).ConfigureAwait(false);
         }
 
@@ -949,8 +947,6 @@ namespace MgmtMockAndSample
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         public static Response<CheckNameAvailabilityResult> CheckNameAvailabilityVault(this SubscriptionResource subscriptionResource, VaultCheckNameAvailabilityContent content, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(content, nameof(content));
-
             return GetMgmtMockAndSampleSubscriptionMockingExtension(subscriptionResource).CheckNameAvailabilityVault(content, cancellationToken);
         }
 
@@ -1189,8 +1185,6 @@ namespace MgmtMockAndSample
         /// <exception cref="ArgumentNullException"> <paramref name="template"/> is null. </exception>
         public static async Task<Response<TemplateHashResult>> CalculateTemplateHashDeploymentAsync(this TenantResource tenantResource, BinaryData template, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(template, nameof(template));
-
             return await GetMgmtMockAndSampleTenantMockingExtension(tenantResource).CalculateTemplateHashDeploymentAsync(template, cancellationToken).ConfigureAwait(false);
         }
 
@@ -1213,8 +1207,6 @@ namespace MgmtMockAndSample
         /// <exception cref="ArgumentNullException"> <paramref name="template"/> is null. </exception>
         public static Response<TemplateHashResult> CalculateTemplateHashDeployment(this TenantResource tenantResource, BinaryData template, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(template, nameof(template));
-
             return GetMgmtMockAndSampleTenantMockingExtension(tenantResource).CalculateTemplateHashDeployment(template, cancellationToken);
         }
     }

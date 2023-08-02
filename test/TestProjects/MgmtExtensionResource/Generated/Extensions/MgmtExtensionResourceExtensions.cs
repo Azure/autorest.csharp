@@ -250,9 +250,6 @@ namespace MgmtExtensionResource
         /// <exception cref="ArgumentNullException"> <paramref name="location"/> or <paramref name="domainNameLabel"/> is null. </exception>
         public static async Task<Response<DnsNameAvailabilityResult>> CheckDnsNameAvailabilityAsync(this SubscriptionResource subscriptionResource, string location, string domainNameLabel, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(location, nameof(location));
-            Argument.AssertNotNull(domainNameLabel, nameof(domainNameLabel));
-
             return await GetMgmtExtensionResourceSubscriptionMockingExtension(subscriptionResource).CheckDnsNameAvailabilityAsync(location, domainNameLabel, cancellationToken).ConfigureAwait(false);
         }
 
@@ -277,9 +274,6 @@ namespace MgmtExtensionResource
         /// <exception cref="ArgumentNullException"> <paramref name="location"/> or <paramref name="domainNameLabel"/> is null. </exception>
         public static Response<DnsNameAvailabilityResult> CheckDnsNameAvailability(this SubscriptionResource subscriptionResource, string location, string domainNameLabel, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(location, nameof(location));
-            Argument.AssertNotNull(domainNameLabel, nameof(domainNameLabel));
-
             return GetMgmtExtensionResourceSubscriptionMockingExtension(subscriptionResource).CheckDnsNameAvailability(location, domainNameLabel, cancellationToken);
         }
 
@@ -302,8 +296,6 @@ namespace MgmtExtensionResource
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         public static async Task<Response> ValidateSomethingOrphanedPostAsync(this SubscriptionResource subscriptionResource, ValidateSomethingContent content, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(content, nameof(content));
-
             return await GetMgmtExtensionResourceSubscriptionMockingExtension(subscriptionResource).ValidateSomethingOrphanedPostAsync(content, cancellationToken).ConfigureAwait(false);
         }
 
@@ -326,8 +318,6 @@ namespace MgmtExtensionResource
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         public static Response ValidateSomethingOrphanedPost(this SubscriptionResource subscriptionResource, ValidateSomethingContent content, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNull(content, nameof(content));
-
             return GetMgmtExtensionResourceSubscriptionMockingExtension(subscriptionResource).ValidateSomethingOrphanedPost(content, cancellationToken);
         }
 

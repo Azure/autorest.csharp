@@ -164,9 +164,6 @@ namespace MgmtOmitOperationGroups
         /// <exception cref="ArgumentNullException"> <paramref name="model5SName"/> or <paramref name="model5"/> is null. </exception>
         public static async Task<Response<Model5>> CreateOrUpdateModel5Async(this ResourceGroupResource resourceGroupResource, string model5SName, Model5 model5, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(model5SName, nameof(model5SName));
-            Argument.AssertNotNull(model5, nameof(model5));
-
             return await GetMgmtOmitOperationGroupsResourceGroupMockingExtension(resourceGroupResource).CreateOrUpdateModel5Async(model5SName, model5, cancellationToken).ConfigureAwait(false);
         }
 
@@ -190,9 +187,6 @@ namespace MgmtOmitOperationGroups
         /// <exception cref="ArgumentNullException"> <paramref name="model5SName"/> or <paramref name="model5"/> is null. </exception>
         public static Response<Model5> CreateOrUpdateModel5(this ResourceGroupResource resourceGroupResource, string model5SName, Model5 model5, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(model5SName, nameof(model5SName));
-            Argument.AssertNotNull(model5, nameof(model5));
-
             return GetMgmtOmitOperationGroupsResourceGroupMockingExtension(resourceGroupResource).CreateOrUpdateModel5(model5SName, model5, cancellationToken);
         }
 
@@ -215,8 +209,6 @@ namespace MgmtOmitOperationGroups
         /// <exception cref="ArgumentNullException"> <paramref name="model5SName"/> is null. </exception>
         public static async Task<Response<Model5>> GetModel5Async(this ResourceGroupResource resourceGroupResource, string model5SName, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(model5SName, nameof(model5SName));
-
             return await GetMgmtOmitOperationGroupsResourceGroupMockingExtension(resourceGroupResource).GetModel5Async(model5SName, cancellationToken).ConfigureAwait(false);
         }
 
@@ -239,8 +231,6 @@ namespace MgmtOmitOperationGroups
         /// <exception cref="ArgumentNullException"> <paramref name="model5SName"/> is null. </exception>
         public static Response<Model5> GetModel5(this ResourceGroupResource resourceGroupResource, string model5SName, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(model5SName, nameof(model5SName));
-
             return GetMgmtOmitOperationGroupsResourceGroupMockingExtension(resourceGroupResource).GetModel5(model5SName, cancellationToken);
         }
     }

@@ -192,9 +192,6 @@ namespace MgmtExactMatchInheritance
         /// <exception cref="ArgumentNullException"> <paramref name="exactMatchModel2SName"/> or <paramref name="exactMatchModel2"/> is null. </exception>
         public static async Task<Response<ExactMatchModel2>> PutExactMatchModel2Async(this ResourceGroupResource resourceGroupResource, string exactMatchModel2SName, ExactMatchModel2 exactMatchModel2, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(exactMatchModel2SName, nameof(exactMatchModel2SName));
-            Argument.AssertNotNull(exactMatchModel2, nameof(exactMatchModel2));
-
             return await GetMgmtExactMatchInheritanceResourceGroupMockingExtension(resourceGroupResource).PutExactMatchModel2Async(exactMatchModel2SName, exactMatchModel2, cancellationToken).ConfigureAwait(false);
         }
 
@@ -218,9 +215,6 @@ namespace MgmtExactMatchInheritance
         /// <exception cref="ArgumentNullException"> <paramref name="exactMatchModel2SName"/> or <paramref name="exactMatchModel2"/> is null. </exception>
         public static Response<ExactMatchModel2> PutExactMatchModel2(this ResourceGroupResource resourceGroupResource, string exactMatchModel2SName, ExactMatchModel2 exactMatchModel2, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(exactMatchModel2SName, nameof(exactMatchModel2SName));
-            Argument.AssertNotNull(exactMatchModel2, nameof(exactMatchModel2));
-
             return GetMgmtExactMatchInheritanceResourceGroupMockingExtension(resourceGroupResource).PutExactMatchModel2(exactMatchModel2SName, exactMatchModel2, cancellationToken);
         }
 
@@ -284,9 +278,6 @@ namespace MgmtExactMatchInheritance
         /// <exception cref="ArgumentNullException"> <paramref name="exactMatchModel3SName"/> or <paramref name="exactMatchModel3"/> is null. </exception>
         public static async Task<Response<ExactMatchModel3>> PutExactMatchModel3Async(this ResourceGroupResource resourceGroupResource, string exactMatchModel3SName, ExactMatchModel3 exactMatchModel3, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(exactMatchModel3SName, nameof(exactMatchModel3SName));
-            Argument.AssertNotNull(exactMatchModel3, nameof(exactMatchModel3));
-
             return await GetMgmtExactMatchInheritanceResourceGroupMockingExtension(resourceGroupResource).PutExactMatchModel3Async(exactMatchModel3SName, exactMatchModel3, cancellationToken).ConfigureAwait(false);
         }
 
@@ -310,9 +301,6 @@ namespace MgmtExactMatchInheritance
         /// <exception cref="ArgumentNullException"> <paramref name="exactMatchModel3SName"/> or <paramref name="exactMatchModel3"/> is null. </exception>
         public static Response<ExactMatchModel3> PutExactMatchModel3(this ResourceGroupResource resourceGroupResource, string exactMatchModel3SName, ExactMatchModel3 exactMatchModel3, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(exactMatchModel3SName, nameof(exactMatchModel3SName));
-            Argument.AssertNotNull(exactMatchModel3, nameof(exactMatchModel3));
-
             return GetMgmtExactMatchInheritanceResourceGroupMockingExtension(resourceGroupResource).PutExactMatchModel3(exactMatchModel3SName, exactMatchModel3, cancellationToken);
         }
 
@@ -335,8 +323,6 @@ namespace MgmtExactMatchInheritance
         /// <exception cref="ArgumentNullException"> <paramref name="exactMatchModel3SName"/> is null. </exception>
         public static async Task<Response<ExactMatchModel3>> GetExactMatchModel3Async(this ResourceGroupResource resourceGroupResource, string exactMatchModel3SName, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(exactMatchModel3SName, nameof(exactMatchModel3SName));
-
             return await GetMgmtExactMatchInheritanceResourceGroupMockingExtension(resourceGroupResource).GetExactMatchModel3Async(exactMatchModel3SName, cancellationToken).ConfigureAwait(false);
         }
 
@@ -359,8 +345,6 @@ namespace MgmtExactMatchInheritance
         /// <exception cref="ArgumentNullException"> <paramref name="exactMatchModel3SName"/> is null. </exception>
         public static Response<ExactMatchModel3> GetExactMatchModel3(this ResourceGroupResource resourceGroupResource, string exactMatchModel3SName, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(exactMatchModel3SName, nameof(exactMatchModel3SName));
-
             return GetMgmtExactMatchInheritanceResourceGroupMockingExtension(resourceGroupResource).GetExactMatchModel3(exactMatchModel3SName, cancellationToken);
         }
 
@@ -384,9 +368,6 @@ namespace MgmtExactMatchInheritance
         /// <exception cref="ArgumentNullException"> <paramref name="exactMatchModel4SName"/> or <paramref name="exactMatchModel4"/> is null. </exception>
         public static async Task<Response<ExactMatchModel4>> PutExactMatchModel4Async(this ResourceGroupResource resourceGroupResource, string exactMatchModel4SName, ExactMatchModel4 exactMatchModel4, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(exactMatchModel4SName, nameof(exactMatchModel4SName));
-            Argument.AssertNotNull(exactMatchModel4, nameof(exactMatchModel4));
-
             return await GetMgmtExactMatchInheritanceResourceGroupMockingExtension(resourceGroupResource).PutExactMatchModel4Async(exactMatchModel4SName, exactMatchModel4, cancellationToken).ConfigureAwait(false);
         }
 
@@ -410,9 +391,6 @@ namespace MgmtExactMatchInheritance
         /// <exception cref="ArgumentNullException"> <paramref name="exactMatchModel4SName"/> or <paramref name="exactMatchModel4"/> is null. </exception>
         public static Response<ExactMatchModel4> PutExactMatchModel4(this ResourceGroupResource resourceGroupResource, string exactMatchModel4SName, ExactMatchModel4 exactMatchModel4, CancellationToken cancellationToken = default)
         {
-            Argument.AssertNotNullOrEmpty(exactMatchModel4SName, nameof(exactMatchModel4SName));
-            Argument.AssertNotNull(exactMatchModel4, nameof(exactMatchModel4));
-
             return GetMgmtExactMatchInheritanceResourceGroupMockingExtension(resourceGroupResource).PutExactMatchModel4(exactMatchModel4SName, exactMatchModel4, cancellationToken);
         }
     }
