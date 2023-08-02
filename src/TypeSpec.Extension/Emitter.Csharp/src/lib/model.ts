@@ -159,6 +159,7 @@ function getCSharpInputTypeKindByIntrinsicModelName(
             return InputTypeKind.Boolean;
         case "date":
             return InputTypeKind.Date;
+        case "utcDateTime":
         case "datetime":
             switch (encode?.encoding) {
                 case undefined:
