@@ -65,7 +65,7 @@ import { Usage } from "../type/usage.js";
 import { logger } from "./logger.js";
 import {
     SdkContext,
-    getSdkBuiltInType,
+    getClientType,
     isInternal
 } from "@azure-tools/typespec-client-generator-core";
 import { capitalize, getNameForTemplate } from "./utils.js";
@@ -159,7 +159,6 @@ function getCSharpInputTypeKindByIntrinsicModelName(
             return InputTypeKind.Boolean;
         case "date":
             return InputTypeKind.Date;
-        case "utcDateTime":
         case "datetime":
             switch (encode?.encoding) {
                 case undefined:
@@ -314,7 +313,7 @@ export function getInputType(
             // In such cases, we don't want to emit a ref and instead just
             // emit the base type directly.
             default:
-                const sdkType = getSdkBuiltInType(context, type);
+                const sdkType = getClientType(context, type);
                 return {
                     Name: type.name,
                     Kind: getCSharpInputTypeKindByIntrinsicModelName(
