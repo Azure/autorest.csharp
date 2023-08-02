@@ -18,7 +18,7 @@ using MgmtExactMatchInheritance.Models;
 namespace MgmtExactMatchInheritance.Mocking
 {
     /// <summary> A class to add extension methods to ResourceGroupResource. </summary>
-    internal partial class MgmtExactMatchInheritanceResourceGroupMockingExtension : ArmResource
+    public partial class MgmtExactMatchInheritanceResourceGroupMockingExtension : ArmResource
     {
         private ClientDiagnostics _exactMatchModel2sClientDiagnostics;
         private ExactMatchModel2SRestOperations _exactMatchModel2sRestClient;
@@ -73,6 +73,8 @@ namespace MgmtExactMatchInheritance.Mocking
         /// </summary>
         /// <param name="exactMatchModel1SName"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="exactMatchModel1SName"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="exactMatchModel1SName"/> is null. </exception>
         [ForwardsClientCalls]
         public virtual async Task<Response<ExactMatchModel1Resource>> GetExactMatchModel1Async(string exactMatchModel1SName, CancellationToken cancellationToken = default)
         {
@@ -93,6 +95,8 @@ namespace MgmtExactMatchInheritance.Mocking
         /// </summary>
         /// <param name="exactMatchModel1SName"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="exactMatchModel1SName"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="exactMatchModel1SName"/> is null. </exception>
         [ForwardsClientCalls]
         public virtual Response<ExactMatchModel1Resource> GetExactMatchModel1(string exactMatchModel1SName, CancellationToken cancellationToken = default)
         {
@@ -120,6 +124,8 @@ namespace MgmtExactMatchInheritance.Mocking
         /// </summary>
         /// <param name="exactMatchModel5SName"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="exactMatchModel5SName"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="exactMatchModel5SName"/> is null. </exception>
         [ForwardsClientCalls]
         public virtual async Task<Response<ExactMatchModel5Resource>> GetExactMatchModel5Async(string exactMatchModel5SName, CancellationToken cancellationToken = default)
         {
@@ -140,6 +146,8 @@ namespace MgmtExactMatchInheritance.Mocking
         /// </summary>
         /// <param name="exactMatchModel5SName"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="exactMatchModel5SName"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="exactMatchModel5SName"/> is null. </exception>
         [ForwardsClientCalls]
         public virtual Response<ExactMatchModel5Resource> GetExactMatchModel5(string exactMatchModel5SName, CancellationToken cancellationToken = default)
         {
@@ -161,8 +169,13 @@ namespace MgmtExactMatchInheritance.Mocking
         /// <param name="exactMatchModel2SName"> The String to use. </param>
         /// <param name="exactMatchModel2"> The ExactMatchModel2 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="exactMatchModel2SName"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="exactMatchModel2SName"/> or <paramref name="exactMatchModel2"/> is null. </exception>
         public virtual async Task<Response<ExactMatchModel2>> PutExactMatchModel2Async(string exactMatchModel2SName, ExactMatchModel2 exactMatchModel2, CancellationToken cancellationToken = default)
         {
+            Argument.AssertNotNullOrEmpty(exactMatchModel2SName, nameof(exactMatchModel2SName));
+            Argument.AssertNotNull(exactMatchModel2, nameof(exactMatchModel2));
+
             using var scope = ExactMatchModel2sClientDiagnostics.CreateScope("MgmtExactMatchInheritanceResourceGroupMockingExtension.PutExactMatchModel2");
             scope.Start();
             try
@@ -192,8 +205,13 @@ namespace MgmtExactMatchInheritance.Mocking
         /// <param name="exactMatchModel2SName"> The String to use. </param>
         /// <param name="exactMatchModel2"> The ExactMatchModel2 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="exactMatchModel2SName"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="exactMatchModel2SName"/> or <paramref name="exactMatchModel2"/> is null. </exception>
         public virtual Response<ExactMatchModel2> PutExactMatchModel2(string exactMatchModel2SName, ExactMatchModel2 exactMatchModel2, CancellationToken cancellationToken = default)
         {
+            Argument.AssertNotNullOrEmpty(exactMatchModel2SName, nameof(exactMatchModel2SName));
+            Argument.AssertNotNull(exactMatchModel2, nameof(exactMatchModel2));
+
             using var scope = ExactMatchModel2sClientDiagnostics.CreateScope("MgmtExactMatchInheritanceResourceGroupMockingExtension.PutExactMatchModel2");
             scope.Start();
             try
@@ -263,8 +281,13 @@ namespace MgmtExactMatchInheritance.Mocking
         /// <param name="exactMatchModel3SName"> The String to use. </param>
         /// <param name="exactMatchModel3"> The ExactMatchModel3 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="exactMatchModel3SName"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="exactMatchModel3SName"/> or <paramref name="exactMatchModel3"/> is null. </exception>
         public virtual async Task<Response<ExactMatchModel3>> PutExactMatchModel3Async(string exactMatchModel3SName, ExactMatchModel3 exactMatchModel3, CancellationToken cancellationToken = default)
         {
+            Argument.AssertNotNullOrEmpty(exactMatchModel3SName, nameof(exactMatchModel3SName));
+            Argument.AssertNotNull(exactMatchModel3, nameof(exactMatchModel3));
+
             using var scope = ExactMatchModel3sClientDiagnostics.CreateScope("MgmtExactMatchInheritanceResourceGroupMockingExtension.PutExactMatchModel3");
             scope.Start();
             try
@@ -294,8 +317,13 @@ namespace MgmtExactMatchInheritance.Mocking
         /// <param name="exactMatchModel3SName"> The String to use. </param>
         /// <param name="exactMatchModel3"> The ExactMatchModel3 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="exactMatchModel3SName"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="exactMatchModel3SName"/> or <paramref name="exactMatchModel3"/> is null. </exception>
         public virtual Response<ExactMatchModel3> PutExactMatchModel3(string exactMatchModel3SName, ExactMatchModel3 exactMatchModel3, CancellationToken cancellationToken = default)
         {
+            Argument.AssertNotNullOrEmpty(exactMatchModel3SName, nameof(exactMatchModel3SName));
+            Argument.AssertNotNull(exactMatchModel3, nameof(exactMatchModel3));
+
             using var scope = ExactMatchModel3sClientDiagnostics.CreateScope("MgmtExactMatchInheritanceResourceGroupMockingExtension.PutExactMatchModel3");
             scope.Start();
             try
@@ -324,8 +352,12 @@ namespace MgmtExactMatchInheritance.Mocking
         /// </summary>
         /// <param name="exactMatchModel3SName"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="exactMatchModel3SName"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="exactMatchModel3SName"/> is null. </exception>
         public virtual async Task<Response<ExactMatchModel3>> GetExactMatchModel3Async(string exactMatchModel3SName, CancellationToken cancellationToken = default)
         {
+            Argument.AssertNotNullOrEmpty(exactMatchModel3SName, nameof(exactMatchModel3SName));
+
             using var scope = ExactMatchModel3sClientDiagnostics.CreateScope("MgmtExactMatchInheritanceResourceGroupMockingExtension.GetExactMatchModel3");
             scope.Start();
             try
@@ -354,8 +386,12 @@ namespace MgmtExactMatchInheritance.Mocking
         /// </summary>
         /// <param name="exactMatchModel3SName"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="exactMatchModel3SName"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="exactMatchModel3SName"/> is null. </exception>
         public virtual Response<ExactMatchModel3> GetExactMatchModel3(string exactMatchModel3SName, CancellationToken cancellationToken = default)
         {
+            Argument.AssertNotNullOrEmpty(exactMatchModel3SName, nameof(exactMatchModel3SName));
+
             using var scope = ExactMatchModel3sClientDiagnostics.CreateScope("MgmtExactMatchInheritanceResourceGroupMockingExtension.GetExactMatchModel3");
             scope.Start();
             try
@@ -385,8 +421,13 @@ namespace MgmtExactMatchInheritance.Mocking
         /// <param name="exactMatchModel4SName"> The String to use. </param>
         /// <param name="exactMatchModel4"> The ExactMatchModel4 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="exactMatchModel4SName"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="exactMatchModel4SName"/> or <paramref name="exactMatchModel4"/> is null. </exception>
         public virtual async Task<Response<ExactMatchModel4>> PutExactMatchModel4Async(string exactMatchModel4SName, ExactMatchModel4 exactMatchModel4, CancellationToken cancellationToken = default)
         {
+            Argument.AssertNotNullOrEmpty(exactMatchModel4SName, nameof(exactMatchModel4SName));
+            Argument.AssertNotNull(exactMatchModel4, nameof(exactMatchModel4));
+
             using var scope = ExactMatchModel4sClientDiagnostics.CreateScope("MgmtExactMatchInheritanceResourceGroupMockingExtension.PutExactMatchModel4");
             scope.Start();
             try
@@ -416,8 +457,13 @@ namespace MgmtExactMatchInheritance.Mocking
         /// <param name="exactMatchModel4SName"> The String to use. </param>
         /// <param name="exactMatchModel4"> The ExactMatchModel4 to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="exactMatchModel4SName"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="exactMatchModel4SName"/> or <paramref name="exactMatchModel4"/> is null. </exception>
         public virtual Response<ExactMatchModel4> PutExactMatchModel4(string exactMatchModel4SName, ExactMatchModel4 exactMatchModel4, CancellationToken cancellationToken = default)
         {
+            Argument.AssertNotNullOrEmpty(exactMatchModel4SName, nameof(exactMatchModel4SName));
+            Argument.AssertNotNull(exactMatchModel4, nameof(exactMatchModel4));
+
             using var scope = ExactMatchModel4sClientDiagnostics.CreateScope("MgmtExactMatchInheritanceResourceGroupMockingExtension.PutExactMatchModel4");
             scope.Start();
             try

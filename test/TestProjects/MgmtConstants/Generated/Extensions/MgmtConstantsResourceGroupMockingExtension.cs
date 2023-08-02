@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Threading;
 using System.Threading.Tasks;
 using Azure;
@@ -16,7 +17,7 @@ using MgmtConstants.Models;
 namespace MgmtConstants.Mocking
 {
     /// <summary> A class to add extension methods to ResourceGroupResource. </summary>
-    internal partial class MgmtConstantsResourceGroupMockingExtension : ArmResource
+    public partial class MgmtConstantsResourceGroupMockingExtension : ArmResource
     {
         /// <summary> Initializes a new instance of the <see cref="MgmtConstantsResourceGroupMockingExtension"/> class for mocking. </summary>
         protected MgmtConstantsResourceGroupMockingExtension()
@@ -59,6 +60,8 @@ namespace MgmtConstants.Mocking
         /// <param name="name"> The name of the virtual machine. </param>
         /// <param name="expand"> The expand expression to apply on the operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="name"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
         [ForwardsClientCalls]
         public virtual async Task<Response<OptionalMachineResource>> GetOptionalMachineAsync(string name, OptionalMachineExpand? expand = null, CancellationToken cancellationToken = default)
         {
@@ -81,6 +84,8 @@ namespace MgmtConstants.Mocking
         /// <param name="name"> The name of the virtual machine. </param>
         /// <param name="expand"> The expand expression to apply on the operation. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="name"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
         [ForwardsClientCalls]
         public virtual Response<OptionalMachineResource> GetOptionalMachine(string name, OptionalMachineExpand? expand = null, CancellationToken cancellationToken = default)
         {

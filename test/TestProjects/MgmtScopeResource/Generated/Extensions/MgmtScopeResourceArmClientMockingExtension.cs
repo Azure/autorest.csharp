@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Threading;
 using System.Threading.Tasks;
 using Azure;
@@ -17,7 +18,7 @@ using MgmtScopeResource.Models;
 namespace MgmtScopeResource.Mocking
 {
     /// <summary> A class to add extension methods to ArmClient. </summary>
-    internal partial class MgmtScopeResourceArmClientMockingExtension : ArmResource
+    public partial class MgmtScopeResourceArmClientMockingExtension : ArmResource
     {
         private ClientDiagnostics _resourceLinkClientDiagnostics;
         private ResourceLinksRestOperations _resourceLinkRestClient;
@@ -75,6 +76,8 @@ namespace MgmtScopeResource.Mocking
         /// <param name="scope"> The scope to use. </param>
         /// <param name="policyAssignmentName"> The name of the policy assignment to get. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="policyAssignmentName"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="policyAssignmentName"/> is null. </exception>
         [ForwardsClientCalls]
         public virtual async Task<Response<FakePolicyAssignmentResource>> GetFakePolicyAssignmentAsync(ResourceIdentifier scope, string policyAssignmentName, CancellationToken cancellationToken = default)
         {
@@ -97,6 +100,8 @@ namespace MgmtScopeResource.Mocking
         /// <param name="scope"> The scope to use. </param>
         /// <param name="policyAssignmentName"> The name of the policy assignment to get. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="policyAssignmentName"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="policyAssignmentName"/> is null. </exception>
         [ForwardsClientCalls]
         public virtual Response<FakePolicyAssignmentResource> GetFakePolicyAssignment(ResourceIdentifier scope, string policyAssignmentName, CancellationToken cancellationToken = default)
         {
@@ -135,6 +140,8 @@ namespace MgmtScopeResource.Mocking
         /// <param name="scope"> The scope to use. </param>
         /// <param name="guestConfigurationAssignmentName"> The guest configuration assignment name. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="guestConfigurationAssignmentName"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="guestConfigurationAssignmentName"/> is null. </exception>
         [ForwardsClientCalls]
         public virtual async Task<Response<GuestConfigurationAssignmentResource>> GetGuestConfigurationAssignmentAsync(ResourceIdentifier scope, string guestConfigurationAssignmentName, CancellationToken cancellationToken = default)
         {
@@ -157,6 +164,8 @@ namespace MgmtScopeResource.Mocking
         /// <param name="scope"> The scope to use. </param>
         /// <param name="guestConfigurationAssignmentName"> The guest configuration assignment name. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="guestConfigurationAssignmentName"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="guestConfigurationAssignmentName"/> is null. </exception>
         [ForwardsClientCalls]
         public virtual Response<GuestConfigurationAssignmentResource> GetGuestConfigurationAssignment(ResourceIdentifier scope, string guestConfigurationAssignmentName, CancellationToken cancellationToken = default)
         {

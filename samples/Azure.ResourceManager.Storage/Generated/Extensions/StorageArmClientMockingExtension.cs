@@ -12,7 +12,7 @@ using Azure.ResourceManager.Storage;
 namespace Azure.ResourceManager.Storage.Mocking
 {
     /// <summary> A class to add extension methods to ArmClient. </summary>
-    internal partial class StorageArmClientMockingExtension : ArmResource
+    public partial class StorageArmClientMockingExtension : ArmResource
     {
         /// <summary> Initializes a new instance of the <see cref="StorageArmClientMockingExtension"/> class for mocking. </summary>
         protected StorageArmClientMockingExtension()

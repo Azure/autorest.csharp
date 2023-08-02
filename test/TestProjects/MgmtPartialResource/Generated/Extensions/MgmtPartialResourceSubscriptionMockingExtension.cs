@@ -15,7 +15,7 @@ using MgmtPartialResource;
 namespace MgmtPartialResource.Mocking
 {
     /// <summary> A class to add extension methods to SubscriptionResource. </summary>
-    internal partial class MgmtPartialResourceSubscriptionMockingExtension : ArmResource
+    public partial class MgmtPartialResourceSubscriptionMockingExtension : ArmResource
     {
         private ClientDiagnostics _publicIPAddressClientDiagnostics;
         private PublicIPAddressesRestOperations _publicIPAddressRestClient;

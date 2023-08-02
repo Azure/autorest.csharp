@@ -18,7 +18,7 @@ using MgmtExtensionResource.Models;
 namespace MgmtExtensionResource.Mocking
 {
     /// <summary> A class to add extension methods to SubscriptionResource. </summary>
-    internal partial class MgmtExtensionResourceSubscriptionMockingExtension : ArmResource
+    public partial class MgmtExtensionResourceSubscriptionMockingExtension : ArmResource
     {
         private ClientDiagnostics _defaultClientDiagnostics;
         private PolicyRestOperations _defaultRestClient;
@@ -77,6 +77,8 @@ namespace MgmtExtensionResource.Mocking
         /// </summary>
         /// <param name="policyDefinitionName"> The name of the policy definition to get. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="policyDefinitionName"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="policyDefinitionName"/> is null. </exception>
         [ForwardsClientCalls]
         public virtual async Task<Response<SubscriptionPolicyDefinitionResource>> GetSubscriptionPolicyDefinitionAsync(string policyDefinitionName, CancellationToken cancellationToken = default)
         {
@@ -98,6 +100,8 @@ namespace MgmtExtensionResource.Mocking
         /// </summary>
         /// <param name="policyDefinitionName"> The name of the policy definition to get. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="policyDefinitionName"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="policyDefinitionName"/> is null. </exception>
         [ForwardsClientCalls]
         public virtual Response<SubscriptionPolicyDefinitionResource> GetSubscriptionPolicyDefinition(string policyDefinitionName, CancellationToken cancellationToken = default)
         {
@@ -120,8 +124,13 @@ namespace MgmtExtensionResource.Mocking
         /// <param name="location"> The location of the domain name. </param>
         /// <param name="domainNameLabel"> The domain name to be verified. It must conform to the following regular expression: ^[a-z][a-z0-9-]{1,61}[a-z0-9]$. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="location"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="location"/> or <paramref name="domainNameLabel"/> is null. </exception>
         public virtual async Task<Response<DnsNameAvailabilityResult>> CheckDnsNameAvailabilityAsync(string location, string domainNameLabel, CancellationToken cancellationToken = default)
         {
+            Argument.AssertNotNullOrEmpty(location, nameof(location));
+            Argument.AssertNotNull(domainNameLabel, nameof(domainNameLabel));
+
             using var scope = DefaultClientDiagnostics.CreateScope("MgmtExtensionResourceSubscriptionMockingExtension.CheckDnsNameAvailability");
             scope.Start();
             try
@@ -152,8 +161,13 @@ namespace MgmtExtensionResource.Mocking
         /// <param name="location"> The location of the domain name. </param>
         /// <param name="domainNameLabel"> The domain name to be verified. It must conform to the following regular expression: ^[a-z][a-z0-9-]{1,61}[a-z0-9]$. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="location"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="location"/> or <paramref name="domainNameLabel"/> is null. </exception>
         public virtual Response<DnsNameAvailabilityResult> CheckDnsNameAvailability(string location, string domainNameLabel, CancellationToken cancellationToken = default)
         {
+            Argument.AssertNotNullOrEmpty(location, nameof(location));
+            Argument.AssertNotNull(domainNameLabel, nameof(domainNameLabel));
+
             using var scope = DefaultClientDiagnostics.CreateScope("MgmtExtensionResourceSubscriptionMockingExtension.CheckDnsNameAvailability");
             scope.Start();
             try
@@ -183,8 +197,11 @@ namespace MgmtExtensionResource.Mocking
         /// </summary>
         /// <param name="content"> Information to validate. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         public virtual async Task<Response> ValidateSomethingOrphanedPostAsync(ValidateSomethingContent content, CancellationToken cancellationToken = default)
         {
+            Argument.AssertNotNull(content, nameof(content));
+
             using var scope = OrphanedPostClientDiagnostics.CreateScope("MgmtExtensionResourceSubscriptionMockingExtension.ValidateSomethingOrphanedPost");
             scope.Start();
             try
@@ -214,8 +231,11 @@ namespace MgmtExtensionResource.Mocking
         /// </summary>
         /// <param name="content"> Information to validate. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         public virtual Response ValidateSomethingOrphanedPost(ValidateSomethingContent content, CancellationToken cancellationToken = default)
         {
+            Argument.AssertNotNull(content, nameof(content));
+
             using var scope = OrphanedPostClientDiagnostics.CreateScope("MgmtExtensionResourceSubscriptionMockingExtension.ValidateSomethingOrphanedPost");
             scope.Start();
             try

@@ -18,7 +18,7 @@ using MgmtMockAndSample.Models;
 namespace MgmtMockAndSample.Mocking
 {
     /// <summary> A class to add extension methods to SubscriptionResource. </summary>
-    internal partial class MgmtMockAndSampleSubscriptionMockingExtension : ArmResource
+    public partial class MgmtMockAndSampleSubscriptionMockingExtension : ArmResource
     {
         private ClientDiagnostics _vaultClientDiagnostics;
         private VaultsRestOperations _vaultRestClient;
@@ -87,6 +87,8 @@ namespace MgmtMockAndSample.Mocking
         /// <param name="location"> The location of the deleted vault. </param>
         /// <param name="vaultName"> The name of the vault. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="vaultName"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="vaultName"/> is null. </exception>
         [ForwardsClientCalls]
         public virtual async Task<Response<DeletedVaultResource>> GetDeletedVaultAsync(AzureLocation location, string vaultName, CancellationToken cancellationToken = default)
         {
@@ -109,6 +111,8 @@ namespace MgmtMockAndSample.Mocking
         /// <param name="location"> The location of the deleted vault. </param>
         /// <param name="vaultName"> The name of the vault. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="vaultName"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="vaultName"/> is null. </exception>
         [ForwardsClientCalls]
         public virtual Response<DeletedVaultResource> GetDeletedVault(AzureLocation location, string vaultName, CancellationToken cancellationToken = default)
         {
@@ -118,9 +122,13 @@ namespace MgmtMockAndSample.Mocking
         /// <summary> Gets a collection of VirtualMachineExtensionImageResources in the SubscriptionResource. </summary>
         /// <param name="location"> The name of a supported Azure region. </param>
         /// <param name="publisherName"> The String to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="publisherName"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="publisherName"/> is null. </exception>
         /// <returns> An object representing collection of VirtualMachineExtensionImageResources and their operations over a VirtualMachineExtensionImageResource. </returns>
         public virtual VirtualMachineExtensionImageCollection GetVirtualMachineExtensionImages(AzureLocation location, string publisherName)
         {
+            Argument.AssertNotNullOrEmpty(publisherName, nameof(publisherName));
+
             return new VirtualMachineExtensionImageCollection(Client, Id, location, publisherName);
         }
 
@@ -142,6 +150,8 @@ namespace MgmtMockAndSample.Mocking
         /// <param name="type"> The String to use. </param>
         /// <param name="version"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="publisherName"/>, <paramref name="type"/> or <paramref name="version"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="publisherName"/>, <paramref name="type"/> or <paramref name="version"/> is null. </exception>
         [ForwardsClientCalls]
         public virtual async Task<Response<VirtualMachineExtensionImageResource>> GetVirtualMachineExtensionImageAsync(AzureLocation location, string publisherName, string type, string version, CancellationToken cancellationToken = default)
         {
@@ -166,6 +176,8 @@ namespace MgmtMockAndSample.Mocking
         /// <param name="type"> The String to use. </param>
         /// <param name="version"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="publisherName"/>, <paramref name="type"/> or <paramref name="version"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="publisherName"/>, <paramref name="type"/> or <paramref name="version"/> is null. </exception>
         [ForwardsClientCalls]
         public virtual Response<VirtualMachineExtensionImageResource> GetVirtualMachineExtensionImage(AzureLocation location, string publisherName, string type, string version, CancellationToken cancellationToken = default)
         {
@@ -195,6 +207,8 @@ namespace MgmtMockAndSample.Mocking
         /// <param name="location"> The location of the deleted managed HSM. </param>
         /// <param name="name"> The name of the deleted managed HSM. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="name"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
         [ForwardsClientCalls]
         public virtual async Task<Response<DeletedManagedHsmResource>> GetDeletedManagedHsmAsync(AzureLocation location, string name, CancellationToken cancellationToken = default)
         {
@@ -217,6 +231,8 @@ namespace MgmtMockAndSample.Mocking
         /// <param name="location"> The location of the deleted managed HSM. </param>
         /// <param name="name"> The name of the deleted managed HSM. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="name"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
         [ForwardsClientCalls]
         public virtual Response<DeletedManagedHsmResource> GetDeletedManagedHsm(AzureLocation location, string name, CancellationToken cancellationToken = default)
         {
@@ -328,8 +344,11 @@ namespace MgmtMockAndSample.Mocking
         /// </summary>
         /// <param name="content"> The name of the vault. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         public virtual async Task<Response<CheckNameAvailabilityResult>> CheckNameAvailabilityVaultAsync(VaultCheckNameAvailabilityContent content, CancellationToken cancellationToken = default)
         {
+            Argument.AssertNotNull(content, nameof(content));
+
             using var scope = VaultClientDiagnostics.CreateScope("MgmtMockAndSampleSubscriptionMockingExtension.CheckNameAvailabilityVault");
             scope.Start();
             try
@@ -359,8 +378,11 @@ namespace MgmtMockAndSample.Mocking
         /// </summary>
         /// <param name="content"> The name of the vault. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         public virtual Response<CheckNameAvailabilityResult> CheckNameAvailabilityVault(VaultCheckNameAvailabilityContent content, CancellationToken cancellationToken = default)
         {
+            Argument.AssertNotNull(content, nameof(content));
+
             using var scope = VaultClientDiagnostics.CreateScope("MgmtMockAndSampleSubscriptionMockingExtension.CheckNameAvailabilityVault");
             scope.Start();
             try

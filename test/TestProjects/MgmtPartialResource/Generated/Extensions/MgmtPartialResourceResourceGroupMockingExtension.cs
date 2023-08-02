@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Threading;
 using System.Threading.Tasks;
 using Azure;
@@ -15,7 +16,7 @@ using MgmtPartialResource;
 namespace MgmtPartialResource.Mocking
 {
     /// <summary> A class to add extension methods to ResourceGroupResource. </summary>
-    internal partial class MgmtPartialResourceResourceGroupMockingExtension : ArmResource
+    public partial class MgmtPartialResourceResourceGroupMockingExtension : ArmResource
     {
         /// <summary> Initializes a new instance of the <see cref="MgmtPartialResourceResourceGroupMockingExtension"/> class for mocking. </summary>
         protected MgmtPartialResourceResourceGroupMockingExtension()
@@ -58,6 +59,8 @@ namespace MgmtPartialResource.Mocking
         /// <param name="publicIpAddressName"> The name of the public IP address. </param>
         /// <param name="expand"> Expands referenced resources. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="publicIpAddressName"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="publicIpAddressName"/> is null. </exception>
         [ForwardsClientCalls]
         public virtual async Task<Response<PublicIPAddressResource>> GetPublicIPAddressAsync(string publicIpAddressName, string expand = null, CancellationToken cancellationToken = default)
         {
@@ -80,6 +83,8 @@ namespace MgmtPartialResource.Mocking
         /// <param name="publicIpAddressName"> The name of the public IP address. </param>
         /// <param name="expand"> Expands referenced resources. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="publicIpAddressName"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="publicIpAddressName"/> is null. </exception>
         [ForwardsClientCalls]
         public virtual Response<PublicIPAddressResource> GetPublicIPAddress(string publicIpAddressName, string expand = null, CancellationToken cancellationToken = default)
         {

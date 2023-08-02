@@ -12,7 +12,7 @@ using MgmtParamOrdering;
 namespace MgmtParamOrdering.Mocking
 {
     /// <summary> A class to add extension methods to ArmClient. </summary>
-    internal partial class MgmtParamOrderingArmClientMockingExtension : ArmResource
+    public partial class MgmtParamOrderingArmClientMockingExtension : ArmResource
     {
         /// <summary> Initializes a new instance of the <see cref="MgmtParamOrderingArmClientMockingExtension"/> class for mocking. </summary>
         protected MgmtParamOrderingArmClientMockingExtension()

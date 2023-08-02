@@ -15,7 +15,7 @@ using MgmtPropertyBag;
 namespace MgmtPropertyBag.Mocking
 {
     /// <summary> A class to add extension methods to SubscriptionResource. </summary>
-    internal partial class MgmtPropertyBagSubscriptionMockingExtension : ArmResource
+    public partial class MgmtPropertyBagSubscriptionMockingExtension : ArmResource
     {
         private ClientDiagnostics _fooClientDiagnostics;
         private FoosRestOperations _fooRestClient;

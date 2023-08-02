@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Threading;
 using System.Threading.Tasks;
 using Azure;
@@ -15,7 +16,7 @@ using MgmtExpandResourceTypes;
 namespace MgmtExpandResourceTypes.Mocking
 {
     /// <summary> A class to add extension methods to ResourceGroupResource. </summary>
-    internal partial class MgmtExpandResourceTypesResourceGroupMockingExtension : ArmResource
+    public partial class MgmtExpandResourceTypesResourceGroupMockingExtension : ArmResource
     {
         /// <summary> Initializes a new instance of the <see cref="MgmtExpandResourceTypesResourceGroupMockingExtension"/> class for mocking. </summary>
         protected MgmtExpandResourceTypesResourceGroupMockingExtension()
@@ -57,6 +58,8 @@ namespace MgmtExpandResourceTypes.Mocking
         /// </summary>
         /// <param name="zoneName"> The name of the DNS zone (without a terminating dot). </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="zoneName"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="zoneName"/> is null. </exception>
         [ForwardsClientCalls]
         public virtual async Task<Response<ZoneResource>> GetZoneAsync(string zoneName, CancellationToken cancellationToken = default)
         {
@@ -78,6 +81,8 @@ namespace MgmtExpandResourceTypes.Mocking
         /// </summary>
         /// <param name="zoneName"> The name of the DNS zone (without a terminating dot). </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="zoneName"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="zoneName"/> is null. </exception>
         [ForwardsClientCalls]
         public virtual Response<ZoneResource> GetZone(string zoneName, CancellationToken cancellationToken = default)
         {

@@ -12,7 +12,7 @@ using MgmtRenameRules;
 namespace MgmtRenameRules.Mocking
 {
     /// <summary> A class to add extension methods to ArmClient. </summary>
-    internal partial class MgmtRenameRulesArmClientMockingExtension : ArmResource
+    public partial class MgmtRenameRulesArmClientMockingExtension : ArmResource
     {
         /// <summary> Initializes a new instance of the <see cref="MgmtRenameRulesArmClientMockingExtension"/> class for mocking. </summary>
         protected MgmtRenameRulesArmClientMockingExtension()

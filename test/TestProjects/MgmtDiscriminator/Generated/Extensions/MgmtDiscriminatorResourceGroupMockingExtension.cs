@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Threading;
 using System.Threading.Tasks;
 using Azure;
@@ -15,7 +16,7 @@ using MgmtDiscriminator;
 namespace MgmtDiscriminator.Mocking
 {
     /// <summary> A class to add extension methods to ResourceGroupResource. </summary>
-    internal partial class MgmtDiscriminatorResourceGroupMockingExtension : ArmResource
+    public partial class MgmtDiscriminatorResourceGroupMockingExtension : ArmResource
     {
         /// <summary> Initializes a new instance of the <see cref="MgmtDiscriminatorResourceGroupMockingExtension"/> class for mocking. </summary>
         protected MgmtDiscriminatorResourceGroupMockingExtension()
@@ -57,6 +58,8 @@ namespace MgmtDiscriminator.Mocking
         /// </summary>
         /// <param name="name"> Name of the endpoint under the profile which is unique globally. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="name"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
         [ForwardsClientCalls]
         public virtual async Task<Response<DeliveryRuleResource>> GetDeliveryRuleAsync(string name, CancellationToken cancellationToken = default)
         {
@@ -78,6 +81,8 @@ namespace MgmtDiscriminator.Mocking
         /// </summary>
         /// <param name="name"> Name of the endpoint under the profile which is unique globally. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="name"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
         [ForwardsClientCalls]
         public virtual Response<DeliveryRuleResource> GetDeliveryRule(string name, CancellationToken cancellationToken = default)
         {

@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Threading;
 using System.Threading.Tasks;
 using Azure;
@@ -15,7 +16,7 @@ using MgmtResourceName;
 namespace MgmtResourceName.Mocking
 {
     /// <summary> A class to add extension methods to ResourceGroupResource. </summary>
-    internal partial class MgmtResourceNameResourceGroupMockingExtension : ArmResource
+    public partial class MgmtResourceNameResourceGroupMockingExtension : ArmResource
     {
         /// <summary> Initializes a new instance of the <see cref="MgmtResourceNameResourceGroupMockingExtension"/> class for mocking. </summary>
         protected MgmtResourceNameResourceGroupMockingExtension()
@@ -56,6 +57,8 @@ namespace MgmtResourceName.Mocking
         /// </summary>
         /// <param name="machineName"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="machineName"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="machineName"/> is null. </exception>
         [ForwardsClientCalls]
         public virtual async Task<Response<MachineResource>> GetMachineAsync(string machineName, CancellationToken cancellationToken = default)
         {
@@ -76,6 +79,8 @@ namespace MgmtResourceName.Mocking
         /// </summary>
         /// <param name="machineName"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="machineName"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="machineName"/> is null. </exception>
         [ForwardsClientCalls]
         public virtual Response<MachineResource> GetMachine(string machineName, CancellationToken cancellationToken = default)
         {
@@ -103,6 +108,8 @@ namespace MgmtResourceName.Mocking
         /// </summary>
         /// <param name="diskResourceName"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="diskResourceName"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="diskResourceName"/> is null. </exception>
         [ForwardsClientCalls]
         public virtual async Task<Response<Disk>> GetDiskAsync(string diskResourceName, CancellationToken cancellationToken = default)
         {
@@ -123,6 +130,8 @@ namespace MgmtResourceName.Mocking
         /// </summary>
         /// <param name="diskResourceName"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="diskResourceName"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="diskResourceName"/> is null. </exception>
         [ForwardsClientCalls]
         public virtual Response<Disk> GetDisk(string diskResourceName, CancellationToken cancellationToken = default)
         {
@@ -150,6 +159,8 @@ namespace MgmtResourceName.Mocking
         /// </summary>
         /// <param name="memoryResourceName"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="memoryResourceName"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="memoryResourceName"/> is null. </exception>
         [ForwardsClientCalls]
         public virtual async Task<Response<Memory>> GetMemoryAsync(string memoryResourceName, CancellationToken cancellationToken = default)
         {
@@ -170,6 +181,8 @@ namespace MgmtResourceName.Mocking
         /// </summary>
         /// <param name="memoryResourceName"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="memoryResourceName"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="memoryResourceName"/> is null. </exception>
         [ForwardsClientCalls]
         public virtual Response<Memory> GetMemory(string memoryResourceName, CancellationToken cancellationToken = default)
         {
@@ -197,6 +210,8 @@ namespace MgmtResourceName.Mocking
         /// </summary>
         /// <param name="networkResourceName"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="networkResourceName"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="networkResourceName"/> is null. </exception>
         [ForwardsClientCalls]
         public virtual async Task<Response<NetworkResource>> GetNetworkAsync(string networkResourceName, CancellationToken cancellationToken = default)
         {
@@ -217,6 +232,8 @@ namespace MgmtResourceName.Mocking
         /// </summary>
         /// <param name="networkResourceName"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="networkResourceName"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="networkResourceName"/> is null. </exception>
         [ForwardsClientCalls]
         public virtual Response<NetworkResource> GetNetwork(string networkResourceName, CancellationToken cancellationToken = default)
         {
@@ -244,6 +261,8 @@ namespace MgmtResourceName.Mocking
         /// </summary>
         /// <param name="displayResourceName"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="displayResourceName"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="displayResourceName"/> is null. </exception>
         [ForwardsClientCalls]
         public virtual async Task<Response<DisplayResource>> GetDisplayResourceAsync(string displayResourceName, CancellationToken cancellationToken = default)
         {
@@ -264,6 +283,8 @@ namespace MgmtResourceName.Mocking
         /// </summary>
         /// <param name="displayResourceName"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="displayResourceName"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="displayResourceName"/> is null. </exception>
         [ForwardsClientCalls]
         public virtual Response<DisplayResource> GetDisplayResource(string displayResourceName, CancellationToken cancellationToken = default)
         {

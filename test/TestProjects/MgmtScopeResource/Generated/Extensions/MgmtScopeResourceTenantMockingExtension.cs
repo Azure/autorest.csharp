@@ -18,7 +18,7 @@ using MgmtScopeResource.Models;
 namespace MgmtScopeResource.Mocking
 {
     /// <summary> A class to add extension methods to TenantResource. </summary>
-    internal partial class MgmtScopeResourceTenantMockingExtension : ArmResource
+    public partial class MgmtScopeResourceTenantMockingExtension : ArmResource
     {
         private ClientDiagnostics _deploymentExtendedDeploymentsClientDiagnostics;
         private DeploymentsRestOperations _deploymentExtendedDeploymentsRestClient;
@@ -66,6 +66,8 @@ namespace MgmtScopeResource.Mocking
         /// </summary>
         /// <param name="deploymentName"> The name of the deployment. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="deploymentName"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="deploymentName"/> is null. </exception>
         [ForwardsClientCalls]
         public virtual async Task<Response<DeploymentExtendedResource>> GetDeploymentExtendedAsync(string deploymentName, CancellationToken cancellationToken = default)
         {
@@ -87,6 +89,8 @@ namespace MgmtScopeResource.Mocking
         /// </summary>
         /// <param name="deploymentName"> The name of the deployment. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="deploymentName"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="deploymentName"/> is null. </exception>
         [ForwardsClientCalls]
         public virtual Response<DeploymentExtendedResource> GetDeploymentExtended(string deploymentName, CancellationToken cancellationToken = default)
         {
@@ -95,9 +99,12 @@ namespace MgmtScopeResource.Mocking
 
         /// <summary> Gets a collection of ResourceLinkResources in the TenantResource. </summary>
         /// <param name="scope"> The fully qualified ID of the scope for getting the resource links. For example, to list resource links at and under a resource group, set the scope to /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myGroup. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="scope"/> is null. </exception>
         /// <returns> An object representing collection of ResourceLinkResources and their operations over a ResourceLinkResource. </returns>
         public virtual ResourceLinkCollection GetResourceLinks(string scope)
         {
+            Argument.AssertNotNull(scope, nameof(scope));
+
             return new ResourceLinkCollection(Client, Id, scope);
         }
 
@@ -116,6 +123,7 @@ namespace MgmtScopeResource.Mocking
         /// </summary>
         /// <param name="scope"> The fully qualified ID of the scope for getting the resource links. For example, to list resource links at and under a resource group, set the scope to /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myGroup. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="scope"/> is null. </exception>
         [ForwardsClientCalls]
         public virtual async Task<Response<ResourceLinkResource>> GetResourceLinkAsync(string scope, CancellationToken cancellationToken = default)
         {
@@ -137,6 +145,7 @@ namespace MgmtScopeResource.Mocking
         /// </summary>
         /// <param name="scope"> The fully qualified ID of the scope for getting the resource links. For example, to list resource links at and under a resource group, set the scope to /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myGroup. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="scope"/> is null. </exception>
         [ForwardsClientCalls]
         public virtual Response<ResourceLinkResource> GetResourceLink(string scope, CancellationToken cancellationToken = default)
         {
@@ -158,8 +167,11 @@ namespace MgmtScopeResource.Mocking
         /// </summary>
         /// <param name="template"> The template provided to calculate hash. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="template"/> is null. </exception>
         public virtual async Task<Response<TemplateHashResult>> CalculateTemplateHashDeploymentAsync(BinaryData template, CancellationToken cancellationToken = default)
         {
+            Argument.AssertNotNull(template, nameof(template));
+
             using var scope = DeploymentExtendedDeploymentsClientDiagnostics.CreateScope("MgmtScopeResourceTenantMockingExtension.CalculateTemplateHashDeployment");
             scope.Start();
             try
@@ -189,8 +201,11 @@ namespace MgmtScopeResource.Mocking
         /// </summary>
         /// <param name="template"> The template provided to calculate hash. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="template"/> is null. </exception>
         public virtual Response<TemplateHashResult> CalculateTemplateHashDeployment(BinaryData template, CancellationToken cancellationToken = default)
         {
+            Argument.AssertNotNull(template, nameof(template));
+
             using var scope = DeploymentExtendedDeploymentsClientDiagnostics.CreateScope("MgmtScopeResourceTenantMockingExtension.CalculateTemplateHashDeployment");
             scope.Start();
             try

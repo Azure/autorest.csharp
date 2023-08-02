@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Threading;
 using System.Threading.Tasks;
 using Azure;
@@ -15,7 +16,7 @@ using MgmtSingletonResource;
 namespace MgmtSingletonResource.Mocking
 {
     /// <summary> A class to add extension methods to ResourceGroupResource. </summary>
-    internal partial class MgmtSingletonResourceResourceGroupMockingExtension : ArmResource
+    public partial class MgmtSingletonResourceResourceGroupMockingExtension : ArmResource
     {
         /// <summary> Initializes a new instance of the <see cref="MgmtSingletonResourceResourceGroupMockingExtension"/> class for mocking. </summary>
         protected MgmtSingletonResourceResourceGroupMockingExtension()
@@ -56,6 +57,8 @@ namespace MgmtSingletonResource.Mocking
         /// </summary>
         /// <param name="carName"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="carName"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="carName"/> is null. </exception>
         [ForwardsClientCalls]
         public virtual async Task<Response<CarResource>> GetCarAsync(string carName, CancellationToken cancellationToken = default)
         {
@@ -76,6 +79,8 @@ namespace MgmtSingletonResource.Mocking
         /// </summary>
         /// <param name="carName"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="carName"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="carName"/> is null. </exception>
         [ForwardsClientCalls]
         public virtual Response<CarResource> GetCar(string carName, CancellationToken cancellationToken = default)
         {
@@ -104,6 +109,8 @@ namespace MgmtSingletonResource.Mocking
         /// </summary>
         /// <param name="parentName"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="parentName"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="parentName"/> is null. </exception>
         [ForwardsClientCalls]
         public virtual async Task<Response<ParentResource>> GetParentResourceAsync(string parentName, CancellationToken cancellationToken = default)
         {
@@ -125,6 +132,8 @@ namespace MgmtSingletonResource.Mocking
         /// </summary>
         /// <param name="parentName"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="parentName"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="parentName"/> is null. </exception>
         [ForwardsClientCalls]
         public virtual Response<ParentResource> GetParentResource(string parentName, CancellationToken cancellationToken = default)
         {
