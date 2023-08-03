@@ -27,22 +27,5 @@ namespace AutoRest.CSharp.Common.Utilities
                 hashSet.Remove(item);
             });
         }
-
-        private class VisitedModelTypeScope<T> : IDisposable
-        {
-            private HashSet<T> HashSet { get; }
-            private T ItemToRemove { get; }
-
-            internal VisitedModelTypeScope(HashSet<T> hashSet, T item)
-            {
-                HashSet = hashSet;
-                ItemToRemove = item;
-            }
-
-            public void Dispose()
-            {
-                HashSet.Remove(ItemToRemove);
-            }
-        }
     }
 }
