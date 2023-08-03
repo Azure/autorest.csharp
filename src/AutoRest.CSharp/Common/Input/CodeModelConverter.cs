@@ -271,7 +271,10 @@ namespace AutoRest.CSharp.Common.Input
                     : null,
                 DerivedModels: derived,
                 DiscriminatorValue: schema.DiscriminatorValue,
-                DiscriminatorPropertyName: schema.Discriminator?.Property.SerializedName);
+                DiscriminatorPropertyName: schema.Discriminator?.Property.SerializedName,
+                InheritedDictionaryType: schema.Parents?.Immediate.OfType<DictionarySchema>().FirstOrDefault() is {} dictionarySchema
+                    ? (InputDictionaryType)CreateType(dictionarySchema, _modelsCache, false)
+                    : null);
 
             _modelsCache[schema] = model;
             _modelPropertiesCache[schema] = properties;

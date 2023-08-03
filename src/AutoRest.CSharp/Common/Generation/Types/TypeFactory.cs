@@ -80,7 +80,7 @@ namespace AutoRest.CSharp.Generation.Types
                 InputTypeKind.Uri => new CSharpType(typeof(Uri), inputType.IsNullable),
                 _ => new CSharpType(typeof(object), inputType.IsNullable),
             },
-            InputIntrinsicType { Kind: InputIntrinsicTypeKind.Unknown } => typeof(BinaryData),
+            InputIntrinsicType { Kind: InputIntrinsicTypeKind.Unknown } => Configuration.AzureArm ? typeof(BinaryData) : typeof(object),
             CodeModelType cmt => CreateType(cmt.Schema, cmt.IsNullable),
             _ => throw new Exception("Unknown type")
         };

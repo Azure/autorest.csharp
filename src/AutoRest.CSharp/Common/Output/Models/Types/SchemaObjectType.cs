@@ -27,7 +27,6 @@ namespace AutoRest.CSharp.Output.Models.Types
     internal class SchemaObjectType : SerializableObjectType
     {
         private readonly BuildContext? _context;
-        private readonly OutputLibrary? _library;
         private readonly SerializationBuilder _serializationBuilder;
         private readonly TypeFactory _typeFactory;
         private readonly SchemaTypeUsage _usage;
@@ -39,27 +38,22 @@ namespace AutoRest.CSharp.Output.Models.Types
         private CSharpType? _implementsDictionaryType;
 
         protected SchemaObjectType(ObjectSchema objectSchema, TypeFactory typeFactory, BuildContext context)
-            : this(objectSchema, null, typeFactory, context.SchemaUsageProvider, context.DefaultNamespace, context.SourceInputModel)
-        {
-            _context = context;
-        }
-
-        public SchemaObjectType(ObjectSchema objectSchema, OutputLibrary? library, TypeFactory typeFactory, SchemaUsageProvider schemaUsageProvider, string defaultNamespace, SourceInputModel? sourceInputModel)
-            : base(defaultNamespace, sourceInputModel)
+            : base(context.DefaultNamespace, context.SourceInputModel)
         {
             DefaultName = objectSchema.CSharpName();
-            DefaultNamespace = GetDefaultModelNamespace(objectSchema.Extensions?.Namespace, defaultNamespace);
+            DefaultNamespace = GetDefaultModelNamespace(objectSchema.Extensions?.Namespace, context.DefaultNamespace);
             ObjectSchema = objectSchema;
-            _library = library;
+
+            _context = context;
             _typeFactory = typeFactory;
             _serializationBuilder = new SerializationBuilder();
-            _usage = schemaUsageProvider.GetUsage(ObjectSchema);
+            _usage = context.SchemaUsageProvider.GetUsage(ObjectSchema);
 
             var hasUsage = _usage.HasFlag(SchemaTypeUsage.Model);
 
             DefaultAccessibility = objectSchema.Extensions?.Accessibility ?? (hasUsage ? "public" : "internal");
 
-            _sourceTypeMapping = sourceInputModel?.CreateForModel(ExistingType);
+            _sourceTypeMapping = context.SourceInputModel?.CreateForModel(ExistingType);
 
             // Update usage from code attribute
             if (_sourceTypeMapping?.Usage != null)
@@ -93,9 +87,7 @@ namespace AutoRest.CSharp.Output.Models.Types
 
         protected override bool IsAbstract => !Configuration.SuppressAbstractBaseClasses.Contains(DefaultName) && ObjectSchema.Discriminator?.All != null && ObjectSchema.Parents?.All.Count == 0;
 
-        public bool IsInheritableCommonType => ObjectSchema != null &&
-            ObjectSchema.Extensions != null &&
-            (ObjectSchema.Extensions.MgmtReferenceType || ObjectSchema.Extensions.MgmtTypeReferenceType);
+        public bool IsInheritableCommonType => ObjectSchema is { Extensions: {} } && (ObjectSchema.Extensions.MgmtReferenceType || ObjectSchema.Extensions.MgmtTypeReferenceType);
 
         public override ObjectTypeProperty? AdditionalPropertiesProperty
         {
@@ -689,7 +681,7 @@ namespace AutoRest.CSharp.Output.Models.Types
                 return _defaultDerivedType;
 
             _hasCalculatedDefaultDerivedType = true;
-            var library = _library ?? _context?.BaseLibrary;
+            var library = _context?.BaseLibrary;
 
             if (library is null)
                 return null;

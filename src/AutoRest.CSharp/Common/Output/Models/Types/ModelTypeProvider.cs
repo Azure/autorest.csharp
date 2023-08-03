@@ -3,6 +3,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Xml.Linq;
@@ -26,12 +27,10 @@ namespace AutoRest.CSharp.Output.Models.Types
 {
     internal sealed class ModelTypeProvider : SerializableObjectType
     {
-        private ModelTypeProviderFields? _fields;
         private ConstructorSignature? _publicConstructor;
         private ConstructorSignature? _serializationConstructor;
         private readonly InputModelType _inputModel;
         private readonly TypeFactory _typeFactory;
-        private readonly SourceInputModel? _sourceInputModel;
         private readonly InputModelType[]? _derivedTypes;
         private readonly ObjectType? _defaultDerivedType;
 
@@ -40,25 +39,31 @@ namespace AutoRest.CSharp.Output.Models.Types
         public override bool IncludeConverter => false;
         protected override bool IsAbstract => !Configuration.SuppressAbstractBaseClasses.Contains(DefaultName) && _inputModel.DiscriminatorPropertyName is not null;
 
-        public ModelTypeProviderFields Fields => _fields ??= EnsureFields();
+        public ModelTypeProviderFields Fields { get; }
         public ConstructorSignature InitializationConstructorSignature => _publicConstructor ??= EnsurePublicConstructorSignature();
         public ConstructorSignature SerializationConstructorSignature => _serializationConstructor ??= EnsureSerializationConstructorSignature();
 
-        public override ObjectTypeProperty? AdditionalPropertiesProperty => throw new NotImplementedException();
+        public override ObjectTypeProperty? AdditionalPropertiesProperty { get; }
 
         public bool IsPropertyBag => _inputModel.IsPropertyBag;
 
-        public ModelTypeProvider(InputModelType inputModel, string defaultNamespace, SourceInputModel? sourceInputModel, TypeFactory? typeFactory = null, InputModelType[]? derivedTypes = null, ObjectType? defaultDerivedType = null)
+        public ModelTypeProvider(InputModelType inputModel, string defaultNamespace, SourceInputModel? sourceInputModel, TypeFactory typeFactory, InputModelType[]? derivedTypes = null, ObjectType? defaultDerivedType = null)
             : base(defaultNamespace, sourceInputModel)
         {
-            _typeFactory = typeFactory!;
+            _typeFactory = typeFactory;
             _inputModel = inputModel;
-            _sourceInputModel = sourceInputModel;
-            DefaultName = inputModel.Name;
-            DefaultAccessibility = inputModel.Accessibility ?? "public";
+
             _deprecated = inputModel.Deprecated;
             _derivedTypes = derivedTypes;
             _defaultDerivedType = defaultDerivedType ?? (inputModel.IsUnknownDiscriminatorModel ? this : null);
+
+            DefaultName = inputModel.Name;
+            DefaultAccessibility = inputModel.Accessibility ?? "public";
+
+            var modelTypeMapping = sourceInputModel?.CreateForModel(ExistingType);
+            Fields = new ModelTypeProviderFields(_inputModel, _typeFactory, modelTypeMapping);
+
+            AdditionalPropertiesProperty = Fields.AdditionalProperties is {} additionalProperties ? new ObjectTypeProperty(additionalProperties, null) : null;
         }
 
         private MethodSignatureModifiers GetFromResponseModifiers()
@@ -94,11 +99,6 @@ namespace AutoRest.CSharp.Output.Models.Types
         protected override string CreateDescription()
         {
             return _inputModel.Description ?? $"The {_inputModel.Name}.";
-        }
-
-        private ModelTypeProviderFields EnsureFields()
-        {
-            return new ModelTypeProviderFields(_inputModel, _typeFactory, _sourceInputModel?.CreateForModel(ExistingType));
         }
 
         private ConstructorSignature EnsurePublicConstructorSignature()
@@ -168,6 +168,29 @@ namespace AutoRest.CSharp.Output.Models.Types
                 }
             }
             return result;
+        }
+
+        private JsonAdditionalPropertiesSerialization? CreateAdditionalPropertySerialization()
+        {
+            foreach (var model in EnumerateHierarchy().OfType<ModelTypeProvider>())
+            {
+                if (model is { AdditionalPropertiesProperty: {} additionalProperties, _inputModel.InheritedDictionaryType: {} inheritedDictionaryType })
+                {
+                    return CreateAdditionalPropertySerialization(additionalProperties, inheritedDictionaryType);
+                }
+            }
+
+            return null;
+        }
+
+        private static JsonAdditionalPropertiesSerialization CreateAdditionalPropertySerialization(ObjectTypeProperty additionalPropertiesProperty, InputDictionaryType inheritedDictionaryType)
+        {
+            var dictionaryValueType = additionalPropertiesProperty.Declaration.Type.Arguments[1];
+            Debug.Assert(!dictionaryValueType.IsNullable, $"{typeof(JsonCodeWriterExtensions)} implicitly relies on {additionalPropertiesProperty.Declaration.Name} dictionary value being non-nullable");
+            var type = new CSharpType(typeof(Dictionary<,>), additionalPropertiesProperty.Declaration.Type.Arguments);
+            var valueSerialization = SerializationBuilder.BuildJsonSerialization(inheritedDictionaryType.ValueType, dictionaryValueType, false);
+
+            return new JsonAdditionalPropertiesSerialization(additionalPropertiesProperty, valueSerialization, type);
         }
 
         private bool ShouldSkipSerialization(ObjectTypeProperty property)
@@ -303,7 +326,9 @@ namespace AutoRest.CSharp.Output.Models.Types
         protected override IEnumerable<ObjectTypeProperty> BuildProperties()
         {
             foreach (var field in Fields)
+            {
                 yield return new ObjectTypeProperty(field, Fields.GetInputByField(field));
+            }
         }
 
         protected override IEnumerable<ObjectTypeConstructor> BuildConstructors()
@@ -341,7 +366,7 @@ namespace AutoRest.CSharp.Output.Models.Types
         {
             // Serialization uses field and property names that first need to verified for uniqueness
             // For that, FieldDeclaration instances must be written in the main partial class before JsonObjectSerialization is created for the serialization partial class
-            return new(Type, SerializationConstructorSignature.Parameters, CreatePropertySerializations().ToArray(), null, Discriminator, false);
+            return new(Type, SerializationConstructorSignature.Parameters, CreatePropertySerializations().ToArray(), CreateAdditionalPropertySerialization(), Discriminator, false);
         }
 
         protected override XmlObjectSerialization? EnsureXmlSerialization()
@@ -364,12 +389,19 @@ namespace AutoRest.CSharp.Output.Models.Types
             if (IncludeDeserializer)
             {
                 yield return JsonSerializationMethodsBuilder.BuildDeserialize(Declaration, serialization);
-                yield return JsonSerializationMethodsBuilder.BuildFromResponse(this, GetFromResponseModifiers());
             }
 
-            if (IncludeSerializer)
+            if (!Configuration.Generation1ConvenienceClient)
             {
-                yield return JsonSerializationMethodsBuilder.BuildToRequestContent(GetToRequestContentModifiers());
+                if (IncludeDeserializer)
+                {
+                    yield return JsonSerializationMethodsBuilder.BuildFromResponse(this, GetFromResponseModifiers());
+                }
+
+                if (IncludeSerializer)
+                {
+                    yield return JsonSerializationMethodsBuilder.BuildToRequestContent(GetToRequestContentModifiers());
+                }
             }
         }
 
