@@ -85,6 +85,7 @@ export function mapTypeSpecTypeToCSharpInputTypeKind(
         case "Model":
             return getCSharpInputTypeKindByIntrinsicModelName(
                 typespecType.name,
+                format,
                 encode
             );
         case "ModelProperty":
@@ -318,7 +319,6 @@ export function getInputType(
             // emit the base type directly.
             default:
                 const sdkType = getClientType(context, type);
-                console.log(formattedType.format);
                 return {
                     Name: type.name,
                     Kind: getCSharpInputTypeKindByIntrinsicModelName(
