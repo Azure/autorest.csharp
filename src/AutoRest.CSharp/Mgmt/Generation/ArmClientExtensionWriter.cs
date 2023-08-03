@@ -72,16 +72,9 @@ namespace AutoRest.CSharp.Mgmt.Generation
             };
             using (_writer.WriteCommonMethod(signature, null, isAsync, This.Accessibility == "public", SkipParameterValidation))
             {
-                WriteMethodBodyWrapper(signature, isAsync, clientOperation.IsPagingOperation, scopeTypes);
+                WriteMethodBodyWrapper(signature, isAsync, clientOperation.IsPagingOperation);
             }
             _writer.Line();
-        }
-
-        private void WriteMethodBodyWrapper(MethodSignature signature, bool isAsync, bool isPaging, ICollection<FormattableString>? scopeTypes)
-        {
-            WriteScopeResourceTypesValidation(_scopeParameter.Name, scopeTypes);
-
-            WriteMethodBodyWrapper(signature, isAsync, isPaging);
         }
 
         protected override void WriteSingletonResourceGetMethod(Resource resource)
@@ -103,7 +96,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                     GetParametersForSingletonEntry(scopeTypes));
                 using (_writer.WriteCommonMethod(signature, null, false, This.Accessibility == "public", SkipParameterValidation))
                 {
-                    WriteMethodBodyWrapper(signature, false, false, scopeTypes);
+                    WriteMethodBodyWrapper(signature, false, false);
                 }
             }
         }
@@ -127,7 +120,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
                     GetParametersForCollectionEntry(resourceCollection, scopeTypes));
                 using (_writer.WriteCommonMethod(signature, null, false, This.Accessibility == "public", SkipParameterValidation))
                 {
-                    WriteMethodBodyWrapper(signature, false, false, scopeTypes);
+                    WriteMethodBodyWrapper(signature, false, false);
                 }
             }
         }
@@ -155,30 +148,17 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
                 using (_writer.WriteCommonMethodWithoutValidation(signature, getOperation.ReturnsDescription != null ? getOperation.ReturnsDescription(isAsync) : null, isAsync, This.Accessibility == "public"))
                 {
-                    WriteMethodBodyWrapper(signature, isAsync, false, scopeTypes);
+                    WriteMethodBodyWrapper(signature, isAsync, false);
                 }
             }
         }
 
-        private ICollection<FormattableString>? GetScopeTypeStrings(IEnumerable<ResourceTypeSegment>? scopeTypes)
+        internal static ICollection<FormattableString>? GetScopeTypeStrings(IEnumerable<ResourceTypeSegment>? scopeTypes)
         {
             if (scopeTypes == null || !scopeTypes.Any() || scopeTypes.Contains(ResourceTypeSegment.Any))
                 return null;
 
             return scopeTypes.Select(type => (FormattableString)$"{type}").ToArray();
-        }
-
-        private void WriteScopeResourceTypesValidation(string parameterName, ICollection<FormattableString>? types)
-        {
-            if (types == null)
-                return;
-            // validate the scope types
-            var typeAssertions = types.Select(type => (FormattableString)$"!{parameterName:I}.ResourceType.Equals(\"{type}\")").ToArray();
-            var assertion = typeAssertions.Join(" || ");
-            using (_writer.Scope($"if ({assertion})"))
-            {
-                _writer.Line($"throw new {typeof(ArgumentException)}({typeof(string)}.{nameof(string.Format)}(\"Invalid resource type {{0}} expected {types.Join(", ", " or ")}\", {parameterName:I}.ResourceType));");
-            }
         }
 
         /// <summary>

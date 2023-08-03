@@ -141,10 +141,6 @@ namespace MgmtScopeResource
         /// <returns> An object representing collection of GuestConfigurationAssignmentResources and their operations over a GuestConfigurationAssignmentResource. </returns>
         public static GuestConfigurationAssignmentCollection GetGuestConfigurationAssignments(this ArmClient client, ResourceIdentifier scope)
         {
-            if (!scope.ResourceType.Equals("Microsoft.Compute/virtualMachines"))
-            {
-                throw new ArgumentException(string.Format("Invalid resource type {0} expected Microsoft.Compute/virtualMachines", scope.ResourceType));
-            }
             return GetMgmtScopeResourceArmClientMockingExtension(client).GetGuestConfigurationAssignments(scope);
         }
         /// <summary>
@@ -169,10 +165,6 @@ namespace MgmtScopeResource
         [ForwardsClientCalls]
         public static async Task<Response<GuestConfigurationAssignmentResource>> GetGuestConfigurationAssignmentAsync(this ArmClient client, ResourceIdentifier scope, string guestConfigurationAssignmentName, CancellationToken cancellationToken = default)
         {
-            if (!scope.ResourceType.Equals("Microsoft.Compute/virtualMachines"))
-            {
-                throw new ArgumentException(string.Format("Invalid resource type {0} expected Microsoft.Compute/virtualMachines", scope.ResourceType));
-            }
             return await GetMgmtScopeResourceArmClientMockingExtension(client).GetGuestConfigurationAssignmentAsync(scope, guestConfigurationAssignmentName, cancellationToken).ConfigureAwait(false);
         }
         /// <summary>
@@ -197,10 +189,6 @@ namespace MgmtScopeResource
         [ForwardsClientCalls]
         public static Response<GuestConfigurationAssignmentResource> GetGuestConfigurationAssignment(this ArmClient client, ResourceIdentifier scope, string guestConfigurationAssignmentName, CancellationToken cancellationToken = default)
         {
-            if (!scope.ResourceType.Equals("Microsoft.Compute/virtualMachines"))
-            {
-                throw new ArgumentException(string.Format("Invalid resource type {0} expected Microsoft.Compute/virtualMachines", scope.ResourceType));
-            }
             return GetMgmtScopeResourceArmClientMockingExtension(client).GetGuestConfigurationAssignment(scope, guestConfigurationAssignmentName, cancellationToken);
         }
 

@@ -13,16 +13,25 @@ using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Utilities;
 using Azure.Core;
+using Humanizer.Localisation;
 
 namespace AutoRest.CSharp.Mgmt.Generation
 {
     internal sealed class ArmClientExtensionClientWriter : MgmtExtensionClientWriter
     {
+        private readonly Parameter _scopeParameter;
         private MgmtExtensionClient This { get; }
 
         public ArmClientExtensionClientWriter(MgmtExtensionClient extensionClient) : base(extensionClient)
         {
             This = extensionClient;
+            _scopeParameter = new Parameter(
+                Name: "scope",
+                Description: $"The scope that the resource will apply against.",
+                Type: typeof(ResourceIdentifier),
+                DefaultValue: null,
+                Validation: ValidationType.None,
+                Initializer: null);
         }
 
         protected override void WriteCtors()
@@ -68,6 +77,68 @@ namespace AutoRest.CSharp.Mgmt.Generation
             return _writer.WriteCommonMethod(signature, returnDescription, isAsync, This.Accessibility == "public", SkipParameterValidation);
         }
 
+        protected override WriteMethodDelegate GetMethodDelegate(bool isLongRunning, bool isPaging)
+        {
+            var writeBody = base.GetMethodDelegate(isLongRunning, isPaging);
+            return (clientOperation, diagnostic, isAsync) =>
+            {
+                var requestPaths = clientOperation.Select(restOperation => restOperation.RequestPath);
+                var scopeResourceTypes = requestPaths.Select(requestPath => requestPath.GetParameterizedScopeResourceTypes() ?? Enumerable.Empty<ResourceTypeSegment>()).SelectMany(types => types).Distinct();
+                var scopeTypes = ArmClientExtensionWriter.GetScopeTypeStrings(scopeResourceTypes);
+
+                WriteScopeResourceTypesValidation(_scopeParameter.Name, scopeTypes);
+
+                writeBody(clientOperation, diagnostic, isAsync);
+            };
+        }
+
+        /// <summary>
+        /// In ArmClientExtensionClient, its `Id` property is actually dummy, therefore we need to override this method to use `scope` instead of using the `Id` property
+        /// </summary>
+        /// <param name="resource"></param>
+        /// <param name="singletonResourceIdSuffix"></param>
+        /// <param name="signature"></param>
+        protected override void WriteSingletonResourceEntry(Resource resource, SingletonResourceSuffix singletonResourceIdSuffix, MethodSignature signature)
+        {
+            var scopeTypes = ArmClientExtensionWriter.GetScopeTypeStrings(resource.RequestPath.GetParameterizedScopeResourceTypes());
+            WriteScopeResourceTypesValidation(_scopeParameter.Name, scopeTypes);
+
+            _writer.Line($"return new {resource.Type.Name}({ArmClientReference}, {singletonResourceIdSuffix.BuildResourceIdentifier($"{MgmtTypeProvider.ScopeParameter.Name}")});");
+        }
+
+        /// <summary>
+        /// In ArmClientExtensionClient, its `Id` property is actually dummy, therefore we need to override this method to use `scope` instead of using the `Id` property
+        /// </summary>
+        /// <param name="resourceCollection"></param>
+        /// <param name="signature"></param>
+        protected override void WriteResourceCollectionEntry(ResourceCollection resourceCollection, MethodSignature signature)
+        {
+            var scopeTypes = ArmClientExtensionWriter.GetScopeTypeStrings(resourceCollection.RequestPath.GetParameterizedScopeResourceTypes());
+            WriteScopeResourceTypesValidation(_scopeParameter.Name, scopeTypes);
+
+            // we cannot use GetCachedClient here because the Id of this instance will never change.
+            _writer.Append($"return new {resourceCollection.Type}({ArmClientReference}, {MgmtTypeProvider.ScopeParameter.Name}, ");
+            foreach (var parameter in resourceCollection.ExtraConstructorParameters)
+            {
+                _writer.Append($"{parameter.Name}, ");
+            }
+            _writer.RemoveTrailingComma();
+            _writer.LineRaw(");");
+        }
+
+        private void WriteScopeResourceTypesValidation(string parameterName, ICollection<FormattableString>? types)
+        {
+            if (types == null)
+                return;
+            // validate the scope types
+            var typeAssertions = types.Select(type => (FormattableString)$"!{parameterName:I}.ResourceType.Equals(\"{type}\")").ToArray();
+            var assertion = typeAssertions.Join(" || ");
+            using (_writer.Scope($"if ({assertion})"))
+            {
+                _writer.Line($"throw new {typeof(ArgumentException)}({typeof(string)}.{nameof(string.Format)}(\"Invalid resource type {{0}} expected {types.Join(", ", " or ")}\", {parameterName:I}.ResourceType));");
+            }
+        }
+
         private void WriteGetResourceFromIdMethod(Resource resource)
         {
             List<FormattableString> lines = new List<FormattableString>();
@@ -89,16 +160,6 @@ namespace AutoRest.CSharp.Mgmt.Generation
             _writer.Line($"return new {resource.Type.Name}({armVariable}, id);");
         }
 
-        /// <summary>
-        /// In ArmClientExtensionClient, its `Id` property is actually dummy, therefore we need to override this method to use `scope` instead of using the `Id` property
-        /// </summary>
-        /// <param name="resource"></param>
-        /// <param name="singletonResourceIdSuffix"></param>
-        /// <param name="signature"></param>
-        protected override void WriteSingletonResourceEntry(Resource resource, SingletonResourceSuffix singletonResourceIdSuffix, MethodSignature signature)
-        {
-            _writer.Line($"return new {resource.Type.Name}({ArmClientReference}, {singletonResourceIdSuffix.BuildResourceIdentifier($"{MgmtTypeProvider.ScopeParameter.Name}")});");
-        }
 
         /// <summary>
         /// Override this method to prepend the `scope` parameter
@@ -117,23 +178,6 @@ namespace AutoRest.CSharp.Mgmt.Generation
         protected override Parameter[] GetParametersForCollectionEntry(ResourceCollection resourceCollection)
         {
             return base.GetParametersForCollectionEntry(resourceCollection).Prepend(MgmtTypeProvider.ScopeParameter).ToArray();
-        }
-
-        /// <summary>
-        /// In ArmClientExtensionClient, its `Id` property is actually dummy, therefore we need to override this method to use `scope` instead of using the `Id` property
-        /// </summary>
-        /// <param name="resourceCollection"></param>
-        /// <param name="signature"></param>
-        protected override void WriteResourceCollectionEntry(ResourceCollection resourceCollection, MethodSignature signature)
-        {
-            // we cannot use GetCachedClient here because the Id of this instance will never change.
-            _writer.Append($"return new {resourceCollection.Type}({ArmClientReference}, {MgmtTypeProvider.ScopeParameter.Name}, ");
-            foreach (var parameter in resourceCollection.ExtraConstructorParameters)
-            {
-                _writer.Append($"{parameter.Name}, ");
-            }
-            _writer.RemoveTrailingComma();
-            _writer.LineRaw(");");
         }
     }
 }

@@ -121,6 +121,10 @@ namespace MgmtScopeResource.Mocking
         /// <returns> An object representing collection of GuestConfigurationAssignmentResources and their operations over a GuestConfigurationAssignmentResource. </returns>
         public virtual GuestConfigurationAssignmentCollection GetGuestConfigurationAssignments(ResourceIdentifier scope)
         {
+            if (!scope.ResourceType.Equals("Microsoft.Compute/virtualMachines"))
+            {
+                throw new ArgumentException(string.Format("Invalid resource type {0} expected Microsoft.Compute/virtualMachines", scope.ResourceType));
+            }
             return new GuestConfigurationAssignmentCollection(Client, scope);
         }
 
