@@ -761,8 +761,6 @@ namespace MgmtScopeResource
         /// <returns> An object representing collection of ResourceLinkResources and their operations over a ResourceLinkResource. </returns>
         public static ResourceLinkCollection GetResourceLinks(this TenantResource tenantResource, string scope)
         {
-            Argument.AssertNotNull(scope, nameof(scope));
-
             return GetMgmtScopeResourceTenantMockingExtension(tenantResource).GetResourceLinks(scope);
         }
 

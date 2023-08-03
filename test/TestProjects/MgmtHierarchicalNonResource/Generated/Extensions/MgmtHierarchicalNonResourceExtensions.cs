@@ -57,8 +57,6 @@ namespace MgmtHierarchicalNonResource
         /// <returns> An object representing collection of SharedGalleryResources and their operations over a SharedGalleryResource. </returns>
         public static SharedGalleryCollection GetSharedGalleries(this SubscriptionResource subscriptionResource, string location)
         {
-            Argument.AssertNotNullOrEmpty(location, nameof(location));
-
             return GetMgmtHierarchicalNonResourceSubscriptionMockingExtension(subscriptionResource).GetSharedGalleries(location);
         }
 
