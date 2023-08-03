@@ -23,7 +23,7 @@ namespace CadlRanchProjects.Tests
             // we should not call the internal ctor. Because this test case is in the same assembly as the source code therefore we can access to the internal ctor now.
             // our customer never could.
             // when we are calling the internal ctor, we can assign null to collections, which is a case we should avoid.
-            InputModel input = new("test", 1, null, null, new BaseModel(), Enumerable.Empty<int>(), new string[] { null, "test" }, new CollectionItem[] { null }, new Dictionary<string, RecordItem>(), new float?[] { null, 12.3f }, new bool?[] {null, true, false}, null, null, null);
+            InputModel input = new("test", 1, null, null, new BaseModel(), new BaseModel(), Enumerable.Empty<int>(), new string[] { null, "test" }, new CollectionItem[] { null }, new Dictionary<string, RecordItem>(), new float?[] { null, 12.3f }, new bool?[] {null, true, false}, null, null, null);
             RoundTripPrimitiveModel result = await new ModelsTypeSpecClient(host).InputToRoundTripPrimitiveAsync(input);
 
             Assert.AreEqual("test", result.RequiredString);
@@ -57,7 +57,7 @@ namespace CadlRanchProjects.Tests
         [Test]
         public Task Models_InputToRoundTripReadOnly() => Test(async (host) =>
         {
-            InputModel input = new("test", 2, null, null, new DerivedModel(new CollectionItem[] { null }), new int[] { 1, 2 }, new string[] { "a", null}, new CollectionItem[] { new CollectionItem(new Dictionary<string, RecordItem>())}, new Dictionary<string, RecordItem>(), Enumerable.Empty<float?>(), Enumerable.Empty<bool?>(), null, null, null);
+            InputModel input = new("test", 2, null, null, null, new DerivedModel(new CollectionItem[] { null }), new int[] { 1, 2 }, new string[] { "a", null}, new CollectionItem[] { new CollectionItem(new Dictionary<string, RecordItem>())}, new Dictionary<string, RecordItem>(), Enumerable.Empty<float?>(), Enumerable.Empty<bool?>(), null, null, null);
             RoundTripReadOnlyModel result = await new ModelsTypeSpecClient(host).InputToRoundTripReadOnlyAsync(input);
 
             Assert.AreEqual("test", result.RequiredReadonlyString);
