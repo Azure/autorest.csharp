@@ -270,6 +270,9 @@ model InputModel {
   @doc("Required model")
   requiredModel: BaseModel;
 
+  @doc("Required model")
+  requiredModel2: BaseModel;
+
   @doc("Required primitive value type collection")
   requiredIntList: int32[];
 
