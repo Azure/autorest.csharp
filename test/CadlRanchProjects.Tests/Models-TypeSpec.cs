@@ -57,7 +57,7 @@ namespace CadlRanchProjects.Tests
         [Test]
         public Task Models_InputToRoundTripReadOnly() => Test(async (host) =>
         {
-            InputModel input = new("test", 2, null, null, null, new DerivedModel(new CollectionItem[] { null }), new int[] { 1, 2 }, new string[] { "a", null}, new CollectionItem[] { new CollectionItem(new Dictionary<string, RecordItem>())}, new Dictionary<string, RecordItem>(), Enumerable.Empty<float?>(), Enumerable.Empty<bool?>(), null, null, null);
+            InputModel input = new("test", 2, null, null, new DerivedModel(new CollectionItem[] { null }), new DerivedModel(new CollectionItem[] { null }), new int[] { 1, 2 }, new string[] { "a", null}, new CollectionItem[] { new CollectionItem(new Dictionary<string, RecordItem>())}, new Dictionary<string, RecordItem>(), Enumerable.Empty<float?>(), Enumerable.Empty<bool?>(), null, null, null);
             RoundTripReadOnlyModel result = await new ModelsTypeSpecClient(host).InputToRoundTripReadOnlyAsync(input);
 
             Assert.AreEqual("test", result.RequiredReadonlyString);
