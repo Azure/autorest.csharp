@@ -815,6 +815,7 @@
             "properties": {
                 "id": {
                     "readOnly": true,
+                    "format": "arm-id",
                     "type": "string"
                 },
                 "name": {

@@ -179,7 +179,7 @@ Console.WriteLine(response.Status);
     </member>
     <member name="NoConvenienceOptionalBodyAsync(RequestContent,RequestContext)">
 <example>
-This sample shows how to call NoConvenienceOptionalBodyAsync with required parameters and request content.
+This sample shows how to call NoConvenienceOptionalBodyAsync with required request content.
 <code><![CDATA[
 var client = new ConvenienceInCadlClient();
 
@@ -187,14 +187,14 @@ var data = new {
     id = "<id>",
 };
 
-Response response = await client.NoConvenienceOptionalBodyAsync(RequestContent.Create(data), new RequestContext());
+Response response = await client.NoConvenienceOptionalBodyAsync(RequestContent.Create(data));
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
     <member name="NoConvenienceOptionalBody(RequestContent,RequestContext)">
 <example>
-This sample shows how to call NoConvenienceOptionalBody with required parameters and request content.
+This sample shows how to call NoConvenienceOptionalBody with required request content.
 <code><![CDATA[
 var client = new ConvenienceInCadlClient();
 
@@ -202,7 +202,7 @@ var data = new {
     id = "<id>",
 };
 
-Response response = client.NoConvenienceOptionalBody(RequestContent.Create(data), new RequestContext());
+Response response = client.NoConvenienceOptionalBody(RequestContent.Create(data));
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
@@ -499,25 +499,25 @@ Console.WriteLine(result.GetProperty("id").ToString());
 ]]></code>
 </example>
     </member>
-    <member name="ProtocolOptionalModelValueAsync(Model,CancellationToken)">
+    <member name="ProtocolOptionalModelAsync(Model,CancellationToken)">
 <example>
-This sample shows how to call ProtocolOptionalModelValueAsync with required parameters.
+This sample shows how to call ProtocolOptionalModelAsync with required parameters.
 <code><![CDATA[
 var client = new ConvenienceInCadlClient();
 
 var optional = new Model("<id>");
-var result = await client.ProtocolOptionalModelValueAsync(optional);
+var result = await client.ProtocolOptionalModelAsync(optional);
 ]]></code>
 </example>
     </member>
-    <member name="ProtocolOptionalModelValue(Model,CancellationToken)">
+    <member name="ProtocolOptionalModel(Model,CancellationToken)">
 <example>
-This sample shows how to call ProtocolOptionalModelValue with required parameters.
+This sample shows how to call ProtocolOptionalModel with required parameters.
 <code><![CDATA[
 var client = new ConvenienceInCadlClient();
 
 var optional = new Model("<id>");
-var result = client.ProtocolOptionalModelValue(optional);
+var result = client.ProtocolOptionalModel(optional);
 ]]></code>
 </example>
     </member>
@@ -805,25 +805,25 @@ Console.WriteLine(result.GetProperty("id").ToString());
 ]]></code>
 </example>
     </member>
-    <member name="ConvenienceOptionalModelWithOptionalValueAsync(Model,CancellationToken)">
+    <member name="ConvenienceOptionalModelWithOptionalAsync(Model,CancellationToken)">
 <example>
-This sample shows how to call ConvenienceOptionalModelWithOptionalValueAsync with required parameters.
+This sample shows how to call ConvenienceOptionalModelWithOptionalAsync with required parameters.
 <code><![CDATA[
 var client = new ConvenienceInCadlClient();
 
 var optional = new Model("<id>");
-var result = await client.ConvenienceOptionalModelWithOptionalValueAsync(optional);
+var result = await client.ConvenienceOptionalModelWithOptionalAsync(optional);
 ]]></code>
 </example>
     </member>
-    <member name="ConvenienceOptionalModelWithOptionalValue(Model,CancellationToken)">
+    <member name="ConvenienceOptionalModelWithOptional(Model,CancellationToken)">
 <example>
-This sample shows how to call ConvenienceOptionalModelWithOptionalValue with required parameters.
+This sample shows how to call ConvenienceOptionalModelWithOptional with required parameters.
 <code><![CDATA[
 var client = new ConvenienceInCadlClient();
 
 var optional = new Model("<id>");
-var result = client.ConvenienceOptionalModelWithOptionalValue(optional);
+var result = client.ConvenienceOptionalModelWithOptional(optional);
 ]]></code>
 </example>
     </member>
@@ -933,7 +933,7 @@ var result = client.ConvenienceOptionalModelWithRequired(optional);
     </member>
     <member name="ConvenienceOptionalModelWithRequiredAsync(RequestContent,RequestContext)">
 <example>
-This sample shows how to call ConvenienceOptionalModelWithRequiredAsync with required parameters and request content.
+This sample shows how to call ConvenienceOptionalModelWithRequiredAsync with required request content.
 <code><![CDATA[
 var client = new ConvenienceInCadlClient();
 
@@ -941,14 +941,14 @@ var data = new {
     id = "<id>",
 };
 
-Response response = await client.ConvenienceOptionalModelWithRequiredAsync(RequestContent.Create(data), new RequestContext());
+Response response = await client.ConvenienceOptionalModelWithRequiredAsync(RequestContent.Create(data));
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
     <member name="ConvenienceOptionalModelWithRequired(RequestContent,RequestContext)">
 <example>
-This sample shows how to call ConvenienceOptionalModelWithRequired with required parameters and request content.
+This sample shows how to call ConvenienceOptionalModelWithRequired with required request content.
 <code><![CDATA[
 var client = new ConvenienceInCadlClient();
 
@@ -956,7 +956,7 @@ var data = new {
     id = "<id>",
 };
 
-Response response = client.ConvenienceOptionalModelWithRequired(RequestContent.Create(data), new RequestContext());
+Response response = client.ConvenienceOptionalModelWithRequired(RequestContent.Create(data));
 Console.WriteLine(response.Status);
 ]]></code>
 </example>

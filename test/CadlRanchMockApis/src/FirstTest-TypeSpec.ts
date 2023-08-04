@@ -19,6 +19,7 @@ Scenarios.FirstTest_CreateLiteral = passOnSuccess([
         optionalLiteralInt: 456,
         optionalLiteralFloat: 4.56,
         optionalLiteralBool: true,
+        requiredNullableList: []
     });
     return {
       status: 200,
@@ -35,6 +36,7 @@ Scenarios.FirstTest_CreateLiteral = passOnSuccess([
         optionalLiteralInt: 12345,
         optionalLiteralFloat: 123.45,
         optionalLiteralBool: false,
+        requiredNullableList: []
       })
     };
   }),
