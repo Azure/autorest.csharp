@@ -3,6 +3,7 @@
 
 using System;
 using System.Linq;
+using AutoRest.CSharp.Common.Output.Builders;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Output.Models.Types;
 
@@ -19,7 +20,7 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
 
         public static string DefaultNamespace => Context.DefaultNamespace;
 
-        public static string RPName => DefaultNamespace.Split('.').Last();
+        public static string RPName => ClientBuilder.GetRPName(DefaultNamespace);
 
         public static bool IsInitialized => _context is not null;
 
