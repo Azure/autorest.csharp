@@ -22,6 +22,7 @@ using AutoRest.CSharp.Output.Models.Serialization.Json;
 using AutoRest.CSharp.Output.Models.Serialization.Xml;
 using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Utilities;
+using Microsoft.CodeAnalysis;
 
 namespace AutoRest.CSharp.Output.Models.Types
 {
@@ -36,6 +37,7 @@ namespace AutoRest.CSharp.Output.Models.Types
 
         protected override string DefaultName { get; }
         protected override string DefaultAccessibility { get; }
+        protected override TypeKind TypeKind { get; }
         public override bool IncludeConverter => false;
         protected override bool IsAbstract => !Configuration.SuppressAbstractBaseClasses.Contains(DefaultName) && _inputModel.DiscriminatorPropertyName is not null;
 
@@ -59,9 +61,10 @@ namespace AutoRest.CSharp.Output.Models.Types
 
             DefaultName = inputModel.Name;
             DefaultAccessibility = inputModel.Accessibility ?? "public";
+            TypeKind = IsStruct ? TypeKind.Struct : TypeKind.Class;
 
             var modelTypeMapping = sourceInputModel?.CreateForModel(ExistingType);
-            Fields = new ModelTypeProviderFields(_inputModel, _typeFactory, modelTypeMapping);
+            Fields = new ModelTypeProviderFields(_inputModel, _typeFactory, modelTypeMapping, IsStruct);
 
             AdditionalPropertiesProperty = Fields.AdditionalProperties is {} additionalProperties ? new ObjectTypeProperty(additionalProperties, null) : null;
         }

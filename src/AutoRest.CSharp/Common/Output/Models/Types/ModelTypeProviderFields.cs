@@ -32,7 +32,7 @@ namespace AutoRest.CSharp.Output.Models.Types
         public int Count => _fields.Count;
         public FieldDeclaration? AdditionalProperties { get; }
 
-        public ModelTypeProviderFields(InputModelType inputModel, TypeFactory typeFactory, ModelTypeMapping? sourceTypeMapping)
+        public ModelTypeProviderFields(InputModelType inputModel, TypeFactory typeFactory, ModelTypeMapping? sourceTypeMapping, bool isStruct)
         {
             var fields = new List<FieldDeclaration>();
             var fieldsToInputs = new Dictionary<FieldDeclaration, InputModelProperty>();
@@ -70,8 +70,10 @@ namespace AutoRest.CSharp.Output.Models.Types
                 parametersToFields[parameter.Name] = field;
                 // all properties should be included in the serialization ctor
                 serializationParameters.Add(parameter with { Validation = Validation.None });
-                // only required + not readonly + not property with constant value + not discriminator could get into the public ctor
-                if (inputModelProperty is { IsRequired: true, IsReadOnly: false, IsDiscriminator: false, ConstantValue: null })
+
+                // for classes, only required + not readonly + not property with constant value + not discriminator could get into the public ctor
+                // for structs, all properties must be set in public constructor
+                if (isStruct || inputModelProperty is { IsRequired: true, IsReadOnly: false, IsDiscriminator: false, ConstantValue: null })
                 {
                     publicParameters.Add(parameter with { Type = TypeFactory.GetInputType(parameter.Type) });
                 }
@@ -101,6 +103,10 @@ namespace AutoRest.CSharp.Output.Models.Types
 
                 fields.Add(additionalPropertiesField);
                 serializationParameters.Add(additionalPropertiesParameter);
+                if (isStruct)
+                {
+                    publicParameters.Add(additionalPropertiesParameter with {Validation = Validation.AssertNotNull});
+                }
 
                 parametersToFields[additionalPropertiesParameter.Name] = additionalPropertiesField;
 
@@ -187,7 +193,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             var declaration = new CodeWriterDeclaration(fieldName);
             declaration.SetActualName(fieldName);
             return new FieldDeclaration(
-                $"{inputModelProperty.Description}",
+                $"{BuilderHelpers.EscapeXmlDocDescription(inputModelProperty.Description)}",
                 fieldModifiers,
                 originalType,
                 declaration,
