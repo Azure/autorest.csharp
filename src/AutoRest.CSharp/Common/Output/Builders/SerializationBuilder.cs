@@ -15,6 +15,7 @@ using AutoRest.CSharp.Output.Models.Serialization;
 using AutoRest.CSharp.Output.Models.Serialization.Json;
 using AutoRest.CSharp.Output.Models.Serialization.Xml;
 using AutoRest.CSharp.Output.Models.Types;
+using AutoRest.CSharp.Utilities;
 using Azure.ResourceManager.Models;
 
 namespace AutoRest.CSharp.Output.Builders
@@ -258,9 +259,14 @@ namespace AutoRest.CSharp.Output.Builders
 
         private IEnumerable<JsonPropertySerialization> GetPropertySerializationsFromBag(PropertyBag propertyBag, SchemaObjectType objectType)
         {
-            foreach (Property property in propertyBag.Properties)
+            foreach (var objectProperty in propertyBag.Properties)
             {
-                var objectProperty = objectType.GetPropertyForSchemaProperty(property, includeParents: true);
+                var property = objectProperty.SchemaProperty;
+                if (property is null)
+                {
+                    continue;
+                }
+
                 var parameter = objectType.SerializationConstructor.FindParameterByInitializedProperty(objectProperty);
                 if (parameter is null)
                 {
@@ -288,22 +294,94 @@ namespace AutoRest.CSharp.Output.Builders
             }
         }
 
-        public JsonObjectSerialization BuildJsonObjectSerialization(ObjectSchema objectSchema, SchemaObjectType objectType)
+        public static JsonObjectSerialization BuildJsonObjectSerialization(ModelTypeProvider model, InputModelType inputModel)
         {
-            var propertyBag = new PropertyBag();
-            foreach (var objectTypeLevel in objectType.EnumerateHierarchy())
+            var propertyBag = PopulatePropertyBag(model);
+            var properties = GetPropertySerializationsFromBag(propertyBag, inputModel).ToArray();
+            var additionalProperties = CreateAdditionalPropertySerialization(model, inputModel);
+
+            return new(model.Type, model.SerializationConstructor.Signature.Parameters, properties, additionalProperties, model.Discriminator, model.IncludeConverter);
+        }
+
+        private static IEnumerable<JsonPropertySerialization> GetPropertySerializationsFromBag(PropertyBag propertyBag, InputModelType inputModel)
+        {
+            foreach (var property in propertyBag.Properties)
             {
-                foreach (var objectTypeProperty in objectTypeLevel.Properties)
+                if (property.InputModelProperty is null)
+                    continue;
+
+                var declaredName = property.Declaration.Name;
+                var serializedName = property.InputModelProperty.SerializedName ?? property.InputModelProperty.Name;
+                var valueSerialization = BuildJsonSerialization(property.InputModelProperty.Type, property.ValueType, false);
+
+                yield return new JsonPropertySerialization(
+                    declaredName.ToVariableName(),
+                    new MemberExpression(null, declaredName),
+                    serializedName,
+                    property.Declaration.Type,
+                    property.ValueType.IsNullable && property.OptionalViaNullability ? property.ValueType.WithNullable(false) : property.ValueType,
+                    valueSerialization,
+                    property.IsRequired,
+                    ShouldSkipSerialization(inputModel, property),
+                    false,
+                    customSerializationMethodName: property.SerializationMapping?.SerializationValueHook,
+                    customDeserializationMethodName: property.SerializationMapping?.DeserializationValueHook);
+            }
+
+            foreach ((string name, PropertyBag innerBag) in propertyBag.Bag)
+            {
+                JsonPropertySerialization[] serializationProperties = GetPropertySerializationsFromBag(innerBag, inputModel).ToArray();
+                yield return new JsonPropertySerialization(name, serializationProperties);
+            }
+        }
+
+        private static JsonAdditionalPropertiesSerialization? CreateAdditionalPropertySerialization(ModelTypeProvider model, InputModelType inputModel)
+        {
+            foreach (var modelOrBase in model.EnumerateHierarchy().OfType<ModelTypeProvider>())
+            {
+                if (modelOrBase is { AdditionalPropertiesProperty: {} additionalProperties} && inputModel.InheritedDictionaryType is {} inheritedDictionaryType)
                 {
-                    var schemaProperty = objectTypeProperty.SchemaProperty;
-                    if (schemaProperty != null)
-                    {
-                        propertyBag.Properties.Add(schemaProperty);
-                    }
+                    var dictionaryValueType = additionalProperties.Declaration.Type.Arguments[1];
+                    Debug.Assert(!dictionaryValueType.IsNullable, $"{typeof(JsonCodeWriterExtensions)} implicitly relies on {additionalProperties.Declaration.Name} dictionary value being non-nullable");
+
+                    var type = new CSharpType(typeof(Dictionary<,>), additionalProperties.Declaration.Type.Arguments);
+                    var valueSerialization = BuildJsonSerialization(inheritedDictionaryType.ValueType, dictionaryValueType, false);
+
+                    return new JsonAdditionalPropertiesSerialization(additionalProperties, valueSerialization, type);
                 }
             }
 
-            PopulatePropertyBag(propertyBag, 0);
+            return null;
+        }
+
+        private static bool ShouldSkipSerialization(InputModelType inputModel, ObjectTypeProperty property)
+        {
+            if (property.InputModelProperty!.IsDiscriminator)
+            {
+                return false;
+            }
+
+            if (property.InputModelProperty!.ConstantValue is not null)
+            {
+                return false;
+            }
+
+            if (property.InputModelProperty!.IsReadOnly)
+            {
+                return true;
+            }
+
+            if (property.Declaration.Type.IsCollectionType())
+            {
+                return inputModel.Usage is InputModelTypeUsage.Output;
+            }
+
+            return property.IsReadOnly && inputModel.Usage is not InputModelTypeUsage.Input;
+        }
+
+        public JsonObjectSerialization BuildJsonObjectSerialization(ObjectSchema objectSchema, SchemaObjectType objectType)
+        {
+            var propertyBag = PopulatePropertyBag(objectType);
             var properties = GetPropertySerializationsFromBag(propertyBag, objectType).ToArray();
             var additionalProperties = CreateAdditionalProperties(objectSchema, objectType);
             return new JsonObjectSerialization(objectType.Type, objectType.SerializationConstructor.Signature.Parameters, properties, additionalProperties, objectType.Discriminator, objectType.IncludeConverter);
@@ -311,20 +389,44 @@ namespace AutoRest.CSharp.Output.Builders
 
         private class PropertyBag
         {
-            public Dictionary<string, PropertyBag> Bag { get; } = new Dictionary<string, PropertyBag>();
-            public List<Property> Properties { get; } = new List<Property>();
+            public Dictionary<string, PropertyBag> Bag { get; } = new();
+            public List<ObjectTypeProperty> Properties { get; } = new();
+        }
+
+        private static PropertyBag PopulatePropertyBag(ObjectType objectType)
+        {
+            var propertyBag = new PropertyBag();
+            foreach (var objectTypeLevel in objectType.EnumerateHierarchy())
+            {
+                foreach (var objectTypeProperty in objectTypeLevel.Properties)
+                {
+                    if (objectTypeProperty.SchemaProperty is not null || objectTypeProperty.InputModelProperty is not null)
+                    {
+                        propertyBag.Properties.Add(objectTypeProperty);
+                    }
+                }
+            }
+
+            PopulatePropertyBag(propertyBag, 0);
+            return propertyBag;
         }
 
         private static void PopulatePropertyBag(PropertyBag propertyBag, int depthIndex)
         {
-            foreach (Property property in propertyBag.Properties.ToArray())
+            var propertiesCopy = propertyBag.Properties.ToArray();
+            foreach (var property in propertiesCopy)
             {
-                if (depthIndex >= (property.FlattenedNames?.Count ?? 0) - 1)
+                var name = property.SchemaProperty is {FlattenedNames: {} schemaFlattenedNames} && schemaFlattenedNames.Count > depthIndex + 1
+                    ? schemaFlattenedNames.ElementAt(depthIndex)
+                    : property.InputModelProperty is {FlattenedNames: {} inputFlattenedNames} && inputFlattenedNames.Count > depthIndex + 1
+                        ? inputFlattenedNames[depthIndex]
+                        : null;
+
+                if (name is null)
                 {
                     continue;
                 }
 
-                string name = property!.FlattenedNames!.ElementAt(depthIndex);
                 if (!propertyBag.Bag.TryGetValue(name, out PropertyBag? namedBag))
                 {
                     namedBag = new PropertyBag();

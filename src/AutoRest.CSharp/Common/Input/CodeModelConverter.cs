@@ -287,7 +287,8 @@ namespace AutoRest.CSharp.Common.Input
             ConstantValue: property.Schema is ConstantSchema constantSchema ? CreateConstant(constantSchema, constantSchema.Extensions?.Format, _modelsCache) : null,
             IsRequired: property.IsRequired,
             IsReadOnly: property.IsReadOnly,
-            IsDiscriminator: property.IsDiscriminator ?? false
+            IsDiscriminator: property.IsDiscriminator ?? false,
+            FlattenedNames: property.FlattenedNames.ToList()
         );
 
         public static InputOperationParameterKind GetOperationParameterKind(RequestParameter input) => input switch

@@ -165,85 +165,6 @@ namespace AutoRest.CSharp.Output.Models.Types
                 Initializer: new(true, parametersToPassToBase));
         }
 
-        private IEnumerable<JsonPropertySerialization> CreatePropertySerializations()
-        {
-            List<JsonPropertySerialization> result = new List<JsonPropertySerialization>();
-            foreach (var objType in EnumerateHierarchy())
-            {
-                foreach (var property in objType.Properties)
-                {
-                    if (property.InputModelProperty is null)
-                        continue;
-
-                    var declaredName = property.Declaration.Name;
-                    var serializedName = property.InputModelProperty.SerializedName ?? property.InputModelProperty.Name;
-                    var valueSerialization = SerializationBuilder.BuildJsonSerialization(property.InputModelProperty.Type, property.ValueType, false);
-
-                    result.Add(new JsonPropertySerialization(
-                        declaredName.ToVariableName(),
-                        new MemberExpression(null, declaredName),
-                        serializedName,
-                        property.Declaration.Type,
-                        property.ValueType.IsNullable && property.OptionalViaNullability ? property.ValueType.WithNullable(false) : property.ValueType,
-                        valueSerialization,
-                        property.IsRequired,
-                        ShouldSkipSerialization(property),
-                        false,
-                        customSerializationMethodName: property.SerializationMapping?.SerializationValueHook,
-                        customDeserializationMethodName: property.SerializationMapping?.DeserializationValueHook));
-                }
-            }
-            return result;
-        }
-
-        private JsonAdditionalPropertiesSerialization? CreateAdditionalPropertySerialization()
-        {
-            foreach (var model in EnumerateHierarchy().OfType<ModelTypeProvider>())
-            {
-                if (model is { AdditionalPropertiesProperty: {} additionalProperties, _inputModel.InheritedDictionaryType: {} inheritedDictionaryType })
-                {
-                    return CreateAdditionalPropertySerialization(additionalProperties, inheritedDictionaryType);
-                }
-            }
-
-            return null;
-        }
-
-        private static JsonAdditionalPropertiesSerialization CreateAdditionalPropertySerialization(ObjectTypeProperty additionalPropertiesProperty, InputDictionaryType inheritedDictionaryType)
-        {
-            var dictionaryValueType = additionalPropertiesProperty.Declaration.Type.Arguments[1];
-            Debug.Assert(!dictionaryValueType.IsNullable, $"{typeof(JsonCodeWriterExtensions)} implicitly relies on {additionalPropertiesProperty.Declaration.Name} dictionary value being non-nullable");
-            var type = new CSharpType(typeof(Dictionary<,>), additionalPropertiesProperty.Declaration.Type.Arguments);
-            var valueSerialization = SerializationBuilder.BuildJsonSerialization(inheritedDictionaryType.ValueType, dictionaryValueType, false);
-
-            return new JsonAdditionalPropertiesSerialization(additionalPropertiesProperty, valueSerialization, type);
-        }
-
-        private bool ShouldSkipSerialization(ObjectTypeProperty property)
-        {
-            if (property.InputModelProperty!.IsDiscriminator)
-            {
-                return false;
-            }
-
-            if (property.InputModelProperty!.ConstantValue is not null)
-            {
-                return false;
-            }
-
-            if (property.InputModelProperty!.IsReadOnly)
-            {
-                return true;
-            }
-
-            if (property.Declaration.Type.IsCollectionType())
-            {
-                return _inputModel.Usage is InputModelTypeUsage.Output;
-            }
-
-            return property.IsReadOnly && _inputModel.Usage is not InputModelTypeUsage.Input;
-        }
-
         private void GetConstructorParameters(IEnumerable<Parameter> parameters, out List<Parameter> fullParameterList, out IEnumerable<Parameter> parametersToPassToBase, bool isInitializer)
         {
             fullParameterList = new List<Parameter>();
@@ -387,7 +308,7 @@ namespace AutoRest.CSharp.Output.Models.Types
         {
             // Serialization uses field and property names that first need to verified for uniqueness
             // For that, FieldDeclaration instances must be written in the main partial class before JsonObjectSerialization is created for the serialization partial class
-            return new(Type, SerializationConstructorSignature.Parameters, CreatePropertySerializations().ToArray(), CreateAdditionalPropertySerialization(), Discriminator, false);
+            return SerializationBuilder.BuildJsonObjectSerialization(this, _inputModel);
         }
 
         protected override XmlObjectSerialization? EnsureXmlSerialization()
