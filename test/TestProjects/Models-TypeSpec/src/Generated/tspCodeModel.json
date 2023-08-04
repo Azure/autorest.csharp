@@ -285,14 +285,25 @@
     },
     {
      "$id": "38",
+     "Name": "requiredModel2",
+     "SerializedName": "requiredModel2",
+     "Description": "Required model",
+     "Type": {
+      "$ref": "37"
+     },
+     "IsRequired": true,
+     "IsReadOnly": false
+    },
+    {
+     "$id": "39",
      "Name": "requiredIntList",
      "SerializedName": "requiredIntList",
      "Description": "Required primitive value type collection",
      "Type": {
-      "$id": "39",
+      "$id": "40",
       "Name": "Array",
       "ElementType": {
-       "$id": "40",
+       "$id": "41",
        "Name": "int32",
        "Kind": "Int32",
        "IsNullable": false
@@ -303,15 +314,15 @@
      "IsReadOnly": false
     },
     {
-     "$id": "41",
+     "$id": "42",
      "Name": "requiredStringList",
      "SerializedName": "requiredStringList",
      "Description": "Required primitive reference type collection",
      "Type": {
-      "$id": "42",
+      "$id": "43",
       "Name": "Array",
       "ElementType": {
-       "$id": "43",
+       "$id": "44",
        "Name": "string",
        "Kind": "String",
        "IsNullable": false
@@ -322,15 +333,15 @@
      "IsReadOnly": false
     },
     {
-     "$id": "44",
+     "$id": "45",
      "Name": "requiredModelList",
      "SerializedName": "requiredModelList",
      "Description": "Required model collection",
      "Type": {
-      "$id": "45",
+      "$id": "46",
       "Name": "Array",
       "ElementType": {
-       "$id": "46",
+       "$id": "47",
        "Name": "CollectionItem",
        "Namespace": "ModelsTypeSpec",
        "Description": "Collection item model",
@@ -338,27 +349,27 @@
        "Usage": "RoundTrip",
        "Properties": [
         {
-         "$id": "47",
+         "$id": "48",
          "Name": "requiredModelRecord",
          "SerializedName": "requiredModelRecord",
          "Description": "Required model record",
          "Type": {
-          "$id": "48",
+          "$id": "49",
           "Name": "Dictionary",
           "KeyType": {
-           "$id": "49",
+           "$id": "50",
            "Name": "string",
            "Kind": "String",
            "IsNullable": false
           },
           "ValueType": {
-           "$id": "50",
+           "$id": "51",
            "Name": "RecordItem",
            "Namespace": "ModelsTypeSpec",
            "Description": "Record item model",
            "IsNullable": false,
            "BaseModel": {
-            "$id": "51",
+            "$id": "52",
             "Name": "DerivedModel",
             "Namespace": "ModelsTypeSpec",
             "Description": "Derived model",
@@ -369,15 +380,15 @@
             "Usage": "RoundTrip",
             "Properties": [
              {
-              "$id": "52",
+              "$id": "53",
               "Name": "requiredList",
               "SerializedName": "requiredList",
               "Description": "Required collection",
               "Type": {
-               "$id": "53",
+               "$id": "54",
                "Name": "Array",
                "ElementType": {
-                "$ref": "46"
+                "$ref": "47"
                },
                "IsNullable": false
               },
@@ -402,21 +413,21 @@
      "IsReadOnly": false
     },
     {
-     "$id": "54",
+     "$id": "55",
      "Name": "requiredModelRecord",
      "SerializedName": "requiredModelRecord",
      "Description": "Required model record",
      "Type": {
-      "$id": "55",
+      "$id": "56",
       "Name": "Dictionary",
       "KeyType": {
-       "$id": "56",
+       "$id": "57",
        "Name": "string",
        "Kind": "String",
        "IsNullable": false
       },
       "ValueType": {
-       "$ref": "50"
+       "$ref": "51"
       },
       "IsNullable": false
      },
@@ -424,15 +435,15 @@
      "IsReadOnly": false
     },
     {
-     "$id": "57",
+     "$id": "58",
      "Name": "requiredCollectionWithNullableFloatElement",
      "SerializedName": "requiredCollectionWithNullableFloatElement",
      "Description": "Required collection of which the element is a nullable float",
      "Type": {
-      "$id": "58",
+      "$id": "59",
       "Name": "Array",
       "ElementType": {
-       "$id": "59",
+       "$id": "60",
        "Name": "float32",
        "Kind": "Float32",
        "IsNullable": true
@@ -443,15 +454,15 @@
      "IsReadOnly": false
     },
     {
-     "$id": "60",
+     "$id": "61",
      "Name": "requiredCollectionWithNullableBooleanElement",
      "SerializedName": "requiredCollectionWithNullableBooleanElement",
      "Description": "Required collection of which the element is a nullable boolean",
      "Type": {
-      "$id": "61",
+      "$id": "62",
       "Name": "Array",
       "ElementType": {
-       "$id": "62",
+       "$id": "63",
        "Name": "boolean",
        "Kind": "Boolean",
        "IsNullable": true
@@ -462,15 +473,15 @@
      "IsReadOnly": false
     },
     {
-     "$id": "63",
+     "$id": "64",
      "Name": "requiredNullableModelList",
      "SerializedName": "requiredNullableModelList",
      "Description": "Required model nullable collection",
      "Type": {
-      "$id": "64",
+      "$id": "65",
       "Name": "Array",
       "ElementType": {
-       "$ref": "46"
+       "$ref": "47"
       },
       "IsNullable": true
      },
@@ -478,15 +489,15 @@
      "IsReadOnly": false
     },
     {
-     "$id": "65",
+     "$id": "66",
      "Name": "requiredNullableStringList",
      "SerializedName": "requiredNullableStringList",
      "Description": "Required string nullable collection",
      "Type": {
-      "$id": "66",
+      "$id": "67",
       "Name": "Array",
       "ElementType": {
-       "$id": "67",
+       "$id": "68",
        "Name": "string",
        "Kind": "String",
        "IsNullable": false
@@ -497,15 +508,15 @@
      "IsReadOnly": false
     },
     {
-     "$id": "68",
+     "$id": "69",
      "Name": "requiredNullableIntList",
      "SerializedName": "requiredNullableIntList",
      "Description": "Required int nullable collection",
      "Type": {
-      "$id": "69",
+      "$id": "70",
       "Name": "Array",
       "ElementType": {
-       "$id": "70",
+       "$id": "71",
        "Name": "int32",
        "Kind": "Int32",
        "IsNullable": false
@@ -516,15 +527,15 @@
      "IsReadOnly": false
     },
     {
-     "$id": "71",
+     "$id": "72",
      "Name": "nonRequiredModelList",
      "SerializedName": "nonRequiredModelList",
      "Description": "Optional model collection",
      "Type": {
-      "$id": "72",
+      "$id": "73",
       "Name": "Array",
       "ElementType": {
-       "$ref": "46"
+       "$ref": "47"
       },
       "IsNullable": false
      },
@@ -532,15 +543,15 @@
      "IsReadOnly": false
     },
     {
-     "$id": "73",
+     "$id": "74",
      "Name": "nonRequiredStringList",
      "SerializedName": "nonRequiredStringList",
      "Description": "Optional string collection",
      "Type": {
-      "$id": "74",
+      "$id": "75",
       "Name": "Array",
       "ElementType": {
-       "$id": "75",
+       "$id": "76",
        "Name": "string",
        "Kind": "String",
        "IsNullable": false
@@ -551,15 +562,15 @@
      "IsReadOnly": false
     },
     {
-     "$id": "76",
+     "$id": "77",
      "Name": "nonRequiredIntList",
      "SerializedName": "nonRequiredIntList",
      "Description": "Optional int collection",
      "Type": {
-      "$id": "77",
+      "$id": "78",
       "Name": "Array",
       "ElementType": {
-       "$id": "78",
+       "$id": "79",
        "Name": "int32",
        "Kind": "Int32",
        "IsNullable": false
@@ -570,15 +581,15 @@
      "IsReadOnly": false
     },
     {
-     "$id": "79",
+     "$id": "80",
      "Name": "nonRequiredNullableModelList",
      "SerializedName": "nonRequiredNullableModelList",
      "Description": "Optional model nullable collection",
      "Type": {
-      "$id": "80",
+      "$id": "81",
       "Name": "Array",
       "ElementType": {
-       "$ref": "46"
+       "$ref": "47"
       },
       "IsNullable": true
      },
@@ -586,15 +597,15 @@
      "IsReadOnly": false
     },
     {
-     "$id": "81",
+     "$id": "82",
      "Name": "nonRequiredNullableStringList",
      "SerializedName": "nonRequiredNullableStringList",
      "Description": "Optional string nullable collection",
      "Type": {
-      "$id": "82",
+      "$id": "83",
       "Name": "Array",
       "ElementType": {
-       "$id": "83",
+       "$id": "84",
        "Name": "string",
        "Kind": "String",
        "IsNullable": false
@@ -605,15 +616,15 @@
      "IsReadOnly": false
     },
     {
-     "$id": "84",
+     "$id": "85",
      "Name": "nonRequiredNullableIntList",
      "SerializedName": "nonRequiredNullableIntList",
      "Description": "Optional int nullable collection",
      "Type": {
-      "$id": "85",
+      "$id": "86",
       "Name": "Array",
       "ElementType": {
-       "$id": "86",
+       "$id": "87",
        "Name": "int32",
        "Kind": "Int32",
        "IsNullable": false
@@ -629,16 +640,16 @@
    "$ref": "37"
   },
   {
-   "$ref": "46"
+   "$ref": "47"
+  },
+  {
+   "$ref": "52"
   },
   {
    "$ref": "51"
   },
   {
-   "$ref": "50"
-  },
-  {
-   "$id": "87",
+   "$id": "88",
    "Name": "RoundTripModel",
    "Namespace": "ModelsTypeSpec",
    "Description": "Model used both as input and output",
@@ -649,12 +660,12 @@
    "Usage": "RoundTrip",
    "Properties": [
     {
-     "$id": "88",
+     "$id": "89",
      "Name": "requiredString",
      "SerializedName": "requiredString",
      "Description": "Required string, illustrating a reference type property.",
      "Type": {
-      "$id": "89",
+      "$id": "90",
       "Name": "string",
       "Kind": "String",
       "IsNullable": false
@@ -663,12 +674,12 @@
      "IsReadOnly": false
     },
     {
-     "$id": "90",
+     "$id": "91",
      "Name": "requiredInt",
      "SerializedName": "requiredInt",
      "Description": "Required int, illustrating a value type property.",
      "Type": {
-      "$id": "91",
+      "$id": "92",
       "Name": "int32",
       "Kind": "Int32",
       "IsNullable": false
@@ -677,12 +688,12 @@
      "IsReadOnly": false
     },
     {
-     "$id": "92",
+     "$id": "93",
      "Name": "nonRequiredString",
      "SerializedName": "nonRequiredString",
      "Description": "Optional string",
      "Type": {
-      "$id": "93",
+      "$id": "94",
       "Name": "string",
       "Kind": "String",
       "IsNullable": false
@@ -691,12 +702,12 @@
      "IsReadOnly": false
     },
     {
-     "$id": "94",
+     "$id": "95",
      "Name": "nonRequiredInt",
      "SerializedName": "nonRequiredInt",
      "Description": "Optional int",
      "Type": {
-      "$id": "95",
+      "$id": "96",
       "Name": "int32",
       "Kind": "Int32",
       "IsNullable": false
@@ -705,12 +716,12 @@
      "IsReadOnly": false
     },
     {
-     "$id": "96",
+     "$id": "97",
      "Name": "requiredNullableInt",
      "SerializedName": "requiredNullableInt",
      "Description": "Required nullable int",
      "Type": {
-      "$id": "97",
+      "$id": "98",
       "Name": "int32",
       "Kind": "Int32",
       "IsNullable": true
@@ -719,12 +730,12 @@
      "IsReadOnly": false
     },
     {
-     "$id": "98",
+     "$id": "99",
      "Name": "requiredNullableString",
      "SerializedName": "requiredNullableString",
      "Description": "Required nullable string",
      "Type": {
-      "$id": "99",
+      "$id": "100",
       "Name": "string",
       "Kind": "String",
       "IsNullable": true
@@ -733,12 +744,12 @@
      "IsReadOnly": false
     },
     {
-     "$id": "100",
+     "$id": "101",
      "Name": "nonRequiredNullableInt",
      "SerializedName": "nonRequiredNullableInt",
      "Description": "Optional nullable int",
      "Type": {
-      "$id": "101",
+      "$id": "102",
       "Name": "int32",
       "Kind": "Int32",
       "IsNullable": true
@@ -747,12 +758,12 @@
      "IsReadOnly": false
     },
     {
-     "$id": "102",
+     "$id": "103",
      "Name": "nonRequiredNullableString",
      "SerializedName": "nonRequiredNullableString",
      "Description": "Optional nullable string",
      "Type": {
-      "$id": "103",
+      "$id": "104",
       "Name": "string",
       "Kind": "String",
       "IsNullable": true
@@ -761,12 +772,12 @@
      "IsReadOnly": false
     },
     {
-     "$id": "104",
+     "$id": "105",
      "Name": "requiredReadonlyInt",
      "SerializedName": "requiredReadonlyInt",
      "Description": "Required readonly int",
      "Type": {
-      "$id": "105",
+      "$id": "106",
       "Name": "int32",
       "Kind": "Int32",
       "IsNullable": false
@@ -775,12 +786,12 @@
      "IsReadOnly": true
     },
     {
-     "$id": "106",
+     "$id": "107",
      "Name": "nonRequiredReadonlyInt",
      "SerializedName": "nonRequiredReadonlyInt",
      "Description": "Optional readonly int",
      "Type": {
-      "$id": "107",
+      "$id": "108",
       "Name": "int32",
       "Kind": "Int32",
       "IsNullable": false
@@ -789,12 +800,12 @@
      "IsReadOnly": true
     },
     {
-     "$id": "108",
+     "$id": "109",
      "Name": "requiredModel",
      "SerializedName": "requiredModel",
      "Description": "Required model with discriminator",
      "Type": {
-      "$id": "109",
+      "$id": "110",
       "Name": "BaseModelWithDiscriminator",
       "Namespace": "ModelsTypeSpec",
       "Description": "Base model with discriminator property.",
@@ -803,7 +814,7 @@
       "Usage": "RoundTrip",
       "Properties": [
        {
-        "$id": "110",
+        "$id": "111",
         "Name": "discriminatorProperty",
         "SerializedName": "discriminatorProperty",
         "Description": "Discriminator",
@@ -811,7 +822,7 @@
         "IsReadOnly": false,
         "IsNullable": false,
         "Type": {
-         "$id": "111",
+         "$id": "112",
          "Name": "string",
          "Kind": "String",
          "IsNullable": false
@@ -819,12 +830,12 @@
         "IsDiscriminator": true
        },
        {
-        "$id": "112",
+        "$id": "113",
         "Name": "optionalPropertyOnBase",
         "SerializedName": "optionalPropertyOnBase",
         "Description": "Optional property on base",
         "Type": {
-         "$id": "113",
+         "$id": "114",
          "Name": "string",
          "Kind": "String",
          "IsNullable": false
@@ -833,12 +844,12 @@
         "IsReadOnly": false
        },
        {
-        "$id": "114",
+        "$id": "115",
         "Name": "requiredPropertyOnBase",
         "SerializedName": "requiredPropertyOnBase",
         "Description": "Required property on base",
         "Type": {
-         "$id": "115",
+         "$id": "116",
          "Name": "int32",
          "Kind": "Int32",
          "IsNullable": false
@@ -852,7 +863,7 @@
      "IsReadOnly": false
     },
     {
-     "$id": "116",
+     "$id": "117",
      "Name": "requiredFixedStringEnum",
      "SerializedName": "requiredFixedStringEnum",
      "Description": "Required fixed string enum",
@@ -863,7 +874,7 @@
      "IsReadOnly": false
     },
     {
-     "$id": "117",
+     "$id": "118",
      "Name": "requiredFixedIntEnum",
      "SerializedName": "requiredFixedIntEnum",
      "Description": "Required fixed int enum",
@@ -874,7 +885,7 @@
      "IsReadOnly": false
     },
     {
-     "$id": "118",
+     "$id": "119",
      "Name": "requiredExtensibleEnum",
      "SerializedName": "requiredExtensibleEnum",
      "Description": "Required extensible enum",
@@ -885,15 +896,15 @@
      "IsReadOnly": false
     },
     {
-     "$id": "119",
+     "$id": "120",
      "Name": "requiredList",
      "SerializedName": "requiredList",
      "Description": "Required collection",
      "Type": {
-      "$id": "120",
+      "$id": "121",
       "Name": "Array",
       "ElementType": {
-       "$ref": "46"
+       "$ref": "47"
       },
       "IsNullable": false
      },
@@ -901,21 +912,21 @@
      "IsReadOnly": false
     },
     {
-     "$id": "121",
+     "$id": "122",
      "Name": "requiredIntRecord",
      "SerializedName": "requiredIntRecord",
      "Description": "Required int record",
      "Type": {
-      "$id": "122",
+      "$id": "123",
       "Name": "Dictionary",
       "KeyType": {
-       "$id": "123",
+       "$id": "124",
        "Name": "string",
        "Kind": "String",
        "IsNullable": false
       },
       "ValueType": {
-       "$id": "124",
+       "$id": "125",
        "Name": "int32",
        "Kind": "Int32",
        "IsNullable": false
@@ -926,46 +937,46 @@
      "IsReadOnly": false
     },
     {
-     "$id": "125",
+     "$id": "126",
      "Name": "requiredStringRecord",
      "SerializedName": "requiredStringRecord",
      "Description": "Required string record",
      "Type": {
-      "$id": "126",
+      "$id": "127",
       "Name": "Dictionary",
       "KeyType": {
-       "$id": "127",
-       "Name": "string",
-       "Kind": "String",
-       "IsNullable": false
-      },
-      "ValueType": {
        "$id": "128",
        "Name": "string",
        "Kind": "String",
        "IsNullable": false
       },
+      "ValueType": {
+       "$id": "129",
+       "Name": "string",
+       "Kind": "String",
+       "IsNullable": false
+      },
       "IsNullable": false
      },
      "IsRequired": true,
      "IsReadOnly": false
     },
     {
-     "$id": "129",
+     "$id": "130",
      "Name": "requiredModelRecord",
      "SerializedName": "requiredModelRecord",
      "Description": "Required Model Record",
      "Type": {
-      "$id": "130",
+      "$id": "131",
       "Name": "Dictionary",
       "KeyType": {
-       "$id": "131",
+       "$id": "132",
        "Name": "string",
        "Kind": "String",
        "IsNullable": false
       },
       "ValueType": {
-       "$ref": "50"
+       "$ref": "51"
       },
       "IsNullable": false
      },
@@ -973,12 +984,12 @@
      "IsReadOnly": false
     },
     {
-     "$id": "132",
+     "$id": "133",
      "Name": "requiredBytes",
      "SerializedName": "requiredBytes",
      "Description": "Required bytes",
      "Type": {
-      "$id": "133",
+      "$id": "134",
       "Name": "bytes",
       "Kind": "Bytes",
       "IsNullable": false
@@ -987,12 +998,12 @@
      "IsReadOnly": false
     },
     {
-     "$id": "134",
+     "$id": "135",
      "Name": "optionalBytes",
      "SerializedName": "optionalBytes",
      "Description": "Optional bytes",
      "Type": {
-      "$id": "135",
+      "$id": "136",
       "Name": "bytes",
       "Kind": "Bytes",
       "IsNullable": false
@@ -1001,15 +1012,15 @@
      "IsReadOnly": false
     },
     {
-     "$id": "136",
+     "$id": "137",
      "Name": "requiredUint8Array",
      "SerializedName": "requiredUint8Array",
      "Description": "Required uint8[]",
      "Type": {
-      "$id": "137",
+      "$id": "138",
       "Name": "Array",
       "ElementType": {
-       "$id": "138",
+       "$id": "139",
        "Name": "uint8",
        "Kind": "Int32",
        "IsNullable": false
@@ -1020,15 +1031,15 @@
      "IsReadOnly": false
     },
     {
-     "$id": "139",
+     "$id": "140",
      "Name": "optionalUint8Array",
      "SerializedName": "optionalUint8Array",
      "Description": "Optional uint8[]",
      "Type": {
-      "$id": "140",
+      "$id": "141",
       "Name": "Array",
       "ElementType": {
-       "$id": "141",
+       "$id": "142",
        "Name": "uint8",
        "Kind": "Int32",
        "IsNullable": false
@@ -1039,12 +1050,12 @@
      "IsReadOnly": false
     },
     {
-     "$id": "142",
+     "$id": "143",
      "Name": "requiredUnknown",
      "SerializedName": "requiredUnknown",
      "Description": "Required unknown",
      "Type": {
-      "$id": "143",
+      "$id": "144",
       "Name": "Intrinsic",
       "Kind": "unknown",
       "IsNullable": false
@@ -1053,12 +1064,12 @@
      "IsReadOnly": false
     },
     {
-     "$id": "144",
+     "$id": "145",
      "Name": "optionalUnknown",
      "SerializedName": "optionalUnknown",
      "Description": "Optional unknown",
      "Type": {
-      "$id": "145",
+      "$id": "146",
       "Name": "Intrinsic",
       "Kind": "unknown",
       "IsNullable": false
@@ -1067,15 +1078,15 @@
      "IsReadOnly": false
     },
     {
-     "$id": "146",
+     "$id": "147",
      "Name": "requiredInt8Array",
      "SerializedName": "requiredInt8Array",
      "Description": "Required int8[]",
      "Type": {
-      "$id": "147",
+      "$id": "148",
       "Name": "Array",
       "ElementType": {
-       "$id": "148",
+       "$id": "149",
        "Name": "int8",
        "Kind": "Int32",
        "IsNullable": false
@@ -1086,15 +1097,15 @@
      "IsReadOnly": false
     },
     {
-     "$id": "149",
+     "$id": "150",
      "Name": "optionalInt8Array",
      "SerializedName": "optionalInt8Array",
      "Description": "Optional int8[]",
      "Type": {
-      "$id": "150",
+      "$id": "151",
       "Name": "Array",
       "ElementType": {
-       "$id": "151",
+       "$id": "152",
        "Name": "int8",
        "Kind": "Int32",
        "IsNullable": false
@@ -1105,15 +1116,15 @@
      "IsReadOnly": false
     },
     {
-     "$id": "152",
+     "$id": "153",
      "Name": "requiredNullableIntList",
      "SerializedName": "requiredNullableIntList",
      "Description": "Required nullable int list",
      "Type": {
-      "$id": "153",
+      "$id": "154",
       "Name": "Array",
       "ElementType": {
-       "$id": "154",
+       "$id": "155",
        "Name": "int32",
        "Kind": "Int32",
        "IsNullable": false
@@ -1124,15 +1135,15 @@
      "IsReadOnly": false
     },
     {
-     "$id": "155",
+     "$id": "156",
      "Name": "requiredNullableStringList",
      "SerializedName": "requiredNullableStringList",
      "Description": "Required nullable string list",
      "Type": {
-      "$id": "156",
+      "$id": "157",
       "Name": "Array",
       "ElementType": {
-       "$id": "157",
+       "$id": "158",
        "Name": "string",
        "Kind": "String",
        "IsNullable": false
@@ -1143,15 +1154,15 @@
      "IsReadOnly": false
     },
     {
-     "$id": "158",
+     "$id": "159",
      "Name": "nonRequiredNullableIntList",
      "SerializedName": "nonRequiredNullableIntList",
      "Description": "Optional nullable model list",
      "Type": {
-      "$id": "159",
+      "$id": "160",
       "Name": "Array",
       "ElementType": {
-       "$id": "160",
+       "$id": "161",
        "Name": "int32",
        "Kind": "Int32",
        "IsNullable": false
@@ -1162,15 +1173,15 @@
      "IsReadOnly": false
     },
     {
-     "$id": "161",
+     "$id": "162",
      "Name": "nonRequiredNullableStringList",
      "SerializedName": "nonRequiredNullableStringList",
      "Description": "Optional nullable string list",
      "Type": {
-      "$id": "162",
+      "$id": "163",
       "Name": "Array",
       "ElementType": {
-       "$id": "163",
+       "$id": "164",
        "Name": "string",
        "Kind": "String",
        "IsNullable": false
@@ -1183,27 +1194,27 @@
    ]
   },
   {
-   "$ref": "109"
+   "$ref": "110"
   },
   {
-   "$id": "164",
+   "$id": "165",
    "Name": "DerivedModelWithDiscriminatorA",
    "Namespace": "ModelsTypeSpec",
    "Description": "Deriver model with discriminator property.",
    "IsNullable": false,
    "DiscriminatorValue": "A",
    "BaseModel": {
-    "$ref": "109"
+    "$ref": "110"
    },
    "Usage": "RoundTrip",
    "Properties": [
     {
-     "$id": "165",
+     "$id": "166",
      "Name": "requiredString",
      "SerializedName": "requiredString",
      "Description": "Required string.",
      "Type": {
-      "$id": "166",
+      "$id": "167",
       "Name": "string",
       "Kind": "String",
       "IsNullable": false
@@ -1214,24 +1225,24 @@
    ]
   },
   {
-   "$id": "167",
+   "$id": "168",
    "Name": "DerivedModelWithDiscriminatorB",
    "Namespace": "ModelsTypeSpec",
    "Description": "Deriver model with discriminator property.",
    "IsNullable": false,
    "DiscriminatorValue": "B",
    "BaseModel": {
-    "$ref": "109"
+    "$ref": "110"
    },
    "Usage": "RoundTrip",
    "Properties": [
     {
-     "$id": "168",
+     "$id": "169",
      "Name": "requiredInt",
      "SerializedName": "requiredInt",
      "Description": "Required int.",
      "Type": {
-      "$id": "169",
+      "$id": "170",
       "Name": "int32",
       "Kind": "Int32",
       "IsNullable": false
@@ -1242,7 +1253,7 @@
    ]
   },
   {
-   "$id": "170",
+   "$id": "171",
    "Name": "RoundTripPrimitiveModel",
    "Namespace": "ModelsTypeSpec",
    "Description": "Model used both as input and output with primitive types",
@@ -1253,12 +1264,12 @@
    "Usage": "RoundTrip",
    "Properties": [
     {
-     "$id": "171",
+     "$id": "172",
      "Name": "requiredString",
      "SerializedName": "requiredString",
      "Description": "Required string, illustrating a reference type property.",
      "Type": {
-      "$id": "172",
+      "$id": "173",
       "Name": "string",
       "Kind": "String",
       "IsNullable": false
@@ -1267,12 +1278,12 @@
      "IsReadOnly": false
     },
     {
-     "$id": "173",
+     "$id": "174",
      "Name": "requiredInt",
      "SerializedName": "requiredInt",
      "Description": "Required int, illustrating a value type property.",
      "Type": {
-      "$id": "174",
+      "$id": "175",
       "Name": "int32",
       "Kind": "Int32",
       "IsNullable": false
@@ -1281,12 +1292,12 @@
      "IsReadOnly": false
     },
     {
-     "$id": "175",
+     "$id": "176",
      "Name": "requiredInt64",
      "SerializedName": "requiredInt64",
      "Description": "Required int64, illustrating a value type property.",
      "Type": {
-      "$id": "176",
+      "$id": "177",
       "Name": "int64",
       "Kind": "Int64",
       "IsNullable": false
@@ -1295,12 +1306,12 @@
      "IsReadOnly": false
     },
     {
-     "$id": "177",
+     "$id": "178",
      "Name": "requiredSafeInt",
      "SerializedName": "requiredSafeInt",
      "Description": "Required safeint, illustrating a value type property.",
      "Type": {
-      "$id": "178",
+      "$id": "179",
       "Name": "safeint",
       "Kind": "Int64",
       "IsNullable": false
@@ -1309,12 +1320,12 @@
      "IsReadOnly": false
     },
     {
-     "$id": "179",
+     "$id": "180",
      "Name": "requiredFloat",
      "SerializedName": "requiredFloat",
      "Description": "Required float, illustrating a value type property.",
      "Type": {
-      "$id": "180",
+      "$id": "181",
       "Name": "float32",
       "Kind": "Float32",
       "IsNullable": false
@@ -1323,12 +1334,12 @@
      "IsReadOnly": false
     },
     {
-     "$id": "181",
+     "$id": "182",
      "Name": "required_Double",
      "SerializedName": "required_Double",
      "Description": "Required double, illustrating a value type property.",
      "Type": {
-      "$id": "182",
+      "$id": "183",
       "Name": "float64",
       "Kind": "Float64",
       "IsNullable": false
@@ -1337,12 +1348,12 @@
      "IsReadOnly": false
     },
     {
-     "$id": "183",
+     "$id": "184",
      "Name": "requiredBoolean",
      "SerializedName": "requiredBoolean",
      "Description": "Required bolean, illustrating a value type property.",
      "Type": {
-      "$id": "184",
+      "$id": "185",
       "Name": "boolean",
       "Kind": "Boolean",
       "IsNullable": false
@@ -1351,12 +1362,12 @@
      "IsReadOnly": false
     },
     {
-     "$id": "185",
+     "$id": "186",
      "Name": "requiredDateTimeOffset",
      "SerializedName": "requiredDateTimeOffset",
      "Description": "Required date time offset, illustrating a reference type property.",
      "Type": {
-      "$id": "186",
+      "$id": "187",
       "Name": "utcDateTime",
       "Kind": "DateTime",
       "IsNullable": false
@@ -1365,12 +1376,12 @@
      "IsReadOnly": false
     },
     {
-     "$id": "187",
+     "$id": "188",
      "Name": "requiredTimeSpan",
      "SerializedName": "requiredTimeSpan",
      "Description": "Required time span, illustrating a value type property.",
      "Type": {
-      "$id": "188",
+      "$id": "189",
       "Name": "duration",
       "Kind": "DurationISO8601",
       "IsNullable": false
@@ -1379,15 +1390,15 @@
      "IsReadOnly": false
     },
     {
-     "$id": "189",
+     "$id": "190",
      "Name": "requiredCollectionWithNullableFloatElement",
      "SerializedName": "requiredCollectionWithNullableFloatElement",
      "Description": "Required collection of which the element is a nullable float",
      "Type": {
-      "$id": "190",
+      "$id": "191",
       "Name": "Array",
       "ElementType": {
-       "$id": "191",
+       "$id": "192",
        "Name": "float32",
        "Kind": "Float32",
        "IsNullable": true
@@ -1400,7 +1411,7 @@
    ]
   },
   {
-   "$id": "192",
+   "$id": "193",
    "Name": "RoundTripOptionalModel",
    "Namespace": "ModelsTypeSpec",
    "Deprecated": "deprecated for test",
@@ -1409,12 +1420,12 @@
    "Usage": "RoundTrip",
    "Properties": [
     {
-     "$id": "193",
+     "$id": "194",
      "Name": "optionalString",
      "SerializedName": "optionalString",
      "Description": "Optional string, illustrating an optional reference type property.",
      "Type": {
-      "$id": "194",
+      "$id": "195",
       "Name": "string",
       "Kind": "String",
       "IsNullable": false
@@ -1423,12 +1434,12 @@
      "IsReadOnly": false
     },
     {
-     "$id": "195",
+     "$id": "196",
      "Name": "optionalInt",
      "SerializedName": "optionalInt",
      "Description": "Optional int, illustrating an optional value type property.",
      "Type": {
-      "$id": "196",
+      "$id": "197",
       "Name": "int32",
       "Kind": "Int32",
       "IsNullable": false
@@ -1437,15 +1448,15 @@
      "IsReadOnly": false
     },
     {
-     "$id": "197",
+     "$id": "198",
      "Name": "optionalStringList",
      "SerializedName": "optionalStringList",
      "Description": "Optional string collection.",
      "Type": {
-      "$id": "198",
+      "$id": "199",
       "Name": "Array",
       "ElementType": {
-       "$id": "199",
+       "$id": "200",
        "Name": "string",
        "Kind": "String",
        "IsNullable": false
@@ -1456,15 +1467,15 @@
      "IsReadOnly": false
     },
     {
-     "$id": "200",
+     "$id": "201",
      "Name": "optionalIntList",
      "SerializedName": "optionalIntList",
      "Description": "Optional int collection.",
      "Type": {
-      "$id": "201",
+      "$id": "202",
       "Name": "Array",
       "ElementType": {
-       "$id": "202",
+       "$id": "203",
        "Name": "int32",
        "Kind": "Int32",
        "IsNullable": false
@@ -1475,15 +1486,15 @@
      "IsReadOnly": false
     },
     {
-     "$id": "203",
+     "$id": "204",
      "Name": "optionalModelList",
      "SerializedName": "optionalModelList",
      "Description": "Optional model collection",
      "Type": {
-      "$id": "204",
+      "$id": "205",
       "Name": "Array",
       "ElementType": {
-       "$ref": "46"
+       "$ref": "47"
       },
       "IsNullable": false
      },
@@ -1491,29 +1502,29 @@
      "IsReadOnly": false
     },
     {
-     "$id": "205",
+     "$id": "206",
      "Name": "optionalModel",
      "SerializedName": "optionalModel",
      "Description": "Optional model.",
      "Type": {
-      "$ref": "51"
+      "$ref": "52"
      },
      "IsRequired": false,
      "IsReadOnly": false
     },
     {
-     "$id": "206",
+     "$id": "207",
      "Name": "optionalModelWithPropertiesOnBase",
      "SerializedName": "optionalModelWithPropertiesOnBase",
      "Description": "Optional model with properties on base",
      "Type": {
-      "$id": "207",
+      "$id": "208",
       "Name": "DerivedModelWithProperties",
       "Namespace": "ModelsTypeSpec",
       "Description": "Derived model with properties",
       "IsNullable": false,
       "BaseModel": {
-       "$id": "208",
+       "$id": "209",
        "Name": "BaseModelWithProperties",
        "Namespace": "ModelsTypeSpec",
        "Description": "Base model with properties",
@@ -1521,12 +1532,12 @@
        "Usage": "None",
        "Properties": [
         {
-         "$id": "209",
+         "$id": "210",
          "Name": "optionalPropertyOnBase",
          "SerializedName": "optionalPropertyOnBase",
          "Description": "Optional properties on base",
          "Type": {
-          "$id": "210",
+          "$id": "211",
           "Name": "string",
           "Kind": "String",
           "IsNullable": false
@@ -1539,15 +1550,15 @@
       "Usage": "RoundTrip",
       "Properties": [
        {
-        "$id": "211",
+        "$id": "212",
         "Name": "requiredList",
         "SerializedName": "requiredList",
         "Description": "Required collection",
         "Type": {
-         "$id": "212",
+         "$id": "213",
          "Name": "Array",
          "ElementType": {
-          "$ref": "46"
+          "$ref": "47"
          },
          "IsNullable": false
         },
@@ -1560,7 +1571,7 @@
      "IsReadOnly": false
     },
     {
-     "$id": "213",
+     "$id": "214",
      "Name": "optionalFixedStringEnum",
      "SerializedName": "optionalFixedStringEnum",
      "Description": "Optional fixed string enum",
@@ -1571,7 +1582,7 @@
      "IsReadOnly": false
     },
     {
-     "$id": "214",
+     "$id": "215",
      "Name": "optionalExtensibleEnum",
      "SerializedName": "optionalExtensibleEnum",
      "Description": "Optional extensible enum",
@@ -1582,21 +1593,21 @@
      "IsReadOnly": false
     },
     {
-     "$id": "215",
+     "$id": "216",
      "Name": "optionalIntRecord",
      "SerializedName": "optionalIntRecord",
      "Description": "Optional int record",
      "Type": {
-      "$id": "216",
+      "$id": "217",
       "Name": "Dictionary",
       "KeyType": {
-       "$id": "217",
+       "$id": "218",
        "Name": "string",
        "Kind": "String",
        "IsNullable": false
       },
       "ValueType": {
-       "$id": "218",
+       "$id": "219",
        "Name": "int32",
        "Kind": "Int32",
        "IsNullable": false
@@ -1607,46 +1618,46 @@
      "IsReadOnly": false
     },
     {
-     "$id": "219",
+     "$id": "220",
      "Name": "optionalStringRecord",
      "SerializedName": "optionalStringRecord",
      "Description": "Optional string record",
      "Type": {
-      "$id": "220",
+      "$id": "221",
       "Name": "Dictionary",
       "KeyType": {
-       "$id": "221",
-       "Name": "string",
-       "Kind": "String",
-       "IsNullable": false
-      },
-      "ValueType": {
        "$id": "222",
        "Name": "string",
        "Kind": "String",
        "IsNullable": false
       },
+      "ValueType": {
+       "$id": "223",
+       "Name": "string",
+       "Kind": "String",
+       "IsNullable": false
+      },
       "IsNullable": false
      },
      "IsRequired": false,
      "IsReadOnly": false
     },
     {
-     "$id": "223",
+     "$id": "224",
      "Name": "optionalModelRecord",
      "SerializedName": "optionalModelRecord",
      "Description": "Optional model record",
      "Type": {
-      "$id": "224",
+      "$id": "225",
       "Name": "Dictionary",
       "KeyType": {
-       "$id": "225",
+       "$id": "226",
        "Name": "string",
        "Kind": "String",
        "IsNullable": false
       },
       "ValueType": {
-       "$ref": "50"
+       "$ref": "51"
       },
       "IsNullable": false
      },
@@ -1654,12 +1665,12 @@
      "IsReadOnly": false
     },
     {
-     "$id": "226",
+     "$id": "227",
      "Name": "optionalPlainDate",
      "SerializedName": "optionalPlainDate",
      "Description": "Optional plainDate",
      "Type": {
-      "$id": "227",
+      "$id": "228",
       "Name": "plainDate",
       "Kind": "Date",
       "IsNullable": false
@@ -1668,12 +1679,12 @@
      "IsReadOnly": false
     },
     {
-     "$id": "228",
+     "$id": "229",
      "Name": "optionalPlainTime",
      "SerializedName": "optionalPlainTime",
      "Description": "Optional plainTime",
      "Type": {
-      "$id": "229",
+      "$id": "230",
       "Name": "plainTime",
       "Kind": "Time",
       "IsNullable": false
@@ -1682,15 +1693,15 @@
      "IsReadOnly": false
     },
     {
-     "$id": "230",
+     "$id": "231",
      "Name": "optionalCollectionWithNullableIntElement",
      "SerializedName": "optionalCollectionWithNullableIntElement",
      "Description": "Optional collection of which the element is a nullable int",
      "Type": {
-      "$id": "231",
+      "$id": "232",
       "Name": "Array",
       "ElementType": {
-       "$id": "232",
+       "$id": "233",
        "Name": "int32",
        "Kind": "Int32",
        "IsNullable": true
@@ -1703,13 +1714,13 @@
    ]
   },
   {
+   "$ref": "209"
+  },
+  {
    "$ref": "208"
   },
   {
-   "$ref": "207"
-  },
-  {
-   "$id": "233",
+   "$id": "234",
    "Name": "RoundTripReadOnlyModel",
    "Namespace": "ModelsTypeSpec",
    "Description": "Output model with readonly properties.",
@@ -1717,12 +1728,12 @@
    "Usage": "Output",
    "Properties": [
     {
-     "$id": "234",
+     "$id": "235",
      "Name": "requiredReadonlyString",
      "SerializedName": "requiredReadonlyString",
      "Description": "Required string, illustrating a readonly reference type property.",
      "Type": {
-      "$id": "235",
+      "$id": "236",
       "Name": "string",
       "Kind": "String",
       "IsNullable": false
@@ -1731,12 +1742,12 @@
      "IsReadOnly": true
     },
     {
-     "$id": "236",
+     "$id": "237",
      "Name": "requiredReadonlyInt",
      "SerializedName": "requiredReadonlyInt",
      "Description": "Required int, illustrating a readonly value type property.",
      "Type": {
-      "$id": "237",
+      "$id": "238",
       "Name": "int32",
       "Kind": "Int32",
       "IsNullable": false
@@ -1745,12 +1756,12 @@
      "IsReadOnly": true
     },
     {
-     "$id": "238",
+     "$id": "239",
      "Name": "optionalReadonlyString",
      "SerializedName": "optionalReadonlyString",
      "Description": "Optional string, illustrating a readonly reference type property.",
      "Type": {
-      "$id": "239",
+      "$id": "240",
       "Name": "string",
       "Kind": "String",
       "IsNullable": false
@@ -1759,12 +1770,12 @@
      "IsReadOnly": true
     },
     {
-     "$id": "240",
+     "$id": "241",
      "Name": "optionalReadonlyInt",
      "SerializedName": "optionalReadonlyInt",
      "Description": "Optional int, illustrating a readonly value type property.",
      "Type": {
-      "$id": "241",
+      "$id": "242",
       "Name": "int32",
       "Kind": "Int32",
       "IsNullable": false
@@ -1773,29 +1784,29 @@
      "IsReadOnly": true
     },
     {
-     "$id": "242",
+     "$id": "243",
      "Name": "requiredReadonlyModel",
      "SerializedName": "requiredReadonlyModel",
      "Description": "Required readonly model.",
      "Type": {
-      "$ref": "51"
+      "$ref": "52"
      },
      "IsRequired": true,
      "IsReadOnly": true
     },
     {
-     "$id": "243",
+     "$id": "244",
      "Name": "optionalReadonlyModel",
      "SerializedName": "optionalReadonlyModel",
      "Description": "Optional readonly model.",
      "Type": {
-      "$ref": "51"
+      "$ref": "52"
      },
      "IsRequired": false,
      "IsReadOnly": true
     },
     {
-     "$id": "244",
+     "$id": "245",
      "Name": "requiredReadonlyFixedStringEnum",
      "SerializedName": "requiredReadonlyFixedStringEnum",
      "Description": "Required readonly fixed string enum",
@@ -1806,7 +1817,7 @@
      "IsReadOnly": true
     },
     {
-     "$id": "245",
+     "$id": "246",
      "Name": "requiredReadonlyExtensibleEnum",
      "SerializedName": "requiredReadonlyExtensibleEnum",
      "Description": "Required readonly extensible enum",
@@ -1817,7 +1828,7 @@
      "IsReadOnly": true
     },
     {
-     "$id": "246",
+     "$id": "247",
      "Name": "optionalReadonlyFixedStringEnum",
      "SerializedName": "optionalReadonlyFixedStringEnum",
      "Description": "Optional readonly fixed string enum",
@@ -1828,7 +1839,7 @@
      "IsReadOnly": true
     },
     {
-     "$id": "247",
+     "$id": "248",
      "Name": "optionalReadonlyExtensibleEnum",
      "SerializedName": "optionalReadonlyExtensibleEnum",
      "Description": "Optional readonly extensible enum",
@@ -1839,15 +1850,15 @@
      "IsReadOnly": true
     },
     {
-     "$id": "248",
+     "$id": "249",
      "Name": "requiredReadonlyStringList",
      "SerializedName": "requiredReadonlyStringList",
      "Description": "Required readonly string collection.",
      "Type": {
-      "$id": "249",
+      "$id": "250",
       "Name": "Array",
       "ElementType": {
-       "$id": "250",
+       "$id": "251",
        "Name": "string",
        "Kind": "String",
        "IsNullable": false
@@ -1858,15 +1869,15 @@
      "IsReadOnly": true
     },
     {
-     "$id": "251",
+     "$id": "252",
      "Name": "requiredReadonlyIntList",
      "SerializedName": "requiredReadonlyIntList",
      "Description": "Required readonly int collection.",
      "Type": {
-      "$id": "252",
+      "$id": "253",
       "Name": "Array",
       "ElementType": {
-       "$id": "253",
+       "$id": "254",
        "Name": "int32",
        "Kind": "Int32",
        "IsNullable": false
@@ -1877,15 +1888,15 @@
      "IsReadOnly": true
     },
     {
-     "$id": "254",
+     "$id": "255",
      "Name": "requiredReadOnlyModelList",
      "SerializedName": "requiredReadOnlyModelList",
      "Description": "Required model collection",
      "Type": {
-      "$id": "255",
+      "$id": "256",
       "Name": "Array",
       "ElementType": {
-       "$ref": "46"
+       "$ref": "47"
       },
       "IsNullable": false
      },
@@ -1893,21 +1904,21 @@
      "IsReadOnly": true
     },
     {
-     "$id": "256",
+     "$id": "257",
      "Name": "requiredReadOnlyIntRecord",
      "SerializedName": "requiredReadOnlyIntRecord",
      "Description": "Required int record",
      "Type": {
-      "$id": "257",
+      "$id": "258",
       "Name": "Dictionary",
       "KeyType": {
-       "$id": "258",
+       "$id": "259",
        "Name": "string",
        "Kind": "String",
        "IsNullable": false
       },
       "ValueType": {
-       "$id": "259",
+       "$id": "260",
        "Name": "int32",
        "Kind": "Int32",
        "IsNullable": false
@@ -1918,46 +1929,46 @@
      "IsReadOnly": true
     },
     {
-     "$id": "260",
+     "$id": "261",
      "Name": "requiredStringRecord",
      "SerializedName": "requiredStringRecord",
      "Description": "Required string record",
      "Type": {
-      "$id": "261",
+      "$id": "262",
       "Name": "Dictionary",
       "KeyType": {
-       "$id": "262",
-       "Name": "string",
-       "Kind": "String",
-       "IsNullable": false
-      },
-      "ValueType": {
        "$id": "263",
        "Name": "string",
        "Kind": "String",
        "IsNullable": false
       },
+      "ValueType": {
+       "$id": "264",
+       "Name": "string",
+       "Kind": "String",
+       "IsNullable": false
+      },
       "IsNullable": false
      },
      "IsRequired": true,
      "IsReadOnly": true
     },
     {
-     "$id": "264",
+     "$id": "265",
      "Name": "requiredReadOnlyModelRecord",
      "SerializedName": "requiredReadOnlyModelRecord",
      "Description": "Required model record",
      "Type": {
-      "$id": "265",
+      "$id": "266",
       "Name": "Dictionary",
       "KeyType": {
-       "$id": "266",
+       "$id": "267",
        "Name": "string",
        "Kind": "String",
        "IsNullable": false
       },
       "ValueType": {
-       "$ref": "50"
+       "$ref": "51"
       },
       "IsNullable": false
      },
@@ -1965,15 +1976,15 @@
      "IsReadOnly": true
     },
     {
-     "$id": "267",
+     "$id": "268",
      "Name": "optionalReadonlyStringList",
      "SerializedName": "optionalReadonlyStringList",
      "Description": "Optional readonly string collection.",
      "Type": {
-      "$id": "268",
+      "$id": "269",
       "Name": "Array",
       "ElementType": {
-       "$id": "269",
+       "$id": "270",
        "Name": "string",
        "Kind": "String",
        "IsNullable": false
@@ -1984,15 +1995,15 @@
      "IsReadOnly": true
     },
     {
-     "$id": "270",
+     "$id": "271",
      "Name": "optionalReadonlyIntList",
      "SerializedName": "optionalReadonlyIntList",
      "Description": "Optional readonly int collection.",
      "Type": {
-      "$id": "271",
+      "$id": "272",
       "Name": "Array",
       "ElementType": {
-       "$id": "272",
+       "$id": "273",
        "Name": "int32",
        "Kind": "Int32",
        "IsNullable": false
@@ -2003,15 +2014,15 @@
      "IsReadOnly": true
     },
     {
-     "$id": "273",
+     "$id": "274",
      "Name": "optionalReadOnlyModelList",
      "SerializedName": "optionalReadOnlyModelList",
      "Description": "Optional model collection",
      "Type": {
-      "$id": "274",
+      "$id": "275",
       "Name": "Array",
       "ElementType": {
-       "$ref": "46"
+       "$ref": "47"
       },
       "IsNullable": false
      },
@@ -2019,21 +2030,21 @@
      "IsReadOnly": true
     },
     {
-     "$id": "275",
+     "$id": "276",
      "Name": "optionalReadOnlyIntRecord",
      "SerializedName": "optionalReadOnlyIntRecord",
      "Description": "Optional int record",
      "Type": {
-      "$id": "276",
+      "$id": "277",
       "Name": "Dictionary",
       "KeyType": {
-       "$id": "277",
+       "$id": "278",
        "Name": "string",
        "Kind": "String",
        "IsNullable": false
       },
       "ValueType": {
-       "$id": "278",
+       "$id": "279",
        "Name": "int32",
        "Kind": "Int32",
        "IsNullable": false
@@ -2044,46 +2055,46 @@
      "IsReadOnly": false
     },
     {
-     "$id": "279",
+     "$id": "280",
      "Name": "optionalReadOnlyStringRecord",
      "SerializedName": "optionalReadOnlyStringRecord",
      "Description": "Optional string record",
      "Type": {
-      "$id": "280",
+      "$id": "281",
       "Name": "Dictionary",
       "KeyType": {
-       "$id": "281",
-       "Name": "string",
-       "Kind": "String",
-       "IsNullable": false
-      },
-      "ValueType": {
        "$id": "282",
        "Name": "string",
        "Kind": "String",
        "IsNullable": false
       },
+      "ValueType": {
+       "$id": "283",
+       "Name": "string",
+       "Kind": "String",
+       "IsNullable": false
+      },
       "IsNullable": false
      },
      "IsRequired": true,
      "IsReadOnly": false
     },
     {
-     "$id": "283",
+     "$id": "284",
      "Name": "optionalModelRecord",
      "SerializedName": "optionalModelRecord",
      "Description": "Optional model record",
      "Type": {
-      "$id": "284",
+      "$id": "285",
       "Name": "Dictionary",
       "KeyType": {
-       "$id": "285",
+       "$id": "286",
        "Name": "string",
        "Kind": "String",
        "IsNullable": false
       },
       "ValueType": {
-       "$ref": "50"
+       "$ref": "51"
       },
       "IsNullable": false
      },
@@ -2091,15 +2102,15 @@
      "IsReadOnly": true
     },
     {
-     "$id": "286",
+     "$id": "287",
      "Name": "requiredCollectionWithNullableIntElement",
      "SerializedName": "requiredCollectionWithNullableIntElement",
      "Description": "Required collection of which the element is a nullable int",
      "Type": {
-      "$id": "287",
+      "$id": "288",
       "Name": "Array",
       "ElementType": {
-       "$id": "288",
+       "$id": "289",
        "Name": "int32",
        "Kind": "Int32",
        "IsNullable": true
@@ -2110,15 +2121,15 @@
      "IsReadOnly": false
     },
     {
-     "$id": "289",
+     "$id": "290",
      "Name": "optionalCollectionWithNullableBooleanElement",
      "SerializedName": "optionalCollectionWithNullableBooleanElement",
      "Description": "Optional collection of which the element is a nullable boolean",
      "Type": {
-      "$id": "290",
+      "$id": "291",
       "Name": "Array",
       "ElementType": {
-       "$id": "291",
+       "$id": "292",
        "Name": "boolean",
        "Kind": "Boolean",
        "IsNullable": true
@@ -2131,7 +2142,7 @@
    ]
   },
   {
-   "$id": "292",
+   "$id": "293",
    "Name": "OutputModel",
    "Namespace": "ModelsTypeSpec",
    "Description": "Model used only as output",
@@ -2139,12 +2150,12 @@
    "Usage": "Output",
    "Properties": [
     {
-     "$id": "293",
+     "$id": "294",
      "Name": "requiredString",
      "SerializedName": "requiredString",
      "Description": "Required string",
      "Type": {
-      "$id": "294",
+      "$id": "295",
       "Name": "string",
       "Kind": "String",
       "IsNullable": false
@@ -2153,12 +2164,12 @@
      "IsReadOnly": false
     },
     {
-     "$id": "295",
+     "$id": "296",
      "Name": "requiredInt",
      "SerializedName": "requiredInt",
      "Description": "Required int",
      "Type": {
-      "$id": "296",
+      "$id": "297",
       "Name": "int32",
       "Kind": "Int32",
       "IsNullable": false
@@ -2167,26 +2178,26 @@
      "IsReadOnly": false
     },
     {
-     "$id": "297",
+     "$id": "298",
      "Name": "requiredModel",
      "SerializedName": "requiredModel",
      "Description": "Required model",
      "Type": {
-      "$ref": "51"
+      "$ref": "52"
      },
      "IsRequired": true,
      "IsReadOnly": false
     },
     {
-     "$id": "298",
+     "$id": "299",
      "Name": "requiredList",
      "SerializedName": "requiredList",
      "Description": "Required collection",
      "Type": {
-      "$id": "299",
+      "$id": "300",
       "Name": "Array",
       "ElementType": {
-       "$ref": "46"
+       "$ref": "47"
       },
       "IsNullable": false
      },
@@ -2194,21 +2205,21 @@
      "IsReadOnly": false
     },
     {
-     "$id": "300",
+     "$id": "301",
      "Name": "requiredModelRecord",
      "SerializedName": "requiredModelRecord",
      "Description": "Required model record",
      "Type": {
-      "$id": "301",
+      "$id": "302",
       "Name": "Dictionary",
       "KeyType": {
-       "$id": "302",
+       "$id": "303",
        "Name": "string",
        "Kind": "String",
        "IsNullable": false
       },
       "ValueType": {
-       "$ref": "50"
+       "$ref": "51"
       },
       "IsNullable": false
      },
@@ -2216,15 +2227,15 @@
      "IsReadOnly": false
     },
     {
-     "$id": "303",
+     "$id": "304",
      "Name": "optionalList",
      "SerializedName": "optionalList",
      "Description": "Optional model collection",
      "Type": {
-      "$id": "304",
+      "$id": "305",
       "Name": "Array",
       "ElementType": {
-       "$ref": "46"
+       "$ref": "47"
       },
       "IsNullable": false
      },
@@ -2232,15 +2243,15 @@
      "IsReadOnly": false
     },
     {
-     "$id": "305",
+     "$id": "306",
      "Name": "optionalNullableList",
      "SerializedName": "optionalNullableList",
      "Description": "Optional model nullable collection",
      "Type": {
-      "$id": "306",
+      "$id": "307",
       "Name": "Array",
       "ElementType": {
-       "$ref": "46"
+       "$ref": "47"
       },
       "IsNullable": true
      },
@@ -2248,21 +2259,21 @@
      "IsReadOnly": false
     },
     {
-     "$id": "307",
+     "$id": "308",
      "Name": "optionalRecord",
      "SerializedName": "optionalRecord",
      "Description": "Optional model record",
      "Type": {
-      "$id": "308",
+      "$id": "309",
       "Name": "Dictionary",
       "KeyType": {
-       "$id": "309",
+       "$id": "310",
        "Name": "string",
        "Kind": "String",
        "IsNullable": false
       },
       "ValueType": {
-       "$ref": "50"
+       "$ref": "51"
       },
       "IsNullable": false
      },
@@ -2270,21 +2281,21 @@
      "IsReadOnly": false
     },
     {
-     "$id": "310",
+     "$id": "311",
      "Name": "optionalNullableRecord",
      "SerializedName": "optionalNullableRecord",
      "Description": "Optional model nullable record",
      "Type": {
-      "$id": "311",
+      "$id": "312",
       "Name": "Dictionary",
       "KeyType": {
-       "$id": "312",
+       "$id": "313",
        "Name": "string",
        "Kind": "String",
        "IsNullable": false
       },
       "ValueType": {
-       "$ref": "50"
+       "$ref": "51"
       },
       "IsNullable": true
      },
@@ -2294,7 +2305,7 @@
    ]
   },
   {
-   "$id": "313",
+   "$id": "314",
    "Name": "InputRecursiveModel",
    "Namespace": "ModelsTypeSpec",
    "Description": "Input model that has property of its own type",
@@ -2302,12 +2313,12 @@
    "Usage": "Input",
    "Properties": [
     {
-     "$id": "314",
+     "$id": "315",
      "Name": "message",
      "SerializedName": "message",
      "Description": "Message",
      "Type": {
-      "$id": "315",
+      "$id": "316",
       "Name": "string",
       "Kind": "String",
       "IsNullable": false
@@ -2316,12 +2327,12 @@
      "IsReadOnly": false
     },
     {
-     "$id": "316",
+     "$id": "317",
      "Name": "inner",
      "SerializedName": "inner",
      "Description": "Required Record",
      "Type": {
-      "$ref": "313"
+      "$ref": "314"
      },
      "IsRequired": false,
      "IsReadOnly": false
@@ -2329,7 +2340,7 @@
    ]
   },
   {
-   "$id": "317",
+   "$id": "318",
    "Name": "RoundTripRecursiveModel",
    "Namespace": "ModelsTypeSpec",
    "Description": "Roundtrip model that has property of its own type",
@@ -2337,12 +2348,12 @@
    "Usage": "RoundTrip",
    "Properties": [
     {
-     "$id": "318",
+     "$id": "319",
      "Name": "message",
      "SerializedName": "message",
      "Description": "Message",
      "Type": {
-      "$id": "319",
+      "$id": "320",
       "Name": "string",
       "Kind": "String",
       "IsNullable": false
@@ -2351,12 +2362,12 @@
      "IsReadOnly": false
     },
     {
-     "$id": "320",
+     "$id": "321",
      "Name": "inner",
      "SerializedName": "inner",
      "Description": "Required Record",
      "Type": {
-      "$ref": "317"
+      "$ref": "318"
      },
      "IsRequired": false,
      "IsReadOnly": false
@@ -2364,7 +2375,7 @@
    ]
   },
   {
-   "$id": "321",
+   "$id": "322",
    "Name": "ErrorModel",
    "Namespace": "ModelsTypeSpec",
    "Description": "Output model that has property of its own type",
@@ -2372,12 +2383,12 @@
    "Usage": "Output",
    "Properties": [
     {
-     "$id": "322",
+     "$id": "323",
      "Name": "message",
      "SerializedName": "message",
      "Description": "Error message",
      "Type": {
-      "$id": "323",
+      "$id": "324",
       "Name": "string",
       "Kind": "String",
       "IsNullable": false
@@ -2386,12 +2397,12 @@
      "IsReadOnly": true
     },
     {
-     "$id": "324",
+     "$id": "325",
      "Name": "innerError",
      "SerializedName": "innerError",
      "Description": "Required Record",
      "Type": {
-      "$ref": "321"
+      "$ref": "322"
      },
      "IsRequired": false,
      "IsReadOnly": true
@@ -2399,7 +2410,7 @@
    ]
   },
   {
-   "$id": "325",
+   "$id": "326",
    "Name": "NoUseBase",
    "Namespace": "ModelsTypeSpec",
    "Description": "Base model",
@@ -2407,12 +2418,12 @@
    "Usage": "None",
    "Properties": [
     {
-     "$id": "326",
+     "$id": "327",
      "Name": "baseModelProp",
      "SerializedName": "baseModelProp",
      "Description": "base model property",
      "Type": {
-      "$id": "327",
+      "$id": "328",
       "Name": "string",
       "Kind": "String",
       "IsNullable": false
@@ -2423,26 +2434,26 @@
    ]
   },
   {
-   "$id": "328",
+   "$id": "329",
    "Name": "RoundTripOnNoUse",
    "Namespace": "ModelsTypeSpec",
    "Description": "Derived model",
    "IsNullable": false,
    "BaseModel": {
-    "$ref": "325"
+    "$ref": "326"
    },
    "Usage": "RoundTrip",
    "Properties": [
     {
-     "$id": "329",
+     "$id": "330",
      "Name": "requiredList",
      "SerializedName": "requiredList",
      "Description": "Required collection",
      "Type": {
-      "$id": "330",
+      "$id": "331",
       "Name": "Array",
       "ElementType": {
-       "$ref": "46"
+       "$ref": "47"
       },
       "IsNullable": false
      },
@@ -2454,21 +2465,21 @@
  ],
  "Clients": [
   {
-   "$id": "331",
+   "$id": "332",
    "Name": "ModelsTypeSpecClient",
    "Description": "CADL project to test various types of models.",
    "Operations": [
     {
-     "$id": "332",
+     "$id": "333",
      "Name": "getOutputDiscriminatorModel",
      "ResourceName": "ModelsTypeSpec",
      "Parameters": [
       {
-       "$id": "333",
+       "$id": "334",
        "Name": "endpoint",
        "NameInRequest": "endpoint",
        "Type": {
-        "$id": "334",
+        "$id": "335",
         "Name": "Uri",
         "Kind": "Uri",
         "IsNullable": false
@@ -2484,11 +2495,11 @@
        "Kind": "Client"
       },
       {
-       "$id": "335",
+       "$id": "336",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "336",
+        "$id": "337",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -2503,20 +2514,20 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "337",
+        "$id": "338",
         "Type": {
-         "$ref": "336"
+         "$ref": "337"
         },
         "Value": "application/json"
        }
       },
       {
-       "$id": "338",
+       "$id": "339",
        "Name": "apiVersion",
        "NameInRequest": "api-version",
        "Description": "",
        "Type": {
-        "$id": "339",
+        "$id": "340",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -2531,9 +2542,9 @@
        "Explode": false,
        "Kind": "Client",
        "DefaultValue": {
-        "$id": "340",
+        "$id": "341",
         "Type": {
-         "$id": "341",
+         "$id": "342",
          "Name": "String",
          "Kind": "String",
          "IsNullable": false
@@ -2544,7 +2555,7 @@
      ],
      "Responses": [
       {
-       "$id": "342",
+       "$id": "343",
        "StatusCodes": [
         200
        ],
@@ -2565,16 +2576,16 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "343",
+     "$id": "344",
      "Name": "inputToRoundTrip",
      "ResourceName": "ModelsTypeSpec",
      "Description": "Input model that has property of its own type",
      "Parameters": [
       {
-       "$ref": "333"
+       "$ref": "334"
       },
       {
-       "$id": "344",
+       "$id": "345",
        "Name": "input",
        "NameInRequest": "input",
        "Type": {
@@ -2591,11 +2602,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "345",
+       "$id": "346",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Type": {
-        "$id": "346",
+        "$id": "347",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -2610,19 +2621,19 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "347",
+        "$id": "348",
         "Type": {
-         "$ref": "346"
+         "$ref": "347"
         },
         "Value": "application/json"
        }
       },
       {
-       "$id": "348",
+       "$id": "349",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "349",
+        "$id": "350",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -2637,25 +2648,25 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "350",
+        "$id": "351",
         "Type": {
-         "$ref": "349"
+         "$ref": "350"
         },
         "Value": "application/json"
        }
       },
       {
-       "$ref": "338"
+       "$ref": "339"
       }
      ],
      "Responses": [
       {
-       "$id": "351",
+       "$id": "352",
        "StatusCodes": [
         200
        ],
        "BodyType": {
-        "$ref": "87"
+        "$ref": "88"
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -2674,16 +2685,16 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "352",
+     "$id": "353",
      "Name": "inputToRoundTripPrimitive",
      "ResourceName": "ModelsTypeSpec",
      "Description": "Input to RoundTripPrimitive",
      "Parameters": [
       {
-       "$ref": "333"
+       "$ref": "334"
       },
       {
-       "$id": "353",
+       "$id": "354",
        "Name": "input",
        "NameInRequest": "input",
        "Type": {
@@ -2700,11 +2711,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "354",
+       "$id": "355",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Type": {
-        "$id": "355",
+        "$id": "356",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -2719,19 +2730,19 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "356",
+        "$id": "357",
         "Type": {
-         "$ref": "355"
+         "$ref": "356"
         },
         "Value": "application/json"
        }
       },
       {
-       "$id": "357",
+       "$id": "358",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "358",
+        "$id": "359",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -2746,25 +2757,25 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "359",
+        "$id": "360",
         "Type": {
-         "$ref": "358"
+         "$ref": "359"
         },
         "Value": "application/json"
        }
       },
       {
-       "$ref": "338"
+       "$ref": "339"
       }
      ],
      "Responses": [
       {
-       "$id": "360",
+       "$id": "361",
        "StatusCodes": [
         200
        ],
        "BodyType": {
-        "$ref": "170"
+        "$ref": "171"
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -2783,20 +2794,20 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "361",
+     "$id": "362",
      "Name": "inputToRoundTripOptional",
      "ResourceName": "ModelsTypeSpec",
      "Description": "Input to RoundTripOptional",
      "Parameters": [
       {
-       "$ref": "333"
+       "$ref": "334"
       },
       {
-       "$id": "362",
+       "$id": "363",
        "Name": "input",
        "NameInRequest": "input",
        "Type": {
-        "$ref": "192"
+        "$ref": "193"
        },
        "Location": "Body",
        "IsRequired": true,
@@ -2809,11 +2820,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "363",
+       "$id": "364",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Type": {
-        "$id": "364",
+        "$id": "365",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -2828,19 +2839,19 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "365",
+        "$id": "366",
         "Type": {
-         "$ref": "364"
+         "$ref": "365"
         },
         "Value": "application/json"
        }
       },
       {
-       "$id": "366",
+       "$id": "367",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "367",
+        "$id": "368",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -2855,25 +2866,25 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "368",
+        "$id": "369",
         "Type": {
-         "$ref": "367"
+         "$ref": "368"
         },
         "Value": "application/json"
        }
       },
       {
-       "$ref": "338"
+       "$ref": "339"
       }
      ],
      "Responses": [
       {
-       "$id": "369",
+       "$id": "370",
        "StatusCodes": [
         200
        ],
        "BodyType": {
-        "$ref": "192"
+        "$ref": "193"
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -2892,17 +2903,17 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "370",
+     "$id": "371",
      "Name": "inputToRoundTripReadOnly",
      "ResourceName": "ModelsTypeSpec",
      "Deprecated": "deprecated for test",
      "Description": "Input to RoundTripReadOnly",
      "Parameters": [
       {
-       "$ref": "333"
+       "$ref": "334"
       },
       {
-       "$id": "371",
+       "$id": "372",
        "Name": "input",
        "NameInRequest": "input",
        "Type": {
@@ -2919,11 +2930,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "372",
+       "$id": "373",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Type": {
-        "$id": "373",
+        "$id": "374",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -2938,19 +2949,19 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "374",
+        "$id": "375",
         "Type": {
-         "$ref": "373"
+         "$ref": "374"
         },
         "Value": "application/json"
        }
       },
       {
-       "$id": "375",
+       "$id": "376",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "376",
+        "$id": "377",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -2965,25 +2976,25 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "377",
+        "$id": "378",
         "Type": {
-         "$ref": "376"
+         "$ref": "377"
         },
         "Value": "application/json"
        }
       },
       {
-       "$ref": "338"
+       "$ref": "339"
       }
      ],
      "Responses": [
       {
-       "$id": "378",
+       "$id": "379",
        "StatusCodes": [
         200
        ],
        "BodyType": {
-        "$ref": "233"
+        "$ref": "234"
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -3002,20 +3013,20 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "379",
+     "$id": "380",
      "Name": "roundTripToOutput",
      "ResourceName": "ModelsTypeSpec",
      "Description": "RoundTrip to Output",
      "Parameters": [
       {
-       "$ref": "333"
+       "$ref": "334"
       },
       {
-       "$id": "380",
+       "$id": "381",
        "Name": "input",
        "NameInRequest": "input",
        "Type": {
-        "$ref": "87"
+        "$ref": "88"
        },
        "Location": "Body",
        "IsRequired": true,
@@ -3028,11 +3039,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "381",
+       "$id": "382",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Type": {
-        "$id": "382",
+        "$id": "383",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -3047,19 +3058,19 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "383",
+        "$id": "384",
         "Type": {
-         "$ref": "382"
+         "$ref": "383"
         },
         "Value": "application/json"
        }
       },
       {
-       "$id": "384",
+       "$id": "385",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "385",
+        "$id": "386",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -3074,25 +3085,25 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "386",
+        "$id": "387",
         "Type": {
-         "$ref": "385"
+         "$ref": "386"
         },
         "Value": "application/json"
        }
       },
       {
-       "$ref": "338"
+       "$ref": "339"
       }
      ],
      "Responses": [
       {
-       "$id": "387",
+       "$id": "388",
        "StatusCodes": [
         200
        ],
        "BodyType": {
-        "$ref": "292"
+        "$ref": "293"
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -3111,20 +3122,20 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "388",
+     "$id": "389",
      "Name": "InputRecursive",
      "ResourceName": "ModelsTypeSpec",
      "Description": "Input recursive model",
      "Parameters": [
       {
-       "$ref": "333"
+       "$ref": "334"
       },
       {
-       "$id": "389",
+       "$id": "390",
        "Name": "input",
        "NameInRequest": "input",
        "Type": {
-        "$ref": "313"
+        "$ref": "314"
        },
        "Location": "Body",
        "IsRequired": true,
@@ -3137,11 +3148,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "390",
+       "$id": "391",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Type": {
-        "$id": "391",
+        "$id": "392",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -3156,19 +3167,19 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "392",
+        "$id": "393",
         "Type": {
-         "$ref": "391"
+         "$ref": "392"
         },
         "Value": "application/json"
        }
       },
       {
-       "$id": "393",
+       "$id": "394",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "394",
+        "$id": "395",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -3183,20 +3194,20 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "395",
+        "$id": "396",
         "Type": {
-         "$ref": "394"
+         "$ref": "395"
         },
         "Value": "application/json"
        }
       },
       {
-       "$ref": "338"
+       "$ref": "339"
       }
      ],
      "Responses": [
       {
-       "$id": "396",
+       "$id": "397",
        "StatusCodes": [
         200
        ],
@@ -3217,20 +3228,20 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "397",
+     "$id": "398",
      "Name": "roundTripRecursive",
      "ResourceName": "ModelsTypeSpec",
      "Description": "RoundTrip recursive model",
      "Parameters": [
       {
-       "$ref": "333"
+       "$ref": "334"
       },
       {
-       "$id": "398",
+       "$id": "399",
        "Name": "input",
        "NameInRequest": "input",
        "Type": {
-        "$ref": "317"
+        "$ref": "318"
        },
        "Location": "Body",
        "IsRequired": true,
@@ -3243,11 +3254,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "399",
+       "$id": "400",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Type": {
-        "$id": "400",
+        "$id": "401",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -3262,19 +3273,19 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "401",
+        "$id": "402",
         "Type": {
-         "$ref": "400"
+         "$ref": "401"
         },
         "Value": "application/json"
        }
       },
       {
-       "$id": "402",
+       "$id": "403",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "403",
+        "$id": "404",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -3289,25 +3300,25 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "404",
+        "$id": "405",
         "Type": {
-         "$ref": "403"
+         "$ref": "404"
         },
         "Value": "application/json"
        }
       },
       {
-       "$ref": "338"
+       "$ref": "339"
       }
      ],
      "Responses": [
       {
-       "$id": "405",
+       "$id": "406",
        "StatusCodes": [
         200
        ],
        "BodyType": {
-        "$ref": "317"
+        "$ref": "318"
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -3326,20 +3337,20 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "406",
+     "$id": "407",
      "Name": "selfReference",
      "ResourceName": "ModelsTypeSpec",
      "Description": "Returns model that has property of its own type",
      "Parameters": [
       {
-       "$ref": "333"
+       "$ref": "334"
       },
       {
-       "$id": "407",
+       "$id": "408",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "408",
+        "$id": "409",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -3354,25 +3365,25 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "409",
+        "$id": "410",
         "Type": {
-         "$ref": "408"
+         "$ref": "409"
         },
         "Value": "application/json"
        }
       },
       {
-       "$ref": "338"
+       "$ref": "339"
       }
      ],
      "Responses": [
       {
-       "$id": "410",
+       "$id": "411",
        "StatusCodes": [
         200
        ],
        "BodyType": {
-        "$ref": "321"
+        "$ref": "322"
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -3388,20 +3399,20 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "411",
+     "$id": "412",
      "Name": "roundTripToOutputWithNoUseBase",
      "ResourceName": "ModelsTypeSpec",
      "Description": "Returns RoundTripOnNoUse",
      "Parameters": [
       {
-       "$ref": "333"
+       "$ref": "334"
       },
       {
-       "$id": "412",
+       "$id": "413",
        "Name": "input",
        "NameInRequest": "input",
        "Type": {
-        "$ref": "328"
+        "$ref": "329"
        },
        "Location": "Body",
        "IsRequired": true,
@@ -3414,11 +3425,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "413",
+       "$id": "414",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Type": {
-        "$id": "414",
+        "$id": "415",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -3433,19 +3444,19 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "415",
+        "$id": "416",
         "Type": {
-         "$ref": "414"
+         "$ref": "415"
         },
         "Value": "application/json"
        }
       },
       {
-       "$id": "416",
+       "$id": "417",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "417",
+        "$id": "418",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -3460,25 +3471,25 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "418",
+        "$id": "419",
         "Type": {
-         "$ref": "417"
+         "$ref": "418"
         },
         "Value": "application/json"
        }
       },
       {
-       "$ref": "338"
+       "$ref": "339"
       }
      ],
      "Responses": [
       {
-       "$id": "419",
+       "$id": "420",
        "StatusCodes": [
         200
        ],
        "BodyType": {
-        "$ref": "328"
+        "$ref": "329"
        },
        "BodyMediaType": "Json",
        "Headers": [],
@@ -3498,7 +3509,7 @@
     }
    ],
    "Protocol": {
-    "$id": "420"
+    "$id": "421"
    },
    "Creatable": true
   }
