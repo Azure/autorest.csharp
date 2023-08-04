@@ -269,7 +269,8 @@ namespace AutoRest.CSharp.Common.Input
                 DiscriminatorPropertyName: schema.Discriminator?.Property.SerializedName,
                 InheritedDictionaryType: schema.Parents?.Immediate.OfType<DictionarySchema>().FirstOrDefault() is {} dictionarySchema
                     ? (InputDictionaryType)CreateType(dictionarySchema, _modelsCache, false)
-                    : null);
+                    : null,
+                SerializationFormat: GetSerializationFormats(schema));
 
             _modelsCache[schema] = model;
             _modelPropertiesCache[schema] = properties;
@@ -300,6 +301,36 @@ namespace AutoRest.CSharp.Common.Input
             { GroupedBy: not null } => InputOperationParameterKind.Grouped,
             _ => InputOperationParameterKind.Method
         };
+
+        private static InputModelTypeSerializationFormat GetSerializationFormats(ObjectSchema objectSchema)
+        {
+            var formats = objectSchema.SerializationFormats;
+            if (Configuration.SkipSerializationFormatXml)
+            {
+                formats.Remove(KnownMediaType.Xml);
+            }
+
+            if (objectSchema.Extensions != null)
+            {
+                foreach (var format in objectSchema.Extensions.Formats)
+                {
+                    formats.Add(Enum.Parse<KnownMediaType>(format, true));
+                }
+            }
+
+            var inputSerializationFormat = InputModelTypeSerializationFormat.None;
+            if (formats.Contains(KnownMediaType.Json))
+            {
+                inputSerializationFormat |= InputModelTypeSerializationFormat.Json;
+            }
+
+            if (formats.Contains(KnownMediaType.Xml))
+            {
+                inputSerializationFormat |= InputModelTypeSerializationFormat.Xml;
+            }
+
+            return inputSerializationFormat;
+        }
 
         private static string? GetArraySerializationDelimiter(RequestParameter input) => input.In switch
         {

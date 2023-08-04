@@ -35,6 +35,7 @@ namespace AutoRest.CSharp.Output.Models.Types
         private readonly InputModelType[]? _derivedTypes;
         private readonly ObjectType? _defaultDerivedType;
         private readonly ModelTypeMapping? _modelTypeMapping;
+        private readonly InputModelTypeSerializationFormat _serializationFormat;
         private ModelTypeProviderFields? _fields;
 
         protected override string DefaultName { get; }
@@ -68,6 +69,27 @@ namespace AutoRest.CSharp.Output.Models.Types
             TypeKind = IsStruct ? TypeKind.Struct : TypeKind.Class;
 
             _modelTypeMapping = sourceInputModel?.CreateForModel(ExistingType);
+            _serializationFormat = GetSerializationFormat(inputModel, _modelTypeMapping);
+        }
+
+        private static InputModelTypeSerializationFormat GetSerializationFormat(InputModelType inputModel, ModelTypeMapping? modelTypeMapping)
+        {
+            var serializationFormat = inputModel.SerializationFormat;
+
+            if (modelTypeMapping?.Formats is { } formatsDefinedInSource)
+            {
+                foreach (var format in formatsDefinedInSource)
+                {
+                    serializationFormat |= Enum.Parse<KnownMediaType>(format, true) switch
+                    {
+                        KnownMediaType.Json => InputModelTypeSerializationFormat.Json,
+                        KnownMediaType.Xml => InputModelTypeSerializationFormat.Xml,
+                        _ => InputModelTypeSerializationFormat.None,
+                    };
+                }
+            }
+
+            return serializationFormat;
         }
 
         private MethodSignatureModifiers GetFromResponseModifiers()
@@ -343,12 +365,12 @@ namespace AutoRest.CSharp.Output.Models.Types
         {
             if (IsPropertyBag)
                 return false;
-            return true;
+            return _serializationFormat.HasFlag(InputModelTypeSerializationFormat.Json);
         }
 
         protected override bool EnsureHasXmlSerialization()
         {
-            return false;
+            return _serializationFormat.HasFlag(InputModelTypeSerializationFormat.Xml);
         }
 
         protected override bool EnsureIncludeSerializer()
