@@ -143,7 +143,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             SerializationParameters = serializationParameters;
         }
 
-        public bool TryGetFieldByParameter(Parameter parameter, [MaybeNullWhen(false)]out FieldDeclaration fieldDeclaration) => _parameterNamesToFields.TryGetValue(parameter.Name, out fieldDeclaration);
+        public FieldDeclaration? GetFieldByParameterName(string name) => _parameterNamesToFields.TryGetValue(name, out var fieldDeclaration) ? fieldDeclaration : null;
         public InputModelProperty? GetInputByField(FieldDeclaration field) => _fieldsToInputs.TryGetValue(field, out var property) ? property : null;
 
         public IEnumerator<FieldDeclaration> GetEnumerator() => _fields.GetEnumerator();

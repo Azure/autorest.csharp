@@ -305,12 +305,17 @@ namespace AutoRest.CSharp.Output.Models
                 case InputOperationParameterKind.Constant when outputParameter.DefaultValue is {} defaultValue:
                     return new ConstantExpression(defaultValue);
 
-                case var _ when inputParameter.GroupedBy is {} groupedByParameter:
-                    var groupedByParameterName = groupedByParameter.Name.ToVariableName();
-                    var groupParameter = _parameters.Single(p => p.Name == groupedByParameterName);
-                    var property = ((SchemaObjectType)groupParameter.Type.Implementation).GetPropertyForGroupedParameter(inputParameter.Name);
+                case var _ when inputParameter.GroupedBy is {} groupedByInputParameter:
+                    var groupedByParameterName = groupedByInputParameter.Name.ToVariableName();
+                    var groupedByParameter = _parameters.Single(p => p.Name == groupedByParameterName);
+                    var property = ((ModelTypeProvider)groupedByParameter.Type.Implementation).Fields.GetFieldByParameterName(outputParameter.Name);
 
-                    return new MemberExpression(NullConditional(groupParameter), property.Declaration.Name);
+                    if (property is null)
+                    {
+                        throw new InvalidOperationException($"Unable to find object property for grouped parameter {outputParameter.Name} in schema {groupedByParameter.Type.Name}");
+                    }
+
+                    return new MemberExpression(NullConditional(groupedByParameter), property.Name);
 
                 default:
                     return outputParameter;

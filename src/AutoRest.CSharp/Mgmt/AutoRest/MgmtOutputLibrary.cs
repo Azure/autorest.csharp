@@ -102,11 +102,12 @@ namespace AutoRest.CSharp.Mgmt.AutoRest
             // these dictionaries are initialized right now and they would not change later
             RawRequestPathToOperationSets = CategorizeOperationGroups(codeModel);
             ResourceDataSchemaNameToOperationSets = DecorateOperationSets();
+            _schemaToInputEnumMap = new CodeModelConverter(codeModel, schemaUsages).CreateEnums();
+
             AllSchemaMap = InitializeModels(codeModel);
 
             var codeModelConverter = new CodeModelConverter(codeModel, schemaUsages);
             _input = codeModelConverter.CreateNamespace();
-            _schemaToInputEnumMap = codeModelConverter.GetCurrentSchemaToInputEnumMap();
             _inputOperationToOperation = codeModelConverter.GetCurrentInputOperationToOperationMap();
 
             // others are populated later

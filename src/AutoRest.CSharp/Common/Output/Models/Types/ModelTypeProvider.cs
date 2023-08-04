@@ -34,6 +34,8 @@ namespace AutoRest.CSharp.Output.Models.Types
         private readonly TypeFactory _typeFactory;
         private readonly InputModelType[]? _derivedTypes;
         private readonly ObjectType? _defaultDerivedType;
+        private readonly ModelTypeMapping? _modelTypeMapping;
+        private ModelTypeProviderFields? _fields;
 
         protected override string DefaultName { get; }
         protected override string DefaultAccessibility { get; }
@@ -41,11 +43,13 @@ namespace AutoRest.CSharp.Output.Models.Types
         public override bool IncludeConverter => false;
         protected override bool IsAbstract => !Configuration.SuppressAbstractBaseClasses.Contains(DefaultName) && _inputModel.DiscriminatorPropertyName is not null;
 
-        public ModelTypeProviderFields Fields { get; }
+        public ModelTypeProviderFields Fields => _fields ??= new ModelTypeProviderFields(_inputModel, _typeFactory, _modelTypeMapping, IsStruct);
         public ConstructorSignature InitializationConstructorSignature => _publicConstructor ??= EnsurePublicConstructorSignature();
         public ConstructorSignature SerializationConstructorSignature => _serializationConstructor ??= EnsureSerializationConstructorSignature();
 
-        public override ObjectTypeProperty? AdditionalPropertiesProperty { get; }
+        public override ObjectTypeProperty? AdditionalPropertiesProperty => Fields.AdditionalProperties is {} additionalProperties
+                ? Properties.First(p => p.Declaration.Name == additionalProperties.Name)
+                : null;
 
         public bool IsPropertyBag => _inputModel.IsPropertyBag;
 
@@ -63,10 +67,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             DefaultAccessibility = inputModel.Accessibility ?? "public";
             TypeKind = IsStruct ? TypeKind.Struct : TypeKind.Class;
 
-            var modelTypeMapping = sourceInputModel?.CreateForModel(ExistingType);
-            Fields = new ModelTypeProviderFields(_inputModel, _typeFactory, modelTypeMapping, IsStruct);
-
-            AdditionalPropertiesProperty = Fields.AdditionalProperties is {} additionalProperties ? new ObjectTypeProperty(additionalProperties, null) : null;
+            _modelTypeMapping = sourceInputModel?.CreateForModel(ExistingType);
         }
 
         private MethodSignatureModifiers GetFromResponseModifiers()
@@ -327,12 +328,7 @@ namespace AutoRest.CSharp.Output.Models.Types
         }
 
         protected override IEnumerable<ObjectTypeProperty> BuildProperties()
-        {
-            foreach (var field in Fields)
-            {
-                yield return new ObjectTypeProperty(field, Fields.GetInputByField(field));
-            }
-        }
+            => Fields.Select(f => new ObjectTypeProperty(f, Fields.GetInputByField(f)));
 
         protected override IEnumerable<ObjectTypeConstructor> BuildConstructors()
         {
