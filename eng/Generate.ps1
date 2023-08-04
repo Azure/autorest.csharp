@@ -257,9 +257,6 @@ if (!($Exclude -contains "CadlRanchProjects")) {
     }
 }
 
-# TODO: remove later after cadl-ranch fixes the discriminator tests
-Add-TypeSpec "inheritance-typespec" (Join-Path $cadlRanchProjectDirectory "inheritance")
-
 # Smoke tests
 if (!($Exclude -contains "SmokeTests")) {
     foreach ($input in Get-Content (Join-Path $PSScriptRoot "SmokeTestInputs.txt")) {
@@ -308,10 +305,6 @@ foreach ($key in Sort-FileSafe ($testProjectEntries.Keys)) {
         continue;
     }
 
-    # TODO: remove later after candl ranch fixes the discriminator test
-    if ($definition.output.Contains("\CadlRanchProjects\inheritance")) {
-        continue;
-    }
 
     $outputPath = Join-Path $definition.output "Generated"
     if ($key -eq "TypeSchemaMapping") {
