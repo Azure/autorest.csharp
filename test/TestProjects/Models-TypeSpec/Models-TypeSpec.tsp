@@ -2,6 +2,13 @@ import "@typespec/rest";
 import "@typespec/http";
 import "@azure-tools/typespec-client-generator-core";
 import "@azure-tools/typespec-azure-core";
+import "@typespec/versioning";
+
+using TypeSpec.Http;
+using TypeSpec.Rest;
+using Azure.ClientGenerator.Core;
+using Azure.Core;
+using TypeSpec.Versioning;
 
 @service(
     {
@@ -16,13 +23,9 @@ import "@azure-tools/typespec-azure-core";
         endpoint: string,
     }
 )
+@useDependency(Azure.Core.Versions.v1_0_Preview_1)
 @doc("CADL project to test various types of models.")
 namespace ModelsTypeSpec;
-
-using TypeSpec.Http;
-using TypeSpec.Rest;
-using Azure.ClientGenerator.Core;
-using Azure.Core;
 
 @doc("Base model")
 model BaseModel {
@@ -610,3 +613,21 @@ model RoundTripOnNoUse extends NoUseBase {
 @get
 @convenientAPI(true)
 op roundTripToOutputWithNoUseBase(@body input: RoundTripOnNoUse): RoundTripOnNoUse;
+
+@doc("This is a model.")
+@resource("items")
+model Foo {
+  @doc("id of Foo")
+  @key
+  @visibility("read","create","query")
+  id: string;
+  @doc("name of Foo")
+  name: string;
+}
+
+@convenientAPI(true)
+op analyzeConversation is Azure.Core.StandardResourceOperations.ResourceCollectionAction<
+  Foo,
+  {},
+  BaseModelWithDiscriminator
+>;
