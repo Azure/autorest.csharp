@@ -779,20 +779,23 @@ export function getUsages(
         const affectTypes: string[] = [];
         if (typeName !== "") {
             affectTypes.push(typeName);
-            if (
-                effectiveType.kind === "Model" &&
-                effectiveType.templateMapper?.args
-            ) {
-                for (const arg of effectiveType.templateMapper.args) {
-                    if (
-                        arg.kind === "Model" &&
-                        "name" in arg &&
-                        arg.name !== ""
-                    ) {
-                        affectTypes.push(
-                            getFriendlyName(program, arg) ?? arg.name
-                        );
+            if (effectiveType.kind === "Model") {
+                if (effectiveType.templateMapper?.args){
+                    for (const arg of effectiveType.templateMapper.args) {
+                        if (
+                            arg.kind === "Model" &&
+                            "name" in arg &&
+                            arg.name !== ""
+                        ) {
+                            affectTypes.push(
+                                getFriendlyName(program, arg) ?? arg.name
+                            );
+                        }
                     }
+                }
+                const subModels = effectiveType.derivedModels;
+                for (const subModel of subModels) {
+                    affectTypes.push(getFriendlyName(program, subModel) ?? subModel.name);
                 }
             }
         }
@@ -810,7 +813,7 @@ export function getUsages(
 
     for (const op of ops) {
         const resourceOperation = getResourceOperation(program, op.operation);
-        if (!op.parameters.bodyParameter && op.parameters.bodyType) {
+        if (!op.parameters.body?.parameter && op.parameters.body?.type) {
             let bodyTypeName = "";
             if (resourceOperation) {
                 /* handle resource operation. */
@@ -819,7 +822,7 @@ export function getUsages(
                 /* handle spread. */
                 const effectiveBodyType = getEffectiveSchemaType(
                     context,
-                    op.parameters.bodyType
+                    op.parameters.body.type
                 );
                 if (effectiveBodyType.kind === "Model") {
                     if (effectiveBodyType.name !== "") {
@@ -840,6 +843,7 @@ export function getUsages(
             const resBody = res.responses[0]?.body;
             if (resBody?.type) {
                 let returnType = "";
+                let subType = [];
                 if (
                     resourceOperation &&
                     resourceOperation.operation !== "list"
@@ -858,6 +862,15 @@ export function getUsages(
                             getFriendlyName(program, effectiveReturnType) ??
                             effectiveReturnType.name;
                     }
+                    /*propgate to sub models*/
+                    // if (effectiveReturnType.kind === "Model") {
+                    //     const subModels = effectiveReturnType.derivedModels;
+                    //     for (const subModel of subModels) {
+                    //         const subModelName =
+                    //             getFriendlyName(program, subModel) ?? subModel.name;
+                    //         appendUsage(subModelName, UsageFlags.Output);
+                    //     }
+                    // }
                 }
                 appendUsage(returnType, UsageFlags.Output);
             }
