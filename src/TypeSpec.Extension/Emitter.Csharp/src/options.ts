@@ -102,7 +102,7 @@ export const NetEmitterOptionsSchema: JSONSchemaType<NetEmitterOptions> = {
             nullable: true
         },
         "package-dir": { type: "string", nullable: true },
-        "head-as-boolean": { type: "boolean", nullable: true },
+        "head-as-boolean": { type: "boolean", nullable: true }
     },
     required: []
 };
