@@ -44,7 +44,6 @@ namespace Azure.ResourceManager.Storage
             });
         }
 
-        #region BlobServiceResource
         /// <summary>
         /// Gets an object representing a <see cref="BlobServiceResource" /> along with the instance operations that can be performed on it but with no data.
         /// You can use <see cref="BlobServiceResource.CreateResourceIdentifier" /> to create a <see cref="BlobServiceResource" /> <see cref="ResourceIdentifier" /> from its components.
@@ -56,9 +55,7 @@ namespace Azure.ResourceManager.Storage
         {
             return GetStorageArmClientMockingExtension(client).GetBlobServiceResource(id);
         }
-        #endregion
 
-        #region BlobContainerResource
         /// <summary>
         /// Gets an object representing a <see cref="BlobContainerResource" /> along with the instance operations that can be performed on it but with no data.
         /// You can use <see cref="BlobContainerResource.CreateResourceIdentifier" /> to create a <see cref="BlobContainerResource" /> <see cref="ResourceIdentifier" /> from its components.
@@ -70,9 +67,7 @@ namespace Azure.ResourceManager.Storage
         {
             return GetStorageArmClientMockingExtension(client).GetBlobContainerResource(id);
         }
-        #endregion
 
-        #region ImmutabilityPolicyResource
         /// <summary>
         /// Gets an object representing an <see cref="ImmutabilityPolicyResource" /> along with the instance operations that can be performed on it but with no data.
         /// You can use <see cref="ImmutabilityPolicyResource.CreateResourceIdentifier" /> to create an <see cref="ImmutabilityPolicyResource" /> <see cref="ResourceIdentifier" /> from its components.
@@ -84,9 +79,7 @@ namespace Azure.ResourceManager.Storage
         {
             return GetStorageArmClientMockingExtension(client).GetImmutabilityPolicyResource(id);
         }
-        #endregion
 
-        #region FileServiceResource
         /// <summary>
         /// Gets an object representing a <see cref="FileServiceResource" /> along with the instance operations that can be performed on it but with no data.
         /// You can use <see cref="FileServiceResource.CreateResourceIdentifier" /> to create a <see cref="FileServiceResource" /> <see cref="ResourceIdentifier" /> from its components.
@@ -98,9 +91,7 @@ namespace Azure.ResourceManager.Storage
         {
             return GetStorageArmClientMockingExtension(client).GetFileServiceResource(id);
         }
-        #endregion
 
-        #region FileShareResource
         /// <summary>
         /// Gets an object representing a <see cref="FileShareResource" /> along with the instance operations that can be performed on it but with no data.
         /// You can use <see cref="FileShareResource.CreateResourceIdentifier" /> to create a <see cref="FileShareResource" /> <see cref="ResourceIdentifier" /> from its components.
@@ -112,9 +103,7 @@ namespace Azure.ResourceManager.Storage
         {
             return GetStorageArmClientMockingExtension(client).GetFileShareResource(id);
         }
-        #endregion
 
-        #region StorageAccountResource
         /// <summary>
         /// Gets an object representing a <see cref="StorageAccountResource" /> along with the instance operations that can be performed on it but with no data.
         /// You can use <see cref="StorageAccountResource.CreateResourceIdentifier" /> to create a <see cref="StorageAccountResource" /> <see cref="ResourceIdentifier" /> from its components.
@@ -126,9 +115,7 @@ namespace Azure.ResourceManager.Storage
         {
             return GetStorageArmClientMockingExtension(client).GetStorageAccountResource(id);
         }
-        #endregion
 
-        #region DeletedAccountResource
         /// <summary>
         /// Gets an object representing a <see cref="DeletedAccountResource" /> along with the instance operations that can be performed on it but with no data.
         /// You can use <see cref="DeletedAccountResource.CreateResourceIdentifier" /> to create a <see cref="DeletedAccountResource" /> <see cref="ResourceIdentifier" /> from its components.
@@ -140,9 +127,7 @@ namespace Azure.ResourceManager.Storage
         {
             return GetStorageArmClientMockingExtension(client).GetDeletedAccountResource(id);
         }
-        #endregion
 
-        #region ManagementPolicyResource
         /// <summary>
         /// Gets an object representing a <see cref="ManagementPolicyResource" /> along with the instance operations that can be performed on it but with no data.
         /// You can use <see cref="ManagementPolicyResource.CreateResourceIdentifier" /> to create a <see cref="ManagementPolicyResource" /> <see cref="ResourceIdentifier" /> from its components.
@@ -154,9 +139,7 @@ namespace Azure.ResourceManager.Storage
         {
             return GetStorageArmClientMockingExtension(client).GetManagementPolicyResource(id);
         }
-        #endregion
 
-        #region BlobInventoryPolicyResource
         /// <summary>
         /// Gets an object representing a <see cref="BlobInventoryPolicyResource" /> along with the instance operations that can be performed on it but with no data.
         /// You can use <see cref="BlobInventoryPolicyResource.CreateResourceIdentifier" /> to create a <see cref="BlobInventoryPolicyResource" /> <see cref="ResourceIdentifier" /> from its components.
@@ -168,9 +151,7 @@ namespace Azure.ResourceManager.Storage
         {
             return GetStorageArmClientMockingExtension(client).GetBlobInventoryPolicyResource(id);
         }
-        #endregion
 
-        #region StoragePrivateEndpointConnectionResource
         /// <summary>
         /// Gets an object representing a <see cref="StoragePrivateEndpointConnectionResource" /> along with the instance operations that can be performed on it but with no data.
         /// You can use <see cref="StoragePrivateEndpointConnectionResource.CreateResourceIdentifier" /> to create a <see cref="StoragePrivateEndpointConnectionResource" /> <see cref="ResourceIdentifier" /> from its components.
@@ -182,9 +163,7 @@ namespace Azure.ResourceManager.Storage
         {
             return GetStorageArmClientMockingExtension(client).GetStoragePrivateEndpointConnectionResource(id);
         }
-        #endregion
 
-        #region ObjectReplicationPolicyResource
         /// <summary>
         /// Gets an object representing an <see cref="ObjectReplicationPolicyResource" /> along with the instance operations that can be performed on it but with no data.
         /// You can use <see cref="ObjectReplicationPolicyResource.CreateResourceIdentifier" /> to create an <see cref="ObjectReplicationPolicyResource" /> <see cref="ResourceIdentifier" /> from its components.
@@ -196,9 +175,7 @@ namespace Azure.ResourceManager.Storage
         {
             return GetStorageArmClientMockingExtension(client).GetObjectReplicationPolicyResource(id);
         }
-        #endregion
 
-        #region EncryptionScopeResource
         /// <summary>
         /// Gets an object representing an <see cref="EncryptionScopeResource" /> along with the instance operations that can be performed on it but with no data.
         /// You can use <see cref="EncryptionScopeResource.CreateResourceIdentifier" /> to create an <see cref="EncryptionScopeResource" /> <see cref="ResourceIdentifier" /> from its components.
@@ -210,7 +187,6 @@ namespace Azure.ResourceManager.Storage
         {
             return GetStorageArmClientMockingExtension(client).GetEncryptionScopeResource(id);
         }
-        #endregion
 
         /// <summary> Gets a collection of StorageAccountResources in the ResourceGroupResource. </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>

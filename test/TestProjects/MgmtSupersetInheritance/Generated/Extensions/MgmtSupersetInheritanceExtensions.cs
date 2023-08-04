@@ -36,7 +36,6 @@ namespace MgmtSupersetInheritance
             });
         }
 
-        #region SupersetModel1Resource
         /// <summary>
         /// Gets an object representing a <see cref="SupersetModel1Resource" /> along with the instance operations that can be performed on it but with no data.
         /// You can use <see cref="SupersetModel1Resource.CreateResourceIdentifier" /> to create a <see cref="SupersetModel1Resource" /> <see cref="ResourceIdentifier" /> from its components.
@@ -48,9 +47,7 @@ namespace MgmtSupersetInheritance
         {
             return GetMgmtSupersetInheritanceArmClientMockingExtension(client).GetSupersetModel1Resource(id);
         }
-        #endregion
 
-        #region SupersetModel4Resource
         /// <summary>
         /// Gets an object representing a <see cref="SupersetModel4Resource" /> along with the instance operations that can be performed on it but with no data.
         /// You can use <see cref="SupersetModel4Resource.CreateResourceIdentifier" /> to create a <see cref="SupersetModel4Resource" /> <see cref="ResourceIdentifier" /> from its components.
@@ -62,9 +59,7 @@ namespace MgmtSupersetInheritance
         {
             return GetMgmtSupersetInheritanceArmClientMockingExtension(client).GetSupersetModel4Resource(id);
         }
-        #endregion
 
-        #region SupersetModel6Resource
         /// <summary>
         /// Gets an object representing a <see cref="SupersetModel6Resource" /> along with the instance operations that can be performed on it but with no data.
         /// You can use <see cref="SupersetModel6Resource.CreateResourceIdentifier" /> to create a <see cref="SupersetModel6Resource" /> <see cref="ResourceIdentifier" /> from its components.
@@ -76,9 +71,7 @@ namespace MgmtSupersetInheritance
         {
             return GetMgmtSupersetInheritanceArmClientMockingExtension(client).GetSupersetModel6Resource(id);
         }
-        #endregion
 
-        #region SupersetModel7Resource
         /// <summary>
         /// Gets an object representing a <see cref="SupersetModel7Resource" /> along with the instance operations that can be performed on it but with no data.
         /// You can use <see cref="SupersetModel7Resource.CreateResourceIdentifier" /> to create a <see cref="SupersetModel7Resource" /> <see cref="ResourceIdentifier" /> from its components.
@@ -90,7 +83,6 @@ namespace MgmtSupersetInheritance
         {
             return GetMgmtSupersetInheritanceArmClientMockingExtension(client).GetSupersetModel7Resource(id);
         }
-        #endregion
 
         /// <summary> Gets a collection of SupersetModel1Resources in the ResourceGroupResource. </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>

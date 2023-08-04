@@ -35,7 +35,6 @@ namespace MgmtXmlDeserialization
             });
         }
 
-        #region XmlInstanceResource
         /// <summary>
         /// Gets an object representing a <see cref="XmlInstanceResource" /> along with the instance operations that can be performed on it but with no data.
         /// You can use <see cref="XmlInstanceResource.CreateResourceIdentifier" /> to create a <see cref="XmlInstanceResource" /> <see cref="ResourceIdentifier" /> from its components.
@@ -47,7 +46,6 @@ namespace MgmtXmlDeserialization
         {
             return GetMgmtXmlDeserializationArmClientMockingExtension(client).GetXmlInstanceResource(id);
         }
-        #endregion
 
         /// <summary> Gets a collection of XmlInstanceResources in the ResourceGroupResource. </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>

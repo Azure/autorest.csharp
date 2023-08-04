@@ -36,7 +36,6 @@ namespace MgmtPropertyChooser
             });
         }
 
-        #region VirtualMachineResource
         /// <summary>
         /// Gets an object representing a <see cref="VirtualMachineResource" /> along with the instance operations that can be performed on it but with no data.
         /// You can use <see cref="VirtualMachineResource.CreateResourceIdentifier" /> to create a <see cref="VirtualMachineResource" /> <see cref="ResourceIdentifier" /> from its components.
@@ -48,7 +47,6 @@ namespace MgmtPropertyChooser
         {
             return GetMgmtPropertyChooserArmClientMockingExtension(client).GetVirtualMachineResource(id);
         }
-        #endregion
 
         /// <summary> Gets a collection of VirtualMachineResources in the ResourceGroupResource. </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>

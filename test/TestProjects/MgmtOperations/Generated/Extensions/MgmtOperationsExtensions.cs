@@ -36,7 +36,6 @@ namespace MgmtOperations
             });
         }
 
-        #region AvailabilitySetResource
         /// <summary>
         /// Gets an object representing an <see cref="AvailabilitySetResource" /> along with the instance operations that can be performed on it but with no data.
         /// You can use <see cref="AvailabilitySetResource.CreateResourceIdentifier" /> to create an <see cref="AvailabilitySetResource" /> <see cref="ResourceIdentifier" /> from its components.
@@ -48,9 +47,7 @@ namespace MgmtOperations
         {
             return GetMgmtOperationsArmClientMockingExtension(client).GetAvailabilitySetResource(id);
         }
-        #endregion
 
-        #region AvailabilitySetChildResource
         /// <summary>
         /// Gets an object representing an <see cref="AvailabilitySetChildResource" /> along with the instance operations that can be performed on it but with no data.
         /// You can use <see cref="AvailabilitySetChildResource.CreateResourceIdentifier" /> to create an <see cref="AvailabilitySetChildResource" /> <see cref="ResourceIdentifier" /> from its components.
@@ -62,9 +59,7 @@ namespace MgmtOperations
         {
             return GetMgmtOperationsArmClientMockingExtension(client).GetAvailabilitySetChildResource(id);
         }
-        #endregion
 
-        #region AvailabilitySetGrandChildResource
         /// <summary>
         /// Gets an object representing an <see cref="AvailabilitySetGrandChildResource" /> along with the instance operations that can be performed on it but with no data.
         /// You can use <see cref="AvailabilitySetGrandChildResource.CreateResourceIdentifier" /> to create an <see cref="AvailabilitySetGrandChildResource" /> <see cref="ResourceIdentifier" /> from its components.
@@ -76,9 +71,7 @@ namespace MgmtOperations
         {
             return GetMgmtOperationsArmClientMockingExtension(client).GetAvailabilitySetGrandChildResource(id);
         }
-        #endregion
 
-        #region UnpatchableResource
         /// <summary>
         /// Gets an object representing an <see cref="UnpatchableResource" /> along with the instance operations that can be performed on it but with no data.
         /// You can use <see cref="UnpatchableResource.CreateResourceIdentifier" /> to create an <see cref="UnpatchableResource" /> <see cref="ResourceIdentifier" /> from its components.
@@ -90,7 +83,6 @@ namespace MgmtOperations
         {
             return GetMgmtOperationsArmClientMockingExtension(client).GetUnpatchableResource(id);
         }
-        #endregion
 
         /// <summary> Gets a collection of AvailabilitySetResources in the ResourceGroupResource. </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>

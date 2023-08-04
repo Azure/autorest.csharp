@@ -35,7 +35,6 @@ namespace MgmtHierarchicalNonResource
             });
         }
 
-        #region SharedGalleryResource
         /// <summary>
         /// Gets an object representing a <see cref="SharedGalleryResource" /> along with the instance operations that can be performed on it but with no data.
         /// You can use <see cref="SharedGalleryResource.CreateResourceIdentifier" /> to create a <see cref="SharedGalleryResource" /> <see cref="ResourceIdentifier" /> from its components.
@@ -47,7 +46,6 @@ namespace MgmtHierarchicalNonResource
         {
             return GetMgmtHierarchicalNonResourceArmClientMockingExtension(client).GetSharedGalleryResource(id);
         }
-        #endregion
 
         /// <summary> Gets a collection of SharedGalleryResources in the SubscriptionResource. </summary>
         /// <param name="subscriptionResource"> The <see cref="SubscriptionResource" /> instance the method will execute against. </param>

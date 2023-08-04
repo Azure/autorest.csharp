@@ -53,7 +53,6 @@ namespace MgmtExtensionResource
             });
         }
 
-        #region SubSingletonResource
         /// <summary>
         /// Gets an object representing a <see cref="SubSingletonResource" /> along with the instance operations that can be performed on it but with no data.
         /// You can use <see cref="SubSingletonResource.CreateResourceIdentifier" /> to create a <see cref="SubSingletonResource" /> <see cref="ResourceIdentifier" /> from its components.
@@ -65,9 +64,7 @@ namespace MgmtExtensionResource
         {
             return GetMgmtExtensionResourceArmClientMockingExtension(client).GetSubSingletonResource(id);
         }
-        #endregion
 
-        #region SubscriptionPolicyDefinitionResource
         /// <summary>
         /// Gets an object representing a <see cref="SubscriptionPolicyDefinitionResource" /> along with the instance operations that can be performed on it but with no data.
         /// You can use <see cref="SubscriptionPolicyDefinitionResource.CreateResourceIdentifier" /> to create a <see cref="SubscriptionPolicyDefinitionResource" /> <see cref="ResourceIdentifier" /> from its components.
@@ -79,9 +76,7 @@ namespace MgmtExtensionResource
         {
             return GetMgmtExtensionResourceArmClientMockingExtension(client).GetSubscriptionPolicyDefinitionResource(id);
         }
-        #endregion
 
-        #region BuiltInPolicyDefinitionResource
         /// <summary>
         /// Gets an object representing a <see cref="BuiltInPolicyDefinitionResource" /> along with the instance operations that can be performed on it but with no data.
         /// You can use <see cref="BuiltInPolicyDefinitionResource.CreateResourceIdentifier" /> to create a <see cref="BuiltInPolicyDefinitionResource" /> <see cref="ResourceIdentifier" /> from its components.
@@ -93,9 +88,7 @@ namespace MgmtExtensionResource
         {
             return GetMgmtExtensionResourceArmClientMockingExtension(client).GetBuiltInPolicyDefinitionResource(id);
         }
-        #endregion
 
-        #region ManagementGroupPolicyDefinitionResource
         /// <summary>
         /// Gets an object representing a <see cref="ManagementGroupPolicyDefinitionResource" /> along with the instance operations that can be performed on it but with no data.
         /// You can use <see cref="ManagementGroupPolicyDefinitionResource.CreateResourceIdentifier" /> to create a <see cref="ManagementGroupPolicyDefinitionResource" /> <see cref="ResourceIdentifier" /> from its components.
@@ -107,7 +100,6 @@ namespace MgmtExtensionResource
         {
             return GetMgmtExtensionResourceArmClientMockingExtension(client).GetManagementGroupPolicyDefinitionResource(id);
         }
-        #endregion
 
         /// <summary> Gets a collection of ManagementGroupPolicyDefinitionResources in the ManagementGroupResource. </summary>
         /// <param name="managementGroupResource"> The <see cref="ManagementGroupResource" /> instance the method will execute against. </param>

@@ -36,7 +36,6 @@ namespace MgmtExactMatchInheritance
             });
         }
 
-        #region ExactMatchModel1Resource
         /// <summary>
         /// Gets an object representing an <see cref="ExactMatchModel1Resource" /> along with the instance operations that can be performed on it but with no data.
         /// You can use <see cref="ExactMatchModel1Resource.CreateResourceIdentifier" /> to create an <see cref="ExactMatchModel1Resource" /> <see cref="ResourceIdentifier" /> from its components.
@@ -48,9 +47,7 @@ namespace MgmtExactMatchInheritance
         {
             return GetMgmtExactMatchInheritanceArmClientMockingExtension(client).GetExactMatchModel1Resource(id);
         }
-        #endregion
 
-        #region ExactMatchModel5Resource
         /// <summary>
         /// Gets an object representing an <see cref="ExactMatchModel5Resource" /> along with the instance operations that can be performed on it but with no data.
         /// You can use <see cref="ExactMatchModel5Resource.CreateResourceIdentifier" /> to create an <see cref="ExactMatchModel5Resource" /> <see cref="ResourceIdentifier" /> from its components.
@@ -62,7 +59,6 @@ namespace MgmtExactMatchInheritance
         {
             return GetMgmtExactMatchInheritanceArmClientMockingExtension(client).GetExactMatchModel5Resource(id);
         }
-        #endregion
 
         /// <summary> Gets a collection of ExactMatchModel1Resources in the ResourceGroupResource. </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>

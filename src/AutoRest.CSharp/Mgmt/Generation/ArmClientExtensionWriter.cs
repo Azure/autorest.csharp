@@ -53,9 +53,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
             foreach (var resource in MgmtContext.Library.ArmResources)
             {
-                _writer.Line($"#region {resource.Type.Name}");
                 WriteGetResourceFromIdMethod(resource);
-                _writer.LineRaw("#endregion");
                 _writer.Line();
             }
         }

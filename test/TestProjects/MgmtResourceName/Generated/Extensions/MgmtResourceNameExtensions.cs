@@ -43,7 +43,6 @@ namespace MgmtResourceName
             });
         }
 
-        #region MachineResource
         /// <summary>
         /// Gets an object representing a <see cref="MachineResource" /> along with the instance operations that can be performed on it but with no data.
         /// You can use <see cref="MachineResource.CreateResourceIdentifier" /> to create a <see cref="MachineResource" /> <see cref="ResourceIdentifier" /> from its components.
@@ -55,9 +54,7 @@ namespace MgmtResourceName
         {
             return GetMgmtResourceNameArmClientMockingExtension(client).GetMachineResource(id);
         }
-        #endregion
 
-        #region Disk
         /// <summary>
         /// Gets an object representing a <see cref="Disk" /> along with the instance operations that can be performed on it but with no data.
         /// You can use <see cref="Disk.CreateResourceIdentifier" /> to create a <see cref="Disk" /> <see cref="ResourceIdentifier" /> from its components.
@@ -69,9 +66,7 @@ namespace MgmtResourceName
         {
             return GetMgmtResourceNameArmClientMockingExtension(client).GetDisk(id);
         }
-        #endregion
 
-        #region Memory
         /// <summary>
         /// Gets an object representing a <see cref="Memory" /> along with the instance operations that can be performed on it but with no data.
         /// You can use <see cref="Memory.CreateResourceIdentifier" /> to create a <see cref="Memory" /> <see cref="ResourceIdentifier" /> from its components.
@@ -83,9 +78,7 @@ namespace MgmtResourceName
         {
             return GetMgmtResourceNameArmClientMockingExtension(client).GetMemory(id);
         }
-        #endregion
 
-        #region NetworkResource
         /// <summary>
         /// Gets an object representing a <see cref="NetworkResource" /> along with the instance operations that can be performed on it but with no data.
         /// You can use <see cref="NetworkResource.CreateResourceIdentifier" /> to create a <see cref="NetworkResource" /> <see cref="ResourceIdentifier" /> from its components.
@@ -97,9 +90,7 @@ namespace MgmtResourceName
         {
             return GetMgmtResourceNameArmClientMockingExtension(client).GetNetworkResource(id);
         }
-        #endregion
 
-        #region DisplayResource
         /// <summary>
         /// Gets an object representing a <see cref="DisplayResource" /> along with the instance operations that can be performed on it but with no data.
         /// You can use <see cref="DisplayResource.CreateResourceIdentifier" /> to create a <see cref="DisplayResource" /> <see cref="ResourceIdentifier" /> from its components.
@@ -111,9 +102,7 @@ namespace MgmtResourceName
         {
             return GetMgmtResourceNameArmClientMockingExtension(client).GetDisplayResource(id);
         }
-        #endregion
 
-        #region ProviderOperationResource
         /// <summary>
         /// Gets an object representing a <see cref="ProviderOperationResource" /> along with the instance operations that can be performed on it but with no data.
         /// You can use <see cref="ProviderOperationResource.CreateResourceIdentifier" /> to create a <see cref="ProviderOperationResource" /> <see cref="ResourceIdentifier" /> from its components.
@@ -125,7 +114,6 @@ namespace MgmtResourceName
         {
             return GetMgmtResourceNameArmClientMockingExtension(client).GetProviderOperationResource(id);
         }
-        #endregion
 
         /// <summary> Gets a collection of MachineResources in the ResourceGroupResource. </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>

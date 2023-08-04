@@ -35,7 +35,6 @@ namespace MgmtLRO
             });
         }
 
-        #region FakeResource
         /// <summary>
         /// Gets an object representing a <see cref="FakeResource" /> along with the instance operations that can be performed on it but with no data.
         /// You can use <see cref="FakeResource.CreateResourceIdentifier" /> to create a <see cref="FakeResource" /> <see cref="ResourceIdentifier" /> from its components.
@@ -47,9 +46,7 @@ namespace MgmtLRO
         {
             return GetMgmtLROArmClientMockingExtension(client).GetFakeResource(id);
         }
-        #endregion
 
-        #region BarResource
         /// <summary>
         /// Gets an object representing a <see cref="BarResource" /> along with the instance operations that can be performed on it but with no data.
         /// You can use <see cref="BarResource.CreateResourceIdentifier" /> to create a <see cref="BarResource" /> <see cref="ResourceIdentifier" /> from its components.
@@ -61,7 +58,6 @@ namespace MgmtLRO
         {
             return GetMgmtLROArmClientMockingExtension(client).GetBarResource(id);
         }
-        #endregion
 
         /// <summary> Gets a collection of FakeResources in the ResourceGroupResource. </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>

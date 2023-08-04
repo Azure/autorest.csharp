@@ -61,7 +61,6 @@ namespace MgmtListMethods
             });
         }
 
-        #region FakeResource
         /// <summary>
         /// Gets an object representing a <see cref="FakeResource" /> along with the instance operations that can be performed on it but with no data.
         /// You can use <see cref="FakeResource.CreateResourceIdentifier" /> to create a <see cref="FakeResource" /> <see cref="ResourceIdentifier" /> from its components.
@@ -73,9 +72,7 @@ namespace MgmtListMethods
         {
             return GetMgmtListMethodsArmClientMockingExtension(client).GetFakeResource(id);
         }
-        #endregion
 
-        #region FakeParentWithAncestorWithNonResChWithLocResource
         /// <summary>
         /// Gets an object representing a <see cref="FakeParentWithAncestorWithNonResChWithLocResource" /> along with the instance operations that can be performed on it but with no data.
         /// You can use <see cref="FakeParentWithAncestorWithNonResChWithLocResource.CreateResourceIdentifier" /> to create a <see cref="FakeParentWithAncestorWithNonResChWithLocResource" /> <see cref="ResourceIdentifier" /> from its components.
@@ -87,9 +84,7 @@ namespace MgmtListMethods
         {
             return GetMgmtListMethodsArmClientMockingExtension(client).GetFakeParentWithAncestorWithNonResChWithLocResource(id);
         }
-        #endregion
 
-        #region FakeParentWithAncestorWithNonResChResource
         /// <summary>
         /// Gets an object representing a <see cref="FakeParentWithAncestorWithNonResChResource" /> along with the instance operations that can be performed on it but with no data.
         /// You can use <see cref="FakeParentWithAncestorWithNonResChResource.CreateResourceIdentifier" /> to create a <see cref="FakeParentWithAncestorWithNonResChResource" /> <see cref="ResourceIdentifier" /> from its components.
@@ -101,9 +96,7 @@ namespace MgmtListMethods
         {
             return GetMgmtListMethodsArmClientMockingExtension(client).GetFakeParentWithAncestorWithNonResChResource(id);
         }
-        #endregion
 
-        #region FakeParentWithAncestorWithLocResource
         /// <summary>
         /// Gets an object representing a <see cref="FakeParentWithAncestorWithLocResource" /> along with the instance operations that can be performed on it but with no data.
         /// You can use <see cref="FakeParentWithAncestorWithLocResource.CreateResourceIdentifier" /> to create a <see cref="FakeParentWithAncestorWithLocResource" /> <see cref="ResourceIdentifier" /> from its components.
@@ -115,9 +108,7 @@ namespace MgmtListMethods
         {
             return GetMgmtListMethodsArmClientMockingExtension(client).GetFakeParentWithAncestorWithLocResource(id);
         }
-        #endregion
 
-        #region FakeParentWithAncestorResource
         /// <summary>
         /// Gets an object representing a <see cref="FakeParentWithAncestorResource" /> along with the instance operations that can be performed on it but with no data.
         /// You can use <see cref="FakeParentWithAncestorResource.CreateResourceIdentifier" /> to create a <see cref="FakeParentWithAncestorResource" /> <see cref="ResourceIdentifier" /> from its components.
@@ -129,9 +120,7 @@ namespace MgmtListMethods
         {
             return GetMgmtListMethodsArmClientMockingExtension(client).GetFakeParentWithAncestorResource(id);
         }
-        #endregion
 
-        #region FakeParentWithNonResChResource
         /// <summary>
         /// Gets an object representing a <see cref="FakeParentWithNonResChResource" /> along with the instance operations that can be performed on it but with no data.
         /// You can use <see cref="FakeParentWithNonResChResource.CreateResourceIdentifier" /> to create a <see cref="FakeParentWithNonResChResource" /> <see cref="ResourceIdentifier" /> from its components.
@@ -143,9 +132,7 @@ namespace MgmtListMethods
         {
             return GetMgmtListMethodsArmClientMockingExtension(client).GetFakeParentWithNonResChResource(id);
         }
-        #endregion
 
-        #region FakeParentResource
         /// <summary>
         /// Gets an object representing a <see cref="FakeParentResource" /> along with the instance operations that can be performed on it but with no data.
         /// You can use <see cref="FakeParentResource.CreateResourceIdentifier" /> to create a <see cref="FakeParentResource" /> <see cref="ResourceIdentifier" /> from its components.
@@ -157,9 +144,7 @@ namespace MgmtListMethods
         {
             return GetMgmtListMethodsArmClientMockingExtension(client).GetFakeParentResource(id);
         }
-        #endregion
 
-        #region ResGrpParentWithAncestorWithNonResChWithLocResource
         /// <summary>
         /// Gets an object representing a <see cref="ResGrpParentWithAncestorWithNonResChWithLocResource" /> along with the instance operations that can be performed on it but with no data.
         /// You can use <see cref="ResGrpParentWithAncestorWithNonResChWithLocResource.CreateResourceIdentifier" /> to create a <see cref="ResGrpParentWithAncestorWithNonResChWithLocResource" /> <see cref="ResourceIdentifier" /> from its components.
@@ -171,9 +156,7 @@ namespace MgmtListMethods
         {
             return GetMgmtListMethodsArmClientMockingExtension(client).GetResGrpParentWithAncestorWithNonResChWithLocResource(id);
         }
-        #endregion
 
-        #region ResGrpParentWithAncestorWithNonResChResource
         /// <summary>
         /// Gets an object representing a <see cref="ResGrpParentWithAncestorWithNonResChResource" /> along with the instance operations that can be performed on it but with no data.
         /// You can use <see cref="ResGrpParentWithAncestorWithNonResChResource.CreateResourceIdentifier" /> to create a <see cref="ResGrpParentWithAncestorWithNonResChResource" /> <see cref="ResourceIdentifier" /> from its components.
@@ -185,9 +168,7 @@ namespace MgmtListMethods
         {
             return GetMgmtListMethodsArmClientMockingExtension(client).GetResGrpParentWithAncestorWithNonResChResource(id);
         }
-        #endregion
 
-        #region ResGrpParentWithAncestorWithLocResource
         /// <summary>
         /// Gets an object representing a <see cref="ResGrpParentWithAncestorWithLocResource" /> along with the instance operations that can be performed on it but with no data.
         /// You can use <see cref="ResGrpParentWithAncestorWithLocResource.CreateResourceIdentifier" /> to create a <see cref="ResGrpParentWithAncestorWithLocResource" /> <see cref="ResourceIdentifier" /> from its components.
@@ -199,9 +180,7 @@ namespace MgmtListMethods
         {
             return GetMgmtListMethodsArmClientMockingExtension(client).GetResGrpParentWithAncestorWithLocResource(id);
         }
-        #endregion
 
-        #region ResGrpParentWithAncestorResource
         /// <summary>
         /// Gets an object representing a <see cref="ResGrpParentWithAncestorResource" /> along with the instance operations that can be performed on it but with no data.
         /// You can use <see cref="ResGrpParentWithAncestorResource.CreateResourceIdentifier" /> to create a <see cref="ResGrpParentWithAncestorResource" /> <see cref="ResourceIdentifier" /> from its components.
@@ -213,9 +192,7 @@ namespace MgmtListMethods
         {
             return GetMgmtListMethodsArmClientMockingExtension(client).GetResGrpParentWithAncestorResource(id);
         }
-        #endregion
 
-        #region ResGrpParentWithNonResChResource
         /// <summary>
         /// Gets an object representing a <see cref="ResGrpParentWithNonResChResource" /> along with the instance operations that can be performed on it but with no data.
         /// You can use <see cref="ResGrpParentWithNonResChResource.CreateResourceIdentifier" /> to create a <see cref="ResGrpParentWithNonResChResource" /> <see cref="ResourceIdentifier" /> from its components.
@@ -227,9 +204,7 @@ namespace MgmtListMethods
         {
             return GetMgmtListMethodsArmClientMockingExtension(client).GetResGrpParentWithNonResChResource(id);
         }
-        #endregion
 
-        #region ResGrpParentResource
         /// <summary>
         /// Gets an object representing a <see cref="ResGrpParentResource" /> along with the instance operations that can be performed on it but with no data.
         /// You can use <see cref="ResGrpParentResource.CreateResourceIdentifier" /> to create a <see cref="ResGrpParentResource" /> <see cref="ResourceIdentifier" /> from its components.
@@ -241,9 +216,7 @@ namespace MgmtListMethods
         {
             return GetMgmtListMethodsArmClientMockingExtension(client).GetResGrpParentResource(id);
         }
-        #endregion
 
-        #region SubParentWithNonResChWithLocResource
         /// <summary>
         /// Gets an object representing a <see cref="SubParentWithNonResChWithLocResource" /> along with the instance operations that can be performed on it but with no data.
         /// You can use <see cref="SubParentWithNonResChWithLocResource.CreateResourceIdentifier" /> to create a <see cref="SubParentWithNonResChWithLocResource" /> <see cref="ResourceIdentifier" /> from its components.
@@ -255,9 +228,7 @@ namespace MgmtListMethods
         {
             return GetMgmtListMethodsArmClientMockingExtension(client).GetSubParentWithNonResChWithLocResource(id);
         }
-        #endregion
 
-        #region SubParentWithNonResChResource
         /// <summary>
         /// Gets an object representing a <see cref="SubParentWithNonResChResource" /> along with the instance operations that can be performed on it but with no data.
         /// You can use <see cref="SubParentWithNonResChResource.CreateResourceIdentifier" /> to create a <see cref="SubParentWithNonResChResource" /> <see cref="ResourceIdentifier" /> from its components.
@@ -269,9 +240,7 @@ namespace MgmtListMethods
         {
             return GetMgmtListMethodsArmClientMockingExtension(client).GetSubParentWithNonResChResource(id);
         }
-        #endregion
 
-        #region SubParentWithLocResource
         /// <summary>
         /// Gets an object representing a <see cref="SubParentWithLocResource" /> along with the instance operations that can be performed on it but with no data.
         /// You can use <see cref="SubParentWithLocResource.CreateResourceIdentifier" /> to create a <see cref="SubParentWithLocResource" /> <see cref="ResourceIdentifier" /> from its components.
@@ -283,9 +252,7 @@ namespace MgmtListMethods
         {
             return GetMgmtListMethodsArmClientMockingExtension(client).GetSubParentWithLocResource(id);
         }
-        #endregion
 
-        #region SubParentResource
         /// <summary>
         /// Gets an object representing a <see cref="SubParentResource" /> along with the instance operations that can be performed on it but with no data.
         /// You can use <see cref="SubParentResource.CreateResourceIdentifier" /> to create a <see cref="SubParentResource" /> <see cref="ResourceIdentifier" /> from its components.
@@ -297,9 +264,7 @@ namespace MgmtListMethods
         {
             return GetMgmtListMethodsArmClientMockingExtension(client).GetSubParentResource(id);
         }
-        #endregion
 
-        #region MgmtGrpParentWithNonResChWithLocResource
         /// <summary>
         /// Gets an object representing a <see cref="MgmtGrpParentWithNonResChWithLocResource" /> along with the instance operations that can be performed on it but with no data.
         /// You can use <see cref="MgmtGrpParentWithNonResChWithLocResource.CreateResourceIdentifier" /> to create a <see cref="MgmtGrpParentWithNonResChWithLocResource" /> <see cref="ResourceIdentifier" /> from its components.
@@ -311,9 +276,7 @@ namespace MgmtListMethods
         {
             return GetMgmtListMethodsArmClientMockingExtension(client).GetMgmtGrpParentWithNonResChWithLocResource(id);
         }
-        #endregion
 
-        #region MgmtGrpParentWithNonResChResource
         /// <summary>
         /// Gets an object representing a <see cref="MgmtGrpParentWithNonResChResource" /> along with the instance operations that can be performed on it but with no data.
         /// You can use <see cref="MgmtGrpParentWithNonResChResource.CreateResourceIdentifier" /> to create a <see cref="MgmtGrpParentWithNonResChResource" /> <see cref="ResourceIdentifier" /> from its components.
@@ -325,9 +288,7 @@ namespace MgmtListMethods
         {
             return GetMgmtListMethodsArmClientMockingExtension(client).GetMgmtGrpParentWithNonResChResource(id);
         }
-        #endregion
 
-        #region MgmtGrpParentWithLocResource
         /// <summary>
         /// Gets an object representing a <see cref="MgmtGrpParentWithLocResource" /> along with the instance operations that can be performed on it but with no data.
         /// You can use <see cref="MgmtGrpParentWithLocResource.CreateResourceIdentifier" /> to create a <see cref="MgmtGrpParentWithLocResource" /> <see cref="ResourceIdentifier" /> from its components.
@@ -339,9 +300,7 @@ namespace MgmtListMethods
         {
             return GetMgmtListMethodsArmClientMockingExtension(client).GetMgmtGrpParentWithLocResource(id);
         }
-        #endregion
 
-        #region MgmtGroupParentResource
         /// <summary>
         /// Gets an object representing a <see cref="MgmtGroupParentResource" /> along with the instance operations that can be performed on it but with no data.
         /// You can use <see cref="MgmtGroupParentResource.CreateResourceIdentifier" /> to create a <see cref="MgmtGroupParentResource" /> <see cref="ResourceIdentifier" /> from its components.
@@ -353,9 +312,7 @@ namespace MgmtListMethods
         {
             return GetMgmtListMethodsArmClientMockingExtension(client).GetMgmtGroupParentResource(id);
         }
-        #endregion
 
-        #region TenantTestResource
         /// <summary>
         /// Gets an object representing a <see cref="TenantTestResource" /> along with the instance operations that can be performed on it but with no data.
         /// You can use <see cref="TenantTestResource.CreateResourceIdentifier" /> to create a <see cref="TenantTestResource" /> <see cref="ResourceIdentifier" /> from its components.
@@ -367,9 +324,7 @@ namespace MgmtListMethods
         {
             return GetMgmtListMethodsArmClientMockingExtension(client).GetTenantTestResource(id);
         }
-        #endregion
 
-        #region TenantParentWithNonResChWithLocResource
         /// <summary>
         /// Gets an object representing a <see cref="TenantParentWithNonResChWithLocResource" /> along with the instance operations that can be performed on it but with no data.
         /// You can use <see cref="TenantParentWithNonResChWithLocResource.CreateResourceIdentifier" /> to create a <see cref="TenantParentWithNonResChWithLocResource" /> <see cref="ResourceIdentifier" /> from its components.
@@ -381,9 +336,7 @@ namespace MgmtListMethods
         {
             return GetMgmtListMethodsArmClientMockingExtension(client).GetTenantParentWithNonResChWithLocResource(id);
         }
-        #endregion
 
-        #region TenantParentWithNonResChResource
         /// <summary>
         /// Gets an object representing a <see cref="TenantParentWithNonResChResource" /> along with the instance operations that can be performed on it but with no data.
         /// You can use <see cref="TenantParentWithNonResChResource.CreateResourceIdentifier" /> to create a <see cref="TenantParentWithNonResChResource" /> <see cref="ResourceIdentifier" /> from its components.
@@ -395,9 +348,7 @@ namespace MgmtListMethods
         {
             return GetMgmtListMethodsArmClientMockingExtension(client).GetTenantParentWithNonResChResource(id);
         }
-        #endregion
 
-        #region TenantParentWithLocResource
         /// <summary>
         /// Gets an object representing a <see cref="TenantParentWithLocResource" /> along with the instance operations that can be performed on it but with no data.
         /// You can use <see cref="TenantParentWithLocResource.CreateResourceIdentifier" /> to create a <see cref="TenantParentWithLocResource" /> <see cref="ResourceIdentifier" /> from its components.
@@ -409,9 +360,7 @@ namespace MgmtListMethods
         {
             return GetMgmtListMethodsArmClientMockingExtension(client).GetTenantParentWithLocResource(id);
         }
-        #endregion
 
-        #region TenantParentResource
         /// <summary>
         /// Gets an object representing a <see cref="TenantParentResource" /> along with the instance operations that can be performed on it but with no data.
         /// You can use <see cref="TenantParentResource.CreateResourceIdentifier" /> to create a <see cref="TenantParentResource" /> <see cref="ResourceIdentifier" /> from its components.
@@ -423,9 +372,7 @@ namespace MgmtListMethods
         {
             return GetMgmtListMethodsArmClientMockingExtension(client).GetTenantParentResource(id);
         }
-        #endregion
 
-        #region FakeConfigurationResource
         /// <summary>
         /// Gets an object representing a <see cref="FakeConfigurationResource" /> along with the instance operations that can be performed on it but with no data.
         /// You can use <see cref="FakeConfigurationResource.CreateResourceIdentifier" /> to create a <see cref="FakeConfigurationResource" /> <see cref="ResourceIdentifier" /> from its components.
@@ -437,7 +384,6 @@ namespace MgmtListMethods
         {
             return GetMgmtListMethodsArmClientMockingExtension(client).GetFakeConfigurationResource(id);
         }
-        #endregion
 
         /// <summary> Gets a collection of MgmtGrpParentWithNonResChWithLocResources in the ManagementGroupResource. </summary>
         /// <param name="managementGroupResource"> The <see cref="ManagementGroupResource" /> instance the method will execute against. </param>

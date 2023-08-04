@@ -44,7 +44,6 @@ namespace MgmtExpandResourceTypes
             });
         }
 
-        #region RecordSetAResource
         /// <summary>
         /// Gets an object representing a <see cref="RecordSetAResource" /> along with the instance operations that can be performed on it but with no data.
         /// You can use <see cref="RecordSetAResource.CreateResourceIdentifier" /> to create a <see cref="RecordSetAResource" /> <see cref="ResourceIdentifier" /> from its components.
@@ -56,9 +55,7 @@ namespace MgmtExpandResourceTypes
         {
             return GetMgmtExpandResourceTypesArmClientMockingExtension(client).GetRecordSetAResource(id);
         }
-        #endregion
 
-        #region RecordSetAaaaResource
         /// <summary>
         /// Gets an object representing a <see cref="RecordSetAaaaResource" /> along with the instance operations that can be performed on it but with no data.
         /// You can use <see cref="RecordSetAaaaResource.CreateResourceIdentifier" /> to create a <see cref="RecordSetAaaaResource" /> <see cref="ResourceIdentifier" /> from its components.
@@ -70,9 +67,7 @@ namespace MgmtExpandResourceTypes
         {
             return GetMgmtExpandResourceTypesArmClientMockingExtension(client).GetRecordSetAaaaResource(id);
         }
-        #endregion
 
-        #region RecordSetCaaResource
         /// <summary>
         /// Gets an object representing a <see cref="RecordSetCaaResource" /> along with the instance operations that can be performed on it but with no data.
         /// You can use <see cref="RecordSetCaaResource.CreateResourceIdentifier" /> to create a <see cref="RecordSetCaaResource" /> <see cref="ResourceIdentifier" /> from its components.
@@ -84,9 +79,7 @@ namespace MgmtExpandResourceTypes
         {
             return GetMgmtExpandResourceTypesArmClientMockingExtension(client).GetRecordSetCaaResource(id);
         }
-        #endregion
 
-        #region RecordSetCNameResource
         /// <summary>
         /// Gets an object representing a <see cref="RecordSetCNameResource" /> along with the instance operations that can be performed on it but with no data.
         /// You can use <see cref="RecordSetCNameResource.CreateResourceIdentifier" /> to create a <see cref="RecordSetCNameResource" /> <see cref="ResourceIdentifier" /> from its components.
@@ -98,9 +91,7 @@ namespace MgmtExpandResourceTypes
         {
             return GetMgmtExpandResourceTypesArmClientMockingExtension(client).GetRecordSetCNameResource(id);
         }
-        #endregion
 
-        #region RecordSetMxResource
         /// <summary>
         /// Gets an object representing a <see cref="RecordSetMxResource" /> along with the instance operations that can be performed on it but with no data.
         /// You can use <see cref="RecordSetMxResource.CreateResourceIdentifier" /> to create a <see cref="RecordSetMxResource" /> <see cref="ResourceIdentifier" /> from its components.
@@ -112,9 +103,7 @@ namespace MgmtExpandResourceTypes
         {
             return GetMgmtExpandResourceTypesArmClientMockingExtension(client).GetRecordSetMxResource(id);
         }
-        #endregion
 
-        #region RecordSetNsResource
         /// <summary>
         /// Gets an object representing a <see cref="RecordSetNsResource" /> along with the instance operations that can be performed on it but with no data.
         /// You can use <see cref="RecordSetNsResource.CreateResourceIdentifier" /> to create a <see cref="RecordSetNsResource" /> <see cref="ResourceIdentifier" /> from its components.
@@ -126,9 +115,7 @@ namespace MgmtExpandResourceTypes
         {
             return GetMgmtExpandResourceTypesArmClientMockingExtension(client).GetRecordSetNsResource(id);
         }
-        #endregion
 
-        #region RecordSetPtrResource
         /// <summary>
         /// Gets an object representing a <see cref="RecordSetPtrResource" /> along with the instance operations that can be performed on it but with no data.
         /// You can use <see cref="RecordSetPtrResource.CreateResourceIdentifier" /> to create a <see cref="RecordSetPtrResource" /> <see cref="ResourceIdentifier" /> from its components.
@@ -140,9 +127,7 @@ namespace MgmtExpandResourceTypes
         {
             return GetMgmtExpandResourceTypesArmClientMockingExtension(client).GetRecordSetPtrResource(id);
         }
-        #endregion
 
-        #region RecordSetSoaResource
         /// <summary>
         /// Gets an object representing a <see cref="RecordSetSoaResource" /> along with the instance operations that can be performed on it but with no data.
         /// You can use <see cref="RecordSetSoaResource.CreateResourceIdentifier" /> to create a <see cref="RecordSetSoaResource" /> <see cref="ResourceIdentifier" /> from its components.
@@ -154,9 +139,7 @@ namespace MgmtExpandResourceTypes
         {
             return GetMgmtExpandResourceTypesArmClientMockingExtension(client).GetRecordSetSoaResource(id);
         }
-        #endregion
 
-        #region RecordSetSrvResource
         /// <summary>
         /// Gets an object representing a <see cref="RecordSetSrvResource" /> along with the instance operations that can be performed on it but with no data.
         /// You can use <see cref="RecordSetSrvResource.CreateResourceIdentifier" /> to create a <see cref="RecordSetSrvResource" /> <see cref="ResourceIdentifier" /> from its components.
@@ -168,9 +151,7 @@ namespace MgmtExpandResourceTypes
         {
             return GetMgmtExpandResourceTypesArmClientMockingExtension(client).GetRecordSetSrvResource(id);
         }
-        #endregion
 
-        #region RecordSetTxtResource
         /// <summary>
         /// Gets an object representing a <see cref="RecordSetTxtResource" /> along with the instance operations that can be performed on it but with no data.
         /// You can use <see cref="RecordSetTxtResource.CreateResourceIdentifier" /> to create a <see cref="RecordSetTxtResource" /> <see cref="ResourceIdentifier" /> from its components.
@@ -182,9 +163,7 @@ namespace MgmtExpandResourceTypes
         {
             return GetMgmtExpandResourceTypesArmClientMockingExtension(client).GetRecordSetTxtResource(id);
         }
-        #endregion
 
-        #region ZoneResource
         /// <summary>
         /// Gets an object representing a <see cref="ZoneResource" /> along with the instance operations that can be performed on it but with no data.
         /// You can use <see cref="ZoneResource.CreateResourceIdentifier" /> to create a <see cref="ZoneResource" /> <see cref="ResourceIdentifier" /> from its components.
@@ -196,7 +175,6 @@ namespace MgmtExpandResourceTypes
         {
             return GetMgmtExpandResourceTypesArmClientMockingExtension(client).GetZoneResource(id);
         }
-        #endregion
 
         /// <summary> Gets a collection of ZoneResources in the ResourceGroupResource. </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>

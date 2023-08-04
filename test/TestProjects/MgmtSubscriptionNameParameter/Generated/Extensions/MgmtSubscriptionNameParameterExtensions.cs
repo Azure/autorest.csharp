@@ -35,7 +35,6 @@ namespace MgmtSubscriptionNameParameter
             });
         }
 
-        #region SBSubscriptionResource
         /// <summary>
         /// Gets an object representing a <see cref="SBSubscriptionResource" /> along with the instance operations that can be performed on it but with no data.
         /// You can use <see cref="SBSubscriptionResource.CreateResourceIdentifier" /> to create a <see cref="SBSubscriptionResource" /> <see cref="ResourceIdentifier" /> from its components.
@@ -47,7 +46,6 @@ namespace MgmtSubscriptionNameParameter
         {
             return GetMgmtSubscriptionNameParameterArmClientMockingExtension(client).GetSBSubscriptionResource(id);
         }
-        #endregion
 
         /// <summary> Gets a collection of SBSubscriptionResources in the ResourceGroupResource. </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>

@@ -43,7 +43,6 @@ namespace MgmtPartialResource
             });
         }
 
-        #region PublicIPAddressResource
         /// <summary>
         /// Gets an object representing a <see cref="PublicIPAddressResource" /> along with the instance operations that can be performed on it but with no data.
         /// You can use <see cref="PublicIPAddressResource.CreateResourceIdentifier" /> to create a <see cref="PublicIPAddressResource" /> <see cref="ResourceIdentifier" /> from its components.
@@ -55,9 +54,7 @@ namespace MgmtPartialResource
         {
             return GetMgmtPartialResourceArmClientMockingExtension(client).GetPublicIPAddressResource(id);
         }
-        #endregion
 
-        #region ConfigurationProfileAssignmentResource
         /// <summary>
         /// Gets an object representing a <see cref="ConfigurationProfileAssignmentResource" /> along with the instance operations that can be performed on it but with no data.
         /// You can use <see cref="ConfigurationProfileAssignmentResource.CreateResourceIdentifier" /> to create a <see cref="ConfigurationProfileAssignmentResource" /> <see cref="ResourceIdentifier" /> from its components.
@@ -69,9 +66,7 @@ namespace MgmtPartialResource
         {
             return GetMgmtPartialResourceArmClientMockingExtension(client).GetConfigurationProfileAssignmentResource(id);
         }
-        #endregion
 
-        #region PartialVmssResource
         /// <summary>
         /// Gets an object representing a <see cref="PartialVmssResource" /> along with the instance operations that can be performed on it but with no data.
         /// You can use <see cref="PartialVmssResource.CreateResourceIdentifier" /> to create a <see cref="PartialVmssResource" /> <see cref="ResourceIdentifier" /> from its components.
@@ -83,9 +78,7 @@ namespace MgmtPartialResource
         {
             return GetMgmtPartialResourceArmClientMockingExtension(client).GetPartialVmssResource(id);
         }
-        #endregion
 
-        #region VirtualMachineMgmtPartialResource
         /// <summary>
         /// Gets an object representing a <see cref="VirtualMachineMgmtPartialResource" /> along with the instance operations that can be performed on it but with no data.
         /// You can use <see cref="VirtualMachineMgmtPartialResource.CreateResourceIdentifier" /> to create a <see cref="VirtualMachineMgmtPartialResource" /> <see cref="ResourceIdentifier" /> from its components.
@@ -97,7 +90,6 @@ namespace MgmtPartialResource
         {
             return GetMgmtPartialResourceArmClientMockingExtension(client).GetVirtualMachineMgmtPartialResource(id);
         }
-        #endregion
 
         /// <summary> Gets a collection of PublicIPAddressResources in the ResourceGroupResource. </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>

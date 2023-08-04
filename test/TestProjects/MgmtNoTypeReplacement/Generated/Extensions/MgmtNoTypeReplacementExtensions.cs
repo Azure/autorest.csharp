@@ -35,7 +35,6 @@ namespace MgmtNoTypeReplacement
             });
         }
 
-        #region NoTypeReplacementModel1Resource
         /// <summary>
         /// Gets an object representing a <see cref="NoTypeReplacementModel1Resource" /> along with the instance operations that can be performed on it but with no data.
         /// You can use <see cref="NoTypeReplacementModel1Resource.CreateResourceIdentifier" /> to create a <see cref="NoTypeReplacementModel1Resource" /> <see cref="ResourceIdentifier" /> from its components.
@@ -47,9 +46,7 @@ namespace MgmtNoTypeReplacement
         {
             return GetMgmtNoTypeReplacementArmClientMockingExtension(client).GetNoTypeReplacementModel1Resource(id);
         }
-        #endregion
 
-        #region NoTypeReplacementModel2Resource
         /// <summary>
         /// Gets an object representing a <see cref="NoTypeReplacementModel2Resource" /> along with the instance operations that can be performed on it but with no data.
         /// You can use <see cref="NoTypeReplacementModel2Resource.CreateResourceIdentifier" /> to create a <see cref="NoTypeReplacementModel2Resource" /> <see cref="ResourceIdentifier" /> from its components.
@@ -61,9 +58,7 @@ namespace MgmtNoTypeReplacement
         {
             return GetMgmtNoTypeReplacementArmClientMockingExtension(client).GetNoTypeReplacementModel2Resource(id);
         }
-        #endregion
 
-        #region NoTypeReplacementModel3Resource
         /// <summary>
         /// Gets an object representing a <see cref="NoTypeReplacementModel3Resource" /> along with the instance operations that can be performed on it but with no data.
         /// You can use <see cref="NoTypeReplacementModel3Resource.CreateResourceIdentifier" /> to create a <see cref="NoTypeReplacementModel3Resource" /> <see cref="ResourceIdentifier" /> from its components.
@@ -75,7 +70,6 @@ namespace MgmtNoTypeReplacement
         {
             return GetMgmtNoTypeReplacementArmClientMockingExtension(client).GetNoTypeReplacementModel3Resource(id);
         }
-        #endregion
 
         /// <summary> Gets a collection of NoTypeReplacementModel1Resources in the ResourceGroupResource. </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>

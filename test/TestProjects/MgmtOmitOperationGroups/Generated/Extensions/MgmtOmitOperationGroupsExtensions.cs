@@ -36,7 +36,6 @@ namespace MgmtOmitOperationGroups
             });
         }
 
-        #region Model2Resource
         /// <summary>
         /// Gets an object representing a <see cref="Model2Resource" /> along with the instance operations that can be performed on it but with no data.
         /// You can use <see cref="Model2Resource.CreateResourceIdentifier" /> to create a <see cref="Model2Resource" /> <see cref="ResourceIdentifier" /> from its components.
@@ -48,7 +47,6 @@ namespace MgmtOmitOperationGroups
         {
             return GetMgmtOmitOperationGroupsArmClientMockingExtension(client).GetModel2Resource(id);
         }
-        #endregion
 
         /// <summary> Gets a collection of Model2Resources in the ResourceGroupResource. </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>

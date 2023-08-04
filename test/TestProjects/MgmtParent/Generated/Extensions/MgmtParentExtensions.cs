@@ -44,7 +44,6 @@ namespace MgmtParent
             });
         }
 
-        #region AvailabilitySetResource
         /// <summary>
         /// Gets an object representing an <see cref="AvailabilitySetResource" /> along with the instance operations that can be performed on it but with no data.
         /// You can use <see cref="AvailabilitySetResource.CreateResourceIdentifier" /> to create an <see cref="AvailabilitySetResource" /> <see cref="ResourceIdentifier" /> from its components.
@@ -56,9 +55,7 @@ namespace MgmtParent
         {
             return GetMgmtParentArmClientMockingExtension(client).GetAvailabilitySetResource(id);
         }
-        #endregion
 
-        #region DedicatedHostGroupResource
         /// <summary>
         /// Gets an object representing a <see cref="DedicatedHostGroupResource" /> along with the instance operations that can be performed on it but with no data.
         /// You can use <see cref="DedicatedHostGroupResource.CreateResourceIdentifier" /> to create a <see cref="DedicatedHostGroupResource" /> <see cref="ResourceIdentifier" /> from its components.
@@ -70,9 +67,7 @@ namespace MgmtParent
         {
             return GetMgmtParentArmClientMockingExtension(client).GetDedicatedHostGroupResource(id);
         }
-        #endregion
 
-        #region DedicatedHostResource
         /// <summary>
         /// Gets an object representing a <see cref="DedicatedHostResource" /> along with the instance operations that can be performed on it but with no data.
         /// You can use <see cref="DedicatedHostResource.CreateResourceIdentifier" /> to create a <see cref="DedicatedHostResource" /> <see cref="ResourceIdentifier" /> from its components.
@@ -84,9 +79,7 @@ namespace MgmtParent
         {
             return GetMgmtParentArmClientMockingExtension(client).GetDedicatedHostResource(id);
         }
-        #endregion
 
-        #region VirtualMachineExtensionImageResource
         /// <summary>
         /// Gets an object representing a <see cref="VirtualMachineExtensionImageResource" /> along with the instance operations that can be performed on it but with no data.
         /// You can use <see cref="VirtualMachineExtensionImageResource.CreateResourceIdentifier" /> to create a <see cref="VirtualMachineExtensionImageResource" /> <see cref="ResourceIdentifier" /> from its components.
@@ -98,7 +91,6 @@ namespace MgmtParent
         {
             return GetMgmtParentArmClientMockingExtension(client).GetVirtualMachineExtensionImageResource(id);
         }
-        #endregion
 
         /// <summary> Gets a collection of AvailabilitySetResources in the ResourceGroupResource. </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>

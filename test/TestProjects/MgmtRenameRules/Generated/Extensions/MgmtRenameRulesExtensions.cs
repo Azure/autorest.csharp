@@ -44,7 +44,6 @@ namespace MgmtRenameRules
             });
         }
 
-        #region VirtualMachineResource
         /// <summary>
         /// Gets an object representing a <see cref="VirtualMachineResource" /> along with the instance operations that can be performed on it but with no data.
         /// You can use <see cref="VirtualMachineResource.CreateResourceIdentifier" /> to create a <see cref="VirtualMachineResource" /> <see cref="ResourceIdentifier" /> from its components.
@@ -56,9 +55,7 @@ namespace MgmtRenameRules
         {
             return GetMgmtRenameRulesArmClientMockingExtension(client).GetVirtualMachineResource(id);
         }
-        #endregion
 
-        #region ImageResource
         /// <summary>
         /// Gets an object representing an <see cref="ImageResource" /> along with the instance operations that can be performed on it but with no data.
         /// You can use <see cref="ImageResource.CreateResourceIdentifier" /> to create an <see cref="ImageResource" /> <see cref="ResourceIdentifier" /> from its components.
@@ -70,9 +67,7 @@ namespace MgmtRenameRules
         {
             return GetMgmtRenameRulesArmClientMockingExtension(client).GetImageResource(id);
         }
-        #endregion
 
-        #region VirtualMachineScaleSetResource
         /// <summary>
         /// Gets an object representing a <see cref="VirtualMachineScaleSetResource" /> along with the instance operations that can be performed on it but with no data.
         /// You can use <see cref="VirtualMachineScaleSetResource.CreateResourceIdentifier" /> to create a <see cref="VirtualMachineScaleSetResource" /> <see cref="ResourceIdentifier" /> from its components.
@@ -84,9 +79,7 @@ namespace MgmtRenameRules
         {
             return GetMgmtRenameRulesArmClientMockingExtension(client).GetVirtualMachineScaleSetResource(id);
         }
-        #endregion
 
-        #region VirtualMachineScaleSetExtensionResource
         /// <summary>
         /// Gets an object representing a <see cref="VirtualMachineScaleSetExtensionResource" /> along with the instance operations that can be performed on it but with no data.
         /// You can use <see cref="VirtualMachineScaleSetExtensionResource.CreateResourceIdentifier" /> to create a <see cref="VirtualMachineScaleSetExtensionResource" /> <see cref="ResourceIdentifier" /> from its components.
@@ -98,9 +91,7 @@ namespace MgmtRenameRules
         {
             return GetMgmtRenameRulesArmClientMockingExtension(client).GetVirtualMachineScaleSetExtensionResource(id);
         }
-        #endregion
 
-        #region VirtualMachineScaleSetRollingUpgradeResource
         /// <summary>
         /// Gets an object representing a <see cref="VirtualMachineScaleSetRollingUpgradeResource" /> along with the instance operations that can be performed on it but with no data.
         /// You can use <see cref="VirtualMachineScaleSetRollingUpgradeResource.CreateResourceIdentifier" /> to create a <see cref="VirtualMachineScaleSetRollingUpgradeResource" /> <see cref="ResourceIdentifier" /> from its components.
@@ -112,9 +103,7 @@ namespace MgmtRenameRules
         {
             return GetMgmtRenameRulesArmClientMockingExtension(client).GetVirtualMachineScaleSetRollingUpgradeResource(id);
         }
-        #endregion
 
-        #region VirtualMachineScaleSetVmResource
         /// <summary>
         /// Gets an object representing a <see cref="VirtualMachineScaleSetVmResource" /> along with the instance operations that can be performed on it but with no data.
         /// You can use <see cref="VirtualMachineScaleSetVmResource.CreateResourceIdentifier" /> to create a <see cref="VirtualMachineScaleSetVmResource" /> <see cref="ResourceIdentifier" /> from its components.
@@ -126,7 +115,6 @@ namespace MgmtRenameRules
         {
             return GetMgmtRenameRulesArmClientMockingExtension(client).GetVirtualMachineScaleSetVmResource(id);
         }
-        #endregion
 
         /// <summary> Gets a collection of VirtualMachineResources in the ResourceGroupResource. </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>

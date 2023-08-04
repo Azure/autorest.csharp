@@ -35,7 +35,6 @@ namespace MgmtCustomizations
             });
         }
 
-        #region PetStoreResource
         /// <summary>
         /// Gets an object representing a <see cref="PetStoreResource" /> along with the instance operations that can be performed on it but with no data.
         /// You can use <see cref="PetStoreResource.CreateResourceIdentifier" /> to create a <see cref="PetStoreResource" /> <see cref="ResourceIdentifier" /> from its components.
@@ -47,7 +46,6 @@ namespace MgmtCustomizations
         {
             return GetMgmtCustomizationsArmClientMockingExtension(client).GetPetStoreResource(id);
         }
-        #endregion
 
         /// <summary> Gets a collection of PetStoreResources in the ResourceGroupResource. </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>

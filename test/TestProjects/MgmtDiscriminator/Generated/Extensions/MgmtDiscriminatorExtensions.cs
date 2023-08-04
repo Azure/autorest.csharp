@@ -35,7 +35,6 @@ namespace MgmtDiscriminator
             });
         }
 
-        #region DeliveryRuleResource
         /// <summary>
         /// Gets an object representing a <see cref="DeliveryRuleResource" /> along with the instance operations that can be performed on it but with no data.
         /// You can use <see cref="DeliveryRuleResource.CreateResourceIdentifier" /> to create a <see cref="DeliveryRuleResource" /> <see cref="ResourceIdentifier" /> from its components.
@@ -47,7 +46,6 @@ namespace MgmtDiscriminator
         {
             return GetMgmtDiscriminatorArmClientMockingExtension(client).GetDeliveryRuleResource(id);
         }
-        #endregion
 
         /// <summary> Gets a collection of DeliveryRuleResources in the ResourceGroupResource. </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>

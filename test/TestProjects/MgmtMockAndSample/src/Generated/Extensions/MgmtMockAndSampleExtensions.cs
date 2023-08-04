@@ -174,7 +174,6 @@ namespace MgmtMockAndSample
             return GetMgmtMockAndSampleArmClientMockingExtension(client).GetGuestConfigurationAssignment(scope, guestConfigurationAssignmentName, cancellationToken);
         }
 
-        #region VaultResource
         /// <summary>
         /// Gets an object representing a <see cref="VaultResource" /> along with the instance operations that can be performed on it but with no data.
         /// You can use <see cref="VaultResource.CreateResourceIdentifier" /> to create a <see cref="VaultResource" /> <see cref="ResourceIdentifier" /> from its components.
@@ -186,9 +185,7 @@ namespace MgmtMockAndSample
         {
             return GetMgmtMockAndSampleArmClientMockingExtension(client).GetVaultResource(id);
         }
-        #endregion
 
-        #region DeletedVaultResource
         /// <summary>
         /// Gets an object representing a <see cref="DeletedVaultResource" /> along with the instance operations that can be performed on it but with no data.
         /// You can use <see cref="DeletedVaultResource.CreateResourceIdentifier" /> to create a <see cref="DeletedVaultResource" /> <see cref="ResourceIdentifier" /> from its components.
@@ -200,9 +197,7 @@ namespace MgmtMockAndSample
         {
             return GetMgmtMockAndSampleArmClientMockingExtension(client).GetDeletedVaultResource(id);
         }
-        #endregion
 
-        #region MgmtMockAndSamplePrivateEndpointConnectionResource
         /// <summary>
         /// Gets an object representing a <see cref="MgmtMockAndSamplePrivateEndpointConnectionResource" /> along with the instance operations that can be performed on it but with no data.
         /// You can use <see cref="MgmtMockAndSamplePrivateEndpointConnectionResource.CreateResourceIdentifier" /> to create a <see cref="MgmtMockAndSamplePrivateEndpointConnectionResource" /> <see cref="ResourceIdentifier" /> from its components.
@@ -214,9 +209,7 @@ namespace MgmtMockAndSample
         {
             return GetMgmtMockAndSampleArmClientMockingExtension(client).GetMgmtMockAndSamplePrivateEndpointConnectionResource(id);
         }
-        #endregion
 
-        #region VirtualMachineExtensionImageResource
         /// <summary>
         /// Gets an object representing a <see cref="VirtualMachineExtensionImageResource" /> along with the instance operations that can be performed on it but with no data.
         /// You can use <see cref="VirtualMachineExtensionImageResource.CreateResourceIdentifier" /> to create a <see cref="VirtualMachineExtensionImageResource" /> <see cref="ResourceIdentifier" /> from its components.
@@ -228,9 +221,7 @@ namespace MgmtMockAndSample
         {
             return GetMgmtMockAndSampleArmClientMockingExtension(client).GetVirtualMachineExtensionImageResource(id);
         }
-        #endregion
 
-        #region DiskEncryptionSetResource
         /// <summary>
         /// Gets an object representing a <see cref="DiskEncryptionSetResource" /> along with the instance operations that can be performed on it but with no data.
         /// You can use <see cref="DiskEncryptionSetResource.CreateResourceIdentifier" /> to create a <see cref="DiskEncryptionSetResource" /> <see cref="ResourceIdentifier" /> from its components.
@@ -242,9 +233,7 @@ namespace MgmtMockAndSample
         {
             return GetMgmtMockAndSampleArmClientMockingExtension(client).GetDiskEncryptionSetResource(id);
         }
-        #endregion
 
-        #region ManagedHsmResource
         /// <summary>
         /// Gets an object representing a <see cref="ManagedHsmResource" /> along with the instance operations that can be performed on it but with no data.
         /// You can use <see cref="ManagedHsmResource.CreateResourceIdentifier" /> to create a <see cref="ManagedHsmResource" /> <see cref="ResourceIdentifier" /> from its components.
@@ -256,9 +245,7 @@ namespace MgmtMockAndSample
         {
             return GetMgmtMockAndSampleArmClientMockingExtension(client).GetManagedHsmResource(id);
         }
-        #endregion
 
-        #region DeletedManagedHsmResource
         /// <summary>
         /// Gets an object representing a <see cref="DeletedManagedHsmResource" /> along with the instance operations that can be performed on it but with no data.
         /// You can use <see cref="DeletedManagedHsmResource.CreateResourceIdentifier" /> to create a <see cref="DeletedManagedHsmResource" /> <see cref="ResourceIdentifier" /> from its components.
@@ -270,9 +257,7 @@ namespace MgmtMockAndSample
         {
             return GetMgmtMockAndSampleArmClientMockingExtension(client).GetDeletedManagedHsmResource(id);
         }
-        #endregion
 
-        #region MhsmPrivateEndpointConnectionResource
         /// <summary>
         /// Gets an object representing a <see cref="MhsmPrivateEndpointConnectionResource" /> along with the instance operations that can be performed on it but with no data.
         /// You can use <see cref="MhsmPrivateEndpointConnectionResource.CreateResourceIdentifier" /> to create a <see cref="MhsmPrivateEndpointConnectionResource" /> <see cref="ResourceIdentifier" /> from its components.
@@ -284,9 +269,7 @@ namespace MgmtMockAndSample
         {
             return GetMgmtMockAndSampleArmClientMockingExtension(client).GetMhsmPrivateEndpointConnectionResource(id);
         }
-        #endregion
 
-        #region FirewallPolicyResource
         /// <summary>
         /// Gets an object representing a <see cref="FirewallPolicyResource" /> along with the instance operations that can be performed on it but with no data.
         /// You can use <see cref="FirewallPolicyResource.CreateResourceIdentifier" /> to create a <see cref="FirewallPolicyResource" /> <see cref="ResourceIdentifier" /> from its components.
@@ -298,9 +281,7 @@ namespace MgmtMockAndSample
         {
             return GetMgmtMockAndSampleArmClientMockingExtension(client).GetFirewallPolicyResource(id);
         }
-        #endregion
 
-        #region FirewallPolicyRuleCollectionGroupResource
         /// <summary>
         /// Gets an object representing a <see cref="FirewallPolicyRuleCollectionGroupResource" /> along with the instance operations that can be performed on it but with no data.
         /// You can use <see cref="FirewallPolicyRuleCollectionGroupResource.CreateResourceIdentifier" /> to create a <see cref="FirewallPolicyRuleCollectionGroupResource" /> <see cref="ResourceIdentifier" /> from its components.
@@ -312,9 +293,7 @@ namespace MgmtMockAndSample
         {
             return GetMgmtMockAndSampleArmClientMockingExtension(client).GetFirewallPolicyRuleCollectionGroupResource(id);
         }
-        #endregion
 
-        #region RoleAssignmentResource
         /// <summary>
         /// Gets an object representing a <see cref="RoleAssignmentResource" /> along with the instance operations that can be performed on it but with no data.
         /// You can use <see cref="RoleAssignmentResource.CreateResourceIdentifier" /> to create a <see cref="RoleAssignmentResource" /> <see cref="ResourceIdentifier" /> from its components.
@@ -326,9 +305,7 @@ namespace MgmtMockAndSample
         {
             return GetMgmtMockAndSampleArmClientMockingExtension(client).GetRoleAssignmentResource(id);
         }
-        #endregion
 
-        #region GuestConfigurationAssignmentResource
         /// <summary>
         /// Gets an object representing a <see cref="GuestConfigurationAssignmentResource" /> along with the instance operations that can be performed on it but with no data.
         /// You can use <see cref="GuestConfigurationAssignmentResource.CreateResourceIdentifier" /> to create a <see cref="GuestConfigurationAssignmentResource" /> <see cref="ResourceIdentifier" /> from its components.
@@ -340,7 +317,6 @@ namespace MgmtMockAndSample
         {
             return GetMgmtMockAndSampleArmClientMockingExtension(client).GetGuestConfigurationAssignmentResource(id);
         }
-        #endregion
 
         /// <summary> Gets a collection of RoleAssignmentResources in the ArmResource. </summary>
         /// <param name="armResource"> The <see cref="ArmResource" /> instance the method will execute against. </param>

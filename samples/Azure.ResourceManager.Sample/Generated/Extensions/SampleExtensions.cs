@@ -44,7 +44,6 @@ namespace Azure.ResourceManager.Sample
             });
         }
 
-        #region AvailabilitySetResource
         /// <summary>
         /// Gets an object representing an <see cref="AvailabilitySetResource" /> along with the instance operations that can be performed on it but with no data.
         /// You can use <see cref="AvailabilitySetResource.CreateResourceIdentifier" /> to create an <see cref="AvailabilitySetResource" /> <see cref="ResourceIdentifier" /> from its components.
@@ -56,9 +55,7 @@ namespace Azure.ResourceManager.Sample
         {
             return GetSampleArmClientMockingExtension(client).GetAvailabilitySetResource(id);
         }
-        #endregion
 
-        #region ProximityPlacementGroupResource
         /// <summary>
         /// Gets an object representing a <see cref="ProximityPlacementGroupResource" /> along with the instance operations that can be performed on it but with no data.
         /// You can use <see cref="ProximityPlacementGroupResource.CreateResourceIdentifier" /> to create a <see cref="ProximityPlacementGroupResource" /> <see cref="ResourceIdentifier" /> from its components.
@@ -70,9 +67,7 @@ namespace Azure.ResourceManager.Sample
         {
             return GetSampleArmClientMockingExtension(client).GetProximityPlacementGroupResource(id);
         }
-        #endregion
 
-        #region DedicatedHostGroupResource
         /// <summary>
         /// Gets an object representing a <see cref="DedicatedHostGroupResource" /> along with the instance operations that can be performed on it but with no data.
         /// You can use <see cref="DedicatedHostGroupResource.CreateResourceIdentifier" /> to create a <see cref="DedicatedHostGroupResource" /> <see cref="ResourceIdentifier" /> from its components.
@@ -84,9 +79,7 @@ namespace Azure.ResourceManager.Sample
         {
             return GetSampleArmClientMockingExtension(client).GetDedicatedHostGroupResource(id);
         }
-        #endregion
 
-        #region DedicatedHostResource
         /// <summary>
         /// Gets an object representing a <see cref="DedicatedHostResource" /> along with the instance operations that can be performed on it but with no data.
         /// You can use <see cref="DedicatedHostResource.CreateResourceIdentifier" /> to create a <see cref="DedicatedHostResource" /> <see cref="ResourceIdentifier" /> from its components.
@@ -98,9 +91,7 @@ namespace Azure.ResourceManager.Sample
         {
             return GetSampleArmClientMockingExtension(client).GetDedicatedHostResource(id);
         }
-        #endregion
 
-        #region SshPublicKeyResource
         /// <summary>
         /// Gets an object representing a <see cref="SshPublicKeyResource" /> along with the instance operations that can be performed on it but with no data.
         /// You can use <see cref="SshPublicKeyResource.CreateResourceIdentifier" /> to create a <see cref="SshPublicKeyResource" /> <see cref="ResourceIdentifier" /> from its components.
@@ -112,9 +103,7 @@ namespace Azure.ResourceManager.Sample
         {
             return GetSampleArmClientMockingExtension(client).GetSshPublicKeyResource(id);
         }
-        #endregion
 
-        #region VirtualMachineExtensionImageResource
         /// <summary>
         /// Gets an object representing a <see cref="VirtualMachineExtensionImageResource" /> along with the instance operations that can be performed on it but with no data.
         /// You can use <see cref="VirtualMachineExtensionImageResource.CreateResourceIdentifier" /> to create a <see cref="VirtualMachineExtensionImageResource" /> <see cref="ResourceIdentifier" /> from its components.
@@ -126,9 +115,7 @@ namespace Azure.ResourceManager.Sample
         {
             return GetSampleArmClientMockingExtension(client).GetVirtualMachineExtensionImageResource(id);
         }
-        #endregion
 
-        #region VirtualMachineExtensionResource
         /// <summary>
         /// Gets an object representing a <see cref="VirtualMachineExtensionResource" /> along with the instance operations that can be performed on it but with no data.
         /// You can use <see cref="VirtualMachineExtensionResource.CreateResourceIdentifier" /> to create a <see cref="VirtualMachineExtensionResource" /> <see cref="ResourceIdentifier" /> from its components.
@@ -140,9 +127,7 @@ namespace Azure.ResourceManager.Sample
         {
             return GetSampleArmClientMockingExtension(client).GetVirtualMachineExtensionResource(id);
         }
-        #endregion
 
-        #region VirtualMachineScaleSetVirtualMachineExtensionResource
         /// <summary>
         /// Gets an object representing a <see cref="VirtualMachineScaleSetVirtualMachineExtensionResource" /> along with the instance operations that can be performed on it but with no data.
         /// You can use <see cref="VirtualMachineScaleSetVirtualMachineExtensionResource.CreateResourceIdentifier" /> to create a <see cref="VirtualMachineScaleSetVirtualMachineExtensionResource" /> <see cref="ResourceIdentifier" /> from its components.
@@ -154,9 +139,7 @@ namespace Azure.ResourceManager.Sample
         {
             return GetSampleArmClientMockingExtension(client).GetVirtualMachineScaleSetVirtualMachineExtensionResource(id);
         }
-        #endregion
 
-        #region VirtualMachineResource
         /// <summary>
         /// Gets an object representing a <see cref="VirtualMachineResource" /> along with the instance operations that can be performed on it but with no data.
         /// You can use <see cref="VirtualMachineResource.CreateResourceIdentifier" /> to create a <see cref="VirtualMachineResource" /> <see cref="ResourceIdentifier" /> from its components.
@@ -168,9 +151,7 @@ namespace Azure.ResourceManager.Sample
         {
             return GetSampleArmClientMockingExtension(client).GetVirtualMachineResource(id);
         }
-        #endregion
 
-        #region ImageResource
         /// <summary>
         /// Gets an object representing an <see cref="ImageResource" /> along with the instance operations that can be performed on it but with no data.
         /// You can use <see cref="ImageResource.CreateResourceIdentifier" /> to create an <see cref="ImageResource" /> <see cref="ResourceIdentifier" /> from its components.
@@ -182,9 +163,7 @@ namespace Azure.ResourceManager.Sample
         {
             return GetSampleArmClientMockingExtension(client).GetImageResource(id);
         }
-        #endregion
 
-        #region VirtualMachineScaleSetResource
         /// <summary>
         /// Gets an object representing a <see cref="VirtualMachineScaleSetResource" /> along with the instance operations that can be performed on it but with no data.
         /// You can use <see cref="VirtualMachineScaleSetResource.CreateResourceIdentifier" /> to create a <see cref="VirtualMachineScaleSetResource" /> <see cref="ResourceIdentifier" /> from its components.
@@ -196,9 +175,7 @@ namespace Azure.ResourceManager.Sample
         {
             return GetSampleArmClientMockingExtension(client).GetVirtualMachineScaleSetResource(id);
         }
-        #endregion
 
-        #region VirtualMachineScaleSetExtensionResource
         /// <summary>
         /// Gets an object representing a <see cref="VirtualMachineScaleSetExtensionResource" /> along with the instance operations that can be performed on it but with no data.
         /// You can use <see cref="VirtualMachineScaleSetExtensionResource.CreateResourceIdentifier" /> to create a <see cref="VirtualMachineScaleSetExtensionResource" /> <see cref="ResourceIdentifier" /> from its components.
@@ -210,9 +187,7 @@ namespace Azure.ResourceManager.Sample
         {
             return GetSampleArmClientMockingExtension(client).GetVirtualMachineScaleSetExtensionResource(id);
         }
-        #endregion
 
-        #region VirtualMachineScaleSetRollingUpgradeResource
         /// <summary>
         /// Gets an object representing a <see cref="VirtualMachineScaleSetRollingUpgradeResource" /> along with the instance operations that can be performed on it but with no data.
         /// You can use <see cref="VirtualMachineScaleSetRollingUpgradeResource.CreateResourceIdentifier" /> to create a <see cref="VirtualMachineScaleSetRollingUpgradeResource" /> <see cref="ResourceIdentifier" /> from its components.
@@ -224,9 +199,7 @@ namespace Azure.ResourceManager.Sample
         {
             return GetSampleArmClientMockingExtension(client).GetVirtualMachineScaleSetRollingUpgradeResource(id);
         }
-        #endregion
 
-        #region VirtualMachineScaleSetVMResource
         /// <summary>
         /// Gets an object representing a <see cref="VirtualMachineScaleSetVMResource" /> along with the instance operations that can be performed on it but with no data.
         /// You can use <see cref="VirtualMachineScaleSetVMResource.CreateResourceIdentifier" /> to create a <see cref="VirtualMachineScaleSetVMResource" /> <see cref="ResourceIdentifier" /> from its components.
@@ -238,7 +211,6 @@ namespace Azure.ResourceManager.Sample
         {
             return GetSampleArmClientMockingExtension(client).GetVirtualMachineScaleSetVMResource(id);
         }
-        #endregion
 
         /// <summary> Gets a collection of AvailabilitySetResources in the ResourceGroupResource. </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>

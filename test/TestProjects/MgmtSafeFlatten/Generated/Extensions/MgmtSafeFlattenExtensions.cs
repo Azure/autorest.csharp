@@ -43,7 +43,6 @@ namespace MgmtSafeFlatten
             });
         }
 
-        #region TypeOneResource
         /// <summary>
         /// Gets an object representing a <see cref="TypeOneResource" /> along with the instance operations that can be performed on it but with no data.
         /// You can use <see cref="TypeOneResource.CreateResourceIdentifier" /> to create a <see cref="TypeOneResource" /> <see cref="ResourceIdentifier" /> from its components.
@@ -55,9 +54,7 @@ namespace MgmtSafeFlatten
         {
             return GetMgmtSafeFlattenArmClientMockingExtension(client).GetTypeOneResource(id);
         }
-        #endregion
 
-        #region TypeTwoResource
         /// <summary>
         /// Gets an object representing a <see cref="TypeTwoResource" /> along with the instance operations that can be performed on it but with no data.
         /// You can use <see cref="TypeTwoResource.CreateResourceIdentifier" /> to create a <see cref="TypeTwoResource" /> <see cref="ResourceIdentifier" /> from its components.
@@ -69,7 +66,6 @@ namespace MgmtSafeFlatten
         {
             return GetMgmtSafeFlattenArmClientMockingExtension(client).GetTypeTwoResource(id);
         }
-        #endregion
 
         /// <summary> Gets a collection of TypeOneResources in the ResourceGroupResource. </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>

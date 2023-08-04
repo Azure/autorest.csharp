@@ -44,7 +44,6 @@ namespace MgmtPropertyBag
             });
         }
 
-        #region FooResource
         /// <summary>
         /// Gets an object representing a <see cref="FooResource" /> along with the instance operations that can be performed on it but with no data.
         /// You can use <see cref="FooResource.CreateResourceIdentifier" /> to create a <see cref="FooResource" /> <see cref="ResourceIdentifier" /> from its components.
@@ -56,9 +55,7 @@ namespace MgmtPropertyBag
         {
             return GetMgmtPropertyBagArmClientMockingExtension(client).GetFooResource(id);
         }
-        #endregion
 
-        #region BarResource
         /// <summary>
         /// Gets an object representing a <see cref="BarResource" /> along with the instance operations that can be performed on it but with no data.
         /// You can use <see cref="BarResource.CreateResourceIdentifier" /> to create a <see cref="BarResource" /> <see cref="ResourceIdentifier" /> from its components.
@@ -70,7 +67,6 @@ namespace MgmtPropertyBag
         {
             return GetMgmtPropertyBagArmClientMockingExtension(client).GetBarResource(id);
         }
-        #endregion
 
         /// <summary> Gets a collection of FooResources in the ResourceGroupResource. </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>

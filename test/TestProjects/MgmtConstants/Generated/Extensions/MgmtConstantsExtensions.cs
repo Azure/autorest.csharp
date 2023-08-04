@@ -44,7 +44,6 @@ namespace MgmtConstants
             });
         }
 
-        #region OptionalMachineResource
         /// <summary>
         /// Gets an object representing an <see cref="OptionalMachineResource" /> along with the instance operations that can be performed on it but with no data.
         /// You can use <see cref="OptionalMachineResource.CreateResourceIdentifier" /> to create an <see cref="OptionalMachineResource" /> <see cref="ResourceIdentifier" /> from its components.
@@ -56,7 +55,6 @@ namespace MgmtConstants
         {
             return GetMgmtConstantsArmClientMockingExtension(client).GetOptionalMachineResource(id);
         }
-        #endregion
 
         /// <summary> Gets a collection of OptionalMachineResources in the ResourceGroupResource. </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>

@@ -43,7 +43,6 @@ namespace MgmtCollectionParent
             });
         }
 
-        #region OrderResource
         /// <summary>
         /// Gets an object representing an <see cref="OrderResource" /> along with the instance operations that can be performed on it but with no data.
         /// You can use <see cref="OrderResource.CreateResourceIdentifier" /> to create an <see cref="OrderResource" /> <see cref="ResourceIdentifier" /> from its components.
@@ -55,7 +54,6 @@ namespace MgmtCollectionParent
         {
             return GetMgmtCollectionParentArmClientMockingExtension(client).GetOrderResource(id);
         }
-        #endregion
 
         /// <summary> Gets a collection of OrderResources in the ResourceGroupResource. </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>

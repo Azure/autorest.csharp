@@ -35,7 +35,6 @@ namespace MgmtSingletonResource
             });
         }
 
-        #region CarResource
         /// <summary>
         /// Gets an object representing a <see cref="CarResource" /> along with the instance operations that can be performed on it but with no data.
         /// You can use <see cref="CarResource.CreateResourceIdentifier" /> to create a <see cref="CarResource" /> <see cref="ResourceIdentifier" /> from its components.
@@ -47,9 +46,7 @@ namespace MgmtSingletonResource
         {
             return GetMgmtSingletonResourceArmClientMockingExtension(client).GetCarResource(id);
         }
-        #endregion
 
-        #region IgnitionResource
         /// <summary>
         /// Gets an object representing an <see cref="IgnitionResource" /> along with the instance operations that can be performed on it but with no data.
         /// You can use <see cref="IgnitionResource.CreateResourceIdentifier" /> to create an <see cref="IgnitionResource" /> <see cref="ResourceIdentifier" /> from its components.
@@ -61,9 +58,7 @@ namespace MgmtSingletonResource
         {
             return GetMgmtSingletonResourceArmClientMockingExtension(client).GetIgnitionResource(id);
         }
-        #endregion
 
-        #region BrakeResource
         /// <summary>
         /// Gets an object representing a <see cref="BrakeResource" /> along with the instance operations that can be performed on it but with no data.
         /// You can use <see cref="BrakeResource.CreateResourceIdentifier" /> to create a <see cref="BrakeResource" /> <see cref="ResourceIdentifier" /> from its components.
@@ -75,9 +70,7 @@ namespace MgmtSingletonResource
         {
             return GetMgmtSingletonResourceArmClientMockingExtension(client).GetBrakeResource(id);
         }
-        #endregion
 
-        #region SingletonResource
         /// <summary>
         /// Gets an object representing a <see cref="SingletonResource" /> along with the instance operations that can be performed on it but with no data.
         /// You can use <see cref="SingletonResource.CreateResourceIdentifier" /> to create a <see cref="SingletonResource" /> <see cref="ResourceIdentifier" /> from its components.
@@ -89,9 +82,7 @@ namespace MgmtSingletonResource
         {
             return GetMgmtSingletonResourceArmClientMockingExtension(client).GetSingletonResource(id);
         }
-        #endregion
 
-        #region ParentResource
         /// <summary>
         /// Gets an object representing a <see cref="ParentResource" /> along with the instance operations that can be performed on it but with no data.
         /// You can use <see cref="ParentResource.CreateResourceIdentifier" /> to create a <see cref="ParentResource" /> <see cref="ResourceIdentifier" /> from its components.
@@ -103,7 +94,6 @@ namespace MgmtSingletonResource
         {
             return GetMgmtSingletonResourceArmClientMockingExtension(client).GetParentResource(id);
         }
-        #endregion
 
         /// <summary> Gets a collection of CarResources in the ResourceGroupResource. </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>

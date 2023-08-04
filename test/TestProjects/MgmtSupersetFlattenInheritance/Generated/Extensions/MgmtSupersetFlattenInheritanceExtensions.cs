@@ -36,7 +36,6 @@ namespace MgmtSupersetFlattenInheritance
             });
         }
 
-        #region ResourceModel1Resource
         /// <summary>
         /// Gets an object representing a <see cref="ResourceModel1Resource" /> along with the instance operations that can be performed on it but with no data.
         /// You can use <see cref="ResourceModel1Resource.CreateResourceIdentifier" /> to create a <see cref="ResourceModel1Resource" /> <see cref="ResourceIdentifier" /> from its components.
@@ -48,9 +47,7 @@ namespace MgmtSupersetFlattenInheritance
         {
             return GetMgmtSupersetFlattenInheritanceArmClientMockingExtension(client).GetResourceModel1Resource(id);
         }
-        #endregion
 
-        #region TrackedResourceModel1Resource
         /// <summary>
         /// Gets an object representing a <see cref="TrackedResourceModel1Resource" /> along with the instance operations that can be performed on it but with no data.
         /// You can use <see cref="TrackedResourceModel1Resource.CreateResourceIdentifier" /> to create a <see cref="TrackedResourceModel1Resource" /> <see cref="ResourceIdentifier" /> from its components.
@@ -62,7 +59,6 @@ namespace MgmtSupersetFlattenInheritance
         {
             return GetMgmtSupersetFlattenInheritanceArmClientMockingExtension(client).GetTrackedResourceModel1Resource(id);
         }
-        #endregion
 
         /// <summary> Gets a collection of ResourceModel1Resources in the ResourceGroupResource. </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>

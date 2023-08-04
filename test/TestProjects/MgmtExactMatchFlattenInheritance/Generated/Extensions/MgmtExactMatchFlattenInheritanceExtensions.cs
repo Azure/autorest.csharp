@@ -36,7 +36,6 @@ namespace MgmtExactMatchFlattenInheritance
             });
         }
 
-        #region AzureResourceFlattenModel1Resource
         /// <summary>
         /// Gets an object representing an <see cref="AzureResourceFlattenModel1Resource" /> along with the instance operations that can be performed on it but with no data.
         /// You can use <see cref="AzureResourceFlattenModel1Resource.CreateResourceIdentifier" /> to create an <see cref="AzureResourceFlattenModel1Resource" /> <see cref="ResourceIdentifier" /> from its components.
@@ -48,9 +47,7 @@ namespace MgmtExactMatchFlattenInheritance
         {
             return GetMgmtExactMatchFlattenInheritanceArmClientMockingExtension(client).GetAzureResourceFlattenModel1Resource(id);
         }
-        #endregion
 
-        #region CustomModel2Resource
         /// <summary>
         /// Gets an object representing a <see cref="CustomModel2Resource" /> along with the instance operations that can be performed on it but with no data.
         /// You can use <see cref="CustomModel2Resource.CreateResourceIdentifier" /> to create a <see cref="CustomModel2Resource" /> <see cref="ResourceIdentifier" /> from its components.
@@ -62,9 +59,7 @@ namespace MgmtExactMatchFlattenInheritance
         {
             return GetMgmtExactMatchFlattenInheritanceArmClientMockingExtension(client).GetCustomModel2Resource(id);
         }
-        #endregion
 
-        #region CustomModel3Resource
         /// <summary>
         /// Gets an object representing a <see cref="CustomModel3Resource" /> along with the instance operations that can be performed on it but with no data.
         /// You can use <see cref="CustomModel3Resource.CreateResourceIdentifier" /> to create a <see cref="CustomModel3Resource" /> <see cref="ResourceIdentifier" /> from its components.
@@ -76,7 +71,6 @@ namespace MgmtExactMatchFlattenInheritance
         {
             return GetMgmtExactMatchFlattenInheritanceArmClientMockingExtension(client).GetCustomModel3Resource(id);
         }
-        #endregion
 
         /// <summary> Gets a collection of AzureResourceFlattenModel1Resources in the ResourceGroupResource. </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>

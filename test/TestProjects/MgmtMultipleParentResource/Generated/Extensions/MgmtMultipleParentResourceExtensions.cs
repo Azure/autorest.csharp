@@ -35,7 +35,6 @@ namespace MgmtMultipleParentResource
             });
         }
 
-        #region AnotherParentResource
         /// <summary>
         /// Gets an object representing an <see cref="AnotherParentResource" /> along with the instance operations that can be performed on it but with no data.
         /// You can use <see cref="AnotherParentResource.CreateResourceIdentifier" /> to create an <see cref="AnotherParentResource" /> <see cref="ResourceIdentifier" /> from its components.
@@ -47,9 +46,7 @@ namespace MgmtMultipleParentResource
         {
             return GetMgmtMultipleParentResourceArmClientMockingExtension(client).GetAnotherParentResource(id);
         }
-        #endregion
 
-        #region AnotherParentChildResource
         /// <summary>
         /// Gets an object representing an <see cref="AnotherParentChildResource" /> along with the instance operations that can be performed on it but with no data.
         /// You can use <see cref="AnotherParentChildResource.CreateResourceIdentifier" /> to create an <see cref="AnotherParentChildResource" /> <see cref="ResourceIdentifier" /> from its components.
@@ -61,9 +58,7 @@ namespace MgmtMultipleParentResource
         {
             return GetMgmtMultipleParentResourceArmClientMockingExtension(client).GetAnotherParentChildResource(id);
         }
-        #endregion
 
-        #region TheParentSubParentChildResource
         /// <summary>
         /// Gets an object representing a <see cref="TheParentSubParentChildResource" /> along with the instance operations that can be performed on it but with no data.
         /// You can use <see cref="TheParentSubParentChildResource.CreateResourceIdentifier" /> to create a <see cref="TheParentSubParentChildResource" /> <see cref="ResourceIdentifier" /> from its components.
@@ -75,9 +70,7 @@ namespace MgmtMultipleParentResource
         {
             return GetMgmtMultipleParentResourceArmClientMockingExtension(client).GetTheParentSubParentChildResource(id);
         }
-        #endregion
 
-        #region TheParentResource
         /// <summary>
         /// Gets an object representing a <see cref="TheParentResource" /> along with the instance operations that can be performed on it but with no data.
         /// You can use <see cref="TheParentResource.CreateResourceIdentifier" /> to create a <see cref="TheParentResource" /> <see cref="ResourceIdentifier" /> from its components.
@@ -89,9 +82,7 @@ namespace MgmtMultipleParentResource
         {
             return GetMgmtMultipleParentResourceArmClientMockingExtension(client).GetTheParentResource(id);
         }
-        #endregion
 
-        #region SubParentResource
         /// <summary>
         /// Gets an object representing a <see cref="SubParentResource" /> along with the instance operations that can be performed on it but with no data.
         /// You can use <see cref="SubParentResource.CreateResourceIdentifier" /> to create a <see cref="SubParentResource" /> <see cref="ResourceIdentifier" /> from its components.
@@ -103,7 +94,6 @@ namespace MgmtMultipleParentResource
         {
             return GetMgmtMultipleParentResourceArmClientMockingExtension(client).GetSubParentResource(id);
         }
-        #endregion
 
         /// <summary> Gets a collection of AnotherParentResources in the ResourceGroupResource. </summary>
         /// <param name="resourceGroupResource"> The <see cref="ResourceGroupResource" /> instance the method will execute against. </param>
