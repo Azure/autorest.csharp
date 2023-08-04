@@ -145,6 +145,8 @@ function getCSharpInputTypeKindByIntrinsicModelName(
             return InputTypeKind.Uri;
         case "uuid":
             return InputTypeKind.Guid;
+        case "etag":
+            return InputTypeKind.ETag;
         case "string":
             switch (format?.toLowerCase()) {
                 case "date":
