@@ -58,7 +58,7 @@ This sample shows how to call InputToRoundTripAsync with required parameters.
 var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new ModelsTypeSpecClient(endpoint);
 
-var input = new InputModel("<requiredString>", 1234, 1234, "<requiredNullableString>", new BaseModel(), new int[] 
+var input = new InputModel("<requiredString>", 1234, 1234, "<requiredNullableString>", new BaseModel(), new BaseModel(), new int[] 
 {
     1234
 }, new string[] 
@@ -70,13 +70,25 @@ var input = new InputModel("<requiredString>", 1234, 1234, "<requiredNullableStr
 {
         ["key"] = new RecordItem(Array.Empty<CollectionItem>()),
     })
-}, new Dictionary<string, RecordItem>(), new float?[] 
+}, new Dictionary<string, RecordItem>
+{
+    ["key"] = new RecordItem(new CollectionItem[] 
+{
+        new CollectionItem(new Dictionary<string, RecordItem>())
+    }),
+}, new float?[] 
 {
     3.14f
 }, new bool?[] 
 {
     true
-}, Array.Empty<CollectionItem>(), new string[] 
+}, new CollectionItem[] 
+{
+    new CollectionItem(new Dictionary<string, RecordItem>
+{
+        ["key"] = new RecordItem(Array.Empty<CollectionItem>()),
+    })
+}, new string[] 
 {
     "<null>"
 }, new int[] 
@@ -86,7 +98,13 @@ var input = new InputModel("<requiredString>", 1234, 1234, "<requiredNullableStr
 {
     NonRequiredNullableInt = 1234,
     NonRequiredNullableString = "<NonRequiredNullableString>",
-    NonRequiredModelList = {},
+    NonRequiredModelList = 
+{
+        new CollectionItem(new Dictionary<string, RecordItem>
+{
+            ["key"] = new RecordItem(Array.Empty<CollectionItem>()),
+        })
+    },
     NonRequiredStringList = 
 {
         "<null>"
@@ -95,7 +113,13 @@ var input = new InputModel("<requiredString>", 1234, 1234, "<requiredNullableStr
 {
         1234
     },
-    NonRequiredNullableModelList = {},
+    NonRequiredNullableModelList = 
+{
+        new CollectionItem(new Dictionary<string, RecordItem>
+{
+            ["key"] = new RecordItem(Array.Empty<CollectionItem>()),
+        })
+    },
     NonRequiredNullableStringList = 
 {
         "<null>"
@@ -116,7 +140,7 @@ This sample shows how to call InputToRoundTrip with required parameters.
 var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new ModelsTypeSpecClient(endpoint);
 
-var input = new InputModel("<requiredString>", 1234, 1234, "<requiredNullableString>", new BaseModel(), new int[] 
+var input = new InputModel("<requiredString>", 1234, 1234, "<requiredNullableString>", new BaseModel(), new BaseModel(), new int[] 
 {
     1234
 }, new string[] 
@@ -128,13 +152,25 @@ var input = new InputModel("<requiredString>", 1234, 1234, "<requiredNullableStr
 {
         ["key"] = new RecordItem(Array.Empty<CollectionItem>()),
     })
-}, new Dictionary<string, RecordItem>(), new float?[] 
+}, new Dictionary<string, RecordItem>
+{
+    ["key"] = new RecordItem(new CollectionItem[] 
+{
+        new CollectionItem(new Dictionary<string, RecordItem>())
+    }),
+}, new float?[] 
 {
     3.14f
 }, new bool?[] 
 {
     true
-}, Array.Empty<CollectionItem>(), new string[] 
+}, new CollectionItem[] 
+{
+    new CollectionItem(new Dictionary<string, RecordItem>
+{
+        ["key"] = new RecordItem(Array.Empty<CollectionItem>()),
+    })
+}, new string[] 
 {
     "<null>"
 }, new int[] 
@@ -144,7 +180,13 @@ var input = new InputModel("<requiredString>", 1234, 1234, "<requiredNullableStr
 {
     NonRequiredNullableInt = 1234,
     NonRequiredNullableString = "<NonRequiredNullableString>",
-    NonRequiredModelList = {},
+    NonRequiredModelList = 
+{
+        new CollectionItem(new Dictionary<string, RecordItem>
+{
+            ["key"] = new RecordItem(Array.Empty<CollectionItem>()),
+        })
+    },
     NonRequiredStringList = 
 {
         "<null>"
@@ -153,7 +195,13 @@ var input = new InputModel("<requiredString>", 1234, 1234, "<requiredNullableStr
 {
         1234
     },
-    NonRequiredNullableModelList = {},
+    NonRequiredNullableModelList = 
+{
+        new CollectionItem(new Dictionary<string, RecordItem>
+{
+            ["key"] = new RecordItem(Array.Empty<CollectionItem>()),
+        })
+    },
     NonRequiredNullableStringList = 
 {
         "<null>"
@@ -180,6 +228,7 @@ var data = new {
     requiredNullableInt = 1234,
     requiredNullableString = "<requiredNullableString>",
     requiredModel = new {},
+    requiredModel2 = new {},
     requiredIntList = new[] {
         1234
     },
@@ -194,7 +243,11 @@ var data = new {
         }
     },
     requiredModelRecord = new {
-        key = new {},
+        key = new {
+            requiredList = new[] {
+                new {}
+            },
+        },
     },
     requiredCollectionWithNullableFloatElement = new[] {
         123.45f
@@ -203,7 +256,11 @@ var data = new {
         true
     },
     requiredNullableModelList = new[] {
-        new {}
+        new {
+            requiredModelRecord = new {
+                key = new {},
+            },
+        }
     },
     requiredNullableStringList = new[] {
         "<String>"
@@ -248,6 +305,7 @@ var data = new {
     nonRequiredNullableInt = 1234,
     nonRequiredNullableString = "<nonRequiredNullableString>",
     requiredModel = new {},
+    requiredModel2 = new {},
     requiredIntList = new[] {
         1234
     },
@@ -262,7 +320,11 @@ var data = new {
         }
     },
     requiredModelRecord = new {
-        key = new {},
+        key = new {
+            requiredList = new[] {
+                new {}
+            },
+        },
     },
     requiredCollectionWithNullableFloatElement = new[] {
         123.45f
@@ -271,7 +333,11 @@ var data = new {
         true
     },
     requiredNullableModelList = new[] {
-        new {}
+        new {
+            requiredModelRecord = new {
+                key = new {},
+            },
+        }
     },
     requiredNullableStringList = new[] {
         "<String>"
@@ -280,7 +346,11 @@ var data = new {
         1234
     },
     nonRequiredModelList = new[] {
-        new {}
+        new {
+            requiredModelRecord = new {
+                key = new {},
+            },
+        }
     },
     nonRequiredStringList = new[] {
         "<String>"
@@ -289,7 +359,11 @@ var data = new {
         1234
     },
     nonRequiredNullableModelList = new[] {
-        new {}
+        new {
+            requiredModelRecord = new {
+                key = new {},
+            },
+        }
     },
     nonRequiredNullableStringList = new[] {
         "<String>"
@@ -348,6 +422,7 @@ var data = new {
     requiredNullableInt = 1234,
     requiredNullableString = "<requiredNullableString>",
     requiredModel = new {},
+    requiredModel2 = new {},
     requiredIntList = new[] {
         1234
     },
@@ -362,7 +437,11 @@ var data = new {
         }
     },
     requiredModelRecord = new {
-        key = new {},
+        key = new {
+            requiredList = new[] {
+                new {}
+            },
+        },
     },
     requiredCollectionWithNullableFloatElement = new[] {
         123.45f
@@ -371,7 +450,11 @@ var data = new {
         true
     },
     requiredNullableModelList = new[] {
-        new {}
+        new {
+            requiredModelRecord = new {
+                key = new {},
+            },
+        }
     },
     requiredNullableStringList = new[] {
         "<String>"
@@ -416,6 +499,7 @@ var data = new {
     nonRequiredNullableInt = 1234,
     nonRequiredNullableString = "<nonRequiredNullableString>",
     requiredModel = new {},
+    requiredModel2 = new {},
     requiredIntList = new[] {
         1234
     },
@@ -430,7 +514,11 @@ var data = new {
         }
     },
     requiredModelRecord = new {
-        key = new {},
+        key = new {
+            requiredList = new[] {
+                new {}
+            },
+        },
     },
     requiredCollectionWithNullableFloatElement = new[] {
         123.45f
@@ -439,7 +527,11 @@ var data = new {
         true
     },
     requiredNullableModelList = new[] {
-        new {}
+        new {
+            requiredModelRecord = new {
+                key = new {},
+            },
+        }
     },
     requiredNullableStringList = new[] {
         "<String>"
@@ -448,7 +540,11 @@ var data = new {
         1234
     },
     nonRequiredModelList = new[] {
-        new {}
+        new {
+            requiredModelRecord = new {
+                key = new {},
+            },
+        }
     },
     nonRequiredStringList = new[] {
         "<String>"
@@ -457,7 +553,11 @@ var data = new {
         1234
     },
     nonRequiredNullableModelList = new[] {
-        new {}
+        new {
+            requiredModelRecord = new {
+                key = new {},
+            },
+        }
     },
     nonRequiredNullableStringList = new[] {
         "<String>"
@@ -510,7 +610,7 @@ This sample shows how to call InputToRoundTripPrimitiveAsync with required param
 var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new ModelsTypeSpecClient(endpoint);
 
-var input = new InputModel("<requiredString>", 1234, 1234, "<requiredNullableString>", new BaseModel(), new int[] 
+var input = new InputModel("<requiredString>", 1234, 1234, "<requiredNullableString>", new BaseModel(), new BaseModel(), new int[] 
 {
     1234
 }, new string[] 
@@ -522,13 +622,25 @@ var input = new InputModel("<requiredString>", 1234, 1234, "<requiredNullableStr
 {
         ["key"] = new RecordItem(Array.Empty<CollectionItem>()),
     })
-}, new Dictionary<string, RecordItem>(), new float?[] 
+}, new Dictionary<string, RecordItem>
+{
+    ["key"] = new RecordItem(new CollectionItem[] 
+{
+        new CollectionItem(new Dictionary<string, RecordItem>())
+    }),
+}, new float?[] 
 {
     3.14f
 }, new bool?[] 
 {
     true
-}, Array.Empty<CollectionItem>(), new string[] 
+}, new CollectionItem[] 
+{
+    new CollectionItem(new Dictionary<string, RecordItem>
+{
+        ["key"] = new RecordItem(Array.Empty<CollectionItem>()),
+    })
+}, new string[] 
 {
     "<null>"
 }, new int[] 
@@ -538,7 +650,13 @@ var input = new InputModel("<requiredString>", 1234, 1234, "<requiredNullableStr
 {
     NonRequiredNullableInt = 1234,
     NonRequiredNullableString = "<NonRequiredNullableString>",
-    NonRequiredModelList = {},
+    NonRequiredModelList = 
+{
+        new CollectionItem(new Dictionary<string, RecordItem>
+{
+            ["key"] = new RecordItem(Array.Empty<CollectionItem>()),
+        })
+    },
     NonRequiredStringList = 
 {
         "<null>"
@@ -547,7 +665,13 @@ var input = new InputModel("<requiredString>", 1234, 1234, "<requiredNullableStr
 {
         1234
     },
-    NonRequiredNullableModelList = {},
+    NonRequiredNullableModelList = 
+{
+        new CollectionItem(new Dictionary<string, RecordItem>
+{
+            ["key"] = new RecordItem(Array.Empty<CollectionItem>()),
+        })
+    },
     NonRequiredNullableStringList = 
 {
         "<null>"
@@ -568,7 +692,7 @@ This sample shows how to call InputToRoundTripPrimitive with required parameters
 var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new ModelsTypeSpecClient(endpoint);
 
-var input = new InputModel("<requiredString>", 1234, 1234, "<requiredNullableString>", new BaseModel(), new int[] 
+var input = new InputModel("<requiredString>", 1234, 1234, "<requiredNullableString>", new BaseModel(), new BaseModel(), new int[] 
 {
     1234
 }, new string[] 
@@ -580,13 +704,25 @@ var input = new InputModel("<requiredString>", 1234, 1234, "<requiredNullableStr
 {
         ["key"] = new RecordItem(Array.Empty<CollectionItem>()),
     })
-}, new Dictionary<string, RecordItem>(), new float?[] 
+}, new Dictionary<string, RecordItem>
+{
+    ["key"] = new RecordItem(new CollectionItem[] 
+{
+        new CollectionItem(new Dictionary<string, RecordItem>())
+    }),
+}, new float?[] 
 {
     3.14f
 }, new bool?[] 
 {
     true
-}, Array.Empty<CollectionItem>(), new string[] 
+}, new CollectionItem[] 
+{
+    new CollectionItem(new Dictionary<string, RecordItem>
+{
+        ["key"] = new RecordItem(Array.Empty<CollectionItem>()),
+    })
+}, new string[] 
 {
     "<null>"
 }, new int[] 
@@ -596,7 +732,13 @@ var input = new InputModel("<requiredString>", 1234, 1234, "<requiredNullableStr
 {
     NonRequiredNullableInt = 1234,
     NonRequiredNullableString = "<NonRequiredNullableString>",
-    NonRequiredModelList = {},
+    NonRequiredModelList = 
+{
+        new CollectionItem(new Dictionary<string, RecordItem>
+{
+            ["key"] = new RecordItem(Array.Empty<CollectionItem>()),
+        })
+    },
     NonRequiredStringList = 
 {
         "<null>"
@@ -605,7 +747,13 @@ var input = new InputModel("<requiredString>", 1234, 1234, "<requiredNullableStr
 {
         1234
     },
-    NonRequiredNullableModelList = {},
+    NonRequiredNullableModelList = 
+{
+        new CollectionItem(new Dictionary<string, RecordItem>
+{
+            ["key"] = new RecordItem(Array.Empty<CollectionItem>()),
+        })
+    },
     NonRequiredNullableStringList = 
 {
         "<null>"
@@ -632,6 +780,7 @@ var data = new {
     requiredNullableInt = 1234,
     requiredNullableString = "<requiredNullableString>",
     requiredModel = new {},
+    requiredModel2 = new {},
     requiredIntList = new[] {
         1234
     },
@@ -646,7 +795,11 @@ var data = new {
         }
     },
     requiredModelRecord = new {
-        key = new {},
+        key = new {
+            requiredList = new[] {
+                new {}
+            },
+        },
     },
     requiredCollectionWithNullableFloatElement = new[] {
         123.45f
@@ -655,7 +808,11 @@ var data = new {
         true
     },
     requiredNullableModelList = new[] {
-        new {}
+        new {
+            requiredModelRecord = new {
+                key = new {},
+            },
+        }
     },
     requiredNullableStringList = new[] {
         "<String>"
@@ -692,6 +849,7 @@ var data = new {
     nonRequiredNullableInt = 1234,
     nonRequiredNullableString = "<nonRequiredNullableString>",
     requiredModel = new {},
+    requiredModel2 = new {},
     requiredIntList = new[] {
         1234
     },
@@ -706,7 +864,11 @@ var data = new {
         }
     },
     requiredModelRecord = new {
-        key = new {},
+        key = new {
+            requiredList = new[] {
+                new {}
+            },
+        },
     },
     requiredCollectionWithNullableFloatElement = new[] {
         123.45f
@@ -715,7 +877,11 @@ var data = new {
         true
     },
     requiredNullableModelList = new[] {
-        new {}
+        new {
+            requiredModelRecord = new {
+                key = new {},
+            },
+        }
     },
     requiredNullableStringList = new[] {
         "<String>"
@@ -724,7 +890,11 @@ var data = new {
         1234
     },
     nonRequiredModelList = new[] {
-        new {}
+        new {
+            requiredModelRecord = new {
+                key = new {},
+            },
+        }
     },
     nonRequiredStringList = new[] {
         "<String>"
@@ -733,7 +903,11 @@ var data = new {
         1234
     },
     nonRequiredNullableModelList = new[] {
-        new {}
+        new {
+            requiredModelRecord = new {
+                key = new {},
+            },
+        }
     },
     nonRequiredNullableStringList = new[] {
         "<String>"
@@ -772,6 +946,7 @@ var data = new {
     requiredNullableInt = 1234,
     requiredNullableString = "<requiredNullableString>",
     requiredModel = new {},
+    requiredModel2 = new {},
     requiredIntList = new[] {
         1234
     },
@@ -786,7 +961,11 @@ var data = new {
         }
     },
     requiredModelRecord = new {
-        key = new {},
+        key = new {
+            requiredList = new[] {
+                new {}
+            },
+        },
     },
     requiredCollectionWithNullableFloatElement = new[] {
         123.45f
@@ -795,7 +974,11 @@ var data = new {
         true
     },
     requiredNullableModelList = new[] {
-        new {}
+        new {
+            requiredModelRecord = new {
+                key = new {},
+            },
+        }
     },
     requiredNullableStringList = new[] {
         "<String>"
@@ -832,6 +1015,7 @@ var data = new {
     nonRequiredNullableInt = 1234,
     nonRequiredNullableString = "<nonRequiredNullableString>",
     requiredModel = new {},
+    requiredModel2 = new {},
     requiredIntList = new[] {
         1234
     },
@@ -846,7 +1030,11 @@ var data = new {
         }
     },
     requiredModelRecord = new {
-        key = new {},
+        key = new {
+            requiredList = new[] {
+                new {}
+            },
+        },
     },
     requiredCollectionWithNullableFloatElement = new[] {
         123.45f
@@ -855,7 +1043,11 @@ var data = new {
         true
     },
     requiredNullableModelList = new[] {
-        new {}
+        new {
+            requiredModelRecord = new {
+                key = new {},
+            },
+        }
     },
     requiredNullableStringList = new[] {
         "<String>"
@@ -864,7 +1056,11 @@ var data = new {
         1234
     },
     nonRequiredModelList = new[] {
-        new {}
+        new {
+            requiredModelRecord = new {
+                key = new {},
+            },
+        }
     },
     nonRequiredStringList = new[] {
         "<String>"
@@ -873,7 +1069,11 @@ var data = new {
         1234
     },
     nonRequiredNullableModelList = new[] {
-        new {}
+        new {
+            requiredModelRecord = new {
+                key = new {},
+            },
+        }
     },
     nonRequiredNullableStringList = new[] {
         "<String>"
@@ -938,8 +1138,23 @@ var data = new {
             },
         }
     },
-    optionalModel = new {},
+    optionalModel = new {
+        requiredList = new[] {
+            new {
+                requiredModelRecord = new {
+                    key = new {},
+                },
+            }
+        },
+    },
     optionalModelWithPropertiesOnBase = new {
+        requiredList = new[] {
+            new {
+                requiredModelRecord = new {
+                    key = new {},
+                },
+            }
+        },
         optionalPropertyOnBase = "<optionalPropertyOnBase>",
     },
     optionalFixedStringEnum = "1",
@@ -951,7 +1166,11 @@ var data = new {
         key = "<String>",
     },
     optionalModelRecord = new {
-        key = new {},
+        key = new {
+            requiredList = new[] {
+                new {}
+            },
+        },
     },
     optionalPlainDate = "2022-05-10",
     optionalPlainTime = "01:23:45",
@@ -1013,8 +1232,23 @@ var data = new {
             },
         }
     },
-    optionalModel = new {},
+    optionalModel = new {
+        requiredList = new[] {
+            new {
+                requiredModelRecord = new {
+                    key = new {},
+                },
+            }
+        },
+    },
     optionalModelWithPropertiesOnBase = new {
+        requiredList = new[] {
+            new {
+                requiredModelRecord = new {
+                    key = new {},
+                },
+            }
+        },
         optionalPropertyOnBase = "<optionalPropertyOnBase>",
     },
     optionalFixedStringEnum = "1",
@@ -1026,7 +1260,11 @@ var data = new {
         key = "<String>",
     },
     optionalModelRecord = new {
-        key = new {},
+        key = new {
+            requiredList = new[] {
+                new {}
+            },
+        },
     },
     optionalPlainDate = "2022-05-10",
     optionalPlainTime = "01:23:45",
@@ -1098,7 +1336,11 @@ var data = new {
         key = "<String>",
     },
     requiredModelRecord = new {
-        key = new {},
+        key = new {
+            requiredList = new[] {
+                new {}
+            },
+        },
     },
     requiredBytes = new {},
     requiredUint8Array = new[] {
@@ -1158,7 +1400,11 @@ var data = new {
         key = "<String>",
     },
     requiredModelRecord = new {
-        key = new {},
+        key = new {
+            requiredList = new[] {
+                new {}
+            },
+        },
     },
     requiredBytes = new {},
     optionalBytes = new {},
@@ -1231,7 +1477,11 @@ var data = new {
         key = "<String>",
     },
     requiredModelRecord = new {
-        key = new {},
+        key = new {
+            requiredList = new[] {
+                new {}
+            },
+        },
     },
     requiredBytes = new {},
     requiredUint8Array = new[] {
@@ -1291,7 +1541,11 @@ var data = new {
         key = "<String>",
     },
     requiredModelRecord = new {
-        key = new {},
+        key = new {
+            requiredList = new[] {
+                new {}
+            },
+        },
     },
     requiredBytes = new {},
     optionalBytes = new {},
