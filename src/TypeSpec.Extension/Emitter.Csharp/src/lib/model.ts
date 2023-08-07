@@ -802,12 +802,7 @@ export function getUsages(
                         }
                     }
                 }
-                const subModels = effectiveType.derivedModels;
-                for (const subModel of subModels) {
-                    affectTypes.push(
-                        getFriendlyName(program, subModel) ?? subModel.name
-                    );
-                }
+                affectTypes.push(...getAllDerivedModels(effectiveType));
             }
         }
 
