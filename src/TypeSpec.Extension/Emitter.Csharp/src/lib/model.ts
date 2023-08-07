@@ -780,7 +780,7 @@ export function getUsages(
         if (typeName !== "") {
             affectTypes.push(typeName);
             if (effectiveType.kind === "Model") {
-                if (effectiveType.templateMapper?.args){
+                if (effectiveType.templateMapper?.args) {
                     for (const arg of effectiveType.templateMapper.args) {
                         if (
                             arg.kind === "Model" &&
@@ -795,7 +795,9 @@ export function getUsages(
                 }
                 const subModels = effectiveType.derivedModels;
                 for (const subModel of subModels) {
-                    affectTypes.push(getFriendlyName(program, subModel) ?? subModel.name);
+                    affectTypes.push(
+                        getFriendlyName(program, subModel) ?? subModel.name
+                    );
                 }
             }
         }
@@ -831,9 +833,11 @@ export function getUsages(
                             op.operation.name
                         )}Request`;
                     }
-                    affectedTypes.push(getFriendlyName(program, effectiveBodyType) ?? effectiveBodyType.name);
+                    affectedTypes.push(
+                        getFriendlyName(program, effectiveBodyType) ??
+                            effectiveBodyType.name
+                    );
                 }
-                
             }
             if (effectiveBodyType.kind === "Model") {
                 affectedTypes.push(...getAllDerivedModels(effectiveBodyType));
@@ -869,7 +873,9 @@ export function getUsages(
                     }
                     /*propagate to sub models*/
                     if (effectiveReturnType.kind === "Model") {
-                        affectedReturnTypes.push(...getAllDerivedModels(effectiveReturnType));
+                        affectedReturnTypes.push(
+                            ...getAllDerivedModels(effectiveReturnType)
+                        );
                     }
                 }
                 affectedReturnTypes.push(returnType);
@@ -922,7 +928,9 @@ export function getUsages(
         const result: string[] = [];
         const derivedModels = model.derivedModels;
         for (const derivedModel of derivedModels) {
-            result.push(getFriendlyName(program, derivedModel) ?? derivedModel.name);
+            result.push(
+                getFriendlyName(program, derivedModel) ?? derivedModel.name
+            );
             result.push(...getAllDerivedModels(derivedModel));
         }
         return result;
