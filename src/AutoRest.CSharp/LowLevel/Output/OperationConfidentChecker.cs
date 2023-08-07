@@ -15,20 +15,24 @@ namespace AutoRest.CSharp.Output.Models
 
         public static bool IsConfident(InputOperation operation)
         {
-            //// check parameters
-            //foreach (var parameter in operation.Parameters)
-            //{
-            //    var isConfident = IsConfident(parameter.Type);
-            //    if (!isConfident)
-            //        return false;
-            //}
-            //// check response
-            //foreach (var response in operation.Responses)
-            //{
-            //    var isConfident = IsConfident(response.BodyType);
-            //    if (!isConfident)
-            //        return false;
-            //}
+            // check parameters
+            foreach (var parameter in operation.Parameters)
+            {
+                // skip the special parameters
+                if (parameter.IsContentType || parameter.IsApiVersion || parameter.IsEndpoint)
+                    continue;
+
+                var isConfident = IsConfident(parameter.Type);
+                if (!isConfident)
+                    return false;
+            }
+            // check response
+            foreach (var response in operation.Responses)
+            {
+                var isConfident = IsConfident(response.BodyType);
+                if (!isConfident)
+                    return false;
+            }
 
             // if no low confident encountered on the way, this is confident, we return true.
             return true;
@@ -83,7 +87,6 @@ namespace AutoRest.CSharp.Output.Models
                 isConfident = isConfident && WalkType(property.Type, visitedModels);
             }
 
-            // TODO -- need to handle the discriminator case
             // the low confident part in derived types will pollute it back to the base class - if any derived class has low confident part (like union types), we will set the base as "not confident", but other derived types are not affected.
             if (type.DiscriminatorPropertyName != null && type.DerivedModels.Count > 0)
             {

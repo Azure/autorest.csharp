@@ -57,7 +57,8 @@
      "IsRequired": true,
      "IsReadOnly": false
     }
-   ]
+   ],
+   "DerivedModels": []
   },
   {
    "$id": "9",
@@ -124,7 +125,8 @@
          "IsRequired": true,
          "IsReadOnly": false
         }
-       ]
+       ],
+       "DerivedModels": []
       },
       "IsNullable": false
      },
@@ -145,7 +147,8 @@
      "IsRequired": false,
      "IsReadOnly": false
     }
-   ]
+   ],
+   "DerivedModels": []
   },
   {
    "$ref": "12"

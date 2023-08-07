@@ -42,7 +42,8 @@
      "IsRequired": true,
      "IsReadOnly": false
     }
-   ]
+   ],
+   "DerivedModels": []
   },
   {
    "$id": "7",
@@ -79,7 +80,8 @@
      "IsRequired": true,
      "IsReadOnly": false
     }
-   ]
+   ],
+   "DerivedModels": []
   },
   {
    "$id": "12",
@@ -116,7 +118,8 @@
      "IsRequired": true,
      "IsReadOnly": false
     }
-   ]
+   ],
+   "DerivedModels": []
   },
   {
    "$id": "17",
@@ -153,7 +156,8 @@
      "IsRequired": true,
      "IsReadOnly": false
     }
-   ]
+   ],
+   "DerivedModels": []
   },
   {
    "$id": "22",
@@ -242,7 +246,8 @@
      "IsRequired": false,
      "IsReadOnly": false
     }
-   ]
+   ],
+   "DerivedModels": []
   },
   {
    "$id": "35",
@@ -289,7 +294,8 @@
      "IsRequired": false,
      "IsReadOnly": false
     }
-   ]
+   ],
+   "DerivedModels": []
   }
  ],
  "Clients": [

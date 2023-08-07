@@ -12,7 +12,7 @@ using Azure.Core;
 
 namespace FirstTestTypeSpec.Models
 {
-    public partial class Thing : IUtf8JsonSerializable
+    internal partial class Thing : IUtf8JsonSerializable
     {
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {

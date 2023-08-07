@@ -45,109 +45,127 @@
      "IsRequired": true,
      "IsReadOnly": false
     }
-   ]
-  },
-  {
-   "$id": "7",
-   "Name": "SeaGull",
-   "Namespace": "Type.Model.Inheritance.SingleDiscriminator",
-   "Description": "The second level model in polymorphic single level inheritance.",
-   "IsNullable": false,
-   "DiscriminatorValue": "seagull",
-   "BaseModel": {
-    "$ref": "2"
-   },
-   "Usage": "RoundTrip",
-   "Properties": []
-  },
-  {
-   "$id": "8",
-   "Name": "Sparrow",
-   "Namespace": "Type.Model.Inheritance.SingleDiscriminator",
-   "Description": "The second level model in polymorphic single level inheritance.",
-   "IsNullable": false,
-   "DiscriminatorValue": "sparrow",
-   "BaseModel": {
-    "$ref": "2"
-   },
-   "Usage": "RoundTrip",
-   "Properties": []
-  },
-  {
-   "$id": "9",
-   "Name": "Goose",
-   "Namespace": "Type.Model.Inheritance.SingleDiscriminator",
-   "Description": "The second level model in polymorphic single level inheritance.",
-   "IsNullable": false,
-   "DiscriminatorValue": "goose",
-   "BaseModel": {
-    "$ref": "2"
-   },
-   "Usage": "RoundTrip",
-   "Properties": []
-  },
-  {
-   "$id": "10",
-   "Name": "Eagle",
-   "Namespace": "Type.Model.Inheritance.SingleDiscriminator",
-   "Description": "The second level model in polymorphic single levels inheritance which contains references to other polymorphic instances.",
-   "IsNullable": false,
-   "DiscriminatorValue": "eagle",
-   "BaseModel": {
-    "$ref": "2"
-   },
-   "Usage": "RoundTrip",
-   "Properties": [
+   ],
+   "DerivedModels": [
     {
-     "$id": "11",
-     "Name": "friends",
-     "SerializedName": "friends",
-     "Description": "",
-     "Type": {
-      "$id": "12",
-      "Name": "Array",
-      "ElementType": {
-       "$ref": "2"
-      },
-      "IsNullable": false
-     },
-     "IsRequired": false,
-     "IsReadOnly": false
-    },
-    {
-     "$id": "13",
-     "Name": "hate",
-     "SerializedName": "hate",
-     "Description": "",
-     "Type": {
-      "$id": "14",
-      "Name": "Dictionary",
-      "KeyType": {
-       "$id": "15",
-       "Name": "string",
-       "Kind": "String",
-       "IsNullable": false
-      },
-      "ValueType": {
-       "$ref": "2"
-      },
-      "IsNullable": false
-     },
-     "IsRequired": false,
-     "IsReadOnly": false
-    },
-    {
-     "$id": "16",
-     "Name": "partner",
-     "SerializedName": "partner",
-     "Description": "",
-     "Type": {
+     "$id": "7",
+     "Name": "SeaGull",
+     "Namespace": "Type.Model.Inheritance.SingleDiscriminator",
+     "Description": "The second level model in polymorphic single level inheritance.",
+     "IsNullable": false,
+     "DiscriminatorValue": "seagull",
+     "BaseModel": {
       "$ref": "2"
      },
-     "IsRequired": false,
-     "IsReadOnly": false
+     "Usage": "RoundTrip",
+     "Properties": [],
+     "DerivedModels": []
+    },
+    {
+     "$id": "8",
+     "Name": "Sparrow",
+     "Namespace": "Type.Model.Inheritance.SingleDiscriminator",
+     "Description": "The second level model in polymorphic single level inheritance.",
+     "IsNullable": false,
+     "DiscriminatorValue": "sparrow",
+     "BaseModel": {
+      "$ref": "2"
+     },
+     "Usage": "RoundTrip",
+     "Properties": [],
+     "DerivedModels": []
+    },
+    {
+     "$id": "9",
+     "Name": "Goose",
+     "Namespace": "Type.Model.Inheritance.SingleDiscriminator",
+     "Description": "The second level model in polymorphic single level inheritance.",
+     "IsNullable": false,
+     "DiscriminatorValue": "goose",
+     "BaseModel": {
+      "$ref": "2"
+     },
+     "Usage": "RoundTrip",
+     "Properties": [],
+     "DerivedModels": []
+    },
+    {
+     "$id": "10",
+     "Name": "Eagle",
+     "Namespace": "Type.Model.Inheritance.SingleDiscriminator",
+     "Description": "The second level model in polymorphic single levels inheritance which contains references to other polymorphic instances.",
+     "IsNullable": false,
+     "DiscriminatorValue": "eagle",
+     "BaseModel": {
+      "$ref": "2"
+     },
+     "Usage": "RoundTrip",
+     "Properties": [
+      {
+       "$id": "11",
+       "Name": "friends",
+       "SerializedName": "friends",
+       "Description": "",
+       "Type": {
+        "$id": "12",
+        "Name": "Array",
+        "ElementType": {
+         "$ref": "2"
+        },
+        "IsNullable": false
+       },
+       "IsRequired": false,
+       "IsReadOnly": false
+      },
+      {
+       "$id": "13",
+       "Name": "hate",
+       "SerializedName": "hate",
+       "Description": "",
+       "Type": {
+        "$id": "14",
+        "Name": "Dictionary",
+        "KeyType": {
+         "$id": "15",
+         "Name": "string",
+         "Kind": "String",
+         "IsNullable": false
+        },
+        "ValueType": {
+         "$ref": "2"
+        },
+        "IsNullable": false
+       },
+       "IsRequired": false,
+       "IsReadOnly": false
+      },
+      {
+       "$id": "16",
+       "Name": "partner",
+       "SerializedName": "partner",
+       "Description": "",
+       "Type": {
+        "$ref": "2"
+       },
+       "IsRequired": false,
+       "IsReadOnly": false
+      }
+     ],
+     "DerivedModels": []
     }
    ]
+  },
+  {
+   "$ref": "7"
+  },
+  {
+   "$ref": "8"
+  },
+  {
+   "$ref": "9"
+  },
+  {
+   "$ref": "10"
   },
   {
    "$id": "17",
@@ -188,20 +206,26 @@
      "IsRequired": true,
      "IsReadOnly": false
     }
+   ],
+   "DerivedModels": [
+    {
+     "$id": "22",
+     "Name": "TRex",
+     "Namespace": "Type.Model.Inheritance.SingleDiscriminator",
+     "Description": "The second level legacy model in polymorphic single level inheritance.",
+     "IsNullable": false,
+     "DiscriminatorValue": "t-rex",
+     "BaseModel": {
+      "$ref": "17"
+     },
+     "Usage": "Output",
+     "Properties": [],
+     "DerivedModels": []
+    }
    ]
   },
   {
-   "$id": "22",
-   "Name": "TRex",
-   "Namespace": "Type.Model.Inheritance.SingleDiscriminator",
-   "Description": "The second level legacy model in polymorphic single level inheritance.",
-   "IsNullable": false,
-   "DiscriminatorValue": "t-rex",
-   "BaseModel": {
-    "$ref": "17"
-   },
-   "Usage": "Output",
-   "Properties": []
+   "$ref": "22"
   }
  ],
  "Clients": [

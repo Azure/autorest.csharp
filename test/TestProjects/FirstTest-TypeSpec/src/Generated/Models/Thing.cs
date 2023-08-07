@@ -13,7 +13,7 @@ using Azure.Core;
 namespace FirstTestTypeSpec.Models
 {
     /// <summary> A model with a few properties of literal types. </summary>
-    public partial class Thing
+    internal partial class Thing
     {
         /// <summary> Initializes a new instance of Thing. </summary>
         /// <param name="name"> name of the Thing. </param>
