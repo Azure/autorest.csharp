@@ -76,26 +76,11 @@ namespace AutoRest.CSharp.Output.Models
 
         private void CreateModels(IDictionary<InputModelType, ModelTypeProvider> models, TypeFactory typeFactory)
         {
-            Dictionary<InputModelType, List<InputModelType>> derivedTypesLookup = new Dictionary<InputModelType, List<InputModelType>>();
-            foreach (var model in _rootNamespace.Models)
-            {
-                if (model.BaseModel is null)
-                    continue;
-
-                if (!derivedTypesLookup.TryGetValue(model.BaseModel, out var derivedTypes))
-                {
-                    derivedTypes = new List<InputModelType>();
-                    derivedTypesLookup.Add(model.BaseModel, derivedTypes);
-                }
-                derivedTypes.Add(model);
-            }
-
             Dictionary<string, ModelTypeProvider> defaultDerivedTypes = new Dictionary<string, ModelTypeProvider>();
 
             foreach (var model in _rootNamespace.Models)
             {
-                derivedTypesLookup.TryGetValue(model, out var children);
-                InputModelType[] derivedTypesArray = children?.ToArray() ?? Array.Empty<InputModelType>();
+                InputModelType[] derivedTypesArray = model.DerivedModels.ToArray();
                 ModelTypeProvider? defaultDerivedType = GetDefaultDerivedType(models, typeFactory, model, derivedTypesArray, defaultDerivedTypes);
                 models.Add(model, new ModelTypeProvider(model, TypeProvider.GetDefaultModelNamespace(null, _defaultNamespace), _sourceInputModel, typeFactory, derivedTypesArray, defaultDerivedType));
             }

@@ -211,8 +211,7 @@ describe("Test getUsages", () => {
             }
       `,
             runner,
-            true,
-            true
+            { IsNamespaceNeeded: true, IsAzureCoreNeeded: true }
         );
         const context = createEmitterContext(program);
         const sdkContext = createSdkContext(context);
@@ -243,8 +242,7 @@ describe("Test getUsages", () => {
             }
       `,
             runner,
-            true,
-            true
+            { IsNamespaceNeeded: true, IsAzureCoreNeeded: true }
         );
 
         const context = createEmitterContext(program);

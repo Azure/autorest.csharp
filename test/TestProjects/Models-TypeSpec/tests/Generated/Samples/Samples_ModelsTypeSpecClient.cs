@@ -1217,7 +1217,8 @@ namespace ModelsTypeSpec.Samples
                 requiredNullableString = "<requiredNullableString>",
                 requiredModel = new
                 {
-                    discriminatorProperty = "",
+                    requiredString = "<requiredString>",
+                    discriminatorProperty = "A",
                     requiredPropertyOnBase = 1234,
                 },
                 requiredFixedStringEnum = "1",
@@ -1289,7 +1290,8 @@ namespace ModelsTypeSpec.Samples
                 nonRequiredNullableString = "<nonRequiredNullableString>",
                 requiredModel = new
                 {
-                    discriminatorProperty = "",
+                    requiredString = "<requiredString>",
+                    discriminatorProperty = "A",
                     optionalPropertyOnBase = "<optionalPropertyOnBase>",
                     requiredPropertyOnBase = 1234,
                 },
@@ -1372,7 +1374,8 @@ namespace ModelsTypeSpec.Samples
                 requiredNullableString = "<requiredNullableString>",
                 requiredModel = new
                 {
-                    discriminatorProperty = "",
+                    requiredString = "<requiredString>",
+                    discriminatorProperty = "A",
                     requiredPropertyOnBase = 1234,
                 },
                 requiredFixedStringEnum = "1",
@@ -1444,7 +1447,8 @@ namespace ModelsTypeSpec.Samples
                 nonRequiredNullableString = "<nonRequiredNullableString>",
                 requiredModel = new
                 {
-                    discriminatorProperty = "",
+                    requiredString = "<requiredString>",
+                    discriminatorProperty = "A",
                     optionalPropertyOnBase = "<optionalPropertyOnBase>",
                     requiredPropertyOnBase = 1234,
                 },

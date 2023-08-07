@@ -286,7 +286,7 @@ This sample shows how to call AnonymousBodyAsync with required parameters.
 var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new FirstTestTypeSpecClient(endpoint);
 
-var thing = new Thing("<name>", "<requiredUnion>", "<requiredBadDescription>", new int[] 
+var thing = new Thing("<name>", new object(), "<requiredBadDescription>", new int[] 
 {
     1234
 })
@@ -311,7 +311,7 @@ This sample shows how to call AnonymousBody with required parameters.
 var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new FirstTestTypeSpecClient(endpoint);
 
-var thing = new Thing("<name>", "<requiredUnion>", "<requiredBadDescription>", new int[] 
+var thing = new Thing("<name>", new object(), "<requiredBadDescription>", new int[] 
 {
     1234
 })
@@ -688,7 +688,7 @@ var action = new RoundTripModel("<requiredString>", 1234, new StringFixedEnum?[]
 }, new Dictionary<string, StringExtensibleEnum?>
 {
     ["key"] = StringExtensibleEnum.One,
-}, new Thing("<name>", "<requiredUnion>", "<requiredBadDescription>", new int[] 
+}, new Thing("<name>", new object(), "<requiredBadDescription>", new int[] 
 {
     1234
 })
@@ -750,7 +750,7 @@ var action = new RoundTripModel("<requiredString>", 1234, new StringFixedEnum?[]
 }, new Dictionary<string, StringExtensibleEnum?>
 {
     ["key"] = StringExtensibleEnum.One,
-}, new Thing("<name>", "<requiredUnion>", "<requiredBadDescription>", new int[] 
+}, new Thing("<name>", new object(), "<requiredBadDescription>", new int[] 
 {
     1234
 })
@@ -1548,7 +1548,7 @@ This sample shows how to call CreateLiteralAsync with required parameters.
 var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new FirstTestTypeSpecClient(endpoint);
 
-var body = new Thing("<name>", "<requiredUnion>", "<requiredBadDescription>", new int[] 
+var body = new Thing("<name>", new object(), "<requiredBadDescription>", new int[] 
 {
     1234
 })
@@ -1573,7 +1573,7 @@ This sample shows how to call CreateLiteral with required parameters.
 var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new FirstTestTypeSpecClient(endpoint);
 
-var body = new Thing("<name>", "<requiredUnion>", "<requiredBadDescription>", new int[] 
+var body = new Thing("<name>", new object(), "<requiredBadDescription>", new int[] 
 {
     1234
 })
@@ -1852,7 +1852,7 @@ This sample shows how to call InternalProtocolAsync with required parameters.
 var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new FirstTestTypeSpecClient(endpoint);
 
-var body = new Thing("<name>", "<requiredUnion>", "<requiredBadDescription>", new int[] 
+var body = new Thing("<name>", new object(), "<requiredBadDescription>", new int[] 
 {
     1234
 })
@@ -1877,7 +1877,7 @@ This sample shows how to call InternalProtocol with required parameters.
 var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new FirstTestTypeSpecClient(endpoint);
 
-var body = new Thing("<name>", "<requiredUnion>", "<requiredBadDescription>", new int[] 
+var body = new Thing("<name>", new object(), "<requiredBadDescription>", new int[] 
 {
     1234
 })

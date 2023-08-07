@@ -537,7 +537,7 @@ namespace FirstTestTypeSpec.Samples
             var endpoint = new Uri("<https://my-service.azure.com>");
             var client = new FirstTestTypeSpecClient(endpoint);
 
-            var thing = new Thing("<name>", "<requiredUnion>", "<requiredBadDescription>", new int[]
+            var thing = new Thing("<name>", new object(), "<requiredBadDescription>", new int[]
             {
     1234
             })
@@ -1223,7 +1223,7 @@ namespace FirstTestTypeSpec.Samples
             }, new Dictionary<string, StringExtensibleEnum?>
             {
                 ["key"] = StringExtensibleEnum.One,
-            }, new Thing("<name>", "<requiredUnion>", "<requiredBadDescription>", new int[]
+            }, new Thing("<name>", new object(), "<requiredBadDescription>", new int[]
             {
     1234
             })
@@ -1898,7 +1898,7 @@ namespace FirstTestTypeSpec.Samples
             var endpoint = new Uri("<https://my-service.azure.com>");
             var client = new FirstTestTypeSpecClient(endpoint);
 
-            var body = new Thing("<name>", "<requiredUnion>", "<requiredBadDescription>", new int[]
+            var body = new Thing("<name>", new object(), "<requiredBadDescription>", new int[]
             {
     1234
             })
@@ -2074,7 +2074,7 @@ namespace FirstTestTypeSpec.Samples
             var endpoint = new Uri("<https://my-service.azure.com>");
             var client = new FirstTestTypeSpecClient(endpoint);
 
-            var body = new Thing("<name>", "<requiredUnion>", "<requiredBadDescription>", new int[]
+            var body = new Thing("<name>", new object(), "<requiredBadDescription>", new int[]
             {
     1234
             })

@@ -534,6 +534,8 @@ namespace AutoRest.CSharp.Generation.Writers
         {
             var methodSignature = clientMethod.ProtocolMethodSignature.WithAsync(async);
 
+            WriteConvenienceMethodOmitReason(clientMethod.ConvenienceMethodOmittingMessage);
+
             WriteMethodDocumentation(_writer, methodSignature, clientMethod, async);
             var docRef = GetMethodSignatureString(methodSignature);
             _writer.Line($"/// <include file=\"Docs/{_client.Type.Name}.xml\" path=\"doc/members/member[@name='{docRef}']/*\" />");
@@ -542,6 +544,15 @@ namespace AutoRest.CSharp.Generation.Writers
                 _xmlDocWriter.WriteXmlDocumentation("example", _exampleComposer.Compose(clientMethod, async));
                 WriteDocumentationRemarks(_xmlDocWriter.WriteXmlDocumentation, clientMethod.RequestMethod, clientMethod.PagingInfo != null, methodSignature, Array.Empty<FormattableString>(), false, false, false);
             }
+        }
+
+        private void WriteConvenienceMethodOmitReason(ConvenienceMethodOmittingMessage? message)
+        {
+            // TODO -- create wiki links to provide guidance here: https://github.com/Azure/autorest.csharp/issues/3624
+            if (message == null)
+                return;
+
+            _writer.Line($"// {message.Message}");
         }
 
         private void WriteConvenienceMethodDocumentationWithExternalXmlDoc(ConvenienceMethod convenienceMethod, RestClientMethod restMethod, bool async)
@@ -628,7 +639,8 @@ namespace AutoRest.CSharp.Generation.Writers
             builder.AppendLine($"<list type=\"bullet\">");
             builder.AppendLine($"<item>{Environment.NewLine}<description>{Environment.NewLine}This <see href=\"https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md\">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.{Environment.NewLine}</description>{Environment.NewLine}</item>");
 
-            if (clientMethod.ConvenienceMethod != null)
+            // we only append the relative convenience method information when the convenience method is public
+            if (clientMethod.ConvenienceMethod != null && clientMethod.ConvenienceMethod.Signature.Modifiers.HasFlag(MethodSignatureModifiers.Public))
             {
                 var convenienceDocRef = GetMethodSignatureString(clientMethod.ConvenienceMethod.Signature.WithAsync(async));
                 builder.AppendLine($"<item>{Environment.NewLine}<description>{Environment.NewLine}Please try the simpler <see cref=\"{convenienceDocRef}\"/> convenience overload with strongly typed models first.{Environment.NewLine}</description>{Environment.NewLine}</item>");

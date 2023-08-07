@@ -58,7 +58,9 @@ import {
     InputUnionType,
     InputNullType,
     InputIntrinsicType,
-    InputUnknownType
+    InputUnknownType,
+    isInputEnumType,
+    isInputLiteralType
 } from "../type/inputType.js";
 import { InputTypeKind } from "../type/inputTypeKind.js";
 import { Usage } from "../type/usage.js";
@@ -237,8 +239,8 @@ function isSchemaProperty(context: SdkContext, property: ModelProperty) {
     const headerInfo = getHeaderFieldName(program, property);
     const queryInfo = getQueryParamName(program, property);
     const pathInfo = getPathParamName(program, property);
-    const statusCodeinfo = isStatusCode(program, property);
-    return !(headerInfo || queryInfo || pathInfo || statusCodeinfo);
+    const statusCodeInfo = isStatusCode(program, property);
+    return !(headerInfo || queryInfo || pathInfo || statusCodeInfo);
 }
 
 export function getDefaultValue(type: Type): any {
@@ -258,14 +260,6 @@ export function getDefaultValue(type: Type): any {
 
 export function isNeverType(type: Type): type is NeverType {
     return type.kind === "Intrinsic" && type.name === "never";
-}
-
-function isInputEnumType(x: any): x is InputEnumType {
-    return x.AllowedValues !== undefined;
-}
-
-function isInputLiteralType(x: any): x is InputLiteralType {
-    return x.Name === "Literal";
 }
 
 export function getInputType(
@@ -403,7 +397,6 @@ export function getInputType(
 
         function getLiteralValueType(): InputPrimitiveType | InputEnumType {
             // we will not wrap it if it comes from outside a model or it is a boolean
-            // TODO -- we need to wrap it into extensible enum when it comes from an operation
             if (literalContext === undefined || rawValueType.Kind === "Boolean")
                 return rawValueType;
 
@@ -419,7 +412,6 @@ export function getInputType(
                     Description: literalValue.toString()
                 } as InputEnumTypeValue
             ];
-            // TODO -- we need to make it low confident if the enum is not string
             const enumType = {
                 Name: enumName,
                 Namespace: literalContext.Namespace,
@@ -531,6 +523,7 @@ export function getInputType(
         if (!model) {
             const baseModel = getInputModelBaseType(m.baseModel);
             const properties: InputModelProperty[] = [];
+            const derivedModels: InputModelType[] = [];
 
             const discriminator = getDiscriminator(program, m);
             model = {
@@ -544,7 +537,8 @@ export function getInputType(
                 DiscriminatorValue: getDiscriminatorValue(m, baseModel),
                 BaseModel: baseModel,
                 Usage: Usage.None,
-                Properties: properties // Properties should be the last assigned to model
+                Properties: properties,
+                DerivedModels: derivedModels // DerivedModels should be the last assigned to model
             } as InputModelType;
 
             models.set(name, model);
@@ -556,12 +550,13 @@ export function getInputType(
             // We should be able to remove it when https://github.com/Azure/typespec-azure/issues/1733 is closed
             if (model.DiscriminatorPropertyName && m.derivedModels) {
                 for (const dm of m.derivedModels) {
-                    getInputType(
+                    const derivedModel = getInputType(
                         context,
                         getFormattedType(program, dm),
                         models,
                         enums
                     );
+                    derivedModels.push(derivedModel as InputModelType);
                 }
             }
         }
@@ -819,7 +814,11 @@ export function getUsages(
 
     for (const op of ops) {
         const resourceOperation = getResourceOperation(program, op.operation);
-        if (!op.parameters.bodyParameter && op.parameters.bodyType) {
+        if (
+            op.parameters.body &&
+            !op.parameters.body.parameter &&
+            op.parameters.body.type
+        ) {
             let bodyTypeName = "";
             if (resourceOperation) {
                 /* handle resource operation. */
@@ -828,7 +827,7 @@ export function getUsages(
                 /* handle spread. */
                 const effectiveBodyType = getEffectiveSchemaType(
                     context,
-                    op.parameters.bodyType
+                    op.parameters.body.type
                 );
                 if (effectiveBodyType.kind === "Model") {
                     if (effectiveBodyType.name !== "") {

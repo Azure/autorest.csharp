@@ -1316,7 +1316,8 @@ var data = new {
     requiredNullableInt = 1234,
     requiredNullableString = "<requiredNullableString>",
     requiredModel = new {
-        discriminatorProperty = "",
+        requiredString = "<requiredString>",
+        discriminatorProperty = "A",
         requiredPropertyOnBase = 1234,
     },
     requiredFixedStringEnum = "1",
@@ -1379,7 +1380,8 @@ var data = new {
     nonRequiredNullableInt = 1234,
     nonRequiredNullableString = "<nonRequiredNullableString>",
     requiredModel = new {
-        discriminatorProperty = "",
+        requiredString = "<requiredString>",
+        discriminatorProperty = "A",
         optionalPropertyOnBase = "<optionalPropertyOnBase>",
         requiredPropertyOnBase = 1234,
     },
@@ -1457,7 +1459,8 @@ var data = new {
     requiredNullableInt = 1234,
     requiredNullableString = "<requiredNullableString>",
     requiredModel = new {
-        discriminatorProperty = "",
+        requiredString = "<requiredString>",
+        discriminatorProperty = "A",
         requiredPropertyOnBase = 1234,
     },
     requiredFixedStringEnum = "1",
@@ -1520,7 +1523,8 @@ var data = new {
     nonRequiredNullableInt = 1234,
     nonRequiredNullableString = "<nonRequiredNullableString>",
     requiredModel = new {
-        discriminatorProperty = "",
+        requiredString = "<requiredString>",
+        discriminatorProperty = "A",
         optionalPropertyOnBase = "<optionalPropertyOnBase>",
         requiredPropertyOnBase = 1234,
     },

@@ -29,7 +29,7 @@ namespace FirstTestTypeSpec.Models
         /// <param name="optionalNullableList"> optional nullable collection. </param>
         /// <param name="requiredNullableList"> required nullable collection. </param>
         /// <returns> A new <see cref="Models.Thing"/> instance for mocking. </returns>
-        public static Thing Thing(string name = null, string requiredUnion = null, ThingRequiredLiteralString requiredLiteralString = default, ThingRequiredLiteralInt requiredLiteralInt = default, ThingRequiredLiteralFloat requiredLiteralFloat = default, bool requiredLiteralBool = default, ThingOptionalLiteralString? optionalLiteralString = null, ThingOptionalLiteralInt? optionalLiteralInt = null, ThingOptionalLiteralFloat? optionalLiteralFloat = null, bool? optionalLiteralBool = null, string requiredBadDescription = null, IEnumerable<int> optionalNullableList = null, IEnumerable<int> requiredNullableList = null)
+        public static Thing Thing(string name = null, object requiredUnion = null, ThingRequiredLiteralString requiredLiteralString = default, ThingRequiredLiteralInt requiredLiteralInt = default, ThingRequiredLiteralFloat requiredLiteralFloat = default, bool requiredLiteralBool = default, ThingOptionalLiteralString? optionalLiteralString = null, ThingOptionalLiteralInt? optionalLiteralInt = null, ThingOptionalLiteralFloat? optionalLiteralFloat = null, bool? optionalLiteralBool = null, string requiredBadDescription = null, IEnumerable<int> optionalNullableList = null, IEnumerable<int> requiredNullableList = null)
         {
             optionalNullableList ??= new List<int>();
             requiredNullableList ??= new List<int>();
