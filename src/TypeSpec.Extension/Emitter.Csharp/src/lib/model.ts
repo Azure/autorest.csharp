@@ -814,31 +814,36 @@ export function getUsages(
     for (const op of ops) {
         const resourceOperation = getResourceOperation(program, op.operation);
         if (!op.parameters.body?.parameter && op.parameters.body?.type) {
-            let bodyTypeName = "";
+            var effectiveBodyType = undefined;
+            var affectedTypes: string[] = [];
             if (resourceOperation) {
-                /* handle resource operation. */
-                bodyTypeName = resourceOperation.resourceType.name;
+                effectiveBodyType = resourceOperation.resourceType;
+                affectedTypes.push(effectiveBodyType.name);
             } else {
-                /* handle spread. */
-                const effectiveBodyType = getEffectiveSchemaType(
+                effectiveBodyType = getEffectiveSchemaType(
                     context,
                     op.parameters.body.type
                 );
                 if (effectiveBodyType.kind === "Model") {
-                    if (effectiveBodyType.name !== "") {
-                        bodyTypeName =
-                            getFriendlyName(program, effectiveBodyType) ??
-                            effectiveBodyType.name;
-                    } else {
-                        bodyTypeName = `${capitalize(
+                    /* handle spread. */
+                    if (effectiveBodyType.name === "") {
+                        effectiveBodyType.name = `${capitalize(
                             op.operation.name
                         )}Request`;
                     }
+                    affectedTypes.push(getFriendlyName(program, effectiveBodyType) ?? effectiveBodyType.name);
                 }
+                
             }
-            appendUsage(bodyTypeName, UsageFlags.Input);
+            if (effectiveBodyType.kind === "Model") {
+                affectedTypes.push(...getAllDerivedModels(effectiveBodyType));
+            }
+            for (const name of affectedTypes) {
+                appendUsage(name, UsageFlags.Input);
+            }
         }
         /* handle response type usage. */
+        var affectedReturnTypes: string[] = [];
         for (const res of op.responses) {
             const resBody = res.responses[0]?.body;
             if (resBody?.type) {
@@ -862,17 +867,15 @@ export function getUsages(
                             getFriendlyName(program, effectiveReturnType) ??
                             effectiveReturnType.name;
                     }
-                    /*propgate to sub models*/
-                    // if (effectiveReturnType.kind === "Model") {
-                    //     const subModels = effectiveReturnType.derivedModels;
-                    //     for (const subModel of subModels) {
-                    //         const subModelName =
-                    //             getFriendlyName(program, subModel) ?? subModel.name;
-                    //         appendUsage(subModelName, UsageFlags.Output);
-                    //     }
-                    // }
+                    /*propagate to sub models*/
+                    if (effectiveReturnType.kind === "Model") {
+                        affectedReturnTypes.push(...getAllDerivedModels(effectiveReturnType));
+                    }
                 }
-                appendUsage(returnType, UsageFlags.Output);
+                affectedReturnTypes.push(returnType);
+                for (const name of affectedReturnTypes) {
+                    appendUsage(name, UsageFlags.Output);
+                }
             }
         }
     }
@@ -913,6 +916,16 @@ export function getUsages(
         if (!value) value = flag;
         else value = value | flag;
         usagesMap.set(name, value);
+    }
+
+    function getAllDerivedModels(model: Model): string[] {
+        const result: string[] = [];
+        const derivedModels = model.derivedModels;
+        for (const derivedModel of derivedModels) {
+            result.push(getFriendlyName(program, derivedModel) ?? derivedModel.name);
+            result.push(...getAllDerivedModels(derivedModel));
+        }
+        return result;
     }
 }
 

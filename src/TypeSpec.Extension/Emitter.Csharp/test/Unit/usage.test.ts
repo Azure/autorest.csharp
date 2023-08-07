@@ -254,6 +254,62 @@ describe("Test getUsages", () => {
         assert(usages.roundTrips.includes("Foo"));
     });
 
+    it("Test the usage of body polymorphism type in azure core resource operation.", async () => {
+        const program = await typeSpecCompile(
+            `
+            @doc("This is a model.")
+            @resource("items")
+            model Foo {
+                @doc("id of Foo")
+                @key
+                @visibility("read","create","query")
+                id: string;
+                @doc("name of Foo")
+                name: string;
+            }
+
+            #suppress "@azure-tools/typespec-azure-core/documentation-required" "The ModelProperty named 'discriminatorProperty' should have a documentation or description, please use decorator @doc to add it"
+            @discriminator("discriminatorProperty")
+            @doc("Base model with discriminator property.")
+            model BaseModelWithDiscriminator {
+                @doc("Optional property on base")
+                optionalPropertyOnBase?: string;
+
+                @doc("Required property on base")
+                requiredPropertyOnBase: int32;
+            }
+
+            #suppress "@azure-tools/typespec-azure-core/documentation-required" "The ModelProperty named 'discriminatorProperty' should have a documentation or description, please use decorator @doc to add it"
+            @doc("Deriver model with discriminator property.")
+            model DerivedModelWithDiscriminatorA extends BaseModelWithDiscriminator {
+                discriminatorProperty: "A";
+
+                @doc("Required string.")
+                requiredString: string;
+            }
+
+            interface FooClient{
+                @doc("create Foo")
+                op testFoo is Azure.Core.StandardResourceOperations.ResourceCollectionAction<
+                Foo,
+                BaseModelWithDiscriminator,
+                {}
+                >;
+            }
+      `,
+            runner,
+            true,
+            true
+        );
+
+        const context = createEmitterContext(program);
+        const sdkContext = createSdkContext(context);
+        const [services] = getAllHttpServices(program);
+        const usages = getUsages(sdkContext, services[0].operations);
+        assert(usages.inputs.includes("BaseModelWithDiscriminator"));
+        assert(usages.inputs.includes("DerivedModelWithDiscriminatorA"));
+    });
+
     it("Test the usage of response polymorphism type in azure core resource operation.", async () => {
         const program = await typeSpecCompile(
             `
