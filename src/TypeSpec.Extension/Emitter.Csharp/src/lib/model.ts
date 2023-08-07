@@ -588,8 +588,14 @@ export function getInputType(
             const discriminatorProperty = m.properties.get(
                 discriminatorPropertyName
             );
-            if (discriminatorProperty?.type.kind === "String") {
-                return discriminatorProperty.type.value;
+            if (
+                discriminatorProperty?.type.kind === "String" ||
+                // discriminator property cannot be number, but enum support number values
+                // typespec compiler will do the check, but here we do a double check just in case
+                (discriminatorProperty?.type.kind === "EnumMember" &&
+                    typeof discriminatorProperty?.type.value === "string")
+            ) {
+                return String(discriminatorProperty.type.value);
             }
         }
 
@@ -650,6 +656,9 @@ export function getInputType(
         });
 
         if (model.DiscriminatorPropertyName && !discriminatorPropertyDefined) {
+            logger.info(
+                `No specified type for discriminator property '${model.DiscriminatorPropertyName}'. Assume it is a string.`
+            );
             const discriminatorProperty = {
                 Name: model.DiscriminatorPropertyName,
                 SerializedName: model.DiscriminatorPropertyName,
