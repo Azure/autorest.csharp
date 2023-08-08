@@ -4,8 +4,10 @@
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Reflection;
 using AutoRest.CSharp.Common.Input;
+using Microsoft.CodeAnalysis.CSharp;
 
 namespace AutoRest.CSharp.Output.Models
 {
@@ -43,17 +45,25 @@ namespace AutoRest.CSharp.Output.Models
             if (type == null)
                 return true;
 
-            return WalkType(type, new Dictionary<InputModelType, bool?>());
+            if (_cache.TryGetValue(type, out var result))
+                return result;
+
+            var visitedModels = new Dictionary<InputModelType, bool?>();
+            result = WalkType(type, visitedModels);
+
+            foreach (var (visitedType, r) in visitedModels)
+            {
+                Debug.Assert(r != null);
+                _cache.TryAdd(visitedType, r.Value);
+            }
+            if (type is not InputListType or InputDictionaryType)
+                _cache.TryAdd(type, result);
+
+            return result;
         }
 
         private static bool WalkType(InputType type, Dictionary<InputModelType, bool?> visitedModels)
         {
-            // return the result if it has been calculated
-            if (_cache.TryGetValue(type, out var value))
-            {
-                return value;
-            }
-
             var isConfident = type switch
             {
                 InputModelType modelType => WalkModelType(modelType, visitedModels),
@@ -63,8 +73,6 @@ namespace AutoRest.CSharp.Output.Models
                 InputUnionType unionType => WalkUnionType(unionType),
                 _ => true
             };
-
-            _cache.TryAdd(type, isConfident);
 
             return isConfident;
         }
@@ -90,9 +98,18 @@ namespace AutoRest.CSharp.Output.Models
             // the low confident part in derived types will pollute it back to the base class - if any derived class has low confident part (like union types), we will set the base as "not confident", but other derived types are not affected.
             if (type.DiscriminatorPropertyName != null && type.DerivedModels.Count > 0)
             {
-                var isBaseConfident = isConfident;
-                foreach (var dm in type.DerivedModels) {
+                foreach (var dm in type.DerivedModels)
+                {
                     isConfident = isConfident && WalkType(dm, visitedModels);
+                }
+
+                // if one of the derived types is not confident, we should make all of them not confident
+                if (!isConfident)
+                {
+                    foreach (var dm in type.DerivedModels)
+                    {
+                        visitedModels[dm] = isConfident;
+                    }
                 }
             }
 
@@ -102,8 +119,17 @@ namespace AutoRest.CSharp.Output.Models
 
         private static bool WalkLiteralType(InputLiteralType literalType)
         {
-            // TODO
-            return true;
+            // a literal type is not confident, when we wrap it wiht a number-valued enum without proper names for its enum value items
+            if (literalType.LiteralValueType is not InputEnumType enumType)
+                return true;
+
+            var isConfident = true;
+            foreach (var value in enumType.AllowedValues)
+            {
+                isConfident = isConfident && SyntaxFacts.IsValidIdentifier(value.Name);
+            }
+
+            return isConfident;
         }
 
         private static bool WalkUnionType(InputUnionType unionType)

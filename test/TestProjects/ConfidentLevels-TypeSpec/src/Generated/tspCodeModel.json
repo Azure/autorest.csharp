@@ -1,0 +1,1827 @@
+{
+ "$id": "1",
+ "Name": "ConfidentLevelsInTsp",
+ "Description": "CADL project to test various types of models.",
+ "ApiVersions": [
+  "0.1.0"
+ ],
+ "Enums": [
+  {
+   "$id": "2",
+   "Name": "ModelWithIntegerLiteralTypeProperty_id",
+   "Namespace": "ConfidentLevelsInTsp",
+   "Description": "The ModelWithIntegerLiteralTypeProperty_id",
+   "EnumValueType": "Float32",
+   "AllowedValues": [
+    {
+     "$id": "3",
+     "Name": "1",
+     "Value": 1,
+     "Description": "1"
+    }
+   ],
+   "IsExtensible": true,
+   "IsNullable": false,
+   "Usage": "Input"
+  },
+  {
+   "$id": "4",
+   "Name": "ModelWithFloatLiteralTypeProperty_id",
+   "Namespace": "ConfidentLevelsInTsp",
+   "Description": "The ModelWithFloatLiteralTypeProperty_id",
+   "EnumValueType": "Float32",
+   "AllowedValues": [
+    {
+     "$id": "5",
+     "Name": "3.141592",
+     "Value": 3.141592,
+     "Description": "3.141592"
+    }
+   ],
+   "IsExtensible": true,
+   "IsNullable": false,
+   "Usage": "Input"
+  }
+ ],
+ "Models": [
+  {
+   "$id": "6",
+   "Name": "ModelWithUnionProperty",
+   "Namespace": "ConfidentLevelsInTsp",
+   "Description": "This is a model with union types",
+   "IsNullable": false,
+   "Usage": "Input",
+   "Properties": [
+    {
+     "$id": "7",
+     "Name": "unionProperty",
+     "SerializedName": "unionProperty",
+     "Description": "This is a union property",
+     "Type": {
+      "$id": "8",
+      "Name": "Union",
+      "UnionItemTypes": [
+       {
+        "$id": "9",
+        "Name": "string",
+        "Kind": "String",
+        "IsNullable": false
+       },
+       {
+        "$id": "10",
+        "Name": "int32",
+        "Kind": "Int32",
+        "IsNullable": false
+       }
+      ],
+      "IsNullable": false
+     },
+     "IsRequired": true,
+     "IsReadOnly": false
+    }
+   ],
+   "DerivedModels": []
+  },
+  {
+   "$id": "11",
+   "Name": "UsualModel",
+   "Namespace": "ConfidentLevelsInTsp",
+   "Description": "This is a model without union types",
+   "IsNullable": false,
+   "Usage": "Input",
+   "Properties": [
+    {
+     "$id": "12",
+     "Name": "name",
+     "SerializedName": "name",
+     "Description": "The name",
+     "Type": {
+      "$id": "13",
+      "Name": "string",
+      "Kind": "String",
+      "IsNullable": false
+     },
+     "IsRequired": true,
+     "IsReadOnly": false
+    },
+    {
+     "$id": "14",
+     "Name": "age",
+     "SerializedName": "age",
+     "Description": "The age",
+     "Type": {
+      "$id": "15",
+      "Name": "int32",
+      "Kind": "Int32",
+      "IsNullable": false
+     },
+     "IsRequired": true,
+     "IsReadOnly": false
+    },
+    {
+     "$id": "16",
+     "Name": "size",
+     "SerializedName": "size",
+     "Description": "The size",
+     "Type": {
+      "$id": "17",
+      "Name": "float64",
+      "Kind": "Float64",
+      "IsNullable": false
+     },
+     "IsRequired": false,
+     "IsReadOnly": false
+    }
+   ],
+   "DerivedModels": []
+  },
+  {
+   "$id": "18",
+   "Name": "AnotherModelWithUnionProperty",
+   "Namespace": "ConfidentLevelsInTsp",
+   "Description": "This is another model with union types",
+   "IsNullable": false,
+   "Usage": "Output",
+   "Properties": [
+    {
+     "$id": "19",
+     "Name": "unionProperty",
+     "SerializedName": "unionProperty",
+     "Description": "This is a union property",
+     "Type": {
+      "$id": "20",
+      "Name": "Union",
+      "UnionItemTypes": [
+       {
+        "$id": "21",
+        "Name": "string",
+        "Kind": "String",
+        "IsNullable": false
+       },
+       {
+        "$id": "22",
+        "Name": "Array",
+        "ElementType": {
+         "$id": "23",
+         "Name": "string",
+         "Kind": "String",
+         "IsNullable": false
+        },
+        "IsNullable": false
+       }
+      ],
+      "IsNullable": false
+     },
+     "IsRequired": true,
+     "IsReadOnly": false
+    }
+   ],
+   "DerivedModels": []
+  },
+  {
+   "$id": "24",
+   "Name": "NonConfidentModelWithSelfReference",
+   "Namespace": "ConfidentLevelsInTsp",
+   "Description": "Non-confident model that contains self reference",
+   "IsNullable": false,
+   "Usage": "Input",
+   "Properties": [
+    {
+     "$id": "25",
+     "Name": "name",
+     "SerializedName": "name",
+     "Description": "The name",
+     "Type": {
+      "$id": "26",
+      "Name": "string",
+      "Kind": "String",
+      "IsNullable": false
+     },
+     "IsRequired": true,
+     "IsReadOnly": false
+    },
+    {
+     "$id": "27",
+     "Name": "selfReference",
+     "SerializedName": "selfReference",
+     "Description": "The self reference",
+     "Type": {
+      "$id": "28",
+      "Name": "Array",
+      "ElementType": {
+       "$ref": "24"
+      },
+      "IsNullable": false
+     },
+     "IsRequired": true,
+     "IsReadOnly": false
+    },
+    {
+     "$id": "29",
+     "Name": "unionProperty",
+     "SerializedName": "unionProperty",
+     "Description": "The non-confident part",
+     "Type": {
+      "$id": "30",
+      "Name": "Union",
+      "UnionItemTypes": [
+       {
+        "$id": "31",
+        "Name": "string",
+        "Kind": "String",
+        "IsNullable": false
+       },
+       {
+        "$id": "32",
+        "Name": "Array",
+        "ElementType": {
+         "$id": "33",
+         "Name": "int32",
+         "Kind": "Int32",
+         "IsNullable": false
+        },
+        "IsNullable": false
+       }
+      ],
+      "IsNullable": false
+     },
+     "IsRequired": true,
+     "IsReadOnly": false
+    }
+   ],
+   "DerivedModels": []
+  },
+  {
+   "$id": "34",
+   "Name": "NonConfidentModelWithIndirectSelfReference",
+   "Namespace": "ConfidentLevelsInTsp",
+   "Description": "The model that contains self reference",
+   "IsNullable": false,
+   "Usage": "Input",
+   "Properties": [
+    {
+     "$id": "35",
+     "Name": "name",
+     "SerializedName": "name",
+     "Description": "The name",
+     "Type": {
+      "$id": "36",
+      "Name": "string",
+      "Kind": "String",
+      "IsNullable": false
+     },
+     "IsRequired": true,
+     "IsReadOnly": false
+    },
+    {
+     "$id": "37",
+     "Name": "reference",
+     "SerializedName": "reference",
+     "Description": "The self reference",
+     "Type": {
+      "$id": "38",
+      "Name": "Array",
+      "ElementType": {
+       "$id": "39",
+       "Name": "IndirectSelfReferenceModel",
+       "Namespace": "ConfidentLevelsInTsp",
+       "Description": "Indirect self reference model",
+       "IsNullable": false,
+       "Usage": "Input",
+       "Properties": [
+        {
+         "$id": "40",
+         "Name": "something",
+         "SerializedName": "something",
+         "Description": "Something not important",
+         "Type": {
+          "$id": "41",
+          "Name": "string",
+          "Kind": "String",
+          "IsNullable": false
+         },
+         "IsRequired": true,
+         "IsReadOnly": false
+        },
+        {
+         "$id": "42",
+         "Name": "reference",
+         "SerializedName": "reference",
+         "Description": "Reference back",
+         "Type": {
+          "$ref": "24"
+         },
+         "IsRequired": false,
+         "IsReadOnly": false
+        },
+        {
+         "$id": "43",
+         "Name": "unionProperty",
+         "SerializedName": "unionProperty",
+         "Description": "The non-confident part",
+         "Type": {
+          "$id": "44",
+          "Name": "Union",
+          "UnionItemTypes": [
+           {
+            "$id": "45",
+            "Name": "string",
+            "Kind": "String",
+            "IsNullable": false
+           },
+           {
+            "$id": "46",
+            "Name": "Array",
+            "ElementType": {
+             "$id": "47",
+             "Name": "int32",
+             "Kind": "Int32",
+             "IsNullable": false
+            },
+            "IsNullable": false
+           }
+          ],
+          "IsNullable": false
+         },
+         "IsRequired": true,
+         "IsReadOnly": false
+        }
+       ],
+       "DerivedModels": []
+      },
+      "IsNullable": false
+     },
+     "IsRequired": false,
+     "IsReadOnly": false
+    }
+   ],
+   "DerivedModels": []
+  },
+  {
+   "$ref": "39"
+  },
+  {
+   "$id": "48",
+   "Name": "ModelWithIntegerLiteralTypeProperty",
+   "Namespace": "ConfidentLevelsInTsp",
+   "Description": "This is a model with a property of literal type of numbers",
+   "IsNullable": false,
+   "Usage": "Input",
+   "Properties": [
+    {
+     "$id": "49",
+     "Name": "name",
+     "SerializedName": "name",
+     "Description": "The name",
+     "Type": {
+      "$id": "50",
+      "Name": "string",
+      "Kind": "String",
+      "IsNullable": false
+     },
+     "IsRequired": true,
+     "IsReadOnly": false
+    },
+    {
+     "$id": "51",
+     "Name": "id",
+     "SerializedName": "id",
+     "Description": "The id",
+     "Type": {
+      "$id": "52",
+      "Name": "Literal",
+      "LiteralValueType": {
+       "$ref": "2"
+      },
+      "Value": 1,
+      "IsNullable": false
+     },
+     "IsRequired": true,
+     "IsReadOnly": false
+    }
+   ],
+   "DerivedModels": []
+  },
+  {
+   "$id": "53",
+   "Name": "ModelWithFloatLiteralTypeProperty",
+   "Namespace": "ConfidentLevelsInTsp",
+   "Description": "This is a model with a property of literal type of numbers",
+   "IsNullable": false,
+   "Usage": "Input",
+   "Properties": [
+    {
+     "$id": "54",
+     "Name": "name",
+     "SerializedName": "name",
+     "Description": "The name",
+     "Type": {
+      "$id": "55",
+      "Name": "string",
+      "Kind": "String",
+      "IsNullable": false
+     },
+     "IsRequired": true,
+     "IsReadOnly": false
+    },
+    {
+     "$id": "56",
+     "Name": "id",
+     "SerializedName": "id",
+     "Description": "The id",
+     "Type": {
+      "$id": "57",
+      "Name": "Literal",
+      "LiteralValueType": {
+       "$ref": "4"
+      },
+      "Value": 3.141592,
+      "IsNullable": false
+     },
+     "IsRequired": true,
+     "IsReadOnly": false
+    }
+   ],
+   "DerivedModels": []
+  },
+  {
+   "$id": "58",
+   "Name": "Pet",
+   "Namespace": "ConfidentLevelsInTsp",
+   "Description": "The base Pet model",
+   "IsNullable": false,
+   "DiscriminatorPropertyName": "kind",
+   "Usage": "RoundTrip",
+   "Properties": [
+    {
+     "$id": "59",
+     "Name": "kind",
+     "SerializedName": "kind",
+     "Description": "Discriminator",
+     "IsRequired": true,
+     "IsReadOnly": false,
+     "IsNullable": false,
+     "Type": {
+      "$id": "60",
+      "Name": "string",
+      "Kind": "String",
+      "IsNullable": false
+     },
+     "IsDiscriminator": true
+    },
+    {
+     "$id": "61",
+     "Name": "name",
+     "SerializedName": "name",
+     "Description": "The name of the pet",
+     "Type": {
+      "$id": "62",
+      "Name": "string",
+      "Kind": "String",
+      "IsNullable": false
+     },
+     "IsRequired": true,
+     "IsReadOnly": false
+    }
+   ],
+   "DerivedModels": [
+    {
+     "$id": "63",
+     "Name": "Cat",
+     "Namespace": "ConfidentLevelsInTsp",
+     "Description": "The cat",
+     "IsNullable": false,
+     "DiscriminatorValue": "cat",
+     "BaseModel": {
+      "$ref": "58"
+     },
+     "Usage": "RoundTrip",
+     "Properties": [
+      {
+       "$id": "64",
+       "Name": "meow",
+       "SerializedName": "meow",
+       "Description": "Meow",
+       "Type": {
+        "$id": "65",
+        "Name": "string",
+        "Kind": "String",
+        "IsNullable": false
+       },
+       "IsRequired": true,
+       "IsReadOnly": false
+      }
+     ],
+     "DerivedModels": []
+    },
+    {
+     "$id": "66",
+     "Name": "Dog",
+     "Namespace": "ConfidentLevelsInTsp",
+     "Description": "The dog",
+     "IsNullable": false,
+     "DiscriminatorValue": "dog",
+     "BaseModel": {
+      "$ref": "58"
+     },
+     "Usage": "RoundTrip",
+     "Properties": [
+      {
+       "$id": "67",
+       "Name": "woof",
+       "SerializedName": "woof",
+       "Description": "Woof",
+       "Type": {
+        "$id": "68",
+        "Name": "string",
+        "Kind": "String",
+        "IsNullable": false
+       },
+       "IsRequired": true,
+       "IsReadOnly": false
+      }
+     ],
+     "DerivedModels": []
+    }
+   ]
+  },
+  {
+   "$ref": "63"
+  },
+  {
+   "$ref": "66"
+  },
+  {
+   "$id": "69",
+   "Name": "PollutedPet",
+   "Namespace": "ConfidentLevelsInTsp",
+   "Description": "The base Pet model polluted by union in derived type",
+   "IsNullable": false,
+   "DiscriminatorPropertyName": "kind",
+   "Usage": "RoundTrip",
+   "Properties": [
+    {
+     "$id": "70",
+     "Name": "kind",
+     "SerializedName": "kind",
+     "Description": "Discriminator",
+     "IsRequired": true,
+     "IsReadOnly": false,
+     "IsNullable": false,
+     "Type": {
+      "$id": "71",
+      "Name": "string",
+      "Kind": "String",
+      "IsNullable": false
+     },
+     "IsDiscriminator": true
+    },
+    {
+     "$id": "72",
+     "Name": "name",
+     "SerializedName": "name",
+     "Description": "The name of the pet",
+     "Type": {
+      "$id": "73",
+      "Name": "string",
+      "Kind": "String",
+      "IsNullable": false
+     },
+     "IsRequired": true,
+     "IsReadOnly": false
+    }
+   ],
+   "DerivedModels": [
+    {
+     "$id": "74",
+     "Name": "PollutedDog",
+     "Namespace": "ConfidentLevelsInTsp",
+     "Description": "The dog with a union type",
+     "IsNullable": false,
+     "DiscriminatorValue": "dog",
+     "BaseModel": {
+      "$ref": "69"
+     },
+     "Usage": "RoundTrip",
+     "Properties": [
+      {
+       "$id": "75",
+       "Name": "woof",
+       "SerializedName": "woof",
+       "Description": "Woof",
+       "Type": {
+        "$id": "76",
+        "Name": "string",
+        "Kind": "String",
+        "IsNullable": false
+       },
+       "IsRequired": true,
+       "IsReadOnly": false
+      },
+      {
+       "$id": "77",
+       "Name": "color",
+       "SerializedName": "color",
+       "Description": "Color, could be specified by a string or by an array of int as RGB",
+       "Type": {
+        "$id": "78",
+        "Name": "Union",
+        "UnionItemTypes": [
+         {
+          "$id": "79",
+          "Name": "string",
+          "Kind": "String",
+          "IsNullable": false
+         },
+         {
+          "$id": "80",
+          "Name": "Array",
+          "ElementType": {
+           "$id": "81",
+           "Name": "int32",
+           "Kind": "Int32",
+           "IsNullable": false
+          },
+          "IsNullable": false
+         }
+        ],
+        "IsNullable": false
+       },
+       "IsRequired": true,
+       "IsReadOnly": false
+      }
+     ],
+     "DerivedModels": []
+    },
+    {
+     "$id": "82",
+     "Name": "UnpollutedCat",
+     "Namespace": "ConfidentLevelsInTsp",
+     "Description": "The cat without a union type",
+     "IsNullable": false,
+     "DiscriminatorValue": "cat",
+     "BaseModel": {
+      "$ref": "69"
+     },
+     "Usage": "RoundTrip",
+     "Properties": [
+      {
+       "$id": "83",
+       "Name": "meow",
+       "SerializedName": "meow",
+       "Description": "Meow",
+       "Type": {
+        "$id": "84",
+        "Name": "string",
+        "Kind": "String",
+        "IsNullable": false
+       },
+       "IsRequired": true,
+       "IsReadOnly": false
+      }
+     ],
+     "DerivedModels": []
+    }
+   ]
+  },
+  {
+   "$ref": "74"
+  },
+  {
+   "$ref": "82"
+  }
+ ],
+ "Clients": [
+  {
+   "$id": "85",
+   "Name": "ConfidentLevelsInTspClient",
+   "Description": "CADL project to test various types of models.",
+   "Operations": [
+    {
+     "$id": "86",
+     "Name": "unionInRequestProperty",
+     "ResourceName": "ConfidentLevelsInTsp",
+     "Description": "This is an operation that uses a model with union types in request body",
+     "Parameters": [
+      {
+       "$id": "87",
+       "Name": "host",
+       "NameInRequest": "host",
+       "Type": {
+        "$id": "88",
+        "Name": "Uri",
+        "Kind": "Uri",
+        "IsNullable": false
+       },
+       "Location": "Uri",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsRequired": true,
+       "IsEndpoint": true,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Client"
+      },
+      {
+       "$id": "89",
+       "Name": "body",
+       "NameInRequest": "body",
+       "Type": {
+        "$ref": "6"
+       },
+       "Location": "Body",
+       "IsRequired": true,
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Method"
+      },
+      {
+       "$id": "90",
+       "Name": "contentType",
+       "NameInRequest": "Content-Type",
+       "Type": {
+        "$id": "91",
+        "Name": "String",
+        "Kind": "String",
+        "IsNullable": false
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": true,
+       "IsRequired": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "92",
+        "Type": {
+         "$ref": "91"
+        },
+        "Value": "application/json"
+       }
+      },
+      {
+       "$id": "93",
+       "Name": "accept",
+       "NameInRequest": "Accept",
+       "Type": {
+        "$id": "94",
+        "Name": "String",
+        "Kind": "String",
+        "IsNullable": false
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsRequired": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "95",
+        "Type": {
+         "$ref": "94"
+        },
+        "Value": "application/json"
+       }
+      },
+      {
+       "$id": "96",
+       "Name": "apiVersion",
+       "NameInRequest": "api-version",
+       "Description": "",
+       "Type": {
+        "$id": "97",
+        "Name": "String",
+        "Kind": "String",
+        "IsNullable": false
+       },
+       "Location": "Query",
+       "IsRequired": true,
+       "IsApiVersion": true,
+       "IsContentType": false,
+       "IsEndpoint": false,
+       "IsResourceParameter": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Client",
+       "DefaultValue": {
+        "$id": "98",
+        "Type": {
+         "$id": "99",
+         "Name": "String",
+         "Kind": "String",
+         "IsNullable": false
+        },
+        "Value": "0.1.0"
+       }
+      }
+     ],
+     "Responses": [
+      {
+       "$id": "100",
+       "StatusCodes": [
+        204
+       ],
+       "BodyMediaType": "Json",
+       "Headers": [],
+       "IsErrorResponse": false
+      }
+     ],
+     "HttpMethod": "POST",
+     "RequestBodyMediaType": "Json",
+     "Uri": "{host}",
+     "Path": "/unions/properties/requests",
+     "RequestMediaTypes": [
+      "application/json"
+     ],
+     "BufferResponse": true,
+     "GenerateProtocolMethod": true,
+     "GenerateConvenienceMethod": true
+    },
+    {
+     "$id": "101",
+     "Name": "unionInResponseProperty",
+     "ResourceName": "ConfidentLevelsInTsp",
+     "Description": "This is an operation that uses a model with union types as response body",
+     "Parameters": [
+      {
+       "$ref": "87"
+      },
+      {
+       "$id": "102",
+       "Name": "body",
+       "NameInRequest": "body",
+       "Type": {
+        "$ref": "11"
+       },
+       "Location": "Body",
+       "IsRequired": true,
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Method"
+      },
+      {
+       "$id": "103",
+       "Name": "contentType",
+       "NameInRequest": "Content-Type",
+       "Type": {
+        "$id": "104",
+        "Name": "String",
+        "Kind": "String",
+        "IsNullable": false
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": true,
+       "IsRequired": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "105",
+        "Type": {
+         "$ref": "104"
+        },
+        "Value": "application/json"
+       }
+      },
+      {
+       "$id": "106",
+       "Name": "accept",
+       "NameInRequest": "Accept",
+       "Type": {
+        "$id": "107",
+        "Name": "String",
+        "Kind": "String",
+        "IsNullable": false
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsRequired": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "108",
+        "Type": {
+         "$ref": "107"
+        },
+        "Value": "application/json"
+       }
+      },
+      {
+       "$ref": "96"
+      }
+     ],
+     "Responses": [
+      {
+       "$id": "109",
+       "StatusCodes": [
+        200
+       ],
+       "BodyType": {
+        "$ref": "18"
+       },
+       "BodyMediaType": "Json",
+       "Headers": [],
+       "IsErrorResponse": false
+      }
+     ],
+     "HttpMethod": "POST",
+     "RequestBodyMediaType": "Json",
+     "Uri": "{host}",
+     "Path": "/unions/properties/responses",
+     "RequestMediaTypes": [
+      "application/json"
+     ],
+     "BufferResponse": true,
+     "GenerateProtocolMethod": true,
+     "GenerateConvenienceMethod": true
+    },
+    {
+     "$id": "110",
+     "Name": "unionWithSelfReference",
+     "ResourceName": "ConfidentLevelsInTsp",
+     "Description": "This is an operation that uses a model with union types and self reference in request body",
+     "Parameters": [
+      {
+       "$ref": "87"
+      },
+      {
+       "$id": "111",
+       "Name": "input",
+       "NameInRequest": "input",
+       "Type": {
+        "$ref": "24"
+       },
+       "Location": "Body",
+       "IsRequired": true,
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Method"
+      },
+      {
+       "$id": "112",
+       "Name": "contentType",
+       "NameInRequest": "Content-Type",
+       "Type": {
+        "$id": "113",
+        "Name": "String",
+        "Kind": "String",
+        "IsNullable": false
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": true,
+       "IsRequired": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "114",
+        "Type": {
+         "$ref": "113"
+        },
+        "Value": "application/json"
+       }
+      },
+      {
+       "$id": "115",
+       "Name": "accept",
+       "NameInRequest": "Accept",
+       "Type": {
+        "$id": "116",
+        "Name": "String",
+        "Kind": "String",
+        "IsNullable": false
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsRequired": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "117",
+        "Type": {
+         "$ref": "116"
+        },
+        "Value": "application/json"
+       }
+      },
+      {
+       "$ref": "96"
+      }
+     ],
+     "Responses": [
+      {
+       "$id": "118",
+       "StatusCodes": [
+        204
+       ],
+       "BodyMediaType": "Json",
+       "Headers": [],
+       "IsErrorResponse": false
+      }
+     ],
+     "HttpMethod": "POST",
+     "RequestBodyMediaType": "Json",
+     "Uri": "{host}",
+     "Path": "/unions/properties/requests/selfReferences",
+     "RequestMediaTypes": [
+      "application/json"
+     ],
+     "BufferResponse": true,
+     "GenerateProtocolMethod": true,
+     "GenerateConvenienceMethod": true
+    },
+    {
+     "$id": "119",
+     "Name": "unionWithInderict",
+     "ResourceName": "ConfidentLevelsInTsp",
+     "Description": "This is an operation that uses a model with union types and indirect self reference in request body",
+     "Parameters": [
+      {
+       "$ref": "87"
+      },
+      {
+       "$id": "120",
+       "Name": "input",
+       "NameInRequest": "input",
+       "Type": {
+        "$ref": "34"
+       },
+       "Location": "Body",
+       "IsRequired": true,
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Method"
+      },
+      {
+       "$id": "121",
+       "Name": "contentType",
+       "NameInRequest": "Content-Type",
+       "Type": {
+        "$id": "122",
+        "Name": "String",
+        "Kind": "String",
+        "IsNullable": false
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": true,
+       "IsRequired": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "123",
+        "Type": {
+         "$ref": "122"
+        },
+        "Value": "application/json"
+       }
+      },
+      {
+       "$id": "124",
+       "Name": "accept",
+       "NameInRequest": "Accept",
+       "Type": {
+        "$id": "125",
+        "Name": "String",
+        "Kind": "String",
+        "IsNullable": false
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsRequired": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "126",
+        "Type": {
+         "$ref": "125"
+        },
+        "Value": "application/json"
+       }
+      },
+      {
+       "$ref": "96"
+      }
+     ],
+     "Responses": [
+      {
+       "$id": "127",
+       "StatusCodes": [
+        204
+       ],
+       "BodyMediaType": "Json",
+       "Headers": [],
+       "IsErrorResponse": false
+      }
+     ],
+     "HttpMethod": "POST",
+     "RequestBodyMediaType": "Json",
+     "Uri": "{host}",
+     "Path": "/unions/properties/requests/indirectSelfReferences",
+     "RequestMediaTypes": [
+      "application/json"
+     ],
+     "BufferResponse": true,
+     "GenerateProtocolMethod": true,
+     "GenerateConvenienceMethod": true
+    },
+    {
+     "$id": "128",
+     "Name": "literalOfInteger",
+     "ResourceName": "ConfidentLevelsInTsp",
+     "Description": "This is an operation that uses a model with a property of literal type of numbers in request body",
+     "Parameters": [
+      {
+       "$ref": "87"
+      },
+      {
+       "$id": "129",
+       "Name": "input",
+       "NameInRequest": "input",
+       "Type": {
+        "$ref": "48"
+       },
+       "Location": "Body",
+       "IsRequired": true,
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Method"
+      },
+      {
+       "$id": "130",
+       "Name": "contentType",
+       "NameInRequest": "Content-Type",
+       "Type": {
+        "$id": "131",
+        "Name": "String",
+        "Kind": "String",
+        "IsNullable": false
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": true,
+       "IsRequired": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "132",
+        "Type": {
+         "$ref": "131"
+        },
+        "Value": "application/json"
+       }
+      },
+      {
+       "$id": "133",
+       "Name": "accept",
+       "NameInRequest": "Accept",
+       "Type": {
+        "$id": "134",
+        "Name": "String",
+        "Kind": "String",
+        "IsNullable": false
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsRequired": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "135",
+        "Type": {
+         "$ref": "134"
+        },
+        "Value": "application/json"
+       }
+      },
+      {
+       "$ref": "96"
+      }
+     ],
+     "Responses": [
+      {
+       "$id": "136",
+       "StatusCodes": [
+        204
+       ],
+       "BodyMediaType": "Json",
+       "Headers": [],
+       "IsErrorResponse": false
+      }
+     ],
+     "HttpMethod": "POST",
+     "RequestBodyMediaType": "Json",
+     "Uri": "{host}",
+     "Path": "/literals/integers/requests",
+     "RequestMediaTypes": [
+      "application/json"
+     ],
+     "BufferResponse": true,
+     "GenerateProtocolMethod": true,
+     "GenerateConvenienceMethod": true
+    },
+    {
+     "$id": "137",
+     "Name": "literalOfFloat",
+     "ResourceName": "ConfidentLevelsInTsp",
+     "Description": "This is an operation that uses a model with a property of literal type of numbers in request body",
+     "Parameters": [
+      {
+       "$ref": "87"
+      },
+      {
+       "$id": "138",
+       "Name": "input",
+       "NameInRequest": "input",
+       "Type": {
+        "$ref": "53"
+       },
+       "Location": "Body",
+       "IsRequired": true,
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Method"
+      },
+      {
+       "$id": "139",
+       "Name": "contentType",
+       "NameInRequest": "Content-Type",
+       "Type": {
+        "$id": "140",
+        "Name": "String",
+        "Kind": "String",
+        "IsNullable": false
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": true,
+       "IsRequired": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "141",
+        "Type": {
+         "$ref": "140"
+        },
+        "Value": "application/json"
+       }
+      },
+      {
+       "$id": "142",
+       "Name": "accept",
+       "NameInRequest": "Accept",
+       "Type": {
+        "$id": "143",
+        "Name": "String",
+        "Kind": "String",
+        "IsNullable": false
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsRequired": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "144",
+        "Type": {
+         "$ref": "143"
+        },
+        "Value": "application/json"
+       }
+      },
+      {
+       "$ref": "96"
+      }
+     ],
+     "Responses": [
+      {
+       "$id": "145",
+       "StatusCodes": [
+        204
+       ],
+       "BodyMediaType": "Json",
+       "Headers": [],
+       "IsErrorResponse": false
+      }
+     ],
+     "HttpMethod": "POST",
+     "RequestBodyMediaType": "Json",
+     "Uri": "{host}",
+     "Path": "/literals/floats/requests",
+     "RequestMediaTypes": [
+      "application/json"
+     ],
+     "BufferResponse": true,
+     "GenerateProtocolMethod": true,
+     "GenerateConvenienceMethod": true
+    },
+    {
+     "$id": "146",
+     "Name": "confidentOperationWithDiscriminator",
+     "ResourceName": "ConfidentLevelsInTsp",
+     "Description": "This is an operation that uses a model with discriminator in request body, this operation should be confident",
+     "Parameters": [
+      {
+       "$ref": "87"
+      },
+      {
+       "$id": "147",
+       "Name": "input",
+       "NameInRequest": "input",
+       "Type": {
+        "$ref": "58"
+       },
+       "Location": "Body",
+       "IsRequired": true,
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Method"
+      },
+      {
+       "$id": "148",
+       "Name": "contentType",
+       "NameInRequest": "Content-Type",
+       "Type": {
+        "$id": "149",
+        "Name": "String",
+        "Kind": "String",
+        "IsNullable": false
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": true,
+       "IsRequired": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "150",
+        "Type": {
+         "$ref": "149"
+        },
+        "Value": "application/json"
+       }
+      },
+      {
+       "$id": "151",
+       "Name": "accept",
+       "NameInRequest": "Accept",
+       "Type": {
+        "$id": "152",
+        "Name": "String",
+        "Kind": "String",
+        "IsNullable": false
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsRequired": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "153",
+        "Type": {
+         "$ref": "152"
+        },
+        "Value": "application/json"
+       }
+      },
+      {
+       "$ref": "96"
+      }
+     ],
+     "Responses": [
+      {
+       "$id": "154",
+       "StatusCodes": [
+        200
+       ],
+       "BodyType": {
+        "$ref": "58"
+       },
+       "BodyMediaType": "Json",
+       "Headers": [],
+       "IsErrorResponse": false
+      }
+     ],
+     "HttpMethod": "POST",
+     "RequestBodyMediaType": "Json",
+     "Uri": "{host}",
+     "Path": "/unions/properties/requests/discriminator",
+     "RequestMediaTypes": [
+      "application/json"
+     ],
+     "BufferResponse": true,
+     "GenerateProtocolMethod": true,
+     "GenerateConvenienceMethod": true
+    },
+    {
+     "$id": "155",
+     "Name": "pollutedBaseMethod",
+     "ResourceName": "ConfidentLevelsInTsp",
+     "Description": "This is an operation that uses the base type with a discriminator, but this operation is low confident because one of the derived type from the discriminated types has union types on it",
+     "Parameters": [
+      {
+       "$ref": "87"
+      },
+      {
+       "$id": "156",
+       "Name": "input",
+       "NameInRequest": "input",
+       "Type": {
+        "$ref": "69"
+       },
+       "Location": "Body",
+       "IsRequired": true,
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Method"
+      },
+      {
+       "$id": "157",
+       "Name": "contentType",
+       "NameInRequest": "Content-Type",
+       "Type": {
+        "$id": "158",
+        "Name": "String",
+        "Kind": "String",
+        "IsNullable": false
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": true,
+       "IsRequired": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "159",
+        "Type": {
+         "$ref": "158"
+        },
+        "Value": "application/json"
+       }
+      },
+      {
+       "$id": "160",
+       "Name": "accept",
+       "NameInRequest": "Accept",
+       "Type": {
+        "$id": "161",
+        "Name": "String",
+        "Kind": "String",
+        "IsNullable": false
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsRequired": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "162",
+        "Type": {
+         "$ref": "161"
+        },
+        "Value": "application/json"
+       }
+      },
+      {
+       "$ref": "96"
+      }
+     ],
+     "Responses": [
+      {
+       "$id": "163",
+       "StatusCodes": [
+        200
+       ],
+       "BodyType": {
+        "$ref": "69"
+       },
+       "BodyMediaType": "Json",
+       "Headers": [],
+       "IsErrorResponse": false
+      }
+     ],
+     "HttpMethod": "POST",
+     "RequestBodyMediaType": "Json",
+     "Uri": "{host}",
+     "Path": "/unions/properties/requests/discriminator/pollutedBase",
+     "RequestMediaTypes": [
+      "application/json"
+     ],
+     "BufferResponse": true,
+     "GenerateProtocolMethod": true,
+     "GenerateConvenienceMethod": true
+    },
+    {
+     "$id": "164",
+     "Name": "pollutedDerivedMethod",
+     "ResourceName": "ConfidentLevelsInTsp",
+     "Description": "This is an operation that uses the model with a union type directly therefore this operation is not confident",
+     "Parameters": [
+      {
+       "$ref": "87"
+      },
+      {
+       "$id": "165",
+       "Name": "input",
+       "NameInRequest": "input",
+       "Type": {
+        "$ref": "74"
+       },
+       "Location": "Body",
+       "IsRequired": true,
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Method"
+      },
+      {
+       "$id": "166",
+       "Name": "contentType",
+       "NameInRequest": "Content-Type",
+       "Type": {
+        "$id": "167",
+        "Name": "String",
+        "Kind": "String",
+        "IsNullable": false
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": true,
+       "IsRequired": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "168",
+        "Type": {
+         "$ref": "167"
+        },
+        "Value": "application/json"
+       }
+      },
+      {
+       "$id": "169",
+       "Name": "accept",
+       "NameInRequest": "Accept",
+       "Type": {
+        "$id": "170",
+        "Name": "String",
+        "Kind": "String",
+        "IsNullable": false
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsRequired": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "171",
+        "Type": {
+         "$ref": "170"
+        },
+        "Value": "application/json"
+       }
+      },
+      {
+       "$ref": "96"
+      }
+     ],
+     "Responses": [
+      {
+       "$id": "172",
+       "StatusCodes": [
+        200
+       ],
+       "BodyType": {
+        "$ref": "74"
+       },
+       "BodyMediaType": "Json",
+       "Headers": [],
+       "IsErrorResponse": false
+      }
+     ],
+     "HttpMethod": "POST",
+     "RequestBodyMediaType": "Json",
+     "Uri": "{host}",
+     "Path": "/unions/properties/requests/discriminator/unpollutedDerived",
+     "RequestMediaTypes": [
+      "application/json"
+     ],
+     "BufferResponse": true,
+     "GenerateProtocolMethod": true,
+     "GenerateConvenienceMethod": true
+    },
+    {
+     "$id": "173",
+     "Name": "unpollutedDerivedMethod",
+     "ResourceName": "ConfidentLevelsInTsp",
+     "Description": "This is an operation that is not using the model with a union type directly but since the base type is not confident and we would like it to be low confident, therefore this must be made internal as well",
+     "Parameters": [
+      {
+       "$ref": "87"
+      },
+      {
+       "$id": "174",
+       "Name": "input",
+       "NameInRequest": "input",
+       "Type": {
+        "$ref": "82"
+       },
+       "Location": "Body",
+       "IsRequired": true,
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Method"
+      },
+      {
+       "$id": "175",
+       "Name": "contentType",
+       "NameInRequest": "Content-Type",
+       "Type": {
+        "$id": "176",
+        "Name": "String",
+        "Kind": "String",
+        "IsNullable": false
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": true,
+       "IsRequired": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "177",
+        "Type": {
+         "$ref": "176"
+        },
+        "Value": "application/json"
+       }
+      },
+      {
+       "$id": "178",
+       "Name": "accept",
+       "NameInRequest": "Accept",
+       "Type": {
+        "$id": "179",
+        "Name": "String",
+        "Kind": "String",
+        "IsNullable": false
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsRequired": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "180",
+        "Type": {
+         "$ref": "179"
+        },
+        "Value": "application/json"
+       }
+      },
+      {
+       "$ref": "96"
+      }
+     ],
+     "Responses": [
+      {
+       "$id": "181",
+       "StatusCodes": [
+        200
+       ],
+       "BodyType": {
+        "$ref": "82"
+       },
+       "BodyMediaType": "Json",
+       "Headers": [],
+       "IsErrorResponse": false
+      }
+     ],
+     "HttpMethod": "POST",
+     "RequestBodyMediaType": "Json",
+     "Uri": "{host}",
+     "Path": "/unions/properties/requests/discriminator/pollutedDerived",
+     "RequestMediaTypes": [
+      "application/json"
+     ],
+     "BufferResponse": true,
+     "GenerateProtocolMethod": true,
+     "GenerateConvenienceMethod": true
+    }
+   ],
+   "Protocol": {
+    "$id": "182"
+   },
+   "Creatable": true
+  }
+ ]
+}

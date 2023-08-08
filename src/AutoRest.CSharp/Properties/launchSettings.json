@@ -184,6 +184,10 @@
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\CollapseRequestCondition-LowLevel\\src\\Generated"
     },
+    "ConfidentLevels-TypeSpec": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\ConfidentLevels-TypeSpec\\src\\Generated -n"
+    },
     "constants": {
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestServerProjects\\constants\\Generated"
