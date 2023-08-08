@@ -75,7 +75,7 @@ There is a universal naming pattern across all the Azure Resource Manager SDKs f
 
 Once we find the mocking extension type, we can mock the extension method by mocking the two virtual methods mentioned above.
 
-## Results {.tabset}
+## How to write the code {.tabset}
 
 ### Non-library
 
