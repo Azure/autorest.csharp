@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Output.Models;
 using NUnit.Framework;
@@ -25,7 +26,7 @@ namespace AutoRest.CSharp.Generation.Writers.Tests
         {
             // refer to the original CADL file: https://github.com/Azure/cadl-ranch/blob/bed837a2e29e55569360206afa3393e044dfb070/packages/cadl-ranch-specs/http/models/optional-properties/main.cadl#L15-L28
             var model = new InputModelType("InputModel", "Cadl.TestServer.OptionalProperties.Models", "public", null, "Input model with optional properties.", InputModelTypeUsage.Input,
-                    OptionalProperties, null, null, null, null, false);
+                    OptionalProperties, null, Array.Empty<InputModelType>(), null, null, false);
 
             var library = new DpgOutputLibraryBuilder(new InputNamespace("Cadl.TestServer.OptionalProperties.Models", null, new List<string>(),
                 new List<InputEnumType>(), new List<InputModelType> { ElementModelType, model }, new List<InputClient>(), new InputAuth()), default).Build(true);
@@ -38,7 +39,7 @@ namespace AutoRest.CSharp.Generation.Writers.Tests
         {
             // refer to the original CADL file: https://github.com/Azure/cadl-ranch/blob/bed837a2e29e55569360206afa3393e044dfb070/packages/cadl-ranch-specs/http/models/optional-properties/main.cadl#L30-L33
             var model = new InputModelType("OutputModel", "Cadl.TestServer.OptionalProperties.Models", "public", null, "Output model with optional properties.", InputModelTypeUsage.Output,
-                    OptionalProperties, null, null, null, null, false);
+                    OptionalProperties, null, Array.Empty<InputModelType>(), null, null, false);
 
             var library = new DpgOutputLibraryBuilder(new InputNamespace("Cadl.TestServer.OptionalProperties.Models", null, new List<string>(),
                 new List<InputEnumType>(), new List<InputModelType> { ElementModelType, model }, new List<InputClient>(), new InputAuth()), default).Build(true);
