@@ -5,6 +5,7 @@ using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Linq;
 using System.Reflection;
 using AutoRest.CSharp.Common.Input;
 using Microsoft.CodeAnalysis.CSharp;
@@ -18,21 +19,16 @@ namespace AutoRest.CSharp.Output.Models
         public static bool IsConfident(InputOperation operation)
         {
             // check parameters
-            foreach (var parameter in operation.Parameters)
+            // skip the special parameters since some particular types are still interpreted as unions (for instance content type could have union of literal types which is actually enums)
+            foreach (var parameter in operation.Parameters.Where(p => !p.IsContentType && !p.IsApiVersion && !p.IsEndpoint))
             {
-                // skip the special parameters since some particular types are still interpreted as unions (for instance content type could have union of literal types which is actually enums)
-                if (parameter.IsContentType || parameter.IsApiVersion || parameter.IsEndpoint)
-                    continue;
-
-                var isConfident = IsConfident(parameter.Type);
-                if (!isConfident)
+                if (!IsConfident(parameter.Type))
                     return false;
             }
             // check response
             foreach (var response in operation.Responses)
             {
-                var isConfident = IsConfident(response.BodyType);
-                if (!isConfident)
+                if (!IsConfident(response.BodyType))
                     return false;
             }
 
