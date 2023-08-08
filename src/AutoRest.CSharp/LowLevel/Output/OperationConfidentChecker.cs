@@ -126,6 +126,7 @@ namespace AutoRest.CSharp.Output.Models
             var isConfident = true;
             foreach (var value in enumType.AllowedValues)
             {
+                // this checks if the enum value is properly named. Numbers like `1` or `3.14` will return false, which is considered as "not properly named" thus not confident.
                 isConfident = isConfident && SyntaxFacts.IsValidIdentifier(value.Name);
             }
 

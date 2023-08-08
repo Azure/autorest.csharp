@@ -8,35 +8,10 @@ namespace AutoRest.CSharp.Output.Models
 {
     internal record ConvenienceMethodGenerationInfo()
     {
-        //private readonly ConvenienceMethodOmitReason _reason;
-        //private ConvenienceMethodOmittingMessage(ConvenienceMethodOmitReason reason)
-        //{
-        //    _reason = reason;
-        //    Message = reason switch
-        //    {
-        //        ConvenienceMethodOmitReason.PatchOperation => "The convenience method of this operation is not generated because this operation has a http verb of PATCH which we do not support yet.",
-        //        ConvenienceMethodOmitReason.TypeNotConfident => "The convenience method of this operation is made internal because this operation directly or indirectly uses a low confident type, for instance, unions, literal types with number values, etc.",
-        //        _ => throw new InvalidOperationException("should never happen"),
-        //    };
-        //}
-
-        //public ConvenienceMethodGenerationInfo(bool isGenerated, bool isInternal)
-        //{
-        //}
-
-        public bool IsConvenienceMethodGenerated { get; init; }
+        public bool IsConvenienceMethodGenerated { get; init; } = false;
 
         public bool IsConvenienceMethodInternal { get; init; } = false;
 
         public ConvenienceMethodOmittingMessage? Message { get; init; }
-
-        //public string Message { get; }
-
-        //public static ConvenienceMethodOmittingMessage? Create(ConvenienceMethodOmitReason? reason)
-        //{
-        //    if (reason != null)
-        //        return new ConvenienceMethodOmittingMessage(reason.Value);
-        //    return null;
-        //}
     }
 }

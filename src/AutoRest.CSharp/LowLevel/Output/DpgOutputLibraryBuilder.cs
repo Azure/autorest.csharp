@@ -86,11 +86,11 @@ namespace AutoRest.CSharp.Output.Models
             }
         }
 
-        private ModelTypeProvider? GetDefaultDerivedType(IDictionary<InputModelType, ModelTypeProvider> models, TypeFactory typeFactory, InputModelType model, InputModelType[] derivedTypesArray, Dictionary<string, ModelTypeProvider> defaultDerivedTypes)
+        private ModelTypeProvider? GetDefaultDerivedType(IDictionary<InputModelType, ModelTypeProvider> models, TypeFactory typeFactory, InputModelType model, IReadOnlyList<InputModelType> derivedTypesArray, Dictionary<string, ModelTypeProvider> defaultDerivedTypes)
         {
             //only want to create one instance of the default derived per polymorphic set
             ModelTypeProvider? defaultDerivedType = null;
-            bool isBasePolyType = derivedTypesArray.Length > 0 && model.DiscriminatorPropertyName is not null;
+            bool isBasePolyType = derivedTypesArray.Count > 0 && model.DiscriminatorPropertyName is not null;
             bool isChildPolyType = model.DiscriminatorValue is not null;
             if (isBasePolyType || isChildPolyType)
             {

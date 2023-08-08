@@ -122,7 +122,7 @@ namespace AutoRest.CSharp.Output.Models
                 };
             }
 
-            // TODO -- check if there is any low confident content inside this operation
+            // check if there is anything not confident inside this operation
             if (!OperationConfidentChecker.IsConfident(Operation))
             {
                 return new()

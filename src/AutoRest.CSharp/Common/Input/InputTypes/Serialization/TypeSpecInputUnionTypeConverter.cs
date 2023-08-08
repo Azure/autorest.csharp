@@ -57,7 +57,7 @@ namespace AutoRest.CSharp.Common.Input
                 throw new JsonException("Union must have a least one union type");
             }
 
-            var unionType = new InputUnionType(name, unionItemTypes, IsNullable: isNullable);
+            var unionType = new InputUnionType(name, unionItemTypes, isNullable);
             if (id != null)
             {
                 resolver.AddReference(id, unionType);
