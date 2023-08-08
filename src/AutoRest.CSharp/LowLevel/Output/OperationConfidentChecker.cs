@@ -18,7 +18,7 @@ namespace AutoRest.CSharp.Output.Models
             // check parameters
             foreach (var parameter in operation.Parameters)
             {
-                // skip the special parameters
+                // skip the special parameters since some particular types are still interpreted as unions (for instance content type could have union of literal types which is actually enums)
                 if (parameter.IsContentType || parameter.IsApiVersion || parameter.IsEndpoint)
                     continue;
 
