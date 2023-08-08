@@ -25,25 +25,69 @@ namespace ModelsTypeSpec.Models
             writer.WriteStringValue(RequiredString);
             writer.WritePropertyName("requiredInt"u8);
             writer.WriteNumberValue(RequiredInt);
+            if (RequiredNullableInt != null)
+            {
+                writer.WritePropertyName("requiredNullableInt"u8);
+                writer.WriteNumberValue(RequiredNullableInt.Value);
+            }
+            else
+            {
+                writer.WriteNull("requiredNullableInt");
+            }
+            if (RequiredNullableString != null)
+            {
+                writer.WritePropertyName("requiredNullableString"u8);
+                writer.WriteStringValue(RequiredNullableString);
+            }
+            else
+            {
+                writer.WriteNull("requiredNullableString");
+            }
+            if (Optional.IsDefined(NonRequiredNullableInt))
+            {
+                if (NonRequiredNullableInt != null)
+                {
+                    writer.WritePropertyName("nonRequiredNullableInt"u8);
+                    writer.WriteNumberValue(NonRequiredNullableInt.Value);
+                }
+                else
+                {
+                    writer.WriteNull("nonRequiredNullableInt");
+                }
+            }
+            if (Optional.IsDefined(NonRequiredNullableString))
+            {
+                if (NonRequiredNullableString != null)
+                {
+                    writer.WritePropertyName("nonRequiredNullableString"u8);
+                    writer.WriteStringValue(NonRequiredNullableString);
+                }
+                else
+                {
+                    writer.WriteNull("nonRequiredNullableString");
+                }
+            }
             writer.WritePropertyName("requiredModel"u8);
             writer.WriteObjectValue(RequiredModel);
-            writer.WritePropertyName("requiredIntCollection"u8);
+            writer.WritePropertyName("requiredModel2"u8);
+            writer.WriteObjectValue(RequiredModel2);
+            writer.WritePropertyName("requiredIntList"u8);
             writer.WriteStartArray();
-            foreach (var item in RequiredIntCollection)
+            foreach (var item in RequiredIntList)
             {
                 writer.WriteNumberValue(item);
             }
             writer.WriteEndArray();
-            writer.WritePropertyName("requiredStringCollection"u8);
+            writer.WritePropertyName("requiredStringList"u8);
             writer.WriteStartArray();
-            foreach (var item in RequiredStringCollection)
+            foreach (var item in RequiredStringList)
             {
                 writer.WriteStringValue(item);
             }
             writer.WriteEndArray();
-            writer.WritePropertyName("requiredModelCollection"u8);
+            writer.WritePropertyName("requiredModelList"u8);
             writer.WriteStartArray();
-            foreach (var item in RequiredModelCollection)
+            foreach (var item in RequiredModelList)
             {
                 writer.WriteObjectValue(item);
             }
@@ -80,6 +124,129 @@ namespace ModelsTypeSpec.Models
                 writer.WriteBooleanValue(item.Value);
             }
             writer.WriteEndArray();
+            if (RequiredNullableModelList != null && Optional.IsCollectionDefined(RequiredNullableModelList))
+            {
+                writer.WritePropertyName("requiredNullableModelList"u8);
+                writer.WriteStartArray();
+                foreach (var item in RequiredNullableModelList)
+                {
+                    writer.WriteObjectValue(item);
+                }
+                writer.WriteEndArray();
+            }
+            else
+            {
+                writer.WriteNull("requiredNullableModelList");
+            }
+            if (RequiredNullableStringList != null && Optional.IsCollectionDefined(RequiredNullableStringList))
+            {
+                writer.WritePropertyName("requiredNullableStringList"u8);
+                writer.WriteStartArray();
+                foreach (var item in RequiredNullableStringList)
+                {
+                    writer.WriteStringValue(item);
+                }
+                writer.WriteEndArray();
+            }
+            else
+            {
+                writer.WriteNull("requiredNullableStringList");
+            }
+            if (RequiredNullableIntList != null && Optional.IsCollectionDefined(RequiredNullableIntList))
+            {
+                writer.WritePropertyName("requiredNullableIntList"u8);
+                writer.WriteStartArray();
+                foreach (var item in RequiredNullableIntList)
+                {
+                    writer.WriteNumberValue(item);
+                }
+                writer.WriteEndArray();
+            }
+            else
+            {
+                writer.WriteNull("requiredNullableIntList");
+            }
+            if (Optional.IsCollectionDefined(NonRequiredModelList))
+            {
+                writer.WritePropertyName("nonRequiredModelList"u8);
+                writer.WriteStartArray();
+                foreach (var item in NonRequiredModelList)
+                {
+                    writer.WriteObjectValue(item);
+                }
+                writer.WriteEndArray();
+            }
+            if (Optional.IsCollectionDefined(NonRequiredStringList))
+            {
+                writer.WritePropertyName("nonRequiredStringList"u8);
+                writer.WriteStartArray();
+                foreach (var item in NonRequiredStringList)
+                {
+                    writer.WriteStringValue(item);
+                }
+                writer.WriteEndArray();
+            }
+            if (Optional.IsCollectionDefined(NonRequiredIntList))
+            {
+                writer.WritePropertyName("nonRequiredIntList"u8);
+                writer.WriteStartArray();
+                foreach (var item in NonRequiredIntList)
+                {
+                    writer.WriteNumberValue(item);
+                }
+                writer.WriteEndArray();
+            }
+            if (Optional.IsCollectionDefined(NonRequiredNullableModelList))
+            {
+                if (NonRequiredNullableModelList != null)
+                {
+                    writer.WritePropertyName("nonRequiredNullableModelList"u8);
+                    writer.WriteStartArray();
+                    foreach (var item in NonRequiredNullableModelList)
+                    {
+                        writer.WriteObjectValue(item);
+                    }
+                    writer.WriteEndArray();
+                }
+                else
+                {
+                    writer.WriteNull("nonRequiredNullableModelList");
+                }
+            }
+            if (Optional.IsCollectionDefined(NonRequiredNullableStringList))
+            {
+                if (NonRequiredNullableStringList != null)
+                {
+                    writer.WritePropertyName("nonRequiredNullableStringList"u8);
+                    writer.WriteStartArray();
+                    foreach (var item in NonRequiredNullableStringList)
+                    {
+                        writer.WriteStringValue(item);
+                    }
+                    writer.WriteEndArray();
+                }
+                else
+                {
+                    writer.WriteNull("nonRequiredNullableStringList");
+                }
+            }
+            if (Optional.IsCollectionDefined(NonRequiredNullableIntList))
+            {
+                if (NonRequiredNullableIntList != null)
+                {
+                    writer.WritePropertyName("nonRequiredNullableIntList"u8);
+                    writer.WriteStartArray();
+                    foreach (var item in NonRequiredNullableIntList)
+                    {
+                        writer.WriteNumberValue(item);
+                    }
+                    writer.WriteEndArray();
+                }
+                else
+                {
+                    writer.WriteNull("nonRequiredNullableIntList");
+                }
+            }
             writer.WriteEndObject();
         }
 

@@ -62,5 +62,12 @@ namespace CadlRanchProjects.Tests
             Response response = await new SpreadTypeSpecClient(host).SpreadAliasWithOptionalPropsAsync("2", 1, "dog", new[] { 1, 2, 3, 4 }, "red", 3, new[] { "a", "b" });
             Assert.AreEqual(204, response.Status);
         });
+
+        [Test]
+        public Task Spread_SpreadAliasWithRequiredAndOptionalCollections() => Test(async (host) =>
+        {
+            Response response = await new SpreadTypeSpecClient(host).SpreadAliasWithCollectionsAsync(new[] { "a", "b" }, new[] { "c", "d" });
+            Assert.AreEqual(204, response.Status);
+        });
     }
 }

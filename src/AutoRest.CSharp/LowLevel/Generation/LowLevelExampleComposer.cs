@@ -19,6 +19,7 @@ using Microsoft.CodeAnalysis.CSharp;
 using System.Threading;
 using YamlDotNet.Core.Tokens;
 using AutoRest.CSharp.Utilities;
+using AutoRest.CSharp.Common.Utilities;
 
 namespace AutoRest.CSharp.Generation.Writers
 {
@@ -977,80 +978,81 @@ namespace AutoRest.CSharp.Generation.Writers
 
         private string ComposeModelRequestContent(bool allProperties, InputModelType model, int indent, HashSet<InputModelType> visitedModels)
         {
-            visitedModels.Add(model);
-
-            /* GENERATED CODE PATTERN
-                     * new {
-                     *     prop1 = {value_expression},
-                     *     prop2 = {value_expression},
-                     *     ...
-                     * }
-                     * or
-                     * new {}
-                     */
-            var properties = new List<InputModelProperty>();
-            // We must also include any properties introduced by our parent chain.
-            // Try to get the concrete child type for polymorphism
-            var concreteModel = GetConcreteChildModel(model);
-            foreach (var modelOrBase in concreteModel.GetSelfAndBaseModels())
+            using (visitedModels.Push(model))
             {
-                if (allProperties)
+                /* GENERATED CODE PATTERN
+                         * new {
+                         *     prop1 = {value_expression},
+                         *     prop2 = {value_expression},
+                         *     ...
+                         * }
+                         * or
+                         * new {}
+                         */
+                var properties = new List<InputModelProperty>();
+                // We must also include any properties introduced by our parent chain.
+                // Try to get the concrete child type for polymorphism
+                var concreteModel = GetConcreteChildModel(model);
+                foreach (var modelOrBase in concreteModel.GetSelfAndBaseModels())
                 {
-                    properties.AddRange(modelOrBase.Properties.Where(p => !p.IsReadOnly));
+                    if (allProperties)
+                    {
+                        properties.AddRange(modelOrBase.Properties.Where(p => !p.IsReadOnly));
+                    }
+                    else
+                    {
+                        properties.AddRange(modelOrBase.Properties.Where(p => p.IsRequired && !p.IsReadOnly));
+                    }
                 }
-                else
+
+                if (!properties.Any())
                 {
-                    properties.AddRange(modelOrBase.Properties.Where(p => p.IsRequired && !p.IsReadOnly));
+                    return "new {}";
                 }
+
+                //remove references to my stack
+                _ = properties.RemoveAll(p =>
+                    visitedModels.Contains(p.Type) ||
+                    (p.Type is InputListType inputListType && visitedModels.Contains(inputListType.ElementType)) ||
+                    (p.Type is InputDictionaryType inputDictionaryType && visitedModels.Contains(inputDictionaryType.ValueType)));
+
+                var propertyExpressions = new List<string>();
+                foreach (var property in properties)
+                {
+                    string propertyValueExpr;
+                    if (property.IsDiscriminator)
+                    {
+                        propertyValueExpr = property.Type is InputPrimitiveType { Kind: InputTypeKind.Boolean } or InputPrimitiveType { IsNumber: true } ? $"{concreteModel.DiscriminatorValue}" : $"\"{concreteModel.DiscriminatorValue}\"";
+                    }
+                    else
+                    {
+                        propertyValueExpr = ComposeRequestContent(allProperties, property.Type, property.SerializedName, indent + 4, visitedModels);
+
+                    }
+
+                    if (propertyValueExpr != "")
+                    {
+                        var propertyExprBuilder = new StringBuilder();
+                        propertyExprBuilder.Append(' ', indent + 4).Append($"{FixKeyWords(property.SerializedName!)} = {propertyValueExpr},");
+                        propertyExpressions.Add(propertyExprBuilder.ToString());
+                    }
+                }
+
+                if (propertyExpressions.Count == 0)
+                {
+                    return "new {}";
+                }
+
+                var builder = new StringBuilder();
+                using (Scope("new ", indent, builder))
+                {
+                    foreach (var expr in propertyExpressions)
+                    {
+                        builder.AppendLine(expr);
+                    }
+                }
+                return builder.ToString();
             }
-
-            if (!properties.Any())
-            {
-                return "new {}";
-            }
-
-            //remove references to my stack
-            _ = properties.RemoveAll(p =>
-                visitedModels.Contains(p.Type) ||
-                (p.Type is InputListType inputListType && visitedModels.Contains(inputListType.ElementType)) ||
-                (p.Type is InputDictionaryType inputDictionaryType && visitedModels.Contains(inputDictionaryType.ValueType)));
-
-            var propertyExpressions = new List<string>();
-            foreach (var property in properties)
-            {
-                string propertyValueExpr;
-                if (property.IsDiscriminator)
-                {
-                    propertyValueExpr = property.Type is InputPrimitiveType { Kind: InputTypeKind.Boolean } or InputPrimitiveType { IsNumber: true } ? $"{concreteModel.DiscriminatorValue}" : $"\"{concreteModel.DiscriminatorValue}\"";
-                }
-                else
-                {
-                    propertyValueExpr = ComposeRequestContent(allProperties, property.Type, property.SerializedName, indent + 4, visitedModels);
-
-                }
-
-                if (propertyValueExpr != "")
-                {
-                    var propertyExprBuilder = new StringBuilder();
-                    propertyExprBuilder.Append(' ', indent + 4).Append($"{FixKeyWords(property.SerializedName!)} = {propertyValueExpr},");
-                    propertyExpressions.Add(propertyExprBuilder.ToString());
-                }
-            }
-
-            if (propertyExpressions.Count == 0)
-            {
-                return "new {}";
-            }
-
-            var builder = new StringBuilder();
-            using (Scope("new ", indent, builder))
-            {
-                foreach (var expr in propertyExpressions)
-                {
-                    builder.AppendLine(expr);
-                }
-            }
-            return builder.ToString();
         }
 
         private string ComposeObjectType(bool allProperties, ObjectType model, int indent, HashSet<ObjectType> visitedModels)
@@ -1058,66 +1060,69 @@ namespace AutoRest.CSharp.Generation.Writers
             if (visitedModels.Contains(model))
                 return string.Empty;
 
-            visitedModels.Add(model);
-
-            if (model.Discriminator != null && model.Discriminator.Implementations.Length > 0)
+            using (visitedModels.Push(model))
             {
-                model = model.Discriminator.Implementations.Where(i => !i.Type.IsFrameworkType && i.Type.Implementation is ObjectType).Select(i => (i.Type.Implementation as ObjectType)!).First();
-            }
-
-            /* GENERATED CODE PATTERN
-                     * new <ModelName>(parameterInCtor1, parameterInCtor2) {
-                     *     propNotInCtor1 = {value_expression},
-                     *     propNotInCtor2 = {value_expression},
-                     *     ...
-                     * }
-                     */
-            // TODO -- rewrite this logic to use CodeWriterExtensions.WriteInitialization when we migrate to use CodeWriter. The WriteInitialization method will make the logic here a lot simpler
-            var builder = new StringBuilder();
-            var concreteModel = GetConcreteChildModel(model);
-            var ctor = model.InitializationConstructor;
-            // write the ctor
-            var parameterExpressions = new List<string>();
-            foreach (var parameter in ctor.Signature.Parameters)
-            {
-                var parameterExpr = ComposeCSharpType(allProperties, parameter.Type, parameter.Name, indent, true, visitedModels);
-                parameterExpressions.Add(parameterExpr);
-            }
-            builder.Append($"new {model.Type.Name}(")
-                .Append(string.Join(", ", parameterExpressions))
-                .Append(")");
-
-            // find other properties
-            if (allProperties)
-            {
-                // get all properties on this model, and then only keep those do not have an initializer on the ctor, which means they are not covered by the signature of the ctor
-                var propertiesToWrite = model.EnumerateHierarchy().SelectMany(model => model.Properties).Distinct()
-                    .Where(p => p.Declaration.Accessibility == "public" && ctor.FindParameterByInitializedProperty(p) == null && IsPropertyAssignable(p));
-
-                var propertyExpressions = new List<string>();
-                foreach (var property in propertiesToWrite)
+                if (model.Discriminator != null && model.Discriminator.Implementations.Length > 0)
                 {
-                    var propertyExpr = ComposeCSharpType(allProperties, property.Declaration.Type, property.Declaration.Name, indent + 4, false, visitedModels);
-                    if (propertyExpr != string.Empty)
-                    {
-                        propertyExpressions.Add($"{property.Declaration.Name} = {propertyExpr},");
-                    }
+                    model = model.Discriminator.Implementations.Where(i => !i.Type.IsFrameworkType && i.Type.Implementation is ObjectType).Select(i => (i.Type.Implementation as ObjectType)!).First();
                 }
 
-                if (propertyExpressions.Any())
+                /* GENERATED CODE PATTERN
+                         * new <ModelName>(parameterInCtor1, parameterInCtor2) {
+                         *     propNotInCtor1 = {value_expression},
+                         *     propNotInCtor2 = {value_expression},
+                         *     ...
+                         * }
+                         */
+                // TODO -- rewrite this logic to use CodeWriterExtensions.WriteInitialization when we migrate to use CodeWriter. The WriteInitialization method will make the logic here a lot simpler
+                var builder = new StringBuilder();
+                var concreteModel = GetConcreteChildModel(model);
+                var ctor = model.InitializationConstructor;
+                // write the ctor
+                var parameterExpressions = new List<string>();
+                foreach (var parameter in ctor.Signature.Parameters)
                 {
-                    builder.AppendLine();
-                    using (Scope("", indent, builder))
+                    var parameterExpr = ComposeCSharpType(allProperties, parameter.Type, parameter.Name, indent, true, visitedModels);
+                    parameterExpressions.Add(parameterExpr);
+                }
+                builder.Append($"new {model.Type.Name}(")
+                    .Append(string.Join(", ", parameterExpressions))
+                    .Append(")");
+
+                // find other properties
+                if (allProperties)
+                {
+                    // get all properties on this model, and then only keep those do not have an initializer on the ctor, which means they are not covered by the signature of the ctor
+                    var propertiesToWrite = model.EnumerateHierarchy().SelectMany(model => model.Properties).Distinct()
+                        .Where(p => p.Declaration.Accessibility == "public" && ctor.FindParameterByInitializedProperty(p) == null && IsPropertyAssignable(p));
+
+                    var propertyExpressions = new List<string>();
+                    foreach (var property in propertiesToWrite)
                     {
-                        foreach (var propertyExpr in propertyExpressions)
+                        var propertyExpr = ComposeCSharpType(allProperties, property.Declaration.Type, property.Declaration.Name, indent + 4, false, visitedModels);
+                        if (propertyExpr != string.Empty)
                         {
-                            builder.Append(' ', indent + 4).AppendLine(propertyExpr);
+                            propertyExpressions.Add($"{property.Declaration.Name} = {propertyExpr},");
+                        }
+                    }
+
+                    if (propertyExpressions.Any())
+                    {
+                        builder.AppendLine();
+                        using (Scope("", indent, builder))
+                        {
+                            foreach (var propertyExpr in propertyExpressions)
+                            {
+                                builder.Append(' ', indent + 4).AppendLine(propertyExpr);
+                            }
                         }
                     }
                 }
-            }
 
-            return builder.ToString();
+
+                return builder.ToString();
+
+            }
         }
 
         private static bool IsPropertyAssignable(ObjectTypeProperty property)

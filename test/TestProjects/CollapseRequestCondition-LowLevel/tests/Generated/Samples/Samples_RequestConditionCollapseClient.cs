@@ -28,7 +28,7 @@ namespace CollapseRequestCondition_LowLevel.Samples
 
             var data = "<String>";
 
-            Response response = client.CollapsePut(RequestContent.Create(data), null, new RequestContext());
+            Response response = client.CollapsePut(RequestContent.Create(data));
             Console.WriteLine(response.Status);
         }
 
@@ -41,7 +41,7 @@ namespace CollapseRequestCondition_LowLevel.Samples
 
             var data = "<String>";
 
-            Response response = client.CollapsePut(RequestContent.Create(data), null, new RequestContext());
+            Response response = client.CollapsePut(RequestContent.Create(data), null);
             Console.WriteLine(response.Status);
         }
 
@@ -54,7 +54,7 @@ namespace CollapseRequestCondition_LowLevel.Samples
 
             var data = "<String>";
 
-            Response response = await client.CollapsePutAsync(RequestContent.Create(data), null, new RequestContext());
+            Response response = await client.CollapsePutAsync(RequestContent.Create(data));
             Console.WriteLine(response.Status);
         }
 
@@ -67,7 +67,7 @@ namespace CollapseRequestCondition_LowLevel.Samples
 
             var data = "<String>";
 
-            Response response = await client.CollapsePutAsync(RequestContent.Create(data), null, new RequestContext());
+            Response response = await client.CollapsePutAsync(RequestContent.Create(data), null);
             Console.WriteLine(response.Status);
         }
 

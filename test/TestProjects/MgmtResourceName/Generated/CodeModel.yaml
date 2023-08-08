@@ -30,16 +30,6 @@ schemas: !Schemas
           name: MachineNew
           description: ''
       protocol: !Protocols {}
-    - !StringSchema &ref_11
-      type: string
-      apiVersions:
-        - !ApiVersion 
-          version: '2020-06-01'
-      language: !Languages 
-        default:
-          name: ResourceId
-          description: ''
-      protocol: !Protocols {}
     - !StringSchema &ref_12
       type: string
       apiVersions:
@@ -309,6 +299,17 @@ schemas: !Schemas
         default:
           name: AnyObject
           description: Any object
+      protocol: !Protocols {}
+  armIds:
+    - !ArmIdSchema &ref_11
+      type: arm-id
+      apiVersions:
+        - !ApiVersion 
+          version: '2020-06-01'
+      language: !Languages 
+        default:
+          name: Resource-id
+          description: ''
       protocol: !Protocols {}
   objects:
     - !ObjectSchema &ref_51

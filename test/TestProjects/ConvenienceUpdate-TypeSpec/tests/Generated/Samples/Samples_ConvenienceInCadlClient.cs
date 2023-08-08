@@ -266,7 +266,7 @@ namespace ConvenienceInCadl.Samples
                 id = "<id>",
             };
 
-            Response response = client.NoConvenienceOptionalBody(RequestContent.Create(data), new RequestContext());
+            Response response = client.NoConvenienceOptionalBody(RequestContent.Create(data));
             Console.WriteLine(response.Status);
         }
 
@@ -281,7 +281,7 @@ namespace ConvenienceInCadl.Samples
                 id = "<id>",
             };
 
-            Response response = client.NoConvenienceOptionalBody(RequestContent.Create(data), new RequestContext());
+            Response response = client.NoConvenienceOptionalBody(RequestContent.Create(data));
             Console.WriteLine(response.Status);
         }
 
@@ -296,7 +296,7 @@ namespace ConvenienceInCadl.Samples
                 id = "<id>",
             };
 
-            Response response = await client.NoConvenienceOptionalBodyAsync(RequestContent.Create(data), new RequestContext());
+            Response response = await client.NoConvenienceOptionalBodyAsync(RequestContent.Create(data));
             Console.WriteLine(response.Status);
         }
 
@@ -311,7 +311,7 @@ namespace ConvenienceInCadl.Samples
                 id = "<id>",
             };
 
-            Response response = await client.NoConvenienceOptionalBodyAsync(RequestContent.Create(data), new RequestContext());
+            Response response = await client.NoConvenienceOptionalBodyAsync(RequestContent.Create(data));
             Console.WriteLine(response.Status);
         }
 
@@ -742,12 +742,12 @@ namespace ConvenienceInCadl.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_ProtocolOptionalModelValue_Convenience_Async()
+        public async Task Example_ProtocolOptionalModel_Convenience_Async()
         {
             var client = new ConvenienceInCadlClient();
 
             var optional = new Model("<id>");
-            var result = await client.ProtocolOptionalModelValueAsync(optional);
+            var result = await client.ProtocolOptionalModelAsync(optional);
         }
 
         [Test]
@@ -1110,12 +1110,12 @@ namespace ConvenienceInCadl.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_ConvenienceOptionalModelWithOptionalValue_Convenience_Async()
+        public async Task Example_ConvenienceOptionalModelWithOptional_Convenience_Async()
         {
             var client = new ConvenienceInCadlClient();
 
             var optional = new Model("<id>");
-            var result = await client.ConvenienceOptionalModelWithOptionalValueAsync(optional);
+            var result = await client.ConvenienceOptionalModelWithOptionalAsync(optional);
         }
 
         [Test]
@@ -1199,7 +1199,7 @@ namespace ConvenienceInCadl.Samples
                 id = "<id>",
             };
 
-            Response response = client.ConvenienceOptionalModelWithRequired(RequestContent.Create(data), new RequestContext());
+            Response response = client.ConvenienceOptionalModelWithRequired(RequestContent.Create(data));
             Console.WriteLine(response.Status);
         }
 
@@ -1214,7 +1214,7 @@ namespace ConvenienceInCadl.Samples
                 id = "<id>",
             };
 
-            Response response = client.ConvenienceOptionalModelWithRequired(RequestContent.Create(data), new RequestContext());
+            Response response = client.ConvenienceOptionalModelWithRequired(RequestContent.Create(data));
             Console.WriteLine(response.Status);
         }
 
@@ -1229,7 +1229,7 @@ namespace ConvenienceInCadl.Samples
                 id = "<id>",
             };
 
-            Response response = await client.ConvenienceOptionalModelWithRequiredAsync(RequestContent.Create(data), new RequestContext());
+            Response response = await client.ConvenienceOptionalModelWithRequiredAsync(RequestContent.Create(data));
             Console.WriteLine(response.Status);
         }
 
@@ -1244,7 +1244,7 @@ namespace ConvenienceInCadl.Samples
                 id = "<id>",
             };
 
-            Response response = await client.ConvenienceOptionalModelWithRequiredAsync(RequestContent.Create(data), new RequestContext());
+            Response response = await client.ConvenienceOptionalModelWithRequiredAsync(RequestContent.Create(data));
             Console.WriteLine(response.Status);
         }
 

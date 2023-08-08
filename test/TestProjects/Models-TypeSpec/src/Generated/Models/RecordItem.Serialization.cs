@@ -21,9 +21,9 @@ namespace ModelsTypeSpec.Models
         void IJsonModelSerializable.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
             writer.WriteStartObject();
-            writer.WritePropertyName("requiredCollection"u8);
+            writer.WritePropertyName("requiredList"u8);
             writer.WriteStartArray();
-            foreach (var item in RequiredCollection)
+            foreach (var item in RequiredList)
             {
                 writer.WriteObjectValue(item);
             }
@@ -44,21 +44,21 @@ namespace ModelsTypeSpec.Models
             {
                 return null;
             }
-            IList<CollectionItem> requiredCollection = default;
+            IList<CollectionItem> requiredList = default;
             foreach (var property in element.EnumerateObject())
             {
-                if (property.NameEquals("requiredCollection"u8))
+                if (property.NameEquals("requiredList"u8))
                 {
                     List<CollectionItem> array = new List<CollectionItem>();
                     foreach (var item in property.Value.EnumerateArray())
                     {
                         array.Add(CollectionItem.DeserializeCollectionItem(item));
                     }
-                    requiredCollection = array;
+                    requiredList = array;
                     continue;
                 }
             }
-            return new RecordItem(requiredCollection);
+            return new RecordItem(requiredList);
         }
 
         object IJsonModelSerializable.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
