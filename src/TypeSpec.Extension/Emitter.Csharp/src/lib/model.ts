@@ -805,7 +805,10 @@ export function getUsages(
                         }
                     }
                 }
-                affectTypes.push(...getAllDerivedModels(effectiveType));
+                /*propagate to sub models and composite models*/
+                affectTypes.push(
+                    ...getAllEffectedModels(effectiveType, new Set<string>())
+                );
             }
         }
 
@@ -847,7 +850,13 @@ export function getUsages(
                 }
             }
             if (effectiveBodyType.kind === "Model") {
-                affectedTypes.push(...getAllDerivedModels(effectiveBodyType));
+                /*propagate to sub models and composite models*/
+                affectedTypes.push(
+                    ...getAllEffectedModels(
+                        effectiveBodyType,
+                        new Set<string>()
+                    )
+                );
             }
             for (const name of affectedTypes) {
                 appendUsage(name, UsageFlags.Input);
@@ -859,7 +868,6 @@ export function getUsages(
             const resBody = res.responses[0]?.body;
             if (resBody?.type) {
                 let returnType = "";
-                let subType = [];
                 if (
                     resourceOperation &&
                     resourceOperation.operation !== "list"
@@ -878,10 +886,13 @@ export function getUsages(
                             getFriendlyName(program, effectiveReturnType) ??
                             effectiveReturnType.name;
                     }
-                    /*propagate to sub models*/
+                    /*propagate to sub models and composite models*/
                     if (effectiveReturnType.kind === "Model") {
                         affectedReturnTypes.push(
-                            ...getAllDerivedModels(effectiveReturnType)
+                            ...getAllEffectedModels(
+                                effectiveReturnType,
+                                new Set<string>()
+                            )
                         );
                     }
                 }
@@ -931,15 +942,36 @@ export function getUsages(
         usagesMap.set(name, value);
     }
 
-    function getAllDerivedModels(model: Model): string[] {
+    function getAllEffectedModels(
+        model: Model,
+        visited: Set<string>
+    ): string[] {
         const result: string[] = [];
-        const derivedModels = model.derivedModels;
-        for (const derivedModel of derivedModels) {
-            result.push(
-                getFriendlyName(program, derivedModel) ?? derivedModel.name
-            );
-            result.push(...getAllDerivedModels(derivedModel));
+        if (
+            (isArrayModelType(program, model) ||
+                isRecordModelType(program, model)) &&
+            model.indexer.value.kind === "Model"
+        ) {
+            result.push(...getAllEffectedModels(model.indexer.value, visited));
+        } else {
+            const name = getFriendlyName(program, model) ?? model.name;
+            if (model.kind !== "Model" || visited.has(name)) return result;
+            result.push(name);
+            visited.add(name);
+            const derivedModels = model.derivedModels;
+            for (const derivedModel of derivedModels) {
+                result.push(
+                    getFriendlyName(program, derivedModel) ?? derivedModel.name
+                );
+                result.push(...getAllEffectedModels(derivedModel, visited));
+            }
+            for (const [_, prop] of model.properties) {
+                if (prop.type.kind === "Model") {
+                    result.push(...getAllEffectedModels(prop.type, visited));
+                }
+            }
         }
+
         return result;
     }
 }
