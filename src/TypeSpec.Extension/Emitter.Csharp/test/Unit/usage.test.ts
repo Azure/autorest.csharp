@@ -324,6 +324,12 @@ describe("Test getUsages", () => {
                 name: string;
             }
 
+            @doc("This is nested model.")
+            model NestedModel {
+                @doc("id of NestedModel")
+                id: string;
+            }
+
             #suppress "@azure-tools/typespec-azure-core/documentation-required" "The ModelProperty named 'discriminatorProperty' should have a documentation or description, please use decorator @doc to add it"
             @discriminator("discriminatorProperty")
             @doc("Base model with discriminator property.")
@@ -342,6 +348,9 @@ describe("Test getUsages", () => {
 
                 @doc("Required string.")
                 requiredString: string;
+
+                @doc("property with complex model type.")
+                nestedModel: NestedModel;
             }
 
             interface FooClient{
@@ -364,5 +373,6 @@ describe("Test getUsages", () => {
         const usages = getUsages(sdkContext, services[0].operations);
         assert(usages.outputs.includes("BaseModelWithDiscriminator"));
         assert(usages.outputs.includes("DerivedModelWithDiscriminatorA"));
+        assert(usages.outputs.includes("NestedModel"));
     });
 });
