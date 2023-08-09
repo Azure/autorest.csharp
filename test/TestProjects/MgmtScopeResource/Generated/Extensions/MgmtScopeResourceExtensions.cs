@@ -29,11 +29,11 @@ namespace MgmtScopeResource
             });
         }
 
-        private static MgmtScopeResourceArmResourceMockingExtension GetMgmtScopeResourceArmResourceMockingExtension(ArmResource resource)
+        private static MgmtScopeResourceArmMockingExtension GetMgmtScopeResourceArmMockingExtension(ArmResource resource)
         {
             return resource.GetCachedClient(client =>
             {
-                return new MgmtScopeResourceArmResourceMockingExtension(client, resource.Id);
+                return new MgmtScopeResourceArmMockingExtension(client, resource.Id);
             });
         }
 
@@ -349,7 +349,7 @@ namespace MgmtScopeResource
         /// <returns> An object representing collection of FakePolicyAssignmentResources and their operations over a FakePolicyAssignmentResource. </returns>
         public static FakePolicyAssignmentCollection GetFakePolicyAssignments(this ArmResource armResource)
         {
-            return GetMgmtScopeResourceArmResourceMockingExtension(armResource).GetFakePolicyAssignments();
+            return GetMgmtScopeResourceArmMockingExtension(armResource).GetFakePolicyAssignments();
         }
 
         /// <summary>
@@ -373,7 +373,7 @@ namespace MgmtScopeResource
         [ForwardsClientCalls]
         public static async Task<Response<FakePolicyAssignmentResource>> GetFakePolicyAssignmentAsync(this ArmResource armResource, string policyAssignmentName, CancellationToken cancellationToken = default)
         {
-            return await GetMgmtScopeResourceArmResourceMockingExtension(armResource).GetFakePolicyAssignmentAsync(policyAssignmentName, cancellationToken).ConfigureAwait(false);
+            return await GetMgmtScopeResourceArmMockingExtension(armResource).GetFakePolicyAssignmentAsync(policyAssignmentName, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -397,7 +397,7 @@ namespace MgmtScopeResource
         [ForwardsClientCalls]
         public static Response<FakePolicyAssignmentResource> GetFakePolicyAssignment(this ArmResource armResource, string policyAssignmentName, CancellationToken cancellationToken = default)
         {
-            return GetMgmtScopeResourceArmResourceMockingExtension(armResource).GetFakePolicyAssignment(policyAssignmentName, cancellationToken);
+            return GetMgmtScopeResourceArmMockingExtension(armResource).GetFakePolicyAssignment(policyAssignmentName, cancellationToken);
         }
 
         /// <summary> Gets an object representing a VMInsightsOnboardingStatusResource along with the instance operations that can be performed on it in the ArmResource. </summary>
@@ -405,7 +405,7 @@ namespace MgmtScopeResource
         /// <returns> Returns a <see cref="VMInsightsOnboardingStatusResource" /> object. </returns>
         public static VMInsightsOnboardingStatusResource GetVMInsightsOnboardingStatus(this ArmResource armResource)
         {
-            return GetMgmtScopeResourceArmResourceMockingExtension(armResource).GetVMInsightsOnboardingStatus();
+            return GetMgmtScopeResourceArmMockingExtension(armResource).GetVMInsightsOnboardingStatus();
         }
 
         /// <summary> Gets a collection of GuestConfigurationAssignmentResources in the ArmResource. </summary>
@@ -413,7 +413,7 @@ namespace MgmtScopeResource
         /// <returns> An object representing collection of GuestConfigurationAssignmentResources and their operations over a GuestConfigurationAssignmentResource. </returns>
         public static GuestConfigurationAssignmentCollection GetGuestConfigurationAssignments(this ArmResource armResource)
         {
-            return GetMgmtScopeResourceArmResourceMockingExtension(armResource).GetGuestConfigurationAssignments();
+            return GetMgmtScopeResourceArmMockingExtension(armResource).GetGuestConfigurationAssignments();
         }
 
         /// <summary>
@@ -437,7 +437,7 @@ namespace MgmtScopeResource
         [ForwardsClientCalls]
         public static async Task<Response<GuestConfigurationAssignmentResource>> GetGuestConfigurationAssignmentAsync(this ArmResource armResource, string guestConfigurationAssignmentName, CancellationToken cancellationToken = default)
         {
-            return await GetMgmtScopeResourceArmResourceMockingExtension(armResource).GetGuestConfigurationAssignmentAsync(guestConfigurationAssignmentName, cancellationToken).ConfigureAwait(false);
+            return await GetMgmtScopeResourceArmMockingExtension(armResource).GetGuestConfigurationAssignmentAsync(guestConfigurationAssignmentName, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -461,7 +461,7 @@ namespace MgmtScopeResource
         [ForwardsClientCalls]
         public static Response<GuestConfigurationAssignmentResource> GetGuestConfigurationAssignment(this ArmResource armResource, string guestConfigurationAssignmentName, CancellationToken cancellationToken = default)
         {
-            return GetMgmtScopeResourceArmResourceMockingExtension(armResource).GetGuestConfigurationAssignment(guestConfigurationAssignmentName, cancellationToken);
+            return GetMgmtScopeResourceArmMockingExtension(armResource).GetGuestConfigurationAssignment(guestConfigurationAssignmentName, cancellationToken);
         }
 
         /// <summary> Gets a collection of DeploymentExtendedResources in the ManagementGroupResource. </summary>

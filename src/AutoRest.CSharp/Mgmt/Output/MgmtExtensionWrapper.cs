@@ -20,18 +20,18 @@ namespace AutoRest.CSharp.Mgmt.Output
     {
         public IEnumerable<MgmtExtension> Extensions { get; }
 
-        public IEnumerable<MgmtExtensionClient> ExtensionClients { get; }
+        public IEnumerable<MgmtMockingExtension> MockingExtensions { get; }
 
         public override bool IsStatic => true;
 
         public bool IsEmpty => Extensions.All(extension => extension.IsEmpty);
 
-        public MgmtExtensionWrapper(IEnumerable<MgmtExtension> extensions, IEnumerable<MgmtExtensionClient> extensionClients) : base(MgmtContext.RPName)
+        public MgmtExtensionWrapper(IEnumerable<MgmtExtension> extensions, IEnumerable<MgmtMockingExtension> mockingExtensions) : base(MgmtContext.RPName)
         {
             DefaultName = $"{ResourceName}Extensions";
             Description = Configuration.MgmtConfiguration.IsArmCore ? (FormattableString)$"" : $"A class to add extension methods to {MgmtContext.Context.DefaultNamespace}.";
             Extensions = extensions;
-            ExtensionClients = extensionClients;
+            MockingExtensions = mockingExtensions;
         }
 
         public override CSharpType? BaseType => null;

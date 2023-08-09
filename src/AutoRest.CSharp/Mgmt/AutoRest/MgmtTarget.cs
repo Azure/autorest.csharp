@@ -150,7 +150,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             await project.PostProcessAsync(new MgmtPostProcessor(modelsToKeep, modelFactoryProvider?.FullName));
         }
 
-        private static void WriteExtensions(GeneratedCodeWorkspace project, bool isArmCore, MgmtExtensionWrapper extensionWrapper, IEnumerable<MgmtExtension> extensions, IEnumerable<MgmtExtensionClient> extensionClients)
+        private static void WriteExtensions(GeneratedCodeWorkspace project, bool isArmCore, MgmtExtensionWrapper extensionWrapper, IEnumerable<MgmtExtension> extensions, IEnumerable<MgmtMockingExtension> extensionClients)
         {
             if (isArmCore)
             {

@@ -28,11 +28,11 @@ namespace MgmtMockAndSample
             });
         }
 
-        private static MgmtMockAndSampleArmResourceMockingExtension GetMgmtMockAndSampleArmResourceMockingExtension(ArmResource resource)
+        private static MgmtMockAndSampleArmMockingExtension GetMgmtMockAndSampleArmMockingExtension(ArmResource resource)
         {
             return resource.GetCachedClient(client =>
             {
-                return new MgmtMockAndSampleArmResourceMockingExtension(client, resource.Id);
+                return new MgmtMockAndSampleArmMockingExtension(client, resource.Id);
             });
         }
 
@@ -323,7 +323,7 @@ namespace MgmtMockAndSample
         /// <returns> An object representing collection of RoleAssignmentResources and their operations over a RoleAssignmentResource. </returns>
         public static RoleAssignmentCollection GetRoleAssignments(this ArmResource armResource)
         {
-            return GetMgmtMockAndSampleArmResourceMockingExtension(armResource).GetRoleAssignments();
+            return GetMgmtMockAndSampleArmMockingExtension(armResource).GetRoleAssignments();
         }
 
         /// <summary>
@@ -347,7 +347,7 @@ namespace MgmtMockAndSample
         [ForwardsClientCalls]
         public static async Task<Response<RoleAssignmentResource>> GetRoleAssignmentAsync(this ArmResource armResource, string roleAssignmentName, CancellationToken cancellationToken = default)
         {
-            return await GetMgmtMockAndSampleArmResourceMockingExtension(armResource).GetRoleAssignmentAsync(roleAssignmentName, cancellationToken).ConfigureAwait(false);
+            return await GetMgmtMockAndSampleArmMockingExtension(armResource).GetRoleAssignmentAsync(roleAssignmentName, cancellationToken).ConfigureAwait(false);
         }
 
         /// <summary>
@@ -371,7 +371,7 @@ namespace MgmtMockAndSample
         [ForwardsClientCalls]
         public static Response<RoleAssignmentResource> GetRoleAssignment(this ArmResource armResource, string roleAssignmentName, CancellationToken cancellationToken = default)
         {
-            return GetMgmtMockAndSampleArmResourceMockingExtension(armResource).GetRoleAssignment(roleAssignmentName, cancellationToken);
+            return GetMgmtMockAndSampleArmMockingExtension(armResource).GetRoleAssignment(roleAssignmentName, cancellationToken);
         }
 
         /// <summary> Gets a collection of VaultResources in the ResourceGroupResource. </summary>

@@ -19,7 +19,7 @@ using static AutoRest.CSharp.Output.Models.MethodSignatureModifiers;
 
 namespace AutoRest.CSharp.Mgmt.Output
 {
-    internal class ArmClientExtensionClient : MgmtExtensionClient
+    internal class ArmClientExtensionClient : MgmtMockingExtension
     {
         public ArmClientExtensionClient(CSharpType resourceType, IEnumerable<MgmtClientOperation> operations, MgmtExtension? extensionForChildResources) : base(resourceType, operations, extensionForChildResources)
         {

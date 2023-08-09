@@ -20,9 +20,9 @@ namespace AutoRest.CSharp.Mgmt.Generation
     internal sealed class ArmClientExtensionClientWriter : MgmtExtensionClientWriter
     {
         private readonly Parameter _scopeParameter;
-        private MgmtExtensionClient This { get; }
+        private MgmtMockingExtension This { get; }
 
-        public ArmClientExtensionClientWriter(MgmtExtensionClient extensionClient) : base(extensionClient)
+        public ArmClientExtensionClientWriter(MgmtMockingExtension extensionClient) : base(extensionClient)
         {
             This = extensionClient;
             _scopeParameter = new Parameter(

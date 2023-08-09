@@ -14,7 +14,7 @@ namespace AutoRest.CSharp.Mgmt.Output
 {
     internal class MgmtExtensionBuilder
     {
-        private record MgmtExtensionInfo(IReadOnlyDictionary<CSharpType, MgmtExtension> ExtensionDict, IEnumerable<MgmtExtensionClient> ExtensionClients)
+        private record MgmtExtensionInfo(IReadOnlyDictionary<CSharpType, MgmtExtension> ExtensionDict, IEnumerable<MgmtMockingExtension> ExtensionClients)
         {
             private IEnumerable<MgmtExtension>? _extensions;
             public IEnumerable<MgmtExtension> Extensions => _extensions ??= ExtensionDict.Values;
@@ -36,7 +36,7 @@ namespace AutoRest.CSharp.Mgmt.Output
 
         public IEnumerable<MgmtExtension> Extensions => ExtensionInfo.Extensions;
 
-        public IEnumerable<MgmtExtensionClient> ExtensionClients => ExtensionInfo.ExtensionClients;
+        public IEnumerable<MgmtMockingExtension> ExtensionClients => ExtensionInfo.ExtensionClients;
 
         public MgmtExtension GetExtension(Type armCoreType)
         {
@@ -50,17 +50,17 @@ namespace AutoRest.CSharp.Mgmt.Output
         {
             // we use a SortedDictionary or SortedSet here to make sure the order of extensions or extension clients is deterministic
             var extensionDict = new SortedDictionary<CSharpType, MgmtExtension>(new CSharpTypeNameComparer());
-            var extensionClients = new SortedSet<MgmtExtensionClient>(new MgmtExtensionClientComparer());
+            var mockingExtensions = new SortedSet<MgmtMockingExtension>(new MgmtExtensionClientComparer());
             // create the extensions
             foreach (var (type, operations) in _extensionOperations)
             {
-                var extension = new MgmtExtension(operations, extensionClients, type);
+                var extension = new MgmtExtension(operations, mockingExtensions, type);
                 extensionDict.Add(type, extension);
             }
             // add ArmResourceExtension methods
-            var armResourceExtension = new ArmResourceExtension(_armResourceExtensionOperations, extensionClients);
+            var armResourceExtension = new ArmResourceExtension(_armResourceExtensionOperations, mockingExtensions);
             // add ArmClientExtension methods (which is also the TenantResource extension methods)
-            var armClientExtension = new ArmClientExtension(_armResourceExtensionOperations, extensionClients, armResourceExtension);
+            var armClientExtension = new ArmClientExtension(_armResourceExtensionOperations, mockingExtensions, armResourceExtension);
             extensionDict.Add(typeof(ArmResource), armResourceExtension);
             extensionDict.Add(typeof(ArmClient), armClientExtension);
 
@@ -83,11 +83,11 @@ namespace AutoRest.CSharp.Mgmt.Output
                 extensionDict.TryGetValue(resourceType, out var extensionForChildResources);
                 var extensionClient = resourceType.Equals(typeof(ArmClient)) ?
                     new ArmClientExtensionClient(resourceType, operations, extensionForChildResources) :
-                    new MgmtExtensionClient(resourceType, operations, extensionForChildResources);
-                extensionClients.Add(extensionClient);
+                    new MgmtMockingExtension(resourceType, operations, extensionForChildResources);
+                mockingExtensions.Add(extensionClient);
             }
 
-            return new(extensionDict, extensionClients);
+            return new(extensionDict, mockingExtensions);
         }
 
         private struct CSharpTypeNameComparer : IComparer<CSharpType>
@@ -98,9 +98,9 @@ namespace AutoRest.CSharp.Mgmt.Output
             }
         }
 
-        private struct MgmtExtensionClientComparer : IComparer<MgmtExtensionClient>
+        private struct MgmtExtensionClientComparer : IComparer<MgmtMockingExtension>
         {
-            public int Compare(MgmtExtensionClient? x, MgmtExtensionClient? y)
+            public int Compare(MgmtMockingExtension? x, MgmtMockingExtension? y)
             {
                 return string.Compare(x?.Declaration.Name, y?.Declaration.Name);
             }

@@ -19,28 +19,28 @@ using static AutoRest.CSharp.Output.Models.MethodSignatureModifiers;
 
 namespace AutoRest.CSharp.Mgmt.Output
 {
-    internal class MgmtExtensionClient : MgmtTypeProvider
+    internal class MgmtMockingExtension : MgmtTypeProvider
     {
         private readonly IEnumerable<MgmtClientOperation> _operations;
         private readonly MgmtExtension? _extensionForChildResources;
 
-        public MgmtExtensionClient(CSharpType resourceType, IEnumerable<MgmtClientOperation> operations, MgmtExtension? extensionForChildResources)
+        public MgmtMockingExtension(CSharpType resourceType, IEnumerable<MgmtClientOperation> operations, MgmtExtension? extensionForChildResources)
             : base(resourceType.Name)
         {
             _operations = operations;
             _extensionForChildResources = extensionForChildResources;
             ExtendedResourceType = resourceType;
             // name of this class is like "ComputeResourceGroupResourceExtension"
-            DefaultName = GetExtensionClientDefaultName(resourceType.Name);
+            DefaultName = GetMockingExtensionDefaultName(resourceType.Name);
         }
 
-        private static string GetExtensionClientDefaultName(string resourceName)
+        private static string GetMockingExtensionDefaultName(string resourceName)
         {
+            const string resourceSuffix = "Resource";
             // trim the Resource suffix if it has one. Actually it should always have one, eg, SubscriptionResource, ResourceGroupResource, etc.
-            // an exception for this is ArmResource, we would not like to trim this suffix
-            if (resourceName.EndsWith("Resource") && resourceName != "ArmResource")
+            if (resourceName.EndsWith(resourceSuffix))
             {
-                resourceName = resourceName[..^8];
+                resourceName = resourceName[..^resourceSuffix.Length];
             }
 
             return $"{MgmtContext.RPName}{resourceName}MockingExtension";

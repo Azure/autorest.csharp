@@ -16,17 +16,17 @@ using MgmtScopeResource;
 namespace MgmtScopeResource.Mocking
 {
     /// <summary> A class to add extension methods to ArmResource. </summary>
-    public partial class MgmtScopeResourceArmResourceMockingExtension : ArmResource
+    public partial class MgmtScopeResourceArmMockingExtension : ArmResource
     {
-        /// <summary> Initializes a new instance of the <see cref="MgmtScopeResourceArmResourceMockingExtension"/> class for mocking. </summary>
-        protected MgmtScopeResourceArmResourceMockingExtension()
+        /// <summary> Initializes a new instance of the <see cref="MgmtScopeResourceArmMockingExtension"/> class for mocking. </summary>
+        protected MgmtScopeResourceArmMockingExtension()
         {
         }
 
-        /// <summary> Initializes a new instance of the <see cref="MgmtScopeResourceArmResourceMockingExtension"/> class. </summary>
+        /// <summary> Initializes a new instance of the <see cref="MgmtScopeResourceArmMockingExtension"/> class. </summary>
         /// <param name="client"> The client parameters to use in these operations. </param>
         /// <param name="id"> The identifier of the resource that is the target of operations. </param>
-        internal MgmtScopeResourceArmResourceMockingExtension(ArmClient client, ResourceIdentifier id) : base(client, id)
+        internal MgmtScopeResourceArmMockingExtension(ArmClient client, ResourceIdentifier id) : base(client, id)
         {
         }
 

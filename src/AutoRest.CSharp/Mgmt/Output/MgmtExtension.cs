@@ -21,7 +21,7 @@ namespace AutoRest.CSharp.Mgmt.Output
 
         private readonly IEnumerable<Operation> _allRawOperations;
 
-        public MgmtExtension(IEnumerable<Operation> allRawOperations, IEnumerable<MgmtExtensionClient> extensionClients, Type armCoreType, RequestPath? contextualPath = null)
+        public MgmtExtension(IEnumerable<Operation> allRawOperations, IEnumerable<MgmtMockingExtension> extensionClients, Type armCoreType, RequestPath? contextualPath = null)
             : base(armCoreType.Name)
         {
             _allRawOperations = allRawOperations;
@@ -159,12 +159,12 @@ namespace AutoRest.CSharp.Mgmt.Output
             return null;
         }
 
-        public MgmtExtensionClient ExtensionClient => Cache[ArmCoreType];
+        public MgmtMockingExtension ExtensionClient => Cache[ArmCoreType];
 
-        private readonly IEnumerable<MgmtExtensionClient> _extensionClients;
+        private readonly IEnumerable<MgmtMockingExtension> _extensionClients;
 
-        private Dictionary<CSharpType, MgmtExtensionClient>? _cache;
-        private Dictionary<CSharpType, MgmtExtensionClient> Cache => _cache ??= _extensionClients.ToDictionary(
+        private Dictionary<CSharpType, MgmtMockingExtension>? _cache;
+        private Dictionary<CSharpType, MgmtMockingExtension> Cache => _cache ??= _extensionClients.ToDictionary(
             extensionClient => extensionClient.ExtendedResourceType,
             extensionClient => extensionClient);
     }

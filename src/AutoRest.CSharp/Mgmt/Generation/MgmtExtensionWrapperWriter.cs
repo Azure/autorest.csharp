@@ -17,7 +17,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
         protected override void WritePrivateHelpers()
         {
-            foreach (var extensionClient in This.ExtensionClients)
+            foreach (var extensionClient in This.MockingExtensions)
             {
                 if (extensionClient.IsEmpty)
                     continue;

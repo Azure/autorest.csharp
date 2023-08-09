@@ -11,7 +11,7 @@ namespace AutoRest.CSharp.Mgmt.Generation
 {
     internal class MgmtExtensionClientWriter : MgmtClientBaseWriter
     {
-        public static MgmtExtensionClientWriter GetWriter(MgmtExtensionClient extensionClient) => extensionClient switch
+        public static MgmtExtensionClientWriter GetWriter(MgmtMockingExtension extensionClient) => extensionClient switch
         {
             ArmClientExtensionClient armClientExtensionClient => new ArmClientExtensionClientWriter(armClientExtensionClient),
             _ => new MgmtExtensionClientWriter(extensionClient)
@@ -19,9 +19,9 @@ namespace AutoRest.CSharp.Mgmt.Generation
 
         protected override bool UseField => false;
 
-        private MgmtExtensionClient This { get; }
+        private MgmtMockingExtension This { get; }
 
-        public MgmtExtensionClientWriter(MgmtExtensionClient extensions) : base(new CodeWriter(), extensions)
+        public MgmtExtensionClientWriter(MgmtMockingExtension extensions) : base(new CodeWriter(), extensions)
         {
             This = extensions;
         }
