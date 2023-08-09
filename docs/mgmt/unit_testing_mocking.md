@@ -56,6 +56,7 @@ namespace Azure.ResourceManager.Compute
     }
 }
 ```
+
 and the method on the "mocking extension" type with the same name and same parameter list is an instance method, and it is guaranteed to be virtual.
 
 Using this pattern, we implement every extension method using two virtual methods and both of them are mockable.
@@ -67,9 +68,9 @@ The second virtual method is the method on the "mocking extension" type with the
 There is a universal naming pattern across all the Azure Resource Manager SDKs for the "mocking extension" type:
 
 1. Find the extended type of the extension method, in the above example, it is `ResourceGroupResource`.
-2. Trim the `Resource` suffix off it and get the "Resource Name", in the above example, it becomes `ResourceGroup`. One exception is that when the extended type is `ArmResource`, please just keep `ArmResource` without trimming it.
+2. Trim the `Resource` suffix off it and get the "Resource Name", in the above example, it becomes `ResourceGroup`.
 3. Find the namespace of the extension method, in the above example, it is `Azure.ResourceManager.Compute`.
-4. Remove the `Azure.ResourceManager` from the namespace above, and get the "RP Name", in the above example, it is `Compute`.
+4. Remove the `Azure.ResourceManager` from the namespace above, and concatenate the left segments together to get the "RP Name", in the above example, it is `Compute`.
 5. Now we get the name of the mocking extension type using this pattern: `{RP Name}{Resource Name}MockingExtension`. In the above extension, the name of the mocking extension type is: `ComputeResourceGroupMockingExtension`.
 6. The mocking extension type is always in the `Mocking` sub-namespace of the extension method. In the above example, the mocking extension type is in the `Azure.ResourceManager.Compute.Mocking` namespace.
 
