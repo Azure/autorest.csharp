@@ -160,7 +160,7 @@ stages:
           usePackageJsonFromArtifacts: true
       - template: check-code-generation.yml
         parameters:
-          name: Check_Code_Generation_O_Z
+          name: Check_Code_Generation_N_Z
           filter: "^[o-z]"
           usePackageJsonFromArtifacts: true
   - stage: 'Update_azure_sdk_for_net'

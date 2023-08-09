@@ -158,8 +158,8 @@ stages:
           filter: "^m"
       - template: check-code-generation.yml
         parameters:
-          name: Check_Code_Generation_O_Z
-          filter: "^[o-z]"
+          name: Check_Code_Generation_N_Z
+          filter: "^[n-z]"
   - ${{if and(ne(variables['Build.Reason'], 'PullRequest'), eq(variables['System.TeamProject'], 'internal'))}}:
     - template: pipelines/stages/net-release-to-feed.yml@azure-sdk-build-tools
       parameters:
