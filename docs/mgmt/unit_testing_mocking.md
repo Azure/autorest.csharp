@@ -94,8 +94,8 @@ public sealed class MockResourceGroupResource : ResourceGroupResource
 {
     public override T GetCachedClient<T>(Func<ArmClient, T> ctor) where T : class
     {
-        if (typeof(ComputeResourceGroupMockingExtension).IsAssignable(typeof(T)))
-            return new MockComputeResourceGroupMockingExtension();
+        if (typeof(T) == typeof(ComputeResourceGroupMockingExtension))
+            return new MockComputeResourceGroupMockingExtension() as T;
         return base.GetCachedClient(ctor);
     }
 }
