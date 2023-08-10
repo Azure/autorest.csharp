@@ -50,12 +50,12 @@ export async function typeSpecCompile(
     import "@typespec/rest";
     import "@typespec/http";
     import "@typespec/versioning";
-    ${needAzureCore ? 'import "@azure-tools/typespec-azure-core";' : ""}
-    using TypeSpec.Rest;
+    ${needAzureCore ? 'import "@azure-tools/typespec-azure-core";' : ""} 
+    using TypeSpec.Rest; 
     using TypeSpec.Http;
     using TypeSpec.Versioning;
     ${needAzureCore ? "using Azure.Core;" : ""}
-
+    
     ${needNamespaces ? namespace : ""}
     ${content}
     `
@@ -63,9 +63,6 @@ export async function typeSpecCompile(
     await host.compile("./", {
         warningAsError: false
     });
-    host.program.emitters = [
-        { main: "typespec-java", metadata: { name: "typespec-java" } }
-    ] as any;
     return host.program;
 }
 
@@ -116,4 +113,3 @@ export function navigateModels(
         { skipSubNamespaces }
     );
 }
-
