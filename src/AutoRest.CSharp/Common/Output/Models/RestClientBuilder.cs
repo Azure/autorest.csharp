@@ -69,7 +69,7 @@ namespace AutoRest.CSharp.Output.Models
         public static IEnumerable<InputParameter> GetParametersFromOperations(IEnumerable<InputOperation> operations) =>
             operations
                 .SelectMany(op => op.Parameters)
-                .Where(p => p.Kind == InputOperationParameterKind.Client || (p.Location == RequestLocation.Header && p.NameInRequest == "client-request-id"))
+                .Where(p => p.Kind == InputOperationParameterKind.Client)
                 .Distinct()
                 .ToList();
 
