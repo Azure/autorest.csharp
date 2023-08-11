@@ -32,8 +32,19 @@ namespace AutoRest.CSharp.Output.Models.Requests
             RepeatabilityRequestId,
             RepeatabilityFirstSent,
         };
-
         public static bool IsRepeatabilityRequestHeader(string headerName) => RepeatabilityRequestHeaders.Contains(headerName);
+
+        public static HashSet<string> ClientRequestIdHeaders = new HashSet<string>(StringComparer.OrdinalIgnoreCase)
+        {
+            "client-request-id",
+        };
+
+        public static HashSet<string> ReturnClientRequestIdResponseHeaders = new HashSet<string>(StringComparer.OrdinalIgnoreCase)
+        {
+            "return-client-request-id",
+        };
+
+        public static bool IsClientRequestIdHeader(string headerName) => ClientRequestIdHeaders.Contains(headerName) || ReturnClientRequestIdResponseHeaders.Contains(headerName);
 
         public string Name { get; }
         public ReferenceOrConstant Value { get; }
