@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <members>
+    <member name="GetClientRequestIdAsync(RequestContext)">
+<example>
+This sample shows how to call GetClientRequestIdAsync.
+<code><![CDATA[
+var client = new ClientRequestIdClient();
+
+Response response = await client.GetClientRequestIdAsync();
+Console.WriteLine(response.Status);
+]]></code>
+</example>
+    </member>
+    <member name="GetClientRequestId(RequestContext)">
+<example>
+This sample shows how to call GetClientRequestId.
+<code><![CDATA[
+var client = new ClientRequestIdClient();
+
+Response response = client.GetClientRequestId();
+Console.WriteLine(response.Status);
+]]></code>
+</example>
+    </member>
+  </members>
+</doc>
