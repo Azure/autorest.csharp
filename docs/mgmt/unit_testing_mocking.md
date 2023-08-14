@@ -131,3 +131,22 @@ rgMockingExtensionMock.Setup(rg => rg.GetVirtualMachines())
 ResourceGroupResource rg = rgMock.Object;
 // call your methods as usual
 ```
+
+### NSubstitute
+
+```csharp
+ResourceGroupResource rgMock = Substitute.For<ResourceGroupResource>();
+ComputeResourceGroupMockingExtension rgMockingExtensionMock = Substitute.For<ComputeResourceGroupMockingExtension>();
+VirtualMachineCollection vmCollectionMock = Substitute.For<VirtualMachineCollection>();
+// mock the GetCachedClient method
+rgMock.GetCachedClient(Arg.Any<Func<ArmClient, ComputeResourceGroupMockingExtension>>())
+    .Returns(rgMockingExtensionMock);
+// mock the actual method
+rgMockingExtensionMock.GetVirtualMachines()
+    .Returns(vmCollectionMock);
+// mock the method you would like to use on VirtualMachineCollection
+
+ResourceGroupResource rg = rgMock;
+// call your methods as usual
+```
+```
