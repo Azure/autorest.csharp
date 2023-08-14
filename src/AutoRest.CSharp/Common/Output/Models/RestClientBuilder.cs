@@ -135,7 +135,7 @@ namespace AutoRest.CSharp.Output.Models
             => parameters
                 .Where(rp => !IsIgnoredHeaderParameter(rp))
                 // change the type to constant so that it won't show up in the method signature
-                .Select(p => RequestHeader.IsRepeatabilityRequestHeader(p.NameInRequest) ? p with { Kind = InputOperationParameterKind.Constant } : p);
+                .Select(p => RequestHeader.IsRepeatabilityRequestHeader(p.NameInRequest) || RequestHeader.IsClientRequestIdHeader(p.NameInRequest) ? p with { Kind = InputOperationParameterKind.Constant } : p);
 
         public static Response[] BuildResponses(InputOperation operation, TypeFactory typeFactory, out CSharpType? responseType)
         {
