@@ -149,4 +149,3 @@ rgMockingExtensionMock.GetVirtualMachines()
 ResourceGroupResource rg = rgMock;
 // call your methods as usual
 ```
-```
