@@ -11,7 +11,7 @@ import {
 import isEqual from "lodash.isequal";
 import { InputEnumType, InputModelType } from "../../src/type/inputType.js";
 import { createSdkContext } from "@azure-tools/typespec-client-generator-core";
-import { getAllHttpServices } from "@typespec/http"
+import { getAllHttpServices } from "@typespec/http";
 
 describe("Discriminator property", () => {
     let runner: TestHost;
@@ -116,7 +116,7 @@ op test(@body input: Pet): Pet;
 
     it("Discriminator property is enum with no enum value defined", async () => {
         const program = await typeSpecCompile(
-        `
+            `
         @doc("Int based extensible enum")
         enum PetKind {
             Cat,
@@ -171,24 +171,35 @@ op test(@body input: Pet): Pet;
         assert(
             isEqual(
                 {
-                    Name: 'kind',
-                    SerializedName: 'kind',
-                    Description: 'The kind of the pet',
+                    Name: "kind",
+                    SerializedName: "kind",
+                    Description: "The kind of the pet",
                     Type: {
-                      Name: 'PetKind',
-                      Namespace: 'Azure.Csharp.Testing',
-                      Accessibility: undefined,
-                      Deprecated: undefined,
-                      Description: 'Int based extensible enum',
-                      EnumValueType: 'String',
-                      AllowedValues: [ { Name: 'Cat', Value: 'Cat', Description: undefined },{ Name: 'Dog', Value: 'Dog', Description: undefined } ],
-                      IsExtensible: true,
-                      IsNullable: false
+                        Name: "PetKind",
+                        Namespace: "Azure.Csharp.Testing",
+                        Accessibility: undefined,
+                        Deprecated: undefined,
+                        Description: "Int based extensible enum",
+                        EnumValueType: "String",
+                        AllowedValues: [
+                            {
+                                Name: "Cat",
+                                Value: "Cat",
+                                Description: undefined
+                            },
+                            {
+                                Name: "Dog",
+                                Value: "Dog",
+                                Description: undefined
+                            }
+                        ],
+                        IsExtensible: true,
+                        IsNullable: false
                     },
                     IsRequired: true,
                     IsReadOnly: false,
                     IsDiscriminator: true
-                  },
+                },
                 discriminatorProperty
             ),
             `Discriminator property is not correct, got ${JSON.stringify(
@@ -201,8 +212,8 @@ op test(@body input: Pet): Pet;
         assert(cat !== undefined);
         assert(cat.DiscriminatorValue === "Cat");
         assert(cat.BaseModel === pet);
-         // assert we will NOT have a DiscriminatorPropertyName on the derived models
-         assert(
+        // assert we will NOT have a DiscriminatorPropertyName on the derived models
+        assert(
             cat.DiscriminatorPropertyName === undefined,
             "Cat model should not have the discriminator property name"
         );
@@ -237,7 +248,7 @@ op test(@body input: Pet): Pet;
 
     it("Discriminator property is enum with enum value defined", async () => {
         const program = await typeSpecCompile(
-        `
+            `
         @doc("Int based extensible enum")
         enum PetKind {
             Cat : "cat",
@@ -292,24 +303,35 @@ op test(@body input: Pet): Pet;
         assert(
             isEqual(
                 {
-                    Name: 'kind',
-                    SerializedName: 'kind',
-                    Description: 'The kind of the pet',
+                    Name: "kind",
+                    SerializedName: "kind",
+                    Description: "The kind of the pet",
                     Type: {
-                      Name: 'PetKind',
-                      Namespace: 'Azure.Csharp.Testing',
-                      Accessibility: undefined,
-                      Deprecated: undefined,
-                      Description: 'Int based extensible enum',
-                      EnumValueType: 'String',
-                      AllowedValues: [ { Name: 'Cat', Value: 'cat', Description: undefined },{ Name: 'Dog', Value: 'dog', Description: undefined } ],
-                      IsExtensible: true,
-                      IsNullable: false
+                        Name: "PetKind",
+                        Namespace: "Azure.Csharp.Testing",
+                        Accessibility: undefined,
+                        Deprecated: undefined,
+                        Description: "Int based extensible enum",
+                        EnumValueType: "String",
+                        AllowedValues: [
+                            {
+                                Name: "Cat",
+                                Value: "cat",
+                                Description: undefined
+                            },
+                            {
+                                Name: "Dog",
+                                Value: "dog",
+                                Description: undefined
+                            }
+                        ],
+                        IsExtensible: true,
+                        IsNullable: false
                     },
                     IsRequired: true,
                     IsReadOnly: false,
                     IsDiscriminator: true
-                  },
+                },
                 discriminatorProperty
             ),
             `Discriminator property is not correct, got ${JSON.stringify(
@@ -322,8 +344,8 @@ op test(@body input: Pet): Pet;
         assert(cat !== undefined);
         assert(cat.DiscriminatorValue === "cat");
         assert(cat.BaseModel === pet);
-         // assert we will NOT have a DiscriminatorPropertyName on the derived models
-         assert(
+        // assert we will NOT have a DiscriminatorPropertyName on the derived models
+        assert(
             cat.DiscriminatorPropertyName === undefined,
             "Cat model should not have the discriminator property name"
         );
