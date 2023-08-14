@@ -60,7 +60,10 @@ namespace AutoRest.CSharp.Output.Models
 
         private static bool WalkType(InputType type, Dictionary<InputModelType, bool?> visitedModels)
         {
-            var isConfident = type switch
+            if (_cache.TryGetValue(type, out var isConfident))
+                return isConfident;
+
+            isConfident = type switch
             {
                 InputModelType modelType => WalkModelType(modelType, visitedModels),
                 InputListType listType => WalkType(listType.ElementType, visitedModels),
