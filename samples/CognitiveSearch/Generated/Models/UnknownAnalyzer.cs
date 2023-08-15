@@ -7,7 +7,7 @@
 
 namespace CognitiveSearch.Models
 {
-    /// <summary> The UnknownAnalyzer. </summary>
+    /// <summary> Unknown version of Analyzer. </summary>
     internal partial class UnknownAnalyzer : Analyzer
     {
         /// <summary> Initializes a new instance of UnknownAnalyzer. </summary>

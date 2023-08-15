@@ -7,7 +7,7 @@
 
 namespace CognitiveSearch.Models
 {
-    /// <summary> The UnknownScoringFunction. </summary>
+    /// <summary> Unknown version of ScoringFunction. </summary>
     internal partial class UnknownScoringFunction : ScoringFunction
     {
         /// <summary> Initializes a new instance of UnknownScoringFunction. </summary>

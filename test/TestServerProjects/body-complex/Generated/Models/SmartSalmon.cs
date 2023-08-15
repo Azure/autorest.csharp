@@ -17,8 +17,8 @@ namespace body_complex.Models
         /// <param name="length"></param>
         public SmartSalmon(float length) : base(length)
         {
-            Fishtype = "smart_salmon";
             AdditionalProperties = new ChangeTrackingDictionary<string, object>();
+            Fishtype = "smart_salmon";
         }
 
         /// <summary> Initializes a new instance of SmartSalmon. </summary>

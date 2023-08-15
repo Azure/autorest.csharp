@@ -9,7 +9,7 @@ using System.Collections.Generic;
 
 namespace CognitiveSearch.Models
 {
-    /// <summary> The UnknownSkill. </summary>
+    /// <summary> Unknown version of Skill. </summary>
     internal partial class UnknownSkill : Skill
     {
         /// <summary> Initializes a new instance of UnknownSkill. </summary>

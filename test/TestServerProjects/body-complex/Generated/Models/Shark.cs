@@ -22,8 +22,8 @@ namespace body_complex.Models
         /// <param name="birthday"></param>
         public Shark(float length, DateTimeOffset birthday) : base(length)
         {
-            Fishtype = "shark";
             Birthday = birthday;
+            Fishtype = "shark";
         }
 
         /// <summary> Initializes a new instance of Shark. </summary>

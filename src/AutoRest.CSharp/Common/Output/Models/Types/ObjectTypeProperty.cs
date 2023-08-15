@@ -31,7 +31,7 @@ namespace AutoRest.CSharp.Output.Models.Types
                   serializationFormat: inputModelProperty is not null ? SerializationBuilder.GetSerializationFormat(inputModelProperty.Type) : SerializationFormat.Default,
                   serializationMapping: field.SerializationMapping)
         {
-            InitializationValue = field.DefaultValue;
+            InitializationValue = Configuration.Generation1ConvenienceClient ? null : field.DefaultValue;
         }
 
         public ObjectTypeProperty(MemberDeclarationOptions declaration, string parameterDescription, bool isReadOnly, Property? schemaProperty, CSharpType? valueType = null, bool optionalViaNullability = false, SourcePropertySerializationMapping? serializationMapping = null)

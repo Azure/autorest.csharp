@@ -211,7 +211,7 @@ namespace AutoRest.CSharp.Output.Models.Types
         {
             List<ObjectPropertyInitializer> defaultCtorInitializers = new List<ObjectPropertyInitializer>();
 
-            if (includeDiscriminator && Discriminator?.Value is { } discriminatorValue && !_inputModel.IsUnknownDiscriminatorModel)
+            if (!Configuration.Generation1ConvenienceClient && includeDiscriminator && Discriminator?.Value is { } discriminatorValue && !_inputModel.IsUnknownDiscriminatorModel)
             {
                 defaultCtorInitializers.Add(new ObjectPropertyInitializer(Discriminator.Property, discriminatorValue));
             }
@@ -224,8 +224,9 @@ namespace AutoRest.CSharp.Output.Models.Types
             {
                 ReferenceOrConstant? initializationValue = null;
 
+                var propertyName = property.Declaration.Name;
                 var propertyType = property.Declaration.Type;
-                if (parameterMap.TryGetValue(property.Declaration.Name.ToVariableName(), out var parameter) || IsStruct)
+                if (parameterMap.TryGetValue(propertyName.ToVariableName(), out var parameter) || IsStruct)
                 {
                     // For structs all properties become required
                     Constant? defaultParameterValue = null;
@@ -237,16 +238,17 @@ namespace AutoRest.CSharp.Output.Models.Types
                     }
 
                     var validation = parameter?.Validation ?? Validation.None;
-                    var defaultCtorParameter = new Parameter(property.Declaration.Name.ToVariableName(), property.ParameterDescription, inputType, defaultParameterValue, validation, null);
+                    var defaultCtorParameter = new Parameter(propertyName.ToVariableName(), property.ParameterDescription, inputType, defaultParameterValue, validation, null);
 
                     initializationValue = defaultCtorParameter;
                 }
-                else
+                else if (initializationValue == null && TypeFactory.IsCollectionType(propertyType))
                 {
-                    if (initializationValue == null && TypeFactory.IsCollectionType(propertyType))
-                    {
-                        initializationValue = Constant.NewInstanceOf(TypeFactory.GetPropertyImplementationType(propertyType));
-                    }
+                    initializationValue = Constant.NewInstanceOf(TypeFactory.GetPropertyImplementationType(propertyType));
+                }
+                else if (Configuration.Generation1ConvenienceClient && property.InputModelProperty?.ConstantValue is {} constant)
+                {
+                    defaultCtorInitializers.Add(new ObjectPropertyInitializer(property, BuilderHelpers.ParseConstant(constant.Value, property.ValueType)));
                 }
 
                 if (initializationValue != null)
@@ -255,11 +257,18 @@ namespace AutoRest.CSharp.Output.Models.Types
                 }
             }
 
-            if (Configuration.Generation1ConvenienceClient && !includeDiscriminator)
+            if (Configuration.Generation1ConvenienceClient)
             {
-                if (Discriminator is { } discriminator && defaultCtorInitializers.All(i => i.Property != discriminator.Property) && parameterMap.TryGetValue(discriminator.Property.Declaration.Name.ToVariableName(), out var discriminatorParameter))
+                if (Discriminator is { } discriminator)
                 {
-                    defaultCtorInitializers.Add(new ObjectPropertyInitializer(discriminator.Property, discriminatorParameter, discriminator.Value));
+                    if (defaultCtorInitializers.All(i => i.Property != discriminator.Property) && parameterMap.TryGetValue(discriminator.Property.Declaration.Name.ToVariableName(), out var discriminatorParameter))
+                    {
+                        defaultCtorInitializers.Add(new ObjectPropertyInitializer(discriminator.Property, discriminatorParameter, discriminator.Value));
+                    }
+                    else if (!_inputModel.IsUnknownDiscriminatorModel && discriminator.Value is {} value)
+                    {
+                        defaultCtorInitializers.Add(new ObjectPropertyInitializer(Discriminator.Property, value));
+                    }
                 }
             }
 
