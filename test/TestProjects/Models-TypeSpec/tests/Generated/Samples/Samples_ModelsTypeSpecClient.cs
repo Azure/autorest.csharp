@@ -1852,5 +1852,73 @@ namespace ModelsTypeSpec.Samples
             });
             var result = await client.RoundTripToOutputWithNoUseBaseAsync(input);
         }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_AnalyzeConversation()
+        {
+            var endpoint = new Uri("<https://my-service.azure.com>");
+            var client = new ModelsTypeSpecClient(endpoint);
+
+            Response response = client.AnalyzeConversation(new RequestContext());
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("discriminatorProperty").ToString());
+            Console.WriteLine(result.GetProperty("requiredPropertyOnBase").ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_AnalyzeConversation_AllParameters()
+        {
+            var endpoint = new Uri("<https://my-service.azure.com>");
+            var client = new ModelsTypeSpecClient(endpoint);
+
+            Response response = client.AnalyzeConversation(new RequestContext());
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("discriminatorProperty").ToString());
+            Console.WriteLine(result.GetProperty("optionalPropertyOnBase").ToString());
+            Console.WriteLine(result.GetProperty("requiredPropertyOnBase").ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_AnalyzeConversation_Async()
+        {
+            var endpoint = new Uri("<https://my-service.azure.com>");
+            var client = new ModelsTypeSpecClient(endpoint);
+
+            Response response = await client.AnalyzeConversationAsync(new RequestContext());
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("discriminatorProperty").ToString());
+            Console.WriteLine(result.GetProperty("requiredPropertyOnBase").ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_AnalyzeConversation_AllParameters_Async()
+        {
+            var endpoint = new Uri("<https://my-service.azure.com>");
+            var client = new ModelsTypeSpecClient(endpoint);
+
+            Response response = await client.AnalyzeConversationAsync(new RequestContext());
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("discriminatorProperty").ToString());
+            Console.WriteLine(result.GetProperty("optionalPropertyOnBase").ToString());
+            Console.WriteLine(result.GetProperty("requiredPropertyOnBase").ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_AnalyzeConversation_Convenience_Async()
+        {
+            var endpoint = new Uri("<https://my-service.azure.com>");
+            var client = new ModelsTypeSpecClient(endpoint);
+
+            var result = await client.AnalyzeConversationAsync();
+        }
     }
 }
