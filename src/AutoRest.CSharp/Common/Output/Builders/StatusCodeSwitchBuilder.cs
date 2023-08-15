@@ -316,7 +316,7 @@ namespace AutoRest.CSharp.Output.Models
                     serialization switch
                     {
                         JsonSerialization jsonSerialization => JsonSerializationMethodsBuilder.BuildDeserializationForMethods(jsonSerialization, async, value, httpMessage.Response, type.Equals(typeof(BinaryData))),
-                        XmlElementSerialization xmlSerialization => XmlSerializationMethodsBuilder.BuildDeserializationForMethods(xmlSerialization, value, httpMessage.Response).AsStatement(),
+                        XmlElementSerialization xmlSerialization => XmlSerializationMethodsBuilder.BuildDeserializationForMethods(xmlSerialization, value, httpMessage.Response),
                         _ => throw new NotImplementedException(serialization?.ToString() ?? $"No serialization for type {type}")
                     }
                 };

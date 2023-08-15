@@ -132,7 +132,8 @@ namespace AutoRest.CSharp.Output.Models.Types
                         Array.Empty<InputModelType>(),
                         "Unknown", //TODO: do we need to support extensible enum / int values?
                         null,
-                        null)
+                        null,
+                        InputTypeSerialization.Default)
                     {
                         IsUnknownDiscriminatorModel = true
                     };

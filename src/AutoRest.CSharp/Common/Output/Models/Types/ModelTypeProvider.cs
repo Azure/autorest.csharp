@@ -35,7 +35,7 @@ namespace AutoRest.CSharp.Output.Models.Types
         private readonly InputModelType[]? _derivedTypes;
         private readonly ObjectType? _defaultDerivedType;
         private readonly ModelTypeMapping? _modelTypeMapping;
-        private readonly InputModelTypeSerializationFormat _serializationFormat;
+        private readonly InputTypeSerialization _inputTypeSerialization;
         private ModelTypeProviderFields? _fields;
 
         protected override string DefaultName { get; }
@@ -69,27 +69,30 @@ namespace AutoRest.CSharp.Output.Models.Types
             TypeKind = IsStruct ? TypeKind.Struct : TypeKind.Class;
 
             _modelTypeMapping = sourceInputModel?.CreateForModel(ExistingType);
-            _serializationFormat = GetSerializationFormat(inputModel, _modelTypeMapping);
+            _inputTypeSerialization = GetSerializationFormat(inputModel, _modelTypeMapping);
         }
 
-        private static InputModelTypeSerializationFormat GetSerializationFormat(InputModelType inputModel, ModelTypeMapping? modelTypeMapping)
+        private static InputTypeSerialization GetSerializationFormat(InputModelType inputModel, ModelTypeMapping? modelTypeMapping)
         {
-            var serializationFormat = inputModel.SerializationFormat;
+            var serializationFormats = inputModel.Serialization;
 
             if (modelTypeMapping?.Formats is { } formatsDefinedInSource)
             {
                 foreach (var format in formatsDefinedInSource)
                 {
-                    serializationFormat |= Enum.Parse<KnownMediaType>(format, true) switch
+                    var mediaType = Enum.Parse<KnownMediaType>(format, true);
+                    if (mediaType == KnownMediaType.Json)
                     {
-                        KnownMediaType.Json => InputModelTypeSerializationFormat.Json,
-                        KnownMediaType.Xml => InputModelTypeSerializationFormat.Xml,
-                        _ => InputModelTypeSerializationFormat.None,
-                    };
+                        serializationFormats = serializationFormats with {Json = true};
+                    }
+                    else if (mediaType == KnownMediaType.Xml)
+                    {
+                        serializationFormats = serializationFormats with {Xml = new InputTypeXmlSerialization(inputModel.Name, false, false)};
+                    }
                 }
             }
 
-            return serializationFormat;
+            return serializationFormats;
         }
 
         private MethodSignatureModifiers GetFromResponseModifiers()
@@ -286,12 +289,12 @@ namespace AutoRest.CSharp.Output.Models.Types
         {
             if (IsPropertyBag)
                 return false;
-            return _serializationFormat.HasFlag(InputModelTypeSerializationFormat.Json);
+            return _inputTypeSerialization.Json;
         }
 
         protected override bool EnsureHasXmlSerialization()
         {
-            return _serializationFormat.HasFlag(InputModelTypeSerializationFormat.Xml);
+            return _inputTypeSerialization.Xml is not null;
         }
 
         protected override bool EnsureIncludeSerializer()
@@ -308,41 +311,73 @@ namespace AutoRest.CSharp.Output.Models.Types
         {
             // Serialization uses field and property names that first need to verified for uniqueness
             // For that, FieldDeclaration instances must be written in the main partial class before JsonObjectSerialization is created for the serialization partial class
-            return SerializationBuilder.BuildJsonObjectSerialization(this, _inputModel);
+            var properties = SerializationBuilder.GetPropertySerializations(this, _inputModel);
+            var additionalProperties = CreateAdditionalPropertySerialization();
+            return new(Type, SerializationConstructor.Signature.Parameters, properties, additionalProperties, Discriminator, IncludeConverter);
+        }
+
+        private JsonAdditionalPropertiesSerialization? CreateAdditionalPropertySerialization()
+        {
+            foreach (var model in EnumerateHierarchy().OfType<ModelTypeProvider>())
+            {
+                if (model is { AdditionalPropertiesProperty: {} additionalProperties, _inputModel.InheritedDictionaryType: {} inheritedDictionaryType })
+                {
+                    var dictionaryValueType = additionalProperties.Declaration.Type.Arguments[1];
+                    Debug.Assert(!dictionaryValueType.IsNullable, $"{typeof(JsonCodeWriterExtensions)} implicitly relies on {additionalProperties.Declaration.Name} dictionary value being non-nullable");
+
+                    var type = new CSharpType(typeof(Dictionary<,>), additionalProperties.Declaration.Type.Arguments);
+                    var valueSerialization = SerializationBuilder.BuildJsonSerialization(inheritedDictionaryType.ValueType, dictionaryValueType, false);
+
+                    return new JsonAdditionalPropertiesSerialization(additionalProperties, valueSerialization, type);
+                }
+            }
+
+            return null;
         }
 
         protected override XmlObjectSerialization? EnsureXmlSerialization()
         {
-            return null;
+            return SerializationBuilder.BuildXmlObjectSerialization(_inputModel.Serialization.Xml!.Name, this);
         }
 
         protected override IEnumerable<Method> BuildSerializationMethods()
         {
-            if (JsonSerialization is not { } serialization)
+            if (XmlSerialization is {} xmlSerialization)
             {
-                yield break;
-            }
-
-            if (IncludeSerializer)
-            {
-                yield return JsonSerializationMethodsBuilder.BuildUtf8JsonSerializableWrite(serialization);
-            }
-
-            if (IncludeDeserializer)
-            {
-                yield return JsonSerializationMethodsBuilder.BuildDeserialize(Declaration, serialization);
-            }
-
-            if (!Configuration.Generation1ConvenienceClient)
-            {
-                if (IncludeDeserializer)
-                {
-                    yield return JsonSerializationMethodsBuilder.BuildFromResponse(this, GetFromResponseModifiers());
-                }
-
                 if (IncludeSerializer)
                 {
-                    yield return JsonSerializationMethodsBuilder.BuildToRequestContent(GetToRequestContentModifiers());
+                    yield return XmlSerializationMethodsBuilder.BuildXmlSerializableWrite(xmlSerialization);
+                }
+
+                if (IncludeDeserializer)
+                {
+                    yield return XmlSerializationMethodsBuilder.BuildDeserialize(Declaration, xmlSerialization);
+                }
+            }
+
+            if (JsonSerialization is {} jsonSerialization)
+            {
+                if (IncludeSerializer)
+                {
+                    yield return JsonSerializationMethodsBuilder.BuildUtf8JsonSerializableWrite(jsonSerialization);
+                }
+
+                if (IncludeDeserializer)
+                {
+                    yield return JsonSerializationMethodsBuilder.BuildDeserialize(Declaration, jsonSerialization);
+                }
+
+                if (!Configuration.Generation1ConvenienceClient)
+                {
+                    if (IncludeDeserializer)
+                    {
+                        yield return JsonSerializationMethodsBuilder.BuildFromResponse(this, GetFromResponseModifiers());
+                    }
+
+                    if (IncludeSerializer)
+                    {
+                        yield return JsonSerializationMethodsBuilder.BuildToRequestContent(GetToRequestContentModifiers());
+                    }
                 }
             }
         }

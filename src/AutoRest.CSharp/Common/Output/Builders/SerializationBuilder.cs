@@ -75,63 +75,47 @@ namespace AutoRest.CSharp.Output.Builders
 
         public static ObjectSerialization Build(BodyMediaType bodyMediaType, InputType inputType, CSharpType type) => bodyMediaType switch
         {
-            BodyMediaType.Xml => BuildXmlElementSerialization(inputType, type, null, true),
             BodyMediaType.Json => BuildJsonSerialization(inputType, type, false),
+            BodyMediaType.Xml => BuildXmlElementSerialization(inputType, type, null, true),
             _ => throw new NotImplementedException(bodyMediaType.ToString())
         };
 
         private static XmlElementSerialization BuildXmlElementSerialization(InputType inputType, CSharpType type, string? name, bool isRoot)
         {
+            var xmlName = (inputType as InputModelType)?.Serialization.Xml?.Name ?? name ?? inputType.Name;
             return inputType switch
             {
-                InputListType listType => new XmlArraySerialization(TypeFactory.GetImplementationType(type), BuildXmlElementSerialization(listType.ElementType, TypeFactory.GetElementType(type), null, false), name ?? inputType.Name, isRoot),
-                InputDictionaryType dictionaryType => new XmlDictionarySerialization(TypeFactory.GetImplementationType(type), BuildXmlElementSerialization(dictionaryType.ValueType, TypeFactory.GetElementType(type), null, false), name ?? inputType.Name),
-                CodeModelType cmt => BuildXmlElementSerialization(cmt.Schema, type, name, isRoot),
-                _ => new XmlElementValueSerialization(name ?? inputType.Name, new XmlValueSerialization(type, GetSerializationFormat(inputType)))
+                InputListType listType => new XmlArraySerialization(TypeFactory.GetImplementationType(type), BuildXmlElementSerialization(listType.ElementType, TypeFactory.GetElementType(type), null, false), xmlName, isRoot),
+                InputDictionaryType dictionaryType => new XmlDictionarySerialization(TypeFactory.GetImplementationType(type), BuildXmlElementSerialization(dictionaryType.ValueType, TypeFactory.GetElementType(type), null, false), xmlName),
+                CodeModelType cmt => BuildXmlElementSerialization(cmt.Schema, type, null, isRoot),
+                _ => new XmlElementValueSerialization(xmlName, new XmlValueSerialization(type, GetSerializationFormat(inputType)))
             };
         }
 
         public static ObjectSerialization Build(KnownMediaType? mediaType, Schema schema, CSharpType type) => mediaType switch
         {
             KnownMediaType.Json => BuildSerialization(schema, type, false),
-            KnownMediaType.Xml => BuildXmlElementSerialization(schema, type, schema.XmlName ?? schema.Name, true),
+            KnownMediaType.Xml => BuildXmlElementSerialization(schema, type, null, true),
             _ => throw new NotImplementedException(mediaType.ToString())
         };
 
 
         private static XmlElementSerialization BuildXmlElementSerialization(Schema schema, CSharpType type, string? name, bool isRoot)
         {
-            string xmlName =
-                schema.XmlName ??
-                name ??
-                schema.Name;
-
+            string xmlName = schema.XmlName ?? name ?? schema.Name;
             switch (schema)
             {
                 case ConstantSchema constantSchema:
                     return BuildXmlElementSerialization(constantSchema.ValueType, type, name, false);
                 case ArraySchema arraySchema:
                     var wrapped = isRoot || arraySchema.Serialization?.Xml?.Wrapped == true;
-
-                    return new XmlArraySerialization(
-                        TypeFactory.GetImplementationType(type),
-                        BuildXmlElementSerialization(arraySchema.ElementType, TypeFactory.GetElementType(type), null, false),
-                        xmlName,
-                        wrapped);
+                    return new XmlArraySerialization(TypeFactory.GetImplementationType(type), BuildXmlElementSerialization(arraySchema.ElementType, TypeFactory.GetElementType(type), null, false), xmlName, wrapped);
 
                 case DictionarySchema dictionarySchema:
-                    return new XmlDictionarySerialization(
-                        TypeFactory.GetImplementationType(type),
-                        BuildXmlElementSerialization(dictionarySchema.ElementType,TypeFactory.GetElementType(type), null, false),
-                        xmlName);
+                    return new XmlDictionarySerialization(TypeFactory.GetImplementationType(type), BuildXmlElementSerialization(dictionarySchema.ElementType,TypeFactory.GetElementType(type), null, false), xmlName);
                 default:
-                    return new XmlElementValueSerialization(xmlName, BuildXmlValueSerialization(schema, type));
+                    return new XmlElementValueSerialization(xmlName, new XmlValueSerialization(type, BuilderHelpers.GetSerializationFormat(schema)));
             }
-        }
-
-        private static XmlValueSerialization BuildXmlValueSerialization(Schema schema, CSharpType type)
-        {
-            return new XmlValueSerialization(type, BuilderHelpers.GetSerializationFormat(schema));
         }
 
         private static bool IsManagedServiceIdentityV3(Schema schema, CSharpType type)
@@ -192,69 +176,77 @@ namespace AutoRest.CSharp.Output.Builders
             }
         }
 
-        public XmlObjectSerialization BuildXmlObjectSerialization(ObjectSchema objectSchema, ObjectType objectType)
+        public static XmlObjectSerialization BuildXmlObjectSerialization(string serializationName, ObjectType objectType)
         {
-            List<XmlObjectElementSerialization> elements = new List<XmlObjectElementSerialization>();
-            List<XmlObjectAttributeSerialization> attributes = new List<XmlObjectAttributeSerialization>();
-            List<XmlObjectArraySerialization> embeddedArrays = new List<XmlObjectArraySerialization>();
+            var elements = new List<XmlObjectElementSerialization>();
+            var attributes = new List<XmlObjectAttributeSerialization>();
+            var embeddedArrays = new List<XmlObjectArraySerialization>();
             XmlObjectContentSerialization? contentSerialization = null;
 
             foreach (var objectTypeLevel in objectType.EnumerateHierarchy())
             {
                 foreach (ObjectTypeProperty objectProperty in objectTypeLevel.Properties)
                 {
-                    var property = objectProperty.SchemaProperty;
-                    if (property == null)
+                    if (objectProperty.SchemaProperty is {} property)
                     {
-                        continue;
-                    }
+                        var isAttribute = property.Schema.Serialization?.Xml?.Attribute == true;
+                        var isContent = property.Schema.Serialization?.Xml?.Text == true;
+                        var format = BuilderHelpers.GetSerializationFormat(property.Schema);
+                        var propertyName = property.SerializedName;
 
-                    var name = property.SerializedName;
-                    var isAttribute = property.Schema.Serialization?.Xml?.Attribute == true;
-                    var isContent = property.Schema.Serialization?.Xml?.Text == true;
-
-                    if (isContent)
-                    {
-                        contentSerialization = new XmlObjectContentSerialization(
-                            objectProperty,
-                            BuildXmlValueSerialization(property.Schema, objectProperty.Declaration.Type));
-                    }
-                    else if (isAttribute)
-                    {
-                        attributes.Add(
-                            new XmlObjectAttributeSerialization(
-                                name,
-                                objectProperty,
-                                BuildXmlValueSerialization(property.Schema, objectProperty.Declaration.Type)
-                            )
-                        );
-                    }
-                    else
-                    {
-                        XmlElementSerialization valueSerialization = BuildXmlElementSerialization(property.Schema, objectProperty.Declaration.Type, name, false);
-
-                        if (valueSerialization is XmlArraySerialization arraySerialization)
+                        if (isContent)
                         {
-                            embeddedArrays.Add(new XmlObjectArraySerialization(objectProperty, arraySerialization));
+                            contentSerialization = new XmlObjectContentSerialization(objectProperty, new XmlValueSerialization(objectProperty.Declaration.Type, format));
+                        }
+                        else if (isAttribute)
+                        {
+                            attributes.Add(new XmlObjectAttributeSerialization(propertyName, objectProperty, new XmlValueSerialization(objectProperty.Declaration.Type, format)));
                         }
                         else
                         {
-                            elements.Add(
-                                new XmlObjectElementSerialization(
-                                    objectProperty,
-                                    valueSerialization
-                                )
-                            );
+                            var valueSerialization = BuildXmlElementSerialization(property.Schema, objectProperty.Declaration.Type, propertyName, false);
+                            if (valueSerialization is XmlArraySerialization arraySerialization)
+                            {
+                                embeddedArrays.Add(new XmlObjectArraySerialization(objectProperty, arraySerialization));
+                            }
+                            else
+                            {
+                                elements.Add(new XmlObjectElementSerialization(objectProperty, valueSerialization));
+                            }
+                        }
+                    }
+                    else if (objectProperty.InputModelProperty is {} inputModelProperty)
+                    {
+                        var isAttribute = (inputModelProperty.Type as InputModelType)?.Serialization.Xml?.IsAttribute == true;
+                        var isContent = (inputModelProperty.Type as InputModelType)?.Serialization.Xml?.IsContent == true;
+                        var format = GetSerializationFormat(inputModelProperty.Type);
+                        var propertyName = inputModelProperty.SerializedName;
+
+                        if (isContent)
+                        {
+                            contentSerialization = new XmlObjectContentSerialization(objectProperty, new XmlValueSerialization(objectProperty.Declaration.Type, format));
+                        }
+                        else if (isAttribute)
+                        {
+                            attributes.Add(new XmlObjectAttributeSerialization(propertyName, objectProperty, new XmlValueSerialization(objectProperty.Declaration.Type, format)));
+                        }
+                        else
+                        {
+                            var valueSerialization = BuildXmlElementSerialization(inputModelProperty.Type, objectProperty.Declaration.Type, propertyName, false);
+                            if (valueSerialization is XmlArraySerialization arraySerialization)
+                            {
+                                embeddedArrays.Add(new XmlObjectArraySerialization(objectProperty, arraySerialization));
+                            }
+                            else
+                            {
+                                elements.Add(new XmlObjectElementSerialization(objectProperty, valueSerialization));
+                            }
                         }
                     }
                 }
             }
 
-            return new XmlObjectSerialization(
-                objectSchema.Serialization?.Xml?.Name ?? objectSchema.Language.Default.Name,
-                objectType.Type, elements.ToArray(), attributes.ToArray(), embeddedArrays.ToArray(),
-                contentSerialization
-                );
+            return new XmlObjectSerialization(serializationName, objectType.Type, elements.ToArray(), attributes.ToArray(), embeddedArrays.ToArray(), contentSerialization);
         }
 
         private IEnumerable<JsonPropertySerialization> GetPropertySerializationsFromBag(PropertyBag propertyBag, SchemaObjectType objectType)
@@ -294,14 +286,8 @@ namespace AutoRest.CSharp.Output.Builders
             }
         }
 
-        public static JsonObjectSerialization BuildJsonObjectSerialization(ModelTypeProvider model, InputModelType inputModel)
-        {
-            var propertyBag = PopulatePropertyBag(model);
-            var properties = GetPropertySerializationsFromBag(propertyBag, inputModel).ToArray();
-            var additionalProperties = CreateAdditionalPropertySerialization(model, inputModel);
-
-            return new(model.Type, model.SerializationConstructor.Signature.Parameters, properties, additionalProperties, model.Discriminator, model.IncludeConverter);
-        }
+        public static IReadOnlyList<JsonPropertySerialization> GetPropertySerializations(ModelTypeProvider model, InputModelType inputModel)
+            => GetPropertySerializationsFromBag(PopulatePropertyBag(model), inputModel).ToArray();
 
         private static IEnumerable<JsonPropertySerialization> GetPropertySerializationsFromBag(PropertyBag propertyBag, InputModelType inputModel)
         {
@@ -322,7 +308,7 @@ namespace AutoRest.CSharp.Output.Builders
                     property.ValueType.IsNullable && property.OptionalViaNullability ? property.ValueType.WithNullable(false) : property.ValueType,
                     valueSerialization,
                     property.IsRequired,
-                    ShouldSkipSerialization(inputModel, property),
+                    ShouldSkipSerialization(inputModel.Usage, property),
                     false,
                     customSerializationMethodName: property.SerializationMapping?.SerializationValueHook,
                     customDeserializationMethodName: property.SerializationMapping?.DeserializationValueHook);
@@ -335,26 +321,7 @@ namespace AutoRest.CSharp.Output.Builders
             }
         }
 
-        private static JsonAdditionalPropertiesSerialization? CreateAdditionalPropertySerialization(ModelTypeProvider model, InputModelType inputModel)
-        {
-            foreach (var modelOrBase in model.EnumerateHierarchy().OfType<ModelTypeProvider>())
-            {
-                if (modelOrBase is { AdditionalPropertiesProperty: {} additionalProperties} && inputModel.InheritedDictionaryType is {} inheritedDictionaryType)
-                {
-                    var dictionaryValueType = additionalProperties.Declaration.Type.Arguments[1];
-                    Debug.Assert(!dictionaryValueType.IsNullable, $"{typeof(JsonCodeWriterExtensions)} implicitly relies on {additionalProperties.Declaration.Name} dictionary value being non-nullable");
-
-                    var type = new CSharpType(typeof(Dictionary<,>), additionalProperties.Declaration.Type.Arguments);
-                    var valueSerialization = BuildJsonSerialization(inheritedDictionaryType.ValueType, dictionaryValueType, false);
-
-                    return new JsonAdditionalPropertiesSerialization(additionalProperties, valueSerialization, type);
-                }
-            }
-
-            return null;
-        }
-
-        private static bool ShouldSkipSerialization(InputModelType inputModel, ObjectTypeProperty property)
+        private static bool ShouldSkipSerialization(InputModelTypeUsage inputModelUsage, ObjectTypeProperty property)
         {
             if (property.InputModelProperty!.IsDiscriminator)
             {
@@ -373,10 +340,10 @@ namespace AutoRest.CSharp.Output.Builders
 
             if (property.Declaration.Type.IsCollectionType())
             {
-                return inputModel.Usage is InputModelTypeUsage.Output;
+                return inputModelUsage is InputModelTypeUsage.Output;
             }
 
-            return property.IsReadOnly && inputModel.Usage is not InputModelTypeUsage.Input;
+            return property.IsReadOnly && inputModelUsage is not InputModelTypeUsage.Input;
         }
 
         public JsonObjectSerialization BuildJsonObjectSerialization(ObjectSchema objectSchema, SchemaObjectType objectType)

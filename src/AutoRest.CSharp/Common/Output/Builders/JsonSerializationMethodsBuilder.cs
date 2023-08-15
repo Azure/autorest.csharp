@@ -26,7 +26,6 @@ using AutoRest.CSharp.Output.Models.Types;
 using AutoRest.CSharp.Utilities;
 using Azure;
 using Azure.Core;
-using Azure.ResourceManager.Models;
 using static AutoRest.CSharp.Common.Output.Models.Snippets;
 
 namespace AutoRest.CSharp.Common.Output.Builders
@@ -713,7 +712,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
             }
         }
 
-        private static ValueExpression GetOptional(JsonPropertySerialization jsonPropertySerialization, ObjectPropertyVariable variable)
+        private static ValueExpression GetOptional(PropertySerialization jsonPropertySerialization, ObjectPropertyVariable variable)
         {
             var targetType = jsonPropertySerialization.ValueType;
             var sourceType = variable.Type;

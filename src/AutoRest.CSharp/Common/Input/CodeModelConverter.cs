@@ -270,7 +270,7 @@ namespace AutoRest.CSharp.Common.Input
                 InheritedDictionaryType: schema.Parents?.Immediate.OfType<DictionarySchema>().FirstOrDefault() is {} dictionarySchema
                     ? (InputDictionaryType)CreateType(dictionarySchema, _modelsCache, false)
                     : null,
-                SerializationFormat: GetSerializationFormats(schema));
+                Serialization: GetSerializationFormats(schema));
 
             _modelsCache[schema] = model;
             _modelPropertiesCache[schema] = properties;
@@ -303,7 +303,7 @@ namespace AutoRest.CSharp.Common.Input
             _ => InputOperationParameterKind.Method
         };
 
-        private static InputModelTypeSerializationFormat GetSerializationFormats(ObjectSchema objectSchema)
+        private static InputTypeSerialization GetSerializationFormats(ObjectSchema objectSchema)
         {
             var formats = objectSchema.SerializationFormats;
             if (Configuration.SkipSerializationFormatXml)
@@ -319,18 +319,12 @@ namespace AutoRest.CSharp.Common.Input
                 }
             }
 
-            var inputSerializationFormat = InputModelTypeSerializationFormat.None;
-            if (formats.Contains(KnownMediaType.Json))
-            {
-                inputSerializationFormat |= InputModelTypeSerializationFormat.Json;
-            }
+            var json = formats.Contains(KnownMediaType.Json);
+            var xml = formats.Contains(KnownMediaType.Xml) && objectSchema.Serialization?.Xml is {} xmlFormat
+                ? new InputTypeXmlSerialization(xmlFormat.Name ?? objectSchema.Language.Default.Name, xmlFormat.Attribute == true, xmlFormat.Text == true)
+                : null;
 
-            if (formats.Contains(KnownMediaType.Xml))
-            {
-                inputSerializationFormat |= InputModelTypeSerializationFormat.Xml;
-            }
-
-            return inputSerializationFormat;
+            return new InputTypeSerialization(json, xml);
         }
 
         private static string? GetArraySerializationDelimiter(RequestParameter input) => input.In switch

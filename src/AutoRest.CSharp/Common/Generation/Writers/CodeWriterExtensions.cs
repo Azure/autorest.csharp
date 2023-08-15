@@ -444,14 +444,15 @@ namespace AutoRest.CSharp.Generation.Writers
 
         public static void WriteDeserializationForMethods(this CodeWriter writer, ObjectSerialization serialization, bool async, CodeWriterDeclaration? variable, FormattableString responseVariable, CSharpType? type)
         {
+            var responseExpression = new ResponseExpression(new FormattableStringToExpression(responseVariable));
+            var variableExpression = variable is not null ? (ValueExpression)variable : null;
             switch (serialization)
             {
                 case JsonSerialization jsonSerialization:
-                    ResponseExpression response = new(new FormattableStringToExpression(responseVariable));
-                    writer.WriteMethodBodyStatement(JsonSerializationMethodsBuilder.BuildDeserializationForMethods(jsonSerialization, async, variable is not null ? (ValueExpression)variable : null, response, type is not null && type.Equals(typeof(BinaryData))));
+                    writer.WriteMethodBodyStatement(JsonSerializationMethodsBuilder.BuildDeserializationForMethods(jsonSerialization, async, variableExpression, responseExpression, type is not null && type.Equals(typeof(BinaryData))));
                     break;
                 case XmlElementSerialization xmlSerialization:
-                    writer.WriteDeserializationForMethods(xmlSerialization, variable, responseVariable);
+                    writer.WriteMethodBodyStatement(XmlSerializationMethodsBuilder.BuildDeserializationForMethods(xmlSerialization, variableExpression, responseExpression));
                     break;
                 default:
                     throw new NotImplementedException(serialization.ToString());

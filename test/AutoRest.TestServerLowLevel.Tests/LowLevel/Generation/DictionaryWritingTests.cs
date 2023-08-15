@@ -12,7 +12,7 @@ namespace AutoRest.CSharp.Generation.Writers.Tests
         public void RoundTripDictionaryProperties(string expectedModelCodes, string expectedSerializationCodes)
         {
             var model = new InputModelType("RoundTripModel", "Cadl.TestServer.DictionaryProperties.Models", "public", null, "Round-trip model with dictionary properties", InputModelTypeUsage.RoundTrip,
-                DictionaryProperties, null, new List<InputModelType>(), null, null, null);
+                DictionaryProperties, null, new List<InputModelType>(), null, null, null, InputTypeSerialization.Default);
 
             var library = new DpgOutputLibraryBuilder(new InputNamespace("Cadl.TestServer.DictionaryProperties.Models", null, new List<string>(),
                 new List<InputEnumType>(), new List<InputModelType> { model, ElementModelType }, new List<InputClient>(), new InputAuth()), default).Build(true);
@@ -24,7 +24,7 @@ namespace AutoRest.CSharp.Generation.Writers.Tests
         public void InputDictionaryProperties(string expectedModelCodes, string expectedSerializationCodes)
         {
             var model = new InputModelType("InputModel", "Cadl.TestServer.DictionaryProperties.Models", "public", null, "Input model with dictionary properties", InputModelTypeUsage.Input,
-                DictionaryProperties, null, new List<InputModelType>(), null, null, null);
+                DictionaryProperties, null, new List<InputModelType>(), null, null, null, InputTypeSerialization.Default);
 
             var library = new DpgOutputLibraryBuilder(new InputNamespace("Cadl.TestServer.DictionaryProperties.Models", null, new List<string>(),
                 new List<InputEnumType>(), new List<InputModelType> { model, ElementModelType }, new List<InputClient>(), new InputAuth()), default).Build(true);
@@ -37,7 +37,7 @@ namespace AutoRest.CSharp.Generation.Writers.Tests
         public void OutputDictionaryProperties(string expectedModelCodes, string expectedSerializationCodes)
         {
             var model = new InputModelType("OutputModel", "Cadl.TestServer.DictionaryProperties.Models", "public", null, "Output model with dictionary properties", InputModelTypeUsage.Output,
-                DictionaryProperties, null, new List<InputModelType>(), null, null, null);
+                DictionaryProperties, null, new List<InputModelType>(), null, null, null, InputTypeSerialization.Default);
 
 
             var library = new DpgOutputLibraryBuilder(new InputNamespace("Cadl.TestServer.DictionaryProperties.Models", null, new List<string>(),

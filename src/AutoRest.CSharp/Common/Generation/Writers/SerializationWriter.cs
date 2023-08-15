@@ -76,19 +76,6 @@ namespace AutoRest.CSharp.Generation.Writers
                 writer.Line();
                 using (writer.Scope())
                 {
-                    if (xmlSerialization != null)
-                    {
-                        if (includeSerializer)
-                        {
-                            WriteXmlSerialize(writer, xmlSerialization);
-                        }
-
-                        if (includeDeserializer)
-                        {
-                            WriteXmlDeserialize(writer, declaration, xmlSerialization);
-                        }
-                    }
-
                     foreach (var method in model.Methods)
                     {
                         writer.WriteMethodDocumentation(method.Signature);

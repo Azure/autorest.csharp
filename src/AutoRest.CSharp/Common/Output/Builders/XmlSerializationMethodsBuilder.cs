@@ -3,14 +3,18 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Xml.Linq;
 using AutoRest.CSharp.Common.Output.Models;
 using AutoRest.CSharp.Common.Output.Models.KnownValueExpressions;
 using AutoRest.CSharp.Common.Output.Models.Statements;
 using AutoRest.CSharp.Common.Output.Models.Types;
 using AutoRest.CSharp.Common.Output.Models.ValueExpressions;
+using AutoRest.CSharp.Generation.Writers;
+using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Output.Models.Serialization;
 using AutoRest.CSharp.Output.Models.Serialization.Xml;
+using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Output.Models.Types;
 using AutoRest.CSharp.Utilities;
 using Azure.Core;
@@ -20,6 +24,17 @@ namespace AutoRest.CSharp.Common.Output.Builders
 {
     internal static class XmlSerializationMethodsBuilder
     {
+        public static Method BuildXmlSerializableWrite(XmlObjectSerialization serialization)
+        {
+            var xmlWriter = new Parameter("writer", null, typeof(IXmlSerializable), null, Validation.None, null);
+            var nameHint = new Parameter("nameHint", null, typeof(string), null, Validation.None, null);
+            return new Method
+            (
+                new MethodSignature(nameof(IUtf8JsonSerializable.Write), null, null, MethodSignatureModifiers.None, null, null, new[]{xmlWriter, nameHint}, ExplicitInterface: typeof(IUtf8JsonSerializable)),
+                SerializeExpression(new XmlWriterExpression(xmlWriter), serialization, nameHint).AsStatement()
+            );
+        }
+
         public static IEnumerable<MethodBodyStatement> SerializeExpression(XmlWriterExpression xmlWriter, XmlObjectSerialization objectSerialization, ValueExpression nameHint)
         {
             yield return xmlWriter.WriteStartElement(NullCoalescing(nameHint, Literal(objectSerialization.Name)));
@@ -144,24 +159,84 @@ namespace AutoRest.CSharp.Common.Output.Builders
 
         }
 
-        public static IEnumerable<MethodBodyStatement> BuildDeserializationForMethods(XmlElementSerialization serialization, ValueExpression? variable, ResponseExpression response)
+        public static Method BuildDeserialize(TypeDeclarationOptions declaration, XmlObjectSerialization serialization)
         {
-            yield return Var("document", XDocumentExpression.Load(response.ContentStream, LoadOptions.PreserveWhitespace), out var document);
+            var methodName = $"Deserialize{declaration.Name}";
+            var element = new Parameter("element", null, typeof(XElement), null, Validation.None, null);
+            return new Method
+            (
+                new MethodSignature(methodName, null, null, MethodSignatureModifiers.Internal | MethodSignatureModifiers.Static, serialization.Type, null, new[]{element}),
+                BuildDeserializeBody(new XElementExpression(element), serialization).ToArray()
+            );
+        }
+
+        private static IEnumerable<MethodBodyStatement> BuildDeserializeBody(XElementExpression element, XmlObjectSerialization objectSerialization)
+        {
+            var propertyVariables = new Dictionary<XmlPropertySerialization, CodeWriterDeclaration>();
+
+            CollectProperties(propertyVariables, objectSerialization);
+
+            foreach (var (property, declaration) in propertyVariables)
+            {
+                yield return new DeclareVariableStatement(property.ValueType, declaration, Default);
+            }
+
+            foreach (XmlObjectAttributeSerialization attribute in objectSerialization.Attributes)
+            {
+                var attributeVariableName = attribute.SerializationConstructorParameterName + "Attribute";
+                yield return new IfStatement(Is(element.Attribute(attribute.SerializedName), attributeVariableName, out var attributeVariable))
+                {
+                    Assign(propertyVariables[attribute], DeserializeValue(attribute.ValueSerialization, attributeVariable))
+                };
+            }
+
+            foreach (XmlObjectElementSerialization elem in objectSerialization.Elements)
+            {
+                yield return BuildDeserialization(elem.ValueSerialization, propertyVariables[elem], element);
+            }
+
+            foreach (XmlObjectArraySerialization embeddedArray in objectSerialization.EmbeddedArrays)
+            {
+                yield return BuildDeserialization(embeddedArray.ArraySerialization, propertyVariables[embeddedArray], element);
+            }
+
+            if (objectSerialization.ContentSerialization is { } contentSerialization)
+            {
+                yield return Assign(propertyVariables[contentSerialization], DeserializeValue(contentSerialization.ValueSerialization, element));
+            }
+
+            var objectType = (ObjectType)objectSerialization.Type.Implementation;
+            var parameterValues = propertyVariables.ToDictionary(v => v.Key.SerializationConstructorParameterName, v => (ValueExpression)v.Value);
+            var parameters = objectType.SerializationConstructor.Signature.Parameters
+                .Select(p => parameterValues[p.Name])
+                .ToArray();
+
+            yield return Return(New.Instance(objectSerialization.Type, parameters));
+        }
+
+        public static MethodBodyStatement BuildDeserializationForMethods(XmlElementSerialization serialization, ValueExpression? variable, ResponseExpression response)
+        {
+            return new[]
+            {
+                Var("document", XDocumentExpression.Load(response.ContentStream, LoadOptions.PreserveWhitespace), out var document),
+                BuildDeserialization(serialization, variable, document)
+            };
+        }
+
+        private static MethodBodyStatement BuildDeserialization(XmlElementSerialization serialization, ValueExpression? variable, XContainerExpression document)
+        {
             if (serialization is XmlArraySerialization { Wrapped: false } arraySerialization)
             {
                 var deserializedDocument = BuildDeserializationForArray(arraySerialization, document, out var deserialization);
-                yield return deserialization;
-                yield return AssignOrReturn(variable, deserializedDocument);
+                return new[] { deserialization, AssignOrReturn(variable, deserializedDocument) };
             }
-            else
+
+            var elementName = serialization.Name.ToVariableName() + "Element";
+            return new IfStatement(Is(document.Element(serialization.Name), elementName, out var element))
             {
-                var elementName = serialization.Name.ToVariableName() + "Element";
-                yield return new IfStatement(Is(document.Element(serialization.Name), elementName, out var element))
-                {
-                    BuildDeserializationForXContainer(serialization, element, out var deserializedContainer),
-                    AssignOrReturn(variable, deserializedContainer)
-                };
-            }
+                BuildDeserializationForXContainer(serialization, element, out var deserializedContainer),
+                AssignOrReturn(variable, deserializedContainer)
+            };
         }
 
         private static MethodBodyStatement BuildDeserializationForXContainer(XmlElementSerialization serialization, XElementExpression element, out ValueExpression deserializedContainer)
@@ -216,7 +291,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
             return dictionary;
         }
 
-        private static ValueExpression DeserializeValue(XmlValueSerialization serialization, XElementExpression element)
+        private static ValueExpression DeserializeValue(XmlValueSerialization serialization, ValueExpression value)
         {
             var type = serialization.Type;
 
@@ -234,60 +309,91 @@ namespace AutoRest.CSharp.Common.Output.Builders
                     frameworkType == typeof(string)
                 )
                 {
-                    return new CastExpression(element, type);
+                    return new CastExpression(value, type);
                 }
 
                 if (frameworkType == typeof(ResourceIdentifier))
                 {
-                    return New.ResourceIdentifier(new CastExpression(element, typeof(string)));
+                    return New.ResourceIdentifier(new CastExpression(value, typeof(string)));
                 }
 
                 if (frameworkType == typeof(ResourceType))
                 {
-                    return new CastExpression(element, typeof(string));
+                    return new CastExpression(value, typeof(string));
                 }
 
                 if (frameworkType == typeof(Guid))
                 {
-                    return New.Instance(typeof(Guid), element.Value);
+                    return value is XElementExpression xElement
+                        ? New.Instance(typeof(Guid), xElement.Value)
+                        : new CastExpression(value, typeof(Guid));
                 }
 
                 if (frameworkType == typeof(Uri))
                 {
-                    return New.Instance(typeof(Uri), new CastExpression(element, typeof(string)));
+                    return New.Instance(typeof(Uri), new CastExpression(value, typeof(string)));
                 }
 
-                if (frameworkType == typeof(byte[]))
+                if (value is XElementExpression element)
                 {
-                    return element.GetBytesFromBase64Value(serialization.Format.ToFormatSpecifier());
-                }
+                    if (frameworkType == typeof(byte[]))
+                    {
+                        return element.GetBytesFromBase64Value(serialization.Format.ToFormatSpecifier());
+                    }
 
-                if (frameworkType == typeof(DateTimeOffset))
-                {
-                    return element.GetDateTimeOffsetValue(serialization.Format.ToFormatSpecifier());
-                }
+                    if (frameworkType == typeof(DateTimeOffset))
+                    {
+                        return element.GetDateTimeOffsetValue(serialization.Format.ToFormatSpecifier());
+                    }
 
-                if (frameworkType == typeof(TimeSpan))
-                {
-                    return element.GetTimeSpanValue(serialization.Format.ToFormatSpecifier());
-                }
+                    if (frameworkType == typeof(TimeSpan))
+                    {
+                        return element.GetTimeSpanValue(serialization.Format.ToFormatSpecifier());
+                    }
 
-                if (frameworkType == typeof(object))
-                {
-                    return element.GetObjectValue(serialization.Format.ToFormatSpecifier());
+                    if (frameworkType == typeof(object))
+                    {
+                        return element.GetObjectValue(serialization.Format.ToFormatSpecifier());
+                    }
                 }
             }
 
             switch (type.Implementation)
             {
                 case SerializableObjectType serializableObjectType:
-                    return SerializableObjectTypeExpression.Deserialize(serializableObjectType, element);
+                    return SerializableObjectTypeExpression.Deserialize(serializableObjectType, value);
 
-                case EnumType clientEnum:
-                    return clientEnum.IsExtensible ? New.Instance(clientEnum.Type, element.Value) : InvokeToEnum(clientEnum.Type, element.Value);
+                case EnumType clientEnum when value is XElementExpression xe:
+                    return clientEnum.IsExtensible ? New.Instance(clientEnum.Type, xe.Value) : InvokeToEnum(clientEnum.Type, xe.Value);
+
+                case EnumType clientEnum when value is XAttributeExpression xa:
+                    return clientEnum.IsExtensible ? New.Instance(clientEnum.Type, xa.Value) : InvokeToEnum(clientEnum.Type, xa.Value);
 
                 default:
                     throw new NotSupportedException();
+            }
+        }
+
+        private static void CollectProperties(Dictionary<XmlPropertySerialization, CodeWriterDeclaration> propertyVariables, XmlObjectSerialization element)
+        {
+            foreach (var attribute in element.Attributes)
+            {
+                propertyVariables.Add(attribute, new CodeWriterDeclaration(attribute.SerializationConstructorParameterName));
+            }
+
+            foreach (var attribute in element.Elements)
+            {
+                propertyVariables.Add(attribute, new CodeWriterDeclaration(attribute.SerializationConstructorParameterName));
+            }
+
+            foreach (var attribute in element.EmbeddedArrays)
+            {
+                propertyVariables.Add(attribute, new CodeWriterDeclaration(attribute.SerializationConstructorParameterName));
+            }
+
+            if (element.ContentSerialization != null)
+            {
+                propertyVariables.Add(element.ContentSerialization, new CodeWriterDeclaration(element.ContentSerialization.SerializationConstructorParameterName));
             }
         }
     }

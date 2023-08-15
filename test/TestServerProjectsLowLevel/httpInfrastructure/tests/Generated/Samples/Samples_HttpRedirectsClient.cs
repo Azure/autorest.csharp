@@ -67,7 +67,7 @@ namespace httpInfrastructure_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new HttpRedirectsClient(credential);
 
-            Response response = client.Get300();
+            Response response = client.Get300(null);
             Console.WriteLine(response.Status);
         }
 
@@ -78,7 +78,7 @@ namespace httpInfrastructure_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new HttpRedirectsClient(credential);
 
-            Response response = client.Get300();
+            Response response = client.Get300(null);
             Console.WriteLine(response.Status);
         }
 
@@ -89,7 +89,7 @@ namespace httpInfrastructure_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new HttpRedirectsClient(credential);
 
-            Response response = await client.Get300Async();
+            Response response = await client.Get300Async(null);
             Console.WriteLine(response.Status);
         }
 
@@ -100,7 +100,7 @@ namespace httpInfrastructure_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new HttpRedirectsClient(credential);
 
-            Response response = await client.Get300Async();
+            Response response = await client.Get300Async(null);
             Console.WriteLine(response.Status);
         }
 

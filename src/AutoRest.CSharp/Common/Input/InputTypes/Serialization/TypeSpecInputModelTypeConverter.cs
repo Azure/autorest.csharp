@@ -83,9 +83,9 @@ namespace AutoRest.CSharp.Common.Input
             InputModelTypeUsage usage = InputModelTypeUsage.None;
             if (usageString != null)
             {
-                Enum.TryParse<InputModelTypeUsage>(usageString, ignoreCase: true, out usage);
+                Enum.TryParse(usageString, ignoreCase: true, out usage);
             }
-            var model = new InputModelType(name, ns, accessibility, deprecated, description, usage, properties, baseModel, new List<InputModelType>(), discriminatorValue, discriminatorPropertyValue, null);
+            var model = new InputModelType(name, ns, accessibility, deprecated, description, usage, properties, baseModel, new List<InputModelType>(), discriminatorValue, discriminatorPropertyValue, null, InputTypeSerialization.Default);
             if (id != null)
             {
                 resolver.AddReference(id, model);

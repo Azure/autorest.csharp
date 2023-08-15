@@ -190,37 +190,6 @@ namespace AutoRest.CSharp.Generation.Writers
             }
         }
 
-        public static void WriteDeserializationForMethods(this CodeWriter writer, XmlElementSerialization serialization, CodeWriterDeclaration? variable, FormattableString response)
-        {
-            var document = new CodeWriterDeclaration("document");
-            writer.Line($"var {document:D} = {typeof(XDocument)}.Load({response}.ContentStream, LoadOptions.PreserveWhitespace);");
-            if (serialization is XmlArraySerialization { Wrapped: false })
-            {
-                if (variable is not null)
-                {
-                    writer.DeserializeElementIntoVariable(serialization, document, variable);
-                }
-                else
-                {
-                    writer.Line($"return {writer.ToDeserializeElementCall(serialization, document)};");
-                }
-                return;
-            }
-
-            var elementVariable = new CodeWriterDeclaration(serialization.Name.ToVariableName() + "Element");
-            using (writer.Scope($"if ({document}.Element({serialization.Name:L}) is {typeof(XElement)} {elementVariable:D})"))
-            {
-                if (variable is not null)
-                {
-                    writer.DeserializeElementIntoVariable(serialization, elementVariable, variable);
-                }
-                else
-                {
-                    writer.Line($"return {writer.ToDeserializeElementCall(serialization, document)};");
-                }
-            }
-        }
-
         private static void CollectProperties(Dictionary<XmlPropertySerialization, CodeWriterDeclaration> propertyVariables, XmlObjectSerialization element)
         {
             foreach (var attribute in element.Attributes)

@@ -18,7 +18,7 @@ namespace AutoRest.CSharp.Generation.Writers.Tests
             // refer to the original CADL file: https://github.com/Azure/cadl-ranch/blob/c4f41f483eac812527f7b6dc837bd22d255a18ed/packages/cadl-ranch-specs/http/models/roundtrip-basic/main.cadl#L15-L23
             var input = new InputModelType("InputModel", "Cadl.TestServer.InputBasic", null, "public", "Round-trip Model", InputModelTypeUsage.RoundTrip,
                 new List<InputModelProperty> { RequiredStringProperty, RequiredIntProperty },
-                null, null, null, null, null);
+                null, null, null, null, null, InputTypeSerialization.Default);
 
             var model = new ModelTypeProvider(input, "test", null, new TypeFactory(null));
             ValidateGeneratedModelCodes(model, expectedModelCodes);
@@ -30,7 +30,7 @@ namespace AutoRest.CSharp.Generation.Writers.Tests
             // refer to the original CADL file: https://github.com/Azure/cadl-ranch/blob/main/packages/cadl-ranch-specs/http/models/input-basic/main.cadl
             var input = new InputModelType("InputModel", "Cadl.TestServer.InputBasic", null, "public", "Input Model", InputModelTypeUsage.Input,
                 new List<InputModelProperty> { RequiredStringProperty, RequiredIntProperty },
-                null, new List<InputModelType>(), null, null, null);
+                null, new List<InputModelType>(), null, null, null, InputTypeSerialization.Default);
 
             var model = new ModelTypeProvider(input, "test", null, new TypeFactory(null));
             ValidateGeneratedCodes(model, expectedModelCodes, expectedSerializationCodes);
@@ -42,7 +42,7 @@ namespace AutoRest.CSharp.Generation.Writers.Tests
             // refer to the original CADL file: https://github.com/Azure/cadl-ranch/blob/c4f41f483eac812527f7b6dc837bd22d255a18ed/packages/cadl-ranch-specs/http/models/output-basic/main.cadl#L15-L23
             var input = new InputModelType("OutputModel", "Cadl.TestServer.OutputBasic", null, "public", "Output Model", InputModelTypeUsage.Output,
                 new List<InputModelProperty> { RequiredStringProperty, RequiredIntProperty },
-                null, new List<InputModelType>(), null, null, null);
+                null, new List<InputModelType>(), null, null, null, InputTypeSerialization.Default);
 
             var model = new ModelTypeProvider(input, "test", null, new TypeFactory(null));
             ValidateGeneratedCodes(model, expectedModelCodes, expectedSerializationCodes);
@@ -55,18 +55,18 @@ namespace AutoRest.CSharp.Generation.Writers.Tests
             var input = new InputModelType("PrimitivePropertyModel", "Cadl.TestServer.PrimitiveProperties", null, "public",
                 "Round-trip model with primitive properties to show serialization and deserialization of each.", InputModelTypeUsage.RoundTrip,
                 new List<InputModelProperty>{
-                    new InputModelProperty("requiredString", "requiredString", "", InputPrimitiveType.String, null, true, false, false),
-                    new InputModelProperty("requiredInt", "requiredInt", "", InputPrimitiveType.Int32, null, true, false, false),
-                    new InputModelProperty("requiredLong", "requiredLong", "", InputPrimitiveType.Int64, null, true, false, false),
-                    new InputModelProperty("requiredSafeInt", "requiredSafeInt", "", InputPrimitiveType.Int64, null, true, false, false),
-                    new InputModelProperty("requiredFloat", "requiredFloat", "", InputPrimitiveType.Float32, null, true, false, false),
-                    new InputModelProperty("requiredDouble", "requiredDouble", "", InputPrimitiveType.Float64, null, true, false, false),
-                    new InputModelProperty("requiredBodyDateTime", "requiredBodyDateTime", "Illustrate a zonedDateTime body parameter, serialized as (https://datatracker.ietf.org/doc/html/rfc3339)", InputPrimitiveType.DateTimeISO8601, null, true, false, false),
-                    new InputModelProperty("requiredDuration", "requiredDuration", "", InputPrimitiveType.DurationISO8601, null, true, false, false),
-                    new InputModelProperty("requiredBoolean", "requiredBoolean", "", InputPrimitiveType.Boolean, null, true, false, false),
-                    new InputModelProperty("requiredBytes", "requiredBytes", "", InputPrimitiveType.BinaryData, null, true, false, false)
+                    new("requiredString", "requiredString", "", InputPrimitiveType.String, null, true, false, false),
+                    new("requiredInt", "requiredInt", "", InputPrimitiveType.Int32, null, true, false, false),
+                    new("requiredLong", "requiredLong", "", InputPrimitiveType.Int64, null, true, false, false),
+                    new("requiredSafeInt", "requiredSafeInt", "", InputPrimitiveType.Int64, null, true, false, false),
+                    new("requiredFloat", "requiredFloat", "", InputPrimitiveType.Float32, null, true, false, false),
+                    new("requiredDouble", "requiredDouble", "", InputPrimitiveType.Float64, null, true, false, false),
+                    new("requiredBodyDateTime", "requiredBodyDateTime", "Illustrate a zonedDateTime body parameter, serialized as (https://datatracker.ietf.org/doc/html/rfc3339)", InputPrimitiveType.DateTimeISO8601, null, true, false, false),
+                    new("requiredDuration", "requiredDuration", "", InputPrimitiveType.DurationISO8601, null, true, false, false),
+                    new("requiredBoolean", "requiredBoolean", "", InputPrimitiveType.Boolean, null, true, false, false),
+                    new("requiredBytes", "requiredBytes", "", InputPrimitiveType.BinaryData, null, true, false, false)
                 },
-                null, Array.Empty<InputModelType>(), null, null, null);
+                null, Array.Empty<InputModelType>(), null, null, null, InputTypeSerialization.Default);
 
             var model = new ModelTypeProvider(input, "test", null, new TypeFactory(null));
             ValidateGeneratedCodes(model, expectedModelCodes, expectedSerializationCodes);

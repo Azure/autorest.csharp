@@ -198,19 +198,30 @@ namespace AutoRest.CSharp.Output.Models.Types
 
         protected override IEnumerable<Method> BuildSerializationMethods()
         {
-            if (JsonSerialization is not { } serialization)
+            if (XmlSerialization is {} xmlSerialization)
             {
-                yield break;
+                if (IncludeSerializer)
+                {
+                    yield return XmlSerializationMethodsBuilder.BuildXmlSerializableWrite(xmlSerialization);
+                }
+
+                if (IncludeDeserializer)
+                {
+                    yield return XmlSerializationMethodsBuilder.BuildDeserialize(Declaration, xmlSerialization);
+                }
             }
 
-            if (IncludeSerializer)
+            if (JsonSerialization is { } serialization)
             {
-                yield return JsonSerializationMethodsBuilder.BuildUtf8JsonSerializableWrite(serialization);
-            }
+                if (IncludeSerializer)
+                {
+                    yield return JsonSerializationMethodsBuilder.BuildUtf8JsonSerializableWrite(serialization);
+                }
 
-            if (IncludeDeserializer)
-            {
-                yield return JsonSerializationMethodsBuilder.BuildDeserialize(Declaration, serialization);
+                if (IncludeDeserializer)
+                {
+                    yield return JsonSerializationMethodsBuilder.BuildDeserialize(Declaration, serialization);
+                }
             }
         }
 
@@ -672,7 +683,8 @@ namespace AutoRest.CSharp.Output.Models.Types
 
         protected override XmlObjectSerialization EnsureXmlSerialization()
         {
-            return _serializationBuilder.BuildXmlObjectSerialization(ObjectSchema, this);
+            var serializationName = ObjectSchema.Serialization?.Xml?.Name ?? ObjectSchema.Language.Default.Name;
+            return SerializationBuilder.BuildXmlObjectSerialization(serializationName, this);
         }
 
         private ObjectType? BuildDefaultDerivedType()
