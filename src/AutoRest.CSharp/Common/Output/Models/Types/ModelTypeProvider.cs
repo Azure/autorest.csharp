@@ -42,7 +42,7 @@ namespace AutoRest.CSharp.Output.Models.Types
         protected override string DefaultAccessibility { get; }
         protected override TypeKind TypeKind { get; }
         public override bool IncludeConverter => false;
-        protected override bool IsAbstract => !Configuration.SuppressAbstractBaseClasses.Contains(DefaultName) && _inputModel.DiscriminatorPropertyName is not null;
+        protected override bool IsAbstract => !Configuration.SuppressAbstractBaseClasses.Contains(DefaultName) && _inputModel.DiscriminatorPropertyName is not null && _inputModel.BaseModel is null;
 
         public ModelTypeProviderFields Fields => _fields ??= new ModelTypeProviderFields(_inputModel, _typeFactory, _modelTypeMapping, IsStruct);
         public ConstructorSignature InitializationConstructorSignature => _publicConstructor ??= EnsurePublicConstructorSignature();
@@ -137,7 +137,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             GetConstructorParameters(Fields.PublicConstructorParameters, out var fullParameterList, out var parametersToPassToBase, true);
 
             var summary = $"Initializes a new instance of {name}";
-            var accessibility = _inputModel.DiscriminatorPropertyName is not null
+            var accessibility = IsAbstract
                 ? MethodSignatureModifiers.Protected
                 : _inputModel.Usage.HasFlag(InputModelTypeUsage.Input)
                     ? MethodSignatureModifiers.Public

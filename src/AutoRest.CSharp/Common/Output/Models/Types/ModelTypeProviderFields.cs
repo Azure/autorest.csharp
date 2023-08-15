@@ -43,7 +43,10 @@ namespace AutoRest.CSharp.Output.Models.Types
             var visitedMembers = new HashSet<ISymbol>(SymbolEqualityComparer.Default);
             foreach (var inputModelProperty in inputModel.Properties)
             {
-                var originalFieldName = inputModelProperty.Name.ToCleanName();
+                var originalFieldName = Configuration.Generation1ConvenienceClient
+                    ? inputModelProperty.Name == "null" ? "NullProperty" : inputModelProperty.Name.ToCleanName()
+                    : inputModelProperty.Name.ToCleanName();
+
                 var propertyType = GetPropertyDefaultType(inputModel.Usage, inputModelProperty, typeFactory);
 
                 // We represent property being optional by making it nullable (when it is a value type)
