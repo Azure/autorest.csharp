@@ -246,9 +246,9 @@ namespace AutoRest.CSharp.Output.Models.Types
                 {
                     initializationValue = Constant.NewInstanceOf(TypeFactory.GetPropertyImplementationType(propertyType));
                 }
-                else if (Configuration.Generation1ConvenienceClient && property.InputModelProperty?.ConstantValue is {} constant)
+                else if (Configuration.Generation1ConvenienceClient && property.InputModelProperty?.ConstantValue is {} constant && !propertyType.IsNullable)
                 {
-                    defaultCtorInitializers.Add(new ObjectPropertyInitializer(property, BuilderHelpers.ParseConstant(constant.Value, property.ValueType)));
+                    defaultCtorInitializers.Add(new ObjectPropertyInitializer(property, BuilderHelpers.ParseConstant(constant.Value, propertyType)));
                 }
 
                 if (initializationValue != null)
