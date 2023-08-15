@@ -26,10 +26,7 @@ namespace AutoRest.CSharp.Generation.Writers.Tests
 
         internal static TypeFactory CadlTypeFactory => new TypeFactory(null);
 
-        internal static readonly InputModelType ElementModelType = new InputModelType("SimpleModel", "Cadl.TestServer.ModelCollectionProperties.Models", null, "public",
-            "Simple model that will appear in a collection.", InputModelTypeUsage.RoundTrip,
-            new List<InputModelProperty> { RequiredStringProperty, RequiredIntProperty },
-            null, new List<InputModelType>(), null, null, null, InputTypeSerialization.Default);
+        internal static readonly InputModelType ElementModelType = new("SimpleModel", "Cadl.TestServer.ModelCollectionProperties.Models", null, "public", "Simple model that will appear in a collection.", InputModelTypeUsage.RoundTrip, new[]{ RequiredStringProperty, RequiredIntProperty }, null, null, null, null, InputTypeSerialization.Default);
 
         [OneTimeSetUp]
         public void init()

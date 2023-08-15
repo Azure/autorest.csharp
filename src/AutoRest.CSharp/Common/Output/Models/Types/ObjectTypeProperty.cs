@@ -144,7 +144,7 @@ namespace AutoRest.CSharp.Output.Models.Types
         public InputModelProperty? InputModelProperty { get; }
         private string? _parameterDescription;
         private string _baseParameterDescription; // inherited type "FlattenedObjectTypeProperty" need to pass this value into the base constructor so that some appended information will not be appended again in the flattened property
-        public string ParameterDescription => _parameterDescription ??= _baseParameterDescription + CreateExtraPropertyDiscriminatorSummary(ValueType);
+        public string ParameterDescription => _parameterDescription ??= _baseParameterDescription + BuilderHelpers.CreateDerivedTypesDescription(ValueType);
 
         /// <summary>
         /// Gets or sets the value indicating whether nullable type of this property represents optionality of the value.
@@ -195,7 +195,7 @@ namespace AutoRest.CSharp.Output.Models.Types
 
         private FormattableString CreatePropertyDescription()
         {
-            var propertyDescription = Description + CreateExtraPropertyDiscriminatorSummary(ValueType);
+            var propertyDescription = Description + BuilderHelpers.CreateDerivedTypesDescription(ValueType);
             var binaryDataExtraDescription = CreateBinaryDataExtraDescription(Declaration.Type);
             if (!string.IsNullOrWhiteSpace(propertyDescription))
             {
@@ -278,35 +278,6 @@ Examples:
 </list>
 </para>";
             }
-        }
-
-        private static string CreateExtraPropertyDiscriminatorSummary(CSharpType valueType)
-        {
-            string updatedDescription = string.Empty;
-            if (valueType.IsFrameworkType)
-            {
-                if (TypeFactory.IsList(valueType))
-                {
-                    if (!valueType.Arguments.First().IsFrameworkType && valueType.Arguments.First().Implementation is ObjectType objectType)
-                    {
-                        updatedDescription = objectType.CreateExtraDescriptionWithDiscriminator();
-                    }
-                }
-                else if (TypeFactory.IsDictionary(valueType))
-                {
-                    var objectTypes = valueType.Arguments.Where(arg => arg is { IsFrameworkType: false, Implementation: ObjectType });
-                    if (objectTypes.Any())
-                    {
-                        var subDescription = objectTypes.Select(o => ((ObjectType)o.Implementation).CreateExtraDescriptionWithDiscriminator());
-                        updatedDescription = string.Join("", subDescription);
-                    }
-                }
-            }
-            else if (valueType.Implementation is ObjectType objectType)
-            {
-                updatedDescription = objectType.CreateExtraDescriptionWithDiscriminator();
-            }
-            return updatedDescription;
         }
 
         public override string ToString()

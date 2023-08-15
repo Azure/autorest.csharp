@@ -48,7 +48,6 @@ namespace AutoRest.CSharp.Mgmt.Output.Models
                 InputModelTypeUsage.Input,
                 properties,
                 null,
-                Array.Empty<InputModelType>(),
                 null,
                 null,
                 null,
@@ -56,7 +55,7 @@ namespace AutoRest.CSharp.Mgmt.Output.Models
             {
                 IsPropertyBag = true
             };
-            return new ModelTypeProvider(propertyBagModel, defaultNamespace, MgmtContext.Context.SourceInputModel, MgmtContext.Context.Library.TypeFactory);
+            return new ModelTypeProvider(propertyBagModel, defaultNamespace, MgmtContext.Context.SourceInputModel, MgmtContext.Context.Library.TypeFactory, Array.Empty<InputModelType>());
         }
 
         protected override bool EnsureShouldValidateParameter()

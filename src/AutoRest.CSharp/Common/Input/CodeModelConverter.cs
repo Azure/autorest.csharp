@@ -19,7 +19,6 @@ namespace AutoRest.CSharp.Common.Input
         private readonly Dictionary<RequestParameter, Func<InputParameter>> _parametersCache;
         private readonly Dictionary<ObjectSchema, InputModelType> _modelsCache;
         private readonly Dictionary<ObjectSchema, List<InputModelProperty>> _modelPropertiesCache;
-        private readonly Dictionary<ObjectSchema, List<InputModelType>> _derivedModelsCache;
         private readonly Dictionary<InputOperation, Operation> _inputOperationToOperationMap;
 
         public CodeModelConverter(CodeModel codeModel, SchemaUsageProvider schemaUsages)
@@ -30,7 +29,6 @@ namespace AutoRest.CSharp.Common.Input
             _parametersCache = new Dictionary<RequestParameter, Func<InputParameter>>();
             _modelsCache = new Dictionary<ObjectSchema, InputModelType>();
             _modelPropertiesCache = new Dictionary<ObjectSchema, List<InputModelProperty>>();
-            _derivedModelsCache = new Dictionary<ObjectSchema, List<InputModelType>>();
             _inputOperationToOperationMap = new Dictionary<InputOperation, Operation>();
         }
 
@@ -225,15 +223,6 @@ namespace AutoRest.CSharp.Common.Input
                 properties.AddRange(schema.Properties.Select(CreateProperty));
             }
 
-            foreach (var schema in schemas)
-            {
-                var derived = schema.Children?.Immediate.OfType<ObjectSchema>().Select(s => _modelsCache[s]);
-                if (derived != null)
-                {
-                    _derivedModelsCache[schema].AddRange(derived);
-                }
-            }
-
             return schemas.Select(s => _modelsCache[s]).ToList();
         }
 
@@ -264,7 +253,6 @@ namespace AutoRest.CSharp.Common.Input
                 BaseModel: schema.Parents?.Immediate.FirstOrDefault() is ObjectSchema parent
                     ? GetOrCreateModel(parent)
                     : null,
-                DerivedModels: derived,
                 DiscriminatorValue: schema.DiscriminatorValue,
                 DiscriminatorPropertyName: schema.Discriminator?.Property.SerializedName,
                 InheritedDictionaryType: schema.Parents?.Immediate.OfType<DictionarySchema>().FirstOrDefault() is {} dictionarySchema
@@ -274,7 +262,6 @@ namespace AutoRest.CSharp.Common.Input
 
             _modelsCache[schema] = model;
             _modelPropertiesCache[schema] = properties;
-            _derivedModelsCache[schema] = derived;
 
             return model;
         }

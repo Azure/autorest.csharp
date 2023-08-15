@@ -260,6 +260,21 @@ namespace AutoRest.CSharp.Output.Builders
             return newType.WithNullable(defaultType.IsNullable);
         }
 
+        public static string CreateDerivedTypesDescription(CSharpType type)
+        {
+            if (TypeFactory.IsCollectionType(type))
+            {
+                type = TypeFactory.GetElementType(type);
+            }
+
+            if (!type.IsFrameworkType && type.Implementation is ObjectType objectType)
+            {
+                return objectType.CreateExtraDescriptionWithDiscriminator();
+            }
+
+            return string.Empty;
+        }
+
         public static string CreateDescription(this Schema schema)
         {
             return string.IsNullOrWhiteSpace(schema.Language.Default.Description) ?

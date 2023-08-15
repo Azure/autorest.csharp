@@ -152,13 +152,13 @@ namespace NamedTypeSymbolExtensionsTests
         public void IsSameType_ModelTypes()
         {
             // Different namespace
-            var input = new InputModelType("MetadataModel", "", null, null, null, InputModelTypeUsage.RoundTrip, null, null, null, null, null, null, InputModelSerializationFormat.Default);
-            CSharpType modelType = new CSharpType(new ModelTypeProvider(input, "", null, new TypeFactory(null)));
+            var input = new InputModelType("MetadataModel", "", null, null, null, InputModelTypeUsage.RoundTrip, Array.Empty<InputModelProperty>(), null, null, null, null, InputTypeSerialization.Default);
+            CSharpType modelType = new CSharpType(new ModelTypeProvider(input, "", null, new TypeFactory(null), Array.Empty<InputModelType>()));
             Assert.IsFalse(_modelSymbol.IsSameType(modelType));
 
             // Same namespace
-            input = new InputModelType("MetadataModel", "NamedTypeSymbolExtensionsTests", null, null, null, InputModelTypeUsage.RoundTrip, null, null, null, null, null, null, InputModelSerializationFormat.Default);
-            modelType = new CSharpType(new ModelTypeProvider(input, "NamedTypeSymbolExtensionsTests", null, new TypeFactory(null)));
+            input = new InputModelType("MetadataModel", "NamedTypeSymbolExtensionsTests", null, null, null, InputModelTypeUsage.RoundTrip, Array.Empty<InputModelProperty>(), null, null, null, null, InputTypeSerialization.Default);
+            modelType = new CSharpType(new ModelTypeProvider(input, "NamedTypeSymbolExtensionsTests", null, new TypeFactory(null), Array.Empty<InputModelType>()));
             Assert.IsTrue(_modelSymbol.IsSameType(modelType));
         }
     }

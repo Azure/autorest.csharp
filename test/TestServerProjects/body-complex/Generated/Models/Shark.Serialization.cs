@@ -63,7 +63,7 @@ namespace body_complex.Models
             }
             Optional<int> age = default;
             DateTimeOffset birthday = default;
-            string fishtype = "shark";
+            string fishtype = default;
             Optional<string> species = default;
             float length = default;
             Optional<IList<Fish>> siblings = default;

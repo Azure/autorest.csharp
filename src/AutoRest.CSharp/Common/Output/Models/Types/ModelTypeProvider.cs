@@ -32,7 +32,7 @@ namespace AutoRest.CSharp.Output.Models.Types
         private ConstructorSignature? _serializationConstructor;
         private readonly InputModelType _inputModel;
         private readonly TypeFactory _typeFactory;
-        private readonly InputModelType[]? _derivedTypes;
+        private readonly IReadOnlyList<InputModelType> _derivedTypes;
         private readonly ObjectType? _defaultDerivedType;
         private readonly ModelTypeMapping? _modelTypeMapping;
         private readonly InputTypeSerialization _inputTypeSerialization;
@@ -54,7 +54,7 @@ namespace AutoRest.CSharp.Output.Models.Types
 
         public bool IsPropertyBag => _inputModel.IsPropertyBag;
 
-        public ModelTypeProvider(InputModelType inputModel, string defaultNamespace, SourceInputModel? sourceInputModel, TypeFactory typeFactory, InputModelType[]? derivedTypes = null, ObjectType? defaultDerivedType = null)
+        public ModelTypeProvider(InputModelType inputModel, string defaultNamespace, SourceInputModel? sourceInputModel, TypeFactory typeFactory, IReadOnlyList<InputModelType> derivedTypes, ObjectType? defaultDerivedType = null)
             : base(defaultNamespace, sourceInputModel)
         {
             _typeFactory = typeFactory;
@@ -179,7 +179,7 @@ namespace AutoRest.CSharp.Output.Models.Types
                 parametersToPassToBase = ctor.Signature.Parameters;
                 fullParameterList.AddRange(parametersToPassToBase);
             }
-            fullParameterList.AddRange(parameters);
+            fullParameterList.AddRange(parameters.Select(p => p with {Description = p.Description + BuilderHelpers.CreateDerivedTypesDescription(p.Type)}));
         }
 
         protected override ObjectTypeConstructor BuildInitializationConstructor()
@@ -211,7 +211,7 @@ namespace AutoRest.CSharp.Output.Models.Types
         {
             List<ObjectPropertyInitializer> defaultCtorInitializers = new List<ObjectPropertyInitializer>();
 
-            if (includeDiscriminator && Discriminator is not null && Discriminator.Value is { } discriminatorValue && !_inputModel.IsUnknownDiscriminatorModel)
+            if (includeDiscriminator && Discriminator?.Value is { } discriminatorValue && !_inputModel.IsUnknownDiscriminatorModel)
             {
                 defaultCtorInitializers.Add(new ObjectPropertyInitializer(Discriminator.Property, discriminatorValue));
             }
@@ -223,19 +223,12 @@ namespace AutoRest.CSharp.Output.Models.Types
             foreach (var property in Properties)
             {
                 ReferenceOrConstant? initializationValue = null;
-                Constant? defaultInitializationValue = null;
 
                 var propertyType = property.Declaration.Type;
                 if (parameterMap.TryGetValue(property.Declaration.Name.ToVariableName(), out var parameter) || IsStruct)
                 {
                     // For structs all properties become required
                     Constant? defaultParameterValue = null;
-                    if (property.SchemaProperty?.ClientDefaultValue is { } defaultValueObject)
-                    {
-                        defaultParameterValue = BuilderHelpers.ParseConstant(defaultValueObject, propertyType);
-                        defaultInitializationValue = defaultParameterValue;
-                    }
-
                     var inputType = parameter?.Type ?? TypeFactory.GetInputType(propertyType);
                     if (defaultParameterValue != null && !TypeFactory.CanBeInitializedInline(property.ValueType, defaultParameterValue))
                     {
@@ -243,7 +236,7 @@ namespace AutoRest.CSharp.Output.Models.Types
                         defaultParameterValue = Constant.Default(inputType);
                     }
 
-                    var validation = property.SchemaProperty?.Nullable != true && !inputType.IsValueType ? Validation.AssertNotNull : Validation.None;
+                    var validation = parameter?.Validation ?? Validation.None;
                     var defaultCtorParameter = new Parameter(property.Declaration.Name.ToVariableName(), property.ParameterDescription, inputType, defaultParameterValue, validation, null);
 
                     initializationValue = defaultCtorParameter;
@@ -258,7 +251,15 @@ namespace AutoRest.CSharp.Output.Models.Types
 
                 if (initializationValue != null)
                 {
-                    defaultCtorInitializers.Add(new ObjectPropertyInitializer(property, initializationValue.Value, defaultInitializationValue));
+                    defaultCtorInitializers.Add(new ObjectPropertyInitializer(property, initializationValue.Value));
+                }
+            }
+
+            if (Configuration.Generation1ConvenienceClient && !includeDiscriminator)
+            {
+                if (Discriminator is { } discriminator && defaultCtorInitializers.All(i => i.Property != discriminator.Property) && parameterMap.TryGetValue(discriminator.Property.Declaration.Name.ToVariableName(), out var discriminatorParameter))
+                {
+                    defaultCtorInitializers.Add(new ObjectPropertyInitializer(discriminator.Property, discriminatorParameter, discriminator.Value));
                 }
             }
 
@@ -278,7 +279,11 @@ namespace AutoRest.CSharp.Output.Models.Types
 
         protected override IEnumerable<ObjectTypeConstructor> BuildConstructors()
         {
-            yield return InitializationConstructor;
+            if (!_inputModel.IsUnknownDiscriminatorModel)
+            {
+                yield return InitializationConstructor;
+            }
+
             if (SerializationConstructor != InitializationConstructor && (!Configuration.Generation1ConvenienceClient || IncludeDeserializer))
             {
                 yield return SerializationConstructor;
@@ -410,13 +415,6 @@ namespace AutoRest.CSharp.Output.Models.Types
 
         protected override ObjectTypeDiscriminator? BuildDiscriminator()
         {
-            Constant? value = null;
-
-            //only load implementations for the base type
-            var implementations = _derivedTypes is not null
-                ? _derivedTypes.Select(child => new ObjectTypeDiscriminatorImplementation(child.DiscriminatorValue!, _typeFactory.CreateType(child))).ToArray()
-                : Array.Empty<ObjectTypeDiscriminatorImplementation>();
-
             var parentDiscriminator = GetBaseObjectType()?.Discriminator;
             var property = Properties.FirstOrDefault(p => p.InputModelProperty is not null && p.InputModelProperty.IsDiscriminator)
                 ?? parentDiscriminator?.Property;
@@ -428,6 +426,14 @@ namespace AutoRest.CSharp.Output.Models.Types
             {
                 return null;
             }
+
+            Constant? value = null;
+
+            //only load implementations for the base type
+            var implementations = Configuration.Generation1ConvenienceClient
+                ? GetDerivedTypes(_derivedTypes).OrderBy(i => i.Key).ToArray()
+                : GetDerivedTypes(_derivedTypes).ToArray();
+
 
             if (_inputModel.DiscriminatorValue != null)
             {
@@ -441,6 +447,25 @@ namespace AutoRest.CSharp.Output.Models.Types
                 value,
                 _defaultDerivedType!
             );
+        }
+
+        private IEnumerable<ObjectTypeDiscriminatorImplementation> GetDerivedTypes(IReadOnlyList<InputModelType> derivedInputTypes)
+        {
+            if (derivedInputTypes == null)
+            {
+                yield break;
+            }
+
+            foreach (var derivedInputType in derivedInputTypes)
+            {
+                var derivedType = (ModelTypeProvider)_typeFactory.CreateType(derivedInputType).Implementation;
+                foreach (var discriminatorImplementation in GetDerivedTypes(derivedType._derivedTypes))
+                {
+                    yield return discriminatorImplementation;
+                }
+
+                yield return new ObjectTypeDiscriminatorImplementation(derivedInputType.DiscriminatorValue!, derivedType.Type);
+            }
         }
     }
 }

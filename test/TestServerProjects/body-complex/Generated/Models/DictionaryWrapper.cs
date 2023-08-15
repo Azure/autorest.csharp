@@ -27,6 +27,6 @@ namespace body_complex.Models
         }
 
         /// <summary> Dictionary of &lt;string&gt;. </summary>
-        public IDictionary<string, string> DefaultProgram { get; set; }
+        public IDictionary<string, string> DefaultProgram { get; }
     }
 }

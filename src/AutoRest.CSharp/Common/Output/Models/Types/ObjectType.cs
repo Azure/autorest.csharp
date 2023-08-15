@@ -90,6 +90,7 @@ namespace AutoRest.CSharp.Output.Models.Types
                 {
                     childrenList.Add($"<see cref=\"{implementation.Type.Implementation.Type.Name}\"/>");
                 }
+
                 return $"{System.Environment.NewLine}{DiscriminatorDescFixedPart[0]}<see cref=\"{Type.Name}\"/>{DiscriminatorDescFixedPart[1]}" +
                     $"{System.Environment.NewLine}{DiscriminatorDescFixedPart[2]}{FormattableStringHelpers.Join(childrenList, ", ", " and ")}.";
             }

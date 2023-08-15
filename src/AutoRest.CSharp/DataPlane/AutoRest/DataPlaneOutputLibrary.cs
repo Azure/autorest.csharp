@@ -42,7 +42,6 @@ namespace AutoRest.CSharp.Output.Models.Types
         {
             var schemaUsageProvider = new SchemaUsageProvider(codeModel);
             SchemaUsageTransformer.Transform(codeModel);
-            DefaultDerivedSchema.AddDefaultDerivedSchemas(codeModel);
             ConstantSchemaTransformer.Transform(codeModel);
 
             _typeFactory = new TypeFactory(this);

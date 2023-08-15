@@ -1092,6 +1092,6 @@ namespace AutoRest.CSharp.Generation.Writers
         }
 
         private static InputModelType GetConcreteChildModel(InputModelType model)
-            => model.DerivedModels.Any() ? model.DerivedModels[0] : model;
+            => model;//.DerivedModels.Any() ? model.DerivedModels[0] : model;
     }
 }
