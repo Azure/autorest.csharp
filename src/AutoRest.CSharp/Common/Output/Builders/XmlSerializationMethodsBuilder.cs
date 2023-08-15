@@ -4,12 +4,14 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Xml;
 using System.Xml.Linq;
 using AutoRest.CSharp.Common.Output.Models;
 using AutoRest.CSharp.Common.Output.Models.KnownValueExpressions;
 using AutoRest.CSharp.Common.Output.Models.Statements;
 using AutoRest.CSharp.Common.Output.Models.Types;
 using AutoRest.CSharp.Common.Output.Models.ValueExpressions;
+using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Output.Models.Serialization;
@@ -26,11 +28,11 @@ namespace AutoRest.CSharp.Common.Output.Builders
     {
         public static Method BuildXmlSerializableWrite(XmlObjectSerialization serialization)
         {
-            var xmlWriter = new Parameter("writer", null, typeof(IXmlSerializable), null, Validation.None, null);
+            var xmlWriter = new Parameter("writer", null, typeof(XmlWriter), null, Validation.None, null);
             var nameHint = new Parameter("nameHint", null, typeof(string), null, Validation.None, null);
             return new Method
             (
-                new MethodSignature(nameof(IUtf8JsonSerializable.Write), null, null, MethodSignatureModifiers.None, null, null, new[]{xmlWriter, nameHint}, ExplicitInterface: typeof(IUtf8JsonSerializable)),
+                new MethodSignature(nameof(IXmlSerializable.Write), null, null, MethodSignatureModifiers.None, null, null, new[]{xmlWriter, nameHint}, ExplicitInterface: typeof(IXmlSerializable)),
                 SerializeExpression(new XmlWriterExpression(xmlWriter), serialization, nameHint).AsStatement()
             );
         }
@@ -69,12 +71,12 @@ namespace AutoRest.CSharp.Common.Output.Builders
 
         private static MethodBodyStatement WrapInNullCheck(PropertySerialization serialization, MethodBodyStatement statement)
         {
-            if (serialization.SerializedType is null || !serialization.SerializedType.IsNullable)
+            if (serialization.SerializedType is {IsNullable: true} && TypeFactory.IsCollectionType(serialization.SerializedType))
             {
-                return statement;
+                return new IfElseStatement(NotEqual(serialization.Value, Null), statement, null);
             }
 
-            return new IfElseStatement(NotEqual(serialization.Value, Null), statement, null);
+            return statement;
         }
 
         public static MethodBodyStatement SerializeExpression(XmlWriterExpression xmlWriter, XmlElementSerialization serialization, ValueExpression expression)

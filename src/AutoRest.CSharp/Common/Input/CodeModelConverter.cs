@@ -319,9 +319,10 @@ namespace AutoRest.CSharp.Common.Input
                 }
             }
 
+            var xmlFormat = objectSchema.Serialization?.Xml;
             var json = formats.Contains(KnownMediaType.Json);
-            var xml = formats.Contains(KnownMediaType.Xml) && objectSchema.Serialization?.Xml is {} xmlFormat
-                ? new InputTypeXmlSerialization(xmlFormat.Name ?? objectSchema.Language.Default.Name, xmlFormat.Attribute == true, xmlFormat.Text == true)
+            var xml = formats.Contains(KnownMediaType.Xml)
+                ? new InputTypeXmlSerialization(xmlFormat?.Name ?? objectSchema.Language.Default.Name, xmlFormat?.Attribute == true, xmlFormat?.Text == true)
                 : null;
 
             return new InputTypeSerialization(json, xml);
@@ -437,7 +438,7 @@ namespace AutoRest.CSharp.Common.Input
             ChoiceSchema choiceSchema => CreateEnumType(choiceSchema, choiceSchema.ChoiceType, choiceSchema.Choices, true),
             SealedChoiceSchema choiceSchema => CreateEnumType(choiceSchema, choiceSchema.ChoiceType, choiceSchema.Choices, false),
 
-            ArraySchema array when !Configuration.AzureArm => new InputListType(array.Name, CreateType(array.ElementType, modelsCache, array.NullableItems ?? false)),
+            ArraySchema array when !Configuration.AzureArm => new InputListType(array.Name, CreateType(array.ElementType, modelsCache, array.NullableItems ?? false), IsXmlSerializationWrapped: array.Serialization?.Xml?.Wrapped ?? false),
             DictionarySchema dictionary when !Configuration.AzureArm => new InputDictionaryType(dictionary.Name, InputPrimitiveType.String, CreateType(dictionary.ElementType, modelsCache, dictionary.NullableItems ?? false)),
             ObjectSchema objectSchema when !Configuration.AzureArm && modelsCache != null => modelsCache[objectSchema],
 
