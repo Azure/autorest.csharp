@@ -114,7 +114,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             }
 
             var actualBase = model;
-            while (actualBase.BaseModel is not null)
+            while (actualBase.BaseModel?.DiscriminatorPropertyName is not null)
             {
                 actualBase = actualBase.BaseModel;
             }

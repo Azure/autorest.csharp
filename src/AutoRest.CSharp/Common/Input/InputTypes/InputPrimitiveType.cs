@@ -1,6 +1,8 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
+using System;
+
 namespace AutoRest.CSharp.Common.Input;
 
 internal record InputPrimitiveType(InputTypeKind Kind, bool IsNullable = false) : InputType(Kind.ToString(), IsNullable)
@@ -39,3 +41,5 @@ internal record InputPrimitiveType(InputTypeKind Kind, bool IsNullable = false) 
 
     public bool IsNumber => Kind is InputTypeKind.Int32 or InputTypeKind.Int64 or InputTypeKind.Float32 or InputTypeKind.Float64 or InputTypeKind.Float128;
 }
+
+internal record InputSystemType(Type Type, InputType ElementType, bool IsNullable) : InputType(Type.Name, IsNullable);

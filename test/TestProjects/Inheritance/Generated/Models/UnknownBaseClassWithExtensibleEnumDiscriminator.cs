@@ -7,7 +7,7 @@
 
 namespace Inheritance.Models
 {
-    /// <summary> The UnknownBaseClassWithExtensibleEnumDiscriminator. </summary>
+    /// <summary> Unknown version of BaseClassWithExtensibleEnumDiscriminator. </summary>
     internal partial class UnknownBaseClassWithExtensibleEnumDiscriminator : BaseClassWithExtensibleEnumDiscriminator
     {
         /// <summary> Initializes a new instance of UnknownBaseClassWithExtensibleEnumDiscriminator. </summary>

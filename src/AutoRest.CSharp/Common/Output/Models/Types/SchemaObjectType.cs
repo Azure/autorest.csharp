@@ -321,9 +321,7 @@ namespace AutoRest.CSharp.Output.Models.Types
 
         public override bool IncludeConverter => _usage.HasFlag(SchemaTypeUsage.Converter);
 
-        protected bool SkipInitializerConstructor => ObjectSchema != null &&
-            ObjectSchema.Extensions != null &&
-            ObjectSchema.Extensions.SkipInitCtor;
+        protected bool SkipInitializerConstructor => ObjectSchema.Extensions is { SkipInitCtor: true };
         protected bool SkipSerializerConstructor => !IncludeDeserializer;
         public CSharpType? ImplementsDictionaryType => _implementsDictionaryType ??= CreateInheritedDictionaryType();
         protected override IEnumerable<ObjectTypeConstructor> BuildConstructors()

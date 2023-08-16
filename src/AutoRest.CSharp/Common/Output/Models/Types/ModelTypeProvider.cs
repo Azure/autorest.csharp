@@ -41,7 +41,7 @@ namespace AutoRest.CSharp.Output.Models.Types
         protected override string DefaultName { get; }
         protected override string DefaultAccessibility { get; }
         protected override TypeKind TypeKind { get; }
-        public override bool IncludeConverter => false;
+        public override bool IncludeConverter => _inputModel.Serialization.IncludeConverter;
         protected override bool IsAbstract => !Configuration.SuppressAbstractBaseClasses.Contains(DefaultName) && _inputModel.DiscriminatorPropertyName is not null && _inputModel.BaseModel is null;
 
         public ModelTypeProviderFields Fields => _fields ??= new ModelTypeProviderFields(_inputModel, _typeFactory, _modelTypeMapping, IsStruct);

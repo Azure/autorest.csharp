@@ -3,9 +3,9 @@
 
 namespace AutoRest.CSharp.Common.Input
 {
-    internal record InputTypeSerialization(bool Json, InputTypeXmlSerialization? Xml)
+    internal record InputTypeSerialization(bool Json, InputTypeXmlSerialization? Xml, bool IncludeConverter)
     {
-        public static InputTypeSerialization Default { get; } = new(true, null);
+        public static InputTypeSerialization Default { get; } = new(true, null, false);
     }
 
     internal record InputTypeXmlSerialization(string Name, bool IsAttribute, bool IsContent);
