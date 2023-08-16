@@ -1044,6 +1044,202 @@ namespace ConfidentLevelsInTsp
             }
         }
 
+        /// <summary> This is an operation with nothing special. </summary>
+        /// <param name="input"> The DerivedModel to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="input"/> is null. </exception>
+        /// <include file="Docs/ConfidentLevelsInTspClient.xml" path="doc/members/member[@name='UseDerivedModelAsync(DerivedModel,CancellationToken)']/*" />
+        internal virtual async Task<Response> UseDerivedModelAsync(DerivedModel input, CancellationToken cancellationToken = default)
+        {
+            Argument.AssertNotNull(input, nameof(input));
+
+            RequestContext context = FromCancellationToken(cancellationToken);
+            Response response = await UseDerivedModelAsync(input.ToRequestContent(), context).ConfigureAwait(false);
+            return response;
+        }
+
+        /// <summary> This is an operation with nothing special. </summary>
+        /// <param name="input"> The DerivedModel to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="input"/> is null. </exception>
+        /// <include file="Docs/ConfidentLevelsInTspClient.xml" path="doc/members/member[@name='UseDerivedModel(DerivedModel,CancellationToken)']/*" />
+        internal virtual Response UseDerivedModel(DerivedModel input, CancellationToken cancellationToken = default)
+        {
+            Argument.AssertNotNull(input, nameof(input));
+
+            RequestContext context = FromCancellationToken(cancellationToken);
+            Response response = UseDerivedModel(input.ToRequestContent(), context);
+            return response;
+        }
+
+        // The convenience method of this operation is made internal because this operation directly or indirectly uses a low confident type, for instance, unions, literal types with number values, etc.
+        /// <summary>
+        /// [Protocol Method] This is an operation with nothing special
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
+        /// <param name="content"> The content to send as the body of the request. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <include file="Docs/ConfidentLevelsInTspClient.xml" path="doc/members/member[@name='UseDerivedModelAsync(RequestContent,RequestContext)']/*" />
+        public virtual async Task<Response> UseDerivedModelAsync(RequestContent content, RequestContext context = null)
+        {
+            Argument.AssertNotNull(content, nameof(content));
+
+            using var scope = ClientDiagnostics.CreateScope("ConfidentLevelsInTspClient.UseDerivedModel");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateUseDerivedModelRequest(content, context);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        // The convenience method of this operation is made internal because this operation directly or indirectly uses a low confident type, for instance, unions, literal types with number values, etc.
+        /// <summary>
+        /// [Protocol Method] This is an operation with nothing special
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
+        /// <param name="content"> The content to send as the body of the request. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <include file="Docs/ConfidentLevelsInTspClient.xml" path="doc/members/member[@name='UseDerivedModel(RequestContent,RequestContext)']/*" />
+        public virtual Response UseDerivedModel(RequestContent content, RequestContext context = null)
+        {
+            Argument.AssertNotNull(content, nameof(content));
+
+            using var scope = ClientDiagnostics.CreateScope("ConfidentLevelsInTspClient.UseDerivedModel");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateUseDerivedModelRequest(content, context);
+                return _pipeline.ProcessMessage(message, context);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary> This is an operation that uses a derived model with unions. </summary>
+        /// <param name="input"> The DerivedModelWithUnion to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="input"/> is null. </exception>
+        /// <include file="Docs/ConfidentLevelsInTspClient.xml" path="doc/members/member[@name='UseDerivedModelWithUnionAsync(DerivedModelWithUnion,CancellationToken)']/*" />
+        internal virtual async Task<Response> UseDerivedModelWithUnionAsync(DerivedModelWithUnion input, CancellationToken cancellationToken = default)
+        {
+            Argument.AssertNotNull(input, nameof(input));
+
+            RequestContext context = FromCancellationToken(cancellationToken);
+            Response response = await UseDerivedModelWithUnionAsync(input.ToRequestContent(), context).ConfigureAwait(false);
+            return response;
+        }
+
+        /// <summary> This is an operation that uses a derived model with unions. </summary>
+        /// <param name="input"> The DerivedModelWithUnion to use. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="input"/> is null. </exception>
+        /// <include file="Docs/ConfidentLevelsInTspClient.xml" path="doc/members/member[@name='UseDerivedModelWithUnion(DerivedModelWithUnion,CancellationToken)']/*" />
+        internal virtual Response UseDerivedModelWithUnion(DerivedModelWithUnion input, CancellationToken cancellationToken = default)
+        {
+            Argument.AssertNotNull(input, nameof(input));
+
+            RequestContext context = FromCancellationToken(cancellationToken);
+            Response response = UseDerivedModelWithUnion(input.ToRequestContent(), context);
+            return response;
+        }
+
+        // The convenience method of this operation is made internal because this operation directly or indirectly uses a low confident type, for instance, unions, literal types with number values, etc.
+        /// <summary>
+        /// [Protocol Method] This is an operation that uses a derived model with unions
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
+        /// <param name="content"> The content to send as the body of the request. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <include file="Docs/ConfidentLevelsInTspClient.xml" path="doc/members/member[@name='UseDerivedModelWithUnionAsync(RequestContent,RequestContext)']/*" />
+        public virtual async Task<Response> UseDerivedModelWithUnionAsync(RequestContent content, RequestContext context = null)
+        {
+            Argument.AssertNotNull(content, nameof(content));
+
+            using var scope = ClientDiagnostics.CreateScope("ConfidentLevelsInTspClient.UseDerivedModelWithUnion");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateUseDerivedModelWithUnionRequest(content, context);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        // The convenience method of this operation is made internal because this operation directly or indirectly uses a low confident type, for instance, unions, literal types with number values, etc.
+        /// <summary>
+        /// [Protocol Method] This is an operation that uses a derived model with unions
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
+        /// <param name="content"> The content to send as the body of the request. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <include file="Docs/ConfidentLevelsInTspClient.xml" path="doc/members/member[@name='UseDerivedModelWithUnion(RequestContent,RequestContext)']/*" />
+        public virtual Response UseDerivedModelWithUnion(RequestContent content, RequestContext context = null)
+        {
+            Argument.AssertNotNull(content, nameof(content));
+
+            using var scope = ClientDiagnostics.CreateScope("ConfidentLevelsInTspClient.UseDerivedModelWithUnion");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateUseDerivedModelWithUnionRequest(content, context);
+                return _pipeline.ProcessMessage(message, context);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
         internal HttpMessage CreateUnionInRequestPropertyRequest(RequestContent content, RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier204);
@@ -1196,6 +1392,38 @@ namespace ConfidentLevelsInTsp
             var uri = new RawRequestUriBuilder();
             uri.Reset(_endpoint);
             uri.AppendPath("/unions/properties/requests/discriminator/pollutedDerived", false);
+            uri.AppendQuery("api-version", _apiVersion, true);
+            request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
+            request.Headers.Add("Content-Type", "application/json");
+            request.Content = content;
+            return message;
+        }
+
+        internal HttpMessage CreateUseDerivedModelRequest(RequestContent content, RequestContext context)
+        {
+            var message = _pipeline.CreateMessage(context, ResponseClassifier204);
+            var request = message.Request;
+            request.Method = RequestMethod.Post;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/confidents/derived", false);
+            uri.AppendQuery("api-version", _apiVersion, true);
+            request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
+            request.Headers.Add("Content-Type", "application/json");
+            request.Content = content;
+            return message;
+        }
+
+        internal HttpMessage CreateUseDerivedModelWithUnionRequest(RequestContent content, RequestContext context)
+        {
+            var message = _pipeline.CreateMessage(context, ResponseClassifier204);
+            var request = message.Request;
+            request.Method = RequestMethod.Post;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/unions/properties/requests/derived", false);
             uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");

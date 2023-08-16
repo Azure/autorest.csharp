@@ -178,3 +178,34 @@ op pollutedDerivedMethod(@body input: PollutedDog): PollutedDog;
 @route("/unions/properties/requests/discriminator/pollutedDerived")
 @convenientAPI(true)
 op unpollutedDerivedMethod(@body input: UnpollutedCat): UnpollutedCat;
+
+@doc("The base model")
+model BaseModel {
+    @doc("The name")
+    name: string;
+
+    @doc("The size")
+    size?: float64;
+}
+
+@doc("The derived model")
+model DerivedModel extends BaseModel {
+    @doc("The age")
+    age?: int32;
+}
+
+@doc("This is an operation with nothing special")
+@route("/confidents/derived")
+@convenientAPI(true)
+op useDerivedModel(@body input: DerivedModel): void; // this should be confident, but the DerivedModelWithUnion is not confident and the whole tree will be polluted
+
+@doc("This is a derived model with unions")
+model DerivedModelWithUnion extends BaseModel {
+    @doc("The union property")
+    unionProperty: string | int32[];
+}
+
+@doc("This is an operation that uses a derived model with unions")
+@route("/unions/properties/requests/derived")
+@convenientAPI(true)
+op useDerivedModelWithUnion(@body input: DerivedModelWithUnion): void;

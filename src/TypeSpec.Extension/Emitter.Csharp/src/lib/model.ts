@@ -523,7 +523,6 @@ export function getInputType(
         if (!model) {
             const baseModel = getInputModelBaseType(m.baseModel);
             const properties: InputModelProperty[] = [];
-            const derivedModels: InputModelType[] = [];
 
             const discriminator = getDiscriminator(program, m);
             model = {
@@ -537,8 +536,7 @@ export function getInputType(
                 DiscriminatorValue: getDiscriminatorValue(m, baseModel),
                 BaseModel: baseModel,
                 Usage: Usage.None,
-                Properties: properties,
-                DerivedModels: derivedModels // DerivedModels should be the last assigned to model
+                Properties: properties, // DerivedModels should be the last assigned to model, if no derived models, properties should be the last
             } as InputModelType;
 
             models.set(name, model);
@@ -546,9 +544,9 @@ export function getInputType(
             // Resolve properties after model is added to the map to resolve possible circular dependencies
             addModelProperties(model, m.properties, properties);
 
-            // Temporary part. Derived types may not be referenced directly by any operation
-            // We should be able to remove it when https://github.com/Azure/typespec-azure/issues/1733 is closed
-            if (model.DiscriminatorPropertyName && m.derivedModels) {
+            // add the derived models into the list
+            if (m.derivedModels) {
+                model.DerivedModels = [];
                 for (const dm of m.derivedModels) {
                     const derivedModel = getInputType(
                         context,
@@ -556,7 +554,7 @@ export function getInputType(
                         models,
                         enums
                     );
-                    derivedModels.push(derivedModel as InputModelType);
+                    model.DerivedModels.push(derivedModel as InputModelType);
                 }
             }
         }

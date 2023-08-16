@@ -95,7 +95,7 @@ namespace AutoRest.CSharp.Output.Models
             }
 
             // the low confident part in derived types will pollute it back to the base class - if any derived class has low confident part (like union types), we will set the base as "not confident", but other derived types are not affected.
-            if (type.DiscriminatorPropertyName != null && type.DerivedModels.Count > 0)
+            if (type.DerivedModels.Count > 0)
             {
                 foreach (var dm in type.DerivedModels)
                 {

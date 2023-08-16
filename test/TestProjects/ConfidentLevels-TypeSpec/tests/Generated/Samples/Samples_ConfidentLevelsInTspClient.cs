@@ -816,5 +816,143 @@ namespace ConfidentLevelsInTsp.Samples
             Console.WriteLine(result.GetProperty("kind").ToString());
             Console.WriteLine(result.GetProperty("name").ToString());
         }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_UseDerivedModel()
+        {
+            var endpoint = new Uri("<https://my-service.azure.com>");
+            var client = new ConfidentLevelsInTspClient(endpoint);
+
+            var data = new
+            {
+                name = "<name>",
+            };
+
+            Response response = client.UseDerivedModel(RequestContent.Create(data));
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_UseDerivedModel_AllParameters()
+        {
+            var endpoint = new Uri("<https://my-service.azure.com>");
+            var client = new ConfidentLevelsInTspClient(endpoint);
+
+            var data = new
+            {
+                age = 1234,
+                name = "<name>",
+                size = 123.45d,
+            };
+
+            Response response = client.UseDerivedModel(RequestContent.Create(data));
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_UseDerivedModel_Async()
+        {
+            var endpoint = new Uri("<https://my-service.azure.com>");
+            var client = new ConfidentLevelsInTspClient(endpoint);
+
+            var data = new
+            {
+                name = "<name>",
+            };
+
+            Response response = await client.UseDerivedModelAsync(RequestContent.Create(data));
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_UseDerivedModel_AllParameters_Async()
+        {
+            var endpoint = new Uri("<https://my-service.azure.com>");
+            var client = new ConfidentLevelsInTspClient(endpoint);
+
+            var data = new
+            {
+                age = 1234,
+                name = "<name>",
+                size = 123.45d,
+            };
+
+            Response response = await client.UseDerivedModelAsync(RequestContent.Create(data));
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_UseDerivedModelWithUnion()
+        {
+            var endpoint = new Uri("<https://my-service.azure.com>");
+            var client = new ConfidentLevelsInTspClient(endpoint);
+
+            var data = new
+            {
+                unionProperty = new { },
+                name = "<name>",
+            };
+
+            Response response = client.UseDerivedModelWithUnion(RequestContent.Create(data));
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_UseDerivedModelWithUnion_AllParameters()
+        {
+            var endpoint = new Uri("<https://my-service.azure.com>");
+            var client = new ConfidentLevelsInTspClient(endpoint);
+
+            var data = new
+            {
+                unionProperty = new { },
+                name = "<name>",
+                size = 123.45d,
+            };
+
+            Response response = client.UseDerivedModelWithUnion(RequestContent.Create(data));
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_UseDerivedModelWithUnion_Async()
+        {
+            var endpoint = new Uri("<https://my-service.azure.com>");
+            var client = new ConfidentLevelsInTspClient(endpoint);
+
+            var data = new
+            {
+                unionProperty = new { },
+                name = "<name>",
+            };
+
+            Response response = await client.UseDerivedModelWithUnionAsync(RequestContent.Create(data));
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_UseDerivedModelWithUnion_AllParameters_Async()
+        {
+            var endpoint = new Uri("<https://my-service.azure.com>");
+            var client = new ConfidentLevelsInTspClient(endpoint);
+
+            var data = new
+            {
+                unionProperty = new { },
+                name = "<name>",
+                size = 123.45d,
+            };
+
+            Response response = await client.UseDerivedModelWithUnionAsync(RequestContent.Create(data));
+            Console.WriteLine(response.Status);
+        }
     }
 }

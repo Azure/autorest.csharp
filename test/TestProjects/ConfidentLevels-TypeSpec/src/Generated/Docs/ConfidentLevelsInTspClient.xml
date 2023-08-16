@@ -519,5 +519,135 @@ Console.WriteLine(result.GetProperty("name").ToString());
 ]]></code>
 </example>
     </member>
+    <member name="UseDerivedModelAsync(DerivedModel,CancellationToken)">
+    </member>
+    <member name="UseDerivedModel(DerivedModel,CancellationToken)">
+    </member>
+    <member name="UseDerivedModelAsync(RequestContent,RequestContext)">
+<example>
+This sample shows how to call UseDerivedModelAsync with required request content.
+<code><![CDATA[
+var endpoint = new Uri("<https://my-service.azure.com>");
+var client = new ConfidentLevelsInTspClient(endpoint);
+
+var data = new {
+    name = "<name>",
+};
+
+Response response = await client.UseDerivedModelAsync(RequestContent.Create(data));
+Console.WriteLine(response.Status);
+]]></code>
+This sample shows how to call UseDerivedModelAsync with all request content.
+<code><![CDATA[
+var endpoint = new Uri("<https://my-service.azure.com>");
+var client = new ConfidentLevelsInTspClient(endpoint);
+
+var data = new {
+    age = 1234,
+    name = "<name>",
+    size = 123.45d,
+};
+
+Response response = await client.UseDerivedModelAsync(RequestContent.Create(data));
+Console.WriteLine(response.Status);
+]]></code>
+</example>
+    </member>
+    <member name="UseDerivedModel(RequestContent,RequestContext)">
+<example>
+This sample shows how to call UseDerivedModel with required request content.
+<code><![CDATA[
+var endpoint = new Uri("<https://my-service.azure.com>");
+var client = new ConfidentLevelsInTspClient(endpoint);
+
+var data = new {
+    name = "<name>",
+};
+
+Response response = client.UseDerivedModel(RequestContent.Create(data));
+Console.WriteLine(response.Status);
+]]></code>
+This sample shows how to call UseDerivedModel with all request content.
+<code><![CDATA[
+var endpoint = new Uri("<https://my-service.azure.com>");
+var client = new ConfidentLevelsInTspClient(endpoint);
+
+var data = new {
+    age = 1234,
+    name = "<name>",
+    size = 123.45d,
+};
+
+Response response = client.UseDerivedModel(RequestContent.Create(data));
+Console.WriteLine(response.Status);
+]]></code>
+</example>
+    </member>
+    <member name="UseDerivedModelWithUnionAsync(DerivedModelWithUnion,CancellationToken)">
+    </member>
+    <member name="UseDerivedModelWithUnion(DerivedModelWithUnion,CancellationToken)">
+    </member>
+    <member name="UseDerivedModelWithUnionAsync(RequestContent,RequestContext)">
+<example>
+This sample shows how to call UseDerivedModelWithUnionAsync with required request content.
+<code><![CDATA[
+var endpoint = new Uri("<https://my-service.azure.com>");
+var client = new ConfidentLevelsInTspClient(endpoint);
+
+var data = new {
+    unionProperty = new {},
+    name = "<name>",
+};
+
+Response response = await client.UseDerivedModelWithUnionAsync(RequestContent.Create(data));
+Console.WriteLine(response.Status);
+]]></code>
+This sample shows how to call UseDerivedModelWithUnionAsync with all request content.
+<code><![CDATA[
+var endpoint = new Uri("<https://my-service.azure.com>");
+var client = new ConfidentLevelsInTspClient(endpoint);
+
+var data = new {
+    unionProperty = new {},
+    name = "<name>",
+    size = 123.45d,
+};
+
+Response response = await client.UseDerivedModelWithUnionAsync(RequestContent.Create(data));
+Console.WriteLine(response.Status);
+]]></code>
+</example>
+    </member>
+    <member name="UseDerivedModelWithUnion(RequestContent,RequestContext)">
+<example>
+This sample shows how to call UseDerivedModelWithUnion with required request content.
+<code><![CDATA[
+var endpoint = new Uri("<https://my-service.azure.com>");
+var client = new ConfidentLevelsInTspClient(endpoint);
+
+var data = new {
+    unionProperty = new {},
+    name = "<name>",
+};
+
+Response response = client.UseDerivedModelWithUnion(RequestContent.Create(data));
+Console.WriteLine(response.Status);
+]]></code>
+This sample shows how to call UseDerivedModelWithUnion with all request content.
+<code><![CDATA[
+var endpoint = new Uri("<https://my-service.azure.com>");
+var client = new ConfidentLevelsInTspClient(endpoint);
+
+var data = new {
+    unionProperty = new {},
+    name = "<name>",
+    size = 123.45d,
+};
+
+Response response = client.UseDerivedModelWithUnion(RequestContent.Create(data));
+Console.WriteLine(response.Status);
+]]></code>
+</example>
+    </member>
   </members>
 </doc>
