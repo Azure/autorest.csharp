@@ -1,5 +1,8 @@
 import { Model, getFriendlyName, getProjectedNames } from "@typespec/compiler";
-import { projectedNameCSharpKey, projectedNameClientKey } from "../constants.js";
+import {
+    projectedNameCSharpKey,
+    projectedNameClientKey
+} from "../constants.js";
 import { SdkContext } from "@azure-tools/typespec-client-generator-core";
 
 export function capitalize(str: string): string {
