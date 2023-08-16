@@ -28,7 +28,7 @@ import {
     isArrayModelType,
     isRecordModelType,
     Scalar,
-    Union,
+    Union
 } from "@typespec/compiler";
 import { getResourceOperation } from "@typespec/rest";
 import {
