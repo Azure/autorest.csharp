@@ -29,8 +29,7 @@
      "IsRequired": true,
      "IsReadOnly": false
     }
-   ],
-   "DerivedModels": []
+   ]
   },
   {
    "$id": "5",
@@ -54,8 +53,7 @@
      "IsRequired": true,
      "IsReadOnly": false
     }
-   ],
-   "DerivedModels": []
+   ]
   }
  ],
  "Clients": [

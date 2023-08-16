@@ -56,8 +56,7 @@
      "IsRequired": true,
      "IsReadOnly": false
     }
-   ],
-   "DerivedModels": []
+   ]
   }
  ],
  "Clients": [

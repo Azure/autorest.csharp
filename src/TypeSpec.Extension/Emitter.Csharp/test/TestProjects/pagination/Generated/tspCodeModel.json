@@ -71,8 +71,7 @@
          "IsRequired": true,
          "IsReadOnly": true
         }
-       ],
-       "DerivedModels": []
+       ]
       },
       "IsNullable": false
      },
@@ -93,8 +92,7 @@
      "IsRequired": false,
      "IsReadOnly": false
     }
-   ],
-   "DerivedModels": []
+   ]
   },
   {
    "$ref": "5"

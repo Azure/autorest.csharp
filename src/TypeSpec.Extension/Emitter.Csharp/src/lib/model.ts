@@ -536,7 +536,7 @@ export function getInputType(
                 DiscriminatorValue: getDiscriminatorValue(m, baseModel),
                 BaseModel: baseModel,
                 Usage: Usage.None,
-                Properties: properties, // DerivedModels should be the last assigned to model, if no derived models, properties should be the last
+                Properties: properties // DerivedModels should be the last assigned to model, if no derived models, properties should be the last
             } as InputModelType;
 
             models.set(name, model);

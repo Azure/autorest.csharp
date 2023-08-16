@@ -322,8 +322,7 @@
          "IsRequired": true,
          "IsReadOnly": false
         }
-       ],
-       "DerivedModels": []
+       ]
       },
       "IsNullable": false
      },
@@ -422,8 +421,7 @@
      "IsRequired": false,
      "IsReadOnly": false
     }
-   ],
-   "DerivedModels": []
+   ]
   },
   {
    "$ref": "46"
@@ -583,8 +581,7 @@
      "IsRequired": false,
      "IsReadOnly": false
     }
-   ],
-   "DerivedModels": []
+   ]
   },
   {
    "$id": "87",
@@ -720,8 +717,7 @@
      "IsRequired": false,
      "IsReadOnly": false
     }
-   ],
-   "DerivedModels": []
+   ]
   },
   {
    "$id": "106",
@@ -814,8 +810,7 @@
      "IsRequired": false,
      "IsReadOnly": false
     }
-   ],
-   "DerivedModels": []
+   ]
   },
   {
    "$id": "118",
@@ -877,8 +872,7 @@
      "IsRequired": false,
      "IsReadOnly": false
     }
-   ],
-   "DerivedModels": []
+   ]
   },
   {
    "$id": "127",
@@ -970,8 +964,7 @@
             "IsRequired": true,
             "IsReadOnly": false
            }
-          ],
-          "DerivedModels": []
+          ]
          },
          "IsNullable": false
         },
@@ -1064,8 +1057,7 @@
             "IsRequired": false,
             "IsReadOnly": false
            }
-          ],
-          "DerivedModels": []
+          ]
          },
          "IsNullable": false
         },
@@ -1141,14 +1133,12 @@
            "IsRequired": true,
            "IsReadOnly": false
           }
-         ],
-         "DerivedModels": []
+         ]
         },
         "IsRequired": true,
         "IsReadOnly": false
        }
-      ],
-      "DerivedModels": []
+      ]
      },
      "IsRequired": true,
      "IsReadOnly": false
@@ -1314,22 +1304,19 @@
                    "IsRequired": false,
                    "IsReadOnly": false
                   }
-                 ],
-                 "DerivedModels": []
+                 ]
                 },
                 "IsRequired": false,
                 "IsReadOnly": false
                }
-              ],
-              "DerivedModels": []
+              ]
              },
              "IsNullable": false
             },
             "IsRequired": false,
             "IsReadOnly": false
            }
-          ],
-          "DerivedModels": []
+          ]
          },
          "IsRequired": false,
          "IsReadOnly": false
@@ -1350,16 +1337,14 @@
          "IsRequired": false,
          "IsReadOnly": false
         }
-       ],
-       "DerivedModels": []
+       ]
       },
       "IsNullable": false
      },
      "IsRequired": true,
      "IsReadOnly": false
     }
-   ],
-   "DerivedModels": []
+   ]
   },
   {
    "$ref": "131"
@@ -1523,8 +1508,7 @@
         "IsRequired": false,
         "IsReadOnly": false
        }
-      ],
-      "DerivedModels": []
+      ]
      },
      "IsRequired": false,
      "IsReadOnly": false
@@ -1658,8 +1642,7 @@
            "IsRequired": false,
            "IsReadOnly": false
           }
-         ],
-         "DerivedModels": []
+         ]
         },
         "IsRequired": false,
         "IsReadOnly": false
@@ -1680,14 +1663,12 @@
         "IsRequired": false,
         "IsReadOnly": false
        }
-      ],
-      "DerivedModels": []
+      ]
      },
      "IsRequired": false,
      "IsReadOnly": false
     }
-   ],
-   "DerivedModels": []
+   ]
   },
   {
    "$ref": "203"
@@ -1759,8 +1740,7 @@
      "IsRequired": false,
      "IsReadOnly": false
     }
-   ],
-   "DerivedModels": []
+   ]
   },
   {
    "$id": "237",
@@ -1828,8 +1808,7 @@
      "IsRequired": false,
      "IsReadOnly": false
     }
-   ],
-   "DerivedModels": []
+   ]
   },
   {
    "$id": "246",
@@ -1907,8 +1886,7 @@
          "IsRequired": true,
          "IsReadOnly": false
         }
-       ],
-       "DerivedModels": []
+       ]
       },
       "IsNullable": false
      },
@@ -1929,8 +1907,7 @@
      "IsRequired": true,
      "IsReadOnly": false
     }
-   ],
-   "DerivedModels": []
+   ]
   },
   {
    "$ref": "249"
@@ -1975,8 +1952,7 @@
      "IsRequired": false,
      "IsReadOnly": false
     }
-   ],
-   "DerivedModels": []
+   ]
   }
  ],
  "Clients": [
