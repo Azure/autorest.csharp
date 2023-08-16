@@ -5,23 +5,36 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
+
 namespace azure_parameter_grouping.Models
 {
     /// <summary> Parameter group. </summary>
     public partial class ParameterGroupingPostOptionalParameters
     {
-        /// <summary> Initializes a new instance of ParameterGroupingPostOptionalParameters. </summary>
+        private Dictionary<string, BinaryData> _rawData;
+
+        /// <summary>
+        /// Initializes a new instance of global::azure_parameter_grouping.Models.ParameterGroupingPostOptionalParameters
+        ///
+        /// </summary>
         public ParameterGroupingPostOptionalParameters()
         {
         }
 
-        /// <summary> Initializes a new instance of ParameterGroupingPostOptionalParameters. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::azure_parameter_grouping.Models.ParameterGroupingPostOptionalParameters
+        ///
+        /// </summary>
         /// <param name="customHeader"></param>
         /// <param name="query"> Query parameter with default. </param>
-        internal ParameterGroupingPostOptionalParameters(string customHeader, int? query)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal ParameterGroupingPostOptionalParameters(string customHeader, int? query, Dictionary<string, BinaryData> rawData)
         {
             CustomHeader = customHeader;
             Query = query;
+            _rawData = rawData;
         }
 
         /// <summary> Gets or sets the custom header. </summary>

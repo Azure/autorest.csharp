@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
 using Azure.Core;
 
 namespace Azure.NewProject.TypeSpec.Models
@@ -13,6 +14,8 @@ namespace Azure.NewProject.TypeSpec.Models
     /// <summary> this is not a friendly model but with a friendly name. </summary>
     public partial class Friend
     {
+        private Dictionary<string, BinaryData> _rawData;
+
         /// <summary> Initializes a new instance of Friend. </summary>
         /// <param name="name"> name of the NotFriend. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
@@ -21,6 +24,15 @@ namespace Azure.NewProject.TypeSpec.Models
             Argument.AssertNotNull(name, nameof(name));
 
             Name = name;
+        }
+
+        /// <summary> Initializes a new instance of Friend. </summary>
+        /// <param name="name"> name of the NotFriend. </param>
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal Friend(string name, Dictionary<string, BinaryData> rawData)
+        {
+            Name = name;
+            _rawData = rawData;
         }
 
         /// <summary> name of the NotFriend. </summary>

@@ -26,7 +26,7 @@ namespace dpg_customization_LowLevel
             {
                 RequestContext requestContext = new RequestContext { CancellationToken = cancellationToken };
                 Response response = await GetModelAsync(mode, requestContext);
-                return Response.FromValue(Product.FromResponse(response), response);
+                return Response.FromValue((Product)response, response);
             }
             catch (Exception e)
             {
@@ -47,7 +47,7 @@ namespace dpg_customization_LowLevel
             {
                 RequestContext requestContext = new RequestContext { CancellationToken = cancellationToken };
                 Response response = GetModel(mode, requestContext);
-                return Response.FromValue(Product.FromResponse(response), response);
+                return Response.FromValue((Product)response, response);
             }
             catch (Exception e)
             {
@@ -68,8 +68,8 @@ namespace dpg_customization_LowLevel
             RequestContext requestContext = new RequestContext();
             requestContext.CancellationToken = cancellationToken;
 
-            Response response = await PostModelAsync("model", Input.ToRequestContent(input), requestContext);
-            return Response.FromValue(Product.FromResponse(response), response);
+            Response response = await PostModelAsync("model", input, requestContext);
+            return Response.FromValue((Product)response, response);
         }
 
         /// <summary> Post either raw response as a model and pass in &apos;raw&apos; for mode, or grow up your operation to take a model instead, and put in &apos;model&apos; as mode. </summary>
@@ -84,8 +84,8 @@ namespace dpg_customization_LowLevel
             RequestContext requestContext = new RequestContext();
             requestContext.CancellationToken = cancellationToken;
 
-            Response result = PostModel("model", Input.ToRequestContent(input), requestContext);
-            return Response.FromValue(Product.FromResponse(result), result);
+            Response result = PostModel("model", input, requestContext);
+            return Response.FromValue((Product)result, result);
         }
 
         /// <summary> Long running put request that will either return to end users a final payload of a raw body, or a final payload of a model after the SDK has grown up. </summary>
@@ -101,7 +101,7 @@ namespace dpg_customization_LowLevel
             try
             {
                 var response = await LroAsync(waitUntil, mode, context).ConfigureAwait(false);
-                return ProtocolOperationHelpers.Convert(response, r => Product.FromResponse(r), ClientDiagnostics, "DPGClient.LroValue");
+                return ProtocolOperationHelpers.Convert(response, r => (Product)r, ClientDiagnostics, "DPGClient.LroValue");
             }
             catch (Exception e)
             {
@@ -123,7 +123,7 @@ namespace dpg_customization_LowLevel
             try
             {
                 var response = Lro(waitUntil, mode, context);
-                return ProtocolOperationHelpers.Convert(response, r => Product.FromResponse(r), ClientDiagnostics, "DPGClient.LroValue");
+                return ProtocolOperationHelpers.Convert(response, r => (Product)r, ClientDiagnostics, "DPGClient.LroValue");
             }
             catch (Exception e)
             {

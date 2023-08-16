@@ -6,19 +6,20 @@
 #nullable disable
 
 using System;
-using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
 using Azure.Core.Serialization;
 
 namespace CognitiveSearch.Models
 {
-    internal partial class UnknownSkill : IUtf8JsonSerializable, IJsonModelSerializable
+    internal partial class UnknownSkill : IUtf8JsonSerializable, IModelJsonSerializable<Skill>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModelSerializable)this).Serialize(writer, ModelSerializerOptions.AzureServiceDefault);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<Skill>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
 
-        void IJsonModelSerializable.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
+        void IModelJsonSerializable<Skill>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
             writer.WriteStartObject();
             writer.WritePropertyName("@odata.type"u8);
             writer.WriteStringValue(OdataType);
@@ -51,78 +52,44 @@ namespace CognitiveSearch.Models
                 writer.WriteObjectValue(item);
             }
             writer.WriteEndArray();
+            if (_rawData is not null && options.Format == ModelSerializerFormat.Json)
+            {
+                foreach (var property in _rawData)
+                {
+                    writer.WritePropertyName(property.Key);
+#if NET6_0_OR_GREATER
+				writer.WriteRawValue(property.Value);
+#else
+                    JsonSerializer.Serialize(writer, JsonDocument.Parse(property.Value.ToString()).RootElement);
+#endif
+                }
+            }
             writer.WriteEndObject();
         }
 
-        object IModelSerializable.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            using var doc = JsonDocument.Parse(data);
-            return DeserializeUnknownSkill(doc.RootElement, options);
-        }
+        internal static Skill DeserializeUnknownSkill(JsonElement element, ModelSerializerOptions options = default) => DeserializeSkill(element, options);
 
-        internal static UnknownSkill DeserializeUnknownSkill(JsonElement element, ModelSerializerOptions options = default)
+        Skill IModelJsonSerializable<Skill>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
         {
-            options ??= ModelSerializerOptions.AzureServiceDefault;
-            if (element.ValueKind == JsonValueKind.Null)
-            {
-                return null;
-            }
-            string odataType = "Unknown";
-            Optional<string> name = default;
-            Optional<string> description = default;
-            Optional<string> context = default;
-            IList<InputFieldMappingEntry> inputs = default;
-            IList<OutputFieldMappingEntry> outputs = default;
-            foreach (var property in element.EnumerateObject())
-            {
-                if (property.NameEquals("@odata.type"u8))
-                {
-                    odataType = property.Value.GetString();
-                    continue;
-                }
-                if (property.NameEquals("name"u8))
-                {
-                    name = property.Value.GetString();
-                    continue;
-                }
-                if (property.NameEquals("description"u8))
-                {
-                    description = property.Value.GetString();
-                    continue;
-                }
-                if (property.NameEquals("context"u8))
-                {
-                    context = property.Value.GetString();
-                    continue;
-                }
-                if (property.NameEquals("inputs"u8))
-                {
-                    List<InputFieldMappingEntry> array = new List<InputFieldMappingEntry>();
-                    foreach (var item in property.Value.EnumerateArray())
-                    {
-                        array.Add(InputFieldMappingEntry.DeserializeInputFieldMappingEntry(item));
-                    }
-                    inputs = array;
-                    continue;
-                }
-                if (property.NameEquals("outputs"u8))
-                {
-                    List<OutputFieldMappingEntry> array = new List<OutputFieldMappingEntry>();
-                    foreach (var item in property.Value.EnumerateArray())
-                    {
-                        array.Add(OutputFieldMappingEntry.DeserializeOutputFieldMappingEntry(item));
-                    }
-                    outputs = array;
-                    continue;
-                }
-            }
-            return new UnknownSkill(odataType, name.Value, description.Value, context.Value, inputs, outputs);
-        }
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
 
-        object IJsonModelSerializable.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
-        {
             using var doc = JsonDocument.ParseValue(ref reader);
             return DeserializeUnknownSkill(doc.RootElement, options);
+        }
+
+        BinaryData IModelSerializable<Skill>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        Skill IModelSerializable<Skill>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using var doc = JsonDocument.Parse(data);
+            return DeserializeSkill(doc.RootElement, options);
         }
     }
 }

@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Collections.Generic;
 using Azure.Core;
 using Azure.ResourceManager.Models;
@@ -18,12 +19,18 @@ namespace Azure.ResourceManager.Sample.Models
     /// </summary>
     public partial class VirtualMachineScaleSetPatch : UpdateResource
     {
-        /// <summary> Initializes a new instance of VirtualMachineScaleSetPatch. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::Azure.ResourceManager.Sample.Models.VirtualMachineScaleSetPatch
+        ///
+        /// </summary>
         public VirtualMachineScaleSetPatch()
         {
         }
 
-        /// <summary> Initializes a new instance of VirtualMachineScaleSetPatch. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::Azure.ResourceManager.Sample.Models.VirtualMachineScaleSetPatch
+        ///
+        /// </summary>
         /// <param name="tags">
         /// Resource tags
         /// Serialized Name: UpdateResource.tags
@@ -76,7 +83,8 @@ namespace Azure.ResourceManager.Sample.Models
         /// Specifies information about the proximity placement group that the virtual machine scale set should be assigned to. &lt;br&gt;&lt;br&gt;Minimum api-version: 2018-04-01.
         /// Serialized Name: VirtualMachineScaleSetUpdate.properties.proximityPlacementGroup
         /// </param>
-        internal VirtualMachineScaleSetPatch(IDictionary<string, string> tags, SampleSku sku, SamplePlan plan, ManagedServiceIdentity identity, UpgradePolicy upgradePolicy, AutomaticRepairsPolicy automaticRepairsPolicy, VirtualMachineScaleSetUpdateVMProfile virtualMachineProfile, bool? overprovision, bool? doNotRunExtensionsOnOverprovisionedVMs, bool? singlePlacementGroup, AdditionalCapabilities additionalCapabilities, ScaleInPolicy scaleInPolicy, WritableSubResource proximityPlacementGroup) : base(tags)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal VirtualMachineScaleSetPatch(IDictionary<string, string> tags, SampleSku sku, SamplePlan plan, ManagedServiceIdentity identity, UpgradePolicy upgradePolicy, AutomaticRepairsPolicy automaticRepairsPolicy, VirtualMachineScaleSetUpdateVMProfile virtualMachineProfile, bool? overprovision, bool? doNotRunExtensionsOnOverprovisionedVMs, bool? singlePlacementGroup, AdditionalCapabilities additionalCapabilities, ScaleInPolicy scaleInPolicy, WritableSubResource proximityPlacementGroup, Dictionary<string, BinaryData> rawData) : base(tags, rawData)
         {
             Sku = sku;
             Plan = plan;

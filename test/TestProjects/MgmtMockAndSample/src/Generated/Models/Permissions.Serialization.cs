@@ -8,17 +8,20 @@
 using System;
 using System.Collections.Generic;
 using System.Text.Json;
+using Azure;
 using Azure.Core;
 using Azure.Core.Serialization;
 
 namespace MgmtMockAndSample.Models
 {
-    public partial class Permissions : IUtf8JsonSerializable, IJsonModelSerializable
+    public partial class Permissions : IUtf8JsonSerializable, IModelJsonSerializable<Permissions>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModelSerializable)this).Serialize(writer, ModelSerializerOptions.AzureServiceDefault);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<Permissions>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
 
-        void IJsonModelSerializable.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
+        void IModelJsonSerializable<Permissions>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
             writer.WriteStartObject();
             if (Optional.IsCollectionDefined(Keys))
             {
@@ -60,18 +63,25 @@ namespace MgmtMockAndSample.Models
                 }
                 writer.WriteEndArray();
             }
+            if (_rawData is not null && options.Format == ModelSerializerFormat.Json)
+            {
+                foreach (var property in _rawData)
+                {
+                    writer.WritePropertyName(property.Key);
+#if NET6_0_OR_GREATER
+				writer.WriteRawValue(property.Value);
+#else
+                    JsonSerializer.Serialize(writer, JsonDocument.Parse(property.Value.ToString()).RootElement);
+#endif
+                }
+            }
             writer.WriteEndObject();
-        }
-
-        object IModelSerializable.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            using var doc = JsonDocument.Parse(data);
-            return DeserializePermissions(doc.RootElement, options);
         }
 
         internal static Permissions DeserializePermissions(JsonElement element, ModelSerializerOptions options = default)
         {
-            options ??= ModelSerializerOptions.AzureServiceDefault;
+            options ??= ModelSerializerOptions.DefaultWireOptions;
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
@@ -80,6 +90,7 @@ namespace MgmtMockAndSample.Models
             Optional<IList<SecretPermission>> secrets = default;
             Optional<IList<CertificatePermission>> certificates = default;
             Optional<IList<StoragePermission>> storage = default;
+            Dictionary<string, BinaryData> rawData = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("keys"u8))
@@ -138,14 +149,57 @@ namespace MgmtMockAndSample.Models
                     storage = array;
                     continue;
                 }
+                if (options.Format == ModelSerializerFormat.Json)
+                {
+                    rawData.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
+                    continue;
+                }
             }
-            return new Permissions(Optional.ToList(keys), Optional.ToList(secrets), Optional.ToList(certificates), Optional.ToList(storage));
+            return new Permissions(Optional.ToList(keys), Optional.ToList(secrets), Optional.ToList(certificates), Optional.ToList(storage), rawData);
         }
 
-        object IJsonModelSerializable.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        Permissions IModelJsonSerializable<Permissions>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
         {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
             using var doc = JsonDocument.ParseValue(ref reader);
             return DeserializePermissions(doc.RootElement, options);
+        }
+
+        BinaryData IModelSerializable<Permissions>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        Permissions IModelSerializable<Permissions>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using var doc = JsonDocument.Parse(data);
+            return DeserializePermissions(doc.RootElement, options);
+        }
+
+        public static implicit operator RequestContent(Permissions model)
+        {
+            if (model is null)
+            {
+                return null;
+            }
+
+            return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
+        }
+
+        public static explicit operator Permissions(Response response)
+        {
+            if (response is null)
+            {
+                return null;
+            }
+
+            using JsonDocument doc = JsonDocument.Parse(response.ContentStream);
+            return DeserializePermissions(doc.RootElement, ModelSerializerOptions.DefaultWireOptions);
         }
     }
 }

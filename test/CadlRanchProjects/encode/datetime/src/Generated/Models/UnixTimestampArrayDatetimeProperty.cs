@@ -15,6 +15,8 @@ namespace Encode.Datetime.Models
     /// <summary> The UnixTimestampArrayDatetimeProperty. </summary>
     public partial class UnixTimestampArrayDatetimeProperty
     {
+        private Dictionary<string, BinaryData> _rawData;
+
         /// <summary> Initializes a new instance of UnixTimestampArrayDatetimeProperty. </summary>
         /// <param name="value"></param>
         /// <exception cref="ArgumentNullException"> <paramref name="value"/> is null. </exception>
@@ -27,9 +29,11 @@ namespace Encode.Datetime.Models
 
         /// <summary> Initializes a new instance of UnixTimestampArrayDatetimeProperty. </summary>
         /// <param name="value"></param>
-        internal UnixTimestampArrayDatetimeProperty(IList<DateTimeOffset> value)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal UnixTimestampArrayDatetimeProperty(IList<DateTimeOffset> value, Dictionary<string, BinaryData> rawData)
         {
             Value = value;
+            _rawData = rawData;
         }
 
         /// <summary> Gets the value. </summary>

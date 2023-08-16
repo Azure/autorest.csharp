@@ -5,6 +5,9 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
+
 namespace ModelsTypeSpec.Models
 {
     /// <summary> Second derived model as an output. </summary>
@@ -21,7 +24,8 @@ namespace ModelsTypeSpec.Models
         /// <summary> Initializes a new instance of SecondDerivedOutputModel. </summary>
         /// <param name="kind"> Discriminator. </param>
         /// <param name="second"></param>
-        internal SecondDerivedOutputModel(string kind, bool second) : base(kind)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal SecondDerivedOutputModel(string kind, bool second, Dictionary<string, BinaryData> rawData) : base(kind, rawData)
         {
             Second = second;
         }

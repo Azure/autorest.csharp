@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Collections.Generic;
 using Azure.Core;
 using Azure.ResourceManager.Resources.Models;
@@ -17,12 +18,18 @@ namespace Azure.ResourceManager.Sample.Models
     /// </summary>
     public partial class ImagePatch : UpdateResource
     {
-        /// <summary> Initializes a new instance of ImagePatch. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::Azure.ResourceManager.Sample.Models.ImagePatch
+        ///
+        /// </summary>
         public ImagePatch()
         {
         }
 
-        /// <summary> Initializes a new instance of ImagePatch. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::Azure.ResourceManager.Sample.Models.ImagePatch
+        ///
+        /// </summary>
         /// <param name="tags">
         /// Resource tags
         /// Serialized Name: UpdateResource.tags
@@ -43,7 +50,8 @@ namespace Azure.ResourceManager.Sample.Models
         /// Gets the HyperVGenerationType of the VirtualMachine created from the image
         /// Serialized Name: ImageUpdate.properties.hyperVGeneration
         /// </param>
-        internal ImagePatch(IDictionary<string, string> tags, WritableSubResource sourceVirtualMachine, ImageStorageProfile storageProfile, string provisioningState, HyperVGeneration? hyperVGeneration) : base(tags)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal ImagePatch(IDictionary<string, string> tags, WritableSubResource sourceVirtualMachine, ImageStorageProfile storageProfile, string provisioningState, HyperVGeneration? hyperVGeneration, Dictionary<string, BinaryData> rawData) : base(tags, rawData)
         {
             SourceVirtualMachine = sourceVirtualMachine;
             StorageProfile = storageProfile;

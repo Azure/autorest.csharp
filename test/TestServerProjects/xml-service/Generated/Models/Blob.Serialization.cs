@@ -7,18 +7,18 @@
 
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Xml;
 using System.Xml.Linq;
+using Azure;
 using Azure.Core;
 using Azure.Core.Serialization;
 
 namespace xml_service.Models
 {
-    public partial class Blob : IXmlSerializable, IXmlModelSerializable
+    public partial class Blob : IXmlSerializable, IModelSerializable<Blob>
     {
-        void IXmlModelSerializable.Serialize(XmlWriter writer, ModelSerializerOptions options) => ((IXmlSerializable)this).Write(writer, null, options);
-
-        void IXmlSerializable.Write(XmlWriter writer, string nameHint, ModelSerializerOptions options)
+        private void Serialize(XmlWriter writer, string nameHint, ModelSerializerOptions options)
         {
             writer.WriteStartElement("Blob");
             writer.WriteStartElement("Name");
@@ -30,7 +30,7 @@ namespace xml_service.Models
             writer.WriteStartElement("Snapshot");
             writer.WriteValue(Snapshot);
             writer.WriteEndElement();
-            writer.WriteObjectValue(Properties, "Properties", options);
+            writer.WriteObjectValue(Properties, "Properties");
             if (Optional.IsCollectionDefined(Metadata))
             {
                 foreach (var pair in Metadata)
@@ -43,14 +43,11 @@ namespace xml_service.Models
             writer.WriteEndElement();
         }
 
-        object IModelSerializable.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            return DeserializeBlob(XElement.Load(data.ToStream()), options);
-        }
+        void IXmlSerializable.Write(XmlWriter writer, string nameHint) => Serialize(writer, nameHint, ModelSerializerOptions.DefaultWireOptions);
 
         internal static Blob DeserializeBlob(XElement element, ModelSerializerOptions options = default)
         {
-            options ??= ModelSerializerOptions.AzureServiceDefault;
+            options ??= ModelSerializerOptions.DefaultWireOptions;
             string name = default;
             bool deleted = default;
             string snapshot = default;
@@ -81,7 +78,53 @@ namespace xml_service.Models
                 }
                 metadata = dictionary;
             }
-            return new Blob(name, deleted, snapshot, properties, metadata);
+            return new Blob(name, deleted, snapshot, properties, metadata, default);
+        }
+
+        BinaryData IModelSerializable<Blob>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            options ??= ModelSerializerOptions.DefaultWireOptions;
+            using MemoryStream stream = new MemoryStream();
+            using XmlWriter writer = XmlWriter.Create(stream);
+            Serialize(writer, null, options);
+            writer.Flush();
+            if (stream.Position > int.MaxValue)
+            {
+                return BinaryData.FromStream(stream);
+            }
+            else
+            {
+                return new BinaryData(stream.GetBuffer().AsMemory(0, (int)stream.Position));
+            }
+        }
+
+        Blob IModelSerializable<Blob>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            return DeserializeBlob(XElement.Load(data.ToStream()), options);
+        }
+
+        public static implicit operator RequestContent(Blob model)
+        {
+            if (model is null)
+            {
+                return null;
+            }
+
+            return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
+        }
+
+        public static explicit operator Blob(Response response)
+        {
+            if (response is null)
+            {
+                return null;
+            }
+
+            return DeserializeBlob(XElement.Load(response.ContentStream), ModelSerializerOptions.DefaultWireOptions);
         }
     }
 }

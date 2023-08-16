@@ -5,6 +5,9 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
+
 namespace Azure.ResourceManager.Sample.Models
 {
     /// <summary>
@@ -13,19 +16,29 @@ namespace Azure.ResourceManager.Sample.Models
     /// </summary>
     internal partial class DisallowedConfiguration
     {
-        /// <summary> Initializes a new instance of DisallowedConfiguration. </summary>
+        private Dictionary<string, BinaryData> _rawData;
+
+        /// <summary>
+        /// Initializes a new instance of global::Azure.ResourceManager.Sample.Models.DisallowedConfiguration
+        ///
+        /// </summary>
         public DisallowedConfiguration()
         {
         }
 
-        /// <summary> Initializes a new instance of DisallowedConfiguration. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::Azure.ResourceManager.Sample.Models.DisallowedConfiguration
+        ///
+        /// </summary>
         /// <param name="vmDiskType">
         /// VM disk types which are disallowed.
         /// Serialized Name: DisallowedConfiguration.vmDiskType
         /// </param>
-        internal DisallowedConfiguration(VmDiskType? vmDiskType)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal DisallowedConfiguration(VmDiskType? vmDiskType, Dictionary<string, BinaryData> rawData)
         {
             VmDiskType = vmDiskType;
+            _rawData = rawData;
         }
 
         /// <summary>

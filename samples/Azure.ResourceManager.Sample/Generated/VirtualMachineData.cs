@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Collections.Generic;
 using Azure.Core;
 using Azure.ResourceManager.Models;
@@ -20,7 +21,12 @@ namespace Azure.ResourceManager.Sample
     /// </summary>
     public partial class VirtualMachineData : TrackedResourceData
     {
-        /// <summary> Initializes a new instance of VirtualMachineData. </summary>
+        private Dictionary<string, BinaryData> _rawData;
+
+        /// <summary>
+        /// Initializes a new instance of global::Azure.ResourceManager.Sample.VirtualMachineData
+        ///
+        /// </summary>
         /// <param name="location"> The location. </param>
         public VirtualMachineData(AzureLocation location) : base(location)
         {
@@ -28,7 +34,10 @@ namespace Azure.ResourceManager.Sample
             Zones = new ChangeTrackingList<string>();
         }
 
-        /// <summary> Initializes a new instance of VirtualMachineData. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::Azure.ResourceManager.Sample.VirtualMachineData
+        ///
+        /// </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
         /// <param name="resourceType"> The resourceType. </param>
@@ -131,7 +140,8 @@ namespace Azure.ResourceManager.Sample
         /// Specifies the time alloted for all extensions to start. The time duration should be between 15 minutes and 120 minutes (inclusive) and should be specified in ISO 8601 format. The default value is 90 minutes (PT1H30M). &lt;br&gt;&lt;br&gt; Minimum api-version: 2020-06-01
         /// Serialized Name: VirtualMachine.properties.extensionsTimeBudget
         /// </param>
-        internal VirtualMachineData(ResourceIdentifier id, string name, ResourceType resourceType, SystemData systemData, IDictionary<string, string> tags, AzureLocation location, SamplePlan plan, IReadOnlyList<VirtualMachineExtensionData> resources, ManagedServiceIdentity identity, IList<string> zones, HardwareProfile hardwareProfile, StorageProfile storageProfile, AdditionalCapabilities additionalCapabilities, OSProfile osProfile, NetworkProfile networkProfile, SecurityProfile securityProfile, DiagnosticsProfile diagnosticsProfile, WritableSubResource availabilitySet, WritableSubResource virtualMachineScaleSet, WritableSubResource proximityPlacementGroup, VirtualMachinePriorityType? priority, VirtualMachineEvictionPolicyType? evictionPolicy, BillingProfile billingProfile, WritableSubResource host, WritableSubResource hostGroup, string provisioningState, VirtualMachineInstanceView instanceView, string licenseType, string vmId, string extensionsTimeBudget) : base(id, name, resourceType, systemData, tags, location)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal VirtualMachineData(ResourceIdentifier id, string name, ResourceType resourceType, SystemData systemData, IDictionary<string, string> tags, AzureLocation location, SamplePlan plan, IReadOnlyList<VirtualMachineExtensionData> resources, ManagedServiceIdentity identity, IList<string> zones, HardwareProfile hardwareProfile, StorageProfile storageProfile, AdditionalCapabilities additionalCapabilities, OSProfile osProfile, NetworkProfile networkProfile, SecurityProfile securityProfile, DiagnosticsProfile diagnosticsProfile, WritableSubResource availabilitySet, WritableSubResource virtualMachineScaleSet, WritableSubResource proximityPlacementGroup, VirtualMachinePriorityType? priority, VirtualMachineEvictionPolicyType? evictionPolicy, BillingProfile billingProfile, WritableSubResource host, WritableSubResource hostGroup, string provisioningState, VirtualMachineInstanceView instanceView, string licenseType, string vmId, string extensionsTimeBudget, Dictionary<string, BinaryData> rawData) : base(id, name, resourceType, systemData, tags, location)
         {
             Plan = plan;
             Resources = resources;
@@ -157,6 +167,7 @@ namespace Azure.ResourceManager.Sample
             LicenseType = licenseType;
             VmId = vmId;
             ExtensionsTimeBudget = extensionsTimeBudget;
+            _rawData = rawData;
         }
 
         /// <summary>

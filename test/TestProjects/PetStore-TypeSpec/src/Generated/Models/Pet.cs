@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
 using Azure.Core;
 
 namespace PetStore.Models
@@ -13,6 +14,8 @@ namespace PetStore.Models
     /// <summary> The Pet. </summary>
     public partial class Pet
     {
+        private Dictionary<string, BinaryData> _rawData;
+
         /// <summary> Initializes a new instance of Pet. </summary>
         /// <param name="name"></param>
         /// <param name="age"></param>
@@ -29,11 +32,13 @@ namespace PetStore.Models
         /// <param name="name"></param>
         /// <param name="tag"></param>
         /// <param name="age"></param>
-        internal Pet(string name, string tag, int age)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal Pet(string name, string tag, int age, Dictionary<string, BinaryData> rawData)
         {
             Name = name;
             Tag = tag;
             Age = age;
+            _rawData = rawData;
         }
 
         /// <summary> Gets or sets the name. </summary>

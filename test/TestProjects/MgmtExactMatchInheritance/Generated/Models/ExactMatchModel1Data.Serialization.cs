@@ -9,6 +9,7 @@ using System;
 using System.Collections.Generic;
 using System.Net;
 using System.Text.Json;
+using Azure;
 using Azure.Core;
 using Azure.Core.Expressions.DataFactory;
 using Azure.Core.Serialization;
@@ -17,12 +18,14 @@ using MgmtExactMatchInheritance.Models;
 
 namespace MgmtExactMatchInheritance
 {
-    public partial class ExactMatchModel1Data : IUtf8JsonSerializable, IJsonModelSerializable
+    public partial class ExactMatchModel1Data : IUtf8JsonSerializable, IModelJsonSerializable<ExactMatchModel1Data>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModelSerializable)this).Serialize(writer, ModelSerializerOptions.AzureServiceDefault);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<ExactMatchModel1Data>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
 
-        void IJsonModelSerializable.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
+        void IModelJsonSerializable<ExactMatchModel1Data>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
             writer.WriteStartObject();
             if (Optional.IsDefined(New))
             {
@@ -139,18 +142,25 @@ namespace MgmtExactMatchInheritance
                 writer.WritePropertyName("type19"u8);
                 JsonSerializer.Serialize(writer, Type19);
             }
+            if (_rawData is not null && options.Format == ModelSerializerFormat.Json)
+            {
+                foreach (var property in _rawData)
+                {
+                    writer.WritePropertyName(property.Key);
+#if NET6_0_OR_GREATER
+				writer.WriteRawValue(property.Value);
+#else
+                    JsonSerializer.Serialize(writer, JsonDocument.Parse(property.Value.ToString()).RootElement);
+#endif
+                }
+            }
             writer.WriteEndObject();
-        }
-
-        object IModelSerializable.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            using var doc = JsonDocument.Parse(data);
-            return DeserializeExactMatchModel1Data(doc.RootElement, options);
         }
 
         internal static ExactMatchModel1Data DeserializeExactMatchModel1Data(JsonElement element, ModelSerializerOptions options = default)
         {
-            options ??= ModelSerializerOptions.AzureServiceDefault;
+            options ??= ModelSerializerOptions.DefaultWireOptions;
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
@@ -180,6 +190,7 @@ namespace MgmtExactMatchInheritance
             string name = default;
             ResourceType type = default;
             Optional<SystemData> systemData = default;
+            Dictionary<string, BinaryData> rawData = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("new"u8))
@@ -403,14 +414,57 @@ namespace MgmtExactMatchInheritance
                     systemData = JsonSerializer.Deserialize<SystemData>(property.Value.GetRawText());
                     continue;
                 }
+                if (options.Format == ModelSerializerFormat.Json)
+                {
+                    rawData.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
+                    continue;
+                }
             }
-            return new ExactMatchModel1Data(id, name, type, systemData.Value, @new.Value, Optional.ToList(supportingUris), Optional.ToNullable(type1), Optional.ToNullable(type2), type3.Value, type4.Value, type5.Value, type6.Value, type7.Value, type8.Value, type9.Value, type10.Value, type11.Value, type12.Value, type13.Value, type14.Value, type15.Value, type16.Value, type17, type18, type19);
+            return new ExactMatchModel1Data(id, name, type, systemData.Value, @new.Value, Optional.ToList(supportingUris), Optional.ToNullable(type1), Optional.ToNullable(type2), type3.Value, type4.Value, type5.Value, type6.Value, type7.Value, type8.Value, type9.Value, type10.Value, type11.Value, type12.Value, type13.Value, type14.Value, type15.Value, type16.Value, type17, type18, type19, rawData);
         }
 
-        object IJsonModelSerializable.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        ExactMatchModel1Data IModelJsonSerializable<ExactMatchModel1Data>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
         {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
             using var doc = JsonDocument.ParseValue(ref reader);
             return DeserializeExactMatchModel1Data(doc.RootElement, options);
+        }
+
+        BinaryData IModelSerializable<ExactMatchModel1Data>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        ExactMatchModel1Data IModelSerializable<ExactMatchModel1Data>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using var doc = JsonDocument.Parse(data);
+            return DeserializeExactMatchModel1Data(doc.RootElement, options);
+        }
+
+        public static implicit operator RequestContent(ExactMatchModel1Data model)
+        {
+            if (model is null)
+            {
+                return null;
+            }
+
+            return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
+        }
+
+        public static explicit operator ExactMatchModel1Data(Response response)
+        {
+            if (response is null)
+            {
+                return null;
+            }
+
+            using JsonDocument doc = JsonDocument.Parse(response.ContentStream);
+            return DeserializeExactMatchModel1Data(doc.RootElement, ModelSerializerOptions.DefaultWireOptions);
         }
     }
 }

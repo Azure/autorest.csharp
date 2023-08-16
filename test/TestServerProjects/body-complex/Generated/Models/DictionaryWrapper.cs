@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Collections.Generic;
 using Azure.Core;
 
@@ -13,17 +14,27 @@ namespace body_complex.Models
     /// <summary> The DictionaryWrapper. </summary>
     public partial class DictionaryWrapper
     {
-        /// <summary> Initializes a new instance of DictionaryWrapper. </summary>
+        private Dictionary<string, BinaryData> _rawData;
+
+        /// <summary>
+        /// Initializes a new instance of global::body_complex.Models.DictionaryWrapper
+        ///
+        /// </summary>
         public DictionaryWrapper()
         {
             DefaultProgram = new ChangeTrackingDictionary<string, string>();
         }
 
-        /// <summary> Initializes a new instance of DictionaryWrapper. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::body_complex.Models.DictionaryWrapper
+        ///
+        /// </summary>
         /// <param name="defaultProgram"> Dictionary of &lt;string&gt;. </param>
-        internal DictionaryWrapper(IDictionary<string, string> defaultProgram)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal DictionaryWrapper(IDictionary<string, string> defaultProgram, Dictionary<string, BinaryData> rawData)
         {
             DefaultProgram = defaultProgram;
+            _rawData = rawData;
         }
 
         /// <summary> Dictionary of &lt;string&gt;. </summary>

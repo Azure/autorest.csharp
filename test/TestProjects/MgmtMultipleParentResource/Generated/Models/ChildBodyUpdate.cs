@@ -13,12 +13,18 @@ namespace MgmtMultipleParentResource.Models
     /// <summary> Describes a Virtual Machine run command. </summary>
     public partial class ChildBodyUpdate : UpdateResource
     {
-        /// <summary> Initializes a new instance of ChildBodyUpdate. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::MgmtMultipleParentResource.Models.ChildBodyUpdate
+        ///
+        /// </summary>
         public ChildBodyUpdate()
         {
         }
 
-        /// <summary> Initializes a new instance of ChildBodyUpdate. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::MgmtMultipleParentResource.Models.ChildBodyUpdate
+        ///
+        /// </summary>
         /// <param name="tags"> Resource tags. </param>
         /// <param name="asyncExecution"> Optional. If set to true, provisioning will complete as soon as the script starts and will not wait for script to complete. </param>
         /// <param name="runAsUser"> Specifies the user account on the VM when executing the run command. </param>
@@ -27,7 +33,8 @@ namespace MgmtMultipleParentResource.Models
         /// <param name="outputBlobUri"> Specifies the Azure storage blob where script output stream will be uploaded. </param>
         /// <param name="errorBlobUri"> Specifies the Azure storage blob where script error stream will be uploaded. </param>
         /// <param name="provisioningState"> The provisioning state, which only appears in the response. </param>
-        internal ChildBodyUpdate(IDictionary<string, string> tags, bool? asyncExecution, string runAsUser, string runAsPassword, int? timeoutInSeconds, Uri outputBlobUri, Uri errorBlobUri, string provisioningState) : base(tags)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal ChildBodyUpdate(IDictionary<string, string> tags, bool? asyncExecution, string runAsUser, string runAsPassword, int? timeoutInSeconds, Uri outputBlobUri, Uri errorBlobUri, string provisioningState, Dictionary<string, BinaryData> rawData) : base(tags, rawData)
         {
             AsyncExecution = asyncExecution;
             RunAsUser = runAsUser;

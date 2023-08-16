@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Collections.Generic;
 using Azure.Core;
 using Azure.ResourceManager.Sample;
@@ -17,13 +18,21 @@ namespace Azure.ResourceManager.Sample.Models
     /// </summary>
     public partial class VirtualMachineScaleSetExtensionProfile
     {
-        /// <summary> Initializes a new instance of VirtualMachineScaleSetExtensionProfile. </summary>
+        private Dictionary<string, BinaryData> _rawData;
+
+        /// <summary>
+        /// Initializes a new instance of global::Azure.ResourceManager.Sample.Models.VirtualMachineScaleSetExtensionProfile
+        ///
+        /// </summary>
         public VirtualMachineScaleSetExtensionProfile()
         {
             Extensions = new ChangeTrackingList<VirtualMachineScaleSetExtensionData>();
         }
 
-        /// <summary> Initializes a new instance of VirtualMachineScaleSetExtensionProfile. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::Azure.ResourceManager.Sample.Models.VirtualMachineScaleSetExtensionProfile
+        ///
+        /// </summary>
         /// <param name="extensions">
         /// The virtual machine scale set child extension resources.
         /// Serialized Name: VirtualMachineScaleSetExtensionProfile.extensions
@@ -32,10 +41,12 @@ namespace Azure.ResourceManager.Sample.Models
         /// Specifies the time alloted for all extensions to start. The time duration should be between 15 minutes and 120 minutes (inclusive) and should be specified in ISO 8601 format. The default value is 90 minutes (PT1H30M). &lt;br&gt;&lt;br&gt; Minimum api-version: 2020-06-01
         /// Serialized Name: VirtualMachineScaleSetExtensionProfile.extensionsTimeBudget
         /// </param>
-        internal VirtualMachineScaleSetExtensionProfile(IList<VirtualMachineScaleSetExtensionData> extensions, string extensionsTimeBudget)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal VirtualMachineScaleSetExtensionProfile(IList<VirtualMachineScaleSetExtensionData> extensions, string extensionsTimeBudget, Dictionary<string, BinaryData> rawData)
         {
             Extensions = extensions;
             ExtensionsTimeBudget = extensionsTimeBudget;
+            _rawData = rawData;
         }
 
         /// <summary>

@@ -14,7 +14,12 @@ namespace CognitiveServices.TextAnalytics.Models
     /// <summary> The TextAnalyticsError. </summary>
     public partial class TextAnalyticsError
     {
-        /// <summary> Initializes a new instance of TextAnalyticsError. </summary>
+        private Dictionary<string, BinaryData> _rawData;
+
+        /// <summary>
+        /// Initializes a new instance of global::CognitiveServices.TextAnalytics.Models.TextAnalyticsError
+        ///
+        /// </summary>
         /// <param name="code"> Error code. </param>
         /// <param name="message"> Error message. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="message"/> is null. </exception>
@@ -27,19 +32,24 @@ namespace CognitiveServices.TextAnalytics.Models
             Details = new ChangeTrackingList<TextAnalyticsError>();
         }
 
-        /// <summary> Initializes a new instance of TextAnalyticsError. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::CognitiveServices.TextAnalytics.Models.TextAnalyticsError
+        ///
+        /// </summary>
         /// <param name="code"> Error code. </param>
         /// <param name="message"> Error message. </param>
         /// <param name="target"> Error target. </param>
         /// <param name="innererror"> Inner error contains more specific information. </param>
         /// <param name="details"> Details about specific errors that led to this reported error. </param>
-        internal TextAnalyticsError(ErrorCodeValue code, string message, string target, InnerError innererror, IReadOnlyList<TextAnalyticsError> details)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal TextAnalyticsError(ErrorCodeValue code, string message, string target, InnerError innererror, IReadOnlyList<TextAnalyticsError> details, Dictionary<string, BinaryData> rawData)
         {
             Code = code;
             Message = message;
             Target = target;
             Innererror = innererror;
             Details = details;
+            _rawData = rawData;
         }
 
         /// <summary> Error code. </summary>

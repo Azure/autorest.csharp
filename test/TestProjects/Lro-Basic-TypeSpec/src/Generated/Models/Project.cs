@@ -5,11 +5,16 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
+
 namespace LroBasicTypeSpec.Models
 {
     /// <summary> The Project. </summary>
     public partial class Project
     {
+        private Dictionary<string, BinaryData> _rawData;
+
         /// <summary> Initializes a new instance of Project. </summary>
         public Project()
         {
@@ -19,11 +24,13 @@ namespace LroBasicTypeSpec.Models
         /// <param name="id"></param>
         /// <param name="description"></param>
         /// <param name="name"></param>
-        internal Project(string id, string description, string name)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal Project(string id, string description, string name, Dictionary<string, BinaryData> rawData)
         {
             Id = id;
             Description = description;
             Name = name;
+            _rawData = rawData;
         }
 
         /// <summary> Gets the id. </summary>

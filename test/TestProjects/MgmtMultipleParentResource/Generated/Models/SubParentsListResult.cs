@@ -16,7 +16,12 @@ namespace MgmtMultipleParentResource.Models
     /// <summary> The List run command operation response. </summary>
     internal partial class SubParentsListResult
     {
-        /// <summary> Initializes a new instance of SubParentsListResult. </summary>
+        private Dictionary<string, BinaryData> _rawData;
+
+        /// <summary>
+        /// Initializes a new instance of global::MgmtMultipleParentResource.Models.SubParentsListResult
+        ///
+        /// </summary>
         /// <param name="value"> The list of run commands. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="value"/> is null. </exception>
         internal SubParentsListResult(IEnumerable<SubParentData> value)
@@ -26,13 +31,18 @@ namespace MgmtMultipleParentResource.Models
             Value = value.ToList();
         }
 
-        /// <summary> Initializes a new instance of SubParentsListResult. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::MgmtMultipleParentResource.Models.SubParentsListResult
+        ///
+        /// </summary>
         /// <param name="value"> The list of run commands. </param>
         /// <param name="nextLink"> The uri to fetch the next page of run commands. </param>
-        internal SubParentsListResult(IReadOnlyList<SubParentData> value, string nextLink)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal SubParentsListResult(IReadOnlyList<SubParentData> value, string nextLink, Dictionary<string, BinaryData> rawData)
         {
             Value = value;
             NextLink = nextLink;
+            _rawData = rawData;
         }
 
         /// <summary> The list of run commands. </summary>

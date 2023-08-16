@@ -8,17 +8,20 @@
 using System;
 using System.Collections.Generic;
 using System.Text.Json;
+using Azure;
 using Azure.Core;
 using Azure.Core.Serialization;
 
 namespace MgmtConstants.Models
 {
-    public partial class OptionalMachinePatch : IUtf8JsonSerializable, IJsonModelSerializable
+    public partial class OptionalMachinePatch : IUtf8JsonSerializable, IModelJsonSerializable<OptionalMachinePatch>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModelSerializable)this).Serialize(writer, ModelSerializerOptions.AzureServiceDefault);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<OptionalMachinePatch>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
 
-        void IJsonModelSerializable.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
+        void IModelJsonSerializable<OptionalMachinePatch>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
+            ModelSerializerHelper.ValidateFormat<OptionalMachinePatch>(this, options.Format);
+
             writer.WriteStartObject();
             if (Optional.IsCollectionDefined(Tags))
             {
@@ -44,18 +47,25 @@ namespace MgmtConstants.Models
                 writer.WriteObjectValue(Content);
             }
             writer.WriteEndObject();
+            if (_rawData is not null && options.Format == ModelSerializerFormat.Json)
+            {
+                foreach (var property in _rawData)
+                {
+                    writer.WritePropertyName(property.Key);
+#if NET6_0_OR_GREATER
+				writer.WriteRawValue(property.Value);
+#else
+                    JsonSerializer.Serialize(writer, JsonDocument.Parse(property.Value.ToString()).RootElement);
+#endif
+                }
+            }
             writer.WriteEndObject();
-        }
-
-        object IModelSerializable.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            using var doc = JsonDocument.Parse(data);
-            return DeserializeOptionalMachinePatch(doc.RootElement, options);
         }
 
         internal static OptionalMachinePatch DeserializeOptionalMachinePatch(JsonElement element, ModelSerializerOptions options = default)
         {
-            options ??= ModelSerializerOptions.AzureServiceDefault;
+            options ??= ModelSerializerOptions.DefaultWireOptions;
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
@@ -63,6 +73,7 @@ namespace MgmtConstants.Models
             Optional<IDictionary<string, string>> tags = default;
             Optional<ModelWithRequiredConstant> listener = default;
             Optional<ModelWithOptionalConstant> content = default;
+            Dictionary<string, BinaryData> rawData = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("tags"u8))
@@ -109,14 +120,57 @@ namespace MgmtConstants.Models
                     }
                     continue;
                 }
+                if (options.Format == ModelSerializerFormat.Json)
+                {
+                    rawData.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
+                    continue;
+                }
             }
-            return new OptionalMachinePatch(Optional.ToDictionary(tags), listener.Value, content.Value);
+            return new OptionalMachinePatch(Optional.ToDictionary(tags), listener.Value, content.Value, rawData);
         }
 
-        object IJsonModelSerializable.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        OptionalMachinePatch IModelJsonSerializable<OptionalMachinePatch>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
         {
+            ModelSerializerHelper.ValidateFormat<OptionalMachinePatch>(this, options.Format);
+
             using var doc = JsonDocument.ParseValue(ref reader);
             return DeserializeOptionalMachinePatch(doc.RootElement, options);
+        }
+
+        BinaryData IModelSerializable<OptionalMachinePatch>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat<OptionalMachinePatch>(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        OptionalMachinePatch IModelSerializable<OptionalMachinePatch>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat<OptionalMachinePatch>(this, options.Format);
+
+            using var doc = JsonDocument.Parse(data);
+            return DeserializeOptionalMachinePatch(doc.RootElement, options);
+        }
+
+        public static implicit operator RequestContent(OptionalMachinePatch model)
+        {
+            if (model is null)
+            {
+                return null;
+            }
+
+            return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
+        }
+
+        public static explicit operator OptionalMachinePatch(Response response)
+        {
+            if (response is null)
+            {
+                return null;
+            }
+
+            using JsonDocument doc = JsonDocument.Parse(response.ContentStream);
+            return DeserializeOptionalMachinePatch(doc.RootElement, ModelSerializerOptions.DefaultWireOptions);
         }
     }
 }

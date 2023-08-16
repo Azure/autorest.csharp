@@ -5,21 +5,34 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
+
 namespace httpInfrastructure.Models
 {
     /// <summary> The D. </summary>
     public partial class D
     {
-        /// <summary> Initializes a new instance of D. </summary>
+        private Dictionary<string, BinaryData> _rawData;
+
+        /// <summary>
+        /// Initializes a new instance of global::httpInfrastructure.Models.D
+        ///
+        /// </summary>
         internal D()
         {
         }
 
-        /// <summary> Initializes a new instance of D. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::httpInfrastructure.Models.D
+        ///
+        /// </summary>
         /// <param name="httpStatusCode"></param>
-        internal D(string httpStatusCode)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal D(string httpStatusCode, Dictionary<string, BinaryData> rawData)
         {
             HttpStatusCode = httpStatusCode;
+            _rawData = rawData;
         }
 
         /// <summary> Gets the http status code. </summary>

@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
 using Azure.Core;
 
 namespace _Type.Model.Inheritance.NotDiscriminated.Models
@@ -21,6 +22,15 @@ namespace _Type.Model.Inheritance.NotDiscriminated.Models
         {
             Argument.AssertNotNull(name, nameof(name));
 
+            Age = age;
+        }
+
+        /// <summary> Initializes a new instance of Cat. </summary>
+        /// <param name="name"></param>
+        /// <param name="age"></param>
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal Cat(string name, int age, Dictionary<string, BinaryData> rawData) : base(name, rawData)
+        {
             Age = age;
         }
 

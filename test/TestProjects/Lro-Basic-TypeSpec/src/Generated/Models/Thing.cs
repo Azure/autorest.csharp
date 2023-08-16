@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
 using Azure.Core;
 
 namespace LroBasicTypeSpec.Models
@@ -13,6 +14,8 @@ namespace LroBasicTypeSpec.Models
     /// <summary> The Thing. </summary>
     public partial class Thing
     {
+        private Dictionary<string, BinaryData> _rawData;
+
         /// <summary> Initializes a new instance of Thing. </summary>
         /// <param name="name"></param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
@@ -21,6 +24,15 @@ namespace LroBasicTypeSpec.Models
             Argument.AssertNotNull(name, nameof(name));
 
             Name = name;
+        }
+
+        /// <summary> Initializes a new instance of Thing. </summary>
+        /// <param name="name"></param>
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal Thing(string name, Dictionary<string, BinaryData> rawData)
+        {
+            Name = name;
+            _rawData = rawData;
         }
 
         /// <summary> Gets or sets the name. </summary>

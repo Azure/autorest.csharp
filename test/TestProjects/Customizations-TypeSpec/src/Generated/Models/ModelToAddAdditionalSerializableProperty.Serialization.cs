@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
 using System.Text.Json;
 using Azure;
 using Azure.Core;
@@ -13,12 +14,14 @@ using Azure.Core.Serialization;
 
 namespace CustomizationsInTsp.Models
 {
-    public partial class ModelToAddAdditionalSerializableProperty : IUtf8JsonSerializable, IJsonModelSerializable
+    public partial class ModelToAddAdditionalSerializableProperty : IUtf8JsonSerializable, IModelJsonSerializable<ModelToAddAdditionalSerializableProperty>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModelSerializable)this).Serialize(writer, ModelSerializerOptions.AzureServiceDefault);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<ModelToAddAdditionalSerializableProperty>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
 
-        void IJsonModelSerializable.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
+        void IModelJsonSerializable<ModelToAddAdditionalSerializableProperty>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
             writer.WriteStartObject();
             writer.WritePropertyName("requiredInt"u8);
             WriteRequiredIntValue(writer);
@@ -39,18 +42,25 @@ namespace CustomizationsInTsp.Models
                     writer.WriteNull("additionalNullableSerializableProperty");
                 }
             }
+            if (_rawData is not null && options.Format == ModelSerializerFormat.Json)
+            {
+                foreach (var property in _rawData)
+                {
+                    writer.WritePropertyName(property.Key);
+#if NET6_0_OR_GREATER
+				writer.WriteRawValue(property.Value);
+#else
+                    JsonSerializer.Serialize(writer, JsonDocument.Parse(property.Value.ToString()).RootElement);
+#endif
+                }
+            }
             writer.WriteEndObject();
-        }
-
-        object IModelSerializable.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            using var doc = JsonDocument.Parse(data);
-            return DeserializeModelToAddAdditionalSerializableProperty(doc.RootElement, options);
         }
 
         internal static ModelToAddAdditionalSerializableProperty DeserializeModelToAddAdditionalSerializableProperty(JsonElement element, ModelSerializerOptions options = default)
         {
-            options ??= ModelSerializerOptions.AzureServiceDefault;
+            options ??= ModelSerializerOptions.DefaultWireOptions;
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
@@ -58,6 +68,7 @@ namespace CustomizationsInTsp.Models
             int requiredInt = default;
             Optional<int> additionalSerializableProperty = default;
             Optional<int?> additionalNullableSerializableProperty = default;
+            Dictionary<string, BinaryData> rawData = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("requiredInt"u8))
@@ -84,30 +95,57 @@ namespace CustomizationsInTsp.Models
                     additionalNullableSerializableProperty = property.Value.GetInt32();
                     continue;
                 }
+                if (options.Format == ModelSerializerFormat.Json)
+                {
+                    rawData.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
+                    continue;
+                }
             }
-            return new ModelToAddAdditionalSerializableProperty(requiredInt, additionalSerializableProperty, Optional.ToNullable(additionalNullableSerializableProperty));
+            return new ModelToAddAdditionalSerializableProperty(requiredInt, additionalSerializableProperty, Optional.ToNullable(additionalNullableSerializableProperty), rawData);
         }
 
-        object IJsonModelSerializable.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        ModelToAddAdditionalSerializableProperty IModelJsonSerializable<ModelToAddAdditionalSerializableProperty>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
         {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
             using var doc = JsonDocument.ParseValue(ref reader);
             return DeserializeModelToAddAdditionalSerializableProperty(doc.RootElement, options);
         }
 
-        /// <summary> Deserializes the model from a raw response. </summary>
-        /// <param name="response"> The response to deserialize the model from. </param>
-        internal static ModelToAddAdditionalSerializableProperty FromResponse(Response response)
+        BinaryData IModelSerializable<ModelToAddAdditionalSerializableProperty>.Serialize(ModelSerializerOptions options)
         {
-            using var document = JsonDocument.Parse(response.Content);
-            return DeserializeModelToAddAdditionalSerializableProperty(document.RootElement);
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
         }
 
-        /// <summary> Convert into a Utf8JsonRequestContent. </summary>
-        internal virtual RequestContent ToRequestContent()
+        ModelToAddAdditionalSerializableProperty IModelSerializable<ModelToAddAdditionalSerializableProperty>.Deserialize(BinaryData data, ModelSerializerOptions options)
         {
-            var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue(this);
-            return content;
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using var doc = JsonDocument.Parse(data);
+            return DeserializeModelToAddAdditionalSerializableProperty(doc.RootElement, options);
+        }
+
+        public static implicit operator RequestContent(ModelToAddAdditionalSerializableProperty model)
+        {
+            if (model is null)
+            {
+                return null;
+            }
+
+            return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
+        }
+
+        public static explicit operator ModelToAddAdditionalSerializableProperty(Response response)
+        {
+            if (response is null)
+            {
+                return null;
+            }
+
+            using JsonDocument doc = JsonDocument.Parse(response.ContentStream);
+            return DeserializeModelToAddAdditionalSerializableProperty(doc.RootElement, ModelSerializerOptions.DefaultWireOptions);
         }
     }
 }

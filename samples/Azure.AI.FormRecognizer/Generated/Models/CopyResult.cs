@@ -14,7 +14,12 @@ namespace Azure.AI.FormRecognizer.Models
     /// <summary> Custom model copy result. </summary>
     public partial class CopyResult
     {
-        /// <summary> Initializes a new instance of CopyResult. </summary>
+        private Dictionary<string, BinaryData> _rawData;
+
+        /// <summary>
+        /// Initializes a new instance of global::Azure.AI.FormRecognizer.Models.CopyResult
+        ///
+        /// </summary>
         /// <param name="modelId"> Identifier of the target model. </param>
         internal CopyResult(Guid modelId)
         {
@@ -22,13 +27,18 @@ namespace Azure.AI.FormRecognizer.Models
             Errors = new ChangeTrackingList<ErrorInformation>();
         }
 
-        /// <summary> Initializes a new instance of CopyResult. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::Azure.AI.FormRecognizer.Models.CopyResult
+        ///
+        /// </summary>
         /// <param name="modelId"> Identifier of the target model. </param>
         /// <param name="errors"> Errors returned during the copy operation. </param>
-        internal CopyResult(Guid modelId, IReadOnlyList<ErrorInformation> errors)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal CopyResult(Guid modelId, IReadOnlyList<ErrorInformation> errors, Dictionary<string, BinaryData> rawData)
         {
             ModelId = modelId;
             Errors = errors;
+            _rawData = rawData;
         }
 
         /// <summary> Identifier of the target model. </summary>

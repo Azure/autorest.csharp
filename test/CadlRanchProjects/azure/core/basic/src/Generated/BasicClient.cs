@@ -132,8 +132,8 @@ namespace _Specs_.Azure.Core.Basic
             Argument.AssertNotNull(resource, nameof(resource));
 
             RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = await CreateOrReplaceAsync(id, resource.ToRequestContent(), context).ConfigureAwait(false);
-            return Response.FromValue(User.FromResponse(response), response);
+            Response response = await CreateOrReplaceAsync(id, resource, context).ConfigureAwait(false);
+            return Response.FromValue((User)response, response);
         }
 
         /// <summary> Adds a user or replaces a user's fields. </summary>
@@ -148,8 +148,8 @@ namespace _Specs_.Azure.Core.Basic
             Argument.AssertNotNull(resource, nameof(resource));
 
             RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = CreateOrReplace(id, resource.ToRequestContent(), context);
-            return Response.FromValue(User.FromResponse(response), response);
+            Response response = CreateOrReplace(id, resource, context);
+            return Response.FromValue((User)response, response);
         }
 
         /// <summary>
@@ -241,7 +241,7 @@ namespace _Specs_.Azure.Core.Basic
         {
             RequestContext context = FromCancellationToken(cancellationToken);
             Response response = await GetUserAsync(id, context).ConfigureAwait(false);
-            return Response.FromValue(User.FromResponse(response), response);
+            return Response.FromValue((User)response, response);
         }
 
         /// <summary> Gets a user. </summary>
@@ -253,7 +253,7 @@ namespace _Specs_.Azure.Core.Basic
         {
             RequestContext context = FromCancellationToken(cancellationToken);
             Response response = GetUser(id, context);
-            return Response.FromValue(User.FromResponse(response), response);
+            return Response.FromValue((User)response, response);
         }
 
         /// <summary>
@@ -403,7 +403,7 @@ namespace _Specs_.Azure.Core.Basic
 
             RequestContext context = FromCancellationToken(cancellationToken);
             Response response = await ExportAsync(id, format, context).ConfigureAwait(false);
-            return Response.FromValue(User.FromResponse(response), response);
+            return Response.FromValue((User)response, response);
         }
 
         /// <summary> Exports a user. </summary>
@@ -419,7 +419,7 @@ namespace _Specs_.Azure.Core.Basic
 
             RequestContext context = FromCancellationToken(cancellationToken);
             Response response = Export(id, format, context);
-            return Response.FromValue(User.FromResponse(response), response);
+            return Response.FromValue((User)response, response);
         }
 
         /// <summary>

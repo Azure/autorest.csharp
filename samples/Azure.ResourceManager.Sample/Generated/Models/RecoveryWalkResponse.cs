@@ -5,6 +5,9 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
+
 namespace Azure.ResourceManager.Sample.Models
 {
     /// <summary>
@@ -13,12 +16,20 @@ namespace Azure.ResourceManager.Sample.Models
     /// </summary>
     public partial class RecoveryWalkResponse
     {
-        /// <summary> Initializes a new instance of RecoveryWalkResponse. </summary>
+        private Dictionary<string, BinaryData> _rawData;
+
+        /// <summary>
+        /// Initializes a new instance of global::Azure.ResourceManager.Sample.Models.RecoveryWalkResponse
+        ///
+        /// </summary>
         internal RecoveryWalkResponse()
         {
         }
 
-        /// <summary> Initializes a new instance of RecoveryWalkResponse. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::Azure.ResourceManager.Sample.Models.RecoveryWalkResponse
+        ///
+        /// </summary>
         /// <param name="walkPerformed">
         /// Whether the recovery walk was performed
         /// Serialized Name: RecoveryWalkResponse.walkPerformed
@@ -27,10 +38,12 @@ namespace Azure.ResourceManager.Sample.Models
         /// The next update domain that needs to be walked. Null means walk spanning all update domains has been completed
         /// Serialized Name: RecoveryWalkResponse.nextPlatformUpdateDomain
         /// </param>
-        internal RecoveryWalkResponse(bool? walkPerformed, int? nextPlatformUpdateDomain)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal RecoveryWalkResponse(bool? walkPerformed, int? nextPlatformUpdateDomain, Dictionary<string, BinaryData> rawData)
         {
             WalkPerformed = walkPerformed;
             NextPlatformUpdateDomain = nextPlatformUpdateDomain;
+            _rawData = rawData;
         }
 
         /// <summary>

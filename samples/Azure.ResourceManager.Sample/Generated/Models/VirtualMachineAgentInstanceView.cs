@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Collections.Generic;
 using Azure.Core;
 
@@ -16,14 +17,22 @@ namespace Azure.ResourceManager.Sample.Models
     /// </summary>
     public partial class VirtualMachineAgentInstanceView
     {
-        /// <summary> Initializes a new instance of VirtualMachineAgentInstanceView. </summary>
+        private Dictionary<string, BinaryData> _rawData;
+
+        /// <summary>
+        /// Initializes a new instance of global::Azure.ResourceManager.Sample.Models.VirtualMachineAgentInstanceView
+        ///
+        /// </summary>
         internal VirtualMachineAgentInstanceView()
         {
             ExtensionHandlers = new ChangeTrackingList<VirtualMachineExtensionHandlerInstanceView>();
             Statuses = new ChangeTrackingList<InstanceViewStatus>();
         }
 
-        /// <summary> Initializes a new instance of VirtualMachineAgentInstanceView. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::Azure.ResourceManager.Sample.Models.VirtualMachineAgentInstanceView
+        ///
+        /// </summary>
         /// <param name="vmAgentVersion">
         /// The VM Agent full version.
         /// Serialized Name: VirtualMachineAgentInstanceView.vmAgentVersion
@@ -36,11 +45,13 @@ namespace Azure.ResourceManager.Sample.Models
         /// The resource status information.
         /// Serialized Name: VirtualMachineAgentInstanceView.statuses
         /// </param>
-        internal VirtualMachineAgentInstanceView(string vmAgentVersion, IReadOnlyList<VirtualMachineExtensionHandlerInstanceView> extensionHandlers, IReadOnlyList<InstanceViewStatus> statuses)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal VirtualMachineAgentInstanceView(string vmAgentVersion, IReadOnlyList<VirtualMachineExtensionHandlerInstanceView> extensionHandlers, IReadOnlyList<InstanceViewStatus> statuses, Dictionary<string, BinaryData> rawData)
         {
             VmAgentVersion = vmAgentVersion;
             ExtensionHandlers = extensionHandlers;
             Statuses = statuses;
+            _rawData = rawData;
         }
 
         /// <summary>

@@ -17,13 +17,19 @@ namespace Azure.ResourceManager.Sample.Models
     /// </summary>
     public partial class VirtualMachineCaptureResult : SubResource
     {
-        /// <summary> Initializes a new instance of VirtualMachineCaptureResult. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::Azure.ResourceManager.Sample.Models.VirtualMachineCaptureResult
+        ///
+        /// </summary>
         public VirtualMachineCaptureResult()
         {
             Resources = new ChangeTrackingList<BinaryData>();
         }
 
-        /// <summary> Initializes a new instance of VirtualMachineCaptureResult. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::Azure.ResourceManager.Sample.Models.VirtualMachineCaptureResult
+        ///
+        /// </summary>
         /// <param name="id">
         /// Resource Id
         /// Serialized Name: SubResource.id
@@ -44,7 +50,8 @@ namespace Azure.ResourceManager.Sample.Models
         /// a list of resource items of the captured virtual machine
         /// Serialized Name: VirtualMachineCaptureResult.resources
         /// </param>
-        internal VirtualMachineCaptureResult(string id, string schema, string contentVersion, BinaryData parameters, IReadOnlyList<BinaryData> resources) : base(id)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal VirtualMachineCaptureResult(string id, string schema, string contentVersion, BinaryData parameters, IReadOnlyList<BinaryData> resources, Dictionary<string, BinaryData> rawData) : base(id, rawData)
         {
             Schema = schema;
             ContentVersion = contentVersion;

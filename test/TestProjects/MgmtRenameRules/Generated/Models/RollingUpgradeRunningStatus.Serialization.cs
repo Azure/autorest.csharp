@@ -6,31 +6,42 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
 using System.Text.Json;
+using Azure;
 using Azure.Core;
 using Azure.Core.Serialization;
 
 namespace MgmtRenameRules.Models
 {
-    public partial class RollingUpgradeRunningStatus : IUtf8JsonSerializable, IJsonModelSerializable
+    public partial class RollingUpgradeRunningStatus : IUtf8JsonSerializable, IModelJsonSerializable<RollingUpgradeRunningStatus>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModelSerializable)this).Serialize(writer, ModelSerializerOptions.AzureServiceDefault);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<RollingUpgradeRunningStatus>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
 
-        void IJsonModelSerializable.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
+        void IModelJsonSerializable<RollingUpgradeRunningStatus>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
             writer.WriteStartObject();
+            if (_rawData is not null && options.Format == ModelSerializerFormat.Json)
+            {
+                foreach (var property in _rawData)
+                {
+                    writer.WritePropertyName(property.Key);
+#if NET6_0_OR_GREATER
+				writer.WriteRawValue(property.Value);
+#else
+                    JsonSerializer.Serialize(writer, JsonDocument.Parse(property.Value.ToString()).RootElement);
+#endif
+                }
+            }
             writer.WriteEndObject();
-        }
-
-        object IModelSerializable.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            using var doc = JsonDocument.Parse(data);
-            return DeserializeRollingUpgradeRunningStatus(doc.RootElement, options);
         }
 
         internal static RollingUpgradeRunningStatus DeserializeRollingUpgradeRunningStatus(JsonElement element, ModelSerializerOptions options = default)
         {
-            options ??= ModelSerializerOptions.AzureServiceDefault;
+            options ??= ModelSerializerOptions.DefaultWireOptions;
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
@@ -39,6 +50,7 @@ namespace MgmtRenameRules.Models
             Optional<DateTimeOffset> startTime = default;
             Optional<RollingUpgradeActionType> lastAction = default;
             Optional<DateTimeOffset> lastActionTime = default;
+            Dictionary<string, BinaryData> rawData = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("code"u8))
@@ -77,14 +89,57 @@ namespace MgmtRenameRules.Models
                     lastActionTime = property.Value.GetDateTimeOffset("O");
                     continue;
                 }
+                if (options.Format == ModelSerializerFormat.Json)
+                {
+                    rawData.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
+                    continue;
+                }
             }
-            return new RollingUpgradeRunningStatus(Optional.ToNullable(code), Optional.ToNullable(startTime), Optional.ToNullable(lastAction), Optional.ToNullable(lastActionTime));
+            return new RollingUpgradeRunningStatus(Optional.ToNullable(code), Optional.ToNullable(startTime), Optional.ToNullable(lastAction), Optional.ToNullable(lastActionTime), rawData);
         }
 
-        object IJsonModelSerializable.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        RollingUpgradeRunningStatus IModelJsonSerializable<RollingUpgradeRunningStatus>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
         {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
             using var doc = JsonDocument.ParseValue(ref reader);
             return DeserializeRollingUpgradeRunningStatus(doc.RootElement, options);
+        }
+
+        BinaryData IModelSerializable<RollingUpgradeRunningStatus>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        RollingUpgradeRunningStatus IModelSerializable<RollingUpgradeRunningStatus>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using var doc = JsonDocument.Parse(data);
+            return DeserializeRollingUpgradeRunningStatus(doc.RootElement, options);
+        }
+
+        public static implicit operator RequestContent(RollingUpgradeRunningStatus model)
+        {
+            if (model is null)
+            {
+                return null;
+            }
+
+            return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
+        }
+
+        public static explicit operator RollingUpgradeRunningStatus(Response response)
+        {
+            if (response is null)
+            {
+                return null;
+            }
+
+            using JsonDocument doc = JsonDocument.Parse(response.ContentStream);
+            return DeserializeRollingUpgradeRunningStatus(doc.RootElement, ModelSerializerOptions.DefaultWireOptions);
         }
     }
 }

@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
 using Azure.Core;
 
 namespace Encode.Bytes.Models
@@ -13,6 +14,8 @@ namespace Encode.Bytes.Models
     /// <summary> The DefaultBytesProperty. </summary>
     public partial class DefaultBytesProperty
     {
+        private Dictionary<string, BinaryData> _rawData;
+
         /// <summary> Initializes a new instance of DefaultBytesProperty. </summary>
         /// <param name="value"></param>
         /// <exception cref="ArgumentNullException"> <paramref name="value"/> is null. </exception>
@@ -21,6 +24,15 @@ namespace Encode.Bytes.Models
             Argument.AssertNotNull(value, nameof(value));
 
             Value = value;
+        }
+
+        /// <summary> Initializes a new instance of DefaultBytesProperty. </summary>
+        /// <param name="value"></param>
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal DefaultBytesProperty(BinaryData value, Dictionary<string, BinaryData> rawData)
+        {
+            Value = value;
+            _rawData = rawData;
         }
 
         /// <summary>

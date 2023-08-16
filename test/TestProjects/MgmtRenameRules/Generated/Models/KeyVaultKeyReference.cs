@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
 using Azure.Core;
 using Azure.ResourceManager.Resources.Models;
 
@@ -17,7 +18,12 @@ namespace MgmtRenameRules.Models
     /// </summary>
     public partial class KeyVaultKeyReference
     {
-        /// <summary> Initializes a new instance of KeyVaultKeyReference. </summary>
+        private Dictionary<string, BinaryData> _rawData;
+
+        /// <summary>
+        /// Initializes a new instance of global::MgmtRenameRules.Models.KeyVaultKeyReference
+        ///
+        /// </summary>
         /// <param name="keyUri">
         /// The URL referencing a key encryption key in Key Vault.
         /// Serialized Name: KeyVaultKeyReference.keyUrl
@@ -34,6 +40,26 @@ namespace MgmtRenameRules.Models
 
             KeyUri = keyUri;
             SourceVault = sourceVault;
+        }
+
+        /// <summary>
+        /// Initializes a new instance of global::MgmtRenameRules.Models.KeyVaultKeyReference
+        ///
+        /// </summary>
+        /// <param name="keyUri">
+        /// The URL referencing a key encryption key in Key Vault.
+        /// Serialized Name: KeyVaultKeyReference.keyUrl
+        /// </param>
+        /// <param name="sourceVault">
+        /// The relative URL of the Key Vault containing the key.
+        /// Serialized Name: KeyVaultKeyReference.sourceVault
+        /// </param>
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal KeyVaultKeyReference(Uri keyUri, WritableSubResource sourceVault, Dictionary<string, BinaryData> rawData)
+        {
+            KeyUri = keyUri;
+            SourceVault = sourceVault;
+            _rawData = rawData;
         }
 
         /// <summary>

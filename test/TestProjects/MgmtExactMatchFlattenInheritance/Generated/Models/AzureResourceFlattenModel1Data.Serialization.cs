@@ -8,18 +8,21 @@
 using System;
 using System.Collections.Generic;
 using System.Text.Json;
+using Azure;
 using Azure.Core;
 using Azure.Core.Serialization;
 using Azure.ResourceManager.Models;
 
 namespace MgmtExactMatchFlattenInheritance
 {
-    public partial class AzureResourceFlattenModel1Data : IUtf8JsonSerializable, IJsonModelSerializable
+    public partial class AzureResourceFlattenModel1Data : IUtf8JsonSerializable, IModelJsonSerializable<AzureResourceFlattenModel1Data>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModelSerializable)this).Serialize(writer, ModelSerializerOptions.AzureServiceDefault);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<AzureResourceFlattenModel1Data>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
 
-        void IJsonModelSerializable.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
+        void IModelJsonSerializable<AzureResourceFlattenModel1Data>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
             writer.WriteStartObject();
             if (Optional.IsDefined(Foo))
             {
@@ -52,18 +55,25 @@ namespace MgmtExactMatchFlattenInheritance
                 writer.WriteStringValue(IdPropertiesId);
             }
             writer.WriteEndObject();
+            if (_rawData is not null && options.Format == ModelSerializerFormat.Json)
+            {
+                foreach (var property in _rawData)
+                {
+                    writer.WritePropertyName(property.Key);
+#if NET6_0_OR_GREATER
+				writer.WriteRawValue(property.Value);
+#else
+                    JsonSerializer.Serialize(writer, JsonDocument.Parse(property.Value.ToString()).RootElement);
+#endif
+                }
+            }
             writer.WriteEndObject();
-        }
-
-        object IModelSerializable.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            using var doc = JsonDocument.Parse(data);
-            return DeserializeAzureResourceFlattenModel1Data(doc.RootElement, options);
         }
 
         internal static AzureResourceFlattenModel1Data DeserializeAzureResourceFlattenModel1Data(JsonElement element, ModelSerializerOptions options = default)
         {
-            options ??= ModelSerializerOptions.AzureServiceDefault;
+            options ??= ModelSerializerOptions.DefaultWireOptions;
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
@@ -77,6 +87,7 @@ namespace MgmtExactMatchFlattenInheritance
             Optional<SystemData> systemData = default;
             Optional<string> foo0 = default;
             Optional<string> id0 = default;
+            Dictionary<string, BinaryData> rawData = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("foo"u8))
@@ -153,14 +164,57 @@ namespace MgmtExactMatchFlattenInheritance
                     }
                     continue;
                 }
+                if (options.Format == ModelSerializerFormat.Json)
+                {
+                    rawData.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
+                    continue;
+                }
             }
-            return new AzureResourceFlattenModel1Data(id, name, type, systemData.Value, Optional.ToDictionary(tags), location, Optional.ToNullable(foo), foo0.Value, id0.Value);
+            return new AzureResourceFlattenModel1Data(id, name, type, systemData.Value, Optional.ToDictionary(tags), location, Optional.ToNullable(foo), foo0.Value, id0.Value, rawData);
         }
 
-        object IJsonModelSerializable.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        AzureResourceFlattenModel1Data IModelJsonSerializable<AzureResourceFlattenModel1Data>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
         {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
             using var doc = JsonDocument.ParseValue(ref reader);
             return DeserializeAzureResourceFlattenModel1Data(doc.RootElement, options);
+        }
+
+        BinaryData IModelSerializable<AzureResourceFlattenModel1Data>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        AzureResourceFlattenModel1Data IModelSerializable<AzureResourceFlattenModel1Data>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using var doc = JsonDocument.Parse(data);
+            return DeserializeAzureResourceFlattenModel1Data(doc.RootElement, options);
+        }
+
+        public static implicit operator RequestContent(AzureResourceFlattenModel1Data model)
+        {
+            if (model is null)
+            {
+                return null;
+            }
+
+            return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
+        }
+
+        public static explicit operator AzureResourceFlattenModel1Data(Response response)
+        {
+            if (response is null)
+            {
+                return null;
+            }
+
+            using JsonDocument doc = JsonDocument.Parse(response.ContentStream);
+            return DeserializeAzureResourceFlattenModel1Data(doc.RootElement, ModelSerializerOptions.DefaultWireOptions);
         }
     }
 }

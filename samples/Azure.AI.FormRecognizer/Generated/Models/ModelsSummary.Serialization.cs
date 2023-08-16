@@ -6,18 +6,22 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
 using System.Text.Json;
+using Azure;
 using Azure.Core;
 using Azure.Core.Serialization;
 
 namespace Azure.AI.FormRecognizer.Models
 {
-    public partial class ModelsSummary : IUtf8JsonSerializable, IJsonModelSerializable
+    public partial class ModelsSummary : IUtf8JsonSerializable, IModelJsonSerializable<ModelsSummary>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModelSerializable)this).Serialize(writer, ModelSerializerOptions.AzureServiceDefault);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<ModelsSummary>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
 
-        void IJsonModelSerializable.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
+        void IModelJsonSerializable<ModelsSummary>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
             writer.WriteStartObject();
             writer.WritePropertyName("count"u8);
             writer.WriteNumberValue(Count);
@@ -25,18 +29,25 @@ namespace Azure.AI.FormRecognizer.Models
             writer.WriteNumberValue(Limit);
             writer.WritePropertyName("lastUpdatedDateTime"u8);
             writer.WriteStringValue(LastUpdatedDateTime, "O");
+            if (_rawData is not null && options.Format == ModelSerializerFormat.Json)
+            {
+                foreach (var property in _rawData)
+                {
+                    writer.WritePropertyName(property.Key);
+#if NET6_0_OR_GREATER
+				writer.WriteRawValue(property.Value);
+#else
+                    JsonSerializer.Serialize(writer, JsonDocument.Parse(property.Value.ToString()).RootElement);
+#endif
+                }
+            }
             writer.WriteEndObject();
-        }
-
-        object IModelSerializable.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            using var doc = JsonDocument.Parse(data);
-            return DeserializeModelsSummary(doc.RootElement, options);
         }
 
         internal static ModelsSummary DeserializeModelsSummary(JsonElement element, ModelSerializerOptions options = default)
         {
-            options ??= ModelSerializerOptions.AzureServiceDefault;
+            options ??= ModelSerializerOptions.DefaultWireOptions;
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
@@ -44,6 +55,7 @@ namespace Azure.AI.FormRecognizer.Models
             int count = default;
             int limit = default;
             DateTimeOffset lastUpdatedDateTime = default;
+            Dictionary<string, BinaryData> rawData = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("count"u8))
@@ -61,14 +73,57 @@ namespace Azure.AI.FormRecognizer.Models
                     lastUpdatedDateTime = property.Value.GetDateTimeOffset("O");
                     continue;
                 }
+                if (options.Format == ModelSerializerFormat.Json)
+                {
+                    rawData.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
+                    continue;
+                }
             }
-            return new ModelsSummary(count, limit, lastUpdatedDateTime);
+            return new ModelsSummary(count, limit, lastUpdatedDateTime, rawData);
         }
 
-        object IJsonModelSerializable.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        ModelsSummary IModelJsonSerializable<ModelsSummary>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
         {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
             using var doc = JsonDocument.ParseValue(ref reader);
             return DeserializeModelsSummary(doc.RootElement, options);
+        }
+
+        BinaryData IModelSerializable<ModelsSummary>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        ModelsSummary IModelSerializable<ModelsSummary>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using var doc = JsonDocument.Parse(data);
+            return DeserializeModelsSummary(doc.RootElement, options);
+        }
+
+        public static implicit operator RequestContent(ModelsSummary model)
+        {
+            if (model is null)
+            {
+                return null;
+            }
+
+            return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
+        }
+
+        public static explicit operator ModelsSummary(Response response)
+        {
+            if (response is null)
+            {
+                return null;
+            }
+
+            using JsonDocument doc = JsonDocument.Parse(response.ContentStream);
+            return DeserializeModelsSummary(doc.RootElement, ModelSerializerOptions.DefaultWireOptions);
         }
     }
 }

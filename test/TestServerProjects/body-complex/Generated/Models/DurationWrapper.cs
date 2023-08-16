@@ -6,22 +6,33 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
 
 namespace body_complex.Models
 {
     /// <summary> The DurationWrapper. </summary>
     public partial class DurationWrapper
     {
-        /// <summary> Initializes a new instance of DurationWrapper. </summary>
+        private Dictionary<string, BinaryData> _rawData;
+
+        /// <summary>
+        /// Initializes a new instance of global::body_complex.Models.DurationWrapper
+        ///
+        /// </summary>
         public DurationWrapper()
         {
         }
 
-        /// <summary> Initializes a new instance of DurationWrapper. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::body_complex.Models.DurationWrapper
+        ///
+        /// </summary>
         /// <param name="field"></param>
-        internal DurationWrapper(TimeSpan? field)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal DurationWrapper(TimeSpan? field, Dictionary<string, BinaryData> rawData)
         {
             Field = field;
+            _rawData = rawData;
         }
 
         /// <summary> Gets or sets the field. </summary>

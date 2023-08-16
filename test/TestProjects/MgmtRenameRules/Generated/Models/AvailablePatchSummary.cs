@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
 
 namespace MgmtRenameRules.Models
 {
@@ -15,12 +16,20 @@ namespace MgmtRenameRules.Models
     /// </summary>
     public partial class AvailablePatchSummary
     {
-        /// <summary> Initializes a new instance of AvailablePatchSummary. </summary>
+        private Dictionary<string, BinaryData> _rawData;
+
+        /// <summary>
+        /// Initializes a new instance of global::MgmtRenameRules.Models.AvailablePatchSummary
+        ///
+        /// </summary>
         internal AvailablePatchSummary()
         {
         }
 
-        /// <summary> Initializes a new instance of AvailablePatchSummary. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::MgmtRenameRules.Models.AvailablePatchSummary
+        ///
+        /// </summary>
         /// <param name="status">
         /// The overall success or failure status of the operation. It remains "InProgress" until the operation completes. At that point it will become "Failed", "Succeeded", or "CompletedWithWarnings."
         /// Serialized Name: AvailablePatchSummary.status
@@ -57,7 +66,8 @@ namespace MgmtRenameRules.Models
         /// The errors that were encountered during execution of the operation. The details array contains the list of them.
         /// Serialized Name: AvailablePatchSummary.error
         /// </param>
-        internal AvailablePatchSummary(PatchOperationStatus? status, string assessmentActivityId, bool? rebootPending, int? criticalAndSecurityPatchCount, int? otherPatchCount, Uri uri, DateTimeOffset? startOn, DateTimeOffset? lastModifiedOn, ApiError error)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal AvailablePatchSummary(PatchOperationStatus? status, string assessmentActivityId, bool? rebootPending, int? criticalAndSecurityPatchCount, int? otherPatchCount, Uri uri, DateTimeOffset? startOn, DateTimeOffset? lastModifiedOn, ApiError error, Dictionary<string, BinaryData> rawData)
         {
             Status = status;
             AssessmentActivityId = assessmentActivityId;
@@ -68,6 +78,7 @@ namespace MgmtRenameRules.Models
             StartOn = startOn;
             LastModifiedOn = lastModifiedOn;
             Error = error;
+            _rawData = rawData;
         }
 
         /// <summary>

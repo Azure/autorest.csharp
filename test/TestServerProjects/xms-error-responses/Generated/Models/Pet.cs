@@ -5,20 +5,30 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
+
 namespace xms_error_responses.Models
 {
     /// <summary> The Pet. </summary>
     public partial class Pet : Animal
     {
-        /// <summary> Initializes a new instance of Pet. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::xms_error_responses.Models.Pet
+        ///
+        /// </summary>
         internal Pet()
         {
         }
 
-        /// <summary> Initializes a new instance of Pet. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::xms_error_responses.Models.Pet
+        ///
+        /// </summary>
         /// <param name="aniType"></param>
         /// <param name="name"> Gets the Pet by id. </param>
-        internal Pet(string aniType, string name) : base(aniType)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal Pet(string aniType, string name, Dictionary<string, BinaryData> rawData) : base(aniType, rawData)
         {
             Name = name;
         }

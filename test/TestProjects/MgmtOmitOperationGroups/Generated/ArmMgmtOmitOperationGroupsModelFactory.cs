@@ -16,16 +16,22 @@ namespace MgmtOmitOperationGroups.Models
     /// <summary> Model factory for models. </summary>
     public static partial class ArmMgmtOmitOperationGroupsModelFactory
     {
-        /// <summary> Initializes a new instance of ModelZ. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::MgmtOmitOperationGroups.Models.ModelZ
+        ///
+        /// </summary>
         /// <param name="h"></param>
         /// <param name="i"></param>
         /// <returns> A new <see cref="Models.ModelZ"/> instance for mocking. </returns>
         public static ModelZ ModelZ(string h = null, string i = null)
         {
-            return new ModelZ(h, i);
+            return new ModelZ(h, i, default);
         }
 
-        /// <summary> Initializes a new instance of ModelQ. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::MgmtOmitOperationGroups.Models.ModelQ
+        ///
+        /// </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
         /// <param name="resourceType"> The resourceType. </param>
@@ -34,10 +40,13 @@ namespace MgmtOmitOperationGroups.Models
         /// <returns> A new <see cref="Models.ModelQ"/> instance for mocking. </returns>
         public static ModelQ ModelQ(ResourceIdentifier id = null, string name = null, ResourceType resourceType = default, SystemData systemData = null, string m = null)
         {
-            return new ModelQ(id, name, resourceType, systemData, m);
+            return new ModelQ(id, name, resourceType, systemData, m, default);
         }
 
-        /// <summary> Initializes a new instance of Model2Data. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::MgmtOmitOperationGroups.Model2Data
+        ///
+        /// </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
         /// <param name="resourceType"> The resourceType. </param>
@@ -49,20 +58,26 @@ namespace MgmtOmitOperationGroups.Models
         /// <returns> A new <see cref="MgmtOmitOperationGroups.Model2Data"/> instance for mocking. </returns>
         public static Model2Data Model2Data(ResourceIdentifier id = null, string name = null, ResourceType resourceType = default, SystemData systemData = null, string b = null, ModelX modelx = null, string f = null, string g = null)
         {
-            return new Model2Data(id, name, resourceType, systemData, b, modelx, f, g);
+            return new Model2Data(id, name, resourceType, systemData, b, modelx, f, g, default);
         }
 
-        /// <summary> Initializes a new instance of Model4. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::MgmtOmitOperationGroups.Models.Model4
+        ///
+        /// </summary>
         /// <param name="id"></param>
         /// <param name="j"></param>
         /// <param name="modelz"></param>
         /// <returns> A new <see cref="Models.Model4"/> instance for mocking. </returns>
         public static Model4 Model4(string id = null, string j = null, ModelZ modelz = null)
         {
-            return new Model4(id, j, modelz);
+            return new Model4(id, j, modelz, default);
         }
 
-        /// <summary> Initializes a new instance of Model5. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::MgmtOmitOperationGroups.Models.Model5
+        ///
+        /// </summary>
         /// <param name="id"></param>
         /// <param name="k"></param>
         /// <param name="modelqs"></param>
@@ -71,7 +86,7 @@ namespace MgmtOmitOperationGroups.Models
         {
             modelqs ??= new List<ModelQ>();
 
-            return new Model5(id, k, modelqs?.ToList());
+            return new Model5(id, k, modelqs?.ToList(), default);
         }
     }
 }

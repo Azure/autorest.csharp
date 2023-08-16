@@ -6,18 +6,22 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
 using System.Text.Json;
+using Azure;
 using Azure.Core;
 using Azure.Core.Serialization;
 
 namespace multiple_inheritance.Models
 {
-    public partial class Kitten : IUtf8JsonSerializable, IJsonModelSerializable
+    public partial class Kitten : IUtf8JsonSerializable, IModelJsonSerializable<Kitten>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModelSerializable)this).Serialize(writer, ModelSerializerOptions.AzureServiceDefault);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<Kitten>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
 
-        void IJsonModelSerializable.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
+        void IModelJsonSerializable<Kitten>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
+            ModelSerializerHelper.ValidateFormat<Kitten>(this, options.Format);
+
             writer.WriteStartObject();
             if (Optional.IsDefined(EatsMiceYet))
             {
@@ -41,18 +45,25 @@ namespace multiple_inheritance.Models
             }
             writer.WritePropertyName("name"u8);
             writer.WriteStringValue(Name);
+            if (_rawData is not null && options.Format == ModelSerializerFormat.Json)
+            {
+                foreach (var property in _rawData)
+                {
+                    writer.WritePropertyName(property.Key);
+#if NET6_0_OR_GREATER
+				writer.WriteRawValue(property.Value);
+#else
+                    JsonSerializer.Serialize(writer, JsonDocument.Parse(property.Value.ToString()).RootElement);
+#endif
+                }
+            }
             writer.WriteEndObject();
-        }
-
-        object IModelSerializable.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            using var doc = JsonDocument.Parse(data);
-            return DeserializeKitten(doc.RootElement, options);
         }
 
         internal static Kitten DeserializeKitten(JsonElement element, ModelSerializerOptions options = default)
         {
-            options ??= ModelSerializerOptions.AzureServiceDefault;
+            options ??= ModelSerializerOptions.DefaultWireOptions;
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
@@ -62,6 +73,7 @@ namespace multiple_inheritance.Models
             Optional<bool> meows = default;
             Optional<bool> hisses = default;
             string name = default;
+            Dictionary<string, BinaryData> rawData = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("eatsMiceYet"u8))
@@ -105,14 +117,57 @@ namespace multiple_inheritance.Models
                     name = property.Value.GetString();
                     continue;
                 }
+                if (options.Format == ModelSerializerFormat.Json)
+                {
+                    rawData.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
+                    continue;
+                }
             }
-            return new Kitten(name, Optional.ToNullable(likesMilk), Optional.ToNullable(meows), Optional.ToNullable(hisses), Optional.ToNullable(eatsMiceYet));
+            return new Kitten(name, Optional.ToNullable(likesMilk), Optional.ToNullable(meows), Optional.ToNullable(hisses), Optional.ToNullable(eatsMiceYet), rawData);
         }
 
-        object IJsonModelSerializable.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        Kitten IModelJsonSerializable<Kitten>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
         {
+            ModelSerializerHelper.ValidateFormat<Kitten>(this, options.Format);
+
             using var doc = JsonDocument.ParseValue(ref reader);
             return DeserializeKitten(doc.RootElement, options);
+        }
+
+        BinaryData IModelSerializable<Kitten>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat<Kitten>(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        Kitten IModelSerializable<Kitten>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat<Kitten>(this, options.Format);
+
+            using var doc = JsonDocument.Parse(data);
+            return DeserializeKitten(doc.RootElement, options);
+        }
+
+        public static implicit operator RequestContent(Kitten model)
+        {
+            if (model is null)
+            {
+                return null;
+            }
+
+            return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
+        }
+
+        public static explicit operator Kitten(Response response)
+        {
+            if (response is null)
+            {
+                return null;
+            }
+
+            using JsonDocument doc = JsonDocument.Parse(response.ContentStream);
+            return DeserializeKitten(doc.RootElement, ModelSerializerOptions.DefaultWireOptions);
         }
     }
 }

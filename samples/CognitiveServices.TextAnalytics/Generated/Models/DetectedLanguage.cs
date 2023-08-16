@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
 using Azure.Core;
 
 namespace CognitiveServices.TextAnalytics.Models
@@ -13,7 +14,12 @@ namespace CognitiveServices.TextAnalytics.Models
     /// <summary> The DetectedLanguage. </summary>
     public partial class DetectedLanguage
     {
-        /// <summary> Initializes a new instance of DetectedLanguage. </summary>
+        private Dictionary<string, BinaryData> _rawData;
+
+        /// <summary>
+        /// Initializes a new instance of global::CognitiveServices.TextAnalytics.Models.DetectedLanguage
+        ///
+        /// </summary>
         /// <param name="name"> Long name of a detected language (e.g. English, French). </param>
         /// <param name="iso6391Name"> A two letter representation of the detected language according to the ISO 639-1 standard (e.g. en, fr). </param>
         /// <param name="confidenceScore"> A confidence score between 0 and 1. Scores close to 1 indicate 100% certainty that the identified language is true. </param>
@@ -26,6 +32,22 @@ namespace CognitiveServices.TextAnalytics.Models
             Name = name;
             Iso6391Name = iso6391Name;
             ConfidenceScore = confidenceScore;
+        }
+
+        /// <summary>
+        /// Initializes a new instance of global::CognitiveServices.TextAnalytics.Models.DetectedLanguage
+        ///
+        /// </summary>
+        /// <param name="name"> Long name of a detected language (e.g. English, French). </param>
+        /// <param name="iso6391Name"> A two letter representation of the detected language according to the ISO 639-1 standard (e.g. en, fr). </param>
+        /// <param name="confidenceScore"> A confidence score between 0 and 1. Scores close to 1 indicate 100% certainty that the identified language is true. </param>
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal DetectedLanguage(string name, string iso6391Name, double confidenceScore, Dictionary<string, BinaryData> rawData)
+        {
+            Name = name;
+            Iso6391Name = iso6391Name;
+            ConfidenceScore = confidenceScore;
+            _rawData = rawData;
         }
 
         /// <summary> Long name of a detected language (e.g. English, French). </summary>

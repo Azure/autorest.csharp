@@ -5,6 +5,9 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
+
 namespace Azure.ResourceManager.Sample.Models
 {
     /// <summary>
@@ -13,12 +16,18 @@ namespace Azure.ResourceManager.Sample.Models
     /// </summary>
     public partial class SubResourceWithColocationStatus : SubResource
     {
-        /// <summary> Initializes a new instance of SubResourceWithColocationStatus. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::Azure.ResourceManager.Sample.Models.SubResourceWithColocationStatus
+        ///
+        /// </summary>
         public SubResourceWithColocationStatus()
         {
         }
 
-        /// <summary> Initializes a new instance of SubResourceWithColocationStatus. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::Azure.ResourceManager.Sample.Models.SubResourceWithColocationStatus
+        ///
+        /// </summary>
         /// <param name="id">
         /// Resource Id
         /// Serialized Name: SubResource.id
@@ -27,7 +36,8 @@ namespace Azure.ResourceManager.Sample.Models
         /// Describes colocation status of a resource in the Proximity Placement Group.
         /// Serialized Name: SubResourceWithColocationStatus.colocationStatus
         /// </param>
-        internal SubResourceWithColocationStatus(string id, InstanceViewStatus colocationStatus) : base(id)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal SubResourceWithColocationStatus(string id, InstanceViewStatus colocationStatus, Dictionary<string, BinaryData> rawData) : base(id, rawData)
         {
             ColocationStatus = colocationStatus;
         }

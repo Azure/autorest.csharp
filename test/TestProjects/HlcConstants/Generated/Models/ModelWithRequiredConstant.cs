@@ -5,12 +5,20 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
+
 namespace HlcConstants.Models
 {
     /// <summary> Describes Protocol and thumbprint of Windows Remote Management listener. </summary>
     public partial class ModelWithRequiredConstant
     {
-        /// <summary> Initializes a new instance of ModelWithRequiredConstant. </summary>
+        private Dictionary<string, BinaryData> _rawData;
+
+        /// <summary>
+        /// Initializes a new instance of global::HlcConstants.Models.ModelWithRequiredConstant
+        ///
+        /// </summary>
         public ModelWithRequiredConstant()
         {
             RequiredStringConstant = StringConstant.Default;
@@ -19,17 +27,22 @@ namespace HlcConstants.Models
             RequiredFloatConstant = FloatConstant._314;
         }
 
-        /// <summary> Initializes a new instance of ModelWithRequiredConstant. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::HlcConstants.Models.ModelWithRequiredConstant
+        ///
+        /// </summary>
         /// <param name="requiredStringConstant"> A constant based on string, the only allowable value is default. </param>
         /// <param name="requiredIntConstant"> A constant based on integer. </param>
         /// <param name="requiredBooleanConstant"> A constant based on boolean. </param>
         /// <param name="requiredFloatConstant"> A constant based on float. </param>
-        internal ModelWithRequiredConstant(StringConstant requiredStringConstant, IntConstant requiredIntConstant, bool requiredBooleanConstant, FloatConstant requiredFloatConstant)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal ModelWithRequiredConstant(StringConstant requiredStringConstant, IntConstant requiredIntConstant, bool requiredBooleanConstant, FloatConstant requiredFloatConstant, Dictionary<string, BinaryData> rawData)
         {
             RequiredStringConstant = requiredStringConstant;
             RequiredIntConstant = requiredIntConstant;
             RequiredBooleanConstant = requiredBooleanConstant;
             RequiredFloatConstant = requiredFloatConstant;
+            _rawData = rawData;
         }
 
         /// <summary> A constant based on string, the only allowable value is default. </summary>

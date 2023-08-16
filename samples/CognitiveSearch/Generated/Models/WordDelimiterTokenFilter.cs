@@ -14,7 +14,10 @@ namespace CognitiveSearch.Models
     /// <summary> Splits words into subwords and performs optional transformations on subword groups. This token filter is implemented using Apache Lucene. </summary>
     public partial class WordDelimiterTokenFilter : TokenFilter
     {
-        /// <summary> Initializes a new instance of WordDelimiterTokenFilter. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::CognitiveSearch.Models.WordDelimiterTokenFilter
+        ///
+        /// </summary>
         /// <param name="name"> The name of the token filter. It must only contain letters, digits, spaces, dashes or underscores, can only start and end with alphanumeric characters, and is limited to 128 characters. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
         public WordDelimiterTokenFilter(string name) : base(name)
@@ -25,7 +28,10 @@ namespace CognitiveSearch.Models
             OdataType = "#Microsoft.Azure.Search.WordDelimiterTokenFilter";
         }
 
-        /// <summary> Initializes a new instance of WordDelimiterTokenFilter. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::CognitiveSearch.Models.WordDelimiterTokenFilter
+        ///
+        /// </summary>
         /// <param name="odataType"> Identifies the concrete type of the token filter. </param>
         /// <param name="name"> The name of the token filter. It must only contain letters, digits, spaces, dashes or underscores, can only start and end with alphanumeric characters, and is limited to 128 characters. </param>
         /// <param name="generateWordParts"> A value indicating whether to generate part words. If set, causes parts of words to be generated; for example "AzureSearch" becomes "Azure" "Search". Default is true. </param>
@@ -38,7 +44,8 @@ namespace CognitiveSearch.Models
         /// <param name="splitOnNumerics"> A value indicating whether to split on numbers. For example, if this is set to true, "Azure1Search" becomes "Azure" "1" "Search". Default is true. </param>
         /// <param name="stemEnglishPossessive"> A value indicating whether to remove trailing "'s" for each subword. Default is true. </param>
         /// <param name="protectedWords"> A list of tokens to protect from being delimited. </param>
-        internal WordDelimiterTokenFilter(string odataType, string name, bool? generateWordParts, bool? generateNumberParts, bool? catenateWords, bool? catenateNumbers, bool? catenateAll, bool? splitOnCaseChange, bool? preserveOriginal, bool? splitOnNumerics, bool? stemEnglishPossessive, IList<string> protectedWords) : base(odataType, name)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal WordDelimiterTokenFilter(string odataType, string name, bool? generateWordParts, bool? generateNumberParts, bool? catenateWords, bool? catenateNumbers, bool? catenateAll, bool? splitOnCaseChange, bool? preserveOriginal, bool? splitOnNumerics, bool? stemEnglishPossessive, IList<string> protectedWords, Dictionary<string, BinaryData> rawData) : base(odataType, name, rawData)
         {
             GenerateWordParts = generateWordParts;
             GenerateNumberParts = generateNumberParts;

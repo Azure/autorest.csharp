@@ -14,6 +14,8 @@ namespace _Specs_.Azure.Core.Basic.Models
     /// <summary> Details about a user. </summary>
     public partial class User
     {
+        private Dictionary<string, BinaryData> _rawData;
+
         /// <summary> Initializes a new instance of User. </summary>
         /// <param name="name"> The user's name. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
@@ -30,12 +32,14 @@ namespace _Specs_.Azure.Core.Basic.Models
         /// <param name="name"> The user's name. </param>
         /// <param name="orders"> The user's order list. </param>
         /// <param name="etag"> The entity tag for this resource. </param>
-        internal User(int id, string name, IList<UserOrder> orders, string etag)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal User(int id, string name, IList<UserOrder> orders, string etag, Dictionary<string, BinaryData> rawData)
         {
             Id = id;
             Name = name;
             Orders = orders;
             Etag = etag;
+            _rawData = rawData;
         }
 
         /// <summary> The user's id. </summary>

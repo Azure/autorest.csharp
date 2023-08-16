@@ -5,23 +5,36 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
+
 namespace Azure.ResourceManager.Storage.Models
 {
     /// <summary> The service properties for soft delete. </summary>
     public partial class DeleteRetentionPolicy
     {
-        /// <summary> Initializes a new instance of DeleteRetentionPolicy. </summary>
+        private Dictionary<string, BinaryData> _rawData;
+
+        /// <summary>
+        /// Initializes a new instance of global::Azure.ResourceManager.Storage.Models.DeleteRetentionPolicy
+        ///
+        /// </summary>
         public DeleteRetentionPolicy()
         {
         }
 
-        /// <summary> Initializes a new instance of DeleteRetentionPolicy. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::Azure.ResourceManager.Storage.Models.DeleteRetentionPolicy
+        ///
+        /// </summary>
         /// <param name="enabled"> Indicates whether DeleteRetentionPolicy is enabled. </param>
         /// <param name="days"> Indicates the number of days that the deleted item should be retained. The minimum specified value can be 1 and the maximum value can be 365. </param>
-        internal DeleteRetentionPolicy(bool? enabled, int? days)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal DeleteRetentionPolicy(bool? enabled, int? days, Dictionary<string, BinaryData> rawData)
         {
             Enabled = enabled;
             Days = days;
+            _rawData = rawData;
         }
 
         /// <summary> Indicates whether DeleteRetentionPolicy is enabled. </summary>

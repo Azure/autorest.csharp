@@ -5,6 +5,8 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
 using Azure.Core;
 using Azure.ResourceManager.Models;
 using MgmtDiscriminator.Models;
@@ -17,20 +19,30 @@ namespace MgmtDiscriminator
     /// </summary>
     public partial class DeliveryRuleData : ResourceData
     {
-        /// <summary> Initializes a new instance of DeliveryRuleData. </summary>
+        private Dictionary<string, BinaryData> _rawData;
+
+        /// <summary>
+        /// Initializes a new instance of global::MgmtDiscriminator.DeliveryRuleData
+        ///
+        /// </summary>
         public DeliveryRuleData()
         {
         }
 
-        /// <summary> Initializes a new instance of DeliveryRuleData. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::MgmtDiscriminator.DeliveryRuleData
+        ///
+        /// </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
         /// <param name="resourceType"> The resourceType. </param>
         /// <param name="systemData"> The systemData. </param>
         /// <param name="properties"> The properties. </param>
-        internal DeliveryRuleData(ResourceIdentifier id, string name, ResourceType resourceType, SystemData systemData, DeliveryRuleProperties properties) : base(id, name, resourceType, systemData)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal DeliveryRuleData(ResourceIdentifier id, string name, ResourceType resourceType, SystemData systemData, DeliveryRuleProperties properties, Dictionary<string, BinaryData> rawData) : base(id, name, resourceType, systemData)
         {
             Properties = properties;
+            _rawData = rawData;
         }
 
         /// <summary> The properties. </summary>

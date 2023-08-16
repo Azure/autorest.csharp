@@ -5,6 +5,10 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
+using Azure.Core.Serialization;
+
 namespace TypeSchemaMapping.Models
 {
     /// <summary>
@@ -12,18 +16,29 @@ namespace TypeSchemaMapping.Models
     /// Please note <see cref="AbstractModel"/> is the base class. According to the scenario, a derived class of the base class might need to be assigned here, or this property needs to be casted to one of the possible derived classes.
     /// The available derived classes include <see cref="DerivedFromAbstractModel"/>.
     /// </summary>
+    [AbstractHierarchyDeserializer(typeof(UnknownAbstractModel))]
     public abstract partial class AbstractModel
     {
-        /// <summary> Initializes a new instance of AbstractModel. </summary>
+        protected internal Dictionary<string, BinaryData> _rawData;
+
+        /// <summary>
+        /// Initializes a new instance of global::TypeSchemaMapping.Models.AbstractModel
+        ///
+        /// </summary>
         protected AbstractModel()
         {
         }
 
-        /// <summary> Initializes a new instance of AbstractModel. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::TypeSchemaMapping.Models.AbstractModel
+        ///
+        /// </summary>
         /// <param name="discriminatorProperty"></param>
-        internal AbstractModel(string discriminatorProperty)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal AbstractModel(string discriminatorProperty, Dictionary<string, BinaryData> rawData)
         {
             DiscriminatorProperty = discriminatorProperty;
+            _rawData = rawData;
         }
 
         /// <summary> Gets or sets the discriminator property. </summary>

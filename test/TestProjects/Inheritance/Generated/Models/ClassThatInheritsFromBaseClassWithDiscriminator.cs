@@ -14,13 +14,19 @@ namespace Inheritance.Models
     /// <summary> The ClassThatInheritsFromBaseClassWithDiscriminator. </summary>
     public partial class ClassThatInheritsFromBaseClassWithDiscriminator : BaseClassWithDiscriminator
     {
-        /// <summary> Initializes a new instance of ClassThatInheritsFromBaseClassWithDiscriminator. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::Inheritance.Models.ClassThatInheritsFromBaseClassWithDiscriminator
+        ///
+        /// </summary>
         public ClassThatInheritsFromBaseClassWithDiscriminator()
         {
             DiscriminatorProperty = "ClassThatInheritsFromBaseClassWithDiscriminator";
         }
 
-        /// <summary> Initializes a new instance of ClassThatInheritsFromBaseClassWithDiscriminator. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::Inheritance.Models.ClassThatInheritsFromBaseClassWithDiscriminator
+        ///
+        /// </summary>
         /// <param name="baseClassProperty"></param>
         /// <param name="dfeString"> Any object. </param>
         /// <param name="dfeDouble"> Any object. </param>
@@ -34,7 +40,8 @@ namespace Inheritance.Models
         /// <param name="dfeDuration"> Any object. </param>
         /// <param name="dfeUri"> Any object. </param>
         /// <param name="discriminatorProperty"></param>
-        internal ClassThatInheritsFromBaseClassWithDiscriminator(string baseClassProperty, DataFactoryElement<string> dfeString, DataFactoryElement<double> dfeDouble, DataFactoryElement<bool> dfeBool, DataFactoryElement<int> dfeInt, DataFactoryElement<BinaryData> dfeObject, DataFactoryElement<IList<SeparateClass>> dfeListOfT, DataFactoryElement<IList<string>> dfeListOfString, DataFactoryElement<IDictionary<string, string>> dfeKeyValuePairs, DataFactoryElement<DateTimeOffset> dfeDateTime, DataFactoryElement<TimeSpan> dfeDuration, DataFactoryElement<Uri> dfeUri, string discriminatorProperty) : base(baseClassProperty, dfeString, dfeDouble, dfeBool, dfeInt, dfeObject, dfeListOfT, dfeListOfString, dfeKeyValuePairs, dfeDateTime, dfeDuration, dfeUri, discriminatorProperty)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal ClassThatInheritsFromBaseClassWithDiscriminator(string baseClassProperty, DataFactoryElement<string> dfeString, DataFactoryElement<double> dfeDouble, DataFactoryElement<bool> dfeBool, DataFactoryElement<int> dfeInt, DataFactoryElement<BinaryData> dfeObject, DataFactoryElement<IList<SeparateClass>> dfeListOfT, DataFactoryElement<IList<string>> dfeListOfString, DataFactoryElement<IDictionary<string, string>> dfeKeyValuePairs, DataFactoryElement<DateTimeOffset> dfeDateTime, DataFactoryElement<TimeSpan> dfeDuration, DataFactoryElement<Uri> dfeUri, string discriminatorProperty, Dictionary<string, BinaryData> rawData) : base(baseClassProperty, dfeString, dfeDouble, dfeBool, dfeInt, dfeObject, dfeListOfT, dfeListOfString, dfeKeyValuePairs, dfeDateTime, dfeDuration, dfeUri, discriminatorProperty, rawData)
         {
             DiscriminatorProperty = discriminatorProperty ?? "ClassThatInheritsFromBaseClassWithDiscriminator";
         }

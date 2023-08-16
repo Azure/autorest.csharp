@@ -18,7 +18,12 @@ namespace MgmtRenameRules.Models
     /// </summary>
     public partial class VirtualMachineScaleSetVmInstanceRequiredIds
     {
-        /// <summary> Initializes a new instance of VirtualMachineScaleSetVmInstanceRequiredIds. </summary>
+        private Dictionary<string, BinaryData> _rawData;
+
+        /// <summary>
+        /// Initializes a new instance of global::MgmtRenameRules.Models.VirtualMachineScaleSetVmInstanceRequiredIds
+        ///
+        /// </summary>
         /// <param name="instanceIds">
         /// The virtual machine scale set instance ids.
         /// Serialized Name: VirtualMachineScaleSetVMInstanceRequiredIDs.instanceIds
@@ -31,14 +36,19 @@ namespace MgmtRenameRules.Models
             InstanceIds = instanceIds.ToList();
         }
 
-        /// <summary> Initializes a new instance of VirtualMachineScaleSetVmInstanceRequiredIds. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::MgmtRenameRules.Models.VirtualMachineScaleSetVmInstanceRequiredIds
+        ///
+        /// </summary>
         /// <param name="instanceIds">
         /// The virtual machine scale set instance ids.
         /// Serialized Name: VirtualMachineScaleSetVMInstanceRequiredIDs.instanceIds
         /// </param>
-        internal VirtualMachineScaleSetVmInstanceRequiredIds(IList<string> instanceIds)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal VirtualMachineScaleSetVmInstanceRequiredIds(IList<string> instanceIds, Dictionary<string, BinaryData> rawData)
         {
             InstanceIds = instanceIds;
+            _rawData = rawData;
         }
 
         /// <summary>

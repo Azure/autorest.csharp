@@ -5,6 +5,8 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
 using Azure.Core;
 
 namespace Azure.ResourceManager.Fake.Models
@@ -13,20 +15,29 @@ namespace Azure.ResourceManager.Fake.Models
     [PropertyReferenceType]
     public partial class CheckNameAvailabilityRequest
     {
-        /// <summary> Initializes a new instance of CheckNameAvailabilityRequest. </summary>
+        private Dictionary<string, BinaryData> _rawData;
+
+        /// <summary>
+        /// Initializes a new instance of global::Azure.ResourceManager.Fake.Models.CheckNameAvailabilityRequest
+        ///
+        /// </summary>
         [InitializationConstructor]
         public CheckNameAvailabilityRequest()
         {
         }
 
-        /// <summary> Initializes a new instance of CheckNameAvailabilityRequest. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::Azure.ResourceManager.Fake.Models.CheckNameAvailabilityRequest
+        ///
+        /// </summary>
         /// <param name="name"> The name of the resource for which availability needs to be checked. </param>
         /// <param name="resourceType"> The resource type. </param>
-        [SerializationConstructor]
-        internal CheckNameAvailabilityRequest(string name, ResourceType resourceType)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal CheckNameAvailabilityRequest(string name, ResourceType resourceType, Dictionary<string, BinaryData> rawData)
         {
             Name = name;
             ResourceType = resourceType;
+            _rawData = rawData;
         }
 
         /// <summary> The name of the resource for which availability needs to be checked. </summary>

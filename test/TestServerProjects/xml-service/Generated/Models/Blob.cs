@@ -14,7 +14,12 @@ namespace xml_service.Models
     /// <summary> An Azure Storage blob. </summary>
     public partial class Blob
     {
-        /// <summary> Initializes a new instance of Blob. </summary>
+        private Dictionary<string, BinaryData> _rawData;
+
+        /// <summary>
+        /// Initializes a new instance of global::xml_service.Models.Blob
+        ///
+        /// </summary>
         /// <param name="name"></param>
         /// <param name="deleted"></param>
         /// <param name="snapshot"></param>
@@ -33,19 +38,24 @@ namespace xml_service.Models
             Metadata = new ChangeTrackingDictionary<string, string>();
         }
 
-        /// <summary> Initializes a new instance of Blob. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::xml_service.Models.Blob
+        ///
+        /// </summary>
         /// <param name="name"></param>
         /// <param name="deleted"></param>
         /// <param name="snapshot"></param>
         /// <param name="properties"> Properties of a blob. </param>
         /// <param name="metadata"> Dictionary of &lt;string&gt;. </param>
-        internal Blob(string name, bool deleted, string snapshot, BlobProperties properties, IReadOnlyDictionary<string, string> metadata)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal Blob(string name, bool deleted, string snapshot, BlobProperties properties, IReadOnlyDictionary<string, string> metadata, Dictionary<string, BinaryData> rawData)
         {
             Name = name;
             Deleted = deleted;
             Snapshot = snapshot;
             Properties = properties;
             Metadata = metadata;
+            _rawData = rawData;
         }
 
         /// <summary> Gets the name. </summary>

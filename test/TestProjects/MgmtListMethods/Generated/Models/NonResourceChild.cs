@@ -5,23 +5,36 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
+
 namespace MgmtListMethods.Models
 {
     /// <summary> Describes the properties of a Non Resource Child. </summary>
     public partial class NonResourceChild
     {
-        /// <summary> Initializes a new instance of NonResourceChild. </summary>
+        private Dictionary<string, BinaryData> _rawData;
+
+        /// <summary>
+        /// Initializes a new instance of global::MgmtListMethods.Models.NonResourceChild
+        ///
+        /// </summary>
         internal NonResourceChild()
         {
         }
 
-        /// <summary> Initializes a new instance of NonResourceChild. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::MgmtListMethods.Models.NonResourceChild
+        ///
+        /// </summary>
         /// <param name="name"> Name. </param>
         /// <param name="numberOfCores"> Test Desc. </param>
-        internal NonResourceChild(string name, int? numberOfCores)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal NonResourceChild(string name, int? numberOfCores, Dictionary<string, BinaryData> rawData)
         {
             Name = name;
             NumberOfCores = numberOfCores;
+            _rawData = rawData;
         }
 
         /// <summary> Name. </summary>

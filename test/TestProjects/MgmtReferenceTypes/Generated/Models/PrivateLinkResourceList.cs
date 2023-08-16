@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Collections.Generic;
 using Azure.Core;
 
@@ -14,19 +15,28 @@ namespace Azure.ResourceManager.Fake.Models
     [TypeReferenceType]
     public partial class PrivateLinkResourceList
     {
-        /// <summary> Initializes a new instance of PrivateLinkResourceList. </summary>
+        private Dictionary<string, BinaryData> _rawData;
+
+        /// <summary>
+        /// Initializes a new instance of global::Azure.ResourceManager.Fake.Models.PrivateLinkResourceList
+        ///
+        /// </summary>
         [InitializationConstructor]
         public PrivateLinkResourceList()
         {
             Value = new ChangeTrackingList<PrivateLinkResourceData>();
         }
 
-        /// <summary> Initializes a new instance of PrivateLinkResourceList. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::Azure.ResourceManager.Fake.Models.PrivateLinkResourceList
+        ///
+        /// </summary>
         /// <param name="value"> Array of private link resources. </param>
-        [SerializationConstructor]
-        protected PrivateLinkResourceList(IReadOnlyList<PrivateLinkResourceData> value)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        protected PrivateLinkResourceList(IReadOnlyList<PrivateLinkResourceData> value, Dictionary<string, BinaryData> rawData)
         {
             Value = value;
+            _rawData = rawData;
         }
 
         /// <summary> Array of private link resources. </summary>

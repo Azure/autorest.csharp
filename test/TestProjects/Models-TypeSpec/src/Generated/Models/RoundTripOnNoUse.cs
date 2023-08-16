@@ -30,11 +30,9 @@ namespace ModelsTypeSpec.Models
         /// <summary> Initializes a new instance of RoundTripOnNoUse. </summary>
         /// <param name="baseModelProp"> base model property. </param>
         /// <param name="requiredList"> Required collection. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="baseModelProp"/> is null. </exception>
-        internal RoundTripOnNoUse(string baseModelProp, IList<CollectionItem> requiredList) : base(baseModelProp)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal RoundTripOnNoUse(string baseModelProp, IList<CollectionItem> requiredList, Dictionary<string, BinaryData> rawData) : base(baseModelProp, rawData)
         {
-            Argument.AssertNotNull(baseModelProp, nameof(baseModelProp));
-
             RequiredList = requiredList;
         }
 

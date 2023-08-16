@@ -15,6 +15,8 @@ namespace AnomalyDetector.Models
     /// <summary> Variable values. </summary>
     public partial class VariableValues
     {
+        private Dictionary<string, BinaryData> _rawData;
+
         /// <summary> Initializes a new instance of VariableValues. </summary>
         /// <param name="variable"> Variable name of last detection request. </param>
         /// <param name="timestamps"> Timestamps of last detection request. </param>
@@ -35,11 +37,13 @@ namespace AnomalyDetector.Models
         /// <param name="variable"> Variable name of last detection request. </param>
         /// <param name="timestamps"> Timestamps of last detection request. </param>
         /// <param name="values"> Values of variables. </param>
-        internal VariableValues(string variable, IList<string> timestamps, IList<float> values)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal VariableValues(string variable, IList<string> timestamps, IList<float> values, Dictionary<string, BinaryData> rawData)
         {
             Variable = variable;
             Timestamps = timestamps;
             Values = values;
+            _rawData = rawData;
         }
 
         /// <summary> Variable name of last detection request. </summary>

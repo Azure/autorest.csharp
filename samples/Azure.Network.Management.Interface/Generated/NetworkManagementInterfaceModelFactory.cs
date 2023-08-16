@@ -13,7 +13,10 @@ namespace Azure.Network.Management.Interface.Models
     /// <summary> Model factory for models. </summary>
     public static partial class NetworkManagementInterfaceModelFactory
     {
-        /// <summary> Initializes a new instance of NetworkInterface. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::Azure.Network.Management.Interface.Models.NetworkInterface
+        ///
+        /// </summary>
         /// <param name="id"> Resource ID. </param>
         /// <param name="name"> Resource name. </param>
         /// <param name="type"> Resource type. </param>
@@ -41,10 +44,13 @@ namespace Azure.Network.Management.Interface.Models
             tapConfigurations ??= new List<NetworkInterfaceTapConfiguration>();
             hostedWorkloads ??= new List<string>();
 
-            return new NetworkInterface(id, name, type, location, tags, etag, virtualMachine, networkSecurityGroup, privateEndpoint, ipConfigurations?.ToList(), tapConfigurations?.ToList(), dnsSettings, macAddress, primary, enableAcceleratedNetworking, enableIPForwarding, hostedWorkloads?.ToList(), resourceGuid, provisioningState);
+            return new NetworkInterface(id, name, type, location, tags, etag, virtualMachine, networkSecurityGroup, privateEndpoint, ipConfigurations?.ToList(), tapConfigurations?.ToList(), dnsSettings, macAddress, primary, enableAcceleratedNetworking, enableIPForwarding, hostedWorkloads?.ToList(), resourceGuid, provisioningState, default);
         }
 
-        /// <summary> Initializes a new instance of NetworkSecurityGroup. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::Azure.Network.Management.Interface.Models.NetworkSecurityGroup
+        ///
+        /// </summary>
         /// <param name="id"> Resource ID. </param>
         /// <param name="name"> Resource name. </param>
         /// <param name="type"> Resource type. </param>
@@ -66,10 +72,13 @@ namespace Azure.Network.Management.Interface.Models
             networkInterfaces ??= new List<NetworkInterface>();
             subnets ??= new List<Subnet>();
 
-            return new NetworkSecurityGroup(id, name, type, location, tags, etag, securityRules?.ToList(), defaultSecurityRules?.ToList(), networkInterfaces?.ToList(), subnets?.ToList(), resourceGuid, provisioningState);
+            return new NetworkSecurityGroup(id, name, type, location, tags, etag, securityRules?.ToList(), defaultSecurityRules?.ToList(), networkInterfaces?.ToList(), subnets?.ToList(), resourceGuid, provisioningState, default);
         }
 
-        /// <summary> Initializes a new instance of SecurityRule. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::Azure.Network.Management.Interface.Models.SecurityRule
+        ///
+        /// </summary>
         /// <param name="id"> Resource ID. </param>
         /// <param name="name"> The name of the resource that is unique within a resource group. This name can be used to access the resource. </param>
         /// <param name="etag"> A unique read-only string that changes whenever the resource is updated. </param>
@@ -99,10 +108,13 @@ namespace Azure.Network.Management.Interface.Models
             sourcePortRanges ??= new List<string>();
             destinationPortRanges ??= new List<string>();
 
-            return new SecurityRule(id, name, etag, description, protocol, sourcePortRange, destinationPortRange, sourceAddressPrefix, sourceAddressPrefixes?.ToList(), sourceApplicationSecurityGroups?.ToList(), destinationAddressPrefix, destinationAddressPrefixes?.ToList(), destinationApplicationSecurityGroups?.ToList(), sourcePortRanges?.ToList(), destinationPortRanges?.ToList(), access, priority, direction, provisioningState);
+            return new SecurityRule(id, name, etag, description, protocol, sourcePortRange, destinationPortRange, sourceAddressPrefix, sourceAddressPrefixes?.ToList(), sourceApplicationSecurityGroups?.ToList(), destinationAddressPrefix, destinationAddressPrefixes?.ToList(), destinationApplicationSecurityGroups?.ToList(), sourcePortRanges?.ToList(), destinationPortRanges?.ToList(), access, priority, direction, provisioningState, default);
         }
 
-        /// <summary> Initializes a new instance of ApplicationSecurityGroup. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::Azure.Network.Management.Interface.Models.ApplicationSecurityGroup
+        ///
+        /// </summary>
         /// <param name="id"> Resource ID. </param>
         /// <param name="name"> Resource name. </param>
         /// <param name="type"> Resource type. </param>
@@ -116,10 +128,13 @@ namespace Azure.Network.Management.Interface.Models
         {
             tags ??= new Dictionary<string, string>();
 
-            return new ApplicationSecurityGroup(id, name, type, location, tags, etag, resourceGuid, provisioningState);
+            return new ApplicationSecurityGroup(id, name, type, location, tags, etag, resourceGuid, provisioningState, default);
         }
 
-        /// <summary> Initializes a new instance of Resource. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::Azure.Network.Management.Interface.Models.Resource
+        ///
+        /// </summary>
         /// <param name="id"> Resource ID. </param>
         /// <param name="name"> Resource name. </param>
         /// <param name="type"> Resource type. </param>
@@ -130,10 +145,13 @@ namespace Azure.Network.Management.Interface.Models
         {
             tags ??= new Dictionary<string, string>();
 
-            return new Resource(id, name, type, location, tags);
+            return new Resource(id, name, type, location, tags, default);
         }
 
-        /// <summary> Initializes a new instance of Subnet. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::Azure.Network.Management.Interface.Models.Subnet
+        ///
+        /// </summary>
         /// <param name="id"> Resource ID. </param>
         /// <param name="name"> The name of the resource that is unique within a resource group. This name can be used to access the resource. </param>
         /// <param name="etag"> A unique read-only string that changes whenever the resource is updated. </param>
@@ -167,10 +185,13 @@ namespace Azure.Network.Management.Interface.Models
             serviceAssociationLinks ??= new List<ServiceAssociationLink>();
             delegations ??= new List<Delegation>();
 
-            return new Subnet(id, name, etag, addressPrefix, addressPrefixes?.ToList(), networkSecurityGroup, routeTable, natGateway, serviceEndpoints?.ToList(), serviceEndpointPolicies?.ToList(), privateEndpoints?.ToList(), ipConfigurations?.ToList(), ipConfigurationProfiles?.ToList(), resourceNavigationLinks?.ToList(), serviceAssociationLinks?.ToList(), delegations?.ToList(), purpose, provisioningState, privateEndpointNetworkPolicies, privateLinkServiceNetworkPolicies);
+            return new Subnet(id, name, etag, addressPrefix, addressPrefixes?.ToList(), networkSecurityGroup, routeTable, natGateway, serviceEndpoints?.ToList(), serviceEndpointPolicies?.ToList(), privateEndpoints?.ToList(), ipConfigurations?.ToList(), ipConfigurationProfiles?.ToList(), resourceNavigationLinks?.ToList(), serviceAssociationLinks?.ToList(), delegations?.ToList(), purpose, provisioningState, privateEndpointNetworkPolicies, privateLinkServiceNetworkPolicies, default);
         }
 
-        /// <summary> Initializes a new instance of RouteTable. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::Azure.Network.Management.Interface.Models.RouteTable
+        ///
+        /// </summary>
         /// <param name="id"> Resource ID. </param>
         /// <param name="name"> Resource name. </param>
         /// <param name="type"> Resource type. </param>
@@ -188,10 +209,13 @@ namespace Azure.Network.Management.Interface.Models
             routes ??= new List<Route>();
             subnets ??= new List<Subnet>();
 
-            return new RouteTable(id, name, type, location, tags, etag, routes?.ToList(), subnets?.ToList(), disableBgpRoutePropagation, provisioningState);
+            return new RouteTable(id, name, type, location, tags, etag, routes?.ToList(), subnets?.ToList(), disableBgpRoutePropagation, provisioningState, default);
         }
 
-        /// <summary> Initializes a new instance of Route. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::Azure.Network.Management.Interface.Models.Route
+        ///
+        /// </summary>
         /// <param name="id"> Resource ID. </param>
         /// <param name="name"> The name of the resource that is unique within a resource group. This name can be used to access the resource. </param>
         /// <param name="etag"> A unique read-only string that changes whenever the resource is updated. </param>
@@ -202,10 +226,13 @@ namespace Azure.Network.Management.Interface.Models
         /// <returns> A new <see cref="Models.Route"/> instance for mocking. </returns>
         public static Route Route(string id = null, string name = null, string etag = null, string addressPrefix = null, RouteNextHopType? nextHopType = null, string nextHopIpAddress = null, ProvisioningState? provisioningState = null)
         {
-            return new Route(id, name, etag, addressPrefix, nextHopType, nextHopIpAddress, provisioningState);
+            return new Route(id, name, etag, addressPrefix, nextHopType, nextHopIpAddress, provisioningState, default);
         }
 
-        /// <summary> Initializes a new instance of ServiceEndpointPropertiesFormat. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::Azure.Network.Management.Interface.Models.ServiceEndpointPropertiesFormat
+        ///
+        /// </summary>
         /// <param name="service"> The type of the endpoint service. </param>
         /// <param name="locations"> A list of locations. </param>
         /// <param name="provisioningState"> The provisioning state of the service endpoint resource. </param>
@@ -214,10 +241,13 @@ namespace Azure.Network.Management.Interface.Models
         {
             locations ??= new List<string>();
 
-            return new ServiceEndpointPropertiesFormat(service, locations?.ToList(), provisioningState);
+            return new ServiceEndpointPropertiesFormat(service, locations?.ToList(), provisioningState, default);
         }
 
-        /// <summary> Initializes a new instance of ServiceEndpointPolicy. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::Azure.Network.Management.Interface.Models.ServiceEndpointPolicy
+        ///
+        /// </summary>
         /// <param name="id"> Resource ID. </param>
         /// <param name="name"> Resource name. </param>
         /// <param name="type"> Resource type. </param>
@@ -235,10 +265,13 @@ namespace Azure.Network.Management.Interface.Models
             serviceEndpointPolicyDefinitions ??= new List<ServiceEndpointPolicyDefinition>();
             subnets ??= new List<Subnet>();
 
-            return new ServiceEndpointPolicy(id, name, type, location, tags, etag, serviceEndpointPolicyDefinitions?.ToList(), subnets?.ToList(), resourceGuid, provisioningState);
+            return new ServiceEndpointPolicy(id, name, type, location, tags, etag, serviceEndpointPolicyDefinitions?.ToList(), subnets?.ToList(), resourceGuid, provisioningState, default);
         }
 
-        /// <summary> Initializes a new instance of ServiceEndpointPolicyDefinition. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::Azure.Network.Management.Interface.Models.ServiceEndpointPolicyDefinition
+        ///
+        /// </summary>
         /// <param name="id"> Resource ID. </param>
         /// <param name="name"> The name of the resource that is unique within a resource group. This name can be used to access the resource. </param>
         /// <param name="etag"> A unique read-only string that changes whenever the resource is updated. </param>
@@ -251,10 +284,13 @@ namespace Azure.Network.Management.Interface.Models
         {
             serviceResources ??= new List<string>();
 
-            return new ServiceEndpointPolicyDefinition(id, name, etag, description, service, serviceResources?.ToList(), provisioningState);
+            return new ServiceEndpointPolicyDefinition(id, name, etag, description, service, serviceResources?.ToList(), provisioningState, default);
         }
 
-        /// <summary> Initializes a new instance of PrivateEndpoint. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::Azure.Network.Management.Interface.Models.PrivateEndpoint
+        ///
+        /// </summary>
         /// <param name="id"> Resource ID. </param>
         /// <param name="name"> Resource name. </param>
         /// <param name="type"> Resource type. </param>
@@ -274,10 +310,13 @@ namespace Azure.Network.Management.Interface.Models
             privateLinkServiceConnections ??= new List<PrivateLinkServiceConnection>();
             manualPrivateLinkServiceConnections ??= new List<PrivateLinkServiceConnection>();
 
-            return new PrivateEndpoint(id, name, type, location, tags, etag, subnet, networkInterfaces?.ToList(), provisioningState, privateLinkServiceConnections?.ToList(), manualPrivateLinkServiceConnections?.ToList());
+            return new PrivateEndpoint(id, name, type, location, tags, etag, subnet, networkInterfaces?.ToList(), provisioningState, privateLinkServiceConnections?.ToList(), manualPrivateLinkServiceConnections?.ToList(), default);
         }
 
-        /// <summary> Initializes a new instance of PrivateLinkServiceConnection. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::Azure.Network.Management.Interface.Models.PrivateLinkServiceConnection
+        ///
+        /// </summary>
         /// <param name="id"> Resource ID. </param>
         /// <param name="name"> The name of the resource that is unique within a resource group. This name can be used to access the resource. </param>
         /// <param name="type"> The resource type. </param>
@@ -292,10 +331,13 @@ namespace Azure.Network.Management.Interface.Models
         {
             groupIds ??= new List<string>();
 
-            return new PrivateLinkServiceConnection(id, name, type, etag, provisioningState, privateLinkServiceId, groupIds?.ToList(), requestMessage, privateLinkServiceConnectionState);
+            return new PrivateLinkServiceConnection(id, name, type, etag, provisioningState, privateLinkServiceId, groupIds?.ToList(), requestMessage, privateLinkServiceConnectionState, default);
         }
 
-        /// <summary> Initializes a new instance of IPConfiguration. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::Azure.Network.Management.Interface.Models.IPConfiguration
+        ///
+        /// </summary>
         /// <param name="id"> Resource ID. </param>
         /// <param name="name"> The name of the resource that is unique within a resource group. This name can be used to access the resource. </param>
         /// <param name="etag"> A unique read-only string that changes whenever the resource is updated. </param>
@@ -307,10 +349,13 @@ namespace Azure.Network.Management.Interface.Models
         /// <returns> A new <see cref="Models.IPConfiguration"/> instance for mocking. </returns>
         public static IPConfiguration IPConfiguration(string id = null, string name = null, string etag = null, string privateIPAddress = null, IPAllocationMethod? privateIPAllocationMethod = null, Subnet subnet = null, PublicIPAddress publicIPAddress = null, ProvisioningState? provisioningState = null)
         {
-            return new IPConfiguration(id, name, etag, privateIPAddress, privateIPAllocationMethod, subnet, publicIPAddress, provisioningState);
+            return new IPConfiguration(id, name, etag, privateIPAddress, privateIPAllocationMethod, subnet, publicIPAddress, provisioningState, default);
         }
 
-        /// <summary> Initializes a new instance of PublicIPAddress. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::Azure.Network.Management.Interface.Models.PublicIPAddress
+        ///
+        /// </summary>
         /// <param name="id"> Resource ID. </param>
         /// <param name="name"> Resource name. </param>
         /// <param name="type"> Resource type. </param>
@@ -337,10 +382,13 @@ namespace Azure.Network.Management.Interface.Models
             zones ??= new List<string>();
             ipTags ??= new List<IpTag>();
 
-            return new PublicIPAddress(id, name, type, location, tags, sku, etag, zones?.ToList(), publicIPAllocationMethod, publicIPAddressVersion, ipConfiguration, dnsSettings, ddosSettings, ipTags?.ToList(), ipAddress, publicIPPrefix, idleTimeoutInMinutes, resourceGuid, provisioningState);
+            return new PublicIPAddress(id, name, type, location, tags, sku, etag, zones?.ToList(), publicIPAllocationMethod, publicIPAddressVersion, ipConfiguration, dnsSettings, ddosSettings, ipTags?.ToList(), ipAddress, publicIPPrefix, idleTimeoutInMinutes, resourceGuid, provisioningState, default);
         }
 
-        /// <summary> Initializes a new instance of IPConfigurationProfile. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::Azure.Network.Management.Interface.Models.IPConfigurationProfile
+        ///
+        /// </summary>
         /// <param name="id"> Resource ID. </param>
         /// <param name="name"> The name of the resource. This name can be used to access the resource. </param>
         /// <param name="type"> Sub Resource type. </param>
@@ -350,10 +398,13 @@ namespace Azure.Network.Management.Interface.Models
         /// <returns> A new <see cref="Models.IPConfigurationProfile"/> instance for mocking. </returns>
         public static IPConfigurationProfile IPConfigurationProfile(string id = null, string name = null, string type = null, string etag = null, Subnet subnet = null, ProvisioningState? provisioningState = null)
         {
-            return new IPConfigurationProfile(id, name, type, etag, subnet, provisioningState);
+            return new IPConfigurationProfile(id, name, type, etag, subnet, provisioningState, default);
         }
 
-        /// <summary> Initializes a new instance of ResourceNavigationLink. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::Azure.Network.Management.Interface.Models.ResourceNavigationLink
+        ///
+        /// </summary>
         /// <param name="id"> Resource ID. </param>
         /// <param name="name"> Name of the resource that is unique within a resource group. This name can be used to access the resource. </param>
         /// <param name="etag"> A unique read-only string that changes whenever the resource is updated. </param>
@@ -364,10 +415,13 @@ namespace Azure.Network.Management.Interface.Models
         /// <returns> A new <see cref="Models.ResourceNavigationLink"/> instance for mocking. </returns>
         public static ResourceNavigationLink ResourceNavigationLink(string id = null, string name = null, string etag = null, string type = null, string linkedResourceType = null, string link = null, ProvisioningState? provisioningState = null)
         {
-            return new ResourceNavigationLink(id, name, etag, type, linkedResourceType, link, provisioningState);
+            return new ResourceNavigationLink(id, name, etag, type, linkedResourceType, link, provisioningState, default);
         }
 
-        /// <summary> Initializes a new instance of ServiceAssociationLink. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::Azure.Network.Management.Interface.Models.ServiceAssociationLink
+        ///
+        /// </summary>
         /// <param name="id"> Resource ID. </param>
         /// <param name="name"> Name of the resource that is unique within a resource group. This name can be used to access the resource. </param>
         /// <param name="etag"> A unique read-only string that changes whenever the resource is updated. </param>
@@ -382,10 +436,13 @@ namespace Azure.Network.Management.Interface.Models
         {
             locations ??= new List<string>();
 
-            return new ServiceAssociationLink(id, name, etag, type, linkedResourceType, link, provisioningState, allowDelete, locations?.ToList());
+            return new ServiceAssociationLink(id, name, etag, type, linkedResourceType, link, provisioningState, allowDelete, locations?.ToList(), default);
         }
 
-        /// <summary> Initializes a new instance of Delegation. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::Azure.Network.Management.Interface.Models.Delegation
+        ///
+        /// </summary>
         /// <param name="id"> Resource ID. </param>
         /// <param name="name"> The name of the resource that is unique within a subnet. This name can be used to access the resource. </param>
         /// <param name="etag"> A unique read-only string that changes whenever the resource is updated. </param>
@@ -397,10 +454,13 @@ namespace Azure.Network.Management.Interface.Models
         {
             actions ??= new List<string>();
 
-            return new Delegation(id, name, etag, serviceName, actions?.ToList(), provisioningState);
+            return new Delegation(id, name, etag, serviceName, actions?.ToList(), provisioningState, default);
         }
 
-        /// <summary> Initializes a new instance of NetworkInterfaceIPConfiguration. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::Azure.Network.Management.Interface.Models.NetworkInterfaceIPConfiguration
+        ///
+        /// </summary>
         /// <param name="id"> Resource ID. </param>
         /// <param name="name"> The name of the resource that is unique within a resource group. This name can be used to access the resource. </param>
         /// <param name="etag"> A unique read-only string that changes whenever the resource is updated. </param>
@@ -426,10 +486,13 @@ namespace Azure.Network.Management.Interface.Models
             loadBalancerInboundNatRules ??= new List<InboundNatRule>();
             applicationSecurityGroups ??= new List<ApplicationSecurityGroup>();
 
-            return new NetworkInterfaceIPConfiguration(id, name, etag, virtualNetworkTaps?.ToList(), applicationGatewayBackendAddressPools?.ToList(), loadBalancerBackendAddressPools?.ToList(), loadBalancerInboundNatRules?.ToList(), privateIPAddress, privateIPAllocationMethod, privateIPAddressVersion, subnet, primary, publicIPAddress, applicationSecurityGroups?.ToList(), provisioningState, privateLinkConnectionProperties);
+            return new NetworkInterfaceIPConfiguration(id, name, etag, virtualNetworkTaps?.ToList(), applicationGatewayBackendAddressPools?.ToList(), loadBalancerBackendAddressPools?.ToList(), loadBalancerInboundNatRules?.ToList(), privateIPAddress, privateIPAllocationMethod, privateIPAddressVersion, subnet, primary, publicIPAddress, applicationSecurityGroups?.ToList(), provisioningState, privateLinkConnectionProperties, default);
         }
 
-        /// <summary> Initializes a new instance of VirtualNetworkTap. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::Azure.Network.Management.Interface.Models.VirtualNetworkTap
+        ///
+        /// </summary>
         /// <param name="id"> Resource ID. </param>
         /// <param name="name"> Resource name. </param>
         /// <param name="type"> Resource type. </param>
@@ -448,10 +511,13 @@ namespace Azure.Network.Management.Interface.Models
             tags ??= new Dictionary<string, string>();
             networkInterfaceTapConfigurations ??= new List<NetworkInterfaceTapConfiguration>();
 
-            return new VirtualNetworkTap(id, name, type, location, tags, etag, networkInterfaceTapConfigurations?.ToList(), resourceGuid, provisioningState, destinationNetworkInterfaceIPConfiguration, destinationLoadBalancerFrontEndIPConfiguration, destinationPort);
+            return new VirtualNetworkTap(id, name, type, location, tags, etag, networkInterfaceTapConfigurations?.ToList(), resourceGuid, provisioningState, destinationNetworkInterfaceIPConfiguration, destinationLoadBalancerFrontEndIPConfiguration, destinationPort, default);
         }
 
-        /// <summary> Initializes a new instance of NetworkInterfaceTapConfiguration. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::Azure.Network.Management.Interface.Models.NetworkInterfaceTapConfiguration
+        ///
+        /// </summary>
         /// <param name="id"> Resource ID. </param>
         /// <param name="name"> The name of the resource that is unique within a resource group. This name can be used to access the resource. </param>
         /// <param name="etag"> A unique read-only string that changes whenever the resource is updated. </param>
@@ -461,10 +527,13 @@ namespace Azure.Network.Management.Interface.Models
         /// <returns> A new <see cref="Models.NetworkInterfaceTapConfiguration"/> instance for mocking. </returns>
         public static NetworkInterfaceTapConfiguration NetworkInterfaceTapConfiguration(string id = null, string name = null, string etag = null, string type = null, VirtualNetworkTap virtualNetworkTap = null, ProvisioningState? provisioningState = null)
         {
-            return new NetworkInterfaceTapConfiguration(id, name, etag, type, virtualNetworkTap, provisioningState);
+            return new NetworkInterfaceTapConfiguration(id, name, etag, type, virtualNetworkTap, provisioningState, default);
         }
 
-        /// <summary> Initializes a new instance of FrontendIPConfiguration. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::Azure.Network.Management.Interface.Models.FrontendIPConfiguration
+        ///
+        /// </summary>
         /// <param name="id"> Resource ID. </param>
         /// <param name="name"> The name of the resource that is unique within the set of frontend IP configurations used by the load balancer. This name can be used to access the resource. </param>
         /// <param name="etag"> A unique read-only string that changes whenever the resource is updated. </param>
@@ -490,10 +559,13 @@ namespace Azure.Network.Management.Interface.Models
             outboundRules ??= new List<SubResource>();
             loadBalancingRules ??= new List<SubResource>();
 
-            return new FrontendIPConfiguration(id, name, etag, type, zones?.ToList(), inboundNatRules?.ToList(), inboundNatPools?.ToList(), outboundRules?.ToList(), loadBalancingRules?.ToList(), privateIPAddress, privateIPAllocationMethod, privateIPAddressVersion, subnet, publicIPAddress, publicIPPrefix, provisioningState);
+            return new FrontendIPConfiguration(id, name, etag, type, zones?.ToList(), inboundNatRules?.ToList(), inboundNatPools?.ToList(), outboundRules?.ToList(), loadBalancingRules?.ToList(), privateIPAddress, privateIPAllocationMethod, privateIPAddressVersion, subnet, publicIPAddress, publicIPPrefix, provisioningState, default);
         }
 
-        /// <summary> Initializes a new instance of ApplicationGatewayBackendAddressPool. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::Azure.Network.Management.Interface.Models.ApplicationGatewayBackendAddressPool
+        ///
+        /// </summary>
         /// <param name="id"> Resource ID. </param>
         /// <param name="name"> Name of the backend address pool that is unique within an Application Gateway. </param>
         /// <param name="etag"> A unique read-only string that changes whenever the resource is updated. </param>
@@ -507,10 +579,13 @@ namespace Azure.Network.Management.Interface.Models
             backendIPConfigurations ??= new List<NetworkInterfaceIPConfiguration>();
             backendAddresses ??= new List<ApplicationGatewayBackendAddress>();
 
-            return new ApplicationGatewayBackendAddressPool(id, name, etag, type, backendIPConfigurations?.ToList(), backendAddresses?.ToList(), provisioningState);
+            return new ApplicationGatewayBackendAddressPool(id, name, etag, type, backendIPConfigurations?.ToList(), backendAddresses?.ToList(), provisioningState, default);
         }
 
-        /// <summary> Initializes a new instance of BackendAddressPool. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::Azure.Network.Management.Interface.Models.BackendAddressPool
+        ///
+        /// </summary>
         /// <param name="id"> Resource ID. </param>
         /// <param name="name"> The name of the resource that is unique within the set of backend address pools used by the load balancer. This name can be used to access the resource. </param>
         /// <param name="etag"> A unique read-only string that changes whenever the resource is updated. </param>
@@ -527,10 +602,13 @@ namespace Azure.Network.Management.Interface.Models
             loadBalancingRules ??= new List<SubResource>();
             outboundRules ??= new List<SubResource>();
 
-            return new BackendAddressPool(id, name, etag, type, backendIPConfigurations?.ToList(), loadBalancingRules?.ToList(), outboundRule, outboundRules?.ToList(), provisioningState);
+            return new BackendAddressPool(id, name, etag, type, backendIPConfigurations?.ToList(), loadBalancingRules?.ToList(), outboundRule, outboundRules?.ToList(), provisioningState, default);
         }
 
-        /// <summary> Initializes a new instance of InboundNatRule. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::Azure.Network.Management.Interface.Models.InboundNatRule
+        ///
+        /// </summary>
         /// <param name="id"> Resource ID. </param>
         /// <param name="name"> The name of the resource that is unique within the set of inbound NAT rules used by the load balancer. This name can be used to access the resource. </param>
         /// <param name="etag"> A unique read-only string that changes whenever the resource is updated. </param>
@@ -547,10 +625,13 @@ namespace Azure.Network.Management.Interface.Models
         /// <returns> A new <see cref="Models.InboundNatRule"/> instance for mocking. </returns>
         public static InboundNatRule InboundNatRule(string id = null, string name = null, string etag = null, string type = null, SubResource frontendIPConfiguration = null, NetworkInterfaceIPConfiguration backendIPConfiguration = null, TransportProtocol? protocol = null, int? frontendPort = null, int? backendPort = null, int? idleTimeoutInMinutes = null, bool? enableFloatingIP = null, bool? enableTcpReset = null, ProvisioningState? provisioningState = null)
         {
-            return new InboundNatRule(id, name, etag, type, frontendIPConfiguration, backendIPConfiguration, protocol, frontendPort, backendPort, idleTimeoutInMinutes, enableFloatingIP, enableTcpReset, provisioningState);
+            return new InboundNatRule(id, name, etag, type, frontendIPConfiguration, backendIPConfiguration, protocol, frontendPort, backendPort, idleTimeoutInMinutes, enableFloatingIP, enableTcpReset, provisioningState, default);
         }
 
-        /// <summary> Initializes a new instance of NetworkInterfaceIPConfigurationPrivateLinkConnectionProperties. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::Azure.Network.Management.Interface.Models.NetworkInterfaceIPConfigurationPrivateLinkConnectionProperties
+        ///
+        /// </summary>
         /// <param name="groupId"> The group ID for current private link connection. </param>
         /// <param name="requiredMemberName"> The required member name for current private link connection. </param>
         /// <param name="fqdns"> List of FQDNs for current private link connection. </param>
@@ -559,10 +640,13 @@ namespace Azure.Network.Management.Interface.Models
         {
             fqdns ??= new List<string>();
 
-            return new NetworkInterfaceIPConfigurationPrivateLinkConnectionProperties(groupId, requiredMemberName, fqdns?.ToList());
+            return new NetworkInterfaceIPConfigurationPrivateLinkConnectionProperties(groupId, requiredMemberName, fqdns?.ToList(), default);
         }
 
-        /// <summary> Initializes a new instance of NetworkInterfaceDnsSettings. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::Azure.Network.Management.Interface.Models.NetworkInterfaceDnsSettings
+        ///
+        /// </summary>
         /// <param name="dnsServers"> List of DNS servers IP addresses. Use 'AzureProvidedDNS' to switch to azure provided DNS resolution. 'AzureProvidedDNS' value cannot be combined with other IPs, it must be the only value in dnsServers collection. </param>
         /// <param name="appliedDnsServers"> If the VM that uses this NIC is part of an Availability Set, then this list will have the union of all DNS servers from all NICs that are part of the Availability Set. This property is what is configured on each of those VMs. </param>
         /// <param name="internalDnsNameLabel"> Relative DNS name for this NIC used for internal communications between VMs in the same virtual network. </param>
@@ -574,10 +658,13 @@ namespace Azure.Network.Management.Interface.Models
             dnsServers ??= new List<string>();
             appliedDnsServers ??= new List<string>();
 
-            return new NetworkInterfaceDnsSettings(dnsServers?.ToList(), appliedDnsServers?.ToList(), internalDnsNameLabel, internalFqdn, internalDomainNameSuffix);
+            return new NetworkInterfaceDnsSettings(dnsServers?.ToList(), appliedDnsServers?.ToList(), internalDnsNameLabel, internalFqdn, internalDomainNameSuffix, default);
         }
 
-        /// <summary> Initializes a new instance of EffectiveRouteListResult. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::Azure.Network.Management.Interface.Models.EffectiveRouteListResult
+        ///
+        /// </summary>
         /// <param name="value"> A list of effective routes. </param>
         /// <param name="nextLink"> The URL to get the next set of results. </param>
         /// <returns> A new <see cref="Models.EffectiveRouteListResult"/> instance for mocking. </returns>
@@ -585,10 +672,13 @@ namespace Azure.Network.Management.Interface.Models
         {
             value ??= new List<EffectiveRoute>();
 
-            return new EffectiveRouteListResult(value?.ToList(), nextLink);
+            return new EffectiveRouteListResult(value?.ToList(), nextLink, default);
         }
 
-        /// <summary> Initializes a new instance of EffectiveRoute. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::Azure.Network.Management.Interface.Models.EffectiveRoute
+        ///
+        /// </summary>
         /// <param name="name"> The name of the user defined route. This is optional. </param>
         /// <param name="disableBgpRoutePropagation"> If true, on-premises routes are not propagated to the network interfaces in the subnet. </param>
         /// <param name="source"> Who created the route. </param>
@@ -602,10 +692,13 @@ namespace Azure.Network.Management.Interface.Models
             addressPrefix ??= new List<string>();
             nextHopIpAddress ??= new List<string>();
 
-            return new EffectiveRoute(name, disableBgpRoutePropagation, source, state, addressPrefix?.ToList(), nextHopIpAddress?.ToList(), nextHopType);
+            return new EffectiveRoute(name, disableBgpRoutePropagation, source, state, addressPrefix?.ToList(), nextHopIpAddress?.ToList(), nextHopType, default);
         }
 
-        /// <summary> Initializes a new instance of EffectiveNetworkSecurityGroupListResult. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::Azure.Network.Management.Interface.Models.EffectiveNetworkSecurityGroupListResult
+        ///
+        /// </summary>
         /// <param name="value"> A list of effective network security groups. </param>
         /// <param name="nextLink"> The URL to get the next set of results. </param>
         /// <returns> A new <see cref="Models.EffectiveNetworkSecurityGroupListResult"/> instance for mocking. </returns>
@@ -613,10 +706,13 @@ namespace Azure.Network.Management.Interface.Models
         {
             value ??= new List<EffectiveNetworkSecurityGroup>();
 
-            return new EffectiveNetworkSecurityGroupListResult(value?.ToList(), nextLink);
+            return new EffectiveNetworkSecurityGroupListResult(value?.ToList(), nextLink, default);
         }
 
-        /// <summary> Initializes a new instance of EffectiveNetworkSecurityGroup. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::Azure.Network.Management.Interface.Models.EffectiveNetworkSecurityGroup
+        ///
+        /// </summary>
         /// <param name="networkSecurityGroup"> The ID of network security group that is applied. </param>
         /// <param name="association"> Associated resources. </param>
         /// <param name="effectiveSecurityRules"> A collection of effective security rules. </param>
@@ -626,19 +722,25 @@ namespace Azure.Network.Management.Interface.Models
         {
             effectiveSecurityRules ??= new List<EffectiveNetworkSecurityRule>();
 
-            return new EffectiveNetworkSecurityGroup(networkSecurityGroup, association, effectiveSecurityRules?.ToList(), tagMap);
+            return new EffectiveNetworkSecurityGroup(networkSecurityGroup, association, effectiveSecurityRules?.ToList(), tagMap, default);
         }
 
-        /// <summary> Initializes a new instance of EffectiveNetworkSecurityGroupAssociation. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::Azure.Network.Management.Interface.Models.EffectiveNetworkSecurityGroupAssociation
+        ///
+        /// </summary>
         /// <param name="subnet"> The ID of the subnet if assigned. </param>
         /// <param name="networkInterface"> The ID of the network interface if assigned. </param>
         /// <returns> A new <see cref="Models.EffectiveNetworkSecurityGroupAssociation"/> instance for mocking. </returns>
         public static EffectiveNetworkSecurityGroupAssociation EffectiveNetworkSecurityGroupAssociation(SubResource subnet = null, SubResource networkInterface = null)
         {
-            return new EffectiveNetworkSecurityGroupAssociation(subnet, networkInterface);
+            return new EffectiveNetworkSecurityGroupAssociation(subnet, networkInterface, default);
         }
 
-        /// <summary> Initializes a new instance of EffectiveNetworkSecurityRule. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::Azure.Network.Management.Interface.Models.EffectiveNetworkSecurityRule
+        ///
+        /// </summary>
         /// <param name="name"> The name of the security rule specified by the user (if created by the user). </param>
         /// <param name="protocol"> The network protocol this rule applies to. </param>
         /// <param name="sourcePortRange"> The source port or range. </param>
@@ -664,10 +766,13 @@ namespace Azure.Network.Management.Interface.Models
             expandedSourceAddressPrefix ??= new List<string>();
             expandedDestinationAddressPrefix ??= new List<string>();
 
-            return new EffectiveNetworkSecurityRule(name, protocol, sourcePortRange, destinationPortRange, sourcePortRanges?.ToList(), destinationPortRanges?.ToList(), sourceAddressPrefix, destinationAddressPrefix, sourceAddressPrefixes?.ToList(), destinationAddressPrefixes?.ToList(), expandedSourceAddressPrefix?.ToList(), expandedDestinationAddressPrefix?.ToList(), access, priority, direction);
+            return new EffectiveNetworkSecurityRule(name, protocol, sourcePortRange, destinationPortRange, sourcePortRanges?.ToList(), destinationPortRanges?.ToList(), sourceAddressPrefix, destinationAddressPrefix, sourceAddressPrefixes?.ToList(), destinationAddressPrefixes?.ToList(), expandedSourceAddressPrefix?.ToList(), expandedDestinationAddressPrefix?.ToList(), access, priority, direction, default);
         }
 
-        /// <summary> Initializes a new instance of LoadBalancer. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::Azure.Network.Management.Interface.Models.LoadBalancer
+        ///
+        /// </summary>
         /// <param name="id"> Resource ID. </param>
         /// <param name="name"> Resource name. </param>
         /// <param name="type"> Resource type. </param>
@@ -696,10 +801,13 @@ namespace Azure.Network.Management.Interface.Models
             inboundNatPools ??= new List<InboundNatPool>();
             outboundRules ??= new List<OutboundRule>();
 
-            return new LoadBalancer(id, name, type, location, tags, sku, etag, frontendIPConfigurations?.ToList(), backendAddressPools?.ToList(), loadBalancingRules?.ToList(), probes?.ToList(), inboundNatRules?.ToList(), inboundNatPools?.ToList(), outboundRules?.ToList(), resourceGuid, provisioningState);
+            return new LoadBalancer(id, name, type, location, tags, sku, etag, frontendIPConfigurations?.ToList(), backendAddressPools?.ToList(), loadBalancingRules?.ToList(), probes?.ToList(), inboundNatRules?.ToList(), inboundNatPools?.ToList(), outboundRules?.ToList(), resourceGuid, provisioningState, default);
         }
 
-        /// <summary> Initializes a new instance of LoadBalancingRule. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::Azure.Network.Management.Interface.Models.LoadBalancingRule
+        ///
+        /// </summary>
         /// <param name="id"> Resource ID. </param>
         /// <param name="name"> The name of the resource that is unique within the set of load balancing rules used by the load balancer. This name can be used to access the resource. </param>
         /// <param name="etag"> A unique read-only string that changes whenever the resource is updated. </param>
@@ -719,10 +827,13 @@ namespace Azure.Network.Management.Interface.Models
         /// <returns> A new <see cref="Models.LoadBalancingRule"/> instance for mocking. </returns>
         public static LoadBalancingRule LoadBalancingRule(string id = null, string name = null, string etag = null, string type = null, SubResource frontendIPConfiguration = null, SubResource backendAddressPool = null, SubResource probe = null, TransportProtocol? protocol = null, LoadDistribution? loadDistribution = null, int? frontendPort = null, int? backendPort = null, int? idleTimeoutInMinutes = null, bool? enableFloatingIP = null, bool? enableTcpReset = null, bool? disableOutboundSnat = null, ProvisioningState? provisioningState = null)
         {
-            return new LoadBalancingRule(id, name, etag, type, frontendIPConfiguration, backendAddressPool, probe, protocol, loadDistribution, frontendPort, backendPort, idleTimeoutInMinutes, enableFloatingIP, enableTcpReset, disableOutboundSnat, provisioningState);
+            return new LoadBalancingRule(id, name, etag, type, frontendIPConfiguration, backendAddressPool, probe, protocol, loadDistribution, frontendPort, backendPort, idleTimeoutInMinutes, enableFloatingIP, enableTcpReset, disableOutboundSnat, provisioningState, default);
         }
 
-        /// <summary> Initializes a new instance of Probe. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::Azure.Network.Management.Interface.Models.Probe
+        ///
+        /// </summary>
         /// <param name="id"> Resource ID. </param>
         /// <param name="name"> The name of the resource that is unique within the set of probes used by the load balancer. This name can be used to access the resource. </param>
         /// <param name="etag"> A unique read-only string that changes whenever the resource is updated. </param>
@@ -739,10 +850,13 @@ namespace Azure.Network.Management.Interface.Models
         {
             loadBalancingRules ??= new List<SubResource>();
 
-            return new Probe(id, name, etag, type, loadBalancingRules?.ToList(), protocol, port, intervalInSeconds, numberOfProbes, requestPath, provisioningState);
+            return new Probe(id, name, etag, type, loadBalancingRules?.ToList(), protocol, port, intervalInSeconds, numberOfProbes, requestPath, provisioningState, default);
         }
 
-        /// <summary> Initializes a new instance of InboundNatPool. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::Azure.Network.Management.Interface.Models.InboundNatPool
+        ///
+        /// </summary>
         /// <param name="id"> Resource ID. </param>
         /// <param name="name"> The name of the resource that is unique within the set of inbound NAT pools used by the load balancer. This name can be used to access the resource. </param>
         /// <param name="etag"> A unique read-only string that changes whenever the resource is updated. </param>
@@ -759,10 +873,13 @@ namespace Azure.Network.Management.Interface.Models
         /// <returns> A new <see cref="Models.InboundNatPool"/> instance for mocking. </returns>
         public static InboundNatPool InboundNatPool(string id = null, string name = null, string etag = null, string type = null, SubResource frontendIPConfiguration = null, TransportProtocol? protocol = null, int? frontendPortRangeStart = null, int? frontendPortRangeEnd = null, int? backendPort = null, int? idleTimeoutInMinutes = null, bool? enableFloatingIP = null, bool? enableTcpReset = null, ProvisioningState? provisioningState = null)
         {
-            return new InboundNatPool(id, name, etag, type, frontendIPConfiguration, protocol, frontendPortRangeStart, frontendPortRangeEnd, backendPort, idleTimeoutInMinutes, enableFloatingIP, enableTcpReset, provisioningState);
+            return new InboundNatPool(id, name, etag, type, frontendIPConfiguration, protocol, frontendPortRangeStart, frontendPortRangeEnd, backendPort, idleTimeoutInMinutes, enableFloatingIP, enableTcpReset, provisioningState, default);
         }
 
-        /// <summary> Initializes a new instance of OutboundRule. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::Azure.Network.Management.Interface.Models.OutboundRule
+        ///
+        /// </summary>
         /// <param name="id"> Resource ID. </param>
         /// <param name="name"> The name of the resource that is unique within the set of outbound rules used by the load balancer. This name can be used to access the resource. </param>
         /// <param name="etag"> A unique read-only string that changes whenever the resource is updated. </param>
@@ -779,7 +896,7 @@ namespace Azure.Network.Management.Interface.Models
         {
             frontendIPConfigurations ??= new List<SubResource>();
 
-            return new OutboundRule(id, name, etag, type, allocatedOutboundPorts, frontendIPConfigurations?.ToList(), backendAddressPool, provisioningState, protocol, enableTcpReset, idleTimeoutInMinutes);
+            return new OutboundRule(id, name, etag, type, allocatedOutboundPorts, frontendIPConfigurations?.ToList(), backendAddressPool, provisioningState, protocol, enableTcpReset, idleTimeoutInMinutes, default);
         }
     }
 }

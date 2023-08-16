@@ -5,6 +5,9 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
+
 namespace xms_error_responses.Models
 {
     /// <summary>
@@ -14,16 +17,23 @@ namespace xms_error_responses.Models
     /// </summary>
     public partial class PetActionError : PetAction
     {
-        /// <summary> Initializes a new instance of PetActionError. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::xms_error_responses.Models.PetActionError
+        ///
+        /// </summary>
         internal PetActionError()
         {
         }
 
-        /// <summary> Initializes a new instance of PetActionError. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::xms_error_responses.Models.PetActionError
+        ///
+        /// </summary>
         /// <param name="actionResponse"> action feedback. </param>
         /// <param name="errorType"></param>
         /// <param name="errorMessage"> the error message. </param>
-        internal PetActionError(string actionResponse, string errorType, string errorMessage) : base(actionResponse)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal PetActionError(string actionResponse, string errorType, string errorMessage, Dictionary<string, BinaryData> rawData) : base(actionResponse, rawData)
         {
             ErrorType = errorType;
             ErrorMessage = errorMessage;

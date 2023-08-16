@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
 using Azure.Core;
 
 namespace Azure.ResourceManager.Sample.Models
@@ -16,7 +17,12 @@ namespace Azure.ResourceManager.Sample.Models
     /// </summary>
     public partial class SshPublicKeyGenerateKeyPairResult
     {
-        /// <summary> Initializes a new instance of SshPublicKeyGenerateKeyPairResult. </summary>
+        private Dictionary<string, BinaryData> _rawData;
+
+        /// <summary>
+        /// Initializes a new instance of global::Azure.ResourceManager.Sample.Models.SshPublicKeyGenerateKeyPairResult
+        ///
+        /// </summary>
         /// <param name="privateKey">
         /// Private key portion of the key pair used to authenticate to a virtual machine through ssh. The private key is returned in RFC3447 format and should be treated as a secret.
         /// Serialized Name: SshPublicKeyGenerateKeyPairResult.privateKey
@@ -39,6 +45,31 @@ namespace Azure.ResourceManager.Sample.Models
             PrivateKey = privateKey;
             PublicKey = publicKey;
             Id = id;
+        }
+
+        /// <summary>
+        /// Initializes a new instance of global::Azure.ResourceManager.Sample.Models.SshPublicKeyGenerateKeyPairResult
+        ///
+        /// </summary>
+        /// <param name="privateKey">
+        /// Private key portion of the key pair used to authenticate to a virtual machine through ssh. The private key is returned in RFC3447 format and should be treated as a secret.
+        /// Serialized Name: SshPublicKeyGenerateKeyPairResult.privateKey
+        /// </param>
+        /// <param name="publicKey">
+        /// Public key portion of the key pair used to authenticate to a virtual machine through ssh. The public key is in ssh-rsa format.
+        /// Serialized Name: SshPublicKeyGenerateKeyPairResult.publicKey
+        /// </param>
+        /// <param name="id">
+        /// The ARM resource id in the form of /subscriptions/{SubscriptionId}/resourceGroups/{ResourceGroupName}/providers/Microsoft.Compute/sshPublicKeys/{SshPublicKeyName}
+        /// Serialized Name: SshPublicKeyGenerateKeyPairResult.id
+        /// </param>
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal SshPublicKeyGenerateKeyPairResult(string privateKey, string publicKey, string id, Dictionary<string, BinaryData> rawData)
+        {
+            PrivateKey = privateKey;
+            PublicKey = publicKey;
+            Id = id;
+            _rawData = rawData;
         }
 
         /// <summary>

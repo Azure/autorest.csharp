@@ -6,18 +6,22 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
 using System.Text.Json;
+using Azure;
 using Azure.Core;
 using Azure.Core.Serialization;
 
 namespace MgmtHierarchicalNonResource.Models
 {
-    public partial class PirSharedGalleryResource : IUtf8JsonSerializable, IJsonModelSerializable
+    public partial class PirSharedGalleryResource : IUtf8JsonSerializable, IModelJsonSerializable<PirSharedGalleryResource>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModelSerializable)this).Serialize(writer, ModelSerializerOptions.AzureServiceDefault);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<PirSharedGalleryResource>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
 
-        void IJsonModelSerializable.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
+        void IModelJsonSerializable<PirSharedGalleryResource>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
+            ModelSerializerHelper.ValidateFormat<PirSharedGalleryResource>(this, options.Format);
+
             writer.WriteStartObject();
             writer.WritePropertyName("identifier"u8);
             writer.WriteStartObject();
@@ -27,18 +31,25 @@ namespace MgmtHierarchicalNonResource.Models
                 writer.WriteStringValue(UniqueId);
             }
             writer.WriteEndObject();
+            if (_rawData is not null && options.Format == ModelSerializerFormat.Json)
+            {
+                foreach (var property in _rawData)
+                {
+                    writer.WritePropertyName(property.Key);
+#if NET6_0_OR_GREATER
+				writer.WriteRawValue(property.Value);
+#else
+                    JsonSerializer.Serialize(writer, JsonDocument.Parse(property.Value.ToString()).RootElement);
+#endif
+                }
+            }
             writer.WriteEndObject();
-        }
-
-        object IModelSerializable.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            using var doc = JsonDocument.Parse(data);
-            return DeserializePirSharedGalleryResource(doc.RootElement, options);
         }
 
         internal static PirSharedGalleryResource DeserializePirSharedGalleryResource(JsonElement element, ModelSerializerOptions options = default)
         {
-            options ??= ModelSerializerOptions.AzureServiceDefault;
+            options ??= ModelSerializerOptions.DefaultWireOptions;
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
@@ -46,6 +57,7 @@ namespace MgmtHierarchicalNonResource.Models
             Optional<string> name = default;
             Optional<string> location = default;
             Optional<string> uniqueId = default;
+            Dictionary<string, BinaryData> rawData = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("name"u8))
@@ -75,14 +87,57 @@ namespace MgmtHierarchicalNonResource.Models
                     }
                     continue;
                 }
+                if (options.Format == ModelSerializerFormat.Json)
+                {
+                    rawData.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
+                    continue;
+                }
             }
-            return new PirSharedGalleryResource(name.Value, location.Value, uniqueId.Value);
+            return new PirSharedGalleryResource(name.Value, location.Value, uniqueId.Value, rawData);
         }
 
-        object IJsonModelSerializable.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        PirSharedGalleryResource IModelJsonSerializable<PirSharedGalleryResource>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
         {
+            ModelSerializerHelper.ValidateFormat<PirSharedGalleryResource>(this, options.Format);
+
             using var doc = JsonDocument.ParseValue(ref reader);
             return DeserializePirSharedGalleryResource(doc.RootElement, options);
+        }
+
+        BinaryData IModelSerializable<PirSharedGalleryResource>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat<PirSharedGalleryResource>(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        PirSharedGalleryResource IModelSerializable<PirSharedGalleryResource>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat<PirSharedGalleryResource>(this, options.Format);
+
+            using var doc = JsonDocument.Parse(data);
+            return DeserializePirSharedGalleryResource(doc.RootElement, options);
+        }
+
+        public static implicit operator RequestContent(PirSharedGalleryResource model)
+        {
+            if (model is null)
+            {
+                return null;
+            }
+
+            return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
+        }
+
+        public static explicit operator PirSharedGalleryResource(Response response)
+        {
+            if (response is null)
+            {
+                return null;
+            }
+
+            using JsonDocument doc = JsonDocument.Parse(response.ContentStream);
+            return DeserializePirSharedGalleryResource(doc.RootElement, ModelSerializerOptions.DefaultWireOptions);
         }
     }
 }

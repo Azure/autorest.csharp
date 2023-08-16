@@ -7,45 +7,42 @@
 
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Xml;
 using System.Xml.Linq;
+using Azure;
 using Azure.Core;
 using Azure.Core.Serialization;
 
 namespace xml_service.Models
 {
-    public partial class Blobs : IXmlSerializable, IXmlModelSerializable
+    public partial class Blobs : IXmlSerializable, IModelSerializable<Blobs>
     {
-        void IXmlModelSerializable.Serialize(XmlWriter writer, ModelSerializerOptions options) => ((IXmlSerializable)this).Write(writer, null, options);
-
-        void IXmlSerializable.Write(XmlWriter writer, string nameHint, ModelSerializerOptions options)
+        private void Serialize(XmlWriter writer, string nameHint, ModelSerializerOptions options)
         {
             writer.WriteStartElement("Blobs");
             if (Optional.IsCollectionDefined(BlobPrefix))
             {
                 foreach (var item in BlobPrefix)
                 {
-                    writer.WriteObjectValue(item, "BlobPrefix", options);
+                    writer.WriteObjectValue(item, "BlobPrefix");
                 }
             }
             if (Optional.IsCollectionDefined(Blob))
             {
                 foreach (var item in Blob)
                 {
-                    writer.WriteObjectValue(item, "Blob", options);
+                    writer.WriteObjectValue(item, "Blob");
                 }
             }
             writer.WriteEndElement();
         }
 
-        object IModelSerializable.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            return DeserializeBlobs(XElement.Load(data.ToStream()), options);
-        }
+        void IXmlSerializable.Write(XmlWriter writer, string nameHint) => Serialize(writer, nameHint, ModelSerializerOptions.DefaultWireOptions);
 
         internal static Blobs DeserializeBlobs(XElement element, ModelSerializerOptions options = default)
         {
-            options ??= ModelSerializerOptions.AzureServiceDefault;
+            options ??= ModelSerializerOptions.DefaultWireOptions;
             IReadOnlyList<BlobPrefix> blobPrefix = default;
             IReadOnlyList<Blob> blob = default;
             var array = new List<BlobPrefix>();
@@ -60,7 +57,53 @@ namespace xml_service.Models
                 array0.Add(Models.Blob.DeserializeBlob(e));
             }
             blob = array0;
-            return new Blobs(blobPrefix, blob);
+            return new Blobs(blobPrefix, blob, default);
+        }
+
+        BinaryData IModelSerializable<Blobs>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            options ??= ModelSerializerOptions.DefaultWireOptions;
+            using MemoryStream stream = new MemoryStream();
+            using XmlWriter writer = XmlWriter.Create(stream);
+            Serialize(writer, null, options);
+            writer.Flush();
+            if (stream.Position > int.MaxValue)
+            {
+                return BinaryData.FromStream(stream);
+            }
+            else
+            {
+                return new BinaryData(stream.GetBuffer().AsMemory(0, (int)stream.Position));
+            }
+        }
+
+        Blobs IModelSerializable<Blobs>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            return DeserializeBlobs(XElement.Load(data.ToStream()), options);
+        }
+
+        public static implicit operator RequestContent(Blobs model)
+        {
+            if (model is null)
+            {
+                return null;
+            }
+
+            return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
+        }
+
+        public static explicit operator Blobs(Response response)
+        {
+            if (response is null)
+            {
+                return null;
+            }
+
+            return DeserializeBlobs(XElement.Load(response.ContentStream), ModelSerializerOptions.DefaultWireOptions);
         }
     }
 }

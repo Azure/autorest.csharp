@@ -5,25 +5,38 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
+
 namespace CognitiveSearch.Models
 {
     /// <summary> Represents a resource's usage and quota. </summary>
     public partial class ResourceCounter
     {
-        /// <summary> Initializes a new instance of ResourceCounter. </summary>
+        private Dictionary<string, BinaryData> _rawData;
+
+        /// <summary>
+        /// Initializes a new instance of global::CognitiveSearch.Models.ResourceCounter
+        ///
+        /// </summary>
         /// <param name="usage"> The resource usage amount. </param>
         internal ResourceCounter(long usage)
         {
             Usage = usage;
         }
 
-        /// <summary> Initializes a new instance of ResourceCounter. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::CognitiveSearch.Models.ResourceCounter
+        ///
+        /// </summary>
         /// <param name="usage"> The resource usage amount. </param>
         /// <param name="quota"> The resource amount quota. </param>
-        internal ResourceCounter(long usage, long? quota)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal ResourceCounter(long usage, long? quota, Dictionary<string, BinaryData> rawData)
         {
             Usage = usage;
             Quota = quota;
+            _rawData = rawData;
         }
 
         /// <summary> The resource usage amount. </summary>

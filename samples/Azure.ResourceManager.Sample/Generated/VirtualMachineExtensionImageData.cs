@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Collections.Generic;
 using Azure.Core;
 using Azure.ResourceManager.Models;
@@ -18,13 +19,21 @@ namespace Azure.ResourceManager.Sample
     /// </summary>
     public partial class VirtualMachineExtensionImageData : TrackedResourceData
     {
-        /// <summary> Initializes a new instance of VirtualMachineExtensionImageData. </summary>
+        private Dictionary<string, BinaryData> _rawData;
+
+        /// <summary>
+        /// Initializes a new instance of global::Azure.ResourceManager.Sample.VirtualMachineExtensionImageData
+        ///
+        /// </summary>
         /// <param name="location"> The location. </param>
         public VirtualMachineExtensionImageData(AzureLocation location) : base(location)
         {
         }
 
-        /// <summary> Initializes a new instance of VirtualMachineExtensionImageData. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::Azure.ResourceManager.Sample.VirtualMachineExtensionImageData
+        ///
+        /// </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
         /// <param name="resourceType"> The resourceType. </param>
@@ -51,13 +60,15 @@ namespace Azure.ResourceManager.Sample
         /// Whether the handler can support multiple extensions.
         /// Serialized Name: VirtualMachineExtensionImage.properties.supportsMultipleExtensions
         /// </param>
-        internal VirtualMachineExtensionImageData(ResourceIdentifier id, string name, ResourceType resourceType, SystemData systemData, IDictionary<string, string> tags, AzureLocation location, string operatingSystem, string computeRole, string handlerSchema, bool? vmScaleSetEnabled, bool? supportsMultipleExtensions) : base(id, name, resourceType, systemData, tags, location)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal VirtualMachineExtensionImageData(ResourceIdentifier id, string name, ResourceType resourceType, SystemData systemData, IDictionary<string, string> tags, AzureLocation location, string operatingSystem, string computeRole, string handlerSchema, bool? vmScaleSetEnabled, bool? supportsMultipleExtensions, Dictionary<string, BinaryData> rawData) : base(id, name, resourceType, systemData, tags, location)
         {
             OperatingSystem = operatingSystem;
             ComputeRole = computeRole;
             HandlerSchema = handlerSchema;
             VmScaleSetEnabled = vmScaleSetEnabled;
             SupportsMultipleExtensions = supportsMultipleExtensions;
+            _rawData = rawData;
         }
 
         /// <summary>

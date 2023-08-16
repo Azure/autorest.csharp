@@ -5,16 +5,23 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
+
 namespace body_complex.Models
 {
     /// <summary> The UnknownMyBaseType. </summary>
     internal partial class UnknownMyBaseType : MyBaseType
     {
-        /// <summary> Initializes a new instance of UnknownMyBaseType. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::body_complex.Models.UnknownMyBaseType
+        ///
+        /// </summary>
         /// <param name="kind"></param>
         /// <param name="propB1"></param>
         /// <param name="propBH1"></param>
-        internal UnknownMyBaseType(MyKind kind, string propB1, string propBH1) : base(kind, propB1, propBH1)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal UnknownMyBaseType(MyKind kind, string propB1, string propBH1, Dictionary<string, BinaryData> rawData) : base(kind, propB1, propBH1, rawData)
         {
             Kind = kind;
         }

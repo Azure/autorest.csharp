@@ -15,7 +15,12 @@ namespace MgmtParamOrdering.Models
     /// <summary> Specifies a list of virtual machine instance IDs from the VM scale set. </summary>
     public partial class VirtualMachineScaleSetVMInstanceRequiredIDs
     {
-        /// <summary> Initializes a new instance of VirtualMachineScaleSetVMInstanceRequiredIDs. </summary>
+        private Dictionary<string, BinaryData> _rawData;
+
+        /// <summary>
+        /// Initializes a new instance of global::MgmtParamOrdering.Models.VirtualMachineScaleSetVMInstanceRequiredIDs
+        ///
+        /// </summary>
         /// <param name="instanceIds"> The virtual machine scale set instance ids. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="instanceIds"/> is null. </exception>
         public VirtualMachineScaleSetVMInstanceRequiredIDs(IEnumerable<string> instanceIds)
@@ -25,11 +30,16 @@ namespace MgmtParamOrdering.Models
             InstanceIds = instanceIds.ToList();
         }
 
-        /// <summary> Initializes a new instance of VirtualMachineScaleSetVMInstanceRequiredIDs. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::MgmtParamOrdering.Models.VirtualMachineScaleSetVMInstanceRequiredIDs
+        ///
+        /// </summary>
         /// <param name="instanceIds"> The virtual machine scale set instance ids. </param>
-        internal VirtualMachineScaleSetVMInstanceRequiredIDs(IList<string> instanceIds)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal VirtualMachineScaleSetVMInstanceRequiredIDs(IList<string> instanceIds, Dictionary<string, BinaryData> rawData)
         {
             InstanceIds = instanceIds;
+            _rawData = rawData;
         }
 
         /// <summary> The virtual machine scale set instance ids. </summary>

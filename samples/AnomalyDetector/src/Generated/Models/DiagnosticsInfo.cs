@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Collections.Generic;
 using Azure.Core;
 
@@ -13,6 +14,8 @@ namespace AnomalyDetector.Models
     /// <summary> Diagnostics information to help inspect the states of model or variable. </summary>
     public partial class DiagnosticsInfo
     {
+        private Dictionary<string, BinaryData> _rawData;
+
         /// <summary> Initializes a new instance of DiagnosticsInfo. </summary>
         public DiagnosticsInfo()
         {
@@ -22,10 +25,12 @@ namespace AnomalyDetector.Models
         /// <summary> Initializes a new instance of DiagnosticsInfo. </summary>
         /// <param name="modelState"> Model status. </param>
         /// <param name="variableStates"> Variable Status. </param>
-        internal DiagnosticsInfo(ModelState modelState, IList<VariableState> variableStates)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal DiagnosticsInfo(ModelState modelState, IList<VariableState> variableStates, Dictionary<string, BinaryData> rawData)
         {
             ModelState = modelState;
             VariableStates = variableStates;
+            _rawData = rawData;
         }
 
         /// <summary> Model status. </summary>

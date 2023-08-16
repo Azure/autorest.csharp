@@ -15,7 +15,12 @@ namespace Azure.ResourceManager.Storage.Models
     /// <summary> Blob restore parameters. </summary>
     public partial class BlobRestoreContent
     {
-        /// <summary> Initializes a new instance of BlobRestoreContent. </summary>
+        private Dictionary<string, BinaryData> _rawData;
+
+        /// <summary>
+        /// Initializes a new instance of global::Azure.ResourceManager.Storage.Models.BlobRestoreContent
+        ///
+        /// </summary>
         /// <param name="timeToRestore"> Restore blob to the specified time. </param>
         /// <param name="blobRanges"> Blob ranges to restore. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="blobRanges"/> is null. </exception>
@@ -27,13 +32,18 @@ namespace Azure.ResourceManager.Storage.Models
             BlobRanges = blobRanges.ToList();
         }
 
-        /// <summary> Initializes a new instance of BlobRestoreContent. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::Azure.ResourceManager.Storage.Models.BlobRestoreContent
+        ///
+        /// </summary>
         /// <param name="timeToRestore"> Restore blob to the specified time. </param>
         /// <param name="blobRanges"> Blob ranges to restore. </param>
-        internal BlobRestoreContent(DateTimeOffset timeToRestore, IList<BlobRestoreRange> blobRanges)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal BlobRestoreContent(DateTimeOffset timeToRestore, IList<BlobRestoreRange> blobRanges, Dictionary<string, BinaryData> rawData)
         {
             TimeToRestore = timeToRestore;
             BlobRanges = blobRanges;
+            _rawData = rawData;
         }
 
         /// <summary> Restore blob to the specified time. </summary>

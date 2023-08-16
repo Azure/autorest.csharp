@@ -15,7 +15,10 @@ namespace CognitiveSearch.Models
     /// <summary> A token filter that only keeps tokens with text contained in a specified list of words. This token filter is implemented using Apache Lucene. </summary>
     public partial class KeepTokenFilter : TokenFilter
     {
-        /// <summary> Initializes a new instance of KeepTokenFilter. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::CognitiveSearch.Models.KeepTokenFilter
+        ///
+        /// </summary>
         /// <param name="name"> The name of the token filter. It must only contain letters, digits, spaces, dashes or underscores, can only start and end with alphanumeric characters, and is limited to 128 characters. </param>
         /// <param name="keepWords"> The list of words to keep. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> or <paramref name="keepWords"/> is null. </exception>
@@ -28,12 +31,16 @@ namespace CognitiveSearch.Models
             OdataType = "#Microsoft.Azure.Search.KeepTokenFilter";
         }
 
-        /// <summary> Initializes a new instance of KeepTokenFilter. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::CognitiveSearch.Models.KeepTokenFilter
+        ///
+        /// </summary>
         /// <param name="odataType"> Identifies the concrete type of the token filter. </param>
         /// <param name="name"> The name of the token filter. It must only contain letters, digits, spaces, dashes or underscores, can only start and end with alphanumeric characters, and is limited to 128 characters. </param>
         /// <param name="keepWords"> The list of words to keep. </param>
         /// <param name="lowerCaseKeepWords"> A value indicating whether to lower case all words first. Default is false. </param>
-        internal KeepTokenFilter(string odataType, string name, IList<string> keepWords, bool? lowerCaseKeepWords) : base(odataType, name)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal KeepTokenFilter(string odataType, string name, IList<string> keepWords, bool? lowerCaseKeepWords, Dictionary<string, BinaryData> rawData) : base(odataType, name, rawData)
         {
             KeepWords = keepWords;
             LowerCaseKeepWords = lowerCaseKeepWords;

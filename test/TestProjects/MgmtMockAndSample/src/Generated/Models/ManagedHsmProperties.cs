@@ -14,14 +14,22 @@ namespace MgmtMockAndSample.Models
     /// <summary> Properties of the managed HSM Pool. </summary>
     public partial class ManagedHsmProperties
     {
-        /// <summary> Initializes a new instance of ManagedHsmProperties. </summary>
+        private Dictionary<string, BinaryData> _rawData;
+
+        /// <summary>
+        /// Initializes a new instance of global::MgmtMockAndSample.Models.ManagedHsmProperties
+        ///
+        /// </summary>
         public ManagedHsmProperties()
         {
             InitialAdminObjectIds = new ChangeTrackingList<string>();
             PrivateEndpointConnections = new ChangeTrackingList<MhsmPrivateEndpointConnectionItem>();
         }
 
-        /// <summary> Initializes a new instance of ManagedHsmProperties. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::MgmtMockAndSample.Models.ManagedHsmProperties
+        ///
+        /// </summary>
         /// <param name="settings"> The settings that should be applied to this ManagedHsm. This should be a JSON string or JSON object. </param>
         /// <param name="protectedSettings"> The protected settings that should be applied to this ManagedHsm. This should be a JSON string or JSON object. </param>
         /// <param name="rawMessage"> The raw message content. </param>
@@ -38,7 +46,8 @@ namespace MgmtMockAndSample.Models
         /// <param name="privateEndpointConnections"> List of private endpoint connections associated with the managed hsm pool. </param>
         /// <param name="publicNetworkAccess"> Control permission for data plane traffic coming from public networks while private endpoint is enabled. </param>
         /// <param name="scheduledPurgeOn"> The scheduled purge date in UTC. </param>
-        internal ManagedHsmProperties(BinaryData settings, BinaryData protectedSettings, byte[] rawMessage, Guid? tenantId, IList<string> initialAdminObjectIds, Uri hsmUri, bool? enableSoftDelete, int? softDeleteRetentionInDays, bool? enablePurgeProtection, CreateMode? createMode, string statusMessage, ProvisioningState? provisioningState, MhsmNetworkRuleSet networkAcls, IReadOnlyList<MhsmPrivateEndpointConnectionItem> privateEndpointConnections, PublicNetworkAccess? publicNetworkAccess, DateTimeOffset? scheduledPurgeOn)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal ManagedHsmProperties(BinaryData settings, BinaryData protectedSettings, byte[] rawMessage, Guid? tenantId, IList<string> initialAdminObjectIds, Uri hsmUri, bool? enableSoftDelete, int? softDeleteRetentionInDays, bool? enablePurgeProtection, CreateMode? createMode, string statusMessage, ProvisioningState? provisioningState, MhsmNetworkRuleSet networkAcls, IReadOnlyList<MhsmPrivateEndpointConnectionItem> privateEndpointConnections, PublicNetworkAccess? publicNetworkAccess, DateTimeOffset? scheduledPurgeOn, Dictionary<string, BinaryData> rawData)
         {
             Settings = settings;
             ProtectedSettings = protectedSettings;
@@ -56,6 +65,7 @@ namespace MgmtMockAndSample.Models
             PrivateEndpointConnections = privateEndpointConnections;
             PublicNetworkAccess = publicNetworkAccess;
             ScheduledPurgeOn = scheduledPurgeOn;
+            _rawData = rawData;
         }
 
         /// <summary>

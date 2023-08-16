@@ -5,21 +5,31 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
+
 namespace body_complex.Models
 {
     /// <summary> The Dog. </summary>
     public partial class Dog : Pet
     {
-        /// <summary> Initializes a new instance of Dog. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::body_complex.Models.Dog
+        ///
+        /// </summary>
         public Dog()
         {
         }
 
-        /// <summary> Initializes a new instance of Dog. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::body_complex.Models.Dog
+        ///
+        /// </summary>
         /// <param name="id"></param>
         /// <param name="name"></param>
         /// <param name="food"></param>
-        internal Dog(int? id, string name, string food) : base(id, name)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal Dog(int? id, string name, string food, Dictionary<string, BinaryData> rawData) : base(id, name, rawData)
         {
             Food = food;
         }

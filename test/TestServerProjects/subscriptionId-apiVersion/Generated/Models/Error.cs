@@ -5,23 +5,36 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
+
 namespace subscriptionId_apiVersion.Models
 {
     /// <summary> The Error. </summary>
     internal partial class Error
     {
-        /// <summary> Initializes a new instance of Error. </summary>
+        private Dictionary<string, BinaryData> _rawData;
+
+        /// <summary>
+        /// Initializes a new instance of global::subscriptionId_apiVersion.Models.Error
+        ///
+        /// </summary>
         internal Error()
         {
         }
 
-        /// <summary> Initializes a new instance of Error. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::subscriptionId_apiVersion.Models.Error
+        ///
+        /// </summary>
         /// <param name="code"></param>
         /// <param name="message"></param>
-        internal Error(int? code, string message)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal Error(int? code, string message, Dictionary<string, BinaryData> rawData)
         {
             Code = code;
             Message = message;
+            _rawData = rawData;
         }
 
         /// <summary> Gets the code. </summary>

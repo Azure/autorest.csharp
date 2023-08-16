@@ -5,6 +5,9 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
+
 namespace Azure.ResourceManager.Sample.Models
 {
     /// <summary>
@@ -13,12 +16,20 @@ namespace Azure.ResourceManager.Sample.Models
     /// </summary>
     public partial class VirtualMachineScaleSetSkuCapacity
     {
-        /// <summary> Initializes a new instance of VirtualMachineScaleSetSkuCapacity. </summary>
+        private Dictionary<string, BinaryData> _rawData;
+
+        /// <summary>
+        /// Initializes a new instance of global::Azure.ResourceManager.Sample.Models.VirtualMachineScaleSetSkuCapacity
+        ///
+        /// </summary>
         internal VirtualMachineScaleSetSkuCapacity()
         {
         }
 
-        /// <summary> Initializes a new instance of VirtualMachineScaleSetSkuCapacity. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::Azure.ResourceManager.Sample.Models.VirtualMachineScaleSetSkuCapacity
+        ///
+        /// </summary>
         /// <param name="minimum">
         /// The minimum capacity.
         /// Serialized Name: VirtualMachineScaleSetSkuCapacity.minimum
@@ -35,12 +46,14 @@ namespace Azure.ResourceManager.Sample.Models
         /// The scale type applicable to the sku.
         /// Serialized Name: VirtualMachineScaleSetSkuCapacity.scaleType
         /// </param>
-        internal VirtualMachineScaleSetSkuCapacity(long? minimum, long? maximum, long? defaultCapacity, VirtualMachineScaleSetSkuScaleType? scaleType)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal VirtualMachineScaleSetSkuCapacity(long? minimum, long? maximum, long? defaultCapacity, VirtualMachineScaleSetSkuScaleType? scaleType, Dictionary<string, BinaryData> rawData)
         {
             Minimum = minimum;
             Maximum = maximum;
             DefaultCapacity = defaultCapacity;
             ScaleType = scaleType;
+            _rawData = rawData;
         }
 
         /// <summary>

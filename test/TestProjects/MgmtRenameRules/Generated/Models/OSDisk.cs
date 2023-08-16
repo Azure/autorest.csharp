@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
 
 namespace MgmtRenameRules.Models
 {
@@ -15,7 +16,12 @@ namespace MgmtRenameRules.Models
     /// </summary>
     public partial class OSDisk
     {
-        /// <summary> Initializes a new instance of OSDisk. </summary>
+        private Dictionary<string, BinaryData> _rawData;
+
+        /// <summary>
+        /// Initializes a new instance of global::MgmtRenameRules.Models.OSDisk
+        ///
+        /// </summary>
         /// <param name="createOption">
         /// Specifies how the virtual machine should be created.&lt;br&gt;&lt;br&gt; Possible values are:&lt;br&gt;&lt;br&gt; **Attach** \u2013 This value is used when you are using a specialized disk to create the virtual machine.&lt;br&gt;&lt;br&gt; **FromImage** \u2013 This value is used when you are using an image to create the virtual machine. If you are using a platform image, you also use the imageReference element described above. If you are using a marketplace image, you  also use the plan element previously described.
         /// Serialized Name: OSDisk.createOption
@@ -25,7 +31,10 @@ namespace MgmtRenameRules.Models
             CreateOption = createOption;
         }
 
-        /// <summary> Initializes a new instance of OSDisk. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::MgmtRenameRules.Models.OSDisk
+        ///
+        /// </summary>
         /// <param name="osType">
         /// This property allows you to specify the type of the OS that is included in the disk if creating a VM from user-image or a specialized VHD. &lt;br&gt;&lt;br&gt; Possible values are: &lt;br&gt;&lt;br&gt; **Windows** &lt;br&gt;&lt;br&gt; **Linux**
         /// Serialized Name: OSDisk.osType
@@ -70,7 +79,8 @@ namespace MgmtRenameRules.Models
         /// The managed disk parameters.
         /// Serialized Name: OSDisk.managedDisk
         /// </param>
-        internal OSDisk(OperatingSystemType? osType, DiskEncryptionSettings encryptionSettings, string name, VirtualHardDisk vhd, VirtualHardDisk image, CachingType? caching, bool? writeAcceleratorEnabled, DiffDiskSettings diffDiskSettings, DiskCreateOptionType createOption, int? diskSizeGB, ManagedDiskParameters managedDisk)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal OSDisk(OperatingSystemType? osType, DiskEncryptionSettings encryptionSettings, string name, VirtualHardDisk vhd, VirtualHardDisk image, CachingType? caching, bool? writeAcceleratorEnabled, DiffDiskSettings diffDiskSettings, DiskCreateOptionType createOption, int? diskSizeGB, ManagedDiskParameters managedDisk, Dictionary<string, BinaryData> rawData)
         {
             OSType = osType;
             EncryptionSettings = encryptionSettings;
@@ -83,6 +93,7 @@ namespace MgmtRenameRules.Models
             CreateOption = createOption;
             DiskSizeGB = diskSizeGB;
             ManagedDisk = managedDisk;
+            _rawData = rawData;
         }
 
         /// <summary>

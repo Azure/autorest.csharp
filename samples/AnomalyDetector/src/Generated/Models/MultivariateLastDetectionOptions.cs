@@ -15,6 +15,8 @@ namespace AnomalyDetector.Models
     /// <summary> Request of last detection. </summary>
     public partial class MultivariateLastDetectionOptions
     {
+        private Dictionary<string, BinaryData> _rawData;
+
         /// <summary> Initializes a new instance of MultivariateLastDetectionOptions. </summary>
         /// <param name="variables">
         /// This contains the inference data, including the name, timestamps(ISO 8601) and
@@ -44,10 +46,12 @@ namespace AnomalyDetector.Models
         /// variables for one anomalous timestamp in the response. The default number is
         /// 10.
         /// </param>
-        internal MultivariateLastDetectionOptions(IList<VariableValues> variables, int topContributorCount)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal MultivariateLastDetectionOptions(IList<VariableValues> variables, int topContributorCount, Dictionary<string, BinaryData> rawData)
         {
             Variables = variables;
             TopContributorCount = topContributorCount;
+            _rawData = rawData;
         }
 
         /// <summary>

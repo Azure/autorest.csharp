@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Collections.Generic;
 using Azure.Core;
 
@@ -13,14 +14,22 @@ namespace CognitiveSearch.Models
     /// <summary> Parameters for filtering, sorting, faceting, paging, and other search query behaviors. </summary>
     public partial class SearchRequest
     {
-        /// <summary> Initializes a new instance of SearchRequest. </summary>
+        private Dictionary<string, BinaryData> _rawData;
+
+        /// <summary>
+        /// Initializes a new instance of global::CognitiveSearch.Models.SearchRequest
+        ///
+        /// </summary>
         public SearchRequest()
         {
             Facets = new ChangeTrackingList<string>();
             ScoringParameters = new ChangeTrackingList<string>();
         }
 
-        /// <summary> Initializes a new instance of SearchRequest. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::CognitiveSearch.Models.SearchRequest
+        ///
+        /// </summary>
         /// <param name="includeTotalResultCount"> A value that specifies whether to fetch the total count of results. Default is false. Setting this value to true may have a performance impact. Note that the count returned is an approximation. </param>
         /// <param name="facets"> The list of facet expressions to apply to the search query. Each facet expression contains a field name, optionally followed by a comma-separated list of name:value pairs. </param>
         /// <param name="filter"> The OData $filter expression to apply to the search query. </param>
@@ -38,7 +47,8 @@ namespace CognitiveSearch.Models
         /// <param name="select"> The comma-separated list of fields to retrieve. If unspecified, all fields marked as retrievable in the schema are included. </param>
         /// <param name="skip"> The number of search results to skip. This value cannot be greater than 100,000. If you need to scan documents in sequence, but cannot use skip due to this limitation, consider using orderby on a totally-ordered key and filter with a range query instead. </param>
         /// <param name="top"> The number of search results to retrieve. This can be used in conjunction with $skip to implement client-side paging of search results. If results are truncated due to server-side paging, the response will include a continuation token that can be used to issue another Search request for the next page of results. </param>
-        internal SearchRequest(bool? includeTotalResultCount, IList<string> facets, string filter, string highlightFields, string highlightPostTag, string highlightPreTag, double? minimumCoverage, string orderBy, QueryType? queryType, IList<string> scoringParameters, string scoringProfile, string searchText, string searchFields, SearchMode? searchMode, string select, int? skip, int? top)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal SearchRequest(bool? includeTotalResultCount, IList<string> facets, string filter, string highlightFields, string highlightPostTag, string highlightPreTag, double? minimumCoverage, string orderBy, QueryType? queryType, IList<string> scoringParameters, string scoringProfile, string searchText, string searchFields, SearchMode? searchMode, string select, int? skip, int? top, Dictionary<string, BinaryData> rawData)
         {
             IncludeTotalResultCount = includeTotalResultCount;
             Facets = facets;
@@ -57,6 +67,7 @@ namespace CognitiveSearch.Models
             Select = select;
             Skip = skip;
             Top = top;
+            _rawData = rawData;
         }
 
         /// <summary> A value that specifies whether to fetch the total count of results. Default is false. Setting this value to true may have a performance impact. Note that the count returned is an approximation. </summary>

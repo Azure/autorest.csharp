@@ -5,6 +5,9 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
+
 namespace MgmtRenameRules.Models
 {
     /// <summary>
@@ -13,12 +16,20 @@ namespace MgmtRenameRules.Models
     /// </summary>
     public partial class OrchestrationServiceSummary
     {
-        /// <summary> Initializes a new instance of OrchestrationServiceSummary. </summary>
+        private Dictionary<string, BinaryData> _rawData;
+
+        /// <summary>
+        /// Initializes a new instance of global::MgmtRenameRules.Models.OrchestrationServiceSummary
+        ///
+        /// </summary>
         internal OrchestrationServiceSummary()
         {
         }
 
-        /// <summary> Initializes a new instance of OrchestrationServiceSummary. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::MgmtRenameRules.Models.OrchestrationServiceSummary
+        ///
+        /// </summary>
         /// <param name="serviceName">
         /// The name of the service.
         /// Serialized Name: OrchestrationServiceSummary.serviceName
@@ -27,10 +38,12 @@ namespace MgmtRenameRules.Models
         /// The current state of the service.
         /// Serialized Name: OrchestrationServiceSummary.serviceState
         /// </param>
-        internal OrchestrationServiceSummary(OrchestrationServiceName? serviceName, OrchestrationServiceState? serviceState)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal OrchestrationServiceSummary(OrchestrationServiceName? serviceName, OrchestrationServiceState? serviceState, Dictionary<string, BinaryData> rawData)
         {
             ServiceName = serviceName;
             ServiceState = serviceState;
+            _rawData = rawData;
         }
 
         /// <summary>

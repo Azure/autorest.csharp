@@ -5,26 +5,39 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
+
 namespace azure_special_properties.Models
 {
     /// <summary> The Error. </summary>
     internal partial class Error
     {
-        /// <summary> Initializes a new instance of Error. </summary>
+        private Dictionary<string, BinaryData> _rawData;
+
+        /// <summary>
+        /// Initializes a new instance of global::azure_special_properties.Models.Error
+        ///
+        /// </summary>
         internal Error()
         {
             ConstantId = ErrorConstantId._1;
         }
 
-        /// <summary> Initializes a new instance of Error. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::azure_special_properties.Models.Error
+        ///
+        /// </summary>
         /// <param name="status"></param>
         /// <param name="constantId"></param>
         /// <param name="message"></param>
-        internal Error(int? status, ErrorConstantId constantId, string message)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal Error(int? status, ErrorConstantId constantId, string message, Dictionary<string, BinaryData> rawData)
         {
             Status = status;
             ConstantId = constantId;
             Message = message;
+            _rawData = rawData;
         }
 
         /// <summary> Gets the status. </summary>

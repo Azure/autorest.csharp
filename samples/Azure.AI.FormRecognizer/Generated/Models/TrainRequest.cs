@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
 using Azure.Core;
 
 namespace Azure.AI.FormRecognizer.Models
@@ -13,7 +14,12 @@ namespace Azure.AI.FormRecognizer.Models
     /// <summary> Request parameter to train a new custom model. </summary>
     public partial class TrainRequest
     {
-        /// <summary> Initializes a new instance of TrainRequest. </summary>
+        private Dictionary<string, BinaryData> _rawData;
+
+        /// <summary>
+        /// Initializes a new instance of global::Azure.AI.FormRecognizer.Models.TrainRequest
+        ///
+        /// </summary>
         /// <param name="source"> Source path containing the training documents. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="source"/> is null. </exception>
         public TrainRequest(string source)
@@ -23,15 +29,20 @@ namespace Azure.AI.FormRecognizer.Models
             Source = source;
         }
 
-        /// <summary> Initializes a new instance of TrainRequest. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::Azure.AI.FormRecognizer.Models.TrainRequest
+        ///
+        /// </summary>
         /// <param name="source"> Source path containing the training documents. </param>
         /// <param name="sourceFilter"> Filter to apply to the documents in the source path for training. </param>
         /// <param name="useLabelFile"> Use label file for training a model. </param>
-        internal TrainRequest(string source, TrainSourceFilter sourceFilter, bool? useLabelFile)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal TrainRequest(string source, TrainSourceFilter sourceFilter, bool? useLabelFile, Dictionary<string, BinaryData> rawData)
         {
             Source = source;
             SourceFilter = sourceFilter;
             UseLabelFile = useLabelFile;
+            _rawData = rawData;
         }
 
         /// <summary> Source path containing the training documents. </summary>

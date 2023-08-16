@@ -5,6 +5,9 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
+
 namespace Azure.ResourceManager.Sample.Models
 {
     /// <summary>
@@ -13,12 +16,20 @@ namespace Azure.ResourceManager.Sample.Models
     /// </summary>
     public partial class VirtualMachineSize
     {
-        /// <summary> Initializes a new instance of VirtualMachineSize. </summary>
+        private Dictionary<string, BinaryData> _rawData;
+
+        /// <summary>
+        /// Initializes a new instance of global::Azure.ResourceManager.Sample.Models.VirtualMachineSize
+        ///
+        /// </summary>
         internal VirtualMachineSize()
         {
         }
 
-        /// <summary> Initializes a new instance of VirtualMachineSize. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::Azure.ResourceManager.Sample.Models.VirtualMachineSize
+        ///
+        /// </summary>
         /// <param name="name">
         /// The name of the virtual machine size.
         /// Serialized Name: VirtualMachineSize.name
@@ -43,7 +54,8 @@ namespace Azure.ResourceManager.Sample.Models
         /// The maximum number of data disks that can be attached to the virtual machine size.
         /// Serialized Name: VirtualMachineSize.maxDataDiskCount
         /// </param>
-        internal VirtualMachineSize(string name, int? numberOfCores, int? osDiskSizeInMB, int? resourceDiskSizeInMB, int? memoryInMB, int? maxDataDiskCount)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal VirtualMachineSize(string name, int? numberOfCores, int? osDiskSizeInMB, int? resourceDiskSizeInMB, int? memoryInMB, int? maxDataDiskCount, Dictionary<string, BinaryData> rawData)
         {
             Name = name;
             NumberOfCores = numberOfCores;
@@ -51,6 +63,7 @@ namespace Azure.ResourceManager.Sample.Models
             ResourceDiskSizeInMB = resourceDiskSizeInMB;
             MemoryInMB = memoryInMB;
             MaxDataDiskCount = maxDataDiskCount;
+            _rawData = rawData;
         }
 
         /// <summary>

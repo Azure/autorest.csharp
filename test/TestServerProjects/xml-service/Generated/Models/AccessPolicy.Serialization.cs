@@ -6,18 +6,18 @@
 #nullable disable
 
 using System;
+using System.IO;
 using System.Xml;
 using System.Xml.Linq;
+using Azure;
 using Azure.Core;
 using Azure.Core.Serialization;
 
 namespace xml_service.Models
 {
-    public partial class AccessPolicy : IXmlSerializable, IXmlModelSerializable
+    public partial class AccessPolicy : IXmlSerializable, IModelSerializable<AccessPolicy>
     {
-        void IXmlModelSerializable.Serialize(XmlWriter writer, ModelSerializerOptions options) => ((IXmlSerializable)this).Write(writer, null, options);
-
-        void IXmlSerializable.Write(XmlWriter writer, string nameHint, ModelSerializerOptions options)
+        private void Serialize(XmlWriter writer, string nameHint, ModelSerializerOptions options)
         {
             writer.WriteStartElement("AccessPolicy");
             writer.WriteStartElement("Start");
@@ -32,14 +32,11 @@ namespace xml_service.Models
             writer.WriteEndElement();
         }
 
-        object IModelSerializable.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            return DeserializeAccessPolicy(XElement.Load(data.ToStream()), options);
-        }
+        void IXmlSerializable.Write(XmlWriter writer, string nameHint) => Serialize(writer, nameHint, ModelSerializerOptions.DefaultWireOptions);
 
         internal static AccessPolicy DeserializeAccessPolicy(XElement element, ModelSerializerOptions options = default)
         {
-            options ??= ModelSerializerOptions.AzureServiceDefault;
+            options ??= ModelSerializerOptions.DefaultWireOptions;
             DateTimeOffset start = default;
             DateTimeOffset expiry = default;
             string permission = default;
@@ -55,7 +52,53 @@ namespace xml_service.Models
             {
                 permission = (string)permissionElement;
             }
-            return new AccessPolicy(start, expiry, permission);
+            return new AccessPolicy(start, expiry, permission, default);
+        }
+
+        BinaryData IModelSerializable<AccessPolicy>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            options ??= ModelSerializerOptions.DefaultWireOptions;
+            using MemoryStream stream = new MemoryStream();
+            using XmlWriter writer = XmlWriter.Create(stream);
+            Serialize(writer, null, options);
+            writer.Flush();
+            if (stream.Position > int.MaxValue)
+            {
+                return BinaryData.FromStream(stream);
+            }
+            else
+            {
+                return new BinaryData(stream.GetBuffer().AsMemory(0, (int)stream.Position));
+            }
+        }
+
+        AccessPolicy IModelSerializable<AccessPolicy>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            return DeserializeAccessPolicy(XElement.Load(data.ToStream()), options);
+        }
+
+        public static implicit operator RequestContent(AccessPolicy model)
+        {
+            if (model is null)
+            {
+                return null;
+            }
+
+            return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
+        }
+
+        public static explicit operator AccessPolicy(Response response)
+        {
+            if (response is null)
+            {
+                return null;
+            }
+
+            return DeserializeAccessPolicy(XElement.Load(response.ContentStream), ModelSerializerOptions.DefaultWireOptions);
         }
     }
 }

@@ -14,12 +14,18 @@ namespace Inheritance.Models
     /// <summary> The ClassThatInheritsFromSomePropertiesAndBaseClass. </summary>
     public partial class ClassThatInheritsFromSomePropertiesAndBaseClass : SomeProperties
     {
-        /// <summary> Initializes a new instance of ClassThatInheritsFromSomePropertiesAndBaseClass. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::Inheritance.Models.ClassThatInheritsFromSomePropertiesAndBaseClass
+        ///
+        /// </summary>
         public ClassThatInheritsFromSomePropertiesAndBaseClass()
         {
         }
 
-        /// <summary> Initializes a new instance of ClassThatInheritsFromSomePropertiesAndBaseClass. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::Inheritance.Models.ClassThatInheritsFromSomePropertiesAndBaseClass
+        ///
+        /// </summary>
         /// <param name="someProperty"></param>
         /// <param name="someOtherProperty"></param>
         /// <param name="baseClassProperty"></param>
@@ -34,7 +40,8 @@ namespace Inheritance.Models
         /// <param name="dfeDateTime"> Any object. </param>
         /// <param name="dfeDuration"> Any object. </param>
         /// <param name="dfeUri"> Any object. </param>
-        internal ClassThatInheritsFromSomePropertiesAndBaseClass(string someProperty, string someOtherProperty, string baseClassProperty, DataFactoryElement<string> dfeString, DataFactoryElement<double> dfeDouble, DataFactoryElement<bool> dfeBool, DataFactoryElement<int> dfeInt, DataFactoryElement<BinaryData> dfeObject, DataFactoryElement<IList<SeparateClass>> dfeListOfT, DataFactoryElement<IList<string>> dfeListOfString, DataFactoryElement<IDictionary<string, string>> dfeKeyValuePairs, DataFactoryElement<DateTimeOffset> dfeDateTime, DataFactoryElement<TimeSpan> dfeDuration, DataFactoryElement<Uri> dfeUri) : base(someProperty, someOtherProperty)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal ClassThatInheritsFromSomePropertiesAndBaseClass(string someProperty, string someOtherProperty, string baseClassProperty, DataFactoryElement<string> dfeString, DataFactoryElement<double> dfeDouble, DataFactoryElement<bool> dfeBool, DataFactoryElement<int> dfeInt, DataFactoryElement<BinaryData> dfeObject, DataFactoryElement<IList<SeparateClass>> dfeListOfT, DataFactoryElement<IList<string>> dfeListOfString, DataFactoryElement<IDictionary<string, string>> dfeKeyValuePairs, DataFactoryElement<DateTimeOffset> dfeDateTime, DataFactoryElement<TimeSpan> dfeDuration, DataFactoryElement<Uri> dfeUri, Dictionary<string, BinaryData> rawData) : base(someProperty, someOtherProperty, rawData)
         {
             BaseClassProperty = baseClassProperty;
             DfeString = dfeString;

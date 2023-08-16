@@ -10,13 +10,16 @@ namespace body_string.Models
     /// <summary> Model factory for models. </summary>
     public static partial class BodyStringModelFactory
     {
-        /// <summary> Initializes a new instance of RefColorConstant. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::body_string.Models.RefColorConstant
+        ///
+        /// </summary>
         /// <param name="colorConstant"> Referenced Color Constant Description. </param>
         /// <param name="field1"> Sample string. </param>
         /// <returns> A new <see cref="Models.RefColorConstant"/> instance for mocking. </returns>
         public static RefColorConstant RefColorConstant(ColorConstant colorConstant = default, string field1 = null)
         {
-            return new RefColorConstant(colorConstant, field1);
+            return new RefColorConstant(colorConstant, field1, default);
         }
     }
 }

@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Collections.Generic;
 
 namespace MgmtParamOrdering.Models
@@ -12,15 +13,22 @@ namespace MgmtParamOrdering.Models
     /// <summary> Describes a Virtual Machine Scale Set. </summary>
     public partial class VirtualMachineScaleSetPatch : UpdateResource
     {
-        /// <summary> Initializes a new instance of VirtualMachineScaleSetPatch. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::MgmtParamOrdering.Models.VirtualMachineScaleSetPatch
+        ///
+        /// </summary>
         public VirtualMachineScaleSetPatch()
         {
         }
 
-        /// <summary> Initializes a new instance of VirtualMachineScaleSetPatch. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::MgmtParamOrdering.Models.VirtualMachineScaleSetPatch
+        ///
+        /// </summary>
         /// <param name="tags"> Resource tags. </param>
         /// <param name="sku"> The virtual machine scale set sku. </param>
-        internal VirtualMachineScaleSetPatch(IDictionary<string, string> tags, MgmtParamOrderingSku sku) : base(tags)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal VirtualMachineScaleSetPatch(IDictionary<string, string> tags, MgmtParamOrderingSku sku, Dictionary<string, BinaryData> rawData) : base(tags, rawData)
         {
             Sku = sku;
         }

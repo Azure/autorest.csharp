@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
 using Azure.ResourceManager.Resources.Models;
 
 namespace MgmtRenameRules.Models
@@ -16,7 +17,10 @@ namespace MgmtRenameRules.Models
     /// </summary>
     public partial class ImageDataDisk : ImageDisk
     {
-        /// <summary> Initializes a new instance of ImageDataDisk. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::MgmtRenameRules.Models.ImageDataDisk
+        ///
+        /// </summary>
         /// <param name="lun">
         /// Specifies the logical unit number of the data disk. This value is used to identify data disks within the VM and therefore must be unique for each data disk attached to a VM.
         /// Serialized Name: ImageDataDisk.lun
@@ -26,7 +30,10 @@ namespace MgmtRenameRules.Models
             Lun = lun;
         }
 
-        /// <summary> Initializes a new instance of ImageDataDisk. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::MgmtRenameRules.Models.ImageDataDisk
+        ///
+        /// </summary>
         /// <param name="snapshot">
         /// The snapshot.
         /// Serialized Name: ImageDisk.snapshot
@@ -59,7 +66,8 @@ namespace MgmtRenameRules.Models
         /// Specifies the logical unit number of the data disk. This value is used to identify data disks within the VM and therefore must be unique for each data disk attached to a VM.
         /// Serialized Name: ImageDataDisk.lun
         /// </param>
-        internal ImageDataDisk(WritableSubResource snapshot, WritableSubResource managedDisk, Uri blobUri, CachingType? caching, int? diskSizeGB, StorageAccountType? storageAccountType, WritableSubResource diskEncryptionSet, int lun) : base(snapshot, managedDisk, blobUri, caching, diskSizeGB, storageAccountType, diskEncryptionSet)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal ImageDataDisk(WritableSubResource snapshot, WritableSubResource managedDisk, Uri blobUri, CachingType? caching, int? diskSizeGB, StorageAccountType? storageAccountType, WritableSubResource diskEncryptionSet, int lun, Dictionary<string, BinaryData> rawData) : base(snapshot, managedDisk, blobUri, caching, diskSizeGB, storageAccountType, diskEncryptionSet, rawData)
         {
             Lun = lun;
         }

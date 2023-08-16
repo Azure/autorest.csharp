@@ -5,21 +5,34 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
+
 namespace MgmtSafeFlatten.Models
 {
     /// <summary> The LayerOneSingle. </summary>
     internal partial class LayerOneSingle
     {
-        /// <summary> Initializes a new instance of LayerOneSingle. </summary>
+        private Dictionary<string, BinaryData> _rawData;
+
+        /// <summary>
+        /// Initializes a new instance of global::MgmtSafeFlatten.Models.LayerOneSingle
+        ///
+        /// </summary>
         public LayerOneSingle()
         {
         }
 
-        /// <summary> Initializes a new instance of LayerOneSingle. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::MgmtSafeFlatten.Models.LayerOneSingle
+        ///
+        /// </summary>
         /// <param name="layerTwo"> The second single value prop. </param>
-        internal LayerOneSingle(LayerTwoSingle layerTwo)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal LayerOneSingle(LayerTwoSingle layerTwo, Dictionary<string, BinaryData> rawData)
         {
             LayerTwo = layerTwo;
+            _rawData = rawData;
         }
 
         /// <summary> The second single value prop. </summary>

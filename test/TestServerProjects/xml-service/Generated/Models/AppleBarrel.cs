@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Collections.Generic;
 using Azure.Core;
 
@@ -13,20 +14,30 @@ namespace xml_service.Models
     /// <summary> A barrel of apples. </summary>
     public partial class AppleBarrel
     {
-        /// <summary> Initializes a new instance of AppleBarrel. </summary>
+        private Dictionary<string, BinaryData> _rawData;
+
+        /// <summary>
+        /// Initializes a new instance of global::xml_service.Models.AppleBarrel
+        ///
+        /// </summary>
         public AppleBarrel()
         {
             GoodApples = new ChangeTrackingList<string>();
             BadApples = new ChangeTrackingList<string>();
         }
 
-        /// <summary> Initializes a new instance of AppleBarrel. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::xml_service.Models.AppleBarrel
+        ///
+        /// </summary>
         /// <param name="goodApples"></param>
         /// <param name="badApples"></param>
-        internal AppleBarrel(IList<string> goodApples, IList<string> badApples)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal AppleBarrel(IList<string> goodApples, IList<string> badApples, Dictionary<string, BinaryData> rawData)
         {
             GoodApples = goodApples;
             BadApples = badApples;
+            _rawData = rawData;
         }
 
         /// <summary> Gets the good apples. </summary>

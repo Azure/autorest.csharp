@@ -16,6 +16,8 @@ namespace CustomizationsInTsp.Models
     /// <summary> Model with customized properties. </summary>
     public partial class ModelWithCustomizedProperties
     {
+        private Dictionary<string, BinaryData> _rawData;
+
         /// <summary> Initializes a new instance of ModelWithCustomizedProperties. </summary>
         /// <param name="propertyToMakeInternal"> Public property made internal. </param>
         /// <param name="renamedProperty"> Renamed property (original name: PropertyToRename). </param>
@@ -66,7 +68,8 @@ namespace CustomizationsInTsp.Models
         /// <param name="goodDictionaryName"> Property renamed that is dictionary. </param>
         /// <param name="goodListOfListName"> Property renamed that is listoflist. </param>
         /// <param name="goodListOfDictionaryName"> Property renamed that is listofdictionary. </param>
-        internal ModelWithCustomizedProperties(int propertyToMakeInternal, int renamedProperty, float propertyToMakeFloat, int propertyToMakeInt, TimeSpan propertyToMakeDuration, string propertyToMakeString, JsonElement propertyToMakeJsonElement, string propertyToField, IList<string> goodListName, IDictionary<string, string> goodDictionaryName, IList<IList<string>> goodListOfListName, IList<IDictionary<string, string>> goodListOfDictionaryName)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal ModelWithCustomizedProperties(int propertyToMakeInternal, int renamedProperty, float propertyToMakeFloat, int propertyToMakeInt, TimeSpan propertyToMakeDuration, string propertyToMakeString, JsonElement propertyToMakeJsonElement, string propertyToField, IList<string> goodListName, IDictionary<string, string> goodDictionaryName, IList<IList<string>> goodListOfListName, IList<IDictionary<string, string>> goodListOfDictionaryName, Dictionary<string, BinaryData> rawData)
         {
             PropertyToMakeInternal = propertyToMakeInternal;
             RenamedProperty = renamedProperty;
@@ -80,6 +83,7 @@ namespace CustomizationsInTsp.Models
             GoodDictionaryName = goodDictionaryName;
             GoodListOfListName = goodListOfListName;
             GoodListOfDictionaryName = goodListOfDictionaryName;
+            _rawData = rawData;
         }
     }
 }

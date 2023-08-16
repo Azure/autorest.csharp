@@ -14,7 +14,12 @@ namespace Azure.AI.FormRecognizer.Models
     /// <summary> Keys extracted by the custom model. </summary>
     public partial class KeysResult
     {
-        /// <summary> Initializes a new instance of KeysResult. </summary>
+        private Dictionary<string, BinaryData> _rawData;
+
+        /// <summary>
+        /// Initializes a new instance of global::Azure.AI.FormRecognizer.Models.KeysResult
+        ///
+        /// </summary>
         /// <param name="clusters"> Object mapping clusterIds to a list of keys. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="clusters"/> is null. </exception>
         internal KeysResult(IReadOnlyDictionary<string, IList<string>> clusters)
@@ -22,6 +27,18 @@ namespace Azure.AI.FormRecognizer.Models
             Argument.AssertNotNull(clusters, nameof(clusters));
 
             Clusters = clusters;
+        }
+
+        /// <summary>
+        /// Initializes a new instance of global::Azure.AI.FormRecognizer.Models.KeysResult
+        ///
+        /// </summary>
+        /// <param name="clusters"> Object mapping clusterIds to a list of keys. </param>
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal KeysResult(IReadOnlyDictionary<string, IList<string>> clusters, Dictionary<string, BinaryData> rawData)
+        {
+            Clusters = clusters;
+            _rawData = rawData;
         }
 
         /// <summary> Object mapping clusterIds to a list of keys. </summary>

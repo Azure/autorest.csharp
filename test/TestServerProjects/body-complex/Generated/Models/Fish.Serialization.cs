@@ -6,18 +6,22 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
 using System.Text.Json;
+using Azure;
 using Azure.Core;
 using Azure.Core.Serialization;
 
 namespace body_complex.Models
 {
-    public partial class Fish : IUtf8JsonSerializable, IJsonModelSerializable
+    public partial class Fish : IUtf8JsonSerializable, IModelJsonSerializable<Fish>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModelSerializable)this).Serialize(writer, ModelSerializerOptions.AzureServiceDefault);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<Fish>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
 
-        void IJsonModelSerializable.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
+        void IModelJsonSerializable<Fish>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
             writer.WriteStartObject();
             writer.WritePropertyName("fishtype"u8);
             writer.WriteStringValue(Fishtype);
@@ -38,18 +42,25 @@ namespace body_complex.Models
                 }
                 writer.WriteEndArray();
             }
+            if (_rawData is not null && options.Format == ModelSerializerFormat.Json)
+            {
+                foreach (var property in _rawData)
+                {
+                    writer.WritePropertyName(property.Key);
+#if NET6_0_OR_GREATER
+				writer.WriteRawValue(property.Value);
+#else
+                    JsonSerializer.Serialize(writer, JsonDocument.Parse(property.Value.ToString()).RootElement);
+#endif
+                }
+            }
             writer.WriteEndObject();
-        }
-
-        object IModelSerializable.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            using var doc = JsonDocument.Parse(data);
-            return DeserializeFish(doc.RootElement, options);
         }
 
         internal static Fish DeserializeFish(JsonElement element, ModelSerializerOptions options = default)
         {
-            options ??= ModelSerializerOptions.AzureServiceDefault;
+            options ??= ModelSerializerOptions.DefaultWireOptions;
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
@@ -66,13 +77,95 @@ namespace body_complex.Models
                     case "smart_salmon": return SmartSalmon.DeserializeSmartSalmon(element);
                 }
             }
-            return UnknownFish.DeserializeUnknownFish(element);
+
+            // Unknown type found so we will deserialize the base properties only
+            string fishtype = default;
+            Optional<string> species = default;
+            float length = default;
+            Optional<IList<Fish>> siblings = default;
+            Dictionary<string, BinaryData> rawData = new Dictionary<string, BinaryData>();
+            foreach (var property in element.EnumerateObject())
+            {
+                if (property.NameEquals("fishtype"u8))
+                {
+                    fishtype = property.Value.GetString();
+                    continue;
+                }
+                if (property.NameEquals("species"u8))
+                {
+                    species = property.Value.GetString();
+                    continue;
+                }
+                if (property.NameEquals("length"u8))
+                {
+                    length = property.Value.GetSingle();
+                    continue;
+                }
+                if (property.NameEquals("siblings"u8))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        continue;
+                    }
+                    List<Fish> array = new List<Fish>();
+                    foreach (var item in property.Value.EnumerateArray())
+                    {
+                        array.Add(DeserializeFish(item));
+                    }
+                    siblings = array;
+                    continue;
+                }
+                if (options.Format == ModelSerializerFormat.Json)
+                {
+                    rawData.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
+                    continue;
+                }
+            }
+            return new UnknownFish(fishtype, species.Value, length, Optional.ToList(siblings), rawData);
         }
 
-        object IJsonModelSerializable.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        Fish IModelJsonSerializable<Fish>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
         {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
             using var doc = JsonDocument.ParseValue(ref reader);
             return DeserializeFish(doc.RootElement, options);
+        }
+
+        BinaryData IModelSerializable<Fish>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        Fish IModelSerializable<Fish>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using var doc = JsonDocument.Parse(data);
+            return DeserializeFish(doc.RootElement, options);
+        }
+
+        public static implicit operator RequestContent(Fish model)
+        {
+            if (model is null)
+            {
+                return null;
+            }
+
+            return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
+        }
+
+        public static explicit operator Fish(Response response)
+        {
+            if (response is null)
+            {
+                return null;
+            }
+
+            using JsonDocument doc = JsonDocument.Parse(response.ContentStream);
+            return DeserializeFish(doc.RootElement, ModelSerializerOptions.DefaultWireOptions);
         }
     }
 }

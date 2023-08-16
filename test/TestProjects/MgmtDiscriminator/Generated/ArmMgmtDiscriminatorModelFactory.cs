@@ -16,7 +16,10 @@ namespace MgmtDiscriminator.Models
     /// <summary> Model factory for models. </summary>
     public static partial class ArmMgmtDiscriminatorModelFactory
     {
-        /// <summary> Initializes a new instance of DeliveryRuleData. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::MgmtDiscriminator.DeliveryRuleData
+        ///
+        /// </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
         /// <param name="resourceType"> The resourceType. </param>
@@ -25,159 +28,210 @@ namespace MgmtDiscriminator.Models
         /// <returns> A new <see cref="MgmtDiscriminator.DeliveryRuleData"/> instance for mocking. </returns>
         public static DeliveryRuleData DeliveryRuleData(ResourceIdentifier id = null, string name = null, ResourceType resourceType = default, SystemData systemData = null, DeliveryRuleProperties properties = null)
         {
-            return new DeliveryRuleData(id, name, resourceType, systemData, properties);
+            return new DeliveryRuleData(id, name, resourceType, systemData, properties, default);
         }
 
-        /// <summary> Initializes a new instance of DeliveryRuleCondition. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::MgmtDiscriminator.Models.DeliveryRuleCondition
+        ///
+        /// </summary>
         /// <param name="name"> The name of the condition for the delivery rule. </param>
         /// <param name="foo"> For test. </param>
         /// <returns> A new <see cref="Models.DeliveryRuleCondition"/> instance for mocking. </returns>
         public static DeliveryRuleCondition DeliveryRuleCondition(string name = "Unknown", string foo = null)
         {
-            return new UnknownDeliveryRuleCondition(name, foo);
+            return new UnknownDeliveryRuleCondition(name, foo, default);
         }
 
-        /// <summary> Initializes a new instance of DeliveryRuleAction. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::MgmtDiscriminator.Models.DeliveryRuleAction
+        ///
+        /// </summary>
         /// <param name="name"> The name of the action for the delivery rule. </param>
         /// <param name="foo"> for test. </param>
         /// <returns> A new <see cref="Models.DeliveryRuleAction"/> instance for mocking. </returns>
         public static DeliveryRuleAction DeliveryRuleAction(string name = "Unknown", string foo = null)
         {
-            return new DeliveryRuleAction(name, foo);
+            return new DeliveryRuleAction(name, foo, default);
         }
 
-        /// <summary> Initializes a new instance of Pet. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::MgmtDiscriminator.Models.Pet
+        ///
+        /// </summary>
         /// <param name="id"> The Id of the pet. </param>
         /// <returns> A new <see cref="Models.Pet"/> instance for mocking. </returns>
         public static Pet Pet(string id = null)
         {
-            return new UnknownPet(default, id);
+            return new UnknownPet(default, id, default);
         }
 
-        /// <summary> Initializes a new instance of Cat. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::MgmtDiscriminator.Models.Cat
+        ///
+        /// </summary>
         /// <param name="id"> The Id of the pet. </param>
         /// <param name="meow"> A cat can meow. </param>
         /// <returns> A new <see cref="Models.Cat"/> instance for mocking. </returns>
         public static Cat Cat(string id = null, string meow = null)
         {
-            return new Cat(PetKind.Cat, id, meow);
+            return new Cat(PetKind.Cat, id, meow, default);
         }
 
-        /// <summary> Initializes a new instance of Dog. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::MgmtDiscriminator.Models.Dog
+        ///
+        /// </summary>
         /// <param name="id"> The Id of the pet. </param>
         /// <param name="bark"> A dog can bark. </param>
         /// <returns> A new <see cref="Models.Dog"/> instance for mocking. </returns>
         public static Dog Dog(string id = null, string bark = null)
         {
-            return new Dog(PetKind.Dog, id, bark);
+            return new Dog(PetKind.Dog, id, bark, default);
         }
 
-        /// <summary> Initializes a new instance of DeliveryRuleRemoteAddressCondition. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::MgmtDiscriminator.Models.DeliveryRuleRemoteAddressCondition
+        ///
+        /// </summary>
         /// <param name="foo"> For test. </param>
         /// <param name="parameters"> Defines the parameters for the condition. </param>
         /// <returns> A new <see cref="Models.DeliveryRuleRemoteAddressCondition"/> instance for mocking. </returns>
         public static DeliveryRuleRemoteAddressCondition DeliveryRuleRemoteAddressCondition(string foo = null, RemoteAddressMatchConditionParameters parameters = null)
         {
-            return new DeliveryRuleRemoteAddressCondition(MatchVariable.RemoteAddress, foo, parameters);
+            return new DeliveryRuleRemoteAddressCondition(MatchVariable.RemoteAddress, foo, parameters, default);
         }
 
-        /// <summary> Initializes a new instance of DeliveryRuleRequestMethodCondition. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::MgmtDiscriminator.Models.DeliveryRuleRequestMethodCondition
+        ///
+        /// </summary>
         /// <param name="foo"> For test. </param>
         /// <param name="parameters"> Defines the parameters for the condition. </param>
         /// <returns> A new <see cref="Models.DeliveryRuleRequestMethodCondition"/> instance for mocking. </returns>
         public static DeliveryRuleRequestMethodCondition DeliveryRuleRequestMethodCondition(string foo = null, RequestMethodMatchConditionParameters parameters = null)
         {
-            return new DeliveryRuleRequestMethodCondition(MatchVariable.RequestMethod, foo, parameters);
+            return new DeliveryRuleRequestMethodCondition(MatchVariable.RequestMethod, foo, parameters, default);
         }
 
-        /// <summary> Initializes a new instance of DeliveryRuleQueryStringCondition. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::MgmtDiscriminator.Models.DeliveryRuleQueryStringCondition
+        ///
+        /// </summary>
         /// <param name="foo"> For test. </param>
         /// <param name="parameters"> Defines the parameters for the condition. </param>
         /// <returns> A new <see cref="Models.DeliveryRuleQueryStringCondition"/> instance for mocking. </returns>
         public static DeliveryRuleQueryStringCondition DeliveryRuleQueryStringCondition(string foo = null, QueryStringMatchConditionParameters parameters = null)
         {
-            return new DeliveryRuleQueryStringCondition(MatchVariable.QueryString, foo, parameters);
+            return new DeliveryRuleQueryStringCondition(MatchVariable.QueryString, foo, parameters, default);
         }
 
-        /// <summary> Initializes a new instance of UrlRedirectAction. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::MgmtDiscriminator.Models.UrlRedirectAction
+        ///
+        /// </summary>
         /// <param name="foo"> for test. </param>
         /// <param name="parameters"> Defines the parameters for the action. </param>
         /// <returns> A new <see cref="Models.UrlRedirectAction"/> instance for mocking. </returns>
         public static UrlRedirectAction UrlRedirectAction(string foo = null, UrlRedirectActionParameters parameters = null)
         {
-            return new UrlRedirectAction(DeliveryRuleActionType.UrlRedirect, foo, parameters);
+            return new UrlRedirectAction(DeliveryRuleActionType.UrlRedirect, foo, parameters, default);
         }
 
-        /// <summary> Initializes a new instance of UrlSigningAction. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::MgmtDiscriminator.Models.UrlSigningAction
+        ///
+        /// </summary>
         /// <param name="foo"> for test. </param>
         /// <param name="parameters"> Defines the parameters for the action. </param>
         /// <returns> A new <see cref="Models.UrlSigningAction"/> instance for mocking. </returns>
         public static UrlSigningAction UrlSigningAction(string foo = null, UrlSigningActionParameters parameters = null)
         {
-            return new UrlSigningAction(DeliveryRuleActionType.UrlSigning, foo, parameters);
+            return new UrlSigningAction(DeliveryRuleActionType.UrlSigning, foo, parameters, default);
         }
 
-        /// <summary> Initializes a new instance of OriginGroupOverrideAction. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::MgmtDiscriminator.Models.OriginGroupOverrideAction
+        ///
+        /// </summary>
         /// <param name="foo"> for test. </param>
         /// <param name="parameters"> Defines the parameters for the action. </param>
         /// <returns> A new <see cref="Models.OriginGroupOverrideAction"/> instance for mocking. </returns>
         public static OriginGroupOverrideAction OriginGroupOverrideAction(string foo = null, OriginGroupOverrideActionParameters parameters = null)
         {
-            return new OriginGroupOverrideAction(DeliveryRuleActionType.OriginGroupOverride, foo, parameters);
+            return new OriginGroupOverrideAction(DeliveryRuleActionType.OriginGroupOverride, foo, parameters, default);
         }
 
-        /// <summary> Initializes a new instance of UrlRewriteAction. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::MgmtDiscriminator.Models.UrlRewriteAction
+        ///
+        /// </summary>
         /// <param name="foo"> for test. </param>
         /// <param name="parameters"> Defines the parameters for the action. </param>
         /// <returns> A new <see cref="Models.UrlRewriteAction"/> instance for mocking. </returns>
         public static UrlRewriteAction UrlRewriteAction(string foo = null, UrlRewriteActionParameters parameters = null)
         {
-            return new UrlRewriteAction(DeliveryRuleActionType.UrlRewrite, foo, parameters);
+            return new UrlRewriteAction(DeliveryRuleActionType.UrlRewrite, foo, parameters, default);
         }
 
-        /// <summary> Initializes a new instance of DeliveryRuleRequestHeaderAction. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::MgmtDiscriminator.Models.DeliveryRuleRequestHeaderAction
+        ///
+        /// </summary>
         /// <param name="foo"> for test. </param>
         /// <param name="parameters"> Defines the parameters for the action. </param>
         /// <returns> A new <see cref="Models.DeliveryRuleRequestHeaderAction"/> instance for mocking. </returns>
         public static DeliveryRuleRequestHeaderAction DeliveryRuleRequestHeaderAction(string foo = null, HeaderActionParameters parameters = null)
         {
-            return new DeliveryRuleRequestHeaderAction(DeliveryRuleActionType.ModifyRequestHeader, foo, parameters);
+            return new DeliveryRuleRequestHeaderAction(DeliveryRuleActionType.ModifyRequestHeader, foo, parameters, default);
         }
 
-        /// <summary> Initializes a new instance of DeliveryRuleResponseHeaderAction. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::MgmtDiscriminator.Models.DeliveryRuleResponseHeaderAction
+        ///
+        /// </summary>
         /// <param name="foo"> for test. </param>
         /// <param name="parameters"> Defines the parameters for the action. </param>
         /// <returns> A new <see cref="Models.DeliveryRuleResponseHeaderAction"/> instance for mocking. </returns>
         public static DeliveryRuleResponseHeaderAction DeliveryRuleResponseHeaderAction(string foo = null, HeaderActionParameters parameters = null)
         {
-            return new DeliveryRuleResponseHeaderAction(DeliveryRuleActionType.ModifyResponseHeader, foo, parameters);
+            return new DeliveryRuleResponseHeaderAction(DeliveryRuleActionType.ModifyResponseHeader, foo, parameters, default);
         }
 
-        /// <summary> Initializes a new instance of DeliveryRuleCacheExpirationAction. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::MgmtDiscriminator.Models.DeliveryRuleCacheExpirationAction
+        ///
+        /// </summary>
         /// <param name="foo"> for test. </param>
         /// <param name="parameters"> Defines the parameters for the action. </param>
         /// <returns> A new <see cref="Models.DeliveryRuleCacheExpirationAction"/> instance for mocking. </returns>
         public static DeliveryRuleCacheExpirationAction DeliveryRuleCacheExpirationAction(string foo = null, CacheExpirationActionParameters parameters = null)
         {
-            return new DeliveryRuleCacheExpirationAction(DeliveryRuleActionType.CacheExpiration, foo, parameters);
+            return new DeliveryRuleCacheExpirationAction(DeliveryRuleActionType.CacheExpiration, foo, parameters, default);
         }
 
-        /// <summary> Initializes a new instance of DeliveryRuleCacheKeyQueryStringAction. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::MgmtDiscriminator.Models.DeliveryRuleCacheKeyQueryStringAction
+        ///
+        /// </summary>
         /// <param name="foo"> for test. </param>
         /// <param name="parameters"> Defines the parameters for the action. </param>
         /// <returns> A new <see cref="Models.DeliveryRuleCacheKeyQueryStringAction"/> instance for mocking. </returns>
         public static DeliveryRuleCacheKeyQueryStringAction DeliveryRuleCacheKeyQueryStringAction(string foo = null, CacheKeyQueryStringActionParameters parameters = null)
         {
-            return new DeliveryRuleCacheKeyQueryStringAction(DeliveryRuleActionType.CacheKeyQueryString, foo, parameters);
+            return new DeliveryRuleCacheKeyQueryStringAction(DeliveryRuleActionType.CacheKeyQueryString, foo, parameters, default);
         }
 
-        /// <summary> Initializes a new instance of DeliveryRuleRouteConfigurationOverrideAction. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::MgmtDiscriminator.Models.DeliveryRuleRouteConfigurationOverrideAction
+        ///
+        /// </summary>
         /// <param name="foo"> for test. </param>
         /// <param name="parameters"> Defines the parameters for the action. </param>
         /// <returns> A new <see cref="Models.DeliveryRuleRouteConfigurationOverrideAction"/> instance for mocking. </returns>
         public static DeliveryRuleRouteConfigurationOverrideAction DeliveryRuleRouteConfigurationOverrideAction(string foo = null, RouteConfigurationOverrideActionParameters parameters = null)
         {
-            return new DeliveryRuleRouteConfigurationOverrideAction(DeliveryRuleActionType.RouteConfigurationOverride, foo, parameters);
+            return new DeliveryRuleRouteConfigurationOverrideAction(DeliveryRuleActionType.RouteConfigurationOverride, foo, parameters, default);
         }
     }
 }

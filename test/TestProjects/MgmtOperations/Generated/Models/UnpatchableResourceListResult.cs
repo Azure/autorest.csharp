@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Collections.Generic;
 using Azure.Core;
 using MgmtOperations;
@@ -14,17 +15,27 @@ namespace MgmtOperations.Models
     /// <summary> The UnpatchableResourceListResult. </summary>
     internal partial class UnpatchableResourceListResult
     {
-        /// <summary> Initializes a new instance of UnpatchableResourceListResult. </summary>
+        private Dictionary<string, BinaryData> _rawData;
+
+        /// <summary>
+        /// Initializes a new instance of global::MgmtOperations.Models.UnpatchableResourceListResult
+        ///
+        /// </summary>
         internal UnpatchableResourceListResult()
         {
             Value = new ChangeTrackingList<UnpatchableResourceData>();
         }
 
-        /// <summary> Initializes a new instance of UnpatchableResourceListResult. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::MgmtOperations.Models.UnpatchableResourceListResult
+        ///
+        /// </summary>
         /// <param name="value"></param>
-        internal UnpatchableResourceListResult(IReadOnlyList<UnpatchableResourceData> value)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal UnpatchableResourceListResult(IReadOnlyList<UnpatchableResourceData> value, Dictionary<string, BinaryData> rawData)
         {
             Value = value;
+            _rawData = rawData;
         }
 
         /// <summary> Gets the value. </summary>

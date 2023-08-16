@@ -19,7 +19,10 @@ namespace MgmtExactMatchInheritance.Models
     /// <summary> Model factory for models. </summary>
     public static partial class ArmMgmtExactMatchInheritanceModelFactory
     {
-        /// <summary> Initializes a new instance of ExactMatchModel1Data. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::MgmtExactMatchInheritance.ExactMatchModel1Data
+        ///
+        /// </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
         /// <param name="resourceType"> The resourceType. </param>
@@ -50,10 +53,13 @@ namespace MgmtExactMatchInheritance.Models
         {
             supportingUris ??= new List<Uri>();
 
-            return new ExactMatchModel1Data(id, name, resourceType, systemData, @new, supportingUris?.ToList(), type1, type2, type3, type4, type5, type6, type7, type8, type9, type10, type11, type12, type13, type14, type15, type16, type17, type18, type19);
+            return new ExactMatchModel1Data(id, name, resourceType, systemData, @new, supportingUris?.ToList(), type1, type2, type3, type4, type5, type6, type7, type8, type9, type10, type11, type12, type13, type14, type15, type16, type17, type18, type19, default);
         }
 
-        /// <summary> Initializes a new instance of ExactMatchModel5Data. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::MgmtExactMatchInheritance.ExactMatchModel5Data
+        ///
+        /// </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
         /// <param name="resourceType"> The resourceType. </param>
@@ -66,10 +72,13 @@ namespace MgmtExactMatchInheritance.Models
         {
             tags ??= new Dictionary<string, string>();
 
-            return new ExactMatchModel5Data(id, name, resourceType, systemData, tags, location, @new);
+            return new ExactMatchModel5Data(id, name, resourceType, systemData, tags, location, @new, default);
         }
 
-        /// <summary> Initializes a new instance of ExactMatchModel10. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::MgmtExactMatchInheritance.Models.ExactMatchModel10
+        ///
+        /// </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
         /// <param name="resourceType"> The resourceType. </param>
@@ -81,16 +90,19 @@ namespace MgmtExactMatchInheritance.Models
         {
             tags ??= new Dictionary<string, string>();
 
-            return new ExactMatchModel10(id, name, resourceType, systemData, location, tags);
+            return new ExactMatchModel10(id, name, resourceType, systemData, location, tags, default);
         }
 
-        /// <summary> Initializes a new instance of ExactMatchModel11. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::MgmtExactMatchInheritance.Models.ExactMatchModel11
+        ///
+        /// </summary>
         /// <param name="name"></param>
         /// <param name="resourceType"></param>
         /// <returns> A new <see cref="Models.ExactMatchModel11"/> instance for mocking. </returns>
         public static ExactMatchModel11 ExactMatchModel11(string name = null, ResourceType? resourceType = null)
         {
-            return new ExactMatchModel11(name, resourceType);
+            return new ExactMatchModel11(name, resourceType, default);
         }
     }
 }

@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Collections.Generic;
 using Azure.Core;
 using Azure.ResourceManager.Models;
@@ -17,13 +18,21 @@ namespace MgmtParent
     /// </summary>
     public partial class DedicatedHostGroupData : TrackedResourceData
     {
-        /// <summary> Initializes a new instance of DedicatedHostGroupData. </summary>
+        private Dictionary<string, BinaryData> _rawData;
+
+        /// <summary>
+        /// Initializes a new instance of global::MgmtParent.DedicatedHostGroupData
+        ///
+        /// </summary>
         /// <param name="location"> The location. </param>
         public DedicatedHostGroupData(AzureLocation location) : base(location)
         {
         }
 
-        /// <summary> Initializes a new instance of DedicatedHostGroupData. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::MgmtParent.DedicatedHostGroupData
+        ///
+        /// </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
         /// <param name="resourceType"> The resourceType. </param>
@@ -31,9 +40,11 @@ namespace MgmtParent
         /// <param name="tags"> The tags. </param>
         /// <param name="location"> The location. </param>
         /// <param name="foo"> specifies the foo. </param>
-        internal DedicatedHostGroupData(ResourceIdentifier id, string name, ResourceType resourceType, SystemData systemData, IDictionary<string, string> tags, AzureLocation location, string foo) : base(id, name, resourceType, systemData, tags, location)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal DedicatedHostGroupData(ResourceIdentifier id, string name, ResourceType resourceType, SystemData systemData, IDictionary<string, string> tags, AzureLocation location, string foo, Dictionary<string, BinaryData> rawData) : base(id, name, resourceType, systemData, tags, location)
         {
             Foo = foo;
+            _rawData = rawData;
         }
 
         /// <summary> specifies the foo. </summary>

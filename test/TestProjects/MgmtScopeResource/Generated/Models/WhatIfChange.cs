@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
 using Azure.Core;
 
 namespace MgmtScopeResource.Models
@@ -13,7 +14,12 @@ namespace MgmtScopeResource.Models
     /// <summary> Information about a single resource change predicted by What-If operation. </summary>
     public partial class WhatIfChange
     {
-        /// <summary> Initializes a new instance of WhatIfChange. </summary>
+        private Dictionary<string, BinaryData> _rawData;
+
+        /// <summary>
+        /// Initializes a new instance of global::MgmtScopeResource.Models.WhatIfChange
+        ///
+        /// </summary>
         /// <param name="resourceId"> Resource ID. </param>
         /// <param name="changeType"> Type of change that will be made to the resource when the deployment is executed. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="resourceId"/> is null. </exception>
@@ -25,19 +31,24 @@ namespace MgmtScopeResource.Models
             ChangeType = changeType;
         }
 
-        /// <summary> Initializes a new instance of WhatIfChange. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::MgmtScopeResource.Models.WhatIfChange
+        ///
+        /// </summary>
         /// <param name="resourceId"> Resource ID. </param>
         /// <param name="changeType"> Type of change that will be made to the resource when the deployment is executed. </param>
         /// <param name="unsupportedReason"> The explanation about why the resource is unsupported by What-If. </param>
         /// <param name="before"> The snapshot of the resource before the deployment is executed. </param>
         /// <param name="after"> The predicted snapshot of the resource after the deployment is executed. </param>
-        internal WhatIfChange(string resourceId, ChangeType changeType, string unsupportedReason, BinaryData before, BinaryData after)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal WhatIfChange(string resourceId, ChangeType changeType, string unsupportedReason, BinaryData before, BinaryData after, Dictionary<string, BinaryData> rawData)
         {
             ResourceId = resourceId;
             ChangeType = changeType;
             UnsupportedReason = unsupportedReason;
             Before = before;
             After = after;
+            _rawData = rawData;
         }
 
         /// <summary> Resource ID. </summary>

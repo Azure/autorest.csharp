@@ -14,46 +14,48 @@ namespace Azure.AI.FormRecognizer.Models
     /// <summary> Model factory for models. </summary>
     public static partial class AIFormRecognizerModelFactory
     {
-        /// <summary> Initializes a new instance of TrainRequest. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::Azure.AI.FormRecognizer.Models.TrainRequest
+        ///
+        /// </summary>
         /// <param name="source"> Source path containing the training documents. </param>
         /// <param name="sourceFilter"> Filter to apply to the documents in the source path for training. </param>
         /// <param name="useLabelFile"> Use label file for training a model. </param>
         /// <returns> A new <see cref="FormRecognizer.Models.TrainRequest"/> instance for mocking. </returns>
         public static TrainRequest TrainRequest(string source = null, TrainSourceFilter sourceFilter = null, bool? useLabelFile = null)
         {
-            return new TrainRequest(source, sourceFilter, useLabelFile);
+            return new TrainRequest(source, sourceFilter, useLabelFile, default);
         }
 
-        /// <summary> Initializes a new instance of ErrorInformation. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::Azure.AI.FormRecognizer.Models.ErrorInformation
+        ///
+        /// </summary>
         /// <param name="code"></param>
         /// <param name="message"></param>
-        /// <exception cref="ArgumentNullException"> <paramref name="code"/> or <paramref name="message"/> is null. </exception>
         /// <returns> A new <see cref="FormRecognizer.Models.ErrorInformation"/> instance for mocking. </returns>
         public static ErrorInformation ErrorInformation(string code = null, string message = null)
         {
-            if (code == null)
-            {
-                throw new ArgumentNullException(nameof(code));
-            }
-            if (message == null)
-            {
-                throw new ArgumentNullException(nameof(message));
-            }
-
-            return new ErrorInformation(code, message);
+            return new ErrorInformation(code, message, default);
         }
 
-        /// <summary> Initializes a new instance of Model. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::Azure.AI.FormRecognizer.Models.Model
+        ///
+        /// </summary>
         /// <param name="modelInfo"> Basic custom model information. </param>
         /// <param name="keys"> Keys extracted by the custom model. </param>
         /// <param name="trainResult"> Custom model training result. </param>
         /// <returns> A new <see cref="FormRecognizer.Models.Model"/> instance for mocking. </returns>
         public static Model Model(ModelInfo modelInfo = null, KeysResult keys = null, TrainResult trainResult = null)
         {
-            return new Model(modelInfo, keys, trainResult);
+            return new Model(modelInfo, keys, trainResult, default);
         }
 
-        /// <summary> Initializes a new instance of ModelInfo. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::Azure.AI.FormRecognizer.Models.ModelInfo
+        ///
+        /// </summary>
         /// <param name="modelId"> Model identifier. </param>
         /// <param name="status"> Status of the model. </param>
         /// <param name="createdDateTime"> Date and time (UTC) when the model was created. </param>
@@ -61,21 +63,26 @@ namespace Azure.AI.FormRecognizer.Models
         /// <returns> A new <see cref="FormRecognizer.Models.ModelInfo"/> instance for mocking. </returns>
         public static ModelInfo ModelInfo(Guid modelId = default, ModelStatus status = default, DateTimeOffset createdDateTime = default, DateTimeOffset lastUpdatedDateTime = default)
         {
-            return new ModelInfo(modelId, status, createdDateTime, lastUpdatedDateTime);
+            return new ModelInfo(modelId, status, createdDateTime, lastUpdatedDateTime, default);
         }
 
-        /// <summary> Initializes a new instance of KeysResult. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::Azure.AI.FormRecognizer.Models.KeysResult
+        ///
+        /// </summary>
         /// <param name="clusters"> Object mapping clusterIds to a list of keys. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="clusters"/> is null. </exception>
         /// <returns> A new <see cref="FormRecognizer.Models.KeysResult"/> instance for mocking. </returns>
         public static KeysResult KeysResult(IReadOnlyDictionary<string, IList<string>> clusters = null)
         {
             clusters ??= new Dictionary<string, IList<string>>();
 
-            return new KeysResult(clusters);
+            return new KeysResult(clusters, default);
         }
 
-        /// <summary> Initializes a new instance of TrainResult. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::Azure.AI.FormRecognizer.Models.TrainResult
+        ///
+        /// </summary>
         /// <param name="trainingDocuments"> List of the documents used to train the model and any errors reported in each document. </param>
         /// <param name="fields"> List of fields used to train the model and the train operation error reported by each. </param>
         /// <param name="averageModelAccuracy"> Average accuracy. </param>
@@ -87,10 +94,13 @@ namespace Azure.AI.FormRecognizer.Models
             fields ??= new List<FormFieldsReport>();
             errors ??= new List<ErrorInformation>();
 
-            return new TrainResult(trainingDocuments?.ToList(), fields?.ToList(), averageModelAccuracy, errors?.ToList());
+            return new TrainResult(trainingDocuments?.ToList(), fields?.ToList(), averageModelAccuracy, errors?.ToList(), default);
         }
 
-        /// <summary> Initializes a new instance of TrainingDocumentInfo. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::Azure.AI.FormRecognizer.Models.TrainingDocumentInfo
+        ///
+        /// </summary>
         /// <param name="documentName"> Training document name. </param>
         /// <param name="pages"> Total number of pages trained. </param>
         /// <param name="errors"> List of errors. </param>
@@ -100,25 +110,25 @@ namespace Azure.AI.FormRecognizer.Models
         {
             errors ??= new List<ErrorInformation>();
 
-            return new TrainingDocumentInfo(documentName, pages, errors?.ToList(), status);
+            return new TrainingDocumentInfo(documentName, pages, errors?.ToList(), status, default);
         }
 
-        /// <summary> Initializes a new instance of FormFieldsReport. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::Azure.AI.FormRecognizer.Models.FormFieldsReport
+        ///
+        /// </summary>
         /// <param name="fieldName"> Training field name. </param>
         /// <param name="accuracy"> Estimated extraction accuracy for this field. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="fieldName"/> is null. </exception>
         /// <returns> A new <see cref="FormRecognizer.Models.FormFieldsReport"/> instance for mocking. </returns>
         public static FormFieldsReport FormFieldsReport(string fieldName = null, float accuracy = default)
         {
-            if (fieldName == null)
-            {
-                throw new ArgumentNullException(nameof(fieldName));
-            }
-
-            return new FormFieldsReport(fieldName, accuracy);
+            return new FormFieldsReport(fieldName, accuracy, default);
         }
 
-        /// <summary> Initializes a new instance of AnalyzeOperationResult. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::Azure.AI.FormRecognizer.Models.AnalyzeOperationResult
+        ///
+        /// </summary>
         /// <param name="status"> Operation status. </param>
         /// <param name="createdDateTime"> Date and time (UTC) when the analyze operation was submitted. </param>
         /// <param name="lastUpdatedDateTime"> Date and time (UTC) when the status was last updated. </param>
@@ -126,10 +136,13 @@ namespace Azure.AI.FormRecognizer.Models
         /// <returns> A new <see cref="FormRecognizer.Models.AnalyzeOperationResult"/> instance for mocking. </returns>
         public static AnalyzeOperationResult AnalyzeOperationResult(OperationStatus status = default, DateTimeOffset createdDateTime = default, DateTimeOffset lastUpdatedDateTime = default, AnalyzeResult analyzeResult = null)
         {
-            return new AnalyzeOperationResult(status, createdDateTime, lastUpdatedDateTime, analyzeResult);
+            return new AnalyzeOperationResult(status, createdDateTime, lastUpdatedDateTime, analyzeResult, default);
         }
 
-        /// <summary> Initializes a new instance of AnalyzeResult. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::Azure.AI.FormRecognizer.Models.AnalyzeResult
+        ///
+        /// </summary>
         /// <param name="version"> Version of schema used for this result. </param>
         /// <param name="readResults"> Text extracted from the input. </param>
         /// <param name="pageResults"> Page-level information extracted from the input. </param>
@@ -143,10 +156,13 @@ namespace Azure.AI.FormRecognizer.Models
             documentResults ??= new List<DocumentResult>();
             errors ??= new List<ErrorInformation>();
 
-            return new AnalyzeResult(version, readResults?.ToList(), pageResults?.ToList(), documentResults?.ToList(), errors?.ToList());
+            return new AnalyzeResult(version, readResults?.ToList(), pageResults?.ToList(), documentResults?.ToList(), errors?.ToList(), default);
         }
 
-        /// <summary> Initializes a new instance of ReadResult. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::Azure.AI.FormRecognizer.Models.ReadResult
+        ///
+        /// </summary>
         /// <param name="page"> The 1-based page number in the input document. </param>
         /// <param name="angle"> The general orientation of the text in clockwise direction, measured in degrees between (-180, 180]. </param>
         /// <param name="width"> The width of the image/PDF in pixels/inches, respectively. </param>
@@ -159,10 +175,13 @@ namespace Azure.AI.FormRecognizer.Models
         {
             lines ??= new List<TextLine>();
 
-            return new ReadResult(page, angle, width, height, unit, language, lines?.ToList());
+            return new ReadResult(page, angle, width, height, unit, language, lines?.ToList(), default);
         }
 
-        /// <summary> Initializes a new instance of TextLine. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::Azure.AI.FormRecognizer.Models.TextLine
+        ///
+        /// </summary>
         /// <param name="text"> The text content of the line. </param>
         /// <param name="boundingBox"> Bounding box of an extracted line. </param>
         /// <param name="language"> The detected language of this line, if different from the overall page language. </param>
@@ -173,10 +192,13 @@ namespace Azure.AI.FormRecognizer.Models
             boundingBox ??= new List<float>();
             words ??= new List<TextWord>();
 
-            return new TextLine(text, boundingBox?.ToList(), language, words?.ToList());
+            return new TextLine(text, boundingBox?.ToList(), language, words?.ToList(), default);
         }
 
-        /// <summary> Initializes a new instance of TextWord. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::Azure.AI.FormRecognizer.Models.TextWord
+        ///
+        /// </summary>
         /// <param name="text"> The text content of the word. </param>
         /// <param name="boundingBox"> Bounding box of an extracted word. </param>
         /// <param name="confidence"> Confidence value. </param>
@@ -185,10 +207,13 @@ namespace Azure.AI.FormRecognizer.Models
         {
             boundingBox ??= new List<float>();
 
-            return new TextWord(text, boundingBox?.ToList(), confidence);
+            return new TextWord(text, boundingBox?.ToList(), confidence, default);
         }
 
-        /// <summary> Initializes a new instance of PageResult. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::Azure.AI.FormRecognizer.Models.PageResult
+        ///
+        /// </summary>
         /// <param name="page"> Page number. </param>
         /// <param name="clusterId"> Cluster identifier. </param>
         /// <param name="keyValuePairs"> List of key-value pairs extracted from the page. </param>
@@ -199,10 +224,13 @@ namespace Azure.AI.FormRecognizer.Models
             keyValuePairs ??= new List<KeyValuePair>();
             tables ??= new List<DataTable>();
 
-            return new PageResult(page, clusterId, keyValuePairs?.ToList(), tables?.ToList());
+            return new PageResult(page, clusterId, keyValuePairs?.ToList(), tables?.ToList(), default);
         }
 
-        /// <summary> Initializes a new instance of KeyValuePair. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::Azure.AI.FormRecognizer.Models.KeyValuePair
+        ///
+        /// </summary>
         /// <param name="label"> A user defined label for the key/value pair entry. </param>
         /// <param name="key"> Information about the extracted key in a key-value pair. </param>
         /// <param name="value"> Information about the extracted value in a key-value pair. </param>
@@ -210,10 +238,13 @@ namespace Azure.AI.FormRecognizer.Models
         /// <returns> A new <see cref="FormRecognizer.Models.KeyValuePair"/> instance for mocking. </returns>
         public static KeyValuePair KeyValuePair(string label = null, KeyValueElement key = null, KeyValueElement value = null, float confidence = default)
         {
-            return new KeyValuePair(label, key, value, confidence);
+            return new KeyValuePair(label, key, value, confidence, default);
         }
 
-        /// <summary> Initializes a new instance of KeyValueElement. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::Azure.AI.FormRecognizer.Models.KeyValueElement
+        ///
+        /// </summary>
         /// <param name="text"> The text content of the key or value. </param>
         /// <param name="boundingBox"> Bounding box of the key or value. </param>
         /// <param name="elements"> When includeTextDetails is set to true, a list of references to the text elements constituting this key or value. </param>
@@ -223,10 +254,13 @@ namespace Azure.AI.FormRecognizer.Models
             boundingBox ??= new List<float>();
             elements ??= new List<string>();
 
-            return new KeyValueElement(text, boundingBox?.ToList(), elements?.ToList());
+            return new KeyValueElement(text, boundingBox?.ToList(), elements?.ToList(), default);
         }
 
-        /// <summary> Initializes a new instance of DataTable. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::Azure.AI.FormRecognizer.Models.DataTable
+        ///
+        /// </summary>
         /// <param name="rows"> Number of rows. </param>
         /// <param name="columns"> Number of columns. </param>
         /// <param name="cells"> List of cells contained in the table. </param>
@@ -235,10 +269,13 @@ namespace Azure.AI.FormRecognizer.Models
         {
             cells ??= new List<DataTableCell>();
 
-            return new DataTable(rows, columns, cells?.ToList());
+            return new DataTable(rows, columns, cells?.ToList(), default);
         }
 
-        /// <summary> Initializes a new instance of DataTableCell. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::Azure.AI.FormRecognizer.Models.DataTableCell
+        ///
+        /// </summary>
         /// <param name="rowIndex"> Row index of the cell. </param>
         /// <param name="columnIndex"> Column index of the cell. </param>
         /// <param name="rowSpan"> Number of rows spanned by this cell. </param>
@@ -255,10 +292,13 @@ namespace Azure.AI.FormRecognizer.Models
             boundingBox ??= new List<float>();
             elements ??= new List<string>();
 
-            return new DataTableCell(rowIndex, columnIndex, rowSpan, columnSpan, text, boundingBox?.ToList(), confidence, elements?.ToList(), isHeader, isFooter);
+            return new DataTableCell(rowIndex, columnIndex, rowSpan, columnSpan, text, boundingBox?.ToList(), confidence, elements?.ToList(), isHeader, isFooter, default);
         }
 
-        /// <summary> Initializes a new instance of DocumentResult. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::Azure.AI.FormRecognizer.Models.DocumentResult
+        ///
+        /// </summary>
         /// <param name="docType"> Document type. </param>
         /// <param name="pageRange"> First and last page number where the document is found. </param>
         /// <param name="fields"> Dictionary of named field values. </param>
@@ -268,10 +308,13 @@ namespace Azure.AI.FormRecognizer.Models
             pageRange ??= new List<int>();
             fields ??= new Dictionary<string, FieldValue>();
 
-            return new DocumentResult(docType, pageRange?.ToList(), fields);
+            return new DocumentResult(docType, pageRange?.ToList(), fields, default);
         }
 
-        /// <summary> Initializes a new instance of FieldValue. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::Azure.AI.FormRecognizer.Models.FieldValue
+        ///
+        /// </summary>
         /// <param name="type"> Type of field value. </param>
         /// <param name="valueString"> String value. </param>
         /// <param name="valueDate"> Date value. </param>
@@ -294,10 +337,13 @@ namespace Azure.AI.FormRecognizer.Models
             boundingBox ??= new List<float>();
             elements ??= new List<string>();
 
-            return new FieldValue(type, valueString, valueDate, valueTime, valuePhoneNumber, valueNumber, valueInteger, valueArray?.ToList(), valueObject, text, boundingBox?.ToList(), confidence, elements?.ToList(), page);
+            return new FieldValue(type, valueString, valueDate, valueTime, valuePhoneNumber, valueNumber, valueInteger, valueArray?.ToList(), valueObject, text, boundingBox?.ToList(), confidence, elements?.ToList(), page, default);
         }
 
-        /// <summary> Initializes a new instance of CopyOperationResult. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::Azure.AI.FormRecognizer.Models.CopyOperationResult
+        ///
+        /// </summary>
         /// <param name="status"> Operation status. </param>
         /// <param name="createdDateTime"> Date and time (UTC) when the copy operation was submitted. </param>
         /// <param name="lastUpdatedDateTime"> Date and time (UTC) when the status was last updated. </param>
@@ -305,10 +351,13 @@ namespace Azure.AI.FormRecognizer.Models
         /// <returns> A new <see cref="FormRecognizer.Models.CopyOperationResult"/> instance for mocking. </returns>
         public static CopyOperationResult CopyOperationResult(OperationStatus status = default, DateTimeOffset createdDateTime = default, DateTimeOffset lastUpdatedDateTime = default, CopyResult copyResult = null)
         {
-            return new CopyOperationResult(status, createdDateTime, lastUpdatedDateTime, copyResult);
+            return new CopyOperationResult(status, createdDateTime, lastUpdatedDateTime, copyResult, default);
         }
 
-        /// <summary> Initializes a new instance of CopyResult. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::Azure.AI.FormRecognizer.Models.CopyResult
+        ///
+        /// </summary>
         /// <param name="modelId"> Identifier of the target model. </param>
         /// <param name="errors"> Errors returned during the copy operation. </param>
         /// <returns> A new <see cref="FormRecognizer.Models.CopyResult"/> instance for mocking. </returns>
@@ -316,10 +365,13 @@ namespace Azure.AI.FormRecognizer.Models
         {
             errors ??= new List<ErrorInformation>();
 
-            return new CopyResult(modelId, errors?.ToList());
+            return new CopyResult(modelId, errors?.ToList(), default);
         }
 
-        /// <summary> Initializes a new instance of Models. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::Azure.AI.FormRecognizer.Models.Models
+        ///
+        /// </summary>
         /// <param name="summary"> Summary of all trained custom models. </param>
         /// <param name="modelList"> Collection of trained custom models. </param>
         /// <param name="nextLink"> Link to the next page of custom models. </param>
@@ -328,17 +380,20 @@ namespace Azure.AI.FormRecognizer.Models
         {
             modelList ??= new List<ModelInfo>();
 
-            return new Models(summary, modelList?.ToList(), nextLink);
+            return new Models(summary, modelList?.ToList(), nextLink, default);
         }
 
-        /// <summary> Initializes a new instance of ModelsSummary. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::Azure.AI.FormRecognizer.Models.ModelsSummary
+        ///
+        /// </summary>
         /// <param name="count"> Current count of trained custom models. </param>
         /// <param name="limit"> Max number of models that can be trained for this account. </param>
         /// <param name="lastUpdatedDateTime"> Date and time (UTC) when the summary was last updated. </param>
         /// <returns> A new <see cref="FormRecognizer.Models.ModelsSummary"/> instance for mocking. </returns>
         public static ModelsSummary ModelsSummary(int count = default, int limit = default, DateTimeOffset lastUpdatedDateTime = default)
         {
-            return new ModelsSummary(count, limit, lastUpdatedDateTime);
+            return new ModelsSummary(count, limit, lastUpdatedDateTime, default);
         }
     }
 }

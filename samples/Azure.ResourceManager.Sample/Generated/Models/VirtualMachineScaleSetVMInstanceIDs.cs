@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Collections.Generic;
 using Azure.Core;
 
@@ -16,20 +17,30 @@ namespace Azure.ResourceManager.Sample.Models
     /// </summary>
     public partial class VirtualMachineScaleSetVMInstanceIDs
     {
-        /// <summary> Initializes a new instance of VirtualMachineScaleSetVMInstanceIDs. </summary>
+        private Dictionary<string, BinaryData> _rawData;
+
+        /// <summary>
+        /// Initializes a new instance of global::Azure.ResourceManager.Sample.Models.VirtualMachineScaleSetVMInstanceIDs
+        ///
+        /// </summary>
         public VirtualMachineScaleSetVMInstanceIDs()
         {
             InstanceIds = new ChangeTrackingList<string>();
         }
 
-        /// <summary> Initializes a new instance of VirtualMachineScaleSetVMInstanceIDs. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::Azure.ResourceManager.Sample.Models.VirtualMachineScaleSetVMInstanceIDs
+        ///
+        /// </summary>
         /// <param name="instanceIds">
         /// The virtual machine scale set instance ids. Omitting the virtual machine scale set instance ids will result in the operation being performed on all virtual machines in the virtual machine scale set.
         /// Serialized Name: VirtualMachineScaleSetVMInstanceIDs.instanceIds
         /// </param>
-        internal VirtualMachineScaleSetVMInstanceIDs(IList<string> instanceIds)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal VirtualMachineScaleSetVMInstanceIDs(IList<string> instanceIds, Dictionary<string, BinaryData> rawData)
         {
             InstanceIds = instanceIds;
+            _rawData = rawData;
         }
 
         /// <summary>

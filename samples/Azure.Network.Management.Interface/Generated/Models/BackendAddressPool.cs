@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Collections.Generic;
 using Azure.Core;
 
@@ -13,7 +14,10 @@ namespace Azure.Network.Management.Interface.Models
     /// <summary> Pool of backend IP addresses. </summary>
     public partial class BackendAddressPool : SubResource
     {
-        /// <summary> Initializes a new instance of BackendAddressPool. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::Azure.Network.Management.Interface.Models.BackendAddressPool
+        ///
+        /// </summary>
         public BackendAddressPool()
         {
             BackendIPConfigurations = new ChangeTrackingList<NetworkInterfaceIPConfiguration>();
@@ -21,7 +25,10 @@ namespace Azure.Network.Management.Interface.Models
             OutboundRules = new ChangeTrackingList<SubResource>();
         }
 
-        /// <summary> Initializes a new instance of BackendAddressPool. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::Azure.Network.Management.Interface.Models.BackendAddressPool
+        ///
+        /// </summary>
         /// <param name="id"> Resource ID. </param>
         /// <param name="name"> The name of the resource that is unique within the set of backend address pools used by the load balancer. This name can be used to access the resource. </param>
         /// <param name="etag"> A unique read-only string that changes whenever the resource is updated. </param>
@@ -31,7 +38,8 @@ namespace Azure.Network.Management.Interface.Models
         /// <param name="outboundRule"> A reference to an outbound rule that uses this backend address pool. </param>
         /// <param name="outboundRules"> An array of references to outbound rules that use this backend address pool. </param>
         /// <param name="provisioningState"> The provisioning state of the backend address pool resource. </param>
-        internal BackendAddressPool(string id, string name, string etag, string type, IReadOnlyList<NetworkInterfaceIPConfiguration> backendIPConfigurations, IReadOnlyList<SubResource> loadBalancingRules, SubResource outboundRule, IReadOnlyList<SubResource> outboundRules, ProvisioningState? provisioningState) : base(id)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal BackendAddressPool(string id, string name, string etag, string type, IReadOnlyList<NetworkInterfaceIPConfiguration> backendIPConfigurations, IReadOnlyList<SubResource> loadBalancingRules, SubResource outboundRule, IReadOnlyList<SubResource> outboundRules, ProvisioningState? provisioningState, Dictionary<string, BinaryData> rawData) : base(id, rawData)
         {
             Name = name;
             Etag = etag;

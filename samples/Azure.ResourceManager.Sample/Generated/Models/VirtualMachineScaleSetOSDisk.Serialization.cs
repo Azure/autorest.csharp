@@ -8,17 +8,20 @@
 using System;
 using System.Collections.Generic;
 using System.Text.Json;
+using Azure;
 using Azure.Core;
 using Azure.Core.Serialization;
 
 namespace Azure.ResourceManager.Sample.Models
 {
-    public partial class VirtualMachineScaleSetOSDisk : IUtf8JsonSerializable, IJsonModelSerializable
+    public partial class VirtualMachineScaleSetOSDisk : IUtf8JsonSerializable, IModelJsonSerializable<VirtualMachineScaleSetOSDisk>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModelSerializable)this).Serialize(writer, ModelSerializerOptions.AzureServiceDefault);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<VirtualMachineScaleSetOSDisk>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
 
-        void IJsonModelSerializable.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
+        void IModelJsonSerializable<VirtualMachineScaleSetOSDisk>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
             writer.WriteStartObject();
             if (Optional.IsDefined(Name))
             {
@@ -72,18 +75,25 @@ namespace Azure.ResourceManager.Sample.Models
                 writer.WritePropertyName("managedDisk"u8);
                 writer.WriteObjectValue(ManagedDisk);
             }
+            if (_rawData is not null && options.Format == ModelSerializerFormat.Json)
+            {
+                foreach (var property in _rawData)
+                {
+                    writer.WritePropertyName(property.Key);
+#if NET6_0_OR_GREATER
+				writer.WriteRawValue(property.Value);
+#else
+                    JsonSerializer.Serialize(writer, JsonDocument.Parse(property.Value.ToString()).RootElement);
+#endif
+                }
+            }
             writer.WriteEndObject();
-        }
-
-        object IModelSerializable.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            using var doc = JsonDocument.Parse(data);
-            return DeserializeVirtualMachineScaleSetOSDisk(doc.RootElement, options);
         }
 
         internal static VirtualMachineScaleSetOSDisk DeserializeVirtualMachineScaleSetOSDisk(JsonElement element, ModelSerializerOptions options = default)
         {
-            options ??= ModelSerializerOptions.AzureServiceDefault;
+            options ??= ModelSerializerOptions.DefaultWireOptions;
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
@@ -98,6 +108,7 @@ namespace Azure.ResourceManager.Sample.Models
             Optional<VirtualHardDisk> image = default;
             Optional<IList<string>> vhdContainers = default;
             Optional<VirtualMachineScaleSetManagedDiskParameters> managedDisk = default;
+            Dictionary<string, BinaryData> rawData = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("name"u8))
@@ -187,14 +198,57 @@ namespace Azure.ResourceManager.Sample.Models
                     managedDisk = VirtualMachineScaleSetManagedDiskParameters.DeserializeVirtualMachineScaleSetManagedDiskParameters(property.Value);
                     continue;
                 }
+                if (options.Format == ModelSerializerFormat.Json)
+                {
+                    rawData.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
+                    continue;
+                }
             }
-            return new VirtualMachineScaleSetOSDisk(name.Value, Optional.ToNullable(caching), Optional.ToNullable(writeAcceleratorEnabled), createOption, diffDiskSettings.Value, Optional.ToNullable(diskSizeGB), Optional.ToNullable(osType), image.Value, Optional.ToList(vhdContainers), managedDisk.Value);
+            return new VirtualMachineScaleSetOSDisk(name.Value, Optional.ToNullable(caching), Optional.ToNullable(writeAcceleratorEnabled), createOption, diffDiskSettings.Value, Optional.ToNullable(diskSizeGB), Optional.ToNullable(osType), image.Value, Optional.ToList(vhdContainers), managedDisk.Value, rawData);
         }
 
-        object IJsonModelSerializable.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        VirtualMachineScaleSetOSDisk IModelJsonSerializable<VirtualMachineScaleSetOSDisk>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
         {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
             using var doc = JsonDocument.ParseValue(ref reader);
             return DeserializeVirtualMachineScaleSetOSDisk(doc.RootElement, options);
+        }
+
+        BinaryData IModelSerializable<VirtualMachineScaleSetOSDisk>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        VirtualMachineScaleSetOSDisk IModelSerializable<VirtualMachineScaleSetOSDisk>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using var doc = JsonDocument.Parse(data);
+            return DeserializeVirtualMachineScaleSetOSDisk(doc.RootElement, options);
+        }
+
+        public static implicit operator RequestContent(VirtualMachineScaleSetOSDisk model)
+        {
+            if (model is null)
+            {
+                return null;
+            }
+
+            return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
+        }
+
+        public static explicit operator VirtualMachineScaleSetOSDisk(Response response)
+        {
+            if (response is null)
+            {
+                return null;
+            }
+
+            using JsonDocument doc = JsonDocument.Parse(response.ContentStream);
+            return DeserializeVirtualMachineScaleSetOSDisk(doc.RootElement, ModelSerializerOptions.DefaultWireOptions);
         }
     }
 }

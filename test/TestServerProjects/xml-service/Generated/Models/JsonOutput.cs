@@ -5,21 +5,34 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
+
 namespace xml_service.Models
 {
     /// <summary> The JsonOutput. </summary>
     public partial class JsonOutput
     {
-        /// <summary> Initializes a new instance of JsonOutput. </summary>
+        private Dictionary<string, BinaryData> _rawData;
+
+        /// <summary>
+        /// Initializes a new instance of global::xml_service.Models.JsonOutput
+        ///
+        /// </summary>
         internal JsonOutput()
         {
         }
 
-        /// <summary> Initializes a new instance of JsonOutput. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::xml_service.Models.JsonOutput
+        ///
+        /// </summary>
         /// <param name="id"></param>
-        internal JsonOutput(int? id)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal JsonOutput(int? id, Dictionary<string, BinaryData> rawData)
         {
             Id = id;
+            _rawData = rawData;
         }
 
         /// <summary> Gets the id. </summary>

@@ -5,23 +5,36 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
+
 namespace Azure.Network.Management.Interface.Models
 {
     /// <summary> The effective network security group association. </summary>
     public partial class EffectiveNetworkSecurityGroupAssociation
     {
-        /// <summary> Initializes a new instance of EffectiveNetworkSecurityGroupAssociation. </summary>
+        private Dictionary<string, BinaryData> _rawData;
+
+        /// <summary>
+        /// Initializes a new instance of global::Azure.Network.Management.Interface.Models.EffectiveNetworkSecurityGroupAssociation
+        ///
+        /// </summary>
         internal EffectiveNetworkSecurityGroupAssociation()
         {
         }
 
-        /// <summary> Initializes a new instance of EffectiveNetworkSecurityGroupAssociation. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::Azure.Network.Management.Interface.Models.EffectiveNetworkSecurityGroupAssociation
+        ///
+        /// </summary>
         /// <param name="subnet"> The ID of the subnet if assigned. </param>
         /// <param name="networkInterface"> The ID of the network interface if assigned. </param>
-        internal EffectiveNetworkSecurityGroupAssociation(SubResource subnet, SubResource networkInterface)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal EffectiveNetworkSecurityGroupAssociation(SubResource subnet, SubResource networkInterface, Dictionary<string, BinaryData> rawData)
         {
             Subnet = subnet;
             NetworkInterface = networkInterface;
+            _rawData = rawData;
         }
 
         /// <summary> The ID of the subnet if assigned. </summary>

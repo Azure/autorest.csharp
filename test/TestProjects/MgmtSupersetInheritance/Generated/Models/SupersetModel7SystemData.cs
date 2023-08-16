@@ -6,26 +6,37 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
 
 namespace MgmtSupersetInheritance.Models
 {
     /// <summary> Metadata pertaining to creation and last modification of the resource. </summary>
     public partial class SupersetModel7SystemData
     {
-        /// <summary> Initializes a new instance of SupersetModel7SystemData. </summary>
+        private Dictionary<string, BinaryData> _rawData;
+
+        /// <summary>
+        /// Initializes a new instance of global::MgmtSupersetInheritance.Models.SupersetModel7SystemData
+        ///
+        /// </summary>
         internal SupersetModel7SystemData()
         {
         }
 
-        /// <summary> Initializes a new instance of SupersetModel7SystemData. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::MgmtSupersetInheritance.Models.SupersetModel7SystemData
+        ///
+        /// </summary>
         /// <param name="createdBy"> The identity that created the resource. </param>
         /// <param name="createdOn"> The timestamp of resource creation (UTC). </param>
         /// <param name="lastModifiedBy"> The identity that last modified the resource. </param>
-        internal SupersetModel7SystemData(string createdBy, DateTimeOffset? createdOn, string lastModifiedBy)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal SupersetModel7SystemData(string createdBy, DateTimeOffset? createdOn, string lastModifiedBy, Dictionary<string, BinaryData> rawData)
         {
             CreatedBy = createdBy;
             CreatedOn = createdOn;
             LastModifiedBy = lastModifiedBy;
+            _rawData = rawData;
         }
 
         /// <summary> The identity that created the resource. </summary>

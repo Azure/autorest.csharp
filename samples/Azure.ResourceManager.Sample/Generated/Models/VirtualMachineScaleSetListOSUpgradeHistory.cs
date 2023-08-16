@@ -19,7 +19,12 @@ namespace Azure.ResourceManager.Sample.Models
     /// </summary>
     internal partial class VirtualMachineScaleSetListOSUpgradeHistory
     {
-        /// <summary> Initializes a new instance of VirtualMachineScaleSetListOSUpgradeHistory. </summary>
+        private Dictionary<string, BinaryData> _rawData;
+
+        /// <summary>
+        /// Initializes a new instance of global::Azure.ResourceManager.Sample.Models.VirtualMachineScaleSetListOSUpgradeHistory
+        ///
+        /// </summary>
         /// <param name="value">
         /// The list of OS upgrades performed on the virtual machine scale set.
         /// Serialized Name: VirtualMachineScaleSetListOSUpgradeHistory.value
@@ -32,7 +37,10 @@ namespace Azure.ResourceManager.Sample.Models
             Value = value.ToList();
         }
 
-        /// <summary> Initializes a new instance of VirtualMachineScaleSetListOSUpgradeHistory. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::Azure.ResourceManager.Sample.Models.VirtualMachineScaleSetListOSUpgradeHistory
+        ///
+        /// </summary>
         /// <param name="value">
         /// The list of OS upgrades performed on the virtual machine scale set.
         /// Serialized Name: VirtualMachineScaleSetListOSUpgradeHistory.value
@@ -45,11 +53,13 @@ namespace Azure.ResourceManager.Sample.Models
         /// The uri to fetch the next page of OS Upgrade History. Call ListNext() with this to fetch the next page of history of upgrades.
         /// Serialized Name: VirtualMachineScaleSetListOSUpgradeHistory.nextLink
         /// </param>
-        internal VirtualMachineScaleSetListOSUpgradeHistory(IReadOnlyList<UpgradeOperationHistoricalStatusInfo> value, ETag? etag, string nextLink)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal VirtualMachineScaleSetListOSUpgradeHistory(IReadOnlyList<UpgradeOperationHistoricalStatusInfo> value, ETag? etag, string nextLink, Dictionary<string, BinaryData> rawData)
         {
             Value = value;
             Etag = etag;
             NextLink = nextLink;
+            _rawData = rawData;
         }
 
         /// <summary>

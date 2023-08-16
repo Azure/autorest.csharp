@@ -13,15 +13,22 @@ namespace MgmtLRO.Models
     /// <summary> Specifies information about the fake that the virtual machine should be assigned to. Only tags may be updated. </summary>
     public partial class BarPatch : UpdateResource
     {
-        /// <summary> Initializes a new instance of BarPatch. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::MgmtLRO.Models.BarPatch
+        ///
+        /// </summary>
         public BarPatch()
         {
         }
 
-        /// <summary> Initializes a new instance of BarPatch. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::MgmtLRO.Models.BarPatch
+        ///
+        /// </summary>
         /// <param name="tags"> Resource tags. </param>
         /// <param name="buzz"> Update Domain count. </param>
-        internal BarPatch(IDictionary<string, string> tags, Guid? buzz) : base(tags)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal BarPatch(IDictionary<string, string> tags, Guid? buzz, Dictionary<string, BinaryData> rawData) : base(tags, rawData)
         {
             Buzz = buzz;
         }

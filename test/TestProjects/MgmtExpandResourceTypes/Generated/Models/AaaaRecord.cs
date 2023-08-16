@@ -5,21 +5,34 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
+
 namespace MgmtExpandResourceTypes.Models
 {
     /// <summary> An AAAA record. </summary>
     public partial class AaaaRecord
     {
-        /// <summary> Initializes a new instance of AaaaRecord. </summary>
+        private Dictionary<string, BinaryData> _rawData;
+
+        /// <summary>
+        /// Initializes a new instance of global::MgmtExpandResourceTypes.Models.AaaaRecord
+        ///
+        /// </summary>
         public AaaaRecord()
         {
         }
 
-        /// <summary> Initializes a new instance of AaaaRecord. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::MgmtExpandResourceTypes.Models.AaaaRecord
+        ///
+        /// </summary>
         /// <param name="ipv6Address"> The IPv6 address of this AAAA record. </param>
-        internal AaaaRecord(string ipv6Address)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal AaaaRecord(string ipv6Address, Dictionary<string, BinaryData> rawData)
         {
             Ipv6Address = ipv6Address;
+            _rawData = rawData;
         }
 
         /// <summary> The IPv6 address of this AAAA record. </summary>

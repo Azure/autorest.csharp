@@ -17,7 +17,10 @@ namespace MgmtParamOrdering.Models
     /// <summary> Model factory for models. </summary>
     public static partial class ArmMgmtParamOrderingModelFactory
     {
-        /// <summary> Initializes a new instance of AvailabilitySetData. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::MgmtParamOrdering.AvailabilitySetData
+        ///
+        /// </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
         /// <param name="resourceType"> The resourceType. </param>
@@ -30,10 +33,13 @@ namespace MgmtParamOrdering.Models
         {
             tags ??= new Dictionary<string, string>();
 
-            return new AvailabilitySetData(id, name, resourceType, systemData, tags, location, bar);
+            return new AvailabilitySetData(id, name, resourceType, systemData, tags, location, bar, default);
         }
 
-        /// <summary> Initializes a new instance of DedicatedHostGroupData. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::MgmtParamOrdering.DedicatedHostGroupData
+        ///
+        /// </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
         /// <param name="resourceType"> The resourceType. </param>
@@ -46,10 +52,13 @@ namespace MgmtParamOrdering.Models
         {
             tags ??= new Dictionary<string, string>();
 
-            return new DedicatedHostGroupData(id, name, resourceType, systemData, tags, location, foo);
+            return new DedicatedHostGroupData(id, name, resourceType, systemData, tags, location, foo, default);
         }
 
-        /// <summary> Initializes a new instance of DedicatedHostData. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::MgmtParamOrdering.DedicatedHostData
+        ///
+        /// </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
         /// <param name="resourceType"> The resourceType. </param>
@@ -62,10 +71,13 @@ namespace MgmtParamOrdering.Models
         {
             tags ??= new Dictionary<string, string>();
 
-            return new DedicatedHostData(id, name, resourceType, systemData, tags, location, foo);
+            return new DedicatedHostData(id, name, resourceType, systemData, tags, location, foo, default);
         }
 
-        /// <summary> Initializes a new instance of DedicatedHostPatch. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::MgmtParamOrdering.Models.DedicatedHostPatch
+        ///
+        /// </summary>
         /// <param name="tags"> Resource tags. </param>
         /// <param name="platformFaultDomain"> Fault domain of the dedicated host within a dedicated host group. </param>
         /// <param name="autoReplaceOnFailure"> Specifies whether the dedicated host should be replaced automatically in case of a failure. The value is defaulted to 'true' when not provided. </param>
@@ -77,10 +89,13 @@ namespace MgmtParamOrdering.Models
         {
             tags ??= new Dictionary<string, string>();
 
-            return new DedicatedHostPatch(tags, platformFaultDomain, autoReplaceOnFailure, hostId, provisioningOn, provisioningState);
+            return new DedicatedHostPatch(tags, platformFaultDomain, autoReplaceOnFailure, hostId, provisioningOn, provisioningState, default);
         }
 
-        /// <summary> Initializes a new instance of VirtualMachineExtensionImageData. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::MgmtParamOrdering.VirtualMachineExtensionImageData
+        ///
+        /// </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
         /// <param name="resourceType"> The resourceType. </param>
@@ -93,10 +108,13 @@ namespace MgmtParamOrdering.Models
         {
             tags ??= new Dictionary<string, string>();
 
-            return new VirtualMachineExtensionImageData(id, name, resourceType, systemData, tags, location, bar);
+            return new VirtualMachineExtensionImageData(id, name, resourceType, systemData, tags, location, bar, default);
         }
 
-        /// <summary> Initializes a new instance of EnvironmentContainerResourceData. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::MgmtParamOrdering.EnvironmentContainerResourceData
+        ///
+        /// </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
         /// <param name="resourceType"> The resourceType. </param>
@@ -109,10 +127,13 @@ namespace MgmtParamOrdering.Models
         {
             tags ??= new Dictionary<string, string>();
 
-            return new EnvironmentContainerResourceData(id, name, resourceType, systemData, tags, location, properties);
+            return new EnvironmentContainerResourceData(id, name, resourceType, systemData, tags, location, properties, default);
         }
 
-        /// <summary> Initializes a new instance of WorkspaceData. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::MgmtParamOrdering.WorkspaceData
+        ///
+        /// </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
         /// <param name="resourceType"> The resourceType. </param>
@@ -140,10 +161,13 @@ namespace MgmtParamOrdering.Models
         {
             tags ??= new Dictionary<string, string>();
 
-            return new WorkspaceData(id, name, resourceType, systemData, tags, location, workspaceId, description, friendlyName, keyVault, applicationInsights, containerRegistry, storageAccount, discoveryUri, provisioningState, hbiWorkspace, serviceProvisionedResourceGroup, privateLinkCount, imageBuildCompute, allowPublicAccessWhenBehindVnet, primaryUserAssignedIdentity, tenantId);
+            return new WorkspaceData(id, name, resourceType, systemData, tags, location, workspaceId, description, friendlyName, keyVault, applicationInsights, containerRegistry, storageAccount, discoveryUri, provisioningState, hbiWorkspace, serviceProvisionedResourceGroup, privateLinkCount, imageBuildCompute, allowPublicAccessWhenBehindVnet, primaryUserAssignedIdentity, tenantId, default);
         }
 
-        /// <summary> Initializes a new instance of VirtualMachineScaleSetData. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::MgmtParamOrdering.VirtualMachineScaleSetData
+        ///
+        /// </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
         /// <param name="resourceType"> The resourceType. </param>
@@ -157,15 +181,18 @@ namespace MgmtParamOrdering.Models
             tags ??= new Dictionary<string, string>();
             zones ??= new List<string>();
 
-            return new VirtualMachineScaleSetData(id, name, resourceType, systemData, tags, location, zones?.ToList());
+            return new VirtualMachineScaleSetData(id, name, resourceType, systemData, tags, location, zones?.ToList(), default);
         }
 
-        /// <summary> Initializes a new instance of VirtualMachineScaleSetInstanceView. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::MgmtParamOrdering.Models.VirtualMachineScaleSetInstanceView
+        ///
+        /// </summary>
         /// <param name="virtualMachine"> The instance view status summary for the virtual machine scale set. </param>
         /// <returns> A new <see cref="Models.VirtualMachineScaleSetInstanceView"/> instance for mocking. </returns>
         public static VirtualMachineScaleSetInstanceView VirtualMachineScaleSetInstanceView(string virtualMachine = null)
         {
-            return new VirtualMachineScaleSetInstanceView(virtualMachine);
+            return new VirtualMachineScaleSetInstanceView(virtualMachine, default);
         }
     }
 }

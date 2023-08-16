@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Collections.Generic;
 using Azure.Core;
 
@@ -16,20 +17,30 @@ namespace MgmtRenameRules.Models
     /// </summary>
     internal partial class VirtualMachineScaleSetVmNetworkProfileConfiguration
     {
-        /// <summary> Initializes a new instance of VirtualMachineScaleSetVmNetworkProfileConfiguration. </summary>
+        private Dictionary<string, BinaryData> _rawData;
+
+        /// <summary>
+        /// Initializes a new instance of global::MgmtRenameRules.Models.VirtualMachineScaleSetVmNetworkProfileConfiguration
+        ///
+        /// </summary>
         public VirtualMachineScaleSetVmNetworkProfileConfiguration()
         {
             NetworkInterfaceConfigurations = new ChangeTrackingList<VirtualMachineScaleSetNetworkConfiguration>();
         }
 
-        /// <summary> Initializes a new instance of VirtualMachineScaleSetVmNetworkProfileConfiguration. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::MgmtRenameRules.Models.VirtualMachineScaleSetVmNetworkProfileConfiguration
+        ///
+        /// </summary>
         /// <param name="networkInterfaceConfigurations">
         /// The list of network configurations.
         /// Serialized Name: VirtualMachineScaleSetVMNetworkProfileConfiguration.networkInterfaceConfigurations
         /// </param>
-        internal VirtualMachineScaleSetVmNetworkProfileConfiguration(IList<VirtualMachineScaleSetNetworkConfiguration> networkInterfaceConfigurations)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal VirtualMachineScaleSetVmNetworkProfileConfiguration(IList<VirtualMachineScaleSetNetworkConfiguration> networkInterfaceConfigurations, Dictionary<string, BinaryData> rawData)
         {
             NetworkInterfaceConfigurations = networkInterfaceConfigurations;
+            _rawData = rawData;
         }
 
         /// <summary>

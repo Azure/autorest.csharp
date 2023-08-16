@@ -15,7 +15,12 @@ namespace MgmtOperations.Models
     /// <summary> Response for GetConnectionSharedKey API service call. </summary>
     public partial class ConnectionSharedKey : TrackedResourceData
     {
-        /// <summary> Initializes a new instance of ConnectionSharedKey. </summary>
+        private Dictionary<string, BinaryData> _rawData;
+
+        /// <summary>
+        /// Initializes a new instance of global::MgmtOperations.Models.ConnectionSharedKey
+        ///
+        /// </summary>
         /// <param name="location"> The location. </param>
         /// <param name="value"> The virtual network connection shared key value. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="value"/> is null. </exception>
@@ -26,7 +31,10 @@ namespace MgmtOperations.Models
             Value = value;
         }
 
-        /// <summary> Initializes a new instance of ConnectionSharedKey. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::MgmtOperations.Models.ConnectionSharedKey
+        ///
+        /// </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
         /// <param name="resourceType"> The resourceType. </param>
@@ -34,9 +42,11 @@ namespace MgmtOperations.Models
         /// <param name="tags"> The tags. </param>
         /// <param name="location"> The location. </param>
         /// <param name="value"> The virtual network connection shared key value. </param>
-        internal ConnectionSharedKey(ResourceIdentifier id, string name, ResourceType resourceType, SystemData systemData, IDictionary<string, string> tags, AzureLocation location, string value) : base(id, name, resourceType, systemData, tags, location)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal ConnectionSharedKey(ResourceIdentifier id, string name, ResourceType resourceType, SystemData systemData, IDictionary<string, string> tags, AzureLocation location, string value, Dictionary<string, BinaryData> rawData) : base(id, name, resourceType, systemData, tags, location)
         {
             Value = value;
+            _rawData = rawData;
         }
 
         /// <summary> The virtual network connection shared key value. </summary>

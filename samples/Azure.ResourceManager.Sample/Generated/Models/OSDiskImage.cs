@@ -5,6 +5,9 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
+
 namespace Azure.ResourceManager.Sample.Models
 {
     /// <summary>
@@ -13,7 +16,12 @@ namespace Azure.ResourceManager.Sample.Models
     /// </summary>
     internal partial class OSDiskImage
     {
-        /// <summary> Initializes a new instance of OSDiskImage. </summary>
+        private Dictionary<string, BinaryData> _rawData;
+
+        /// <summary>
+        /// Initializes a new instance of global::Azure.ResourceManager.Sample.Models.OSDiskImage
+        ///
+        /// </summary>
         /// <param name="operatingSystem">
         /// The operating system of the osDiskImage.
         /// Serialized Name: OSDiskImage.operatingSystem
@@ -21,6 +29,21 @@ namespace Azure.ResourceManager.Sample.Models
         public OSDiskImage(OperatingSystemType operatingSystem)
         {
             OperatingSystem = operatingSystem;
+        }
+
+        /// <summary>
+        /// Initializes a new instance of global::Azure.ResourceManager.Sample.Models.OSDiskImage
+        ///
+        /// </summary>
+        /// <param name="operatingSystem">
+        /// The operating system of the osDiskImage.
+        /// Serialized Name: OSDiskImage.operatingSystem
+        /// </param>
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal OSDiskImage(OperatingSystemType operatingSystem, Dictionary<string, BinaryData> rawData)
+        {
+            OperatingSystem = operatingSystem;
+            _rawData = rawData;
         }
 
         /// <summary>

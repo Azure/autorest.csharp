@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Collections.Generic;
 using Azure.Core;
 
@@ -16,13 +17,21 @@ namespace MgmtRenameRules.Models
     /// </summary>
     public partial class ImageStorageProfile
     {
-        /// <summary> Initializes a new instance of ImageStorageProfile. </summary>
+        private Dictionary<string, BinaryData> _rawData;
+
+        /// <summary>
+        /// Initializes a new instance of global::MgmtRenameRules.Models.ImageStorageProfile
+        ///
+        /// </summary>
         public ImageStorageProfile()
         {
             DataDisks = new ChangeTrackingList<ImageDataDisk>();
         }
 
-        /// <summary> Initializes a new instance of ImageStorageProfile. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::MgmtRenameRules.Models.ImageStorageProfile
+        ///
+        /// </summary>
         /// <param name="osDisk">
         /// Specifies information about the operating system disk used by the virtual machine. &lt;br&gt;&lt;br&gt; For more information about disks, see [About disks and VHDs for Azure virtual machines](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-windows-about-disks-vhds?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json).
         /// Serialized Name: ImageStorageProfile.osDisk
@@ -35,11 +44,13 @@ namespace MgmtRenameRules.Models
         /// Specifies whether an image is zone resilient or not. Default is false. Zone resilient images can be created only in regions that provide Zone Redundant Storage (ZRS).
         /// Serialized Name: ImageStorageProfile.zoneResilient
         /// </param>
-        internal ImageStorageProfile(ImageOSDisk osDisk, IList<ImageDataDisk> dataDisks, bool? zoneResilient)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal ImageStorageProfile(ImageOSDisk osDisk, IList<ImageDataDisk> dataDisks, bool? zoneResilient, Dictionary<string, BinaryData> rawData)
         {
             OSDisk = osDisk;
             DataDisks = dataDisks;
             ZoneResilient = zoneResilient;
+            _rawData = rawData;
         }
 
         /// <summary>

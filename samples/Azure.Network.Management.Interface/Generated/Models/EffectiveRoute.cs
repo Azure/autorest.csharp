@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Collections.Generic;
 using Azure.Core;
 
@@ -13,14 +14,22 @@ namespace Azure.Network.Management.Interface.Models
     /// <summary> Effective Route. </summary>
     public partial class EffectiveRoute
     {
-        /// <summary> Initializes a new instance of EffectiveRoute. </summary>
+        private Dictionary<string, BinaryData> _rawData;
+
+        /// <summary>
+        /// Initializes a new instance of global::Azure.Network.Management.Interface.Models.EffectiveRoute
+        ///
+        /// </summary>
         internal EffectiveRoute()
         {
             AddressPrefix = new ChangeTrackingList<string>();
             NextHopIpAddress = new ChangeTrackingList<string>();
         }
 
-        /// <summary> Initializes a new instance of EffectiveRoute. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::Azure.Network.Management.Interface.Models.EffectiveRoute
+        ///
+        /// </summary>
         /// <param name="name"> The name of the user defined route. This is optional. </param>
         /// <param name="disableBgpRoutePropagation"> If true, on-premises routes are not propagated to the network interfaces in the subnet. </param>
         /// <param name="source"> Who created the route. </param>
@@ -28,7 +37,8 @@ namespace Azure.Network.Management.Interface.Models
         /// <param name="addressPrefix"> The address prefixes of the effective routes in CIDR notation. </param>
         /// <param name="nextHopIpAddress"> The IP address of the next hop of the effective route. </param>
         /// <param name="nextHopType"> The type of Azure hop the packet should be sent to. </param>
-        internal EffectiveRoute(string name, bool? disableBgpRoutePropagation, EffectiveRouteSource? source, EffectiveRouteState? state, IReadOnlyList<string> addressPrefix, IReadOnlyList<string> nextHopIpAddress, RouteNextHopType? nextHopType)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal EffectiveRoute(string name, bool? disableBgpRoutePropagation, EffectiveRouteSource? source, EffectiveRouteState? state, IReadOnlyList<string> addressPrefix, IReadOnlyList<string> nextHopIpAddress, RouteNextHopType? nextHopType, Dictionary<string, BinaryData> rawData)
         {
             Name = name;
             DisableBgpRoutePropagation = disableBgpRoutePropagation;
@@ -37,6 +47,7 @@ namespace Azure.Network.Management.Interface.Models
             AddressPrefix = addressPrefix;
             NextHopIpAddress = nextHopIpAddress;
             NextHopType = nextHopType;
+            _rawData = rawData;
         }
 
         /// <summary> The name of the user defined route. This is optional. </summary>

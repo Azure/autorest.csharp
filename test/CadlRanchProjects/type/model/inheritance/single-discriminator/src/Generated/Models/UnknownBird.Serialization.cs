@@ -7,77 +7,62 @@
 
 using System;
 using System.Text.Json;
-using Azure;
 using Azure.Core;
 using Azure.Core.Serialization;
 
-namespace _Type.Model.Inheritance.Models
+namespace _Type.Model.Inheritance.SingleDiscriminator.Models
 {
-    internal partial class UnknownFish : IUtf8JsonSerializable, IJsonModelSerializable
+    internal partial class UnknownBird : IUtf8JsonSerializable, IModelJsonSerializable<Bird>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModelSerializable)this).Serialize(writer, ModelSerializerOptions.AzureServiceDefault);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<Bird>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
 
-        void IJsonModelSerializable.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
+        void IModelJsonSerializable<Bird>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
             writer.WriteStartObject();
             writer.WritePropertyName("kind"u8);
             writer.WriteStringValue(Kind);
-            writer.WritePropertyName("age"u8);
-            writer.WriteNumberValue(Age);
+            writer.WritePropertyName("wingspan"u8);
+            writer.WriteNumberValue(Wingspan);
+            if (_rawData is not null && options.Format == ModelSerializerFormat.Json)
+            {
+                foreach (var property in _rawData)
+                {
+                    writer.WritePropertyName(property.Key);
+#if NET6_0_OR_GREATER
+				writer.WriteRawValue(property.Value);
+#else
+                    JsonSerializer.Serialize(writer, JsonDocument.Parse(property.Value.ToString()).RootElement);
+#endif
+                }
+            }
             writer.WriteEndObject();
         }
 
-        object IModelSerializable.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            using var doc = JsonDocument.Parse(data);
-            return DeserializeUnknownFish(doc.RootElement, options);
-        }
+        internal static Bird DeserializeUnknownBird(JsonElement element, ModelSerializerOptions options = default) => DeserializeBird(element, options);
 
-        internal static UnknownFish DeserializeUnknownFish(JsonElement element, ModelSerializerOptions options = default)
+        Bird IModelJsonSerializable<Bird>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
         {
-            options ??= ModelSerializerOptions.AzureServiceDefault;
-            if (element.ValueKind == JsonValueKind.Null)
-            {
-                return null;
-            }
-            string kind = "Unknown";
-            int age = default;
-            foreach (var property in element.EnumerateObject())
-            {
-                if (property.NameEquals("kind"u8))
-                {
-                    kind = property.Value.GetString();
-                    continue;
-                }
-                if (property.NameEquals("age"u8))
-                {
-                    age = property.Value.GetInt32();
-                    continue;
-                }
-            }
-            return new UnknownFish(kind, age);
-        }
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
 
-        object IJsonModelSerializable.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
-        {
             using var doc = JsonDocument.ParseValue(ref reader);
-            return DeserializeUnknownFish(doc.RootElement, options);
+            return DeserializeUnknownBird(doc.RootElement, options);
         }
 
-        /// <summary> Deserializes the model from a raw response. </summary>
-        /// <param name="response"> The response to deserialize the model from. </param>
-        internal static new UnknownFish FromResponse(Response response)
+        BinaryData IModelSerializable<Bird>.Serialize(ModelSerializerOptions options)
         {
-            using var document = JsonDocument.Parse(response.Content);
-            return DeserializeUnknownFish(document.RootElement);
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
         }
 
-        /// <summary> Convert into a Utf8JsonRequestContent. </summary>
-        internal override RequestContent ToRequestContent()
+        Bird IModelSerializable<Bird>.Deserialize(BinaryData data, ModelSerializerOptions options)
         {
-            var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue(this);
-            return content;
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using var doc = JsonDocument.Parse(data);
+            return DeserializeBird(doc.RootElement, options);
         }
     }
 }

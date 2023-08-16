@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Collections.Generic;
 using Azure.Core;
 using Azure.ResourceManager.Resources.Models;
@@ -17,13 +18,21 @@ namespace MgmtRenameRules.Models
     /// </summary>
     public partial class VirtualMachineScaleSetUpdateNetworkProfile
     {
-        /// <summary> Initializes a new instance of VirtualMachineScaleSetUpdateNetworkProfile. </summary>
+        private Dictionary<string, BinaryData> _rawData;
+
+        /// <summary>
+        /// Initializes a new instance of global::MgmtRenameRules.Models.VirtualMachineScaleSetUpdateNetworkProfile
+        ///
+        /// </summary>
         public VirtualMachineScaleSetUpdateNetworkProfile()
         {
             NetworkInterfaceConfigurations = new ChangeTrackingList<VirtualMachineScaleSetUpdateNetworkConfiguration>();
         }
 
-        /// <summary> Initializes a new instance of VirtualMachineScaleSetUpdateNetworkProfile. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::MgmtRenameRules.Models.VirtualMachineScaleSetUpdateNetworkProfile
+        ///
+        /// </summary>
         /// <param name="healthProbe">
         /// A reference to a load balancer probe used to determine the health of an instance in the virtual machine scale set. The reference will be in the form: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/loadBalancers/{loadBalancerName}/probes/{probeName}'.
         /// Serialized Name: VirtualMachineScaleSetUpdateNetworkProfile.healthProbe
@@ -32,10 +41,12 @@ namespace MgmtRenameRules.Models
         /// The list of network configurations.
         /// Serialized Name: VirtualMachineScaleSetUpdateNetworkProfile.networkInterfaceConfigurations
         /// </param>
-        internal VirtualMachineScaleSetUpdateNetworkProfile(WritableSubResource healthProbe, IList<VirtualMachineScaleSetUpdateNetworkConfiguration> networkInterfaceConfigurations)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal VirtualMachineScaleSetUpdateNetworkProfile(WritableSubResource healthProbe, IList<VirtualMachineScaleSetUpdateNetworkConfiguration> networkInterfaceConfigurations, Dictionary<string, BinaryData> rawData)
         {
             HealthProbe = healthProbe;
             NetworkInterfaceConfigurations = networkInterfaceConfigurations;
+            _rawData = rawData;
         }
 
         /// <summary>

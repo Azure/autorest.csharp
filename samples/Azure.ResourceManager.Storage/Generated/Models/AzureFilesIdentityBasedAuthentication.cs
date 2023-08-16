@@ -5,27 +5,40 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
+
 namespace Azure.ResourceManager.Storage.Models
 {
     /// <summary> Settings for Azure Files identity based authentication. </summary>
     public partial class AzureFilesIdentityBasedAuthentication
     {
-        /// <summary> Initializes a new instance of AzureFilesIdentityBasedAuthentication. </summary>
+        private Dictionary<string, BinaryData> _rawData;
+
+        /// <summary>
+        /// Initializes a new instance of global::Azure.ResourceManager.Storage.Models.AzureFilesIdentityBasedAuthentication
+        ///
+        /// </summary>
         /// <param name="directoryServiceOptions"> Indicates the directory service used. </param>
         public AzureFilesIdentityBasedAuthentication(DirectoryServiceOption directoryServiceOptions)
         {
             DirectoryServiceOptions = directoryServiceOptions;
         }
 
-        /// <summary> Initializes a new instance of AzureFilesIdentityBasedAuthentication. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::Azure.ResourceManager.Storage.Models.AzureFilesIdentityBasedAuthentication
+        ///
+        /// </summary>
         /// <param name="directoryServiceOptions"> Indicates the directory service used. </param>
         /// <param name="activeDirectoryProperties"> Required if choose AD. </param>
         /// <param name="defaultSharePermission"> Default share permission for users using Kerberos authentication if RBAC role is not assigned. </param>
-        internal AzureFilesIdentityBasedAuthentication(DirectoryServiceOption directoryServiceOptions, ActiveDirectoryProperties activeDirectoryProperties, DefaultSharePermission? defaultSharePermission)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal AzureFilesIdentityBasedAuthentication(DirectoryServiceOption directoryServiceOptions, ActiveDirectoryProperties activeDirectoryProperties, DefaultSharePermission? defaultSharePermission, Dictionary<string, BinaryData> rawData)
         {
             DirectoryServiceOptions = directoryServiceOptions;
             ActiveDirectoryProperties = activeDirectoryProperties;
             DefaultSharePermission = defaultSharePermission;
+            _rawData = rawData;
         }
 
         /// <summary> Indicates the directory service used. </summary>

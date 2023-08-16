@@ -5,25 +5,38 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
+
 namespace required_optional.Models
 {
     /// <summary> The Product. </summary>
     public partial class Product
     {
-        /// <summary> Initializes a new instance of Product. </summary>
+        private Dictionary<string, BinaryData> _rawData;
+
+        /// <summary>
+        /// Initializes a new instance of global::required_optional.Models.Product
+        ///
+        /// </summary>
         /// <param name="id"></param>
         public Product(int id)
         {
             Id = id;
         }
 
-        /// <summary> Initializes a new instance of Product. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::required_optional.Models.Product
+        ///
+        /// </summary>
         /// <param name="id"></param>
         /// <param name="name"></param>
-        internal Product(int id, string name)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal Product(int id, string name, Dictionary<string, BinaryData> rawData)
         {
             Id = id;
             Name = name;
+            _rawData = rawData;
         }
 
         /// <summary> Gets the id. </summary>

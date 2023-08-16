@@ -5,23 +5,36 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
+
 namespace body_complex.Models
 {
     /// <summary> The FloatWrapper. </summary>
     public partial class FloatWrapper
     {
-        /// <summary> Initializes a new instance of FloatWrapper. </summary>
+        private Dictionary<string, BinaryData> _rawData;
+
+        /// <summary>
+        /// Initializes a new instance of global::body_complex.Models.FloatWrapper
+        ///
+        /// </summary>
         public FloatWrapper()
         {
         }
 
-        /// <summary> Initializes a new instance of FloatWrapper. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::body_complex.Models.FloatWrapper
+        ///
+        /// </summary>
         /// <param name="field1"></param>
         /// <param name="field2"></param>
-        internal FloatWrapper(float? field1, float? field2)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal FloatWrapper(float? field1, float? field2, Dictionary<string, BinaryData> rawData)
         {
             Field1 = field1;
             Field2 = field2;
+            _rawData = rawData;
         }
 
         /// <summary> Gets or sets the field 1. </summary>

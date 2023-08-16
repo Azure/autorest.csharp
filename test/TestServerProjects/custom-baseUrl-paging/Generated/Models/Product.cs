@@ -5,21 +5,34 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
+
 namespace custom_baseUrl_paging.Models
 {
     /// <summary> The Product. </summary>
     public partial class Product
     {
-        /// <summary> Initializes a new instance of Product. </summary>
+        private Dictionary<string, BinaryData> _rawData;
+
+        /// <summary>
+        /// Initializes a new instance of global::custom_baseUrl_paging.Models.Product
+        ///
+        /// </summary>
         internal Product()
         {
         }
 
-        /// <summary> Initializes a new instance of Product. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::custom_baseUrl_paging.Models.Product
+        ///
+        /// </summary>
         /// <param name="properties"></param>
-        internal Product(ProductProperties properties)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal Product(ProductProperties properties, Dictionary<string, BinaryData> rawData)
         {
             Properties = properties;
+            _rawData = rawData;
         }
 
         /// <summary> Gets the properties. </summary>

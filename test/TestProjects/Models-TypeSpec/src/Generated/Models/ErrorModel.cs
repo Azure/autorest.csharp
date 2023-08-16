@@ -5,11 +5,16 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
+
 namespace ModelsTypeSpec.Models
 {
     /// <summary> Output model that has property of its own type. </summary>
     public partial class ErrorModel
     {
+        private Dictionary<string, BinaryData> _rawData;
+
         /// <summary> Initializes a new instance of ErrorModel. </summary>
         internal ErrorModel()
         {
@@ -18,10 +23,12 @@ namespace ModelsTypeSpec.Models
         /// <summary> Initializes a new instance of ErrorModel. </summary>
         /// <param name="message"> Error message. </param>
         /// <param name="innerError"> Required Record. </param>
-        internal ErrorModel(string message, ErrorModel innerError)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal ErrorModel(string message, ErrorModel innerError, Dictionary<string, BinaryData> rawData)
         {
             Message = message;
             InnerError = innerError;
+            _rawData = rawData;
         }
 
         /// <summary> Error message. </summary>

@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
 using Azure.Core;
 
 namespace Azure.ResourceManager.Storage.Models
@@ -13,7 +14,12 @@ namespace Azure.ResourceManager.Storage.Models
     /// <summary> SasPolicy assigned to the storage account. </summary>
     public partial class SasPolicy
     {
-        /// <summary> Initializes a new instance of SasPolicy. </summary>
+        private Dictionary<string, BinaryData> _rawData;
+
+        /// <summary>
+        /// Initializes a new instance of global::Azure.ResourceManager.Storage.Models.SasPolicy
+        ///
+        /// </summary>
         /// <param name="sasExpirationPeriod"> The SAS expiration period, DD.HH:MM:SS. </param>
         /// <param name="expirationAction"> The SAS expiration action. Can only be Log. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="sasExpirationPeriod"/> is null. </exception>
@@ -23,6 +29,20 @@ namespace Azure.ResourceManager.Storage.Models
 
             SasExpirationPeriod = sasExpirationPeriod;
             ExpirationAction = expirationAction;
+        }
+
+        /// <summary>
+        /// Initializes a new instance of global::Azure.ResourceManager.Storage.Models.SasPolicy
+        ///
+        /// </summary>
+        /// <param name="sasExpirationPeriod"> The SAS expiration period, DD.HH:MM:SS. </param>
+        /// <param name="expirationAction"> The SAS expiration action. Can only be Log. </param>
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal SasPolicy(string sasExpirationPeriod, ExpirationAction expirationAction, Dictionary<string, BinaryData> rawData)
+        {
+            SasExpirationPeriod = sasExpirationPeriod;
+            ExpirationAction = expirationAction;
+            _rawData = rawData;
         }
 
         /// <summary> The SAS expiration period, DD.HH:MM:SS. </summary>

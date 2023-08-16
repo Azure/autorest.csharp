@@ -5,6 +5,9 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
+
 namespace xms_error_responses.Models
 {
     /// <summary>
@@ -14,16 +17,23 @@ namespace xms_error_responses.Models
     /// </summary>
     internal partial class NotFoundErrorBase : BaseError
     {
-        /// <summary> Initializes a new instance of NotFoundErrorBase. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::xms_error_responses.Models.NotFoundErrorBase
+        ///
+        /// </summary>
         internal NotFoundErrorBase()
         {
         }
 
-        /// <summary> Initializes a new instance of NotFoundErrorBase. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::xms_error_responses.Models.NotFoundErrorBase
+        ///
+        /// </summary>
         /// <param name="someBaseProp"></param>
         /// <param name="reason"></param>
         /// <param name="whatNotFound"></param>
-        internal NotFoundErrorBase(string someBaseProp, string reason, string whatNotFound) : base(someBaseProp)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal NotFoundErrorBase(string someBaseProp, string reason, string whatNotFound, Dictionary<string, BinaryData> rawData) : base(someBaseProp, rawData)
         {
             Reason = reason;
             WhatNotFound = whatNotFound;

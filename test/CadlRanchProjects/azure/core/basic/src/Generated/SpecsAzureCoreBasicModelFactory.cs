@@ -24,7 +24,7 @@ namespace _Specs_.Azure.Core.Basic.Models
         {
             orders ??= new List<UserOrder>();
 
-            return new User(id, name, orders?.ToList(), etag);
+            return new User(id, name, orders?.ToList(), etag, default);
         }
 
         /// <summary> Initializes a new instance of UserOrder. </summary>
@@ -34,7 +34,7 @@ namespace _Specs_.Azure.Core.Basic.Models
         /// <returns> A new <see cref="Models.UserOrder"/> instance for mocking. </returns>
         public static UserOrder UserOrder(int id = default, int userId = default, string detail = null)
         {
-            return new UserOrder(id, userId, detail);
+            return new UserOrder(id, userId, detail, default);
         }
     }
 }

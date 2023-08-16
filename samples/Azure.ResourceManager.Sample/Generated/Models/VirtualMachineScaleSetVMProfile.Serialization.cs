@@ -6,18 +6,22 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
 using System.Text.Json;
+using Azure;
 using Azure.Core;
 using Azure.Core.Serialization;
 
 namespace Azure.ResourceManager.Sample.Models
 {
-    public partial class VirtualMachineScaleSetVMProfile : IUtf8JsonSerializable, IJsonModelSerializable
+    public partial class VirtualMachineScaleSetVMProfile : IUtf8JsonSerializable, IModelJsonSerializable<VirtualMachineScaleSetVMProfile>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModelSerializable)this).Serialize(writer, ModelSerializerOptions.AzureServiceDefault);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<VirtualMachineScaleSetVMProfile>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
 
-        void IJsonModelSerializable.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
+        void IModelJsonSerializable<VirtualMachineScaleSetVMProfile>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
             writer.WriteStartObject();
             if (Optional.IsDefined(OsProfile))
             {
@@ -74,18 +78,25 @@ namespace Azure.ResourceManager.Sample.Models
                 writer.WritePropertyName("scheduledEventsProfile"u8);
                 writer.WriteObjectValue(ScheduledEventsProfile);
             }
+            if (_rawData is not null && options.Format == ModelSerializerFormat.Json)
+            {
+                foreach (var property in _rawData)
+                {
+                    writer.WritePropertyName(property.Key);
+#if NET6_0_OR_GREATER
+				writer.WriteRawValue(property.Value);
+#else
+                    JsonSerializer.Serialize(writer, JsonDocument.Parse(property.Value.ToString()).RootElement);
+#endif
+                }
+            }
             writer.WriteEndObject();
-        }
-
-        object IModelSerializable.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            using var doc = JsonDocument.Parse(data);
-            return DeserializeVirtualMachineScaleSetVMProfile(doc.RootElement, options);
         }
 
         internal static VirtualMachineScaleSetVMProfile DeserializeVirtualMachineScaleSetVMProfile(JsonElement element, ModelSerializerOptions options = default)
         {
-            options ??= ModelSerializerOptions.AzureServiceDefault;
+            options ??= ModelSerializerOptions.DefaultWireOptions;
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
@@ -101,6 +112,7 @@ namespace Azure.ResourceManager.Sample.Models
             Optional<VirtualMachineEvictionPolicyType> evictionPolicy = default;
             Optional<BillingProfile> billingProfile = default;
             Optional<ScheduledEventsProfile> scheduledEventsProfile = default;
+            Dictionary<string, BinaryData> rawData = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("osProfile"u8))
@@ -198,14 +210,57 @@ namespace Azure.ResourceManager.Sample.Models
                     scheduledEventsProfile = ScheduledEventsProfile.DeserializeScheduledEventsProfile(property.Value);
                     continue;
                 }
+                if (options.Format == ModelSerializerFormat.Json)
+                {
+                    rawData.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
+                    continue;
+                }
             }
-            return new VirtualMachineScaleSetVMProfile(osProfile.Value, storageProfile.Value, networkProfile.Value, securityProfile.Value, diagnosticsProfile.Value, extensionProfile.Value, licenseType.Value, Optional.ToNullable(priority), Optional.ToNullable(evictionPolicy), billingProfile.Value, scheduledEventsProfile.Value);
+            return new VirtualMachineScaleSetVMProfile(osProfile.Value, storageProfile.Value, networkProfile.Value, securityProfile.Value, diagnosticsProfile.Value, extensionProfile.Value, licenseType.Value, Optional.ToNullable(priority), Optional.ToNullable(evictionPolicy), billingProfile.Value, scheduledEventsProfile.Value, rawData);
         }
 
-        object IJsonModelSerializable.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        VirtualMachineScaleSetVMProfile IModelJsonSerializable<VirtualMachineScaleSetVMProfile>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
         {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
             using var doc = JsonDocument.ParseValue(ref reader);
             return DeserializeVirtualMachineScaleSetVMProfile(doc.RootElement, options);
+        }
+
+        BinaryData IModelSerializable<VirtualMachineScaleSetVMProfile>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        VirtualMachineScaleSetVMProfile IModelSerializable<VirtualMachineScaleSetVMProfile>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using var doc = JsonDocument.Parse(data);
+            return DeserializeVirtualMachineScaleSetVMProfile(doc.RootElement, options);
+        }
+
+        public static implicit operator RequestContent(VirtualMachineScaleSetVMProfile model)
+        {
+            if (model is null)
+            {
+                return null;
+            }
+
+            return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
+        }
+
+        public static explicit operator VirtualMachineScaleSetVMProfile(Response response)
+        {
+            if (response is null)
+            {
+                return null;
+            }
+
+            using JsonDocument doc = JsonDocument.Parse(response.ContentStream);
+            return DeserializeVirtualMachineScaleSetVMProfile(doc.RootElement, ModelSerializerOptions.DefaultWireOptions);
         }
     }
 }

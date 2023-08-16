@@ -6,12 +6,15 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
 
 namespace AnomalyDetector.Models
 {
     /// <summary> Response of getting a model. </summary>
     public partial class AnomalyDetectionModel
     {
+        private Dictionary<string, BinaryData> _rawData;
+
         /// <summary> Initializes a new instance of AnomalyDetectionModel. </summary>
         /// <param name="createdTime"> Date and time (UTC) when the model was created. </param>
         /// <param name="lastUpdatedTime"> Date and time (UTC) when the model was last updated. </param>
@@ -29,12 +32,14 @@ namespace AnomalyDetector.Models
         /// Training result of a model including its status, errors and diagnostics
         /// information.
         /// </param>
-        internal AnomalyDetectionModel(Guid modelId, DateTimeOffset createdTime, DateTimeOffset lastUpdatedTime, ModelInfo modelInfo)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal AnomalyDetectionModel(Guid modelId, DateTimeOffset createdTime, DateTimeOffset lastUpdatedTime, ModelInfo modelInfo, Dictionary<string, BinaryData> rawData)
         {
             ModelId = modelId;
             CreatedTime = createdTime;
             LastUpdatedTime = lastUpdatedTime;
             ModelInfo = modelInfo;
+            _rawData = rawData;
         }
 
         /// <summary> Model identifier. </summary>

@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Collections.Generic;
 using Azure.Core;
 
@@ -13,14 +14,20 @@ namespace MgmtMockAndSample.Models
     /// <summary> Firewall Policy Filter Rule Collection. </summary>
     public partial class FirewallPolicyFilterRuleCollection : FirewallPolicyRuleCollection
     {
-        /// <summary> Initializes a new instance of FirewallPolicyFilterRuleCollection. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::MgmtMockAndSample.Models.FirewallPolicyFilterRuleCollection
+        ///
+        /// </summary>
         public FirewallPolicyFilterRuleCollection()
         {
             Rules = new ChangeTrackingList<FirewallPolicyRule>();
             RuleCollectionType = FirewallPolicyRuleCollectionType.FirewallPolicyFilterRuleCollection;
         }
 
-        /// <summary> Initializes a new instance of FirewallPolicyFilterRuleCollection. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::MgmtMockAndSample.Models.FirewallPolicyFilterRuleCollection
+        ///
+        /// </summary>
         /// <param name="ruleCollectionType"> The type of the rule collection. </param>
         /// <param name="name"> The name of the rule collection. </param>
         /// <param name="priority"> Priority of the Firewall Policy Rule Collection resource. </param>
@@ -30,7 +37,8 @@ namespace MgmtMockAndSample.Models
         /// Please note <see cref="FirewallPolicyRule"/> is the base class. According to the scenario, a derived class of the base class might need to be assigned here, or this property needs to be casted to one of the possible derived classes.
         /// The available derived classes include <see cref="ApplicationRule"/>, <see cref="NatRule"/> and <see cref="NetworkRule"/>.
         /// </param>
-        internal FirewallPolicyFilterRuleCollection(FirewallPolicyRuleCollectionType ruleCollectionType, string name, int? priority, FirewallPolicyFilterRuleCollectionAction action, IList<FirewallPolicyRule> rules) : base(ruleCollectionType, name, priority)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal FirewallPolicyFilterRuleCollection(FirewallPolicyRuleCollectionType ruleCollectionType, string name, int? priority, FirewallPolicyFilterRuleCollectionAction action, IList<FirewallPolicyRule> rules, Dictionary<string, BinaryData> rawData) : base(ruleCollectionType, name, priority, rawData)
         {
             Action = action;
             Rules = rules;

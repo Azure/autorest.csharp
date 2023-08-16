@@ -15,7 +15,12 @@ namespace CognitiveServices.TextAnalytics.Models
     /// <summary> Contains a set of input documents to be analyzed by the service. </summary>
     public partial class MultiLanguageBatchInput
     {
-        /// <summary> Initializes a new instance of MultiLanguageBatchInput. </summary>
+        private Dictionary<string, BinaryData> _rawData;
+
+        /// <summary>
+        /// Initializes a new instance of global::CognitiveServices.TextAnalytics.Models.MultiLanguageBatchInput
+        ///
+        /// </summary>
         /// <param name="documents"> The set of documents to process as part of this batch. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="documents"/> is null. </exception>
         public MultiLanguageBatchInput(IEnumerable<MultiLanguageInput> documents)
@@ -25,11 +30,16 @@ namespace CognitiveServices.TextAnalytics.Models
             Documents = documents.ToList();
         }
 
-        /// <summary> Initializes a new instance of MultiLanguageBatchInput. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::CognitiveServices.TextAnalytics.Models.MultiLanguageBatchInput
+        ///
+        /// </summary>
         /// <param name="documents"> The set of documents to process as part of this batch. </param>
-        internal MultiLanguageBatchInput(IList<MultiLanguageInput> documents)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal MultiLanguageBatchInput(IList<MultiLanguageInput> documents, Dictionary<string, BinaryData> rawData)
         {
             Documents = documents;
+            _rawData = rawData;
         }
 
         /// <summary> The set of documents to process as part of this batch. </summary>

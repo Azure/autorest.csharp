@@ -6,17 +6,29 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
 
 namespace _Type.Property.ValueTypes.Models
 {
     /// <summary> Model with a duration property. </summary>
     public partial class DurationProperty
     {
+        private Dictionary<string, BinaryData> _rawData;
+
         /// <summary> Initializes a new instance of DurationProperty. </summary>
         /// <param name="property"> Property. </param>
         public DurationProperty(TimeSpan property)
         {
             Property = property;
+        }
+
+        /// <summary> Initializes a new instance of DurationProperty. </summary>
+        /// <param name="property"> Property. </param>
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal DurationProperty(TimeSpan property, Dictionary<string, BinaryData> rawData)
+        {
+            Property = property;
+            _rawData = rawData;
         }
 
         /// <summary> Property. </summary>

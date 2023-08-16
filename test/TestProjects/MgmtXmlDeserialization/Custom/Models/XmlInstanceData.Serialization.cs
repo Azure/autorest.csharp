@@ -16,7 +16,7 @@ namespace MgmtXmlDeserialization
     {
         internal static XmlInstanceData DeserializeXmlInstanceData(XElement element, ModelSerializerOptions options = default)
         {
-            options ??= ModelSerializerOptions.AzureServiceDefault;
+            options ??= ModelSerializerOptions.DefaultWireOptions;
             ResourceIdentifier id = default;
             string name = default;
             ResourceType type = default;
@@ -32,7 +32,7 @@ namespace MgmtXmlDeserialization
             {
                 type = (string)typeElement;
             }
-            return new XmlInstanceData(id, name, type, null);
+            return new XmlInstanceData(id, name, type, null, default);
         }
     }
 }

@@ -5,14 +5,21 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
+
 namespace MgmtSafeFlatten.Models
 {
     /// <summary> The UnknownLayerOneBaseType. </summary>
     internal partial class UnknownLayerOneBaseType : LayerOneBaseType
     {
-        /// <summary> Initializes a new instance of UnknownLayerOneBaseType. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::MgmtSafeFlatten.Models.UnknownLayerOneBaseType
+        ///
+        /// </summary>
         /// <param name="name"></param>
-        internal UnknownLayerOneBaseType(LayerOneTypeName name) : base(name)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal UnknownLayerOneBaseType(LayerOneTypeName name, Dictionary<string, BinaryData> rawData) : base(name, rawData)
         {
             Name = name;
         }

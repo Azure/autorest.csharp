@@ -5,6 +5,8 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
 using Azure.Core;
 using Azure.ResourceManager.Models;
 
@@ -13,20 +15,30 @@ namespace MgmtResourceName
     /// <summary> A class representing the DisplayResource data model. </summary>
     public partial class DisplayResourceData : ResourceData
     {
-        /// <summary> Initializes a new instance of DisplayResourceData. </summary>
+        private Dictionary<string, BinaryData> _rawData;
+
+        /// <summary>
+        /// Initializes a new instance of global::MgmtResourceName.DisplayResourceData
+        ///
+        /// </summary>
         public DisplayResourceData()
         {
         }
 
-        /// <summary> Initializes a new instance of DisplayResourceData. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::MgmtResourceName.DisplayResourceData
+        ///
+        /// </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
         /// <param name="resourceType"> The resourceType. </param>
         /// <param name="systemData"> The systemData. </param>
         /// <param name="new"></param>
-        internal DisplayResourceData(ResourceIdentifier id, string name, ResourceType resourceType, SystemData systemData, string @new) : base(id, name, resourceType, systemData)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal DisplayResourceData(ResourceIdentifier id, string name, ResourceType resourceType, SystemData systemData, string @new, Dictionary<string, BinaryData> rawData) : base(id, name, resourceType, systemData)
         {
             New = @new;
+            _rawData = rawData;
         }
 
         /// <summary> Gets or sets the new. </summary>

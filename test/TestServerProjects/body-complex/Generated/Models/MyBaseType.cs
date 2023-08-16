@@ -5,6 +5,10 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
+using Azure.Core.Serialization;
+
 namespace body_complex.Models
 {
     /// <summary>
@@ -12,22 +16,33 @@ namespace body_complex.Models
     /// Please note <see cref="MyBaseType"/> is the base class. According to the scenario, a derived class of the base class might need to be assigned here, or this property needs to be casted to one of the possible derived classes.
     /// The available derived classes include <see cref="MyDerivedType"/>.
     /// </summary>
+    [AbstractHierarchyDeserializer(typeof(UnknownMyBaseType))]
     public abstract partial class MyBaseType
     {
-        /// <summary> Initializes a new instance of MyBaseType. </summary>
+        protected internal Dictionary<string, BinaryData> _rawData;
+
+        /// <summary>
+        /// Initializes a new instance of global::body_complex.Models.MyBaseType
+        ///
+        /// </summary>
         protected MyBaseType()
         {
         }
 
-        /// <summary> Initializes a new instance of MyBaseType. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::body_complex.Models.MyBaseType
+        ///
+        /// </summary>
         /// <param name="kind"></param>
         /// <param name="propB1"></param>
         /// <param name="propBH1"></param>
-        internal MyBaseType(MyKind kind, string propB1, string propBH1)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal MyBaseType(MyKind kind, string propB1, string propBH1, Dictionary<string, BinaryData> rawData)
         {
             Kind = kind;
             PropB1 = propB1;
             PropBH1 = propBH1;
+            _rawData = rawData;
         }
 
         /// <summary> Gets or sets the kind. </summary>

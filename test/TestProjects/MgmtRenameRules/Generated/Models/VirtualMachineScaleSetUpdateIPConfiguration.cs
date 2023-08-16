@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Collections.Generic;
 using Azure.Core;
 using Azure.ResourceManager.Resources.Models;
@@ -17,7 +18,10 @@ namespace MgmtRenameRules.Models
     /// </summary>
     public partial class VirtualMachineScaleSetUpdateIPConfiguration : SubResource
     {
-        /// <summary> Initializes a new instance of VirtualMachineScaleSetUpdateIPConfiguration. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::MgmtRenameRules.Models.VirtualMachineScaleSetUpdateIPConfiguration
+        ///
+        /// </summary>
         public VirtualMachineScaleSetUpdateIPConfiguration()
         {
             ApplicationGatewayBackendAddressPools = new ChangeTrackingList<WritableSubResource>();
@@ -26,7 +30,10 @@ namespace MgmtRenameRules.Models
             LoadBalancerInboundNatPools = new ChangeTrackingList<WritableSubResource>();
         }
 
-        /// <summary> Initializes a new instance of VirtualMachineScaleSetUpdateIPConfiguration. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::MgmtRenameRules.Models.VirtualMachineScaleSetUpdateIPConfiguration
+        ///
+        /// </summary>
         /// <param name="id">
         /// Resource Id
         /// Serialized Name: SubResource.id
@@ -67,7 +74,8 @@ namespace MgmtRenameRules.Models
         /// The load balancer inbound nat pools.
         /// Serialized Name: VirtualMachineScaleSetUpdateIPConfiguration.properties.loadBalancerInboundNatPools
         /// </param>
-        internal VirtualMachineScaleSetUpdateIPConfiguration(string id, string name, WritableSubResource subnet, bool? primary, VirtualMachineScaleSetUpdatePublicIPAddressConfiguration publicIPAddressConfiguration, IPVersion? privateIPAddressVersion, IList<WritableSubResource> applicationGatewayBackendAddressPools, IList<WritableSubResource> applicationSecurityGroups, IList<WritableSubResource> loadBalancerBackendAddressPools, IList<WritableSubResource> loadBalancerInboundNatPools) : base(id)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal VirtualMachineScaleSetUpdateIPConfiguration(string id, string name, WritableSubResource subnet, bool? primary, VirtualMachineScaleSetUpdatePublicIPAddressConfiguration publicIPAddressConfiguration, IPVersion? privateIPAddressVersion, IList<WritableSubResource> applicationGatewayBackendAddressPools, IList<WritableSubResource> applicationSecurityGroups, IList<WritableSubResource> loadBalancerBackendAddressPools, IList<WritableSubResource> loadBalancerInboundNatPools, Dictionary<string, BinaryData> rawData) : base(id, rawData)
         {
             Name = name;
             Subnet = subnet;

@@ -5,23 +5,36 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
+
 namespace ModelShapes.Models
 {
     /// <summary> The ParametersModel. </summary>
     internal partial class ParametersModel
     {
-        /// <summary> Initializes a new instance of ParametersModel. </summary>
+        private Dictionary<string, BinaryData> _rawData;
+
+        /// <summary>
+        /// Initializes a new instance of global::ModelShapes.Models.ParametersModel
+        ///
+        /// </summary>
         public ParametersModel()
         {
         }
 
-        /// <summary> Initializes a new instance of ParametersModel. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::ModelShapes.Models.ParametersModel
+        ///
+        /// </summary>
         /// <param name="code"></param>
         /// <param name="status"></param>
-        internal ParametersModel(string code, string status)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal ParametersModel(string code, string status, Dictionary<string, BinaryData> rawData)
         {
             Code = code;
             Status = status;
+            _rawData = rawData;
         }
 
         /// <summary> Gets or sets the code. </summary>

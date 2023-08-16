@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
 
 namespace Azure.ResourceManager.Sample.Models
 {
@@ -15,12 +16,20 @@ namespace Azure.ResourceManager.Sample.Models
     /// </summary>
     public partial class LastPatchInstallationSummary
     {
-        /// <summary> Initializes a new instance of LastPatchInstallationSummary. </summary>
+        private Dictionary<string, BinaryData> _rawData;
+
+        /// <summary>
+        /// Initializes a new instance of global::Azure.ResourceManager.Sample.Models.LastPatchInstallationSummary
+        ///
+        /// </summary>
         internal LastPatchInstallationSummary()
         {
         }
 
-        /// <summary> Initializes a new instance of LastPatchInstallationSummary. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::Azure.ResourceManager.Sample.Models.LastPatchInstallationSummary
+        ///
+        /// </summary>
         /// <param name="status">
         /// The overall success or failure status of the operation. It remains "InProgress" until the operation completes. At that point it will become "Failed", "Succeeded", or "CompletedWithWarnings."
         /// Serialized Name: LastPatchInstallationSummary.status
@@ -73,7 +82,8 @@ namespace Azure.ResourceManager.Sample.Models
         /// The errors that were encountered during execution of the operation. The details array contains the list of them.
         /// Serialized Name: LastPatchInstallationSummary.error
         /// </param>
-        internal LastPatchInstallationSummary(PatchOperationStatus? status, string installationActivityId, bool? maintenanceWindowExceeded, RebootStatus? rebootStatus, int? notSelectedPatchCount, int? excludedPatchCount, int? pendingPatchCount, int? installedPatchCount, int? failedPatchCount, DateTimeOffset? startOn, DateTimeOffset? lastModifiedOn, string startedBy, ApiError error)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal LastPatchInstallationSummary(PatchOperationStatus? status, string installationActivityId, bool? maintenanceWindowExceeded, RebootStatus? rebootStatus, int? notSelectedPatchCount, int? excludedPatchCount, int? pendingPatchCount, int? installedPatchCount, int? failedPatchCount, DateTimeOffset? startOn, DateTimeOffset? lastModifiedOn, string startedBy, ApiError error, Dictionary<string, BinaryData> rawData)
         {
             Status = status;
             InstallationActivityId = installationActivityId;
@@ -88,6 +98,7 @@ namespace Azure.ResourceManager.Sample.Models
             LastModifiedOn = lastModifiedOn;
             StartedBy = startedBy;
             Error = error;
+            _rawData = rawData;
         }
 
         /// <summary>

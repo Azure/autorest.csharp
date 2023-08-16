@@ -5,21 +5,34 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
+
 namespace MgmtNoTypeReplacement.Models
 {
     /// <summary> The NoSubResourceModel2. </summary>
     internal partial class NoSubResourceModel2
     {
-        /// <summary> Initializes a new instance of NoSubResourceModel2. </summary>
+        private Dictionary<string, BinaryData> _rawData;
+
+        /// <summary>
+        /// Initializes a new instance of global::MgmtNoTypeReplacement.Models.NoSubResourceModel2
+        ///
+        /// </summary>
         public NoSubResourceModel2()
         {
         }
 
-        /// <summary> Initializes a new instance of NoSubResourceModel2. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::MgmtNoTypeReplacement.Models.NoSubResourceModel2
+        ///
+        /// </summary>
         /// <param name="id"></param>
-        internal NoSubResourceModel2(string id)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal NoSubResourceModel2(string id, Dictionary<string, BinaryData> rawData)
         {
             Id = id;
+            _rawData = rawData;
         }
 
         /// <summary> Gets the id. </summary>

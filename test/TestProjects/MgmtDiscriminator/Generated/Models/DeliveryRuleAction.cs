@@ -5,6 +5,9 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
+
 namespace MgmtDiscriminator.Models
 {
     /// <summary>
@@ -14,18 +17,28 @@ namespace MgmtDiscriminator.Models
     /// </summary>
     public partial class DeliveryRuleAction
     {
-        /// <summary> Initializes a new instance of DeliveryRuleAction. </summary>
+        protected internal Dictionary<string, BinaryData> _rawData;
+
+        /// <summary>
+        /// Initializes a new instance of global::MgmtDiscriminator.Models.DeliveryRuleAction
+        ///
+        /// </summary>
         public DeliveryRuleAction()
         {
         }
 
-        /// <summary> Initializes a new instance of DeliveryRuleAction. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::MgmtDiscriminator.Models.DeliveryRuleAction
+        ///
+        /// </summary>
         /// <param name="name"> The name of the action for the delivery rule. </param>
         /// <param name="foo"> for test. </param>
-        internal DeliveryRuleAction(DeliveryRuleActionType name, string foo)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal DeliveryRuleAction(DeliveryRuleActionType name, string foo, Dictionary<string, BinaryData> rawData)
         {
             Name = name;
             Foo = foo;
+            _rawData = rawData;
         }
 
         /// <summary> The name of the action for the delivery rule. </summary>

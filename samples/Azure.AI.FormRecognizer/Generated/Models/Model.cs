@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
 using Azure.Core;
 
 namespace Azure.AI.FormRecognizer.Models
@@ -13,7 +14,12 @@ namespace Azure.AI.FormRecognizer.Models
     /// <summary> Response to the get custom model operation. </summary>
     public partial class Model
     {
-        /// <summary> Initializes a new instance of Model. </summary>
+        private Dictionary<string, BinaryData> _rawData;
+
+        /// <summary>
+        /// Initializes a new instance of global::Azure.AI.FormRecognizer.Models.Model
+        ///
+        /// </summary>
         /// <param name="modelInfo"> Basic custom model information. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="modelInfo"/> is null. </exception>
         internal Model(ModelInfo modelInfo)
@@ -23,15 +29,20 @@ namespace Azure.AI.FormRecognizer.Models
             ModelInfo = modelInfo;
         }
 
-        /// <summary> Initializes a new instance of Model. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::Azure.AI.FormRecognizer.Models.Model
+        ///
+        /// </summary>
         /// <param name="modelInfo"> Basic custom model information. </param>
         /// <param name="keys"> Keys extracted by the custom model. </param>
         /// <param name="trainResult"> Custom model training result. </param>
-        internal Model(ModelInfo modelInfo, KeysResult keys, TrainResult trainResult)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal Model(ModelInfo modelInfo, KeysResult keys, TrainResult trainResult, Dictionary<string, BinaryData> rawData)
         {
             ModelInfo = modelInfo;
             Keys = keys;
             TrainResult = trainResult;
+            _rawData = rawData;
         }
 
         /// <summary> Basic custom model information. </summary>

@@ -6,18 +6,22 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
 using System.Text.Json;
+using Azure;
 using Azure.Core;
 using Azure.Core.Serialization;
 
 namespace xms_error_responses.Models
 {
-    internal partial class AnimalNotFound : IUtf8JsonSerializable, IJsonModelSerializable
+    internal partial class AnimalNotFound : IUtf8JsonSerializable, IModelJsonSerializable<AnimalNotFound>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModelSerializable)this).Serialize(writer, ModelSerializerOptions.AzureServiceDefault);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<AnimalNotFound>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
 
-        void IJsonModelSerializable.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
+        void IModelJsonSerializable<AnimalNotFound>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
+            ModelSerializerHelper.ValidateFormat<AnimalNotFound>(this, options.Format);
+
             writer.WriteStartObject();
             if (Optional.IsDefined(Name))
             {
@@ -36,18 +40,25 @@ namespace xms_error_responses.Models
                 writer.WritePropertyName("someBaseProp"u8);
                 writer.WriteStringValue(SomeBaseProp);
             }
+            if (_rawData is not null && options.Format == ModelSerializerFormat.Json)
+            {
+                foreach (var property in _rawData)
+                {
+                    writer.WritePropertyName(property.Key);
+#if NET6_0_OR_GREATER
+				writer.WriteRawValue(property.Value);
+#else
+                    JsonSerializer.Serialize(writer, JsonDocument.Parse(property.Value.ToString()).RootElement);
+#endif
+                }
+            }
             writer.WriteEndObject();
-        }
-
-        object IModelSerializable.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            using var doc = JsonDocument.Parse(data);
-            return DeserializeAnimalNotFound(doc.RootElement, options);
         }
 
         internal static AnimalNotFound DeserializeAnimalNotFound(JsonElement element, ModelSerializerOptions options = default)
         {
-            options ??= ModelSerializerOptions.AzureServiceDefault;
+            options ??= ModelSerializerOptions.DefaultWireOptions;
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
@@ -56,6 +67,7 @@ namespace xms_error_responses.Models
             Optional<string> reason = default;
             string whatNotFound = default;
             Optional<string> someBaseProp = default;
+            Dictionary<string, BinaryData> rawData = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("name"u8))
@@ -78,14 +90,57 @@ namespace xms_error_responses.Models
                     someBaseProp = property.Value.GetString();
                     continue;
                 }
+                if (options.Format == ModelSerializerFormat.Json)
+                {
+                    rawData.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
+                    continue;
+                }
             }
-            return new AnimalNotFound(someBaseProp.Value, reason.Value, whatNotFound, name.Value);
+            return new AnimalNotFound(someBaseProp.Value, reason.Value, whatNotFound, name.Value, rawData);
         }
 
-        object IJsonModelSerializable.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        AnimalNotFound IModelJsonSerializable<AnimalNotFound>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
         {
+            ModelSerializerHelper.ValidateFormat<AnimalNotFound>(this, options.Format);
+
             using var doc = JsonDocument.ParseValue(ref reader);
             return DeserializeAnimalNotFound(doc.RootElement, options);
+        }
+
+        BinaryData IModelSerializable<AnimalNotFound>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat<AnimalNotFound>(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        AnimalNotFound IModelSerializable<AnimalNotFound>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat<AnimalNotFound>(this, options.Format);
+
+            using var doc = JsonDocument.Parse(data);
+            return DeserializeAnimalNotFound(doc.RootElement, options);
+        }
+
+        public static implicit operator RequestContent(AnimalNotFound model)
+        {
+            if (model is null)
+            {
+                return null;
+            }
+
+            return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
+        }
+
+        public static explicit operator AnimalNotFound(Response response)
+        {
+            if (response is null)
+            {
+                return null;
+            }
+
+            using JsonDocument doc = JsonDocument.Parse(response.ContentStream);
+            return DeserializeAnimalNotFound(doc.RootElement, ModelSerializerOptions.DefaultWireOptions);
         }
     }
 }

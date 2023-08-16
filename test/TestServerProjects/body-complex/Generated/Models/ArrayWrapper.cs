@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Collections.Generic;
 using Azure.Core;
 
@@ -13,17 +14,27 @@ namespace body_complex.Models
     /// <summary> The ArrayWrapper. </summary>
     public partial class ArrayWrapper
     {
-        /// <summary> Initializes a new instance of ArrayWrapper. </summary>
+        private Dictionary<string, BinaryData> _rawData;
+
+        /// <summary>
+        /// Initializes a new instance of global::body_complex.Models.ArrayWrapper
+        ///
+        /// </summary>
         public ArrayWrapper()
         {
             Array = new ChangeTrackingList<string>();
         }
 
-        /// <summary> Initializes a new instance of ArrayWrapper. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::body_complex.Models.ArrayWrapper
+        ///
+        /// </summary>
         /// <param name="array"></param>
-        internal ArrayWrapper(IList<string> array)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal ArrayWrapper(IList<string> array, Dictionary<string, BinaryData> rawData)
         {
             Array = array;
+            _rawData = rawData;
         }
 
         /// <summary> Gets the array. </summary>

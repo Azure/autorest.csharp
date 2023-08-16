@@ -15,6 +15,8 @@ namespace Encode.Duration.Models
     /// <summary> The FloatSecondsDurationArrayProperty. </summary>
     public partial class FloatSecondsDurationArrayProperty
     {
+        private Dictionary<string, BinaryData> _rawData;
+
         /// <summary> Initializes a new instance of FloatSecondsDurationArrayProperty. </summary>
         /// <param name="value"></param>
         /// <exception cref="ArgumentNullException"> <paramref name="value"/> is null. </exception>
@@ -27,9 +29,11 @@ namespace Encode.Duration.Models
 
         /// <summary> Initializes a new instance of FloatSecondsDurationArrayProperty. </summary>
         /// <param name="value"></param>
-        internal FloatSecondsDurationArrayProperty(IList<TimeSpan> value)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal FloatSecondsDurationArrayProperty(IList<TimeSpan> value, Dictionary<string, BinaryData> rawData)
         {
             Value = value;
+            _rawData = rawData;
         }
 
         /// <summary> Gets the value. </summary>

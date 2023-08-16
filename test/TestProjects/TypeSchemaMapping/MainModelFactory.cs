@@ -10,7 +10,7 @@ namespace TypeSchemaMapping.Models
     {
         public static ModelWithAbstractModel ModelWithAbstractModel(AbstractModel abstractModelProperty = default)
         {
-            return new ModelWithAbstractModel(abstractModelProperty);
+            return new ModelWithAbstractModel(abstractModelProperty, default);
         }
     }
 }

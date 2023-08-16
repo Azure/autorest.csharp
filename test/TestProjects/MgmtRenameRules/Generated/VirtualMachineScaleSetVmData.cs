@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Collections.Generic;
 using Azure.Core;
 using Azure.ResourceManager.Models;
@@ -20,14 +21,22 @@ namespace MgmtRenameRules
     /// </summary>
     public partial class VirtualMachineScaleSetVmData : TrackedResourceData
     {
-        /// <summary> Initializes a new instance of VirtualMachineScaleSetVmData. </summary>
+        private Dictionary<string, BinaryData> _rawData;
+
+        /// <summary>
+        /// Initializes a new instance of global::MgmtRenameRules.VirtualMachineScaleSetVmData
+        ///
+        /// </summary>
         /// <param name="location"> The location. </param>
         public VirtualMachineScaleSetVmData(AzureLocation location) : base(location)
         {
             Zones = new ChangeTrackingList<string>();
         }
 
-        /// <summary> Initializes a new instance of VirtualMachineScaleSetVmData. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::MgmtRenameRules.VirtualMachineScaleSetVmData
+        ///
+        /// </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
         /// <param name="resourceType"> The resourceType. </param>
@@ -114,7 +123,8 @@ namespace MgmtRenameRules
         /// Specifies the protection policy of the virtual machine.
         /// Serialized Name: VirtualMachineScaleSetVM.properties.protectionPolicy
         /// </param>
-        internal VirtualMachineScaleSetVmData(ResourceIdentifier id, string name, ResourceType resourceType, SystemData systemData, IDictionary<string, string> tags, AzureLocation location, string instanceId, MgmtRenameRulesSku sku, MgmtRenameRulesPlan plan, IReadOnlyList<string> zones, bool? latestModelApplied, string vmId, VirtualMachineScaleSetVmInstanceView instanceView, HardwareProfile hardwareProfile, StorageProfile storageProfile, AdditionalCapabilities additionalCapabilities, OSProfile osProfile, SecurityProfile securityProfile, NetworkProfile networkProfile, VirtualMachineScaleSetVmNetworkProfileConfiguration networkProfileConfiguration, DiagnosticsProfile diagnosticsProfile, WritableSubResource availabilitySet, string provisioningState, string licenseType, string modelDefinitionApplied, VirtualMachineScaleSetVmProtectionPolicy protectionPolicy) : base(id, name, resourceType, systemData, tags, location)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal VirtualMachineScaleSetVmData(ResourceIdentifier id, string name, ResourceType resourceType, SystemData systemData, IDictionary<string, string> tags, AzureLocation location, string instanceId, MgmtRenameRulesSku sku, MgmtRenameRulesPlan plan, IReadOnlyList<string> zones, bool? latestModelApplied, string vmId, VirtualMachineScaleSetVmInstanceView instanceView, HardwareProfile hardwareProfile, StorageProfile storageProfile, AdditionalCapabilities additionalCapabilities, OSProfile osProfile, SecurityProfile securityProfile, NetworkProfile networkProfile, VirtualMachineScaleSetVmNetworkProfileConfiguration networkProfileConfiguration, DiagnosticsProfile diagnosticsProfile, WritableSubResource availabilitySet, string provisioningState, string licenseType, string modelDefinitionApplied, VirtualMachineScaleSetVmProtectionPolicy protectionPolicy, Dictionary<string, BinaryData> rawData) : base(id, name, resourceType, systemData, tags, location)
         {
             InstanceId = instanceId;
             Sku = sku;
@@ -136,6 +146,7 @@ namespace MgmtRenameRules
             LicenseType = licenseType;
             ModelDefinitionApplied = modelDefinitionApplied;
             ProtectionPolicy = protectionPolicy;
+            _rawData = rawData;
         }
 
         /// <summary>

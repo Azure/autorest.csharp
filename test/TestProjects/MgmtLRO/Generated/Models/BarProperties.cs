@@ -6,22 +6,33 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
 
 namespace MgmtLRO.Models
 {
     /// <summary> The instance view of a resource. </summary>
     internal partial class BarProperties
     {
-        /// <summary> Initializes a new instance of BarProperties. </summary>
+        private Dictionary<string, BinaryData> _rawData;
+
+        /// <summary>
+        /// Initializes a new instance of global::MgmtLRO.Models.BarProperties
+        ///
+        /// </summary>
         public BarProperties()
         {
         }
 
-        /// <summary> Initializes a new instance of BarProperties. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::MgmtLRO.Models.BarProperties
+        ///
+        /// </summary>
         /// <param name="buzz"> Update Domain count. </param>
-        internal BarProperties(Guid? buzz)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal BarProperties(Guid? buzz, Dictionary<string, BinaryData> rawData)
         {
             Buzz = buzz;
+            _rawData = rawData;
         }
 
         /// <summary> Update Domain count. </summary>

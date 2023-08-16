@@ -6,17 +6,29 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
 
 namespace Encode.Duration.Models
 {
     /// <summary> The ISO8601DurationProperty. </summary>
     public partial class ISO8601DurationProperty
     {
+        private Dictionary<string, BinaryData> _rawData;
+
         /// <summary> Initializes a new instance of ISO8601DurationProperty. </summary>
         /// <param name="value"></param>
         public ISO8601DurationProperty(TimeSpan value)
         {
             Value = value;
+        }
+
+        /// <summary> Initializes a new instance of ISO8601DurationProperty. </summary>
+        /// <param name="value"></param>
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal ISO8601DurationProperty(TimeSpan value, Dictionary<string, BinaryData> rawData)
+        {
+            Value = value;
+            _rawData = rawData;
         }
 
         /// <summary> Gets or sets the value. </summary>

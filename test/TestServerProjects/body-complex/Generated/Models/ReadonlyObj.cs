@@ -5,23 +5,36 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
+
 namespace body_complex.Models
 {
     /// <summary> The ReadonlyObj. </summary>
     public partial class ReadonlyObj
     {
-        /// <summary> Initializes a new instance of ReadonlyObj. </summary>
+        private Dictionary<string, BinaryData> _rawData;
+
+        /// <summary>
+        /// Initializes a new instance of global::body_complex.Models.ReadonlyObj
+        ///
+        /// </summary>
         public ReadonlyObj()
         {
         }
 
-        /// <summary> Initializes a new instance of ReadonlyObj. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::body_complex.Models.ReadonlyObj
+        ///
+        /// </summary>
         /// <param name="id"></param>
         /// <param name="size"></param>
-        internal ReadonlyObj(string id, int? size)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal ReadonlyObj(string id, int? size, Dictionary<string, BinaryData> rawData)
         {
             Id = id;
             Size = size;
+            _rawData = rawData;
         }
 
         /// <summary> Gets the id. </summary>

@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
 using Azure.Core;
 
 namespace Azure.ResourceManager.Storage.Models
@@ -13,7 +14,12 @@ namespace Azure.ResourceManager.Storage.Models
     /// <summary> Settings properties for Active Directory (AD). </summary>
     public partial class ActiveDirectoryProperties
     {
-        /// <summary> Initializes a new instance of ActiveDirectoryProperties. </summary>
+        private Dictionary<string, BinaryData> _rawData;
+
+        /// <summary>
+        /// Initializes a new instance of global::Azure.ResourceManager.Storage.Models.ActiveDirectoryProperties
+        ///
+        /// </summary>
         /// <param name="domainName"> Specifies the primary domain that the AD DNS server is authoritative for. </param>
         /// <param name="netBiosDomainName"> Specifies the NetBIOS domain name. </param>
         /// <param name="forestName"> Specifies the Active Directory forest to get. </param>
@@ -36,6 +42,28 @@ namespace Azure.ResourceManager.Storage.Models
             DomainGuid = domainGuid;
             DomainSid = domainSid;
             AzureStorageSid = azureStorageSid;
+        }
+
+        /// <summary>
+        /// Initializes a new instance of global::Azure.ResourceManager.Storage.Models.ActiveDirectoryProperties
+        ///
+        /// </summary>
+        /// <param name="domainName"> Specifies the primary domain that the AD DNS server is authoritative for. </param>
+        /// <param name="netBiosDomainName"> Specifies the NetBIOS domain name. </param>
+        /// <param name="forestName"> Specifies the Active Directory forest to get. </param>
+        /// <param name="domainGuid"> Specifies the domain GUID. </param>
+        /// <param name="domainSid"> Specifies the security identifier (SID). </param>
+        /// <param name="azureStorageSid"> Specifies the security identifier (SID) for Azure Storage. </param>
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal ActiveDirectoryProperties(string domainName, string netBiosDomainName, string forestName, string domainGuid, string domainSid, string azureStorageSid, Dictionary<string, BinaryData> rawData)
+        {
+            DomainName = domainName;
+            NetBiosDomainName = netBiosDomainName;
+            ForestName = forestName;
+            DomainGuid = domainGuid;
+            DomainSid = domainSid;
+            AzureStorageSid = azureStorageSid;
+            _rawData = rawData;
         }
 
         /// <summary> Specifies the primary domain that the AD DNS server is authoritative for. </summary>

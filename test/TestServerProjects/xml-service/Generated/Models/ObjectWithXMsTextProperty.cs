@@ -5,23 +5,36 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
+
 namespace xml_service.Models
 {
     /// <summary> Contans property. </summary>
     public partial class ObjectWithXMsTextProperty
     {
-        /// <summary> Initializes a new instance of ObjectWithXMsTextProperty. </summary>
+        private Dictionary<string, BinaryData> _rawData;
+
+        /// <summary>
+        /// Initializes a new instance of global::xml_service.Models.ObjectWithXMsTextProperty
+        ///
+        /// </summary>
         internal ObjectWithXMsTextProperty()
         {
         }
 
-        /// <summary> Initializes a new instance of ObjectWithXMsTextProperty. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::xml_service.Models.ObjectWithXMsTextProperty
+        ///
+        /// </summary>
         /// <param name="language"> Returned value should be 'english'. </param>
         /// <param name="content"> Returned value should be 'I am text'. </param>
-        internal ObjectWithXMsTextProperty(string language, string content)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal ObjectWithXMsTextProperty(string language, string content, Dictionary<string, BinaryData> rawData)
         {
             Language = language;
             Content = content;
+            _rawData = rawData;
         }
 
         /// <summary> Returned value should be 'english'. </summary>

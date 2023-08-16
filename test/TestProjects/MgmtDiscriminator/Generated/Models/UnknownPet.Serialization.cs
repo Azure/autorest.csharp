@@ -12,53 +12,55 @@ using Azure.Core.Serialization;
 
 namespace MgmtDiscriminator.Models
 {
-    internal partial class UnknownPet : IUtf8JsonSerializable, IJsonModelSerializable
+    internal partial class UnknownPet : IUtf8JsonSerializable, IModelJsonSerializable<Pet>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModelSerializable)this).Serialize(writer, ModelSerializerOptions.AzureServiceDefault);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<Pet>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
 
-        void IJsonModelSerializable.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
+        void IModelJsonSerializable<Pet>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
             writer.WriteStartObject();
             writer.WritePropertyName("kind"u8);
             writer.WriteStringValue(Kind.ToSerialString());
+            if (_rawData is not null && options.Format == ModelSerializerFormat.Json)
+            {
+                foreach (var property in _rawData)
+                {
+                    writer.WritePropertyName(property.Key);
+#if NET6_0_OR_GREATER
+				writer.WriteRawValue(property.Value);
+#else
+                    JsonSerializer.Serialize(writer, JsonDocument.Parse(property.Value.ToString()).RootElement);
+#endif
+                }
+            }
             writer.WriteEndObject();
         }
 
-        object IModelSerializable.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            using var doc = JsonDocument.Parse(data);
-            return DeserializeUnknownPet(doc.RootElement, options);
-        }
+        internal static Pet DeserializeUnknownPet(JsonElement element, ModelSerializerOptions options = default) => DeserializePet(element, options);
 
-        internal static UnknownPet DeserializeUnknownPet(JsonElement element, ModelSerializerOptions options = default)
+        Pet IModelJsonSerializable<Pet>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
         {
-            options ??= ModelSerializerOptions.AzureServiceDefault;
-            if (element.ValueKind == JsonValueKind.Null)
-            {
-                return null;
-            }
-            PetKind kind = default;
-            Optional<string> id = default;
-            foreach (var property in element.EnumerateObject())
-            {
-                if (property.NameEquals("kind"u8))
-                {
-                    kind = property.Value.GetString().ToPetKind();
-                    continue;
-                }
-                if (property.NameEquals("id"u8))
-                {
-                    id = property.Value.GetString();
-                    continue;
-                }
-            }
-            return new UnknownPet(kind, id.Value);
-        }
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
 
-        object IJsonModelSerializable.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
-        {
             using var doc = JsonDocument.ParseValue(ref reader);
             return DeserializeUnknownPet(doc.RootElement, options);
+        }
+
+        BinaryData IModelSerializable<Pet>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        Pet IModelSerializable<Pet>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using var doc = JsonDocument.Parse(data);
+            return DeserializePet(doc.RootElement, options);
         }
     }
 }

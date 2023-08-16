@@ -5,18 +5,40 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
+
 namespace MgmtMockAndSample.Models
 {
     /// <summary> SKU details. </summary>
     public partial class MgmtMockAndSampleSku
     {
-        /// <summary> Initializes a new instance of MgmtMockAndSampleSku. </summary>
+        private Dictionary<string, BinaryData> _rawData;
+
+        /// <summary>
+        /// Initializes a new instance of global::MgmtMockAndSample.Models.MgmtMockAndSampleSku
+        ///
+        /// </summary>
         /// <param name="family"> SKU family name. </param>
         /// <param name="name"> SKU name to specify whether the key vault is a standard vault or a premium vault. </param>
         public MgmtMockAndSampleSku(MgmtMockAndSampleSkuFamily family, MgmtMockAndSampleSkuName name)
         {
             Family = family;
             Name = name;
+        }
+
+        /// <summary>
+        /// Initializes a new instance of global::MgmtMockAndSample.Models.MgmtMockAndSampleSku
+        ///
+        /// </summary>
+        /// <param name="family"> SKU family name. </param>
+        /// <param name="name"> SKU name to specify whether the key vault is a standard vault or a premium vault. </param>
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal MgmtMockAndSampleSku(MgmtMockAndSampleSkuFamily family, MgmtMockAndSampleSkuName name, Dictionary<string, BinaryData> rawData)
+        {
+            Family = family;
+            Name = name;
+            _rawData = rawData;
         }
 
         /// <summary> SKU family name. </summary>

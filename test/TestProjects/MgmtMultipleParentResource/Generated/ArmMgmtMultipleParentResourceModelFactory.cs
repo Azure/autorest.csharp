@@ -16,7 +16,10 @@ namespace MgmtMultipleParentResource.Models
     /// <summary> Model factory for models. </summary>
     public static partial class ArmMgmtMultipleParentResourceModelFactory
     {
-        /// <summary> Initializes a new instance of AnotherParentData. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::MgmtMultipleParentResource.AnotherParentData
+        ///
+        /// </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
         /// <param name="resourceType"> The resourceType. </param>
@@ -35,10 +38,13 @@ namespace MgmtMultipleParentResource.Models
         {
             tags ??= new Dictionary<string, string>();
 
-            return new AnotherParentData(id, name, resourceType, systemData, tags, location, asyncExecution, runAsUser, runAsPassword, timeoutInSeconds, outputBlobUri, errorBlobUri, provisioningState);
+            return new AnotherParentData(id, name, resourceType, systemData, tags, location, asyncExecution, runAsUser, runAsPassword, timeoutInSeconds, outputBlobUri, errorBlobUri, provisioningState, default);
         }
 
-        /// <summary> Initializes a new instance of AnotherParentPatch. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::MgmtMultipleParentResource.Models.AnotherParentPatch
+        ///
+        /// </summary>
         /// <param name="tags"> Resource tags. </param>
         /// <param name="asyncExecution"> Optional. If set to true, provisioning will complete as soon as the script starts and will not wait for script to complete. </param>
         /// <param name="runAsUser"> Specifies the user account on the VM when executing the run command. </param>
@@ -52,10 +58,13 @@ namespace MgmtMultipleParentResource.Models
         {
             tags ??= new Dictionary<string, string>();
 
-            return new AnotherParentPatch(tags, asyncExecution, runAsUser, runAsPassword, timeoutInSeconds, outputBlobUri, errorBlobUri, provisioningState);
+            return new AnotherParentPatch(tags, asyncExecution, runAsUser, runAsPassword, timeoutInSeconds, outputBlobUri, errorBlobUri, provisioningState, default);
         }
 
-        /// <summary> Initializes a new instance of ChildBodyData. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::MgmtMultipleParentResource.ChildBodyData
+        ///
+        /// </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
         /// <param name="resourceType"> The resourceType. </param>
@@ -74,10 +83,13 @@ namespace MgmtMultipleParentResource.Models
         {
             tags ??= new Dictionary<string, string>();
 
-            return new ChildBodyData(id, name, resourceType, systemData, tags, location, asyncExecution, runAsUser, runAsPassword, timeoutInSeconds, outputBlobUri, errorBlobUri, provisioningState);
+            return new ChildBodyData(id, name, resourceType, systemData, tags, location, asyncExecution, runAsUser, runAsPassword, timeoutInSeconds, outputBlobUri, errorBlobUri, provisioningState, default);
         }
 
-        /// <summary> Initializes a new instance of ChildBodyUpdate. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::MgmtMultipleParentResource.Models.ChildBodyUpdate
+        ///
+        /// </summary>
         /// <param name="tags"> Resource tags. </param>
         /// <param name="asyncExecution"> Optional. If set to true, provisioning will complete as soon as the script starts and will not wait for script to complete. </param>
         /// <param name="runAsUser"> Specifies the user account on the VM when executing the run command. </param>
@@ -91,10 +103,13 @@ namespace MgmtMultipleParentResource.Models
         {
             tags ??= new Dictionary<string, string>();
 
-            return new ChildBodyUpdate(tags, asyncExecution, runAsUser, runAsPassword, timeoutInSeconds, outputBlobUri, errorBlobUri, provisioningState);
+            return new ChildBodyUpdate(tags, asyncExecution, runAsUser, runAsPassword, timeoutInSeconds, outputBlobUri, errorBlobUri, provisioningState, default);
         }
 
-        /// <summary> Initializes a new instance of TheParentData. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::MgmtMultipleParentResource.TheParentData
+        ///
+        /// </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
         /// <param name="resourceType"> The resourceType. </param>
@@ -113,10 +128,13 @@ namespace MgmtMultipleParentResource.Models
         {
             tags ??= new Dictionary<string, string>();
 
-            return new TheParentData(id, name, resourceType, systemData, tags, location, asyncExecution, runAsUser, runAsPassword, timeoutInSeconds, outputBlobUri, errorBlobUri, provisioningState);
+            return new TheParentData(id, name, resourceType, systemData, tags, location, asyncExecution, runAsUser, runAsPassword, timeoutInSeconds, outputBlobUri, errorBlobUri, provisioningState, default);
         }
 
-        /// <summary> Initializes a new instance of TheParentPatch. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::MgmtMultipleParentResource.Models.TheParentPatch
+        ///
+        /// </summary>
         /// <param name="tags"> Resource tags. </param>
         /// <param name="asyncExecution"> Optional. If set to true, provisioning will complete as soon as the script starts and will not wait for script to complete. </param>
         /// <param name="runAsUser"> Specifies the user account on the VM when executing the run command. </param>
@@ -130,10 +148,13 @@ namespace MgmtMultipleParentResource.Models
         {
             tags ??= new Dictionary<string, string>();
 
-            return new TheParentPatch(tags, asyncExecution, runAsUser, runAsPassword, timeoutInSeconds, outputBlobUri, errorBlobUri, provisioningState);
+            return new TheParentPatch(tags, asyncExecution, runAsUser, runAsPassword, timeoutInSeconds, outputBlobUri, errorBlobUri, provisioningState, default);
         }
 
-        /// <summary> Initializes a new instance of SubParentData. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::MgmtMultipleParentResource.SubParentData
+        ///
+        /// </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
         /// <param name="resourceType"> The resourceType. </param>
@@ -152,10 +173,13 @@ namespace MgmtMultipleParentResource.Models
         {
             tags ??= new Dictionary<string, string>();
 
-            return new SubParentData(id, name, resourceType, systemData, tags, location, asyncExecution, runAsUser, runAsPassword, timeoutInSeconds, outputBlobUri, errorBlobUri, provisioningState);
+            return new SubParentData(id, name, resourceType, systemData, tags, location, asyncExecution, runAsUser, runAsPassword, timeoutInSeconds, outputBlobUri, errorBlobUri, provisioningState, default);
         }
 
-        /// <summary> Initializes a new instance of SubParentPatch. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::MgmtMultipleParentResource.Models.SubParentPatch
+        ///
+        /// </summary>
         /// <param name="tags"> Resource tags. </param>
         /// <param name="asyncExecution"> Optional. If set to true, provisioning will complete as soon as the script starts and will not wait for script to complete. </param>
         /// <param name="runAsUser"> Specifies the user account on the VM when executing the run command. </param>
@@ -169,7 +193,7 @@ namespace MgmtMultipleParentResource.Models
         {
             tags ??= new Dictionary<string, string>();
 
-            return new SubParentPatch(tags, asyncExecution, runAsUser, runAsPassword, timeoutInSeconds, outputBlobUri, errorBlobUri, provisioningState);
+            return new SubParentPatch(tags, asyncExecution, runAsUser, runAsPassword, timeoutInSeconds, outputBlobUri, errorBlobUri, provisioningState, default);
         }
     }
 }

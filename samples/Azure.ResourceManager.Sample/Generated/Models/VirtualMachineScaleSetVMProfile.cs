@@ -5,6 +5,9 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
+
 namespace Azure.ResourceManager.Sample.Models
 {
     /// <summary>
@@ -13,12 +16,20 @@ namespace Azure.ResourceManager.Sample.Models
     /// </summary>
     public partial class VirtualMachineScaleSetVMProfile
     {
-        /// <summary> Initializes a new instance of VirtualMachineScaleSetVMProfile. </summary>
+        private Dictionary<string, BinaryData> _rawData;
+
+        /// <summary>
+        /// Initializes a new instance of global::Azure.ResourceManager.Sample.Models.VirtualMachineScaleSetVMProfile
+        ///
+        /// </summary>
         public VirtualMachineScaleSetVMProfile()
         {
         }
 
-        /// <summary> Initializes a new instance of VirtualMachineScaleSetVMProfile. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::Azure.ResourceManager.Sample.Models.VirtualMachineScaleSetVMProfile
+        ///
+        /// </summary>
         /// <param name="osProfile">
         /// Specifies the operating system settings for the virtual machines in the scale set.
         /// Serialized Name: VirtualMachineScaleSetVMProfile.osProfile
@@ -63,7 +74,8 @@ namespace Azure.ResourceManager.Sample.Models
         /// Specifies Scheduled Event related configurations.
         /// Serialized Name: VirtualMachineScaleSetVMProfile.scheduledEventsProfile
         /// </param>
-        internal VirtualMachineScaleSetVMProfile(VirtualMachineScaleSetOSProfile osProfile, VirtualMachineScaleSetStorageProfile storageProfile, VirtualMachineScaleSetNetworkProfile networkProfile, SecurityProfile securityProfile, DiagnosticsProfile diagnosticsProfile, VirtualMachineScaleSetExtensionProfile extensionProfile, string licenseType, VirtualMachinePriorityType? priority, VirtualMachineEvictionPolicyType? evictionPolicy, BillingProfile billingProfile, ScheduledEventsProfile scheduledEventsProfile)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal VirtualMachineScaleSetVMProfile(VirtualMachineScaleSetOSProfile osProfile, VirtualMachineScaleSetStorageProfile storageProfile, VirtualMachineScaleSetNetworkProfile networkProfile, SecurityProfile securityProfile, DiagnosticsProfile diagnosticsProfile, VirtualMachineScaleSetExtensionProfile extensionProfile, string licenseType, VirtualMachinePriorityType? priority, VirtualMachineEvictionPolicyType? evictionPolicy, BillingProfile billingProfile, ScheduledEventsProfile scheduledEventsProfile, Dictionary<string, BinaryData> rawData)
         {
             OsProfile = osProfile;
             StorageProfile = storageProfile;
@@ -76,6 +88,7 @@ namespace Azure.ResourceManager.Sample.Models
             EvictionPolicy = evictionPolicy;
             BillingProfile = billingProfile;
             ScheduledEventsProfile = scheduledEventsProfile;
+            _rawData = rawData;
         }
 
         /// <summary>

@@ -6,37 +6,48 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
 using System.Text.Json;
+using Azure;
 using Azure.Core;
 using Azure.Core.Serialization;
 using MgmtSupersetInheritance.Models;
 
 namespace MgmtSupersetInheritance
 {
-    public partial class SupersetModel7Data : IUtf8JsonSerializable, IJsonModelSerializable
+    public partial class SupersetModel7Data : IUtf8JsonSerializable, IModelJsonSerializable<SupersetModel7Data>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModelSerializable)this).Serialize(writer, ModelSerializerOptions.AzureServiceDefault);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<SupersetModel7Data>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
 
-        void IJsonModelSerializable.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
+        void IModelJsonSerializable<SupersetModel7Data>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
             writer.WriteStartObject();
             if (Optional.IsDefined(New))
             {
                 writer.WritePropertyName("new"u8);
                 writer.WriteStringValue(New);
             }
+            if (_rawData is not null && options.Format == ModelSerializerFormat.Json)
+            {
+                foreach (var property in _rawData)
+                {
+                    writer.WritePropertyName(property.Key);
+#if NET6_0_OR_GREATER
+				writer.WriteRawValue(property.Value);
+#else
+                    JsonSerializer.Serialize(writer, JsonDocument.Parse(property.Value.ToString()).RootElement);
+#endif
+                }
+            }
             writer.WriteEndObject();
-        }
-
-        object IModelSerializable.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            using var doc = JsonDocument.Parse(data);
-            return DeserializeSupersetModel7Data(doc.RootElement, options);
         }
 
         internal static SupersetModel7Data DeserializeSupersetModel7Data(JsonElement element, ModelSerializerOptions options = default)
         {
-            options ??= ModelSerializerOptions.AzureServiceDefault;
+            options ??= ModelSerializerOptions.DefaultWireOptions;
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
@@ -46,6 +57,7 @@ namespace MgmtSupersetInheritance
             Optional<string> type = default;
             Optional<string> @new = default;
             Optional<SupersetModel7SystemData> systemData = default;
+            Dictionary<string, BinaryData> rawData = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("id"u8))
@@ -77,14 +89,57 @@ namespace MgmtSupersetInheritance
                     systemData = SupersetModel7SystemData.DeserializeSupersetModel7SystemData(property.Value);
                     continue;
                 }
+                if (options.Format == ModelSerializerFormat.Json)
+                {
+                    rawData.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
+                    continue;
+                }
             }
-            return new SupersetModel7Data(id.Value, name.Value, type.Value, @new.Value, systemData.Value);
+            return new SupersetModel7Data(id.Value, name.Value, type.Value, @new.Value, systemData.Value, rawData);
         }
 
-        object IJsonModelSerializable.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        SupersetModel7Data IModelJsonSerializable<SupersetModel7Data>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
         {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
             using var doc = JsonDocument.ParseValue(ref reader);
             return DeserializeSupersetModel7Data(doc.RootElement, options);
+        }
+
+        BinaryData IModelSerializable<SupersetModel7Data>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        SupersetModel7Data IModelSerializable<SupersetModel7Data>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using var doc = JsonDocument.Parse(data);
+            return DeserializeSupersetModel7Data(doc.RootElement, options);
+        }
+
+        public static implicit operator RequestContent(SupersetModel7Data model)
+        {
+            if (model is null)
+            {
+                return null;
+            }
+
+            return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
+        }
+
+        public static explicit operator SupersetModel7Data(Response response)
+        {
+            if (response is null)
+            {
+                return null;
+            }
+
+            using JsonDocument doc = JsonDocument.Parse(response.ContentStream);
+            return DeserializeSupersetModel7Data(doc.RootElement, ModelSerializerOptions.DefaultWireOptions);
         }
     }
 }

@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Collections.Generic;
 using Azure.Core;
 
@@ -13,17 +14,27 @@ namespace MgmtListMethods.Models
     /// <summary> The List of Non Resource Child operation response. </summary>
     internal partial class NonResourceChildListResult
     {
-        /// <summary> Initializes a new instance of NonResourceChildListResult. </summary>
+        private Dictionary<string, BinaryData> _rawData;
+
+        /// <summary>
+        /// Initializes a new instance of global::MgmtListMethods.Models.NonResourceChildListResult
+        ///
+        /// </summary>
         internal NonResourceChildListResult()
         {
             Value = new ChangeTrackingList<NonResourceChild>();
         }
 
-        /// <summary> Initializes a new instance of NonResourceChildListResult. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::MgmtListMethods.Models.NonResourceChildListResult
+        ///
+        /// </summary>
         /// <param name="value"> The list of Non Resource Child. </param>
-        internal NonResourceChildListResult(IReadOnlyList<NonResourceChild> value)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal NonResourceChildListResult(IReadOnlyList<NonResourceChild> value, Dictionary<string, BinaryData> rawData)
         {
             Value = value;
+            _rawData = rawData;
         }
 
         /// <summary> The list of Non Resource Child. </summary>

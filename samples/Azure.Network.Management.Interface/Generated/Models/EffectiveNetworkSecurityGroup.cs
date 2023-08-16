@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Collections.Generic;
 using Azure.Core;
 
@@ -13,23 +14,33 @@ namespace Azure.Network.Management.Interface.Models
     /// <summary> Effective network security group. </summary>
     public partial class EffectiveNetworkSecurityGroup
     {
-        /// <summary> Initializes a new instance of EffectiveNetworkSecurityGroup. </summary>
+        private Dictionary<string, BinaryData> _rawData;
+
+        /// <summary>
+        /// Initializes a new instance of global::Azure.Network.Management.Interface.Models.EffectiveNetworkSecurityGroup
+        ///
+        /// </summary>
         internal EffectiveNetworkSecurityGroup()
         {
             EffectiveSecurityRules = new ChangeTrackingList<EffectiveNetworkSecurityRule>();
         }
 
-        /// <summary> Initializes a new instance of EffectiveNetworkSecurityGroup. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::Azure.Network.Management.Interface.Models.EffectiveNetworkSecurityGroup
+        ///
+        /// </summary>
         /// <param name="networkSecurityGroup"> The ID of network security group that is applied. </param>
         /// <param name="association"> Associated resources. </param>
         /// <param name="effectiveSecurityRules"> A collection of effective security rules. </param>
         /// <param name="tagMap"> Mapping of tags to list of IP Addresses included within the tag. </param>
-        internal EffectiveNetworkSecurityGroup(SubResource networkSecurityGroup, EffectiveNetworkSecurityGroupAssociation association, IReadOnlyList<EffectiveNetworkSecurityRule> effectiveSecurityRules, string tagMap)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal EffectiveNetworkSecurityGroup(SubResource networkSecurityGroup, EffectiveNetworkSecurityGroupAssociation association, IReadOnlyList<EffectiveNetworkSecurityRule> effectiveSecurityRules, string tagMap, Dictionary<string, BinaryData> rawData)
         {
             NetworkSecurityGroup = networkSecurityGroup;
             Association = association;
             EffectiveSecurityRules = effectiveSecurityRules;
             TagMap = tagMap;
+            _rawData = rawData;
         }
 
         /// <summary> The ID of network security group that is applied. </summary>

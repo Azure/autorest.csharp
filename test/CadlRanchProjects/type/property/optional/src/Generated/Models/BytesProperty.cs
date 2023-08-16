@@ -6,12 +6,15 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
 
 namespace _Type.Property.Optional.Models
 {
     /// <summary> Template type for testing models with optional property. Pass in the type of the property you are looking for. </summary>
     public partial class BytesProperty
     {
+        private Dictionary<string, BinaryData> _rawData;
+
         /// <summary> Initializes a new instance of BytesProperty. </summary>
         public BytesProperty()
         {
@@ -19,9 +22,11 @@ namespace _Type.Property.Optional.Models
 
         /// <summary> Initializes a new instance of BytesProperty. </summary>
         /// <param name="property"> Property. </param>
-        internal BytesProperty(BinaryData property)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal BytesProperty(BinaryData property, Dictionary<string, BinaryData> rawData)
         {
             Property = property;
+            _rawData = rawData;
         }
 
         /// <summary>

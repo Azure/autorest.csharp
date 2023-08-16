@@ -57,7 +57,7 @@ namespace _Specs_.Azure.ClientGenerator.Core.Internal
 
             RequestContext context = FromCancellationToken(cancellationToken);
             Response response = await PublicAsync(name, context).ConfigureAwait(false);
-            return Response.FromValue(SharedModel.FromResponse(response), response);
+            return Response.FromValue((SharedModel)response, response);
         }
 
         /// <param name="name"> The String to use. </param>
@@ -70,7 +70,7 @@ namespace _Specs_.Azure.ClientGenerator.Core.Internal
 
             RequestContext context = FromCancellationToken(cancellationToken);
             Response response = Public(name, context);
-            return Response.FromValue(SharedModel.FromResponse(response), response);
+            return Response.FromValue((SharedModel)response, response);
         }
 
         /// <summary>
@@ -161,7 +161,7 @@ namespace _Specs_.Azure.ClientGenerator.Core.Internal
 
             RequestContext context = FromCancellationToken(cancellationToken);
             Response response = await InternalAsync(name, context).ConfigureAwait(false);
-            return Response.FromValue(SharedModel.FromResponse(response), response);
+            return Response.FromValue((SharedModel)response, response);
         }
 
         /// <param name="name"> The String to use. </param>
@@ -174,7 +174,7 @@ namespace _Specs_.Azure.ClientGenerator.Core.Internal
 
             RequestContext context = FromCancellationToken(cancellationToken);
             Response response = Internal(name, context);
-            return Response.FromValue(SharedModel.FromResponse(response), response);
+            return Response.FromValue((SharedModel)response, response);
         }
 
         /// <summary>

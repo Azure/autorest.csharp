@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
 using Azure.Core;
 
 namespace SpecialWords.Models
@@ -31,7 +32,8 @@ namespace SpecialWords.Models
         /// <param name="modelKind"> Discriminator. </param>
         /// <param name="derivedName"></param>
         /// <param name="for"></param>
-        internal DerivedModel(string modelKind, string derivedName, string @for) : base(modelKind)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal DerivedModel(string modelKind, string derivedName, string @for, Dictionary<string, BinaryData> rawData) : base(modelKind, rawData)
         {
             DerivedName = derivedName;
             For = @for;

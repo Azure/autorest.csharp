@@ -5,20 +5,30 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
+
 namespace TypeSchemaMapping.Models
 {
     /// <summary> The DerivedFromAbstractModel. </summary>
     public partial class DerivedFromAbstractModel : AbstractModel
     {
-        /// <summary> Initializes a new instance of DerivedFromAbstractModel. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::TypeSchemaMapping.Models.DerivedFromAbstractModel
+        ///
+        /// </summary>
         internal DerivedFromAbstractModel()
         {
             DiscriminatorProperty = "DerivedFromAbstractModel";
         }
 
-        /// <summary> Initializes a new instance of DerivedFromAbstractModel. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::TypeSchemaMapping.Models.DerivedFromAbstractModel
+        ///
+        /// </summary>
         /// <param name="discriminatorProperty"></param>
-        internal DerivedFromAbstractModel(string discriminatorProperty) : base(discriminatorProperty)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal DerivedFromAbstractModel(string discriminatorProperty, Dictionary<string, BinaryData> rawData) : base(discriminatorProperty, rawData)
         {
             DiscriminatorProperty = discriminatorProperty ?? "DerivedFromAbstractModel";
         }

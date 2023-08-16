@@ -15,7 +15,12 @@ namespace Azure.AI.FormRecognizer.Models
     /// <summary> Custom model training result. </summary>
     public partial class TrainResult
     {
-        /// <summary> Initializes a new instance of TrainResult. </summary>
+        private Dictionary<string, BinaryData> _rawData;
+
+        /// <summary>
+        /// Initializes a new instance of global::Azure.AI.FormRecognizer.Models.TrainResult
+        ///
+        /// </summary>
         /// <param name="trainingDocuments"> List of the documents used to train the model and any errors reported in each document. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="trainingDocuments"/> is null. </exception>
         internal TrainResult(IEnumerable<TrainingDocumentInfo> trainingDocuments)
@@ -27,17 +32,22 @@ namespace Azure.AI.FormRecognizer.Models
             Errors = new ChangeTrackingList<ErrorInformation>();
         }
 
-        /// <summary> Initializes a new instance of TrainResult. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::Azure.AI.FormRecognizer.Models.TrainResult
+        ///
+        /// </summary>
         /// <param name="trainingDocuments"> List of the documents used to train the model and any errors reported in each document. </param>
         /// <param name="fields"> List of fields used to train the model and the train operation error reported by each. </param>
         /// <param name="averageModelAccuracy"> Average accuracy. </param>
         /// <param name="errors"> Errors returned during the training operation. </param>
-        internal TrainResult(IReadOnlyList<TrainingDocumentInfo> trainingDocuments, IReadOnlyList<FormFieldsReport> fields, float? averageModelAccuracy, IReadOnlyList<ErrorInformation> errors)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal TrainResult(IReadOnlyList<TrainingDocumentInfo> trainingDocuments, IReadOnlyList<FormFieldsReport> fields, float? averageModelAccuracy, IReadOnlyList<ErrorInformation> errors, Dictionary<string, BinaryData> rawData)
         {
             TrainingDocuments = trainingDocuments;
             Fields = fields;
             AverageModelAccuracy = averageModelAccuracy;
             Errors = errors;
+            _rawData = rawData;
         }
 
         /// <summary> List of the documents used to train the model and any errors reported in each document. </summary>

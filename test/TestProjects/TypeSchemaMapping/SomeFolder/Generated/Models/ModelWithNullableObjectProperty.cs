@@ -5,6 +5,8 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
 using System.Text.Json;
 
 namespace TypeSchemaMapping.Models
@@ -12,16 +14,26 @@ namespace TypeSchemaMapping.Models
     /// <summary> The ModelWithNullableObjectProperty. </summary>
     internal partial class ModelWithNullableObjectProperty
     {
-        /// <summary> Initializes a new instance of ModelWithNullableObjectProperty. </summary>
+        private Dictionary<string, BinaryData> _rawData;
+
+        /// <summary>
+        /// Initializes a new instance of global::TypeSchemaMapping.Models.ModelWithNullableObjectProperty
+        ///
+        /// </summary>
         public ModelWithNullableObjectProperty()
         {
         }
 
-        /// <summary> Initializes a new instance of ModelWithNullableObjectProperty. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::TypeSchemaMapping.Models.ModelWithNullableObjectProperty
+        ///
+        /// </summary>
         /// <param name="modelProperty"> . </param>
-        internal ModelWithNullableObjectProperty(JsonElement modelProperty)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal ModelWithNullableObjectProperty(JsonElement modelProperty, Dictionary<string, BinaryData> rawData)
         {
             ModelProperty = modelProperty;
+            _rawData = rawData;
         }
     }
 }

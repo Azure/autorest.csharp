@@ -5,23 +5,36 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
+
 namespace MgmtHierarchicalNonResource.Models
 {
     /// <summary> The Resource model definition. </summary>
     public partial class PirResource
     {
-        /// <summary> Initializes a new instance of PirResource. </summary>
+        protected internal Dictionary<string, BinaryData> _rawData;
+
+        /// <summary>
+        /// Initializes a new instance of global::MgmtHierarchicalNonResource.Models.PirResource
+        ///
+        /// </summary>
         internal PirResource()
         {
         }
 
-        /// <summary> Initializes a new instance of PirResource. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::MgmtHierarchicalNonResource.Models.PirResource
+        ///
+        /// </summary>
         /// <param name="name"> Resource name. </param>
         /// <param name="location"> Resource location. </param>
-        internal PirResource(string name, string location)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal PirResource(string name, string location, Dictionary<string, BinaryData> rawData)
         {
             Name = name;
             Location = location;
+            _rawData = rawData;
         }
 
         /// <summary> Resource name. </summary>

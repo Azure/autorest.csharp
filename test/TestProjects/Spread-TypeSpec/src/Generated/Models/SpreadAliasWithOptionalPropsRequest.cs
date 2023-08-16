@@ -15,6 +15,8 @@ namespace SpreadTypeSpec.Models
     /// <summary> The SpreadAliasWithOptionalPropsRequest. </summary>
     internal partial class SpreadAliasWithOptionalPropsRequest
     {
+        private Dictionary<string, BinaryData> _rawData;
+
         /// <summary> Initializes a new instance of SpreadAliasWithOptionalPropsRequest. </summary>
         /// <param name="name"> name of the Thing. </param>
         /// <param name="items"> required array. </param>
@@ -35,13 +37,15 @@ namespace SpreadTypeSpec.Models
         /// <param name="age"> age of the Thing. </param>
         /// <param name="items"> required array. </param>
         /// <param name="elements"> optional array. </param>
-        internal SpreadAliasWithOptionalPropsRequest(string name, string color, int? age, IList<int> items, IList<string> elements)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal SpreadAliasWithOptionalPropsRequest(string name, string color, int? age, IList<int> items, IList<string> elements, Dictionary<string, BinaryData> rawData)
         {
             Name = name;
             Color = color;
             Age = age;
             Items = items;
             Elements = elements;
+            _rawData = rawData;
         }
 
         /// <summary> name of the Thing. </summary>

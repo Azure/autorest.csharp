@@ -15,7 +15,12 @@ namespace CognitiveSearch.Models
     /// <summary> A list of skills. </summary>
     public partial class Skillset
     {
-        /// <summary> Initializes a new instance of Skillset. </summary>
+        private Dictionary<string, BinaryData> _rawData;
+
+        /// <summary>
+        /// Initializes a new instance of global::CognitiveSearch.Models.Skillset
+        ///
+        /// </summary>
         /// <param name="name"> The name of the skillset. </param>
         /// <param name="description"> The description of the skillset. </param>
         /// <param name="skills">
@@ -35,7 +40,10 @@ namespace CognitiveSearch.Models
             Skills = skills.ToList();
         }
 
-        /// <summary> Initializes a new instance of Skillset. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::CognitiveSearch.Models.Skillset
+        ///
+        /// </summary>
         /// <param name="name"> The name of the skillset. </param>
         /// <param name="description"> The description of the skillset. </param>
         /// <param name="skills">
@@ -49,13 +57,15 @@ namespace CognitiveSearch.Models
         /// The available derived classes include <see cref="CognitiveServicesAccountKey"/> and <see cref="DefaultCognitiveServicesAccount"/>.
         /// </param>
         /// <param name="eTag"> The ETag of the skillset. </param>
-        internal Skillset(string name, string description, IList<Skill> skills, CognitiveServicesAccount cognitiveServicesAccount, string eTag)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal Skillset(string name, string description, IList<Skill> skills, CognitiveServicesAccount cognitiveServicesAccount, string eTag, Dictionary<string, BinaryData> rawData)
         {
             Name = name;
             Description = description;
             Skills = skills;
             CognitiveServicesAccount = cognitiveServicesAccount;
             ETag = eTag;
+            _rawData = rawData;
         }
 
         /// <summary> The name of the skillset. </summary>

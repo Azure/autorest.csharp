@@ -15,7 +15,12 @@ namespace Azure.AI.FormRecognizer.Models
     /// <summary> A set of extracted fields corresponding to the input document. </summary>
     public partial class DocumentResult
     {
-        /// <summary> Initializes a new instance of DocumentResult. </summary>
+        private Dictionary<string, BinaryData> _rawData;
+
+        /// <summary>
+        /// Initializes a new instance of global::Azure.AI.FormRecognizer.Models.DocumentResult
+        ///
+        /// </summary>
         /// <param name="docType"> Document type. </param>
         /// <param name="pageRange"> First and last page number where the document is found. </param>
         /// <param name="fields"> Dictionary of named field values. </param>
@@ -31,15 +36,20 @@ namespace Azure.AI.FormRecognizer.Models
             Fields = fields;
         }
 
-        /// <summary> Initializes a new instance of DocumentResult. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::Azure.AI.FormRecognizer.Models.DocumentResult
+        ///
+        /// </summary>
         /// <param name="docType"> Document type. </param>
         /// <param name="pageRange"> First and last page number where the document is found. </param>
         /// <param name="fields"> Dictionary of named field values. </param>
-        internal DocumentResult(string docType, IReadOnlyList<int> pageRange, IReadOnlyDictionary<string, FieldValue> fields)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal DocumentResult(string docType, IReadOnlyList<int> pageRange, IReadOnlyDictionary<string, FieldValue> fields, Dictionary<string, BinaryData> rawData)
         {
             DocType = docType;
             PageRange = pageRange;
             Fields = fields;
+            _rawData = rawData;
         }
 
         /// <summary> Document type. </summary>

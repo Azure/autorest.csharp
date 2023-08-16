@@ -12,55 +12,57 @@ using Azure.Core.Serialization;
 
 namespace CognitiveSearch.Models
 {
-    internal partial class UnknownCharFilter : IUtf8JsonSerializable, IJsonModelSerializable
+    internal partial class UnknownCharFilter : IUtf8JsonSerializable, IModelJsonSerializable<CharFilter>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModelSerializable)this).Serialize(writer, ModelSerializerOptions.AzureServiceDefault);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<CharFilter>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
 
-        void IJsonModelSerializable.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
+        void IModelJsonSerializable<CharFilter>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
             writer.WriteStartObject();
             writer.WritePropertyName("@odata.type"u8);
             writer.WriteStringValue(OdataType);
             writer.WritePropertyName("name"u8);
             writer.WriteStringValue(Name);
+            if (_rawData is not null && options.Format == ModelSerializerFormat.Json)
+            {
+                foreach (var property in _rawData)
+                {
+                    writer.WritePropertyName(property.Key);
+#if NET6_0_OR_GREATER
+				writer.WriteRawValue(property.Value);
+#else
+                    JsonSerializer.Serialize(writer, JsonDocument.Parse(property.Value.ToString()).RootElement);
+#endif
+                }
+            }
             writer.WriteEndObject();
         }
 
-        object IModelSerializable.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            using var doc = JsonDocument.Parse(data);
-            return DeserializeUnknownCharFilter(doc.RootElement, options);
-        }
+        internal static CharFilter DeserializeUnknownCharFilter(JsonElement element, ModelSerializerOptions options = default) => DeserializeCharFilter(element, options);
 
-        internal static UnknownCharFilter DeserializeUnknownCharFilter(JsonElement element, ModelSerializerOptions options = default)
+        CharFilter IModelJsonSerializable<CharFilter>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
         {
-            options ??= ModelSerializerOptions.AzureServiceDefault;
-            if (element.ValueKind == JsonValueKind.Null)
-            {
-                return null;
-            }
-            string odataType = "Unknown";
-            string name = default;
-            foreach (var property in element.EnumerateObject())
-            {
-                if (property.NameEquals("@odata.type"u8))
-                {
-                    odataType = property.Value.GetString();
-                    continue;
-                }
-                if (property.NameEquals("name"u8))
-                {
-                    name = property.Value.GetString();
-                    continue;
-                }
-            }
-            return new UnknownCharFilter(odataType, name);
-        }
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
 
-        object IJsonModelSerializable.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
-        {
             using var doc = JsonDocument.ParseValue(ref reader);
             return DeserializeUnknownCharFilter(doc.RootElement, options);
+        }
+
+        BinaryData IModelSerializable<CharFilter>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        CharFilter IModelSerializable<CharFilter>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using var doc = JsonDocument.Parse(data);
+            return DeserializeCharFilter(doc.RootElement, options);
         }
     }
 }

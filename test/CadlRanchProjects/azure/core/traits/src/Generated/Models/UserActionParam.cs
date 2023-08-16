@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
 using Azure.Core;
 
 namespace _Specs_.Azure.Core.Traits.Models
@@ -13,6 +14,8 @@ namespace _Specs_.Azure.Core.Traits.Models
     /// <summary> User action param. </summary>
     public partial class UserActionParam
     {
+        private Dictionary<string, BinaryData> _rawData;
+
         /// <summary> Initializes a new instance of UserActionParam. </summary>
         /// <param name="userActionValue"> User action value. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="userActionValue"/> is null. </exception>
@@ -21,6 +24,15 @@ namespace _Specs_.Azure.Core.Traits.Models
             Argument.AssertNotNull(userActionValue, nameof(userActionValue));
 
             UserActionValue = userActionValue;
+        }
+
+        /// <summary> Initializes a new instance of UserActionParam. </summary>
+        /// <param name="userActionValue"> User action value. </param>
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal UserActionParam(string userActionValue, Dictionary<string, BinaryData> rawData)
+        {
+            UserActionValue = userActionValue;
+            _rawData = rawData;
         }
 
         /// <summary> User action value. </summary>

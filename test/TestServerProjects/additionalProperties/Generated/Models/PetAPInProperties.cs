@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Collections.Generic;
 using Azure.Core;
 
@@ -13,7 +14,12 @@ namespace additionalProperties.Models
     /// <summary> The PetAPInProperties. </summary>
     public partial class PetAPInProperties
     {
-        /// <summary> Initializes a new instance of PetAPInProperties. </summary>
+        private Dictionary<string, BinaryData> _rawData;
+
+        /// <summary>
+        /// Initializes a new instance of global::additionalProperties.Models.PetAPInProperties
+        ///
+        /// </summary>
         /// <param name="id"></param>
         public PetAPInProperties(int id)
         {
@@ -21,17 +27,22 @@ namespace additionalProperties.Models
             AdditionalProperties = new ChangeTrackingDictionary<string, float>();
         }
 
-        /// <summary> Initializes a new instance of PetAPInProperties. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::additionalProperties.Models.PetAPInProperties
+        ///
+        /// </summary>
         /// <param name="id"></param>
         /// <param name="name"></param>
         /// <param name="status"></param>
         /// <param name="additionalProperties"> Dictionary of &lt;number&gt;. </param>
-        internal PetAPInProperties(int id, string name, bool? status, IDictionary<string, float> additionalProperties)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal PetAPInProperties(int id, string name, bool? status, IDictionary<string, float> additionalProperties, Dictionary<string, BinaryData> rawData)
         {
             Id = id;
             Name = name;
             Status = status;
             AdditionalProperties = additionalProperties;
+            _rawData = rawData;
         }
 
         /// <summary> Gets or sets the id. </summary>

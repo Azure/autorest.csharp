@@ -6,18 +6,18 @@
 #nullable disable
 
 using System;
+using System.IO;
 using System.Xml;
 using System.Xml.Linq;
+using Azure;
 using Azure.Core;
 using Azure.Core.Serialization;
 
 namespace xml_service.Models
 {
-    public partial class ContainerProperties : IXmlSerializable, IXmlModelSerializable
+    public partial class ContainerProperties : IXmlSerializable, IModelSerializable<ContainerProperties>
     {
-        void IXmlModelSerializable.Serialize(XmlWriter writer, ModelSerializerOptions options) => ((IXmlSerializable)this).Write(writer, null, options);
-
-        void IXmlSerializable.Write(XmlWriter writer, string nameHint, ModelSerializerOptions options)
+        private void Serialize(XmlWriter writer, string nameHint, ModelSerializerOptions options)
         {
             writer.WriteStartElement("ContainerProperties");
             writer.WriteStartElement("Last-Modified");
@@ -53,14 +53,11 @@ namespace xml_service.Models
             writer.WriteEndElement();
         }
 
-        object IModelSerializable.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            return DeserializeContainerProperties(XElement.Load(data.ToStream()), options);
-        }
+        void IXmlSerializable.Write(XmlWriter writer, string nameHint) => Serialize(writer, nameHint, ModelSerializerOptions.DefaultWireOptions);
 
         internal static ContainerProperties DeserializeContainerProperties(XElement element, ModelSerializerOptions options = default)
         {
-            options ??= ModelSerializerOptions.AzureServiceDefault;
+            options ??= ModelSerializerOptions.DefaultWireOptions;
             DateTimeOffset lastModified = default;
             string etag = default;
             LeaseStatusType? leaseStatus = default;
@@ -91,7 +88,53 @@ namespace xml_service.Models
             {
                 publicAccess = new PublicAccessType(publicAccessElement.Value);
             }
-            return new ContainerProperties(lastModified, etag, leaseStatus, leaseState, leaseDuration, publicAccess);
+            return new ContainerProperties(lastModified, etag, leaseStatus, leaseState, leaseDuration, publicAccess, default);
+        }
+
+        BinaryData IModelSerializable<ContainerProperties>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            options ??= ModelSerializerOptions.DefaultWireOptions;
+            using MemoryStream stream = new MemoryStream();
+            using XmlWriter writer = XmlWriter.Create(stream);
+            Serialize(writer, null, options);
+            writer.Flush();
+            if (stream.Position > int.MaxValue)
+            {
+                return BinaryData.FromStream(stream);
+            }
+            else
+            {
+                return new BinaryData(stream.GetBuffer().AsMemory(0, (int)stream.Position));
+            }
+        }
+
+        ContainerProperties IModelSerializable<ContainerProperties>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            return DeserializeContainerProperties(XElement.Load(data.ToStream()), options);
+        }
+
+        public static implicit operator RequestContent(ContainerProperties model)
+        {
+            if (model is null)
+            {
+                return null;
+            }
+
+            return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
+        }
+
+        public static explicit operator ContainerProperties(Response response)
+        {
+            if (response is null)
+            {
+                return null;
+            }
+
+            return DeserializeContainerProperties(XElement.Load(response.ContentStream), ModelSerializerOptions.DefaultWireOptions);
         }
     }
 }

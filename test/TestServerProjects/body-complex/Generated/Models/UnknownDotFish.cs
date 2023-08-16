@@ -5,15 +5,22 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
+
 namespace body_complex.Models
 {
     /// <summary> The UnknownDotFish. </summary>
     internal partial class UnknownDotFish : DotFish
     {
-        /// <summary> Initializes a new instance of UnknownDotFish. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::body_complex.Models.UnknownDotFish
+        ///
+        /// </summary>
         /// <param name="fishType"></param>
         /// <param name="species"></param>
-        internal UnknownDotFish(string fishType, string species) : base(fishType, species)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal UnknownDotFish(string fishType, string species, Dictionary<string, BinaryData> rawData) : base(fishType, species, rawData)
         {
             FishType = fishType ?? "Unknown";
         }

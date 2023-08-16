@@ -5,6 +5,8 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
 using Azure.Core;
 
 namespace MgmtExactMatchInheritance.Models
@@ -12,17 +14,24 @@ namespace MgmtExactMatchInheritance.Models
     /// <summary> The ExactMatchModel3. </summary>
     public partial class ExactMatchModel3 : ExactMatchModel8
     {
-        /// <summary> Initializes a new instance of ExactMatchModel3. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::MgmtExactMatchInheritance.Models.ExactMatchModel3
+        ///
+        /// </summary>
         public ExactMatchModel3()
         {
         }
 
-        /// <summary> Initializes a new instance of ExactMatchModel3. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::MgmtExactMatchInheritance.Models.ExactMatchModel3
+        ///
+        /// </summary>
         /// <param name="id"></param>
         /// <param name="name"></param>
         /// <param name="bar"></param>
         /// <param name="new"></param>
-        internal ExactMatchModel3(ResourceIdentifier id, string name, string bar, string @new) : base(id, name, bar)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal ExactMatchModel3(ResourceIdentifier id, string name, string bar, string @new, Dictionary<string, BinaryData> rawData) : base(id, name, bar, rawData)
         {
             New = @new;
         }

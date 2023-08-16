@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Collections.Generic;
 using Azure.Core;
 using MgmtCustomizations;
@@ -14,17 +15,27 @@ namespace MgmtCustomizations.Models
     /// <summary> The list result of the rules. </summary>
     internal partial class PetStoreListResult
     {
-        /// <summary> Initializes a new instance of PetStoreListResult. </summary>
+        private Dictionary<string, BinaryData> _rawData;
+
+        /// <summary>
+        /// Initializes a new instance of global::MgmtCustomizations.Models.PetStoreListResult
+        ///
+        /// </summary>
         internal PetStoreListResult()
         {
             Value = new ChangeTrackingList<PetStoreData>();
         }
 
-        /// <summary> Initializes a new instance of PetStoreListResult. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::MgmtCustomizations.Models.PetStoreListResult
+        ///
+        /// </summary>
         /// <param name="value"> The values. </param>
-        internal PetStoreListResult(IReadOnlyList<PetStoreData> value)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal PetStoreListResult(IReadOnlyList<PetStoreData> value, Dictionary<string, BinaryData> rawData)
         {
             Value = value;
+            _rawData = rawData;
         }
 
         /// <summary> The values. </summary>

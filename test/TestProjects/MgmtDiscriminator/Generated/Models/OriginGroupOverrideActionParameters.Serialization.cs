@@ -6,41 +6,53 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
 using System.Text.Json;
+using Azure;
 using Azure.Core;
 using Azure.Core.Serialization;
 using Azure.ResourceManager.Resources.Models;
 
 namespace MgmtDiscriminator.Models
 {
-    public partial class OriginGroupOverrideActionParameters : IUtf8JsonSerializable, IJsonModelSerializable
+    public partial class OriginGroupOverrideActionParameters : IUtf8JsonSerializable, IModelJsonSerializable<OriginGroupOverrideActionParameters>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModelSerializable)this).Serialize(writer, ModelSerializerOptions.AzureServiceDefault);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<OriginGroupOverrideActionParameters>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
 
-        void IJsonModelSerializable.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
+        void IModelJsonSerializable<OriginGroupOverrideActionParameters>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
             writer.WriteStartObject();
             writer.WritePropertyName("typeName"u8);
             writer.WriteStringValue(TypeName.ToString());
             writer.WritePropertyName("originGroup"u8);
-            JsonSerializer.Serialize(writer, OriginGroup); writer.WriteEndObject();
-        }
-
-        object IModelSerializable.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            using var doc = JsonDocument.Parse(data);
-            return DeserializeOriginGroupOverrideActionParameters(doc.RootElement, options);
+            JsonSerializer.Serialize(writer, OriginGroup); if (_rawData is not null && options.Format == ModelSerializerFormat.Json)
+            {
+                foreach (var property in _rawData)
+                {
+                    writer.WritePropertyName(property.Key);
+#if NET6_0_OR_GREATER
+				writer.WriteRawValue(property.Value);
+#else
+                    JsonSerializer.Serialize(writer, JsonDocument.Parse(property.Value.ToString()).RootElement);
+#endif
+                }
+            }
+            writer.WriteEndObject();
         }
 
         internal static OriginGroupOverrideActionParameters DeserializeOriginGroupOverrideActionParameters(JsonElement element, ModelSerializerOptions options = default)
         {
-            options ??= ModelSerializerOptions.AzureServiceDefault;
+            options ??= ModelSerializerOptions.DefaultWireOptions;
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
             }
             OriginGroupOverrideActionParametersTypeName typeName = default;
             WritableSubResource originGroup = default;
+            Dictionary<string, BinaryData> rawData = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("typeName"u8))
@@ -53,14 +65,57 @@ namespace MgmtDiscriminator.Models
                     originGroup = JsonSerializer.Deserialize<WritableSubResource>(property.Value.GetRawText());
                     continue;
                 }
+                if (options.Format == ModelSerializerFormat.Json)
+                {
+                    rawData.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
+                    continue;
+                }
             }
-            return new OriginGroupOverrideActionParameters(typeName, originGroup);
+            return new OriginGroupOverrideActionParameters(typeName, originGroup, rawData);
         }
 
-        object IJsonModelSerializable.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        OriginGroupOverrideActionParameters IModelJsonSerializable<OriginGroupOverrideActionParameters>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
         {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
             using var doc = JsonDocument.ParseValue(ref reader);
             return DeserializeOriginGroupOverrideActionParameters(doc.RootElement, options);
+        }
+
+        BinaryData IModelSerializable<OriginGroupOverrideActionParameters>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        OriginGroupOverrideActionParameters IModelSerializable<OriginGroupOverrideActionParameters>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using var doc = JsonDocument.Parse(data);
+            return DeserializeOriginGroupOverrideActionParameters(doc.RootElement, options);
+        }
+
+        public static implicit operator RequestContent(OriginGroupOverrideActionParameters model)
+        {
+            if (model is null)
+            {
+                return null;
+            }
+
+            return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
+        }
+
+        public static explicit operator OriginGroupOverrideActionParameters(Response response)
+        {
+            if (response is null)
+            {
+                return null;
+            }
+
+            using JsonDocument doc = JsonDocument.Parse(response.ContentStream);
+            return DeserializeOriginGroupOverrideActionParameters(doc.RootElement, ModelSerializerOptions.DefaultWireOptions);
         }
     }
 }

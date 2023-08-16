@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Collections.Generic;
 using Azure.Core;
 
@@ -13,6 +14,8 @@ namespace _Type.Property.Optional.Models
     /// <summary> Model with collection models properties. </summary>
     public partial class CollectionsModelProperty
     {
+        private Dictionary<string, BinaryData> _rawData;
+
         /// <summary> Initializes a new instance of CollectionsModelProperty. </summary>
         public CollectionsModelProperty()
         {
@@ -21,9 +24,11 @@ namespace _Type.Property.Optional.Models
 
         /// <summary> Initializes a new instance of CollectionsModelProperty. </summary>
         /// <param name="property"> Property. </param>
-        internal CollectionsModelProperty(IList<StringProperty> property)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal CollectionsModelProperty(IList<StringProperty> property, Dictionary<string, BinaryData> rawData)
         {
             Property = property;
+            _rawData = rawData;
         }
 
         /// <summary> Property. </summary>

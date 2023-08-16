@@ -8,6 +8,7 @@
 using System;
 using System.Collections.Generic;
 using System.Text.Json;
+using Azure;
 using Azure.Core;
 using Azure.Core.Serialization;
 using Azure.ResourceManager.Models;
@@ -15,12 +16,14 @@ using Azure.ResourceManager.Resources.Models;
 
 namespace MgmtRenameRules.Models
 {
-    public partial class VirtualMachineScaleSetPatch : IUtf8JsonSerializable, IJsonModelSerializable
+    public partial class VirtualMachineScaleSetPatch : IUtf8JsonSerializable, IModelJsonSerializable<VirtualMachineScaleSetPatch>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModelSerializable)this).Serialize(writer, ModelSerializerOptions.AzureServiceDefault);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<VirtualMachineScaleSetPatch>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
 
-        void IJsonModelSerializable.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
+        void IModelJsonSerializable<VirtualMachineScaleSetPatch>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
+            ModelSerializerHelper.ValidateFormat<VirtualMachineScaleSetPatch>(this, options.Format);
+
             writer.WriteStartObject();
             if (Optional.IsDefined(Sku))
             {
@@ -96,18 +99,25 @@ namespace MgmtRenameRules.Models
                 JsonSerializer.Serialize(writer, ProximityPlacementGroup);
             }
             writer.WriteEndObject();
+            if (_rawData is not null && options.Format == ModelSerializerFormat.Json)
+            {
+                foreach (var property in _rawData)
+                {
+                    writer.WritePropertyName(property.Key);
+#if NET6_0_OR_GREATER
+				writer.WriteRawValue(property.Value);
+#else
+                    JsonSerializer.Serialize(writer, JsonDocument.Parse(property.Value.ToString()).RootElement);
+#endif
+                }
+            }
             writer.WriteEndObject();
-        }
-
-        object IModelSerializable.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            using var doc = JsonDocument.Parse(data);
-            return DeserializeVirtualMachineScaleSetPatch(doc.RootElement, options);
         }
 
         internal static VirtualMachineScaleSetPatch DeserializeVirtualMachineScaleSetPatch(JsonElement element, ModelSerializerOptions options = default)
         {
-            options ??= ModelSerializerOptions.AzureServiceDefault;
+            options ??= ModelSerializerOptions.DefaultWireOptions;
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
@@ -125,6 +135,7 @@ namespace MgmtRenameRules.Models
             Optional<AdditionalCapabilities> additionalCapabilities = default;
             Optional<ScaleInPolicy> scaleInPolicy = default;
             Optional<WritableSubResource> proximityPlacementGroup = default;
+            Dictionary<string, BinaryData> rawData = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("sku"u8))
@@ -261,14 +272,57 @@ namespace MgmtRenameRules.Models
                     }
                     continue;
                 }
+                if (options.Format == ModelSerializerFormat.Json)
+                {
+                    rawData.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
+                    continue;
+                }
             }
-            return new VirtualMachineScaleSetPatch(Optional.ToDictionary(tags), sku.Value, plan.Value, identity, upgradePolicy.Value, automaticRepairsPolicy.Value, virtualMachineProfile.Value, Optional.ToNullable(overprovision), Optional.ToNullable(doNotRunExtensionsOnOverprovisionedVms), Optional.ToNullable(singlePlacementGroup), additionalCapabilities.Value, scaleInPolicy.Value, proximityPlacementGroup);
+            return new VirtualMachineScaleSetPatch(Optional.ToDictionary(tags), sku.Value, plan.Value, identity, upgradePolicy.Value, automaticRepairsPolicy.Value, virtualMachineProfile.Value, Optional.ToNullable(overprovision), Optional.ToNullable(doNotRunExtensionsOnOverprovisionedVms), Optional.ToNullable(singlePlacementGroup), additionalCapabilities.Value, scaleInPolicy.Value, proximityPlacementGroup, rawData);
         }
 
-        object IJsonModelSerializable.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        VirtualMachineScaleSetPatch IModelJsonSerializable<VirtualMachineScaleSetPatch>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
         {
+            ModelSerializerHelper.ValidateFormat<VirtualMachineScaleSetPatch>(this, options.Format);
+
             using var doc = JsonDocument.ParseValue(ref reader);
             return DeserializeVirtualMachineScaleSetPatch(doc.RootElement, options);
+        }
+
+        BinaryData IModelSerializable<VirtualMachineScaleSetPatch>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat<VirtualMachineScaleSetPatch>(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        VirtualMachineScaleSetPatch IModelSerializable<VirtualMachineScaleSetPatch>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat<VirtualMachineScaleSetPatch>(this, options.Format);
+
+            using var doc = JsonDocument.Parse(data);
+            return DeserializeVirtualMachineScaleSetPatch(doc.RootElement, options);
+        }
+
+        public static implicit operator RequestContent(VirtualMachineScaleSetPatch model)
+        {
+            if (model is null)
+            {
+                return null;
+            }
+
+            return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
+        }
+
+        public static explicit operator VirtualMachineScaleSetPatch(Response response)
+        {
+            if (response is null)
+            {
+                return null;
+            }
+
+            using JsonDocument doc = JsonDocument.Parse(response.ContentStream);
+            return DeserializeVirtualMachineScaleSetPatch(doc.RootElement, ModelSerializerOptions.DefaultWireOptions);
         }
     }
 }

@@ -18,7 +18,12 @@ namespace Azure.ResourceManager.Sample.Models
     /// </summary>
     public partial class VirtualMachineScaleSetVMInstanceRequiredIDs
     {
-        /// <summary> Initializes a new instance of VirtualMachineScaleSetVMInstanceRequiredIDs. </summary>
+        private Dictionary<string, BinaryData> _rawData;
+
+        /// <summary>
+        /// Initializes a new instance of global::Azure.ResourceManager.Sample.Models.VirtualMachineScaleSetVMInstanceRequiredIDs
+        ///
+        /// </summary>
         /// <param name="instanceIds">
         /// The virtual machine scale set instance ids.
         /// Serialized Name: VirtualMachineScaleSetVMInstanceRequiredIDs.instanceIds
@@ -31,14 +36,19 @@ namespace Azure.ResourceManager.Sample.Models
             InstanceIds = instanceIds.ToList();
         }
 
-        /// <summary> Initializes a new instance of VirtualMachineScaleSetVMInstanceRequiredIDs. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::Azure.ResourceManager.Sample.Models.VirtualMachineScaleSetVMInstanceRequiredIDs
+        ///
+        /// </summary>
         /// <param name="instanceIds">
         /// The virtual machine scale set instance ids.
         /// Serialized Name: VirtualMachineScaleSetVMInstanceRequiredIDs.instanceIds
         /// </param>
-        internal VirtualMachineScaleSetVMInstanceRequiredIDs(IList<string> instanceIds)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal VirtualMachineScaleSetVMInstanceRequiredIDs(IList<string> instanceIds, Dictionary<string, BinaryData> rawData)
         {
             InstanceIds = instanceIds;
+            _rawData = rawData;
         }
 
         /// <summary>

@@ -5,6 +5,8 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
 using Azure.Core;
 using MgmtHierarchicalNonResource.Models;
 
@@ -16,16 +18,23 @@ namespace MgmtHierarchicalNonResource
     /// </summary>
     public partial class SharedGalleryData : PirSharedGalleryResource
     {
-        /// <summary> Initializes a new instance of SharedGalleryData. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::MgmtHierarchicalNonResource.SharedGalleryData
+        ///
+        /// </summary>
         internal SharedGalleryData()
         {
         }
 
-        /// <summary> Initializes a new instance of SharedGalleryData. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::MgmtHierarchicalNonResource.SharedGalleryData
+        ///
+        /// </summary>
         /// <param name="name"> Resource name. </param>
         /// <param name="location"> Resource location. </param>
         /// <param name="uniqueId"> The unique id of this shared gallery. </param>
-        internal SharedGalleryData(string name, string location, string uniqueId) : base(name, location, uniqueId)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal SharedGalleryData(string name, string location, string uniqueId, Dictionary<string, BinaryData> rawData) : base(name, location, uniqueId, rawData)
         {
         }
 

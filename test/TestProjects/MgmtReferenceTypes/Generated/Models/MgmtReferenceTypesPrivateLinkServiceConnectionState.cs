@@ -5,6 +5,8 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
 using Azure.Core;
 
 namespace Azure.ResourceManager.Fake.Models
@@ -13,22 +15,31 @@ namespace Azure.ResourceManager.Fake.Models
     [TypeReferenceType]
     public partial class MgmtReferenceTypesPrivateLinkServiceConnectionState
     {
-        /// <summary> Initializes a new instance of MgmtReferenceTypesPrivateLinkServiceConnectionState. </summary>
+        private Dictionary<string, BinaryData> _rawData;
+
+        /// <summary>
+        /// Initializes a new instance of global::Azure.ResourceManager.Fake.Models.MgmtReferenceTypesPrivateLinkServiceConnectionState
+        ///
+        /// </summary>
         [InitializationConstructor]
         public MgmtReferenceTypesPrivateLinkServiceConnectionState()
         {
         }
 
-        /// <summary> Initializes a new instance of MgmtReferenceTypesPrivateLinkServiceConnectionState. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::Azure.ResourceManager.Fake.Models.MgmtReferenceTypesPrivateLinkServiceConnectionState
+        ///
+        /// </summary>
         /// <param name="status"> Indicates whether the connection has been Approved/Rejected/Removed by the owner of the service. </param>
         /// <param name="description"> The reason for approval/rejection of the connection. </param>
         /// <param name="actionsRequired"> A message indicating if changes on the service provider require any updates on the consumer. </param>
-        [SerializationConstructor]
-        protected MgmtReferenceTypesPrivateLinkServiceConnectionState(MgmtReferenceTypesPrivateEndpointServiceConnectionStatus? status, string description, string actionsRequired)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        protected MgmtReferenceTypesPrivateLinkServiceConnectionState(MgmtReferenceTypesPrivateEndpointServiceConnectionStatus? status, string description, string actionsRequired, Dictionary<string, BinaryData> rawData)
         {
             Status = status;
             Description = description;
             ActionsRequired = actionsRequired;
+            _rawData = rawData;
         }
 
         /// <summary> Indicates whether the connection has been Approved/Rejected/Removed by the owner of the service. </summary>

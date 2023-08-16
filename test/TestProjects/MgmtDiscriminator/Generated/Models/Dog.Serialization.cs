@@ -6,18 +6,22 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
 using System.Text.Json;
+using Azure;
 using Azure.Core;
 using Azure.Core.Serialization;
 
 namespace MgmtDiscriminator.Models
 {
-    public partial class Dog : IUtf8JsonSerializable, IJsonModelSerializable
+    public partial class Dog : IUtf8JsonSerializable, IModelJsonSerializable<Dog>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModelSerializable)this).Serialize(writer, ModelSerializerOptions.AzureServiceDefault);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<Dog>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
 
-        void IJsonModelSerializable.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
+        void IModelJsonSerializable<Dog>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
+            ModelSerializerHelper.ValidateFormat<Dog>(this, options.Format);
+
             writer.WriteStartObject();
             if (Optional.IsDefined(Bark))
             {
@@ -26,18 +30,25 @@ namespace MgmtDiscriminator.Models
             }
             writer.WritePropertyName("kind"u8);
             writer.WriteStringValue(Kind.ToSerialString());
+            if (_rawData is not null && options.Format == ModelSerializerFormat.Json)
+            {
+                foreach (var property in _rawData)
+                {
+                    writer.WritePropertyName(property.Key);
+#if NET6_0_OR_GREATER
+				writer.WriteRawValue(property.Value);
+#else
+                    JsonSerializer.Serialize(writer, JsonDocument.Parse(property.Value.ToString()).RootElement);
+#endif
+                }
+            }
             writer.WriteEndObject();
-        }
-
-        object IModelSerializable.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            using var doc = JsonDocument.Parse(data);
-            return DeserializeDog(doc.RootElement, options);
         }
 
         internal static Dog DeserializeDog(JsonElement element, ModelSerializerOptions options = default)
         {
-            options ??= ModelSerializerOptions.AzureServiceDefault;
+            options ??= ModelSerializerOptions.DefaultWireOptions;
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
@@ -45,6 +56,7 @@ namespace MgmtDiscriminator.Models
             Optional<string> bark = default;
             PetKind kind = default;
             Optional<string> id = default;
+            Dictionary<string, BinaryData> rawData = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("bark"u8))
@@ -62,14 +74,57 @@ namespace MgmtDiscriminator.Models
                     id = property.Value.GetString();
                     continue;
                 }
+                if (options.Format == ModelSerializerFormat.Json)
+                {
+                    rawData.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
+                    continue;
+                }
             }
-            return new Dog(kind, id.Value, bark.Value);
+            return new Dog(kind, id.Value, bark.Value, rawData);
         }
 
-        object IJsonModelSerializable.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        Dog IModelJsonSerializable<Dog>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
         {
+            ModelSerializerHelper.ValidateFormat<Dog>(this, options.Format);
+
             using var doc = JsonDocument.ParseValue(ref reader);
             return DeserializeDog(doc.RootElement, options);
+        }
+
+        BinaryData IModelSerializable<Dog>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat<Dog>(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        Dog IModelSerializable<Dog>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat<Dog>(this, options.Format);
+
+            using var doc = JsonDocument.Parse(data);
+            return DeserializeDog(doc.RootElement, options);
+        }
+
+        public static implicit operator RequestContent(Dog model)
+        {
+            if (model is null)
+            {
+                return null;
+            }
+
+            return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
+        }
+
+        public static explicit operator Dog(Response response)
+        {
+            if (response is null)
+            {
+                return null;
+            }
+
+            using JsonDocument doc = JsonDocument.Parse(response.ContentStream);
+            return DeserializeDog(doc.RootElement, ModelSerializerOptions.DefaultWireOptions);
         }
     }
 }

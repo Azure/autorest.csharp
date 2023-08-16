@@ -5,6 +5,8 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
 using Azure.Core;
 
 namespace Azure.ResourceManager.Fake.Models
@@ -13,22 +15,31 @@ namespace Azure.ResourceManager.Fake.Models
     [ReferenceType]
     public abstract partial class MgmtReferenceTypesResourceData
     {
-        /// <summary> Initializes a new instance of MgmtReferenceTypesResourceData. </summary>
+        protected internal Dictionary<string, BinaryData> _rawData;
+
+        /// <summary>
+        /// Initializes a new instance of global::Azure.ResourceManager.Fake.Models.MgmtReferenceTypesResourceData
+        ///
+        /// </summary>
         [InitializationConstructor]
         protected MgmtReferenceTypesResourceData()
         {
         }
 
-        /// <summary> Initializes a new instance of MgmtReferenceTypesResourceData. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::Azure.ResourceManager.Fake.Models.MgmtReferenceTypesResourceData
+        ///
+        /// </summary>
         /// <param name="id"> Fully qualified resource ID for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}. </param>
         /// <param name="name"> The name of the resource. </param>
         /// <param name="resourceType"> The type of the resource. E.g. "Microsoft.Compute/virtualMachines" or "Microsoft.Storage/storageAccounts". </param>
-        [SerializationConstructor]
-        protected MgmtReferenceTypesResourceData(ResourceIdentifier id, string name, ResourceType resourceType)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        protected MgmtReferenceTypesResourceData(ResourceIdentifier id, string name, ResourceType resourceType, Dictionary<string, BinaryData> rawData)
         {
             Id = id;
             Name = name;
             ResourceType = resourceType;
+            _rawData = rawData;
         }
 
         /// <summary> Fully qualified resource ID for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}. </summary>

@@ -5,16 +5,36 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
+
 namespace Azure.ResourceManager.Storage.Models
 {
     /// <summary> Object to define the number of days after creation. </summary>
     internal partial class DateAfterCreation
     {
-        /// <summary> Initializes a new instance of DateAfterCreation. </summary>
+        private Dictionary<string, BinaryData> _rawData;
+
+        /// <summary>
+        /// Initializes a new instance of global::Azure.ResourceManager.Storage.Models.DateAfterCreation
+        ///
+        /// </summary>
         /// <param name="daysAfterCreationGreaterThan"> Value indicating the age in days after creation. </param>
         public DateAfterCreation(float daysAfterCreationGreaterThan)
         {
             DaysAfterCreationGreaterThan = daysAfterCreationGreaterThan;
+        }
+
+        /// <summary>
+        /// Initializes a new instance of global::Azure.ResourceManager.Storage.Models.DateAfterCreation
+        ///
+        /// </summary>
+        /// <param name="daysAfterCreationGreaterThan"> Value indicating the age in days after creation. </param>
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal DateAfterCreation(float daysAfterCreationGreaterThan, Dictionary<string, BinaryData> rawData)
+        {
+            DaysAfterCreationGreaterThan = daysAfterCreationGreaterThan;
+            _rawData = rawData;
         }
 
         /// <summary> Value indicating the age in days after creation. </summary>

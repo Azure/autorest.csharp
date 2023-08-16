@@ -15,7 +15,12 @@ namespace Azure.ResourceManager.Storage.Models
     /// <summary> The Storage Account ManagementPolicies Rules. See more details in: https://docs.microsoft.com/en-us/azure/storage/common/storage-lifecycle-managment-concepts. </summary>
     internal partial class ManagementPolicySchema
     {
-        /// <summary> Initializes a new instance of ManagementPolicySchema. </summary>
+        private Dictionary<string, BinaryData> _rawData;
+
+        /// <summary>
+        /// Initializes a new instance of global::Azure.ResourceManager.Storage.Models.ManagementPolicySchema
+        ///
+        /// </summary>
         /// <param name="rules"> The Storage Account ManagementPolicies Rules. See more details in: https://docs.microsoft.com/en-us/azure/storage/common/storage-lifecycle-managment-concepts. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="rules"/> is null. </exception>
         public ManagementPolicySchema(IEnumerable<ManagementPolicyRule> rules)
@@ -25,11 +30,16 @@ namespace Azure.ResourceManager.Storage.Models
             Rules = rules.ToList();
         }
 
-        /// <summary> Initializes a new instance of ManagementPolicySchema. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::Azure.ResourceManager.Storage.Models.ManagementPolicySchema
+        ///
+        /// </summary>
         /// <param name="rules"> The Storage Account ManagementPolicies Rules. See more details in: https://docs.microsoft.com/en-us/azure/storage/common/storage-lifecycle-managment-concepts. </param>
-        internal ManagementPolicySchema(IList<ManagementPolicyRule> rules)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal ManagementPolicySchema(IList<ManagementPolicyRule> rules, Dictionary<string, BinaryData> rawData)
         {
             Rules = rules;
+            _rawData = rawData;
         }
 
         /// <summary> The Storage Account ManagementPolicies Rules. See more details in: https://docs.microsoft.com/en-us/azure/storage/common/storage-lifecycle-managment-concepts. </summary>

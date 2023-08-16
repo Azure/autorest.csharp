@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
 using Azure.Core;
 
 namespace CognitiveSearch.Models
@@ -17,7 +18,12 @@ namespace CognitiveSearch.Models
     /// </summary>
     public partial class ScoringFunction
     {
-        /// <summary> Initializes a new instance of ScoringFunction. </summary>
+        protected internal Dictionary<string, BinaryData> _rawData;
+
+        /// <summary>
+        /// Initializes a new instance of global::CognitiveSearch.Models.ScoringFunction
+        ///
+        /// </summary>
         /// <param name="fieldName"> The name of the field used as input to the scoring function. </param>
         /// <param name="boost"> A multiplier for the raw score. Must be a positive number not equal to 1.0. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="fieldName"/> is null. </exception>
@@ -29,17 +35,22 @@ namespace CognitiveSearch.Models
             Boost = boost;
         }
 
-        /// <summary> Initializes a new instance of ScoringFunction. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::CognitiveSearch.Models.ScoringFunction
+        ///
+        /// </summary>
         /// <param name="type"> Indicates the type of function to use. Valid values include magnitude, freshness, distance, and tag. The function type must be lower case. </param>
         /// <param name="fieldName"> The name of the field used as input to the scoring function. </param>
         /// <param name="boost"> A multiplier for the raw score. Must be a positive number not equal to 1.0. </param>
         /// <param name="interpolation"> A value indicating how boosting will be interpolated across document scores; defaults to "Linear". </param>
-        internal ScoringFunction(string type, string fieldName, double boost, ScoringFunctionInterpolation? interpolation)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal ScoringFunction(string type, string fieldName, double boost, ScoringFunctionInterpolation? interpolation, Dictionary<string, BinaryData> rawData)
         {
             Type = type;
             FieldName = fieldName;
             Boost = boost;
             Interpolation = interpolation;
+            _rawData = rawData;
         }
 
         /// <summary> Indicates the type of function to use. Valid values include magnitude, freshness, distance, and tag. The function type must be lower case. </summary>

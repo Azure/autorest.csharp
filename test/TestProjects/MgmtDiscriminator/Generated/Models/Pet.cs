@@ -5,6 +5,10 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
+using Azure.Core.Serialization;
+
 namespace MgmtDiscriminator.Models
 {
     /// <summary>
@@ -12,20 +16,31 @@ namespace MgmtDiscriminator.Models
     /// Please note <see cref="Pet"/> is the base class. According to the scenario, a derived class of the base class might need to be assigned here, or this property needs to be casted to one of the possible derived classes.
     /// The available derived classes include <see cref="Cat"/> and <see cref="Dog"/>.
     /// </summary>
+    [AbstractHierarchyDeserializer(typeof(UnknownPet))]
     public abstract partial class Pet
     {
-        /// <summary> Initializes a new instance of Pet. </summary>
+        protected internal Dictionary<string, BinaryData> _rawData;
+
+        /// <summary>
+        /// Initializes a new instance of global::MgmtDiscriminator.Models.Pet
+        ///
+        /// </summary>
         protected Pet()
         {
         }
 
-        /// <summary> Initializes a new instance of Pet. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::MgmtDiscriminator.Models.Pet
+        ///
+        /// </summary>
         /// <param name="kind"> The kind of the pet. </param>
         /// <param name="id"> The Id of the pet. </param>
-        internal Pet(PetKind kind, string id)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal Pet(PetKind kind, string id, Dictionary<string, BinaryData> rawData)
         {
             Kind = kind;
             Id = id;
+            _rawData = rawData;
         }
 
         /// <summary> The kind of the pet. </summary>

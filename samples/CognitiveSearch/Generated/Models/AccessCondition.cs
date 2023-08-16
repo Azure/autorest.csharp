@@ -5,23 +5,36 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
+
 namespace CognitiveSearch.Models
 {
     /// <summary> Parameter group. </summary>
     public partial class AccessCondition
     {
-        /// <summary> Initializes a new instance of AccessCondition. </summary>
+        private Dictionary<string, BinaryData> _rawData;
+
+        /// <summary>
+        /// Initializes a new instance of global::CognitiveSearch.Models.AccessCondition
+        ///
+        /// </summary>
         public AccessCondition()
         {
         }
 
-        /// <summary> Initializes a new instance of AccessCondition. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::CognitiveSearch.Models.AccessCondition
+        ///
+        /// </summary>
         /// <param name="ifMatch"> Defines the If-Match condition. The operation will be performed only if the ETag on the server matches this value. </param>
         /// <param name="ifNoneMatch"> Defines the If-None-Match condition. The operation will be performed only if the ETag on the server does not match this value. </param>
-        internal AccessCondition(string ifMatch, string ifNoneMatch)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal AccessCondition(string ifMatch, string ifNoneMatch, Dictionary<string, BinaryData> rawData)
         {
             IfMatch = ifMatch;
             IfNoneMatch = ifNoneMatch;
+            _rawData = rawData;
         }
 
         /// <summary> Defines the If-Match condition. The operation will be performed only if the ETag on the server matches this value. </summary>

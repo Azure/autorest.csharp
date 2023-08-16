@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
 using Azure.Core;
 
 namespace SpreadTypeSpec.Models
@@ -13,6 +14,8 @@ namespace SpreadTypeSpec.Models
     /// <summary> The SpreadMultiTargetAliasRequest. </summary>
     internal partial class SpreadMultiTargetAliasRequest
     {
+        private Dictionary<string, BinaryData> _rawData;
+
         /// <summary> Initializes a new instance of SpreadMultiTargetAliasRequest. </summary>
         /// <param name="name"> name of the Thing. </param>
         /// <param name="age"> age of the Thing. </param>
@@ -23,6 +26,17 @@ namespace SpreadTypeSpec.Models
 
             Name = name;
             Age = age;
+        }
+
+        /// <summary> Initializes a new instance of SpreadMultiTargetAliasRequest. </summary>
+        /// <param name="name"> name of the Thing. </param>
+        /// <param name="age"> age of the Thing. </param>
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal SpreadMultiTargetAliasRequest(string name, int age, Dictionary<string, BinaryData> rawData)
+        {
+            Name = name;
+            Age = age;
+            _rawData = rawData;
         }
 
         /// <summary> name of the Thing. </summary>

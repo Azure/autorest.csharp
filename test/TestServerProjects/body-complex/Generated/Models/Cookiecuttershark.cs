@@ -13,7 +13,10 @@ namespace body_complex.Models
     /// <summary> The Cookiecuttershark. </summary>
     public partial class Cookiecuttershark : Shark
     {
-        /// <summary> Initializes a new instance of Cookiecuttershark. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::body_complex.Models.Cookiecuttershark
+        ///
+        /// </summary>
         /// <param name="length"></param>
         /// <param name="birthday"></param>
         public Cookiecuttershark(float length, DateTimeOffset birthday) : base(length, birthday)
@@ -21,7 +24,10 @@ namespace body_complex.Models
             Fishtype = "cookiecuttershark";
         }
 
-        /// <summary> Initializes a new instance of Cookiecuttershark. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::body_complex.Models.Cookiecuttershark
+        ///
+        /// </summary>
         /// <param name="fishtype"></param>
         /// <param name="species"></param>
         /// <param name="length"></param>
@@ -31,7 +37,8 @@ namespace body_complex.Models
         /// </param>
         /// <param name="age"></param>
         /// <param name="birthday"></param>
-        internal Cookiecuttershark(string fishtype, string species, float length, IList<Fish> siblings, int? age, DateTimeOffset birthday) : base(fishtype, species, length, siblings, age, birthday)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal Cookiecuttershark(string fishtype, string species, float length, IList<Fish> siblings, int? age, DateTimeOffset birthday, Dictionary<string, BinaryData> rawData) : base(fishtype, species, length, siblings, age, birthday, rawData)
         {
             Fishtype = fishtype ?? "cookiecuttershark";
         }

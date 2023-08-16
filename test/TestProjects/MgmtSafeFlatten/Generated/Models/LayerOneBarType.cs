@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
 using Azure.Core;
 
 namespace MgmtSafeFlatten.Models
@@ -13,7 +14,10 @@ namespace MgmtSafeFlatten.Models
     /// <summary> The LayerOneBarType. </summary>
     public partial class LayerOneBarType : LayerOneBaseType
     {
-        /// <summary> Initializes a new instance of LayerOneBarType. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::MgmtSafeFlatten.Models.LayerOneBarType
+        ///
+        /// </summary>
         /// <param name="parameters"> Defines the parameters for the type. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="parameters"/> is null. </exception>
         public LayerOneBarType(string parameters)
@@ -24,10 +28,14 @@ namespace MgmtSafeFlatten.Models
             Name = LayerOneTypeName.LayerOneBar;
         }
 
-        /// <summary> Initializes a new instance of LayerOneBarType. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::MgmtSafeFlatten.Models.LayerOneBarType
+        ///
+        /// </summary>
         /// <param name="name"></param>
         /// <param name="parameters"> Defines the parameters for the type. </param>
-        internal LayerOneBarType(LayerOneTypeName name, string parameters) : base(name)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal LayerOneBarType(LayerOneTypeName name, string parameters, Dictionary<string, BinaryData> rawData) : base(name, rawData)
         {
             Parameters = parameters;
             Name = name;

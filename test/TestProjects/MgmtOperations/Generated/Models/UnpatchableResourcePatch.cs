@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Collections.Generic;
 using Azure.Core;
 
@@ -13,17 +14,27 @@ namespace MgmtOperations.Models
     /// <summary> The update content of unpatchable resource. </summary>
     public partial class UnpatchableResourcePatch
     {
-        /// <summary> Initializes a new instance of UnpatchableResourcePatch. </summary>
+        private Dictionary<string, BinaryData> _rawData;
+
+        /// <summary>
+        /// Initializes a new instance of global::MgmtOperations.Models.UnpatchableResourcePatch
+        ///
+        /// </summary>
         public UnpatchableResourcePatch()
         {
             Tags = new ChangeTrackingDictionary<string, string>();
         }
 
-        /// <summary> Initializes a new instance of UnpatchableResourcePatch. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::MgmtOperations.Models.UnpatchableResourcePatch
+        ///
+        /// </summary>
         /// <param name="tags"> Resource tags. </param>
-        internal UnpatchableResourcePatch(IDictionary<string, string> tags)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal UnpatchableResourcePatch(IDictionary<string, string> tags, Dictionary<string, BinaryData> rawData)
         {
             Tags = tags;
+            _rawData = rawData;
         }
 
         /// <summary> Resource tags. </summary>

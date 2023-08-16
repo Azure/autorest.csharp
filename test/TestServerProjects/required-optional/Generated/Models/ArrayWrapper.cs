@@ -15,7 +15,12 @@ namespace required_optional.Models
     /// <summary> The ArrayWrapper. </summary>
     public partial class ArrayWrapper
     {
-        /// <summary> Initializes a new instance of ArrayWrapper. </summary>
+        private Dictionary<string, BinaryData> _rawData;
+
+        /// <summary>
+        /// Initializes a new instance of global::required_optional.Models.ArrayWrapper
+        ///
+        /// </summary>
         /// <param name="value"></param>
         /// <exception cref="ArgumentNullException"> <paramref name="value"/> is null. </exception>
         public ArrayWrapper(IEnumerable<string> value)
@@ -25,11 +30,16 @@ namespace required_optional.Models
             Value = value.ToList();
         }
 
-        /// <summary> Initializes a new instance of ArrayWrapper. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::required_optional.Models.ArrayWrapper
+        ///
+        /// </summary>
         /// <param name="value"></param>
-        internal ArrayWrapper(IList<string> value)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal ArrayWrapper(IList<string> value, Dictionary<string, BinaryData> rawData)
         {
             Value = value;
+            _rawData = rawData;
         }
 
         /// <summary> Gets the value. </summary>

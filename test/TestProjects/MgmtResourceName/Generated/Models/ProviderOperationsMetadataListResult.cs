@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Collections.Generic;
 using Azure.Core;
 using MgmtResourceName;
@@ -14,19 +15,29 @@ namespace MgmtResourceName.Models
     /// <summary> Provider operations metadata list. </summary>
     internal partial class ProviderOperationsMetadataListResult
     {
-        /// <summary> Initializes a new instance of ProviderOperationsMetadataListResult. </summary>
+        private Dictionary<string, BinaryData> _rawData;
+
+        /// <summary>
+        /// Initializes a new instance of global::MgmtResourceName.Models.ProviderOperationsMetadataListResult
+        ///
+        /// </summary>
         internal ProviderOperationsMetadataListResult()
         {
             Value = new ChangeTrackingList<ProviderOperationData>();
         }
 
-        /// <summary> Initializes a new instance of ProviderOperationsMetadataListResult. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::MgmtResourceName.Models.ProviderOperationsMetadataListResult
+        ///
+        /// </summary>
         /// <param name="value"> The list of providers. </param>
         /// <param name="nextLink"> The URL to use for getting the next set of results. </param>
-        internal ProviderOperationsMetadataListResult(IReadOnlyList<ProviderOperationData> value, string nextLink)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal ProviderOperationsMetadataListResult(IReadOnlyList<ProviderOperationData> value, string nextLink, Dictionary<string, BinaryData> rawData)
         {
             Value = value;
             NextLink = nextLink;
+            _rawData = rawData;
         }
 
         /// <summary> The list of providers. </summary>

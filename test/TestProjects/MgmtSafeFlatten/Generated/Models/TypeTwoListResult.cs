@@ -16,7 +16,12 @@ namespace MgmtSafeFlatten.Models
     /// <summary> The TypeTwoListResult. </summary>
     internal partial class TypeTwoListResult
     {
-        /// <summary> Initializes a new instance of TypeTwoListResult. </summary>
+        private Dictionary<string, BinaryData> _rawData;
+
+        /// <summary>
+        /// Initializes a new instance of global::MgmtSafeFlatten.Models.TypeTwoListResult
+        ///
+        /// </summary>
         /// <param name="value"> The list of of type twos. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="value"/> is null. </exception>
         internal TypeTwoListResult(IEnumerable<TypeTwoData> value)
@@ -26,13 +31,18 @@ namespace MgmtSafeFlatten.Models
             Value = value.ToList();
         }
 
-        /// <summary> Initializes a new instance of TypeTwoListResult. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::MgmtSafeFlatten.Models.TypeTwoListResult
+        ///
+        /// </summary>
         /// <param name="value"> The list of of type twos. </param>
         /// <param name="nextLink"> The uri to fetch the next page of Virtual Machine Scale Set VMs. Call ListNext() with this to fetch the next page of VMSS VMs. </param>
-        internal TypeTwoListResult(IReadOnlyList<TypeTwoData> value, string nextLink)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal TypeTwoListResult(IReadOnlyList<TypeTwoData> value, string nextLink, Dictionary<string, BinaryData> rawData)
         {
             Value = value;
             NextLink = nextLink;
+            _rawData = rawData;
         }
 
         /// <summary> The list of of type twos. </summary>

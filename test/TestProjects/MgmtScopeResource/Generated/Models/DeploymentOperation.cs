@@ -5,25 +5,38 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
+
 namespace MgmtScopeResource.Models
 {
     /// <summary> Deployment operation information. </summary>
     public partial class DeploymentOperation
     {
-        /// <summary> Initializes a new instance of DeploymentOperation. </summary>
+        private Dictionary<string, BinaryData> _rawData;
+
+        /// <summary>
+        /// Initializes a new instance of global::MgmtScopeResource.Models.DeploymentOperation
+        ///
+        /// </summary>
         internal DeploymentOperation()
         {
         }
 
-        /// <summary> Initializes a new instance of DeploymentOperation. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::MgmtScopeResource.Models.DeploymentOperation
+        ///
+        /// </summary>
         /// <param name="id"> Full deployment operation ID. </param>
         /// <param name="operationId"> Deployment operation ID. </param>
         /// <param name="properties"> Deployment properties. </param>
-        internal DeploymentOperation(string id, string operationId, DeploymentOperationProperties properties)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal DeploymentOperation(string id, string operationId, DeploymentOperationProperties properties, Dictionary<string, BinaryData> rawData)
         {
             Id = id;
             OperationId = operationId;
             Properties = properties;
+            _rawData = rawData;
         }
 
         /// <summary> Full deployment operation ID. </summary>

@@ -5,23 +5,36 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
+
 namespace body_array.Models
 {
     /// <summary> The Product. </summary>
     public partial class Product
     {
-        /// <summary> Initializes a new instance of Product. </summary>
+        private Dictionary<string, BinaryData> _rawData;
+
+        /// <summary>
+        /// Initializes a new instance of global::body_array.Models.Product
+        ///
+        /// </summary>
         public Product()
         {
         }
 
-        /// <summary> Initializes a new instance of Product. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::body_array.Models.Product
+        ///
+        /// </summary>
         /// <param name="integer"></param>
         /// <param name="string"></param>
-        internal Product(int? integer, string @string)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal Product(int? integer, string @string, Dictionary<string, BinaryData> rawData)
         {
             Integer = integer;
             String = @string;
+            _rawData = rawData;
         }
 
         /// <summary> Gets or sets the integer. </summary>

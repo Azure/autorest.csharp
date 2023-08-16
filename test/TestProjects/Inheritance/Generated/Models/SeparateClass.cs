@@ -5,26 +5,39 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
+
 namespace Inheritance.Models
 {
     /// <summary> The SeparateClass. </summary>
     public partial class SeparateClass
     {
-        /// <summary> Initializes a new instance of SeparateClass. </summary>
+        private Dictionary<string, BinaryData> _rawData;
+
+        /// <summary>
+        /// Initializes a new instance of global::Inheritance.Models.SeparateClass
+        ///
+        /// </summary>
         public SeparateClass()
         {
         }
 
-        /// <summary> Initializes a new instance of SeparateClass. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::Inheritance.Models.SeparateClass
+        ///
+        /// </summary>
         /// <param name="stringProperty"></param>
         /// <param name="modelProperty">
         /// Please note <see cref="BaseClassWithExtensibleEnumDiscriminator"/> is the base class. According to the scenario, a derived class of the base class might need to be assigned here, or this property needs to be casted to one of the possible derived classes.
         /// The available derived classes include <see cref="DerivedClassWithExtensibleEnumDiscriminator"/> and <see cref="AnotherDerivedClassWithExtensibleEnumDiscriminator"/>.
         /// </param>
-        internal SeparateClass(string stringProperty, BaseClassWithExtensibleEnumDiscriminator modelProperty)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal SeparateClass(string stringProperty, BaseClassWithExtensibleEnumDiscriminator modelProperty, Dictionary<string, BinaryData> rawData)
         {
             StringProperty = stringProperty;
             ModelProperty = modelProperty;
+            _rawData = rawData;
         }
 
         /// <summary> Gets or sets the string property. </summary>

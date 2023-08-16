@@ -5,23 +5,33 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
+
 namespace body_complex.Models
 {
     /// <summary> The DotSalmon. </summary>
     public partial class DotSalmon : DotFish
     {
-        /// <summary> Initializes a new instance of DotSalmon. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::body_complex.Models.DotSalmon
+        ///
+        /// </summary>
         internal DotSalmon()
         {
             FishType = "DotSalmon";
         }
 
-        /// <summary> Initializes a new instance of DotSalmon. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::body_complex.Models.DotSalmon
+        ///
+        /// </summary>
         /// <param name="fishType"></param>
         /// <param name="species"></param>
         /// <param name="location"></param>
         /// <param name="iswild"></param>
-        internal DotSalmon(string fishType, string species, string location, bool? iswild) : base(fishType, species)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal DotSalmon(string fishType, string species, string location, bool? iswild, Dictionary<string, BinaryData> rawData) : base(fishType, species, rawData)
         {
             Location = location;
             Iswild = iswild;

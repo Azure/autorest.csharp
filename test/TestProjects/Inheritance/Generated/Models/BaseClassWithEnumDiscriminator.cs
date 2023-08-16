@@ -5,6 +5,9 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
+
 namespace Inheritance.Models
 {
     /// <summary>
@@ -14,16 +17,26 @@ namespace Inheritance.Models
     /// </summary>
     internal abstract partial class BaseClassWithEnumDiscriminator
     {
-        /// <summary> Initializes a new instance of BaseClassWithEnumDiscriminator. </summary>
+        protected internal Dictionary<string, BinaryData> _rawData;
+
+        /// <summary>
+        /// Initializes a new instance of global::Inheritance.Models.BaseClassWithEnumDiscriminator
+        ///
+        /// </summary>
         protected BaseClassWithEnumDiscriminator()
         {
         }
 
-        /// <summary> Initializes a new instance of BaseClassWithEnumDiscriminator. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::Inheritance.Models.BaseClassWithEnumDiscriminator
+        ///
+        /// </summary>
         /// <param name="discriminatorProperty"></param>
-        internal BaseClassWithEnumDiscriminator(BaseClassWithEnumDiscriminatorEnum discriminatorProperty)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal BaseClassWithEnumDiscriminator(BaseClassWithEnumDiscriminatorEnum discriminatorProperty, Dictionary<string, BinaryData> rawData)
         {
             DiscriminatorProperty = discriminatorProperty;
+            _rawData = rawData;
         }
 
         /// <summary> Gets or sets the discriminator property. </summary>

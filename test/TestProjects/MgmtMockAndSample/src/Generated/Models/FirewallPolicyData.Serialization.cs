@@ -8,6 +8,7 @@
 using System;
 using System.Collections.Generic;
 using System.Text.Json;
+using Azure;
 using Azure.Core;
 using Azure.Core.Serialization;
 using Azure.ResourceManager.Models;
@@ -16,12 +17,14 @@ using MgmtMockAndSample.Models;
 
 namespace MgmtMockAndSample
 {
-    public partial class FirewallPolicyData : IUtf8JsonSerializable, IJsonModelSerializable
+    public partial class FirewallPolicyData : IUtf8JsonSerializable, IModelJsonSerializable<FirewallPolicyData>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModelSerializable)this).Serialize(writer, ModelSerializerOptions.AzureServiceDefault);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<FirewallPolicyData>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
 
-        void IJsonModelSerializable.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
+        void IModelJsonSerializable<FirewallPolicyData>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
             writer.WriteStartObject();
             if (Optional.IsDefined(Identity))
             {
@@ -100,18 +103,25 @@ namespace MgmtMockAndSample
                 writer.WriteObjectValue(Sku);
             }
             writer.WriteEndObject();
+            if (_rawData is not null && options.Format == ModelSerializerFormat.Json)
+            {
+                foreach (var property in _rawData)
+                {
+                    writer.WritePropertyName(property.Key);
+#if NET6_0_OR_GREATER
+				writer.WriteRawValue(property.Value);
+#else
+                    JsonSerializer.Serialize(writer, JsonDocument.Parse(property.Value.ToString()).RootElement);
+#endif
+                }
+            }
             writer.WriteEndObject();
-        }
-
-        object IModelSerializable.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            using var doc = JsonDocument.Parse(data);
-            return DeserializeFirewallPolicyData(doc.RootElement, options);
         }
 
         internal static FirewallPolicyData DeserializeFirewallPolicyData(JsonElement element, ModelSerializerOptions options = default)
         {
-            options ??= ModelSerializerOptions.AzureServiceDefault;
+            options ??= ModelSerializerOptions.DefaultWireOptions;
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
@@ -139,6 +149,7 @@ namespace MgmtMockAndSample
             Optional<FirewallPolicyIntrusionDetection> intrusionDetection = default;
             Optional<FirewallPolicyTransportSecurity> transportSecurity = default;
             Optional<FirewallPolicySku> sku = default;
+            Dictionary<string, BinaryData> rawData = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("etag"u8))
@@ -361,14 +372,57 @@ namespace MgmtMockAndSample
                     }
                     continue;
                 }
+                if (options.Format == ModelSerializerFormat.Json)
+                {
+                    rawData.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
+                    continue;
+                }
             }
-            return new FirewallPolicyData(id, name, type, systemData.Value, Optional.ToDictionary(tags), location, etag.Value, identity, startupProbe.Value, readinessProbe.Value, Optional.ToNullable(desiredStatusCode), Optional.ToList(ruleCollectionGroups), Optional.ToNullable(provisioningState), basePolicy, Optional.ToList(firewalls), Optional.ToList(childPolicies), threatIntelWhitelist.Value, insights.Value, snat.Value, dnsSettings.Value, intrusionDetection.Value, transportSecurity.Value, sku.Value);
+            return new FirewallPolicyData(id, name, type, systemData.Value, Optional.ToDictionary(tags), location, etag.Value, identity, startupProbe.Value, readinessProbe.Value, Optional.ToNullable(desiredStatusCode), Optional.ToList(ruleCollectionGroups), Optional.ToNullable(provisioningState), basePolicy, Optional.ToList(firewalls), Optional.ToList(childPolicies), threatIntelWhitelist.Value, insights.Value, snat.Value, dnsSettings.Value, intrusionDetection.Value, transportSecurity.Value, sku.Value, rawData);
         }
 
-        object IJsonModelSerializable.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        FirewallPolicyData IModelJsonSerializable<FirewallPolicyData>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
         {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
             using var doc = JsonDocument.ParseValue(ref reader);
             return DeserializeFirewallPolicyData(doc.RootElement, options);
+        }
+
+        BinaryData IModelSerializable<FirewallPolicyData>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        FirewallPolicyData IModelSerializable<FirewallPolicyData>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using var doc = JsonDocument.Parse(data);
+            return DeserializeFirewallPolicyData(doc.RootElement, options);
+        }
+
+        public static implicit operator RequestContent(FirewallPolicyData model)
+        {
+            if (model is null)
+            {
+                return null;
+            }
+
+            return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
+        }
+
+        public static explicit operator FirewallPolicyData(Response response)
+        {
+            if (response is null)
+            {
+                return null;
+            }
+
+            using JsonDocument doc = JsonDocument.Parse(response.ContentStream);
+            return DeserializeFirewallPolicyData(doc.RootElement, ModelSerializerOptions.DefaultWireOptions);
         }
     }
 }

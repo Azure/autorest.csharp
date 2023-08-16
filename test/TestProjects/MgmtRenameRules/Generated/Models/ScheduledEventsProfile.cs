@@ -5,6 +5,9 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
+
 namespace MgmtRenameRules.Models
 {
     /// <summary>
@@ -13,19 +16,29 @@ namespace MgmtRenameRules.Models
     /// </summary>
     internal partial class ScheduledEventsProfile
     {
-        /// <summary> Initializes a new instance of ScheduledEventsProfile. </summary>
+        private Dictionary<string, BinaryData> _rawData;
+
+        /// <summary>
+        /// Initializes a new instance of global::MgmtRenameRules.Models.ScheduledEventsProfile
+        ///
+        /// </summary>
         public ScheduledEventsProfile()
         {
         }
 
-        /// <summary> Initializes a new instance of ScheduledEventsProfile. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::MgmtRenameRules.Models.ScheduledEventsProfile
+        ///
+        /// </summary>
         /// <param name="terminateNotificationProfile">
         /// Specifies Terminate Scheduled Event related configurations.
         /// Serialized Name: ScheduledEventsProfile.terminateNotificationProfile
         /// </param>
-        internal ScheduledEventsProfile(TerminateNotificationProfile terminateNotificationProfile)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal ScheduledEventsProfile(TerminateNotificationProfile terminateNotificationProfile, Dictionary<string, BinaryData> rawData)
         {
             TerminateNotificationProfile = terminateNotificationProfile;
+            _rawData = rawData;
         }
 
         /// <summary>

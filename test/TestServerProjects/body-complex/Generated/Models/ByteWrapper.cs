@@ -6,22 +6,33 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
 
 namespace body_complex.Models
 {
     /// <summary> The ByteWrapper. </summary>
     public partial class ByteWrapper
     {
-        /// <summary> Initializes a new instance of ByteWrapper. </summary>
+        private Dictionary<string, BinaryData> _rawData;
+
+        /// <summary>
+        /// Initializes a new instance of global::body_complex.Models.ByteWrapper
+        ///
+        /// </summary>
         public ByteWrapper()
         {
         }
 
-        /// <summary> Initializes a new instance of ByteWrapper. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::body_complex.Models.ByteWrapper
+        ///
+        /// </summary>
         /// <param name="field"></param>
-        internal ByteWrapper(byte[] field)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal ByteWrapper(byte[] field, Dictionary<string, BinaryData> rawData)
         {
             Field = field;
+            _rawData = rawData;
         }
 
         /// <summary> Gets or sets the field. </summary>

@@ -51,7 +51,7 @@ namespace ConvenienceInCadl
         {
             RequestContext context = FromCancellationToken(cancellationToken);
             Response response = await UpdateConvenienceAsync(context).ConfigureAwait(false);
-            return Response.FromValue(Model.FromResponse(response), response);
+            return Response.FromValue((Model)response, response);
         }
 
         /// <summary> No initial operation methods. In the updated version, we add the protocol method and convenience method. </summary>
@@ -61,7 +61,7 @@ namespace ConvenienceInCadl
         {
             RequestContext context = FromCancellationToken(cancellationToken);
             Response response = UpdateConvenience(context);
-            return Response.FromValue(Model.FromResponse(response), response);
+            return Response.FromValue((Model)response, response);
         }
 
         /// <summary>
@@ -145,7 +145,7 @@ namespace ConvenienceInCadl
             Argument.AssertNotNull(required, nameof(required));
 
             RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = await ConvenienceOptionalBeforeRequiredAsync(required.ToRequestContent(), optional, context).ConfigureAwait(false);
+            Response response = await ConvenienceOptionalBeforeRequiredAsync(required, optional, context).ConfigureAwait(false);
             return response;
         }
 
@@ -160,7 +160,7 @@ namespace ConvenienceInCadl
             Argument.AssertNotNull(required, nameof(required));
 
             RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = ConvenienceOptionalBeforeRequired(required.ToRequestContent(), optional, context);
+            Response response = ConvenienceOptionalBeforeRequired(required, optional, context);
             return response;
         }
 
@@ -445,7 +445,7 @@ namespace ConvenienceInCadl
             {
                 RequestContext context = FromCancellationToken(cancellationToken);
                 Response response = await ProtocolAsync(context).ConfigureAwait(false);
-                return Response.FromValue(Model.FromResponse(response), response);
+                return Response.FromValue((Model)response, response);
             }
             catch (Exception e)
             {
@@ -465,7 +465,7 @@ namespace ConvenienceInCadl
             {
                 RequestContext context = FromCancellationToken(cancellationToken);
                 Response response = Protocol(context);
-                return Response.FromValue(Model.FromResponse(response), response);
+                return Response.FromValue((Model)response, response);
             }
             catch (Exception e)
             {
@@ -555,7 +555,7 @@ namespace ConvenienceInCadl
             {
                 RequestContext context = FromCancellationToken(cancellationToken);
                 Response response = await ConvenienceWithOptionalAsync(context).ConfigureAwait(false);
-                return Response.FromValue(Model.FromResponse(response), response);
+                return Response.FromValue((Model)response, response);
             }
             catch (Exception e)
             {
@@ -575,7 +575,7 @@ namespace ConvenienceInCadl
             {
                 RequestContext context = FromCancellationToken(cancellationToken);
                 Response response = ConvenienceWithOptional(context);
-                return Response.FromValue(Model.FromResponse(response), response);
+                return Response.FromValue((Model)response, response);
             }
             catch (Exception e)
             {
@@ -661,7 +661,7 @@ namespace ConvenienceInCadl
         {
             RequestContext context = FromCancellationToken(cancellationToken);
             Response response = await ConvenienceWithRequiredAsync(context).ConfigureAwait(false);
-            return Response.FromValue(Model.FromResponse(response), response);
+            return Response.FromValue((Model)response, response);
         }
 
         /// <summary> Operation has protocol method with required RequestContext and convenience method. </summary>
@@ -671,7 +671,7 @@ namespace ConvenienceInCadl
         {
             RequestContext context = FromCancellationToken(cancellationToken);
             Response response = ConvenienceWithRequired(context);
-            return Response.FromValue(Model.FromResponse(response), response);
+            return Response.FromValue((Model)response, response);
         }
 
         /// <summary>
@@ -876,7 +876,7 @@ namespace ConvenienceInCadl
             {
                 RequestContext context = FromCancellationToken(cancellationToken);
                 Response response = await ProtocolOptionalQueryAsync(optional, context).ConfigureAwait(false);
-                return Response.FromValue(Model.FromResponse(response), response);
+                return Response.FromValue((Model)response, response);
             }
             catch (Exception e)
             {
@@ -897,7 +897,7 @@ namespace ConvenienceInCadl
             {
                 RequestContext context = FromCancellationToken(cancellationToken);
                 Response response = ProtocolOptionalQuery(optional, context);
-                return Response.FromValue(Model.FromResponse(response), response);
+                return Response.FromValue((Model)response, response);
             }
             catch (Exception e)
             {
@@ -990,7 +990,7 @@ namespace ConvenienceInCadl
             {
                 RequestContext context = FromCancellationToken(cancellationToken);
                 Response response = await ProtocolRequiredQueryAsync(required, context).ConfigureAwait(false);
-                return Response.FromValue(Model.FromResponse(response), response);
+                return Response.FromValue((Model)response, response);
             }
             catch (Exception e)
             {
@@ -1011,7 +1011,7 @@ namespace ConvenienceInCadl
             {
                 RequestContext context = FromCancellationToken(cancellationToken);
                 Response response = ProtocolRequiredQuery(required, context);
-                return Response.FromValue(Model.FromResponse(response), response);
+                return Response.FromValue((Model)response, response);
             }
             catch (Exception e)
             {
@@ -1099,7 +1099,7 @@ namespace ConvenienceInCadl
         public virtual async Task<Response> ProtocolOptionalModelAsync(Model optional = null, CancellationToken cancellationToken = default)
         {
             RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = await ProtocolOptionalModelAsync(optional?.ToRequestContent(), context).ConfigureAwait(false);
+            Response response = await ProtocolOptionalModelAsync(optional, context).ConfigureAwait(false);
             return response;
         }
 
@@ -1110,7 +1110,7 @@ namespace ConvenienceInCadl
         public virtual Response ProtocolOptionalModel(Model optional = null, CancellationToken cancellationToken = default)
         {
             RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = ProtocolOptionalModel(optional?.ToRequestContent(), context);
+            Response response = ProtocolOptionalModel(optional, context);
             return response;
         }
 
@@ -1196,7 +1196,7 @@ namespace ConvenienceInCadl
             Argument.AssertNotNull(required, nameof(required));
 
             RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = await ProtocolRequiredModelAsync(required.ToRequestContent(), context).ConfigureAwait(false);
+            Response response = await ProtocolRequiredModelAsync(required, context).ConfigureAwait(false);
             return response;
         }
 
@@ -1210,7 +1210,7 @@ namespace ConvenienceInCadl
             Argument.AssertNotNull(required, nameof(required));
 
             RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = ProtocolRequiredModel(required.ToRequestContent(), context);
+            Response response = ProtocolRequiredModel(required, context);
             return response;
         }
 
@@ -1304,7 +1304,7 @@ namespace ConvenienceInCadl
             {
                 RequestContext context = FromCancellationToken(cancellationToken);
                 Response response = await ConvenienceOptionalQueryWithOptionalAsync(optional, context).ConfigureAwait(false);
-                return Response.FromValue(Model.FromResponse(response), response);
+                return Response.FromValue((Model)response, response);
             }
             catch (Exception e)
             {
@@ -1325,7 +1325,7 @@ namespace ConvenienceInCadl
             {
                 RequestContext context = FromCancellationToken(cancellationToken);
                 Response response = ConvenienceOptionalQueryWithOptional(optional, context);
-                return Response.FromValue(Model.FromResponse(response), response);
+                return Response.FromValue((Model)response, response);
             }
             catch (Exception e)
             {
@@ -1418,7 +1418,7 @@ namespace ConvenienceInCadl
             {
                 RequestContext context = FromCancellationToken(cancellationToken);
                 Response response = await ConvenienceRequiredQueryWithOptionalAsync(required, context).ConfigureAwait(false);
-                return Response.FromValue(Model.FromResponse(response), response);
+                return Response.FromValue((Model)response, response);
             }
             catch (Exception e)
             {
@@ -1439,7 +1439,7 @@ namespace ConvenienceInCadl
             {
                 RequestContext context = FromCancellationToken(cancellationToken);
                 Response response = ConvenienceRequiredQueryWithOptional(required, context);
-                return Response.FromValue(Model.FromResponse(response), response);
+                return Response.FromValue((Model)response, response);
             }
             catch (Exception e)
             {
@@ -1528,7 +1528,7 @@ namespace ConvenienceInCadl
         {
             RequestContext context = FromCancellationToken(cancellationToken);
             Response response = await ConvenienceOptionalQueryWithRequiredAsync(optional, context).ConfigureAwait(false);
-            return Response.FromValue(Model.FromResponse(response), response);
+            return Response.FromValue((Model)response, response);
         }
 
         /// <summary> Operation has protocol method with optional query parameter and required RequestContext and convenience method. </summary>
@@ -1539,7 +1539,7 @@ namespace ConvenienceInCadl
         {
             RequestContext context = FromCancellationToken(cancellationToken);
             Response response = ConvenienceOptionalQueryWithRequired(optional, context);
-            return Response.FromValue(Model.FromResponse(response), response);
+            return Response.FromValue((Model)response, response);
         }
 
         /// <summary>
@@ -1622,7 +1622,7 @@ namespace ConvenienceInCadl
         {
             RequestContext context = FromCancellationToken(cancellationToken);
             Response response = await ConvenienceRequiredQueryWithRequiredAsync(required, context).ConfigureAwait(false);
-            return Response.FromValue(Model.FromResponse(response), response);
+            return Response.FromValue((Model)response, response);
         }
 
         /// <summary> Operation has protocol method with required query parameter and required RequestContext and convenience method. </summary>
@@ -1633,7 +1633,7 @@ namespace ConvenienceInCadl
         {
             RequestContext context = FromCancellationToken(cancellationToken);
             Response response = ConvenienceRequiredQueryWithRequired(required, context);
-            return Response.FromValue(Model.FromResponse(response), response);
+            return Response.FromValue((Model)response, response);
         }
 
         /// <summary>
@@ -1715,7 +1715,7 @@ namespace ConvenienceInCadl
         public virtual async Task<Response> ConvenienceOptionalModelWithOptionalAsync(Model optional = null, CancellationToken cancellationToken = default)
         {
             RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = await ConvenienceOptionalModelWithOptionalAsync(optional?.ToRequestContent(), context).ConfigureAwait(false);
+            Response response = await ConvenienceOptionalModelWithOptionalAsync(optional, context).ConfigureAwait(false);
             return response;
         }
 
@@ -1726,7 +1726,7 @@ namespace ConvenienceInCadl
         public virtual Response ConvenienceOptionalModelWithOptional(Model optional = null, CancellationToken cancellationToken = default)
         {
             RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = ConvenienceOptionalModelWithOptional(optional?.ToRequestContent(), context);
+            Response response = ConvenienceOptionalModelWithOptional(optional, context);
             return response;
         }
 
@@ -1812,7 +1812,7 @@ namespace ConvenienceInCadl
             Argument.AssertNotNull(required, nameof(required));
 
             RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = await ConvenienceRequiredModelWithOptionalAsync(required.ToRequestContent(), context).ConfigureAwait(false);
+            Response response = await ConvenienceRequiredModelWithOptionalAsync(required, context).ConfigureAwait(false);
             return response;
         }
 
@@ -1826,7 +1826,7 @@ namespace ConvenienceInCadl
             Argument.AssertNotNull(required, nameof(required));
 
             RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = ConvenienceRequiredModelWithOptional(required.ToRequestContent(), context);
+            Response response = ConvenienceRequiredModelWithOptional(required, context);
             return response;
         }
 
@@ -1915,7 +1915,7 @@ namespace ConvenienceInCadl
         public virtual async Task<Response> ConvenienceOptionalModelWithRequiredAsync(Model optional = null, CancellationToken cancellationToken = default)
         {
             RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = await ConvenienceOptionalModelWithRequiredAsync(optional?.ToRequestContent(), context).ConfigureAwait(false);
+            Response response = await ConvenienceOptionalModelWithRequiredAsync(optional, context).ConfigureAwait(false);
             return response;
         }
 
@@ -1926,7 +1926,7 @@ namespace ConvenienceInCadl
         public virtual Response ConvenienceOptionalModelWithRequired(Model optional = null, CancellationToken cancellationToken = default)
         {
             RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = ConvenienceOptionalModelWithRequired(optional?.ToRequestContent(), context);
+            Response response = ConvenienceOptionalModelWithRequired(optional, context);
             return response;
         }
 
@@ -2013,7 +2013,7 @@ namespace ConvenienceInCadl
             Argument.AssertNotNull(required, nameof(required));
 
             RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = await ProtocolOptionalBeforeRequiredAsync(required.ToRequestContent(), optional, context).ConfigureAwait(false);
+            Response response = await ProtocolOptionalBeforeRequiredAsync(required, optional, context).ConfigureAwait(false);
             return response;
         }
 
@@ -2028,7 +2028,7 @@ namespace ConvenienceInCadl
             Argument.AssertNotNull(required, nameof(required));
 
             RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = ProtocolOptionalBeforeRequired(required.ToRequestContent(), optional, context);
+            Response response = ProtocolOptionalBeforeRequired(required, optional, context);
             return response;
         }
 

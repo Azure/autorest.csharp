@@ -5,14 +5,21 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
+
 namespace CognitiveSearch.Models
 {
     /// <summary> The UnknownDataChangeDetectionPolicy. </summary>
     internal partial class UnknownDataChangeDetectionPolicy : DataChangeDetectionPolicy
     {
-        /// <summary> Initializes a new instance of UnknownDataChangeDetectionPolicy. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::CognitiveSearch.Models.UnknownDataChangeDetectionPolicy
+        ///
+        /// </summary>
         /// <param name="odataType"> Identifies the concrete type of the data change detection policy. </param>
-        internal UnknownDataChangeDetectionPolicy(string odataType) : base(odataType)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal UnknownDataChangeDetectionPolicy(string odataType, Dictionary<string, BinaryData> rawData) : base(odataType, rawData)
         {
             OdataType = odataType ?? "Unknown";
         }

@@ -5,6 +5,8 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
 using Azure.Core;
 using Azure.ResourceManager.Resources.Models;
 
@@ -16,12 +18,20 @@ namespace MgmtRenameRules.Models
     /// </summary>
     public partial class VirtualMachineScaleSetManagedDiskParameters
     {
-        /// <summary> Initializes a new instance of VirtualMachineScaleSetManagedDiskParameters. </summary>
+        private Dictionary<string, BinaryData> _rawData;
+
+        /// <summary>
+        /// Initializes a new instance of global::MgmtRenameRules.Models.VirtualMachineScaleSetManagedDiskParameters
+        ///
+        /// </summary>
         public VirtualMachineScaleSetManagedDiskParameters()
         {
         }
 
-        /// <summary> Initializes a new instance of VirtualMachineScaleSetManagedDiskParameters. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::MgmtRenameRules.Models.VirtualMachineScaleSetManagedDiskParameters
+        ///
+        /// </summary>
         /// <param name="storageAccountType">
         /// Specifies the storage account type for the managed disk. NOTE: UltraSSD_LRS can only be used with data disks, it cannot be used with OS Disk.
         /// Serialized Name: VirtualMachineScaleSetManagedDiskParameters.storageAccountType
@@ -30,10 +40,12 @@ namespace MgmtRenameRules.Models
         /// Specifies the customer managed disk encryption set resource id for the managed disk.
         /// Serialized Name: VirtualMachineScaleSetManagedDiskParameters.diskEncryptionSet
         /// </param>
-        internal VirtualMachineScaleSetManagedDiskParameters(StorageAccountType? storageAccountType, WritableSubResource diskEncryptionSet)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal VirtualMachineScaleSetManagedDiskParameters(StorageAccountType? storageAccountType, WritableSubResource diskEncryptionSet, Dictionary<string, BinaryData> rawData)
         {
             StorageAccountType = storageAccountType;
             DiskEncryptionSet = diskEncryptionSet;
+            _rawData = rawData;
         }
 
         /// <summary>

@@ -6,18 +6,22 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
 using System.Text.Json;
+using Azure;
 using Azure.Core;
 using Azure.Core.Serialization;
 
 namespace xms_error_responses.Models
 {
-    public partial class PetActionError : IUtf8JsonSerializable, IJsonModelSerializable
+    public partial class PetActionError : IUtf8JsonSerializable, IModelJsonSerializable<PetActionError>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModelSerializable)this).Serialize(writer, ModelSerializerOptions.AzureServiceDefault);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<PetActionError>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
 
-        void IJsonModelSerializable.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
+        void IModelJsonSerializable<PetActionError>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
+            ModelSerializerHelper.ValidateFormat<PetActionError>(this, options.Format);
+
             writer.WriteStartObject();
             writer.WritePropertyName("errorType"u8);
             writer.WriteStringValue(ErrorType);
@@ -31,18 +35,25 @@ namespace xms_error_responses.Models
                 writer.WritePropertyName("actionResponse"u8);
                 writer.WriteStringValue(ActionResponse);
             }
+            if (_rawData is not null && options.Format == ModelSerializerFormat.Json)
+            {
+                foreach (var property in _rawData)
+                {
+                    writer.WritePropertyName(property.Key);
+#if NET6_0_OR_GREATER
+				writer.WriteRawValue(property.Value);
+#else
+                    JsonSerializer.Serialize(writer, JsonDocument.Parse(property.Value.ToString()).RootElement);
+#endif
+                }
+            }
             writer.WriteEndObject();
-        }
-
-        object IModelSerializable.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            using var doc = JsonDocument.Parse(data);
-            return DeserializePetActionError(doc.RootElement, options);
         }
 
         internal static PetActionError DeserializePetActionError(JsonElement element, ModelSerializerOptions options = default)
         {
-            options ??= ModelSerializerOptions.AzureServiceDefault;
+            options ??= ModelSerializerOptions.DefaultWireOptions;
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
@@ -55,9 +66,12 @@ namespace xms_error_responses.Models
                     case "PetSadError": return PetSadError.DeserializePetSadError(element);
                 }
             }
+
+            // Unknown type found so we will deserialize the base properties only
             string errorType = default;
             Optional<string> errorMessage = default;
             Optional<string> actionResponse = default;
+            Dictionary<string, BinaryData> rawData = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("errorType"u8))
@@ -75,14 +89,57 @@ namespace xms_error_responses.Models
                     actionResponse = property.Value.GetString();
                     continue;
                 }
+                if (options.Format == ModelSerializerFormat.Json)
+                {
+                    rawData.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
+                    continue;
+                }
             }
-            return new PetActionError(actionResponse.Value, errorType, errorMessage.Value);
+            return new UnknownPetActionError(actionResponse.Value, errorType, errorMessage.Value, rawData);
         }
 
-        object IJsonModelSerializable.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        PetActionError IModelJsonSerializable<PetActionError>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
         {
+            ModelSerializerHelper.ValidateFormat<PetActionError>(this, options.Format);
+
             using var doc = JsonDocument.ParseValue(ref reader);
             return DeserializePetActionError(doc.RootElement, options);
+        }
+
+        BinaryData IModelSerializable<PetActionError>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat<PetActionError>(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        PetActionError IModelSerializable<PetActionError>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat<PetActionError>(this, options.Format);
+
+            using var doc = JsonDocument.Parse(data);
+            return DeserializePetActionError(doc.RootElement, options);
+        }
+
+        public static implicit operator RequestContent(PetActionError model)
+        {
+            if (model is null)
+            {
+                return null;
+            }
+
+            return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
+        }
+
+        public static explicit operator PetActionError(Response response)
+        {
+            if (response is null)
+            {
+                return null;
+            }
+
+            using JsonDocument doc = JsonDocument.Parse(response.ContentStream);
+            return DeserializePetActionError(doc.RootElement, ModelSerializerOptions.DefaultWireOptions);
         }
     }
 }

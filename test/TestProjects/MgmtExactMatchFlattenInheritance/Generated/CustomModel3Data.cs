@@ -5,6 +5,8 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
 using MgmtExactMatchFlattenInheritance.Models;
 
 namespace MgmtExactMatchFlattenInheritance
@@ -15,17 +17,24 @@ namespace MgmtExactMatchFlattenInheritance
     /// </summary>
     public partial class CustomModel3Data : AzureResourceFlattenModel7
     {
-        /// <summary> Initializes a new instance of CustomModel3Data. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::MgmtExactMatchFlattenInheritance.CustomModel3Data
+        ///
+        /// </summary>
         public CustomModel3Data()
         {
         }
 
-        /// <summary> Initializes a new instance of CustomModel3Data. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::MgmtExactMatchFlattenInheritance.CustomModel3Data
+        ///
+        /// </summary>
         /// <param name="id"></param>
         /// <param name="name"></param>
         /// <param name="resourceType"></param>
         /// <param name="foo"></param>
-        internal CustomModel3Data(string id, string name, string resourceType, string foo) : base(id, name, resourceType)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal CustomModel3Data(string id, string name, string resourceType, string foo, Dictionary<string, BinaryData> rawData) : base(id, name, resourceType, rawData)
         {
             Foo = foo;
         }

@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
 using Azure.Core;
 using Azure.ResourceManager.Resources.Models;
 
@@ -17,12 +18,20 @@ namespace MgmtRenameRules.Models
     /// </summary>
     public partial class ImageDisk
     {
-        /// <summary> Initializes a new instance of ImageDisk. </summary>
+        protected internal Dictionary<string, BinaryData> _rawData;
+
+        /// <summary>
+        /// Initializes a new instance of global::MgmtRenameRules.Models.ImageDisk
+        ///
+        /// </summary>
         public ImageDisk()
         {
         }
 
-        /// <summary> Initializes a new instance of ImageDisk. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::MgmtRenameRules.Models.ImageDisk
+        ///
+        /// </summary>
         /// <param name="snapshot">
         /// The snapshot.
         /// Serialized Name: ImageDisk.snapshot
@@ -51,7 +60,8 @@ namespace MgmtRenameRules.Models
         /// Specifies the customer managed disk encryption set resource id for the managed image disk.
         /// Serialized Name: ImageDisk.diskEncryptionSet
         /// </param>
-        internal ImageDisk(WritableSubResource snapshot, WritableSubResource managedDisk, Uri blobUri, CachingType? caching, int? diskSizeGB, StorageAccountType? storageAccountType, WritableSubResource diskEncryptionSet)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal ImageDisk(WritableSubResource snapshot, WritableSubResource managedDisk, Uri blobUri, CachingType? caching, int? diskSizeGB, StorageAccountType? storageAccountType, WritableSubResource diskEncryptionSet, Dictionary<string, BinaryData> rawData)
         {
             Snapshot = snapshot;
             ManagedDisk = managedDisk;
@@ -60,6 +70,7 @@ namespace MgmtRenameRules.Models
             DiskSizeGB = diskSizeGB;
             StorageAccountType = storageAccountType;
             DiskEncryptionSet = diskEncryptionSet;
+            _rawData = rawData;
         }
 
         /// <summary>

@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Collections.Generic;
 using Azure.Core;
 
@@ -13,14 +14,22 @@ namespace MgmtDiscriminator.Models
     /// <summary> The properties. </summary>
     public partial class DeliveryRuleProperties
     {
-        /// <summary> Initializes a new instance of DeliveryRuleProperties. </summary>
+        private Dictionary<string, BinaryData> _rawData;
+
+        /// <summary>
+        /// Initializes a new instance of global::MgmtDiscriminator.Models.DeliveryRuleProperties
+        ///
+        /// </summary>
         public DeliveryRuleProperties()
         {
             Actions = new ChangeTrackingList<DeliveryRuleAction>();
             ExtraMappingInfo = new ChangeTrackingDictionary<string, DeliveryRuleAction>();
         }
 
-        /// <summary> Initializes a new instance of DeliveryRuleProperties. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::MgmtDiscriminator.Models.DeliveryRuleProperties
+        ///
+        /// </summary>
         /// <param name="order"> The order in which the rules are applied for the endpoint. Possible values {0,1,2,3,………}. A rule with a lesser order will be applied before a rule with a greater order. Rule with order 0 is a special rule. It does not require any condition and actions listed in it will always be applied. </param>
         /// <param name="conditions">
         /// The condition that must be matched for the actions to be executed
@@ -42,13 +51,15 @@ namespace MgmtDiscriminator.Models
         /// Please note <see cref="Pet"/> is the base class. According to the scenario, a derived class of the base class might need to be assigned here, or this property needs to be casted to one of the possible derived classes.
         /// The available derived classes include <see cref="Cat"/> and <see cref="Dog"/>.
         /// </param>
-        internal DeliveryRuleProperties(int? order, DeliveryRuleCondition conditions, IList<DeliveryRuleAction> actions, IDictionary<string, DeliveryRuleAction> extraMappingInfo, Pet pet)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal DeliveryRuleProperties(int? order, DeliveryRuleCondition conditions, IList<DeliveryRuleAction> actions, IDictionary<string, DeliveryRuleAction> extraMappingInfo, Pet pet, Dictionary<string, BinaryData> rawData)
         {
             Order = order;
             Conditions = conditions;
             Actions = actions;
             ExtraMappingInfo = extraMappingInfo;
             Pet = pet;
+            _rawData = rawData;
         }
 
         /// <summary> The order in which the rules are applied for the endpoint. Possible values {0,1,2,3,………}. A rule with a lesser order will be applied before a rule with a greater order. Rule with order 0 is a special rule. It does not require any condition and actions listed in it will always be applied. </summary>

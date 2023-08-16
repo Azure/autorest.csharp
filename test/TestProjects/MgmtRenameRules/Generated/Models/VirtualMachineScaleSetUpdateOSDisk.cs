@@ -17,13 +17,21 @@ namespace MgmtRenameRules.Models
     /// </summary>
     public partial class VirtualMachineScaleSetUpdateOSDisk
     {
-        /// <summary> Initializes a new instance of VirtualMachineScaleSetUpdateOSDisk. </summary>
+        private Dictionary<string, BinaryData> _rawData;
+
+        /// <summary>
+        /// Initializes a new instance of global::MgmtRenameRules.Models.VirtualMachineScaleSetUpdateOSDisk
+        ///
+        /// </summary>
         public VirtualMachineScaleSetUpdateOSDisk()
         {
             VhdContainers = new ChangeTrackingList<string>();
         }
 
-        /// <summary> Initializes a new instance of VirtualMachineScaleSetUpdateOSDisk. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::MgmtRenameRules.Models.VirtualMachineScaleSetUpdateOSDisk
+        ///
+        /// </summary>
         /// <param name="caching">
         /// The caching type.
         /// Serialized Name: VirtualMachineScaleSetUpdateOSDisk.caching
@@ -48,7 +56,8 @@ namespace MgmtRenameRules.Models
         /// The managed disk parameters.
         /// Serialized Name: VirtualMachineScaleSetUpdateOSDisk.managedDisk
         /// </param>
-        internal VirtualMachineScaleSetUpdateOSDisk(CachingType? caching, bool? writeAcceleratorEnabled, int? diskSizeGB, VirtualHardDisk image, IList<string> vhdContainers, VirtualMachineScaleSetManagedDiskParameters managedDisk)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal VirtualMachineScaleSetUpdateOSDisk(CachingType? caching, bool? writeAcceleratorEnabled, int? diskSizeGB, VirtualHardDisk image, IList<string> vhdContainers, VirtualMachineScaleSetManagedDiskParameters managedDisk, Dictionary<string, BinaryData> rawData)
         {
             Caching = caching;
             WriteAcceleratorEnabled = writeAcceleratorEnabled;
@@ -56,6 +65,7 @@ namespace MgmtRenameRules.Models
             Image = image;
             VhdContainers = vhdContainers;
             ManagedDisk = managedDisk;
+            _rawData = rawData;
         }
 
         /// <summary>

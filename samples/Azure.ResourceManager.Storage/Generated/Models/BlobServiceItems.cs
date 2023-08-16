@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Collections.Generic;
 using Azure.Core;
 using Azure.ResourceManager.Storage;
@@ -14,17 +15,27 @@ namespace Azure.ResourceManager.Storage.Models
     /// <summary> The BlobServiceItems. </summary>
     internal partial class BlobServiceItems
     {
-        /// <summary> Initializes a new instance of BlobServiceItems. </summary>
+        private Dictionary<string, BinaryData> _rawData;
+
+        /// <summary>
+        /// Initializes a new instance of global::Azure.ResourceManager.Storage.Models.BlobServiceItems
+        ///
+        /// </summary>
         internal BlobServiceItems()
         {
             Value = new ChangeTrackingList<BlobServiceData>();
         }
 
-        /// <summary> Initializes a new instance of BlobServiceItems. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::Azure.ResourceManager.Storage.Models.BlobServiceItems
+        ///
+        /// </summary>
         /// <param name="value"> List of blob services returned. </param>
-        internal BlobServiceItems(IReadOnlyList<BlobServiceData> value)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal BlobServiceItems(IReadOnlyList<BlobServiceData> value, Dictionary<string, BinaryData> rawData)
         {
             Value = value;
+            _rawData = rawData;
         }
 
         /// <summary> List of blob services returned. </summary>

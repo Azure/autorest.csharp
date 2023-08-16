@@ -19,7 +19,12 @@ namespace Azure.ResourceManager.Sample.Models
     /// </summary>
     internal partial class ImageListResult
     {
-        /// <summary> Initializes a new instance of ImageListResult. </summary>
+        private Dictionary<string, BinaryData> _rawData;
+
+        /// <summary>
+        /// Initializes a new instance of global::Azure.ResourceManager.Sample.Models.ImageListResult
+        ///
+        /// </summary>
         /// <param name="images">
         /// The list of Images.
         /// Serialized Name: ImageListResult.value
@@ -32,7 +37,10 @@ namespace Azure.ResourceManager.Sample.Models
             Images = images.ToList();
         }
 
-        /// <summary> Initializes a new instance of ImageListResult. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::Azure.ResourceManager.Sample.Models.ImageListResult
+        ///
+        /// </summary>
         /// <param name="images">
         /// The list of Images.
         /// Serialized Name: ImageListResult.value
@@ -41,10 +49,12 @@ namespace Azure.ResourceManager.Sample.Models
         /// The uri to fetch the next page of Images. Call ListNext() with this to fetch the next page of Images.
         /// Serialized Name: ImageListResult.nextLink
         /// </param>
-        internal ImageListResult(IReadOnlyList<ImageData> images, string nextLink)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal ImageListResult(IReadOnlyList<ImageData> images, string nextLink, Dictionary<string, BinaryData> rawData)
         {
             Images = images;
             NextLink = nextLink;
+            _rawData = rawData;
         }
 
         /// <summary>

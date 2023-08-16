@@ -56,8 +56,8 @@ namespace Encode.Duration
             Argument.AssertNotNull(body, nameof(body));
 
             RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = await DefaultAsync(body.ToRequestContent(), context).ConfigureAwait(false);
-            return Response.FromValue(DefaultDurationProperty.FromResponse(response), response);
+            Response response = await DefaultAsync(body, context).ConfigureAwait(false);
+            return Response.FromValue((DefaultDurationProperty)response, response);
         }
 
         /// <param name="body"> The DefaultDurationProperty to use. </param>
@@ -69,8 +69,8 @@ namespace Encode.Duration
             Argument.AssertNotNull(body, nameof(body));
 
             RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = Default(body.ToRequestContent(), context);
-            return Response.FromValue(DefaultDurationProperty.FromResponse(response), response);
+            Response response = Default(body, context);
+            return Response.FromValue((DefaultDurationProperty)response, response);
         }
 
         /// <summary>
@@ -160,8 +160,8 @@ namespace Encode.Duration
             Argument.AssertNotNull(body, nameof(body));
 
             RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = await Iso8601Async(body.ToRequestContent(), context).ConfigureAwait(false);
-            return Response.FromValue(ISO8601DurationProperty.FromResponse(response), response);
+            Response response = await Iso8601Async(body, context).ConfigureAwait(false);
+            return Response.FromValue((ISO8601DurationProperty)response, response);
         }
 
         /// <param name="body"> The ISO8601DurationProperty to use. </param>
@@ -173,8 +173,8 @@ namespace Encode.Duration
             Argument.AssertNotNull(body, nameof(body));
 
             RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = Iso8601(body.ToRequestContent(), context);
-            return Response.FromValue(ISO8601DurationProperty.FromResponse(response), response);
+            Response response = Iso8601(body, context);
+            return Response.FromValue((ISO8601DurationProperty)response, response);
         }
 
         /// <summary>
@@ -264,8 +264,8 @@ namespace Encode.Duration
             Argument.AssertNotNull(body, nameof(body));
 
             RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = await Int32SecondsAsync(body.ToRequestContent(), context).ConfigureAwait(false);
-            return Response.FromValue(Int32SecondsDurationProperty.FromResponse(response), response);
+            Response response = await Int32SecondsAsync(body, context).ConfigureAwait(false);
+            return Response.FromValue((Int32SecondsDurationProperty)response, response);
         }
 
         /// <param name="body"> The Int32SecondsDurationProperty to use. </param>
@@ -277,8 +277,8 @@ namespace Encode.Duration
             Argument.AssertNotNull(body, nameof(body));
 
             RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = Int32Seconds(body.ToRequestContent(), context);
-            return Response.FromValue(Int32SecondsDurationProperty.FromResponse(response), response);
+            Response response = Int32Seconds(body, context);
+            return Response.FromValue((Int32SecondsDurationProperty)response, response);
         }
 
         /// <summary>
@@ -368,8 +368,8 @@ namespace Encode.Duration
             Argument.AssertNotNull(body, nameof(body));
 
             RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = await FloatSecondsAsync(body.ToRequestContent(), context).ConfigureAwait(false);
-            return Response.FromValue(FloatSecondsDurationProperty.FromResponse(response), response);
+            Response response = await FloatSecondsAsync(body, context).ConfigureAwait(false);
+            return Response.FromValue((FloatSecondsDurationProperty)response, response);
         }
 
         /// <param name="body"> The FloatSecondsDurationProperty to use. </param>
@@ -381,8 +381,8 @@ namespace Encode.Duration
             Argument.AssertNotNull(body, nameof(body));
 
             RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = FloatSeconds(body.ToRequestContent(), context);
-            return Response.FromValue(FloatSecondsDurationProperty.FromResponse(response), response);
+            Response response = FloatSeconds(body, context);
+            return Response.FromValue((FloatSecondsDurationProperty)response, response);
         }
 
         /// <summary>
@@ -472,8 +472,8 @@ namespace Encode.Duration
             Argument.AssertNotNull(body, nameof(body));
 
             RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = await FloatSecondsArrayAsync(body.ToRequestContent(), context).ConfigureAwait(false);
-            return Response.FromValue(FloatSecondsDurationArrayProperty.FromResponse(response), response);
+            Response response = await FloatSecondsArrayAsync(body, context).ConfigureAwait(false);
+            return Response.FromValue((FloatSecondsDurationArrayProperty)response, response);
         }
 
         /// <param name="body"> The FloatSecondsDurationArrayProperty to use. </param>
@@ -485,8 +485,8 @@ namespace Encode.Duration
             Argument.AssertNotNull(body, nameof(body));
 
             RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = FloatSecondsArray(body.ToRequestContent(), context);
-            return Response.FromValue(FloatSecondsDurationArrayProperty.FromResponse(response), response);
+            Response response = FloatSecondsArray(body, context);
+            return Response.FromValue((FloatSecondsDurationArrayProperty)response, response);
         }
 
         /// <summary>

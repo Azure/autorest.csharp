@@ -15,7 +15,10 @@ namespace CognitiveSearch.Models
     /// <summary> Marks terms as keywords. This token filter is implemented using Apache Lucene. </summary>
     public partial class KeywordMarkerTokenFilter : TokenFilter
     {
-        /// <summary> Initializes a new instance of KeywordMarkerTokenFilter. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::CognitiveSearch.Models.KeywordMarkerTokenFilter
+        ///
+        /// </summary>
         /// <param name="name"> The name of the token filter. It must only contain letters, digits, spaces, dashes or underscores, can only start and end with alphanumeric characters, and is limited to 128 characters. </param>
         /// <param name="keywords"> A list of words to mark as keywords. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> or <paramref name="keywords"/> is null. </exception>
@@ -28,12 +31,16 @@ namespace CognitiveSearch.Models
             OdataType = "#Microsoft.Azure.Search.KeywordMarkerTokenFilter";
         }
 
-        /// <summary> Initializes a new instance of KeywordMarkerTokenFilter. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::CognitiveSearch.Models.KeywordMarkerTokenFilter
+        ///
+        /// </summary>
         /// <param name="odataType"> Identifies the concrete type of the token filter. </param>
         /// <param name="name"> The name of the token filter. It must only contain letters, digits, spaces, dashes or underscores, can only start and end with alphanumeric characters, and is limited to 128 characters. </param>
         /// <param name="keywords"> A list of words to mark as keywords. </param>
         /// <param name="ignoreCase"> A value indicating whether to ignore case. If true, all words are converted to lower case first. Default is false. </param>
-        internal KeywordMarkerTokenFilter(string odataType, string name, IList<string> keywords, bool? ignoreCase) : base(odataType, name)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal KeywordMarkerTokenFilter(string odataType, string name, IList<string> keywords, bool? ignoreCase, Dictionary<string, BinaryData> rawData) : base(odataType, name, rawData)
         {
             Keywords = keywords;
             IgnoreCase = ignoreCase;

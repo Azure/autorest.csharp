@@ -8,17 +8,20 @@
 using System;
 using System.Collections.Generic;
 using System.Text.Json;
+using Azure;
 using Azure.Core;
 using Azure.Core.Serialization;
 
 namespace body_complex.Models
 {
-    public partial class SmartSalmon : IUtf8JsonSerializable, IJsonModelSerializable
+    public partial class SmartSalmon : IUtf8JsonSerializable, IModelJsonSerializable<SmartSalmon>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModelSerializable)this).Serialize(writer, ModelSerializerOptions.AzureServiceDefault);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<SmartSalmon>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
 
-        void IJsonModelSerializable.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
+        void IModelJsonSerializable<SmartSalmon>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
+            ModelSerializerHelper.ValidateFormat<SmartSalmon>(this, options.Format);
+
             writer.WriteStartObject();
             if (Optional.IsDefined(CollegeDegree))
             {
@@ -62,15 +65,10 @@ namespace body_complex.Models
             writer.WriteEndObject();
         }
 
-        object IModelSerializable.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            using var doc = JsonDocument.Parse(data);
-            return DeserializeSmartSalmon(doc.RootElement, options);
-        }
-
         internal static SmartSalmon DeserializeSmartSalmon(JsonElement element, ModelSerializerOptions options = default)
         {
-            options ??= ModelSerializerOptions.AzureServiceDefault;
+            options ??= ModelSerializerOptions.DefaultWireOptions;
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
@@ -140,10 +138,48 @@ namespace body_complex.Models
             return new SmartSalmon(fishtype, species.Value, length, Optional.ToList(siblings), location.Value, Optional.ToNullable(iswild), collegeDegree.Value, additionalProperties);
         }
 
-        object IJsonModelSerializable.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        SmartSalmon IModelJsonSerializable<SmartSalmon>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
         {
+            ModelSerializerHelper.ValidateFormat<SmartSalmon>(this, options.Format);
+
             using var doc = JsonDocument.ParseValue(ref reader);
             return DeserializeSmartSalmon(doc.RootElement, options);
+        }
+
+        BinaryData IModelSerializable<SmartSalmon>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat<SmartSalmon>(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        SmartSalmon IModelSerializable<SmartSalmon>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat<SmartSalmon>(this, options.Format);
+
+            using var doc = JsonDocument.Parse(data);
+            return DeserializeSmartSalmon(doc.RootElement, options);
+        }
+
+        public static implicit operator RequestContent(SmartSalmon model)
+        {
+            if (model is null)
+            {
+                return null;
+            }
+
+            return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
+        }
+
+        public static explicit operator SmartSalmon(Response response)
+        {
+            if (response is null)
+            {
+                return null;
+            }
+
+            using JsonDocument doc = JsonDocument.Parse(response.ContentStream);
+            return DeserializeSmartSalmon(doc.RootElement, ModelSerializerOptions.DefaultWireOptions);
         }
     }
 }

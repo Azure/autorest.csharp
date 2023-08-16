@@ -5,20 +5,30 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
+
 namespace Inheritance.Models
 {
     /// <summary> The AnotherDerivedClassWithExtensibleEnumDiscriminator. </summary>
     public partial class AnotherDerivedClassWithExtensibleEnumDiscriminator : BaseClassWithExtensibleEnumDiscriminator
     {
-        /// <summary> Initializes a new instance of AnotherDerivedClassWithExtensibleEnumDiscriminator. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::Inheritance.Models.AnotherDerivedClassWithExtensibleEnumDiscriminator
+        ///
+        /// </summary>
         public AnotherDerivedClassWithExtensibleEnumDiscriminator()
         {
             DiscriminatorProperty = new BaseClassWithEntensibleEnumDiscriminatorEnum("random value");
         }
 
-        /// <summary> Initializes a new instance of AnotherDerivedClassWithExtensibleEnumDiscriminator. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::Inheritance.Models.AnotherDerivedClassWithExtensibleEnumDiscriminator
+        ///
+        /// </summary>
         /// <param name="discriminatorProperty"></param>
-        internal AnotherDerivedClassWithExtensibleEnumDiscriminator(BaseClassWithEntensibleEnumDiscriminatorEnum discriminatorProperty) : base(discriminatorProperty)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal AnotherDerivedClassWithExtensibleEnumDiscriminator(BaseClassWithEntensibleEnumDiscriminatorEnum discriminatorProperty, Dictionary<string, BinaryData> rawData) : base(discriminatorProperty, rawData)
         {
             DiscriminatorProperty = discriminatorProperty;
         }

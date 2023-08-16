@@ -7,18 +7,18 @@
 
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Xml;
 using System.Xml.Linq;
+using Azure;
 using Azure.Core;
 using Azure.Core.Serialization;
 
 namespace xml_service.Models
 {
-    public partial class Slideshow : IXmlSerializable, IXmlModelSerializable
+    public partial class Slideshow : IXmlSerializable, IModelSerializable<Slideshow>
     {
-        void IXmlModelSerializable.Serialize(XmlWriter writer, ModelSerializerOptions options) => ((IXmlSerializable)this).Write(writer, null, options);
-
-        void IXmlSerializable.Write(XmlWriter writer, string nameHint, ModelSerializerOptions options)
+        private void Serialize(XmlWriter writer, string nameHint, ModelSerializerOptions options)
         {
             writer.WriteStartElement("slideshow");
             if (Optional.IsDefined(Title))
@@ -43,20 +43,17 @@ namespace xml_service.Models
             {
                 foreach (var item in Slides)
                 {
-                    writer.WriteObjectValue(item, "slide", options);
+                    writer.WriteObjectValue(item, "slide");
                 }
             }
             writer.WriteEndElement();
         }
 
-        object IModelSerializable.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            return DeserializeSlideshow(XElement.Load(data.ToStream()), options);
-        }
+        void IXmlSerializable.Write(XmlWriter writer, string nameHint) => Serialize(writer, nameHint, ModelSerializerOptions.DefaultWireOptions);
 
         internal static Slideshow DeserializeSlideshow(XElement element, ModelSerializerOptions options = default)
         {
-            options ??= ModelSerializerOptions.AzureServiceDefault;
+            options ??= ModelSerializerOptions.DefaultWireOptions;
             string title = default;
             string date = default;
             string author = default;
@@ -79,7 +76,53 @@ namespace xml_service.Models
                 array.Add(Slide.DeserializeSlide(e));
             }
             slides = array;
-            return new Slideshow(title, date, author, slides);
+            return new Slideshow(title, date, author, slides, default);
+        }
+
+        BinaryData IModelSerializable<Slideshow>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            options ??= ModelSerializerOptions.DefaultWireOptions;
+            using MemoryStream stream = new MemoryStream();
+            using XmlWriter writer = XmlWriter.Create(stream);
+            Serialize(writer, null, options);
+            writer.Flush();
+            if (stream.Position > int.MaxValue)
+            {
+                return BinaryData.FromStream(stream);
+            }
+            else
+            {
+                return new BinaryData(stream.GetBuffer().AsMemory(0, (int)stream.Position));
+            }
+        }
+
+        Slideshow IModelSerializable<Slideshow>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            return DeserializeSlideshow(XElement.Load(data.ToStream()), options);
+        }
+
+        public static implicit operator RequestContent(Slideshow model)
+        {
+            if (model is null)
+            {
+                return null;
+            }
+
+            return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
+        }
+
+        public static explicit operator Slideshow(Response response)
+        {
+            if (response is null)
+            {
+                return null;
+            }
+
+            return DeserializeSlideshow(XElement.Load(response.ContentStream), ModelSerializerOptions.DefaultWireOptions);
         }
     }
 }

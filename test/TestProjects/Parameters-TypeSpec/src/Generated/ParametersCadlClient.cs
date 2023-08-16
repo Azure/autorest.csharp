@@ -52,7 +52,7 @@ namespace ParametersCadl
         {
             RequestContext context = FromCancellationToken(cancellationToken);
             Response response = await OperationAsync(start, end, context).ConfigureAwait(false);
-            return Response.FromValue(Result.FromResponse(response), response);
+            return Response.FromValue((Result)response, response);
         }
 
         /// <param name="start"> The Int32 to use. </param>
@@ -63,7 +63,7 @@ namespace ParametersCadl
         {
             RequestContext context = FromCancellationToken(cancellationToken);
             Response response = Operation(start, end, context);
-            return Response.FromValue(Result.FromResponse(response), response);
+            return Response.FromValue((Result)response, response);
         }
 
         /// <summary>
@@ -148,7 +148,7 @@ namespace ParametersCadl
         {
             RequestContext context = FromCancellationToken(cancellationToken);
             Response response = await Operation2Async(end, start, context).ConfigureAwait(false);
-            return Response.FromValue(Result.FromResponse(response), response);
+            return Response.FromValue((Result)response, response);
         }
 
         /// <param name="end"> The Int32 to use. </param>
@@ -159,7 +159,7 @@ namespace ParametersCadl
         {
             RequestContext context = FromCancellationToken(cancellationToken);
             Response response = Operation2(end, start, context);
-            return Response.FromValue(Result.FromResponse(response), response);
+            return Response.FromValue((Result)response, response);
         }
 
         /// <summary>

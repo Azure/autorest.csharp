@@ -8,17 +8,20 @@
 using System;
 using System.Collections.Generic;
 using System.Text.Json;
+using Azure;
 using Azure.Core;
 using Azure.Core.Serialization;
 
 namespace ModelShapes.Models
 {
-    public partial class OutputModel : IUtf8JsonSerializable, IJsonModelSerializable
+    public partial class OutputModel : IUtf8JsonSerializable, IModelJsonSerializable<OutputModel>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModelSerializable)this).Serialize(writer, ModelSerializerOptions.AzureServiceDefault);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<OutputModel>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
 
-        void IJsonModelSerializable.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
+        void IModelJsonSerializable<OutputModel>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
             writer.WriteStartObject();
             writer.WritePropertyName("RequiredString"u8);
             writer.WriteStringValue(RequiredString);
@@ -86,7 +89,7 @@ namespace ModelShapes.Models
             {
                 writer.WriteNull("RequiredNullableInt");
             }
-            if (RequiredNullableStringList != null)
+            if (RequiredNullableStringList != null && Optional.IsCollectionDefined(RequiredNullableStringList))
             {
                 writer.WritePropertyName("RequiredNullableStringList"u8);
                 writer.WriteStartArray();
@@ -100,7 +103,7 @@ namespace ModelShapes.Models
             {
                 writer.WriteNull("RequiredNullableStringList");
             }
-            if (RequiredNullableIntList != null)
+            if (RequiredNullableIntList != null && Optional.IsCollectionDefined(RequiredNullableIntList))
             {
                 writer.WritePropertyName("RequiredNullableIntList"u8);
                 writer.WriteStartArray();
@@ -172,18 +175,25 @@ namespace ModelShapes.Models
                     writer.WriteNull("NonRequiredNullableIntList");
                 }
             }
+            if (_rawData is not null && options.Format == ModelSerializerFormat.Json)
+            {
+                foreach (var property in _rawData)
+                {
+                    writer.WritePropertyName(property.Key);
+#if NET6_0_OR_GREATER
+				writer.WriteRawValue(property.Value);
+#else
+                    JsonSerializer.Serialize(writer, JsonDocument.Parse(property.Value.ToString()).RootElement);
+#endif
+                }
+            }
             writer.WriteEndObject();
-        }
-
-        object IModelSerializable.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            using var doc = JsonDocument.Parse(data);
-            return DeserializeOutputModel(doc.RootElement, options);
         }
 
         internal static OutputModel DeserializeOutputModel(JsonElement element, ModelSerializerOptions options = default)
         {
-            options ??= ModelSerializerOptions.AzureServiceDefault;
+            options ??= ModelSerializerOptions.DefaultWireOptions;
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
@@ -206,6 +216,7 @@ namespace ModelShapes.Models
             Optional<IReadOnlyList<int>> nonRequiredNullableIntList = default;
             int requiredReadonlyInt = default;
             Optional<int> nonRequiredReadonlyInt = default;
+            Dictionary<string, BinaryData> rawData = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("RequiredString"u8))
@@ -392,14 +403,57 @@ namespace ModelShapes.Models
                     nonRequiredReadonlyInt = property.Value.GetInt32();
                     continue;
                 }
+                if (options.Format == ModelSerializerFormat.Json)
+                {
+                    rawData.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
+                    continue;
+                }
             }
-            return new OutputModel(requiredString, requiredInt, requiredStringList, requiredIntList, nonRequiredString.Value, Optional.ToNullable(nonRequiredInt), Optional.ToList(nonRequiredStringList), Optional.ToList(nonRequiredIntList), requiredNullableString, requiredNullableInt, requiredNullableStringList, requiredNullableIntList, nonRequiredNullableString.Value, Optional.ToNullable(nonRequiredNullableInt), Optional.ToList(nonRequiredNullableStringList), Optional.ToList(nonRequiredNullableIntList), requiredReadonlyInt, Optional.ToNullable(nonRequiredReadonlyInt));
+            return new OutputModel(requiredString, requiredInt, requiredStringList, requiredIntList, nonRequiredString.Value, Optional.ToNullable(nonRequiredInt), Optional.ToList(nonRequiredStringList), Optional.ToList(nonRequiredIntList), requiredNullableString, requiredNullableInt, requiredNullableStringList, requiredNullableIntList, nonRequiredNullableString.Value, Optional.ToNullable(nonRequiredNullableInt), Optional.ToList(nonRequiredNullableStringList), Optional.ToList(nonRequiredNullableIntList), requiredReadonlyInt, Optional.ToNullable(nonRequiredReadonlyInt), rawData);
         }
 
-        object IJsonModelSerializable.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        OutputModel IModelJsonSerializable<OutputModel>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
         {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
             using var doc = JsonDocument.ParseValue(ref reader);
             return DeserializeOutputModel(doc.RootElement, options);
+        }
+
+        BinaryData IModelSerializable<OutputModel>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        OutputModel IModelSerializable<OutputModel>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using var doc = JsonDocument.Parse(data);
+            return DeserializeOutputModel(doc.RootElement, options);
+        }
+
+        public static implicit operator RequestContent(OutputModel model)
+        {
+            if (model is null)
+            {
+                return null;
+            }
+
+            return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
+        }
+
+        public static explicit operator OutputModel(Response response)
+        {
+            if (response is null)
+            {
+                return null;
+            }
+
+            using JsonDocument doc = JsonDocument.Parse(response.ContentStream);
+            return DeserializeOutputModel(doc.RootElement, ModelSerializerOptions.DefaultWireOptions);
         }
     }
 }

@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Collections.Generic;
 using Azure.Core;
 
@@ -13,25 +14,35 @@ namespace Azure.Network.Management.Interface.Models
     /// <summary> Common resource representation. </summary>
     public partial class Resource
     {
-        /// <summary> Initializes a new instance of Resource. </summary>
+        protected internal Dictionary<string, BinaryData> _rawData;
+
+        /// <summary>
+        /// Initializes a new instance of global::Azure.Network.Management.Interface.Models.Resource
+        ///
+        /// </summary>
         public Resource()
         {
             Tags = new ChangeTrackingDictionary<string, string>();
         }
 
-        /// <summary> Initializes a new instance of Resource. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::Azure.Network.Management.Interface.Models.Resource
+        ///
+        /// </summary>
         /// <param name="id"> Resource ID. </param>
         /// <param name="name"> Resource name. </param>
         /// <param name="type"> Resource type. </param>
         /// <param name="location"> Resource location. </param>
         /// <param name="tags"> Resource tags. </param>
-        internal Resource(string id, string name, string type, string location, IDictionary<string, string> tags)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal Resource(string id, string name, string type, string location, IDictionary<string, string> tags, Dictionary<string, BinaryData> rawData)
         {
             Id = id;
             Name = name;
             Type = type;
             Location = location;
             Tags = tags;
+            _rawData = rawData;
         }
 
         /// <summary> Resource ID. </summary>

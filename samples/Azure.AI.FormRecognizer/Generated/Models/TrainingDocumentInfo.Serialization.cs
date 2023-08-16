@@ -8,17 +8,20 @@
 using System;
 using System.Collections.Generic;
 using System.Text.Json;
+using Azure;
 using Azure.Core;
 using Azure.Core.Serialization;
 
 namespace Azure.AI.FormRecognizer.Models
 {
-    public partial class TrainingDocumentInfo : IUtf8JsonSerializable, IJsonModelSerializable
+    public partial class TrainingDocumentInfo : IUtf8JsonSerializable, IModelJsonSerializable<TrainingDocumentInfo>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModelSerializable)this).Serialize(writer, ModelSerializerOptions.AzureServiceDefault);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<TrainingDocumentInfo>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
 
-        void IJsonModelSerializable.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
+        void IModelJsonSerializable<TrainingDocumentInfo>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
             writer.WriteStartObject();
             writer.WritePropertyName("documentName"u8);
             writer.WriteStringValue(DocumentName);
@@ -33,18 +36,25 @@ namespace Azure.AI.FormRecognizer.Models
             writer.WriteEndArray();
             writer.WritePropertyName("status"u8);
             writer.WriteStringValue(Status.ToSerialString());
+            if (_rawData is not null && options.Format == ModelSerializerFormat.Json)
+            {
+                foreach (var property in _rawData)
+                {
+                    writer.WritePropertyName(property.Key);
+#if NET6_0_OR_GREATER
+				writer.WriteRawValue(property.Value);
+#else
+                    JsonSerializer.Serialize(writer, JsonDocument.Parse(property.Value.ToString()).RootElement);
+#endif
+                }
+            }
             writer.WriteEndObject();
-        }
-
-        object IModelSerializable.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            using var doc = JsonDocument.Parse(data);
-            return DeserializeTrainingDocumentInfo(doc.RootElement, options);
         }
 
         internal static TrainingDocumentInfo DeserializeTrainingDocumentInfo(JsonElement element, ModelSerializerOptions options = default)
         {
-            options ??= ModelSerializerOptions.AzureServiceDefault;
+            options ??= ModelSerializerOptions.DefaultWireOptions;
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
@@ -53,6 +63,7 @@ namespace Azure.AI.FormRecognizer.Models
             int pages = default;
             IReadOnlyList<ErrorInformation> errors = default;
             TrainStatus status = default;
+            Dictionary<string, BinaryData> rawData = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("documentName"u8))
@@ -80,14 +91,57 @@ namespace Azure.AI.FormRecognizer.Models
                     status = property.Value.GetString().ToTrainStatus();
                     continue;
                 }
+                if (options.Format == ModelSerializerFormat.Json)
+                {
+                    rawData.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
+                    continue;
+                }
             }
-            return new TrainingDocumentInfo(documentName, pages, errors, status);
+            return new TrainingDocumentInfo(documentName, pages, errors, status, rawData);
         }
 
-        object IJsonModelSerializable.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        TrainingDocumentInfo IModelJsonSerializable<TrainingDocumentInfo>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
         {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
             using var doc = JsonDocument.ParseValue(ref reader);
             return DeserializeTrainingDocumentInfo(doc.RootElement, options);
+        }
+
+        BinaryData IModelSerializable<TrainingDocumentInfo>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        TrainingDocumentInfo IModelSerializable<TrainingDocumentInfo>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using var doc = JsonDocument.Parse(data);
+            return DeserializeTrainingDocumentInfo(doc.RootElement, options);
+        }
+
+        public static implicit operator RequestContent(TrainingDocumentInfo model)
+        {
+            if (model is null)
+            {
+                return null;
+            }
+
+            return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
+        }
+
+        public static explicit operator TrainingDocumentInfo(Response response)
+        {
+            if (response is null)
+            {
+                return null;
+            }
+
+            using JsonDocument doc = JsonDocument.Parse(response.ContentStream);
+            return DeserializeTrainingDocumentInfo(doc.RootElement, ModelSerializerOptions.DefaultWireOptions);
         }
     }
 }

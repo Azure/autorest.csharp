@@ -5,44 +5,64 @@
 
 #nullable disable
 
+using System;
 using System.Text.Json;
-using Azure;
 using Azure.Core;
+using Azure.Core.Serialization;
 
 namespace _Type.Model.Inheritance.EnumDiscriminator.Models
 {
-    internal partial class UnknownSnake
+    internal partial class UnknownSnake : IUtf8JsonSerializable, IModelJsonSerializable<Snake>
     {
-        internal static UnknownSnake DeserializeUnknownSnake(JsonElement element)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<Snake>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+
+        void IModelJsonSerializable<Snake>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
-            if (element.ValueKind == JsonValueKind.Null)
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            writer.WriteStartObject();
+            writer.WritePropertyName("kind"u8);
+            writer.WriteStringValue(Kind.ToSerialString());
+            writer.WritePropertyName("length"u8);
+            writer.WriteNumberValue(Length);
+            if (_rawData is not null && options.Format == ModelSerializerFormat.Json)
             {
-                return null;
-            }
-            SnakeKind kind = default;
-            int length = default;
-            foreach (var property in element.EnumerateObject())
-            {
-                if (property.NameEquals("kind"u8))
+                foreach (var property in _rawData)
                 {
-                    kind = property.Value.GetString().ToSnakeKind();
-                    continue;
-                }
-                if (property.NameEquals("length"u8))
-                {
-                    length = property.Value.GetInt32();
-                    continue;
+                    writer.WritePropertyName(property.Key);
+#if NET6_0_OR_GREATER
+				writer.WriteRawValue(property.Value);
+#else
+                    JsonSerializer.Serialize(writer, JsonDocument.Parse(property.Value.ToString()).RootElement);
+#endif
                 }
             }
-            return new UnknownSnake(kind, length);
+            writer.WriteEndObject();
         }
 
-        /// <summary> Deserializes the model from a raw response. </summary>
-        /// <param name="response"> The response to deserialize the model from. </param>
-        internal static new UnknownSnake FromResponse(Response response)
+        internal static Snake DeserializeUnknownSnake(JsonElement element, ModelSerializerOptions options = default) => DeserializeSnake(element, options);
+
+        Snake IModelJsonSerializable<Snake>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
         {
-            using var document = JsonDocument.Parse(response.Content);
-            return DeserializeUnknownSnake(document.RootElement);
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using var doc = JsonDocument.ParseValue(ref reader);
+            return DeserializeUnknownSnake(doc.RootElement, options);
+        }
+
+        BinaryData IModelSerializable<Snake>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        Snake IModelSerializable<Snake>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using var doc = JsonDocument.Parse(data);
+            return DeserializeSnake(doc.RootElement, options);
         }
     }
 }

@@ -15,7 +15,12 @@ namespace CognitiveServices.TextAnalytics.Models
     /// <summary> The DocumentLanguage. </summary>
     public partial class DocumentLanguage
     {
-        /// <summary> Initializes a new instance of DocumentLanguage. </summary>
+        private Dictionary<string, BinaryData> _rawData;
+
+        /// <summary>
+        /// Initializes a new instance of global::CognitiveServices.TextAnalytics.Models.DocumentLanguage
+        ///
+        /// </summary>
         /// <param name="id"> Unique, non-empty document identifier. </param>
         /// <param name="detectedLanguage"> Detected Language. </param>
         /// <param name="warnings"> Warnings encountered while processing document. </param>
@@ -31,17 +36,22 @@ namespace CognitiveServices.TextAnalytics.Models
             Warnings = warnings.ToList();
         }
 
-        /// <summary> Initializes a new instance of DocumentLanguage. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::CognitiveServices.TextAnalytics.Models.DocumentLanguage
+        ///
+        /// </summary>
         /// <param name="id"> Unique, non-empty document identifier. </param>
         /// <param name="detectedLanguage"> Detected Language. </param>
         /// <param name="warnings"> Warnings encountered while processing document. </param>
         /// <param name="statistics"> if showStats=true was specified in the request this field will contain information about the document payload. </param>
-        internal DocumentLanguage(string id, DetectedLanguage detectedLanguage, IReadOnlyList<TextAnalyticsWarning> warnings, DocumentStatistics statistics)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal DocumentLanguage(string id, DetectedLanguage detectedLanguage, IReadOnlyList<TextAnalyticsWarning> warnings, DocumentStatistics statistics, Dictionary<string, BinaryData> rawData)
         {
             Id = id;
             DetectedLanguage = detectedLanguage;
             Warnings = warnings;
             Statistics = statistics;
+            _rawData = rawData;
         }
 
         /// <summary> Unique, non-empty document identifier. </summary>

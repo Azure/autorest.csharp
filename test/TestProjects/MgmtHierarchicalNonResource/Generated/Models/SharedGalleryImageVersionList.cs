@@ -15,7 +15,12 @@ namespace MgmtHierarchicalNonResource.Models
     /// <summary> The List Shared Gallery Image versions operation response. </summary>
     internal partial class SharedGalleryImageVersionList
     {
-        /// <summary> Initializes a new instance of SharedGalleryImageVersionList. </summary>
+        private Dictionary<string, BinaryData> _rawData;
+
+        /// <summary>
+        /// Initializes a new instance of global::MgmtHierarchicalNonResource.Models.SharedGalleryImageVersionList
+        ///
+        /// </summary>
         /// <param name="value"> A list of shared gallery images versions. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="value"/> is null. </exception>
         internal SharedGalleryImageVersionList(IEnumerable<SharedGalleryImageVersion> value)
@@ -25,13 +30,18 @@ namespace MgmtHierarchicalNonResource.Models
             Value = value.ToList();
         }
 
-        /// <summary> Initializes a new instance of SharedGalleryImageVersionList. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::MgmtHierarchicalNonResource.Models.SharedGalleryImageVersionList
+        ///
+        /// </summary>
         /// <param name="value"> A list of shared gallery images versions. </param>
         /// <param name="nextLink"> The uri to fetch the next page of shared gallery image versions. Call ListNext() with this to fetch the next page of shared gallery image versions. </param>
-        internal SharedGalleryImageVersionList(IReadOnlyList<SharedGalleryImageVersion> value, string nextLink)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal SharedGalleryImageVersionList(IReadOnlyList<SharedGalleryImageVersion> value, string nextLink, Dictionary<string, BinaryData> rawData)
         {
             Value = value;
             NextLink = nextLink;
+            _rawData = rawData;
         }
 
         /// <summary> A list of shared gallery images versions. </summary>

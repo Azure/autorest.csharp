@@ -5,6 +5,9 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
+
 namespace Azure.ResourceManager.Sample.Models
 {
     /// <summary>
@@ -13,12 +16,20 @@ namespace Azure.ResourceManager.Sample.Models
     /// </summary>
     public partial class DedicatedHostAllocatableVM
     {
-        /// <summary> Initializes a new instance of DedicatedHostAllocatableVM. </summary>
+        private Dictionary<string, BinaryData> _rawData;
+
+        /// <summary>
+        /// Initializes a new instance of global::Azure.ResourceManager.Sample.Models.DedicatedHostAllocatableVM
+        ///
+        /// </summary>
         internal DedicatedHostAllocatableVM()
         {
         }
 
-        /// <summary> Initializes a new instance of DedicatedHostAllocatableVM. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::Azure.ResourceManager.Sample.Models.DedicatedHostAllocatableVM
+        ///
+        /// </summary>
         /// <param name="vmSize">
         /// VM size in terms of which the unutilized capacity is represented.
         /// Serialized Name: DedicatedHostAllocatableVM.vmSize
@@ -27,10 +38,12 @@ namespace Azure.ResourceManager.Sample.Models
         /// Maximum number of VMs of size vmSize that can fit in the dedicated host's remaining capacity.
         /// Serialized Name: DedicatedHostAllocatableVM.count
         /// </param>
-        internal DedicatedHostAllocatableVM(string vmSize, double? count)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal DedicatedHostAllocatableVM(string vmSize, double? count, Dictionary<string, BinaryData> rawData)
         {
             VmSize = vmSize;
             Count = count;
+            _rawData = rawData;
         }
 
         /// <summary>

@@ -5,21 +5,34 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
+
 namespace Azure.ResourceManager.Storage.Models
 {
     /// <summary> The List service SAS credentials operation response. </summary>
     public partial class ListServiceSasResponse
     {
-        /// <summary> Initializes a new instance of ListServiceSasResponse. </summary>
+        private Dictionary<string, BinaryData> _rawData;
+
+        /// <summary>
+        /// Initializes a new instance of global::Azure.ResourceManager.Storage.Models.ListServiceSasResponse
+        ///
+        /// </summary>
         internal ListServiceSasResponse()
         {
         }
 
-        /// <summary> Initializes a new instance of ListServiceSasResponse. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::Azure.ResourceManager.Storage.Models.ListServiceSasResponse
+        ///
+        /// </summary>
         /// <param name="serviceSasToken"> List service SAS credentials of specific resource. </param>
-        internal ListServiceSasResponse(string serviceSasToken)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal ListServiceSasResponse(string serviceSasToken, Dictionary<string, BinaryData> rawData)
         {
             ServiceSasToken = serviceSasToken;
+            _rawData = rawData;
         }
 
         /// <summary> List service SAS credentials of specific resource. </summary>

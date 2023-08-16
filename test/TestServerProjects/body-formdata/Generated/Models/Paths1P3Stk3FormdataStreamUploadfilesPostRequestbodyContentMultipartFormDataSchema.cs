@@ -16,7 +16,12 @@ namespace body_formdata.Models
     /// <summary> The Paths1P3Stk3FormdataStreamUploadfilesPostRequestbodyContentMultipartFormDataSchema. </summary>
     internal partial class Paths1P3Stk3FormdataStreamUploadfilesPostRequestbodyContentMultipartFormDataSchema
     {
-        /// <summary> Initializes a new instance of Paths1P3Stk3FormdataStreamUploadfilesPostRequestbodyContentMultipartFormDataSchema. </summary>
+        private Dictionary<string, BinaryData> _rawData;
+
+        /// <summary>
+        /// Initializes a new instance of global::body_formdata.Models.Paths1P3Stk3FormdataStreamUploadfilesPostRequestbodyContentMultipartFormDataSchema
+        ///
+        /// </summary>
         /// <param name="fileContent"> Files to upload. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="fileContent"/> is null. </exception>
         internal Paths1P3Stk3FormdataStreamUploadfilesPostRequestbodyContentMultipartFormDataSchema(IEnumerable<Stream> fileContent)
@@ -26,11 +31,16 @@ namespace body_formdata.Models
             FileContent = fileContent.ToList();
         }
 
-        /// <summary> Initializes a new instance of Paths1P3Stk3FormdataStreamUploadfilesPostRequestbodyContentMultipartFormDataSchema. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::body_formdata.Models.Paths1P3Stk3FormdataStreamUploadfilesPostRequestbodyContentMultipartFormDataSchema
+        ///
+        /// </summary>
         /// <param name="fileContent"> Files to upload. </param>
-        internal Paths1P3Stk3FormdataStreamUploadfilesPostRequestbodyContentMultipartFormDataSchema(IReadOnlyList<Stream> fileContent)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal Paths1P3Stk3FormdataStreamUploadfilesPostRequestbodyContentMultipartFormDataSchema(IReadOnlyList<Stream> fileContent, Dictionary<string, BinaryData> rawData)
         {
             FileContent = fileContent;
+            _rawData = rawData;
         }
 
         /// <summary> Files to upload. </summary>

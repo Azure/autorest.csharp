@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Collections.Generic;
 using Azure.Core;
 using Azure.ResourceManager.Resources.Models;
@@ -14,17 +15,27 @@ namespace MgmtExpandResourceTypes.Models
     /// <summary> Represents the properties of the Dns Resource Reference Request. </summary>
     public partial class DnsResourceReferenceContent
     {
-        /// <summary> Initializes a new instance of DnsResourceReferenceContent. </summary>
+        private Dictionary<string, BinaryData> _rawData;
+
+        /// <summary>
+        /// Initializes a new instance of global::MgmtExpandResourceTypes.Models.DnsResourceReferenceContent
+        ///
+        /// </summary>
         public DnsResourceReferenceContent()
         {
             TargetResources = new ChangeTrackingList<WritableSubResource>();
         }
 
-        /// <summary> Initializes a new instance of DnsResourceReferenceContent. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::MgmtExpandResourceTypes.Models.DnsResourceReferenceContent
+        ///
+        /// </summary>
         /// <param name="targetResources"> A list of references to azure resources for which referencing dns records need to be queried. </param>
-        internal DnsResourceReferenceContent(IList<WritableSubResource> targetResources)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal DnsResourceReferenceContent(IList<WritableSubResource> targetResources, Dictionary<string, BinaryData> rawData)
         {
             TargetResources = targetResources;
+            _rawData = rawData;
         }
 
         /// <summary> A list of references to azure resources for which referencing dns records need to be queried. </summary>

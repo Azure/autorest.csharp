@@ -5,6 +5,9 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
+
 namespace Azure.ResourceManager.Sample.Models
 {
     /// <summary>
@@ -13,7 +16,12 @@ namespace Azure.ResourceManager.Sample.Models
     /// </summary>
     public partial class VirtualMachineScaleSetDataDisk
     {
-        /// <summary> Initializes a new instance of VirtualMachineScaleSetDataDisk. </summary>
+        private Dictionary<string, BinaryData> _rawData;
+
+        /// <summary>
+        /// Initializes a new instance of global::Azure.ResourceManager.Sample.Models.VirtualMachineScaleSetDataDisk
+        ///
+        /// </summary>
         /// <param name="lun">
         /// Specifies the logical unit number of the data disk. This value is used to identify data disks within the VM and therefore must be unique for each data disk attached to a VM.
         /// Serialized Name: VirtualMachineScaleSetDataDisk.lun
@@ -28,7 +36,10 @@ namespace Azure.ResourceManager.Sample.Models
             CreateOption = createOption;
         }
 
-        /// <summary> Initializes a new instance of VirtualMachineScaleSetDataDisk. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::Azure.ResourceManager.Sample.Models.VirtualMachineScaleSetDataDisk
+        ///
+        /// </summary>
         /// <param name="name">
         /// The disk name.
         /// Serialized Name: VirtualMachineScaleSetDataDisk.name
@@ -65,7 +76,8 @@ namespace Azure.ResourceManager.Sample.Models
         /// Specifies the bandwidth in MB per second for the managed disk. Should be used only when StorageAccountType is UltraSSD_LRS. If not specified, a default value would be assigned based on diskSizeGB.
         /// Serialized Name: VirtualMachineScaleSetDataDisk.diskMBpsReadWrite
         /// </param>
-        internal VirtualMachineScaleSetDataDisk(string name, int lun, CachingType? caching, bool? writeAcceleratorEnabled, DiskCreateOptionType createOption, int? diskSizeGB, VirtualMachineScaleSetManagedDiskParameters managedDisk, long? diskIopsReadWrite, long? diskMBpsReadWrite)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal VirtualMachineScaleSetDataDisk(string name, int lun, CachingType? caching, bool? writeAcceleratorEnabled, DiskCreateOptionType createOption, int? diskSizeGB, VirtualMachineScaleSetManagedDiskParameters managedDisk, long? diskIopsReadWrite, long? diskMBpsReadWrite, Dictionary<string, BinaryData> rawData)
         {
             Name = name;
             Lun = lun;
@@ -76,6 +88,7 @@ namespace Azure.ResourceManager.Sample.Models
             ManagedDisk = managedDisk;
             DiskIopsReadWrite = diskIopsReadWrite;
             DiskMBpsReadWrite = diskMBpsReadWrite;
+            _rawData = rawData;
         }
 
         /// <summary>

@@ -6,19 +6,23 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
 using System.Text.Json;
+using Azure;
 using Azure.Core;
 using Azure.Core.Serialization;
 using NamespaceForEnums;
 
 namespace CustomNamespace
 {
-    internal partial class CustomizedModel : IUtf8JsonSerializable, IJsonModelSerializable
+    internal partial class CustomizedModel : IUtf8JsonSerializable, IModelJsonSerializable<CustomizedModel>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModelSerializable)this).Serialize(writer, ModelSerializerOptions.AzureServiceDefault);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<CustomizedModel>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
 
-        void IJsonModelSerializable.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
+        void IModelJsonSerializable<CustomizedModel>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
             writer.WriteStartObject();
             if (Optional.IsDefined(PropertyRenamedAndTypeChanged))
             {
@@ -34,60 +38,63 @@ namespace CustomNamespace
             writer.WriteStringValue(CustomizedFancyField.ToSerialString());
             writer.WritePropertyName("DaysOfWeek"u8);
             writer.WriteStringValue(DaysOfWeek.ToString());
+            if (_rawData is not null && options.Format == ModelSerializerFormat.Json)
+            {
+                foreach (var property in _rawData)
+                {
+                    writer.WritePropertyName(property.Key);
+#if NET6_0_OR_GREATER
+				writer.WriteRawValue(property.Value);
+#else
+                    JsonSerializer.Serialize(writer, JsonDocument.Parse(property.Value.ToString()).RootElement);
+#endif
+                }
+            }
             writer.WriteEndObject();
         }
 
-        object IModelSerializable.Deserialize(BinaryData data, ModelSerializerOptions options)
+        CustomizedModel IModelJsonSerializable<CustomizedModel>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
         {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using var doc = JsonDocument.ParseValue(ref reader);
+            return DeserializeCustomizedModel(doc.RootElement, options);
+        }
+
+        BinaryData IModelSerializable<CustomizedModel>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        CustomizedModel IModelSerializable<CustomizedModel>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
             using var doc = JsonDocument.Parse(data);
             return DeserializeCustomizedModel(doc.RootElement, options);
         }
 
-        internal static CustomizedModel DeserializeCustomizedModel(JsonElement element, ModelSerializerOptions options = default)
+        public static implicit operator RequestContent(CustomizedModel model)
         {
-            options ??= ModelSerializerOptions.AzureServiceDefault;
-            if (element.ValueKind == JsonValueKind.Null)
+            if (model is null)
             {
                 return null;
             }
-            Optional<int> modelProperty = default;
-            Optional<string> propertyToField = default;
-            CustomFruitEnum fruit = default;
-            CustomDaysOfWeek daysOfWeek = default;
-            foreach (var property in element.EnumerateObject())
-            {
-                if (property.NameEquals("ModelProperty"u8))
-                {
-                    if (property.Value.ValueKind == JsonValueKind.Null)
-                    {
-                        continue;
-                    }
-                    modelProperty = property.Value.GetInt32();
-                    continue;
-                }
-                if (property.NameEquals("PropertyToField"u8))
-                {
-                    propertyToField = property.Value.GetString();
-                    continue;
-                }
-                if (property.NameEquals("Fruit"u8))
-                {
-                    fruit = property.Value.GetString().ToCustomFruitEnum();
-                    continue;
-                }
-                if (property.NameEquals("DaysOfWeek"u8))
-                {
-                    daysOfWeek = new CustomDaysOfWeek(property.Value.GetString());
-                    continue;
-                }
-            }
-            return new CustomizedModel(Optional.ToNullable(modelProperty), propertyToField.Value, fruit, daysOfWeek);
+
+            return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
         }
 
-        object IJsonModelSerializable.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        public static explicit operator CustomizedModel(Response response)
         {
-            using var doc = JsonDocument.ParseValue(ref reader);
-            return DeserializeCustomizedModel(doc.RootElement, options);
+            if (response is null)
+            {
+                return null;
+            }
+
+            using JsonDocument doc = JsonDocument.Parse(response.ContentStream);
+            return DeserializeCustomizedModel(doc.RootElement, ModelSerializerOptions.DefaultWireOptions);
         }
     }
 }

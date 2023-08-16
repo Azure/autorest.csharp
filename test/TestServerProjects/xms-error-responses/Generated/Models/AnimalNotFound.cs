@@ -5,23 +5,33 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
+
 namespace xms_error_responses.Models
 {
     /// <summary> The AnimalNotFound. </summary>
     internal partial class AnimalNotFound : NotFoundErrorBase
     {
-        /// <summary> Initializes a new instance of AnimalNotFound. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::xms_error_responses.Models.AnimalNotFound
+        ///
+        /// </summary>
         internal AnimalNotFound()
         {
             WhatNotFound = "AnimalNotFound";
         }
 
-        /// <summary> Initializes a new instance of AnimalNotFound. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::xms_error_responses.Models.AnimalNotFound
+        ///
+        /// </summary>
         /// <param name="someBaseProp"></param>
         /// <param name="reason"></param>
         /// <param name="whatNotFound"></param>
         /// <param name="name"></param>
-        internal AnimalNotFound(string someBaseProp, string reason, string whatNotFound, string name) : base(someBaseProp, reason, whatNotFound)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal AnimalNotFound(string someBaseProp, string reason, string whatNotFound, string name, Dictionary<string, BinaryData> rawData) : base(someBaseProp, reason, whatNotFound, rawData)
         {
             Name = name;
             WhatNotFound = whatNotFound ?? "AnimalNotFound";

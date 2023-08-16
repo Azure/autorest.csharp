@@ -5,16 +5,30 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
+
 namespace _Type.Property.ValueTypes.Models
 {
     /// <summary> Model with a int property. </summary>
     public partial class IntProperty
     {
+        private Dictionary<string, BinaryData> _rawData;
+
         /// <summary> Initializes a new instance of IntProperty. </summary>
         /// <param name="property"> Property. </param>
         public IntProperty(int property)
         {
             Property = property;
+        }
+
+        /// <summary> Initializes a new instance of IntProperty. </summary>
+        /// <param name="property"> Property. </param>
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal IntProperty(int property, Dictionary<string, BinaryData> rawData)
+        {
+            Property = property;
+            _rawData = rawData;
         }
 
         /// <summary> Property. </summary>

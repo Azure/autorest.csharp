@@ -14,20 +14,29 @@ namespace MgmtMockAndSample.Models
     /// <summary> Properties of the deleted vault. </summary>
     public partial class DeletedVaultProperties
     {
-        /// <summary> Initializes a new instance of DeletedVaultProperties. </summary>
+        private Dictionary<string, BinaryData> _rawData;
+
+        /// <summary>
+        /// Initializes a new instance of global::MgmtMockAndSample.Models.DeletedVaultProperties
+        ///
+        /// </summary>
         internal DeletedVaultProperties()
         {
             Tags = new ChangeTrackingDictionary<string, string>();
         }
 
-        /// <summary> Initializes a new instance of DeletedVaultProperties. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::MgmtMockAndSample.Models.DeletedVaultProperties
+        ///
+        /// </summary>
         /// <param name="vaultId"> The resource id of the original vault. </param>
         /// <param name="location"> The location of the original vault. </param>
         /// <param name="deletedOn"> The deleted date. </param>
         /// <param name="scheduledPurgeOn"> The scheduled purged date. </param>
         /// <param name="tags"> Tags of the original vault. </param>
         /// <param name="purgeProtectionEnabled"> Purge protection status of the original vault. </param>
-        internal DeletedVaultProperties(string vaultId, AzureLocation? location, DateTimeOffset? deletedOn, DateTimeOffset? scheduledPurgeOn, IReadOnlyDictionary<string, string> tags, bool? purgeProtectionEnabled)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal DeletedVaultProperties(string vaultId, AzureLocation? location, DateTimeOffset? deletedOn, DateTimeOffset? scheduledPurgeOn, IReadOnlyDictionary<string, string> tags, bool? purgeProtectionEnabled, Dictionary<string, BinaryData> rawData)
         {
             VaultId = vaultId;
             Location = location;
@@ -35,6 +44,7 @@ namespace MgmtMockAndSample.Models
             ScheduledPurgeOn = scheduledPurgeOn;
             Tags = tags;
             PurgeProtectionEnabled = purgeProtectionEnabled;
+            _rawData = rawData;
         }
 
         /// <summary> The resource id of the original vault. </summary>

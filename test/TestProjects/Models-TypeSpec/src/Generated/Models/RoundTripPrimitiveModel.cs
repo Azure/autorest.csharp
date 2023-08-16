@@ -55,7 +55,8 @@ namespace ModelsTypeSpec.Models
         /// <param name="requiredDateTimeOffset"> Required date time offset, illustrating a reference type property. </param>
         /// <param name="requiredTimeSpan"> Required time span, illustrating a value type property. </param>
         /// <param name="requiredCollectionWithNullableFloatElement"> Required collection of which the element is a nullable float. </param>
-        internal RoundTripPrimitiveModel(string requiredString, int requiredInt, long requiredInt64, long requiredSafeInt, float requiredFloat, double requiredDouble, bool requiredBoolean, DateTimeOffset requiredDateTimeOffset, TimeSpan requiredTimeSpan, IList<float?> requiredCollectionWithNullableFloatElement)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal RoundTripPrimitiveModel(string requiredString, int requiredInt, long requiredInt64, long requiredSafeInt, float requiredFloat, double requiredDouble, bool requiredBoolean, DateTimeOffset requiredDateTimeOffset, TimeSpan requiredTimeSpan, IList<float?> requiredCollectionWithNullableFloatElement, Dictionary<string, BinaryData> rawData) : base(rawData)
         {
             RequiredString = requiredString;
             RequiredInt = requiredInt;

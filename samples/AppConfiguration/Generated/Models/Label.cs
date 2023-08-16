@@ -5,21 +5,34 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
+
 namespace AppConfiguration.Models
 {
     /// <summary> The Label. </summary>
     public partial class Label
     {
-        /// <summary> Initializes a new instance of Label. </summary>
+        private Dictionary<string, BinaryData> _rawData;
+
+        /// <summary>
+        /// Initializes a new instance of global::AppConfiguration.Models.Label
+        ///
+        /// </summary>
         internal Label()
         {
         }
 
-        /// <summary> Initializes a new instance of Label. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::AppConfiguration.Models.Label
+        ///
+        /// </summary>
         /// <param name="name"></param>
-        internal Label(string name)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal Label(string name, Dictionary<string, BinaryData> rawData)
         {
             Name = name;
+            _rawData = rawData;
         }
 
         /// <summary> Gets the name. </summary>

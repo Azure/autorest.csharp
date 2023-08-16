@@ -5,25 +5,38 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
+
 namespace MgmtExactMatchInheritance.Models
 {
     /// <summary> The ExactMatchModel9. </summary>
     public partial class ExactMatchModel9
     {
-        /// <summary> Initializes a new instance of ExactMatchModel9. </summary>
+        protected internal Dictionary<string, BinaryData> _rawData;
+
+        /// <summary>
+        /// Initializes a new instance of global::MgmtExactMatchInheritance.Models.ExactMatchModel9
+        ///
+        /// </summary>
         public ExactMatchModel9()
         {
         }
 
-        /// <summary> Initializes a new instance of ExactMatchModel9. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::MgmtExactMatchInheritance.Models.ExactMatchModel9
+        ///
+        /// </summary>
         /// <param name="id"></param>
         /// <param name="name"></param>
         /// <param name="exactMatchModel9Type"></param>
-        internal ExactMatchModel9(int? id, string name, string exactMatchModel9Type)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal ExactMatchModel9(int? id, string name, string exactMatchModel9Type, Dictionary<string, BinaryData> rawData)
         {
             Id = id;
             Name = name;
             ExactMatchModel9Type = exactMatchModel9Type;
+            _rawData = rawData;
         }
 
         /// <summary> Gets or sets the id. </summary>

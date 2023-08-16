@@ -8,18 +8,21 @@
 using System;
 using System.Collections.Generic;
 using System.Text.Json;
+using Azure;
 using Azure.Core;
 using Azure.Core.Expressions.DataFactory;
 using Azure.Core.Serialization;
 
 namespace Inheritance.Models
 {
-    public partial class ClassThatInheritsFromSomePropertiesAndBaseClass : IUtf8JsonSerializable, IJsonModelSerializable
+    public partial class ClassThatInheritsFromSomePropertiesAndBaseClass : IUtf8JsonSerializable, IModelJsonSerializable<ClassThatInheritsFromSomePropertiesAndBaseClass>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModelSerializable)this).Serialize(writer, ModelSerializerOptions.AzureServiceDefault);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<ClassThatInheritsFromSomePropertiesAndBaseClass>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
 
-        void IJsonModelSerializable.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
+        void IModelJsonSerializable<ClassThatInheritsFromSomePropertiesAndBaseClass>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
+            ModelSerializerHelper.ValidateFormat<ClassThatInheritsFromSomePropertiesAndBaseClass>(this, options.Format);
+
             writer.WriteStartObject();
             if (Optional.IsDefined(BaseClassProperty))
             {
@@ -91,18 +94,25 @@ namespace Inheritance.Models
                 writer.WritePropertyName("SomeOtherProperty"u8);
                 writer.WriteStringValue(SomeOtherProperty);
             }
+            if (_rawData is not null && options.Format == ModelSerializerFormat.Json)
+            {
+                foreach (var property in _rawData)
+                {
+                    writer.WritePropertyName(property.Key);
+#if NET6_0_OR_GREATER
+				writer.WriteRawValue(property.Value);
+#else
+                    JsonSerializer.Serialize(writer, JsonDocument.Parse(property.Value.ToString()).RootElement);
+#endif
+                }
+            }
             writer.WriteEndObject();
-        }
-
-        object IModelSerializable.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            using var doc = JsonDocument.Parse(data);
-            return DeserializeClassThatInheritsFromSomePropertiesAndBaseClass(doc.RootElement, options);
         }
 
         internal static ClassThatInheritsFromSomePropertiesAndBaseClass DeserializeClassThatInheritsFromSomePropertiesAndBaseClass(JsonElement element, ModelSerializerOptions options = default)
         {
-            options ??= ModelSerializerOptions.AzureServiceDefault;
+            options ??= ModelSerializerOptions.DefaultWireOptions;
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
@@ -121,6 +131,7 @@ namespace Inheritance.Models
             Optional<DataFactoryElement<Uri>> dfeUri = default;
             Optional<string> someProperty = default;
             Optional<string> someOtherProperty = default;
+            Dictionary<string, BinaryData> rawData = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("BaseClassProperty"u8))
@@ -237,14 +248,57 @@ namespace Inheritance.Models
                     someOtherProperty = property.Value.GetString();
                     continue;
                 }
+                if (options.Format == ModelSerializerFormat.Json)
+                {
+                    rawData.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
+                    continue;
+                }
             }
-            return new ClassThatInheritsFromSomePropertiesAndBaseClass(someProperty.Value, someOtherProperty.Value, baseClassProperty.Value, dfeString.Value, dfeDouble.Value, dfeBool.Value, dfeInt.Value, dfeObject.Value, dfeListOfT.Value, dfeListOfString.Value, dfeKeyValuePairs.Value, dfeDateTime.Value, dfeDuration.Value, dfeUri.Value);
+            return new ClassThatInheritsFromSomePropertiesAndBaseClass(someProperty.Value, someOtherProperty.Value, baseClassProperty.Value, dfeString.Value, dfeDouble.Value, dfeBool.Value, dfeInt.Value, dfeObject.Value, dfeListOfT.Value, dfeListOfString.Value, dfeKeyValuePairs.Value, dfeDateTime.Value, dfeDuration.Value, dfeUri.Value, rawData);
         }
 
-        object IJsonModelSerializable.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        ClassThatInheritsFromSomePropertiesAndBaseClass IModelJsonSerializable<ClassThatInheritsFromSomePropertiesAndBaseClass>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
         {
+            ModelSerializerHelper.ValidateFormat<ClassThatInheritsFromSomePropertiesAndBaseClass>(this, options.Format);
+
             using var doc = JsonDocument.ParseValue(ref reader);
             return DeserializeClassThatInheritsFromSomePropertiesAndBaseClass(doc.RootElement, options);
+        }
+
+        BinaryData IModelSerializable<ClassThatInheritsFromSomePropertiesAndBaseClass>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat<ClassThatInheritsFromSomePropertiesAndBaseClass>(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        ClassThatInheritsFromSomePropertiesAndBaseClass IModelSerializable<ClassThatInheritsFromSomePropertiesAndBaseClass>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat<ClassThatInheritsFromSomePropertiesAndBaseClass>(this, options.Format);
+
+            using var doc = JsonDocument.Parse(data);
+            return DeserializeClassThatInheritsFromSomePropertiesAndBaseClass(doc.RootElement, options);
+        }
+
+        public static implicit operator RequestContent(ClassThatInheritsFromSomePropertiesAndBaseClass model)
+        {
+            if (model is null)
+            {
+                return null;
+            }
+
+            return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
+        }
+
+        public static explicit operator ClassThatInheritsFromSomePropertiesAndBaseClass(Response response)
+        {
+            if (response is null)
+            {
+                return null;
+            }
+
+            using JsonDocument doc = JsonDocument.Parse(response.ContentStream);
+            return DeserializeClassThatInheritsFromSomePropertiesAndBaseClass(doc.RootElement, ModelSerializerOptions.DefaultWireOptions);
         }
     }
 }

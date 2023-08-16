@@ -5,6 +5,8 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
 using MgmtSupersetInheritance.Models;
 
 namespace MgmtSupersetInheritance
@@ -15,24 +17,34 @@ namespace MgmtSupersetInheritance
     /// </summary>
     public partial class SupersetModel7Data
     {
-        /// <summary> Initializes a new instance of SupersetModel7Data. </summary>
+        private Dictionary<string, BinaryData> _rawData;
+
+        /// <summary>
+        /// Initializes a new instance of global::MgmtSupersetInheritance.SupersetModel7Data
+        ///
+        /// </summary>
         public SupersetModel7Data()
         {
         }
 
-        /// <summary> Initializes a new instance of SupersetModel7Data. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::MgmtSupersetInheritance.SupersetModel7Data
+        ///
+        /// </summary>
         /// <param name="id"></param>
         /// <param name="name"></param>
         /// <param name="resourceType"></param>
         /// <param name="new"></param>
         /// <param name="systemData"> Metadata pertaining to creation and last modification of the resource. </param>
-        internal SupersetModel7Data(string id, string name, string resourceType, string @new, SupersetModel7SystemData systemData)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal SupersetModel7Data(string id, string name, string resourceType, string @new, SupersetModel7SystemData systemData, Dictionary<string, BinaryData> rawData)
         {
             Id = id;
             Name = name;
             ResourceType = resourceType;
             New = @new;
             SystemData = systemData;
+            _rawData = rawData;
         }
 
         /// <summary> Gets the id. </summary>

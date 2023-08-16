@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
 using System.Text.Json;
 using Azure;
 using Azure.Core;
@@ -13,12 +14,14 @@ using Azure.Core.Serialization;
 
 namespace ModelsTypeSpec.Models
 {
-    public partial class BaseModelWithDiscriminator : IUtf8JsonSerializable, IJsonModelSerializable
+    public partial class BaseModelWithDiscriminator : IUtf8JsonSerializable, IModelJsonSerializable<BaseModelWithDiscriminator>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModelSerializable)this).Serialize(writer, ModelSerializerOptions.AzureServiceDefault);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<BaseModelWithDiscriminator>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
 
-        void IJsonModelSerializable.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
+        void IModelJsonSerializable<BaseModelWithDiscriminator>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
             writer.WriteStartObject();
             writer.WritePropertyName("discriminatorProperty"u8);
             writer.WriteStringValue(DiscriminatorProperty);
@@ -29,18 +32,25 @@ namespace ModelsTypeSpec.Models
             }
             writer.WritePropertyName("requiredPropertyOnBase"u8);
             writer.WriteNumberValue(RequiredPropertyOnBase);
+            if (_rawData is not null && options.Format == ModelSerializerFormat.Json)
+            {
+                foreach (var property in _rawData)
+                {
+                    writer.WritePropertyName(property.Key);
+#if NET6_0_OR_GREATER
+				writer.WriteRawValue(property.Value);
+#else
+                    JsonSerializer.Serialize(writer, JsonDocument.Parse(property.Value.ToString()).RootElement);
+#endif
+                }
+            }
             writer.WriteEndObject();
-        }
-
-        object IModelSerializable.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            using var doc = JsonDocument.Parse(data);
-            return DeserializeBaseModelWithDiscriminator(doc.RootElement, options);
         }
 
         internal static BaseModelWithDiscriminator DeserializeBaseModelWithDiscriminator(JsonElement element, ModelSerializerOptions options = default)
         {
-            options ??= ModelSerializerOptions.AzureServiceDefault;
+            options ??= ModelSerializerOptions.DefaultWireOptions;
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
@@ -53,29 +63,80 @@ namespace ModelsTypeSpec.Models
                     case "B": return DerivedModelWithDiscriminatorB.DeserializeDerivedModelWithDiscriminatorB(element);
                 }
             }
-            return UnknownBaseModelWithDiscriminator.DeserializeUnknownBaseModelWithDiscriminator(element);
+
+            // Unknown type found so we will deserialize the base properties only
+            string discriminatorProperty = default;
+            Optional<string> optionalPropertyOnBase = default;
+            int requiredPropertyOnBase = default;
+            Dictionary<string, BinaryData> rawData = new Dictionary<string, BinaryData>();
+            foreach (var property in element.EnumerateObject())
+            {
+                if (property.NameEquals("discriminatorProperty"u8))
+                {
+                    discriminatorProperty = property.Value.GetString();
+                    continue;
+                }
+                if (property.NameEquals("optionalPropertyOnBase"u8))
+                {
+                    optionalPropertyOnBase = property.Value.GetString();
+                    continue;
+                }
+                if (property.NameEquals("requiredPropertyOnBase"u8))
+                {
+                    requiredPropertyOnBase = property.Value.GetInt32();
+                    continue;
+                }
+                if (options.Format == ModelSerializerFormat.Json)
+                {
+                    rawData.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
+                    continue;
+                }
+            }
+            return new UnknownBaseModelWithDiscriminator(discriminatorProperty, optionalPropertyOnBase.Value, requiredPropertyOnBase, rawData);
         }
 
-        object IJsonModelSerializable.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        BaseModelWithDiscriminator IModelJsonSerializable<BaseModelWithDiscriminator>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
         {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
             using var doc = JsonDocument.ParseValue(ref reader);
             return DeserializeBaseModelWithDiscriminator(doc.RootElement, options);
         }
 
-        /// <summary> Deserializes the model from a raw response. </summary>
-        /// <param name="response"> The response to deserialize the model from. </param>
-        internal static BaseModelWithDiscriminator FromResponse(Response response)
+        BinaryData IModelSerializable<BaseModelWithDiscriminator>.Serialize(ModelSerializerOptions options)
         {
-            using var document = JsonDocument.Parse(response.Content);
-            return DeserializeBaseModelWithDiscriminator(document.RootElement);
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
         }
 
-        /// <summary> Convert into a Utf8JsonRequestContent. </summary>
-        internal virtual RequestContent ToRequestContent()
+        BaseModelWithDiscriminator IModelSerializable<BaseModelWithDiscriminator>.Deserialize(BinaryData data, ModelSerializerOptions options)
         {
-            var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue(this);
-            return content;
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using var doc = JsonDocument.Parse(data);
+            return DeserializeBaseModelWithDiscriminator(doc.RootElement, options);
+        }
+
+        public static implicit operator RequestContent(BaseModelWithDiscriminator model)
+        {
+            if (model is null)
+            {
+                return null;
+            }
+
+            return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
+        }
+
+        public static explicit operator BaseModelWithDiscriminator(Response response)
+        {
+            if (response is null)
+            {
+                return null;
+            }
+
+            using JsonDocument doc = JsonDocument.Parse(response.ContentStream);
+            return DeserializeBaseModelWithDiscriminator(doc.RootElement, ModelSerializerOptions.DefaultWireOptions);
         }
     }
 }

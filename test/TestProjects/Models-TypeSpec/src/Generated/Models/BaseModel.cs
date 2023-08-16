@@ -5,14 +5,26 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
+
 namespace ModelsTypeSpec.Models
 {
     /// <summary> Base model. </summary>
     public partial class BaseModel
     {
+        protected internal Dictionary<string, BinaryData> _rawData;
+
         /// <summary> Initializes a new instance of BaseModel. </summary>
         public BaseModel()
         {
+        }
+
+        /// <summary> Initializes a new instance of BaseModel. </summary>
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal BaseModel(Dictionary<string, BinaryData> rawData)
+        {
+            _rawData = rawData;
         }
     }
 }

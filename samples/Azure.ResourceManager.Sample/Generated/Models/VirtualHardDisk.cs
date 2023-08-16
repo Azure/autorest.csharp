@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
 
 namespace Azure.ResourceManager.Sample.Models
 {
@@ -15,19 +16,29 @@ namespace Azure.ResourceManager.Sample.Models
     /// </summary>
     internal partial class VirtualHardDisk
     {
-        /// <summary> Initializes a new instance of VirtualHardDisk. </summary>
+        private Dictionary<string, BinaryData> _rawData;
+
+        /// <summary>
+        /// Initializes a new instance of global::Azure.ResourceManager.Sample.Models.VirtualHardDisk
+        ///
+        /// </summary>
         public VirtualHardDisk()
         {
         }
 
-        /// <summary> Initializes a new instance of VirtualHardDisk. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::Azure.ResourceManager.Sample.Models.VirtualHardDisk
+        ///
+        /// </summary>
         /// <param name="uri">
         /// Specifies the virtual hard disk's uri.
         /// Serialized Name: VirtualHardDisk.uri
         /// </param>
-        internal VirtualHardDisk(Uri uri)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal VirtualHardDisk(Uri uri, Dictionary<string, BinaryData> rawData)
         {
             Uri = uri;
+            _rawData = rawData;
         }
 
         /// <summary>

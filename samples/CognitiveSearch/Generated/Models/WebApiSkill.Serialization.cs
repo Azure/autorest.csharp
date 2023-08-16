@@ -8,17 +8,20 @@
 using System;
 using System.Collections.Generic;
 using System.Text.Json;
+using Azure;
 using Azure.Core;
 using Azure.Core.Serialization;
 
 namespace CognitiveSearch.Models
 {
-    public partial class WebApiSkill : IUtf8JsonSerializable, IJsonModelSerializable
+    public partial class WebApiSkill : IUtf8JsonSerializable, IModelJsonSerializable<WebApiSkill>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModelSerializable)this).Serialize(writer, ModelSerializerOptions.AzureServiceDefault);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<WebApiSkill>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
 
-        void IJsonModelSerializable.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
+        void IModelJsonSerializable<WebApiSkill>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
+            ModelSerializerHelper.ValidateFormat<WebApiSkill>(this, options.Format);
+
             writer.WriteStartObject();
             writer.WritePropertyName("uri"u8);
             writer.WriteStringValue(Uri);
@@ -98,18 +101,25 @@ namespace CognitiveSearch.Models
                 writer.WriteObjectValue(item);
             }
             writer.WriteEndArray();
+            if (_rawData is not null && options.Format == ModelSerializerFormat.Json)
+            {
+                foreach (var property in _rawData)
+                {
+                    writer.WritePropertyName(property.Key);
+#if NET6_0_OR_GREATER
+				writer.WriteRawValue(property.Value);
+#else
+                    JsonSerializer.Serialize(writer, JsonDocument.Parse(property.Value.ToString()).RootElement);
+#endif
+                }
+            }
             writer.WriteEndObject();
-        }
-
-        object IModelSerializable.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            using var doc = JsonDocument.Parse(data);
-            return DeserializeWebApiSkill(doc.RootElement, options);
         }
 
         internal static WebApiSkill DeserializeWebApiSkill(JsonElement element, ModelSerializerOptions options = default)
         {
-            options ??= ModelSerializerOptions.AzureServiceDefault;
+            options ??= ModelSerializerOptions.DefaultWireOptions;
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
@@ -126,6 +136,7 @@ namespace CognitiveSearch.Models
             Optional<string> context = default;
             IList<InputFieldMappingEntry> inputs = default;
             IList<OutputFieldMappingEntry> outputs = default;
+            Dictionary<string, BinaryData> rawData = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("uri"u8))
@@ -221,14 +232,57 @@ namespace CognitiveSearch.Models
                     outputs = array;
                     continue;
                 }
+                if (options.Format == ModelSerializerFormat.Json)
+                {
+                    rawData.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
+                    continue;
+                }
             }
-            return new WebApiSkill(odataType, name.Value, description.Value, context.Value, inputs, outputs, uri, Optional.ToDictionary(httpHeaders), httpMethod.Value, Optional.ToNullable(timeout), Optional.ToNullable(batchSize), Optional.ToNullable(degreeOfParallelism));
+            return new WebApiSkill(odataType, name.Value, description.Value, context.Value, inputs, outputs, uri, Optional.ToDictionary(httpHeaders), httpMethod.Value, Optional.ToNullable(timeout), Optional.ToNullable(batchSize), Optional.ToNullable(degreeOfParallelism), rawData);
         }
 
-        object IJsonModelSerializable.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        WebApiSkill IModelJsonSerializable<WebApiSkill>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
         {
+            ModelSerializerHelper.ValidateFormat<WebApiSkill>(this, options.Format);
+
             using var doc = JsonDocument.ParseValue(ref reader);
             return DeserializeWebApiSkill(doc.RootElement, options);
+        }
+
+        BinaryData IModelSerializable<WebApiSkill>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat<WebApiSkill>(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        WebApiSkill IModelSerializable<WebApiSkill>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat<WebApiSkill>(this, options.Format);
+
+            using var doc = JsonDocument.Parse(data);
+            return DeserializeWebApiSkill(doc.RootElement, options);
+        }
+
+        public static implicit operator RequestContent(WebApiSkill model)
+        {
+            if (model is null)
+            {
+                return null;
+            }
+
+            return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
+        }
+
+        public static explicit operator WebApiSkill(Response response)
+        {
+            if (response is null)
+            {
+                return null;
+            }
+
+            using JsonDocument doc = JsonDocument.Parse(response.ContentStream);
+            return DeserializeWebApiSkill(doc.RootElement, ModelSerializerOptions.DefaultWireOptions);
         }
     }
 }

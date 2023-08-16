@@ -19,13 +19,19 @@ namespace MgmtRenameRules
     /// </summary>
     public partial class VirtualMachineScaleSetExtensionData : SubResourceReadOnly
     {
-        /// <summary> Initializes a new instance of VirtualMachineScaleSetExtensionData. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::MgmtRenameRules.VirtualMachineScaleSetExtensionData
+        ///
+        /// </summary>
         public VirtualMachineScaleSetExtensionData()
         {
             ProvisionAfterExtensions = new ChangeTrackingList<string>();
         }
 
-        /// <summary> Initializes a new instance of VirtualMachineScaleSetExtensionData. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::MgmtRenameRules.VirtualMachineScaleSetExtensionData
+        ///
+        /// </summary>
         /// <param name="id">
         /// Resource Id
         /// Serialized Name: SubResourceReadOnly.id
@@ -78,7 +84,8 @@ namespace MgmtRenameRules
         /// Collection of extension names after which this extension needs to be provisioned.
         /// Serialized Name: VirtualMachineScaleSetExtension.properties.provisionAfterExtensions
         /// </param>
-        internal VirtualMachineScaleSetExtensionData(string id, string name, string resourceType, string forceUpdateTag, string publisher, string typePropertiesType, string typeHandlerVersion, bool? autoUpgradeMinorVersion, bool? enableAutomaticUpgrade, BinaryData settings, BinaryData protectedSettings, string provisioningState, IList<string> provisionAfterExtensions) : base(id)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal VirtualMachineScaleSetExtensionData(string id, string name, string resourceType, string forceUpdateTag, string publisher, string typePropertiesType, string typeHandlerVersion, bool? autoUpgradeMinorVersion, bool? enableAutomaticUpgrade, BinaryData settings, BinaryData protectedSettings, string provisioningState, IList<string> provisionAfterExtensions, Dictionary<string, BinaryData> rawData) : base(id, rawData)
         {
             Name = name;
             ResourceType = resourceType;

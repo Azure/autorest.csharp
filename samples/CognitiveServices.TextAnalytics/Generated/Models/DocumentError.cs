@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
 using Azure.Core;
 
 namespace CognitiveServices.TextAnalytics.Models
@@ -13,7 +14,12 @@ namespace CognitiveServices.TextAnalytics.Models
     /// <summary> The DocumentError. </summary>
     public partial class DocumentError
     {
-        /// <summary> Initializes a new instance of DocumentError. </summary>
+        private Dictionary<string, BinaryData> _rawData;
+
+        /// <summary>
+        /// Initializes a new instance of global::CognitiveServices.TextAnalytics.Models.DocumentError
+        ///
+        /// </summary>
         /// <param name="id"> Document Id. </param>
         /// <param name="error"> Document Error. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="id"/> or <paramref name="error"/> is null. </exception>
@@ -24,6 +30,20 @@ namespace CognitiveServices.TextAnalytics.Models
 
             Id = id;
             Error = error;
+        }
+
+        /// <summary>
+        /// Initializes a new instance of global::CognitiveServices.TextAnalytics.Models.DocumentError
+        ///
+        /// </summary>
+        /// <param name="id"> Document Id. </param>
+        /// <param name="error"> Document Error. </param>
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal DocumentError(string id, TextAnalyticsError error, Dictionary<string, BinaryData> rawData)
+        {
+            Id = id;
+            Error = error;
+            _rawData = rawData;
         }
 
         /// <summary> Document Id. </summary>

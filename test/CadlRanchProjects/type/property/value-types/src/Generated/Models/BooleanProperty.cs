@@ -5,16 +5,30 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
+
 namespace _Type.Property.ValueTypes.Models
 {
     /// <summary> Model with a boolean property. </summary>
     public partial class BooleanProperty
     {
+        private Dictionary<string, BinaryData> _rawData;
+
         /// <summary> Initializes a new instance of BooleanProperty. </summary>
         /// <param name="property"> Property. </param>
         public BooleanProperty(bool property)
         {
             Property = property;
+        }
+
+        /// <summary> Initializes a new instance of BooleanProperty. </summary>
+        /// <param name="property"> Property. </param>
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal BooleanProperty(bool property, Dictionary<string, BinaryData> rawData)
+        {
+            Property = property;
+            _rawData = rawData;
         }
 
         /// <summary> Property. </summary>

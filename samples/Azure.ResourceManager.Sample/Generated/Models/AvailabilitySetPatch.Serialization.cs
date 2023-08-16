@@ -8,18 +8,21 @@
 using System;
 using System.Collections.Generic;
 using System.Text.Json;
+using Azure;
 using Azure.Core;
 using Azure.Core.Serialization;
 using Azure.ResourceManager.Resources.Models;
 
 namespace Azure.ResourceManager.Sample.Models
 {
-    public partial class AvailabilitySetPatch : IUtf8JsonSerializable, IJsonModelSerializable
+    public partial class AvailabilitySetPatch : IUtf8JsonSerializable, IModelJsonSerializable<AvailabilitySetPatch>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModelSerializable)this).Serialize(writer, ModelSerializerOptions.AzureServiceDefault);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<AvailabilitySetPatch>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
 
-        void IJsonModelSerializable.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
+        void IModelJsonSerializable<AvailabilitySetPatch>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
+            ModelSerializerHelper.ValidateFormat<AvailabilitySetPatch>(this, options.Format);
+
             writer.WriteStartObject();
             if (Optional.IsDefined(Sku))
             {
@@ -65,18 +68,25 @@ namespace Azure.ResourceManager.Sample.Models
                 JsonSerializer.Serialize(writer, ProximityPlacementGroup);
             }
             writer.WriteEndObject();
+            if (_rawData is not null && options.Format == ModelSerializerFormat.Json)
+            {
+                foreach (var property in _rawData)
+                {
+                    writer.WritePropertyName(property.Key);
+#if NET6_0_OR_GREATER
+				writer.WriteRawValue(property.Value);
+#else
+                    JsonSerializer.Serialize(writer, JsonDocument.Parse(property.Value.ToString()).RootElement);
+#endif
+                }
+            }
             writer.WriteEndObject();
-        }
-
-        object IModelSerializable.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            using var doc = JsonDocument.Parse(data);
-            return DeserializeAvailabilitySetPatch(doc.RootElement, options);
         }
 
         internal static AvailabilitySetPatch DeserializeAvailabilitySetPatch(JsonElement element, ModelSerializerOptions options = default)
         {
-            options ??= ModelSerializerOptions.AzureServiceDefault;
+            options ??= ModelSerializerOptions.DefaultWireOptions;
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
@@ -88,6 +98,7 @@ namespace Azure.ResourceManager.Sample.Models
             Optional<IList<WritableSubResource>> virtualMachines = default;
             Optional<WritableSubResource> proximityPlacementGroup = default;
             Optional<IReadOnlyList<InstanceViewStatus>> statuses = default;
+            Dictionary<string, BinaryData> rawData = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("sku"u8))
@@ -180,14 +191,57 @@ namespace Azure.ResourceManager.Sample.Models
                     }
                     continue;
                 }
+                if (options.Format == ModelSerializerFormat.Json)
+                {
+                    rawData.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
+                    continue;
+                }
             }
-            return new AvailabilitySetPatch(Optional.ToDictionary(tags), sku.Value, Optional.ToNullable(platformUpdateDomainCount), Optional.ToNullable(platformFaultDomainCount), Optional.ToList(virtualMachines), proximityPlacementGroup, Optional.ToList(statuses));
+            return new AvailabilitySetPatch(Optional.ToDictionary(tags), sku.Value, Optional.ToNullable(platformUpdateDomainCount), Optional.ToNullable(platformFaultDomainCount), Optional.ToList(virtualMachines), proximityPlacementGroup, Optional.ToList(statuses), rawData);
         }
 
-        object IJsonModelSerializable.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        AvailabilitySetPatch IModelJsonSerializable<AvailabilitySetPatch>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
         {
+            ModelSerializerHelper.ValidateFormat<AvailabilitySetPatch>(this, options.Format);
+
             using var doc = JsonDocument.ParseValue(ref reader);
             return DeserializeAvailabilitySetPatch(doc.RootElement, options);
+        }
+
+        BinaryData IModelSerializable<AvailabilitySetPatch>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat<AvailabilitySetPatch>(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        AvailabilitySetPatch IModelSerializable<AvailabilitySetPatch>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat<AvailabilitySetPatch>(this, options.Format);
+
+            using var doc = JsonDocument.Parse(data);
+            return DeserializeAvailabilitySetPatch(doc.RootElement, options);
+        }
+
+        public static implicit operator RequestContent(AvailabilitySetPatch model)
+        {
+            if (model is null)
+            {
+                return null;
+            }
+
+            return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
+        }
+
+        public static explicit operator AvailabilitySetPatch(Response response)
+        {
+            if (response is null)
+            {
+                return null;
+            }
+
+            using JsonDocument doc = JsonDocument.Parse(response.ContentStream);
+            return DeserializeAvailabilitySetPatch(doc.RootElement, ModelSerializerOptions.DefaultWireOptions);
         }
     }
 }

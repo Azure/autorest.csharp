@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
 using Azure.Core;
 
 namespace CognitiveSearch.Models
@@ -13,7 +14,12 @@ namespace CognitiveSearch.Models
     /// <summary> The result of Autocomplete requests. </summary>
     public partial class AutocompleteItem
     {
-        /// <summary> Initializes a new instance of AutocompleteItem. </summary>
+        private Dictionary<string, BinaryData> _rawData;
+
+        /// <summary>
+        /// Initializes a new instance of global::CognitiveSearch.Models.AutocompleteItem
+        ///
+        /// </summary>
         /// <param name="text"> The completed term. </param>
         /// <param name="queryPlusText"> The query along with the completed term. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="text"/> or <paramref name="queryPlusText"/> is null. </exception>
@@ -24,6 +30,20 @@ namespace CognitiveSearch.Models
 
             Text = text;
             QueryPlusText = queryPlusText;
+        }
+
+        /// <summary>
+        /// Initializes a new instance of global::CognitiveSearch.Models.AutocompleteItem
+        ///
+        /// </summary>
+        /// <param name="text"> The completed term. </param>
+        /// <param name="queryPlusText"> The query along with the completed term. </param>
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal AutocompleteItem(string text, string queryPlusText, Dictionary<string, BinaryData> rawData)
+        {
+            Text = text;
+            QueryPlusText = queryPlusText;
+            _rawData = rawData;
         }
 
         /// <summary> The completed term. </summary>

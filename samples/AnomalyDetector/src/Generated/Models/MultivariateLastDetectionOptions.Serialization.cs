@@ -14,12 +14,14 @@ using Azure.Core.Serialization;
 
 namespace AnomalyDetector.Models
 {
-    public partial class MultivariateLastDetectionOptions : IUtf8JsonSerializable, IJsonModelSerializable
+    public partial class MultivariateLastDetectionOptions : IUtf8JsonSerializable, IModelJsonSerializable<MultivariateLastDetectionOptions>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModelSerializable)this).Serialize(writer, ModelSerializerOptions.AzureServiceDefault);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<MultivariateLastDetectionOptions>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
 
-        void IJsonModelSerializable.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
+        void IModelJsonSerializable<MultivariateLastDetectionOptions>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
             writer.WriteStartObject();
             writer.WritePropertyName("variables"u8);
             writer.WriteStartArray();
@@ -30,24 +32,32 @@ namespace AnomalyDetector.Models
             writer.WriteEndArray();
             writer.WritePropertyName("topContributorCount"u8);
             writer.WriteNumberValue(TopContributorCount);
+            if (_rawData is not null && options.Format == ModelSerializerFormat.Json)
+            {
+                foreach (var property in _rawData)
+                {
+                    writer.WritePropertyName(property.Key);
+#if NET6_0_OR_GREATER
+				writer.WriteRawValue(property.Value);
+#else
+                    JsonSerializer.Serialize(writer, JsonDocument.Parse(property.Value.ToString()).RootElement);
+#endif
+                }
+            }
             writer.WriteEndObject();
-        }
-
-        object IModelSerializable.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            using var doc = JsonDocument.Parse(data);
-            return DeserializeMultivariateLastDetectionOptions(doc.RootElement, options);
         }
 
         internal static MultivariateLastDetectionOptions DeserializeMultivariateLastDetectionOptions(JsonElement element, ModelSerializerOptions options = default)
         {
-            options ??= ModelSerializerOptions.AzureServiceDefault;
+            options ??= ModelSerializerOptions.DefaultWireOptions;
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
             }
             IList<VariableValues> variables = default;
             int topContributorCount = default;
+            Dictionary<string, BinaryData> rawData = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("variables"u8))
@@ -65,30 +75,57 @@ namespace AnomalyDetector.Models
                     topContributorCount = property.Value.GetInt32();
                     continue;
                 }
+                if (options.Format == ModelSerializerFormat.Json)
+                {
+                    rawData.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
+                    continue;
+                }
             }
-            return new MultivariateLastDetectionOptions(variables, topContributorCount);
+            return new MultivariateLastDetectionOptions(variables, topContributorCount, rawData);
         }
 
-        object IJsonModelSerializable.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        MultivariateLastDetectionOptions IModelJsonSerializable<MultivariateLastDetectionOptions>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
         {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
             using var doc = JsonDocument.ParseValue(ref reader);
             return DeserializeMultivariateLastDetectionOptions(doc.RootElement, options);
         }
 
-        /// <summary> Deserializes the model from a raw response. </summary>
-        /// <param name="response"> The response to deserialize the model from. </param>
-        internal static MultivariateLastDetectionOptions FromResponse(Response response)
+        BinaryData IModelSerializable<MultivariateLastDetectionOptions>.Serialize(ModelSerializerOptions options)
         {
-            using var document = JsonDocument.Parse(response.Content);
-            return DeserializeMultivariateLastDetectionOptions(document.RootElement);
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
         }
 
-        /// <summary> Convert into a Utf8JsonRequestContent. </summary>
-        internal virtual RequestContent ToRequestContent()
+        MultivariateLastDetectionOptions IModelSerializable<MultivariateLastDetectionOptions>.Deserialize(BinaryData data, ModelSerializerOptions options)
         {
-            var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue(this);
-            return content;
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using var doc = JsonDocument.Parse(data);
+            return DeserializeMultivariateLastDetectionOptions(doc.RootElement, options);
+        }
+
+        public static implicit operator RequestContent(MultivariateLastDetectionOptions model)
+        {
+            if (model is null)
+            {
+                return null;
+            }
+
+            return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
+        }
+
+        public static explicit operator MultivariateLastDetectionOptions(Response response)
+        {
+            if (response is null)
+            {
+                return null;
+            }
+
+            using JsonDocument doc = JsonDocument.Parse(response.ContentStream);
+            return DeserializeMultivariateLastDetectionOptions(doc.RootElement, ModelSerializerOptions.DefaultWireOptions);
         }
     }
 }

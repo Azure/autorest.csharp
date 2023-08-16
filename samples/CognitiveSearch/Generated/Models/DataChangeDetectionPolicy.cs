@@ -5,6 +5,9 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
+
 namespace CognitiveSearch.Models
 {
     /// <summary>
@@ -14,16 +17,26 @@ namespace CognitiveSearch.Models
     /// </summary>
     public partial class DataChangeDetectionPolicy
     {
-        /// <summary> Initializes a new instance of DataChangeDetectionPolicy. </summary>
+        protected internal Dictionary<string, BinaryData> _rawData;
+
+        /// <summary>
+        /// Initializes a new instance of global::CognitiveSearch.Models.DataChangeDetectionPolicy
+        ///
+        /// </summary>
         public DataChangeDetectionPolicy()
         {
         }
 
-        /// <summary> Initializes a new instance of DataChangeDetectionPolicy. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::CognitiveSearch.Models.DataChangeDetectionPolicy
+        ///
+        /// </summary>
         /// <param name="odataType"> Identifies the concrete type of the data change detection policy. </param>
-        internal DataChangeDetectionPolicy(string odataType)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal DataChangeDetectionPolicy(string odataType, Dictionary<string, BinaryData> rawData)
         {
             OdataType = odataType;
+            _rawData = rawData;
         }
 
         /// <summary> Identifies the concrete type of the data change detection policy. </summary>

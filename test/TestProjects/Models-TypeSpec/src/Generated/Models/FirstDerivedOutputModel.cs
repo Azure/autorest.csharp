@@ -5,6 +5,9 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
+
 namespace ModelsTypeSpec.Models
 {
     /// <summary> First derived model as an output. </summary>
@@ -21,7 +24,8 @@ namespace ModelsTypeSpec.Models
         /// <summary> Initializes a new instance of FirstDerivedOutputModel. </summary>
         /// <param name="kind"> Discriminator. </param>
         /// <param name="first"></param>
-        internal FirstDerivedOutputModel(string kind, bool first) : base(kind)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal FirstDerivedOutputModel(string kind, bool first, Dictionary<string, BinaryData> rawData) : base(kind, rawData)
         {
             First = first;
         }

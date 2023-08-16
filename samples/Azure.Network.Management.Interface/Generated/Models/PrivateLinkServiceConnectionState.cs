@@ -5,25 +5,38 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
+
 namespace Azure.Network.Management.Interface.Models
 {
     /// <summary> A collection of information about the state of the connection between service consumer and provider. </summary>
     public partial class PrivateLinkServiceConnectionState
     {
-        /// <summary> Initializes a new instance of PrivateLinkServiceConnectionState. </summary>
+        private Dictionary<string, BinaryData> _rawData;
+
+        /// <summary>
+        /// Initializes a new instance of global::Azure.Network.Management.Interface.Models.PrivateLinkServiceConnectionState
+        ///
+        /// </summary>
         public PrivateLinkServiceConnectionState()
         {
         }
 
-        /// <summary> Initializes a new instance of PrivateLinkServiceConnectionState. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::Azure.Network.Management.Interface.Models.PrivateLinkServiceConnectionState
+        ///
+        /// </summary>
         /// <param name="status"> Indicates whether the connection has been Approved/Rejected/Removed by the owner of the service. </param>
         /// <param name="description"> The reason for approval/rejection of the connection. </param>
         /// <param name="actionsRequired"> A message indicating if changes on the service provider require any updates on the consumer. </param>
-        internal PrivateLinkServiceConnectionState(string status, string description, string actionsRequired)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal PrivateLinkServiceConnectionState(string status, string description, string actionsRequired, Dictionary<string, BinaryData> rawData)
         {
             Status = status;
             Description = description;
             ActionsRequired = actionsRequired;
+            _rawData = rawData;
         }
 
         /// <summary> Indicates whether the connection has been Approved/Rejected/Removed by the owner of the service. </summary>

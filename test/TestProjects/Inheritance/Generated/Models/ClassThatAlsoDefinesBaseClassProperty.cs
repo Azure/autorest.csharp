@@ -5,21 +5,34 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
+
 namespace Inheritance.Models
 {
     /// <summary> The ClassThatAlsoDefinesBaseClassProperty. </summary>
     internal partial class ClassThatAlsoDefinesBaseClassProperty
     {
-        /// <summary> Initializes a new instance of ClassThatAlsoDefinesBaseClassProperty. </summary>
+        private Dictionary<string, BinaryData> _rawData;
+
+        /// <summary>
+        /// Initializes a new instance of global::Inheritance.Models.ClassThatAlsoDefinesBaseClassProperty
+        ///
+        /// </summary>
         internal ClassThatAlsoDefinesBaseClassProperty()
         {
         }
 
-        /// <summary> Initializes a new instance of ClassThatAlsoDefinesBaseClassProperty. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::Inheritance.Models.ClassThatAlsoDefinesBaseClassProperty
+        ///
+        /// </summary>
         /// <param name="baseClassProperty"></param>
-        internal ClassThatAlsoDefinesBaseClassProperty(string baseClassProperty)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal ClassThatAlsoDefinesBaseClassProperty(string baseClassProperty, Dictionary<string, BinaryData> rawData)
         {
             BaseClassProperty = baseClassProperty;
+            _rawData = rawData;
         }
 
         /// <summary> Gets the base class property. </summary>

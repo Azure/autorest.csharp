@@ -6,18 +6,22 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
 using System.Text.Json;
+using Azure;
 using Azure.Core;
 using Azure.Core.Serialization;
 
 namespace FlattenedParameters.Models
 {
-    internal partial class Paths1Ti27MtOperationnotrequiredPatchRequestbodyContentApplicationJsonSchema : IUtf8JsonSerializable, IJsonModelSerializable
+    internal partial class Paths1Ti27MtOperationnotrequiredPatchRequestbodyContentApplicationJsonSchema : IUtf8JsonSerializable, IModelJsonSerializable<Paths1Ti27MtOperationnotrequiredPatchRequestbodyContentApplicationJsonSchema>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModelSerializable)this).Serialize(writer, ModelSerializerOptions.AzureServiceDefault);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<Paths1Ti27MtOperationnotrequiredPatchRequestbodyContentApplicationJsonSchema>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
 
-        void IJsonModelSerializable.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
+        void IModelJsonSerializable<Paths1Ti27MtOperationnotrequiredPatchRequestbodyContentApplicationJsonSchema>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
             writer.WriteStartObject();
             writer.WritePropertyName("flattened"u8);
             writer.WriteStartObject();
@@ -32,24 +36,32 @@ namespace FlattenedParameters.Models
                 writer.WriteStringValue(NonRequired);
             }
             writer.WriteEndObject();
+            if (_rawData is not null && options.Format == ModelSerializerFormat.Json)
+            {
+                foreach (var property in _rawData)
+                {
+                    writer.WritePropertyName(property.Key);
+#if NET6_0_OR_GREATER
+				writer.WriteRawValue(property.Value);
+#else
+                    JsonSerializer.Serialize(writer, JsonDocument.Parse(property.Value.ToString()).RootElement);
+#endif
+                }
+            }
             writer.WriteEndObject();
-        }
-
-        object IModelSerializable.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            using var doc = JsonDocument.Parse(data);
-            return DeserializePaths1Ti27MtOperationnotrequiredPatchRequestbodyContentApplicationJsonSchema(doc.RootElement, options);
         }
 
         internal static Paths1Ti27MtOperationnotrequiredPatchRequestbodyContentApplicationJsonSchema DeserializePaths1Ti27MtOperationnotrequiredPatchRequestbodyContentApplicationJsonSchema(JsonElement element, ModelSerializerOptions options = default)
         {
-            options ??= ModelSerializerOptions.AzureServiceDefault;
+            options ??= ModelSerializerOptions.DefaultWireOptions;
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
             }
             Optional<string> required = default;
             Optional<string> nonRequired = default;
+            Dictionary<string, BinaryData> rawData = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("flattened"u8))
@@ -74,14 +86,57 @@ namespace FlattenedParameters.Models
                     }
                     continue;
                 }
+                if (options.Format == ModelSerializerFormat.Json)
+                {
+                    rawData.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
+                    continue;
+                }
             }
-            return new Paths1Ti27MtOperationnotrequiredPatchRequestbodyContentApplicationJsonSchema(required.Value, nonRequired.Value);
+            return new Paths1Ti27MtOperationnotrequiredPatchRequestbodyContentApplicationJsonSchema(required.Value, nonRequired.Value, rawData);
         }
 
-        object IJsonModelSerializable.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        Paths1Ti27MtOperationnotrequiredPatchRequestbodyContentApplicationJsonSchema IModelJsonSerializable<Paths1Ti27MtOperationnotrequiredPatchRequestbodyContentApplicationJsonSchema>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
         {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
             using var doc = JsonDocument.ParseValue(ref reader);
             return DeserializePaths1Ti27MtOperationnotrequiredPatchRequestbodyContentApplicationJsonSchema(doc.RootElement, options);
+        }
+
+        BinaryData IModelSerializable<Paths1Ti27MtOperationnotrequiredPatchRequestbodyContentApplicationJsonSchema>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        Paths1Ti27MtOperationnotrequiredPatchRequestbodyContentApplicationJsonSchema IModelSerializable<Paths1Ti27MtOperationnotrequiredPatchRequestbodyContentApplicationJsonSchema>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using var doc = JsonDocument.Parse(data);
+            return DeserializePaths1Ti27MtOperationnotrequiredPatchRequestbodyContentApplicationJsonSchema(doc.RootElement, options);
+        }
+
+        public static implicit operator RequestContent(Paths1Ti27MtOperationnotrequiredPatchRequestbodyContentApplicationJsonSchema model)
+        {
+            if (model is null)
+            {
+                return null;
+            }
+
+            return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
+        }
+
+        public static explicit operator Paths1Ti27MtOperationnotrequiredPatchRequestbodyContentApplicationJsonSchema(Response response)
+        {
+            if (response is null)
+            {
+                return null;
+            }
+
+            using JsonDocument doc = JsonDocument.Parse(response.ContentStream);
+            return DeserializePaths1Ti27MtOperationnotrequiredPatchRequestbodyContentApplicationJsonSchema(doc.RootElement, ModelSerializerOptions.DefaultWireOptions);
         }
     }
 }

@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
 using Azure.Core;
 
 namespace body_formdata_urlencoded.Models
@@ -13,7 +14,12 @@ namespace body_formdata_urlencoded.Models
     /// <summary> The PathsPvivzlFormsdataurlencodedPartialconstantbodyPostRequestbodyContentApplicationXWwwFormUrlencodedSchema. </summary>
     internal partial class PathsPvivzlFormsdataurlencodedPartialconstantbodyPostRequestbodyContentApplicationXWwwFormUrlencodedSchema
     {
-        /// <summary> Initializes a new instance of PathsPvivzlFormsdataurlencodedPartialconstantbodyPostRequestbodyContentApplicationXWwwFormUrlencodedSchema. </summary>
+        private Dictionary<string, BinaryData> _rawData;
+
+        /// <summary>
+        /// Initializes a new instance of global::body_formdata_urlencoded.Models.PathsPvivzlFormsdataurlencodedPartialconstantbodyPostRequestbodyContentApplicationXWwwFormUrlencodedSchema
+        ///
+        /// </summary>
         /// <param name="grantType"> Constant part of a formdata body. </param>
         /// <param name="service"> Indicates the name of your Azure container registry. </param>
         /// <param name="aadAccessToken"> AAD access token, mandatory when grant_type is access_token_refresh_token or access_token. </param>
@@ -26,6 +32,22 @@ namespace body_formdata_urlencoded.Models
             GrantType = grantType;
             Service = service;
             AadAccessToken = aadAccessToken;
+        }
+
+        /// <summary>
+        /// Initializes a new instance of global::body_formdata_urlencoded.Models.PathsPvivzlFormsdataurlencodedPartialconstantbodyPostRequestbodyContentApplicationXWwwFormUrlencodedSchema
+        ///
+        /// </summary>
+        /// <param name="grantType"> Constant part of a formdata body. </param>
+        /// <param name="service"> Indicates the name of your Azure container registry. </param>
+        /// <param name="aadAccessToken"> AAD access token, mandatory when grant_type is access_token_refresh_token or access_token. </param>
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal PathsPvivzlFormsdataurlencodedPartialconstantbodyPostRequestbodyContentApplicationXWwwFormUrlencodedSchema(PostContentSchemaGrantType grantType, string service, string aadAccessToken, Dictionary<string, BinaryData> rawData)
+        {
+            GrantType = grantType;
+            Service = service;
+            AadAccessToken = aadAccessToken;
+            _rawData = rawData;
         }
 
         /// <summary> Constant part of a formdata body. </summary>

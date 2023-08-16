@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Collections.Generic;
 using Azure.Core;
 
@@ -13,7 +14,12 @@ namespace CognitiveSearch.Models
     /// <summary> Parameter group. </summary>
     public partial class SuggestOptions
     {
-        /// <summary> Initializes a new instance of SuggestOptions. </summary>
+        private Dictionary<string, BinaryData> _rawData;
+
+        /// <summary>
+        /// Initializes a new instance of global::CognitiveSearch.Models.SuggestOptions
+        ///
+        /// </summary>
         public SuggestOptions()
         {
             OrderBy = new ChangeTrackingList<string>();
@@ -21,7 +27,10 @@ namespace CognitiveSearch.Models
             Select = new ChangeTrackingList<string>();
         }
 
-        /// <summary> Initializes a new instance of SuggestOptions. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::CognitiveSearch.Models.SuggestOptions
+        ///
+        /// </summary>
         /// <param name="filter"> An OData expression that filters the documents considered for suggestions. </param>
         /// <param name="useFuzzyMatching"> A value indicating whether to use fuzzy matching for the suggestions query. Default is false. When set to true, the query will find terms even if there's a substituted or missing character in the search text. While this provides a better experience in some scenarios, it comes at a performance cost as fuzzy suggestions queries are slower and consume more resources. </param>
         /// <param name="highlightPostTag"> A string tag that is appended to hit highlights. Must be set with highlightPreTag. If omitted, hit highlighting of suggestions is disabled. </param>
@@ -31,7 +40,8 @@ namespace CognitiveSearch.Models
         /// <param name="searchFields"> The list of field names to search for the specified search text. Target fields must be included in the specified suggester. </param>
         /// <param name="select"> The list of fields to retrieve. If unspecified, only the key field will be included in the results. </param>
         /// <param name="top"> The number of suggestions to retrieve. The value must be a number between 1 and 100. The default is 5. </param>
-        internal SuggestOptions(string filter, bool? useFuzzyMatching, string highlightPostTag, string highlightPreTag, double? minimumCoverage, IList<string> orderBy, IList<string> searchFields, IList<string> select, int? top)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal SuggestOptions(string filter, bool? useFuzzyMatching, string highlightPostTag, string highlightPreTag, double? minimumCoverage, IList<string> orderBy, IList<string> searchFields, IList<string> select, int? top, Dictionary<string, BinaryData> rawData)
         {
             Filter = filter;
             UseFuzzyMatching = useFuzzyMatching;
@@ -42,6 +52,7 @@ namespace CognitiveSearch.Models
             SearchFields = searchFields;
             Select = select;
             Top = top;
+            _rawData = rawData;
         }
 
         /// <summary> An OData expression that filters the documents considered for suggestions. </summary>

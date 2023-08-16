@@ -5,6 +5,8 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
 using Azure.Core;
 
 namespace Azure.ResourceManager.Fake.Models
@@ -13,18 +15,27 @@ namespace Azure.ResourceManager.Fake.Models
     [TypeReferenceType]
     public partial class PrivateEndpoint
     {
-        /// <summary> Initializes a new instance of PrivateEndpoint. </summary>
+        private Dictionary<string, BinaryData> _rawData;
+
+        /// <summary>
+        /// Initializes a new instance of global::Azure.ResourceManager.Fake.Models.PrivateEndpoint
+        ///
+        /// </summary>
         [InitializationConstructor]
         public PrivateEndpoint()
         {
         }
 
-        /// <summary> Initializes a new instance of PrivateEndpoint. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::Azure.ResourceManager.Fake.Models.PrivateEndpoint
+        ///
+        /// </summary>
         /// <param name="id"> The ARM identifier for Private Endpoint. </param>
-        [SerializationConstructor]
-        protected PrivateEndpoint(ResourceIdentifier id)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        protected PrivateEndpoint(ResourceIdentifier id, Dictionary<string, BinaryData> rawData)
         {
             Id = id;
+            _rawData = rawData;
         }
 
         /// <summary> The ARM identifier for Private Endpoint. </summary>

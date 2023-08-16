@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
 using Azure.Core;
 
 namespace xml_service.Models
@@ -13,7 +14,12 @@ namespace xml_service.Models
     /// <summary> Properties of a container. </summary>
     public partial class ContainerProperties
     {
-        /// <summary> Initializes a new instance of ContainerProperties. </summary>
+        private Dictionary<string, BinaryData> _rawData;
+
+        /// <summary>
+        /// Initializes a new instance of global::xml_service.Models.ContainerProperties
+        ///
+        /// </summary>
         /// <param name="lastModified"></param>
         /// <param name="etag"></param>
         /// <exception cref="ArgumentNullException"> <paramref name="etag"/> is null. </exception>
@@ -25,14 +31,18 @@ namespace xml_service.Models
             Etag = etag;
         }
 
-        /// <summary> Initializes a new instance of ContainerProperties. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::xml_service.Models.ContainerProperties
+        ///
+        /// </summary>
         /// <param name="lastModified"></param>
         /// <param name="etag"></param>
         /// <param name="leaseStatus"></param>
         /// <param name="leaseState"></param>
         /// <param name="leaseDuration"></param>
         /// <param name="publicAccess"></param>
-        internal ContainerProperties(DateTimeOffset lastModified, string etag, LeaseStatusType? leaseStatus, LeaseStateType? leaseState, LeaseDurationType? leaseDuration, PublicAccessType? publicAccess)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal ContainerProperties(DateTimeOffset lastModified, string etag, LeaseStatusType? leaseStatus, LeaseStateType? leaseState, LeaseDurationType? leaseDuration, PublicAccessType? publicAccess, Dictionary<string, BinaryData> rawData)
         {
             LastModified = lastModified;
             Etag = etag;
@@ -40,6 +50,7 @@ namespace xml_service.Models
             LeaseState = leaseState;
             LeaseDuration = leaseDuration;
             PublicAccess = publicAccess;
+            _rawData = rawData;
         }
 
         /// <summary> Gets the last modified. </summary>

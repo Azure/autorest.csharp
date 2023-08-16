@@ -5,6 +5,10 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
+using Azure.Core.Serialization;
+
 namespace _Type.Model.Inheritance.SingleDiscriminator.Models
 {
     /// <summary>
@@ -12,8 +16,11 @@ namespace _Type.Model.Inheritance.SingleDiscriminator.Models
     /// Please note <see cref="Dinosaur"/> is the base class. According to the scenario, a derived class of the base class might need to be assigned here, or this property needs to be casted to one of the possible derived classes.
     /// The available derived classes include <see cref="TRex"/>.
     /// </summary>
+    [AbstractHierarchyDeserializer(typeof(UnknownDinosaur))]
     public abstract partial class Dinosaur
     {
+        protected internal Dictionary<string, BinaryData> _rawData;
+
         /// <summary> Initializes a new instance of Dinosaur. </summary>
         /// <param name="size"></param>
         protected Dinosaur(int size)
@@ -24,10 +31,12 @@ namespace _Type.Model.Inheritance.SingleDiscriminator.Models
         /// <summary> Initializes a new instance of Dinosaur. </summary>
         /// <param name="kind"> Discriminator. </param>
         /// <param name="size"></param>
-        internal Dinosaur(string kind, int size)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal Dinosaur(string kind, int size, Dictionary<string, BinaryData> rawData)
         {
             Kind = kind;
             Size = size;
+            _rawData = rawData;
         }
 
         /// <summary> Discriminator. </summary>

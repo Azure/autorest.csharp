@@ -5,21 +5,34 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
+
 namespace MgmtExpandResourceTypes.Models
 {
     /// <summary> An NS record. </summary>
     public partial class NsRecord
     {
-        /// <summary> Initializes a new instance of NsRecord. </summary>
+        private Dictionary<string, BinaryData> _rawData;
+
+        /// <summary>
+        /// Initializes a new instance of global::MgmtExpandResourceTypes.Models.NsRecord
+        ///
+        /// </summary>
         public NsRecord()
         {
         }
 
-        /// <summary> Initializes a new instance of NsRecord. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::MgmtExpandResourceTypes.Models.NsRecord
+        ///
+        /// </summary>
         /// <param name="nsdname"> The name server name for this NS record. </param>
-        internal NsRecord(string nsdname)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal NsRecord(string nsdname, Dictionary<string, BinaryData> rawData)
         {
             Nsdname = nsdname;
+            _rawData = rawData;
         }
 
         /// <summary> The name server name for this NS record. </summary>

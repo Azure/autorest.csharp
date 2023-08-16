@@ -15,6 +15,8 @@ namespace AnomalyDetector.Models
     /// <summary> The response of entire anomaly detection. </summary>
     public partial class UnivariateEntireDetectionResult
     {
+        private Dictionary<string, BinaryData> _rawData;
+
         /// <summary> Initializes a new instance of UnivariateEntireDetectionResult. </summary>
         /// <param name="period">
         /// Frequency extracted from the series, zero means no recurrent pattern has been
@@ -121,7 +123,8 @@ namespace AnomalyDetector.Models
         /// The severity score for each input point. The larger the value is, the more
         /// sever the anomaly is. For normal points, the "severity" is always 0.
         /// </param>
-        internal UnivariateEntireDetectionResult(int period, IReadOnlyList<float> expectedValues, IReadOnlyList<float> upperMargins, IReadOnlyList<float> lowerMargins, IReadOnlyList<bool> isAnomaly, IReadOnlyList<bool> isNegativeAnomaly, IReadOnlyList<bool> isPositiveAnomaly, IReadOnlyList<float> severity)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal UnivariateEntireDetectionResult(int period, IReadOnlyList<float> expectedValues, IReadOnlyList<float> upperMargins, IReadOnlyList<float> lowerMargins, IReadOnlyList<bool> isAnomaly, IReadOnlyList<bool> isNegativeAnomaly, IReadOnlyList<bool> isPositiveAnomaly, IReadOnlyList<float> severity, Dictionary<string, BinaryData> rawData)
         {
             Period = period;
             ExpectedValues = expectedValues;
@@ -131,6 +134,7 @@ namespace AnomalyDetector.Models
             IsNegativeAnomaly = isNegativeAnomaly;
             IsPositiveAnomaly = isPositiveAnomaly;
             Severity = severity;
+            _rawData = rawData;
         }
 
         /// <summary>

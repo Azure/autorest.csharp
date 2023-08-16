@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Collections.Generic;
 using Azure.Core;
 
@@ -16,20 +17,30 @@ namespace Azure.ResourceManager.Sample.Models
     /// </summary>
     internal partial class DedicatedHostAvailableCapacity
     {
-        /// <summary> Initializes a new instance of DedicatedHostAvailableCapacity. </summary>
+        private Dictionary<string, BinaryData> _rawData;
+
+        /// <summary>
+        /// Initializes a new instance of global::Azure.ResourceManager.Sample.Models.DedicatedHostAvailableCapacity
+        ///
+        /// </summary>
         internal DedicatedHostAvailableCapacity()
         {
             AllocatableVMs = new ChangeTrackingList<DedicatedHostAllocatableVM>();
         }
 
-        /// <summary> Initializes a new instance of DedicatedHostAvailableCapacity. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::Azure.ResourceManager.Sample.Models.DedicatedHostAvailableCapacity
+        ///
+        /// </summary>
         /// <param name="allocatableVMs">
         /// The unutilized capacity of the dedicated host represented in terms of each VM size that is allowed to be deployed to the dedicated host.
         /// Serialized Name: DedicatedHostAvailableCapacity.allocatableVMs
         /// </param>
-        internal DedicatedHostAvailableCapacity(IReadOnlyList<DedicatedHostAllocatableVM> allocatableVMs)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal DedicatedHostAvailableCapacity(IReadOnlyList<DedicatedHostAllocatableVM> allocatableVMs, Dictionary<string, BinaryData> rawData)
         {
             AllocatableVMs = allocatableVMs;
+            _rawData = rawData;
         }
 
         /// <summary>

@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
 using Azure;
 
 namespace CustomNamespace
@@ -13,18 +14,28 @@ namespace CustomNamespace
     /// <summary> The ThirdModel. </summary>
     internal partial class RenamedThirdModel
     {
-        /// <summary> Initializes a new instance of RenamedThirdModel. </summary>
+        private Dictionary<string, BinaryData> _rawData;
+
+        /// <summary>
+        /// Initializes a new instance of global::CustomNamespace.RenamedThirdModel
+        ///
+        /// </summary>
         public RenamedThirdModel()
         {
         }
 
-        /// <summary> Initializes a new instance of RenamedThirdModel. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::CustomNamespace.RenamedThirdModel
+        ///
+        /// </summary>
         /// <param name="customizedETagProperty"> ETag property. </param>
         /// <param name="customizedCreatedAtProperty"> Creation date. </param>
-        internal RenamedThirdModel(ETag customizedETagProperty, DateTime customizedCreatedAtProperty)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal RenamedThirdModel(ETag customizedETagProperty, DateTime customizedCreatedAtProperty, Dictionary<string, BinaryData> rawData)
         {
             CustomizedETagProperty = customizedETagProperty;
             CustomizedCreatedAtProperty = customizedCreatedAtProperty;
+            _rawData = rawData;
         }
     }
 }

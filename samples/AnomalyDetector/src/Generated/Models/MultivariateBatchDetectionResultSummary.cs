@@ -14,6 +14,8 @@ namespace AnomalyDetector.Models
     /// <summary> Multivariate anomaly detection status. </summary>
     public partial class MultivariateBatchDetectionResultSummary
     {
+        private Dictionary<string, BinaryData> _rawData;
+
         /// <summary> Initializes a new instance of MultivariateBatchDetectionResultSummary. </summary>
         /// <param name="status"> Status of detection results. One of CREATED, RUNNING, READY, and FAILED. </param>
         /// <param name="setupInfo">
@@ -39,12 +41,14 @@ namespace AnomalyDetector.Models
         /// Detection request for batch inference. This is an asynchronous inference which
         /// will need another API to get detection results.
         /// </param>
-        internal MultivariateBatchDetectionResultSummary(MultivariateBatchDetectionStatus status, IReadOnlyList<ErrorResponse> errors, IReadOnlyList<VariableState> variableStates, MultivariateBatchDetectionOptions setupInfo)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal MultivariateBatchDetectionResultSummary(MultivariateBatchDetectionStatus status, IReadOnlyList<ErrorResponse> errors, IReadOnlyList<VariableState> variableStates, MultivariateBatchDetectionOptions setupInfo, Dictionary<string, BinaryData> rawData)
         {
             Status = status;
             Errors = errors;
             VariableStates = variableStates;
             SetupInfo = setupInfo;
+            _rawData = rawData;
         }
 
         /// <summary> Status of detection results. One of CREATED, RUNNING, READY, and FAILED. </summary>

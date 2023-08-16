@@ -67,7 +67,7 @@ namespace LroBasicTypeSpec
             Argument.AssertNotNull(resource, nameof(resource));
 
             RequestContext context = FromCancellationToken(cancellationToken);
-            return await CreateProjectAsync(waitUntil, resource.ToRequestContent(), context).ConfigureAwait(false);
+            return await CreateProjectAsync(waitUntil, resource, context).ConfigureAwait(false);
         }
 
         /// <summary> Creates a project. </summary>
@@ -81,7 +81,7 @@ namespace LroBasicTypeSpec
             Argument.AssertNotNull(resource, nameof(resource));
 
             RequestContext context = FromCancellationToken(cancellationToken);
-            return CreateProject(waitUntil, resource.ToRequestContent(), context);
+            return CreateProject(waitUntil, resource, context);
         }
 
         /// <summary>
@@ -178,8 +178,8 @@ namespace LroBasicTypeSpec
             Argument.AssertNotNull(resource, nameof(resource));
 
             RequestContext context = FromCancellationToken(cancellationToken);
-            Operation<BinaryData> response = await UpdateProjectAsync(waitUntil, id, resource.ToRequestContent(), context).ConfigureAwait(false);
-            return ProtocolOperationHelpers.Convert(response, Project.FromResponse, ClientDiagnostics, "LroBasicTypeSpecClient.UpdateProject");
+            Operation<BinaryData> response = await UpdateProjectAsync(waitUntil, id, resource, context).ConfigureAwait(false);
+            return ProtocolOperationHelpers.Convert(response, response => (Project)response, ClientDiagnostics, "LroBasicTypeSpecClient.UpdateProject");
         }
 
         /// <summary> Updates a project. </summary>
@@ -196,8 +196,8 @@ namespace LroBasicTypeSpec
             Argument.AssertNotNull(resource, nameof(resource));
 
             RequestContext context = FromCancellationToken(cancellationToken);
-            Operation<BinaryData> response = UpdateProject(waitUntil, id, resource.ToRequestContent(), context);
-            return ProtocolOperationHelpers.Convert(response, Project.FromResponse, ClientDiagnostics, "LroBasicTypeSpecClient.UpdateProject");
+            Operation<BinaryData> response = UpdateProject(waitUntil, id, resource, context);
+            return ProtocolOperationHelpers.Convert(response, response => (Project)response, ClientDiagnostics, "LroBasicTypeSpecClient.UpdateProject");
         }
 
         /// <summary>
@@ -297,8 +297,8 @@ namespace LroBasicTypeSpec
             Argument.AssertNotNull(thing, nameof(thing));
 
             RequestContext context = FromCancellationToken(cancellationToken);
-            Operation<BinaryData> response = await CreateThingAsync(waitUntil, thing.ToRequestContent(), context).ConfigureAwait(false);
-            return ProtocolOperationHelpers.Convert(response, Thing.FromResponse, ClientDiagnostics, "LroBasicTypeSpecClient.CreateThing");
+            Operation<BinaryData> response = await CreateThingAsync(waitUntil, thing, context).ConfigureAwait(false);
+            return ProtocolOperationHelpers.Convert(response, response => (Thing)response, ClientDiagnostics, "LroBasicTypeSpecClient.CreateThing");
         }
 
         /// <summary> Long running RPC operation template. </summary>
@@ -312,8 +312,8 @@ namespace LroBasicTypeSpec
             Argument.AssertNotNull(thing, nameof(thing));
 
             RequestContext context = FromCancellationToken(cancellationToken);
-            Operation<BinaryData> response = CreateThing(waitUntil, thing.ToRequestContent(), context);
-            return ProtocolOperationHelpers.Convert(response, Thing.FromResponse, ClientDiagnostics, "LroBasicTypeSpecClient.CreateThing");
+            Operation<BinaryData> response = CreateThing(waitUntil, thing, context);
+            return ProtocolOperationHelpers.Convert(response, response => (Thing)response, ClientDiagnostics, "LroBasicTypeSpecClient.CreateThing");
         }
 
         /// <summary>

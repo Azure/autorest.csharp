@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
 using Azure.Core;
 
 namespace ModelsTypeSpec.Models
@@ -13,6 +14,8 @@ namespace ModelsTypeSpec.Models
     /// <summary> Base model. </summary>
     public partial class NoUseBase
     {
+        protected internal Dictionary<string, BinaryData> _rawData;
+
         /// <summary> Initializes a new instance of NoUseBase. </summary>
         /// <param name="baseModelProp"> base model property. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="baseModelProp"/> is null. </exception>
@@ -21,6 +24,15 @@ namespace ModelsTypeSpec.Models
             Argument.AssertNotNull(baseModelProp, nameof(baseModelProp));
 
             BaseModelProp = baseModelProp;
+        }
+
+        /// <summary> Initializes a new instance of NoUseBase. </summary>
+        /// <param name="baseModelProp"> base model property. </param>
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal NoUseBase(string baseModelProp, Dictionary<string, BinaryData> rawData)
+        {
+            BaseModelProp = baseModelProp;
+            _rawData = rawData;
         }
 
         /// <summary> base model property. </summary>

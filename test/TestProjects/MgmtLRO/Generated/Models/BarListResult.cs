@@ -16,7 +16,12 @@ namespace MgmtLRO.Models
     /// <summary> The List Availability Set operation response. </summary>
     internal partial class BarListResult
     {
-        /// <summary> Initializes a new instance of BarListResult. </summary>
+        private Dictionary<string, BinaryData> _rawData;
+
+        /// <summary>
+        /// Initializes a new instance of global::MgmtLRO.Models.BarListResult
+        ///
+        /// </summary>
         /// <param name="value"> The list of bars. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="value"/> is null. </exception>
         internal BarListResult(IEnumerable<BarData> value)
@@ -26,13 +31,18 @@ namespace MgmtLRO.Models
             Value = value.ToList();
         }
 
-        /// <summary> Initializes a new instance of BarListResult. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::MgmtLRO.Models.BarListResult
+        ///
+        /// </summary>
         /// <param name="value"> The list of bars. </param>
         /// <param name="nextLink"> The URI to fetch the next page of Fakes. Call ListNext() with this URI to fetch the next page of Fakes. </param>
-        internal BarListResult(IReadOnlyList<BarData> value, string nextLink)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal BarListResult(IReadOnlyList<BarData> value, string nextLink, Dictionary<string, BinaryData> rawData)
         {
             Value = value;
             NextLink = nextLink;
+            _rawData = rawData;
         }
 
         /// <summary> The list of bars. </summary>

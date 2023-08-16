@@ -12,12 +12,14 @@ using Azure.Core.Serialization;
 
 namespace body_complex.Models
 {
-    internal partial class UnknownDotFish : IUtf8JsonSerializable, IJsonModelSerializable
+    internal partial class UnknownDotFish : IUtf8JsonSerializable, IModelJsonSerializable<DotFish>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModelSerializable)this).Serialize(writer, ModelSerializerOptions.AzureServiceDefault);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<DotFish>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
 
-        void IJsonModelSerializable.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
+        void IModelJsonSerializable<DotFish>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
             writer.WriteStartObject();
             writer.WritePropertyName("fish.type"u8);
             writer.WriteStringValue(FishType);
@@ -26,44 +28,44 @@ namespace body_complex.Models
                 writer.WritePropertyName("species"u8);
                 writer.WriteStringValue(Species);
             }
+            if (_rawData is not null && options.Format == ModelSerializerFormat.Json)
+            {
+                foreach (var property in _rawData)
+                {
+                    writer.WritePropertyName(property.Key);
+#if NET6_0_OR_GREATER
+				writer.WriteRawValue(property.Value);
+#else
+                    JsonSerializer.Serialize(writer, JsonDocument.Parse(property.Value.ToString()).RootElement);
+#endif
+                }
+            }
             writer.WriteEndObject();
         }
 
-        object IModelSerializable.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            using var doc = JsonDocument.Parse(data);
-            return DeserializeUnknownDotFish(doc.RootElement, options);
-        }
+        internal static DotFish DeserializeUnknownDotFish(JsonElement element, ModelSerializerOptions options = default) => DeserializeDotFish(element, options);
 
-        internal static UnknownDotFish DeserializeUnknownDotFish(JsonElement element, ModelSerializerOptions options = default)
+        DotFish IModelJsonSerializable<DotFish>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
         {
-            options ??= ModelSerializerOptions.AzureServiceDefault;
-            if (element.ValueKind == JsonValueKind.Null)
-            {
-                return null;
-            }
-            string fishType = "Unknown";
-            Optional<string> species = default;
-            foreach (var property in element.EnumerateObject())
-            {
-                if (property.NameEquals("fish.type"u8))
-                {
-                    fishType = property.Value.GetString();
-                    continue;
-                }
-                if (property.NameEquals("species"u8))
-                {
-                    species = property.Value.GetString();
-                    continue;
-                }
-            }
-            return new UnknownDotFish(fishType, species.Value);
-        }
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
 
-        object IJsonModelSerializable.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
-        {
             using var doc = JsonDocument.ParseValue(ref reader);
             return DeserializeUnknownDotFish(doc.RootElement, options);
+        }
+
+        BinaryData IModelSerializable<DotFish>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        DotFish IModelSerializable<DotFish>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using var doc = JsonDocument.Parse(data);
+            return DeserializeDotFish(doc.RootElement, options);
         }
     }
 }

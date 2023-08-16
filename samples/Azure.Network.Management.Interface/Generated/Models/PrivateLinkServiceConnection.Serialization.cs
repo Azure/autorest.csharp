@@ -8,17 +8,20 @@
 using System;
 using System.Collections.Generic;
 using System.Text.Json;
+using Azure;
 using Azure.Core;
 using Azure.Core.Serialization;
 
 namespace Azure.Network.Management.Interface.Models
 {
-    public partial class PrivateLinkServiceConnection : IUtf8JsonSerializable, IJsonModelSerializable
+    public partial class PrivateLinkServiceConnection : IUtf8JsonSerializable, IModelJsonSerializable<PrivateLinkServiceConnection>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModelSerializable)this).Serialize(writer, ModelSerializerOptions.AzureServiceDefault);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<PrivateLinkServiceConnection>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
 
-        void IJsonModelSerializable.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
+        void IModelJsonSerializable<PrivateLinkServiceConnection>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
+            ModelSerializerHelper.ValidateFormat<PrivateLinkServiceConnection>(this, options.Format);
+
             writer.WriteStartObject();
             if (Optional.IsDefined(Name))
             {
@@ -58,18 +61,25 @@ namespace Azure.Network.Management.Interface.Models
                 writer.WriteObjectValue(PrivateLinkServiceConnectionState);
             }
             writer.WriteEndObject();
+            if (_rawData is not null && options.Format == ModelSerializerFormat.Json)
+            {
+                foreach (var property in _rawData)
+                {
+                    writer.WritePropertyName(property.Key);
+#if NET6_0_OR_GREATER
+				writer.WriteRawValue(property.Value);
+#else
+                    JsonSerializer.Serialize(writer, JsonDocument.Parse(property.Value.ToString()).RootElement);
+#endif
+                }
+            }
             writer.WriteEndObject();
-        }
-
-        object IModelSerializable.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            using var doc = JsonDocument.Parse(data);
-            return DeserializePrivateLinkServiceConnection(doc.RootElement, options);
         }
 
         internal static PrivateLinkServiceConnection DeserializePrivateLinkServiceConnection(JsonElement element, ModelSerializerOptions options = default)
         {
-            options ??= ModelSerializerOptions.AzureServiceDefault;
+            options ??= ModelSerializerOptions.DefaultWireOptions;
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
@@ -83,6 +93,7 @@ namespace Azure.Network.Management.Interface.Models
             Optional<IList<string>> groupIds = default;
             Optional<string> requestMessage = default;
             Optional<PrivateLinkServiceConnectionState> privateLinkServiceConnectionState = default;
+            Dictionary<string, BinaryData> rawData = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("name"u8))
@@ -159,14 +170,57 @@ namespace Azure.Network.Management.Interface.Models
                     }
                     continue;
                 }
+                if (options.Format == ModelSerializerFormat.Json)
+                {
+                    rawData.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
+                    continue;
+                }
             }
-            return new PrivateLinkServiceConnection(id.Value, name.Value, type.Value, etag.Value, Optional.ToNullable(provisioningState), privateLinkServiceId.Value, Optional.ToList(groupIds), requestMessage.Value, privateLinkServiceConnectionState.Value);
+            return new PrivateLinkServiceConnection(id.Value, name.Value, type.Value, etag.Value, Optional.ToNullable(provisioningState), privateLinkServiceId.Value, Optional.ToList(groupIds), requestMessage.Value, privateLinkServiceConnectionState.Value, rawData);
         }
 
-        object IJsonModelSerializable.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        PrivateLinkServiceConnection IModelJsonSerializable<PrivateLinkServiceConnection>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
         {
+            ModelSerializerHelper.ValidateFormat<PrivateLinkServiceConnection>(this, options.Format);
+
             using var doc = JsonDocument.ParseValue(ref reader);
             return DeserializePrivateLinkServiceConnection(doc.RootElement, options);
+        }
+
+        BinaryData IModelSerializable<PrivateLinkServiceConnection>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat<PrivateLinkServiceConnection>(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        PrivateLinkServiceConnection IModelSerializable<PrivateLinkServiceConnection>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat<PrivateLinkServiceConnection>(this, options.Format);
+
+            using var doc = JsonDocument.Parse(data);
+            return DeserializePrivateLinkServiceConnection(doc.RootElement, options);
+        }
+
+        public static implicit operator RequestContent(PrivateLinkServiceConnection model)
+        {
+            if (model is null)
+            {
+                return null;
+            }
+
+            return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
+        }
+
+        public static explicit operator PrivateLinkServiceConnection(Response response)
+        {
+            if (response is null)
+            {
+                return null;
+            }
+
+            using JsonDocument doc = JsonDocument.Parse(response.ContentStream);
+            return DeserializePrivateLinkServiceConnection(doc.RootElement, ModelSerializerOptions.DefaultWireOptions);
         }
     }
 }

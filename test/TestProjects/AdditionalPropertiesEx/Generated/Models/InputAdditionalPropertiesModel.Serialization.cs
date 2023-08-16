@@ -8,17 +8,20 @@
 using System;
 using System.Collections.Generic;
 using System.Text.Json;
+using Azure;
 using Azure.Core;
 using Azure.Core.Serialization;
 
 namespace AdditionalPropertiesEx.Models
 {
-    public partial class InputAdditionalPropertiesModel : IUtf8JsonSerializable, IJsonModelSerializable
+    public partial class InputAdditionalPropertiesModel : IUtf8JsonSerializable, IModelJsonSerializable<InputAdditionalPropertiesModel>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModelSerializable)this).Serialize(writer, ModelSerializerOptions.AzureServiceDefault);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<InputAdditionalPropertiesModel>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
 
-        void IJsonModelSerializable.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
+        void IModelJsonSerializable<InputAdditionalPropertiesModel>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
             writer.WriteStartObject();
             writer.WritePropertyName("id"u8);
             writer.WriteNumberValue(Id);
@@ -30,15 +33,10 @@ namespace AdditionalPropertiesEx.Models
             writer.WriteEndObject();
         }
 
-        object IModelSerializable.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            using var doc = JsonDocument.Parse(data);
-            return DeserializeInputAdditionalPropertiesModel(doc.RootElement, options);
-        }
-
         internal static InputAdditionalPropertiesModel DeserializeInputAdditionalPropertiesModel(JsonElement element, ModelSerializerOptions options = default)
         {
-            options ??= ModelSerializerOptions.AzureServiceDefault;
+            options ??= ModelSerializerOptions.DefaultWireOptions;
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
@@ -59,10 +57,48 @@ namespace AdditionalPropertiesEx.Models
             return new InputAdditionalPropertiesModel(id, additionalProperties);
         }
 
-        object IJsonModelSerializable.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        InputAdditionalPropertiesModel IModelJsonSerializable<InputAdditionalPropertiesModel>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
         {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
             using var doc = JsonDocument.ParseValue(ref reader);
             return DeserializeInputAdditionalPropertiesModel(doc.RootElement, options);
+        }
+
+        BinaryData IModelSerializable<InputAdditionalPropertiesModel>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        InputAdditionalPropertiesModel IModelSerializable<InputAdditionalPropertiesModel>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using var doc = JsonDocument.Parse(data);
+            return DeserializeInputAdditionalPropertiesModel(doc.RootElement, options);
+        }
+
+        public static implicit operator RequestContent(InputAdditionalPropertiesModel model)
+        {
+            if (model is null)
+            {
+                return null;
+            }
+
+            return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
+        }
+
+        public static explicit operator InputAdditionalPropertiesModel(Response response)
+        {
+            if (response is null)
+            {
+                return null;
+            }
+
+            using JsonDocument doc = JsonDocument.Parse(response.ContentStream);
+            return DeserializeInputAdditionalPropertiesModel(doc.RootElement, ModelSerializerOptions.DefaultWireOptions);
         }
     }
 }

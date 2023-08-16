@@ -14,6 +14,8 @@ namespace _Type.Property.ValueTypes.Models
     /// <summary> Model with dictionary string properties. </summary>
     public partial class DictionaryStringProperty
     {
+        private Dictionary<string, BinaryData> _rawData;
+
         /// <summary> Initializes a new instance of DictionaryStringProperty. </summary>
         /// <param name="property"> Property. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="property"/> is null. </exception>
@@ -22,6 +24,15 @@ namespace _Type.Property.ValueTypes.Models
             Argument.AssertNotNull(property, nameof(property));
 
             Property = property;
+        }
+
+        /// <summary> Initializes a new instance of DictionaryStringProperty. </summary>
+        /// <param name="property"> Property. </param>
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal DictionaryStringProperty(IDictionary<string, string> property, Dictionary<string, BinaryData> rawData)
+        {
+            Property = property;
+            _rawData = rawData;
         }
 
         /// <summary> Property. </summary>

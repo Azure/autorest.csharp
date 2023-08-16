@@ -5,6 +5,10 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
+using Azure.Core.Serialization;
+
 namespace MgmtMockAndSample.Models
 {
     /// <summary>
@@ -12,22 +16,33 @@ namespace MgmtMockAndSample.Models
     /// Please note <see cref="FirewallPolicyRuleCollection"/> is the base class. According to the scenario, a derived class of the base class might need to be assigned here, or this property needs to be casted to one of the possible derived classes.
     /// The available derived classes include <see cref="FirewallPolicyFilterRuleCollection"/> and <see cref="FirewallPolicyNatRuleCollection"/>.
     /// </summary>
+    [AbstractHierarchyDeserializer(typeof(UnknownFirewallPolicyRuleCollection))]
     public abstract partial class FirewallPolicyRuleCollection
     {
-        /// <summary> Initializes a new instance of FirewallPolicyRuleCollection. </summary>
+        protected internal Dictionary<string, BinaryData> _rawData;
+
+        /// <summary>
+        /// Initializes a new instance of global::MgmtMockAndSample.Models.FirewallPolicyRuleCollection
+        ///
+        /// </summary>
         protected FirewallPolicyRuleCollection()
         {
         }
 
-        /// <summary> Initializes a new instance of FirewallPolicyRuleCollection. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::MgmtMockAndSample.Models.FirewallPolicyRuleCollection
+        ///
+        /// </summary>
         /// <param name="ruleCollectionType"> The type of the rule collection. </param>
         /// <param name="name"> The name of the rule collection. </param>
         /// <param name="priority"> Priority of the Firewall Policy Rule Collection resource. </param>
-        internal FirewallPolicyRuleCollection(FirewallPolicyRuleCollectionType ruleCollectionType, string name, int? priority)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal FirewallPolicyRuleCollection(FirewallPolicyRuleCollectionType ruleCollectionType, string name, int? priority, Dictionary<string, BinaryData> rawData)
         {
             RuleCollectionType = ruleCollectionType;
             Name = name;
             Priority = priority;
+            _rawData = rawData;
         }
 
         /// <summary> The type of the rule collection. </summary>

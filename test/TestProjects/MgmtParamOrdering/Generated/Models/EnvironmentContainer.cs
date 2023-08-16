@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Collections.Generic;
 using Azure.Core;
 
@@ -13,22 +14,32 @@ namespace MgmtParamOrdering.Models
     /// <summary> Container for environment specification versions. </summary>
     public partial class EnvironmentContainer
     {
-        /// <summary> Initializes a new instance of EnvironmentContainer. </summary>
+        private Dictionary<string, BinaryData> _rawData;
+
+        /// <summary>
+        /// Initializes a new instance of global::MgmtParamOrdering.Models.EnvironmentContainer
+        ///
+        /// </summary>
         public EnvironmentContainer()
         {
             Properties = new ChangeTrackingDictionary<string, string>();
             Tags = new ChangeTrackingDictionary<string, string>();
         }
 
-        /// <summary> Initializes a new instance of EnvironmentContainer. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::MgmtParamOrdering.Models.EnvironmentContainer
+        ///
+        /// </summary>
         /// <param name="description"> The asset description text. </param>
         /// <param name="properties"> The asset property dictionary. </param>
         /// <param name="tags"> Tag dictionary. Tags can be added, removed, and updated. </param>
-        internal EnvironmentContainer(string description, IDictionary<string, string> properties, IDictionary<string, string> tags)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal EnvironmentContainer(string description, IDictionary<string, string> properties, IDictionary<string, string> tags, Dictionary<string, BinaryData> rawData)
         {
             Description = description;
             Properties = properties;
             Tags = tags;
+            _rawData = rawData;
         }
 
         /// <summary> The asset description text. </summary>

@@ -5,14 +5,21 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
+
 namespace CognitiveSearch.Models
 {
     /// <summary> The UnknownDataDeletionDetectionPolicy. </summary>
     internal partial class UnknownDataDeletionDetectionPolicy : DataDeletionDetectionPolicy
     {
-        /// <summary> Initializes a new instance of UnknownDataDeletionDetectionPolicy. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::CognitiveSearch.Models.UnknownDataDeletionDetectionPolicy
+        ///
+        /// </summary>
         /// <param name="odataType"> Identifies the concrete type of the data deletion detection policy. </param>
-        internal UnknownDataDeletionDetectionPolicy(string odataType) : base(odataType)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal UnknownDataDeletionDetectionPolicy(string odataType, Dictionary<string, BinaryData> rawData) : base(odataType, rawData)
         {
             OdataType = odataType ?? "Unknown";
         }

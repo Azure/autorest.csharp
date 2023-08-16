@@ -15,7 +15,10 @@ namespace CognitiveSearch.Models
     /// <summary> Decomposes compound words found in many Germanic languages. This token filter is implemented using Apache Lucene. </summary>
     public partial class DictionaryDecompounderTokenFilter : TokenFilter
     {
-        /// <summary> Initializes a new instance of DictionaryDecompounderTokenFilter. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::CognitiveSearch.Models.DictionaryDecompounderTokenFilter
+        ///
+        /// </summary>
         /// <param name="name"> The name of the token filter. It must only contain letters, digits, spaces, dashes or underscores, can only start and end with alphanumeric characters, and is limited to 128 characters. </param>
         /// <param name="wordList"> The list of words to match against. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> or <paramref name="wordList"/> is null. </exception>
@@ -28,7 +31,10 @@ namespace CognitiveSearch.Models
             OdataType = "#Microsoft.Azure.Search.DictionaryDecompounderTokenFilter";
         }
 
-        /// <summary> Initializes a new instance of DictionaryDecompounderTokenFilter. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::CognitiveSearch.Models.DictionaryDecompounderTokenFilter
+        ///
+        /// </summary>
         /// <param name="odataType"> Identifies the concrete type of the token filter. </param>
         /// <param name="name"> The name of the token filter. It must only contain letters, digits, spaces, dashes or underscores, can only start and end with alphanumeric characters, and is limited to 128 characters. </param>
         /// <param name="wordList"> The list of words to match against. </param>
@@ -36,7 +42,8 @@ namespace CognitiveSearch.Models
         /// <param name="minSubwordSize"> The minimum subword size. Only subwords longer than this are outputted. Default is 2. Maximum is 300. </param>
         /// <param name="maxSubwordSize"> The maximum subword size. Only subwords shorter than this are outputted. Default is 15. Maximum is 300. </param>
         /// <param name="onlyLongestMatch"> A value indicating whether to add only the longest matching subword to the output. Default is false. </param>
-        internal DictionaryDecompounderTokenFilter(string odataType, string name, IList<string> wordList, int? minWordSize, int? minSubwordSize, int? maxSubwordSize, bool? onlyLongestMatch) : base(odataType, name)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal DictionaryDecompounderTokenFilter(string odataType, string name, IList<string> wordList, int? minWordSize, int? minSubwordSize, int? maxSubwordSize, bool? onlyLongestMatch, Dictionary<string, BinaryData> rawData) : base(odataType, name, rawData)
         {
             WordList = wordList;
             MinWordSize = minWordSize;

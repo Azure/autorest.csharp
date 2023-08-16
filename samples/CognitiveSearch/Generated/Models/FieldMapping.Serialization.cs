@@ -6,18 +6,22 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
 using System.Text.Json;
+using Azure;
 using Azure.Core;
 using Azure.Core.Serialization;
 
 namespace CognitiveSearch.Models
 {
-    public partial class FieldMapping : IUtf8JsonSerializable, IJsonModelSerializable
+    public partial class FieldMapping : IUtf8JsonSerializable, IModelJsonSerializable<FieldMapping>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModelSerializable)this).Serialize(writer, ModelSerializerOptions.AzureServiceDefault);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<FieldMapping>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
 
-        void IJsonModelSerializable.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
+        void IModelJsonSerializable<FieldMapping>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
             writer.WriteStartObject();
             writer.WritePropertyName("sourceFieldName"u8);
             writer.WriteStringValue(SourceFieldName);
@@ -31,18 +35,25 @@ namespace CognitiveSearch.Models
                 writer.WritePropertyName("mappingFunction"u8);
                 writer.WriteObjectValue(MappingFunction);
             }
+            if (_rawData is not null && options.Format == ModelSerializerFormat.Json)
+            {
+                foreach (var property in _rawData)
+                {
+                    writer.WritePropertyName(property.Key);
+#if NET6_0_OR_GREATER
+				writer.WriteRawValue(property.Value);
+#else
+                    JsonSerializer.Serialize(writer, JsonDocument.Parse(property.Value.ToString()).RootElement);
+#endif
+                }
+            }
             writer.WriteEndObject();
-        }
-
-        object IModelSerializable.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            using var doc = JsonDocument.Parse(data);
-            return DeserializeFieldMapping(doc.RootElement, options);
         }
 
         internal static FieldMapping DeserializeFieldMapping(JsonElement element, ModelSerializerOptions options = default)
         {
-            options ??= ModelSerializerOptions.AzureServiceDefault;
+            options ??= ModelSerializerOptions.DefaultWireOptions;
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
@@ -50,6 +61,7 @@ namespace CognitiveSearch.Models
             string sourceFieldName = default;
             Optional<string> targetFieldName = default;
             Optional<FieldMappingFunction> mappingFunction = default;
+            Dictionary<string, BinaryData> rawData = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("sourceFieldName"u8))
@@ -71,14 +83,57 @@ namespace CognitiveSearch.Models
                     mappingFunction = FieldMappingFunction.DeserializeFieldMappingFunction(property.Value);
                     continue;
                 }
+                if (options.Format == ModelSerializerFormat.Json)
+                {
+                    rawData.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
+                    continue;
+                }
             }
-            return new FieldMapping(sourceFieldName, targetFieldName.Value, mappingFunction.Value);
+            return new FieldMapping(sourceFieldName, targetFieldName.Value, mappingFunction.Value, rawData);
         }
 
-        object IJsonModelSerializable.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        FieldMapping IModelJsonSerializable<FieldMapping>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
         {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
             using var doc = JsonDocument.ParseValue(ref reader);
             return DeserializeFieldMapping(doc.RootElement, options);
+        }
+
+        BinaryData IModelSerializable<FieldMapping>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        FieldMapping IModelSerializable<FieldMapping>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using var doc = JsonDocument.Parse(data);
+            return DeserializeFieldMapping(doc.RootElement, options);
+        }
+
+        public static implicit operator RequestContent(FieldMapping model)
+        {
+            if (model is null)
+            {
+                return null;
+            }
+
+            return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
+        }
+
+        public static explicit operator FieldMapping(Response response)
+        {
+            if (response is null)
+            {
+                return null;
+            }
+
+            using JsonDocument doc = JsonDocument.Parse(response.ContentStream);
+            return DeserializeFieldMapping(doc.RootElement, ModelSerializerOptions.DefaultWireOptions);
         }
     }
 }

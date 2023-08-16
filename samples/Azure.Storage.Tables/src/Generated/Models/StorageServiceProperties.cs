@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Collections.Generic;
 using Azure.Core;
 
@@ -13,23 +14,33 @@ namespace Azure.Storage.Tables.Models
     /// <summary> Storage Service Properties. </summary>
     public partial class StorageServiceProperties
     {
-        /// <summary> Initializes a new instance of StorageServiceProperties. </summary>
+        private Dictionary<string, BinaryData> _rawData;
+
+        /// <summary>
+        /// Initializes a new instance of global::Azure.Storage.Tables.Models.StorageServiceProperties
+        ///
+        /// </summary>
         public StorageServiceProperties()
         {
             Cors = new ChangeTrackingList<CorsRule>();
         }
 
-        /// <summary> Initializes a new instance of StorageServiceProperties. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::Azure.Storage.Tables.Models.StorageServiceProperties
+        ///
+        /// </summary>
         /// <param name="logging"> Azure Analytics Logging settings. </param>
         /// <param name="hourMetrics"> A summary of request statistics grouped by API in hourly aggregates for queues. </param>
         /// <param name="minuteMetrics"> a summary of request statistics grouped by API in minute aggregates for queues. </param>
         /// <param name="cors"> The set of CORS rules. </param>
-        internal StorageServiceProperties(Logging logging, Metrics hourMetrics, Metrics minuteMetrics, IList<CorsRule> cors)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal StorageServiceProperties(Logging logging, Metrics hourMetrics, Metrics minuteMetrics, IList<CorsRule> cors, Dictionary<string, BinaryData> rawData)
         {
             Logging = logging;
             HourMetrics = hourMetrics;
             MinuteMetrics = minuteMetrics;
             Cors = cors;
+            _rawData = rawData;
         }
 
         /// <summary> Azure Analytics Logging settings. </summary>

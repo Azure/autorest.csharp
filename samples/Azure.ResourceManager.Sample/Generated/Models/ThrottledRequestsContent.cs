@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
 using Azure.Core;
 
 namespace Azure.ResourceManager.Sample.Models
@@ -16,7 +17,10 @@ namespace Azure.ResourceManager.Sample.Models
     /// </summary>
     public partial class ThrottledRequestsContent : LogAnalyticsInputBase
     {
-        /// <summary> Initializes a new instance of ThrottledRequestsContent. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::Azure.ResourceManager.Sample.Models.ThrottledRequestsContent
+        ///
+        /// </summary>
         /// <param name="blobContainerSasUri">
         /// SAS Uri of the logging blob container to which LogAnalytics Api writes output logs to.
         /// Serialized Name: LogAnalyticsInputBase.blobContainerSasUri
@@ -35,7 +39,10 @@ namespace Azure.ResourceManager.Sample.Models
             Argument.AssertNotNull(blobContainerSasUri, nameof(blobContainerSasUri));
         }
 
-        /// <summary> Initializes a new instance of ThrottledRequestsContent. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::Azure.ResourceManager.Sample.Models.ThrottledRequestsContent
+        ///
+        /// </summary>
         /// <param name="blobContainerSasUri">
         /// SAS Uri of the logging blob container to which LogAnalytics Api writes output logs to.
         /// Serialized Name: LogAnalyticsInputBase.blobContainerSasUri
@@ -60,7 +67,8 @@ namespace Azure.ResourceManager.Sample.Models
         /// Group query result by Resource Name.
         /// Serialized Name: LogAnalyticsInputBase.groupByResourceName
         /// </param>
-        internal ThrottledRequestsContent(Uri blobContainerSasUri, DateTimeOffset fromTime, DateTimeOffset toTime, bool? groupByThrottlePolicy, bool? groupByOperationName, bool? groupByResourceName) : base(blobContainerSasUri, fromTime, toTime, groupByThrottlePolicy, groupByOperationName, groupByResourceName)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal ThrottledRequestsContent(Uri blobContainerSasUri, DateTimeOffset fromTime, DateTimeOffset toTime, bool? groupByThrottlePolicy, bool? groupByOperationName, bool? groupByResourceName, Dictionary<string, BinaryData> rawData) : base(blobContainerSasUri, fromTime, toTime, groupByThrottlePolicy, groupByOperationName, groupByResourceName, rawData)
         {
         }
     }

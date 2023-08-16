@@ -5,6 +5,9 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
+
 namespace MgmtRenameRules.Models
 {
     /// <summary>
@@ -13,12 +16,20 @@ namespace MgmtRenameRules.Models
     /// </summary>
     public partial class VirtualMachineScaleSetSku
     {
-        /// <summary> Initializes a new instance of VirtualMachineScaleSetSku. </summary>
+        private Dictionary<string, BinaryData> _rawData;
+
+        /// <summary>
+        /// Initializes a new instance of global::MgmtRenameRules.Models.VirtualMachineScaleSetSku
+        ///
+        /// </summary>
         internal VirtualMachineScaleSetSku()
         {
         }
 
-        /// <summary> Initializes a new instance of VirtualMachineScaleSetSku. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::MgmtRenameRules.Models.VirtualMachineScaleSetSku
+        ///
+        /// </summary>
         /// <param name="resourceType">
         /// The type of resource the sku applies to.
         /// Serialized Name: VirtualMachineScaleSetSku.resourceType
@@ -31,11 +42,13 @@ namespace MgmtRenameRules.Models
         /// Specifies the number of virtual machines in the scale set.
         /// Serialized Name: VirtualMachineScaleSetSku.capacity
         /// </param>
-        internal VirtualMachineScaleSetSku(string resourceType, MgmtRenameRulesSku sku, VirtualMachineScaleSetSkuCapacity capacity)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal VirtualMachineScaleSetSku(string resourceType, MgmtRenameRulesSku sku, VirtualMachineScaleSetSkuCapacity capacity, Dictionary<string, BinaryData> rawData)
         {
             ResourceType = resourceType;
             Sku = sku;
             Capacity = capacity;
+            _rawData = rawData;
         }
 
         /// <summary>

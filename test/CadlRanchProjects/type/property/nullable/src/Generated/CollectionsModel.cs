@@ -54,7 +54,7 @@ namespace _Type.Property.Nullable
         {
             RequestContext context = FromCancellationToken(cancellationToken);
             Response response = await GetNonNullAsync(context).ConfigureAwait(false);
-            return Response.FromValue(CollectionsModelProperty.FromResponse(response), response);
+            return Response.FromValue((CollectionsModelProperty)response, response);
         }
 
         /// <summary> Get models that will return all properties in the model. </summary>
@@ -64,7 +64,7 @@ namespace _Type.Property.Nullable
         {
             RequestContext context = FromCancellationToken(cancellationToken);
             Response response = GetNonNull(context);
-            return Response.FromValue(CollectionsModelProperty.FromResponse(response), response);
+            return Response.FromValue((CollectionsModelProperty)response, response);
         }
 
         /// <summary>
@@ -144,7 +144,7 @@ namespace _Type.Property.Nullable
         {
             RequestContext context = FromCancellationToken(cancellationToken);
             Response response = await GetNullAsync(context).ConfigureAwait(false);
-            return Response.FromValue(CollectionsModelProperty.FromResponse(response), response);
+            return Response.FromValue((CollectionsModelProperty)response, response);
         }
 
         /// <summary> Get models that will return the default object. </summary>
@@ -154,7 +154,7 @@ namespace _Type.Property.Nullable
         {
             RequestContext context = FromCancellationToken(cancellationToken);
             Response response = GetNull(context);
-            return Response.FromValue(CollectionsModelProperty.FromResponse(response), response);
+            return Response.FromValue((CollectionsModelProperty)response, response);
         }
 
         /// <summary>

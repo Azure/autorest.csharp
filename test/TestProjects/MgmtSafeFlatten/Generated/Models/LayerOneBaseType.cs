@@ -5,6 +5,10 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
+using Azure.Core.Serialization;
+
 namespace MgmtSafeFlatten.Models
 {
     /// <summary>
@@ -12,18 +16,29 @@ namespace MgmtSafeFlatten.Models
     /// Please note <see cref="LayerOneBaseType"/> is the base class. According to the scenario, a derived class of the base class might need to be assigned here, or this property needs to be casted to one of the possible derived classes.
     /// The available derived classes include <see cref="LayerOneBarType"/> and <see cref="LayerOneFooType"/>.
     /// </summary>
+    [AbstractHierarchyDeserializer(typeof(UnknownLayerOneBaseType))]
     public abstract partial class LayerOneBaseType
     {
-        /// <summary> Initializes a new instance of LayerOneBaseType. </summary>
+        protected internal Dictionary<string, BinaryData> _rawData;
+
+        /// <summary>
+        /// Initializes a new instance of global::MgmtSafeFlatten.Models.LayerOneBaseType
+        ///
+        /// </summary>
         protected LayerOneBaseType()
         {
         }
 
-        /// <summary> Initializes a new instance of LayerOneBaseType. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::MgmtSafeFlatten.Models.LayerOneBaseType
+        ///
+        /// </summary>
         /// <param name="name"></param>
-        internal LayerOneBaseType(LayerOneTypeName name)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal LayerOneBaseType(LayerOneTypeName name, Dictionary<string, BinaryData> rawData)
         {
             Name = name;
+            _rawData = rawData;
         }
 
         /// <summary> Gets or sets the name. </summary>

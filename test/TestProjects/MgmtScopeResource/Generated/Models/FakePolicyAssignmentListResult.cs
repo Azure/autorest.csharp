@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Collections.Generic;
 using Azure.Core;
 using MgmtScopeResource;
@@ -14,19 +15,29 @@ namespace MgmtScopeResource.Models
     /// <summary> List of policy assignments. </summary>
     internal partial class FakePolicyAssignmentListResult
     {
-        /// <summary> Initializes a new instance of FakePolicyAssignmentListResult. </summary>
+        private Dictionary<string, BinaryData> _rawData;
+
+        /// <summary>
+        /// Initializes a new instance of global::MgmtScopeResource.Models.FakePolicyAssignmentListResult
+        ///
+        /// </summary>
         internal FakePolicyAssignmentListResult()
         {
             Value = new ChangeTrackingList<FakePolicyAssignmentData>();
         }
 
-        /// <summary> Initializes a new instance of FakePolicyAssignmentListResult. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::MgmtScopeResource.Models.FakePolicyAssignmentListResult
+        ///
+        /// </summary>
         /// <param name="value"> An array of policy assignments. </param>
         /// <param name="nextLink"> The URL to use for getting the next set of results. </param>
-        internal FakePolicyAssignmentListResult(IReadOnlyList<FakePolicyAssignmentData> value, string nextLink)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal FakePolicyAssignmentListResult(IReadOnlyList<FakePolicyAssignmentData> value, string nextLink, Dictionary<string, BinaryData> rawData)
         {
             Value = value;
             NextLink = nextLink;
+            _rawData = rawData;
         }
 
         /// <summary> An array of policy assignments. </summary>

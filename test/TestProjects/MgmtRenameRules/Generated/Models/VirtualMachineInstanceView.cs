@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Collections.Generic;
 using Azure.Core;
 
@@ -16,14 +17,22 @@ namespace MgmtRenameRules.Models
     /// </summary>
     public partial class VirtualMachineInstanceView
     {
-        /// <summary> Initializes a new instance of VirtualMachineInstanceView. </summary>
+        private Dictionary<string, BinaryData> _rawData;
+
+        /// <summary>
+        /// Initializes a new instance of global::MgmtRenameRules.Models.VirtualMachineInstanceView
+        ///
+        /// </summary>
         internal VirtualMachineInstanceView()
         {
             Disks = new ChangeTrackingList<DiskInstanceView>();
             Statuses = new ChangeTrackingList<InstanceViewStatus>();
         }
 
-        /// <summary> Initializes a new instance of VirtualMachineInstanceView. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::MgmtRenameRules.Models.VirtualMachineInstanceView
+        ///
+        /// </summary>
         /// <param name="platformUpdateDomain">
         /// Specifies the update domain of the virtual machine.
         /// Serialized Name: VirtualMachineInstanceView.platformUpdateDomain
@@ -84,7 +93,8 @@ namespace MgmtRenameRules.Models
         /// The status of virtual machine patch operations.
         /// Serialized Name: VirtualMachineInstanceView.patchStatus
         /// </param>
-        internal VirtualMachineInstanceView(int? platformUpdateDomain, int? platformFaultDomain, string computerName, string osName, string osVersion, HyperVGenerationType? hyperVGeneration, string rdpThumbPrint, VirtualMachineAgentInstanceView vmAgent, MaintenanceRedeployStatus maintenanceRedeployStatus, IReadOnlyList<DiskInstanceView> disks, VirtualMachineHealthStatus vmHealth, BootDiagnosticsInstanceView bootDiagnostics, string assignedHost, IReadOnlyList<InstanceViewStatus> statuses, VirtualMachinePatchStatus patchStatus)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal VirtualMachineInstanceView(int? platformUpdateDomain, int? platformFaultDomain, string computerName, string osName, string osVersion, HyperVGenerationType? hyperVGeneration, string rdpThumbPrint, VirtualMachineAgentInstanceView vmAgent, MaintenanceRedeployStatus maintenanceRedeployStatus, IReadOnlyList<DiskInstanceView> disks, VirtualMachineHealthStatus vmHealth, BootDiagnosticsInstanceView bootDiagnostics, string assignedHost, IReadOnlyList<InstanceViewStatus> statuses, VirtualMachinePatchStatus patchStatus, Dictionary<string, BinaryData> rawData)
         {
             PlatformUpdateDomain = platformUpdateDomain;
             PlatformFaultDomain = platformFaultDomain;
@@ -101,6 +111,7 @@ namespace MgmtRenameRules.Models
             AssignedHost = assignedHost;
             Statuses = statuses;
             PatchStatus = patchStatus;
+            _rawData = rawData;
         }
 
         /// <summary>

@@ -5,24 +5,34 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
+
 namespace Azure.Network.Management.Interface.Models
 {
     /// <summary> IP configuration profile child resource. </summary>
     public partial class IPConfigurationProfile : SubResource
     {
-        /// <summary> Initializes a new instance of IPConfigurationProfile. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::Azure.Network.Management.Interface.Models.IPConfigurationProfile
+        ///
+        /// </summary>
         public IPConfigurationProfile()
         {
         }
 
-        /// <summary> Initializes a new instance of IPConfigurationProfile. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::Azure.Network.Management.Interface.Models.IPConfigurationProfile
+        ///
+        /// </summary>
         /// <param name="id"> Resource ID. </param>
         /// <param name="name"> The name of the resource. This name can be used to access the resource. </param>
         /// <param name="type"> Sub Resource type. </param>
         /// <param name="etag"> A unique read-only string that changes whenever the resource is updated. </param>
         /// <param name="subnet"> The reference to the subnet resource to create a container network interface ip configuration. </param>
         /// <param name="provisioningState"> The provisioning state of the IP configuration profile resource. </param>
-        internal IPConfigurationProfile(string id, string name, string type, string etag, Subnet subnet, ProvisioningState? provisioningState) : base(id)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal IPConfigurationProfile(string id, string name, string type, string etag, Subnet subnet, ProvisioningState? provisioningState, Dictionary<string, BinaryData> rawData) : base(id, rawData)
         {
             Name = name;
             Type = type;

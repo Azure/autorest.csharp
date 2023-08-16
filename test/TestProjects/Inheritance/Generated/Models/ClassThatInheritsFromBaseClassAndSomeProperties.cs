@@ -14,12 +14,18 @@ namespace Inheritance.Models
     /// <summary> The ClassThatInheritsFromBaseClassAndSomeProperties. </summary>
     public partial class ClassThatInheritsFromBaseClassAndSomeProperties : BaseClass
     {
-        /// <summary> Initializes a new instance of ClassThatInheritsFromBaseClassAndSomeProperties. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::Inheritance.Models.ClassThatInheritsFromBaseClassAndSomeProperties
+        ///
+        /// </summary>
         public ClassThatInheritsFromBaseClassAndSomeProperties()
         {
         }
 
-        /// <summary> Initializes a new instance of ClassThatInheritsFromBaseClassAndSomeProperties. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::Inheritance.Models.ClassThatInheritsFromBaseClassAndSomeProperties
+        ///
+        /// </summary>
         /// <param name="baseClassProperty"></param>
         /// <param name="dfeString"> Any object. </param>
         /// <param name="dfeDouble"> Any object. </param>
@@ -34,7 +40,8 @@ namespace Inheritance.Models
         /// <param name="dfeUri"> Any object. </param>
         /// <param name="someProperty"></param>
         /// <param name="someOtherProperty"></param>
-        internal ClassThatInheritsFromBaseClassAndSomeProperties(string baseClassProperty, DataFactoryElement<string> dfeString, DataFactoryElement<double> dfeDouble, DataFactoryElement<bool> dfeBool, DataFactoryElement<int> dfeInt, DataFactoryElement<BinaryData> dfeObject, DataFactoryElement<IList<SeparateClass>> dfeListOfT, DataFactoryElement<IList<string>> dfeListOfString, DataFactoryElement<IDictionary<string, string>> dfeKeyValuePairs, DataFactoryElement<DateTimeOffset> dfeDateTime, DataFactoryElement<TimeSpan> dfeDuration, DataFactoryElement<Uri> dfeUri, string someProperty, string someOtherProperty) : base(baseClassProperty, dfeString, dfeDouble, dfeBool, dfeInt, dfeObject, dfeListOfT, dfeListOfString, dfeKeyValuePairs, dfeDateTime, dfeDuration, dfeUri)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal ClassThatInheritsFromBaseClassAndSomeProperties(string baseClassProperty, DataFactoryElement<string> dfeString, DataFactoryElement<double> dfeDouble, DataFactoryElement<bool> dfeBool, DataFactoryElement<int> dfeInt, DataFactoryElement<BinaryData> dfeObject, DataFactoryElement<IList<SeparateClass>> dfeListOfT, DataFactoryElement<IList<string>> dfeListOfString, DataFactoryElement<IDictionary<string, string>> dfeKeyValuePairs, DataFactoryElement<DateTimeOffset> dfeDateTime, DataFactoryElement<TimeSpan> dfeDuration, DataFactoryElement<Uri> dfeUri, string someProperty, string someOtherProperty, Dictionary<string, BinaryData> rawData) : base(baseClassProperty, dfeString, dfeDouble, dfeBool, dfeInt, dfeObject, dfeListOfT, dfeListOfString, dfeKeyValuePairs, dfeDateTime, dfeDuration, dfeUri, rawData)
         {
             SomeProperty = someProperty;
             SomeOtherProperty = someOtherProperty;

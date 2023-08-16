@@ -8,6 +8,7 @@
 using System;
 using System.Collections.Generic;
 using System.Text.Json;
+using Azure;
 using Azure.Core;
 using Azure.Core.Serialization;
 using Azure.ResourceManager.Models;
@@ -16,12 +17,14 @@ using MgmtMockAndSample.Models;
 
 namespace MgmtMockAndSample
 {
-    public partial class MgmtMockAndSamplePrivateEndpointConnectionData : IUtf8JsonSerializable, IJsonModelSerializable
+    public partial class MgmtMockAndSamplePrivateEndpointConnectionData : IUtf8JsonSerializable, IModelJsonSerializable<MgmtMockAndSamplePrivateEndpointConnectionData>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModelSerializable)this).Serialize(writer, ModelSerializerOptions.AzureServiceDefault);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<MgmtMockAndSamplePrivateEndpointConnectionData>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
 
-        void IJsonModelSerializable.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
+        void IModelJsonSerializable<MgmtMockAndSamplePrivateEndpointConnectionData>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
             writer.WriteStartObject();
             if (Optional.IsDefined(Etag))
             {
@@ -46,18 +49,25 @@ namespace MgmtMockAndSample
                 writer.WriteStringValue(ProvisioningState.Value.ToString());
             }
             writer.WriteEndObject();
+            if (_rawData is not null && options.Format == ModelSerializerFormat.Json)
+            {
+                foreach (var property in _rawData)
+                {
+                    writer.WritePropertyName(property.Key);
+#if NET6_0_OR_GREATER
+				writer.WriteRawValue(property.Value);
+#else
+                    JsonSerializer.Serialize(writer, JsonDocument.Parse(property.Value.ToString()).RootElement);
+#endif
+                }
+            }
             writer.WriteEndObject();
-        }
-
-        object IModelSerializable.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            using var doc = JsonDocument.Parse(data);
-            return DeserializeMgmtMockAndSamplePrivateEndpointConnectionData(doc.RootElement, options);
         }
 
         internal static MgmtMockAndSamplePrivateEndpointConnectionData DeserializeMgmtMockAndSamplePrivateEndpointConnectionData(JsonElement element, ModelSerializerOptions options = default)
         {
-            options ??= ModelSerializerOptions.AzureServiceDefault;
+            options ??= ModelSerializerOptions.DefaultWireOptions;
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
@@ -72,6 +82,7 @@ namespace MgmtMockAndSample
             Optional<Azure.ResourceManager.Resources.Models.SubResource> privateEndpoint = default;
             Optional<MgmtMockAndSamplePrivateLinkServiceConnectionState> privateLinkServiceConnectionState = default;
             Optional<MgmtMockAndSamplePrivateEndpointConnectionProvisioningState> provisioningState = default;
+            Dictionary<string, BinaryData> rawData = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("etag"u8))
@@ -165,14 +176,57 @@ namespace MgmtMockAndSample
                     }
                     continue;
                 }
+                if (options.Format == ModelSerializerFormat.Json)
+                {
+                    rawData.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
+                    continue;
+                }
             }
-            return new MgmtMockAndSamplePrivateEndpointConnectionData(id, name, type, systemData.Value, etag.Value, privateEndpoint, privateLinkServiceConnectionState.Value, Optional.ToNullable(provisioningState), Optional.ToNullable(location), Optional.ToDictionary(tags));
+            return new MgmtMockAndSamplePrivateEndpointConnectionData(id, name, type, systemData.Value, etag.Value, privateEndpoint, privateLinkServiceConnectionState.Value, Optional.ToNullable(provisioningState), Optional.ToNullable(location), Optional.ToDictionary(tags), rawData);
         }
 
-        object IJsonModelSerializable.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        MgmtMockAndSamplePrivateEndpointConnectionData IModelJsonSerializable<MgmtMockAndSamplePrivateEndpointConnectionData>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
         {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
             using var doc = JsonDocument.ParseValue(ref reader);
             return DeserializeMgmtMockAndSamplePrivateEndpointConnectionData(doc.RootElement, options);
+        }
+
+        BinaryData IModelSerializable<MgmtMockAndSamplePrivateEndpointConnectionData>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        MgmtMockAndSamplePrivateEndpointConnectionData IModelSerializable<MgmtMockAndSamplePrivateEndpointConnectionData>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using var doc = JsonDocument.Parse(data);
+            return DeserializeMgmtMockAndSamplePrivateEndpointConnectionData(doc.RootElement, options);
+        }
+
+        public static implicit operator RequestContent(MgmtMockAndSamplePrivateEndpointConnectionData model)
+        {
+            if (model is null)
+            {
+                return null;
+            }
+
+            return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
+        }
+
+        public static explicit operator MgmtMockAndSamplePrivateEndpointConnectionData(Response response)
+        {
+            if (response is null)
+            {
+                return null;
+            }
+
+            using JsonDocument doc = JsonDocument.Parse(response.ContentStream);
+            return DeserializeMgmtMockAndSamplePrivateEndpointConnectionData(doc.RootElement, ModelSerializerOptions.DefaultWireOptions);
         }
     }
 }

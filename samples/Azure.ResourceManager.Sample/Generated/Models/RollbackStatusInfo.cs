@@ -5,6 +5,9 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
+
 namespace Azure.ResourceManager.Sample.Models
 {
     /// <summary>
@@ -13,12 +16,20 @@ namespace Azure.ResourceManager.Sample.Models
     /// </summary>
     public partial class RollbackStatusInfo
     {
-        /// <summary> Initializes a new instance of RollbackStatusInfo. </summary>
+        private Dictionary<string, BinaryData> _rawData;
+
+        /// <summary>
+        /// Initializes a new instance of global::Azure.ResourceManager.Sample.Models.RollbackStatusInfo
+        ///
+        /// </summary>
         internal RollbackStatusInfo()
         {
         }
 
-        /// <summary> Initializes a new instance of RollbackStatusInfo. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::Azure.ResourceManager.Sample.Models.RollbackStatusInfo
+        ///
+        /// </summary>
         /// <param name="successfullyRolledbackInstanceCount">
         /// The number of instances which have been successfully rolled back.
         /// Serialized Name: RollbackStatusInfo.successfullyRolledbackInstanceCount
@@ -31,11 +42,13 @@ namespace Azure.ResourceManager.Sample.Models
         /// Error details if OS rollback failed.
         /// Serialized Name: RollbackStatusInfo.rollbackError
         /// </param>
-        internal RollbackStatusInfo(int? successfullyRolledbackInstanceCount, int? failedRolledbackInstanceCount, ApiError rollbackError)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal RollbackStatusInfo(int? successfullyRolledbackInstanceCount, int? failedRolledbackInstanceCount, ApiError rollbackError, Dictionary<string, BinaryData> rawData)
         {
             SuccessfullyRolledbackInstanceCount = successfullyRolledbackInstanceCount;
             FailedRolledbackInstanceCount = failedRolledbackInstanceCount;
             RollbackError = rollbackError;
+            _rawData = rawData;
         }
 
         /// <summary>

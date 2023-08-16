@@ -12,47 +12,55 @@ using Azure.Core.Serialization;
 
 namespace TypeSchemaMapping.Models
 {
-    internal partial class UnknownAbstractModel : IUtf8JsonSerializable, IJsonModelSerializable
+    internal partial class UnknownAbstractModel : IUtf8JsonSerializable, IModelJsonSerializable<AbstractModel>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModelSerializable)this).Serialize(writer, ModelSerializerOptions.AzureServiceDefault);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<AbstractModel>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
 
-        void IJsonModelSerializable.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
+        void IModelJsonSerializable<AbstractModel>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
             writer.WriteStartObject();
             writer.WritePropertyName("DiscriminatorProperty"u8);
             writer.WriteStringValue(DiscriminatorProperty);
+            if (_rawData is not null && options.Format == ModelSerializerFormat.Json)
+            {
+                foreach (var property in _rawData)
+                {
+                    writer.WritePropertyName(property.Key);
+#if NET6_0_OR_GREATER
+				writer.WriteRawValue(property.Value);
+#else
+                    JsonSerializer.Serialize(writer, JsonDocument.Parse(property.Value.ToString()).RootElement);
+#endif
+                }
+            }
             writer.WriteEndObject();
         }
 
-        object IModelSerializable.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            using var doc = JsonDocument.Parse(data);
-            return DeserializeUnknownAbstractModel(doc.RootElement, options);
-        }
+        internal static AbstractModel DeserializeUnknownAbstractModel(JsonElement element, ModelSerializerOptions options = default) => DeserializeAbstractModel(element, options);
 
-        internal static UnknownAbstractModel DeserializeUnknownAbstractModel(JsonElement element, ModelSerializerOptions options = default)
+        AbstractModel IModelJsonSerializable<AbstractModel>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
         {
-            options ??= ModelSerializerOptions.AzureServiceDefault;
-            if (element.ValueKind == JsonValueKind.Null)
-            {
-                return null;
-            }
-            string discriminatorProperty = "Unknown";
-            foreach (var property in element.EnumerateObject())
-            {
-                if (property.NameEquals("DiscriminatorProperty"u8))
-                {
-                    discriminatorProperty = property.Value.GetString();
-                    continue;
-                }
-            }
-            return new UnknownAbstractModel(discriminatorProperty);
-        }
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
 
-        object IJsonModelSerializable.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
-        {
             using var doc = JsonDocument.ParseValue(ref reader);
             return DeserializeUnknownAbstractModel(doc.RootElement, options);
+        }
+
+        BinaryData IModelSerializable<AbstractModel>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        AbstractModel IModelSerializable<AbstractModel>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using var doc = JsonDocument.Parse(data);
+            return DeserializeAbstractModel(doc.RootElement, options);
         }
     }
 }

@@ -5,6 +5,9 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
+
 namespace MgmtRenameRules.Models
 {
     /// <summary>
@@ -13,12 +16,20 @@ namespace MgmtRenameRules.Models
     /// </summary>
     public partial class VirtualMachineScaleSetIPTag
     {
-        /// <summary> Initializes a new instance of VirtualMachineScaleSetIPTag. </summary>
+        private Dictionary<string, BinaryData> _rawData;
+
+        /// <summary>
+        /// Initializes a new instance of global::MgmtRenameRules.Models.VirtualMachineScaleSetIPTag
+        ///
+        /// </summary>
         public VirtualMachineScaleSetIPTag()
         {
         }
 
-        /// <summary> Initializes a new instance of VirtualMachineScaleSetIPTag. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::MgmtRenameRules.Models.VirtualMachineScaleSetIPTag
+        ///
+        /// </summary>
         /// <param name="ipTagType">
         /// IP tag type. Example: FirstPartyUsage.
         /// Serialized Name: VirtualMachineScaleSetIpTag.ipTagType
@@ -27,10 +38,12 @@ namespace MgmtRenameRules.Models
         /// IP tag associated with the public IP. Example: SQL, Storage etc.
         /// Serialized Name: VirtualMachineScaleSetIpTag.tag
         /// </param>
-        internal VirtualMachineScaleSetIPTag(string ipTagType, string tag)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal VirtualMachineScaleSetIPTag(string ipTagType, string tag, Dictionary<string, BinaryData> rawData)
         {
             IPTagType = ipTagType;
             Tag = tag;
+            _rawData = rawData;
         }
 
         /// <summary>

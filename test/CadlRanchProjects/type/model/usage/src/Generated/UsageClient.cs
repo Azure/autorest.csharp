@@ -58,7 +58,7 @@ namespace _Type.Model.Usage
             Argument.AssertNotNull(input, nameof(input));
 
             RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = await InputAsync(input.ToRequestContent(), context).ConfigureAwait(false);
+            Response response = await InputAsync(input, context).ConfigureAwait(false);
             return response;
         }
 
@@ -71,7 +71,7 @@ namespace _Type.Model.Usage
             Argument.AssertNotNull(input, nameof(input));
 
             RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = Input(input.ToRequestContent(), context);
+            Response response = Input(input, context);
             return response;
         }
 
@@ -159,7 +159,7 @@ namespace _Type.Model.Usage
         {
             RequestContext context = FromCancellationToken(cancellationToken);
             Response response = await OutputAsync(context).ConfigureAwait(false);
-            return Response.FromValue(OutputRecord.FromResponse(response), response);
+            return Response.FromValue((OutputRecord)response, response);
         }
 
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -168,7 +168,7 @@ namespace _Type.Model.Usage
         {
             RequestContext context = FromCancellationToken(cancellationToken);
             Response response = Output(context);
-            return Response.FromValue(OutputRecord.FromResponse(response), response);
+            return Response.FromValue((OutputRecord)response, response);
         }
 
         /// <summary>
@@ -250,8 +250,8 @@ namespace _Type.Model.Usage
             Argument.AssertNotNull(body, nameof(body));
 
             RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = await InputAndOutputAsync(body.ToRequestContent(), context).ConfigureAwait(false);
-            return Response.FromValue(InputOutputRecord.FromResponse(response), response);
+            Response response = await InputAndOutputAsync(body, context).ConfigureAwait(false);
+            return Response.FromValue((InputOutputRecord)response, response);
         }
 
         /// <param name="body"> The InputOutputRecord to use. </param>
@@ -263,8 +263,8 @@ namespace _Type.Model.Usage
             Argument.AssertNotNull(body, nameof(body));
 
             RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = InputAndOutput(body.ToRequestContent(), context);
-            return Response.FromValue(InputOutputRecord.FromResponse(response), response);
+            Response response = InputAndOutput(body, context);
+            return Response.FromValue((InputOutputRecord)response, response);
         }
 
         /// <summary>

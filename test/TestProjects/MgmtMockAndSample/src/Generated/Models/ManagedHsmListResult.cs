@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Collections.Generic;
 using Azure.Core;
 using MgmtMockAndSample;
@@ -14,19 +15,29 @@ namespace MgmtMockAndSample.Models
     /// <summary> List of managed HSM Pools. </summary>
     internal partial class ManagedHsmListResult
     {
-        /// <summary> Initializes a new instance of ManagedHsmListResult. </summary>
+        private Dictionary<string, BinaryData> _rawData;
+
+        /// <summary>
+        /// Initializes a new instance of global::MgmtMockAndSample.Models.ManagedHsmListResult
+        ///
+        /// </summary>
         internal ManagedHsmListResult()
         {
             Value = new ChangeTrackingList<ManagedHsmData>();
         }
 
-        /// <summary> Initializes a new instance of ManagedHsmListResult. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::MgmtMockAndSample.Models.ManagedHsmListResult
+        ///
+        /// </summary>
         /// <param name="value"> The list of managed HSM Pools. </param>
         /// <param name="nextLink"> The URL to get the next set of managed HSM Pools. </param>
-        internal ManagedHsmListResult(IReadOnlyList<ManagedHsmData> value, string nextLink)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal ManagedHsmListResult(IReadOnlyList<ManagedHsmData> value, string nextLink, Dictionary<string, BinaryData> rawData)
         {
             Value = value;
             NextLink = nextLink;
+            _rawData = rawData;
         }
 
         /// <summary> The list of managed HSM Pools. </summary>

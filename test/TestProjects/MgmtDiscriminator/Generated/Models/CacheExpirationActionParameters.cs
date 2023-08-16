@@ -6,13 +6,19 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
 
 namespace MgmtDiscriminator.Models
 {
     /// <summary> Defines the parameters for the cache expiration action. </summary>
     public partial class CacheExpirationActionParameters
     {
-        /// <summary> Initializes a new instance of CacheExpirationActionParameters. </summary>
+        private Dictionary<string, BinaryData> _rawData;
+
+        /// <summary>
+        /// Initializes a new instance of global::MgmtDiscriminator.Models.CacheExpirationActionParameters
+        ///
+        /// </summary>
         /// <param name="typeName"></param>
         /// <param name="cacheBehavior"> Caching behavior for the requests. </param>
         /// <param name="cacheType"> The level at which the content needs to be cached. </param>
@@ -23,17 +29,22 @@ namespace MgmtDiscriminator.Models
             CacheType = cacheType;
         }
 
-        /// <summary> Initializes a new instance of CacheExpirationActionParameters. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::MgmtDiscriminator.Models.CacheExpirationActionParameters
+        ///
+        /// </summary>
         /// <param name="typeName"></param>
         /// <param name="cacheBehavior"> Caching behavior for the requests. </param>
         /// <param name="cacheType"> The level at which the content needs to be cached. </param>
         /// <param name="cacheDuration"> The duration for which the content needs to be cached. Allowed format is [d.]hh:mm:ss. </param>
-        internal CacheExpirationActionParameters(CacheExpirationActionParametersTypeName typeName, CacheBehavior cacheBehavior, CacheType cacheType, TimeSpan? cacheDuration)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal CacheExpirationActionParameters(CacheExpirationActionParametersTypeName typeName, CacheBehavior cacheBehavior, CacheType cacheType, TimeSpan? cacheDuration, Dictionary<string, BinaryData> rawData)
         {
             TypeName = typeName;
             CacheBehavior = cacheBehavior;
             CacheType = cacheType;
             CacheDuration = cacheDuration;
+            _rawData = rawData;
         }
 
         /// <summary> Gets or sets the type name. </summary>

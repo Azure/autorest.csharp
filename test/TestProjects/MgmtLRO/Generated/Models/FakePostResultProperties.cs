@@ -5,21 +5,34 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
+
 namespace MgmtLRO.Models
 {
     /// <summary> The FakePostResultProperties. </summary>
     internal partial class FakePostResultProperties
     {
-        /// <summary> Initializes a new instance of FakePostResultProperties. </summary>
+        private Dictionary<string, BinaryData> _rawData;
+
+        /// <summary>
+        /// Initializes a new instance of global::MgmtLRO.Models.FakePostResultProperties
+        ///
+        /// </summary>
         internal FakePostResultProperties()
         {
         }
 
-        /// <summary> Initializes a new instance of FakePostResultProperties. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::MgmtLRO.Models.FakePostResultProperties
+        ///
+        /// </summary>
         /// <param name="bar"> Bar property. </param>
-        internal FakePostResultProperties(string bar)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal FakePostResultProperties(string bar, Dictionary<string, BinaryData> rawData)
         {
             Bar = bar;
+            _rawData = rawData;
         }
 
         /// <summary> Bar property. </summary>

@@ -14,7 +14,10 @@ namespace AdditionalPropertiesEx.Models
     /// <summary> The InputAdditionalPropertiesModelStruct. </summary>
     public readonly partial struct InputAdditionalPropertiesModelStruct
     {
-        /// <summary> Initializes a new instance of InputAdditionalPropertiesModelStruct. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::AdditionalPropertiesEx.Models.InputAdditionalPropertiesModelStruct
+        ///
+        /// </summary>
         /// <param name="id"></param>
         /// <param name="additionalProperties"> Additional Properties. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="additionalProperties"/> is null. </exception>

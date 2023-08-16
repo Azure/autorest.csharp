@@ -15,7 +15,12 @@ namespace CognitiveSearch.Models
     /// <summary> Contains a batch of document write actions to send to the index. </summary>
     public partial class IndexBatch
     {
-        /// <summary> Initializes a new instance of IndexBatch. </summary>
+        private Dictionary<string, BinaryData> _rawData;
+
+        /// <summary>
+        /// Initializes a new instance of global::CognitiveSearch.Models.IndexBatch
+        ///
+        /// </summary>
         /// <param name="actions"> The actions in the batch. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="actions"/> is null. </exception>
         public IndexBatch(IEnumerable<IndexAction> actions)
@@ -25,11 +30,16 @@ namespace CognitiveSearch.Models
             Actions = actions.ToList();
         }
 
-        /// <summary> Initializes a new instance of IndexBatch. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::CognitiveSearch.Models.IndexBatch
+        ///
+        /// </summary>
         /// <param name="actions"> The actions in the batch. </param>
-        internal IndexBatch(IList<IndexAction> actions)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal IndexBatch(IList<IndexAction> actions, Dictionary<string, BinaryData> rawData)
         {
             Actions = actions;
+            _rawData = rawData;
         }
 
         /// <summary> The actions in the batch. </summary>

@@ -16,7 +16,10 @@ namespace MgmtCustomizations.Models
     /// <summary> Model factory for models. </summary>
     public static partial class ArmMgmtCustomizationsModelFactory
     {
-        /// <summary> Initializes a new instance of PetStoreData. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::MgmtCustomizations.PetStoreData
+        ///
+        /// </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
         /// <param name="resourceType"> The resourceType. </param>
@@ -25,10 +28,13 @@ namespace MgmtCustomizations.Models
         /// <returns> A new <see cref="MgmtCustomizations.PetStoreData"/> instance for mocking. </returns>
         public static PetStoreData PetStoreData(ResourceIdentifier id = null, string name = null, ResourceType resourceType = default, SystemData systemData = null, PetStoreProperties properties = null)
         {
-            return new PetStoreData(id, name, resourceType, systemData, properties);
+            return new PetStoreData(id, name, resourceType, systemData, properties, default);
         }
 
-        /// <summary> Initializes a new instance of Pet. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::MgmtCustomizations.Models.Pet
+        ///
+        /// </summary>
         /// <param name="name"> The name of the pet. </param>
         /// <param name="size">
         /// The size of the pet. This property here is mocking the following scenario:
@@ -37,10 +43,13 @@ namespace MgmtCustomizations.Models
         /// <returns> A new <see cref="Models.Pet"/> instance for mocking. </returns>
         public static Pet Pet(string name = null, int size = default)
         {
-            return new UnknownPet(default, name, size);
+            return new UnknownPet(default, name, size, default);
         }
 
-        /// <summary> Initializes a new instance of Cat. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::MgmtCustomizations.Models.Cat
+        ///
+        /// </summary>
         /// <param name="name"> The name of the pet. </param>
         /// <param name="size">
         /// The size of the pet. This property here is mocking the following scenario:
@@ -50,10 +59,13 @@ namespace MgmtCustomizations.Models
         /// <returns> A new <see cref="Models.Cat"/> instance for mocking. </returns>
         public static Cat Cat(string name = null, int size = default, string meow = null)
         {
-            return new Cat(PetKind.Cat, name, size, meow);
+            return new Cat(PetKind.Cat, name, size, meow, default);
         }
 
-        /// <summary> Initializes a new instance of Dog. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::MgmtCustomizations.Models.Dog
+        ///
+        /// </summary>
         /// <param name="name"> The name of the pet. </param>
         /// <param name="size">
         /// The size of the pet. This property here is mocking the following scenario:
@@ -63,7 +75,7 @@ namespace MgmtCustomizations.Models
         /// <returns> A new <see cref="Models.Dog"/> instance for mocking. </returns>
         public static Dog Dog(string name = null, int size = default, string bark = null)
         {
-            return new Dog(PetKind.Dog, name, size, bark);
+            return new Dog(PetKind.Dog, name, size, bark, default);
         }
     }
 }

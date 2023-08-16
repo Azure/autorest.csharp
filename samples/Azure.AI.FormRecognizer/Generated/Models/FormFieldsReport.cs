@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
 using Azure.Core;
 
 namespace Azure.AI.FormRecognizer.Models
@@ -13,7 +14,12 @@ namespace Azure.AI.FormRecognizer.Models
     /// <summary> Report for a custom model training field. </summary>
     public partial class FormFieldsReport
     {
-        /// <summary> Initializes a new instance of FormFieldsReport. </summary>
+        private Dictionary<string, BinaryData> _rawData;
+
+        /// <summary>
+        /// Initializes a new instance of global::Azure.AI.FormRecognizer.Models.FormFieldsReport
+        ///
+        /// </summary>
         /// <param name="fieldName"> Training field name. </param>
         /// <param name="accuracy"> Estimated extraction accuracy for this field. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="fieldName"/> is null. </exception>
@@ -23,6 +29,20 @@ namespace Azure.AI.FormRecognizer.Models
 
             FieldName = fieldName;
             Accuracy = accuracy;
+        }
+
+        /// <summary>
+        /// Initializes a new instance of global::Azure.AI.FormRecognizer.Models.FormFieldsReport
+        ///
+        /// </summary>
+        /// <param name="fieldName"> Training field name. </param>
+        /// <param name="accuracy"> Estimated extraction accuracy for this field. </param>
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal FormFieldsReport(string fieldName, float accuracy, Dictionary<string, BinaryData> rawData)
+        {
+            FieldName = fieldName;
+            Accuracy = accuracy;
+            _rawData = rawData;
         }
 
         /// <summary> Training field name. </summary>

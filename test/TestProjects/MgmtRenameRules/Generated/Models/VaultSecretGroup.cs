@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Collections.Generic;
 using Azure.Core;
 using Azure.ResourceManager.Resources.Models;
@@ -17,13 +18,21 @@ namespace MgmtRenameRules.Models
     /// </summary>
     public partial class VaultSecretGroup
     {
-        /// <summary> Initializes a new instance of VaultSecretGroup. </summary>
+        private Dictionary<string, BinaryData> _rawData;
+
+        /// <summary>
+        /// Initializes a new instance of global::MgmtRenameRules.Models.VaultSecretGroup
+        ///
+        /// </summary>
         public VaultSecretGroup()
         {
             VaultCertificates = new ChangeTrackingList<VaultCertificate>();
         }
 
-        /// <summary> Initializes a new instance of VaultSecretGroup. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::MgmtRenameRules.Models.VaultSecretGroup
+        ///
+        /// </summary>
         /// <param name="sourceVault">
         /// The relative URL of the Key Vault containing all of the certificates in VaultCertificates.
         /// Serialized Name: VaultSecretGroup.sourceVault
@@ -32,10 +41,12 @@ namespace MgmtRenameRules.Models
         /// The list of key vault references in SourceVault which contain certificates.
         /// Serialized Name: VaultSecretGroup.vaultCertificates
         /// </param>
-        internal VaultSecretGroup(WritableSubResource sourceVault, IList<VaultCertificate> vaultCertificates)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal VaultSecretGroup(WritableSubResource sourceVault, IList<VaultCertificate> vaultCertificates, Dictionary<string, BinaryData> rawData)
         {
             SourceVault = sourceVault;
             VaultCertificates = vaultCertificates;
+            _rawData = rawData;
         }
 
         /// <summary>

@@ -5,21 +5,34 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
+
 namespace xml_service.Models
 {
     /// <summary> I am a complex type with no XML node. </summary>
     public partial class ComplexTypeNoMeta
     {
-        /// <summary> Initializes a new instance of ComplexTypeNoMeta. </summary>
+        private Dictionary<string, BinaryData> _rawData;
+
+        /// <summary>
+        /// Initializes a new instance of global::xml_service.Models.ComplexTypeNoMeta
+        ///
+        /// </summary>
         public ComplexTypeNoMeta()
         {
         }
 
-        /// <summary> Initializes a new instance of ComplexTypeNoMeta. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::xml_service.Models.ComplexTypeNoMeta
+        ///
+        /// </summary>
         /// <param name="id"> The id of the res. </param>
-        internal ComplexTypeNoMeta(string id)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal ComplexTypeNoMeta(string id, Dictionary<string, BinaryData> rawData)
         {
             ID = id;
+            _rawData = rawData;
         }
 
         /// <summary> The id of the res. </summary>

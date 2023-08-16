@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
 using Azure.Core;
 
 namespace required_optional.Models
@@ -13,7 +14,12 @@ namespace required_optional.Models
     /// <summary> The ClassWrapper. </summary>
     public partial class ClassWrapper
     {
-        /// <summary> Initializes a new instance of ClassWrapper. </summary>
+        private Dictionary<string, BinaryData> _rawData;
+
+        /// <summary>
+        /// Initializes a new instance of global::required_optional.Models.ClassWrapper
+        ///
+        /// </summary>
         /// <param name="value"></param>
         /// <exception cref="ArgumentNullException"> <paramref name="value"/> is null. </exception>
         public ClassWrapper(Product value)
@@ -21,6 +27,18 @@ namespace required_optional.Models
             Argument.AssertNotNull(value, nameof(value));
 
             Value = value;
+        }
+
+        /// <summary>
+        /// Initializes a new instance of global::required_optional.Models.ClassWrapper
+        ///
+        /// </summary>
+        /// <param name="value"></param>
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal ClassWrapper(Product value, Dictionary<string, BinaryData> rawData)
+        {
+            Value = value;
+            _rawData = rawData;
         }
 
         /// <summary> Gets the value. </summary>

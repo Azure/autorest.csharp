@@ -5,21 +5,34 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
+
 namespace MgmtSafeFlatten.Models
 {
     /// <summary> The LayerTwoSingle. </summary>
     internal partial class LayerTwoSingle
     {
-        /// <summary> Initializes a new instance of LayerTwoSingle. </summary>
+        private Dictionary<string, BinaryData> _rawData;
+
+        /// <summary>
+        /// Initializes a new instance of global::MgmtSafeFlatten.Models.LayerTwoSingle
+        ///
+        /// </summary>
         public LayerTwoSingle()
         {
         }
 
-        /// <summary> Initializes a new instance of LayerTwoSingle. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::MgmtSafeFlatten.Models.LayerTwoSingle
+        ///
+        /// </summary>
         /// <param name="myProp"> MyProp description. </param>
-        internal LayerTwoSingle(string myProp)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal LayerTwoSingle(string myProp, Dictionary<string, BinaryData> rawData)
         {
             MyProp = myProp;
+            _rawData = rawData;
         }
 
         /// <summary> MyProp description. </summary>

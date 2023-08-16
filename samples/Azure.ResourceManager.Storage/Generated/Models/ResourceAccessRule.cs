@@ -6,24 +6,35 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
 
 namespace Azure.ResourceManager.Storage.Models
 {
     /// <summary> Resource Access Rule. </summary>
     public partial class ResourceAccessRule
     {
-        /// <summary> Initializes a new instance of ResourceAccessRule. </summary>
+        private Dictionary<string, BinaryData> _rawData;
+
+        /// <summary>
+        /// Initializes a new instance of global::Azure.ResourceManager.Storage.Models.ResourceAccessRule
+        ///
+        /// </summary>
         public ResourceAccessRule()
         {
         }
 
-        /// <summary> Initializes a new instance of ResourceAccessRule. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::Azure.ResourceManager.Storage.Models.ResourceAccessRule
+        ///
+        /// </summary>
         /// <param name="tenantId"> Tenant Id. </param>
         /// <param name="resourceId"> Resource Id. </param>
-        internal ResourceAccessRule(Guid? tenantId, string resourceId)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal ResourceAccessRule(Guid? tenantId, string resourceId, Dictionary<string, BinaryData> rawData)
         {
             TenantId = tenantId;
             ResourceId = resourceId;
+            _rawData = rawData;
         }
 
         /// <summary> Tenant Id. </summary>

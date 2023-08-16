@@ -6,26 +6,37 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
 
 namespace Azure.ResourceManager.Storage.Models
 {
     /// <summary> The AccessPolicy. </summary>
     public partial class AccessPolicy
     {
-        /// <summary> Initializes a new instance of AccessPolicy. </summary>
+        private Dictionary<string, BinaryData> _rawData;
+
+        /// <summary>
+        /// Initializes a new instance of global::Azure.ResourceManager.Storage.Models.AccessPolicy
+        ///
+        /// </summary>
         public AccessPolicy()
         {
         }
 
-        /// <summary> Initializes a new instance of AccessPolicy. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::Azure.ResourceManager.Storage.Models.AccessPolicy
+        ///
+        /// </summary>
         /// <param name="startOn"> Start time of the access policy. </param>
         /// <param name="expiryOn"> Expiry time of the access policy. </param>
         /// <param name="permission"> List of abbreviated permissions. </param>
-        internal AccessPolicy(DateTimeOffset? startOn, DateTimeOffset? expiryOn, string permission)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal AccessPolicy(DateTimeOffset? startOn, DateTimeOffset? expiryOn, string permission, Dictionary<string, BinaryData> rawData)
         {
             StartOn = startOn;
             ExpiryOn = expiryOn;
             Permission = permission;
+            _rawData = rawData;
         }
 
         /// <summary> Start time of the access policy. </summary>

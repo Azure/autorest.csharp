@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Collections.Generic;
 using Azure.Core;
 using Azure.ResourceManager.Models;
@@ -19,7 +20,12 @@ namespace MgmtExpandResourceTypes
     /// </summary>
     public partial class RecordSetData : ResourceData
     {
-        /// <summary> Initializes a new instance of RecordSetData. </summary>
+        private Dictionary<string, BinaryData> _rawData;
+
+        /// <summary>
+        /// Initializes a new instance of global::MgmtExpandResourceTypes.RecordSetData
+        ///
+        /// </summary>
         public RecordSetData()
         {
             Metadata = new ChangeTrackingDictionary<string, string>();
@@ -33,7 +39,10 @@ namespace MgmtExpandResourceTypes
             CaaRecords = new ChangeTrackingList<CaaRecord>();
         }
 
-        /// <summary> Initializes a new instance of RecordSetData. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::MgmtExpandResourceTypes.RecordSetData
+        ///
+        /// </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
         /// <param name="resourceType"> The resourceType. </param>
@@ -54,7 +63,8 @@ namespace MgmtExpandResourceTypes
         /// <param name="cnameRecord"> The CNAME record in the  record set. </param>
         /// <param name="soaRecord"> The SOA record in the record set. </param>
         /// <param name="caaRecords"> The list of CAA records in the record set. </param>
-        internal RecordSetData(ResourceIdentifier id, string name, ResourceType resourceType, SystemData systemData, string etag, IDictionary<string, string> metadata, long? ttl, string fqdn, string provisioningState, WritableSubResource targetResource, IList<ARecord> aRecords, IList<AaaaRecord> aaaaRecords, IList<MxRecord> mxRecords, IList<NsRecord> nsRecords, IList<PtrRecord> ptrRecords, IList<SrvRecord> srvRecords, IList<TxtRecord> txtRecords, CnameRecord cnameRecord, SoaRecord soaRecord, IList<CaaRecord> caaRecords) : base(id, name, resourceType, systemData)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal RecordSetData(ResourceIdentifier id, string name, ResourceType resourceType, SystemData systemData, string etag, IDictionary<string, string> metadata, long? ttl, string fqdn, string provisioningState, WritableSubResource targetResource, IList<ARecord> aRecords, IList<AaaaRecord> aaaaRecords, IList<MxRecord> mxRecords, IList<NsRecord> nsRecords, IList<PtrRecord> ptrRecords, IList<SrvRecord> srvRecords, IList<TxtRecord> txtRecords, CnameRecord cnameRecord, SoaRecord soaRecord, IList<CaaRecord> caaRecords, Dictionary<string, BinaryData> rawData) : base(id, name, resourceType, systemData)
         {
             Etag = etag;
             Metadata = metadata;
@@ -72,6 +82,7 @@ namespace MgmtExpandResourceTypes
             CnameRecord = cnameRecord;
             SoaRecord = soaRecord;
             CaaRecords = caaRecords;
+            _rawData = rawData;
         }
 
         /// <summary> The etag of the record set. </summary>

@@ -5,21 +5,34 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
+
 namespace AppConfiguration.Models
 {
     /// <summary> The Key. </summary>
     public partial class Key
     {
-        /// <summary> Initializes a new instance of Key. </summary>
+        private Dictionary<string, BinaryData> _rawData;
+
+        /// <summary>
+        /// Initializes a new instance of global::AppConfiguration.Models.Key
+        ///
+        /// </summary>
         internal Key()
         {
         }
 
-        /// <summary> Initializes a new instance of Key. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::AppConfiguration.Models.Key
+        ///
+        /// </summary>
         /// <param name="name"></param>
-        internal Key(string name)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal Key(string name, Dictionary<string, BinaryData> rawData)
         {
             Name = name;
+            _rawData = rawData;
         }
 
         /// <summary> Gets the name. </summary>

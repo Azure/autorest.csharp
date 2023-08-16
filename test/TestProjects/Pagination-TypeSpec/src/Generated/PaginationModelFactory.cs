@@ -21,7 +21,7 @@ namespace Pagination.Models
         /// <returns> A new <see cref="Models.LedgerEntry"/> instance for mocking. </returns>
         public static LedgerEntry LedgerEntry(string contents = null, string collectionId = null, string transactionId = null)
         {
-            return new LedgerEntry(contents, collectionId, transactionId);
+            return new LedgerEntry(contents, collectionId, transactionId, default);
         }
 
         /// <summary> Initializes a new instance of DimensionValueListItem. </summary>
@@ -31,7 +31,7 @@ namespace Pagination.Models
         {
             value ??= new List<string>();
 
-            return new DimensionValueListItem(value?.ToList());
+            return new DimensionValueListItem(value?.ToList(), default);
         }
 
         /// <summary> Initializes a new instance of TextBlocklist. </summary>
@@ -40,7 +40,7 @@ namespace Pagination.Models
         /// <returns> A new <see cref="Models.TextBlocklist"/> instance for mocking. </returns>
         public static TextBlocklist TextBlocklist(string blocklistName = null, string description = null)
         {
-            return new TextBlocklist(blocklistName, description);
+            return new TextBlocklist(blocklistName, description, default);
         }
 
         /// <summary> Initializes a new instance of TextBlockItem. </summary>
@@ -50,7 +50,7 @@ namespace Pagination.Models
         /// <returns> A new <see cref="Models.TextBlockItem"/> instance for mocking. </returns>
         public static TextBlockItem TextBlockItem(string blockItemId = null, string description = null, string text = null)
         {
-            return new TextBlockItem(blockItemId, description, text);
+            return new TextBlockItem(blockItemId, description, text, default);
         }
     }
 }

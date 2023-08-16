@@ -8,17 +8,20 @@
 using System;
 using System.Collections.Generic;
 using System.Text.Json;
+using Azure;
 using Azure.Core;
 using Azure.Core.Serialization;
 
 namespace Azure.Network.Management.Interface.Models
 {
-    public partial class EffectiveNetworkSecurityRule : IUtf8JsonSerializable, IJsonModelSerializable
+    public partial class EffectiveNetworkSecurityRule : IUtf8JsonSerializable, IModelJsonSerializable<EffectiveNetworkSecurityRule>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModelSerializable)this).Serialize(writer, ModelSerializerOptions.AzureServiceDefault);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<EffectiveNetworkSecurityRule>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
 
-        void IJsonModelSerializable.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
+        void IModelJsonSerializable<EffectiveNetworkSecurityRule>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
             writer.WriteStartObject();
             if (Optional.IsDefined(Name))
             {
@@ -125,18 +128,25 @@ namespace Azure.Network.Management.Interface.Models
                 writer.WritePropertyName("direction"u8);
                 writer.WriteStringValue(Direction.Value.ToString());
             }
+            if (_rawData is not null && options.Format == ModelSerializerFormat.Json)
+            {
+                foreach (var property in _rawData)
+                {
+                    writer.WritePropertyName(property.Key);
+#if NET6_0_OR_GREATER
+				writer.WriteRawValue(property.Value);
+#else
+                    JsonSerializer.Serialize(writer, JsonDocument.Parse(property.Value.ToString()).RootElement);
+#endif
+                }
+            }
             writer.WriteEndObject();
-        }
-
-        object IModelSerializable.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            using var doc = JsonDocument.Parse(data);
-            return DeserializeEffectiveNetworkSecurityRule(doc.RootElement, options);
         }
 
         internal static EffectiveNetworkSecurityRule DeserializeEffectiveNetworkSecurityRule(JsonElement element, ModelSerializerOptions options = default)
         {
-            options ??= ModelSerializerOptions.AzureServiceDefault;
+            options ??= ModelSerializerOptions.DefaultWireOptions;
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
@@ -156,6 +166,7 @@ namespace Azure.Network.Management.Interface.Models
             Optional<SecurityRuleAccess> access = default;
             Optional<int> priority = default;
             Optional<SecurityRuleDirection> direction = default;
+            Dictionary<string, BinaryData> rawData = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("name"u8))
@@ -303,14 +314,57 @@ namespace Azure.Network.Management.Interface.Models
                     direction = new SecurityRuleDirection(property.Value.GetString());
                     continue;
                 }
+                if (options.Format == ModelSerializerFormat.Json)
+                {
+                    rawData.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
+                    continue;
+                }
             }
-            return new EffectiveNetworkSecurityRule(name.Value, Optional.ToNullable(protocol), sourcePortRange.Value, destinationPortRange.Value, Optional.ToList(sourcePortRanges), Optional.ToList(destinationPortRanges), sourceAddressPrefix.Value, destinationAddressPrefix.Value, Optional.ToList(sourceAddressPrefixes), Optional.ToList(destinationAddressPrefixes), Optional.ToList(expandedSourceAddressPrefix), Optional.ToList(expandedDestinationAddressPrefix), Optional.ToNullable(access), Optional.ToNullable(priority), Optional.ToNullable(direction));
+            return new EffectiveNetworkSecurityRule(name.Value, Optional.ToNullable(protocol), sourcePortRange.Value, destinationPortRange.Value, Optional.ToList(sourcePortRanges), Optional.ToList(destinationPortRanges), sourceAddressPrefix.Value, destinationAddressPrefix.Value, Optional.ToList(sourceAddressPrefixes), Optional.ToList(destinationAddressPrefixes), Optional.ToList(expandedSourceAddressPrefix), Optional.ToList(expandedDestinationAddressPrefix), Optional.ToNullable(access), Optional.ToNullable(priority), Optional.ToNullable(direction), rawData);
         }
 
-        object IJsonModelSerializable.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        EffectiveNetworkSecurityRule IModelJsonSerializable<EffectiveNetworkSecurityRule>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
         {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
             using var doc = JsonDocument.ParseValue(ref reader);
             return DeserializeEffectiveNetworkSecurityRule(doc.RootElement, options);
+        }
+
+        BinaryData IModelSerializable<EffectiveNetworkSecurityRule>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        EffectiveNetworkSecurityRule IModelSerializable<EffectiveNetworkSecurityRule>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using var doc = JsonDocument.Parse(data);
+            return DeserializeEffectiveNetworkSecurityRule(doc.RootElement, options);
+        }
+
+        public static implicit operator RequestContent(EffectiveNetworkSecurityRule model)
+        {
+            if (model is null)
+            {
+                return null;
+            }
+
+            return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
+        }
+
+        public static explicit operator EffectiveNetworkSecurityRule(Response response)
+        {
+            if (response is null)
+            {
+                return null;
+            }
+
+            using JsonDocument doc = JsonDocument.Parse(response.ContentStream);
+            return DeserializeEffectiveNetworkSecurityRule(doc.RootElement, ModelSerializerOptions.DefaultWireOptions);
         }
     }
 }

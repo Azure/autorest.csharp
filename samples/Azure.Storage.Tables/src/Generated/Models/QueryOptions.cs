@@ -5,6 +5,8 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
 using Azure.Storage.Tables;
 
 namespace Azure.Storage.Tables.Models
@@ -12,22 +14,32 @@ namespace Azure.Storage.Tables.Models
     /// <summary> Parameter group. </summary>
     public partial class QueryOptions
     {
-        /// <summary> Initializes a new instance of QueryOptions. </summary>
+        private Dictionary<string, BinaryData> _rawData;
+
+        /// <summary>
+        /// Initializes a new instance of global::Azure.Storage.Tables.Models.QueryOptions
+        ///
+        /// </summary>
         public QueryOptions()
         {
         }
 
-        /// <summary> Initializes a new instance of QueryOptions. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::Azure.Storage.Tables.Models.QueryOptions
+        ///
+        /// </summary>
         /// <param name="format"> Specifies the media type for the response. </param>
         /// <param name="top"> Maximum number of records to return. </param>
         /// <param name="select"> Select expression using OData notation. Limits the columns on each record to just those requested, e.g. "$select=PolicyAssignmentId, ResourceId". </param>
         /// <param name="filter"> OData filter expression. </param>
-        internal QueryOptions(ResponseFormat? format, int? top, string select, string filter)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal QueryOptions(ResponseFormat? format, int? top, string select, string filter, Dictionary<string, BinaryData> rawData)
         {
             Format = format;
             Top = top;
             Select = select;
             Filter = filter;
+            _rawData = rawData;
         }
 
         /// <summary> Specifies the media type for the response. </summary>

@@ -5,23 +5,36 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
+
 namespace Inheritance.Models
 {
     /// <summary> The SomeProperties. </summary>
     public partial class SomeProperties
     {
-        /// <summary> Initializes a new instance of SomeProperties. </summary>
+        protected internal Dictionary<string, BinaryData> _rawData;
+
+        /// <summary>
+        /// Initializes a new instance of global::Inheritance.Models.SomeProperties
+        ///
+        /// </summary>
         public SomeProperties()
         {
         }
 
-        /// <summary> Initializes a new instance of SomeProperties. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::Inheritance.Models.SomeProperties
+        ///
+        /// </summary>
         /// <param name="someProperty"></param>
         /// <param name="someOtherProperty"></param>
-        internal SomeProperties(string someProperty, string someOtherProperty)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal SomeProperties(string someProperty, string someOtherProperty, Dictionary<string, BinaryData> rawData)
         {
             SomeProperty = someProperty;
             SomeOtherProperty = someOtherProperty;
+            _rawData = rawData;
         }
 
         /// <summary> Gets or sets the some property. </summary>

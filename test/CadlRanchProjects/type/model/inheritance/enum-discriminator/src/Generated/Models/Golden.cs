@@ -5,6 +5,9 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
+
 namespace _Type.Model.Inheritance.EnumDiscriminator.Models
 {
     /// <summary> Golden dog model. </summary>
@@ -20,7 +23,8 @@ namespace _Type.Model.Inheritance.EnumDiscriminator.Models
         /// <summary> Initializes a new instance of Golden. </summary>
         /// <param name="kind"> discriminator property. </param>
         /// <param name="weight"> Weight of the dog. </param>
-        internal Golden(DogKind kind, int weight) : base(kind, weight)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal Golden(DogKind kind, int weight, Dictionary<string, BinaryData> rawData) : base(kind, weight, rawData)
         {
         }
     }

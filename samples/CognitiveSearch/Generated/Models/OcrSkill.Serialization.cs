@@ -8,17 +8,20 @@
 using System;
 using System.Collections.Generic;
 using System.Text.Json;
+using Azure;
 using Azure.Core;
 using Azure.Core.Serialization;
 
 namespace CognitiveSearch.Models
 {
-    public partial class OcrSkill : IUtf8JsonSerializable, IJsonModelSerializable
+    public partial class OcrSkill : IUtf8JsonSerializable, IModelJsonSerializable<OcrSkill>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModelSerializable)this).Serialize(writer, ModelSerializerOptions.AzureServiceDefault);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<OcrSkill>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
 
-        void IJsonModelSerializable.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
+        void IModelJsonSerializable<OcrSkill>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
+            ModelSerializerHelper.ValidateFormat<OcrSkill>(this, options.Format);
+
             writer.WriteStartObject();
             if (Optional.IsDefined(TextExtractionAlgorithm))
             {
@@ -66,18 +69,25 @@ namespace CognitiveSearch.Models
                 writer.WriteObjectValue(item);
             }
             writer.WriteEndArray();
+            if (_rawData is not null && options.Format == ModelSerializerFormat.Json)
+            {
+                foreach (var property in _rawData)
+                {
+                    writer.WritePropertyName(property.Key);
+#if NET6_0_OR_GREATER
+				writer.WriteRawValue(property.Value);
+#else
+                    JsonSerializer.Serialize(writer, JsonDocument.Parse(property.Value.ToString()).RootElement);
+#endif
+                }
+            }
             writer.WriteEndObject();
-        }
-
-        object IModelSerializable.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            using var doc = JsonDocument.Parse(data);
-            return DeserializeOcrSkill(doc.RootElement, options);
         }
 
         internal static OcrSkill DeserializeOcrSkill(JsonElement element, ModelSerializerOptions options = default)
         {
-            options ??= ModelSerializerOptions.AzureServiceDefault;
+            options ??= ModelSerializerOptions.DefaultWireOptions;
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
@@ -91,6 +101,7 @@ namespace CognitiveSearch.Models
             Optional<string> context = default;
             IList<InputFieldMappingEntry> inputs = default;
             IList<OutputFieldMappingEntry> outputs = default;
+            Dictionary<string, BinaryData> rawData = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("textExtractionAlgorithm"u8))
@@ -160,14 +171,57 @@ namespace CognitiveSearch.Models
                     outputs = array;
                     continue;
                 }
+                if (options.Format == ModelSerializerFormat.Json)
+                {
+                    rawData.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
+                    continue;
+                }
             }
-            return new OcrSkill(odataType, name.Value, description.Value, context.Value, inputs, outputs, Optional.ToNullable(textExtractionAlgorithm), Optional.ToNullable(defaultLanguageCode), Optional.ToNullable(detectOrientation));
+            return new OcrSkill(odataType, name.Value, description.Value, context.Value, inputs, outputs, Optional.ToNullable(textExtractionAlgorithm), Optional.ToNullable(defaultLanguageCode), Optional.ToNullable(detectOrientation), rawData);
         }
 
-        object IJsonModelSerializable.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        OcrSkill IModelJsonSerializable<OcrSkill>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
         {
+            ModelSerializerHelper.ValidateFormat<OcrSkill>(this, options.Format);
+
             using var doc = JsonDocument.ParseValue(ref reader);
             return DeserializeOcrSkill(doc.RootElement, options);
+        }
+
+        BinaryData IModelSerializable<OcrSkill>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat<OcrSkill>(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        OcrSkill IModelSerializable<OcrSkill>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat<OcrSkill>(this, options.Format);
+
+            using var doc = JsonDocument.Parse(data);
+            return DeserializeOcrSkill(doc.RootElement, options);
+        }
+
+        public static implicit operator RequestContent(OcrSkill model)
+        {
+            if (model is null)
+            {
+                return null;
+            }
+
+            return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
+        }
+
+        public static explicit operator OcrSkill(Response response)
+        {
+            if (response is null)
+            {
+                return null;
+            }
+
+            using JsonDocument doc = JsonDocument.Parse(response.ContentStream);
+            return DeserializeOcrSkill(doc.RootElement, ModelSerializerOptions.DefaultWireOptions);
         }
     }
 }

@@ -5,27 +5,40 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
+
 namespace Azure.ResourceManager.Storage.Models
 {
     /// <summary> Management policy action for base blob. </summary>
     public partial class ManagementPolicyBaseBlob
     {
-        /// <summary> Initializes a new instance of ManagementPolicyBaseBlob. </summary>
+        private Dictionary<string, BinaryData> _rawData;
+
+        /// <summary>
+        /// Initializes a new instance of global::Azure.ResourceManager.Storage.Models.ManagementPolicyBaseBlob
+        ///
+        /// </summary>
         public ManagementPolicyBaseBlob()
         {
         }
 
-        /// <summary> Initializes a new instance of ManagementPolicyBaseBlob. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::Azure.ResourceManager.Storage.Models.ManagementPolicyBaseBlob
+        ///
+        /// </summary>
         /// <param name="tierToCool"> The function to tier blobs to cool storage. Support blobs currently at Hot tier. </param>
         /// <param name="tierToArchive"> The function to tier blobs to archive storage. Support blobs currently at Hot or Cool tier. </param>
         /// <param name="delete"> The function to delete the blob. </param>
         /// <param name="enableAutoTierToHotFromCool"> This property enables auto tiering of a blob from cool to hot on a blob access. This property requires tierToCool.daysAfterLastAccessTimeGreaterThan. </param>
-        internal ManagementPolicyBaseBlob(DateAfterModification tierToCool, DateAfterModification tierToArchive, DateAfterModification delete, bool? enableAutoTierToHotFromCool)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal ManagementPolicyBaseBlob(DateAfterModification tierToCool, DateAfterModification tierToArchive, DateAfterModification delete, bool? enableAutoTierToHotFromCool, Dictionary<string, BinaryData> rawData)
         {
             TierToCool = tierToCool;
             TierToArchive = tierToArchive;
             Delete = delete;
             EnableAutoTierToHotFromCool = enableAutoTierToHotFromCool;
+            _rawData = rawData;
         }
 
         /// <summary> The function to tier blobs to cool storage. Support blobs currently at Hot tier. </summary>

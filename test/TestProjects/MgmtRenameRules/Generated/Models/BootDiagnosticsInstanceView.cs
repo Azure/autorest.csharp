@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
 
 namespace MgmtRenameRules.Models
 {
@@ -15,12 +16,20 @@ namespace MgmtRenameRules.Models
     /// </summary>
     public partial class BootDiagnosticsInstanceView
     {
-        /// <summary> Initializes a new instance of BootDiagnosticsInstanceView. </summary>
+        private Dictionary<string, BinaryData> _rawData;
+
+        /// <summary>
+        /// Initializes a new instance of global::MgmtRenameRules.Models.BootDiagnosticsInstanceView
+        ///
+        /// </summary>
         internal BootDiagnosticsInstanceView()
         {
         }
 
-        /// <summary> Initializes a new instance of BootDiagnosticsInstanceView. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::MgmtRenameRules.Models.BootDiagnosticsInstanceView
+        ///
+        /// </summary>
         /// <param name="consoleScreenshotBlobUri">
         /// The console screenshot blob URI. &lt;br&gt;&lt;br&gt;NOTE: This will **not** be set if boot diagnostics is currently enabled with managed storage.
         /// Serialized Name: BootDiagnosticsInstanceView.consoleScreenshotBlobUri
@@ -33,11 +42,13 @@ namespace MgmtRenameRules.Models
         /// The boot diagnostics status information for the VM. &lt;br&gt;&lt;br&gt; NOTE: It will be set only if there are errors encountered in enabling boot diagnostics.
         /// Serialized Name: BootDiagnosticsInstanceView.status
         /// </param>
-        internal BootDiagnosticsInstanceView(Uri consoleScreenshotBlobUri, Uri serialConsoleLogBlobUri, InstanceViewStatus status)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal BootDiagnosticsInstanceView(Uri consoleScreenshotBlobUri, Uri serialConsoleLogBlobUri, InstanceViewStatus status, Dictionary<string, BinaryData> rawData)
         {
             ConsoleScreenshotBlobUri = consoleScreenshotBlobUri;
             SerialConsoleLogBlobUri = serialConsoleLogBlobUri;
             Status = status;
+            _rawData = rawData;
         }
 
         /// <summary>

@@ -19,7 +19,7 @@ namespace ModelsTypeSpec.Models
         /// <returns> A new <see cref="Models.FirstDerivedOutputModel"/> instance for mocking. </returns>
         public static FirstDerivedOutputModel FirstDerivedOutputModel(bool first = default)
         {
-            return new FirstDerivedOutputModel("first", first);
+            return new FirstDerivedOutputModel("first", first, default);
         }
 
         /// <summary> Initializes a new instance of SecondDerivedOutputModel. </summary>
@@ -27,7 +27,53 @@ namespace ModelsTypeSpec.Models
         /// <returns> A new <see cref="Models.SecondDerivedOutputModel"/> instance for mocking. </returns>
         public static SecondDerivedOutputModel SecondDerivedOutputModel(bool second = default)
         {
-            return new SecondDerivedOutputModel("second", second);
+            return new SecondDerivedOutputModel("second", second, default);
+        }
+
+        /// <summary> Initializes a new instance of InputModel. </summary>
+        /// <param name="requiredString"> Required string. </param>
+        /// <param name="requiredInt"> Required int. </param>
+        /// <param name="requiredNullableInt"> Required nullable int. </param>
+        /// <param name="requiredNullableString"> Required nullable string. </param>
+        /// <param name="nonRequiredNullableInt"> Optional nullable int. </param>
+        /// <param name="nonRequiredNullableString"> Optional nullable string. </param>
+        /// <param name="requiredModel"> Required model. </param>
+        /// <param name="requiredModel2"> Required model. </param>
+        /// <param name="requiredIntList"> Required primitive value type collection. </param>
+        /// <param name="requiredStringList"> Required primitive reference type collection. </param>
+        /// <param name="requiredModelList"> Required model collection. </param>
+        /// <param name="requiredModelRecord"> Required model record. </param>
+        /// <param name="requiredCollectionWithNullableFloatElement"> Required collection of which the element is a nullable float. </param>
+        /// <param name="requiredCollectionWithNullableBooleanElement"> Required collection of which the element is a nullable boolean. </param>
+        /// <param name="requiredNullableModelList"> Required model nullable collection. </param>
+        /// <param name="requiredNullableStringList"> Required string nullable collection. </param>
+        /// <param name="requiredNullableIntList"> Required int nullable collection. </param>
+        /// <param name="nonRequiredModelList"> Optional model collection. </param>
+        /// <param name="nonRequiredStringList"> Optional string collection. </param>
+        /// <param name="nonRequiredIntList"> Optional int collection. </param>
+        /// <param name="nonRequiredNullableModelList"> Optional model nullable collection. </param>
+        /// <param name="nonRequiredNullableStringList"> Optional string nullable collection. </param>
+        /// <param name="nonRequiredNullableIntList"> Optional int nullable collection. </param>
+        /// <returns> A new <see cref="Models.InputModel"/> instance for mocking. </returns>
+        public static InputModel InputModel(string requiredString = null, int requiredInt = default, int? requiredNullableInt = null, string requiredNullableString = null, int? nonRequiredNullableInt = null, string nonRequiredNullableString = null, BaseModel requiredModel = null, BaseModel requiredModel2 = null, IEnumerable<int> requiredIntList = null, IEnumerable<string> requiredStringList = null, IEnumerable<CollectionItem> requiredModelList = null, IDictionary<string, RecordItem> requiredModelRecord = null, IEnumerable<float?> requiredCollectionWithNullableFloatElement = null, IEnumerable<bool?> requiredCollectionWithNullableBooleanElement = null, IEnumerable<CollectionItem> requiredNullableModelList = null, IEnumerable<string> requiredNullableStringList = null, IEnumerable<int> requiredNullableIntList = null, IEnumerable<CollectionItem> nonRequiredModelList = null, IEnumerable<string> nonRequiredStringList = null, IEnumerable<int> nonRequiredIntList = null, IEnumerable<CollectionItem> nonRequiredNullableModelList = null, IEnumerable<string> nonRequiredNullableStringList = null, IEnumerable<int> nonRequiredNullableIntList = null)
+        {
+            requiredIntList ??= new List<int>();
+            requiredStringList ??= new List<string>();
+            requiredModelList ??= new List<CollectionItem>();
+            requiredModelRecord ??= new Dictionary<string, RecordItem>();
+            requiredCollectionWithNullableFloatElement ??= new List<float?>();
+            requiredCollectionWithNullableBooleanElement ??= new List<bool?>();
+            requiredNullableModelList ??= new List<CollectionItem>();
+            requiredNullableStringList ??= new List<string>();
+            requiredNullableIntList ??= new List<int>();
+            nonRequiredModelList ??= new List<CollectionItem>();
+            nonRequiredStringList ??= new List<string>();
+            nonRequiredIntList ??= new List<int>();
+            nonRequiredNullableModelList ??= new List<CollectionItem>();
+            nonRequiredNullableStringList ??= new List<string>();
+            nonRequiredNullableIntList ??= new List<int>();
+
+            return new InputModel(requiredString, requiredInt, requiredNullableInt, requiredNullableString, nonRequiredNullableInt, nonRequiredNullableString, requiredModel, requiredModel2, requiredIntList?.ToList(), requiredStringList?.ToList(), requiredModelList?.ToList(), requiredModelRecord, requiredCollectionWithNullableFloatElement?.ToList(), requiredCollectionWithNullableBooleanElement?.ToList(), requiredNullableModelList?.ToList(), requiredNullableStringList?.ToList(), requiredNullableIntList?.ToList(), nonRequiredModelList?.ToList(), nonRequiredStringList?.ToList(), nonRequiredIntList?.ToList(), nonRequiredNullableModelList?.ToList(), nonRequiredNullableStringList?.ToList(), nonRequiredNullableIntList?.ToList(), default);
         }
 
         /// <summary> Initializes a new instance of RoundTripModel. </summary>
@@ -77,7 +123,15 @@ namespace ModelsTypeSpec.Models
             nonRequiredNullableIntList ??= new List<int>();
             nonRequiredNullableStringList ??= new List<string>();
 
-            return new RoundTripModel(requiredString, requiredInt, nonRequiredString, nonRequiredInt, requiredNullableInt, requiredNullableString, nonRequiredNullableInt, nonRequiredNullableString, requiredReadonlyInt, nonRequiredReadonlyInt, requiredModel, requiredFixedStringEnum, requiredFixedIntEnum, requiredExtensibleEnum, requiredList?.ToList(), requiredIntRecord, requiredStringRecord, requiredModelRecord, requiredBytes, optionalBytes, requiredUint8Array?.ToList(), optionalUint8Array?.ToList(), requiredUnknown, optionalUnknown, requiredInt8Array?.ToList(), optionalInt8Array?.ToList(), requiredNullableIntList?.ToList(), requiredNullableStringList?.ToList(), nonRequiredNullableIntList?.ToList(), nonRequiredNullableStringList?.ToList());
+            return new RoundTripModel(requiredString, requiredInt, nonRequiredString, nonRequiredInt, requiredNullableInt, requiredNullableString, nonRequiredNullableInt, nonRequiredNullableString, requiredReadonlyInt, nonRequiredReadonlyInt, requiredModel, requiredFixedStringEnum, requiredFixedIntEnum, requiredExtensibleEnum, requiredList?.ToList(), requiredIntRecord, requiredStringRecord, requiredModelRecord, requiredBytes, optionalBytes, requiredUint8Array?.ToList(), optionalUint8Array?.ToList(), requiredUnknown, optionalUnknown, requiredInt8Array?.ToList(), optionalInt8Array?.ToList(), requiredNullableIntList?.ToList(), requiredNullableStringList?.ToList(), nonRequiredNullableIntList?.ToList(), nonRequiredNullableStringList?.ToList(), default);
+        }
+
+        /// <summary> Initializes a new instance of BaseModelWithProperties. </summary>
+        /// <param name="optionalPropertyOnBase"> Optional properties on base. </param>
+        /// <returns> A new <see cref="Models.BaseModelWithProperties"/> instance for mocking. </returns>
+        public static BaseModelWithProperties BaseModelWithProperties(string optionalPropertyOnBase = null)
+        {
+            return new BaseModelWithProperties(optionalPropertyOnBase, default);
         }
 
         /// <summary> Initializes a new instance of DerivedModelWithProperties. </summary>
@@ -88,7 +142,7 @@ namespace ModelsTypeSpec.Models
         {
             requiredList ??= new List<CollectionItem>();
 
-            return new DerivedModelWithProperties(optionalPropertyOnBase, requiredList?.ToList());
+            return new DerivedModelWithProperties(optionalPropertyOnBase, requiredList?.ToList(), default);
         }
 
         /// <summary> Initializes a new instance of RoundTripReadOnlyModel. </summary>
@@ -134,7 +188,7 @@ namespace ModelsTypeSpec.Models
             requiredCollectionWithNullableIntElement ??= new List<int?>();
             optionalCollectionWithNullableBooleanElement ??= new List<bool?>();
 
-            return new RoundTripReadOnlyModel(requiredReadonlyString, requiredReadonlyInt, optionalReadonlyString, optionalReadonlyInt, requiredReadonlyModel, optionalReadonlyModel, requiredReadonlyFixedStringEnum, requiredReadonlyExtensibleEnum, optionalReadonlyFixedStringEnum, optionalReadonlyExtensibleEnum, requiredReadonlyStringList?.ToList(), requiredReadonlyIntList?.ToList(), requiredReadOnlyModelList?.ToList(), requiredReadOnlyIntRecord, requiredStringRecord, requiredReadOnlyModelRecord, optionalReadonlyStringList?.ToList(), optionalReadonlyIntList?.ToList(), optionalReadOnlyModelList?.ToList(), optionalReadOnlyIntRecord, optionalReadOnlyStringRecord, optionalModelRecord, requiredCollectionWithNullableIntElement?.ToList(), optionalCollectionWithNullableBooleanElement?.ToList());
+            return new RoundTripReadOnlyModel(requiredReadonlyString, requiredReadonlyInt, optionalReadonlyString, optionalReadonlyInt, requiredReadonlyModel, optionalReadonlyModel, requiredReadonlyFixedStringEnum, requiredReadonlyExtensibleEnum, optionalReadonlyFixedStringEnum, optionalReadonlyExtensibleEnum, requiredReadonlyStringList?.ToList(), requiredReadonlyIntList?.ToList(), requiredReadOnlyModelList?.ToList(), requiredReadOnlyIntRecord, requiredStringRecord, requiredReadOnlyModelRecord, optionalReadonlyStringList?.ToList(), optionalReadonlyIntList?.ToList(), optionalReadOnlyModelList?.ToList(), optionalReadOnlyIntRecord, optionalReadOnlyStringRecord, optionalModelRecord, requiredCollectionWithNullableIntElement?.ToList(), optionalCollectionWithNullableBooleanElement?.ToList(), default);
         }
 
         /// <summary> Initializes a new instance of OutputModel. </summary>
@@ -157,7 +211,7 @@ namespace ModelsTypeSpec.Models
             optionalRecord ??= new Dictionary<string, RecordItem>();
             optionalNullableRecord ??= new Dictionary<string, RecordItem>();
 
-            return new OutputModel(requiredString, requiredInt, requiredModel, requiredList?.ToList(), requiredModelRecord, optionalList?.ToList(), optionalNullableList?.ToList(), optionalRecord, optionalNullableRecord);
+            return new OutputModel(requiredString, requiredInt, requiredModel, requiredList?.ToList(), requiredModelRecord, optionalList?.ToList(), optionalNullableList?.ToList(), optionalRecord, optionalNullableRecord, default);
         }
 
         /// <summary> Initializes a new instance of InputRecursiveModel. </summary>
@@ -166,7 +220,7 @@ namespace ModelsTypeSpec.Models
         /// <returns> A new <see cref="Models.InputRecursiveModel"/> instance for mocking. </returns>
         public static InputRecursiveModel InputRecursiveModel(string message = null, InputRecursiveModel inner = null)
         {
-            return new InputRecursiveModel(message, inner);
+            return new InputRecursiveModel(message, inner, default);
         }
 
         /// <summary> Initializes a new instance of ErrorModel. </summary>
@@ -175,7 +229,15 @@ namespace ModelsTypeSpec.Models
         /// <returns> A new <see cref="Models.ErrorModel"/> instance for mocking. </returns>
         public static ErrorModel ErrorModel(string message = null, ErrorModel innerError = null)
         {
-            return new ErrorModel(message, innerError);
+            return new ErrorModel(message, innerError, default);
+        }
+
+        /// <summary> Initializes a new instance of NoUseBase. </summary>
+        /// <param name="baseModelProp"> base model property. </param>
+        /// <returns> A new <see cref="Models.NoUseBase"/> instance for mocking. </returns>
+        public static NoUseBase NoUseBase(string baseModelProp = null)
+        {
+            return new NoUseBase(baseModelProp, default);
         }
     }
 }

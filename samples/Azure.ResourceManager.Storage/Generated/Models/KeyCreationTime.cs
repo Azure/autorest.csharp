@@ -6,24 +6,35 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
 
 namespace Azure.ResourceManager.Storage.Models
 {
     /// <summary> Storage account keys creation time. </summary>
     public partial class KeyCreationTime
     {
-        /// <summary> Initializes a new instance of KeyCreationTime. </summary>
+        private Dictionary<string, BinaryData> _rawData;
+
+        /// <summary>
+        /// Initializes a new instance of global::Azure.ResourceManager.Storage.Models.KeyCreationTime
+        ///
+        /// </summary>
         internal KeyCreationTime()
         {
         }
 
-        /// <summary> Initializes a new instance of KeyCreationTime. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::Azure.ResourceManager.Storage.Models.KeyCreationTime
+        ///
+        /// </summary>
         /// <param name="key1"></param>
         /// <param name="key2"></param>
-        internal KeyCreationTime(DateTimeOffset? key1, DateTimeOffset? key2)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal KeyCreationTime(DateTimeOffset? key1, DateTimeOffset? key2, Dictionary<string, BinaryData> rawData)
         {
             Key1 = key1;
             Key2 = key2;
+            _rawData = rawData;
         }
 
         /// <summary> Gets the key 1. </summary>

@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
 using Azure.ResourceManager.Resources.Models;
 
 namespace Azure.ResourceManager.Sample.Models
@@ -16,7 +17,10 @@ namespace Azure.ResourceManager.Sample.Models
     /// </summary>
     public partial class ImageOSDisk : ImageDisk
     {
-        /// <summary> Initializes a new instance of ImageOSDisk. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::Azure.ResourceManager.Sample.Models.ImageOSDisk
+        ///
+        /// </summary>
         /// <param name="osType">
         /// This property allows you to specify the type of the OS that is included in the disk if creating a VM from a custom image. &lt;br&gt;&lt;br&gt; Possible values are: &lt;br&gt;&lt;br&gt; **Windows** &lt;br&gt;&lt;br&gt; **Linux**
         /// Serialized Name: ImageOSDisk.osType
@@ -31,7 +35,10 @@ namespace Azure.ResourceManager.Sample.Models
             OsState = osState;
         }
 
-        /// <summary> Initializes a new instance of ImageOSDisk. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::Azure.ResourceManager.Sample.Models.ImageOSDisk
+        ///
+        /// </summary>
         /// <param name="snapshot">
         /// The snapshot.
         /// Serialized Name: ImageDisk.snapshot
@@ -68,7 +75,8 @@ namespace Azure.ResourceManager.Sample.Models
         /// The OS State.
         /// Serialized Name: ImageOSDisk.osState
         /// </param>
-        internal ImageOSDisk(WritableSubResource snapshot, WritableSubResource managedDisk, Uri blobUri, CachingType? caching, int? diskSizeGB, StorageAccountType? storageAccountType, WritableSubResource diskEncryptionSet, OperatingSystemType osType, OperatingSystemStateType osState) : base(snapshot, managedDisk, blobUri, caching, diskSizeGB, storageAccountType, diskEncryptionSet)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal ImageOSDisk(WritableSubResource snapshot, WritableSubResource managedDisk, Uri blobUri, CachingType? caching, int? diskSizeGB, StorageAccountType? storageAccountType, WritableSubResource diskEncryptionSet, OperatingSystemType osType, OperatingSystemStateType osState, Dictionary<string, BinaryData> rawData) : base(snapshot, managedDisk, blobUri, caching, diskSizeGB, storageAccountType, diskEncryptionSet, rawData)
         {
             OsType = osType;
             OsState = osState;

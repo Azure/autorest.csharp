@@ -12,12 +12,14 @@ using Azure.Core.Serialization;
 
 namespace xms_error_responses.Models
 {
-    internal partial class UnknownNotFoundErrorBase : IUtf8JsonSerializable, IJsonModelSerializable
+    internal partial class UnknownNotFoundErrorBase : IUtf8JsonSerializable, IModelJsonSerializable<NotFoundErrorBase>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModelSerializable)this).Serialize(writer, ModelSerializerOptions.AzureServiceDefault);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<NotFoundErrorBase>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
 
-        void IJsonModelSerializable.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
+        void IModelJsonSerializable<NotFoundErrorBase>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
+            ModelSerializerHelper.ValidateFormat<NotFoundErrorBase>(this, options.Format);
+
             writer.WriteStartObject();
             if (Optional.IsDefined(Reason))
             {
@@ -31,50 +33,44 @@ namespace xms_error_responses.Models
                 writer.WritePropertyName("someBaseProp"u8);
                 writer.WriteStringValue(SomeBaseProp);
             }
+            if (_rawData is not null && options.Format == ModelSerializerFormat.Json)
+            {
+                foreach (var property in _rawData)
+                {
+                    writer.WritePropertyName(property.Key);
+#if NET6_0_OR_GREATER
+				writer.WriteRawValue(property.Value);
+#else
+                    JsonSerializer.Serialize(writer, JsonDocument.Parse(property.Value.ToString()).RootElement);
+#endif
+                }
+            }
             writer.WriteEndObject();
         }
 
-        object IModelSerializable.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            using var doc = JsonDocument.Parse(data);
-            return DeserializeUnknownNotFoundErrorBase(doc.RootElement, options);
-        }
+        internal static NotFoundErrorBase DeserializeUnknownNotFoundErrorBase(JsonElement element, ModelSerializerOptions options = default) => DeserializeNotFoundErrorBase(element, options);
 
-        internal static UnknownNotFoundErrorBase DeserializeUnknownNotFoundErrorBase(JsonElement element, ModelSerializerOptions options = default)
+        NotFoundErrorBase IModelJsonSerializable<NotFoundErrorBase>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
         {
-            options ??= ModelSerializerOptions.AzureServiceDefault;
-            if (element.ValueKind == JsonValueKind.Null)
-            {
-                return null;
-            }
-            Optional<string> reason = default;
-            string whatNotFound = "Unknown";
-            Optional<string> someBaseProp = default;
-            foreach (var property in element.EnumerateObject())
-            {
-                if (property.NameEquals("reason"u8))
-                {
-                    reason = property.Value.GetString();
-                    continue;
-                }
-                if (property.NameEquals("whatNotFound"u8))
-                {
-                    whatNotFound = property.Value.GetString();
-                    continue;
-                }
-                if (property.NameEquals("someBaseProp"u8))
-                {
-                    someBaseProp = property.Value.GetString();
-                    continue;
-                }
-            }
-            return new UnknownNotFoundErrorBase(someBaseProp.Value, reason.Value, whatNotFound);
-        }
+            ModelSerializerHelper.ValidateFormat<NotFoundErrorBase>(this, options.Format);
 
-        object IJsonModelSerializable.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
-        {
             using var doc = JsonDocument.ParseValue(ref reader);
             return DeserializeUnknownNotFoundErrorBase(doc.RootElement, options);
+        }
+
+        BinaryData IModelSerializable<NotFoundErrorBase>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat<NotFoundErrorBase>(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        NotFoundErrorBase IModelSerializable<NotFoundErrorBase>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat<NotFoundErrorBase>(this, options.Format);
+
+            using var doc = JsonDocument.Parse(data);
+            return DeserializeNotFoundErrorBase(doc.RootElement, options);
         }
     }
 }

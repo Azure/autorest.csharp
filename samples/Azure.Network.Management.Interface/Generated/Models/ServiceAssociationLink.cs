@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Collections.Generic;
 using Azure.Core;
 
@@ -13,13 +14,19 @@ namespace Azure.Network.Management.Interface.Models
     /// <summary> ServiceAssociationLink resource. </summary>
     public partial class ServiceAssociationLink : SubResource
     {
-        /// <summary> Initializes a new instance of ServiceAssociationLink. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::Azure.Network.Management.Interface.Models.ServiceAssociationLink
+        ///
+        /// </summary>
         public ServiceAssociationLink()
         {
             Locations = new ChangeTrackingList<string>();
         }
 
-        /// <summary> Initializes a new instance of ServiceAssociationLink. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::Azure.Network.Management.Interface.Models.ServiceAssociationLink
+        ///
+        /// </summary>
         /// <param name="id"> Resource ID. </param>
         /// <param name="name"> Name of the resource that is unique within a resource group. This name can be used to access the resource. </param>
         /// <param name="etag"> A unique read-only string that changes whenever the resource is updated. </param>
@@ -29,7 +36,8 @@ namespace Azure.Network.Management.Interface.Models
         /// <param name="provisioningState"> The provisioning state of the service association link resource. </param>
         /// <param name="allowDelete"> If true, the resource can be deleted. </param>
         /// <param name="locations"> A list of locations. </param>
-        internal ServiceAssociationLink(string id, string name, string etag, string type, string linkedResourceType, string link, ProvisioningState? provisioningState, bool? allowDelete, IList<string> locations) : base(id)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal ServiceAssociationLink(string id, string name, string etag, string type, string linkedResourceType, string link, ProvisioningState? provisioningState, bool? allowDelete, IList<string> locations, Dictionary<string, BinaryData> rawData) : base(id, rawData)
         {
             Name = name;
             Etag = etag;

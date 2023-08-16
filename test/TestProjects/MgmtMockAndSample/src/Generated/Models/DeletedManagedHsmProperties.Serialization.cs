@@ -8,30 +8,40 @@
 using System;
 using System.Collections.Generic;
 using System.Text.Json;
+using Azure;
 using Azure.Core;
 using Azure.Core.Serialization;
 
 namespace MgmtMockAndSample.Models
 {
-    public partial class DeletedManagedHsmProperties : IUtf8JsonSerializable, IJsonModelSerializable
+    public partial class DeletedManagedHsmProperties : IUtf8JsonSerializable, IModelJsonSerializable<DeletedManagedHsmProperties>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModelSerializable)this).Serialize(writer, ModelSerializerOptions.AzureServiceDefault);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<DeletedManagedHsmProperties>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
 
-        void IJsonModelSerializable.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
+        void IModelJsonSerializable<DeletedManagedHsmProperties>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
             writer.WriteStartObject();
+            if (_rawData is not null && options.Format == ModelSerializerFormat.Json)
+            {
+                foreach (var property in _rawData)
+                {
+                    writer.WritePropertyName(property.Key);
+#if NET6_0_OR_GREATER
+				writer.WriteRawValue(property.Value);
+#else
+                    JsonSerializer.Serialize(writer, JsonDocument.Parse(property.Value.ToString()).RootElement);
+#endif
+                }
+            }
             writer.WriteEndObject();
-        }
-
-        object IModelSerializable.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            using var doc = JsonDocument.Parse(data);
-            return DeserializeDeletedManagedHsmProperties(doc.RootElement, options);
         }
 
         internal static DeletedManagedHsmProperties DeserializeDeletedManagedHsmProperties(JsonElement element, ModelSerializerOptions options = default)
         {
-            options ??= ModelSerializerOptions.AzureServiceDefault;
+            options ??= ModelSerializerOptions.DefaultWireOptions;
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
@@ -42,6 +52,7 @@ namespace MgmtMockAndSample.Models
             Optional<DateTimeOffset> scheduledPurgeDate = default;
             Optional<bool> purgeProtectionEnabled = default;
             Optional<IReadOnlyDictionary<string, string>> tags = default;
+            Dictionary<string, BinaryData> rawData = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("mhsmId"u8))
@@ -99,14 +110,57 @@ namespace MgmtMockAndSample.Models
                     tags = dictionary;
                     continue;
                 }
+                if (options.Format == ModelSerializerFormat.Json)
+                {
+                    rawData.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
+                    continue;
+                }
             }
-            return new DeletedManagedHsmProperties(mhsmId.Value, Optional.ToNullable(location), Optional.ToNullable(deletionDate), Optional.ToNullable(scheduledPurgeDate), Optional.ToNullable(purgeProtectionEnabled), Optional.ToDictionary(tags));
+            return new DeletedManagedHsmProperties(mhsmId.Value, Optional.ToNullable(location), Optional.ToNullable(deletionDate), Optional.ToNullable(scheduledPurgeDate), Optional.ToNullable(purgeProtectionEnabled), Optional.ToDictionary(tags), rawData);
         }
 
-        object IJsonModelSerializable.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        DeletedManagedHsmProperties IModelJsonSerializable<DeletedManagedHsmProperties>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
         {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
             using var doc = JsonDocument.ParseValue(ref reader);
             return DeserializeDeletedManagedHsmProperties(doc.RootElement, options);
+        }
+
+        BinaryData IModelSerializable<DeletedManagedHsmProperties>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        DeletedManagedHsmProperties IModelSerializable<DeletedManagedHsmProperties>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using var doc = JsonDocument.Parse(data);
+            return DeserializeDeletedManagedHsmProperties(doc.RootElement, options);
+        }
+
+        public static implicit operator RequestContent(DeletedManagedHsmProperties model)
+        {
+            if (model is null)
+            {
+                return null;
+            }
+
+            return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
+        }
+
+        public static explicit operator DeletedManagedHsmProperties(Response response)
+        {
+            if (response is null)
+            {
+                return null;
+            }
+
+            using JsonDocument doc = JsonDocument.Parse(response.ContentStream);
+            return DeserializeDeletedManagedHsmProperties(doc.RootElement, ModelSerializerOptions.DefaultWireOptions);
         }
     }
 }

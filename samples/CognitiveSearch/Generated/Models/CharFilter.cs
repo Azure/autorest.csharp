@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
 using Azure.Core;
 
 namespace CognitiveSearch.Models
@@ -17,7 +18,12 @@ namespace CognitiveSearch.Models
     /// </summary>
     public partial class CharFilter
     {
-        /// <summary> Initializes a new instance of CharFilter. </summary>
+        protected internal Dictionary<string, BinaryData> _rawData;
+
+        /// <summary>
+        /// Initializes a new instance of global::CognitiveSearch.Models.CharFilter
+        ///
+        /// </summary>
         /// <param name="name"> The name of the char filter. It must only contain letters, digits, spaces, dashes or underscores, can only start and end with alphanumeric characters, and is limited to 128 characters. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
         public CharFilter(string name)
@@ -27,13 +33,18 @@ namespace CognitiveSearch.Models
             Name = name;
         }
 
-        /// <summary> Initializes a new instance of CharFilter. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::CognitiveSearch.Models.CharFilter
+        ///
+        /// </summary>
         /// <param name="odataType"> Identifies the concrete type of the char filter. </param>
         /// <param name="name"> The name of the char filter. It must only contain letters, digits, spaces, dashes or underscores, can only start and end with alphanumeric characters, and is limited to 128 characters. </param>
-        internal CharFilter(string odataType, string name)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal CharFilter(string odataType, string name, Dictionary<string, BinaryData> rawData)
         {
             OdataType = odataType;
             Name = name;
+            _rawData = rawData;
         }
 
         /// <summary> Identifies the concrete type of the char filter. </summary>

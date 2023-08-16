@@ -5,21 +5,34 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
+
 namespace MgmtScopeResource.Models
 {
     /// <summary> Deployment What-If operation settings. </summary>
     internal partial class DeploymentWhatIfSettings
     {
-        /// <summary> Initializes a new instance of DeploymentWhatIfSettings. </summary>
+        private Dictionary<string, BinaryData> _rawData;
+
+        /// <summary>
+        /// Initializes a new instance of global::MgmtScopeResource.Models.DeploymentWhatIfSettings
+        ///
+        /// </summary>
         public DeploymentWhatIfSettings()
         {
         }
 
-        /// <summary> Initializes a new instance of DeploymentWhatIfSettings. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::MgmtScopeResource.Models.DeploymentWhatIfSettings
+        ///
+        /// </summary>
         /// <param name="resultFormat"> The format of the What-If results. </param>
-        internal DeploymentWhatIfSettings(WhatIfResultFormat? resultFormat)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal DeploymentWhatIfSettings(WhatIfResultFormat? resultFormat, Dictionary<string, BinaryData> rawData)
         {
             ResultFormat = resultFormat;
+            _rawData = rawData;
         }
 
         /// <summary> The format of the What-If results. </summary>

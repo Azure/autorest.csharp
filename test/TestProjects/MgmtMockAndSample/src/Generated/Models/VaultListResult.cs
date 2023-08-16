@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Collections.Generic;
 using Azure.Core;
 using MgmtMockAndSample;
@@ -14,19 +15,29 @@ namespace MgmtMockAndSample.Models
     /// <summary> List of vaults. </summary>
     internal partial class VaultListResult
     {
-        /// <summary> Initializes a new instance of VaultListResult. </summary>
+        private Dictionary<string, BinaryData> _rawData;
+
+        /// <summary>
+        /// Initializes a new instance of global::MgmtMockAndSample.Models.VaultListResult
+        ///
+        /// </summary>
         internal VaultListResult()
         {
             Value = new ChangeTrackingList<VaultData>();
         }
 
-        /// <summary> Initializes a new instance of VaultListResult. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::MgmtMockAndSample.Models.VaultListResult
+        ///
+        /// </summary>
         /// <param name="value"> The list of vaults. </param>
         /// <param name="nextLink"> The URL to get the next set of vaults. </param>
-        internal VaultListResult(IReadOnlyList<VaultData> value, string nextLink)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal VaultListResult(IReadOnlyList<VaultData> value, string nextLink, Dictionary<string, BinaryData> rawData)
         {
             Value = value;
             NextLink = nextLink;
+            _rawData = rawData;
         }
 
         /// <summary> The list of vaults. </summary>

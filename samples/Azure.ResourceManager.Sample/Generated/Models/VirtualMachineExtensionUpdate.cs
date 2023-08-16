@@ -16,12 +16,18 @@ namespace Azure.ResourceManager.Sample.Models
     /// </summary>
     public partial class VirtualMachineExtensionUpdate : UpdateResource
     {
-        /// <summary> Initializes a new instance of VirtualMachineExtensionUpdate. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::Azure.ResourceManager.Sample.Models.VirtualMachineExtensionUpdate
+        ///
+        /// </summary>
         public VirtualMachineExtensionUpdate()
         {
         }
 
-        /// <summary> Initializes a new instance of VirtualMachineExtensionUpdate. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::Azure.ResourceManager.Sample.Models.VirtualMachineExtensionUpdate
+        ///
+        /// </summary>
         /// <param name="tags">
         /// Resource tags
         /// Serialized Name: UpdateResource.tags
@@ -58,7 +64,8 @@ namespace Azure.ResourceManager.Sample.Models
         /// The extension can contain either protectedSettings or protectedSettingsFromKeyVault or no protected settings at all.
         /// Serialized Name: VirtualMachineExtensionUpdate.properties.protectedSettings
         /// </param>
-        internal VirtualMachineExtensionUpdate(IDictionary<string, string> tags, string forceUpdateTag, string publisher, string extensionType, string typeHandlerVersion, bool? autoUpgradeMinorVersion, bool? enableAutomaticUpgrade, BinaryData settings, BinaryData protectedSettings) : base(tags)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal VirtualMachineExtensionUpdate(IDictionary<string, string> tags, string forceUpdateTag, string publisher, string extensionType, string typeHandlerVersion, bool? autoUpgradeMinorVersion, bool? enableAutomaticUpgrade, BinaryData settings, BinaryData protectedSettings, Dictionary<string, BinaryData> rawData) : base(tags, rawData)
         {
             ForceUpdateTag = forceUpdateTag;
             Publisher = publisher;

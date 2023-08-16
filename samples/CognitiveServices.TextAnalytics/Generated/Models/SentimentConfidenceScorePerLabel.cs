@@ -5,12 +5,20 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
+
 namespace CognitiveServices.TextAnalytics.Models
 {
     /// <summary> Represents the confidence scores between 0 and 1 across all sentiment classes: positive, neutral, negative. </summary>
     public partial class SentimentConfidenceScorePerLabel
     {
-        /// <summary> Initializes a new instance of SentimentConfidenceScorePerLabel. </summary>
+        private Dictionary<string, BinaryData> _rawData;
+
+        /// <summary>
+        /// Initializes a new instance of global::CognitiveServices.TextAnalytics.Models.SentimentConfidenceScorePerLabel
+        ///
+        /// </summary>
         /// <param name="positive"></param>
         /// <param name="neutral"></param>
         /// <param name="negative"></param>
@@ -19,6 +27,22 @@ namespace CognitiveServices.TextAnalytics.Models
             Positive = positive;
             Neutral = neutral;
             Negative = negative;
+        }
+
+        /// <summary>
+        /// Initializes a new instance of global::CognitiveServices.TextAnalytics.Models.SentimentConfidenceScorePerLabel
+        ///
+        /// </summary>
+        /// <param name="positive"></param>
+        /// <param name="neutral"></param>
+        /// <param name="negative"></param>
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal SentimentConfidenceScorePerLabel(double positive, double neutral, double negative, Dictionary<string, BinaryData> rawData)
+        {
+            Positive = positive;
+            Neutral = neutral;
+            Negative = negative;
+            _rawData = rawData;
         }
 
         /// <summary> Gets the positive. </summary>

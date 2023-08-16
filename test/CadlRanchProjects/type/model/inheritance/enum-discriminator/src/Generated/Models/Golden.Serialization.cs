@@ -5,32 +5,54 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
 using System.Text.Json;
 using Azure;
 using Azure.Core;
+using Azure.Core.Serialization;
 
 namespace _Type.Model.Inheritance.EnumDiscriminator.Models
 {
-    public partial class Golden : IUtf8JsonSerializable
+    public partial class Golden : IUtf8JsonSerializable, IModelJsonSerializable<Golden>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<Golden>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+
+        void IModelJsonSerializable<Golden>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
+            ModelSerializerHelper.ValidateFormat<Golden>(this, options.Format);
+
             writer.WriteStartObject();
             writer.WritePropertyName("kind"u8);
             writer.WriteStringValue(Kind.ToString());
             writer.WritePropertyName("weight"u8);
             writer.WriteNumberValue(Weight);
+            if (_rawData is not null && options.Format == ModelSerializerFormat.Json)
+            {
+                foreach (var property in _rawData)
+                {
+                    writer.WritePropertyName(property.Key);
+#if NET6_0_OR_GREATER
+				writer.WriteRawValue(property.Value);
+#else
+                    JsonSerializer.Serialize(writer, JsonDocument.Parse(property.Value.ToString()).RootElement);
+#endif
+                }
+            }
             writer.WriteEndObject();
         }
 
-        internal static Golden DeserializeGolden(JsonElement element)
+        internal static Golden DeserializeGolden(JsonElement element, ModelSerializerOptions options = default)
         {
+            options ??= ModelSerializerOptions.DefaultWireOptions;
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
             }
             DogKind kind = default;
             int weight = default;
+            Dictionary<string, BinaryData> rawData = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("kind"u8))
@@ -43,24 +65,57 @@ namespace _Type.Model.Inheritance.EnumDiscriminator.Models
                     weight = property.Value.GetInt32();
                     continue;
                 }
+                if (options.Format == ModelSerializerFormat.Json)
+                {
+                    rawData.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
+                    continue;
+                }
             }
-            return new Golden(kind, weight);
+            return new Golden(kind, weight, rawData);
         }
 
-        /// <summary> Deserializes the model from a raw response. </summary>
-        /// <param name="response"> The response to deserialize the model from. </param>
-        internal static new Golden FromResponse(Response response)
+        Golden IModelJsonSerializable<Golden>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
         {
-            using var document = JsonDocument.Parse(response.Content);
-            return DeserializeGolden(document.RootElement);
+            ModelSerializerHelper.ValidateFormat<Golden>(this, options.Format);
+
+            using var doc = JsonDocument.ParseValue(ref reader);
+            return DeserializeGolden(doc.RootElement, options);
         }
 
-        /// <summary> Convert into a Utf8JsonRequestContent. </summary>
-        internal override RequestContent ToRequestContent()
+        BinaryData IModelSerializable<Golden>.Serialize(ModelSerializerOptions options)
         {
-            var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue(this);
-            return content;
+            ModelSerializerHelper.ValidateFormat<Golden>(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        Golden IModelSerializable<Golden>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat<Golden>(this, options.Format);
+
+            using var doc = JsonDocument.Parse(data);
+            return DeserializeGolden(doc.RootElement, options);
+        }
+
+        public static implicit operator RequestContent(Golden model)
+        {
+            if (model is null)
+            {
+                return null;
+            }
+
+            return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
+        }
+
+        public static explicit operator Golden(Response response)
+        {
+            if (response is null)
+            {
+                return null;
+            }
+
+            using JsonDocument doc = JsonDocument.Parse(response.ContentStream);
+            return DeserializeGolden(doc.RootElement, ModelSerializerOptions.DefaultWireOptions);
         }
     }
 }

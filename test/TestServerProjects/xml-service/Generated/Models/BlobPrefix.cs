@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
 using Azure.Core;
 
 namespace xml_service.Models
@@ -13,7 +14,12 @@ namespace xml_service.Models
     /// <summary> The BlobPrefix. </summary>
     public partial class BlobPrefix
     {
-        /// <summary> Initializes a new instance of BlobPrefix. </summary>
+        private Dictionary<string, BinaryData> _rawData;
+
+        /// <summary>
+        /// Initializes a new instance of global::xml_service.Models.BlobPrefix
+        ///
+        /// </summary>
         /// <param name="name"></param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
         internal BlobPrefix(string name)
@@ -21,6 +27,18 @@ namespace xml_service.Models
             Argument.AssertNotNull(name, nameof(name));
 
             Name = name;
+        }
+
+        /// <summary>
+        /// Initializes a new instance of global::xml_service.Models.BlobPrefix
+        ///
+        /// </summary>
+        /// <param name="name"></param>
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal BlobPrefix(string name, Dictionary<string, BinaryData> rawData)
+        {
+            Name = name;
+            _rawData = rawData;
         }
 
         /// <summary> Gets the name. </summary>

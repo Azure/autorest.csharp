@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Collections.Generic;
 using Azure.Core;
 using Azure.ResourceManager.Models;
@@ -18,13 +19,21 @@ namespace MgmtLRO
     /// </summary>
     public partial class FakeData : TrackedResourceData
     {
-        /// <summary> Initializes a new instance of FakeData. </summary>
+        private Dictionary<string, BinaryData> _rawData;
+
+        /// <summary>
+        /// Initializes a new instance of global::MgmtLRO.FakeData
+        ///
+        /// </summary>
         /// <param name="location"> The location. </param>
         public FakeData(AzureLocation location) : base(location)
         {
         }
 
-        /// <summary> Initializes a new instance of FakeData. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::MgmtLRO.FakeData
+        ///
+        /// </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
         /// <param name="resourceType"> The resourceType. </param>
@@ -32,9 +41,11 @@ namespace MgmtLRO
         /// <param name="tags"> The tags. </param>
         /// <param name="location"> The location. </param>
         /// <param name="properties"> The instance view of a resource. </param>
-        internal FakeData(ResourceIdentifier id, string name, ResourceType resourceType, SystemData systemData, IDictionary<string, string> tags, AzureLocation location, FakeProperties properties) : base(id, name, resourceType, systemData, tags, location)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal FakeData(ResourceIdentifier id, string name, ResourceType resourceType, SystemData systemData, IDictionary<string, string> tags, AzureLocation location, FakeProperties properties, Dictionary<string, BinaryData> rawData) : base(id, name, resourceType, systemData, tags, location)
         {
             Properties = properties;
+            _rawData = rawData;
         }
 
         /// <summary> The instance view of a resource. </summary>

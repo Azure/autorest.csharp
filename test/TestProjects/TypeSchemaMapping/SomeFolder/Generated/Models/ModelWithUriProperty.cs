@@ -6,22 +6,33 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
 
 namespace TypeSchemaMapping.Models
 {
     /// <summary> The ModelWithUriProperty. </summary>
     public partial class ModelWithUriProperty
     {
-        /// <summary> Initializes a new instance of ModelWithUriProperty. </summary>
+        private Dictionary<string, BinaryData> _rawData;
+
+        /// <summary>
+        /// Initializes a new instance of global::TypeSchemaMapping.Models.ModelWithUriProperty
+        ///
+        /// </summary>
         public ModelWithUriProperty()
         {
         }
 
-        /// <summary> Initializes a new instance of ModelWithUriProperty. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::TypeSchemaMapping.Models.ModelWithUriProperty
+        ///
+        /// </summary>
         /// <param name="uri"> . </param>
-        internal ModelWithUriProperty(Uri uri)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal ModelWithUriProperty(Uri uri, Dictionary<string, BinaryData> rawData)
         {
             Uri = uri;
+            _rawData = rawData;
         }
     }
 }

@@ -19,7 +19,12 @@ namespace Azure.ResourceManager.Sample.Models
     /// </summary>
     internal partial class ProximityPlacementGroupListResult
     {
-        /// <summary> Initializes a new instance of ProximityPlacementGroupListResult. </summary>
+        private Dictionary<string, BinaryData> _rawData;
+
+        /// <summary>
+        /// Initializes a new instance of global::Azure.ResourceManager.Sample.Models.ProximityPlacementGroupListResult
+        ///
+        /// </summary>
         /// <param name="value">
         /// The list of proximity placement groups
         /// Serialized Name: ProximityPlacementGroupListResult.value
@@ -32,7 +37,10 @@ namespace Azure.ResourceManager.Sample.Models
             Value = value.ToList();
         }
 
-        /// <summary> Initializes a new instance of ProximityPlacementGroupListResult. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::Azure.ResourceManager.Sample.Models.ProximityPlacementGroupListResult
+        ///
+        /// </summary>
         /// <param name="value">
         /// The list of proximity placement groups
         /// Serialized Name: ProximityPlacementGroupListResult.value
@@ -41,10 +49,12 @@ namespace Azure.ResourceManager.Sample.Models
         /// The URI to fetch the next page of proximity placement groups.
         /// Serialized Name: ProximityPlacementGroupListResult.nextLink
         /// </param>
-        internal ProximityPlacementGroupListResult(IReadOnlyList<ProximityPlacementGroupData> value, string nextLink)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal ProximityPlacementGroupListResult(IReadOnlyList<ProximityPlacementGroupData> value, string nextLink, Dictionary<string, BinaryData> rawData)
         {
             Value = value;
             NextLink = nextLink;
+            _rawData = rawData;
         }
 
         /// <summary>

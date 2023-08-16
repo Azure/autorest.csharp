@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
 using Azure.Core;
 
 namespace ModelWithConverterUsage.Models
@@ -13,7 +14,12 @@ namespace ModelWithConverterUsage.Models
     /// <summary> The ModelStruct. </summary>
     public readonly partial struct ModelStruct
     {
-        /// <summary> Initializes a new instance of ModelStruct. </summary>
+        private readonly Dictionary<string, BinaryData> _rawData;
+
+        /// <summary>
+        /// Initializes a new instance of global::ModelWithConverterUsage.Models.ModelStruct
+        ///
+        /// </summary>
         /// <param name="modelProperty"> . </param>
         /// <exception cref="ArgumentNullException"> <paramref name="modelProperty"/> is null. </exception>
         public ModelStruct(string modelProperty)
@@ -21,6 +27,18 @@ namespace ModelWithConverterUsage.Models
             Argument.AssertNotNull(modelProperty, nameof(modelProperty));
 
             ModelProperty = modelProperty;
+        }
+
+        /// <summary>
+        /// Initializes a new instance of global::ModelWithConverterUsage.Models.ModelStruct
+        ///
+        /// </summary>
+        /// <param name="modelProperty"> . </param>
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal ModelStruct(string modelProperty, Dictionary<string, BinaryData> rawData)
+        {
+            ModelProperty = modelProperty;
+            _rawData = rawData;
         }
 
         /// <summary> . </summary>

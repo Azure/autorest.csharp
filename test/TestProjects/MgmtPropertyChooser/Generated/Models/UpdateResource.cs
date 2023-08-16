@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Collections.Generic;
 using Azure.Core;
 
@@ -13,17 +14,27 @@ namespace MgmtPropertyChooser.Models
     /// <summary> The Update Resource model definition. </summary>
     public partial class UpdateResource
     {
-        /// <summary> Initializes a new instance of UpdateResource. </summary>
+        protected internal Dictionary<string, BinaryData> _rawData;
+
+        /// <summary>
+        /// Initializes a new instance of global::MgmtPropertyChooser.Models.UpdateResource
+        ///
+        /// </summary>
         public UpdateResource()
         {
             Tags = new ChangeTrackingDictionary<string, string>();
         }
 
-        /// <summary> Initializes a new instance of UpdateResource. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::MgmtPropertyChooser.Models.UpdateResource
+        ///
+        /// </summary>
         /// <param name="tags"> Resource tags. </param>
-        internal UpdateResource(IDictionary<string, string> tags)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal UpdateResource(IDictionary<string, string> tags, Dictionary<string, BinaryData> rawData)
         {
             Tags = tags;
+            _rawData = rawData;
         }
 
         /// <summary> Resource tags. </summary>

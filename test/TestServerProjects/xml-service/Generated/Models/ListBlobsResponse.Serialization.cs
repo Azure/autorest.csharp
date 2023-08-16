@@ -6,18 +6,18 @@
 #nullable disable
 
 using System;
+using System.IO;
 using System.Xml;
 using System.Xml.Linq;
+using Azure;
 using Azure.Core;
 using Azure.Core.Serialization;
 
 namespace xml_service.Models
 {
-    public partial class ListBlobsResponse : IXmlSerializable, IXmlModelSerializable
+    public partial class ListBlobsResponse : IXmlSerializable, IModelSerializable<ListBlobsResponse>
     {
-        void IXmlModelSerializable.Serialize(XmlWriter writer, ModelSerializerOptions options) => ((IXmlSerializable)this).Write(writer, null, options);
-
-        void IXmlSerializable.Write(XmlWriter writer, string nameHint, ModelSerializerOptions options)
+        private void Serialize(XmlWriter writer, string nameHint, ModelSerializerOptions options)
         {
             writer.WriteStartElement("EnumerationResults");
             if (Optional.IsDefined(ServiceEndpoint))
@@ -41,21 +41,18 @@ namespace xml_service.Models
             writer.WriteStartElement("Delimiter");
             writer.WriteValue(Delimiter);
             writer.WriteEndElement();
-            writer.WriteObjectValue(Blobs, "Blobs", options);
+            writer.WriteObjectValue(Blobs, "Blobs");
             writer.WriteStartElement("NextMarker");
             writer.WriteValue(NextMarker);
             writer.WriteEndElement();
             writer.WriteEndElement();
         }
 
-        object IModelSerializable.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            return DeserializeListBlobsResponse(XElement.Load(data.ToStream()), options);
-        }
+        void IXmlSerializable.Write(XmlWriter writer, string nameHint) => Serialize(writer, nameHint, ModelSerializerOptions.DefaultWireOptions);
 
         internal static ListBlobsResponse DeserializeListBlobsResponse(XElement element, ModelSerializerOptions options = default)
         {
-            options ??= ModelSerializerOptions.AzureServiceDefault;
+            options ??= ModelSerializerOptions.DefaultWireOptions;
             string serviceEndpoint = default;
             string containerName = default;
             string prefix = default;
@@ -96,7 +93,53 @@ namespace xml_service.Models
             {
                 nextMarker = (string)nextMarkerElement;
             }
-            return new ListBlobsResponse(serviceEndpoint, containerName, prefix, marker, maxResults, delimiter, blobs, nextMarker);
+            return new ListBlobsResponse(serviceEndpoint, containerName, prefix, marker, maxResults, delimiter, blobs, nextMarker, default);
+        }
+
+        BinaryData IModelSerializable<ListBlobsResponse>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            options ??= ModelSerializerOptions.DefaultWireOptions;
+            using MemoryStream stream = new MemoryStream();
+            using XmlWriter writer = XmlWriter.Create(stream);
+            Serialize(writer, null, options);
+            writer.Flush();
+            if (stream.Position > int.MaxValue)
+            {
+                return BinaryData.FromStream(stream);
+            }
+            else
+            {
+                return new BinaryData(stream.GetBuffer().AsMemory(0, (int)stream.Position));
+            }
+        }
+
+        ListBlobsResponse IModelSerializable<ListBlobsResponse>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            return DeserializeListBlobsResponse(XElement.Load(data.ToStream()), options);
+        }
+
+        public static implicit operator RequestContent(ListBlobsResponse model)
+        {
+            if (model is null)
+            {
+                return null;
+            }
+
+            return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
+        }
+
+        public static explicit operator ListBlobsResponse(Response response)
+        {
+            if (response is null)
+            {
+                return null;
+            }
+
+            return DeserializeListBlobsResponse(XElement.Load(response.ContentStream), ModelSerializerOptions.DefaultWireOptions);
         }
     }
 }

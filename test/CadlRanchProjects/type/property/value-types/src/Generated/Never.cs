@@ -54,7 +54,7 @@ namespace _Type.Property.ValueTypes
         {
             RequestContext context = FromCancellationToken(cancellationToken);
             Response response = await GetNeverAsync(context).ConfigureAwait(false);
-            return Response.FromValue(NeverProperty.FromResponse(response), response);
+            return Response.FromValue((NeverProperty)response, response);
         }
 
         /// <summary> Get call. </summary>
@@ -64,7 +64,7 @@ namespace _Type.Property.ValueTypes
         {
             RequestContext context = FromCancellationToken(cancellationToken);
             Response response = GetNever(context);
-            return Response.FromValue(NeverProperty.FromResponse(response), response);
+            return Response.FromValue((NeverProperty)response, response);
         }
 
         /// <summary>
@@ -147,7 +147,7 @@ namespace _Type.Property.ValueTypes
             Argument.AssertNotNull(body, nameof(body));
 
             RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = await PutAsync(body.ToRequestContent(), context).ConfigureAwait(false);
+            Response response = await PutAsync(body, context).ConfigureAwait(false);
             return response;
         }
 
@@ -161,7 +161,7 @@ namespace _Type.Property.ValueTypes
             Argument.AssertNotNull(body, nameof(body));
 
             RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = Put(body.ToRequestContent(), context);
+            Response response = Put(body, context);
             return response;
         }
 

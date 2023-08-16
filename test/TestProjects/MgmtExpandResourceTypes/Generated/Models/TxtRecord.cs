@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Collections.Generic;
 using Azure.Core;
 
@@ -13,17 +14,27 @@ namespace MgmtExpandResourceTypes.Models
     /// <summary> A TXT record. </summary>
     public partial class TxtRecord
     {
-        /// <summary> Initializes a new instance of TxtRecord. </summary>
+        private Dictionary<string, BinaryData> _rawData;
+
+        /// <summary>
+        /// Initializes a new instance of global::MgmtExpandResourceTypes.Models.TxtRecord
+        ///
+        /// </summary>
         public TxtRecord()
         {
             Value = new ChangeTrackingList<string>();
         }
 
-        /// <summary> Initializes a new instance of TxtRecord. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::MgmtExpandResourceTypes.Models.TxtRecord
+        ///
+        /// </summary>
         /// <param name="value"> The text value of this TXT record. </param>
-        internal TxtRecord(IList<string> value)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal TxtRecord(IList<string> value, Dictionary<string, BinaryData> rawData)
         {
             Value = value;
+            _rawData = rawData;
         }
 
         /// <summary> The text value of this TXT record. </summary>

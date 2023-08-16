@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Collections.Generic;
 using Azure.Core;
 
@@ -13,19 +14,29 @@ namespace Azure.Storage.Tables.Models
     /// <summary> The properties for the table query response. </summary>
     public partial class TableQueryResponse
     {
-        /// <summary> Initializes a new instance of TableQueryResponse. </summary>
+        private Dictionary<string, BinaryData> _rawData;
+
+        /// <summary>
+        /// Initializes a new instance of global::Azure.Storage.Tables.Models.TableQueryResponse
+        ///
+        /// </summary>
         internal TableQueryResponse()
         {
             Value = new ChangeTrackingList<TableResponseProperties>();
         }
 
-        /// <summary> Initializes a new instance of TableQueryResponse. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::Azure.Storage.Tables.Models.TableQueryResponse
+        ///
+        /// </summary>
         /// <param name="odataMetadata"> The metadata response of the table. </param>
         /// <param name="value"> List of tables. </param>
-        internal TableQueryResponse(string odataMetadata, IReadOnlyList<TableResponseProperties> value)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal TableQueryResponse(string odataMetadata, IReadOnlyList<TableResponseProperties> value, Dictionary<string, BinaryData> rawData)
         {
             OdataMetadata = odataMetadata;
             Value = value;
+            _rawData = rawData;
         }
 
         /// <summary> The metadata response of the table. </summary>

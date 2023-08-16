@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
 using System.IO;
 using Azure.Core;
 
@@ -14,7 +15,12 @@ namespace body_formdata.Models
     /// <summary> The Paths1MqqetpFormdataStreamUploadfilePostRequestbodyContentMultipartFormDataSchema. </summary>
     internal partial class Paths1MqqetpFormdataStreamUploadfilePostRequestbodyContentMultipartFormDataSchema
     {
-        /// <summary> Initializes a new instance of Paths1MqqetpFormdataStreamUploadfilePostRequestbodyContentMultipartFormDataSchema. </summary>
+        private Dictionary<string, BinaryData> _rawData;
+
+        /// <summary>
+        /// Initializes a new instance of global::body_formdata.Models.Paths1MqqetpFormdataStreamUploadfilePostRequestbodyContentMultipartFormDataSchema
+        ///
+        /// </summary>
         /// <param name="fileContent"> File to upload. </param>
         /// <param name="fileName"> File name to upload. Name has to be spelled exactly as written here. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="fileContent"/> or <paramref name="fileName"/> is null. </exception>
@@ -25,6 +31,20 @@ namespace body_formdata.Models
 
             FileContent = fileContent;
             FileName = fileName;
+        }
+
+        /// <summary>
+        /// Initializes a new instance of global::body_formdata.Models.Paths1MqqetpFormdataStreamUploadfilePostRequestbodyContentMultipartFormDataSchema
+        ///
+        /// </summary>
+        /// <param name="fileContent"> File to upload. </param>
+        /// <param name="fileName"> File name to upload. Name has to be spelled exactly as written here. </param>
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal Paths1MqqetpFormdataStreamUploadfilePostRequestbodyContentMultipartFormDataSchema(Stream fileContent, string fileName, Dictionary<string, BinaryData> rawData)
+        {
+            FileContent = fileContent;
+            FileName = fileName;
+            _rawData = rawData;
         }
 
         /// <summary> File to upload. </summary>

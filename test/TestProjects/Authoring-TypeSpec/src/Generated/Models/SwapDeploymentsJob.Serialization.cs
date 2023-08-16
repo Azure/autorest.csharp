@@ -14,12 +14,14 @@ using Azure.Core.Serialization;
 
 namespace AuthoringTypeSpec.Models
 {
-    public partial class SwapDeploymentsJob : IUtf8JsonSerializable, IJsonModelSerializable
+    public partial class SwapDeploymentsJob : IUtf8JsonSerializable, IModelJsonSerializable<SwapDeploymentsJob>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModelSerializable)this).Serialize(writer, ModelSerializerOptions.AzureServiceDefault);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<SwapDeploymentsJob>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
 
-        void IJsonModelSerializable.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
+        void IModelJsonSerializable<SwapDeploymentsJob>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
             writer.WriteStartObject();
             writer.WritePropertyName("jobId"u8);
             writer.WriteStringValue(JobId);
@@ -33,18 +35,25 @@ namespace AuthoringTypeSpec.Models
             }
             writer.WriteEndArray();
             writer.WritePropertyName("errors"u8);
-            JsonSerializer.Serialize(writer, Errors); writer.WriteEndObject();
-        }
-
-        object IModelSerializable.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            using var doc = JsonDocument.Parse(data);
-            return DeserializeSwapDeploymentsJob(doc.RootElement, options);
+            JsonSerializer.Serialize(writer, Errors); if (_rawData is not null && options.Format == ModelSerializerFormat.Json)
+            {
+                foreach (var property in _rawData)
+                {
+                    writer.WritePropertyName(property.Key);
+#if NET6_0_OR_GREATER
+				writer.WriteRawValue(property.Value);
+#else
+                    JsonSerializer.Serialize(writer, JsonDocument.Parse(property.Value.ToString()).RootElement);
+#endif
+                }
+            }
+            writer.WriteEndObject();
         }
 
         internal static SwapDeploymentsJob DeserializeSwapDeploymentsJob(JsonElement element, ModelSerializerOptions options = default)
         {
-            options ??= ModelSerializerOptions.AzureServiceDefault;
+            options ??= ModelSerializerOptions.DefaultWireOptions;
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
@@ -57,6 +66,7 @@ namespace AuthoringTypeSpec.Models
             IReadOnlyList<JobWarning> warnings = default;
             ResponseError errors = default;
             string id = default;
+            Dictionary<string, BinaryData> rawData = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("jobId"u8))
@@ -104,30 +114,57 @@ namespace AuthoringTypeSpec.Models
                     id = property.Value.GetString();
                     continue;
                 }
+                if (options.Format == ModelSerializerFormat.Json)
+                {
+                    rawData.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
+                    continue;
+                }
             }
-            return new SwapDeploymentsJob(jobId, createdDateTime, lastUpdatedDateTime, expirationDateTime, status, warnings, errors, id);
+            return new SwapDeploymentsJob(jobId, createdDateTime, lastUpdatedDateTime, expirationDateTime, status, warnings, errors, id, rawData);
         }
 
-        object IJsonModelSerializable.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        SwapDeploymentsJob IModelJsonSerializable<SwapDeploymentsJob>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
         {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
             using var doc = JsonDocument.ParseValue(ref reader);
             return DeserializeSwapDeploymentsJob(doc.RootElement, options);
         }
 
-        /// <summary> Deserializes the model from a raw response. </summary>
-        /// <param name="response"> The response to deserialize the model from. </param>
-        internal static SwapDeploymentsJob FromResponse(Response response)
+        BinaryData IModelSerializable<SwapDeploymentsJob>.Serialize(ModelSerializerOptions options)
         {
-            using var document = JsonDocument.Parse(response.Content);
-            return DeserializeSwapDeploymentsJob(document.RootElement);
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
         }
 
-        /// <summary> Convert into a Utf8JsonRequestContent. </summary>
-        internal virtual RequestContent ToRequestContent()
+        SwapDeploymentsJob IModelSerializable<SwapDeploymentsJob>.Deserialize(BinaryData data, ModelSerializerOptions options)
         {
-            var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue(this);
-            return content;
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using var doc = JsonDocument.Parse(data);
+            return DeserializeSwapDeploymentsJob(doc.RootElement, options);
+        }
+
+        public static implicit operator RequestContent(SwapDeploymentsJob model)
+        {
+            if (model is null)
+            {
+                return null;
+            }
+
+            return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
+        }
+
+        public static explicit operator SwapDeploymentsJob(Response response)
+        {
+            if (response is null)
+            {
+                return null;
+            }
+
+            using JsonDocument doc = JsonDocument.Parse(response.ContentStream);
+            return DeserializeSwapDeploymentsJob(doc.RootElement, ModelSerializerOptions.DefaultWireOptions);
         }
     }
 }

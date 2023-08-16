@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Collections.Generic;
 using Azure.Core;
 
@@ -13,19 +14,29 @@ namespace ModelShapes.Models
     /// <summary> The MixedModelWithReadonlyProperty. </summary>
     public partial class MixedModelWithReadonlyProperty
     {
-        /// <summary> Initializes a new instance of MixedModelWithReadonlyProperty. </summary>
+        private Dictionary<string, BinaryData> _rawData;
+
+        /// <summary>
+        /// Initializes a new instance of global::ModelShapes.Models.MixedModelWithReadonlyProperty
+        ///
+        /// </summary>
         public MixedModelWithReadonlyProperty()
         {
             ReadonlyListProperty = new ChangeTrackingList<ReadonlyModel>();
         }
 
-        /// <summary> Initializes a new instance of MixedModelWithReadonlyProperty. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::ModelShapes.Models.MixedModelWithReadonlyProperty
+        ///
+        /// </summary>
         /// <param name="readonlyProperty"></param>
         /// <param name="readonlyListProperty"></param>
-        internal MixedModelWithReadonlyProperty(ReadonlyModel readonlyProperty, IReadOnlyList<ReadonlyModel> readonlyListProperty)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal MixedModelWithReadonlyProperty(ReadonlyModel readonlyProperty, IReadOnlyList<ReadonlyModel> readonlyListProperty, Dictionary<string, BinaryData> rawData)
         {
             ReadonlyProperty = readonlyProperty;
             ReadonlyListProperty = readonlyListProperty;
+            _rawData = rawData;
         }
 
         /// <summary> Gets the readonly property. </summary>

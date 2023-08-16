@@ -20,7 +20,7 @@ namespace AnomalyDetector.Models
         /// <returns> A new <see cref="Models.TimeSeriesPoint"/> instance for mocking. </returns>
         public static TimeSeriesPoint TimeSeriesPoint(DateTimeOffset? timestamp = null, float value = default)
         {
-            return new TimeSeriesPoint(timestamp, value);
+            return new TimeSeriesPoint(timestamp, value, default);
         }
 
         /// <summary> Initializes a new instance of UnivariateEntireDetectionResult. </summary>
@@ -79,7 +79,7 @@ namespace AnomalyDetector.Models
             isPositiveAnomaly ??= new List<bool>();
             severity ??= new List<float>();
 
-            return new UnivariateEntireDetectionResult(period, expectedValues?.ToList(), upperMargins?.ToList(), lowerMargins?.ToList(), isAnomaly?.ToList(), isNegativeAnomaly?.ToList(), isPositiveAnomaly?.ToList(), severity?.ToList());
+            return new UnivariateEntireDetectionResult(period, expectedValues?.ToList(), upperMargins?.ToList(), lowerMargins?.ToList(), isAnomaly?.ToList(), isNegativeAnomaly?.ToList(), isPositiveAnomaly?.ToList(), severity?.ToList(), default);
         }
 
         /// <summary> Initializes a new instance of UnivariateLastDetectionResult. </summary>
@@ -120,7 +120,7 @@ namespace AnomalyDetector.Models
         /// <returns> A new <see cref="Models.UnivariateLastDetectionResult"/> instance for mocking. </returns>
         public static UnivariateLastDetectionResult UnivariateLastDetectionResult(int period = default, int suggestedWindow = default, float expectedValue = default, float upperMargin = default, float lowerMargin = default, bool isAnomaly = default, bool isNegativeAnomaly = default, bool isPositiveAnomaly = default, float? severity = null)
         {
-            return new UnivariateLastDetectionResult(period, suggestedWindow, expectedValue, upperMargin, lowerMargin, isAnomaly, isNegativeAnomaly, isPositiveAnomaly, severity);
+            return new UnivariateLastDetectionResult(period, suggestedWindow, expectedValue, upperMargin, lowerMargin, isAnomaly, isNegativeAnomaly, isPositiveAnomaly, severity, default);
         }
 
         /// <summary> Initializes a new instance of UnivariateChangePointDetectionOptions. </summary>
@@ -155,7 +155,7 @@ namespace AnomalyDetector.Models
         {
             series ??= new List<TimeSeriesPoint>();
 
-            return new UnivariateChangePointDetectionOptions(series?.ToList(), granularity, customInterval, period, stableTrendWindow, threshold);
+            return new UnivariateChangePointDetectionOptions(series?.ToList(), granularity, customInterval, period, stableTrendWindow, threshold, default);
         }
 
         /// <summary> Initializes a new instance of UnivariateChangePointDetectionResult. </summary>
@@ -175,7 +175,7 @@ namespace AnomalyDetector.Models
             isChangePoint ??= new List<bool>();
             confidenceScores ??= new List<float>();
 
-            return new UnivariateChangePointDetectionResult(period, isChangePoint?.ToList(), confidenceScores?.ToList());
+            return new UnivariateChangePointDetectionResult(period, isChangePoint?.ToList(), confidenceScores?.ToList(), default);
         }
 
         /// <summary> Initializes a new instance of MultivariateDetectionResult. </summary>
@@ -187,7 +187,7 @@ namespace AnomalyDetector.Models
         {
             results ??= new List<AnomalyState>();
 
-            return new MultivariateDetectionResult(resultId, summary, results?.ToList());
+            return new MultivariateDetectionResult(resultId, summary, results?.ToList(), default);
         }
 
         /// <summary> Initializes a new instance of MultivariateBatchDetectionResultSummary. </summary>
@@ -204,7 +204,7 @@ namespace AnomalyDetector.Models
             errors ??= new List<ErrorResponse>();
             variableStates ??= new List<VariableState>();
 
-            return new MultivariateBatchDetectionResultSummary(status, errors?.ToList(), variableStates?.ToList(), setupInfo);
+            return new MultivariateBatchDetectionResultSummary(status, errors?.ToList(), variableStates?.ToList(), setupInfo, default);
         }
 
         /// <summary> Initializes a new instance of AnomalyState. </summary>
@@ -216,7 +216,7 @@ namespace AnomalyDetector.Models
         {
             errors ??= new List<ErrorResponse>();
 
-            return new AnomalyState(timestamp, value, errors?.ToList());
+            return new AnomalyState(timestamp, value, errors?.ToList(), default);
         }
 
         /// <summary> Initializes a new instance of AnomalyValue. </summary>
@@ -235,7 +235,7 @@ namespace AnomalyDetector.Models
         {
             interpretation ??= new List<AnomalyInterpretation>();
 
-            return new AnomalyValue(isAnomaly, severity, score, interpretation?.ToList());
+            return new AnomalyValue(isAnomaly, severity, score, interpretation?.ToList(), default);
         }
 
         /// <summary> Initializes a new instance of AnomalyInterpretation. </summary>
@@ -248,7 +248,7 @@ namespace AnomalyDetector.Models
         /// <returns> A new <see cref="Models.AnomalyInterpretation"/> instance for mocking. </returns>
         public static AnomalyInterpretation AnomalyInterpretation(string variable = null, float? contributionScore = null, CorrelationChanges correlationChanges = null)
         {
-            return new AnomalyInterpretation(variable, contributionScore, correlationChanges);
+            return new AnomalyInterpretation(variable, contributionScore, correlationChanges, default);
         }
 
         /// <summary> Initializes a new instance of CorrelationChanges. </summary>
@@ -258,7 +258,7 @@ namespace AnomalyDetector.Models
         {
             changedVariables ??= new List<string>();
 
-            return new CorrelationChanges(changedVariables?.ToList());
+            return new CorrelationChanges(changedVariables?.ToList(), default);
         }
 
         /// <summary> Initializes a new instance of ModelInfo. </summary>
@@ -296,7 +296,7 @@ namespace AnomalyDetector.Models
         {
             errors ??= new List<ErrorResponse>();
 
-            return new ModelInfo(dataSource, dataSchema, startTime, endTime, displayName, slidingWindow, alignPolicy, status, errors?.ToList(), diagnosticsInfo);
+            return new ModelInfo(dataSource, dataSchema, startTime, endTime, displayName, slidingWindow, alignPolicy, status, errors?.ToList(), diagnosticsInfo, default);
         }
 
         /// <summary> Initializes a new instance of AnomalyDetectionModel. </summary>
@@ -310,7 +310,7 @@ namespace AnomalyDetector.Models
         /// <returns> A new <see cref="Models.AnomalyDetectionModel"/> instance for mocking. </returns>
         public static AnomalyDetectionModel AnomalyDetectionModel(Guid modelId = default, DateTimeOffset createdTime = default, DateTimeOffset lastUpdatedTime = default, ModelInfo modelInfo = null)
         {
-            return new AnomalyDetectionModel(modelId, createdTime, lastUpdatedTime, modelInfo);
+            return new AnomalyDetectionModel(modelId, createdTime, lastUpdatedTime, modelInfo, default);
         }
 
         /// <summary> Initializes a new instance of MultivariateLastDetectionResult. </summary>
@@ -322,7 +322,7 @@ namespace AnomalyDetector.Models
             variableStates ??= new List<VariableState>();
             results ??= new List<AnomalyState>();
 
-            return new MultivariateLastDetectionResult(variableStates?.ToList(), results?.ToList());
+            return new MultivariateLastDetectionResult(variableStates?.ToList(), results?.ToList(), default);
         }
     }
 }

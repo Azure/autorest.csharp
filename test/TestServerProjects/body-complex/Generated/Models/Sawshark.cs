@@ -13,7 +13,10 @@ namespace body_complex.Models
     /// <summary> The Sawshark. </summary>
     public partial class Sawshark : Shark
     {
-        /// <summary> Initializes a new instance of Sawshark. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::body_complex.Models.Sawshark
+        ///
+        /// </summary>
         /// <param name="length"></param>
         /// <param name="birthday"></param>
         public Sawshark(float length, DateTimeOffset birthday) : base(length, birthday)
@@ -21,7 +24,10 @@ namespace body_complex.Models
             Fishtype = "sawshark";
         }
 
-        /// <summary> Initializes a new instance of Sawshark. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::body_complex.Models.Sawshark
+        ///
+        /// </summary>
         /// <param name="fishtype"></param>
         /// <param name="species"></param>
         /// <param name="length"></param>
@@ -32,7 +38,8 @@ namespace body_complex.Models
         /// <param name="age"></param>
         /// <param name="birthday"></param>
         /// <param name="picture"></param>
-        internal Sawshark(string fishtype, string species, float length, IList<Fish> siblings, int? age, DateTimeOffset birthday, byte[] picture) : base(fishtype, species, length, siblings, age, birthday)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal Sawshark(string fishtype, string species, float length, IList<Fish> siblings, int? age, DateTimeOffset birthday, byte[] picture, Dictionary<string, BinaryData> rawData) : base(fishtype, species, length, siblings, age, birthday, rawData)
         {
             Picture = picture;
             Fishtype = fishtype ?? "sawshark";

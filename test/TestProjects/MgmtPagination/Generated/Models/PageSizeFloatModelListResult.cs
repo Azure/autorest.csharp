@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Collections.Generic;
 using Azure.Core;
 using MgmtPagination;
@@ -14,19 +15,29 @@ namespace MgmtPagination.Models
     /// <summary> The PageSizeFloatModelListResult. </summary>
     internal partial class PageSizeFloatModelListResult
     {
-        /// <summary> Initializes a new instance of PageSizeFloatModelListResult. </summary>
+        private Dictionary<string, BinaryData> _rawData;
+
+        /// <summary>
+        /// Initializes a new instance of global::MgmtPagination.Models.PageSizeFloatModelListResult
+        ///
+        /// </summary>
         internal PageSizeFloatModelListResult()
         {
             Value = new ChangeTrackingList<PageSizeFloatModelData>();
         }
 
-        /// <summary> Initializes a new instance of PageSizeFloatModelListResult. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::MgmtPagination.Models.PageSizeFloatModelListResult
+        ///
+        /// </summary>
         /// <param name="value"></param>
         /// <param name="nextLink"></param>
-        internal PageSizeFloatModelListResult(IReadOnlyList<PageSizeFloatModelData> value, string nextLink)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal PageSizeFloatModelListResult(IReadOnlyList<PageSizeFloatModelData> value, string nextLink, Dictionary<string, BinaryData> rawData)
         {
             Value = value;
             NextLink = nextLink;
+            _rawData = rawData;
         }
 
         /// <summary> Gets the value. </summary>

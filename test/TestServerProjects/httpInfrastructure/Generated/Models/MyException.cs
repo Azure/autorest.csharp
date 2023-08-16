@@ -5,21 +5,34 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
+
 namespace httpInfrastructure.Models
 {
     /// <summary> The MyException. </summary>
     public partial class MyException
     {
-        /// <summary> Initializes a new instance of MyException. </summary>
+        protected internal Dictionary<string, BinaryData> _rawData;
+
+        /// <summary>
+        /// Initializes a new instance of global::httpInfrastructure.Models.MyException
+        ///
+        /// </summary>
         internal MyException()
         {
         }
 
-        /// <summary> Initializes a new instance of MyException. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::httpInfrastructure.Models.MyException
+        ///
+        /// </summary>
         /// <param name="statusCode"></param>
-        internal MyException(string statusCode)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal MyException(string statusCode, Dictionary<string, BinaryData> rawData)
         {
             StatusCode = statusCode;
+            _rawData = rawData;
         }
 
         /// <summary> Gets the status code. </summary>

@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Collections.Generic;
 using Azure.Core;
 using MgmtMockAndSample;
@@ -14,19 +15,29 @@ namespace MgmtMockAndSample.Models
     /// <summary> List of private endpoint connections associated with a managed HSM Pools. </summary>
     internal partial class MhsmPrivateEndpointConnectionsListResult
     {
-        /// <summary> Initializes a new instance of MhsmPrivateEndpointConnectionsListResult. </summary>
+        private Dictionary<string, BinaryData> _rawData;
+
+        /// <summary>
+        /// Initializes a new instance of global::MgmtMockAndSample.Models.MhsmPrivateEndpointConnectionsListResult
+        ///
+        /// </summary>
         internal MhsmPrivateEndpointConnectionsListResult()
         {
             Value = new ChangeTrackingList<MhsmPrivateEndpointConnectionData>();
         }
 
-        /// <summary> Initializes a new instance of MhsmPrivateEndpointConnectionsListResult. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::MgmtMockAndSample.Models.MhsmPrivateEndpointConnectionsListResult
+        ///
+        /// </summary>
         /// <param name="value"> The private endpoint connection associated with a managed HSM Pools. </param>
         /// <param name="nextLink"> The URL to get the next set of managed HSM Pools. </param>
-        internal MhsmPrivateEndpointConnectionsListResult(IReadOnlyList<MhsmPrivateEndpointConnectionData> value, string nextLink)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal MhsmPrivateEndpointConnectionsListResult(IReadOnlyList<MhsmPrivateEndpointConnectionData> value, string nextLink, Dictionary<string, BinaryData> rawData)
         {
             Value = value;
             NextLink = nextLink;
+            _rawData = rawData;
         }
 
         /// <summary> The private endpoint connection associated with a managed HSM Pools. </summary>

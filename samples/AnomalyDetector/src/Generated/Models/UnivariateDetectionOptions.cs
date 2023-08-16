@@ -15,6 +15,8 @@ namespace AnomalyDetector.Models
     /// <summary> The request of entire or last anomaly detection. </summary>
     public partial class UnivariateDetectionOptions
     {
+        private Dictionary<string, BinaryData> _rawData;
+
         /// <summary> Initializes a new instance of UnivariateDetectionOptions. </summary>
         /// <param name="series">
         /// Time series data points. Points should be sorted by timestamp in ascending
@@ -66,7 +68,8 @@ namespace AnomalyDetector.Models
         /// Used to specify the value to fill, it's used when granularity is not "none"
         /// and imputeMode is "fixed".
         /// </param>
-        internal UnivariateDetectionOptions(IList<TimeSeriesPoint> series, TimeGranularity? granularity, int? customInterval, int? period, float? maxAnomalyRatio, int? sensitivity, ImputeMode? imputeMode, float? imputeFixedValue)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal UnivariateDetectionOptions(IList<TimeSeriesPoint> series, TimeGranularity? granularity, int? customInterval, int? period, float? maxAnomalyRatio, int? sensitivity, ImputeMode? imputeMode, float? imputeFixedValue, Dictionary<string, BinaryData> rawData)
         {
             Series = series;
             Granularity = granularity;
@@ -76,6 +79,7 @@ namespace AnomalyDetector.Models
             Sensitivity = sensitivity;
             ImputeMode = imputeMode;
             ImputeFixedValue = imputeFixedValue;
+            _rawData = rawData;
         }
 
         /// <summary>

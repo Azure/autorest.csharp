@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Collections.Generic;
 using Azure.Core;
 
@@ -28,7 +29,8 @@ namespace _Type.Model.Inheritance.SingleDiscriminator.Models
         /// <param name="friends"></param>
         /// <param name="hate"></param>
         /// <param name="partner"></param>
-        internal Eagle(string kind, int wingspan, IList<Bird> friends, IDictionary<string, Bird> hate, Bird partner) : base(kind, wingspan)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal Eagle(string kind, int wingspan, IList<Bird> friends, IDictionary<string, Bird> hate, Bird partner, Dictionary<string, BinaryData> rawData) : base(kind, wingspan, rawData)
         {
             Friends = friends;
             Hate = hate;

@@ -20,14 +20,22 @@ namespace Azure.ResourceManager.Storage
     /// </summary>
     public partial class FileShareData : ResourceData
     {
-        /// <summary> Initializes a new instance of FileShareData. </summary>
+        private Dictionary<string, BinaryData> _rawData;
+
+        /// <summary>
+        /// Initializes a new instance of global::Azure.ResourceManager.Storage.FileShareData
+        ///
+        /// </summary>
         public FileShareData()
         {
             Metadata = new ChangeTrackingDictionary<string, string>();
             SignedIdentifiers = new ChangeTrackingList<SignedIdentifier>();
         }
 
-        /// <summary> Initializes a new instance of FileShareData. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::Azure.ResourceManager.Storage.FileShareData
+        ///
+        /// </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
         /// <param name="resourceType"> The resourceType. </param>
@@ -51,7 +59,8 @@ namespace Azure.ResourceManager.Storage
         /// <param name="signedIdentifiers"> List of stored access policies specified on the share. </param>
         /// <param name="snapshotOn"> Creation time of share snapshot returned in the response of list shares with expand param "snapshots". </param>
         /// <param name="etag"> Resource Etag. </param>
-        internal FileShareData(ResourceIdentifier id, string name, ResourceType resourceType, SystemData systemData, DateTimeOffset? lastModifiedOn, IDictionary<string, string> metadata, int? shareQuota, EnabledProtocol? enabledProtocols, RootSquashType? rootSquash, string version, bool? deleted, DateTimeOffset? deletedOn, int? remainingRetentionDays, ShareAccessTier? accessTier, DateTimeOffset? accessTierChangeOn, string accessTierStatus, long? shareUsageBytes, LeaseStatus? leaseStatus, LeaseState? leaseState, LeaseDuration? leaseDuration, IList<SignedIdentifier> signedIdentifiers, DateTimeOffset? snapshotOn, ETag? etag) : base(id, name, resourceType, systemData)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal FileShareData(ResourceIdentifier id, string name, ResourceType resourceType, SystemData systemData, DateTimeOffset? lastModifiedOn, IDictionary<string, string> metadata, int? shareQuota, EnabledProtocol? enabledProtocols, RootSquashType? rootSquash, string version, bool? deleted, DateTimeOffset? deletedOn, int? remainingRetentionDays, ShareAccessTier? accessTier, DateTimeOffset? accessTierChangeOn, string accessTierStatus, long? shareUsageBytes, LeaseStatus? leaseStatus, LeaseState? leaseState, LeaseDuration? leaseDuration, IList<SignedIdentifier> signedIdentifiers, DateTimeOffset? snapshotOn, ETag? etag, Dictionary<string, BinaryData> rawData) : base(id, name, resourceType, systemData)
         {
             LastModifiedOn = lastModifiedOn;
             Metadata = metadata;
@@ -72,6 +81,7 @@ namespace Azure.ResourceManager.Storage
             SignedIdentifiers = signedIdentifiers;
             SnapshotOn = snapshotOn;
             Etag = etag;
+            _rawData = rawData;
         }
 
         /// <summary> Returns the date and time the share was last modified. </summary>

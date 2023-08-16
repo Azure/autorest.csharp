@@ -10,13 +10,16 @@ namespace ProtocolMethodsInRestClient.Models
     /// <summary> Model factory for models. </summary>
     public static partial class ProtocolMethodsInRestClientModelFactory
     {
-        /// <summary> Initializes a new instance of Grouped. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::ProtocolMethodsInRestClient.Models.Grouped
+        ///
+        /// </summary>
         /// <param name="first"> First in group. </param>
         /// <param name="second"> Second in group. </param>
         /// <returns> A new <see cref="Models.Grouped"/> instance for mocking. </returns>
         public static Grouped Grouped(string first = null, int second = default)
         {
-            return new Grouped(first, second);
+            return new Grouped(first, second, default);
         }
     }
 }

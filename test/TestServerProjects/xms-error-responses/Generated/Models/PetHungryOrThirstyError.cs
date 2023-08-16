@@ -5,24 +5,34 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
+
 namespace xms_error_responses.Models
 {
     /// <summary> The PetHungryOrThirstyError. </summary>
     public partial class PetHungryOrThirstyError : PetSadError
     {
-        /// <summary> Initializes a new instance of PetHungryOrThirstyError. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::xms_error_responses.Models.PetHungryOrThirstyError
+        ///
+        /// </summary>
         internal PetHungryOrThirstyError()
         {
             ErrorType = "PetHungryOrThirstyError";
         }
 
-        /// <summary> Initializes a new instance of PetHungryOrThirstyError. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::xms_error_responses.Models.PetHungryOrThirstyError
+        ///
+        /// </summary>
         /// <param name="actionResponse"> action feedback. </param>
         /// <param name="errorType"></param>
         /// <param name="errorMessage"> the error message. </param>
         /// <param name="reason"> why is the pet sad. </param>
         /// <param name="hungryOrThirsty"> is the pet hungry or thirsty or both. </param>
-        internal PetHungryOrThirstyError(string actionResponse, string errorType, string errorMessage, string reason, string hungryOrThirsty) : base(actionResponse, errorType, errorMessage, reason)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal PetHungryOrThirstyError(string actionResponse, string errorType, string errorMessage, string reason, string hungryOrThirsty, Dictionary<string, BinaryData> rawData) : base(actionResponse, errorType, errorMessage, reason, rawData)
         {
             HungryOrThirsty = hungryOrThirsty;
             ErrorType = errorType ?? "PetHungryOrThirstyError";

@@ -5,21 +5,34 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
+
 namespace ModelWithConverterUsage.Models
 {
     /// <summary> The product documentation. </summary>
     public partial class Product
     {
-        /// <summary> Initializes a new instance of Product. </summary>
+        private Dictionary<string, BinaryData> _rawData;
+
+        /// <summary>
+        /// Initializes a new instance of global::ModelWithConverterUsage.Models.Product
+        ///
+        /// </summary>
         public Product()
         {
         }
 
-        /// <summary> Initializes a new instance of Product. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::ModelWithConverterUsage.Models.Product
+        ///
+        /// </summary>
         /// <param name="constProperty"> Constant string. </param>
-        internal Product(string constProperty)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal Product(string constProperty, Dictionary<string, BinaryData> rawData)
         {
             ConstProperty = constProperty;
+            _rawData = rawData;
         }
 
         /// <summary> Constant string. </summary>

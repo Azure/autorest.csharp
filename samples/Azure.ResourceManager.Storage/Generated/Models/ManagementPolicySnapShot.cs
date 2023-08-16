@@ -5,25 +5,38 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
+
 namespace Azure.ResourceManager.Storage.Models
 {
     /// <summary> Management policy action for snapshot. </summary>
     public partial class ManagementPolicySnapShot
     {
-        /// <summary> Initializes a new instance of ManagementPolicySnapShot. </summary>
+        private Dictionary<string, BinaryData> _rawData;
+
+        /// <summary>
+        /// Initializes a new instance of global::Azure.ResourceManager.Storage.Models.ManagementPolicySnapShot
+        ///
+        /// </summary>
         public ManagementPolicySnapShot()
         {
         }
 
-        /// <summary> Initializes a new instance of ManagementPolicySnapShot. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::Azure.ResourceManager.Storage.Models.ManagementPolicySnapShot
+        ///
+        /// </summary>
         /// <param name="tierToCool"> The function to tier blob snapshot to cool storage. Support blob snapshot currently at Hot tier. </param>
         /// <param name="tierToArchive"> The function to tier blob snapshot to archive storage. Support blob snapshot currently at Hot or Cool tier. </param>
         /// <param name="delete"> The function to delete the blob snapshot. </param>
-        internal ManagementPolicySnapShot(DateAfterCreation tierToCool, DateAfterCreation tierToArchive, DateAfterCreation delete)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal ManagementPolicySnapShot(DateAfterCreation tierToCool, DateAfterCreation tierToArchive, DateAfterCreation delete, Dictionary<string, BinaryData> rawData)
         {
             TierToCool = tierToCool;
             TierToArchive = tierToArchive;
             Delete = delete;
+            _rawData = rawData;
         }
 
         /// <summary> The function to tier blob snapshot to cool storage. Support blob snapshot currently at Hot tier. </summary>

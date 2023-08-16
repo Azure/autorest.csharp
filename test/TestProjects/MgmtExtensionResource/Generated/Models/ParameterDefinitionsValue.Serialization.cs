@@ -8,17 +8,20 @@
 using System;
 using System.Collections.Generic;
 using System.Text.Json;
+using Azure;
 using Azure.Core;
 using Azure.Core.Serialization;
 
 namespace MgmtExtensionResource.Models
 {
-    public partial class ParameterDefinitionsValue : IUtf8JsonSerializable, IJsonModelSerializable
+    public partial class ParameterDefinitionsValue : IUtf8JsonSerializable, IModelJsonSerializable<ParameterDefinitionsValue>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModelSerializable)this).Serialize(writer, ModelSerializerOptions.AzureServiceDefault);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<ParameterDefinitionsValue>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
 
-        void IJsonModelSerializable.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
+        void IModelJsonSerializable<ParameterDefinitionsValue>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
             writer.WriteStartObject();
             if (Optional.IsDefined(ParameterType))
             {
@@ -58,18 +61,25 @@ namespace MgmtExtensionResource.Models
                 writer.WritePropertyName("metadata"u8);
                 writer.WriteObjectValue(Metadata);
             }
+            if (_rawData is not null && options.Format == ModelSerializerFormat.Json)
+            {
+                foreach (var property in _rawData)
+                {
+                    writer.WritePropertyName(property.Key);
+#if NET6_0_OR_GREATER
+				writer.WriteRawValue(property.Value);
+#else
+                    JsonSerializer.Serialize(writer, JsonDocument.Parse(property.Value.ToString()).RootElement);
+#endif
+                }
+            }
             writer.WriteEndObject();
-        }
-
-        object IModelSerializable.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            using var doc = JsonDocument.Parse(data);
-            return DeserializeParameterDefinitionsValue(doc.RootElement, options);
         }
 
         internal static ParameterDefinitionsValue DeserializeParameterDefinitionsValue(JsonElement element, ModelSerializerOptions options = default)
         {
-            options ??= ModelSerializerOptions.AzureServiceDefault;
+            options ??= ModelSerializerOptions.DefaultWireOptions;
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
@@ -78,6 +88,7 @@ namespace MgmtExtensionResource.Models
             Optional<IList<BinaryData>> allowedValues = default;
             Optional<BinaryData> defaultValue = default;
             Optional<ParameterDefinitionsValueMetadata> metadata = default;
+            Dictionary<string, BinaryData> rawData = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("type"u8))
@@ -128,14 +139,57 @@ namespace MgmtExtensionResource.Models
                     metadata = ParameterDefinitionsValueMetadata.DeserializeParameterDefinitionsValueMetadata(property.Value);
                     continue;
                 }
+                if (options.Format == ModelSerializerFormat.Json)
+                {
+                    rawData.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
+                    continue;
+                }
             }
-            return new ParameterDefinitionsValue(Optional.ToNullable(type), Optional.ToList(allowedValues), defaultValue.Value, metadata.Value);
+            return new ParameterDefinitionsValue(Optional.ToNullable(type), Optional.ToList(allowedValues), defaultValue.Value, metadata.Value, rawData);
         }
 
-        object IJsonModelSerializable.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        ParameterDefinitionsValue IModelJsonSerializable<ParameterDefinitionsValue>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
         {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
             using var doc = JsonDocument.ParseValue(ref reader);
             return DeserializeParameterDefinitionsValue(doc.RootElement, options);
+        }
+
+        BinaryData IModelSerializable<ParameterDefinitionsValue>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        ParameterDefinitionsValue IModelSerializable<ParameterDefinitionsValue>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using var doc = JsonDocument.Parse(data);
+            return DeserializeParameterDefinitionsValue(doc.RootElement, options);
+        }
+
+        public static implicit operator RequestContent(ParameterDefinitionsValue model)
+        {
+            if (model is null)
+            {
+                return null;
+            }
+
+            return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
+        }
+
+        public static explicit operator ParameterDefinitionsValue(Response response)
+        {
+            if (response is null)
+            {
+                return null;
+            }
+
+            using JsonDocument doc = JsonDocument.Parse(response.ContentStream);
+            return DeserializeParameterDefinitionsValue(doc.RootElement, ModelSerializerOptions.DefaultWireOptions);
         }
     }
 }

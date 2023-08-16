@@ -5,15 +5,22 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
+
 namespace MgmtDiscriminator.Models
 {
     /// <summary> The UnknownPet. </summary>
     internal partial class UnknownPet : Pet
     {
-        /// <summary> Initializes a new instance of UnknownPet. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::MgmtDiscriminator.Models.UnknownPet
+        ///
+        /// </summary>
         /// <param name="kind"> The kind of the pet. </param>
         /// <param name="id"> The Id of the pet. </param>
-        internal UnknownPet(PetKind kind, string id) : base(kind, id)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal UnknownPet(PetKind kind, string id, Dictionary<string, BinaryData> rawData) : base(kind, id, rawData)
         {
             Kind = kind;
         }

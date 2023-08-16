@@ -8,6 +8,7 @@
 using System;
 using System.Collections.Generic;
 using System.Text.Json;
+using Azure;
 using Azure.Core;
 using Azure.Core.Serialization;
 using Azure.ResourceManager.Models;
@@ -15,12 +16,14 @@ using MgmtMockAndSample.Models;
 
 namespace MgmtMockAndSample
 {
-    public partial class DiskEncryptionSetData : IUtf8JsonSerializable, IJsonModelSerializable
+    public partial class DiskEncryptionSetData : IUtf8JsonSerializable, IModelJsonSerializable<DiskEncryptionSetData>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModelSerializable)this).Serialize(writer, ModelSerializerOptions.AzureServiceDefault);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<DiskEncryptionSetData>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
 
-        void IJsonModelSerializable.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
+        void IModelJsonSerializable<DiskEncryptionSetData>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
             writer.WriteStartObject();
             if (Optional.IsDefined(Identity))
             {
@@ -56,18 +59,25 @@ namespace MgmtMockAndSample
                 writer.WriteStringValue(MinimumTlsVersion.Value.ToString());
             }
             writer.WriteEndObject();
+            if (_rawData is not null && options.Format == ModelSerializerFormat.Json)
+            {
+                foreach (var property in _rawData)
+                {
+                    writer.WritePropertyName(property.Key);
+#if NET6_0_OR_GREATER
+				writer.WriteRawValue(property.Value);
+#else
+                    JsonSerializer.Serialize(writer, JsonDocument.Parse(property.Value.ToString()).RootElement);
+#endif
+                }
+            }
             writer.WriteEndObject();
-        }
-
-        object IModelSerializable.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            using var doc = JsonDocument.Parse(data);
-            return DeserializeDiskEncryptionSetData(doc.RootElement, options);
         }
 
         internal static DiskEncryptionSetData DeserializeDiskEncryptionSetData(JsonElement element, ModelSerializerOptions options = default)
         {
-            options ??= ModelSerializerOptions.AzureServiceDefault;
+            options ??= ModelSerializerOptions.DefaultWireOptions;
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
@@ -87,6 +97,7 @@ namespace MgmtMockAndSample
             Optional<DateTimeOffset> lastKeyRotationTimestamp = default;
             Optional<string> federatedClientId = default;
             Optional<MinimumTlsVersion> minimumTlsVersion = default;
+            Dictionary<string, BinaryData> rawData = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("identity"u8))
@@ -227,14 +238,57 @@ namespace MgmtMockAndSample
                     }
                     continue;
                 }
+                if (options.Format == ModelSerializerFormat.Json)
+                {
+                    rawData.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
+                    continue;
+                }
             }
-            return new DiskEncryptionSetData(id, name, type, systemData.Value, identity, Optional.ToNullable(encryptionType), activeKey.Value, Optional.ToList(previousKeys), provisioningState.Value, Optional.ToNullable(rotationToLatestKeyVersionEnabled), Optional.ToNullable(lastKeyRotationTimestamp), federatedClientId.Value, Optional.ToNullable(minimumTlsVersion), Optional.ToNullable(location), Optional.ToDictionary(tags));
+            return new DiskEncryptionSetData(id, name, type, systemData.Value, identity, Optional.ToNullable(encryptionType), activeKey.Value, Optional.ToList(previousKeys), provisioningState.Value, Optional.ToNullable(rotationToLatestKeyVersionEnabled), Optional.ToNullable(lastKeyRotationTimestamp), federatedClientId.Value, Optional.ToNullable(minimumTlsVersion), Optional.ToNullable(location), Optional.ToDictionary(tags), rawData);
         }
 
-        object IJsonModelSerializable.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        DiskEncryptionSetData IModelJsonSerializable<DiskEncryptionSetData>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
         {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
             using var doc = JsonDocument.ParseValue(ref reader);
             return DeserializeDiskEncryptionSetData(doc.RootElement, options);
+        }
+
+        BinaryData IModelSerializable<DiskEncryptionSetData>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        DiskEncryptionSetData IModelSerializable<DiskEncryptionSetData>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using var doc = JsonDocument.Parse(data);
+            return DeserializeDiskEncryptionSetData(doc.RootElement, options);
+        }
+
+        public static implicit operator RequestContent(DiskEncryptionSetData model)
+        {
+            if (model is null)
+            {
+                return null;
+            }
+
+            return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
+        }
+
+        public static explicit operator DiskEncryptionSetData(Response response)
+        {
+            if (response is null)
+            {
+                return null;
+            }
+
+            using JsonDocument doc = JsonDocument.Parse(response.ContentStream);
+            return DeserializeDiskEncryptionSetData(doc.RootElement, ModelSerializerOptions.DefaultWireOptions);
         }
     }
 }

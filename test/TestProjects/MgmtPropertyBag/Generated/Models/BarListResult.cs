@@ -16,7 +16,12 @@ namespace MgmtPropertyBag.Models
     /// <summary> The List bar with subscription response. </summary>
     internal partial class BarListResult
     {
-        /// <summary> Initializes a new instance of BarListResult. </summary>
+        private Dictionary<string, BinaryData> _rawData;
+
+        /// <summary>
+        /// Initializes a new instance of global::MgmtPropertyBag.Models.BarListResult
+        ///
+        /// </summary>
         /// <param name="value"> The list of bar. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="value"/> is null. </exception>
         internal BarListResult(IEnumerable<BarData> value)
@@ -26,13 +31,18 @@ namespace MgmtPropertyBag.Models
             Value = value.ToList();
         }
 
-        /// <summary> Initializes a new instance of BarListResult. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::MgmtPropertyBag.Models.BarListResult
+        ///
+        /// </summary>
         /// <param name="value"> The list of bar. </param>
         /// <param name="nextLink"> The uri to fetch the next page of bar. Call ListNext() with this to fetch the next page. </param>
-        internal BarListResult(IReadOnlyList<BarData> value, string nextLink)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal BarListResult(IReadOnlyList<BarData> value, string nextLink, Dictionary<string, BinaryData> rawData)
         {
             Value = value;
             NextLink = nextLink;
+            _rawData = rawData;
         }
 
         /// <summary> The list of bar. </summary>

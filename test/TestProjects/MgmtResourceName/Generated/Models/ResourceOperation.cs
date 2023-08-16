@@ -6,30 +6,41 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
 
 namespace MgmtResourceName.Models
 {
     /// <summary> Operation. </summary>
     public partial class ResourceOperation
     {
-        /// <summary> Initializes a new instance of ResourceOperation. </summary>
+        private Dictionary<string, BinaryData> _rawData;
+
+        /// <summary>
+        /// Initializes a new instance of global::MgmtResourceName.Models.ResourceOperation
+        ///
+        /// </summary>
         internal ResourceOperation()
         {
         }
 
-        /// <summary> Initializes a new instance of ResourceOperation. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::MgmtResourceName.Models.ResourceOperation
+        ///
+        /// </summary>
         /// <param name="name"> The operation name. </param>
         /// <param name="displayName"> The operation display name. </param>
         /// <param name="description"> The operation description. </param>
         /// <param name="origin"> The operation origin. </param>
         /// <param name="properties"> The operation properties. </param>
-        internal ResourceOperation(string name, string displayName, string description, string origin, BinaryData properties)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal ResourceOperation(string name, string displayName, string description, string origin, BinaryData properties, Dictionary<string, BinaryData> rawData)
         {
             Name = name;
             DisplayName = displayName;
             Description = description;
             Origin = origin;
             Properties = properties;
+            _rawData = rawData;
         }
 
         /// <summary> The operation name. </summary>

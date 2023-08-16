@@ -6,18 +6,22 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
 using System.Text.Json;
+using Azure;
 using Azure.Core;
 using Azure.Core.Serialization;
 
 namespace CognitiveServices.TextAnalytics.Models
 {
-    public partial class SentimentConfidenceScorePerLabel : IUtf8JsonSerializable, IJsonModelSerializable
+    public partial class SentimentConfidenceScorePerLabel : IUtf8JsonSerializable, IModelJsonSerializable<SentimentConfidenceScorePerLabel>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModelSerializable)this).Serialize(writer, ModelSerializerOptions.AzureServiceDefault);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<SentimentConfidenceScorePerLabel>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
 
-        void IJsonModelSerializable.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
+        void IModelJsonSerializable<SentimentConfidenceScorePerLabel>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
             writer.WriteStartObject();
             writer.WritePropertyName("positive"u8);
             writer.WriteNumberValue(Positive);
@@ -25,18 +29,25 @@ namespace CognitiveServices.TextAnalytics.Models
             writer.WriteNumberValue(Neutral);
             writer.WritePropertyName("negative"u8);
             writer.WriteNumberValue(Negative);
+            if (_rawData is not null && options.Format == ModelSerializerFormat.Json)
+            {
+                foreach (var property in _rawData)
+                {
+                    writer.WritePropertyName(property.Key);
+#if NET6_0_OR_GREATER
+				writer.WriteRawValue(property.Value);
+#else
+                    JsonSerializer.Serialize(writer, JsonDocument.Parse(property.Value.ToString()).RootElement);
+#endif
+                }
+            }
             writer.WriteEndObject();
-        }
-
-        object IModelSerializable.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            using var doc = JsonDocument.Parse(data);
-            return DeserializeSentimentConfidenceScorePerLabel(doc.RootElement, options);
         }
 
         internal static SentimentConfidenceScorePerLabel DeserializeSentimentConfidenceScorePerLabel(JsonElement element, ModelSerializerOptions options = default)
         {
-            options ??= ModelSerializerOptions.AzureServiceDefault;
+            options ??= ModelSerializerOptions.DefaultWireOptions;
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
@@ -44,6 +55,7 @@ namespace CognitiveServices.TextAnalytics.Models
             double positive = default;
             double neutral = default;
             double negative = default;
+            Dictionary<string, BinaryData> rawData = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("positive"u8))
@@ -61,14 +73,57 @@ namespace CognitiveServices.TextAnalytics.Models
                     negative = property.Value.GetDouble();
                     continue;
                 }
+                if (options.Format == ModelSerializerFormat.Json)
+                {
+                    rawData.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
+                    continue;
+                }
             }
-            return new SentimentConfidenceScorePerLabel(positive, neutral, negative);
+            return new SentimentConfidenceScorePerLabel(positive, neutral, negative, rawData);
         }
 
-        object IJsonModelSerializable.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        SentimentConfidenceScorePerLabel IModelJsonSerializable<SentimentConfidenceScorePerLabel>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
         {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
             using var doc = JsonDocument.ParseValue(ref reader);
             return DeserializeSentimentConfidenceScorePerLabel(doc.RootElement, options);
+        }
+
+        BinaryData IModelSerializable<SentimentConfidenceScorePerLabel>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        SentimentConfidenceScorePerLabel IModelSerializable<SentimentConfidenceScorePerLabel>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using var doc = JsonDocument.Parse(data);
+            return DeserializeSentimentConfidenceScorePerLabel(doc.RootElement, options);
+        }
+
+        public static implicit operator RequestContent(SentimentConfidenceScorePerLabel model)
+        {
+            if (model is null)
+            {
+                return null;
+            }
+
+            return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
+        }
+
+        public static explicit operator SentimentConfidenceScorePerLabel(Response response)
+        {
+            if (response is null)
+            {
+                return null;
+            }
+
+            using JsonDocument doc = JsonDocument.Parse(response.ContentStream);
+            return DeserializeSentimentConfidenceScorePerLabel(doc.RootElement, ModelSerializerOptions.DefaultWireOptions);
         }
     }
 }

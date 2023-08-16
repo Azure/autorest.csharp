@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Collections.Generic;
 using Azure.Core;
 
@@ -16,13 +17,21 @@ namespace Azure.ResourceManager.Sample.Models
     /// </summary>
     public partial class ApiError
     {
-        /// <summary> Initializes a new instance of ApiError. </summary>
+        private Dictionary<string, BinaryData> _rawData;
+
+        /// <summary>
+        /// Initializes a new instance of global::Azure.ResourceManager.Sample.Models.ApiError
+        ///
+        /// </summary>
         internal ApiError()
         {
             Details = new ChangeTrackingList<ApiErrorBase>();
         }
 
-        /// <summary> Initializes a new instance of ApiError. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::Azure.ResourceManager.Sample.Models.ApiError
+        ///
+        /// </summary>
         /// <param name="details">
         /// The Api error details
         /// Serialized Name: ApiError.details
@@ -43,13 +52,15 @@ namespace Azure.ResourceManager.Sample.Models
         /// The error message.
         /// Serialized Name: ApiError.message
         /// </param>
-        internal ApiError(IReadOnlyList<ApiErrorBase> details, InnerError innererror, string code, string target, string message)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal ApiError(IReadOnlyList<ApiErrorBase> details, InnerError innererror, string code, string target, string message, Dictionary<string, BinaryData> rawData)
         {
             Details = details;
             Innererror = innererror;
             Code = code;
             Target = target;
             Message = message;
+            _rawData = rawData;
         }
 
         /// <summary>

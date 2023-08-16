@@ -15,6 +15,8 @@ namespace ModelsTypeSpec.Models
     /// <summary> Model used only as input. </summary>
     public partial class InputModel
     {
+        private Dictionary<string, BinaryData> _rawData;
+
         /// <summary> Initializes a new instance of InputModel. </summary>
         /// <param name="requiredString"> Required string. </param>
         /// <param name="requiredInt"> Required int. </param>
@@ -91,7 +93,8 @@ namespace ModelsTypeSpec.Models
         /// <param name="nonRequiredNullableModelList"> Optional model nullable collection. </param>
         /// <param name="nonRequiredNullableStringList"> Optional string nullable collection. </param>
         /// <param name="nonRequiredNullableIntList"> Optional int nullable collection. </param>
-        internal InputModel(string requiredString, int requiredInt, int? requiredNullableInt, string requiredNullableString, int? nonRequiredNullableInt, string nonRequiredNullableString, BaseModel requiredModel, BaseModel requiredModel2, IList<int> requiredIntList, IList<string> requiredStringList, IList<CollectionItem> requiredModelList, IDictionary<string, RecordItem> requiredModelRecord, IList<float?> requiredCollectionWithNullableFloatElement, IList<bool?> requiredCollectionWithNullableBooleanElement, IList<CollectionItem> requiredNullableModelList, IList<string> requiredNullableStringList, IList<int> requiredNullableIntList, IList<CollectionItem> nonRequiredModelList, IList<string> nonRequiredStringList, IList<int> nonRequiredIntList, IList<CollectionItem> nonRequiredNullableModelList, IList<string> nonRequiredNullableStringList, IList<int> nonRequiredNullableIntList)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal InputModel(string requiredString, int requiredInt, int? requiredNullableInt, string requiredNullableString, int? nonRequiredNullableInt, string nonRequiredNullableString, BaseModel requiredModel, BaseModel requiredModel2, IList<int> requiredIntList, IList<string> requiredStringList, IList<CollectionItem> requiredModelList, IDictionary<string, RecordItem> requiredModelRecord, IList<float?> requiredCollectionWithNullableFloatElement, IList<bool?> requiredCollectionWithNullableBooleanElement, IList<CollectionItem> requiredNullableModelList, IList<string> requiredNullableStringList, IList<int> requiredNullableIntList, IList<CollectionItem> nonRequiredModelList, IList<string> nonRequiredStringList, IList<int> nonRequiredIntList, IList<CollectionItem> nonRequiredNullableModelList, IList<string> nonRequiredNullableStringList, IList<int> nonRequiredNullableIntList, Dictionary<string, BinaryData> rawData)
         {
             RequiredString = requiredString;
             RequiredInt = requiredInt;
@@ -116,6 +119,7 @@ namespace ModelsTypeSpec.Models
             NonRequiredNullableModelList = nonRequiredNullableModelList;
             NonRequiredNullableStringList = nonRequiredNullableStringList;
             NonRequiredNullableIntList = nonRequiredNullableIntList;
+            _rawData = rawData;
         }
 
         /// <summary> Required string. </summary>

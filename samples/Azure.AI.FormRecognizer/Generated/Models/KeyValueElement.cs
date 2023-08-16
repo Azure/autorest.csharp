@@ -14,7 +14,12 @@ namespace Azure.AI.FormRecognizer.Models
     /// <summary> Information about the extracted key or value in a key-value pair. </summary>
     public partial class KeyValueElement
     {
-        /// <summary> Initializes a new instance of KeyValueElement. </summary>
+        private Dictionary<string, BinaryData> _rawData;
+
+        /// <summary>
+        /// Initializes a new instance of global::Azure.AI.FormRecognizer.Models.KeyValueElement
+        ///
+        /// </summary>
         /// <param name="text"> The text content of the key or value. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="text"/> is null. </exception>
         internal KeyValueElement(string text)
@@ -26,15 +31,20 @@ namespace Azure.AI.FormRecognizer.Models
             Elements = new ChangeTrackingList<string>();
         }
 
-        /// <summary> Initializes a new instance of KeyValueElement. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::Azure.AI.FormRecognizer.Models.KeyValueElement
+        ///
+        /// </summary>
         /// <param name="text"> The text content of the key or value. </param>
         /// <param name="boundingBox"> Bounding box of the key or value. </param>
         /// <param name="elements"> When includeTextDetails is set to true, a list of references to the text elements constituting this key or value. </param>
-        internal KeyValueElement(string text, IReadOnlyList<float> boundingBox, IReadOnlyList<string> elements)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal KeyValueElement(string text, IReadOnlyList<float> boundingBox, IReadOnlyList<string> elements, Dictionary<string, BinaryData> rawData)
         {
             Text = text;
             BoundingBox = boundingBox;
             Elements = elements;
+            _rawData = rawData;
         }
 
         /// <summary> The text content of the key or value. </summary>

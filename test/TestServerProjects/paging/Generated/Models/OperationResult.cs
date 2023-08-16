@@ -5,21 +5,34 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
+
 namespace paging.Models
 {
     /// <summary> The OperationResult. </summary>
     internal partial class OperationResult
     {
-        /// <summary> Initializes a new instance of OperationResult. </summary>
+        private Dictionary<string, BinaryData> _rawData;
+
+        /// <summary>
+        /// Initializes a new instance of global::paging.Models.OperationResult
+        ///
+        /// </summary>
         internal OperationResult()
         {
         }
 
-        /// <summary> Initializes a new instance of OperationResult. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::paging.Models.OperationResult
+        ///
+        /// </summary>
         /// <param name="status"> The status of the request. </param>
-        internal OperationResult(OperationResultStatus? status)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal OperationResult(OperationResultStatus? status, Dictionary<string, BinaryData> rawData)
         {
             Status = status;
+            _rawData = rawData;
         }
 
         /// <summary> The status of the request. </summary>

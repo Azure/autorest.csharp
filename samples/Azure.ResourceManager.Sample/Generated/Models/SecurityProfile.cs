@@ -5,6 +5,9 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
+
 namespace Azure.ResourceManager.Sample.Models
 {
     /// <summary>
@@ -13,19 +16,29 @@ namespace Azure.ResourceManager.Sample.Models
     /// </summary>
     internal partial class SecurityProfile
     {
-        /// <summary> Initializes a new instance of SecurityProfile. </summary>
+        private Dictionary<string, BinaryData> _rawData;
+
+        /// <summary>
+        /// Initializes a new instance of global::Azure.ResourceManager.Sample.Models.SecurityProfile
+        ///
+        /// </summary>
         public SecurityProfile()
         {
         }
 
-        /// <summary> Initializes a new instance of SecurityProfile. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::Azure.ResourceManager.Sample.Models.SecurityProfile
+        ///
+        /// </summary>
         /// <param name="encryptionAtHost">
         /// This property can be used by user in the request to enable or disable the Host Encryption for the virtual machine or virtual machine scale set. This will enable the encryption for all the disks including Resource/Temp disk at host itself. &lt;br&gt;&lt;br&gt; Default: The Encryption at host will be disabled unless this property is set to true for the resource.
         /// Serialized Name: SecurityProfile.encryptionAtHost
         /// </param>
-        internal SecurityProfile(bool? encryptionAtHost)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal SecurityProfile(bool? encryptionAtHost, Dictionary<string, BinaryData> rawData)
         {
             EncryptionAtHost = encryptionAtHost;
+            _rawData = rawData;
         }
 
         /// <summary>

@@ -19,22 +19,32 @@ namespace Azure.ResourceManager.Storage
     /// </summary>
     public partial class ManagementPolicyData : ResourceData
     {
-        /// <summary> Initializes a new instance of ManagementPolicyData. </summary>
+        private Dictionary<string, BinaryData> _rawData;
+
+        /// <summary>
+        /// Initializes a new instance of global::Azure.ResourceManager.Storage.ManagementPolicyData
+        ///
+        /// </summary>
         public ManagementPolicyData()
         {
         }
 
-        /// <summary> Initializes a new instance of ManagementPolicyData. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::Azure.ResourceManager.Storage.ManagementPolicyData
+        ///
+        /// </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
         /// <param name="resourceType"> The resourceType. </param>
         /// <param name="systemData"> The systemData. </param>
         /// <param name="lastModifiedOn"> Returns the date and time the ManagementPolicies was last modified. </param>
         /// <param name="policy"> The Storage Account ManagementPolicy, in JSON format. See more details in: https://docs.microsoft.com/en-us/azure/storage/common/storage-lifecycle-managment-concepts. </param>
-        internal ManagementPolicyData(ResourceIdentifier id, string name, ResourceType resourceType, SystemData systemData, DateTimeOffset? lastModifiedOn, ManagementPolicySchema policy) : base(id, name, resourceType, systemData)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal ManagementPolicyData(ResourceIdentifier id, string name, ResourceType resourceType, SystemData systemData, DateTimeOffset? lastModifiedOn, ManagementPolicySchema policy, Dictionary<string, BinaryData> rawData) : base(id, name, resourceType, systemData)
         {
             LastModifiedOn = lastModifiedOn;
             Policy = policy;
+            _rawData = rawData;
         }
 
         /// <summary> Returns the date and time the ManagementPolicies was last modified. </summary>

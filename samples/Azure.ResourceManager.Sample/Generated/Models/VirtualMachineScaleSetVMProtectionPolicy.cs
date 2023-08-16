@@ -5,6 +5,9 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
+
 namespace Azure.ResourceManager.Sample.Models
 {
     /// <summary>
@@ -13,12 +16,20 @@ namespace Azure.ResourceManager.Sample.Models
     /// </summary>
     public partial class VirtualMachineScaleSetVMProtectionPolicy
     {
-        /// <summary> Initializes a new instance of VirtualMachineScaleSetVMProtectionPolicy. </summary>
+        private Dictionary<string, BinaryData> _rawData;
+
+        /// <summary>
+        /// Initializes a new instance of global::Azure.ResourceManager.Sample.Models.VirtualMachineScaleSetVMProtectionPolicy
+        ///
+        /// </summary>
         public VirtualMachineScaleSetVMProtectionPolicy()
         {
         }
 
-        /// <summary> Initializes a new instance of VirtualMachineScaleSetVMProtectionPolicy. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::Azure.ResourceManager.Sample.Models.VirtualMachineScaleSetVMProtectionPolicy
+        ///
+        /// </summary>
         /// <param name="protectFromScaleIn">
         /// Indicates that the virtual machine scale set VM shouldn't be considered for deletion during a scale-in operation.
         /// Serialized Name: VirtualMachineScaleSetVMProtectionPolicy.protectFromScaleIn
@@ -27,10 +38,12 @@ namespace Azure.ResourceManager.Sample.Models
         /// Indicates that model updates or actions (including scale-in) initiated on the virtual machine scale set should not be applied to the virtual machine scale set VM.
         /// Serialized Name: VirtualMachineScaleSetVMProtectionPolicy.protectFromScaleSetActions
         /// </param>
-        internal VirtualMachineScaleSetVMProtectionPolicy(bool? protectFromScaleIn, bool? protectFromScaleSetActions)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal VirtualMachineScaleSetVMProtectionPolicy(bool? protectFromScaleIn, bool? protectFromScaleSetActions, Dictionary<string, BinaryData> rawData)
         {
             ProtectFromScaleIn = protectFromScaleIn;
             ProtectFromScaleSetActions = protectFromScaleSetActions;
+            _rawData = rawData;
         }
 
         /// <summary>

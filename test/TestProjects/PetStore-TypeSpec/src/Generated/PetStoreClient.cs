@@ -126,7 +126,7 @@ namespace PetStore
         {
             RequestContext context = FromCancellationToken(cancellationToken);
             Response response = await ReadAsync(petId, context).ConfigureAwait(false);
-            return Response.FromValue(Pet.FromResponse(response), response);
+            return Response.FromValue((Pet)response, response);
         }
 
         /// <summary> Returns a pet. Supports eTags. </summary>
@@ -137,7 +137,7 @@ namespace PetStore
         {
             RequestContext context = FromCancellationToken(cancellationToken);
             Response response = Read(petId, context);
-            return Response.FromValue(Pet.FromResponse(response), response);
+            return Response.FromValue((Pet)response, response);
         }
 
         /// <summary>
@@ -221,8 +221,8 @@ namespace PetStore
             Argument.AssertNotNull(pet, nameof(pet));
 
             RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = await CreateAsync(pet.ToRequestContent(), context).ConfigureAwait(false);
-            return Response.FromValue(Pet.FromResponse(response), response);
+            Response response = await CreateAsync(pet, context).ConfigureAwait(false);
+            return Response.FromValue((Pet)response, response);
         }
 
         /// <param name="pet"> The Pet to use. </param>
@@ -234,8 +234,8 @@ namespace PetStore
             Argument.AssertNotNull(pet, nameof(pet));
 
             RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = Create(pet.ToRequestContent(), context);
-            return Response.FromValue(Pet.FromResponse(response), response);
+            Response response = Create(pet, context);
+            return Response.FromValue((Pet)response, response);
         }
 
         /// <summary>
@@ -323,7 +323,7 @@ namespace PetStore
         {
             RequestContext context = FromCancellationToken(cancellationToken);
             Response response = await GetPetByKindAsync(kind.ToString(), context).ConfigureAwait(false);
-            return Response.FromValue(Pet.FromResponse(response), response);
+            return Response.FromValue((Pet)response, response);
         }
 
         /// <param name="kind"> The PetKind to use. </param>
@@ -333,7 +333,7 @@ namespace PetStore
         {
             RequestContext context = FromCancellationToken(cancellationToken);
             Response response = GetPetByKind(kind.ToString(), context);
-            return Response.FromValue(Pet.FromResponse(response), response);
+            return Response.FromValue((Pet)response, response);
         }
 
         /// <summary>
@@ -423,7 +423,7 @@ namespace PetStore
         {
             RequestContext context = FromCancellationToken(cancellationToken);
             Response response = await GetFirstPetAsync(start, context).ConfigureAwait(false);
-            return Response.FromValue(Pet.FromResponse(response), response);
+            return Response.FromValue((Pet)response, response);
         }
 
         /// <param name="start"> The Int32 to use. </param>
@@ -433,7 +433,7 @@ namespace PetStore
         {
             RequestContext context = FromCancellationToken(cancellationToken);
             Response response = GetFirstPet(start, context);
-            return Response.FromValue(Pet.FromResponse(response), response);
+            return Response.FromValue((Pet)response, response);
         }
 
         /// <summary>
@@ -515,7 +515,7 @@ namespace PetStore
         {
             RequestContext context = FromCancellationToken(cancellationToken);
             Response response = await GetFishAsync(kind, context).ConfigureAwait(false);
-            return Response.FromValue(Fish.FromResponse(response), response);
+            return Response.FromValue((Fish)response, response);
         }
 
         /// <param name="kind"> The String to use. </param>
@@ -525,7 +525,7 @@ namespace PetStore
         {
             RequestContext context = FromCancellationToken(cancellationToken);
             Response response = GetFish(kind, context);
-            return Response.FromValue(Fish.FromResponse(response), response);
+            return Response.FromValue((Fish)response, response);
         }
 
         /// <summary>

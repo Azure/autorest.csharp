@@ -15,7 +15,12 @@ namespace CognitiveSearch.Models
     /// <summary> The result of Autocomplete query. </summary>
     public partial class AutocompleteResult
     {
-        /// <summary> Initializes a new instance of AutocompleteResult. </summary>
+        private Dictionary<string, BinaryData> _rawData;
+
+        /// <summary>
+        /// Initializes a new instance of global::CognitiveSearch.Models.AutocompleteResult
+        ///
+        /// </summary>
         /// <param name="results"> The list of returned Autocompleted items. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="results"/> is null. </exception>
         internal AutocompleteResult(IEnumerable<AutocompleteItem> results)
@@ -25,13 +30,18 @@ namespace CognitiveSearch.Models
             Results = results.ToList();
         }
 
-        /// <summary> Initializes a new instance of AutocompleteResult. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::CognitiveSearch.Models.AutocompleteResult
+        ///
+        /// </summary>
         /// <param name="coverage"> A value indicating the percentage of the index that was considered by the autocomplete request, or null if minimumCoverage was not specified in the request. </param>
         /// <param name="results"> The list of returned Autocompleted items. </param>
-        internal AutocompleteResult(double? coverage, IReadOnlyList<AutocompleteItem> results)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal AutocompleteResult(double? coverage, IReadOnlyList<AutocompleteItem> results, Dictionary<string, BinaryData> rawData)
         {
             Coverage = coverage;
             Results = results;
+            _rawData = rawData;
         }
 
         /// <summary> A value indicating the percentage of the index that was considered by the autocomplete request, or null if minimumCoverage was not specified in the request. </summary>

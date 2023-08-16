@@ -6,18 +6,22 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
 using System.Text.Json;
+using Azure;
 using Azure.Core;
 using Azure.Core.Serialization;
 
 namespace Azure.Network.Management.Interface.Models
 {
-    public partial class IPConfigurationProfile : IUtf8JsonSerializable, IJsonModelSerializable
+    public partial class IPConfigurationProfile : IUtf8JsonSerializable, IModelJsonSerializable<IPConfigurationProfile>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModelSerializable)this).Serialize(writer, ModelSerializerOptions.AzureServiceDefault);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<IPConfigurationProfile>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
 
-        void IJsonModelSerializable.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
+        void IModelJsonSerializable<IPConfigurationProfile>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
+            ModelSerializerHelper.ValidateFormat<IPConfigurationProfile>(this, options.Format);
+
             writer.WriteStartObject();
             if (Optional.IsDefined(Name))
             {
@@ -37,18 +41,25 @@ namespace Azure.Network.Management.Interface.Models
                 writer.WriteObjectValue(Subnet);
             }
             writer.WriteEndObject();
+            if (_rawData is not null && options.Format == ModelSerializerFormat.Json)
+            {
+                foreach (var property in _rawData)
+                {
+                    writer.WritePropertyName(property.Key);
+#if NET6_0_OR_GREATER
+				writer.WriteRawValue(property.Value);
+#else
+                    JsonSerializer.Serialize(writer, JsonDocument.Parse(property.Value.ToString()).RootElement);
+#endif
+                }
+            }
             writer.WriteEndObject();
-        }
-
-        object IModelSerializable.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            using var doc = JsonDocument.Parse(data);
-            return DeserializeIPConfigurationProfile(doc.RootElement, options);
         }
 
         internal static IPConfigurationProfile DeserializeIPConfigurationProfile(JsonElement element, ModelSerializerOptions options = default)
         {
-            options ??= ModelSerializerOptions.AzureServiceDefault;
+            options ??= ModelSerializerOptions.DefaultWireOptions;
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
@@ -59,6 +70,7 @@ namespace Azure.Network.Management.Interface.Models
             Optional<string> id = default;
             Optional<Subnet> subnet = default;
             Optional<ProvisioningState> provisioningState = default;
+            Dictionary<string, BinaryData> rawData = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("name"u8))
@@ -111,14 +123,57 @@ namespace Azure.Network.Management.Interface.Models
                     }
                     continue;
                 }
+                if (options.Format == ModelSerializerFormat.Json)
+                {
+                    rawData.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
+                    continue;
+                }
             }
-            return new IPConfigurationProfile(id.Value, name.Value, type.Value, etag.Value, subnet.Value, Optional.ToNullable(provisioningState));
+            return new IPConfigurationProfile(id.Value, name.Value, type.Value, etag.Value, subnet.Value, Optional.ToNullable(provisioningState), rawData);
         }
 
-        object IJsonModelSerializable.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        IPConfigurationProfile IModelJsonSerializable<IPConfigurationProfile>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
         {
+            ModelSerializerHelper.ValidateFormat<IPConfigurationProfile>(this, options.Format);
+
             using var doc = JsonDocument.ParseValue(ref reader);
             return DeserializeIPConfigurationProfile(doc.RootElement, options);
+        }
+
+        BinaryData IModelSerializable<IPConfigurationProfile>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat<IPConfigurationProfile>(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        IPConfigurationProfile IModelSerializable<IPConfigurationProfile>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat<IPConfigurationProfile>(this, options.Format);
+
+            using var doc = JsonDocument.Parse(data);
+            return DeserializeIPConfigurationProfile(doc.RootElement, options);
+        }
+
+        public static implicit operator RequestContent(IPConfigurationProfile model)
+        {
+            if (model is null)
+            {
+                return null;
+            }
+
+            return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
+        }
+
+        public static explicit operator IPConfigurationProfile(Response response)
+        {
+            if (response is null)
+            {
+                return null;
+            }
+
+            using JsonDocument doc = JsonDocument.Parse(response.ContentStream);
+            return DeserializeIPConfigurationProfile(doc.RootElement, ModelSerializerOptions.DefaultWireOptions);
         }
     }
 }

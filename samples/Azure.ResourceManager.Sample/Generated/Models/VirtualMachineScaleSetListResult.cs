@@ -19,7 +19,12 @@ namespace Azure.ResourceManager.Sample.Models
     /// </summary>
     internal partial class VirtualMachineScaleSetListResult
     {
-        /// <summary> Initializes a new instance of VirtualMachineScaleSetListResult. </summary>
+        private Dictionary<string, BinaryData> _rawData;
+
+        /// <summary>
+        /// Initializes a new instance of global::Azure.ResourceManager.Sample.Models.VirtualMachineScaleSetListResult
+        ///
+        /// </summary>
         /// <param name="value">
         /// The list of virtual machine scale sets.
         /// Serialized Name: VirtualMachineScaleSetListResult.value
@@ -32,7 +37,10 @@ namespace Azure.ResourceManager.Sample.Models
             Value = value.ToList();
         }
 
-        /// <summary> Initializes a new instance of VirtualMachineScaleSetListResult. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::Azure.ResourceManager.Sample.Models.VirtualMachineScaleSetListResult
+        ///
+        /// </summary>
         /// <param name="value">
         /// The list of virtual machine scale sets.
         /// Serialized Name: VirtualMachineScaleSetListResult.value
@@ -41,10 +49,12 @@ namespace Azure.ResourceManager.Sample.Models
         /// The uri to fetch the next page of Virtual Machine Scale Sets. Call ListNext() with this to fetch the next page of VMSS.
         /// Serialized Name: VirtualMachineScaleSetListResult.nextLink
         /// </param>
-        internal VirtualMachineScaleSetListResult(IReadOnlyList<VirtualMachineScaleSetData> value, string nextLink)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal VirtualMachineScaleSetListResult(IReadOnlyList<VirtualMachineScaleSetData> value, string nextLink, Dictionary<string, BinaryData> rawData)
         {
             Value = value;
             NextLink = nextLink;
+            _rawData = rawData;
         }
 
         /// <summary>

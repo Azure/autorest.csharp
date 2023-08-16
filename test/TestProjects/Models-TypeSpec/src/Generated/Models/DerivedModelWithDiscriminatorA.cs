@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
 using Azure.Core;
 
 namespace ModelsTypeSpec.Models
@@ -30,7 +31,8 @@ namespace ModelsTypeSpec.Models
         /// <param name="optionalPropertyOnBase"> Optional property on base. </param>
         /// <param name="requiredPropertyOnBase"> Required property on base. </param>
         /// <param name="requiredString"> Required string. </param>
-        internal DerivedModelWithDiscriminatorA(string discriminatorProperty, string optionalPropertyOnBase, int requiredPropertyOnBase, string requiredString) : base(discriminatorProperty, optionalPropertyOnBase, requiredPropertyOnBase)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal DerivedModelWithDiscriminatorA(string discriminatorProperty, string optionalPropertyOnBase, int requiredPropertyOnBase, string requiredString, Dictionary<string, BinaryData> rawData) : base(discriminatorProperty, optionalPropertyOnBase, requiredPropertyOnBase, rawData)
         {
             RequiredString = requiredString;
         }

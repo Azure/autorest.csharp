@@ -5,24 +5,36 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
+
 namespace Azure.ResourceManager.Storage.Models
 {
     /// <summary> The URIs that are used to perform a retrieval of a public blob, queue, table, web or dfs object via a microsoft routing endpoint. </summary>
     public partial class StorageAccountMicrosoftEndpoints
     {
-        /// <summary> Initializes a new instance of StorageAccountMicrosoftEndpoints. </summary>
+        private Dictionary<string, BinaryData> _rawData;
+
+        /// <summary>
+        /// Initializes a new instance of global::Azure.ResourceManager.Storage.Models.StorageAccountMicrosoftEndpoints
+        ///
+        /// </summary>
         internal StorageAccountMicrosoftEndpoints()
         {
         }
 
-        /// <summary> Initializes a new instance of StorageAccountMicrosoftEndpoints. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::Azure.ResourceManager.Storage.Models.StorageAccountMicrosoftEndpoints
+        ///
+        /// </summary>
         /// <param name="blob"> Gets the blob endpoint. </param>
         /// <param name="queue"> Gets the queue endpoint. </param>
         /// <param name="table"> Gets the table endpoint. </param>
         /// <param name="file"> Gets the file endpoint. </param>
         /// <param name="web"> Gets the web endpoint. </param>
         /// <param name="dfs"> Gets the dfs endpoint. </param>
-        internal StorageAccountMicrosoftEndpoints(string blob, string queue, string table, string file, string web, string dfs)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal StorageAccountMicrosoftEndpoints(string blob, string queue, string table, string file, string web, string dfs, Dictionary<string, BinaryData> rawData)
         {
             Blob = blob;
             Queue = queue;
@@ -30,6 +42,7 @@ namespace Azure.ResourceManager.Storage.Models
             File = file;
             Web = web;
             Dfs = dfs;
+            _rawData = rawData;
         }
 
         /// <summary> Gets the blob endpoint. </summary>

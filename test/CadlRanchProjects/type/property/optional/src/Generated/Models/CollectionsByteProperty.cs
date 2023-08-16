@@ -14,6 +14,8 @@ namespace _Type.Property.Optional.Models
     /// <summary> Model with collection bytes properties. </summary>
     public partial class CollectionsByteProperty
     {
+        private Dictionary<string, BinaryData> _rawData;
+
         /// <summary> Initializes a new instance of CollectionsByteProperty. </summary>
         public CollectionsByteProperty()
         {
@@ -22,9 +24,11 @@ namespace _Type.Property.Optional.Models
 
         /// <summary> Initializes a new instance of CollectionsByteProperty. </summary>
         /// <param name="property"> Property. </param>
-        internal CollectionsByteProperty(IList<BinaryData> property)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal CollectionsByteProperty(IList<BinaryData> property, Dictionary<string, BinaryData> rawData)
         {
             Property = property;
+            _rawData = rawData;
         }
 
         /// <summary>

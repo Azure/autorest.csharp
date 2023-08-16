@@ -15,6 +15,8 @@ namespace ModelsTypeSpec.Models
     /// <summary> Model used only as output. </summary>
     public partial class OutputModel
     {
+        private Dictionary<string, BinaryData> _rawData;
+
         /// <summary> Initializes a new instance of OutputModel. </summary>
         /// <param name="requiredString"> Required string. </param>
         /// <param name="requiredInt"> Required int. </param>
@@ -50,7 +52,8 @@ namespace ModelsTypeSpec.Models
         /// <param name="optionalNullableList"> Optional model nullable collection. </param>
         /// <param name="optionalRecord"> Optional model record. </param>
         /// <param name="optionalNullableRecord"> Optional model nullable record. </param>
-        internal OutputModel(string requiredString, int requiredInt, DerivedModel requiredModel, IReadOnlyList<CollectionItem> requiredList, IReadOnlyDictionary<string, RecordItem> requiredModelRecord, IReadOnlyList<CollectionItem> optionalList, IReadOnlyList<CollectionItem> optionalNullableList, IReadOnlyDictionary<string, RecordItem> optionalRecord, IReadOnlyDictionary<string, RecordItem> optionalNullableRecord)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal OutputModel(string requiredString, int requiredInt, DerivedModel requiredModel, IReadOnlyList<CollectionItem> requiredList, IReadOnlyDictionary<string, RecordItem> requiredModelRecord, IReadOnlyList<CollectionItem> optionalList, IReadOnlyList<CollectionItem> optionalNullableList, IReadOnlyDictionary<string, RecordItem> optionalRecord, IReadOnlyDictionary<string, RecordItem> optionalNullableRecord, Dictionary<string, BinaryData> rawData)
         {
             RequiredString = requiredString;
             RequiredInt = requiredInt;
@@ -61,6 +64,7 @@ namespace ModelsTypeSpec.Models
             OptionalNullableList = optionalNullableList;
             OptionalRecord = optionalRecord;
             OptionalNullableRecord = optionalNullableRecord;
+            _rawData = rawData;
         }
 
         /// <summary> Required string. </summary>

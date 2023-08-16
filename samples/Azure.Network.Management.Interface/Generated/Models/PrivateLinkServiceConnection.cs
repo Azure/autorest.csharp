@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Collections.Generic;
 using Azure.Core;
 
@@ -13,13 +14,19 @@ namespace Azure.Network.Management.Interface.Models
     /// <summary> PrivateLinkServiceConnection resource. </summary>
     public partial class PrivateLinkServiceConnection : SubResource
     {
-        /// <summary> Initializes a new instance of PrivateLinkServiceConnection. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::Azure.Network.Management.Interface.Models.PrivateLinkServiceConnection
+        ///
+        /// </summary>
         public PrivateLinkServiceConnection()
         {
             GroupIds = new ChangeTrackingList<string>();
         }
 
-        /// <summary> Initializes a new instance of PrivateLinkServiceConnection. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::Azure.Network.Management.Interface.Models.PrivateLinkServiceConnection
+        ///
+        /// </summary>
         /// <param name="id"> Resource ID. </param>
         /// <param name="name"> The name of the resource that is unique within a resource group. This name can be used to access the resource. </param>
         /// <param name="type"> The resource type. </param>
@@ -29,7 +36,8 @@ namespace Azure.Network.Management.Interface.Models
         /// <param name="groupIds"> The ID(s) of the group(s) obtained from the remote resource that this private endpoint should connect to. </param>
         /// <param name="requestMessage"> A message passed to the owner of the remote resource with this connection request. Restricted to 140 chars. </param>
         /// <param name="privateLinkServiceConnectionState"> A collection of read-only information about the state of the connection to the remote resource. </param>
-        internal PrivateLinkServiceConnection(string id, string name, string type, string etag, ProvisioningState? provisioningState, string privateLinkServiceId, IList<string> groupIds, string requestMessage, PrivateLinkServiceConnectionState privateLinkServiceConnectionState) : base(id)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal PrivateLinkServiceConnection(string id, string name, string type, string etag, ProvisioningState? provisioningState, string privateLinkServiceId, IList<string> groupIds, string requestMessage, PrivateLinkServiceConnectionState privateLinkServiceConnectionState, Dictionary<string, BinaryData> rawData) : base(id, rawData)
         {
             Name = name;
             Type = type;

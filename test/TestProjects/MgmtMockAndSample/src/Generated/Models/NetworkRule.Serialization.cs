@@ -8,17 +8,20 @@
 using System;
 using System.Collections.Generic;
 using System.Text.Json;
+using Azure;
 using Azure.Core;
 using Azure.Core.Serialization;
 
 namespace MgmtMockAndSample.Models
 {
-    public partial class NetworkRule : IUtf8JsonSerializable, IJsonModelSerializable
+    public partial class NetworkRule : IUtf8JsonSerializable, IModelJsonSerializable<NetworkRule>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModelSerializable)this).Serialize(writer, ModelSerializerOptions.AzureServiceDefault);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<NetworkRule>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
 
-        void IJsonModelSerializable.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
+        void IModelJsonSerializable<NetworkRule>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
+            ModelSerializerHelper.ValidateFormat<NetworkRule>(this, options.Format);
+
             writer.WriteStartObject();
             if (Optional.IsCollectionDefined(IpProtocols))
             {
@@ -102,18 +105,25 @@ namespace MgmtMockAndSample.Models
             }
             writer.WritePropertyName("ruleType"u8);
             writer.WriteStringValue(RuleType.ToString());
+            if (_rawData is not null && options.Format == ModelSerializerFormat.Json)
+            {
+                foreach (var property in _rawData)
+                {
+                    writer.WritePropertyName(property.Key);
+#if NET6_0_OR_GREATER
+				writer.WriteRawValue(property.Value);
+#else
+                    JsonSerializer.Serialize(writer, JsonDocument.Parse(property.Value.ToString()).RootElement);
+#endif
+                }
+            }
             writer.WriteEndObject();
-        }
-
-        object IModelSerializable.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            using var doc = JsonDocument.Parse(data);
-            return DeserializeNetworkRule(doc.RootElement, options);
         }
 
         internal static NetworkRule DeserializeNetworkRule(JsonElement element, ModelSerializerOptions options = default)
         {
-            options ??= ModelSerializerOptions.AzureServiceDefault;
+            options ??= ModelSerializerOptions.DefaultWireOptions;
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
@@ -128,6 +138,7 @@ namespace MgmtMockAndSample.Models
             Optional<string> name = default;
             Optional<string> description = default;
             FirewallPolicyRuleType ruleType = default;
+            Dictionary<string, BinaryData> rawData = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("ipProtocols"u8))
@@ -243,14 +254,57 @@ namespace MgmtMockAndSample.Models
                     ruleType = new FirewallPolicyRuleType(property.Value.GetString());
                     continue;
                 }
+                if (options.Format == ModelSerializerFormat.Json)
+                {
+                    rawData.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
+                    continue;
+                }
             }
-            return new NetworkRule(name.Value, description.Value, ruleType, Optional.ToList(ipProtocols), Optional.ToList(sourceAddresses), Optional.ToList(destinationAddresses), Optional.ToList(destinationPorts), Optional.ToList(sourceIpGroups), Optional.ToList(destinationIpGroups), Optional.ToList(destinationFqdns));
+            return new NetworkRule(name.Value, description.Value, ruleType, Optional.ToList(ipProtocols), Optional.ToList(sourceAddresses), Optional.ToList(destinationAddresses), Optional.ToList(destinationPorts), Optional.ToList(sourceIpGroups), Optional.ToList(destinationIpGroups), Optional.ToList(destinationFqdns), rawData);
         }
 
-        object IJsonModelSerializable.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        NetworkRule IModelJsonSerializable<NetworkRule>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
         {
+            ModelSerializerHelper.ValidateFormat<NetworkRule>(this, options.Format);
+
             using var doc = JsonDocument.ParseValue(ref reader);
             return DeserializeNetworkRule(doc.RootElement, options);
+        }
+
+        BinaryData IModelSerializable<NetworkRule>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat<NetworkRule>(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        NetworkRule IModelSerializable<NetworkRule>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat<NetworkRule>(this, options.Format);
+
+            using var doc = JsonDocument.Parse(data);
+            return DeserializeNetworkRule(doc.RootElement, options);
+        }
+
+        public static implicit operator RequestContent(NetworkRule model)
+        {
+            if (model is null)
+            {
+                return null;
+            }
+
+            return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
+        }
+
+        public static explicit operator NetworkRule(Response response)
+        {
+            if (response is null)
+            {
+                return null;
+            }
+
+            using JsonDocument doc = JsonDocument.Parse(response.ContentStream);
+            return DeserializeNetworkRule(doc.RootElement, ModelSerializerOptions.DefaultWireOptions);
         }
     }
 }

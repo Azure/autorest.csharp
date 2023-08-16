@@ -8,17 +8,20 @@
 using System;
 using System.Collections.Generic;
 using System.Text.Json;
+using Azure;
 using Azure.Core;
 using Azure.Core.Serialization;
 
 namespace FlattenedParameters.Models
 {
-    internal partial class PathsYkez7BOperationPatchRequestbodyContentApplicationJsonSchema : IUtf8JsonSerializable, IJsonModelSerializable
+    internal partial class PathsYkez7BOperationPatchRequestbodyContentApplicationJsonSchema : IUtf8JsonSerializable, IModelJsonSerializable<PathsYkez7BOperationPatchRequestbodyContentApplicationJsonSchema>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModelSerializable)this).Serialize(writer, ModelSerializerOptions.AzureServiceDefault);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<PathsYkez7BOperationPatchRequestbodyContentApplicationJsonSchema>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
 
-        void IJsonModelSerializable.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
+        void IModelJsonSerializable<PathsYkez7BOperationPatchRequestbodyContentApplicationJsonSchema>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
             writer.WriteStartObject();
             if (Optional.IsCollectionDefined(Items))
             {
@@ -37,30 +40,37 @@ namespace FlattenedParameters.Models
                     writer.WriteNull("items");
                 }
             }
+            if (_rawData is not null && options.Format == ModelSerializerFormat.Json)
+            {
+                foreach (var property in _rawData)
+                {
+                    writer.WritePropertyName(property.Key);
+#if NET6_0_OR_GREATER
+				writer.WriteRawValue(property.Value);
+#else
+                    JsonSerializer.Serialize(writer, JsonDocument.Parse(property.Value.ToString()).RootElement);
+#endif
+                }
+            }
             writer.WriteEndObject();
-        }
-
-        object IModelSerializable.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            using var doc = JsonDocument.Parse(data);
-            return DeserializePathsYkez7BOperationPatchRequestbodyContentApplicationJsonSchema(doc.RootElement, options);
         }
 
         internal static PathsYkez7BOperationPatchRequestbodyContentApplicationJsonSchema DeserializePathsYkez7BOperationPatchRequestbodyContentApplicationJsonSchema(JsonElement element, ModelSerializerOptions options = default)
         {
-            options ??= ModelSerializerOptions.AzureServiceDefault;
+            options ??= ModelSerializerOptions.DefaultWireOptions;
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
             }
             Optional<IList<string>> items = default;
+            Dictionary<string, BinaryData> rawData = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("items"u8))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        items = null;
                         continue;
                     }
                     List<string> array = new List<string>();
@@ -71,14 +81,57 @@ namespace FlattenedParameters.Models
                     items = array;
                     continue;
                 }
+                if (options.Format == ModelSerializerFormat.Json)
+                {
+                    rawData.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
+                    continue;
+                }
             }
-            return new PathsYkez7BOperationPatchRequestbodyContentApplicationJsonSchema(Optional.ToList(items));
+            return new PathsYkez7BOperationPatchRequestbodyContentApplicationJsonSchema(Optional.ToList(items), rawData);
         }
 
-        object IJsonModelSerializable.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        PathsYkez7BOperationPatchRequestbodyContentApplicationJsonSchema IModelJsonSerializable<PathsYkez7BOperationPatchRequestbodyContentApplicationJsonSchema>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
         {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
             using var doc = JsonDocument.ParseValue(ref reader);
             return DeserializePathsYkez7BOperationPatchRequestbodyContentApplicationJsonSchema(doc.RootElement, options);
+        }
+
+        BinaryData IModelSerializable<PathsYkez7BOperationPatchRequestbodyContentApplicationJsonSchema>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        PathsYkez7BOperationPatchRequestbodyContentApplicationJsonSchema IModelSerializable<PathsYkez7BOperationPatchRequestbodyContentApplicationJsonSchema>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using var doc = JsonDocument.Parse(data);
+            return DeserializePathsYkez7BOperationPatchRequestbodyContentApplicationJsonSchema(doc.RootElement, options);
+        }
+
+        public static implicit operator RequestContent(PathsYkez7BOperationPatchRequestbodyContentApplicationJsonSchema model)
+        {
+            if (model is null)
+            {
+                return null;
+            }
+
+            return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
+        }
+
+        public static explicit operator PathsYkez7BOperationPatchRequestbodyContentApplicationJsonSchema(Response response)
+        {
+            if (response is null)
+            {
+                return null;
+            }
+
+            using JsonDocument doc = JsonDocument.Parse(response.ContentStream);
+            return DeserializePathsYkez7BOperationPatchRequestbodyContentApplicationJsonSchema(doc.RootElement, ModelSerializerOptions.DefaultWireOptions);
         }
     }
 }

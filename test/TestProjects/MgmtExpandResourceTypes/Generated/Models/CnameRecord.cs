@@ -5,21 +5,34 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
+
 namespace MgmtExpandResourceTypes.Models
 {
     /// <summary> A CNAME record. </summary>
     internal partial class CnameRecord
     {
-        /// <summary> Initializes a new instance of CnameRecord. </summary>
+        private Dictionary<string, BinaryData> _rawData;
+
+        /// <summary>
+        /// Initializes a new instance of global::MgmtExpandResourceTypes.Models.CnameRecord
+        ///
+        /// </summary>
         public CnameRecord()
         {
         }
 
-        /// <summary> Initializes a new instance of CnameRecord. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::MgmtExpandResourceTypes.Models.CnameRecord
+        ///
+        /// </summary>
         /// <param name="cname"> The canonical name for this CNAME record. </param>
-        internal CnameRecord(string cname)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal CnameRecord(string cname, Dictionary<string, BinaryData> rawData)
         {
             Cname = cname;
+            _rawData = rawData;
         }
 
         /// <summary> The canonical name for this CNAME record. </summary>

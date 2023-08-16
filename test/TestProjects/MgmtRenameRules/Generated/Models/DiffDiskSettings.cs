@@ -5,6 +5,9 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
+
 namespace MgmtRenameRules.Models
 {
     /// <summary>
@@ -13,12 +16,20 @@ namespace MgmtRenameRules.Models
     /// </summary>
     public partial class DiffDiskSettings
     {
-        /// <summary> Initializes a new instance of DiffDiskSettings. </summary>
+        private Dictionary<string, BinaryData> _rawData;
+
+        /// <summary>
+        /// Initializes a new instance of global::MgmtRenameRules.Models.DiffDiskSettings
+        ///
+        /// </summary>
         public DiffDiskSettings()
         {
         }
 
-        /// <summary> Initializes a new instance of DiffDiskSettings. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::MgmtRenameRules.Models.DiffDiskSettings
+        ///
+        /// </summary>
         /// <param name="option">
         /// Specifies the ephemeral disk settings for operating system disk.
         /// Serialized Name: DiffDiskSettings.option
@@ -27,10 +38,12 @@ namespace MgmtRenameRules.Models
         /// Specifies the ephemeral disk placement for operating system disk.&lt;br&gt;&lt;br&gt; Possible values are: &lt;br&gt;&lt;br&gt; **CacheDisk** &lt;br&gt;&lt;br&gt; **ResourceDisk** &lt;br&gt;&lt;br&gt; Default: **CacheDisk** if one is configured for the VM size otherwise **ResourceDisk** is used.&lt;br&gt;&lt;br&gt; Refer to VM size documentation for Windows VM at https://docs.microsoft.com/en-us/azure/virtual-machines/windows/sizes and Linux VM at https://docs.microsoft.com/en-us/azure/virtual-machines/linux/sizes to check which VM sizes exposes a cache disk.
         /// Serialized Name: DiffDiskSettings.placement
         /// </param>
-        internal DiffDiskSettings(DiffDiskOption? option, DiffDiskPlacement? placement)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal DiffDiskSettings(DiffDiskOption? option, DiffDiskPlacement? placement, Dictionary<string, BinaryData> rawData)
         {
             Option = option;
             Placement = placement;
+            _rawData = rawData;
         }
 
         /// <summary>

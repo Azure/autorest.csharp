@@ -16,7 +16,12 @@ namespace MgmtListMethods.Models
     /// <summary> The List operation response. </summary>
     internal partial class FakeParentWithAncestorWithNonResChListResult
     {
-        /// <summary> Initializes a new instance of FakeParentWithAncestorWithNonResChListResult. </summary>
+        private Dictionary<string, BinaryData> _rawData;
+
+        /// <summary>
+        /// Initializes a new instance of global::MgmtListMethods.Models.FakeParentWithAncestorWithNonResChListResult
+        ///
+        /// </summary>
         /// <param name="value"> List. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="value"/> is null. </exception>
         internal FakeParentWithAncestorWithNonResChListResult(IEnumerable<FakeParentWithAncestorWithNonResChData> value)
@@ -26,13 +31,18 @@ namespace MgmtListMethods.Models
             Value = value.ToList();
         }
 
-        /// <summary> Initializes a new instance of FakeParentWithAncestorWithNonResChListResult. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::MgmtListMethods.Models.FakeParentWithAncestorWithNonResChListResult
+        ///
+        /// </summary>
         /// <param name="value"> List. </param>
         /// <param name="nextLink"> The URI to fetch the next page. Call ListNext() with this URI to fetch the next page. </param>
-        internal FakeParentWithAncestorWithNonResChListResult(IReadOnlyList<FakeParentWithAncestorWithNonResChData> value, string nextLink)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal FakeParentWithAncestorWithNonResChListResult(IReadOnlyList<FakeParentWithAncestorWithNonResChData> value, string nextLink, Dictionary<string, BinaryData> rawData)
         {
             Value = value;
             NextLink = nextLink;
+            _rawData = rawData;
         }
 
         /// <summary> List. </summary>

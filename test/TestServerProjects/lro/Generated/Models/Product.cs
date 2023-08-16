@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Collections.Generic;
 
 namespace lro.Models
@@ -12,12 +13,18 @@ namespace lro.Models
     /// <summary> The Product. </summary>
     public partial class Product : Resource
     {
-        /// <summary> Initializes a new instance of Product. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::lro.Models.Product
+        ///
+        /// </summary>
         public Product()
         {
         }
 
-        /// <summary> Initializes a new instance of Product. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::lro.Models.Product
+        ///
+        /// </summary>
         /// <param name="id"> Resource Id. </param>
         /// <param name="type"> Resource Type. </param>
         /// <param name="tags"> Dictionary of &lt;string&gt;. </param>
@@ -25,7 +32,8 @@ namespace lro.Models
         /// <param name="name"> Resource Name. </param>
         /// <param name="provisioningState"></param>
         /// <param name="provisioningStateValues"></param>
-        internal Product(string id, string type, IDictionary<string, string> tags, string location, string name, string provisioningState, ProductPropertiesProvisioningStateValues? provisioningStateValues) : base(id, type, tags, location, name)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal Product(string id, string type, IDictionary<string, string> tags, string location, string name, string provisioningState, ProductPropertiesProvisioningStateValues? provisioningStateValues, Dictionary<string, BinaryData> rawData) : base(id, type, tags, location, name, rawData)
         {
             ProvisioningState = provisioningState;
             ProvisioningStateValues = provisioningStateValues;

@@ -14,6 +14,8 @@ namespace ModelsTypeSpec.Models
     /// <summary> Collection item model. </summary>
     public partial class CollectionItem
     {
+        private Dictionary<string, BinaryData> _rawData;
+
         /// <summary> Initializes a new instance of CollectionItem. </summary>
         /// <param name="requiredModelRecord"> Required model record. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="requiredModelRecord"/> is null. </exception>
@@ -22,6 +24,15 @@ namespace ModelsTypeSpec.Models
             Argument.AssertNotNull(requiredModelRecord, nameof(requiredModelRecord));
 
             RequiredModelRecord = requiredModelRecord;
+        }
+
+        /// <summary> Initializes a new instance of CollectionItem. </summary>
+        /// <param name="requiredModelRecord"> Required model record. </param>
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal CollectionItem(IDictionary<string, RecordItem> requiredModelRecord, Dictionary<string, BinaryData> rawData)
+        {
+            RequiredModelRecord = requiredModelRecord;
+            _rawData = rawData;
         }
 
         /// <summary> Required model record. </summary>

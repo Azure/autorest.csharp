@@ -62,7 +62,7 @@ namespace _Specs_.Azure.Core.Traits
 
             RequestContext context = FromCancellationToken(cancellationToken);
             Response response = await SmokeTestAsync(id, foo, requestConditions, context).ConfigureAwait(false);
-            return Response.FromValue(User.FromResponse(response), response);
+            return Response.FromValue((User)response, response);
         }
 
         /// <summary> Get a resource, sending and receiving headers. </summary>
@@ -78,7 +78,7 @@ namespace _Specs_.Azure.Core.Traits
 
             RequestContext context = FromCancellationToken(cancellationToken);
             Response response = SmokeTest(id, foo, requestConditions, context);
-            return Response.FromValue(User.FromResponse(response), response);
+            return Response.FromValue((User)response, response);
         }
 
         /// <summary>
@@ -174,8 +174,8 @@ namespace _Specs_.Azure.Core.Traits
             Argument.AssertNotNull(userActionParam, nameof(userActionParam));
 
             RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = await RepeatableActionAsync(id, userActionParam.ToRequestContent(), context).ConfigureAwait(false);
-            return Response.FromValue(UserActionResponse.FromResponse(response), response);
+            Response response = await RepeatableActionAsync(id, userActionParam, context).ConfigureAwait(false);
+            return Response.FromValue((UserActionResponse)response, response);
         }
 
         /// <summary> Test for repeatable requests. </summary>
@@ -189,8 +189,8 @@ namespace _Specs_.Azure.Core.Traits
             Argument.AssertNotNull(userActionParam, nameof(userActionParam));
 
             RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = RepeatableAction(id, userActionParam.ToRequestContent(), context);
-            return Response.FromValue(UserActionResponse.FromResponse(response), response);
+            Response response = RepeatableAction(id, userActionParam, context);
+            return Response.FromValue((UserActionResponse)response, response);
         }
 
         /// <summary>

@@ -15,7 +15,12 @@ namespace ModelShapes.Models
     /// <summary> The InputModel. </summary>
     public partial class InputModel
     {
-        /// <summary> Initializes a new instance of InputModel. </summary>
+        private Dictionary<string, BinaryData> _rawData;
+
+        /// <summary>
+        /// Initializes a new instance of global::ModelShapes.Models.InputModel
+        ///
+        /// </summary>
         /// <param name="requiredString"></param>
         /// <param name="requiredInt"></param>
         /// <param name="requiredStringList"></param>
@@ -45,7 +50,10 @@ namespace ModelShapes.Models
             NonRequiredNullableIntList = new ChangeTrackingList<int>();
         }
 
-        /// <summary> Initializes a new instance of InputModel. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::ModelShapes.Models.InputModel
+        ///
+        /// </summary>
         /// <param name="requiredString"></param>
         /// <param name="requiredInt"></param>
         /// <param name="requiredStringList"></param>
@@ -62,7 +70,8 @@ namespace ModelShapes.Models
         /// <param name="nonRequiredNullableInt"></param>
         /// <param name="nonRequiredNullableStringList"></param>
         /// <param name="nonRequiredNullableIntList"></param>
-        internal InputModel(string requiredString, int requiredInt, IList<string> requiredStringList, IList<int> requiredIntList, string nonRequiredString, int? nonRequiredInt, IList<string> nonRequiredStringList, IList<int> nonRequiredIntList, string requiredNullableString, int? requiredNullableInt, IList<string> requiredNullableStringList, IList<int> requiredNullableIntList, string nonRequiredNullableString, int? nonRequiredNullableInt, IList<string> nonRequiredNullableStringList, IList<int> nonRequiredNullableIntList)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal InputModel(string requiredString, int requiredInt, IList<string> requiredStringList, IList<int> requiredIntList, string nonRequiredString, int? nonRequiredInt, IList<string> nonRequiredStringList, IList<int> nonRequiredIntList, string requiredNullableString, int? requiredNullableInt, IList<string> requiredNullableStringList, IList<int> requiredNullableIntList, string nonRequiredNullableString, int? nonRequiredNullableInt, IList<string> nonRequiredNullableStringList, IList<int> nonRequiredNullableIntList, Dictionary<string, BinaryData> rawData)
         {
             RequiredString = requiredString;
             RequiredInt = requiredInt;
@@ -80,6 +89,7 @@ namespace ModelShapes.Models
             NonRequiredNullableInt = nonRequiredNullableInt;
             NonRequiredNullableStringList = nonRequiredNullableStringList;
             NonRequiredNullableIntList = nonRequiredNullableIntList;
+            _rawData = rawData;
         }
 
         /// <summary> Gets the required string. </summary>

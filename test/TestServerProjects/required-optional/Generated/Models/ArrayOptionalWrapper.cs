@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Collections.Generic;
 using Azure.Core;
 
@@ -13,17 +14,27 @@ namespace required_optional.Models
     /// <summary> The ArrayOptionalWrapper. </summary>
     public partial class ArrayOptionalWrapper
     {
-        /// <summary> Initializes a new instance of ArrayOptionalWrapper. </summary>
+        private Dictionary<string, BinaryData> _rawData;
+
+        /// <summary>
+        /// Initializes a new instance of global::required_optional.Models.ArrayOptionalWrapper
+        ///
+        /// </summary>
         public ArrayOptionalWrapper()
         {
             Value = new ChangeTrackingList<string>();
         }
 
-        /// <summary> Initializes a new instance of ArrayOptionalWrapper. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::required_optional.Models.ArrayOptionalWrapper
+        ///
+        /// </summary>
         /// <param name="value"></param>
-        internal ArrayOptionalWrapper(IList<string> value)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal ArrayOptionalWrapper(IList<string> value, Dictionary<string, BinaryData> rawData)
         {
             Value = value;
+            _rawData = rawData;
         }
 
         /// <summary> Gets the value. </summary>

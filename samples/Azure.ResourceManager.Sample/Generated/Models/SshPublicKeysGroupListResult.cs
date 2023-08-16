@@ -19,7 +19,12 @@ namespace Azure.ResourceManager.Sample.Models
     /// </summary>
     internal partial class SshPublicKeysGroupListResult
     {
-        /// <summary> Initializes a new instance of SshPublicKeysGroupListResult. </summary>
+        private Dictionary<string, BinaryData> _rawData;
+
+        /// <summary>
+        /// Initializes a new instance of global::Azure.ResourceManager.Sample.Models.SshPublicKeysGroupListResult
+        ///
+        /// </summary>
         /// <param name="value">
         /// The list of SSH public keys
         /// Serialized Name: SshPublicKeysGroupListResult.value
@@ -32,7 +37,10 @@ namespace Azure.ResourceManager.Sample.Models
             Value = value.ToList();
         }
 
-        /// <summary> Initializes a new instance of SshPublicKeysGroupListResult. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::Azure.ResourceManager.Sample.Models.SshPublicKeysGroupListResult
+        ///
+        /// </summary>
         /// <param name="value">
         /// The list of SSH public keys
         /// Serialized Name: SshPublicKeysGroupListResult.value
@@ -41,10 +49,12 @@ namespace Azure.ResourceManager.Sample.Models
         /// The URI to fetch the next page of SSH public keys. Call ListNext() with this URI to fetch the next page of SSH public keys.
         /// Serialized Name: SshPublicKeysGroupListResult.nextLink
         /// </param>
-        internal SshPublicKeysGroupListResult(IReadOnlyList<SshPublicKeyData> value, string nextLink)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal SshPublicKeysGroupListResult(IReadOnlyList<SshPublicKeyData> value, string nextLink, Dictionary<string, BinaryData> rawData)
         {
             Value = value;
             NextLink = nextLink;
+            _rawData = rawData;
         }
 
         /// <summary>

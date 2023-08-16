@@ -5,21 +5,31 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
+
 namespace MgmtOmitOperationGroups.Models
 {
     /// <summary> The ModelX. </summary>
     public partial class ModelX : ModelY
     {
-        /// <summary> Initializes a new instance of ModelX. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::MgmtOmitOperationGroups.Models.ModelX
+        ///
+        /// </summary>
         public ModelX()
         {
         }
 
-        /// <summary> Initializes a new instance of ModelX. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::MgmtOmitOperationGroups.Models.ModelX
+        ///
+        /// </summary>
         /// <param name="e"></param>
         /// <param name="c"></param>
         /// <param name="d"></param>
-        internal ModelX(string e, string c, string d) : base(e)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal ModelX(string e, string c, string d, Dictionary<string, BinaryData> rawData) : base(e, rawData)
         {
             C = c;
             D = d;

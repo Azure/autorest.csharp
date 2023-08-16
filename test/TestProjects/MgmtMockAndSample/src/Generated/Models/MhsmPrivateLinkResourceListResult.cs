@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Collections.Generic;
 using Azure.Core;
 
@@ -13,17 +14,27 @@ namespace MgmtMockAndSample.Models
     /// <summary> A list of private link resources. </summary>
     internal partial class MhsmPrivateLinkResourceListResult
     {
-        /// <summary> Initializes a new instance of MhsmPrivateLinkResourceListResult. </summary>
+        private Dictionary<string, BinaryData> _rawData;
+
+        /// <summary>
+        /// Initializes a new instance of global::MgmtMockAndSample.Models.MhsmPrivateLinkResourceListResult
+        ///
+        /// </summary>
         internal MhsmPrivateLinkResourceListResult()
         {
             Value = new ChangeTrackingList<MhsmPrivateLinkResource>();
         }
 
-        /// <summary> Initializes a new instance of MhsmPrivateLinkResourceListResult. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::MgmtMockAndSample.Models.MhsmPrivateLinkResourceListResult
+        ///
+        /// </summary>
         /// <param name="value"> Array of private link resources. </param>
-        internal MhsmPrivateLinkResourceListResult(IReadOnlyList<MhsmPrivateLinkResource> value)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal MhsmPrivateLinkResourceListResult(IReadOnlyList<MhsmPrivateLinkResource> value, Dictionary<string, BinaryData> rawData)
         {
             Value = value;
+            _rawData = rawData;
         }
 
         /// <summary> Array of private link resources. </summary>

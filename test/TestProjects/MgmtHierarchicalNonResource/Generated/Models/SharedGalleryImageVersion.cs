@@ -6,24 +6,32 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
 
 namespace MgmtHierarchicalNonResource.Models
 {
     /// <summary> Specifies information about the gallery image version that you want to create or update. </summary>
     public partial class SharedGalleryImageVersion : PirSharedGalleryResource
     {
-        /// <summary> Initializes a new instance of SharedGalleryImageVersion. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::MgmtHierarchicalNonResource.Models.SharedGalleryImageVersion
+        ///
+        /// </summary>
         internal SharedGalleryImageVersion()
         {
         }
 
-        /// <summary> Initializes a new instance of SharedGalleryImageVersion. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::MgmtHierarchicalNonResource.Models.SharedGalleryImageVersion
+        ///
+        /// </summary>
         /// <param name="name"> Resource name. </param>
         /// <param name="location"> Resource location. </param>
         /// <param name="uniqueId"> The unique id of this shared gallery. </param>
         /// <param name="publishedOn"> The published date of the gallery image version Definition. This property can be used for decommissioning purposes. This property is updatable. </param>
         /// <param name="endOfLifeOn"> The end of life date of the gallery image version Definition. This property can be used for decommissioning purposes. This property is updatable. </param>
-        internal SharedGalleryImageVersion(string name, string location, string uniqueId, DateTimeOffset? publishedOn, DateTimeOffset? endOfLifeOn) : base(name, location, uniqueId)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal SharedGalleryImageVersion(string name, string location, string uniqueId, DateTimeOffset? publishedOn, DateTimeOffset? endOfLifeOn, Dictionary<string, BinaryData> rawData) : base(name, location, uniqueId, rawData)
         {
             PublishedOn = publishedOn;
             EndOfLifeOn = endOfLifeOn;

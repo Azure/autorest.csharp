@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Collections.Generic;
 using Azure.Core;
 using Azure.ResourceManager.Models;
@@ -19,13 +20,21 @@ namespace MgmtMockAndSample
     /// </summary>
     public partial class MhsmPrivateEndpointConnectionData : TrackedResourceData
     {
-        /// <summary> Initializes a new instance of MhsmPrivateEndpointConnectionData. </summary>
+        private Dictionary<string, BinaryData> _rawData;
+
+        /// <summary>
+        /// Initializes a new instance of global::MgmtMockAndSample.MhsmPrivateEndpointConnectionData
+        ///
+        /// </summary>
         /// <param name="location"> The location. </param>
         public MhsmPrivateEndpointConnectionData(AzureLocation location) : base(location)
         {
         }
 
-        /// <summary> Initializes a new instance of MhsmPrivateEndpointConnectionData. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::MgmtMockAndSample.MhsmPrivateEndpointConnectionData
+        ///
+        /// </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
         /// <param name="resourceType"> The resourceType. </param>
@@ -37,13 +46,15 @@ namespace MgmtMockAndSample
         /// <param name="privateLinkServiceConnectionState"> Approval state of the private link connection. </param>
         /// <param name="provisioningState"> Provisioning state of the private endpoint connection. </param>
         /// <param name="sku"> SKU details. </param>
-        internal MhsmPrivateEndpointConnectionData(ResourceIdentifier id, string name, ResourceType resourceType, SystemData systemData, IDictionary<string, string> tags, AzureLocation location, string etag, Azure.ResourceManager.Resources.Models.SubResource privateEndpoint, MhsmPrivateLinkServiceConnectionState privateLinkServiceConnectionState, MgmtMockAndSamplePrivateEndpointConnectionProvisioningState? provisioningState, ManagedHsmSku sku) : base(id, name, resourceType, systemData, tags, location)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal MhsmPrivateEndpointConnectionData(ResourceIdentifier id, string name, ResourceType resourceType, SystemData systemData, IDictionary<string, string> tags, AzureLocation location, string etag, Azure.ResourceManager.Resources.Models.SubResource privateEndpoint, MhsmPrivateLinkServiceConnectionState privateLinkServiceConnectionState, MgmtMockAndSamplePrivateEndpointConnectionProvisioningState? provisioningState, ManagedHsmSku sku, Dictionary<string, BinaryData> rawData) : base(id, name, resourceType, systemData, tags, location)
         {
             Etag = etag;
             PrivateEndpoint = privateEndpoint;
             PrivateLinkServiceConnectionState = privateLinkServiceConnectionState;
             ProvisioningState = provisioningState;
             Sku = sku;
+            _rawData = rawData;
         }
 
         /// <summary> Modified whenever there is a change in the state of private endpoint connection. </summary>

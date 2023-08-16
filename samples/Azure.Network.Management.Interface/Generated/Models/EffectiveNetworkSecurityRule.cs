@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Collections.Generic;
 using Azure.Core;
 
@@ -13,7 +14,12 @@ namespace Azure.Network.Management.Interface.Models
     /// <summary> Effective network security rules. </summary>
     public partial class EffectiveNetworkSecurityRule
     {
-        /// <summary> Initializes a new instance of EffectiveNetworkSecurityRule. </summary>
+        private Dictionary<string, BinaryData> _rawData;
+
+        /// <summary>
+        /// Initializes a new instance of global::Azure.Network.Management.Interface.Models.EffectiveNetworkSecurityRule
+        ///
+        /// </summary>
         internal EffectiveNetworkSecurityRule()
         {
             SourcePortRanges = new ChangeTrackingList<string>();
@@ -24,7 +30,10 @@ namespace Azure.Network.Management.Interface.Models
             ExpandedDestinationAddressPrefix = new ChangeTrackingList<string>();
         }
 
-        /// <summary> Initializes a new instance of EffectiveNetworkSecurityRule. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::Azure.Network.Management.Interface.Models.EffectiveNetworkSecurityRule
+        ///
+        /// </summary>
         /// <param name="name"> The name of the security rule specified by the user (if created by the user). </param>
         /// <param name="protocol"> The network protocol this rule applies to. </param>
         /// <param name="sourcePortRange"> The source port or range. </param>
@@ -40,7 +49,8 @@ namespace Azure.Network.Management.Interface.Models
         /// <param name="access"> Whether network traffic is allowed or denied. </param>
         /// <param name="priority"> The priority of the rule. </param>
         /// <param name="direction"> The direction of the rule. </param>
-        internal EffectiveNetworkSecurityRule(string name, EffectiveSecurityRuleProtocol? protocol, string sourcePortRange, string destinationPortRange, IReadOnlyList<string> sourcePortRanges, IReadOnlyList<string> destinationPortRanges, string sourceAddressPrefix, string destinationAddressPrefix, IReadOnlyList<string> sourceAddressPrefixes, IReadOnlyList<string> destinationAddressPrefixes, IReadOnlyList<string> expandedSourceAddressPrefix, IReadOnlyList<string> expandedDestinationAddressPrefix, SecurityRuleAccess? access, int? priority, SecurityRuleDirection? direction)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal EffectiveNetworkSecurityRule(string name, EffectiveSecurityRuleProtocol? protocol, string sourcePortRange, string destinationPortRange, IReadOnlyList<string> sourcePortRanges, IReadOnlyList<string> destinationPortRanges, string sourceAddressPrefix, string destinationAddressPrefix, IReadOnlyList<string> sourceAddressPrefixes, IReadOnlyList<string> destinationAddressPrefixes, IReadOnlyList<string> expandedSourceAddressPrefix, IReadOnlyList<string> expandedDestinationAddressPrefix, SecurityRuleAccess? access, int? priority, SecurityRuleDirection? direction, Dictionary<string, BinaryData> rawData)
         {
             Name = name;
             Protocol = protocol;
@@ -57,6 +67,7 @@ namespace Azure.Network.Management.Interface.Models
             Access = access;
             Priority = priority;
             Direction = direction;
+            _rawData = rawData;
         }
 
         /// <summary> The name of the security rule specified by the user (if created by the user). </summary>

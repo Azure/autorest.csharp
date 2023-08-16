@@ -6,23 +6,23 @@
 #nullable disable
 
 using System;
+using System.IO;
 using System.Xml;
 using System.Xml.Linq;
+using Azure;
 using Azure.Core;
 using Azure.Core.Serialization;
 
 namespace xml_service.Models
 {
-    public partial class RootWithRefAndNoMeta : IXmlSerializable, IXmlModelSerializable
+    public partial class RootWithRefAndNoMeta : IXmlSerializable, IModelSerializable<RootWithRefAndNoMeta>
     {
-        void IXmlModelSerializable.Serialize(XmlWriter writer, ModelSerializerOptions options) => ((IXmlSerializable)this).Write(writer, null, options);
-
-        void IXmlSerializable.Write(XmlWriter writer, string nameHint, ModelSerializerOptions options)
+        private void Serialize(XmlWriter writer, string nameHint, ModelSerializerOptions options)
         {
             writer.WriteStartElement("RootWithRefAndNoMeta");
             if (Optional.IsDefined(RefToModel))
             {
-                writer.WriteObjectValue(RefToModel, "RefToModel", options);
+                writer.WriteObjectValue(RefToModel, "RefToModel");
             }
             if (Optional.IsDefined(Something))
             {
@@ -33,14 +33,11 @@ namespace xml_service.Models
             writer.WriteEndElement();
         }
 
-        object IModelSerializable.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            return DeserializeRootWithRefAndNoMeta(XElement.Load(data.ToStream()), options);
-        }
+        void IXmlSerializable.Write(XmlWriter writer, string nameHint) => Serialize(writer, nameHint, ModelSerializerOptions.DefaultWireOptions);
 
         internal static RootWithRefAndNoMeta DeserializeRootWithRefAndNoMeta(XElement element, ModelSerializerOptions options = default)
         {
-            options ??= ModelSerializerOptions.AzureServiceDefault;
+            options ??= ModelSerializerOptions.DefaultWireOptions;
             ComplexTypeNoMeta refToModel = default;
             string something = default;
             if (element.Element("RefToModel") is XElement refToModelElement)
@@ -51,7 +48,53 @@ namespace xml_service.Models
             {
                 something = (string)somethingElement;
             }
-            return new RootWithRefAndNoMeta(refToModel, something);
+            return new RootWithRefAndNoMeta(refToModel, something, default);
+        }
+
+        BinaryData IModelSerializable<RootWithRefAndNoMeta>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            options ??= ModelSerializerOptions.DefaultWireOptions;
+            using MemoryStream stream = new MemoryStream();
+            using XmlWriter writer = XmlWriter.Create(stream);
+            Serialize(writer, null, options);
+            writer.Flush();
+            if (stream.Position > int.MaxValue)
+            {
+                return BinaryData.FromStream(stream);
+            }
+            else
+            {
+                return new BinaryData(stream.GetBuffer().AsMemory(0, (int)stream.Position));
+            }
+        }
+
+        RootWithRefAndNoMeta IModelSerializable<RootWithRefAndNoMeta>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            return DeserializeRootWithRefAndNoMeta(XElement.Load(data.ToStream()), options);
+        }
+
+        public static implicit operator RequestContent(RootWithRefAndNoMeta model)
+        {
+            if (model is null)
+            {
+                return null;
+            }
+
+            return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
+        }
+
+        public static explicit operator RootWithRefAndNoMeta(Response response)
+        {
+            if (response is null)
+            {
+                return null;
+            }
+
+            return DeserializeRootWithRefAndNoMeta(XElement.Load(response.ContentStream), ModelSerializerOptions.DefaultWireOptions);
         }
     }
 }

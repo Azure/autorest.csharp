@@ -6,26 +6,37 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
 
 namespace Azure.ResourceManager.Storage.Models
 {
     /// <summary> Object level immutability properties of the container. </summary>
     public partial class ImmutableStorageWithVersioning
     {
-        /// <summary> Initializes a new instance of ImmutableStorageWithVersioning. </summary>
+        private Dictionary<string, BinaryData> _rawData;
+
+        /// <summary>
+        /// Initializes a new instance of global::Azure.ResourceManager.Storage.Models.ImmutableStorageWithVersioning
+        ///
+        /// </summary>
         public ImmutableStorageWithVersioning()
         {
         }
 
-        /// <summary> Initializes a new instance of ImmutableStorageWithVersioning. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::Azure.ResourceManager.Storage.Models.ImmutableStorageWithVersioning
+        ///
+        /// </summary>
         /// <param name="enabled"> This is an immutable property, when set to true it enables object level immutability at the container level. </param>
         /// <param name="timeStamp"> Returns the date and time the object level immutability was enabled. </param>
         /// <param name="migrationState"> This property denotes the container level immutability to object level immutability migration state. </param>
-        internal ImmutableStorageWithVersioning(bool? enabled, DateTimeOffset? timeStamp, MigrationState? migrationState)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal ImmutableStorageWithVersioning(bool? enabled, DateTimeOffset? timeStamp, MigrationState? migrationState, Dictionary<string, BinaryData> rawData)
         {
             Enabled = enabled;
             TimeStamp = timeStamp;
             MigrationState = migrationState;
+            _rawData = rawData;
         }
 
         /// <summary> This is an immutable property, when set to true it enables object level immutability at the container level. </summary>

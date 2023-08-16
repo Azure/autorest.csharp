@@ -5,8 +5,6 @@
 
 #nullable disable
 
-using System;
-
 namespace Authentication.Http.Custom.Models
 {
     /// <summary> Model factory for models. </summary>

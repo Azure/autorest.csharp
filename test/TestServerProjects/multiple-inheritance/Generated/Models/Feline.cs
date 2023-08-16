@@ -5,23 +5,36 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
+
 namespace multiple_inheritance.Models
 {
     /// <summary> The Feline. </summary>
     public partial class Feline
     {
-        /// <summary> Initializes a new instance of Feline. </summary>
+        protected internal Dictionary<string, BinaryData> _rawData;
+
+        /// <summary>
+        /// Initializes a new instance of global::multiple_inheritance.Models.Feline
+        ///
+        /// </summary>
         public Feline()
         {
         }
 
-        /// <summary> Initializes a new instance of Feline. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::multiple_inheritance.Models.Feline
+        ///
+        /// </summary>
         /// <param name="meows"></param>
         /// <param name="hisses"></param>
-        internal Feline(bool? meows, bool? hisses)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal Feline(bool? meows, bool? hisses, Dictionary<string, BinaryData> rawData)
         {
             Meows = meows;
             Hisses = hisses;
+            _rawData = rawData;
         }
 
         /// <summary> Gets or sets the meows. </summary>

@@ -5,21 +5,34 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
+
 namespace MgmtExtensionResource.Models
 {
     /// <summary> Validate something options. </summary>
     public partial class ValidateSomethingContent
     {
-        /// <summary> Initializes a new instance of ValidateSomethingContent. </summary>
+        private Dictionary<string, BinaryData> _rawData;
+
+        /// <summary>
+        /// Initializes a new instance of global::MgmtExtensionResource.Models.ValidateSomethingContent
+        ///
+        /// </summary>
         public ValidateSomethingContent()
         {
         }
 
-        /// <summary> Initializes a new instance of ValidateSomethingContent. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::MgmtExtensionResource.Models.ValidateSomethingContent
+        ///
+        /// </summary>
         /// <param name="something"> The something to validate. </param>
-        internal ValidateSomethingContent(string something)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal ValidateSomethingContent(string something, Dictionary<string, BinaryData> rawData)
         {
             Something = something;
+            _rawData = rawData;
         }
 
         /// <summary> The something to validate. </summary>

@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Collections.Generic;
 using Azure.Core;
 
@@ -13,20 +14,30 @@ namespace TypeSchemaMapping.Models
     /// <summary> The ModelWithArrayOfEnum. </summary>
     internal partial class ModelWithArrayOfEnum
     {
-        /// <summary> Initializes a new instance of ModelWithArrayOfEnum. </summary>
+        private Dictionary<string, BinaryData> _rawData;
+
+        /// <summary>
+        /// Initializes a new instance of global::TypeSchemaMapping.Models.ModelWithArrayOfEnum
+        ///
+        /// </summary>
         public ModelWithArrayOfEnum()
         {
             ArrayOfEnum = new ChangeTrackingList<EnumForModelWithArrayOfEnum>();
             ArrayOfEnumCustomizedToNullable = new ChangeTrackingList<EnumForModelWithArrayOfEnum?>();
         }
 
-        /// <summary> Initializes a new instance of ModelWithArrayOfEnum. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::TypeSchemaMapping.Models.ModelWithArrayOfEnum
+        ///
+        /// </summary>
         /// <param name="arrayOfEnum"></param>
         /// <param name="arrayOfEnumCustomizedToNullable"></param>
-        internal ModelWithArrayOfEnum(IReadOnlyList<EnumForModelWithArrayOfEnum> arrayOfEnum, IReadOnlyList<EnumForModelWithArrayOfEnum?> arrayOfEnumCustomizedToNullable)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal ModelWithArrayOfEnum(IReadOnlyList<EnumForModelWithArrayOfEnum> arrayOfEnum, IReadOnlyList<EnumForModelWithArrayOfEnum?> arrayOfEnumCustomizedToNullable, Dictionary<string, BinaryData> rawData)
         {
             ArrayOfEnum = arrayOfEnum;
             ArrayOfEnumCustomizedToNullable = arrayOfEnumCustomizedToNullable;
+            _rawData = rawData;
         }
     }
 }

@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
 using Azure.Core;
 
 namespace CognitiveSearch.Models
@@ -13,7 +14,12 @@ namespace CognitiveSearch.Models
     /// <summary> Parameters for filtering, sorting, fuzzy matching, and other suggestions query behaviors. </summary>
     public partial class SuggestRequest
     {
-        /// <summary> Initializes a new instance of SuggestRequest. </summary>
+        private Dictionary<string, BinaryData> _rawData;
+
+        /// <summary>
+        /// Initializes a new instance of global::CognitiveSearch.Models.SuggestRequest
+        ///
+        /// </summary>
         /// <param name="searchText"> The search text to use to suggest documents. Must be at least 1 character, and no more than 100 characters. </param>
         /// <param name="suggesterName"> The name of the suggester as specified in the suggesters collection that's part of the index definition. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="searchText"/> or <paramref name="suggesterName"/> is null. </exception>
@@ -26,7 +32,10 @@ namespace CognitiveSearch.Models
             SuggesterName = suggesterName;
         }
 
-        /// <summary> Initializes a new instance of SuggestRequest. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::CognitiveSearch.Models.SuggestRequest
+        ///
+        /// </summary>
         /// <param name="filter"> An OData expression that filters the documents considered for suggestions. </param>
         /// <param name="useFuzzyMatching"> A value indicating whether to use fuzzy matching for the suggestion query. Default is false. When set to true, the query will find suggestions even if there's a substituted or missing character in the search text. While this provides a better experience in some scenarios, it comes at a performance cost as fuzzy suggestion searches are slower and consume more resources. </param>
         /// <param name="highlightPostTag"> A string tag that is appended to hit highlights. Must be set with highlightPreTag. If omitted, hit highlighting of suggestions is disabled. </param>
@@ -38,7 +47,8 @@ namespace CognitiveSearch.Models
         /// <param name="select"> The comma-separated list of fields to retrieve. If unspecified, only the key field will be included in the results. </param>
         /// <param name="suggesterName"> The name of the suggester as specified in the suggesters collection that's part of the index definition. </param>
         /// <param name="top"> The number of suggestions to retrieve. This must be a value between 1 and 100. The default is 5. </param>
-        internal SuggestRequest(string filter, bool? useFuzzyMatching, string highlightPostTag, string highlightPreTag, double? minimumCoverage, string orderBy, string searchText, string searchFields, string select, string suggesterName, int? top)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal SuggestRequest(string filter, bool? useFuzzyMatching, string highlightPostTag, string highlightPreTag, double? minimumCoverage, string orderBy, string searchText, string searchFields, string select, string suggesterName, int? top, Dictionary<string, BinaryData> rawData)
         {
             Filter = filter;
             UseFuzzyMatching = useFuzzyMatching;
@@ -51,6 +61,7 @@ namespace CognitiveSearch.Models
             Select = select;
             SuggesterName = suggesterName;
             Top = top;
+            _rawData = rawData;
         }
 
         /// <summary> An OData expression that filters the documents considered for suggestions. </summary>

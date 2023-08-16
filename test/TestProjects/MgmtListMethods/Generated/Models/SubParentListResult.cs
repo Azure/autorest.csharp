@@ -16,7 +16,12 @@ namespace MgmtListMethods.Models
     /// <summary> The List operation response. </summary>
     internal partial class SubParentListResult
     {
-        /// <summary> Initializes a new instance of SubParentListResult. </summary>
+        private Dictionary<string, BinaryData> _rawData;
+
+        /// <summary>
+        /// Initializes a new instance of global::MgmtListMethods.Models.SubParentListResult
+        ///
+        /// </summary>
         /// <param name="value"> List. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="value"/> is null. </exception>
         internal SubParentListResult(IEnumerable<SubParentData> value)
@@ -26,13 +31,18 @@ namespace MgmtListMethods.Models
             Value = value.ToList();
         }
 
-        /// <summary> Initializes a new instance of SubParentListResult. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::MgmtListMethods.Models.SubParentListResult
+        ///
+        /// </summary>
         /// <param name="value"> List. </param>
         /// <param name="nextLink"> The URI to fetch the next page. Call ListNext() with this URI to fetch the next page. </param>
-        internal SubParentListResult(IReadOnlyList<SubParentData> value, string nextLink)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal SubParentListResult(IReadOnlyList<SubParentData> value, string nextLink, Dictionary<string, BinaryData> rawData)
         {
             Value = value;
             NextLink = nextLink;
+            _rawData = rawData;
         }
 
         /// <summary> List. </summary>

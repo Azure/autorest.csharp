@@ -10,37 +10,49 @@ namespace httpInfrastructure.Models
     /// <summary> Model factory for models. </summary>
     public static partial class HttpInfrastructureModelFactory
     {
-        /// <summary> Initializes a new instance of MyException. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::httpInfrastructure.Models.MyException
+        ///
+        /// </summary>
         /// <param name="statusCode"></param>
         /// <returns> A new <see cref="Models.MyException"/> instance for mocking. </returns>
         public static MyException MyException(string statusCode = null)
         {
-            return new MyException(statusCode);
+            return new MyException(statusCode, default);
         }
 
-        /// <summary> Initializes a new instance of B. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::httpInfrastructure.Models.B
+        ///
+        /// </summary>
         /// <param name="statusCode"></param>
         /// <param name="textStatusCode"></param>
         /// <returns> A new <see cref="Models.B"/> instance for mocking. </returns>
         public static B B(string statusCode = null, string textStatusCode = null)
         {
-            return new B(statusCode, textStatusCode);
+            return new B(statusCode, textStatusCode, default);
         }
 
-        /// <summary> Initializes a new instance of C. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::httpInfrastructure.Models.C
+        ///
+        /// </summary>
         /// <param name="httpCode"></param>
         /// <returns> A new <see cref="Models.C"/> instance for mocking. </returns>
         public static C C(string httpCode = null)
         {
-            return new C(httpCode);
+            return new C(httpCode, default);
         }
 
-        /// <summary> Initializes a new instance of D. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::httpInfrastructure.Models.D
+        ///
+        /// </summary>
         /// <param name="httpStatusCode"></param>
         /// <returns> A new <see cref="Models.D"/> instance for mocking. </returns>
         public static D D(string httpStatusCode = null)
         {
-            return new D(httpStatusCode);
+            return new D(httpStatusCode, default);
         }
     }
 }

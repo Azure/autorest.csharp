@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
 using Azure.Core;
 
 namespace MgmtRenameRules.Models
@@ -16,7 +17,12 @@ namespace MgmtRenameRules.Models
     /// </summary>
     public partial class VirtualMachineCaptureContent
     {
-        /// <summary> Initializes a new instance of VirtualMachineCaptureContent. </summary>
+        private Dictionary<string, BinaryData> _rawData;
+
+        /// <summary>
+        /// Initializes a new instance of global::MgmtRenameRules.Models.VirtualMachineCaptureContent
+        ///
+        /// </summary>
         /// <param name="vhdPrefix">
         /// The captured virtual hard disk's name prefix.
         /// Serialized Name: VirtualMachineCaptureParameters.vhdPrefix
@@ -38,6 +44,31 @@ namespace MgmtRenameRules.Models
             VhdPrefix = vhdPrefix;
             DestinationContainerName = destinationContainerName;
             OverwriteVhds = overwriteVhds;
+        }
+
+        /// <summary>
+        /// Initializes a new instance of global::MgmtRenameRules.Models.VirtualMachineCaptureContent
+        ///
+        /// </summary>
+        /// <param name="vhdPrefix">
+        /// The captured virtual hard disk's name prefix.
+        /// Serialized Name: VirtualMachineCaptureParameters.vhdPrefix
+        /// </param>
+        /// <param name="destinationContainerName">
+        /// The destination container name.
+        /// Serialized Name: VirtualMachineCaptureParameters.destinationContainerName
+        /// </param>
+        /// <param name="overwriteVhds">
+        /// Specifies whether to overwrite the destination virtual hard disk, in case of conflict.
+        /// Serialized Name: VirtualMachineCaptureParameters.overwriteVhds
+        /// </param>
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal VirtualMachineCaptureContent(string vhdPrefix, string destinationContainerName, bool overwriteVhds, Dictionary<string, BinaryData> rawData)
+        {
+            VhdPrefix = vhdPrefix;
+            DestinationContainerName = destinationContainerName;
+            OverwriteVhds = overwriteVhds;
+            _rawData = rawData;
         }
 
         /// <summary>

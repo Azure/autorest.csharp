@@ -7,69 +7,62 @@
 
 using System;
 using System.Text.Json;
-using Azure;
 using Azure.Core;
 using Azure.Core.Serialization;
 
-namespace _Type.Model.Inheritance.Models
+namespace _Type.Model.Inheritance.SingleDiscriminator.Models
 {
-    internal partial class UnknownTurtle : IUtf8JsonSerializable, IJsonModelSerializable
+    internal partial class UnknownDinosaur : IUtf8JsonSerializable, IModelJsonSerializable<Dinosaur>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModelSerializable)this).Serialize(writer, ModelSerializerOptions.AzureServiceDefault);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<Dinosaur>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
 
-        void IJsonModelSerializable.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
+        void IModelJsonSerializable<Dinosaur>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
             writer.WriteStartObject();
             writer.WritePropertyName("kind"u8);
             writer.WriteStringValue(Kind);
+            writer.WritePropertyName("size"u8);
+            writer.WriteNumberValue(Size);
+            if (_rawData is not null && options.Format == ModelSerializerFormat.Json)
+            {
+                foreach (var property in _rawData)
+                {
+                    writer.WritePropertyName(property.Key);
+#if NET6_0_OR_GREATER
+				writer.WriteRawValue(property.Value);
+#else
+                    JsonSerializer.Serialize(writer, JsonDocument.Parse(property.Value.ToString()).RootElement);
+#endif
+                }
+            }
             writer.WriteEndObject();
         }
 
-        object IModelSerializable.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            using var doc = JsonDocument.Parse(data);
-            return DeserializeUnknownTurtle(doc.RootElement, options);
-        }
+        internal static Dinosaur DeserializeUnknownDinosaur(JsonElement element, ModelSerializerOptions options = default) => DeserializeDinosaur(element, options);
 
-        internal static UnknownTurtle DeserializeUnknownTurtle(JsonElement element, ModelSerializerOptions options = default)
+        Dinosaur IModelJsonSerializable<Dinosaur>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
         {
-            options ??= ModelSerializerOptions.AzureServiceDefault;
-            if (element.ValueKind == JsonValueKind.Null)
-            {
-                return null;
-            }
-            string kind = "Unknown";
-            foreach (var property in element.EnumerateObject())
-            {
-                if (property.NameEquals("kind"u8))
-                {
-                    kind = property.Value.GetString();
-                    continue;
-                }
-            }
-            return new UnknownTurtle(kind);
-        }
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
 
-        object IJsonModelSerializable.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
-        {
             using var doc = JsonDocument.ParseValue(ref reader);
-            return DeserializeUnknownTurtle(doc.RootElement, options);
+            return DeserializeUnknownDinosaur(doc.RootElement, options);
         }
 
-        /// <summary> Deserializes the model from a raw response. </summary>
-        /// <param name="response"> The response to deserialize the model from. </param>
-        internal static new UnknownTurtle FromResponse(Response response)
+        BinaryData IModelSerializable<Dinosaur>.Serialize(ModelSerializerOptions options)
         {
-            using var document = JsonDocument.Parse(response.Content);
-            return DeserializeUnknownTurtle(document.RootElement);
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
         }
 
-        /// <summary> Convert into a Utf8JsonRequestContent. </summary>
-        internal override RequestContent ToRequestContent()
+        Dinosaur IModelSerializable<Dinosaur>.Deserialize(BinaryData data, ModelSerializerOptions options)
         {
-            var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue(this);
-            return content;
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using var doc = JsonDocument.Parse(data);
+            return DeserializeDinosaur(doc.RootElement, options);
         }
     }
 }

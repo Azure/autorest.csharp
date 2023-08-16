@@ -5,6 +5,9 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
+
 namespace Azure.ResourceManager.Sample.Models
 {
     /// <summary>
@@ -13,12 +16,20 @@ namespace Azure.ResourceManager.Sample.Models
     /// </summary>
     public partial class DiskEncryptionSettings
     {
-        /// <summary> Initializes a new instance of DiskEncryptionSettings. </summary>
+        private Dictionary<string, BinaryData> _rawData;
+
+        /// <summary>
+        /// Initializes a new instance of global::Azure.ResourceManager.Sample.Models.DiskEncryptionSettings
+        ///
+        /// </summary>
         public DiskEncryptionSettings()
         {
         }
 
-        /// <summary> Initializes a new instance of DiskEncryptionSettings. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::Azure.ResourceManager.Sample.Models.DiskEncryptionSettings
+        ///
+        /// </summary>
         /// <param name="diskEncryptionKey">
         /// Specifies the location of the disk encryption key, which is a Key Vault Secret.
         /// Serialized Name: DiskEncryptionSettings.diskEncryptionKey
@@ -31,11 +42,13 @@ namespace Azure.ResourceManager.Sample.Models
         /// Specifies whether disk encryption should be enabled on the virtual machine.
         /// Serialized Name: DiskEncryptionSettings.enabled
         /// </param>
-        internal DiskEncryptionSettings(KeyVaultSecretReference diskEncryptionKey, KeyVaultKeyReference keyEncryptionKey, bool? enabled)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal DiskEncryptionSettings(KeyVaultSecretReference diskEncryptionKey, KeyVaultKeyReference keyEncryptionKey, bool? enabled, Dictionary<string, BinaryData> rawData)
         {
             DiskEncryptionKey = diskEncryptionKey;
             KeyEncryptionKey = keyEncryptionKey;
             Enabled = enabled;
+            _rawData = rawData;
         }
 
         /// <summary>

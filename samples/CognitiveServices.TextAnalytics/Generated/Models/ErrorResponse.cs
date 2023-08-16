@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
 using Azure.Core;
 
 namespace CognitiveServices.TextAnalytics.Models
@@ -13,7 +14,12 @@ namespace CognitiveServices.TextAnalytics.Models
     /// <summary> The ErrorResponse. </summary>
     internal partial class ErrorResponse
     {
-        /// <summary> Initializes a new instance of ErrorResponse. </summary>
+        private Dictionary<string, BinaryData> _rawData;
+
+        /// <summary>
+        /// Initializes a new instance of global::CognitiveServices.TextAnalytics.Models.ErrorResponse
+        ///
+        /// </summary>
         /// <param name="error"> Document Error. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="error"/> is null. </exception>
         internal ErrorResponse(TextAnalyticsError error)
@@ -21,6 +27,18 @@ namespace CognitiveServices.TextAnalytics.Models
             Argument.AssertNotNull(error, nameof(error));
 
             Error = error;
+        }
+
+        /// <summary>
+        /// Initializes a new instance of global::CognitiveServices.TextAnalytics.Models.ErrorResponse
+        ///
+        /// </summary>
+        /// <param name="error"> Document Error. </param>
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal ErrorResponse(TextAnalyticsError error, Dictionary<string, BinaryData> rawData)
+        {
+            Error = error;
+            _rawData = rawData;
         }
 
         /// <summary> Document Error. </summary>

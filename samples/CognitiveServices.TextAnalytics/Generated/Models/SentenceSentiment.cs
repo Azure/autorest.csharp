@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
 using Azure.Core;
 
 namespace CognitiveServices.TextAnalytics.Models
@@ -13,7 +14,12 @@ namespace CognitiveServices.TextAnalytics.Models
     /// <summary> The SentenceSentiment. </summary>
     public partial class SentenceSentiment
     {
-        /// <summary> Initializes a new instance of SentenceSentiment. </summary>
+        private Dictionary<string, BinaryData> _rawData;
+
+        /// <summary>
+        /// Initializes a new instance of global::CognitiveServices.TextAnalytics.Models.SentenceSentiment
+        ///
+        /// </summary>
         /// <param name="text"> The sentence text. </param>
         /// <param name="sentiment"> The predicted Sentiment for the sentence. </param>
         /// <param name="confidenceScores"> The sentiment confidence score between 0 and 1 for the sentence for all classes. </param>
@@ -30,6 +36,26 @@ namespace CognitiveServices.TextAnalytics.Models
             ConfidenceScores = confidenceScores;
             Offset = offset;
             Length = length;
+        }
+
+        /// <summary>
+        /// Initializes a new instance of global::CognitiveServices.TextAnalytics.Models.SentenceSentiment
+        ///
+        /// </summary>
+        /// <param name="text"> The sentence text. </param>
+        /// <param name="sentiment"> The predicted Sentiment for the sentence. </param>
+        /// <param name="confidenceScores"> The sentiment confidence score between 0 and 1 for the sentence for all classes. </param>
+        /// <param name="offset"> The sentence offset from the start of the document. </param>
+        /// <param name="length"> The length of the sentence by Unicode standard. </param>
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal SentenceSentiment(string text, SentenceSentimentValue sentiment, SentimentConfidenceScorePerLabel confidenceScores, int offset, int length, Dictionary<string, BinaryData> rawData)
+        {
+            Text = text;
+            Sentiment = sentiment;
+            ConfidenceScores = confidenceScores;
+            Offset = offset;
+            Length = length;
+            _rawData = rawData;
         }
 
         /// <summary> The sentence text. </summary>

@@ -5,44 +5,64 @@
 
 #nullable disable
 
+using System;
 using System.Text.Json;
-using Azure;
 using Azure.Core;
+using Azure.Core.Serialization;
 
 namespace _Type.Model.Inheritance.EnumDiscriminator.Models
 {
-    internal partial class UnknownDog
+    internal partial class UnknownDog : IUtf8JsonSerializable, IModelJsonSerializable<Dog>
     {
-        internal static UnknownDog DeserializeUnknownDog(JsonElement element)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<Dog>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+
+        void IModelJsonSerializable<Dog>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
-            if (element.ValueKind == JsonValueKind.Null)
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            writer.WriteStartObject();
+            writer.WritePropertyName("kind"u8);
+            writer.WriteStringValue(Kind.ToString());
+            writer.WritePropertyName("weight"u8);
+            writer.WriteNumberValue(Weight);
+            if (_rawData is not null && options.Format == ModelSerializerFormat.Json)
             {
-                return null;
-            }
-            DogKind kind = "Unknown";
-            int weight = default;
-            foreach (var property in element.EnumerateObject())
-            {
-                if (property.NameEquals("kind"u8))
+                foreach (var property in _rawData)
                 {
-                    kind = new DogKind(property.Value.GetString());
-                    continue;
-                }
-                if (property.NameEquals("weight"u8))
-                {
-                    weight = property.Value.GetInt32();
-                    continue;
+                    writer.WritePropertyName(property.Key);
+#if NET6_0_OR_GREATER
+				writer.WriteRawValue(property.Value);
+#else
+                    JsonSerializer.Serialize(writer, JsonDocument.Parse(property.Value.ToString()).RootElement);
+#endif
                 }
             }
-            return new UnknownDog(kind, weight);
+            writer.WriteEndObject();
         }
 
-        /// <summary> Deserializes the model from a raw response. </summary>
-        /// <param name="response"> The response to deserialize the model from. </param>
-        internal static new UnknownDog FromResponse(Response response)
+        internal static Dog DeserializeUnknownDog(JsonElement element, ModelSerializerOptions options = default) => DeserializeDog(element, options);
+
+        Dog IModelJsonSerializable<Dog>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
         {
-            using var document = JsonDocument.Parse(response.Content);
-            return DeserializeUnknownDog(document.RootElement);
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using var doc = JsonDocument.ParseValue(ref reader);
+            return DeserializeUnknownDog(doc.RootElement, options);
+        }
+
+        BinaryData IModelSerializable<Dog>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        Dog IModelSerializable<Dog>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using var doc = JsonDocument.Parse(data);
+            return DeserializeDog(doc.RootElement, options);
         }
     }
 }

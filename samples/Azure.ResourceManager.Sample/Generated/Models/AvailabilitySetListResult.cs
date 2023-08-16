@@ -19,7 +19,12 @@ namespace Azure.ResourceManager.Sample.Models
     /// </summary>
     internal partial class AvailabilitySetListResult
     {
-        /// <summary> Initializes a new instance of AvailabilitySetListResult. </summary>
+        private Dictionary<string, BinaryData> _rawData;
+
+        /// <summary>
+        /// Initializes a new instance of global::Azure.ResourceManager.Sample.Models.AvailabilitySetListResult
+        ///
+        /// </summary>
         /// <param name="value">
         /// The list of availability sets
         /// Serialized Name: AvailabilitySetListResult.value
@@ -32,7 +37,10 @@ namespace Azure.ResourceManager.Sample.Models
             Value = value.ToList();
         }
 
-        /// <summary> Initializes a new instance of AvailabilitySetListResult. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::Azure.ResourceManager.Sample.Models.AvailabilitySetListResult
+        ///
+        /// </summary>
         /// <param name="value">
         /// The list of availability sets
         /// Serialized Name: AvailabilitySetListResult.value
@@ -41,10 +49,12 @@ namespace Azure.ResourceManager.Sample.Models
         /// The URI to fetch the next page of AvailabilitySets. Call ListNext() with this URI to fetch the next page of AvailabilitySets.
         /// Serialized Name: AvailabilitySetListResult.nextLink
         /// </param>
-        internal AvailabilitySetListResult(IReadOnlyList<AvailabilitySetData> value, string nextLink)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal AvailabilitySetListResult(IReadOnlyList<AvailabilitySetData> value, string nextLink, Dictionary<string, BinaryData> rawData)
         {
             Value = value;
             NextLink = nextLink;
+            _rawData = rawData;
         }
 
         /// <summary>

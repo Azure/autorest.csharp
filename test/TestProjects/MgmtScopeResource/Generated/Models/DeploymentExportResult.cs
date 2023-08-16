@@ -6,22 +6,33 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
 
 namespace MgmtScopeResource.Models
 {
     /// <summary> The deployment export result. </summary>
     public partial class DeploymentExportResult
     {
-        /// <summary> Initializes a new instance of DeploymentExportResult. </summary>
+        private Dictionary<string, BinaryData> _rawData;
+
+        /// <summary>
+        /// Initializes a new instance of global::MgmtScopeResource.Models.DeploymentExportResult
+        ///
+        /// </summary>
         internal DeploymentExportResult()
         {
         }
 
-        /// <summary> Initializes a new instance of DeploymentExportResult. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::MgmtScopeResource.Models.DeploymentExportResult
+        ///
+        /// </summary>
         /// <param name="template"> The template content. </param>
-        internal DeploymentExportResult(BinaryData template)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal DeploymentExportResult(BinaryData template, Dictionary<string, BinaryData> rawData)
         {
             Template = template;
+            _rawData = rawData;
         }
 
         /// <summary>

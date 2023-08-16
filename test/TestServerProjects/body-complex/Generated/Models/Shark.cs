@@ -17,7 +17,10 @@ namespace body_complex.Models
     /// </summary>
     public partial class Shark : Fish
     {
-        /// <summary> Initializes a new instance of Shark. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::body_complex.Models.Shark
+        ///
+        /// </summary>
         /// <param name="length"></param>
         /// <param name="birthday"></param>
         public Shark(float length, DateTimeOffset birthday) : base(length)
@@ -26,7 +29,10 @@ namespace body_complex.Models
             Fishtype = "shark";
         }
 
-        /// <summary> Initializes a new instance of Shark. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::body_complex.Models.Shark
+        ///
+        /// </summary>
         /// <param name="fishtype"></param>
         /// <param name="species"></param>
         /// <param name="length"></param>
@@ -36,7 +42,8 @@ namespace body_complex.Models
         /// </param>
         /// <param name="age"></param>
         /// <param name="birthday"></param>
-        internal Shark(string fishtype, string species, float length, IList<Fish> siblings, int? age, DateTimeOffset birthday) : base(fishtype, species, length, siblings)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal Shark(string fishtype, string species, float length, IList<Fish> siblings, int? age, DateTimeOffset birthday, Dictionary<string, BinaryData> rawData) : base(fishtype, species, length, siblings, rawData)
         {
             Age = age;
             Birthday = birthday;

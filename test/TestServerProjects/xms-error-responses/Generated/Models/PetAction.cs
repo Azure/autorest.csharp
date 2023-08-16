@@ -5,21 +5,34 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
+
 namespace xms_error_responses.Models
 {
     /// <summary> The PetAction. </summary>
     public partial class PetAction
     {
-        /// <summary> Initializes a new instance of PetAction. </summary>
+        protected internal Dictionary<string, BinaryData> _rawData;
+
+        /// <summary>
+        /// Initializes a new instance of global::xms_error_responses.Models.PetAction
+        ///
+        /// </summary>
         internal PetAction()
         {
         }
 
-        /// <summary> Initializes a new instance of PetAction. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::xms_error_responses.Models.PetAction
+        ///
+        /// </summary>
         /// <param name="actionResponse"> action feedback. </param>
-        internal PetAction(string actionResponse)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal PetAction(string actionResponse, Dictionary<string, BinaryData> rawData)
         {
             ActionResponse = actionResponse;
+            _rawData = rawData;
         }
 
         /// <summary> action feedback. </summary>

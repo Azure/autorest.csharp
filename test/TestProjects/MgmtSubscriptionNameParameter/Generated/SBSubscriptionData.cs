@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
 using Azure.Core;
 using Azure.ResourceManager.Models;
 using MgmtSubscriptionNameParameter.Models;
@@ -18,12 +19,20 @@ namespace MgmtSubscriptionNameParameter
     /// </summary>
     public partial class SBSubscriptionData : ResourceData
     {
-        /// <summary> Initializes a new instance of SBSubscriptionData. </summary>
+        private Dictionary<string, BinaryData> _rawData;
+
+        /// <summary>
+        /// Initializes a new instance of global::MgmtSubscriptionNameParameter.SBSubscriptionData
+        ///
+        /// </summary>
         public SBSubscriptionData()
         {
         }
 
-        /// <summary> Initializes a new instance of SBSubscriptionData. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::MgmtSubscriptionNameParameter.SBSubscriptionData
+        ///
+        /// </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
         /// <param name="resourceType"> The resourceType. </param>
@@ -45,7 +54,8 @@ namespace MgmtSubscriptionNameParameter
         /// <param name="forwardDeadLetteredMessagesTo"> Queue/Topic name to forward the Dead Letter message. </param>
         /// <param name="isClientAffine"> Value that indicates whether the subscription has an affinity to the client id. </param>
         /// <param name="clientAffineProperties"> Properties specific to client affine subscriptions. </param>
-        internal SBSubscriptionData(ResourceIdentifier id, string name, ResourceType resourceType, SystemData systemData, long? messageCount, DateTimeOffset? createdOn, DateTimeOffset? accessedOn, DateTimeOffset? updatedOn, TimeSpan? lockDuration, bool? requiresSession, TimeSpan? defaultMessageTimeToLive, bool? deadLetteringOnFilterEvaluationExceptions, bool? deadLetteringOnMessageExpiration, TimeSpan? duplicateDetectionHistoryTimeWindow, int? maxDeliveryCount, bool? enableBatchedOperations, TimeSpan? autoDeleteOnIdle, string forwardTo, string forwardDeadLetteredMessagesTo, bool? isClientAffine, SBClientAffineProperties clientAffineProperties) : base(id, name, resourceType, systemData)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal SBSubscriptionData(ResourceIdentifier id, string name, ResourceType resourceType, SystemData systemData, long? messageCount, DateTimeOffset? createdOn, DateTimeOffset? accessedOn, DateTimeOffset? updatedOn, TimeSpan? lockDuration, bool? requiresSession, TimeSpan? defaultMessageTimeToLive, bool? deadLetteringOnFilterEvaluationExceptions, bool? deadLetteringOnMessageExpiration, TimeSpan? duplicateDetectionHistoryTimeWindow, int? maxDeliveryCount, bool? enableBatchedOperations, TimeSpan? autoDeleteOnIdle, string forwardTo, string forwardDeadLetteredMessagesTo, bool? isClientAffine, SBClientAffineProperties clientAffineProperties, Dictionary<string, BinaryData> rawData) : base(id, name, resourceType, systemData)
         {
             MessageCount = messageCount;
             CreatedOn = createdOn;
@@ -64,6 +74,7 @@ namespace MgmtSubscriptionNameParameter
             ForwardDeadLetteredMessagesTo = forwardDeadLetteredMessagesTo;
             IsClientAffine = isClientAffine;
             ClientAffineProperties = clientAffineProperties;
+            _rawData = rawData;
         }
 
         /// <summary> Number of messages. </summary>

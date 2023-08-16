@@ -5,6 +5,9 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
+
 namespace MgmtRenameRules.Models
 {
     /// <summary>
@@ -13,12 +16,20 @@ namespace MgmtRenameRules.Models
     /// </summary>
     public partial class VirtualMachineScaleSetUpdatePublicIPAddressConfiguration
     {
-        /// <summary> Initializes a new instance of VirtualMachineScaleSetUpdatePublicIPAddressConfiguration. </summary>
+        private Dictionary<string, BinaryData> _rawData;
+
+        /// <summary>
+        /// Initializes a new instance of global::MgmtRenameRules.Models.VirtualMachineScaleSetUpdatePublicIPAddressConfiguration
+        ///
+        /// </summary>
         public VirtualMachineScaleSetUpdatePublicIPAddressConfiguration()
         {
         }
 
-        /// <summary> Initializes a new instance of VirtualMachineScaleSetUpdatePublicIPAddressConfiguration. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::MgmtRenameRules.Models.VirtualMachineScaleSetUpdatePublicIPAddressConfiguration
+        ///
+        /// </summary>
         /// <param name="name">
         /// The publicIP address configuration name.
         /// Serialized Name: VirtualMachineScaleSetUpdatePublicIPAddressConfiguration.name
@@ -31,11 +42,13 @@ namespace MgmtRenameRules.Models
         /// The dns settings to be applied on the publicIP addresses .
         /// Serialized Name: VirtualMachineScaleSetUpdatePublicIPAddressConfiguration.properties.dnsSettings
         /// </param>
-        internal VirtualMachineScaleSetUpdatePublicIPAddressConfiguration(string name, int? idleTimeoutInMinutes, VirtualMachineScaleSetPublicIPAddressConfigurationDnsSettings dnsSettings)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal VirtualMachineScaleSetUpdatePublicIPAddressConfiguration(string name, int? idleTimeoutInMinutes, VirtualMachineScaleSetPublicIPAddressConfigurationDnsSettings dnsSettings, Dictionary<string, BinaryData> rawData)
         {
             Name = name;
             IdleTimeoutInMinutes = idleTimeoutInMinutes;
             DnsSettings = dnsSettings;
+            _rawData = rawData;
         }
 
         /// <summary>

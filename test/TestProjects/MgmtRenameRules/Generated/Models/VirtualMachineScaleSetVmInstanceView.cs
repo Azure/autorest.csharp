@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Collections.Generic;
 using Azure.Core;
 
@@ -16,14 +17,22 @@ namespace MgmtRenameRules.Models
     /// </summary>
     public partial class VirtualMachineScaleSetVmInstanceView
     {
-        /// <summary> Initializes a new instance of VirtualMachineScaleSetVmInstanceView. </summary>
+        private Dictionary<string, BinaryData> _rawData;
+
+        /// <summary>
+        /// Initializes a new instance of global::MgmtRenameRules.Models.VirtualMachineScaleSetVmInstanceView
+        ///
+        /// </summary>
         internal VirtualMachineScaleSetVmInstanceView()
         {
             Disks = new ChangeTrackingList<DiskInstanceView>();
             Statuses = new ChangeTrackingList<InstanceViewStatus>();
         }
 
-        /// <summary> Initializes a new instance of VirtualMachineScaleSetVmInstanceView. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::MgmtRenameRules.Models.VirtualMachineScaleSetVmInstanceView
+        ///
+        /// </summary>
         /// <param name="platformUpdateDomain">
         /// The Update Domain count.
         /// Serialized Name: VirtualMachineScaleSetVMInstanceView.platformUpdateDomain
@@ -68,7 +77,8 @@ namespace MgmtRenameRules.Models
         /// The placement group in which the VM is running. If the VM is deallocated it will not have a placementGroupId.
         /// Serialized Name: VirtualMachineScaleSetVMInstanceView.placementGroupId
         /// </param>
-        internal VirtualMachineScaleSetVmInstanceView(int? platformUpdateDomain, int? platformFaultDomain, string rdpThumbPrint, VirtualMachineAgentInstanceView vmAgent, MaintenanceRedeployStatus maintenanceRedeployStatus, IReadOnlyList<DiskInstanceView> disks, VirtualMachineHealthStatus vmHealth, BootDiagnosticsInstanceView bootDiagnostics, IReadOnlyList<InstanceViewStatus> statuses, string assignedHost, ResourceIdentifier placementGroupId)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal VirtualMachineScaleSetVmInstanceView(int? platformUpdateDomain, int? platformFaultDomain, string rdpThumbPrint, VirtualMachineAgentInstanceView vmAgent, MaintenanceRedeployStatus maintenanceRedeployStatus, IReadOnlyList<DiskInstanceView> disks, VirtualMachineHealthStatus vmHealth, BootDiagnosticsInstanceView bootDiagnostics, IReadOnlyList<InstanceViewStatus> statuses, string assignedHost, ResourceIdentifier placementGroupId, Dictionary<string, BinaryData> rawData)
         {
             PlatformUpdateDomain = platformUpdateDomain;
             PlatformFaultDomain = platformFaultDomain;
@@ -81,6 +91,7 @@ namespace MgmtRenameRules.Models
             Statuses = statuses;
             AssignedHost = assignedHost;
             PlacementGroupId = placementGroupId;
+            _rawData = rawData;
         }
 
         /// <summary>

@@ -19,7 +19,12 @@ namespace Azure.ResourceManager.Sample.Models
     /// </summary>
     internal partial class VirtualMachineListResult
     {
-        /// <summary> Initializes a new instance of VirtualMachineListResult. </summary>
+        private Dictionary<string, BinaryData> _rawData;
+
+        /// <summary>
+        /// Initializes a new instance of global::Azure.ResourceManager.Sample.Models.VirtualMachineListResult
+        ///
+        /// </summary>
         /// <param name="value">
         /// The list of virtual machines.
         /// Serialized Name: VirtualMachineListResult.value
@@ -32,7 +37,10 @@ namespace Azure.ResourceManager.Sample.Models
             Value = value.ToList();
         }
 
-        /// <summary> Initializes a new instance of VirtualMachineListResult. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::Azure.ResourceManager.Sample.Models.VirtualMachineListResult
+        ///
+        /// </summary>
         /// <param name="value">
         /// The list of virtual machines.
         /// Serialized Name: VirtualMachineListResult.value
@@ -41,10 +49,12 @@ namespace Azure.ResourceManager.Sample.Models
         /// The URI to fetch the next page of VMs. Call ListNext() with this URI to fetch the next page of Virtual Machines.
         /// Serialized Name: VirtualMachineListResult.nextLink
         /// </param>
-        internal VirtualMachineListResult(IReadOnlyList<VirtualMachineData> value, string nextLink)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal VirtualMachineListResult(IReadOnlyList<VirtualMachineData> value, string nextLink, Dictionary<string, BinaryData> rawData)
         {
             Value = value;
             NextLink = nextLink;
+            _rawData = rawData;
         }
 
         /// <summary>

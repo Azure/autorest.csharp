@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
 using Azure.Core;
 
 namespace MgmtDiscriminator.Models
@@ -13,7 +14,12 @@ namespace MgmtDiscriminator.Models
     /// <summary> Defines how to identify a parameter for a specific purpose e.g. expires. </summary>
     public partial class UrlSigningParamIdentifier
     {
-        /// <summary> Initializes a new instance of UrlSigningParamIdentifier. </summary>
+        private Dictionary<string, BinaryData> _rawData;
+
+        /// <summary>
+        /// Initializes a new instance of global::MgmtDiscriminator.Models.UrlSigningParamIdentifier
+        ///
+        /// </summary>
         /// <param name="paramIndicator"> Indicates the purpose of the parameter. </param>
         /// <param name="paramName"> Parameter name. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="paramName"/> is null. </exception>
@@ -23,6 +29,20 @@ namespace MgmtDiscriminator.Models
 
             ParamIndicator = paramIndicator;
             ParamName = paramName;
+        }
+
+        /// <summary>
+        /// Initializes a new instance of global::MgmtDiscriminator.Models.UrlSigningParamIdentifier
+        ///
+        /// </summary>
+        /// <param name="paramIndicator"> Indicates the purpose of the parameter. </param>
+        /// <param name="paramName"> Parameter name. </param>
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal UrlSigningParamIdentifier(ParamIndicator paramIndicator, string paramName, Dictionary<string, BinaryData> rawData)
+        {
+            ParamIndicator = paramIndicator;
+            ParamName = paramName;
+            _rawData = rawData;
         }
 
         /// <summary> Indicates the purpose of the parameter. </summary>

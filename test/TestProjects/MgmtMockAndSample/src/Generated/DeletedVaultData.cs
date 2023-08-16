@@ -5,6 +5,8 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
 using Azure.Core;
 using Azure.ResourceManager.Models;
 using MgmtMockAndSample.Models;
@@ -17,20 +19,30 @@ namespace MgmtMockAndSample
     /// </summary>
     public partial class DeletedVaultData : ResourceData
     {
-        /// <summary> Initializes a new instance of DeletedVaultData. </summary>
+        private Dictionary<string, BinaryData> _rawData;
+
+        /// <summary>
+        /// Initializes a new instance of global::MgmtMockAndSample.DeletedVaultData
+        ///
+        /// </summary>
         internal DeletedVaultData()
         {
         }
 
-        /// <summary> Initializes a new instance of DeletedVaultData. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::MgmtMockAndSample.DeletedVaultData
+        ///
+        /// </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
         /// <param name="resourceType"> The resourceType. </param>
         /// <param name="systemData"> The systemData. </param>
         /// <param name="properties"> Properties of the vault. </param>
-        internal DeletedVaultData(ResourceIdentifier id, string name, ResourceType resourceType, SystemData systemData, DeletedVaultProperties properties) : base(id, name, resourceType, systemData)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal DeletedVaultData(ResourceIdentifier id, string name, ResourceType resourceType, SystemData systemData, DeletedVaultProperties properties, Dictionary<string, BinaryData> rawData) : base(id, name, resourceType, systemData)
         {
             Properties = properties;
+            _rawData = rawData;
         }
 
         /// <summary> Properties of the vault. </summary>

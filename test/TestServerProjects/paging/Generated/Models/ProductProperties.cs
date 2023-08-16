@@ -5,23 +5,36 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
+
 namespace paging.Models
 {
     /// <summary> The ProductProperties. </summary>
     public partial class ProductProperties
     {
-        /// <summary> Initializes a new instance of ProductProperties. </summary>
+        private Dictionary<string, BinaryData> _rawData;
+
+        /// <summary>
+        /// Initializes a new instance of global::paging.Models.ProductProperties
+        ///
+        /// </summary>
         internal ProductProperties()
         {
         }
 
-        /// <summary> Initializes a new instance of ProductProperties. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::paging.Models.ProductProperties
+        ///
+        /// </summary>
         /// <param name="id"></param>
         /// <param name="name"></param>
-        internal ProductProperties(int? id, string name)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal ProductProperties(int? id, string name, Dictionary<string, BinaryData> rawData)
         {
             Id = id;
             Name = name;
+            _rawData = rawData;
         }
 
         /// <summary> Gets the id. </summary>

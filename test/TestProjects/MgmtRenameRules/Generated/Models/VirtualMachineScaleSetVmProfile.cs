@@ -5,6 +5,9 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
+
 namespace MgmtRenameRules.Models
 {
     /// <summary>
@@ -13,12 +16,20 @@ namespace MgmtRenameRules.Models
     /// </summary>
     public partial class VirtualMachineScaleSetVmProfile
     {
-        /// <summary> Initializes a new instance of VirtualMachineScaleSetVmProfile. </summary>
+        private Dictionary<string, BinaryData> _rawData;
+
+        /// <summary>
+        /// Initializes a new instance of global::MgmtRenameRules.Models.VirtualMachineScaleSetVmProfile
+        ///
+        /// </summary>
         public VirtualMachineScaleSetVmProfile()
         {
         }
 
-        /// <summary> Initializes a new instance of VirtualMachineScaleSetVmProfile. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::MgmtRenameRules.Models.VirtualMachineScaleSetVmProfile
+        ///
+        /// </summary>
         /// <param name="osProfile">
         /// Specifies the operating system settings for the virtual machines in the scale set.
         /// Serialized Name: VirtualMachineScaleSetVMProfile.osProfile
@@ -63,7 +74,8 @@ namespace MgmtRenameRules.Models
         /// Specifies Scheduled Event related configurations.
         /// Serialized Name: VirtualMachineScaleSetVMProfile.scheduledEventsProfile
         /// </param>
-        internal VirtualMachineScaleSetVmProfile(VirtualMachineScaleSetOSProfile osProfile, VirtualMachineScaleSetStorageProfile storageProfile, VirtualMachineScaleSetNetworkProfile networkProfile, SecurityProfile securityProfile, DiagnosticsProfile diagnosticsProfile, VirtualMachineScaleSetExtensionProfile extensionProfile, string licenseType, VirtualMachinePriorityType? priority, VirtualMachineEvictionPolicyType? evictionPolicy, BillingProfile billingProfile, ScheduledEventsProfile scheduledEventsProfile)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal VirtualMachineScaleSetVmProfile(VirtualMachineScaleSetOSProfile osProfile, VirtualMachineScaleSetStorageProfile storageProfile, VirtualMachineScaleSetNetworkProfile networkProfile, SecurityProfile securityProfile, DiagnosticsProfile diagnosticsProfile, VirtualMachineScaleSetExtensionProfile extensionProfile, string licenseType, VirtualMachinePriorityType? priority, VirtualMachineEvictionPolicyType? evictionPolicy, BillingProfile billingProfile, ScheduledEventsProfile scheduledEventsProfile, Dictionary<string, BinaryData> rawData)
         {
             OSProfile = osProfile;
             StorageProfile = storageProfile;
@@ -76,6 +88,7 @@ namespace MgmtRenameRules.Models
             EvictionPolicy = evictionPolicy;
             BillingProfile = billingProfile;
             ScheduledEventsProfile = scheduledEventsProfile;
+            _rawData = rawData;
         }
 
         /// <summary>

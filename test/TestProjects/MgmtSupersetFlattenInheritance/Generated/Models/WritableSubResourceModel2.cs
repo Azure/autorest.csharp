@@ -5,25 +5,38 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
+
 namespace MgmtSupersetFlattenInheritance.Models
 {
     /// <summary> WritableSubResource with flatten properties. </summary>
     public partial class WritableSubResourceModel2
     {
-        /// <summary> Initializes a new instance of WritableSubResourceModel2. </summary>
+        private Dictionary<string, BinaryData> _rawData;
+
+        /// <summary>
+        /// Initializes a new instance of global::MgmtSupersetFlattenInheritance.Models.WritableSubResourceModel2
+        ///
+        /// </summary>
         public WritableSubResourceModel2()
         {
         }
 
-        /// <summary> Initializes a new instance of WritableSubResourceModel2. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::MgmtSupersetFlattenInheritance.Models.WritableSubResourceModel2
+        ///
+        /// </summary>
         /// <param name="id"></param>
         /// <param name="idPropertiesId"></param>
         /// <param name="foo"></param>
-        internal WritableSubResourceModel2(string id, string idPropertiesId, string foo)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal WritableSubResourceModel2(string id, string idPropertiesId, string foo, Dictionary<string, BinaryData> rawData)
         {
             Id = id;
             IdPropertiesId = idPropertiesId;
             Foo = foo;
+            _rawData = rawData;
         }
 
         /// <summary> Gets or sets the id. </summary>

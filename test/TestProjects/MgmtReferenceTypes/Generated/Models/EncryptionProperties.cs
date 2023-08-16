@@ -5,6 +5,8 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
 using Azure.Core;
 
 namespace Azure.ResourceManager.Fake.Models
@@ -13,20 +15,29 @@ namespace Azure.ResourceManager.Fake.Models
     [PropertyReferenceType]
     public partial class EncryptionProperties
     {
-        /// <summary> Initializes a new instance of EncryptionProperties. </summary>
+        private Dictionary<string, BinaryData> _rawData;
+
+        /// <summary>
+        /// Initializes a new instance of global::Azure.ResourceManager.Fake.Models.EncryptionProperties
+        ///
+        /// </summary>
         [InitializationConstructor]
         public EncryptionProperties()
         {
         }
 
-        /// <summary> Initializes a new instance of EncryptionProperties. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::Azure.ResourceManager.Fake.Models.EncryptionProperties
+        ///
+        /// </summary>
         /// <param name="status"> Indicates whether or not the encryption is enabled for container registry. </param>
         /// <param name="keyVaultProperties"> Key vault properties. </param>
-        [SerializationConstructor]
-        internal EncryptionProperties(EncryptionStatus? status, KeyVaultProperties keyVaultProperties)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal EncryptionProperties(EncryptionStatus? status, KeyVaultProperties keyVaultProperties, Dictionary<string, BinaryData> rawData)
         {
             Status = status;
             KeyVaultProperties = keyVaultProperties;
+            _rawData = rawData;
         }
 
         /// <summary> Indicates whether or not the encryption is enabled for container registry. </summary>

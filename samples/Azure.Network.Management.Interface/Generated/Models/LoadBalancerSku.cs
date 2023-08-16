@@ -5,21 +5,34 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
+
 namespace Azure.Network.Management.Interface.Models
 {
     /// <summary> SKU of a load balancer. </summary>
     public partial class LoadBalancerSku
     {
-        /// <summary> Initializes a new instance of LoadBalancerSku. </summary>
+        private Dictionary<string, BinaryData> _rawData;
+
+        /// <summary>
+        /// Initializes a new instance of global::Azure.Network.Management.Interface.Models.LoadBalancerSku
+        ///
+        /// </summary>
         public LoadBalancerSku()
         {
         }
 
-        /// <summary> Initializes a new instance of LoadBalancerSku. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::Azure.Network.Management.Interface.Models.LoadBalancerSku
+        ///
+        /// </summary>
         /// <param name="name"> Name of a load balancer SKU. </param>
-        internal LoadBalancerSku(LoadBalancerSkuName? name)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal LoadBalancerSku(LoadBalancerSkuName? name, Dictionary<string, BinaryData> rawData)
         {
             Name = name;
+            _rawData = rawData;
         }
 
         /// <summary> Name of a load balancer SKU. </summary>

@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
 using Azure.Core;
 
 namespace CognitiveSearch.Models
@@ -13,7 +14,10 @@ namespace CognitiveSearch.Models
     /// <summary> A character filter that replaces characters in the input string. It uses a regular expression to identify character sequences to preserve and a replacement pattern to identify characters to replace. For example, given the input text "aa bb aa bb", pattern "(aa)\s+(bb)", and replacement "$1#$2", the result would be "aa#bb aa#bb". This character filter is implemented using Apache Lucene. </summary>
     public partial class PatternReplaceCharFilter : CharFilter
     {
-        /// <summary> Initializes a new instance of PatternReplaceCharFilter. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::CognitiveSearch.Models.PatternReplaceCharFilter
+        ///
+        /// </summary>
         /// <param name="name"> The name of the char filter. It must only contain letters, digits, spaces, dashes or underscores, can only start and end with alphanumeric characters, and is limited to 128 characters. </param>
         /// <param name="pattern"> A regular expression pattern. </param>
         /// <param name="replacement"> The replacement text. </param>
@@ -29,12 +33,16 @@ namespace CognitiveSearch.Models
             OdataType = "#Microsoft.Azure.Search.PatternReplaceCharFilter";
         }
 
-        /// <summary> Initializes a new instance of PatternReplaceCharFilter. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::CognitiveSearch.Models.PatternReplaceCharFilter
+        ///
+        /// </summary>
         /// <param name="odataType"> Identifies the concrete type of the char filter. </param>
         /// <param name="name"> The name of the char filter. It must only contain letters, digits, spaces, dashes or underscores, can only start and end with alphanumeric characters, and is limited to 128 characters. </param>
         /// <param name="pattern"> A regular expression pattern. </param>
         /// <param name="replacement"> The replacement text. </param>
-        internal PatternReplaceCharFilter(string odataType, string name, string pattern, string replacement) : base(odataType, name)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal PatternReplaceCharFilter(string odataType, string name, string pattern, string replacement, Dictionary<string, BinaryData> rawData) : base(odataType, name, rawData)
         {
             Pattern = pattern;
             Replacement = replacement;

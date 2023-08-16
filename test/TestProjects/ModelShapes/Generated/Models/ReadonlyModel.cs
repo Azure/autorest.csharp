@@ -5,21 +5,34 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
+
 namespace ModelShapes.Models
 {
     /// <summary> The ReadonlyModel. </summary>
     public partial class ReadonlyModel
     {
-        /// <summary> Initializes a new instance of ReadonlyModel. </summary>
+        private Dictionary<string, BinaryData> _rawData;
+
+        /// <summary>
+        /// Initializes a new instance of global::ModelShapes.Models.ReadonlyModel
+        ///
+        /// </summary>
         internal ReadonlyModel()
         {
         }
 
-        /// <summary> Initializes a new instance of ReadonlyModel. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::ModelShapes.Models.ReadonlyModel
+        ///
+        /// </summary>
         /// <param name="name"></param>
-        internal ReadonlyModel(string name)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal ReadonlyModel(string name, Dictionary<string, BinaryData> rawData)
         {
             Name = name;
+            _rawData = rawData;
         }
 
         /// <summary> Gets the name. </summary>

@@ -15,6 +15,8 @@ namespace Azure.NewProject.TypeSpec.Models
     /// <summary> this is a roundtrip model. </summary>
     public partial class RoundTripModel
     {
+        private Dictionary<string, BinaryData> _rawData;
+
         /// <summary> Initializes a new instance of RoundTripModel. </summary>
         /// <param name="requiredString"> Required string, illustrating a reference type property. </param>
         /// <param name="requiredInt"> Required int, illustrating a value type property. </param>
@@ -70,7 +72,8 @@ namespace Azure.NewProject.TypeSpec.Models
         /// <param name="optionalRecordUnknown"> optional record of unknown. </param>
         /// <param name="readOnlyRequiredRecordUnknown"> required readonly record of unknown. </param>
         /// <param name="readOnlyOptionalRecordUnknown"> optional readonly record of unknown. </param>
-        internal RoundTripModel(string requiredString, int requiredInt, IList<StringFixedEnum> requiredCollection, IDictionary<string, StringExtensibleEnum> requiredDictionary, Thing requiredModel, IntExtensibleEnum? intExtensibleEnum, IList<IntExtensibleEnum> intExtensibleEnumCollection, FloatExtensibleEnum? floatExtensibleEnum, IList<FloatExtensibleEnum> floatExtensibleEnumCollection, FloatFixedEnum? floatFixedEnum, IList<FloatFixedEnum> floatFixedEnumCollection, IntFixedEnum? intFixedEnum, IList<IntFixedEnum> intFixedEnumCollection, StringFixedEnum? stringFixedEnum, BinaryData requiredUnknown, BinaryData optionalUnknown, IDictionary<string, BinaryData> requiredRecordUnknown, IDictionary<string, BinaryData> optionalRecordUnknown, IReadOnlyDictionary<string, BinaryData> readOnlyRequiredRecordUnknown, IReadOnlyDictionary<string, BinaryData> readOnlyOptionalRecordUnknown)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal RoundTripModel(string requiredString, int requiredInt, IList<StringFixedEnum> requiredCollection, IDictionary<string, StringExtensibleEnum> requiredDictionary, Thing requiredModel, IntExtensibleEnum? intExtensibleEnum, IList<IntExtensibleEnum> intExtensibleEnumCollection, FloatExtensibleEnum? floatExtensibleEnum, IList<FloatExtensibleEnum> floatExtensibleEnumCollection, FloatFixedEnum? floatFixedEnum, IList<FloatFixedEnum> floatFixedEnumCollection, IntFixedEnum? intFixedEnum, IList<IntFixedEnum> intFixedEnumCollection, StringFixedEnum? stringFixedEnum, BinaryData requiredUnknown, BinaryData optionalUnknown, IDictionary<string, BinaryData> requiredRecordUnknown, IDictionary<string, BinaryData> optionalRecordUnknown, IReadOnlyDictionary<string, BinaryData> readOnlyRequiredRecordUnknown, IReadOnlyDictionary<string, BinaryData> readOnlyOptionalRecordUnknown, Dictionary<string, BinaryData> rawData)
         {
             RequiredString = requiredString;
             RequiredInt = requiredInt;
@@ -92,6 +95,7 @@ namespace Azure.NewProject.TypeSpec.Models
             OptionalRecordUnknown = optionalRecordUnknown;
             ReadOnlyRequiredRecordUnknown = readOnlyRequiredRecordUnknown;
             ReadOnlyOptionalRecordUnknown = readOnlyOptionalRecordUnknown;
+            _rawData = rawData;
         }
 
         /// <summary> Required string, illustrating a reference type property. </summary>

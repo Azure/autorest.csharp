@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Collections.Generic;
 using Azure.Core;
 
@@ -16,7 +17,12 @@ namespace Azure.ResourceManager.Sample.Models
     /// </summary>
     public partial class VirtualMachineInstanceView
     {
-        /// <summary> Initializes a new instance of VirtualMachineInstanceView. </summary>
+        private Dictionary<string, BinaryData> _rawData;
+
+        /// <summary>
+        /// Initializes a new instance of global::Azure.ResourceManager.Sample.Models.VirtualMachineInstanceView
+        ///
+        /// </summary>
         internal VirtualMachineInstanceView()
         {
             Disks = new ChangeTrackingList<DiskInstanceView>();
@@ -24,7 +30,10 @@ namespace Azure.ResourceManager.Sample.Models
             Statuses = new ChangeTrackingList<InstanceViewStatus>();
         }
 
-        /// <summary> Initializes a new instance of VirtualMachineInstanceView. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::Azure.ResourceManager.Sample.Models.VirtualMachineInstanceView
+        ///
+        /// </summary>
         /// <param name="platformUpdateDomain">
         /// Specifies the update domain of the virtual machine.
         /// Serialized Name: VirtualMachineInstanceView.platformUpdateDomain
@@ -89,7 +98,8 @@ namespace Azure.ResourceManager.Sample.Models
         /// The status of virtual machine patch operations.
         /// Serialized Name: VirtualMachineInstanceView.patchStatus
         /// </param>
-        internal VirtualMachineInstanceView(int? platformUpdateDomain, int? platformFaultDomain, string computerName, string osName, string osVersion, HyperVGeneration? hyperVGeneration, string rdpThumbPrint, VirtualMachineAgentInstanceView vmAgent, MaintenanceRedeployStatus maintenanceRedeployStatus, IReadOnlyList<DiskInstanceView> disks, IReadOnlyList<VirtualMachineExtensionInstanceView> extensions, VirtualMachineHealthStatus vmHealth, BootDiagnosticsInstanceView bootDiagnostics, string assignedHost, IReadOnlyList<InstanceViewStatus> statuses, VirtualMachinePatchStatus patchStatus)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal VirtualMachineInstanceView(int? platformUpdateDomain, int? platformFaultDomain, string computerName, string osName, string osVersion, HyperVGeneration? hyperVGeneration, string rdpThumbPrint, VirtualMachineAgentInstanceView vmAgent, MaintenanceRedeployStatus maintenanceRedeployStatus, IReadOnlyList<DiskInstanceView> disks, IReadOnlyList<VirtualMachineExtensionInstanceView> extensions, VirtualMachineHealthStatus vmHealth, BootDiagnosticsInstanceView bootDiagnostics, string assignedHost, IReadOnlyList<InstanceViewStatus> statuses, VirtualMachinePatchStatus patchStatus, Dictionary<string, BinaryData> rawData)
         {
             PlatformUpdateDomain = platformUpdateDomain;
             PlatformFaultDomain = platformFaultDomain;
@@ -107,6 +117,7 @@ namespace Azure.ResourceManager.Sample.Models
             AssignedHost = assignedHost;
             Statuses = statuses;
             PatchStatus = patchStatus;
+            _rawData = rawData;
         }
 
         /// <summary>

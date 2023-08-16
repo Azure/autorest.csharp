@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Collections.Generic;
 using Azure.Core;
 using Azure.ResourceManager.Models;
@@ -17,13 +18,21 @@ namespace MgmtSingletonResource
     /// </summary>
     public partial class ParentResourceData : TrackedResourceData
     {
-        /// <summary> Initializes a new instance of ParentResourceData. </summary>
+        private Dictionary<string, BinaryData> _rawData;
+
+        /// <summary>
+        /// Initializes a new instance of global::MgmtSingletonResource.ParentResourceData
+        ///
+        /// </summary>
         /// <param name="location"> The location. </param>
         public ParentResourceData(AzureLocation location) : base(location)
         {
         }
 
-        /// <summary> Initializes a new instance of ParentResourceData. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::MgmtSingletonResource.ParentResourceData
+        ///
+        /// </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
         /// <param name="resourceType"> The resourceType. </param>
@@ -31,9 +40,11 @@ namespace MgmtSingletonResource
         /// <param name="tags"> The tags. </param>
         /// <param name="location"> The location. </param>
         /// <param name="new"></param>
-        internal ParentResourceData(ResourceIdentifier id, string name, ResourceType resourceType, SystemData systemData, IDictionary<string, string> tags, AzureLocation location, string @new) : base(id, name, resourceType, systemData, tags, location)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal ParentResourceData(ResourceIdentifier id, string name, ResourceType resourceType, SystemData systemData, IDictionary<string, string> tags, AzureLocation location, string @new, Dictionary<string, BinaryData> rawData) : base(id, name, resourceType, systemData, tags, location)
         {
             New = @new;
+            _rawData = rawData;
         }
 
         /// <summary> Gets or sets the new. </summary>

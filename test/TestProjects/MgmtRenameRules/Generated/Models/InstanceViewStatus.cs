@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
 
 namespace MgmtRenameRules.Models
 {
@@ -15,12 +16,20 @@ namespace MgmtRenameRules.Models
     /// </summary>
     public partial class InstanceViewStatus
     {
-        /// <summary> Initializes a new instance of InstanceViewStatus. </summary>
+        private Dictionary<string, BinaryData> _rawData;
+
+        /// <summary>
+        /// Initializes a new instance of global::MgmtRenameRules.Models.InstanceViewStatus
+        ///
+        /// </summary>
         public InstanceViewStatus()
         {
         }
 
-        /// <summary> Initializes a new instance of InstanceViewStatus. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::MgmtRenameRules.Models.InstanceViewStatus
+        ///
+        /// </summary>
         /// <param name="code">
         /// The status code.
         /// Serialized Name: InstanceViewStatus.code
@@ -41,13 +50,15 @@ namespace MgmtRenameRules.Models
         /// The time of the status.
         /// Serialized Name: InstanceViewStatus.time
         /// </param>
-        internal InstanceViewStatus(string code, StatusLevelType? level, string displayStatus, string message, DateTimeOffset? time)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal InstanceViewStatus(string code, StatusLevelType? level, string displayStatus, string message, DateTimeOffset? time, Dictionary<string, BinaryData> rawData)
         {
             Code = code;
             Level = level;
             DisplayStatus = displayStatus;
             Message = message;
             Time = time;
+            _rawData = rawData;
         }
 
         /// <summary>

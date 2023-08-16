@@ -5,23 +5,36 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
+
 namespace Azure.Network.Management.Interface.Models
 {
     /// <summary> Contains the IpTag associated with the object. </summary>
     public partial class IpTag
     {
-        /// <summary> Initializes a new instance of IpTag. </summary>
+        private Dictionary<string, BinaryData> _rawData;
+
+        /// <summary>
+        /// Initializes a new instance of global::Azure.Network.Management.Interface.Models.IpTag
+        ///
+        /// </summary>
         public IpTag()
         {
         }
 
-        /// <summary> Initializes a new instance of IpTag. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::Azure.Network.Management.Interface.Models.IpTag
+        ///
+        /// </summary>
         /// <param name="ipTagType"> The IP tag type. Example: FirstPartyUsage. </param>
         /// <param name="tag"> The value of the IP tag associated with the public IP. Example: SQL. </param>
-        internal IpTag(string ipTagType, string tag)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal IpTag(string ipTagType, string tag, Dictionary<string, BinaryData> rawData)
         {
             IpTagType = ipTagType;
             Tag = tag;
+            _rawData = rawData;
         }
 
         /// <summary> The IP tag type. Example: FirstPartyUsage. </summary>

@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Collections.Generic;
 using Azure.Core;
 using Azure.ResourceManager.Models;
@@ -18,12 +19,20 @@ namespace Azure.ResourceManager.Storage
     /// </summary>
     public partial class BlobServiceData : ResourceData
     {
-        /// <summary> Initializes a new instance of BlobServiceData. </summary>
+        private Dictionary<string, BinaryData> _rawData;
+
+        /// <summary>
+        /// Initializes a new instance of global::Azure.ResourceManager.Storage.BlobServiceData
+        ///
+        /// </summary>
         public BlobServiceData()
         {
         }
 
-        /// <summary> Initializes a new instance of BlobServiceData. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::Azure.ResourceManager.Storage.BlobServiceData
+        ///
+        /// </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
         /// <param name="resourceType"> The resourceType. </param>
@@ -38,7 +47,8 @@ namespace Azure.ResourceManager.Storage
         /// <param name="restorePolicy"> The blob service properties for blob restore policy. </param>
         /// <param name="containerDeleteRetentionPolicy"> The blob service properties for container soft delete. </param>
         /// <param name="lastAccessTimeTrackingPolicy"> The blob service property to configure last access time based tracking policy. </param>
-        internal BlobServiceData(ResourceIdentifier id, string name, ResourceType resourceType, SystemData systemData, StorageSku sku, CorsRules cors, string defaultServiceVersion, DeleteRetentionPolicy deleteRetentionPolicy, bool? isVersioningEnabled, bool? automaticSnapshotPolicyEnabled, ChangeFeed changeFeed, RestorePolicyProperties restorePolicy, DeleteRetentionPolicy containerDeleteRetentionPolicy, LastAccessTimeTrackingPolicy lastAccessTimeTrackingPolicy) : base(id, name, resourceType, systemData)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal BlobServiceData(ResourceIdentifier id, string name, ResourceType resourceType, SystemData systemData, StorageSku sku, CorsRules cors, string defaultServiceVersion, DeleteRetentionPolicy deleteRetentionPolicy, bool? isVersioningEnabled, bool? automaticSnapshotPolicyEnabled, ChangeFeed changeFeed, RestorePolicyProperties restorePolicy, DeleteRetentionPolicy containerDeleteRetentionPolicy, LastAccessTimeTrackingPolicy lastAccessTimeTrackingPolicy, Dictionary<string, BinaryData> rawData) : base(id, name, resourceType, systemData)
         {
             Sku = sku;
             Cors = cors;
@@ -50,6 +60,7 @@ namespace Azure.ResourceManager.Storage
             RestorePolicy = restorePolicy;
             ContainerDeleteRetentionPolicy = containerDeleteRetentionPolicy;
             LastAccessTimeTrackingPolicy = lastAccessTimeTrackingPolicy;
+            _rawData = rawData;
         }
 
         /// <summary> Sku name and tier. </summary>

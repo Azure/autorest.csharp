@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
 using Azure.Core;
 
 namespace MgmtScopeResource.Models
@@ -13,7 +14,12 @@ namespace MgmtScopeResource.Models
     /// <summary> Deployment What-if operation parameters. </summary>
     public partial class DeploymentWhatIf
     {
-        /// <summary> Initializes a new instance of DeploymentWhatIf. </summary>
+        private Dictionary<string, BinaryData> _rawData;
+
+        /// <summary>
+        /// Initializes a new instance of global::MgmtScopeResource.Models.DeploymentWhatIf
+        ///
+        /// </summary>
         /// <param name="properties"> The deployment properties. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="properties"/> is null. </exception>
         public DeploymentWhatIf(DeploymentWhatIfProperties properties)
@@ -23,13 +29,18 @@ namespace MgmtScopeResource.Models
             Properties = properties;
         }
 
-        /// <summary> Initializes a new instance of DeploymentWhatIf. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::MgmtScopeResource.Models.DeploymentWhatIf
+        ///
+        /// </summary>
         /// <param name="location"> The location to store the deployment data. </param>
         /// <param name="properties"> The deployment properties. </param>
-        internal DeploymentWhatIf(string location, DeploymentWhatIfProperties properties)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal DeploymentWhatIf(string location, DeploymentWhatIfProperties properties, Dictionary<string, BinaryData> rawData)
         {
             Location = location;
             Properties = properties;
+            _rawData = rawData;
         }
 
         /// <summary> The location to store the deployment data. </summary>

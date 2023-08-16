@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
 using Azure.Core;
 
 namespace Azure.ResourceManager.Sample.Models
@@ -16,7 +17,12 @@ namespace Azure.ResourceManager.Sample.Models
     /// </summary>
     public partial class PurchasePlan
     {
-        /// <summary> Initializes a new instance of PurchasePlan. </summary>
+        private Dictionary<string, BinaryData> _rawData;
+
+        /// <summary>
+        /// Initializes a new instance of global::Azure.ResourceManager.Sample.Models.PurchasePlan
+        ///
+        /// </summary>
         /// <param name="publisher">
         /// The publisher ID.
         /// Serialized Name: PurchasePlan.publisher
@@ -39,6 +45,31 @@ namespace Azure.ResourceManager.Sample.Models
             Publisher = publisher;
             Name = name;
             Product = product;
+        }
+
+        /// <summary>
+        /// Initializes a new instance of global::Azure.ResourceManager.Sample.Models.PurchasePlan
+        ///
+        /// </summary>
+        /// <param name="publisher">
+        /// The publisher ID.
+        /// Serialized Name: PurchasePlan.publisher
+        /// </param>
+        /// <param name="name">
+        /// The plan ID.
+        /// Serialized Name: PurchasePlan.name
+        /// </param>
+        /// <param name="product">
+        /// Specifies the product of the image from the marketplace. This is the same value as Offer under the imageReference element.
+        /// Serialized Name: PurchasePlan.product
+        /// </param>
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal PurchasePlan(string publisher, string name, string product, Dictionary<string, BinaryData> rawData)
+        {
+            Publisher = publisher;
+            Name = name;
+            Product = product;
+            _rawData = rawData;
         }
 
         /// <summary>

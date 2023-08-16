@@ -6,18 +6,22 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
 using System.Text.Json;
+using Azure;
 using Azure.Core;
 using Azure.Core.Serialization;
 
 namespace Azure.ResourceManager.Sample.Models
 {
-    public partial class RequestRateByIntervalContent : IUtf8JsonSerializable, IJsonModelSerializable
+    public partial class RequestRateByIntervalContent : IUtf8JsonSerializable, IModelJsonSerializable<RequestRateByIntervalContent>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModelSerializable)this).Serialize(writer, ModelSerializerOptions.AzureServiceDefault);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<RequestRateByIntervalContent>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
 
-        void IJsonModelSerializable.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
+        void IModelJsonSerializable<RequestRateByIntervalContent>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
+            ModelSerializerHelper.ValidateFormat<RequestRateByIntervalContent>(this, options.Format);
+
             writer.WriteStartObject();
             writer.WritePropertyName("intervalLength"u8);
             writer.WriteStringValue(IntervalLength.ToSerialString());
@@ -42,18 +46,25 @@ namespace Azure.ResourceManager.Sample.Models
                 writer.WritePropertyName("groupByResourceName"u8);
                 writer.WriteBooleanValue(GroupByResourceName.Value);
             }
+            if (_rawData is not null && options.Format == ModelSerializerFormat.Json)
+            {
+                foreach (var property in _rawData)
+                {
+                    writer.WritePropertyName(property.Key);
+#if NET6_0_OR_GREATER
+				writer.WriteRawValue(property.Value);
+#else
+                    JsonSerializer.Serialize(writer, JsonDocument.Parse(property.Value.ToString()).RootElement);
+#endif
+                }
+            }
             writer.WriteEndObject();
-        }
-
-        object IModelSerializable.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            using var doc = JsonDocument.Parse(data);
-            return DeserializeRequestRateByIntervalContent(doc.RootElement, options);
         }
 
         internal static RequestRateByIntervalContent DeserializeRequestRateByIntervalContent(JsonElement element, ModelSerializerOptions options = default)
         {
-            options ??= ModelSerializerOptions.AzureServiceDefault;
+            options ??= ModelSerializerOptions.DefaultWireOptions;
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
@@ -65,6 +76,7 @@ namespace Azure.ResourceManager.Sample.Models
             Optional<bool> groupByThrottlePolicy = default;
             Optional<bool> groupByOperationName = default;
             Optional<bool> groupByResourceName = default;
+            Dictionary<string, BinaryData> rawData = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("intervalLength"u8))
@@ -114,14 +126,57 @@ namespace Azure.ResourceManager.Sample.Models
                     groupByResourceName = property.Value.GetBoolean();
                     continue;
                 }
+                if (options.Format == ModelSerializerFormat.Json)
+                {
+                    rawData.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
+                    continue;
+                }
             }
-            return new RequestRateByIntervalContent(blobContainerSasUri, fromTime, toTime, Optional.ToNullable(groupByThrottlePolicy), Optional.ToNullable(groupByOperationName), Optional.ToNullable(groupByResourceName), intervalLength);
+            return new RequestRateByIntervalContent(blobContainerSasUri, fromTime, toTime, Optional.ToNullable(groupByThrottlePolicy), Optional.ToNullable(groupByOperationName), Optional.ToNullable(groupByResourceName), intervalLength, rawData);
         }
 
-        object IJsonModelSerializable.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        RequestRateByIntervalContent IModelJsonSerializable<RequestRateByIntervalContent>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
         {
+            ModelSerializerHelper.ValidateFormat<RequestRateByIntervalContent>(this, options.Format);
+
             using var doc = JsonDocument.ParseValue(ref reader);
             return DeserializeRequestRateByIntervalContent(doc.RootElement, options);
+        }
+
+        BinaryData IModelSerializable<RequestRateByIntervalContent>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat<RequestRateByIntervalContent>(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        RequestRateByIntervalContent IModelSerializable<RequestRateByIntervalContent>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat<RequestRateByIntervalContent>(this, options.Format);
+
+            using var doc = JsonDocument.Parse(data);
+            return DeserializeRequestRateByIntervalContent(doc.RootElement, options);
+        }
+
+        public static implicit operator RequestContent(RequestRateByIntervalContent model)
+        {
+            if (model is null)
+            {
+                return null;
+            }
+
+            return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
+        }
+
+        public static explicit operator RequestRateByIntervalContent(Response response)
+        {
+            if (response is null)
+            {
+                return null;
+            }
+
+            using JsonDocument doc = JsonDocument.Parse(response.ContentStream);
+            return DeserializeRequestRateByIntervalContent(doc.RootElement, ModelSerializerOptions.DefaultWireOptions);
         }
     }
 }

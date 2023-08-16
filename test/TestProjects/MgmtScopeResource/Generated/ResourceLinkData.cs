@@ -5,6 +5,8 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
 using Azure.Core;
 using Azure.ResourceManager.Models;
 using MgmtScopeResource.Models;
@@ -17,20 +19,30 @@ namespace MgmtScopeResource
     /// </summary>
     public partial class ResourceLinkData : ResourceData
     {
-        /// <summary> Initializes a new instance of ResourceLinkData. </summary>
+        private Dictionary<string, BinaryData> _rawData;
+
+        /// <summary>
+        /// Initializes a new instance of global::MgmtScopeResource.ResourceLinkData
+        ///
+        /// </summary>
         public ResourceLinkData()
         {
         }
 
-        /// <summary> Initializes a new instance of ResourceLinkData. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::MgmtScopeResource.ResourceLinkData
+        ///
+        /// </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
         /// <param name="resourceType"> The resourceType. </param>
         /// <param name="systemData"> The systemData. </param>
         /// <param name="properties"> Properties for resource link. </param>
-        internal ResourceLinkData(ResourceIdentifier id, string name, ResourceType resourceType, SystemData systemData, ResourceLinkProperties properties) : base(id, name, resourceType, systemData)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal ResourceLinkData(ResourceIdentifier id, string name, ResourceType resourceType, SystemData systemData, ResourceLinkProperties properties, Dictionary<string, BinaryData> rawData) : base(id, name, resourceType, systemData)
         {
             Properties = properties;
+            _rawData = rawData;
         }
 
         /// <summary> Properties for resource link. </summary>

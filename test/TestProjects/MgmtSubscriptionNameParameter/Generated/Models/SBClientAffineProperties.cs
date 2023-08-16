@@ -5,25 +5,38 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
+
 namespace MgmtSubscriptionNameParameter.Models
 {
     /// <summary> Properties specific to client affine subscriptions. </summary>
     public partial class SBClientAffineProperties
     {
-        /// <summary> Initializes a new instance of SBClientAffineProperties. </summary>
+        private Dictionary<string, BinaryData> _rawData;
+
+        /// <summary>
+        /// Initializes a new instance of global::MgmtSubscriptionNameParameter.Models.SBClientAffineProperties
+        ///
+        /// </summary>
         public SBClientAffineProperties()
         {
         }
 
-        /// <summary> Initializes a new instance of SBClientAffineProperties. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::MgmtSubscriptionNameParameter.Models.SBClientAffineProperties
+        ///
+        /// </summary>
         /// <param name="clientId"> Indicates the Client ID of the application that created the client-affine subscription. </param>
         /// <param name="isDurable"> For client-affine subscriptions, this value indicates whether the subscription is durable or not. </param>
         /// <param name="isShared"> For client-affine subscriptions, this value indicates whether the subscription is shared or not. </param>
-        internal SBClientAffineProperties(string clientId, bool? isDurable, bool? isShared)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal SBClientAffineProperties(string clientId, bool? isDurable, bool? isShared, Dictionary<string, BinaryData> rawData)
         {
             ClientId = clientId;
             IsDurable = isDurable;
             IsShared = isShared;
+            _rawData = rawData;
         }
 
         /// <summary> Indicates the Client ID of the application that created the client-affine subscription. </summary>

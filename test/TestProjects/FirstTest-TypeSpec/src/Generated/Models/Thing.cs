@@ -15,6 +15,8 @@ namespace FirstTestTypeSpec.Models
     /// <summary> A model with a few properties of literal types. </summary>
     public partial class Thing
     {
+        private Dictionary<string, BinaryData> _rawData;
+
         /// <summary> Initializes a new instance of Thing. </summary>
         /// <param name="name"> name of the Thing. </param>
         /// <param name="requiredUnion"> required Union. </param>
@@ -48,7 +50,8 @@ namespace FirstTestTypeSpec.Models
         /// <param name="requiredBadDescription"> description with xml &lt;|endoftext|&gt;. </param>
         /// <param name="optionalNullableList"> optional nullable collection. </param>
         /// <param name="requiredNullableList"> required nullable collection. </param>
-        internal Thing(string name, string requiredUnion, ThingRequiredLiteralString requiredLiteralString, ThingRequiredLiteralInt requiredLiteralInt, ThingRequiredLiteralFloat requiredLiteralFloat, bool requiredLiteralBool, ThingOptionalLiteralString? optionalLiteralString, ThingOptionalLiteralInt? optionalLiteralInt, ThingOptionalLiteralFloat? optionalLiteralFloat, bool? optionalLiteralBool, string requiredBadDescription, IList<int> optionalNullableList, IList<int> requiredNullableList)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal Thing(string name, string requiredUnion, ThingRequiredLiteralString requiredLiteralString, ThingRequiredLiteralInt requiredLiteralInt, ThingRequiredLiteralFloat requiredLiteralFloat, bool requiredLiteralBool, ThingOptionalLiteralString? optionalLiteralString, ThingOptionalLiteralInt? optionalLiteralInt, ThingOptionalLiteralFloat? optionalLiteralFloat, bool? optionalLiteralBool, string requiredBadDescription, IList<int> optionalNullableList, IList<int> requiredNullableList, Dictionary<string, BinaryData> rawData)
         {
             Name = name;
             RequiredUnion = requiredUnion;
@@ -63,6 +66,7 @@ namespace FirstTestTypeSpec.Models
             RequiredBadDescription = requiredBadDescription;
             OptionalNullableList = optionalNullableList;
             RequiredNullableList = requiredNullableList;
+            _rawData = rawData;
         }
 
         /// <summary> name of the Thing. </summary>

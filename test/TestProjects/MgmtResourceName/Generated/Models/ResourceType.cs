@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Collections.Generic;
 using Azure.Core;
 
@@ -13,21 +14,31 @@ namespace MgmtResourceName.Models
     /// <summary> Resource Type. </summary>
     public partial class ResourceType
     {
-        /// <summary> Initializes a new instance of ResourceType. </summary>
+        private Dictionary<string, BinaryData> _rawData;
+
+        /// <summary>
+        /// Initializes a new instance of global::MgmtResourceName.Models.ResourceType
+        ///
+        /// </summary>
         internal ResourceType()
         {
             Operations = new ChangeTrackingList<ResourceOperation>();
         }
 
-        /// <summary> Initializes a new instance of ResourceType. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::MgmtResourceName.Models.ResourceType
+        ///
+        /// </summary>
         /// <param name="name"> The resource type name. </param>
         /// <param name="displayName"> The resource type display name. </param>
         /// <param name="operations"> The resource type operations. </param>
-        internal ResourceType(string name, string displayName, IReadOnlyList<ResourceOperation> operations)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal ResourceType(string name, string displayName, IReadOnlyList<ResourceOperation> operations, Dictionary<string, BinaryData> rawData)
         {
             Name = name;
             DisplayName = displayName;
             Operations = operations;
+            _rawData = rawData;
         }
 
         /// <summary> The resource type name. </summary>

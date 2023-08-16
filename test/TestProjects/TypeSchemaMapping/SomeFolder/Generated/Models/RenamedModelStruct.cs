@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
 using Azure.Core;
 using NamespaceForEnums;
 
@@ -14,7 +15,12 @@ namespace CustomNamespace
     /// <summary> The ModelStruct. </summary>
     internal readonly partial struct RenamedModelStruct
     {
-        /// <summary> Initializes a new instance of RenamedModelStruct. </summary>
+        private readonly Dictionary<string, BinaryData> _rawData;
+
+        /// <summary>
+        /// Initializes a new instance of global::CustomNamespace.RenamedModelStruct
+        ///
+        /// </summary>
         /// <param name="customizedFlattenedStringProperty"> . </param>
         /// <param name="propertyToField"> . </param>
         /// <param name="fruit"> Fruit. </param>
@@ -29,6 +35,24 @@ namespace CustomNamespace
             PropertyToField = propertyToField;
             Fruit = fruit;
             DaysOfWeek = daysOfWeek;
+        }
+
+        /// <summary>
+        /// Initializes a new instance of global::CustomNamespace.RenamedModelStruct
+        ///
+        /// </summary>
+        /// <param name="customizedFlattenedStringProperty"> . </param>
+        /// <param name="propertyToField"> . </param>
+        /// <param name="fruit"> Fruit. </param>
+        /// <param name="daysOfWeek"> Day of week. </param>
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal RenamedModelStruct(string customizedFlattenedStringProperty, string propertyToField, CustomFruitEnum? fruit, CustomDaysOfWeek? daysOfWeek, Dictionary<string, BinaryData> rawData)
+        {
+            CustomizedFlattenedStringProperty = customizedFlattenedStringProperty;
+            PropertyToField = propertyToField;
+            Fruit = fruit;
+            DaysOfWeek = daysOfWeek;
+            _rawData = rawData;
         }
         /// <summary> . </summary>
         public string PropertyToField { get; }

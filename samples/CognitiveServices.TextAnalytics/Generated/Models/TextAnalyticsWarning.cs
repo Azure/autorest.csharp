@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
 using Azure.Core;
 
 namespace CognitiveServices.TextAnalytics.Models
@@ -13,7 +14,12 @@ namespace CognitiveServices.TextAnalytics.Models
     /// <summary> The TextAnalyticsWarning. </summary>
     public partial class TextAnalyticsWarning
     {
-        /// <summary> Initializes a new instance of TextAnalyticsWarning. </summary>
+        private Dictionary<string, BinaryData> _rawData;
+
+        /// <summary>
+        /// Initializes a new instance of global::CognitiveServices.TextAnalytics.Models.TextAnalyticsWarning
+        ///
+        /// </summary>
         /// <param name="code"> Error code. </param>
         /// <param name="message"> Warning message. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="message"/> is null. </exception>
@@ -25,15 +31,20 @@ namespace CognitiveServices.TextAnalytics.Models
             Message = message;
         }
 
-        /// <summary> Initializes a new instance of TextAnalyticsWarning. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::CognitiveServices.TextAnalytics.Models.TextAnalyticsWarning
+        ///
+        /// </summary>
         /// <param name="code"> Error code. </param>
         /// <param name="message"> Warning message. </param>
         /// <param name="targetRef"> A JSON pointer reference indicating the target object. </param>
-        internal TextAnalyticsWarning(WarningCodeValue code, string message, string targetRef)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal TextAnalyticsWarning(WarningCodeValue code, string message, string targetRef, Dictionary<string, BinaryData> rawData)
         {
             Code = code;
             Message = message;
             TargetRef = targetRef;
+            _rawData = rawData;
         }
 
         /// <summary> Error code. </summary>

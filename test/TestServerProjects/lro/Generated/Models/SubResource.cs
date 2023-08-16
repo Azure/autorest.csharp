@@ -5,21 +5,34 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
+
 namespace lro.Models
 {
     /// <summary> The SubResource. </summary>
     public partial class SubResource
     {
-        /// <summary> Initializes a new instance of SubResource. </summary>
+        protected internal Dictionary<string, BinaryData> _rawData;
+
+        /// <summary>
+        /// Initializes a new instance of global::lro.Models.SubResource
+        ///
+        /// </summary>
         public SubResource()
         {
         }
 
-        /// <summary> Initializes a new instance of SubResource. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::lro.Models.SubResource
+        ///
+        /// </summary>
         /// <param name="id"> Sub Resource Id. </param>
-        internal SubResource(string id)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal SubResource(string id, Dictionary<string, BinaryData> rawData)
         {
             Id = id;
+            _rawData = rawData;
         }
 
         /// <summary> Sub Resource Id. </summary>

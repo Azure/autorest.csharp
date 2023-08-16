@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Collections.Generic;
 using Azure.Core;
 
@@ -13,14 +14,20 @@ namespace Azure.Network.Management.Interface.Models
     /// <summary> Service End point policy resource. </summary>
     public partial class ServiceEndpointPolicy : Resource
     {
-        /// <summary> Initializes a new instance of ServiceEndpointPolicy. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::Azure.Network.Management.Interface.Models.ServiceEndpointPolicy
+        ///
+        /// </summary>
         public ServiceEndpointPolicy()
         {
             ServiceEndpointPolicyDefinitions = new ChangeTrackingList<ServiceEndpointPolicyDefinition>();
             Subnets = new ChangeTrackingList<Subnet>();
         }
 
-        /// <summary> Initializes a new instance of ServiceEndpointPolicy. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::Azure.Network.Management.Interface.Models.ServiceEndpointPolicy
+        ///
+        /// </summary>
         /// <param name="id"> Resource ID. </param>
         /// <param name="name"> Resource name. </param>
         /// <param name="type"> Resource type. </param>
@@ -31,7 +38,8 @@ namespace Azure.Network.Management.Interface.Models
         /// <param name="subnets"> A collection of references to subnets. </param>
         /// <param name="resourceGuid"> The resource GUID property of the service endpoint policy resource. </param>
         /// <param name="provisioningState"> The provisioning state of the service endpoint policy resource. </param>
-        internal ServiceEndpointPolicy(string id, string name, string type, string location, IDictionary<string, string> tags, string etag, IList<ServiceEndpointPolicyDefinition> serviceEndpointPolicyDefinitions, IReadOnlyList<Subnet> subnets, string resourceGuid, ProvisioningState? provisioningState) : base(id, name, type, location, tags)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal ServiceEndpointPolicy(string id, string name, string type, string location, IDictionary<string, string> tags, string etag, IList<ServiceEndpointPolicyDefinition> serviceEndpointPolicyDefinitions, IReadOnlyList<Subnet> subnets, string resourceGuid, ProvisioningState? provisioningState, Dictionary<string, BinaryData> rawData) : base(id, name, type, location, tags, rawData)
         {
             Etag = etag;
             ServiceEndpointPolicyDefinitions = serviceEndpointPolicyDefinitions;

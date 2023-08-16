@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Collections.Generic;
 using Azure.Core;
 
@@ -13,13 +14,19 @@ namespace Azure.Network.Management.Interface.Models
     /// <summary> Service Endpoint policy definitions. </summary>
     public partial class ServiceEndpointPolicyDefinition : SubResource
     {
-        /// <summary> Initializes a new instance of ServiceEndpointPolicyDefinition. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::Azure.Network.Management.Interface.Models.ServiceEndpointPolicyDefinition
+        ///
+        /// </summary>
         public ServiceEndpointPolicyDefinition()
         {
             ServiceResources = new ChangeTrackingList<string>();
         }
 
-        /// <summary> Initializes a new instance of ServiceEndpointPolicyDefinition. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::Azure.Network.Management.Interface.Models.ServiceEndpointPolicyDefinition
+        ///
+        /// </summary>
         /// <param name="id"> Resource ID. </param>
         /// <param name="name"> The name of the resource that is unique within a resource group. This name can be used to access the resource. </param>
         /// <param name="etag"> A unique read-only string that changes whenever the resource is updated. </param>
@@ -27,7 +34,8 @@ namespace Azure.Network.Management.Interface.Models
         /// <param name="service"> Service endpoint name. </param>
         /// <param name="serviceResources"> A list of service resources. </param>
         /// <param name="provisioningState"> The provisioning state of the service endpoint policy definition resource. </param>
-        internal ServiceEndpointPolicyDefinition(string id, string name, string etag, string description, string service, IList<string> serviceResources, ProvisioningState? provisioningState) : base(id)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal ServiceEndpointPolicyDefinition(string id, string name, string etag, string description, string service, IList<string> serviceResources, ProvisioningState? provisioningState, Dictionary<string, BinaryData> rawData) : base(id, rawData)
         {
             Name = name;
             Etag = etag;

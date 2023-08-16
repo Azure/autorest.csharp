@@ -18,7 +18,12 @@ namespace Azure.ResourceManager.Sample.Models
     /// </summary>
     internal partial class VirtualMachineScaleSetListSkusResult
     {
-        /// <summary> Initializes a new instance of VirtualMachineScaleSetListSkusResult. </summary>
+        private Dictionary<string, BinaryData> _rawData;
+
+        /// <summary>
+        /// Initializes a new instance of global::Azure.ResourceManager.Sample.Models.VirtualMachineScaleSetListSkusResult
+        ///
+        /// </summary>
         /// <param name="vmssSkus">
         /// The list of skus available for the virtual machine scale set.
         /// Serialized Name: VirtualMachineScaleSetListSkusResult.VmssSkus
@@ -31,7 +36,10 @@ namespace Azure.ResourceManager.Sample.Models
             VmssSkus = vmssSkus.ToList();
         }
 
-        /// <summary> Initializes a new instance of VirtualMachineScaleSetListSkusResult. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::Azure.ResourceManager.Sample.Models.VirtualMachineScaleSetListSkusResult
+        ///
+        /// </summary>
         /// <param name="vmssSkus">
         /// The list of skus available for the virtual machine scale set.
         /// Serialized Name: VirtualMachineScaleSetListSkusResult.VmssSkus
@@ -40,10 +48,12 @@ namespace Azure.ResourceManager.Sample.Models
         /// The uri to fetch the next page of Virtual Machine Scale Set Skus. Call ListNext() with this to fetch the next page of VMSS Skus.
         /// Serialized Name: VirtualMachineScaleSetListSkusResult.nextLink
         /// </param>
-        internal VirtualMachineScaleSetListSkusResult(IReadOnlyList<VirtualMachineScaleSetSku> vmssSkus, string nextLink)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal VirtualMachineScaleSetListSkusResult(IReadOnlyList<VirtualMachineScaleSetSku> vmssSkus, string nextLink, Dictionary<string, BinaryData> rawData)
         {
             VmssSkus = vmssSkus;
             NextLink = nextLink;
+            _rawData = rawData;
         }
 
         /// <summary>

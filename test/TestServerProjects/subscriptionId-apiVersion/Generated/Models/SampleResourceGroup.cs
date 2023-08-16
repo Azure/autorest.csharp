@@ -5,23 +5,36 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
+
 namespace subscriptionId_apiVersion.Models
 {
     /// <summary> The SampleResourceGroup. </summary>
     public partial class SampleResourceGroup
     {
-        /// <summary> Initializes a new instance of SampleResourceGroup. </summary>
+        private Dictionary<string, BinaryData> _rawData;
+
+        /// <summary>
+        /// Initializes a new instance of global::subscriptionId_apiVersion.Models.SampleResourceGroup
+        ///
+        /// </summary>
         internal SampleResourceGroup()
         {
         }
 
-        /// <summary> Initializes a new instance of SampleResourceGroup. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::subscriptionId_apiVersion.Models.SampleResourceGroup
+        ///
+        /// </summary>
         /// <param name="name"> resource group name 'testgroup101'. </param>
         /// <param name="location"> resource group location 'West US'. </param>
-        internal SampleResourceGroup(string name, string location)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal SampleResourceGroup(string name, string location, Dictionary<string, BinaryData> rawData)
         {
             Name = name;
             Location = location;
+            _rawData = rawData;
         }
 
         /// <summary> resource group name 'testgroup101'. </summary>

@@ -18,7 +18,12 @@ namespace MgmtRenameRules.Models
     /// </summary>
     internal partial class VirtualMachineScaleSetListSkusResult
     {
-        /// <summary> Initializes a new instance of VirtualMachineScaleSetListSkusResult. </summary>
+        private Dictionary<string, BinaryData> _rawData;
+
+        /// <summary>
+        /// Initializes a new instance of global::MgmtRenameRules.Models.VirtualMachineScaleSetListSkusResult
+        ///
+        /// </summary>
         /// <param name="value">
         /// The list of skus available for the virtual machine scale set.
         /// Serialized Name: VirtualMachineScaleSetListSkusResult.value
@@ -31,7 +36,10 @@ namespace MgmtRenameRules.Models
             Value = value.ToList();
         }
 
-        /// <summary> Initializes a new instance of VirtualMachineScaleSetListSkusResult. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::MgmtRenameRules.Models.VirtualMachineScaleSetListSkusResult
+        ///
+        /// </summary>
         /// <param name="value">
         /// The list of skus available for the virtual machine scale set.
         /// Serialized Name: VirtualMachineScaleSetListSkusResult.value
@@ -40,10 +48,12 @@ namespace MgmtRenameRules.Models
         /// The uri to fetch the next page of Virtual Machine Scale Set Skus. Call ListNext() with this to fetch the next page of VMSS Skus.
         /// Serialized Name: VirtualMachineScaleSetListSkusResult.nextLink
         /// </param>
-        internal VirtualMachineScaleSetListSkusResult(IReadOnlyList<VirtualMachineScaleSetSku> value, string nextLink)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal VirtualMachineScaleSetListSkusResult(IReadOnlyList<VirtualMachineScaleSetSku> value, string nextLink, Dictionary<string, BinaryData> rawData)
         {
             Value = value;
             NextLink = nextLink;
+            _rawData = rawData;
         }
 
         /// <summary>

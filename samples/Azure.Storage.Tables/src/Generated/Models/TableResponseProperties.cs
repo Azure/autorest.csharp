@@ -5,27 +5,40 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
+
 namespace Azure.Storage.Tables.Models
 {
     /// <summary> The properties for the table response. </summary>
     public partial class TableResponseProperties
     {
-        /// <summary> Initializes a new instance of TableResponseProperties. </summary>
+        protected internal Dictionary<string, BinaryData> _rawData;
+
+        /// <summary>
+        /// Initializes a new instance of global::Azure.Storage.Tables.Models.TableResponseProperties
+        ///
+        /// </summary>
         internal TableResponseProperties()
         {
         }
 
-        /// <summary> Initializes a new instance of TableResponseProperties. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::Azure.Storage.Tables.Models.TableResponseProperties
+        ///
+        /// </summary>
         /// <param name="tableName"> The name of the table. </param>
         /// <param name="odataType"> The odata type of the table. </param>
         /// <param name="odataId"> The id of the table. </param>
         /// <param name="odataEditLink"> The edit link of the table. </param>
-        internal TableResponseProperties(string tableName, string odataType, string odataId, string odataEditLink)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal TableResponseProperties(string tableName, string odataType, string odataId, string odataEditLink, Dictionary<string, BinaryData> rawData)
         {
             TableName = tableName;
             OdataType = odataType;
             OdataId = odataId;
             OdataEditLink = odataEditLink;
+            _rawData = rawData;
         }
 
         /// <summary> The name of the table. </summary>

@@ -5,25 +5,38 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
+
 namespace MgmtSupersetFlattenInheritance.Models
 {
     /// <summary> Normal custom object with flatten properties from CustomModel2. Also marked as azure resource, but it's not recognized either. </summary>
     public partial class NonResourceModel1
     {
-        /// <summary> Initializes a new instance of NonResourceModel1. </summary>
+        private Dictionary<string, BinaryData> _rawData;
+
+        /// <summary>
+        /// Initializes a new instance of global::MgmtSupersetFlattenInheritance.Models.NonResourceModel1
+        ///
+        /// </summary>
         public NonResourceModel1()
         {
         }
 
-        /// <summary> Initializes a new instance of NonResourceModel1. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::MgmtSupersetFlattenInheritance.Models.NonResourceModel1
+        ///
+        /// </summary>
         /// <param name="bar"></param>
         /// <param name="id"></param>
         /// <param name="foo"></param>
-        internal NonResourceModel1(string bar, string id, string foo)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal NonResourceModel1(string bar, string id, string foo, Dictionary<string, BinaryData> rawData)
         {
             Bar = bar;
             Id = id;
             Foo = foo;
+            _rawData = rawData;
         }
 
         /// <summary> Gets or sets the bar. </summary>

@@ -5,6 +5,8 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
 using Azure.Core;
 using Azure.ResourceManager.Resources.Models;
 
@@ -16,12 +18,18 @@ namespace Azure.ResourceManager.Sample.Models
     /// </summary>
     public partial class ManagedDiskParameters : SubResource
     {
-        /// <summary> Initializes a new instance of ManagedDiskParameters. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::Azure.ResourceManager.Sample.Models.ManagedDiskParameters
+        ///
+        /// </summary>
         public ManagedDiskParameters()
         {
         }
 
-        /// <summary> Initializes a new instance of ManagedDiskParameters. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::Azure.ResourceManager.Sample.Models.ManagedDiskParameters
+        ///
+        /// </summary>
         /// <param name="id">
         /// Resource Id
         /// Serialized Name: SubResource.id
@@ -34,7 +42,8 @@ namespace Azure.ResourceManager.Sample.Models
         /// Specifies the customer managed disk encryption set resource id for the managed disk.
         /// Serialized Name: ManagedDiskParameters.diskEncryptionSet
         /// </param>
-        internal ManagedDiskParameters(string id, StorageAccountType? storageAccountType, WritableSubResource diskEncryptionSet) : base(id)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal ManagedDiskParameters(string id, StorageAccountType? storageAccountType, WritableSubResource diskEncryptionSet, Dictionary<string, BinaryData> rawData) : base(id, rawData)
         {
             StorageAccountType = storageAccountType;
             DiskEncryptionSet = diskEncryptionSet;

@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Collections.Generic;
 using Azure.Core;
 using NamespaceForEnums;
@@ -14,21 +15,31 @@ namespace TypeSchemaMapping.Models
     /// <summary> The SecondModel. </summary>
     internal partial class SecondModel
     {
-        /// <summary> Initializes a new instance of SecondModel. </summary>
+        private Dictionary<string, BinaryData> _rawData;
+
+        /// <summary>
+        /// Initializes a new instance of global::TypeSchemaMapping.Models.SecondModel
+        ///
+        /// </summary>
         public SecondModel()
         {
             DictionaryProperty = new ChangeTrackingDictionary<string, string>();
         }
 
-        /// <summary> Initializes a new instance of SecondModel. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::TypeSchemaMapping.Models.SecondModel
+        ///
+        /// </summary>
         /// <param name="intProperty"> . </param>
         /// <param name="dictionaryProperty"> . </param>
         /// <param name="daysOfWeek"> Day of week. </param>
-        internal SecondModel(int intProperty, IReadOnlyDictionary<string, string> dictionaryProperty, CustomDaysOfWeek? daysOfWeek)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal SecondModel(int intProperty, IReadOnlyDictionary<string, string> dictionaryProperty, CustomDaysOfWeek? daysOfWeek, Dictionary<string, BinaryData> rawData)
         {
             IntProperty = intProperty;
             DictionaryProperty = dictionaryProperty;
             DaysOfWeek = daysOfWeek;
+            _rawData = rawData;
         }
     }
 }

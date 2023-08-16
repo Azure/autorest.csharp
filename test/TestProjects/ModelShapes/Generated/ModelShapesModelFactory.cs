@@ -13,7 +13,10 @@ namespace ModelShapes.Models
     /// <summary> Model factory for models. </summary>
     public static partial class ModelShapesModelFactory
     {
-        /// <summary> Initializes a new instance of InputModel. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::ModelShapes.Models.InputModel
+        ///
+        /// </summary>
         /// <param name="requiredString"></param>
         /// <param name="requiredInt"></param>
         /// <param name="requiredStringList"></param>
@@ -42,10 +45,13 @@ namespace ModelShapes.Models
             nonRequiredNullableStringList ??= new List<string>();
             nonRequiredNullableIntList ??= new List<int>();
 
-            return new InputModel(requiredString, requiredInt, requiredStringList?.ToList(), requiredIntList?.ToList(), nonRequiredString, nonRequiredInt, nonRequiredStringList?.ToList(), nonRequiredIntList?.ToList(), requiredNullableString, requiredNullableInt, requiredNullableStringList?.ToList(), requiredNullableIntList?.ToList(), nonRequiredNullableString, nonRequiredNullableInt, nonRequiredNullableStringList?.ToList(), nonRequiredNullableIntList?.ToList());
+            return new InputModel(requiredString, requiredInt, requiredStringList?.ToList(), requiredIntList?.ToList(), nonRequiredString, nonRequiredInt, nonRequiredStringList?.ToList(), nonRequiredIntList?.ToList(), requiredNullableString, requiredNullableInt, requiredNullableStringList?.ToList(), requiredNullableIntList?.ToList(), nonRequiredNullableString, nonRequiredNullableInt, nonRequiredNullableStringList?.ToList(), nonRequiredNullableIntList?.ToList(), default);
         }
 
-        /// <summary> Initializes a new instance of MixedModel. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::ModelShapes.Models.MixedModel
+        ///
+        /// </summary>
         /// <param name="requiredString"></param>
         /// <param name="requiredInt"></param>
         /// <param name="requiredStringList"></param>
@@ -76,10 +82,13 @@ namespace ModelShapes.Models
             nonRequiredNullableStringList ??= new List<string>();
             nonRequiredNullableIntList ??= new List<int>();
 
-            return new MixedModel(requiredString, requiredInt, requiredStringList?.ToList(), requiredIntList?.ToList(), nonRequiredString, nonRequiredInt, nonRequiredStringList?.ToList(), nonRequiredIntList?.ToList(), requiredNullableString, requiredNullableInt, requiredNullableStringList?.ToList(), requiredNullableIntList?.ToList(), nonRequiredNullableString, nonRequiredNullableInt, nonRequiredNullableStringList?.ToList(), nonRequiredNullableIntList?.ToList(), requiredReadonlyInt, nonRequiredReadonlyInt);
+            return new MixedModel(requiredString, requiredInt, requiredStringList?.ToList(), requiredIntList?.ToList(), nonRequiredString, nonRequiredInt, nonRequiredStringList?.ToList(), nonRequiredIntList?.ToList(), requiredNullableString, requiredNullableInt, requiredNullableStringList?.ToList(), requiredNullableIntList?.ToList(), nonRequiredNullableString, nonRequiredNullableInt, nonRequiredNullableStringList?.ToList(), nonRequiredNullableIntList?.ToList(), requiredReadonlyInt, nonRequiredReadonlyInt, default);
         }
 
-        /// <summary> Initializes a new instance of OutputModel. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::ModelShapes.Models.OutputModel
+        ///
+        /// </summary>
         /// <param name="requiredString"></param>
         /// <param name="requiredInt"></param>
         /// <param name="requiredStringList"></param>
@@ -110,10 +119,13 @@ namespace ModelShapes.Models
             nonRequiredNullableStringList ??= new List<string>();
             nonRequiredNullableIntList ??= new List<int>();
 
-            return new OutputModel(requiredString, requiredInt, requiredStringList?.ToList(), requiredIntList?.ToList(), nonRequiredString, nonRequiredInt, nonRequiredStringList?.ToList(), nonRequiredIntList?.ToList(), requiredNullableString, requiredNullableInt, requiredNullableStringList?.ToList(), requiredNullableIntList?.ToList(), nonRequiredNullableString, nonRequiredNullableInt, nonRequiredNullableStringList?.ToList(), nonRequiredNullableIntList?.ToList(), requiredReadonlyInt, nonRequiredReadonlyInt);
+            return new OutputModel(requiredString, requiredInt, requiredStringList?.ToList(), requiredIntList?.ToList(), nonRequiredString, nonRequiredInt, nonRequiredStringList?.ToList(), nonRequiredIntList?.ToList(), requiredNullableString, requiredNullableInt, requiredNullableStringList?.ToList(), requiredNullableIntList?.ToList(), nonRequiredNullableString, nonRequiredNullableInt, nonRequiredNullableStringList?.ToList(), nonRequiredNullableIntList?.ToList(), requiredReadonlyInt, nonRequiredReadonlyInt, default);
         }
 
-        /// <summary> Initializes a new instance of MixedModelWithReadonlyProperty. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::ModelShapes.Models.MixedModelWithReadonlyProperty
+        ///
+        /// </summary>
         /// <param name="readonlyProperty"></param>
         /// <param name="readonlyListProperty"></param>
         /// <returns> A new <see cref="Models.MixedModelWithReadonlyProperty"/> instance for mocking. </returns>
@@ -121,15 +133,18 @@ namespace ModelShapes.Models
         {
             readonlyListProperty ??= new List<ReadonlyModel>();
 
-            return new MixedModelWithReadonlyProperty(readonlyProperty, readonlyListProperty?.ToList());
+            return new MixedModelWithReadonlyProperty(readonlyProperty, readonlyListProperty?.ToList(), default);
         }
 
-        /// <summary> Initializes a new instance of ReadonlyModel. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::ModelShapes.Models.ReadonlyModel
+        ///
+        /// </summary>
         /// <param name="name"></param>
         /// <returns> A new <see cref="Models.ReadonlyModel"/> instance for mocking. </returns>
         public static ReadonlyModel ReadonlyModel(string name = null)
         {
-            return new ReadonlyModel(name);
+            return new ReadonlyModel(name, default);
         }
     }
 }

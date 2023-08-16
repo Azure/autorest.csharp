@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
 using Azure.Core;
 
 namespace Azure.ResourceManager.Storage.Models
@@ -13,7 +14,12 @@ namespace Azure.ResourceManager.Storage.Models
     /// <summary> The parameters to list service SAS credentials of a specific resource. </summary>
     public partial class ServiceSasContent
     {
-        /// <summary> Initializes a new instance of ServiceSasContent. </summary>
+        private Dictionary<string, BinaryData> _rawData;
+
+        /// <summary>
+        /// Initializes a new instance of global::Azure.ResourceManager.Storage.Models.ServiceSasContent
+        ///
+        /// </summary>
         /// <param name="canonicalizedResource"> The canonical path to the signed resource. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="canonicalizedResource"/> is null. </exception>
         public ServiceSasContent(string canonicalizedResource)
@@ -23,7 +29,10 @@ namespace Azure.ResourceManager.Storage.Models
             CanonicalizedResource = canonicalizedResource;
         }
 
-        /// <summary> Initializes a new instance of ServiceSasContent. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::Azure.ResourceManager.Storage.Models.ServiceSasContent
+        ///
+        /// </summary>
         /// <param name="canonicalizedResource"> The canonical path to the signed resource. </param>
         /// <param name="resource"> The signed services accessible with the service SAS. Possible values include: Blob (b), Container (c), File (f), Share (s). </param>
         /// <param name="permissions"> The signed permissions for the service SAS. Possible values include: Read (r), Write (w), Delete (d), List (l), Add (a), Create (c), Update (u) and Process (p). </param>
@@ -42,7 +51,8 @@ namespace Azure.ResourceManager.Storage.Models
         /// <param name="contentEncoding"> The response header override for content encoding. </param>
         /// <param name="contentLanguage"> The response header override for content language. </param>
         /// <param name="contentType"> The response header override for content type. </param>
-        internal ServiceSasContent(string canonicalizedResource, SignedResource? resource, Permission? permissions, string ipAddressOrRange, HttpProtocol? protocols, DateTimeOffset? sharedAccessStartOn, DateTimeOffset? sharedAccessExpiryOn, string identifier, string partitionKeyStart, string partitionKeyEnd, string rowKeyStart, string rowKeyEnd, string keyToSign, string cacheControl, string contentDisposition, string contentEncoding, string contentLanguage, string contentType)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal ServiceSasContent(string canonicalizedResource, SignedResource? resource, Permission? permissions, string ipAddressOrRange, HttpProtocol? protocols, DateTimeOffset? sharedAccessStartOn, DateTimeOffset? sharedAccessExpiryOn, string identifier, string partitionKeyStart, string partitionKeyEnd, string rowKeyStart, string rowKeyEnd, string keyToSign, string cacheControl, string contentDisposition, string contentEncoding, string contentLanguage, string contentType, Dictionary<string, BinaryData> rawData)
         {
             CanonicalizedResource = canonicalizedResource;
             Resource = resource;
@@ -62,6 +72,7 @@ namespace Azure.ResourceManager.Storage.Models
             ContentEncoding = contentEncoding;
             ContentLanguage = contentLanguage;
             ContentType = contentType;
+            _rawData = rawData;
         }
 
         /// <summary> The canonical path to the signed resource. </summary>

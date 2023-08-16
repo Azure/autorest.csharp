@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
 using Azure.Core;
 using Azure.ResourceManager.Resources.Models;
 
@@ -14,7 +15,12 @@ namespace MgmtDiscriminator.Models
     /// <summary> Defines the parameters for the origin group override action. </summary>
     public partial class OriginGroupOverrideActionParameters
     {
-        /// <summary> Initializes a new instance of OriginGroupOverrideActionParameters. </summary>
+        private Dictionary<string, BinaryData> _rawData;
+
+        /// <summary>
+        /// Initializes a new instance of global::MgmtDiscriminator.Models.OriginGroupOverrideActionParameters
+        ///
+        /// </summary>
         /// <param name="typeName"></param>
         /// <param name="originGroup"> defines the OriginGroup that would override the DefaultOriginGroup. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="originGroup"/> is null. </exception>
@@ -24,6 +30,20 @@ namespace MgmtDiscriminator.Models
 
             TypeName = typeName;
             OriginGroup = originGroup;
+        }
+
+        /// <summary>
+        /// Initializes a new instance of global::MgmtDiscriminator.Models.OriginGroupOverrideActionParameters
+        ///
+        /// </summary>
+        /// <param name="typeName"></param>
+        /// <param name="originGroup"> defines the OriginGroup that would override the DefaultOriginGroup. </param>
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal OriginGroupOverrideActionParameters(OriginGroupOverrideActionParametersTypeName typeName, WritableSubResource originGroup, Dictionary<string, BinaryData> rawData)
+        {
+            TypeName = typeName;
+            OriginGroup = originGroup;
+            _rawData = rawData;
         }
 
         /// <summary> Gets or sets the type name. </summary>

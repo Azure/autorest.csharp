@@ -6,18 +6,18 @@
 #nullable disable
 
 using System;
+using System.IO;
 using System.Xml;
 using System.Xml.Linq;
+using Azure;
 using Azure.Core;
 using Azure.Core.Serialization;
 
 namespace Azure.Storage.Tables.Models
 {
-    public partial class Logging : IXmlSerializable, IXmlModelSerializable
+    public partial class Logging : IXmlSerializable, IModelSerializable<Logging>
     {
-        void IXmlModelSerializable.Serialize(XmlWriter writer, ModelSerializerOptions options) => ((IXmlSerializable)this).Write(writer, null, options);
-
-        void IXmlSerializable.Write(XmlWriter writer, string nameHint, ModelSerializerOptions options)
+        private void Serialize(XmlWriter writer, string nameHint, ModelSerializerOptions options)
         {
             writer.WriteStartElement("Logging");
             writer.WriteStartElement("Version");
@@ -32,18 +32,15 @@ namespace Azure.Storage.Tables.Models
             writer.WriteStartElement("Write");
             writer.WriteValue(Write);
             writer.WriteEndElement();
-            writer.WriteObjectValue(RetentionPolicy, "RetentionPolicy", options);
+            writer.WriteObjectValue(RetentionPolicy, "RetentionPolicy");
             writer.WriteEndElement();
         }
 
-        object IModelSerializable.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            return DeserializeLogging(XElement.Load(data.ToStream()), options);
-        }
+        void IXmlSerializable.Write(XmlWriter writer, string nameHint) => Serialize(writer, nameHint, ModelSerializerOptions.DefaultWireOptions);
 
         internal static Logging DeserializeLogging(XElement element, ModelSerializerOptions options = default)
         {
-            options ??= ModelSerializerOptions.AzureServiceDefault;
+            options ??= ModelSerializerOptions.DefaultWireOptions;
             string version = default;
             bool delete = default;
             bool read = default;
@@ -69,7 +66,53 @@ namespace Azure.Storage.Tables.Models
             {
                 retentionPolicy = RetentionPolicy.DeserializeRetentionPolicy(retentionPolicyElement);
             }
-            return new Logging(version, delete, read, write, retentionPolicy);
+            return new Logging(version, delete, read, write, retentionPolicy, default);
+        }
+
+        BinaryData IModelSerializable<Logging>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            options ??= ModelSerializerOptions.DefaultWireOptions;
+            using MemoryStream stream = new MemoryStream();
+            using XmlWriter writer = XmlWriter.Create(stream);
+            Serialize(writer, null, options);
+            writer.Flush();
+            if (stream.Position > int.MaxValue)
+            {
+                return BinaryData.FromStream(stream);
+            }
+            else
+            {
+                return new BinaryData(stream.GetBuffer().AsMemory(0, (int)stream.Position));
+            }
+        }
+
+        Logging IModelSerializable<Logging>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            return DeserializeLogging(XElement.Load(data.ToStream()), options);
+        }
+
+        public static implicit operator RequestContent(Logging model)
+        {
+            if (model is null)
+            {
+                return null;
+            }
+
+            return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
+        }
+
+        public static explicit operator Logging(Response response)
+        {
+            if (response is null)
+            {
+                return null;
+            }
+
+            return DeserializeLogging(XElement.Load(response.ContentStream), ModelSerializerOptions.DefaultWireOptions);
         }
     }
 }

@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Collections.Generic;
 using Azure.Core;
 
@@ -13,7 +14,10 @@ namespace Azure.Network.Management.Interface.Models
     /// <summary> A network interface in a resource group. </summary>
     public partial class NetworkInterface : Resource
     {
-        /// <summary> Initializes a new instance of NetworkInterface. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::Azure.Network.Management.Interface.Models.NetworkInterface
+        ///
+        /// </summary>
         public NetworkInterface()
         {
             IpConfigurations = new ChangeTrackingList<NetworkInterfaceIPConfiguration>();
@@ -21,7 +25,10 @@ namespace Azure.Network.Management.Interface.Models
             HostedWorkloads = new ChangeTrackingList<string>();
         }
 
-        /// <summary> Initializes a new instance of NetworkInterface. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::Azure.Network.Management.Interface.Models.NetworkInterface
+        ///
+        /// </summary>
         /// <param name="id"> Resource ID. </param>
         /// <param name="name"> Resource name. </param>
         /// <param name="type"> Resource type. </param>
@@ -41,7 +48,8 @@ namespace Azure.Network.Management.Interface.Models
         /// <param name="hostedWorkloads"> A list of references to linked BareMetal resources. </param>
         /// <param name="resourceGuid"> The resource GUID property of the network interface resource. </param>
         /// <param name="provisioningState"> The provisioning state of the network interface resource. </param>
-        internal NetworkInterface(string id, string name, string type, string location, IDictionary<string, string> tags, string etag, SubResource virtualMachine, NetworkSecurityGroup networkSecurityGroup, PrivateEndpoint privateEndpoint, IList<NetworkInterfaceIPConfiguration> ipConfigurations, IReadOnlyList<NetworkInterfaceTapConfiguration> tapConfigurations, NetworkInterfaceDnsSettings dnsSettings, string macAddress, bool? primary, bool? enableAcceleratedNetworking, bool? enableIPForwarding, IReadOnlyList<string> hostedWorkloads, string resourceGuid, ProvisioningState? provisioningState) : base(id, name, type, location, tags)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal NetworkInterface(string id, string name, string type, string location, IDictionary<string, string> tags, string etag, SubResource virtualMachine, NetworkSecurityGroup networkSecurityGroup, PrivateEndpoint privateEndpoint, IList<NetworkInterfaceIPConfiguration> ipConfigurations, IReadOnlyList<NetworkInterfaceTapConfiguration> tapConfigurations, NetworkInterfaceDnsSettings dnsSettings, string macAddress, bool? primary, bool? enableAcceleratedNetworking, bool? enableIPForwarding, IReadOnlyList<string> hostedWorkloads, string resourceGuid, ProvisioningState? provisioningState, Dictionary<string, BinaryData> rawData) : base(id, name, type, location, tags, rawData)
         {
             Etag = etag;
             VirtualMachine = virtualMachine;

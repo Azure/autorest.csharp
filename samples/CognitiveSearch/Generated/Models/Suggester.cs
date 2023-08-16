@@ -15,7 +15,12 @@ namespace CognitiveSearch.Models
     /// <summary> Defines how the Suggest API should apply to a group of fields in the index. </summary>
     public partial class Suggester
     {
-        /// <summary> Initializes a new instance of Suggester. </summary>
+        private Dictionary<string, BinaryData> _rawData;
+
+        /// <summary>
+        /// Initializes a new instance of global::CognitiveSearch.Models.Suggester
+        ///
+        /// </summary>
         /// <param name="name"> The name of the suggester. </param>
         /// <param name="searchMode"> A value indicating the capabilities of the suggester. </param>
         /// <param name="sourceFields"> The list of field names to which the suggester applies. Each field must be searchable. </param>
@@ -30,15 +35,20 @@ namespace CognitiveSearch.Models
             SourceFields = sourceFields.ToList();
         }
 
-        /// <summary> Initializes a new instance of Suggester. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::CognitiveSearch.Models.Suggester
+        ///
+        /// </summary>
         /// <param name="name"> The name of the suggester. </param>
         /// <param name="searchMode"> A value indicating the capabilities of the suggester. </param>
         /// <param name="sourceFields"> The list of field names to which the suggester applies. Each field must be searchable. </param>
-        internal Suggester(string name, SearchMode searchMode, IList<string> sourceFields)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal Suggester(string name, SearchMode searchMode, IList<string> sourceFields, Dictionary<string, BinaryData> rawData)
         {
             Name = name;
             SearchMode = searchMode;
             SourceFields = sourceFields;
+            _rawData = rawData;
         }
 
         /// <summary> The name of the suggester. </summary>

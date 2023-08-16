@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Collections.Generic;
 using Azure.Core;
 using Azure.ResourceManager.Models;
@@ -20,7 +21,12 @@ namespace Azure.ResourceManager.Sample
     /// </summary>
     public partial class AvailabilitySetData : TrackedResourceData
     {
-        /// <summary> Initializes a new instance of AvailabilitySetData. </summary>
+        private Dictionary<string, BinaryData> _rawData;
+
+        /// <summary>
+        /// Initializes a new instance of global::Azure.ResourceManager.Sample.AvailabilitySetData
+        ///
+        /// </summary>
         /// <param name="location"> The location. </param>
         public AvailabilitySetData(AzureLocation location) : base(location)
         {
@@ -28,7 +34,10 @@ namespace Azure.ResourceManager.Sample
             Statuses = new ChangeTrackingList<InstanceViewStatus>();
         }
 
-        /// <summary> Initializes a new instance of AvailabilitySetData. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::Azure.ResourceManager.Sample.AvailabilitySetData
+        ///
+        /// </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
         /// <param name="resourceType"> The resourceType. </param>
@@ -59,7 +68,8 @@ namespace Azure.ResourceManager.Sample
         /// The resource status information.
         /// Serialized Name: AvailabilitySet.properties.statuses
         /// </param>
-        internal AvailabilitySetData(ResourceIdentifier id, string name, ResourceType resourceType, SystemData systemData, IDictionary<string, string> tags, AzureLocation location, SampleSku sku, int? platformUpdateDomainCount, int? platformFaultDomainCount, IList<WritableSubResource> virtualMachines, WritableSubResource proximityPlacementGroup, IReadOnlyList<InstanceViewStatus> statuses) : base(id, name, resourceType, systemData, tags, location)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal AvailabilitySetData(ResourceIdentifier id, string name, ResourceType resourceType, SystemData systemData, IDictionary<string, string> tags, AzureLocation location, SampleSku sku, int? platformUpdateDomainCount, int? platformFaultDomainCount, IList<WritableSubResource> virtualMachines, WritableSubResource proximityPlacementGroup, IReadOnlyList<InstanceViewStatus> statuses, Dictionary<string, BinaryData> rawData) : base(id, name, resourceType, systemData, tags, location)
         {
             Sku = sku;
             PlatformUpdateDomainCount = platformUpdateDomainCount;
@@ -67,6 +77,7 @@ namespace Azure.ResourceManager.Sample
             VirtualMachines = virtualMachines;
             ProximityPlacementGroup = proximityPlacementGroup;
             Statuses = statuses;
+            _rawData = rawData;
         }
 
         /// <summary>

@@ -15,7 +15,12 @@ namespace Azure.AI.FormRecognizer.Models
     /// <summary> Report for a custom model training document. </summary>
     public partial class TrainingDocumentInfo
     {
-        /// <summary> Initializes a new instance of TrainingDocumentInfo. </summary>
+        private Dictionary<string, BinaryData> _rawData;
+
+        /// <summary>
+        /// Initializes a new instance of global::Azure.AI.FormRecognizer.Models.TrainingDocumentInfo
+        ///
+        /// </summary>
         /// <param name="documentName"> Training document name. </param>
         /// <param name="pages"> Total number of pages trained. </param>
         /// <param name="errors"> List of errors. </param>
@@ -32,17 +37,22 @@ namespace Azure.AI.FormRecognizer.Models
             Status = status;
         }
 
-        /// <summary> Initializes a new instance of TrainingDocumentInfo. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::Azure.AI.FormRecognizer.Models.TrainingDocumentInfo
+        ///
+        /// </summary>
         /// <param name="documentName"> Training document name. </param>
         /// <param name="pages"> Total number of pages trained. </param>
         /// <param name="errors"> List of errors. </param>
         /// <param name="status"> Status of the training operation. </param>
-        internal TrainingDocumentInfo(string documentName, int pages, IReadOnlyList<ErrorInformation> errors, TrainStatus status)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal TrainingDocumentInfo(string documentName, int pages, IReadOnlyList<ErrorInformation> errors, TrainStatus status, Dictionary<string, BinaryData> rawData)
         {
             DocumentName = documentName;
             Pages = pages;
             Errors = errors;
             Status = status;
+            _rawData = rawData;
         }
 
         /// <summary> Training document name. </summary>

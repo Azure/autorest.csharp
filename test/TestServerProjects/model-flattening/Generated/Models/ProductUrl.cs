@@ -5,20 +5,30 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
+
 namespace model_flattening.Models
 {
     /// <summary> The product URL. </summary>
     internal partial class ProductUrl : GenericUrl
     {
-        /// <summary> Initializes a new instance of ProductUrl. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::model_flattening.Models.ProductUrl
+        ///
+        /// </summary>
         internal ProductUrl()
         {
         }
 
-        /// <summary> Initializes a new instance of ProductUrl. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::model_flattening.Models.ProductUrl
+        ///
+        /// </summary>
         /// <param name="genericValue"> Generic URL value. </param>
         /// <param name="odataValue"> URL value. </param>
-        internal ProductUrl(string genericValue, string odataValue) : base(genericValue)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal ProductUrl(string genericValue, string odataValue, Dictionary<string, BinaryData> rawData) : base(genericValue, rawData)
         {
             OdataValue = odataValue;
         }

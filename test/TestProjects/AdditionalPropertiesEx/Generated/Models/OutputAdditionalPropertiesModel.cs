@@ -13,7 +13,10 @@ namespace AdditionalPropertiesEx.Models
     /// <summary> The OutputAdditionalPropertiesModel. </summary>
     public partial class OutputAdditionalPropertiesModel
     {
-        /// <summary> Initializes a new instance of OutputAdditionalPropertiesModel. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::AdditionalPropertiesEx.Models.OutputAdditionalPropertiesModel
+        ///
+        /// </summary>
         /// <param name="id"></param>
         internal OutputAdditionalPropertiesModel(int id)
         {
@@ -21,7 +24,10 @@ namespace AdditionalPropertiesEx.Models
             AdditionalProperties = new ChangeTrackingDictionary<string, string>();
         }
 
-        /// <summary> Initializes a new instance of OutputAdditionalPropertiesModel. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::AdditionalPropertiesEx.Models.OutputAdditionalPropertiesModel
+        ///
+        /// </summary>
         /// <param name="id"></param>
         /// <param name="additionalProperties"> Additional Properties. </param>
         internal OutputAdditionalPropertiesModel(int id, IReadOnlyDictionary<string, string> additionalProperties)

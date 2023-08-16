@@ -5,29 +5,42 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
+
 namespace AppConfiguration.Models
 {
     /// <summary> Azure App Configuration error object. </summary>
     internal partial class Error
     {
-        /// <summary> Initializes a new instance of Error. </summary>
+        private Dictionary<string, BinaryData> _rawData;
+
+        /// <summary>
+        /// Initializes a new instance of global::AppConfiguration.Models.Error
+        ///
+        /// </summary>
         internal Error()
         {
         }
 
-        /// <summary> Initializes a new instance of Error. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::AppConfiguration.Models.Error
+        ///
+        /// </summary>
         /// <param name="type"> The type of the error. </param>
         /// <param name="title"> A brief summary of the error. </param>
         /// <param name="name"> The name of the parameter that resulted in the error. </param>
         /// <param name="detail"> A detailed description of the error. </param>
         /// <param name="status"> The HTTP status code that the error maps to. </param>
-        internal Error(string type, string title, string name, string detail, int? status)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal Error(string type, string title, string name, string detail, int? status, Dictionary<string, BinaryData> rawData)
         {
             Type = type;
             Title = title;
             Name = name;
             Detail = detail;
             Status = status;
+            _rawData = rawData;
         }
 
         /// <summary> The type of the error. </summary>

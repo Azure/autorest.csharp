@@ -5,16 +5,30 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
+
 namespace Projection.ProjectedName.Models
 {
     /// <summary> The JsonProjectedNameModel. </summary>
     public partial class JsonProjectedNameModel
     {
+        private Dictionary<string, BinaryData> _rawData;
+
         /// <summary> Initializes a new instance of JsonProjectedNameModel. </summary>
         /// <param name="defaultName"> Pass in true. </param>
         public JsonProjectedNameModel(bool defaultName)
         {
             DefaultName = defaultName;
+        }
+
+        /// <summary> Initializes a new instance of JsonProjectedNameModel. </summary>
+        /// <param name="defaultName"> Pass in true. </param>
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal JsonProjectedNameModel(bool defaultName, Dictionary<string, BinaryData> rawData)
+        {
+            DefaultName = defaultName;
+            _rawData = rawData;
         }
 
         /// <summary> Pass in true. </summary>

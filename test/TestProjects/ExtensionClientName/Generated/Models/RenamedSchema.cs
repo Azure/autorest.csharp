@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Collections.Generic;
 using Azure.Core;
 
@@ -13,19 +14,29 @@ namespace ExtensionClientName.Models
     /// <summary> The RenamedSchema. </summary>
     public partial class RenamedSchema
     {
-        /// <summary> Initializes a new instance of RenamedSchema. </summary>
+        private Dictionary<string, BinaryData> _rawData;
+
+        /// <summary>
+        /// Initializes a new instance of global::ExtensionClientName.Models.RenamedSchema
+        ///
+        /// </summary>
         public RenamedSchema()
         {
             RenamedProperty = new ChangeTrackingDictionary<string, string>();
         }
 
-        /// <summary> Initializes a new instance of RenamedSchema. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::ExtensionClientName.Models.RenamedSchema
+        ///
+        /// </summary>
         /// <param name="renamedProperty"> A description about the set of tags. </param>
         /// <param name="renamedPropertyString"> A description about the set of tags. </param>
-        internal RenamedSchema(IDictionary<string, string> renamedProperty, string renamedPropertyString)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal RenamedSchema(IDictionary<string, string> renamedProperty, string renamedPropertyString, Dictionary<string, BinaryData> rawData)
         {
             RenamedProperty = renamedProperty;
             RenamedPropertyString = renamedPropertyString;
+            _rawData = rawData;
         }
 
         /// <summary> A description about the set of tags. </summary>

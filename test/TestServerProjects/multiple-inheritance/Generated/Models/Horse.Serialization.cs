@@ -6,18 +6,22 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
 using System.Text.Json;
+using Azure;
 using Azure.Core;
 using Azure.Core.Serialization;
 
 namespace multiple_inheritance.Models
 {
-    public partial class Horse : IUtf8JsonSerializable, IJsonModelSerializable
+    public partial class Horse : IUtf8JsonSerializable, IModelJsonSerializable<Horse>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModelSerializable)this).Serialize(writer, ModelSerializerOptions.AzureServiceDefault);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<Horse>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
 
-        void IJsonModelSerializable.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
+        void IModelJsonSerializable<Horse>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
+            ModelSerializerHelper.ValidateFormat<Horse>(this, options.Format);
+
             writer.WriteStartObject();
             if (Optional.IsDefined(IsAShowHorse))
             {
@@ -26,24 +30,32 @@ namespace multiple_inheritance.Models
             }
             writer.WritePropertyName("name"u8);
             writer.WriteStringValue(Name);
+            if (_rawData is not null && options.Format == ModelSerializerFormat.Json)
+            {
+                foreach (var property in _rawData)
+                {
+                    writer.WritePropertyName(property.Key);
+#if NET6_0_OR_GREATER
+				writer.WriteRawValue(property.Value);
+#else
+                    JsonSerializer.Serialize(writer, JsonDocument.Parse(property.Value.ToString()).RootElement);
+#endif
+                }
+            }
             writer.WriteEndObject();
-        }
-
-        object IModelSerializable.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            using var doc = JsonDocument.Parse(data);
-            return DeserializeHorse(doc.RootElement, options);
         }
 
         internal static Horse DeserializeHorse(JsonElement element, ModelSerializerOptions options = default)
         {
-            options ??= ModelSerializerOptions.AzureServiceDefault;
+            options ??= ModelSerializerOptions.DefaultWireOptions;
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
             }
             Optional<bool> isAShowHorse = default;
             string name = default;
+            Dictionary<string, BinaryData> rawData = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("isAShowHorse"u8))
@@ -60,14 +72,57 @@ namespace multiple_inheritance.Models
                     name = property.Value.GetString();
                     continue;
                 }
+                if (options.Format == ModelSerializerFormat.Json)
+                {
+                    rawData.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
+                    continue;
+                }
             }
-            return new Horse(name, Optional.ToNullable(isAShowHorse));
+            return new Horse(name, Optional.ToNullable(isAShowHorse), rawData);
         }
 
-        object IJsonModelSerializable.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        Horse IModelJsonSerializable<Horse>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
         {
+            ModelSerializerHelper.ValidateFormat<Horse>(this, options.Format);
+
             using var doc = JsonDocument.ParseValue(ref reader);
             return DeserializeHorse(doc.RootElement, options);
+        }
+
+        BinaryData IModelSerializable<Horse>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat<Horse>(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        Horse IModelSerializable<Horse>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat<Horse>(this, options.Format);
+
+            using var doc = JsonDocument.Parse(data);
+            return DeserializeHorse(doc.RootElement, options);
+        }
+
+        public static implicit operator RequestContent(Horse model)
+        {
+            if (model is null)
+            {
+                return null;
+            }
+
+            return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
+        }
+
+        public static explicit operator Horse(Response response)
+        {
+            if (response is null)
+            {
+                return null;
+            }
+
+            using JsonDocument doc = JsonDocument.Parse(response.ContentStream);
+            return DeserializeHorse(doc.RootElement, ModelSerializerOptions.DefaultWireOptions);
         }
     }
 }

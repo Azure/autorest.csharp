@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Collections.Generic;
 using Azure.Core;
 using MgmtPagination;
@@ -14,19 +15,29 @@ namespace MgmtPagination.Models
     /// <summary> The PageSizeDecimalModelListResult. </summary>
     internal partial class PageSizeDecimalModelListResult
     {
-        /// <summary> Initializes a new instance of PageSizeDecimalModelListResult. </summary>
+        private Dictionary<string, BinaryData> _rawData;
+
+        /// <summary>
+        /// Initializes a new instance of global::MgmtPagination.Models.PageSizeDecimalModelListResult
+        ///
+        /// </summary>
         internal PageSizeDecimalModelListResult()
         {
             Value = new ChangeTrackingList<PageSizeDecimalModelData>();
         }
 
-        /// <summary> Initializes a new instance of PageSizeDecimalModelListResult. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::MgmtPagination.Models.PageSizeDecimalModelListResult
+        ///
+        /// </summary>
         /// <param name="value"></param>
         /// <param name="nextLink"></param>
-        internal PageSizeDecimalModelListResult(IReadOnlyList<PageSizeDecimalModelData> value, string nextLink)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal PageSizeDecimalModelListResult(IReadOnlyList<PageSizeDecimalModelData> value, string nextLink, Dictionary<string, BinaryData> rawData)
         {
             Value = value;
             NextLink = nextLink;
+            _rawData = rawData;
         }
 
         /// <summary> Gets the value. </summary>

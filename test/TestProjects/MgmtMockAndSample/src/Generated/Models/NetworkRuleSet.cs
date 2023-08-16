@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Collections.Generic;
 using Azure.Core;
 
@@ -13,24 +14,34 @@ namespace MgmtMockAndSample.Models
     /// <summary> A set of rules governing the network accessibility of a vault. </summary>
     public partial class NetworkRuleSet
     {
-        /// <summary> Initializes a new instance of NetworkRuleSet. </summary>
+        private Dictionary<string, BinaryData> _rawData;
+
+        /// <summary>
+        /// Initializes a new instance of global::MgmtMockAndSample.Models.NetworkRuleSet
+        ///
+        /// </summary>
         public NetworkRuleSet()
         {
             IpRules = new ChangeTrackingList<IPRule>();
             VirtualNetworkRules = new ChangeTrackingList<VirtualNetworkRule>();
         }
 
-        /// <summary> Initializes a new instance of NetworkRuleSet. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::MgmtMockAndSample.Models.NetworkRuleSet
+        ///
+        /// </summary>
         /// <param name="bypass"> Tells what traffic can bypass network rules. This can be 'AzureServices' or 'None'.  If not specified the default is 'AzureServices'. </param>
         /// <param name="defaultAction"> The default action when no rule from ipRules and from virtualNetworkRules match. This is only used after the bypass property has been evaluated. </param>
         /// <param name="ipRules"> The list of IP address rules. </param>
         /// <param name="virtualNetworkRules"> The list of virtual network rules. </param>
-        internal NetworkRuleSet(NetworkRuleBypassOption? bypass, NetworkRuleAction? defaultAction, IList<IPRule> ipRules, IList<VirtualNetworkRule> virtualNetworkRules)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal NetworkRuleSet(NetworkRuleBypassOption? bypass, NetworkRuleAction? defaultAction, IList<IPRule> ipRules, IList<VirtualNetworkRule> virtualNetworkRules, Dictionary<string, BinaryData> rawData)
         {
             Bypass = bypass;
             DefaultAction = defaultAction;
             IpRules = ipRules;
             VirtualNetworkRules = virtualNetworkRules;
+            _rawData = rawData;
         }
 
         /// <summary> Tells what traffic can bypass network rules. This can be 'AzureServices' or 'None'.  If not specified the default is 'AzureServices'. </summary>

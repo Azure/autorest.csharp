@@ -5,21 +5,34 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
+
 namespace TypeSchemaMapping.Models
 {
     /// <summary> The ModelWithInternalModel. </summary>
     public partial class ModelWithInternalModel
     {
-        /// <summary> Initializes a new instance of ModelWithInternalModel. </summary>
+        private Dictionary<string, BinaryData> _rawData;
+
+        /// <summary>
+        /// Initializes a new instance of global::TypeSchemaMapping.Models.ModelWithInternalModel
+        ///
+        /// </summary>
         internal ModelWithInternalModel()
         {
         }
 
-        /// <summary> Initializes a new instance of ModelWithInternalModel. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::TypeSchemaMapping.Models.ModelWithInternalModel
+        ///
+        /// </summary>
         /// <param name="internalProperty"></param>
-        internal ModelWithInternalModel(InternalModel internalProperty)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal ModelWithInternalModel(InternalModel internalProperty, Dictionary<string, BinaryData> rawData)
         {
             InternalProperty = internalProperty;
+            _rawData = rawData;
         }
     }
 }

@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Collections.Generic;
 using Azure.Core;
 
@@ -14,7 +15,10 @@ namespace Azure.ResourceManager.Fake.Models
     [ReferenceType]
     public abstract partial class TrackedResource : MgmtReferenceTypesResourceData
     {
-        /// <summary> Initializes a new instance of TrackedResource. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::Azure.ResourceManager.Fake.Models.TrackedResource
+        ///
+        /// </summary>
         /// <param name="location"> The geo-location where the resource lives. </param>
         [InitializationConstructor]
         protected TrackedResource(AzureLocation location)
@@ -23,14 +27,17 @@ namespace Azure.ResourceManager.Fake.Models
             Location = location;
         }
 
-        /// <summary> Initializes a new instance of TrackedResource. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::Azure.ResourceManager.Fake.Models.TrackedResource
+        ///
+        /// </summary>
         /// <param name="id"> Fully qualified resource ID for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}. </param>
         /// <param name="name"> The name of the resource. </param>
         /// <param name="resourceType"> The type of the resource. E.g. "Microsoft.Compute/virtualMachines" or "Microsoft.Storage/storageAccounts". </param>
         /// <param name="tags"> Resource tags. </param>
         /// <param name="location"> The geo-location where the resource lives. </param>
-        [SerializationConstructor]
-        protected TrackedResource(ResourceIdentifier id, string name, ResourceType resourceType, IDictionary<string, string> tags, AzureLocation location) : base(id, name, resourceType)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        protected TrackedResource(ResourceIdentifier id, string name, ResourceType resourceType, IDictionary<string, string> tags, AzureLocation location, Dictionary<string, BinaryData> rawData) : base(id, name, resourceType, rawData)
         {
             Tags = tags;
             Location = location;

@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
 using Azure.Core;
 
 namespace Azure.Storage.Tables.Models
@@ -13,7 +14,12 @@ namespace Azure.Storage.Tables.Models
     /// <summary> An Access policy. </summary>
     public partial class AccessPolicy
     {
-        /// <summary> Initializes a new instance of AccessPolicy. </summary>
+        private Dictionary<string, BinaryData> _rawData;
+
+        /// <summary>
+        /// Initializes a new instance of global::Azure.Storage.Tables.Models.AccessPolicy
+        ///
+        /// </summary>
         /// <param name="start"> the date-time the policy is active. </param>
         /// <param name="expiry"> the date-time the policy expires. </param>
         /// <param name="permission"> the permissions for the acl policy. </param>
@@ -25,6 +31,22 @@ namespace Azure.Storage.Tables.Models
             Start = start;
             Expiry = expiry;
             Permission = permission;
+        }
+
+        /// <summary>
+        /// Initializes a new instance of global::Azure.Storage.Tables.Models.AccessPolicy
+        ///
+        /// </summary>
+        /// <param name="start"> the date-time the policy is active. </param>
+        /// <param name="expiry"> the date-time the policy expires. </param>
+        /// <param name="permission"> the permissions for the acl policy. </param>
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal AccessPolicy(DateTimeOffset start, DateTimeOffset expiry, string permission, Dictionary<string, BinaryData> rawData)
+        {
+            Start = start;
+            Expiry = expiry;
+            Permission = permission;
+            _rawData = rawData;
         }
 
         /// <summary> the date-time the policy is active. </summary>

@@ -6,26 +6,37 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
 
 namespace xml_service.Models
 {
     /// <summary> A banana. </summary>
     public partial class Banana
     {
-        /// <summary> Initializes a new instance of Banana. </summary>
+        private Dictionary<string, BinaryData> _rawData;
+
+        /// <summary>
+        /// Initializes a new instance of global::xml_service.Models.Banana
+        ///
+        /// </summary>
         public Banana()
         {
         }
 
-        /// <summary> Initializes a new instance of Banana. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::xml_service.Models.Banana
+        ///
+        /// </summary>
         /// <param name="name"></param>
         /// <param name="flavor"></param>
         /// <param name="expiration"> The time at which you should reconsider eating this banana. </param>
-        internal Banana(string name, string flavor, DateTimeOffset? expiration)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal Banana(string name, string flavor, DateTimeOffset? expiration, Dictionary<string, BinaryData> rawData)
         {
             Name = name;
             Flavor = flavor;
             Expiration = expiration;
+            _rawData = rawData;
         }
 
         /// <summary> Gets or sets the name. </summary>

@@ -15,6 +15,8 @@ namespace Encode.Bytes.Models
     /// <summary> The Base64urlArrayBytesProperty. </summary>
     public partial class Base64urlArrayBytesProperty
     {
+        private Dictionary<string, BinaryData> _rawData;
+
         /// <summary> Initializes a new instance of Base64urlArrayBytesProperty. </summary>
         /// <param name="value"></param>
         /// <exception cref="ArgumentNullException"> <paramref name="value"/> is null. </exception>
@@ -27,9 +29,11 @@ namespace Encode.Bytes.Models
 
         /// <summary> Initializes a new instance of Base64urlArrayBytesProperty. </summary>
         /// <param name="value"></param>
-        internal Base64urlArrayBytesProperty(IList<BinaryData> value)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal Base64urlArrayBytesProperty(IList<BinaryData> value, Dictionary<string, BinaryData> rawData)
         {
             Value = value;
+            _rawData = rawData;
         }
 
         /// <summary>

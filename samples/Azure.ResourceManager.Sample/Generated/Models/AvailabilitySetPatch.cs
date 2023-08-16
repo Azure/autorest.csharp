@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Collections.Generic;
 using Azure.Core;
 using Azure.ResourceManager.Resources.Models;
@@ -17,14 +18,20 @@ namespace Azure.ResourceManager.Sample.Models
     /// </summary>
     public partial class AvailabilitySetPatch : UpdateResource
     {
-        /// <summary> Initializes a new instance of AvailabilitySetPatch. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::Azure.ResourceManager.Sample.Models.AvailabilitySetPatch
+        ///
+        /// </summary>
         public AvailabilitySetPatch()
         {
             VirtualMachines = new ChangeTrackingList<WritableSubResource>();
             Statuses = new ChangeTrackingList<InstanceViewStatus>();
         }
 
-        /// <summary> Initializes a new instance of AvailabilitySetPatch. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::Azure.ResourceManager.Sample.Models.AvailabilitySetPatch
+        ///
+        /// </summary>
         /// <param name="tags">
         /// Resource tags
         /// Serialized Name: UpdateResource.tags
@@ -53,7 +60,8 @@ namespace Azure.ResourceManager.Sample.Models
         /// The resource status information.
         /// Serialized Name: AvailabilitySetUpdate.properties.statuses
         /// </param>
-        internal AvailabilitySetPatch(IDictionary<string, string> tags, SampleSku sku, int? platformUpdateDomainCount, int? platformFaultDomainCount, IList<WritableSubResource> virtualMachines, WritableSubResource proximityPlacementGroup, IReadOnlyList<InstanceViewStatus> statuses) : base(tags)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal AvailabilitySetPatch(IDictionary<string, string> tags, SampleSku sku, int? platformUpdateDomainCount, int? platformFaultDomainCount, IList<WritableSubResource> virtualMachines, WritableSubResource proximityPlacementGroup, IReadOnlyList<InstanceViewStatus> statuses, Dictionary<string, BinaryData> rawData) : base(tags, rawData)
         {
             Sku = sku;
             PlatformUpdateDomainCount = platformUpdateDomainCount;

@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Collections.Generic;
 using Azure.Core;
 using MgmtMockAndSample.Models;
@@ -17,13 +18,19 @@ namespace MgmtMockAndSample
     /// </summary>
     public partial class FirewallPolicyRuleCollectionGroupData : SubResource
     {
-        /// <summary> Initializes a new instance of FirewallPolicyRuleCollectionGroupData. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::MgmtMockAndSample.FirewallPolicyRuleCollectionGroupData
+        ///
+        /// </summary>
         public FirewallPolicyRuleCollectionGroupData()
         {
             RuleCollections = new ChangeTrackingList<FirewallPolicyRuleCollection>();
         }
 
-        /// <summary> Initializes a new instance of FirewallPolicyRuleCollectionGroupData. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::MgmtMockAndSample.FirewallPolicyRuleCollectionGroupData
+        ///
+        /// </summary>
         /// <param name="id"> Resource ID. </param>
         /// <param name="name"> The name of the resource that is unique within a resource group. This name can be used to access the resource. </param>
         /// <param name="etag"> A unique read-only string that changes whenever the resource is updated. </param>
@@ -35,7 +42,8 @@ namespace MgmtMockAndSample
         /// The available derived classes include <see cref="FirewallPolicyFilterRuleCollection"/> and <see cref="FirewallPolicyNatRuleCollection"/>.
         /// </param>
         /// <param name="provisioningState"> The provisioning state of the firewall policy rule collection group resource. </param>
-        internal FirewallPolicyRuleCollectionGroupData(string id, string name, string etag, ResourceType? resourceType, int? priority, IList<FirewallPolicyRuleCollection> ruleCollections, ProvisioningState? provisioningState) : base(id)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal FirewallPolicyRuleCollectionGroupData(string id, string name, string etag, ResourceType? resourceType, int? priority, IList<FirewallPolicyRuleCollection> ruleCollections, ProvisioningState? provisioningState, Dictionary<string, BinaryData> rawData) : base(id, rawData)
         {
             Name = name;
             Etag = etag;

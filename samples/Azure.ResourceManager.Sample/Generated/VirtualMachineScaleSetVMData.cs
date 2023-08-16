@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Collections.Generic;
 using Azure.Core;
 using Azure.ResourceManager.Models;
@@ -20,7 +21,12 @@ namespace Azure.ResourceManager.Sample
     /// </summary>
     public partial class VirtualMachineScaleSetVMData : TrackedResourceData
     {
-        /// <summary> Initializes a new instance of VirtualMachineScaleSetVMData. </summary>
+        private Dictionary<string, BinaryData> _rawData;
+
+        /// <summary>
+        /// Initializes a new instance of global::Azure.ResourceManager.Sample.VirtualMachineScaleSetVMData
+        ///
+        /// </summary>
         /// <param name="location"> The location. </param>
         public VirtualMachineScaleSetVMData(AzureLocation location) : base(location)
         {
@@ -28,7 +34,10 @@ namespace Azure.ResourceManager.Sample
             Zones = new ChangeTrackingList<string>();
         }
 
-        /// <summary> Initializes a new instance of VirtualMachineScaleSetVMData. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::Azure.ResourceManager.Sample.VirtualMachineScaleSetVMData
+        ///
+        /// </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
         /// <param name="resourceType"> The resourceType. </param>
@@ -119,7 +128,8 @@ namespace Azure.ResourceManager.Sample
         /// Specifies the protection policy of the virtual machine.
         /// Serialized Name: VirtualMachineScaleSetVM.properties.protectionPolicy
         /// </param>
-        internal VirtualMachineScaleSetVMData(ResourceIdentifier id, string name, ResourceType resourceType, SystemData systemData, IDictionary<string, string> tags, AzureLocation location, string instanceId, SampleSku sku, SamplePlan plan, IReadOnlyList<VirtualMachineExtensionData> resources, IReadOnlyList<string> zones, bool? latestModelApplied, string vmId, VirtualMachineScaleSetVMInstanceView instanceView, HardwareProfile hardwareProfile, StorageProfile storageProfile, AdditionalCapabilities additionalCapabilities, OSProfile osProfile, SecurityProfile securityProfile, NetworkProfile networkProfile, VirtualMachineScaleSetVMNetworkProfileConfiguration networkProfileConfiguration, DiagnosticsProfile diagnosticsProfile, WritableSubResource availabilitySet, string provisioningState, string licenseType, string modelDefinitionApplied, VirtualMachineScaleSetVMProtectionPolicy protectionPolicy) : base(id, name, resourceType, systemData, tags, location)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal VirtualMachineScaleSetVMData(ResourceIdentifier id, string name, ResourceType resourceType, SystemData systemData, IDictionary<string, string> tags, AzureLocation location, string instanceId, SampleSku sku, SamplePlan plan, IReadOnlyList<VirtualMachineExtensionData> resources, IReadOnlyList<string> zones, bool? latestModelApplied, string vmId, VirtualMachineScaleSetVMInstanceView instanceView, HardwareProfile hardwareProfile, StorageProfile storageProfile, AdditionalCapabilities additionalCapabilities, OSProfile osProfile, SecurityProfile securityProfile, NetworkProfile networkProfile, VirtualMachineScaleSetVMNetworkProfileConfiguration networkProfileConfiguration, DiagnosticsProfile diagnosticsProfile, WritableSubResource availabilitySet, string provisioningState, string licenseType, string modelDefinitionApplied, VirtualMachineScaleSetVMProtectionPolicy protectionPolicy, Dictionary<string, BinaryData> rawData) : base(id, name, resourceType, systemData, tags, location)
         {
             InstanceId = instanceId;
             Sku = sku;
@@ -142,6 +152,7 @@ namespace Azure.ResourceManager.Sample
             LicenseType = licenseType;
             ModelDefinitionApplied = modelDefinitionApplied;
             ProtectionPolicy = protectionPolicy;
+            _rawData = rawData;
         }
 
         /// <summary>

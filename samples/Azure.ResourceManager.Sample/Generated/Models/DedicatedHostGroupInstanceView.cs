@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Collections.Generic;
 using Azure.Core;
 
@@ -16,20 +17,30 @@ namespace Azure.ResourceManager.Sample.Models
     /// </summary>
     internal partial class DedicatedHostGroupInstanceView
     {
-        /// <summary> Initializes a new instance of DedicatedHostGroupInstanceView. </summary>
+        private Dictionary<string, BinaryData> _rawData;
+
+        /// <summary>
+        /// Initializes a new instance of global::Azure.ResourceManager.Sample.Models.DedicatedHostGroupInstanceView
+        ///
+        /// </summary>
         internal DedicatedHostGroupInstanceView()
         {
             Hosts = new ChangeTrackingList<DedicatedHostInstanceViewWithName>();
         }
 
-        /// <summary> Initializes a new instance of DedicatedHostGroupInstanceView. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::Azure.ResourceManager.Sample.Models.DedicatedHostGroupInstanceView
+        ///
+        /// </summary>
         /// <param name="hosts">
         /// List of instance view of the dedicated hosts under the dedicated host group.
         /// Serialized Name: DedicatedHostGroupInstanceView.hosts
         /// </param>
-        internal DedicatedHostGroupInstanceView(IReadOnlyList<DedicatedHostInstanceViewWithName> hosts)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal DedicatedHostGroupInstanceView(IReadOnlyList<DedicatedHostInstanceViewWithName> hosts, Dictionary<string, BinaryData> rawData)
         {
             Hosts = hosts;
+            _rawData = rawData;
         }
 
         /// <summary>

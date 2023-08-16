@@ -5,15 +5,22 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
+
 namespace CognitiveSearch.Models
 {
     /// <summary> The UnknownCharFilter. </summary>
     internal partial class UnknownCharFilter : CharFilter
     {
-        /// <summary> Initializes a new instance of UnknownCharFilter. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::CognitiveSearch.Models.UnknownCharFilter
+        ///
+        /// </summary>
         /// <param name="odataType"> Identifies the concrete type of the char filter. </param>
         /// <param name="name"> The name of the char filter. It must only contain letters, digits, spaces, dashes or underscores, can only start and end with alphanumeric characters, and is limited to 128 characters. </param>
-        internal UnknownCharFilter(string odataType, string name) : base(odataType, name)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal UnknownCharFilter(string odataType, string name, Dictionary<string, BinaryData> rawData) : base(odataType, name, rawData)
         {
             OdataType = odataType ?? "Unknown";
         }

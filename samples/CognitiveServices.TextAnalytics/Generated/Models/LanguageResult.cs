@@ -15,7 +15,12 @@ namespace CognitiveServices.TextAnalytics.Models
     /// <summary> The LanguageResult. </summary>
     public partial class LanguageResult
     {
-        /// <summary> Initializes a new instance of LanguageResult. </summary>
+        private Dictionary<string, BinaryData> _rawData;
+
+        /// <summary>
+        /// Initializes a new instance of global::CognitiveServices.TextAnalytics.Models.LanguageResult
+        ///
+        /// </summary>
         /// <param name="documents"> Response by document. </param>
         /// <param name="errors"> Errors by document id. </param>
         /// <param name="modelVersion"> This field indicates which model is used for scoring. </param>
@@ -31,17 +36,22 @@ namespace CognitiveServices.TextAnalytics.Models
             ModelVersion = modelVersion;
         }
 
-        /// <summary> Initializes a new instance of LanguageResult. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::CognitiveServices.TextAnalytics.Models.LanguageResult
+        ///
+        /// </summary>
         /// <param name="documents"> Response by document. </param>
         /// <param name="errors"> Errors by document id. </param>
         /// <param name="statistics"> if showStats=true was specified in the request this field will contain information about the request payload. </param>
         /// <param name="modelVersion"> This field indicates which model is used for scoring. </param>
-        internal LanguageResult(IReadOnlyList<DocumentLanguage> documents, IReadOnlyList<DocumentError> errors, RequestStatistics statistics, string modelVersion)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal LanguageResult(IReadOnlyList<DocumentLanguage> documents, IReadOnlyList<DocumentError> errors, RequestStatistics statistics, string modelVersion, Dictionary<string, BinaryData> rawData)
         {
             Documents = documents;
             Errors = errors;
             Statistics = statistics;
             ModelVersion = modelVersion;
+            _rawData = rawData;
         }
 
         /// <summary> Response by document. </summary>

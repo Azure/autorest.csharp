@@ -8,17 +8,20 @@
 using System;
 using System.Collections.Generic;
 using System.Text.Json;
+using Azure;
 using Azure.Core;
 using Azure.Core.Serialization;
 
 namespace CognitiveSearch.Models
 {
-    public partial class StopAnalyzer : IUtf8JsonSerializable, IJsonModelSerializable
+    public partial class StopAnalyzer : IUtf8JsonSerializable, IModelJsonSerializable<StopAnalyzer>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModelSerializable)this).Serialize(writer, ModelSerializerOptions.AzureServiceDefault);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<StopAnalyzer>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
 
-        void IJsonModelSerializable.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
+        void IModelJsonSerializable<StopAnalyzer>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
+            ModelSerializerHelper.ValidateFormat<StopAnalyzer>(this, options.Format);
+
             writer.WriteStartObject();
             if (Optional.IsCollectionDefined(Stopwords))
             {
@@ -34,18 +37,25 @@ namespace CognitiveSearch.Models
             writer.WriteStringValue(OdataType);
             writer.WritePropertyName("name"u8);
             writer.WriteStringValue(Name);
+            if (_rawData is not null && options.Format == ModelSerializerFormat.Json)
+            {
+                foreach (var property in _rawData)
+                {
+                    writer.WritePropertyName(property.Key);
+#if NET6_0_OR_GREATER
+				writer.WriteRawValue(property.Value);
+#else
+                    JsonSerializer.Serialize(writer, JsonDocument.Parse(property.Value.ToString()).RootElement);
+#endif
+                }
+            }
             writer.WriteEndObject();
-        }
-
-        object IModelSerializable.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            using var doc = JsonDocument.Parse(data);
-            return DeserializeStopAnalyzer(doc.RootElement, options);
         }
 
         internal static StopAnalyzer DeserializeStopAnalyzer(JsonElement element, ModelSerializerOptions options = default)
         {
-            options ??= ModelSerializerOptions.AzureServiceDefault;
+            options ??= ModelSerializerOptions.DefaultWireOptions;
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
@@ -53,6 +63,7 @@ namespace CognitiveSearch.Models
             Optional<IList<string>> stopwords = default;
             string odataType = default;
             string name = default;
+            Dictionary<string, BinaryData> rawData = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("stopwords"u8))
@@ -79,14 +90,57 @@ namespace CognitiveSearch.Models
                     name = property.Value.GetString();
                     continue;
                 }
+                if (options.Format == ModelSerializerFormat.Json)
+                {
+                    rawData.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
+                    continue;
+                }
             }
-            return new StopAnalyzer(odataType, name, Optional.ToList(stopwords));
+            return new StopAnalyzer(odataType, name, Optional.ToList(stopwords), rawData);
         }
 
-        object IJsonModelSerializable.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        StopAnalyzer IModelJsonSerializable<StopAnalyzer>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
         {
+            ModelSerializerHelper.ValidateFormat<StopAnalyzer>(this, options.Format);
+
             using var doc = JsonDocument.ParseValue(ref reader);
             return DeserializeStopAnalyzer(doc.RootElement, options);
+        }
+
+        BinaryData IModelSerializable<StopAnalyzer>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat<StopAnalyzer>(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        StopAnalyzer IModelSerializable<StopAnalyzer>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat<StopAnalyzer>(this, options.Format);
+
+            using var doc = JsonDocument.Parse(data);
+            return DeserializeStopAnalyzer(doc.RootElement, options);
+        }
+
+        public static implicit operator RequestContent(StopAnalyzer model)
+        {
+            if (model is null)
+            {
+                return null;
+            }
+
+            return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
+        }
+
+        public static explicit operator StopAnalyzer(Response response)
+        {
+            if (response is null)
+            {
+                return null;
+            }
+
+            using JsonDocument doc = JsonDocument.Parse(response.ContentStream);
+            return DeserializeStopAnalyzer(doc.RootElement, ModelSerializerOptions.DefaultWireOptions);
         }
     }
 }

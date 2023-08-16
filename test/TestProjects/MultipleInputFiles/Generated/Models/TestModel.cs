@@ -5,23 +5,36 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
+
 namespace MultipleInputFiles.Models
 {
     /// <summary> . </summary>
     public partial class TestModel
     {
-        /// <summary> Initializes a new instance of TestModel. </summary>
+        private Dictionary<string, BinaryData> _rawData;
+
+        /// <summary>
+        /// Initializes a new instance of global::MultipleInputFiles.Models.TestModel
+        ///
+        /// </summary>
         public TestModel()
         {
         }
 
-        /// <summary> Initializes a new instance of TestModel. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::MultipleInputFiles.Models.TestModel
+        ///
+        /// </summary>
         /// <param name="code"></param>
         /// <param name="status"></param>
-        internal TestModel(string code, string status)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal TestModel(string code, string status, Dictionary<string, BinaryData> rawData)
         {
             Code = code;
             Status = status;
+            _rawData = rawData;
         }
 
         /// <summary> Gets or sets the code. </summary>

@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
 using Azure.Core;
 
 namespace Azure.NewProject.TypeSpec.Models
@@ -13,6 +14,8 @@ namespace Azure.NewProject.TypeSpec.Models
     /// <summary> A model with a few properties of literal types. </summary>
     public partial class Thing
     {
+        private Dictionary<string, BinaryData> _rawData;
+
         /// <summary> Initializes a new instance of Thing. </summary>
         /// <param name="name"> name of the Thing. </param>
         /// <param name="requiredUnion"> required Union. </param>
@@ -41,7 +44,8 @@ namespace Azure.NewProject.TypeSpec.Models
         /// <param name="optionalLiteralFloat"> optional literal float. </param>
         /// <param name="optionalLiteralBool"> optional literal bool. </param>
         /// <param name="requiredBadDescription"> description with xml &lt;|endoftext|&gt;. </param>
-        internal Thing(string name, string requiredUnion, ThingRequiredLiteralString requiredLiteralString, ThingRequiredLiteralInt requiredLiteralInt, ThingRequiredLiteralFloat requiredLiteralFloat, bool requiredLiteralBool, ThingOptionalLiteralString? optionalLiteralString, ThingOptionalLiteralInt? optionalLiteralInt, ThingOptionalLiteralFloat? optionalLiteralFloat, bool? optionalLiteralBool, string requiredBadDescription)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal Thing(string name, string requiredUnion, ThingRequiredLiteralString requiredLiteralString, ThingRequiredLiteralInt requiredLiteralInt, ThingRequiredLiteralFloat requiredLiteralFloat, bool requiredLiteralBool, ThingOptionalLiteralString? optionalLiteralString, ThingOptionalLiteralInt? optionalLiteralInt, ThingOptionalLiteralFloat? optionalLiteralFloat, bool? optionalLiteralBool, string requiredBadDescription, Dictionary<string, BinaryData> rawData)
         {
             Name = name;
             RequiredUnion = requiredUnion;
@@ -54,6 +58,7 @@ namespace Azure.NewProject.TypeSpec.Models
             OptionalLiteralFloat = optionalLiteralFloat;
             OptionalLiteralBool = optionalLiteralBool;
             RequiredBadDescription = requiredBadDescription;
+            _rawData = rawData;
         }
 
         /// <summary> name of the Thing. </summary>

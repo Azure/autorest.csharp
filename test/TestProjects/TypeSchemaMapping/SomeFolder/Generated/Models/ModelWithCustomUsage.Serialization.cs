@@ -6,19 +6,20 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
+using System.IO;
 using System.Text.Json;
 using System.Xml;
 using System.Xml.Linq;
+using Azure;
 using Azure.Core;
 using Azure.Core.Serialization;
 
 namespace TypeSchemaMapping.Models
 {
-    public partial class ModelWithCustomUsage : IUtf8JsonSerializable, IJsonModelSerializable, IXmlSerializable, IXmlModelSerializable
+    public partial class ModelWithCustomUsage : IUtf8JsonSerializable, IModelJsonSerializable<ModelWithCustomUsage>, IXmlSerializable, IModelSerializable<ModelWithCustomUsage>
     {
-        void IXmlModelSerializable.Serialize(XmlWriter writer, ModelSerializerOptions options) => ((IXmlSerializable)this).Write(writer, null, options);
-
-        void IXmlSerializable.Write(XmlWriter writer, string nameHint, ModelSerializerOptions options)
+        private void Serialize(XmlWriter writer, string nameHint, ModelSerializerOptions options)
         {
             writer.WriteStartElement("ModelWithCustomUsage");
             if (Optional.IsDefined(ModelProperty))
@@ -30,32 +31,110 @@ namespace TypeSchemaMapping.Models
             writer.WriteEndElement();
         }
 
+        void IXmlSerializable.Write(XmlWriter writer, string nameHint) => Serialize(writer, nameHint, ModelSerializerOptions.DefaultWireOptions);
+
         internal static ModelWithCustomUsage DeserializeModelWithCustomUsage(XElement element, ModelSerializerOptions options = default)
         {
-            options ??= ModelSerializerOptions.AzureServiceDefault;
+            options ??= ModelSerializerOptions.DefaultWireOptions;
             string modelProperty = default;
             if (element.Element("ModelProperty") is XElement modelPropertyElement)
             {
                 modelProperty = (string)modelPropertyElement;
             }
-            return new ModelWithCustomUsage(modelProperty);
+            return new ModelWithCustomUsage(modelProperty, default);
         }
 
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModelSerializable)this).Serialize(writer, ModelSerializerOptions.AzureServiceDefault);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<ModelWithCustomUsage>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
 
-        void IJsonModelSerializable.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
+        void IModelJsonSerializable<ModelWithCustomUsage>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
             writer.WriteStartObject();
             if (Optional.IsDefined(ModelProperty))
             {
                 writer.WritePropertyName("ModelProperty"u8);
                 writer.WriteStringValue(ModelProperty);
             }
+            if (_rawData is not null && options.Format == ModelSerializerFormat.Json)
+            {
+                foreach (var property in _rawData)
+                {
+                    writer.WritePropertyName(property.Key);
+#if NET6_0_OR_GREATER
+				writer.WriteRawValue(property.Value);
+#else
+                    JsonSerializer.Serialize(writer, JsonDocument.Parse(property.Value.ToString()).RootElement);
+#endif
+                }
+            }
             writer.WriteEndObject();
         }
 
-        object IModelSerializable.Deserialize(BinaryData data, ModelSerializerOptions options)
+        internal static ModelWithCustomUsage DeserializeModelWithCustomUsage(JsonElement element, ModelSerializerOptions options = default)
         {
+            options ??= ModelSerializerOptions.DefaultWireOptions;
+
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
+            Optional<string> modelProperty = default;
+            Dictionary<string, BinaryData> rawData = new Dictionary<string, BinaryData>();
+            foreach (var property in element.EnumerateObject())
+            {
+                if (property.NameEquals("ModelProperty"u8))
+                {
+                    modelProperty = property.Value.GetString();
+                    continue;
+                }
+                if (options.Format == ModelSerializerFormat.Json)
+                {
+                    rawData.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
+                    continue;
+                }
+            }
+            return new ModelWithCustomUsage(modelProperty.Value, rawData);
+        }
+
+        ModelWithCustomUsage IModelJsonSerializable<ModelWithCustomUsage>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using var doc = JsonDocument.ParseValue(ref reader);
+            return DeserializeModelWithCustomUsage(doc.RootElement, options);
+        }
+
+        BinaryData IModelSerializable<ModelWithCustomUsage>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            if (options.Format == ModelSerializerFormat.Json)
+            {
+                return ModelSerializer.SerializeCore(this, options);
+            }
+            else
+            {
+                options ??= ModelSerializerOptions.DefaultWireOptions;
+                using MemoryStream stream = new MemoryStream();
+                using XmlWriter writer = XmlWriter.Create(stream);
+                Serialize(writer, null, options);
+                writer.Flush();
+                if (stream.Position > int.MaxValue)
+                {
+                    return BinaryData.FromStream(stream);
+                }
+                else
+                {
+                    return new BinaryData(stream.GetBuffer().AsMemory(0, (int)stream.Position));
+                }
+            }
+        }
+
+        ModelWithCustomUsage IModelSerializable<ModelWithCustomUsage>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
             if (data.ToMemory().Span.StartsWith("{"u8))
             {
                 using var doc = JsonDocument.Parse(data);
@@ -67,29 +146,24 @@ namespace TypeSchemaMapping.Models
             }
         }
 
-        internal static ModelWithCustomUsage DeserializeModelWithCustomUsage(JsonElement element, ModelSerializerOptions options = default)
+        public static implicit operator RequestContent(ModelWithCustomUsage model)
         {
-            options ??= ModelSerializerOptions.AzureServiceDefault;
-            if (element.ValueKind == JsonValueKind.Null)
+            if (model is null)
             {
                 return null;
             }
-            Optional<string> modelProperty = default;
-            foreach (var property in element.EnumerateObject())
-            {
-                if (property.NameEquals("ModelProperty"u8))
-                {
-                    modelProperty = property.Value.GetString();
-                    continue;
-                }
-            }
-            return new ModelWithCustomUsage(modelProperty.Value);
+
+            return RequestContent.Create((IModelSerializable<ModelWithCustomUsage>)model, ModelSerializerOptions.DefaultWireOptions);
         }
 
-        object IJsonModelSerializable.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        public static explicit operator ModelWithCustomUsage(Response response)
         {
-            using var doc = JsonDocument.ParseValue(ref reader);
-            return DeserializeModelWithCustomUsage(doc.RootElement, options);
+            if (response is null)
+            {
+                return null;
+            }
+
+            return DeserializeModelWithCustomUsage(XElement.Load(response.ContentStream), ModelSerializerOptions.DefaultWireOptions);
         }
     }
 }

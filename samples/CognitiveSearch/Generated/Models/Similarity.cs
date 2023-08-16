@@ -5,6 +5,9 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
+
 namespace CognitiveSearch.Models
 {
     /// <summary>
@@ -14,16 +17,26 @@ namespace CognitiveSearch.Models
     /// </summary>
     public partial class Similarity
     {
-        /// <summary> Initializes a new instance of Similarity. </summary>
+        protected internal Dictionary<string, BinaryData> _rawData;
+
+        /// <summary>
+        /// Initializes a new instance of global::CognitiveSearch.Models.Similarity
+        ///
+        /// </summary>
         public Similarity()
         {
         }
 
-        /// <summary> Initializes a new instance of Similarity. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::CognitiveSearch.Models.Similarity
+        ///
+        /// </summary>
         /// <param name="odataType"></param>
-        internal Similarity(string odataType)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal Similarity(string odataType, Dictionary<string, BinaryData> rawData)
         {
             OdataType = odataType;
+            _rawData = rawData;
         }
 
         /// <summary> Gets or sets the odata type. </summary>

@@ -5,6 +5,9 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
+
 namespace MgmtRenameRules.Models
 {
     /// <summary>
@@ -13,12 +16,20 @@ namespace MgmtRenameRules.Models
     /// </summary>
     public partial class MgmtRenameRulesPlan
     {
-        /// <summary> Initializes a new instance of MgmtRenameRulesPlan. </summary>
+        private Dictionary<string, BinaryData> _rawData;
+
+        /// <summary>
+        /// Initializes a new instance of global::MgmtRenameRules.Models.MgmtRenameRulesPlan
+        ///
+        /// </summary>
         public MgmtRenameRulesPlan()
         {
         }
 
-        /// <summary> Initializes a new instance of MgmtRenameRulesPlan. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::MgmtRenameRules.Models.MgmtRenameRulesPlan
+        ///
+        /// </summary>
         /// <param name="name">
         /// The plan ID.
         /// Serialized Name: Plan.name
@@ -35,12 +46,14 @@ namespace MgmtRenameRules.Models
         /// The promotion code.
         /// Serialized Name: Plan.promotionCode
         /// </param>
-        internal MgmtRenameRulesPlan(string name, string publisher, string product, string promotionCode)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal MgmtRenameRulesPlan(string name, string publisher, string product, string promotionCode, Dictionary<string, BinaryData> rawData)
         {
             Name = name;
             Publisher = publisher;
             Product = product;
             PromotionCode = promotionCode;
+            _rawData = rawData;
         }
 
         /// <summary>

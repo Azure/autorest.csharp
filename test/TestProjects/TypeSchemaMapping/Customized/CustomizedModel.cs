@@ -1,8 +1,11 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
+using System;
+using System.Collections.Generic;
 using System.Text.Json;
 using Azure.Core;
+using Azure.Core.Serialization;
 using NamespaceForEnums;
 
 [assembly:CodeGenSuppressType("ModelToBeSkipped")]
@@ -24,12 +27,15 @@ namespace CustomNamespace
         [CodeGenMember("PropertyToField")]
         private readonly string _field;
 
-        internal static CustomizedModel DeserializeCustomizedModel(JsonElement element)
+        internal static CustomizedModel DeserializeCustomizedModel(JsonElement element, ModelSerializerOptions options = default)
         {
+            options ??= ModelSerializerOptions.DefaultWireOptions;
+
             int? propertyRenamedAndTypeChanged = default;
             CustomFruitEnum fruit = default;
             CustomDaysOfWeek daysOfWeek = default;
             string field = default;
+            Dictionary<string, BinaryData> rawData = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("ModelProperty"))
@@ -56,8 +62,13 @@ namespace CustomNamespace
                     field = property.Value.GetString();
                     continue;
                 }
+                if (options.Format == ModelSerializerFormat.Json)
+                {
+                    //this means it's an unknown property we got
+                    rawData.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
+                }
             }
-            return new CustomizedModel(propertyRenamedAndTypeChanged, field, fruit, daysOfWeek);
+            return new CustomizedModel(propertyRenamedAndTypeChanged, field, fruit, daysOfWeek, rawData);
         }
     }
 }

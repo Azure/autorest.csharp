@@ -5,17 +5,28 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
+
 namespace Azure.ResourceManager.Storage.Models
 {
     /// <summary> The URIs that are used to perform a retrieval of a public blob, queue, table, web or dfs object. </summary>
     public partial class Endpoints
     {
-        /// <summary> Initializes a new instance of Endpoints. </summary>
+        private Dictionary<string, BinaryData> _rawData;
+
+        /// <summary>
+        /// Initializes a new instance of global::Azure.ResourceManager.Storage.Models.Endpoints
+        ///
+        /// </summary>
         internal Endpoints()
         {
         }
 
-        /// <summary> Initializes a new instance of Endpoints. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::Azure.ResourceManager.Storage.Models.Endpoints
+        ///
+        /// </summary>
         /// <param name="blob"> Gets the blob endpoint. </param>
         /// <param name="queue"> Gets the queue endpoint. </param>
         /// <param name="table"> Gets the table endpoint. </param>
@@ -24,7 +35,8 @@ namespace Azure.ResourceManager.Storage.Models
         /// <param name="dfs"> Gets the dfs endpoint. </param>
         /// <param name="microsoftEndpoints"> Gets the microsoft routing storage endpoints. </param>
         /// <param name="internetEndpoints"> Gets the internet routing storage endpoints. </param>
-        internal Endpoints(string blob, string queue, string table, string file, string web, string dfs, StorageAccountMicrosoftEndpoints microsoftEndpoints, StorageAccountInternetEndpoints internetEndpoints)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal Endpoints(string blob, string queue, string table, string file, string web, string dfs, StorageAccountMicrosoftEndpoints microsoftEndpoints, StorageAccountInternetEndpoints internetEndpoints, Dictionary<string, BinaryData> rawData)
         {
             Blob = blob;
             Queue = queue;
@@ -34,6 +46,7 @@ namespace Azure.ResourceManager.Storage.Models
             Dfs = dfs;
             MicrosoftEndpoints = microsoftEndpoints;
             InternetEndpoints = internetEndpoints;
+            _rawData = rawData;
         }
 
         /// <summary> Gets the blob endpoint. </summary>

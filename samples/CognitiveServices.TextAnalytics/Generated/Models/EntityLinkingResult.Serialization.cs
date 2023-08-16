@@ -8,17 +8,20 @@
 using System;
 using System.Collections.Generic;
 using System.Text.Json;
+using Azure;
 using Azure.Core;
 using Azure.Core.Serialization;
 
 namespace CognitiveServices.TextAnalytics.Models
 {
-    public partial class EntityLinkingResult : IUtf8JsonSerializable, IJsonModelSerializable
+    public partial class EntityLinkingResult : IUtf8JsonSerializable, IModelJsonSerializable<EntityLinkingResult>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModelSerializable)this).Serialize(writer, ModelSerializerOptions.AzureServiceDefault);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<EntityLinkingResult>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
 
-        void IJsonModelSerializable.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
+        void IModelJsonSerializable<EntityLinkingResult>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
             writer.WriteStartObject();
             writer.WritePropertyName("documents"u8);
             writer.WriteStartArray();
@@ -41,18 +44,25 @@ namespace CognitiveServices.TextAnalytics.Models
             }
             writer.WritePropertyName("modelVersion"u8);
             writer.WriteStringValue(ModelVersion);
+            if (_rawData is not null && options.Format == ModelSerializerFormat.Json)
+            {
+                foreach (var property in _rawData)
+                {
+                    writer.WritePropertyName(property.Key);
+#if NET6_0_OR_GREATER
+				writer.WriteRawValue(property.Value);
+#else
+                    JsonSerializer.Serialize(writer, JsonDocument.Parse(property.Value.ToString()).RootElement);
+#endif
+                }
+            }
             writer.WriteEndObject();
-        }
-
-        object IModelSerializable.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            using var doc = JsonDocument.Parse(data);
-            return DeserializeEntityLinkingResult(doc.RootElement, options);
         }
 
         internal static EntityLinkingResult DeserializeEntityLinkingResult(JsonElement element, ModelSerializerOptions options = default)
         {
-            options ??= ModelSerializerOptions.AzureServiceDefault;
+            options ??= ModelSerializerOptions.DefaultWireOptions;
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
@@ -61,6 +71,7 @@ namespace CognitiveServices.TextAnalytics.Models
             IReadOnlyList<DocumentError> errors = default;
             Optional<RequestStatistics> statistics = default;
             string modelVersion = default;
+            Dictionary<string, BinaryData> rawData = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("documents"u8))
@@ -97,14 +108,57 @@ namespace CognitiveServices.TextAnalytics.Models
                     modelVersion = property.Value.GetString();
                     continue;
                 }
+                if (options.Format == ModelSerializerFormat.Json)
+                {
+                    rawData.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
+                    continue;
+                }
             }
-            return new EntityLinkingResult(documents, errors, statistics.Value, modelVersion);
+            return new EntityLinkingResult(documents, errors, statistics.Value, modelVersion, rawData);
         }
 
-        object IJsonModelSerializable.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        EntityLinkingResult IModelJsonSerializable<EntityLinkingResult>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
         {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
             using var doc = JsonDocument.ParseValue(ref reader);
             return DeserializeEntityLinkingResult(doc.RootElement, options);
+        }
+
+        BinaryData IModelSerializable<EntityLinkingResult>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        EntityLinkingResult IModelSerializable<EntityLinkingResult>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using var doc = JsonDocument.Parse(data);
+            return DeserializeEntityLinkingResult(doc.RootElement, options);
+        }
+
+        public static implicit operator RequestContent(EntityLinkingResult model)
+        {
+            if (model is null)
+            {
+                return null;
+            }
+
+            return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
+        }
+
+        public static explicit operator EntityLinkingResult(Response response)
+        {
+            if (response is null)
+            {
+                return null;
+            }
+
+            using JsonDocument doc = JsonDocument.Parse(response.ContentStream);
+            return DeserializeEntityLinkingResult(doc.RootElement, ModelSerializerOptions.DefaultWireOptions);
         }
     }
 }

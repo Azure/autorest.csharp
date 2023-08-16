@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Collections.Generic;
 using Azure.Core;
 using Azure.ResourceManager.Sample;
@@ -17,20 +18,30 @@ namespace Azure.ResourceManager.Sample.Models
     /// </summary>
     internal partial class VirtualMachineExtensionsListResult
     {
-        /// <summary> Initializes a new instance of VirtualMachineExtensionsListResult. </summary>
+        private Dictionary<string, BinaryData> _rawData;
+
+        /// <summary>
+        /// Initializes a new instance of global::Azure.ResourceManager.Sample.Models.VirtualMachineExtensionsListResult
+        ///
+        /// </summary>
         internal VirtualMachineExtensionsListResult()
         {
             Value = new ChangeTrackingList<VirtualMachineExtensionData>();
         }
 
-        /// <summary> Initializes a new instance of VirtualMachineExtensionsListResult. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::Azure.ResourceManager.Sample.Models.VirtualMachineExtensionsListResult
+        ///
+        /// </summary>
         /// <param name="value">
         /// The list of extensions
         /// Serialized Name: VirtualMachineExtensionsListResult.value
         /// </param>
-        internal VirtualMachineExtensionsListResult(IReadOnlyList<VirtualMachineExtensionData> value)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal VirtualMachineExtensionsListResult(IReadOnlyList<VirtualMachineExtensionData> value, Dictionary<string, BinaryData> rawData)
         {
             Value = value;
+            _rawData = rawData;
         }
 
         /// <summary>

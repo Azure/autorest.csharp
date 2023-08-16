@@ -6,18 +6,22 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
 using System.Text.Json;
+using Azure;
 using Azure.Core;
 using Azure.Core.Serialization;
 
 namespace CognitiveSearch.Models
 {
-    public partial class SoftDeleteColumnDeletionDetectionPolicy : IUtf8JsonSerializable, IJsonModelSerializable
+    public partial class SoftDeleteColumnDeletionDetectionPolicy : IUtf8JsonSerializable, IModelJsonSerializable<SoftDeleteColumnDeletionDetectionPolicy>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModelSerializable)this).Serialize(writer, ModelSerializerOptions.AzureServiceDefault);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<SoftDeleteColumnDeletionDetectionPolicy>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
 
-        void IJsonModelSerializable.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
+        void IModelJsonSerializable<SoftDeleteColumnDeletionDetectionPolicy>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
+            ModelSerializerHelper.ValidateFormat<SoftDeleteColumnDeletionDetectionPolicy>(this, options.Format);
+
             writer.WriteStartObject();
             if (Optional.IsDefined(SoftDeleteColumnName))
             {
@@ -31,18 +35,25 @@ namespace CognitiveSearch.Models
             }
             writer.WritePropertyName("@odata.type"u8);
             writer.WriteStringValue(OdataType);
+            if (_rawData is not null && options.Format == ModelSerializerFormat.Json)
+            {
+                foreach (var property in _rawData)
+                {
+                    writer.WritePropertyName(property.Key);
+#if NET6_0_OR_GREATER
+				writer.WriteRawValue(property.Value);
+#else
+                    JsonSerializer.Serialize(writer, JsonDocument.Parse(property.Value.ToString()).RootElement);
+#endif
+                }
+            }
             writer.WriteEndObject();
-        }
-
-        object IModelSerializable.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            using var doc = JsonDocument.Parse(data);
-            return DeserializeSoftDeleteColumnDeletionDetectionPolicy(doc.RootElement, options);
         }
 
         internal static SoftDeleteColumnDeletionDetectionPolicy DeserializeSoftDeleteColumnDeletionDetectionPolicy(JsonElement element, ModelSerializerOptions options = default)
         {
-            options ??= ModelSerializerOptions.AzureServiceDefault;
+            options ??= ModelSerializerOptions.DefaultWireOptions;
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
@@ -50,6 +61,7 @@ namespace CognitiveSearch.Models
             Optional<string> softDeleteColumnName = default;
             Optional<string> softDeleteMarkerValue = default;
             string odataType = default;
+            Dictionary<string, BinaryData> rawData = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("softDeleteColumnName"u8))
@@ -67,14 +79,57 @@ namespace CognitiveSearch.Models
                     odataType = property.Value.GetString();
                     continue;
                 }
+                if (options.Format == ModelSerializerFormat.Json)
+                {
+                    rawData.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
+                    continue;
+                }
             }
-            return new SoftDeleteColumnDeletionDetectionPolicy(odataType, softDeleteColumnName.Value, softDeleteMarkerValue.Value);
+            return new SoftDeleteColumnDeletionDetectionPolicy(odataType, softDeleteColumnName.Value, softDeleteMarkerValue.Value, rawData);
         }
 
-        object IJsonModelSerializable.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        SoftDeleteColumnDeletionDetectionPolicy IModelJsonSerializable<SoftDeleteColumnDeletionDetectionPolicy>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
         {
+            ModelSerializerHelper.ValidateFormat<SoftDeleteColumnDeletionDetectionPolicy>(this, options.Format);
+
             using var doc = JsonDocument.ParseValue(ref reader);
             return DeserializeSoftDeleteColumnDeletionDetectionPolicy(doc.RootElement, options);
+        }
+
+        BinaryData IModelSerializable<SoftDeleteColumnDeletionDetectionPolicy>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat<SoftDeleteColumnDeletionDetectionPolicy>(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        SoftDeleteColumnDeletionDetectionPolicy IModelSerializable<SoftDeleteColumnDeletionDetectionPolicy>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat<SoftDeleteColumnDeletionDetectionPolicy>(this, options.Format);
+
+            using var doc = JsonDocument.Parse(data);
+            return DeserializeSoftDeleteColumnDeletionDetectionPolicy(doc.RootElement, options);
+        }
+
+        public static implicit operator RequestContent(SoftDeleteColumnDeletionDetectionPolicy model)
+        {
+            if (model is null)
+            {
+                return null;
+            }
+
+            return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
+        }
+
+        public static explicit operator SoftDeleteColumnDeletionDetectionPolicy(Response response)
+        {
+            if (response is null)
+            {
+                return null;
+            }
+
+            using JsonDocument doc = JsonDocument.Parse(response.ContentStream);
+            return DeserializeSoftDeleteColumnDeletionDetectionPolicy(doc.RootElement, ModelSerializerOptions.DefaultWireOptions);
         }
     }
 }

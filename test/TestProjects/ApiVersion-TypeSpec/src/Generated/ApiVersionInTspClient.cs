@@ -80,7 +80,7 @@ namespace ApiVersionInTsp
         {
             RequestContext context = FromCancellationToken(cancellationToken);
             Response response = await GetBatchDetectionResultAsync(resultId, context).ConfigureAwait(false);
-            return Response.FromValue(DetectionResult.FromResponse(response), response);
+            return Response.FromValue((DetectionResult)response, response);
         }
 
         /// <summary> Get Multivariate Anomaly Detection Result. </summary>
@@ -95,7 +95,7 @@ namespace ApiVersionInTsp
         {
             RequestContext context = FromCancellationToken(cancellationToken);
             Response response = GetBatchDetectionResult(resultId, context);
-            return Response.FromValue(DetectionResult.FromResponse(response), response);
+            return Response.FromValue((DetectionResult)response, response);
         }
 
         /// <summary>

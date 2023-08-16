@@ -15,6 +15,8 @@ namespace _Type.Property.ValueTypes.Models
     /// <summary> Model with collection string properties. </summary>
     public partial class CollectionsStringProperty
     {
+        private Dictionary<string, BinaryData> _rawData;
+
         /// <summary> Initializes a new instance of CollectionsStringProperty. </summary>
         /// <param name="property"> Property. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="property"/> is null. </exception>
@@ -27,9 +29,11 @@ namespace _Type.Property.ValueTypes.Models
 
         /// <summary> Initializes a new instance of CollectionsStringProperty. </summary>
         /// <param name="property"> Property. </param>
-        internal CollectionsStringProperty(IList<string> property)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal CollectionsStringProperty(IList<string> property, Dictionary<string, BinaryData> rawData)
         {
             Property = property;
+            _rawData = rawData;
         }
 
         /// <summary> Property. </summary>

@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
 using Azure.Core;
 
 namespace CognitiveSearch.Models
@@ -13,7 +14,10 @@ namespace CognitiveSearch.Models
     /// <summary> Language specific stemming filter. This token filter is implemented using Apache Lucene. </summary>
     public partial class StemmerTokenFilter : TokenFilter
     {
-        /// <summary> Initializes a new instance of StemmerTokenFilter. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::CognitiveSearch.Models.StemmerTokenFilter
+        ///
+        /// </summary>
         /// <param name="name"> The name of the token filter. It must only contain letters, digits, spaces, dashes or underscores, can only start and end with alphanumeric characters, and is limited to 128 characters. </param>
         /// <param name="language"> The language to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
@@ -25,11 +29,15 @@ namespace CognitiveSearch.Models
             OdataType = "#Microsoft.Azure.Search.StemmerTokenFilter";
         }
 
-        /// <summary> Initializes a new instance of StemmerTokenFilter. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::CognitiveSearch.Models.StemmerTokenFilter
+        ///
+        /// </summary>
         /// <param name="odataType"> Identifies the concrete type of the token filter. </param>
         /// <param name="name"> The name of the token filter. It must only contain letters, digits, spaces, dashes or underscores, can only start and end with alphanumeric characters, and is limited to 128 characters. </param>
         /// <param name="language"> The language to use. </param>
-        internal StemmerTokenFilter(string odataType, string name, StemmerTokenFilterLanguage language) : base(odataType, name)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal StemmerTokenFilter(string odataType, string name, StemmerTokenFilterLanguage language, Dictionary<string, BinaryData> rawData) : base(odataType, name, rawData)
         {
             Language = language;
             OdataType = odataType ?? "#Microsoft.Azure.Search.StemmerTokenFilter";

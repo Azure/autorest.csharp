@@ -5,6 +5,9 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
+
 namespace Azure.ResourceManager.Sample.Models
 {
     /// <summary>
@@ -13,12 +16,20 @@ namespace Azure.ResourceManager.Sample.Models
     /// </summary>
     public partial class VirtualMachineScaleSetIpTag
     {
-        /// <summary> Initializes a new instance of VirtualMachineScaleSetIpTag. </summary>
+        private Dictionary<string, BinaryData> _rawData;
+
+        /// <summary>
+        /// Initializes a new instance of global::Azure.ResourceManager.Sample.Models.VirtualMachineScaleSetIpTag
+        ///
+        /// </summary>
         public VirtualMachineScaleSetIpTag()
         {
         }
 
-        /// <summary> Initializes a new instance of VirtualMachineScaleSetIpTag. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::Azure.ResourceManager.Sample.Models.VirtualMachineScaleSetIpTag
+        ///
+        /// </summary>
         /// <param name="ipTagType">
         /// IP tag type. Example: FirstPartyUsage.
         /// Serialized Name: VirtualMachineScaleSetIpTag.ipTagType
@@ -27,10 +38,12 @@ namespace Azure.ResourceManager.Sample.Models
         /// IP tag associated with the public IP. Example: SQL, Storage etc.
         /// Serialized Name: VirtualMachineScaleSetIpTag.tag
         /// </param>
-        internal VirtualMachineScaleSetIpTag(string ipTagType, string tag)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal VirtualMachineScaleSetIpTag(string ipTagType, string tag, Dictionary<string, BinaryData> rawData)
         {
             IpTagType = ipTagType;
             Tag = tag;
+            _rawData = rawData;
         }
 
         /// <summary>

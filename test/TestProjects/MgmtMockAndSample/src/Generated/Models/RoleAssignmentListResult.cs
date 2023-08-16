@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Collections.Generic;
 using Azure.Core;
 using MgmtMockAndSample;
@@ -14,19 +15,29 @@ namespace MgmtMockAndSample.Models
     /// <summary> Role assignment list operation result. </summary>
     internal partial class RoleAssignmentListResult
     {
-        /// <summary> Initializes a new instance of RoleAssignmentListResult. </summary>
+        private Dictionary<string, BinaryData> _rawData;
+
+        /// <summary>
+        /// Initializes a new instance of global::MgmtMockAndSample.Models.RoleAssignmentListResult
+        ///
+        /// </summary>
         internal RoleAssignmentListResult()
         {
             Value = new ChangeTrackingList<RoleAssignmentData>();
         }
 
-        /// <summary> Initializes a new instance of RoleAssignmentListResult. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::MgmtMockAndSample.Models.RoleAssignmentListResult
+        ///
+        /// </summary>
         /// <param name="value"> Role assignment list. </param>
         /// <param name="nextLink"> The URL to use for getting the next set of results. </param>
-        internal RoleAssignmentListResult(IReadOnlyList<RoleAssignmentData> value, string nextLink)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal RoleAssignmentListResult(IReadOnlyList<RoleAssignmentData> value, string nextLink, Dictionary<string, BinaryData> rawData)
         {
             Value = value;
             NextLink = nextLink;
+            _rawData = rawData;
         }
 
         /// <summary> Role assignment list. </summary>

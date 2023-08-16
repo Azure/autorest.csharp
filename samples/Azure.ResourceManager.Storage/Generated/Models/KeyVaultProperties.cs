@@ -6,30 +6,41 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
 
 namespace Azure.ResourceManager.Storage.Models
 {
     /// <summary> Properties of key vault. </summary>
     public partial class KeyVaultProperties
     {
-        /// <summary> Initializes a new instance of KeyVaultProperties. </summary>
+        private Dictionary<string, BinaryData> _rawData;
+
+        /// <summary>
+        /// Initializes a new instance of global::Azure.ResourceManager.Storage.Models.KeyVaultProperties
+        ///
+        /// </summary>
         public KeyVaultProperties()
         {
         }
 
-        /// <summary> Initializes a new instance of KeyVaultProperties. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::Azure.ResourceManager.Storage.Models.KeyVaultProperties
+        ///
+        /// </summary>
         /// <param name="keyName"> The name of KeyVault key. </param>
         /// <param name="keyVersion"> The version of KeyVault key. </param>
         /// <param name="keyVaultUri"> The Uri of KeyVault. </param>
         /// <param name="currentVersionedKeyIdentifier"> The object identifier of the current versioned Key Vault Key in use. </param>
         /// <param name="lastKeyRotationTimestamp"> Timestamp of last rotation of the Key Vault Key. </param>
-        internal KeyVaultProperties(string keyName, string keyVersion, Uri keyVaultUri, string currentVersionedKeyIdentifier, DateTimeOffset? lastKeyRotationTimestamp)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal KeyVaultProperties(string keyName, string keyVersion, Uri keyVaultUri, string currentVersionedKeyIdentifier, DateTimeOffset? lastKeyRotationTimestamp, Dictionary<string, BinaryData> rawData)
         {
             KeyName = keyName;
             KeyVersion = keyVersion;
             KeyVaultUri = keyVaultUri;
             CurrentVersionedKeyIdentifier = currentVersionedKeyIdentifier;
             LastKeyRotationTimestamp = lastKeyRotationTimestamp;
+            _rawData = rawData;
         }
 
         /// <summary> The name of KeyVault key. </summary>

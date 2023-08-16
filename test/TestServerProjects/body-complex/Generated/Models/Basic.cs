@@ -5,25 +5,38 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
+
 namespace body_complex.Models
 {
     /// <summary> The Basic. </summary>
     public partial class Basic
     {
-        /// <summary> Initializes a new instance of Basic. </summary>
+        private Dictionary<string, BinaryData> _rawData;
+
+        /// <summary>
+        /// Initializes a new instance of global::body_complex.Models.Basic
+        ///
+        /// </summary>
         public Basic()
         {
         }
 
-        /// <summary> Initializes a new instance of Basic. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::body_complex.Models.Basic
+        ///
+        /// </summary>
         /// <param name="id"> Basic Id. </param>
         /// <param name="name"> Name property with a very long description that does not fit on a single line and a line break. </param>
         /// <param name="color"></param>
-        internal Basic(int? id, string name, CMYKColors? color)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal Basic(int? id, string name, CMYKColors? color, Dictionary<string, BinaryData> rawData)
         {
             Id = id;
             Name = name;
             Color = color;
+            _rawData = rawData;
         }
 
         /// <summary> Basic Id. </summary>

@@ -5,21 +5,34 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
+
 namespace MgmtMockAndSample.Models
 {
     /// <summary> This is a single property of read-only string. </summary>
     internal partial class ReadOnlySinglePropertyModel
     {
-        /// <summary> Initializes a new instance of ReadOnlySinglePropertyModel. </summary>
+        private Dictionary<string, BinaryData> _rawData;
+
+        /// <summary>
+        /// Initializes a new instance of global::MgmtMockAndSample.Models.ReadOnlySinglePropertyModel
+        ///
+        /// </summary>
         public ReadOnlySinglePropertyModel()
         {
         }
 
-        /// <summary> Initializes a new instance of ReadOnlySinglePropertyModel. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::MgmtMockAndSample.Models.ReadOnlySinglePropertyModel
+        ///
+        /// </summary>
         /// <param name="readOnlySomething"> This is a read only string property. </param>
-        internal ReadOnlySinglePropertyModel(string readOnlySomething)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal ReadOnlySinglePropertyModel(string readOnlySomething, Dictionary<string, BinaryData> rawData)
         {
             ReadOnlySomething = readOnlySomething;
+            _rawData = rawData;
         }
 
         /// <summary> This is a read only string property. </summary>

@@ -55,7 +55,7 @@ namespace _Type.Model.Inheritance.SingleDiscriminator
         {
             RequestContext context = FromCancellationToken(cancellationToken);
             Response response = await GetModelAsync(context).ConfigureAwait(false);
-            return Response.FromValue(Bird.FromResponse(response), response);
+            return Response.FromValue((Bird)response, response);
         }
 
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -64,7 +64,7 @@ namespace _Type.Model.Inheritance.SingleDiscriminator
         {
             RequestContext context = FromCancellationToken(cancellationToken);
             Response response = GetModel(context);
-            return Response.FromValue(Bird.FromResponse(response), response);
+            return Response.FromValue((Bird)response, response);
         }
 
         /// <summary>
@@ -146,7 +146,7 @@ namespace _Type.Model.Inheritance.SingleDiscriminator
             Argument.AssertNotNull(input, nameof(input));
 
             RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = await PutModelAsync(input.ToRequestContent(), context).ConfigureAwait(false);
+            Response response = await PutModelAsync(input, context).ConfigureAwait(false);
             return response;
         }
 
@@ -159,7 +159,7 @@ namespace _Type.Model.Inheritance.SingleDiscriminator
             Argument.AssertNotNull(input, nameof(input));
 
             RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = PutModel(input.ToRequestContent(), context);
+            Response response = PutModel(input, context);
             return response;
         }
 
@@ -247,7 +247,7 @@ namespace _Type.Model.Inheritance.SingleDiscriminator
         {
             RequestContext context = FromCancellationToken(cancellationToken);
             Response response = await GetRecursiveModelAsync(context).ConfigureAwait(false);
-            return Response.FromValue(Bird.FromResponse(response), response);
+            return Response.FromValue((Bird)response, response);
         }
 
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -256,7 +256,7 @@ namespace _Type.Model.Inheritance.SingleDiscriminator
         {
             RequestContext context = FromCancellationToken(cancellationToken);
             Response response = GetRecursiveModel(context);
-            return Response.FromValue(Bird.FromResponse(response), response);
+            return Response.FromValue((Bird)response, response);
         }
 
         /// <summary>
@@ -338,7 +338,7 @@ namespace _Type.Model.Inheritance.SingleDiscriminator
             Argument.AssertNotNull(input, nameof(input));
 
             RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = await PutRecursiveModelAsync(input.ToRequestContent(), context).ConfigureAwait(false);
+            Response response = await PutRecursiveModelAsync(input, context).ConfigureAwait(false);
             return response;
         }
 
@@ -351,7 +351,7 @@ namespace _Type.Model.Inheritance.SingleDiscriminator
             Argument.AssertNotNull(input, nameof(input));
 
             RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = PutRecursiveModel(input.ToRequestContent(), context);
+            Response response = PutRecursiveModel(input, context);
             return response;
         }
 
@@ -439,7 +439,7 @@ namespace _Type.Model.Inheritance.SingleDiscriminator
         {
             RequestContext context = FromCancellationToken(cancellationToken);
             Response response = await GetMissingDiscriminatorAsync(context).ConfigureAwait(false);
-            return Response.FromValue(Bird.FromResponse(response), response);
+            return Response.FromValue((Bird)response, response);
         }
 
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -448,7 +448,7 @@ namespace _Type.Model.Inheritance.SingleDiscriminator
         {
             RequestContext context = FromCancellationToken(cancellationToken);
             Response response = GetMissingDiscriminator(context);
-            return Response.FromValue(Bird.FromResponse(response), response);
+            return Response.FromValue((Bird)response, response);
         }
 
         /// <summary>
@@ -527,7 +527,7 @@ namespace _Type.Model.Inheritance.SingleDiscriminator
         {
             RequestContext context = FromCancellationToken(cancellationToken);
             Response response = await GetWrongDiscriminatorAsync(context).ConfigureAwait(false);
-            return Response.FromValue(Bird.FromResponse(response), response);
+            return Response.FromValue((Bird)response, response);
         }
 
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -536,7 +536,7 @@ namespace _Type.Model.Inheritance.SingleDiscriminator
         {
             RequestContext context = FromCancellationToken(cancellationToken);
             Response response = GetWrongDiscriminator(context);
-            return Response.FromValue(Bird.FromResponse(response), response);
+            return Response.FromValue((Bird)response, response);
         }
 
         /// <summary>
@@ -615,7 +615,7 @@ namespace _Type.Model.Inheritance.SingleDiscriminator
         {
             RequestContext context = FromCancellationToken(cancellationToken);
             Response response = await GetLegacyModelAsync(context).ConfigureAwait(false);
-            return Response.FromValue(Dinosaur.FromResponse(response), response);
+            return Response.FromValue((Dinosaur)response, response);
         }
 
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -624,7 +624,7 @@ namespace _Type.Model.Inheritance.SingleDiscriminator
         {
             RequestContext context = FromCancellationToken(cancellationToken);
             Response response = GetLegacyModel(context);
-            return Response.FromValue(Dinosaur.FromResponse(response), response);
+            return Response.FromValue((Dinosaur)response, response);
         }
 
         /// <summary>

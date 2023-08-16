@@ -16,6 +16,8 @@ namespace AuthoringTypeSpec.Models
     /// <summary> The SwapDeploymentsJob. </summary>
     public partial class SwapDeploymentsJob
     {
+        private Dictionary<string, BinaryData> _rawData;
+
         /// <summary> Initializes a new instance of SwapDeploymentsJob. </summary>
         /// <param name="jobId"> The job ID. </param>
         /// <param name="status"> The job status. </param>
@@ -43,7 +45,8 @@ namespace AuthoringTypeSpec.Models
         /// <param name="warnings"> The warnings that were encountered while executing the job. </param>
         /// <param name="errors"> The errors encountered while executing the job. </param>
         /// <param name="id"></param>
-        internal SwapDeploymentsJob(string jobId, DateTimeOffset createdDateTime, DateTimeOffset lastUpdatedDateTime, DateTimeOffset expirationDateTime, JobStatus status, IReadOnlyList<JobWarning> warnings, ResponseError errors, string id)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal SwapDeploymentsJob(string jobId, DateTimeOffset createdDateTime, DateTimeOffset lastUpdatedDateTime, DateTimeOffset expirationDateTime, JobStatus status, IReadOnlyList<JobWarning> warnings, ResponseError errors, string id, Dictionary<string, BinaryData> rawData)
         {
             JobId = jobId;
             CreatedDateTime = createdDateTime;
@@ -53,6 +56,7 @@ namespace AuthoringTypeSpec.Models
             Warnings = warnings;
             Errors = errors;
             Id = id;
+            _rawData = rawData;
         }
 
         /// <summary> The job ID. </summary>

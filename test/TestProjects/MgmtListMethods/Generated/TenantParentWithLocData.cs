@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Collections.Generic;
 using Azure.Core;
 using Azure.ResourceManager.Models;
@@ -17,13 +18,21 @@ namespace MgmtListMethods
     /// </summary>
     public partial class TenantParentWithLocData : TrackedResourceData
     {
-        /// <summary> Initializes a new instance of TenantParentWithLocData. </summary>
+        private Dictionary<string, BinaryData> _rawData;
+
+        /// <summary>
+        /// Initializes a new instance of global::MgmtListMethods.TenantParentWithLocData
+        ///
+        /// </summary>
         /// <param name="location"> The location. </param>
         public TenantParentWithLocData(AzureLocation location) : base(location)
         {
         }
 
-        /// <summary> Initializes a new instance of TenantParentWithLocData. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::MgmtListMethods.TenantParentWithLocData
+        ///
+        /// </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
         /// <param name="resourceType"> The resourceType. </param>
@@ -31,9 +40,11 @@ namespace MgmtListMethods
         /// <param name="tags"> The tags. </param>
         /// <param name="location"> The location. </param>
         /// <param name="bar"> specifies the bar. </param>
-        internal TenantParentWithLocData(ResourceIdentifier id, string name, ResourceType resourceType, SystemData systemData, IDictionary<string, string> tags, AzureLocation location, string bar) : base(id, name, resourceType, systemData, tags, location)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal TenantParentWithLocData(ResourceIdentifier id, string name, ResourceType resourceType, SystemData systemData, IDictionary<string, string> tags, AzureLocation location, string bar, Dictionary<string, BinaryData> rawData) : base(id, name, resourceType, systemData, tags, location)
         {
             Bar = bar;
+            _rawData = rawData;
         }
 
         /// <summary> specifies the bar. </summary>

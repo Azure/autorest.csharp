@@ -5,21 +5,34 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
+
 namespace Azure.Network.Management.Interface.Models
 {
     /// <summary> SKU of a public IP address. </summary>
     public partial class PublicIPAddressSku
     {
-        /// <summary> Initializes a new instance of PublicIPAddressSku. </summary>
+        private Dictionary<string, BinaryData> _rawData;
+
+        /// <summary>
+        /// Initializes a new instance of global::Azure.Network.Management.Interface.Models.PublicIPAddressSku
+        ///
+        /// </summary>
         public PublicIPAddressSku()
         {
         }
 
-        /// <summary> Initializes a new instance of PublicIPAddressSku. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::Azure.Network.Management.Interface.Models.PublicIPAddressSku
+        ///
+        /// </summary>
         /// <param name="name"> Name of a public IP address SKU. </param>
-        internal PublicIPAddressSku(PublicIPAddressSkuName? name)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal PublicIPAddressSku(PublicIPAddressSkuName? name, Dictionary<string, BinaryData> rawData)
         {
             Name = name;
+            _rawData = rawData;
         }
 
         /// <summary> Name of a public IP address SKU. </summary>

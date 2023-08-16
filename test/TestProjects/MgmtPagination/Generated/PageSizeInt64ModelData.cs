@@ -5,25 +5,38 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
+
 namespace MgmtPagination
 {
     /// <summary> A class representing the PageSizeInt64Model data model. </summary>
     public partial class PageSizeInt64ModelData
     {
-        /// <summary> Initializes a new instance of PageSizeInt64ModelData. </summary>
+        private Dictionary<string, BinaryData> _rawData;
+
+        /// <summary>
+        /// Initializes a new instance of global::MgmtPagination.PageSizeInt64ModelData
+        ///
+        /// </summary>
         public PageSizeInt64ModelData()
         {
         }
 
-        /// <summary> Initializes a new instance of PageSizeInt64ModelData. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::MgmtPagination.PageSizeInt64ModelData
+        ///
+        /// </summary>
         /// <param name="id"> Resource ID. </param>
         /// <param name="name"> Resource name. </param>
         /// <param name="resourceType"> Resource type. </param>
-        internal PageSizeInt64ModelData(string id, string name, string resourceType)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal PageSizeInt64ModelData(string id, string name, string resourceType, Dictionary<string, BinaryData> rawData)
         {
             Id = id;
             Name = name;
             ResourceType = resourceType;
+            _rawData = rawData;
         }
 
         /// <summary> Resource ID. </summary>

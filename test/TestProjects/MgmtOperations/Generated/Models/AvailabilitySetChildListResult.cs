@@ -16,7 +16,12 @@ namespace MgmtOperations.Models
     /// <summary> The List Availability Set operation response. </summary>
     internal partial class AvailabilitySetChildListResult
     {
-        /// <summary> Initializes a new instance of AvailabilitySetChildListResult. </summary>
+        private Dictionary<string, BinaryData> _rawData;
+
+        /// <summary>
+        /// Initializes a new instance of global::MgmtOperations.Models.AvailabilitySetChildListResult
+        ///
+        /// </summary>
         /// <param name="value"> The list of availability sets. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="value"/> is null. </exception>
         internal AvailabilitySetChildListResult(IEnumerable<AvailabilitySetChildData> value)
@@ -26,13 +31,18 @@ namespace MgmtOperations.Models
             Value = value.ToList();
         }
 
-        /// <summary> Initializes a new instance of AvailabilitySetChildListResult. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::MgmtOperations.Models.AvailabilitySetChildListResult
+        ///
+        /// </summary>
         /// <param name="value"> The list of availability sets. </param>
         /// <param name="nextLink"> The URI to fetch the next page of AvailabilitySets. Call ListNext() with this URI to fetch the next page of AvailabilitySets. </param>
-        internal AvailabilitySetChildListResult(IReadOnlyList<AvailabilitySetChildData> value, string nextLink)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal AvailabilitySetChildListResult(IReadOnlyList<AvailabilitySetChildData> value, string nextLink, Dictionary<string, BinaryData> rawData)
         {
             Value = value;
             NextLink = nextLink;
+            _rawData = rawData;
         }
 
         /// <summary> The list of availability sets. </summary>

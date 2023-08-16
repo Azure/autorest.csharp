@@ -5,25 +5,38 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
+
 namespace validation.Models
 {
     /// <summary> The Error. </summary>
     internal partial class Error
     {
-        /// <summary> Initializes a new instance of Error. </summary>
+        private Dictionary<string, BinaryData> _rawData;
+
+        /// <summary>
+        /// Initializes a new instance of global::validation.Models.Error
+        ///
+        /// </summary>
         internal Error()
         {
         }
 
-        /// <summary> Initializes a new instance of Error. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::validation.Models.Error
+        ///
+        /// </summary>
         /// <param name="code"></param>
         /// <param name="message"></param>
         /// <param name="fields"></param>
-        internal Error(int? code, string message, string fields)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal Error(int? code, string message, string fields, Dictionary<string, BinaryData> rawData)
         {
             Code = code;
             Message = message;
             Fields = fields;
+            _rawData = rawData;
         }
 
         /// <summary> Gets the code. </summary>

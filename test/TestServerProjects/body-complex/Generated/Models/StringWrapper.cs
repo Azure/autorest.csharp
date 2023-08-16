@@ -5,25 +5,38 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
+
 namespace body_complex.Models
 {
     /// <summary> The StringWrapper. </summary>
     public partial class StringWrapper
     {
-        /// <summary> Initializes a new instance of StringWrapper. </summary>
+        private Dictionary<string, BinaryData> _rawData;
+
+        /// <summary>
+        /// Initializes a new instance of global::body_complex.Models.StringWrapper
+        ///
+        /// </summary>
         public StringWrapper()
         {
         }
 
-        /// <summary> Initializes a new instance of StringWrapper. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::body_complex.Models.StringWrapper
+        ///
+        /// </summary>
         /// <param name="field"></param>
         /// <param name="empty"></param>
         /// <param name="nullProperty"></param>
-        internal StringWrapper(string field, string empty, string nullProperty)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal StringWrapper(string field, string empty, string nullProperty, Dictionary<string, BinaryData> rawData)
         {
             Field = field;
             Empty = empty;
             NullProperty = nullProperty;
+            _rawData = rawData;
         }
 
         /// <summary> Gets or sets the field. </summary>

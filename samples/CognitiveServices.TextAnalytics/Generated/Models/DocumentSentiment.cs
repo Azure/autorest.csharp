@@ -15,7 +15,12 @@ namespace CognitiveServices.TextAnalytics.Models
     /// <summary> The DocumentSentiment. </summary>
     public partial class DocumentSentiment
     {
-        /// <summary> Initializes a new instance of DocumentSentiment. </summary>
+        private Dictionary<string, BinaryData> _rawData;
+
+        /// <summary>
+        /// Initializes a new instance of global::CognitiveServices.TextAnalytics.Models.DocumentSentiment
+        ///
+        /// </summary>
         /// <param name="id"> Unique, non-empty document identifier. </param>
         /// <param name="sentiment"> Predicted sentiment for document (Negative, Neutral, Positive, or Mixed). </param>
         /// <param name="confidenceScores"> Document level sentiment confidence scores between 0 and 1 for each sentiment class. </param>
@@ -36,14 +41,18 @@ namespace CognitiveServices.TextAnalytics.Models
             Warnings = warnings.ToList();
         }
 
-        /// <summary> Initializes a new instance of DocumentSentiment. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::CognitiveServices.TextAnalytics.Models.DocumentSentiment
+        ///
+        /// </summary>
         /// <param name="id"> Unique, non-empty document identifier. </param>
         /// <param name="sentiment"> Predicted sentiment for document (Negative, Neutral, Positive, or Mixed). </param>
         /// <param name="statistics"> if showStats=true was specified in the request this field will contain information about the document payload. </param>
         /// <param name="confidenceScores"> Document level sentiment confidence scores between 0 and 1 for each sentiment class. </param>
         /// <param name="sentences"> Sentence level sentiment analysis. </param>
         /// <param name="warnings"> Warnings encountered while processing document. </param>
-        internal DocumentSentiment(string id, DocumentSentimentValue sentiment, DocumentStatistics statistics, SentimentConfidenceScorePerLabel confidenceScores, IReadOnlyList<SentenceSentiment> sentences, IReadOnlyList<TextAnalyticsWarning> warnings)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal DocumentSentiment(string id, DocumentSentimentValue sentiment, DocumentStatistics statistics, SentimentConfidenceScorePerLabel confidenceScores, IReadOnlyList<SentenceSentiment> sentences, IReadOnlyList<TextAnalyticsWarning> warnings, Dictionary<string, BinaryData> rawData)
         {
             Id = id;
             Sentiment = sentiment;
@@ -51,6 +60,7 @@ namespace CognitiveServices.TextAnalytics.Models
             ConfidenceScores = confidenceScores;
             Sentences = sentences;
             Warnings = warnings;
+            _rawData = rawData;
         }
 
         /// <summary> Unique, non-empty document identifier. </summary>

@@ -5,23 +5,36 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
+
 namespace ModelShapes.Models
 {
     /// <summary> The ErrorModel. </summary>
     internal partial class ErrorModel
     {
-        /// <summary> Initializes a new instance of ErrorModel. </summary>
+        private Dictionary<string, BinaryData> _rawData;
+
+        /// <summary>
+        /// Initializes a new instance of global::ModelShapes.Models.ErrorModel
+        ///
+        /// </summary>
         internal ErrorModel()
         {
         }
 
-        /// <summary> Initializes a new instance of ErrorModel. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::ModelShapes.Models.ErrorModel
+        ///
+        /// </summary>
         /// <param name="code"></param>
         /// <param name="status"></param>
-        internal ErrorModel(string code, string status)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal ErrorModel(string code, string status, Dictionary<string, BinaryData> rawData)
         {
             Code = code;
             Status = status;
+            _rawData = rawData;
         }
 
         /// <summary> Gets the code. </summary>

@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Collections.Generic;
 using Azure.Core;
 
@@ -13,18 +14,25 @@ namespace body_complex.Models
     /// <summary> The Cat. </summary>
     public partial class Cat : Pet
     {
-        /// <summary> Initializes a new instance of Cat. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::body_complex.Models.Cat
+        ///
+        /// </summary>
         public Cat()
         {
             Hates = new ChangeTrackingList<Dog>();
         }
 
-        /// <summary> Initializes a new instance of Cat. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::body_complex.Models.Cat
+        ///
+        /// </summary>
         /// <param name="id"></param>
         /// <param name="name"></param>
         /// <param name="color"></param>
         /// <param name="hates"></param>
-        internal Cat(int? id, string name, string color, IList<Dog> hates) : base(id, name)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal Cat(int? id, string name, string color, IList<Dog> hates, Dictionary<string, BinaryData> rawData) : base(id, name, rawData)
         {
             Color = color;
             Hates = hates;

@@ -4,12 +4,15 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
 
 namespace dpg_customization_LowLevel.Models
 {
     /// <summary> The Input. </summary>
     public partial class Input
     {
+        private Dictionary<string, BinaryData> _rawData;
+
         /// <summary> Initializes a new instance of Input. </summary>
         /// <param name="hello"></param>
         /// <exception cref="ArgumentNullException"> <paramref name="hello"/> is null. </exception>
@@ -21,6 +24,12 @@ namespace dpg_customization_LowLevel.Models
             }
 
             Hello = hello;
+        }
+
+        internal Input(string hello, Dictionary<string, BinaryData> rawData)
+        {
+            Hello = hello;
+            _rawData = rawData;
         }
 
         /// <summary> Gets the hello. </summary>

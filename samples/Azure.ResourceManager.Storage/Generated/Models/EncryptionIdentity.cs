@@ -5,21 +5,34 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
+
 namespace Azure.ResourceManager.Storage.Models
 {
     /// <summary> Encryption identity for the storage account. </summary>
     internal partial class EncryptionIdentity
     {
-        /// <summary> Initializes a new instance of EncryptionIdentity. </summary>
+        private Dictionary<string, BinaryData> _rawData;
+
+        /// <summary>
+        /// Initializes a new instance of global::Azure.ResourceManager.Storage.Models.EncryptionIdentity
+        ///
+        /// </summary>
         public EncryptionIdentity()
         {
         }
 
-        /// <summary> Initializes a new instance of EncryptionIdentity. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::Azure.ResourceManager.Storage.Models.EncryptionIdentity
+        ///
+        /// </summary>
         /// <param name="encryptionUserAssignedIdentity"> Resource identifier of the UserAssigned identity to be associated with server-side encryption on the storage account. </param>
-        internal EncryptionIdentity(string encryptionUserAssignedIdentity)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal EncryptionIdentity(string encryptionUserAssignedIdentity, Dictionary<string, BinaryData> rawData)
         {
             EncryptionUserAssignedIdentity = encryptionUserAssignedIdentity;
+            _rawData = rawData;
         }
 
         /// <summary> Resource identifier of the UserAssigned identity to be associated with server-side encryption on the storage account. </summary>

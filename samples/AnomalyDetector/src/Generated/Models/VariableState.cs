@@ -6,12 +6,15 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
 
 namespace AnomalyDetector.Models
 {
     /// <summary> Variable Status. </summary>
     public partial class VariableState
     {
+        private Dictionary<string, BinaryData> _rawData;
+
         /// <summary> Initializes a new instance of VariableState. </summary>
         public VariableState()
         {
@@ -23,13 +26,15 @@ namespace AnomalyDetector.Models
         /// <param name="effectiveCount"> Number of effective data points before applying fillNAMethod. </param>
         /// <param name="firstTimestamp"> First valid timestamp with value of input data. </param>
         /// <param name="lastTimestamp"> Last valid timestamp with value of input data. </param>
-        internal VariableState(string variable, float? filledNARatio, int? effectiveCount, DateTimeOffset? firstTimestamp, DateTimeOffset? lastTimestamp)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal VariableState(string variable, float? filledNARatio, int? effectiveCount, DateTimeOffset? firstTimestamp, DateTimeOffset? lastTimestamp, Dictionary<string, BinaryData> rawData)
         {
             Variable = variable;
             FilledNARatio = filledNARatio;
             EffectiveCount = effectiveCount;
             FirstTimestamp = firstTimestamp;
             LastTimestamp = lastTimestamp;
+            _rawData = rawData;
         }
 
         /// <summary> Variable name in variable states. </summary>

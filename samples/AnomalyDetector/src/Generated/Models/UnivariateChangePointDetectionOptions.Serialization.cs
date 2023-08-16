@@ -14,12 +14,14 @@ using Azure.Core.Serialization;
 
 namespace AnomalyDetector.Models
 {
-    public partial class UnivariateChangePointDetectionOptions : IUtf8JsonSerializable, IJsonModelSerializable
+    public partial class UnivariateChangePointDetectionOptions : IUtf8JsonSerializable, IModelJsonSerializable<UnivariateChangePointDetectionOptions>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModelSerializable)this).Serialize(writer, ModelSerializerOptions.AzureServiceDefault);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<UnivariateChangePointDetectionOptions>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
 
-        void IJsonModelSerializable.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
+        void IModelJsonSerializable<UnivariateChangePointDetectionOptions>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
             writer.WriteStartObject();
             writer.WritePropertyName("series"u8);
             writer.WriteStartArray();
@@ -50,18 +52,25 @@ namespace AnomalyDetector.Models
                 writer.WritePropertyName("threshold"u8);
                 writer.WriteNumberValue(Threshold.Value);
             }
+            if (_rawData is not null && options.Format == ModelSerializerFormat.Json)
+            {
+                foreach (var property in _rawData)
+                {
+                    writer.WritePropertyName(property.Key);
+#if NET6_0_OR_GREATER
+				writer.WriteRawValue(property.Value);
+#else
+                    JsonSerializer.Serialize(writer, JsonDocument.Parse(property.Value.ToString()).RootElement);
+#endif
+                }
+            }
             writer.WriteEndObject();
-        }
-
-        object IModelSerializable.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            using var doc = JsonDocument.Parse(data);
-            return DeserializeUnivariateChangePointDetectionOptions(doc.RootElement, options);
         }
 
         internal static UnivariateChangePointDetectionOptions DeserializeUnivariateChangePointDetectionOptions(JsonElement element, ModelSerializerOptions options = default)
         {
-            options ??= ModelSerializerOptions.AzureServiceDefault;
+            options ??= ModelSerializerOptions.DefaultWireOptions;
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
@@ -72,6 +81,7 @@ namespace AnomalyDetector.Models
             Optional<int> period = default;
             Optional<int> stableTrendWindow = default;
             Optional<float> threshold = default;
+            Dictionary<string, BinaryData> rawData = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("series"u8))
@@ -125,30 +135,57 @@ namespace AnomalyDetector.Models
                     threshold = property.Value.GetSingle();
                     continue;
                 }
+                if (options.Format == ModelSerializerFormat.Json)
+                {
+                    rawData.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
+                    continue;
+                }
             }
-            return new UnivariateChangePointDetectionOptions(series, granularity, Optional.ToNullable(customInterval), Optional.ToNullable(period), Optional.ToNullable(stableTrendWindow), Optional.ToNullable(threshold));
+            return new UnivariateChangePointDetectionOptions(series, granularity, Optional.ToNullable(customInterval), Optional.ToNullable(period), Optional.ToNullable(stableTrendWindow), Optional.ToNullable(threshold), rawData);
         }
 
-        object IJsonModelSerializable.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        UnivariateChangePointDetectionOptions IModelJsonSerializable<UnivariateChangePointDetectionOptions>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
         {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
             using var doc = JsonDocument.ParseValue(ref reader);
             return DeserializeUnivariateChangePointDetectionOptions(doc.RootElement, options);
         }
 
-        /// <summary> Deserializes the model from a raw response. </summary>
-        /// <param name="response"> The response to deserialize the model from. </param>
-        internal static UnivariateChangePointDetectionOptions FromResponse(Response response)
+        BinaryData IModelSerializable<UnivariateChangePointDetectionOptions>.Serialize(ModelSerializerOptions options)
         {
-            using var document = JsonDocument.Parse(response.Content);
-            return DeserializeUnivariateChangePointDetectionOptions(document.RootElement);
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
         }
 
-        /// <summary> Convert into a Utf8JsonRequestContent. </summary>
-        internal virtual RequestContent ToRequestContent()
+        UnivariateChangePointDetectionOptions IModelSerializable<UnivariateChangePointDetectionOptions>.Deserialize(BinaryData data, ModelSerializerOptions options)
         {
-            var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue(this);
-            return content;
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using var doc = JsonDocument.Parse(data);
+            return DeserializeUnivariateChangePointDetectionOptions(doc.RootElement, options);
+        }
+
+        public static implicit operator RequestContent(UnivariateChangePointDetectionOptions model)
+        {
+            if (model is null)
+            {
+                return null;
+            }
+
+            return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
+        }
+
+        public static explicit operator UnivariateChangePointDetectionOptions(Response response)
+        {
+            if (response is null)
+            {
+                return null;
+            }
+
+            using JsonDocument doc = JsonDocument.Parse(response.ContentStream);
+            return DeserializeUnivariateChangePointDetectionOptions(doc.RootElement, ModelSerializerOptions.DefaultWireOptions);
         }
     }
 }

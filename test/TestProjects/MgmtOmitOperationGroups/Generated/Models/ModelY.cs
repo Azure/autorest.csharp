@@ -5,21 +5,34 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
+
 namespace MgmtOmitOperationGroups.Models
 {
     /// <summary> The ModelY. </summary>
     public partial class ModelY
     {
-        /// <summary> Initializes a new instance of ModelY. </summary>
+        protected internal Dictionary<string, BinaryData> _rawData;
+
+        /// <summary>
+        /// Initializes a new instance of global::MgmtOmitOperationGroups.Models.ModelY
+        ///
+        /// </summary>
         public ModelY()
         {
         }
 
-        /// <summary> Initializes a new instance of ModelY. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::MgmtOmitOperationGroups.Models.ModelY
+        ///
+        /// </summary>
         /// <param name="e"></param>
-        internal ModelY(string e)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal ModelY(string e, Dictionary<string, BinaryData> rawData)
         {
             E = e;
+            _rawData = rawData;
         }
 
         /// <summary> Gets or sets the e. </summary>

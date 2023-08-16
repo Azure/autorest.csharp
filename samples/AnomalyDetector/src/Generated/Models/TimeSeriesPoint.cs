@@ -6,12 +6,15 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
 
 namespace AnomalyDetector.Models
 {
     /// <summary> The definition of input timeseries points. </summary>
     public partial class TimeSeriesPoint
     {
+        private Dictionary<string, BinaryData> _rawData;
+
         /// <summary> Initializes a new instance of TimeSeriesPoint. </summary>
         /// <param name="value"> The measurement of that point, should be float. </param>
         public TimeSeriesPoint(float value)
@@ -22,10 +25,12 @@ namespace AnomalyDetector.Models
         /// <summary> Initializes a new instance of TimeSeriesPoint. </summary>
         /// <param name="timestamp"> Optional argument, timestamp of a data point (ISO8601 format). </param>
         /// <param name="value"> The measurement of that point, should be float. </param>
-        internal TimeSeriesPoint(DateTimeOffset? timestamp, float value)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal TimeSeriesPoint(DateTimeOffset? timestamp, float value, Dictionary<string, BinaryData> rawData)
         {
             Timestamp = timestamp;
             Value = value;
+            _rawData = rawData;
         }
 
         /// <summary> Optional argument, timestamp of a data point (ISO8601 format). </summary>

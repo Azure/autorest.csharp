@@ -15,7 +15,12 @@ namespace CognitiveSearch.Models
     /// <summary> Response from a List Indexers request. If successful, it includes the full definitions of all indexers. </summary>
     public partial class ListIndexersResult
     {
-        /// <summary> Initializes a new instance of ListIndexersResult. </summary>
+        private Dictionary<string, BinaryData> _rawData;
+
+        /// <summary>
+        /// Initializes a new instance of global::CognitiveSearch.Models.ListIndexersResult
+        ///
+        /// </summary>
         /// <param name="indexers"> The indexers in the Search service. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="indexers"/> is null. </exception>
         internal ListIndexersResult(IEnumerable<Indexer> indexers)
@@ -25,11 +30,16 @@ namespace CognitiveSearch.Models
             Indexers = indexers.ToList();
         }
 
-        /// <summary> Initializes a new instance of ListIndexersResult. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::CognitiveSearch.Models.ListIndexersResult
+        ///
+        /// </summary>
         /// <param name="indexers"> The indexers in the Search service. </param>
-        internal ListIndexersResult(IReadOnlyList<Indexer> indexers)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal ListIndexersResult(IReadOnlyList<Indexer> indexers, Dictionary<string, BinaryData> rawData)
         {
             Indexers = indexers;
+            _rawData = rawData;
         }
 
         /// <summary> The indexers in the Search service. </summary>

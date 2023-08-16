@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
 using Azure.Core;
 
 namespace paging.Models
@@ -13,7 +14,12 @@ namespace paging.Models
     /// <summary> Parameter group. </summary>
     public partial class CustomParameterGroup
     {
-        /// <summary> Initializes a new instance of CustomParameterGroup. </summary>
+        private Dictionary<string, BinaryData> _rawData;
+
+        /// <summary>
+        /// Initializes a new instance of global::paging.Models.CustomParameterGroup
+        ///
+        /// </summary>
         /// <param name="apiVersion"> Sets the api version to use. </param>
         /// <param name="tenant"> Sets the tenant to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="apiVersion"/> or <paramref name="tenant"/> is null. </exception>
@@ -24,6 +30,20 @@ namespace paging.Models
 
             ApiVersion = apiVersion;
             Tenant = tenant;
+        }
+
+        /// <summary>
+        /// Initializes a new instance of global::paging.Models.CustomParameterGroup
+        ///
+        /// </summary>
+        /// <param name="apiVersion"> Sets the api version to use. </param>
+        /// <param name="tenant"> Sets the tenant to use. </param>
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal CustomParameterGroup(string apiVersion, string tenant, Dictionary<string, BinaryData> rawData)
+        {
+            ApiVersion = apiVersion;
+            Tenant = tenant;
+            _rawData = rawData;
         }
 
         /// <summary> Sets the api version to use. </summary>

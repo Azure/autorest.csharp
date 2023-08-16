@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Collections.Generic;
 using Azure.Core;
 using MgmtScopeResource;
@@ -14,17 +15,27 @@ namespace MgmtScopeResource.Models
     /// <summary> The response of the list guest configuration assignment operation. </summary>
     internal partial class GuestConfigurationAssignmentList
     {
-        /// <summary> Initializes a new instance of GuestConfigurationAssignmentList. </summary>
+        private Dictionary<string, BinaryData> _rawData;
+
+        /// <summary>
+        /// Initializes a new instance of global::MgmtScopeResource.Models.GuestConfigurationAssignmentList
+        ///
+        /// </summary>
         internal GuestConfigurationAssignmentList()
         {
             Value = new ChangeTrackingList<GuestConfigurationAssignmentData>();
         }
 
-        /// <summary> Initializes a new instance of GuestConfigurationAssignmentList. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::MgmtScopeResource.Models.GuestConfigurationAssignmentList
+        ///
+        /// </summary>
         /// <param name="value"> Result of the list guest configuration assignment operation. </param>
-        internal GuestConfigurationAssignmentList(IReadOnlyList<GuestConfigurationAssignmentData> value)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal GuestConfigurationAssignmentList(IReadOnlyList<GuestConfigurationAssignmentData> value, Dictionary<string, BinaryData> rawData)
         {
             Value = value;
+            _rawData = rawData;
         }
 
         /// <summary> Result of the list guest configuration assignment operation. </summary>

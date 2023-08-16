@@ -15,7 +15,12 @@ namespace MgmtMockAndSample.Models
     /// <summary> Parameters for creating or updating a vault. </summary>
     public partial class VaultCreateOrUpdateContent
     {
-        /// <summary> Initializes a new instance of VaultCreateOrUpdateContent. </summary>
+        private Dictionary<string, BinaryData> _rawData;
+
+        /// <summary>
+        /// Initializes a new instance of global::MgmtMockAndSample.Models.VaultCreateOrUpdateContent
+        ///
+        /// </summary>
         /// <param name="location"> The supported Azure location where the key vault should be created. </param>
         /// <param name="properties"> Properties of the vault. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="properties"/> is null. </exception>
@@ -28,17 +33,22 @@ namespace MgmtMockAndSample.Models
             Properties = properties;
         }
 
-        /// <summary> Initializes a new instance of VaultCreateOrUpdateContent. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::MgmtMockAndSample.Models.VaultCreateOrUpdateContent
+        ///
+        /// </summary>
         /// <param name="location"> The supported Azure location where the key vault should be created. </param>
         /// <param name="tags"> The tags that will be assigned to the key vault. </param>
         /// <param name="properties"> Properties of the vault. </param>
         /// <param name="identity"> Identity for the virtual machine. </param>
-        internal VaultCreateOrUpdateContent(AzureLocation location, IDictionary<string, string> tags, VaultProperties properties, ManagedServiceIdentity identity)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal VaultCreateOrUpdateContent(AzureLocation location, IDictionary<string, string> tags, VaultProperties properties, ManagedServiceIdentity identity, Dictionary<string, BinaryData> rawData)
         {
             Location = location;
             Tags = tags;
             Properties = properties;
             Identity = identity;
+            _rawData = rawData;
         }
 
         /// <summary> The supported Azure location where the key vault should be created. </summary>

@@ -5,6 +5,9 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
+
 namespace _Type.Model.Inheritance.SingleDiscriminator.Models
 {
     /// <summary> The second level legacy model in polymorphic single level inheritance. </summary>
@@ -20,7 +23,8 @@ namespace _Type.Model.Inheritance.SingleDiscriminator.Models
         /// <summary> Initializes a new instance of TRex. </summary>
         /// <param name="kind"> Discriminator. </param>
         /// <param name="size"></param>
-        internal TRex(string kind, int size) : base(kind, size)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal TRex(string kind, int size, Dictionary<string, BinaryData> rawData) : base(kind, size, rawData)
         {
         }
     }

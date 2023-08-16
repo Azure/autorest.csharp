@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
 using Azure.Core;
 
 namespace Azure.ResourceManager.Sample.Models
@@ -16,7 +17,12 @@ namespace Azure.ResourceManager.Sample.Models
     /// </summary>
     public partial class SampleUsage
     {
-        /// <summary> Initializes a new instance of SampleUsage. </summary>
+        private Dictionary<string, BinaryData> _rawData;
+
+        /// <summary>
+        /// Initializes a new instance of global::Azure.ResourceManager.Sample.Models.SampleUsage
+        ///
+        /// </summary>
         /// <param name="currentValue">
         /// The current usage of the resource.
         /// Serialized Name: SampleUsage.currentValue
@@ -40,7 +46,10 @@ namespace Azure.ResourceManager.Sample.Models
             Name = name;
         }
 
-        /// <summary> Initializes a new instance of SampleUsage. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::Azure.ResourceManager.Sample.Models.SampleUsage
+        ///
+        /// </summary>
         /// <param name="unit">
         /// An enum describing the unit of usage measurement.
         /// Serialized Name: SampleUsage.unit
@@ -57,12 +66,14 @@ namespace Azure.ResourceManager.Sample.Models
         /// The name of the type of usage.
         /// Serialized Name: SampleUsage.name
         /// </param>
-        internal SampleUsage(UsageUnit unit, int currentValue, long limit, SampleUsageName name)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal SampleUsage(UsageUnit unit, int currentValue, long limit, SampleUsageName name, Dictionary<string, BinaryData> rawData)
         {
             Unit = unit;
             CurrentValue = currentValue;
             Limit = limit;
             Name = name;
+            _rawData = rawData;
         }
 
         /// <summary>

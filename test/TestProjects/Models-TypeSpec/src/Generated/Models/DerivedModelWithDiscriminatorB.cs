@@ -5,6 +5,9 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
+
 namespace ModelsTypeSpec.Models
 {
     /// <summary> Deriver model with discriminator property. </summary>
@@ -24,7 +27,8 @@ namespace ModelsTypeSpec.Models
         /// <param name="optionalPropertyOnBase"> Optional property on base. </param>
         /// <param name="requiredPropertyOnBase"> Required property on base. </param>
         /// <param name="requiredInt"> Required int. </param>
-        internal DerivedModelWithDiscriminatorB(string discriminatorProperty, string optionalPropertyOnBase, int requiredPropertyOnBase, int requiredInt) : base(discriminatorProperty, optionalPropertyOnBase, requiredPropertyOnBase)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal DerivedModelWithDiscriminatorB(string discriminatorProperty, string optionalPropertyOnBase, int requiredPropertyOnBase, int requiredInt, Dictionary<string, BinaryData> rawData) : base(discriminatorProperty, optionalPropertyOnBase, requiredPropertyOnBase, rawData)
         {
             RequiredInt = requiredInt;
         }

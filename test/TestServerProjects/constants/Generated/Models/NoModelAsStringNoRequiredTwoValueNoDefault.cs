@@ -5,21 +5,34 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
+
 namespace constants.Models
 {
     /// <summary> The NoModelAsStringNoRequiredTwoValueNoDefault. </summary>
     internal partial class NoModelAsStringNoRequiredTwoValueNoDefault
     {
-        /// <summary> Initializes a new instance of NoModelAsStringNoRequiredTwoValueNoDefault. </summary>
+        private Dictionary<string, BinaryData> _rawData;
+
+        /// <summary>
+        /// Initializes a new instance of global::constants.Models.NoModelAsStringNoRequiredTwoValueNoDefault
+        ///
+        /// </summary>
         internal NoModelAsStringNoRequiredTwoValueNoDefault()
         {
         }
 
-        /// <summary> Initializes a new instance of NoModelAsStringNoRequiredTwoValueNoDefault. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::constants.Models.NoModelAsStringNoRequiredTwoValueNoDefault
+        ///
+        /// </summary>
         /// <param name="parameter"></param>
-        internal NoModelAsStringNoRequiredTwoValueNoDefault(NoModelAsStringNoRequiredTwoValueNoDefaultEnum? parameter)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal NoModelAsStringNoRequiredTwoValueNoDefault(NoModelAsStringNoRequiredTwoValueNoDefaultEnum? parameter, Dictionary<string, BinaryData> rawData)
         {
             Parameter = parameter;
+            _rawData = rawData;
         }
 
         /// <summary> Gets the parameter. </summary>

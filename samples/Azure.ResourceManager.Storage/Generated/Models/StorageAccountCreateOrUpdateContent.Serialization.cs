@@ -8,6 +8,7 @@
 using System;
 using System.Collections.Generic;
 using System.Text.Json;
+using Azure;
 using Azure.Core;
 using Azure.Core.Serialization;
 using Azure.ResourceManager.Models;
@@ -15,12 +16,14 @@ using Azure.ResourceManager.Resources.Models;
 
 namespace Azure.ResourceManager.Storage.Models
 {
-    public partial class StorageAccountCreateOrUpdateContent : IUtf8JsonSerializable, IJsonModelSerializable
+    public partial class StorageAccountCreateOrUpdateContent : IUtf8JsonSerializable, IModelJsonSerializable<StorageAccountCreateOrUpdateContent>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModelSerializable)this).Serialize(writer, ModelSerializerOptions.AzureServiceDefault);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<StorageAccountCreateOrUpdateContent>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
 
-        void IJsonModelSerializable.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
+        void IModelJsonSerializable<StorageAccountCreateOrUpdateContent>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
             writer.WriteStartObject();
             writer.WritePropertyName("sku"u8);
             writer.WriteObjectValue(Sku);
@@ -148,18 +151,25 @@ namespace Azure.ResourceManager.Storage.Models
                 writer.WriteObjectValue(ImmutableStorageWithVersioning);
             }
             writer.WriteEndObject();
+            if (_rawData is not null && options.Format == ModelSerializerFormat.Json)
+            {
+                foreach (var property in _rawData)
+                {
+                    writer.WritePropertyName(property.Key);
+#if NET6_0_OR_GREATER
+				writer.WriteRawValue(property.Value);
+#else
+                    JsonSerializer.Serialize(writer, JsonDocument.Parse(property.Value.ToString()).RootElement);
+#endif
+                }
+            }
             writer.WriteEndObject();
-        }
-
-        object IModelSerializable.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            using var doc = JsonDocument.Parse(data);
-            return DeserializeStorageAccountCreateOrUpdateContent(doc.RootElement, options);
         }
 
         internal static StorageAccountCreateOrUpdateContent DeserializeStorageAccountCreateOrUpdateContent(JsonElement element, ModelSerializerOptions options = default)
         {
-            options ??= ModelSerializerOptions.AzureServiceDefault;
+            options ??= ModelSerializerOptions.DefaultWireOptions;
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
@@ -189,6 +199,7 @@ namespace Azure.ResourceManager.Storage.Models
             Optional<bool> allowCrossTenantReplication = default;
             Optional<bool> defaultToOAuthAuthentication = default;
             Optional<ImmutableStorageAccount> immutableStorageWithVersioning = default;
+            Dictionary<string, BinaryData> rawData = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("sku"u8))
@@ -422,14 +433,57 @@ namespace Azure.ResourceManager.Storage.Models
                     }
                     continue;
                 }
+                if (options.Format == ModelSerializerFormat.Json)
+                {
+                    rawData.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
+                    continue;
+                }
             }
-            return new StorageAccountCreateOrUpdateContent(sku, kind, location, extendedLocation, Optional.ToDictionary(tags), identity, Optional.ToNullable(publicNetworkAccess), sasPolicy.Value, keyPolicy.Value, customDomain.Value, encryption.Value, networkAcls.Value, Optional.ToNullable(accessTier), azureFilesIdentityBasedAuthentication.Value, Optional.ToNullable(supportsHttpsTrafficOnly), Optional.ToNullable(isHnsEnabled), Optional.ToNullable(largeFileSharesState), routingPreference.Value, Optional.ToNullable(allowBlobPublicAccess), Optional.ToNullable(minimumTlsVersion), Optional.ToNullable(allowSharedKeyAccess), Optional.ToNullable(isNfsV3Enabled), Optional.ToNullable(allowCrossTenantReplication), Optional.ToNullable(defaultToOAuthAuthentication), immutableStorageWithVersioning.Value);
+            return new StorageAccountCreateOrUpdateContent(sku, kind, location, extendedLocation, Optional.ToDictionary(tags), identity, Optional.ToNullable(publicNetworkAccess), sasPolicy.Value, keyPolicy.Value, customDomain.Value, encryption.Value, networkAcls.Value, Optional.ToNullable(accessTier), azureFilesIdentityBasedAuthentication.Value, Optional.ToNullable(supportsHttpsTrafficOnly), Optional.ToNullable(isHnsEnabled), Optional.ToNullable(largeFileSharesState), routingPreference.Value, Optional.ToNullable(allowBlobPublicAccess), Optional.ToNullable(minimumTlsVersion), Optional.ToNullable(allowSharedKeyAccess), Optional.ToNullable(isNfsV3Enabled), Optional.ToNullable(allowCrossTenantReplication), Optional.ToNullable(defaultToOAuthAuthentication), immutableStorageWithVersioning.Value, rawData);
         }
 
-        object IJsonModelSerializable.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        StorageAccountCreateOrUpdateContent IModelJsonSerializable<StorageAccountCreateOrUpdateContent>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
         {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
             using var doc = JsonDocument.ParseValue(ref reader);
             return DeserializeStorageAccountCreateOrUpdateContent(doc.RootElement, options);
+        }
+
+        BinaryData IModelSerializable<StorageAccountCreateOrUpdateContent>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        StorageAccountCreateOrUpdateContent IModelSerializable<StorageAccountCreateOrUpdateContent>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using var doc = JsonDocument.Parse(data);
+            return DeserializeStorageAccountCreateOrUpdateContent(doc.RootElement, options);
+        }
+
+        public static implicit operator RequestContent(StorageAccountCreateOrUpdateContent model)
+        {
+            if (model is null)
+            {
+                return null;
+            }
+
+            return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
+        }
+
+        public static explicit operator StorageAccountCreateOrUpdateContent(Response response)
+        {
+            if (response is null)
+            {
+                return null;
+            }
+
+            using JsonDocument doc = JsonDocument.Parse(response.ContentStream);
+            return DeserializeStorageAccountCreateOrUpdateContent(doc.RootElement, ModelSerializerOptions.DefaultWireOptions);
         }
     }
 }

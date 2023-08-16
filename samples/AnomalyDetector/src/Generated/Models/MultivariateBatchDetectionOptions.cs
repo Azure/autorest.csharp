@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
 using Azure.Core;
 
 namespace AnomalyDetector.Models
@@ -16,6 +17,8 @@ namespace AnomalyDetector.Models
     /// </summary>
     public partial class MultivariateBatchDetectionOptions
     {
+        private Dictionary<string, BinaryData> _rawData;
+
         /// <summary> Initializes a new instance of MultivariateBatchDetectionOptions. </summary>
         /// <param name="dataSource">
         /// Source link to the input data to indicate an accessible Azure storage Uri,
@@ -45,6 +48,36 @@ namespace AnomalyDetector.Models
             TopContributorCount = topContributorCount;
             StartTime = startTime;
             EndTime = endTime;
+        }
+
+        /// <summary> Initializes a new instance of MultivariateBatchDetectionOptions. </summary>
+        /// <param name="dataSource">
+        /// Source link to the input data to indicate an accessible Azure storage Uri,
+        /// either pointed to an Azure blob storage folder, or pointed to a CSV file in
+        /// Azure blob storage based on you data schema selection. The data schema should
+        /// be exactly the same with those used in the training phase.
+        /// </param>
+        /// <param name="topContributorCount">
+        /// An optional field, which is used to specify the number of top contributed
+        /// variables for one anomalous timestamp in the response. The default number is
+        /// 10.
+        /// </param>
+        /// <param name="startTime">
+        /// A required field, indicating the start time of data for detection, which should
+        /// be date-time of ISO 8601 format.
+        /// </param>
+        /// <param name="endTime">
+        /// A required field, indicating the end time of data for detection, which should
+        /// be date-time of ISO 8601 format.
+        /// </param>
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal MultivariateBatchDetectionOptions(Uri dataSource, int topContributorCount, DateTimeOffset startTime, DateTimeOffset endTime, Dictionary<string, BinaryData> rawData)
+        {
+            DataSource = dataSource;
+            TopContributorCount = topContributorCount;
+            StartTime = startTime;
+            EndTime = endTime;
+            _rawData = rawData;
         }
 
         /// <summary>

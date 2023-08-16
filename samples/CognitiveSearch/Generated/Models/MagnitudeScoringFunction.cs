@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
 using Azure.Core;
 
 namespace CognitiveSearch.Models
@@ -13,7 +14,10 @@ namespace CognitiveSearch.Models
     /// <summary> Defines a function that boosts scores based on the magnitude of a numeric field. </summary>
     public partial class MagnitudeScoringFunction : ScoringFunction
     {
-        /// <summary> Initializes a new instance of MagnitudeScoringFunction. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::CognitiveSearch.Models.MagnitudeScoringFunction
+        ///
+        /// </summary>
         /// <param name="fieldName"> The name of the field used as input to the scoring function. </param>
         /// <param name="boost"> A multiplier for the raw score. Must be a positive number not equal to 1.0. </param>
         /// <param name="parameters"> Parameter values for the magnitude scoring function. </param>
@@ -27,13 +31,17 @@ namespace CognitiveSearch.Models
             Type = "magnitude";
         }
 
-        /// <summary> Initializes a new instance of MagnitudeScoringFunction. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::CognitiveSearch.Models.MagnitudeScoringFunction
+        ///
+        /// </summary>
         /// <param name="type"> Indicates the type of function to use. Valid values include magnitude, freshness, distance, and tag. The function type must be lower case. </param>
         /// <param name="fieldName"> The name of the field used as input to the scoring function. </param>
         /// <param name="boost"> A multiplier for the raw score. Must be a positive number not equal to 1.0. </param>
         /// <param name="interpolation"> A value indicating how boosting will be interpolated across document scores; defaults to "Linear". </param>
         /// <param name="parameters"> Parameter values for the magnitude scoring function. </param>
-        internal MagnitudeScoringFunction(string type, string fieldName, double boost, ScoringFunctionInterpolation? interpolation, MagnitudeScoringParameters parameters) : base(type, fieldName, boost, interpolation)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal MagnitudeScoringFunction(string type, string fieldName, double boost, ScoringFunctionInterpolation? interpolation, MagnitudeScoringParameters parameters, Dictionary<string, BinaryData> rawData) : base(type, fieldName, boost, interpolation, rawData)
         {
             Parameters = parameters;
             Type = type ?? "magnitude";

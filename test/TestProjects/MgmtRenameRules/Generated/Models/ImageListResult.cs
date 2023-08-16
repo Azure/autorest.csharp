@@ -19,7 +19,12 @@ namespace MgmtRenameRules.Models
     /// </summary>
     internal partial class ImageListResult
     {
-        /// <summary> Initializes a new instance of ImageListResult. </summary>
+        private Dictionary<string, BinaryData> _rawData;
+
+        /// <summary>
+        /// Initializes a new instance of global::MgmtRenameRules.Models.ImageListResult
+        ///
+        /// </summary>
         /// <param name="value">
         /// The list of Images.
         /// Serialized Name: ImageListResult.value
@@ -32,7 +37,10 @@ namespace MgmtRenameRules.Models
             Value = value.ToList();
         }
 
-        /// <summary> Initializes a new instance of ImageListResult. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::MgmtRenameRules.Models.ImageListResult
+        ///
+        /// </summary>
         /// <param name="value">
         /// The list of Images.
         /// Serialized Name: ImageListResult.value
@@ -41,10 +49,12 @@ namespace MgmtRenameRules.Models
         /// The uri to fetch the next page of Images. Call ListNext() with this to fetch the next page of Images.
         /// Serialized Name: ImageListResult.nextLink
         /// </param>
-        internal ImageListResult(IReadOnlyList<ImageData> value, string nextLink)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal ImageListResult(IReadOnlyList<ImageData> value, string nextLink, Dictionary<string, BinaryData> rawData)
         {
             Value = value;
             NextLink = nextLink;
+            _rawData = rawData;
         }
 
         /// <summary>

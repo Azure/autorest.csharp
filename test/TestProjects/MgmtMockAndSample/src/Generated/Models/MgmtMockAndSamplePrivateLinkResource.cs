@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Collections.Generic;
 using Azure.Core;
 using Azure.ResourceManager.Models;
@@ -14,7 +15,12 @@ namespace MgmtMockAndSample.Models
     /// <summary> A private link resource. </summary>
     public partial class MgmtMockAndSamplePrivateLinkResource : ResourceData
     {
-        /// <summary> Initializes a new instance of MgmtMockAndSamplePrivateLinkResource. </summary>
+        private Dictionary<string, BinaryData> _rawData;
+
+        /// <summary>
+        /// Initializes a new instance of global::MgmtMockAndSample.Models.MgmtMockAndSamplePrivateLinkResource
+        ///
+        /// </summary>
         public MgmtMockAndSamplePrivateLinkResource()
         {
             RequiredMembers = new ChangeTrackingList<string>();
@@ -22,7 +28,10 @@ namespace MgmtMockAndSample.Models
             Tags = new ChangeTrackingDictionary<string, string>();
         }
 
-        /// <summary> Initializes a new instance of MgmtMockAndSamplePrivateLinkResource. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::MgmtMockAndSample.Models.MgmtMockAndSamplePrivateLinkResource
+        ///
+        /// </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
         /// <param name="resourceType"> The resourceType. </param>
@@ -32,13 +41,15 @@ namespace MgmtMockAndSample.Models
         /// <param name="requiredZoneNames"> Required DNS zone names of the the private link resource. </param>
         /// <param name="location"> Azure location of the key vault resource. </param>
         /// <param name="tags"> Tags assigned to the key vault resource. </param>
-        internal MgmtMockAndSamplePrivateLinkResource(ResourceIdentifier id, string name, ResourceType resourceType, SystemData systemData, string groupId, IReadOnlyList<string> requiredMembers, IList<string> requiredZoneNames, AzureLocation? location, IReadOnlyDictionary<string, string> tags) : base(id, name, resourceType, systemData)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal MgmtMockAndSamplePrivateLinkResource(ResourceIdentifier id, string name, ResourceType resourceType, SystemData systemData, string groupId, IReadOnlyList<string> requiredMembers, IList<string> requiredZoneNames, AzureLocation? location, IReadOnlyDictionary<string, string> tags, Dictionary<string, BinaryData> rawData) : base(id, name, resourceType, systemData)
         {
             GroupId = groupId;
             RequiredMembers = requiredMembers;
             RequiredZoneNames = requiredZoneNames;
             Location = location;
             Tags = tags;
+            _rawData = rawData;
         }
 
         /// <summary> Group identifier of private link resource. </summary>

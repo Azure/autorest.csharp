@@ -5,11 +5,16 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
+
 namespace CustomizationsInTsp.Models
 {
     /// <summary> Root RoundTrip model to reference all other types to ensure generation. </summary>
     public partial class RootModel
     {
+        private Dictionary<string, BinaryData> _rawData;
+
         /// <summary> Initializes a new instance of RootModel. </summary>
         public RootModel()
         {
@@ -25,7 +30,8 @@ namespace CustomizationsInTsp.Models
         /// <param name="propertyEnumToBeMadeExtensible"> EnumToBeMadeExtensible. </param>
         /// <param name="propertyModelToAddAdditionalSerializableProperty"> ModelToAddAdditionalSerializableProperty. </param>
         /// <param name="propertyToMoveToCustomization"> Enum type property to move to customization code. </param>
-        internal RootModel(ModelToMakeInternal propertyModelToMakeInternal, RenamedModel propertyModelToRename, ModelToChangeNamespace propertyModelToChangeNamespace, ModelWithCustomizedProperties propertyModelWithCustomizedProperties, RenamedEnum? propertyEnumToRename, EnumWithValueToRename? propertyEnumWithValueToRename, EnumToBeMadeExtensible? propertyEnumToBeMadeExtensible, ModelToAddAdditionalSerializableProperty propertyModelToAddAdditionalSerializableProperty, NormalEnum? propertyToMoveToCustomization)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal RootModel(ModelToMakeInternal propertyModelToMakeInternal, RenamedModel propertyModelToRename, ModelToChangeNamespace propertyModelToChangeNamespace, ModelWithCustomizedProperties propertyModelWithCustomizedProperties, RenamedEnum? propertyEnumToRename, EnumWithValueToRename? propertyEnumWithValueToRename, EnumToBeMadeExtensible? propertyEnumToBeMadeExtensible, ModelToAddAdditionalSerializableProperty propertyModelToAddAdditionalSerializableProperty, NormalEnum? propertyToMoveToCustomization, Dictionary<string, BinaryData> rawData)
         {
             PropertyModelToMakeInternal = propertyModelToMakeInternal;
             PropertyModelToRename = propertyModelToRename;
@@ -36,6 +42,7 @@ namespace CustomizationsInTsp.Models
             PropertyEnumToBeMadeExtensible = propertyEnumToBeMadeExtensible;
             PropertyModelToAddAdditionalSerializableProperty = propertyModelToAddAdditionalSerializableProperty;
             PropertyToMoveToCustomization = propertyToMoveToCustomization;
+            _rawData = rawData;
         }
         /// <summary> ModelToRename. </summary>
         public RenamedModel PropertyModelToRename { get; set; }

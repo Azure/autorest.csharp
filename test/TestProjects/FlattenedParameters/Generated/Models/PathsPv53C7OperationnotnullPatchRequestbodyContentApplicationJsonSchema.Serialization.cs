@@ -8,17 +8,20 @@
 using System;
 using System.Collections.Generic;
 using System.Text.Json;
+using Azure;
 using Azure.Core;
 using Azure.Core.Serialization;
 
 namespace FlattenedParameters.Models
 {
-    internal partial class PathsPv53C7OperationnotnullPatchRequestbodyContentApplicationJsonSchema : IUtf8JsonSerializable, IJsonModelSerializable
+    internal partial class PathsPv53C7OperationnotnullPatchRequestbodyContentApplicationJsonSchema : IUtf8JsonSerializable, IModelJsonSerializable<PathsPv53C7OperationnotnullPatchRequestbodyContentApplicationJsonSchema>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModelSerializable)this).Serialize(writer, ModelSerializerOptions.AzureServiceDefault);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<PathsPv53C7OperationnotnullPatchRequestbodyContentApplicationJsonSchema>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
 
-        void IJsonModelSerializable.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
+        void IModelJsonSerializable<PathsPv53C7OperationnotnullPatchRequestbodyContentApplicationJsonSchema>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
             writer.WriteStartObject();
             if (Optional.IsCollectionDefined(Items))
             {
@@ -30,23 +33,31 @@ namespace FlattenedParameters.Models
                 }
                 writer.WriteEndArray();
             }
+            if (_rawData is not null && options.Format == ModelSerializerFormat.Json)
+            {
+                foreach (var property in _rawData)
+                {
+                    writer.WritePropertyName(property.Key);
+#if NET6_0_OR_GREATER
+				writer.WriteRawValue(property.Value);
+#else
+                    JsonSerializer.Serialize(writer, JsonDocument.Parse(property.Value.ToString()).RootElement);
+#endif
+                }
+            }
             writer.WriteEndObject();
-        }
-
-        object IModelSerializable.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            using var doc = JsonDocument.Parse(data);
-            return DeserializePathsPv53C7OperationnotnullPatchRequestbodyContentApplicationJsonSchema(doc.RootElement, options);
         }
 
         internal static PathsPv53C7OperationnotnullPatchRequestbodyContentApplicationJsonSchema DeserializePathsPv53C7OperationnotnullPatchRequestbodyContentApplicationJsonSchema(JsonElement element, ModelSerializerOptions options = default)
         {
-            options ??= ModelSerializerOptions.AzureServiceDefault;
+            options ??= ModelSerializerOptions.DefaultWireOptions;
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
             }
             Optional<IList<string>> items = default;
+            Dictionary<string, BinaryData> rawData = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("items"u8))
@@ -63,14 +74,57 @@ namespace FlattenedParameters.Models
                     items = array;
                     continue;
                 }
+                if (options.Format == ModelSerializerFormat.Json)
+                {
+                    rawData.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
+                    continue;
+                }
             }
-            return new PathsPv53C7OperationnotnullPatchRequestbodyContentApplicationJsonSchema(Optional.ToList(items));
+            return new PathsPv53C7OperationnotnullPatchRequestbodyContentApplicationJsonSchema(Optional.ToList(items), rawData);
         }
 
-        object IJsonModelSerializable.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        PathsPv53C7OperationnotnullPatchRequestbodyContentApplicationJsonSchema IModelJsonSerializable<PathsPv53C7OperationnotnullPatchRequestbodyContentApplicationJsonSchema>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
         {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
             using var doc = JsonDocument.ParseValue(ref reader);
             return DeserializePathsPv53C7OperationnotnullPatchRequestbodyContentApplicationJsonSchema(doc.RootElement, options);
+        }
+
+        BinaryData IModelSerializable<PathsPv53C7OperationnotnullPatchRequestbodyContentApplicationJsonSchema>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        PathsPv53C7OperationnotnullPatchRequestbodyContentApplicationJsonSchema IModelSerializable<PathsPv53C7OperationnotnullPatchRequestbodyContentApplicationJsonSchema>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using var doc = JsonDocument.Parse(data);
+            return DeserializePathsPv53C7OperationnotnullPatchRequestbodyContentApplicationJsonSchema(doc.RootElement, options);
+        }
+
+        public static implicit operator RequestContent(PathsPv53C7OperationnotnullPatchRequestbodyContentApplicationJsonSchema model)
+        {
+            if (model is null)
+            {
+                return null;
+            }
+
+            return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
+        }
+
+        public static explicit operator PathsPv53C7OperationnotnullPatchRequestbodyContentApplicationJsonSchema(Response response)
+        {
+            if (response is null)
+            {
+                return null;
+            }
+
+            using JsonDocument doc = JsonDocument.Parse(response.ContentStream);
+            return DeserializePathsPv53C7OperationnotnullPatchRequestbodyContentApplicationJsonSchema(doc.RootElement, ModelSerializerOptions.DefaultWireOptions);
         }
     }
 }

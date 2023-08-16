@@ -5,25 +5,38 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
+
 namespace Azure.Network.Management.Interface.Models
 {
     /// <summary> Contains the DDoS protection settings of the public IP. </summary>
     public partial class DdosSettings
     {
-        /// <summary> Initializes a new instance of DdosSettings. </summary>
+        private Dictionary<string, BinaryData> _rawData;
+
+        /// <summary>
+        /// Initializes a new instance of global::Azure.Network.Management.Interface.Models.DdosSettings
+        ///
+        /// </summary>
         public DdosSettings()
         {
         }
 
-        /// <summary> Initializes a new instance of DdosSettings. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::Azure.Network.Management.Interface.Models.DdosSettings
+        ///
+        /// </summary>
         /// <param name="ddosCustomPolicy"> The DDoS custom policy associated with the public IP. </param>
         /// <param name="protectionCoverage"> The DDoS protection policy customizability of the public IP. Only standard coverage will have the ability to be customized. </param>
         /// <param name="protectedIP"> Enables DDoS protection on the public IP. </param>
-        internal DdosSettings(SubResource ddosCustomPolicy, DdosSettingsProtectionCoverage? protectionCoverage, bool? protectedIP)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal DdosSettings(SubResource ddosCustomPolicy, DdosSettingsProtectionCoverage? protectionCoverage, bool? protectedIP, Dictionary<string, BinaryData> rawData)
         {
             DdosCustomPolicy = ddosCustomPolicy;
             ProtectionCoverage = protectionCoverage;
             ProtectedIP = protectedIP;
+            _rawData = rawData;
         }
 
         /// <summary> The DDoS custom policy associated with the public IP. </summary>

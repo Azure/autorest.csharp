@@ -8,17 +8,20 @@
 using System;
 using System.Collections.Generic;
 using System.Text.Json;
+using Azure;
 using Azure.Core;
 using Azure.Core.Serialization;
 
 namespace CognitiveSearch.Models
 {
-    public partial class Field : IUtf8JsonSerializable, IJsonModelSerializable
+    public partial class Field : IUtf8JsonSerializable, IModelJsonSerializable<Field>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModelSerializable)this).Serialize(writer, ModelSerializerOptions.AzureServiceDefault);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<Field>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
 
-        void IJsonModelSerializable.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
+        void IModelJsonSerializable<Field>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
             writer.WriteStartObject();
             writer.WritePropertyName("name"u8);
             writer.WriteStringValue(Name);
@@ -89,18 +92,25 @@ namespace CognitiveSearch.Models
                 }
                 writer.WriteEndArray();
             }
+            if (_rawData is not null && options.Format == ModelSerializerFormat.Json)
+            {
+                foreach (var property in _rawData)
+                {
+                    writer.WritePropertyName(property.Key);
+#if NET6_0_OR_GREATER
+				writer.WriteRawValue(property.Value);
+#else
+                    JsonSerializer.Serialize(writer, JsonDocument.Parse(property.Value.ToString()).RootElement);
+#endif
+                }
+            }
             writer.WriteEndObject();
-        }
-
-        object IModelSerializable.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            using var doc = JsonDocument.Parse(data);
-            return DeserializeField(doc.RootElement, options);
         }
 
         internal static Field DeserializeField(JsonElement element, ModelSerializerOptions options = default)
         {
-            options ??= ModelSerializerOptions.AzureServiceDefault;
+            options ??= ModelSerializerOptions.DefaultWireOptions;
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
@@ -118,6 +128,7 @@ namespace CognitiveSearch.Models
             Optional<AnalyzerName> indexAnalyzer = default;
             Optional<IList<string>> synonymMaps = default;
             Optional<IList<Field>> fields = default;
+            Dictionary<string, BinaryData> rawData = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("name"u8))
@@ -239,14 +250,57 @@ namespace CognitiveSearch.Models
                     fields = array;
                     continue;
                 }
+                if (options.Format == ModelSerializerFormat.Json)
+                {
+                    rawData.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
+                    continue;
+                }
             }
-            return new Field(name, type, Optional.ToNullable(key), Optional.ToNullable(retrievable), Optional.ToNullable(searchable), Optional.ToNullable(filterable), Optional.ToNullable(sortable), Optional.ToNullable(facetable), Optional.ToNullable(analyzer), Optional.ToNullable(searchAnalyzer), Optional.ToNullable(indexAnalyzer), Optional.ToList(synonymMaps), Optional.ToList(fields));
+            return new Field(name, type, Optional.ToNullable(key), Optional.ToNullable(retrievable), Optional.ToNullable(searchable), Optional.ToNullable(filterable), Optional.ToNullable(sortable), Optional.ToNullable(facetable), Optional.ToNullable(analyzer), Optional.ToNullable(searchAnalyzer), Optional.ToNullable(indexAnalyzer), Optional.ToList(synonymMaps), Optional.ToList(fields), rawData);
         }
 
-        object IJsonModelSerializable.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        Field IModelJsonSerializable<Field>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
         {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
             using var doc = JsonDocument.ParseValue(ref reader);
             return DeserializeField(doc.RootElement, options);
+        }
+
+        BinaryData IModelSerializable<Field>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        Field IModelSerializable<Field>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using var doc = JsonDocument.Parse(data);
+            return DeserializeField(doc.RootElement, options);
+        }
+
+        public static implicit operator RequestContent(Field model)
+        {
+            if (model is null)
+            {
+                return null;
+            }
+
+            return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
+        }
+
+        public static explicit operator Field(Response response)
+        {
+            if (response is null)
+            {
+                return null;
+            }
+
+            using JsonDocument doc = JsonDocument.Parse(response.ContentStream);
+            return DeserializeField(doc.RootElement, ModelSerializerOptions.DefaultWireOptions);
         }
     }
 }

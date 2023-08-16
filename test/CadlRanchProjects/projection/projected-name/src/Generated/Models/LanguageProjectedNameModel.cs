@@ -5,16 +5,30 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
+
 namespace Projection.ProjectedName.Models
 {
     /// <summary> The LanguageProjectedNameModel. </summary>
     public partial class LanguageProjectedNameModel
     {
+        private Dictionary<string, BinaryData> _rawData;
+
         /// <summary> Initializes a new instance of LanguageProjectedNameModel. </summary>
         /// <param name="csName"> Pass in true. </param>
         public LanguageProjectedNameModel(bool csName)
         {
             CSName = csName;
+        }
+
+        /// <summary> Initializes a new instance of LanguageProjectedNameModel. </summary>
+        /// <param name="csName"> Pass in true. </param>
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal LanguageProjectedNameModel(bool csName, Dictionary<string, BinaryData> rawData)
+        {
+            CSName = csName;
+            _rawData = rawData;
         }
 
         /// <summary> Pass in true. </summary>

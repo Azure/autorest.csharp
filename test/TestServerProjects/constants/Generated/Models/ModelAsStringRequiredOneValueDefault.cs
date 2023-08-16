@@ -5,16 +5,36 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
+
 namespace constants.Models
 {
     /// <summary> The ModelAsStringRequiredOneValueDefault. </summary>
     internal partial class ModelAsStringRequiredOneValueDefault
     {
-        /// <summary> Initializes a new instance of ModelAsStringRequiredOneValueDefault. </summary>
+        private Dictionary<string, BinaryData> _rawData;
+
+        /// <summary>
+        /// Initializes a new instance of global::constants.Models.ModelAsStringRequiredOneValueDefault
+        ///
+        /// </summary>
         /// <param name="parameter"></param>
         internal ModelAsStringRequiredOneValueDefault(ModelAsStringRequiredOneValueDefaultEnum parameter)
         {
             Parameter = parameter;
+        }
+
+        /// <summary>
+        /// Initializes a new instance of global::constants.Models.ModelAsStringRequiredOneValueDefault
+        ///
+        /// </summary>
+        /// <param name="parameter"></param>
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal ModelAsStringRequiredOneValueDefault(ModelAsStringRequiredOneValueDefaultEnum parameter, Dictionary<string, BinaryData> rawData)
+        {
+            Parameter = parameter;
+            _rawData = rawData;
         }
 
         /// <summary> Gets the parameter. </summary>

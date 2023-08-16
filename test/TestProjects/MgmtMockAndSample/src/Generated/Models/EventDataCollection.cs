@@ -15,7 +15,12 @@ namespace MgmtMockAndSample.Models
     /// <summary> Represents collection of events. </summary>
     internal partial class EventDataCollection
     {
-        /// <summary> Initializes a new instance of EventDataCollection. </summary>
+        private Dictionary<string, BinaryData> _rawData;
+
+        /// <summary>
+        /// Initializes a new instance of global::MgmtMockAndSample.Models.EventDataCollection
+        ///
+        /// </summary>
         /// <param name="value"> this list that includes the Azure audit logs. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="value"/> is null. </exception>
         internal EventDataCollection(IEnumerable<EventData> value)
@@ -25,13 +30,18 @@ namespace MgmtMockAndSample.Models
             Value = value.ToList();
         }
 
-        /// <summary> Initializes a new instance of EventDataCollection. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::MgmtMockAndSample.Models.EventDataCollection
+        ///
+        /// </summary>
         /// <param name="value"> this list that includes the Azure audit logs. </param>
         /// <param name="nextLink"> Provides the link to retrieve the next set of events. </param>
-        internal EventDataCollection(IReadOnlyList<EventData> value, string nextLink)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal EventDataCollection(IReadOnlyList<EventData> value, string nextLink, Dictionary<string, BinaryData> rawData)
         {
             Value = value;
             NextLink = nextLink;
+            _rawData = rawData;
         }
 
         /// <summary> this list that includes the Azure audit logs. </summary>

@@ -15,7 +15,12 @@ namespace Azure.AI.FormRecognizer.Models
     /// <summary> Analyze operation result. </summary>
     public partial class AnalyzeResult
     {
-        /// <summary> Initializes a new instance of AnalyzeResult. </summary>
+        private Dictionary<string, BinaryData> _rawData;
+
+        /// <summary>
+        /// Initializes a new instance of global::Azure.AI.FormRecognizer.Models.AnalyzeResult
+        ///
+        /// </summary>
         /// <param name="version"> Version of schema used for this result. </param>
         /// <param name="readResults"> Text extracted from the input. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="version"/> or <paramref name="readResults"/> is null. </exception>
@@ -31,19 +36,24 @@ namespace Azure.AI.FormRecognizer.Models
             Errors = new ChangeTrackingList<ErrorInformation>();
         }
 
-        /// <summary> Initializes a new instance of AnalyzeResult. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::Azure.AI.FormRecognizer.Models.AnalyzeResult
+        ///
+        /// </summary>
         /// <param name="version"> Version of schema used for this result. </param>
         /// <param name="readResults"> Text extracted from the input. </param>
         /// <param name="pageResults"> Page-level information extracted from the input. </param>
         /// <param name="documentResults"> Document-level information extracted from the input. </param>
         /// <param name="errors"> List of errors reported during the analyze operation. </param>
-        internal AnalyzeResult(string version, IReadOnlyList<ReadResult> readResults, IReadOnlyList<PageResult> pageResults, IReadOnlyList<DocumentResult> documentResults, IReadOnlyList<ErrorInformation> errors)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal AnalyzeResult(string version, IReadOnlyList<ReadResult> readResults, IReadOnlyList<PageResult> pageResults, IReadOnlyList<DocumentResult> documentResults, IReadOnlyList<ErrorInformation> errors, Dictionary<string, BinaryData> rawData)
         {
             Version = version;
             ReadResults = readResults;
             PageResults = pageResults;
             DocumentResults = documentResults;
             Errors = errors;
+            _rawData = rawData;
         }
 
         /// <summary> Version of schema used for this result. </summary>

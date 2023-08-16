@@ -6,20 +6,24 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
 using System.Text.Json;
 using System.Text.Json.Serialization;
+using Azure;
 using Azure.Core;
 using Azure.Core.Serialization;
 
 namespace Azure.ResourceManager.Fake.Models
 {
     [JsonConverter(typeof(MgmtReferenceTypesSkuConverter))]
-    public partial class MgmtReferenceTypesSku : IUtf8JsonSerializable, IJsonModelSerializable
+    public partial class MgmtReferenceTypesSku : IUtf8JsonSerializable, IModelJsonSerializable<MgmtReferenceTypesSku>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModelSerializable)this).Serialize(writer, ModelSerializerOptions.AzureServiceDefault);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<MgmtReferenceTypesSku>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
 
-        void IJsonModelSerializable.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
+        void IModelJsonSerializable<MgmtReferenceTypesSku>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
             writer.WriteStartObject();
             writer.WritePropertyName("name"u8);
             writer.WriteStringValue(Name);
@@ -43,18 +47,25 @@ namespace Azure.ResourceManager.Fake.Models
                 writer.WritePropertyName("capacity"u8);
                 writer.WriteNumberValue(Capacity.Value);
             }
+            if (_rawData is not null && options.Format == ModelSerializerFormat.Json)
+            {
+                foreach (var property in _rawData)
+                {
+                    writer.WritePropertyName(property.Key);
+#if NET6_0_OR_GREATER
+				writer.WriteRawValue(property.Value);
+#else
+                    JsonSerializer.Serialize(writer, JsonDocument.Parse(property.Value.ToString()).RootElement);
+#endif
+                }
+            }
             writer.WriteEndObject();
-        }
-
-        object IModelSerializable.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            using var doc = JsonDocument.Parse(data);
-            return DeserializeMgmtReferenceTypesSku(doc.RootElement, options);
         }
 
         internal static MgmtReferenceTypesSku DeserializeMgmtReferenceTypesSku(JsonElement element, ModelSerializerOptions options = default)
         {
-            options ??= ModelSerializerOptions.AzureServiceDefault;
+            options ??= ModelSerializerOptions.DefaultWireOptions;
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
@@ -64,6 +75,7 @@ namespace Azure.ResourceManager.Fake.Models
             Optional<string> size = default;
             Optional<string> family = default;
             Optional<int> capacity = default;
+            Dictionary<string, BinaryData> rawData = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("name"u8))
@@ -99,14 +111,57 @@ namespace Azure.ResourceManager.Fake.Models
                     capacity = property.Value.GetInt32();
                     continue;
                 }
+                if (options.Format == ModelSerializerFormat.Json)
+                {
+                    rawData.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
+                    continue;
+                }
             }
-            return new MgmtReferenceTypesSku(name, Optional.ToNullable(tier), size.Value, family.Value, Optional.ToNullable(capacity));
+            return new MgmtReferenceTypesSku(name, Optional.ToNullable(tier), size.Value, family.Value, Optional.ToNullable(capacity), rawData);
         }
 
-        object IJsonModelSerializable.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        MgmtReferenceTypesSku IModelJsonSerializable<MgmtReferenceTypesSku>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
         {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
             using var doc = JsonDocument.ParseValue(ref reader);
             return DeserializeMgmtReferenceTypesSku(doc.RootElement, options);
+        }
+
+        BinaryData IModelSerializable<MgmtReferenceTypesSku>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        MgmtReferenceTypesSku IModelSerializable<MgmtReferenceTypesSku>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using var doc = JsonDocument.Parse(data);
+            return DeserializeMgmtReferenceTypesSku(doc.RootElement, options);
+        }
+
+        public static implicit operator RequestContent(MgmtReferenceTypesSku model)
+        {
+            if (model is null)
+            {
+                return null;
+            }
+
+            return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
+        }
+
+        public static explicit operator MgmtReferenceTypesSku(Response response)
+        {
+            if (response is null)
+            {
+                return null;
+            }
+
+            using JsonDocument doc = JsonDocument.Parse(response.ContentStream);
+            return DeserializeMgmtReferenceTypesSku(doc.RootElement, ModelSerializerOptions.DefaultWireOptions);
         }
 
         internal partial class MgmtReferenceTypesSkuConverter : JsonConverter<MgmtReferenceTypesSku>

@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
 
 namespace MgmtRenameRules.Models
 {
@@ -15,12 +16,20 @@ namespace MgmtRenameRules.Models
     /// </summary>
     public partial class MaintenanceRedeployStatus
     {
-        /// <summary> Initializes a new instance of MaintenanceRedeployStatus. </summary>
+        private Dictionary<string, BinaryData> _rawData;
+
+        /// <summary>
+        /// Initializes a new instance of global::MgmtRenameRules.Models.MaintenanceRedeployStatus
+        ///
+        /// </summary>
         internal MaintenanceRedeployStatus()
         {
         }
 
-        /// <summary> Initializes a new instance of MaintenanceRedeployStatus. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::MgmtRenameRules.Models.MaintenanceRedeployStatus
+        ///
+        /// </summary>
         /// <param name="isCustomerInitiatedMaintenanceAllowed">
         /// True, if customer is allowed to perform Maintenance.
         /// Serialized Name: MaintenanceRedeployStatus.isCustomerInitiatedMaintenanceAllowed
@@ -49,7 +58,8 @@ namespace MgmtRenameRules.Models
         /// Message returned for the last Maintenance Operation.
         /// Serialized Name: MaintenanceRedeployStatus.lastOperationMessage
         /// </param>
-        internal MaintenanceRedeployStatus(bool? isCustomerInitiatedMaintenanceAllowed, DateTimeOffset? preMaintenanceWindowStartOn, DateTimeOffset? preMaintenanceWindowEndOn, DateTimeOffset? maintenanceWindowStartOn, DateTimeOffset? maintenanceWindowEndOn, MaintenanceOperationResultCodeType? lastOperationResultCode, string lastOperationMessage)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal MaintenanceRedeployStatus(bool? isCustomerInitiatedMaintenanceAllowed, DateTimeOffset? preMaintenanceWindowStartOn, DateTimeOffset? preMaintenanceWindowEndOn, DateTimeOffset? maintenanceWindowStartOn, DateTimeOffset? maintenanceWindowEndOn, MaintenanceOperationResultCodeType? lastOperationResultCode, string lastOperationMessage, Dictionary<string, BinaryData> rawData)
         {
             IsCustomerInitiatedMaintenanceAllowed = isCustomerInitiatedMaintenanceAllowed;
             PreMaintenanceWindowStartOn = preMaintenanceWindowStartOn;
@@ -58,6 +68,7 @@ namespace MgmtRenameRules.Models
             MaintenanceWindowEndOn = maintenanceWindowEndOn;
             LastOperationResultCode = lastOperationResultCode;
             LastOperationMessage = lastOperationMessage;
+            _rawData = rawData;
         }
 
         /// <summary>

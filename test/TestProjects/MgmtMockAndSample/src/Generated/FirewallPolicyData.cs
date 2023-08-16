@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Collections.Generic;
 using Azure.Core;
 using Azure.ResourceManager.Models;
@@ -19,7 +20,12 @@ namespace MgmtMockAndSample
     /// </summary>
     public partial class FirewallPolicyData : TrackedResourceData
     {
-        /// <summary> Initializes a new instance of FirewallPolicyData. </summary>
+        private Dictionary<string, BinaryData> _rawData;
+
+        /// <summary>
+        /// Initializes a new instance of global::MgmtMockAndSample.FirewallPolicyData
+        ///
+        /// </summary>
         /// <param name="location"> The location. </param>
         public FirewallPolicyData(AzureLocation location) : base(location)
         {
@@ -28,7 +34,10 @@ namespace MgmtMockAndSample
             ChildPolicies = new ChangeTrackingList<WritableSubResource>();
         }
 
-        /// <summary> Initializes a new instance of FirewallPolicyData. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::MgmtMockAndSample.FirewallPolicyData
+        ///
+        /// </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
         /// <param name="resourceType"> The resourceType. </param>
@@ -52,7 +61,8 @@ namespace MgmtMockAndSample
         /// <param name="intrusionDetection"> The configuration for Intrusion detection. </param>
         /// <param name="transportSecurity"> TLS Configuration definition. </param>
         /// <param name="sku"> The Firewall Policy SKU. </param>
-        internal FirewallPolicyData(ResourceIdentifier id, string name, ResourceType resourceType, SystemData systemData, IDictionary<string, string> tags, AzureLocation location, string etag, ManagedServiceIdentity identity, Probe startupProbe, Probe readinessProbe, DesiredStatusCode? desiredStatusCode, IReadOnlyList<WritableSubResource> ruleCollectionGroups, ProvisioningState? provisioningState, WritableSubResource basePolicy, IReadOnlyList<WritableSubResource> firewalls, IReadOnlyList<WritableSubResource> childPolicies, FirewallPolicyThreatIntelWhitelist threatIntelWhitelist, FirewallPolicyInsights insights, FirewallPolicySnat snat, DnsSettings dnsSettings, FirewallPolicyIntrusionDetection intrusionDetection, FirewallPolicyTransportSecurity transportSecurity, FirewallPolicySku sku) : base(id, name, resourceType, systemData, tags, location)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal FirewallPolicyData(ResourceIdentifier id, string name, ResourceType resourceType, SystemData systemData, IDictionary<string, string> tags, AzureLocation location, string etag, ManagedServiceIdentity identity, Probe startupProbe, Probe readinessProbe, DesiredStatusCode? desiredStatusCode, IReadOnlyList<WritableSubResource> ruleCollectionGroups, ProvisioningState? provisioningState, WritableSubResource basePolicy, IReadOnlyList<WritableSubResource> firewalls, IReadOnlyList<WritableSubResource> childPolicies, FirewallPolicyThreatIntelWhitelist threatIntelWhitelist, FirewallPolicyInsights insights, FirewallPolicySnat snat, DnsSettings dnsSettings, FirewallPolicyIntrusionDetection intrusionDetection, FirewallPolicyTransportSecurity transportSecurity, FirewallPolicySku sku, Dictionary<string, BinaryData> rawData) : base(id, name, resourceType, systemData, tags, location)
         {
             Etag = etag;
             Identity = identity;
@@ -71,6 +81,7 @@ namespace MgmtMockAndSample
             IntrusionDetection = intrusionDetection;
             TransportSecurity = transportSecurity;
             Sku = sku;
+            _rawData = rawData;
         }
 
         /// <summary> A unique read-only string that changes whenever the resource is updated. </summary>

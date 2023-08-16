@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
 using Azure.Core;
 
 namespace model_flattening.Models
@@ -13,7 +14,10 @@ namespace model_flattening.Models
     /// <summary> The product documentation. </summary>
     public partial class SimpleProduct : BaseProduct
     {
-        /// <summary> Initializes a new instance of SimpleProduct. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::model_flattening.Models.SimpleProduct
+        ///
+        /// </summary>
         /// <param name="productId"> Unique identifier representing a specific product for a given latitude &amp; longitude. For example, uberX in San Francisco will have a different product_id than uberX in Los Angeles. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="productId"/> is null. </exception>
         public SimpleProduct(string productId) : base(productId)
@@ -21,14 +25,18 @@ namespace model_flattening.Models
             Argument.AssertNotNull(productId, nameof(productId));
         }
 
-        /// <summary> Initializes a new instance of SimpleProduct. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::model_flattening.Models.SimpleProduct
+        ///
+        /// </summary>
         /// <param name="productId"> Unique identifier representing a specific product for a given latitude &amp; longitude. For example, uberX in San Francisco will have a different product_id than uberX in Los Angeles. </param>
         /// <param name="description"> Description of product. </param>
         /// <param name="maxProductDisplayName"> Display name of product. </param>
         /// <param name="capacity"> Capacity of product. For example, 4 people. </param>
         /// <param name="genericValue"> Generic URL value. </param>
         /// <param name="odataValue"> URL value. </param>
-        internal SimpleProduct(string productId, string description, string maxProductDisplayName, SimpleProductPropertiesMaxProductCapacity? capacity, string genericValue, string odataValue) : base(productId, description)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal SimpleProduct(string productId, string description, string maxProductDisplayName, SimpleProductPropertiesMaxProductCapacity? capacity, string genericValue, string odataValue, Dictionary<string, BinaryData> rawData) : base(productId, description, rawData)
         {
             MaxProductDisplayName = maxProductDisplayName;
             Capacity = capacity;

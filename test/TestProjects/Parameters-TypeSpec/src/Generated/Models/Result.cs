@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
 using Azure.Core;
 
 namespace ParametersCadl.Models
@@ -13,6 +14,8 @@ namespace ParametersCadl.Models
     /// <summary> The Result. </summary>
     public partial class Result
     {
+        private Dictionary<string, BinaryData> _rawData;
+
         /// <summary> Initializes a new instance of Result. </summary>
         /// <param name="id"></param>
         /// <exception cref="ArgumentNullException"> <paramref name="id"/> is null. </exception>
@@ -21,6 +24,15 @@ namespace ParametersCadl.Models
             Argument.AssertNotNull(id, nameof(id));
 
             Id = id;
+        }
+
+        /// <summary> Initializes a new instance of Result. </summary>
+        /// <param name="id"></param>
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal Result(string id, Dictionary<string, BinaryData> rawData)
+        {
+            Id = id;
+            _rawData = rawData;
         }
 
         /// <summary> Gets the id. </summary>

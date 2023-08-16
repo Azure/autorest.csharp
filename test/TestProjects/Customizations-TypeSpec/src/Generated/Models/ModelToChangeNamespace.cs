@@ -5,16 +5,30 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
+
 namespace CustomizationsInTsp.Models
 {
     /// <summary> Model moved into custom namespace. </summary>
     public partial class ModelToChangeNamespace
     {
+        private Dictionary<string, BinaryData> _rawData;
+
         /// <summary> Initializes a new instance of ModelToChangeNamespace. </summary>
         /// <param name="requiredInt"> Required int. </param>
         public ModelToChangeNamespace(int requiredInt)
         {
             RequiredInt = requiredInt;
+        }
+
+        /// <summary> Initializes a new instance of ModelToChangeNamespace. </summary>
+        /// <param name="requiredInt"> Required int. </param>
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal ModelToChangeNamespace(int requiredInt, Dictionary<string, BinaryData> rawData)
+        {
+            RequiredInt = requiredInt;
+            _rawData = rawData;
         }
 
         /// <summary> Required int. </summary>

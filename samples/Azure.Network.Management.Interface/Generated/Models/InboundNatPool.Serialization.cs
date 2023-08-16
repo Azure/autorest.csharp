@@ -6,18 +6,22 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
 using System.Text.Json;
+using Azure;
 using Azure.Core;
 using Azure.Core.Serialization;
 
 namespace Azure.Network.Management.Interface.Models
 {
-    public partial class InboundNatPool : IUtf8JsonSerializable, IJsonModelSerializable
+    public partial class InboundNatPool : IUtf8JsonSerializable, IModelJsonSerializable<InboundNatPool>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModelSerializable)this).Serialize(writer, ModelSerializerOptions.AzureServiceDefault);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<InboundNatPool>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
 
-        void IJsonModelSerializable.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
+        void IModelJsonSerializable<InboundNatPool>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
+            ModelSerializerHelper.ValidateFormat<InboundNatPool>(this, options.Format);
+
             writer.WriteStartObject();
             if (Optional.IsDefined(Name))
             {
@@ -72,18 +76,25 @@ namespace Azure.Network.Management.Interface.Models
                 writer.WriteBooleanValue(EnableTcpReset.Value);
             }
             writer.WriteEndObject();
+            if (_rawData is not null && options.Format == ModelSerializerFormat.Json)
+            {
+                foreach (var property in _rawData)
+                {
+                    writer.WritePropertyName(property.Key);
+#if NET6_0_OR_GREATER
+				writer.WriteRawValue(property.Value);
+#else
+                    JsonSerializer.Serialize(writer, JsonDocument.Parse(property.Value.ToString()).RootElement);
+#endif
+                }
+            }
             writer.WriteEndObject();
-        }
-
-        object IModelSerializable.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            using var doc = JsonDocument.Parse(data);
-            return DeserializeInboundNatPool(doc.RootElement, options);
         }
 
         internal static InboundNatPool DeserializeInboundNatPool(JsonElement element, ModelSerializerOptions options = default)
         {
-            options ??= ModelSerializerOptions.AzureServiceDefault;
+            options ??= ModelSerializerOptions.DefaultWireOptions;
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
@@ -101,6 +112,7 @@ namespace Azure.Network.Management.Interface.Models
             Optional<bool> enableFloatingIP = default;
             Optional<bool> enableTcpReset = default;
             Optional<ProvisioningState> provisioningState = default;
+            Dictionary<string, BinaryData> rawData = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("name"u8))
@@ -216,14 +228,57 @@ namespace Azure.Network.Management.Interface.Models
                     }
                     continue;
                 }
+                if (options.Format == ModelSerializerFormat.Json)
+                {
+                    rawData.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
+                    continue;
+                }
             }
-            return new InboundNatPool(id.Value, name.Value, etag.Value, type.Value, frontendIPConfiguration.Value, Optional.ToNullable(protocol), Optional.ToNullable(frontendPortRangeStart), Optional.ToNullable(frontendPortRangeEnd), Optional.ToNullable(backendPort), Optional.ToNullable(idleTimeoutInMinutes), Optional.ToNullable(enableFloatingIP), Optional.ToNullable(enableTcpReset), Optional.ToNullable(provisioningState));
+            return new InboundNatPool(id.Value, name.Value, etag.Value, type.Value, frontendIPConfiguration.Value, Optional.ToNullable(protocol), Optional.ToNullable(frontendPortRangeStart), Optional.ToNullable(frontendPortRangeEnd), Optional.ToNullable(backendPort), Optional.ToNullable(idleTimeoutInMinutes), Optional.ToNullable(enableFloatingIP), Optional.ToNullable(enableTcpReset), Optional.ToNullable(provisioningState), rawData);
         }
 
-        object IJsonModelSerializable.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        InboundNatPool IModelJsonSerializable<InboundNatPool>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
         {
+            ModelSerializerHelper.ValidateFormat<InboundNatPool>(this, options.Format);
+
             using var doc = JsonDocument.ParseValue(ref reader);
             return DeserializeInboundNatPool(doc.RootElement, options);
+        }
+
+        BinaryData IModelSerializable<InboundNatPool>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat<InboundNatPool>(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        InboundNatPool IModelSerializable<InboundNatPool>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat<InboundNatPool>(this, options.Format);
+
+            using var doc = JsonDocument.Parse(data);
+            return DeserializeInboundNatPool(doc.RootElement, options);
+        }
+
+        public static implicit operator RequestContent(InboundNatPool model)
+        {
+            if (model is null)
+            {
+                return null;
+            }
+
+            return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
+        }
+
+        public static explicit operator InboundNatPool(Response response)
+        {
+            if (response is null)
+            {
+                return null;
+            }
+
+            using JsonDocument doc = JsonDocument.Parse(response.ContentStream);
+            return DeserializeInboundNatPool(doc.RootElement, ModelSerializerOptions.DefaultWireOptions);
         }
     }
 }

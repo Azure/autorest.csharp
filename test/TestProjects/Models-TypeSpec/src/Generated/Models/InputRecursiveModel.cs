@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
 using Azure.Core;
 
 namespace ModelsTypeSpec.Models
@@ -13,6 +14,8 @@ namespace ModelsTypeSpec.Models
     /// <summary> Input model that has property of its own type. </summary>
     public partial class InputRecursiveModel
     {
+        private Dictionary<string, BinaryData> _rawData;
+
         /// <summary> Initializes a new instance of InputRecursiveModel. </summary>
         /// <param name="message"> Message. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="message"/> is null. </exception>
@@ -26,10 +29,12 @@ namespace ModelsTypeSpec.Models
         /// <summary> Initializes a new instance of InputRecursiveModel. </summary>
         /// <param name="message"> Message. </param>
         /// <param name="inner"> Required Record. </param>
-        internal InputRecursiveModel(string message, InputRecursiveModel inner)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal InputRecursiveModel(string message, InputRecursiveModel inner, Dictionary<string, BinaryData> rawData)
         {
             Message = message;
             Inner = inner;
+            _rawData = rawData;
         }
 
         /// <summary> Message. </summary>

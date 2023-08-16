@@ -20,13 +20,21 @@ namespace Azure.ResourceManager.Sample
     /// </summary>
     public partial class VirtualMachineExtensionData : TrackedResourceData
     {
-        /// <summary> Initializes a new instance of VirtualMachineExtensionData. </summary>
+        private Dictionary<string, BinaryData> _rawData;
+
+        /// <summary>
+        /// Initializes a new instance of global::Azure.ResourceManager.Sample.VirtualMachineExtensionData
+        ///
+        /// </summary>
         /// <param name="location"> The location. </param>
         public VirtualMachineExtensionData(AzureLocation location) : base(location)
         {
         }
 
-        /// <summary> Initializes a new instance of VirtualMachineExtensionData. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::Azure.ResourceManager.Sample.VirtualMachineExtensionData
+        ///
+        /// </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
         /// <param name="resourceType"> The resourceType. </param>
@@ -73,7 +81,8 @@ namespace Azure.ResourceManager.Sample
         /// The virtual machine extension instance view.
         /// Serialized Name: VirtualMachineExtension.properties.instanceView
         /// </param>
-        internal VirtualMachineExtensionData(ResourceIdentifier id, string name, ResourceType resourceType, SystemData systemData, IDictionary<string, string> tags, AzureLocation location, string forceUpdateTag, string publisher, string extensionType, string typeHandlerVersion, bool? autoUpgradeMinorVersion, bool? enableAutomaticUpgrade, BinaryData settings, BinaryData protectedSettings, string provisioningState, VirtualMachineExtensionInstanceView instanceView) : base(id, name, resourceType, systemData, tags, location)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal VirtualMachineExtensionData(ResourceIdentifier id, string name, ResourceType resourceType, SystemData systemData, IDictionary<string, string> tags, AzureLocation location, string forceUpdateTag, string publisher, string extensionType, string typeHandlerVersion, bool? autoUpgradeMinorVersion, bool? enableAutomaticUpgrade, BinaryData settings, BinaryData protectedSettings, string provisioningState, VirtualMachineExtensionInstanceView instanceView, Dictionary<string, BinaryData> rawData) : base(id, name, resourceType, systemData, tags, location)
         {
             ForceUpdateTag = forceUpdateTag;
             Publisher = publisher;
@@ -85,6 +94,7 @@ namespace Azure.ResourceManager.Sample
             ProtectedSettings = protectedSettings;
             ProvisioningState = provisioningState;
             InstanceView = instanceView;
+            _rawData = rawData;
         }
 
         /// <summary>

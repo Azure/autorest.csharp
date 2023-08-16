@@ -5,27 +5,40 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
+
 namespace MgmtListMethods.Models
 {
     /// <summary> The properties for Quota update or retrieval. </summary>
     public partial class QuotaBaseProperties
     {
-        /// <summary> Initializes a new instance of QuotaBaseProperties. </summary>
+        private Dictionary<string, BinaryData> _rawData;
+
+        /// <summary>
+        /// Initializes a new instance of global::MgmtListMethods.Models.QuotaBaseProperties
+        ///
+        /// </summary>
         public QuotaBaseProperties()
         {
         }
 
-        /// <summary> Initializes a new instance of QuotaBaseProperties. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::MgmtListMethods.Models.QuotaBaseProperties
+        ///
+        /// </summary>
         /// <param name="id"> Specifies the resource ID. </param>
         /// <param name="quotaBasePropertiesType"> Specifies the resource type. </param>
         /// <param name="limit"> The maximum permitted quota of the resource. </param>
         /// <param name="unit"> An enum describing the unit of quota measurement. </param>
-        internal QuotaBaseProperties(string id, string quotaBasePropertiesType, long? limit, QuotaUnit? unit)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal QuotaBaseProperties(string id, string quotaBasePropertiesType, long? limit, QuotaUnit? unit, Dictionary<string, BinaryData> rawData)
         {
             Id = id;
             QuotaBasePropertiesType = quotaBasePropertiesType;
             Limit = limit;
             Unit = unit;
+            _rawData = rawData;
         }
 
         /// <summary> Specifies the resource ID. </summary>

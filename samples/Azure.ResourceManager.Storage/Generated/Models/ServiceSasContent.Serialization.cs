@@ -6,18 +6,22 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
 using System.Text.Json;
+using Azure;
 using Azure.Core;
 using Azure.Core.Serialization;
 
 namespace Azure.ResourceManager.Storage.Models
 {
-    public partial class ServiceSasContent : IUtf8JsonSerializable, IJsonModelSerializable
+    public partial class ServiceSasContent : IUtf8JsonSerializable, IModelJsonSerializable<ServiceSasContent>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModelSerializable)this).Serialize(writer, ModelSerializerOptions.AzureServiceDefault);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<ServiceSasContent>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
 
-        void IJsonModelSerializable.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
+        void IModelJsonSerializable<ServiceSasContent>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
             writer.WriteStartObject();
             writer.WritePropertyName("canonicalizedResource"u8);
             writer.WriteStringValue(CanonicalizedResource);
@@ -106,18 +110,25 @@ namespace Azure.ResourceManager.Storage.Models
                 writer.WritePropertyName("rsct"u8);
                 writer.WriteStringValue(ContentType);
             }
+            if (_rawData is not null && options.Format == ModelSerializerFormat.Json)
+            {
+                foreach (var property in _rawData)
+                {
+                    writer.WritePropertyName(property.Key);
+#if NET6_0_OR_GREATER
+				writer.WriteRawValue(property.Value);
+#else
+                    JsonSerializer.Serialize(writer, JsonDocument.Parse(property.Value.ToString()).RootElement);
+#endif
+                }
+            }
             writer.WriteEndObject();
-        }
-
-        object IModelSerializable.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            using var doc = JsonDocument.Parse(data);
-            return DeserializeServiceSasContent(doc.RootElement, options);
         }
 
         internal static ServiceSasContent DeserializeServiceSasContent(JsonElement element, ModelSerializerOptions options = default)
         {
-            options ??= ModelSerializerOptions.AzureServiceDefault;
+            options ??= ModelSerializerOptions.DefaultWireOptions;
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
@@ -140,6 +151,7 @@ namespace Azure.ResourceManager.Storage.Models
             Optional<string> rsce = default;
             Optional<string> rscl = default;
             Optional<string> rsct = default;
+            Dictionary<string, BinaryData> rawData = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("canonicalizedResource"u8))
@@ -252,14 +264,57 @@ namespace Azure.ResourceManager.Storage.Models
                     rsct = property.Value.GetString();
                     continue;
                 }
+                if (options.Format == ModelSerializerFormat.Json)
+                {
+                    rawData.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
+                    continue;
+                }
             }
-            return new ServiceSasContent(canonicalizedResource, Optional.ToNullable(signedResource), Optional.ToNullable(signedPermission), signedIp.Value, Optional.ToNullable(signedProtocol), Optional.ToNullable(signedStart), Optional.ToNullable(signedExpiry), signedIdentifier.Value, startPk.Value, endPk.Value, startRk.Value, endRk.Value, keyToSign.Value, rscc.Value, rscd.Value, rsce.Value, rscl.Value, rsct.Value);
+            return new ServiceSasContent(canonicalizedResource, Optional.ToNullable(signedResource), Optional.ToNullable(signedPermission), signedIp.Value, Optional.ToNullable(signedProtocol), Optional.ToNullable(signedStart), Optional.ToNullable(signedExpiry), signedIdentifier.Value, startPk.Value, endPk.Value, startRk.Value, endRk.Value, keyToSign.Value, rscc.Value, rscd.Value, rsce.Value, rscl.Value, rsct.Value, rawData);
         }
 
-        object IJsonModelSerializable.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        ServiceSasContent IModelJsonSerializable<ServiceSasContent>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
         {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
             using var doc = JsonDocument.ParseValue(ref reader);
             return DeserializeServiceSasContent(doc.RootElement, options);
+        }
+
+        BinaryData IModelSerializable<ServiceSasContent>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        ServiceSasContent IModelSerializable<ServiceSasContent>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using var doc = JsonDocument.Parse(data);
+            return DeserializeServiceSasContent(doc.RootElement, options);
+        }
+
+        public static implicit operator RequestContent(ServiceSasContent model)
+        {
+            if (model is null)
+            {
+                return null;
+            }
+
+            return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
+        }
+
+        public static explicit operator ServiceSasContent(Response response)
+        {
+            if (response is null)
+            {
+                return null;
+            }
+
+            using JsonDocument doc = JsonDocument.Parse(response.ContentStream);
+            return DeserializeServiceSasContent(doc.RootElement, ModelSerializerOptions.DefaultWireOptions);
         }
     }
 }

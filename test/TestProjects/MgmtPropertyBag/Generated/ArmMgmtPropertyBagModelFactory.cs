@@ -15,7 +15,10 @@ namespace MgmtPropertyBag.Models
     /// <summary> Model factory for models. </summary>
     public static partial class ArmMgmtPropertyBagModelFactory
     {
-        /// <summary> Initializes a new instance of FooData. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::MgmtPropertyBag.FooData
+        ///
+        /// </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
         /// <param name="resourceType"> The resourceType. </param>
@@ -24,10 +27,13 @@ namespace MgmtPropertyBag.Models
         /// <returns> A new <see cref="MgmtPropertyBag.FooData"/> instance for mocking. </returns>
         public static FooData FooData(ResourceIdentifier id = null, string name = null, ResourceType resourceType = default, SystemData systemData = null, string details = null)
         {
-            return new FooData(id, name, resourceType, systemData, details);
+            return new FooData(id, name, resourceType, systemData, details, default);
         }
 
-        /// <summary> Initializes a new instance of BarData. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::MgmtPropertyBag.BarData
+        ///
+        /// </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
         /// <param name="resourceType"> The resourceType. </param>
@@ -36,7 +42,7 @@ namespace MgmtPropertyBag.Models
         /// <returns> A new <see cref="MgmtPropertyBag.BarData"/> instance for mocking. </returns>
         public static BarData BarData(ResourceIdentifier id = null, string name = null, ResourceType resourceType = default, SystemData systemData = null, string details = null)
         {
-            return new BarData(id, name, resourceType, systemData, details);
+            return new BarData(id, name, resourceType, systemData, details, default);
         }
     }
 }

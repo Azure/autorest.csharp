@@ -5,6 +5,9 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
+
 namespace Azure.ResourceManager.Sample.Models
 {
     /// <summary>
@@ -13,12 +16,18 @@ namespace Azure.ResourceManager.Sample.Models
     /// </summary>
     public partial class ImageReference : SubResource
     {
-        /// <summary> Initializes a new instance of ImageReference. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::Azure.ResourceManager.Sample.Models.ImageReference
+        ///
+        /// </summary>
         public ImageReference()
         {
         }
 
-        /// <summary> Initializes a new instance of ImageReference. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::Azure.ResourceManager.Sample.Models.ImageReference
+        ///
+        /// </summary>
         /// <param name="id">
         /// Resource Id
         /// Serialized Name: SubResource.id
@@ -43,7 +52,8 @@ namespace Azure.ResourceManager.Sample.Models
         /// Specifies in decimal numbers, the version of platform image or marketplace image used to create the virtual machine. This readonly field differs from 'version', only if the value specified in 'version' field is 'latest'.
         /// Serialized Name: ImageReference.exactVersion
         /// </param>
-        internal ImageReference(string id, string publisher, string offer, string sku, string version, string exactVersion) : base(id)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal ImageReference(string id, string publisher, string offer, string sku, string version, string exactVersion, Dictionary<string, BinaryData> rawData) : base(id, rawData)
         {
             Publisher = publisher;
             Offer = offer;

@@ -8,17 +8,20 @@
 using System;
 using System.Collections.Generic;
 using System.Text.Json;
+using Azure;
 using Azure.Core;
 using Azure.Core.Serialization;
 
 namespace Azure.Network.Management.Interface.Models
 {
-    public partial class Probe : IUtf8JsonSerializable, IJsonModelSerializable
+    public partial class Probe : IUtf8JsonSerializable, IModelJsonSerializable<Probe>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModelSerializable)this).Serialize(writer, ModelSerializerOptions.AzureServiceDefault);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<Probe>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
 
-        void IJsonModelSerializable.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
+        void IModelJsonSerializable<Probe>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
+            ModelSerializerHelper.ValidateFormat<Probe>(this, options.Format);
+
             writer.WriteStartObject();
             if (Optional.IsDefined(Name))
             {
@@ -58,18 +61,25 @@ namespace Azure.Network.Management.Interface.Models
                 writer.WriteStringValue(RequestPath);
             }
             writer.WriteEndObject();
+            if (_rawData is not null && options.Format == ModelSerializerFormat.Json)
+            {
+                foreach (var property in _rawData)
+                {
+                    writer.WritePropertyName(property.Key);
+#if NET6_0_OR_GREATER
+				writer.WriteRawValue(property.Value);
+#else
+                    JsonSerializer.Serialize(writer, JsonDocument.Parse(property.Value.ToString()).RootElement);
+#endif
+                }
+            }
             writer.WriteEndObject();
-        }
-
-        object IModelSerializable.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            using var doc = JsonDocument.Parse(data);
-            return DeserializeProbe(doc.RootElement, options);
         }
 
         internal static Probe DeserializeProbe(JsonElement element, ModelSerializerOptions options = default)
         {
-            options ??= ModelSerializerOptions.AzureServiceDefault;
+            options ??= ModelSerializerOptions.DefaultWireOptions;
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
@@ -85,6 +95,7 @@ namespace Azure.Network.Management.Interface.Models
             Optional<int> numberOfProbes = default;
             Optional<string> requestPath = default;
             Optional<ProvisioningState> provisioningState = default;
+            Dictionary<string, BinaryData> rawData = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("name"u8))
@@ -183,14 +194,57 @@ namespace Azure.Network.Management.Interface.Models
                     }
                     continue;
                 }
+                if (options.Format == ModelSerializerFormat.Json)
+                {
+                    rawData.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
+                    continue;
+                }
             }
-            return new Probe(id.Value, name.Value, etag.Value, type.Value, Optional.ToList(loadBalancingRules), Optional.ToNullable(protocol), Optional.ToNullable(port), Optional.ToNullable(intervalInSeconds), Optional.ToNullable(numberOfProbes), requestPath.Value, Optional.ToNullable(provisioningState));
+            return new Probe(id.Value, name.Value, etag.Value, type.Value, Optional.ToList(loadBalancingRules), Optional.ToNullable(protocol), Optional.ToNullable(port), Optional.ToNullable(intervalInSeconds), Optional.ToNullable(numberOfProbes), requestPath.Value, Optional.ToNullable(provisioningState), rawData);
         }
 
-        object IJsonModelSerializable.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        Probe IModelJsonSerializable<Probe>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
         {
+            ModelSerializerHelper.ValidateFormat<Probe>(this, options.Format);
+
             using var doc = JsonDocument.ParseValue(ref reader);
             return DeserializeProbe(doc.RootElement, options);
+        }
+
+        BinaryData IModelSerializable<Probe>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat<Probe>(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        Probe IModelSerializable<Probe>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat<Probe>(this, options.Format);
+
+            using var doc = JsonDocument.Parse(data);
+            return DeserializeProbe(doc.RootElement, options);
+        }
+
+        public static implicit operator RequestContent(Probe model)
+        {
+            if (model is null)
+            {
+                return null;
+            }
+
+            return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
+        }
+
+        public static explicit operator Probe(Response response)
+        {
+            if (response is null)
+            {
+                return null;
+            }
+
+            using JsonDocument doc = JsonDocument.Parse(response.ContentStream);
+            return DeserializeProbe(doc.RootElement, ModelSerializerOptions.DefaultWireOptions);
         }
     }
 }

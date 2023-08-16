@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Collections.Generic;
 using Azure.Core;
 using Azure.ResourceManager.Models;
@@ -18,13 +19,21 @@ namespace MgmtScopeResource
     /// </summary>
     public partial class DeploymentExtendedData : ResourceData
     {
-        /// <summary> Initializes a new instance of DeploymentExtendedData. </summary>
+        private Dictionary<string, BinaryData> _rawData;
+
+        /// <summary>
+        /// Initializes a new instance of global::MgmtScopeResource.DeploymentExtendedData
+        ///
+        /// </summary>
         internal DeploymentExtendedData()
         {
             Tags = new ChangeTrackingDictionary<string, string>();
         }
 
-        /// <summary> Initializes a new instance of DeploymentExtendedData. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::MgmtScopeResource.DeploymentExtendedData
+        ///
+        /// </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
         /// <param name="resourceType"> The resourceType. </param>
@@ -32,11 +41,13 @@ namespace MgmtScopeResource
         /// <param name="location"> the location of the deployment. </param>
         /// <param name="properties"> Deployment properties. </param>
         /// <param name="tags"> Deployment tags. </param>
-        internal DeploymentExtendedData(ResourceIdentifier id, string name, ResourceType resourceType, SystemData systemData, string location, DeploymentPropertiesExtended properties, IReadOnlyDictionary<string, string> tags) : base(id, name, resourceType, systemData)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal DeploymentExtendedData(ResourceIdentifier id, string name, ResourceType resourceType, SystemData systemData, string location, DeploymentPropertiesExtended properties, IReadOnlyDictionary<string, string> tags, Dictionary<string, BinaryData> rawData) : base(id, name, resourceType, systemData)
         {
             Location = location;
             Properties = properties;
             Tags = tags;
+            _rawData = rawData;
         }
 
         /// <summary> the location of the deployment. </summary>

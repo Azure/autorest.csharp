@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Collections.Generic;
 using Azure.Core;
 using MgmtResourceName;
@@ -14,19 +15,29 @@ namespace MgmtResourceName.Models
     /// <summary> The response from the List Storage Accounts operation. </summary>
     internal partial class DiskListResult
     {
-        /// <summary> Initializes a new instance of DiskListResult. </summary>
+        private Dictionary<string, BinaryData> _rawData;
+
+        /// <summary>
+        /// Initializes a new instance of global::MgmtResourceName.Models.DiskListResult
+        ///
+        /// </summary>
         internal DiskListResult()
         {
             Value = new ChangeTrackingList<DiskData>();
         }
 
-        /// <summary> Initializes a new instance of DiskListResult. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::MgmtResourceName.Models.DiskListResult
+        ///
+        /// </summary>
         /// <param name="value"> Gets the list of storage accounts and their properties. </param>
         /// <param name="nextLink"> Request URL that can be used to query next page of storage accounts. Returned when total number of requested storage accounts exceed maximum page size. </param>
-        internal DiskListResult(IReadOnlyList<DiskData> value, string nextLink)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal DiskListResult(IReadOnlyList<DiskData> value, string nextLink, Dictionary<string, BinaryData> rawData)
         {
             Value = value;
             NextLink = nextLink;
+            _rawData = rawData;
         }
 
         /// <summary> Gets the list of storage accounts and their properties. </summary>

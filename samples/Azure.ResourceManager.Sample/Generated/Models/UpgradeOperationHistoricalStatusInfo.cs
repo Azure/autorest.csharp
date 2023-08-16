@@ -5,6 +5,8 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
 using Azure.Core;
 
 namespace Azure.ResourceManager.Sample.Models
@@ -15,12 +17,20 @@ namespace Azure.ResourceManager.Sample.Models
     /// </summary>
     public partial class UpgradeOperationHistoricalStatusInfo
     {
-        /// <summary> Initializes a new instance of UpgradeOperationHistoricalStatusInfo. </summary>
+        private Dictionary<string, BinaryData> _rawData;
+
+        /// <summary>
+        /// Initializes a new instance of global::Azure.ResourceManager.Sample.Models.UpgradeOperationHistoricalStatusInfo
+        ///
+        /// </summary>
         internal UpgradeOperationHistoricalStatusInfo()
         {
         }
 
-        /// <summary> Initializes a new instance of UpgradeOperationHistoricalStatusInfo. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::Azure.ResourceManager.Sample.Models.UpgradeOperationHistoricalStatusInfo
+        ///
+        /// </summary>
         /// <param name="properties">
         /// Information about the properties of the upgrade operation.
         /// Serialized Name: UpgradeOperationHistoricalStatusInfo.properties
@@ -33,11 +43,13 @@ namespace Azure.ResourceManager.Sample.Models
         /// Resource location
         /// Serialized Name: UpgradeOperationHistoricalStatusInfo.location
         /// </param>
-        internal UpgradeOperationHistoricalStatusInfo(UpgradeOperationHistoricalStatusInfoProperties properties, string upgradeOperationHistoricalStatusInfoType, AzureLocation? location)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal UpgradeOperationHistoricalStatusInfo(UpgradeOperationHistoricalStatusInfoProperties properties, string upgradeOperationHistoricalStatusInfoType, AzureLocation? location, Dictionary<string, BinaryData> rawData)
         {
             Properties = properties;
             UpgradeOperationHistoricalStatusInfoType = upgradeOperationHistoricalStatusInfoType;
             Location = location;
+            _rawData = rawData;
         }
 
         /// <summary>

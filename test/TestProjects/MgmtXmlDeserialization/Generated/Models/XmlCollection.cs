@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Collections.Generic;
 using Azure.Core;
 using MgmtXmlDeserialization;
@@ -14,21 +15,31 @@ namespace MgmtXmlDeserialization.Models
     /// <summary> Paged Xml list representation. </summary>
     internal partial class XmlCollection
     {
-        /// <summary> Initializes a new instance of XmlCollection. </summary>
+        private Dictionary<string, BinaryData> _rawData;
+
+        /// <summary>
+        /// Initializes a new instance of global::MgmtXmlDeserialization.Models.XmlCollection
+        ///
+        /// </summary>
         internal XmlCollection()
         {
             Value = new ChangeTrackingList<XmlInstanceData>();
         }
 
-        /// <summary> Initializes a new instance of XmlCollection. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::MgmtXmlDeserialization.Models.XmlCollection
+        ///
+        /// </summary>
         /// <param name="value"> Page values. </param>
         /// <param name="count"> Total record count number across all pages. </param>
         /// <param name="nextLink"> Next page link if any. </param>
-        internal XmlCollection(IReadOnlyList<XmlInstanceData> value, long? count, string nextLink)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal XmlCollection(IReadOnlyList<XmlInstanceData> value, long? count, string nextLink, Dictionary<string, BinaryData> rawData)
         {
             Value = value;
             Count = count;
             NextLink = nextLink;
+            _rawData = rawData;
         }
 
         /// <summary> Page values. </summary>

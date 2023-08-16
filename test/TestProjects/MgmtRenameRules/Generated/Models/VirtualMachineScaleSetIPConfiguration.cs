@@ -19,7 +19,10 @@ namespace MgmtRenameRules.Models
     /// </summary>
     public partial class VirtualMachineScaleSetIPConfiguration : SubResource
     {
-        /// <summary> Initializes a new instance of VirtualMachineScaleSetIPConfiguration. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::MgmtRenameRules.Models.VirtualMachineScaleSetIPConfiguration
+        ///
+        /// </summary>
         /// <param name="name">
         /// The IP configuration name.
         /// Serialized Name: VirtualMachineScaleSetIPConfiguration.name
@@ -37,7 +40,10 @@ namespace MgmtRenameRules.Models
             LoadBalancerInboundNatPools = new ChangeTrackingList<WritableSubResource>();
         }
 
-        /// <summary> Initializes a new instance of VirtualMachineScaleSetIPConfiguration. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::MgmtRenameRules.Models.VirtualMachineScaleSetIPConfiguration
+        ///
+        /// </summary>
         /// <param name="id">
         /// Resource Id
         /// Serialized Name: SubResource.id
@@ -82,7 +88,8 @@ namespace MgmtRenameRules.Models
         /// Specifies an array of references to inbound Nat pools of the load balancers. A scale set can reference inbound nat pools of one public and one internal load balancer. Multiple scale sets cannot use the same basic sku load balancer.
         /// Serialized Name: VirtualMachineScaleSetIPConfiguration.properties.loadBalancerInboundNatPools
         /// </param>
-        internal VirtualMachineScaleSetIPConfiguration(string id, string name, WritableSubResource subnet, bool? primary, VirtualMachineScaleSetPublicIPAddressConfiguration publicIPAddressConfiguration, IList<IPAddress> ipAddresses, IPVersion? privateIPAddressVersion, IList<WritableSubResource> applicationGatewayBackendAddressPools, IList<WritableSubResource> applicationSecurityGroups, IList<WritableSubResource> loadBalancerBackendAddressPools, IList<WritableSubResource> loadBalancerInboundNatPools) : base(id)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal VirtualMachineScaleSetIPConfiguration(string id, string name, WritableSubResource subnet, bool? primary, VirtualMachineScaleSetPublicIPAddressConfiguration publicIPAddressConfiguration, IList<IPAddress> ipAddresses, IPVersion? privateIPAddressVersion, IList<WritableSubResource> applicationGatewayBackendAddressPools, IList<WritableSubResource> applicationSecurityGroups, IList<WritableSubResource> loadBalancerBackendAddressPools, IList<WritableSubResource> loadBalancerInboundNatPools, Dictionary<string, BinaryData> rawData) : base(id, rawData)
         {
             Name = name;
             Subnet = subnet;

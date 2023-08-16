@@ -5,23 +5,36 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
+
 namespace azure_parameter_grouping.Models
 {
     /// <summary> Parameter group. </summary>
     public partial class FirstParameterGroup
     {
-        /// <summary> Initializes a new instance of FirstParameterGroup. </summary>
+        private Dictionary<string, BinaryData> _rawData;
+
+        /// <summary>
+        /// Initializes a new instance of global::azure_parameter_grouping.Models.FirstParameterGroup
+        ///
+        /// </summary>
         public FirstParameterGroup()
         {
         }
 
-        /// <summary> Initializes a new instance of FirstParameterGroup. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::azure_parameter_grouping.Models.FirstParameterGroup
+        ///
+        /// </summary>
         /// <param name="headerOne"></param>
         /// <param name="queryOne"> Query parameter with default. </param>
-        internal FirstParameterGroup(string headerOne, int? queryOne)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal FirstParameterGroup(string headerOne, int? queryOne, Dictionary<string, BinaryData> rawData)
         {
             HeaderOne = headerOne;
             QueryOne = queryOne;
+            _rawData = rawData;
         }
 
         /// <summary> Gets or sets the header one. </summary>

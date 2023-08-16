@@ -5,21 +5,34 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
+
 namespace MgmtExtensionCommonRestOperation.Models
 {
     /// <summary> An error response from a policy operation. </summary>
     internal partial class CloudError
     {
-        /// <summary> Initializes a new instance of CloudError. </summary>
+        private Dictionary<string, BinaryData> _rawData;
+
+        /// <summary>
+        /// Initializes a new instance of global::MgmtExtensionCommonRestOperation.Models.CloudError
+        ///
+        /// </summary>
         internal CloudError()
         {
         }
 
-        /// <summary> Initializes a new instance of CloudError. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::MgmtExtensionCommonRestOperation.Models.CloudError
+        ///
+        /// </summary>
         /// <param name="errorResponse"> Error response indicates that the service is not able to process the incoming request. The reason is provided in the error message. </param>
-        internal CloudError(ErrorResponse errorResponse)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal CloudError(ErrorResponse errorResponse, Dictionary<string, BinaryData> rawData)
         {
             ErrorResponse = errorResponse;
+            _rawData = rawData;
         }
         /// <summary> The details of the error. </summary>
         public string Error

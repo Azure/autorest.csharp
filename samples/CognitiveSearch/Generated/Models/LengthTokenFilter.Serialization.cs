@@ -6,18 +6,22 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
 using System.Text.Json;
+using Azure;
 using Azure.Core;
 using Azure.Core.Serialization;
 
 namespace CognitiveSearch.Models
 {
-    public partial class LengthTokenFilter : IUtf8JsonSerializable, IJsonModelSerializable
+    public partial class LengthTokenFilter : IUtf8JsonSerializable, IModelJsonSerializable<LengthTokenFilter>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModelSerializable)this).Serialize(writer, ModelSerializerOptions.AzureServiceDefault);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<LengthTokenFilter>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
 
-        void IJsonModelSerializable.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
+        void IModelJsonSerializable<LengthTokenFilter>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
+            ModelSerializerHelper.ValidateFormat<LengthTokenFilter>(this, options.Format);
+
             writer.WriteStartObject();
             if (Optional.IsDefined(Min))
             {
@@ -33,18 +37,25 @@ namespace CognitiveSearch.Models
             writer.WriteStringValue(OdataType);
             writer.WritePropertyName("name"u8);
             writer.WriteStringValue(Name);
+            if (_rawData is not null && options.Format == ModelSerializerFormat.Json)
+            {
+                foreach (var property in _rawData)
+                {
+                    writer.WritePropertyName(property.Key);
+#if NET6_0_OR_GREATER
+				writer.WriteRawValue(property.Value);
+#else
+                    JsonSerializer.Serialize(writer, JsonDocument.Parse(property.Value.ToString()).RootElement);
+#endif
+                }
+            }
             writer.WriteEndObject();
-        }
-
-        object IModelSerializable.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            using var doc = JsonDocument.Parse(data);
-            return DeserializeLengthTokenFilter(doc.RootElement, options);
         }
 
         internal static LengthTokenFilter DeserializeLengthTokenFilter(JsonElement element, ModelSerializerOptions options = default)
         {
-            options ??= ModelSerializerOptions.AzureServiceDefault;
+            options ??= ModelSerializerOptions.DefaultWireOptions;
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
@@ -53,6 +64,7 @@ namespace CognitiveSearch.Models
             Optional<int> max = default;
             string odataType = default;
             string name = default;
+            Dictionary<string, BinaryData> rawData = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("min"u8))
@@ -83,14 +95,57 @@ namespace CognitiveSearch.Models
                     name = property.Value.GetString();
                     continue;
                 }
+                if (options.Format == ModelSerializerFormat.Json)
+                {
+                    rawData.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
+                    continue;
+                }
             }
-            return new LengthTokenFilter(odataType, name, Optional.ToNullable(min), Optional.ToNullable(max));
+            return new LengthTokenFilter(odataType, name, Optional.ToNullable(min), Optional.ToNullable(max), rawData);
         }
 
-        object IJsonModelSerializable.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        LengthTokenFilter IModelJsonSerializable<LengthTokenFilter>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
         {
+            ModelSerializerHelper.ValidateFormat<LengthTokenFilter>(this, options.Format);
+
             using var doc = JsonDocument.ParseValue(ref reader);
             return DeserializeLengthTokenFilter(doc.RootElement, options);
+        }
+
+        BinaryData IModelSerializable<LengthTokenFilter>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat<LengthTokenFilter>(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        LengthTokenFilter IModelSerializable<LengthTokenFilter>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat<LengthTokenFilter>(this, options.Format);
+
+            using var doc = JsonDocument.Parse(data);
+            return DeserializeLengthTokenFilter(doc.RootElement, options);
+        }
+
+        public static implicit operator RequestContent(LengthTokenFilter model)
+        {
+            if (model is null)
+            {
+                return null;
+            }
+
+            return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
+        }
+
+        public static explicit operator LengthTokenFilter(Response response)
+        {
+            if (response is null)
+            {
+                return null;
+            }
+
+            using JsonDocument doc = JsonDocument.Parse(response.ContentStream);
+            return DeserializeLengthTokenFilter(doc.RootElement, ModelSerializerOptions.DefaultWireOptions);
         }
     }
 }

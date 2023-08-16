@@ -5,8 +5,6 @@
 
 #nullable disable
 
-using System;
-
 namespace _Specs_.Azure.ClientGenerator.Core.Internal.Models
 {
     /// <summary> Model factory for models. </summary>
@@ -14,30 +12,18 @@ namespace _Specs_.Azure.ClientGenerator.Core.Internal.Models
     {
         /// <summary> Initializes a new instance of PublicModel. </summary>
         /// <param name="name"></param>
-        /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
         /// <returns> A new <see cref="Models.PublicModel"/> instance for mocking. </returns>
         public static PublicModel PublicModel(string name = null)
         {
-            if (name == null)
-            {
-                throw new ArgumentNullException(nameof(name));
-            }
-
-            return new PublicModel(name);
+            return new PublicModel(name, default);
         }
 
         /// <summary> Initializes a new instance of SharedModel. </summary>
         /// <param name="name"></param>
-        /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
         /// <returns> A new <see cref="Models.SharedModel"/> instance for mocking. </returns>
         public static SharedModel SharedModel(string name = null)
         {
-            if (name == null)
-            {
-                throw new ArgumentNullException(nameof(name));
-            }
-
-            return new SharedModel(name);
+            return new SharedModel(name, default);
         }
     }
 }

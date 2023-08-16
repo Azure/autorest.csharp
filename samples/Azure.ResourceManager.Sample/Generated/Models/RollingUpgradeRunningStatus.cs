@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
 
 namespace Azure.ResourceManager.Sample.Models
 {
@@ -15,12 +16,20 @@ namespace Azure.ResourceManager.Sample.Models
     /// </summary>
     public partial class RollingUpgradeRunningStatus
     {
-        /// <summary> Initializes a new instance of RollingUpgradeRunningStatus. </summary>
+        private Dictionary<string, BinaryData> _rawData;
+
+        /// <summary>
+        /// Initializes a new instance of global::Azure.ResourceManager.Sample.Models.RollingUpgradeRunningStatus
+        ///
+        /// </summary>
         internal RollingUpgradeRunningStatus()
         {
         }
 
-        /// <summary> Initializes a new instance of RollingUpgradeRunningStatus. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::Azure.ResourceManager.Sample.Models.RollingUpgradeRunningStatus
+        ///
+        /// </summary>
         /// <param name="code">
         /// Code indicating the current status of the upgrade.
         /// Serialized Name: RollingUpgradeRunningStatus.code
@@ -37,12 +46,14 @@ namespace Azure.ResourceManager.Sample.Models
         /// Last action time of the upgrade.
         /// Serialized Name: RollingUpgradeRunningStatus.lastActionTime
         /// </param>
-        internal RollingUpgradeRunningStatus(RollingUpgradeStatusCode? code, DateTimeOffset? startOn, RollingUpgradeActionType? lastAction, DateTimeOffset? lastActionOn)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal RollingUpgradeRunningStatus(RollingUpgradeStatusCode? code, DateTimeOffset? startOn, RollingUpgradeActionType? lastAction, DateTimeOffset? lastActionOn, Dictionary<string, BinaryData> rawData)
         {
             Code = code;
             StartOn = startOn;
             LastAction = lastAction;
             LastActionOn = lastActionOn;
+            _rawData = rawData;
         }
 
         /// <summary>

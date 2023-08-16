@@ -6,42 +6,53 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
 using System.Text.Json;
 using Azure;
 using Azure.Core;
 using Azure.Core.Serialization;
 
-namespace _Type.Model.Inheritance.Models
+namespace _Type.Model.Inheritance.SingleDiscriminator.Models
 {
-    public partial class Shark : IUtf8JsonSerializable, IJsonModelSerializable
+    public partial class Goose : IUtf8JsonSerializable, IModelJsonSerializable<Goose>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModelSerializable)this).Serialize(writer, ModelSerializerOptions.AzureServiceDefault);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<Goose>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
 
-        void IJsonModelSerializable.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
+        void IModelJsonSerializable<Goose>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
+            ModelSerializerHelper.ValidateFormat<Goose>(this, options.Format);
+
             writer.WriteStartObject();
             writer.WritePropertyName("kind"u8);
             writer.WriteStringValue(Kind);
-            writer.WritePropertyName("age"u8);
-            writer.WriteNumberValue(Age);
+            writer.WritePropertyName("wingspan"u8);
+            writer.WriteNumberValue(Wingspan);
+            if (_rawData is not null && options.Format == ModelSerializerFormat.Json)
+            {
+                foreach (var property in _rawData)
+                {
+                    writer.WritePropertyName(property.Key);
+#if NET6_0_OR_GREATER
+				writer.WriteRawValue(property.Value);
+#else
+                    JsonSerializer.Serialize(writer, JsonDocument.Parse(property.Value.ToString()).RootElement);
+#endif
+                }
+            }
             writer.WriteEndObject();
         }
 
-        object IModelSerializable.Deserialize(BinaryData data, ModelSerializerOptions options)
+        internal static Goose DeserializeGoose(JsonElement element, ModelSerializerOptions options = default)
         {
-            using var doc = JsonDocument.Parse(data);
-            return DeserializeShark(doc.RootElement, options);
-        }
+            options ??= ModelSerializerOptions.DefaultWireOptions;
 
-        internal static Shark DeserializeShark(JsonElement element, ModelSerializerOptions options = default)
-        {
-            options ??= ModelSerializerOptions.AzureServiceDefault;
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
             }
             string kind = default;
-            int age = default;
+            int wingspan = default;
+            Dictionary<string, BinaryData> rawData = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("kind"u8))
@@ -49,35 +60,62 @@ namespace _Type.Model.Inheritance.Models
                     kind = property.Value.GetString();
                     continue;
                 }
-                if (property.NameEquals("age"u8))
+                if (property.NameEquals("wingspan"u8))
                 {
-                    age = property.Value.GetInt32();
+                    wingspan = property.Value.GetInt32();
+                    continue;
+                }
+                if (options.Format == ModelSerializerFormat.Json)
+                {
+                    rawData.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
                     continue;
                 }
             }
-            return new Shark(kind, age);
+            return new Goose(kind, wingspan, rawData);
         }
 
-        object IJsonModelSerializable.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        Goose IModelJsonSerializable<Goose>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
         {
+            ModelSerializerHelper.ValidateFormat<Goose>(this, options.Format);
+
             using var doc = JsonDocument.ParseValue(ref reader);
-            return DeserializeShark(doc.RootElement, options);
+            return DeserializeGoose(doc.RootElement, options);
         }
 
-        /// <summary> Deserializes the model from a raw response. </summary>
-        /// <param name="response"> The response to deserialize the model from. </param>
-        internal static new Shark FromResponse(Response response)
+        BinaryData IModelSerializable<Goose>.Serialize(ModelSerializerOptions options)
         {
-            using var document = JsonDocument.Parse(response.Content);
-            return DeserializeShark(document.RootElement);
+            ModelSerializerHelper.ValidateFormat<Goose>(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
         }
 
-        /// <summary> Convert into a Utf8JsonRequestContent. </summary>
-        internal override RequestContent ToRequestContent()
+        Goose IModelSerializable<Goose>.Deserialize(BinaryData data, ModelSerializerOptions options)
         {
-            var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue(this);
-            return content;
+            ModelSerializerHelper.ValidateFormat<Goose>(this, options.Format);
+
+            using var doc = JsonDocument.Parse(data);
+            return DeserializeGoose(doc.RootElement, options);
+        }
+
+        public static implicit operator RequestContent(Goose model)
+        {
+            if (model is null)
+            {
+                return null;
+            }
+
+            return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
+        }
+
+        public static explicit operator Goose(Response response)
+        {
+            if (response is null)
+            {
+                return null;
+            }
+
+            using JsonDocument doc = JsonDocument.Parse(response.ContentStream);
+            return DeserializeGoose(doc.RootElement, ModelSerializerOptions.DefaultWireOptions);
         }
     }
 }

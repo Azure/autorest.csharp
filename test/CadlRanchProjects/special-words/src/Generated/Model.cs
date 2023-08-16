@@ -57,7 +57,7 @@ namespace SpecialWords
             {
                 RequestContext context = FromCancellationToken(cancellationToken);
                 Response response = await GetModelAsync(context).ConfigureAwait(false);
-                return Response.FromValue(BaseModel.FromResponse(response), response);
+                return Response.FromValue((BaseModel)response, response);
             }
             catch (Exception e)
             {
@@ -76,7 +76,7 @@ namespace SpecialWords
             {
                 RequestContext context = FromCancellationToken(cancellationToken);
                 Response response = GetModel(context);
-                return Response.FromValue(BaseModel.FromResponse(response), response);
+                return Response.FromValue((BaseModel)response, response);
             }
             catch (Exception e)
             {
@@ -164,7 +164,7 @@ namespace SpecialWords
             Argument.AssertNotNull(body, nameof(body));
 
             RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = await PutAsync(body.ToRequestContent(), context).ConfigureAwait(false);
+            Response response = await PutAsync(body, context).ConfigureAwait(false);
             return response;
         }
 
@@ -177,7 +177,7 @@ namespace SpecialWords
             Argument.AssertNotNull(body, nameof(body));
 
             RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = Put(body.ToRequestContent(), context);
+            Response response = Put(body, context);
             return response;
         }
 

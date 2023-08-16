@@ -5,11 +5,16 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
+
 namespace _Type.Property.Optional.Models
 {
     /// <summary> Model with required and optional properties. </summary>
     public partial class RequiredAndOptionalProperty
     {
+        private Dictionary<string, BinaryData> _rawData;
+
         /// <summary> Initializes a new instance of RequiredAndOptionalProperty. </summary>
         /// <param name="requiredProperty"> required int property. </param>
         public RequiredAndOptionalProperty(int requiredProperty)
@@ -20,10 +25,12 @@ namespace _Type.Property.Optional.Models
         /// <summary> Initializes a new instance of RequiredAndOptionalProperty. </summary>
         /// <param name="optionalProperty"> optional string property. </param>
         /// <param name="requiredProperty"> required int property. </param>
-        internal RequiredAndOptionalProperty(string optionalProperty, int requiredProperty)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal RequiredAndOptionalProperty(string optionalProperty, int requiredProperty, Dictionary<string, BinaryData> rawData)
         {
             OptionalProperty = optionalProperty;
             RequiredProperty = requiredProperty;
+            _rawData = rawData;
         }
 
         /// <summary> optional string property. </summary>

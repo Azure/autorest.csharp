@@ -7,31 +7,31 @@
 
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Xml;
 using System.Xml.Linq;
+using Azure;
 using Azure.Core;
 using Azure.Core.Serialization;
 
 namespace xml_service.Models
 {
-    public partial class StorageServiceProperties : IXmlSerializable, IXmlModelSerializable
+    public partial class StorageServiceProperties : IXmlSerializable, IModelSerializable<StorageServiceProperties>
     {
-        void IXmlModelSerializable.Serialize(XmlWriter writer, ModelSerializerOptions options) => ((IXmlSerializable)this).Write(writer, null, options);
-
-        void IXmlSerializable.Write(XmlWriter writer, string nameHint, ModelSerializerOptions options)
+        private void Serialize(XmlWriter writer, string nameHint, ModelSerializerOptions options)
         {
             writer.WriteStartElement("StorageServiceProperties");
             if (Optional.IsDefined(Logging))
             {
-                writer.WriteObjectValue(Logging, "Logging", options);
+                writer.WriteObjectValue(Logging, "Logging");
             }
             if (Optional.IsDefined(HourMetrics))
             {
-                writer.WriteObjectValue(HourMetrics, "HourMetrics", options);
+                writer.WriteObjectValue(HourMetrics, "HourMetrics");
             }
             if (Optional.IsDefined(MinuteMetrics))
             {
-                writer.WriteObjectValue(MinuteMetrics, "MinuteMetrics", options);
+                writer.WriteObjectValue(MinuteMetrics, "MinuteMetrics");
             }
             if (Optional.IsDefined(DefaultServiceVersion))
             {
@@ -41,28 +41,25 @@ namespace xml_service.Models
             }
             if (Optional.IsDefined(DeleteRetentionPolicy))
             {
-                writer.WriteObjectValue(DeleteRetentionPolicy, "DeleteRetentionPolicy", options);
+                writer.WriteObjectValue(DeleteRetentionPolicy, "DeleteRetentionPolicy");
             }
             if (Optional.IsCollectionDefined(Cors))
             {
                 writer.WriteStartElement("Cors");
                 foreach (var item in Cors)
                 {
-                    writer.WriteObjectValue(item, "CorsRule", options);
+                    writer.WriteObjectValue(item, "CorsRule");
                 }
                 writer.WriteEndElement();
             }
             writer.WriteEndElement();
         }
 
-        object IModelSerializable.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            return DeserializeStorageServiceProperties(XElement.Load(data.ToStream()), options);
-        }
+        void IXmlSerializable.Write(XmlWriter writer, string nameHint) => Serialize(writer, nameHint, ModelSerializerOptions.DefaultWireOptions);
 
         internal static StorageServiceProperties DeserializeStorageServiceProperties(XElement element, ModelSerializerOptions options = default)
         {
-            options ??= ModelSerializerOptions.AzureServiceDefault;
+            options ??= ModelSerializerOptions.DefaultWireOptions;
             Logging logging = default;
             Metrics hourMetrics = default;
             Metrics minuteMetrics = default;
@@ -98,7 +95,53 @@ namespace xml_service.Models
                 }
                 cors = array;
             }
-            return new StorageServiceProperties(logging, hourMetrics, minuteMetrics, cors, defaultServiceVersion, deleteRetentionPolicy);
+            return new StorageServiceProperties(logging, hourMetrics, minuteMetrics, cors, defaultServiceVersion, deleteRetentionPolicy, default);
+        }
+
+        BinaryData IModelSerializable<StorageServiceProperties>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            options ??= ModelSerializerOptions.DefaultWireOptions;
+            using MemoryStream stream = new MemoryStream();
+            using XmlWriter writer = XmlWriter.Create(stream);
+            Serialize(writer, null, options);
+            writer.Flush();
+            if (stream.Position > int.MaxValue)
+            {
+                return BinaryData.FromStream(stream);
+            }
+            else
+            {
+                return new BinaryData(stream.GetBuffer().AsMemory(0, (int)stream.Position));
+            }
+        }
+
+        StorageServiceProperties IModelSerializable<StorageServiceProperties>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            return DeserializeStorageServiceProperties(XElement.Load(data.ToStream()), options);
+        }
+
+        public static implicit operator RequestContent(StorageServiceProperties model)
+        {
+            if (model is null)
+            {
+                return null;
+            }
+
+            return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
+        }
+
+        public static explicit operator StorageServiceProperties(Response response)
+        {
+            if (response is null)
+            {
+                return null;
+            }
+
+            return DeserializeStorageServiceProperties(XElement.Load(response.ContentStream), ModelSerializerOptions.DefaultWireOptions);
         }
     }
 }

@@ -15,6 +15,8 @@ namespace Pagination.Models
     /// <summary> The DimensionValueListItem. </summary>
     public partial class DimensionValueListItem
     {
+        private Dictionary<string, BinaryData> _rawData;
+
         /// <summary> Initializes a new instance of DimensionValueListItem. </summary>
         /// <param name="value"></param>
         /// <exception cref="ArgumentNullException"> <paramref name="value"/> is null. </exception>
@@ -27,9 +29,11 @@ namespace Pagination.Models
 
         /// <summary> Initializes a new instance of DimensionValueListItem. </summary>
         /// <param name="value"></param>
-        internal DimensionValueListItem(IReadOnlyList<string> value)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal DimensionValueListItem(IReadOnlyList<string> value, Dictionary<string, BinaryData> rawData)
         {
             Value = value;
+            _rawData = rawData;
         }
 
         /// <summary> Gets the value. </summary>

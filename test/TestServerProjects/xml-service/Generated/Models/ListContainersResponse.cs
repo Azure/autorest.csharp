@@ -14,7 +14,12 @@ namespace xml_service.Models
     /// <summary> An enumeration of containers. </summary>
     public partial class ListContainersResponse
     {
-        /// <summary> Initializes a new instance of ListContainersResponse. </summary>
+        private Dictionary<string, BinaryData> _rawData;
+
+        /// <summary>
+        /// Initializes a new instance of global::xml_service.Models.ListContainersResponse
+        ///
+        /// </summary>
         /// <param name="serviceEndpoint"></param>
         /// <param name="prefix"></param>
         /// <param name="maxResults"></param>
@@ -33,14 +38,18 @@ namespace xml_service.Models
             NextMarker = nextMarker;
         }
 
-        /// <summary> Initializes a new instance of ListContainersResponse. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::xml_service.Models.ListContainersResponse
+        ///
+        /// </summary>
         /// <param name="serviceEndpoint"></param>
         /// <param name="prefix"></param>
         /// <param name="marker"></param>
         /// <param name="maxResults"></param>
         /// <param name="containers"></param>
         /// <param name="nextMarker"></param>
-        internal ListContainersResponse(string serviceEndpoint, string prefix, string marker, int maxResults, IReadOnlyList<Container> containers, string nextMarker)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal ListContainersResponse(string serviceEndpoint, string prefix, string marker, int maxResults, IReadOnlyList<Container> containers, string nextMarker, Dictionary<string, BinaryData> rawData)
         {
             ServiceEndpoint = serviceEndpoint;
             Prefix = prefix;
@@ -48,6 +57,7 @@ namespace xml_service.Models
             MaxResults = maxResults;
             Containers = containers;
             NextMarker = nextMarker;
+            _rawData = rawData;
         }
 
         /// <summary> Gets the service endpoint. </summary>

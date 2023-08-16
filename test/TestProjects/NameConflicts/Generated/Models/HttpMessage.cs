@@ -5,21 +5,34 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
+
 namespace NameConflicts.Models
 {
     /// <summary> The HttpMessage. </summary>
     public partial class HttpMessage
     {
-        /// <summary> Initializes a new instance of HttpMessage. </summary>
+        private Dictionary<string, BinaryData> _rawData;
+
+        /// <summary>
+        /// Initializes a new instance of global::NameConflicts.Models.HttpMessage
+        ///
+        /// </summary>
         public HttpMessage()
         {
         }
 
-        /// <summary> Initializes a new instance of HttpMessage. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::NameConflicts.Models.HttpMessage
+        ///
+        /// </summary>
         /// <param name="property"></param>
-        internal HttpMessage(string property)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal HttpMessage(string property, Dictionary<string, BinaryData> rawData)
         {
             Property = property;
+            _rawData = rawData;
         }
 
         /// <summary> Gets or sets the property. </summary>

@@ -5,11 +5,16 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
+
 namespace CustomizationsInTsp.Models
 {
     /// <summary> Model to add additional serializable property. </summary>
     public partial class ModelToAddAdditionalSerializableProperty
     {
+        private Dictionary<string, BinaryData> _rawData;
+
         /// <summary> Initializes a new instance of ModelToAddAdditionalSerializableProperty. </summary>
         /// <param name="requiredInt"> Required int. </param>
         public ModelToAddAdditionalSerializableProperty(int requiredInt)
@@ -21,11 +26,13 @@ namespace CustomizationsInTsp.Models
         /// <param name="requiredInt"> Required int. </param>
         /// <param name="additionalSerializableProperty"> to be removed by post process. </param>
         /// <param name="additionalNullableSerializableProperty"> to be removed by post process. </param>
-        internal ModelToAddAdditionalSerializableProperty(int requiredInt, int additionalSerializableProperty, int? additionalNullableSerializableProperty)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal ModelToAddAdditionalSerializableProperty(int requiredInt, int additionalSerializableProperty, int? additionalNullableSerializableProperty, Dictionary<string, BinaryData> rawData)
         {
             RequiredInt = requiredInt;
             AdditionalSerializableProperty = additionalSerializableProperty;
             AdditionalNullableSerializableProperty = additionalNullableSerializableProperty;
+            _rawData = rawData;
         }
     }
 }

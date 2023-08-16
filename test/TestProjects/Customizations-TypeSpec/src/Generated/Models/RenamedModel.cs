@@ -5,11 +5,16 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
+
 namespace CustomizationsInTsp.Models
 {
     /// <summary> Renamed model (original name: ModelToRename). </summary>
     public partial class RenamedModel
     {
+        private Dictionary<string, BinaryData> _rawData;
+
         /// <summary> Initializes a new instance of RenamedModel. </summary>
         /// <param name="requiredInt"> Required int. </param>
         public RenamedModel(int requiredInt)
@@ -20,10 +25,12 @@ namespace CustomizationsInTsp.Models
         /// <summary> Initializes a new instance of RenamedModel. </summary>
         /// <param name="requiredInt"> Required int. </param>
         /// <param name="optionalInt"> Optional int. </param>
-        internal RenamedModel(int requiredInt, int? optionalInt)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal RenamedModel(int requiredInt, int? optionalInt, Dictionary<string, BinaryData> rawData)
         {
             RequiredInt = requiredInt;
             OptionalInt = optionalInt;
+            _rawData = rawData;
         }
 
         /// <summary> Required int. </summary>

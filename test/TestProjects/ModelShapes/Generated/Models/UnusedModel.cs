@@ -5,21 +5,34 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
+
 namespace ModelShapes.Models
 {
     /// <summary> The UnusedModel. </summary>
     internal partial class UnusedModel
     {
-        /// <summary> Initializes a new instance of UnusedModel. </summary>
+        private Dictionary<string, BinaryData> _rawData;
+
+        /// <summary>
+        /// Initializes a new instance of global::ModelShapes.Models.UnusedModel
+        ///
+        /// </summary>
         internal UnusedModel()
         {
         }
 
-        /// <summary> Initializes a new instance of UnusedModel. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::ModelShapes.Models.UnusedModel
+        ///
+        /// </summary>
         /// <param name="unusedString"></param>
-        internal UnusedModel(string unusedString)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal UnusedModel(string unusedString, Dictionary<string, BinaryData> rawData)
         {
             UnusedString = unusedString;
+            _rawData = rawData;
         }
 
         /// <summary> Gets the unused string. </summary>

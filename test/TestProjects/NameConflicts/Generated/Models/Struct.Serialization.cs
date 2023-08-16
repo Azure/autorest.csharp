@@ -6,18 +6,22 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
 using System.Text.Json;
+using Azure;
 using Azure.Core;
 using Azure.Core.Serialization;
 
 namespace NameConflicts.Models
 {
-    public partial class Struct : IUtf8JsonSerializable, IJsonModelSerializable
+    public partial class Struct : IUtf8JsonSerializable, IModelJsonSerializable<Struct>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModelSerializable)this).Serialize(writer, ModelSerializerOptions.AzureServiceDefault);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<Struct>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
 
-        void IJsonModelSerializable.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
+        void IModelJsonSerializable<Struct>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
+            ModelSerializerHelper.ValidateFormat<Struct>(this, options.Format);
+
             writer.WriteStartObject();
             if (Optional.IsDefined(One))
             {
@@ -564,18 +568,25 @@ namespace NameConflicts.Models
                 writer.WritePropertyName("GetHashCode"u8);
                 writer.WriteStringValue(GetHashCodeValue);
             }
+            if (_rawData is not null && options.Format == ModelSerializerFormat.Json)
+            {
+                foreach (var property in _rawData)
+                {
+                    writer.WritePropertyName(property.Key);
+#if NET6_0_OR_GREATER
+				writer.WriteRawValue(property.Value);
+#else
+                    JsonSerializer.Serialize(writer, JsonDocument.Parse(property.Value.ToString()).RootElement);
+#endif
+                }
+            }
             writer.WriteEndObject();
-        }
-
-        object IModelSerializable.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            using var doc = JsonDocument.Parse(data);
-            return DeserializeStruct(doc.RootElement, options);
         }
 
         internal static Struct DeserializeStruct(JsonElement element, ModelSerializerOptions options = default)
         {
-            options ??= ModelSerializerOptions.AzureServiceDefault;
+            options ??= ModelSerializerOptions.DefaultWireOptions;
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
@@ -689,6 +700,7 @@ namespace NameConflicts.Models
             Optional<string> toString = default;
             Optional<string> @equals = default;
             Optional<string> getHashCode = default;
+            Dictionary<string, BinaryData> rawData = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("1"u8))
@@ -1240,14 +1252,57 @@ namespace NameConflicts.Models
                     getHashCode = property.Value.GetString();
                     continue;
                 }
+                if (options.Format == ModelSerializerFormat.Json)
+                {
+                    rawData.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
+                    continue;
+                }
             }
-            return new Struct(@abstract.Value, @add.Value, @alias.Value, @as.Value, @ascending.Value, @async.Value, @await.Value, @base.Value, @bool.Value, @break.Value, @by.Value, @byte.Value, @catch.Value, @char.Value, @checked.Value, @const.Value, @continue.Value, @class.Value, @decimal.Value, @default.Value, @delegate.Value, @descending.Value, @do.Value, @double.Value, @dynamic.Value, @else.Value, @enum.Value, @event.Value, @explicit.Value, @extern.Value, @false.Value, @finally.Value, @fixed.Value, @float.Value, @for.Value, @foreach.Value, @from.Value, @get.Value, @global.Value, @goto.Value, group.Value, @if.Value, @implicit.Value, @in.Value, @int.Value, @interface.Value, @internal.Value, @into.Value, @is.Value, @join.Value, @let.Value, @lock.Value, @long.Value, @nameof.Value, @namespace.Value, @new.Value, @null.Value, @object.Value, @on.Value, @operator.Value, orderby.Value, @out.Value, @override.Value, @params.Value, @partial.Value, @private.Value, @protected.Value, @public.Value, @readonly.Value, @ref.Value, @remove.Value, @return.Value, @sbyte.Value, @sealed.Value, select.Value, @set.Value, @short.Value, @sizeof.Value, @stackalloc.Value, @static.Value, @string.Value, @struct.Value, @switch.Value, @this.Value, @throw.Value, @true.Value, @try.Value, @typeof.Value, @uint.Value, @ulong.Value, @unchecked.Value, @unmanaged.Value, @unsafe.Value, @ushort.Value, @using.Value, value.Value, @var.Value, @virtual.Value, @void.Value, @volatile.Value, @when.Value, @where.Value, @while.Value, @yield.Value, Optional.ToNullable(system), toString.Value, @equals.Value, getHashCode.Value, _1.Value);
+            return new Struct(@abstract.Value, @add.Value, @alias.Value, @as.Value, @ascending.Value, @async.Value, @await.Value, @base.Value, @bool.Value, @break.Value, @by.Value, @byte.Value, @catch.Value, @char.Value, @checked.Value, @const.Value, @continue.Value, @class.Value, @decimal.Value, @default.Value, @delegate.Value, @descending.Value, @do.Value, @double.Value, @dynamic.Value, @else.Value, @enum.Value, @event.Value, @explicit.Value, @extern.Value, @false.Value, @finally.Value, @fixed.Value, @float.Value, @for.Value, @foreach.Value, @from.Value, @get.Value, @global.Value, @goto.Value, group.Value, @if.Value, @implicit.Value, @in.Value, @int.Value, @interface.Value, @internal.Value, @into.Value, @is.Value, @join.Value, @let.Value, @lock.Value, @long.Value, @nameof.Value, @namespace.Value, @new.Value, @null.Value, @object.Value, @on.Value, @operator.Value, orderby.Value, @out.Value, @override.Value, @params.Value, @partial.Value, @private.Value, @protected.Value, @public.Value, @readonly.Value, @ref.Value, @remove.Value, @return.Value, @sbyte.Value, @sealed.Value, select.Value, @set.Value, @short.Value, @sizeof.Value, @stackalloc.Value, @static.Value, @string.Value, @struct.Value, @switch.Value, @this.Value, @throw.Value, @true.Value, @try.Value, @typeof.Value, @uint.Value, @ulong.Value, @unchecked.Value, @unmanaged.Value, @unsafe.Value, @ushort.Value, @using.Value, value.Value, @var.Value, @virtual.Value, @void.Value, @volatile.Value, @when.Value, @where.Value, @while.Value, @yield.Value, Optional.ToNullable(system), toString.Value, @equals.Value, getHashCode.Value, _1.Value, rawData);
         }
 
-        object IJsonModelSerializable.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        Struct IModelJsonSerializable<Struct>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
         {
+            ModelSerializerHelper.ValidateFormat<Struct>(this, options.Format);
+
             using var doc = JsonDocument.ParseValue(ref reader);
             return DeserializeStruct(doc.RootElement, options);
+        }
+
+        BinaryData IModelSerializable<Struct>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat<Struct>(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        Struct IModelSerializable<Struct>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat<Struct>(this, options.Format);
+
+            using var doc = JsonDocument.Parse(data);
+            return DeserializeStruct(doc.RootElement, options);
+        }
+
+        public static implicit operator RequestContent(Struct model)
+        {
+            if (model is null)
+            {
+                return null;
+            }
+
+            return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
+        }
+
+        public static explicit operator Struct(Azure.Response response)
+        {
+            if (response is null)
+            {
+                return null;
+            }
+
+            using JsonDocument doc = JsonDocument.Parse(response.ContentStream);
+            return DeserializeStruct(doc.RootElement, ModelSerializerOptions.DefaultWireOptions);
         }
     }
 }

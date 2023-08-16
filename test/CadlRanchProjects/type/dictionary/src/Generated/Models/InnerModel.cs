@@ -14,6 +14,8 @@ namespace _Type._Dictionary.Models
     /// <summary> Dictionary inner model. </summary>
     public partial class InnerModel
     {
+        private Dictionary<string, BinaryData> _rawData;
+
         /// <summary> Initializes a new instance of InnerModel. </summary>
         /// <param name="property"> Required string property. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="property"/> is null. </exception>
@@ -28,10 +30,12 @@ namespace _Type._Dictionary.Models
         /// <summary> Initializes a new instance of InnerModel. </summary>
         /// <param name="property"> Required string property. </param>
         /// <param name="children"></param>
-        internal InnerModel(string property, IDictionary<string, InnerModel> children)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal InnerModel(string property, IDictionary<string, InnerModel> children, Dictionary<string, BinaryData> rawData)
         {
             Property = property;
             Children = children;
+            _rawData = rawData;
         }
 
         /// <summary> Required string property. </summary>

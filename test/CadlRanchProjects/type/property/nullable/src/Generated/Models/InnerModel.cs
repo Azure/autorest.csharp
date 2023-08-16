@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
 using Azure.Core;
 
 namespace _Type.Property.Nullable.Models
@@ -13,6 +14,8 @@ namespace _Type.Property.Nullable.Models
     /// <summary> Inner model used in collections model property. </summary>
     public partial class InnerModel
     {
+        private Dictionary<string, BinaryData> _rawData;
+
         /// <summary> Initializes a new instance of InnerModel. </summary>
         /// <param name="property"> Inner model property. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="property"/> is null. </exception>
@@ -21,6 +24,15 @@ namespace _Type.Property.Nullable.Models
             Argument.AssertNotNull(property, nameof(property));
 
             Property = property;
+        }
+
+        /// <summary> Initializes a new instance of InnerModel. </summary>
+        /// <param name="property"> Inner model property. </param>
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal InnerModel(string property, Dictionary<string, BinaryData> rawData)
+        {
+            Property = property;
+            _rawData = rawData;
         }
 
         /// <summary> Inner model property. </summary>

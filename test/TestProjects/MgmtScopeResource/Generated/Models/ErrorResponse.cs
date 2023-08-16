@@ -5,21 +5,34 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
+
 namespace MgmtScopeResource.Models
 {
     /// <summary> Error response indicates that the service is not able to process the incoming request. The reason is provided in the error message. </summary>
     internal partial class ErrorResponse
     {
-        /// <summary> Initializes a new instance of ErrorResponse. </summary>
+        private Dictionary<string, BinaryData> _rawData;
+
+        /// <summary>
+        /// Initializes a new instance of global::MgmtScopeResource.Models.ErrorResponse
+        ///
+        /// </summary>
         internal ErrorResponse()
         {
         }
 
-        /// <summary> Initializes a new instance of ErrorResponse. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::MgmtScopeResource.Models.ErrorResponse
+        ///
+        /// </summary>
         /// <param name="error"> The details of the error. </param>
-        internal ErrorResponse(string error)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal ErrorResponse(string error, Dictionary<string, BinaryData> rawData)
         {
             Error = error;
+            _rawData = rawData;
         }
 
         /// <summary> The details of the error. </summary>

@@ -6,18 +6,22 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
 using System.Text.Json;
+using Azure;
 using Azure.Core;
 using Azure.Core.Serialization;
 
 namespace CognitiveSearch.Models
 {
-    public partial class AutocompleteRequest : IUtf8JsonSerializable, IJsonModelSerializable
+    public partial class AutocompleteRequest : IUtf8JsonSerializable, IModelJsonSerializable<AutocompleteRequest>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModelSerializable)this).Serialize(writer, ModelSerializerOptions.AzureServiceDefault);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<AutocompleteRequest>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
 
-        void IJsonModelSerializable.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
+        void IModelJsonSerializable<AutocompleteRequest>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
             writer.WriteStartObject();
             writer.WritePropertyName("search"u8);
             writer.WriteStringValue(SearchText);
@@ -63,18 +67,25 @@ namespace CognitiveSearch.Models
                 writer.WritePropertyName("top"u8);
                 writer.WriteNumberValue(Top.Value);
             }
+            if (_rawData is not null && options.Format == ModelSerializerFormat.Json)
+            {
+                foreach (var property in _rawData)
+                {
+                    writer.WritePropertyName(property.Key);
+#if NET6_0_OR_GREATER
+				writer.WriteRawValue(property.Value);
+#else
+                    JsonSerializer.Serialize(writer, JsonDocument.Parse(property.Value.ToString()).RootElement);
+#endif
+                }
+            }
             writer.WriteEndObject();
-        }
-
-        object IModelSerializable.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            using var doc = JsonDocument.Parse(data);
-            return DeserializeAutocompleteRequest(doc.RootElement, options);
         }
 
         internal static AutocompleteRequest DeserializeAutocompleteRequest(JsonElement element, ModelSerializerOptions options = default)
         {
-            options ??= ModelSerializerOptions.AzureServiceDefault;
+            options ??= ModelSerializerOptions.DefaultWireOptions;
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
@@ -89,6 +100,7 @@ namespace CognitiveSearch.Models
             Optional<string> searchFields = default;
             string suggesterName = default;
             Optional<int> top = default;
+            Dictionary<string, BinaryData> rawData = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("search"u8))
@@ -157,14 +169,57 @@ namespace CognitiveSearch.Models
                     top = property.Value.GetInt32();
                     continue;
                 }
+                if (options.Format == ModelSerializerFormat.Json)
+                {
+                    rawData.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
+                    continue;
+                }
             }
-            return new AutocompleteRequest(search, Optional.ToNullable(autocompleteMode), filter.Value, Optional.ToNullable(fuzzy), highlightPostTag.Value, highlightPreTag.Value, Optional.ToNullable(minimumCoverage), searchFields.Value, suggesterName, Optional.ToNullable(top));
+            return new AutocompleteRequest(search, Optional.ToNullable(autocompleteMode), filter.Value, Optional.ToNullable(fuzzy), highlightPostTag.Value, highlightPreTag.Value, Optional.ToNullable(minimumCoverage), searchFields.Value, suggesterName, Optional.ToNullable(top), rawData);
         }
 
-        object IJsonModelSerializable.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        AutocompleteRequest IModelJsonSerializable<AutocompleteRequest>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
         {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
             using var doc = JsonDocument.ParseValue(ref reader);
             return DeserializeAutocompleteRequest(doc.RootElement, options);
+        }
+
+        BinaryData IModelSerializable<AutocompleteRequest>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        AutocompleteRequest IModelSerializable<AutocompleteRequest>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using var doc = JsonDocument.Parse(data);
+            return DeserializeAutocompleteRequest(doc.RootElement, options);
+        }
+
+        public static implicit operator RequestContent(AutocompleteRequest model)
+        {
+            if (model is null)
+            {
+                return null;
+            }
+
+            return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
+        }
+
+        public static explicit operator AutocompleteRequest(Response response)
+        {
+            if (response is null)
+            {
+                return null;
+            }
+
+            using JsonDocument doc = JsonDocument.Parse(response.ContentStream);
+            return DeserializeAutocompleteRequest(doc.RootElement, ModelSerializerOptions.DefaultWireOptions);
         }
     }
 }

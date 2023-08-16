@@ -5,23 +5,36 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
+
 namespace MgmtSafeFlatten.Models
 {
     /// <summary> The TypeFour. </summary>
     internal partial class TypeFour
     {
-        /// <summary> Initializes a new instance of TypeFour. </summary>
+        private Dictionary<string, BinaryData> _rawData;
+
+        /// <summary>
+        /// Initializes a new instance of global::MgmtSafeFlatten.Models.TypeFour
+        ///
+        /// </summary>
         internal TypeFour()
         {
         }
 
-        /// <summary> Initializes a new instance of TypeFour. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::MgmtSafeFlatten.Models.TypeFour
+        ///
+        /// </summary>
         /// <param name="myType"> The details of the type. </param>
         /// <param name="properties"> The single value prop. </param>
-        internal TypeFour(string myType, LayerOneProperties properties)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal TypeFour(string myType, LayerOneProperties properties, Dictionary<string, BinaryData> rawData)
         {
             MyType = myType;
             Properties = properties;
+            _rawData = rawData;
         }
 
         /// <summary> The details of the type. </summary>

@@ -5,6 +5,9 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
+
 namespace Azure.ResourceManager.Sample.Models
 {
     /// <summary>
@@ -13,17 +16,24 @@ namespace Azure.ResourceManager.Sample.Models
     /// </summary>
     public partial class VirtualMachineScaleSetVMReimageContent : VirtualMachineReimageContent
     {
-        /// <summary> Initializes a new instance of VirtualMachineScaleSetVMReimageContent. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::Azure.ResourceManager.Sample.Models.VirtualMachineScaleSetVMReimageContent
+        ///
+        /// </summary>
         public VirtualMachineScaleSetVMReimageContent()
         {
         }
 
-        /// <summary> Initializes a new instance of VirtualMachineScaleSetVMReimageContent. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::Azure.ResourceManager.Sample.Models.VirtualMachineScaleSetVMReimageContent
+        ///
+        /// </summary>
         /// <param name="tempDisk">
         /// Specifies whether to reimage temp disk. Default value: false. Note: This temp disk reimage parameter is only supported for VM/VMSS with Ephemeral OS disk.
         /// Serialized Name: VirtualMachineReimageParameters.tempDisk
         /// </param>
-        internal VirtualMachineScaleSetVMReimageContent(bool? tempDisk) : base(tempDisk)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal VirtualMachineScaleSetVMReimageContent(bool? tempDisk, Dictionary<string, BinaryData> rawData) : base(tempDisk, rawData)
         {
         }
     }

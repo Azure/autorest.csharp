@@ -14,12 +14,18 @@ namespace Inheritance.Models
     /// <summary> The ClassThatInheritsFromBaseClass. </summary>
     public partial class ClassThatInheritsFromBaseClass : BaseClass
     {
-        /// <summary> Initializes a new instance of ClassThatInheritsFromBaseClass. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::Inheritance.Models.ClassThatInheritsFromBaseClass
+        ///
+        /// </summary>
         public ClassThatInheritsFromBaseClass()
         {
         }
 
-        /// <summary> Initializes a new instance of ClassThatInheritsFromBaseClass. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::Inheritance.Models.ClassThatInheritsFromBaseClass
+        ///
+        /// </summary>
         /// <param name="baseClassProperty"></param>
         /// <param name="dfeString"> Any object. </param>
         /// <param name="dfeDouble"> Any object. </param>
@@ -32,7 +38,8 @@ namespace Inheritance.Models
         /// <param name="dfeDateTime"> Any object. </param>
         /// <param name="dfeDuration"> Any object. </param>
         /// <param name="dfeUri"> Any object. </param>
-        internal ClassThatInheritsFromBaseClass(string baseClassProperty, DataFactoryElement<string> dfeString, DataFactoryElement<double> dfeDouble, DataFactoryElement<bool> dfeBool, DataFactoryElement<int> dfeInt, DataFactoryElement<BinaryData> dfeObject, DataFactoryElement<IList<SeparateClass>> dfeListOfT, DataFactoryElement<IList<string>> dfeListOfString, DataFactoryElement<IDictionary<string, string>> dfeKeyValuePairs, DataFactoryElement<DateTimeOffset> dfeDateTime, DataFactoryElement<TimeSpan> dfeDuration, DataFactoryElement<Uri> dfeUri) : base(baseClassProperty, dfeString, dfeDouble, dfeBool, dfeInt, dfeObject, dfeListOfT, dfeListOfString, dfeKeyValuePairs, dfeDateTime, dfeDuration, dfeUri)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal ClassThatInheritsFromBaseClass(string baseClassProperty, DataFactoryElement<string> dfeString, DataFactoryElement<double> dfeDouble, DataFactoryElement<bool> dfeBool, DataFactoryElement<int> dfeInt, DataFactoryElement<BinaryData> dfeObject, DataFactoryElement<IList<SeparateClass>> dfeListOfT, DataFactoryElement<IList<string>> dfeListOfString, DataFactoryElement<IDictionary<string, string>> dfeKeyValuePairs, DataFactoryElement<DateTimeOffset> dfeDateTime, DataFactoryElement<TimeSpan> dfeDuration, DataFactoryElement<Uri> dfeUri, Dictionary<string, BinaryData> rawData) : base(baseClassProperty, dfeString, dfeDouble, dfeBool, dfeInt, dfeObject, dfeListOfT, dfeListOfString, dfeKeyValuePairs, dfeDateTime, dfeDuration, dfeUri, rawData)
         {
         }
     }

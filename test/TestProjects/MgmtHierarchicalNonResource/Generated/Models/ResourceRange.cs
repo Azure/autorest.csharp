@@ -5,23 +5,36 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
+
 namespace MgmtHierarchicalNonResource.Models
 {
     /// <summary> Describes the resource range. </summary>
     public partial class ResourceRange
     {
-        /// <summary> Initializes a new instance of ResourceRange. </summary>
+        private Dictionary<string, BinaryData> _rawData;
+
+        /// <summary>
+        /// Initializes a new instance of global::MgmtHierarchicalNonResource.Models.ResourceRange
+        ///
+        /// </summary>
         internal ResourceRange()
         {
         }
 
-        /// <summary> Initializes a new instance of ResourceRange. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::MgmtHierarchicalNonResource.Models.ResourceRange
+        ///
+        /// </summary>
         /// <param name="min"> The minimum number of the resource. </param>
         /// <param name="max"> The maximum number of the resource. </param>
-        internal ResourceRange(int? min, int? max)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal ResourceRange(int? min, int? max, Dictionary<string, BinaryData> rawData)
         {
             Min = min;
             Max = max;
+            _rawData = rawData;
         }
 
         /// <summary> The minimum number of the resource. </summary>

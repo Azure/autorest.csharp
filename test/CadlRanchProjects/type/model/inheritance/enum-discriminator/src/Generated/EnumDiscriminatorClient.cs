@@ -56,7 +56,7 @@ namespace _Type.Model.Inheritance.EnumDiscriminator
         {
             RequestContext context = FromCancellationToken(cancellationToken);
             Response response = await GetExtensibleModelAsync(context).ConfigureAwait(false);
-            return Response.FromValue(Dog.FromResponse(response), response);
+            return Response.FromValue((Dog)response, response);
         }
 
         /// <summary> Receive model with extensible enum discriminator type. </summary>
@@ -66,7 +66,7 @@ namespace _Type.Model.Inheritance.EnumDiscriminator
         {
             RequestContext context = FromCancellationToken(cancellationToken);
             Response response = GetExtensibleModel(context);
-            return Response.FromValue(Dog.FromResponse(response), response);
+            return Response.FromValue((Dog)response, response);
         }
 
         /// <summary>
@@ -149,7 +149,7 @@ namespace _Type.Model.Inheritance.EnumDiscriminator
             Argument.AssertNotNull(input, nameof(input));
 
             RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = await PutExtensibleModelAsync(input.ToRequestContent(), context).ConfigureAwait(false);
+            Response response = await PutExtensibleModelAsync(input, context).ConfigureAwait(false);
             return response;
         }
 
@@ -163,7 +163,7 @@ namespace _Type.Model.Inheritance.EnumDiscriminator
             Argument.AssertNotNull(input, nameof(input));
 
             RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = PutExtensibleModel(input.ToRequestContent(), context);
+            Response response = PutExtensibleModel(input, context);
             return response;
         }
 
@@ -252,7 +252,7 @@ namespace _Type.Model.Inheritance.EnumDiscriminator
         {
             RequestContext context = FromCancellationToken(cancellationToken);
             Response response = await GetExtensibleModelMissingDiscriminatorAsync(context).ConfigureAwait(false);
-            return Response.FromValue(Dog.FromResponse(response), response);
+            return Response.FromValue((Dog)response, response);
         }
 
         /// <summary> Get a model omitting the discriminator. </summary>
@@ -262,7 +262,7 @@ namespace _Type.Model.Inheritance.EnumDiscriminator
         {
             RequestContext context = FromCancellationToken(cancellationToken);
             Response response = GetExtensibleModelMissingDiscriminator(context);
-            return Response.FromValue(Dog.FromResponse(response), response);
+            return Response.FromValue((Dog)response, response);
         }
 
         /// <summary>
@@ -342,7 +342,7 @@ namespace _Type.Model.Inheritance.EnumDiscriminator
         {
             RequestContext context = FromCancellationToken(cancellationToken);
             Response response = await GetExtensibleModelWrongDiscriminatorAsync(context).ConfigureAwait(false);
-            return Response.FromValue(Dog.FromResponse(response), response);
+            return Response.FromValue((Dog)response, response);
         }
 
         /// <summary> Get a model containing discriminator value never defined. </summary>
@@ -352,7 +352,7 @@ namespace _Type.Model.Inheritance.EnumDiscriminator
         {
             RequestContext context = FromCancellationToken(cancellationToken);
             Response response = GetExtensibleModelWrongDiscriminator(context);
-            return Response.FromValue(Dog.FromResponse(response), response);
+            return Response.FromValue((Dog)response, response);
         }
 
         /// <summary>
@@ -432,7 +432,7 @@ namespace _Type.Model.Inheritance.EnumDiscriminator
         {
             RequestContext context = FromCancellationToken(cancellationToken);
             Response response = await GetFixedModelAsync(context).ConfigureAwait(false);
-            return Response.FromValue(Snake.FromResponse(response), response);
+            return Response.FromValue((Snake)response, response);
         }
 
         /// <summary> Receive model with fixed enum discriminator type. </summary>
@@ -442,7 +442,7 @@ namespace _Type.Model.Inheritance.EnumDiscriminator
         {
             RequestContext context = FromCancellationToken(cancellationToken);
             Response response = GetFixedModel(context);
-            return Response.FromValue(Snake.FromResponse(response), response);
+            return Response.FromValue((Snake)response, response);
         }
 
         /// <summary>
@@ -525,7 +525,7 @@ namespace _Type.Model.Inheritance.EnumDiscriminator
             Argument.AssertNotNull(input, nameof(input));
 
             RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = await PutFixedModelAsync(input.ToRequestContent(), context).ConfigureAwait(false);
+            Response response = await PutFixedModelAsync(input, context).ConfigureAwait(false);
             return response;
         }
 
@@ -539,7 +539,7 @@ namespace _Type.Model.Inheritance.EnumDiscriminator
             Argument.AssertNotNull(input, nameof(input));
 
             RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = PutFixedModel(input.ToRequestContent(), context);
+            Response response = PutFixedModel(input, context);
             return response;
         }
 
@@ -628,7 +628,7 @@ namespace _Type.Model.Inheritance.EnumDiscriminator
         {
             RequestContext context = FromCancellationToken(cancellationToken);
             Response response = await GetFixedModelMissingDiscriminatorAsync(context).ConfigureAwait(false);
-            return Response.FromValue(Snake.FromResponse(response), response);
+            return Response.FromValue((Snake)response, response);
         }
 
         /// <summary> Get a model omitting the discriminator. </summary>
@@ -638,7 +638,7 @@ namespace _Type.Model.Inheritance.EnumDiscriminator
         {
             RequestContext context = FromCancellationToken(cancellationToken);
             Response response = GetFixedModelMissingDiscriminator(context);
-            return Response.FromValue(Snake.FromResponse(response), response);
+            return Response.FromValue((Snake)response, response);
         }
 
         /// <summary>
@@ -718,7 +718,7 @@ namespace _Type.Model.Inheritance.EnumDiscriminator
         {
             RequestContext context = FromCancellationToken(cancellationToken);
             Response response = await GetFixedModelWrongDiscriminatorAsync(context).ConfigureAwait(false);
-            return Response.FromValue(Snake.FromResponse(response), response);
+            return Response.FromValue((Snake)response, response);
         }
 
         /// <summary> Get a model containing discriminator value never defined. </summary>
@@ -728,7 +728,7 @@ namespace _Type.Model.Inheritance.EnumDiscriminator
         {
             RequestContext context = FromCancellationToken(cancellationToken);
             Response response = GetFixedModelWrongDiscriminator(context);
-            return Response.FromValue(Snake.FromResponse(response), response);
+            return Response.FromValue((Snake)response, response);
         }
 
         /// <summary>

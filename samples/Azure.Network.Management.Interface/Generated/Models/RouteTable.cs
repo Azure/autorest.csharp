@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Collections.Generic;
 using Azure.Core;
 
@@ -13,14 +14,20 @@ namespace Azure.Network.Management.Interface.Models
     /// <summary> Route table resource. </summary>
     public partial class RouteTable : Resource
     {
-        /// <summary> Initializes a new instance of RouteTable. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::Azure.Network.Management.Interface.Models.RouteTable
+        ///
+        /// </summary>
         public RouteTable()
         {
             Routes = new ChangeTrackingList<Route>();
             Subnets = new ChangeTrackingList<Subnet>();
         }
 
-        /// <summary> Initializes a new instance of RouteTable. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::Azure.Network.Management.Interface.Models.RouteTable
+        ///
+        /// </summary>
         /// <param name="id"> Resource ID. </param>
         /// <param name="name"> Resource name. </param>
         /// <param name="type"> Resource type. </param>
@@ -31,7 +38,8 @@ namespace Azure.Network.Management.Interface.Models
         /// <param name="subnets"> A collection of references to subnets. </param>
         /// <param name="disableBgpRoutePropagation"> Whether to disable the routes learned by BGP on that route table. True means disable. </param>
         /// <param name="provisioningState"> The provisioning state of the route table resource. </param>
-        internal RouteTable(string id, string name, string type, string location, IDictionary<string, string> tags, string etag, IList<Route> routes, IReadOnlyList<Subnet> subnets, bool? disableBgpRoutePropagation, ProvisioningState? provisioningState) : base(id, name, type, location, tags)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal RouteTable(string id, string name, string type, string location, IDictionary<string, string> tags, string etag, IList<Route> routes, IReadOnlyList<Subnet> subnets, bool? disableBgpRoutePropagation, ProvisioningState? provisioningState, Dictionary<string, BinaryData> rawData) : base(id, name, type, location, tags, rawData)
         {
             Etag = etag;
             Routes = routes;

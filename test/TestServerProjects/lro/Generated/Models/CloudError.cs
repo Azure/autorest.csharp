@@ -5,23 +5,36 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
+
 namespace lro.Models
 {
     /// <summary> The CloudError. </summary>
     internal partial class CloudError
     {
-        /// <summary> Initializes a new instance of CloudError. </summary>
+        private Dictionary<string, BinaryData> _rawData;
+
+        /// <summary>
+        /// Initializes a new instance of global::lro.Models.CloudError
+        ///
+        /// </summary>
         internal CloudError()
         {
         }
 
-        /// <summary> Initializes a new instance of CloudError. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::lro.Models.CloudError
+        ///
+        /// </summary>
         /// <param name="code"></param>
         /// <param name="message"></param>
-        internal CloudError(int? code, string message)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal CloudError(int? code, string message, Dictionary<string, BinaryData> rawData)
         {
             Code = code;
             Message = message;
+            _rawData = rawData;
         }
 
         /// <summary> Gets the code. </summary>

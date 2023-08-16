@@ -5,6 +5,9 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
+
 namespace PetStore.Models
 {
     /// <summary> Unknown version of Fish. </summary>
@@ -19,7 +22,8 @@ namespace PetStore.Models
         /// <summary> Initializes a new instance of UnknownFish. </summary>
         /// <param name="kind"> Discriminator. </param>
         /// <param name="size"> The size of the fish. </param>
-        internal UnknownFish(string kind, int size) : base(kind, size)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal UnknownFish(string kind, int size, Dictionary<string, BinaryData> rawData) : base(kind, size, rawData)
         {
         }
     }

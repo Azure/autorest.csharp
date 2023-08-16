@@ -56,7 +56,7 @@ namespace Projection.ProjectedName
             Argument.AssertNotNull(jsonProjectedNameModel, nameof(jsonProjectedNameModel));
 
             RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = await JsonAsync(jsonProjectedNameModel.ToRequestContent(), context).ConfigureAwait(false);
+            Response response = await JsonAsync(jsonProjectedNameModel, context).ConfigureAwait(false);
             return response;
         }
 
@@ -69,7 +69,7 @@ namespace Projection.ProjectedName
             Argument.AssertNotNull(jsonProjectedNameModel, nameof(jsonProjectedNameModel));
 
             RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = Json(jsonProjectedNameModel.ToRequestContent(), context);
+            Response response = Json(jsonProjectedNameModel, context);
             return response;
         }
 
@@ -160,7 +160,7 @@ namespace Projection.ProjectedName
             Argument.AssertNotNull(clientProjectedNameModel, nameof(clientProjectedNameModel));
 
             RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = await ClientAsync(clientProjectedNameModel.ToRequestContent(), context).ConfigureAwait(false);
+            Response response = await ClientAsync(clientProjectedNameModel, context).ConfigureAwait(false);
             return response;
         }
 
@@ -173,7 +173,7 @@ namespace Projection.ProjectedName
             Argument.AssertNotNull(clientProjectedNameModel, nameof(clientProjectedNameModel));
 
             RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = Client(clientProjectedNameModel.ToRequestContent(), context);
+            Response response = Client(clientProjectedNameModel, context);
             return response;
         }
 
@@ -264,7 +264,7 @@ namespace Projection.ProjectedName
             Argument.AssertNotNull(languageProjectedNameModel, nameof(languageProjectedNameModel));
 
             RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = await LanguageAsync(languageProjectedNameModel.ToRequestContent(), context).ConfigureAwait(false);
+            Response response = await LanguageAsync(languageProjectedNameModel, context).ConfigureAwait(false);
             return response;
         }
 
@@ -277,7 +277,7 @@ namespace Projection.ProjectedName
             Argument.AssertNotNull(languageProjectedNameModel, nameof(languageProjectedNameModel));
 
             RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = Language(languageProjectedNameModel.ToRequestContent(), context);
+            Response response = Language(languageProjectedNameModel, context);
             return response;
         }
 
@@ -368,7 +368,7 @@ namespace Projection.ProjectedName
             Argument.AssertNotNull(jsonAndClientProjectedNameModel, nameof(jsonAndClientProjectedNameModel));
 
             RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = await JsonAndClientAsync(jsonAndClientProjectedNameModel.ToRequestContent(), context).ConfigureAwait(false);
+            Response response = await JsonAndClientAsync(jsonAndClientProjectedNameModel, context).ConfigureAwait(false);
             return response;
         }
 
@@ -381,7 +381,7 @@ namespace Projection.ProjectedName
             Argument.AssertNotNull(jsonAndClientProjectedNameModel, nameof(jsonAndClientProjectedNameModel));
 
             RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = JsonAndClient(jsonAndClientProjectedNameModel.ToRequestContent(), context);
+            Response response = JsonAndClient(jsonAndClientProjectedNameModel, context);
             return response;
         }
 

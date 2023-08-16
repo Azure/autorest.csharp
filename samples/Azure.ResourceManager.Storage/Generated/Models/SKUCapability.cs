@@ -5,23 +5,36 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
+
 namespace Azure.ResourceManager.Storage.Models
 {
     /// <summary> The capability information in the specified SKU, including file encryption, network ACLs, change notification, etc. </summary>
     public partial class SKUCapability
     {
-        /// <summary> Initializes a new instance of SKUCapability. </summary>
+        private Dictionary<string, BinaryData> _rawData;
+
+        /// <summary>
+        /// Initializes a new instance of global::Azure.ResourceManager.Storage.Models.SKUCapability
+        ///
+        /// </summary>
         internal SKUCapability()
         {
         }
 
-        /// <summary> Initializes a new instance of SKUCapability. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::Azure.ResourceManager.Storage.Models.SKUCapability
+        ///
+        /// </summary>
         /// <param name="name"> The name of capability, The capability information in the specified SKU, including file encryption, network ACLs, change notification, etc. </param>
         /// <param name="value"> A string value to indicate states of given capability. Possibly 'true' or 'false'. </param>
-        internal SKUCapability(string name, string value)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal SKUCapability(string name, string value, Dictionary<string, BinaryData> rawData)
         {
             Name = name;
             Value = value;
+            _rawData = rawData;
         }
 
         /// <summary> The name of capability, The capability information in the specified SKU, including file encryption, network ACLs, change notification, etc. </summary>

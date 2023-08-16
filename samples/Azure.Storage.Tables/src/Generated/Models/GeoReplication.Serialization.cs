@@ -6,18 +6,18 @@
 #nullable disable
 
 using System;
+using System.IO;
 using System.Xml;
 using System.Xml.Linq;
+using Azure;
 using Azure.Core;
 using Azure.Core.Serialization;
 
 namespace Azure.Storage.Tables.Models
 {
-    public partial class GeoReplication : IXmlSerializable, IXmlModelSerializable
+    public partial class GeoReplication : IXmlSerializable, IModelSerializable<GeoReplication>
     {
-        void IXmlModelSerializable.Serialize(XmlWriter writer, ModelSerializerOptions options) => ((IXmlSerializable)this).Write(writer, null, options);
-
-        void IXmlSerializable.Write(XmlWriter writer, string nameHint, ModelSerializerOptions options)
+        private void Serialize(XmlWriter writer, string nameHint, ModelSerializerOptions options)
         {
             writer.WriteStartElement("GeoReplication");
             writer.WriteStartElement("Status");
@@ -29,14 +29,11 @@ namespace Azure.Storage.Tables.Models
             writer.WriteEndElement();
         }
 
-        object IModelSerializable.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            return DeserializeGeoReplication(XElement.Load(data.ToStream()), options);
-        }
+        void IXmlSerializable.Write(XmlWriter writer, string nameHint) => Serialize(writer, nameHint, ModelSerializerOptions.DefaultWireOptions);
 
         internal static GeoReplication DeserializeGeoReplication(XElement element, ModelSerializerOptions options = default)
         {
-            options ??= ModelSerializerOptions.AzureServiceDefault;
+            options ??= ModelSerializerOptions.DefaultWireOptions;
             GeoReplicationStatusType status = default;
             DateTimeOffset lastSyncTime = default;
             if (element.Element("Status") is XElement statusElement)
@@ -47,7 +44,53 @@ namespace Azure.Storage.Tables.Models
             {
                 lastSyncTime = lastSyncTimeElement.GetDateTimeOffsetValue("R");
             }
-            return new GeoReplication(status, lastSyncTime);
+            return new GeoReplication(status, lastSyncTime, default);
+        }
+
+        BinaryData IModelSerializable<GeoReplication>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            options ??= ModelSerializerOptions.DefaultWireOptions;
+            using MemoryStream stream = new MemoryStream();
+            using XmlWriter writer = XmlWriter.Create(stream);
+            Serialize(writer, null, options);
+            writer.Flush();
+            if (stream.Position > int.MaxValue)
+            {
+                return BinaryData.FromStream(stream);
+            }
+            else
+            {
+                return new BinaryData(stream.GetBuffer().AsMemory(0, (int)stream.Position));
+            }
+        }
+
+        GeoReplication IModelSerializable<GeoReplication>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            return DeserializeGeoReplication(XElement.Load(data.ToStream()), options);
+        }
+
+        public static implicit operator RequestContent(GeoReplication model)
+        {
+            if (model is null)
+            {
+                return null;
+            }
+
+            return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
+        }
+
+        public static explicit operator GeoReplication(Response response)
+        {
+            if (response is null)
+            {
+                return null;
+            }
+
+            return DeserializeGeoReplication(XElement.Load(response.ContentStream), ModelSerializerOptions.DefaultWireOptions);
         }
     }
 }

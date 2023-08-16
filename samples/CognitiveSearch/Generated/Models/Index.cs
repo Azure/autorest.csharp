@@ -15,7 +15,12 @@ namespace CognitiveSearch.Models
     /// <summary> Represents a search index definition, which describes the fields and search behavior of an index. </summary>
     public partial class Index
     {
-        /// <summary> Initializes a new instance of Index. </summary>
+        private Dictionary<string, BinaryData> _rawData;
+
+        /// <summary>
+        /// Initializes a new instance of global::CognitiveSearch.Models.Index
+        ///
+        /// </summary>
         /// <param name="name"> The name of the index. </param>
         /// <param name="fields"> The fields of the index. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> or <paramref name="fields"/> is null. </exception>
@@ -34,7 +39,10 @@ namespace CognitiveSearch.Models
             CharFilters = new ChangeTrackingList<CharFilter>();
         }
 
-        /// <summary> Initializes a new instance of Index. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::CognitiveSearch.Models.Index
+        ///
+        /// </summary>
         /// <param name="name"> The name of the index. </param>
         /// <param name="fields"> The fields of the index. </param>
         /// <param name="scoringProfiles"> The scoring profiles for the index. </param>
@@ -68,7 +76,8 @@ namespace CognitiveSearch.Models
         /// The available derived classes include <see cref="BM25Similarity"/> and <see cref="ClassicSimilarity"/>.
         /// </param>
         /// <param name="eTag"> The ETag of the index. </param>
-        internal Index(string name, IList<Field> fields, IList<ScoringProfile> scoringProfiles, string defaultScoringProfile, CorsOptions corsOptions, IList<Suggester> suggesters, IList<Analyzer> analyzers, IList<Tokenizer> tokenizers, IList<TokenFilter> tokenFilters, IList<CharFilter> charFilters, EncryptionKey encryptionKey, Similarity similarity, string eTag)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal Index(string name, IList<Field> fields, IList<ScoringProfile> scoringProfiles, string defaultScoringProfile, CorsOptions corsOptions, IList<Suggester> suggesters, IList<Analyzer> analyzers, IList<Tokenizer> tokenizers, IList<TokenFilter> tokenFilters, IList<CharFilter> charFilters, EncryptionKey encryptionKey, Similarity similarity, string eTag, Dictionary<string, BinaryData> rawData)
         {
             Name = name;
             Fields = fields;
@@ -83,6 +92,7 @@ namespace CognitiveSearch.Models
             EncryptionKey = encryptionKey;
             Similarity = similarity;
             ETag = eTag;
+            _rawData = rawData;
         }
 
         /// <summary> The name of the index. </summary>

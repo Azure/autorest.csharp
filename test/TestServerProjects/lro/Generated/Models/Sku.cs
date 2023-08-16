@@ -5,23 +5,36 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
+
 namespace lro.Models
 {
     /// <summary> The Sku. </summary>
     public partial class Sku
     {
-        /// <summary> Initializes a new instance of Sku. </summary>
+        private Dictionary<string, BinaryData> _rawData;
+
+        /// <summary>
+        /// Initializes a new instance of global::lro.Models.Sku
+        ///
+        /// </summary>
         public Sku()
         {
         }
 
-        /// <summary> Initializes a new instance of Sku. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::lro.Models.Sku
+        ///
+        /// </summary>
         /// <param name="name"></param>
         /// <param name="id"></param>
-        internal Sku(string name, string id)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal Sku(string name, string id, Dictionary<string, BinaryData> rawData)
         {
             Name = name;
             Id = id;
+            _rawData = rawData;
         }
 
         /// <summary> Gets or sets the name. </summary>

@@ -58,7 +58,7 @@ namespace _Type.Model.Inheritance.NotDiscriminated
             Argument.AssertNotNull(input, nameof(input));
 
             RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = await PostValidAsync(input.ToRequestContent(), context).ConfigureAwait(false);
+            Response response = await PostValidAsync(input, context).ConfigureAwait(false);
             return response;
         }
 
@@ -71,7 +71,7 @@ namespace _Type.Model.Inheritance.NotDiscriminated
             Argument.AssertNotNull(input, nameof(input));
 
             RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = PostValid(input.ToRequestContent(), context);
+            Response response = PostValid(input, context);
             return response;
         }
 
@@ -159,7 +159,7 @@ namespace _Type.Model.Inheritance.NotDiscriminated
         {
             RequestContext context = FromCancellationToken(cancellationToken);
             Response response = await GetValidAsync(context).ConfigureAwait(false);
-            return Response.FromValue(Siamese.FromResponse(response), response);
+            return Response.FromValue((Siamese)response, response);
         }
 
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -168,7 +168,7 @@ namespace _Type.Model.Inheritance.NotDiscriminated
         {
             RequestContext context = FromCancellationToken(cancellationToken);
             Response response = GetValid(context);
-            return Response.FromValue(Siamese.FromResponse(response), response);
+            return Response.FromValue((Siamese)response, response);
         }
 
         /// <summary>
@@ -250,8 +250,8 @@ namespace _Type.Model.Inheritance.NotDiscriminated
             Argument.AssertNotNull(input, nameof(input));
 
             RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = await PutValidAsync(input.ToRequestContent(), context).ConfigureAwait(false);
-            return Response.FromValue(Siamese.FromResponse(response), response);
+            Response response = await PutValidAsync(input, context).ConfigureAwait(false);
+            return Response.FromValue((Siamese)response, response);
         }
 
         /// <param name="input"> The Siamese to use. </param>
@@ -263,8 +263,8 @@ namespace _Type.Model.Inheritance.NotDiscriminated
             Argument.AssertNotNull(input, nameof(input));
 
             RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = PutValid(input.ToRequestContent(), context);
-            return Response.FromValue(Siamese.FromResponse(response), response);
+            Response response = PutValid(input, context);
+            return Response.FromValue((Siamese)response, response);
         }
 
         /// <summary>

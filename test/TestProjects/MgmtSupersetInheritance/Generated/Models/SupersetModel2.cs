@@ -5,27 +5,40 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
+
 namespace MgmtSupersetInheritance.Models
 {
     /// <summary> This model does not have id property, it's Non-Resource. </summary>
     public partial class SupersetModel2
     {
-        /// <summary> Initializes a new instance of SupersetModel2. </summary>
+        private Dictionary<string, BinaryData> _rawData;
+
+        /// <summary>
+        /// Initializes a new instance of global::MgmtSupersetInheritance.Models.SupersetModel2
+        ///
+        /// </summary>
         public SupersetModel2()
         {
         }
 
-        /// <summary> Initializes a new instance of SupersetModel2. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::MgmtSupersetInheritance.Models.SupersetModel2
+        ///
+        /// </summary>
         /// <param name="id"></param>
         /// <param name="name"></param>
         /// <param name="supersetModel2Type"></param>
         /// <param name="new"></param>
-        internal SupersetModel2(string id, string name, string supersetModel2Type, string @new)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal SupersetModel2(string id, string name, string supersetModel2Type, string @new, Dictionary<string, BinaryData> rawData)
         {
             ID = id;
             Name = name;
             SupersetModel2Type = supersetModel2Type;
             New = @new;
+            _rawData = rawData;
         }
 
         /// <summary> Gets or sets the id. </summary>

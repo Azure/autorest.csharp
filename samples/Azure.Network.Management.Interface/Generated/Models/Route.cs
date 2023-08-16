@@ -5,17 +5,26 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
+
 namespace Azure.Network.Management.Interface.Models
 {
     /// <summary> Route resource. </summary>
     public partial class Route : SubResource
     {
-        /// <summary> Initializes a new instance of Route. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::Azure.Network.Management.Interface.Models.Route
+        ///
+        /// </summary>
         public Route()
         {
         }
 
-        /// <summary> Initializes a new instance of Route. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::Azure.Network.Management.Interface.Models.Route
+        ///
+        /// </summary>
         /// <param name="id"> Resource ID. </param>
         /// <param name="name"> The name of the resource that is unique within a resource group. This name can be used to access the resource. </param>
         /// <param name="etag"> A unique read-only string that changes whenever the resource is updated. </param>
@@ -23,7 +32,8 @@ namespace Azure.Network.Management.Interface.Models
         /// <param name="nextHopType"> The type of Azure hop the packet should be sent to. </param>
         /// <param name="nextHopIpAddress"> The IP address packets should be forwarded to. Next hop values are only allowed in routes where the next hop type is VirtualAppliance. </param>
         /// <param name="provisioningState"> The provisioning state of the route resource. </param>
-        internal Route(string id, string name, string etag, string addressPrefix, RouteNextHopType? nextHopType, string nextHopIpAddress, ProvisioningState? provisioningState) : base(id)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal Route(string id, string name, string etag, string addressPrefix, RouteNextHopType? nextHopType, string nextHopIpAddress, ProvisioningState? provisioningState, Dictionary<string, BinaryData> rawData) : base(id, rawData)
         {
             Name = name;
             Etag = etag;

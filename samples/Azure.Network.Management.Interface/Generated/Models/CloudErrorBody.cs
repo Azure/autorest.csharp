@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Collections.Generic;
 using Azure.Core;
 
@@ -13,23 +14,33 @@ namespace Azure.Network.Management.Interface.Models
     /// <summary> An error response from the service. </summary>
     internal partial class CloudErrorBody
     {
-        /// <summary> Initializes a new instance of CloudErrorBody. </summary>
+        private Dictionary<string, BinaryData> _rawData;
+
+        /// <summary>
+        /// Initializes a new instance of global::Azure.Network.Management.Interface.Models.CloudErrorBody
+        ///
+        /// </summary>
         internal CloudErrorBody()
         {
             Details = new ChangeTrackingList<CloudErrorBody>();
         }
 
-        /// <summary> Initializes a new instance of CloudErrorBody. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::Azure.Network.Management.Interface.Models.CloudErrorBody
+        ///
+        /// </summary>
         /// <param name="code"> An identifier for the error. Codes are invariant and are intended to be consumed programmatically. </param>
         /// <param name="message"> A message describing the error, intended to be suitable for display in a user interface. </param>
         /// <param name="target"> The target of the particular error. For example, the name of the property in error. </param>
         /// <param name="details"> A list of additional details about the error. </param>
-        internal CloudErrorBody(string code, string message, string target, IReadOnlyList<CloudErrorBody> details)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal CloudErrorBody(string code, string message, string target, IReadOnlyList<CloudErrorBody> details, Dictionary<string, BinaryData> rawData)
         {
             Code = code;
             Message = message;
             Target = target;
             Details = details;
+            _rawData = rawData;
         }
 
         /// <summary> An identifier for the error. Codes are invariant and are intended to be consumed programmatically. </summary>

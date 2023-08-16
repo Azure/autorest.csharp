@@ -6,24 +6,35 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
 
 namespace body_complex.Models
 {
     /// <summary> The Datetimerfc1123Wrapper. </summary>
     public partial class Datetimerfc1123Wrapper
     {
-        /// <summary> Initializes a new instance of Datetimerfc1123Wrapper. </summary>
+        private Dictionary<string, BinaryData> _rawData;
+
+        /// <summary>
+        /// Initializes a new instance of global::body_complex.Models.Datetimerfc1123Wrapper
+        ///
+        /// </summary>
         public Datetimerfc1123Wrapper()
         {
         }
 
-        /// <summary> Initializes a new instance of Datetimerfc1123Wrapper. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::body_complex.Models.Datetimerfc1123Wrapper
+        ///
+        /// </summary>
         /// <param name="field"></param>
         /// <param name="now"></param>
-        internal Datetimerfc1123Wrapper(DateTimeOffset? field, DateTimeOffset? now)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal Datetimerfc1123Wrapper(DateTimeOffset? field, DateTimeOffset? now, Dictionary<string, BinaryData> rawData)
         {
             Field = field;
             Now = now;
+            _rawData = rawData;
         }
 
         /// <summary> Gets or sets the field. </summary>

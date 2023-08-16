@@ -5,6 +5,10 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
+using Azure.Core.Serialization;
+
 namespace ModelsTypeSpec.Models
 {
     /// <summary>
@@ -12,8 +16,11 @@ namespace ModelsTypeSpec.Models
     /// Please note <see cref="OutputBaseModelWithDiscriminator"/> is the base class. According to the scenario, a derived class of the base class might need to be assigned here, or this property needs to be casted to one of the possible derived classes.
     /// The available derived classes include <see cref="FirstDerivedOutputModel"/> and <see cref="SecondDerivedOutputModel"/>.
     /// </summary>
+    [AbstractHierarchyDeserializer(typeof(UnknownOutputBaseModelWithDiscriminator))]
     public abstract partial class OutputBaseModelWithDiscriminator
     {
+        protected internal Dictionary<string, BinaryData> _rawData;
+
         /// <summary> Initializes a new instance of OutputBaseModelWithDiscriminator. </summary>
         protected OutputBaseModelWithDiscriminator()
         {
@@ -21,9 +28,11 @@ namespace ModelsTypeSpec.Models
 
         /// <summary> Initializes a new instance of OutputBaseModelWithDiscriminator. </summary>
         /// <param name="kind"> Discriminator. </param>
-        internal OutputBaseModelWithDiscriminator(string kind)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal OutputBaseModelWithDiscriminator(string kind, Dictionary<string, BinaryData> rawData)
         {
             Kind = kind;
+            _rawData = rawData;
         }
 
         /// <summary> Discriminator. </summary>

@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Collections.Generic;
 using Azure.Core;
 
@@ -13,17 +14,27 @@ namespace Azure.Network.Management.Interface.Models
     /// <summary> Tags object for patch operations. </summary>
     public partial class TagsObject
     {
-        /// <summary> Initializes a new instance of TagsObject. </summary>
+        private Dictionary<string, BinaryData> _rawData;
+
+        /// <summary>
+        /// Initializes a new instance of global::Azure.Network.Management.Interface.Models.TagsObject
+        ///
+        /// </summary>
         public TagsObject()
         {
             Tags = new ChangeTrackingDictionary<string, string>();
         }
 
-        /// <summary> Initializes a new instance of TagsObject. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::Azure.Network.Management.Interface.Models.TagsObject
+        ///
+        /// </summary>
         /// <param name="tags"> Resource tags. </param>
-        internal TagsObject(IDictionary<string, string> tags)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal TagsObject(IDictionary<string, string> tags, Dictionary<string, BinaryData> rawData)
         {
             Tags = tags;
+            _rawData = rawData;
         }
 
         /// <summary> Resource tags. </summary>

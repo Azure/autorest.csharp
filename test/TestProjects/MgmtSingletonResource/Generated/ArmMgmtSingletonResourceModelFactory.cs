@@ -16,7 +16,10 @@ namespace MgmtSingletonResource.Models
     /// <summary> Model factory for models. </summary>
     public static partial class ArmMgmtSingletonResourceModelFactory
     {
-        /// <summary> Initializes a new instance of CarData. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::MgmtSingletonResource.CarData
+        ///
+        /// </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
         /// <param name="resourceType"> The resourceType. </param>
@@ -25,10 +28,13 @@ namespace MgmtSingletonResource.Models
         /// <returns> A new <see cref="MgmtSingletonResource.CarData"/> instance for mocking. </returns>
         public static CarData CarData(ResourceIdentifier id = null, string name = null, ResourceType resourceType = default, SystemData systemData = null, string horsepower = null)
         {
-            return new CarData(id, name, resourceType, systemData, horsepower);
+            return new CarData(id, name, resourceType, systemData, horsepower, default);
         }
 
-        /// <summary> Initializes a new instance of IgnitionData. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::MgmtSingletonResource.IgnitionData
+        ///
+        /// </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
         /// <param name="resourceType"> The resourceType. </param>
@@ -37,10 +43,13 @@ namespace MgmtSingletonResource.Models
         /// <returns> A new <see cref="MgmtSingletonResource.IgnitionData"/> instance for mocking. </returns>
         public static IgnitionData IgnitionData(ResourceIdentifier id = null, string name = null, ResourceType resourceType = default, SystemData systemData = null, bool? pushButton = null)
         {
-            return new IgnitionData(id, name, resourceType, systemData, pushButton);
+            return new IgnitionData(id, name, resourceType, systemData, pushButton, default);
         }
 
-        /// <summary> Initializes a new instance of BrakeData. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::MgmtSingletonResource.BrakeData
+        ///
+        /// </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
         /// <param name="resourceType"> The resourceType. </param>
@@ -49,10 +58,13 @@ namespace MgmtSingletonResource.Models
         /// <returns> A new <see cref="MgmtSingletonResource.BrakeData"/> instance for mocking. </returns>
         public static BrakeData BrakeData(ResourceIdentifier id = null, string name = null, ResourceType resourceType = default, SystemData systemData = null, bool? hitBrake = null)
         {
-            return new BrakeData(id, name, resourceType, systemData, hitBrake);
+            return new BrakeData(id, name, resourceType, systemData, hitBrake, default);
         }
 
-        /// <summary> Initializes a new instance of SingletonResourceData. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::MgmtSingletonResource.SingletonResourceData
+        ///
+        /// </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
         /// <param name="resourceType"> The resourceType. </param>
@@ -61,10 +73,13 @@ namespace MgmtSingletonResource.Models
         /// <returns> A new <see cref="MgmtSingletonResource.SingletonResourceData"/> instance for mocking. </returns>
         public static SingletonResourceData SingletonResourceData(ResourceIdentifier id = null, string name = null, ResourceType resourceType = default, SystemData systemData = null, string @new = null)
         {
-            return new SingletonResourceData(id, name, resourceType, systemData, @new);
+            return new SingletonResourceData(id, name, resourceType, systemData, @new, default);
         }
 
-        /// <summary> Initializes a new instance of ParentResourceData. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::MgmtSingletonResource.ParentResourceData
+        ///
+        /// </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
         /// <param name="resourceType"> The resourceType. </param>
@@ -77,7 +92,7 @@ namespace MgmtSingletonResource.Models
         {
             tags ??= new Dictionary<string, string>();
 
-            return new ParentResourceData(id, name, resourceType, systemData, tags, location, @new);
+            return new ParentResourceData(id, name, resourceType, systemData, tags, location, @new, default);
         }
     }
 }

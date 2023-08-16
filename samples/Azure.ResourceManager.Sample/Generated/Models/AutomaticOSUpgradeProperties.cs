@@ -5,6 +5,9 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
+
 namespace Azure.ResourceManager.Sample.Models
 {
     /// <summary>
@@ -13,7 +16,12 @@ namespace Azure.ResourceManager.Sample.Models
     /// </summary>
     internal partial class AutomaticOSUpgradeProperties
     {
-        /// <summary> Initializes a new instance of AutomaticOSUpgradeProperties. </summary>
+        private Dictionary<string, BinaryData> _rawData;
+
+        /// <summary>
+        /// Initializes a new instance of global::Azure.ResourceManager.Sample.Models.AutomaticOSUpgradeProperties
+        ///
+        /// </summary>
         /// <param name="automaticOSUpgradeSupported">
         /// Specifies whether automatic OS upgrade is supported on the image.
         /// Serialized Name: AutomaticOSUpgradeProperties.automaticOSUpgradeSupported
@@ -21,6 +29,21 @@ namespace Azure.ResourceManager.Sample.Models
         public AutomaticOSUpgradeProperties(bool automaticOSUpgradeSupported)
         {
             AutomaticOSUpgradeSupported = automaticOSUpgradeSupported;
+        }
+
+        /// <summary>
+        /// Initializes a new instance of global::Azure.ResourceManager.Sample.Models.AutomaticOSUpgradeProperties
+        ///
+        /// </summary>
+        /// <param name="automaticOSUpgradeSupported">
+        /// Specifies whether automatic OS upgrade is supported on the image.
+        /// Serialized Name: AutomaticOSUpgradeProperties.automaticOSUpgradeSupported
+        /// </param>
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal AutomaticOSUpgradeProperties(bool automaticOSUpgradeSupported, Dictionary<string, BinaryData> rawData)
+        {
+            AutomaticOSUpgradeSupported = automaticOSUpgradeSupported;
+            _rawData = rawData;
         }
 
         /// <summary>

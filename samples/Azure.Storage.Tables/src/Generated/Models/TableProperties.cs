@@ -5,21 +5,34 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
+
 namespace Azure.Storage.Tables.Models
 {
     /// <summary> The properties for creating a table. </summary>
     public partial class TableProperties
     {
-        /// <summary> Initializes a new instance of TableProperties. </summary>
+        private Dictionary<string, BinaryData> _rawData;
+
+        /// <summary>
+        /// Initializes a new instance of global::Azure.Storage.Tables.Models.TableProperties
+        ///
+        /// </summary>
         public TableProperties()
         {
         }
 
-        /// <summary> Initializes a new instance of TableProperties. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::Azure.Storage.Tables.Models.TableProperties
+        ///
+        /// </summary>
         /// <param name="tableName"> The name of the table to create. </param>
-        internal TableProperties(string tableName)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal TableProperties(string tableName, Dictionary<string, BinaryData> rawData)
         {
             TableName = tableName;
+            _rawData = rawData;
         }
 
         /// <summary> The name of the table to create. </summary>

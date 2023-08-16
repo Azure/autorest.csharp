@@ -59,7 +59,7 @@ namespace _Specs_.Azure.ClientGenerator.Core.Internal
 
             RequestContext context = FromCancellationToken(cancellationToken);
             Response response = await PublicOnlyAsync(name, context).ConfigureAwait(false);
-            return Response.FromValue(PublicModel.FromResponse(response), response);
+            return Response.FromValue((PublicModel)response, response);
         }
 
         /// <param name="name"> The String to use. </param>
@@ -72,7 +72,7 @@ namespace _Specs_.Azure.ClientGenerator.Core.Internal
 
             RequestContext context = FromCancellationToken(cancellationToken);
             Response response = PublicOnly(name, context);
-            return Response.FromValue(PublicModel.FromResponse(response), response);
+            return Response.FromValue((PublicModel)response, response);
         }
 
         /// <summary>
@@ -163,7 +163,7 @@ namespace _Specs_.Azure.ClientGenerator.Core.Internal
 
             RequestContext context = FromCancellationToken(cancellationToken);
             Response response = await InternalOnlyAsync(name, context).ConfigureAwait(false);
-            return Response.FromValue(InternalModel.FromResponse(response), response);
+            return Response.FromValue((InternalModel)response, response);
         }
 
         /// <param name="name"> The String to use. </param>
@@ -176,7 +176,7 @@ namespace _Specs_.Azure.ClientGenerator.Core.Internal
 
             RequestContext context = FromCancellationToken(cancellationToken);
             Response response = InternalOnly(name, context);
-            return Response.FromValue(InternalModel.FromResponse(response), response);
+            return Response.FromValue((InternalModel)response, response);
         }
 
         /// <summary>

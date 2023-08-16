@@ -14,12 +14,14 @@ using Azure.Core.Serialization;
 
 namespace ModelsTypeSpec.Models
 {
-    public partial class RoundTripPrimitiveModel : IUtf8JsonSerializable, IJsonModelSerializable
+    public partial class RoundTripPrimitiveModel : IUtf8JsonSerializable, IModelJsonSerializable<RoundTripPrimitiveModel>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModelSerializable)this).Serialize(writer, ModelSerializerOptions.AzureServiceDefault);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<RoundTripPrimitiveModel>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
 
-        void IJsonModelSerializable.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
+        void IModelJsonSerializable<RoundTripPrimitiveModel>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
+            ModelSerializerHelper.ValidateFormat<RoundTripPrimitiveModel>(this, options.Format);
+
             writer.WriteStartObject();
             writer.WritePropertyName("requiredString"u8);
             writer.WriteStringValue(RequiredString);
@@ -51,18 +53,25 @@ namespace ModelsTypeSpec.Models
                 writer.WriteNumberValue(item.Value);
             }
             writer.WriteEndArray();
+            if (_rawData is not null && options.Format == ModelSerializerFormat.Json)
+            {
+                foreach (var property in _rawData)
+                {
+                    writer.WritePropertyName(property.Key);
+#if NET6_0_OR_GREATER
+				writer.WriteRawValue(property.Value);
+#else
+                    JsonSerializer.Serialize(writer, JsonDocument.Parse(property.Value.ToString()).RootElement);
+#endif
+                }
+            }
             writer.WriteEndObject();
-        }
-
-        object IModelSerializable.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            using var doc = JsonDocument.Parse(data);
-            return DeserializeRoundTripPrimitiveModel(doc.RootElement, options);
         }
 
         internal static RoundTripPrimitiveModel DeserializeRoundTripPrimitiveModel(JsonElement element, ModelSerializerOptions options = default)
         {
-            options ??= ModelSerializerOptions.AzureServiceDefault;
+            options ??= ModelSerializerOptions.DefaultWireOptions;
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
@@ -77,6 +86,7 @@ namespace ModelsTypeSpec.Models
             DateTimeOffset requiredDateTimeOffset = default;
             TimeSpan requiredTimeSpan = default;
             IList<float?> requiredCollectionWithNullableFloatElement = default;
+            Dictionary<string, BinaryData> rawData = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("requiredString"u8))
@@ -141,30 +151,57 @@ namespace ModelsTypeSpec.Models
                     requiredCollectionWithNullableFloatElement = array;
                     continue;
                 }
+                if (options.Format == ModelSerializerFormat.Json)
+                {
+                    rawData.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
+                    continue;
+                }
             }
-            return new RoundTripPrimitiveModel(requiredString, requiredInt, requiredInt64, requiredSafeInt, requiredFloat, requiredDouble, requiredBoolean, requiredDateTimeOffset, requiredTimeSpan, requiredCollectionWithNullableFloatElement);
+            return new RoundTripPrimitiveModel(requiredString, requiredInt, requiredInt64, requiredSafeInt, requiredFloat, requiredDouble, requiredBoolean, requiredDateTimeOffset, requiredTimeSpan, requiredCollectionWithNullableFloatElement, rawData);
         }
 
-        object IJsonModelSerializable.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        RoundTripPrimitiveModel IModelJsonSerializable<RoundTripPrimitiveModel>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
         {
+            ModelSerializerHelper.ValidateFormat<RoundTripPrimitiveModel>(this, options.Format);
+
             using var doc = JsonDocument.ParseValue(ref reader);
             return DeserializeRoundTripPrimitiveModel(doc.RootElement, options);
         }
 
-        /// <summary> Deserializes the model from a raw response. </summary>
-        /// <param name="response"> The response to deserialize the model from. </param>
-        internal static new RoundTripPrimitiveModel FromResponse(Response response)
+        BinaryData IModelSerializable<RoundTripPrimitiveModel>.Serialize(ModelSerializerOptions options)
         {
-            using var document = JsonDocument.Parse(response.Content);
-            return DeserializeRoundTripPrimitiveModel(document.RootElement);
+            ModelSerializerHelper.ValidateFormat<RoundTripPrimitiveModel>(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
         }
 
-        /// <summary> Convert into a Utf8JsonRequestContent. </summary>
-        internal override RequestContent ToRequestContent()
+        RoundTripPrimitiveModel IModelSerializable<RoundTripPrimitiveModel>.Deserialize(BinaryData data, ModelSerializerOptions options)
         {
-            var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue(this);
-            return content;
+            ModelSerializerHelper.ValidateFormat<RoundTripPrimitiveModel>(this, options.Format);
+
+            using var doc = JsonDocument.Parse(data);
+            return DeserializeRoundTripPrimitiveModel(doc.RootElement, options);
+        }
+
+        public static implicit operator RequestContent(RoundTripPrimitiveModel model)
+        {
+            if (model is null)
+            {
+                return null;
+            }
+
+            return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
+        }
+
+        public static explicit operator RoundTripPrimitiveModel(Response response)
+        {
+            if (response is null)
+            {
+                return null;
+            }
+
+            using JsonDocument doc = JsonDocument.Parse(response.ContentStream);
+            return DeserializeRoundTripPrimitiveModel(doc.RootElement, ModelSerializerOptions.DefaultWireOptions);
         }
     }
 }

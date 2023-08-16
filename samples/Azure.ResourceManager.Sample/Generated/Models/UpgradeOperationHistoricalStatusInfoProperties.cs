@@ -5,6 +5,9 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
+
 namespace Azure.ResourceManager.Sample.Models
 {
     /// <summary>
@@ -13,12 +16,20 @@ namespace Azure.ResourceManager.Sample.Models
     /// </summary>
     public partial class UpgradeOperationHistoricalStatusInfoProperties
     {
-        /// <summary> Initializes a new instance of UpgradeOperationHistoricalStatusInfoProperties. </summary>
+        private Dictionary<string, BinaryData> _rawData;
+
+        /// <summary>
+        /// Initializes a new instance of global::Azure.ResourceManager.Sample.Models.UpgradeOperationHistoricalStatusInfoProperties
+        ///
+        /// </summary>
         internal UpgradeOperationHistoricalStatusInfoProperties()
         {
         }
 
-        /// <summary> Initializes a new instance of UpgradeOperationHistoricalStatusInfoProperties. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::Azure.ResourceManager.Sample.Models.UpgradeOperationHistoricalStatusInfoProperties
+        ///
+        /// </summary>
         /// <param name="runningStatus">
         /// Information about the overall status of the upgrade operation.
         /// Serialized Name: UpgradeOperationHistoricalStatusInfoProperties.runningStatus
@@ -43,7 +54,8 @@ namespace Azure.ResourceManager.Sample.Models
         /// Information about OS rollback if performed
         /// Serialized Name: UpgradeOperationHistoricalStatusInfoProperties.rollbackInfo
         /// </param>
-        internal UpgradeOperationHistoricalStatusInfoProperties(UpgradeOperationHistoryStatus runningStatus, RollingUpgradeProgressInfo progress, ApiError error, UpgradeOperationInvoker? startedBy, ImageReference targetImageReference, RollbackStatusInfo rollbackInfo)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal UpgradeOperationHistoricalStatusInfoProperties(UpgradeOperationHistoryStatus runningStatus, RollingUpgradeProgressInfo progress, ApiError error, UpgradeOperationInvoker? startedBy, ImageReference targetImageReference, RollbackStatusInfo rollbackInfo, Dictionary<string, BinaryData> rawData)
         {
             RunningStatus = runningStatus;
             Progress = progress;
@@ -51,6 +63,7 @@ namespace Azure.ResourceManager.Sample.Models
             StartedBy = startedBy;
             TargetImageReference = targetImageReference;
             RollbackInfo = rollbackInfo;
+            _rawData = rawData;
         }
 
         /// <summary>

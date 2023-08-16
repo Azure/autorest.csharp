@@ -6,18 +6,22 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
 using System.Text.Json;
+using Azure;
 using Azure.Core;
 using Azure.Core.Serialization;
 
 namespace MgmtExactMatchInheritance.Models
 {
-    public partial class ExactMatchModel3 : IUtf8JsonSerializable, IJsonModelSerializable
+    public partial class ExactMatchModel3 : IUtf8JsonSerializable, IModelJsonSerializable<ExactMatchModel3>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModelSerializable)this).Serialize(writer, ModelSerializerOptions.AzureServiceDefault);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<ExactMatchModel3>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
 
-        void IJsonModelSerializable.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
+        void IModelJsonSerializable<ExactMatchModel3>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
+            ModelSerializerHelper.ValidateFormat<ExactMatchModel3>(this, options.Format);
+
             writer.WriteStartObject();
             if (Optional.IsDefined(New))
             {
@@ -39,18 +43,25 @@ namespace MgmtExactMatchInheritance.Models
                 writer.WritePropertyName("bar"u8);
                 writer.WriteStringValue(Bar);
             }
+            if (_rawData is not null && options.Format == ModelSerializerFormat.Json)
+            {
+                foreach (var property in _rawData)
+                {
+                    writer.WritePropertyName(property.Key);
+#if NET6_0_OR_GREATER
+				writer.WriteRawValue(property.Value);
+#else
+                    JsonSerializer.Serialize(writer, JsonDocument.Parse(property.Value.ToString()).RootElement);
+#endif
+                }
+            }
             writer.WriteEndObject();
-        }
-
-        object IModelSerializable.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            using var doc = JsonDocument.Parse(data);
-            return DeserializeExactMatchModel3(doc.RootElement, options);
         }
 
         internal static ExactMatchModel3 DeserializeExactMatchModel3(JsonElement element, ModelSerializerOptions options = default)
         {
-            options ??= ModelSerializerOptions.AzureServiceDefault;
+            options ??= ModelSerializerOptions.DefaultWireOptions;
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
@@ -59,6 +70,7 @@ namespace MgmtExactMatchInheritance.Models
             Optional<ResourceIdentifier> id = default;
             Optional<string> name = default;
             Optional<string> bar = default;
+            Dictionary<string, BinaryData> rawData = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("new"u8))
@@ -85,14 +97,57 @@ namespace MgmtExactMatchInheritance.Models
                     bar = property.Value.GetString();
                     continue;
                 }
+                if (options.Format == ModelSerializerFormat.Json)
+                {
+                    rawData.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
+                    continue;
+                }
             }
-            return new ExactMatchModel3(id.Value, name.Value, bar.Value, @new.Value);
+            return new ExactMatchModel3(id.Value, name.Value, bar.Value, @new.Value, rawData);
         }
 
-        object IJsonModelSerializable.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        ExactMatchModel3 IModelJsonSerializable<ExactMatchModel3>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
         {
+            ModelSerializerHelper.ValidateFormat<ExactMatchModel3>(this, options.Format);
+
             using var doc = JsonDocument.ParseValue(ref reader);
             return DeserializeExactMatchModel3(doc.RootElement, options);
+        }
+
+        BinaryData IModelSerializable<ExactMatchModel3>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat<ExactMatchModel3>(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        ExactMatchModel3 IModelSerializable<ExactMatchModel3>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat<ExactMatchModel3>(this, options.Format);
+
+            using var doc = JsonDocument.Parse(data);
+            return DeserializeExactMatchModel3(doc.RootElement, options);
+        }
+
+        public static implicit operator RequestContent(ExactMatchModel3 model)
+        {
+            if (model is null)
+            {
+                return null;
+            }
+
+            return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
+        }
+
+        public static explicit operator ExactMatchModel3(Response response)
+        {
+            if (response is null)
+            {
+                return null;
+            }
+
+            using JsonDocument doc = JsonDocument.Parse(response.ContentStream);
+            return DeserializeExactMatchModel3(doc.RootElement, ModelSerializerOptions.DefaultWireOptions);
         }
     }
 }

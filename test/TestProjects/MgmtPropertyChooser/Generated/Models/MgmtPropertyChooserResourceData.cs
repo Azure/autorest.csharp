@@ -15,7 +15,12 @@ namespace MgmtPropertyChooser.Models
     /// <summary> The Resource model definition. </summary>
     public partial class MgmtPropertyChooserResourceData : ResourceData
     {
-        /// <summary> Initializes a new instance of MgmtPropertyChooserResourceData. </summary>
+        private Dictionary<string, BinaryData> _rawData;
+
+        /// <summary>
+        /// Initializes a new instance of global::MgmtPropertyChooser.Models.MgmtPropertyChooserResourceData
+        ///
+        /// </summary>
         /// <param name="location"> Resource location. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="location"/> is null. </exception>
         public MgmtPropertyChooserResourceData(string location)
@@ -26,17 +31,22 @@ namespace MgmtPropertyChooser.Models
             Tags = new ChangeTrackingDictionary<string, string>();
         }
 
-        /// <summary> Initializes a new instance of MgmtPropertyChooserResourceData. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::MgmtPropertyChooser.Models.MgmtPropertyChooserResourceData
+        ///
+        /// </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
         /// <param name="resourceType"> The resourceType. </param>
         /// <param name="systemData"> The systemData. </param>
         /// <param name="location"> Resource location. </param>
         /// <param name="tags"> Resource tags. </param>
-        internal MgmtPropertyChooserResourceData(ResourceIdentifier id, string name, ResourceType resourceType, SystemData systemData, string location, IDictionary<string, string> tags) : base(id, name, resourceType, systemData)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal MgmtPropertyChooserResourceData(ResourceIdentifier id, string name, ResourceType resourceType, SystemData systemData, string location, IDictionary<string, string> tags, Dictionary<string, BinaryData> rawData) : base(id, name, resourceType, systemData)
         {
             Location = location;
             Tags = tags;
+            _rawData = rawData;
         }
 
         /// <summary> Resource location. </summary>

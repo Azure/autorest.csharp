@@ -5,6 +5,9 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
+
 namespace Azure.ResourceManager.Sample.Models
 {
     /// <summary>
@@ -13,19 +16,29 @@ namespace Azure.ResourceManager.Sample.Models
     /// </summary>
     public partial class LogAnalytics
     {
-        /// <summary> Initializes a new instance of LogAnalytics. </summary>
+        private Dictionary<string, BinaryData> _rawData;
+
+        /// <summary>
+        /// Initializes a new instance of global::Azure.ResourceManager.Sample.Models.LogAnalytics
+        ///
+        /// </summary>
         internal LogAnalytics()
         {
         }
 
-        /// <summary> Initializes a new instance of LogAnalytics. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::Azure.ResourceManager.Sample.Models.LogAnalytics
+        ///
+        /// </summary>
         /// <param name="properties">
         /// LogAnalyticsOutput
         /// Serialized Name: LogAnalyticsOperationResult.properties
         /// </param>
-        internal LogAnalytics(LogAnalyticsOutput properties)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal LogAnalytics(LogAnalyticsOutput properties, Dictionary<string, BinaryData> rawData)
         {
             Properties = properties;
+            _rawData = rawData;
         }
 
         /// <summary>

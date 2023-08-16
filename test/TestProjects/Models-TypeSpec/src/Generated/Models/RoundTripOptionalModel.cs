@@ -15,6 +15,8 @@ namespace ModelsTypeSpec.Models
     [Obsolete("deprecated for test")]
     public partial class RoundTripOptionalModel
     {
+        private Dictionary<string, BinaryData> _rawData;
+
         /// <summary> Initializes a new instance of RoundTripOptionalModel. </summary>
         public RoundTripOptionalModel()
         {
@@ -43,7 +45,8 @@ namespace ModelsTypeSpec.Models
         /// <param name="optionalPlainDate"> Optional plainDate. </param>
         /// <param name="optionalPlainTime"> Optional plainTime. </param>
         /// <param name="optionalCollectionWithNullableIntElement"> Optional collection of which the element is a nullable int. </param>
-        internal RoundTripOptionalModel(string optionalString, int? optionalInt, IList<string> optionalStringList, IList<int> optionalIntList, IList<CollectionItem> optionalModelList, DerivedModel optionalModel, DerivedModelWithProperties optionalModelWithPropertiesOnBase, FixedStringEnum? optionalFixedStringEnum, ExtensibleEnum? optionalExtensibleEnum, IDictionary<string, int> optionalIntRecord, IDictionary<string, string> optionalStringRecord, IDictionary<string, RecordItem> optionalModelRecord, DateTimeOffset? optionalPlainDate, TimeSpan? optionalPlainTime, IList<int?> optionalCollectionWithNullableIntElement)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal RoundTripOptionalModel(string optionalString, int? optionalInt, IList<string> optionalStringList, IList<int> optionalIntList, IList<CollectionItem> optionalModelList, DerivedModel optionalModel, DerivedModelWithProperties optionalModelWithPropertiesOnBase, FixedStringEnum? optionalFixedStringEnum, ExtensibleEnum? optionalExtensibleEnum, IDictionary<string, int> optionalIntRecord, IDictionary<string, string> optionalStringRecord, IDictionary<string, RecordItem> optionalModelRecord, DateTimeOffset? optionalPlainDate, TimeSpan? optionalPlainTime, IList<int?> optionalCollectionWithNullableIntElement, Dictionary<string, BinaryData> rawData)
         {
             OptionalString = optionalString;
             OptionalInt = optionalInt;
@@ -60,6 +63,7 @@ namespace ModelsTypeSpec.Models
             OptionalPlainDate = optionalPlainDate;
             OptionalPlainTime = optionalPlainTime;
             OptionalCollectionWithNullableIntElement = optionalCollectionWithNullableIntElement;
+            _rawData = rawData;
         }
 
         /// <summary> Optional string, illustrating an optional reference type property. </summary>

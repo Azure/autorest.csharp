@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Collections.Generic;
 using Azure.Core;
 
@@ -13,7 +14,10 @@ namespace MgmtMockAndSample.Models
     /// <summary> Rule of type network. </summary>
     public partial class NetworkRule : FirewallPolicyRule
     {
-        /// <summary> Initializes a new instance of NetworkRule. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::MgmtMockAndSample.Models.NetworkRule
+        ///
+        /// </summary>
         public NetworkRule()
         {
             IpProtocols = new ChangeTrackingList<FirewallPolicyRuleNetworkProtocol>();
@@ -26,7 +30,10 @@ namespace MgmtMockAndSample.Models
             RuleType = FirewallPolicyRuleType.NetworkRule;
         }
 
-        /// <summary> Initializes a new instance of NetworkRule. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::MgmtMockAndSample.Models.NetworkRule
+        ///
+        /// </summary>
         /// <param name="name"> Name of the rule. </param>
         /// <param name="description"> Description of the rule. </param>
         /// <param name="ruleType"> Rule Type. </param>
@@ -37,7 +44,8 @@ namespace MgmtMockAndSample.Models
         /// <param name="sourceIpGroups"> List of source IpGroups for this rule. </param>
         /// <param name="destinationIpGroups"> List of destination IpGroups for this rule. </param>
         /// <param name="destinationFqdns"> List of destination FQDNs. </param>
-        internal NetworkRule(string name, string description, FirewallPolicyRuleType ruleType, IList<FirewallPolicyRuleNetworkProtocol> ipProtocols, IList<string> sourceAddresses, IList<string> destinationAddresses, IList<string> destinationPorts, IList<string> sourceIpGroups, IList<string> destinationIpGroups, IList<string> destinationFqdns) : base(name, description, ruleType)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal NetworkRule(string name, string description, FirewallPolicyRuleType ruleType, IList<FirewallPolicyRuleNetworkProtocol> ipProtocols, IList<string> sourceAddresses, IList<string> destinationAddresses, IList<string> destinationPorts, IList<string> sourceIpGroups, IList<string> destinationIpGroups, IList<string> destinationFqdns, Dictionary<string, BinaryData> rawData) : base(name, description, ruleType, rawData)
         {
             IpProtocols = ipProtocols;
             SourceAddresses = sourceAddresses;

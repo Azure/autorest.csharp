@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Collections.Generic;
 
 namespace body_complex.Models
@@ -12,18 +13,25 @@ namespace body_complex.Models
     /// <summary> The Siamese. </summary>
     public partial class Siamese : Cat
     {
-        /// <summary> Initializes a new instance of Siamese. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::body_complex.Models.Siamese
+        ///
+        /// </summary>
         public Siamese()
         {
         }
 
-        /// <summary> Initializes a new instance of Siamese. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::body_complex.Models.Siamese
+        ///
+        /// </summary>
         /// <param name="id"></param>
         /// <param name="name"></param>
         /// <param name="color"></param>
         /// <param name="hates"></param>
         /// <param name="breed"></param>
-        internal Siamese(int? id, string name, string color, IList<Dog> hates, string breed) : base(id, name, color, hates)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal Siamese(int? id, string name, string color, IList<Dog> hates, string breed, Dictionary<string, BinaryData> rawData) : base(id, name, color, hates, rawData)
         {
             Breed = breed;
         }

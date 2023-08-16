@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Collections.Generic;
 using Azure.Core;
 
@@ -13,17 +14,27 @@ namespace FlattenedParameters.Models
     /// <summary> The PathsPv53C7OperationnotnullPatchRequestbodyContentApplicationJsonSchema. </summary>
     internal partial class PathsPv53C7OperationnotnullPatchRequestbodyContentApplicationJsonSchema
     {
-        /// <summary> Initializes a new instance of PathsPv53C7OperationnotnullPatchRequestbodyContentApplicationJsonSchema. </summary>
+        private Dictionary<string, BinaryData> _rawData;
+
+        /// <summary>
+        /// Initializes a new instance of global::FlattenedParameters.Models.PathsPv53C7OperationnotnullPatchRequestbodyContentApplicationJsonSchema
+        ///
+        /// </summary>
         public PathsPv53C7OperationnotnullPatchRequestbodyContentApplicationJsonSchema()
         {
             Items = new ChangeTrackingList<string>();
         }
 
-        /// <summary> Initializes a new instance of PathsPv53C7OperationnotnullPatchRequestbodyContentApplicationJsonSchema. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::FlattenedParameters.Models.PathsPv53C7OperationnotnullPatchRequestbodyContentApplicationJsonSchema
+        ///
+        /// </summary>
         /// <param name="items"></param>
-        internal PathsPv53C7OperationnotnullPatchRequestbodyContentApplicationJsonSchema(IList<string> items)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal PathsPv53C7OperationnotnullPatchRequestbodyContentApplicationJsonSchema(IList<string> items, Dictionary<string, BinaryData> rawData)
         {
             Items = items;
+            _rawData = rawData;
         }
 
         /// <summary> Gets the items. </summary>

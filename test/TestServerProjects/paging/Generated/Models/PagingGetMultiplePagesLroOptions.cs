@@ -5,23 +5,36 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
+
 namespace paging.Models
 {
     /// <summary> Parameter group. </summary>
     public partial class PagingGetMultiplePagesLroOptions
     {
-        /// <summary> Initializes a new instance of PagingGetMultiplePagesLroOptions. </summary>
+        private Dictionary<string, BinaryData> _rawData;
+
+        /// <summary>
+        /// Initializes a new instance of global::paging.Models.PagingGetMultiplePagesLroOptions
+        ///
+        /// </summary>
         public PagingGetMultiplePagesLroOptions()
         {
         }
 
-        /// <summary> Initializes a new instance of PagingGetMultiplePagesLroOptions. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::paging.Models.PagingGetMultiplePagesLroOptions
+        ///
+        /// </summary>
         /// <param name="maxresults"> Sets the maximum number of items to return in the response. </param>
         /// <param name="timeout"> Sets the maximum time that the server can spend processing the request, in seconds. The default is 30 seconds. </param>
-        internal PagingGetMultiplePagesLroOptions(int? maxresults, int? timeout)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal PagingGetMultiplePagesLroOptions(int? maxresults, int? timeout, Dictionary<string, BinaryData> rawData)
         {
             Maxresults = maxresults;
             Timeout = timeout;
+            _rawData = rawData;
         }
 
         /// <summary> Sets the maximum number of items to return in the response. </summary>

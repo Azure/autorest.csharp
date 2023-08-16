@@ -17,7 +17,7 @@ namespace LroBasicTypeSpec.Models
         /// <returns> A new <see cref="Models.Project"/> instance for mocking. </returns>
         public static Project Project(string id = null, string description = null, string name = null)
         {
-            return new Project(id, description, name);
+            return new Project(id, description, name, default);
         }
     }
 }

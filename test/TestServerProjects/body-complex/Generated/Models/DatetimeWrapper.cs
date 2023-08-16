@@ -6,24 +6,35 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
 
 namespace body_complex.Models
 {
     /// <summary> The DatetimeWrapper. </summary>
     public partial class DatetimeWrapper
     {
-        /// <summary> Initializes a new instance of DatetimeWrapper. </summary>
+        private Dictionary<string, BinaryData> _rawData;
+
+        /// <summary>
+        /// Initializes a new instance of global::body_complex.Models.DatetimeWrapper
+        ///
+        /// </summary>
         public DatetimeWrapper()
         {
         }
 
-        /// <summary> Initializes a new instance of DatetimeWrapper. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::body_complex.Models.DatetimeWrapper
+        ///
+        /// </summary>
         /// <param name="field"></param>
         /// <param name="now"></param>
-        internal DatetimeWrapper(DateTimeOffset? field, DateTimeOffset? now)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal DatetimeWrapper(DateTimeOffset? field, DateTimeOffset? now, Dictionary<string, BinaryData> rawData)
         {
             Field = field;
             Now = now;
+            _rawData = rawData;
         }
 
         /// <summary> Gets or sets the field. </summary>

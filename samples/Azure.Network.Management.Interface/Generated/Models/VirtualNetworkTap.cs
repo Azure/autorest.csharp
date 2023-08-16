@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Collections.Generic;
 using Azure.Core;
 
@@ -13,13 +14,19 @@ namespace Azure.Network.Management.Interface.Models
     /// <summary> Virtual Network Tap resource. </summary>
     public partial class VirtualNetworkTap : Resource
     {
-        /// <summary> Initializes a new instance of VirtualNetworkTap. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::Azure.Network.Management.Interface.Models.VirtualNetworkTap
+        ///
+        /// </summary>
         public VirtualNetworkTap()
         {
             NetworkInterfaceTapConfigurations = new ChangeTrackingList<NetworkInterfaceTapConfiguration>();
         }
 
-        /// <summary> Initializes a new instance of VirtualNetworkTap. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::Azure.Network.Management.Interface.Models.VirtualNetworkTap
+        ///
+        /// </summary>
         /// <param name="id"> Resource ID. </param>
         /// <param name="name"> Resource name. </param>
         /// <param name="type"> Resource type. </param>
@@ -32,7 +39,8 @@ namespace Azure.Network.Management.Interface.Models
         /// <param name="destinationNetworkInterfaceIPConfiguration"> The reference to the private IP Address of the collector nic that will receive the tap. </param>
         /// <param name="destinationLoadBalancerFrontEndIPConfiguration"> The reference to the private IP address on the internal Load Balancer that will receive the tap. </param>
         /// <param name="destinationPort"> The VXLAN destination port that will receive the tapped traffic. </param>
-        internal VirtualNetworkTap(string id, string name, string type, string location, IDictionary<string, string> tags, string etag, IReadOnlyList<NetworkInterfaceTapConfiguration> networkInterfaceTapConfigurations, string resourceGuid, ProvisioningState? provisioningState, NetworkInterfaceIPConfiguration destinationNetworkInterfaceIPConfiguration, FrontendIPConfiguration destinationLoadBalancerFrontEndIPConfiguration, int? destinationPort) : base(id, name, type, location, tags)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal VirtualNetworkTap(string id, string name, string type, string location, IDictionary<string, string> tags, string etag, IReadOnlyList<NetworkInterfaceTapConfiguration> networkInterfaceTapConfigurations, string resourceGuid, ProvisioningState? provisioningState, NetworkInterfaceIPConfiguration destinationNetworkInterfaceIPConfiguration, FrontendIPConfiguration destinationLoadBalancerFrontEndIPConfiguration, int? destinationPort, Dictionary<string, BinaryData> rawData) : base(id, name, type, location, tags, rawData)
         {
             Etag = etag;
             NetworkInterfaceTapConfigurations = networkInterfaceTapConfigurations;

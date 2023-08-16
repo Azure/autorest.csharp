@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Collections.Generic;
 using Azure.Core;
 
@@ -13,19 +14,29 @@ namespace MgmtMockAndSample.Models
     /// <summary> Parameters for creating or updating a vault. </summary>
     public partial class VaultPatch
     {
-        /// <summary> Initializes a new instance of VaultPatch. </summary>
+        private Dictionary<string, BinaryData> _rawData;
+
+        /// <summary>
+        /// Initializes a new instance of global::MgmtMockAndSample.Models.VaultPatch
+        ///
+        /// </summary>
         public VaultPatch()
         {
             Tags = new ChangeTrackingDictionary<string, string>();
         }
 
-        /// <summary> Initializes a new instance of VaultPatch. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::MgmtMockAndSample.Models.VaultPatch
+        ///
+        /// </summary>
         /// <param name="tags"> The tags that will be assigned to the key vault. </param>
         /// <param name="properties"> Properties of the vault. </param>
-        internal VaultPatch(IDictionary<string, string> tags, VaultPatchProperties properties)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal VaultPatch(IDictionary<string, string> tags, VaultPatchProperties properties, Dictionary<string, BinaryData> rawData)
         {
             Tags = tags;
             Properties = properties;
+            _rawData = rawData;
         }
 
         /// <summary> The tags that will be assigned to the key vault. </summary>

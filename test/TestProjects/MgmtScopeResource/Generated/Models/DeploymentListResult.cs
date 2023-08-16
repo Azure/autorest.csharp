@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Collections.Generic;
 using Azure.Core;
 using MgmtScopeResource;
@@ -14,19 +15,29 @@ namespace MgmtScopeResource.Models
     /// <summary> List of deployments. </summary>
     internal partial class DeploymentListResult
     {
-        /// <summary> Initializes a new instance of DeploymentListResult. </summary>
+        private Dictionary<string, BinaryData> _rawData;
+
+        /// <summary>
+        /// Initializes a new instance of global::MgmtScopeResource.Models.DeploymentListResult
+        ///
+        /// </summary>
         internal DeploymentListResult()
         {
             Value = new ChangeTrackingList<DeploymentExtendedData>();
         }
 
-        /// <summary> Initializes a new instance of DeploymentListResult. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::MgmtScopeResource.Models.DeploymentListResult
+        ///
+        /// </summary>
         /// <param name="value"> An array of deployments. </param>
         /// <param name="nextLink"> The URL to use for getting the next set of results. </param>
-        internal DeploymentListResult(IReadOnlyList<DeploymentExtendedData> value, string nextLink)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal DeploymentListResult(IReadOnlyList<DeploymentExtendedData> value, string nextLink, Dictionary<string, BinaryData> rawData)
         {
             Value = value;
             NextLink = nextLink;
+            _rawData = rawData;
         }
 
         /// <summary> An array of deployments. </summary>

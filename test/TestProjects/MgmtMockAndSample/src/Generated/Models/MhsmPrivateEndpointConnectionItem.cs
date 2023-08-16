@@ -5,6 +5,8 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
 using Azure.Core;
 using Azure.ResourceManager.Resources.Models;
 
@@ -13,20 +15,30 @@ namespace MgmtMockAndSample.Models
     /// <summary> Private endpoint connection item. </summary>
     public partial class MhsmPrivateEndpointConnectionItem
     {
-        /// <summary> Initializes a new instance of MhsmPrivateEndpointConnectionItem. </summary>
+        private Dictionary<string, BinaryData> _rawData;
+
+        /// <summary>
+        /// Initializes a new instance of global::MgmtMockAndSample.Models.MhsmPrivateEndpointConnectionItem
+        ///
+        /// </summary>
         internal MhsmPrivateEndpointConnectionItem()
         {
         }
 
-        /// <summary> Initializes a new instance of MhsmPrivateEndpointConnectionItem. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::MgmtMockAndSample.Models.MhsmPrivateEndpointConnectionItem
+        ///
+        /// </summary>
         /// <param name="privateEndpoint"> Properties of the private endpoint object. </param>
         /// <param name="privateLinkServiceConnectionState"> Approval state of the private link connection. </param>
         /// <param name="provisioningState"> Provisioning state of the private endpoint connection. </param>
-        internal MhsmPrivateEndpointConnectionItem(Azure.ResourceManager.Resources.Models.SubResource privateEndpoint, MhsmPrivateLinkServiceConnectionState privateLinkServiceConnectionState, MgmtMockAndSamplePrivateEndpointConnectionProvisioningState? provisioningState)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal MhsmPrivateEndpointConnectionItem(Azure.ResourceManager.Resources.Models.SubResource privateEndpoint, MhsmPrivateLinkServiceConnectionState privateLinkServiceConnectionState, MgmtMockAndSamplePrivateEndpointConnectionProvisioningState? provisioningState, Dictionary<string, BinaryData> rawData)
         {
             PrivateEndpoint = privateEndpoint;
             PrivateLinkServiceConnectionState = privateLinkServiceConnectionState;
             ProvisioningState = provisioningState;
+            _rawData = rawData;
         }
 
         /// <summary> Properties of the private endpoint object. </summary>

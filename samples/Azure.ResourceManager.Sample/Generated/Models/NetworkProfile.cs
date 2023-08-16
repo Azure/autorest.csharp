@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Collections.Generic;
 using Azure.Core;
 
@@ -16,20 +17,30 @@ namespace Azure.ResourceManager.Sample.Models
     /// </summary>
     internal partial class NetworkProfile
     {
-        /// <summary> Initializes a new instance of NetworkProfile. </summary>
+        private Dictionary<string, BinaryData> _rawData;
+
+        /// <summary>
+        /// Initializes a new instance of global::Azure.ResourceManager.Sample.Models.NetworkProfile
+        ///
+        /// </summary>
         public NetworkProfile()
         {
             NetworkInterfaces = new ChangeTrackingList<NetworkInterfaceReference>();
         }
 
-        /// <summary> Initializes a new instance of NetworkProfile. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::Azure.ResourceManager.Sample.Models.NetworkProfile
+        ///
+        /// </summary>
         /// <param name="networkInterfaces">
         /// Specifies the list of resource Ids for the network interfaces associated with the virtual machine.
         /// Serialized Name: NetworkProfile.networkInterfaces
         /// </param>
-        internal NetworkProfile(IList<NetworkInterfaceReference> networkInterfaces)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal NetworkProfile(IList<NetworkInterfaceReference> networkInterfaces, Dictionary<string, BinaryData> rawData)
         {
             NetworkInterfaces = networkInterfaces;
+            _rawData = rawData;
         }
 
         /// <summary>

@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Collections.Generic;
 using Azure.Core;
 
@@ -13,7 +14,10 @@ namespace Azure.Network.Management.Interface.Models
     /// <summary> Private endpoint resource. </summary>
     public partial class PrivateEndpoint : Resource
     {
-        /// <summary> Initializes a new instance of PrivateEndpoint. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::Azure.Network.Management.Interface.Models.PrivateEndpoint
+        ///
+        /// </summary>
         public PrivateEndpoint()
         {
             NetworkInterfaces = new ChangeTrackingList<NetworkInterface>();
@@ -21,7 +25,10 @@ namespace Azure.Network.Management.Interface.Models
             ManualPrivateLinkServiceConnections = new ChangeTrackingList<PrivateLinkServiceConnection>();
         }
 
-        /// <summary> Initializes a new instance of PrivateEndpoint. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::Azure.Network.Management.Interface.Models.PrivateEndpoint
+        ///
+        /// </summary>
         /// <param name="id"> Resource ID. </param>
         /// <param name="name"> Resource name. </param>
         /// <param name="type"> Resource type. </param>
@@ -33,7 +40,8 @@ namespace Azure.Network.Management.Interface.Models
         /// <param name="provisioningState"> The provisioning state of the private endpoint resource. </param>
         /// <param name="privateLinkServiceConnections"> A grouping of information about the connection to the remote resource. </param>
         /// <param name="manualPrivateLinkServiceConnections"> A grouping of information about the connection to the remote resource. Used when the network admin does not have access to approve connections to the remote resource. </param>
-        internal PrivateEndpoint(string id, string name, string type, string location, IDictionary<string, string> tags, string etag, Subnet subnet, IReadOnlyList<NetworkInterface> networkInterfaces, ProvisioningState? provisioningState, IList<PrivateLinkServiceConnection> privateLinkServiceConnections, IList<PrivateLinkServiceConnection> manualPrivateLinkServiceConnections) : base(id, name, type, location, tags)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal PrivateEndpoint(string id, string name, string type, string location, IDictionary<string, string> tags, string etag, Subnet subnet, IReadOnlyList<NetworkInterface> networkInterfaces, ProvisioningState? provisioningState, IList<PrivateLinkServiceConnection> privateLinkServiceConnections, IList<PrivateLinkServiceConnection> manualPrivateLinkServiceConnections, Dictionary<string, BinaryData> rawData) : base(id, name, type, location, tags, rawData)
         {
             Etag = etag;
             Subnet = subnet;

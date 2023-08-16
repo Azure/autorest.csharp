@@ -16,7 +16,10 @@ namespace MgmtExactMatchFlattenInheritance.Models
     /// <summary> Model factory for models. </summary>
     public static partial class ArmMgmtExactMatchFlattenInheritanceModelFactory
     {
-        /// <summary> Initializes a new instance of AzureResourceFlattenModel1Data. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::MgmtExactMatchFlattenInheritance.AzureResourceFlattenModel1Data
+        ///
+        /// </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
         /// <param name="resourceType"> The resourceType. </param>
@@ -31,10 +34,13 @@ namespace MgmtExactMatchFlattenInheritance.Models
         {
             tags ??= new Dictionary<string, string>();
 
-            return new AzureResourceFlattenModel1Data(id, name, resourceType, systemData, tags, location, foo, fooPropertiesFoo, idPropertiesId);
+            return new AzureResourceFlattenModel1Data(id, name, resourceType, systemData, tags, location, foo, fooPropertiesFoo, idPropertiesId, default);
         }
 
-        /// <summary> Initializes a new instance of AzureResourceFlattenModel2. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::MgmtExactMatchFlattenInheritance.Models.AzureResourceFlattenModel2
+        ///
+        /// </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
         /// <param name="resourceType"> The resourceType. </param>
@@ -47,10 +53,13 @@ namespace MgmtExactMatchFlattenInheritance.Models
         {
             tags ??= new Dictionary<string, string>();
 
-            return new AzureResourceFlattenModel2(id, name, resourceType, systemData, tags, location, foo);
+            return new AzureResourceFlattenModel2(id, name, resourceType, systemData, tags, location, foo, default);
         }
 
-        /// <summary> Initializes a new instance of AzureResourceFlattenModel3. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::MgmtExactMatchFlattenInheritance.Models.AzureResourceFlattenModel3
+        ///
+        /// </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
         /// <param name="resourceType"> The resourceType. </param>
@@ -63,10 +72,13 @@ namespace MgmtExactMatchFlattenInheritance.Models
         {
             tags ??= new Dictionary<string, string>();
 
-            return new AzureResourceFlattenModel3(id, name, resourceType, systemData, tags, location, foo);
+            return new AzureResourceFlattenModel3(id, name, resourceType, systemData, tags, location, foo, default);
         }
 
-        /// <summary> Initializes a new instance of AzureResourceFlattenModel5. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::MgmtExactMatchFlattenInheritance.Models.AzureResourceFlattenModel5
+        ///
+        /// </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
         /// <param name="resourceType"> The resourceType. </param>
@@ -75,10 +87,13 @@ namespace MgmtExactMatchFlattenInheritance.Models
         /// <returns> A new <see cref="Models.AzureResourceFlattenModel5"/> instance for mocking. </returns>
         public static AzureResourceFlattenModel5 AzureResourceFlattenModel5(ResourceIdentifier id = null, string name = null, ResourceType resourceType = default, SystemData systemData = null, int? foo = null)
         {
-            return new AzureResourceFlattenModel5(id, name, resourceType, systemData, foo);
+            return new AzureResourceFlattenModel5(id, name, resourceType, systemData, foo, default);
         }
 
-        /// <summary> Initializes a new instance of CustomModel2Data. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::MgmtExactMatchFlattenInheritance.CustomModel2Data
+        ///
+        /// </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
         /// <param name="resourceType"> The resourceType. </param>
@@ -87,7 +102,7 @@ namespace MgmtExactMatchFlattenInheritance.Models
         /// <returns> A new <see cref="MgmtExactMatchFlattenInheritance.CustomModel2Data"/> instance for mocking. </returns>
         public static CustomModel2Data CustomModel2Data(ResourceIdentifier id = null, string name = null, ResourceType resourceType = default, SystemData systemData = null, string foo = null)
         {
-            return new CustomModel2Data(id, name, resourceType, systemData, foo);
+            return new CustomModel2Data(id, name, resourceType, systemData, foo, default);
         }
     }
 }

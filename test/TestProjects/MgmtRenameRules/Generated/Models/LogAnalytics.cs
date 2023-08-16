@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
 using Azure.Core;
 
 namespace MgmtRenameRules.Models
@@ -16,12 +17,20 @@ namespace MgmtRenameRules.Models
     /// </summary>
     public partial class LogAnalytics
     {
-        /// <summary> Initializes a new instance of LogAnalytics. </summary>
+        private Dictionary<string, BinaryData> _rawData;
+
+        /// <summary>
+        /// Initializes a new instance of global::MgmtRenameRules.Models.LogAnalytics
+        ///
+        /// </summary>
         internal LogAnalytics()
         {
         }
 
-        /// <summary> Initializes a new instance of LogAnalytics. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::MgmtRenameRules.Models.LogAnalytics
+        ///
+        /// </summary>
         /// <param name="properties">
         /// LogAnalyticsOutput
         /// Serialized Name: LogAnalyticsOperationResult.properties
@@ -42,13 +51,15 @@ namespace MgmtRenameRules.Models
         /// Gets the workflow trigger callback URL base path.
         /// Serialized Name: LogAnalyticsOperationResult.basePath
         /// </param>
-        internal LogAnalytics(LogAnalyticsOutput properties, ContentType? contentType, BinaryData content, RequestMethod? requestMethod, Uri basePathUri)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal LogAnalytics(LogAnalyticsOutput properties, ContentType? contentType, BinaryData content, RequestMethod? requestMethod, Uri basePathUri, Dictionary<string, BinaryData> rawData)
         {
             Properties = properties;
             ContentType = contentType;
             Content = content;
             RequestMethod = requestMethod;
             BasePathUri = basePathUri;
+            _rawData = rawData;
         }
 
         /// <summary>

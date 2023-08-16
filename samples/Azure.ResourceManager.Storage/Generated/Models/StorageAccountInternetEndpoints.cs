@@ -5,27 +5,40 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
+
 namespace Azure.ResourceManager.Storage.Models
 {
     /// <summary> The URIs that are used to perform a retrieval of a public blob, file, web or dfs object via a internet routing endpoint. </summary>
     public partial class StorageAccountInternetEndpoints
     {
-        /// <summary> Initializes a new instance of StorageAccountInternetEndpoints. </summary>
+        private Dictionary<string, BinaryData> _rawData;
+
+        /// <summary>
+        /// Initializes a new instance of global::Azure.ResourceManager.Storage.Models.StorageAccountInternetEndpoints
+        ///
+        /// </summary>
         internal StorageAccountInternetEndpoints()
         {
         }
 
-        /// <summary> Initializes a new instance of StorageAccountInternetEndpoints. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::Azure.ResourceManager.Storage.Models.StorageAccountInternetEndpoints
+        ///
+        /// </summary>
         /// <param name="blob"> Gets the blob endpoint. </param>
         /// <param name="file"> Gets the file endpoint. </param>
         /// <param name="web"> Gets the web endpoint. </param>
         /// <param name="dfs"> Gets the dfs endpoint. </param>
-        internal StorageAccountInternetEndpoints(string blob, string file, string web, string dfs)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal StorageAccountInternetEndpoints(string blob, string file, string web, string dfs, Dictionary<string, BinaryData> rawData)
         {
             Blob = blob;
             File = file;
             Web = web;
             Dfs = dfs;
+            _rawData = rawData;
         }
 
         /// <summary> Gets the blob endpoint. </summary>

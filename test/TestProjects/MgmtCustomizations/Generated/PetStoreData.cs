@@ -5,6 +5,8 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
 using Azure.Core;
 using Azure.ResourceManager.Models;
 using MgmtCustomizations.Models;
@@ -17,20 +19,30 @@ namespace MgmtCustomizations
     /// </summary>
     public partial class PetStoreData : ResourceData
     {
-        /// <summary> Initializes a new instance of PetStoreData. </summary>
+        private Dictionary<string, BinaryData> _rawData;
+
+        /// <summary>
+        /// Initializes a new instance of global::MgmtCustomizations.PetStoreData
+        ///
+        /// </summary>
         public PetStoreData()
         {
         }
 
-        /// <summary> Initializes a new instance of PetStoreData. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::MgmtCustomizations.PetStoreData
+        ///
+        /// </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
         /// <param name="resourceType"> The resourceType. </param>
         /// <param name="systemData"> The systemData. </param>
         /// <param name="properties"> The properties. </param>
-        internal PetStoreData(ResourceIdentifier id, string name, ResourceType resourceType, SystemData systemData, PetStoreProperties properties) : base(id, name, resourceType, systemData)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal PetStoreData(ResourceIdentifier id, string name, ResourceType resourceType, SystemData systemData, PetStoreProperties properties, Dictionary<string, BinaryData> rawData) : base(id, name, resourceType, systemData)
         {
             Properties = properties;
+            _rawData = rawData;
         }
 
         /// <summary> The properties. </summary>

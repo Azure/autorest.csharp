@@ -5,21 +5,34 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
+
 namespace TypeSchemaMapping.Models
 {
     /// <summary> The ModelWithCustomUsageViaAttribute. </summary>
     public partial class ModelWithCustomUsageViaAttribute
     {
-        /// <summary> Initializes a new instance of ModelWithCustomUsageViaAttribute. </summary>
+        private Dictionary<string, BinaryData> _rawData;
+
+        /// <summary>
+        /// Initializes a new instance of global::TypeSchemaMapping.Models.ModelWithCustomUsageViaAttribute
+        ///
+        /// </summary>
         public ModelWithCustomUsageViaAttribute()
         {
         }
 
-        /// <summary> Initializes a new instance of ModelWithCustomUsageViaAttribute. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::TypeSchemaMapping.Models.ModelWithCustomUsageViaAttribute
+        ///
+        /// </summary>
         /// <param name="modelProperty"> . </param>
-        internal ModelWithCustomUsageViaAttribute(string modelProperty)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal ModelWithCustomUsageViaAttribute(string modelProperty, Dictionary<string, BinaryData> rawData)
         {
             ModelProperty = modelProperty;
+            _rawData = rawData;
         }
 
         /// <summary> . </summary>

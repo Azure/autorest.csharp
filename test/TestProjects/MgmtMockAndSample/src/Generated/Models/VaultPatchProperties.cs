@@ -14,13 +14,21 @@ namespace MgmtMockAndSample.Models
     /// <summary> Properties of the vault. </summary>
     public partial class VaultPatchProperties
     {
-        /// <summary> Initializes a new instance of VaultPatchProperties. </summary>
+        private Dictionary<string, BinaryData> _rawData;
+
+        /// <summary>
+        /// Initializes a new instance of global::MgmtMockAndSample.Models.VaultPatchProperties
+        ///
+        /// </summary>
         public VaultPatchProperties()
         {
             AccessPolicies = new ChangeTrackingList<AccessPolicyEntry>();
         }
 
-        /// <summary> Initializes a new instance of VaultPatchProperties. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::MgmtMockAndSample.Models.VaultPatchProperties
+        ///
+        /// </summary>
         /// <param name="tenantId"> The Azure Active Directory tenant ID that should be used for authenticating requests to the key vault. </param>
         /// <param name="sku"> SKU details. </param>
         /// <param name="accessPolicies"> An array of 0 to 16 identities that have access to the key vault. All identities in the array must use the same tenant ID as the key vault's tenant ID. </param>
@@ -34,7 +42,8 @@ namespace MgmtMockAndSample.Models
         /// <param name="enablePurgeProtection"> Property specifying whether protection against purge is enabled for this vault. Setting this property to true activates protection against purge for this vault and its content - only the Key Vault service may initiate a hard, irrecoverable deletion. The setting is effective only if soft delete is also enabled. Enabling this functionality is irreversible - that is, the property does not accept false as its value. </param>
         /// <param name="networkAcls"> A collection of rules governing the accessibility of the vault from specific network locations. </param>
         /// <param name="publicNetworkAccess"> Property to specify whether the vault will accept traffic from public internet. If set to 'disabled' all traffic except private endpoint traffic and that that originates from trusted services will be blocked. This will override the set firewall rules, meaning that even if the firewall rules are present we will not honor the rules. </param>
-        internal VaultPatchProperties(Guid? tenantId, MgmtMockAndSampleSku sku, IList<AccessPolicyEntry> accessPolicies, bool? enabledForDeployment, bool? enabledForDiskEncryption, bool? enabledForTemplateDeployment, bool? enableSoftDelete, bool? enableRbacAuthorization, int? softDeleteRetentionInDays, CreateMode? createMode, bool? enablePurgeProtection, NetworkRuleSet networkAcls, string publicNetworkAccess)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal VaultPatchProperties(Guid? tenantId, MgmtMockAndSampleSku sku, IList<AccessPolicyEntry> accessPolicies, bool? enabledForDeployment, bool? enabledForDiskEncryption, bool? enabledForTemplateDeployment, bool? enableSoftDelete, bool? enableRbacAuthorization, int? softDeleteRetentionInDays, CreateMode? createMode, bool? enablePurgeProtection, NetworkRuleSet networkAcls, string publicNetworkAccess, Dictionary<string, BinaryData> rawData)
         {
             TenantId = tenantId;
             Sku = sku;
@@ -49,6 +58,7 @@ namespace MgmtMockAndSample.Models
             EnablePurgeProtection = enablePurgeProtection;
             NetworkAcls = networkAcls;
             PublicNetworkAccess = publicNetworkAccess;
+            _rawData = rawData;
         }
 
         /// <summary> The Azure Active Directory tenant ID that should be used for authenticating requests to the key vault. </summary>

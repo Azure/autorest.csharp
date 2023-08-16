@@ -16,7 +16,12 @@ namespace MgmtListMethods.Models
     /// <summary> The List Availability Set operation response. </summary>
     internal partial class TenantParentWithNonResChListResult
     {
-        /// <summary> Initializes a new instance of TenantParentWithNonResChListResult. </summary>
+        private Dictionary<string, BinaryData> _rawData;
+
+        /// <summary>
+        /// Initializes a new instance of global::MgmtListMethods.Models.TenantParentWithNonResChListResult
+        ///
+        /// </summary>
         /// <param name="value"> The list of fakes. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="value"/> is null. </exception>
         internal TenantParentWithNonResChListResult(IEnumerable<TenantParentWithNonResChData> value)
@@ -26,13 +31,18 @@ namespace MgmtListMethods.Models
             Value = value.ToList();
         }
 
-        /// <summary> Initializes a new instance of TenantParentWithNonResChListResult. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::MgmtListMethods.Models.TenantParentWithNonResChListResult
+        ///
+        /// </summary>
         /// <param name="value"> The list of fakes. </param>
         /// <param name="nextLink"> The URI to fetch the next page of Fakes. Call ListNext() with this URI to fetch the next page of Fakes. </param>
-        internal TenantParentWithNonResChListResult(IReadOnlyList<TenantParentWithNonResChData> value, string nextLink)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal TenantParentWithNonResChListResult(IReadOnlyList<TenantParentWithNonResChData> value, string nextLink, Dictionary<string, BinaryData> rawData)
         {
             Value = value;
             NextLink = nextLink;
+            _rawData = rawData;
         }
 
         /// <summary> The list of fakes. </summary>

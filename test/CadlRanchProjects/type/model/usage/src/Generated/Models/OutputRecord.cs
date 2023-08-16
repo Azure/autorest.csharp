@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
 using Azure.Core;
 
 namespace _Type.Model.Usage.Models
@@ -13,6 +14,8 @@ namespace _Type.Model.Usage.Models
     /// <summary> Record used in operation return type. </summary>
     public partial class OutputRecord
     {
+        private Dictionary<string, BinaryData> _rawData;
+
         /// <summary> Initializes a new instance of OutputRecord. </summary>
         /// <param name="requiredProp"></param>
         /// <exception cref="ArgumentNullException"> <paramref name="requiredProp"/> is null. </exception>
@@ -21,6 +24,15 @@ namespace _Type.Model.Usage.Models
             Argument.AssertNotNull(requiredProp, nameof(requiredProp));
 
             RequiredProp = requiredProp;
+        }
+
+        /// <summary> Initializes a new instance of OutputRecord. </summary>
+        /// <param name="requiredProp"></param>
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal OutputRecord(string requiredProp, Dictionary<string, BinaryData> rawData)
+        {
+            RequiredProp = requiredProp;
+            _rawData = rawData;
         }
 
         /// <summary> Gets the required prop. </summary>

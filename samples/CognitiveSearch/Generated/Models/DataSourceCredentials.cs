@@ -5,21 +5,34 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
+
 namespace CognitiveSearch.Models
 {
     /// <summary> Represents credentials that can be used to connect to a datasource. </summary>
     public partial class DataSourceCredentials
     {
-        /// <summary> Initializes a new instance of DataSourceCredentials. </summary>
+        private Dictionary<string, BinaryData> _rawData;
+
+        /// <summary>
+        /// Initializes a new instance of global::CognitiveSearch.Models.DataSourceCredentials
+        ///
+        /// </summary>
         public DataSourceCredentials()
         {
         }
 
-        /// <summary> Initializes a new instance of DataSourceCredentials. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::CognitiveSearch.Models.DataSourceCredentials
+        ///
+        /// </summary>
         /// <param name="connectionString"> The connection string for the datasource. </param>
-        internal DataSourceCredentials(string connectionString)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal DataSourceCredentials(string connectionString, Dictionary<string, BinaryData> rawData)
         {
             ConnectionString = connectionString;
+            _rawData = rawData;
         }
 
         /// <summary> The connection string for the datasource. </summary>

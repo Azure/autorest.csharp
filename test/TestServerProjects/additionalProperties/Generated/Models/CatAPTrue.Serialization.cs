@@ -8,17 +8,20 @@
 using System;
 using System.Collections.Generic;
 using System.Text.Json;
+using Azure;
 using Azure.Core;
 using Azure.Core.Serialization;
 
 namespace additionalProperties.Models
 {
-    public partial class CatAPTrue : IUtf8JsonSerializable, IJsonModelSerializable
+    public partial class CatAPTrue : IUtf8JsonSerializable, IModelJsonSerializable<CatAPTrue>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModelSerializable)this).Serialize(writer, ModelSerializerOptions.AzureServiceDefault);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<CatAPTrue>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
 
-        void IJsonModelSerializable.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
+        void IModelJsonSerializable<CatAPTrue>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
+            ModelSerializerHelper.ValidateFormat<CatAPTrue>(this, options.Format);
+
             writer.WriteStartObject();
             if (Optional.IsDefined(Friendly))
             {
@@ -40,15 +43,10 @@ namespace additionalProperties.Models
             writer.WriteEndObject();
         }
 
-        object IModelSerializable.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            using var doc = JsonDocument.Parse(data);
-            return DeserializeCatAPTrue(doc.RootElement, options);
-        }
-
         internal static CatAPTrue DeserializeCatAPTrue(JsonElement element, ModelSerializerOptions options = default)
         {
-            options ??= ModelSerializerOptions.AzureServiceDefault;
+            options ??= ModelSerializerOptions.DefaultWireOptions;
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
@@ -95,10 +93,48 @@ namespace additionalProperties.Models
             return new CatAPTrue(id, name.Value, Optional.ToNullable(status), additionalProperties, Optional.ToNullable(friendly));
         }
 
-        object IJsonModelSerializable.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        CatAPTrue IModelJsonSerializable<CatAPTrue>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
         {
+            ModelSerializerHelper.ValidateFormat<CatAPTrue>(this, options.Format);
+
             using var doc = JsonDocument.ParseValue(ref reader);
             return DeserializeCatAPTrue(doc.RootElement, options);
+        }
+
+        BinaryData IModelSerializable<CatAPTrue>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat<CatAPTrue>(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        CatAPTrue IModelSerializable<CatAPTrue>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat<CatAPTrue>(this, options.Format);
+
+            using var doc = JsonDocument.Parse(data);
+            return DeserializeCatAPTrue(doc.RootElement, options);
+        }
+
+        public static implicit operator RequestContent(CatAPTrue model)
+        {
+            if (model is null)
+            {
+                return null;
+            }
+
+            return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
+        }
+
+        public static explicit operator CatAPTrue(Response response)
+        {
+            if (response is null)
+            {
+                return null;
+            }
+
+            using JsonDocument doc = JsonDocument.Parse(response.ContentStream);
+            return DeserializeCatAPTrue(doc.RootElement, ModelSerializerOptions.DefaultWireOptions);
         }
     }
 }

@@ -15,7 +15,12 @@ namespace ModelShapes.Models
     /// <summary> The OutputModel. </summary>
     public partial class OutputModel
     {
-        /// <summary> Initializes a new instance of OutputModel. </summary>
+        private Dictionary<string, BinaryData> _rawData;
+
+        /// <summary>
+        /// Initializes a new instance of global::ModelShapes.Models.OutputModel
+        ///
+        /// </summary>
         /// <param name="requiredString"></param>
         /// <param name="requiredInt"></param>
         /// <param name="requiredStringList"></param>
@@ -47,7 +52,10 @@ namespace ModelShapes.Models
             RequiredReadonlyInt = requiredReadonlyInt;
         }
 
-        /// <summary> Initializes a new instance of OutputModel. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::ModelShapes.Models.OutputModel
+        ///
+        /// </summary>
         /// <param name="requiredString"></param>
         /// <param name="requiredInt"></param>
         /// <param name="requiredStringList"></param>
@@ -66,7 +74,8 @@ namespace ModelShapes.Models
         /// <param name="nonRequiredNullableIntList"></param>
         /// <param name="requiredReadonlyInt"></param>
         /// <param name="nonRequiredReadonlyInt"></param>
-        internal OutputModel(string requiredString, int requiredInt, IReadOnlyList<string> requiredStringList, IReadOnlyList<int> requiredIntList, string nonRequiredString, int? nonRequiredInt, IReadOnlyList<string> nonRequiredStringList, IReadOnlyList<int> nonRequiredIntList, string requiredNullableString, int? requiredNullableInt, IReadOnlyList<string> requiredNullableStringList, IReadOnlyList<int> requiredNullableIntList, string nonRequiredNullableString, int? nonRequiredNullableInt, IReadOnlyList<string> nonRequiredNullableStringList, IReadOnlyList<int> nonRequiredNullableIntList, int requiredReadonlyInt, int? nonRequiredReadonlyInt)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal OutputModel(string requiredString, int requiredInt, IReadOnlyList<string> requiredStringList, IReadOnlyList<int> requiredIntList, string nonRequiredString, int? nonRequiredInt, IReadOnlyList<string> nonRequiredStringList, IReadOnlyList<int> nonRequiredIntList, string requiredNullableString, int? requiredNullableInt, IReadOnlyList<string> requiredNullableStringList, IReadOnlyList<int> requiredNullableIntList, string nonRequiredNullableString, int? nonRequiredNullableInt, IReadOnlyList<string> nonRequiredNullableStringList, IReadOnlyList<int> nonRequiredNullableIntList, int requiredReadonlyInt, int? nonRequiredReadonlyInt, Dictionary<string, BinaryData> rawData)
         {
             RequiredString = requiredString;
             RequiredInt = requiredInt;
@@ -86,6 +95,7 @@ namespace ModelShapes.Models
             NonRequiredNullableIntList = nonRequiredNullableIntList;
             RequiredReadonlyInt = requiredReadonlyInt;
             NonRequiredReadonlyInt = nonRequiredReadonlyInt;
+            _rawData = rawData;
         }
 
         /// <summary> Gets the required string. </summary>

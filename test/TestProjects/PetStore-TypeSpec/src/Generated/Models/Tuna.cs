@@ -5,6 +5,9 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
+
 namespace PetStore.Models
 {
     /// <summary> Tuna is a fish. </summary>
@@ -23,7 +26,8 @@ namespace PetStore.Models
         /// <param name="kind"> Discriminator. </param>
         /// <param name="size"> The size of the fish. </param>
         /// <param name="fat"> The amount of fat of the tuna. </param>
-        internal Tuna(string kind, int size, int fat) : base(kind, size)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal Tuna(string kind, int size, int fat, Dictionary<string, BinaryData> rawData) : base(kind, size, rawData)
         {
             Fat = fat;
         }

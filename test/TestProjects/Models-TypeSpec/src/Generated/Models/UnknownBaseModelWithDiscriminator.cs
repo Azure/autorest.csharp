@@ -5,6 +5,9 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
+
 namespace ModelsTypeSpec.Models
 {
     /// <summary> Unknown version of BaseModelWithDiscriminator. </summary>
@@ -20,7 +23,8 @@ namespace ModelsTypeSpec.Models
         /// <param name="discriminatorProperty"> Discriminator. </param>
         /// <param name="optionalPropertyOnBase"> Optional property on base. </param>
         /// <param name="requiredPropertyOnBase"> Required property on base. </param>
-        internal UnknownBaseModelWithDiscriminator(string discriminatorProperty, string optionalPropertyOnBase, int requiredPropertyOnBase) : base(discriminatorProperty, optionalPropertyOnBase, requiredPropertyOnBase)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal UnknownBaseModelWithDiscriminator(string discriminatorProperty, string optionalPropertyOnBase, int requiredPropertyOnBase, Dictionary<string, BinaryData> rawData) : base(discriminatorProperty, optionalPropertyOnBase, requiredPropertyOnBase, rawData)
         {
         }
     }

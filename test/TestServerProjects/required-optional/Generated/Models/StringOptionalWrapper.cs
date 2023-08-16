@@ -5,21 +5,34 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
+
 namespace required_optional.Models
 {
     /// <summary> The StringOptionalWrapper. </summary>
     public partial class StringOptionalWrapper
     {
-        /// <summary> Initializes a new instance of StringOptionalWrapper. </summary>
+        private Dictionary<string, BinaryData> _rawData;
+
+        /// <summary>
+        /// Initializes a new instance of global::required_optional.Models.StringOptionalWrapper
+        ///
+        /// </summary>
         public StringOptionalWrapper()
         {
         }
 
-        /// <summary> Initializes a new instance of StringOptionalWrapper. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::required_optional.Models.StringOptionalWrapper
+        ///
+        /// </summary>
         /// <param name="value"></param>
-        internal StringOptionalWrapper(string value)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal StringOptionalWrapper(string value, Dictionary<string, BinaryData> rawData)
         {
             Value = value;
+            _rawData = rawData;
         }
 
         /// <summary> Gets or sets the value. </summary>

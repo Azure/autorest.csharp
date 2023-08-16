@@ -5,25 +5,38 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
+
 namespace model_flattening.Models
 {
     /// <summary> The Error. </summary>
     internal partial class Error
     {
-        /// <summary> Initializes a new instance of Error. </summary>
+        private Dictionary<string, BinaryData> _rawData;
+
+        /// <summary>
+        /// Initializes a new instance of global::model_flattening.Models.Error
+        ///
+        /// </summary>
         internal Error()
         {
         }
 
-        /// <summary> Initializes a new instance of Error. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::model_flattening.Models.Error
+        ///
+        /// </summary>
         /// <param name="status"></param>
         /// <param name="message"></param>
         /// <param name="parentError"></param>
-        internal Error(int? status, string message, Error parentError)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal Error(int? status, string message, Error parentError, Dictionary<string, BinaryData> rawData)
         {
             Status = status;
             Message = message;
             ParentError = parentError;
+            _rawData = rawData;
         }
 
         /// <summary> Gets the status. </summary>

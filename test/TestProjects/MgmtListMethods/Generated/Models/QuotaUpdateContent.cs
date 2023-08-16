@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Collections.Generic;
 using Azure.Core;
 
@@ -13,19 +14,29 @@ namespace MgmtListMethods.Models
     /// <summary> Quota update parameters. </summary>
     public partial class QuotaUpdateContent
     {
-        /// <summary> Initializes a new instance of QuotaUpdateContent. </summary>
+        private Dictionary<string, BinaryData> _rawData;
+
+        /// <summary>
+        /// Initializes a new instance of global::MgmtListMethods.Models.QuotaUpdateContent
+        ///
+        /// </summary>
         public QuotaUpdateContent()
         {
             Value = new ChangeTrackingList<QuotaBaseProperties>();
         }
 
-        /// <summary> Initializes a new instance of QuotaUpdateContent. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::MgmtListMethods.Models.QuotaUpdateContent
+        ///
+        /// </summary>
         /// <param name="value"> The list for update quota. </param>
         /// <param name="location"> Region of workspace quota to be updated. </param>
-        internal QuotaUpdateContent(IList<QuotaBaseProperties> value, string location)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal QuotaUpdateContent(IList<QuotaBaseProperties> value, string location, Dictionary<string, BinaryData> rawData)
         {
             Value = value;
             Location = location;
+            _rawData = rawData;
         }
 
         /// <summary> The list for update quota. </summary>

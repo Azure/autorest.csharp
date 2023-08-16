@@ -15,7 +15,12 @@ namespace CognitiveSearch.Models
     /// <summary> Represents the current status and execution history of an indexer. </summary>
     public partial class IndexerExecutionInfo
     {
-        /// <summary> Initializes a new instance of IndexerExecutionInfo. </summary>
+        private Dictionary<string, BinaryData> _rawData;
+
+        /// <summary>
+        /// Initializes a new instance of global::CognitiveSearch.Models.IndexerExecutionInfo
+        ///
+        /// </summary>
         /// <param name="status"> Overall indexer status. </param>
         /// <param name="executionHistory"> History of the recent indexer executions, sorted in reverse chronological order. </param>
         /// <param name="limits"> The execution limits for the indexer. </param>
@@ -30,17 +35,22 @@ namespace CognitiveSearch.Models
             Limits = limits;
         }
 
-        /// <summary> Initializes a new instance of IndexerExecutionInfo. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::CognitiveSearch.Models.IndexerExecutionInfo
+        ///
+        /// </summary>
         /// <param name="status"> Overall indexer status. </param>
         /// <param name="lastResult"> The result of the most recent or an in-progress indexer execution. </param>
         /// <param name="executionHistory"> History of the recent indexer executions, sorted in reverse chronological order. </param>
         /// <param name="limits"> The execution limits for the indexer. </param>
-        internal IndexerExecutionInfo(IndexerStatus status, IndexerExecutionResult lastResult, IReadOnlyList<IndexerExecutionResult> executionHistory, IndexerLimits limits)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal IndexerExecutionInfo(IndexerStatus status, IndexerExecutionResult lastResult, IReadOnlyList<IndexerExecutionResult> executionHistory, IndexerLimits limits, Dictionary<string, BinaryData> rawData)
         {
             Status = status;
             LastResult = lastResult;
             ExecutionHistory = executionHistory;
             Limits = limits;
+            _rawData = rawData;
         }
 
         /// <summary> Overall indexer status. </summary>

@@ -18,7 +18,10 @@ namespace Azure.ResourceManager.Sample.Models
     /// </summary>
     public partial class VirtualMachineScaleSetNetworkConfiguration : SubResource
     {
-        /// <summary> Initializes a new instance of VirtualMachineScaleSetNetworkConfiguration. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::Azure.ResourceManager.Sample.Models.VirtualMachineScaleSetNetworkConfiguration
+        ///
+        /// </summary>
         /// <param name="name">
         /// The network configuration name.
         /// Serialized Name: VirtualMachineScaleSetNetworkConfiguration.name
@@ -32,7 +35,10 @@ namespace Azure.ResourceManager.Sample.Models
             IpConfigurations = new ChangeTrackingList<VirtualMachineScaleSetIPConfiguration>();
         }
 
-        /// <summary> Initializes a new instance of VirtualMachineScaleSetNetworkConfiguration. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::Azure.ResourceManager.Sample.Models.VirtualMachineScaleSetNetworkConfiguration
+        ///
+        /// </summary>
         /// <param name="id">
         /// Resource Id
         /// Serialized Name: SubResource.id
@@ -65,7 +71,8 @@ namespace Azure.ResourceManager.Sample.Models
         /// Whether IP forwarding enabled on this NIC.
         /// Serialized Name: VirtualMachineScaleSetNetworkConfiguration.properties.enableIPForwarding
         /// </param>
-        internal VirtualMachineScaleSetNetworkConfiguration(string id, string name, bool? primary, bool? enableAcceleratedNetworking, WritableSubResource networkSecurityGroup, VirtualMachineScaleSetNetworkConfigurationDnsSettings dnsSettings, IList<VirtualMachineScaleSetIPConfiguration> ipConfigurations, bool? enableIPForwarding) : base(id)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal VirtualMachineScaleSetNetworkConfiguration(string id, string name, bool? primary, bool? enableAcceleratedNetworking, WritableSubResource networkSecurityGroup, VirtualMachineScaleSetNetworkConfigurationDnsSettings dnsSettings, IList<VirtualMachineScaleSetIPConfiguration> ipConfigurations, bool? enableIPForwarding, Dictionary<string, BinaryData> rawData) : base(id, rawData)
         {
             Name = name;
             Primary = primary;

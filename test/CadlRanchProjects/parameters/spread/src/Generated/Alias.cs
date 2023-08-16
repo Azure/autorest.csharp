@@ -57,7 +57,7 @@ namespace Parameters.Spread
 
             RequestContext context = FromCancellationToken(cancellationToken);
             SpreadAsRequestBodyRequest spreadAsRequestBodyRequest = new SpreadAsRequestBodyRequest(name);
-            Response response = await SpreadAsRequestBodyAsync(spreadAsRequestBodyRequest.ToRequestContent(), context).ConfigureAwait(false);
+            Response response = await SpreadAsRequestBodyAsync(spreadAsRequestBodyRequest, context).ConfigureAwait(false);
             return response;
         }
 
@@ -71,7 +71,7 @@ namespace Parameters.Spread
 
             RequestContext context = FromCancellationToken(cancellationToken);
             SpreadAsRequestBodyRequest spreadAsRequestBodyRequest = new SpreadAsRequestBodyRequest(name);
-            Response response = SpreadAsRequestBody(spreadAsRequestBodyRequest.ToRequestContent(), context);
+            Response response = SpreadAsRequestBody(spreadAsRequestBodyRequest, context);
             return response;
         }
 
@@ -168,7 +168,7 @@ namespace Parameters.Spread
 
             RequestContext context = FromCancellationToken(cancellationToken);
             SpreadAsRequestParameterRequest spreadAsRequestParameterRequest = new SpreadAsRequestParameterRequest(name);
-            Response response = await SpreadAsRequestParameterAsync(id, xMsTestHeader, spreadAsRequestParameterRequest.ToRequestContent(), context).ConfigureAwait(false);
+            Response response = await SpreadAsRequestParameterAsync(id, xMsTestHeader, spreadAsRequestParameterRequest, context).ConfigureAwait(false);
             return response;
         }
 
@@ -187,7 +187,7 @@ namespace Parameters.Spread
 
             RequestContext context = FromCancellationToken(cancellationToken);
             SpreadAsRequestParameterRequest spreadAsRequestParameterRequest = new SpreadAsRequestParameterRequest(name);
-            Response response = SpreadAsRequestParameter(id, xMsTestHeader, spreadAsRequestParameterRequest.ToRequestContent(), context);
+            Response response = SpreadAsRequestParameter(id, xMsTestHeader, spreadAsRequestParameterRequest, context);
             return response;
         }
 
@@ -304,7 +304,7 @@ namespace Parameters.Spread
 
             RequestContext context = FromCancellationToken(cancellationToken);
             SpreadWithMultipleParametersRequest spreadWithMultipleParametersRequest = new SpreadWithMultipleParametersRequest(prop1, prop2, prop3, prop4, prop5, prop6);
-            Response response = await SpreadWithMultipleParametersAsync(id, xMsTestHeader, spreadWithMultipleParametersRequest.ToRequestContent(), context).ConfigureAwait(false);
+            Response response = await SpreadWithMultipleParametersAsync(id, xMsTestHeader, spreadWithMultipleParametersRequest, context).ConfigureAwait(false);
             return response;
         }
 
@@ -333,7 +333,7 @@ namespace Parameters.Spread
 
             RequestContext context = FromCancellationToken(cancellationToken);
             SpreadWithMultipleParametersRequest spreadWithMultipleParametersRequest = new SpreadWithMultipleParametersRequest(prop1, prop2, prop3, prop4, prop5, prop6);
-            Response response = SpreadWithMultipleParameters(id, xMsTestHeader, spreadWithMultipleParametersRequest.ToRequestContent(), context);
+            Response response = SpreadWithMultipleParameters(id, xMsTestHeader, spreadWithMultipleParametersRequest, context);
             return response;
         }
 

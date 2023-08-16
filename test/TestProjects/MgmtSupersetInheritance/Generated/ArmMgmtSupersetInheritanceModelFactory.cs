@@ -17,7 +17,10 @@ namespace MgmtSupersetInheritance.Models
     /// <summary> Model factory for models. </summary>
     public static partial class ArmMgmtSupersetInheritanceModelFactory
     {
-        /// <summary> Initializes a new instance of SupersetModel1Data. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::MgmtSupersetInheritance.SupersetModel1Data
+        ///
+        /// </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
         /// <param name="resourceType"> The resourceType. </param>
@@ -26,10 +29,13 @@ namespace MgmtSupersetInheritance.Models
         /// <returns> A new <see cref="MgmtSupersetInheritance.SupersetModel1Data"/> instance for mocking. </returns>
         public static SupersetModel1Data SupersetModel1Data(ResourceIdentifier id = null, string name = null, ResourceType resourceType = default, SystemData systemData = null, string @new = null)
         {
-            return new SupersetModel1Data(id, name, resourceType, systemData, @new);
+            return new SupersetModel1Data(id, name, resourceType, systemData, @new, default);
         }
 
-        /// <summary> Initializes a new instance of SupersetModel4Data. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::MgmtSupersetInheritance.SupersetModel4Data
+        ///
+        /// </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
         /// <param name="resourceType"> The resourceType. </param>
@@ -42,10 +48,13 @@ namespace MgmtSupersetInheritance.Models
         {
             tags ??= new Dictionary<string, string>();
 
-            return new SupersetModel4Data(id, name, resourceType, systemData, tags, location, @new);
+            return new SupersetModel4Data(id, name, resourceType, systemData, tags, location, @new, default);
         }
 
-        /// <summary> Initializes a new instance of SupersetModel6Data. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::MgmtSupersetInheritance.SupersetModel6Data
+        ///
+        /// </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
         /// <param name="resourceType"> The resourceType. </param>
@@ -54,10 +63,13 @@ namespace MgmtSupersetInheritance.Models
         /// <returns> A new <see cref="MgmtSupersetInheritance.SupersetModel6Data"/> instance for mocking. </returns>
         public static SupersetModel6Data SupersetModel6Data(ResourceIdentifier id = null, string name = null, ResourceType resourceType = default, SystemData systemData = null, string @new = null)
         {
-            return new SupersetModel6Data(id, name, resourceType, systemData, @new);
+            return new SupersetModel6Data(id, name, resourceType, systemData, @new, default);
         }
 
-        /// <summary> Initializes a new instance of SupersetModel7Data. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::MgmtSupersetInheritance.SupersetModel7Data
+        ///
+        /// </summary>
         /// <param name="id"></param>
         /// <param name="name"></param>
         /// <param name="resourceType"></param>
@@ -66,20 +78,26 @@ namespace MgmtSupersetInheritance.Models
         /// <returns> A new <see cref="MgmtSupersetInheritance.SupersetModel7Data"/> instance for mocking. </returns>
         public static SupersetModel7Data SupersetModel7Data(string id = null, string name = null, string resourceType = null, string @new = null, SupersetModel7SystemData systemData = null)
         {
-            return new SupersetModel7Data(id, name, resourceType, @new, systemData);
+            return new SupersetModel7Data(id, name, resourceType, @new, systemData, default);
         }
 
-        /// <summary> Initializes a new instance of SupersetModel7SystemData. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::MgmtSupersetInheritance.Models.SupersetModel7SystemData
+        ///
+        /// </summary>
         /// <param name="createdBy"> The identity that created the resource. </param>
         /// <param name="createdOn"> The timestamp of resource creation (UTC). </param>
         /// <param name="lastModifiedBy"> The identity that last modified the resource. </param>
         /// <returns> A new <see cref="Models.SupersetModel7SystemData"/> instance for mocking. </returns>
         public static SupersetModel7SystemData SupersetModel7SystemData(string createdBy = null, DateTimeOffset? createdOn = null, string lastModifiedBy = null)
         {
-            return new SupersetModel7SystemData(createdBy, createdOn, lastModifiedBy);
+            return new SupersetModel7SystemData(createdBy, createdOn, lastModifiedBy, default);
         }
 
-        /// <summary> Initializes a new instance of SupersetModel5. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::MgmtSupersetInheritance.Models.SupersetModel5
+        ///
+        /// </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
         /// <param name="resourceType"> The resourceType. </param>
@@ -93,7 +111,7 @@ namespace MgmtSupersetInheritance.Models
         {
             tags ??= new Dictionary<string, string>();
 
-            return new SupersetModel5(id, name, resourceType, systemData, tags, location, foo, @new);
+            return new SupersetModel5(id, name, resourceType, systemData, tags, location, foo, @new, default);
         }
     }
 }

@@ -5,23 +5,36 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
+
 namespace xml_service.Models
 {
     /// <summary> I am root, and I ref a model with no meta. </summary>
     public partial class RootWithRefAndNoMeta
     {
-        /// <summary> Initializes a new instance of RootWithRefAndNoMeta. </summary>
+        private Dictionary<string, BinaryData> _rawData;
+
+        /// <summary>
+        /// Initializes a new instance of global::xml_service.Models.RootWithRefAndNoMeta
+        ///
+        /// </summary>
         public RootWithRefAndNoMeta()
         {
         }
 
-        /// <summary> Initializes a new instance of RootWithRefAndNoMeta. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::xml_service.Models.RootWithRefAndNoMeta
+        ///
+        /// </summary>
         /// <param name="refToModel"> XML will use RefToModel. </param>
         /// <param name="something"> Something else (just to avoid flattening). </param>
-        internal RootWithRefAndNoMeta(ComplexTypeNoMeta refToModel, string something)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal RootWithRefAndNoMeta(ComplexTypeNoMeta refToModel, string something, Dictionary<string, BinaryData> rawData)
         {
             RefToModel = refToModel;
             Something = something;
+            _rawData = rawData;
         }
 
         /// <summary> XML will use RefToModel. </summary>

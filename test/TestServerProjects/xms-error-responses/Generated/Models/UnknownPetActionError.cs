@@ -5,16 +5,23 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
+
 namespace xms_error_responses.Models
 {
     /// <summary> The UnknownPetActionError. </summary>
     internal partial class UnknownPetActionError : PetActionError
     {
-        /// <summary> Initializes a new instance of UnknownPetActionError. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::xms_error_responses.Models.UnknownPetActionError
+        ///
+        /// </summary>
         /// <param name="actionResponse"> action feedback. </param>
         /// <param name="errorType"></param>
         /// <param name="errorMessage"> the error message. </param>
-        internal UnknownPetActionError(string actionResponse, string errorType, string errorMessage) : base(actionResponse, errorType, errorMessage)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal UnknownPetActionError(string actionResponse, string errorType, string errorMessage, Dictionary<string, BinaryData> rawData) : base(actionResponse, errorType, errorMessage, rawData)
         {
             ErrorType = errorType ?? "Unknown";
         }

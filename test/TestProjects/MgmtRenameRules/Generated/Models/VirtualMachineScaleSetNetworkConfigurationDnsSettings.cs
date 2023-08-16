@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Collections.Generic;
 using Azure.Core;
 
@@ -16,20 +17,30 @@ namespace MgmtRenameRules.Models
     /// </summary>
     internal partial class VirtualMachineScaleSetNetworkConfigurationDnsSettings
     {
-        /// <summary> Initializes a new instance of VirtualMachineScaleSetNetworkConfigurationDnsSettings. </summary>
+        private Dictionary<string, BinaryData> _rawData;
+
+        /// <summary>
+        /// Initializes a new instance of global::MgmtRenameRules.Models.VirtualMachineScaleSetNetworkConfigurationDnsSettings
+        ///
+        /// </summary>
         public VirtualMachineScaleSetNetworkConfigurationDnsSettings()
         {
             DnsServers = new ChangeTrackingList<string>();
         }
 
-        /// <summary> Initializes a new instance of VirtualMachineScaleSetNetworkConfigurationDnsSettings. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::MgmtRenameRules.Models.VirtualMachineScaleSetNetworkConfigurationDnsSettings
+        ///
+        /// </summary>
         /// <param name="dnsServers">
         /// List of DNS servers IP addresses
         /// Serialized Name: VirtualMachineScaleSetNetworkConfigurationDnsSettings.dnsServers
         /// </param>
-        internal VirtualMachineScaleSetNetworkConfigurationDnsSettings(IList<string> dnsServers)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal VirtualMachineScaleSetNetworkConfigurationDnsSettings(IList<string> dnsServers, Dictionary<string, BinaryData> rawData)
         {
             DnsServers = dnsServers;
+            _rawData = rawData;
         }
 
         /// <summary>

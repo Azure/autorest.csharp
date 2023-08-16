@@ -6,17 +6,29 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
 
 namespace Encode.Datetime.Models
 {
     /// <summary> The DefaultDatetimeProperty. </summary>
     public partial class DefaultDatetimeProperty
     {
+        private Dictionary<string, BinaryData> _rawData;
+
         /// <summary> Initializes a new instance of DefaultDatetimeProperty. </summary>
         /// <param name="value"></param>
         public DefaultDatetimeProperty(DateTimeOffset value)
         {
             Value = value;
+        }
+
+        /// <summary> Initializes a new instance of DefaultDatetimeProperty. </summary>
+        /// <param name="value"></param>
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal DefaultDatetimeProperty(DateTimeOffset value, Dictionary<string, BinaryData> rawData)
+        {
+            Value = value;
+            _rawData = rawData;
         }
 
         /// <summary> Gets or sets the value. </summary>

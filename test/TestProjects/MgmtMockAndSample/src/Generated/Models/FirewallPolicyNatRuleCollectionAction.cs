@@ -5,21 +5,34 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
+
 namespace MgmtMockAndSample.Models
 {
     /// <summary> Properties of the FirewallPolicyNatRuleCollectionAction. </summary>
     internal partial class FirewallPolicyNatRuleCollectionAction
     {
-        /// <summary> Initializes a new instance of FirewallPolicyNatRuleCollectionAction. </summary>
+        private Dictionary<string, BinaryData> _rawData;
+
+        /// <summary>
+        /// Initializes a new instance of global::MgmtMockAndSample.Models.FirewallPolicyNatRuleCollectionAction
+        ///
+        /// </summary>
         public FirewallPolicyNatRuleCollectionAction()
         {
         }
 
-        /// <summary> Initializes a new instance of FirewallPolicyNatRuleCollectionAction. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::MgmtMockAndSample.Models.FirewallPolicyNatRuleCollectionAction
+        ///
+        /// </summary>
         /// <param name="actionType"> The type of action. </param>
-        internal FirewallPolicyNatRuleCollectionAction(FirewallPolicyNatRuleCollectionActionType? actionType)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal FirewallPolicyNatRuleCollectionAction(FirewallPolicyNatRuleCollectionActionType? actionType, Dictionary<string, BinaryData> rawData)
         {
             ActionType = actionType;
+            _rawData = rawData;
         }
 
         /// <summary> The type of action. </summary>

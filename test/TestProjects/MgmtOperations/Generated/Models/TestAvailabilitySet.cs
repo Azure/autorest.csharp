@@ -5,21 +5,34 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
+
 namespace MgmtOperations.Models
 {
     /// <summary> The TestAvailabilitySet. </summary>
     public partial class TestAvailabilitySet
     {
-        /// <summary> Initializes a new instance of TestAvailabilitySet. </summary>
+        private Dictionary<string, BinaryData> _rawData;
+
+        /// <summary>
+        /// Initializes a new instance of global::MgmtOperations.Models.TestAvailabilitySet
+        ///
+        /// </summary>
         internal TestAvailabilitySet()
         {
         }
 
-        /// <summary> Initializes a new instance of TestAvailabilitySet. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::MgmtOperations.Models.TestAvailabilitySet
+        ///
+        /// </summary>
         /// <param name="bar"> specifies the bar. </param>
-        internal TestAvailabilitySet(string bar)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal TestAvailabilitySet(string bar, Dictionary<string, BinaryData> rawData)
         {
             Bar = bar;
+            _rawData = rawData;
         }
 
         /// <summary> specifies the bar. </summary>

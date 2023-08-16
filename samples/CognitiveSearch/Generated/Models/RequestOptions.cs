@@ -6,22 +6,33 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
 
 namespace CognitiveSearch.Models
 {
     /// <summary> Parameter group. </summary>
     public partial class RequestOptions
     {
-        /// <summary> Initializes a new instance of RequestOptions. </summary>
+        private Dictionary<string, BinaryData> _rawData;
+
+        /// <summary>
+        /// Initializes a new instance of global::CognitiveSearch.Models.RequestOptions
+        ///
+        /// </summary>
         public RequestOptions()
         {
         }
 
-        /// <summary> Initializes a new instance of RequestOptions. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::CognitiveSearch.Models.RequestOptions
+        ///
+        /// </summary>
         /// <param name="xMsClientRequestId"> The tracking ID sent with the request to help with debugging. </param>
-        internal RequestOptions(Guid? xMsClientRequestId)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal RequestOptions(Guid? xMsClientRequestId, Dictionary<string, BinaryData> rawData)
         {
             XMsClientRequestId = xMsClientRequestId;
+            _rawData = rawData;
         }
 
         /// <summary> The tracking ID sent with the request to help with debugging. </summary>

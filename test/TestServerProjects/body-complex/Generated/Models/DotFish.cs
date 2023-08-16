@@ -5,6 +5,10 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
+using Azure.Core.Serialization;
+
 namespace body_complex.Models
 {
     /// <summary>
@@ -12,20 +16,31 @@ namespace body_complex.Models
     /// Please note <see cref="DotFish"/> is the base class. According to the scenario, a derived class of the base class might need to be assigned here, or this property needs to be casted to one of the possible derived classes.
     /// The available derived classes include <see cref="DotSalmon"/>.
     /// </summary>
+    [AbstractHierarchyDeserializer(typeof(UnknownDotFish))]
     public abstract partial class DotFish
     {
-        /// <summary> Initializes a new instance of DotFish. </summary>
+        protected internal Dictionary<string, BinaryData> _rawData;
+
+        /// <summary>
+        /// Initializes a new instance of global::body_complex.Models.DotFish
+        ///
+        /// </summary>
         protected DotFish()
         {
         }
 
-        /// <summary> Initializes a new instance of DotFish. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::body_complex.Models.DotFish
+        ///
+        /// </summary>
         /// <param name="fishType"></param>
         /// <param name="species"></param>
-        internal DotFish(string fishType, string species)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal DotFish(string fishType, string species, Dictionary<string, BinaryData> rawData)
         {
             FishType = fishType;
             Species = species;
+            _rawData = rawData;
         }
 
         /// <summary> Gets or sets the fish type. </summary>

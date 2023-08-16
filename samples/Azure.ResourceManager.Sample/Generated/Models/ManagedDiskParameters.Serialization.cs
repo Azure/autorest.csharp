@@ -6,19 +6,23 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
 using System.Text.Json;
+using Azure;
 using Azure.Core;
 using Azure.Core.Serialization;
 using Azure.ResourceManager.Resources.Models;
 
 namespace Azure.ResourceManager.Sample.Models
 {
-    public partial class ManagedDiskParameters : IUtf8JsonSerializable, IJsonModelSerializable
+    public partial class ManagedDiskParameters : IUtf8JsonSerializable, IModelJsonSerializable<ManagedDiskParameters>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModelSerializable)this).Serialize(writer, ModelSerializerOptions.AzureServiceDefault);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<ManagedDiskParameters>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
 
-        void IJsonModelSerializable.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
+        void IModelJsonSerializable<ManagedDiskParameters>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
+            ModelSerializerHelper.ValidateFormat<ManagedDiskParameters>(this, options.Format);
+
             writer.WriteStartObject();
             if (Optional.IsDefined(StorageAccountType))
             {
@@ -35,18 +39,25 @@ namespace Azure.ResourceManager.Sample.Models
                 writer.WritePropertyName("id"u8);
                 writer.WriteStringValue(Id);
             }
+            if (_rawData is not null && options.Format == ModelSerializerFormat.Json)
+            {
+                foreach (var property in _rawData)
+                {
+                    writer.WritePropertyName(property.Key);
+#if NET6_0_OR_GREATER
+				writer.WriteRawValue(property.Value);
+#else
+                    JsonSerializer.Serialize(writer, JsonDocument.Parse(property.Value.ToString()).RootElement);
+#endif
+                }
+            }
             writer.WriteEndObject();
-        }
-
-        object IModelSerializable.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            using var doc = JsonDocument.Parse(data);
-            return DeserializeManagedDiskParameters(doc.RootElement, options);
         }
 
         internal static ManagedDiskParameters DeserializeManagedDiskParameters(JsonElement element, ModelSerializerOptions options = default)
         {
-            options ??= ModelSerializerOptions.AzureServiceDefault;
+            options ??= ModelSerializerOptions.DefaultWireOptions;
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
@@ -54,6 +65,7 @@ namespace Azure.ResourceManager.Sample.Models
             Optional<StorageAccountType> storageAccountType = default;
             Optional<WritableSubResource> diskEncryptionSet = default;
             Optional<string> id = default;
+            Dictionary<string, BinaryData> rawData = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("storageAccountType"u8))
@@ -79,14 +91,57 @@ namespace Azure.ResourceManager.Sample.Models
                     id = property.Value.GetString();
                     continue;
                 }
+                if (options.Format == ModelSerializerFormat.Json)
+                {
+                    rawData.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
+                    continue;
+                }
             }
-            return new ManagedDiskParameters(id.Value, Optional.ToNullable(storageAccountType), diskEncryptionSet);
+            return new ManagedDiskParameters(id.Value, Optional.ToNullable(storageAccountType), diskEncryptionSet, rawData);
         }
 
-        object IJsonModelSerializable.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        ManagedDiskParameters IModelJsonSerializable<ManagedDiskParameters>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
         {
+            ModelSerializerHelper.ValidateFormat<ManagedDiskParameters>(this, options.Format);
+
             using var doc = JsonDocument.ParseValue(ref reader);
             return DeserializeManagedDiskParameters(doc.RootElement, options);
+        }
+
+        BinaryData IModelSerializable<ManagedDiskParameters>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat<ManagedDiskParameters>(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        ManagedDiskParameters IModelSerializable<ManagedDiskParameters>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat<ManagedDiskParameters>(this, options.Format);
+
+            using var doc = JsonDocument.Parse(data);
+            return DeserializeManagedDiskParameters(doc.RootElement, options);
+        }
+
+        public static implicit operator RequestContent(ManagedDiskParameters model)
+        {
+            if (model is null)
+            {
+                return null;
+            }
+
+            return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
+        }
+
+        public static explicit operator ManagedDiskParameters(Response response)
+        {
+            if (response is null)
+            {
+                return null;
+            }
+
+            using JsonDocument doc = JsonDocument.Parse(response.ContentStream);
+            return DeserializeManagedDiskParameters(doc.RootElement, ModelSerializerOptions.DefaultWireOptions);
         }
     }
 }

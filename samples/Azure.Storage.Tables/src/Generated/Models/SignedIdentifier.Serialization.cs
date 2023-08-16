@@ -6,35 +6,32 @@
 #nullable disable
 
 using System;
+using System.IO;
 using System.Xml;
 using System.Xml.Linq;
+using Azure;
 using Azure.Core;
 using Azure.Core.Serialization;
 
 namespace Azure.Storage.Tables.Models
 {
-    public partial class SignedIdentifier : IXmlSerializable, IXmlModelSerializable
+    public partial class SignedIdentifier : IXmlSerializable, IModelSerializable<SignedIdentifier>
     {
-        void IXmlModelSerializable.Serialize(XmlWriter writer, ModelSerializerOptions options) => ((IXmlSerializable)this).Write(writer, null, options);
-
-        void IXmlSerializable.Write(XmlWriter writer, string nameHint, ModelSerializerOptions options)
+        private void Serialize(XmlWriter writer, string nameHint, ModelSerializerOptions options)
         {
             writer.WriteStartElement("SignedIdentifier");
             writer.WriteStartElement("Id");
             writer.WriteValue(Id);
             writer.WriteEndElement();
-            writer.WriteObjectValue(AccessPolicy, "AccessPolicy", options);
+            writer.WriteObjectValue(AccessPolicy, "AccessPolicy");
             writer.WriteEndElement();
         }
 
-        object IModelSerializable.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            return DeserializeSignedIdentifier(XElement.Load(data.ToStream()), options);
-        }
+        void IXmlSerializable.Write(XmlWriter writer, string nameHint) => Serialize(writer, nameHint, ModelSerializerOptions.DefaultWireOptions);
 
         internal static SignedIdentifier DeserializeSignedIdentifier(XElement element, ModelSerializerOptions options = default)
         {
-            options ??= ModelSerializerOptions.AzureServiceDefault;
+            options ??= ModelSerializerOptions.DefaultWireOptions;
             string id = default;
             AccessPolicy accessPolicy = default;
             if (element.Element("Id") is XElement idElement)
@@ -45,7 +42,53 @@ namespace Azure.Storage.Tables.Models
             {
                 accessPolicy = AccessPolicy.DeserializeAccessPolicy(accessPolicyElement);
             }
-            return new SignedIdentifier(id, accessPolicy);
+            return new SignedIdentifier(id, accessPolicy, default);
+        }
+
+        BinaryData IModelSerializable<SignedIdentifier>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            options ??= ModelSerializerOptions.DefaultWireOptions;
+            using MemoryStream stream = new MemoryStream();
+            using XmlWriter writer = XmlWriter.Create(stream);
+            Serialize(writer, null, options);
+            writer.Flush();
+            if (stream.Position > int.MaxValue)
+            {
+                return BinaryData.FromStream(stream);
+            }
+            else
+            {
+                return new BinaryData(stream.GetBuffer().AsMemory(0, (int)stream.Position));
+            }
+        }
+
+        SignedIdentifier IModelSerializable<SignedIdentifier>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            return DeserializeSignedIdentifier(XElement.Load(data.ToStream()), options);
+        }
+
+        public static implicit operator RequestContent(SignedIdentifier model)
+        {
+            if (model is null)
+            {
+                return null;
+            }
+
+            return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
+        }
+
+        public static explicit operator SignedIdentifier(Response response)
+        {
+            if (response is null)
+            {
+                return null;
+            }
+
+            return DeserializeSignedIdentifier(XElement.Load(response.ContentStream), ModelSerializerOptions.DefaultWireOptions);
         }
     }
 }

@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
 using Azure.Core;
 
 namespace AnomalyDetector.Models
@@ -13,6 +14,8 @@ namespace AnomalyDetector.Models
     /// <summary> ErrorResponse contains code and message that shows the error information. </summary>
     public partial class ErrorResponse
     {
+        private Dictionary<string, BinaryData> _rawData;
+
         /// <summary> Initializes a new instance of ErrorResponse. </summary>
         /// <param name="code"> The error code. </param>
         /// <param name="message"> The message explaining the error reported by the service. </param>
@@ -24,6 +27,17 @@ namespace AnomalyDetector.Models
 
             Code = code;
             Message = message;
+        }
+
+        /// <summary> Initializes a new instance of ErrorResponse. </summary>
+        /// <param name="code"> The error code. </param>
+        /// <param name="message"> The message explaining the error reported by the service. </param>
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal ErrorResponse(string code, string message, Dictionary<string, BinaryData> rawData)
+        {
+            Code = code;
+            Message = message;
+            _rawData = rawData;
         }
 
         /// <summary> The error code. </summary>

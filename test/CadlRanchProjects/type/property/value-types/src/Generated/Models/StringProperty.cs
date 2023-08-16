@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
 using Azure.Core;
 
 namespace _Type.Property.ValueTypes.Models
@@ -13,6 +14,8 @@ namespace _Type.Property.ValueTypes.Models
     /// <summary> Model with a string property. </summary>
     public partial class StringProperty
     {
+        private Dictionary<string, BinaryData> _rawData;
+
         /// <summary> Initializes a new instance of StringProperty. </summary>
         /// <param name="property"> Property. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="property"/> is null. </exception>
@@ -21,6 +24,15 @@ namespace _Type.Property.ValueTypes.Models
             Argument.AssertNotNull(property, nameof(property));
 
             Property = property;
+        }
+
+        /// <summary> Initializes a new instance of StringProperty. </summary>
+        /// <param name="property"> Property. </param>
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal StringProperty(string property, Dictionary<string, BinaryData> rawData)
+        {
+            Property = property;
+            _rawData = rawData;
         }
 
         /// <summary> Property. </summary>

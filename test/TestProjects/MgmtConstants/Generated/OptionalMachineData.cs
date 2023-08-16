@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Collections.Generic;
 using Azure.Core;
 using Azure.ResourceManager.Models;
@@ -18,13 +19,21 @@ namespace MgmtConstants
     /// </summary>
     public partial class OptionalMachineData : TrackedResourceData
     {
-        /// <summary> Initializes a new instance of OptionalMachineData. </summary>
+        private Dictionary<string, BinaryData> _rawData;
+
+        /// <summary>
+        /// Initializes a new instance of global::MgmtConstants.OptionalMachineData
+        ///
+        /// </summary>
         /// <param name="location"> The location. </param>
         public OptionalMachineData(AzureLocation location) : base(location)
         {
         }
 
-        /// <summary> Initializes a new instance of OptionalMachineData. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::MgmtConstants.OptionalMachineData
+        ///
+        /// </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
         /// <param name="resourceType"> The resourceType. </param>
@@ -33,10 +42,12 @@ namespace MgmtConstants
         /// <param name="location"> The location. </param>
         /// <param name="listener"> Describes Protocol and thumbprint of Windows Remote Management listener. </param>
         /// <param name="content"> Specifies additional XML formatted information that can be included in the Unattend.xml file, which is used by Windows Setup. Contents are defined by setting name, component name, and the pass in which the content is applied. </param>
-        internal OptionalMachineData(ResourceIdentifier id, string name, ResourceType resourceType, SystemData systemData, IDictionary<string, string> tags, AzureLocation location, ModelWithRequiredConstant listener, ModelWithOptionalConstant content) : base(id, name, resourceType, systemData, tags, location)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal OptionalMachineData(ResourceIdentifier id, string name, ResourceType resourceType, SystemData systemData, IDictionary<string, string> tags, AzureLocation location, ModelWithRequiredConstant listener, ModelWithOptionalConstant content, Dictionary<string, BinaryData> rawData) : base(id, name, resourceType, systemData, tags, location)
         {
             Listener = listener;
             Content = content;
+            _rawData = rawData;
         }
 
         /// <summary> Describes Protocol and thumbprint of Windows Remote Management listener. </summary>

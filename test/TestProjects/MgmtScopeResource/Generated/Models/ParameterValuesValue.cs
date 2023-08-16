@@ -6,22 +6,33 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
 
 namespace MgmtScopeResource.Models
 {
     /// <summary> The value of a parameter. </summary>
     public partial class ParameterValuesValue
     {
-        /// <summary> Initializes a new instance of ParameterValuesValue. </summary>
+        private Dictionary<string, BinaryData> _rawData;
+
+        /// <summary>
+        /// Initializes a new instance of global::MgmtScopeResource.Models.ParameterValuesValue
+        ///
+        /// </summary>
         public ParameterValuesValue()
         {
         }
 
-        /// <summary> Initializes a new instance of ParameterValuesValue. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::MgmtScopeResource.Models.ParameterValuesValue
+        ///
+        /// </summary>
         /// <param name="value"> The value of the parameter. </param>
-        internal ParameterValuesValue(BinaryData value)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal ParameterValuesValue(BinaryData value, Dictionary<string, BinaryData> rawData)
         {
             Value = value;
+            _rawData = rawData;
         }
 
         /// <summary>

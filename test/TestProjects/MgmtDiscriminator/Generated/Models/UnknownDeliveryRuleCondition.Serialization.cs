@@ -12,53 +12,55 @@ using Azure.Core.Serialization;
 
 namespace MgmtDiscriminator.Models
 {
-    internal partial class UnknownDeliveryRuleCondition : IUtf8JsonSerializable, IJsonModelSerializable
+    internal partial class UnknownDeliveryRuleCondition : IUtf8JsonSerializable, IModelJsonSerializable<DeliveryRuleCondition>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModelSerializable)this).Serialize(writer, ModelSerializerOptions.AzureServiceDefault);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<DeliveryRuleCondition>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
 
-        void IJsonModelSerializable.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
+        void IModelJsonSerializable<DeliveryRuleCondition>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
             writer.WriteStartObject();
             writer.WritePropertyName("name"u8);
             writer.WriteStringValue(Name.ToString());
+            if (_rawData is not null && options.Format == ModelSerializerFormat.Json)
+            {
+                foreach (var property in _rawData)
+                {
+                    writer.WritePropertyName(property.Key);
+#if NET6_0_OR_GREATER
+				writer.WriteRawValue(property.Value);
+#else
+                    JsonSerializer.Serialize(writer, JsonDocument.Parse(property.Value.ToString()).RootElement);
+#endif
+                }
+            }
             writer.WriteEndObject();
         }
 
-        object IModelSerializable.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            using var doc = JsonDocument.Parse(data);
-            return DeserializeUnknownDeliveryRuleCondition(doc.RootElement, options);
-        }
+        internal static DeliveryRuleCondition DeserializeUnknownDeliveryRuleCondition(JsonElement element, ModelSerializerOptions options = default) => DeserializeDeliveryRuleCondition(element, options);
 
-        internal static UnknownDeliveryRuleCondition DeserializeUnknownDeliveryRuleCondition(JsonElement element, ModelSerializerOptions options = default)
+        DeliveryRuleCondition IModelJsonSerializable<DeliveryRuleCondition>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
         {
-            options ??= ModelSerializerOptions.AzureServiceDefault;
-            if (element.ValueKind == JsonValueKind.Null)
-            {
-                return null;
-            }
-            MatchVariable name = "Unknown";
-            Optional<string> foo = default;
-            foreach (var property in element.EnumerateObject())
-            {
-                if (property.NameEquals("name"u8))
-                {
-                    name = new MatchVariable(property.Value.GetString());
-                    continue;
-                }
-                if (property.NameEquals("foo"u8))
-                {
-                    foo = property.Value.GetString();
-                    continue;
-                }
-            }
-            return new UnknownDeliveryRuleCondition(name, foo.Value);
-        }
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
 
-        object IJsonModelSerializable.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
-        {
             using var doc = JsonDocument.ParseValue(ref reader);
             return DeserializeUnknownDeliveryRuleCondition(doc.RootElement, options);
+        }
+
+        BinaryData IModelSerializable<DeliveryRuleCondition>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        DeliveryRuleCondition IModelSerializable<DeliveryRuleCondition>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using var doc = JsonDocument.Parse(data);
+            return DeserializeDeliveryRuleCondition(doc.RootElement, options);
         }
     }
 }

@@ -8,34 +8,44 @@
 using System;
 using System.Collections.Generic;
 using System.Text.Json;
+using Azure;
 using Azure.Core;
 using Azure.Core.Serialization;
 using Azure.ResourceManager.Models;
 
 namespace MgmtScopeResource.Models
 {
-    public partial class Marketplace : IUtf8JsonSerializable, IJsonModelSerializable
+    public partial class Marketplace : IUtf8JsonSerializable, IModelJsonSerializable<Marketplace>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModelSerializable)this).Serialize(writer, ModelSerializerOptions.AzureServiceDefault);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<Marketplace>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
 
-        void IJsonModelSerializable.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
+        void IModelJsonSerializable<Marketplace>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
             writer.WriteStartObject();
             writer.WritePropertyName("properties"u8);
             writer.WriteStartObject();
             writer.WriteEndObject();
+            if (_rawData is not null && options.Format == ModelSerializerFormat.Json)
+            {
+                foreach (var property in _rawData)
+                {
+                    writer.WritePropertyName(property.Key);
+#if NET6_0_OR_GREATER
+				writer.WriteRawValue(property.Value);
+#else
+                    JsonSerializer.Serialize(writer, JsonDocument.Parse(property.Value.ToString()).RootElement);
+#endif
+                }
+            }
             writer.WriteEndObject();
-        }
-
-        object IModelSerializable.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            using var doc = JsonDocument.Parse(data);
-            return DeserializeMarketplace(doc.RootElement, options);
         }
 
         internal static Marketplace DeserializeMarketplace(JsonElement element, ModelSerializerOptions options = default)
         {
-            options ??= ModelSerializerOptions.AzureServiceDefault;
+            options ??= ModelSerializerOptions.DefaultWireOptions;
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
@@ -72,6 +82,7 @@ namespace MgmtScopeResource.Models
             Optional<string> publisherName = default;
             Optional<string> planName = default;
             Optional<bool> isRecurringCharge = default;
+            Dictionary<string, BinaryData> rawData = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("etag"u8))
@@ -295,14 +306,57 @@ namespace MgmtScopeResource.Models
                     }
                     continue;
                 }
+                if (options.Format == ModelSerializerFormat.Json)
+                {
+                    rawData.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
+                    continue;
+                }
             }
-            return new Marketplace(id, name, type, systemData.Value, billingPeriodId.Value, Optional.ToNullable(usageStart), Optional.ToNullable(usageEnd), Optional.ToNullable(resourceRate), offerName.Value, resourceGroup.Value, additionalInfo.Value, orderNumber.Value, instanceName.Value, instanceId.Value, currency.Value, Optional.ToNullable(consumedQuantity), unitOfMeasure.Value, Optional.ToNullable(pretaxCost), Optional.ToNullable(isEstimated), Optional.ToNullable(meterId), Optional.ToNullable(subscriptionGuid), subscriptionName.Value, accountName.Value, departmentName.Value, consumedService.Value, costCenter.Value, additionalProperties.Value, publisherName.Value, planName.Value, Optional.ToNullable(isRecurringCharge), etag.Value, Optional.ToDictionary(tags));
+            return new Marketplace(id, name, type, systemData.Value, billingPeriodId.Value, Optional.ToNullable(usageStart), Optional.ToNullable(usageEnd), Optional.ToNullable(resourceRate), offerName.Value, resourceGroup.Value, additionalInfo.Value, orderNumber.Value, instanceName.Value, instanceId.Value, currency.Value, Optional.ToNullable(consumedQuantity), unitOfMeasure.Value, Optional.ToNullable(pretaxCost), Optional.ToNullable(isEstimated), Optional.ToNullable(meterId), Optional.ToNullable(subscriptionGuid), subscriptionName.Value, accountName.Value, departmentName.Value, consumedService.Value, costCenter.Value, additionalProperties.Value, publisherName.Value, planName.Value, Optional.ToNullable(isRecurringCharge), etag.Value, Optional.ToDictionary(tags), rawData);
         }
 
-        object IJsonModelSerializable.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        Marketplace IModelJsonSerializable<Marketplace>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
         {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
             using var doc = JsonDocument.ParseValue(ref reader);
             return DeserializeMarketplace(doc.RootElement, options);
+        }
+
+        BinaryData IModelSerializable<Marketplace>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        Marketplace IModelSerializable<Marketplace>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using var doc = JsonDocument.Parse(data);
+            return DeserializeMarketplace(doc.RootElement, options);
+        }
+
+        public static implicit operator RequestContent(Marketplace model)
+        {
+            if (model is null)
+            {
+                return null;
+            }
+
+            return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
+        }
+
+        public static explicit operator Marketplace(Response response)
+        {
+            if (response is null)
+            {
+                return null;
+            }
+
+            using JsonDocument doc = JsonDocument.Parse(response.ContentStream);
+            return DeserializeMarketplace(doc.RootElement, ModelSerializerOptions.DefaultWireOptions);
         }
     }
 }

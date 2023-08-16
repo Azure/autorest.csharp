@@ -5,6 +5,9 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
+
 namespace Azure.ResourceManager.Sample.Models
 {
     /// <summary>
@@ -13,12 +16,20 @@ namespace Azure.ResourceManager.Sample.Models
     /// </summary>
     public partial class AutomaticOSUpgradePolicy
     {
-        /// <summary> Initializes a new instance of AutomaticOSUpgradePolicy. </summary>
+        private Dictionary<string, BinaryData> _rawData;
+
+        /// <summary>
+        /// Initializes a new instance of global::Azure.ResourceManager.Sample.Models.AutomaticOSUpgradePolicy
+        ///
+        /// </summary>
         public AutomaticOSUpgradePolicy()
         {
         }
 
-        /// <summary> Initializes a new instance of AutomaticOSUpgradePolicy. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::Azure.ResourceManager.Sample.Models.AutomaticOSUpgradePolicy
+        ///
+        /// </summary>
         /// <param name="enableAutomaticOSUpgrade">
         /// Indicates whether OS upgrades should automatically be applied to scale set instances in a rolling fashion when a newer version of the OS image becomes available. Default value is false. &lt;br&gt;&lt;br&gt; If this is set to true for Windows based scale sets, [enableAutomaticUpdates](https://docs.microsoft.com/dotnet/api/microsoft.azure.management.compute.models.windowsconfiguration.enableautomaticupdates?view=azure-dotnet) is automatically set to false and cannot be set to true.
         /// Serialized Name: AutomaticOSUpgradePolicy.enableAutomaticOSUpgrade
@@ -27,10 +38,12 @@ namespace Azure.ResourceManager.Sample.Models
         /// Whether OS image rollback feature should be disabled. Default value is false.
         /// Serialized Name: AutomaticOSUpgradePolicy.disableAutomaticRollback
         /// </param>
-        internal AutomaticOSUpgradePolicy(bool? enableAutomaticOSUpgrade, bool? disableAutomaticRollback)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal AutomaticOSUpgradePolicy(bool? enableAutomaticOSUpgrade, bool? disableAutomaticRollback, Dictionary<string, BinaryData> rawData)
         {
             EnableAutomaticOSUpgrade = enableAutomaticOSUpgrade;
             DisableAutomaticRollback = disableAutomaticRollback;
+            _rawData = rawData;
         }
 
         /// <summary>

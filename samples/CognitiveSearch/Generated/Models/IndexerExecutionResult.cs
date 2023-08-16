@@ -15,7 +15,12 @@ namespace CognitiveSearch.Models
     /// <summary> Represents the result of an individual indexer execution. </summary>
     public partial class IndexerExecutionResult
     {
-        /// <summary> Initializes a new instance of IndexerExecutionResult. </summary>
+        private Dictionary<string, BinaryData> _rawData;
+
+        /// <summary>
+        /// Initializes a new instance of global::CognitiveSearch.Models.IndexerExecutionResult
+        ///
+        /// </summary>
         /// <param name="status"> The outcome of this indexer execution. </param>
         /// <param name="errors"> The item-level indexing errors. </param>
         /// <param name="warnings"> The item-level indexing warnings. </param>
@@ -34,7 +39,10 @@ namespace CognitiveSearch.Models
             FailedItemCount = failedItemCount;
         }
 
-        /// <summary> Initializes a new instance of IndexerExecutionResult. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::CognitiveSearch.Models.IndexerExecutionResult
+        ///
+        /// </summary>
         /// <param name="status"> The outcome of this indexer execution. </param>
         /// <param name="errorMessage"> The error message indicating the top-level error, if any. </param>
         /// <param name="startTime"> The start time of this indexer execution. </param>
@@ -45,7 +53,8 @@ namespace CognitiveSearch.Models
         /// <param name="failedItemCount"> The number of items that failed to be indexed during this indexer execution. </param>
         /// <param name="initialTrackingState"> Change tracking state with which an indexer execution started. </param>
         /// <param name="finalTrackingState"> Change tracking state with which an indexer execution finished. </param>
-        internal IndexerExecutionResult(IndexerExecutionStatus status, string errorMessage, DateTimeOffset? startTime, DateTimeOffset? endTime, IReadOnlyList<ItemError> errors, IReadOnlyList<ItemWarning> warnings, int itemCount, int failedItemCount, string initialTrackingState, string finalTrackingState)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal IndexerExecutionResult(IndexerExecutionStatus status, string errorMessage, DateTimeOffset? startTime, DateTimeOffset? endTime, IReadOnlyList<ItemError> errors, IReadOnlyList<ItemWarning> warnings, int itemCount, int failedItemCount, string initialTrackingState, string finalTrackingState, Dictionary<string, BinaryData> rawData)
         {
             Status = status;
             ErrorMessage = errorMessage;
@@ -57,6 +66,7 @@ namespace CognitiveSearch.Models
             FailedItemCount = failedItemCount;
             InitialTrackingState = initialTrackingState;
             FinalTrackingState = finalTrackingState;
+            _rawData = rawData;
         }
 
         /// <summary> The outcome of this indexer execution. </summary>

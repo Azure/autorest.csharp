@@ -6,18 +6,22 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
 using System.Text.Json;
+using Azure;
 using Azure.Core;
 using Azure.Core.Serialization;
 
 namespace MgmtMockAndSample.Models
 {
-    public partial class AccessPolicyEntry : IUtf8JsonSerializable, IJsonModelSerializable
+    public partial class AccessPolicyEntry : IUtf8JsonSerializable, IModelJsonSerializable<AccessPolicyEntry>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModelSerializable)this).Serialize(writer, ModelSerializerOptions.AzureServiceDefault);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<AccessPolicyEntry>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
 
-        void IJsonModelSerializable.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
+        void IModelJsonSerializable<AccessPolicyEntry>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
             writer.WriteStartObject();
             writer.WritePropertyName("tenantId"u8);
             writer.WriteStringValue(TenantId);
@@ -30,18 +34,25 @@ namespace MgmtMockAndSample.Models
             }
             writer.WritePropertyName("permissions"u8);
             writer.WriteObjectValue(Permissions);
+            if (_rawData is not null && options.Format == ModelSerializerFormat.Json)
+            {
+                foreach (var property in _rawData)
+                {
+                    writer.WritePropertyName(property.Key);
+#if NET6_0_OR_GREATER
+				writer.WriteRawValue(property.Value);
+#else
+                    JsonSerializer.Serialize(writer, JsonDocument.Parse(property.Value.ToString()).RootElement);
+#endif
+                }
+            }
             writer.WriteEndObject();
-        }
-
-        object IModelSerializable.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            using var doc = JsonDocument.Parse(data);
-            return DeserializeAccessPolicyEntry(doc.RootElement, options);
         }
 
         internal static AccessPolicyEntry DeserializeAccessPolicyEntry(JsonElement element, ModelSerializerOptions options = default)
         {
-            options ??= ModelSerializerOptions.AzureServiceDefault;
+            options ??= ModelSerializerOptions.DefaultWireOptions;
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
@@ -50,6 +61,7 @@ namespace MgmtMockAndSample.Models
             string objectId = default;
             Optional<Guid> applicationId = default;
             Permissions permissions = default;
+            Dictionary<string, BinaryData> rawData = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("tenantId"u8))
@@ -76,14 +88,57 @@ namespace MgmtMockAndSample.Models
                     permissions = Permissions.DeserializePermissions(property.Value);
                     continue;
                 }
+                if (options.Format == ModelSerializerFormat.Json)
+                {
+                    rawData.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
+                    continue;
+                }
             }
-            return new AccessPolicyEntry(tenantId, objectId, Optional.ToNullable(applicationId), permissions);
+            return new AccessPolicyEntry(tenantId, objectId, Optional.ToNullable(applicationId), permissions, rawData);
         }
 
-        object IJsonModelSerializable.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        AccessPolicyEntry IModelJsonSerializable<AccessPolicyEntry>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
         {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
             using var doc = JsonDocument.ParseValue(ref reader);
             return DeserializeAccessPolicyEntry(doc.RootElement, options);
+        }
+
+        BinaryData IModelSerializable<AccessPolicyEntry>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        AccessPolicyEntry IModelSerializable<AccessPolicyEntry>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using var doc = JsonDocument.Parse(data);
+            return DeserializeAccessPolicyEntry(doc.RootElement, options);
+        }
+
+        public static implicit operator RequestContent(AccessPolicyEntry model)
+        {
+            if (model is null)
+            {
+                return null;
+            }
+
+            return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
+        }
+
+        public static explicit operator AccessPolicyEntry(Response response)
+        {
+            if (response is null)
+            {
+                return null;
+            }
+
+            using JsonDocument doc = JsonDocument.Parse(response.ContentStream);
+            return DeserializeAccessPolicyEntry(doc.RootElement, ModelSerializerOptions.DefaultWireOptions);
         }
     }
 }

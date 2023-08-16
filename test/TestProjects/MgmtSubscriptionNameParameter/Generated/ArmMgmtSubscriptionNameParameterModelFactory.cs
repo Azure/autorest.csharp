@@ -16,7 +16,10 @@ namespace MgmtSubscriptionNameParameter.Models
     /// <summary> Model factory for models. </summary>
     public static partial class ArmMgmtSubscriptionNameParameterModelFactory
     {
-        /// <summary> Initializes a new instance of SBSubscriptionData. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::MgmtSubscriptionNameParameter.SBSubscriptionData
+        ///
+        /// </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
         /// <param name="resourceType"> The resourceType. </param>
@@ -41,7 +44,7 @@ namespace MgmtSubscriptionNameParameter.Models
         /// <returns> A new <see cref="MgmtSubscriptionNameParameter.SBSubscriptionData"/> instance for mocking. </returns>
         public static SBSubscriptionData SBSubscriptionData(ResourceIdentifier id = null, string name = null, ResourceType resourceType = default, SystemData systemData = null, long? messageCount = null, DateTimeOffset? createdOn = null, DateTimeOffset? accessedOn = null, DateTimeOffset? updatedOn = null, TimeSpan? lockDuration = null, bool? requiresSession = null, TimeSpan? defaultMessageTimeToLive = null, bool? deadLetteringOnFilterEvaluationExceptions = null, bool? deadLetteringOnMessageExpiration = null, TimeSpan? duplicateDetectionHistoryTimeWindow = null, int? maxDeliveryCount = null, bool? enableBatchedOperations = null, TimeSpan? autoDeleteOnIdle = null, string forwardTo = null, string forwardDeadLetteredMessagesTo = null, bool? isClientAffine = null, SBClientAffineProperties clientAffineProperties = null)
         {
-            return new SBSubscriptionData(id, name, resourceType, systemData, messageCount, createdOn, accessedOn, updatedOn, lockDuration, requiresSession, defaultMessageTimeToLive, deadLetteringOnFilterEvaluationExceptions, deadLetteringOnMessageExpiration, duplicateDetectionHistoryTimeWindow, maxDeliveryCount, enableBatchedOperations, autoDeleteOnIdle, forwardTo, forwardDeadLetteredMessagesTo, isClientAffine, clientAffineProperties);
+            return new SBSubscriptionData(id, name, resourceType, systemData, messageCount, createdOn, accessedOn, updatedOn, lockDuration, requiresSession, defaultMessageTimeToLive, deadLetteringOnFilterEvaluationExceptions, deadLetteringOnMessageExpiration, duplicateDetectionHistoryTimeWindow, maxDeliveryCount, enableBatchedOperations, autoDeleteOnIdle, forwardTo, forwardDeadLetteredMessagesTo, isClientAffine, clientAffineProperties, default);
         }
     }
 }

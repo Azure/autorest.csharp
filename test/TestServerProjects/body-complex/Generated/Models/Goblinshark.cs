@@ -13,7 +13,10 @@ namespace body_complex.Models
     /// <summary> The Goblinshark. </summary>
     public partial class Goblinshark : Shark
     {
-        /// <summary> Initializes a new instance of Goblinshark. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::body_complex.Models.Goblinshark
+        ///
+        /// </summary>
         /// <param name="length"></param>
         /// <param name="birthday"></param>
         public Goblinshark(float length, DateTimeOffset birthday) : base(length, birthday)
@@ -21,7 +24,10 @@ namespace body_complex.Models
             Fishtype = "goblin";
         }
 
-        /// <summary> Initializes a new instance of Goblinshark. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::body_complex.Models.Goblinshark
+        ///
+        /// </summary>
         /// <param name="fishtype"></param>
         /// <param name="species"></param>
         /// <param name="length"></param>
@@ -33,7 +39,8 @@ namespace body_complex.Models
         /// <param name="birthday"></param>
         /// <param name="jawsize"></param>
         /// <param name="color"> Colors possible. </param>
-        internal Goblinshark(string fishtype, string species, float length, IList<Fish> siblings, int? age, DateTimeOffset birthday, int? jawsize, GoblinSharkColor? color) : base(fishtype, species, length, siblings, age, birthday)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal Goblinshark(string fishtype, string species, float length, IList<Fish> siblings, int? age, DateTimeOffset birthday, int? jawsize, GoblinSharkColor? color, Dictionary<string, BinaryData> rawData) : base(fishtype, species, length, siblings, age, birthday, rawData)
         {
             Jawsize = jawsize;
             Color = color;

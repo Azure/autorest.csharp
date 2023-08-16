@@ -5,6 +5,9 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
+
 namespace SpecialWords.Models
 {
     /// <summary> Unknown version of BaseModel. </summary>
@@ -17,7 +20,8 @@ namespace SpecialWords.Models
 
         /// <summary> Initializes a new instance of UnknownBaseModel. </summary>
         /// <param name="modelKind"> Discriminator. </param>
-        internal UnknownBaseModel(string modelKind) : base(modelKind)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal UnknownBaseModel(string modelKind, Dictionary<string, BinaryData> rawData) : base(modelKind, rawData)
         {
         }
     }

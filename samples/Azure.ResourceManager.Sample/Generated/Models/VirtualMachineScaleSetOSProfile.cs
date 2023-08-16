@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Collections.Generic;
 using Azure.Core;
 
@@ -16,13 +17,21 @@ namespace Azure.ResourceManager.Sample.Models
     /// </summary>
     public partial class VirtualMachineScaleSetOSProfile
     {
-        /// <summary> Initializes a new instance of VirtualMachineScaleSetOSProfile. </summary>
+        private Dictionary<string, BinaryData> _rawData;
+
+        /// <summary>
+        /// Initializes a new instance of global::Azure.ResourceManager.Sample.Models.VirtualMachineScaleSetOSProfile
+        ///
+        /// </summary>
         public VirtualMachineScaleSetOSProfile()
         {
             Secrets = new ChangeTrackingList<VaultSecretGroup>();
         }
 
-        /// <summary> Initializes a new instance of VirtualMachineScaleSetOSProfile. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::Azure.ResourceManager.Sample.Models.VirtualMachineScaleSetOSProfile
+        ///
+        /// </summary>
         /// <param name="computerNamePrefix">
         /// Specifies the computer name prefix for all of the virtual machines in the scale set. Computer name prefixes must be 1 to 15 characters long.
         /// Serialized Name: VirtualMachineScaleSetOSProfile.computerNamePrefix
@@ -51,7 +60,8 @@ namespace Azure.ResourceManager.Sample.Models
         /// Specifies set of certificates that should be installed onto the virtual machines in the scale set.
         /// Serialized Name: VirtualMachineScaleSetOSProfile.secrets
         /// </param>
-        internal VirtualMachineScaleSetOSProfile(string computerNamePrefix, string adminUsername, string adminPassword, string customData, WindowsConfiguration windowsConfiguration, LinuxConfiguration linuxConfiguration, IList<VaultSecretGroup> secrets)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal VirtualMachineScaleSetOSProfile(string computerNamePrefix, string adminUsername, string adminPassword, string customData, WindowsConfiguration windowsConfiguration, LinuxConfiguration linuxConfiguration, IList<VaultSecretGroup> secrets, Dictionary<string, BinaryData> rawData)
         {
             ComputerNamePrefix = computerNamePrefix;
             AdminUsername = adminUsername;
@@ -60,6 +70,7 @@ namespace Azure.ResourceManager.Sample.Models
             WindowsConfiguration = windowsConfiguration;
             LinuxConfiguration = linuxConfiguration;
             Secrets = secrets;
+            _rawData = rawData;
         }
 
         /// <summary>

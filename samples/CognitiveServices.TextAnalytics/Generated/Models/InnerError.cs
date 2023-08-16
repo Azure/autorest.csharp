@@ -14,7 +14,12 @@ namespace CognitiveServices.TextAnalytics.Models
     /// <summary> The InnerError. </summary>
     public partial class InnerError
     {
-        /// <summary> Initializes a new instance of InnerError. </summary>
+        private Dictionary<string, BinaryData> _rawData;
+
+        /// <summary>
+        /// Initializes a new instance of global::CognitiveServices.TextAnalytics.Models.InnerError
+        ///
+        /// </summary>
         /// <param name="code"> Error code. </param>
         /// <param name="message"> Error message. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="message"/> is null. </exception>
@@ -27,19 +32,24 @@ namespace CognitiveServices.TextAnalytics.Models
             Details = new ChangeTrackingDictionary<string, string>();
         }
 
-        /// <summary> Initializes a new instance of InnerError. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::CognitiveServices.TextAnalytics.Models.InnerError
+        ///
+        /// </summary>
         /// <param name="code"> Error code. </param>
         /// <param name="message"> Error message. </param>
         /// <param name="details"> Error details. </param>
         /// <param name="target"> Error target. </param>
         /// <param name="innererror"> Inner error contains more specific information. </param>
-        internal InnerError(InnerErrorCodeValue code, string message, IReadOnlyDictionary<string, string> details, string target, InnerError innererror)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal InnerError(InnerErrorCodeValue code, string message, IReadOnlyDictionary<string, string> details, string target, InnerError innererror, Dictionary<string, BinaryData> rawData)
         {
             Code = code;
             Message = message;
             Details = details;
             Target = target;
             Innererror = innererror;
+            _rawData = rawData;
         }
 
         /// <summary> Error code. </summary>

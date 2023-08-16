@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Collections.Generic;
 using Azure.Core;
 
@@ -14,19 +15,28 @@ namespace Azure.ResourceManager.Fake.Models
     [TypeReferenceType]
     public partial class PrivateEndpointConnectionList
     {
-        /// <summary> Initializes a new instance of PrivateEndpointConnectionList. </summary>
+        private Dictionary<string, BinaryData> _rawData;
+
+        /// <summary>
+        /// Initializes a new instance of global::Azure.ResourceManager.Fake.Models.PrivateEndpointConnectionList
+        ///
+        /// </summary>
         [InitializationConstructor]
         public PrivateEndpointConnectionList()
         {
             Value = new ChangeTrackingList<PrivateEndpointConnectionData>();
         }
 
-        /// <summary> Initializes a new instance of PrivateEndpointConnectionList. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::Azure.ResourceManager.Fake.Models.PrivateEndpointConnectionList
+        ///
+        /// </summary>
         /// <param name="value"> Array of private endpoint connections. </param>
-        [SerializationConstructor]
-        protected PrivateEndpointConnectionList(IReadOnlyList<PrivateEndpointConnectionData> value)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        protected PrivateEndpointConnectionList(IReadOnlyList<PrivateEndpointConnectionData> value, Dictionary<string, BinaryData> rawData)
         {
             Value = value;
+            _rawData = rawData;
         }
 
         /// <summary> Array of private endpoint connections. </summary>

@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
 using Azure.Core;
 
 namespace MgmtMockAndSample.Models
@@ -13,12 +14,20 @@ namespace MgmtMockAndSample.Models
     /// <summary> Guest configuration assignment properties. </summary>
     public partial class GuestConfigurationAssignmentProperties
     {
-        /// <summary> Initializes a new instance of GuestConfigurationAssignmentProperties. </summary>
+        private Dictionary<string, BinaryData> _rawData;
+
+        /// <summary>
+        /// Initializes a new instance of global::MgmtMockAndSample.Models.GuestConfigurationAssignmentProperties
+        ///
+        /// </summary>
         public GuestConfigurationAssignmentProperties()
         {
         }
 
-        /// <summary> Initializes a new instance of GuestConfigurationAssignmentProperties. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::MgmtMockAndSample.Models.GuestConfigurationAssignmentProperties
+        ///
+        /// </summary>
         /// <param name="targetResourceId"> VM resource Id. </param>
         /// <param name="complianceStatus"> A value indicating compliance status of the machine for the assigned guest configuration. </param>
         /// <param name="lastComplianceStatusChecked"> Date and time when last compliance status was checked. </param>
@@ -28,7 +37,8 @@ namespace MgmtMockAndSample.Models
         /// <param name="assignmentHash"> Combined hash of the configuration package and parameters. </param>
         /// <param name="provisioningState"> The provisioning state, which only appears in the response. </param>
         /// <param name="resourceType"> Type of the resource - VMSS / VM. </param>
-        internal GuestConfigurationAssignmentProperties(string targetResourceId, ComplianceStatus? complianceStatus, DateTimeOffset? lastComplianceStatusChecked, string latestReportId, string parameterHash, string context, string assignmentHash, ProvisioningState? provisioningState, ResourceType? resourceType)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal GuestConfigurationAssignmentProperties(string targetResourceId, ComplianceStatus? complianceStatus, DateTimeOffset? lastComplianceStatusChecked, string latestReportId, string parameterHash, string context, string assignmentHash, ProvisioningState? provisioningState, ResourceType? resourceType, Dictionary<string, BinaryData> rawData)
         {
             TargetResourceId = targetResourceId;
             ComplianceStatus = complianceStatus;
@@ -39,6 +49,7 @@ namespace MgmtMockAndSample.Models
             AssignmentHash = assignmentHash;
             ProvisioningState = provisioningState;
             ResourceType = resourceType;
+            _rawData = rawData;
         }
 
         /// <summary> VM resource Id. </summary>

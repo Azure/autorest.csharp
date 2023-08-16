@@ -12,7 +12,10 @@ namespace additionalProperties.Models
     /// <summary> Model factory for models. </summary>
     public static partial class AdditionalPropertiesModelFactory
     {
-        /// <summary> Initializes a new instance of PetAPTrue. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::additionalProperties.Models.PetAPTrue
+        ///
+        /// </summary>
         /// <param name="id"></param>
         /// <param name="name"></param>
         /// <param name="status"></param>
@@ -25,7 +28,10 @@ namespace additionalProperties.Models
             return new PetAPTrue(id, name, status, additionalProperties);
         }
 
-        /// <summary> Initializes a new instance of CatAPTrue. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::additionalProperties.Models.CatAPTrue
+        ///
+        /// </summary>
         /// <param name="id"></param>
         /// <param name="name"></param>
         /// <param name="status"></param>
@@ -39,7 +45,10 @@ namespace additionalProperties.Models
             return new CatAPTrue(id, name, status, additionalProperties, friendly);
         }
 
-        /// <summary> Initializes a new instance of PetAPObject. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::additionalProperties.Models.PetAPObject
+        ///
+        /// </summary>
         /// <param name="id"></param>
         /// <param name="name"></param>
         /// <param name="status"></param>
@@ -52,7 +61,10 @@ namespace additionalProperties.Models
             return new PetAPObject(id, name, status, additionalProperties);
         }
 
-        /// <summary> Initializes a new instance of PetAPString. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::additionalProperties.Models.PetAPString
+        ///
+        /// </summary>
         /// <param name="id"></param>
         /// <param name="name"></param>
         /// <param name="status"></param>
@@ -65,7 +77,10 @@ namespace additionalProperties.Models
             return new PetAPString(id, name, status, additionalProperties);
         }
 
-        /// <summary> Initializes a new instance of PetAPInProperties. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::additionalProperties.Models.PetAPInProperties
+        ///
+        /// </summary>
         /// <param name="id"></param>
         /// <param name="name"></param>
         /// <param name="status"></param>
@@ -75,7 +90,7 @@ namespace additionalProperties.Models
         {
             additionalProperties ??= new Dictionary<string, float>();
 
-            return new PetAPInProperties(id, name, status, additionalProperties);
+            return new PetAPInProperties(id, name, status, additionalProperties, default);
         }
     }
 }

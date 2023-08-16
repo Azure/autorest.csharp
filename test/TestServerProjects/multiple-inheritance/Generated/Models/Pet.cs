@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
 using Azure.Core;
 
 namespace multiple_inheritance.Models
@@ -13,7 +14,12 @@ namespace multiple_inheritance.Models
     /// <summary> The Pet. </summary>
     public partial class Pet
     {
-        /// <summary> Initializes a new instance of Pet. </summary>
+        protected internal Dictionary<string, BinaryData> _rawData;
+
+        /// <summary>
+        /// Initializes a new instance of global::multiple_inheritance.Models.Pet
+        ///
+        /// </summary>
         /// <param name="name"></param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
         public Pet(string name)
@@ -21,6 +27,18 @@ namespace multiple_inheritance.Models
             Argument.AssertNotNull(name, nameof(name));
 
             Name = name;
+        }
+
+        /// <summary>
+        /// Initializes a new instance of global::multiple_inheritance.Models.Pet
+        ///
+        /// </summary>
+        /// <param name="name"></param>
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal Pet(string name, Dictionary<string, BinaryData> rawData)
+        {
+            Name = name;
+            _rawData = rawData;
         }
 
         /// <summary> Gets or sets the name. </summary>

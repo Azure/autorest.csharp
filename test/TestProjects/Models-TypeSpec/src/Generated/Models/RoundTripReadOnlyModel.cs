@@ -15,6 +15,8 @@ namespace ModelsTypeSpec.Models
     /// <summary> Output model with readonly properties. </summary>
     public partial class RoundTripReadOnlyModel
     {
+        private Dictionary<string, BinaryData> _rawData;
+
         /// <summary> Initializes a new instance of RoundTripReadOnlyModel. </summary>
         /// <param name="optionalReadOnlyIntRecord"> Optional int record. </param>
         /// <param name="optionalReadOnlyStringRecord"> Optional string record. </param>
@@ -67,7 +69,8 @@ namespace ModelsTypeSpec.Models
         /// <param name="optionalModelRecord"> Optional model record. </param>
         /// <param name="requiredCollectionWithNullableIntElement"> Required collection of which the element is a nullable int. </param>
         /// <param name="optionalCollectionWithNullableBooleanElement"> Optional collection of which the element is a nullable boolean. </param>
-        internal RoundTripReadOnlyModel(string requiredReadonlyString, int requiredReadonlyInt, string optionalReadonlyString, int? optionalReadonlyInt, DerivedModel requiredReadonlyModel, DerivedModel optionalReadonlyModel, FixedStringEnum requiredReadonlyFixedStringEnum, ExtensibleEnum requiredReadonlyExtensibleEnum, FixedStringEnum optionalReadonlyFixedStringEnum, ExtensibleEnum optionalReadonlyExtensibleEnum, IReadOnlyList<string> requiredReadonlyStringList, IReadOnlyList<int> requiredReadonlyIntList, IReadOnlyList<CollectionItem> requiredReadOnlyModelList, IReadOnlyDictionary<string, int> requiredReadOnlyIntRecord, IReadOnlyDictionary<string, string> requiredStringRecord, IReadOnlyDictionary<string, RecordItem> requiredReadOnlyModelRecord, IReadOnlyList<string> optionalReadonlyStringList, IReadOnlyList<int> optionalReadonlyIntList, IReadOnlyList<CollectionItem> optionalReadOnlyModelList, IReadOnlyDictionary<string, int> optionalReadOnlyIntRecord, IReadOnlyDictionary<string, string> optionalReadOnlyStringRecord, IReadOnlyDictionary<string, RecordItem> optionalModelRecord, IReadOnlyList<int?> requiredCollectionWithNullableIntElement, IReadOnlyList<bool?> optionalCollectionWithNullableBooleanElement)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal RoundTripReadOnlyModel(string requiredReadonlyString, int requiredReadonlyInt, string optionalReadonlyString, int? optionalReadonlyInt, DerivedModel requiredReadonlyModel, DerivedModel optionalReadonlyModel, FixedStringEnum requiredReadonlyFixedStringEnum, ExtensibleEnum requiredReadonlyExtensibleEnum, FixedStringEnum optionalReadonlyFixedStringEnum, ExtensibleEnum optionalReadonlyExtensibleEnum, IReadOnlyList<string> requiredReadonlyStringList, IReadOnlyList<int> requiredReadonlyIntList, IReadOnlyList<CollectionItem> requiredReadOnlyModelList, IReadOnlyDictionary<string, int> requiredReadOnlyIntRecord, IReadOnlyDictionary<string, string> requiredStringRecord, IReadOnlyDictionary<string, RecordItem> requiredReadOnlyModelRecord, IReadOnlyList<string> optionalReadonlyStringList, IReadOnlyList<int> optionalReadonlyIntList, IReadOnlyList<CollectionItem> optionalReadOnlyModelList, IReadOnlyDictionary<string, int> optionalReadOnlyIntRecord, IReadOnlyDictionary<string, string> optionalReadOnlyStringRecord, IReadOnlyDictionary<string, RecordItem> optionalModelRecord, IReadOnlyList<int?> requiredCollectionWithNullableIntElement, IReadOnlyList<bool?> optionalCollectionWithNullableBooleanElement, Dictionary<string, BinaryData> rawData)
         {
             RequiredReadonlyString = requiredReadonlyString;
             RequiredReadonlyInt = requiredReadonlyInt;
@@ -93,6 +96,7 @@ namespace ModelsTypeSpec.Models
             OptionalModelRecord = optionalModelRecord;
             RequiredCollectionWithNullableIntElement = requiredCollectionWithNullableIntElement;
             OptionalCollectionWithNullableBooleanElement = optionalCollectionWithNullableBooleanElement;
+            _rawData = rawData;
         }
 
         /// <summary> Required string, illustrating a readonly reference type property. </summary>

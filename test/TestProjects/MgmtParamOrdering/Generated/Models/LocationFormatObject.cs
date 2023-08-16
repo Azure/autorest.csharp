@@ -5,6 +5,8 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
 using Azure.Core;
 
 namespace MgmtParamOrdering.Models
@@ -12,18 +14,28 @@ namespace MgmtParamOrdering.Models
     /// <summary> The LocationFormatObject. </summary>
     internal partial class LocationFormatObject
     {
-        /// <summary> Initializes a new instance of LocationFormatObject. </summary>
+        private Dictionary<string, BinaryData> _rawData;
+
+        /// <summary>
+        /// Initializes a new instance of global::MgmtParamOrdering.Models.LocationFormatObject
+        ///
+        /// </summary>
         internal LocationFormatObject()
         {
         }
 
-        /// <summary> Initializes a new instance of LocationFormatObject. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::MgmtParamOrdering.Models.LocationFormatObject
+        ///
+        /// </summary>
         /// <param name="stringLocation"> This location should be a string. </param>
         /// <param name="objectLocation"> This location should be an AzureLocation. </param>
-        internal LocationFormatObject(string stringLocation, AzureLocation? objectLocation)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal LocationFormatObject(string stringLocation, AzureLocation? objectLocation, Dictionary<string, BinaryData> rawData)
         {
             StringLocation = stringLocation;
             ObjectLocation = objectLocation;
+            _rawData = rawData;
         }
 
         /// <summary> This location should be a string. </summary>

@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Azure.Core;
@@ -17,7 +18,10 @@ namespace MgmtExpandResourceTypes.Models
     /// <summary> Model factory for models. </summary>
     public static partial class ArmMgmtExpandResourceTypesModelFactory
     {
-        /// <summary> Initializes a new instance of RecordSetData. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::MgmtExpandResourceTypes.RecordSetData
+        ///
+        /// </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
         /// <param name="resourceType"> The resourceType. </param>
@@ -51,10 +55,13 @@ namespace MgmtExpandResourceTypes.Models
             txtRecords ??= new List<TxtRecord>();
             caaRecords ??= new List<CaaRecord>();
 
-            return new RecordSetData(id, name, resourceType, systemData, etag, metadata, ttl, fqdn, provisioningState, targetResourceId != null ? ResourceManagerModelFactory.WritableSubResource(targetResourceId) : null, aRecords?.ToList(), aaaaRecords?.ToList(), mxRecords?.ToList(), nsRecords?.ToList(), ptrRecords?.ToList(), srvRecords?.ToList(), txtRecords?.ToList(), cname != null ? new CnameRecord(cname) : null, soaRecord, caaRecords?.ToList());
+            return new RecordSetData(id, name, resourceType, systemData, etag, metadata, ttl, fqdn, provisioningState, targetResourceId != null ? ResourceManagerModelFactory.WritableSubResource(targetResourceId) : null, aRecords?.ToList(), aaaaRecords?.ToList(), mxRecords?.ToList(), nsRecords?.ToList(), ptrRecords?.ToList(), srvRecords?.ToList(), txtRecords?.ToList(), cname != null ? new CnameRecord(cname, new Dictionary<string, BinaryData>()) : null, soaRecord, caaRecords?.ToList(), default);
         }
 
-        /// <summary> Initializes a new instance of ZoneData. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::MgmtExpandResourceTypes.ZoneData
+        ///
+        /// </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
         /// <param name="resourceType"> The resourceType. </param>
@@ -80,20 +87,26 @@ namespace MgmtExpandResourceTypes.Models
             registrationVirtualNetworks ??= new List<WritableSubResource>();
             resolutionVirtualNetworks ??= new List<WritableSubResource>();
 
-            return new ZoneData(id, name, resourceType, systemData, tags, location, etag, maxNumberOfRecordSets, maxNumberOfRecordsPerRecordSet, numberOfRecordSets, nameServers?.ToList(), zoneType, machineType, storageType, memoryType, registrationVirtualNetworks?.ToList(), resolutionVirtualNetworks?.ToList());
+            return new ZoneData(id, name, resourceType, systemData, tags, location, etag, maxNumberOfRecordSets, maxNumberOfRecordsPerRecordSet, numberOfRecordSets, nameServers?.ToList(), zoneType, machineType, storageType, memoryType, registrationVirtualNetworks?.ToList(), resolutionVirtualNetworks?.ToList(), default);
         }
 
-        /// <summary> Initializes a new instance of DnsResourceReferenceResult. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::MgmtExpandResourceTypes.Models.DnsResourceReferenceResult
+        ///
+        /// </summary>
         /// <param name="dnsResourceReferences"> The result of dns resource reference request. A list of dns resource references for each of the azure resource in the request. </param>
         /// <returns> A new <see cref="Models.DnsResourceReferenceResult"/> instance for mocking. </returns>
         public static DnsResourceReferenceResult DnsResourceReferenceResult(IEnumerable<DnsResourceReference> dnsResourceReferences = null)
         {
             dnsResourceReferences ??= new List<DnsResourceReference>();
 
-            return new DnsResourceReferenceResult(dnsResourceReferences?.ToList());
+            return new DnsResourceReferenceResult(dnsResourceReferences?.ToList(), default);
         }
 
-        /// <summary> Initializes a new instance of DnsResourceReference. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::MgmtExpandResourceTypes.Models.DnsResourceReference
+        ///
+        /// </summary>
         /// <param name="dnsResources"> A list of dns Records. </param>
         /// <param name="targetResourceId"> A reference to an azure resource from where the dns resource value is taken. </param>
         /// <returns> A new <see cref="Models.DnsResourceReference"/> instance for mocking. </returns>
@@ -101,7 +114,7 @@ namespace MgmtExpandResourceTypes.Models
         {
             dnsResources ??= new List<WritableSubResource>();
 
-            return new DnsResourceReference(dnsResources?.ToList(), targetResourceId != null ? ResourceManagerModelFactory.WritableSubResource(targetResourceId) : null);
+            return new DnsResourceReference(dnsResources?.ToList(), targetResourceId != null ? ResourceManagerModelFactory.WritableSubResource(targetResourceId) : null, default);
         }
     }
 }

@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Collections.Generic;
 using Azure.Core;
 
@@ -16,13 +17,19 @@ namespace MgmtRenameRules.Models
     /// </summary>
     public partial class VirtualMachineScaleSetReimageContent : VirtualMachineScaleSetVmReimageContent
     {
-        /// <summary> Initializes a new instance of VirtualMachineScaleSetReimageContent. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::MgmtRenameRules.Models.VirtualMachineScaleSetReimageContent
+        ///
+        /// </summary>
         public VirtualMachineScaleSetReimageContent()
         {
             InstanceIds = new ChangeTrackingList<string>();
         }
 
-        /// <summary> Initializes a new instance of VirtualMachineScaleSetReimageContent. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::MgmtRenameRules.Models.VirtualMachineScaleSetReimageContent
+        ///
+        /// </summary>
         /// <param name="tempDisk">
         /// Specifies whether to reimage temp disk. Default value: false. Note: This temp disk reimage parameter is only supported for VM/VMSS with Ephemeral OS disk.
         /// Serialized Name: VirtualMachineReimageParameters.tempDisk
@@ -31,7 +38,8 @@ namespace MgmtRenameRules.Models
         /// The virtual machine scale set instance ids. Omitting the virtual machine scale set instance ids will result in the operation being performed on all virtual machines in the virtual machine scale set.
         /// Serialized Name: VirtualMachineScaleSetReimageParameters.instanceIds
         /// </param>
-        internal VirtualMachineScaleSetReimageContent(bool? tempDisk, IList<string> instanceIds) : base(tempDisk)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal VirtualMachineScaleSetReimageContent(bool? tempDisk, IList<string> instanceIds, Dictionary<string, BinaryData> rawData) : base(tempDisk, rawData)
         {
             InstanceIds = instanceIds;
         }

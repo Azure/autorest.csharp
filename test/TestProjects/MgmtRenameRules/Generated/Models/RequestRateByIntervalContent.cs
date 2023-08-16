@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
 using Azure.Core;
 
 namespace MgmtRenameRules.Models
@@ -16,7 +17,10 @@ namespace MgmtRenameRules.Models
     /// </summary>
     public partial class RequestRateByIntervalContent : LogAnalyticsInputBase
     {
-        /// <summary> Initializes a new instance of RequestRateByIntervalContent. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::MgmtRenameRules.Models.RequestRateByIntervalContent
+        ///
+        /// </summary>
         /// <param name="blobContainerSasUri">
         /// SAS Uri of the logging blob container to which LogAnalytics Api writes output logs to.
         /// Serialized Name: LogAnalyticsInputBase.blobContainerSasUri
@@ -41,7 +45,10 @@ namespace MgmtRenameRules.Models
             IntervalLength = intervalLength;
         }
 
-        /// <summary> Initializes a new instance of RequestRateByIntervalContent. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::MgmtRenameRules.Models.RequestRateByIntervalContent
+        ///
+        /// </summary>
         /// <param name="blobContainerSasUri">
         /// SAS Uri of the logging blob container to which LogAnalytics Api writes output logs to.
         /// Serialized Name: LogAnalyticsInputBase.blobContainerSasUri
@@ -70,7 +77,8 @@ namespace MgmtRenameRules.Models
         /// Interval value in minutes used to create LogAnalytics call rate logs.
         /// Serialized Name: RequestRateByIntervalInput.intervalLength
         /// </param>
-        internal RequestRateByIntervalContent(Uri blobContainerSasUri, DateTimeOffset fromTime, DateTimeOffset toTime, bool? groupByThrottlePolicy, bool? groupByOperationName, bool? groupByResourceName, IntervalInMin intervalLength) : base(blobContainerSasUri, fromTime, toTime, groupByThrottlePolicy, groupByOperationName, groupByResourceName)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal RequestRateByIntervalContent(Uri blobContainerSasUri, DateTimeOffset fromTime, DateTimeOffset toTime, bool? groupByThrottlePolicy, bool? groupByOperationName, bool? groupByResourceName, IntervalInMin intervalLength, Dictionary<string, BinaryData> rawData) : base(blobContainerSasUri, fromTime, toTime, groupByThrottlePolicy, groupByOperationName, groupByResourceName, rawData)
         {
             IntervalLength = intervalLength;
         }

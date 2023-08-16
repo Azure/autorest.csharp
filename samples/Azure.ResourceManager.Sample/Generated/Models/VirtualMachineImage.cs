@@ -17,7 +17,10 @@ namespace Azure.ResourceManager.Sample.Models
     /// </summary>
     public partial class VirtualMachineImage : VirtualMachineImageResource
     {
-        /// <summary> Initializes a new instance of VirtualMachineImage. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::Azure.ResourceManager.Sample.Models.VirtualMachineImage
+        ///
+        /// </summary>
         /// <param name="name">
         /// The name of the resource.
         /// Serialized Name: VirtualMachineImageResource.name
@@ -34,7 +37,10 @@ namespace Azure.ResourceManager.Sample.Models
             DataDiskImages = new ChangeTrackingList<DataDiskImage>();
         }
 
-        /// <summary> Initializes a new instance of VirtualMachineImage. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::Azure.ResourceManager.Sample.Models.VirtualMachineImage
+        ///
+        /// </summary>
         /// <param name="id">
         /// Resource Id
         /// Serialized Name: SubResource.id
@@ -72,7 +78,8 @@ namespace Azure.ResourceManager.Sample.Models
         /// Specifies disallowed configuration for the VirtualMachine created from the image
         /// Serialized Name: VirtualMachineImage.properties.disallowed
         /// </param>
-        internal VirtualMachineImage(string id, string name, AzureLocation location, IDictionary<string, string> tags, PurchasePlan plan, OSDiskImage osDiskImage, IList<DataDiskImage> dataDiskImages, AutomaticOSUpgradeProperties automaticOSUpgradeProperties, HyperVGeneration? hyperVGeneration, DisallowedConfiguration disallowed) : base(id, name, location, tags)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal VirtualMachineImage(string id, string name, AzureLocation location, IDictionary<string, string> tags, PurchasePlan plan, OSDiskImage osDiskImage, IList<DataDiskImage> dataDiskImages, AutomaticOSUpgradeProperties automaticOSUpgradeProperties, HyperVGeneration? hyperVGeneration, DisallowedConfiguration disallowed, Dictionary<string, BinaryData> rawData) : base(id, name, location, tags, rawData)
         {
             Plan = plan;
             OsDiskImage = osDiskImage;

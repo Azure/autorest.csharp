@@ -5,11 +5,16 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
+
 namespace _Specs_.Azure.Core.Traits.Models
 {
     /// <summary> Sample Model. </summary>
     public partial class User
     {
+        private Dictionary<string, BinaryData> _rawData;
+
         /// <summary> Initializes a new instance of User. </summary>
         internal User()
         {
@@ -18,10 +23,12 @@ namespace _Specs_.Azure.Core.Traits.Models
         /// <summary> Initializes a new instance of User. </summary>
         /// <param name="id"> The user's id. </param>
         /// <param name="name"> The user's name. </param>
-        internal User(int id, string name)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal User(int id, string name, Dictionary<string, BinaryData> rawData)
         {
             Id = id;
             Name = name;
+            _rawData = rawData;
         }
 
         /// <summary> The user's id. </summary>

@@ -5,6 +5,9 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
+
 namespace MgmtRenameRules.Models
 {
     /// <summary>
@@ -13,12 +16,20 @@ namespace MgmtRenameRules.Models
     /// </summary>
     public partial class VirtualMachineScaleSetUpdateVmProfile
     {
-        /// <summary> Initializes a new instance of VirtualMachineScaleSetUpdateVmProfile. </summary>
+        private Dictionary<string, BinaryData> _rawData;
+
+        /// <summary>
+        /// Initializes a new instance of global::MgmtRenameRules.Models.VirtualMachineScaleSetUpdateVmProfile
+        ///
+        /// </summary>
         public VirtualMachineScaleSetUpdateVmProfile()
         {
         }
 
-        /// <summary> Initializes a new instance of VirtualMachineScaleSetUpdateVmProfile. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::MgmtRenameRules.Models.VirtualMachineScaleSetUpdateVmProfile
+        ///
+        /// </summary>
         /// <param name="osProfile">
         /// The virtual machine scale set OS profile.
         /// Serialized Name: VirtualMachineScaleSetUpdateVMProfile.osProfile
@@ -55,7 +66,8 @@ namespace MgmtRenameRules.Models
         /// Specifies Scheduled Event related configurations.
         /// Serialized Name: VirtualMachineScaleSetUpdateVMProfile.scheduledEventsProfile
         /// </param>
-        internal VirtualMachineScaleSetUpdateVmProfile(VirtualMachineScaleSetUpdateOSProfile osProfile, VirtualMachineScaleSetUpdateStorageProfile storageProfile, VirtualMachineScaleSetUpdateNetworkProfile networkProfile, SecurityProfile securityProfile, DiagnosticsProfile diagnosticsProfile, VirtualMachineScaleSetExtensionProfile extensionProfile, string licenseType, BillingProfile billingProfile, ScheduledEventsProfile scheduledEventsProfile)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal VirtualMachineScaleSetUpdateVmProfile(VirtualMachineScaleSetUpdateOSProfile osProfile, VirtualMachineScaleSetUpdateStorageProfile storageProfile, VirtualMachineScaleSetUpdateNetworkProfile networkProfile, SecurityProfile securityProfile, DiagnosticsProfile diagnosticsProfile, VirtualMachineScaleSetExtensionProfile extensionProfile, string licenseType, BillingProfile billingProfile, ScheduledEventsProfile scheduledEventsProfile, Dictionary<string, BinaryData> rawData)
         {
             OSProfile = osProfile;
             StorageProfile = storageProfile;
@@ -66,6 +78,7 @@ namespace MgmtRenameRules.Models
             LicenseType = licenseType;
             BillingProfile = billingProfile;
             ScheduledEventsProfile = scheduledEventsProfile;
+            _rawData = rawData;
         }
 
         /// <summary>

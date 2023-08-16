@@ -6,12 +6,15 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
 
 namespace _Type.Property.Optional.Models
 {
     /// <summary> Model with a datetime property. </summary>
     public partial class DatetimeProperty
     {
+        private Dictionary<string, BinaryData> _rawData;
+
         /// <summary> Initializes a new instance of DatetimeProperty. </summary>
         public DatetimeProperty()
         {
@@ -19,9 +22,11 @@ namespace _Type.Property.Optional.Models
 
         /// <summary> Initializes a new instance of DatetimeProperty. </summary>
         /// <param name="property"> Property. </param>
-        internal DatetimeProperty(DateTimeOffset? property)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal DatetimeProperty(DateTimeOffset? property, Dictionary<string, BinaryData> rawData)
         {
             Property = property;
+            _rawData = rawData;
         }
 
         /// <summary> Property. </summary>

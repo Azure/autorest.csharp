@@ -6,18 +6,22 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
 using System.Text.Json;
+using Azure;
 using Azure.Core;
 using Azure.Core.Serialization;
 
 namespace CognitiveSearch.Models
 {
-    public partial class MicrosoftLanguageTokenizer : IUtf8JsonSerializable, IJsonModelSerializable
+    public partial class MicrosoftLanguageTokenizer : IUtf8JsonSerializable, IModelJsonSerializable<MicrosoftLanguageTokenizer>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModelSerializable)this).Serialize(writer, ModelSerializerOptions.AzureServiceDefault);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<MicrosoftLanguageTokenizer>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
 
-        void IJsonModelSerializable.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
+        void IModelJsonSerializable<MicrosoftLanguageTokenizer>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
+            ModelSerializerHelper.ValidateFormat<MicrosoftLanguageTokenizer>(this, options.Format);
+
             writer.WriteStartObject();
             if (Optional.IsDefined(MaxTokenLength))
             {
@@ -38,18 +42,25 @@ namespace CognitiveSearch.Models
             writer.WriteStringValue(OdataType);
             writer.WritePropertyName("name"u8);
             writer.WriteStringValue(Name);
+            if (_rawData is not null && options.Format == ModelSerializerFormat.Json)
+            {
+                foreach (var property in _rawData)
+                {
+                    writer.WritePropertyName(property.Key);
+#if NET6_0_OR_GREATER
+				writer.WriteRawValue(property.Value);
+#else
+                    JsonSerializer.Serialize(writer, JsonDocument.Parse(property.Value.ToString()).RootElement);
+#endif
+                }
+            }
             writer.WriteEndObject();
-        }
-
-        object IModelSerializable.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            using var doc = JsonDocument.Parse(data);
-            return DeserializeMicrosoftLanguageTokenizer(doc.RootElement, options);
         }
 
         internal static MicrosoftLanguageTokenizer DeserializeMicrosoftLanguageTokenizer(JsonElement element, ModelSerializerOptions options = default)
         {
-            options ??= ModelSerializerOptions.AzureServiceDefault;
+            options ??= ModelSerializerOptions.DefaultWireOptions;
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
@@ -59,6 +70,7 @@ namespace CognitiveSearch.Models
             Optional<MicrosoftTokenizerLanguage> language = default;
             string odataType = default;
             string name = default;
+            Dictionary<string, BinaryData> rawData = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("maxTokenLength"u8))
@@ -98,14 +110,57 @@ namespace CognitiveSearch.Models
                     name = property.Value.GetString();
                     continue;
                 }
+                if (options.Format == ModelSerializerFormat.Json)
+                {
+                    rawData.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
+                    continue;
+                }
             }
-            return new MicrosoftLanguageTokenizer(odataType, name, Optional.ToNullable(maxTokenLength), Optional.ToNullable(isSearchTokenizer), Optional.ToNullable(language));
+            return new MicrosoftLanguageTokenizer(odataType, name, Optional.ToNullable(maxTokenLength), Optional.ToNullable(isSearchTokenizer), Optional.ToNullable(language), rawData);
         }
 
-        object IJsonModelSerializable.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        MicrosoftLanguageTokenizer IModelJsonSerializable<MicrosoftLanguageTokenizer>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
         {
+            ModelSerializerHelper.ValidateFormat<MicrosoftLanguageTokenizer>(this, options.Format);
+
             using var doc = JsonDocument.ParseValue(ref reader);
             return DeserializeMicrosoftLanguageTokenizer(doc.RootElement, options);
+        }
+
+        BinaryData IModelSerializable<MicrosoftLanguageTokenizer>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat<MicrosoftLanguageTokenizer>(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        MicrosoftLanguageTokenizer IModelSerializable<MicrosoftLanguageTokenizer>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat<MicrosoftLanguageTokenizer>(this, options.Format);
+
+            using var doc = JsonDocument.Parse(data);
+            return DeserializeMicrosoftLanguageTokenizer(doc.RootElement, options);
+        }
+
+        public static implicit operator RequestContent(MicrosoftLanguageTokenizer model)
+        {
+            if (model is null)
+            {
+                return null;
+            }
+
+            return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
+        }
+
+        public static explicit operator MicrosoftLanguageTokenizer(Response response)
+        {
+            if (response is null)
+            {
+                return null;
+            }
+
+            using JsonDocument doc = JsonDocument.Parse(response.ContentStream);
+            return DeserializeMicrosoftLanguageTokenizer(doc.RootElement, ModelSerializerOptions.DefaultWireOptions);
         }
     }
 }

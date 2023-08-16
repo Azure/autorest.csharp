@@ -5,6 +5,8 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
 using System.Text.Json;
 
 namespace TypeSchemaMapping.Models
@@ -12,18 +14,28 @@ namespace TypeSchemaMapping.Models
     /// <summary> The PublicModelWithInternalProperty. </summary>
     public partial class PublicModelWithInternalProperty
     {
-        /// <summary> Initializes a new instance of PublicModelWithInternalProperty. </summary>
+        private Dictionary<string, BinaryData> _rawData;
+
+        /// <summary>
+        /// Initializes a new instance of global::TypeSchemaMapping.Models.PublicModelWithInternalProperty
+        ///
+        /// </summary>
         internal PublicModelWithInternalProperty()
         {
         }
 
-        /// <summary> Initializes a new instance of PublicModelWithInternalProperty. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::TypeSchemaMapping.Models.PublicModelWithInternalProperty
+        ///
+        /// </summary>
         /// <param name="stringPropertyJson"></param>
         /// <param name="publicProperty"></param>
-        internal PublicModelWithInternalProperty(JsonElement stringPropertyJson, string publicProperty)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal PublicModelWithInternalProperty(JsonElement stringPropertyJson, string publicProperty, Dictionary<string, BinaryData> rawData)
         {
             StringPropertyJson = stringPropertyJson;
             PublicProperty = publicProperty;
+            _rawData = rawData;
         }
         /// <summary> Gets the public property. </summary>
         public string PublicProperty { get; }

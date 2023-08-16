@@ -5,6 +5,9 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
+
 namespace Azure.ResourceManager.Sample.Models
 {
     /// <summary>
@@ -13,12 +16,20 @@ namespace Azure.ResourceManager.Sample.Models
     /// </summary>
     public partial class VirtualMachineExtensionHandlerInstanceView
     {
-        /// <summary> Initializes a new instance of VirtualMachineExtensionHandlerInstanceView. </summary>
+        private Dictionary<string, BinaryData> _rawData;
+
+        /// <summary>
+        /// Initializes a new instance of global::Azure.ResourceManager.Sample.Models.VirtualMachineExtensionHandlerInstanceView
+        ///
+        /// </summary>
         internal VirtualMachineExtensionHandlerInstanceView()
         {
         }
 
-        /// <summary> Initializes a new instance of VirtualMachineExtensionHandlerInstanceView. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::Azure.ResourceManager.Sample.Models.VirtualMachineExtensionHandlerInstanceView
+        ///
+        /// </summary>
         /// <param name="virtualMachineExtensionHandlerInstanceViewType">
         /// Specifies the type of the extension; an example is "CustomScriptExtension".
         /// Serialized Name: VirtualMachineExtensionHandlerInstanceView.type
@@ -31,11 +42,13 @@ namespace Azure.ResourceManager.Sample.Models
         /// The extension handler status.
         /// Serialized Name: VirtualMachineExtensionHandlerInstanceView.status
         /// </param>
-        internal VirtualMachineExtensionHandlerInstanceView(string virtualMachineExtensionHandlerInstanceViewType, string typeHandlerVersion, InstanceViewStatus status)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal VirtualMachineExtensionHandlerInstanceView(string virtualMachineExtensionHandlerInstanceViewType, string typeHandlerVersion, InstanceViewStatus status, Dictionary<string, BinaryData> rawData)
         {
             VirtualMachineExtensionHandlerInstanceViewType = virtualMachineExtensionHandlerInstanceViewType;
             TypeHandlerVersion = typeHandlerVersion;
             Status = status;
+            _rawData = rawData;
         }
 
         /// <summary>

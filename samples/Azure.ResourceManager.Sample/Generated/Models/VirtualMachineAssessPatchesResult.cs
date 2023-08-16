@@ -17,13 +17,21 @@ namespace Azure.ResourceManager.Sample.Models
     /// </summary>
     public partial class VirtualMachineAssessPatchesResult
     {
-        /// <summary> Initializes a new instance of VirtualMachineAssessPatchesResult. </summary>
+        private Dictionary<string, BinaryData> _rawData;
+
+        /// <summary>
+        /// Initializes a new instance of global::Azure.ResourceManager.Sample.Models.VirtualMachineAssessPatchesResult
+        ///
+        /// </summary>
         internal VirtualMachineAssessPatchesResult()
         {
             Patches = new ChangeTrackingList<VirtualMachineSoftwarePatchProperties>();
         }
 
-        /// <summary> Initializes a new instance of VirtualMachineAssessPatchesResult. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::Azure.ResourceManager.Sample.Models.VirtualMachineAssessPatchesResult
+        ///
+        /// </summary>
         /// <param name="status">
         /// The overall success or failure status of the operation. It remains "InProgress" until the operation completes. At that point it will become "Failed", "Succeeded", or "CompletedWithWarnings."
         /// Serialized Name: VirtualMachineAssessPatchesResult.status
@@ -56,7 +64,8 @@ namespace Azure.ResourceManager.Sample.Models
         /// The errors that were encountered during execution of the operation. The details array contains the list of them.
         /// Serialized Name: VirtualMachineAssessPatchesResult.error
         /// </param>
-        internal VirtualMachineAssessPatchesResult(PatchOperationStatus? status, string assessmentActivityId, bool? rebootPending, int? criticalAndSecurityPatchCount, int? otherPatchCount, DateTimeOffset? startOn, IReadOnlyList<VirtualMachineSoftwarePatchProperties> patches, ApiError error)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal VirtualMachineAssessPatchesResult(PatchOperationStatus? status, string assessmentActivityId, bool? rebootPending, int? criticalAndSecurityPatchCount, int? otherPatchCount, DateTimeOffset? startOn, IReadOnlyList<VirtualMachineSoftwarePatchProperties> patches, ApiError error, Dictionary<string, BinaryData> rawData)
         {
             Status = status;
             AssessmentActivityId = assessmentActivityId;
@@ -66,6 +75,7 @@ namespace Azure.ResourceManager.Sample.Models
             StartOn = startOn;
             Patches = patches;
             Error = error;
+            _rawData = rawData;
         }
 
         /// <summary>

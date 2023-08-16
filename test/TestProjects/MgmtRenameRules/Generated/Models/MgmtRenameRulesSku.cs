@@ -5,6 +5,9 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
+
 namespace MgmtRenameRules.Models
 {
     /// <summary>
@@ -13,12 +16,20 @@ namespace MgmtRenameRules.Models
     /// </summary>
     public partial class MgmtRenameRulesSku
     {
-        /// <summary> Initializes a new instance of MgmtRenameRulesSku. </summary>
+        private Dictionary<string, BinaryData> _rawData;
+
+        /// <summary>
+        /// Initializes a new instance of global::MgmtRenameRules.Models.MgmtRenameRulesSku
+        ///
+        /// </summary>
         public MgmtRenameRulesSku()
         {
         }
 
-        /// <summary> Initializes a new instance of MgmtRenameRulesSku. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::MgmtRenameRules.Models.MgmtRenameRulesSku
+        ///
+        /// </summary>
         /// <param name="name">
         /// The sku name.
         /// Serialized Name: Sku.name
@@ -31,11 +42,13 @@ namespace MgmtRenameRules.Models
         /// Specifies the number of virtual machines in the scale set.
         /// Serialized Name: Sku.capacity
         /// </param>
-        internal MgmtRenameRulesSku(string name, string tier, long? capacity)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal MgmtRenameRulesSku(string name, string tier, long? capacity, Dictionary<string, BinaryData> rawData)
         {
             Name = name;
             Tier = tier;
             Capacity = capacity;
+            _rawData = rawData;
         }
 
         /// <summary>

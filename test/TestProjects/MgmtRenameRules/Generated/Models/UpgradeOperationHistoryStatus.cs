@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
 
 namespace MgmtRenameRules.Models
 {
@@ -15,12 +16,20 @@ namespace MgmtRenameRules.Models
     /// </summary>
     public partial class UpgradeOperationHistoryStatus
     {
-        /// <summary> Initializes a new instance of UpgradeOperationHistoryStatus. </summary>
+        private Dictionary<string, BinaryData> _rawData;
+
+        /// <summary>
+        /// Initializes a new instance of global::MgmtRenameRules.Models.UpgradeOperationHistoryStatus
+        ///
+        /// </summary>
         internal UpgradeOperationHistoryStatus()
         {
         }
 
-        /// <summary> Initializes a new instance of UpgradeOperationHistoryStatus. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::MgmtRenameRules.Models.UpgradeOperationHistoryStatus
+        ///
+        /// </summary>
         /// <param name="code">
         /// Code indicating the current status of the upgrade.
         /// Serialized Name: UpgradeOperationHistoryStatus.code
@@ -33,11 +42,13 @@ namespace MgmtRenameRules.Models
         /// End time of the upgrade.
         /// Serialized Name: UpgradeOperationHistoryStatus.endTime
         /// </param>
-        internal UpgradeOperationHistoryStatus(UpgradeState? code, DateTimeOffset? startOn, DateTimeOffset? endOn)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal UpgradeOperationHistoryStatus(UpgradeState? code, DateTimeOffset? startOn, DateTimeOffset? endOn, Dictionary<string, BinaryData> rawData)
         {
             Code = code;
             StartOn = startOn;
             EndOn = endOn;
+            _rawData = rawData;
         }
 
         /// <summary>

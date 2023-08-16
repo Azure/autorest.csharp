@@ -5,12 +5,20 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
+
 namespace MgmtDiscriminator.Models
 {
     /// <summary> Defines the parameters for the url redirect action. </summary>
     public partial class UrlRedirectActionParameters
     {
-        /// <summary> Initializes a new instance of UrlRedirectActionParameters. </summary>
+        private Dictionary<string, BinaryData> _rawData;
+
+        /// <summary>
+        /// Initializes a new instance of global::MgmtDiscriminator.Models.UrlRedirectActionParameters
+        ///
+        /// </summary>
         /// <param name="typeName"></param>
         /// <param name="redirectType"> The redirect type the rule will use when redirecting traffic. </param>
         public UrlRedirectActionParameters(UrlRedirectActionParametersTypeName typeName, RedirectType redirectType)
@@ -19,7 +27,10 @@ namespace MgmtDiscriminator.Models
             RedirectType = redirectType;
         }
 
-        /// <summary> Initializes a new instance of UrlRedirectActionParameters. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::MgmtDiscriminator.Models.UrlRedirectActionParameters
+        ///
+        /// </summary>
         /// <param name="typeName"></param>
         /// <param name="redirectType"> The redirect type the rule will use when redirecting traffic. </param>
         /// <param name="destinationProtocol"> Protocol to use for the redirect. The default value is MatchRequest. </param>
@@ -27,7 +38,8 @@ namespace MgmtDiscriminator.Models
         /// <param name="customHostname"> Host to redirect. Leave empty to use the incoming host as the destination host. </param>
         /// <param name="customQueryString"> The set of query strings to be placed in the redirect URL. Setting this value would replace any existing query string; leave empty to preserve the incoming query string. Query string must be in &lt;key&gt;=&lt;value&gt; format. ? and &amp; will be added automatically so do not include them. </param>
         /// <param name="customFragment"> Fragment to add to the redirect URL. Fragment is the part of the URL that comes after #. Do not include the #. </param>
-        internal UrlRedirectActionParameters(UrlRedirectActionParametersTypeName typeName, RedirectType redirectType, DestinationProtocol? destinationProtocol, string customPath, string customHostname, string customQueryString, string customFragment)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal UrlRedirectActionParameters(UrlRedirectActionParametersTypeName typeName, RedirectType redirectType, DestinationProtocol? destinationProtocol, string customPath, string customHostname, string customQueryString, string customFragment, Dictionary<string, BinaryData> rawData)
         {
             TypeName = typeName;
             RedirectType = redirectType;
@@ -36,6 +48,7 @@ namespace MgmtDiscriminator.Models
             CustomHostname = customHostname;
             CustomQueryString = customQueryString;
             CustomFragment = customFragment;
+            _rawData = rawData;
         }
 
         /// <summary> Gets or sets the type name. </summary>

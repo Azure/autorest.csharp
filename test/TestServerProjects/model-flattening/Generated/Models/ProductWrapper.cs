@@ -5,21 +5,34 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
+
 namespace model_flattening.Models
 {
     /// <summary> The wrapped produc. </summary>
     public partial class ProductWrapper
     {
-        /// <summary> Initializes a new instance of ProductWrapper. </summary>
+        private Dictionary<string, BinaryData> _rawData;
+
+        /// <summary>
+        /// Initializes a new instance of global::model_flattening.Models.ProductWrapper
+        ///
+        /// </summary>
         internal ProductWrapper()
         {
         }
 
-        /// <summary> Initializes a new instance of ProductWrapper. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::model_flattening.Models.ProductWrapper
+        ///
+        /// </summary>
         /// <param name="value"> the product value. </param>
-        internal ProductWrapper(string value)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal ProductWrapper(string value, Dictionary<string, BinaryData> rawData)
         {
             Value = value;
+            _rawData = rawData;
         }
 
         /// <summary> the product value. </summary>

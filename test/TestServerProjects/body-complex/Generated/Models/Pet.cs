@@ -5,23 +5,36 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
+
 namespace body_complex.Models
 {
     /// <summary> The Pet. </summary>
     public partial class Pet
     {
-        /// <summary> Initializes a new instance of Pet. </summary>
+        protected internal Dictionary<string, BinaryData> _rawData;
+
+        /// <summary>
+        /// Initializes a new instance of global::body_complex.Models.Pet
+        ///
+        /// </summary>
         public Pet()
         {
         }
 
-        /// <summary> Initializes a new instance of Pet. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::body_complex.Models.Pet
+        ///
+        /// </summary>
         /// <param name="id"></param>
         /// <param name="name"></param>
-        internal Pet(int? id, string name)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal Pet(int? id, string name, Dictionary<string, BinaryData> rawData)
         {
             Id = id;
             Name = name;
+            _rawData = rawData;
         }
 
         /// <summary> Gets or sets the id. </summary>

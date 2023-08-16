@@ -6,13 +6,19 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
 
 namespace Azure.AI.FormRecognizer.Models
 {
     /// <summary> Basic custom model information. </summary>
     public partial class ModelInfo
     {
-        /// <summary> Initializes a new instance of ModelInfo. </summary>
+        private Dictionary<string, BinaryData> _rawData;
+
+        /// <summary>
+        /// Initializes a new instance of global::Azure.AI.FormRecognizer.Models.ModelInfo
+        ///
+        /// </summary>
         /// <param name="modelId"> Model identifier. </param>
         /// <param name="status"> Status of the model. </param>
         /// <param name="createdDateTime"> Date and time (UTC) when the model was created. </param>
@@ -23,6 +29,24 @@ namespace Azure.AI.FormRecognizer.Models
             Status = status;
             CreatedDateTime = createdDateTime;
             LastUpdatedDateTime = lastUpdatedDateTime;
+        }
+
+        /// <summary>
+        /// Initializes a new instance of global::Azure.AI.FormRecognizer.Models.ModelInfo
+        ///
+        /// </summary>
+        /// <param name="modelId"> Model identifier. </param>
+        /// <param name="status"> Status of the model. </param>
+        /// <param name="createdDateTime"> Date and time (UTC) when the model was created. </param>
+        /// <param name="lastUpdatedDateTime"> Date and time (UTC) when the status was last updated. </param>
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal ModelInfo(Guid modelId, ModelStatus status, DateTimeOffset createdDateTime, DateTimeOffset lastUpdatedDateTime, Dictionary<string, BinaryData> rawData)
+        {
+            ModelId = modelId;
+            Status = status;
+            CreatedDateTime = createdDateTime;
+            LastUpdatedDateTime = lastUpdatedDateTime;
+            _rawData = rawData;
         }
 
         /// <summary> Model identifier. </summary>

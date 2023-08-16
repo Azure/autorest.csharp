@@ -6,18 +6,22 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
 using System.Text.Json;
+using Azure;
 using Azure.Core;
 using Azure.Core.Serialization;
 
 namespace MgmtConstants.Models
 {
-    public partial class ModelWithOptionalConstant : IUtf8JsonSerializable, IJsonModelSerializable
+    public partial class ModelWithOptionalConstant : IUtf8JsonSerializable, IModelJsonSerializable<ModelWithOptionalConstant>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModelSerializable)this).Serialize(writer, ModelSerializerOptions.AzureServiceDefault);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<ModelWithOptionalConstant>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
 
-        void IJsonModelSerializable.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
+        void IModelJsonSerializable<ModelWithOptionalConstant>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
             writer.WriteStartObject();
             if (Optional.IsDefined(OptionalStringConstant))
             {
@@ -39,18 +43,25 @@ namespace MgmtConstants.Models
                 writer.WritePropertyName("optionalFloatConstant"u8);
                 writer.WriteNumberValue(OptionalFloatConstant.Value.ToSerialSingle());
             }
+            if (_rawData is not null && options.Format == ModelSerializerFormat.Json)
+            {
+                foreach (var property in _rawData)
+                {
+                    writer.WritePropertyName(property.Key);
+#if NET6_0_OR_GREATER
+				writer.WriteRawValue(property.Value);
+#else
+                    JsonSerializer.Serialize(writer, JsonDocument.Parse(property.Value.ToString()).RootElement);
+#endif
+                }
+            }
             writer.WriteEndObject();
-        }
-
-        object IModelSerializable.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            using var doc = JsonDocument.Parse(data);
-            return DeserializeModelWithOptionalConstant(doc.RootElement, options);
         }
 
         internal static ModelWithOptionalConstant DeserializeModelWithOptionalConstant(JsonElement element, ModelSerializerOptions options = default)
         {
-            options ??= ModelSerializerOptions.AzureServiceDefault;
+            options ??= ModelSerializerOptions.DefaultWireOptions;
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
@@ -59,6 +70,7 @@ namespace MgmtConstants.Models
             Optional<IntConstant> optionalIntConstant = default;
             Optional<bool> optionalBooleanConstant = default;
             Optional<FloatConstant> optionalFloatConstant = default;
+            Dictionary<string, BinaryData> rawData = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("optionalStringConstant"u8))
@@ -97,14 +109,57 @@ namespace MgmtConstants.Models
                     optionalFloatConstant = new FloatConstant(property.Value.GetSingle());
                     continue;
                 }
+                if (options.Format == ModelSerializerFormat.Json)
+                {
+                    rawData.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
+                    continue;
+                }
             }
-            return new ModelWithOptionalConstant(Optional.ToNullable(optionalStringConstant), Optional.ToNullable(optionalIntConstant), Optional.ToNullable(optionalBooleanConstant), Optional.ToNullable(optionalFloatConstant));
+            return new ModelWithOptionalConstant(Optional.ToNullable(optionalStringConstant), Optional.ToNullable(optionalIntConstant), Optional.ToNullable(optionalBooleanConstant), Optional.ToNullable(optionalFloatConstant), rawData);
         }
 
-        object IJsonModelSerializable.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        ModelWithOptionalConstant IModelJsonSerializable<ModelWithOptionalConstant>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
         {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
             using var doc = JsonDocument.ParseValue(ref reader);
             return DeserializeModelWithOptionalConstant(doc.RootElement, options);
+        }
+
+        BinaryData IModelSerializable<ModelWithOptionalConstant>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        ModelWithOptionalConstant IModelSerializable<ModelWithOptionalConstant>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using var doc = JsonDocument.Parse(data);
+            return DeserializeModelWithOptionalConstant(doc.RootElement, options);
+        }
+
+        public static implicit operator RequestContent(ModelWithOptionalConstant model)
+        {
+            if (model is null)
+            {
+                return null;
+            }
+
+            return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
+        }
+
+        public static explicit operator ModelWithOptionalConstant(Response response)
+        {
+            if (response is null)
+            {
+                return null;
+            }
+
+            using JsonDocument doc = JsonDocument.Parse(response.ContentStream);
+            return DeserializeModelWithOptionalConstant(doc.RootElement, ModelSerializerOptions.DefaultWireOptions);
         }
     }
 }

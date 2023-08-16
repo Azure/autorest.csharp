@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Collections.Generic;
 using Azure.Core;
 
@@ -13,6 +14,8 @@ namespace AnomalyDetector.Models
     /// <summary> Detailed information of the anomalous timestamp. </summary>
     public partial class AnomalyValue
     {
+        private Dictionary<string, BinaryData> _rawData;
+
         /// <summary> Initializes a new instance of AnomalyValue. </summary>
         /// <param name="isAnomaly"> True if an anomaly is detected at the current timestamp. </param>
         /// <param name="severity">
@@ -42,12 +45,14 @@ namespace AnomalyDetector.Models
         /// well.
         /// </param>
         /// <param name="interpretation"> Interpretation of this anomalous timestamp. </param>
-        internal AnomalyValue(bool isAnomaly, float severity, float score, IReadOnlyList<AnomalyInterpretation> interpretation)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal AnomalyValue(bool isAnomaly, float severity, float score, IReadOnlyList<AnomalyInterpretation> interpretation, Dictionary<string, BinaryData> rawData)
         {
             IsAnomaly = isAnomaly;
             Severity = severity;
             Score = score;
             Interpretation = interpretation;
+            _rawData = rawData;
         }
 
         /// <summary> True if an anomaly is detected at the current timestamp. </summary>

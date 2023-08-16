@@ -5,25 +5,38 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
+
 namespace MgmtDiscriminator.Models
 {
     /// <summary> Defines the parameters for the route configuration override action. </summary>
     public partial class RouteConfigurationOverrideActionParameters
     {
-        /// <summary> Initializes a new instance of RouteConfigurationOverrideActionParameters. </summary>
+        private Dictionary<string, BinaryData> _rawData;
+
+        /// <summary>
+        /// Initializes a new instance of global::MgmtDiscriminator.Models.RouteConfigurationOverrideActionParameters
+        ///
+        /// </summary>
         /// <param name="typeName"></param>
         public RouteConfigurationOverrideActionParameters(RouteConfigurationOverrideActionParametersTypeName typeName)
         {
             TypeName = typeName;
         }
 
-        /// <summary> Initializes a new instance of RouteConfigurationOverrideActionParameters. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::MgmtDiscriminator.Models.RouteConfigurationOverrideActionParameters
+        ///
+        /// </summary>
         /// <param name="typeName"></param>
         /// <param name="originGroupOverride"> A reference to the origin group override configuration. Leave empty to use the default origin group on route. </param>
-        internal RouteConfigurationOverrideActionParameters(RouteConfigurationOverrideActionParametersTypeName typeName, OriginGroupOverride originGroupOverride)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal RouteConfigurationOverrideActionParameters(RouteConfigurationOverrideActionParametersTypeName typeName, OriginGroupOverride originGroupOverride, Dictionary<string, BinaryData> rawData)
         {
             TypeName = typeName;
             OriginGroupOverride = originGroupOverride;
+            _rawData = rawData;
         }
 
         /// <summary> Gets or sets the type name. </summary>

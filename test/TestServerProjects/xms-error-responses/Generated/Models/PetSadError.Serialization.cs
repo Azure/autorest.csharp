@@ -6,18 +6,22 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
 using System.Text.Json;
+using Azure;
 using Azure.Core;
 using Azure.Core.Serialization;
 
 namespace xms_error_responses.Models
 {
-    public partial class PetSadError : IUtf8JsonSerializable, IJsonModelSerializable
+    public partial class PetSadError : IUtf8JsonSerializable, IModelJsonSerializable<PetSadError>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModelSerializable)this).Serialize(writer, ModelSerializerOptions.AzureServiceDefault);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<PetSadError>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
 
-        void IJsonModelSerializable.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
+        void IModelJsonSerializable<PetSadError>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
+            ModelSerializerHelper.ValidateFormat<PetSadError>(this, options.Format);
+
             writer.WriteStartObject();
             if (Optional.IsDefined(Reason))
             {
@@ -36,18 +40,25 @@ namespace xms_error_responses.Models
                 writer.WritePropertyName("actionResponse"u8);
                 writer.WriteStringValue(ActionResponse);
             }
+            if (_rawData is not null && options.Format == ModelSerializerFormat.Json)
+            {
+                foreach (var property in _rawData)
+                {
+                    writer.WritePropertyName(property.Key);
+#if NET6_0_OR_GREATER
+				writer.WriteRawValue(property.Value);
+#else
+                    JsonSerializer.Serialize(writer, JsonDocument.Parse(property.Value.ToString()).RootElement);
+#endif
+                }
+            }
             writer.WriteEndObject();
-        }
-
-        object IModelSerializable.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            using var doc = JsonDocument.Parse(data);
-            return DeserializePetSadError(doc.RootElement, options);
         }
 
         internal static PetSadError DeserializePetSadError(JsonElement element, ModelSerializerOptions options = default)
         {
-            options ??= ModelSerializerOptions.AzureServiceDefault;
+            options ??= ModelSerializerOptions.DefaultWireOptions;
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
@@ -59,10 +70,13 @@ namespace xms_error_responses.Models
                     case "PetHungryOrThirstyError": return PetHungryOrThirstyError.DeserializePetHungryOrThirstyError(element);
                 }
             }
+
+            // Unknown type found so we will deserialize the base properties only
             Optional<string> reason = default;
             string errorType = "PetSadError";
             Optional<string> errorMessage = default;
             Optional<string> actionResponse = default;
+            Dictionary<string, BinaryData> rawData = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("reason"u8))
@@ -85,14 +99,57 @@ namespace xms_error_responses.Models
                     actionResponse = property.Value.GetString();
                     continue;
                 }
+                if (options.Format == ModelSerializerFormat.Json)
+                {
+                    rawData.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
+                    continue;
+                }
             }
-            return new PetSadError(actionResponse.Value, errorType, errorMessage.Value, reason.Value);
+            return new PetSadError(actionResponse.Value, errorType, errorMessage.Value, reason.Value, rawData);
         }
 
-        object IJsonModelSerializable.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        PetSadError IModelJsonSerializable<PetSadError>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
         {
+            ModelSerializerHelper.ValidateFormat<PetSadError>(this, options.Format);
+
             using var doc = JsonDocument.ParseValue(ref reader);
             return DeserializePetSadError(doc.RootElement, options);
+        }
+
+        BinaryData IModelSerializable<PetSadError>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat<PetSadError>(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        PetSadError IModelSerializable<PetSadError>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat<PetSadError>(this, options.Format);
+
+            using var doc = JsonDocument.Parse(data);
+            return DeserializePetSadError(doc.RootElement, options);
+        }
+
+        public static implicit operator RequestContent(PetSadError model)
+        {
+            if (model is null)
+            {
+                return null;
+            }
+
+            return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
+        }
+
+        public static explicit operator PetSadError(Response response)
+        {
+            if (response is null)
+            {
+                return null;
+            }
+
+            using JsonDocument doc = JsonDocument.Parse(response.ContentStream);
+            return DeserializePetSadError(doc.RootElement, ModelSerializerOptions.DefaultWireOptions);
         }
     }
 }

@@ -5,6 +5,9 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
+
 namespace Azure.ResourceManager.Sample.Models
 {
     /// <summary>
@@ -13,12 +16,18 @@ namespace Azure.ResourceManager.Sample.Models
     /// </summary>
     public partial class NetworkInterfaceReference : SubResource
     {
-        /// <summary> Initializes a new instance of NetworkInterfaceReference. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::Azure.ResourceManager.Sample.Models.NetworkInterfaceReference
+        ///
+        /// </summary>
         public NetworkInterfaceReference()
         {
         }
 
-        /// <summary> Initializes a new instance of NetworkInterfaceReference. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::Azure.ResourceManager.Sample.Models.NetworkInterfaceReference
+        ///
+        /// </summary>
         /// <param name="id">
         /// Resource Id
         /// Serialized Name: SubResource.id
@@ -27,7 +36,8 @@ namespace Azure.ResourceManager.Sample.Models
         /// Specifies the primary network interface in case the virtual machine has more than 1 network interface.
         /// Serialized Name: NetworkInterfaceReference.properties.primary
         /// </param>
-        internal NetworkInterfaceReference(string id, bool? primary) : base(id)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal NetworkInterfaceReference(string id, bool? primary, Dictionary<string, BinaryData> rawData) : base(id, rawData)
         {
             Primary = primary;
         }

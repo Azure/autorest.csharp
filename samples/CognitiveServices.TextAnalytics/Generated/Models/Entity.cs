@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
 using Azure.Core;
 
 namespace CognitiveServices.TextAnalytics.Models
@@ -13,7 +14,12 @@ namespace CognitiveServices.TextAnalytics.Models
     /// <summary> The Entity. </summary>
     public partial class Entity
     {
-        /// <summary> Initializes a new instance of Entity. </summary>
+        private Dictionary<string, BinaryData> _rawData;
+
+        /// <summary>
+        /// Initializes a new instance of global::CognitiveServices.TextAnalytics.Models.Entity
+        ///
+        /// </summary>
         /// <param name="text"> Entity text as appears in the request. </param>
         /// <param name="category"> Entity type, such as Person/Location/Org/SSN etc. </param>
         /// <param name="offset"> Start position (in Unicode characters) for the entity text. </param>
@@ -32,14 +38,18 @@ namespace CognitiveServices.TextAnalytics.Models
             ConfidenceScore = confidenceScore;
         }
 
-        /// <summary> Initializes a new instance of Entity. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::CognitiveServices.TextAnalytics.Models.Entity
+        ///
+        /// </summary>
         /// <param name="text"> Entity text as appears in the request. </param>
         /// <param name="category"> Entity type, such as Person/Location/Org/SSN etc. </param>
         /// <param name="subcategory"> Entity sub type, such as Age/Year/TimeRange etc. </param>
         /// <param name="offset"> Start position (in Unicode characters) for the entity text. </param>
         /// <param name="length"> Length (in Unicode characters) for the entity text. </param>
         /// <param name="confidenceScore"> Confidence score between 0 and 1 of the extracted entity. </param>
-        internal Entity(string text, string category, string subcategory, int offset, int length, double confidenceScore)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal Entity(string text, string category, string subcategory, int offset, int length, double confidenceScore, Dictionary<string, BinaryData> rawData)
         {
             Text = text;
             Category = category;
@@ -47,6 +57,7 @@ namespace CognitiveServices.TextAnalytics.Models
             Offset = offset;
             Length = length;
             ConfidenceScore = confidenceScore;
+            _rawData = rawData;
         }
 
         /// <summary> Entity text as appears in the request. </summary>

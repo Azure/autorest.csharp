@@ -5,6 +5,9 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
+
 namespace Azure.ResourceManager.Sample.Models
 {
     /// <summary>
@@ -13,19 +16,29 @@ namespace Azure.ResourceManager.Sample.Models
     /// </summary>
     internal partial class LogAnalyticsOutput
     {
-        /// <summary> Initializes a new instance of LogAnalyticsOutput. </summary>
+        private Dictionary<string, BinaryData> _rawData;
+
+        /// <summary>
+        /// Initializes a new instance of global::Azure.ResourceManager.Sample.Models.LogAnalyticsOutput
+        ///
+        /// </summary>
         internal LogAnalyticsOutput()
         {
         }
 
-        /// <summary> Initializes a new instance of LogAnalyticsOutput. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::Azure.ResourceManager.Sample.Models.LogAnalyticsOutput
+        ///
+        /// </summary>
         /// <param name="output">
         /// Output file Uri path to blob container.
         /// Serialized Name: LogAnalyticsOutput.output
         /// </param>
-        internal LogAnalyticsOutput(string output)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal LogAnalyticsOutput(string output, Dictionary<string, BinaryData> rawData)
         {
             Output = output;
+            _rawData = rawData;
         }
 
         /// <summary>

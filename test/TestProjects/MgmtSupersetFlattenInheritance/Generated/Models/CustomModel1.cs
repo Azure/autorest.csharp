@@ -5,23 +5,36 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
+
 namespace MgmtSupersetFlattenInheritance.Models
 {
     /// <summary> Normal custom object, although marked as azure resource, but it's not recognized by autorest. </summary>
     public partial class CustomModel1
     {
-        /// <summary> Initializes a new instance of CustomModel1. </summary>
+        private Dictionary<string, BinaryData> _rawData;
+
+        /// <summary>
+        /// Initializes a new instance of global::MgmtSupersetFlattenInheritance.Models.CustomModel1
+        ///
+        /// </summary>
         public CustomModel1()
         {
         }
 
-        /// <summary> Initializes a new instance of CustomModel1. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::MgmtSupersetFlattenInheritance.Models.CustomModel1
+        ///
+        /// </summary>
         /// <param name="id"></param>
         /// <param name="foo"></param>
-        internal CustomModel1(string id, string foo)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal CustomModel1(string id, string foo, Dictionary<string, BinaryData> rawData)
         {
             Id = id;
             Foo = foo;
+            _rawData = rawData;
         }
 
         /// <summary> Gets or sets the id. </summary>

@@ -5,6 +5,8 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
 using Azure;
 using Azure.Core;
 
@@ -14,18 +16,27 @@ namespace Azure.ResourceManager.Fake.Models
     [PropertyReferenceType]
     public partial class ErrorResponse
     {
-        /// <summary> Initializes a new instance of ErrorResponse. </summary>
+        private Dictionary<string, BinaryData> _rawData;
+
+        /// <summary>
+        /// Initializes a new instance of global::Azure.ResourceManager.Fake.Models.ErrorResponse
+        ///
+        /// </summary>
         [InitializationConstructor]
         public ErrorResponse()
         {
         }
 
-        /// <summary> Initializes a new instance of ErrorResponse. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::Azure.ResourceManager.Fake.Models.ErrorResponse
+        ///
+        /// </summary>
         /// <param name="error"> The error object. </param>
-        [SerializationConstructor]
-        internal ErrorResponse(ResponseError error)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal ErrorResponse(ResponseError error, Dictionary<string, BinaryData> rawData)
         {
             Error = error;
+            _rawData = rawData;
         }
 
         /// <summary> The error object. </summary>

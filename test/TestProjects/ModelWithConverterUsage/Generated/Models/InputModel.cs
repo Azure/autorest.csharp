@@ -5,21 +5,34 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
+
 namespace ModelWithConverterUsage.Models
 {
     /// <summary> The product documentation. </summary>
     public partial class InputModel
     {
-        /// <summary> Initializes a new instance of InputModel. </summary>
+        private Dictionary<string, BinaryData> _rawData;
+
+        /// <summary>
+        /// Initializes a new instance of global::ModelWithConverterUsage.Models.InputModel
+        ///
+        /// </summary>
         public InputModel()
         {
         }
 
-        /// <summary> Initializes a new instance of InputModel. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::ModelWithConverterUsage.Models.InputModel
+        ///
+        /// </summary>
         /// <param name="inputModelProperty"> Constant string. </param>
-        internal InputModel(string inputModelProperty)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal InputModel(string inputModelProperty, Dictionary<string, BinaryData> rawData)
         {
             InputModelProperty = inputModelProperty;
+            _rawData = rawData;
         }
 
         /// <summary> Constant string. </summary>

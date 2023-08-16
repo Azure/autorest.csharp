@@ -5,6 +5,9 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
+
 namespace MgmtRenameRules.Models
 {
     /// <summary>
@@ -13,12 +16,20 @@ namespace MgmtRenameRules.Models
     /// </summary>
     public partial class VirtualMachinePatchStatus
     {
-        /// <summary> Initializes a new instance of VirtualMachinePatchStatus. </summary>
+        private Dictionary<string, BinaryData> _rawData;
+
+        /// <summary>
+        /// Initializes a new instance of global::MgmtRenameRules.Models.VirtualMachinePatchStatus
+        ///
+        /// </summary>
         internal VirtualMachinePatchStatus()
         {
         }
 
-        /// <summary> Initializes a new instance of VirtualMachinePatchStatus. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::MgmtRenameRules.Models.VirtualMachinePatchStatus
+        ///
+        /// </summary>
         /// <param name="availablePatchSummary">
         /// The available patch summary of the latest assessment operation for the virtual machine.
         /// Serialized Name: VirtualMachinePatchStatus.availablePatchSummary
@@ -27,10 +38,12 @@ namespace MgmtRenameRules.Models
         /// The installation summary of the latest installation operation for the virtual machine.
         /// Serialized Name: VirtualMachinePatchStatus.lastPatchInstallationSummary
         /// </param>
-        internal VirtualMachinePatchStatus(AvailablePatchSummary availablePatchSummary, LastPatchInstallationSummary lastPatchInstallationSummary)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal VirtualMachinePatchStatus(AvailablePatchSummary availablePatchSummary, LastPatchInstallationSummary lastPatchInstallationSummary, Dictionary<string, BinaryData> rawData)
         {
             AvailablePatchSummary = availablePatchSummary;
             LastPatchInstallationSummary = lastPatchInstallationSummary;
+            _rawData = rawData;
         }
 
         /// <summary>

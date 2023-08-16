@@ -5,6 +5,9 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
+
 namespace _Type.Model.Inheritance.SingleDiscriminator.Models
 {
     /// <summary> The second level model in polymorphic single level inheritance. </summary>
@@ -20,7 +23,8 @@ namespace _Type.Model.Inheritance.SingleDiscriminator.Models
         /// <summary> Initializes a new instance of SeaGull. </summary>
         /// <param name="kind"></param>
         /// <param name="wingspan"></param>
-        internal SeaGull(string kind, int wingspan) : base(kind, wingspan)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal SeaGull(string kind, int wingspan, Dictionary<string, BinaryData> rawData) : base(kind, wingspan, rawData)
         {
         }
     }

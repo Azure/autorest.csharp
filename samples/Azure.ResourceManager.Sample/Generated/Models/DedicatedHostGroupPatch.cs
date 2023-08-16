@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Collections.Generic;
 using Azure.Core;
 using Azure.ResourceManager.Resources.Models;
@@ -17,14 +18,20 @@ namespace Azure.ResourceManager.Sample.Models
     /// </summary>
     public partial class DedicatedHostGroupPatch : UpdateResource
     {
-        /// <summary> Initializes a new instance of DedicatedHostGroupPatch. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::Azure.ResourceManager.Sample.Models.DedicatedHostGroupPatch
+        ///
+        /// </summary>
         public DedicatedHostGroupPatch()
         {
             Zones = new ChangeTrackingList<string>();
             Hosts = new ChangeTrackingList<Resources.Models.SubResource>();
         }
 
-        /// <summary> Initializes a new instance of DedicatedHostGroupPatch. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::Azure.ResourceManager.Sample.Models.DedicatedHostGroupPatch
+        ///
+        /// </summary>
         /// <param name="tags">
         /// Resource tags
         /// Serialized Name: UpdateResource.tags
@@ -49,7 +56,8 @@ namespace Azure.ResourceManager.Sample.Models
         /// Specifies whether virtual machines or virtual machine scale sets can be placed automatically on the dedicated host group. Automatic placement means resources are allocated on dedicated hosts, that are chosen by Azure, under the dedicated host group. The value is defaulted to 'true' when not provided. &lt;br&gt;&lt;br&gt;Minimum api-version: 2020-06-01.
         /// Serialized Name: DedicatedHostGroupUpdate.properties.supportAutomaticPlacement
         /// </param>
-        internal DedicatedHostGroupPatch(IDictionary<string, string> tags, IList<string> zones, int? platformFaultDomainCount, IReadOnlyList<Resources.Models.SubResource> hosts, DedicatedHostGroupInstanceView instanceView, bool? supportAutomaticPlacement) : base(tags)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal DedicatedHostGroupPatch(IDictionary<string, string> tags, IList<string> zones, int? platformFaultDomainCount, IReadOnlyList<Resources.Models.SubResource> hosts, DedicatedHostGroupInstanceView instanceView, bool? supportAutomaticPlacement, Dictionary<string, BinaryData> rawData) : base(tags, rawData)
         {
             Zones = zones;
             PlatformFaultDomainCount = platformFaultDomainCount;

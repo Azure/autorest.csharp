@@ -5,6 +5,9 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
+
 namespace MgmtRenameRules.Models
 {
     /// <summary>
@@ -13,12 +16,20 @@ namespace MgmtRenameRules.Models
     /// </summary>
     public partial class AutomaticRepairsPolicy
     {
-        /// <summary> Initializes a new instance of AutomaticRepairsPolicy. </summary>
+        private Dictionary<string, BinaryData> _rawData;
+
+        /// <summary>
+        /// Initializes a new instance of global::MgmtRenameRules.Models.AutomaticRepairsPolicy
+        ///
+        /// </summary>
         public AutomaticRepairsPolicy()
         {
         }
 
-        /// <summary> Initializes a new instance of AutomaticRepairsPolicy. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::MgmtRenameRules.Models.AutomaticRepairsPolicy
+        ///
+        /// </summary>
         /// <param name="enabled">
         /// Specifies whether automatic repairs should be enabled on the virtual machine scale set. The default value is false.
         /// Serialized Name: AutomaticRepairsPolicy.enabled
@@ -27,10 +38,12 @@ namespace MgmtRenameRules.Models
         /// The amount of time for which automatic repairs are suspended due to a state change on VM. The grace time starts after the state change has completed. This helps avoid premature or accidental repairs. The time duration should be specified in ISO 8601 format. The minimum allowed grace period is 30 minutes (PT30M), which is also the default value. The maximum allowed grace period is 90 minutes (PT90M).
         /// Serialized Name: AutomaticRepairsPolicy.gracePeriod
         /// </param>
-        internal AutomaticRepairsPolicy(bool? enabled, string gracePeriod)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal AutomaticRepairsPolicy(bool? enabled, string gracePeriod, Dictionary<string, BinaryData> rawData)
         {
             Enabled = enabled;
             GracePeriod = gracePeriod;
+            _rawData = rawData;
         }
 
         /// <summary>

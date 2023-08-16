@@ -5,6 +5,8 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
 using Azure.Core;
 using Azure.ResourceManager.Models;
 
@@ -16,20 +18,30 @@ namespace MgmtPropertyBag
     /// </summary>
     public partial class FooData : ResourceData
     {
-        /// <summary> Initializes a new instance of FooData. </summary>
+        private Dictionary<string, BinaryData> _rawData;
+
+        /// <summary>
+        /// Initializes a new instance of global::MgmtPropertyBag.FooData
+        ///
+        /// </summary>
         public FooData()
         {
         }
 
-        /// <summary> Initializes a new instance of FooData. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::MgmtPropertyBag.FooData
+        ///
+        /// </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
         /// <param name="resourceType"> The resourceType. </param>
         /// <param name="systemData"> The systemData. </param>
         /// <param name="details"> The details of the resource. </param>
-        internal FooData(ResourceIdentifier id, string name, ResourceType resourceType, SystemData systemData, string details) : base(id, name, resourceType, systemData)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal FooData(ResourceIdentifier id, string name, ResourceType resourceType, SystemData systemData, string details, Dictionary<string, BinaryData> rawData) : base(id, name, resourceType, systemData)
         {
             Details = details;
+            _rawData = rawData;
         }
 
         /// <summary> The details of the resource. </summary>

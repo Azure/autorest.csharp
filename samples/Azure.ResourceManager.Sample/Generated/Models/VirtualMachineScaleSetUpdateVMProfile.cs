@@ -5,6 +5,9 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
+
 namespace Azure.ResourceManager.Sample.Models
 {
     /// <summary>
@@ -13,12 +16,20 @@ namespace Azure.ResourceManager.Sample.Models
     /// </summary>
     public partial class VirtualMachineScaleSetUpdateVMProfile
     {
-        /// <summary> Initializes a new instance of VirtualMachineScaleSetUpdateVMProfile. </summary>
+        private Dictionary<string, BinaryData> _rawData;
+
+        /// <summary>
+        /// Initializes a new instance of global::Azure.ResourceManager.Sample.Models.VirtualMachineScaleSetUpdateVMProfile
+        ///
+        /// </summary>
         public VirtualMachineScaleSetUpdateVMProfile()
         {
         }
 
-        /// <summary> Initializes a new instance of VirtualMachineScaleSetUpdateVMProfile. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::Azure.ResourceManager.Sample.Models.VirtualMachineScaleSetUpdateVMProfile
+        ///
+        /// </summary>
         /// <param name="osProfile">
         /// The virtual machine scale set OS profile.
         /// Serialized Name: VirtualMachineScaleSetUpdateVMProfile.osProfile
@@ -55,7 +66,8 @@ namespace Azure.ResourceManager.Sample.Models
         /// Specifies Scheduled Event related configurations.
         /// Serialized Name: VirtualMachineScaleSetUpdateVMProfile.scheduledEventsProfile
         /// </param>
-        internal VirtualMachineScaleSetUpdateVMProfile(VirtualMachineScaleSetUpdateOSProfile osProfile, VirtualMachineScaleSetUpdateStorageProfile storageProfile, VirtualMachineScaleSetUpdateNetworkProfile networkProfile, SecurityProfile securityProfile, DiagnosticsProfile diagnosticsProfile, VirtualMachineScaleSetExtensionProfile extensionProfile, string licenseType, BillingProfile billingProfile, ScheduledEventsProfile scheduledEventsProfile)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal VirtualMachineScaleSetUpdateVMProfile(VirtualMachineScaleSetUpdateOSProfile osProfile, VirtualMachineScaleSetUpdateStorageProfile storageProfile, VirtualMachineScaleSetUpdateNetworkProfile networkProfile, SecurityProfile securityProfile, DiagnosticsProfile diagnosticsProfile, VirtualMachineScaleSetExtensionProfile extensionProfile, string licenseType, BillingProfile billingProfile, ScheduledEventsProfile scheduledEventsProfile, Dictionary<string, BinaryData> rawData)
         {
             OsProfile = osProfile;
             StorageProfile = storageProfile;
@@ -66,6 +78,7 @@ namespace Azure.ResourceManager.Sample.Models
             LicenseType = licenseType;
             BillingProfile = billingProfile;
             ScheduledEventsProfile = scheduledEventsProfile;
+            _rawData = rawData;
         }
 
         /// <summary>

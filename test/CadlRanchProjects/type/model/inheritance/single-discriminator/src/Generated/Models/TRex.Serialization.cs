@@ -6,78 +6,116 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
 using System.Text.Json;
 using Azure;
 using Azure.Core;
 using Azure.Core.Serialization;
 
-namespace _Type.Model.Inheritance.Models
+namespace _Type.Model.Inheritance.SingleDiscriminator.Models
 {
-    public partial class SeaTurtle : IUtf8JsonSerializable, IJsonModelSerializable
+    public partial class TRex : IUtf8JsonSerializable, IModelJsonSerializable<TRex>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModelSerializable)this).Serialize(writer, ModelSerializerOptions.AzureServiceDefault);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<TRex>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
 
-        void IJsonModelSerializable.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
+        void IModelJsonSerializable<TRex>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
+            ModelSerializerHelper.ValidateFormat<TRex>(this, options.Format);
+
             writer.WriteStartObject();
-            writer.WritePropertyName("swimmingSpeed"u8);
-            writer.WriteNumberValue(SwimmingSpeed);
             writer.WritePropertyName("kind"u8);
             writer.WriteStringValue(Kind);
+            writer.WritePropertyName("size"u8);
+            writer.WriteNumberValue(Size);
+            if (_rawData is not null && options.Format == ModelSerializerFormat.Json)
+            {
+                foreach (var property in _rawData)
+                {
+                    writer.WritePropertyName(property.Key);
+#if NET6_0_OR_GREATER
+				writer.WriteRawValue(property.Value);
+#else
+                    JsonSerializer.Serialize(writer, JsonDocument.Parse(property.Value.ToString()).RootElement);
+#endif
+                }
+            }
             writer.WriteEndObject();
         }
 
-        object IModelSerializable.Deserialize(BinaryData data, ModelSerializerOptions options)
+        internal static TRex DeserializeTRex(JsonElement element, ModelSerializerOptions options = default)
         {
-            using var doc = JsonDocument.Parse(data);
-            return DeserializeSeaTurtle(doc.RootElement, options);
-        }
+            options ??= ModelSerializerOptions.DefaultWireOptions;
 
-        internal static SeaTurtle DeserializeSeaTurtle(JsonElement element, ModelSerializerOptions options = default)
-        {
-            options ??= ModelSerializerOptions.AzureServiceDefault;
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
             }
-            int swimmingSpeed = default;
             string kind = default;
+            int size = default;
+            Dictionary<string, BinaryData> rawData = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
-                if (property.NameEquals("swimmingSpeed"u8))
-                {
-                    swimmingSpeed = property.Value.GetInt32();
-                    continue;
-                }
                 if (property.NameEquals("kind"u8))
                 {
                     kind = property.Value.GetString();
                     continue;
                 }
+                if (property.NameEquals("size"u8))
+                {
+                    size = property.Value.GetInt32();
+                    continue;
+                }
+                if (options.Format == ModelSerializerFormat.Json)
+                {
+                    rawData.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
+                    continue;
+                }
             }
-            return new SeaTurtle(kind, swimmingSpeed);
+            return new TRex(kind, size, rawData);
         }
 
-        object IJsonModelSerializable.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        TRex IModelJsonSerializable<TRex>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
         {
+            ModelSerializerHelper.ValidateFormat<TRex>(this, options.Format);
+
             using var doc = JsonDocument.ParseValue(ref reader);
-            return DeserializeSeaTurtle(doc.RootElement, options);
+            return DeserializeTRex(doc.RootElement, options);
         }
 
-        /// <summary> Deserializes the model from a raw response. </summary>
-        /// <param name="response"> The response to deserialize the model from. </param>
-        internal static new SeaTurtle FromResponse(Response response)
+        BinaryData IModelSerializable<TRex>.Serialize(ModelSerializerOptions options)
         {
-            using var document = JsonDocument.Parse(response.Content);
-            return DeserializeSeaTurtle(document.RootElement);
+            ModelSerializerHelper.ValidateFormat<TRex>(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
         }
 
-        /// <summary> Convert into a Utf8JsonRequestContent. </summary>
-        internal override RequestContent ToRequestContent()
+        TRex IModelSerializable<TRex>.Deserialize(BinaryData data, ModelSerializerOptions options)
         {
-            var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue(this);
-            return content;
+            ModelSerializerHelper.ValidateFormat<TRex>(this, options.Format);
+
+            using var doc = JsonDocument.Parse(data);
+            return DeserializeTRex(doc.RootElement, options);
+        }
+
+        public static implicit operator RequestContent(TRex model)
+        {
+            if (model is null)
+            {
+                return null;
+            }
+
+            return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
+        }
+
+        public static explicit operator TRex(Response response)
+        {
+            if (response is null)
+            {
+                return null;
+            }
+
+            using JsonDocument doc = JsonDocument.Parse(response.ContentStream);
+            return DeserializeTRex(doc.RootElement, ModelSerializerOptions.DefaultWireOptions);
         }
     }
 }

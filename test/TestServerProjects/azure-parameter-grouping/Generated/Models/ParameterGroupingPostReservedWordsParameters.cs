@@ -5,23 +5,36 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
+
 namespace azure_parameter_grouping.Models
 {
     /// <summary> Parameter group. </summary>
     public partial class ParameterGroupingPostReservedWordsParameters
     {
-        /// <summary> Initializes a new instance of ParameterGroupingPostReservedWordsParameters. </summary>
+        private Dictionary<string, BinaryData> _rawData;
+
+        /// <summary>
+        /// Initializes a new instance of global::azure_parameter_grouping.Models.ParameterGroupingPostReservedWordsParameters
+        ///
+        /// </summary>
         public ParameterGroupingPostReservedWordsParameters()
         {
         }
 
-        /// <summary> Initializes a new instance of ParameterGroupingPostReservedWordsParameters. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::azure_parameter_grouping.Models.ParameterGroupingPostReservedWordsParameters
+        ///
+        /// </summary>
         /// <param name="from"> 'from' is a reserved word. Pass in 'bob' to pass. </param>
         /// <param name="accept"> 'accept' is a reserved word. Pass in 'yes' to pass. </param>
-        internal ParameterGroupingPostReservedWordsParameters(string @from, string accept)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal ParameterGroupingPostReservedWordsParameters(string @from, string accept, Dictionary<string, BinaryData> rawData)
         {
             From = @from;
             Accept = accept;
+            _rawData = rawData;
         }
 
         /// <summary> 'from' is a reserved word. Pass in 'bob' to pass. </summary>

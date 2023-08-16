@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Collections.Generic;
 using Azure.Core;
 
@@ -13,7 +14,10 @@ namespace Azure.Network.Management.Interface.Models
     /// <summary> LoadBalancer resource. </summary>
     public partial class LoadBalancer : Resource
     {
-        /// <summary> Initializes a new instance of LoadBalancer. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::Azure.Network.Management.Interface.Models.LoadBalancer
+        ///
+        /// </summary>
         public LoadBalancer()
         {
             FrontendIPConfigurations = new ChangeTrackingList<FrontendIPConfiguration>();
@@ -25,7 +29,10 @@ namespace Azure.Network.Management.Interface.Models
             OutboundRules = new ChangeTrackingList<OutboundRule>();
         }
 
-        /// <summary> Initializes a new instance of LoadBalancer. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::Azure.Network.Management.Interface.Models.LoadBalancer
+        ///
+        /// </summary>
         /// <param name="id"> Resource ID. </param>
         /// <param name="name"> Resource name. </param>
         /// <param name="type"> Resource type. </param>
@@ -42,7 +49,8 @@ namespace Azure.Network.Management.Interface.Models
         /// <param name="outboundRules"> The outbound rules. </param>
         /// <param name="resourceGuid"> The resource GUID property of the load balancer resource. </param>
         /// <param name="provisioningState"> The provisioning state of the load balancer resource. </param>
-        internal LoadBalancer(string id, string name, string type, string location, IDictionary<string, string> tags, LoadBalancerSku sku, string etag, IList<FrontendIPConfiguration> frontendIPConfigurations, IList<BackendAddressPool> backendAddressPools, IList<LoadBalancingRule> loadBalancingRules, IList<Probe> probes, IList<InboundNatRule> inboundNatRules, IList<InboundNatPool> inboundNatPools, IList<OutboundRule> outboundRules, string resourceGuid, ProvisioningState? provisioningState) : base(id, name, type, location, tags)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal LoadBalancer(string id, string name, string type, string location, IDictionary<string, string> tags, LoadBalancerSku sku, string etag, IList<FrontendIPConfiguration> frontendIPConfigurations, IList<BackendAddressPool> backendAddressPools, IList<LoadBalancingRule> loadBalancingRules, IList<Probe> probes, IList<InboundNatRule> inboundNatRules, IList<InboundNatPool> inboundNatPools, IList<OutboundRule> outboundRules, string resourceGuid, ProvisioningState? provisioningState, Dictionary<string, BinaryData> rawData) : base(id, name, type, location, tags, rawData)
         {
             Sku = sku;
             Etag = etag;

@@ -62,7 +62,7 @@ namespace ModelsTypeSpec
         {
             RequestContext context = FromCancellationToken(cancellationToken);
             Response response = await GetOutputDiscriminatorModelAsync(context).ConfigureAwait(false);
-            return Response.FromValue(OutputBaseModelWithDiscriminator.FromResponse(response), response);
+            return Response.FromValue((OutputBaseModelWithDiscriminator)response, response);
         }
 
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -71,7 +71,7 @@ namespace ModelsTypeSpec
         {
             RequestContext context = FromCancellationToken(cancellationToken);
             Response response = GetOutputDiscriminatorModel(context);
-            return Response.FromValue(OutputBaseModelWithDiscriminator.FromResponse(response), response);
+            return Response.FromValue((OutputBaseModelWithDiscriminator)response, response);
         }
 
         /// <summary>
@@ -154,8 +154,8 @@ namespace ModelsTypeSpec
             Argument.AssertNotNull(input, nameof(input));
 
             RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = await InputToRoundTripAsync(input.ToRequestContent(), context).ConfigureAwait(false);
-            return Response.FromValue(RoundTripModel.FromResponse(response), response);
+            Response response = await InputToRoundTripAsync(input, context).ConfigureAwait(false);
+            return Response.FromValue((RoundTripModel)response, response);
         }
 
         /// <summary> Input model that has property of its own type. </summary>
@@ -168,8 +168,8 @@ namespace ModelsTypeSpec
             Argument.AssertNotNull(input, nameof(input));
 
             RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = InputToRoundTrip(input.ToRequestContent(), context);
-            return Response.FromValue(RoundTripModel.FromResponse(response), response);
+            Response response = InputToRoundTrip(input, context);
+            return Response.FromValue((RoundTripModel)response, response);
         }
 
         /// <summary>
@@ -260,8 +260,8 @@ namespace ModelsTypeSpec
             Argument.AssertNotNull(input, nameof(input));
 
             RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = await InputToRoundTripPrimitiveAsync(input.ToRequestContent(), context).ConfigureAwait(false);
-            return Response.FromValue(RoundTripPrimitiveModel.FromResponse(response), response);
+            Response response = await InputToRoundTripPrimitiveAsync(input, context).ConfigureAwait(false);
+            return Response.FromValue((RoundTripPrimitiveModel)response, response);
         }
 
         /// <summary> Input to RoundTripPrimitive. </summary>
@@ -274,8 +274,8 @@ namespace ModelsTypeSpec
             Argument.AssertNotNull(input, nameof(input));
 
             RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = InputToRoundTripPrimitive(input.ToRequestContent(), context);
-            return Response.FromValue(RoundTripPrimitiveModel.FromResponse(response), response);
+            Response response = InputToRoundTripPrimitive(input, context);
+            return Response.FromValue((RoundTripPrimitiveModel)response, response);
         }
 
         /// <summary>
@@ -366,8 +366,8 @@ namespace ModelsTypeSpec
             Argument.AssertNotNull(input, nameof(input));
 
             RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = await InputToRoundTripOptionalAsync(input.ToRequestContent(), context).ConfigureAwait(false);
-            return Response.FromValue(RoundTripOptionalModel.FromResponse(response), response);
+            Response response = await InputToRoundTripOptionalAsync(input, context).ConfigureAwait(false);
+            return Response.FromValue((RoundTripOptionalModel)response, response);
         }
 
         /// <summary> Input to RoundTripOptional. </summary>
@@ -380,8 +380,8 @@ namespace ModelsTypeSpec
             Argument.AssertNotNull(input, nameof(input));
 
             RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = InputToRoundTripOptional(input.ToRequestContent(), context);
-            return Response.FromValue(RoundTripOptionalModel.FromResponse(response), response);
+            Response response = InputToRoundTripOptional(input, context);
+            return Response.FromValue((RoundTripOptionalModel)response, response);
         }
 
         /// <summary>
@@ -473,8 +473,8 @@ namespace ModelsTypeSpec
             Argument.AssertNotNull(input, nameof(input));
 
             RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = await InputToRoundTripReadOnlyAsync(input.ToRequestContent(), context).ConfigureAwait(false);
-            return Response.FromValue(RoundTripReadOnlyModel.FromResponse(response), response);
+            Response response = await InputToRoundTripReadOnlyAsync(input, context).ConfigureAwait(false);
+            return Response.FromValue((RoundTripReadOnlyModel)response, response);
         }
 
         /// <summary> Input to RoundTripReadOnly. </summary>
@@ -488,8 +488,8 @@ namespace ModelsTypeSpec
             Argument.AssertNotNull(input, nameof(input));
 
             RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = InputToRoundTripReadOnly(input.ToRequestContent(), context);
-            return Response.FromValue(RoundTripReadOnlyModel.FromResponse(response), response);
+            Response response = InputToRoundTripReadOnly(input, context);
+            return Response.FromValue((RoundTripReadOnlyModel)response, response);
         }
 
         /// <summary>
@@ -582,8 +582,8 @@ namespace ModelsTypeSpec
             Argument.AssertNotNull(input, nameof(input));
 
             RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = await RoundTripToOutputAsync(input.ToRequestContent(), context).ConfigureAwait(false);
-            return Response.FromValue(OutputModel.FromResponse(response), response);
+            Response response = await RoundTripToOutputAsync(input, context).ConfigureAwait(false);
+            return Response.FromValue((OutputModel)response, response);
         }
 
         /// <summary> RoundTrip to Output. </summary>
@@ -596,8 +596,8 @@ namespace ModelsTypeSpec
             Argument.AssertNotNull(input, nameof(input));
 
             RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = RoundTripToOutput(input.ToRequestContent(), context);
-            return Response.FromValue(OutputModel.FromResponse(response), response);
+            Response response = RoundTripToOutput(input, context);
+            return Response.FromValue((OutputModel)response, response);
         }
 
         /// <summary>
@@ -688,7 +688,7 @@ namespace ModelsTypeSpec
             Argument.AssertNotNull(input, nameof(input));
 
             RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = await InputRecursiveAsync(input.ToRequestContent(), context).ConfigureAwait(false);
+            Response response = await InputRecursiveAsync(input, context).ConfigureAwait(false);
             return response;
         }
 
@@ -702,7 +702,7 @@ namespace ModelsTypeSpec
             Argument.AssertNotNull(input, nameof(input));
 
             RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = InputRecursive(input.ToRequestContent(), context);
+            Response response = InputRecursive(input, context);
             return response;
         }
 
@@ -794,8 +794,8 @@ namespace ModelsTypeSpec
             Argument.AssertNotNull(input, nameof(input));
 
             RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = await RoundTripRecursiveAsync(input.ToRequestContent(), context).ConfigureAwait(false);
-            return Response.FromValue(RoundTripRecursiveModel.FromResponse(response), response);
+            Response response = await RoundTripRecursiveAsync(input, context).ConfigureAwait(false);
+            return Response.FromValue((RoundTripRecursiveModel)response, response);
         }
 
         /// <summary> RoundTrip recursive model. </summary>
@@ -808,8 +808,8 @@ namespace ModelsTypeSpec
             Argument.AssertNotNull(input, nameof(input));
 
             RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = RoundTripRecursive(input.ToRequestContent(), context);
-            return Response.FromValue(RoundTripRecursiveModel.FromResponse(response), response);
+            Response response = RoundTripRecursive(input, context);
+            return Response.FromValue((RoundTripRecursiveModel)response, response);
         }
 
         /// <summary>
@@ -897,7 +897,7 @@ namespace ModelsTypeSpec
         {
             RequestContext context = FromCancellationToken(cancellationToken);
             Response response = await SelfReferenceAsync(context).ConfigureAwait(false);
-            return Response.FromValue(ErrorModel.FromResponse(response), response);
+            return Response.FromValue((ErrorModel)response, response);
         }
 
         /// <summary> Returns model that has property of its own type. </summary>
@@ -907,7 +907,7 @@ namespace ModelsTypeSpec
         {
             RequestContext context = FromCancellationToken(cancellationToken);
             Response response = SelfReference(context);
-            return Response.FromValue(ErrorModel.FromResponse(response), response);
+            return Response.FromValue((ErrorModel)response, response);
         }
 
         /// <summary>
@@ -990,8 +990,8 @@ namespace ModelsTypeSpec
             Argument.AssertNotNull(input, nameof(input));
 
             RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = await RoundTripToOutputWithNoUseBaseAsync(input.ToRequestContent(), context).ConfigureAwait(false);
-            return Response.FromValue(RoundTripOnNoUse.FromResponse(response), response);
+            Response response = await RoundTripToOutputWithNoUseBaseAsync(input, context).ConfigureAwait(false);
+            return Response.FromValue((RoundTripOnNoUse)response, response);
         }
 
         /// <summary> Returns RoundTripOnNoUse. </summary>
@@ -1004,8 +1004,8 @@ namespace ModelsTypeSpec
             Argument.AssertNotNull(input, nameof(input));
 
             RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = RoundTripToOutputWithNoUseBase(input.ToRequestContent(), context);
-            return Response.FromValue(RoundTripOnNoUse.FromResponse(response), response);
+            Response response = RoundTripToOutputWithNoUseBase(input, context);
+            return Response.FromValue((RoundTripOnNoUse)response, response);
         }
 
         /// <summary>

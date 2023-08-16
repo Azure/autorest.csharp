@@ -808,7 +808,7 @@ namespace AuthoringTypeSpec
             {
                 RequestContext context = FromCancellationToken(cancellationToken);
                 Response response = await GetDeploymentStatusAsync(projectName, deploymentName, jobId, context).ConfigureAwait(false);
-                return Response.FromValue(DeploymentJob.FromResponse(response), response);
+                return Response.FromValue((DeploymentJob)response, response);
             }
             catch (Exception e)
             {
@@ -837,7 +837,7 @@ namespace AuthoringTypeSpec
             {
                 RequestContext context = FromCancellationToken(cancellationToken);
                 Response response = GetDeploymentStatus(projectName, deploymentName, jobId, context);
-                return Response.FromValue(DeploymentJob.FromResponse(response), response);
+                return Response.FromValue((DeploymentJob)response, response);
             }
             catch (Exception e)
             {
@@ -954,7 +954,7 @@ namespace AuthoringTypeSpec
             {
                 RequestContext context = FromCancellationToken(cancellationToken);
                 Response response = await GetSwapDeploymentsStatusAsync(projectName, deploymentName, jobId, context).ConfigureAwait(false);
-                return Response.FromValue(SwapDeploymentsJob.FromResponse(response), response);
+                return Response.FromValue((SwapDeploymentsJob)response, response);
             }
             catch (Exception e)
             {
@@ -983,7 +983,7 @@ namespace AuthoringTypeSpec
             {
                 RequestContext context = FromCancellationToken(cancellationToken);
                 Response response = GetSwapDeploymentsStatus(projectName, deploymentName, jobId, context);
-                return Response.FromValue(SwapDeploymentsJob.FromResponse(response), response);
+                return Response.FromValue((SwapDeploymentsJob)response, response);
             }
             catch (Exception e)
             {

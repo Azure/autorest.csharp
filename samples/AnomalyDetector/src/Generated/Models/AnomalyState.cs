@@ -14,6 +14,8 @@ namespace AnomalyDetector.Models
     /// <summary> Anomaly status and information. </summary>
     public partial class AnomalyState
     {
+        private Dictionary<string, BinaryData> _rawData;
+
         /// <summary> Initializes a new instance of AnomalyState. </summary>
         /// <param name="timestamp"> The timestamp for this anomaly. </param>
         internal AnomalyState(DateTimeOffset timestamp)
@@ -26,11 +28,13 @@ namespace AnomalyDetector.Models
         /// <param name="timestamp"> The timestamp for this anomaly. </param>
         /// <param name="value"> The detailed value of this anomalous timestamp. </param>
         /// <param name="errors"> Error message for the current timestamp. </param>
-        internal AnomalyState(DateTimeOffset timestamp, AnomalyValue value, IReadOnlyList<ErrorResponse> errors)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal AnomalyState(DateTimeOffset timestamp, AnomalyValue value, IReadOnlyList<ErrorResponse> errors, Dictionary<string, BinaryData> rawData)
         {
             Timestamp = timestamp;
             Value = value;
             Errors = errors;
+            _rawData = rawData;
         }
 
         /// <summary> The timestamp for this anomaly. </summary>

@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Collections.Generic;
 using Azure.Core;
 using MgmtExpandResourceTypes;
@@ -14,19 +15,29 @@ namespace MgmtExpandResourceTypes.Models
     /// <summary> The response to a Zone List or ListAll operation. </summary>
     internal partial class ZoneListResult
     {
-        /// <summary> Initializes a new instance of ZoneListResult. </summary>
+        private Dictionary<string, BinaryData> _rawData;
+
+        /// <summary>
+        /// Initializes a new instance of global::MgmtExpandResourceTypes.Models.ZoneListResult
+        ///
+        /// </summary>
         internal ZoneListResult()
         {
             Value = new ChangeTrackingList<ZoneData>();
         }
 
-        /// <summary> Initializes a new instance of ZoneListResult. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::MgmtExpandResourceTypes.Models.ZoneListResult
+        ///
+        /// </summary>
         /// <param name="value"> Information about the DNS zones. </param>
         /// <param name="nextLink"> The continuation token for the next page of results. </param>
-        internal ZoneListResult(IReadOnlyList<ZoneData> value, string nextLink)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal ZoneListResult(IReadOnlyList<ZoneData> value, string nextLink, Dictionary<string, BinaryData> rawData)
         {
             Value = value;
             NextLink = nextLink;
+            _rawData = rawData;
         }
 
         /// <summary> Information about the DNS zones. </summary>

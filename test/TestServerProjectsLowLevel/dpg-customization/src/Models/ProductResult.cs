@@ -5,8 +5,6 @@
 
 using System;
 using System.Collections.Generic;
-using System.Text.Json;
-using Azure;
 using Azure.Core;
 
 namespace dpg_customization_LowLevel.Models
@@ -14,6 +12,8 @@ namespace dpg_customization_LowLevel.Models
     /// <summary> The ProductResult. </summary>
     internal partial class ProductResult
     {
+        private Dictionary<string, BinaryData> _rawData;
+
         /// <summary> Initializes a new instance of ProductResult. </summary>
         internal ProductResult()
         {
@@ -23,27 +23,17 @@ namespace dpg_customization_LowLevel.Models
         /// <summary> Initializes a new instance of ProductResult. </summary>
         /// <param name="values"></param>
         /// <param name="nextLink"></param>
-        internal ProductResult(IReadOnlyList<Product> values, string nextLink)
+        /// <param name="rawData"></param>
+        internal ProductResult(IReadOnlyList<Product> values, string nextLink, Dictionary<string, BinaryData> rawData)
         {
             Values = values;
             NextLink = nextLink;
+            _rawData = rawData;
         }
 
         /// <summary> Gets the values. </summary>
         public IReadOnlyList<Product> Values { get; }
         /// <summary> Gets the next link. </summary>
         public string NextLink { get; }
-
-        public static implicit operator ProductResult(Response response)
-        {
-            try
-            {
-                return DeserializeProductResult(JsonDocument.Parse(response.Content.ToMemory()).RootElement);
-            }
-            catch
-            {
-                throw new RequestFailedException($"Failed to cast from Response to {typeof(ProductResult)}.");
-            }
-        }
     }
 }

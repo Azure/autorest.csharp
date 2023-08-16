@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Collections.Generic;
 using Azure.Core;
 
@@ -16,14 +17,22 @@ namespace MgmtRenameRules.Models
     /// </summary>
     public partial class DiskInstanceView
     {
-        /// <summary> Initializes a new instance of DiskInstanceView. </summary>
+        private Dictionary<string, BinaryData> _rawData;
+
+        /// <summary>
+        /// Initializes a new instance of global::MgmtRenameRules.Models.DiskInstanceView
+        ///
+        /// </summary>
         internal DiskInstanceView()
         {
             EncryptionSettings = new ChangeTrackingList<DiskEncryptionSettings>();
             Statuses = new ChangeTrackingList<InstanceViewStatus>();
         }
 
-        /// <summary> Initializes a new instance of DiskInstanceView. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::MgmtRenameRules.Models.DiskInstanceView
+        ///
+        /// </summary>
         /// <param name="name">
         /// The disk name.
         /// Serialized Name: DiskInstanceView.name
@@ -36,11 +45,13 @@ namespace MgmtRenameRules.Models
         /// The resource status information.
         /// Serialized Name: DiskInstanceView.statuses
         /// </param>
-        internal DiskInstanceView(string name, IReadOnlyList<DiskEncryptionSettings> encryptionSettings, IReadOnlyList<InstanceViewStatus> statuses)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal DiskInstanceView(string name, IReadOnlyList<DiskEncryptionSettings> encryptionSettings, IReadOnlyList<InstanceViewStatus> statuses, Dictionary<string, BinaryData> rawData)
         {
             Name = name;
             EncryptionSettings = encryptionSettings;
             Statuses = statuses;
+            _rawData = rawData;
         }
 
         /// <summary>

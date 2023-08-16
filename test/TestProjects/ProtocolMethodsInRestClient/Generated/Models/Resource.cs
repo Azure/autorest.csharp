@@ -5,23 +5,36 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
+
 namespace ProtocolMethodsInRestClient.Models
 {
     /// <summary> . </summary>
     public partial class Resource
     {
-        /// <summary> Initializes a new instance of Resource. </summary>
+        private Dictionary<string, BinaryData> _rawData;
+
+        /// <summary>
+        /// Initializes a new instance of global::ProtocolMethodsInRestClient.Models.Resource
+        ///
+        /// </summary>
         public Resource()
         {
         }
 
-        /// <summary> Initializes a new instance of Resource. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::ProtocolMethodsInRestClient.Models.Resource
+        ///
+        /// </summary>
         /// <param name="name"></param>
         /// <param name="id"></param>
-        internal Resource(string name, string id)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal Resource(string name, string id, Dictionary<string, BinaryData> rawData)
         {
             Name = name;
             Id = id;
+            _rawData = rawData;
         }
 
         /// <summary> Gets or sets the name. </summary>

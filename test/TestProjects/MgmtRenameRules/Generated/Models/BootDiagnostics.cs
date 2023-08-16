@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
 
 namespace MgmtRenameRules.Models
 {
@@ -15,12 +16,20 @@ namespace MgmtRenameRules.Models
     /// </summary>
     public partial class BootDiagnostics
     {
-        /// <summary> Initializes a new instance of BootDiagnostics. </summary>
+        private Dictionary<string, BinaryData> _rawData;
+
+        /// <summary>
+        /// Initializes a new instance of global::MgmtRenameRules.Models.BootDiagnostics
+        ///
+        /// </summary>
         public BootDiagnostics()
         {
         }
 
-        /// <summary> Initializes a new instance of BootDiagnostics. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::MgmtRenameRules.Models.BootDiagnostics
+        ///
+        /// </summary>
         /// <param name="enabled">
         /// Whether boot diagnostics should be enabled on the Virtual Machine.
         /// Serialized Name: BootDiagnostics.enabled
@@ -29,10 +38,12 @@ namespace MgmtRenameRules.Models
         /// Uri of the storage account to use for placing the console output and screenshot. &lt;br&gt;&lt;br&gt;If storageUri is not specified while enabling boot diagnostics, managed storage will be used.
         /// Serialized Name: BootDiagnostics.storageUri
         /// </param>
-        internal BootDiagnostics(bool? enabled, Uri storageUri)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal BootDiagnostics(bool? enabled, Uri storageUri, Dictionary<string, BinaryData> rawData)
         {
             Enabled = enabled;
             StorageUri = storageUri;
+            _rawData = rawData;
         }
 
         /// <summary>

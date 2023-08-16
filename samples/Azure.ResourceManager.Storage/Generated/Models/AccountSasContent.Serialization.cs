@@ -6,18 +6,22 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
 using System.Text.Json;
+using Azure;
 using Azure.Core;
 using Azure.Core.Serialization;
 
 namespace Azure.ResourceManager.Storage.Models
 {
-    public partial class AccountSasContent : IUtf8JsonSerializable, IJsonModelSerializable
+    public partial class AccountSasContent : IUtf8JsonSerializable, IModelJsonSerializable<AccountSasContent>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModelSerializable)this).Serialize(writer, ModelSerializerOptions.AzureServiceDefault);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<AccountSasContent>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
 
-        void IJsonModelSerializable.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
+        void IModelJsonSerializable<AccountSasContent>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
             writer.WriteStartObject();
             writer.WritePropertyName("signedServices"u8);
             writer.WriteStringValue(Services.ToString());
@@ -47,18 +51,25 @@ namespace Azure.ResourceManager.Storage.Models
                 writer.WritePropertyName("keyToSign"u8);
                 writer.WriteStringValue(KeyToSign);
             }
+            if (_rawData is not null && options.Format == ModelSerializerFormat.Json)
+            {
+                foreach (var property in _rawData)
+                {
+                    writer.WritePropertyName(property.Key);
+#if NET6_0_OR_GREATER
+				writer.WriteRawValue(property.Value);
+#else
+                    JsonSerializer.Serialize(writer, JsonDocument.Parse(property.Value.ToString()).RootElement);
+#endif
+                }
+            }
             writer.WriteEndObject();
-        }
-
-        object IModelSerializable.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            using var doc = JsonDocument.Parse(data);
-            return DeserializeAccountSasContent(doc.RootElement, options);
         }
 
         internal static AccountSasContent DeserializeAccountSasContent(JsonElement element, ModelSerializerOptions options = default)
         {
-            options ??= ModelSerializerOptions.AzureServiceDefault;
+            options ??= ModelSerializerOptions.DefaultWireOptions;
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
@@ -71,6 +82,7 @@ namespace Azure.ResourceManager.Storage.Models
             Optional<DateTimeOffset> signedStart = default;
             DateTimeOffset signedExpiry = default;
             Optional<string> keyToSign = default;
+            Dictionary<string, BinaryData> rawData = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("signedServices"u8))
@@ -121,14 +133,57 @@ namespace Azure.ResourceManager.Storage.Models
                     keyToSign = property.Value.GetString();
                     continue;
                 }
+                if (options.Format == ModelSerializerFormat.Json)
+                {
+                    rawData.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
+                    continue;
+                }
             }
-            return new AccountSasContent(signedServices, signedResourceTypes, signedPermission, signedIp.Value, Optional.ToNullable(signedProtocol), Optional.ToNullable(signedStart), signedExpiry, keyToSign.Value);
+            return new AccountSasContent(signedServices, signedResourceTypes, signedPermission, signedIp.Value, Optional.ToNullable(signedProtocol), Optional.ToNullable(signedStart), signedExpiry, keyToSign.Value, rawData);
         }
 
-        object IJsonModelSerializable.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        AccountSasContent IModelJsonSerializable<AccountSasContent>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
         {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
             using var doc = JsonDocument.ParseValue(ref reader);
             return DeserializeAccountSasContent(doc.RootElement, options);
+        }
+
+        BinaryData IModelSerializable<AccountSasContent>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        AccountSasContent IModelSerializable<AccountSasContent>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using var doc = JsonDocument.Parse(data);
+            return DeserializeAccountSasContent(doc.RootElement, options);
+        }
+
+        public static implicit operator RequestContent(AccountSasContent model)
+        {
+            if (model is null)
+            {
+                return null;
+            }
+
+            return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
+        }
+
+        public static explicit operator AccountSasContent(Response response)
+        {
+            if (response is null)
+            {
+                return null;
+            }
+
+            using JsonDocument doc = JsonDocument.Parse(response.ContentStream);
+            return DeserializeAccountSasContent(doc.RootElement, ModelSerializerOptions.DefaultWireOptions);
         }
     }
 }

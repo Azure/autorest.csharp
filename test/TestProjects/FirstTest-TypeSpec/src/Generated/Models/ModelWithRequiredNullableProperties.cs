@@ -5,11 +5,16 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
+
 namespace FirstTestTypeSpec.Models
 {
     /// <summary> A model with a few required nullable properties. </summary>
     public partial class ModelWithRequiredNullableProperties
     {
+        private Dictionary<string, BinaryData> _rawData;
+
         /// <summary> Initializes a new instance of ModelWithRequiredNullableProperties. </summary>
         /// <param name="requiredNullablePrimitive"> required nullable primitive type. </param>
         /// <param name="requiredExtensibleEnum"> required nullable extensible enum type. </param>
@@ -19,6 +24,19 @@ namespace FirstTestTypeSpec.Models
             RequiredNullablePrimitive = requiredNullablePrimitive;
             RequiredExtensibleEnum = requiredExtensibleEnum;
             RequiredFixedEnum = requiredFixedEnum;
+        }
+
+        /// <summary> Initializes a new instance of ModelWithRequiredNullableProperties. </summary>
+        /// <param name="requiredNullablePrimitive"> required nullable primitive type. </param>
+        /// <param name="requiredExtensibleEnum"> required nullable extensible enum type. </param>
+        /// <param name="requiredFixedEnum"> required nullable fixed enum type. </param>
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal ModelWithRequiredNullableProperties(int? requiredNullablePrimitive, StringExtensibleEnum? requiredExtensibleEnum, StringFixedEnum? requiredFixedEnum, Dictionary<string, BinaryData> rawData)
+        {
+            RequiredNullablePrimitive = requiredNullablePrimitive;
+            RequiredExtensibleEnum = requiredExtensibleEnum;
+            RequiredFixedEnum = requiredFixedEnum;
+            _rawData = rawData;
         }
 
         /// <summary> required nullable primitive type. </summary>

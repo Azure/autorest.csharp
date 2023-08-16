@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
 using Azure.Core;
 
 namespace MgmtRenameRules.Models
@@ -16,7 +17,12 @@ namespace MgmtRenameRules.Models
     /// </summary>
     public partial class LogAnalyticsInputBase
     {
-        /// <summary> Initializes a new instance of LogAnalyticsInputBase. </summary>
+        protected internal Dictionary<string, BinaryData> _rawData;
+
+        /// <summary>
+        /// Initializes a new instance of global::MgmtRenameRules.Models.LogAnalyticsInputBase
+        ///
+        /// </summary>
         /// <param name="blobContainerSasUri">
         /// SAS Uri of the logging blob container to which LogAnalytics Api writes output logs to.
         /// Serialized Name: LogAnalyticsInputBase.blobContainerSasUri
@@ -39,7 +45,10 @@ namespace MgmtRenameRules.Models
             ToTime = toTime;
         }
 
-        /// <summary> Initializes a new instance of LogAnalyticsInputBase. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::MgmtRenameRules.Models.LogAnalyticsInputBase
+        ///
+        /// </summary>
         /// <param name="blobContainerSasUri">
         /// SAS Uri of the logging blob container to which LogAnalytics Api writes output logs to.
         /// Serialized Name: LogAnalyticsInputBase.blobContainerSasUri
@@ -64,7 +73,8 @@ namespace MgmtRenameRules.Models
         /// Group query result by Resource Name.
         /// Serialized Name: LogAnalyticsInputBase.groupByResourceName
         /// </param>
-        internal LogAnalyticsInputBase(Uri blobContainerSasUri, DateTimeOffset fromTime, DateTimeOffset toTime, bool? groupByThrottlePolicy, bool? groupByOperationName, bool? groupByResourceName)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal LogAnalyticsInputBase(Uri blobContainerSasUri, DateTimeOffset fromTime, DateTimeOffset toTime, bool? groupByThrottlePolicy, bool? groupByOperationName, bool? groupByResourceName, Dictionary<string, BinaryData> rawData)
         {
             BlobContainerSasUri = blobContainerSasUri;
             FromTime = fromTime;
@@ -72,6 +82,7 @@ namespace MgmtRenameRules.Models
             GroupByThrottlePolicy = groupByThrottlePolicy;
             GroupByOperationName = groupByOperationName;
             GroupByResourceName = groupByResourceName;
+            _rawData = rawData;
         }
 
         /// <summary>

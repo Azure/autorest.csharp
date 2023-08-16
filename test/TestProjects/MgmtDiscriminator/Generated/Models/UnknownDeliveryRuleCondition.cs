@@ -5,15 +5,22 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
+
 namespace MgmtDiscriminator.Models
 {
     /// <summary> The UnknownDeliveryRuleCondition. </summary>
     internal partial class UnknownDeliveryRuleCondition : DeliveryRuleCondition
     {
-        /// <summary> Initializes a new instance of UnknownDeliveryRuleCondition. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::MgmtDiscriminator.Models.UnknownDeliveryRuleCondition
+        ///
+        /// </summary>
         /// <param name="name"> The name of the condition for the delivery rule. </param>
         /// <param name="foo"> For test. </param>
-        internal UnknownDeliveryRuleCondition(MatchVariable name, string foo) : base(name, foo)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal UnknownDeliveryRuleCondition(MatchVariable name, string foo, Dictionary<string, BinaryData> rawData) : base(name, foo, rawData)
         {
             Name = name;
         }

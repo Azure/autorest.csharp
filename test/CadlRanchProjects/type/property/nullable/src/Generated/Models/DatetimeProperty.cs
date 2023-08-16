@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
 using Azure.Core;
 
 namespace _Type.Property.Nullable.Models
@@ -13,6 +14,8 @@ namespace _Type.Property.Nullable.Models
     /// <summary> Model with a datetime property. </summary>
     public partial class DatetimeProperty
     {
+        private Dictionary<string, BinaryData> _rawData;
+
         /// <summary> Initializes a new instance of DatetimeProperty. </summary>
         /// <param name="requiredProperty"> Required property. </param>
         /// <param name="nullableProperty"> Property. </param>
@@ -23,6 +26,17 @@ namespace _Type.Property.Nullable.Models
 
             RequiredProperty = requiredProperty;
             NullableProperty = nullableProperty;
+        }
+
+        /// <summary> Initializes a new instance of DatetimeProperty. </summary>
+        /// <param name="requiredProperty"> Required property. </param>
+        /// <param name="nullableProperty"> Property. </param>
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal DatetimeProperty(string requiredProperty, DateTimeOffset? nullableProperty, Dictionary<string, BinaryData> rawData)
+        {
+            RequiredProperty = requiredProperty;
+            NullableProperty = nullableProperty;
+            _rawData = rawData;
         }
 
         /// <summary> Required property. </summary>

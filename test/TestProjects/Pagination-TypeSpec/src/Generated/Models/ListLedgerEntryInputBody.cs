@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
 using Azure.Core;
 
 namespace Pagination.Models
@@ -13,6 +14,8 @@ namespace Pagination.Models
     /// <summary> Type for input model body. </summary>
     public partial class ListLedgerEntryInputBody
     {
+        private Dictionary<string, BinaryData> _rawData;
+
         /// <summary> Initializes a new instance of ListLedgerEntryInputBody. </summary>
         /// <param name="requiredString"> Required string. </param>
         /// <param name="requiredInt"> Required int. </param>
@@ -23,6 +26,17 @@ namespace Pagination.Models
 
             RequiredString = requiredString;
             RequiredInt = requiredInt;
+        }
+
+        /// <summary> Initializes a new instance of ListLedgerEntryInputBody. </summary>
+        /// <param name="requiredString"> Required string. </param>
+        /// <param name="requiredInt"> Required int. </param>
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal ListLedgerEntryInputBody(string requiredString, int requiredInt, Dictionary<string, BinaryData> rawData)
+        {
+            RequiredString = requiredString;
+            RequiredInt = requiredInt;
+            _rawData = rawData;
         }
 
         /// <summary> Required string. </summary>

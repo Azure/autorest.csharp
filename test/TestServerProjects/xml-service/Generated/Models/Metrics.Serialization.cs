@@ -6,18 +6,18 @@
 #nullable disable
 
 using System;
+using System.IO;
 using System.Xml;
 using System.Xml.Linq;
+using Azure;
 using Azure.Core;
 using Azure.Core.Serialization;
 
 namespace xml_service.Models
 {
-    public partial class Metrics : IXmlSerializable, IXmlModelSerializable
+    public partial class Metrics : IXmlSerializable, IModelSerializable<Metrics>
     {
-        void IXmlModelSerializable.Serialize(XmlWriter writer, ModelSerializerOptions options) => ((IXmlSerializable)this).Write(writer, null, options);
-
-        void IXmlSerializable.Write(XmlWriter writer, string nameHint, ModelSerializerOptions options)
+        private void Serialize(XmlWriter writer, string nameHint, ModelSerializerOptions options)
         {
             writer.WriteStartElement("Metrics");
             if (Optional.IsDefined(Version))
@@ -37,19 +37,16 @@ namespace xml_service.Models
             }
             if (Optional.IsDefined(RetentionPolicy))
             {
-                writer.WriteObjectValue(RetentionPolicy, "RetentionPolicy", options);
+                writer.WriteObjectValue(RetentionPolicy, "RetentionPolicy");
             }
             writer.WriteEndElement();
         }
 
-        object IModelSerializable.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            return DeserializeMetrics(XElement.Load(data.ToStream()), options);
-        }
+        void IXmlSerializable.Write(XmlWriter writer, string nameHint) => Serialize(writer, nameHint, ModelSerializerOptions.DefaultWireOptions);
 
         internal static Metrics DeserializeMetrics(XElement element, ModelSerializerOptions options = default)
         {
-            options ??= ModelSerializerOptions.AzureServiceDefault;
+            options ??= ModelSerializerOptions.DefaultWireOptions;
             string version = default;
             bool enabled = default;
             bool? includeAPIs = default;
@@ -70,7 +67,53 @@ namespace xml_service.Models
             {
                 retentionPolicy = RetentionPolicy.DeserializeRetentionPolicy(retentionPolicyElement);
             }
-            return new Metrics(version, enabled, includeAPIs, retentionPolicy);
+            return new Metrics(version, enabled, includeAPIs, retentionPolicy, default);
+        }
+
+        BinaryData IModelSerializable<Metrics>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            options ??= ModelSerializerOptions.DefaultWireOptions;
+            using MemoryStream stream = new MemoryStream();
+            using XmlWriter writer = XmlWriter.Create(stream);
+            Serialize(writer, null, options);
+            writer.Flush();
+            if (stream.Position > int.MaxValue)
+            {
+                return BinaryData.FromStream(stream);
+            }
+            else
+            {
+                return new BinaryData(stream.GetBuffer().AsMemory(0, (int)stream.Position));
+            }
+        }
+
+        Metrics IModelSerializable<Metrics>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            return DeserializeMetrics(XElement.Load(data.ToStream()), options);
+        }
+
+        public static implicit operator RequestContent(Metrics model)
+        {
+            if (model is null)
+            {
+                return null;
+            }
+
+            return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
+        }
+
+        public static explicit operator Metrics(Response response)
+        {
+            if (response is null)
+            {
+                return null;
+            }
+
+            return DeserializeMetrics(XElement.Load(response.ContentStream), ModelSerializerOptions.DefaultWireOptions);
         }
     }
 }

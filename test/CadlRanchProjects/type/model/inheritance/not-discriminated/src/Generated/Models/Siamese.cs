@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
 using Azure.Core;
 
 namespace _Type.Model.Inheritance.NotDiscriminated.Models
@@ -22,6 +23,16 @@ namespace _Type.Model.Inheritance.NotDiscriminated.Models
         {
             Argument.AssertNotNull(name, nameof(name));
 
+            Smart = smart;
+        }
+
+        /// <summary> Initializes a new instance of Siamese. </summary>
+        /// <param name="name"></param>
+        /// <param name="age"></param>
+        /// <param name="smart"></param>
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal Siamese(string name, int age, bool smart, Dictionary<string, BinaryData> rawData) : base(name, age, rawData)
+        {
             Smart = smart;
         }
 

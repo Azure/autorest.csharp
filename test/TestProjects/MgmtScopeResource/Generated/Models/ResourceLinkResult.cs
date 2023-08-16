@@ -16,7 +16,12 @@ namespace MgmtScopeResource.Models
     /// <summary> List of resource links. </summary>
     internal partial class ResourceLinkResult
     {
-        /// <summary> Initializes a new instance of ResourceLinkResult. </summary>
+        private Dictionary<string, BinaryData> _rawData;
+
+        /// <summary>
+        /// Initializes a new instance of global::MgmtScopeResource.Models.ResourceLinkResult
+        ///
+        /// </summary>
         /// <param name="value"> An array of resource links. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="value"/> is null. </exception>
         internal ResourceLinkResult(IEnumerable<ResourceLinkData> value)
@@ -26,13 +31,18 @@ namespace MgmtScopeResource.Models
             Value = value.ToList();
         }
 
-        /// <summary> Initializes a new instance of ResourceLinkResult. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::MgmtScopeResource.Models.ResourceLinkResult
+        ///
+        /// </summary>
         /// <param name="value"> An array of resource links. </param>
         /// <param name="nextLink"> The URL to use for getting the next set of results. </param>
-        internal ResourceLinkResult(IReadOnlyList<ResourceLinkData> value, string nextLink)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal ResourceLinkResult(IReadOnlyList<ResourceLinkData> value, string nextLink, Dictionary<string, BinaryData> rawData)
         {
             Value = value;
             NextLink = nextLink;
+            _rawData = rawData;
         }
 
         /// <summary> An array of resource links. </summary>

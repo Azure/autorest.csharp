@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
 using Azure.Core;
 
 namespace CognitiveSearch.Models
@@ -13,7 +14,12 @@ namespace CognitiveSearch.Models
     /// <summary> Provides parameter values to a tag scoring function. </summary>
     public partial class TagScoringParameters
     {
-        /// <summary> Initializes a new instance of TagScoringParameters. </summary>
+        private Dictionary<string, BinaryData> _rawData;
+
+        /// <summary>
+        /// Initializes a new instance of global::CognitiveSearch.Models.TagScoringParameters
+        ///
+        /// </summary>
         /// <param name="tagsParameter"> The name of the parameter passed in search queries to specify the list of tags to compare against the target field. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="tagsParameter"/> is null. </exception>
         public TagScoringParameters(string tagsParameter)
@@ -21,6 +27,18 @@ namespace CognitiveSearch.Models
             Argument.AssertNotNull(tagsParameter, nameof(tagsParameter));
 
             TagsParameter = tagsParameter;
+        }
+
+        /// <summary>
+        /// Initializes a new instance of global::CognitiveSearch.Models.TagScoringParameters
+        ///
+        /// </summary>
+        /// <param name="tagsParameter"> The name of the parameter passed in search queries to specify the list of tags to compare against the target field. </param>
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal TagScoringParameters(string tagsParameter, Dictionary<string, BinaryData> rawData)
+        {
+            TagsParameter = tagsParameter;
+            _rawData = rawData;
         }
 
         /// <summary> The name of the parameter passed in search queries to specify the list of tags to compare against the target field. </summary>

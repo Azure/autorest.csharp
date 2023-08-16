@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Collections.Generic;
 using Azure.Core;
 
@@ -13,13 +14,19 @@ namespace Azure.Network.Management.Interface.Models
     /// <summary> Outbound rule of the load balancer. </summary>
     public partial class OutboundRule : SubResource
     {
-        /// <summary> Initializes a new instance of OutboundRule. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::Azure.Network.Management.Interface.Models.OutboundRule
+        ///
+        /// </summary>
         public OutboundRule()
         {
             FrontendIPConfigurations = new ChangeTrackingList<SubResource>();
         }
 
-        /// <summary> Initializes a new instance of OutboundRule. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::Azure.Network.Management.Interface.Models.OutboundRule
+        ///
+        /// </summary>
         /// <param name="id"> Resource ID. </param>
         /// <param name="name"> The name of the resource that is unique within the set of outbound rules used by the load balancer. This name can be used to access the resource. </param>
         /// <param name="etag"> A unique read-only string that changes whenever the resource is updated. </param>
@@ -31,7 +38,8 @@ namespace Azure.Network.Management.Interface.Models
         /// <param name="protocol"> The protocol for the outbound rule in load balancer. </param>
         /// <param name="enableTcpReset"> Receive bidirectional TCP Reset on TCP flow idle timeout or unexpected connection termination. This element is only used when the protocol is set to TCP. </param>
         /// <param name="idleTimeoutInMinutes"> The timeout for the TCP idle connection. </param>
-        internal OutboundRule(string id, string name, string etag, string type, int? allocatedOutboundPorts, IList<SubResource> frontendIPConfigurations, SubResource backendAddressPool, ProvisioningState? provisioningState, LoadBalancerOutboundRuleProtocol? protocol, bool? enableTcpReset, int? idleTimeoutInMinutes) : base(id)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal OutboundRule(string id, string name, string etag, string type, int? allocatedOutboundPorts, IList<SubResource> frontendIPConfigurations, SubResource backendAddressPool, ProvisioningState? provisioningState, LoadBalancerOutboundRuleProtocol? protocol, bool? enableTcpReset, int? idleTimeoutInMinutes, Dictionary<string, BinaryData> rawData) : base(id, rawData)
         {
             Name = name;
             Etag = etag;

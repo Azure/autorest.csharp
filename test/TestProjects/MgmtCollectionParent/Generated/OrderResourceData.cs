@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Collections.Generic;
 using Azure.Core;
 using Azure.ResourceManager.Models;
@@ -18,14 +19,22 @@ namespace MgmtCollectionParent
     /// </summary>
     public partial class OrderResourceData : ResourceData
     {
-        /// <summary> Initializes a new instance of OrderResourceData. </summary>
+        private Dictionary<string, BinaryData> _rawData;
+
+        /// <summary>
+        /// Initializes a new instance of global::MgmtCollectionParent.OrderResourceData
+        ///
+        /// </summary>
         internal OrderResourceData()
         {
             OrderItemIds = new ChangeTrackingList<string>();
             OrderStageHistory = new ChangeTrackingList<StageDetails>();
         }
 
-        /// <summary> Initializes a new instance of OrderResourceData. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::MgmtCollectionParent.OrderResourceData
+        ///
+        /// </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
         /// <param name="resourceType"> The resourceType. </param>
@@ -33,11 +42,13 @@ namespace MgmtCollectionParent
         /// <param name="orderItemIds"> List of order item ARM Ids which are part of an order. </param>
         /// <param name="currentStage"> Order current status. </param>
         /// <param name="orderStageHistory"> Order status history. </param>
-        internal OrderResourceData(ResourceIdentifier id, string name, ResourceType resourceType, SystemData systemData, IReadOnlyList<string> orderItemIds, StageDetails currentStage, IReadOnlyList<StageDetails> orderStageHistory) : base(id, name, resourceType, systemData)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal OrderResourceData(ResourceIdentifier id, string name, ResourceType resourceType, SystemData systemData, IReadOnlyList<string> orderItemIds, StageDetails currentStage, IReadOnlyList<StageDetails> orderStageHistory, Dictionary<string, BinaryData> rawData) : base(id, name, resourceType, systemData)
         {
             OrderItemIds = orderItemIds;
             CurrentStage = currentStage;
             OrderStageHistory = orderStageHistory;
+            _rawData = rawData;
         }
 
         /// <summary> List of order item ARM Ids which are part of an order. </summary>

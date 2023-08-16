@@ -6,39 +6,76 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
 using System.Text.Json;
 using System.Text.Json.Serialization;
+using Azure;
 using Azure.Core;
 using Azure.Core.Serialization;
 
 namespace ModelWithConverterUsage.Models
 {
     [JsonConverter(typeof(ModelStructConverter))]
-    public partial struct ModelStruct : IUtf8JsonSerializable, IJsonModelSerializable
+    public partial struct ModelStruct : IUtf8JsonSerializable, IModelJsonSerializable<ModelStruct>, IModelJsonSerializable<object>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModelSerializable)this).Serialize(writer, ModelSerializerOptions.AzureServiceDefault);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<ModelStruct>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
 
-        void IJsonModelSerializable.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
+        void IModelJsonSerializable<ModelStruct>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
+            ModelSerializerHelper.ValidateFormat<ModelStruct>(this, options.Format);
+
             writer.WriteStartObject();
             if (Optional.IsDefined(ModelProperty))
             {
                 writer.WritePropertyName("Model_Property"u8);
                 writer.WriteStringValue(ModelProperty);
             }
+            if (_rawData is not null && options.Format == ModelSerializerFormat.Json)
+            {
+                foreach (var property in _rawData)
+                {
+                    writer.WritePropertyName(property.Key);
+#if NET6_0_OR_GREATER
+				writer.WriteRawValue(property.Value);
+#else
+                    JsonSerializer.Serialize(writer, JsonDocument.Parse(property.Value.ToString()).RootElement);
+#endif
+                }
+            }
             writer.WriteEndObject();
         }
 
-        object IModelSerializable.Deserialize(BinaryData data, ModelSerializerOptions options)
+        void IModelJsonSerializable<object>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
-            using var doc = JsonDocument.Parse(data);
-            return DeserializeModelStruct(doc.RootElement, options);
+            ModelSerializerHelper.ValidateFormat<ModelStruct>(this, options.Format);
+
+            writer.WriteStartObject();
+            if (Optional.IsDefined(ModelProperty))
+            {
+                writer.WritePropertyName("Model_Property"u8);
+                writer.WriteStringValue(ModelProperty);
+            }
+            if (_rawData is not null && options.Format == ModelSerializerFormat.Json)
+            {
+                foreach (var property in _rawData)
+                {
+                    writer.WritePropertyName(property.Key);
+#if NET6_0_OR_GREATER
+				writer.WriteRawValue(property.Value);
+#else
+                    JsonSerializer.Serialize(writer, JsonDocument.Parse(property.Value.ToString()).RootElement);
+#endif
+                }
+            }
+            writer.WriteEndObject();
         }
 
         internal static ModelStruct DeserializeModelStruct(JsonElement element, ModelSerializerOptions options = default)
         {
-            options ??= ModelSerializerOptions.AzureServiceDefault;
+            options ??= ModelSerializerOptions.DefaultWireOptions;
+
             Optional<string> modelProperty = default;
+            Dictionary<string, BinaryData> rawData = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("Model_Property"u8))
@@ -46,14 +83,72 @@ namespace ModelWithConverterUsage.Models
                     modelProperty = property.Value.GetString();
                     continue;
                 }
+                if (options.Format == ModelSerializerFormat.Json)
+                {
+                    rawData.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
+                    continue;
+                }
             }
-            return new ModelStruct(modelProperty.Value);
+            return new ModelStruct(modelProperty.Value, rawData);
         }
 
-        object IJsonModelSerializable.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        ModelStruct IModelJsonSerializable<ModelStruct>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
         {
+            ModelSerializerHelper.ValidateFormat<ModelStruct>(this, options.Format);
+
             using var doc = JsonDocument.ParseValue(ref reader);
             return DeserializeModelStruct(doc.RootElement, options);
+        }
+
+        object IModelJsonSerializable<object>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat<ModelStruct>(this, options.Format);
+
+            using var doc = JsonDocument.ParseValue(ref reader);
+            return DeserializeModelStruct(doc.RootElement, options);
+        }
+
+        BinaryData IModelSerializable<ModelStruct>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat<ModelStruct>(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        ModelStruct IModelSerializable<ModelStruct>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat<ModelStruct>(this, options.Format);
+
+            using var doc = JsonDocument.Parse(data);
+            return DeserializeModelStruct(doc.RootElement, options);
+        }
+
+        BinaryData IModelSerializable<object>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat<ModelStruct>(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        object IModelSerializable<object>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat<ModelStruct>(this, options.Format);
+
+            using var doc = JsonDocument.Parse(data);
+            return DeserializeModelStruct(doc.RootElement, options);
+        }
+
+        public static implicit operator RequestContent(ModelStruct model)
+        {
+            return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
+        }
+
+        public static explicit operator ModelStruct(Response response)
+        {
+            Argument.AssertNotNull(response, nameof(response));
+
+            using JsonDocument doc = JsonDocument.Parse(response.ContentStream);
+            return DeserializeModelStruct(doc.RootElement, ModelSerializerOptions.DefaultWireOptions);
         }
 
         internal partial class ModelStructConverter : JsonConverter<ModelStruct>

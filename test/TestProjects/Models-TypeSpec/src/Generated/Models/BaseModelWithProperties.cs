@@ -5,11 +5,16 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
+
 namespace ModelsTypeSpec.Models
 {
     /// <summary> Base model with properties. </summary>
     public partial class BaseModelWithProperties
     {
+        protected internal Dictionary<string, BinaryData> _rawData;
+
         /// <summary> Initializes a new instance of BaseModelWithProperties. </summary>
         internal BaseModelWithProperties()
         {
@@ -17,9 +22,11 @@ namespace ModelsTypeSpec.Models
 
         /// <summary> Initializes a new instance of BaseModelWithProperties. </summary>
         /// <param name="optionalPropertyOnBase"> Optional properties on base. </param>
-        internal BaseModelWithProperties(string optionalPropertyOnBase)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal BaseModelWithProperties(string optionalPropertyOnBase, Dictionary<string, BinaryData> rawData)
         {
             OptionalPropertyOnBase = optionalPropertyOnBase;
+            _rawData = rawData;
         }
 
         /// <summary> Optional properties on base. </summary>

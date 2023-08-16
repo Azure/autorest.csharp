@@ -5,31 +5,44 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
+
 namespace Azure.ResourceManager.Storage.Models
 {
     /// <summary> The encryption settings on the storage account. </summary>
     public partial class Encryption
     {
-        /// <summary> Initializes a new instance of Encryption. </summary>
+        private Dictionary<string, BinaryData> _rawData;
+
+        /// <summary>
+        /// Initializes a new instance of global::Azure.ResourceManager.Storage.Models.Encryption
+        ///
+        /// </summary>
         /// <param name="keySource"> The encryption keySource (provider). Possible values (case-insensitive):  Microsoft.Storage, Microsoft.Keyvault. </param>
         public Encryption(KeySource keySource)
         {
             KeySource = keySource;
         }
 
-        /// <summary> Initializes a new instance of Encryption. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::Azure.ResourceManager.Storage.Models.Encryption
+        ///
+        /// </summary>
         /// <param name="services"> List of services which support encryption. </param>
         /// <param name="keySource"> The encryption keySource (provider). Possible values (case-insensitive):  Microsoft.Storage, Microsoft.Keyvault. </param>
         /// <param name="requireInfrastructureEncryption"> A boolean indicating whether or not the service applies a secondary layer of encryption with platform managed keys for data at rest. </param>
         /// <param name="keyVaultProperties"> Properties provided by key vault. </param>
         /// <param name="encryptionIdentity"> The identity to be used with service-side encryption at rest. </param>
-        internal Encryption(EncryptionServices services, KeySource keySource, bool? requireInfrastructureEncryption, KeyVaultProperties keyVaultProperties, EncryptionIdentity encryptionIdentity)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal Encryption(EncryptionServices services, KeySource keySource, bool? requireInfrastructureEncryption, KeyVaultProperties keyVaultProperties, EncryptionIdentity encryptionIdentity, Dictionary<string, BinaryData> rawData)
         {
             Services = services;
             KeySource = keySource;
             RequireInfrastructureEncryption = requireInfrastructureEncryption;
             KeyVaultProperties = keyVaultProperties;
             EncryptionIdentity = encryptionIdentity;
+            _rawData = rawData;
         }
 
         /// <summary> List of services which support encryption. </summary>

@@ -5,21 +5,34 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
+
 namespace MgmtMockAndSample.Models
 {
     /// <summary> Configuration needed to perform TLS termination &amp; initiation. </summary>
     internal partial class FirewallPolicyTransportSecurity
     {
-        /// <summary> Initializes a new instance of FirewallPolicyTransportSecurity. </summary>
+        private Dictionary<string, BinaryData> _rawData;
+
+        /// <summary>
+        /// Initializes a new instance of global::MgmtMockAndSample.Models.FirewallPolicyTransportSecurity
+        ///
+        /// </summary>
         public FirewallPolicyTransportSecurity()
         {
         }
 
-        /// <summary> Initializes a new instance of FirewallPolicyTransportSecurity. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::MgmtMockAndSample.Models.FirewallPolicyTransportSecurity
+        ///
+        /// </summary>
         /// <param name="certificateAuthority"> The CA used for intermediate CA generation. </param>
-        internal FirewallPolicyTransportSecurity(FirewallPolicyCertificateAuthority certificateAuthority)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal FirewallPolicyTransportSecurity(FirewallPolicyCertificateAuthority certificateAuthority, Dictionary<string, BinaryData> rawData)
         {
             CertificateAuthority = certificateAuthority;
+            _rawData = rawData;
         }
 
         /// <summary> The CA used for intermediate CA generation. </summary>

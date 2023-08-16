@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Collections.Generic;
 using Azure.Core;
 using Azure.ResourceManager.Models;
@@ -15,7 +16,12 @@ namespace Azure.ResourceManager.Fake.Models
     [TypeReferenceType]
     public partial class PrivateLinkResourceData : ResourceData
     {
-        /// <summary> Initializes a new instance of PrivateLinkResourceData. </summary>
+        private Dictionary<string, BinaryData> _rawData;
+
+        /// <summary>
+        /// Initializes a new instance of global::Azure.ResourceManager.Fake.Models.PrivateLinkResourceData
+        ///
+        /// </summary>
         [InitializationConstructor]
         public PrivateLinkResourceData()
         {
@@ -23,7 +29,10 @@ namespace Azure.ResourceManager.Fake.Models
             RequiredZoneNames = new ChangeTrackingList<string>();
         }
 
-        /// <summary> Initializes a new instance of PrivateLinkResourceData. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::Azure.ResourceManager.Fake.Models.PrivateLinkResourceData
+        ///
+        /// </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
         /// <param name="resourceType"> The resourceType. </param>
@@ -31,12 +40,13 @@ namespace Azure.ResourceManager.Fake.Models
         /// <param name="groupId"> The private link resource group id. </param>
         /// <param name="requiredMembers"> The private link resource required member names. </param>
         /// <param name="requiredZoneNames"> The private link resource Private link DNS zone name. </param>
-        [SerializationConstructor]
-        protected PrivateLinkResourceData(ResourceIdentifier id, string name, ResourceType resourceType, ResourceManager.Models.SystemData systemData, string groupId, IReadOnlyList<string> requiredMembers, IReadOnlyList<string> requiredZoneNames) : base(id, name, resourceType, systemData)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        protected PrivateLinkResourceData(ResourceIdentifier id, string name, ResourceType resourceType, ResourceManager.Models.SystemData systemData, string groupId, IReadOnlyList<string> requiredMembers, IReadOnlyList<string> requiredZoneNames, Dictionary<string, BinaryData> rawData) : base(id, name, resourceType, systemData)
         {
             GroupId = groupId;
             RequiredMembers = requiredMembers;
             RequiredZoneNames = requiredZoneNames;
+            _rawData = rawData;
         }
 
         /// <summary> The private link resource group id. </summary>

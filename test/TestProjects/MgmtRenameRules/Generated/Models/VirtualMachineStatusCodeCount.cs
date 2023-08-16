@@ -5,6 +5,9 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
+
 namespace MgmtRenameRules.Models
 {
     /// <summary>
@@ -13,12 +16,20 @@ namespace MgmtRenameRules.Models
     /// </summary>
     public partial class VirtualMachineStatusCodeCount
     {
-        /// <summary> Initializes a new instance of VirtualMachineStatusCodeCount. </summary>
+        private Dictionary<string, BinaryData> _rawData;
+
+        /// <summary>
+        /// Initializes a new instance of global::MgmtRenameRules.Models.VirtualMachineStatusCodeCount
+        ///
+        /// </summary>
         internal VirtualMachineStatusCodeCount()
         {
         }
 
-        /// <summary> Initializes a new instance of VirtualMachineStatusCodeCount. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::MgmtRenameRules.Models.VirtualMachineStatusCodeCount
+        ///
+        /// </summary>
         /// <param name="code">
         /// The instance view status code.
         /// Serialized Name: VirtualMachineStatusCodeCount.code
@@ -27,10 +38,12 @@ namespace MgmtRenameRules.Models
         /// The number of instances having a particular status code.
         /// Serialized Name: VirtualMachineStatusCodeCount.count
         /// </param>
-        internal VirtualMachineStatusCodeCount(string code, int? count)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal VirtualMachineStatusCodeCount(string code, int? count, Dictionary<string, BinaryData> rawData)
         {
             Code = code;
             Count = count;
+            _rawData = rawData;
         }
 
         /// <summary>

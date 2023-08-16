@@ -5,6 +5,9 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
+
 namespace Azure.ResourceManager.Sample.Models
 {
     /// <summary>
@@ -13,12 +16,20 @@ namespace Azure.ResourceManager.Sample.Models
     /// </summary>
     public partial class SamplePlan
     {
-        /// <summary> Initializes a new instance of SamplePlan. </summary>
+        private Dictionary<string, BinaryData> _rawData;
+
+        /// <summary>
+        /// Initializes a new instance of global::Azure.ResourceManager.Sample.Models.SamplePlan
+        ///
+        /// </summary>
         public SamplePlan()
         {
         }
 
-        /// <summary> Initializes a new instance of SamplePlan. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::Azure.ResourceManager.Sample.Models.SamplePlan
+        ///
+        /// </summary>
         /// <param name="name">
         /// The plan ID.
         /// Serialized Name: SamplePlan.name
@@ -35,12 +46,14 @@ namespace Azure.ResourceManager.Sample.Models
         /// The promotion code.
         /// Serialized Name: SamplePlan.promotionCode
         /// </param>
-        internal SamplePlan(string name, string publisher, string product, string promotionCode)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal SamplePlan(string name, string publisher, string product, string promotionCode, Dictionary<string, BinaryData> rawData)
         {
             Name = name;
             Publisher = publisher;
             Product = product;
             PromotionCode = promotionCode;
+            _rawData = rawData;
         }
 
         /// <summary>

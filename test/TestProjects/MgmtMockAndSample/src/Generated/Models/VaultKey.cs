@@ -5,23 +5,36 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
+
 namespace MgmtMockAndSample.Models
 {
     /// <summary> The VaultKey. </summary>
     public partial class VaultKey
     {
-        /// <summary> Initializes a new instance of VaultKey. </summary>
+        private Dictionary<string, BinaryData> _rawData;
+
+        /// <summary>
+        /// Initializes a new instance of global::MgmtMockAndSample.Models.VaultKey
+        ///
+        /// </summary>
         internal VaultKey()
         {
         }
 
-        /// <summary> Initializes a new instance of VaultKey. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::MgmtMockAndSample.Models.VaultKey
+        ///
+        /// </summary>
         /// <param name="key"> name of the key. </param>
         /// <param name="content"> content of the key. </param>
-        internal VaultKey(string key, string content)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal VaultKey(string key, string content, Dictionary<string, BinaryData> rawData)
         {
             Key = key;
             Content = content;
+            _rawData = rawData;
         }
 
         /// <summary> name of the key. </summary>

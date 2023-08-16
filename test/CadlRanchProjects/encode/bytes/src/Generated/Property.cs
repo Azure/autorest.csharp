@@ -56,8 +56,8 @@ namespace Encode.Bytes
             Argument.AssertNotNull(body, nameof(body));
 
             RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = await DefaultAsync(body.ToRequestContent(), context).ConfigureAwait(false);
-            return Response.FromValue(DefaultBytesProperty.FromResponse(response), response);
+            Response response = await DefaultAsync(body, context).ConfigureAwait(false);
+            return Response.FromValue((DefaultBytesProperty)response, response);
         }
 
         /// <param name="body"> The DefaultBytesProperty to use. </param>
@@ -69,8 +69,8 @@ namespace Encode.Bytes
             Argument.AssertNotNull(body, nameof(body));
 
             RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = Default(body.ToRequestContent(), context);
-            return Response.FromValue(DefaultBytesProperty.FromResponse(response), response);
+            Response response = Default(body, context);
+            return Response.FromValue((DefaultBytesProperty)response, response);
         }
 
         /// <summary>
@@ -160,8 +160,8 @@ namespace Encode.Bytes
             Argument.AssertNotNull(body, nameof(body));
 
             RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = await Base64Async(body.ToRequestContent(), context).ConfigureAwait(false);
-            return Response.FromValue(Base64BytesProperty.FromResponse(response), response);
+            Response response = await Base64Async(body, context).ConfigureAwait(false);
+            return Response.FromValue((Base64BytesProperty)response, response);
         }
 
         /// <param name="body"> The Base64BytesProperty to use. </param>
@@ -173,8 +173,8 @@ namespace Encode.Bytes
             Argument.AssertNotNull(body, nameof(body));
 
             RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = Base64(body.ToRequestContent(), context);
-            return Response.FromValue(Base64BytesProperty.FromResponse(response), response);
+            Response response = Base64(body, context);
+            return Response.FromValue((Base64BytesProperty)response, response);
         }
 
         /// <summary>
@@ -264,8 +264,8 @@ namespace Encode.Bytes
             Argument.AssertNotNull(body, nameof(body));
 
             RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = await Base64urlAsync(body.ToRequestContent(), context).ConfigureAwait(false);
-            return Response.FromValue(Base64urlBytesProperty.FromResponse(response), response);
+            Response response = await Base64urlAsync(body, context).ConfigureAwait(false);
+            return Response.FromValue((Base64urlBytesProperty)response, response);
         }
 
         /// <param name="body"> The Base64urlBytesProperty to use. </param>
@@ -277,8 +277,8 @@ namespace Encode.Bytes
             Argument.AssertNotNull(body, nameof(body));
 
             RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = Base64url(body.ToRequestContent(), context);
-            return Response.FromValue(Base64urlBytesProperty.FromResponse(response), response);
+            Response response = Base64url(body, context);
+            return Response.FromValue((Base64urlBytesProperty)response, response);
         }
 
         /// <summary>
@@ -368,8 +368,8 @@ namespace Encode.Bytes
             Argument.AssertNotNull(body, nameof(body));
 
             RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = await Base64urlArrayAsync(body.ToRequestContent(), context).ConfigureAwait(false);
-            return Response.FromValue(Base64urlArrayBytesProperty.FromResponse(response), response);
+            Response response = await Base64urlArrayAsync(body, context).ConfigureAwait(false);
+            return Response.FromValue((Base64urlArrayBytesProperty)response, response);
         }
 
         /// <param name="body"> The Base64urlArrayBytesProperty to use. </param>
@@ -381,8 +381,8 @@ namespace Encode.Bytes
             Argument.AssertNotNull(body, nameof(body));
 
             RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = Base64urlArray(body.ToRequestContent(), context);
-            return Response.FromValue(Base64urlArrayBytesProperty.FromResponse(response), response);
+            Response response = Base64urlArray(body, context);
+            return Response.FromValue((Base64urlArrayBytesProperty)response, response);
         }
 
         /// <summary>

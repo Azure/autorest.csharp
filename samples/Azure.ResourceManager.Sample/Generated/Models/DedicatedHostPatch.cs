@@ -18,13 +18,19 @@ namespace Azure.ResourceManager.Sample.Models
     /// </summary>
     public partial class DedicatedHostPatch : UpdateResource
     {
-        /// <summary> Initializes a new instance of DedicatedHostPatch. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::Azure.ResourceManager.Sample.Models.DedicatedHostPatch
+        ///
+        /// </summary>
         public DedicatedHostPatch()
         {
             VirtualMachines = new ChangeTrackingList<Resources.Models.SubResource>();
         }
 
-        /// <summary> Initializes a new instance of DedicatedHostPatch. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::Azure.ResourceManager.Sample.Models.DedicatedHostPatch
+        ///
+        /// </summary>
         /// <param name="tags">
         /// Resource tags
         /// Serialized Name: UpdateResource.tags
@@ -61,7 +67,8 @@ namespace Azure.ResourceManager.Sample.Models
         /// The dedicated host instance view.
         /// Serialized Name: DedicatedHostUpdate.properties.instanceView
         /// </param>
-        internal DedicatedHostPatch(IDictionary<string, string> tags, int? platformFaultDomain, bool? autoReplaceOnFailure, string hostId, IReadOnlyList<Resources.Models.SubResource> virtualMachines, DedicatedHostLicenseType? licenseType, DateTimeOffset? provisioningOn, string provisioningState, DedicatedHostInstanceView instanceView) : base(tags)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal DedicatedHostPatch(IDictionary<string, string> tags, int? platformFaultDomain, bool? autoReplaceOnFailure, string hostId, IReadOnlyList<Resources.Models.SubResource> virtualMachines, DedicatedHostLicenseType? licenseType, DateTimeOffset? provisioningOn, string provisioningState, DedicatedHostInstanceView instanceView, Dictionary<string, BinaryData> rawData) : base(tags, rawData)
         {
             PlatformFaultDomain = platformFaultDomain;
             AutoReplaceOnFailure = autoReplaceOnFailure;

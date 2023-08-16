@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
 using Azure.Core;
 
 namespace MgmtMockAndSample.Models
@@ -13,7 +14,12 @@ namespace MgmtMockAndSample.Models
     /// <summary> The parameters used to check the availability of the vault name. </summary>
     public partial class VaultCheckNameAvailabilityContent
     {
-        /// <summary> Initializes a new instance of VaultCheckNameAvailabilityContent. </summary>
+        private Dictionary<string, BinaryData> _rawData;
+
+        /// <summary>
+        /// Initializes a new instance of global::MgmtMockAndSample.Models.VaultCheckNameAvailabilityContent
+        ///
+        /// </summary>
         /// <param name="name"> The vault name. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
         public VaultCheckNameAvailabilityContent(string name)
@@ -24,13 +30,18 @@ namespace MgmtMockAndSample.Models
             ResourceType = EncryptionType.MicrosoftKeyVaultVaults;
         }
 
-        /// <summary> Initializes a new instance of VaultCheckNameAvailabilityContent. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::MgmtMockAndSample.Models.VaultCheckNameAvailabilityContent
+        ///
+        /// </summary>
         /// <param name="name"> The vault name. </param>
         /// <param name="resourceType"> The type of resource, Microsoft.KeyVault/vaults. </param>
-        internal VaultCheckNameAvailabilityContent(string name, EncryptionType resourceType)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal VaultCheckNameAvailabilityContent(string name, EncryptionType resourceType, Dictionary<string, BinaryData> rawData)
         {
             Name = name;
             ResourceType = resourceType;
+            _rawData = rawData;
         }
 
         /// <summary> The vault name. </summary>

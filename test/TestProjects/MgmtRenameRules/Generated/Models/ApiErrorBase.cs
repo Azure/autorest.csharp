@@ -5,6 +5,9 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
+
 namespace MgmtRenameRules.Models
 {
     /// <summary>
@@ -13,12 +16,20 @@ namespace MgmtRenameRules.Models
     /// </summary>
     public partial class ApiErrorBase
     {
-        /// <summary> Initializes a new instance of ApiErrorBase. </summary>
+        private Dictionary<string, BinaryData> _rawData;
+
+        /// <summary>
+        /// Initializes a new instance of global::MgmtRenameRules.Models.ApiErrorBase
+        ///
+        /// </summary>
         internal ApiErrorBase()
         {
         }
 
-        /// <summary> Initializes a new instance of ApiErrorBase. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::MgmtRenameRules.Models.ApiErrorBase
+        ///
+        /// </summary>
         /// <param name="code">
         /// The error code.
         /// Serialized Name: ApiErrorBase.code
@@ -31,11 +42,13 @@ namespace MgmtRenameRules.Models
         /// The error message.
         /// Serialized Name: ApiErrorBase.message
         /// </param>
-        internal ApiErrorBase(string code, string target, string message)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal ApiErrorBase(string code, string target, string message, Dictionary<string, BinaryData> rawData)
         {
             Code = code;
             Target = target;
             Message = message;
+            _rawData = rawData;
         }
 
         /// <summary>

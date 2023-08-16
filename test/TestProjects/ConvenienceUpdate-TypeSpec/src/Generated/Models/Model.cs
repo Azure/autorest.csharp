@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
 using Azure.Core;
 
 namespace ConvenienceInCadl.Models
@@ -13,6 +14,8 @@ namespace ConvenienceInCadl.Models
     /// <summary> A model. </summary>
     public partial class Model
     {
+        private Dictionary<string, BinaryData> _rawData;
+
         /// <summary> Initializes a new instance of Model. </summary>
         /// <param name="id"></param>
         /// <exception cref="ArgumentNullException"> <paramref name="id"/> is null. </exception>
@@ -21,6 +24,15 @@ namespace ConvenienceInCadl.Models
             Argument.AssertNotNull(id, nameof(id));
 
             Id = id;
+        }
+
+        /// <summary> Initializes a new instance of Model. </summary>
+        /// <param name="id"></param>
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal Model(string id, Dictionary<string, BinaryData> rawData)
+        {
+            Id = id;
+            _rawData = rawData;
         }
 
         /// <summary> Gets or sets the id. </summary>

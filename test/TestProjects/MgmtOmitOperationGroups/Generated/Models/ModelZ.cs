@@ -5,23 +5,36 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
+
 namespace MgmtOmitOperationGroups.Models
 {
     /// <summary> The ModelZ. </summary>
     public partial class ModelZ
     {
-        /// <summary> Initializes a new instance of ModelZ. </summary>
+        private Dictionary<string, BinaryData> _rawData;
+
+        /// <summary>
+        /// Initializes a new instance of global::MgmtOmitOperationGroups.Models.ModelZ
+        ///
+        /// </summary>
         public ModelZ()
         {
         }
 
-        /// <summary> Initializes a new instance of ModelZ. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::MgmtOmitOperationGroups.Models.ModelZ
+        ///
+        /// </summary>
         /// <param name="h"></param>
         /// <param name="i"></param>
-        internal ModelZ(string h, string i)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal ModelZ(string h, string i, Dictionary<string, BinaryData> rawData)
         {
             H = h;
             I = i;
+            _rawData = rawData;
         }
 
         /// <summary> Gets or sets the h. </summary>

@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Collections.Generic;
 using Azure.Core;
 using Azure.ResourceManager.Models;
@@ -20,14 +21,22 @@ namespace MgmtRenameRules
     /// </summary>
     public partial class VirtualMachineScaleSetData : TrackedResourceData
     {
-        /// <summary> Initializes a new instance of VirtualMachineScaleSetData. </summary>
+        private Dictionary<string, BinaryData> _rawData;
+
+        /// <summary>
+        /// Initializes a new instance of global::MgmtRenameRules.VirtualMachineScaleSetData
+        ///
+        /// </summary>
         /// <param name="location"> The location. </param>
         public VirtualMachineScaleSetData(AzureLocation location) : base(location)
         {
             Zones = new ChangeTrackingList<string>();
         }
 
-        /// <summary> Initializes a new instance of VirtualMachineScaleSetData. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::MgmtRenameRules.VirtualMachineScaleSetData
+        ///
+        /// </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
         /// <param name="resourceType"> The resourceType. </param>
@@ -118,7 +127,8 @@ namespace MgmtRenameRules
         /// Specifies the scale-in policy that decides which virtual machines are chosen for removal when a Virtual Machine Scale Set is scaled-in.
         /// Serialized Name: VirtualMachineScaleSet.properties.scaleInPolicy
         /// </param>
-        internal VirtualMachineScaleSetData(ResourceIdentifier id, string name, ResourceType resourceType, SystemData systemData, IDictionary<string, string> tags, AzureLocation location, MgmtRenameRulesSku sku, MgmtRenameRulesPlan plan, ManagedServiceIdentity identity, IList<string> zones, string ipsecSomething, string testIPsec, string p2sServer, UpgradePolicy upgradePolicy, AutomaticRepairsPolicy automaticRepairsPolicy, VirtualMachineScaleSetVmProfile virtualMachineProfile, string provisioningState, bool? overprovision, bool? doNotRunExtensionsOnOverprovisionedVms, string uniqueId, bool? singlePlacementGroup, bool? zoneBalance, int? platformFaultDomainCount, WritableSubResource proximityPlacementGroup, WritableSubResource hostGroup, AdditionalCapabilities additionalCapabilities, ScaleInPolicy scaleInPolicy) : base(id, name, resourceType, systemData, tags, location)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal VirtualMachineScaleSetData(ResourceIdentifier id, string name, ResourceType resourceType, SystemData systemData, IDictionary<string, string> tags, AzureLocation location, MgmtRenameRulesSku sku, MgmtRenameRulesPlan plan, ManagedServiceIdentity identity, IList<string> zones, string ipsecSomething, string testIPsec, string p2sServer, UpgradePolicy upgradePolicy, AutomaticRepairsPolicy automaticRepairsPolicy, VirtualMachineScaleSetVmProfile virtualMachineProfile, string provisioningState, bool? overprovision, bool? doNotRunExtensionsOnOverprovisionedVms, string uniqueId, bool? singlePlacementGroup, bool? zoneBalance, int? platformFaultDomainCount, WritableSubResource proximityPlacementGroup, WritableSubResource hostGroup, AdditionalCapabilities additionalCapabilities, ScaleInPolicy scaleInPolicy, Dictionary<string, BinaryData> rawData) : base(id, name, resourceType, systemData, tags, location)
         {
             Sku = sku;
             Plan = plan;
@@ -141,6 +151,7 @@ namespace MgmtRenameRules
             HostGroup = hostGroup;
             AdditionalCapabilities = additionalCapabilities;
             ScaleInPolicy = scaleInPolicy;
+            _rawData = rawData;
         }
 
         /// <summary>

@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Collections.Generic;
 using Azure.Core;
 
@@ -13,17 +14,27 @@ namespace FlattenedParameters.Models
     /// <summary> The PathsYkez7BOperationPatchRequestbodyContentApplicationJsonSchema. </summary>
     internal partial class PathsYkez7BOperationPatchRequestbodyContentApplicationJsonSchema
     {
-        /// <summary> Initializes a new instance of PathsYkez7BOperationPatchRequestbodyContentApplicationJsonSchema. </summary>
+        private Dictionary<string, BinaryData> _rawData;
+
+        /// <summary>
+        /// Initializes a new instance of global::FlattenedParameters.Models.PathsYkez7BOperationPatchRequestbodyContentApplicationJsonSchema
+        ///
+        /// </summary>
         public PathsYkez7BOperationPatchRequestbodyContentApplicationJsonSchema()
         {
             Items = new ChangeTrackingList<string>();
         }
 
-        /// <summary> Initializes a new instance of PathsYkez7BOperationPatchRequestbodyContentApplicationJsonSchema. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::FlattenedParameters.Models.PathsYkez7BOperationPatchRequestbodyContentApplicationJsonSchema
+        ///
+        /// </summary>
         /// <param name="items"></param>
-        internal PathsYkez7BOperationPatchRequestbodyContentApplicationJsonSchema(IList<string> items)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal PathsYkez7BOperationPatchRequestbodyContentApplicationJsonSchema(IList<string> items, Dictionary<string, BinaryData> rawData)
         {
             Items = items;
+            _rawData = rawData;
         }
 
         /// <summary> Gets or sets the items. </summary>

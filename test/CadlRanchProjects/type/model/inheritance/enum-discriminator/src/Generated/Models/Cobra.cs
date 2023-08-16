@@ -5,6 +5,9 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
+
 namespace _Type.Model.Inheritance.EnumDiscriminator.Models
 {
     /// <summary> Cobra model. </summary>
@@ -20,7 +23,8 @@ namespace _Type.Model.Inheritance.EnumDiscriminator.Models
         /// <summary> Initializes a new instance of Cobra. </summary>
         /// <param name="kind"> discriminator property. </param>
         /// <param name="length"> Length of the snake. </param>
-        internal Cobra(SnakeKind kind, int length) : base(kind, length)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal Cobra(SnakeKind kind, int length, Dictionary<string, BinaryData> rawData) : base(kind, length, rawData)
         {
         }
     }

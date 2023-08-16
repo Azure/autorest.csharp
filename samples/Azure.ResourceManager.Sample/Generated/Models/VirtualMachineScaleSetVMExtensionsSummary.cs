@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Collections.Generic;
 using Azure.Core;
 
@@ -16,13 +17,21 @@ namespace Azure.ResourceManager.Sample.Models
     /// </summary>
     public partial class VirtualMachineScaleSetVMExtensionsSummary
     {
-        /// <summary> Initializes a new instance of VirtualMachineScaleSetVMExtensionsSummary. </summary>
+        private Dictionary<string, BinaryData> _rawData;
+
+        /// <summary>
+        /// Initializes a new instance of global::Azure.ResourceManager.Sample.Models.VirtualMachineScaleSetVMExtensionsSummary
+        ///
+        /// </summary>
         internal VirtualMachineScaleSetVMExtensionsSummary()
         {
             StatusesSummary = new ChangeTrackingList<VirtualMachineStatusCodeCount>();
         }
 
-        /// <summary> Initializes a new instance of VirtualMachineScaleSetVMExtensionsSummary. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::Azure.ResourceManager.Sample.Models.VirtualMachineScaleSetVMExtensionsSummary
+        ///
+        /// </summary>
         /// <param name="name">
         /// The extension name.
         /// Serialized Name: VirtualMachineScaleSetVMExtensionsSummary.name
@@ -31,10 +40,12 @@ namespace Azure.ResourceManager.Sample.Models
         /// The extensions information.
         /// Serialized Name: VirtualMachineScaleSetVMExtensionsSummary.statusesSummary
         /// </param>
-        internal VirtualMachineScaleSetVMExtensionsSummary(string name, IReadOnlyList<VirtualMachineStatusCodeCount> statusesSummary)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal VirtualMachineScaleSetVMExtensionsSummary(string name, IReadOnlyList<VirtualMachineStatusCodeCount> statusesSummary, Dictionary<string, BinaryData> rawData)
         {
             Name = name;
             StatusesSummary = statusesSummary;
+            _rawData = rawData;
         }
 
         /// <summary>

@@ -5,23 +5,36 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
+
 namespace HlcConstants.Models
 {
     /// <summary> The RoundTripModel. </summary>
     public partial class RoundTripModel
     {
-        /// <summary> Initializes a new instance of RoundTripModel. </summary>
+        private Dictionary<string, BinaryData> _rawData;
+
+        /// <summary>
+        /// Initializes a new instance of global::HlcConstants.Models.RoundTripModel
+        ///
+        /// </summary>
         public RoundTripModel()
         {
         }
 
-        /// <summary> Initializes a new instance of RoundTripModel. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::HlcConstants.Models.RoundTripModel
+        ///
+        /// </summary>
         /// <param name="requiredConstantModel"> Describes Protocol and thumbprint of Windows Remote Management listener. </param>
         /// <param name="optionalConstantModel"> Specifies additional XML formatted information that can be included in the Unattend.xml file, which is used by Windows Setup. Contents are defined by setting name, component name, and the pass in which the content is applied. </param>
-        internal RoundTripModel(ModelWithRequiredConstant requiredConstantModel, ModelWithOptionalConstant optionalConstantModel)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal RoundTripModel(ModelWithRequiredConstant requiredConstantModel, ModelWithOptionalConstant optionalConstantModel, Dictionary<string, BinaryData> rawData)
         {
             RequiredConstantModel = requiredConstantModel;
             OptionalConstantModel = optionalConstantModel;
+            _rawData = rawData;
         }
 
         /// <summary> Describes Protocol and thumbprint of Windows Remote Management listener. </summary>

@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
 
 namespace MgmtRenameRules.Models
 {
@@ -15,12 +16,20 @@ namespace MgmtRenameRules.Models
     /// </summary>
     public partial class VaultCertificate
     {
-        /// <summary> Initializes a new instance of VaultCertificate. </summary>
+        private Dictionary<string, BinaryData> _rawData;
+
+        /// <summary>
+        /// Initializes a new instance of global::MgmtRenameRules.Models.VaultCertificate
+        ///
+        /// </summary>
         public VaultCertificate()
         {
         }
 
-        /// <summary> Initializes a new instance of VaultCertificate. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::MgmtRenameRules.Models.VaultCertificate
+        ///
+        /// </summary>
         /// <param name="certificateUri">
         /// This is the URL of a certificate that has been uploaded to Key Vault as a secret. For adding a secret to the Key Vault, see [Add a key or secret to the key vault](https://docs.microsoft.com/azure/key-vault/key-vault-get-started/#add). In this case, your certificate needs to be It is the Base64 encoding of the following JSON Object which is encoded in UTF-8: &lt;br&gt;&lt;br&gt; {&lt;br&gt;  "data":"&lt;Base64-encoded-certificate&gt;",&lt;br&gt;  "dataType":"pfx",&lt;br&gt;  "password":"&lt;pfx-file-password&gt;"&lt;br&gt;}
         /// Serialized Name: VaultCertificate.certificateUrl
@@ -29,10 +38,12 @@ namespace MgmtRenameRules.Models
         /// For Windows VMs, specifies the certificate store on the Virtual Machine to which the certificate should be added. The specified certificate store is implicitly in the LocalMachine account. &lt;br&gt;&lt;br&gt;For Linux VMs, the certificate file is placed under the /var/lib/waagent directory, with the file name &lt;UppercaseThumbprint&gt;.crt for the X509 certificate file and &lt;UppercaseThumbprint&gt;.prv for private key. Both of these files are .pem formatted.
         /// Serialized Name: VaultCertificate.certificateStore
         /// </param>
-        internal VaultCertificate(Uri certificateUri, string certificateStore)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal VaultCertificate(Uri certificateUri, string certificateStore, Dictionary<string, BinaryData> rawData)
         {
             CertificateUri = certificateUri;
             CertificateStore = certificateStore;
+            _rawData = rawData;
         }
 
         /// <summary>

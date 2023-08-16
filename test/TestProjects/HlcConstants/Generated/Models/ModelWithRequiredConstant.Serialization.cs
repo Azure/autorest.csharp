@@ -6,18 +6,22 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
 using System.Text.Json;
+using Azure;
 using Azure.Core;
 using Azure.Core.Serialization;
 
 namespace HlcConstants.Models
 {
-    public partial class ModelWithRequiredConstant : IUtf8JsonSerializable, IJsonModelSerializable
+    public partial class ModelWithRequiredConstant : IUtf8JsonSerializable, IModelJsonSerializable<ModelWithRequiredConstant>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModelSerializable)this).Serialize(writer, ModelSerializerOptions.AzureServiceDefault);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<ModelWithRequiredConstant>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
 
-        void IJsonModelSerializable.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
+        void IModelJsonSerializable<ModelWithRequiredConstant>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
             writer.WriteStartObject();
             writer.WritePropertyName("requiredStringConstant"u8);
             writer.WriteStringValue(RequiredStringConstant.ToString());
@@ -27,18 +31,25 @@ namespace HlcConstants.Models
             writer.WriteBooleanValue(RequiredBooleanConstant);
             writer.WritePropertyName("requiredFloatConstant"u8);
             writer.WriteNumberValue(RequiredFloatConstant.ToSerialSingle());
+            if (_rawData is not null && options.Format == ModelSerializerFormat.Json)
+            {
+                foreach (var property in _rawData)
+                {
+                    writer.WritePropertyName(property.Key);
+#if NET6_0_OR_GREATER
+				writer.WriteRawValue(property.Value);
+#else
+                    JsonSerializer.Serialize(writer, JsonDocument.Parse(property.Value.ToString()).RootElement);
+#endif
+                }
+            }
             writer.WriteEndObject();
-        }
-
-        object IModelSerializable.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            using var doc = JsonDocument.Parse(data);
-            return DeserializeModelWithRequiredConstant(doc.RootElement, options);
         }
 
         internal static ModelWithRequiredConstant DeserializeModelWithRequiredConstant(JsonElement element, ModelSerializerOptions options = default)
         {
-            options ??= ModelSerializerOptions.AzureServiceDefault;
+            options ??= ModelSerializerOptions.DefaultWireOptions;
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
@@ -47,6 +58,7 @@ namespace HlcConstants.Models
             IntConstant requiredIntConstant = default;
             bool requiredBooleanConstant = default;
             FloatConstant requiredFloatConstant = default;
+            Dictionary<string, BinaryData> rawData = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("requiredStringConstant"u8))
@@ -69,14 +81,57 @@ namespace HlcConstants.Models
                     requiredFloatConstant = new FloatConstant(property.Value.GetSingle());
                     continue;
                 }
+                if (options.Format == ModelSerializerFormat.Json)
+                {
+                    rawData.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
+                    continue;
+                }
             }
-            return new ModelWithRequiredConstant(requiredStringConstant, requiredIntConstant, requiredBooleanConstant, requiredFloatConstant);
+            return new ModelWithRequiredConstant(requiredStringConstant, requiredIntConstant, requiredBooleanConstant, requiredFloatConstant, rawData);
         }
 
-        object IJsonModelSerializable.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        ModelWithRequiredConstant IModelJsonSerializable<ModelWithRequiredConstant>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
         {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
             using var doc = JsonDocument.ParseValue(ref reader);
             return DeserializeModelWithRequiredConstant(doc.RootElement, options);
+        }
+
+        BinaryData IModelSerializable<ModelWithRequiredConstant>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        ModelWithRequiredConstant IModelSerializable<ModelWithRequiredConstant>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using var doc = JsonDocument.Parse(data);
+            return DeserializeModelWithRequiredConstant(doc.RootElement, options);
+        }
+
+        public static implicit operator RequestContent(ModelWithRequiredConstant model)
+        {
+            if (model is null)
+            {
+                return null;
+            }
+
+            return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
+        }
+
+        public static explicit operator ModelWithRequiredConstant(Response response)
+        {
+            if (response is null)
+            {
+                return null;
+            }
+
+            using JsonDocument doc = JsonDocument.Parse(response.ContentStream);
+            return DeserializeModelWithRequiredConstant(doc.RootElement, ModelSerializerOptions.DefaultWireOptions);
         }
     }
 }

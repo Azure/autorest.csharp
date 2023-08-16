@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
 using Azure.Core;
 
 namespace multiple_inheritance.Models
@@ -13,7 +14,10 @@ namespace multiple_inheritance.Models
     /// <summary> The Horse. </summary>
     public partial class Horse : Pet
     {
-        /// <summary> Initializes a new instance of Horse. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::multiple_inheritance.Models.Horse
+        ///
+        /// </summary>
         /// <param name="name"></param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
         public Horse(string name) : base(name)
@@ -21,14 +25,15 @@ namespace multiple_inheritance.Models
             Argument.AssertNotNull(name, nameof(name));
         }
 
-        /// <summary> Initializes a new instance of Horse. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::multiple_inheritance.Models.Horse
+        ///
+        /// </summary>
         /// <param name="name"></param>
         /// <param name="isAShowHorse"></param>
-        /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
-        internal Horse(string name, bool? isAShowHorse) : base(name)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal Horse(string name, bool? isAShowHorse, Dictionary<string, BinaryData> rawData) : base(name, rawData)
         {
-            Argument.AssertNotNull(name, nameof(name));
-
             IsAShowHorse = isAShowHorse;
         }
 

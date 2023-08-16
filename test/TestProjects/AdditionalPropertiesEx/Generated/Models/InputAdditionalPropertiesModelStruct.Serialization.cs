@@ -8,17 +8,20 @@
 using System;
 using System.Collections.Generic;
 using System.Text.Json;
+using Azure;
 using Azure.Core;
 using Azure.Core.Serialization;
 
 namespace AdditionalPropertiesEx.Models
 {
-    public partial struct InputAdditionalPropertiesModelStruct : IUtf8JsonSerializable, IJsonModelSerializable
+    public partial struct InputAdditionalPropertiesModelStruct : IUtf8JsonSerializable, IModelJsonSerializable<InputAdditionalPropertiesModelStruct>, IModelJsonSerializable<object>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModelSerializable)this).Serialize(writer, ModelSerializerOptions.AzureServiceDefault);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<InputAdditionalPropertiesModelStruct>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
 
-        void IJsonModelSerializable.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
+        void IModelJsonSerializable<InputAdditionalPropertiesModelStruct>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
+            ModelSerializerHelper.ValidateFormat<InputAdditionalPropertiesModelStruct>(this, options.Format);
+
             writer.WriteStartObject();
             writer.WritePropertyName("id"u8);
             writer.WriteNumberValue(Id);
@@ -30,15 +33,25 @@ namespace AdditionalPropertiesEx.Models
             writer.WriteEndObject();
         }
 
-        object IModelSerializable.Deserialize(BinaryData data, ModelSerializerOptions options)
+        void IModelJsonSerializable<object>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
-            using var doc = JsonDocument.Parse(data);
-            return DeserializeInputAdditionalPropertiesModelStruct(doc.RootElement, options);
+            ModelSerializerHelper.ValidateFormat<InputAdditionalPropertiesModelStruct>(this, options.Format);
+
+            writer.WriteStartObject();
+            writer.WritePropertyName("id"u8);
+            writer.WriteNumberValue(Id);
+            foreach (var item in AdditionalProperties)
+            {
+                writer.WritePropertyName(item.Key);
+                writer.WriteObjectValue(item.Value);
+            }
+            writer.WriteEndObject();
         }
 
         internal static InputAdditionalPropertiesModelStruct DeserializeInputAdditionalPropertiesModelStruct(JsonElement element, ModelSerializerOptions options = default)
         {
-            options ??= ModelSerializerOptions.AzureServiceDefault;
+            options ??= ModelSerializerOptions.DefaultWireOptions;
+
             int id = default;
             IDictionary<string, object> additionalProperties = default;
             Dictionary<string, object> additionalPropertiesDictionary = new Dictionary<string, object>();
@@ -55,10 +68,63 @@ namespace AdditionalPropertiesEx.Models
             return new InputAdditionalPropertiesModelStruct(id, additionalProperties);
         }
 
-        object IJsonModelSerializable.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        InputAdditionalPropertiesModelStruct IModelJsonSerializable<InputAdditionalPropertiesModelStruct>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
         {
+            ModelSerializerHelper.ValidateFormat<InputAdditionalPropertiesModelStruct>(this, options.Format);
+
             using var doc = JsonDocument.ParseValue(ref reader);
             return DeserializeInputAdditionalPropertiesModelStruct(doc.RootElement, options);
+        }
+
+        object IModelJsonSerializable<object>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat<InputAdditionalPropertiesModelStruct>(this, options.Format);
+
+            using var doc = JsonDocument.ParseValue(ref reader);
+            return DeserializeInputAdditionalPropertiesModelStruct(doc.RootElement, options);
+        }
+
+        BinaryData IModelSerializable<InputAdditionalPropertiesModelStruct>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat<InputAdditionalPropertiesModelStruct>(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        InputAdditionalPropertiesModelStruct IModelSerializable<InputAdditionalPropertiesModelStruct>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat<InputAdditionalPropertiesModelStruct>(this, options.Format);
+
+            using var doc = JsonDocument.Parse(data);
+            return DeserializeInputAdditionalPropertiesModelStruct(doc.RootElement, options);
+        }
+
+        BinaryData IModelSerializable<object>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat<InputAdditionalPropertiesModelStruct>(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        object IModelSerializable<object>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat<InputAdditionalPropertiesModelStruct>(this, options.Format);
+
+            using var doc = JsonDocument.Parse(data);
+            return DeserializeInputAdditionalPropertiesModelStruct(doc.RootElement, options);
+        }
+
+        public static implicit operator RequestContent(InputAdditionalPropertiesModelStruct model)
+        {
+            return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
+        }
+
+        public static explicit operator InputAdditionalPropertiesModelStruct(Response response)
+        {
+            Argument.AssertNotNull(response, nameof(response));
+
+            using JsonDocument doc = JsonDocument.Parse(response.ContentStream);
+            return DeserializeInputAdditionalPropertiesModelStruct(doc.RootElement, ModelSerializerOptions.DefaultWireOptions);
         }
     }
 }

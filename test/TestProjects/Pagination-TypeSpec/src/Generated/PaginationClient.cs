@@ -71,7 +71,7 @@ namespace Pagination
         {
             Argument.AssertNotNull(bodyInput, nameof(bodyInput));
 
-            RequestContent content = bodyInput.ToRequestContent();
+            RequestContent content = bodyInput;
             RequestContext context = cancellationToken.CanBeCanceled ? new RequestContext { CancellationToken = cancellationToken } : null;
             HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetPaginationLedgerEntriesRequest(content, context);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => CreateGetPaginationLedgerEntriesNextPageRequest(nextLink, content, context);
@@ -88,7 +88,7 @@ namespace Pagination
         {
             Argument.AssertNotNull(bodyInput, nameof(bodyInput));
 
-            RequestContent content = bodyInput.ToRequestContent();
+            RequestContent content = bodyInput;
             RequestContext context = cancellationToken.CanBeCanceled ? new RequestContext { CancellationToken = cancellationToken } : null;
             HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetPaginationLedgerEntriesRequest(content, context);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => CreateGetPaginationLedgerEntriesNextPageRequest(nextLink, content, context);

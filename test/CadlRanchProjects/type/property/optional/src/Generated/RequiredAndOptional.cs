@@ -54,7 +54,7 @@ namespace _Type.Property.Optional
         {
             RequestContext context = FromCancellationToken(cancellationToken);
             Response response = await GetAllAsync(context).ConfigureAwait(false);
-            return Response.FromValue(RequiredAndOptionalProperty.FromResponse(response), response);
+            return Response.FromValue((RequiredAndOptionalProperty)response, response);
         }
 
         /// <summary> Get models that will return all properties in the model. </summary>
@@ -64,7 +64,7 @@ namespace _Type.Property.Optional
         {
             RequestContext context = FromCancellationToken(cancellationToken);
             Response response = GetAll(context);
-            return Response.FromValue(RequiredAndOptionalProperty.FromResponse(response), response);
+            return Response.FromValue((RequiredAndOptionalProperty)response, response);
         }
 
         /// <summary>
@@ -144,7 +144,7 @@ namespace _Type.Property.Optional
         {
             RequestContext context = FromCancellationToken(cancellationToken);
             Response response = await GetRequiredOnlyAsync(context).ConfigureAwait(false);
-            return Response.FromValue(RequiredAndOptionalProperty.FromResponse(response), response);
+            return Response.FromValue((RequiredAndOptionalProperty)response, response);
         }
 
         /// <summary> Get models that will return only the required properties. </summary>
@@ -154,7 +154,7 @@ namespace _Type.Property.Optional
         {
             RequestContext context = FromCancellationToken(cancellationToken);
             Response response = GetRequiredOnly(context);
-            return Response.FromValue(RequiredAndOptionalProperty.FromResponse(response), response);
+            return Response.FromValue((RequiredAndOptionalProperty)response, response);
         }
 
         /// <summary>
@@ -237,7 +237,7 @@ namespace _Type.Property.Optional
             Argument.AssertNotNull(body, nameof(body));
 
             RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = await PutAllAsync(body.ToRequestContent(), context).ConfigureAwait(false);
+            Response response = await PutAllAsync(body, context).ConfigureAwait(false);
             return response;
         }
 
@@ -251,7 +251,7 @@ namespace _Type.Property.Optional
             Argument.AssertNotNull(body, nameof(body));
 
             RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = PutAll(body.ToRequestContent(), context);
+            Response response = PutAll(body, context);
             return response;
         }
 
@@ -343,7 +343,7 @@ namespace _Type.Property.Optional
             Argument.AssertNotNull(body, nameof(body));
 
             RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = await PutRequiredOnlyAsync(body.ToRequestContent(), context).ConfigureAwait(false);
+            Response response = await PutRequiredOnlyAsync(body, context).ConfigureAwait(false);
             return response;
         }
 
@@ -357,7 +357,7 @@ namespace _Type.Property.Optional
             Argument.AssertNotNull(body, nameof(body));
 
             RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = PutRequiredOnly(body.ToRequestContent(), context);
+            Response response = PutRequiredOnly(body, context);
             return response;
         }
 

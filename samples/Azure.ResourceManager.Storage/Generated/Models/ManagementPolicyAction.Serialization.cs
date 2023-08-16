@@ -6,18 +6,22 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
 using System.Text.Json;
+using Azure;
 using Azure.Core;
 using Azure.Core.Serialization;
 
 namespace Azure.ResourceManager.Storage.Models
 {
-    public partial class ManagementPolicyAction : IUtf8JsonSerializable, IJsonModelSerializable
+    public partial class ManagementPolicyAction : IUtf8JsonSerializable, IModelJsonSerializable<ManagementPolicyAction>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModelSerializable)this).Serialize(writer, ModelSerializerOptions.AzureServiceDefault);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<ManagementPolicyAction>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
 
-        void IJsonModelSerializable.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
+        void IModelJsonSerializable<ManagementPolicyAction>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
             writer.WriteStartObject();
             if (Optional.IsDefined(BaseBlob))
             {
@@ -34,18 +38,25 @@ namespace Azure.ResourceManager.Storage.Models
                 writer.WritePropertyName("version"u8);
                 writer.WriteObjectValue(Version);
             }
+            if (_rawData is not null && options.Format == ModelSerializerFormat.Json)
+            {
+                foreach (var property in _rawData)
+                {
+                    writer.WritePropertyName(property.Key);
+#if NET6_0_OR_GREATER
+				writer.WriteRawValue(property.Value);
+#else
+                    JsonSerializer.Serialize(writer, JsonDocument.Parse(property.Value.ToString()).RootElement);
+#endif
+                }
+            }
             writer.WriteEndObject();
-        }
-
-        object IModelSerializable.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            using var doc = JsonDocument.Parse(data);
-            return DeserializeManagementPolicyAction(doc.RootElement, options);
         }
 
         internal static ManagementPolicyAction DeserializeManagementPolicyAction(JsonElement element, ModelSerializerOptions options = default)
         {
-            options ??= ModelSerializerOptions.AzureServiceDefault;
+            options ??= ModelSerializerOptions.DefaultWireOptions;
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
@@ -53,6 +64,7 @@ namespace Azure.ResourceManager.Storage.Models
             Optional<ManagementPolicyBaseBlob> baseBlob = default;
             Optional<ManagementPolicySnapShot> snapshot = default;
             Optional<ManagementPolicyVersion> version = default;
+            Dictionary<string, BinaryData> rawData = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("baseBlob"u8))
@@ -82,14 +94,57 @@ namespace Azure.ResourceManager.Storage.Models
                     version = ManagementPolicyVersion.DeserializeManagementPolicyVersion(property.Value);
                     continue;
                 }
+                if (options.Format == ModelSerializerFormat.Json)
+                {
+                    rawData.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
+                    continue;
+                }
             }
-            return new ManagementPolicyAction(baseBlob.Value, snapshot.Value, version.Value);
+            return new ManagementPolicyAction(baseBlob.Value, snapshot.Value, version.Value, rawData);
         }
 
-        object IJsonModelSerializable.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        ManagementPolicyAction IModelJsonSerializable<ManagementPolicyAction>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
         {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
             using var doc = JsonDocument.ParseValue(ref reader);
             return DeserializeManagementPolicyAction(doc.RootElement, options);
+        }
+
+        BinaryData IModelSerializable<ManagementPolicyAction>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        ManagementPolicyAction IModelSerializable<ManagementPolicyAction>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using var doc = JsonDocument.Parse(data);
+            return DeserializeManagementPolicyAction(doc.RootElement, options);
+        }
+
+        public static implicit operator RequestContent(ManagementPolicyAction model)
+        {
+            if (model is null)
+            {
+                return null;
+            }
+
+            return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
+        }
+
+        public static explicit operator ManagementPolicyAction(Response response)
+        {
+            if (response is null)
+            {
+                return null;
+            }
+
+            using JsonDocument doc = JsonDocument.Parse(response.ContentStream);
+            return DeserializeManagementPolicyAction(doc.RootElement, ModelSerializerOptions.DefaultWireOptions);
         }
     }
 }

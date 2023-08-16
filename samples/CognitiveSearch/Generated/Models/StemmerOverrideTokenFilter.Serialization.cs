@@ -8,17 +8,20 @@
 using System;
 using System.Collections.Generic;
 using System.Text.Json;
+using Azure;
 using Azure.Core;
 using Azure.Core.Serialization;
 
 namespace CognitiveSearch.Models
 {
-    public partial class StemmerOverrideTokenFilter : IUtf8JsonSerializable, IJsonModelSerializable
+    public partial class StemmerOverrideTokenFilter : IUtf8JsonSerializable, IModelJsonSerializable<StemmerOverrideTokenFilter>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModelSerializable)this).Serialize(writer, ModelSerializerOptions.AzureServiceDefault);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<StemmerOverrideTokenFilter>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
 
-        void IJsonModelSerializable.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
+        void IModelJsonSerializable<StemmerOverrideTokenFilter>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
+            ModelSerializerHelper.ValidateFormat<StemmerOverrideTokenFilter>(this, options.Format);
+
             writer.WriteStartObject();
             writer.WritePropertyName("rules"u8);
             writer.WriteStartArray();
@@ -31,18 +34,25 @@ namespace CognitiveSearch.Models
             writer.WriteStringValue(OdataType);
             writer.WritePropertyName("name"u8);
             writer.WriteStringValue(Name);
+            if (_rawData is not null && options.Format == ModelSerializerFormat.Json)
+            {
+                foreach (var property in _rawData)
+                {
+                    writer.WritePropertyName(property.Key);
+#if NET6_0_OR_GREATER
+				writer.WriteRawValue(property.Value);
+#else
+                    JsonSerializer.Serialize(writer, JsonDocument.Parse(property.Value.ToString()).RootElement);
+#endif
+                }
+            }
             writer.WriteEndObject();
-        }
-
-        object IModelSerializable.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            using var doc = JsonDocument.Parse(data);
-            return DeserializeStemmerOverrideTokenFilter(doc.RootElement, options);
         }
 
         internal static StemmerOverrideTokenFilter DeserializeStemmerOverrideTokenFilter(JsonElement element, ModelSerializerOptions options = default)
         {
-            options ??= ModelSerializerOptions.AzureServiceDefault;
+            options ??= ModelSerializerOptions.DefaultWireOptions;
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
@@ -50,6 +60,7 @@ namespace CognitiveSearch.Models
             IList<string> rules = default;
             string odataType = default;
             string name = default;
+            Dictionary<string, BinaryData> rawData = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("rules"u8))
@@ -72,14 +83,57 @@ namespace CognitiveSearch.Models
                     name = property.Value.GetString();
                     continue;
                 }
+                if (options.Format == ModelSerializerFormat.Json)
+                {
+                    rawData.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
+                    continue;
+                }
             }
-            return new StemmerOverrideTokenFilter(odataType, name, rules);
+            return new StemmerOverrideTokenFilter(odataType, name, rules, rawData);
         }
 
-        object IJsonModelSerializable.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        StemmerOverrideTokenFilter IModelJsonSerializable<StemmerOverrideTokenFilter>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
         {
+            ModelSerializerHelper.ValidateFormat<StemmerOverrideTokenFilter>(this, options.Format);
+
             using var doc = JsonDocument.ParseValue(ref reader);
             return DeserializeStemmerOverrideTokenFilter(doc.RootElement, options);
+        }
+
+        BinaryData IModelSerializable<StemmerOverrideTokenFilter>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat<StemmerOverrideTokenFilter>(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        StemmerOverrideTokenFilter IModelSerializable<StemmerOverrideTokenFilter>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat<StemmerOverrideTokenFilter>(this, options.Format);
+
+            using var doc = JsonDocument.Parse(data);
+            return DeserializeStemmerOverrideTokenFilter(doc.RootElement, options);
+        }
+
+        public static implicit operator RequestContent(StemmerOverrideTokenFilter model)
+        {
+            if (model is null)
+            {
+                return null;
+            }
+
+            return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
+        }
+
+        public static explicit operator StemmerOverrideTokenFilter(Response response)
+        {
+            if (response is null)
+            {
+                return null;
+            }
+
+            using JsonDocument doc = JsonDocument.Parse(response.ContentStream);
+            return DeserializeStemmerOverrideTokenFilter(doc.RootElement, ModelSerializerOptions.DefaultWireOptions);
         }
     }
 }

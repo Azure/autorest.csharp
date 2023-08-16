@@ -5,27 +5,40 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
+
 namespace MgmtExpandResourceTypes.Models
 {
     /// <summary> An SRV record. </summary>
     public partial class SrvRecord
     {
-        /// <summary> Initializes a new instance of SrvRecord. </summary>
+        private Dictionary<string, BinaryData> _rawData;
+
+        /// <summary>
+        /// Initializes a new instance of global::MgmtExpandResourceTypes.Models.SrvRecord
+        ///
+        /// </summary>
         public SrvRecord()
         {
         }
 
-        /// <summary> Initializes a new instance of SrvRecord. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::MgmtExpandResourceTypes.Models.SrvRecord
+        ///
+        /// </summary>
         /// <param name="priority"> The priority value for this SRV record. </param>
         /// <param name="weight"> The weight value for this SRV record. </param>
         /// <param name="port"> The port value for this SRV record. </param>
         /// <param name="target"> The target domain name for this SRV record. </param>
-        internal SrvRecord(int? priority, int? weight, int? port, string target)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal SrvRecord(int? priority, int? weight, int? port, string target, Dictionary<string, BinaryData> rawData)
         {
             Priority = priority;
             Weight = weight;
             Port = port;
             Target = target;
+            _rawData = rawData;
         }
 
         /// <summary> The priority value for this SRV record. </summary>

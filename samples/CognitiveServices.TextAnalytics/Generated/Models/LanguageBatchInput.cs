@@ -15,7 +15,12 @@ namespace CognitiveServices.TextAnalytics.Models
     /// <summary> The LanguageBatchInput. </summary>
     public partial class LanguageBatchInput
     {
-        /// <summary> Initializes a new instance of LanguageBatchInput. </summary>
+        private Dictionary<string, BinaryData> _rawData;
+
+        /// <summary>
+        /// Initializes a new instance of global::CognitiveServices.TextAnalytics.Models.LanguageBatchInput
+        ///
+        /// </summary>
         /// <param name="documents"></param>
         /// <exception cref="ArgumentNullException"> <paramref name="documents"/> is null. </exception>
         public LanguageBatchInput(IEnumerable<LanguageInput> documents)
@@ -25,11 +30,16 @@ namespace CognitiveServices.TextAnalytics.Models
             Documents = documents.ToList();
         }
 
-        /// <summary> Initializes a new instance of LanguageBatchInput. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::CognitiveServices.TextAnalytics.Models.LanguageBatchInput
+        ///
+        /// </summary>
         /// <param name="documents"></param>
-        internal LanguageBatchInput(IList<LanguageInput> documents)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal LanguageBatchInput(IList<LanguageInput> documents, Dictionary<string, BinaryData> rawData)
         {
             Documents = documents;
+            _rawData = rawData;
         }
 
         /// <summary> Gets the documents. </summary>

@@ -5,6 +5,7 @@
 
 #nullable disable
 
+using System;
 using System.Collections.Generic;
 using Azure.Core;
 
@@ -13,7 +14,12 @@ namespace MgmtDiscriminator.Models
     /// <summary> Defines the parameters for the Url Signing action. </summary>
     public partial class UrlSigningActionParameters
     {
-        /// <summary> Initializes a new instance of UrlSigningActionParameters. </summary>
+        private Dictionary<string, BinaryData> _rawData;
+
+        /// <summary>
+        /// Initializes a new instance of global::MgmtDiscriminator.Models.UrlSigningActionParameters
+        ///
+        /// </summary>
         /// <param name="typeName"></param>
         public UrlSigningActionParameters(UrlSigningActionParametersTypeName typeName)
         {
@@ -21,15 +27,20 @@ namespace MgmtDiscriminator.Models
             ParameterNameOverride = new ChangeTrackingList<UrlSigningParamIdentifier>();
         }
 
-        /// <summary> Initializes a new instance of UrlSigningActionParameters. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::MgmtDiscriminator.Models.UrlSigningActionParameters
+        ///
+        /// </summary>
         /// <param name="typeName"></param>
         /// <param name="algorithm"> Algorithm to use for URL signing. </param>
         /// <param name="parameterNameOverride"> Defines which query string parameters in the url to be considered for expires, key id etc. </param>
-        internal UrlSigningActionParameters(UrlSigningActionParametersTypeName typeName, Algorithm? algorithm, IList<UrlSigningParamIdentifier> parameterNameOverride)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal UrlSigningActionParameters(UrlSigningActionParametersTypeName typeName, Algorithm? algorithm, IList<UrlSigningParamIdentifier> parameterNameOverride, Dictionary<string, BinaryData> rawData)
         {
             TypeName = typeName;
             Algorithm = algorithm;
             ParameterNameOverride = parameterNameOverride;
+            _rawData = rawData;
         }
 
         /// <summary> Gets or sets the type name. </summary>

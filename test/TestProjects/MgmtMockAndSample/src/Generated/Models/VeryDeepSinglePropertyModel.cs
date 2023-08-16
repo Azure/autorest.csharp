@@ -5,21 +5,34 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
+
 namespace MgmtMockAndSample.Models
 {
     /// <summary> This is a single property of string. </summary>
     internal partial class VeryDeepSinglePropertyModel
     {
-        /// <summary> Initializes a new instance of VeryDeepSinglePropertyModel. </summary>
+        private Dictionary<string, BinaryData> _rawData;
+
+        /// <summary>
+        /// Initializes a new instance of global::MgmtMockAndSample.Models.VeryDeepSinglePropertyModel
+        ///
+        /// </summary>
         public VeryDeepSinglePropertyModel()
         {
         }
 
-        /// <summary> Initializes a new instance of VeryDeepSinglePropertyModel. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::MgmtMockAndSample.Models.VeryDeepSinglePropertyModel
+        ///
+        /// </summary>
         /// <param name="very"> This is a single property of string. </param>
-        internal VeryDeepSinglePropertyModel(DeepSinglePropertyModel very)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal VeryDeepSinglePropertyModel(DeepSinglePropertyModel very, Dictionary<string, BinaryData> rawData)
         {
             Very = very;
+            _rawData = rawData;
         }
 
         /// <summary> This is a single property of string. </summary>

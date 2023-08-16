@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
 using Azure.Core;
 
 namespace Azure.ResourceManager.Fake.Models
@@ -14,20 +15,29 @@ namespace Azure.ResourceManager.Fake.Models
     [PropertyReferenceType]
     public partial class ErrorAdditionalInfo
     {
-        /// <summary> Initializes a new instance of ErrorAdditionalInfo. </summary>
+        private Dictionary<string, BinaryData> _rawData;
+
+        /// <summary>
+        /// Initializes a new instance of global::Azure.ResourceManager.Fake.Models.ErrorAdditionalInfo
+        ///
+        /// </summary>
         [InitializationConstructor]
         public ErrorAdditionalInfo()
         {
         }
 
-        /// <summary> Initializes a new instance of ErrorAdditionalInfo. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::Azure.ResourceManager.Fake.Models.ErrorAdditionalInfo
+        ///
+        /// </summary>
         /// <param name="errorAdditionalInfoType"> The additional info type. </param>
         /// <param name="info"> The additional info. </param>
-        [SerializationConstructor]
-        internal ErrorAdditionalInfo(string errorAdditionalInfoType, BinaryData info)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal ErrorAdditionalInfo(string errorAdditionalInfoType, BinaryData info, Dictionary<string, BinaryData> rawData)
         {
             ErrorAdditionalInfoType = errorAdditionalInfoType;
             Info = info;
+            _rawData = rawData;
         }
 
         /// <summary> The additional info type. </summary>

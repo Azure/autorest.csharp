@@ -17,7 +17,10 @@ namespace MgmtPropertyChooser.Models
     /// <summary> Model factory for models. </summary>
     public static partial class ArmMgmtPropertyChooserModelFactory
     {
-        /// <summary> Initializes a new instance of VirtualMachineData. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::MgmtPropertyChooser.VirtualMachineData
+        ///
+        /// </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
         /// <param name="resourceType"> The resourceType. </param>
@@ -48,10 +51,13 @@ namespace MgmtPropertyChooser.Models
             zones ??= new List<string>();
             fakeResources ??= new List<MgmtPropertyChooserResourceData>();
 
-            return new VirtualMachineData(id, name, resourceType, systemData, tags, location, plan, resources?.ToList(), identity, identityWithRenamedProperty, identityWithDifferentPropertyType, identityWithNoUserIdentity, identityWithNoSystemIdentity, identityV3, zones?.ToList(), fakeResources?.ToList(), fakeSubResourceId != null ? ResourceManagerModelFactory.SubResource(fakeSubResourceId) : null, fakeWritableSubResourceId != null ? ResourceManagerModelFactory.WritableSubResource(fakeWritableSubResourceId) : null, provisioningState, licenseType, vmId, extensionsTimeBudget);
+            return new VirtualMachineData(id, name, resourceType, systemData, tags, location, plan, resources?.ToList(), identity, identityWithRenamedProperty, identityWithDifferentPropertyType, identityWithNoUserIdentity, identityWithNoSystemIdentity, identityV3, zones?.ToList(), fakeResources?.ToList(), fakeSubResourceId != null ? ResourceManagerModelFactory.SubResource(fakeSubResourceId) : null, fakeWritableSubResourceId != null ? ResourceManagerModelFactory.WritableSubResource(fakeWritableSubResourceId) : null, provisioningState, licenseType, vmId, extensionsTimeBudget, default);
         }
 
-        /// <summary> Initializes a new instance of VirtualMachineExtension. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::MgmtPropertyChooser.Models.VirtualMachineExtension
+        ///
+        /// </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
         /// <param name="resourceType"> The resourceType. </param>
@@ -72,10 +78,13 @@ namespace MgmtPropertyChooser.Models
         {
             tags ??= new Dictionary<string, string>();
 
-            return new VirtualMachineExtension(id, name, resourceType, systemData, tags, location, forceUpdateTag, publisher, typePropertiesType, typeHandlerVersion, autoUpgradeMinorVersion, enableAutomaticUpgrade, settings, protectedSettings, provisioningState);
+            return new VirtualMachineExtension(id, name, resourceType, systemData, tags, location, forceUpdateTag, publisher, typePropertiesType, typeHandlerVersion, autoUpgradeMinorVersion, enableAutomaticUpgrade, settings, protectedSettings, provisioningState, default);
         }
 
-        /// <summary> Initializes a new instance of MgmtPropertyChooserResourceData. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::MgmtPropertyChooser.Models.MgmtPropertyChooserResourceData
+        ///
+        /// </summary>
         /// <param name="id"> The id. </param>
         /// <param name="name"> The name. </param>
         /// <param name="resourceType"> The resourceType. </param>
@@ -87,10 +96,13 @@ namespace MgmtPropertyChooser.Models
         {
             tags ??= new Dictionary<string, string>();
 
-            return new MgmtPropertyChooserResourceData(id, name, resourceType, systemData, location, tags);
+            return new MgmtPropertyChooserResourceData(id, name, resourceType, systemData, location, tags, default);
         }
 
-        /// <summary> Initializes a new instance of IdentityWithRenamedProperty. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::MgmtPropertyChooser.Models.IdentityWithRenamedProperty
+        ///
+        /// </summary>
         /// <param name="testPrincipalId"> The principal id of virtual machine identity. This property will only be provided for a system assigned identity. </param>
         /// <param name="tenantId"> The tenant id associated with the virtual machine. This property will only be provided for a system assigned identity. </param>
         /// <param name="resourceIdentityType"> The type of identity used for the virtual machine. The type 'SystemAssigned, UserAssigned' includes both an implicitly created identity and a set of user assigned identities. The type 'None' will remove any identities from the virtual machine. </param>
@@ -100,10 +112,13 @@ namespace MgmtPropertyChooser.Models
         {
             userAssignedIdentities ??= new Dictionary<string, UserAssignedIdentity>();
 
-            return new IdentityWithRenamedProperty(testPrincipalId, tenantId, resourceIdentityType, userAssignedIdentities);
+            return new IdentityWithRenamedProperty(testPrincipalId, tenantId, resourceIdentityType, userAssignedIdentities, default);
         }
 
-        /// <summary> Initializes a new instance of IdentityWithDifferentPropertyType. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::MgmtPropertyChooser.Models.IdentityWithDifferentPropertyType
+        ///
+        /// </summary>
         /// <param name="principalId"> The principal id of virtual machine identity. This property will only be provided for a system assigned identity. </param>
         /// <param name="tenantId"> The tenant id associated with the virtual machine. This property will only be provided for a system assigned identity. </param>
         /// <param name="resourceIdentityType"> The type of identity used for the virtual machine. The type 'SystemAssigned, UserAssigned' includes both an implicitly created identity and a set of user assigned identities. The type 'None' will remove any identities from the virtual machine. </param>
@@ -113,10 +128,13 @@ namespace MgmtPropertyChooser.Models
         {
             userAssignedIdentities ??= new Dictionary<string, UserAssignedIdentity>();
 
-            return new IdentityWithDifferentPropertyType(principalId, tenantId, resourceIdentityType, userAssignedIdentities);
+            return new IdentityWithDifferentPropertyType(principalId, tenantId, resourceIdentityType, userAssignedIdentities, default);
         }
 
-        /// <summary> Initializes a new instance of VirtualMachinePatch. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::MgmtPropertyChooser.Models.VirtualMachinePatch
+        ///
+        /// </summary>
         /// <param name="tags"> Resource tags. </param>
         /// <param name="plan"> Specifies information about the marketplace image used to create the virtual machine. This element is only used for marketplace images. Before you can use a marketplace image from an API, you must enable the image for programmatic use.  In the Azure portal, find the marketplace image that you want to use and then click **Want to deploy programmatically, Get Started -&gt;**. Enter any required information and then click **Save**. </param>
         /// <param name="identity"> The identity of the virtual machine, if configured. </param>
@@ -131,7 +149,7 @@ namespace MgmtPropertyChooser.Models
             tags ??= new Dictionary<string, string>();
             zones ??= new List<string>();
 
-            return new VirtualMachinePatch(tags, plan, identity, zones?.ToList(), provisioningState, licenseType, vmId, extensionsTimeBudget);
+            return new VirtualMachinePatch(tags, plan, identity, zones?.ToList(), provisioningState, licenseType, vmId, extensionsTimeBudget, default);
         }
     }
 }

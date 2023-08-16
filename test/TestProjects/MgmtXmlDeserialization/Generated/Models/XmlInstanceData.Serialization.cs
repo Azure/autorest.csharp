@@ -6,20 +6,21 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
+using System.IO;
 using System.Text.Json;
 using System.Xml;
 using System.Xml.Linq;
+using Azure;
 using Azure.Core;
 using Azure.Core.Serialization;
 using Azure.ResourceManager.Models;
 
 namespace MgmtXmlDeserialization
 {
-    public partial class XmlInstanceData : IUtf8JsonSerializable, IJsonModelSerializable, IXmlSerializable, IXmlModelSerializable
+    public partial class XmlInstanceData : IUtf8JsonSerializable, IModelJsonSerializable<XmlInstanceData>, IXmlSerializable, IModelSerializable<XmlInstanceData>
     {
-        void IXmlModelSerializable.Serialize(XmlWriter writer, ModelSerializerOptions options) => ((IXmlSerializable)this).Write(writer, null, options);
-
-        void IXmlSerializable.Write(XmlWriter writer, string nameHint, ModelSerializerOptions options)
+        private void Serialize(XmlWriter writer, string nameHint, ModelSerializerOptions options)
         {
             writer.WriteStartElement("XmlInstance");
             writer.WriteStartElement("id");
@@ -40,30 +41,34 @@ namespace MgmtXmlDeserialization
             writer.WriteEndElement();
         }
 
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IJsonModelSerializable)this).Serialize(writer, ModelSerializerOptions.AzureServiceDefault);
+        void IXmlSerializable.Write(XmlWriter writer, string nameHint) => Serialize(writer, nameHint, ModelSerializerOptions.DefaultWireOptions);
 
-        void IJsonModelSerializable.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<XmlInstanceData>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+
+        void IModelJsonSerializable<XmlInstanceData>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
             writer.WriteStartObject();
+            if (_rawData is not null && options.Format == ModelSerializerFormat.Json)
+            {
+                foreach (var property in _rawData)
+                {
+                    writer.WritePropertyName(property.Key);
+#if NET6_0_OR_GREATER
+				writer.WriteRawValue(property.Value);
+#else
+                    JsonSerializer.Serialize(writer, JsonDocument.Parse(property.Value.ToString()).RootElement);
+#endif
+                }
+            }
             writer.WriteEndObject();
-        }
-
-        object IModelSerializable.Deserialize(BinaryData data, ModelSerializerOptions options)
-        {
-            if (data.ToMemory().Span.StartsWith("{"u8))
-            {
-                using var doc = JsonDocument.Parse(data);
-                return DeserializeXmlInstanceData(doc.RootElement, options);
-            }
-            else
-            {
-                return DeserializeXmlInstanceData(XElement.Load(data.ToStream()), options);
-            }
         }
 
         internal static XmlInstanceData DeserializeXmlInstanceData(JsonElement element, ModelSerializerOptions options = default)
         {
-            options ??= ModelSerializerOptions.AzureServiceDefault;
+            options ??= ModelSerializerOptions.DefaultWireOptions;
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
@@ -72,6 +77,7 @@ namespace MgmtXmlDeserialization
             string name = default;
             ResourceType type = default;
             Optional<SystemData> systemData = default;
+            Dictionary<string, BinaryData> rawData = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("id"u8))
@@ -98,14 +104,82 @@ namespace MgmtXmlDeserialization
                     systemData = JsonSerializer.Deserialize<SystemData>(property.Value.GetRawText());
                     continue;
                 }
+                if (options.Format == ModelSerializerFormat.Json)
+                {
+                    rawData.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
+                    continue;
+                }
             }
-            return new XmlInstanceData(id, name, type, systemData.Value);
+            return new XmlInstanceData(id, name, type, systemData.Value, rawData);
         }
 
-        object IJsonModelSerializable.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        XmlInstanceData IModelJsonSerializable<XmlInstanceData>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
         {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
             using var doc = JsonDocument.ParseValue(ref reader);
             return DeserializeXmlInstanceData(doc.RootElement, options);
+        }
+
+        BinaryData IModelSerializable<XmlInstanceData>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            if (options.Format == ModelSerializerFormat.Json)
+            {
+                return ModelSerializer.SerializeCore(this, options);
+            }
+            else
+            {
+                options ??= ModelSerializerOptions.DefaultWireOptions;
+                using MemoryStream stream = new MemoryStream();
+                using XmlWriter writer = XmlWriter.Create(stream);
+                Serialize(writer, null, options);
+                writer.Flush();
+                if (stream.Position > int.MaxValue)
+                {
+                    return BinaryData.FromStream(stream);
+                }
+                else
+                {
+                    return new BinaryData(stream.GetBuffer().AsMemory(0, (int)stream.Position));
+                }
+            }
+        }
+
+        XmlInstanceData IModelSerializable<XmlInstanceData>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            if (data.ToMemory().Span.StartsWith("{"u8))
+            {
+                using var doc = JsonDocument.Parse(data);
+                return DeserializeXmlInstanceData(doc.RootElement, options);
+            }
+            else
+            {
+                return DeserializeXmlInstanceData(XElement.Load(data.ToStream()), options);
+            }
+        }
+
+        public static implicit operator RequestContent(XmlInstanceData model)
+        {
+            if (model is null)
+            {
+                return null;
+            }
+
+            return RequestContent.Create((IModelSerializable<XmlInstanceData>)model, ModelSerializerOptions.DefaultWireOptions);
+        }
+
+        public static explicit operator XmlInstanceData(Response response)
+        {
+            if (response is null)
+            {
+                return null;
+            }
+
+            return DeserializeXmlInstanceData(XElement.Load(response.ContentStream), ModelSerializerOptions.DefaultWireOptions);
         }
     }
 }

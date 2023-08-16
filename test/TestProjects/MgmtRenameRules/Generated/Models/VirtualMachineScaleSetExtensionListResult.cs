@@ -19,7 +19,12 @@ namespace MgmtRenameRules.Models
     /// </summary>
     internal partial class VirtualMachineScaleSetExtensionListResult
     {
-        /// <summary> Initializes a new instance of VirtualMachineScaleSetExtensionListResult. </summary>
+        private Dictionary<string, BinaryData> _rawData;
+
+        /// <summary>
+        /// Initializes a new instance of global::MgmtRenameRules.Models.VirtualMachineScaleSetExtensionListResult
+        ///
+        /// </summary>
         /// <param name="value">
         /// The list of VM scale set extensions.
         /// Serialized Name: VirtualMachineScaleSetExtensionListResult.value
@@ -32,7 +37,10 @@ namespace MgmtRenameRules.Models
             Value = value.ToList();
         }
 
-        /// <summary> Initializes a new instance of VirtualMachineScaleSetExtensionListResult. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::MgmtRenameRules.Models.VirtualMachineScaleSetExtensionListResult
+        ///
+        /// </summary>
         /// <param name="value">
         /// The list of VM scale set extensions.
         /// Serialized Name: VirtualMachineScaleSetExtensionListResult.value
@@ -41,10 +49,12 @@ namespace MgmtRenameRules.Models
         /// The uri to fetch the next page of VM scale set extensions. Call ListNext() with this to fetch the next page of VM scale set extensions.
         /// Serialized Name: VirtualMachineScaleSetExtensionListResult.nextLink
         /// </param>
-        internal VirtualMachineScaleSetExtensionListResult(IReadOnlyList<VirtualMachineScaleSetExtensionData> value, string nextLink)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal VirtualMachineScaleSetExtensionListResult(IReadOnlyList<VirtualMachineScaleSetExtensionData> value, string nextLink, Dictionary<string, BinaryData> rawData)
         {
             Value = value;
             NextLink = nextLink;
+            _rawData = rawData;
         }
 
         /// <summary>

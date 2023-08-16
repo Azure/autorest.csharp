@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
 using Azure.Core;
 
 namespace MgmtRenameRules.Models
@@ -16,7 +17,12 @@ namespace MgmtRenameRules.Models
     /// </summary>
     internal partial class VirtualMachineScaleSetPublicIPAddressConfigurationDnsSettings
     {
-        /// <summary> Initializes a new instance of VirtualMachineScaleSetPublicIPAddressConfigurationDnsSettings. </summary>
+        private Dictionary<string, BinaryData> _rawData;
+
+        /// <summary>
+        /// Initializes a new instance of global::MgmtRenameRules.Models.VirtualMachineScaleSetPublicIPAddressConfigurationDnsSettings
+        ///
+        /// </summary>
         /// <param name="domainNameLabel">
         /// The Domain name label.The concatenation of the domain name label and vm index will be the domain name labels of the PublicIPAddress resources that will be created
         /// Serialized Name: VirtualMachineScaleSetPublicIPAddressConfigurationDnsSettings.domainNameLabel
@@ -27,6 +33,21 @@ namespace MgmtRenameRules.Models
             Argument.AssertNotNull(domainNameLabel, nameof(domainNameLabel));
 
             DomainNameLabel = domainNameLabel;
+        }
+
+        /// <summary>
+        /// Initializes a new instance of global::MgmtRenameRules.Models.VirtualMachineScaleSetPublicIPAddressConfigurationDnsSettings
+        ///
+        /// </summary>
+        /// <param name="domainNameLabel">
+        /// The Domain name label.The concatenation of the domain name label and vm index will be the domain name labels of the PublicIPAddress resources that will be created
+        /// Serialized Name: VirtualMachineScaleSetPublicIPAddressConfigurationDnsSettings.domainNameLabel
+        /// </param>
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal VirtualMachineScaleSetPublicIPAddressConfigurationDnsSettings(string domainNameLabel, Dictionary<string, BinaryData> rawData)
+        {
+            DomainNameLabel = domainNameLabel;
+            _rawData = rawData;
         }
 
         /// <summary>

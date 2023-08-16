@@ -15,6 +15,8 @@ namespace SpreadTypeSpec.Models
     /// <summary> The SpreadAliasWithCollectionsRequest. </summary>
     internal partial class SpreadAliasWithCollectionsRequest
     {
+        private Dictionary<string, BinaryData> _rawData;
+
         /// <summary> Initializes a new instance of SpreadAliasWithCollectionsRequest. </summary>
         /// <param name="requiredStringList"> required list. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="requiredStringList"/> is null. </exception>
@@ -29,10 +31,12 @@ namespace SpreadTypeSpec.Models
         /// <summary> Initializes a new instance of SpreadAliasWithCollectionsRequest. </summary>
         /// <param name="requiredStringList"> required list. </param>
         /// <param name="optionalStringList"> optional list. </param>
-        internal SpreadAliasWithCollectionsRequest(IList<string> requiredStringList, IList<string> optionalStringList)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal SpreadAliasWithCollectionsRequest(IList<string> requiredStringList, IList<string> optionalStringList, Dictionary<string, BinaryData> rawData)
         {
             RequiredStringList = requiredStringList;
             OptionalStringList = optionalStringList;
+            _rawData = rawData;
         }
 
         /// <summary> required list. </summary>

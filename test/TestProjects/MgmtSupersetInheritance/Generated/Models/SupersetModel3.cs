@@ -5,27 +5,40 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
+
 namespace MgmtSupersetInheritance.Models
 {
     /// <summary> id is integer, the model is Non-Resource. </summary>
     public partial class SupersetModel3
     {
-        /// <summary> Initializes a new instance of SupersetModel3. </summary>
+        private Dictionary<string, BinaryData> _rawData;
+
+        /// <summary>
+        /// Initializes a new instance of global::MgmtSupersetInheritance.Models.SupersetModel3
+        ///
+        /// </summary>
         public SupersetModel3()
         {
         }
 
-        /// <summary> Initializes a new instance of SupersetModel3. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::MgmtSupersetInheritance.Models.SupersetModel3
+        ///
+        /// </summary>
         /// <param name="id"></param>
         /// <param name="name"></param>
         /// <param name="supersetModel3Type"></param>
         /// <param name="new"></param>
-        internal SupersetModel3(int? id, string name, string supersetModel3Type, string @new)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal SupersetModel3(int? id, string name, string supersetModel3Type, string @new, Dictionary<string, BinaryData> rawData)
         {
             Id = id;
             Name = name;
             SupersetModel3Type = supersetModel3Type;
             New = @new;
+            _rawData = rawData;
         }
 
         /// <summary> Gets or sets the id. </summary>

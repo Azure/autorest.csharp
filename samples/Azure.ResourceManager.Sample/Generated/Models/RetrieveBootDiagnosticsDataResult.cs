@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
 
 namespace Azure.ResourceManager.Sample.Models
 {
@@ -15,12 +16,20 @@ namespace Azure.ResourceManager.Sample.Models
     /// </summary>
     public partial class RetrieveBootDiagnosticsDataResult
     {
-        /// <summary> Initializes a new instance of RetrieveBootDiagnosticsDataResult. </summary>
+        private Dictionary<string, BinaryData> _rawData;
+
+        /// <summary>
+        /// Initializes a new instance of global::Azure.ResourceManager.Sample.Models.RetrieveBootDiagnosticsDataResult
+        ///
+        /// </summary>
         internal RetrieveBootDiagnosticsDataResult()
         {
         }
 
-        /// <summary> Initializes a new instance of RetrieveBootDiagnosticsDataResult. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::Azure.ResourceManager.Sample.Models.RetrieveBootDiagnosticsDataResult
+        ///
+        /// </summary>
         /// <param name="consoleScreenshotBlobUri">
         /// The console screenshot blob URI
         /// Serialized Name: RetrieveBootDiagnosticsDataResult.consoleScreenshotBlobUri
@@ -29,10 +38,12 @@ namespace Azure.ResourceManager.Sample.Models
         /// The serial console log blob URI.
         /// Serialized Name: RetrieveBootDiagnosticsDataResult.serialConsoleLogBlobUri
         /// </param>
-        internal RetrieveBootDiagnosticsDataResult(Uri consoleScreenshotBlobUri, Uri serialConsoleLogBlobUri)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal RetrieveBootDiagnosticsDataResult(Uri consoleScreenshotBlobUri, Uri serialConsoleLogBlobUri, Dictionary<string, BinaryData> rawData)
         {
             ConsoleScreenshotBlobUri = consoleScreenshotBlobUri;
             SerialConsoleLogBlobUri = serialConsoleLogBlobUri;
+            _rawData = rawData;
         }
 
         /// <summary>

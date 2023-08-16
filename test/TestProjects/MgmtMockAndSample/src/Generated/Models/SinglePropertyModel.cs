@@ -5,21 +5,34 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
+
 namespace MgmtMockAndSample.Models
 {
     /// <summary> This is a single property of string. </summary>
     internal partial class SinglePropertyModel
     {
-        /// <summary> Initializes a new instance of SinglePropertyModel. </summary>
+        private Dictionary<string, BinaryData> _rawData;
+
+        /// <summary>
+        /// Initializes a new instance of global::MgmtMockAndSample.Models.SinglePropertyModel
+        ///
+        /// </summary>
         public SinglePropertyModel()
         {
         }
 
-        /// <summary> Initializes a new instance of SinglePropertyModel. </summary>
+        /// <summary>
+        /// Initializes a new instance of global::MgmtMockAndSample.Models.SinglePropertyModel
+        ///
+        /// </summary>
         /// <param name="something"> This is a string property. </param>
-        internal SinglePropertyModel(string something)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal SinglePropertyModel(string something, Dictionary<string, BinaryData> rawData)
         {
             Something = something;
+            _rawData = rawData;
         }
 
         /// <summary> This is a string property. </summary>
