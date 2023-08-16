@@ -694,6 +694,112 @@ namespace FirstTestTypeSpec
             }
         }
 
+        /// <summary> Model can have its projected name. </summary>
+        /// <param name="modelWithProjectedName"> this is a model with a projected name. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="modelWithProjectedName"/> is null. </exception>
+        /// <include file="Docs/FirstTestTypeSpecClient.xml" path="doc/members/member[@name='ProjectedNameModelAsync(ProjectedModel,CancellationToken)']/*" />
+        public virtual async Task<Response<ProjectedModel>> ProjectedNameModelAsync(ProjectedModel modelWithProjectedName, CancellationToken cancellationToken = default)
+        {
+            Argument.AssertNotNull(modelWithProjectedName, nameof(modelWithProjectedName));
+
+            RequestContext context = FromCancellationToken(cancellationToken);
+            Response response = await ProjectedNameModelAsync(modelWithProjectedName.ToRequestContent(), context).ConfigureAwait(false);
+            return Response.FromValue(ProjectedModel.FromResponse(response), response);
+        }
+
+        /// <summary> Model can have its projected name. </summary>
+        /// <param name="modelWithProjectedName"> this is a model with a projected name. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="modelWithProjectedName"/> is null. </exception>
+        /// <include file="Docs/FirstTestTypeSpecClient.xml" path="doc/members/member[@name='ProjectedNameModel(ProjectedModel,CancellationToken)']/*" />
+        public virtual Response<ProjectedModel> ProjectedNameModel(ProjectedModel modelWithProjectedName, CancellationToken cancellationToken = default)
+        {
+            Argument.AssertNotNull(modelWithProjectedName, nameof(modelWithProjectedName));
+
+            RequestContext context = FromCancellationToken(cancellationToken);
+            Response response = ProjectedNameModel(modelWithProjectedName.ToRequestContent(), context);
+            return Response.FromValue(ProjectedModel.FromResponse(response), response);
+        }
+
+        /// <summary>
+        /// [Protocol Method] Model can have its projected name
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
+        /// <item>
+        /// <description>
+        /// Please try the simpler <see cref="ProjectedNameModelAsync(ProjectedModel,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
+        /// <param name="content"> The content to send as the body of the request. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <include file="Docs/FirstTestTypeSpecClient.xml" path="doc/members/member[@name='ProjectedNameModelAsync(RequestContent,RequestContext)']/*" />
+        public virtual async Task<Response> ProjectedNameModelAsync(RequestContent content, RequestContext context = null)
+        {
+            Argument.AssertNotNull(content, nameof(content));
+
+            using var scope = ClientDiagnostics.CreateScope("FirstTestTypeSpecClient.ProjectedNameModel");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateProjectedNameModelRequest(content, context);
+                return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// [Protocol Method] Model can have its projected name
+        /// <list type="bullet">
+        /// <item>
+        /// <description>
+        /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
+        /// </description>
+        /// </item>
+        /// <item>
+        /// <description>
+        /// Please try the simpler <see cref="ProjectedNameModel(ProjectedModel,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// </description>
+        /// </item>
+        /// </list>
+        /// </summary>
+        /// <param name="content"> The content to send as the body of the request. </param>
+        /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
+        /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
+        /// <returns> The response returned from the service. </returns>
+        /// <include file="Docs/FirstTestTypeSpecClient.xml" path="doc/members/member[@name='ProjectedNameModel(RequestContent,RequestContext)']/*" />
+        public virtual Response ProjectedNameModel(RequestContent content, RequestContext context = null)
+        {
+            Argument.AssertNotNull(content, nameof(content));
+
+            using var scope = ClientDiagnostics.CreateScope("FirstTestTypeSpecClient.ProjectedNameModel");
+            scope.Start();
+            try
+            {
+                using HttpMessage message = CreateProjectedNameModelRequest(content, context);
+                return _pipeline.ProcessMessage(message, context);
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
         /// <summary>
         /// [Protocol Method] Return hi
         /// <list type="bullet">
@@ -1635,6 +1741,22 @@ namespace FirstTestTypeSpec
             uri.Reset(_endpoint);
             uri.AppendPath("/stringFormat/", false);
             uri.AppendPath(subscriptionId, true);
+            uri.AppendQuery("api-version", _apiVersion, true);
+            request.Uri = uri;
+            request.Headers.Add("Accept", "application/json");
+            request.Headers.Add("Content-Type", "application/json");
+            request.Content = content;
+            return message;
+        }
+
+        internal HttpMessage CreateProjectedNameModelRequest(RequestContent content, RequestContext context)
+        {
+            var message = _pipeline.CreateMessage(context, ResponseClassifier200);
+            var request = message.Request;
+            request.Method = RequestMethod.Post;
+            var uri = new RawRequestUriBuilder();
+            uri.Reset(_endpoint);
+            uri.AppendPath("/projectedName", false);
             uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
