@@ -12,7 +12,7 @@ namespace constants.Models
     {
         /// <summary> Initializes a new instance of NoModelAsStringRequiredTwoValueDefault. </summary>
         /// <param name="parameter"></param>
-        internal NoModelAsStringRequiredTwoValueDefault(NoModelAsStringRequiredTwoValueDefaultEnum parameter = NoModelAsStringRequiredTwoValueDefaultEnum.Value1)
+        internal NoModelAsStringRequiredTwoValueDefault(NoModelAsStringRequiredTwoValueDefaultEnum parameter)
         {
             Parameter = parameter;
         }

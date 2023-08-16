@@ -23,6 +23,6 @@ namespace ModelsTypeSpec.Models
         }
 
         /// <summary> Optional properties on base. </summary>
-        public string OptionalPropertyOnBase { get; set; }
+        public string OptionalPropertyOnBase { get; }
     }
 }

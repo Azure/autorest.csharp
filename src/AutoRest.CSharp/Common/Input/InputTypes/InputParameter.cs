@@ -31,7 +31,7 @@ internal record InputParameter(
         Name: string.Empty,
         NameInRequest: string.Empty,
         Description: null,
-        Type: new InputPrimitiveType(InputTypeKind.Object),
+        Type: new InputPrimitiveType(InputTypeKind.Object, false),
         Location: RequestLocation.None,
         DefaultValue: null,
         VirtualParameter: null,
