@@ -269,7 +269,7 @@ namespace AutoRest.CSharp.Common.Input
             var properties = new List<InputModelProperty>();
             var baseModelSchema = GetBaseModelSchema(schema);
 
-            var dictionarySchema = schema.Parents?.Immediate?.OfType<DictionarySchema>().FirstOrDefault();
+            var dictionarySchema = Configuration.AzureArm ? null : schema.Parents?.Immediate?.OfType<DictionarySchema>().FirstOrDefault();
 
             model = new InputModelType(
                 Name: schema.Language.Default.Name,

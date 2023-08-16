@@ -20,6 +20,7 @@ using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Output.Models.Types;
 using AutoRest.CSharp.Utilities;
 using Azure.Core;
+using Azure.ResourceManager.Models;
 using static AutoRest.CSharp.Common.Output.Models.Snippets;
 
 namespace AutoRest.CSharp.Common.Output.Builders
@@ -317,6 +318,12 @@ namespace AutoRest.CSharp.Common.Output.Builders
                 if (frameworkType == typeof(ResourceIdentifier))
                 {
                     return New.ResourceIdentifier(new CastExpression(value, typeof(string)));
+                }
+
+                if (frameworkType == typeof(SystemData))
+                {
+                    // XML Deserialization of SystemData isn't supported yet.
+                    return Null;
                 }
 
                 if (frameworkType == typeof(ResourceType))
