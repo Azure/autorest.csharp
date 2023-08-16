@@ -257,7 +257,7 @@
   },
   {
    "$id": "38",
-   "Name": "CustomPageProject",
+   "Name": "PagedProject",
    "Namespace": "Azure.Core.Foundations",
    "Description": "Paged collection of Project items",
    "IsNullable": false,
@@ -344,7 +344,7 @@
   },
   {
    "$id": "49",
-   "Name": "CustomPageDeployment",
+   "Name": "PagedDeployment",
    "Namespace": "Azure.Core.Foundations",
    "Description": "Paged collection of Deployment items",
    "IsNullable": false,
