@@ -110,7 +110,7 @@ namespace AutoRest.TestServer.Tests
         public void ObjectTypePropertiesSerializedAsValues()
         {
             DateTime date = DateTime.UtcNow;
-            var inputModel = new RenamedThirdModel(new ETag("Id"), date);
+            var inputModel = new RenamedThirdModel(new ETag("Id"), date, default);
 
             JsonAsserts.AssertSerialization(
                 @"{""ETag"":""Id"",""CreatedAt"":" + JsonSerializer.Serialize(date) + "}",

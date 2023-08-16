@@ -42,7 +42,7 @@ namespace CadlRanchProjects.Tests
         [Test]
         public Task SpecialWords_Model_put() => Test(async (host) =>
         {
-            var response = await new SpecialWordsClient(host, null).GetModelClient().PutAsync(new DerivedModel("derived", "my.name", "value"));
+            var response = await new SpecialWordsClient(host, null).GetModelClient().PutAsync(new DerivedModel("derived", "my.name", "value", default));
             Assert.AreEqual(204, response.Status);
         });
     }

@@ -658,7 +658,7 @@ namespace AutoRest.CSharp.Generation.Writers
             if (objAdditionalProperties != null)
             {
                 writer.Line($"{objAdditionalProperties.Type} {dictionaryVariable:D} = new {objAdditionalProperties.Type}();");
-            } 
+            }
             else if (serialization.ObjectType is not null && serialization.ObjectType.HasRawDataInHeirarchy)
             {
                 writer.Line($"{Parameter.RawData.Type} rawData = new {Parameter.RawData.Type}();");

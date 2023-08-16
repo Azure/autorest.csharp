@@ -505,7 +505,7 @@ namespace AutoRest.TestServer.Tests
         {
             var properties = new StorageServiceProperties()
             {
-                Logging = new Logging("1.0", true, false, true, new RetentionPolicy(true, 7)),
+                Logging = new Logging("1.0", true, false, true, new RetentionPolicy(true, 7, default)),
                 HourMetrics = new Metrics(true)
                 {
                     Version = "1.0",
