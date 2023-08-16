@@ -583,7 +583,7 @@
   },
   {
    "$id": "81",
-   "Name": "NotFriend",
+   "Name": "Friend",
    "Namespace": "FirstTestTypeSpec",
    "Description": "this is not a friendly model but with a friendly name",
    "IsNullable": false,
