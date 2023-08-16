@@ -3,6 +3,7 @@
 
 
 using AutoRest.CSharp.Generation.Types;
+using AutoRest.CSharp.Output.Models.Types;
 
 namespace AutoRest.CSharp.Output.Models.Serialization.Xml
 {
@@ -29,5 +30,7 @@ namespace AutoRest.CSharp.Output.Models.Serialization.Xml
         public XmlObjectArraySerialization[] EmbeddedArrays { get; }
         public XmlObjectContentSerialization? ContentSerialization { get; }
         public CSharpType Type { get; }
+
+        public ObjectType? ObjectType => Type.IsFrameworkType ? null : Type.Implementation as ObjectType;
     }
 }

@@ -2,7 +2,6 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 using AutoRest.CSharp.Generation.Types;
-using AutoRest.CSharp.Output.Models.Types;
 
 namespace AutoRest.CSharp.Output.Models.Serialization.Json
 {
@@ -25,7 +24,7 @@ namespace AutoRest.CSharp.Output.Models.Serialization.Json
             PropertySerializations = propertySerializations;
         }
 
-        public string ParameterName { get;  }
+        public string ParameterName { get; }
         public bool OptionalViaNullability { get; }
         public JsonSerialization? ValueSerialization { get; }
         /// <summary>

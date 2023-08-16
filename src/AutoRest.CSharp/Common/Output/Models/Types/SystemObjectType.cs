@@ -123,7 +123,7 @@ namespace AutoRest.CSharp.Output.Models.Types
 
             var modifiers = ctor.IsFamily ? Protected : Public;
 
-            return new ObjectTypeConstructor(DefaultName, modifiers, parameters, initializers.ToArray(), baseConstructor);
+            return new ObjectTypeConstructor(Type, modifiers, parameters, initializers.ToArray(), baseConstructor);
         }
 
         protected override ObjectTypeConstructor BuildInitializationConstructor()
@@ -218,6 +218,11 @@ namespace AutoRest.CSharp.Output.Models.Types
         protected override string CreateDescription()
         {
             throw new NotImplementedException("Currently we don't support getting description in SystemObjectType");
+        }
+
+        protected override bool HasSubClasses()
+        {
+            return false;
         }
     }
 }

@@ -10,6 +10,7 @@ using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Output.Models.Serialization;
 using AutoRest.CSharp.Output.Models.Types;
+using Azure.Core.Serialization;
 using Microsoft.CodeAnalysis;
 
 namespace AutoRest.CSharp.Generation.Writers
@@ -71,6 +72,12 @@ namespace AutoRest.CSharp.Generation.Writers
                 writer.Line();
                 using (writer.Scope())
                 {
+                    if (schema.RawDataProperty is not null)
+                    {
+                        writer.Line($"{schema.RawDataProperty.Declaration.Accessibility} {schema.RawDataProperty.ValueType} {schema.RawDataProperty.Declaration.Name};");
+                        writer.Line();
+                    }
+
                     WriteConstructor(writer, schema);
 
                     WriteProperties(writer, schema);
@@ -329,6 +336,10 @@ Examples:
             {
                 writer.Line($"[{typeof(ObsoleteAttribute)}(\"{schema.Deprecated}\")]");
             }
+            if (schema.Declaration.IsAbstract && schema.Discriminator?.DefaultObjectType is not null)
+            {
+                writer.Line($"[{typeof(AbstractHierarchyDeserializerAttribute)}(typeof({schema.Discriminator?.DefaultObjectType.Type}))]");
+            }
         }
 
         private void AddClassAttributes(CodeWriter writer, EnumType enumType)
@@ -347,13 +358,14 @@ Examples:
         {
             foreach (var constructor in schema.Constructors)
             {
-                writer.WriteMethodDocumentation(constructor.Signature);
-                AddCtorAttribute(writer, schema, constructor);
-                using (writer.WriteMethodDeclaration(constructor.Signature))
+                var ctorToUse = constructor.InternalCtor ?? constructor;
+                writer.WriteMethodDocumentation(ctorToUse.Signature);
+                AddCtorAttribute(writer, schema, ctorToUse);
+                using (writer.WriteMethodDeclaration(ctorToUse.Signature))
                 {
-                    writer.WriteParametersValidation(constructor.Signature.Parameters);
+                    writer.WriteParametersValidation(ctorToUse.Signature.Parameters);
 
-                    foreach (var initializer in constructor.Initializers)
+                    foreach (var initializer in ctorToUse.Initializers)
                     {
                         writer.Append($"{initializer.Property.Declaration.Name} = ")
                             .WriteReferenceOrConstant(initializer.Value)

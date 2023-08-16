@@ -18,6 +18,7 @@ namespace AutoRest.CSharp.Output.Models.Serialization.Json
             AdditionalProperties = additionalProperties;
             Discriminator = discriminator;
             IncludeConverter = includeConverter;
+            ObjectType = type.IsFrameworkType ? null : type.Implementation as ObjectType;
         }
 
         public CSharpType Type { get; }
@@ -26,5 +27,6 @@ namespace AutoRest.CSharp.Output.Models.Serialization.Json
         public JsonAdditionalPropertiesSerialization? AdditionalProperties { get; }
         public ObjectTypeDiscriminator? Discriminator { get; }
         public bool IncludeConverter { get; }
+        public ObjectType? ObjectType { get; }
     }
 }

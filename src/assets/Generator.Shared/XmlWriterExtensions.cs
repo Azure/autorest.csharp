@@ -11,12 +11,12 @@ namespace Azure.Core
 {
     internal static class XmlWriterExtensions
     {
-        public static void WriteObjectValue(this XmlWriter writer, object value, string? nameHint, ModelSerializerOptions? options = default)
+        public static void WriteObjectValue(this XmlWriter writer, object value, string? nameHint)
         {
             switch (value)
             {
                 case IXmlSerializable serializable:
-                    serializable.Write(writer, nameHint, options ?? ModelSerializerOptions.AzureServiceDefault);
+                    serializable.Write(writer, nameHint);
                     return;
                 default:
                     throw new NotImplementedException();

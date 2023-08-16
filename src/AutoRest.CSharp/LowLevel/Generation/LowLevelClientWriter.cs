@@ -317,7 +317,7 @@ namespace AutoRest.CSharp.Generation.Writers
                 }
                 else
                 {
-                    _writer.Line($"return {typeof(Response)}.{nameof(Response.FromValue)}({responseType}.FromResponse({responseVariable:I}), {responseVariable:I});");
+                    _writer.Line($"return {typeof(Response)}.{nameof(Response.FromValue)}(({responseType}){responseVariable:I}, {responseVariable:I});");
                 }
             }
             _writer.Line();
@@ -353,7 +353,7 @@ namespace AutoRest.CSharp.Generation.Writers
                         .LineRaw(";");
                     // return ProtocolOperationHelpers.Convert(response, r => responseType.FromResponse(r), ClientDiagnostics, scopeName);
                     var diagnostic = convenienceMethod.Diagnostic ?? clientMethod.ProtocolMethodDiagnostic;
-                    _writer.Line($"return {typeof(ProtocolOperationHelpers)}.{nameof(ProtocolOperationHelpers.Convert)}({responseVariable:I}, {responseType}.FromResponse, {fields.ClientDiagnosticsProperty.Name}, {diagnostic.ScopeName:L});");
+                    _writer.Line($"return {typeof(ProtocolOperationHelpers)}.{nameof(ProtocolOperationHelpers.Convert)}({responseVariable:I}, response => ({responseType})response, {fields.ClientDiagnosticsProperty.Name}, {diagnostic.ScopeName:L});");
                 }
             }
             _writer.Line();

@@ -43,12 +43,16 @@ namespace AutoRest.CSharp.Output.Models
                 else if (convenienceParameter != null)
                 {
                     if (converter.ConvenienceSpread == null)
+                    {
                         parameters.Add(convenienceParameter.GetConversionFormattable(protocolParameter.Type));
+                    }
                     else
                     {
                         // we put a declaration here to avoid possible local variable naming collisions
                         spreadVariable = new CodeWriterDeclaration(convenienceParameter.Name);
-                        parameters.Add($"{spreadVariable:I}{FormattableStringHelpers.GetConversionMethod(convenienceParameter.Type, protocolParameter.Type)}");
+                        var conversion = FormattableStringHelpers.GetConversionMethod(convenienceParameter.Type, protocolParameter.Type);
+                        FormattableString stringToAdd = conversion is null ? (FormattableString)$"{spreadVariable:I}" : $"{spreadVariable:I}{conversion}";
+                        parameters.Add(stringToAdd);
                     }
                 }
                 else

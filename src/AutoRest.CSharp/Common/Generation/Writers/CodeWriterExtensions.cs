@@ -498,7 +498,8 @@ namespace AutoRest.CSharp.Generation.Writers
             Action<FormattableString> valueCallback,
             TypeProvider objectType,
             ObjectTypeConstructor constructor,
-            IEnumerable<PropertyInitializer> initializers)
+            IEnumerable<PropertyInitializer> initializers,
+            bool addRawData = false)
         {
             var initializersSet = initializers.ToHashSet();
 
@@ -527,6 +528,12 @@ namespace AutoRest.CSharp.Generation.Writers
                 .Select<PropertyInitializer, FormattableString>(pi => $"{pi.Value}{GetConversion(writer, pi.ValueType!, pi.Type)}")
                 .ToArray()
                 .Join(", ");
+
+            //add rawdata string
+            if (addRawData)
+            {
+                constructorParameters = $"{constructorParameters}, default";
+            }
 
             var propertyInitializers = restOfInitializers
                 .Select<PropertyInitializer, FormattableString>(pi => $"{pi.Name} = {pi.Value}{GetConversion(writer, pi.ValueType!, pi.Type)}")

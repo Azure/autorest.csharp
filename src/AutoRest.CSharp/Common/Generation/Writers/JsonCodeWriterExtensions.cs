@@ -10,16 +10,17 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 using AutoRest.CSharp.Common.Output.Models.Types;
 using AutoRest.CSharp.Generation.Types;
-using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Mgmt.Decorator;
 using AutoRest.CSharp.Mgmt.Output;
 using AutoRest.CSharp.Output.Models.Serialization;
 using AutoRest.CSharp.Output.Models.Serialization.Json;
+using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Output.Models.Types;
 using AutoRest.CSharp.Utilities;
 using Azure;
 using Azure.Core;
 using Azure.Core.Expressions.DataFactory;
+using Azure.Core.Serialization;
 using Azure.ResourceManager.Models;
 using Configuration = AutoRest.CSharp.Input.Configuration;
 using JsonElementExtensions = Azure.Core.JsonElementExtensions;
@@ -28,12 +29,13 @@ namespace AutoRest.CSharp.Generation.Writers
 {
     internal static class JsonCodeWriterExtensions
     {
+        private static readonly FormattableString IsFormatJson = $"options.{nameof(ModelSerializerOptions.Format)} == {typeof(ModelSerializerFormat)}.{nameof(ModelSerializerFormat.Json)}";
+
         public static void ToSerializeCall(this CodeWriter writer, JsonObjectSerialization serialization)
         {
             FormattableString writerName = $"writer";
 
             writer.Line($"{writerName}.WriteStartObject();");
-
             writer.ToSerializeCall(writerName, serialization.Properties);
 
             if (serialization.AdditionalProperties?.ValueSerialization != null)
@@ -44,6 +46,17 @@ namespace AutoRest.CSharp.Generation.Writers
                 {
                     writer.Line($"{writerName}.WritePropertyName({itemVariable}.Key);");
                     writer.ToSerializeCall(serialization.AdditionalProperties.ValueSerialization, $"{itemVariable:I}.Value", writerName);
+                }
+            }
+            else if (serialization.ObjectType is not null && serialization.ObjectType.HasRawDataInHeirarchy)
+            {
+                using (writer.Scope($"if (_rawData is not null && {IsFormatJson})"))
+                {
+                    using (writer.Scope($"foreach (var property in _rawData)"))
+                    {
+                        writer.Line($"writer.{nameof(Utf8JsonWriter.WritePropertyName)}(property.Key);");
+                        WriteRawJson(writer, $"property.Value", writerName);
+                    }
                 }
             }
 
@@ -178,11 +191,7 @@ namespace AutoRest.CSharp.Generation.Writers
                                     addToArrayForBinaryData = true;
                                     break;
                                 default:
-                                    writer.Line($"#if NET6_0_OR_GREATER");
-                                    writer.Line($"\t\t\t\t{writerName}.WriteRawValue({name:I});");
-                                    writer.Line($"#else");
-                                    writer.Line($"{typeof(JsonSerializer)}.{nameof(JsonSerializer.Serialize)}({writerName}, {typeof(JsonDocument)}.Parse({name:I}.ToString()).RootElement);");
-                                    writer.Line($"#endif");
+                                    WriteRawJson(writer, name, writerName);
                                     return;
                             }
                         }
@@ -268,6 +277,15 @@ namespace AutoRest.CSharp.Generation.Writers
                 default:
                     throw new NotSupportedException();
             }
+        }
+
+        private static void WriteRawJson(CodeWriter writer, FormattableString name, FormattableString? writerName)
+        {
+            writer.Line($"#if NET6_0_OR_GREATER");
+            writer.Line($"\t\t\t\t{writerName}.WriteRawValue({name:I});");
+            writer.Line($"#else");
+            writer.Line($"{typeof(JsonSerializer)}.{nameof(JsonSerializer.Serialize)}({writerName}, {typeof(JsonDocument)}.Parse({name:I}.ToString()).RootElement);");
+            writer.Line($"#endif");
         }
 
         private static void ToArraySerializeCall(CodeWriter writer, FormattableString name, FormattableString? writerName, JsonArraySerialization array)
@@ -640,6 +658,10 @@ namespace AutoRest.CSharp.Generation.Writers
             if (objAdditionalProperties != null)
             {
                 writer.Line($"{objAdditionalProperties.Type} {dictionaryVariable:D} = new {objAdditionalProperties.Type}();");
+            } 
+            else if (serialization.ObjectType is not null && serialization.ObjectType.HasRawDataInHeirarchy)
+            {
+                writer.Line($"{Parameter.RawData.Type} rawData = new {Parameter.RawData.Type}();");
             }
 
             var itemVariable = new CodeWriterDeclaration("property");
@@ -651,6 +673,15 @@ namespace AutoRest.CSharp.Generation.Writers
                 {
                     var variableOrExpression = writer.DeserializeValue(objAdditionalProperties.ValueSerialization, $"{itemVariable}.Value");
                     writer.Line($"{dictionaryVariable}.Add({itemVariable}.Name, {variableOrExpression});");
+                }
+                else if (serialization.ObjectType is not null && serialization.ObjectType.HasRawDataInHeirarchy)
+                {
+                    // add raw data TODO consolidate with additionalProperties
+                    using (writer.Scope($"if ({IsFormatJson})"))
+                    {
+                        writer.Line($"rawData.Add({itemVariable}.Name, {typeof(BinaryData)}.{nameof(BinaryData.FromString)}({itemVariable}.Value.{nameof(JsonElement.GetRawText)}()));");
+                        writer.Line($"continue;");
+                    }
                 }
             }
 
@@ -664,7 +695,16 @@ namespace AutoRest.CSharp.Generation.Writers
                 .Select(p => parameterValues[p.Name])
                 .ToArray();
 
-            writer.Append($"return new {serialization.Type}({parameters.Join(", ")});");
+            var typeToReturn = serialization.Discriminator is not null && serialization.Discriminator.HasDescendants ? serialization.Discriminator.DefaultObjectType.Type : serialization.Type;
+            writer.Append($"return new {typeToReturn}({parameters.Join(", ")}");
+            if (objAdditionalProperties is null && serialization.ObjectType is not null && serialization.ObjectType.HasRawDataInHeirarchy)
+            {
+                if (parameters.Length > 0)
+                    writer.Append($", ");
+
+                writer.Append($"rawData");
+            }
+            writer.Append($");");
         }
 
         private static FormattableString GetDeserializeValueFormattable(JsonValueSerialization serialization, FormattableString element)

@@ -109,6 +109,8 @@ namespace AutoRest.CSharp.Output.Models.Types
             if (isOverriddenValueType)
                 result = $"{result}.Value";
 
+            FormattableString rawDataStr = $", new {Parameter.RawData.Type}()";
+
             CSharpType from = parameter.Type;
             while (propertyStack.Count > 0)
             {
@@ -119,7 +121,7 @@ namespace AutoRest.CSharp.Output.Models.Types
                     case { IsFrameworkType: false, Implementation: SerializableObjectType serializableObjectType }:
                         // get the type of the first parameter of its ctor
                         var to = serializableObjectType.SerializationConstructor.Signature.Parameters.First().Type;
-                        result = $"new {parentPropertyType}({result}{CodeWriterExtensions.GetConversion(writer, from, to)})";
+                        result = $"new {parentPropertyType}({result}{CodeWriterExtensions.GetConversion(writer, from, to)}{rawDataStr})";
                         break;
                     case { IsFrameworkType: false, Implementation: SystemObjectType systemObjectType }:
                         // for the case of SystemObjectType, the serialization constructor is internal and the definition of this class might be outside of this assembly, we need to use its corresponding model factory to construct it

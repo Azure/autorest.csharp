@@ -144,7 +144,8 @@ namespace AutoRest.CSharp.Output.Models.Types
                     type,
                     null,
                     ValidationType.None,
-                    null
+                    null,
+                    IsAdditionalProperties: property == AdditionalPropertiesProperty
                 );
 
                 ownsDiscriminatorProperty |= property == Discriminator?.Property;
@@ -154,7 +155,7 @@ namespace AutoRest.CSharp.Output.Models.Types
                 serializationInitializers.Add(new ObjectPropertyInitializer(property, deserializationParameter, GetPropertyDefaultValue(property)));
             }
 
-            if (InitializationConstructor.Signature.Parameters
+            if (!HasRawDataInHeirarchy && InitializationConstructor.Signature.Parameters
                 .Select(p => p.Type)
                 .SequenceEqual(serializationConstructorParameters.Select(p => p.Type)))
             {
@@ -179,11 +180,12 @@ namespace AutoRest.CSharp.Output.Models.Types
             }
 
             return new ObjectTypeConstructor(
-                Type.Name,
+                Type,
                 IsInheritableCommonType ? Protected : Internal,
                 serializationConstructorParameters.ToArray(),
                 serializationInitializers.ToArray(),
-                baseSerializationCtor
+                baseSerializationCtor,
+                createInternal: true
             );
         }
 
@@ -251,7 +253,8 @@ namespace AutoRest.CSharp.Output.Models.Types
                         inputType,
                         defaultParameterValue,
                         validate,
-                        null
+                        null,
+                        IsAdditionalProperties: property == AdditionalPropertiesProperty
                     );
 
                     defaultCtorParameters.Add(defaultCtorParameter);
@@ -285,7 +288,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             }
 
             return new ObjectTypeConstructor(
-                Type.Name,
+                Type,
                 IsAbstract ? Protected : _usage.HasFlag(SchemaTypeUsage.Input) ? Public : Internal,
                 defaultCtorParameters.ToArray(),
                 defaultCtorInitializers.ToArray(),
@@ -306,7 +309,7 @@ namespace AutoRest.CSharp.Output.Models.Types
                 yield return InitializationConstructor;
             }
 
-            // Skip serialization ctor if they are the same
+            // Skip serialization ctor if they are the same and we don't have RawData
             if (InitializationConstructor != SerializationConstructor)
             {
                 yield return SerializationConstructor;
@@ -662,6 +665,11 @@ namespace AutoRest.CSharp.Output.Models.Types
                 return null;
 
             return _context.BaseLibrary.FindTypeProviderForSchema(defaultDerivedSchema) as ObjectType;
+        }
+
+        protected override bool HasSubClasses()
+        {
+            return ObjectSchema.Children is not null && ObjectSchema.Children.All.Count > 0;
         }
     }
 }

@@ -248,7 +248,7 @@ namespace AutoRest.CSharp.Generation.Writers
                         var content = new CodeWriterDeclaration("content");
 
                         writer.Line($"var {content:D} = new {typeof(XmlWriterContent)}();");
-                        writer.ToSerializeCall(xmlSerialization, value, writerName: $"{content}.{nameof(XmlWriterContent.XmlWriter)}", useOptions: false);
+                        writer.ToSerializeCall(xmlSerialization, value, writerName: $"{content}.{nameof(XmlWriterContent.XmlWriter)}");
                         writer.Line($"{request}.Content = {content};");
                         break;
                     }

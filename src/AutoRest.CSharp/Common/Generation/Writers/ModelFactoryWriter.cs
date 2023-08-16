@@ -117,7 +117,7 @@ namespace AutoRest.CSharp.Generation.Writers
             using (_writer.WriteMethodDeclaration(method))
             {
                 _writer.WriteParameterNullChecks(method.Parameters);
-                _writer.WriteInitialization(v => _writer.Line($"return {v};"), model, ctor, initializers.Values);
+                _writer.WriteInitialization(v => _writer.Line($"return {v};"), model, ctor, initializers.Values, model.HasRawDataInHeirarchy);
             }
         }
 

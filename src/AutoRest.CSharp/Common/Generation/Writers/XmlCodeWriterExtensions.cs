@@ -16,7 +16,7 @@ namespace AutoRest.CSharp.Generation.Writers
 {
     internal static class XmlCodeWriterExtensions
     {
-        public static void ToSerializeCall(this CodeWriter writer, XmlObjectSerialization objectSerialization, CodeWriterDeclaration nameHint, bool useOptions = true)
+        public static void ToSerializeCall(this CodeWriter writer, XmlObjectSerialization objectSerialization, CodeWriterDeclaration nameHint)
         {
             FormattableString writerName = $"writer";
             writer.Line($"{writerName}.WriteStartElement({objectSerialization.Name:L});");
@@ -37,7 +37,7 @@ namespace AutoRest.CSharp.Generation.Writers
                 using (writer.WriteDefinedCheck(property))
                 using (writer.WritePropertyNullCheckIf(property))
                 {
-                    writer.ToSerializeCall(property.ValueSerialization, $"{property.PropertyName}", useOptions);
+                    writer.ToSerializeCall(property.ValueSerialization, $"{property.PropertyName}");
                 }
             }
 
@@ -46,7 +46,7 @@ namespace AutoRest.CSharp.Generation.Writers
                 using (writer.WriteDefinedCheck(property))
                 using (writer.WritePropertyNullCheckIf(property))
                 {
-                    writer.ToSerializeCall(property.ArraySerialization, $"{property.PropertyName}", useOptions);
+                    writer.ToSerializeCall(property.ArraySerialization, $"{property.PropertyName}");
                 }
             }
 
@@ -58,7 +58,7 @@ namespace AutoRest.CSharp.Generation.Writers
             writer.Line($"{writerName}.WriteEndElement();");
         }
 
-        public static void ToSerializeCall(this CodeWriter writer, XmlElementSerialization serialization, FormattableString name, bool useOptions, FormattableString? writerName = null, string? nameHint = null)
+        public static void ToSerializeCall(this CodeWriter writer, XmlElementSerialization serialization, FormattableString name, FormattableString? writerName = null, string? nameHint = null)
         {
             writerName ??= $"writer";
             switch (serialization)
@@ -74,7 +74,7 @@ namespace AutoRest.CSharp.Generation.Writers
 
                     using (writer.Scope($"foreach (var {itemVariable:D} in {name})"))
                     {
-                        writer.ToSerializeCall(array.ValueSerialization, $"{itemVariable}", useOptions, writerName);
+                        writer.ToSerializeCall(array.ValueSerialization, $"{itemVariable}", writerName);
                     }
 
                     if (array.Wrapped)
@@ -87,7 +87,7 @@ namespace AutoRest.CSharp.Generation.Writers
                     var pairVariable = new CodeWriterDeclaration("pair");
                     using (writer.Scope($"foreach (var {pairVariable:D} in {name})"))
                     {
-                        writer.ToSerializeCall(dictionarySerialization.ValueSerialization, $"{pairVariable}.Value", useOptions, writerName);
+                        writer.ToSerializeCall(dictionarySerialization.ValueSerialization, $"{pairVariable}.Value", writerName);
                     }
 
                     break;
@@ -100,8 +100,7 @@ namespace AutoRest.CSharp.Generation.Writers
                     if ((!type.IsFrameworkType && type.Implementation is ObjectType) ||
                         (type.IsFrameworkType && type.FrameworkType == typeof(object)))
                     {
-                        var optionStr = useOptions ? ", options" : string.Empty;
-                        writer.Line($"{writerName}.WriteObjectValue({name}, {elementName:L}{optionStr});");
+                        writer.Line($"{writerName}.WriteObjectValue({name}, {elementName:L});");
                         return;
                     }
 
