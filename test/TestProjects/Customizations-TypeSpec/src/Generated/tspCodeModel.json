@@ -146,8 +146,7 @@
         "IsRequired": true,
         "IsReadOnly": false
        }
-      ],
-      "DerivedModels": []
+      ]
      },
      "IsRequired": false,
      "IsReadOnly": false
@@ -193,8 +192,7 @@
         "IsRequired": false,
         "IsReadOnly": false
        }
-      ],
-      "DerivedModels": []
+      ]
      },
      "IsRequired": false,
      "IsReadOnly": false
@@ -226,8 +224,7 @@
         "IsRequired": true,
         "IsReadOnly": false
        }
-      ],
-      "DerivedModels": []
+      ]
      },
      "IsRequired": false,
      "IsReadOnly": false
@@ -455,8 +452,7 @@
         "IsRequired": true,
         "IsReadOnly": false
        }
-      ],
-      "DerivedModels": []
+      ]
      },
      "IsRequired": false,
      "IsReadOnly": false
@@ -521,8 +517,7 @@
         "IsRequired": true,
         "IsReadOnly": false
        }
-      ],
-      "DerivedModels": []
+      ]
      },
      "IsRequired": false,
      "IsReadOnly": false
@@ -538,8 +533,7 @@
      "IsRequired": false,
      "IsReadOnly": false
     }
-   ],
-   "DerivedModels": []
+   ]
   },
   {
    "$ref": "19"

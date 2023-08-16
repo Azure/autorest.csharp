@@ -95,8 +95,26 @@ namespace ModelsTypeSpec.Samples
                 requiredInt = 1234,
                 requiredNullableInt = 1234,
                 requiredNullableString = "<requiredNullableString>",
-                requiredModel = new { },
-                requiredModel2 = new { },
+                requiredModel = new
+                {
+                    requiredList = new[] {
+            new {
+                requiredModelRecord = new {
+                    key = new {},
+                },
+            }
+        },
+                },
+                requiredModel2 = new
+                {
+                    requiredList = new[] {
+            new {
+                requiredModelRecord = new {
+                    key = new {},
+                },
+            }
+        },
+                },
                 requiredIntList = new[] {
         1234
     },
@@ -178,8 +196,26 @@ namespace ModelsTypeSpec.Samples
                 requiredNullableString = "<requiredNullableString>",
                 nonRequiredNullableInt = 1234,
                 nonRequiredNullableString = "<nonRequiredNullableString>",
-                requiredModel = new { },
-                requiredModel2 = new { },
+                requiredModel = new
+                {
+                    requiredList = new[] {
+            new {
+                requiredModelRecord = new {
+                    key = new {},
+                },
+            }
+        },
+                },
+                requiredModel2 = new
+                {
+                    requiredList = new[] {
+            new {
+                requiredModelRecord = new {
+                    key = new {},
+                },
+            }
+        },
+                },
                 requiredIntList = new[] {
         1234
     },
@@ -297,8 +333,26 @@ namespace ModelsTypeSpec.Samples
                 requiredInt = 1234,
                 requiredNullableInt = 1234,
                 requiredNullableString = "<requiredNullableString>",
-                requiredModel = new { },
-                requiredModel2 = new { },
+                requiredModel = new
+                {
+                    requiredList = new[] {
+            new {
+                requiredModelRecord = new {
+                    key = new {},
+                },
+            }
+        },
+                },
+                requiredModel2 = new
+                {
+                    requiredList = new[] {
+            new {
+                requiredModelRecord = new {
+                    key = new {},
+                },
+            }
+        },
+                },
                 requiredIntList = new[] {
         1234
     },
@@ -380,8 +434,26 @@ namespace ModelsTypeSpec.Samples
                 requiredNullableString = "<requiredNullableString>",
                 nonRequiredNullableInt = 1234,
                 nonRequiredNullableString = "<nonRequiredNullableString>",
-                requiredModel = new { },
-                requiredModel2 = new { },
+                requiredModel = new
+                {
+                    requiredList = new[] {
+            new {
+                requiredModelRecord = new {
+                    key = new {},
+                },
+            }
+        },
+                },
+                requiredModel2 = new
+                {
+                    requiredList = new[] {
+            new {
+                requiredModelRecord = new {
+                    key = new {},
+                },
+            }
+        },
+                },
                 requiredIntList = new[] {
         1234
     },
@@ -580,8 +652,26 @@ namespace ModelsTypeSpec.Samples
                 requiredInt = 1234,
                 requiredNullableInt = 1234,
                 requiredNullableString = "<requiredNullableString>",
-                requiredModel = new { },
-                requiredModel2 = new { },
+                requiredModel = new
+                {
+                    requiredList = new[] {
+            new {
+                requiredModelRecord = new {
+                    key = new {},
+                },
+            }
+        },
+                },
+                requiredModel2 = new
+                {
+                    requiredList = new[] {
+            new {
+                requiredModelRecord = new {
+                    key = new {},
+                },
+            }
+        },
+                },
                 requiredIntList = new[] {
         1234
     },
@@ -655,8 +745,26 @@ namespace ModelsTypeSpec.Samples
                 requiredNullableString = "<requiredNullableString>",
                 nonRequiredNullableInt = 1234,
                 nonRequiredNullableString = "<nonRequiredNullableString>",
-                requiredModel = new { },
-                requiredModel2 = new { },
+                requiredModel = new
+                {
+                    requiredList = new[] {
+            new {
+                requiredModelRecord = new {
+                    key = new {},
+                },
+            }
+        },
+                },
+                requiredModel2 = new
+                {
+                    requiredList = new[] {
+            new {
+                requiredModelRecord = new {
+                    key = new {},
+                },
+            }
+        },
+                },
                 requiredIntList = new[] {
         1234
     },
@@ -754,8 +862,26 @@ namespace ModelsTypeSpec.Samples
                 requiredInt = 1234,
                 requiredNullableInt = 1234,
                 requiredNullableString = "<requiredNullableString>",
-                requiredModel = new { },
-                requiredModel2 = new { },
+                requiredModel = new
+                {
+                    requiredList = new[] {
+            new {
+                requiredModelRecord = new {
+                    key = new {},
+                },
+            }
+        },
+                },
+                requiredModel2 = new
+                {
+                    requiredList = new[] {
+            new {
+                requiredModelRecord = new {
+                    key = new {},
+                },
+            }
+        },
+                },
                 requiredIntList = new[] {
         1234
     },
@@ -829,8 +955,26 @@ namespace ModelsTypeSpec.Samples
                 requiredNullableString = "<requiredNullableString>",
                 nonRequiredNullableInt = 1234,
                 nonRequiredNullableString = "<nonRequiredNullableString>",
-                requiredModel = new { },
-                requiredModel2 = new { },
+                requiredModel = new
+                {
+                    requiredList = new[] {
+            new {
+                requiredModelRecord = new {
+                    key = new {},
+                },
+            }
+        },
+                },
+                requiredModel2 = new
+                {
+                    requiredList = new[] {
+            new {
+                requiredModelRecord = new {
+                    key = new {},
+                },
+            }
+        },
+                },
                 requiredIntList = new[] {
         1234
     },

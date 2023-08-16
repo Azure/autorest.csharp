@@ -78,8 +78,7 @@
      "IsRequired": true,
      "IsReadOnly": false
     }
-   ],
-   "DerivedModels": []
+   ]
   },
   {
    "$id": "11",
@@ -103,8 +102,7 @@
      "IsRequired": true,
      "IsReadOnly": false
     }
-   ],
-   "DerivedModels": []
+   ]
   },
   {
    "$id": "14",
@@ -128,8 +126,7 @@
      "IsRequired": true,
      "IsReadOnly": false
     }
-   ],
-   "DerivedModels": []
+   ]
   },
   {
    "$id": "17",
@@ -153,8 +150,7 @@
      "IsRequired": true,
      "IsReadOnly": false
     }
-   ],
-   "DerivedModels": []
+   ]
   },
   {
    "$id": "20",
@@ -178,8 +174,7 @@
      "IsRequired": true,
      "IsReadOnly": false
     }
-   ],
-   "DerivedModels": []
+   ]
   },
   {
    "$id": "23",
@@ -203,8 +198,7 @@
      "IsRequired": true,
      "IsReadOnly": false
     }
-   ],
-   "DerivedModels": []
+   ]
   },
   {
    "$id": "26",
@@ -228,8 +222,7 @@
      "IsRequired": true,
      "IsReadOnly": false
     }
-   ],
-   "DerivedModels": []
+   ]
   },
   {
    "$id": "29",
@@ -250,8 +243,7 @@
      "IsRequired": true,
      "IsReadOnly": false
     }
-   ],
-   "DerivedModels": []
+   ]
   },
   {
    "$id": "31",
@@ -272,8 +264,7 @@
      "IsRequired": true,
      "IsReadOnly": false
     }
-   ],
-   "DerivedModels": []
+   ]
   },
   {
    "$id": "33",
@@ -310,14 +301,12 @@
         "IsRequired": true,
         "IsReadOnly": false
        }
-      ],
-      "DerivedModels": []
+      ]
      },
      "IsRequired": true,
      "IsReadOnly": false
     }
-   ],
-   "DerivedModels": []
+   ]
   },
   {
    "$ref": "35"
@@ -349,8 +338,7 @@
      "IsRequired": true,
      "IsReadOnly": false
     }
-   ],
-   "DerivedModels": []
+   ]
   },
   {
    "$id": "42",
@@ -379,8 +367,7 @@
      "IsRequired": true,
      "IsReadOnly": false
     }
-   ],
-   "DerivedModels": []
+   ]
   },
   {
    "$id": "46",
@@ -406,8 +393,7 @@
      "IsRequired": true,
      "IsReadOnly": false
     }
-   ],
-   "DerivedModels": []
+   ]
   },
   {
    "$id": "49",
@@ -442,8 +428,7 @@
      "IsRequired": true,
      "IsReadOnly": false
     }
-   ],
-   "DerivedModels": []
+   ]
   },
   {
    "$id": "54",
@@ -452,8 +437,7 @@
    "Description": "Model with a property never. (This property should not be included).",
    "IsNullable": false,
    "Usage": "RoundTrip",
-   "Properties": [],
-   "DerivedModels": []
+   "Properties": []
   },
   {
    "$id": "55",
@@ -477,8 +461,7 @@
      "IsRequired": true,
      "IsReadOnly": false
     }
-   ],
-   "DerivedModels": []
+   ]
   },
   {
    "$id": "58",
@@ -502,8 +485,7 @@
      "IsRequired": true,
      "IsReadOnly": false
     }
-   ],
-   "DerivedModels": []
+   ]
   },
   {
    "$id": "61",
@@ -527,8 +509,7 @@
      "IsRequired": true,
      "IsReadOnly": false
     }
-   ],
-   "DerivedModels": []
+   ]
   },
   {
    "$id": "64",
@@ -552,8 +533,7 @@
      "IsRequired": true,
      "IsReadOnly": false
     }
-   ],
-   "DerivedModels": []
+   ]
   }
  ],
  "Clients": [

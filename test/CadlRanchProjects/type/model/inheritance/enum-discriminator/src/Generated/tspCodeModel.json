@@ -92,8 +92,7 @@
       "$ref": "6"
      },
      "Usage": "RoundTrip",
-     "Properties": [],
-     "DerivedModels": []
+     "Properties": []
     }
    ]
   },
@@ -148,8 +147,7 @@
       "$ref": "11"
      },
      "Usage": "RoundTrip",
-     "Properties": [],
-     "DerivedModels": []
+     "Properties": []
     }
    ]
   },

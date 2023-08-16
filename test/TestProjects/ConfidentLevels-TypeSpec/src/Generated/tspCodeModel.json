@@ -79,8 +79,7 @@
      "IsRequired": true,
      "IsReadOnly": false
     }
-   ],
-   "DerivedModels": []
+   ]
   },
   {
    "$id": "11",
@@ -132,8 +131,7 @@
      "IsRequired": false,
      "IsReadOnly": false
     }
-   ],
-   "DerivedModels": []
+   ]
   },
   {
    "$id": "18",
@@ -175,8 +173,7 @@
      "IsRequired": true,
      "IsReadOnly": false
     }
-   ],
-   "DerivedModels": []
+   ]
   },
   {
    "$id": "24",
@@ -248,8 +245,7 @@
      "IsRequired": true,
      "IsReadOnly": false
     }
-   ],
-   "DerivedModels": []
+   ]
   },
   {
    "$id": "34",
@@ -346,16 +342,14 @@
          "IsRequired": true,
          "IsReadOnly": false
         }
-       ],
-       "DerivedModels": []
+       ]
       },
       "IsNullable": false
      },
      "IsRequired": false,
      "IsReadOnly": false
     }
-   ],
-   "DerivedModels": []
+   ]
   },
   {
    "$ref": "39"
@@ -399,8 +393,7 @@
      "IsRequired": true,
      "IsReadOnly": false
     }
-   ],
-   "DerivedModels": []
+   ]
   },
   {
    "$id": "53",
@@ -441,8 +434,7 @@
      "IsRequired": true,
      "IsReadOnly": false
     }
-   ],
-   "DerivedModels": []
+   ]
   },
   {
    "$id": "58",
@@ -511,8 +503,7 @@
        "IsRequired": true,
        "IsReadOnly": false
       }
-     ],
-     "DerivedModels": []
+     ]
     },
     {
      "$id": "66",
@@ -540,8 +531,7 @@
        "IsRequired": true,
        "IsReadOnly": false
       }
-     ],
-     "DerivedModels": []
+     ]
     }
    ]
   },
@@ -650,8 +640,7 @@
        "IsRequired": true,
        "IsReadOnly": false
       }
-     ],
-     "DerivedModels": []
+     ]
     },
     {
      "$id": "82",
@@ -679,8 +668,7 @@
        "IsRequired": true,
        "IsReadOnly": false
       }
-     ],
-     "DerivedModels": []
+     ]
     }
    ]
   },
@@ -753,8 +741,7 @@
        "IsRequired": false,
        "IsReadOnly": false
       }
-     ],
-     "DerivedModels": []
+     ]
     },
     {
      "$id": "93",
@@ -799,8 +786,7 @@
        "IsRequired": true,
        "IsReadOnly": false
       }
-     ],
-     "DerivedModels": []
+     ]
     }
    ]
   },
@@ -829,8 +815,7 @@
      "IsRequired": false,
      "IsReadOnly": false
     }
-   ],
-   "DerivedModels": []
+   ]
   },
   {
    "$ref": "93"

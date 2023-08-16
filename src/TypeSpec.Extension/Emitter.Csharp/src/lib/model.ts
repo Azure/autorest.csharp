@@ -545,7 +545,7 @@ export function getInputType(
             addModelProperties(model, m.properties, properties);
 
             // add the derived models into the list
-            if (m.derivedModels) {
+            if (m.derivedModels !== undefined && m.derivedModels.length > 0) {
                 model.DerivedModels = [];
                 for (const dm of m.derivedModels) {
                     const derivedModel = getInputType(

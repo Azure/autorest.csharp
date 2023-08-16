@@ -58,8 +58,7 @@
       "$ref": "2"
      },
      "Usage": "RoundTrip",
-     "Properties": [],
-     "DerivedModels": []
+     "Properties": []
     },
     {
      "$id": "8",
@@ -72,8 +71,7 @@
       "$ref": "2"
      },
      "Usage": "RoundTrip",
-     "Properties": [],
-     "DerivedModels": []
+     "Properties": []
     },
     {
      "$id": "9",
@@ -86,8 +84,7 @@
       "$ref": "2"
      },
      "Usage": "RoundTrip",
-     "Properties": [],
-     "DerivedModels": []
+     "Properties": []
     },
     {
      "$id": "10",
@@ -150,8 +147,7 @@
        "IsRequired": false,
        "IsReadOnly": false
       }
-     ],
-     "DerivedModels": []
+     ]
     }
    ]
   },
@@ -219,8 +215,7 @@
       "$ref": "17"
      },
      "Usage": "Output",
-     "Properties": [],
-     "DerivedModels": []
+     "Properties": []
     }
    ]
   },

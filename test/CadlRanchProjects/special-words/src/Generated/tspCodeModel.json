@@ -74,8 +74,7 @@
        "IsRequired": true,
        "IsReadOnly": false
       }
-     ],
-     "DerivedModels": []
+     ]
     }
    ]
   },
