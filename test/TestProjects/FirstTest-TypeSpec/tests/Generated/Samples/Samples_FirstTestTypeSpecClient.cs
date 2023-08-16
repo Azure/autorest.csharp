@@ -633,7 +633,7 @@ namespace FirstTestTypeSpec.Samples
             var endpoint = new Uri("<https://my-service.azure.com>");
             var client = new FirstTestTypeSpecClient(endpoint);
 
-            var notFriend = new Friend("<name>");
+            var notFriend = new NotFriend("<name>");
             var result = await client.FriendlyModelAsync(notFriend);
         }
 

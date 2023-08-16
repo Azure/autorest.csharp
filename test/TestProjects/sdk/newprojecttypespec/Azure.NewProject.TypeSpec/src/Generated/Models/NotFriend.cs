@@ -8,15 +8,15 @@
 using System;
 using Azure.Core;
 
-namespace FirstTestTypeSpec.Models
+namespace Azure.NewProject.TypeSpec.Models
 {
     /// <summary> this is not a friendly model but with a friendly name. </summary>
-    public partial class Friend
+    public partial class NotFriend
     {
-        /// <summary> Initializes a new instance of Friend. </summary>
+        /// <summary> Initializes a new instance of NotFriend. </summary>
         /// <param name="name"> name of the NotFriend. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
-        public Friend(string name)
+        public NotFriend(string name)
         {
             Argument.AssertNotNull(name, nameof(name));
 

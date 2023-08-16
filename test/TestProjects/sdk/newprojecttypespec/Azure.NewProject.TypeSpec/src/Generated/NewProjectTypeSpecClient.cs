@@ -422,28 +422,28 @@ namespace Azure.NewProject.TypeSpec
         /// <param name="notFriend"> this is not a friendly model but with a friendly name. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="notFriend"/> is null. </exception>
-        /// <include file="Docs/NewProjectTypeSpecClient.xml" path="doc/members/member[@name='FriendlyModelAsync(Friend,CancellationToken)']/*" />
-        public virtual async Task<Response<Friend>> FriendlyModelAsync(Friend notFriend, CancellationToken cancellationToken = default)
+        /// <include file="Docs/NewProjectTypeSpecClient.xml" path="doc/members/member[@name='FriendlyModelAsync(NotFriend,CancellationToken)']/*" />
+        public virtual async Task<Response<NotFriend>> FriendlyModelAsync(NotFriend notFriend, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(notFriend, nameof(notFriend));
 
             RequestContext context = FromCancellationToken(cancellationToken);
             Response response = await FriendlyModelAsync(notFriend.ToRequestContent(), context).ConfigureAwait(false);
-            return Response.FromValue(Friend.FromResponse(response), response);
+            return Response.FromValue(NotFriend.FromResponse(response), response);
         }
 
         /// <summary> Model can have its friendly name. </summary>
         /// <param name="notFriend"> this is not a friendly model but with a friendly name. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="notFriend"/> is null. </exception>
-        /// <include file="Docs/NewProjectTypeSpecClient.xml" path="doc/members/member[@name='FriendlyModel(Friend,CancellationToken)']/*" />
-        public virtual Response<Friend> FriendlyModel(Friend notFriend, CancellationToken cancellationToken = default)
+        /// <include file="Docs/NewProjectTypeSpecClient.xml" path="doc/members/member[@name='FriendlyModel(NotFriend,CancellationToken)']/*" />
+        public virtual Response<NotFriend> FriendlyModel(NotFriend notFriend, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(notFriend, nameof(notFriend));
 
             RequestContext context = FromCancellationToken(cancellationToken);
             Response response = FriendlyModel(notFriend.ToRequestContent(), context);
-            return Response.FromValue(Friend.FromResponse(response), response);
+            return Response.FromValue(NotFriend.FromResponse(response), response);
         }
 
         /// <summary>
@@ -456,7 +456,7 @@ namespace Azure.NewProject.TypeSpec
         /// </item>
         /// <item>
         /// <description>
-        /// Please try the simpler <see cref="FriendlyModelAsync(Friend,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// Please try the simpler <see cref="FriendlyModelAsync(NotFriend,CancellationToken)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>
@@ -495,7 +495,7 @@ namespace Azure.NewProject.TypeSpec
         /// </item>
         /// <item>
         /// <description>
-        /// Please try the simpler <see cref="FriendlyModel(Friend,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// Please try the simpler <see cref="FriendlyModel(NotFriend,CancellationToken)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>

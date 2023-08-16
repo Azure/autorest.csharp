@@ -9,9 +9,9 @@ using System.Text.Json;
 using Azure;
 using Azure.Core;
 
-namespace FirstTestTypeSpec.Models
+namespace Azure.NewProject.TypeSpec.Models
 {
-    public partial class Friend : IUtf8JsonSerializable
+    public partial class NotFriend : IUtf8JsonSerializable
     {
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
@@ -21,7 +21,7 @@ namespace FirstTestTypeSpec.Models
             writer.WriteEndObject();
         }
 
-        internal static Friend DeserializeFriend(JsonElement element)
+        internal static NotFriend DeserializeNotFriend(JsonElement element)
         {
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -36,15 +36,15 @@ namespace FirstTestTypeSpec.Models
                     continue;
                 }
             }
-            return new Friend(name);
+            return new NotFriend(name);
         }
 
         /// <summary> Deserializes the model from a raw response. </summary>
         /// <param name="response"> The response to deserialize the model from. </param>
-        internal static Friend FromResponse(Response response)
+        internal static NotFriend FromResponse(Response response)
         {
             using var document = JsonDocument.Parse(response.Content);
-            return DeserializeFriend(document.RootElement);
+            return DeserializeNotFriend(document.RootElement);
         }
 
         /// <summary> Convert into a Utf8JsonRequestContent. </summary>

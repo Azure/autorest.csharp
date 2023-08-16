@@ -11,7 +11,6 @@ import {
     getEffectiveModelType,
     getEncode,
     getFormat,
-    getFriendlyName,
     getKnownValues,
     getVisibility,
     Model,
@@ -777,7 +776,7 @@ export function getUsages(
         if (type.kind === "Model") {
             effectiveType = getEffectiveSchemaType(context, type) as Model;
             typeName =
-                getFriendlyName(program, effectiveType) ?? effectiveType.name;
+                getLibraryName(context, effectiveType) ?? effectiveType.name;
         }
         const affectTypes: string[] = [];
         if (typeName !== "") {
@@ -791,7 +790,7 @@ export function getUsages(
                             arg.name !== ""
                         ) {
                             affectTypes.push(
-                                getFriendlyName(program, arg) ?? arg.name
+                                getLibraryName(context, arg) ?? arg.name
                             );
                         }
                     }
@@ -835,7 +834,7 @@ export function getUsages(
                         )}Request`;
                     }
                     affectedTypes.push(
-                        getFriendlyName(program, effectiveBodyType) ??
+                        getLibraryName(context, effectiveBodyType) ??
                             effectiveBodyType.name
                     );
                 }
@@ -874,7 +873,7 @@ export function getUsages(
                         effectiveReturnType.name !== ""
                     ) {
                         returnType =
-                            getFriendlyName(program, effectiveReturnType) ??
+                            getLibraryName(context, effectiveReturnType) ??
                             effectiveReturnType.name;
                     }
                     /*propagate to sub models and composite models*/
@@ -945,14 +944,14 @@ export function getUsages(
         ) {
             result.push(...getAllEffectedModels(model.indexer.value, visited));
         } else {
-            const name = getFriendlyName(program, model) ?? model.name;
+            const name = getLibraryName(context, model) ?? model.name;
             if (model.kind !== "Model" || visited.has(name)) return result;
             result.push(name);
             visited.add(name);
             const derivedModels = model.derivedModels;
             for (const derivedModel of derivedModels) {
                 result.push(
-                    getFriendlyName(program, derivedModel) ?? derivedModel.name
+                    getLibraryName(context, derivedModel) ?? derivedModel.name
                 );
                 result.push(...getAllEffectedModels(derivedModel, visited));
             }

@@ -61,7 +61,7 @@
   },
   {
    "$id": "9",
-   "Name": "PagedToy",
+   "Name": "CustomPage",
    "Namespace": "Azure.Core.Foundations",
    "Description": "Paged collection of Toy items",
    "IsNullable": false,

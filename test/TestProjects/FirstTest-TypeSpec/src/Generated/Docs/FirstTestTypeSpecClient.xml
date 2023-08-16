@@ -481,26 +481,26 @@ Console.WriteLine(result.GetProperty("requiredNullableList")[0].ToString());
 ]]></code>
 </example>
     </member>
-    <member name="FriendlyModelAsync(Friend,CancellationToken)">
+    <member name="FriendlyModelAsync(NotFriend,CancellationToken)">
 <example>
 This sample shows how to call FriendlyModelAsync with required parameters.
 <code><![CDATA[
 var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new FirstTestTypeSpecClient(endpoint);
 
-var notFriend = new Friend("<name>");
+var notFriend = new NotFriend("<name>");
 var result = await client.FriendlyModelAsync(notFriend);
 ]]></code>
 </example>
     </member>
-    <member name="FriendlyModel(Friend,CancellationToken)">
+    <member name="FriendlyModel(NotFriend,CancellationToken)">
 <example>
 This sample shows how to call FriendlyModel with required parameters.
 <code><![CDATA[
 var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new FirstTestTypeSpecClient(endpoint);
 
-var notFriend = new Friend("<name>");
+var notFriend = new NotFriend("<name>");
 var result = client.FriendlyModel(notFriend);
 ]]></code>
 </example>

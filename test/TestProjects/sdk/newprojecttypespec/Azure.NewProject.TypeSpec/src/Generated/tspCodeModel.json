@@ -545,7 +545,7 @@
   },
   {
    "$id": "75",
-   "Name": "Friend",
+   "Name": "NotFriend",
    "Namespace": "NewProjectTypeSpec",
    "Description": "this is not a friendly model but with a friendly name",
    "IsNullable": false,
