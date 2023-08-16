@@ -11,7 +11,7 @@ using Azure.Core;
 
 namespace Azure.NewProject.TypeSpec.Models
 {
-    public partial class NotFriend : IUtf8JsonSerializable
+    public partial class Friend : IUtf8JsonSerializable
     {
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
@@ -21,7 +21,7 @@ namespace Azure.NewProject.TypeSpec.Models
             writer.WriteEndObject();
         }
 
-        internal static NotFriend DeserializeNotFriend(JsonElement element)
+        internal static Friend DeserializeFriend(JsonElement element)
         {
             if (element.ValueKind == JsonValueKind.Null)
             {
@@ -36,15 +36,15 @@ namespace Azure.NewProject.TypeSpec.Models
                     continue;
                 }
             }
-            return new NotFriend(name);
+            return new Friend(name);
         }
 
         /// <summary> Deserializes the model from a raw response. </summary>
         /// <param name="response"> The response to deserialize the model from. </param>
-        internal static NotFriend FromResponse(Response response)
+        internal static Friend FromResponse(Response response)
         {
             using var document = JsonDocument.Parse(response.Content);
-            return DeserializeNotFriend(document.RootElement);
+            return DeserializeFriend(document.RootElement);
         }
 
         /// <summary> Convert into a Utf8JsonRequestContent. </summary>

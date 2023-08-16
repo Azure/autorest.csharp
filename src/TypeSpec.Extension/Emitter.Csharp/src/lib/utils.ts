@@ -21,12 +21,15 @@ export function getNameForTemplate(model: Model): string {
 
 export function getModelName(context: SdkContext, model: Model): string {
     // if the projectedName does not exist, we take friendlyName
-    if (getProjectedNames(context.program, model) === undefined) {
-        return (
-            getFriendlyName(context.program, model) ?? getNameForTemplate(model)
-        );
+    const projectedNames = getProjectedNames(context.program, model);
+    if (projectedNames === undefined || projectedNames.size === 0) {
+        const name =
+            getFriendlyName(context.program, model) ??
+            getNameForTemplate(model);
+
+        if (name) return name;
     }
 
     // otherwise we take the libraryName
-    return getLibraryName(context, model);
+    return getLibraryName(context, model) ?? model.name;
 }

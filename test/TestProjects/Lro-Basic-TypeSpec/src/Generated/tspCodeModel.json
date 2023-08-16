@@ -479,7 +479,7 @@
      "$id": "54",
      "Name": "createThing",
      "ResourceName": "Authoring",
-     "Description": "Long running RPC operation template",
+     "Description": "A remote procedure call (RPC) operation.",
      "Parameters": [
       {
        "$ref": "14"
@@ -563,7 +563,7 @@
       {
        "$id": "62",
        "StatusCodes": [
-        202
+        200
        ],
        "BodyType": {
         "$ref": "9"
@@ -600,7 +600,7 @@
       "FinalResponse": {
        "$id": "66",
        "StatusCodes": [
-        202
+        200
        ],
        "BodyType": {
         "$ref": "9"

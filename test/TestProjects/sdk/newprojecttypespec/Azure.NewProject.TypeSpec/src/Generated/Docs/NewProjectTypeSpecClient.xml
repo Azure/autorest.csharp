@@ -427,7 +427,7 @@ Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
 ]]></code>
 </example>
     </member>
-    <member name="FriendlyModelAsync(NotFriend,CancellationToken)">
+    <member name="FriendlyModelAsync(Friend,CancellationToken)">
 <example>
 This sample shows how to call FriendlyModelAsync with required parameters.
 <code><![CDATA[
@@ -435,12 +435,12 @@ var credential = new AzureKeyCredential("<key>");
 var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new NewProjectTypeSpecClient(endpoint, credential);
 
-var notFriend = new NotFriend("<name>");
+var notFriend = new Friend("<name>");
 var result = await client.FriendlyModelAsync(notFriend);
 ]]></code>
 </example>
     </member>
-    <member name="FriendlyModel(NotFriend,CancellationToken)">
+    <member name="FriendlyModel(Friend,CancellationToken)">
 <example>
 This sample shows how to call FriendlyModel with required parameters.
 <code><![CDATA[
@@ -448,7 +448,7 @@ var credential = new AzureKeyCredential("<key>");
 var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new NewProjectTypeSpecClient(endpoint, credential);
 
-var notFriend = new NotFriend("<name>");
+var notFriend = new Friend("<name>");
 var result = client.FriendlyModel(notFriend);
 ]]></code>
 </example>

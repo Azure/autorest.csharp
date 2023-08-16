@@ -589,7 +589,7 @@ namespace Azure.NewProject.TypeSpec.Samples
             var endpoint = new Uri("<https://my-service.azure.com>");
             var client = new NewProjectTypeSpecClient(endpoint, credential);
 
-            var notFriend = new NotFriend("<name>");
+            var notFriend = new Friend("<name>");
             var result = await client.FriendlyModelAsync(notFriend);
         }
 

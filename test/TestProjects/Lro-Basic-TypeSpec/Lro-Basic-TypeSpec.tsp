@@ -41,7 +41,7 @@ model Thing {
 }
 
 interface Authoring {
-  createProjectStatusMonitor is CustomCore.PollingOperation<Project>;
+  createProjectStatusMonitor is Azure.Core.ResourceRead<OperationStatusResource<Project>>;
 
   @convenientAPI(true)
   @Azure.Core.pollingOperation(Authoring.createProjectStatusMonitor)
@@ -55,27 +55,33 @@ interface Authoring {
 
   @convenientAPI(true)
   @Azure.Core.pollingOperation(Authoring.createProjectStatusMonitor)
-  op createThing is CustomCore.LongRunningRpcOperation<Thing, Thing>;
+  op createThing is Azure.Core.RpcOperation<Thing, Thing & Azure.Core.Foundations.LongRunningStatusLocation>;
 }
 
-namespace CustomCore {
-  @parentResource(Project)
-  @resource("operations")
-  model OperationStatusResource<T> is Azure.Core.Foundations.OperationStatus {
-    operationId: string;
-  }
-
-  @route("operations")
-  @convenientAPI(true)
-  op PollingOperation<TCustom> is Azure.Core.ResourceRead<OperationStatusResource<TCustom>>;
-
-  @doc("Long running RPC operation template")
-  op LongRunningRpcOperation<
-    TParams extends object,
-    TResponse extends object
-  > is Azure.Core.RpcOperation<
-    TParams,
-    Azure.Core.Foundations.AcceptedResponse<TResponse &
-      Azure.Core.Foundations.LongRunningStatusLocation>
-  >;
+@parentResource(Project)
+@resource("operations")
+model OperationStatusResource<T> is Azure.Core.Foundations.OperationStatus {
+  operationId: string;
 }
+
+// namespace CustomCore {
+//   @parentResource(Project)
+//   @resource("operations")
+//   model OperationStatusResource<T> is Azure.Core.Foundations.OperationStatus {
+//     operationId: string;
+//   }
+
+//   @route("operations")
+//   @convenientAPI(true)
+//   op PollingOperation<TCustom> is Azure.Core.ResourceRead<OperationStatusResource<TCustom>>;
+
+//   @doc("Long running RPC operation template")
+//   op LongRunningRpcOperation<
+//     TParams extends object,
+//     TResponse extends object
+//   > is Azure.Core.RpcOperation<
+//     TParams,
+//     Azure.Core.Foundations.AcceptedResponse<TResponse &
+//       Azure.Core.Foundations.LongRunningStatusLocation>
+//   >;
+// }

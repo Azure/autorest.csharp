@@ -286,7 +286,7 @@ namespace LroBasicTypeSpec
             }
         }
 
-        /// <summary> Long running RPC operation template. </summary>
+        /// <summary> A remote procedure call (RPC) operation. </summary>
         /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
         /// <param name="thing"> The Thing to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -301,7 +301,7 @@ namespace LroBasicTypeSpec
             return ProtocolOperationHelpers.Convert(response, Thing.FromResponse, ClientDiagnostics, "LroBasicTypeSpecClient.CreateThing");
         }
 
-        /// <summary> Long running RPC operation template. </summary>
+        /// <summary> A remote procedure call (RPC) operation. </summary>
         /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
         /// <param name="thing"> The Thing to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -317,7 +317,7 @@ namespace LroBasicTypeSpec
         }
 
         /// <summary>
-        /// [Protocol Method] Long running RPC operation template
+        /// [Protocol Method] A remote procedure call (RPC) operation.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -357,7 +357,7 @@ namespace LroBasicTypeSpec
         }
 
         /// <summary>
-        /// [Protocol Method] Long running RPC operation template
+        /// [Protocol Method] A remote procedure call (RPC) operation.
         /// <list type="bullet">
         /// <item>
         /// <description>
@@ -431,7 +431,7 @@ namespace LroBasicTypeSpec
 
         internal HttpMessage CreateCreateThingRequest(RequestContent content, RequestContext context)
         {
-            var message = _pipeline.CreateMessage(context, ResponseClassifier202);
+            var message = _pipeline.CreateMessage(context, ResponseClassifier200);
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
@@ -460,5 +460,7 @@ namespace LroBasicTypeSpec
         private static ResponseClassifier ResponseClassifier202 => _responseClassifier202 ??= new StatusCodeClassifier(stackalloc ushort[] { 202 });
         private static ResponseClassifier _responseClassifier200201;
         private static ResponseClassifier ResponseClassifier200201 => _responseClassifier200201 ??= new StatusCodeClassifier(stackalloc ushort[] { 200, 201 });
+        private static ResponseClassifier _responseClassifier200;
+        private static ResponseClassifier ResponseClassifier200 => _responseClassifier200 ??= new StatusCodeClassifier(stackalloc ushort[] { 200 });
     }
 }

@@ -11,12 +11,12 @@ using Azure.Core;
 namespace Azure.NewProject.TypeSpec.Models
 {
     /// <summary> this is not a friendly model but with a friendly name. </summary>
-    public partial class NotFriend
+    public partial class Friend
     {
-        /// <summary> Initializes a new instance of NotFriend. </summary>
+        /// <summary> Initializes a new instance of Friend. </summary>
         /// <param name="name"> name of the NotFriend. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
-        public NotFriend(string name)
+        public Friend(string name)
         {
             Argument.AssertNotNull(name, nameof(name));
 
