@@ -132,11 +132,6 @@ namespace AutoRest.CSharp.Mgmt.Models
             return BuildRequestPathFromHint(hintOperationSet);
         }
 
-        //private static bool IsRawRequestPathShareTheSamePrefix(string candidate, string requestPath)
-        //{
-        //    // check if the two request paths has the same prefix, regardless the variable names inside {}
-        //}
-
         private RequestPath BuildRequestPathFromHint(OperationSet hint)
         {
             var hintPath = hint.GetRequestPath();
