@@ -10,7 +10,11 @@ export function capitalize(str: string): string {
 }
 
 export function getNameForTemplate(model: Model): string {
-    if (model.templateMapper && model.templateMapper.args) {
+    if (
+        model.name !== "" &&
+        model.templateMapper &&
+        model.templateMapper.args
+    ) {
         return (
             model.name +
             model.templateMapper.args.map((it) => (it as Model).name).join("")
