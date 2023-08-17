@@ -24,6 +24,7 @@
         "projection/projected-name",
         "server/path/multiple",
         "server/path/single",
+        "special-headers/client-request-id",
         "special-headers/repeatability",
         "special-words",
         "parameters/collection-format",
