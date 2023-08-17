@@ -204,6 +204,9 @@ internal readonly struct RequestPath : IEquatable<RequestPath>, IReadOnlyList<Se
 
     /// <summary>
     /// Check if <paramref name="requestPath"/> is a prefix path of <paramref name="candidate"/>
+    /// While comparing, we will ignore everything inside {}
+    /// For instance, if "/subs/{subsId}/rgs/{name}/foo" and "/subs/{subsId}/rgs/{name}/foo/bar/{something}",
+    /// we are effectively comparing /subs/{}/rgs/{}/foo and /subs/{}/rgs/{}/foo/bar/{}
     /// </summary>
     /// <param name="requestPath"></param>
     /// <param name="candidate"></param>
