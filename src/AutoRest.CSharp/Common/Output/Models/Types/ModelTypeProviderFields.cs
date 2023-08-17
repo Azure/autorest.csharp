@@ -69,7 +69,7 @@ namespace AutoRest.CSharp.Output.Models.Types
                 fields.Add(field);
                 fieldsToInputs[field] = inputModelProperty;
 
-                var parameterName = existingMember is IFieldSymbol ? inputModelProperty.Name.ToVariableName() : field.Name.ToVariableName();
+                var parameterName = field.Name.ToVariableName();
                 // we do not validate a parameter when it is a value type (struct or int, etc), or it is optional, or it it nullable, or it is readonly in DPG (in Legacy Data Plane readonly property require validation)
                 var parameterValidation = field.Type.IsValueType || (inputModelProperty.IsReadOnly && !Configuration.Generation1ConvenienceClient) || !field.IsRequired || field.Type.IsNullable
                     ? Validation.None

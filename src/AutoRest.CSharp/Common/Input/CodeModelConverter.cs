@@ -221,41 +221,10 @@ namespace AutoRest.CSharp.Common.Input
 
             foreach (var (schema, properties) in _modelPropertiesCache)
             {
-                properties.AddRange(GetAllSchemaProperties(schema).Select(CreateProperty));
+                properties.AddRange(schema.Properties.Select(CreateProperty));
             }
 
             return schemas.Select(s => _modelsCache[s]).ToList();
-        }
-
-        private static IEnumerable<Property> GetAllSchemaProperties(ObjectSchema schema)
-        {
-            foreach (var property in schema.Properties)
-            {
-                yield return property;
-            }
-
-            if (schema.Parents is not {} parents || parents.All.Count == 0 || GetBaseModelSchema(schema) is not {} baseModelSchema)
-            {
-                yield break;
-            }
-
-            var parentPropertyNames = new HashSet<string>();
-            foreach (var parentSchema in parents.Immediate.OfType<ObjectSchema>())
-            {
-                if (parentSchema == baseModelSchema)
-                {
-                    continue;
-                }
-
-                foreach (var property in parentSchema.Properties)
-                {
-                    // Need to control for name duplicates
-                    if (parentPropertyNames.Add(property.Language.Default.Name))
-                    {
-                        yield return property;
-                    }
-                }
-            }
         }
 
         private InputModelType GetOrCreateModel(ObjectSchema schema)
@@ -268,7 +237,7 @@ namespace AutoRest.CSharp.Common.Input
             var usage = _schemaUsages.GetUsage(schema);
             var properties = new List<InputModelProperty>();
             var baseModelSchema = GetBaseModelSchema(schema);
-
+            var compositeSchemas = schema.Parents?.Immediate?.OfType<ObjectSchema>().Where(s => s != baseModelSchema);
             var dictionarySchema = Configuration.AzureArm ? null : schema.Parents?.Immediate?.OfType<DictionarySchema>().FirstOrDefault();
 
             model = new InputModelType(
@@ -289,7 +258,10 @@ namespace AutoRest.CSharp.Common.Input
                 DiscriminatorValue: schema.DiscriminatorValue,
                 DiscriminatorPropertyName: schema.Discriminator?.Property.SerializedName,
                 InheritedDictionaryType: dictionarySchema is not null ? (InputDictionaryType)CreateType(dictionarySchema, _modelsCache, false) : null,
-                Serialization: GetSerialization(schema, usage));
+                Serialization: GetSerialization(schema, usage))
+            {
+                CompositionModels = compositeSchemas is not null ? compositeSchemas.Select(GetOrCreateModel).ToList() : Array.Empty<InputModelType>()
+            };
 
             _modelsCache[schema] = model;
             _modelPropertiesCache[schema] = properties;

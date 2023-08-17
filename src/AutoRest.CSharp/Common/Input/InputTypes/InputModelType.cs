@@ -1,6 +1,7 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
+using System;
 using System.Collections.Generic;
 
 namespace AutoRest.CSharp.Common.Input
@@ -16,6 +17,11 @@ namespace AutoRest.CSharp.Common.Input
         /// Indicates if this model is a property bag
         /// </summary>
         public bool IsPropertyBag { get; init; } = false;
+
+        /// <summary>
+        /// Types provided as immediate parents in spec that aren't base model
+        /// </summary>
+        public IReadOnlyList<InputModelType> CompositionModels { get; init; } = Array.Empty<InputModelType>();
 
         public IEnumerable<InputModelType> GetSelfAndBaseModels() => EnumerateBase(this);
 
