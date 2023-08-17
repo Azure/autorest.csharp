@@ -203,6 +203,57 @@ internal readonly struct RequestPath : IEquatable<RequestPath>, IReadOnlyList<Se
     }
 
     /// <summary>
+    /// Check if <paramref name="requestPath"/> is a prefix path of <paramref name="candidate"/>
+    /// </summary>
+    /// <param name="requestPath"></param>
+    /// <param name="candidate"></param>
+    /// <returns></returns>
+    public static bool IsPrefix(string requestPath, string candidate)
+    {
+        // Create spans for the candidate and request path
+        ReadOnlySpan<char> candidateSpan = candidate.AsSpan();
+        ReadOnlySpan<char> requestPathSpan = requestPath.AsSpan();
+
+        int cIdx = 0, rIdx = 0;
+
+        // iterate through everything on request path
+        while (rIdx < requestPathSpan.Length)
+        {
+            // if we run out of candidate, return false because request path here is effectively longer than candidate
+            if (cIdx >= candidateSpan.Length)
+                return false;
+
+            // if we hit a {
+            char c = candidateSpan[cIdx];
+            char r = requestPathSpan[rIdx];
+            switch (c == '{', r == '{')
+            {
+                case (true, true):
+                    // they both are {, skip everything until we have a }
+                    while (cIdx < candidateSpan.Length && candidateSpan[cIdx] != '}')
+                        cIdx++;
+                    while (rIdx < requestPathSpan.Length && requestPathSpan[rIdx] != '}')
+                        rIdx++;
+                    if (cIdx >= candidateSpan.Length || rIdx >= requestPathSpan.Length) // if we get out of range, we should return false because this request path might be incomplete
+                        return false;
+                    break;
+                case (false, false):
+                    // they are not {, therefore we check if the char are the same
+                    if (c != r)
+                        return false;
+                    cIdx++;
+                    rIdx++; // go to next char
+                    break;
+                default:
+                    // one of them is { and the other is not, we should return false
+                    return false;
+            }
+        }
+
+        return true;
+    }
+
+    /// <summary>
     /// Trim this from the other and return the <see cref="RequestPath"/> that remain.
     /// The result is "other - this" by removing this as a prefix of other.
     /// If this == other, return empty request path
