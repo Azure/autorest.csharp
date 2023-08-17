@@ -282,12 +282,9 @@ namespace AutoRest.CSharp.Output.Builders
                 EscapeXmlDocDescription(schema.Language.Default.Description);
         }
 
-        public static string DisambiguateName(CSharpType type, string name)
+        public static string DisambiguateName(string typeName, string name)
         {
-            if (name == type.Name ||
-                name == nameof(GetHashCode) ||
-                name == nameof(Equals) ||
-                name == nameof(ToString))
+            if (name == typeName || name is nameof(GetHashCode) or nameof(Equals) or nameof(ToString))
             {
                 return name + "Value";
             }

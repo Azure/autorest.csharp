@@ -6,12 +6,10 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
-using System.Xml.Linq;
 using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Common.Output.Builders;
 using AutoRest.CSharp.Common.Output.Models;
 using AutoRest.CSharp.Common.Output.Models.Types;
-using AutoRest.CSharp.Common.Output.Models.ValueExpressions;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Input;
@@ -35,16 +33,17 @@ namespace AutoRest.CSharp.Output.Models.Types
         private readonly IReadOnlyList<InputModelType> _derivedTypes;
         private readonly ObjectType? _defaultDerivedType;
         private readonly ModelTypeMapping? _modelTypeMapping;
+        private readonly InputModelTypeUsage _inputTypeUsage;
         private readonly InputTypeSerialization _inputTypeSerialization;
         private ModelTypeProviderFields? _fields;
 
         protected override string DefaultName { get; }
         protected override string DefaultAccessibility { get; }
         protected override TypeKind TypeKind { get; }
-        public override bool IncludeConverter => _inputModel.Serialization.IncludeConverter;
+        public override bool IncludeConverter => _inputTypeSerialization.IncludeConverter;
         protected override bool IsAbstract => !Configuration.SuppressAbstractBaseClasses.Contains(DefaultName) && _inputModel.DiscriminatorPropertyName is not null && _inputModel.BaseModel is null;
 
-        public ModelTypeProviderFields Fields => _fields ??= new ModelTypeProviderFields(_inputModel, _typeFactory, _modelTypeMapping, IsStruct);
+        public ModelTypeProviderFields Fields => _fields ??= new ModelTypeProviderFields(_inputModel.Properties, Declaration.Name, _inputTypeUsage, _typeFactory, _modelTypeMapping, _inputModel.InheritedDictionaryType, IsStruct);
         public ConstructorSignature InitializationConstructorSignature => _publicConstructor ??= EnsurePublicConstructorSignature();
         public ConstructorSignature SerializationConstructorSignature => _serializationConstructor ??= EnsureSerializationConstructorSignature();
 
@@ -69,12 +68,33 @@ namespace AutoRest.CSharp.Output.Models.Types
             TypeKind = IsStruct ? TypeKind.Struct : TypeKind.Class;
 
             _modelTypeMapping = sourceInputModel?.CreateForModel(ExistingType);
-            _inputTypeSerialization = GetSerializationFormat(inputModel, _modelTypeMapping);
+            _inputTypeUsage = UpdateInputTypeUsage(inputModel, _modelTypeMapping);
+            _inputTypeSerialization = UpdateInputSerialization(inputModel, _modelTypeMapping);
         }
 
-        private static InputTypeSerialization GetSerializationFormat(InputModelType inputModel, ModelTypeMapping? modelTypeMapping)
+        private static InputModelTypeUsage UpdateInputTypeUsage(InputModelType inputModel, ModelTypeMapping? modelTypeMapping)
         {
-            var serializationFormats = inputModel.Serialization;
+            var usage = inputModel.Usage;
+            if (modelTypeMapping?.Usage is {} usageDefinedInSource)
+            {
+                foreach (var schemaTypeUsage in usageDefinedInSource.Select(u => Enum.Parse<SchemaTypeUsage>(u, true)))
+                {
+                    usage |= schemaTypeUsage switch
+                    {
+                        SchemaTypeUsage.Input => InputModelTypeUsage.Input,
+                        SchemaTypeUsage.Output => InputModelTypeUsage.Output,
+                        SchemaTypeUsage.RoundTrip => InputModelTypeUsage.RoundTrip,
+                        _ => InputModelTypeUsage.None
+                    };
+                }
+            }
+
+            return usage;
+        }
+
+        private static InputTypeSerialization UpdateInputSerialization(InputModelType inputModel, ModelTypeMapping? modelTypeMapping)
+        {
+            var serialization = inputModel.Serialization;
 
             if (modelTypeMapping?.Formats is { } formatsDefinedInSource)
             {
@@ -83,16 +103,21 @@ namespace AutoRest.CSharp.Output.Models.Types
                     var mediaType = Enum.Parse<KnownMediaType>(format, true);
                     if (mediaType == KnownMediaType.Json)
                     {
-                        serializationFormats = serializationFormats with {Json = true};
+                        serialization = serialization with {Json = true};
                     }
                     else if (mediaType == KnownMediaType.Xml)
                     {
-                        serializationFormats = serializationFormats with {Xml = new InputTypeXmlSerialization(inputModel.Name, false, false)};
+                        serialization = serialization with {Xml = new InputTypeXmlSerialization(inputModel.Name, false, false)};
                     }
                 }
             }
 
-            return serializationFormats;
+            if (modelTypeMapping?.Usage is {} usage && usage.Contains(nameof(SchemaTypeUsage.Converter), StringComparer.OrdinalIgnoreCase))
+            {
+                serialization = serialization with {IncludeConverter = true};
+            }
+
+            return serialization;
         }
 
         private MethodSignatureModifiers GetFromResponseModifiers()
@@ -139,7 +164,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             var summary = $"Initializes a new instance of {name}";
             var accessibility = IsAbstract
                 ? MethodSignatureModifiers.Protected
-                : _inputModel.Usage.HasFlag(InputModelTypeUsage.Input)
+                : _inputTypeUsage.HasFlag(InputModelTypeUsage.Input)
                     ? MethodSignatureModifiers.Public
                     : MethodSignatureModifiers.Internal;
 
@@ -277,10 +302,14 @@ namespace AutoRest.CSharp.Output.Models.Types
 
         protected override CSharpType? CreateInheritedType()
         {
-            if (_inputModel.BaseModel is not null)
-                return _typeFactory.CreateType(_inputModel.BaseModel!);
+            if (ExistingType?.BaseType is { } sourceBaseType && sourceBaseType.SpecialType != SpecialType.System_ValueType && sourceBaseType.SpecialType != SpecialType.System_Object && _typeFactory.TryCreateType(sourceBaseType, out CSharpType? baseType))
+            {
+                return baseType;
+            }
 
-            return null;
+            return _inputModel.BaseModel is {} baseModel
+                ? _typeFactory.CreateType(baseModel)
+                : null;
         }
 
         protected override IEnumerable<ObjectTypeProperty> BuildProperties()
@@ -306,26 +335,17 @@ namespace AutoRest.CSharp.Output.Models.Types
             return _inputTypeSerialization.Json;
         }
 
-        protected override bool EnsureHasXmlSerialization()
-        {
-            return _inputTypeSerialization.Xml is not null;
-        }
+        protected override bool EnsureHasXmlSerialization() => _inputTypeSerialization.Xml is not null;
 
-        protected override bool EnsureIncludeSerializer()
-        {
-            return _inputModel.Usage.HasFlag(InputModelTypeUsage.Input);
-        }
+        protected override bool EnsureIncludeSerializer() => _inputTypeUsage.HasFlag(InputModelTypeUsage.Input);
 
-        protected override bool EnsureIncludeDeserializer()
-        {
-            return _inputModel.Usage.HasFlag(InputModelTypeUsage.Output);
-        }
+        protected override bool EnsureIncludeDeserializer() => _inputTypeUsage.HasFlag(InputModelTypeUsage.Output);
 
         protected override JsonObjectSerialization EnsureJsonSerialization()
         {
             // Serialization uses field and property names that first need to verified for uniqueness
             // For that, FieldDeclaration instances must be written in the main partial class before JsonObjectSerialization is created for the serialization partial class
-            var properties = SerializationBuilder.GetPropertySerializations(this, _inputModel);
+            var properties = SerializationBuilder.GetPropertySerializations(this, _inputTypeUsage);
             var additionalProperties = CreateAdditionalPropertySerialization();
             return new(Type, SerializationConstructor.Signature.Parameters, properties, additionalProperties, Discriminator, IncludeConverter);
         }

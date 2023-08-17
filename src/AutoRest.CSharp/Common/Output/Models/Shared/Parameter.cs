@@ -19,13 +19,6 @@ namespace AutoRest.CSharp.Output.Models.Shared
         public CSharpAttribute[] Attributes { get; init; } = Array.Empty<CSharpAttribute>();
         public bool IsOptionalInSignature => DefaultValue != null;
 
-        public static Parameter FromModelProperty(in InputModelProperty property, string name, CSharpType propertyType)
-        {
-            // we do not validate a parameter when it is a value type (struct or int, etc), or it is optional, or it it nullable, or it is readonly in DPG (in Legacy Data Plane readonly property require validation)
-            var validation = propertyType.IsValueType || (property.IsReadOnly && !Configuration.Generation1ConvenienceClient) || !property.IsRequired || property.Type.IsNullable ? Validation.None : Validation.AssertNotNull;
-            return new Parameter(name, BuilderHelpers.EscapeXmlDocDescription(property.Description), propertyType, null, validation, null);
-        }
-
         public static Parameter FromInputParameter(in InputParameter operationParameter, CSharpType type, bool keepClientDefaultValue, TypeFactory typeFactory)
         {
             var name = operationParameter.Name.ToVariableName();

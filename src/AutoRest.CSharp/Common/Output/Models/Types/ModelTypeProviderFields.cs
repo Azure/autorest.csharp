@@ -4,8 +4,6 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Generation.Types;
@@ -32,7 +30,7 @@ namespace AutoRest.CSharp.Output.Models.Types
         public int Count => _fields.Count;
         public FieldDeclaration? AdditionalProperties { get; }
 
-        public ModelTypeProviderFields(InputModelType inputModel, TypeFactory typeFactory, ModelTypeMapping? sourceTypeMapping, bool isStruct)
+        public ModelTypeProviderFields(IReadOnlyList<InputModelProperty> properties, string inputModelName, InputModelTypeUsage inputModelUsage, TypeFactory typeFactory, ModelTypeMapping? sourceTypeMapping, InputDictionaryType? additionalPropertiesType, bool isStruct)
         {
             var fields = new List<FieldDeclaration>();
             var fieldsToInputs = new Dictionary<FieldDeclaration, InputModelProperty>();
@@ -41,13 +39,15 @@ namespace AutoRest.CSharp.Output.Models.Types
             var parametersToFields = new Dictionary<string, FieldDeclaration>();
 
             var visitedMembers = new HashSet<ISymbol>(SymbolEqualityComparer.Default);
-            foreach (var inputModelProperty in inputModel.Properties)
+            foreach (var inputModelProperty in properties)
             {
                 var originalFieldName = Configuration.Generation1ConvenienceClient
                     ? inputModelProperty.Name == "null" ? "NullProperty" : inputModelProperty.Name.ToCleanName()
                     : inputModelProperty.Name.ToCleanName();
 
-                var propertyType = GetPropertyDefaultType(inputModel.Usage, inputModelProperty, typeFactory);
+                originalFieldName = BuilderHelpers.DisambiguateName(inputModelName, originalFieldName);
+
+                var propertyType = GetPropertyDefaultType(inputModelUsage, inputModelProperty, typeFactory);
 
                 // We represent property being optional by making it nullable (when it is a value type)
                 // Except in the case of collection where there is a special handling
@@ -59,7 +59,7 @@ namespace AutoRest.CSharp.Output.Models.Types
                 var serialization = sourceTypeMapping?.GetForMemberSerialization(existingMember);
                 var field = existingMember is not null
                     ? CreateFieldFromExisting(existingMember, serialization, propertyType, inputModelProperty, typeFactory, optionalViaNullability)
-                    : CreateField(originalFieldName, propertyType, inputModel, inputModelProperty, optionalViaNullability);
+                    : CreateField(originalFieldName, propertyType, inputModelUsage, inputModelProperty, isStruct, optionalViaNullability);
 
                 if (existingMember is not null)
                 {
@@ -69,7 +69,13 @@ namespace AutoRest.CSharp.Output.Models.Types
                 fields.Add(field);
                 fieldsToInputs[field] = inputModelProperty;
 
-                var parameter = Parameter.FromModelProperty(inputModelProperty, existingMember is IFieldSymbol ? inputModelProperty.Name.ToVariableName() : field.Name.ToVariableName(), field.Type);
+                var parameterName = existingMember is IFieldSymbol ? inputModelProperty.Name.ToVariableName() : field.Name.ToVariableName();
+                // we do not validate a parameter when it is a value type (struct or int, etc), or it is optional, or it it nullable, or it is readonly in DPG (in Legacy Data Plane readonly property require validation)
+                var parameterValidation = field.Type.IsValueType || (inputModelProperty.IsReadOnly && !Configuration.Generation1ConvenienceClient) || !field.IsRequired || field.Type.IsNullable
+                    ? Validation.None
+                    : Validation.AssertNotNull;
+
+                var parameter = new Parameter(parameterName, BuilderHelpers.EscapeXmlDocDescription(inputModelProperty.Description), field.Type, null, parameterValidation, null);
                 parametersToFields[parameter.Name] = field;
                 // all properties should be included in the serialization ctor
                 serializationParameters.Add(parameter with { Validation = Validation.None });
@@ -85,7 +91,7 @@ namespace AutoRest.CSharp.Output.Models.Types
                 }
             }
 
-            if (inputModel.InheritedDictionaryType is {} additionalPropertiesType)
+            if (additionalPropertiesType is not null)
             {
                 // We use a $ prefix here as AdditionalProperties comes from a swagger concept
                 // and not a swagger model/operation name to disambiguate from a possible property with
@@ -93,7 +99,7 @@ namespace AutoRest.CSharp.Output.Models.Types
                 var existingMember = sourceTypeMapping?.GetForMember("$AdditionalProperties")?.ExistingMember;
 
                 var type = typeFactory.CreateType(additionalPropertiesType);
-                if (!inputModel.Usage.HasFlag(InputModelTypeUsage.Input))
+                if (!inputModelUsage.HasFlag(InputModelTypeUsage.Input))
                 {
                     type = TypeFactory.GetOutputType(type);
                 }
@@ -136,9 +142,12 @@ namespace AutoRest.CSharp.Output.Models.Types
                     // the serialization will be generated for this type and it might has issues if the type is not recognized properly.
                     // but customer could always use the `CodeGenMemberSerializationHooks` attribute to override those incorrect serialization/deserialization code.
                     var field = CreateFieldFromExisting(serializationMapping.ExistingMember, serializationMapping, typeof(object), inputModelProperty, typeFactory, false);
+                    var parameter = new Parameter(field.Name.FirstCharToLowerCase(), BuilderHelpers.EscapeXmlDocDescription(inputModelProperty.Description), field.Type, null, Validation.None, null);
+
                     fields.Add(field);
                     fieldsToInputs[field] = inputModelProperty;
-                    serializationParameters.Add(Parameter.FromModelProperty(inputModelProperty, field.Name.FirstCharToLowerCase(), field.Type));
+
+                    serializationParameters.Add(parameter);
                 }
             }
 
@@ -156,20 +165,21 @@ namespace AutoRest.CSharp.Output.Models.Types
         public IEnumerator<FieldDeclaration> GetEnumerator() => _fields.GetEnumerator();
         IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
 
-        private static FieldDeclaration CreateField(string fieldName, CSharpType originalType, InputModelType inputModel, InputModelProperty inputModelProperty, bool optionalViaNullability)
+        private static FieldDeclaration CreateField(string fieldName, CSharpType originalType, InputModelTypeUsage usage, InputModelProperty inputModelProperty, bool isStruct, bool optionalViaNullability)
         {
             var propertyIsCollection = inputModelProperty.Type is InputDictionaryType or InputListType or
                 // This is a temporary work around as we don't convert collection type to InputListType or InputDictionaryType in MPG for now
                 CodeModelType { Schema: ArraySchema or DictionarySchema };
 
-            var propertyIsRequiredInNonRoundTripModel = inputModel.Usage is InputModelTypeUsage.Input or InputModelTypeUsage.Output && inputModelProperty.IsRequired;
-            var propertyIsOptionalInOutputModel = inputModel.Usage is InputModelTypeUsage.Output && !inputModelProperty.IsRequired;
+            var propertyIsRequiredInNonRoundTripModel = usage is InputModelTypeUsage.Input or InputModelTypeUsage.Output && inputModelProperty.IsRequired;
+            var propertyIsOptionalInOutputModel = usage is InputModelTypeUsage.Output && !inputModelProperty.IsRequired;
             var propertyIsConstant = inputModelProperty.ConstantValue is not null;
             var propertyIsDiscriminator = inputModelProperty.IsDiscriminator;
 
-            var propertyShouldOmitSetter = !propertyIsDiscriminator && // if a property is a discriminator, it should always has its setter
-                (inputModelProperty.IsReadOnly || // a property will not have setter when it is readonly
-                (!inputModel.Usage.HasFlag(InputModelTypeUsage.Input) && Configuration.Generation1ConvenienceClient) || // In Legacy DataPlane, non-input models have read-only properties
+            var propertyShouldOmitSetter = !propertyIsDiscriminator && (
+                inputModelProperty.IsReadOnly || // a property will not have setter when it is readonly
+                isStruct || // structs must have all their properties set in constructor
+                (!usage.HasFlag(InputModelTypeUsage.Input) && Configuration.Generation1ConvenienceClient) || // In Legacy DataPlane, non-input models have read-only properties
                 (propertyIsConstant && inputModelProperty.IsRequired) || // a property will not have setter when it is required literal type
                 propertyIsCollection || // a property will not have setter when it is a collection
                 propertyIsRequiredInNonRoundTripModel || // a property will explicitly omit its setter when it is useless
