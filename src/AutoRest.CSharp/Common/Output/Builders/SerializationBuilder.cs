@@ -342,6 +342,11 @@ namespace AutoRest.CSharp.Output.Builders
                 return false;
             }
 
+            if (Configuration.Generation1ConvenienceClient)
+            {
+                return property.InputModelProperty!.IsReadOnly;
+            }
+
             return property.IsReadOnly && inputModelUsage is InputModelTypeUsage.Output;
         }
 
