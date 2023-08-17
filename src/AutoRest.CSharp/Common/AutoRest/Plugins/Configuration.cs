@@ -391,7 +391,7 @@ namespace AutoRest.CSharp.Input
             return autoRest.GetValue<T>(name).GetAwaiter().GetResult() ?? throw new InvalidOperationException($"{name} configuration parameter is required");
         }
 
-        private static string TrimFileSuffix(string path)
+        internal static string TrimFileSuffix(string path)
         {
             if (Uri.IsWellFormedUriString(path, UriKind.Absolute))
             {

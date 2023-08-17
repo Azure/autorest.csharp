@@ -5,8 +5,6 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
-using System.Threading.Tasks;
-using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Input.Source;
 using AutoRest.CSharp.MgmtTest.AutoRest;
@@ -17,20 +15,13 @@ namespace AutoRest.CSharp.AutoRest.Plugins
 {
     internal class MgmtTestTarget
     {
-        public static async Task ExecuteAsync(GeneratedCodeWorkspace project, CodeModel codeModel)
+        public static void Execute(GeneratedCodeWorkspace project, CodeModel codeModel, SourceInputModel sourceInputModel)
         {
             Debug.Assert(codeModel.TestModel is not null);
             Debug.Assert(Configuration.MgmtTestConfiguration is not null);
 
-            var sourceCodePath = GetSourceCodePath();
-            var sourceCodeProject = new SourceCodeProject(sourceCodePath, Configuration.SharedSourceFolders);
-            var sourceInputModel = new SourceInputModel(await sourceCodeProject.GetCompilationAsync());
-
             // construct the MgmtTestOutputLibrary
             var library = new MgmtTestOutputLibrary(codeModel, sourceInputModel);
-
-            // add the files in the source code project into the GeneratedCodeWorkspace so that our Roslyn could know how to simplify them
-            project.AddDirectory(sourceCodePath);
 
             if (Configuration.MgmtTestConfiguration.Mock)
             {
@@ -44,17 +35,24 @@ namespace AutoRest.CSharp.AutoRest.Plugins
 
             if (_overriddenProjectFilenames.TryGetValue(project, out var overriddenFilenames))
                 throw new InvalidOperationException($"At least one file was overridden during the generation process. Filenames are: {string.Join(", ", overriddenFilenames)}");
+
+            if (Configuration.MgmtTestConfiguration.ClearOutputFolder)
+            {
+                ClearTestGenOutputFolder();
+            }
         }
 
         private static void WriteMockTests(GeneratedCodeWorkspace project, MgmtTestOutputLibrary library)
         {
+            string outputFolder = GetTestGenOutputFolder();
+
             // write the collection mock tests
             foreach (var collectionTest in library.ResourceCollectionMockTests)
             {
                 var collectionTestWriter = new ResourceCollectionMockTestWriter(collectionTest);
                 collectionTestWriter.Write();
 
-                AddGeneratedFile(project, $"Mock/{collectionTest.Type.Name}.cs", collectionTestWriter.ToString());
+                AddGeneratedFile(project, Path.Combine(outputFolder, $"Mock/{collectionTest.Type.Name}.cs"), collectionTestWriter.ToString());
             }
 
             foreach (var resourceTest in library.ResourceMockTests)
@@ -62,18 +60,20 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                 var resourceTestWriter = new ResourceMockTestWriter(resourceTest);
                 resourceTestWriter.Write();
 
-                AddGeneratedFile(project, $"Mock/{resourceTest.Type.Name}.cs", resourceTestWriter.ToString());
+                AddGeneratedFile(project, Path.Combine(outputFolder, $"Mock/{resourceTest.Type.Name}.cs"), resourceTestWriter.ToString());
             }
 
             var extensionWrapperTest = library.ExtensionWrapperMockTest;
             var extensionWrapperTestWriter = new ExtensionWrapMockTestWriter(extensionWrapperTest, library.ExtensionMockTests);
             extensionWrapperTestWriter.Write();
 
-            AddGeneratedFile(project, $"Mock/{extensionWrapperTest.Type.Name}.cs", extensionWrapperTestWriter.ToString());
+            AddGeneratedFile(project, Path.Combine(outputFolder, $"Mock/{extensionWrapperTest.Type.Name}.cs"), extensionWrapperTestWriter.ToString());
         }
 
         private static void WriteSamples(GeneratedCodeWorkspace project, MgmtTestOutputLibrary library)
         {
+            string outputFolder = GetTestGenOutputFolder();
+
             var names = new Dictionary<string, int>();
             foreach (var sample in library.Samples)
             {
@@ -81,7 +81,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                 sampleWriter.Write();
 
                 var filename = GetFilename(sample.Type.Name, names);
-                AddGeneratedFile(project, $"Samples/{filename}.cs", sampleWriter.ToString());
+                AddGeneratedFile(project, Path.Combine(outputFolder, $"Samples/{filename}.cs"), sampleWriter.ToString());
             }
         }
 
@@ -97,15 +97,48 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             return name;
         }
 
-        private static string GetSourceCodePath()
+        private static string GetTestGenOutputFolder()
         {
-            if (Configuration.MgmtTestConfiguration?.SourceCodePath != null)
-                return Configuration.MgmtTestConfiguration.SourceCodePath;
+            if (Configuration.MgmtTestConfiguration == null ||
+                string.IsNullOrEmpty(Configuration.MgmtTestConfiguration.OutputFolder))
+                return Configuration.OutputFolder;
+            else
+                return Configuration.MgmtTestConfiguration.OutputFolder;
+        }
 
-            // try to find the sdk source code path according to the default folder structure
-            // Azure.ResourceManager.XXX \ src <- default sdk source folder
-            //                           \ samples \ Generated <- default sample output folder defined in msbuild
-            return Path.Combine(Configuration.OutputFolder, "../../src");
+        private static void ClearTestGenOutputFolder()
+        {
+            if (Configuration.MgmtTestConfiguration == null ||
+                string.IsNullOrEmpty(Configuration.MgmtTestConfiguration.OutputFolder))
+                return;
+            DirectoryInfo di = new DirectoryInfo(Configuration.MgmtTestConfiguration.OutputFolder);
+            ClearFolder(di);
+        }
+
+        private static void ClearFolder(DirectoryInfo di)
+        {
+            if (di.Exists)
+            {
+                foreach (FileInfo fi in di.EnumerateFiles())
+                {
+                    try
+                    {
+                        fi.Delete();
+                    }
+                    // Ignore the error from clearing folder
+                    catch { }
+                }
+                foreach (DirectoryInfo subFolder in di.EnumerateDirectories())
+                {
+                    ClearFolder(subFolder);
+                    try
+                    {
+                        subFolder.Delete();
+                    }
+                    // Ignore the error from clearing folder
+                    catch { }
+                }
+            }
         }
 
         private static IDictionary<GeneratedCodeWorkspace, ISet<string>> _addedProjectFilenames = new Dictionary<GeneratedCodeWorkspace, ISet<string>>();
