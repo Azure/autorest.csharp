@@ -6,7 +6,7 @@
     "@azure-tools/typespec-csharp": "file:src/TypeSpec.Extension/Emitter.Csharp",
     "@azure-tools/cadl-ranch-mockapis": "file:test/CadlRanchMockApis",
     "@microsoft.azure/autorest.testserver": "3.3.24",
-    "autorest": "3.6.1",
+    "autorest": "3.6.3",
     "typescript": "~5.1.3"
   }
 }
