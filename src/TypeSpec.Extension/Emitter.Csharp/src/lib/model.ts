@@ -591,9 +591,12 @@ export function getInputType(
                 // discriminator property cannot be number, but enum support number values
                 // typespec compiler will do the check, but here we do a double check just in case
                 (discriminatorProperty?.type.kind === "EnumMember" &&
-                    typeof discriminatorProperty?.type.value === "string")
+                    typeof discriminatorProperty?.type.value !== "number")
             ) {
-                return String(discriminatorProperty.type.value);
+                return String(
+                    discriminatorProperty.type.value ??
+                        discriminatorProperty.type.name
+                );
             }
         }
 
@@ -795,21 +798,24 @@ export function getUsages(
         const affectTypes: string[] = [];
         if (typeName !== "") {
             affectTypes.push(typeName);
-            if (
-                effectiveType.kind === "Model" &&
-                effectiveType.templateMapper?.args
-            ) {
-                for (const arg of effectiveType.templateMapper.args) {
-                    if (
-                        arg.kind === "Model" &&
-                        "name" in arg &&
-                        arg.name !== ""
-                    ) {
-                        affectTypes.push(
-                            getFriendlyName(program, arg) ?? arg.name
-                        );
+            if (effectiveType.kind === "Model") {
+                if (effectiveType.templateMapper?.args) {
+                    for (const arg of effectiveType.templateMapper.args) {
+                        if (
+                            arg.kind === "Model" &&
+                            "name" in arg &&
+                            arg.name !== ""
+                        ) {
+                            affectTypes.push(
+                                getFriendlyName(program, arg) ?? arg.name
+                            );
+                        }
                     }
                 }
+                /*propagate to sub models and composite models*/
+                affectTypes.push(
+                    ...getAllEffectedModels(effectiveType, new Set<string>())
+                );
             }
         }
 
@@ -826,32 +832,45 @@ export function getUsages(
 
     for (const op of ops) {
         const resourceOperation = getResourceOperation(program, op.operation);
-        if (!op.parameters.bodyParameter && op.parameters.bodyType) {
-            let bodyTypeName = "";
+        if (!op.parameters.body?.parameter && op.parameters.body?.type) {
+            var effectiveBodyType = undefined;
+            var affectedTypes: string[] = [];
             if (resourceOperation) {
-                /* handle resource operation. */
-                bodyTypeName = resourceOperation.resourceType.name;
+                effectiveBodyType = resourceOperation.resourceType;
+                affectedTypes.push(effectiveBodyType.name);
             } else {
-                /* handle spread. */
-                const effectiveBodyType = getEffectiveSchemaType(
+                effectiveBodyType = getEffectiveSchemaType(
                     context,
-                    op.parameters.bodyType
+                    op.parameters.body.type
                 );
                 if (effectiveBodyType.kind === "Model") {
-                    if (effectiveBodyType.name !== "") {
-                        bodyTypeName =
-                            getFriendlyName(program, effectiveBodyType) ??
-                            effectiveBodyType.name;
-                    } else {
-                        bodyTypeName = `${capitalize(
+                    /* handle spread. */
+                    if (effectiveBodyType.name === "") {
+                        effectiveBodyType.name = `${capitalize(
                             op.operation.name
                         )}Request`;
                     }
+                    affectedTypes.push(
+                        getFriendlyName(program, effectiveBodyType) ??
+                            effectiveBodyType.name
+                    );
                 }
             }
-            appendUsage(bodyTypeName, UsageFlags.Input);
+            if (effectiveBodyType.kind === "Model") {
+                /*propagate to sub models and composite models*/
+                affectedTypes.push(
+                    ...getAllEffectedModels(
+                        effectiveBodyType,
+                        new Set<string>()
+                    )
+                );
+            }
+            for (const name of affectedTypes) {
+                appendUsage(name, UsageFlags.Input);
+            }
         }
         /* handle response type usage. */
+        var affectedReturnTypes: string[] = [];
         for (const res of op.responses) {
             const resBody = res.responses[0]?.body;
             if (resBody?.type) {
@@ -874,8 +893,20 @@ export function getUsages(
                             getFriendlyName(program, effectiveReturnType) ??
                             effectiveReturnType.name;
                     }
+                    /*propagate to sub models and composite models*/
+                    if (effectiveReturnType.kind === "Model") {
+                        affectedReturnTypes.push(
+                            ...getAllEffectedModels(
+                                effectiveReturnType,
+                                new Set<string>()
+                            )
+                        );
+                    }
                 }
-                appendUsage(returnType, UsageFlags.Output);
+                affectedReturnTypes.push(returnType);
+                for (const name of affectedReturnTypes) {
+                    appendUsage(name, UsageFlags.Output);
+                }
             }
         }
     }
@@ -916,6 +947,39 @@ export function getUsages(
         if (!value) value = flag;
         else value = value | flag;
         usagesMap.set(name, value);
+    }
+
+    function getAllEffectedModels(
+        model: Model,
+        visited: Set<string>
+    ): string[] {
+        const result: string[] = [];
+        if (
+            (isArrayModelType(program, model) ||
+                isRecordModelType(program, model)) &&
+            model.indexer.value.kind === "Model"
+        ) {
+            result.push(...getAllEffectedModels(model.indexer.value, visited));
+        } else {
+            const name = getFriendlyName(program, model) ?? model.name;
+            if (model.kind !== "Model" || visited.has(name)) return result;
+            result.push(name);
+            visited.add(name);
+            const derivedModels = model.derivedModels;
+            for (const derivedModel of derivedModels) {
+                result.push(
+                    getFriendlyName(program, derivedModel) ?? derivedModel.name
+                );
+                result.push(...getAllEffectedModels(derivedModel, visited));
+            }
+            for (const [_, prop] of model.properties) {
+                if (prop.type.kind === "Model") {
+                    result.push(...getAllEffectedModels(prop.type, visited));
+                }
+            }
+        }
+
+        return result;
     }
 }
 
