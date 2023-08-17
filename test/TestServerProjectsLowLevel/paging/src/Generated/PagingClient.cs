@@ -233,17 +233,16 @@ namespace paging_LowLevel
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="clientRequestId"> The String to use. </param>
         /// <param name="maxresults"> Sets the maximum number of items to return in the response. </param>
         /// <param name="timeout"> Sets the maximum time that the server can spend processing the request, in seconds. The default is 30 seconds. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="AsyncPageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
-        /// <include file="Docs/PagingClient.xml" path="doc/members/member[@name='GetMultiplePagesAsync(string,int?,int?,RequestContext)']/*" />
-        public virtual AsyncPageable<BinaryData> GetMultiplePagesAsync(string clientRequestId, int? maxresults, int? timeout, RequestContext context)
+        /// <include file="Docs/PagingClient.xml" path="doc/members/member[@name='GetMultiplePagesAsync(int?,int?,RequestContext)']/*" />
+        public virtual AsyncPageable<BinaryData> GetMultiplePagesAsync(int? maxresults, int? timeout, RequestContext context)
         {
-            HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetMultiplePagesRequest(clientRequestId, maxresults, timeout, context);
-            HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => CreateGetMultiplePagesNextPageRequest(nextLink, clientRequestId, maxresults, timeout, context);
+            HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetMultiplePagesRequest(maxresults, timeout, context);
+            HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => CreateGetMultiplePagesNextPageRequest(nextLink, maxresults, timeout, context);
             return PageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, (e, o) => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "PagingClient.GetMultiplePages", "values", "nextLink", context);
         }
 
@@ -257,17 +256,16 @@ namespace paging_LowLevel
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="clientRequestId"> The String to use. </param>
         /// <param name="maxresults"> Sets the maximum number of items to return in the response. </param>
         /// <param name="timeout"> Sets the maximum time that the server can spend processing the request, in seconds. The default is 30 seconds. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="Pageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
-        /// <include file="Docs/PagingClient.xml" path="doc/members/member[@name='GetMultiplePages(string,int?,int?,RequestContext)']/*" />
-        public virtual Pageable<BinaryData> GetMultiplePages(string clientRequestId, int? maxresults, int? timeout, RequestContext context)
+        /// <include file="Docs/PagingClient.xml" path="doc/members/member[@name='GetMultiplePages(int?,int?,RequestContext)']/*" />
+        public virtual Pageable<BinaryData> GetMultiplePages(int? maxresults, int? timeout, RequestContext context)
         {
-            HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetMultiplePagesRequest(clientRequestId, maxresults, timeout, context);
-            HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => CreateGetMultiplePagesNextPageRequest(nextLink, clientRequestId, maxresults, timeout, context);
+            HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetMultiplePagesRequest(maxresults, timeout, context);
+            HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => CreateGetMultiplePagesNextPageRequest(nextLink, maxresults, timeout, context);
             return PageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, (e, o) => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "PagingClient.GetMultiplePages", "values", "nextLink", context);
         }
 
@@ -409,17 +407,16 @@ namespace paging_LowLevel
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="clientRequestId"> The String to use. </param>
         /// <param name="maxresults"> Sets the maximum number of items to return in the response. </param>
         /// <param name="timeout"> Sets the maximum time that the server can spend processing the request, in seconds. The default is 30 seconds. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="AsyncPageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
-        /// <include file="Docs/PagingClient.xml" path="doc/members/member[@name='GetOdataMultiplePagesAsync(string,int?,int?,RequestContext)']/*" />
-        public virtual AsyncPageable<BinaryData> GetOdataMultiplePagesAsync(string clientRequestId, int? maxresults, int? timeout, RequestContext context)
+        /// <include file="Docs/PagingClient.xml" path="doc/members/member[@name='GetOdataMultiplePagesAsync(int?,int?,RequestContext)']/*" />
+        public virtual AsyncPageable<BinaryData> GetOdataMultiplePagesAsync(int? maxresults, int? timeout, RequestContext context)
         {
-            HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetOdataMultiplePagesRequest(clientRequestId, maxresults, timeout, context);
-            HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => CreateGetOdataMultiplePagesNextPageRequest(nextLink, clientRequestId, maxresults, timeout, context);
+            HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetOdataMultiplePagesRequest(maxresults, timeout, context);
+            HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => CreateGetOdataMultiplePagesNextPageRequest(nextLink, maxresults, timeout, context);
             return PageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, (e, o) => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "PagingClient.GetOdataMultiplePages", "values", "odata.nextLink", context);
         }
 
@@ -433,17 +430,16 @@ namespace paging_LowLevel
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="clientRequestId"> The String to use. </param>
         /// <param name="maxresults"> Sets the maximum number of items to return in the response. </param>
         /// <param name="timeout"> Sets the maximum time that the server can spend processing the request, in seconds. The default is 30 seconds. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="Pageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
-        /// <include file="Docs/PagingClient.xml" path="doc/members/member[@name='GetOdataMultiplePages(string,int?,int?,RequestContext)']/*" />
-        public virtual Pageable<BinaryData> GetOdataMultiplePages(string clientRequestId, int? maxresults, int? timeout, RequestContext context)
+        /// <include file="Docs/PagingClient.xml" path="doc/members/member[@name='GetOdataMultiplePages(int?,int?,RequestContext)']/*" />
+        public virtual Pageable<BinaryData> GetOdataMultiplePages(int? maxresults, int? timeout, RequestContext context)
         {
-            HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetOdataMultiplePagesRequest(clientRequestId, maxresults, timeout, context);
-            HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => CreateGetOdataMultiplePagesNextPageRequest(nextLink, clientRequestId, maxresults, timeout, context);
+            HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetOdataMultiplePagesRequest(maxresults, timeout, context);
+            HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => CreateGetOdataMultiplePagesNextPageRequest(nextLink, maxresults, timeout, context);
             return PageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, (e, o) => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "PagingClient.GetOdataMultiplePages", "values", "odata.nextLink", context);
         }
 
@@ -458,17 +454,16 @@ namespace paging_LowLevel
         /// </list>
         /// </summary>
         /// <param name="offset"> Offset of return value. </param>
-        /// <param name="clientRequestId"> The String to use. </param>
         /// <param name="maxresults"> Sets the maximum number of items to return in the response. </param>
         /// <param name="timeout"> Sets the maximum time that the server can spend processing the request, in seconds. The default is 30 seconds. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="AsyncPageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
-        /// <include file="Docs/PagingClient.xml" path="doc/members/member[@name='GetMultiplePagesWithOffsetAsync(int,string,int?,int?,RequestContext)']/*" />
-        public virtual AsyncPageable<BinaryData> GetMultiplePagesWithOffsetAsync(int offset, string clientRequestId, int? maxresults, int? timeout, RequestContext context)
+        /// <include file="Docs/PagingClient.xml" path="doc/members/member[@name='GetMultiplePagesWithOffsetAsync(int,int?,int?,RequestContext)']/*" />
+        public virtual AsyncPageable<BinaryData> GetMultiplePagesWithOffsetAsync(int offset, int? maxresults, int? timeout, RequestContext context)
         {
-            HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetMultiplePagesWithOffsetRequest(offset, clientRequestId, maxresults, timeout, context);
-            HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => CreateGetMultiplePagesWithOffsetNextPageRequest(nextLink, offset, clientRequestId, maxresults, timeout, context);
+            HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetMultiplePagesWithOffsetRequest(offset, maxresults, timeout, context);
+            HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => CreateGetMultiplePagesWithOffsetNextPageRequest(nextLink, offset, maxresults, timeout, context);
             return PageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, (e, o) => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "PagingClient.GetMultiplePagesWithOffset", "values", "nextLink", context);
         }
 
@@ -483,17 +478,16 @@ namespace paging_LowLevel
         /// </list>
         /// </summary>
         /// <param name="offset"> Offset of return value. </param>
-        /// <param name="clientRequestId"> The String to use. </param>
         /// <param name="maxresults"> Sets the maximum number of items to return in the response. </param>
         /// <param name="timeout"> Sets the maximum time that the server can spend processing the request, in seconds. The default is 30 seconds. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="Pageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
-        /// <include file="Docs/PagingClient.xml" path="doc/members/member[@name='GetMultiplePagesWithOffset(int,string,int?,int?,RequestContext)']/*" />
-        public virtual Pageable<BinaryData> GetMultiplePagesWithOffset(int offset, string clientRequestId, int? maxresults, int? timeout, RequestContext context)
+        /// <include file="Docs/PagingClient.xml" path="doc/members/member[@name='GetMultiplePagesWithOffset(int,int?,int?,RequestContext)']/*" />
+        public virtual Pageable<BinaryData> GetMultiplePagesWithOffset(int offset, int? maxresults, int? timeout, RequestContext context)
         {
-            HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetMultiplePagesWithOffsetRequest(offset, clientRequestId, maxresults, timeout, context);
-            HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => CreateGetMultiplePagesWithOffsetNextPageRequest(nextLink, offset, clientRequestId, maxresults, timeout, context);
+            HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetMultiplePagesWithOffsetRequest(offset, maxresults, timeout, context);
+            HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => CreateGetMultiplePagesWithOffsetNextPageRequest(nextLink, offset, maxresults, timeout, context);
             return PageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, (e, o) => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "PagingClient.GetMultiplePagesWithOffset", "values", "nextLink", context);
         }
 
@@ -992,21 +986,20 @@ namespace paging_LowLevel
         /// </list>
         /// </summary>
         /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
-        /// <param name="clientRequestId"> The String to use. </param>
         /// <param name="maxresults"> Sets the maximum number of items to return in the response. </param>
         /// <param name="timeout"> Sets the maximum time that the server can spend processing the request, in seconds. The default is 30 seconds. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="Operation{T}"/> from the service that will contain a <see cref="AsyncPageable{T}"/> containing a list of <see cref="BinaryData"/> objects once the asynchronous operation on the service has completed. Details of the body schema for the operation's final value are in the Remarks section below. </returns>
-        /// <include file="Docs/PagingClient.xml" path="doc/members/member[@name='GetMultiplePagesLROAsync(WaitUntil,string,int?,int?,RequestContext)']/*" />
-        public virtual async Task<Operation<AsyncPageable<BinaryData>>> GetMultiplePagesLROAsync(WaitUntil waitUntil, string clientRequestId, int? maxresults, int? timeout, RequestContext context)
+        /// <include file="Docs/PagingClient.xml" path="doc/members/member[@name='GetMultiplePagesLROAsync(WaitUntil,int?,int?,RequestContext)']/*" />
+        public virtual async Task<Operation<AsyncPageable<BinaryData>>> GetMultiplePagesLROAsync(WaitUntil waitUntil, int? maxresults, int? timeout, RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("PagingClient.GetMultiplePagesLRO");
             scope.Start();
             try
             {
-                HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => CreateGetMultiplePagesLRONextPageRequest(nextLink, clientRequestId, maxresults, timeout, context);
-                using HttpMessage message = CreateGetMultiplePagesLRORequest(clientRequestId, maxresults, timeout, context);
+                HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => CreateGetMultiplePagesLRONextPageRequest(nextLink, maxresults, timeout, context);
+                using HttpMessage message = CreateGetMultiplePagesLRORequest(maxresults, timeout, context);
                 return await PageableHelpers.CreateAsyncPageable(waitUntil, message, NextPageRequest, (e, o) => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, OperationFinalStateVia.Location, "PagingClient.GetMultiplePagesLRO", "values", "nextLink", context).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -1027,21 +1020,20 @@ namespace paging_LowLevel
         /// </list>
         /// </summary>
         /// <param name="waitUntil"> <see cref="WaitUntil.Completed"/> if the method should wait to return until the long-running operation has completed on the service; <see cref="WaitUntil.Started"/> if it should return after starting the operation. For more information on long-running operations, please see <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/LongRunningOperations.md"> Azure.Core Long-Running Operation samples</see>. </param>
-        /// <param name="clientRequestId"> The String to use. </param>
         /// <param name="maxresults"> Sets the maximum number of items to return in the response. </param>
         /// <param name="timeout"> Sets the maximum time that the server can spend processing the request, in seconds. The default is 30 seconds. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="Operation{T}"/> from the service that will contain a <see cref="Pageable{T}"/> containing a list of <see cref="BinaryData"/> objects once the asynchronous operation on the service has completed. Details of the body schema for the operation's final value are in the Remarks section below. </returns>
-        /// <include file="Docs/PagingClient.xml" path="doc/members/member[@name='GetMultiplePagesLRO(WaitUntil,string,int?,int?,RequestContext)']/*" />
-        public virtual Operation<Pageable<BinaryData>> GetMultiplePagesLRO(WaitUntil waitUntil, string clientRequestId, int? maxresults, int? timeout, RequestContext context)
+        /// <include file="Docs/PagingClient.xml" path="doc/members/member[@name='GetMultiplePagesLRO(WaitUntil,int?,int?,RequestContext)']/*" />
+        public virtual Operation<Pageable<BinaryData>> GetMultiplePagesLRO(WaitUntil waitUntil, int? maxresults, int? timeout, RequestContext context)
         {
             using var scope = ClientDiagnostics.CreateScope("PagingClient.GetMultiplePagesLRO");
             scope.Start();
             try
             {
-                HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => CreateGetMultiplePagesLRONextPageRequest(nextLink, clientRequestId, maxresults, timeout, context);
-                using HttpMessage message = CreateGetMultiplePagesLRORequest(clientRequestId, maxresults, timeout, context);
+                HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => CreateGetMultiplePagesLRONextPageRequest(nextLink, maxresults, timeout, context);
+                using HttpMessage message = CreateGetMultiplePagesLRORequest(maxresults, timeout, context);
                 return PageableHelpers.CreatePageable(waitUntil, message, NextPageRequest, (e, o) => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, OperationFinalStateVia.Location, "PagingClient.GetMultiplePagesLRO", "values", "nextLink", context);
             }
             catch (Exception e)
@@ -1103,7 +1095,7 @@ namespace paging_LowLevel
             return message;
         }
 
-        internal HttpMessage CreateGetMultiplePagesRequest(string clientRequestId, int? maxresults, int? timeout, RequestContext context)
+        internal HttpMessage CreateGetMultiplePagesRequest(int? maxresults, int? timeout, RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier200);
             var request = message.Request;
@@ -1113,10 +1105,7 @@ namespace paging_LowLevel
             uri.AppendPath("/paging/multiple", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
-            if (clientRequestId != null)
-            {
-                request.Headers.Add("client-request-id", clientRequestId);
-            }
+            request.Headers.Add("client-request-id", message.Request.ClientRequestId);
             if (maxresults != null)
             {
                 request.Headers.Add("maxresults", maxresults.Value);
@@ -1174,7 +1163,7 @@ namespace paging_LowLevel
             return message;
         }
 
-        internal HttpMessage CreateGetOdataMultiplePagesRequest(string clientRequestId, int? maxresults, int? timeout, RequestContext context)
+        internal HttpMessage CreateGetOdataMultiplePagesRequest(int? maxresults, int? timeout, RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier200);
             var request = message.Request;
@@ -1184,10 +1173,7 @@ namespace paging_LowLevel
             uri.AppendPath("/paging/multiple/odata", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
-            if (clientRequestId != null)
-            {
-                request.Headers.Add("client-request-id", clientRequestId);
-            }
+            request.Headers.Add("client-request-id", message.Request.ClientRequestId);
             if (maxresults != null)
             {
                 request.Headers.Add("maxresults", maxresults.Value);
@@ -1199,7 +1185,7 @@ namespace paging_LowLevel
             return message;
         }
 
-        internal HttpMessage CreateGetMultiplePagesWithOffsetRequest(int offset, string clientRequestId, int? maxresults, int? timeout, RequestContext context)
+        internal HttpMessage CreateGetMultiplePagesWithOffsetRequest(int offset, int? maxresults, int? timeout, RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier200);
             var request = message.Request;
@@ -1210,10 +1196,7 @@ namespace paging_LowLevel
             uri.AppendPath(offset, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
-            if (clientRequestId != null)
-            {
-                request.Headers.Add("client-request-id", clientRequestId);
-            }
+            request.Headers.Add("client-request-id", message.Request.ClientRequestId);
             if (maxresults != null)
             {
                 request.Headers.Add("maxresults", maxresults.Value);
@@ -1320,7 +1303,7 @@ namespace paging_LowLevel
             return message;
         }
 
-        internal HttpMessage CreateGetMultiplePagesLRORequest(string clientRequestId, int? maxresults, int? timeout, RequestContext context)
+        internal HttpMessage CreateGetMultiplePagesLRORequest(int? maxresults, int? timeout, RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier202);
             var request = message.Request;
@@ -1330,10 +1313,7 @@ namespace paging_LowLevel
             uri.AppendPath("/paging/multiple/lro", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
-            if (clientRequestId != null)
-            {
-                request.Headers.Add("client-request-id", clientRequestId);
-            }
+            request.Headers.Add("client-request-id", message.Request.ClientRequestId);
             if (maxresults != null)
             {
                 request.Headers.Add("maxresults", maxresults.Value);
@@ -1431,7 +1411,7 @@ namespace paging_LowLevel
             return message;
         }
 
-        internal HttpMessage CreateGetMultiplePagesNextPageRequest(string nextLink, string clientRequestId, int? maxresults, int? timeout, RequestContext context)
+        internal HttpMessage CreateGetMultiplePagesNextPageRequest(string nextLink, int? maxresults, int? timeout, RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier200);
             var request = message.Request;
@@ -1441,10 +1421,7 @@ namespace paging_LowLevel
             uri.AppendRawNextLink(nextLink, false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
-            if (clientRequestId != null)
-            {
-                request.Headers.Add("client-request-id", clientRequestId);
-            }
+            request.Headers.Add("client-request-id", message.Request.ClientRequestId);
             if (maxresults != null)
             {
                 request.Headers.Add("maxresults", maxresults.Value);
@@ -1469,7 +1446,7 @@ namespace paging_LowLevel
             return message;
         }
 
-        internal HttpMessage CreateGetOdataMultiplePagesNextPageRequest(string nextLink, string clientRequestId, int? maxresults, int? timeout, RequestContext context)
+        internal HttpMessage CreateGetOdataMultiplePagesNextPageRequest(string nextLink, int? maxresults, int? timeout, RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier200);
             var request = message.Request;
@@ -1479,10 +1456,7 @@ namespace paging_LowLevel
             uri.AppendRawNextLink(nextLink, false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
-            if (clientRequestId != null)
-            {
-                request.Headers.Add("client-request-id", clientRequestId);
-            }
+            request.Headers.Add("client-request-id", message.Request.ClientRequestId);
             if (maxresults != null)
             {
                 request.Headers.Add("maxresults", maxresults.Value);
@@ -1494,7 +1468,7 @@ namespace paging_LowLevel
             return message;
         }
 
-        internal HttpMessage CreateGetMultiplePagesWithOffsetNextPageRequest(string nextLink, int offset, string clientRequestId, int? maxresults, int? timeout, RequestContext context)
+        internal HttpMessage CreateGetMultiplePagesWithOffsetNextPageRequest(string nextLink, int offset, int? maxresults, int? timeout, RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier200);
             var request = message.Request;
@@ -1504,10 +1478,7 @@ namespace paging_LowLevel
             uri.AppendRawNextLink(nextLink, false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
-            if (clientRequestId != null)
-            {
-                request.Headers.Add("client-request-id", clientRequestId);
-            }
+            request.Headers.Add("client-request-id", message.Request.ClientRequestId);
             if (maxresults != null)
             {
                 request.Headers.Add("maxresults", maxresults.Value);
@@ -1597,7 +1568,7 @@ namespace paging_LowLevel
             return message;
         }
 
-        internal HttpMessage CreateGetMultiplePagesLRONextPageRequest(string nextLink, string clientRequestId, int? maxresults, int? timeout, RequestContext context)
+        internal HttpMessage CreateGetMultiplePagesLRONextPageRequest(string nextLink, int? maxresults, int? timeout, RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier200);
             var request = message.Request;
@@ -1607,10 +1578,7 @@ namespace paging_LowLevel
             uri.AppendRawNextLink(nextLink, false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
-            if (clientRequestId != null)
-            {
-                request.Headers.Add("client-request-id", clientRequestId);
-            }
+            request.Headers.Add("client-request-id", message.Request.ClientRequestId);
             if (maxresults != null)
             {
                 request.Headers.Add("maxresults", maxresults.Value);

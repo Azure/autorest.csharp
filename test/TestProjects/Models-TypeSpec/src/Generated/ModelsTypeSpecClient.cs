@@ -1093,7 +1093,7 @@ namespace ModelsTypeSpec
         {
             RequestContext context = FromCancellationToken(cancellationToken);
             Response response = await AnalyzeConversationAsync(context).ConfigureAwait(false);
-            return Response.FromValue(BaseModelWithDiscriminator.FromResponse(response), response);
+            return Response.FromValue((BaseModelWithDiscriminator)response, response);
         }
 
         /// <summary> Resource collection action operation template. </summary>
@@ -1103,7 +1103,7 @@ namespace ModelsTypeSpec
         {
             RequestContext context = FromCancellationToken(cancellationToken);
             Response response = AnalyzeConversation(context);
-            return Response.FromValue(BaseModelWithDiscriminator.FromResponse(response), response);
+            return Response.FromValue((BaseModelWithDiscriminator)response, response);
         }
 
         /// <summary>
