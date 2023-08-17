@@ -208,7 +208,7 @@ namespace lro_LowLevel
             try
             {
                 using HttpMessage message = CreatePatch201RetryWithAsyncHeaderRequest(content, context);
-                return await ProtocolOperationHelpers.ProcessMessageAsync(_pipeline, message, ClientDiagnostics, "LROsClient.Patch201RetryWithAsyncHeader", OperationFinalStateVia.AzureAsyncOperation, context, waitUntil).ConfigureAwait(false);
+                return await ProtocolOperationHelpers.ProcessMessageAsync(_pipeline, message, ClientDiagnostics, "LROsClient.Patch201RetryWithAsyncHeader", OperationFinalStateVia.Location, context, waitUntil).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -240,7 +240,7 @@ namespace lro_LowLevel
             try
             {
                 using HttpMessage message = CreatePatch201RetryWithAsyncHeaderRequest(content, context);
-                return ProtocolOperationHelpers.ProcessMessage(_pipeline, message, ClientDiagnostics, "LROsClient.Patch201RetryWithAsyncHeader", OperationFinalStateVia.AzureAsyncOperation, context, waitUntil);
+                return ProtocolOperationHelpers.ProcessMessage(_pipeline, message, ClientDiagnostics, "LROsClient.Patch201RetryWithAsyncHeader", OperationFinalStateVia.Location, context, waitUntil);
             }
             catch (Exception e)
             {

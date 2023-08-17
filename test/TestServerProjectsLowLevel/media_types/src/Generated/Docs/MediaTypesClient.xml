@@ -157,6 +157,38 @@ Console.WriteLine(result.ToString());
 ]]></code>
 </example>
     </member>
+    <member name="BodyThreeTypesAsync(RequestContent,ContentType,RequestContext)">
+<example>
+This sample shows how to call BodyThreeTypesAsync with required parameters and request content and parse the result.
+<code><![CDATA[
+var credential = new AzureKeyCredential("<key>");
+var client = new MediaTypesClient(credential);
+
+var data = File.OpenRead("<filePath>");
+
+Response response = await client.BodyThreeTypesAsync(RequestContent.Create(data), ContentType.ApplicationOctetStream);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.ToString());
+]]></code>
+</example>
+    </member>
+    <member name="BodyThreeTypes(RequestContent,ContentType,RequestContext)">
+<example>
+This sample shows how to call BodyThreeTypes with required parameters and request content and parse the result.
+<code><![CDATA[
+var credential = new AzureKeyCredential("<key>");
+var client = new MediaTypesClient(credential);
+
+var data = File.OpenRead("<filePath>");
+
+Response response = client.BodyThreeTypes(RequestContent.Create(data), ContentType.ApplicationOctetStream);
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.ToString());
+]]></code>
+</example>
+    </member>
     <member name="PutTextAndJsonBodyAsync(RequestContent,ContentType,RequestContext)">
 <example>
 This sample shows how to call PutTextAndJsonBodyAsync with required parameters and request content and parse the result.
