@@ -588,7 +588,7 @@ namespace AutoRest.CSharp.Output.Models
         private record ReturnTypeChain(CSharpType Convenience, CSharpType Protocol, CSharpType? ConvenienceResponseType);
 
         private record ParameterChain(Parameter? Convenience, Parameter? Protocol, Parameter? CreateMessage, bool IsSpreadParameter = false);
-        
+
         internal record ConvenienceMethodGenerationInfo()
         {
             public bool IsConvenienceMethodGenerated { get; init; } = false;
