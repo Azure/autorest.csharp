@@ -1,6 +1,7 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
+using System.Collections.Immutable;
 using System.Threading.Tasks;
 using AutoRest.CSharp.Common.Generation.Writers;
 using AutoRest.CSharp.Common.Input;
@@ -64,6 +65,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             }
 
             await project.PostProcessAsync(new PostProcessor(
+                modelsToKeep: library.AccessOverrideModels.ToImmutableHashSet(),
                 modelFactoryFullName: modelFactoryProvider?.FullName,
                 aspExtensionClassName: library.AspDotNetExtension.FullName));
         }

@@ -27,6 +27,8 @@ namespace AutoRest.CSharp.Output.Models.Types
         public IReadOnlyList<LowLevelClient> RestClients { get; }
         public ClientOptionsTypeProvider ClientOptions { get; }
         public IEnumerable<TypeProvider> AllModels => new List<TypeProvider>(_enums.Values).Concat(_models.Values);
+        public IEnumerable<string> AccessOverrideModels => Enums.Where(e => e.IsAccessibilityOverride).Select(e => e.Declaration.Name)
+            .Concat(Models.Where(m => m.IsAccessibilityOverride).Select(m => m.Declaration.Name));
 
         public DpgOutputLibrary(string libraryName, IReadOnlyDictionary<InputEnumType, EnumType> enums, IReadOnlyDictionary<InputModelType, ModelTypeProvider> models, IReadOnlyList<LowLevelClient> restClients, ClientOptionsTypeProvider clientOptions, bool isTspInput, SourceInputModel? sourceInputModel)
         {
