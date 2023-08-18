@@ -161,7 +161,7 @@ namespace AutoRest.CSharp.Common.Input.Examples
 
                     var exampleValue = BuildExampleValue(property.Type, property.SerializedName);
 
-                    dict.Add(property.SerializedName ?? throw new InvalidOperationException($"Serialized name of property {property.Name} in model {model.Name} is null"), exampleValue);
+                    dict.Add(property.SerializedName, exampleValue);
                 }
             }
 
