@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
+using System.Net.NetworkInformation;
 using System.Threading.Tasks;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Input.Source;
@@ -154,15 +155,14 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             if (!string.IsNullOrEmpty(Configuration.MgmtTestConfiguration?.OutputFolder))
                 return Configuration.MgmtTestConfiguration.OutputFolder;
 
-            string defaultFolder = Path.GetFullPath(Configuration.OutputFolder);
+            string folder = FormatPath(Configuration.OutputFolder);
             // if the output folder is not given explicitly, try to figure it out from general output folder if possible according to default folder structure:
             // Azure.ResourceManager.XXX \ src \ Generated <- default sdk source output folder
             //                           \ samples(or tests) \ Generated <- default sample output folder defined in msbuild
-            string normalizedFolder = defaultFolder.Trim('/', '\\').Replace('\\', '/');
-            if (normalizedFolder.EndsWith(SOURCE_DEFAULT_OUTPUT_PATH, StringComparison.InvariantCultureIgnoreCase))
-                return Path.Combine(defaultFolder, $"../..", defaultOutputPath);
-            else if (normalizedFolder.EndsWith(SAMPLE_DEFAULT_OUTPUT_PATH, StringComparison.InvariantCultureIgnoreCase) || normalizedFolder.EndsWith(MOCK_TEST_DEFAULT_OUTPUT_PATH, StringComparison.InvariantCultureIgnoreCase))
-                return defaultFolder;
+            if (folder.EndsWith(SOURCE_DEFAULT_OUTPUT_PATH, StringComparison.InvariantCultureIgnoreCase))
+                return FormatPath(Path.Combine(folder, $"../..", defaultOutputPath));
+            else if (folder.EndsWith(SAMPLE_DEFAULT_OUTPUT_PATH, StringComparison.InvariantCultureIgnoreCase) || folder.EndsWith(MOCK_TEST_DEFAULT_OUTPUT_PATH, StringComparison.InvariantCultureIgnoreCase))
+                return folder;
             else
                 throw new InvalidOperationException("'sample-gen.output-folder' is not configured and can't figure it out from give general output-folder");
         }
@@ -172,24 +172,32 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             if (!string.IsNullOrEmpty(Configuration.MgmtTestConfiguration?.SourceCodePath))
                 return Configuration.MgmtTestConfiguration.SourceCodePath;
 
+            string folder = FormatPath(Configuration.OutputFolder);
+            string testFolder = FormatPath(Configuration.MgmtTestConfiguration?.OutputFolder);
+
             if (!string.IsNullOrEmpty(Configuration.MgmtTestConfiguration?.OutputFolder) &&
-               !string.Equals(Configuration.OutputFolder, Configuration.MgmtTestConfiguration.OutputFolder))
+               !string.Equals(folder, testFolder, StringComparison.InvariantCultureIgnoreCase))
             {
                 // if the general output folder and our output folder is different, the general output folder should point to the sdk code folder src\Generated
-                return Path.Combine(Configuration.OutputFolder, "..");
+                return FormatPath(Path.Combine(Configuration.OutputFolder, ".."));
             }
 
-            string defaultFolder = Path.GetFullPath(Configuration.OutputFolder);
             // if only the general output folder is given or it's the same as our output folder. Let's try to figure it out from given output folder if possible according to default folder structure:
             // Azure.ResourceManager.XXX \ src <- default sdk source folder
             //                           \ samples(or tests) \ Generated <- default sample output folder defined in msbuild
-            string normalizedFolder = defaultFolder.Trim('/', '\\').Replace('\\', '/');
-            if (normalizedFolder.EndsWith(SOURCE_DEFAULT_OUTPUT_PATH, StringComparison.InvariantCultureIgnoreCase))
-                return Path.Combine(defaultFolder, "..");
-            else if (normalizedFolder.EndsWith(SAMPLE_DEFAULT_OUTPUT_PATH, StringComparison.InvariantCultureIgnoreCase) || normalizedFolder.EndsWith(MOCK_TEST_DEFAULT_OUTPUT_PATH, StringComparison.InvariantCultureIgnoreCase))
-                return Path.Combine(defaultFolder, "../..", SOURCE_DEFAULT_FOLDER_NAME);
+            if (folder.EndsWith(SOURCE_DEFAULT_OUTPUT_PATH, StringComparison.InvariantCultureIgnoreCase))
+                return FormatPath(Path.Combine(folder, ".."));
+            else if (folder.EndsWith(SAMPLE_DEFAULT_OUTPUT_PATH, StringComparison.InvariantCultureIgnoreCase) || folder.EndsWith(MOCK_TEST_DEFAULT_OUTPUT_PATH, StringComparison.InvariantCultureIgnoreCase))
+                return FormatPath(Path.Combine(folder, "../..", SOURCE_DEFAULT_FOLDER_NAME));
             else
                 throw new InvalidOperationException("'sample-gen.source-path' is not configured and can't figure it out from give output-folder and sample-gen.output-folder");
+        }
+
+        private static string FormatPath(string? path)
+        {
+            if (string.IsNullOrEmpty(path))
+                return path ?? "";
+            return Path.GetFullPath(path.TrimEnd('/', '\\')).Replace("\\", "/");
         }
 
         private static IDictionary<GeneratedCodeWorkspace, ISet<string>> _addedProjectFilenames = new Dictionary<GeneratedCodeWorkspace, ISet<string>>();

@@ -11364,7 +11364,7 @@ operationGroups:
                 resourceGroupName: sample-resource-group
                 subscriptionId: 00000000-0000-0000-0000-000000000000
                 vaultName: sample-vault
-              x-ms-original-file: file:///C:/git/rodgefu/autorest.csharp2/test/TestProjects/MgmtMockAndSample/specification/mockSwagger/examples/createVault.json
+              x-ms-original-file: file:///c:/git/rodgefu/autorest.csharp2/test/TestProjects/MgmtMockAndSample/specification/mockSwagger/examples/createVault.json
               responses:
                 '200':
                   body:
@@ -11564,7 +11564,7 @@ operationGroups:
                 resourceGroupName: sample-resource-group
                 subscriptionId: 00000000-0000-0000-0000-000000000000
                 vaultName: sample-vault
-              x-ms-original-file: file:///C:/git/rodgefu/autorest.csharp2/test/TestProjects/MgmtMockAndSample/specification/mockSwagger/examples/createVaultWithNetworkAcls.json
+              x-ms-original-file: file:///c:/git/rodgefu/autorest.csharp2/test/TestProjects/MgmtMockAndSample/specification/mockSwagger/examples/createVaultWithNetworkAcls.json
               responses:
                 '200':
                   body:
@@ -11845,7 +11845,7 @@ operationGroups:
                 resourceGroupName: sample-resource-group
                 subscriptionId: 00000000-0000-0000-0000-000000000000
                 vaultName: sample-vault
-              x-ms-original-file: file:///C:/git/rodgefu/autorest.csharp2/test/TestProjects/MgmtMockAndSample/specification/mockSwagger/examples/updateVault.json
+              x-ms-original-file: file:///c:/git/rodgefu/autorest.csharp2/test/TestProjects/MgmtMockAndSample/specification/mockSwagger/examples/updateVault.json
               responses:
                 '200':
                   body:
@@ -12126,7 +12126,7 @@ operationGroups:
                 resourceGroupName: sample-resource-group
                 subscriptionId: 00000000-0000-0000-0000-000000000000
                 vaultName: sample-vault
-              x-ms-original-file: file:///C:/git/rodgefu/autorest.csharp2/test/TestProjects/MgmtMockAndSample/specification/mockSwagger/examples/deleteVault.json
+              x-ms-original-file: file:///c:/git/rodgefu/autorest.csharp2/test/TestProjects/MgmtMockAndSample/specification/mockSwagger/examples/deleteVault.json
               responses:
                 '200':
                   headers: &ref_793 {}
@@ -12247,7 +12247,7 @@ operationGroups:
                 resourceGroupName: sample-resource-group
                 subscriptionId: 00000000-0000-0000-0000-000000000000
                 vaultName: sample-vault
-              x-ms-original-file: file:///C:/git/rodgefu/autorest.csharp2/test/TestProjects/MgmtMockAndSample/specification/mockSwagger/examples/getVault.json
+              x-ms-original-file: file:///c:/git/rodgefu/autorest.csharp2/test/TestProjects/MgmtMockAndSample/specification/mockSwagger/examples/getVault.json
               responses:
                 '200':
                   body:
@@ -12435,7 +12435,7 @@ operationGroups:
                 resourceGroupName: sample-resource-group
                 subscriptionId: 00000000-0000-0000-0000-000000000000
                 vaultName: sample-vault
-              x-ms-original-file: file:///C:/git/rodgefu/autorest.csharp2/test/TestProjects/MgmtMockAndSample/specification/mockSwagger/examples/listKeysOnVault.json
+              x-ms-original-file: file:///c:/git/rodgefu/autorest.csharp2/test/TestProjects/MgmtMockAndSample/specification/mockSwagger/examples/listKeysOnVault.json
               responses:
                 '200':
                   body:
@@ -12559,7 +12559,7 @@ operationGroups:
                 resourceGroupName: sample-resource-group
                 subscriptionId: 00000000-0000-0000-0000-000000000000
                 vaultName: sample-vault
-              x-ms-original-file: file:///C:/git/rodgefu/autorest.csharp2/test/TestProjects/MgmtMockAndSample/specification/mockSwagger/examples/validateVault.json
+              x-ms-original-file: file:///c:/git/rodgefu/autorest.csharp2/test/TestProjects/MgmtMockAndSample/specification/mockSwagger/examples/validateVault.json
               responses:
                 '200':
                   body:
@@ -12682,7 +12682,7 @@ operationGroups:
                 resourceGroupName: sample-resource-group
                 subscriptionId: 00000000-0000-0000-0000-000000000000
                 vaultName: sample-vault
-              x-ms-original-file: file:///C:/git/rodgefu/autorest.csharp2/test/TestProjects/MgmtMockAndSample/specification/mockSwagger/examples/disableVault.json
+              x-ms-original-file: file:///c:/git/rodgefu/autorest.csharp2/test/TestProjects/MgmtMockAndSample/specification/mockSwagger/examples/disableVault.json
               responses:
                 '200': {}
         language: !Languages 
@@ -12870,7 +12870,7 @@ operationGroups:
                 resourceGroupName: sample-group
                 subscriptionId: 00000000-0000-0000-0000-000000000000
                 vaultName: sample-vault
-              x-ms-original-file: file:///C:/git/rodgefu/autorest.csharp2/test/TestProjects/MgmtMockAndSample/specification/mockSwagger/examples/updateAccessPoliciesAdd.json
+              x-ms-original-file: file:///c:/git/rodgefu/autorest.csharp2/test/TestProjects/MgmtMockAndSample/specification/mockSwagger/examples/updateAccessPoliciesAdd.json
               responses:
                 '200':
                   body:
@@ -13016,7 +13016,7 @@ operationGroups:
                 api-version: '2021-10-01'
                 resourceGroupName: sample-group
                 subscriptionId: 00000000-0000-0000-0000-000000000000
-              x-ms-original-file: file:///C:/git/rodgefu/autorest.csharp2/test/TestProjects/MgmtMockAndSample/specification/mockSwagger/examples/listVaultByResourceGroup.json
+              x-ms-original-file: file:///c:/git/rodgefu/autorest.csharp2/test/TestProjects/MgmtMockAndSample/specification/mockSwagger/examples/listVaultByResourceGroup.json
               responses:
                 '200':
                   body:
@@ -13195,7 +13195,7 @@ operationGroups:
                 $top: 1
                 api-version: '2021-10-01'
                 subscriptionId: 00000000-0000-0000-0000-000000000000
-              x-ms-original-file: file:///C:/git/rodgefu/autorest.csharp2/test/TestProjects/MgmtMockAndSample/specification/mockSwagger/examples/listVaultBySubscription.json
+              x-ms-original-file: file:///c:/git/rodgefu/autorest.csharp2/test/TestProjects/MgmtMockAndSample/specification/mockSwagger/examples/listVaultBySubscription.json
               responses:
                 '200':
                   body:
@@ -13362,7 +13362,7 @@ operationGroups:
                 $top: 1
                 api-version: '2021-10-01'
                 subscriptionId: 00000000-0000-0000-0000-000000000000
-              x-ms-original-file: file:///C:/git/rodgefu/autorest.csharp2/test/TestProjects/MgmtMockAndSample/specification/mockSwagger/examples/listDeletedVaults.json
+              x-ms-original-file: file:///c:/git/rodgefu/autorest.csharp2/test/TestProjects/MgmtMockAndSample/specification/mockSwagger/examples/listDeletedVaults.json
               responses:
                 '200':
                   body:
@@ -13498,7 +13498,7 @@ operationGroups:
                 location: westus
                 subscriptionId: 00000000-0000-0000-0000-000000000000
                 vaultName: sample-vault
-              x-ms-original-file: file:///C:/git/rodgefu/autorest.csharp2/test/TestProjects/MgmtMockAndSample/specification/mockSwagger/examples/getDeletedVault.json
+              x-ms-original-file: file:///c:/git/rodgefu/autorest.csharp2/test/TestProjects/MgmtMockAndSample/specification/mockSwagger/examples/getDeletedVault.json
               responses:
                 '200':
                   body:
@@ -13633,7 +13633,7 @@ operationGroups:
                 location: westus
                 subscriptionId: 00000000-0000-0000-0000-000000000000
                 vaultName: sample-vault
-              x-ms-original-file: file:///C:/git/rodgefu/autorest.csharp2/test/TestProjects/MgmtMockAndSample/specification/mockSwagger/examples/purgeDeletedVault.json
+              x-ms-original-file: file:///c:/git/rodgefu/autorest.csharp2/test/TestProjects/MgmtMockAndSample/specification/mockSwagger/examples/purgeDeletedVault.json
               responses:
                 '200':
                   headers: &ref_881 {}
@@ -13761,7 +13761,7 @@ operationGroups:
                 vaultName:
                   name: sample-vault
                   type: Microsoft.KeyVault/vaults
-              x-ms-original-file: file:///C:/git/rodgefu/autorest.csharp2/test/TestProjects/MgmtMockAndSample/specification/mockSwagger/examples/checkVaultNameAvailability.json
+              x-ms-original-file: file:///c:/git/rodgefu/autorest.csharp2/test/TestProjects/MgmtMockAndSample/specification/mockSwagger/examples/checkVaultNameAvailability.json
               responses:
                 '200':
                   body:
@@ -13912,7 +13912,7 @@ operationGroups:
                 resourceGroupName: sample-group
                 subscriptionId: 00000000-0000-0000-0000-000000000000
                 vaultName: sample-vault
-              x-ms-original-file: file:///C:/git/rodgefu/autorest.csharp2/test/TestProjects/MgmtMockAndSample/specification/mockSwagger/examples/getPrivateEndpointConnection.json
+              x-ms-original-file: file:///c:/git/rodgefu/autorest.csharp2/test/TestProjects/MgmtMockAndSample/specification/mockSwagger/examples/getPrivateEndpointConnection.json
               responses:
                 '200':
                   body:
@@ -14111,7 +14111,7 @@ operationGroups:
                 resourceGroupName: sample-group
                 subscriptionId: 00000000-0000-0000-0000-000000000000
                 vaultName: sample-vault
-              x-ms-original-file: file:///C:/git/rodgefu/autorest.csharp2/test/TestProjects/MgmtMockAndSample/specification/mockSwagger/examples/putPrivateEndpointConnection.json
+              x-ms-original-file: file:///c:/git/rodgefu/autorest.csharp2/test/TestProjects/MgmtMockAndSample/specification/mockSwagger/examples/putPrivateEndpointConnection.json
               responses:
                 '200':
                   body:
@@ -14289,7 +14289,7 @@ operationGroups:
                 resourceGroupName: sample-group
                 subscriptionId: 00000000-0000-0000-0000-000000000000
                 vaultName: sample-vault
-              x-ms-original-file: file:///C:/git/rodgefu/autorest.csharp2/test/TestProjects/MgmtMockAndSample/specification/mockSwagger/examples/deletePrivateEndpointConnection.json
+              x-ms-original-file: file:///c:/git/rodgefu/autorest.csharp2/test/TestProjects/MgmtMockAndSample/specification/mockSwagger/examples/deletePrivateEndpointConnection.json
               responses:
                 '200':
                   body:
@@ -14419,7 +14419,7 @@ operationGroups:
                 resourceGroupName: sample-group
                 subscriptionId: 00000000-0000-0000-0000-000000000000
                 vaultName: sample-vault
-              x-ms-original-file: file:///C:/git/rodgefu/autorest.csharp2/test/TestProjects/MgmtMockAndSample/specification/mockSwagger/examples/listPrivateEndpointConnection.json
+              x-ms-original-file: file:///c:/git/rodgefu/autorest.csharp2/test/TestProjects/MgmtMockAndSample/specification/mockSwagger/examples/listPrivateEndpointConnection.json
               responses:
                 '200':
                   body:
@@ -14576,7 +14576,7 @@ operationGroups:
                 resourceGroupName: sample-group
                 subscriptionId: 00000000-0000-0000-0000-000000000000
                 vaultName: sample-vault
-              x-ms-original-file: file:///C:/git/rodgefu/autorest.csharp2/test/TestProjects/MgmtMockAndSample/specification/mockSwagger/examples/listPrivateLinkResources.json
+              x-ms-original-file: file:///c:/git/rodgefu/autorest.csharp2/test/TestProjects/MgmtMockAndSample/specification/mockSwagger/examples/listPrivateLinkResources.json
               responses:
                 '200':
                   body:
@@ -14727,7 +14727,7 @@ operationGroups:
                 publisherName: aaaaaaaaaaaaaaaaaaaa
                 subscriptionId: '{subscription-id}'
                 version: aaaaaaaaaaaaaa
-              x-ms-original-file: file:///C:/git/rodgefu/autorest.csharp2/test/TestProjects/MgmtMockAndSample/specification/mockSwagger/examples/virtualMachineExtensionImageExamples/VirtualMachineExtensionImages_Get_MaximumSet_Gen.json
+              x-ms-original-file: file:///c:/git/rodgefu/autorest.csharp2/test/TestProjects/MgmtMockAndSample/specification/mockSwagger/examples/virtualMachineExtensionImageExamples/VirtualMachineExtensionImages_Get_MaximumSet_Gen.json
               responses:
                 '200':
                   body:
@@ -14751,7 +14751,7 @@ operationGroups:
                 publisherName: aaaaaaaaaaaaaaaaaaaaaaaaaa
                 subscriptionId: '{subscription-id}'
                 version: aaa
-              x-ms-original-file: file:///C:/git/rodgefu/autorest.csharp2/test/TestProjects/MgmtMockAndSample/specification/mockSwagger/examples/virtualMachineExtensionImageExamples/VirtualMachineExtensionImages_Get_MinimumSet_Gen.json
+              x-ms-original-file: file:///c:/git/rodgefu/autorest.csharp2/test/TestProjects/MgmtMockAndSample/specification/mockSwagger/examples/virtualMachineExtensionImageExamples/VirtualMachineExtensionImages_Get_MinimumSet_Gen.json
               responses:
                 '200':
                   body:
@@ -14858,7 +14858,7 @@ operationGroups:
                 location: aaaaaaaaaaaaaaaaaaaaaaaaaa
                 publisherName: aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
                 subscriptionId: '{subscription-id}'
-              x-ms-original-file: file:///C:/git/rodgefu/autorest.csharp2/test/TestProjects/MgmtMockAndSample/specification/mockSwagger/examples/virtualMachineExtensionImageExamples/VirtualMachineExtensionImages_ListTypes_MaximumSet_Gen.json
+              x-ms-original-file: file:///c:/git/rodgefu/autorest.csharp2/test/TestProjects/MgmtMockAndSample/specification/mockSwagger/examples/virtualMachineExtensionImageExamples/VirtualMachineExtensionImages_ListTypes_MaximumSet_Gen.json
               responses:
                 '200':
                   body:
@@ -14880,7 +14880,7 @@ operationGroups:
                 location: aaaa
                 publisherName: aa
                 subscriptionId: '{subscription-id}'
-              x-ms-original-file: file:///C:/git/rodgefu/autorest.csharp2/test/TestProjects/MgmtMockAndSample/specification/mockSwagger/examples/virtualMachineExtensionImageExamples/VirtualMachineExtensionImages_ListTypes_MinimumSet_Gen.json
+              x-ms-original-file: file:///c:/git/rodgefu/autorest.csharp2/test/TestProjects/MgmtMockAndSample/specification/mockSwagger/examples/virtualMachineExtensionImageExamples/VirtualMachineExtensionImages_ListTypes_MinimumSet_Gen.json
               responses:
                 '200':
                   body:
@@ -15040,7 +15040,7 @@ operationGroups:
                 location: aaaaaaaaaaaaaaaaaaaaaaaaaa
                 publisherName: aaaaaaaaaaaaaaaaaaaa
                 subscriptionId: '{subscription-id}'
-              x-ms-original-file: file:///C:/git/rodgefu/autorest.csharp2/test/TestProjects/MgmtMockAndSample/specification/mockSwagger/examples/virtualMachineExtensionImageExamples/VirtualMachineExtensionImages_ListVersions_MaximumSet_Gen.json
+              x-ms-original-file: file:///c:/git/rodgefu/autorest.csharp2/test/TestProjects/MgmtMockAndSample/specification/mockSwagger/examples/virtualMachineExtensionImageExamples/VirtualMachineExtensionImages_ListVersions_MaximumSet_Gen.json
               responses:
                 '200':
                   body:
@@ -15063,7 +15063,7 @@ operationGroups:
                 location: aaaaaaaaa
                 publisherName: aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
                 subscriptionId: '{subscription-id}'
-              x-ms-original-file: file:///C:/git/rodgefu/autorest.csharp2/test/TestProjects/MgmtMockAndSample/specification/mockSwagger/examples/virtualMachineExtensionImageExamples/VirtualMachineExtensionImages_ListVersions_MinimumSet_Gen.json
+              x-ms-original-file: file:///c:/git/rodgefu/autorest.csharp2/test/TestProjects/MgmtMockAndSample/specification/mockSwagger/examples/virtualMachineExtensionImageExamples/VirtualMachineExtensionImages_ListVersions_MinimumSet_Gen.json
               responses:
                 '200':
                   body:
@@ -15234,7 +15234,7 @@ operationGroups:
                 diskEncryptionSetName: myDiskEncryptionSet
                 resourceGroupName: myResourceGroup
                 subscriptionId: '{subscription-id}'
-              x-ms-original-file: file:///C:/git/rodgefu/autorest.csharp2/test/TestProjects/MgmtMockAndSample/specification/mockSwagger/examples/diskEncryptionSetExamples/DiskEncryptionSet_Create_WithKeyVaultFromADifferentSubscription.json
+              x-ms-original-file: file:///c:/git/rodgefu/autorest.csharp2/test/TestProjects/MgmtMockAndSample/specification/mockSwagger/examples/diskEncryptionSetExamples/DiskEncryptionSet_Create_WithKeyVaultFromADifferentSubscription.json
               responses:
                 '200':
                   body:
@@ -15275,7 +15275,7 @@ operationGroups:
                 diskEncryptionSetName: myDiskEncryptionSet
                 resourceGroupName: myResourceGroup
                 subscriptionId: '{subscription-id}'
-              x-ms-original-file: file:///C:/git/rodgefu/autorest.csharp2/test/TestProjects/MgmtMockAndSample/specification/mockSwagger/examples/diskEncryptionSetExamples/DiskEncryptionSet_Create_WithKeyVaultFromADifferentTenant.json
+              x-ms-original-file: file:///c:/git/rodgefu/autorest.csharp2/test/TestProjects/MgmtMockAndSample/specification/mockSwagger/examples/diskEncryptionSetExamples/DiskEncryptionSet_Create_WithKeyVaultFromADifferentTenant.json
               responses:
                 '200':
                   body:
@@ -15321,7 +15321,7 @@ operationGroups:
                 diskEncryptionSetName: myDiskEncryptionSet
                 resourceGroupName: myResourceGroup
                 subscriptionId: '{subscription-id}'
-              x-ms-original-file: file:///C:/git/rodgefu/autorest.csharp2/test/TestProjects/MgmtMockAndSample/specification/mockSwagger/examples/diskEncryptionSetExamples/DiskEncryptionSet_Create.json
+              x-ms-original-file: file:///c:/git/rodgefu/autorest.csharp2/test/TestProjects/MgmtMockAndSample/specification/mockSwagger/examples/diskEncryptionSetExamples/DiskEncryptionSet_Create.json
               responses:
                 '200':
                   body:
@@ -15505,7 +15505,7 @@ operationGroups:
                 diskEncryptionSetName: myDiskEncryptionSet
                 resourceGroupName: myResourceGroup
                 subscriptionId: '{subscription-id}'
-              x-ms-original-file: file:///C:/git/rodgefu/autorest.csharp2/test/TestProjects/MgmtMockAndSample/specification/mockSwagger/examples/diskEncryptionSetExamples/DiskEncryptionSet_Update_WithRotationToLatestKeyVersionEnabled.json
+              x-ms-original-file: file:///c:/git/rodgefu/autorest.csharp2/test/TestProjects/MgmtMockAndSample/specification/mockSwagger/examples/diskEncryptionSetExamples/DiskEncryptionSet_Update_WithRotationToLatestKeyVersionEnabled.json
               responses:
                 '200':
                   body:
@@ -15551,7 +15551,7 @@ operationGroups:
                 diskEncryptionSetName: myDiskEncryptionSet
                 resourceGroupName: myResourceGroup
                 subscriptionId: '{subscription-id}'
-              x-ms-original-file: file:///C:/git/rodgefu/autorest.csharp2/test/TestProjects/MgmtMockAndSample/specification/mockSwagger/examples/diskEncryptionSetExamples/DiskEncryptionSet_Update_WithRotationToLatestKeyVersionEnabledInProgress.json
+              x-ms-original-file: file:///c:/git/rodgefu/autorest.csharp2/test/TestProjects/MgmtMockAndSample/specification/mockSwagger/examples/diskEncryptionSetExamples/DiskEncryptionSet_Update_WithRotationToLatestKeyVersionEnabledInProgress.json
               responses:
                 '200':
                   body:
@@ -15601,7 +15601,7 @@ operationGroups:
                 diskEncryptionSetName: myDiskEncryptionSet
                 resourceGroupName: myResourceGroup
                 subscriptionId: '{subscription-id}'
-              x-ms-original-file: file:///C:/git/rodgefu/autorest.csharp2/test/TestProjects/MgmtMockAndSample/specification/mockSwagger/examples/diskEncryptionSetExamples/DiskEncryptionSet_Update.json
+              x-ms-original-file: file:///c:/git/rodgefu/autorest.csharp2/test/TestProjects/MgmtMockAndSample/specification/mockSwagger/examples/diskEncryptionSetExamples/DiskEncryptionSet_Update.json
               responses:
                 '200':
                   body:
@@ -15742,7 +15742,7 @@ operationGroups:
                 diskEncryptionSetName: myDiskEncryptionSet
                 resourceGroupName: myResourceGroup
                 subscriptionId: '{subscription-id}'
-              x-ms-original-file: file:///C:/git/rodgefu/autorest.csharp2/test/TestProjects/MgmtMockAndSample/specification/mockSwagger/examples/diskEncryptionSetExamples/DiskEncryptionSet_Get_WithAutoKeyRotationError.json
+              x-ms-original-file: file:///c:/git/rodgefu/autorest.csharp2/test/TestProjects/MgmtMockAndSample/specification/mockSwagger/examples/diskEncryptionSetExamples/DiskEncryptionSet_Get_WithAutoKeyRotationError.json
               responses:
                 '200':
                   body:
@@ -15773,7 +15773,7 @@ operationGroups:
                 diskEncryptionSetName: myDiskEncryptionSet
                 resourceGroupName: myResourceGroup
                 subscriptionId: '{subscription-id}'
-              x-ms-original-file: file:///C:/git/rodgefu/autorest.csharp2/test/TestProjects/MgmtMockAndSample/specification/mockSwagger/examples/diskEncryptionSetExamples/DiskEncryptionSet_Get.json
+              x-ms-original-file: file:///c:/git/rodgefu/autorest.csharp2/test/TestProjects/MgmtMockAndSample/specification/mockSwagger/examples/diskEncryptionSetExamples/DiskEncryptionSet_Get.json
               responses:
                 '200':
                   body:
@@ -15896,7 +15896,7 @@ operationGroups:
                 diskEncryptionSetName: myDiskEncryptionSet
                 resourceGroupName: myResourceGroup
                 subscriptionId: '{subscription-id}'
-              x-ms-original-file: file:///C:/git/rodgefu/autorest.csharp2/test/TestProjects/MgmtMockAndSample/specification/mockSwagger/examples/diskEncryptionSetExamples/DiskEncryptionSet_Delete.json
+              x-ms-original-file: file:///c:/git/rodgefu/autorest.csharp2/test/TestProjects/MgmtMockAndSample/specification/mockSwagger/examples/diskEncryptionSetExamples/DiskEncryptionSet_Delete.json
               responses:
                 '200': {}
                 '202': {}
@@ -15989,7 +15989,7 @@ operationGroups:
                 api-version: '2022-03-02'
                 resourceGroupName: myResourceGroup
                 subscriptionId: '{subscription-id}'
-              x-ms-original-file: file:///C:/git/rodgefu/autorest.csharp2/test/TestProjects/MgmtMockAndSample/specification/mockSwagger/examples/diskEncryptionSetExamples/DiskEncryptionSet_ListByResourceGroup.json
+              x-ms-original-file: file:///c:/git/rodgefu/autorest.csharp2/test/TestProjects/MgmtMockAndSample/specification/mockSwagger/examples/diskEncryptionSetExamples/DiskEncryptionSet_ListByResourceGroup.json
               responses:
                 '200':
                   body:
@@ -16106,7 +16106,7 @@ operationGroups:
               parameters:
                 api-version: '2022-03-02'
                 subscriptionId: '{subscription-id}'
-              x-ms-original-file: file:///C:/git/rodgefu/autorest.csharp2/test/TestProjects/MgmtMockAndSample/specification/mockSwagger/examples/diskEncryptionSetExamples/DiskEncryptionSet_ListBySubscription.json
+              x-ms-original-file: file:///c:/git/rodgefu/autorest.csharp2/test/TestProjects/MgmtMockAndSample/specification/mockSwagger/examples/diskEncryptionSetExamples/DiskEncryptionSet_ListBySubscription.json
               responses:
                 '200':
                   body:
@@ -16355,7 +16355,7 @@ operationGroups:
                     Environment: dogfood
                 resourceGroupName: hsm-group
                 subscriptionId: 00000000-0000-0000-0000-000000000000
-              x-ms-original-file: file:///C:/git/rodgefu/autorest.csharp2/test/TestProjects/MgmtMockAndSample/specification/mockSwagger/examples/ManagedHsm_CreateOrUpdate.json
+              x-ms-original-file: file:///c:/git/rodgefu/autorest.csharp2/test/TestProjects/MgmtMockAndSample/specification/mockSwagger/examples/ManagedHsm_CreateOrUpdate.json
               responses:
                 '200':
                   body:
@@ -16566,7 +16566,7 @@ operationGroups:
                     Slice: A
                 resourceGroupName: hsm-group
                 subscriptionId: 00000000-0000-0000-0000-000000000000
-              x-ms-original-file: file:///C:/git/rodgefu/autorest.csharp2/test/TestProjects/MgmtMockAndSample/specification/mockSwagger/examples/ManagedHsm_Update.json
+              x-ms-original-file: file:///c:/git/rodgefu/autorest.csharp2/test/TestProjects/MgmtMockAndSample/specification/mockSwagger/examples/ManagedHsm_Update.json
               responses:
                 '200':
                   body:
@@ -16744,7 +16744,7 @@ operationGroups:
                 api-version: '2021-10-01'
                 resourceGroupName: hsm-group
                 subscriptionId: 00000000-0000-0000-0000-000000000000
-              x-ms-original-file: file:///C:/git/rodgefu/autorest.csharp2/test/TestProjects/MgmtMockAndSample/specification/mockSwagger/examples/ManagedHsm_Delete.json
+              x-ms-original-file: file:///c:/git/rodgefu/autorest.csharp2/test/TestProjects/MgmtMockAndSample/specification/mockSwagger/examples/ManagedHsm_Delete.json
               responses:
                 '200': {}
                 '202': {}
@@ -16883,7 +16883,7 @@ operationGroups:
                 api-version: '2021-10-01'
                 resourceGroupName: hsm-group
                 subscriptionId: 00000000-0000-0000-0000-000000000000
-              x-ms-original-file: file:///C:/git/rodgefu/autorest.csharp2/test/TestProjects/MgmtMockAndSample/specification/mockSwagger/examples/ManagedHsm_Get.json
+              x-ms-original-file: file:///c:/git/rodgefu/autorest.csharp2/test/TestProjects/MgmtMockAndSample/specification/mockSwagger/examples/ManagedHsm_Get.json
               responses:
                 '200':
                   body:
@@ -17026,7 +17026,7 @@ operationGroups:
                 api-version: '2021-10-01'
                 resourceGroupName: hsm-group
                 subscriptionId: 00000000-0000-0000-0000-000000000000
-              x-ms-original-file: file:///C:/git/rodgefu/autorest.csharp2/test/TestProjects/MgmtMockAndSample/specification/mockSwagger/examples/ManagedHsm_ListByResourceGroup.json
+              x-ms-original-file: file:///c:/git/rodgefu/autorest.csharp2/test/TestProjects/MgmtMockAndSample/specification/mockSwagger/examples/ManagedHsm_ListByResourceGroup.json
               responses:
                 '200':
                   body:
@@ -17175,7 +17175,7 @@ operationGroups:
               parameters:
                 api-version: '2021-10-01'
                 subscriptionId: 00000000-0000-0000-0000-000000000000
-              x-ms-original-file: file:///C:/git/rodgefu/autorest.csharp2/test/TestProjects/MgmtMockAndSample/specification/mockSwagger/examples/ManagedHsm_ListBySubscription.json
+              x-ms-original-file: file:///c:/git/rodgefu/autorest.csharp2/test/TestProjects/MgmtMockAndSample/specification/mockSwagger/examples/ManagedHsm_ListBySubscription.json
               responses:
                 '200':
                   body:
@@ -17312,7 +17312,7 @@ operationGroups:
               parameters:
                 api-version: '2021-10-01'
                 subscriptionId: 00000000-0000-0000-0000-000000000000
-              x-ms-original-file: file:///C:/git/rodgefu/autorest.csharp2/test/TestProjects/MgmtMockAndSample/specification/mockSwagger/examples/DeletedManagedHsm_List.json
+              x-ms-original-file: file:///c:/git/rodgefu/autorest.csharp2/test/TestProjects/MgmtMockAndSample/specification/mockSwagger/examples/DeletedManagedHsm_List.json
               responses:
                 '200':
                   body:
@@ -17461,7 +17461,7 @@ operationGroups:
                 api-version: '2021-10-01'
                 location: westus
                 subscriptionId: 00000000-0000-0000-0000-000000000000
-              x-ms-original-file: file:///C:/git/rodgefu/autorest.csharp2/test/TestProjects/MgmtMockAndSample/specification/mockSwagger/examples/DeletedManagedHsm_Get.json
+              x-ms-original-file: file:///c:/git/rodgefu/autorest.csharp2/test/TestProjects/MgmtMockAndSample/specification/mockSwagger/examples/DeletedManagedHsm_Get.json
               responses:
                 '200':
                   body:
@@ -17588,7 +17588,7 @@ operationGroups:
                 api-version: '2021-10-01'
                 location: westus
                 subscriptionId: 00000000-0000-0000-0000-000000000000
-              x-ms-original-file: file:///C:/git/rodgefu/autorest.csharp2/test/TestProjects/MgmtMockAndSample/specification/mockSwagger/examples/DeletedManagedHsm_Purge.json
+              x-ms-original-file: file:///c:/git/rodgefu/autorest.csharp2/test/TestProjects/MgmtMockAndSample/specification/mockSwagger/examples/DeletedManagedHsm_Purge.json
               responses:
                 '202': {}
           x-ms-long-running-operation: true
@@ -17715,7 +17715,7 @@ operationGroups:
                 api-version: '2021-10-01'
                 resourceGroupName: sample-group
                 subscriptionId: 00000000-0000-0000-0000-000000000000
-              x-ms-original-file: file:///C:/git/rodgefu/autorest.csharp2/test/TestProjects/MgmtMockAndSample/specification/mockSwagger/examples/ManagedHsm_ListPrivateEndpointConnectionsByResource.json
+              x-ms-original-file: file:///c:/git/rodgefu/autorest.csharp2/test/TestProjects/MgmtMockAndSample/specification/mockSwagger/examples/ManagedHsm_ListPrivateEndpointConnectionsByResource.json
               responses:
                 '200':
                   body:
@@ -17878,7 +17878,7 @@ operationGroups:
                 privateEndpointConnectionName: sample-pec
                 resourceGroupName: sample-group
                 subscriptionId: 00000000-0000-0000-0000-000000000000
-              x-ms-original-file: file:///C:/git/rodgefu/autorest.csharp2/test/TestProjects/MgmtMockAndSample/specification/mockSwagger/examples/ManagedHsm_getPrivateEndpointConnection.json
+              x-ms-original-file: file:///c:/git/rodgefu/autorest.csharp2/test/TestProjects/MgmtMockAndSample/specification/mockSwagger/examples/ManagedHsm_getPrivateEndpointConnection.json
               responses:
                 '200':
                   body:
@@ -18074,7 +18074,7 @@ operationGroups:
                       status: Approved
                 resourceGroupName: sample-group
                 subscriptionId: 00000000-0000-0000-0000-000000000000
-              x-ms-original-file: file:///C:/git/rodgefu/autorest.csharp2/test/TestProjects/MgmtMockAndSample/specification/mockSwagger/examples/ManagedHsm_putPrivateEndpointConnection.json
+              x-ms-original-file: file:///c:/git/rodgefu/autorest.csharp2/test/TestProjects/MgmtMockAndSample/specification/mockSwagger/examples/ManagedHsm_putPrivateEndpointConnection.json
               responses:
                 '200':
                   body:
@@ -18251,7 +18251,7 @@ operationGroups:
                 privateEndpointConnectionName: sample-pec
                 resourceGroupName: sample-group
                 subscriptionId: 00000000-0000-0000-0000-000000000000
-              x-ms-original-file: file:///C:/git/rodgefu/autorest.csharp2/test/TestProjects/MgmtMockAndSample/specification/mockSwagger/examples/ManagedHsm_deletePrivateEndpointConnection.json
+              x-ms-original-file: file:///c:/git/rodgefu/autorest.csharp2/test/TestProjects/MgmtMockAndSample/specification/mockSwagger/examples/ManagedHsm_deletePrivateEndpointConnection.json
               responses:
                 '200':
                   body:
@@ -18389,7 +18389,7 @@ operationGroups:
                 api-version: '2021-10-01'
                 resourceGroupName: sample-group
                 subscriptionId: 00000000-0000-0000-0000-000000000000
-              x-ms-original-file: file:///C:/git/rodgefu/autorest.csharp2/test/TestProjects/MgmtMockAndSample/specification/mockSwagger/examples/ManagedHsm_listPrivateLinkResources.json
+              x-ms-original-file: file:///c:/git/rodgefu/autorest.csharp2/test/TestProjects/MgmtMockAndSample/specification/mockSwagger/examples/ManagedHsm_listPrivateLinkResources.json
               responses:
                 '200':
                   body:
@@ -18540,7 +18540,7 @@ operationGroups:
                 firewallPolicyName: firewallPolicy
                 resourceGroupName: rg1
                 subscriptionId: subid
-              x-ms-original-file: file:///C:/git/rodgefu/autorest.csharp2/test/TestProjects/MgmtMockAndSample/specification/mockSwagger/examples/network/FirewallPolicyDelete.json
+              x-ms-original-file: file:///c:/git/rodgefu/autorest.csharp2/test/TestProjects/MgmtMockAndSample/specification/mockSwagger/examples/network/FirewallPolicyDelete.json
               responses:
                 '200': {}
                 '202': {}
@@ -18675,7 +18675,7 @@ operationGroups:
                 firewallPolicyName: firewallPolicy
                 resourceGroupName: rg1
                 subscriptionId: subid
-              x-ms-original-file: file:///C:/git/rodgefu/autorest.csharp2/test/TestProjects/MgmtMockAndSample/specification/mockSwagger/examples/network/FirewallPolicyGet.json
+              x-ms-original-file: file:///c:/git/rodgefu/autorest.csharp2/test/TestProjects/MgmtMockAndSample/specification/mockSwagger/examples/network/FirewallPolicyGet.json
               responses:
                 '200':
                   body:
@@ -18966,7 +18966,7 @@ operationGroups:
                     key1: value1
                 resourceGroupName: rg1
                 subscriptionId: subid
-              x-ms-original-file: file:///C:/git/rodgefu/autorest.csharp2/test/TestProjects/MgmtMockAndSample/specification/mockSwagger/examples/network/FirewallPolicyPut.json
+              x-ms-original-file: file:///c:/git/rodgefu/autorest.csharp2/test/TestProjects/MgmtMockAndSample/specification/mockSwagger/examples/network/FirewallPolicyPut.json
               responses:
                 '200':
                   body:
@@ -19169,7 +19169,7 @@ operationGroups:
                     key1: value1
                 resourceGroupName: rg1
                 subscriptionId: subid
-              x-ms-original-file: file:///C:/git/rodgefu/autorest.csharp2/test/TestProjects/MgmtMockAndSample/specification/mockSwagger/examples/network/FirewallPolicyPutWithCustomizedEnumValue.json
+              x-ms-original-file: file:///c:/git/rodgefu/autorest.csharp2/test/TestProjects/MgmtMockAndSample/specification/mockSwagger/examples/network/FirewallPolicyPutWithCustomizedEnumValue.json
               responses:
                 '200':
                   body:
@@ -19409,7 +19409,7 @@ operationGroups:
                 api-version: '2021-02-01'
                 resourceGroupName: rg1
                 subscriptionId: subid
-              x-ms-original-file: file:///C:/git/rodgefu/autorest.csharp2/test/TestProjects/MgmtMockAndSample/specification/mockSwagger/examples/network/FirewallPolicyListByResourceGroup.json
+              x-ms-original-file: file:///c:/git/rodgefu/autorest.csharp2/test/TestProjects/MgmtMockAndSample/specification/mockSwagger/examples/network/FirewallPolicyListByResourceGroup.json
               responses:
                 '200':
                   body:
@@ -19528,7 +19528,7 @@ operationGroups:
               parameters:
                 api-version: '2021-02-01'
                 subscriptionId: subid
-              x-ms-original-file: file:///C:/git/rodgefu/autorest.csharp2/test/TestProjects/MgmtMockAndSample/specification/mockSwagger/examples/network/FirewallPolicyListBySubscription.json
+              x-ms-original-file: file:///c:/git/rodgefu/autorest.csharp2/test/TestProjects/MgmtMockAndSample/specification/mockSwagger/examples/network/FirewallPolicyListBySubscription.json
               responses:
                 '200':
                   body:
@@ -19711,7 +19711,7 @@ operationGroups:
                 resourceGroupName: rg1
                 ruleCollectionGroupName: ruleCollectionGroup1
                 subscriptionId: subid
-              x-ms-original-file: file:///C:/git/rodgefu/autorest.csharp2/test/TestProjects/MgmtMockAndSample/specification/mockSwagger/examples/network/FirewallPolicyRuleCollectionGroupDelete.json
+              x-ms-original-file: file:///c:/git/rodgefu/autorest.csharp2/test/TestProjects/MgmtMockAndSample/specification/mockSwagger/examples/network/FirewallPolicyRuleCollectionGroupDelete.json
               responses:
                 '200': {}
                 '202': {}
@@ -19848,7 +19848,7 @@ operationGroups:
                 resourceGroupName: rg1
                 ruleCollectionGroupName: ruleCollectionGroup1
                 subscriptionId: subid
-              x-ms-original-file: file:///C:/git/rodgefu/autorest.csharp2/test/TestProjects/MgmtMockAndSample/specification/mockSwagger/examples/network/FirewallPolicyNatRuleCollectionGroupGet.json
+              x-ms-original-file: file:///c:/git/rodgefu/autorest.csharp2/test/TestProjects/MgmtMockAndSample/specification/mockSwagger/examples/network/FirewallPolicyNatRuleCollectionGroupGet.json
               responses:
                 '200':
                   body:
@@ -19886,7 +19886,7 @@ operationGroups:
                 resourceGroupName: rg1
                 ruleCollectionGroupName: ruleCollectionGroup1
                 subscriptionId: subid
-              x-ms-original-file: file:///C:/git/rodgefu/autorest.csharp2/test/TestProjects/MgmtMockAndSample/specification/mockSwagger/examples/network/FirewallPolicyRuleCollectionGroupGet.json
+              x-ms-original-file: file:///c:/git/rodgefu/autorest.csharp2/test/TestProjects/MgmtMockAndSample/specification/mockSwagger/examples/network/FirewallPolicyRuleCollectionGroupGet.json
               responses:
                 '200':
                   body:
@@ -19920,7 +19920,7 @@ operationGroups:
                 resourceGroupName: rg1
                 ruleCollectionGroupName: ruleGroup1
                 subscriptionId: subid
-              x-ms-original-file: file:///C:/git/rodgefu/autorest.csharp2/test/TestProjects/MgmtMockAndSample/specification/mockSwagger/examples/network/FirewallPolicyRuleCollectionGroupWithIpGroupsGet.json
+              x-ms-original-file: file:///c:/git/rodgefu/autorest.csharp2/test/TestProjects/MgmtMockAndSample/specification/mockSwagger/examples/network/FirewallPolicyRuleCollectionGroupWithIpGroupsGet.json
               responses:
                 '200':
                   body:
@@ -19954,7 +19954,7 @@ operationGroups:
                 resourceGroupName: rg1
                 ruleCollectionGroupName: ruleCollectionGroup1
                 subscriptionId: e747cc13-97d4-4a79-b463-42d7f4e558f2
-              x-ms-original-file: file:///C:/git/rodgefu/autorest.csharp2/test/TestProjects/MgmtMockAndSample/specification/mockSwagger/examples/network/FirewallPolicyRuleCollectionGroupWithWebCategoriesGet.json
+              x-ms-original-file: file:///c:/git/rodgefu/autorest.csharp2/test/TestProjects/MgmtMockAndSample/specification/mockSwagger/examples/network/FirewallPolicyRuleCollectionGroupWithWebCategoriesGet.json
               responses:
                 '200':
                   body:
@@ -20179,7 +20179,7 @@ operationGroups:
                 resourceGroupName: rg1
                 ruleCollectionGroupName: ruleCollectionGroup1
                 subscriptionId: subid
-              x-ms-original-file: file:///C:/git/rodgefu/autorest.csharp2/test/TestProjects/MgmtMockAndSample/specification/mockSwagger/examples/network/FirewallPolicyNatRuleCollectionGroupPut.json
+              x-ms-original-file: file:///c:/git/rodgefu/autorest.csharp2/test/TestProjects/MgmtMockAndSample/specification/mockSwagger/examples/network/FirewallPolicyNatRuleCollectionGroupPut.json
               responses:
                 '200':
                   body:
@@ -20265,7 +20265,7 @@ operationGroups:
                 resourceGroupName: rg1
                 ruleCollectionGroupName: ruleCollectionGroup1
                 subscriptionId: subid
-              x-ms-original-file: file:///C:/git/rodgefu/autorest.csharp2/test/TestProjects/MgmtMockAndSample/specification/mockSwagger/examples/network/FirewallPolicyRuleCollectionGroupPut.json
+              x-ms-original-file: file:///c:/git/rodgefu/autorest.csharp2/test/TestProjects/MgmtMockAndSample/specification/mockSwagger/examples/network/FirewallPolicyRuleCollectionGroupPut.json
               responses:
                 '200':
                   body:
@@ -20324,7 +20324,7 @@ operationGroups:
                 resourceGroupName: rg1
                 ruleCollectionGroupName: ruleCollectionGroup1
                 subscriptionId: e747cc13-97d4-4a79-b463-42d7f4e558f2
-              x-ms-original-file: file:///C:/git/rodgefu/autorest.csharp2/test/TestProjects/MgmtMockAndSample/specification/mockSwagger/examples/network/FirewallPolicyRuleCollectionGroupWithDefaultsPut.json
+              x-ms-original-file: file:///c:/git/rodgefu/autorest.csharp2/test/TestProjects/MgmtMockAndSample/specification/mockSwagger/examples/network/FirewallPolicyRuleCollectionGroupWithDefaultsPut.json
               responses:
                 '200':
                   body:
@@ -20402,7 +20402,7 @@ operationGroups:
                 resourceGroupName: rg1
                 ruleCollectionGroupName: ruleCollectionGroup1
                 subscriptionId: subid
-              x-ms-original-file: file:///C:/git/rodgefu/autorest.csharp2/test/TestProjects/MgmtMockAndSample/specification/mockSwagger/examples/network/FirewallPolicyRuleCollectionGroupWithIpGroupsPut.json
+              x-ms-original-file: file:///c:/git/rodgefu/autorest.csharp2/test/TestProjects/MgmtMockAndSample/specification/mockSwagger/examples/network/FirewallPolicyRuleCollectionGroupWithIpGroupsPut.json
               responses:
                 '200':
                   body:
@@ -20479,7 +20479,7 @@ operationGroups:
                 resourceGroupName: rg1
                 ruleCollectionGroupName: ruleCollectionGroup1
                 subscriptionId: e747cc13-97d4-4a79-b463-42d7f4e558f2
-              x-ms-original-file: file:///C:/git/rodgefu/autorest.csharp2/test/TestProjects/MgmtMockAndSample/specification/mockSwagger/examples/network/FirewallPolicyRuleCollectionGroupWithWebCategoriesPut.json
+              x-ms-original-file: file:///c:/git/rodgefu/autorest.csharp2/test/TestProjects/MgmtMockAndSample/specification/mockSwagger/examples/network/FirewallPolicyRuleCollectionGroupWithWebCategoriesPut.json
               responses:
                 '200':
                   body:
@@ -20649,7 +20649,7 @@ operationGroups:
                 firewallPolicyName: firewallPolicy
                 resourceGroupName: rg1
                 subscriptionId: e747cc13-97d4-4a79-b463-42d7f4e558f2
-              x-ms-original-file: file:///C:/git/rodgefu/autorest.csharp2/test/TestProjects/MgmtMockAndSample/specification/mockSwagger/examples/network/FirewallPolicyRuleCollectionGroupWithWebCategoriesList.json
+              x-ms-original-file: file:///c:/git/rodgefu/autorest.csharp2/test/TestProjects/MgmtMockAndSample/specification/mockSwagger/examples/network/FirewallPolicyRuleCollectionGroupWithWebCategoriesList.json
               responses:
                 '200':
                   body:
@@ -20684,7 +20684,7 @@ operationGroups:
                 firewallPolicyName: firewallPolicy
                 resourceGroupName: rg1
                 subscriptionId: subid
-              x-ms-original-file: file:///C:/git/rodgefu/autorest.csharp2/test/TestProjects/MgmtMockAndSample/specification/mockSwagger/examples/network/FirewallPolicyRuleCollectionGroupList.json
+              x-ms-original-file: file:///c:/git/rodgefu/autorest.csharp2/test/TestProjects/MgmtMockAndSample/specification/mockSwagger/examples/network/FirewallPolicyRuleCollectionGroupList.json
               responses:
                 '200':
                   body:
@@ -20719,7 +20719,7 @@ operationGroups:
                 firewallPolicyName: firewallPolicy
                 resourceGroupName: rg1
                 subscriptionId: subid
-              x-ms-original-file: file:///C:/git/rodgefu/autorest.csharp2/test/TestProjects/MgmtMockAndSample/specification/mockSwagger/examples/network/FirewallPolicyRuleCollectionGroupWithIpGroupsList.json
+              x-ms-original-file: file:///c:/git/rodgefu/autorest.csharp2/test/TestProjects/MgmtMockAndSample/specification/mockSwagger/examples/network/FirewallPolicyRuleCollectionGroupWithIpGroupsList.json
               responses:
                 '200':
                   body:
@@ -20845,7 +20845,7 @@ operationGroups:
             Lists available Rest API operations.:
               parameters:
                 api-version: '2021-10-01'
-              x-ms-original-file: file:///C:/git/rodgefu/autorest.csharp2/test/TestProjects/MgmtMockAndSample/specification/mockSwagger/examples/listOperations.json
+              x-ms-original-file: file:///c:/git/rodgefu/autorest.csharp2/test/TestProjects/MgmtMockAndSample/specification/mockSwagger/examples/listOperations.json
               responses:
                 '200':
                   body:
@@ -21245,7 +21245,7 @@ operationGroups:
                 resourceProviderNamespace: resourceProviderNamespace
                 resourceType: resourceType
                 subscriptionId: subId
-              x-ms-original-file: file:///C:/git/rodgefu/autorest.csharp2/test/TestProjects/MgmtMockAndSample/specification/mockSwagger/examples/GetRoleAssignmentsForResource.json
+              x-ms-original-file: file:///c:/git/rodgefu/autorest.csharp2/test/TestProjects/MgmtMockAndSample/specification/mockSwagger/examples/GetRoleAssignmentsForResource.json
               responses:
                 '200':
                   body:
@@ -21364,7 +21364,7 @@ operationGroups:
                 api-version: 2017-10-01-preview
                 resourceGroupName: rgname
                 subscriptionId: subId
-              x-ms-original-file: file:///C:/git/rodgefu/autorest.csharp2/test/TestProjects/MgmtMockAndSample/specification/mockSwagger/examples/GetRoleAssignmentsForResourceGroup.json
+              x-ms-original-file: file:///c:/git/rodgefu/autorest.csharp2/test/TestProjects/MgmtMockAndSample/specification/mockSwagger/examples/GetRoleAssignmentsForResourceGroup.json
               responses:
                 '200':
                   body:
@@ -21492,7 +21492,7 @@ operationGroups:
                 api-version: 2017-10-01-preview
                 roleAssignmentName: roleAssignmentName
                 scope: scope
-              x-ms-original-file: file:///C:/git/rodgefu/autorest.csharp2/test/TestProjects/MgmtMockAndSample/specification/mockSwagger/examples/DeleteRoleAssignmentByName.json
+              x-ms-original-file: file:///c:/git/rodgefu/autorest.csharp2/test/TestProjects/MgmtMockAndSample/specification/mockSwagger/examples/DeleteRoleAssignmentByName.json
               responses:
                 '200':
                   body:
@@ -21645,7 +21645,7 @@ operationGroups:
                     roleDefinitionId: /subscriptions/4004a9fd-d58e-48dc-aeb2-4a4aec58606f/providers/Microsoft.Authorization/roleDefinitions/de139f84-1756-47ae-9be6-808fbbe84772
                 roleAssignmentName: roleAssignmentName
                 scope: scope
-              x-ms-original-file: file:///C:/git/rodgefu/autorest.csharp2/test/TestProjects/MgmtMockAndSample/specification/mockSwagger/examples/PutRoleAssignment.json
+              x-ms-original-file: file:///c:/git/rodgefu/autorest.csharp2/test/TestProjects/MgmtMockAndSample/specification/mockSwagger/examples/PutRoleAssignment.json
               responses:
                 '201':
                   body:
@@ -21759,7 +21759,7 @@ operationGroups:
                 roleAssignmentName: roleAssignmentName
                 scope: scope
                 subscriptionId: subId
-              x-ms-original-file: file:///C:/git/rodgefu/autorest.csharp2/test/TestProjects/MgmtMockAndSample/specification/mockSwagger/examples/GetRoleAssignmentByName.json
+              x-ms-original-file: file:///c:/git/rodgefu/autorest.csharp2/test/TestProjects/MgmtMockAndSample/specification/mockSwagger/examples/GetRoleAssignmentByName.json
               responses:
                 '200':
                   body:
@@ -21858,7 +21858,7 @@ operationGroups:
               parameters:
                 api-version: 2017-10-01-preview
                 subscriptionId: subId
-              x-ms-original-file: file:///C:/git/rodgefu/autorest.csharp2/test/TestProjects/MgmtMockAndSample/specification/mockSwagger/examples/GetAllRoleAssignments.json
+              x-ms-original-file: file:///c:/git/rodgefu/autorest.csharp2/test/TestProjects/MgmtMockAndSample/specification/mockSwagger/examples/GetAllRoleAssignments.json
               responses:
                 '200':
                   body:
@@ -21944,7 +21944,7 @@ operationGroups:
                 api-version: 2017-10-01-preview
                 roleAssignmentName: roleAssignmentId
                 subscriptionId: subId
-              x-ms-original-file: file:///C:/git/rodgefu/autorest.csharp2/test/TestProjects/MgmtMockAndSample/specification/mockSwagger/examples/ValidateRoleAssignment.json
+              x-ms-original-file: file:///c:/git/rodgefu/autorest.csharp2/test/TestProjects/MgmtMockAndSample/specification/mockSwagger/examples/ValidateRoleAssignment.json
               responses:
                 '200': {}
         language: !Languages 
@@ -22048,7 +22048,7 @@ operationGroups:
               parameters:
                 api-version: 2017-10-01-preview
                 scope: scope
-              x-ms-original-file: file:///C:/git/rodgefu/autorest.csharp2/test/TestProjects/MgmtMockAndSample/specification/mockSwagger/examples/GetRoleAssignmentByScope.json
+              x-ms-original-file: file:///c:/git/rodgefu/autorest.csharp2/test/TestProjects/MgmtMockAndSample/specification/mockSwagger/examples/GetRoleAssignmentByScope.json
               responses:
                 '200':
                   body:
@@ -22193,7 +22193,7 @@ operationGroups:
               parameters:
                 api-version: '2015-04-01'
                 subscriptionId: 089bd33f-d4ec-47fe-8ba5-0753aa5c5b33
-              x-ms-original-file: file:///C:/git/rodgefu/autorest.csharp2/test/TestProjects/MgmtMockAndSample/specification/mockSwagger/examples/GetTenantActivityLogsNoParams.json
+              x-ms-original-file: file:///c:/git/rodgefu/autorest.csharp2/test/TestProjects/MgmtMockAndSample/specification/mockSwagger/examples/GetTenantActivityLogsNoParams.json
               responses:
                 '200':
                   body:
@@ -22345,7 +22345,7 @@ operationGroups:
                         location: West US
                         vmSize: Large
                     string: string
-              x-ms-original-file: file:///C:/git/rodgefu/autorest.csharp2/test/TestProjects/MgmtMockAndSample/specification/mockSwagger/examples/resources/CalculateTemplateHash.json
+              x-ms-original-file: file:///c:/git/rodgefu/autorest.csharp2/test/TestProjects/MgmtMockAndSample/specification/mockSwagger/examples/resources/CalculateTemplateHash.json
               responses:
                 '200':
                   body:
@@ -22535,7 +22535,7 @@ operationGroups:
                 resourceGroupName: myResourceGroupName
                 subscriptionId: mySubscriptionId
                 vmName: myVMName
-              x-ms-original-file: file:///C:/git/rodgefu/autorest.csharp2/test/TestProjects/MgmtMockAndSample/specification/mockSwagger/examples/guestconfiguration/createOrUpdateGuestConfigurationAssignment.json
+              x-ms-original-file: file:///c:/git/rodgefu/autorest.csharp2/test/TestProjects/MgmtMockAndSample/specification/mockSwagger/examples/guestconfiguration/createOrUpdateGuestConfigurationAssignment.json
               responses:
                 '200':
                   body:
@@ -22705,7 +22705,7 @@ operationGroups:
                 resourceGroupName: myResourceGroupName
                 subscriptionId: mySubscriptionId
                 vmName: myVMName
-              x-ms-original-file: file:///C:/git/rodgefu/autorest.csharp2/test/TestProjects/MgmtMockAndSample/specification/mockSwagger/examples/guestconfiguration/getGuestConfigurationAssignment.json
+              x-ms-original-file: file:///c:/git/rodgefu/autorest.csharp2/test/TestProjects/MgmtMockAndSample/specification/mockSwagger/examples/guestconfiguration/getGuestConfigurationAssignment.json
               responses:
                 '200':
                   body:
@@ -22826,7 +22826,7 @@ operationGroups:
                 resourceGroupName: myResourceGroupName
                 subscriptionId: mySubscriptionId
                 vmName: myVMName
-              x-ms-original-file: file:///C:/git/rodgefu/autorest.csharp2/test/TestProjects/MgmtMockAndSample/specification/mockSwagger/examples/guestconfiguration/deleteGuestConfigurationAssignment.json
+              x-ms-original-file: file:///c:/git/rodgefu/autorest.csharp2/test/TestProjects/MgmtMockAndSample/specification/mockSwagger/examples/guestconfiguration/deleteGuestConfigurationAssignment.json
               responses:
                 '200': {}
         language: !Languages 
@@ -22930,7 +22930,7 @@ operationGroups:
                 resourceGroupName: myResourceGroupName
                 subscriptionId: mySubscriptionId
                 vmName: myVMName
-              x-ms-original-file: file:///C:/git/rodgefu/autorest.csharp2/test/TestProjects/MgmtMockAndSample/specification/mockSwagger/examples/guestconfiguration/listGuestConfigurationAssignments.json
+              x-ms-original-file: file:///c:/git/rodgefu/autorest.csharp2/test/TestProjects/MgmtMockAndSample/specification/mockSwagger/examples/guestconfiguration/listGuestConfigurationAssignments.json
               responses:
                 '200':
                   body:
