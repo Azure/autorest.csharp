@@ -12,7 +12,7 @@ namespace AutoRest.CSharp.Generation.Writers.Tests
         {
             // refer to the original CADL file: https://github.com/Azure/cadl-ranch/blob/main/packages/cadl-ranch-specs/http/models/readonly-properties/main.cadl
             var model = new InputModelType("RoundTripModel", "Cadl.TestServer.ReadonlyProperties.Models", "public", null, "Readonly model", InputModelTypeUsage.RoundTrip,
-                    ReadOnlyProperties, null, null, null, null, InputTypeSerialization.Default);
+                    ReadOnlyProperties, null, null, null, null);
 
             var library = new DpgOutputLibraryBuilder(new InputNamespace("Cadl.TestServer.ReadonlyProperties.Models", null, new List<string>(),
                 new List<InputEnumType>(), new List<InputModelType> { ReadonlyModel, model }, new List<InputClient>(), new InputAuth()), default).Build(true);
@@ -25,7 +25,7 @@ namespace AutoRest.CSharp.Generation.Writers.Tests
         {
             // refer to the original CADL file: https://github.com/Azure/cadl-ranch/blob/dc6d00c98983f34b2f723c90fe840678a863438c/packages/cadl-ranch-specs/http/models/readonly-properties/main.cadl#L24-L65
             var model = new InputModelType("OutputModel", "Cadl.TestServer.ReadonlyProperties.Models", "public", null, "Readonly model", InputModelTypeUsage.Output,
-                    ReadOnlyProperties, null, null, null, null, InputTypeSerialization.Default);
+                    ReadOnlyProperties, null, null, null, null);
 
             var library = new DpgOutputLibraryBuilder(new InputNamespace("Cadl.TestServer.ReadonlyProperties.Models", null, new List<string>(),
                 new List<InputEnumType>(), new List<InputModelType> { ReadonlyModel, model }, new List<InputClient>(), new InputAuth()), default).Build(true);
@@ -35,7 +35,7 @@ namespace AutoRest.CSharp.Generation.Writers.Tests
 
         // below are test cases
         private static readonly InputModelType ReadonlyModel = new InputModelType("ReadonlyModel", "Cadl.TestServer.ReadonlyProperties.Models", "public", null, "Readonly model", InputModelTypeUsage.Output,
-                    new List<InputModelProperty> { RequiredStringProperty }, null, null, null, null, InputTypeSerialization.Default);
+                    new List<InputModelProperty> { RequiredStringProperty }, null, null, null, null);
 
         private static readonly IReadOnlyList<InputModelProperty> ReadOnlyProperties = new List<InputModelProperty>{
             new InputModelProperty("requiredReadonlyString", "requiredReadonlyString", "Required string, illustrating a readonly reference type property.", InputPrimitiveType.String, null, true, true, false),

@@ -257,10 +257,10 @@ namespace AutoRest.CSharp.Common.Input
                 BaseModel: baseModelSchema is not null ? GetOrCreateModel(baseModelSchema) : null,
                 DiscriminatorValue: schema.DiscriminatorValue,
                 DiscriminatorPropertyName: schema.Discriminator?.Property.SerializedName,
-                InheritedDictionaryType: dictionarySchema is not null ? (InputDictionaryType)CreateType(dictionarySchema, _modelsCache, false) : null,
-                Serialization: GetSerialization(schema, usage))
+                InheritedDictionaryType: dictionarySchema is not null ? (InputDictionaryType)CreateType(dictionarySchema, _modelsCache, false) : null)
             {
-                CompositionModels = compositeSchemas is not null ? compositeSchemas.Select(GetOrCreateModel).ToList() : Array.Empty<InputModelType>()
+                CompositionModels = compositeSchemas is not null ? compositeSchemas.Select(GetOrCreateModel).ToList() : Array.Empty<InputModelType>(),
+                Serialization = GetSerialization(schema, usage)
             };
 
             _modelsCache[schema] = model;
@@ -298,29 +298,29 @@ namespace AutoRest.CSharp.Common.Input
             _ => InputOperationParameterKind.Method
         };
 
-        private static InputTypeSerialization GetSerialization(ObjectSchema objectSchema, SchemaTypeUsage typeUsage)
+        private static InputTypeSerialization GetSerialization(Schema schema, SchemaTypeUsage typeUsage)
         {
-            var formats = objectSchema.SerializationFormats;
+            var formats = schema is ObjectSchema objectSchema ? objectSchema.SerializationFormats : new List<KnownMediaType> {KnownMediaType.Json, KnownMediaType.Xml};
             if (Configuration.SkipSerializationFormatXml)
             {
                 formats.Remove(KnownMediaType.Xml);
             }
 
-            if (objectSchema.Extensions != null)
+            if (schema.Extensions != null)
             {
-                foreach (var format in objectSchema.Extensions.Formats)
+                foreach (var format in schema.Extensions.Formats)
                 {
                     formats.Add(Enum.Parse<KnownMediaType>(format, true));
                 }
             }
 
-            var xmlFormat = objectSchema.Serialization?.Xml;
-            var json = formats.Contains(KnownMediaType.Json);
-            var xml = formats.Contains(KnownMediaType.Xml)
-                ? new InputTypeXmlSerialization(xmlFormat?.Name ?? objectSchema.Language.Default.Name, xmlFormat?.Attribute == true, xmlFormat?.Text == true)
+            var xmlSerialization = schema.Serialization?.Xml;
+            var jsonFormat = formats.Contains(KnownMediaType.Json);
+            var xmlFormat = formats.Contains(KnownMediaType.Xml)
+                ? new InputTypeXmlSerialization(xmlSerialization?.Name, xmlSerialization?.Attribute == true, xmlSerialization?.Text == true, xmlSerialization?.Wrapped == true)
                 : null;
 
-            return new InputTypeSerialization(json, xml, typeUsage.HasFlag(SchemaTypeUsage.Converter));
+            return new InputTypeSerialization(jsonFormat, xmlFormat, typeUsage.HasFlag(SchemaTypeUsage.Converter));
         }
 
         private static string? GetArraySerializationDelimiter(RequestParameter input) => input.In switch
@@ -402,7 +402,7 @@ namespace AutoRest.CSharp.Common.Input
             => CreateType(schema, schema.Extensions?.Format, modelsCache, isNullable);
 
         private InputType CreateType(Schema schema, string? format, IReadOnlyDictionary<ObjectSchema, InputModelType>? modelsCache, bool isNullable)
-            => CreateType(schema, format, modelsCache) with { IsNullable = isNullable };
+            => CreateType(schema, format, modelsCache) with { IsNullable = isNullable, Serialization = GetSerialization(schema, SchemaTypeUsage.None) };
 
         private InputType CreateType(Schema schema, string? format, IReadOnlyDictionary<ObjectSchema, InputModelType>? modelsCache) => schema switch
         {
@@ -454,7 +454,7 @@ namespace AutoRest.CSharp.Common.Input
             ChoiceSchema choiceSchema => CreateEnumType(choiceSchema, choiceSchema.ChoiceType, choiceSchema.Choices, true),
             SealedChoiceSchema choiceSchema => CreateEnumType(choiceSchema, choiceSchema.ChoiceType, choiceSchema.Choices, false),
 
-            ArraySchema array when !Configuration.AzureArm => new InputListType(array.Name, CreateType(array.ElementType, modelsCache, array.NullableItems ?? false), IsXmlSerializationWrapped: array.Serialization?.Xml?.Wrapped ?? false),
+            ArraySchema array when !Configuration.AzureArm => new InputListType(array.Name, CreateType(array.ElementType, modelsCache, array.NullableItems ?? false)),
             DictionarySchema dictionary when !Configuration.AzureArm => new InputDictionaryType(dictionary.Name, InputPrimitiveType.String, CreateType(dictionary.ElementType, modelsCache, dictionary.NullableItems ?? false)),
             ObjectSchema objectSchema when !Configuration.AzureArm && modelsCache != null => modelsCache[objectSchema],
 

@@ -20,7 +20,7 @@ namespace AutoRest.TestServerLowLevel.Tests.LowLevel.Generation
                     new InputModelProperty("NestedRoundTripModel", "NestedRoundTripModel", "Required nested round-trip model.", NestedRoundTripOnlyModelType, null, true, false, false),
                     NestedRoundTripSharedModelProperty
                 },
-                null, null, null, null, InputTypeSerialization.Default);
+                null, null, null, null);
 
             var library = new DpgOutputLibraryBuilder(new InputNamespace("NestedModelsBasic.Models", null, new List<string>(),
                 new List<InputEnumType>(), new List<InputModelType> { model, NestedRoundTripOnlyModelType, NestedRoundTripSharedModelType }, new List<InputClient>(), new InputAuth()), default).Build(true);
@@ -38,7 +38,7 @@ namespace AutoRest.TestServerLowLevel.Tests.LowLevel.Generation
                     new InputModelProperty("NestedInputModel", "NestedInputModel", "Required nested input model.", NestedInputOnlyModelType, null, true, false, false),
                     NestedRoundTripSharedModelProperty
                 },
-                null, null, null, null, InputTypeSerialization.Default);
+                null, null, null, null);
 
             var library = new DpgOutputLibraryBuilder(new InputNamespace("NestedModelsBasic.Models", null, new List<string>(),
                 new List<InputEnumType>(), new List<InputModelType> { model, NestedInputOnlyModelType, NestedRoundTripSharedModelType }, new List<InputClient>(), new InputAuth()), default).Build(true);
@@ -56,7 +56,7 @@ namespace AutoRest.TestServerLowLevel.Tests.LowLevel.Generation
                     new InputModelProperty("NestedOutputModel", "NestedOutputModel", "Required nested output model.", NestedOutputOnlyModelType, null, true, false, false),
                     NestedRoundTripSharedModelProperty
                 },
-                null, null, null, null, InputTypeSerialization.Default);
+                null, null, null, null);
 
             var library = new DpgOutputLibraryBuilder(new InputNamespace("NestedModelsBasic.Models", null, new List<string>(),
                 new List<InputEnumType>(), new List<InputModelType> { model, NestedOutputOnlyModelType, NestedRoundTripSharedModelType }, new List<InputClient>(), new InputAuth()), default).Build(true);
@@ -66,19 +66,19 @@ namespace AutoRest.TestServerLowLevel.Tests.LowLevel.Generation
 
         private static readonly InputModelType NestedInputOnlyModelType = new InputModelType("NestedInputOnlyModel", "NestedInputOnlyModel", "public", null, "Model to illustrate a nested model that only appears on an input model.", InputModelTypeUsage.Input,
             new List<InputModelProperty> { RequiredStringProperty, RequiredIntProperty, RequiredStringListProperty, RequiredIntListProperty },
-            null, null, null, null, InputTypeSerialization.Default);
+            null, null, null, null);
 
         private static readonly InputModelType NestedOutputOnlyModelType = new InputModelType("NestedOutputOnlyModel", "NestedOutputOnlyModel", "public", null, "Model to illustrate a nested model that only appears on an ouput model.", InputModelTypeUsage.Output,
             new List<InputModelProperty> { RequiredStringProperty, RequiredIntProperty, RequiredStringListProperty, RequiredIntListProperty },
-            null, null, null, null, InputTypeSerialization.Default);
+            null, null, null, null);
 
         private static readonly InputModelType NestedRoundTripOnlyModelType = new InputModelType("NestedRoundTripOnlyModel", "NestedRoundTripOnlyModel", "public", null, "Model to illustrate a nested model that only appears on a nested model.", InputModelTypeUsage.RoundTrip,
             new List<InputModelProperty> { RequiredStringProperty, RequiredIntProperty, RequiredStringListProperty, RequiredIntListProperty },
-            null, null, null, null, InputTypeSerialization.Default);
+            null, null, null, null);
 
         private static readonly InputModelType NestedRoundTripSharedModelType = new InputModelType("NestedRoundTripSharedModel", "NestedRoundTripSharedModel", "public", null, "Model to illustrate a nested model that appears as a nested model on input, output, and round-trip models.", InputModelTypeUsage.RoundTrip,
             new List<InputModelProperty> { RequiredStringProperty, RequiredIntProperty, RequiredStringListProperty, RequiredIntListProperty },
-            null, null, null, null, InputTypeSerialization.Default);
+            null, null, null, null);
 
         private static readonly InputModelProperty NestedRoundTripSharedModelProperty = new InputModelProperty("NestedSharedModel", "NestedSharedModel", "Required nested shared model.", NestedRoundTripSharedModelType, null, true, false, false);
 

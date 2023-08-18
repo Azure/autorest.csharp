@@ -8,5 +8,5 @@ namespace AutoRest.CSharp.Common.Input
         public static InputTypeSerialization Default { get; } = new(true, null, false);
     }
 
-    internal record InputTypeXmlSerialization(string Name, bool IsAttribute, bool IsContent);
+    internal record InputTypeXmlSerialization(string? Name, bool IsAttribute, bool IsContent, bool IsWrapped);
 }

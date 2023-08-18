@@ -82,19 +82,20 @@ namespace AutoRest.CSharp.Output.Builders
 
         private static XmlElementSerialization BuildXmlElementSerialization(InputType inputType, CSharpType type, string? name, bool isRoot)
         {
+            string xmlName = inputType.Serialization.Xml?.Name ?? name ?? inputType.Name;
             switch (inputType)
             {
                 case InputListType listType:
-                    var wrapped = isRoot || listType.IsXmlSerializationWrapped;
+                    var wrapped = isRoot || listType.Serialization.Xml?.IsWrapped == true;
                     var arrayElement = BuildXmlElementSerialization(listType.ElementType, TypeFactory.GetElementType(type), null, false);
-                    return new XmlArraySerialization(TypeFactory.GetImplementationType(type), arrayElement, name ?? inputType.Name, wrapped);
+                    return new XmlArraySerialization(TypeFactory.GetImplementationType(type), arrayElement, xmlName, wrapped);
                 case InputDictionaryType dictionaryType:
                     var valueElement = BuildXmlElementSerialization(dictionaryType.ValueType, TypeFactory.GetElementType(type), null, false);
-                    return new XmlDictionarySerialization(TypeFactory.GetImplementationType(type), valueElement, name ?? inputType.Name);
+                    return new XmlDictionarySerialization(TypeFactory.GetImplementationType(type), valueElement, xmlName);
                 case CodeModelType cmt:
                     return BuildXmlElementSerialization(cmt.Schema, type, null, isRoot);
                 default:
-                    return new XmlElementValueSerialization(name ?? inputType.Name, new XmlValueSerialization(type, GetSerializationFormat(inputType)));
+                    return new XmlElementValueSerialization(xmlName, new XmlValueSerialization(type, GetSerializationFormat(inputType)));
             }
         }
 
@@ -228,8 +229,8 @@ namespace AutoRest.CSharp.Output.Builders
             {
                 if (objectProperty.InputModelProperty is {} inputModelProperty)
                 {
-                    isAttribute = (inputModelProperty.Type as InputModelType)?.Serialization.Xml?.IsAttribute == true;
-                    isContent = (inputModelProperty.Type as InputModelType)?.Serialization.Xml?.IsContent == true;
+                    isAttribute = inputModelProperty.Type.Serialization.Xml?.IsAttribute == true;
+                    isContent = inputModelProperty.Type.Serialization.Xml?.IsContent == true;
                     format = GetSerializationFormat(inputModelProperty.Type);
                     propertyName = inputModelProperty.SerializedName;
                     return true;

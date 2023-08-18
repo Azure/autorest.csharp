@@ -50,8 +50,7 @@ namespace AutoRest.CSharp.Mgmt.Output.Models
                 null,
                 null,
                 null,
-                null,
-                InputTypeSerialization.Default)
+                null)
             {
                 IsPropertyBag = true
             };

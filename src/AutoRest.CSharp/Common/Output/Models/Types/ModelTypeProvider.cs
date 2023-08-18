@@ -109,7 +109,7 @@ namespace AutoRest.CSharp.Output.Models.Types
                     }
                     else if (mediaType == KnownMediaType.Xml)
                     {
-                        serialization = serialization with {Xml = new InputTypeXmlSerialization(inputModel.Name, false, false)};
+                        serialization = serialization with {Xml = new InputTypeXmlSerialization(inputModel.Name, false, false, false)};
                     }
                 }
             }
@@ -411,7 +411,7 @@ namespace AutoRest.CSharp.Output.Models.Types
 
         protected override XmlObjectSerialization? EnsureXmlSerialization()
         {
-            return SerializationBuilder.BuildXmlObjectSerialization(_inputModelSerialization.Xml!.Name, this);
+            return SerializationBuilder.BuildXmlObjectSerialization(_inputModelSerialization.Xml?.Name ?? _inputModel.Name, this);
         }
 
         protected override IEnumerable<Method> BuildSerializationMethods()
