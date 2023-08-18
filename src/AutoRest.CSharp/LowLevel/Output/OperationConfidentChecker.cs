@@ -94,7 +94,7 @@ namespace AutoRest.CSharp.Output.Models
                 isConfident = isConfident && WalkType(property.Type, visitedModels);
             }
 
-            // the low confident part in derived types will pollute it back to the base class - if any derived class has low confident part (like union types), we will set the base as "not confident", but other derived types are not affected.
+            // the low confident part in derived types will impact the base class - if any derived class has low confident part (like union types), we will set the base as "not confident", and other derived types must be not confident as well
             if (type.DerivedModels.Count > 0)
             {
                 foreach (var dm in type.DerivedModels)
