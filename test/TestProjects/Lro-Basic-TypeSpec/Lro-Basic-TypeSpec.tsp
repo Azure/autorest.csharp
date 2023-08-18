@@ -41,7 +41,7 @@ model Thing {
 }
 
 interface Authoring {
-  createProjectStatusMonitor is CustomCore.PollingOperation<Project>;
+  createProjectStatusMonitor is Azure.Core.ResourceRead<Project>;
 
   @convenientAPI(true)
   @Azure.Core.pollingOperation(Authoring.createProjectStatusMonitor)
@@ -59,15 +59,6 @@ interface Authoring {
 }
 
 namespace CustomCore {
-  @parentResource(Project)
-  @resource("operations")
-  model OperationStatusResource<T> is Azure.Core.Foundations.OperationStatus {
-    operationId: string;
-  }
-
-  @route("operations")
-  @convenientAPI(true)
-  op PollingOperation<TCustom> is Azure.Core.ResourceRead<OperationStatusResource<TCustom>>;
 
   @doc("Long running RPC operation template")
   op LongRunningRpcOperation<
