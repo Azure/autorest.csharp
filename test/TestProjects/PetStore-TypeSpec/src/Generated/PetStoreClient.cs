@@ -56,6 +56,7 @@ namespace PetStore
             _apiVersion = options.Version;
         }
 
+        // The convenience method is omitted here because it has exactly the same parameter list as the corresponding protocol method
         /// <summary>
         /// [Protocol Method] delete.
         /// <list type="bullet">
@@ -87,6 +88,7 @@ namespace PetStore
             }
         }
 
+        // The convenience method is omitted here because it has exactly the same parameter list as the corresponding protocol method
         /// <summary>
         /// [Protocol Method] delete.
         /// <list type="bullet">

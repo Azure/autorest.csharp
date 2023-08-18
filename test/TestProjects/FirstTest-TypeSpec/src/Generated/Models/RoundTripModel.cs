@@ -13,7 +13,7 @@ using Azure.Core;
 namespace FirstTestTypeSpec.Models
 {
     /// <summary> this is a roundtrip model. </summary>
-    public partial class RoundTripModel
+    internal partial class RoundTripModel
     {
         private Dictionary<string, BinaryData> _rawData;
 

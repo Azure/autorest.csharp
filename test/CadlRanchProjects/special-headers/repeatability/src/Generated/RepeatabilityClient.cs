@@ -47,6 +47,7 @@ namespace SpecialHeaders.Repeatability
             _apiVersion = options.Version;
         }
 
+        // The convenience method is omitted here because it has exactly the same parameter list as the corresponding protocol method
         /// <summary>
         /// [Protocol Method] Check we recognize Repeatability-Request-ID and Repeatability-First-Sent.
         /// <list type="bullet">
@@ -77,6 +78,7 @@ namespace SpecialHeaders.Repeatability
             }
         }
 
+        // The convenience method is omitted here because it has exactly the same parameter list as the corresponding protocol method
         /// <summary>
         /// [Protocol Method] Check we recognize Repeatability-Request-ID and Repeatability-First-Sent.
         /// <list type="bullet">

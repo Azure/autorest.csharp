@@ -11,7 +11,7 @@ using System.Collections.Generic;
 namespace FirstTestTypeSpec.Models
 {
     /// <summary> A model with a few required nullable properties. </summary>
-    public partial class ModelWithRequiredNullableProperties
+    internal partial class ModelWithRequiredNullableProperties
     {
         private Dictionary<string, BinaryData> _rawData;
 
