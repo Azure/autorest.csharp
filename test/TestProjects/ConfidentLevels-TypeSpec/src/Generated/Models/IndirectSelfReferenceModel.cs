@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
 using Azure.Core;
 
 namespace ConfidentLevelsInTsp.Models
@@ -13,6 +14,8 @@ namespace ConfidentLevelsInTsp.Models
     /// <summary> Indirect self reference model. </summary>
     internal partial class IndirectSelfReferenceModel
     {
+        private Dictionary<string, BinaryData> _rawData;
+
         /// <summary> Initializes a new instance of IndirectSelfReferenceModel. </summary>
         /// <param name="something"> Something not important. </param>
         /// <param name="unionProperty"> The non-confident part. </param>
@@ -30,11 +33,13 @@ namespace ConfidentLevelsInTsp.Models
         /// <param name="something"> Something not important. </param>
         /// <param name="reference"> Reference back. </param>
         /// <param name="unionProperty"> The non-confident part. </param>
-        internal IndirectSelfReferenceModel(string something, NonConfidentModelWithSelfReference reference, object unionProperty)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal IndirectSelfReferenceModel(string something, NonConfidentModelWithSelfReference reference, object unionProperty, Dictionary<string, BinaryData> rawData)
         {
             Something = something;
             Reference = reference;
             UnionProperty = unionProperty;
+            _rawData = rawData;
         }
 
         /// <summary> Something not important. </summary>

@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
 using Azure.Core;
 
 namespace ConfidentLevelsInTsp.Models
@@ -29,7 +30,8 @@ namespace ConfidentLevelsInTsp.Models
         /// <param name="name"> The name. </param>
         /// <param name="size"> The size. </param>
         /// <param name="unionProperty"> The union property. </param>
-        internal DerivedModelWithUnion(string name, double? size, object unionProperty) : base(name, size)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal DerivedModelWithUnion(string name, double? size, object unionProperty, Dictionary<string, BinaryData> rawData) : base(name, size, rawData)
         {
             UnionProperty = unionProperty;
         }

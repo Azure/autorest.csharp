@@ -6,7 +6,9 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
 using Azure.Core;
+using Azure.Core.Serialization;
 
 namespace ConfidentLevelsInTsp.Models
 {
@@ -15,8 +17,11 @@ namespace ConfidentLevelsInTsp.Models
     /// Please note <see cref="Pet"/> is the base class. According to the scenario, a derived class of the base class might need to be assigned here, or this property needs to be casted to one of the possible derived classes.
     /// The available derived classes include <see cref="Cat"/> and <see cref="Dog"/>.
     /// </summary>
+    [AbstractHierarchyDeserializer(typeof(UnknownPet))]
     public abstract partial class Pet
     {
+        protected internal Dictionary<string, BinaryData> _rawData;
+
         /// <summary> Initializes a new instance of Pet. </summary>
         /// <param name="name"> The name of the pet. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
@@ -30,10 +35,12 @@ namespace ConfidentLevelsInTsp.Models
         /// <summary> Initializes a new instance of Pet. </summary>
         /// <param name="kind"> Discriminator. </param>
         /// <param name="name"> The name of the pet. </param>
-        internal Pet(string kind, string name)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal Pet(string kind, string name, Dictionary<string, BinaryData> rawData)
         {
             Kind = kind;
             Name = name;
+            _rawData = rawData;
         }
 
         /// <summary> Discriminator. </summary>

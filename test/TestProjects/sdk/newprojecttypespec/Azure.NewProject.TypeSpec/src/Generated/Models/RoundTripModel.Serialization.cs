@@ -14,7 +14,7 @@ using Azure.Core.Serialization;
 
 namespace Azure.NewProject.TypeSpec.Models
 {
-    public partial class RoundTripModel : IUtf8JsonSerializable, IModelJsonSerializable<RoundTripModel>
+    internal partial class RoundTripModel : IUtf8JsonSerializable, IModelJsonSerializable<RoundTripModel>
     {
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<RoundTripModel>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
 

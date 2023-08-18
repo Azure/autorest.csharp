@@ -5,44 +5,64 @@
 
 #nullable disable
 
+using System;
 using System.Text.Json;
-using Azure;
 using Azure.Core;
+using Azure.Core.Serialization;
 
 namespace ConfidentLevelsInTsp.Models
 {
-    internal partial class UnknownPollutedPet
+    internal partial class UnknownPollutedPet : IUtf8JsonSerializable, IModelJsonSerializable<PollutedPet>
     {
-        internal static UnknownPollutedPet DeserializeUnknownPollutedPet(JsonElement element)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<PollutedPet>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+
+        void IModelJsonSerializable<PollutedPet>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
-            if (element.ValueKind == JsonValueKind.Null)
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            writer.WriteStartObject();
+            writer.WritePropertyName("kind"u8);
+            writer.WriteStringValue(Kind);
+            writer.WritePropertyName("name"u8);
+            writer.WriteStringValue(Name);
+            if (_rawData is not null && options.Format == ModelSerializerFormat.Json)
             {
-                return null;
-            }
-            string kind = "Unknown";
-            string name = default;
-            foreach (var property in element.EnumerateObject())
-            {
-                if (property.NameEquals("kind"u8))
+                foreach (var property in _rawData)
                 {
-                    kind = property.Value.GetString();
-                    continue;
-                }
-                if (property.NameEquals("name"u8))
-                {
-                    name = property.Value.GetString();
-                    continue;
+                    writer.WritePropertyName(property.Key);
+#if NET6_0_OR_GREATER
+				writer.WriteRawValue(property.Value);
+#else
+                    JsonSerializer.Serialize(writer, JsonDocument.Parse(property.Value.ToString()).RootElement);
+#endif
                 }
             }
-            return new UnknownPollutedPet(kind, name);
+            writer.WriteEndObject();
         }
 
-        /// <summary> Deserializes the model from a raw response. </summary>
-        /// <param name="response"> The response to deserialize the model from. </param>
-        internal static new UnknownPollutedPet FromResponse(Response response)
+        internal static PollutedPet DeserializeUnknownPollutedPet(JsonElement element, ModelSerializerOptions options = default) => DeserializePollutedPet(element, options);
+
+        PollutedPet IModelJsonSerializable<PollutedPet>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
         {
-            using var document = JsonDocument.Parse(response.Content);
-            return DeserializeUnknownPollutedPet(document.RootElement);
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using var doc = JsonDocument.ParseValue(ref reader);
+            return DeserializeUnknownPollutedPet(doc.RootElement, options);
+        }
+
+        BinaryData IModelSerializable<PollutedPet>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        PollutedPet IModelSerializable<PollutedPet>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using var doc = JsonDocument.Parse(data);
+            return DeserializePollutedPet(doc.RootElement, options);
         }
     }
 }

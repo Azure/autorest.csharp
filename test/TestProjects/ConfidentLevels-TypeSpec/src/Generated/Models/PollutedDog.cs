@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
 using Azure.Core;
 
 namespace ConfidentLevelsInTsp.Models
@@ -34,7 +35,8 @@ namespace ConfidentLevelsInTsp.Models
         /// <param name="name"> The name of the pet. </param>
         /// <param name="woof"> Woof. </param>
         /// <param name="color"> Color, could be specified by a string or by an array of int as RGB. </param>
-        internal PollutedDog(string kind, string name, string woof, object color) : base(kind, name)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal PollutedDog(string kind, string name, string woof, object color, Dictionary<string, BinaryData> rawData) : base(kind, name, rawData)
         {
             Woof = woof;
             Color = color;

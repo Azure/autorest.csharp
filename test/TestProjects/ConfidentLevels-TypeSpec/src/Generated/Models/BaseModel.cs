@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
 using Azure.Core;
 
 namespace ConfidentLevelsInTsp.Models
@@ -13,6 +14,8 @@ namespace ConfidentLevelsInTsp.Models
     /// <summary> The base model. </summary>
     internal partial class BaseModel
     {
+        protected internal Dictionary<string, BinaryData> _rawData;
+
         /// <summary> Initializes a new instance of BaseModel. </summary>
         /// <param name="name"> The name. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
@@ -26,10 +29,12 @@ namespace ConfidentLevelsInTsp.Models
         /// <summary> Initializes a new instance of BaseModel. </summary>
         /// <param name="name"> The name. </param>
         /// <param name="size"> The size. </param>
-        internal BaseModel(string name, double? size)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal BaseModel(string name, double? size, Dictionary<string, BinaryData> rawData)
         {
             Name = name;
             Size = size;
+            _rawData = rawData;
         }
 
         /// <summary> The name. </summary>

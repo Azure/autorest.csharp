@@ -5,15 +5,23 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
 using System.Text.Json;
+using Azure;
 using Azure.Core;
+using Azure.Core.Serialization;
 
 namespace ConfidentLevelsInTsp.Models
 {
-    internal partial class NonConfidentModelWithIndirectSelfReference : IUtf8JsonSerializable
+    internal partial class NonConfidentModelWithIndirectSelfReference : IUtf8JsonSerializable, IModelJsonSerializable<NonConfidentModelWithIndirectSelfReference>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<NonConfidentModelWithIndirectSelfReference>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+
+        void IModelJsonSerializable<NonConfidentModelWithIndirectSelfReference>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
             writer.WriteStartObject();
             writer.WritePropertyName("name"u8);
             writer.WriteStringValue(Name);
@@ -27,15 +35,104 @@ namespace ConfidentLevelsInTsp.Models
                 }
                 writer.WriteEndArray();
             }
+            if (_rawData is not null && options.Format == ModelSerializerFormat.Json)
+            {
+                foreach (var property in _rawData)
+                {
+                    writer.WritePropertyName(property.Key);
+#if NET6_0_OR_GREATER
+				writer.WriteRawValue(property.Value);
+#else
+                    JsonSerializer.Serialize(writer, JsonDocument.Parse(property.Value.ToString()).RootElement);
+#endif
+                }
+            }
             writer.WriteEndObject();
         }
 
-        /// <summary> Convert into a Utf8JsonRequestContent. </summary>
-        internal virtual RequestContent ToRequestContent()
+        internal static NonConfidentModelWithIndirectSelfReference DeserializeNonConfidentModelWithIndirectSelfReference(JsonElement element, ModelSerializerOptions options = default)
         {
-            var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue(this);
-            return content;
+            options ??= ModelSerializerOptions.DefaultWireOptions;
+
+            if (element.ValueKind == JsonValueKind.Null)
+            {
+                return null;
+            }
+            string name = default;
+            Optional<IList<IndirectSelfReferenceModel>> reference = default;
+            Dictionary<string, BinaryData> rawData = new Dictionary<string, BinaryData>();
+            foreach (var property in element.EnumerateObject())
+            {
+                if (property.NameEquals("name"u8))
+                {
+                    name = property.Value.GetString();
+                    continue;
+                }
+                if (property.NameEquals("reference"u8))
+                {
+                    if (property.Value.ValueKind == JsonValueKind.Null)
+                    {
+                        continue;
+                    }
+                    List<IndirectSelfReferenceModel> array = new List<IndirectSelfReferenceModel>();
+                    foreach (var item in property.Value.EnumerateArray())
+                    {
+                        array.Add(IndirectSelfReferenceModel.DeserializeIndirectSelfReferenceModel(item));
+                    }
+                    reference = array;
+                    continue;
+                }
+                if (options.Format == ModelSerializerFormat.Json)
+                {
+                    rawData.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
+                    continue;
+                }
+            }
+            return new NonConfidentModelWithIndirectSelfReference(name, Optional.ToList(reference), rawData);
+        }
+
+        NonConfidentModelWithIndirectSelfReference IModelJsonSerializable<NonConfidentModelWithIndirectSelfReference>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using var doc = JsonDocument.ParseValue(ref reader);
+            return DeserializeNonConfidentModelWithIndirectSelfReference(doc.RootElement, options);
+        }
+
+        BinaryData IModelSerializable<NonConfidentModelWithIndirectSelfReference>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        NonConfidentModelWithIndirectSelfReference IModelSerializable<NonConfidentModelWithIndirectSelfReference>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using var doc = JsonDocument.Parse(data);
+            return DeserializeNonConfidentModelWithIndirectSelfReference(doc.RootElement, options);
+        }
+
+        public static implicit operator RequestContent(NonConfidentModelWithIndirectSelfReference model)
+        {
+            if (model is null)
+            {
+                return null;
+            }
+
+            return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
+        }
+
+        public static explicit operator NonConfidentModelWithIndirectSelfReference(Response response)
+        {
+            if (response is null)
+            {
+                return null;
+            }
+
+            using JsonDocument doc = JsonDocument.Parse(response.ContentStream);
+            return DeserializeNonConfidentModelWithIndirectSelfReference(doc.RootElement, ModelSerializerOptions.DefaultWireOptions);
         }
     }
 }

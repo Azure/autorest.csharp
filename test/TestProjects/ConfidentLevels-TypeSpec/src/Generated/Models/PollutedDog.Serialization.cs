@@ -5,16 +5,23 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
 using System.Text.Json;
 using Azure;
 using Azure.Core;
+using Azure.Core.Serialization;
 
 namespace ConfidentLevelsInTsp.Models
 {
-    internal partial class PollutedDog : IUtf8JsonSerializable
+    internal partial class PollutedDog : IUtf8JsonSerializable, IModelJsonSerializable<PollutedDog>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<PollutedDog>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+
+        void IModelJsonSerializable<PollutedDog>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
+            ModelSerializerHelper.ValidateFormat<PollutedDog>(this, options.Format);
+
             writer.WriteStartObject();
             writer.WritePropertyName("woof"u8);
             writer.WriteStringValue(Woof);
@@ -24,11 +31,25 @@ namespace ConfidentLevelsInTsp.Models
             writer.WriteStringValue(Kind);
             writer.WritePropertyName("name"u8);
             writer.WriteStringValue(Name);
+            if (_rawData is not null && options.Format == ModelSerializerFormat.Json)
+            {
+                foreach (var property in _rawData)
+                {
+                    writer.WritePropertyName(property.Key);
+#if NET6_0_OR_GREATER
+				writer.WriteRawValue(property.Value);
+#else
+                    JsonSerializer.Serialize(writer, JsonDocument.Parse(property.Value.ToString()).RootElement);
+#endif
+                }
+            }
             writer.WriteEndObject();
         }
 
-        internal static PollutedDog DeserializePollutedDog(JsonElement element)
+        internal static PollutedDog DeserializePollutedDog(JsonElement element, ModelSerializerOptions options = default)
         {
+            options ??= ModelSerializerOptions.DefaultWireOptions;
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
@@ -37,6 +58,7 @@ namespace ConfidentLevelsInTsp.Models
             object color = default;
             string kind = default;
             string name = default;
+            Dictionary<string, BinaryData> rawData = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
                 if (property.NameEquals("woof"u8))
@@ -59,24 +81,57 @@ namespace ConfidentLevelsInTsp.Models
                     name = property.Value.GetString();
                     continue;
                 }
+                if (options.Format == ModelSerializerFormat.Json)
+                {
+                    rawData.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
+                    continue;
+                }
             }
-            return new PollutedDog(kind, name, woof, color);
+            return new PollutedDog(kind, name, woof, color, rawData);
         }
 
-        /// <summary> Deserializes the model from a raw response. </summary>
-        /// <param name="response"> The response to deserialize the model from. </param>
-        internal static new PollutedDog FromResponse(Response response)
+        PollutedDog IModelJsonSerializable<PollutedDog>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
         {
-            using var document = JsonDocument.Parse(response.Content);
-            return DeserializePollutedDog(document.RootElement);
+            ModelSerializerHelper.ValidateFormat<PollutedDog>(this, options.Format);
+
+            using var doc = JsonDocument.ParseValue(ref reader);
+            return DeserializePollutedDog(doc.RootElement, options);
         }
 
-        /// <summary> Convert into a Utf8JsonRequestContent. </summary>
-        internal override RequestContent ToRequestContent()
+        BinaryData IModelSerializable<PollutedDog>.Serialize(ModelSerializerOptions options)
         {
-            var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue(this);
-            return content;
+            ModelSerializerHelper.ValidateFormat<PollutedDog>(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        PollutedDog IModelSerializable<PollutedDog>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat<PollutedDog>(this, options.Format);
+
+            using var doc = JsonDocument.Parse(data);
+            return DeserializePollutedDog(doc.RootElement, options);
+        }
+
+        public static implicit operator RequestContent(PollutedDog model)
+        {
+            if (model is null)
+            {
+                return null;
+            }
+
+            return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
+        }
+
+        public static explicit operator PollutedDog(Response response)
+        {
+            if (response is null)
+            {
+                return null;
+            }
+
+            using JsonDocument doc = JsonDocument.Parse(response.ContentStream);
+            return DeserializePollutedDog(doc.RootElement, ModelSerializerOptions.DefaultWireOptions);
         }
     }
 }

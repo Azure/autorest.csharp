@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
 using Azure.Core;
 
 namespace ConfidentLevelsInTsp.Models
@@ -13,6 +14,8 @@ namespace ConfidentLevelsInTsp.Models
     /// <summary> This is another model with union types. </summary>
     internal partial class AnotherModelWithUnionProperty
     {
+        private Dictionary<string, BinaryData> _rawData;
+
         /// <summary> Initializes a new instance of AnotherModelWithUnionProperty. </summary>
         /// <param name="unionProperty"> This is a union property. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="unionProperty"/> is null. </exception>
@@ -21,6 +24,15 @@ namespace ConfidentLevelsInTsp.Models
             Argument.AssertNotNull(unionProperty, nameof(unionProperty));
 
             UnionProperty = unionProperty;
+        }
+
+        /// <summary> Initializes a new instance of AnotherModelWithUnionProperty. </summary>
+        /// <param name="unionProperty"> This is a union property. </param>
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal AnotherModelWithUnionProperty(object unionProperty, Dictionary<string, BinaryData> rawData)
+        {
+            UnionProperty = unionProperty;
+            _rawData = rawData;
         }
 
         /// <summary> This is a union property. </summary>

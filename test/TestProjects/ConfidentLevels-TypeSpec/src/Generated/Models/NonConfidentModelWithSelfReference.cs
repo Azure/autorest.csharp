@@ -15,6 +15,8 @@ namespace ConfidentLevelsInTsp.Models
     /// <summary> Non-confident model that contains self reference. </summary>
     internal partial class NonConfidentModelWithSelfReference
     {
+        private Dictionary<string, BinaryData> _rawData;
+
         /// <summary> Initializes a new instance of NonConfidentModelWithSelfReference. </summary>
         /// <param name="name"> The name. </param>
         /// <param name="selfReference"> The self reference. </param>
@@ -35,11 +37,13 @@ namespace ConfidentLevelsInTsp.Models
         /// <param name="name"> The name. </param>
         /// <param name="selfReference"> The self reference. </param>
         /// <param name="unionProperty"> The non-confident part. </param>
-        internal NonConfidentModelWithSelfReference(string name, IList<NonConfidentModelWithSelfReference> selfReference, object unionProperty)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal NonConfidentModelWithSelfReference(string name, IList<NonConfidentModelWithSelfReference> selfReference, object unionProperty, Dictionary<string, BinaryData> rawData)
         {
             Name = name;
             SelfReference = selfReference;
             UnionProperty = unionProperty;
+            _rawData = rawData;
         }
 
         /// <summary> The name. </summary>

@@ -12,7 +12,7 @@ using Azure.Core;
 namespace Azure.NewProject.TypeSpec.Models
 {
     /// <summary> A model with a few properties of literal types. </summary>
-    public partial class Thing
+    internal partial class Thing
     {
         private Dictionary<string, BinaryData> _rawData;
 
@@ -21,7 +21,7 @@ namespace Azure.NewProject.TypeSpec.Models
         /// <param name="requiredUnion"> required Union. </param>
         /// <param name="requiredBadDescription"> description with xml &lt;|endoftext|&gt;. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/>, <paramref name="requiredUnion"/> or <paramref name="requiredBadDescription"/> is null. </exception>
-        public Thing(string name, string requiredUnion, string requiredBadDescription)
+        public Thing(string name, object requiredUnion, string requiredBadDescription)
         {
             Argument.AssertNotNull(name, nameof(name));
             Argument.AssertNotNull(requiredUnion, nameof(requiredUnion));
@@ -45,7 +45,7 @@ namespace Azure.NewProject.TypeSpec.Models
         /// <param name="optionalLiteralBool"> optional literal bool. </param>
         /// <param name="requiredBadDescription"> description with xml &lt;|endoftext|&gt;. </param>
         /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
-        internal Thing(string name, string requiredUnion, ThingRequiredLiteralString requiredLiteralString, ThingRequiredLiteralInt requiredLiteralInt, ThingRequiredLiteralFloat requiredLiteralFloat, bool requiredLiteralBool, ThingOptionalLiteralString? optionalLiteralString, ThingOptionalLiteralInt? optionalLiteralInt, ThingOptionalLiteralFloat? optionalLiteralFloat, bool? optionalLiteralBool, string requiredBadDescription, Dictionary<string, BinaryData> rawData)
+        internal Thing(string name, object requiredUnion, ThingRequiredLiteralString requiredLiteralString, ThingRequiredLiteralInt requiredLiteralInt, ThingRequiredLiteralFloat requiredLiteralFloat, bool requiredLiteralBool, ThingOptionalLiteralString? optionalLiteralString, ThingOptionalLiteralInt? optionalLiteralInt, ThingOptionalLiteralFloat? optionalLiteralFloat, bool? optionalLiteralBool, string requiredBadDescription, Dictionary<string, BinaryData> rawData)
         {
             Name = name;
             RequiredUnion = requiredUnion;
@@ -64,7 +64,7 @@ namespace Azure.NewProject.TypeSpec.Models
         /// <summary> name of the Thing. </summary>
         public string Name { get; set; }
         /// <summary> required Union. </summary>
-        public string RequiredUnion { get; set; }
+        public object RequiredUnion { get; set; }
         /// <summary> required literal string. </summary>
         public ThingRequiredLiteralString RequiredLiteralString { get; } = ThingRequiredLiteralString.Accept;
 

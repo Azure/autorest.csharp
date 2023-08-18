@@ -14,17 +14,15 @@ using Azure.Core.Serialization;
 
 namespace ConfidentLevelsInTsp.Models
 {
-    internal partial class DerivedModelWithUnion : IUtf8JsonSerializable, IModelJsonSerializable<DerivedModelWithUnion>
+    internal partial class BaseModel : IUtf8JsonSerializable, IModelJsonSerializable<BaseModel>
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<DerivedModelWithUnion>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<BaseModel>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
 
-        void IModelJsonSerializable<DerivedModelWithUnion>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
+        void IModelJsonSerializable<BaseModel>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
-            ModelSerializerHelper.ValidateFormat<DerivedModelWithUnion>(this, options.Format);
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
 
             writer.WriteStartObject();
-            writer.WritePropertyName("unionProperty"u8);
-            writer.WriteObjectValue(UnionProperty);
             writer.WritePropertyName("name"u8);
             writer.WriteStringValue(Name);
             if (Optional.IsDefined(Size))
@@ -47,7 +45,7 @@ namespace ConfidentLevelsInTsp.Models
             writer.WriteEndObject();
         }
 
-        internal static DerivedModelWithUnion DeserializeDerivedModelWithUnion(JsonElement element, ModelSerializerOptions options = default)
+        internal static BaseModel DeserializeBaseModel(JsonElement element, ModelSerializerOptions options = default)
         {
             options ??= ModelSerializerOptions.DefaultWireOptions;
 
@@ -55,17 +53,11 @@ namespace ConfidentLevelsInTsp.Models
             {
                 return null;
             }
-            object unionProperty = default;
             string name = default;
             Optional<double> size = default;
             Dictionary<string, BinaryData> rawData = new Dictionary<string, BinaryData>();
             foreach (var property in element.EnumerateObject())
             {
-                if (property.NameEquals("unionProperty"u8))
-                {
-                    unionProperty = property.Value.GetObject();
-                    continue;
-                }
                 if (property.NameEquals("name"u8))
                 {
                     name = property.Value.GetString();
@@ -86,33 +78,33 @@ namespace ConfidentLevelsInTsp.Models
                     continue;
                 }
             }
-            return new DerivedModelWithUnion(name, Optional.ToNullable(size), unionProperty, rawData);
+            return new BaseModel(name, Optional.ToNullable(size), rawData);
         }
 
-        DerivedModelWithUnion IModelJsonSerializable<DerivedModelWithUnion>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
+        BaseModel IModelJsonSerializable<BaseModel>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
         {
-            ModelSerializerHelper.ValidateFormat<DerivedModelWithUnion>(this, options.Format);
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
 
             using var doc = JsonDocument.ParseValue(ref reader);
-            return DeserializeDerivedModelWithUnion(doc.RootElement, options);
+            return DeserializeBaseModel(doc.RootElement, options);
         }
 
-        BinaryData IModelSerializable<DerivedModelWithUnion>.Serialize(ModelSerializerOptions options)
+        BinaryData IModelSerializable<BaseModel>.Serialize(ModelSerializerOptions options)
         {
-            ModelSerializerHelper.ValidateFormat<DerivedModelWithUnion>(this, options.Format);
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
 
             return ModelSerializer.SerializeCore(this, options);
         }
 
-        DerivedModelWithUnion IModelSerializable<DerivedModelWithUnion>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        BaseModel IModelSerializable<BaseModel>.Deserialize(BinaryData data, ModelSerializerOptions options)
         {
-            ModelSerializerHelper.ValidateFormat<DerivedModelWithUnion>(this, options.Format);
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
 
             using var doc = JsonDocument.Parse(data);
-            return DeserializeDerivedModelWithUnion(doc.RootElement, options);
+            return DeserializeBaseModel(doc.RootElement, options);
         }
 
-        public static implicit operator RequestContent(DerivedModelWithUnion model)
+        public static implicit operator RequestContent(BaseModel model)
         {
             if (model is null)
             {
@@ -122,7 +114,7 @@ namespace ConfidentLevelsInTsp.Models
             return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
         }
 
-        public static explicit operator DerivedModelWithUnion(Response response)
+        public static explicit operator BaseModel(Response response)
         {
             if (response is null)
             {
@@ -130,7 +122,7 @@ namespace ConfidentLevelsInTsp.Models
             }
 
             using JsonDocument doc = JsonDocument.Parse(response.ContentStream);
-            return DeserializeDerivedModelWithUnion(doc.RootElement, ModelSerializerOptions.DefaultWireOptions);
+            return DeserializeBaseModel(doc.RootElement, ModelSerializerOptions.DefaultWireOptions);
         }
     }
 }

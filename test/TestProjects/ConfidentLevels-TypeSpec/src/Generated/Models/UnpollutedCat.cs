@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
 using Azure.Core;
 
 namespace ConfidentLevelsInTsp.Models
@@ -30,7 +31,8 @@ namespace ConfidentLevelsInTsp.Models
         /// <param name="kind"> Discriminator. </param>
         /// <param name="name"> The name of the pet. </param>
         /// <param name="meow"> Meow. </param>
-        internal UnpollutedCat(string kind, string name, string meow) : base(kind, name)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal UnpollutedCat(string kind, string name, string meow, Dictionary<string, BinaryData> rawData) : base(kind, name, rawData)
         {
             Meow = meow;
         }

@@ -66,7 +66,7 @@ namespace ConfidentLevelsInTsp
             Argument.AssertNotNull(body, nameof(body));
 
             RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = await UnionInRequestPropertyAsync(body.ToRequestContent(), context).ConfigureAwait(false);
+            Response response = await UnionInRequestPropertyAsync(body, context).ConfigureAwait(false);
             return response;
         }
 
@@ -80,7 +80,7 @@ namespace ConfidentLevelsInTsp
             Argument.AssertNotNull(body, nameof(body));
 
             RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = UnionInRequestProperty(body.ToRequestContent(), context);
+            Response response = UnionInRequestProperty(body, context);
             return response;
         }
 
@@ -164,8 +164,8 @@ namespace ConfidentLevelsInTsp
             Argument.AssertNotNull(body, nameof(body));
 
             RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = await UnionInResponsePropertyAsync(body.ToRequestContent(), context).ConfigureAwait(false);
-            return Response.FromValue(AnotherModelWithUnionProperty.FromResponse(response), response);
+            Response response = await UnionInResponsePropertyAsync(body, context).ConfigureAwait(false);
+            return Response.FromValue((AnotherModelWithUnionProperty)response, response);
         }
 
         /// <summary> This is an operation that uses a model with union types as response body. </summary>
@@ -178,8 +178,8 @@ namespace ConfidentLevelsInTsp
             Argument.AssertNotNull(body, nameof(body));
 
             RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = UnionInResponseProperty(body.ToRequestContent(), context);
-            return Response.FromValue(AnotherModelWithUnionProperty.FromResponse(response), response);
+            Response response = UnionInResponseProperty(body, context);
+            return Response.FromValue((AnotherModelWithUnionProperty)response, response);
         }
 
         // The convenience method of this operation is made internal because this operation directly or indirectly uses a low confident type, for instance, unions, literal types with number values, etc.
@@ -262,7 +262,7 @@ namespace ConfidentLevelsInTsp
             Argument.AssertNotNull(input, nameof(input));
 
             RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = await UnionWithSelfReferenceAsync(input.ToRequestContent(), context).ConfigureAwait(false);
+            Response response = await UnionWithSelfReferenceAsync(input, context).ConfigureAwait(false);
             return response;
         }
 
@@ -276,7 +276,7 @@ namespace ConfidentLevelsInTsp
             Argument.AssertNotNull(input, nameof(input));
 
             RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = UnionWithSelfReference(input.ToRequestContent(), context);
+            Response response = UnionWithSelfReference(input, context);
             return response;
         }
 
@@ -360,7 +360,7 @@ namespace ConfidentLevelsInTsp
             Argument.AssertNotNull(input, nameof(input));
 
             RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = await UnionWithInderictAsync(input.ToRequestContent(), context).ConfigureAwait(false);
+            Response response = await UnionWithInderictAsync(input, context).ConfigureAwait(false);
             return response;
         }
 
@@ -374,7 +374,7 @@ namespace ConfidentLevelsInTsp
             Argument.AssertNotNull(input, nameof(input));
 
             RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = UnionWithInderict(input.ToRequestContent(), context);
+            Response response = UnionWithInderict(input, context);
             return response;
         }
 
@@ -458,7 +458,7 @@ namespace ConfidentLevelsInTsp
             Argument.AssertNotNull(input, nameof(input));
 
             RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = await LiteralOfIntegerAsync(input.ToRequestContent(), context).ConfigureAwait(false);
+            Response response = await LiteralOfIntegerAsync(input, context).ConfigureAwait(false);
             return response;
         }
 
@@ -472,7 +472,7 @@ namespace ConfidentLevelsInTsp
             Argument.AssertNotNull(input, nameof(input));
 
             RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = LiteralOfInteger(input.ToRequestContent(), context);
+            Response response = LiteralOfInteger(input, context);
             return response;
         }
 
@@ -556,7 +556,7 @@ namespace ConfidentLevelsInTsp
             Argument.AssertNotNull(input, nameof(input));
 
             RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = await LiteralOfFloatAsync(input.ToRequestContent(), context).ConfigureAwait(false);
+            Response response = await LiteralOfFloatAsync(input, context).ConfigureAwait(false);
             return response;
         }
 
@@ -570,7 +570,7 @@ namespace ConfidentLevelsInTsp
             Argument.AssertNotNull(input, nameof(input));
 
             RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = LiteralOfFloat(input.ToRequestContent(), context);
+            Response response = LiteralOfFloat(input, context);
             return response;
         }
 
@@ -654,8 +654,8 @@ namespace ConfidentLevelsInTsp
             Argument.AssertNotNull(input, nameof(input));
 
             RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = await ConfidentOperationWithDiscriminatorAsync(input.ToRequestContent(), context).ConfigureAwait(false);
-            return Response.FromValue(Pet.FromResponse(response), response);
+            Response response = await ConfidentOperationWithDiscriminatorAsync(input, context).ConfigureAwait(false);
+            return Response.FromValue((Pet)response, response);
         }
 
         /// <summary> This is an operation that uses a model with discriminator in request body, this operation should be confident. </summary>
@@ -668,8 +668,8 @@ namespace ConfidentLevelsInTsp
             Argument.AssertNotNull(input, nameof(input));
 
             RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = ConfidentOperationWithDiscriminator(input.ToRequestContent(), context);
-            return Response.FromValue(Pet.FromResponse(response), response);
+            Response response = ConfidentOperationWithDiscriminator(input, context);
+            return Response.FromValue((Pet)response, response);
         }
 
         /// <summary>
@@ -760,8 +760,8 @@ namespace ConfidentLevelsInTsp
             Argument.AssertNotNull(input, nameof(input));
 
             RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = await PollutedBaseMethodAsync(input.ToRequestContent(), context).ConfigureAwait(false);
-            return Response.FromValue(PollutedPet.FromResponse(response), response);
+            Response response = await PollutedBaseMethodAsync(input, context).ConfigureAwait(false);
+            return Response.FromValue((PollutedPet)response, response);
         }
 
         /// <summary> This is an operation that uses the base type with a discriminator, but this operation is low confident because one of the derived type from the discriminated types has union types on it. </summary>
@@ -774,8 +774,8 @@ namespace ConfidentLevelsInTsp
             Argument.AssertNotNull(input, nameof(input));
 
             RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = PollutedBaseMethod(input.ToRequestContent(), context);
-            return Response.FromValue(PollutedPet.FromResponse(response), response);
+            Response response = PollutedBaseMethod(input, context);
+            return Response.FromValue((PollutedPet)response, response);
         }
 
         // The convenience method of this operation is made internal because this operation directly or indirectly uses a low confident type, for instance, unions, literal types with number values, etc.
@@ -858,8 +858,8 @@ namespace ConfidentLevelsInTsp
             Argument.AssertNotNull(input, nameof(input));
 
             RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = await PollutedDerivedMethodAsync(input.ToRequestContent(), context).ConfigureAwait(false);
-            return Response.FromValue(PollutedDog.FromResponse(response), response);
+            Response response = await PollutedDerivedMethodAsync(input, context).ConfigureAwait(false);
+            return Response.FromValue((PollutedDog)response, response);
         }
 
         /// <summary> This is an operation that uses the model with a union type directly therefore this operation is not confident. </summary>
@@ -872,8 +872,8 @@ namespace ConfidentLevelsInTsp
             Argument.AssertNotNull(input, nameof(input));
 
             RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = PollutedDerivedMethod(input.ToRequestContent(), context);
-            return Response.FromValue(PollutedDog.FromResponse(response), response);
+            Response response = PollutedDerivedMethod(input, context);
+            return Response.FromValue((PollutedDog)response, response);
         }
 
         // The convenience method of this operation is made internal because this operation directly or indirectly uses a low confident type, for instance, unions, literal types with number values, etc.
@@ -956,8 +956,8 @@ namespace ConfidentLevelsInTsp
             Argument.AssertNotNull(input, nameof(input));
 
             RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = await UnpollutedDerivedMethodAsync(input.ToRequestContent(), context).ConfigureAwait(false);
-            return Response.FromValue(UnpollutedCat.FromResponse(response), response);
+            Response response = await UnpollutedDerivedMethodAsync(input, context).ConfigureAwait(false);
+            return Response.FromValue((UnpollutedCat)response, response);
         }
 
         /// <summary> This is an operation that is not using the model with a union type directly but since the base type is not confident and we would like it to be low confident, therefore this must be made internal as well. </summary>
@@ -970,8 +970,8 @@ namespace ConfidentLevelsInTsp
             Argument.AssertNotNull(input, nameof(input));
 
             RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = UnpollutedDerivedMethod(input.ToRequestContent(), context);
-            return Response.FromValue(UnpollutedCat.FromResponse(response), response);
+            Response response = UnpollutedDerivedMethod(input, context);
+            return Response.FromValue((UnpollutedCat)response, response);
         }
 
         // The convenience method of this operation is made internal because this operation directly or indirectly uses a low confident type, for instance, unions, literal types with number values, etc.
@@ -1054,7 +1054,7 @@ namespace ConfidentLevelsInTsp
             Argument.AssertNotNull(input, nameof(input));
 
             RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = await UseDerivedModelAsync(input.ToRequestContent(), context).ConfigureAwait(false);
+            Response response = await UseDerivedModelAsync(input, context).ConfigureAwait(false);
             return response;
         }
 
@@ -1068,7 +1068,7 @@ namespace ConfidentLevelsInTsp
             Argument.AssertNotNull(input, nameof(input));
 
             RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = UseDerivedModel(input.ToRequestContent(), context);
+            Response response = UseDerivedModel(input, context);
             return response;
         }
 
@@ -1152,7 +1152,7 @@ namespace ConfidentLevelsInTsp
             Argument.AssertNotNull(input, nameof(input));
 
             RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = await UseDerivedModelWithUnionAsync(input.ToRequestContent(), context).ConfigureAwait(false);
+            Response response = await UseDerivedModelWithUnionAsync(input, context).ConfigureAwait(false);
             return response;
         }
 
@@ -1166,7 +1166,7 @@ namespace ConfidentLevelsInTsp
             Argument.AssertNotNull(input, nameof(input));
 
             RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = UseDerivedModelWithUnion(input.ToRequestContent(), context);
+            Response response = UseDerivedModelWithUnion(input, context);
             return response;
         }
 

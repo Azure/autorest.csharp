@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
 using Azure.Core;
 
 namespace ConfidentLevelsInTsp.Models
@@ -25,7 +26,8 @@ namespace ConfidentLevelsInTsp.Models
         /// <param name="name"> The name. </param>
         /// <param name="size"> The size. </param>
         /// <param name="age"> The age. </param>
-        internal DerivedModel(string name, double? size, int? age) : base(name, size)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal DerivedModel(string name, double? size, int? age, Dictionary<string, BinaryData> rawData) : base(name, size, rawData)
         {
             Age = age;
         }

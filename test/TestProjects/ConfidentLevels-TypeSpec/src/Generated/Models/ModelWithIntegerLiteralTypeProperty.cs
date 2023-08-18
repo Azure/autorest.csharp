@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
 using Azure.Core;
 
 namespace ConfidentLevelsInTsp.Models
@@ -13,6 +14,8 @@ namespace ConfidentLevelsInTsp.Models
     /// <summary> This is a model with a property of literal type of numbers. </summary>
     internal partial class ModelWithIntegerLiteralTypeProperty
     {
+        private Dictionary<string, BinaryData> _rawData;
+
         /// <summary> Initializes a new instance of ModelWithIntegerLiteralTypeProperty. </summary>
         /// <param name="name"> The name. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
@@ -26,10 +29,12 @@ namespace ConfidentLevelsInTsp.Models
         /// <summary> Initializes a new instance of ModelWithIntegerLiteralTypeProperty. </summary>
         /// <param name="name"> The name. </param>
         /// <param name="id"> The id. </param>
-        internal ModelWithIntegerLiteralTypeProperty(string name, ModelWithIntegerLiteralTypePropertyId id)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal ModelWithIntegerLiteralTypeProperty(string name, ModelWithIntegerLiteralTypePropertyId id, Dictionary<string, BinaryData> rawData)
         {
             Name = name;
             Id = id;
+            _rawData = rawData;
         }
 
         /// <summary> The name. </summary>

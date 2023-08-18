@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
 using Azure.Core;
 
 namespace ConfidentLevelsInTsp.Models
@@ -13,6 +14,8 @@ namespace ConfidentLevelsInTsp.Models
     /// <summary> This is a model without union types. </summary>
     internal partial class UsualModel
     {
+        private Dictionary<string, BinaryData> _rawData;
+
         /// <summary> Initializes a new instance of UsualModel. </summary>
         /// <param name="name"> The name. </param>
         /// <param name="age"> The age. </param>
@@ -29,11 +32,13 @@ namespace ConfidentLevelsInTsp.Models
         /// <param name="name"> The name. </param>
         /// <param name="age"> The age. </param>
         /// <param name="size"> The size. </param>
-        internal UsualModel(string name, int age, double? size)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal UsualModel(string name, int age, double? size, Dictionary<string, BinaryData> rawData)
         {
             Name = name;
             Age = age;
             Size = size;
+            _rawData = rawData;
         }
 
         /// <summary> The name. </summary>

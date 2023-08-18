@@ -14,7 +14,7 @@ using Azure.Core.Serialization;
 
 namespace Azure.NewProject.TypeSpec.Models
 {
-    public partial class Thing : IUtf8JsonSerializable, IModelJsonSerializable<Thing>
+    internal partial class Thing : IUtf8JsonSerializable, IModelJsonSerializable<Thing>
     {
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<Thing>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
 
@@ -26,7 +26,7 @@ namespace Azure.NewProject.TypeSpec.Models
             writer.WritePropertyName("name"u8);
             writer.WriteStringValue(Name);
             writer.WritePropertyName("requiredUnion"u8);
-            writer.WriteStringValue(RequiredUnion);
+            writer.WriteObjectValue(RequiredUnion);
             writer.WritePropertyName("requiredLiteralString"u8);
             writer.WriteStringValue(RequiredLiteralString.ToString());
             writer.WritePropertyName("requiredLiteralInt"u8);
@@ -81,7 +81,7 @@ namespace Azure.NewProject.TypeSpec.Models
                 return null;
             }
             string name = default;
-            string requiredUnion = default;
+            object requiredUnion = default;
             ThingRequiredLiteralString requiredLiteralString = default;
             ThingRequiredLiteralInt requiredLiteralInt = default;
             ThingRequiredLiteralFloat requiredLiteralFloat = default;
@@ -101,7 +101,7 @@ namespace Azure.NewProject.TypeSpec.Models
                 }
                 if (property.NameEquals("requiredUnion"u8))
                 {
-                    requiredUnion = property.Value.GetString();
+                    requiredUnion = property.Value.GetObject();
                     continue;
                 }
                 if (property.NameEquals("requiredLiteralString"u8))
