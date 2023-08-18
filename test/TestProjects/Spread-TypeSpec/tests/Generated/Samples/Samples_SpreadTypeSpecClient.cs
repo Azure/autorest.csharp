@@ -503,5 +503,93 @@ namespace SpreadTypeSpec.Samples
 
             var result = await client.SpreadAliasWithOptionalPropsAsync("<id>", 1234, "<name>", new int[] { 1234 }, "<color>", 1234, new string[] { "<elements>" }).ConfigureAwait(false);
         }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_SpreadAliasWithCollections()
+        {
+            var endpoint = new Uri("<https://my-service.azure.com>");
+            var client = new SpreadTypeSpecClient(endpoint);
+
+            var data = new
+            {
+                requiredStringList = new[] {
+        "<String>"
+    },
+            };
+
+            Response response = client.SpreadAliasWithCollections(RequestContent.Create(data));
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_SpreadAliasWithCollections_AllParameters()
+        {
+            var endpoint = new Uri("<https://my-service.azure.com>");
+            var client = new SpreadTypeSpecClient(endpoint);
+
+            var data = new
+            {
+                requiredStringList = new[] {
+        "<String>"
+    },
+                optionalStringList = new[] {
+        "<String>"
+    },
+            };
+
+            Response response = client.SpreadAliasWithCollections(RequestContent.Create(data));
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_SpreadAliasWithCollections_Async()
+        {
+            var endpoint = new Uri("<https://my-service.azure.com>");
+            var client = new SpreadTypeSpecClient(endpoint);
+
+            var data = new
+            {
+                requiredStringList = new[] {
+        "<String>"
+    },
+            };
+
+            Response response = await client.SpreadAliasWithCollectionsAsync(RequestContent.Create(data));
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_SpreadAliasWithCollections_AllParameters_Async()
+        {
+            var endpoint = new Uri("<https://my-service.azure.com>");
+            var client = new SpreadTypeSpecClient(endpoint);
+
+            var data = new
+            {
+                requiredStringList = new[] {
+        "<String>"
+    },
+                optionalStringList = new[] {
+        "<String>"
+    },
+            };
+
+            Response response = await client.SpreadAliasWithCollectionsAsync(RequestContent.Create(data));
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_SpreadAliasWithCollections_Convenience_Async()
+        {
+            var endpoint = new Uri("<https://my-service.azure.com>");
+            var client = new SpreadTypeSpecClient(endpoint);
+
+            var result = await client.SpreadAliasWithCollectionsAsync(new string[] { "<requiredStringList>" }, new string[] { "<optionalStringList>" });
+        }
     }
 }

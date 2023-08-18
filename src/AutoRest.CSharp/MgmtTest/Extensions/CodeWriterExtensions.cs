@@ -11,13 +11,13 @@ using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Mgmt.AutoRest;
 using AutoRest.CSharp.Mgmt.Decorator;
-using AutoRest.CSharp.Mgmt.Output;
 using AutoRest.CSharp.MgmtTest.Models;
 using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Output.Models.Types;
 using AutoRest.CSharp.Utilities;
 using Azure;
 using Azure.Core;
+using Azure.Core.Expressions.DataFactory;
 
 namespace AutoRest.CSharp.MgmtTest.Extensions
 {
@@ -38,6 +38,9 @@ namespace AutoRest.CSharp.MgmtTest.Extensions
             // get the type of this schema in the type factory if the type is not specified
             // get the type from TypeFactory cannot get the replaced types, therefore we need to put an argument in the signature as a hint in case this might happen in the replaced type case
             type ??= MgmtContext.Context.Library.TypeFactory.CreateType(exampleValue.Schema, false);
+
+            if (exampleValue.Schema != null && ReferenceTypePropertyChooser.TryGetCachedExactMatch(exampleValue.Schema, out CSharpType? replaceType) && replaceType != null)
+                type = replaceType;
 
             return type.IsFrameworkType ?
                 writer.AppendFrameworkTypeValue(type, exampleValue, includeCollectionInitialization) :
@@ -104,10 +107,47 @@ namespace AutoRest.CSharp.MgmtTest.Extensions
             if (type.FrameworkType == typeof(BinaryData))
                 return writer.AppendBinaryData(exampleValue);
 
+            if (type.FrameworkType == typeof(DataFactoryElement<>))
+                return writer.AppendDataFactoryElementValue(type, exampleValue);
+
             if (exampleValue.Schema is ObjectSchema objectSchema)
                 return writer.AppendComplexFrameworkTypeValue(objectSchema, type.FrameworkType, exampleValue);
 
             return writer.AppendRawValue(exampleValue.RawValue, type.FrameworkType, exampleValue.Schema.Type);
+        }
+
+        private static CodeWriter AppendDataFactoryElementValue(this CodeWriter writer, CSharpType type, ExampleValue exampleValue)
+        {
+            if (type.FrameworkType != typeof(DataFactoryElement<>))
+                throw new ArgumentException("DataFactoryElement<> is expected but got: " + type.ToString());
+
+            const string DFE_OBJECT_SCHEMA_PREFIX = "DataFactoryElement-";
+
+            if (exampleValue.Schema is ObjectSchema os && os.Name.StartsWith(DFE_OBJECT_SCHEMA_PREFIX))
+            {
+                const string DFE_OBJECT_PROPERTY_TYPE = "type";
+                const string DFE_OBJECT_PROPERTY_VALUE = "value";
+
+                string dfeType = (string)exampleValue.Properties![DFE_OBJECT_PROPERTY_TYPE].RawValue!;
+                ExampleValue dfeValue = exampleValue.Properties![DFE_OBJECT_PROPERTY_VALUE]!;
+                string createMethodName = dfeType switch
+                {
+                    "Expression" => nameof(DataFactoryElement<string>.FromExpression),
+                    "SecureString" => nameof(DataFactoryElement<string>.FromSecretString),
+                    "AzureKeyVaultSecretReference" => nameof(DataFactoryElement<string>.FromKeyVaultSecretReference),
+                    _ => throw new InvalidOperationException("Unknown DataFactoryElement type: " + dfeType)
+                };
+
+                writer.Append($"{type: L}.{createMethodName}(");
+                writer.AppendExampleValue(dfeValue, typeof(DataFactoryKeyVaultSecretReference));
+                writer.AppendRaw(")");
+            }
+            else
+            {
+                CSharpType literlType = type.Arguments.First();
+                writer.AppendExampleValue(exampleValue, literlType);
+            }
+            return writer;
         }
 
         private static CodeWriter AppendListValue(this CodeWriter writer, CSharpType type, ExampleValue exampleValue, bool includeInitialization = true)
@@ -376,8 +416,8 @@ namespace AutoRest.CSharp.MgmtTest.Extensions
             }
             // need to get the actual ObjectType if this type has a discrinimator
             objectType = GetActualImplementation(objectType, valueDict);
-            // get all the properties on this type, including the properties from its base type
-            var properties = new HashSet<ObjectTypeProperty>(objectType.EnumerateHierarchy().SelectMany(objectType => objectType.Properties));
+            // get all the properties on this type, including the properties from its base type. Distinct is needed when the type is replaced with additional property included
+            var properties = new HashSet<ObjectTypeProperty>(objectType.EnumerateHierarchy().SelectMany(objectType => objectType.Properties).DistinctBy(p => p.Declaration.Name));
             var constructor = objectType.InitializationConstructor;
             writer.Append($"new {objectType.Type}(");
             // build a map from parameter name to property

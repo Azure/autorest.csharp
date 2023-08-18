@@ -6,10 +6,13 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
+using System.IO;
 using System.Text.Json;
 using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
+using Azure.Identity;
 using NUnit.Framework;
 
 namespace lro_LowLevel.Samples
@@ -25,7 +28,7 @@ namespace lro_LowLevel.Samples
 
             var data = new { };
 
-            var operation = client.Put200Succeeded(WaitUntil.Completed, RequestContent.Create(data), new RequestContext());
+            var operation = client.Put200Succeeded(WaitUntil.Completed, RequestContent.Create(data));
 
             BinaryData responseData = operation.Value;
             JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
@@ -52,7 +55,7 @@ namespace lro_LowLevel.Samples
                 location = "<location>",
             };
 
-            var operation = client.Put200Succeeded(WaitUntil.Completed, RequestContent.Create(data), new RequestContext());
+            var operation = client.Put200Succeeded(WaitUntil.Completed, RequestContent.Create(data));
 
             BinaryData responseData = operation.Value;
             JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
@@ -74,7 +77,7 @@ namespace lro_LowLevel.Samples
 
             var data = new { };
 
-            var operation = await client.Put200SucceededAsync(WaitUntil.Completed, RequestContent.Create(data), new RequestContext()).ConfigureAwait(false);
+            var operation = await client.Put200SucceededAsync(WaitUntil.Completed, RequestContent.Create(data));
 
             BinaryData responseData = operation.Value;
             JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
@@ -101,7 +104,7 @@ namespace lro_LowLevel.Samples
                 location = "<location>",
             };
 
-            var operation = await client.Put200SucceededAsync(WaitUntil.Completed, RequestContent.Create(data), new RequestContext()).ConfigureAwait(false);
+            var operation = await client.Put200SucceededAsync(WaitUntil.Completed, RequestContent.Create(data));
 
             BinaryData responseData = operation.Value;
             JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
@@ -123,7 +126,7 @@ namespace lro_LowLevel.Samples
 
             var data = new { };
 
-            var operation = client.Patch200SucceededIgnoreHeaders(WaitUntil.Completed, RequestContent.Create(data), new RequestContext());
+            var operation = client.Patch200SucceededIgnoreHeaders(WaitUntil.Completed, RequestContent.Create(data));
 
             BinaryData responseData = operation.Value;
             JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
@@ -150,7 +153,7 @@ namespace lro_LowLevel.Samples
                 location = "<location>",
             };
 
-            var operation = client.Patch200SucceededIgnoreHeaders(WaitUntil.Completed, RequestContent.Create(data), new RequestContext());
+            var operation = client.Patch200SucceededIgnoreHeaders(WaitUntil.Completed, RequestContent.Create(data));
 
             BinaryData responseData = operation.Value;
             JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
@@ -172,7 +175,7 @@ namespace lro_LowLevel.Samples
 
             var data = new { };
 
-            var operation = await client.Patch200SucceededIgnoreHeadersAsync(WaitUntil.Completed, RequestContent.Create(data), new RequestContext()).ConfigureAwait(false);
+            var operation = await client.Patch200SucceededIgnoreHeadersAsync(WaitUntil.Completed, RequestContent.Create(data));
 
             BinaryData responseData = operation.Value;
             JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
@@ -199,7 +202,7 @@ namespace lro_LowLevel.Samples
                 location = "<location>",
             };
 
-            var operation = await client.Patch200SucceededIgnoreHeadersAsync(WaitUntil.Completed, RequestContent.Create(data), new RequestContext()).ConfigureAwait(false);
+            var operation = await client.Patch200SucceededIgnoreHeadersAsync(WaitUntil.Completed, RequestContent.Create(data));
 
             BinaryData responseData = operation.Value;
             JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
@@ -221,7 +224,7 @@ namespace lro_LowLevel.Samples
 
             var data = new { };
 
-            var operation = client.Patch201RetryWithAsyncHeader(WaitUntil.Completed, RequestContent.Create(data), new RequestContext());
+            var operation = client.Patch201RetryWithAsyncHeader(WaitUntil.Completed, RequestContent.Create(data));
 
             BinaryData responseData = operation.Value;
             JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
@@ -248,7 +251,7 @@ namespace lro_LowLevel.Samples
                 location = "<location>",
             };
 
-            var operation = client.Patch201RetryWithAsyncHeader(WaitUntil.Completed, RequestContent.Create(data), new RequestContext());
+            var operation = client.Patch201RetryWithAsyncHeader(WaitUntil.Completed, RequestContent.Create(data));
 
             BinaryData responseData = operation.Value;
             JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
@@ -270,7 +273,7 @@ namespace lro_LowLevel.Samples
 
             var data = new { };
 
-            var operation = await client.Patch201RetryWithAsyncHeaderAsync(WaitUntil.Completed, RequestContent.Create(data), new RequestContext()).ConfigureAwait(false);
+            var operation = await client.Patch201RetryWithAsyncHeaderAsync(WaitUntil.Completed, RequestContent.Create(data));
 
             BinaryData responseData = operation.Value;
             JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
@@ -297,7 +300,7 @@ namespace lro_LowLevel.Samples
                 location = "<location>",
             };
 
-            var operation = await client.Patch201RetryWithAsyncHeaderAsync(WaitUntil.Completed, RequestContent.Create(data), new RequestContext()).ConfigureAwait(false);
+            var operation = await client.Patch201RetryWithAsyncHeaderAsync(WaitUntil.Completed, RequestContent.Create(data));
 
             BinaryData responseData = operation.Value;
             JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
@@ -319,7 +322,7 @@ namespace lro_LowLevel.Samples
 
             var data = new { };
 
-            var operation = client.Patch202RetryWithAsyncAndLocationHeader(WaitUntil.Completed, RequestContent.Create(data), new RequestContext());
+            var operation = client.Patch202RetryWithAsyncAndLocationHeader(WaitUntil.Completed, RequestContent.Create(data));
 
             BinaryData responseData = operation.Value;
             JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
@@ -346,7 +349,7 @@ namespace lro_LowLevel.Samples
                 location = "<location>",
             };
 
-            var operation = client.Patch202RetryWithAsyncAndLocationHeader(WaitUntil.Completed, RequestContent.Create(data), new RequestContext());
+            var operation = client.Patch202RetryWithAsyncAndLocationHeader(WaitUntil.Completed, RequestContent.Create(data));
 
             BinaryData responseData = operation.Value;
             JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
@@ -368,7 +371,7 @@ namespace lro_LowLevel.Samples
 
             var data = new { };
 
-            var operation = await client.Patch202RetryWithAsyncAndLocationHeaderAsync(WaitUntil.Completed, RequestContent.Create(data), new RequestContext()).ConfigureAwait(false);
+            var operation = await client.Patch202RetryWithAsyncAndLocationHeaderAsync(WaitUntil.Completed, RequestContent.Create(data));
 
             BinaryData responseData = operation.Value;
             JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
@@ -395,7 +398,7 @@ namespace lro_LowLevel.Samples
                 location = "<location>",
             };
 
-            var operation = await client.Patch202RetryWithAsyncAndLocationHeaderAsync(WaitUntil.Completed, RequestContent.Create(data), new RequestContext()).ConfigureAwait(false);
+            var operation = await client.Patch202RetryWithAsyncAndLocationHeaderAsync(WaitUntil.Completed, RequestContent.Create(data));
 
             BinaryData responseData = operation.Value;
             JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
@@ -417,7 +420,7 @@ namespace lro_LowLevel.Samples
 
             var data = new { };
 
-            var operation = client.Put201Succeeded(WaitUntil.Completed, RequestContent.Create(data), new RequestContext());
+            var operation = client.Put201Succeeded(WaitUntil.Completed, RequestContent.Create(data));
 
             BinaryData responseData = operation.Value;
             JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
@@ -444,7 +447,7 @@ namespace lro_LowLevel.Samples
                 location = "<location>",
             };
 
-            var operation = client.Put201Succeeded(WaitUntil.Completed, RequestContent.Create(data), new RequestContext());
+            var operation = client.Put201Succeeded(WaitUntil.Completed, RequestContent.Create(data));
 
             BinaryData responseData = operation.Value;
             JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
@@ -466,7 +469,7 @@ namespace lro_LowLevel.Samples
 
             var data = new { };
 
-            var operation = await client.Put201SucceededAsync(WaitUntil.Completed, RequestContent.Create(data), new RequestContext()).ConfigureAwait(false);
+            var operation = await client.Put201SucceededAsync(WaitUntil.Completed, RequestContent.Create(data));
 
             BinaryData responseData = operation.Value;
             JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
@@ -493,7 +496,7 @@ namespace lro_LowLevel.Samples
                 location = "<location>",
             };
 
-            var operation = await client.Put201SucceededAsync(WaitUntil.Completed, RequestContent.Create(data), new RequestContext()).ConfigureAwait(false);
+            var operation = await client.Put201SucceededAsync(WaitUntil.Completed, RequestContent.Create(data));
 
             BinaryData responseData = operation.Value;
             JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
@@ -547,7 +550,7 @@ namespace lro_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new LROsClient(credential);
 
-            var operation = await client.Post202ListAsync(WaitUntil.Completed, new RequestContext()).ConfigureAwait(false);
+            var operation = await client.Post202ListAsync(WaitUntil.Completed, new RequestContext());
 
             BinaryData responseData = operation.Value;
             JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
@@ -561,7 +564,7 @@ namespace lro_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new LROsClient(credential);
 
-            var operation = await client.Post202ListAsync(WaitUntil.Completed, new RequestContext()).ConfigureAwait(false);
+            var operation = await client.Post202ListAsync(WaitUntil.Completed, new RequestContext());
 
             BinaryData responseData = operation.Value;
             JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
@@ -583,7 +586,7 @@ namespace lro_LowLevel.Samples
 
             var data = new { };
 
-            var operation = client.Put200SucceededNoState(WaitUntil.Completed, RequestContent.Create(data), new RequestContext());
+            var operation = client.Put200SucceededNoState(WaitUntil.Completed, RequestContent.Create(data));
 
             BinaryData responseData = operation.Value;
             JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
@@ -610,7 +613,7 @@ namespace lro_LowLevel.Samples
                 location = "<location>",
             };
 
-            var operation = client.Put200SucceededNoState(WaitUntil.Completed, RequestContent.Create(data), new RequestContext());
+            var operation = client.Put200SucceededNoState(WaitUntil.Completed, RequestContent.Create(data));
 
             BinaryData responseData = operation.Value;
             JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
@@ -632,7 +635,7 @@ namespace lro_LowLevel.Samples
 
             var data = new { };
 
-            var operation = await client.Put200SucceededNoStateAsync(WaitUntil.Completed, RequestContent.Create(data), new RequestContext()).ConfigureAwait(false);
+            var operation = await client.Put200SucceededNoStateAsync(WaitUntil.Completed, RequestContent.Create(data));
 
             BinaryData responseData = operation.Value;
             JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
@@ -659,7 +662,7 @@ namespace lro_LowLevel.Samples
                 location = "<location>",
             };
 
-            var operation = await client.Put200SucceededNoStateAsync(WaitUntil.Completed, RequestContent.Create(data), new RequestContext()).ConfigureAwait(false);
+            var operation = await client.Put200SucceededNoStateAsync(WaitUntil.Completed, RequestContent.Create(data));
 
             BinaryData responseData = operation.Value;
             JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
@@ -681,7 +684,7 @@ namespace lro_LowLevel.Samples
 
             var data = new { };
 
-            var operation = client.Put202Retry200(WaitUntil.Completed, RequestContent.Create(data), new RequestContext());
+            var operation = client.Put202Retry200(WaitUntil.Completed, RequestContent.Create(data));
 
             BinaryData responseData = operation.Value;
             JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
@@ -708,7 +711,7 @@ namespace lro_LowLevel.Samples
                 location = "<location>",
             };
 
-            var operation = client.Put202Retry200(WaitUntil.Completed, RequestContent.Create(data), new RequestContext());
+            var operation = client.Put202Retry200(WaitUntil.Completed, RequestContent.Create(data));
 
             BinaryData responseData = operation.Value;
             JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
@@ -730,7 +733,7 @@ namespace lro_LowLevel.Samples
 
             var data = new { };
 
-            var operation = await client.Put202Retry200Async(WaitUntil.Completed, RequestContent.Create(data), new RequestContext()).ConfigureAwait(false);
+            var operation = await client.Put202Retry200Async(WaitUntil.Completed, RequestContent.Create(data));
 
             BinaryData responseData = operation.Value;
             JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
@@ -757,7 +760,7 @@ namespace lro_LowLevel.Samples
                 location = "<location>",
             };
 
-            var operation = await client.Put202Retry200Async(WaitUntil.Completed, RequestContent.Create(data), new RequestContext()).ConfigureAwait(false);
+            var operation = await client.Put202Retry200Async(WaitUntil.Completed, RequestContent.Create(data));
 
             BinaryData responseData = operation.Value;
             JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
@@ -779,7 +782,7 @@ namespace lro_LowLevel.Samples
 
             var data = new { };
 
-            var operation = client.Put201CreatingSucceeded200(WaitUntil.Completed, RequestContent.Create(data), new RequestContext());
+            var operation = client.Put201CreatingSucceeded200(WaitUntil.Completed, RequestContent.Create(data));
 
             BinaryData responseData = operation.Value;
             JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
@@ -806,7 +809,7 @@ namespace lro_LowLevel.Samples
                 location = "<location>",
             };
 
-            var operation = client.Put201CreatingSucceeded200(WaitUntil.Completed, RequestContent.Create(data), new RequestContext());
+            var operation = client.Put201CreatingSucceeded200(WaitUntil.Completed, RequestContent.Create(data));
 
             BinaryData responseData = operation.Value;
             JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
@@ -828,7 +831,7 @@ namespace lro_LowLevel.Samples
 
             var data = new { };
 
-            var operation = await client.Put201CreatingSucceeded200Async(WaitUntil.Completed, RequestContent.Create(data), new RequestContext()).ConfigureAwait(false);
+            var operation = await client.Put201CreatingSucceeded200Async(WaitUntil.Completed, RequestContent.Create(data));
 
             BinaryData responseData = operation.Value;
             JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
@@ -855,7 +858,7 @@ namespace lro_LowLevel.Samples
                 location = "<location>",
             };
 
-            var operation = await client.Put201CreatingSucceeded200Async(WaitUntil.Completed, RequestContent.Create(data), new RequestContext()).ConfigureAwait(false);
+            var operation = await client.Put201CreatingSucceeded200Async(WaitUntil.Completed, RequestContent.Create(data));
 
             BinaryData responseData = operation.Value;
             JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
@@ -877,7 +880,7 @@ namespace lro_LowLevel.Samples
 
             var data = new { };
 
-            var operation = client.Put200UpdatingSucceeded204(WaitUntil.Completed, RequestContent.Create(data), new RequestContext());
+            var operation = client.Put200UpdatingSucceeded204(WaitUntil.Completed, RequestContent.Create(data));
 
             BinaryData responseData = operation.Value;
             JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
@@ -904,7 +907,7 @@ namespace lro_LowLevel.Samples
                 location = "<location>",
             };
 
-            var operation = client.Put200UpdatingSucceeded204(WaitUntil.Completed, RequestContent.Create(data), new RequestContext());
+            var operation = client.Put200UpdatingSucceeded204(WaitUntil.Completed, RequestContent.Create(data));
 
             BinaryData responseData = operation.Value;
             JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
@@ -926,7 +929,7 @@ namespace lro_LowLevel.Samples
 
             var data = new { };
 
-            var operation = await client.Put200UpdatingSucceeded204Async(WaitUntil.Completed, RequestContent.Create(data), new RequestContext()).ConfigureAwait(false);
+            var operation = await client.Put200UpdatingSucceeded204Async(WaitUntil.Completed, RequestContent.Create(data));
 
             BinaryData responseData = operation.Value;
             JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
@@ -953,7 +956,7 @@ namespace lro_LowLevel.Samples
                 location = "<location>",
             };
 
-            var operation = await client.Put200UpdatingSucceeded204Async(WaitUntil.Completed, RequestContent.Create(data), new RequestContext()).ConfigureAwait(false);
+            var operation = await client.Put200UpdatingSucceeded204Async(WaitUntil.Completed, RequestContent.Create(data));
 
             BinaryData responseData = operation.Value;
             JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
@@ -975,7 +978,7 @@ namespace lro_LowLevel.Samples
 
             var data = new { };
 
-            var operation = client.Put201CreatingFailed200(WaitUntil.Completed, RequestContent.Create(data), new RequestContext());
+            var operation = client.Put201CreatingFailed200(WaitUntil.Completed, RequestContent.Create(data));
 
             BinaryData responseData = operation.Value;
             JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
@@ -1002,7 +1005,7 @@ namespace lro_LowLevel.Samples
                 location = "<location>",
             };
 
-            var operation = client.Put201CreatingFailed200(WaitUntil.Completed, RequestContent.Create(data), new RequestContext());
+            var operation = client.Put201CreatingFailed200(WaitUntil.Completed, RequestContent.Create(data));
 
             BinaryData responseData = operation.Value;
             JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
@@ -1024,7 +1027,7 @@ namespace lro_LowLevel.Samples
 
             var data = new { };
 
-            var operation = await client.Put201CreatingFailed200Async(WaitUntil.Completed, RequestContent.Create(data), new RequestContext()).ConfigureAwait(false);
+            var operation = await client.Put201CreatingFailed200Async(WaitUntil.Completed, RequestContent.Create(data));
 
             BinaryData responseData = operation.Value;
             JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
@@ -1051,7 +1054,7 @@ namespace lro_LowLevel.Samples
                 location = "<location>",
             };
 
-            var operation = await client.Put201CreatingFailed200Async(WaitUntil.Completed, RequestContent.Create(data), new RequestContext()).ConfigureAwait(false);
+            var operation = await client.Put201CreatingFailed200Async(WaitUntil.Completed, RequestContent.Create(data));
 
             BinaryData responseData = operation.Value;
             JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
@@ -1073,7 +1076,7 @@ namespace lro_LowLevel.Samples
 
             var data = new { };
 
-            var operation = client.Put200Acceptedcanceled200(WaitUntil.Completed, RequestContent.Create(data), new RequestContext());
+            var operation = client.Put200Acceptedcanceled200(WaitUntil.Completed, RequestContent.Create(data));
 
             BinaryData responseData = operation.Value;
             JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
@@ -1100,7 +1103,7 @@ namespace lro_LowLevel.Samples
                 location = "<location>",
             };
 
-            var operation = client.Put200Acceptedcanceled200(WaitUntil.Completed, RequestContent.Create(data), new RequestContext());
+            var operation = client.Put200Acceptedcanceled200(WaitUntil.Completed, RequestContent.Create(data));
 
             BinaryData responseData = operation.Value;
             JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
@@ -1122,7 +1125,7 @@ namespace lro_LowLevel.Samples
 
             var data = new { };
 
-            var operation = await client.Put200Acceptedcanceled200Async(WaitUntil.Completed, RequestContent.Create(data), new RequestContext()).ConfigureAwait(false);
+            var operation = await client.Put200Acceptedcanceled200Async(WaitUntil.Completed, RequestContent.Create(data));
 
             BinaryData responseData = operation.Value;
             JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
@@ -1149,7 +1152,7 @@ namespace lro_LowLevel.Samples
                 location = "<location>",
             };
 
-            var operation = await client.Put200Acceptedcanceled200Async(WaitUntil.Completed, RequestContent.Create(data), new RequestContext()).ConfigureAwait(false);
+            var operation = await client.Put200Acceptedcanceled200Async(WaitUntil.Completed, RequestContent.Create(data));
 
             BinaryData responseData = operation.Value;
             JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
@@ -1171,7 +1174,7 @@ namespace lro_LowLevel.Samples
 
             var data = new { };
 
-            var operation = client.PutNoHeaderInRetry(WaitUntil.Completed, RequestContent.Create(data), new RequestContext());
+            var operation = client.PutNoHeaderInRetry(WaitUntil.Completed, RequestContent.Create(data));
 
             BinaryData responseData = operation.Value;
             JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
@@ -1198,7 +1201,7 @@ namespace lro_LowLevel.Samples
                 location = "<location>",
             };
 
-            var operation = client.PutNoHeaderInRetry(WaitUntil.Completed, RequestContent.Create(data), new RequestContext());
+            var operation = client.PutNoHeaderInRetry(WaitUntil.Completed, RequestContent.Create(data));
 
             BinaryData responseData = operation.Value;
             JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
@@ -1220,7 +1223,7 @@ namespace lro_LowLevel.Samples
 
             var data = new { };
 
-            var operation = await client.PutNoHeaderInRetryAsync(WaitUntil.Completed, RequestContent.Create(data), new RequestContext()).ConfigureAwait(false);
+            var operation = await client.PutNoHeaderInRetryAsync(WaitUntil.Completed, RequestContent.Create(data));
 
             BinaryData responseData = operation.Value;
             JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
@@ -1247,7 +1250,7 @@ namespace lro_LowLevel.Samples
                 location = "<location>",
             };
 
-            var operation = await client.PutNoHeaderInRetryAsync(WaitUntil.Completed, RequestContent.Create(data), new RequestContext()).ConfigureAwait(false);
+            var operation = await client.PutNoHeaderInRetryAsync(WaitUntil.Completed, RequestContent.Create(data));
 
             BinaryData responseData = operation.Value;
             JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
@@ -1269,7 +1272,7 @@ namespace lro_LowLevel.Samples
 
             var data = new { };
 
-            var operation = client.PutAsyncRetrySucceeded(WaitUntil.Completed, RequestContent.Create(data), new RequestContext());
+            var operation = client.PutAsyncRetrySucceeded(WaitUntil.Completed, RequestContent.Create(data));
 
             BinaryData responseData = operation.Value;
             JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
@@ -1296,7 +1299,7 @@ namespace lro_LowLevel.Samples
                 location = "<location>",
             };
 
-            var operation = client.PutAsyncRetrySucceeded(WaitUntil.Completed, RequestContent.Create(data), new RequestContext());
+            var operation = client.PutAsyncRetrySucceeded(WaitUntil.Completed, RequestContent.Create(data));
 
             BinaryData responseData = operation.Value;
             JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
@@ -1318,7 +1321,7 @@ namespace lro_LowLevel.Samples
 
             var data = new { };
 
-            var operation = await client.PutAsyncRetrySucceededAsync(WaitUntil.Completed, RequestContent.Create(data), new RequestContext()).ConfigureAwait(false);
+            var operation = await client.PutAsyncRetrySucceededAsync(WaitUntil.Completed, RequestContent.Create(data));
 
             BinaryData responseData = operation.Value;
             JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
@@ -1345,7 +1348,7 @@ namespace lro_LowLevel.Samples
                 location = "<location>",
             };
 
-            var operation = await client.PutAsyncRetrySucceededAsync(WaitUntil.Completed, RequestContent.Create(data), new RequestContext()).ConfigureAwait(false);
+            var operation = await client.PutAsyncRetrySucceededAsync(WaitUntil.Completed, RequestContent.Create(data));
 
             BinaryData responseData = operation.Value;
             JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
@@ -1367,7 +1370,7 @@ namespace lro_LowLevel.Samples
 
             var data = new { };
 
-            var operation = client.PutAsyncNoRetrySucceeded(WaitUntil.Completed, RequestContent.Create(data), new RequestContext());
+            var operation = client.PutAsyncNoRetrySucceeded(WaitUntil.Completed, RequestContent.Create(data));
 
             BinaryData responseData = operation.Value;
             JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
@@ -1394,7 +1397,7 @@ namespace lro_LowLevel.Samples
                 location = "<location>",
             };
 
-            var operation = client.PutAsyncNoRetrySucceeded(WaitUntil.Completed, RequestContent.Create(data), new RequestContext());
+            var operation = client.PutAsyncNoRetrySucceeded(WaitUntil.Completed, RequestContent.Create(data));
 
             BinaryData responseData = operation.Value;
             JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
@@ -1416,7 +1419,7 @@ namespace lro_LowLevel.Samples
 
             var data = new { };
 
-            var operation = await client.PutAsyncNoRetrySucceededAsync(WaitUntil.Completed, RequestContent.Create(data), new RequestContext()).ConfigureAwait(false);
+            var operation = await client.PutAsyncNoRetrySucceededAsync(WaitUntil.Completed, RequestContent.Create(data));
 
             BinaryData responseData = operation.Value;
             JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
@@ -1443,7 +1446,7 @@ namespace lro_LowLevel.Samples
                 location = "<location>",
             };
 
-            var operation = await client.PutAsyncNoRetrySucceededAsync(WaitUntil.Completed, RequestContent.Create(data), new RequestContext()).ConfigureAwait(false);
+            var operation = await client.PutAsyncNoRetrySucceededAsync(WaitUntil.Completed, RequestContent.Create(data));
 
             BinaryData responseData = operation.Value;
             JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
@@ -1465,7 +1468,7 @@ namespace lro_LowLevel.Samples
 
             var data = new { };
 
-            var operation = client.PutAsyncRetryFailed(WaitUntil.Completed, RequestContent.Create(data), new RequestContext());
+            var operation = client.PutAsyncRetryFailed(WaitUntil.Completed, RequestContent.Create(data));
 
             BinaryData responseData = operation.Value;
             JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
@@ -1492,7 +1495,7 @@ namespace lro_LowLevel.Samples
                 location = "<location>",
             };
 
-            var operation = client.PutAsyncRetryFailed(WaitUntil.Completed, RequestContent.Create(data), new RequestContext());
+            var operation = client.PutAsyncRetryFailed(WaitUntil.Completed, RequestContent.Create(data));
 
             BinaryData responseData = operation.Value;
             JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
@@ -1514,7 +1517,7 @@ namespace lro_LowLevel.Samples
 
             var data = new { };
 
-            var operation = await client.PutAsyncRetryFailedAsync(WaitUntil.Completed, RequestContent.Create(data), new RequestContext()).ConfigureAwait(false);
+            var operation = await client.PutAsyncRetryFailedAsync(WaitUntil.Completed, RequestContent.Create(data));
 
             BinaryData responseData = operation.Value;
             JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
@@ -1541,7 +1544,7 @@ namespace lro_LowLevel.Samples
                 location = "<location>",
             };
 
-            var operation = await client.PutAsyncRetryFailedAsync(WaitUntil.Completed, RequestContent.Create(data), new RequestContext()).ConfigureAwait(false);
+            var operation = await client.PutAsyncRetryFailedAsync(WaitUntil.Completed, RequestContent.Create(data));
 
             BinaryData responseData = operation.Value;
             JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
@@ -1563,7 +1566,7 @@ namespace lro_LowLevel.Samples
 
             var data = new { };
 
-            var operation = client.PutAsyncNoRetrycanceled(WaitUntil.Completed, RequestContent.Create(data), new RequestContext());
+            var operation = client.PutAsyncNoRetrycanceled(WaitUntil.Completed, RequestContent.Create(data));
 
             BinaryData responseData = operation.Value;
             JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
@@ -1590,7 +1593,7 @@ namespace lro_LowLevel.Samples
                 location = "<location>",
             };
 
-            var operation = client.PutAsyncNoRetrycanceled(WaitUntil.Completed, RequestContent.Create(data), new RequestContext());
+            var operation = client.PutAsyncNoRetrycanceled(WaitUntil.Completed, RequestContent.Create(data));
 
             BinaryData responseData = operation.Value;
             JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
@@ -1612,7 +1615,7 @@ namespace lro_LowLevel.Samples
 
             var data = new { };
 
-            var operation = await client.PutAsyncNoRetrycanceledAsync(WaitUntil.Completed, RequestContent.Create(data), new RequestContext()).ConfigureAwait(false);
+            var operation = await client.PutAsyncNoRetrycanceledAsync(WaitUntil.Completed, RequestContent.Create(data));
 
             BinaryData responseData = operation.Value;
             JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
@@ -1639,7 +1642,7 @@ namespace lro_LowLevel.Samples
                 location = "<location>",
             };
 
-            var operation = await client.PutAsyncNoRetrycanceledAsync(WaitUntil.Completed, RequestContent.Create(data), new RequestContext()).ConfigureAwait(false);
+            var operation = await client.PutAsyncNoRetrycanceledAsync(WaitUntil.Completed, RequestContent.Create(data));
 
             BinaryData responseData = operation.Value;
             JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
@@ -1661,7 +1664,7 @@ namespace lro_LowLevel.Samples
 
             var data = new { };
 
-            var operation = client.PutAsyncNoHeaderInRetry(WaitUntil.Completed, RequestContent.Create(data), new RequestContext());
+            var operation = client.PutAsyncNoHeaderInRetry(WaitUntil.Completed, RequestContent.Create(data));
 
             BinaryData responseData = operation.Value;
             JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
@@ -1688,7 +1691,7 @@ namespace lro_LowLevel.Samples
                 location = "<location>",
             };
 
-            var operation = client.PutAsyncNoHeaderInRetry(WaitUntil.Completed, RequestContent.Create(data), new RequestContext());
+            var operation = client.PutAsyncNoHeaderInRetry(WaitUntil.Completed, RequestContent.Create(data));
 
             BinaryData responseData = operation.Value;
             JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
@@ -1710,7 +1713,7 @@ namespace lro_LowLevel.Samples
 
             var data = new { };
 
-            var operation = await client.PutAsyncNoHeaderInRetryAsync(WaitUntil.Completed, RequestContent.Create(data), new RequestContext()).ConfigureAwait(false);
+            var operation = await client.PutAsyncNoHeaderInRetryAsync(WaitUntil.Completed, RequestContent.Create(data));
 
             BinaryData responseData = operation.Value;
             JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
@@ -1737,7 +1740,7 @@ namespace lro_LowLevel.Samples
                 location = "<location>",
             };
 
-            var operation = await client.PutAsyncNoHeaderInRetryAsync(WaitUntil.Completed, RequestContent.Create(data), new RequestContext()).ConfigureAwait(false);
+            var operation = await client.PutAsyncNoHeaderInRetryAsync(WaitUntil.Completed, RequestContent.Create(data));
 
             BinaryData responseData = operation.Value;
             JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
@@ -1759,7 +1762,7 @@ namespace lro_LowLevel.Samples
 
             var data = new { };
 
-            var operation = client.PutNonResource(WaitUntil.Completed, RequestContent.Create(data), new RequestContext());
+            var operation = client.PutNonResource(WaitUntil.Completed, RequestContent.Create(data));
 
             BinaryData responseData = operation.Value;
             JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
@@ -1779,7 +1782,7 @@ namespace lro_LowLevel.Samples
                 id = "<id>",
             };
 
-            var operation = client.PutNonResource(WaitUntil.Completed, RequestContent.Create(data), new RequestContext());
+            var operation = client.PutNonResource(WaitUntil.Completed, RequestContent.Create(data));
 
             BinaryData responseData = operation.Value;
             JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
@@ -1796,7 +1799,7 @@ namespace lro_LowLevel.Samples
 
             var data = new { };
 
-            var operation = await client.PutNonResourceAsync(WaitUntil.Completed, RequestContent.Create(data), new RequestContext()).ConfigureAwait(false);
+            var operation = await client.PutNonResourceAsync(WaitUntil.Completed, RequestContent.Create(data));
 
             BinaryData responseData = operation.Value;
             JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
@@ -1816,7 +1819,7 @@ namespace lro_LowLevel.Samples
                 id = "<id>",
             };
 
-            var operation = await client.PutNonResourceAsync(WaitUntil.Completed, RequestContent.Create(data), new RequestContext()).ConfigureAwait(false);
+            var operation = await client.PutNonResourceAsync(WaitUntil.Completed, RequestContent.Create(data));
 
             BinaryData responseData = operation.Value;
             JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
@@ -1833,7 +1836,7 @@ namespace lro_LowLevel.Samples
 
             var data = new { };
 
-            var operation = client.PutAsyncNonResource(WaitUntil.Completed, RequestContent.Create(data), new RequestContext());
+            var operation = client.PutAsyncNonResource(WaitUntil.Completed, RequestContent.Create(data));
 
             BinaryData responseData = operation.Value;
             JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
@@ -1853,7 +1856,7 @@ namespace lro_LowLevel.Samples
                 id = "<id>",
             };
 
-            var operation = client.PutAsyncNonResource(WaitUntil.Completed, RequestContent.Create(data), new RequestContext());
+            var operation = client.PutAsyncNonResource(WaitUntil.Completed, RequestContent.Create(data));
 
             BinaryData responseData = operation.Value;
             JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
@@ -1870,7 +1873,7 @@ namespace lro_LowLevel.Samples
 
             var data = new { };
 
-            var operation = await client.PutAsyncNonResourceAsync(WaitUntil.Completed, RequestContent.Create(data), new RequestContext()).ConfigureAwait(false);
+            var operation = await client.PutAsyncNonResourceAsync(WaitUntil.Completed, RequestContent.Create(data));
 
             BinaryData responseData = operation.Value;
             JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
@@ -1890,7 +1893,7 @@ namespace lro_LowLevel.Samples
                 id = "<id>",
             };
 
-            var operation = await client.PutAsyncNonResourceAsync(WaitUntil.Completed, RequestContent.Create(data), new RequestContext()).ConfigureAwait(false);
+            var operation = await client.PutAsyncNonResourceAsync(WaitUntil.Completed, RequestContent.Create(data));
 
             BinaryData responseData = operation.Value;
             JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
@@ -1907,7 +1910,7 @@ namespace lro_LowLevel.Samples
 
             var data = new { };
 
-            var operation = client.PutSubResource(WaitUntil.Completed, RequestContent.Create(data), new RequestContext());
+            var operation = client.PutSubResource(WaitUntil.Completed, RequestContent.Create(data));
 
             BinaryData responseData = operation.Value;
             JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
@@ -1929,7 +1932,7 @@ namespace lro_LowLevel.Samples
                 },
             };
 
-            var operation = client.PutSubResource(WaitUntil.Completed, RequestContent.Create(data), new RequestContext());
+            var operation = client.PutSubResource(WaitUntil.Completed, RequestContent.Create(data));
 
             BinaryData responseData = operation.Value;
             JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
@@ -1947,7 +1950,7 @@ namespace lro_LowLevel.Samples
 
             var data = new { };
 
-            var operation = await client.PutSubResourceAsync(WaitUntil.Completed, RequestContent.Create(data), new RequestContext()).ConfigureAwait(false);
+            var operation = await client.PutSubResourceAsync(WaitUntil.Completed, RequestContent.Create(data));
 
             BinaryData responseData = operation.Value;
             JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
@@ -1969,7 +1972,7 @@ namespace lro_LowLevel.Samples
                 },
             };
 
-            var operation = await client.PutSubResourceAsync(WaitUntil.Completed, RequestContent.Create(data), new RequestContext()).ConfigureAwait(false);
+            var operation = await client.PutSubResourceAsync(WaitUntil.Completed, RequestContent.Create(data));
 
             BinaryData responseData = operation.Value;
             JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
@@ -1987,7 +1990,7 @@ namespace lro_LowLevel.Samples
 
             var data = new { };
 
-            var operation = client.PutAsyncSubResource(WaitUntil.Completed, RequestContent.Create(data), new RequestContext());
+            var operation = client.PutAsyncSubResource(WaitUntil.Completed, RequestContent.Create(data));
 
             BinaryData responseData = operation.Value;
             JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
@@ -2009,7 +2012,7 @@ namespace lro_LowLevel.Samples
                 },
             };
 
-            var operation = client.PutAsyncSubResource(WaitUntil.Completed, RequestContent.Create(data), new RequestContext());
+            var operation = client.PutAsyncSubResource(WaitUntil.Completed, RequestContent.Create(data));
 
             BinaryData responseData = operation.Value;
             JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
@@ -2027,7 +2030,7 @@ namespace lro_LowLevel.Samples
 
             var data = new { };
 
-            var operation = await client.PutAsyncSubResourceAsync(WaitUntil.Completed, RequestContent.Create(data), new RequestContext()).ConfigureAwait(false);
+            var operation = await client.PutAsyncSubResourceAsync(WaitUntil.Completed, RequestContent.Create(data));
 
             BinaryData responseData = operation.Value;
             JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
@@ -2049,7 +2052,7 @@ namespace lro_LowLevel.Samples
                 },
             };
 
-            var operation = await client.PutAsyncSubResourceAsync(WaitUntil.Completed, RequestContent.Create(data), new RequestContext()).ConfigureAwait(false);
+            var operation = await client.PutAsyncSubResourceAsync(WaitUntil.Completed, RequestContent.Create(data));
 
             BinaryData responseData = operation.Value;
             JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
@@ -2099,7 +2102,7 @@ namespace lro_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new LROsClient(credential);
 
-            var operation = await client.DeleteProvisioning202Accepted200SucceededAsync(WaitUntil.Completed, new RequestContext()).ConfigureAwait(false);
+            var operation = await client.DeleteProvisioning202Accepted200SucceededAsync(WaitUntil.Completed, new RequestContext());
 
             BinaryData responseData = operation.Value;
             JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
@@ -2113,7 +2116,7 @@ namespace lro_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new LROsClient(credential);
 
-            var operation = await client.DeleteProvisioning202Accepted200SucceededAsync(WaitUntil.Completed, new RequestContext()).ConfigureAwait(false);
+            var operation = await client.DeleteProvisioning202Accepted200SucceededAsync(WaitUntil.Completed, new RequestContext());
 
             BinaryData responseData = operation.Value;
             JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
@@ -2167,7 +2170,7 @@ namespace lro_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new LROsClient(credential);
 
-            var operation = await client.DeleteProvisioning202DeletingFailed200Async(WaitUntil.Completed, new RequestContext()).ConfigureAwait(false);
+            var operation = await client.DeleteProvisioning202DeletingFailed200Async(WaitUntil.Completed, new RequestContext());
 
             BinaryData responseData = operation.Value;
             JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
@@ -2181,7 +2184,7 @@ namespace lro_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new LROsClient(credential);
 
-            var operation = await client.DeleteProvisioning202DeletingFailed200Async(WaitUntil.Completed, new RequestContext()).ConfigureAwait(false);
+            var operation = await client.DeleteProvisioning202DeletingFailed200Async(WaitUntil.Completed, new RequestContext());
 
             BinaryData responseData = operation.Value;
             JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
@@ -2235,7 +2238,7 @@ namespace lro_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new LROsClient(credential);
 
-            var operation = await client.DeleteProvisioning202Deletingcanceled200Async(WaitUntil.Completed, new RequestContext()).ConfigureAwait(false);
+            var operation = await client.DeleteProvisioning202Deletingcanceled200Async(WaitUntil.Completed, new RequestContext());
 
             BinaryData responseData = operation.Value;
             JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
@@ -2249,7 +2252,7 @@ namespace lro_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new LROsClient(credential);
 
-            var operation = await client.DeleteProvisioning202Deletingcanceled200Async(WaitUntil.Completed, new RequestContext()).ConfigureAwait(false);
+            var operation = await client.DeleteProvisioning202Deletingcanceled200Async(WaitUntil.Completed, new RequestContext());
 
             BinaryData responseData = operation.Value;
             JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
@@ -2293,7 +2296,7 @@ namespace lro_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new LROsClient(credential);
 
-            var operation = await client.Delete204SucceededAsync(WaitUntil.Completed).ConfigureAwait(false);
+            var operation = await client.Delete204SucceededAsync(WaitUntil.Completed);
 
             Console.WriteLine(operation.GetRawResponse().Status);
         }
@@ -2305,7 +2308,7 @@ namespace lro_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new LROsClient(credential);
 
-            var operation = await client.Delete204SucceededAsync(WaitUntil.Completed).ConfigureAwait(false);
+            var operation = await client.Delete204SucceededAsync(WaitUntil.Completed);
 
             Console.WriteLine(operation.GetRawResponse().Status);
         }
@@ -2351,7 +2354,7 @@ namespace lro_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new LROsClient(credential);
 
-            var operation = await client.Delete202Retry200Async(WaitUntil.Completed, new RequestContext()).ConfigureAwait(false);
+            var operation = await client.Delete202Retry200Async(WaitUntil.Completed, new RequestContext());
 
             BinaryData responseData = operation.Value;
             JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
@@ -2365,7 +2368,7 @@ namespace lro_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new LROsClient(credential);
 
-            var operation = await client.Delete202Retry200Async(WaitUntil.Completed, new RequestContext()).ConfigureAwait(false);
+            var operation = await client.Delete202Retry200Async(WaitUntil.Completed, new RequestContext());
 
             BinaryData responseData = operation.Value;
             JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
@@ -2419,7 +2422,7 @@ namespace lro_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new LROsClient(credential);
 
-            var operation = await client.Delete202NoRetry204Async(WaitUntil.Completed, new RequestContext()).ConfigureAwait(false);
+            var operation = await client.Delete202NoRetry204Async(WaitUntil.Completed, new RequestContext());
 
             BinaryData responseData = operation.Value;
             JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
@@ -2433,7 +2436,7 @@ namespace lro_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new LROsClient(credential);
 
-            var operation = await client.Delete202NoRetry204Async(WaitUntil.Completed, new RequestContext()).ConfigureAwait(false);
+            var operation = await client.Delete202NoRetry204Async(WaitUntil.Completed, new RequestContext());
 
             BinaryData responseData = operation.Value;
             JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
@@ -2477,7 +2480,7 @@ namespace lro_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new LROsClient(credential);
 
-            var operation = await client.DeleteNoHeaderInRetryAsync(WaitUntil.Completed).ConfigureAwait(false);
+            var operation = await client.DeleteNoHeaderInRetryAsync(WaitUntil.Completed);
 
             Console.WriteLine(operation.GetRawResponse().Status);
         }
@@ -2489,7 +2492,7 @@ namespace lro_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new LROsClient(credential);
 
-            var operation = await client.DeleteNoHeaderInRetryAsync(WaitUntil.Completed).ConfigureAwait(false);
+            var operation = await client.DeleteNoHeaderInRetryAsync(WaitUntil.Completed);
 
             Console.WriteLine(operation.GetRawResponse().Status);
         }
@@ -2525,7 +2528,7 @@ namespace lro_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new LROsClient(credential);
 
-            var operation = await client.DeleteAsyncNoHeaderInRetryAsync(WaitUntil.Completed).ConfigureAwait(false);
+            var operation = await client.DeleteAsyncNoHeaderInRetryAsync(WaitUntil.Completed);
 
             Console.WriteLine(operation.GetRawResponse().Status);
         }
@@ -2537,7 +2540,7 @@ namespace lro_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new LROsClient(credential);
 
-            var operation = await client.DeleteAsyncNoHeaderInRetryAsync(WaitUntil.Completed).ConfigureAwait(false);
+            var operation = await client.DeleteAsyncNoHeaderInRetryAsync(WaitUntil.Completed);
 
             Console.WriteLine(operation.GetRawResponse().Status);
         }
@@ -2573,7 +2576,7 @@ namespace lro_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new LROsClient(credential);
 
-            var operation = await client.DeleteAsyncRetrySucceededAsync(WaitUntil.Completed).ConfigureAwait(false);
+            var operation = await client.DeleteAsyncRetrySucceededAsync(WaitUntil.Completed);
 
             Console.WriteLine(operation.GetRawResponse().Status);
         }
@@ -2585,7 +2588,7 @@ namespace lro_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new LROsClient(credential);
 
-            var operation = await client.DeleteAsyncRetrySucceededAsync(WaitUntil.Completed).ConfigureAwait(false);
+            var operation = await client.DeleteAsyncRetrySucceededAsync(WaitUntil.Completed);
 
             Console.WriteLine(operation.GetRawResponse().Status);
         }
@@ -2621,7 +2624,7 @@ namespace lro_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new LROsClient(credential);
 
-            var operation = await client.DeleteAsyncNoRetrySucceededAsync(WaitUntil.Completed).ConfigureAwait(false);
+            var operation = await client.DeleteAsyncNoRetrySucceededAsync(WaitUntil.Completed);
 
             Console.WriteLine(operation.GetRawResponse().Status);
         }
@@ -2633,7 +2636,7 @@ namespace lro_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new LROsClient(credential);
 
-            var operation = await client.DeleteAsyncNoRetrySucceededAsync(WaitUntil.Completed).ConfigureAwait(false);
+            var operation = await client.DeleteAsyncNoRetrySucceededAsync(WaitUntil.Completed);
 
             Console.WriteLine(operation.GetRawResponse().Status);
         }
@@ -2669,7 +2672,7 @@ namespace lro_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new LROsClient(credential);
 
-            var operation = await client.DeleteAsyncRetryFailedAsync(WaitUntil.Completed).ConfigureAwait(false);
+            var operation = await client.DeleteAsyncRetryFailedAsync(WaitUntil.Completed);
 
             Console.WriteLine(operation.GetRawResponse().Status);
         }
@@ -2681,7 +2684,7 @@ namespace lro_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new LROsClient(credential);
 
-            var operation = await client.DeleteAsyncRetryFailedAsync(WaitUntil.Completed).ConfigureAwait(false);
+            var operation = await client.DeleteAsyncRetryFailedAsync(WaitUntil.Completed);
 
             Console.WriteLine(operation.GetRawResponse().Status);
         }
@@ -2717,7 +2720,7 @@ namespace lro_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new LROsClient(credential);
 
-            var operation = await client.DeleteAsyncRetrycanceledAsync(WaitUntil.Completed).ConfigureAwait(false);
+            var operation = await client.DeleteAsyncRetrycanceledAsync(WaitUntil.Completed);
 
             Console.WriteLine(operation.GetRawResponse().Status);
         }
@@ -2729,7 +2732,7 @@ namespace lro_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new LROsClient(credential);
 
-            var operation = await client.DeleteAsyncRetrycanceledAsync(WaitUntil.Completed).ConfigureAwait(false);
+            var operation = await client.DeleteAsyncRetrycanceledAsync(WaitUntil.Completed);
 
             Console.WriteLine(operation.GetRawResponse().Status);
         }
@@ -2770,7 +2773,7 @@ namespace lro_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new LROsClient(credential);
 
-            var operation = await client.Post200WithPayloadAsync(WaitUntil.Completed, new RequestContext()).ConfigureAwait(false);
+            var operation = await client.Post200WithPayloadAsync(WaitUntil.Completed, new RequestContext());
 
             BinaryData responseData = operation.Value;
             JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
@@ -2784,7 +2787,7 @@ namespace lro_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new LROsClient(credential);
 
-            var operation = await client.Post200WithPayloadAsync(WaitUntil.Completed, new RequestContext()).ConfigureAwait(false);
+            var operation = await client.Post200WithPayloadAsync(WaitUntil.Completed, new RequestContext());
 
             BinaryData responseData = operation.Value;
             JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
@@ -2801,7 +2804,7 @@ namespace lro_LowLevel.Samples
 
             var data = new { };
 
-            var operation = client.Post202Retry200(WaitUntil.Completed, RequestContent.Create(data), new RequestContext());
+            var operation = client.Post202Retry200(WaitUntil.Completed, RequestContent.Create(data));
 
             Console.WriteLine(operation.GetRawResponse().Status);
         }
@@ -2826,7 +2829,7 @@ namespace lro_LowLevel.Samples
                 location = "<location>",
             };
 
-            var operation = client.Post202Retry200(WaitUntil.Completed, RequestContent.Create(data), new RequestContext());
+            var operation = client.Post202Retry200(WaitUntil.Completed, RequestContent.Create(data));
 
             Console.WriteLine(operation.GetRawResponse().Status);
         }
@@ -2840,7 +2843,7 @@ namespace lro_LowLevel.Samples
 
             var data = new { };
 
-            var operation = await client.Post202Retry200Async(WaitUntil.Completed, RequestContent.Create(data), new RequestContext()).ConfigureAwait(false);
+            var operation = await client.Post202Retry200Async(WaitUntil.Completed, RequestContent.Create(data));
 
             Console.WriteLine(operation.GetRawResponse().Status);
         }
@@ -2865,7 +2868,7 @@ namespace lro_LowLevel.Samples
                 location = "<location>",
             };
 
-            var operation = await client.Post202Retry200Async(WaitUntil.Completed, RequestContent.Create(data), new RequestContext()).ConfigureAwait(false);
+            var operation = await client.Post202Retry200Async(WaitUntil.Completed, RequestContent.Create(data));
 
             Console.WriteLine(operation.GetRawResponse().Status);
         }
@@ -2879,7 +2882,7 @@ namespace lro_LowLevel.Samples
 
             var data = new { };
 
-            var operation = client.Post202NoRetry204(WaitUntil.Completed, RequestContent.Create(data), new RequestContext());
+            var operation = client.Post202NoRetry204(WaitUntil.Completed, RequestContent.Create(data));
 
             BinaryData responseData = operation.Value;
             JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
@@ -2906,7 +2909,7 @@ namespace lro_LowLevel.Samples
                 location = "<location>",
             };
 
-            var operation = client.Post202NoRetry204(WaitUntil.Completed, RequestContent.Create(data), new RequestContext());
+            var operation = client.Post202NoRetry204(WaitUntil.Completed, RequestContent.Create(data));
 
             BinaryData responseData = operation.Value;
             JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
@@ -2928,7 +2931,7 @@ namespace lro_LowLevel.Samples
 
             var data = new { };
 
-            var operation = await client.Post202NoRetry204Async(WaitUntil.Completed, RequestContent.Create(data), new RequestContext()).ConfigureAwait(false);
+            var operation = await client.Post202NoRetry204Async(WaitUntil.Completed, RequestContent.Create(data));
 
             BinaryData responseData = operation.Value;
             JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
@@ -2955,7 +2958,7 @@ namespace lro_LowLevel.Samples
                 location = "<location>",
             };
 
-            var operation = await client.Post202NoRetry204Async(WaitUntil.Completed, RequestContent.Create(data), new RequestContext()).ConfigureAwait(false);
+            var operation = await client.Post202NoRetry204Async(WaitUntil.Completed, RequestContent.Create(data));
 
             BinaryData responseData = operation.Value;
             JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
@@ -3009,7 +3012,7 @@ namespace lro_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new LROsClient(credential);
 
-            var operation = await client.PostDoubleHeadersFinalLocationGetAsync(WaitUntil.Completed, new RequestContext()).ConfigureAwait(false);
+            var operation = await client.PostDoubleHeadersFinalLocationGetAsync(WaitUntil.Completed, new RequestContext());
 
             BinaryData responseData = operation.Value;
             JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
@@ -3023,7 +3026,7 @@ namespace lro_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new LROsClient(credential);
 
-            var operation = await client.PostDoubleHeadersFinalLocationGetAsync(WaitUntil.Completed, new RequestContext()).ConfigureAwait(false);
+            var operation = await client.PostDoubleHeadersFinalLocationGetAsync(WaitUntil.Completed, new RequestContext());
 
             BinaryData responseData = operation.Value;
             JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
@@ -3077,7 +3080,7 @@ namespace lro_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new LROsClient(credential);
 
-            var operation = await client.PostDoubleHeadersFinalAzureHeaderGetAsync(WaitUntil.Completed, new RequestContext()).ConfigureAwait(false);
+            var operation = await client.PostDoubleHeadersFinalAzureHeaderGetAsync(WaitUntil.Completed, new RequestContext());
 
             BinaryData responseData = operation.Value;
             JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
@@ -3091,7 +3094,7 @@ namespace lro_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new LROsClient(credential);
 
-            var operation = await client.PostDoubleHeadersFinalAzureHeaderGetAsync(WaitUntil.Completed, new RequestContext()).ConfigureAwait(false);
+            var operation = await client.PostDoubleHeadersFinalAzureHeaderGetAsync(WaitUntil.Completed, new RequestContext());
 
             BinaryData responseData = operation.Value;
             JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
@@ -3145,7 +3148,7 @@ namespace lro_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new LROsClient(credential);
 
-            var operation = await client.PostDoubleHeadersFinalAzureHeaderGetDefaultAsync(WaitUntil.Completed, new RequestContext()).ConfigureAwait(false);
+            var operation = await client.PostDoubleHeadersFinalAzureHeaderGetDefaultAsync(WaitUntil.Completed, new RequestContext());
 
             BinaryData responseData = operation.Value;
             JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
@@ -3159,7 +3162,7 @@ namespace lro_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new LROsClient(credential);
 
-            var operation = await client.PostDoubleHeadersFinalAzureHeaderGetDefaultAsync(WaitUntil.Completed, new RequestContext()).ConfigureAwait(false);
+            var operation = await client.PostDoubleHeadersFinalAzureHeaderGetDefaultAsync(WaitUntil.Completed, new RequestContext());
 
             BinaryData responseData = operation.Value;
             JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
@@ -3181,7 +3184,7 @@ namespace lro_LowLevel.Samples
 
             var data = new { };
 
-            var operation = client.PostAsyncRetrySucceeded(WaitUntil.Completed, RequestContent.Create(data), new RequestContext());
+            var operation = client.PostAsyncRetrySucceeded(WaitUntil.Completed, RequestContent.Create(data));
 
             BinaryData responseData = operation.Value;
             JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
@@ -3208,7 +3211,7 @@ namespace lro_LowLevel.Samples
                 location = "<location>",
             };
 
-            var operation = client.PostAsyncRetrySucceeded(WaitUntil.Completed, RequestContent.Create(data), new RequestContext());
+            var operation = client.PostAsyncRetrySucceeded(WaitUntil.Completed, RequestContent.Create(data));
 
             BinaryData responseData = operation.Value;
             JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
@@ -3230,7 +3233,7 @@ namespace lro_LowLevel.Samples
 
             var data = new { };
 
-            var operation = await client.PostAsyncRetrySucceededAsync(WaitUntil.Completed, RequestContent.Create(data), new RequestContext()).ConfigureAwait(false);
+            var operation = await client.PostAsyncRetrySucceededAsync(WaitUntil.Completed, RequestContent.Create(data));
 
             BinaryData responseData = operation.Value;
             JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
@@ -3257,7 +3260,7 @@ namespace lro_LowLevel.Samples
                 location = "<location>",
             };
 
-            var operation = await client.PostAsyncRetrySucceededAsync(WaitUntil.Completed, RequestContent.Create(data), new RequestContext()).ConfigureAwait(false);
+            var operation = await client.PostAsyncRetrySucceededAsync(WaitUntil.Completed, RequestContent.Create(data));
 
             BinaryData responseData = operation.Value;
             JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
@@ -3279,7 +3282,7 @@ namespace lro_LowLevel.Samples
 
             var data = new { };
 
-            var operation = client.PostAsyncNoRetrySucceeded(WaitUntil.Completed, RequestContent.Create(data), new RequestContext());
+            var operation = client.PostAsyncNoRetrySucceeded(WaitUntil.Completed, RequestContent.Create(data));
 
             BinaryData responseData = operation.Value;
             JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
@@ -3306,7 +3309,7 @@ namespace lro_LowLevel.Samples
                 location = "<location>",
             };
 
-            var operation = client.PostAsyncNoRetrySucceeded(WaitUntil.Completed, RequestContent.Create(data), new RequestContext());
+            var operation = client.PostAsyncNoRetrySucceeded(WaitUntil.Completed, RequestContent.Create(data));
 
             BinaryData responseData = operation.Value;
             JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
@@ -3328,7 +3331,7 @@ namespace lro_LowLevel.Samples
 
             var data = new { };
 
-            var operation = await client.PostAsyncNoRetrySucceededAsync(WaitUntil.Completed, RequestContent.Create(data), new RequestContext()).ConfigureAwait(false);
+            var operation = await client.PostAsyncNoRetrySucceededAsync(WaitUntil.Completed, RequestContent.Create(data));
 
             BinaryData responseData = operation.Value;
             JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
@@ -3355,7 +3358,7 @@ namespace lro_LowLevel.Samples
                 location = "<location>",
             };
 
-            var operation = await client.PostAsyncNoRetrySucceededAsync(WaitUntil.Completed, RequestContent.Create(data), new RequestContext()).ConfigureAwait(false);
+            var operation = await client.PostAsyncNoRetrySucceededAsync(WaitUntil.Completed, RequestContent.Create(data));
 
             BinaryData responseData = operation.Value;
             JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
@@ -3377,7 +3380,7 @@ namespace lro_LowLevel.Samples
 
             var data = new { };
 
-            var operation = client.PostAsyncRetryFailed(WaitUntil.Completed, RequestContent.Create(data), new RequestContext());
+            var operation = client.PostAsyncRetryFailed(WaitUntil.Completed, RequestContent.Create(data));
 
             Console.WriteLine(operation.GetRawResponse().Status);
         }
@@ -3402,7 +3405,7 @@ namespace lro_LowLevel.Samples
                 location = "<location>",
             };
 
-            var operation = client.PostAsyncRetryFailed(WaitUntil.Completed, RequestContent.Create(data), new RequestContext());
+            var operation = client.PostAsyncRetryFailed(WaitUntil.Completed, RequestContent.Create(data));
 
             Console.WriteLine(operation.GetRawResponse().Status);
         }
@@ -3416,7 +3419,7 @@ namespace lro_LowLevel.Samples
 
             var data = new { };
 
-            var operation = await client.PostAsyncRetryFailedAsync(WaitUntil.Completed, RequestContent.Create(data), new RequestContext()).ConfigureAwait(false);
+            var operation = await client.PostAsyncRetryFailedAsync(WaitUntil.Completed, RequestContent.Create(data));
 
             Console.WriteLine(operation.GetRawResponse().Status);
         }
@@ -3441,7 +3444,7 @@ namespace lro_LowLevel.Samples
                 location = "<location>",
             };
 
-            var operation = await client.PostAsyncRetryFailedAsync(WaitUntil.Completed, RequestContent.Create(data), new RequestContext()).ConfigureAwait(false);
+            var operation = await client.PostAsyncRetryFailedAsync(WaitUntil.Completed, RequestContent.Create(data));
 
             Console.WriteLine(operation.GetRawResponse().Status);
         }
@@ -3455,7 +3458,7 @@ namespace lro_LowLevel.Samples
 
             var data = new { };
 
-            var operation = client.PostAsyncRetrycanceled(WaitUntil.Completed, RequestContent.Create(data), new RequestContext());
+            var operation = client.PostAsyncRetrycanceled(WaitUntil.Completed, RequestContent.Create(data));
 
             Console.WriteLine(operation.GetRawResponse().Status);
         }
@@ -3480,7 +3483,7 @@ namespace lro_LowLevel.Samples
                 location = "<location>",
             };
 
-            var operation = client.PostAsyncRetrycanceled(WaitUntil.Completed, RequestContent.Create(data), new RequestContext());
+            var operation = client.PostAsyncRetrycanceled(WaitUntil.Completed, RequestContent.Create(data));
 
             Console.WriteLine(operation.GetRawResponse().Status);
         }
@@ -3494,7 +3497,7 @@ namespace lro_LowLevel.Samples
 
             var data = new { };
 
-            var operation = await client.PostAsyncRetrycanceledAsync(WaitUntil.Completed, RequestContent.Create(data), new RequestContext()).ConfigureAwait(false);
+            var operation = await client.PostAsyncRetrycanceledAsync(WaitUntil.Completed, RequestContent.Create(data));
 
             Console.WriteLine(operation.GetRawResponse().Status);
         }
@@ -3519,7 +3522,7 @@ namespace lro_LowLevel.Samples
                 location = "<location>",
             };
 
-            var operation = await client.PostAsyncRetrycanceledAsync(WaitUntil.Completed, RequestContent.Create(data), new RequestContext()).ConfigureAwait(false);
+            var operation = await client.PostAsyncRetrycanceledAsync(WaitUntil.Completed, RequestContent.Create(data));
 
             Console.WriteLine(operation.GetRawResponse().Status);
         }

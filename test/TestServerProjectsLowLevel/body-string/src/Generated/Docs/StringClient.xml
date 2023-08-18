@@ -8,7 +8,7 @@ This sample shows how to call GetNullAsync with required parameters and parse th
 var credential = new AzureKeyCredential("<key>");
 var client = new StringClient(credential);
 
-Response response = await client.GetNullAsync(new RequestContext()).ConfigureAwait(false);
+Response response = await client.GetNullAsync(new RequestContext());
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.ToString());
@@ -31,28 +31,28 @@ Console.WriteLine(result.ToString());
     </member>
     <member name="PutNullAsync(RequestContent,RequestContext)">
 <example>
-This sample shows how to call PutNullAsync with required parameters and request content.
+This sample shows how to call PutNullAsync with required request content.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
 var client = new StringClient(credential);
 
 var data = "<String>";
 
-Response response = await client.PutNullAsync(RequestContent.Create(data), new RequestContext()).ConfigureAwait(false);
+Response response = await client.PutNullAsync(RequestContent.Create(data));
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
     <member name="PutNull(RequestContent,RequestContext)">
 <example>
-This sample shows how to call PutNull with required parameters and request content.
+This sample shows how to call PutNull with required request content.
 <code><![CDATA[
 var credential = new AzureKeyCredential("<key>");
 var client = new StringClient(credential);
 
 var data = "<String>";
 
-Response response = client.PutNull(RequestContent.Create(data), new RequestContext());
+Response response = client.PutNull(RequestContent.Create(data));
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
@@ -64,7 +64,7 @@ This sample shows how to call GetEmptyAsync with required parameters and parse t
 var credential = new AzureKeyCredential("<key>");
 var client = new StringClient(credential);
 
-Response response = await client.GetEmptyAsync(new RequestContext()).ConfigureAwait(false);
+Response response = await client.GetEmptyAsync(new RequestContext());
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.ToString());

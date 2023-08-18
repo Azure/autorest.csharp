@@ -92,6 +92,7 @@ namespace NamedTypeSymbolExtensionsTests
                 disablePaginationTopRenaming: false,
                 generateModelFactory: false,
                 publicDiscriminatorProperty: false,
+                deserializeNullCollectionAsNullValue: false,
                 useCoreDataFactoryReplacements: true,
                 modelFactoryForHlc: Array.Empty<string>(),
                 unreferencedTypesHandling: Configuration.UnreferencedTypesHandlingOption.RemoveOrInternalize,
@@ -152,13 +153,13 @@ namespace NamedTypeSymbolExtensionsTests
         public void IsSameType_ModelTypes()
         {
             // Different namespace
-            var input = new InputModelType("MetadataModel", "", null, null, null, InputModelTypeUsage.RoundTrip, Array.Empty<InputModelProperty>(), null, null, null, null);
-            CSharpType modelType = new CSharpType(new ModelTypeProvider(input, "", null, new TypeFactory(null), Array.Empty<InputModelType>()));
+            var input = new InputModelType("MetadataModel", "", null, null, null, InputModelTypeUsage.RoundTrip, null, null, null, null, null, false);
+            CSharpType modelType = new CSharpType(new ModelTypeProvider(input, "", null));
             Assert.IsFalse(_modelSymbol.IsSameType(modelType));
 
             // Same namespace
-            input = new InputModelType("MetadataModel", "NamedTypeSymbolExtensionsTests", null, null, null, InputModelTypeUsage.RoundTrip, Array.Empty<InputModelProperty>(), null, null, null, null);
-            modelType = new CSharpType(new ModelTypeProvider(input, "NamedTypeSymbolExtensionsTests", null, new TypeFactory(null), Array.Empty<InputModelType>()));
+            input = new InputModelType("MetadataModel", "NamedTypeSymbolExtensionsTests", null, null, null, InputModelTypeUsage.RoundTrip, null, null, null, null, null, false);
+            modelType = new CSharpType(new ModelTypeProvider(input, "NamedTypeSymbolExtensionsTests", null));
             Assert.IsTrue(_modelSymbol.IsSameType(modelType));
         }
     }

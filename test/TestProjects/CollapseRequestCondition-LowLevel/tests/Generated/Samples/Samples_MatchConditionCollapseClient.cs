@@ -6,9 +6,13 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Text.Json;
 using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
+using Azure.Identity;
 using NUnit.Framework;
 
 namespace CollapseRequestCondition_LowLevel.Samples
@@ -44,7 +48,7 @@ namespace CollapseRequestCondition_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new MatchConditionCollapseClient(credential);
 
-            Response response = await client.CollapseGetWithHeadAsync().ConfigureAwait(false);
+            Response response = await client.CollapseGetWithHeadAsync();
             Console.WriteLine(response.Status);
         }
 
@@ -55,7 +59,7 @@ namespace CollapseRequestCondition_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new MatchConditionCollapseClient(credential);
 
-            Response response = await client.CollapseGetWithHeadAsync("<otherHeader>", new MatchConditions { IfMatch = new ETag("<YOUR_ETAG>") }).ConfigureAwait(false);
+            Response response = await client.CollapseGetWithHeadAsync("<otherHeader>", new MatchConditions { IfMatch = new ETag("<YOUR_ETAG>") });
             Console.WriteLine(response.Status);
         }
 
@@ -68,7 +72,7 @@ namespace CollapseRequestCondition_LowLevel.Samples
 
             var data = "<String>";
 
-            Response response = client.CollapsePut(RequestContent.Create(data), new MatchConditions { IfMatch = new ETag("<YOUR_ETAG>") }, new RequestContext());
+            Response response = client.CollapsePut(RequestContent.Create(data));
             Console.WriteLine(response.Status);
         }
 
@@ -81,7 +85,7 @@ namespace CollapseRequestCondition_LowLevel.Samples
 
             var data = "<String>";
 
-            Response response = client.CollapsePut(RequestContent.Create(data), new MatchConditions { IfMatch = new ETag("<YOUR_ETAG>") }, new RequestContext());
+            Response response = client.CollapsePut(RequestContent.Create(data), new MatchConditions { IfMatch = new ETag("<YOUR_ETAG>") });
             Console.WriteLine(response.Status);
         }
 
@@ -94,7 +98,7 @@ namespace CollapseRequestCondition_LowLevel.Samples
 
             var data = "<String>";
 
-            Response response = await client.CollapsePutAsync(RequestContent.Create(data), new MatchConditions { IfMatch = new ETag("<YOUR_ETAG>") }, new RequestContext()).ConfigureAwait(false);
+            Response response = await client.CollapsePutAsync(RequestContent.Create(data));
             Console.WriteLine(response.Status);
         }
 
@@ -107,7 +111,7 @@ namespace CollapseRequestCondition_LowLevel.Samples
 
             var data = "<String>";
 
-            Response response = await client.CollapsePutAsync(RequestContent.Create(data), new MatchConditions { IfMatch = new ETag("<YOUR_ETAG>") }, new RequestContext()).ConfigureAwait(false);
+            Response response = await client.CollapsePutAsync(RequestContent.Create(data), new MatchConditions { IfMatch = new ETag("<YOUR_ETAG>") });
             Console.WriteLine(response.Status);
         }
 
@@ -140,7 +144,7 @@ namespace CollapseRequestCondition_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new MatchConditionCollapseClient(credential);
 
-            Response response = await client.CollapseGetAsync().ConfigureAwait(false);
+            Response response = await client.CollapseGetAsync();
             Console.WriteLine(response.Status);
         }
 
@@ -151,7 +155,7 @@ namespace CollapseRequestCondition_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new MatchConditionCollapseClient(credential);
 
-            Response response = await client.CollapseGetAsync(new MatchConditions { IfMatch = new ETag("<YOUR_ETAG>") }).ConfigureAwait(false);
+            Response response = await client.CollapseGetAsync(new MatchConditions { IfMatch = new ETag("<YOUR_ETAG>") });
             Console.WriteLine(response.Status);
         }
     }

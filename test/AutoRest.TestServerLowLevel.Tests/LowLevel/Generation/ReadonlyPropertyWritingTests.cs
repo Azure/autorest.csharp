@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Output.Models;
 using NUnit.Framework;
@@ -12,7 +13,7 @@ namespace AutoRest.CSharp.Generation.Writers.Tests
         {
             // refer to the original CADL file: https://github.com/Azure/cadl-ranch/blob/main/packages/cadl-ranch-specs/http/models/readonly-properties/main.cadl
             var model = new InputModelType("RoundTripModel", "Cadl.TestServer.ReadonlyProperties.Models", "public", null, "Readonly model", InputModelTypeUsage.RoundTrip,
-                    ReadOnlyProperties, null, null, null, null);
+                    ReadOnlyProperties, null, Array.Empty<InputModelType>(), null, null, false);
 
             var library = new DpgOutputLibraryBuilder(new InputNamespace("Cadl.TestServer.ReadonlyProperties.Models", null, new List<string>(),
                 new List<InputEnumType>(), new List<InputModelType> { ReadonlyModel, model }, new List<InputClient>(), new InputAuth()), default).Build(true);
@@ -25,7 +26,7 @@ namespace AutoRest.CSharp.Generation.Writers.Tests
         {
             // refer to the original CADL file: https://github.com/Azure/cadl-ranch/blob/dc6d00c98983f34b2f723c90fe840678a863438c/packages/cadl-ranch-specs/http/models/readonly-properties/main.cadl#L24-L65
             var model = new InputModelType("OutputModel", "Cadl.TestServer.ReadonlyProperties.Models", "public", null, "Readonly model", InputModelTypeUsage.Output,
-                    ReadOnlyProperties, null, null, null, null);
+                    ReadOnlyProperties, null, Array.Empty<InputModelType>(), null, null, false);
 
             var library = new DpgOutputLibraryBuilder(new InputNamespace("Cadl.TestServer.ReadonlyProperties.Models", null, new List<string>(),
                 new List<InputEnumType>(), new List<InputModelType> { ReadonlyModel, model }, new List<InputClient>(), new InputAuth()), default).Build(true);
@@ -35,23 +36,23 @@ namespace AutoRest.CSharp.Generation.Writers.Tests
 
         // below are test cases
         private static readonly InputModelType ReadonlyModel = new InputModelType("ReadonlyModel", "Cadl.TestServer.ReadonlyProperties.Models", "public", null, "Readonly model", InputModelTypeUsage.Output,
-                    new List<InputModelProperty> { RequiredStringProperty }, null, null, null, null);
+                    new List<InputModelProperty> { RequiredStringProperty }, null, Array.Empty<InputModelType>(), null, null, false);
 
         private static readonly IReadOnlyList<InputModelProperty> ReadOnlyProperties = new List<InputModelProperty>{
-            new InputModelProperty("requiredReadonlyString", "requiredReadonlyString", "Required string, illustrating a readonly reference type property.", InputPrimitiveType.String, null, true, true, false),
-            new InputModelProperty("requiredReadonlyInt", "requiredReadonlyInt", "Required int, illustrating a readonly reference type property.", InputPrimitiveType.Int32, null, true, true, false),
-            new InputModelProperty("optionalReadonlyString", "optionalReadonlyString", "Optional string, illustrating a readonly reference type property.", InputPrimitiveType.String, null, false, true, false),
-            new InputModelProperty("optionalReadonlyInt", "optionalReadonlyInt", "Optional int, illustrating a readonly reference type property.", InputPrimitiveType.Int32, null, false, true, false),
-            new InputModelProperty("requiredReadonlyModel", "requiredReadonlyModel", "Required readonly model.", ReadonlyModel, null, true, true, false),
-            new InputModelProperty("optionalReadonlyModel", "optionalReadonlyModel", "Optional readonly model", ReadonlyModel, null, false, true, false),
-            new InputModelProperty("requiredReadonlyStringList", "requiredReadonlyStringList", "Required readonly string collection.", new InputListType("requiredReadonlyStringList", InputPrimitiveType.String), null, true, true, false),
-            new InputModelProperty("requiredReadonlyIntList", "requiredReadonlyIntList", "Required readonly int collection.", new InputListType("requiredReadonlyIntList", InputPrimitiveType.Int32), null, true, true, false),
-            new InputModelProperty("optionalReadonlyStringList", "optionalReadonlyStringList", "Optional readonly string collection.", new InputListType("optionalReadonlyStringList", InputPrimitiveType.String), null, false, true, false),
-            new InputModelProperty("optionalReadonlyIntList", "optionalReadonlyIntList", "Optional readonly int collection.", new InputListType("optionalReadonlyIntList", InputPrimitiveType.Int32), null, false, true, false),
-            new InputModelProperty("requiredReadonlyStringDictionary", "requiredReadonlyStringDictionary", "Required readonly string collection.", new InputDictionaryType("requiredReadonlyStringDictionary", InputPrimitiveType.String, InputPrimitiveType.String), null, true, true, false),
-            new InputModelProperty("requiredReadonlyIntDictionary", "requiredReadonlyIntDictionary", "Required readonly int collection.", new InputDictionaryType("requiredReadonlyIntDictionary", InputPrimitiveType.String, InputPrimitiveType.Int32), null, true, true, false),
-            new InputModelProperty("optionalReadonlyStringDictionary", "optionalReadonlyStringDictionary", "Optional readonly string collection.", new InputDictionaryType("optionalReadonlyStringDictionary", InputPrimitiveType.String, InputPrimitiveType.String), null, false, true, false),
-            new InputModelProperty("optionalReadonlyIntDictionary", "optionalReadonlyIntDictionary", "Optional readonly int collection.", new InputDictionaryType("optionalReadonlyIntDictionary", InputPrimitiveType.String, InputPrimitiveType.Int32), null, false, true, false),
+            new InputModelProperty("requiredReadonlyString", "requiredReadonlyString", "Required string, illustrating a readonly reference type property.", InputPrimitiveType.String, true, true, false),
+            new InputModelProperty("requiredReadonlyInt", "requiredReadonlyInt", "Required int, illustrating a readonly reference type property.", InputPrimitiveType.Int32, true, true, false),
+            new InputModelProperty("optionalReadonlyString", "optionalReadonlyString", "Optional string, illustrating a readonly reference type property.", InputPrimitiveType.String, false, true, false),
+            new InputModelProperty("optionalReadonlyInt", "optionalReadonlyInt", "Optional int, illustrating a readonly reference type property.", InputPrimitiveType.Int32, false, true, false),
+            new InputModelProperty("requiredReadonlyModel", "requiredReadonlyModel", "Required readonly model.", ReadonlyModel, true, true, false),
+            new InputModelProperty("optionalReadonlyModel", "optionalReadonlyModel", "Optional readonly model", ReadonlyModel, false, true, false),
+            new InputModelProperty("requiredReadonlyStringList", "requiredReadonlyStringList", "Required readonly string collection.", new InputListType("requiredReadonlyStringList", InputPrimitiveType.String, false), true, true, false),
+            new InputModelProperty("requiredReadonlyIntList", "requiredReadonlyIntList", "Required readonly int collection.", new InputListType("requiredReadonlyIntList", InputPrimitiveType.Int32, false), true, true, false),
+            new InputModelProperty("optionalReadonlyStringList", "optionalReadonlyStringList", "Optional readonly string collection.", new InputListType("optionalReadonlyStringList", InputPrimitiveType.String, false), false, true, false),
+            new InputModelProperty("optionalReadonlyIntList", "optionalReadonlyIntList", "Optional readonly int collection.", new InputListType("optionalReadonlyIntList", InputPrimitiveType.Int32, false), false, true, false),
+            new InputModelProperty("requiredReadonlyStringDictionary", "requiredReadonlyStringDictionary", "Required readonly string collection.", new InputDictionaryType("requiredReadonlyStringDictionary", InputPrimitiveType.String, InputPrimitiveType.String, false), true, true, false),
+            new InputModelProperty("requiredReadonlyIntDictionary", "requiredReadonlyIntDictionary", "Required readonly int collection.", new InputDictionaryType("requiredReadonlyIntDictionary", InputPrimitiveType.String, InputPrimitiveType.Int32, false), true, true, false),
+            new InputModelProperty("optionalReadonlyStringDictionary", "optionalReadonlyStringDictionary", "Optional readonly string collection.", new InputDictionaryType("optionalReadonlyStringDictionary", InputPrimitiveType.String, InputPrimitiveType.String, false), false, true, false),
+            new InputModelProperty("optionalReadonlyIntDictionary", "optionalReadonlyIntDictionary", "Optional readonly int collection.", new InputDictionaryType("optionalReadonlyIntDictionary", InputPrimitiveType.String, InputPrimitiveType.Int32, false), false, true, false),
         };
 
         private static readonly object[] RoundTripModelCase =

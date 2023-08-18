@@ -1,7 +1,6 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
-using System;
 using System.Collections.Generic;
 using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Output.Models;
@@ -18,9 +17,9 @@ namespace AutoRest.CSharp.Generation.Writers.Tests
             // refer to the original CADL file: https://github.com/Azure/cadl-ranch/blob/main/packages/cadl-ranch-specs/http/models/primitive-properties/main.cadl
             var input = new InputModelType("RoundTripModel", "Cadl.TestServer.CollectionPropertiesBasic.Models", "public", null, "Round-trip model with collection properties", InputModelTypeUsage.RoundTrip,
                 new List<InputModelProperty> { RequiredStringListProperty, RequiredIntListProperty },
-                null, null, null, null);
+                null, new List<InputModelType>(), null, null, false);
 
-            var model = new ModelTypeProvider(input, "test", null, CadlTypeFactory, Array.Empty<InputModelType>());
+            var model = new ModelTypeProvider(input, "test", null, CadlTypeFactory);
             ValidateGeneratedCodes(model, expectedModelCodes, expectedSerializationCodes);
         }
 
@@ -30,9 +29,9 @@ namespace AutoRest.CSharp.Generation.Writers.Tests
             // refer to the original CADL file: https://github.com/Azure/cadl-ranch/blob/main/packages/cadl-ranch-specs/http/models/collections-basic/main.cadl#L16-L24
             var input = new InputModelType("InputModel", "Cadl.TestServer.CollectionPropertiesBasic.Models", "public", null, "Input model with collection properties", InputModelTypeUsage.Input,
                 new List<InputModelProperty> { RequiredStringListProperty, RequiredIntListProperty },
-                null, null, null, null);
+                null, new List<InputModelType>(), null, null, false);
 
-            var model = new ModelTypeProvider(input, "test", null, CadlTypeFactory, Array.Empty<InputModelType>());
+            var model = new ModelTypeProvider(input, "test", null, CadlTypeFactory);
             ValidateGeneratedCodes(model, expectedModelCodes, expectedSerializationCodes);
         }
 
@@ -42,9 +41,9 @@ namespace AutoRest.CSharp.Generation.Writers.Tests
             // refer to the original CADL file: https://github.com/Azure/cadl-ranch/blob/main/packages/cadl-ranch-specs/http/models/collections-basic/main.cadl#L26-L34
             var input = new InputModelType("OutputModel", "Cadl.TestServer.CollectionPropertiesBasic.Models", "public", null, "Output model with collection properties", InputModelTypeUsage.Output,
                 new List<InputModelProperty> { RequiredStringListProperty, RequiredIntListProperty },
-                null, null, null, null);
+                null, new List<InputModelType>(), null, null, false);
 
-            var model = new ModelTypeProvider(input, "test", null, CadlTypeFactory, Array.Empty<InputModelType>());
+            var model = new ModelTypeProvider(input, "test", null, CadlTypeFactory);
             ValidateGeneratedCodes(model, expectedModelCodes, expectedSerializationCodes);
         }
 
@@ -55,14 +54,14 @@ namespace AutoRest.CSharp.Generation.Writers.Tests
             var elementModelType = new InputModelType("SimpleModel", "Cadl.TestServer.ModelCollectionProperties.Models", "public", null,
                     "Simple model that will appear in a collection.", InputModelTypeUsage.RoundTrip,
                     new List<InputModelProperty> { RequiredStringProperty, RequiredIntProperty },
-                null, null, null, null);
+                null, new List<InputModelType>(), null, null, false);
             var collectionModelType = new InputModelType("ModelCollectionModel", "Cadl.TestServer.ModelCollectionProperties.Models", "public", null,
                     "Simple model with model collection properties", InputModelTypeUsage.RoundTrip,
                 new List<InputModelProperty>{
-                        new InputModelProperty("requiredModelCollection", "requiredModelCollection", "Required collection of models.", new InputListType("requiredModelCollection", elementModelType), null, true, false, false),
-                        new InputModelProperty("optionalModelCollection", "optionalModelCollection", "Optional collection of models.", new InputListType("optionalModelCollection", elementModelType), null, false, false, false),
+                        new InputModelProperty("requiredModelCollection", "requiredModelCollection", "Required collection of models.", new InputListType("requiredModelCollection", elementModelType, false), true, false, false),
+                        new InputModelProperty("optionalModelCollection", "optionalModelCollection", "Optional collection of models.", new InputListType("optionalModelCollection", elementModelType, false), false, false, false),
                 },
-                null, null, null, null);
+                null, new List<InputModelType>(), null, null, false);
 
             var library = new DpgOutputLibraryBuilder(new InputNamespace("Cadl.TestServer.ModelCollectionProperties.Models", null, new List<string>(),
                 new List<InputEnumType>(), new List<InputModelType> { elementModelType, collectionModelType }, new List<InputClient>(), new InputAuth()), default).Build(true);
@@ -77,14 +76,14 @@ namespace AutoRest.CSharp.Generation.Writers.Tests
             var elementModelType = new InputModelType("SimpleModel", "Cadl.TestServer.ModelCollectionProperties.Models", "public", null,
                     "Simple model that will appear in a collection.", InputModelTypeUsage.RoundTrip,
                     new List<InputModelProperty> { RequiredStringProperty, RequiredIntProperty },
-                null, null, null, null);
+                null, new List<InputModelType>(), null, null, false);
             var collectionModelType = new InputModelType("ModelCollectionModel", "Cadl.TestServer.ModelCollectionProperties.Models", "public", null,
                     "Simple model with model collection properties", InputModelTypeUsage.RoundTrip,
                 new List<InputModelProperty>{
-                        new InputModelProperty("required2DCollection", "required2DCollection", "Required collection of models.", new InputListType("required2DCollection", new InputListType("requiredModelCollection", elementModelType)), null, true, false, false),
-                        new InputModelProperty("optional2DCollection", "optional2DCollection", "Optional collection of models.", new InputListType("optional2DCollection", new InputListType("optionalModelCollection", elementModelType)), null, false, false, false),
+                        new InputModelProperty("required2DCollection", "required2DCollection", "Required collection of models.", new InputListType("required2DCollection", new InputListType("requiredModelCollection", elementModelType, false), false), true, false, false),
+                        new InputModelProperty("optional2DCollection", "optional2DCollection", "Optional collection of models.", new InputListType("optional2DCollection", new InputListType("optionalModelCollection", elementModelType, false), false), false, false, false),
                 },
-                null, null, null, null);
+                null, new List<InputModelType>(), null, null, false);
 
             var library = new DpgOutputLibraryBuilder(new InputNamespace("Cadl.TestServer.ModelCollectionProperties.Models", null, new List<string>(),
                 new List<InputEnumType>(), new List<InputModelType> { elementModelType, collectionModelType }, new List<InputClient>(), new InputAuth()), default).Build(true);

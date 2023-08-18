@@ -5,6 +5,9 @@
         "type/enum/extensible",
         "type/enum/fixed",
         "type/model/usage",
+        "type/model/inheritance/single-discriminator",
+        "type/model/inheritance/not-discriminated",
+        "type/model/inheritance/enum-discriminator",
         "type/property/nullable",
         "type/property/optional",
         "type/property/value-types",
@@ -21,6 +24,8 @@
         "projection/projected-name",
         "server/path/multiple",
         "server/path/single",
+        "special-headers/client-request-id",
+        "special-headers/repeatability",
         "special-words",
         "parameters/collection-format",
         "parameters/spread"

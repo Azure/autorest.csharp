@@ -6,19 +6,22 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using Azure.Core;
 
 namespace FirstTestTypeSpec.Models
 {
     /// <summary> A model with a few properties of literal types. </summary>
-    public partial class Thing
+    internal partial class Thing
     {
         /// <summary> Initializes a new instance of Thing. </summary>
         /// <param name="name"> name of the Thing. </param>
         /// <param name="requiredUnion"> required Union. </param>
         /// <param name="requiredBadDescription"> description with xml &lt;|endoftext|&gt;. </param>
+        /// <param name="requiredNullableList"> required nullable collection. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/>, <paramref name="requiredUnion"/> or <paramref name="requiredBadDescription"/> is null. </exception>
-        public Thing(string name, string requiredUnion, string requiredBadDescription)
+        public Thing(string name, object requiredUnion, string requiredBadDescription, IEnumerable<int> requiredNullableList)
         {
             Argument.AssertNotNull(name, nameof(name));
             Argument.AssertNotNull(requiredUnion, nameof(requiredUnion));
@@ -27,6 +30,8 @@ namespace FirstTestTypeSpec.Models
             Name = name;
             RequiredUnion = requiredUnion;
             RequiredBadDescription = requiredBadDescription;
+            OptionalNullableList = new ChangeTrackingList<int>();
+            RequiredNullableList = requiredNullableList?.ToList();
         }
 
         /// <summary> Initializes a new instance of Thing. </summary>
@@ -41,7 +46,9 @@ namespace FirstTestTypeSpec.Models
         /// <param name="optionalLiteralFloat"> optional literal float. </param>
         /// <param name="optionalLiteralBool"> optional literal bool. </param>
         /// <param name="requiredBadDescription"> description with xml &lt;|endoftext|&gt;. </param>
-        internal Thing(string name, string requiredUnion, ThingRequiredLiteralString requiredLiteralString, ThingRequiredLiteralInt requiredLiteralInt, ThingRequiredLiteralFloat requiredLiteralFloat, bool requiredLiteralBool, ThingOptionalLiteralString? optionalLiteralString, ThingOptionalLiteralInt? optionalLiteralInt, ThingOptionalLiteralFloat? optionalLiteralFloat, bool? optionalLiteralBool, string requiredBadDescription)
+        /// <param name="optionalNullableList"> optional nullable collection. </param>
+        /// <param name="requiredNullableList"> required nullable collection. </param>
+        internal Thing(string name, object requiredUnion, ThingRequiredLiteralString requiredLiteralString, ThingRequiredLiteralInt requiredLiteralInt, ThingRequiredLiteralFloat requiredLiteralFloat, bool requiredLiteralBool, ThingOptionalLiteralString? optionalLiteralString, ThingOptionalLiteralInt? optionalLiteralInt, ThingOptionalLiteralFloat? optionalLiteralFloat, bool? optionalLiteralBool, string requiredBadDescription, IList<int> optionalNullableList, IList<int> requiredNullableList)
         {
             Name = name;
             RequiredUnion = requiredUnion;
@@ -54,12 +61,14 @@ namespace FirstTestTypeSpec.Models
             OptionalLiteralFloat = optionalLiteralFloat;
             OptionalLiteralBool = optionalLiteralBool;
             RequiredBadDescription = requiredBadDescription;
+            OptionalNullableList = optionalNullableList;
+            RequiredNullableList = requiredNullableList;
         }
 
         /// <summary> name of the Thing. </summary>
         public string Name { get; set; }
         /// <summary> required Union. </summary>
-        public string RequiredUnion { get; set; }
+        public object RequiredUnion { get; set; }
         /// <summary> required literal string. </summary>
         public ThingRequiredLiteralString RequiredLiteralString { get; } = ThingRequiredLiteralString.Accept;
 
@@ -82,5 +91,9 @@ namespace FirstTestTypeSpec.Models
         public bool? OptionalLiteralBool { get; set; }
         /// <summary> description with xml &lt;|endoftext|&gt;. </summary>
         public string RequiredBadDescription { get; set; }
+        /// <summary> optional nullable collection. </summary>
+        public IList<int> OptionalNullableList { get; set; }
+        /// <summary> required nullable collection. </summary>
+        public IList<int> RequiredNullableList { get; set; }
     }
 }

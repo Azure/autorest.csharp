@@ -50,6 +50,8 @@ namespace ProtocolMethodsInRestClient
             }
             uri.AppendQuery("second", grouped.Second, true);
             request.Uri = uri;
+            request.Headers.Add("Repeatability-Request-ID", Guid.NewGuid());
+            request.Headers.Add("Repeatability-First-Sent", DateTimeOffset.Now, "R");
             request.Headers.Add("Accept", "application/json");
             if (resource != null)
             {
@@ -132,6 +134,8 @@ namespace ProtocolMethodsInRestClient
             }
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
+            request.Headers.Add("Repeatability-Request-ID", Guid.NewGuid());
+            request.Headers.Add("Repeatability-First-Sent", DateTimeOffset.Now, "R");
             request.Headers.Add("Content-Type", "application/json");
             request.Content = content;
             return message;

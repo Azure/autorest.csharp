@@ -58,7 +58,9 @@ import {
     InputUnionType,
     InputNullType,
     InputIntrinsicType,
-    InputUnknownType
+    InputUnknownType,
+    isInputEnumType,
+    isInputLiteralType
 } from "../type/inputType.js";
 import { InputTypeKind } from "../type/inputTypeKind.js";
 import { Usage } from "../type/usage.js";
@@ -237,8 +239,8 @@ function isSchemaProperty(context: SdkContext, property: ModelProperty) {
     const headerInfo = getHeaderFieldName(program, property);
     const queryInfo = getQueryParamName(program, property);
     const pathInfo = getPathParamName(program, property);
-    const statusCodeinfo = isStatusCode(program, property);
-    return !(headerInfo || queryInfo || pathInfo || statusCodeinfo);
+    const statusCodeInfo = isStatusCode(program, property);
+    return !(headerInfo || queryInfo || pathInfo || statusCodeInfo);
 }
 
 export function getDefaultValue(type: Type): any {
@@ -258,14 +260,6 @@ export function getDefaultValue(type: Type): any {
 
 export function isNeverType(type: Type): type is NeverType {
     return type.kind === "Intrinsic" && type.name === "never";
-}
-
-function isInputEnumType(x: any): x is InputEnumType {
-    return x.AllowedValues !== undefined;
-}
-
-function isInputLiteralType(x: any): x is InputLiteralType {
-    return x.Name === "Literal";
 }
 
 export function getInputType(
@@ -403,7 +397,6 @@ export function getInputType(
 
         function getLiteralValueType(): InputPrimitiveType | InputEnumType {
             // we will not wrap it if it comes from outside a model or it is a boolean
-            // TODO -- we need to wrap it into extensible enum when it comes from an operation
             if (literalContext === undefined || rawValueType.Kind === "Boolean")
                 return rawValueType;
 
@@ -419,7 +412,6 @@ export function getInputType(
                     Description: literalValue.toString()
                 } as InputEnumTypeValue
             ];
-            // TODO -- we need to make it low confident if the enum is not string
             const enumType = {
                 Name: enumName,
                 Namespace: literalContext.Namespace,
@@ -544,7 +536,7 @@ export function getInputType(
                 DiscriminatorValue: getDiscriminatorValue(m, baseModel),
                 BaseModel: baseModel,
                 Usage: Usage.None,
-                Properties: properties // Properties should be the last assigned to model
+                Properties: properties // DerivedModels should be the last assigned to model, if no derived models, properties should be the last
             } as InputModelType;
 
             models.set(name, model);
@@ -552,16 +544,17 @@ export function getInputType(
             // Resolve properties after model is added to the map to resolve possible circular dependencies
             addModelProperties(model, m.properties, properties);
 
-            // Temporary part. Derived types may not be referenced directly by any operation
-            // We should be able to remove it when https://github.com/Azure/typespec-azure/issues/1733 is closed
-            if (model.DiscriminatorPropertyName && m.derivedModels) {
+            // add the derived models into the list
+            if (m.derivedModels !== undefined && m.derivedModels.length > 0) {
+                model.DerivedModels = [];
                 for (const dm of m.derivedModels) {
-                    getInputType(
+                    const derivedModel = getInputType(
                         context,
                         getFormattedType(program, dm),
                         models,
                         enums
                     );
+                    model.DerivedModels.push(derivedModel as InputModelType);
                 }
             }
         }
@@ -579,8 +572,17 @@ export function getInputType(
             const discriminatorProperty = m.properties.get(
                 discriminatorPropertyName
             );
-            if (discriminatorProperty?.type.kind === "String") {
-                return discriminatorProperty.type.value;
+            if (
+                discriminatorProperty?.type.kind === "String" ||
+                // discriminator property cannot be number, but enum support number values
+                // typespec compiler will do the check, but here we do a double check just in case
+                (discriminatorProperty?.type.kind === "EnumMember" &&
+                    typeof discriminatorProperty?.type.value !== "number")
+            ) {
+                return String(
+                    discriminatorProperty.type.value ??
+                        discriminatorProperty.type.name
+                );
             }
         }
 
@@ -641,6 +643,9 @@ export function getInputType(
         });
 
         if (model.DiscriminatorPropertyName && !discriminatorPropertyDefined) {
+            logger.info(
+                `No specified type for discriminator property '${model.DiscriminatorPropertyName}'. Assume it is a string.`
+            );
             const discriminatorProperty = {
                 Name: model.DiscriminatorPropertyName,
                 SerializedName: model.DiscriminatorPropertyName,
@@ -779,21 +784,24 @@ export function getUsages(
         const affectTypes: string[] = [];
         if (typeName !== "") {
             affectTypes.push(typeName);
-            if (
-                effectiveType.kind === "Model" &&
-                effectiveType.templateMapper?.args
-            ) {
-                for (const arg of effectiveType.templateMapper.args) {
-                    if (
-                        arg.kind === "Model" &&
-                        "name" in arg &&
-                        arg.name !== ""
-                    ) {
-                        affectTypes.push(
-                            getFriendlyName(program, arg) ?? arg.name
-                        );
+            if (effectiveType.kind === "Model") {
+                if (effectiveType.templateMapper?.args) {
+                    for (const arg of effectiveType.templateMapper.args) {
+                        if (
+                            arg.kind === "Model" &&
+                            "name" in arg &&
+                            arg.name !== ""
+                        ) {
+                            affectTypes.push(
+                                getFriendlyName(program, arg) ?? arg.name
+                            );
+                        }
                     }
                 }
+                /*propagate to sub models and composite models*/
+                affectTypes.push(
+                    ...getAllEffectedModels(effectiveType, new Set<string>())
+                );
             }
         }
 
@@ -810,32 +818,45 @@ export function getUsages(
 
     for (const op of ops) {
         const resourceOperation = getResourceOperation(program, op.operation);
-        if (!op.parameters.bodyParameter && op.parameters.bodyType) {
-            let bodyTypeName = "";
+        if (!op.parameters.body?.parameter && op.parameters.body?.type) {
+            var effectiveBodyType = undefined;
+            var affectedTypes: string[] = [];
             if (resourceOperation) {
-                /* handle resource operation. */
-                bodyTypeName = resourceOperation.resourceType.name;
+                effectiveBodyType = resourceOperation.resourceType;
+                affectedTypes.push(effectiveBodyType.name);
             } else {
-                /* handle spread. */
-                const effectiveBodyType = getEffectiveSchemaType(
+                effectiveBodyType = getEffectiveSchemaType(
                     context,
-                    op.parameters.bodyType
+                    op.parameters.body.type
                 );
                 if (effectiveBodyType.kind === "Model") {
-                    if (effectiveBodyType.name !== "") {
-                        bodyTypeName =
-                            getFriendlyName(program, effectiveBodyType) ??
-                            effectiveBodyType.name;
-                    } else {
-                        bodyTypeName = `${capitalize(
+                    /* handle spread. */
+                    if (effectiveBodyType.name === "") {
+                        effectiveBodyType.name = `${capitalize(
                             op.operation.name
                         )}Request`;
                     }
+                    affectedTypes.push(
+                        getFriendlyName(program, effectiveBodyType) ??
+                            effectiveBodyType.name
+                    );
                 }
             }
-            appendUsage(bodyTypeName, UsageFlags.Input);
+            if (effectiveBodyType.kind === "Model") {
+                /*propagate to sub models and composite models*/
+                affectedTypes.push(
+                    ...getAllEffectedModels(
+                        effectiveBodyType,
+                        new Set<string>()
+                    )
+                );
+            }
+            for (const name of affectedTypes) {
+                appendUsage(name, UsageFlags.Input);
+            }
         }
         /* handle response type usage. */
+        var affectedReturnTypes: string[] = [];
         for (const res of op.responses) {
             const resBody = res.responses[0]?.body;
             if (resBody?.type) {
@@ -858,8 +879,20 @@ export function getUsages(
                             getFriendlyName(program, effectiveReturnType) ??
                             effectiveReturnType.name;
                     }
+                    /*propagate to sub models and composite models*/
+                    if (effectiveReturnType.kind === "Model") {
+                        affectedReturnTypes.push(
+                            ...getAllEffectedModels(
+                                effectiveReturnType,
+                                new Set<string>()
+                            )
+                        );
+                    }
                 }
-                appendUsage(returnType, UsageFlags.Output);
+                affectedReturnTypes.push(returnType);
+                for (const name of affectedReturnTypes) {
+                    appendUsage(name, UsageFlags.Output);
+                }
             }
         }
     }
@@ -900,6 +933,39 @@ export function getUsages(
         if (!value) value = flag;
         else value = value | flag;
         usagesMap.set(name, value);
+    }
+
+    function getAllEffectedModels(
+        model: Model,
+        visited: Set<string>
+    ): string[] {
+        const result: string[] = [];
+        if (
+            (isArrayModelType(program, model) ||
+                isRecordModelType(program, model)) &&
+            model.indexer.value.kind === "Model"
+        ) {
+            result.push(...getAllEffectedModels(model.indexer.value, visited));
+        } else {
+            const name = getFriendlyName(program, model) ?? model.name;
+            if (model.kind !== "Model" || visited.has(name)) return result;
+            result.push(name);
+            visited.add(name);
+            const derivedModels = model.derivedModels;
+            for (const derivedModel of derivedModels) {
+                result.push(
+                    getFriendlyName(program, derivedModel) ?? derivedModel.name
+                );
+                result.push(...getAllEffectedModels(derivedModel, visited));
+            }
+            for (const [_, prop] of model.properties) {
+                if (prop.type.kind === "Model") {
+                    result.push(...getAllEffectedModels(prop.type, visited));
+                }
+            }
+        }
+
+        return result;
     }
 }
 

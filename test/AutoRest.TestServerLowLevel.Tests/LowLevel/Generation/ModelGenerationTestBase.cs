@@ -16,20 +16,23 @@ namespace AutoRest.CSharp.Generation.Writers.Tests
     public class ModelGenerationTestBase
     {
         // common usages definitions
-        internal static readonly InputModelProperty RequiredStringProperty = new InputModelProperty("requiredString", "requiredString", "Required string, illustrating a reference type property.", InputPrimitiveType.String, null, true, false, false);
+        internal static readonly InputModelProperty RequiredStringProperty = new InputModelProperty("requiredString", "requiredString", "Required string, illustrating a reference type property.", InputPrimitiveType.String, true, false, false);
 
-        internal static readonly InputModelProperty RequiredIntProperty = new InputModelProperty("requiredInt", "requiredInt", "Required int, illustrating a value type property.", InputPrimitiveType.Int32, null, true, false, false);
+        internal static readonly InputModelProperty RequiredIntProperty = new InputModelProperty("requiredInt", "requiredInt", "Required int, illustrating a value type property.", InputPrimitiveType.Int32, true, false, false);
 
-        internal static readonly InputModelProperty RequiredStringListProperty = new InputModelProperty("requiredStringList", "requiredStringList", "Required collection of strings, illustrating a collection of reference types.", new InputListType("requiredStringList", InputPrimitiveType.String), null, true, false, false);
+        internal static readonly InputModelProperty RequiredStringListProperty = new InputModelProperty("requiredStringList", "requiredStringList", "Required collection of strings, illustrating a collection of reference types.", new InputListType("requiredStringList", InputPrimitiveType.String, false), true, false, false);
 
-        internal static readonly InputModelProperty RequiredIntListProperty = new InputModelProperty("requiredIntList", "requiredIntList", "Required collection of ints, illustrating a collection of value types.", new InputListType("requiredIntList", InputPrimitiveType.Int32), null, true, false, false);
+        internal static readonly InputModelProperty RequiredIntListProperty = new InputModelProperty("requiredIntList", "requiredIntList", "Required collection of ints, illustrating a collection of value types.", new InputListType("requiredIntList", InputPrimitiveType.Int32, false), true, false, false);
 
         internal static TypeFactory CadlTypeFactory => new TypeFactory(null);
 
-        internal static readonly InputModelType ElementModelType = new("SimpleModel", "Cadl.TestServer.ModelCollectionProperties.Models", null, "public", "Simple model that will appear in a collection.", InputModelTypeUsage.RoundTrip, new[]{ RequiredStringProperty, RequiredIntProperty }, null, null, null, null);
+        internal static readonly InputModelType ElementModelType = new InputModelType("SimpleModel", "Cadl.TestServer.ModelCollectionProperties.Models", null, "public",
+            "Simple model that will appear in a collection.", InputModelTypeUsage.RoundTrip,
+            new List<InputModelProperty> { RequiredStringProperty, RequiredIntProperty },
+            null, new List<InputModelType>(), null, null, false);
 
         [OneTimeSetUp]
-        public void init()
+        public void Initialize()
         {
             Configuration.Initialize(
                 outputFolder: "Generated",
@@ -48,6 +51,7 @@ namespace AutoRest.CSharp.Generation.Writers.Tests
                 disablePaginationTopRenaming: false,
                 generateModelFactory: true,
                 publicDiscriminatorProperty: false,
+                deserializeNullCollectionAsNullValue: false,
                 useCoreDataFactoryReplacements: true,
                 modelFactoryForHlc: Array.Empty<string>(),
                 unreferencedTypesHandling: Configuration.UnreferencedTypesHandlingOption.RemoveOrInternalize,

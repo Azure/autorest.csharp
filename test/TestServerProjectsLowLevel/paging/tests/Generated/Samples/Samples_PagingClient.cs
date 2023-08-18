@@ -254,7 +254,7 @@ namespace paging_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new PagingClient(credential);
 
-            foreach (var item in client.GetMultiplePages("<clientRequestId>", 1234, 1234, new RequestContext()))
+            foreach (var item in client.GetMultiplePages(1234, 1234, new RequestContext()))
             {
                 JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
                 Console.WriteLine(result.ToString());
@@ -268,7 +268,7 @@ namespace paging_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new PagingClient(credential);
 
-            foreach (var item in client.GetMultiplePages("<clientRequestId>", 1234, 1234, new RequestContext()))
+            foreach (var item in client.GetMultiplePages(1234, 1234, new RequestContext()))
             {
                 JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
                 Console.WriteLine(result.GetProperty("properties").GetProperty("id").ToString());
@@ -283,7 +283,7 @@ namespace paging_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new PagingClient(credential);
 
-            await foreach (var item in client.GetMultiplePagesAsync("<clientRequestId>", 1234, 1234, new RequestContext()))
+            await foreach (var item in client.GetMultiplePagesAsync(1234, 1234, new RequestContext()))
             {
                 JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
                 Console.WriteLine(result.ToString());
@@ -297,7 +297,7 @@ namespace paging_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new PagingClient(credential);
 
-            await foreach (var item in client.GetMultiplePagesAsync("<clientRequestId>", 1234, 1234, new RequestContext()))
+            await foreach (var item in client.GetMultiplePagesAsync(1234, 1234, new RequestContext()))
             {
                 JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
                 Console.WriteLine(result.GetProperty("properties").GetProperty("id").ToString());
@@ -486,7 +486,7 @@ namespace paging_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new PagingClient(credential);
 
-            foreach (var item in client.GetOdataMultiplePages("<clientRequestId>", 1234, 1234, new RequestContext()))
+            foreach (var item in client.GetOdataMultiplePages(1234, 1234, new RequestContext()))
             {
                 JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
                 Console.WriteLine(result.ToString());
@@ -500,7 +500,7 @@ namespace paging_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new PagingClient(credential);
 
-            foreach (var item in client.GetOdataMultiplePages("<clientRequestId>", 1234, 1234, new RequestContext()))
+            foreach (var item in client.GetOdataMultiplePages(1234, 1234, new RequestContext()))
             {
                 JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
                 Console.WriteLine(result.GetProperty("properties").GetProperty("id").ToString());
@@ -515,7 +515,7 @@ namespace paging_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new PagingClient(credential);
 
-            await foreach (var item in client.GetOdataMultiplePagesAsync("<clientRequestId>", 1234, 1234, new RequestContext()))
+            await foreach (var item in client.GetOdataMultiplePagesAsync(1234, 1234, new RequestContext()))
             {
                 JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
                 Console.WriteLine(result.ToString());
@@ -529,7 +529,7 @@ namespace paging_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new PagingClient(credential);
 
-            await foreach (var item in client.GetOdataMultiplePagesAsync("<clientRequestId>", 1234, 1234, new RequestContext()))
+            await foreach (var item in client.GetOdataMultiplePagesAsync(1234, 1234, new RequestContext()))
             {
                 JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
                 Console.WriteLine(result.GetProperty("properties").GetProperty("id").ToString());
@@ -544,7 +544,7 @@ namespace paging_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new PagingClient(credential);
 
-            foreach (var item in client.GetMultiplePagesWithOffset(1234, "<clientRequestId>", 1234, 1234, new RequestContext()))
+            foreach (var item in client.GetMultiplePagesWithOffset(1234, 1234, 1234, new RequestContext()))
             {
                 JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
                 Console.WriteLine(result.ToString());
@@ -558,7 +558,7 @@ namespace paging_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new PagingClient(credential);
 
-            foreach (var item in client.GetMultiplePagesWithOffset(1234, "<clientRequestId>", 1234, 1234, new RequestContext()))
+            foreach (var item in client.GetMultiplePagesWithOffset(1234, 1234, 1234, new RequestContext()))
             {
                 JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
                 Console.WriteLine(result.GetProperty("properties").GetProperty("id").ToString());
@@ -573,7 +573,7 @@ namespace paging_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new PagingClient(credential);
 
-            await foreach (var item in client.GetMultiplePagesWithOffsetAsync(1234, "<clientRequestId>", 1234, 1234, new RequestContext()))
+            await foreach (var item in client.GetMultiplePagesWithOffsetAsync(1234, 1234, 1234, new RequestContext()))
             {
                 JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
                 Console.WriteLine(result.ToString());
@@ -587,7 +587,7 @@ namespace paging_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new PagingClient(credential);
 
-            await foreach (var item in client.GetMultiplePagesWithOffsetAsync(1234, "<clientRequestId>", 1234, 1234, new RequestContext()))
+            await foreach (var item in client.GetMultiplePagesWithOffsetAsync(1234, 1234, 1234, new RequestContext()))
             {
                 JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
                 Console.WriteLine(result.GetProperty("properties").GetProperty("id").ToString());
@@ -1182,7 +1182,7 @@ namespace paging_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new PagingClient(credential);
 
-            var operation = client.GetMultiplePagesLRO(WaitUntil.Completed, "<clientRequestId>", 1234, 1234, new RequestContext());
+            var operation = client.GetMultiplePagesLRO(WaitUntil.Completed, 1234, 1234, new RequestContext());
 
             foreach (var item in operation.Value)
             {
@@ -1198,7 +1198,7 @@ namespace paging_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new PagingClient(credential);
 
-            var operation = client.GetMultiplePagesLRO(WaitUntil.Completed, "<clientRequestId>", 1234, 1234, new RequestContext());
+            var operation = client.GetMultiplePagesLRO(WaitUntil.Completed, 1234, 1234, new RequestContext());
 
             foreach (var item in operation.Value)
             {
@@ -1215,7 +1215,7 @@ namespace paging_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new PagingClient(credential);
 
-            var operation = await client.GetMultiplePagesLROAsync(WaitUntil.Completed, "<clientRequestId>", 1234, 1234, new RequestContext()).ConfigureAwait(false);
+            var operation = await client.GetMultiplePagesLROAsync(WaitUntil.Completed, 1234, 1234, new RequestContext());
 
             await foreach (var item in operation.Value)
             {
@@ -1231,7 +1231,7 @@ namespace paging_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new PagingClient(credential);
 
-            var operation = await client.GetMultiplePagesLROAsync(WaitUntil.Completed, "<clientRequestId>", 1234, 1234, new RequestContext()).ConfigureAwait(false);
+            var operation = await client.GetMultiplePagesLROAsync(WaitUntil.Completed, 1234, 1234, new RequestContext());
 
             await foreach (var item in operation.Value)
             {

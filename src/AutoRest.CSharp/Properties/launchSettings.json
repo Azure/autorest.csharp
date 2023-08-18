@@ -184,6 +184,10 @@
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\CollapseRequestCondition-LowLevel\\src\\Generated"
     },
+    "ConfidentLevels-TypeSpec": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\ConfidentLevels-TypeSpec\\src\\Generated -n"
+    },
     "constants": {
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestServerProjects\\constants\\Generated"
@@ -660,6 +664,14 @@
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\CadlRanchProjects\\server\\path\\single\\src\\Generated -n"
     },
+    "typespec-special-headers/client-request-id": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\CadlRanchProjects\\special-headers\\client-request-id\\src\\Generated -n"
+    },
+    "typespec-special-headers/repeatability": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\CadlRanchProjects\\special-headers\\repeatability\\src\\Generated -n"
+    },
     "typespec-special-words": {
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\CadlRanchProjects\\special-words\\src\\Generated -n"
@@ -679,6 +691,18 @@
     "typespec-type/enum/fixed": {
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\CadlRanchProjects\\type\\enum\\fixed\\src\\Generated -n"
+    },
+    "typespec-type/model/inheritance/enum-discriminator": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\CadlRanchProjects\\type\\model\\inheritance\\enum-discriminator\\src\\Generated -n"
+    },
+    "typespec-type/model/inheritance/not-discriminated": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\CadlRanchProjects\\type\\model\\inheritance\\not-discriminated\\src\\Generated -n"
+    },
+    "typespec-type/model/inheritance/single-discriminator": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\CadlRanchProjects\\type\\model\\inheritance\\single-discriminator\\src\\Generated -n"
     },
     "typespec-type/model/usage": {
       "commandName": "Project",
