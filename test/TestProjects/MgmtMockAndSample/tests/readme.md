@@ -5,6 +5,7 @@
 
 ``` yaml
 require: ../src/readme.md
+include-x-ms-examples-original-file: false
 mgmt-debug:
   skip-codegen: true
 sample-gen:

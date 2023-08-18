@@ -23,7 +23,7 @@ namespace MgmtMockAndSample.Samples
         [NUnit.Framework.Ignore("Only verifying that the sample builds")]
         public async Task Delete_DeleteRoleAssignmentByName()
         {
-            // Generated from example definition: specification/mockSwagger/examples/DeleteRoleAssignmentByName.json
+            // Generated from example definition:
             // this example is just showing the usage of "RoleAssignments_Delete" operation, for the dependent resources, they will have to be created separately.
 
             // get your azure access token, for more details of how Azure SDK get your access token, please refer to https://learn.microsoft.com/en-us/dotnet/azure/sdk/authentication?tabs=command-line
@@ -54,7 +54,7 @@ namespace MgmtMockAndSample.Samples
         [NUnit.Framework.Ignore("Only verifying that the sample builds")]
         public async Task Update_CreateRoleAssignment()
         {
-            // Generated from example definition: specification/mockSwagger/examples/PutRoleAssignment.json
+            // Generated from example definition:
             // this example is just showing the usage of "RoleAssignments_Create" operation, for the dependent resources, they will have to be created separately.
 
             // get your azure access token, for more details of how Azure SDK get your access token, please refer to https://learn.microsoft.com/en-us/dotnet/azure/sdk/authentication?tabs=command-line
@@ -91,7 +91,7 @@ namespace MgmtMockAndSample.Samples
         [NUnit.Framework.Ignore("Only verifying that the sample builds")]
         public async Task Get_GetRoleAssignmentByName()
         {
-            // Generated from example definition: specification/mockSwagger/examples/GetRoleAssignmentByName.json
+            // Generated from example definition:
             // this example is just showing the usage of "RoleAssignments_Get" operation, for the dependent resources, they will have to be created separately.
 
             // get your azure access token, for more details of how Azure SDK get your access token, please refer to https://learn.microsoft.com/en-us/dotnet/azure/sdk/authentication?tabs=command-line
@@ -121,7 +121,7 @@ namespace MgmtMockAndSample.Samples
         [NUnit.Framework.Ignore("Only verifying that the sample builds")]
         public async Task Validate_ValidateRoleAssignmentsForSubscription()
         {
-            // Generated from example definition: specification/mockSwagger/examples/ValidateRoleAssignment.json
+            // Generated from example definition:
             // this example is just showing the usage of "RoleAssignments_Validate" operation, for the dependent resources, they will have to be created separately.
 
             // get your azure access token, for more details of how Azure SDK get your access token, please refer to https://learn.microsoft.com/en-us/dotnet/azure/sdk/authentication?tabs=command-line

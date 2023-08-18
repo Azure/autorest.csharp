@@ -24,7 +24,7 @@ namespace MgmtMockAndSample.Samples
         [NUnit.Framework.Ignore("Only verifying that the sample builds")]
         public async Task Update_UpdateAnExistingManagedHSMPool()
         {
-            // Generated from example definition: specification/mockSwagger/examples/ManagedHsm_Update.json
+            // Generated from example definition:
             // this example is just showing the usage of "ManagedHsms_Update" operation, for the dependent resources, they will have to be created separately.
 
             // get your azure access token, for more details of how Azure SDK get your access token, please refer to https://learn.microsoft.com/en-us/dotnet/azure/sdk/authentication?tabs=command-line
@@ -65,7 +65,7 @@ namespace MgmtMockAndSample.Samples
         [NUnit.Framework.Ignore("Only verifying that the sample builds")]
         public async Task Delete_DeleteAManagedHSMPool()
         {
-            // Generated from example definition: specification/mockSwagger/examples/ManagedHsm_Delete.json
+            // Generated from example definition:
             // this example is just showing the usage of "ManagedHsms_Delete" operation, for the dependent resources, they will have to be created separately.
 
             // get your azure access token, for more details of how Azure SDK get your access token, please refer to https://learn.microsoft.com/en-us/dotnet/azure/sdk/authentication?tabs=command-line
@@ -92,7 +92,7 @@ namespace MgmtMockAndSample.Samples
         [NUnit.Framework.Ignore("Only verifying that the sample builds")]
         public async Task Get_RetrieveAManagedHSMPool()
         {
-            // Generated from example definition: specification/mockSwagger/examples/ManagedHsm_Get.json
+            // Generated from example definition:
             // this example is just showing the usage of "ManagedHsms_Get" operation, for the dependent resources, they will have to be created separately.
 
             // get your azure access token, for more details of how Azure SDK get your access token, please refer to https://learn.microsoft.com/en-us/dotnet/azure/sdk/authentication?tabs=command-line
@@ -123,7 +123,7 @@ namespace MgmtMockAndSample.Samples
         [NUnit.Framework.Ignore("Only verifying that the sample builds")]
         public async Task GetManagedHsms_ListManagedHSMPoolsInASubscription()
         {
-            // Generated from example definition: specification/mockSwagger/examples/ManagedHsm_ListBySubscription.json
+            // Generated from example definition:
             // this example is just showing the usage of "ManagedHsms_ListBySubscription" operation, for the dependent resources, they will have to be created separately.
 
             // get your azure access token, for more details of how Azure SDK get your access token, please refer to https://learn.microsoft.com/en-us/dotnet/azure/sdk/authentication?tabs=command-line
@@ -155,7 +155,7 @@ namespace MgmtMockAndSample.Samples
         [NUnit.Framework.Ignore("Only verifying that the sample builds")]
         public async Task GetMHSMPrivateLinkResourcesByMhsmResource_KeyVaultListPrivateLinkResources()
         {
-            // Generated from example definition: specification/mockSwagger/examples/ManagedHsm_listPrivateLinkResources.json
+            // Generated from example definition:
             // this example is just showing the usage of "MHSMPrivateLinkResources_ListByMHSMResource" operation, for the dependent resources, they will have to be created separately.
 
             // get your azure access token, for more details of how Azure SDK get your access token, please refer to https://learn.microsoft.com/en-us/dotnet/azure/sdk/authentication?tabs=command-line

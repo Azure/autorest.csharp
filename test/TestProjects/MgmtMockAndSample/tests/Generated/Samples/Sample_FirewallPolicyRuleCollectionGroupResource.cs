@@ -23,7 +23,7 @@ namespace MgmtMockAndSample.Samples
         [NUnit.Framework.Ignore("Only verifying that the sample builds")]
         public async Task Delete_DeleteFirewallPolicyRuleCollectionGroup()
         {
-            // Generated from example definition: specification/mockSwagger/examples/network/FirewallPolicyRuleCollectionGroupDelete.json
+            // Generated from example definition:
             // this example is just showing the usage of "FirewallPolicyRuleCollectionGroups_Delete" operation, for the dependent resources, they will have to be created separately.
 
             // get your azure access token, for more details of how Azure SDK get your access token, please refer to https://learn.microsoft.com/en-us/dotnet/azure/sdk/authentication?tabs=command-line
@@ -51,7 +51,7 @@ namespace MgmtMockAndSample.Samples
         [NUnit.Framework.Ignore("Only verifying that the sample builds")]
         public async Task Get_GetFirewallPolicyNatRuleCollectionGroup()
         {
-            // Generated from example definition: specification/mockSwagger/examples/network/FirewallPolicyNatRuleCollectionGroupGet.json
+            // Generated from example definition:
             // this example is just showing the usage of "FirewallPolicyRuleCollectionGroups_Get" operation, for the dependent resources, they will have to be created separately.
 
             // get your azure access token, for more details of how Azure SDK get your access token, please refer to https://learn.microsoft.com/en-us/dotnet/azure/sdk/authentication?tabs=command-line
@@ -83,7 +83,7 @@ namespace MgmtMockAndSample.Samples
         [NUnit.Framework.Ignore("Only verifying that the sample builds")]
         public async Task Get_GetFirewallPolicyRuleCollectionGroup()
         {
-            // Generated from example definition: specification/mockSwagger/examples/network/FirewallPolicyRuleCollectionGroupGet.json
+            // Generated from example definition:
             // this example is just showing the usage of "FirewallPolicyRuleCollectionGroups_Get" operation, for the dependent resources, they will have to be created separately.
 
             // get your azure access token, for more details of how Azure SDK get your access token, please refer to https://learn.microsoft.com/en-us/dotnet/azure/sdk/authentication?tabs=command-line
@@ -115,7 +115,7 @@ namespace MgmtMockAndSample.Samples
         [NUnit.Framework.Ignore("Only verifying that the sample builds")]
         public async Task Get_GetFirewallPolicyRuleCollectionGroupWithIpGroups()
         {
-            // Generated from example definition: specification/mockSwagger/examples/network/FirewallPolicyRuleCollectionGroupWithIpGroupsGet.json
+            // Generated from example definition:
             // this example is just showing the usage of "FirewallPolicyRuleCollectionGroups_Get" operation, for the dependent resources, they will have to be created separately.
 
             // get your azure access token, for more details of how Azure SDK get your access token, please refer to https://learn.microsoft.com/en-us/dotnet/azure/sdk/authentication?tabs=command-line
@@ -147,7 +147,7 @@ namespace MgmtMockAndSample.Samples
         [NUnit.Framework.Ignore("Only verifying that the sample builds")]
         public async Task Get_GetFirewallPolicyRuleCollectionGroupWithWebCategories()
         {
-            // Generated from example definition: specification/mockSwagger/examples/network/FirewallPolicyRuleCollectionGroupWithWebCategoriesGet.json
+            // Generated from example definition:
             // this example is just showing the usage of "FirewallPolicyRuleCollectionGroups_Get" operation, for the dependent resources, they will have to be created separately.
 
             // get your azure access token, for more details of how Azure SDK get your access token, please refer to https://learn.microsoft.com/en-us/dotnet/azure/sdk/authentication?tabs=command-line
@@ -179,7 +179,7 @@ namespace MgmtMockAndSample.Samples
         [NUnit.Framework.Ignore("Only verifying that the sample builds")]
         public async Task Update_CreateFirewallPolicyNatRuleCollectionGroup()
         {
-            // Generated from example definition: specification/mockSwagger/examples/network/FirewallPolicyNatRuleCollectionGroupPut.json
+            // Generated from example definition:
             // this example is just showing the usage of "FirewallPolicyRuleCollectionGroups_CreateOrUpdate" operation, for the dependent resources, they will have to be created separately.
 
             // get your azure access token, for more details of how Azure SDK get your access token, please refer to https://learn.microsoft.com/en-us/dotnet/azure/sdk/authentication?tabs=command-line
@@ -253,7 +253,7 @@ Priority = 100,
         [NUnit.Framework.Ignore("Only verifying that the sample builds")]
         public async Task Update_CreateFirewallPolicyRuleCollectionGroup()
         {
-            // Generated from example definition: specification/mockSwagger/examples/network/FirewallPolicyRuleCollectionGroupPut.json
+            // Generated from example definition:
             // this example is just showing the usage of "FirewallPolicyRuleCollectionGroups_CreateOrUpdate" operation, for the dependent resources, they will have to be created separately.
 
             // get your azure access token, for more details of how Azure SDK get your access token, please refer to https://learn.microsoft.com/en-us/dotnet/azure/sdk/authentication?tabs=command-line
@@ -322,7 +322,7 @@ Priority = 100,
         [NUnit.Framework.Ignore("Only verifying that the sample builds")]
         public async Task Update_CreateFirewallPolicyRuleCollectionGroupWithAllDefaultValues()
         {
-            // Generated from example definition: specification/mockSwagger/examples/network/FirewallPolicyRuleCollectionGroupWithDefaultsPut.json
+            // Generated from example definition:
             // this example is just showing the usage of "FirewallPolicyRuleCollectionGroups_CreateOrUpdate" operation, for the dependent resources, they will have to be created separately.
 
             // get your azure access token, for more details of how Azure SDK get your access token, please refer to https://learn.microsoft.com/en-us/dotnet/azure/sdk/authentication?tabs=command-line
@@ -356,7 +356,7 @@ Priority = 100,
         [NUnit.Framework.Ignore("Only verifying that the sample builds")]
         public async Task Update_CreateFirewallPolicyRuleCollectionGroupWithIpGroups()
         {
-            // Generated from example definition: specification/mockSwagger/examples/network/FirewallPolicyRuleCollectionGroupWithIpGroupsPut.json
+            // Generated from example definition:
             // this example is just showing the usage of "FirewallPolicyRuleCollectionGroups_CreateOrUpdate" operation, for the dependent resources, they will have to be created separately.
 
             // get your azure access token, for more details of how Azure SDK get your access token, please refer to https://learn.microsoft.com/en-us/dotnet/azure/sdk/authentication?tabs=command-line
@@ -424,7 +424,7 @@ Name = "Example-Filter-Rule-Collection",
         [NUnit.Framework.Ignore("Only verifying that the sample builds")]
         public async Task Update_CreateFirewallPolicyRuleCollectionGroupWithWebCategories()
         {
-            // Generated from example definition: specification/mockSwagger/examples/network/FirewallPolicyRuleCollectionGroupWithWebCategoriesPut.json
+            // Generated from example definition:
             // this example is just showing the usage of "FirewallPolicyRuleCollectionGroups_CreateOrUpdate" operation, for the dependent resources, they will have to be created separately.
 
             // get your azure access token, for more details of how Azure SDK get your access token, please refer to https://learn.microsoft.com/en-us/dotnet/azure/sdk/authentication?tabs=command-line
