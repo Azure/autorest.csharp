@@ -744,6 +744,7 @@ namespace ConvenienceInCadl
             }
         }
 
+        // The convenience method is omitted here because it has exactly the same parameter list as the corresponding protocol method
         /// <summary>
         /// [Protocol Method] Operation has protocol method marked with convenience method, but the convenience method should not be generated.
         /// <list type="bullet">
@@ -774,6 +775,7 @@ namespace ConvenienceInCadl
             }
         }
 
+        // The convenience method is omitted here because it has exactly the same parameter list as the corresponding protocol method
         /// <summary>
         /// [Protocol Method] Operation has protocol method marked with convenience method, but the convenience method should not be generated.
         /// <list type="bullet">
@@ -804,6 +806,7 @@ namespace ConvenienceInCadl
             }
         }
 
+        // The convenience method is omitted here because it has exactly the same parameter list as the corresponding protocol method
         /// <summary>
         /// [Protocol Method] Initial operation only has protocol method, but the convenience method should not be generated even it marks the convenience decorator.
         /// <list type="bullet">
@@ -834,6 +837,7 @@ namespace ConvenienceInCadl
             }
         }
 
+        // The convenience method is omitted here because it has exactly the same parameter list as the corresponding protocol method
         /// <summary>
         /// [Protocol Method] Initial operation only has protocol method, but the convenience method should not be generated even it marks the convenience decorator.
         /// <list type="bullet">

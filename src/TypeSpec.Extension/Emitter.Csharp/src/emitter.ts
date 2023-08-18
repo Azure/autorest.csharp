@@ -4,7 +4,6 @@
 import {
     Program,
     resolvePath,
-    Service,
     EmitContext,
     createTypeSpecLibrary,
     paramMessage,

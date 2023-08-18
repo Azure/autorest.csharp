@@ -85,7 +85,9 @@ namespace SpecialWords.Samples
 
             var data = new
             {
-                modelkind = "",
+                derivedname = "<derived.name>",
+                @for = "<for>",
+                modelkind = "derived",
             };
 
             Response response = client.Put(RequestContent.Create(data));
@@ -100,7 +102,9 @@ namespace SpecialWords.Samples
 
             var data = new
             {
-                modelkind = "",
+                derivedname = "<derived.name>",
+                @for = "<for>",
+                modelkind = "derived",
             };
 
             Response response = client.Put(RequestContent.Create(data));
@@ -115,7 +119,9 @@ namespace SpecialWords.Samples
 
             var data = new
             {
-                modelkind = "",
+                derivedname = "<derived.name>",
+                @for = "<for>",
+                modelkind = "derived",
             };
 
             Response response = await client.PutAsync(RequestContent.Create(data));
@@ -130,7 +136,9 @@ namespace SpecialWords.Samples
 
             var data = new
             {
-                modelkind = "",
+                derivedname = "<derived.name>",
+                @for = "<for>",
+                modelkind = "derived",
             };
 
             Response response = await client.PutAsync(RequestContent.Create(data));
