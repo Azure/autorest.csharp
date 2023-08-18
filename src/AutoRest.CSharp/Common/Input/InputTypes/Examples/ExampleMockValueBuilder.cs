@@ -91,6 +91,7 @@ namespace AutoRest.CSharp.Common.Input.Examples
             InputPrimitiveType primitiveType => BuildPrimitiveExampleValue(primitiveType, hint),
             InputLiteralType literalType => InputExampleValue.Value(literalType, literalType.Value),
             InputModelType modelType => BuildModelExampleValue(modelType),
+            InputUnionType unionType => BuildExampleValue(unionType.UnionItemTypes.First(), hint),
             _ => InputExampleValue.Object(type, new Dictionary<string, InputExampleValue>())
         };
 

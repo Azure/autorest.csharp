@@ -2,6 +2,7 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 using System.Threading.Tasks;
+using System.Xml.Linq;
 using AutoRest.CSharp.Common.Generation.Writers;
 using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Common.Output.PostProcessing;
@@ -40,11 +41,15 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                 var lowLevelClientWriter = new LowLevelClientWriter(codeWriter, xmlDocWriter, client);
                 lowLevelClientWriter.WriteClient();
                 project.AddGeneratedFile($"{client.Type.Name}.cs", codeWriter.ToString());
-                project.AddGeneratedDocFile($"Docs/{client.Type.Name}.xml", xmlDocWriter.ToString());
 
                 var exampleCompileCheckWriter = new ExampleCompileCheckWriter(client);
                 exampleCompileCheckWriter.Write();
-                project.AddGeneratedFile($"../../tests/Generated/Samples/Samples_{client.Type.Name}.cs", exampleCompileCheckWriter.ToString());
+                var exampleFileCheckFilename = $"../../tests/Generated/Samples/Samples_{client.Type.Name}.cs";
+                project.AddGeneratedFile(exampleFileCheckFilename, exampleCompileCheckWriter.ToString());
+
+                // TODO -- temporary
+                var xmlDocument = XDocument.Parse(xmlDocWriter.ToString());
+                project.AddGeneratedDocFile($"Docs/{client.Type.Name}.xml", new XmlDocument(exampleFileCheckFilename, xmlDocument));
             }
 
             var optionsWriter = new CodeWriter();

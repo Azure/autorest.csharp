@@ -7,6 +7,7 @@ using System.Collections.Immutable;
 using System.Linq;
 using System.Text.RegularExpressions;
 using AutoRest.CSharp.Common.Input;
+using AutoRest.CSharp.Common.Input.Examples;
 using AutoRest.CSharp.Common.Output.Builders;
 using AutoRest.CSharp.Common.Output.Models.Responses;
 using AutoRest.CSharp.Generation.Types;
@@ -27,6 +28,7 @@ namespace AutoRest.CSharp.Output.Models
         private readonly string _libraryName;
         private readonly TypeFactory _typeFactory;
         private readonly IEnumerable<InputParameter> _clientParameters;
+        private readonly IReadOnlyDictionary<string, InputClientExample> _clientParameterExamples;
         private readonly InputAuth _authorization;
         private readonly IEnumerable<InputOperation> _operations;
         private readonly SourceInputModel? _sourceInputModel;
@@ -49,7 +51,7 @@ namespace AutoRest.CSharp.Output.Models
         private bool? _isResourceClient;
         public bool IsResourceClient => _isResourceClient ??= Parameters.Any(p => p.IsResourceIdentifier);
 
-        public LowLevelClient(string name, string ns, string description, string libraryName, LowLevelClient? parentClient, IEnumerable<InputOperation> operations, IEnumerable<InputParameter> clientParameters, InputAuth authorization, SourceInputModel? sourceInputModel, ClientOptionsTypeProvider clientOptions, TypeFactory typeFactory)
+        public LowLevelClient(string name, string ns, string description, string libraryName, LowLevelClient? parentClient, IEnumerable<InputOperation> operations, IEnumerable<InputParameter> clientParameters, InputAuth authorization, SourceInputModel? sourceInputModel, ClientOptionsTypeProvider clientOptions, IReadOnlyDictionary<string, InputClientExample> examples, TypeFactory typeFactory)
             : base(ns, sourceInputModel)
         {
             _libraryName = libraryName;
@@ -62,6 +64,7 @@ namespace AutoRest.CSharp.Output.Models
             ClientOptions = clientOptions;
 
             _clientParameters = clientParameters;
+            _clientParameterExamples = examples;
             _authorization = authorization;
             _operations = operations;
             _sourceInputModel = sourceInputModel;
@@ -81,7 +84,7 @@ namespace AutoRest.CSharp.Output.Models
         public ConstructorSignature[] SecondaryConstructors => Constructors.SecondaryConstructors;
 
         private IReadOnlyList<LowLevelClientMethod>? _allClientMethods;
-        private IReadOnlyList<LowLevelClientMethod> AllClientMethods => _allClientMethods ??= BuildMethods(_typeFactory, _operations, Fields, Declaration.Namespace, Declaration.Name, _sourceInputModel).ToArray();
+        private IReadOnlyList<LowLevelClientMethod> AllClientMethods => _allClientMethods ??= BuildMethods(this, _typeFactory, _operations, Fields, Declaration.Namespace, Declaration.Name, _sourceInputModel, _clientParameterExamples).ToArray();
 
         private IReadOnlyList<LowLevelClientMethod>? _clientMethods;
         public IReadOnlyList<LowLevelClientMethod> ClientMethods => _clientMethods ??= AllClientMethods
@@ -107,9 +110,9 @@ namespace AutoRest.CSharp.Output.Models
         }
 
 
-        public static IEnumerable<LowLevelClientMethod> BuildMethods(TypeFactory typeFactory, IEnumerable<InputOperation> operations, ClientFields fields, string namespaceName, string clientName, SourceInputModel? sourceInputModel)
+        public static IEnumerable<LowLevelClientMethod> BuildMethods(LowLevelClient? client, TypeFactory typeFactory, IEnumerable<InputOperation> operations, ClientFields fields, string namespaceName, string clientName, SourceInputModel? sourceInputModel, IReadOnlyDictionary<string, InputClientExample>? clientParameterExamples)
         {
-            var builders = operations.ToDictionary(o => o, o => new OperationMethodChainBuilder(o, namespaceName, clientName, fields, typeFactory, sourceInputModel));
+            var builders = operations.ToDictionary(o => o, o => new OperationMethodChainBuilder(client, o, namespaceName, clientName, fields, typeFactory, sourceInputModel, clientParameterExamples));
             foreach (var (_, builder) in builders)
             {
                 builder.BuildNextPageMethod(builders);

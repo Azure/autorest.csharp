@@ -2,29 +2,27 @@
 <doc>
   <members>
     <member name="TopActionAsync(DateTimeOffset,CancellationToken)">
-<example>
+      <example>
 This sample shows how to call TopActionAsync with required parameters.
 <code><![CDATA[
 var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new FirstTestTypeSpecClient(endpoint);
 
 var result = await client.TopActionAsync(DateTimeOffset.UtcNow);
-]]></code>
-</example>
+]]></code></example>
     </member>
     <member name="TopAction(DateTimeOffset,CancellationToken)">
-<example>
+      <example>
 This sample shows how to call TopAction with required parameters.
 <code><![CDATA[
 var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new FirstTestTypeSpecClient(endpoint);
 
 var result = client.TopAction(DateTimeOffset.UtcNow);
-]]></code>
-</example>
+]]></code></example>
     </member>
     <member name="TopActionAsync(DateTimeOffset,RequestContext)">
-<example>
+      <example>
 This sample shows how to call TopActionAsync with required parameters and parse the result.
 <code><![CDATA[
 var endpoint = new Uri("<https://my-service.azure.com>");
@@ -46,11 +44,10 @@ Console.WriteLine(result.GetProperty("optionalLiteralBool").ToString());
 Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
 Console.WriteLine(result.GetProperty("optionalNullableList")[0].ToString());
 Console.WriteLine(result.GetProperty("requiredNullableList")[0].ToString());
-]]></code>
-</example>
+]]></code></example>
     </member>
     <member name="TopAction(DateTimeOffset,RequestContext)">
-<example>
+      <example>
 This sample shows how to call TopAction with required parameters and parse the result.
 <code><![CDATA[
 var endpoint = new Uri("<https://my-service.azure.com>");
@@ -72,11 +69,10 @@ Console.WriteLine(result.GetProperty("optionalLiteralBool").ToString());
 Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
 Console.WriteLine(result.GetProperty("optionalNullableList")[0].ToString());
 Console.WriteLine(result.GetProperty("requiredNullableList")[0].ToString());
-]]></code>
-</example>
+]]></code></example>
     </member>
     <member name="TopAction2Async(RequestContext)">
-<example>
+      <example>
 This sample shows how to call TopAction2Async with required parameters and parse the result.
 <code><![CDATA[
 var endpoint = new Uri("<https://my-service.azure.com>");
@@ -98,11 +94,10 @@ Console.WriteLine(result.GetProperty("optionalLiteralBool").ToString());
 Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
 Console.WriteLine(result.GetProperty("optionalNullableList")[0].ToString());
 Console.WriteLine(result.GetProperty("requiredNullableList")[0].ToString());
-]]></code>
-</example>
+]]></code></example>
     </member>
     <member name="TopAction2(RequestContext)">
-<example>
+      <example>
 This sample shows how to call TopAction2 with required parameters and parse the result.
 <code><![CDATA[
 var endpoint = new Uri("<https://my-service.azure.com>");
@@ -124,11 +119,10 @@ Console.WriteLine(result.GetProperty("optionalLiteralBool").ToString());
 Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
 Console.WriteLine(result.GetProperty("optionalNullableList")[0].ToString());
 Console.WriteLine(result.GetProperty("requiredNullableList")[0].ToString());
-]]></code>
-</example>
+]]></code></example>
     </member>
     <member name="PatchActionAsync(RequestContent,RequestContext)">
-<example>
+      <example>
 This sample shows how to call PatchActionAsync with required request content, and how to parse the result.
 <code><![CDATA[
 var endpoint = new Uri("<https://my-service.azure.com>");
@@ -200,11 +194,10 @@ Console.WriteLine(result.GetProperty("optionalLiteralBool").ToString());
 Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
 Console.WriteLine(result.GetProperty("optionalNullableList")[0].ToString());
 Console.WriteLine(result.GetProperty("requiredNullableList")[0].ToString());
-]]></code>
-</example>
+]]></code></example>
     </member>
     <member name="PatchAction(RequestContent,RequestContext)">
-<example>
+      <example>
 This sample shows how to call PatchAction with required request content, and how to parse the result.
 <code><![CDATA[
 var endpoint = new Uri("<https://my-service.azure.com>");
@@ -276,11 +269,10 @@ Console.WriteLine(result.GetProperty("optionalLiteralBool").ToString());
 Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
 Console.WriteLine(result.GetProperty("optionalNullableList")[0].ToString());
 Console.WriteLine(result.GetProperty("requiredNullableList")[0].ToString());
-]]></code>
-</example>
+]]></code></example>
     </member>
     <member name="AnonymousBodyAsync(Thing,CancellationToken)">
-<example>
+      <example>
 This sample shows how to call AnonymousBodyAsync with required parameters.
 <code><![CDATA[
 var endpoint = new Uri("<https://my-service.azure.com>");
@@ -301,11 +293,10 @@ var thing = new Thing("<name>", "<requiredUnion>", "<requiredBadDescription>", n
     },
 };
 var result = await client.AnonymousBodyAsync(thing);
-]]></code>
-</example>
+]]></code></example>
     </member>
     <member name="AnonymousBody(Thing,CancellationToken)">
-<example>
+      <example>
 This sample shows how to call AnonymousBody with required parameters.
 <code><![CDATA[
 var endpoint = new Uri("<https://my-service.azure.com>");
@@ -326,11 +317,10 @@ var thing = new Thing("<name>", "<requiredUnion>", "<requiredBadDescription>", n
     },
 };
 var result = client.AnonymousBody(thing);
-]]></code>
-</example>
+]]></code></example>
     </member>
     <member name="AnonymousBodyAsync(RequestContent,RequestContext)">
-<example>
+      <example>
 This sample shows how to call AnonymousBodyAsync with required request content, and how to parse the result.
 <code><![CDATA[
 var endpoint = new Uri("<https://my-service.azure.com>");
@@ -402,11 +392,10 @@ Console.WriteLine(result.GetProperty("optionalLiteralBool").ToString());
 Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
 Console.WriteLine(result.GetProperty("optionalNullableList")[0].ToString());
 Console.WriteLine(result.GetProperty("requiredNullableList")[0].ToString());
-]]></code>
-</example>
+]]></code></example>
     </member>
     <member name="AnonymousBody(RequestContent,RequestContext)">
-<example>
+      <example>
 This sample shows how to call AnonymousBody with required request content, and how to parse the result.
 <code><![CDATA[
 var endpoint = new Uri("<https://my-service.azure.com>");
@@ -478,11 +467,10 @@ Console.WriteLine(result.GetProperty("optionalLiteralBool").ToString());
 Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
 Console.WriteLine(result.GetProperty("optionalNullableList")[0].ToString());
 Console.WriteLine(result.GetProperty("requiredNullableList")[0].ToString());
-]]></code>
-</example>
+]]></code></example>
     </member>
     <member name="FriendlyModelAsync(Friend,CancellationToken)">
-<example>
+      <example>
 This sample shows how to call FriendlyModelAsync with required parameters.
 <code><![CDATA[
 var endpoint = new Uri("<https://my-service.azure.com>");
@@ -490,11 +478,10 @@ var client = new FirstTestTypeSpecClient(endpoint);
 
 var notFriend = new Friend("<name>");
 var result = await client.FriendlyModelAsync(notFriend);
-]]></code>
-</example>
+]]></code></example>
     </member>
     <member name="FriendlyModel(Friend,CancellationToken)">
-<example>
+      <example>
 This sample shows how to call FriendlyModel with required parameters.
 <code><![CDATA[
 var endpoint = new Uri("<https://my-service.azure.com>");
@@ -502,11 +489,10 @@ var client = new FirstTestTypeSpecClient(endpoint);
 
 var notFriend = new Friend("<name>");
 var result = client.FriendlyModel(notFriend);
-]]></code>
-</example>
+]]></code></example>
     </member>
     <member name="FriendlyModelAsync(RequestContent,RequestContext)">
-<example>
+      <example>
 This sample shows how to call FriendlyModelAsync with required request content and parse the result.
 <code><![CDATA[
 var endpoint = new Uri("<https://my-service.azure.com>");
@@ -520,11 +506,10 @@ Response response = await client.FriendlyModelAsync(RequestContent.Create(data))
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("name").ToString());
-]]></code>
-</example>
+]]></code></example>
     </member>
     <member name="FriendlyModel(RequestContent,RequestContext)">
-<example>
+      <example>
 This sample shows how to call FriendlyModel with required request content and parse the result.
 <code><![CDATA[
 var endpoint = new Uri("<https://my-service.azure.com>");
@@ -538,11 +523,10 @@ Response response = client.FriendlyModel(RequestContent.Create(data));
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("name").ToString());
-]]></code>
-</example>
+]]></code></example>
     </member>
     <member name="AddTimeHeaderAsync(RequestContext)">
-<example>
+      <example>
 This sample shows how to call AddTimeHeaderAsync.
 <code><![CDATA[
 var endpoint = new Uri("<https://my-service.azure.com>");
@@ -550,11 +534,10 @@ var client = new FirstTestTypeSpecClient(endpoint);
 
 Response response = await client.AddTimeHeaderAsync();
 Console.WriteLine(response.Status);
-]]></code>
-</example>
+]]></code></example>
     </member>
     <member name="AddTimeHeader(RequestContext)">
-<example>
+      <example>
 This sample shows how to call AddTimeHeader.
 <code><![CDATA[
 var endpoint = new Uri("<https://my-service.azure.com>");
@@ -562,11 +545,10 @@ var client = new FirstTestTypeSpecClient(endpoint);
 
 Response response = client.AddTimeHeader();
 Console.WriteLine(response.Status);
-]]></code>
-</example>
+]]></code></example>
     </member>
     <member name="StringFormatAsync(Guid,ModelWithFormat,CancellationToken)">
-<example>
+      <example>
 This sample shows how to call StringFormatAsync with required parameters.
 <code><![CDATA[
 var endpoint = new Uri("<https://my-service.azure.com>");
@@ -574,11 +556,10 @@ var client = new FirstTestTypeSpecClient(endpoint);
 
 var body = new ModelWithFormat(new Uri("http://localhost:3000"), Guid.NewGuid());
 var result = await client.StringFormatAsync(Guid.NewGuid(), body);
-]]></code>
-</example>
+]]></code></example>
     </member>
     <member name="StringFormat(Guid,ModelWithFormat,CancellationToken)">
-<example>
+      <example>
 This sample shows how to call StringFormat with required parameters.
 <code><![CDATA[
 var endpoint = new Uri("<https://my-service.azure.com>");
@@ -586,11 +567,10 @@ var client = new FirstTestTypeSpecClient(endpoint);
 
 var body = new ModelWithFormat(new Uri("http://localhost:3000"), Guid.NewGuid());
 var result = client.StringFormat(Guid.NewGuid(), body);
-]]></code>
-</example>
+]]></code></example>
     </member>
     <member name="StringFormatAsync(Guid,RequestContent,RequestContext)">
-<example>
+      <example>
 This sample shows how to call StringFormatAsync with required parameters and request content.
 <code><![CDATA[
 var endpoint = new Uri("<https://my-service.azure.com>");
@@ -603,11 +583,10 @@ var data = new {
 
 Response response = await client.StringFormatAsync(Guid.NewGuid(), RequestContent.Create(data));
 Console.WriteLine(response.Status);
-]]></code>
-</example>
+]]></code></example>
     </member>
     <member name="StringFormat(Guid,RequestContent,RequestContext)">
-<example>
+      <example>
 This sample shows how to call StringFormat with required parameters and request content.
 <code><![CDATA[
 var endpoint = new Uri("<https://my-service.azure.com>");
@@ -620,11 +599,10 @@ var data = new {
 
 Response response = client.StringFormat(Guid.NewGuid(), RequestContent.Create(data));
 Console.WriteLine(response.Status);
-]]></code>
-</example>
+]]></code></example>
     </member>
     <member name="SayHiAsync(string,string,string,RequestContext)">
-<example>
+      <example>
 This sample shows how to call SayHiAsync with required parameters and parse the result.
 <code><![CDATA[
 var endpoint = new Uri("<https://my-service.azure.com>");
@@ -646,11 +624,10 @@ Console.WriteLine(result.GetProperty("optionalLiteralBool").ToString());
 Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
 Console.WriteLine(result.GetProperty("optionalNullableList")[0].ToString());
 Console.WriteLine(result.GetProperty("requiredNullableList")[0].ToString());
-]]></code>
-</example>
+]]></code></example>
     </member>
     <member name="SayHi(string,string,string,RequestContext)">
-<example>
+      <example>
 This sample shows how to call SayHi with required parameters and parse the result.
 <code><![CDATA[
 var endpoint = new Uri("<https://my-service.azure.com>");
@@ -672,11 +649,10 @@ Console.WriteLine(result.GetProperty("optionalLiteralBool").ToString());
 Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
 Console.WriteLine(result.GetProperty("optionalNullableList")[0].ToString());
 Console.WriteLine(result.GetProperty("requiredNullableList")[0].ToString());
-]]></code>
-</example>
+]]></code></example>
     </member>
     <member name="HelloAgainAsync(string,string,RoundTripModel,CancellationToken)">
-<example>
+      <example>
 This sample shows how to call HelloAgainAsync with required parameters.
 <code><![CDATA[
 var endpoint = new Uri("<https://my-service.azure.com>");
@@ -734,11 +710,10 @@ var action = new RoundTripModel("<requiredString>", 1234, new StringFixedEnum?[]
     },
 };
 var result = await client.HelloAgainAsync("<p2>", "<p1>", action);
-]]></code>
-</example>
+]]></code></example>
     </member>
     <member name="HelloAgain(string,string,RoundTripModel,CancellationToken)">
-<example>
+      <example>
 This sample shows how to call HelloAgain with required parameters.
 <code><![CDATA[
 var endpoint = new Uri("<https://my-service.azure.com>");
@@ -796,11 +771,10 @@ var action = new RoundTripModel("<requiredString>", 1234, new StringFixedEnum?[]
     },
 };
 var result = client.HelloAgain("<p2>", "<p1>", action);
-]]></code>
-</example>
+]]></code></example>
     </member>
     <member name="HelloAgainAsync(string,string,RequestContent,RequestContext)">
-<example>
+      <example>
 This sample shows how to call HelloAgainAsync with required parameters and request content, and how to parse the result.
 <code><![CDATA[
 var endpoint = new Uri("<https://my-service.azure.com>");
@@ -963,11 +937,10 @@ Console.WriteLine(result.GetProperty("readOnlyOptionalRecordUnknown").GetPropert
 Console.WriteLine(result.GetProperty("modelWithRequiredNullable").GetProperty("requiredNullablePrimitive").ToString());
 Console.WriteLine(result.GetProperty("modelWithRequiredNullable").GetProperty("requiredExtensibleEnum").ToString());
 Console.WriteLine(result.GetProperty("modelWithRequiredNullable").GetProperty("requiredFixedEnum").ToString());
-]]></code>
-</example>
+]]></code></example>
     </member>
     <member name="HelloAgain(string,string,RequestContent,RequestContext)">
-<example>
+      <example>
 This sample shows how to call HelloAgain with required parameters and request content, and how to parse the result.
 <code><![CDATA[
 var endpoint = new Uri("<https://my-service.azure.com>");
@@ -1130,11 +1103,10 @@ Console.WriteLine(result.GetProperty("readOnlyOptionalRecordUnknown").GetPropert
 Console.WriteLine(result.GetProperty("modelWithRequiredNullable").GetProperty("requiredNullablePrimitive").ToString());
 Console.WriteLine(result.GetProperty("modelWithRequiredNullable").GetProperty("requiredExtensibleEnum").ToString());
 Console.WriteLine(result.GetProperty("modelWithRequiredNullable").GetProperty("requiredFixedEnum").ToString());
-]]></code>
-</example>
+]]></code></example>
     </member>
     <member name="NoContentTypeAsync(string,string,RequestContent,RequestContext)">
-<example>
+      <example>
 This sample shows how to call NoContentTypeAsync with required parameters and request content, and how to parse the result.
 <code><![CDATA[
 var endpoint = new Uri("<https://my-service.azure.com>");
@@ -1297,11 +1269,10 @@ Console.WriteLine(result.GetProperty("readOnlyOptionalRecordUnknown").GetPropert
 Console.WriteLine(result.GetProperty("modelWithRequiredNullable").GetProperty("requiredNullablePrimitive").ToString());
 Console.WriteLine(result.GetProperty("modelWithRequiredNullable").GetProperty("requiredExtensibleEnum").ToString());
 Console.WriteLine(result.GetProperty("modelWithRequiredNullable").GetProperty("requiredFixedEnum").ToString());
-]]></code>
-</example>
+]]></code></example>
     </member>
     <member name="NoContentType(string,string,RequestContent,RequestContext)">
-<example>
+      <example>
 This sample shows how to call NoContentType with required parameters and request content, and how to parse the result.
 <code><![CDATA[
 var endpoint = new Uri("<https://my-service.azure.com>");
@@ -1464,33 +1435,30 @@ Console.WriteLine(result.GetProperty("readOnlyOptionalRecordUnknown").GetPropert
 Console.WriteLine(result.GetProperty("modelWithRequiredNullable").GetProperty("requiredNullablePrimitive").ToString());
 Console.WriteLine(result.GetProperty("modelWithRequiredNullable").GetProperty("requiredExtensibleEnum").ToString());
 Console.WriteLine(result.GetProperty("modelWithRequiredNullable").GetProperty("requiredFixedEnum").ToString());
-]]></code>
-</example>
+]]></code></example>
     </member>
     <member name="HelloDemo2Async(CancellationToken)">
-<example>
+      <example>
 This sample shows how to call HelloDemo2Async.
 <code><![CDATA[
 var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new FirstTestTypeSpecClient(endpoint);
 
 var result = await client.HelloDemo2Async();
-]]></code>
-</example>
+]]></code></example>
     </member>
     <member name="HelloDemo2(CancellationToken)">
-<example>
+      <example>
 This sample shows how to call HelloDemo2.
 <code><![CDATA[
 var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new FirstTestTypeSpecClient(endpoint);
 
 var result = client.HelloDemo2();
-]]></code>
-</example>
+]]></code></example>
     </member>
     <member name="HelloDemo2Async(RequestContext)">
-<example>
+      <example>
 This sample shows how to call HelloDemo2Async with required parameters and parse the result.
 <code><![CDATA[
 var endpoint = new Uri("<https://my-service.azure.com>");
@@ -1512,11 +1480,10 @@ Console.WriteLine(result.GetProperty("optionalLiteralBool").ToString());
 Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
 Console.WriteLine(result.GetProperty("optionalNullableList")[0].ToString());
 Console.WriteLine(result.GetProperty("requiredNullableList")[0].ToString());
-]]></code>
-</example>
+]]></code></example>
     </member>
     <member name="HelloDemo2(RequestContext)">
-<example>
+      <example>
 This sample shows how to call HelloDemo2 with required parameters and parse the result.
 <code><![CDATA[
 var endpoint = new Uri("<https://my-service.azure.com>");
@@ -1538,11 +1505,10 @@ Console.WriteLine(result.GetProperty("optionalLiteralBool").ToString());
 Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
 Console.WriteLine(result.GetProperty("optionalNullableList")[0].ToString());
 Console.WriteLine(result.GetProperty("requiredNullableList")[0].ToString());
-]]></code>
-</example>
+]]></code></example>
     </member>
     <member name="CreateLiteralAsync(Thing,CancellationToken)">
-<example>
+      <example>
 This sample shows how to call CreateLiteralAsync with required parameters.
 <code><![CDATA[
 var endpoint = new Uri("<https://my-service.azure.com>");
@@ -1563,11 +1529,10 @@ var body = new Thing("<name>", "<requiredUnion>", "<requiredBadDescription>", ne
     },
 };
 var result = await client.CreateLiteralAsync(body);
-]]></code>
-</example>
+]]></code></example>
     </member>
     <member name="CreateLiteral(Thing,CancellationToken)">
-<example>
+      <example>
 This sample shows how to call CreateLiteral with required parameters.
 <code><![CDATA[
 var endpoint = new Uri("<https://my-service.azure.com>");
@@ -1588,11 +1553,10 @@ var body = new Thing("<name>", "<requiredUnion>", "<requiredBadDescription>", ne
     },
 };
 var result = client.CreateLiteral(body);
-]]></code>
-</example>
+]]></code></example>
     </member>
     <member name="CreateLiteralAsync(RequestContent,RequestContext)">
-<example>
+      <example>
 This sample shows how to call CreateLiteralAsync with required request content, and how to parse the result.
 <code><![CDATA[
 var endpoint = new Uri("<https://my-service.azure.com>");
@@ -1664,11 +1628,10 @@ Console.WriteLine(result.GetProperty("optionalLiteralBool").ToString());
 Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
 Console.WriteLine(result.GetProperty("optionalNullableList")[0].ToString());
 Console.WriteLine(result.GetProperty("requiredNullableList")[0].ToString());
-]]></code>
-</example>
+]]></code></example>
     </member>
     <member name="CreateLiteral(RequestContent,RequestContext)">
-<example>
+      <example>
 This sample shows how to call CreateLiteral with required request content, and how to parse the result.
 <code><![CDATA[
 var endpoint = new Uri("<https://my-service.azure.com>");
@@ -1740,33 +1703,30 @@ Console.WriteLine(result.GetProperty("optionalLiteralBool").ToString());
 Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
 Console.WriteLine(result.GetProperty("optionalNullableList")[0].ToString());
 Console.WriteLine(result.GetProperty("requiredNullableList")[0].ToString());
-]]></code>
-</example>
+]]></code></example>
     </member>
     <member name="HelloLiteralAsync(CancellationToken)">
-<example>
+      <example>
 This sample shows how to call HelloLiteralAsync.
 <code><![CDATA[
 var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new FirstTestTypeSpecClient(endpoint);
 
 var result = await client.HelloLiteralAsync();
-]]></code>
-</example>
+]]></code></example>
     </member>
     <member name="HelloLiteral(CancellationToken)">
-<example>
+      <example>
 This sample shows how to call HelloLiteral.
 <code><![CDATA[
 var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new FirstTestTypeSpecClient(endpoint);
 
 var result = client.HelloLiteral();
-]]></code>
-</example>
+]]></code></example>
     </member>
     <member name="HelloLiteralAsync(RequestContext)">
-<example>
+      <example>
 This sample shows how to call HelloLiteralAsync with required parameters and parse the result.
 <code><![CDATA[
 var endpoint = new Uri("<https://my-service.azure.com>");
@@ -1788,11 +1748,10 @@ Console.WriteLine(result.GetProperty("optionalLiteralBool").ToString());
 Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
 Console.WriteLine(result.GetProperty("optionalNullableList")[0].ToString());
 Console.WriteLine(result.GetProperty("requiredNullableList")[0].ToString());
-]]></code>
-</example>
+]]></code></example>
     </member>
     <member name="HelloLiteral(RequestContext)">
-<example>
+      <example>
 This sample shows how to call HelloLiteral with required parameters and parse the result.
 <code><![CDATA[
 var endpoint = new Uri("<https://my-service.azure.com>");
@@ -1814,11 +1773,10 @@ Console.WriteLine(result.GetProperty("optionalLiteralBool").ToString());
 Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
 Console.WriteLine(result.GetProperty("optionalNullableList")[0].ToString());
 Console.WriteLine(result.GetProperty("requiredNullableList")[0].ToString());
-]]></code>
-</example>
+]]></code></example>
     </member>
     <member name="GetUnknownValueAsync(RequestContext)">
-<example>
+      <example>
 This sample shows how to call GetUnknownValueAsync with required parameters and parse the result.
 <code><![CDATA[
 var endpoint = new Uri("<https://my-service.azure.com>");
@@ -1828,11 +1786,10 @@ Response response = await client.GetUnknownValueAsync(new RequestContext());
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.ToString());
-]]></code>
-</example>
+]]></code></example>
     </member>
     <member name="GetUnknownValue(RequestContext)">
-<example>
+      <example>
 This sample shows how to call GetUnknownValue with required parameters and parse the result.
 <code><![CDATA[
 var endpoint = new Uri("<https://my-service.azure.com>");
@@ -1842,11 +1799,10 @@ Response response = client.GetUnknownValue(new RequestContext());
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.ToString());
-]]></code>
-</example>
+]]></code></example>
     </member>
     <member name="InternalProtocolAsync(Thing,CancellationToken)">
-<example>
+      <example>
 This sample shows how to call InternalProtocolAsync with required parameters.
 <code><![CDATA[
 var endpoint = new Uri("<https://my-service.azure.com>");
@@ -1867,11 +1823,10 @@ var body = new Thing("<name>", "<requiredUnion>", "<requiredBadDescription>", ne
     },
 };
 var result = await client.InternalProtocolAsync(body);
-]]></code>
-</example>
+]]></code></example>
     </member>
     <member name="InternalProtocol(Thing,CancellationToken)">
-<example>
+      <example>
 This sample shows how to call InternalProtocol with required parameters.
 <code><![CDATA[
 var endpoint = new Uri("<https://my-service.azure.com>");
@@ -1892,38 +1847,31 @@ var body = new Thing("<name>", "<requiredUnion>", "<requiredBadDescription>", ne
     },
 };
 var result = client.InternalProtocol(body);
-]]></code>
-</example>
+]]></code></example>
     </member>
-    <member name="InternalProtocolAsync(RequestContent,RequestContext)">
-    </member>
-    <member name="InternalProtocol(RequestContent,RequestContext)">
-    </member>
+    <member name="InternalProtocolAsync(RequestContent,RequestContext)"></member>
+    <member name="InternalProtocol(RequestContent,RequestContext)"></member>
     <member name="StillConvenientValueAsync(CancellationToken)">
-<example>
+      <example>
 This sample shows how to call StillConvenientValueAsync.
 <code><![CDATA[
 var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new FirstTestTypeSpecClient(endpoint);
 
 var result = await client.StillConvenientValueAsync();
-]]></code>
-</example>
+]]></code></example>
     </member>
     <member name="StillConvenientValue(CancellationToken)">
-<example>
+      <example>
 This sample shows how to call StillConvenientValue.
 <code><![CDATA[
 var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new FirstTestTypeSpecClient(endpoint);
 
 var result = client.StillConvenientValue();
-]]></code>
-</example>
+]]></code></example>
     </member>
-    <member name="StillConvenientAsync(RequestContext)">
-    </member>
-    <member name="StillConvenient(RequestContext)">
-    </member>
+    <member name="StillConvenientAsync(RequestContext)"></member>
+    <member name="StillConvenient(RequestContext)"></member>
   </members>
 </doc>

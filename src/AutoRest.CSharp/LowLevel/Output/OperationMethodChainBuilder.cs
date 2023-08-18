@@ -18,6 +18,9 @@ using Azure.Core;
 using static AutoRest.CSharp.Output.Models.MethodSignatureModifiers;
 using Configuration = AutoRest.CSharp.Input.Configuration;
 using AutoRest.CSharp.Input.Source;
+using AutoRest.CSharp.Common.Input.Examples;
+using AutoRest.CSharp.Output.Samples.Models;
+using System.Runtime.CompilerServices;
 
 namespace AutoRest.CSharp.Output.Models
 {
@@ -33,7 +36,9 @@ namespace AutoRest.CSharp.Output.Models
 
         private readonly string _namespaceName;
         private readonly string _clientName;
+        private readonly LowLevelClient? _client;
         private readonly ClientFields _fields;
+        private readonly IReadOnlyDictionary<string, InputClientExample>? _clientParameterExamples;
         private readonly TypeFactory _typeFactory;
         private readonly SourceInputModel? _sourceInputModel;
         private readonly List<ParameterChain> _orderedParameters;
@@ -47,11 +52,13 @@ namespace AutoRest.CSharp.Output.Models
 
         private InputOperation Operation { get; }
 
-        public OperationMethodChainBuilder(InputOperation operation, string namespaceName, string clientName, ClientFields fields, TypeFactory typeFactory, SourceInputModel? sourceInputModel)
+        public OperationMethodChainBuilder(LowLevelClient? client, InputOperation operation, string namespaceName, string clientName, ClientFields fields, TypeFactory typeFactory, SourceInputModel? sourceInputModel, IReadOnlyDictionary<string, InputClientExample>? clientParameterExamples)
         {
+            _client = client;
             _namespaceName = namespaceName;
             _clientName = clientName;
             _fields = fields;
+            _clientParameterExamples = clientParameterExamples;
             _typeFactory = typeFactory;
             _sourceInputModel = sourceInputModel;
             _orderedParameters = new List<ParameterChain>();
@@ -99,7 +106,56 @@ namespace AutoRest.CSharp.Output.Models
 
             var requestBodyType = Operation.Parameters.FirstOrDefault(p => p.Location == RequestLocation.Body)?.Type;
             var responseBodyType = Operation.Responses.FirstOrDefault()?.BodyType;
-            return new LowLevelClientMethod(protocolMethodSignature, convenienceMethod, _restClientMethod, requestBodyType, responseBodyType, diagnostic, _protocolMethodPaging, Operation.LongRunning, _conditionHeaderFlag);
+
+            // TODO -- build the sample
+            var samples = new List<DpgOperationSample>();
+
+            var method = new LowLevelClientMethod(protocolMethodSignature, convenienceMethod, _restClientMethod, requestBodyType, responseBodyType, diagnostic, _protocolMethodPaging, Operation.LongRunning, _conditionHeaderFlag, samples);
+
+            BuildSamples(method, samples);
+
+            return method;
+        }
+
+        private void BuildSamples(LowLevelClientMethod method, List<DpgOperationSample> samples)
+        {
+            // we do not generate any sample if these variables are null
+            // they are only null when HLC calling methods in this class
+            if (_clientParameterExamples == null || _client == null)
+                return;
+            var shouldGenerateSample = DpgOperationSample.ShouldGenerateSample(_client, method.ProtocolMethodSignature);
+
+            if (!shouldGenerateSample)
+                return;
+
+            // for now, we only take the one with mocking values, return null if any of them does not present
+            const string mockExampleKey = ExampleMockValueBuilder.MockExampleKey;
+            if (!_clientParameterExamples.TryGetValue(mockExampleKey, out var clientExample) || !Operation.Examples.TryGetValue(mockExampleKey, out var operationExample))
+            {
+                return;
+            }
+
+            // we should generate samples
+            var shouldGenerateShortVersion = DpgOperationSample.ShouldGenerateShortVersion(_client, method);
+            if (shouldGenerateShortVersion)
+            {
+                samples.Add(new(
+                    _client,
+                    method,
+                    clientExample.ClientParameters,
+                    operationExample,
+                    false,
+                    false));
+            }
+            samples.Add(new(
+                _client,
+                method,
+                clientExample.ClientParameters,
+                operationExample,
+                false,
+                true));
+
+            // TODO -- convenience method samples
         }
 
         private bool ShouldGenerateConvenienceMethod()

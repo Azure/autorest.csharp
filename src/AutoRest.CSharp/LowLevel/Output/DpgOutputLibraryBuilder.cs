@@ -7,6 +7,7 @@ using System.Linq;
 using System.Reflection;
 using System.Xml.Linq;
 using AutoRest.CSharp.Common.Input;
+using AutoRest.CSharp.Common.Input.Examples;
 using AutoRest.CSharp.Common.Output.Builders;
 using AutoRest.CSharp.Common.Output.Models.Types;
 using AutoRest.CSharp.Common.Utilities;
@@ -228,12 +229,12 @@ namespace AutoRest.CSharp.Output.Models
             INamedTypeSymbol? existingType;
             if (sourceInputModel == null || (existingType = sourceInputModel.FindForType(clientNamespace, clientName)) == null)
             {
-                return new ClientInfo(ns.Name, clientName, clientNamespace, clientDescription, operations, clientParameters, resourceParameters);
+                return new ClientInfo(ns.Name, clientName, clientNamespace, clientDescription, operations, clientParameters, resourceParameters, ns.Examples);
             }
 
             clientName = existingType.Name;
             clientNamespace = existingType.ContainingNamespace.ToDisplayString();
-            return new ClientInfo(ns.Name, clientName, clientNamespace, clientDescription, existingType, operations, clientParameters, resourceParameters);
+            return new ClientInfo(ns.Name, clientName, clientNamespace, clientDescription, existingType, operations, clientParameters, resourceParameters, ns.Examples);
         }
 
         private IReadOnlyList<ClientInfo> SetHierarchy(IReadOnlyDictionary<string, ClientInfo> clientInfosByName)
@@ -257,10 +258,12 @@ namespace AutoRest.CSharp.Output.Models
             {
                 var clientName = ClientBuilder.GetClientPrefix(_libraryName, _rootNamespace.Name) + ClientBuilder.GetClientSuffix();
                 var clientNamespace = _defaultNamespace;
-                var endpointParameter = topLevelClients.SelectMany(c => c.ClientParameters).FirstOrDefault(p => p.IsEndpoint);
+                var infoForEndpoint = topLevelClients.FirstOrDefault(c => c.ClientParameters.Any(p => p.IsEndpoint));
+                var endpointParameter = infoForEndpoint?.ClientParameters.FirstOrDefault(p => p.IsEndpoint);
                 var clientParameters = endpointParameter != null ? new[] { endpointParameter } : Array.Empty<InputParameter>();
+                var clientExamples = infoForEndpoint?.Examples ?? new Dictionary<string, InputClientExample>();
 
-                topLevelClientInfo = new ClientInfo(clientName, clientNamespace, clientParameters);
+                topLevelClientInfo = new ClientInfo(clientName, clientNamespace, clientParameters, clientExamples);
             }
 
             foreach (var clientInfo in topLevelClients)
@@ -391,6 +394,7 @@ namespace AutoRest.CSharp.Output.Models
                     _rootNamespace.Auth,
                     _sourceInputModel,
                     clientOptions,
+                    clientInfo.Examples,
                     typeFactory)
                 {
                     SubClients = subClients
@@ -410,6 +414,7 @@ namespace AutoRest.CSharp.Output.Models
             public string Description { get; }
             public INamedTypeSymbol? ExistingType { get; }
             public IReadOnlyList<InputOperation> Operations { get; }
+            public IReadOnlyDictionary<string, InputClientExample> Examples { get; }
 
             private IReadOnlyList<InputParameter>? _clientParameters;
             private IReadOnlyList<InputParameter> _initClientParameters;
@@ -430,12 +435,12 @@ namespace AutoRest.CSharp.Output.Models
             public IList<ClientInfo> Children { get; }
             public IList<InputOperation> Requests { get; }
 
-            public ClientInfo(string operationGroupKey, string clientName, string clientNamespace, string clientDescription, IReadOnlyList<InputOperation> operations, IReadOnlyList<InputParameter> clientParameters, ISet<InputParameter> resourceParameters)
-                : this(operationGroupKey, clientName, clientNamespace, clientDescription, null, operations, clientParameters, resourceParameters)
+            public ClientInfo(string operationGroupKey, string clientName, string clientNamespace, string clientDescription, IReadOnlyList<InputOperation> operations, IReadOnlyList<InputParameter> clientParameters, ISet<InputParameter> resourceParameters, IReadOnlyDictionary<string, InputClientExample> examples)
+                : this(operationGroupKey, clientName, clientNamespace, clientDescription, null, operations, clientParameters, resourceParameters, examples)
             {
             }
 
-            public ClientInfo(string operationGroupKey, string clientName, string clientNamespace, string clientDescription, INamedTypeSymbol? existingType, IReadOnlyList<InputOperation> operations, IReadOnlyList<InputParameter> clientParameters, ISet<InputParameter> resourceParameters)
+            public ClientInfo(string operationGroupKey, string clientName, string clientNamespace, string clientDescription, INamedTypeSymbol? existingType, IReadOnlyList<InputOperation> operations, IReadOnlyList<InputParameter> clientParameters, ISet<InputParameter> resourceParameters, IReadOnlyDictionary<string, InputClientExample> examples)
             {
                 OperationGroupKey = operationGroupKey;
                 Name = clientName;
@@ -447,9 +452,10 @@ namespace AutoRest.CSharp.Output.Models
                 ResourceParameters = resourceParameters;
                 Children = new List<ClientInfo>();
                 Requests = new List<InputOperation>();
+                Examples = examples;
             }
 
-            public ClientInfo(string clientName, string clientNamespace, IReadOnlyList<InputParameter> clientParameters)
+            public ClientInfo(string clientName, string clientNamespace, IReadOnlyList<InputParameter> clientParameters, IReadOnlyDictionary<string, InputClientExample> examples)
             {
                 OperationGroupKey = string.Empty;
                 Name = clientName;
@@ -461,6 +467,7 @@ namespace AutoRest.CSharp.Output.Models
                 ResourceParameters = new HashSet<InputParameter>();
                 Children = new List<ClientInfo>();
                 Requests = new List<InputOperation>();
+                Examples = examples;
             }
         }
     }
