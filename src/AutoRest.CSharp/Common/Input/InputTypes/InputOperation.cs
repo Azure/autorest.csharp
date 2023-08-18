@@ -4,9 +4,9 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using AutoRest.CSharp.Common.Input.Examples;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Utilities;
-using Azure;
 using Azure.Core;
 
 namespace AutoRest.CSharp.Common.Input;
@@ -69,4 +69,15 @@ internal record InputOperation(
     }
 
     public bool KeepClientDefaultValue { get; set; } = Configuration.MethodsToKeepClientDefaultValue.Contains(Name);
+
+    private IReadOnlyDictionary<string, InputOperationExample>? _examples;
+    public IReadOnlyDictionary<string, InputOperationExample> Examples => _examples ??= EnsureExamples();
+
+    private IReadOnlyDictionary<string, InputOperationExample> EnsureExamples()
+    {
+        return new Dictionary<string, InputOperationExample>()
+        {
+            [ExampleMockValueBuilder.MockExampleKey] = ExampleMockValueBuilder.BuildOperationExample(this)
+        };
+    }
 }
