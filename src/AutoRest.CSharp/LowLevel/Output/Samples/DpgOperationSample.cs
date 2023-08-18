@@ -17,6 +17,7 @@ using AutoRest.CSharp.MgmtTest.Models;
 using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Output.Models.Requests;
 using AutoRest.CSharp.Output.Models.Shared;
+using AutoRest.CSharp.Output.Models.Types;
 using AutoRest.CSharp.Utilities;
 using Azure;
 using NUnit.Framework;
@@ -32,25 +33,25 @@ namespace AutoRest.CSharp.Output.Samples.Models
             _inputClientParameterExamples = inputClientParameterExamples;
             _inputOperationExample = inputOperationExample;
             ClientInvocationChain = GetClientInvocationChain(client);
-            _isConvenienceSample = isConvenienceSample;
+            IsConvenienceSample = isConvenienceSample;
             _useAllParameters = useAllParameters;
             _operationMethodSignature = isConvenienceSample ? method.ConvenienceMethod!.Signature : method.ProtocolMethodSignature;
         }
 
-        private readonly bool _isConvenienceSample;
         private readonly bool _useAllParameters;
         private readonly IEnumerable<InputParameterExample> _inputClientParameterExamples;
         private readonly InputOperationExample _inputOperationExample;
         private readonly MethodSignature _operationMethodSignature;
 
+        public bool IsConvenienceSample { get; }
         public LowLevelClient Client { get; }
         public LowLevelClientMethod Method { get; }
 
         public MethodSignature OperationMethodSignature => _operationMethodSignature;
 
-        public bool IsLongRunning => _isConvenienceSample ? Method.ConvenienceMethod!.IsLongRunning : Method.LongRunning != null;
+        public bool IsLongRunning => IsConvenienceSample ? Method.ConvenienceMethod!.IsLongRunning : Method.LongRunning != null;
 
-        public bool IsPageable => _isConvenienceSample ? Method.ConvenienceMethod!.IsPageable : Method.PagingInfo != null;
+        public bool IsPageable => IsConvenienceSample ? Method.ConvenienceMethod!.IsPageable : Method.PagingInfo != null;
 
         public IReadOnlyList<MethodSignatureBase> ClientInvocationChain { get; }
 
@@ -84,7 +85,7 @@ namespace AutoRest.CSharp.Output.Samples.Models
             {
                 builder.Append("_AllParameters");
             }
-            if (_isConvenienceSample)
+            if (IsConvenienceSample)
             {
                 builder.Append("_Convenience");
             }
@@ -247,7 +248,6 @@ namespace AutoRest.CSharp.Output.Samples.Models
 
         public bool IsInlineParameter(Parameter parameter)
         {
-            // TODO -- maybe we should store it here?
             if (IsSameParameter(parameter, KnownParameters.RequestContent) || IsSameParameter(parameter, KnownParameters.RequestContentNullable))
                 return false;
 
@@ -258,6 +258,9 @@ namespace AutoRest.CSharp.Output.Samples.Models
                 return false;
 
             if (parameter.Type.EqualsIgnoreNullable(KnownParameters.TokenAuth.Type))
+                return false;
+
+            if (parameter.Type is { IsFrameworkType: false, Implementation: ObjectType })
                 return false;
 
             return true;

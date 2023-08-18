@@ -307,7 +307,7 @@ namespace AutoRest.CSharp.LowLevel.Generation.Extensions
                         exampleValue = InputExampleValue.Value(InputPrimitiveType.String, "placeholder");
                     }
                     else
-                        throw new InvalidOperationException($"Example value for required property {property.SchemaProperty!.SerializedName} in class {objectType.Type.Name} is not found");
+                        throw new InvalidOperationException($"Example value for required property {property.InputModelProperty!.SerializedName} in class {objectType.Type.Name} is not found");
                 }
                 properties.Remove(property);
                 writer.AppendInputExampleValue(exampleValue, type: property.Declaration.Type).AppendRaw(",");

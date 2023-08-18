@@ -79,32 +79,32 @@ namespace AutoRest.CSharp.Common.Input.Examples
                 return new(parameter, value);
             }
 
-            var exampleValue = BuildExampleValue(parameter.Type, parameter.Name);
+            var exampleValue = BuildExampleValue(parameter.Type, parameter.Name, new HashSet<InputModelType>());
             return new(parameter, exampleValue);
         }
 
-        private static InputExampleValue BuildExampleValue(InputType type, string? hint) => type switch
+        private static InputExampleValue BuildExampleValue(InputType type, string? hint, HashSet<InputModelType> visitedModels) => type switch
         {
-            InputListType listType => BuildListExampleValue(listType, hint),
-            InputDictionaryType dictionaryType => BuildDictionaryExampleValue(dictionaryType, hint),
+            InputListType listType => BuildListExampleValue(listType, hint, visitedModels),
+            InputDictionaryType dictionaryType => BuildDictionaryExampleValue(dictionaryType, hint, visitedModels),
             InputEnumType enumType => BuildEnumExampleValue(enumType),
             InputPrimitiveType primitiveType => BuildPrimitiveExampleValue(primitiveType, hint),
             InputLiteralType literalType => InputExampleValue.Value(literalType, literalType.Value),
-            InputModelType modelType => BuildModelExampleValue(modelType),
-            InputUnionType unionType => BuildExampleValue(unionType.UnionItemTypes.First(), hint),
+            InputModelType modelType => BuildModelExampleValue(modelType, visitedModels),
+            InputUnionType unionType => BuildExampleValue(unionType.UnionItemTypes.First(), hint, visitedModels),
             _ => InputExampleValue.Object(type, new Dictionary<string, InputExampleValue>())
         };
 
-        private static InputExampleValue BuildListExampleValue(InputListType listType, string? hint)
+        private static InputExampleValue BuildListExampleValue(InputListType listType, string? hint, HashSet<InputModelType> visitedModels)
         {
-            var exampleElementValue = BuildExampleValue(listType.ElementType, hint);
+            var exampleElementValue = BuildExampleValue(listType.ElementType, hint, visitedModels);
 
             return InputExampleValue.List(listType, new[] { exampleElementValue });
         }
 
-        private static InputExampleValue BuildDictionaryExampleValue(InputDictionaryType dictionaryType, string? hint)
+        private static InputExampleValue BuildDictionaryExampleValue(InputDictionaryType dictionaryType, string? hint, HashSet<InputModelType> visitedModels)
         {
-            var exampleValue = BuildExampleValue(dictionaryType.ValueType, hint);
+            var exampleValue = BuildExampleValue(dictionaryType.ValueType, hint, visitedModels);
 
             return InputExampleValue.Object(dictionaryType, new Dictionary<string, InputExampleValue>
             {
@@ -144,23 +144,25 @@ namespace AutoRest.CSharp.Common.Input.Examples
             InputTypeKind.DurationSecondsFloat => InputExampleValue.Value(primitiveType, 10f),
             _ => InputExampleValue.Object(primitiveType, new Dictionary<string, InputExampleValue>())
         };
-        private static InputExampleValue BuildModelExampleValue(InputModelType model)
+
+        private static InputExampleValue BuildModelExampleValue(InputModelType model, HashSet<InputModelType> visitedModels)
         {
             if (_cache.TryGetValue(model, out var value))
                 return value;
 
             var dict = new Dictionary<string, InputExampleValue>();
             var result = InputExampleValue.Object(model, dict);
+            visitedModels.Add(model);
             _cache.TryAdd(model, result);
             // iterate all the properties
             foreach (var modelOrBase in model.GetSelfAndBaseModels())
             {
                 foreach (var property in modelOrBase.Properties)
                 {
-                    if (_cache.ContainsKey(property.Type) || property.IsReadOnly)
+                    if (visitedModels.Contains(property.Type) || property.IsReadOnly)
                         continue;
 
-                    var exampleValue = BuildExampleValue(property.Type, property.SerializedName);
+                    var exampleValue = BuildExampleValue(property.Type, property.SerializedName, visitedModels);
 
                     dict.Add(property.SerializedName, exampleValue);
                 }

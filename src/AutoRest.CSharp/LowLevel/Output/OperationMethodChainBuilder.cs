@@ -155,7 +155,26 @@ namespace AutoRest.CSharp.Output.Models
                 false,
                 true));
 
-            // TODO -- convenience method samples
+            if (method.ConvenienceMethod != null)
+            {
+                if (shouldGenerateShortVersion)
+                {
+                    samples.Add(new(
+                        _client,
+                        method,
+                        clientExample.ClientParameters,
+                        operationExample,
+                        true,
+                        false));
+                }
+                samples.Add(new(
+                    _client,
+                    method,
+                    clientExample.ClientParameters,
+                    operationExample,
+                    true,
+                    true));
+            }
         }
 
         private bool ShouldGenerateConvenienceMethod()

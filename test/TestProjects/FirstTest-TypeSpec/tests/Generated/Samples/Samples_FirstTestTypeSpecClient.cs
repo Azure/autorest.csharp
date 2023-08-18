@@ -12,6 +12,7 @@ using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
 using FirstTestTypeSpec;
+using FirstTestTypeSpec.Models;
 using NUnit.Framework;
 
 namespace FirstTestTypeSpec.Samples
@@ -65,6 +66,26 @@ namespace FirstTestTypeSpec.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
+        public void Example_TopAction_Convenience()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+
+            Response<Thing> response = client.TopAction(DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"));
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_TopAction_AllParameters_Convenience()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+
+            Response<Thing> response = client.TopAction(DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"));
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
         public async Task Example_TopAction_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -106,6 +127,26 @@ namespace FirstTestTypeSpec.Samples
             Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
             Console.WriteLine(result.GetProperty("optionalNullableList")[0].ToString());
             Console.WriteLine(result.GetProperty("requiredNullableList")[0].ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_TopAction_Convenience_Async()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+
+            Response<Thing> response = await client.TopActionAsync(DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"));
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_TopAction_AllParameters_Convenience_Async()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+
+            Response<Thing> response = await client.TopActionAsync(DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"));
         }
 
         [Test]
@@ -467,6 +508,54 @@ namespace FirstTestTypeSpec.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
+        public void Example_AnonymousBody_Convenience()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+
+            Thing thing = new Thing("<name>", "<requiredUnion>", "<requiredBadDescription>", new int[]
+            {
+1234
+            })
+            {
+                OptionalLiteralString = ThingOptionalLiteralString.Reject,
+                OptionalLiteralInt = ThingOptionalLiteralInt._456,
+                OptionalLiteralFloat = ThingOptionalLiteralFloat._456,
+                OptionalLiteralBool = true,
+                OptionalNullableList =
+{
+1234
+},
+            };
+            Response<Thing> response = client.AnonymousBody(thing);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_AnonymousBody_AllParameters_Convenience()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+
+            Thing thing = new Thing("<name>", "<requiredUnion>", "<requiredBadDescription>", new int[]
+            {
+1234
+            })
+            {
+                OptionalLiteralString = ThingOptionalLiteralString.Reject,
+                OptionalLiteralInt = ThingOptionalLiteralInt._456,
+                OptionalLiteralFloat = ThingOptionalLiteralFloat._456,
+                OptionalLiteralBool = true,
+                OptionalNullableList =
+{
+1234
+},
+            };
+            Response<Thing> response = client.AnonymousBody(thing);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
         public async Task Example_AnonymousBody_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -556,6 +645,54 @@ namespace FirstTestTypeSpec.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
+        public async Task Example_AnonymousBody_Convenience_Async()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+
+            Thing thing = new Thing("<name>", "<requiredUnion>", "<requiredBadDescription>", new int[]
+            {
+1234
+            })
+            {
+                OptionalLiteralString = ThingOptionalLiteralString.Reject,
+                OptionalLiteralInt = ThingOptionalLiteralInt._456,
+                OptionalLiteralFloat = ThingOptionalLiteralFloat._456,
+                OptionalLiteralBool = true,
+                OptionalNullableList =
+{
+1234
+},
+            };
+            Response<Thing> response = await client.AnonymousBodyAsync(thing);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_AnonymousBody_AllParameters_Convenience_Async()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+
+            Thing thing = new Thing("<name>", "<requiredUnion>", "<requiredBadDescription>", new int[]
+            {
+1234
+            })
+            {
+                OptionalLiteralString = ThingOptionalLiteralString.Reject,
+                OptionalLiteralInt = ThingOptionalLiteralInt._456,
+                OptionalLiteralFloat = ThingOptionalLiteralFloat._456,
+                OptionalLiteralBool = true,
+                OptionalNullableList =
+{
+1234
+},
+            };
+            Response<Thing> response = await client.AnonymousBodyAsync(thing);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
         public void Example_FriendlyModel()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -590,6 +727,28 @@ namespace FirstTestTypeSpec.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
+        public void Example_FriendlyModel_Convenience()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+
+            Friend notFriend = new Friend("<name>");
+            Response<Friend> response = client.FriendlyModel(notFriend);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_FriendlyModel_AllParameters_Convenience()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+
+            Friend notFriend = new Friend("<name>");
+            Response<Friend> response = client.FriendlyModel(notFriend);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
         public async Task Example_FriendlyModel_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -620,6 +779,28 @@ namespace FirstTestTypeSpec.Samples
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("name").ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_FriendlyModel_Convenience_Async()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+
+            Friend notFriend = new Friend("<name>");
+            Response<Friend> response = await client.FriendlyModelAsync(notFriend);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_FriendlyModel_AllParameters_Convenience_Async()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+
+            Friend notFriend = new Friend("<name>");
+            Response<Friend> response = await client.FriendlyModelAsync(notFriend);
         }
 
         [Test]
@@ -700,6 +881,30 @@ namespace FirstTestTypeSpec.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
+        public void Example_StringFormat_Convenience()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+
+            ModelWithFormat body = new ModelWithFormat(new Uri("http://localhost:3000"), Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"));
+            Response response = client.StringFormat(Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"), body);
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_StringFormat_AllParameters_Convenience()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+
+            ModelWithFormat body = new ModelWithFormat(new Uri("http://localhost:3000"), Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"));
+            Response response = client.StringFormat(Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"), body);
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
         public async Task Example_StringFormat_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -727,6 +932,30 @@ namespace FirstTestTypeSpec.Samples
                 ["guid"] = "73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a",
             });
             Response response = await client.StringFormatAsync(Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"), content);
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_StringFormat_Convenience_Async()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+
+            ModelWithFormat body = new ModelWithFormat(new Uri("http://localhost:3000"), Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"));
+            Response response = await client.StringFormatAsync(Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"), body);
+            Console.WriteLine(response.Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_StringFormat_AllParameters_Convenience_Async()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+
+            ModelWithFormat body = new ModelWithFormat(new Uri("http://localhost:3000"), Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"));
+            Response response = await client.StringFormatAsync(Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a"), body);
             Console.WriteLine(response.Status);
         }
 
@@ -839,6 +1068,28 @@ namespace FirstTestTypeSpec.Samples
                 {
                     ["key"] = "1",
                 },
+                ["requiredModel"] = new Dictionary<string, object>()
+                {
+                    ["name"] = "<name>",
+                    ["requiredUnion"] = "<requiredUnion>",
+                    ["requiredLiteralString"] = "accept",
+                    ["requiredLiteralInt"] = 123,
+                    ["requiredLiteralFloat"] = 1.23F,
+                    ["requiredLiteralBool"] = false,
+                    ["optionalLiteralString"] = "reject",
+                    ["optionalLiteralInt"] = 456,
+                    ["optionalLiteralFloat"] = 4.56F,
+                    ["optionalLiteralBool"] = true,
+                    ["requiredBadDescription"] = "<requiredBadDescription>",
+                    ["optionalNullableList"] = new object[]
+            {
+1234
+            },
+                    ["requiredNullableList"] = new object[]
+            {
+1234
+            },
+                },
                 ["intExtensibleEnum"] = 1,
                 ["intExtensibleEnumCollection"] = new object[]
             {
@@ -918,6 +1169,28 @@ namespace FirstTestTypeSpec.Samples
                 ["requiredDictionary"] = new Dictionary<string, object>()
                 {
                     ["key"] = "1",
+                },
+                ["requiredModel"] = new Dictionary<string, object>()
+                {
+                    ["name"] = "<name>",
+                    ["requiredUnion"] = "<requiredUnion>",
+                    ["requiredLiteralString"] = "accept",
+                    ["requiredLiteralInt"] = 123,
+                    ["requiredLiteralFloat"] = 1.23F,
+                    ["requiredLiteralBool"] = false,
+                    ["optionalLiteralString"] = "reject",
+                    ["optionalLiteralInt"] = 456,
+                    ["optionalLiteralFloat"] = 4.56F,
+                    ["optionalLiteralBool"] = true,
+                    ["requiredBadDescription"] = "<requiredBadDescription>",
+                    ["optionalNullableList"] = new object[]
+            {
+1234
+            },
+                    ["requiredNullableList"] = new object[]
+            {
+1234
+            },
                 },
                 ["intExtensibleEnum"] = 1,
                 ["intExtensibleEnumCollection"] = new object[]
@@ -999,6 +1272,128 @@ namespace FirstTestTypeSpec.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
+        public void Example_HelloAgain_Convenience()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+
+            RoundTripModel action = new RoundTripModel("<requiredString>", 1234, new StringFixedEnum?[]
+            {
+StringFixedEnum.One
+            }, new Dictionary<string, StringExtensibleEnum?>()
+            {
+                ["key"] = StringExtensibleEnum.One,
+            }, new Thing("<name>", "<requiredUnion>", "<requiredBadDescription>", new int[]
+            {
+1234
+            })
+            {
+                OptionalLiteralString = ThingOptionalLiteralString.Reject,
+                OptionalLiteralInt = ThingOptionalLiteralInt._456,
+                OptionalLiteralFloat = ThingOptionalLiteralFloat._456,
+                OptionalLiteralBool = true,
+                OptionalNullableList =
+            {
+1234
+            },
+            }, BinaryData.FromObjectAsJson(new Dictionary<string, object>()), new Dictionary<string, BinaryData>()
+            {
+                ["key"] = BinaryData.FromObjectAsJson(new Dictionary<string, object>()),
+            }, new ModelWithRequiredNullableProperties(1234, StringExtensibleEnum.One, StringFixedEnum.One))
+            {
+                IntExtensibleEnum = IntExtensibleEnum.One,
+                IntExtensibleEnumCollection =
+{
+IntExtensibleEnum.One
+},
+                FloatExtensibleEnum = FloatExtensibleEnum.One,
+                FloatExtensibleEnumCollection =
+{
+FloatExtensibleEnum.One
+},
+                FloatFixedEnum = FloatFixedEnum.One,
+                FloatFixedEnumCollection =
+{
+FloatFixedEnum.One
+},
+                IntFixedEnum = IntFixedEnum.One,
+                IntFixedEnumCollection =
+{
+IntFixedEnum.One
+},
+                StringFixedEnum = StringFixedEnum.One,
+                OptionalUnknown = BinaryData.FromObjectAsJson(new Dictionary<string, object>()),
+                OptionalRecordUnknown =
+{
+["key"] = BinaryData.FromObjectAsJson(new Dictionary<string, object>()),
+},
+            };
+            Response<RoundTripModel> response = client.HelloAgain("<p2>", "<p1>", action);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_HelloAgain_AllParameters_Convenience()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+
+            RoundTripModel action = new RoundTripModel("<requiredString>", 1234, new StringFixedEnum?[]
+            {
+StringFixedEnum.One
+            }, new Dictionary<string, StringExtensibleEnum?>()
+            {
+                ["key"] = StringExtensibleEnum.One,
+            }, new Thing("<name>", "<requiredUnion>", "<requiredBadDescription>", new int[]
+            {
+1234
+            })
+            {
+                OptionalLiteralString = ThingOptionalLiteralString.Reject,
+                OptionalLiteralInt = ThingOptionalLiteralInt._456,
+                OptionalLiteralFloat = ThingOptionalLiteralFloat._456,
+                OptionalLiteralBool = true,
+                OptionalNullableList =
+            {
+1234
+            },
+            }, BinaryData.FromObjectAsJson(new Dictionary<string, object>()), new Dictionary<string, BinaryData>()
+            {
+                ["key"] = BinaryData.FromObjectAsJson(new Dictionary<string, object>()),
+            }, new ModelWithRequiredNullableProperties(1234, StringExtensibleEnum.One, StringFixedEnum.One))
+            {
+                IntExtensibleEnum = IntExtensibleEnum.One,
+                IntExtensibleEnumCollection =
+{
+IntExtensibleEnum.One
+},
+                FloatExtensibleEnum = FloatExtensibleEnum.One,
+                FloatExtensibleEnumCollection =
+{
+FloatExtensibleEnum.One
+},
+                FloatFixedEnum = FloatFixedEnum.One,
+                FloatFixedEnumCollection =
+{
+FloatFixedEnum.One
+},
+                IntFixedEnum = IntFixedEnum.One,
+                IntFixedEnumCollection =
+{
+IntFixedEnum.One
+},
+                StringFixedEnum = StringFixedEnum.One,
+                OptionalUnknown = BinaryData.FromObjectAsJson(new Dictionary<string, object>()),
+                OptionalRecordUnknown =
+{
+["key"] = BinaryData.FromObjectAsJson(new Dictionary<string, object>()),
+},
+            };
+            Response<RoundTripModel> response = client.HelloAgain("<p2>", "<p1>", action);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
         public async Task Example_HelloAgain_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -1015,6 +1410,28 @@ namespace FirstTestTypeSpec.Samples
                 ["requiredDictionary"] = new Dictionary<string, object>()
                 {
                     ["key"] = "1",
+                },
+                ["requiredModel"] = new Dictionary<string, object>()
+                {
+                    ["name"] = "<name>",
+                    ["requiredUnion"] = "<requiredUnion>",
+                    ["requiredLiteralString"] = "accept",
+                    ["requiredLiteralInt"] = 123,
+                    ["requiredLiteralFloat"] = 1.23F,
+                    ["requiredLiteralBool"] = false,
+                    ["optionalLiteralString"] = "reject",
+                    ["optionalLiteralInt"] = 456,
+                    ["optionalLiteralFloat"] = 4.56F,
+                    ["optionalLiteralBool"] = true,
+                    ["requiredBadDescription"] = "<requiredBadDescription>",
+                    ["optionalNullableList"] = new object[]
+            {
+1234
+            },
+                    ["requiredNullableList"] = new object[]
+            {
+1234
+            },
                 },
                 ["intExtensibleEnum"] = 1,
                 ["intExtensibleEnumCollection"] = new object[]
@@ -1096,6 +1513,28 @@ namespace FirstTestTypeSpec.Samples
                 {
                     ["key"] = "1",
                 },
+                ["requiredModel"] = new Dictionary<string, object>()
+                {
+                    ["name"] = "<name>",
+                    ["requiredUnion"] = "<requiredUnion>",
+                    ["requiredLiteralString"] = "accept",
+                    ["requiredLiteralInt"] = 123,
+                    ["requiredLiteralFloat"] = 1.23F,
+                    ["requiredLiteralBool"] = false,
+                    ["optionalLiteralString"] = "reject",
+                    ["optionalLiteralInt"] = 456,
+                    ["optionalLiteralFloat"] = 4.56F,
+                    ["optionalLiteralBool"] = true,
+                    ["requiredBadDescription"] = "<requiredBadDescription>",
+                    ["optionalNullableList"] = new object[]
+            {
+1234
+            },
+                    ["requiredNullableList"] = new object[]
+            {
+1234
+            },
+                },
                 ["intExtensibleEnum"] = 1,
                 ["intExtensibleEnumCollection"] = new object[]
             {
@@ -1176,6 +1615,128 @@ namespace FirstTestTypeSpec.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
+        public async Task Example_HelloAgain_Convenience_Async()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+
+            RoundTripModel action = new RoundTripModel("<requiredString>", 1234, new StringFixedEnum?[]
+            {
+StringFixedEnum.One
+            }, new Dictionary<string, StringExtensibleEnum?>()
+            {
+                ["key"] = StringExtensibleEnum.One,
+            }, new Thing("<name>", "<requiredUnion>", "<requiredBadDescription>", new int[]
+            {
+1234
+            })
+            {
+                OptionalLiteralString = ThingOptionalLiteralString.Reject,
+                OptionalLiteralInt = ThingOptionalLiteralInt._456,
+                OptionalLiteralFloat = ThingOptionalLiteralFloat._456,
+                OptionalLiteralBool = true,
+                OptionalNullableList =
+            {
+1234
+            },
+            }, BinaryData.FromObjectAsJson(new Dictionary<string, object>()), new Dictionary<string, BinaryData>()
+            {
+                ["key"] = BinaryData.FromObjectAsJson(new Dictionary<string, object>()),
+            }, new ModelWithRequiredNullableProperties(1234, StringExtensibleEnum.One, StringFixedEnum.One))
+            {
+                IntExtensibleEnum = IntExtensibleEnum.One,
+                IntExtensibleEnumCollection =
+{
+IntExtensibleEnum.One
+},
+                FloatExtensibleEnum = FloatExtensibleEnum.One,
+                FloatExtensibleEnumCollection =
+{
+FloatExtensibleEnum.One
+},
+                FloatFixedEnum = FloatFixedEnum.One,
+                FloatFixedEnumCollection =
+{
+FloatFixedEnum.One
+},
+                IntFixedEnum = IntFixedEnum.One,
+                IntFixedEnumCollection =
+{
+IntFixedEnum.One
+},
+                StringFixedEnum = StringFixedEnum.One,
+                OptionalUnknown = BinaryData.FromObjectAsJson(new Dictionary<string, object>()),
+                OptionalRecordUnknown =
+{
+["key"] = BinaryData.FromObjectAsJson(new Dictionary<string, object>()),
+},
+            };
+            Response<RoundTripModel> response = await client.HelloAgainAsync("<p2>", "<p1>", action);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_HelloAgain_AllParameters_Convenience_Async()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+
+            RoundTripModel action = new RoundTripModel("<requiredString>", 1234, new StringFixedEnum?[]
+            {
+StringFixedEnum.One
+            }, new Dictionary<string, StringExtensibleEnum?>()
+            {
+                ["key"] = StringExtensibleEnum.One,
+            }, new Thing("<name>", "<requiredUnion>", "<requiredBadDescription>", new int[]
+            {
+1234
+            })
+            {
+                OptionalLiteralString = ThingOptionalLiteralString.Reject,
+                OptionalLiteralInt = ThingOptionalLiteralInt._456,
+                OptionalLiteralFloat = ThingOptionalLiteralFloat._456,
+                OptionalLiteralBool = true,
+                OptionalNullableList =
+            {
+1234
+            },
+            }, BinaryData.FromObjectAsJson(new Dictionary<string, object>()), new Dictionary<string, BinaryData>()
+            {
+                ["key"] = BinaryData.FromObjectAsJson(new Dictionary<string, object>()),
+            }, new ModelWithRequiredNullableProperties(1234, StringExtensibleEnum.One, StringFixedEnum.One))
+            {
+                IntExtensibleEnum = IntExtensibleEnum.One,
+                IntExtensibleEnumCollection =
+{
+IntExtensibleEnum.One
+},
+                FloatExtensibleEnum = FloatExtensibleEnum.One,
+                FloatExtensibleEnumCollection =
+{
+FloatExtensibleEnum.One
+},
+                FloatFixedEnum = FloatFixedEnum.One,
+                FloatFixedEnumCollection =
+{
+FloatFixedEnum.One
+},
+                IntFixedEnum = IntFixedEnum.One,
+                IntFixedEnumCollection =
+{
+IntFixedEnum.One
+},
+                StringFixedEnum = StringFixedEnum.One,
+                OptionalUnknown = BinaryData.FromObjectAsJson(new Dictionary<string, object>()),
+                OptionalRecordUnknown =
+{
+["key"] = BinaryData.FromObjectAsJson(new Dictionary<string, object>()),
+},
+            };
+            Response<RoundTripModel> response = await client.HelloAgainAsync("<p2>", "<p1>", action);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
         public void Example_NoContentType()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -1192,6 +1753,28 @@ namespace FirstTestTypeSpec.Samples
                 ["requiredDictionary"] = new Dictionary<string, object>()
                 {
                     ["key"] = "1",
+                },
+                ["requiredModel"] = new Dictionary<string, object>()
+                {
+                    ["name"] = "<name>",
+                    ["requiredUnion"] = "<requiredUnion>",
+                    ["requiredLiteralString"] = "accept",
+                    ["requiredLiteralInt"] = 123,
+                    ["requiredLiteralFloat"] = 1.23F,
+                    ["requiredLiteralBool"] = false,
+                    ["optionalLiteralString"] = "reject",
+                    ["optionalLiteralInt"] = 456,
+                    ["optionalLiteralFloat"] = 4.56F,
+                    ["optionalLiteralBool"] = true,
+                    ["requiredBadDescription"] = "<requiredBadDescription>",
+                    ["optionalNullableList"] = new object[]
+            {
+1234
+            },
+                    ["requiredNullableList"] = new object[]
+            {
+1234
+            },
                 },
                 ["intExtensibleEnum"] = 1,
                 ["intExtensibleEnumCollection"] = new object[]
@@ -1272,6 +1855,28 @@ namespace FirstTestTypeSpec.Samples
                 ["requiredDictionary"] = new Dictionary<string, object>()
                 {
                     ["key"] = "1",
+                },
+                ["requiredModel"] = new Dictionary<string, object>()
+                {
+                    ["name"] = "<name>",
+                    ["requiredUnion"] = "<requiredUnion>",
+                    ["requiredLiteralString"] = "accept",
+                    ["requiredLiteralInt"] = 123,
+                    ["requiredLiteralFloat"] = 1.23F,
+                    ["requiredLiteralBool"] = false,
+                    ["optionalLiteralString"] = "reject",
+                    ["optionalLiteralInt"] = 456,
+                    ["optionalLiteralFloat"] = 4.56F,
+                    ["optionalLiteralBool"] = true,
+                    ["requiredBadDescription"] = "<requiredBadDescription>",
+                    ["optionalNullableList"] = new object[]
+            {
+1234
+            },
+                    ["requiredNullableList"] = new object[]
+            {
+1234
+            },
                 },
                 ["intExtensibleEnum"] = 1,
                 ["intExtensibleEnumCollection"] = new object[]
@@ -1370,6 +1975,28 @@ namespace FirstTestTypeSpec.Samples
                 {
                     ["key"] = "1",
                 },
+                ["requiredModel"] = new Dictionary<string, object>()
+                {
+                    ["name"] = "<name>",
+                    ["requiredUnion"] = "<requiredUnion>",
+                    ["requiredLiteralString"] = "accept",
+                    ["requiredLiteralInt"] = 123,
+                    ["requiredLiteralFloat"] = 1.23F,
+                    ["requiredLiteralBool"] = false,
+                    ["optionalLiteralString"] = "reject",
+                    ["optionalLiteralInt"] = 456,
+                    ["optionalLiteralFloat"] = 4.56F,
+                    ["optionalLiteralBool"] = true,
+                    ["requiredBadDescription"] = "<requiredBadDescription>",
+                    ["optionalNullableList"] = new object[]
+            {
+1234
+            },
+                    ["requiredNullableList"] = new object[]
+            {
+1234
+            },
+                },
                 ["intExtensibleEnum"] = 1,
                 ["intExtensibleEnumCollection"] = new object[]
             {
@@ -1449,6 +2076,28 @@ namespace FirstTestTypeSpec.Samples
                 ["requiredDictionary"] = new Dictionary<string, object>()
                 {
                     ["key"] = "1",
+                },
+                ["requiredModel"] = new Dictionary<string, object>()
+                {
+                    ["name"] = "<name>",
+                    ["requiredUnion"] = "<requiredUnion>",
+                    ["requiredLiteralString"] = "accept",
+                    ["requiredLiteralInt"] = 123,
+                    ["requiredLiteralFloat"] = 1.23F,
+                    ["requiredLiteralBool"] = false,
+                    ["optionalLiteralString"] = "reject",
+                    ["optionalLiteralInt"] = 456,
+                    ["optionalLiteralFloat"] = 4.56F,
+                    ["optionalLiteralBool"] = true,
+                    ["requiredBadDescription"] = "<requiredBadDescription>",
+                    ["optionalNullableList"] = new object[]
+            {
+1234
+            },
+                    ["requiredNullableList"] = new object[]
+            {
+1234
+            },
                 },
                 ["intExtensibleEnum"] = 1,
                 ["intExtensibleEnumCollection"] = new object[]
@@ -1575,6 +2224,26 @@ namespace FirstTestTypeSpec.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
+        public void Example_HelloDemo2_Convenience()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+
+            Response<Thing> response = client.HelloDemo2();
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_HelloDemo2_AllParameters_Convenience()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+
+            Response<Thing> response = client.HelloDemo2();
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
         public async Task Example_HelloDemo2_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -1616,6 +2285,26 @@ namespace FirstTestTypeSpec.Samples
             Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
             Console.WriteLine(result.GetProperty("optionalNullableList")[0].ToString());
             Console.WriteLine(result.GetProperty("requiredNullableList")[0].ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_HelloDemo2_Convenience_Async()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+
+            Response<Thing> response = await client.HelloDemo2Async();
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_HelloDemo2_AllParameters_Convenience_Async()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+
+            Response<Thing> response = await client.HelloDemo2Async();
         }
 
         [Test]
@@ -1709,6 +2398,54 @@ namespace FirstTestTypeSpec.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
+        public void Example_CreateLiteral_Convenience()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+
+            Thing body = new Thing("<name>", "<requiredUnion>", "<requiredBadDescription>", new int[]
+            {
+1234
+            })
+            {
+                OptionalLiteralString = ThingOptionalLiteralString.Reject,
+                OptionalLiteralInt = ThingOptionalLiteralInt._456,
+                OptionalLiteralFloat = ThingOptionalLiteralFloat._456,
+                OptionalLiteralBool = true,
+                OptionalNullableList =
+{
+1234
+},
+            };
+            Response<Thing> response = client.CreateLiteral(body);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_CreateLiteral_AllParameters_Convenience()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+
+            Thing body = new Thing("<name>", "<requiredUnion>", "<requiredBadDescription>", new int[]
+            {
+1234
+            })
+            {
+                OptionalLiteralString = ThingOptionalLiteralString.Reject,
+                OptionalLiteralInt = ThingOptionalLiteralInt._456,
+                OptionalLiteralFloat = ThingOptionalLiteralFloat._456,
+                OptionalLiteralBool = true,
+                OptionalNullableList =
+{
+1234
+},
+            };
+            Response<Thing> response = client.CreateLiteral(body);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
         public async Task Example_CreateLiteral_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -1798,6 +2535,54 @@ namespace FirstTestTypeSpec.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
+        public async Task Example_CreateLiteral_Convenience_Async()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+
+            Thing body = new Thing("<name>", "<requiredUnion>", "<requiredBadDescription>", new int[]
+            {
+1234
+            })
+            {
+                OptionalLiteralString = ThingOptionalLiteralString.Reject,
+                OptionalLiteralInt = ThingOptionalLiteralInt._456,
+                OptionalLiteralFloat = ThingOptionalLiteralFloat._456,
+                OptionalLiteralBool = true,
+                OptionalNullableList =
+{
+1234
+},
+            };
+            Response<Thing> response = await client.CreateLiteralAsync(body);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_CreateLiteral_AllParameters_Convenience_Async()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+
+            Thing body = new Thing("<name>", "<requiredUnion>", "<requiredBadDescription>", new int[]
+            {
+1234
+            })
+            {
+                OptionalLiteralString = ThingOptionalLiteralString.Reject,
+                OptionalLiteralInt = ThingOptionalLiteralInt._456,
+                OptionalLiteralFloat = ThingOptionalLiteralFloat._456,
+                OptionalLiteralBool = true,
+                OptionalNullableList =
+{
+1234
+},
+            };
+            Response<Thing> response = await client.CreateLiteralAsync(body);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
         public void Example_HelloLiteral()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -1843,6 +2628,26 @@ namespace FirstTestTypeSpec.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
+        public void Example_HelloLiteral_Convenience()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+
+            Response<Thing> response = client.HelloLiteral();
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_HelloLiteral_AllParameters_Convenience()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+
+            Response<Thing> response = client.HelloLiteral();
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
         public async Task Example_HelloLiteral_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -1884,6 +2689,26 @@ namespace FirstTestTypeSpec.Samples
             Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
             Console.WriteLine(result.GetProperty("optionalNullableList")[0].ToString());
             Console.WriteLine(result.GetProperty("requiredNullableList")[0].ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_HelloLiteral_Convenience_Async()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+
+            Response<Thing> response = await client.HelloLiteralAsync();
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_HelloLiteral_AllParameters_Convenience_Async()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
+
+            Response<Thing> response = await client.HelloLiteralAsync();
         }
 
         [Test]
