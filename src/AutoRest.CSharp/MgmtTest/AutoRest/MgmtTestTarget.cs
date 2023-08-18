@@ -38,13 +38,13 @@ namespace AutoRest.CSharp.AutoRest.Plugins
 
             if (Configuration.MgmtTestConfiguration.ClearOutputFolder)
             {
-                ClearTestGenOutputFolder();
+                ClearOutputFolder();
             }
         }
 
         private static void WriteMockTests(GeneratedCodeWorkspace project, MgmtTestOutputLibrary library)
         {
-            string outputFolder = GetTestGenOutputFolder();
+            string outputFolder = GetOutputFolder();
 
             // write the collection mock tests
             foreach (var collectionTest in library.ResourceCollectionMockTests)
@@ -72,7 +72,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
 
         private static void WriteSamples(GeneratedCodeWorkspace project, MgmtTestOutputLibrary library)
         {
-            string outputFolder = GetTestGenOutputFolder();
+            string outputFolder = GetOutputFolder();
 
             var names = new Dictionary<string, int>();
             foreach (var sample in library.Samples)
@@ -97,7 +97,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             return name;
         }
 
-        private static string GetTestGenOutputFolder()
+        private static string GetOutputFolder()
         {
             if (Configuration.MgmtTestConfiguration == null ||
                 string.IsNullOrEmpty(Configuration.MgmtTestConfiguration.OutputFolder))
@@ -106,7 +106,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                 return Configuration.MgmtTestConfiguration.OutputFolder;
         }
 
-        private static void ClearTestGenOutputFolder()
+        private static void ClearOutputFolder()
         {
             if (Configuration.MgmtTestConfiguration == null ||
                 string.IsNullOrEmpty(Configuration.MgmtTestConfiguration.OutputFolder))

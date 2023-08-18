@@ -15,18 +15,18 @@ namespace AutoRest.CSharp.Common.Utilities
             _autoRest = autoRest;
         }
 
-        public static bool HasInitialized => _autoRest != null;
+        public static bool IsInitialized => _autoRest != null;
 
         public static async Task Warning(string message)
         {
-            if (!HasInitialized)
+            if (!IsInitialized)
                 throw new InvalidOperationException("AutoRestLogger.Warning is called before initialized");
             await _autoRest!.Warning(message);
         }
 
         public static async Task Fatal(string message)
         {
-            if (!HasInitialized)
+            if (!IsInitialized)
                 throw new InvalidOperationException("AutoRestLogger.Fatal is called before initialized");
             await _autoRest!.Fatal(message);
         }
