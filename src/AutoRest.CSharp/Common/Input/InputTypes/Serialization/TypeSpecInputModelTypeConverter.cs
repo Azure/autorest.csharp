@@ -66,6 +66,10 @@ namespace AutoRest.CSharp.Common.Input
                     model = CreateInputModelTypeInstance(id, name, ns, accessibility, deprecated, description, usageString, discriminatorValue, discriminatorPropertyName, baseModel, properties, derivedModels, isNullable, resolver);
                     reader.Read();
                     CreateProperties(ref reader, properties, options);
+                    if (reader.TokenType != JsonTokenType.EndObject && !(reader.TokenType == JsonTokenType.PropertyName && reader.GetString() == nameof(InputModelType.DerivedModels)))
+                    {
+                        throw new JsonException($"{nameof(InputModelType)}.{nameof(InputModelType.Properties)} must be the last defined property.");
+                    }
                 }
                 else if (reader.GetString() == nameof(InputModelType.DerivedModels))
                 {
@@ -93,7 +97,7 @@ namespace AutoRest.CSharp.Common.Input
             {
                 Enum.TryParse(usageString, ignoreCase: true, out usage);
             }
-            var model = new InputModelType(name, ns, accessibility, deprecated, description, usage, properties, baseModel, discriminatorValue, discriminatorPropertyValue, null, isNullable);
+            var model = new InputModelType(name, ns, accessibility, deprecated, description, usage, properties, baseModel, derivedModels, discriminatorValue, discriminatorPropertyName, null, isNullable);
             if (id != null)
             {
                 resolver.AddReference(id, model);

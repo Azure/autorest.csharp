@@ -54,14 +54,14 @@ namespace AutoRest.CSharp.Output.Models.Types
 
         public bool IsPropertyBag => _inputModel.IsPropertyBag;
 
-        public ModelTypeProvider(InputModelType inputModel, string defaultNamespace, SourceInputModel? sourceInputModel, TypeFactory typeFactory, IReadOnlyList<InputModelType> derivedTypes, ObjectType? defaultDerivedType = null)
+        public ModelTypeProvider(InputModelType inputModel, string defaultNamespace, SourceInputModel? sourceInputModel, TypeFactory typeFactory, ObjectType? defaultDerivedType = null)
             : base(defaultNamespace, sourceInputModel)
         {
             _typeFactory = typeFactory;
             _inputModel = inputModel;
 
             _deprecated = inputModel.Deprecated;
-            _derivedTypes = derivedTypes;
+            _derivedTypes = inputModel.DerivedModels;
             _defaultDerivedType = defaultDerivedType ?? (inputModel.IsUnknownDiscriminatorModel ? this : null);
 
             DefaultName = inputModel.Name;

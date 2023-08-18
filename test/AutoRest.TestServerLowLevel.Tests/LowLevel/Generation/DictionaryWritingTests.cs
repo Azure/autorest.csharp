@@ -12,7 +12,7 @@ namespace AutoRest.CSharp.Generation.Writers.Tests
         public void RoundTripDictionaryProperties(string expectedModelCodes, string expectedSerializationCodes)
         {
             var model = new InputModelType("RoundTripModel", "Cadl.TestServer.DictionaryProperties.Models", "public", null, "Round-trip model with dictionary properties", InputModelTypeUsage.RoundTrip,
-                DictionaryProperties, null, new List<InputModelType>(), null, null, false);
+                DictionaryProperties, null, new List<InputModelType>(), null, null, null, false);
 
             var library = new DpgOutputLibraryBuilder(new InputNamespace("Cadl.TestServer.DictionaryProperties.Models", null, new List<string>(),
                 new List<InputEnumType>(), new List<InputModelType> { model, ElementModelType }, new List<InputClient>(), new InputAuth()), default).Build(true);
@@ -24,7 +24,7 @@ namespace AutoRest.CSharp.Generation.Writers.Tests
         public void InputDictionaryProperties(string expectedModelCodes, string expectedSerializationCodes)
         {
             var model = new InputModelType("InputModel", "Cadl.TestServer.DictionaryProperties.Models", "public", null, "Input model with dictionary properties", InputModelTypeUsage.Input,
-                DictionaryProperties, null, new List<InputModelType>(), null, null, false);
+                DictionaryProperties, null, new List<InputModelType>(), null, null, null, false);
 
             var library = new DpgOutputLibraryBuilder(new InputNamespace("Cadl.TestServer.DictionaryProperties.Models", null, new List<string>(),
                 new List<InputEnumType>(), new List<InputModelType> { model, ElementModelType }, new List<InputClient>(), new InputAuth()), default).Build(true);
@@ -37,7 +37,7 @@ namespace AutoRest.CSharp.Generation.Writers.Tests
         public void OutputDictionaryProperties(string expectedModelCodes, string expectedSerializationCodes)
         {
             var model = new InputModelType("OutputModel", "Cadl.TestServer.DictionaryProperties.Models", "public", null, "Output model with dictionary properties", InputModelTypeUsage.Output,
-                DictionaryProperties, null, new List<InputModelType>(), null, null, false);
+                DictionaryProperties, null, new List<InputModelType>(), null, null, null, false);
 
             var library = new DpgOutputLibraryBuilder(new InputNamespace("Cadl.TestServer.DictionaryProperties.Models", null, new List<string>(),
                 new List<InputEnumType>(), new List<InputModelType> { model, ElementModelType }, new List<InputClient>(), new InputAuth()), default).Build(true);
@@ -47,13 +47,13 @@ namespace AutoRest.CSharp.Generation.Writers.Tests
 
         private static readonly IReadOnlyList<InputModelProperty> DictionaryProperties = new List<InputModelProperty>
         {
-            new InputModelProperty("requiredStringDictionary", "requiredStringDictionary", "Required dictionary of strings, illustrating a dictionary of reference types.", new InputDictionaryType("requiredStringDictionary", InputPrimitiveType.String, InputPrimitiveType.String, false), true, false, false),
-            new InputModelProperty("requiredIntDictionary", "requiredIntDictionary", "Required dictionary of ints, illustrating a dictionary of value types.", new InputDictionaryType("requiredIntDictionary", InputPrimitiveType.String, InputPrimitiveType.Int32, false), true, false, false),
-            new InputModelProperty("requiredModelDictionary", "requiredModelDictionary", "Required dictionary of models, illustrating a dictionary of model types.", new InputDictionaryType("requiredIntDictionary", InputPrimitiveType.String, ElementModelType, false), true, false, false),
+            new InputModelProperty("requiredStringDictionary", "requiredStringDictionary", "Required dictionary of strings, illustrating a dictionary of reference types.", new InputDictionaryType("requiredStringDictionary", InputPrimitiveType.String, InputPrimitiveType.String, false), null, true, false, false),
+            new InputModelProperty("requiredIntDictionary", "requiredIntDictionary", "Required dictionary of ints, illustrating a dictionary of value types.", new InputDictionaryType("requiredIntDictionary", InputPrimitiveType.String, InputPrimitiveType.Int32, false), null, true, false, false),
+            new InputModelProperty("requiredModelDictionary", "requiredModelDictionary", "Required dictionary of models, illustrating a dictionary of model types.", new InputDictionaryType("requiredIntDictionary", InputPrimitiveType.String, ElementModelType, false), null, true, false, false),
             new InputModelProperty("requiredModelDictionaryDictionary", "requiredModelDictionaryDictionary", "Required dictionary of dictionary of models, illustrating a dictionary of dictionary types.",
-                    new InputDictionaryType("requiredModelDictionaryDictionary", InputPrimitiveType.String, new InputDictionaryType("requiredModelDictionary", InputPrimitiveType.String, ElementModelType, false), false), true, false, false),
+                    new InputDictionaryType("requiredModelDictionaryDictionary", InputPrimitiveType.String, new InputDictionaryType("requiredModelDictionary", InputPrimitiveType.String, ElementModelType, false), false), null, true, false, false),
             new InputModelProperty("requiredModelListDictionary", "requiredModelListDictionary", "Required dictionary of list of models, illustrating a dictionary of list types.",
-                    new InputDictionaryType("requiredModelListDictionary", InputPrimitiveType.String, new InputListType("requiredModelList", ElementModelType, false), false), true, false, false)
+                    new InputDictionaryType("requiredModelListDictionary", InputPrimitiveType.String, new InputListType("requiredModelList", ElementModelType, false), false), null, true, false, false)
         };
 
         // below are test cases
