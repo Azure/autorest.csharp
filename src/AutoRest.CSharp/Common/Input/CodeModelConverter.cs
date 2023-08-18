@@ -129,7 +129,7 @@ namespace AutoRest.CSharp.Common.Input
             Name: input.Language.Default.Name,
             NameInRequest: input.Language.Default.SerializedName ?? input.Language.Default.Name,
             Description: input.Language.Default.Description,
-            Type: CreateType(input),
+            Type: GetOrCreateType(input),
             Location: GetRequestLocation(input),
             DefaultValue: GetDefaultValue(input),
             IsRequired: input.IsRequired,
@@ -158,7 +158,7 @@ namespace AutoRest.CSharp.Common.Input
             Name: header.CSharpName(),
             NameInResponse: header.Extensions?.HeaderCollectionPrefix ?? header.Header,
             Description: header.Language.Default.Description,
-            Type: CreateType(header.Schema, header.Extensions?.Format, _modelsCache, true)
+            Type: GetOrCreateType(header.Schema, header.Extensions?.Format, _modelsCache, true)
         );
 
         private OperationLongRunning? CreateLongRunning(Operation operation)
@@ -257,7 +257,7 @@ namespace AutoRest.CSharp.Common.Input
                 BaseModel: baseModelSchema is not null ? GetOrCreateModel(baseModelSchema) : null,
                 DiscriminatorValue: schema.DiscriminatorValue,
                 DiscriminatorPropertyName: schema.Discriminator?.Property.SerializedName,
-                InheritedDictionaryType: dictionarySchema is not null ? (InputDictionaryType)CreateType(dictionarySchema, _modelsCache, false) : null)
+                InheritedDictionaryType: dictionarySchema is not null ? (InputDictionaryType)GetOrCreateType(dictionarySchema, _modelsCache, false) : null)
             {
                 CompositionModels = compositeSchemas is not null ? compositeSchemas.Select(GetOrCreateModel).ToList() : Array.Empty<InputModelType>(),
                 Serialization = GetSerialization(schema, usage)
@@ -278,7 +278,7 @@ namespace AutoRest.CSharp.Common.Input
             Name: property.Language.Default.Name,
             SerializedName: property.SerializedName,
             Description: property.Language.Default.Description,
-            Type: CreateType(property),
+            Type: GetOrCreateType(property),
             ConstantValue: property.Schema is ConstantSchema constantSchema ? CreateConstant(constantSchema, constantSchema.Extensions?.Format, _modelsCache) : null,
             IsRequired: property.IsRequired,
             IsReadOnly: property.IsReadOnly,
@@ -355,7 +355,7 @@ namespace AutoRest.CSharp.Common.Input
         {
             { HttpResponse.KnownMediaType: KnownMediaType.Text } => InputPrimitiveType.String,
             BinaryResponse => InputPrimitiveType.Stream,
-            SchemaResponse schemaResponse => CreateType(schemaResponse.Schema, _modelsCache, schemaResponse.IsNullable),
+            SchemaResponse schemaResponse => GetOrCreateType(schemaResponse.Schema, _modelsCache, schemaResponse.IsNullable),
             _ => null
         };
 
@@ -368,16 +368,16 @@ namespace AutoRest.CSharp.Common.Input
             return headers.Select(CreateResponseHeader).ToList();
         }
 
-        private InputType CreateType(RequestParameter requestParameter)
+        private InputType GetOrCreateType(RequestParameter requestParameter)
         {
             var sc = requestParameter is { Schema: ConstantSchema constantSchema }
                 ? constantSchema.ValueType
                 : requestParameter.Schema;
 
-            return CreateType(sc, requestParameter.Extensions?.Format, _modelsCache, requestParameter.IsNullable || !requestParameter.IsRequired);
+            return GetOrCreateType(sc, requestParameter.Extensions?.Format, _modelsCache, requestParameter.IsNullable || !requestParameter.IsRequired);
         }
 
-        private InputType CreateType(Property property)
+        private InputType GetOrCreateType(Property property)
         {
             var name = property.Schema.Name;
             var type = typeof(DataFactoryElement<>);
@@ -388,21 +388,32 @@ namespace AutoRest.CSharp.Common.Input
                 XMsFormat.DataFactoryElementOfInt => new InputSystemType(type, InputPrimitiveType.Int32, false),
                 XMsFormat.DataFactoryElementOfDouble => new InputSystemType(type, InputPrimitiveType.Float64, false),
                 XMsFormat.DataFactoryElementOfBool => new InputSystemType(type, InputPrimitiveType.Boolean, false),
-                XMsFormat.DataFactoryElementOfListOfT => new InputSystemType(type, new InputListType(name, CreateType((Schema)property.Extensions!["x-ms-format-element-type"], _modelsCache, false)), false),
+                XMsFormat.DataFactoryElementOfListOfT => new InputSystemType(type, new InputListType(name, GetOrCreateType((Schema)property.Extensions!["x-ms-format-element-type"], _modelsCache, false)), false),
                 XMsFormat.DataFactoryElementOfListOfString => new InputSystemType(type, new InputListType(name, InputPrimitiveType.String), false),
                 XMsFormat.DataFactoryElementOfKeyValuePairs => new InputSystemType(type, new InputDictionaryType(name, InputPrimitiveType.String, InputPrimitiveType.String), false),
                 XMsFormat.DataFactoryElementOfDateTime => new InputSystemType(type, InputPrimitiveType.DateTime, false),
                 XMsFormat.DataFactoryElementOfDuration => new InputSystemType(type, InputPrimitiveType.Time, false),
                 XMsFormat.DataFactoryElementOfUri => new InputSystemType(type, InputPrimitiveType.Uri, false),
-                _ => CreateType(property.Schema, property.Schema.Extensions?.Format, _modelsCache, property.IsNullable)
+                _ => GetOrCreateType(property.Schema, property.Schema.Extensions?.Format, _modelsCache, property.IsNullable)
             };
         }
 
-        private InputType CreateType(Schema schema, IReadOnlyDictionary<ObjectSchema, InputModelType>? modelsCache, bool isNullable)
-            => CreateType(schema, schema.Extensions?.Format, modelsCache, isNullable);
+        private InputType GetOrCreateType(Schema schema, IReadOnlyDictionary<ObjectSchema, InputModelType>? modelsCache, bool isNullable)
+            => GetOrCreateType(schema, schema.Extensions?.Format, modelsCache, isNullable);
 
-        private InputType CreateType(Schema schema, string? format, IReadOnlyDictionary<ObjectSchema, InputModelType>? modelsCache, bool isNullable)
-            => CreateType(schema, format, modelsCache) with { IsNullable = isNullable, Serialization = GetSerialization(schema, SchemaTypeUsage.None) };
+        private InputType GetOrCreateType(Schema schema, string? format, IReadOnlyDictionary<ObjectSchema, InputModelType>? modelsCache, bool isNullable)
+        {
+            if (schema is ObjectSchema objectSchema && !Configuration.AzureArm && modelsCache != null)
+            {
+                return modelsCache[objectSchema] with {IsNullable = isNullable};
+            }
+
+            return CreateType(schema, format, modelsCache) with
+            {
+                IsNullable = isNullable,
+                Serialization = GetSerialization(schema, SchemaTypeUsage.None)
+            };
+        }
 
         private InputType CreateType(Schema schema, string? format, IReadOnlyDictionary<ObjectSchema, InputModelType>? modelsCache) => schema switch
         {
@@ -454,8 +465,8 @@ namespace AutoRest.CSharp.Common.Input
             ChoiceSchema choiceSchema => CreateEnumType(choiceSchema, choiceSchema.ChoiceType, choiceSchema.Choices, true),
             SealedChoiceSchema choiceSchema => CreateEnumType(choiceSchema, choiceSchema.ChoiceType, choiceSchema.Choices, false),
 
-            ArraySchema array when !Configuration.AzureArm => new InputListType(array.Name, CreateType(array.ElementType, modelsCache, array.NullableItems ?? false)),
-            DictionarySchema dictionary when !Configuration.AzureArm => new InputDictionaryType(dictionary.Name, InputPrimitiveType.String, CreateType(dictionary.ElementType, modelsCache, dictionary.NullableItems ?? false)),
+            ArraySchema array when !Configuration.AzureArm => new InputListType(array.Name, GetOrCreateType(array.ElementType, modelsCache, array.NullableItems ?? false)),
+            DictionarySchema dictionary when !Configuration.AzureArm => new InputDictionaryType(dictionary.Name, InputPrimitiveType.String, GetOrCreateType(dictionary.ElementType, modelsCache, dictionary.NullableItems ?? false)),
             ObjectSchema objectSchema when !Configuration.AzureArm && modelsCache != null => modelsCache[objectSchema],
 
             AnySchema when !Configuration.AzureArm => InputIntrinsicType.Unknown,
@@ -528,12 +539,12 @@ namespace AutoRest.CSharp.Common.Input
         {
             if (parameter.ClientDefaultValue != null)
             {
-                return new InputConstant(Value: parameter.ClientDefaultValue, Type: CreateType(parameter.Schema, _modelsCache, parameter.IsNullable));
+                return new InputConstant(Value: parameter.ClientDefaultValue, Type: GetOrCreateType(parameter.Schema, _modelsCache, parameter.IsNullable));
             }
 
             if (parameter is { Schema: ConstantSchema constantSchema } && (!Configuration.AzureArm || parameter.IsRequired))
             {
-                return new InputConstant(Value: constantSchema.Value.Value, Type: CreateType(constantSchema.ValueType, _modelsCache, constantSchema.Value.Value == null));
+                return new InputConstant(Value: constantSchema.Value.Value, Type: GetOrCreateType(constantSchema.ValueType, _modelsCache, constantSchema.Value.Value == null));
             }
 
             return null;
