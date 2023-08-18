@@ -24,7 +24,7 @@ namespace MgmtMockAndSample.Samples
         [NUnit.Framework.Ignore("Only verifying that the sample builds")]
         public async Task Delete_DeleteAVault()
         {
-            // Generated from example definition:
+            // Generated from example definition: specification/mockSwagger/examples/deleteVault.json
             // this example is just showing the usage of "Vaults_Delete" operation, for the dependent resources, they will have to be created separately.
 
             // get your azure access token, for more details of how Azure SDK get your access token, please refer to https://learn.microsoft.com/en-us/dotnet/azure/sdk/authentication?tabs=command-line
@@ -51,7 +51,7 @@ namespace MgmtMockAndSample.Samples
         [NUnit.Framework.Ignore("Only verifying that the sample builds")]
         public async Task Get_RetrieveAVault()
         {
-            // Generated from example definition:
+            // Generated from example definition: specification/mockSwagger/examples/getVault.json
             // this example is just showing the usage of "Vaults_Get" operation, for the dependent resources, they will have to be created separately.
 
             // get your azure access token, for more details of how Azure SDK get your access token, please refer to https://learn.microsoft.com/en-us/dotnet/azure/sdk/authentication?tabs=command-line
@@ -82,7 +82,7 @@ namespace MgmtMockAndSample.Samples
         [NUnit.Framework.Ignore("Only verifying that the sample builds")]
         public async Task GetKeys_ListKeysOnAnExistingVault()
         {
-            // Generated from example definition:
+            // Generated from example definition: specification/mockSwagger/examples/listKeysOnVault.json
             // this example is just showing the usage of "Vaults_ListKeys" operation, for the dependent resources, they will have to be created separately.
 
             // get your azure access token, for more details of how Azure SDK get your access token, please refer to https://learn.microsoft.com/en-us/dotnet/azure/sdk/authentication?tabs=command-line
@@ -112,7 +112,7 @@ namespace MgmtMockAndSample.Samples
         [NUnit.Framework.Ignore("Only verifying that the sample builds")]
         public async Task Validate_ValidateAnExistingVault()
         {
-            // Generated from example definition:
+            // Generated from example definition: specification/mockSwagger/examples/validateVault.json
             // this example is just showing the usage of "Vaults_Validate" operation, for the dependent resources, they will have to be created separately.
 
             // get your azure access token, for more details of how Azure SDK get your access token, please refer to https://learn.microsoft.com/en-us/dotnet/azure/sdk/authentication?tabs=command-line
@@ -139,7 +139,7 @@ namespace MgmtMockAndSample.Samples
         [NUnit.Framework.Ignore("Only verifying that the sample builds")]
         public async Task Disable_DisableAVault()
         {
-            // Generated from example definition:
+            // Generated from example definition: specification/mockSwagger/examples/disableVault.json
             // this example is just showing the usage of "Vaults_Disable" operation, for the dependent resources, they will have to be created separately.
 
             // get your azure access token, for more details of how Azure SDK get your access token, please refer to https://learn.microsoft.com/en-us/dotnet/azure/sdk/authentication?tabs=command-line
@@ -166,7 +166,7 @@ namespace MgmtMockAndSample.Samples
         [NUnit.Framework.Ignore("Only verifying that the sample builds")]
         public async Task UpdateAccessPolicy_AddAnAccessPolicyOrUpdateAnAccessPolicyWithNewPermissions()
         {
-            // Generated from example definition:
+            // Generated from example definition: specification/mockSwagger/examples/updateAccessPoliciesAdd.json
             // this example is just showing the usage of "Vaults_UpdateAccessPolicy" operation, for the dependent resources, they will have to be created separately.
 
             // get your azure access token, for more details of how Azure SDK get your access token, please refer to https://learn.microsoft.com/en-us/dotnet/azure/sdk/authentication?tabs=command-line
@@ -212,7 +212,7 @@ CertificatePermission.Get
         [NUnit.Framework.Ignore("Only verifying that the sample builds")]
         public async Task GetVaults_ListVaultsInTheSpecifiedSubscription()
         {
-            // Generated from example definition:
+            // Generated from example definition: specification/mockSwagger/examples/listVaultBySubscription.json
             // this example is just showing the usage of "Vaults_ListBySubscription" operation, for the dependent resources, they will have to be created separately.
 
             // get your azure access token, for more details of how Azure SDK get your access token, please refer to https://learn.microsoft.com/en-us/dotnet/azure/sdk/authentication?tabs=command-line
@@ -245,7 +245,7 @@ CertificatePermission.Get
         [NUnit.Framework.Ignore("Only verifying that the sample builds")]
         public async Task CheckNameAvailabilityVault_ValidateAVaultName()
         {
-            // Generated from example definition:
+            // Generated from example definition: specification/mockSwagger/examples/checkVaultNameAvailability.json
             // this example is just showing the usage of "Vaults_CheckNameAvailability" operation, for the dependent resources, they will have to be created separately.
 
             // get your azure access token, for more details of how Azure SDK get your access token, please refer to https://learn.microsoft.com/en-us/dotnet/azure/sdk/authentication?tabs=command-line
@@ -271,7 +271,7 @@ CertificatePermission.Get
         [NUnit.Framework.Ignore("Only verifying that the sample builds")]
         public async Task GetPrivateLinkResources_KeyVaultListPrivateLinkResources()
         {
-            // Generated from example definition:
+            // Generated from example definition: specification/mockSwagger/examples/listPrivateLinkResources.json
             // this example is just showing the usage of "PrivateLinkResources_ListByVault" operation, for the dependent resources, they will have to be created separately.
 
             // get your azure access token, for more details of how Azure SDK get your access token, please refer to https://learn.microsoft.com/en-us/dotnet/azure/sdk/authentication?tabs=command-line

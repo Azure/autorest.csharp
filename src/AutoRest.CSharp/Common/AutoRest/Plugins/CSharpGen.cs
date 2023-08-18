@@ -36,16 +36,13 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                 {
                     await AutoRestLogger.Warning("skip generating sdk code because 'mgmt-debug.skip-codegen' is true.");
                     if (Configuration.MgmtTestConfiguration is not null)
-                    {
-                        project.AddDirectory(Configuration.OutputFolder);
-                        MgmtTestTarget.Execute(project, codeModel, sourceInputModel);
-                    }
+                        await MgmtTestTarget.ExecuteAsync(project, codeModel, null);
                 }
                 else
                 {
                     await MgmtTarget.ExecuteAsync(project, codeModel, sourceInputModel);
                     if (Configuration.MgmtTestConfiguration is not null)
-                        MgmtTestTarget.Execute(project, codeModel, sourceInputModel);
+                        await MgmtTestTarget.ExecuteAsync (project, codeModel, sourceInputModel);
                 }
             }
             else

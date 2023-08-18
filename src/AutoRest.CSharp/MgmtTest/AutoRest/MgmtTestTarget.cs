@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
+using System.Threading.Tasks;
 using AutoRest.CSharp.Input;
 using AutoRest.CSharp.Input.Source;
 using AutoRest.CSharp.MgmtTest.AutoRest;
@@ -15,13 +16,29 @@ namespace AutoRest.CSharp.AutoRest.Plugins
 {
     internal class MgmtTestTarget
     {
-        public static void Execute(GeneratedCodeWorkspace project, CodeModel codeModel, SourceInputModel sourceInputModel)
+        private const string SOURCE_DEFAULT_FOLDER_NAME = "src";
+        private const string SOURCE_DEFAULT_OUTPUT_PATH = $"/{SOURCE_DEFAULT_FOLDER_NAME}/Generated";
+        private const string MOCK_TEST_DEFAULT_OUTPUT_PATH = "/tests/Generated";
+        private const string SAMPLE_DEFAULT_OUTPUT_PATH = "/samples/Generated";
+
+        public static async Task ExecuteAsync(GeneratedCodeWorkspace project, CodeModel codeModel, SourceInputModel? sourceInputModel)
         {
             Debug.Assert(codeModel.TestModel is not null);
             Debug.Assert(Configuration.MgmtTestConfiguration is not null);
 
-            // construct the MgmtTestOutputLibrary
-            var library = new MgmtTestOutputLibrary(codeModel, sourceInputModel);
+            MgmtTestOutputLibrary? library = null;
+            if (sourceInputModel == null)
+            {
+                var sourceFolder = GetSourceFolder();
+                var sourceCodeProject = new SourceCodeProject(sourceFolder, Configuration.SharedSourceFolders);
+                sourceInputModel = new SourceInputModel(await sourceCodeProject.GetCompilationAsync());
+                library = new MgmtTestOutputLibrary(codeModel, sourceInputModel);
+                project.AddDirectory(sourceFolder);
+            }
+            else
+            {
+                library = new MgmtTestOutputLibrary(codeModel, sourceInputModel);
+            }
 
             if (Configuration.MgmtTestConfiguration.Mock)
             {
@@ -44,7 +61,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
 
         private static void WriteMockTests(GeneratedCodeWorkspace project, MgmtTestOutputLibrary library)
         {
-            string outputFolder = GetOutputFolder();
+            string outputFolder = GetOutputFolder(MOCK_TEST_DEFAULT_OUTPUT_PATH);
 
             // write the collection mock tests
             foreach (var collectionTest in library.ResourceCollectionMockTests)
@@ -72,7 +89,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
 
         private static void WriteSamples(GeneratedCodeWorkspace project, MgmtTestOutputLibrary library)
         {
-            string outputFolder = GetOutputFolder();
+            string outputFolder = GetOutputFolder(SAMPLE_DEFAULT_OUTPUT_PATH);
 
             var names = new Dictionary<string, int>();
             foreach (var sample in library.Samples)
@@ -95,15 +112,6 @@ namespace AutoRest.CSharp.AutoRest.Plugins
 
             names[name] = 1;
             return name;
-        }
-
-        private static string GetOutputFolder()
-        {
-            if (Configuration.MgmtTestConfiguration == null ||
-                string.IsNullOrEmpty(Configuration.MgmtTestConfiguration.OutputFolder))
-                return Configuration.OutputFolder;
-            else
-                return Configuration.MgmtTestConfiguration.OutputFolder;
         }
 
         private static void ClearOutputFolder()
@@ -139,6 +147,49 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                     catch { }
                 }
             }
+        }
+
+        private static string GetOutputFolder(string defaultOutputPath)
+        {
+            if (!string.IsNullOrEmpty(Configuration.MgmtTestConfiguration?.OutputFolder))
+                return Configuration.MgmtTestConfiguration.OutputFolder;
+
+            string defaultFolder = Path.GetFullPath(Configuration.OutputFolder);
+            // if the output folder is not given explicitly, try to figure it out from general output folder if possible according to default folder structure:
+            // Azure.ResourceManager.XXX \ src \ Generated <- default sdk source output folder
+            //                           \ samples(or tests) \ Generated <- default sample output folder defined in msbuild
+            string normalizedFolder = defaultFolder.Trim('/', '\\').Replace('\\', '/');
+            if (normalizedFolder.EndsWith(SOURCE_DEFAULT_OUTPUT_PATH, StringComparison.InvariantCultureIgnoreCase))
+                return Path.Combine(defaultFolder, $"../..", defaultOutputPath);
+            else if (normalizedFolder.EndsWith(SAMPLE_DEFAULT_OUTPUT_PATH, StringComparison.InvariantCultureIgnoreCase) || normalizedFolder.EndsWith(MOCK_TEST_DEFAULT_OUTPUT_PATH, StringComparison.InvariantCultureIgnoreCase))
+                return defaultFolder;
+            else
+                throw new InvalidOperationException("'sample-gen.output-folder' is not configured and can't figure it out from give general output-folder");
+        }
+
+        private static string GetSourceFolder()
+        {
+            if (!string.IsNullOrEmpty(Configuration.MgmtTestConfiguration?.SourceCodePath))
+                return Configuration.MgmtTestConfiguration.SourceCodePath;
+
+            if (!string.IsNullOrEmpty(Configuration.MgmtTestConfiguration?.OutputFolder) &&
+               !string.Equals(Configuration.OutputFolder, Configuration.MgmtTestConfiguration.OutputFolder))
+            {
+                // if the general output folder and our output folder is different, the general output folder should point to the sdk code folder src\Generated
+                return Path.Combine(Configuration.OutputFolder, "..");
+            }
+
+            string defaultFolder = Path.GetFullPath(Configuration.OutputFolder);
+            // if only the general output folder is given or it's the same as our output folder. Let's try to figure it out from given output folder if possible according to default folder structure:
+            // Azure.ResourceManager.XXX \ src <- default sdk source folder
+            //                           \ samples(or tests) \ Generated <- default sample output folder defined in msbuild
+            string normalizedFolder = defaultFolder.Trim('/', '\\').Replace('\\', '/');
+            if (normalizedFolder.EndsWith(SOURCE_DEFAULT_OUTPUT_PATH, StringComparison.InvariantCultureIgnoreCase))
+                return Path.Combine(defaultFolder, "..");
+            else if (normalizedFolder.EndsWith(SAMPLE_DEFAULT_OUTPUT_PATH, StringComparison.InvariantCultureIgnoreCase) || normalizedFolder.EndsWith(MOCK_TEST_DEFAULT_OUTPUT_PATH, StringComparison.InvariantCultureIgnoreCase))
+                return Path.Combine(defaultFolder, "../..", SOURCE_DEFAULT_FOLDER_NAME);
+            else
+                throw new InvalidOperationException("'sample-gen.source-path' is not configured and can't figure it out from give output-folder and sample-gen.output-folder");
         }
 
         private static IDictionary<GeneratedCodeWorkspace, ISet<string>> _addedProjectFilenames = new Dictionary<GeneratedCodeWorkspace, ISet<string>>();
