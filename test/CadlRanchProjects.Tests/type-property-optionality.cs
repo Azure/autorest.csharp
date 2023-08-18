@@ -7,8 +7,8 @@ using System.Xml;
 using AutoRest.TestServer.Tests.Infrastructure;
 using Azure;
 using NUnit.Framework;
-using _Type.Property.Optional;
-using _Type.Property.Optional.Models;
+using _Type.Property.Optionality;
+using _Type.Property.Optionality.Models;
 
 namespace CadlRanchProjects.Tests
 {
