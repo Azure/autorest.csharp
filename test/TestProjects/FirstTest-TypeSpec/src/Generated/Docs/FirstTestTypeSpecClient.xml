@@ -1,26 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <doc>
   <members>
-    <member name="TopActionAsync(DateTimeOffset,CancellationToken)">
-      <example>
-This sample shows how to call TopActionAsync with required parameters.
-<code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
-FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
-
-Response<Thing> response = await client.TopActionAsync(DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"));
-]]></code></example>
-    </member>
-    <member name="TopAction(DateTimeOffset,CancellationToken)">
-      <example>
-This sample shows how to call TopAction with required parameters.
-<code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
-FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
-
-Response<Thing> response = client.TopAction(DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"));
-]]></code></example>
-    </member>
+    <member name="TopActionAsync(DateTimeOffset,CancellationToken)"></member>
+    <member name="TopAction(DateTimeOffset,CancellationToken)"></member>
     <member name="TopActionAsync(DateTimeOffset,RequestContext)">
       <example>
 This sample shows how to call TopActionAsync with required parameters and parse the result.
@@ -293,54 +275,8 @@ Console.WriteLine(result.GetProperty("optionalNullableList")[0].ToString());
 Console.WriteLine(result.GetProperty("requiredNullableList")[0].ToString());
 ]]></code></example>
     </member>
-    <member name="AnonymousBodyAsync(Thing,CancellationToken)">
-      <example>
-This sample shows how to call AnonymousBodyAsync with required parameters.
-<code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
-FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
-
-Thing thing = new Thing("<name>", "<requiredUnion>", "<requiredBadDescription>", new int[]
-{
-1234
-})
-{
-    OptionalLiteralString = ThingOptionalLiteralString.Reject,
-    OptionalLiteralInt = ThingOptionalLiteralInt._456,
-    OptionalLiteralFloat = ThingOptionalLiteralFloat._456,
-    OptionalLiteralBool = true,
-    OptionalNullableList =
-{
-1234
-},
-};
-Response<Thing> response = await client.AnonymousBodyAsync(thing);
-]]></code></example>
-    </member>
-    <member name="AnonymousBody(Thing,CancellationToken)">
-      <example>
-This sample shows how to call AnonymousBody with required parameters.
-<code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
-FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
-
-Thing thing = new Thing("<name>", "<requiredUnion>", "<requiredBadDescription>", new int[]
-{
-1234
-})
-{
-    OptionalLiteralString = ThingOptionalLiteralString.Reject,
-    OptionalLiteralInt = ThingOptionalLiteralInt._456,
-    OptionalLiteralFloat = ThingOptionalLiteralFloat._456,
-    OptionalLiteralBool = true,
-    OptionalNullableList =
-{
-1234
-},
-};
-Response<Thing> response = client.AnonymousBody(thing);
-]]></code></example>
-    </member>
+    <member name="AnonymousBodyAsync(Thing,CancellationToken)"></member>
+    <member name="AnonymousBody(Thing,CancellationToken)"></member>
     <member name="AnonymousBodyAsync(RequestContent,RequestContext)">
       <example>
 This sample shows how to call AnonymousBodyAsync with required request content, and how to parse the result.
@@ -697,128 +633,8 @@ Console.WriteLine(result.GetProperty("optionalNullableList")[0].ToString());
 Console.WriteLine(result.GetProperty("requiredNullableList")[0].ToString());
 ]]></code></example>
     </member>
-    <member name="HelloAgainAsync(string,string,RoundTripModel,CancellationToken)">
-      <example>
-This sample shows how to call HelloAgainAsync with required parameters.
-<code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
-FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
-
-RoundTripModel action = new RoundTripModel("<requiredString>", 1234, new StringFixedEnum?[]
-{
-num.One
-}, new Dictionary<string, StringExtensibleEnum?>()
-{
-    ["key"] = StringExtensibleEnum.One,
-}, new Thing("<name>", "<requiredUnion>", "<requiredBadDescription>", new int[]
-{
-1234
-})
-{
-    OptionalLiteralString = ThingOptionalLiteralString.Reject,
-    OptionalLiteralInt = ThingOptionalLiteralInt._456,
-    OptionalLiteralFloat = ThingOptionalLiteralFloat._456,
-    OptionalLiteralBool = true,
-    OptionalNullableList =
-{
-1234
-},
-}, BinaryData.FromObjectAsJson(new Dictionary<string, object>()), new Dictionary<string, BinaryData>()
-{
-    ["key"] = BinaryData.FromObjectAsJson(new Dictionary<string, object>()),
-}, new ModelWithRequiredNullableProperties(1234, StringExtensibleEnum.One, StringFixedEnum.One))
-{
-    IntExtensibleEnum = IntExtensibleEnum.One,
-    IntExtensibleEnumCollection =
-{
-eEnum.One
-},
-    FloatExtensibleEnum = FloatExtensibleEnum.One,
-    FloatExtensibleEnumCollection =
-{
-bleEnum.One
-},
-    FloatFixedEnum = FloatFixedEnum.One,
-    FloatFixedEnumCollection =
-{
-um.One
-},
-    IntFixedEnum = IntFixedEnum.One,
-    IntFixedEnumCollection =
-{
-.One
-},
-    StringFixedEnum = StringFixedEnum.One,
-    OptionalUnknown = BinaryData.FromObjectAsJson(new Dictionary<string, object>()),
-    OptionalRecordUnknown =
-{
-naryData.FromObjectAsJson(new Dictionary<string, object>()),
-},
-};
-Response<RoundTripModel> response = await client.HelloAgainAsync("<p2>", "<p1>", action);
-]]></code></example>
-    </member>
-    <member name="HelloAgain(string,string,RoundTripModel,CancellationToken)">
-      <example>
-This sample shows how to call HelloAgain with required parameters.
-<code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
-FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
-
-RoundTripModel action = new RoundTripModel("<requiredString>", 1234, new StringFixedEnum?[]
-{
-num.One
-}, new Dictionary<string, StringExtensibleEnum?>()
-{
-    ["key"] = StringExtensibleEnum.One,
-}, new Thing("<name>", "<requiredUnion>", "<requiredBadDescription>", new int[]
-{
-1234
-})
-{
-    OptionalLiteralString = ThingOptionalLiteralString.Reject,
-    OptionalLiteralInt = ThingOptionalLiteralInt._456,
-    OptionalLiteralFloat = ThingOptionalLiteralFloat._456,
-    OptionalLiteralBool = true,
-    OptionalNullableList =
-{
-1234
-},
-}, BinaryData.FromObjectAsJson(new Dictionary<string, object>()), new Dictionary<string, BinaryData>()
-{
-    ["key"] = BinaryData.FromObjectAsJson(new Dictionary<string, object>()),
-}, new ModelWithRequiredNullableProperties(1234, StringExtensibleEnum.One, StringFixedEnum.One))
-{
-    IntExtensibleEnum = IntExtensibleEnum.One,
-    IntExtensibleEnumCollection =
-{
-eEnum.One
-},
-    FloatExtensibleEnum = FloatExtensibleEnum.One,
-    FloatExtensibleEnumCollection =
-{
-bleEnum.One
-},
-    FloatFixedEnum = FloatFixedEnum.One,
-    FloatFixedEnumCollection =
-{
-um.One
-},
-    IntFixedEnum = IntFixedEnum.One,
-    IntFixedEnumCollection =
-{
-.One
-},
-    StringFixedEnum = StringFixedEnum.One,
-    OptionalUnknown = BinaryData.FromObjectAsJson(new Dictionary<string, object>()),
-    OptionalRecordUnknown =
-{
-naryData.FromObjectAsJson(new Dictionary<string, object>()),
-},
-};
-Response<RoundTripModel> response = client.HelloAgain("<p2>", "<p1>", action);
-]]></code></example>
-    </member>
+    <member name="HelloAgainAsync(string,string,RoundTripModel,CancellationToken)"></member>
+    <member name="HelloAgain(string,string,RoundTripModel,CancellationToken)"></member>
     <member name="HelloAgainAsync(string,string,RequestContent,RequestContext)">
       <example>
 This sample shows how to call HelloAgainAsync with required parameters and request content, and how to parse the result.
@@ -1691,26 +1507,8 @@ Console.WriteLine(result.GetProperty("modelWithRequiredNullable").GetProperty("r
 Console.WriteLine(result.GetProperty("modelWithRequiredNullable").GetProperty("requiredFixedEnum").ToString());
 ]]></code></example>
     </member>
-    <member name="HelloDemo2Async(CancellationToken)">
-      <example>
-This sample shows how to call HelloDemo2Async.
-<code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
-FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
-
-Response<Thing> response = await client.HelloDemo2Async();
-]]></code></example>
-    </member>
-    <member name="HelloDemo2(CancellationToken)">
-      <example>
-This sample shows how to call HelloDemo2.
-<code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
-FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
-
-Response<Thing> response = client.HelloDemo2();
-]]></code></example>
-    </member>
+    <member name="HelloDemo2Async(CancellationToken)"></member>
+    <member name="HelloDemo2(CancellationToken)"></member>
     <member name="HelloDemo2Async(RequestContext)">
       <example>
 This sample shows how to call HelloDemo2Async with required parameters and parse the result.
@@ -1761,54 +1559,8 @@ Console.WriteLine(result.GetProperty("optionalNullableList")[0].ToString());
 Console.WriteLine(result.GetProperty("requiredNullableList")[0].ToString());
 ]]></code></example>
     </member>
-    <member name="CreateLiteralAsync(Thing,CancellationToken)">
-      <example>
-This sample shows how to call CreateLiteralAsync with required parameters.
-<code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
-FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
-
-Thing body = new Thing("<name>", "<requiredUnion>", "<requiredBadDescription>", new int[]
-{
-1234
-})
-{
-    OptionalLiteralString = ThingOptionalLiteralString.Reject,
-    OptionalLiteralInt = ThingOptionalLiteralInt._456,
-    OptionalLiteralFloat = ThingOptionalLiteralFloat._456,
-    OptionalLiteralBool = true,
-    OptionalNullableList =
-{
-1234
-},
-};
-Response<Thing> response = await client.CreateLiteralAsync(body);
-]]></code></example>
-    </member>
-    <member name="CreateLiteral(Thing,CancellationToken)">
-      <example>
-This sample shows how to call CreateLiteral with required parameters.
-<code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
-FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
-
-Thing body = new Thing("<name>", "<requiredUnion>", "<requiredBadDescription>", new int[]
-{
-1234
-})
-{
-    OptionalLiteralString = ThingOptionalLiteralString.Reject,
-    OptionalLiteralInt = ThingOptionalLiteralInt._456,
-    OptionalLiteralFloat = ThingOptionalLiteralFloat._456,
-    OptionalLiteralBool = true,
-    OptionalNullableList =
-{
-1234
-},
-};
-Response<Thing> response = client.CreateLiteral(body);
-]]></code></example>
-    </member>
+    <member name="CreateLiteralAsync(Thing,CancellationToken)"></member>
+    <member name="CreateLiteral(Thing,CancellationToken)"></member>
     <member name="CreateLiteralAsync(RequestContent,RequestContext)">
       <example>
 This sample shows how to call CreateLiteralAsync with required request content, and how to parse the result.
@@ -1981,26 +1733,8 @@ Console.WriteLine(result.GetProperty("optionalNullableList")[0].ToString());
 Console.WriteLine(result.GetProperty("requiredNullableList")[0].ToString());
 ]]></code></example>
     </member>
-    <member name="HelloLiteralAsync(CancellationToken)">
-      <example>
-This sample shows how to call HelloLiteralAsync.
-<code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
-FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
-
-Response<Thing> response = await client.HelloLiteralAsync();
-]]></code></example>
-    </member>
-    <member name="HelloLiteral(CancellationToken)">
-      <example>
-This sample shows how to call HelloLiteral.
-<code><![CDATA[
-Uri endpoint = new Uri("<https://my-service.azure.com>");
-FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
-
-Response<Thing> response = client.HelloLiteral();
-]]></code></example>
-    </member>
+    <member name="HelloLiteralAsync(CancellationToken)"></member>
+    <member name="HelloLiteral(CancellationToken)"></member>
     <member name="HelloLiteralAsync(RequestContext)">
       <example>
 This sample shows how to call HelloLiteralAsync with required parameters and parse the result.
@@ -2077,16 +1811,8 @@ JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.ToString());
 ]]></code></example>
     </member>
-    <member name="InternalProtocolAsync(Thing,CancellationToken)">
-      <example>
-This sample shows how to call InternalProtocolAsync with required parameters.
-<code>Example_InternalProtocol_AllParameters_Convenience_Async</code></example>
-    </member>
-    <member name="InternalProtocol(Thing,CancellationToken)">
-      <example>
-This sample shows how to call InternalProtocol with required parameters.
-<code>Example_InternalProtocol_AllParameters_Convenience</code></example>
-    </member>
+    <member name="InternalProtocolAsync(Thing,CancellationToken)"></member>
+    <member name="InternalProtocol(Thing,CancellationToken)"></member>
     <member name="InternalProtocolAsync(RequestContent,RequestContext)"></member>
     <member name="InternalProtocol(RequestContent,RequestContext)"></member>
     <member name="StillConvenientValueAsync(CancellationToken)">

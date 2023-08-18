@@ -19,5 +19,22 @@ namespace AutoRest.CSharp.Output.Models
         ProtocolMethodPaging? PagingInfo,
         OperationLongRunning? LongRunning,
         RequestConditionHeaders ConditionHeaderFlag,
-        IEnumerable<DpgOperationSample> Samples);
+        IEnumerable<DpgOperationSample> Samples,
+        ConvenienceMethodOmittingMessage? ConvenienceMethodOmittingMessage)
+    {
+        public bool ShouldGenerateConvenienceMethodRef()
+        {
+            // we only generate the convenience method ref when convenience method and protocol method have the same accessibility
+            var convenienceMethod = ConvenienceMethod?.Signature.Modifiers;
+            var protocolMethod = ProtocolMethodSignature.Modifiers;
+
+            if (convenienceMethod?.HasFlag(MethodSignatureModifiers.Public) is true && protocolMethod.HasFlag(MethodSignatureModifiers.Public) is true)
+                return true;
+
+            if (convenienceMethod?.HasFlag(MethodSignatureModifiers.Internal) is true && protocolMethod.HasFlag(MethodSignatureModifiers.Internal) is true)
+                return true;
+
+            return false;
+        }
+    }
 }
