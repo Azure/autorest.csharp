@@ -712,9 +712,9 @@
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\CadlRanchProjects\\type\\property\\nullable\\src\\Generated -n"
     },
-    "typespec-type/property/optional": {
+    "typespec-type/property/optionality": {
       "commandName": "Project",
-      "commandLineArgs": "--standalone $(SolutionDir)\\test\\CadlRanchProjects\\type\\property\\optional\\src\\Generated -n"
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\CadlRanchProjects\\type\\property\\optionality\\src\\Generated -n"
     },
     "typespec-type/property/value-types": {
       "commandName": "Project",
