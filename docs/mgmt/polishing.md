@@ -18,7 +18,7 @@
 A mechanism of renaming is introduced in the generator to unify the casing of some words.
 
 ```yaml
-rename-rules:
+acronym-mapping:
   Ip: IP
   Ips: IPs
 ```
@@ -43,7 +43,7 @@ public partial class PublicIPAddress
 ```
 The default logic to create a variable name from a property name is usually lower case the first letter. But this introduces a weird combination of `iPs` in the internal constructor. To fix this, you could manually assign a variable version of the replaced key:
 ```yaml
-rename-rules:
+acronym-mapping:
   Ip: IP
   Ips: IPs|ips
 ```

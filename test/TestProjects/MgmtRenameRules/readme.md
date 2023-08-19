@@ -18,7 +18,7 @@ modelerfour:
 keep-orphaned-models:
   VmDiskType
 
-rename-rules:
+acronym-mapping:
   Os: OS
   Ip: IP
   Ips: IPs
