@@ -10,7 +10,7 @@ using Azure.Core;
 
 namespace _Type.Union.Models
 {
-    public partial class ModelWithNamedUnionProperty : IUtf8JsonSerializable
+    internal partial class ModelWithNamedUnionProperty : IUtf8JsonSerializable
     {
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {

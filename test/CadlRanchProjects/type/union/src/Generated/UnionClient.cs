@@ -53,7 +53,7 @@ namespace _Type.Union
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="input"/> is null. </exception>
         /// <include file="Docs/UnionClient.xml" path="doc/members/member[@name='SendIntAsync(ModelWithSimpleUnionProperty,CancellationToken)']/*" />
-        public virtual async Task<Response> SendIntAsync(ModelWithSimpleUnionProperty input, CancellationToken cancellationToken = default)
+        internal virtual async Task<Response> SendIntAsync(ModelWithSimpleUnionProperty input, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(input, nameof(input));
 
@@ -66,7 +66,7 @@ namespace _Type.Union
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="input"/> is null. </exception>
         /// <include file="Docs/UnionClient.xml" path="doc/members/member[@name='SendInt(ModelWithSimpleUnionProperty,CancellationToken)']/*" />
-        public virtual Response SendInt(ModelWithSimpleUnionProperty input, CancellationToken cancellationToken = default)
+        internal virtual Response SendInt(ModelWithSimpleUnionProperty input, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(input, nameof(input));
 
@@ -75,17 +75,13 @@ namespace _Type.Union
             return response;
         }
 
+        // The convenience method of this operation is made internal because this operation directly or indirectly uses a low confident type, for instance, unions, literal types with number values, etc.
         /// <summary>
         /// [Protocol Method]
         /// <list type="bullet">
         /// <item>
         /// <description>
         /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
-        /// </description>
-        /// </item>
-        /// <item>
-        /// <description>
-        /// Please try the simpler <see cref="SendIntAsync(ModelWithSimpleUnionProperty,CancellationToken)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>
@@ -114,17 +110,13 @@ namespace _Type.Union
             }
         }
 
+        // The convenience method of this operation is made internal because this operation directly or indirectly uses a low confident type, for instance, unions, literal types with number values, etc.
         /// <summary>
         /// [Protocol Method]
         /// <list type="bullet">
         /// <item>
         /// <description>
         /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
-        /// </description>
-        /// </item>
-        /// <item>
-        /// <description>
-        /// Please try the simpler <see cref="SendInt(ModelWithSimpleUnionProperty,CancellationToken)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>
@@ -157,7 +149,7 @@ namespace _Type.Union
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="input"/> is null. </exception>
         /// <include file="Docs/UnionClient.xml" path="doc/members/member[@name='SendIntArrayAsync(ModelWithSimpleUnionProperty,CancellationToken)']/*" />
-        public virtual async Task<Response> SendIntArrayAsync(ModelWithSimpleUnionProperty input, CancellationToken cancellationToken = default)
+        internal virtual async Task<Response> SendIntArrayAsync(ModelWithSimpleUnionProperty input, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(input, nameof(input));
 
@@ -170,7 +162,7 @@ namespace _Type.Union
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="input"/> is null. </exception>
         /// <include file="Docs/UnionClient.xml" path="doc/members/member[@name='SendIntArray(ModelWithSimpleUnionProperty,CancellationToken)']/*" />
-        public virtual Response SendIntArray(ModelWithSimpleUnionProperty input, CancellationToken cancellationToken = default)
+        internal virtual Response SendIntArray(ModelWithSimpleUnionProperty input, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(input, nameof(input));
 
@@ -179,17 +171,13 @@ namespace _Type.Union
             return response;
         }
 
+        // The convenience method of this operation is made internal because this operation directly or indirectly uses a low confident type, for instance, unions, literal types with number values, etc.
         /// <summary>
         /// [Protocol Method]
         /// <list type="bullet">
         /// <item>
         /// <description>
         /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
-        /// </description>
-        /// </item>
-        /// <item>
-        /// <description>
-        /// Please try the simpler <see cref="SendIntArrayAsync(ModelWithSimpleUnionProperty,CancellationToken)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>
@@ -218,17 +206,13 @@ namespace _Type.Union
             }
         }
 
+        // The convenience method of this operation is made internal because this operation directly or indirectly uses a low confident type, for instance, unions, literal types with number values, etc.
         /// <summary>
         /// [Protocol Method]
         /// <list type="bullet">
         /// <item>
         /// <description>
         /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
-        /// </description>
-        /// </item>
-        /// <item>
-        /// <description>
-        /// Please try the simpler <see cref="SendIntArray(ModelWithSimpleUnionProperty,CancellationToken)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>
@@ -261,7 +245,7 @@ namespace _Type.Union
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="input"/> is null. </exception>
         /// <include file="Docs/UnionClient.xml" path="doc/members/member[@name='SendFirstNamedUnionValueAsync(ModelWithNamedUnionProperty,CancellationToken)']/*" />
-        public virtual async Task<Response> SendFirstNamedUnionValueAsync(ModelWithNamedUnionProperty input, CancellationToken cancellationToken = default)
+        internal virtual async Task<Response> SendFirstNamedUnionValueAsync(ModelWithNamedUnionProperty input, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(input, nameof(input));
 
@@ -274,7 +258,7 @@ namespace _Type.Union
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="input"/> is null. </exception>
         /// <include file="Docs/UnionClient.xml" path="doc/members/member[@name='SendFirstNamedUnionValue(ModelWithNamedUnionProperty,CancellationToken)']/*" />
-        public virtual Response SendFirstNamedUnionValue(ModelWithNamedUnionProperty input, CancellationToken cancellationToken = default)
+        internal virtual Response SendFirstNamedUnionValue(ModelWithNamedUnionProperty input, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(input, nameof(input));
 
@@ -283,17 +267,13 @@ namespace _Type.Union
             return response;
         }
 
+        // The convenience method of this operation is made internal because this operation directly or indirectly uses a low confident type, for instance, unions, literal types with number values, etc.
         /// <summary>
         /// [Protocol Method]
         /// <list type="bullet">
         /// <item>
         /// <description>
         /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
-        /// </description>
-        /// </item>
-        /// <item>
-        /// <description>
-        /// Please try the simpler <see cref="SendFirstNamedUnionValueAsync(ModelWithNamedUnionProperty,CancellationToken)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>
@@ -322,17 +302,13 @@ namespace _Type.Union
             }
         }
 
+        // The convenience method of this operation is made internal because this operation directly or indirectly uses a low confident type, for instance, unions, literal types with number values, etc.
         /// <summary>
         /// [Protocol Method]
         /// <list type="bullet">
         /// <item>
         /// <description>
         /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
-        /// </description>
-        /// </item>
-        /// <item>
-        /// <description>
-        /// Please try the simpler <see cref="SendFirstNamedUnionValue(ModelWithNamedUnionProperty,CancellationToken)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>
@@ -365,7 +341,7 @@ namespace _Type.Union
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="input"/> is null. </exception>
         /// <include file="Docs/UnionClient.xml" path="doc/members/member[@name='SendSecondNamedUnionValueAsync(ModelWithNamedUnionProperty,CancellationToken)']/*" />
-        public virtual async Task<Response> SendSecondNamedUnionValueAsync(ModelWithNamedUnionProperty input, CancellationToken cancellationToken = default)
+        internal virtual async Task<Response> SendSecondNamedUnionValueAsync(ModelWithNamedUnionProperty input, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(input, nameof(input));
 
@@ -378,7 +354,7 @@ namespace _Type.Union
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="input"/> is null. </exception>
         /// <include file="Docs/UnionClient.xml" path="doc/members/member[@name='SendSecondNamedUnionValue(ModelWithNamedUnionProperty,CancellationToken)']/*" />
-        public virtual Response SendSecondNamedUnionValue(ModelWithNamedUnionProperty input, CancellationToken cancellationToken = default)
+        internal virtual Response SendSecondNamedUnionValue(ModelWithNamedUnionProperty input, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(input, nameof(input));
 
@@ -387,17 +363,13 @@ namespace _Type.Union
             return response;
         }
 
+        // The convenience method of this operation is made internal because this operation directly or indirectly uses a low confident type, for instance, unions, literal types with number values, etc.
         /// <summary>
         /// [Protocol Method]
         /// <list type="bullet">
         /// <item>
         /// <description>
         /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
-        /// </description>
-        /// </item>
-        /// <item>
-        /// <description>
-        /// Please try the simpler <see cref="SendSecondNamedUnionValueAsync(ModelWithNamedUnionProperty,CancellationToken)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>
@@ -426,17 +398,13 @@ namespace _Type.Union
             }
         }
 
+        // The convenience method of this operation is made internal because this operation directly or indirectly uses a low confident type, for instance, unions, literal types with number values, etc.
         /// <summary>
         /// [Protocol Method]
         /// <list type="bullet">
         /// <item>
         /// <description>
         /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
-        /// </description>
-        /// </item>
-        /// <item>
-        /// <description>
-        /// Please try the simpler <see cref="SendSecondNamedUnionValue(ModelWithNamedUnionProperty,CancellationToken)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>

@@ -92,17 +92,73 @@
            "IsRequired": true,
            "IsReadOnly": false
           }
+         ],
+         "DerivedModels": [
+          {
+           "$id": "15",
+           "Name": "Model1",
+           "Namespace": "Type.Union",
+           "Description": "The first one of the unioned model type.",
+           "IsNullable": false,
+           "BaseModel": {
+            "$ref": "12"
+           },
+           "Usage": "None",
+           "Properties": [
+            {
+             "$id": "16",
+             "Name": "prop1",
+             "SerializedName": "prop1",
+             "Description": "",
+             "Type": {
+              "$id": "17",
+              "Name": "int32",
+              "Kind": "Int32",
+              "IsNullable": false
+             },
+             "IsRequired": true,
+             "IsReadOnly": false
+            }
+           ]
+          },
+          {
+           "$id": "18",
+           "Name": "Model2",
+           "Namespace": "Type.Union",
+           "Description": "The second one of the unioned model type.",
+           "IsNullable": false,
+           "BaseModel": {
+            "$ref": "12"
+           },
+           "Usage": "Input",
+           "Properties": [
+            {
+             "$id": "19",
+             "Name": "prop2",
+             "SerializedName": "prop2",
+             "Description": "",
+             "Type": {
+              "$id": "20",
+              "Name": "int32",
+              "Kind": "Int32",
+              "IsNullable": false
+             },
+             "IsRequired": true,
+             "IsReadOnly": false
+            }
+           ]
+          }
          ]
         },
         "Usage": "Input",
         "Properties": [
          {
-          "$id": "15",
+          "$id": "21",
           "Name": "prop1",
           "SerializedName": "prop1",
           "Description": "",
           "Type": {
-           "$id": "16",
+           "$id": "22",
            "Name": "int32",
            "Kind": "Int32",
            "IsNullable": false
@@ -113,31 +169,7 @@
         ]
        },
        {
-        "$id": "17",
-        "Name": "Model2",
-        "Namespace": "Type.Union",
-        "Description": "The second one of the unioned model type.",
-        "IsNullable": false,
-        "BaseModel": {
-         "$ref": "12"
-        },
-        "Usage": "Input",
-        "Properties": [
-         {
-          "$id": "18",
-          "Name": "prop2",
-          "SerializedName": "prop2",
-          "Description": "",
-          "Type": {
-           "$id": "19",
-           "Name": "int32",
-           "Kind": "Int32",
-           "IsNullable": false
-          },
-          "IsRequired": true,
-          "IsReadOnly": false
-         }
-        ]
+        "$ref": "18"
        }
       ],
       "IsNullable": false
@@ -154,27 +186,27 @@
    "$ref": "11"
   },
   {
-   "$ref": "17"
+   "$ref": "18"
   }
  ],
  "Clients": [
   {
-   "$id": "20",
+   "$id": "23",
    "Name": "UnionClient",
    "Description": "Test for type of union.",
    "Operations": [
     {
-     "$id": "21",
+     "$id": "24",
      "Name": "sendInt",
      "ResourceName": "Union",
      "Parameters": [
       {
-       "$id": "22",
+       "$id": "25",
        "Name": "host",
        "NameInRequest": "host",
        "Description": "TestServer endpoint",
        "Type": {
-        "$id": "23",
+        "$id": "26",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -189,9 +221,9 @@
        "Explode": false,
        "Kind": "Client",
        "DefaultValue": {
-        "$id": "24",
+        "$id": "27",
         "Type": {
-         "$id": "25",
+         "$id": "28",
          "Name": "String",
          "Kind": "String",
          "IsNullable": false
@@ -200,7 +232,7 @@
        }
       },
       {
-       "$id": "26",
+       "$id": "29",
        "Name": "input",
        "NameInRequest": "input",
        "Type": {
@@ -217,36 +249,9 @@
        "Kind": "Method"
       },
       {
-       "$id": "27",
+       "$id": "30",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
-       "Type": {
-        "$id": "28",
-        "Name": "String",
-        "Kind": "String",
-        "IsNullable": false
-       },
-       "Location": "Header",
-       "IsApiVersion": false,
-       "IsResourceParameter": false,
-       "IsContentType": true,
-       "IsRequired": true,
-       "IsEndpoint": false,
-       "SkipUrlEncoding": false,
-       "Explode": false,
-       "Kind": "Constant",
-       "DefaultValue": {
-        "$id": "29",
-        "Type": {
-         "$ref": "28"
-        },
-        "Value": "application/json"
-       }
-      },
-      {
-       "$id": "30",
-       "Name": "accept",
-       "NameInRequest": "Accept",
        "Type": {
         "$id": "31",
         "Name": "String",
@@ -256,7 +261,7 @@
        "Location": "Header",
        "IsApiVersion": false,
        "IsResourceParameter": false,
-       "IsContentType": false,
+       "IsContentType": true,
        "IsRequired": true,
        "IsEndpoint": false,
        "SkipUrlEncoding": false,
@@ -272,11 +277,38 @@
       },
       {
        "$id": "33",
+       "Name": "accept",
+       "NameInRequest": "Accept",
+       "Type": {
+        "$id": "34",
+        "Name": "String",
+        "Kind": "String",
+        "IsNullable": false
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsRequired": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "35",
+        "Type": {
+         "$ref": "34"
+        },
+        "Value": "application/json"
+       }
+      },
+      {
+       "$id": "36",
        "Name": "apiVersion",
        "NameInRequest": "api-version",
        "Description": "",
        "Type": {
-        "$id": "34",
+        "$id": "37",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -291,9 +323,9 @@
        "Explode": false,
        "Kind": "Client",
        "DefaultValue": {
-        "$id": "35",
+        "$id": "38",
         "Type": {
-         "$id": "36",
+         "$id": "39",
          "Name": "String",
          "Kind": "String",
          "IsNullable": false
@@ -304,7 +336,7 @@
      ],
      "Responses": [
       {
-       "$id": "37",
+       "$id": "40",
        "StatusCodes": [
         200
        ],
@@ -325,15 +357,15 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "38",
+     "$id": "41",
      "Name": "sendIntArray",
      "ResourceName": "Union",
      "Parameters": [
       {
-       "$ref": "22"
+       "$ref": "25"
       },
       {
-       "$id": "39",
+       "$id": "42",
        "Name": "input",
        "NameInRequest": "input",
        "Type": {
@@ -350,11 +382,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "40",
+       "$id": "43",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Type": {
-        "$id": "41",
+        "$id": "44",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -369,19 +401,19 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "42",
+        "$id": "45",
         "Type": {
-         "$ref": "41"
+         "$ref": "44"
         },
         "Value": "application/json"
        }
       },
       {
-       "$id": "43",
+       "$id": "46",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "44",
+        "$id": "47",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -396,20 +428,20 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "45",
+        "$id": "48",
         "Type": {
-         "$ref": "44"
+         "$ref": "47"
         },
         "Value": "application/json"
        }
       },
       {
-       "$ref": "33"
+       "$ref": "36"
       }
      ],
      "Responses": [
       {
-       "$id": "46",
+       "$id": "49",
        "StatusCodes": [
         200
        ],
@@ -430,15 +462,15 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "47",
+     "$id": "50",
      "Name": "sendFirstNamedUnionValue",
      "ResourceName": "Union",
      "Parameters": [
       {
-       "$ref": "22"
+       "$ref": "25"
       },
       {
-       "$id": "48",
+       "$id": "51",
        "Name": "input",
        "NameInRequest": "input",
        "Type": {
@@ -455,11 +487,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "49",
+       "$id": "52",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Type": {
-        "$id": "50",
+        "$id": "53",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -474,19 +506,19 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "51",
+        "$id": "54",
         "Type": {
-         "$ref": "50"
+         "$ref": "53"
         },
         "Value": "application/json"
        }
       },
       {
-       "$id": "52",
+       "$id": "55",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "53",
+        "$id": "56",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -501,20 +533,20 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "54",
+        "$id": "57",
         "Type": {
-         "$ref": "53"
+         "$ref": "56"
         },
         "Value": "application/json"
        }
       },
       {
-       "$ref": "33"
+       "$ref": "36"
       }
      ],
      "Responses": [
       {
-       "$id": "55",
+       "$id": "58",
        "StatusCodes": [
         200
        ],
@@ -535,15 +567,15 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "56",
+     "$id": "59",
      "Name": "sendSecondNamedUnionValue",
      "ResourceName": "Union",
      "Parameters": [
       {
-       "$ref": "22"
+       "$ref": "25"
       },
       {
-       "$id": "57",
+       "$id": "60",
        "Name": "input",
        "NameInRequest": "input",
        "Type": {
@@ -560,11 +592,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "58",
+       "$id": "61",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Type": {
-        "$id": "59",
+        "$id": "62",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -579,19 +611,19 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "60",
+        "$id": "63",
         "Type": {
-         "$ref": "59"
+         "$ref": "62"
         },
         "Value": "application/json"
        }
       },
       {
-       "$id": "61",
+       "$id": "64",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "62",
+        "$id": "65",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -606,20 +638,20 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "63",
+        "$id": "66",
         "Type": {
-         "$ref": "62"
+         "$ref": "65"
         },
         "Value": "application/json"
        }
       },
       {
-       "$ref": "33"
+       "$ref": "36"
       }
      ],
      "Responses": [
       {
-       "$id": "64",
+       "$id": "67",
        "StatusCodes": [
         200
        ],
@@ -641,7 +673,7 @@
     }
    ],
    "Protocol": {
-    "$id": "65"
+    "$id": "68"
    },
    "Creatable": true
   }

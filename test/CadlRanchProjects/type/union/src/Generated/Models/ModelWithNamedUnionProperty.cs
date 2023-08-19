@@ -11,12 +11,12 @@ using Azure.Core;
 namespace _Type.Union.Models
 {
     /// <summary> The ModelWithNamedUnionProperty. </summary>
-    public partial class ModelWithNamedUnionProperty
+    internal partial class ModelWithNamedUnionProperty
     {
         /// <summary> Initializes a new instance of ModelWithNamedUnionProperty. </summary>
         /// <param name="namedUnion"></param>
         /// <exception cref="ArgumentNullException"> <paramref name="namedUnion"/> is null. </exception>
-        public ModelWithNamedUnionProperty(Model1 namedUnion)
+        public ModelWithNamedUnionProperty(object namedUnion)
         {
             Argument.AssertNotNull(namedUnion, nameof(namedUnion));
 
@@ -24,6 +24,6 @@ namespace _Type.Union.Models
         }
 
         /// <summary> Gets the named union. </summary>
-        public Model1 NamedUnion { get; }
+        public object NamedUnion { get; }
     }
 }

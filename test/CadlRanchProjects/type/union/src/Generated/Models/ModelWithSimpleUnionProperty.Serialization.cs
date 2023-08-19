@@ -10,13 +10,13 @@ using Azure.Core;
 
 namespace _Type.Union.Models
 {
-    public partial class ModelWithSimpleUnionProperty : IUtf8JsonSerializable
+    internal partial class ModelWithSimpleUnionProperty : IUtf8JsonSerializable
     {
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
             writer.WriteStartObject();
             writer.WritePropertyName("simpleUnion"u8);
-            writer.WriteNumberValue(SimpleUnion);
+            writer.WriteObjectValue(SimpleUnion);
             writer.WriteEndObject();
         }
 

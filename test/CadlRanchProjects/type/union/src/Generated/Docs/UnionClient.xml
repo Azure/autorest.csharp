@@ -2,26 +2,8 @@
 <doc>
   <members>
     <member name="SendIntAsync(ModelWithSimpleUnionProperty,CancellationToken)">
-<example>
-This sample shows how to call SendIntAsync with required parameters.
-<code><![CDATA[
-var client = new UnionClient();
-
-var input = new ModelWithSimpleUnionProperty(1234);
-var result = await client.SendIntAsync(input);
-]]></code>
-</example>
     </member>
     <member name="SendInt(ModelWithSimpleUnionProperty,CancellationToken)">
-<example>
-This sample shows how to call SendInt with required parameters.
-<code><![CDATA[
-var client = new UnionClient();
-
-var input = new ModelWithSimpleUnionProperty(1234);
-var result = client.SendInt(input);
-]]></code>
-</example>
     </member>
     <member name="SendIntAsync(RequestContent,RequestContext)">
 <example>
@@ -54,26 +36,8 @@ Console.WriteLine(response.Status);
 </example>
     </member>
     <member name="SendIntArrayAsync(ModelWithSimpleUnionProperty,CancellationToken)">
-<example>
-This sample shows how to call SendIntArrayAsync with required parameters.
-<code><![CDATA[
-var client = new UnionClient();
-
-var input = new ModelWithSimpleUnionProperty(1234);
-var result = await client.SendIntArrayAsync(input);
-]]></code>
-</example>
     </member>
     <member name="SendIntArray(ModelWithSimpleUnionProperty,CancellationToken)">
-<example>
-This sample shows how to call SendIntArray with required parameters.
-<code><![CDATA[
-var client = new UnionClient();
-
-var input = new ModelWithSimpleUnionProperty(1234);
-var result = client.SendIntArray(input);
-]]></code>
-</example>
     </member>
     <member name="SendIntArrayAsync(RequestContent,RequestContext)">
 <example>
@@ -106,26 +70,8 @@ Console.WriteLine(response.Status);
 </example>
     </member>
     <member name="SendFirstNamedUnionValueAsync(ModelWithNamedUnionProperty,CancellationToken)">
-<example>
-This sample shows how to call SendFirstNamedUnionValueAsync with required parameters.
-<code><![CDATA[
-var client = new UnionClient();
-
-var input = new ModelWithNamedUnionProperty(new Model1("<name>", 1234));
-var result = await client.SendFirstNamedUnionValueAsync(input);
-]]></code>
-</example>
     </member>
     <member name="SendFirstNamedUnionValue(ModelWithNamedUnionProperty,CancellationToken)">
-<example>
-This sample shows how to call SendFirstNamedUnionValue with required parameters.
-<code><![CDATA[
-var client = new UnionClient();
-
-var input = new ModelWithNamedUnionProperty(new Model1("<name>", 1234));
-var result = client.SendFirstNamedUnionValue(input);
-]]></code>
-</example>
     </member>
     <member name="SendFirstNamedUnionValueAsync(RequestContent,RequestContext)">
 <example>
@@ -158,26 +104,8 @@ Console.WriteLine(response.Status);
 </example>
     </member>
     <member name="SendSecondNamedUnionValueAsync(ModelWithNamedUnionProperty,CancellationToken)">
-<example>
-This sample shows how to call SendSecondNamedUnionValueAsync with required parameters.
-<code><![CDATA[
-var client = new UnionClient();
-
-var input = new ModelWithNamedUnionProperty(new Model1("<name>", 1234));
-var result = await client.SendSecondNamedUnionValueAsync(input);
-]]></code>
-</example>
     </member>
     <member name="SendSecondNamedUnionValue(ModelWithNamedUnionProperty,CancellationToken)">
-<example>
-This sample shows how to call SendSecondNamedUnionValue with required parameters.
-<code><![CDATA[
-var client = new UnionClient();
-
-var input = new ModelWithNamedUnionProperty(new Model1("<name>", 1234));
-var result = client.SendSecondNamedUnionValue(input);
-]]></code>
-</example>
     </member>
     <member name="SendSecondNamedUnionValueAsync(RequestContent,RequestContext)">
 <example>

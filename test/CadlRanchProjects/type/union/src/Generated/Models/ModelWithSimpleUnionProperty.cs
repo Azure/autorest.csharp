@@ -5,19 +5,25 @@
 
 #nullable disable
 
+using System;
+using Azure.Core;
+
 namespace _Type.Union.Models
 {
     /// <summary> The ModelWithSimpleUnionProperty. </summary>
-    public partial class ModelWithSimpleUnionProperty
+    internal partial class ModelWithSimpleUnionProperty
     {
         /// <summary> Initializes a new instance of ModelWithSimpleUnionProperty. </summary>
         /// <param name="simpleUnion"></param>
-        public ModelWithSimpleUnionProperty(int simpleUnion)
+        /// <exception cref="ArgumentNullException"> <paramref name="simpleUnion"/> is null. </exception>
+        public ModelWithSimpleUnionProperty(object simpleUnion)
         {
+            Argument.AssertNotNull(simpleUnion, nameof(simpleUnion));
+
             SimpleUnion = simpleUnion;
         }
 
         /// <summary> Gets the simple union. </summary>
-        public int SimpleUnion { get; }
+        public object SimpleUnion { get; }
     }
 }

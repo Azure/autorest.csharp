@@ -14,7 +14,6 @@ using Azure;
 using Azure.Core;
 using Azure.Identity;
 using NUnit.Framework;
-using _Type.Union.Models;
 
 namespace _Type.Union.Samples
 {
@@ -82,16 +81,6 @@ namespace _Type.Union.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_SendInt_Convenience_Async()
-        {
-            var client = new UnionClient();
-
-            var input = new ModelWithSimpleUnionProperty(1234);
-            var result = await client.SendIntAsync(input);
-        }
-
-        [Test]
-        [Ignore("Only validating compilation of examples")]
         public void Example_SendIntArray()
         {
             var client = new UnionClient();
@@ -148,16 +137,6 @@ namespace _Type.Union.Samples
 
             Response response = await client.SendIntArrayAsync(RequestContent.Create(data));
             Console.WriteLine(response.Status);
-        }
-
-        [Test]
-        [Ignore("Only validating compilation of examples")]
-        public async Task Example_SendIntArray_Convenience_Async()
-        {
-            var client = new UnionClient();
-
-            var input = new ModelWithSimpleUnionProperty(1234);
-            var result = await client.SendIntArrayAsync(input);
         }
 
         [Test]
@@ -222,16 +201,6 @@ namespace _Type.Union.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_SendFirstNamedUnionValue_Convenience_Async()
-        {
-            var client = new UnionClient();
-
-            var input = new ModelWithNamedUnionProperty(new Model1("<name>", 1234));
-            var result = await client.SendFirstNamedUnionValueAsync(input);
-        }
-
-        [Test]
-        [Ignore("Only validating compilation of examples")]
         public void Example_SendSecondNamedUnionValue()
         {
             var client = new UnionClient();
@@ -288,16 +257,6 @@ namespace _Type.Union.Samples
 
             Response response = await client.SendSecondNamedUnionValueAsync(RequestContent.Create(data));
             Console.WriteLine(response.Status);
-        }
-
-        [Test]
-        [Ignore("Only validating compilation of examples")]
-        public async Task Example_SendSecondNamedUnionValue_Convenience_Async()
-        {
-            var client = new UnionClient();
-
-            var input = new ModelWithNamedUnionProperty(new Model1("<name>", 1234));
-            var result = await client.SendSecondNamedUnionValueAsync(input);
         }
     }
 }
