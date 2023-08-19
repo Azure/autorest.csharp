@@ -17,28 +17,28 @@ namespace ModelsTypeSpec.Models
     {
         /// <summary> Initializes a new instance of RoundTripOnNoUse. </summary>
         /// <param name="baseModelProp"> base model property. </param>
-        /// <param name="requiredCollection"> Required collection. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="baseModelProp"/> or <paramref name="requiredCollection"/> is null. </exception>
-        public RoundTripOnNoUse(string baseModelProp, IEnumerable<CollectionItem> requiredCollection) : base(baseModelProp)
+        /// <param name="requiredList"> Required collection. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="baseModelProp"/> or <paramref name="requiredList"/> is null. </exception>
+        public RoundTripOnNoUse(string baseModelProp, IEnumerable<CollectionItem> requiredList) : base(baseModelProp)
         {
             Argument.AssertNotNull(baseModelProp, nameof(baseModelProp));
-            Argument.AssertNotNull(requiredCollection, nameof(requiredCollection));
+            Argument.AssertNotNull(requiredList, nameof(requiredList));
 
-            RequiredCollection = requiredCollection.ToList();
+            RequiredList = requiredList.ToList();
         }
 
         /// <summary> Initializes a new instance of RoundTripOnNoUse. </summary>
         /// <param name="baseModelProp"> base model property. </param>
-        /// <param name="requiredCollection"> Required collection. </param>
+        /// <param name="requiredList"> Required collection. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="baseModelProp"/> is null. </exception>
-        internal RoundTripOnNoUse(string baseModelProp, IList<CollectionItem> requiredCollection) : base(baseModelProp)
+        internal RoundTripOnNoUse(string baseModelProp, IList<CollectionItem> requiredList) : base(baseModelProp)
         {
             Argument.AssertNotNull(baseModelProp, nameof(baseModelProp));
 
-            RequiredCollection = requiredCollection;
+            RequiredList = requiredList;
         }
 
         /// <summary> Required collection. </summary>
-        public IList<CollectionItem> RequiredCollection { get; }
+        public IList<CollectionItem> RequiredList { get; }
     }
 }

@@ -3,18 +3,22 @@
 
 export enum CollectionFormat {
     CSV = "csv",
+    Simple = "simple",
     SSV = "ssv",
     TSV = "tsv",
     Pipes = "pipes",
-    Multi = "multi"
+    Multi = "multi",
+    Form = "form"
 }
 
 export const collectionFormatToDelimMap: {
-    [key in CollectionFormat]: string | undefined;
+    [key: string]: string | undefined;
 } = {
-    [CollectionFormat.CSV]: ",",
-    [CollectionFormat.SSV]: " ",
-    [CollectionFormat.TSV]: "\t",
-    [CollectionFormat.Pipes]: "|",
-    [CollectionFormat.Multi]: undefined
+    [CollectionFormat.CSV.toString()]: ",",
+    [CollectionFormat.Simple.toString()]: ",", // csv and simple are used interchangeably
+    [CollectionFormat.SSV.toString()]: " ",
+    [CollectionFormat.TSV.toString()]: "\t",
+    [CollectionFormat.Pipes.toString()]: "|",
+    [CollectionFormat.Multi.toString()]: undefined,
+    [CollectionFormat.Form.toString()]: undefined // multi and form are used interchangeably
 };

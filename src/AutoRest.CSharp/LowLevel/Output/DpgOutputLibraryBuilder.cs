@@ -76,36 +76,21 @@ namespace AutoRest.CSharp.Output.Models
 
         private void CreateModels(IDictionary<InputModelType, ModelTypeProvider> models, TypeFactory typeFactory)
         {
-            Dictionary<InputModelType, List<InputModelType>> derivedTypesLookup = new Dictionary<InputModelType, List<InputModelType>>();
-            foreach (var model in _rootNamespace.Models)
-            {
-                if (model.BaseModel is null)
-                    continue;
-
-                if (!derivedTypesLookup.TryGetValue(model.BaseModel, out var derivedTypes))
-                {
-                    derivedTypes = new List<InputModelType>();
-                    derivedTypesLookup.Add(model.BaseModel, derivedTypes);
-                }
-                derivedTypes.Add(model);
-            }
-
             Dictionary<string, ModelTypeProvider> defaultDerivedTypes = new Dictionary<string, ModelTypeProvider>();
 
             foreach (var model in _rootNamespace.Models)
             {
-                derivedTypesLookup.TryGetValue(model, out var children);
-                InputModelType[] derivedTypesArray = children?.ToArray() ?? Array.Empty<InputModelType>();
+                InputModelType[] derivedTypesArray = model.DerivedModels.ToArray();
                 ModelTypeProvider? defaultDerivedType = GetDefaultDerivedType(models, typeFactory, model, derivedTypesArray, defaultDerivedTypes);
                 models.Add(model, new ModelTypeProvider(model, TypeProvider.GetDefaultModelNamespace(null, _defaultNamespace), _sourceInputModel, typeFactory, derivedTypesArray, defaultDerivedType));
             }
         }
 
-        private ModelTypeProvider? GetDefaultDerivedType(IDictionary<InputModelType, ModelTypeProvider> models, TypeFactory typeFactory, InputModelType model, InputModelType[] derivedTypesArray, Dictionary<string, ModelTypeProvider> defaultDerivedTypes)
+        private ModelTypeProvider? GetDefaultDerivedType(IDictionary<InputModelType, ModelTypeProvider> models, TypeFactory typeFactory, InputModelType model, IReadOnlyList<InputModelType> derivedTypesArray, Dictionary<string, ModelTypeProvider> defaultDerivedTypes)
         {
             //only want to create one instance of the default derived per polymorphic set
             ModelTypeProvider? defaultDerivedType = null;
-            bool isBasePolyType = derivedTypesArray.Length > 0 && model.DiscriminatorPropertyName is not null;
+            bool isBasePolyType = derivedTypesArray.Count > 0 && model.DiscriminatorPropertyName is not null;
             bool isChildPolyType = model.DiscriminatorValue is not null;
             if (isBasePolyType || isChildPolyType)
             {
@@ -130,7 +115,8 @@ namespace AutoRest.CSharp.Output.Models
                         actualBase,
                         Array.Empty<InputModelType>(),
                         "Unknown", //TODO: do we need to support extensible enum / int values?
-                        null)
+                        null,
+                        false)
                     {
                         IsUnknownDiscriminatorModel = true
                     };

@@ -80,7 +80,7 @@ namespace body_string_LowLevel.Samples
 
             var data = "<String>";
 
-            Response response = client.PutNull(RequestContent.Create(data), new RequestContext());
+            Response response = client.PutNull(RequestContent.Create(data));
             Console.WriteLine(response.Status);
         }
 
@@ -93,7 +93,7 @@ namespace body_string_LowLevel.Samples
 
             var data = "<String>";
 
-            Response response = client.PutNull(RequestContent.Create(data), new RequestContext());
+            Response response = client.PutNull(RequestContent.Create(data));
             Console.WriteLine(response.Status);
         }
 
@@ -106,7 +106,7 @@ namespace body_string_LowLevel.Samples
 
             var data = "<String>";
 
-            Response response = await client.PutNullAsync(RequestContent.Create(data), new RequestContext());
+            Response response = await client.PutNullAsync(RequestContent.Create(data));
             Console.WriteLine(response.Status);
         }
 
@@ -119,7 +119,7 @@ namespace body_string_LowLevel.Samples
 
             var data = "<String>";
 
-            Response response = await client.PutNullAsync(RequestContent.Create(data), new RequestContext());
+            Response response = await client.PutNullAsync(RequestContent.Create(data));
             Console.WriteLine(response.Status);
         }
 

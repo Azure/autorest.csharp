@@ -59,6 +59,7 @@ namespace Authentication.OAuth2
             _apiVersion = options.Version;
         }
 
+        // The convenience method is omitted here because it has exactly the same parameter list as the corresponding protocol method
         /// <summary>
         /// [Protocol Method] Check whether client is authenticated
         /// <list type="bullet">
@@ -89,6 +90,7 @@ namespace Authentication.OAuth2
             }
         }
 
+        // The convenience method is omitted here because it has exactly the same parameter list as the corresponding protocol method
         /// <summary>
         /// [Protocol Method] Check whether client is authenticated
         /// <list type="bullet">
@@ -119,6 +121,7 @@ namespace Authentication.OAuth2
             }
         }
 
+        // The convenience method is omitted here because it has exactly the same parameter list as the corresponding protocol method
         /// <summary>
         /// [Protocol Method] Check whether client is authenticated. Will return an invalid bearer error.
         /// <list type="bullet">
@@ -149,6 +152,7 @@ namespace Authentication.OAuth2
             }
         }
 
+        // The convenience method is omitted here because it has exactly the same parameter list as the corresponding protocol method
         /// <summary>
         /// [Protocol Method] Check whether client is authenticated. Will return an invalid bearer error.
         /// <list type="bullet">

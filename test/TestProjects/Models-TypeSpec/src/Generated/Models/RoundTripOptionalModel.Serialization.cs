@@ -48,11 +48,11 @@ namespace ModelsTypeSpec.Models
                 }
                 writer.WriteEndArray();
             }
-            if (Optional.IsCollectionDefined(OptionalModelCollection))
+            if (Optional.IsCollectionDefined(OptionalModelList))
             {
-                writer.WritePropertyName("optionalModelCollection"u8);
+                writer.WritePropertyName("optionalModelList"u8);
                 writer.WriteStartArray();
-                foreach (var item in OptionalModelCollection)
+                foreach (var item in OptionalModelList)
                 {
                     writer.WriteObjectValue(item);
                 }
@@ -149,7 +149,7 @@ namespace ModelsTypeSpec.Models
             Optional<int> optionalInt = default;
             Optional<IList<string>> optionalStringList = default;
             Optional<IList<int>> optionalIntList = default;
-            Optional<IList<CollectionItem>> optionalModelCollection = default;
+            Optional<IList<CollectionItem>> optionalModelList = default;
             Optional<DerivedModel> optionalModel = default;
             Optional<DerivedModelWithProperties> optionalModelWithPropertiesOnBase = default;
             Optional<FixedStringEnum> optionalFixedStringEnum = default;
@@ -204,7 +204,7 @@ namespace ModelsTypeSpec.Models
                     optionalIntList = array;
                     continue;
                 }
-                if (property.NameEquals("optionalModelCollection"u8))
+                if (property.NameEquals("optionalModelList"u8))
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
@@ -215,7 +215,7 @@ namespace ModelsTypeSpec.Models
                     {
                         array.Add(CollectionItem.DeserializeCollectionItem(item));
                     }
-                    optionalModelCollection = array;
+                    optionalModelList = array;
                     continue;
                 }
                 if (property.NameEquals("optionalModel"u8))
@@ -336,7 +336,7 @@ namespace ModelsTypeSpec.Models
                     continue;
                 }
             }
-            return new RoundTripOptionalModel(optionalString.Value, Optional.ToNullable(optionalInt), Optional.ToList(optionalStringList), Optional.ToList(optionalIntList), Optional.ToList(optionalModelCollection), optionalModel.Value, optionalModelWithPropertiesOnBase.Value, Optional.ToNullable(optionalFixedStringEnum), Optional.ToNullable(optionalExtensibleEnum), Optional.ToDictionary(optionalIntRecord), Optional.ToDictionary(optionalStringRecord), Optional.ToDictionary(optionalModelRecord), Optional.ToNullable(optionalPlainDate), Optional.ToNullable(optionalPlainTime), Optional.ToList(optionalCollectionWithNullableIntElement));
+            return new RoundTripOptionalModel(optionalString.Value, Optional.ToNullable(optionalInt), Optional.ToList(optionalStringList), Optional.ToList(optionalIntList), Optional.ToList(optionalModelList), optionalModel.Value, optionalModelWithPropertiesOnBase.Value, Optional.ToNullable(optionalFixedStringEnum), Optional.ToNullable(optionalExtensibleEnum), Optional.ToDictionary(optionalIntRecord), Optional.ToDictionary(optionalStringRecord), Optional.ToDictionary(optionalModelRecord), Optional.ToNullable(optionalPlainDate), Optional.ToNullable(optionalPlainTime), Optional.ToList(optionalCollectionWithNullableIntElement));
         }
 
         /// <summary> Deserializes the model from a raw response. </summary>

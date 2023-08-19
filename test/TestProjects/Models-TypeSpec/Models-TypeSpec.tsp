@@ -2,6 +2,13 @@ import "@typespec/rest";
 import "@typespec/http";
 import "@azure-tools/typespec-client-generator-core";
 import "@azure-tools/typespec-azure-core";
+import "@typespec/versioning";
+
+using TypeSpec.Http;
+using TypeSpec.Rest;
+using Azure.ClientGenerator.Core;
+using Azure.Core;
+using TypeSpec.Versioning;
 
 @service(
     {
@@ -16,13 +23,9 @@ import "@azure-tools/typespec-azure-core";
         endpoint: string,
     }
 )
+@useDependency(Azure.Core.Versions.v1_0_Preview_1)
 @doc("CADL project to test various types of models.")
 namespace ModelsTypeSpec;
-
-using TypeSpec.Http;
-using TypeSpec.Rest;
-using Azure.ClientGenerator.Core;
-using Azure.Core;
 
 @doc("Base model")
 model BaseModel {
@@ -37,13 +40,13 @@ model BaseModelWithProperties {
 @doc("Derived model")
 model DerivedModel extends BaseModel {
   @doc("Required collection")
-  requiredCollection: CollectionItem[];
+  requiredList: CollectionItem[];
 }
 
 @doc("Derived model with properties")
 model DerivedModelWithProperties extends BaseModelWithProperties {
   @doc("Required collection")
-  requiredCollection: CollectionItem[];
+  requiredList: CollectionItem[];
 }
 
 @discriminator("discriminatorProperty")
@@ -124,6 +127,32 @@ model RoundTripModel extends BaseModel {
   @doc("Required int, illustrating a value type property.")
   requiredInt: int32;
 
+  @doc("Optional string")
+  nonRequiredString?: string;
+
+  @doc("Optional int")
+  nonRequiredInt?: int32;
+
+  @doc("Required nullable int")
+  requiredNullableInt: int32 | null;
+
+  @doc("Required nullable string")
+  requiredNullableString: string | null;
+
+  @doc("Optional nullable int")
+  nonRequiredNullableInt?: int32 | null;
+
+  @doc("Optional nullable string")
+  nonRequiredNullableString?: string | null;
+  
+  @doc("Required readonly int")
+  @visibility("read")
+  requiredReadonlyInt: int32;
+
+  @doc("Optional readonly int")
+  @visibility("read")
+  nonRequiredReadonlyInt?: int32;
+
   @doc("Required model with discriminator")
   requiredModel: BaseModelWithDiscriminator;
 
@@ -140,7 +169,7 @@ model RoundTripModel extends BaseModel {
   requiredExtensibleEnum: ExtensibleEnum;
 
   @doc("Required collection")
-  requiredCollection: CollectionItem[];
+  requiredList: CollectionItem[];
 
   @doc("Required int record")
   requiredIntRecord: Record<int32>;
@@ -174,6 +203,18 @@ model RoundTripModel extends BaseModel {
 
   @doc("Optional int8[]")
   optionalInt8Array?: int8[];
+
+  @doc("Required nullable int list")
+  requiredNullableIntList: int32[] | null;
+
+  @doc("Required nullable string list")
+  requiredNullableStringList: string[] | null;
+
+  @doc("Optional nullable model list")
+  nonRequiredNullableIntList?: int32[] | null;
+
+  @doc("Optional nullable string list")
+  nonRequiredNullableStringList?: string[] | null;
 }
 
 @doc("Model used both as input and output with primitive types")
@@ -217,17 +258,32 @@ model InputModel {
   @doc("Required int")
   requiredInt: int32;
 
+  @doc("Required nullable int")
+  requiredNullableInt: int32 | null;
+
+  @doc("Required nullable string")
+  requiredNullableString: string | null;
+
+  @doc("Optional nullable int")
+  nonRequiredNullableInt?: int32 | null;
+
+  @doc("Optional nullable string")
+  nonRequiredNullableString?: string | null;
+
   @doc("Required model")
   requiredModel: BaseModel;
 
+  @doc("Required model")
+  requiredModel2: BaseModel;
+
   @doc("Required primitive value type collection")
-  requiredIntCollection: int32[];
+  requiredIntList: int32[];
 
   @doc("Required primitive reference type collection")
-  requiredStringCollection: string[];
+  requiredStringList: string[];
 
   @doc("Required model collection")
-  requiredModelCollection: CollectionItem[];
+  requiredModelList: CollectionItem[];
 
   @doc("Required model record")
   requiredModelRecord: Record<RecordItem>;
@@ -237,6 +293,33 @@ model InputModel {
 
   @doc("Required collection of which the element is a nullable boolean")
   requiredCollectionWithNullableBooleanElement: (boolean | null) [];
+
+  @doc("Required model nullable collection")
+  requiredNullableModelList: CollectionItem[] | null;
+
+  @doc("Required string nullable collection")
+  requiredNullableStringList: string[] | null;
+
+  @doc("Required int nullable collection")
+  requiredNullableIntList: int32[] | null;
+
+  @doc("Optional model collection")
+  nonRequiredModelList?: CollectionItem[];
+
+  @doc("Optional string collection")
+  nonRequiredStringList?: string[];
+
+  @doc("Optional int collection")
+  nonRequiredIntList?: int32[];
+
+  @doc("Optional model nullable collection")
+  nonRequiredNullableModelList?: CollectionItem[] | null;
+
+  @doc("Optional string nullable collection")
+  nonRequiredNullableStringList?: string[] | null;
+
+  @doc("Optional int nullable collection")
+  nonRequiredNullableIntList?: int32[] | null;
 }
 
 @doc("Model used only as output")
@@ -251,10 +334,22 @@ model OutputModel {
   requiredModel: DerivedModel;
 
   @doc("Required collection")
-  requiredCollection: CollectionItem[];
+  requiredList: CollectionItem[];
 
   @doc("Required model record")
   requiredModelRecord: Record<RecordItem>;
+
+  @doc("Optional model collection")
+  optionalList?: CollectionItem[];
+
+  @doc("Optional model nullable collection")
+  optionalNullableList?: CollectionItem[] | null;
+
+  @doc("Optional model record")
+  optionalRecord?: Record<RecordItem>;
+
+  @doc("Optional model nullable record")
+  optionalNullableRecord?: Record<RecordItem> | null;
 }
 
 @doc("RoundTrip model with optional properties.")
@@ -268,12 +363,12 @@ model RoundTripOptionalModel {
 
   @doc("Optional string collection.")
   optionalStringList?: string[];
-
+  
   @doc("Optional int collection.")
   optionalIntList?: int32[];
 
   @doc("Optional model collection")
-  optionalModelCollection?: CollectionItem[];
+  optionalModelList?: CollectionItem[];
 
   @doc("Optional model.")
   optionalModel?: DerivedModel;
@@ -358,7 +453,7 @@ model RoundTripReadOnlyModel {
 
   @doc("Required model collection")
   @visibility("read")
-  requiredReadOnlyModelCollection: CollectionItem[];
+  requiredReadOnlyModelList: CollectionItem[];
 
   @doc("Required int record")
   @visibility("read")
@@ -382,7 +477,7 @@ model RoundTripReadOnlyModel {
 
   @doc("Optional model collection")
   @visibility("read")
-  optionalReadOnlyModelCollection?: CollectionItem[];
+  optionalReadOnlyModelList?: CollectionItem[];
 
   @doc("Optional int record")
   optionalReadOnlyIntRecord: Record<int32>;
@@ -511,10 +606,28 @@ model NoUseBase {
 @doc("Derived model")
 model RoundTripOnNoUse extends NoUseBase {
   @doc("Required collection")
-  requiredCollection: CollectionItem[];
+  requiredList: CollectionItem[];
 }
 
 @doc("Returns RoundTripOnNoUse")
 @get
 @convenientAPI(true)
 op roundTripToOutputWithNoUseBase(@body input: RoundTripOnNoUse): RoundTripOnNoUse;
+
+@doc("This is a model.")
+@resource("items")
+model Foo {
+  @doc("id of Foo")
+  @key
+  @visibility("read","create","query")
+  id: string;
+  @doc("name of Foo")
+  name: string;
+}
+
+@convenientAPI(true)
+op analyzeConversation is Azure.Core.StandardResourceOperations.ResourceCollectionAction<
+  Foo,
+  {},
+  BaseModelWithDiscriminator
+>;
