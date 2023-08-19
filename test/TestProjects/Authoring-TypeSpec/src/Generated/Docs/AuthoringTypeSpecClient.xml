@@ -2,19 +2,19 @@
 <doc>
   <members>
     <member name="CreateOrUpdateAsync(string,RequestContent,RequestContext)">
-<example>
+      <example>
 This sample shows how to call CreateOrUpdateAsync with required parameters and request content, and how to parse the result.
 <code><![CDATA[
-var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new AuthoringTypeSpecClient(endpoint);
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+AuthoringTypeSpecClient client = new AuthoringTypeSpecClient(endpoint);
 
-var data = new {
-    projectKind = "CustomSingleLabelClassification",
-    storageInputContainerName = "<storageInputContainerName>",
-    language = "<language>",
-};
-
-Response response = await client.CreateOrUpdateAsync("<projectName>", RequestContent.Create(data));
+RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+{
+    ["projectKind"] = "CustomSingleLabelClassification",
+    ["storageInputContainerName"] = "<storageInputContainerName>",
+    ["language"] = "<language>",
+});
+Response response = await client.CreateOrUpdateAsync("<projectName>", content);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("projectName").ToString());
@@ -28,27 +28,28 @@ Console.WriteLine(result.GetProperty("lastDeployedDateTime").ToString());
 ]]></code>
 This sample shows how to call CreateOrUpdateAsync with all parameters and request content, and how to parse the result.
 <code><![CDATA[
-var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new AuthoringTypeSpecClient(endpoint);
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+AuthoringTypeSpecClient client = new AuthoringTypeSpecClient(endpoint);
 
-var data = new {
-    projectKind = "CustomSingleLabelClassification",
-    storageInputContainerName = "<storageInputContainerName>",
-    settings = new {
-        key = "<String>",
+RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+{
+    ["projectKind"] = "CustomSingleLabelClassification",
+    ["storageInputContainerName"] = "<storageInputContainerName>",
+    ["settings"] = new Dictionary<string, object>()
+    {
+        ["key"] = "<settings>",
     },
-    multilingual = true,
-    description = "<description>",
-    language = "<language>",
-};
-
-Response response = await client.CreateOrUpdateAsync("<projectName>", RequestContent.Create(data));
+    ["multilingual"] = true,
+    ["description"] = "<description>",
+    ["language"] = "<language>",
+});
+Response response = await client.CreateOrUpdateAsync("<projectName>", content);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("projectName").ToString());
 Console.WriteLine(result.GetProperty("projectKind").ToString());
 Console.WriteLine(result.GetProperty("storageInputContainerName").ToString());
-Console.WriteLine(result.GetProperty("settings").GetProperty("<test>").ToString());
+Console.WriteLine(result.GetProperty("settings").GetProperty("<key>").ToString());
 Console.WriteLine(result.GetProperty("multilingual").ToString());
 Console.WriteLine(result.GetProperty("description").ToString());
 Console.WriteLine(result.GetProperty("language").ToString());
@@ -56,23 +57,22 @@ Console.WriteLine(result.GetProperty("createdDateTime").ToString());
 Console.WriteLine(result.GetProperty("lastModifiedDateTime").ToString());
 Console.WriteLine(result.GetProperty("lastTrainedDateTime").ToString());
 Console.WriteLine(result.GetProperty("lastDeployedDateTime").ToString());
-]]></code>
-</example>
+]]></code></example>
     </member>
     <member name="CreateOrUpdate(string,RequestContent,RequestContext)">
-<example>
+      <example>
 This sample shows how to call CreateOrUpdate with required parameters and request content, and how to parse the result.
 <code><![CDATA[
-var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new AuthoringTypeSpecClient(endpoint);
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+AuthoringTypeSpecClient client = new AuthoringTypeSpecClient(endpoint);
 
-var data = new {
-    projectKind = "CustomSingleLabelClassification",
-    storageInputContainerName = "<storageInputContainerName>",
-    language = "<language>",
-};
-
-Response response = client.CreateOrUpdate("<projectName>", RequestContent.Create(data));
+RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+{
+    ["projectKind"] = "CustomSingleLabelClassification",
+    ["storageInputContainerName"] = "<storageInputContainerName>",
+    ["language"] = "<language>",
+});
+Response response = client.CreateOrUpdate("<projectName>", content);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("projectName").ToString());
@@ -86,27 +86,28 @@ Console.WriteLine(result.GetProperty("lastDeployedDateTime").ToString());
 ]]></code>
 This sample shows how to call CreateOrUpdate with all parameters and request content, and how to parse the result.
 <code><![CDATA[
-var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new AuthoringTypeSpecClient(endpoint);
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+AuthoringTypeSpecClient client = new AuthoringTypeSpecClient(endpoint);
 
-var data = new {
-    projectKind = "CustomSingleLabelClassification",
-    storageInputContainerName = "<storageInputContainerName>",
-    settings = new {
-        key = "<String>",
+RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+{
+    ["projectKind"] = "CustomSingleLabelClassification",
+    ["storageInputContainerName"] = "<storageInputContainerName>",
+    ["settings"] = new Dictionary<string, object>()
+    {
+        ["key"] = "<settings>",
     },
-    multilingual = true,
-    description = "<description>",
-    language = "<language>",
-};
-
-Response response = client.CreateOrUpdate("<projectName>", RequestContent.Create(data));
+    ["multilingual"] = true,
+    ["description"] = "<description>",
+    ["language"] = "<language>",
+});
+Response response = client.CreateOrUpdate("<projectName>", content);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("projectName").ToString());
 Console.WriteLine(result.GetProperty("projectKind").ToString());
 Console.WriteLine(result.GetProperty("storageInputContainerName").ToString());
-Console.WriteLine(result.GetProperty("settings").GetProperty("<test>").ToString());
+Console.WriteLine(result.GetProperty("settings").GetProperty("<key>").ToString());
 Console.WriteLine(result.GetProperty("multilingual").ToString());
 Console.WriteLine(result.GetProperty("description").ToString());
 Console.WriteLine(result.GetProperty("language").ToString());
@@ -114,15 +115,14 @@ Console.WriteLine(result.GetProperty("createdDateTime").ToString());
 Console.WriteLine(result.GetProperty("lastModifiedDateTime").ToString());
 Console.WriteLine(result.GetProperty("lastTrainedDateTime").ToString());
 Console.WriteLine(result.GetProperty("lastDeployedDateTime").ToString());
-]]></code>
-</example>
+]]></code></example>
     </member>
     <member name="GetProjectAsync(string,RequestContext)">
-<example>
+      <example>
 This sample shows how to call GetProjectAsync with required parameters and parse the result.
 <code><![CDATA[
-var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new AuthoringTypeSpecClient(endpoint);
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+AuthoringTypeSpecClient client = new AuthoringTypeSpecClient(endpoint);
 
 Response response = await client.GetProjectAsync("<projectName>");
 
@@ -130,7 +130,7 @@ JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("projectName").ToString());
 Console.WriteLine(result.GetProperty("projectKind").ToString());
 Console.WriteLine(result.GetProperty("storageInputContainerName").ToString());
-Console.WriteLine(result.GetProperty("settings").GetProperty("<test>").ToString());
+Console.WriteLine(result.GetProperty("settings").GetProperty("<key>").ToString());
 Console.WriteLine(result.GetProperty("multilingual").ToString());
 Console.WriteLine(result.GetProperty("description").ToString());
 Console.WriteLine(result.GetProperty("language").ToString());
@@ -138,15 +138,14 @@ Console.WriteLine(result.GetProperty("createdDateTime").ToString());
 Console.WriteLine(result.GetProperty("lastModifiedDateTime").ToString());
 Console.WriteLine(result.GetProperty("lastTrainedDateTime").ToString());
 Console.WriteLine(result.GetProperty("lastDeployedDateTime").ToString());
-]]></code>
-</example>
+]]></code></example>
     </member>
     <member name="GetProject(string,RequestContext)">
-<example>
+      <example>
 This sample shows how to call GetProject with required parameters and parse the result.
 <code><![CDATA[
-var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new AuthoringTypeSpecClient(endpoint);
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+AuthoringTypeSpecClient client = new AuthoringTypeSpecClient(endpoint);
 
 Response response = client.GetProject("<projectName>");
 
@@ -154,7 +153,7 @@ JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("projectName").ToString());
 Console.WriteLine(result.GetProperty("projectKind").ToString());
 Console.WriteLine(result.GetProperty("storageInputContainerName").ToString());
-Console.WriteLine(result.GetProperty("settings").GetProperty("<test>").ToString());
+Console.WriteLine(result.GetProperty("settings").GetProperty("<key>").ToString());
 Console.WriteLine(result.GetProperty("multilingual").ToString());
 Console.WriteLine(result.GetProperty("description").ToString());
 Console.WriteLine(result.GetProperty("language").ToString());
@@ -162,15 +161,14 @@ Console.WriteLine(result.GetProperty("createdDateTime").ToString());
 Console.WriteLine(result.GetProperty("lastModifiedDateTime").ToString());
 Console.WriteLine(result.GetProperty("lastTrainedDateTime").ToString());
 Console.WriteLine(result.GetProperty("lastDeployedDateTime").ToString());
-]]></code>
-</example>
+]]></code></example>
     </member>
     <member name="DeleteAsync(string,RequestContext)">
-<example>
+      <example>
 This sample shows how to call DeleteAsync with required parameters and parse the result.
 <code><![CDATA[
-var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new AuthoringTypeSpecClient(endpoint);
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+AuthoringTypeSpecClient client = new AuthoringTypeSpecClient(endpoint);
 
 Response response = await client.DeleteAsync("<projectName>");
 
@@ -178,7 +176,7 @@ JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("projectName").ToString());
 Console.WriteLine(result.GetProperty("projectKind").ToString());
 Console.WriteLine(result.GetProperty("storageInputContainerName").ToString());
-Console.WriteLine(result.GetProperty("settings").GetProperty("<test>").ToString());
+Console.WriteLine(result.GetProperty("settings").GetProperty("<key>").ToString());
 Console.WriteLine(result.GetProperty("multilingual").ToString());
 Console.WriteLine(result.GetProperty("description").ToString());
 Console.WriteLine(result.GetProperty("language").ToString());
@@ -186,15 +184,14 @@ Console.WriteLine(result.GetProperty("createdDateTime").ToString());
 Console.WriteLine(result.GetProperty("lastModifiedDateTime").ToString());
 Console.WriteLine(result.GetProperty("lastTrainedDateTime").ToString());
 Console.WriteLine(result.GetProperty("lastDeployedDateTime").ToString());
-]]></code>
-</example>
+]]></code></example>
     </member>
     <member name="Delete(string,RequestContext)">
-<example>
+      <example>
 This sample shows how to call Delete with required parameters and parse the result.
 <code><![CDATA[
-var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new AuthoringTypeSpecClient(endpoint);
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+AuthoringTypeSpecClient client = new AuthoringTypeSpecClient(endpoint);
 
 Response response = client.Delete("<projectName>");
 
@@ -202,7 +199,7 @@ JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("projectName").ToString());
 Console.WriteLine(result.GetProperty("projectKind").ToString());
 Console.WriteLine(result.GetProperty("storageInputContainerName").ToString());
-Console.WriteLine(result.GetProperty("settings").GetProperty("<test>").ToString());
+Console.WriteLine(result.GetProperty("settings").GetProperty("<key>").ToString());
 Console.WriteLine(result.GetProperty("multilingual").ToString());
 Console.WriteLine(result.GetProperty("description").ToString());
 Console.WriteLine(result.GetProperty("language").ToString());
@@ -210,239 +207,220 @@ Console.WriteLine(result.GetProperty("createdDateTime").ToString());
 Console.WriteLine(result.GetProperty("lastModifiedDateTime").ToString());
 Console.WriteLine(result.GetProperty("lastTrainedDateTime").ToString());
 Console.WriteLine(result.GetProperty("lastDeployedDateTime").ToString());
-]]></code>
-</example>
+]]></code></example>
     </member>
     <member name="ExportAsync(string,string,RequestContext)">
-<example>
+      <example>
 This sample shows how to call ExportAsync with required parameters.
 <code><![CDATA[
-var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new AuthoringTypeSpecClient(endpoint);
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+AuthoringTypeSpecClient client = new AuthoringTypeSpecClient(endpoint);
 
 Response response = await client.ExportAsync("<projectName>", "<projectFileVersion>");
 Console.WriteLine(response.Status);
-]]></code>
-</example>
+]]></code></example>
     </member>
     <member name="Export(string,string,RequestContext)">
-<example>
+      <example>
 This sample shows how to call Export with required parameters.
 <code><![CDATA[
-var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new AuthoringTypeSpecClient(endpoint);
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+AuthoringTypeSpecClient client = new AuthoringTypeSpecClient(endpoint);
 
 Response response = client.Export("<projectName>", "<projectFileVersion>");
 Console.WriteLine(response.Status);
-]]></code>
-</example>
+]]></code></example>
     </member>
     <member name="ImportxAsync(string,RequestContext)">
-<example>
+      <example>
 This sample shows how to call ImportxAsync with required parameters.
 <code><![CDATA[
-var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new AuthoringTypeSpecClient(endpoint);
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+AuthoringTypeSpecClient client = new AuthoringTypeSpecClient(endpoint);
 
 Response response = await client.ImportxAsync("<projectName>");
 Console.WriteLine(response.Status);
-]]></code>
-</example>
+]]></code></example>
     </member>
     <member name="Importx(string,RequestContext)">
-<example>
+      <example>
 This sample shows how to call Importx with required parameters.
 <code><![CDATA[
-var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new AuthoringTypeSpecClient(endpoint);
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+AuthoringTypeSpecClient client = new AuthoringTypeSpecClient(endpoint);
 
 Response response = client.Importx("<projectName>");
 Console.WriteLine(response.Status);
-]]></code>
-</example>
+]]></code></example>
     </member>
     <member name="TrainAsync(string,RequestContent,RequestContext)">
-<example>
+      <example>
 This sample shows how to call TrainAsync with required parameters and request content.
 <code><![CDATA[
-var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new AuthoringTypeSpecClient(endpoint);
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+AuthoringTypeSpecClient client = new AuthoringTypeSpecClient(endpoint);
 
-var data = new {
-    modelLabel = "<modelLabel>",
-};
-
-Response response = await client.TrainAsync("<projectName>", RequestContent.Create(data));
+RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+{
+    ["modelLabel"] = "<modelLabel>",
+});
+Response response = await client.TrainAsync("<projectName>", content);
 Console.WriteLine(response.Status);
-]]></code>
-</example>
+]]></code></example>
     </member>
     <member name="Train(string,RequestContent,RequestContext)">
-<example>
+      <example>
 This sample shows how to call Train with required parameters and request content.
 <code><![CDATA[
-var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new AuthoringTypeSpecClient(endpoint);
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+AuthoringTypeSpecClient client = new AuthoringTypeSpecClient(endpoint);
 
-var data = new {
-    modelLabel = "<modelLabel>",
-};
-
-Response response = client.Train("<projectName>", RequestContent.Create(data));
+RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+{
+    ["modelLabel"] = "<modelLabel>",
+});
+Response response = client.Train("<projectName>", content);
 Console.WriteLine(response.Status);
-]]></code>
-</example>
+]]></code></example>
     </member>
     <member name="GetDeploymentAsync(string,string,RequestContext)">
-<example>
+      <example>
 This sample shows how to call GetDeploymentAsync with required parameters and parse the result.
 <code><![CDATA[
-var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new AuthoringTypeSpecClient(endpoint);
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+AuthoringTypeSpecClient client = new AuthoringTypeSpecClient(endpoint);
 
 Response response = await client.GetDeploymentAsync("<projectName>", "<deploymentName>");
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("name").ToString());
-]]></code>
-</example>
+]]></code></example>
     </member>
     <member name="GetDeployment(string,string,RequestContext)">
-<example>
+      <example>
 This sample shows how to call GetDeployment with required parameters and parse the result.
 <code><![CDATA[
-var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new AuthoringTypeSpecClient(endpoint);
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+AuthoringTypeSpecClient client = new AuthoringTypeSpecClient(endpoint);
 
 Response response = client.GetDeployment("<projectName>", "<deploymentName>");
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("name").ToString());
-]]></code>
-</example>
+]]></code></example>
     </member>
     <member name="DeployProjectAsync(string,string,RequestContent,RequestContext)">
-<example>
+      <example>
 This sample shows how to call DeployProjectAsync with required parameters and request content and parse the result.
 <code><![CDATA[
-var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new AuthoringTypeSpecClient(endpoint);
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+AuthoringTypeSpecClient client = new AuthoringTypeSpecClient(endpoint);
 
-var data = new {};
-
-Response response = await client.DeployProjectAsync("<projectName>", "<deploymentName>", RequestContent.Create(data));
+RequestContent content = RequestContent.Create(new Dictionary<string, object>());
+Response response = await client.DeployProjectAsync("<projectName>", "<deploymentName>", content);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("name").ToString());
-]]></code>
-</example>
+]]></code></example>
     </member>
     <member name="DeployProject(string,string,RequestContent,RequestContext)">
-<example>
+      <example>
 This sample shows how to call DeployProject with required parameters and request content and parse the result.
 <code><![CDATA[
-var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new AuthoringTypeSpecClient(endpoint);
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+AuthoringTypeSpecClient client = new AuthoringTypeSpecClient(endpoint);
 
-var data = new {};
-
-Response response = client.DeployProject("<projectName>", "<deploymentName>", RequestContent.Create(data));
+RequestContent content = RequestContent.Create(new Dictionary<string, object>());
+Response response = client.DeployProject("<projectName>", "<deploymentName>", content);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("name").ToString());
-]]></code>
-</example>
+]]></code></example>
     </member>
     <member name="DeleteDeploymentAsync(string,string,RequestContext)">
-<example>
+      <example>
 This sample shows how to call DeleteDeploymentAsync with required parameters and parse the result.
 <code><![CDATA[
-var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new AuthoringTypeSpecClient(endpoint);
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+AuthoringTypeSpecClient client = new AuthoringTypeSpecClient(endpoint);
 
 Response response = await client.DeleteDeploymentAsync("<projectName>", "<deploymentName>");
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("name").ToString());
-]]></code>
-</example>
+]]></code></example>
     </member>
     <member name="DeleteDeployment(string,string,RequestContext)">
-<example>
+      <example>
 This sample shows how to call DeleteDeployment with required parameters and parse the result.
 <code><![CDATA[
-var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new AuthoringTypeSpecClient(endpoint);
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+AuthoringTypeSpecClient client = new AuthoringTypeSpecClient(endpoint);
 
 Response response = client.DeleteDeployment("<projectName>", "<deploymentName>");
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("name").ToString());
-]]></code>
-</example>
+]]></code></example>
     </member>
     <member name="SwapDeploymentsAsync(string,RequestContent,RequestContext)">
-<example>
+      <example>
 This sample shows how to call SwapDeploymentsAsync with required parameters and request content.
 <code><![CDATA[
-var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new AuthoringTypeSpecClient(endpoint);
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+AuthoringTypeSpecClient client = new AuthoringTypeSpecClient(endpoint);
 
-var data = new {
-    firstDeploymentName = "<firstDeploymentName>",
-    secondDeploymentName = "<secondDeploymentName>",
-};
-
-Response response = await client.SwapDeploymentsAsync("<projectName>", RequestContent.Create(data));
+RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+{
+    ["firstDeploymentName"] = "<firstDeploymentName>",
+    ["secondDeploymentName"] = "<secondDeploymentName>",
+});
+Response response = await client.SwapDeploymentsAsync("<projectName>", content);
 Console.WriteLine(response.Status);
-]]></code>
-</example>
+]]></code></example>
     </member>
     <member name="SwapDeployments(string,RequestContent,RequestContext)">
-<example>
+      <example>
 This sample shows how to call SwapDeployments with required parameters and request content.
 <code><![CDATA[
-var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new AuthoringTypeSpecClient(endpoint);
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+AuthoringTypeSpecClient client = new AuthoringTypeSpecClient(endpoint);
 
-var data = new {
-    firstDeploymentName = "<firstDeploymentName>",
-    secondDeploymentName = "<secondDeploymentName>",
-};
-
-Response response = client.SwapDeployments("<projectName>", RequestContent.Create(data));
+RequestContent content = RequestContent.Create(new Dictionary<string, object>()
+{
+    ["firstDeploymentName"] = "<firstDeploymentName>",
+    ["secondDeploymentName"] = "<secondDeploymentName>",
+});
+Response response = client.SwapDeployments("<projectName>", content);
 Console.WriteLine(response.Status);
-]]></code>
-</example>
+]]></code></example>
     </member>
     <member name="GetDeploymentStatusValueAsync(string,string,string,CancellationToken)">
-<example>
+      <example>
 This sample shows how to call GetDeploymentStatusValueAsync with required parameters.
 <code><![CDATA[
-var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new AuthoringTypeSpecClient(endpoint);
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+AuthoringTypeSpecClient client = new AuthoringTypeSpecClient(endpoint);
 
-var result = await client.GetDeploymentStatusValueAsync("<projectName>", "<deploymentName>", "<jobId>");
-]]></code>
-</example>
+Response<DeploymentJob> response = await client.GetDeploymentStatusValueAsync("<projectName>", "<deploymentName>", "<jobId>");
+]]></code></example>
     </member>
     <member name="GetDeploymentStatusValue(string,string,string,CancellationToken)">
-<example>
+      <example>
 This sample shows how to call GetDeploymentStatusValue with required parameters.
 <code><![CDATA[
-var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new AuthoringTypeSpecClient(endpoint);
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+AuthoringTypeSpecClient client = new AuthoringTypeSpecClient(endpoint);
 
-var result = client.GetDeploymentStatusValue("<projectName>", "<deploymentName>", "<jobId>");
-]]></code>
-</example>
+Response<DeploymentJob> response = client.GetDeploymentStatusValue("<projectName>", "<deploymentName>", "<jobId>");
+]]></code></example>
     </member>
     <member name="GetDeploymentStatusAsync(string,string,string,RequestContext)">
-<example>
+      <example>
 This sample shows how to call GetDeploymentStatusAsync with required parameters and parse the result.
 <code><![CDATA[
-var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new AuthoringTypeSpecClient(endpoint);
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+AuthoringTypeSpecClient client = new AuthoringTypeSpecClient(endpoint);
 
 Response response = await client.GetDeploymentStatusAsync("<projectName>", "<deploymentName>", "<jobId>");
 
@@ -459,15 +437,14 @@ Console.WriteLine(result.GetProperty("errors").GetProperty("message").ToString()
 Console.WriteLine(result.GetProperty("errors").GetProperty("target").ToString());
 Console.WriteLine(result.GetProperty("errors").GetProperty("innererror").GetProperty("code").ToString());
 Console.WriteLine(result.GetProperty("id").ToString());
-]]></code>
-</example>
+]]></code></example>
     </member>
     <member name="GetDeploymentStatus(string,string,string,RequestContext)">
-<example>
+      <example>
 This sample shows how to call GetDeploymentStatus with required parameters and parse the result.
 <code><![CDATA[
-var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new AuthoringTypeSpecClient(endpoint);
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+AuthoringTypeSpecClient client = new AuthoringTypeSpecClient(endpoint);
 
 Response response = client.GetDeploymentStatus("<projectName>", "<deploymentName>", "<jobId>");
 
@@ -484,37 +461,34 @@ Console.WriteLine(result.GetProperty("errors").GetProperty("message").ToString()
 Console.WriteLine(result.GetProperty("errors").GetProperty("target").ToString());
 Console.WriteLine(result.GetProperty("errors").GetProperty("innererror").GetProperty("code").ToString());
 Console.WriteLine(result.GetProperty("id").ToString());
-]]></code>
-</example>
+]]></code></example>
     </member>
     <member name="GetSwapDeploymentsStatusValueAsync(string,string,string,CancellationToken)">
-<example>
+      <example>
 This sample shows how to call GetSwapDeploymentsStatusValueAsync with required parameters.
 <code><![CDATA[
-var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new AuthoringTypeSpecClient(endpoint);
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+AuthoringTypeSpecClient client = new AuthoringTypeSpecClient(endpoint);
 
-var result = await client.GetSwapDeploymentsStatusValueAsync("<projectName>", "<deploymentName>", "<jobId>");
-]]></code>
-</example>
+Response<SwapDeploymentsJob> response = await client.GetSwapDeploymentsStatusValueAsync("<projectName>", "<deploymentName>", "<jobId>");
+]]></code></example>
     </member>
     <member name="GetSwapDeploymentsStatusValue(string,string,string,CancellationToken)">
-<example>
+      <example>
 This sample shows how to call GetSwapDeploymentsStatusValue with required parameters.
 <code><![CDATA[
-var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new AuthoringTypeSpecClient(endpoint);
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+AuthoringTypeSpecClient client = new AuthoringTypeSpecClient(endpoint);
 
-var result = client.GetSwapDeploymentsStatusValue("<projectName>", "<deploymentName>", "<jobId>");
-]]></code>
-</example>
+Response<SwapDeploymentsJob> response = client.GetSwapDeploymentsStatusValue("<projectName>", "<deploymentName>", "<jobId>");
+]]></code></example>
     </member>
     <member name="GetSwapDeploymentsStatusAsync(string,string,string,RequestContext)">
-<example>
+      <example>
 This sample shows how to call GetSwapDeploymentsStatusAsync with required parameters and parse the result.
 <code><![CDATA[
-var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new AuthoringTypeSpecClient(endpoint);
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+AuthoringTypeSpecClient client = new AuthoringTypeSpecClient(endpoint);
 
 Response response = await client.GetSwapDeploymentsStatusAsync("<projectName>", "<deploymentName>", "<jobId>");
 
@@ -531,15 +505,14 @@ Console.WriteLine(result.GetProperty("errors").GetProperty("message").ToString()
 Console.WriteLine(result.GetProperty("errors").GetProperty("target").ToString());
 Console.WriteLine(result.GetProperty("errors").GetProperty("innererror").GetProperty("code").ToString());
 Console.WriteLine(result.GetProperty("id").ToString());
-]]></code>
-</example>
+]]></code></example>
     </member>
     <member name="GetSwapDeploymentsStatus(string,string,string,RequestContext)">
-<example>
+      <example>
 This sample shows how to call GetSwapDeploymentsStatus with required parameters and parse the result.
 <code><![CDATA[
-var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new AuthoringTypeSpecClient(endpoint);
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+AuthoringTypeSpecClient client = new AuthoringTypeSpecClient(endpoint);
 
 Response response = client.GetSwapDeploymentsStatus("<projectName>", "<deploymentName>", "<jobId>");
 
@@ -556,200 +529,191 @@ Console.WriteLine(result.GetProperty("errors").GetProperty("message").ToString()
 Console.WriteLine(result.GetProperty("errors").GetProperty("target").ToString());
 Console.WriteLine(result.GetProperty("errors").GetProperty("innererror").GetProperty("code").ToString());
 Console.WriteLine(result.GetProperty("id").ToString());
-]]></code>
-</example>
+]]></code></example>
     </member>
     <member name="GetProjectsAsync(RequestContext)">
-<example>
+      <example>
 This sample shows how to call GetProjectsAsync and parse the result.
 <code><![CDATA[
-var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new AuthoringTypeSpecClient(endpoint);
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+AuthoringTypeSpecClient client = new AuthoringTypeSpecClient(endpoint);
 
-await foreach (var item in client.GetProjectsAsync())
+await foreach (BinaryData item in client.GetProjectsAsync())
 {
     JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
-    Console.WriteLine(result.GetProperty("projectName").ToString());
-    Console.WriteLine(result.GetProperty("projectKind").ToString());
-    Console.WriteLine(result.GetProperty("storageInputContainerName").ToString());
-    Console.WriteLine(result.GetProperty("settings").GetProperty("<test>").ToString());
-    Console.WriteLine(result.GetProperty("multilingual").ToString());
-    Console.WriteLine(result.GetProperty("description").ToString());
-    Console.WriteLine(result.GetProperty("language").ToString());
-    Console.WriteLine(result.GetProperty("createdDateTime").ToString());
-    Console.WriteLine(result.GetProperty("lastModifiedDateTime").ToString());
-    Console.WriteLine(result.GetProperty("lastTrainedDateTime").ToString());
-    Console.WriteLine(result.GetProperty("lastDeployedDateTime").ToString());
+    Console.WriteLine(result[0].GetProperty("projectName").ToString());
+    Console.WriteLine(result[0].GetProperty("projectKind").ToString());
+    Console.WriteLine(result[0].GetProperty("storageInputContainerName").ToString());
+    Console.WriteLine(result[0].GetProperty("settings").GetProperty("<key>").ToString());
+    Console.WriteLine(result[0].GetProperty("multilingual").ToString());
+    Console.WriteLine(result[0].GetProperty("description").ToString());
+    Console.WriteLine(result[0].GetProperty("language").ToString());
+    Console.WriteLine(result[0].GetProperty("createdDateTime").ToString());
+    Console.WriteLine(result[0].GetProperty("lastModifiedDateTime").ToString());
+    Console.WriteLine(result[0].GetProperty("lastTrainedDateTime").ToString());
+    Console.WriteLine(result[0].GetProperty("lastDeployedDateTime").ToString());
 }
-]]></code>
-</example>
+]]></code></example>
     </member>
     <member name="GetProjects(RequestContext)">
-<example>
+      <example>
 This sample shows how to call GetProjects and parse the result.
 <code><![CDATA[
-var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new AuthoringTypeSpecClient(endpoint);
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+AuthoringTypeSpecClient client = new AuthoringTypeSpecClient(endpoint);
 
-foreach (var item in client.GetProjects())
+foreach (BinaryData item in client.GetProjects())
 {
     JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
-    Console.WriteLine(result.GetProperty("projectName").ToString());
-    Console.WriteLine(result.GetProperty("projectKind").ToString());
-    Console.WriteLine(result.GetProperty("storageInputContainerName").ToString());
-    Console.WriteLine(result.GetProperty("settings").GetProperty("<test>").ToString());
-    Console.WriteLine(result.GetProperty("multilingual").ToString());
-    Console.WriteLine(result.GetProperty("description").ToString());
-    Console.WriteLine(result.GetProperty("language").ToString());
-    Console.WriteLine(result.GetProperty("createdDateTime").ToString());
-    Console.WriteLine(result.GetProperty("lastModifiedDateTime").ToString());
-    Console.WriteLine(result.GetProperty("lastTrainedDateTime").ToString());
-    Console.WriteLine(result.GetProperty("lastDeployedDateTime").ToString());
+    Console.WriteLine(result[0].GetProperty("projectName").ToString());
+    Console.WriteLine(result[0].GetProperty("projectKind").ToString());
+    Console.WriteLine(result[0].GetProperty("storageInputContainerName").ToString());
+    Console.WriteLine(result[0].GetProperty("settings").GetProperty("<key>").ToString());
+    Console.WriteLine(result[0].GetProperty("multilingual").ToString());
+    Console.WriteLine(result[0].GetProperty("description").ToString());
+    Console.WriteLine(result[0].GetProperty("language").ToString());
+    Console.WriteLine(result[0].GetProperty("createdDateTime").ToString());
+    Console.WriteLine(result[0].GetProperty("lastModifiedDateTime").ToString());
+    Console.WriteLine(result[0].GetProperty("lastTrainedDateTime").ToString());
+    Console.WriteLine(result[0].GetProperty("lastDeployedDateTime").ToString());
 }
-]]></code>
-</example>
+]]></code></example>
     </member>
     <member name="GetDeploymentsAsync(string,RequestContext)">
-<example>
+      <example>
 This sample shows how to call GetDeploymentsAsync with required parameters and parse the result.
 <code><![CDATA[
-var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new AuthoringTypeSpecClient(endpoint);
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+AuthoringTypeSpecClient client = new AuthoringTypeSpecClient(endpoint);
 
-await foreach (var item in client.GetDeploymentsAsync("<projectName>"))
+await foreach (BinaryData item in client.GetDeploymentsAsync("<projectName>"))
 {
     JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
-    Console.WriteLine(result.GetProperty("name").ToString());
+    Console.WriteLine(result[0].GetProperty("name").ToString());
 }
-]]></code>
-</example>
+]]></code></example>
     </member>
     <member name="GetDeployments(string,RequestContext)">
-<example>
+      <example>
 This sample shows how to call GetDeployments with required parameters and parse the result.
 <code><![CDATA[
-var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new AuthoringTypeSpecClient(endpoint);
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+AuthoringTypeSpecClient client = new AuthoringTypeSpecClient(endpoint);
 
-foreach (var item in client.GetDeployments("<projectName>"))
+foreach (BinaryData item in client.GetDeployments("<projectName>"))
 {
     JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
-    Console.WriteLine(result.GetProperty("name").ToString());
+    Console.WriteLine(result[0].GetProperty("name").ToString());
 }
-]]></code>
-</example>
+]]></code></example>
     </member>
     <member name="GetSupportedLanguagesAsync(int?,int?,int?,RequestContext)">
-<example>
+      <example>
 This sample shows how to call GetSupportedLanguagesAsync and parse the result.
 <code><![CDATA[
-var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new AuthoringTypeSpecClient(endpoint);
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+AuthoringTypeSpecClient client = new AuthoringTypeSpecClient(endpoint);
 
-await foreach (var item in client.GetSupportedLanguagesAsync())
+await foreach (BinaryData item in client.GetSupportedLanguagesAsync())
 {
     JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
-    Console.WriteLine(result.GetProperty("languageName").ToString());
-    Console.WriteLine(result.GetProperty("languageCode").ToString());
+    Console.WriteLine(result[0].GetProperty("languageName").ToString());
+    Console.WriteLine(result[0].GetProperty("languageCode").ToString());
 }
 ]]></code>
 This sample shows how to call GetSupportedLanguagesAsync with all parameters, and how to parse the result.
 <code><![CDATA[
-var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new AuthoringTypeSpecClient(endpoint);
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+AuthoringTypeSpecClient client = new AuthoringTypeSpecClient(endpoint);
 
-await foreach (var item in client.GetSupportedLanguagesAsync(1234, 1234, 1234))
+await foreach (BinaryData item in client.GetSupportedLanguagesAsync(maxCount: 1234, skip: 1234, maxpagesize: 1234))
 {
     JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
-    Console.WriteLine(result.GetProperty("languageName").ToString());
-    Console.WriteLine(result.GetProperty("languageCode").ToString());
+    Console.WriteLine(result[0].GetProperty("languageName").ToString());
+    Console.WriteLine(result[0].GetProperty("languageCode").ToString());
 }
-]]></code>
-</example>
+]]></code></example>
     </member>
     <member name="GetSupportedLanguages(int?,int?,int?,RequestContext)">
-<example>
+      <example>
 This sample shows how to call GetSupportedLanguages and parse the result.
 <code><![CDATA[
-var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new AuthoringTypeSpecClient(endpoint);
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+AuthoringTypeSpecClient client = new AuthoringTypeSpecClient(endpoint);
 
-foreach (var item in client.GetSupportedLanguages())
+foreach (BinaryData item in client.GetSupportedLanguages())
 {
     JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
-    Console.WriteLine(result.GetProperty("languageName").ToString());
-    Console.WriteLine(result.GetProperty("languageCode").ToString());
+    Console.WriteLine(result[0].GetProperty("languageName").ToString());
+    Console.WriteLine(result[0].GetProperty("languageCode").ToString());
 }
 ]]></code>
 This sample shows how to call GetSupportedLanguages with all parameters, and how to parse the result.
 <code><![CDATA[
-var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new AuthoringTypeSpecClient(endpoint);
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+AuthoringTypeSpecClient client = new AuthoringTypeSpecClient(endpoint);
 
-foreach (var item in client.GetSupportedLanguages(1234, 1234, 1234))
+foreach (BinaryData item in client.GetSupportedLanguages(maxCount: 1234, skip: 1234, maxpagesize: 1234))
 {
     JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
-    Console.WriteLine(result.GetProperty("languageName").ToString());
-    Console.WriteLine(result.GetProperty("languageCode").ToString());
+    Console.WriteLine(result[0].GetProperty("languageName").ToString());
+    Console.WriteLine(result[0].GetProperty("languageCode").ToString());
 }
-]]></code>
-</example>
+]]></code></example>
     </member>
     <member name="GetTrainingConfigVersionsAsync(int?,int?,int?,RequestContext)">
-<example>
+      <example>
 This sample shows how to call GetTrainingConfigVersionsAsync and parse the result.
 <code><![CDATA[
-var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new AuthoringTypeSpecClient(endpoint);
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+AuthoringTypeSpecClient client = new AuthoringTypeSpecClient(endpoint);
 
-await foreach (var item in client.GetTrainingConfigVersionsAsync())
+await foreach (BinaryData item in client.GetTrainingConfigVersionsAsync())
 {
     JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
-    Console.WriteLine(result.GetProperty("trainingConfigVersionStr").ToString());
-    Console.WriteLine(result.GetProperty("modelExpirationDate").ToString());
+    Console.WriteLine(result[0].GetProperty("trainingConfigVersionStr").ToString());
+    Console.WriteLine(result[0].GetProperty("modelExpirationDate").ToString());
 }
 ]]></code>
 This sample shows how to call GetTrainingConfigVersionsAsync with all parameters, and how to parse the result.
 <code><![CDATA[
-var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new AuthoringTypeSpecClient(endpoint);
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+AuthoringTypeSpecClient client = new AuthoringTypeSpecClient(endpoint);
 
-await foreach (var item in client.GetTrainingConfigVersionsAsync(1234, 1234, 1234))
+await foreach (BinaryData item in client.GetTrainingConfigVersionsAsync(maxCount: 1234, skip: 1234, maxpagesize: 1234))
 {
     JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
-    Console.WriteLine(result.GetProperty("trainingConfigVersionStr").ToString());
-    Console.WriteLine(result.GetProperty("modelExpirationDate").ToString());
+    Console.WriteLine(result[0].GetProperty("trainingConfigVersionStr").ToString());
+    Console.WriteLine(result[0].GetProperty("modelExpirationDate").ToString());
 }
-]]></code>
-</example>
+]]></code></example>
     </member>
     <member name="GetTrainingConfigVersions(int?,int?,int?,RequestContext)">
-<example>
+      <example>
 This sample shows how to call GetTrainingConfigVersions and parse the result.
 <code><![CDATA[
-var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new AuthoringTypeSpecClient(endpoint);
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+AuthoringTypeSpecClient client = new AuthoringTypeSpecClient(endpoint);
 
-foreach (var item in client.GetTrainingConfigVersions())
+foreach (BinaryData item in client.GetTrainingConfigVersions())
 {
     JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
-    Console.WriteLine(result.GetProperty("trainingConfigVersionStr").ToString());
-    Console.WriteLine(result.GetProperty("modelExpirationDate").ToString());
+    Console.WriteLine(result[0].GetProperty("trainingConfigVersionStr").ToString());
+    Console.WriteLine(result[0].GetProperty("modelExpirationDate").ToString());
 }
 ]]></code>
 This sample shows how to call GetTrainingConfigVersions with all parameters, and how to parse the result.
 <code><![CDATA[
-var endpoint = new Uri("<https://my-service.azure.com>");
-var client = new AuthoringTypeSpecClient(endpoint);
+Uri endpoint = new Uri("<https://my-service.azure.com>");
+AuthoringTypeSpecClient client = new AuthoringTypeSpecClient(endpoint);
 
-foreach (var item in client.GetTrainingConfigVersions(1234, 1234, 1234))
+foreach (BinaryData item in client.GetTrainingConfigVersions(maxCount: 1234, skip: 1234, maxpagesize: 1234))
 {
     JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
-    Console.WriteLine(result.GetProperty("trainingConfigVersionStr").ToString());
-    Console.WriteLine(result.GetProperty("modelExpirationDate").ToString());
+    Console.WriteLine(result[0].GetProperty("trainingConfigVersionStr").ToString());
+    Console.WriteLine(result[0].GetProperty("modelExpirationDate").ToString());
 }
-]]></code>
-</example>
+]]></code></example>
     </member>
   </members>
 </doc>

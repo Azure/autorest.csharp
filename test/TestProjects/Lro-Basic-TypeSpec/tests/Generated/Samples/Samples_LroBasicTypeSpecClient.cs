@@ -7,12 +7,12 @@
 
 using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Text.Json;
 using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
 using Azure.Identity;
+using LroBasicTypeSpec;
 using LroBasicTypeSpec.Models;
 using NUnit.Framework;
 
@@ -24,93 +24,117 @@ namespace LroBasicTypeSpec.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_CreateProject()
         {
-            var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new LroBasicTypeSpecClient(endpoint);
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            LroBasicTypeSpecClient client = new LroBasicTypeSpecClient(endpoint);
 
-            var data = new { };
-
-            var operation = client.CreateProject(WaitUntil.Completed, RequestContent.Create(data));
-
-            Console.WriteLine(operation.GetRawResponse().Status);
+            RequestContent content = RequestContent.Create(new Dictionary<string, object>());
+            Operation operation = client.CreateProject(WaitUntil.Completed, content);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
         public void Example_CreateProject_AllParameters()
         {
-            var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new LroBasicTypeSpecClient(endpoint);
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            LroBasicTypeSpecClient client = new LroBasicTypeSpecClient(endpoint);
 
-            var data = new
+            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
             {
-                description = "<description>",
-                name = "<name>",
+                ["description"] = "<description>",
+                ["name"] = "<name>",
+            });
+            Operation operation = client.CreateProject(WaitUntil.Completed, content);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_CreateProject_Convenience()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            LroBasicTypeSpecClient client = new LroBasicTypeSpecClient(endpoint);
+
+            Project resource = new Project();
+            Operation operation = client.CreateProject(WaitUntil.Completed, resource);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_CreateProject_AllParameters_Convenience()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            LroBasicTypeSpecClient client = new LroBasicTypeSpecClient(endpoint);
+
+            Project resource = new Project()
+            {
+                Description = "<description>",
+                Name = "<name>",
             };
-
-            var operation = client.CreateProject(WaitUntil.Completed, RequestContent.Create(data));
-
-            Console.WriteLine(operation.GetRawResponse().Status);
+            Operation operation = client.CreateProject(WaitUntil.Completed, resource);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
         public async Task Example_CreateProject_Async()
         {
-            var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new LroBasicTypeSpecClient(endpoint);
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            LroBasicTypeSpecClient client = new LroBasicTypeSpecClient(endpoint);
 
-            var data = new { };
-
-            var operation = await client.CreateProjectAsync(WaitUntil.Completed, RequestContent.Create(data));
-
-            Console.WriteLine(operation.GetRawResponse().Status);
+            RequestContent content = RequestContent.Create(new Dictionary<string, object>());
+            Operation operation = await client.CreateProjectAsync(WaitUntil.Completed, content);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
         public async Task Example_CreateProject_AllParameters_Async()
         {
-            var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new LroBasicTypeSpecClient(endpoint);
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            LroBasicTypeSpecClient client = new LroBasicTypeSpecClient(endpoint);
 
-            var data = new
+            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
             {
-                description = "<description>",
-                name = "<name>",
-            };
-
-            var operation = await client.CreateProjectAsync(WaitUntil.Completed, RequestContent.Create(data));
-
-            Console.WriteLine(operation.GetRawResponse().Status);
+                ["description"] = "<description>",
+                ["name"] = "<name>",
+            });
+            Operation operation = await client.CreateProjectAsync(WaitUntil.Completed, content);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
         public async Task Example_CreateProject_Convenience_Async()
         {
-            var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new LroBasicTypeSpecClient(endpoint);
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            LroBasicTypeSpecClient client = new LroBasicTypeSpecClient(endpoint);
 
-            var resource = new Project()
+            Project resource = new Project();
+            Operation operation = await client.CreateProjectAsync(WaitUntil.Completed, resource);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_CreateProject_AllParameters_Convenience_Async()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            LroBasicTypeSpecClient client = new LroBasicTypeSpecClient(endpoint);
+
+            Project resource = new Project()
             {
-                Description = "<Description>",
-                Name = "<Name>",
+                Description = "<description>",
+                Name = "<name>",
             };
-            var operation = await client.CreateProjectAsync(WaitUntil.Completed, resource);
+            Operation operation = await client.CreateProjectAsync(WaitUntil.Completed, resource);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
         public void Example_UpdateProject()
         {
-            var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new LroBasicTypeSpecClient(endpoint);
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            LroBasicTypeSpecClient client = new LroBasicTypeSpecClient(endpoint);
 
-            var data = new { };
-
-            var operation = client.UpdateProject(WaitUntil.Completed, "<id>", RequestContent.Create(data));
-
+            RequestContent content = RequestContent.Create(new Dictionary<string, object>());
+            Operation<BinaryData> operation = client.UpdateProject(WaitUntil.Completed, "<id>", content);
             BinaryData responseData = operation.Value;
+
             JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
             Console.WriteLine(result.GetProperty("id").ToString());
         }
@@ -119,18 +143,17 @@ namespace LroBasicTypeSpec.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_UpdateProject_AllParameters()
         {
-            var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new LroBasicTypeSpecClient(endpoint);
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            LroBasicTypeSpecClient client = new LroBasicTypeSpecClient(endpoint);
 
-            var data = new
+            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
             {
-                description = "<description>",
-                name = "<name>",
-            };
-
-            var operation = client.UpdateProject(WaitUntil.Completed, "<id>", RequestContent.Create(data));
-
+                ["description"] = "<description>",
+                ["name"] = "<name>",
+            });
+            Operation<BinaryData> operation = client.UpdateProject(WaitUntil.Completed, "<id>", content);
             BinaryData responseData = operation.Value;
+
             JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
             Console.WriteLine(result.GetProperty("id").ToString());
             Console.WriteLine(result.GetProperty("description").ToString());
@@ -139,16 +162,43 @@ namespace LroBasicTypeSpec.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
+        public void Example_UpdateProject_Convenience()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            LroBasicTypeSpecClient client = new LroBasicTypeSpecClient(endpoint);
+
+            Project resource = new Project();
+            Operation<Project> operation = client.UpdateProject(WaitUntil.Completed, "<id>", resource);
+            BinaryData responseData = operation.Value;
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_UpdateProject_AllParameters_Convenience()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            LroBasicTypeSpecClient client = new LroBasicTypeSpecClient(endpoint);
+
+            Project resource = new Project()
+            {
+                Description = "<description>",
+                Name = "<name>",
+            };
+            Operation<Project> operation = client.UpdateProject(WaitUntil.Completed, "<id>", resource);
+            BinaryData responseData = operation.Value;
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
         public async Task Example_UpdateProject_Async()
         {
-            var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new LroBasicTypeSpecClient(endpoint);
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            LroBasicTypeSpecClient client = new LroBasicTypeSpecClient(endpoint);
 
-            var data = new { };
-
-            var operation = await client.UpdateProjectAsync(WaitUntil.Completed, "<id>", RequestContent.Create(data));
-
+            RequestContent content = RequestContent.Create(new Dictionary<string, object>());
+            Operation<BinaryData> operation = await client.UpdateProjectAsync(WaitUntil.Completed, "<id>", content);
             BinaryData responseData = operation.Value;
+
             JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
             Console.WriteLine(result.GetProperty("id").ToString());
         }
@@ -157,18 +207,17 @@ namespace LroBasicTypeSpec.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_UpdateProject_AllParameters_Async()
         {
-            var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new LroBasicTypeSpecClient(endpoint);
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            LroBasicTypeSpecClient client = new LroBasicTypeSpecClient(endpoint);
 
-            var data = new
+            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
             {
-                description = "<description>",
-                name = "<name>",
-            };
-
-            var operation = await client.UpdateProjectAsync(WaitUntil.Completed, "<id>", RequestContent.Create(data));
-
+                ["description"] = "<description>",
+                ["name"] = "<name>",
+            });
+            Operation<BinaryData> operation = await client.UpdateProjectAsync(WaitUntil.Completed, "<id>", content);
             BinaryData responseData = operation.Value;
+
             JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
             Console.WriteLine(result.GetProperty("id").ToString());
             Console.WriteLine(result.GetProperty("description").ToString());
@@ -179,32 +228,44 @@ namespace LroBasicTypeSpec.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_UpdateProject_Convenience_Async()
         {
-            var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new LroBasicTypeSpecClient(endpoint);
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            LroBasicTypeSpecClient client = new LroBasicTypeSpecClient(endpoint);
 
-            var resource = new Project()
+            Project resource = new Project();
+            Operation<Project> operation = await client.UpdateProjectAsync(WaitUntil.Completed, "<id>", resource);
+            BinaryData responseData = operation.Value;
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_UpdateProject_AllParameters_Convenience_Async()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            LroBasicTypeSpecClient client = new LroBasicTypeSpecClient(endpoint);
+
+            Project resource = new Project()
             {
-                Description = "<Description>",
-                Name = "<Name>",
+                Description = "<description>",
+                Name = "<name>",
             };
-            var operation = await client.UpdateProjectAsync(WaitUntil.Completed, "<id>", resource);
+            Operation<Project> operation = await client.UpdateProjectAsync(WaitUntil.Completed, "<id>", resource);
+            BinaryData responseData = operation.Value;
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
         public void Example_CreateThing()
         {
-            var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new LroBasicTypeSpecClient(endpoint);
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            LroBasicTypeSpecClient client = new LroBasicTypeSpecClient(endpoint);
 
-            var data = new
+            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
             {
-                name = "<name>",
-            };
-
-            var operation = client.CreateThing(WaitUntil.Completed, RequestContent.Create(data));
-
+                ["name"] = "<name>",
+            });
+            Operation<BinaryData> operation = client.CreateThing(WaitUntil.Completed, content);
             BinaryData responseData = operation.Value;
+
             JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
             Console.WriteLine(result.GetProperty("name").ToString());
         }
@@ -213,36 +274,58 @@ namespace LroBasicTypeSpec.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_CreateThing_AllParameters()
         {
-            var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new LroBasicTypeSpecClient(endpoint);
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            LroBasicTypeSpecClient client = new LroBasicTypeSpecClient(endpoint);
 
-            var data = new
+            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
             {
-                name = "<name>",
-            };
-
-            var operation = client.CreateThing(WaitUntil.Completed, RequestContent.Create(data));
-
+                ["name"] = "<name>",
+            });
+            Operation<BinaryData> operation = client.CreateThing(WaitUntil.Completed, content);
             BinaryData responseData = operation.Value;
+
             JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
             Console.WriteLine(result.GetProperty("name").ToString());
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
+        public void Example_CreateThing_Convenience()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            LroBasicTypeSpecClient client = new LroBasicTypeSpecClient(endpoint);
+
+            Thing thing = new Thing("<name>");
+            Operation<Thing> operation = client.CreateThing(WaitUntil.Completed, thing);
+            BinaryData responseData = operation.Value;
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_CreateThing_AllParameters_Convenience()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            LroBasicTypeSpecClient client = new LroBasicTypeSpecClient(endpoint);
+
+            Thing thing = new Thing("<name>");
+            Operation<Thing> operation = client.CreateThing(WaitUntil.Completed, thing);
+            BinaryData responseData = operation.Value;
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
         public async Task Example_CreateThing_Async()
         {
-            var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new LroBasicTypeSpecClient(endpoint);
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            LroBasicTypeSpecClient client = new LroBasicTypeSpecClient(endpoint);
 
-            var data = new
+            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
             {
-                name = "<name>",
-            };
-
-            var operation = await client.CreateThingAsync(WaitUntil.Completed, RequestContent.Create(data));
-
+                ["name"] = "<name>",
+            });
+            Operation<BinaryData> operation = await client.CreateThingAsync(WaitUntil.Completed, content);
             BinaryData responseData = operation.Value;
+
             JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
             Console.WriteLine(result.GetProperty("name").ToString());
         }
@@ -251,17 +334,16 @@ namespace LroBasicTypeSpec.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_CreateThing_AllParameters_Async()
         {
-            var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new LroBasicTypeSpecClient(endpoint);
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            LroBasicTypeSpecClient client = new LroBasicTypeSpecClient(endpoint);
 
-            var data = new
+            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
             {
-                name = "<name>",
-            };
-
-            var operation = await client.CreateThingAsync(WaitUntil.Completed, RequestContent.Create(data));
-
+                ["name"] = "<name>",
+            });
+            Operation<BinaryData> operation = await client.CreateThingAsync(WaitUntil.Completed, content);
             BinaryData responseData = operation.Value;
+
             JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
             Console.WriteLine(result.GetProperty("name").ToString());
         }
@@ -270,11 +352,24 @@ namespace LroBasicTypeSpec.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_CreateThing_Convenience_Async()
         {
-            var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new LroBasicTypeSpecClient(endpoint);
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            LroBasicTypeSpecClient client = new LroBasicTypeSpecClient(endpoint);
 
-            var thing = new Thing("<name>");
-            var operation = await client.CreateThingAsync(WaitUntil.Completed, thing);
+            Thing thing = new Thing("<name>");
+            Operation<Thing> operation = await client.CreateThingAsync(WaitUntil.Completed, thing);
+            BinaryData responseData = operation.Value;
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_CreateThing_AllParameters_Convenience_Async()
+        {
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            LroBasicTypeSpecClient client = new LroBasicTypeSpecClient(endpoint);
+
+            Thing thing = new Thing("<name>");
+            Operation<Thing> operation = await client.CreateThingAsync(WaitUntil.Completed, thing);
+            BinaryData responseData = operation.Value;
         }
     }
 }

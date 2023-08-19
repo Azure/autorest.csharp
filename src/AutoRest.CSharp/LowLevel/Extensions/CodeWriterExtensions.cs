@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
+using System.Text.Json;
 using System.Xml;
 using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Common.Input.Examples;
@@ -69,9 +70,13 @@ namespace AutoRest.CSharp.LowLevel.Generation.Extensions
             if (type.FrameworkType == typeof(RequestContent))
                 return writer.AppendRequestContent(exampleValue);
 
-            if (exampleValue is not InputExampleRawValue inputRawValue)
-                throw new InvalidOperationException($"expect the example value for type {type} is an InputExampleRawValue, but got {exampleValue}");
-            return writer.AppendRawValue(inputRawValue.RawValue, type.FrameworkType, exampleValue.Type);
+            return exampleValue switch
+            {
+                InputExampleRawValue inputRawValue => writer.AppendRawValue(inputRawValue.RawValue, type.FrameworkType, exampleValue.Type),
+                InputExampleListValue inputListValue => writer.AppendListValue(typeof(object), inputListValue, includeCollectionInitialization),
+                InputExampleObjectValue inputObjectValue => writer.AppendDictionaryValue(new CSharpType(typeof(IDictionary<,>), typeof(string), typeof(object)), inputObjectValue, includeCollectionInitialization),
+                _ => throw new InvalidOperationException($"unhandled case {exampleValue}")
+            };
         }
 
         private static CodeWriter AppendRequestContent(this CodeWriter writer, InputExampleValue value)
@@ -123,7 +128,7 @@ namespace AutoRest.CSharp.LowLevel.Generation.Extensions
                 {
                     // write key
                     writer.AppendRaw("[");
-                    writer.AppendInputExampleValue(InputExampleValue.Value(((InputDictionaryType)exampleValue.Type).KeyType, key), keyType);
+                    writer.AppendInputExampleValue(InputExampleValue.Value(InputPrimitiveType.String, key), keyType);
                     writer.AppendRaw("] = ");
                     writer.AppendInputExampleValue(value, valueType);
                     writer.LineRaw(", ");
@@ -179,25 +184,60 @@ namespace AutoRest.CSharp.LowLevel.Generation.Extensions
             }
         }
 
-        private static CodeWriter AppendRawValue(this CodeWriter writer, object? rawValue, Type type, InputType? inputType = null) => rawValue switch
+        private static CodeWriter AppendRawValue(this CodeWriter writer, object? rawValue, Type type, InputType? inputType = null)
         {
-            string str => writer.AppendStringValue(type, str, inputType),
-            int or float or double or decimal or bool => writer.AppendNumberValue(rawValue, inputType),
-            null => writer.AppendRaw("null"),
-            _ => writer.AppendRaw(rawValue.ToString()!)
-        };
+            // we should write things according to the actual type of the property or variable otherwise we may get compilation errors
+            if (rawValue == null)
+            {
+                return writer.AppendRaw("null");
+            }
+            else if (type == typeof(string))
+            {
+                return writer.Append($"{rawValue.ToString():L}");
+            }
+            else if (_primitiveTypes.Contains(type))
+            {
+                return writer.Append($"({type}){rawValue:L}");
+            }
+            else if (_newInstanceInitializedTypes.Contains(type))
+            {
+                return writer.Append($"new {type}({rawValue:L})");
+            }
+            else if (_parsableInitializedTypes.Contains(type))
+            {
+                return writer.Append($"{type}.Parse({rawValue:L})");
+            }
+            else if (type == typeof(byte[]))
+            {
+                return writer.Append($"{typeof(Convert)}.FromBase64String({rawValue:L})");
+            }
+            else if (type == typeof(JsonElement))
+            {
+                return writer.Append($"new {type}()");
+            }
 
-        private static CodeWriter AppendStringValue(this CodeWriter writer, Type type, string value, InputType? inputType = null) => type switch
-        {
-            _ when inputType is InputPrimitiveType { IsNumber: true } => writer.Literal(value),
-            _ when inputType is InputPrimitiveType { Kind: InputTypeKind.String } => writer.Literal(value),
-            _ when inputType is InputPrimitiveType { Kind: InputTypeKind.DurationISO8601 } => writer.Append($"{typeof(XmlConvert)}.ToTimeSpan({value:L})"),
-            _ when _primitiveTypes.Contains(type) => writer.AppendRaw(value),
-            _ when _newInstanceInitializedTypes.Contains(type) => writer.Append($"new {type}({value:L})"),
-            _ when _parsableInitializedTypes.Contains(type) => writer.Append($"{type}.Parse({value:L})"),
-            _ when type == typeof(byte[]) => writer.Append($"{typeof(Convert)}.FromBase64String({value:L})"),
-            _ => writer.Literal(value),
-        };
+            return writer.AppendRaw("default"); // fall back to default since we need to try our best not to generate compile errors.
+        }
+
+        //private static CodeWriter AppendRawValue(this CodeWriter writer, object? rawValue, Type type, InputType? inputType = null) => rawValue switch
+        //{
+        //    string str => writer.AppendStringValue(type, str, inputType),
+        //    int or float or double or decimal or bool => writer.AppendNumberValue(rawValue, inputType),
+        //    null => writer.AppendRaw("null"),
+        //    _ => writer.AppendRaw(rawValue.ToString()!)
+        //};
+
+        //private static CodeWriter AppendStringValue(this CodeWriter writer, Type type, string value, InputType? inputType = null) => type switch
+        //{
+        //    _ when _primitiveTypes.Contains(type) => writer.AppendRaw(value),
+        //    _ when _newInstanceInitializedTypes.Contains(type) => writer.Append($"new {type}({value:L})"),
+        //    _ when _parsableInitializedTypes.Contains(type) => writer.Append($"{type}.Parse({value:L})"),
+        //    _ when type == typeof(byte[]) => writer.Append($"{typeof(Convert)}.FromBase64String({value:L})"),
+        //    _ when inputType is InputPrimitiveType { IsNumber: true } => writer.Literal(value),
+        //    _ when inputType is InputPrimitiveType { Kind: InputTypeKind.String } => writer.Literal(value),
+        //    _ when inputType is InputPrimitiveType { Kind: InputTypeKind.DurationISO8601 } => writer.Append($"{typeof(XmlConvert)}.ToTimeSpan({value:L})"),
+        //    _ => writer.Literal(value),
+        //};
 
         private static CodeWriter AppendNumberValue(this CodeWriter writer, object value, InputType? inputType = null) => inputType switch
         {

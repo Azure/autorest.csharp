@@ -11,6 +11,7 @@ using System.Text.Json;
 using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
+using Azure.Identity;
 using FirstTestTypeSpec;
 using FirstTestTypeSpec.Models;
 using NUnit.Framework;
@@ -217,7 +218,7 @@ namespace FirstTestTypeSpec.Samples
                 ["requiredBadDescription"] = "<requiredBadDescription>",
                 ["requiredNullableList"] = new object[]
             {
-1234
+default
             },
             });
             Response response = client.PatchAction(content);
@@ -255,11 +256,11 @@ namespace FirstTestTypeSpec.Samples
                 ["requiredBadDescription"] = "<requiredBadDescription>",
                 ["optionalNullableList"] = new object[]
             {
-1234
+default
             },
                 ["requiredNullableList"] = new object[]
             {
-1234
+default
             },
             });
             Response response = client.PatchAction(content);
@@ -298,7 +299,7 @@ namespace FirstTestTypeSpec.Samples
                 ["requiredBadDescription"] = "<requiredBadDescription>",
                 ["requiredNullableList"] = new object[]
             {
-1234
+default
             },
             });
             Response response = await client.PatchActionAsync(content);
@@ -336,11 +337,11 @@ namespace FirstTestTypeSpec.Samples
                 ["requiredBadDescription"] = "<requiredBadDescription>",
                 ["optionalNullableList"] = new object[]
             {
-1234
+default
             },
                 ["requiredNullableList"] = new object[]
             {
-1234
+default
             },
             });
             Response response = await client.PatchActionAsync(content);
@@ -379,7 +380,7 @@ namespace FirstTestTypeSpec.Samples
                 ["requiredBadDescription"] = "<requiredBadDescription>",
                 ["requiredNullableList"] = new object[]
             {
-1234
+default
             },
             });
             Response response = client.AnonymousBody(content);
@@ -417,11 +418,11 @@ namespace FirstTestTypeSpec.Samples
                 ["requiredBadDescription"] = "<requiredBadDescription>",
                 ["optionalNullableList"] = new object[]
             {
-1234
+default
             },
                 ["requiredNullableList"] = new object[]
             {
-1234
+default
             },
             });
             Response response = client.AnonymousBody(content);
@@ -460,7 +461,7 @@ namespace FirstTestTypeSpec.Samples
                 ["requiredBadDescription"] = "<requiredBadDescription>",
                 ["requiredNullableList"] = new object[]
             {
-1234
+default
             },
             });
             Response response = await client.AnonymousBodyAsync(content);
@@ -498,11 +499,11 @@ namespace FirstTestTypeSpec.Samples
                 ["requiredBadDescription"] = "<requiredBadDescription>",
                 ["optionalNullableList"] = new object[]
             {
-1234
+default
             },
                 ["requiredNullableList"] = new object[]
             {
-1234
+default
             },
             });
             Response response = await client.AnonymousBodyAsync(content);
@@ -894,7 +895,7 @@ namespace FirstTestTypeSpec.Samples
                 ["requiredInt"] = 1234,
                 ["requiredCollection"] = new object[]
             {
-"1"
+default
             },
                 ["requiredDictionary"] = new Dictionary<string, object>()
                 {
@@ -911,7 +912,7 @@ namespace FirstTestTypeSpec.Samples
                     ["requiredBadDescription"] = "<requiredBadDescription>",
                     ["requiredNullableList"] = new object[]
             {
-1234
+default
             },
                 },
                 ["requiredUnknown"] = new Dictionary<string, object>(),
@@ -962,7 +963,7 @@ namespace FirstTestTypeSpec.Samples
                 ["requiredInt"] = 1234,
                 ["requiredCollection"] = new object[]
             {
-"1"
+default
             },
                 ["requiredDictionary"] = new Dictionary<string, object>()
                 {
@@ -983,32 +984,32 @@ namespace FirstTestTypeSpec.Samples
                     ["requiredBadDescription"] = "<requiredBadDescription>",
                     ["optionalNullableList"] = new object[]
             {
-1234
+default
             },
                     ["requiredNullableList"] = new object[]
             {
-1234
+default
             },
                 },
                 ["intExtensibleEnum"] = 1,
                 ["intExtensibleEnumCollection"] = new object[]
             {
-1
+default
             },
                 ["floatExtensibleEnum"] = 1,
                 ["floatExtensibleEnumCollection"] = new object[]
             {
-1
+default
             },
                 ["floatFixedEnum"] = 1.1F,
                 ["floatFixedEnumCollection"] = new object[]
             {
-1.1F
+default
             },
                 ["intFixedEnum"] = 1,
                 ["intFixedEnumCollection"] = new object[]
             {
-1
+default
             },
                 ["stringFixedEnum"] = "1",
                 ["requiredUnknown"] = new Dictionary<string, object>(),
@@ -1081,7 +1082,7 @@ namespace FirstTestTypeSpec.Samples
                 ["requiredInt"] = 1234,
                 ["requiredCollection"] = new object[]
             {
-"1"
+default
             },
                 ["requiredDictionary"] = new Dictionary<string, object>()
                 {
@@ -1098,7 +1099,7 @@ namespace FirstTestTypeSpec.Samples
                     ["requiredBadDescription"] = "<requiredBadDescription>",
                     ["requiredNullableList"] = new object[]
             {
-1234
+default
             },
                 },
                 ["requiredUnknown"] = new Dictionary<string, object>(),
@@ -1149,7 +1150,7 @@ namespace FirstTestTypeSpec.Samples
                 ["requiredInt"] = 1234,
                 ["requiredCollection"] = new object[]
             {
-"1"
+default
             },
                 ["requiredDictionary"] = new Dictionary<string, object>()
                 {
@@ -1170,32 +1171,32 @@ namespace FirstTestTypeSpec.Samples
                     ["requiredBadDescription"] = "<requiredBadDescription>",
                     ["optionalNullableList"] = new object[]
             {
-1234
+default
             },
                     ["requiredNullableList"] = new object[]
             {
-1234
+default
             },
                 },
                 ["intExtensibleEnum"] = 1,
                 ["intExtensibleEnumCollection"] = new object[]
             {
-1
+default
             },
                 ["floatExtensibleEnum"] = 1,
                 ["floatExtensibleEnumCollection"] = new object[]
             {
-1
+default
             },
                 ["floatFixedEnum"] = 1.1F,
                 ["floatFixedEnumCollection"] = new object[]
             {
-1.1F
+default
             },
                 ["intFixedEnum"] = 1,
                 ["intFixedEnumCollection"] = new object[]
             {
-1
+default
             },
                 ["stringFixedEnum"] = "1",
                 ["requiredUnknown"] = new Dictionary<string, object>(),
@@ -1268,7 +1269,7 @@ namespace FirstTestTypeSpec.Samples
                 ["requiredInt"] = 1234,
                 ["requiredCollection"] = new object[]
             {
-"1"
+default
             },
                 ["requiredDictionary"] = new Dictionary<string, object>()
                 {
@@ -1285,7 +1286,7 @@ namespace FirstTestTypeSpec.Samples
                     ["requiredBadDescription"] = "<requiredBadDescription>",
                     ["requiredNullableList"] = new object[]
             {
-1234
+default
             },
                 },
                 ["requiredUnknown"] = new Dictionary<string, object>(),
@@ -1336,7 +1337,7 @@ namespace FirstTestTypeSpec.Samples
                 ["requiredInt"] = 1234,
                 ["requiredCollection"] = new object[]
             {
-"1"
+default
             },
                 ["requiredDictionary"] = new Dictionary<string, object>()
                 {
@@ -1357,32 +1358,32 @@ namespace FirstTestTypeSpec.Samples
                     ["requiredBadDescription"] = "<requiredBadDescription>",
                     ["optionalNullableList"] = new object[]
             {
-1234
+default
             },
                     ["requiredNullableList"] = new object[]
             {
-1234
+default
             },
                 },
                 ["intExtensibleEnum"] = 1,
                 ["intExtensibleEnumCollection"] = new object[]
             {
-1
+default
             },
                 ["floatExtensibleEnum"] = 1,
                 ["floatExtensibleEnumCollection"] = new object[]
             {
-1
+default
             },
                 ["floatFixedEnum"] = 1.1F,
                 ["floatFixedEnumCollection"] = new object[]
             {
-1.1F
+default
             },
                 ["intFixedEnum"] = 1,
                 ["intFixedEnumCollection"] = new object[]
             {
-1
+default
             },
                 ["stringFixedEnum"] = "1",
                 ["requiredUnknown"] = new Dictionary<string, object>(),
@@ -1455,7 +1456,7 @@ namespace FirstTestTypeSpec.Samples
                 ["requiredInt"] = 1234,
                 ["requiredCollection"] = new object[]
             {
-"1"
+default
             },
                 ["requiredDictionary"] = new Dictionary<string, object>()
                 {
@@ -1472,7 +1473,7 @@ namespace FirstTestTypeSpec.Samples
                     ["requiredBadDescription"] = "<requiredBadDescription>",
                     ["requiredNullableList"] = new object[]
             {
-1234
+default
             },
                 },
                 ["requiredUnknown"] = new Dictionary<string, object>(),
@@ -1523,7 +1524,7 @@ namespace FirstTestTypeSpec.Samples
                 ["requiredInt"] = 1234,
                 ["requiredCollection"] = new object[]
             {
-"1"
+default
             },
                 ["requiredDictionary"] = new Dictionary<string, object>()
                 {
@@ -1544,32 +1545,32 @@ namespace FirstTestTypeSpec.Samples
                     ["requiredBadDescription"] = "<requiredBadDescription>",
                     ["optionalNullableList"] = new object[]
             {
-1234
+default
             },
                     ["requiredNullableList"] = new object[]
             {
-1234
+default
             },
                 },
                 ["intExtensibleEnum"] = 1,
                 ["intExtensibleEnumCollection"] = new object[]
             {
-1
+default
             },
                 ["floatExtensibleEnum"] = 1,
                 ["floatExtensibleEnumCollection"] = new object[]
             {
-1
+default
             },
                 ["floatFixedEnum"] = 1.1F,
                 ["floatFixedEnumCollection"] = new object[]
             {
-1.1F
+default
             },
                 ["intFixedEnum"] = 1,
                 ["intFixedEnumCollection"] = new object[]
             {
-1
+default
             },
                 ["stringFixedEnum"] = "1",
                 ["requiredUnknown"] = new Dictionary<string, object>(),
@@ -1737,7 +1738,7 @@ namespace FirstTestTypeSpec.Samples
                 ["requiredBadDescription"] = "<requiredBadDescription>",
                 ["requiredNullableList"] = new object[]
             {
-1234
+default
             },
             });
             Response response = client.CreateLiteral(content);
@@ -1775,11 +1776,11 @@ namespace FirstTestTypeSpec.Samples
                 ["requiredBadDescription"] = "<requiredBadDescription>",
                 ["optionalNullableList"] = new object[]
             {
-1234
+default
             },
                 ["requiredNullableList"] = new object[]
             {
-1234
+default
             },
             });
             Response response = client.CreateLiteral(content);
@@ -1818,7 +1819,7 @@ namespace FirstTestTypeSpec.Samples
                 ["requiredBadDescription"] = "<requiredBadDescription>",
                 ["requiredNullableList"] = new object[]
             {
-1234
+default
             },
             });
             Response response = await client.CreateLiteralAsync(content);
@@ -1856,11 +1857,11 @@ namespace FirstTestTypeSpec.Samples
                 ["requiredBadDescription"] = "<requiredBadDescription>",
                 ["optionalNullableList"] = new object[]
             {
-1234
+default
             },
                 ["requiredNullableList"] = new object[]
             {
-1234
+default
             },
             });
             Response response = await client.CreateLiteralAsync(content);

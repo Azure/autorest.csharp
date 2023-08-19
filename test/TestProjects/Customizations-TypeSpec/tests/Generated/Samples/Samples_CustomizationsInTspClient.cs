@@ -7,12 +7,12 @@
 
 using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Text.Json;
 using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
 using Azure.Identity;
+using CustomizationsInTsp;
 using CustomizationsInTsp.Models;
 using NUnit.Framework;
 
@@ -24,11 +24,10 @@ namespace CustomizationsInTsp.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_RoundTrip()
         {
-            var client = new CustomizationsInTspClient();
+            CustomizationsInTspClient client = new CustomizationsInTspClient();
 
-            var data = new { };
-
-            Response response = client.RoundTrip(RequestContent.Create(data));
+            RequestContent content = RequestContent.Create(new Dictionary<string, object>());
+            Response response = client.RoundTrip(content);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());
@@ -38,62 +37,66 @@ namespace CustomizationsInTsp.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_RoundTrip_AllParameters()
         {
-            var client = new CustomizationsInTspClient();
+            CustomizationsInTspClient client = new CustomizationsInTspClient();
 
-            var data = new
+            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
             {
-                propertyModelToMakeInternal = new
+                ["propertyModelToMakeInternal"] = new Dictionary<string, object>()
                 {
-                    requiredInt = 1234,
+                    ["requiredInt"] = 1234,
                 },
-                propertyModelToRename = new
+                ["propertyModelToRename"] = new Dictionary<string, object>()
                 {
-                    requiredInt = 1234,
-                    optionalInt = 1234,
+                    ["requiredInt"] = 1234,
+                    ["optionalInt"] = 1234,
                 },
-                propertyModelToChangeNamespace = new
+                ["propertyModelToChangeNamespace"] = new Dictionary<string, object>()
                 {
-                    requiredInt = 1234,
+                    ["requiredInt"] = 1234,
                 },
-                propertyModelWithCustomizedProperties = new
+                ["propertyModelWithCustomizedProperties"] = new Dictionary<string, object>()
                 {
-                    propertyToMakeInternal = 1234,
-                    propertyToRename = 1234,
-                    propertyToMakeFloat = 1234,
-                    propertyToMakeInt = 123.45f,
-                    propertyToMakeDuration = "<propertyToMakeDuration>",
-                    propertyToMakeString = "PT1H23M45S",
-                    propertyToMakeJsonElement = "<propertyToMakeJsonElement>",
-                    propertyToField = "<propertyToField>",
-                    badListName = new[] {
-            "<String>"
-        },
-                    badDictionaryName = new
+                    ["propertyToMakeInternal"] = 1234,
+                    ["propertyToRename"] = 1234,
+                    ["propertyToMakeFloat"] = 1234,
+                    ["propertyToMakeInt"] = 123.45F,
+                    ["propertyToMakeDuration"] = "<propertyToMakeDuration>",
+                    ["propertyToMakeString"] = "PT1H23M45S",
+                    ["propertyToMakeJsonElement"] = "<propertyToMakeJsonElement>",
+                    ["propertyToField"] = "<propertyToField>",
+                    ["badListName"] = new object[]
+            {
+default
+            },
+                    ["badDictionaryName"] = new Dictionary<string, object>()
                     {
-                        key = "<String>",
+                        ["key"] = "<badDictionaryName>",
                     },
-                    badListOfListName = new[] {
-            new[] {
-                "<String>"
-            }
-        },
-                    badListOfDictionaryName = new[] {
-            new {
-                key = "<String>",
-            }
-        },
+                    ["badListOfListName"] = new object[]
+            {
+new object[]
+{
+default
+}
+            },
+                    ["badListOfDictionaryName"] = new object[]
+            {
+new Dictionary<string, object>()
+{
+["key"] = default,
+}
+            },
                 },
-                propertyEnumToRename = "1",
-                propertyEnumWithValueToRename = "1",
-                propertyEnumToBeMadeExtensible = "1",
-                propertyModelToAddAdditionalSerializableProperty = new
+                ["propertyEnumToRename"] = "1",
+                ["propertyEnumWithValueToRename"] = "1",
+                ["propertyEnumToBeMadeExtensible"] = "1",
+                ["propertyModelToAddAdditionalSerializableProperty"] = new Dictionary<string, object>()
                 {
-                    requiredInt = 1234,
+                    ["requiredInt"] = 1234,
                 },
-                propertyToMoveToCustomization = "a",
-            };
-
-            Response response = client.RoundTrip(RequestContent.Create(data));
+                ["propertyToMoveToCustomization"] = "a",
+            });
+            Response response = client.RoundTrip(content);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("propertyModelToMakeInternal").GetProperty("requiredInt").ToString());
@@ -109,9 +112,9 @@ namespace CustomizationsInTsp.Samples
             Console.WriteLine(result.GetProperty("propertyModelWithCustomizedProperties").GetProperty("propertyToMakeJsonElement").ToString());
             Console.WriteLine(result.GetProperty("propertyModelWithCustomizedProperties").GetProperty("propertyToField").ToString());
             Console.WriteLine(result.GetProperty("propertyModelWithCustomizedProperties").GetProperty("badListName")[0].ToString());
-            Console.WriteLine(result.GetProperty("propertyModelWithCustomizedProperties").GetProperty("badDictionaryName").GetProperty("<test>").ToString());
+            Console.WriteLine(result.GetProperty("propertyModelWithCustomizedProperties").GetProperty("badDictionaryName").GetProperty("<key>").ToString());
             Console.WriteLine(result.GetProperty("propertyModelWithCustomizedProperties").GetProperty("badListOfListName")[0][0].ToString());
-            Console.WriteLine(result.GetProperty("propertyModelWithCustomizedProperties").GetProperty("badListOfDictionaryName")[0].GetProperty("<test>").ToString());
+            Console.WriteLine(result.GetProperty("propertyModelWithCustomizedProperties").GetProperty("badListOfDictionaryName")[0].GetProperty("<key>").ToString());
             Console.WriteLine(result.GetProperty("propertyEnumToRename").ToString());
             Console.WriteLine(result.GetProperty("propertyEnumWithValueToRename").ToString());
             Console.WriteLine(result.GetProperty("propertyEnumToBeMadeExtensible").ToString());
@@ -121,13 +124,63 @@ namespace CustomizationsInTsp.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
+        public void Example_RoundTrip_Convenience()
+        {
+            CustomizationsInTspClient client = new CustomizationsInTspClient();
+
+            RootModel input = new RootModel();
+            Response<RootModel> response = client.RoundTrip(input);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_RoundTrip_AllParameters_Convenience()
+        {
+            CustomizationsInTspClient client = new CustomizationsInTspClient();
+
+            RootModel input = new RootModel()
+            {
+                PropertyModelToRename = new RenamedModel(1234)
+                {
+                    OptionalInt = 1234,
+                },
+                PropertyModelToChangeNamespace = new ModelToChangeNamespace(1234),
+                PropertyModelWithCustomizedProperties = new ModelWithCustomizedProperties(1234, 1234, 1234, (int)123.45F, TimeSpan.Parse("<propertyToMakeDuration>"), "PT1H23M45S", new JsonElement(), "<propertyToField>", new string[]
+            {
+"<badListName>"
+            }, new Dictionary<string, string>()
+            {
+                ["key"] = "<badDictionaryName>",
+            }, new IList<string>[]
+            {
+new string[]
+{
+"<badListOfListName>"
+}
+            }, new IDictionary<string, string>[]
+            {
+new Dictionary<string, string>()
+{
+["key"] = "<badListOfDictionaryName>",
+}
+            }),
+                PropertyEnumToRename = RenamedEnum.One,
+                PropertyEnumWithValueToRename = EnumWithValueToRename.One,
+                PropertyEnumToBeMadeExtensible = EnumToBeMadeExtensible.ExOne,
+                PropertyModelToAddAdditionalSerializableProperty = new ModelToAddAdditionalSerializableProperty(1234),
+                PropertyToMoveToCustomization = NormalEnum.A,
+            };
+            Response<RootModel> response = client.RoundTrip(input);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
         public async Task Example_RoundTrip_Async()
         {
-            var client = new CustomizationsInTspClient();
+            CustomizationsInTspClient client = new CustomizationsInTspClient();
 
-            var data = new { };
-
-            Response response = await client.RoundTripAsync(RequestContent.Create(data));
+            RequestContent content = RequestContent.Create(new Dictionary<string, object>());
+            Response response = await client.RoundTripAsync(content);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());
@@ -137,62 +190,66 @@ namespace CustomizationsInTsp.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_RoundTrip_AllParameters_Async()
         {
-            var client = new CustomizationsInTspClient();
+            CustomizationsInTspClient client = new CustomizationsInTspClient();
 
-            var data = new
+            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
             {
-                propertyModelToMakeInternal = new
+                ["propertyModelToMakeInternal"] = new Dictionary<string, object>()
                 {
-                    requiredInt = 1234,
+                    ["requiredInt"] = 1234,
                 },
-                propertyModelToRename = new
+                ["propertyModelToRename"] = new Dictionary<string, object>()
                 {
-                    requiredInt = 1234,
-                    optionalInt = 1234,
+                    ["requiredInt"] = 1234,
+                    ["optionalInt"] = 1234,
                 },
-                propertyModelToChangeNamespace = new
+                ["propertyModelToChangeNamespace"] = new Dictionary<string, object>()
                 {
-                    requiredInt = 1234,
+                    ["requiredInt"] = 1234,
                 },
-                propertyModelWithCustomizedProperties = new
+                ["propertyModelWithCustomizedProperties"] = new Dictionary<string, object>()
                 {
-                    propertyToMakeInternal = 1234,
-                    propertyToRename = 1234,
-                    propertyToMakeFloat = 1234,
-                    propertyToMakeInt = 123.45f,
-                    propertyToMakeDuration = "<propertyToMakeDuration>",
-                    propertyToMakeString = "PT1H23M45S",
-                    propertyToMakeJsonElement = "<propertyToMakeJsonElement>",
-                    propertyToField = "<propertyToField>",
-                    badListName = new[] {
-            "<String>"
-        },
-                    badDictionaryName = new
+                    ["propertyToMakeInternal"] = 1234,
+                    ["propertyToRename"] = 1234,
+                    ["propertyToMakeFloat"] = 1234,
+                    ["propertyToMakeInt"] = 123.45F,
+                    ["propertyToMakeDuration"] = "<propertyToMakeDuration>",
+                    ["propertyToMakeString"] = "PT1H23M45S",
+                    ["propertyToMakeJsonElement"] = "<propertyToMakeJsonElement>",
+                    ["propertyToField"] = "<propertyToField>",
+                    ["badListName"] = new object[]
+            {
+default
+            },
+                    ["badDictionaryName"] = new Dictionary<string, object>()
                     {
-                        key = "<String>",
+                        ["key"] = "<badDictionaryName>",
                     },
-                    badListOfListName = new[] {
-            new[] {
-                "<String>"
-            }
-        },
-                    badListOfDictionaryName = new[] {
-            new {
-                key = "<String>",
-            }
-        },
+                    ["badListOfListName"] = new object[]
+            {
+new object[]
+{
+default
+}
+            },
+                    ["badListOfDictionaryName"] = new object[]
+            {
+new Dictionary<string, object>()
+{
+["key"] = default,
+}
+            },
                 },
-                propertyEnumToRename = "1",
-                propertyEnumWithValueToRename = "1",
-                propertyEnumToBeMadeExtensible = "1",
-                propertyModelToAddAdditionalSerializableProperty = new
+                ["propertyEnumToRename"] = "1",
+                ["propertyEnumWithValueToRename"] = "1",
+                ["propertyEnumToBeMadeExtensible"] = "1",
+                ["propertyModelToAddAdditionalSerializableProperty"] = new Dictionary<string, object>()
                 {
-                    requiredInt = 1234,
+                    ["requiredInt"] = 1234,
                 },
-                propertyToMoveToCustomization = "a",
-            };
-
-            Response response = await client.RoundTripAsync(RequestContent.Create(data));
+                ["propertyToMoveToCustomization"] = "a",
+            });
+            Response response = await client.RoundTripAsync(content);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("propertyModelToMakeInternal").GetProperty("requiredInt").ToString());
@@ -208,9 +265,9 @@ namespace CustomizationsInTsp.Samples
             Console.WriteLine(result.GetProperty("propertyModelWithCustomizedProperties").GetProperty("propertyToMakeJsonElement").ToString());
             Console.WriteLine(result.GetProperty("propertyModelWithCustomizedProperties").GetProperty("propertyToField").ToString());
             Console.WriteLine(result.GetProperty("propertyModelWithCustomizedProperties").GetProperty("badListName")[0].ToString());
-            Console.WriteLine(result.GetProperty("propertyModelWithCustomizedProperties").GetProperty("badDictionaryName").GetProperty("<test>").ToString());
+            Console.WriteLine(result.GetProperty("propertyModelWithCustomizedProperties").GetProperty("badDictionaryName").GetProperty("<key>").ToString());
             Console.WriteLine(result.GetProperty("propertyModelWithCustomizedProperties").GetProperty("badListOfListName")[0][0].ToString());
-            Console.WriteLine(result.GetProperty("propertyModelWithCustomizedProperties").GetProperty("badListOfDictionaryName")[0].GetProperty("<test>").ToString());
+            Console.WriteLine(result.GetProperty("propertyModelWithCustomizedProperties").GetProperty("badListOfDictionaryName")[0].GetProperty("<key>").ToString());
             Console.WriteLine(result.GetProperty("propertyEnumToRename").ToString());
             Console.WriteLine(result.GetProperty("propertyEnumWithValueToRename").ToString());
             Console.WriteLine(result.GetProperty("propertyEnumToBeMadeExtensible").ToString());
@@ -222,45 +279,51 @@ namespace CustomizationsInTsp.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_RoundTrip_Convenience_Async()
         {
-            var client = new CustomizationsInTspClient();
+            CustomizationsInTspClient client = new CustomizationsInTspClient();
 
-            var input = new RootModel()
+            RootModel input = new RootModel();
+            Response<RootModel> response = await client.RoundTripAsync(input);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_RoundTrip_AllParameters_Convenience_Async()
+        {
+            CustomizationsInTspClient client = new CustomizationsInTspClient();
+
+            RootModel input = new RootModel()
             {
                 PropertyModelToRename = new RenamedModel(1234)
                 {
                     OptionalInt = 1234,
                 },
                 PropertyModelToChangeNamespace = new ModelToChangeNamespace(1234),
-                PropertyModelWithCustomizedProperties = new ModelWithCustomizedProperties(1234, 1234, 3.14f, 1234, new TimeSpan(1, 2, 3), "<propertyToMakeString>", new JsonElement(), "<propertyToField>", new string[]
+                PropertyModelWithCustomizedProperties = new ModelWithCustomizedProperties(1234, 1234, 1234, (int)123.45F, TimeSpan.Parse("<propertyToMakeDuration>"), "PT1H23M45S", new JsonElement(), "<propertyToField>", new string[]
             {
-        "<null>"
-                }, new Dictionary<string, string>
-                {
-                    ["key"] = "<null>",
-                }, new IList<string>[]
+"<badListName>"
+            }, new Dictionary<string, string>()
             {
-        new string[]
+                ["key"] = "<badDictionaryName>",
+            }, new IList<string>[]
+            {
+new string[]
 {
-            "<null>"
-        }
-                }, new IDictionary<string, string>[]
+"<badListOfListName>"
+}
+            }, new IDictionary<string, string>[]
             {
-        new Dictionary<string, string>
+new Dictionary<string, string>()
 {
-            ["key"] = "<null>",
-        }
-                }),
+["key"] = "<badListOfDictionaryName>",
+}
+            }),
                 PropertyEnumToRename = RenamedEnum.One,
                 PropertyEnumWithValueToRename = EnumWithValueToRename.One,
                 PropertyEnumToBeMadeExtensible = EnumToBeMadeExtensible.ExOne,
-                PropertyModelToAddAdditionalSerializableProperty = new ModelToAddAdditionalSerializableProperty(1234)
-                {
-                    AdditionalSerializableProperty = 1234,
-                    AdditionalNullableSerializableProperty = 1234,
-                },
+                PropertyModelToAddAdditionalSerializableProperty = new ModelToAddAdditionalSerializableProperty(1234),
                 PropertyToMoveToCustomization = NormalEnum.A,
             };
-            var result = await client.RoundTripAsync(input);
+            Response<RootModel> response = await client.RoundTripAsync(input);
         }
     }
 }

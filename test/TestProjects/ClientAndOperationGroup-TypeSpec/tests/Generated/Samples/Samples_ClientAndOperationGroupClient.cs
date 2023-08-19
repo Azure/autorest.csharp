@@ -6,13 +6,11 @@
 #nullable disable
 
 using System;
-using System.Collections.Generic;
-using System.IO;
 using System.Text.Json;
 using System.Threading.Tasks;
 using Azure;
-using Azure.Core;
 using Azure.Identity;
+using ClientAndOperationGroup;
 using NUnit.Framework;
 
 namespace ClientAndOperationGroup.Samples
@@ -23,10 +21,10 @@ namespace ClientAndOperationGroup.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Zero()
         {
-            var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new ClientAndOperationGroupClient(endpoint);
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            ClientAndOperationGroupClient client = new ClientAndOperationGroupClient(endpoint);
 
-            Response response = client.Zero(new RequestContext());
+            Response response = client.Zero(null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());
@@ -36,10 +34,10 @@ namespace ClientAndOperationGroup.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Zero_AllParameters()
         {
-            var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new ClientAndOperationGroupClient(endpoint);
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            ClientAndOperationGroupClient client = new ClientAndOperationGroupClient(endpoint);
 
-            Response response = client.Zero(new RequestContext());
+            Response response = client.Zero(null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());
@@ -49,10 +47,10 @@ namespace ClientAndOperationGroup.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Zero_Async()
         {
-            var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new ClientAndOperationGroupClient(endpoint);
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            ClientAndOperationGroupClient client = new ClientAndOperationGroupClient(endpoint);
 
-            Response response = await client.ZeroAsync(new RequestContext());
+            Response response = await client.ZeroAsync(null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());
@@ -62,10 +60,10 @@ namespace ClientAndOperationGroup.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Zero_AllParameters_Async()
         {
-            var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new ClientAndOperationGroupClient(endpoint);
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            ClientAndOperationGroupClient client = new ClientAndOperationGroupClient(endpoint);
 
-            Response response = await client.ZeroAsync(new RequestContext());
+            Response response = await client.ZeroAsync(null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());
@@ -75,10 +73,10 @@ namespace ClientAndOperationGroup.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_One()
         {
-            var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new ClientAndOperationGroupClient(endpoint);
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            ClientAndOperationGroupClient client = new ClientAndOperationGroupClient(endpoint);
 
-            Response response = client.One(new RequestContext());
+            Response response = client.One(null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());
@@ -88,10 +86,10 @@ namespace ClientAndOperationGroup.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_One_AllParameters()
         {
-            var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new ClientAndOperationGroupClient(endpoint);
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            ClientAndOperationGroupClient client = new ClientAndOperationGroupClient(endpoint);
 
-            Response response = client.One(new RequestContext());
+            Response response = client.One(null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());
@@ -101,10 +99,10 @@ namespace ClientAndOperationGroup.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_One_Async()
         {
-            var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new ClientAndOperationGroupClient(endpoint);
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            ClientAndOperationGroupClient client = new ClientAndOperationGroupClient(endpoint);
 
-            Response response = await client.OneAsync(new RequestContext());
+            Response response = await client.OneAsync(null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());
@@ -114,10 +112,10 @@ namespace ClientAndOperationGroup.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_One_AllParameters_Async()
         {
-            var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new ClientAndOperationGroupClient(endpoint);
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            ClientAndOperationGroupClient client = new ClientAndOperationGroupClient(endpoint);
 
-            Response response = await client.OneAsync(new RequestContext());
+            Response response = await client.OneAsync(null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());

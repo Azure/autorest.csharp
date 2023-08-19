@@ -134,7 +134,7 @@ namespace AutoRest.CSharp.Output.Models
 
             foreach (var (exampleKey, clientExample) in _clientParameterExamples)
             {
-                if (!shouldGenerateSample && exampleKey != ExampleMockValueBuilder.ShortVersionMockExampleKey)
+                if (!shouldGenerateShortVersion && exampleKey != ExampleMockValueBuilder.ShortVersionMockExampleKey)
                     continue; // skip the short example when we decide not to generate it
                 if (Operation.Examples.TryGetValue(exampleKey, out var operationExample))
                 {
@@ -154,7 +154,7 @@ namespace AutoRest.CSharp.Output.Models
             {
                 foreach (var (exampleKey, clientExample) in _clientParameterExamples)
                 {
-                    if (!shouldGenerateSample && exampleKey != ExampleMockValueBuilder.ShortVersionMockExampleKey)
+                    if (!shouldGenerateShortVersion && exampleKey != ExampleMockValueBuilder.ShortVersionMockExampleKey)
                         continue; // skip the short example when we decide not to generate it
                     if (Operation.Examples.TryGetValue(exampleKey, out var operationExample))
                     {

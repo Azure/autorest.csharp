@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace AutoRest.CSharp.Common.Input.Examples
 {
-    internal record InputExampleValue(InputType Type)
+    internal abstract record InputExampleValue(InputType Type)
     {
         public static InputExampleValue Null(InputType type) => new InputExampleRawValue(type, null);
         public static InputExampleValue Value(InputType type, object? rawValue) => new InputExampleRawValue(type, rawValue);

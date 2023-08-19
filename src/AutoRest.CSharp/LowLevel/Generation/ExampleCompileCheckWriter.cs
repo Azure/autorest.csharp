@@ -36,6 +36,9 @@ namespace AutoRest.CSharp.LowLevel.Generation
 
         public void Write()
         {
+            // since our generator source code does not have the Azure.Identity dependency, we have to add this dependency separately
+            _writer.UseNamespace("Azure.Identity");
+
             using (_writer.Namespace($"{_client.Declaration.Namespace}.Samples"))
             {
                 using (_writer.Scope($"public class Samples_{_client.Declaration.Name}"))

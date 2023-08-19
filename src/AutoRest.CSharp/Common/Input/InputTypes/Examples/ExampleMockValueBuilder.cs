@@ -159,25 +159,37 @@ namespace AutoRest.CSharp.Common.Input.Examples
 
         private static InputExampleValue BuildModelExampleValue(InputModelType model, bool useAllParameters, HashSet<InputModelType> visitedModels)
         {
-            if (_cache.TryGetValue(model, out var value))
-                return value;
+            if (visitedModels.Contains(model))
+                return InputExampleValue.Null(model);
 
             var dict = new Dictionary<string, InputExampleValue>();
             var result = InputExampleValue.Object(model, dict);
             visitedModels.Add(model);
-            _cache.TryAdd(model, result);
-            // iterate all the properties
+            // if this model has a discriminator, we should return a derived type
+            if (model.DiscriminatorPropertyName != null)
+            {
+                model = model.DerivedModels.First();
+            }
+            // then, we just iterate all the properties
             foreach (var modelOrBase in model.GetSelfAndBaseModels())
             {
                 foreach (var property in modelOrBase.Properties)
                 {
-                    if (visitedModels.Contains(property.Type) || property.IsReadOnly)
+                    if (property.IsReadOnly)
                         continue;
 
                     if (!useAllParameters && !property.IsRequired)
                         continue;
 
-                    var exampleValue = BuildExampleValue(property.Type, property.SerializedName, useAllParameters, visitedModels);
+                    InputExampleValue exampleValue;
+                    if (property.IsDiscriminator)
+                    {
+                        exampleValue = InputExampleValue.Value(property.Type, model.DiscriminatorValue!);
+                    }
+                    else
+                    {
+                        exampleValue = BuildExampleValue(property.Type, property.SerializedName, useAllParameters, visitedModels);
+                    }
 
                     dict.Add(property.SerializedName, exampleValue);
                 }

@@ -121,7 +121,7 @@ RequestContent content = RequestContent.Create(new Dictionary<string, object>()
     ["requiredBadDescription"] = "<requiredBadDescription>",
     ["requiredNullableList"] = new object[]
 {
-1234
+default
 },
 });
 Response response = await client.PatchActionAsync(content);
@@ -156,11 +156,11 @@ RequestContent content = RequestContent.Create(new Dictionary<string, object>()
     ["requiredBadDescription"] = "<requiredBadDescription>",
     ["optionalNullableList"] = new object[]
 {
-1234
+default
 },
     ["requiredNullableList"] = new object[]
 {
-1234
+default
 },
 });
 Response response = await client.PatchActionAsync(content);
@@ -199,7 +199,7 @@ RequestContent content = RequestContent.Create(new Dictionary<string, object>()
     ["requiredBadDescription"] = "<requiredBadDescription>",
     ["requiredNullableList"] = new object[]
 {
-1234
+default
 },
 });
 Response response = client.PatchAction(content);
@@ -234,11 +234,11 @@ RequestContent content = RequestContent.Create(new Dictionary<string, object>()
     ["requiredBadDescription"] = "<requiredBadDescription>",
     ["optionalNullableList"] = new object[]
 {
-1234
+default
 },
     ["requiredNullableList"] = new object[]
 {
-1234
+default
 },
 });
 Response response = client.PatchAction(content);
@@ -279,7 +279,7 @@ RequestContent content = RequestContent.Create(new Dictionary<string, object>()
     ["requiredBadDescription"] = "<requiredBadDescription>",
     ["requiredNullableList"] = new object[]
 {
-1234
+default
 },
 });
 Response response = await client.AnonymousBodyAsync(content);
@@ -314,11 +314,11 @@ RequestContent content = RequestContent.Create(new Dictionary<string, object>()
     ["requiredBadDescription"] = "<requiredBadDescription>",
     ["optionalNullableList"] = new object[]
 {
-1234
+default
 },
     ["requiredNullableList"] = new object[]
 {
-1234
+default
 },
 });
 Response response = await client.AnonymousBodyAsync(content);
@@ -357,7 +357,7 @@ RequestContent content = RequestContent.Create(new Dictionary<string, object>()
     ["requiredBadDescription"] = "<requiredBadDescription>",
     ["requiredNullableList"] = new object[]
 {
-1234
+default
 },
 });
 Response response = client.AnonymousBody(content);
@@ -392,11 +392,11 @@ RequestContent content = RequestContent.Create(new Dictionary<string, object>()
     ["requiredBadDescription"] = "<requiredBadDescription>",
     ["optionalNullableList"] = new object[]
 {
-1234
+default
 },
     ["requiredNullableList"] = new object[]
 {
-1234
+default
 },
 });
 Response response = client.AnonymousBody(content);
@@ -616,7 +616,7 @@ RequestContent content = RequestContent.Create(new Dictionary<string, object>()
     ["requiredInt"] = 1234,
     ["requiredCollection"] = new object[]
 {
-"1"
+default
 },
     ["requiredDictionary"] = new Dictionary<string, object>()
     {
@@ -633,7 +633,7 @@ RequestContent content = RequestContent.Create(new Dictionary<string, object>()
         ["requiredBadDescription"] = "<requiredBadDescription>",
         ["requiredNullableList"] = new object[]
 {
-1234
+default
 },
     },
     ["requiredUnknown"] = new Dictionary<string, object>(),
@@ -681,7 +681,7 @@ RequestContent content = RequestContent.Create(new Dictionary<string, object>()
     ["requiredInt"] = 1234,
     ["requiredCollection"] = new object[]
 {
-"1"
+default
 },
     ["requiredDictionary"] = new Dictionary<string, object>()
     {
@@ -702,32 +702,32 @@ RequestContent content = RequestContent.Create(new Dictionary<string, object>()
         ["requiredBadDescription"] = "<requiredBadDescription>",
         ["optionalNullableList"] = new object[]
 {
-1234
+default
 },
         ["requiredNullableList"] = new object[]
 {
-1234
+default
 },
     },
     ["intExtensibleEnum"] = 1,
     ["intExtensibleEnumCollection"] = new object[]
 {
-1
+default
 },
     ["floatExtensibleEnum"] = 1,
     ["floatExtensibleEnumCollection"] = new object[]
 {
-1
+default
 },
     ["floatFixedEnum"] = 1.1F,
     ["floatFixedEnumCollection"] = new object[]
 {
-1.1F
+default
 },
     ["intFixedEnum"] = 1,
     ["intFixedEnumCollection"] = new object[]
 {
-1
+default
 },
     ["stringFixedEnum"] = "1",
     ["requiredUnknown"] = new Dictionary<string, object>(),
@@ -800,7 +800,7 @@ RequestContent content = RequestContent.Create(new Dictionary<string, object>()
     ["requiredInt"] = 1234,
     ["requiredCollection"] = new object[]
 {
-"1"
+default
 },
     ["requiredDictionary"] = new Dictionary<string, object>()
     {
@@ -817,7 +817,7 @@ RequestContent content = RequestContent.Create(new Dictionary<string, object>()
         ["requiredBadDescription"] = "<requiredBadDescription>",
         ["requiredNullableList"] = new object[]
 {
-1234
+default
 },
     },
     ["requiredUnknown"] = new Dictionary<string, object>(),
@@ -865,7 +865,7 @@ RequestContent content = RequestContent.Create(new Dictionary<string, object>()
     ["requiredInt"] = 1234,
     ["requiredCollection"] = new object[]
 {
-"1"
+default
 },
     ["requiredDictionary"] = new Dictionary<string, object>()
     {
@@ -886,32 +886,32 @@ RequestContent content = RequestContent.Create(new Dictionary<string, object>()
         ["requiredBadDescription"] = "<requiredBadDescription>",
         ["optionalNullableList"] = new object[]
 {
-1234
+default
 },
         ["requiredNullableList"] = new object[]
 {
-1234
+default
 },
     },
     ["intExtensibleEnum"] = 1,
     ["intExtensibleEnumCollection"] = new object[]
 {
-1
+default
 },
     ["floatExtensibleEnum"] = 1,
     ["floatExtensibleEnumCollection"] = new object[]
 {
-1
+default
 },
     ["floatFixedEnum"] = 1.1F,
     ["floatFixedEnumCollection"] = new object[]
 {
-1.1F
+default
 },
     ["intFixedEnum"] = 1,
     ["intFixedEnumCollection"] = new object[]
 {
-1
+default
 },
     ["stringFixedEnum"] = "1",
     ["requiredUnknown"] = new Dictionary<string, object>(),
@@ -984,7 +984,7 @@ RequestContent content = RequestContent.Create(new Dictionary<string, object>()
     ["requiredInt"] = 1234,
     ["requiredCollection"] = new object[]
 {
-"1"
+default
 },
     ["requiredDictionary"] = new Dictionary<string, object>()
     {
@@ -1001,7 +1001,7 @@ RequestContent content = RequestContent.Create(new Dictionary<string, object>()
         ["requiredBadDescription"] = "<requiredBadDescription>",
         ["requiredNullableList"] = new object[]
 {
-1234
+default
 },
     },
     ["requiredUnknown"] = new Dictionary<string, object>(),
@@ -1049,7 +1049,7 @@ RequestContent content = RequestContent.Create(new Dictionary<string, object>()
     ["requiredInt"] = 1234,
     ["requiredCollection"] = new object[]
 {
-"1"
+default
 },
     ["requiredDictionary"] = new Dictionary<string, object>()
     {
@@ -1070,32 +1070,32 @@ RequestContent content = RequestContent.Create(new Dictionary<string, object>()
         ["requiredBadDescription"] = "<requiredBadDescription>",
         ["optionalNullableList"] = new object[]
 {
-1234
+default
 },
         ["requiredNullableList"] = new object[]
 {
-1234
+default
 },
     },
     ["intExtensibleEnum"] = 1,
     ["intExtensibleEnumCollection"] = new object[]
 {
-1
+default
 },
     ["floatExtensibleEnum"] = 1,
     ["floatExtensibleEnumCollection"] = new object[]
 {
-1
+default
 },
     ["floatFixedEnum"] = 1.1F,
     ["floatFixedEnumCollection"] = new object[]
 {
-1.1F
+default
 },
     ["intFixedEnum"] = 1,
     ["intFixedEnumCollection"] = new object[]
 {
-1
+default
 },
     ["stringFixedEnum"] = "1",
     ["requiredUnknown"] = new Dictionary<string, object>(),
@@ -1168,7 +1168,7 @@ RequestContent content = RequestContent.Create(new Dictionary<string, object>()
     ["requiredInt"] = 1234,
     ["requiredCollection"] = new object[]
 {
-"1"
+default
 },
     ["requiredDictionary"] = new Dictionary<string, object>()
     {
@@ -1185,7 +1185,7 @@ RequestContent content = RequestContent.Create(new Dictionary<string, object>()
         ["requiredBadDescription"] = "<requiredBadDescription>",
         ["requiredNullableList"] = new object[]
 {
-1234
+default
 },
     },
     ["requiredUnknown"] = new Dictionary<string, object>(),
@@ -1233,7 +1233,7 @@ RequestContent content = RequestContent.Create(new Dictionary<string, object>()
     ["requiredInt"] = 1234,
     ["requiredCollection"] = new object[]
 {
-"1"
+default
 },
     ["requiredDictionary"] = new Dictionary<string, object>()
     {
@@ -1254,32 +1254,32 @@ RequestContent content = RequestContent.Create(new Dictionary<string, object>()
         ["requiredBadDescription"] = "<requiredBadDescription>",
         ["optionalNullableList"] = new object[]
 {
-1234
+default
 },
         ["requiredNullableList"] = new object[]
 {
-1234
+default
 },
     },
     ["intExtensibleEnum"] = 1,
     ["intExtensibleEnumCollection"] = new object[]
 {
-1
+default
 },
     ["floatExtensibleEnum"] = 1,
     ["floatExtensibleEnumCollection"] = new object[]
 {
-1
+default
 },
     ["floatFixedEnum"] = 1.1F,
     ["floatFixedEnumCollection"] = new object[]
 {
-1.1F
+default
 },
     ["intFixedEnum"] = 1,
     ["intFixedEnumCollection"] = new object[]
 {
-1
+default
 },
     ["stringFixedEnum"] = "1",
     ["requiredUnknown"] = new Dictionary<string, object>(),
@@ -1411,7 +1411,7 @@ RequestContent content = RequestContent.Create(new Dictionary<string, object>()
     ["requiredBadDescription"] = "<requiredBadDescription>",
     ["requiredNullableList"] = new object[]
 {
-1234
+default
 },
 });
 Response response = await client.CreateLiteralAsync(content);
@@ -1446,11 +1446,11 @@ RequestContent content = RequestContent.Create(new Dictionary<string, object>()
     ["requiredBadDescription"] = "<requiredBadDescription>",
     ["optionalNullableList"] = new object[]
 {
-1234
+default
 },
     ["requiredNullableList"] = new object[]
 {
-1234
+default
 },
 });
 Response response = await client.CreateLiteralAsync(content);
@@ -1489,7 +1489,7 @@ RequestContent content = RequestContent.Create(new Dictionary<string, object>()
     ["requiredBadDescription"] = "<requiredBadDescription>",
     ["requiredNullableList"] = new object[]
 {
-1234
+default
 },
 });
 Response response = client.CreateLiteral(content);
@@ -1524,11 +1524,11 @@ RequestContent content = RequestContent.Create(new Dictionary<string, object>()
     ["requiredBadDescription"] = "<requiredBadDescription>",
     ["optionalNullableList"] = new object[]
 {
-1234
+default
 },
     ["requiredNullableList"] = new object[]
 {
-1234
+default
 },
 });
 Response response = client.CreateLiteral(content);
