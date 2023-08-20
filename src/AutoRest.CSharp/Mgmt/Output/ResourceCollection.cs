@@ -246,12 +246,12 @@ namespace AutoRest.CSharp.Mgmt.Output
                         "Exists",
                         typeof(bool),
                         $"Checks to see if the resource exists in azure.")));
-                //result.Add(MgmtClientOperation.FromOperation(
-                //    new MgmtRestOperation(
-                //        getMgmtRestOperation,
-                //        "GetIfExists",
-                //        getMgmtRestOperation.MgmtReturnType,
-                //        $"Tries to get details for this resource from the service.")));
+                result.Add(MgmtClientOperation.FromOperation(
+                    new MgmtRestOperation(
+                        getMgmtRestOperation,
+                        "GetIfExists",
+                        getMgmtRestOperation.MgmtReturnType,
+                        $"Tries to get details for this resource from the service.")));
             }
 
             return result;

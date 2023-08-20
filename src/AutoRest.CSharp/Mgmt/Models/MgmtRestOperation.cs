@@ -550,8 +550,8 @@ namespace AutoRest.CSharp.Mgmt.Models
             if (InterimOperation is not null)
                 return InterimOperation.InterimType;
 
-
-            return IsLongRunningOperation ? originalType.WrapOperation(false) : originalType.WrapResponse(false);
+            string[] nullableResponseMethodNames = { "GetIfExists" };
+            return IsLongRunningOperation ? originalType.WrapOperation(false) : originalType.WrapResponse(isAsync: false, isNullable: nullableResponseMethodNames.Contains(this.Name));
         }
 
         private CSharpType? GetMgmtReturnType(CSharpType? originalType)
