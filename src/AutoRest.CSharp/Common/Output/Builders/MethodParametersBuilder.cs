@@ -234,6 +234,11 @@ namespace AutoRest.CSharp.Output.Models
                     continue;
                 }
 
+                if (protocol == KnownParameters.RequestContent || protocol == KnownParameters.RequestContentNullable)
+                {
+                    return false;
+                }
+
                 // Value types have clear resolution between them with exception of numbers and enums
                 if (protocol.Type.IsValueType && convenience.Type.IsValueType)
                 {
@@ -256,10 +261,6 @@ namespace AutoRest.CSharp.Output.Models
                     {
                         return false;
                     }
-                }
-                else if (protocol == KnownParameters.RequestContent)
-                {
-                    return false;
                 }
             }
 

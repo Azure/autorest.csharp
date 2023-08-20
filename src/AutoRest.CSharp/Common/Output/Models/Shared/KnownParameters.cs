@@ -33,7 +33,7 @@ namespace AutoRest.CSharp.Output.Models.Shared
         public static readonly Parameter NextLink = new("nextLink", "Continuation token", typeof(string), null, Validation.None, null);
 
         public static readonly Parameter RequestContent = new("content", "The content to send as the body of the request.", RequestContentType, null, Validation.AssertNotNull, null, RequestLocation: RequestLocation.Body);
-        public static readonly Parameter RequestContentNullable = new("content", "The content to send as the body of the request.", RequestContentNullableType, /*Constant.Default(RequestContentNullableType)*/null, Validation.None, null, RequestLocation: RequestLocation.Body);
+        public static readonly Parameter RequestContentNullable = new("content", "The content to send as the body of the request.", RequestContentNullableType, null, Validation.None, null, RequestLocation: RequestLocation.Body);
 
         public static readonly Parameter MatchConditionsParameter = new("matchConditions", "The content to send as the request conditions of the request.", MatchConditionsType, Constant.Default(RequestConditionsType), Validation.None, null, RequestLocation: RequestLocation.Header);
         public static readonly Parameter RequestConditionsParameter = new("requestConditions", "The content to send as the request conditions of the request.", RequestConditionsType, Constant.Default(RequestConditionsType), Validation.None, null, RequestLocation: RequestLocation.Header);

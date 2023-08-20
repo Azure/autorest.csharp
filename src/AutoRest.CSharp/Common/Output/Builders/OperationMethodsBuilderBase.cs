@@ -27,6 +27,9 @@ namespace AutoRest.CSharp.Output.Models
 {
     internal abstract class OperationMethodsBuilderBase
     {
+        private const string ConvenienceMethodNotConfident = "The convenience method of this operation is made internal because this operation directly or indirectly uses a low confident type, for instance, unions, literal types with number values, etc.";
+        private const string ConvenienceMethodNotMeaningful = "The convenience method is omitted here because it has exactly the same parameter list as the corresponding protocol method";
+
         private static readonly int[] RedirectResponseCodes = { 300, 301, 302, 303, 307, 308 };
 
         private readonly ClientFields _fields;
@@ -115,6 +118,7 @@ namespace AutoRest.CSharp.Output.Models
 
             if (Operation.GenerateConvenienceMethod && (!Operation.GenerateProtocolMethod || !convenienceMethodIsMeaningless))
             {
+                var methodIsConfident = OperationConfidentChecker.IsConfident(Operation);
                 var convenienceMethodName = ProtocolMethodName;
                 if (parameters.HasAmbiguityBetweenProtocolAndConvenience)
                 {
@@ -123,8 +127,8 @@ namespace AutoRest.CSharp.Output.Models
                         : $"{ProtocolMethodName.LastWordToSingular()}Values";
                 }
 
-                convenience = BuildConvenienceMethod(convenienceMethodName, parameters, createNextPageMessageMethodSignature, false);
-                convenienceAsync = BuildConvenienceMethod(convenienceMethodName, parameters, createNextPageMessageMethodSignature, true);
+                convenience = BuildConvenienceMethod(convenienceMethodName, parameters, createNextPageMessageMethodSignature, methodIsConfident, false);
+                convenienceAsync = BuildConvenienceMethod(convenienceMethodName, parameters, createNextPageMessageMethodSignature, methodIsConfident, true);
             }
 
             var order = Operation.LongRunning is not null ? 2 : Operation.Paging is not null ? 1 : 0;
@@ -239,9 +243,20 @@ namespace AutoRest.CSharp.Output.Models
             return new Method(signature.WithAsync(async), body);
         }
 
-        private Method BuildConvenienceMethod(string methodName, RestClientMethodParameters parameters, MethodSignature? createNextPageMessageSignature, bool async)
+        private Method BuildConvenienceMethod(string methodName, RestClientMethodParameters parameters, MethodSignature? createNextPageMessageSignature, bool methodIsConfident, bool async)
         {
-            var signature = CreateMethodSignature(methodName, ConvenienceModifiers | MethodSignatureModifiers.Virtual, parameters.Convenience, ConvenienceMethodReturnType);
+            var modifiers = ConvenienceModifiers | MethodSignatureModifiers.Virtual;
+            if (!methodIsConfident)
+            {
+                modifiers = modifiers & ~MethodSignatureModifiers.Public | MethodSignatureModifiers.Internal;
+            }
+
+            var signature = CreateMethodSignature(methodName, modifiers, parameters.Convenience, ConvenienceMethodReturnType);
+            if (!methodIsConfident)
+            {
+                signature = signature with {NonDocumentComment = ConvenienceMethodNotConfident};
+            }
+
             var body = new[]
             {
                 new ParameterValidationBlock(parameters.Convenience),

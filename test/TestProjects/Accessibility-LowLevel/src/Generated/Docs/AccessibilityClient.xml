@@ -10,7 +10,7 @@ var client = new AccessibilityClient(credential);
 
 var data = "<String>";
 
-Response response = await client.OperationAsync(RequestContent.Create(data));
+Response response = await client.OperationAsync(RequestContent.Create(data)).ConfigureAwait(false);
 Console.WriteLine(response.Status);
 ]]></code>
 </example>

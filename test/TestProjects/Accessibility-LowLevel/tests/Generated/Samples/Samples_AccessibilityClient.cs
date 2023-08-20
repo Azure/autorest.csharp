@@ -50,7 +50,7 @@ namespace Accessibility_LowLevel.Samples
 
             var data = "<String>";
 
-            Response response = await client.OperationAsync(RequestContent.Create(data));
+            Response response = await client.OperationAsync(RequestContent.Create(data)).ConfigureAwait(false);
             Console.WriteLine(response.Status);
         }
 
@@ -63,7 +63,7 @@ namespace Accessibility_LowLevel.Samples
 
             var data = "<String>";
 
-            Response response = await client.OperationAsync(RequestContent.Create(data));
+            Response response = await client.OperationAsync(RequestContent.Create(data)).ConfigureAwait(false);
             Console.WriteLine(response.Status);
         }
     }

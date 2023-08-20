@@ -346,6 +346,10 @@ namespace AutoRest.CSharp.Generation.Writers
 
         private void WriteConvenienceMethodDocumentationWithExternalXmlDoc(RestClientOperationMethods operationMethods, MethodSignature convenienceMethod, bool async)
         {
+            if (convenienceMethod.NonDocumentComment is { } comment)
+            {
+                _writer.Line($"// {comment}");
+            }
             _writer.WriteMethodDocumentation(convenienceMethod);
             _writer.WriteXmlDocumentation("remarks", $"{convenienceMethod.DescriptionText}");
             var docRef = GetMethodSignatureString(convenienceMethod);

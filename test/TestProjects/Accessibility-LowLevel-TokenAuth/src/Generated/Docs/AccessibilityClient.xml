@@ -5,12 +5,12 @@
 <example>
 This sample shows how to call OperationAsync with required request content.
 <code><![CDATA[
-var credential = new DefaultAzureCredential();
+var credential = new Azure.Identity.DefaultAzureCredential();
 var client = new AccessibilityClient(credential);
 
 var data = "<String>";
 
-Response response = await client.OperationAsync(RequestContent.Create(data));
+Response response = await client.OperationAsync(RequestContent.Create(data)).ConfigureAwait(false);
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
@@ -19,7 +19,7 @@ Console.WriteLine(response.Status);
 <example>
 This sample shows how to call Operation with required request content.
 <code><![CDATA[
-var credential = new DefaultAzureCredential();
+var credential = new Azure.Identity.DefaultAzureCredential();
 var client = new AccessibilityClient(credential);
 
 var data = "<String>";
