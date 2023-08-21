@@ -11,6 +11,7 @@
         "type/property/nullable",
         "type/property/optionality",
         "type/property/value-types",
+        "type/union",
         "authentication/api-key",
         "authentication/http/custom",
         "authentication/oauth2",
