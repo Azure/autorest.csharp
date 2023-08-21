@@ -146,20 +146,20 @@ stages:
                 workingDirectory: $(Build.SourcesDirectory)/autorest.csharp
       - template: check-code-generation.yml
         parameters:
-          name: Check_Code_Generation_A_C
+          name: Check_Code_Generation_A_B
           filter: "^[a-b]"
       - template: check-code-generation.yml
         parameters:
-          name: Check_Code_Generation_C_I
-          filter: "^[c-i]"
+          name: Check_Code_Generation_C_L
+          filter: "^[c-l]"
       - template: check-code-generation.yml
         parameters:
-          name: Check_Code_Generation_J_R
-          filter: "^[j-r]"
+          name: Check_Code_Generation_M
+          filter: "^m"
       - template: check-code-generation.yml
         parameters:
-          name: Check_Code_Generation_S_Z
-          filter: "^[s-z]"
+          name: Check_Code_Generation_N_Z
+          filter: "^[n-z]"
   - ${{if and(ne(variables['Build.Reason'], 'PullRequest'), eq(variables['System.TeamProject'], 'internal'))}}:
     - template: pipelines/stages/net-release-to-feed.yml@azure-sdk-build-tools
       parameters:

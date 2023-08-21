@@ -112,16 +112,6 @@ namespace FirstTestTypeSpec.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_TopAction_Convenience_Async()
-        {
-            var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new FirstTestTypeSpecClient(endpoint);
-
-            var result = await client.TopActionAsync(DateTimeOffset.UtcNow);
-        }
-
-        [Test]
-        [Ignore("Only validating compilation of examples")]
         public void Example_TopAction2()
         {
             var endpoint = new Uri("<https://my-service.azure.com>");
@@ -528,30 +518,6 @@ namespace FirstTestTypeSpec.Samples
             Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
             Console.WriteLine(result.GetProperty("optionalNullableList")[0].ToString());
             Console.WriteLine(result.GetProperty("requiredNullableList")[0].ToString());
-        }
-
-        [Test]
-        [Ignore("Only validating compilation of examples")]
-        public async Task Example_AnonymousBody_Convenience_Async()
-        {
-            var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new FirstTestTypeSpecClient(endpoint);
-
-            var thing = new Thing("<name>", "<requiredUnion>", "<requiredBadDescription>", new int[]
-            {
-    1234
-            })
-            {
-                OptionalLiteralString = ThingOptionalLiteralString.Reject,
-                OptionalLiteralInt = ThingOptionalLiteralInt._456,
-                OptionalLiteralFloat = ThingOptionalLiteralFloat._456,
-                OptionalLiteralBool = true,
-                OptionalNullableList =
-{
-        1234
-    },
-            };
-            var result = await client.AnonymousBodyAsync(thing);
         }
 
         [Test]
@@ -1256,67 +1222,6 @@ namespace FirstTestTypeSpec.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_HelloAgain_Convenience_Async()
-        {
-            var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new FirstTestTypeSpecClient(endpoint);
-
-            var action = new RoundTripModel("<requiredString>", 1234, new StringFixedEnum?[]
-            {
-    StringFixedEnum.One
-            }, new Dictionary<string, StringExtensibleEnum?>
-            {
-                ["key"] = StringExtensibleEnum.One,
-            }, new Thing("<name>", "<requiredUnion>", "<requiredBadDescription>", new int[]
-            {
-    1234
-            })
-            {
-                OptionalLiteralString = ThingOptionalLiteralString.Reject,
-                OptionalLiteralInt = ThingOptionalLiteralInt._456,
-                OptionalLiteralFloat = ThingOptionalLiteralFloat._456,
-                OptionalLiteralBool = true,
-                OptionalNullableList =
-            {
-        1234
-                },
-            }, BinaryData.FromString("<your binary data content>"), new Dictionary<string, BinaryData>
-            {
-                ["key"] = BinaryData.FromString("<your binary data content>"),
-            }, new ModelWithRequiredNullableProperties(1234, StringExtensibleEnum.One, StringFixedEnum.One))
-            {
-                IntExtensibleEnum = IntExtensibleEnum.One,
-                IntExtensibleEnumCollection =
-{
-        IntExtensibleEnum.One
-    },
-                FloatExtensibleEnum = FloatExtensibleEnum.One,
-                FloatExtensibleEnumCollection =
-{
-        FloatExtensibleEnum.One
-    },
-                FloatFixedEnum = FloatFixedEnum.One,
-                FloatFixedEnumCollection =
-{
-        FloatFixedEnum.One
-    },
-                IntFixedEnum = IntFixedEnum.One,
-                IntFixedEnumCollection =
-{
-        IntFixedEnum.One
-    },
-                StringFixedEnum = StringFixedEnum.One,
-                OptionalUnknown = BinaryData.FromString("<your binary data content>"),
-                OptionalRecordUnknown =
-{
-        ["key"] = BinaryData.FromString("<your binary data content>"),
-    },
-            };
-            var result = await client.HelloAgainAsync("<p2>", "<p1>", action);
-        }
-
-        [Test]
-        [Ignore("Only validating compilation of examples")]
         public void Example_NoContentType()
         {
             var endpoint = new Uri("<https://my-service.azure.com>");
@@ -1767,16 +1672,6 @@ namespace FirstTestTypeSpec.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_HelloDemo2_Convenience_Async()
-        {
-            var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new FirstTestTypeSpecClient(endpoint);
-
-            var result = await client.HelloDemo2Async();
-        }
-
-        [Test]
-        [Ignore("Only validating compilation of examples")]
         public void Example_CreateLiteral()
         {
             var endpoint = new Uri("<https://my-service.azure.com>");
@@ -1937,30 +1832,6 @@ namespace FirstTestTypeSpec.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_CreateLiteral_Convenience_Async()
-        {
-            var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new FirstTestTypeSpecClient(endpoint);
-
-            var body = new Thing("<name>", "<requiredUnion>", "<requiredBadDescription>", new int[]
-            {
-    1234
-            })
-            {
-                OptionalLiteralString = ThingOptionalLiteralString.Reject,
-                OptionalLiteralInt = ThingOptionalLiteralInt._456,
-                OptionalLiteralFloat = ThingOptionalLiteralFloat._456,
-                OptionalLiteralBool = true,
-                OptionalNullableList =
-{
-        1234
-    },
-            };
-            var result = await client.CreateLiteralAsync(body);
-        }
-
-        [Test]
-        [Ignore("Only validating compilation of examples")]
         public void Example_HelloLiteral()
         {
             var endpoint = new Uri("<https://my-service.azure.com>");
@@ -2051,16 +1922,6 @@ namespace FirstTestTypeSpec.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_HelloLiteral_Convenience_Async()
-        {
-            var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new FirstTestTypeSpecClient(endpoint);
-
-            var result = await client.HelloLiteralAsync();
-        }
-
-        [Test]
-        [Ignore("Only validating compilation of examples")]
         public void Example_GetUnknownValue()
         {
             var endpoint = new Uri("<https://my-service.azure.com>");
@@ -2109,30 +1970,6 @@ namespace FirstTestTypeSpec.Samples
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());
-        }
-
-        [Test]
-        [Ignore("Only validating compilation of examples")]
-        public async Task Example_InternalProtocol_Convenience_Async()
-        {
-            var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new FirstTestTypeSpecClient(endpoint);
-
-            var body = new Thing("<name>", "<requiredUnion>", "<requiredBadDescription>", new int[]
-            {
-    1234
-            })
-            {
-                OptionalLiteralString = ThingOptionalLiteralString.Reject,
-                OptionalLiteralInt = ThingOptionalLiteralInt._456,
-                OptionalLiteralFloat = ThingOptionalLiteralFloat._456,
-                OptionalLiteralBool = true,
-                OptionalNullableList =
-{
-        1234
-    },
-            };
-            var result = await client.InternalProtocolAsync(body);
         }
 
         [Test]

@@ -12,7 +12,7 @@ using Azure.Core;
 
 namespace FirstTestTypeSpec.Models
 {
-    public partial class Thing : IUtf8JsonSerializable
+    internal partial class Thing : IUtf8JsonSerializable
     {
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {
@@ -20,7 +20,7 @@ namespace FirstTestTypeSpec.Models
             writer.WritePropertyName("name"u8);
             writer.WriteStringValue(Name);
             writer.WritePropertyName("requiredUnion"u8);
-            writer.WriteStringValue(RequiredUnion);
+            writer.WriteObjectValue(RequiredUnion);
             writer.WritePropertyName("requiredLiteralString"u8);
             writer.WriteStringValue(RequiredLiteralString.ToString());
             writer.WritePropertyName("requiredLiteralInt"u8);
@@ -92,7 +92,7 @@ namespace FirstTestTypeSpec.Models
                 return null;
             }
             string name = default;
-            string requiredUnion = default;
+            object requiredUnion = default;
             ThingRequiredLiteralString requiredLiteralString = default;
             ThingRequiredLiteralInt requiredLiteralInt = default;
             ThingRequiredLiteralFloat requiredLiteralFloat = default;
@@ -113,7 +113,7 @@ namespace FirstTestTypeSpec.Models
                 }
                 if (property.NameEquals("requiredUnion"u8))
                 {
-                    requiredUnion = property.Value.GetString();
+                    requiredUnion = property.Value.GetObject();
                     continue;
                 }
                 if (property.NameEquals("requiredLiteralString"u8))

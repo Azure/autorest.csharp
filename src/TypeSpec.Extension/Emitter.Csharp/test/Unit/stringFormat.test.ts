@@ -42,7 +42,11 @@ describe("Test string format", () => {
         );
         assert(
             isEqual(
-                { Name: "url", Kind: "Uri", IsNullable: false },
+                {
+                    Name: "url",
+                    Kind: "Uri",
+                    IsNullable: false
+                },
                 operation.Parameters[0].Type
             )
         );
@@ -69,7 +73,11 @@ describe("Test string format", () => {
         assert(foo !== undefined);
         assert(
             isEqual(
-                { Name: "url", Kind: "Uri", IsNullable: false },
+                {
+                    Name: "url",
+                    Kind: "Uri",
+                    IsNullable: false
+                },
                 foo.Properties[0].Type
             )
         );
@@ -98,7 +106,11 @@ describe("Test string format", () => {
         );
         assert(
             isEqual(
-                { Name: "string", Kind: "Uri", IsNullable: false },
+                {
+                    Name: "string",
+                    Kind: "Uri",
+                    IsNullable: false
+                },
                 operation.Parameters[0].Type
             )
         );
@@ -126,7 +138,11 @@ describe("Test string format", () => {
         assert(foo !== undefined);
         assert(
             isEqual(
-                { Name: "string", Kind: "Uri", IsNullable: false },
+                {
+                    Name: "string",
+                    Kind: "Uri",
+                    IsNullable: false
+                },
                 foo.Properties[0].Type
             )
         );
@@ -155,7 +171,11 @@ describe("Test string format", () => {
         );
         assert(
             isEqual(
-                { Name: "string", Kind: "Guid", IsNullable: false },
+                {
+                    Name: "string",
+                    Kind: "Guid",
+                    IsNullable: false
+                },
                 operation.Parameters[0].Type
             )
         );
@@ -183,7 +203,11 @@ describe("Test string format", () => {
         assert(foo !== undefined);
         assert(
             isEqual(
-                { Name: "string", Kind: "Guid", IsNullable: false },
+                {
+                    Name: "string",
+                    Kind: "Guid",
+                    IsNullable: false
+                },
                 foo.Properties[0].Type
             )
         );

@@ -78,7 +78,7 @@ This sample shows how to call PutModelAsync with required request content.
 var client = new SingleDiscriminatorClient();
 
 var data = new {
-    kind = "",
+    kind = "seagull",
     wingspan = 1234,
 };
 
@@ -94,7 +94,7 @@ This sample shows how to call PutModel with required request content.
 var client = new SingleDiscriminatorClient();
 
 var data = new {
-    kind = "",
+    kind = "seagull",
     wingspan = 1234,
 };
 
@@ -180,7 +180,7 @@ This sample shows how to call PutRecursiveModelAsync with required request conte
 var client = new SingleDiscriminatorClient();
 
 var data = new {
-    kind = "",
+    kind = "seagull",
     wingspan = 1234,
 };
 
@@ -196,7 +196,7 @@ This sample shows how to call PutRecursiveModel with required request content.
 var client = new SingleDiscriminatorClient();
 
 var data = new {
-    kind = "",
+    kind = "seagull",
     wingspan = 1234,
 };
 

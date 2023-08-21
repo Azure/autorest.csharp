@@ -95,8 +95,26 @@ namespace ModelsTypeSpec.Samples
                 requiredInt = 1234,
                 requiredNullableInt = 1234,
                 requiredNullableString = "<requiredNullableString>",
-                requiredModel = new { },
-                requiredModel2 = new { },
+                requiredModel = new
+                {
+                    requiredList = new[] {
+            new {
+                requiredModelRecord = new {
+                    key = new {},
+                },
+            }
+        },
+                },
+                requiredModel2 = new
+                {
+                    requiredList = new[] {
+            new {
+                requiredModelRecord = new {
+                    key = new {},
+                },
+            }
+        },
+                },
                 requiredIntList = new[] {
         1234
     },
@@ -178,8 +196,26 @@ namespace ModelsTypeSpec.Samples
                 requiredNullableString = "<requiredNullableString>",
                 nonRequiredNullableInt = 1234,
                 nonRequiredNullableString = "<nonRequiredNullableString>",
-                requiredModel = new { },
-                requiredModel2 = new { },
+                requiredModel = new
+                {
+                    requiredList = new[] {
+            new {
+                requiredModelRecord = new {
+                    key = new {},
+                },
+            }
+        },
+                },
+                requiredModel2 = new
+                {
+                    requiredList = new[] {
+            new {
+                requiredModelRecord = new {
+                    key = new {},
+                },
+            }
+        },
+                },
                 requiredIntList = new[] {
         1234
     },
@@ -297,8 +333,26 @@ namespace ModelsTypeSpec.Samples
                 requiredInt = 1234,
                 requiredNullableInt = 1234,
                 requiredNullableString = "<requiredNullableString>",
-                requiredModel = new { },
-                requiredModel2 = new { },
+                requiredModel = new
+                {
+                    requiredList = new[] {
+            new {
+                requiredModelRecord = new {
+                    key = new {},
+                },
+            }
+        },
+                },
+                requiredModel2 = new
+                {
+                    requiredList = new[] {
+            new {
+                requiredModelRecord = new {
+                    key = new {},
+                },
+            }
+        },
+                },
                 requiredIntList = new[] {
         1234
     },
@@ -380,8 +434,26 @@ namespace ModelsTypeSpec.Samples
                 requiredNullableString = "<requiredNullableString>",
                 nonRequiredNullableInt = 1234,
                 nonRequiredNullableString = "<nonRequiredNullableString>",
-                requiredModel = new { },
-                requiredModel2 = new { },
+                requiredModel = new
+                {
+                    requiredList = new[] {
+            new {
+                requiredModelRecord = new {
+                    key = new {},
+                },
+            }
+        },
+                },
+                requiredModel2 = new
+                {
+                    requiredList = new[] {
+            new {
+                requiredModelRecord = new {
+                    key = new {},
+                },
+            }
+        },
+                },
                 requiredIntList = new[] {
         1234
     },
@@ -580,8 +652,26 @@ namespace ModelsTypeSpec.Samples
                 requiredInt = 1234,
                 requiredNullableInt = 1234,
                 requiredNullableString = "<requiredNullableString>",
-                requiredModel = new { },
-                requiredModel2 = new { },
+                requiredModel = new
+                {
+                    requiredList = new[] {
+            new {
+                requiredModelRecord = new {
+                    key = new {},
+                },
+            }
+        },
+                },
+                requiredModel2 = new
+                {
+                    requiredList = new[] {
+            new {
+                requiredModelRecord = new {
+                    key = new {},
+                },
+            }
+        },
+                },
                 requiredIntList = new[] {
         1234
     },
@@ -655,8 +745,26 @@ namespace ModelsTypeSpec.Samples
                 requiredNullableString = "<requiredNullableString>",
                 nonRequiredNullableInt = 1234,
                 nonRequiredNullableString = "<nonRequiredNullableString>",
-                requiredModel = new { },
-                requiredModel2 = new { },
+                requiredModel = new
+                {
+                    requiredList = new[] {
+            new {
+                requiredModelRecord = new {
+                    key = new {},
+                },
+            }
+        },
+                },
+                requiredModel2 = new
+                {
+                    requiredList = new[] {
+            new {
+                requiredModelRecord = new {
+                    key = new {},
+                },
+            }
+        },
+                },
                 requiredIntList = new[] {
         1234
     },
@@ -754,8 +862,26 @@ namespace ModelsTypeSpec.Samples
                 requiredInt = 1234,
                 requiredNullableInt = 1234,
                 requiredNullableString = "<requiredNullableString>",
-                requiredModel = new { },
-                requiredModel2 = new { },
+                requiredModel = new
+                {
+                    requiredList = new[] {
+            new {
+                requiredModelRecord = new {
+                    key = new {},
+                },
+            }
+        },
+                },
+                requiredModel2 = new
+                {
+                    requiredList = new[] {
+            new {
+                requiredModelRecord = new {
+                    key = new {},
+                },
+            }
+        },
+                },
                 requiredIntList = new[] {
         1234
     },
@@ -829,8 +955,26 @@ namespace ModelsTypeSpec.Samples
                 requiredNullableString = "<requiredNullableString>",
                 nonRequiredNullableInt = 1234,
                 nonRequiredNullableString = "<nonRequiredNullableString>",
-                requiredModel = new { },
-                requiredModel2 = new { },
+                requiredModel = new
+                {
+                    requiredList = new[] {
+            new {
+                requiredModelRecord = new {
+                    key = new {},
+                },
+            }
+        },
+                },
+                requiredModel2 = new
+                {
+                    requiredList = new[] {
+            new {
+                requiredModelRecord = new {
+                    key = new {},
+                },
+            }
+        },
+                },
                 requiredIntList = new[] {
         1234
     },
@@ -1217,7 +1361,8 @@ namespace ModelsTypeSpec.Samples
                 requiredNullableString = "<requiredNullableString>",
                 requiredModel = new
                 {
-                    discriminatorProperty = "",
+                    requiredString = "<requiredString>",
+                    discriminatorProperty = "A",
                     requiredPropertyOnBase = 1234,
                 },
                 requiredFixedStringEnum = "1",
@@ -1289,7 +1434,8 @@ namespace ModelsTypeSpec.Samples
                 nonRequiredNullableString = "<nonRequiredNullableString>",
                 requiredModel = new
                 {
-                    discriminatorProperty = "",
+                    requiredString = "<requiredString>",
+                    discriminatorProperty = "A",
                     optionalPropertyOnBase = "<optionalPropertyOnBase>",
                     requiredPropertyOnBase = 1234,
                 },
@@ -1372,7 +1518,8 @@ namespace ModelsTypeSpec.Samples
                 requiredNullableString = "<requiredNullableString>",
                 requiredModel = new
                 {
-                    discriminatorProperty = "",
+                    requiredString = "<requiredString>",
+                    discriminatorProperty = "A",
                     requiredPropertyOnBase = 1234,
                 },
                 requiredFixedStringEnum = "1",
@@ -1444,7 +1591,8 @@ namespace ModelsTypeSpec.Samples
                 nonRequiredNullableString = "<nonRequiredNullableString>",
                 requiredModel = new
                 {
-                    discriminatorProperty = "",
+                    requiredString = "<requiredString>",
+                    discriminatorProperty = "A",
                     optionalPropertyOnBase = "<optionalPropertyOnBase>",
                     requiredPropertyOnBase = 1234,
                 },
@@ -1851,6 +1999,74 @@ namespace ModelsTypeSpec.Samples
     })
             });
             var result = await client.RoundTripToOutputWithNoUseBaseAsync(input);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_AnalyzeConversation()
+        {
+            var endpoint = new Uri("<https://my-service.azure.com>");
+            var client = new ModelsTypeSpecClient(endpoint);
+
+            Response response = client.AnalyzeConversation(new RequestContext());
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("discriminatorProperty").ToString());
+            Console.WriteLine(result.GetProperty("requiredPropertyOnBase").ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_AnalyzeConversation_AllParameters()
+        {
+            var endpoint = new Uri("<https://my-service.azure.com>");
+            var client = new ModelsTypeSpecClient(endpoint);
+
+            Response response = client.AnalyzeConversation(new RequestContext());
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("discriminatorProperty").ToString());
+            Console.WriteLine(result.GetProperty("optionalPropertyOnBase").ToString());
+            Console.WriteLine(result.GetProperty("requiredPropertyOnBase").ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_AnalyzeConversation_Async()
+        {
+            var endpoint = new Uri("<https://my-service.azure.com>");
+            var client = new ModelsTypeSpecClient(endpoint);
+
+            Response response = await client.AnalyzeConversationAsync(new RequestContext());
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("discriminatorProperty").ToString());
+            Console.WriteLine(result.GetProperty("requiredPropertyOnBase").ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_AnalyzeConversation_AllParameters_Async()
+        {
+            var endpoint = new Uri("<https://my-service.azure.com>");
+            var client = new ModelsTypeSpecClient(endpoint);
+
+            Response response = await client.AnalyzeConversationAsync(new RequestContext());
+
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.GetProperty("discriminatorProperty").ToString());
+            Console.WriteLine(result.GetProperty("optionalPropertyOnBase").ToString());
+            Console.WriteLine(result.GetProperty("requiredPropertyOnBase").ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_AnalyzeConversation_Convenience_Async()
+        {
+            var endpoint = new Uri("<https://my-service.azure.com>");
+            var client = new ModelsTypeSpecClient(endpoint);
+
+            var result = await client.AnalyzeConversationAsync();
         }
     }
 }
