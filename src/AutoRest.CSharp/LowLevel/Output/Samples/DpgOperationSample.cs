@@ -272,7 +272,13 @@ namespace AutoRest.CSharp.Output.Samples.Models
 
         private InputExampleValue GetBodyParameterValue()
         {
-            return _inputOperationExample.Parameters.Single(e => e.Parameter is { Location: RequestLocation.Body }).ExampleValue;
+            var bodyParameterExample = _inputOperationExample.Parameters.SingleOrDefault(e => e.Parameter is { Location: RequestLocation.Body });
+            if (bodyParameterExample != null)
+            {
+                return bodyParameterExample.ExampleValue;
+            }
+
+            return InputExampleValue.Null(Method.RequestBodyType!);
         }
 
         private static bool IsSameParameter(Parameter parameter, Parameter knownParameter)

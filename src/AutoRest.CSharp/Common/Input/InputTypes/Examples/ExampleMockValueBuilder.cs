@@ -51,7 +51,7 @@ namespace AutoRest.CSharp.Common.Input.Examples
                 parameterExamples.Add(parameterExample);
             }
 
-            return new(parameterExamples);
+            return new(operation, parameterExamples);
         }
 
         private static InputParameterExample BuildParameterExample(InputParameter parameter, bool useAllParameters)

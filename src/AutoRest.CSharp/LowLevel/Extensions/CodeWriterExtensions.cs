@@ -81,9 +81,16 @@ namespace AutoRest.CSharp.LowLevel.Generation.Extensions
 
         private static CodeWriter AppendRequestContent(this CodeWriter writer, InputExampleValue value)
         {
-            return writer.Append($"{typeof(RequestContent)}.Create(")
-                .AppendAnonymousObject(value)
-                .AppendRaw(")");
+            if (value is InputExampleRawValue rawValue && rawValue.RawValue == null)
+            {
+                return writer.AppendRaw("null");
+            }
+            else
+            {
+                return writer.Append($"{typeof(RequestContent)}.Create(")
+                    .AppendAnonymousObject(value)
+                    .AppendRaw(")");
+            }
         }
 
         private static CodeWriter AppendListValue(this CodeWriter writer, CSharpType elementType, InputExampleValue exampleValue, bool includeInitialization = true)
