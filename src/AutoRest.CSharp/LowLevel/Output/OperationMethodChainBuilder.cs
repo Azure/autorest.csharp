@@ -123,7 +123,7 @@ namespace AutoRest.CSharp.Output.Models
             }
 
             // check if there is anything not confident inside this operation
-            var confidentLevel = OperationConfidentChecker.GetConfidentLevel(Operation);
+            var confidentLevel = OperationConfidentChecker.GetConfidentLevel(Operation, _typeFactory);
             return confidentLevel switch
             {
                 ConvenienceMethodConfidentLevel.Confident => new()
