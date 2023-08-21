@@ -60,7 +60,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             return writer.ToString();
         }
 
-        private static IEnumerable<string> GetLines(BlockSyntax methodBlock)
+        private static string[] GetLines(BlockSyntax methodBlock)
         {
             if (!methodBlock.Statements.Any())
                 return Array.Empty<string>();
@@ -82,26 +82,56 @@ namespace AutoRest.CSharp.AutoRest.Plugins
         /// </summary>
         /// <param name="lines"></param>
         /// <returns></returns>
-        private static string FormatContent(IEnumerable<string> lines)
+        private static string FormatContent(string[] lines)
         {
             if (!lines.Any())
                 return string.Empty;
 
             var builder = new StringBuilder();
 
-            var first = lines.First();
-            var trimed = first.TrimStart();
-            var spaces = first.Length - trimed.Length;
-            //int level = 0;
-            foreach (var line in lines)
+            // find the first non-empty line
+            int lineNumber = -1;
+            for (int i = 0; i < lines.Length; i++)
             {
-                if (line.Length >= spaces)
-                    builder.AppendLine().Append(line.Substring(spaces));
-                else
-                    builder.AppendLine().Append(line.TrimStart());
+                var line = lines[i];
+                if (!string.IsNullOrWhiteSpace(line))
+                {
+                    lineNumber = i;
+                    break;
+                }
+                builder.AppendLine().Append(line);
+            }
+
+            if (lineNumber < 0)
+                return string.Empty; // every line is whitespaces
+
+            var first = lines[lineNumber].AsSpan();
+            // find how many spaces are there in the first line
+            int firstLineSpaces = CountLeadingSpaces(first);
+            builder.AppendLine().Append(first.Slice(firstLineSpaces));
+
+            for (int i = lineNumber + 1; i < lines.Length; i++)
+            {
+                var line = lines[i].AsSpan();
+                var spaceCount = CountLeadingSpaces(line);
+                var spacesToTrim = Math.Min(firstLineSpaces, spaceCount);
+                builder.AppendLine().Append(line.Slice(spacesToTrim));
             }
 
             return builder.ToString();
+        }
+
+        private static int CountLeadingSpaces(ReadOnlySpan<char> line)
+        {
+            int count = 0;
+            while (count < line.Length)
+            {
+                if (!char.IsWhiteSpace(line[count]))
+                    break;
+                count++;
+            }
+
+            return count;
         }
 
         private static async Task<Dictionary<string, MethodDeclarationSyntax>> GetMethods(SyntaxTree syntaxTree)

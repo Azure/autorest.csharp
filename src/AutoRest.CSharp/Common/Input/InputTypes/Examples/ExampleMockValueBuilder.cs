@@ -21,6 +21,7 @@ namespace AutoRest.CSharp.Common.Input.Examples
 
         public static InputClientExample BuildClientExample(InputClient client, bool useAllParameters)
         {
+            _cache.Clear();
             var clientParameterExamples = new List<InputParameterExample>();
             foreach (var parameter in client.Parameters)
             {
@@ -37,6 +38,8 @@ namespace AutoRest.CSharp.Common.Input.Examples
 
         public static InputOperationExample BuildOperationExample(InputOperation operation, bool useAllParameters)
         {
+            _cache.Clear();
+
             var parameterExamples = new List<InputParameterExample>();
             foreach (var parameter in operation.Parameters)
             {

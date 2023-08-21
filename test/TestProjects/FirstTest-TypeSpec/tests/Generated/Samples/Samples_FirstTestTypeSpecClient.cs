@@ -248,7 +248,15 @@ namespace FirstTestTypeSpec.Samples
                 ["requiredLiteralInt"] = 123,
                 ["requiredLiteralFloat"] = 1.23F,
                 ["requiredLiteralBool"] = false,
+                ["optionalLiteralString"] = "reject",
+                ["optionalLiteralInt"] = 456,
+                ["optionalLiteralFloat"] = 4.56F,
+                ["optionalLiteralBool"] = true,
                 ["requiredBadDescription"] = "<requiredBadDescription>",
+                ["optionalNullableList"] = new object[]
+            {
+1234
+            },
                 ["requiredNullableList"] = new object[]
             {
 1234
@@ -321,7 +329,15 @@ namespace FirstTestTypeSpec.Samples
                 ["requiredLiteralInt"] = 123,
                 ["requiredLiteralFloat"] = 1.23F,
                 ["requiredLiteralBool"] = false,
+                ["optionalLiteralString"] = "reject",
+                ["optionalLiteralInt"] = 456,
+                ["optionalLiteralFloat"] = 4.56F,
+                ["optionalLiteralBool"] = true,
                 ["requiredBadDescription"] = "<requiredBadDescription>",
+                ["optionalNullableList"] = new object[]
+            {
+1234
+            },
                 ["requiredNullableList"] = new object[]
             {
 1234
@@ -394,7 +410,15 @@ namespace FirstTestTypeSpec.Samples
                 ["requiredLiteralInt"] = 123,
                 ["requiredLiteralFloat"] = 1.23F,
                 ["requiredLiteralBool"] = false,
+                ["optionalLiteralString"] = "reject",
+                ["optionalLiteralInt"] = 456,
+                ["optionalLiteralFloat"] = 4.56F,
+                ["optionalLiteralBool"] = true,
                 ["requiredBadDescription"] = "<requiredBadDescription>",
+                ["optionalNullableList"] = new object[]
+            {
+1234
+            },
                 ["requiredNullableList"] = new object[]
             {
 1234
@@ -467,7 +491,15 @@ namespace FirstTestTypeSpec.Samples
                 ["requiredLiteralInt"] = 123,
                 ["requiredLiteralFloat"] = 1.23F,
                 ["requiredLiteralBool"] = false,
+                ["optionalLiteralString"] = "reject",
+                ["optionalLiteralInt"] = 456,
+                ["optionalLiteralFloat"] = 4.56F,
+                ["optionalLiteralBool"] = true,
                 ["requiredBadDescription"] = "<requiredBadDescription>",
+                ["optionalNullableList"] = new object[]
+            {
+1234
+            },
                 ["requiredNullableList"] = new object[]
             {
 1234
@@ -944,14 +976,48 @@ namespace FirstTestTypeSpec.Samples
                     ["requiredLiteralInt"] = 123,
                     ["requiredLiteralFloat"] = 1.23F,
                     ["requiredLiteralBool"] = false,
+                    ["optionalLiteralString"] = "reject",
+                    ["optionalLiteralInt"] = 456,
+                    ["optionalLiteralFloat"] = 4.56F,
+                    ["optionalLiteralBool"] = true,
                     ["requiredBadDescription"] = "<requiredBadDescription>",
+                    ["optionalNullableList"] = new object[]
+            {
+1234
+            },
                     ["requiredNullableList"] = new object[]
             {
 1234
             },
                 },
+                ["intExtensibleEnum"] = 1,
+                ["intExtensibleEnumCollection"] = new object[]
+            {
+1
+            },
+                ["floatExtensibleEnum"] = 1,
+                ["floatExtensibleEnumCollection"] = new object[]
+            {
+1
+            },
+                ["floatFixedEnum"] = 1.1F,
+                ["floatFixedEnumCollection"] = new object[]
+            {
+1.1F
+            },
+                ["intFixedEnum"] = 1,
+                ["intFixedEnumCollection"] = new object[]
+            {
+1
+            },
+                ["stringFixedEnum"] = "1",
                 ["requiredUnknown"] = new Dictionary<string, object>(),
+                ["optionalUnknown"] = new Dictionary<string, object>(),
                 ["requiredRecordUnknown"] = new Dictionary<string, object>()
+                {
+                    ["key"] = new Dictionary<string, object>(),
+                },
+                ["optionalRecordUnknown"] = new Dictionary<string, object>()
                 {
                     ["key"] = new Dictionary<string, object>(),
                 },
@@ -1097,14 +1163,48 @@ namespace FirstTestTypeSpec.Samples
                     ["requiredLiteralInt"] = 123,
                     ["requiredLiteralFloat"] = 1.23F,
                     ["requiredLiteralBool"] = false,
+                    ["optionalLiteralString"] = "reject",
+                    ["optionalLiteralInt"] = 456,
+                    ["optionalLiteralFloat"] = 4.56F,
+                    ["optionalLiteralBool"] = true,
                     ["requiredBadDescription"] = "<requiredBadDescription>",
+                    ["optionalNullableList"] = new object[]
+            {
+1234
+            },
                     ["requiredNullableList"] = new object[]
             {
 1234
             },
                 },
+                ["intExtensibleEnum"] = 1,
+                ["intExtensibleEnumCollection"] = new object[]
+            {
+1
+            },
+                ["floatExtensibleEnum"] = 1,
+                ["floatExtensibleEnumCollection"] = new object[]
+            {
+1
+            },
+                ["floatFixedEnum"] = 1.1F,
+                ["floatFixedEnumCollection"] = new object[]
+            {
+1.1F
+            },
+                ["intFixedEnum"] = 1,
+                ["intFixedEnumCollection"] = new object[]
+            {
+1
+            },
+                ["stringFixedEnum"] = "1",
                 ["requiredUnknown"] = new Dictionary<string, object>(),
+                ["optionalUnknown"] = new Dictionary<string, object>(),
                 ["requiredRecordUnknown"] = new Dictionary<string, object>()
+                {
+                    ["key"] = new Dictionary<string, object>(),
+                },
+                ["optionalRecordUnknown"] = new Dictionary<string, object>()
                 {
                     ["key"] = new Dictionary<string, object>(),
                 },
@@ -1250,14 +1350,48 @@ namespace FirstTestTypeSpec.Samples
                     ["requiredLiteralInt"] = 123,
                     ["requiredLiteralFloat"] = 1.23F,
                     ["requiredLiteralBool"] = false,
+                    ["optionalLiteralString"] = "reject",
+                    ["optionalLiteralInt"] = 456,
+                    ["optionalLiteralFloat"] = 4.56F,
+                    ["optionalLiteralBool"] = true,
                     ["requiredBadDescription"] = "<requiredBadDescription>",
+                    ["optionalNullableList"] = new object[]
+            {
+1234
+            },
                     ["requiredNullableList"] = new object[]
             {
 1234
             },
                 },
+                ["intExtensibleEnum"] = 1,
+                ["intExtensibleEnumCollection"] = new object[]
+            {
+1
+            },
+                ["floatExtensibleEnum"] = 1,
+                ["floatExtensibleEnumCollection"] = new object[]
+            {
+1
+            },
+                ["floatFixedEnum"] = 1.1F,
+                ["floatFixedEnumCollection"] = new object[]
+            {
+1.1F
+            },
+                ["intFixedEnum"] = 1,
+                ["intFixedEnumCollection"] = new object[]
+            {
+1
+            },
+                ["stringFixedEnum"] = "1",
                 ["requiredUnknown"] = new Dictionary<string, object>(),
+                ["optionalUnknown"] = new Dictionary<string, object>(),
                 ["requiredRecordUnknown"] = new Dictionary<string, object>()
+                {
+                    ["key"] = new Dictionary<string, object>(),
+                },
+                ["optionalRecordUnknown"] = new Dictionary<string, object>()
                 {
                     ["key"] = new Dictionary<string, object>(),
                 },
@@ -1403,14 +1537,48 @@ namespace FirstTestTypeSpec.Samples
                     ["requiredLiteralInt"] = 123,
                     ["requiredLiteralFloat"] = 1.23F,
                     ["requiredLiteralBool"] = false,
+                    ["optionalLiteralString"] = "reject",
+                    ["optionalLiteralInt"] = 456,
+                    ["optionalLiteralFloat"] = 4.56F,
+                    ["optionalLiteralBool"] = true,
                     ["requiredBadDescription"] = "<requiredBadDescription>",
+                    ["optionalNullableList"] = new object[]
+            {
+1234
+            },
                     ["requiredNullableList"] = new object[]
             {
 1234
             },
                 },
+                ["intExtensibleEnum"] = 1,
+                ["intExtensibleEnumCollection"] = new object[]
+            {
+1
+            },
+                ["floatExtensibleEnum"] = 1,
+                ["floatExtensibleEnumCollection"] = new object[]
+            {
+1
+            },
+                ["floatFixedEnum"] = 1.1F,
+                ["floatFixedEnumCollection"] = new object[]
+            {
+1.1F
+            },
+                ["intFixedEnum"] = 1,
+                ["intFixedEnumCollection"] = new object[]
+            {
+1
+            },
+                ["stringFixedEnum"] = "1",
                 ["requiredUnknown"] = new Dictionary<string, object>(),
+                ["optionalUnknown"] = new Dictionary<string, object>(),
                 ["requiredRecordUnknown"] = new Dictionary<string, object>()
+                {
+                    ["key"] = new Dictionary<string, object>(),
+                },
+                ["optionalRecordUnknown"] = new Dictionary<string, object>()
                 {
                     ["key"] = new Dictionary<string, object>(),
                 },
@@ -1600,7 +1768,15 @@ namespace FirstTestTypeSpec.Samples
                 ["requiredLiteralInt"] = 123,
                 ["requiredLiteralFloat"] = 1.23F,
                 ["requiredLiteralBool"] = false,
+                ["optionalLiteralString"] = "reject",
+                ["optionalLiteralInt"] = 456,
+                ["optionalLiteralFloat"] = 4.56F,
+                ["optionalLiteralBool"] = true,
                 ["requiredBadDescription"] = "<requiredBadDescription>",
+                ["optionalNullableList"] = new object[]
+            {
+1234
+            },
                 ["requiredNullableList"] = new object[]
             {
 1234
@@ -1673,7 +1849,15 @@ namespace FirstTestTypeSpec.Samples
                 ["requiredLiteralInt"] = 123,
                 ["requiredLiteralFloat"] = 1.23F,
                 ["requiredLiteralBool"] = false,
+                ["optionalLiteralString"] = "reject",
+                ["optionalLiteralInt"] = 456,
+                ["optionalLiteralFloat"] = 4.56F,
+                ["optionalLiteralBool"] = true,
                 ["requiredBadDescription"] = "<requiredBadDescription>",
+                ["optionalNullableList"] = new object[]
+            {
+1234
+            },
                 ["requiredNullableList"] = new object[]
             {
 1234
