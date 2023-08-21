@@ -725,7 +725,7 @@ namespace AutoRest.CSharp.Generation.Writers
                 {
                     return serializationFormat.HasValue
                         ? Literal("73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a")
-                        : new InvokeStaticMethodExpression(typeof(Guid), nameof(Guid.NewGuid));
+                        : InvokeGuidNewGuid();
                 }
 
                 if (type == typeof(Uri))

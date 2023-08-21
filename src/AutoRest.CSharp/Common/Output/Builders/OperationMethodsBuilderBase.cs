@@ -113,22 +113,31 @@ namespace AutoRest.CSharp.Output.Models
             var createNextPageMessageMethodSignature = BuildCreateNextPageMessageSignature(parameters.CreateMessage);
             var createNextPageMessageMethod = BuildCreateNextPageMessageMethod(createNextPageMessageMethodSignature, parameters, requestContext);
 
+            string? protocolMethodNonDocumentComment = null;
             Method? convenience = null;
             Method? convenienceAsync = null;
 
-            if (Operation.GenerateConvenienceMethod && (!Operation.GenerateProtocolMethod || !convenienceMethodIsMeaningless))
+            if (Operation.GenerateConvenienceMethod)
             {
-                var methodIsConfident = OperationConfidentChecker.IsConfident(Operation);
-                var convenienceMethodName = ProtocolMethodName;
-                if (parameters.HasAmbiguityBetweenProtocolAndConvenience)
+                if (!Operation.GenerateProtocolMethod || !convenienceMethodIsMeaningless)
                 {
-                    convenienceMethodName = ProtocolMethodName.IsLastWordSingular()
-                        ? $"{ProtocolMethodName}Value"
-                        : $"{ProtocolMethodName.LastWordToSingular()}Values";
-                }
+                    var methodIsConfident = OperationConfidentChecker.IsConfident(Operation);
+                    var convenienceMethodName = ProtocolMethodName;
+                    if (parameters.HasAmbiguityBetweenProtocolAndConvenience)
+                    {
+                        convenienceMethodName = ProtocolMethodName.IsLastWordSingular()
+                            ? $"{ProtocolMethodName}Value"
+                            : $"{ProtocolMethodName.LastWordToSingular()}Values";
+                    }
 
-                convenience = BuildConvenienceMethod(convenienceMethodName, parameters, createNextPageMessageMethodSignature, methodIsConfident, false);
-                convenienceAsync = BuildConvenienceMethod(convenienceMethodName, parameters, createNextPageMessageMethodSignature, methodIsConfident, true);
+                    protocolMethodNonDocumentComment = methodIsConfident ? null : ConvenienceMethodNotConfident;
+                    convenience = BuildConvenienceMethod(convenienceMethodName, parameters, createNextPageMessageMethodSignature, methodIsConfident, false);
+                    convenienceAsync = BuildConvenienceMethod(convenienceMethodName, parameters, createNextPageMessageMethodSignature, methodIsConfident, true);
+                }
+                else if (Operation.GenerateProtocolMethod)
+                {
+                    protocolMethodNonDocumentComment = ConvenienceMethodIsMeaningless;
+                }
             }
 
             var order = Operation.LongRunning is not null ? 2 : Operation.Paging is not null ? 1 : 0;
@@ -138,8 +147,8 @@ namespace AutoRest.CSharp.Output.Models
             (
                 createMessageMethod,
                 createNextPageMessageMethod,
-                BuildProtocolMethod(parameters.Protocol, createMessageMethod.Signature, createNextPageMessageMethodSignature, convenienceMethodIsMeaningless, false),
-                BuildProtocolMethod(parameters.Protocol, createMessageMethod.Signature, createNextPageMessageMethodSignature, convenienceMethodIsMeaningless, true),
+                BuildProtocolMethod(parameters.Protocol, createMessageMethod.Signature, createNextPageMessageMethodSignature, protocolMethodNonDocumentComment, false),
+                BuildProtocolMethod(parameters.Protocol, createMessageMethod.Signature, createNextPageMessageMethodSignature, protocolMethodNonDocumentComment, true),
                 convenience,
                 convenienceAsync,
                 null,
@@ -232,32 +241,27 @@ namespace AutoRest.CSharp.Output.Models
 
         protected string CreateScopeName(string methodName) => $"{_clientName}.{methodName}";
 
-        private Method BuildProtocolMethod(IReadOnlyList<Parameter> parameters, MethodSignatureBase createMessageSignature, MethodSignature? createNextPageMessageSignature, bool convenienceMethodIsMeaningless, bool async)
+        private Method BuildProtocolMethod(IReadOnlyList<Parameter> parameters, MethodSignatureBase createMessageSignature, MethodSignature? createNextPageMessageSignature, string? protocolMethodNonDocumentComment, bool async)
         {
-            var nonDocumentComment = convenienceMethodIsMeaningless && Operation is { GenerateConvenienceMethod: true, GenerateProtocolMethod: true }
-                ? ConvenienceMethodIsMeaningless
-                : null;
-
-            var signature = CreateMethodSignature(ProtocolMethodName, _protocolAccessibility | MethodSignatureModifiers.Virtual, parameters, ProtocolMethodReturnType, nonDocumentComment);
+            var signature = CreateMethodSignature(ProtocolMethodName, _protocolAccessibility | MethodSignatureModifiers.Virtual, parameters, ProtocolMethodReturnType, protocolMethodNonDocumentComment);
             var body = new[]
             {
                 new ParameterValidationBlock(signature.Parameters),
                 CreateProtocolMethodBody(createMessageSignature, createNextPageMessageSignature, async)
             };
+
             return new Method(signature.WithAsync(async), body);
         }
 
         private Method BuildConvenienceMethod(string methodName, RestClientMethodParameters parameters, MethodSignature? createNextPageMessageSignature, bool methodIsConfident, bool async)
         {
             var modifiers = ConvenienceModifiers | MethodSignatureModifiers.Virtual;
-            string? nonDocumentComment = null;
             if (!methodIsConfident)
             {
                 modifiers = modifiers & ~MethodSignatureModifiers.Public | MethodSignatureModifiers.Internal;
-                nonDocumentComment = ConvenienceMethodNotConfident;
             }
 
-            var signature = CreateMethodSignature(methodName, modifiers, parameters.Convenience, ConvenienceMethodReturnType, nonDocumentComment);
+            var signature = CreateMethodSignature(methodName, modifiers, parameters.Convenience, ConvenienceMethodReturnType, null);
             var body = new[]
             {
                 new ParameterValidationBlock(parameters.Convenience),

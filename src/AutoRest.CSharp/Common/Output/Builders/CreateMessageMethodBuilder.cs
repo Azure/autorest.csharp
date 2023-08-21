@@ -92,7 +92,7 @@ namespace AutoRest.CSharp.Output.Models
                 {
                     lines.Add(uriBuilder.AppendRaw(span.ToString(), false));
                 }
-                else if (TryGetRequestPart(span, RequestLocation.Uri, out var inputParameter, out var outputParameter, out _))
+                else if (TryGetUriOrPathRequestPart(span, RequestLocation.Uri, out var inputParameter, out var outputParameter, out _))
                 {
                     if (inputParameter.IsEndpoint)
                     {
@@ -124,7 +124,7 @@ namespace AutoRest.CSharp.Output.Models
                 {
                     lines.Add(uriBuilder.AppendPath(span.ToString(), false));
                 }
-                else if (TryGetRequestPart(span, RequestLocation.Path, out var inputParameter, out var outputParameter, out var format))
+                else if (TryGetUriOrPathRequestPart(span, RequestLocation.Path, out var inputParameter, out var outputParameter, out var format))
                 {
                     var value = GetValueForRequestPart(inputParameter, outputParameter);
                     lines.Add(value is not ConstantExpression && outputParameter.Name == "nextLink"
@@ -143,7 +143,7 @@ namespace AutoRest.CSharp.Output.Models
         {
             foreach (var (nameInRequest, inputParameter, outputParameter, format) in _requestParts)
             {
-                if (inputParameter is not null && inputParameter.Location == RequestLocation.Query)
+                if (inputParameter is not null && outputParameter is not null && inputParameter.Location == RequestLocation.Query)
                 {
                     yield return AddToQuery(uriBuilder, inputParameter, outputParameter, nameInRequest, format);
                 }
@@ -154,7 +154,11 @@ namespace AutoRest.CSharp.Output.Models
         {
             foreach (var (nameInRequest, inputParameter, outputParameter, format) in _requestParts)
             {
-                if (inputParameter is null)
+                if (outputParameter is null)
+                {
+                    yield return request.Headers.Add(nameInRequest, GetNonParameterizedHeaderValue(nameInRequest, request), format);
+                }
+                else if (inputParameter is null)
                 {
                     if (!addContentHeaders)
                     {
@@ -168,12 +172,34 @@ namespace AutoRest.CSharp.Output.Models
             }
         }
 
+        private ValueExpression GetNonParameterizedHeaderValue(string nameInRequest, RequestExpression request)
+        {
+            if (nameInRequest.Equals(SpecialHandledHeaders.ClientRequestId, StringComparison.OrdinalIgnoreCase))
+            {
+                return request.ClientRequestId;
+            }
+            if (nameInRequest.Equals(SpecialHandledHeaders.ReturnClientRequestId, StringComparison.OrdinalIgnoreCase))
+            {
+                return Literal("true");
+            }
+            if (nameInRequest.Equals(SpecialHandledHeaders.RepeatabilityRequestId, StringComparison.OrdinalIgnoreCase))
+            {
+                return InvokeGuidNewGuid();
+            }
+            if (nameInRequest.Equals(SpecialHandledHeaders.RepeatabilityFirstSent, StringComparison.OrdinalIgnoreCase))
+            {
+                return InvokeDateTimeOffsetNow();
+            }
+
+            throw new InvalidOperationException($"Unknown non-parameterized header {nameInRequest}.");
+        }
+
         public MethodBodyStatement AddBody(InputOperation operation, RequestExpression request)
         {
             var bodyParameters = new Dictionary<string, Parameter>();
             foreach (var (_, inputParameter, outputParameter, _) in _requestParts)
             {
-                if (inputParameter is null || inputParameter.Location != RequestLocation.Body)
+                if (inputParameter is null || outputParameter is null || inputParameter.Location != RequestLocation.Body)
                 {
                     continue;
                 }
@@ -382,7 +408,7 @@ namespace AutoRest.CSharp.Output.Models
 
             foreach (var (_, inputParameter, outputParameter, _) in _requestParts)
             {
-                if (inputParameter is { FlattenedBodyProperty: { } property })
+                if (inputParameter is { FlattenedBodyProperty: { } property } && outputParameter is not null)
                 {
                     conversion.Add(CreatePropertySerializationStatement(property, content.JsonWriter, inputParameter, outputParameter));
                 }
@@ -437,11 +463,11 @@ namespace AutoRest.CSharp.Output.Models
                 _ => throw new NotImplementedException()
             };
 
-        private bool TryGetRequestPart(in ReadOnlySpan<char> key, in RequestLocation location, [MaybeNullWhen(false)] out InputParameter inputParameter, [MaybeNullWhen(false)] out Parameter outputParameter, out SerializationFormat serializationFormat)
+        private bool TryGetUriOrPathRequestPart(in ReadOnlySpan<char> key, in RequestLocation location, [MaybeNullWhen(false)] out InputParameter inputParameter, [MaybeNullWhen(false)] out Parameter outputParameter, out SerializationFormat serializationFormat)
         {
             foreach (var part in _requestParts)
             {
-                if (part.InputParameter?.Location == location && part.NameInRequest.AsSpan().Equals(key, StringComparison.InvariantCulture))
+                if (part.InputParameter?.Location == location && part.NameInRequest.AsSpan().Equals(key, StringComparison.InvariantCulture) && part.OutputParameter is not null)
                 {
                     inputParameter = part.InputParameter;
                     outputParameter = part.OutputParameter;

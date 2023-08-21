@@ -68,5 +68,5 @@ namespace AutoRest.CSharp.Output.Models
         }
     }
 
-    internal record RequestPartSource(string NameInRequest, InputParameter? InputParameter, Parameter OutputParameter, SerializationFormat SerializationFormat);
+    internal record RequestPartSource(string NameInRequest, InputParameter? InputParameter, Parameter? OutputParameter, SerializationFormat SerializationFormat);
 }

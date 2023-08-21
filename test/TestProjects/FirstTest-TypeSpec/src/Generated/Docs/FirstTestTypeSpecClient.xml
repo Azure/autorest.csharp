@@ -1134,11 +1134,11 @@ var data = new {
     },
     requiredModel = new {
         name = "<name>",
-        requiredUnion = new {},
+        requiredUnion = new object(),
         requiredLiteralString = "accept",
         requiredLiteralInt = 123,
-        requiredLiteralFloat = 1.23,
-        requiredLiteralBool = false,
+        requiredLiteralFloat = 1.23F,
+        requiredLiteralBool = true,
         requiredBadDescription = "<requiredBadDescription>",
         requiredNullableList = new[] {
             1234
@@ -1193,14 +1193,14 @@ var data = new {
     },
     requiredModel = new {
         name = "<name>",
-        requiredUnion = new {},
+        requiredUnion = new object(),
         requiredLiteralString = "accept",
         requiredLiteralInt = 123,
-        requiredLiteralFloat = 1.23,
-        requiredLiteralBool = false,
+        requiredLiteralFloat = 1.23F,
+        requiredLiteralBool = true,
         optionalLiteralString = "reject",
         optionalLiteralInt = 456,
-        optionalLiteralFloat = 4.56,
+        optionalLiteralFloat = 4.56F,
         optionalLiteralBool = true,
         requiredBadDescription = "<requiredBadDescription>",
         optionalNullableList = new[] {
@@ -1294,7 +1294,7 @@ This sample shows how to call HelloDemo2Async with required parameters and parse
 var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new FirstTestTypeSpecClient(endpoint);
 
-Response response = await client.HelloDemo2Async(new RequestContext());
+Response response = await client.HelloDemo2Async(new RequestContext()).ConfigureAwait(false);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("name").ToString());
@@ -1352,18 +1352,18 @@ var client = new FirstTestTypeSpecClient(endpoint);
 
 var data = new {
     name = "<name>",
-    requiredUnion = new {},
+    requiredUnion = new object(),
     requiredLiteralString = "accept",
     requiredLiteralInt = 123,
-    requiredLiteralFloat = 1.23,
-    requiredLiteralBool = false,
+    requiredLiteralFloat = 1.23F,
+    requiredLiteralBool = true,
     requiredBadDescription = "<requiredBadDescription>",
     requiredNullableList = new[] {
         1234
     },
 };
 
-Response response = await client.CreateLiteralAsync(RequestContent.Create(data));
+Response response = await client.CreateLiteralAsync(RequestContent.Create(data)).ConfigureAwait(false);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("name").ToString());
@@ -1382,14 +1382,14 @@ var client = new FirstTestTypeSpecClient(endpoint);
 
 var data = new {
     name = "<name>",
-    requiredUnion = new {},
+    requiredUnion = new object(),
     requiredLiteralString = "accept",
     requiredLiteralInt = 123,
-    requiredLiteralFloat = 1.23,
-    requiredLiteralBool = false,
+    requiredLiteralFloat = 1.23F,
+    requiredLiteralBool = true,
     optionalLiteralString = "reject",
     optionalLiteralInt = 456,
-    optionalLiteralFloat = 4.56,
+    optionalLiteralFloat = 4.56F,
     optionalLiteralBool = true,
     requiredBadDescription = "<requiredBadDescription>",
     optionalNullableList = new[] {
@@ -1400,7 +1400,7 @@ var data = new {
     },
 };
 
-Response response = await client.CreateLiteralAsync(RequestContent.Create(data));
+Response response = await client.CreateLiteralAsync(RequestContent.Create(data)).ConfigureAwait(false);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("name").ToString());
@@ -1428,11 +1428,11 @@ var client = new FirstTestTypeSpecClient(endpoint);
 
 var data = new {
     name = "<name>",
-    requiredUnion = new {},
+    requiredUnion = new object(),
     requiredLiteralString = "accept",
     requiredLiteralInt = 123,
-    requiredLiteralFloat = 1.23,
-    requiredLiteralBool = false,
+    requiredLiteralFloat = 1.23F,
+    requiredLiteralBool = true,
     requiredBadDescription = "<requiredBadDescription>",
     requiredNullableList = new[] {
         1234
@@ -1458,14 +1458,14 @@ var client = new FirstTestTypeSpecClient(endpoint);
 
 var data = new {
     name = "<name>",
-    requiredUnion = new {},
+    requiredUnion = new object(),
     requiredLiteralString = "accept",
     requiredLiteralInt = 123,
-    requiredLiteralFloat = 1.23,
-    requiredLiteralBool = false,
+    requiredLiteralFloat = 1.23F,
+    requiredLiteralBool = true,
     optionalLiteralString = "reject",
     optionalLiteralInt = 456,
-    optionalLiteralFloat = 4.56,
+    optionalLiteralFloat = 4.56F,
     optionalLiteralBool = true,
     requiredBadDescription = "<requiredBadDescription>",
     optionalNullableList = new[] {
@@ -1506,7 +1506,7 @@ This sample shows how to call HelloLiteralAsync with required parameters and par
 var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new FirstTestTypeSpecClient(endpoint);
 
-Response response = await client.HelloLiteralAsync(new RequestContext());
+Response response = await client.HelloLiteralAsync(new RequestContext()).ConfigureAwait(false);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("name").ToString());
@@ -1558,7 +1558,7 @@ This sample shows how to call GetUnknownValueAsync with required parameters and 
 var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new FirstTestTypeSpecClient(endpoint);
 
-Response response = await client.GetUnknownValueAsync(new RequestContext());
+Response response = await client.GetUnknownValueAsync(new RequestContext()).ConfigureAwait(false);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.ToString());
@@ -1594,7 +1594,7 @@ This sample shows how to call StillConvenientValueAsync.
 var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new FirstTestTypeSpecClient(endpoint);
 
-var result = await client.StillConvenientValueAsync();
+var result = await client.StillConvenientValueAsync().ConfigureAwait(false);
 ]]></code>
 </example>
     </member>

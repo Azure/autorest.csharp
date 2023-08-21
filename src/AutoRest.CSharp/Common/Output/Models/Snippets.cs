@@ -67,12 +67,16 @@ namespace AutoRest.CSharp.Common.Output.Models
         public static ValueExpression InvokeToEnum(CSharpType enumType, ValueExpression stringValue)
             => new InvokeStaticMethodExpression(enumType, $"To{enumType.Implementation.Declaration.Name}", new[]{stringValue}, null, true);
 
+        public static MemberExpression InvokeDateTimeOffsetNow() =>
+            new(typeof(DateTimeOffset), nameof(DateTimeOffset.Now));
         public static InvokeStaticMethodExpression InvokeDateTimeOffsetFromUnixTimeSeconds(ValueExpression expression)
-            => new InvokeStaticMethodExpression(typeof(DateTimeOffset), nameof(DateTimeOffset.FromUnixTimeSeconds), new[]{expression});
-        public static ValueExpression InvokeFileOpenRead(ValueExpression expression)
-            => new InvokeStaticMethodExpression(typeof(System.IO.File), nameof(System.IO.File.OpenRead), new[]{expression});
-        public static ValueExpression InvokeFileOpenWrite(ValueExpression expression)
-            => new InvokeStaticMethodExpression(typeof(System.IO.File), nameof(System.IO.File.OpenWrite), new[]{expression});
+            => new(typeof(DateTimeOffset), nameof(DateTimeOffset.FromUnixTimeSeconds), new[]{expression});
+        public static InvokeStaticMethodExpression InvokeGuidNewGuid()
+            => new(typeof(Guid), nameof(Guid.NewGuid));
+        public static InvokeStaticMethodExpression InvokeFileOpenRead(ValueExpression expression)
+            => new(typeof(System.IO.File), nameof(System.IO.File.OpenRead), new[]{expression});
+        public static InvokeStaticMethodExpression InvokeFileOpenWrite(ValueExpression expression)
+            => new(typeof(System.IO.File), nameof(System.IO.File.OpenWrite), new[]{expression});
 
         // Expected signature: MethodName(Utf8JsonWriter writer);
         public static MethodBodyStatement InvokeCustomSerializationMethod(string methodName, Utf8JsonWriterExpression utf8JsonWriter)

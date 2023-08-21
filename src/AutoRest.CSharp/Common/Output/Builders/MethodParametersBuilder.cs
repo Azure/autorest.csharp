@@ -95,6 +95,9 @@ namespace AutoRest.CSharp.Output.Models
                     case { Location: RequestLocation.Header, IsContentType: true }:
                         AddContentTypeRequestParameter(inputParameter);
                         break;
+                    case { Location: RequestLocation.Header } when SpecialHandledHeaders.IsNonParameterizedHeader(inputParameter.NameInRequest):
+                        AddReference(inputParameter);
+                        break;
                     default:
                         AddReferenceAndParameter(inputParameter.NameInRequest, inputParameter);
                         break;
@@ -451,10 +454,13 @@ namespace AutoRest.CSharp.Output.Models
             AddReference(inputParameter.NameInRequest, inputParameter, parameter, SerializationFormat.Default);
         }
 
-        private void AddReference(string nameInRequest, InputParameter? inputParameter, Parameter parameter, SerializationFormat serializationFormat)
+        private void AddReference(InputParameter inputParameter)
+            => _requestParts.Add(new RequestPartSource(inputParameter.NameInRequest, inputParameter, null, SerializationBuilder.GetSerializationFormat(inputParameter.Type)));
+
+        private void AddReference(string nameInRequest, InputParameter? inputParameter, Parameter? outputParameter, SerializationFormat serializationFormat)
         {
             // DPG would do ungrouping in protocol method rather than in create request methods
-            _requestParts.Add(new RequestPartSource(nameInRequest, inputParameter != null ? inputParameter with { GroupedBy = null } : null, parameter, serializationFormat));
+            _requestParts.Add(new RequestPartSource(nameInRequest, inputParameter != null ? inputParameter with { GroupedBy = null } : null, outputParameter, serializationFormat));
         }
 
         private CSharpType ChangeTypeForProtocolMethod(InputType type) => type switch

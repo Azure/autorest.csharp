@@ -81,7 +81,7 @@ namespace AutoRest.CSharp.Generation.Types
                 _ => new CSharpType(typeof(object), inputType.IsNullable),
             },
             InputSystemType systemType => new CSharpType(systemType.Type, CreateType(systemType.ElementType)).WithNullable(inputType.IsNullable),
-            InputIntrinsicType { Kind: InputIntrinsicTypeKind.Unknown } => Configuration.AzureArm ? typeof(BinaryData) : typeof(object),
+            InputIntrinsicType { Kind: InputIntrinsicTypeKind.Unknown } => typeof(BinaryData),
             CodeModelType cmt => CreateType(cmt.Schema, cmt.IsNullable),
             _ => throw new Exception("Unknown type")
         };

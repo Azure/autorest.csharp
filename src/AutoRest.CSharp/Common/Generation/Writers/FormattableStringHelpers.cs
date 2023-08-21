@@ -108,11 +108,6 @@ namespace AutoRest.CSharp.Generation.Writers
                 return $"new {constant.Type}()";
             }
 
-            if (constant.Value is Constant.Expression expression)
-            {
-                return expression.ExpressionValue;
-            }
-
             if (constant is { Type: { IsFrameworkType: false }, Value: EnumTypeValue enumTypeValue })
             {
                 return $"{constant.Type}.{enumTypeValue.Declaration.Name}";

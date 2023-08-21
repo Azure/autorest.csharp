@@ -6,13 +6,10 @@
 #nullable disable
 
 using System;
-using System.Collections.Generic;
-using System.IO;
 using System.Text.Json;
 using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
-using Azure.Identity;
 using FirstTestTypeSpec.Models;
 using NUnit.Framework;
 
@@ -72,7 +69,7 @@ namespace FirstTestTypeSpec.Samples
             var endpoint = new Uri("<https://my-service.azure.com>");
             var client = new FirstTestTypeSpecClient(endpoint);
 
-            Response response = await client.TopActionAsync(DateTimeOffset.UtcNow, new RequestContext());
+            Response response = await client.TopActionAsync(DateTimeOffset.UtcNow, new RequestContext()).ConfigureAwait(false);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("name").ToString());
@@ -92,7 +89,7 @@ namespace FirstTestTypeSpec.Samples
             var endpoint = new Uri("<https://my-service.azure.com>");
             var client = new FirstTestTypeSpecClient(endpoint);
 
-            Response response = await client.TopActionAsync(DateTimeOffset.UtcNow, new RequestContext());
+            Response response = await client.TopActionAsync(DateTimeOffset.UtcNow, new RequestContext()).ConfigureAwait(false);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("name").ToString());
@@ -162,7 +159,7 @@ namespace FirstTestTypeSpec.Samples
             var endpoint = new Uri("<https://my-service.azure.com>");
             var client = new FirstTestTypeSpecClient(endpoint);
 
-            Response response = await client.TopAction2Async(new RequestContext());
+            Response response = await client.TopAction2Async(new RequestContext()).ConfigureAwait(false);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("name").ToString());
@@ -182,7 +179,7 @@ namespace FirstTestTypeSpec.Samples
             var endpoint = new Uri("<https://my-service.azure.com>");
             var client = new FirstTestTypeSpecClient(endpoint);
 
-            Response response = await client.TopAction2Async(new RequestContext());
+            Response response = await client.TopAction2Async(new RequestContext()).ConfigureAwait(false);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("name").ToString());
@@ -210,11 +207,11 @@ namespace FirstTestTypeSpec.Samples
             var data = new
             {
                 name = "<name>",
-                requiredUnion = new { },
+                requiredUnion = new object(),
                 requiredLiteralString = "accept",
                 requiredLiteralInt = 123,
-                requiredLiteralFloat = 1.23,
-                requiredLiteralBool = false,
+                requiredLiteralFloat = 1.23F,
+                requiredLiteralBool = true,
                 requiredBadDescription = "<requiredBadDescription>",
                 requiredNullableList = new[] {
         1234
@@ -244,14 +241,14 @@ namespace FirstTestTypeSpec.Samples
             var data = new
             {
                 name = "<name>",
-                requiredUnion = new { },
+                requiredUnion = new object(),
                 requiredLiteralString = "accept",
                 requiredLiteralInt = 123,
-                requiredLiteralFloat = 1.23,
-                requiredLiteralBool = false,
+                requiredLiteralFloat = 1.23F,
+                requiredLiteralBool = true,
                 optionalLiteralString = "reject",
                 optionalLiteralInt = 456,
-                optionalLiteralFloat = 4.56,
+                optionalLiteralFloat = 4.56F,
                 optionalLiteralBool = true,
                 requiredBadDescription = "<requiredBadDescription>",
                 optionalNullableList = new[] {
@@ -290,18 +287,18 @@ namespace FirstTestTypeSpec.Samples
             var data = new
             {
                 name = "<name>",
-                requiredUnion = new { },
+                requiredUnion = new object(),
                 requiredLiteralString = "accept",
                 requiredLiteralInt = 123,
-                requiredLiteralFloat = 1.23,
-                requiredLiteralBool = false,
+                requiredLiteralFloat = 1.23F,
+                requiredLiteralBool = true,
                 requiredBadDescription = "<requiredBadDescription>",
                 requiredNullableList = new[] {
         1234
     },
             };
 
-            Response response = await client.PatchActionAsync(RequestContent.Create(data));
+            Response response = await client.PatchActionAsync(RequestContent.Create(data)).ConfigureAwait(false);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("name").ToString());
@@ -324,14 +321,14 @@ namespace FirstTestTypeSpec.Samples
             var data = new
             {
                 name = "<name>",
-                requiredUnion = new { },
+                requiredUnion = new object(),
                 requiredLiteralString = "accept",
                 requiredLiteralInt = 123,
-                requiredLiteralFloat = 1.23,
-                requiredLiteralBool = false,
+                requiredLiteralFloat = 1.23F,
+                requiredLiteralBool = true,
                 optionalLiteralString = "reject",
                 optionalLiteralInt = 456,
-                optionalLiteralFloat = 4.56,
+                optionalLiteralFloat = 4.56F,
                 optionalLiteralBool = true,
                 requiredBadDescription = "<requiredBadDescription>",
                 optionalNullableList = new[] {
@@ -342,7 +339,7 @@ namespace FirstTestTypeSpec.Samples
     },
             };
 
-            Response response = await client.PatchActionAsync(RequestContent.Create(data));
+            Response response = await client.PatchActionAsync(RequestContent.Create(data)).ConfigureAwait(false);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("name").ToString());
@@ -370,11 +367,11 @@ namespace FirstTestTypeSpec.Samples
             var data = new
             {
                 name = "<name>",
-                requiredUnion = new { },
+                requiredUnion = new object(),
                 requiredLiteralString = "accept",
                 requiredLiteralInt = 123,
-                requiredLiteralFloat = 1.23,
-                requiredLiteralBool = false,
+                requiredLiteralFloat = 1.23F,
+                requiredLiteralBool = true,
                 requiredBadDescription = "<requiredBadDescription>",
                 requiredNullableList = new[] {
         1234
@@ -404,14 +401,14 @@ namespace FirstTestTypeSpec.Samples
             var data = new
             {
                 name = "<name>",
-                requiredUnion = new { },
+                requiredUnion = new object(),
                 requiredLiteralString = "accept",
                 requiredLiteralInt = 123,
-                requiredLiteralFloat = 1.23,
-                requiredLiteralBool = false,
+                requiredLiteralFloat = 1.23F,
+                requiredLiteralBool = true,
                 optionalLiteralString = "reject",
                 optionalLiteralInt = 456,
-                optionalLiteralFloat = 4.56,
+                optionalLiteralFloat = 4.56F,
                 optionalLiteralBool = true,
                 requiredBadDescription = "<requiredBadDescription>",
                 optionalNullableList = new[] {
@@ -450,18 +447,18 @@ namespace FirstTestTypeSpec.Samples
             var data = new
             {
                 name = "<name>",
-                requiredUnion = new { },
+                requiredUnion = new object(),
                 requiredLiteralString = "accept",
                 requiredLiteralInt = 123,
-                requiredLiteralFloat = 1.23,
-                requiredLiteralBool = false,
+                requiredLiteralFloat = 1.23F,
+                requiredLiteralBool = true,
                 requiredBadDescription = "<requiredBadDescription>",
                 requiredNullableList = new[] {
         1234
     },
             };
 
-            Response response = await client.AnonymousBodyAsync(RequestContent.Create(data));
+            Response response = await client.AnonymousBodyAsync(RequestContent.Create(data)).ConfigureAwait(false);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("name").ToString());
@@ -484,14 +481,14 @@ namespace FirstTestTypeSpec.Samples
             var data = new
             {
                 name = "<name>",
-                requiredUnion = new { },
+                requiredUnion = new object(),
                 requiredLiteralString = "accept",
                 requiredLiteralInt = 123,
-                requiredLiteralFloat = 1.23,
-                requiredLiteralBool = false,
+                requiredLiteralFloat = 1.23F,
+                requiredLiteralBool = true,
                 optionalLiteralString = "reject",
                 optionalLiteralInt = 456,
-                optionalLiteralFloat = 4.56,
+                optionalLiteralFloat = 4.56F,
                 optionalLiteralBool = true,
                 requiredBadDescription = "<requiredBadDescription>",
                 optionalNullableList = new[] {
@@ -502,7 +499,7 @@ namespace FirstTestTypeSpec.Samples
     },
             };
 
-            Response response = await client.AnonymousBodyAsync(RequestContent.Create(data));
+            Response response = await client.AnonymousBodyAsync(RequestContent.Create(data)).ConfigureAwait(false);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("name").ToString());
@@ -568,7 +565,7 @@ namespace FirstTestTypeSpec.Samples
                 name = "<name>",
             };
 
-            Response response = await client.FriendlyModelAsync(RequestContent.Create(data));
+            Response response = await client.FriendlyModelAsync(RequestContent.Create(data)).ConfigureAwait(false);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("name").ToString());
@@ -586,7 +583,7 @@ namespace FirstTestTypeSpec.Samples
                 name = "<name>",
             };
 
-            Response response = await client.FriendlyModelAsync(RequestContent.Create(data));
+            Response response = await client.FriendlyModelAsync(RequestContent.Create(data)).ConfigureAwait(false);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("name").ToString());
@@ -600,7 +597,7 @@ namespace FirstTestTypeSpec.Samples
             var client = new FirstTestTypeSpecClient(endpoint);
 
             var notFriend = new Friend("<name>");
-            var result = await client.FriendlyModelAsync(notFriend);
+            var result = await client.FriendlyModelAsync(notFriend).ConfigureAwait(false);
         }
 
         [Test]
@@ -632,7 +629,7 @@ namespace FirstTestTypeSpec.Samples
             var endpoint = new Uri("<https://my-service.azure.com>");
             var client = new FirstTestTypeSpecClient(endpoint);
 
-            Response response = await client.AddTimeHeaderAsync();
+            Response response = await client.AddTimeHeaderAsync().ConfigureAwait(false);
             Console.WriteLine(response.Status);
         }
 
@@ -643,7 +640,7 @@ namespace FirstTestTypeSpec.Samples
             var endpoint = new Uri("<https://my-service.azure.com>");
             var client = new FirstTestTypeSpecClient(endpoint);
 
-            Response response = await client.AddTimeHeaderAsync();
+            Response response = await client.AddTimeHeaderAsync().ConfigureAwait(false);
             Console.WriteLine(response.Status);
         }
 
@@ -694,7 +691,7 @@ namespace FirstTestTypeSpec.Samples
                 guid = "73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a",
             };
 
-            Response response = await client.StringFormatAsync(Guid.NewGuid(), RequestContent.Create(data));
+            Response response = await client.StringFormatAsync(Guid.NewGuid(), RequestContent.Create(data)).ConfigureAwait(false);
             Console.WriteLine(response.Status);
         }
 
@@ -711,7 +708,7 @@ namespace FirstTestTypeSpec.Samples
                 guid = "73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a",
             };
 
-            Response response = await client.StringFormatAsync(Guid.NewGuid(), RequestContent.Create(data));
+            Response response = await client.StringFormatAsync(Guid.NewGuid(), RequestContent.Create(data)).ConfigureAwait(false);
             Console.WriteLine(response.Status);
         }
 
@@ -723,7 +720,7 @@ namespace FirstTestTypeSpec.Samples
             var client = new FirstTestTypeSpecClient(endpoint);
 
             var body = new ModelWithFormat(new Uri("http://localhost:3000"), Guid.NewGuid());
-            var result = await client.StringFormatAsync(Guid.NewGuid(), body);
+            var result = await client.StringFormatAsync(Guid.NewGuid(), body).ConfigureAwait(false);
         }
 
         [Test]
@@ -778,7 +775,7 @@ namespace FirstTestTypeSpec.Samples
             var endpoint = new Uri("<https://my-service.azure.com>");
             var client = new FirstTestTypeSpecClient(endpoint);
 
-            Response response = await client.SayHiAsync("<headParameter>", "<queryParameter>", "<optionalQuery>", new RequestContext());
+            Response response = await client.SayHiAsync("<headParameter>", "<queryParameter>", "<optionalQuery>", new RequestContext()).ConfigureAwait(false);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("name").ToString());
@@ -798,7 +795,7 @@ namespace FirstTestTypeSpec.Samples
             var endpoint = new Uri("<https://my-service.azure.com>");
             var client = new FirstTestTypeSpecClient(endpoint);
 
-            Response response = await client.SayHiAsync("<headParameter>", "<queryParameter>", "<optionalQuery>", new RequestContext());
+            Response response = await client.SayHiAsync("<headParameter>", "<queryParameter>", "<optionalQuery>", new RequestContext()).ConfigureAwait(false);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("name").ToString());
@@ -837,11 +834,11 @@ namespace FirstTestTypeSpec.Samples
                 requiredModel = new
                 {
                     name = "<name>",
-                    requiredUnion = new { },
+                    requiredUnion = new object(),
                     requiredLiteralString = "accept",
                     requiredLiteralInt = 123,
-                    requiredLiteralFloat = 1.23,
-                    requiredLiteralBool = false,
+                    requiredLiteralFloat = 1.23F,
+                    requiredLiteralBool = true,
                     requiredBadDescription = "<requiredBadDescription>",
                     requiredNullableList = new[] {
             1234
@@ -1040,7 +1037,7 @@ namespace FirstTestTypeSpec.Samples
                 },
             };
 
-            Response response = await client.HelloAgainAsync("<p2>", "<p1>", RequestContent.Create(data));
+            Response response = await client.HelloAgainAsync("<p2>", "<p1>", RequestContent.Create(data)).ConfigureAwait(false);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("requiredString").ToString());
@@ -1084,14 +1081,14 @@ namespace FirstTestTypeSpec.Samples
                 requiredModel = new
                 {
                     name = "<name>",
-                    requiredUnion = new { },
+                    requiredUnion = new object(),
                     requiredLiteralString = "accept",
                     requiredLiteralInt = 123,
-                    requiredLiteralFloat = 1.23,
-                    requiredLiteralBool = false,
+                    requiredLiteralFloat = 1.23F,
+                    requiredLiteralBool = true,
                     optionalLiteralString = "reject",
                     optionalLiteralInt = 456,
-                    optionalLiteralFloat = 4.56,
+                    optionalLiteralFloat = 4.56F,
                     optionalLiteralBool = true,
                     requiredBadDescription = "<requiredBadDescription>",
                     optionalNullableList = new[] {
@@ -1136,7 +1133,7 @@ namespace FirstTestTypeSpec.Samples
                 },
             };
 
-            Response response = await client.HelloAgainAsync("<p2>", "<p1>", RequestContent.Create(data));
+            Response response = await client.HelloAgainAsync("<p2>", "<p1>", RequestContent.Create(data)).ConfigureAwait(false);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("requiredString").ToString());
@@ -1197,11 +1194,11 @@ namespace FirstTestTypeSpec.Samples
                 requiredModel = new
                 {
                     name = "<name>",
-                    requiredUnion = new { },
+                    requiredUnion = new object(),
                     requiredLiteralString = "accept",
                     requiredLiteralInt = 123,
-                    requiredLiteralFloat = 1.23,
-                    requiredLiteralBool = false,
+                    requiredLiteralFloat = 1.23F,
+                    requiredLiteralBool = true,
                     requiredBadDescription = "<requiredBadDescription>",
                     requiredNullableList = new[] {
             1234
@@ -1264,14 +1261,14 @@ namespace FirstTestTypeSpec.Samples
                 requiredModel = new
                 {
                     name = "<name>",
-                    requiredUnion = new { },
+                    requiredUnion = new object(),
                     requiredLiteralString = "accept",
                     requiredLiteralInt = 123,
-                    requiredLiteralFloat = 1.23,
-                    requiredLiteralBool = false,
+                    requiredLiteralFloat = 1.23F,
+                    requiredLiteralBool = true,
                     optionalLiteralString = "reject",
                     optionalLiteralInt = 456,
-                    optionalLiteralFloat = 4.56,
+                    optionalLiteralFloat = 4.56F,
                     optionalLiteralBool = true,
                     requiredBadDescription = "<requiredBadDescription>",
                     optionalNullableList = new[] {
@@ -1377,11 +1374,11 @@ namespace FirstTestTypeSpec.Samples
                 requiredModel = new
                 {
                     name = "<name>",
-                    requiredUnion = new { },
+                    requiredUnion = new object(),
                     requiredLiteralString = "accept",
                     requiredLiteralInt = 123,
-                    requiredLiteralFloat = 1.23,
-                    requiredLiteralBool = false,
+                    requiredLiteralFloat = 1.23F,
+                    requiredLiteralBool = true,
                     requiredBadDescription = "<requiredBadDescription>",
                     requiredNullableList = new[] {
             1234
@@ -1400,7 +1397,7 @@ namespace FirstTestTypeSpec.Samples
                 },
             };
 
-            Response response = await client.NoContentTypeAsync("<p2>", "<p1>", RequestContent.Create(data));
+            Response response = await client.NoContentTypeAsync("<p2>", "<p1>", RequestContent.Create(data)).ConfigureAwait(false);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("requiredString").ToString());
@@ -1496,7 +1493,7 @@ namespace FirstTestTypeSpec.Samples
                 },
             };
 
-            Response response = await client.NoContentTypeAsync("<p2>", "<p1>", RequestContent.Create(data));
+            Response response = await client.NoContentTypeAsync("<p2>", "<p1>", RequestContent.Create(data)).ConfigureAwait(false);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("requiredString").ToString());
@@ -1588,7 +1585,7 @@ namespace FirstTestTypeSpec.Samples
             var endpoint = new Uri("<https://my-service.azure.com>");
             var client = new FirstTestTypeSpecClient(endpoint);
 
-            Response response = await client.HelloDemo2Async(new RequestContext());
+            Response response = await client.HelloDemo2Async(new RequestContext()).ConfigureAwait(false);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("name").ToString());
@@ -1608,7 +1605,7 @@ namespace FirstTestTypeSpec.Samples
             var endpoint = new Uri("<https://my-service.azure.com>");
             var client = new FirstTestTypeSpecClient(endpoint);
 
-            Response response = await client.HelloDemo2Async(new RequestContext());
+            Response response = await client.HelloDemo2Async(new RequestContext()).ConfigureAwait(false);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("name").ToString());
@@ -1636,11 +1633,11 @@ namespace FirstTestTypeSpec.Samples
             var data = new
             {
                 name = "<name>",
-                requiredUnion = new { },
+                requiredUnion = new object(),
                 requiredLiteralString = "accept",
                 requiredLiteralInt = 123,
-                requiredLiteralFloat = 1.23,
-                requiredLiteralBool = false,
+                requiredLiteralFloat = 1.23F,
+                requiredLiteralBool = true,
                 requiredBadDescription = "<requiredBadDescription>",
                 requiredNullableList = new[] {
         1234
@@ -1670,14 +1667,14 @@ namespace FirstTestTypeSpec.Samples
             var data = new
             {
                 name = "<name>",
-                requiredUnion = new { },
+                requiredUnion = new object(),
                 requiredLiteralString = "accept",
                 requiredLiteralInt = 123,
-                requiredLiteralFloat = 1.23,
-                requiredLiteralBool = false,
+                requiredLiteralFloat = 1.23F,
+                requiredLiteralBool = true,
                 optionalLiteralString = "reject",
                 optionalLiteralInt = 456,
-                optionalLiteralFloat = 4.56,
+                optionalLiteralFloat = 4.56F,
                 optionalLiteralBool = true,
                 requiredBadDescription = "<requiredBadDescription>",
                 optionalNullableList = new[] {
@@ -1716,18 +1713,18 @@ namespace FirstTestTypeSpec.Samples
             var data = new
             {
                 name = "<name>",
-                requiredUnion = new { },
+                requiredUnion = new object(),
                 requiredLiteralString = "accept",
                 requiredLiteralInt = 123,
-                requiredLiteralFloat = 1.23,
-                requiredLiteralBool = false,
+                requiredLiteralFloat = 1.23F,
+                requiredLiteralBool = true,
                 requiredBadDescription = "<requiredBadDescription>",
                 requiredNullableList = new[] {
         1234
     },
             };
 
-            Response response = await client.CreateLiteralAsync(RequestContent.Create(data));
+            Response response = await client.CreateLiteralAsync(RequestContent.Create(data)).ConfigureAwait(false);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("name").ToString());
@@ -1750,14 +1747,14 @@ namespace FirstTestTypeSpec.Samples
             var data = new
             {
                 name = "<name>",
-                requiredUnion = new { },
+                requiredUnion = new object(),
                 requiredLiteralString = "accept",
                 requiredLiteralInt = 123,
-                requiredLiteralFloat = 1.23,
-                requiredLiteralBool = false,
+                requiredLiteralFloat = 1.23F,
+                requiredLiteralBool = true,
                 optionalLiteralString = "reject",
                 optionalLiteralInt = 456,
-                optionalLiteralFloat = 4.56,
+                optionalLiteralFloat = 4.56F,
                 optionalLiteralBool = true,
                 requiredBadDescription = "<requiredBadDescription>",
                 optionalNullableList = new[] {
@@ -1768,7 +1765,7 @@ namespace FirstTestTypeSpec.Samples
     },
             };
 
-            Response response = await client.CreateLiteralAsync(RequestContent.Create(data));
+            Response response = await client.CreateLiteralAsync(RequestContent.Create(data)).ConfigureAwait(false);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("name").ToString());
@@ -1838,7 +1835,7 @@ namespace FirstTestTypeSpec.Samples
             var endpoint = new Uri("<https://my-service.azure.com>");
             var client = new FirstTestTypeSpecClient(endpoint);
 
-            Response response = await client.HelloLiteralAsync(new RequestContext());
+            Response response = await client.HelloLiteralAsync(new RequestContext()).ConfigureAwait(false);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("name").ToString());
@@ -1858,7 +1855,7 @@ namespace FirstTestTypeSpec.Samples
             var endpoint = new Uri("<https://my-service.azure.com>");
             var client = new FirstTestTypeSpecClient(endpoint);
 
-            Response response = await client.HelloLiteralAsync(new RequestContext());
+            Response response = await client.HelloLiteralAsync(new RequestContext()).ConfigureAwait(false);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("name").ToString());
@@ -1909,7 +1906,7 @@ namespace FirstTestTypeSpec.Samples
             var endpoint = new Uri("<https://my-service.azure.com>");
             var client = new FirstTestTypeSpecClient(endpoint);
 
-            Response response = await client.GetUnknownValueAsync(new RequestContext());
+            Response response = await client.GetUnknownValueAsync(new RequestContext()).ConfigureAwait(false);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());
@@ -1922,7 +1919,7 @@ namespace FirstTestTypeSpec.Samples
             var endpoint = new Uri("<https://my-service.azure.com>");
             var client = new FirstTestTypeSpecClient(endpoint);
 
-            Response response = await client.GetUnknownValueAsync(new RequestContext());
+            Response response = await client.GetUnknownValueAsync(new RequestContext()).ConfigureAwait(false);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());
@@ -1935,7 +1932,7 @@ namespace FirstTestTypeSpec.Samples
             var endpoint = new Uri("<https://my-service.azure.com>");
             var client = new FirstTestTypeSpecClient(endpoint);
 
-            var result = await client.StillConvenientValueAsync();
+            var result = await client.StillConvenientValueAsync().ConfigureAwait(false);
         }
     }
 }
