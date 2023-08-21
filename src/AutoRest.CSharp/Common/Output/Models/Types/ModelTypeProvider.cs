@@ -60,7 +60,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             _typeFactory = typeFactory!;
             _inputModel = inputModel;
             _sourceInputModel = sourceInputModel;
-            DefaultName = inputModel.Name;
+            DefaultName = inputModel.Name.ToCleanName();
             DefaultAccessibility = inputModel.Accessibility ?? "public";
             _deprecated = inputModel.Deprecated;
             _derivedTypes = derivedTypes;
