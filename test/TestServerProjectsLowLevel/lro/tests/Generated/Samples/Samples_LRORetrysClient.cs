@@ -6,13 +6,10 @@
 #nullable disable
 
 using System;
-using System.Collections.Generic;
-using System.IO;
 using System.Text.Json;
 using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
-using Azure.Identity;
 using NUnit.Framework;
 
 namespace lro_LowLevel.Samples
@@ -77,7 +74,7 @@ namespace lro_LowLevel.Samples
 
             var data = new { };
 
-            var operation = await client.Put201CreatingSucceeded200Async(WaitUntil.Completed, RequestContent.Create(data));
+            var operation = await client.Put201CreatingSucceeded200Async(WaitUntil.Completed, RequestContent.Create(data)).ConfigureAwait(false);
 
             BinaryData responseData = operation.Value;
             JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
@@ -104,7 +101,7 @@ namespace lro_LowLevel.Samples
                 location = "<location>",
             };
 
-            var operation = await client.Put201CreatingSucceeded200Async(WaitUntil.Completed, RequestContent.Create(data));
+            var operation = await client.Put201CreatingSucceeded200Async(WaitUntil.Completed, RequestContent.Create(data)).ConfigureAwait(false);
 
             BinaryData responseData = operation.Value;
             JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
@@ -175,7 +172,7 @@ namespace lro_LowLevel.Samples
 
             var data = new { };
 
-            var operation = await client.PutAsyncRelativeRetrySucceededAsync(WaitUntil.Completed, RequestContent.Create(data));
+            var operation = await client.PutAsyncRelativeRetrySucceededAsync(WaitUntil.Completed, RequestContent.Create(data)).ConfigureAwait(false);
 
             BinaryData responseData = operation.Value;
             JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
@@ -202,7 +199,7 @@ namespace lro_LowLevel.Samples
                 location = "<location>",
             };
 
-            var operation = await client.PutAsyncRelativeRetrySucceededAsync(WaitUntil.Completed, RequestContent.Create(data));
+            var operation = await client.PutAsyncRelativeRetrySucceededAsync(WaitUntil.Completed, RequestContent.Create(data)).ConfigureAwait(false);
 
             BinaryData responseData = operation.Value;
             JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
@@ -256,7 +253,7 @@ namespace lro_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new LRORetrysClient(credential);
 
-            var operation = await client.DeleteProvisioning202Accepted200SucceededAsync(WaitUntil.Completed, new RequestContext());
+            var operation = await client.DeleteProvisioning202Accepted200SucceededAsync(WaitUntil.Completed, new RequestContext()).ConfigureAwait(false);
 
             BinaryData responseData = operation.Value;
             JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
@@ -270,7 +267,7 @@ namespace lro_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new LRORetrysClient(credential);
 
-            var operation = await client.DeleteProvisioning202Accepted200SucceededAsync(WaitUntil.Completed, new RequestContext());
+            var operation = await client.DeleteProvisioning202Accepted200SucceededAsync(WaitUntil.Completed, new RequestContext()).ConfigureAwait(false);
 
             BinaryData responseData = operation.Value;
             JsonElement result = JsonDocument.Parse(responseData.ToStream()).RootElement;
@@ -314,7 +311,7 @@ namespace lro_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new LRORetrysClient(credential);
 
-            var operation = await client.Delete202Retry200Async(WaitUntil.Completed);
+            var operation = await client.Delete202Retry200Async(WaitUntil.Completed).ConfigureAwait(false);
 
             Console.WriteLine(operation.GetRawResponse().Status);
         }
@@ -326,7 +323,7 @@ namespace lro_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new LRORetrysClient(credential);
 
-            var operation = await client.Delete202Retry200Async(WaitUntil.Completed);
+            var operation = await client.Delete202Retry200Async(WaitUntil.Completed).ConfigureAwait(false);
 
             Console.WriteLine(operation.GetRawResponse().Status);
         }
@@ -362,7 +359,7 @@ namespace lro_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new LRORetrysClient(credential);
 
-            var operation = await client.DeleteAsyncRelativeRetrySucceededAsync(WaitUntil.Completed);
+            var operation = await client.DeleteAsyncRelativeRetrySucceededAsync(WaitUntil.Completed).ConfigureAwait(false);
 
             Console.WriteLine(operation.GetRawResponse().Status);
         }
@@ -374,7 +371,7 @@ namespace lro_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new LRORetrysClient(credential);
 
-            var operation = await client.DeleteAsyncRelativeRetrySucceededAsync(WaitUntil.Completed);
+            var operation = await client.DeleteAsyncRelativeRetrySucceededAsync(WaitUntil.Completed).ConfigureAwait(false);
 
             Console.WriteLine(operation.GetRawResponse().Status);
         }
@@ -427,7 +424,7 @@ namespace lro_LowLevel.Samples
 
             var data = new { };
 
-            var operation = await client.Post202Retry200Async(WaitUntil.Completed, RequestContent.Create(data));
+            var operation = await client.Post202Retry200Async(WaitUntil.Completed, RequestContent.Create(data)).ConfigureAwait(false);
 
             Console.WriteLine(operation.GetRawResponse().Status);
         }
@@ -452,7 +449,7 @@ namespace lro_LowLevel.Samples
                 location = "<location>",
             };
 
-            var operation = await client.Post202Retry200Async(WaitUntil.Completed, RequestContent.Create(data));
+            var operation = await client.Post202Retry200Async(WaitUntil.Completed, RequestContent.Create(data)).ConfigureAwait(false);
 
             Console.WriteLine(operation.GetRawResponse().Status);
         }
@@ -505,7 +502,7 @@ namespace lro_LowLevel.Samples
 
             var data = new { };
 
-            var operation = await client.PostAsyncRelativeRetrySucceededAsync(WaitUntil.Completed, RequestContent.Create(data));
+            var operation = await client.PostAsyncRelativeRetrySucceededAsync(WaitUntil.Completed, RequestContent.Create(data)).ConfigureAwait(false);
 
             Console.WriteLine(operation.GetRawResponse().Status);
         }
@@ -530,7 +527,7 @@ namespace lro_LowLevel.Samples
                 location = "<location>",
             };
 
-            var operation = await client.PostAsyncRelativeRetrySucceededAsync(WaitUntil.Completed, RequestContent.Create(data));
+            var operation = await client.PostAsyncRelativeRetrySucceededAsync(WaitUntil.Completed, RequestContent.Create(data)).ConfigureAwait(false);
 
             Console.WriteLine(operation.GetRawResponse().Status);
         }
