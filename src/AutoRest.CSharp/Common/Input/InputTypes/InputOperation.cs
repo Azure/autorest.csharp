@@ -77,7 +77,8 @@ internal record InputOperation(
     {
         return new Dictionary<string, InputOperationExample>()
         {
-            [ExampleMockValueBuilder.MockExampleKey] = ExampleMockValueBuilder.BuildOperationExample(this)
+            [ExampleMockValueBuilder.ShortVersionMockExampleKey] = ExampleMockValueBuilder.BuildOperationExample(this, false),
+            [ExampleMockValueBuilder.MockExampleAllParameterKey] = ExampleMockValueBuilder.BuildOperationExample(this, true)
         };
     }
 }

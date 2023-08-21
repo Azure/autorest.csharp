@@ -26,7 +26,7 @@ namespace AutoRest.CSharp.Output.Samples.Models
 {
     internal class DpgOperationSample
     {
-        public DpgOperationSample(LowLevelClient client, LowLevelClientMethod method, IEnumerable<InputParameterExample> inputClientParameterExamples, InputOperationExample inputOperationExample, bool isConvenienceSample, bool useAllParameters)
+        public DpgOperationSample(LowLevelClient client, LowLevelClientMethod method, IEnumerable<InputParameterExample> inputClientParameterExamples, InputOperationExample inputOperationExample, bool isConvenienceSample, string exampleKey)
         {
             Client = client;
             Method = method;
@@ -34,10 +34,12 @@ namespace AutoRest.CSharp.Output.Samples.Models
             _inputOperationExample = inputOperationExample;
             ClientInvocationChain = GetClientInvocationChain(client);
             IsConvenienceSample = isConvenienceSample;
-            _useAllParameters = useAllParameters;
+            _exampleKey = exampleKey;
+            _useAllParameters = exampleKey == ExampleMockValueBuilder.MockExampleAllParameterKey; // TODO -- only work around
             _operationMethodSignature = isConvenienceSample ? method.ConvenienceMethod!.Signature : method.ProtocolMethodSignature;
         }
 
+        private readonly string _exampleKey;
         private readonly bool _useAllParameters;
         private readonly IEnumerable<InputParameterExample> _inputClientParameterExamples;
         private readonly InputOperationExample _inputOperationExample;
@@ -126,9 +128,11 @@ namespace AutoRest.CSharp.Output.Samples.Models
                 var exampleValue = exampleParameter?.ExampleValue;
                 if (exampleValue == null)
                 {
-                    // if this is a required parameter and we did not find the corresponding parameter in the examples, we throw an exception.
+                    // if this is a required parameter and we did not find the corresponding parameter in the examples, we put the null
                     if (parameter.DefaultValue == null)
-                        throw new InvalidOperationException($"Cannot find an example value for required parameter `{parameter.Name}` for operation {Method.RequestMethod.Name}");
+                    {
+                        result.Add(parameter.Name, new InputExampleParameterValue(parameter, $"null"));
+                    }
                     // if it is optional, we just do not put it in the map indicates that in the invocation we could omit it
                 }
                 else
@@ -192,8 +196,8 @@ namespace AutoRest.CSharp.Output.Samples.Models
 
             if (parameter == KnownParameters.RequestContextRequired)
             {
-                // we need the RequestContext to disambiguiate from the convenience method
-                result.Add(parameter.Name, new InputExampleParameterValue(parameter, $"new {typeof(RequestContext)}()"));
+                // we need the RequestContext to disambiguiate from the convenience method - but passing in a null value is allowed.
+                result.Add(parameter.Name, new InputExampleParameterValue(parameter, $"null"));
                 return true;
             }
 

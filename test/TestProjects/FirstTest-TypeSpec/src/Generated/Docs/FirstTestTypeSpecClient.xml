@@ -10,7 +10,7 @@ This sample shows how to call TopActionAsync with required parameters and parse 
 Uri endpoint = new Uri("<https://my-service.azure.com>");
 FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
-Response response = await client.TopActionAsync(DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"), new RequestContext());
+Response response = await client.TopActionAsync(DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"), null);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("name").ToString());
@@ -35,7 +35,7 @@ This sample shows how to call TopAction with required parameters and parse the r
 Uri endpoint = new Uri("<https://my-service.azure.com>");
 FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
-Response response = client.TopAction(DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"), new RequestContext());
+Response response = client.TopAction(DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"), null);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("name").ToString());
@@ -60,7 +60,7 @@ This sample shows how to call TopAction2Async with required parameters and parse
 Uri endpoint = new Uri("<https://my-service.azure.com>");
 FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
-Response response = await client.TopAction2Async(new RequestContext());
+Response response = await client.TopAction2Async(null);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("name").ToString());
@@ -85,7 +85,7 @@ This sample shows how to call TopAction2 with required parameters and parse the 
 Uri endpoint = new Uri("<https://my-service.azure.com>");
 FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
-Response response = client.TopAction2(new RequestContext());
+Response response = client.TopAction2(null);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("name").ToString());
@@ -118,15 +118,7 @@ RequestContent content = RequestContent.Create(new Dictionary<string, object>()
     ["requiredLiteralInt"] = 123,
     ["requiredLiteralFloat"] = 1.23F,
     ["requiredLiteralBool"] = false,
-    ["optionalLiteralString"] = "reject",
-    ["optionalLiteralInt"] = 456,
-    ["optionalLiteralFloat"] = 4.56F,
-    ["optionalLiteralBool"] = true,
     ["requiredBadDescription"] = "<requiredBadDescription>",
-    ["optionalNullableList"] = new object[]
-{
-1234
-},
     ["requiredNullableList"] = new object[]
 {
 1234
@@ -157,15 +149,7 @@ RequestContent content = RequestContent.Create(new Dictionary<string, object>()
     ["requiredLiteralInt"] = 123,
     ["requiredLiteralFloat"] = 1.23F,
     ["requiredLiteralBool"] = false,
-    ["optionalLiteralString"] = "reject",
-    ["optionalLiteralInt"] = 456,
-    ["optionalLiteralFloat"] = 4.56F,
-    ["optionalLiteralBool"] = true,
     ["requiredBadDescription"] = "<requiredBadDescription>",
-    ["optionalNullableList"] = new object[]
-{
-1234
-},
     ["requiredNullableList"] = new object[]
 {
 1234
@@ -204,15 +188,7 @@ RequestContent content = RequestContent.Create(new Dictionary<string, object>()
     ["requiredLiteralInt"] = 123,
     ["requiredLiteralFloat"] = 1.23F,
     ["requiredLiteralBool"] = false,
-    ["optionalLiteralString"] = "reject",
-    ["optionalLiteralInt"] = 456,
-    ["optionalLiteralFloat"] = 4.56F,
-    ["optionalLiteralBool"] = true,
     ["requiredBadDescription"] = "<requiredBadDescription>",
-    ["optionalNullableList"] = new object[]
-{
-1234
-},
     ["requiredNullableList"] = new object[]
 {
 1234
@@ -243,15 +219,7 @@ RequestContent content = RequestContent.Create(new Dictionary<string, object>()
     ["requiredLiteralInt"] = 123,
     ["requiredLiteralFloat"] = 1.23F,
     ["requiredLiteralBool"] = false,
-    ["optionalLiteralString"] = "reject",
-    ["optionalLiteralInt"] = 456,
-    ["optionalLiteralFloat"] = 4.56F,
-    ["optionalLiteralBool"] = true,
     ["requiredBadDescription"] = "<requiredBadDescription>",
-    ["optionalNullableList"] = new object[]
-{
-1234
-},
     ["requiredNullableList"] = new object[]
 {
 1234
@@ -292,15 +260,7 @@ RequestContent content = RequestContent.Create(new Dictionary<string, object>()
     ["requiredLiteralInt"] = 123,
     ["requiredLiteralFloat"] = 1.23F,
     ["requiredLiteralBool"] = false,
-    ["optionalLiteralString"] = "reject",
-    ["optionalLiteralInt"] = 456,
-    ["optionalLiteralFloat"] = 4.56F,
-    ["optionalLiteralBool"] = true,
     ["requiredBadDescription"] = "<requiredBadDescription>",
-    ["optionalNullableList"] = new object[]
-{
-1234
-},
     ["requiredNullableList"] = new object[]
 {
 1234
@@ -331,15 +291,7 @@ RequestContent content = RequestContent.Create(new Dictionary<string, object>()
     ["requiredLiteralInt"] = 123,
     ["requiredLiteralFloat"] = 1.23F,
     ["requiredLiteralBool"] = false,
-    ["optionalLiteralString"] = "reject",
-    ["optionalLiteralInt"] = 456,
-    ["optionalLiteralFloat"] = 4.56F,
-    ["optionalLiteralBool"] = true,
     ["requiredBadDescription"] = "<requiredBadDescription>",
-    ["optionalNullableList"] = new object[]
-{
-1234
-},
     ["requiredNullableList"] = new object[]
 {
 1234
@@ -378,15 +330,7 @@ RequestContent content = RequestContent.Create(new Dictionary<string, object>()
     ["requiredLiteralInt"] = 123,
     ["requiredLiteralFloat"] = 1.23F,
     ["requiredLiteralBool"] = false,
-    ["optionalLiteralString"] = "reject",
-    ["optionalLiteralInt"] = 456,
-    ["optionalLiteralFloat"] = 4.56F,
-    ["optionalLiteralBool"] = true,
     ["requiredBadDescription"] = "<requiredBadDescription>",
-    ["optionalNullableList"] = new object[]
-{
-1234
-},
     ["requiredNullableList"] = new object[]
 {
 1234
@@ -417,15 +361,7 @@ RequestContent content = RequestContent.Create(new Dictionary<string, object>()
     ["requiredLiteralInt"] = 123,
     ["requiredLiteralFloat"] = 1.23F,
     ["requiredLiteralBool"] = false,
-    ["optionalLiteralString"] = "reject",
-    ["optionalLiteralInt"] = 456,
-    ["optionalLiteralFloat"] = 4.56F,
-    ["optionalLiteralBool"] = true,
     ["requiredBadDescription"] = "<requiredBadDescription>",
-    ["optionalNullableList"] = new object[]
-{
-1234
-},
     ["requiredNullableList"] = new object[]
 {
 1234
@@ -590,7 +526,7 @@ This sample shows how to call SayHiAsync with required parameters and parse the 
 Uri endpoint = new Uri("<https://my-service.azure.com>");
 FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
-Response response = await client.SayHiAsync("<headParameter>", "<queryParameter>", "<optionalQuery>", new RequestContext());
+Response response = await client.SayHiAsync("<headParameter>", "<queryParameter>", "<optionalQuery>", null);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("name").ToString());
@@ -615,7 +551,7 @@ This sample shows how to call SayHi with required parameters and parse the resul
 Uri endpoint = new Uri("<https://my-service.azure.com>");
 FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
-Response response = client.SayHi("<headParameter>", "<queryParameter>", "<optionalQuery>", new RequestContext());
+Response response = client.SayHi("<headParameter>", "<queryParameter>", "<optionalQuery>", null);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("name").ToString());
@@ -662,48 +598,14 @@ RequestContent content = RequestContent.Create(new Dictionary<string, object>()
         ["requiredLiteralInt"] = 123,
         ["requiredLiteralFloat"] = 1.23F,
         ["requiredLiteralBool"] = false,
-        ["optionalLiteralString"] = "reject",
-        ["optionalLiteralInt"] = 456,
-        ["optionalLiteralFloat"] = 4.56F,
-        ["optionalLiteralBool"] = true,
         ["requiredBadDescription"] = "<requiredBadDescription>",
-        ["optionalNullableList"] = new object[]
-{
-1234
-},
         ["requiredNullableList"] = new object[]
 {
 1234
 },
     },
-    ["intExtensibleEnum"] = 1,
-    ["intExtensibleEnumCollection"] = new object[]
-{
-1
-},
-    ["floatExtensibleEnum"] = 1,
-    ["floatExtensibleEnumCollection"] = new object[]
-{
-1
-},
-    ["floatFixedEnum"] = 1.1F,
-    ["floatFixedEnumCollection"] = new object[]
-{
-1.1F
-},
-    ["intFixedEnum"] = 1,
-    ["intFixedEnumCollection"] = new object[]
-{
-1
-},
-    ["stringFixedEnum"] = "1",
     ["requiredUnknown"] = new Dictionary<string, object>(),
-    ["optionalUnknown"] = new Dictionary<string, object>(),
     ["requiredRecordUnknown"] = new Dictionary<string, object>()
-    {
-        ["key"] = new Dictionary<string, object>(),
-    },
-    ["optionalRecordUnknown"] = new Dictionary<string, object>()
     {
         ["key"] = new Dictionary<string, object>(),
     },
@@ -761,48 +663,14 @@ RequestContent content = RequestContent.Create(new Dictionary<string, object>()
         ["requiredLiteralInt"] = 123,
         ["requiredLiteralFloat"] = 1.23F,
         ["requiredLiteralBool"] = false,
-        ["optionalLiteralString"] = "reject",
-        ["optionalLiteralInt"] = 456,
-        ["optionalLiteralFloat"] = 4.56F,
-        ["optionalLiteralBool"] = true,
         ["requiredBadDescription"] = "<requiredBadDescription>",
-        ["optionalNullableList"] = new object[]
-{
-1234
-},
         ["requiredNullableList"] = new object[]
 {
 1234
 },
     },
-    ["intExtensibleEnum"] = 1,
-    ["intExtensibleEnumCollection"] = new object[]
-{
-1
-},
-    ["floatExtensibleEnum"] = 1,
-    ["floatExtensibleEnumCollection"] = new object[]
-{
-1
-},
-    ["floatFixedEnum"] = 1.1F,
-    ["floatFixedEnumCollection"] = new object[]
-{
-1.1F
-},
-    ["intFixedEnum"] = 1,
-    ["intFixedEnumCollection"] = new object[]
-{
-1
-},
-    ["stringFixedEnum"] = "1",
     ["requiredUnknown"] = new Dictionary<string, object>(),
-    ["optionalUnknown"] = new Dictionary<string, object>(),
     ["requiredRecordUnknown"] = new Dictionary<string, object>()
-    {
-        ["key"] = new Dictionary<string, object>(),
-    },
-    ["optionalRecordUnknown"] = new Dictionary<string, object>()
     {
         ["key"] = new Dictionary<string, object>(),
     },
@@ -880,48 +748,14 @@ RequestContent content = RequestContent.Create(new Dictionary<string, object>()
         ["requiredLiteralInt"] = 123,
         ["requiredLiteralFloat"] = 1.23F,
         ["requiredLiteralBool"] = false,
-        ["optionalLiteralString"] = "reject",
-        ["optionalLiteralInt"] = 456,
-        ["optionalLiteralFloat"] = 4.56F,
-        ["optionalLiteralBool"] = true,
         ["requiredBadDescription"] = "<requiredBadDescription>",
-        ["optionalNullableList"] = new object[]
-{
-1234
-},
         ["requiredNullableList"] = new object[]
 {
 1234
 },
     },
-    ["intExtensibleEnum"] = 1,
-    ["intExtensibleEnumCollection"] = new object[]
-{
-1
-},
-    ["floatExtensibleEnum"] = 1,
-    ["floatExtensibleEnumCollection"] = new object[]
-{
-1
-},
-    ["floatFixedEnum"] = 1.1F,
-    ["floatFixedEnumCollection"] = new object[]
-{
-1.1F
-},
-    ["intFixedEnum"] = 1,
-    ["intFixedEnumCollection"] = new object[]
-{
-1
-},
-    ["stringFixedEnum"] = "1",
     ["requiredUnknown"] = new Dictionary<string, object>(),
-    ["optionalUnknown"] = new Dictionary<string, object>(),
     ["requiredRecordUnknown"] = new Dictionary<string, object>()
-    {
-        ["key"] = new Dictionary<string, object>(),
-    },
-    ["optionalRecordUnknown"] = new Dictionary<string, object>()
     {
         ["key"] = new Dictionary<string, object>(),
     },
@@ -979,48 +813,14 @@ RequestContent content = RequestContent.Create(new Dictionary<string, object>()
         ["requiredLiteralInt"] = 123,
         ["requiredLiteralFloat"] = 1.23F,
         ["requiredLiteralBool"] = false,
-        ["optionalLiteralString"] = "reject",
-        ["optionalLiteralInt"] = 456,
-        ["optionalLiteralFloat"] = 4.56F,
-        ["optionalLiteralBool"] = true,
         ["requiredBadDescription"] = "<requiredBadDescription>",
-        ["optionalNullableList"] = new object[]
-{
-1234
-},
         ["requiredNullableList"] = new object[]
 {
 1234
 },
     },
-    ["intExtensibleEnum"] = 1,
-    ["intExtensibleEnumCollection"] = new object[]
-{
-1
-},
-    ["floatExtensibleEnum"] = 1,
-    ["floatExtensibleEnumCollection"] = new object[]
-{
-1
-},
-    ["floatFixedEnum"] = 1.1F,
-    ["floatFixedEnumCollection"] = new object[]
-{
-1.1F
-},
-    ["intFixedEnum"] = 1,
-    ["intFixedEnumCollection"] = new object[]
-{
-1
-},
-    ["stringFixedEnum"] = "1",
     ["requiredUnknown"] = new Dictionary<string, object>(),
-    ["optionalUnknown"] = new Dictionary<string, object>(),
     ["requiredRecordUnknown"] = new Dictionary<string, object>()
-    {
-        ["key"] = new Dictionary<string, object>(),
-    },
-    ["optionalRecordUnknown"] = new Dictionary<string, object>()
     {
         ["key"] = new Dictionary<string, object>(),
     },
@@ -1098,48 +898,14 @@ RequestContent content = RequestContent.Create(new Dictionary<string, object>()
         ["requiredLiteralInt"] = 123,
         ["requiredLiteralFloat"] = 1.23F,
         ["requiredLiteralBool"] = false,
-        ["optionalLiteralString"] = "reject",
-        ["optionalLiteralInt"] = 456,
-        ["optionalLiteralFloat"] = 4.56F,
-        ["optionalLiteralBool"] = true,
         ["requiredBadDescription"] = "<requiredBadDescription>",
-        ["optionalNullableList"] = new object[]
-{
-1234
-},
         ["requiredNullableList"] = new object[]
 {
 1234
 },
     },
-    ["intExtensibleEnum"] = 1,
-    ["intExtensibleEnumCollection"] = new object[]
-{
-1
-},
-    ["floatExtensibleEnum"] = 1,
-    ["floatExtensibleEnumCollection"] = new object[]
-{
-1
-},
-    ["floatFixedEnum"] = 1.1F,
-    ["floatFixedEnumCollection"] = new object[]
-{
-1.1F
-},
-    ["intFixedEnum"] = 1,
-    ["intFixedEnumCollection"] = new object[]
-{
-1
-},
-    ["stringFixedEnum"] = "1",
     ["requiredUnknown"] = new Dictionary<string, object>(),
-    ["optionalUnknown"] = new Dictionary<string, object>(),
     ["requiredRecordUnknown"] = new Dictionary<string, object>()
-    {
-        ["key"] = new Dictionary<string, object>(),
-    },
-    ["optionalRecordUnknown"] = new Dictionary<string, object>()
     {
         ["key"] = new Dictionary<string, object>(),
     },
@@ -1197,48 +963,14 @@ RequestContent content = RequestContent.Create(new Dictionary<string, object>()
         ["requiredLiteralInt"] = 123,
         ["requiredLiteralFloat"] = 1.23F,
         ["requiredLiteralBool"] = false,
-        ["optionalLiteralString"] = "reject",
-        ["optionalLiteralInt"] = 456,
-        ["optionalLiteralFloat"] = 4.56F,
-        ["optionalLiteralBool"] = true,
         ["requiredBadDescription"] = "<requiredBadDescription>",
-        ["optionalNullableList"] = new object[]
-{
-1234
-},
         ["requiredNullableList"] = new object[]
 {
 1234
 },
     },
-    ["intExtensibleEnum"] = 1,
-    ["intExtensibleEnumCollection"] = new object[]
-{
-1
-},
-    ["floatExtensibleEnum"] = 1,
-    ["floatExtensibleEnumCollection"] = new object[]
-{
-1
-},
-    ["floatFixedEnum"] = 1.1F,
-    ["floatFixedEnumCollection"] = new object[]
-{
-1.1F
-},
-    ["intFixedEnum"] = 1,
-    ["intFixedEnumCollection"] = new object[]
-{
-1
-},
-    ["stringFixedEnum"] = "1",
     ["requiredUnknown"] = new Dictionary<string, object>(),
-    ["optionalUnknown"] = new Dictionary<string, object>(),
     ["requiredRecordUnknown"] = new Dictionary<string, object>()
-    {
-        ["key"] = new Dictionary<string, object>(),
-    },
-    ["optionalRecordUnknown"] = new Dictionary<string, object>()
     {
         ["key"] = new Dictionary<string, object>(),
     },
@@ -1316,48 +1048,14 @@ RequestContent content = RequestContent.Create(new Dictionary<string, object>()
         ["requiredLiteralInt"] = 123,
         ["requiredLiteralFloat"] = 1.23F,
         ["requiredLiteralBool"] = false,
-        ["optionalLiteralString"] = "reject",
-        ["optionalLiteralInt"] = 456,
-        ["optionalLiteralFloat"] = 4.56F,
-        ["optionalLiteralBool"] = true,
         ["requiredBadDescription"] = "<requiredBadDescription>",
-        ["optionalNullableList"] = new object[]
-{
-1234
-},
         ["requiredNullableList"] = new object[]
 {
 1234
 },
     },
-    ["intExtensibleEnum"] = 1,
-    ["intExtensibleEnumCollection"] = new object[]
-{
-1
-},
-    ["floatExtensibleEnum"] = 1,
-    ["floatExtensibleEnumCollection"] = new object[]
-{
-1
-},
-    ["floatFixedEnum"] = 1.1F,
-    ["floatFixedEnumCollection"] = new object[]
-{
-1.1F
-},
-    ["intFixedEnum"] = 1,
-    ["intFixedEnumCollection"] = new object[]
-{
-1
-},
-    ["stringFixedEnum"] = "1",
     ["requiredUnknown"] = new Dictionary<string, object>(),
-    ["optionalUnknown"] = new Dictionary<string, object>(),
     ["requiredRecordUnknown"] = new Dictionary<string, object>()
-    {
-        ["key"] = new Dictionary<string, object>(),
-    },
-    ["optionalRecordUnknown"] = new Dictionary<string, object>()
     {
         ["key"] = new Dictionary<string, object>(),
     },
@@ -1415,48 +1113,14 @@ RequestContent content = RequestContent.Create(new Dictionary<string, object>()
         ["requiredLiteralInt"] = 123,
         ["requiredLiteralFloat"] = 1.23F,
         ["requiredLiteralBool"] = false,
-        ["optionalLiteralString"] = "reject",
-        ["optionalLiteralInt"] = 456,
-        ["optionalLiteralFloat"] = 4.56F,
-        ["optionalLiteralBool"] = true,
         ["requiredBadDescription"] = "<requiredBadDescription>",
-        ["optionalNullableList"] = new object[]
-{
-1234
-},
         ["requiredNullableList"] = new object[]
 {
 1234
 },
     },
-    ["intExtensibleEnum"] = 1,
-    ["intExtensibleEnumCollection"] = new object[]
-{
-1
-},
-    ["floatExtensibleEnum"] = 1,
-    ["floatExtensibleEnumCollection"] = new object[]
-{
-1
-},
-    ["floatFixedEnum"] = 1.1F,
-    ["floatFixedEnumCollection"] = new object[]
-{
-1.1F
-},
-    ["intFixedEnum"] = 1,
-    ["intFixedEnumCollection"] = new object[]
-{
-1
-},
-    ["stringFixedEnum"] = "1",
     ["requiredUnknown"] = new Dictionary<string, object>(),
-    ["optionalUnknown"] = new Dictionary<string, object>(),
     ["requiredRecordUnknown"] = new Dictionary<string, object>()
-    {
-        ["key"] = new Dictionary<string, object>(),
-    },
-    ["optionalRecordUnknown"] = new Dictionary<string, object>()
     {
         ["key"] = new Dictionary<string, object>(),
     },
@@ -1516,7 +1180,7 @@ This sample shows how to call HelloDemo2Async with required parameters and parse
 Uri endpoint = new Uri("<https://my-service.azure.com>");
 FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
-Response response = await client.HelloDemo2Async(new RequestContext());
+Response response = await client.HelloDemo2Async(null);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("name").ToString());
@@ -1541,7 +1205,7 @@ This sample shows how to call HelloDemo2 with required parameters and parse the 
 Uri endpoint = new Uri("<https://my-service.azure.com>");
 FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
-Response response = client.HelloDemo2(new RequestContext());
+Response response = client.HelloDemo2(null);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("name").ToString());
@@ -1576,15 +1240,7 @@ RequestContent content = RequestContent.Create(new Dictionary<string, object>()
     ["requiredLiteralInt"] = 123,
     ["requiredLiteralFloat"] = 1.23F,
     ["requiredLiteralBool"] = false,
-    ["optionalLiteralString"] = "reject",
-    ["optionalLiteralInt"] = 456,
-    ["optionalLiteralFloat"] = 4.56F,
-    ["optionalLiteralBool"] = true,
     ["requiredBadDescription"] = "<requiredBadDescription>",
-    ["optionalNullableList"] = new object[]
-{
-1234
-},
     ["requiredNullableList"] = new object[]
 {
 1234
@@ -1615,15 +1271,7 @@ RequestContent content = RequestContent.Create(new Dictionary<string, object>()
     ["requiredLiteralInt"] = 123,
     ["requiredLiteralFloat"] = 1.23F,
     ["requiredLiteralBool"] = false,
-    ["optionalLiteralString"] = "reject",
-    ["optionalLiteralInt"] = 456,
-    ["optionalLiteralFloat"] = 4.56F,
-    ["optionalLiteralBool"] = true,
     ["requiredBadDescription"] = "<requiredBadDescription>",
-    ["optionalNullableList"] = new object[]
-{
-1234
-},
     ["requiredNullableList"] = new object[]
 {
 1234
@@ -1662,15 +1310,7 @@ RequestContent content = RequestContent.Create(new Dictionary<string, object>()
     ["requiredLiteralInt"] = 123,
     ["requiredLiteralFloat"] = 1.23F,
     ["requiredLiteralBool"] = false,
-    ["optionalLiteralString"] = "reject",
-    ["optionalLiteralInt"] = 456,
-    ["optionalLiteralFloat"] = 4.56F,
-    ["optionalLiteralBool"] = true,
     ["requiredBadDescription"] = "<requiredBadDescription>",
-    ["optionalNullableList"] = new object[]
-{
-1234
-},
     ["requiredNullableList"] = new object[]
 {
 1234
@@ -1701,15 +1341,7 @@ RequestContent content = RequestContent.Create(new Dictionary<string, object>()
     ["requiredLiteralInt"] = 123,
     ["requiredLiteralFloat"] = 1.23F,
     ["requiredLiteralBool"] = false,
-    ["optionalLiteralString"] = "reject",
-    ["optionalLiteralInt"] = 456,
-    ["optionalLiteralFloat"] = 4.56F,
-    ["optionalLiteralBool"] = true,
     ["requiredBadDescription"] = "<requiredBadDescription>",
-    ["optionalNullableList"] = new object[]
-{
-1234
-},
     ["requiredNullableList"] = new object[]
 {
 1234
@@ -1742,7 +1374,7 @@ This sample shows how to call HelloLiteralAsync with required parameters and par
 Uri endpoint = new Uri("<https://my-service.azure.com>");
 FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
-Response response = await client.HelloLiteralAsync(new RequestContext());
+Response response = await client.HelloLiteralAsync(null);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("name").ToString());
@@ -1767,7 +1399,7 @@ This sample shows how to call HelloLiteral with required parameters and parse th
 Uri endpoint = new Uri("<https://my-service.azure.com>");
 FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
-Response response = client.HelloLiteral(new RequestContext());
+Response response = client.HelloLiteral(null);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("name").ToString());
@@ -1792,7 +1424,7 @@ This sample shows how to call GetUnknownValueAsync with required parameters and 
 Uri endpoint = new Uri("<https://my-service.azure.com>");
 FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
-Response response = await client.GetUnknownValueAsync(new RequestContext());
+Response response = await client.GetUnknownValueAsync(null);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.ToString());
@@ -1805,7 +1437,7 @@ This sample shows how to call GetUnknownValue with required parameters and parse
 Uri endpoint = new Uri("<https://my-service.azure.com>");
 FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
-Response response = client.GetUnknownValue(new RequestContext());
+Response response = client.GetUnknownValue(null);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.ToString());

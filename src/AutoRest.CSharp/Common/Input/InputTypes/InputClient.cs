@@ -26,7 +26,8 @@ internal record InputClient(string Name, string Description, IReadOnlyList<Input
     {
         return new Dictionary<string, InputClientExample>()
         {
-            [ExampleMockValueBuilder.MockExampleKey] = ExampleMockValueBuilder.BuildClientExample(this)
+            [ExampleMockValueBuilder.ShortVersionMockExampleKey] = ExampleMockValueBuilder.BuildClientExample(this, false),
+            [ExampleMockValueBuilder.MockExampleAllParameterKey] = ExampleMockValueBuilder.BuildClientExample(this, true)
         };
     }
 }

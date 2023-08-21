@@ -12,37 +12,46 @@ namespace AutoRest.CSharp.Common.Input.Examples
 {
     internal class ExampleMockValueBuilder
     {
-        public const string MockExampleKey = "mock-example";
+        public const string ShortVersionMockExampleKey = "ShortVersion";
+        public const string MockExampleAllParameterKey = "AllParameters";
 
         private const string EndpointMockValue = "<https://my-service.azure.com>";
 
         private readonly static ConcurrentDictionary<InputType, InputExampleValue> _cache = new();
 
-        public static InputClientExample BuildClientExample(InputClient client)
+        public static InputClientExample BuildClientExample(InputClient client, bool useAllParameters)
         {
             var clientParameterExamples = new List<InputParameterExample>();
             foreach (var parameter in client.Parameters)
             {
-                var parameterExample = BuildParameterExample(parameter);
+                if (!useAllParameters && !parameter.IsRequired)
+                {
+                    continue;
+                }
+                var parameterExample = BuildParameterExample(parameter, useAllParameters);
                 clientParameterExamples.Add(parameterExample);
             }
 
             return new(clientParameterExamples);
         }
 
-        public static InputOperationExample BuildOperationExample(InputOperation operation)
+        public static InputOperationExample BuildOperationExample(InputOperation operation, bool useAllParameters)
         {
             var parameterExamples = new List<InputParameterExample>();
             foreach (var parameter in operation.Parameters)
             {
-                var parameterExample = BuildParameterExample(parameter);
+                if (!useAllParameters && !parameter.IsRequired)
+                {
+                    continue;
+                }
+                var parameterExample = BuildParameterExample(parameter, useAllParameters);
                 parameterExamples.Add(parameterExample);
             }
 
             return new(parameterExamples);
         }
 
-        private static InputParameterExample BuildParameterExample(InputParameter parameter)
+        private static InputParameterExample BuildParameterExample(InputParameter parameter, bool useAllParameters)
         {
             // if the parameter is constant, we just put the constant into the example value instead of mocking a new one
             if (parameter.Kind == InputOperationParameterKind.Constant)
@@ -79,32 +88,32 @@ namespace AutoRest.CSharp.Common.Input.Examples
                 return new(parameter, value);
             }
 
-            var exampleValue = BuildExampleValue(parameter.Type, parameter.Name, new HashSet<InputModelType>());
+            var exampleValue = BuildExampleValue(parameter.Type, parameter.Name, useAllParameters, new HashSet<InputModelType>());
             return new(parameter, exampleValue);
         }
 
-        private static InputExampleValue BuildExampleValue(InputType type, string? hint, HashSet<InputModelType> visitedModels) => type switch
+        private static InputExampleValue BuildExampleValue(InputType type, string? hint, bool useAllParameters, HashSet<InputModelType> visitedModels) => type switch
         {
-            InputListType listType => BuildListExampleValue(listType, hint, visitedModels),
-            InputDictionaryType dictionaryType => BuildDictionaryExampleValue(dictionaryType, hint, visitedModels),
+            InputListType listType => BuildListExampleValue(listType, hint, useAllParameters, visitedModels),
+            InputDictionaryType dictionaryType => BuildDictionaryExampleValue(dictionaryType, hint, useAllParameters, visitedModels),
             InputEnumType enumType => BuildEnumExampleValue(enumType),
             InputPrimitiveType primitiveType => BuildPrimitiveExampleValue(primitiveType, hint),
             InputLiteralType literalType => InputExampleValue.Value(literalType, literalType.Value),
-            InputModelType modelType => BuildModelExampleValue(modelType, visitedModels),
-            InputUnionType unionType => BuildExampleValue(unionType.UnionItemTypes.First(), hint, visitedModels),
+            InputModelType modelType => BuildModelExampleValue(modelType, useAllParameters, visitedModels),
+            InputUnionType unionType => BuildExampleValue(unionType.UnionItemTypes.First(), hint, useAllParameters, visitedModels),
             _ => InputExampleValue.Object(type, new Dictionary<string, InputExampleValue>())
         };
 
-        private static InputExampleValue BuildListExampleValue(InputListType listType, string? hint, HashSet<InputModelType> visitedModels)
+        private static InputExampleValue BuildListExampleValue(InputListType listType, string? hint, bool useAllParameters, HashSet<InputModelType> visitedModels)
         {
-            var exampleElementValue = BuildExampleValue(listType.ElementType, hint, visitedModels);
+            var exampleElementValue = BuildExampleValue(listType.ElementType, hint, useAllParameters, visitedModels);
 
             return InputExampleValue.List(listType, new[] { exampleElementValue });
         }
 
-        private static InputExampleValue BuildDictionaryExampleValue(InputDictionaryType dictionaryType, string? hint, HashSet<InputModelType> visitedModels)
+        private static InputExampleValue BuildDictionaryExampleValue(InputDictionaryType dictionaryType, string? hint, bool useAllParameters, HashSet<InputModelType> visitedModels)
         {
-            var exampleValue = BuildExampleValue(dictionaryType.ValueType, hint, visitedModels);
+            var exampleValue = BuildExampleValue(dictionaryType.ValueType, hint, useAllParameters, visitedModels);
 
             return InputExampleValue.Object(dictionaryType, new Dictionary<string, InputExampleValue>
             {
@@ -145,7 +154,7 @@ namespace AutoRest.CSharp.Common.Input.Examples
             _ => InputExampleValue.Object(primitiveType, new Dictionary<string, InputExampleValue>())
         };
 
-        private static InputExampleValue BuildModelExampleValue(InputModelType model, HashSet<InputModelType> visitedModels)
+        private static InputExampleValue BuildModelExampleValue(InputModelType model, bool useAllParameters, HashSet<InputModelType> visitedModels)
         {
             if (_cache.TryGetValue(model, out var value))
                 return value;
@@ -162,7 +171,10 @@ namespace AutoRest.CSharp.Common.Input.Examples
                     if (visitedModels.Contains(property.Type) || property.IsReadOnly)
                         continue;
 
-                    var exampleValue = BuildExampleValue(property.Type, property.SerializedName, visitedModels);
+                    if (!useAllParameters && !property.IsRequired)
+                        continue;
+
+                    var exampleValue = BuildExampleValue(property.Type, property.SerializedName, useAllParameters, visitedModels);
 
                     dict.Add(property.SerializedName, exampleValue);
                 }

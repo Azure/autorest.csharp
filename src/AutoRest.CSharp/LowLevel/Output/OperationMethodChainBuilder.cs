@@ -129,52 +129,44 @@ namespace AutoRest.CSharp.Output.Models
             if (!shouldGenerateSample)
                 return;
 
-            // for now, we only take the one with mocking values, return null if any of them does not present
-            const string mockExampleKey = ExampleMockValueBuilder.MockExampleKey;
-            if (!_clientParameterExamples.TryGetValue(mockExampleKey, out var clientExample) || !Operation.Examples.TryGetValue(mockExampleKey, out var operationExample))
-            {
-                return;
-            }
-
-            // we should generate samples
+            // short version samples
             var shouldGenerateShortVersion = DpgOperationSample.ShouldGenerateShortVersion(_client, method);
-            if (shouldGenerateShortVersion)
-            {
-                samples.Add(new(
-                    _client,
-                    method,
-                    clientExample.ClientParameters,
-                    operationExample,
-                    false,
-                    false));
-            }
-            samples.Add(new(
-                _client,
-                method,
-                clientExample.ClientParameters,
-                operationExample,
-                false,
-                true));
 
-            if (method.ConvenienceMethod != null)
+            foreach (var (exampleKey, clientExample) in _clientParameterExamples)
             {
-                if (shouldGenerateShortVersion)
+                if (!shouldGenerateSample && exampleKey != ExampleMockValueBuilder.ShortVersionMockExampleKey)
+                    continue; // skip the short example when we decide not to generate it
+                if (Operation.Examples.TryGetValue(exampleKey, out var operationExample))
                 {
                     samples.Add(new(
                         _client,
                         method,
                         clientExample.ClientParameters,
                         operationExample,
-                        true,
-                        false));
+                        false,
+                        exampleKey == ExampleMockValueBuilder.ShortVersionMockExampleKey ? string.Empty : exampleKey)); // TODO -- this is temporary to minimize the diff
                 }
-                samples.Add(new(
-                    _client,
-                    method,
-                    clientExample.ClientParameters,
-                    operationExample,
-                    true,
-                    true));
+            }
+
+            // TODO -- this is intentional to keep the order of existing samples unchanged to minimize the amount of changes in the PR
+            // TODO -- will use a follow up PR to remove the double iteration
+            if (method.ConvenienceMethod != null && method.ConvenienceMethod.Signature.Modifiers.HasFlag(MethodSignatureModifiers.Public))
+            {
+                foreach (var (exampleKey, clientExample) in _clientParameterExamples)
+                {
+                    if (!shouldGenerateSample && exampleKey != ExampleMockValueBuilder.ShortVersionMockExampleKey)
+                        continue; // skip the short example when we decide not to generate it
+                    if (Operation.Examples.TryGetValue(exampleKey, out var operationExample))
+                    {
+                        samples.Add(new(
+                            _client,
+                            method,
+                            clientExample.ClientParameters,
+                            operationExample,
+                            true,
+                            exampleKey == ExampleMockValueBuilder.ShortVersionMockExampleKey ? string.Empty : exampleKey)); // TODO -- this is temporary to minimize the diff
+                    }
+                }
             }
         }
 

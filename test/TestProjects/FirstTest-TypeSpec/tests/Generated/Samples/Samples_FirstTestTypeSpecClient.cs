@@ -26,7 +26,7 @@ namespace FirstTestTypeSpec.Samples
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
-            Response response = client.TopAction(DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"), new RequestContext());
+            Response response = client.TopAction(DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"), null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("name").ToString());
@@ -46,7 +46,7 @@ namespace FirstTestTypeSpec.Samples
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
-            Response response = client.TopAction(DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"), new RequestContext());
+            Response response = client.TopAction(DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"), null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("name").ToString());
@@ -66,32 +66,12 @@ namespace FirstTestTypeSpec.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_TopAction_Convenience()
-        {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
-            FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
-
-            Response<Thing> response = client.TopAction(DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"));
-        }
-
-        [Test]
-        [Ignore("Only validating compilation of examples")]
-        public void Example_TopAction_AllParameters_Convenience()
-        {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
-            FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
-
-            Response<Thing> response = client.TopAction(DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"));
-        }
-
-        [Test]
-        [Ignore("Only validating compilation of examples")]
         public async Task Example_TopAction_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
-            Response response = await client.TopActionAsync(DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"), new RequestContext());
+            Response response = await client.TopActionAsync(DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"), null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("name").ToString());
@@ -111,7 +91,7 @@ namespace FirstTestTypeSpec.Samples
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
-            Response response = await client.TopActionAsync(DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"), new RequestContext());
+            Response response = await client.TopActionAsync(DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"), null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("name").ToString());
@@ -131,32 +111,12 @@ namespace FirstTestTypeSpec.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_TopAction_Convenience_Async()
-        {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
-            FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
-
-            Response<Thing> response = await client.TopActionAsync(DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"));
-        }
-
-        [Test]
-        [Ignore("Only validating compilation of examples")]
-        public async Task Example_TopAction_AllParameters_Convenience_Async()
-        {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
-            FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
-
-            Response<Thing> response = await client.TopActionAsync(DateTimeOffset.Parse("2022-05-10T14:57:31.2311892-04:00"));
-        }
-
-        [Test]
-        [Ignore("Only validating compilation of examples")]
         public void Example_TopAction2()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
-            Response response = client.TopAction2(new RequestContext());
+            Response response = client.TopAction2(null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("name").ToString());
@@ -176,7 +136,7 @@ namespace FirstTestTypeSpec.Samples
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
-            Response response = client.TopAction2(new RequestContext());
+            Response response = client.TopAction2(null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("name").ToString());
@@ -201,7 +161,7 @@ namespace FirstTestTypeSpec.Samples
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
-            Response response = await client.TopAction2Async(new RequestContext());
+            Response response = await client.TopAction2Async(null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("name").ToString());
@@ -221,7 +181,7 @@ namespace FirstTestTypeSpec.Samples
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
-            Response response = await client.TopAction2Async(new RequestContext());
+            Response response = await client.TopAction2Async(null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("name").ToString());
@@ -254,15 +214,7 @@ namespace FirstTestTypeSpec.Samples
                 ["requiredLiteralInt"] = 123,
                 ["requiredLiteralFloat"] = 1.23F,
                 ["requiredLiteralBool"] = false,
-                ["optionalLiteralString"] = "reject",
-                ["optionalLiteralInt"] = 456,
-                ["optionalLiteralFloat"] = 4.56F,
-                ["optionalLiteralBool"] = true,
                 ["requiredBadDescription"] = "<requiredBadDescription>",
-                ["optionalNullableList"] = new object[]
-            {
-1234
-            },
                 ["requiredNullableList"] = new object[]
             {
 1234
@@ -296,15 +248,7 @@ namespace FirstTestTypeSpec.Samples
                 ["requiredLiteralInt"] = 123,
                 ["requiredLiteralFloat"] = 1.23F,
                 ["requiredLiteralBool"] = false,
-                ["optionalLiteralString"] = "reject",
-                ["optionalLiteralInt"] = 456,
-                ["optionalLiteralFloat"] = 4.56F,
-                ["optionalLiteralBool"] = true,
                 ["requiredBadDescription"] = "<requiredBadDescription>",
-                ["optionalNullableList"] = new object[]
-            {
-1234
-            },
                 ["requiredNullableList"] = new object[]
             {
 1234
@@ -343,15 +287,7 @@ namespace FirstTestTypeSpec.Samples
                 ["requiredLiteralInt"] = 123,
                 ["requiredLiteralFloat"] = 1.23F,
                 ["requiredLiteralBool"] = false,
-                ["optionalLiteralString"] = "reject",
-                ["optionalLiteralInt"] = 456,
-                ["optionalLiteralFloat"] = 4.56F,
-                ["optionalLiteralBool"] = true,
                 ["requiredBadDescription"] = "<requiredBadDescription>",
-                ["optionalNullableList"] = new object[]
-            {
-1234
-            },
                 ["requiredNullableList"] = new object[]
             {
 1234
@@ -385,15 +321,7 @@ namespace FirstTestTypeSpec.Samples
                 ["requiredLiteralInt"] = 123,
                 ["requiredLiteralFloat"] = 1.23F,
                 ["requiredLiteralBool"] = false,
-                ["optionalLiteralString"] = "reject",
-                ["optionalLiteralInt"] = 456,
-                ["optionalLiteralFloat"] = 4.56F,
-                ["optionalLiteralBool"] = true,
                 ["requiredBadDescription"] = "<requiredBadDescription>",
-                ["optionalNullableList"] = new object[]
-            {
-1234
-            },
                 ["requiredNullableList"] = new object[]
             {
 1234
@@ -432,15 +360,7 @@ namespace FirstTestTypeSpec.Samples
                 ["requiredLiteralInt"] = 123,
                 ["requiredLiteralFloat"] = 1.23F,
                 ["requiredLiteralBool"] = false,
-                ["optionalLiteralString"] = "reject",
-                ["optionalLiteralInt"] = 456,
-                ["optionalLiteralFloat"] = 4.56F,
-                ["optionalLiteralBool"] = true,
                 ["requiredBadDescription"] = "<requiredBadDescription>",
-                ["optionalNullableList"] = new object[]
-            {
-1234
-            },
                 ["requiredNullableList"] = new object[]
             {
 1234
@@ -474,15 +394,7 @@ namespace FirstTestTypeSpec.Samples
                 ["requiredLiteralInt"] = 123,
                 ["requiredLiteralFloat"] = 1.23F,
                 ["requiredLiteralBool"] = false,
-                ["optionalLiteralString"] = "reject",
-                ["optionalLiteralInt"] = 456,
-                ["optionalLiteralFloat"] = 4.56F,
-                ["optionalLiteralBool"] = true,
                 ["requiredBadDescription"] = "<requiredBadDescription>",
-                ["optionalNullableList"] = new object[]
-            {
-1234
-            },
                 ["requiredNullableList"] = new object[]
             {
 1234
@@ -508,54 +420,6 @@ namespace FirstTestTypeSpec.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_AnonymousBody_Convenience()
-        {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
-            FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
-
-            Thing thing = new Thing("<name>", "<requiredUnion>", "<requiredBadDescription>", new int[]
-            {
-1234
-            })
-            {
-                OptionalLiteralString = ThingOptionalLiteralString.Reject,
-                OptionalLiteralInt = ThingOptionalLiteralInt._456,
-                OptionalLiteralFloat = ThingOptionalLiteralFloat._456,
-                OptionalLiteralBool = true,
-                OptionalNullableList =
-{
-1234
-},
-            };
-            Response<Thing> response = client.AnonymousBody(thing);
-        }
-
-        [Test]
-        [Ignore("Only validating compilation of examples")]
-        public void Example_AnonymousBody_AllParameters_Convenience()
-        {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
-            FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
-
-            Thing thing = new Thing("<name>", "<requiredUnion>", "<requiredBadDescription>", new int[]
-            {
-1234
-            })
-            {
-                OptionalLiteralString = ThingOptionalLiteralString.Reject,
-                OptionalLiteralInt = ThingOptionalLiteralInt._456,
-                OptionalLiteralFloat = ThingOptionalLiteralFloat._456,
-                OptionalLiteralBool = true,
-                OptionalNullableList =
-{
-1234
-},
-            };
-            Response<Thing> response = client.AnonymousBody(thing);
-        }
-
-        [Test]
-        [Ignore("Only validating compilation of examples")]
         public async Task Example_AnonymousBody_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -569,15 +433,7 @@ namespace FirstTestTypeSpec.Samples
                 ["requiredLiteralInt"] = 123,
                 ["requiredLiteralFloat"] = 1.23F,
                 ["requiredLiteralBool"] = false,
-                ["optionalLiteralString"] = "reject",
-                ["optionalLiteralInt"] = 456,
-                ["optionalLiteralFloat"] = 4.56F,
-                ["optionalLiteralBool"] = true,
                 ["requiredBadDescription"] = "<requiredBadDescription>",
-                ["optionalNullableList"] = new object[]
-            {
-1234
-            },
                 ["requiredNullableList"] = new object[]
             {
 1234
@@ -611,15 +467,7 @@ namespace FirstTestTypeSpec.Samples
                 ["requiredLiteralInt"] = 123,
                 ["requiredLiteralFloat"] = 1.23F,
                 ["requiredLiteralBool"] = false,
-                ["optionalLiteralString"] = "reject",
-                ["optionalLiteralInt"] = 456,
-                ["optionalLiteralFloat"] = 4.56F,
-                ["optionalLiteralBool"] = true,
                 ["requiredBadDescription"] = "<requiredBadDescription>",
-                ["optionalNullableList"] = new object[]
-            {
-1234
-            },
                 ["requiredNullableList"] = new object[]
             {
 1234
@@ -641,54 +489,6 @@ namespace FirstTestTypeSpec.Samples
             Console.WriteLine(result.GetProperty("requiredBadDescription").ToString());
             Console.WriteLine(result.GetProperty("optionalNullableList")[0].ToString());
             Console.WriteLine(result.GetProperty("requiredNullableList")[0].ToString());
-        }
-
-        [Test]
-        [Ignore("Only validating compilation of examples")]
-        public async Task Example_AnonymousBody_Convenience_Async()
-        {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
-            FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
-
-            Thing thing = new Thing("<name>", "<requiredUnion>", "<requiredBadDescription>", new int[]
-            {
-1234
-            })
-            {
-                OptionalLiteralString = ThingOptionalLiteralString.Reject,
-                OptionalLiteralInt = ThingOptionalLiteralInt._456,
-                OptionalLiteralFloat = ThingOptionalLiteralFloat._456,
-                OptionalLiteralBool = true,
-                OptionalNullableList =
-{
-1234
-},
-            };
-            Response<Thing> response = await client.AnonymousBodyAsync(thing);
-        }
-
-        [Test]
-        [Ignore("Only validating compilation of examples")]
-        public async Task Example_AnonymousBody_AllParameters_Convenience_Async()
-        {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
-            FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
-
-            Thing thing = new Thing("<name>", "<requiredUnion>", "<requiredBadDescription>", new int[]
-            {
-1234
-            })
-            {
-                OptionalLiteralString = ThingOptionalLiteralString.Reject,
-                OptionalLiteralInt = ThingOptionalLiteralInt._456,
-                OptionalLiteralFloat = ThingOptionalLiteralFloat._456,
-                OptionalLiteralBool = true,
-                OptionalNullableList =
-{
-1234
-},
-            };
-            Response<Thing> response = await client.AnonymousBodyAsync(thing);
         }
 
         [Test]
@@ -966,7 +766,7 @@ namespace FirstTestTypeSpec.Samples
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
-            Response response = client.SayHi("<headParameter>", "<queryParameter>", "<optionalQuery>", new RequestContext());
+            Response response = client.SayHi("<headParameter>", "<queryParameter>", null, null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("name").ToString());
@@ -986,7 +786,7 @@ namespace FirstTestTypeSpec.Samples
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
-            Response response = client.SayHi("<headParameter>", "<queryParameter>", "<optionalQuery>", new RequestContext());
+            Response response = client.SayHi("<headParameter>", "<queryParameter>", "<optionalQuery>", null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("name").ToString());
@@ -1011,7 +811,7 @@ namespace FirstTestTypeSpec.Samples
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
-            Response response = await client.SayHiAsync("<headParameter>", "<queryParameter>", "<optionalQuery>", new RequestContext());
+            Response response = await client.SayHiAsync("<headParameter>", "<queryParameter>", null, null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("name").ToString());
@@ -1031,7 +831,7 @@ namespace FirstTestTypeSpec.Samples
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
-            Response response = await client.SayHiAsync("<headParameter>", "<queryParameter>", "<optionalQuery>", new RequestContext());
+            Response response = await client.SayHiAsync("<headParameter>", "<queryParameter>", "<optionalQuery>", null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("name").ToString());
@@ -1076,48 +876,14 @@ namespace FirstTestTypeSpec.Samples
                     ["requiredLiteralInt"] = 123,
                     ["requiredLiteralFloat"] = 1.23F,
                     ["requiredLiteralBool"] = false,
-                    ["optionalLiteralString"] = "reject",
-                    ["optionalLiteralInt"] = 456,
-                    ["optionalLiteralFloat"] = 4.56F,
-                    ["optionalLiteralBool"] = true,
                     ["requiredBadDescription"] = "<requiredBadDescription>",
-                    ["optionalNullableList"] = new object[]
-            {
-1234
-            },
                     ["requiredNullableList"] = new object[]
             {
 1234
             },
                 },
-                ["intExtensibleEnum"] = 1,
-                ["intExtensibleEnumCollection"] = new object[]
-            {
-1
-            },
-                ["floatExtensibleEnum"] = 1,
-                ["floatExtensibleEnumCollection"] = new object[]
-            {
-1
-            },
-                ["floatFixedEnum"] = 1.1F,
-                ["floatFixedEnumCollection"] = new object[]
-            {
-1.1F
-            },
-                ["intFixedEnum"] = 1,
-                ["intFixedEnumCollection"] = new object[]
-            {
-1
-            },
-                ["stringFixedEnum"] = "1",
                 ["requiredUnknown"] = new Dictionary<string, object>(),
-                ["optionalUnknown"] = new Dictionary<string, object>(),
                 ["requiredRecordUnknown"] = new Dictionary<string, object>()
-                {
-                    ["key"] = new Dictionary<string, object>(),
-                },
-                ["optionalRecordUnknown"] = new Dictionary<string, object>()
                 {
                     ["key"] = new Dictionary<string, object>(),
                 },
@@ -1178,48 +944,14 @@ namespace FirstTestTypeSpec.Samples
                     ["requiredLiteralInt"] = 123,
                     ["requiredLiteralFloat"] = 1.23F,
                     ["requiredLiteralBool"] = false,
-                    ["optionalLiteralString"] = "reject",
-                    ["optionalLiteralInt"] = 456,
-                    ["optionalLiteralFloat"] = 4.56F,
-                    ["optionalLiteralBool"] = true,
                     ["requiredBadDescription"] = "<requiredBadDescription>",
-                    ["optionalNullableList"] = new object[]
-            {
-1234
-            },
                     ["requiredNullableList"] = new object[]
             {
 1234
             },
                 },
-                ["intExtensibleEnum"] = 1,
-                ["intExtensibleEnumCollection"] = new object[]
-            {
-1
-            },
-                ["floatExtensibleEnum"] = 1,
-                ["floatExtensibleEnumCollection"] = new object[]
-            {
-1
-            },
-                ["floatFixedEnum"] = 1.1F,
-                ["floatFixedEnumCollection"] = new object[]
-            {
-1.1F
-            },
-                ["intFixedEnum"] = 1,
-                ["intFixedEnumCollection"] = new object[]
-            {
-1
-            },
-                ["stringFixedEnum"] = "1",
                 ["requiredUnknown"] = new Dictionary<string, object>(),
-                ["optionalUnknown"] = new Dictionary<string, object>(),
                 ["requiredRecordUnknown"] = new Dictionary<string, object>()
-                {
-                    ["key"] = new Dictionary<string, object>(),
-                },
-                ["optionalRecordUnknown"] = new Dictionary<string, object>()
                 {
                     ["key"] = new Dictionary<string, object>(),
                 },
@@ -1272,128 +1004,6 @@ namespace FirstTestTypeSpec.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_HelloAgain_Convenience()
-        {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
-            FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
-
-            RoundTripModel action = new RoundTripModel("<requiredString>", 1234, new StringFixedEnum?[]
-            {
-StringFixedEnum.One
-            }, new Dictionary<string, StringExtensibleEnum?>()
-            {
-                ["key"] = StringExtensibleEnum.One,
-            }, new Thing("<name>", "<requiredUnion>", "<requiredBadDescription>", new int[]
-            {
-1234
-            })
-            {
-                OptionalLiteralString = ThingOptionalLiteralString.Reject,
-                OptionalLiteralInt = ThingOptionalLiteralInt._456,
-                OptionalLiteralFloat = ThingOptionalLiteralFloat._456,
-                OptionalLiteralBool = true,
-                OptionalNullableList =
-            {
-1234
-            },
-            }, BinaryData.FromObjectAsJson(new Dictionary<string, object>()), new Dictionary<string, BinaryData>()
-            {
-                ["key"] = BinaryData.FromObjectAsJson(new Dictionary<string, object>()),
-            }, new ModelWithRequiredNullableProperties(1234, StringExtensibleEnum.One, StringFixedEnum.One))
-            {
-                IntExtensibleEnum = IntExtensibleEnum.One,
-                IntExtensibleEnumCollection =
-{
-IntExtensibleEnum.One
-},
-                FloatExtensibleEnum = FloatExtensibleEnum.One,
-                FloatExtensibleEnumCollection =
-{
-FloatExtensibleEnum.One
-},
-                FloatFixedEnum = FloatFixedEnum.One,
-                FloatFixedEnumCollection =
-{
-FloatFixedEnum.One
-},
-                IntFixedEnum = IntFixedEnum.One,
-                IntFixedEnumCollection =
-{
-IntFixedEnum.One
-},
-                StringFixedEnum = StringFixedEnum.One,
-                OptionalUnknown = BinaryData.FromObjectAsJson(new Dictionary<string, object>()),
-                OptionalRecordUnknown =
-{
-["key"] = BinaryData.FromObjectAsJson(new Dictionary<string, object>()),
-},
-            };
-            Response<RoundTripModel> response = client.HelloAgain("<p2>", "<p1>", action);
-        }
-
-        [Test]
-        [Ignore("Only validating compilation of examples")]
-        public void Example_HelloAgain_AllParameters_Convenience()
-        {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
-            FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
-
-            RoundTripModel action = new RoundTripModel("<requiredString>", 1234, new StringFixedEnum?[]
-            {
-StringFixedEnum.One
-            }, new Dictionary<string, StringExtensibleEnum?>()
-            {
-                ["key"] = StringExtensibleEnum.One,
-            }, new Thing("<name>", "<requiredUnion>", "<requiredBadDescription>", new int[]
-            {
-1234
-            })
-            {
-                OptionalLiteralString = ThingOptionalLiteralString.Reject,
-                OptionalLiteralInt = ThingOptionalLiteralInt._456,
-                OptionalLiteralFloat = ThingOptionalLiteralFloat._456,
-                OptionalLiteralBool = true,
-                OptionalNullableList =
-            {
-1234
-            },
-            }, BinaryData.FromObjectAsJson(new Dictionary<string, object>()), new Dictionary<string, BinaryData>()
-            {
-                ["key"] = BinaryData.FromObjectAsJson(new Dictionary<string, object>()),
-            }, new ModelWithRequiredNullableProperties(1234, StringExtensibleEnum.One, StringFixedEnum.One))
-            {
-                IntExtensibleEnum = IntExtensibleEnum.One,
-                IntExtensibleEnumCollection =
-{
-IntExtensibleEnum.One
-},
-                FloatExtensibleEnum = FloatExtensibleEnum.One,
-                FloatExtensibleEnumCollection =
-{
-FloatExtensibleEnum.One
-},
-                FloatFixedEnum = FloatFixedEnum.One,
-                FloatFixedEnumCollection =
-{
-FloatFixedEnum.One
-},
-                IntFixedEnum = IntFixedEnum.One,
-                IntFixedEnumCollection =
-{
-IntFixedEnum.One
-},
-                StringFixedEnum = StringFixedEnum.One,
-                OptionalUnknown = BinaryData.FromObjectAsJson(new Dictionary<string, object>()),
-                OptionalRecordUnknown =
-{
-["key"] = BinaryData.FromObjectAsJson(new Dictionary<string, object>()),
-},
-            };
-            Response<RoundTripModel> response = client.HelloAgain("<p2>", "<p1>", action);
-        }
-
-        [Test]
-        [Ignore("Only validating compilation of examples")]
         public async Task Example_HelloAgain_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -1419,48 +1029,14 @@ IntFixedEnum.One
                     ["requiredLiteralInt"] = 123,
                     ["requiredLiteralFloat"] = 1.23F,
                     ["requiredLiteralBool"] = false,
-                    ["optionalLiteralString"] = "reject",
-                    ["optionalLiteralInt"] = 456,
-                    ["optionalLiteralFloat"] = 4.56F,
-                    ["optionalLiteralBool"] = true,
                     ["requiredBadDescription"] = "<requiredBadDescription>",
-                    ["optionalNullableList"] = new object[]
-            {
-1234
-            },
                     ["requiredNullableList"] = new object[]
             {
 1234
             },
                 },
-                ["intExtensibleEnum"] = 1,
-                ["intExtensibleEnumCollection"] = new object[]
-            {
-1
-            },
-                ["floatExtensibleEnum"] = 1,
-                ["floatExtensibleEnumCollection"] = new object[]
-            {
-1
-            },
-                ["floatFixedEnum"] = 1.1F,
-                ["floatFixedEnumCollection"] = new object[]
-            {
-1.1F
-            },
-                ["intFixedEnum"] = 1,
-                ["intFixedEnumCollection"] = new object[]
-            {
-1
-            },
-                ["stringFixedEnum"] = "1",
                 ["requiredUnknown"] = new Dictionary<string, object>(),
-                ["optionalUnknown"] = new Dictionary<string, object>(),
                 ["requiredRecordUnknown"] = new Dictionary<string, object>()
-                {
-                    ["key"] = new Dictionary<string, object>(),
-                },
-                ["optionalRecordUnknown"] = new Dictionary<string, object>()
                 {
                     ["key"] = new Dictionary<string, object>(),
                 },
@@ -1521,48 +1097,14 @@ IntFixedEnum.One
                     ["requiredLiteralInt"] = 123,
                     ["requiredLiteralFloat"] = 1.23F,
                     ["requiredLiteralBool"] = false,
-                    ["optionalLiteralString"] = "reject",
-                    ["optionalLiteralInt"] = 456,
-                    ["optionalLiteralFloat"] = 4.56F,
-                    ["optionalLiteralBool"] = true,
                     ["requiredBadDescription"] = "<requiredBadDescription>",
-                    ["optionalNullableList"] = new object[]
-            {
-1234
-            },
                     ["requiredNullableList"] = new object[]
             {
 1234
             },
                 },
-                ["intExtensibleEnum"] = 1,
-                ["intExtensibleEnumCollection"] = new object[]
-            {
-1
-            },
-                ["floatExtensibleEnum"] = 1,
-                ["floatExtensibleEnumCollection"] = new object[]
-            {
-1
-            },
-                ["floatFixedEnum"] = 1.1F,
-                ["floatFixedEnumCollection"] = new object[]
-            {
-1.1F
-            },
-                ["intFixedEnum"] = 1,
-                ["intFixedEnumCollection"] = new object[]
-            {
-1
-            },
-                ["stringFixedEnum"] = "1",
                 ["requiredUnknown"] = new Dictionary<string, object>(),
-                ["optionalUnknown"] = new Dictionary<string, object>(),
                 ["requiredRecordUnknown"] = new Dictionary<string, object>()
-                {
-                    ["key"] = new Dictionary<string, object>(),
-                },
-                ["optionalRecordUnknown"] = new Dictionary<string, object>()
                 {
                     ["key"] = new Dictionary<string, object>(),
                 },
@@ -1615,128 +1157,6 @@ IntFixedEnum.One
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_HelloAgain_Convenience_Async()
-        {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
-            FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
-
-            RoundTripModel action = new RoundTripModel("<requiredString>", 1234, new StringFixedEnum?[]
-            {
-StringFixedEnum.One
-            }, new Dictionary<string, StringExtensibleEnum?>()
-            {
-                ["key"] = StringExtensibleEnum.One,
-            }, new Thing("<name>", "<requiredUnion>", "<requiredBadDescription>", new int[]
-            {
-1234
-            })
-            {
-                OptionalLiteralString = ThingOptionalLiteralString.Reject,
-                OptionalLiteralInt = ThingOptionalLiteralInt._456,
-                OptionalLiteralFloat = ThingOptionalLiteralFloat._456,
-                OptionalLiteralBool = true,
-                OptionalNullableList =
-            {
-1234
-            },
-            }, BinaryData.FromObjectAsJson(new Dictionary<string, object>()), new Dictionary<string, BinaryData>()
-            {
-                ["key"] = BinaryData.FromObjectAsJson(new Dictionary<string, object>()),
-            }, new ModelWithRequiredNullableProperties(1234, StringExtensibleEnum.One, StringFixedEnum.One))
-            {
-                IntExtensibleEnum = IntExtensibleEnum.One,
-                IntExtensibleEnumCollection =
-{
-IntExtensibleEnum.One
-},
-                FloatExtensibleEnum = FloatExtensibleEnum.One,
-                FloatExtensibleEnumCollection =
-{
-FloatExtensibleEnum.One
-},
-                FloatFixedEnum = FloatFixedEnum.One,
-                FloatFixedEnumCollection =
-{
-FloatFixedEnum.One
-},
-                IntFixedEnum = IntFixedEnum.One,
-                IntFixedEnumCollection =
-{
-IntFixedEnum.One
-},
-                StringFixedEnum = StringFixedEnum.One,
-                OptionalUnknown = BinaryData.FromObjectAsJson(new Dictionary<string, object>()),
-                OptionalRecordUnknown =
-{
-["key"] = BinaryData.FromObjectAsJson(new Dictionary<string, object>()),
-},
-            };
-            Response<RoundTripModel> response = await client.HelloAgainAsync("<p2>", "<p1>", action);
-        }
-
-        [Test]
-        [Ignore("Only validating compilation of examples")]
-        public async Task Example_HelloAgain_AllParameters_Convenience_Async()
-        {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
-            FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
-
-            RoundTripModel action = new RoundTripModel("<requiredString>", 1234, new StringFixedEnum?[]
-            {
-StringFixedEnum.One
-            }, new Dictionary<string, StringExtensibleEnum?>()
-            {
-                ["key"] = StringExtensibleEnum.One,
-            }, new Thing("<name>", "<requiredUnion>", "<requiredBadDescription>", new int[]
-            {
-1234
-            })
-            {
-                OptionalLiteralString = ThingOptionalLiteralString.Reject,
-                OptionalLiteralInt = ThingOptionalLiteralInt._456,
-                OptionalLiteralFloat = ThingOptionalLiteralFloat._456,
-                OptionalLiteralBool = true,
-                OptionalNullableList =
-            {
-1234
-            },
-            }, BinaryData.FromObjectAsJson(new Dictionary<string, object>()), new Dictionary<string, BinaryData>()
-            {
-                ["key"] = BinaryData.FromObjectAsJson(new Dictionary<string, object>()),
-            }, new ModelWithRequiredNullableProperties(1234, StringExtensibleEnum.One, StringFixedEnum.One))
-            {
-                IntExtensibleEnum = IntExtensibleEnum.One,
-                IntExtensibleEnumCollection =
-{
-IntExtensibleEnum.One
-},
-                FloatExtensibleEnum = FloatExtensibleEnum.One,
-                FloatExtensibleEnumCollection =
-{
-FloatExtensibleEnum.One
-},
-                FloatFixedEnum = FloatFixedEnum.One,
-                FloatFixedEnumCollection =
-{
-FloatFixedEnum.One
-},
-                IntFixedEnum = IntFixedEnum.One,
-                IntFixedEnumCollection =
-{
-IntFixedEnum.One
-},
-                StringFixedEnum = StringFixedEnum.One,
-                OptionalUnknown = BinaryData.FromObjectAsJson(new Dictionary<string, object>()),
-                OptionalRecordUnknown =
-{
-["key"] = BinaryData.FromObjectAsJson(new Dictionary<string, object>()),
-},
-            };
-            Response<RoundTripModel> response = await client.HelloAgainAsync("<p2>", "<p1>", action);
-        }
-
-        [Test]
-        [Ignore("Only validating compilation of examples")]
         public void Example_NoContentType()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -1762,48 +1182,14 @@ IntFixedEnum.One
                     ["requiredLiteralInt"] = 123,
                     ["requiredLiteralFloat"] = 1.23F,
                     ["requiredLiteralBool"] = false,
-                    ["optionalLiteralString"] = "reject",
-                    ["optionalLiteralInt"] = 456,
-                    ["optionalLiteralFloat"] = 4.56F,
-                    ["optionalLiteralBool"] = true,
                     ["requiredBadDescription"] = "<requiredBadDescription>",
-                    ["optionalNullableList"] = new object[]
-            {
-1234
-            },
                     ["requiredNullableList"] = new object[]
             {
 1234
             },
                 },
-                ["intExtensibleEnum"] = 1,
-                ["intExtensibleEnumCollection"] = new object[]
-            {
-1
-            },
-                ["floatExtensibleEnum"] = 1,
-                ["floatExtensibleEnumCollection"] = new object[]
-            {
-1
-            },
-                ["floatFixedEnum"] = 1.1F,
-                ["floatFixedEnumCollection"] = new object[]
-            {
-1.1F
-            },
-                ["intFixedEnum"] = 1,
-                ["intFixedEnumCollection"] = new object[]
-            {
-1
-            },
-                ["stringFixedEnum"] = "1",
                 ["requiredUnknown"] = new Dictionary<string, object>(),
-                ["optionalUnknown"] = new Dictionary<string, object>(),
                 ["requiredRecordUnknown"] = new Dictionary<string, object>()
-                {
-                    ["key"] = new Dictionary<string, object>(),
-                },
-                ["optionalRecordUnknown"] = new Dictionary<string, object>()
                 {
                     ["key"] = new Dictionary<string, object>(),
                 },
@@ -1864,48 +1250,14 @@ IntFixedEnum.One
                     ["requiredLiteralInt"] = 123,
                     ["requiredLiteralFloat"] = 1.23F,
                     ["requiredLiteralBool"] = false,
-                    ["optionalLiteralString"] = "reject",
-                    ["optionalLiteralInt"] = 456,
-                    ["optionalLiteralFloat"] = 4.56F,
-                    ["optionalLiteralBool"] = true,
                     ["requiredBadDescription"] = "<requiredBadDescription>",
-                    ["optionalNullableList"] = new object[]
-            {
-1234
-            },
                     ["requiredNullableList"] = new object[]
             {
 1234
             },
                 },
-                ["intExtensibleEnum"] = 1,
-                ["intExtensibleEnumCollection"] = new object[]
-            {
-1
-            },
-                ["floatExtensibleEnum"] = 1,
-                ["floatExtensibleEnumCollection"] = new object[]
-            {
-1
-            },
-                ["floatFixedEnum"] = 1.1F,
-                ["floatFixedEnumCollection"] = new object[]
-            {
-1.1F
-            },
-                ["intFixedEnum"] = 1,
-                ["intFixedEnumCollection"] = new object[]
-            {
-1
-            },
-                ["stringFixedEnum"] = "1",
                 ["requiredUnknown"] = new Dictionary<string, object>(),
-                ["optionalUnknown"] = new Dictionary<string, object>(),
                 ["requiredRecordUnknown"] = new Dictionary<string, object>()
-                {
-                    ["key"] = new Dictionary<string, object>(),
-                },
-                ["optionalRecordUnknown"] = new Dictionary<string, object>()
                 {
                     ["key"] = new Dictionary<string, object>(),
                 },
@@ -1983,48 +1335,14 @@ IntFixedEnum.One
                     ["requiredLiteralInt"] = 123,
                     ["requiredLiteralFloat"] = 1.23F,
                     ["requiredLiteralBool"] = false,
-                    ["optionalLiteralString"] = "reject",
-                    ["optionalLiteralInt"] = 456,
-                    ["optionalLiteralFloat"] = 4.56F,
-                    ["optionalLiteralBool"] = true,
                     ["requiredBadDescription"] = "<requiredBadDescription>",
-                    ["optionalNullableList"] = new object[]
-            {
-1234
-            },
                     ["requiredNullableList"] = new object[]
             {
 1234
             },
                 },
-                ["intExtensibleEnum"] = 1,
-                ["intExtensibleEnumCollection"] = new object[]
-            {
-1
-            },
-                ["floatExtensibleEnum"] = 1,
-                ["floatExtensibleEnumCollection"] = new object[]
-            {
-1
-            },
-                ["floatFixedEnum"] = 1.1F,
-                ["floatFixedEnumCollection"] = new object[]
-            {
-1.1F
-            },
-                ["intFixedEnum"] = 1,
-                ["intFixedEnumCollection"] = new object[]
-            {
-1
-            },
-                ["stringFixedEnum"] = "1",
                 ["requiredUnknown"] = new Dictionary<string, object>(),
-                ["optionalUnknown"] = new Dictionary<string, object>(),
                 ["requiredRecordUnknown"] = new Dictionary<string, object>()
-                {
-                    ["key"] = new Dictionary<string, object>(),
-                },
-                ["optionalRecordUnknown"] = new Dictionary<string, object>()
                 {
                     ["key"] = new Dictionary<string, object>(),
                 },
@@ -2085,48 +1403,14 @@ IntFixedEnum.One
                     ["requiredLiteralInt"] = 123,
                     ["requiredLiteralFloat"] = 1.23F,
                     ["requiredLiteralBool"] = false,
-                    ["optionalLiteralString"] = "reject",
-                    ["optionalLiteralInt"] = 456,
-                    ["optionalLiteralFloat"] = 4.56F,
-                    ["optionalLiteralBool"] = true,
                     ["requiredBadDescription"] = "<requiredBadDescription>",
-                    ["optionalNullableList"] = new object[]
-            {
-1234
-            },
                     ["requiredNullableList"] = new object[]
             {
 1234
             },
                 },
-                ["intExtensibleEnum"] = 1,
-                ["intExtensibleEnumCollection"] = new object[]
-            {
-1
-            },
-                ["floatExtensibleEnum"] = 1,
-                ["floatExtensibleEnumCollection"] = new object[]
-            {
-1
-            },
-                ["floatFixedEnum"] = 1.1F,
-                ["floatFixedEnumCollection"] = new object[]
-            {
-1.1F
-            },
-                ["intFixedEnum"] = 1,
-                ["intFixedEnumCollection"] = new object[]
-            {
-1
-            },
-                ["stringFixedEnum"] = "1",
                 ["requiredUnknown"] = new Dictionary<string, object>(),
-                ["optionalUnknown"] = new Dictionary<string, object>(),
                 ["requiredRecordUnknown"] = new Dictionary<string, object>()
-                {
-                    ["key"] = new Dictionary<string, object>(),
-                },
-                ["optionalRecordUnknown"] = new Dictionary<string, object>()
                 {
                     ["key"] = new Dictionary<string, object>(),
                 },
@@ -2184,7 +1468,7 @@ IntFixedEnum.One
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
-            Response response = client.HelloDemo2(new RequestContext());
+            Response response = client.HelloDemo2(null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("name").ToString());
@@ -2204,7 +1488,7 @@ IntFixedEnum.One
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
-            Response response = client.HelloDemo2(new RequestContext());
+            Response response = client.HelloDemo2(null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("name").ToString());
@@ -2224,32 +1508,12 @@ IntFixedEnum.One
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_HelloDemo2_Convenience()
-        {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
-            FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
-
-            Response<Thing> response = client.HelloDemo2();
-        }
-
-        [Test]
-        [Ignore("Only validating compilation of examples")]
-        public void Example_HelloDemo2_AllParameters_Convenience()
-        {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
-            FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
-
-            Response<Thing> response = client.HelloDemo2();
-        }
-
-        [Test]
-        [Ignore("Only validating compilation of examples")]
         public async Task Example_HelloDemo2_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
-            Response response = await client.HelloDemo2Async(new RequestContext());
+            Response response = await client.HelloDemo2Async(null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("name").ToString());
@@ -2269,7 +1533,7 @@ IntFixedEnum.One
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
-            Response response = await client.HelloDemo2Async(new RequestContext());
+            Response response = await client.HelloDemo2Async(null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("name").ToString());
@@ -2289,26 +1553,6 @@ IntFixedEnum.One
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_HelloDemo2_Convenience_Async()
-        {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
-            FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
-
-            Response<Thing> response = await client.HelloDemo2Async();
-        }
-
-        [Test]
-        [Ignore("Only validating compilation of examples")]
-        public async Task Example_HelloDemo2_AllParameters_Convenience_Async()
-        {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
-            FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
-
-            Response<Thing> response = await client.HelloDemo2Async();
-        }
-
-        [Test]
-        [Ignore("Only validating compilation of examples")]
         public void Example_CreateLiteral()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -2322,15 +1566,7 @@ IntFixedEnum.One
                 ["requiredLiteralInt"] = 123,
                 ["requiredLiteralFloat"] = 1.23F,
                 ["requiredLiteralBool"] = false,
-                ["optionalLiteralString"] = "reject",
-                ["optionalLiteralInt"] = 456,
-                ["optionalLiteralFloat"] = 4.56F,
-                ["optionalLiteralBool"] = true,
                 ["requiredBadDescription"] = "<requiredBadDescription>",
-                ["optionalNullableList"] = new object[]
-            {
-1234
-            },
                 ["requiredNullableList"] = new object[]
             {
 1234
@@ -2364,15 +1600,7 @@ IntFixedEnum.One
                 ["requiredLiteralInt"] = 123,
                 ["requiredLiteralFloat"] = 1.23F,
                 ["requiredLiteralBool"] = false,
-                ["optionalLiteralString"] = "reject",
-                ["optionalLiteralInt"] = 456,
-                ["optionalLiteralFloat"] = 4.56F,
-                ["optionalLiteralBool"] = true,
                 ["requiredBadDescription"] = "<requiredBadDescription>",
-                ["optionalNullableList"] = new object[]
-            {
-1234
-            },
                 ["requiredNullableList"] = new object[]
             {
 1234
@@ -2398,54 +1626,6 @@ IntFixedEnum.One
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_CreateLiteral_Convenience()
-        {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
-            FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
-
-            Thing body = new Thing("<name>", "<requiredUnion>", "<requiredBadDescription>", new int[]
-            {
-1234
-            })
-            {
-                OptionalLiteralString = ThingOptionalLiteralString.Reject,
-                OptionalLiteralInt = ThingOptionalLiteralInt._456,
-                OptionalLiteralFloat = ThingOptionalLiteralFloat._456,
-                OptionalLiteralBool = true,
-                OptionalNullableList =
-{
-1234
-},
-            };
-            Response<Thing> response = client.CreateLiteral(body);
-        }
-
-        [Test]
-        [Ignore("Only validating compilation of examples")]
-        public void Example_CreateLiteral_AllParameters_Convenience()
-        {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
-            FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
-
-            Thing body = new Thing("<name>", "<requiredUnion>", "<requiredBadDescription>", new int[]
-            {
-1234
-            })
-            {
-                OptionalLiteralString = ThingOptionalLiteralString.Reject,
-                OptionalLiteralInt = ThingOptionalLiteralInt._456,
-                OptionalLiteralFloat = ThingOptionalLiteralFloat._456,
-                OptionalLiteralBool = true,
-                OptionalNullableList =
-{
-1234
-},
-            };
-            Response<Thing> response = client.CreateLiteral(body);
-        }
-
-        [Test]
-        [Ignore("Only validating compilation of examples")]
         public async Task Example_CreateLiteral_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
@@ -2459,15 +1639,7 @@ IntFixedEnum.One
                 ["requiredLiteralInt"] = 123,
                 ["requiredLiteralFloat"] = 1.23F,
                 ["requiredLiteralBool"] = false,
-                ["optionalLiteralString"] = "reject",
-                ["optionalLiteralInt"] = 456,
-                ["optionalLiteralFloat"] = 4.56F,
-                ["optionalLiteralBool"] = true,
                 ["requiredBadDescription"] = "<requiredBadDescription>",
-                ["optionalNullableList"] = new object[]
-            {
-1234
-            },
                 ["requiredNullableList"] = new object[]
             {
 1234
@@ -2501,15 +1673,7 @@ IntFixedEnum.One
                 ["requiredLiteralInt"] = 123,
                 ["requiredLiteralFloat"] = 1.23F,
                 ["requiredLiteralBool"] = false,
-                ["optionalLiteralString"] = "reject",
-                ["optionalLiteralInt"] = 456,
-                ["optionalLiteralFloat"] = 4.56F,
-                ["optionalLiteralBool"] = true,
                 ["requiredBadDescription"] = "<requiredBadDescription>",
-                ["optionalNullableList"] = new object[]
-            {
-1234
-            },
                 ["requiredNullableList"] = new object[]
             {
 1234
@@ -2535,60 +1699,12 @@ IntFixedEnum.One
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_CreateLiteral_Convenience_Async()
-        {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
-            FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
-
-            Thing body = new Thing("<name>", "<requiredUnion>", "<requiredBadDescription>", new int[]
-            {
-1234
-            })
-            {
-                OptionalLiteralString = ThingOptionalLiteralString.Reject,
-                OptionalLiteralInt = ThingOptionalLiteralInt._456,
-                OptionalLiteralFloat = ThingOptionalLiteralFloat._456,
-                OptionalLiteralBool = true,
-                OptionalNullableList =
-{
-1234
-},
-            };
-            Response<Thing> response = await client.CreateLiteralAsync(body);
-        }
-
-        [Test]
-        [Ignore("Only validating compilation of examples")]
-        public async Task Example_CreateLiteral_AllParameters_Convenience_Async()
-        {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
-            FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
-
-            Thing body = new Thing("<name>", "<requiredUnion>", "<requiredBadDescription>", new int[]
-            {
-1234
-            })
-            {
-                OptionalLiteralString = ThingOptionalLiteralString.Reject,
-                OptionalLiteralInt = ThingOptionalLiteralInt._456,
-                OptionalLiteralFloat = ThingOptionalLiteralFloat._456,
-                OptionalLiteralBool = true,
-                OptionalNullableList =
-{
-1234
-},
-            };
-            Response<Thing> response = await client.CreateLiteralAsync(body);
-        }
-
-        [Test]
-        [Ignore("Only validating compilation of examples")]
         public void Example_HelloLiteral()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
-            Response response = client.HelloLiteral(new RequestContext());
+            Response response = client.HelloLiteral(null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("name").ToString());
@@ -2608,7 +1724,7 @@ IntFixedEnum.One
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
-            Response response = client.HelloLiteral(new RequestContext());
+            Response response = client.HelloLiteral(null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("name").ToString());
@@ -2628,32 +1744,12 @@ IntFixedEnum.One
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_HelloLiteral_Convenience()
-        {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
-            FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
-
-            Response<Thing> response = client.HelloLiteral();
-        }
-
-        [Test]
-        [Ignore("Only validating compilation of examples")]
-        public void Example_HelloLiteral_AllParameters_Convenience()
-        {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
-            FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
-
-            Response<Thing> response = client.HelloLiteral();
-        }
-
-        [Test]
-        [Ignore("Only validating compilation of examples")]
         public async Task Example_HelloLiteral_Async()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
-            Response response = await client.HelloLiteralAsync(new RequestContext());
+            Response response = await client.HelloLiteralAsync(null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("name").ToString());
@@ -2673,7 +1769,7 @@ IntFixedEnum.One
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
-            Response response = await client.HelloLiteralAsync(new RequestContext());
+            Response response = await client.HelloLiteralAsync(null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("name").ToString());
@@ -2693,32 +1789,12 @@ IntFixedEnum.One
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_HelloLiteral_Convenience_Async()
-        {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
-            FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
-
-            Response<Thing> response = await client.HelloLiteralAsync();
-        }
-
-        [Test]
-        [Ignore("Only validating compilation of examples")]
-        public async Task Example_HelloLiteral_AllParameters_Convenience_Async()
-        {
-            Uri endpoint = new Uri("<https://my-service.azure.com>");
-            FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
-
-            Response<Thing> response = await client.HelloLiteralAsync();
-        }
-
-        [Test]
-        [Ignore("Only validating compilation of examples")]
         public void Example_GetUnknownValue()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
-            Response response = client.GetUnknownValue(new RequestContext());
+            Response response = client.GetUnknownValue(null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());
@@ -2731,7 +1807,7 @@ IntFixedEnum.One
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
-            Response response = client.GetUnknownValue(new RequestContext());
+            Response response = client.GetUnknownValue(null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());
@@ -2744,7 +1820,7 @@ IntFixedEnum.One
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
-            Response response = await client.GetUnknownValueAsync(new RequestContext());
+            Response response = await client.GetUnknownValueAsync(null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());
@@ -2757,7 +1833,7 @@ IntFixedEnum.One
             Uri endpoint = new Uri("<https://my-service.azure.com>");
             FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
-            Response response = await client.GetUnknownValueAsync(new RequestContext());
+            Response response = await client.GetUnknownValueAsync(null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());
