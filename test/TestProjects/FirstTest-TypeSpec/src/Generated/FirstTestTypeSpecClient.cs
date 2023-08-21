@@ -678,6 +678,7 @@ namespace FirstTestTypeSpec
             }
         }
 
+        // The convenience method is omitted here because it has exactly the same parameter list as the corresponding protocol method
         /// <summary>
         /// [Protocol Method] head as boolean.
         /// <list type="bullet">
@@ -713,6 +714,7 @@ namespace FirstTestTypeSpec
             }
         }
 
+        // The convenience method is omitted here because it has exactly the same parameter list as the corresponding protocol method
         /// <summary>
         /// [Protocol Method] head as boolean.
         /// <list type="bullet">
