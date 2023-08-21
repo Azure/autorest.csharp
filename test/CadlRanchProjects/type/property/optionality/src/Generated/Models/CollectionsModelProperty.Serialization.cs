@@ -12,7 +12,7 @@ using Azure;
 using Azure.Core;
 using Azure.Core.Serialization;
 
-namespace _Type.Property.Optional.Models
+namespace _Type.Property.Optionality.Models
 {
     public partial class CollectionsModelProperty : IUtf8JsonSerializable, IModelJsonSerializable<CollectionsModelProperty>
     {
@@ -23,7 +23,7 @@ namespace _Type.Property.Optional.Models
             ModelSerializerHelper.ValidateFormat(this, options.Format);
 
             writer.WriteStartObject();
-            if (Azure.Core.Optional.IsCollectionDefined(Property))
+            if (Optional.IsCollectionDefined(Property))
             {
                 writer.WritePropertyName("property"u8);
                 writer.WriteStartArray();
@@ -80,7 +80,7 @@ namespace _Type.Property.Optional.Models
                     continue;
                 }
             }
-            return new CollectionsModelProperty(Azure.Core.Optional.ToList(property), rawData);
+            return new CollectionsModelProperty(Optional.ToList(property), rawData);
         }
 
         CollectionsModelProperty IModelJsonSerializable<CollectionsModelProperty>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)

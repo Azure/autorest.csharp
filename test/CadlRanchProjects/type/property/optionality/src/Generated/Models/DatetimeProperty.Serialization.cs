@@ -12,7 +12,7 @@ using Azure;
 using Azure.Core;
 using Azure.Core.Serialization;
 
-namespace _Type.Property.Optional.Models
+namespace _Type.Property.Optionality.Models
 {
     public partial class DatetimeProperty : IUtf8JsonSerializable, IModelJsonSerializable<DatetimeProperty>
     {
@@ -23,7 +23,7 @@ namespace _Type.Property.Optional.Models
             ModelSerializerHelper.ValidateFormat(this, options.Format);
 
             writer.WriteStartObject();
-            if (Azure.Core.Optional.IsDefined(Property))
+            if (Optional.IsDefined(Property))
             {
                 writer.WritePropertyName("property"u8);
                 writer.WriteStringValue(Property.Value, "O");
@@ -57,7 +57,7 @@ namespace _Type.Property.Optional.Models
             {
                 if (property0.NameEquals("property"u8))
                 {
-                    if (property0.Value.ValueKind == JsonValueKind.Null || property0.Value.ValueKind == JsonValueKind.String && property0.Value.GetString().Length == 0)
+                    if (property0.Value.ValueKind == JsonValueKind.Null)
                     {
                         continue;
                     }
@@ -70,7 +70,7 @@ namespace _Type.Property.Optional.Models
                     continue;
                 }
             }
-            return new DatetimeProperty(Azure.Core.Optional.ToNullable(property), rawData);
+            return new DatetimeProperty(Optional.ToNullable(property), rawData);
         }
 
         DatetimeProperty IModelJsonSerializable<DatetimeProperty>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)

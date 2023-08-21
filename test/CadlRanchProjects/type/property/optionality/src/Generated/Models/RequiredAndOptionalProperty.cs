@@ -8,7 +8,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace _Type.Property.Optional.Models
+namespace _Type.Property.Optionality.Models
 {
     /// <summary> Model with required and optional properties. </summary>
     public partial class RequiredAndOptionalProperty
