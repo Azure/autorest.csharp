@@ -167,10 +167,6 @@ namespace AutoRest.CSharp.Output.Models.Types
 
         private static FieldDeclaration CreateField(string fieldName, CSharpType originalType, InputModelTypeUsage usage, InputModelProperty inputModelProperty, bool isStruct, bool optionalViaNullability)
         {
-            var propertyIsCollection = inputModelProperty.Type is InputDictionaryType or InputListType or
-                // This is a temporary work around as we don't convert collection type to InputListType or InputDictionaryType in MPG for now
-                CodeModelType { Schema: ArraySchema or DictionarySchema };
-
             var propertyIsRequiredInNonRoundTripModel = usage is InputModelTypeUsage.Input or InputModelTypeUsage.Output && inputModelProperty.IsRequired;
             var propertyIsOptionalInOutputModel = usage is InputModelTypeUsage.Output && !inputModelProperty.IsRequired;
             var propertyIsConstant = inputModelProperty.ConstantValue is not null;
@@ -179,9 +175,9 @@ namespace AutoRest.CSharp.Output.Models.Types
             var propertyShouldOmitSetter = !propertyIsDiscriminator && (
                 inputModelProperty.IsReadOnly || // a property will not have setter when it is readonly
                 isStruct || // structs must have all their properties set in constructor
-                (!usage.HasFlag(InputModelTypeUsage.Input) && Configuration.Generation1ConvenienceClient) || // In Legacy DataPlane, non-input models have read-only properties
+                !usage.HasFlag(InputModelTypeUsage.Input) || // In Legacy DataPlane, non-input models have read-only properties
                 (propertyIsConstant && inputModelProperty.IsRequired) || // a property will not have setter when it is required literal type
-                propertyIsCollection || // a property will not have setter when it is a collection
+                (TypeFactory.IsCollectionType(originalType) && !originalType.IsNullable) || // a property will not have setter when it is a non-nullable collection
                 propertyIsRequiredInNonRoundTripModel || // a property will explicitly omit its setter when it is useless
                 propertyIsOptionalInOutputModel); // a property will explicitly omit its setter when it is useless
 

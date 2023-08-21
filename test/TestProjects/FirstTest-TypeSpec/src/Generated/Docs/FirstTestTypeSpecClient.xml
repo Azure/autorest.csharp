@@ -12,7 +12,7 @@ This sample shows how to call TopActionAsync with required parameters and parse 
 var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new FirstTestTypeSpecClient(endpoint);
 
-Response response = await client.TopActionAsync(DateTimeOffset.UtcNow, new RequestContext());
+Response response = await client.TopActionAsync(DateTimeOffset.UtcNow, new RequestContext()).ConfigureAwait(false);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("name").ToString());
@@ -64,7 +64,7 @@ This sample shows how to call TopAction2Async with required parameters and parse
 var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new FirstTestTypeSpecClient(endpoint);
 
-Response response = await client.TopAction2Async(new RequestContext());
+Response response = await client.TopAction2Async(new RequestContext()).ConfigureAwait(false);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("name").ToString());
@@ -129,7 +129,7 @@ var data = new {
     },
 };
 
-Response response = await client.PatchActionAsync(RequestContent.Create(data));
+Response response = await client.PatchActionAsync(RequestContent.Create(data)).ConfigureAwait(false);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("name").ToString());

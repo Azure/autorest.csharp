@@ -391,7 +391,7 @@ namespace AutoRest.CSharp.Generation.Writers
             builder.AppendLine($"<list type=\"bullet\">");
             builder.AppendLine($"<item>{Environment.NewLine}<description>{Environment.NewLine}This <see href=\"https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md\">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.{Environment.NewLine}</description>{Environment.NewLine}</item>");
 
-            if (convenienceMethod != null)
+            if (convenienceMethod is not null && convenienceMethod.Modifiers.HasFlag(Public))
             {
                 var convenienceDocRef = GetMethodSignatureString(convenienceMethod);
                 builder.AppendLine($"<item>{Environment.NewLine}<description>{Environment.NewLine}Please try the simpler <see cref=\"{convenienceDocRef}\"/> convenience overload with strongly typed models first.{Environment.NewLine}</description>{Environment.NewLine}</item>");
