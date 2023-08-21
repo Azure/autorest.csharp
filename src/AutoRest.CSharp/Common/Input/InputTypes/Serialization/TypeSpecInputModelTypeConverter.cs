@@ -87,7 +87,12 @@ namespace AutoRest.CSharp.Common.Input
 
         private static InputModelType CreateInputModelTypeInstance(string? id, string? name, string? ns, string? accessibility, string? deprecated, string? description, string? usageString, string? discriminatorValue, string? discriminatorPropertyName, InputModelType? baseModel, List<InputModelProperty> properties, List<InputModelType> derivedModels, bool isNullable, ReferenceResolver resolver)
         {
-            name = name ?? throw new JsonException("Model must have name");
+            if (name == null)
+                throw new JsonException("Model must have name");
+
+            if (string.IsNullOrEmpty(name))
+                name = id ?? throw new JsonException("Id must have id"); // we just use id as the name of the model
+
             InputModelTypeUsage usage = InputModelTypeUsage.None;
             if (usageString != null)
             {
