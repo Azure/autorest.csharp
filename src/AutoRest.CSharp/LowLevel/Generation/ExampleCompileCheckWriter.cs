@@ -144,6 +144,7 @@ namespace AutoRest.CSharp.LowLevel.Generation
 
             return operation;
         }
+
         private void WriteSampleLongRunningOperationWithResponse(DpgOperationSample sample, MethodSignature methodSignature, CodeWriterDeclaration clientVar, bool isAsync)
         {
             var operation = WriteSampleLongRunningOperation(sample, methodSignature, clientVar, isAsync);
@@ -151,7 +152,8 @@ namespace AutoRest.CSharp.LowLevel.Generation
             if (sample.HasResponseBody)
             {
                 var responseData = new CodeWriterDeclaration("responseData");
-                _writer.Line($"{typeof(BinaryData)} {responseData:D} = {operation}.Value;");
+                var typeOfResult = GetReturnType(methodSignature.ReturnType).Arguments.Single();
+                _writer.Line($"{typeOfResult} {responseData:D} = {operation}.Value;");
                 WriteNormalOperationResponse(sample, $"{responseData}", $"{responseData}.ToStream()");
             }
         }

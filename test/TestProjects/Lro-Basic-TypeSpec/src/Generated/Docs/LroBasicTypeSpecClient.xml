@@ -90,7 +90,7 @@ Project resource = new Project()
     Name = "<name>",
 };
 Operation<Project> operation = await client.UpdateProjectAsync(WaitUntil.Completed, "<id>", resource);
-BinaryData responseData = operation.Value;
+Project responseData = operation.Value;
 ]]></code></example>
     </member>
     <member name="UpdateProject(WaitUntil,string,Project,CancellationToken)">
@@ -106,7 +106,7 @@ Project resource = new Project()
     Name = "<name>",
 };
 Operation<Project> operation = client.UpdateProject(WaitUntil.Completed, "<id>", resource);
-BinaryData responseData = operation.Value;
+Project responseData = operation.Value;
 ]]></code></example>
     </member>
     <member name="UpdateProjectAsync(WaitUntil,string,RequestContent,RequestContext)">
@@ -184,7 +184,7 @@ LroBasicTypeSpecClient client = new LroBasicTypeSpecClient(endpoint);
 
 Thing thing = new Thing("<name>");
 Operation<Thing> operation = await client.CreateThingAsync(WaitUntil.Completed, thing);
-BinaryData responseData = operation.Value;
+Thing responseData = operation.Value;
 ]]></code></example>
     </member>
     <member name="CreateThing(WaitUntil,Thing,CancellationToken)">
@@ -196,7 +196,7 @@ LroBasicTypeSpecClient client = new LroBasicTypeSpecClient(endpoint);
 
 Thing thing = new Thing("<name>");
 Operation<Thing> operation = client.CreateThing(WaitUntil.Completed, thing);
-BinaryData responseData = operation.Value;
+Thing responseData = operation.Value;
 ]]></code></example>
     </member>
     <member name="CreateThingAsync(WaitUntil,RequestContent,RequestContext)">

@@ -169,7 +169,7 @@ namespace LroBasicTypeSpec.Samples
 
             Project resource = new Project();
             Operation<Project> operation = client.UpdateProject(WaitUntil.Completed, "<id>", resource);
-            BinaryData responseData = operation.Value;
+            Project responseData = operation.Value;
         }
 
         [Test]
@@ -185,7 +185,7 @@ namespace LroBasicTypeSpec.Samples
                 Name = "<name>",
             };
             Operation<Project> operation = client.UpdateProject(WaitUntil.Completed, "<id>", resource);
-            BinaryData responseData = operation.Value;
+            Project responseData = operation.Value;
         }
 
         [Test]
@@ -233,7 +233,7 @@ namespace LroBasicTypeSpec.Samples
 
             Project resource = new Project();
             Operation<Project> operation = await client.UpdateProjectAsync(WaitUntil.Completed, "<id>", resource);
-            BinaryData responseData = operation.Value;
+            Project responseData = operation.Value;
         }
 
         [Test]
@@ -249,7 +249,7 @@ namespace LroBasicTypeSpec.Samples
                 Name = "<name>",
             };
             Operation<Project> operation = await client.UpdateProjectAsync(WaitUntil.Completed, "<id>", resource);
-            BinaryData responseData = operation.Value;
+            Project responseData = operation.Value;
         }
 
         [Test]
@@ -297,7 +297,7 @@ namespace LroBasicTypeSpec.Samples
 
             Thing thing = new Thing("<name>");
             Operation<Thing> operation = client.CreateThing(WaitUntil.Completed, thing);
-            BinaryData responseData = operation.Value;
+            Thing responseData = operation.Value;
         }
 
         [Test]
@@ -309,7 +309,7 @@ namespace LroBasicTypeSpec.Samples
 
             Thing thing = new Thing("<name>");
             Operation<Thing> operation = client.CreateThing(WaitUntil.Completed, thing);
-            BinaryData responseData = operation.Value;
+            Thing responseData = operation.Value;
         }
 
         [Test]
@@ -357,7 +357,7 @@ namespace LroBasicTypeSpec.Samples
 
             Thing thing = new Thing("<name>");
             Operation<Thing> operation = await client.CreateThingAsync(WaitUntil.Completed, thing);
-            BinaryData responseData = operation.Value;
+            Thing responseData = operation.Value;
         }
 
         [Test]
@@ -369,7 +369,7 @@ namespace LroBasicTypeSpec.Samples
 
             Thing thing = new Thing("<name>");
             Operation<Thing> operation = await client.CreateThingAsync(WaitUntil.Completed, thing);
-            BinaryData responseData = operation.Value;
+            Thing responseData = operation.Value;
         }
     }
 }
