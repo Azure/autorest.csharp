@@ -279,6 +279,11 @@ namespace AutoRest.CSharp.Generation.Writers
 
         public static CodeWriter WriteMethodDocumentation(this CodeWriter writer, MethodSignatureBase methodBase)
         {
+            if (methodBase.NonDocumentComment is { } comment)
+            {
+                writer.Line($"// {comment}");
+            }
+
             if (methodBase.SummaryText is { } summaryText)
             {
                 writer.WriteXmlDocumentationSummary($"{summaryText}");

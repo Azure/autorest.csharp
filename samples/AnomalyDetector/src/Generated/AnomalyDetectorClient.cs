@@ -1099,7 +1099,7 @@ namespace AnomalyDetector
             RequestContext context = cancellationToken.CanBeCanceled ? new RequestContext { CancellationToken = cancellationToken } : null;
             HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetMultivariateModelsRequest(skip, maxCount, context);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => CreateGetMultivariateModelsNextPageRequest(nextLink, skip, maxCount, context);
-            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, AnomalyDetectionModel.DeserializeAnomalyDetectionModel, ClientDiagnostics, _pipeline, "AnomalyDetectorClient.GetMultivariateModels", "models", "nextLink", cancellationToken);
+            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, AnomalyDetectionModel.DeserializeAnomalyDetectionModel, ClientDiagnostics, _pipeline, "AnomalyDetectorClient.GetMultivariateModels", "models", "nextLink", context);
         }
 
         /// <summary> List Multivariate Models. </summary>
@@ -1113,7 +1113,7 @@ namespace AnomalyDetector
             RequestContext context = cancellationToken.CanBeCanceled ? new RequestContext { CancellationToken = cancellationToken } : null;
             HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetMultivariateModelsRequest(skip, maxCount, context);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => CreateGetMultivariateModelsNextPageRequest(nextLink, skip, maxCount, context);
-            return PageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, AnomalyDetectionModel.DeserializeAnomalyDetectionModel, ClientDiagnostics, _pipeline, "AnomalyDetectorClient.GetMultivariateModels", "models", "nextLink", cancellationToken);
+            return PageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, AnomalyDetectionModel.DeserializeAnomalyDetectionModel, ClientDiagnostics, _pipeline, "AnomalyDetectorClient.GetMultivariateModels", "models", "nextLink", context);
         }
 
         /// <summary>

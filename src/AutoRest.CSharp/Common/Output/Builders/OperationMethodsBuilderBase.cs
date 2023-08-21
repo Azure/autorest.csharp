@@ -28,7 +28,7 @@ namespace AutoRest.CSharp.Output.Models
     internal abstract class OperationMethodsBuilderBase
     {
         private const string ConvenienceMethodNotConfident = "The convenience method of this operation is made internal because this operation directly or indirectly uses a low confident type, for instance, unions, literal types with number values, etc.";
-        private const string ConvenienceMethodNotMeaningful = "The convenience method is omitted here because it has exactly the same parameter list as the corresponding protocol method";
+        private const string ConvenienceMethodIsMeaningless = "The convenience method is omitted here because it has exactly the same parameter list as the corresponding protocol method";
 
         private static readonly int[] RedirectResponseCodes = { 300, 301, 302, 303, 307, 308 };
 
@@ -138,8 +138,8 @@ namespace AutoRest.CSharp.Output.Models
             (
                 createMessageMethod,
                 createNextPageMessageMethod,
-                BuildProtocolMethod(parameters.Protocol, createMessageMethod.Signature, createNextPageMessageMethodSignature, false),
-                BuildProtocolMethod(parameters.Protocol, createMessageMethod.Signature, createNextPageMessageMethodSignature, true),
+                BuildProtocolMethod(parameters.Protocol, createMessageMethod.Signature, createNextPageMessageMethodSignature, convenienceMethodIsMeaningless, false),
+                BuildProtocolMethod(parameters.Protocol, createMessageMethod.Signature, createNextPageMessageMethodSignature, convenienceMethodIsMeaningless, true),
                 convenience,
                 convenienceAsync,
                 null,
@@ -232,9 +232,13 @@ namespace AutoRest.CSharp.Output.Models
 
         protected string CreateScopeName(string methodName) => $"{_clientName}.{methodName}";
 
-        private Method BuildProtocolMethod(IReadOnlyList<Parameter> parameters, MethodSignatureBase createMessageSignature, MethodSignature? createNextPageMessageSignature, bool async)
+        private Method BuildProtocolMethod(IReadOnlyList<Parameter> parameters, MethodSignatureBase createMessageSignature, MethodSignature? createNextPageMessageSignature, bool convenienceMethodIsMeaningless, bool async)
         {
-            var signature = CreateMethodSignature(ProtocolMethodName, _protocolAccessibility | MethodSignatureModifiers.Virtual, parameters, ProtocolMethodReturnType);
+            var nonDocumentComment = convenienceMethodIsMeaningless && Operation is { GenerateConvenienceMethod: true, GenerateProtocolMethod: true }
+                ? ConvenienceMethodIsMeaningless
+                : null;
+
+            var signature = CreateMethodSignature(ProtocolMethodName, _protocolAccessibility | MethodSignatureModifiers.Virtual, parameters, ProtocolMethodReturnType, nonDocumentComment);
             var body = new[]
             {
                 new ParameterValidationBlock(signature.Parameters),
@@ -246,17 +250,14 @@ namespace AutoRest.CSharp.Output.Models
         private Method BuildConvenienceMethod(string methodName, RestClientMethodParameters parameters, MethodSignature? createNextPageMessageSignature, bool methodIsConfident, bool async)
         {
             var modifiers = ConvenienceModifiers | MethodSignatureModifiers.Virtual;
+            string? nonDocumentComment = null;
             if (!methodIsConfident)
             {
                 modifiers = modifiers & ~MethodSignatureModifiers.Public | MethodSignatureModifiers.Internal;
+                nonDocumentComment = ConvenienceMethodNotConfident;
             }
 
-            var signature = CreateMethodSignature(methodName, modifiers, parameters.Convenience, ConvenienceMethodReturnType);
-            if (!methodIsConfident)
-            {
-                signature = signature with {NonDocumentComment = ConvenienceMethodNotConfident};
-            }
-
+            var signature = CreateMethodSignature(methodName, modifiers, parameters.Convenience, ConvenienceMethodReturnType, nonDocumentComment);
             var body = new[]
             {
                 new ParameterValidationBlock(parameters.Convenience),
@@ -267,7 +268,7 @@ namespace AutoRest.CSharp.Output.Models
 
         protected Method BuildLegacyConvenienceMethod(string methodName, IReadOnlyList<Parameter> parameters, HttpMessageExpression invokeCreateRequestMethod, StatusCodeSwitchBuilder statusCodeSwitchBuilder, bool async)
         {
-            var signature = CreateMethodSignature(methodName, ConvenienceModifiers, parameters, statusCodeSwitchBuilder.RestClientConvenienceReturnType);
+            var signature = CreateMethodSignature(methodName, ConvenienceModifiers, parameters, statusCodeSwitchBuilder.RestClientConvenienceReturnType, null);
             var body = new[]
             {
                 new ParameterValidationBlock(signature.Parameters, IsLegacy: !Configuration.AzureArm),
@@ -282,13 +283,13 @@ namespace AutoRest.CSharp.Output.Models
 
         protected abstract Method? BuildLegacyNextPageConvenienceMethod(IReadOnlyList<Parameter> parameters, Method? createRequestMethod, bool async);
 
-        protected MethodSignature CreateMethodSignature(string name, MethodSignatureModifiers accessibility, IReadOnlyList<Parameter> parameters, CSharpType returnType)
+        private MethodSignature CreateMethodSignature(string name, MethodSignatureModifiers accessibility, IReadOnlyList<Parameter> parameters, CSharpType returnType, string? nonDocumentComment)
         {
             var attributes = Operation.Deprecated is { } deprecated
                 ? new[] { new CSharpAttribute(typeof(ObsoleteAttribute), deprecated) }
                 : null;
 
-            return new MethodSignature(name, _summary, _description, accessibility, returnType, null, parameters, attributes);
+            return new MethodSignature(name, _summary, _description, accessibility, returnType, null, parameters, attributes, NonDocumentComment: nonDocumentComment);
         }
 
         protected abstract MethodBodyStatement CreateProtocolMethodBody(MethodSignatureBase createMessageSignature, MethodSignature? createNextPageMessageSignature, bool async);

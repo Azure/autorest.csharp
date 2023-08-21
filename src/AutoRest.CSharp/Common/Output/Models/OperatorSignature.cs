@@ -8,5 +8,5 @@ using AutoRest.CSharp.Output.Models.Shared;
 namespace AutoRest.CSharp.Output.Models
 {
     internal record OperatorSignature(bool IsExplicit, string? Summary, string? Description, Parameter FromParameter, CSharpType ToType)
-        : MethodSignatureBase(ToType.Name, Summary, Description, MethodSignatureModifiers.Public | MethodSignatureModifiers.Static, new[]{FromParameter}, Array.Empty<CSharpAttribute>());
+        : MethodSignatureBase(ToType.Name, Summary, Description, null, MethodSignatureModifiers.Public | MethodSignatureModifiers.Static, new[]{FromParameter}, Array.Empty<CSharpAttribute>());
 }

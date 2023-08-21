@@ -346,10 +346,6 @@ namespace AutoRest.CSharp.Generation.Writers
 
         private void WriteConvenienceMethodDocumentationWithExternalXmlDoc(RestClientOperationMethods operationMethods, MethodSignature convenienceMethod, bool async)
         {
-            if (convenienceMethod.NonDocumentComment is { } comment)
-            {
-                _writer.Line($"// {comment}");
-            }
             _writer.WriteMethodDocumentation(convenienceMethod);
             _writer.WriteXmlDocumentation("remarks", $"{convenienceMethod.DescriptionText}");
             var docRef = GetMethodSignatureString(convenienceMethod);
@@ -407,6 +403,11 @@ namespace AutoRest.CSharp.Generation.Writers
 
         private static void WriteMethodDocumentation(CodeWriter codeWriter, MethodSignature protocolMethod, MethodSignature? convenienceMethod, RestClientOperationMethods operationMethods)
         {
+            if (protocolMethod.NonDocumentComment is { } comment)
+            {
+                codeWriter.Line($"// {comment}");
+            }
+
             codeWriter.WriteXmlDocumentationSummary(BuildProtocolMethodSummary(protocolMethod, convenienceMethod));
             codeWriter.WriteMethodDocumentationSignature(protocolMethod);
             codeWriter.WriteXmlDocumentationException(typeof(RequestFailedException), $"Service returned a non-success status code.");
