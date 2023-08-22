@@ -347,3 +347,9 @@ namespace ProtocolAndConvenient {
     @protocolAPI(false)
     op stillConvenient(): void;
 }
+
+@route("/headAsBoolean")
+@doc("head as boolean.")
+@head
+@convenientAPI(true)
+op headAsBoolean(@path id: string): void;
