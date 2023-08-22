@@ -11,50 +11,52 @@ using AutoRest.CSharp.Output.Models.Types;
 
 namespace AutoRest.CSharp.Output.Models
 {
-    internal static class OperationConfidentChecker
+    internal static class OperationConfidenceChecker
     {
-        private static ConcurrentDictionary<InputType, ConvenienceMethodConfidentLevel> _cache = new();
+        private static ConcurrentDictionary<InputType, ConvenienceMethodConfidenceLevel> _cache = new();
 
-        public static ConvenienceMethodConfidentLevel GetConfidentLevel(InputOperation operation, TypeFactory typeFactory)
+        public static ConvenienceMethodConfidenceLevel GetConfidenceLevel(InputOperation operation, TypeFactory typeFactory)
         {
-            var confidentLevel = ConvenienceMethodConfidentLevel.Confident;
+            var confidenceLevel = ConvenienceMethodConfidenceLevel.Confident;
             // check parameters
             // skip the special parameters since some particular types are still interpreted as unions (for instance content type could have union of literal types which is actually enums)
             foreach (var parameter in operation.Parameters.Where(p => !p.IsContentType && !p.IsApiVersion && !p.IsEndpoint))
             {
-                var level = GetConfidentLevel(parameter.Type, typeFactory);
-                if (level > confidentLevel)
-                    confidentLevel = level;
+                UpdateConfidenceLevel(ref confidenceLevel, GetConfidenceLevel(parameter.Type, typeFactory));
 
                 // escape when the level has been raised to highest
-                if (confidentLevel == ConvenienceMethodConfidentLevel.Removal)
-                    return confidentLevel;
+                if (confidenceLevel == ConvenienceMethodConfidenceLevel.Removal)
+                    return confidenceLevel;
             }
             // check response
             foreach (var response in operation.Responses)
             {
-                var level = GetConfidentLevel(response.BodyType, typeFactory);
-                if (level > confidentLevel)
-                    confidentLevel = level;
+                UpdateConfidenceLevel(ref confidenceLevel, GetConfidenceLevel(response.BodyType, typeFactory));
 
                 // escape when the level has been raised to highest
-                if (confidentLevel == ConvenienceMethodConfidentLevel.Removal)
-                    return confidentLevel;
+                if (confidenceLevel == ConvenienceMethodConfidenceLevel.Removal)
+                    return confidenceLevel;
             }
 
             // if no low confident encountered on the way, this is confident, we return true.
-            return confidentLevel;
+            return confidenceLevel;
         }
 
-        private static ConvenienceMethodConfidentLevel GetConfidentLevel(InputType? type, TypeFactory typeFactory)
+        private static void UpdateConfidenceLevel(ref ConvenienceMethodConfidenceLevel current, ConvenienceMethodConfidenceLevel level)
+        {
+            if (level > current)
+                current = level;
+        }
+
+        private static ConvenienceMethodConfidenceLevel GetConfidenceLevel(InputType? type, TypeFactory typeFactory)
         {
             if (type == null)
-                return ConvenienceMethodConfidentLevel.Confident;
+                return ConvenienceMethodConfidenceLevel.Confident;
 
             if (_cache.TryGetValue(type, out var result))
                 return result;
 
-            var visitedModels = new Dictionary<InputModelType, ConvenienceMethodConfidentLevel?>();
+            var visitedModels = new Dictionary<InputModelType, ConvenienceMethodConfidenceLevel?>();
             result = WalkType(type, typeFactory, visitedModels);
 
             foreach (var (visitedType, r) in visitedModels)
@@ -68,7 +70,7 @@ namespace AutoRest.CSharp.Output.Models
             return result;
         }
 
-        private static ConvenienceMethodConfidentLevel WalkType(InputType type, TypeFactory typeFactory, Dictionary<InputModelType, ConvenienceMethodConfidentLevel?> visitedModels)
+        private static ConvenienceMethodConfidenceLevel WalkType(InputType type, TypeFactory typeFactory, Dictionary<InputModelType, ConvenienceMethodConfidenceLevel?> visitedModels)
         {
             if (_cache.TryGetValue(type, out var isConfident))
                 return isConfident;
@@ -80,41 +82,42 @@ namespace AutoRest.CSharp.Output.Models
                 InputDictionaryType dictType => WalkDictionaryType(dictType, typeFactory, visitedModels),
                 InputLiteralType literalType => WalkLiteralType(literalType, typeFactory),
                 InputUnionType unionType => WalkUnionType(unionType),
-                _ => ConvenienceMethodConfidentLevel.Confident
+                _ => ConvenienceMethodConfidenceLevel.Confident
             };
 
             return isConfident;
         }
 
-        private static ConvenienceMethodConfidentLevel WalkModelType(InputModelType type, TypeFactory typeFactory, Dictionary<InputModelType, ConvenienceMethodConfidentLevel?> visitedModels)
+        private static ConvenienceMethodConfidenceLevel WalkModelType(InputModelType type, TypeFactory typeFactory, Dictionary<InputModelType, ConvenienceMethodConfidenceLevel?> visitedModels)
         {
             // check if the type is visited before, if so, there are two cases:
             // 1. it already has a value, true or false, we return that.
             // 2. it is being calculated right now, which means its value now is null (undefined is prohibited by the definition of the interface)
             //    in this case we return true to skip the calculation, because the calculation of `IsConfident` is trying to find if there is a false (we are using && to do that)
             if (visitedModels.TryGetValue(type, out var result))
-                return result ?? ConvenienceMethodConfidentLevel.Confident;
+                return result ?? ConvenienceMethodConfidenceLevel.Confident;
             visitedModels.Add(type, null);
 
-            var confidentLevel = ConvenienceMethodConfidentLevel.Confident;
+            var confidenceLevel = ConvenienceMethodConfidenceLevel.Confident;
             var model = typeFactory.CreateType(type);
             if (IsUnreasonableName(model.Name))
             {
-                confidentLevel = ConvenienceMethodConfidentLevel.Removal;
+                confidenceLevel = ConvenienceMethodConfidenceLevel.Removal;
             }
 
             if (type.BaseModel != null)
             {
-                confidentLevel = WalkType(type.BaseModel, typeFactory, visitedModels);
+                var baseModelLevel = WalkType(type.BaseModel, typeFactory, visitedModels);
+                UpdateConfidenceLevel(ref confidenceLevel, baseModelLevel);
             }
 
             foreach (var property in type.Properties)
             {
-                if (confidentLevel == ConvenienceMethodConfidentLevel.Removal)
+                if (confidenceLevel == ConvenienceMethodConfidenceLevel.Removal)
                     break;
+
                 var propertyLevel = WalkType(property.Type, typeFactory, visitedModels);
-                if (propertyLevel > confidentLevel)
-                    confidentLevel = propertyLevel;
+                UpdateConfidenceLevel(ref confidenceLevel, propertyLevel);
             }
 
             // the low confident part in derived types will impact the base class - if any derived class has low confident part (like union types), we will set the base as "not confident", and other derived types must be not confident as well
@@ -123,41 +126,45 @@ namespace AutoRest.CSharp.Output.Models
                 foreach (var dm in type.DerivedModels)
                 {
                     var dmLevel = WalkType(dm, typeFactory, visitedModels);
-                    if (dmLevel > confidentLevel)
-                        confidentLevel = dmLevel;
+
+                    UpdateConfidenceLevel(ref confidenceLevel, dmLevel);
                 }
 
                 // if one of the derived types is not confident, we should make all of them not confident
-                if (confidentLevel != ConvenienceMethodConfidentLevel.Confident)
+                if (confidenceLevel != ConvenienceMethodConfidenceLevel.Confident)
                 {
                     foreach (var dm in type.DerivedModels)
                     {
-                        visitedModels[dm] = confidentLevel;
+                        visitedModels[dm] = confidenceLevel;
                     }
                 }
             }
 
-            visitedModels[type] = confidentLevel;
-            return confidentLevel;
+            visitedModels[type] = confidenceLevel;
+            return confidenceLevel;
         }
 
-        private static ConvenienceMethodConfidentLevel WalkListType(InputListType listType, TypeFactory typeFactory, Dictionary<InputModelType, ConvenienceMethodConfidentLevel?> visitedModels)
+        private static ConvenienceMethodConfidenceLevel WalkListType(InputListType listType, TypeFactory typeFactory, Dictionary<InputModelType, ConvenienceMethodConfidenceLevel?> visitedModels)
             => WalkType(listType.ElementType, typeFactory, visitedModels);
 
-        private static ConvenienceMethodConfidentLevel WalkDictionaryType(InputDictionaryType dictType, TypeFactory typeFactory, Dictionary<InputModelType, ConvenienceMethodConfidentLevel?> visitedModels)
+        private static ConvenienceMethodConfidenceLevel WalkDictionaryType(InputDictionaryType dictType, TypeFactory typeFactory, Dictionary<InputModelType, ConvenienceMethodConfidenceLevel?> visitedModels)
         {
+            var confidenceLevel = ConvenienceMethodConfidenceLevel.Confident;
+
             var keyLevel = WalkType(dictType.KeyType, typeFactory, visitedModels);
+            UpdateConfidenceLevel(ref confidenceLevel, keyLevel);
 
             var valueLevel = WalkType(dictType.ValueType, typeFactory, visitedModels);
+            UpdateConfidenceLevel(ref confidenceLevel, valueLevel);
 
-            return keyLevel > valueLevel ? keyLevel : valueLevel;
+            return confidenceLevel;
         }
 
-        private static ConvenienceMethodConfidentLevel WalkLiteralType(InputLiteralType literalType, TypeFactory typeFactory)
+        private static ConvenienceMethodConfidenceLevel WalkLiteralType(InputLiteralType literalType, TypeFactory typeFactory)
         {
             // a literal type is not confident, when we wrap it wiht a number-valued enum without proper names for its enum value items
             if (literalType.LiteralValueType is not InputEnumType enumType)
-                return ConvenienceMethodConfidentLevel.Confident;
+                return ConvenienceMethodConfidenceLevel.Confident;
 
             var isConfident = true;
             var csharpType = typeFactory.CreateType(enumType);
@@ -165,7 +172,7 @@ namespace AutoRest.CSharp.Output.Models
             {
                 foreach (var value in @enum.Values)
                 {
-                    // this checks if the enum value is properly named. Numbers like `1` or `3.14` will return false, which is considered as "not properly named" thus not confident.
+                    // this checks if the enum value is properly named. Numbers like `_1` or `_314` will return false, which is considered as "not properly named" thus not confident.
                     if (IsUnreasonableName(value.Declaration.Name))
                     {
                         isConfident = false;
@@ -174,23 +181,16 @@ namespace AutoRest.CSharp.Output.Models
                 }
             }
 
-            return isConfident ? ConvenienceMethodConfidentLevel.Confident : ConvenienceMethodConfidentLevel.Internal;
+            return isConfident ? ConvenienceMethodConfidenceLevel.Confident : ConvenienceMethodConfidenceLevel.Internal;
         }
 
-        private static ConvenienceMethodConfidentLevel WalkUnionType(InputUnionType unionType)
+        private static ConvenienceMethodConfidenceLevel WalkUnionType(InputUnionType unionType)
         {
             // the union types are always not confident.
             // if any exceptions happen in the future, we could handle it here.
-            return ConvenienceMethodConfidentLevel.Internal;
+            return ConvenienceMethodConfidenceLevel.Internal;
         }
 
         private static bool IsUnreasonableName(string name) => name.StartsWith('_');
-    }
-
-    internal enum ConvenienceMethodConfidentLevel : int
-    {
-        Confident = 0,
-        Internal = 1,
-        Removal = 2
     }
 }

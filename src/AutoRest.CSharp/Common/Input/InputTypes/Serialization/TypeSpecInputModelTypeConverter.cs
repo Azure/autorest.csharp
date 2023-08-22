@@ -90,7 +90,7 @@ namespace AutoRest.CSharp.Common.Input
             if (name == null)
                 throw new JsonException("Model must have name");
 
-            if (string.IsNullOrEmpty(name))
+            if (name.Length == 0)
                 name = id ?? throw new JsonException("Model must have id"); // we just use id as the name of the model
 
             InputModelTypeUsage usage = InputModelTypeUsage.None;

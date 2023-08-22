@@ -123,21 +123,21 @@ namespace AutoRest.CSharp.Output.Models
             }
 
             // check if there is anything not confident inside this operation
-            var confidentLevel = OperationConfidentChecker.GetConfidentLevel(Operation, _typeFactory);
+            var confidentLevel = OperationConfidenceChecker.GetConfidenceLevel(Operation, _typeFactory);
             return confidentLevel switch
             {
-                ConvenienceMethodConfidentLevel.Confident => new()
+                ConvenienceMethodConfidenceLevel.Confident => new()
                 {
                     IsConvenienceMethodGenerated = true,
                     IsConvenienceMethodInternal = false
                 },
-                ConvenienceMethodConfidentLevel.Internal => new()
+                ConvenienceMethodConfidenceLevel.Internal => new()
                 {
                     Message = ConvenienceMethodOmittingMessage.NotConfident,
                     IsConvenienceMethodGenerated = true,
                     IsConvenienceMethodInternal = true
                 },
-                ConvenienceMethodConfidentLevel.Removal => new()
+                ConvenienceMethodConfidenceLevel.Removal => new()
                 {
                     Message = ConvenienceMethodOmittingMessage.AnonymousModel,
                     IsConvenienceMethodGenerated = false
