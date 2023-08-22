@@ -74,10 +74,10 @@ namespace ConfidentLevelsInTsp.Samples
 
             var data = new
             {
-                unionProperty = new { },
+                unionProperty = new object(),
             };
 
-            Response response = await client.UnionInRequestPropertyAsync(RequestContent.Create(data));
+            Response response = await client.UnionInRequestPropertyAsync(RequestContent.Create(data)).ConfigureAwait(false);
             Console.WriteLine(response.Status);
         }
 
@@ -111,7 +111,7 @@ namespace ConfidentLevelsInTsp.Samples
             {
                 name = "<name>",
                 age = 1234,
-                size = 123.45d,
+                size = 3.14d,
             };
 
             Response response = client.UnionInResponseProperty(RequestContent.Create(data));
@@ -133,7 +133,7 @@ namespace ConfidentLevelsInTsp.Samples
                 age = 1234,
             };
 
-            Response response = await client.UnionInResponsePropertyAsync(RequestContent.Create(data));
+            Response response = await client.UnionInResponsePropertyAsync(RequestContent.Create(data)).ConfigureAwait(false);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("unionProperty").ToString());
@@ -150,10 +150,10 @@ namespace ConfidentLevelsInTsp.Samples
             {
                 name = "<name>",
                 age = 1234,
-                size = 123.45d,
+                size = 3.14d,
             };
 
-            Response response = await client.UnionInResponsePropertyAsync(RequestContent.Create(data));
+            Response response = await client.UnionInResponsePropertyAsync(RequestContent.Create(data)).ConfigureAwait(false);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("unionProperty").ToString());
@@ -169,7 +169,7 @@ namespace ConfidentLevelsInTsp.Samples
             var data = new
             {
                 name = "<name>",
-                unionProperty = new { },
+                unionProperty = new object(),
             };
 
             Response response = client.UnionWithSelfReference(RequestContent.Create(data));
@@ -186,7 +186,7 @@ namespace ConfidentLevelsInTsp.Samples
             var data = new
             {
                 name = "<name>",
-                unionProperty = new { },
+                unionProperty = new object(),
             };
 
             Response response = client.UnionWithSelfReference(RequestContent.Create(data));
@@ -203,10 +203,10 @@ namespace ConfidentLevelsInTsp.Samples
             var data = new
             {
                 name = "<name>",
-                unionProperty = new { },
+                unionProperty = new object(),
             };
 
-            Response response = await client.UnionWithSelfReferenceAsync(RequestContent.Create(data));
+            Response response = await client.UnionWithSelfReferenceAsync(RequestContent.Create(data)).ConfigureAwait(false);
             Console.WriteLine(response.Status);
         }
 
@@ -220,10 +220,10 @@ namespace ConfidentLevelsInTsp.Samples
             var data = new
             {
                 name = "<name>",
-                unionProperty = new { },
+                unionProperty = new object(),
             };
 
-            Response response = await client.UnionWithSelfReferenceAsync(RequestContent.Create(data));
+            Response response = await client.UnionWithSelfReferenceAsync(RequestContent.Create(data)).ConfigureAwait(false);
             Console.WriteLine(response.Status);
         }
 
@@ -258,9 +258,9 @@ namespace ConfidentLevelsInTsp.Samples
             something = "<something>",
             reference = new {
                 name = "<name>",
-                unionProperty = new {},
+                unionProperty = new object(),
             },
-            unionProperty = new {},
+            unionProperty = new object(),
         }
     },
             };
@@ -281,7 +281,7 @@ namespace ConfidentLevelsInTsp.Samples
                 name = "<name>",
             };
 
-            Response response = await client.UnionWithInderictAsync(RequestContent.Create(data));
+            Response response = await client.UnionWithInderictAsync(RequestContent.Create(data)).ConfigureAwait(false);
             Console.WriteLine(response.Status);
         }
 
@@ -300,14 +300,14 @@ namespace ConfidentLevelsInTsp.Samples
             something = "<something>",
             reference = new {
                 name = "<name>",
-                unionProperty = new {},
+                unionProperty = new object(),
             },
-            unionProperty = new {},
+            unionProperty = new object(),
         }
     },
             };
 
-            Response response = await client.UnionWithInderictAsync(RequestContent.Create(data));
+            Response response = await client.UnionWithInderictAsync(RequestContent.Create(data)).ConfigureAwait(false);
             Console.WriteLine(response.Status);
         }
 
@@ -358,7 +358,7 @@ namespace ConfidentLevelsInTsp.Samples
                 id = 1,
             };
 
-            Response response = await client.LiteralOfIntegerAsync(RequestContent.Create(data));
+            Response response = await client.LiteralOfIntegerAsync(RequestContent.Create(data)).ConfigureAwait(false);
             Console.WriteLine(response.Status);
         }
 
@@ -375,7 +375,7 @@ namespace ConfidentLevelsInTsp.Samples
                 id = 1,
             };
 
-            Response response = await client.LiteralOfIntegerAsync(RequestContent.Create(data));
+            Response response = await client.LiteralOfIntegerAsync(RequestContent.Create(data)).ConfigureAwait(false);
             Console.WriteLine(response.Status);
         }
 
@@ -389,7 +389,7 @@ namespace ConfidentLevelsInTsp.Samples
             var data = new
             {
                 name = "<name>",
-                id = 3.141592,
+                id = 3.141592F,
             };
 
             Response response = client.LiteralOfFloat(RequestContent.Create(data));
@@ -406,7 +406,7 @@ namespace ConfidentLevelsInTsp.Samples
             var data = new
             {
                 name = "<name>",
-                id = 3.141592,
+                id = 3.141592F,
             };
 
             Response response = client.LiteralOfFloat(RequestContent.Create(data));
@@ -423,10 +423,10 @@ namespace ConfidentLevelsInTsp.Samples
             var data = new
             {
                 name = "<name>",
-                id = 3.141592,
+                id = 3.141592F,
             };
 
-            Response response = await client.LiteralOfFloatAsync(RequestContent.Create(data));
+            Response response = await client.LiteralOfFloatAsync(RequestContent.Create(data)).ConfigureAwait(false);
             Console.WriteLine(response.Status);
         }
 
@@ -440,10 +440,10 @@ namespace ConfidentLevelsInTsp.Samples
             var data = new
             {
                 name = "<name>",
-                id = 3.141592,
+                id = 3.141592F,
             };
 
-            Response response = await client.LiteralOfFloatAsync(RequestContent.Create(data));
+            Response response = await client.LiteralOfFloatAsync(RequestContent.Create(data)).ConfigureAwait(false);
             Console.WriteLine(response.Status);
         }
 
@@ -503,7 +503,7 @@ namespace ConfidentLevelsInTsp.Samples
                 name = "<name>",
             };
 
-            Response response = await client.ConfidentOperationWithDiscriminatorAsync(RequestContent.Create(data));
+            Response response = await client.ConfidentOperationWithDiscriminatorAsync(RequestContent.Create(data)).ConfigureAwait(false);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("kind").ToString());
@@ -524,7 +524,7 @@ namespace ConfidentLevelsInTsp.Samples
                 name = "<name>",
             };
 
-            Response response = await client.ConfidentOperationWithDiscriminatorAsync(RequestContent.Create(data));
+            Response response = await client.ConfidentOperationWithDiscriminatorAsync(RequestContent.Create(data)).ConfigureAwait(false);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("kind").ToString());
@@ -539,7 +539,7 @@ namespace ConfidentLevelsInTsp.Samples
             var client = new ConfidentLevelsInTspClient(endpoint);
 
             var input = new Cat("<name>", "<meow>");
-            var result = await client.ConfidentOperationWithDiscriminatorAsync(input);
+            var result = await client.ConfidentOperationWithDiscriminatorAsync(input).ConfigureAwait(false);
         }
 
         [Test]
@@ -552,7 +552,7 @@ namespace ConfidentLevelsInTsp.Samples
             var data = new
             {
                 woof = "<woof>",
-                color = new { },
+                color = new object(),
                 kind = "dog",
                 name = "<name>",
             };
@@ -574,7 +574,7 @@ namespace ConfidentLevelsInTsp.Samples
             var data = new
             {
                 woof = "<woof>",
-                color = new { },
+                color = new object(),
                 kind = "dog",
                 name = "<name>",
             };
@@ -596,12 +596,12 @@ namespace ConfidentLevelsInTsp.Samples
             var data = new
             {
                 woof = "<woof>",
-                color = new { },
+                color = new object(),
                 kind = "dog",
                 name = "<name>",
             };
 
-            Response response = await client.PollutedBaseMethodAsync(RequestContent.Create(data));
+            Response response = await client.PollutedBaseMethodAsync(RequestContent.Create(data)).ConfigureAwait(false);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("kind").ToString());
@@ -618,12 +618,12 @@ namespace ConfidentLevelsInTsp.Samples
             var data = new
             {
                 woof = "<woof>",
-                color = new { },
+                color = new object(),
                 kind = "dog",
                 name = "<name>",
             };
 
-            Response response = await client.PollutedBaseMethodAsync(RequestContent.Create(data));
+            Response response = await client.PollutedBaseMethodAsync(RequestContent.Create(data)).ConfigureAwait(false);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("kind").ToString());
@@ -640,7 +640,7 @@ namespace ConfidentLevelsInTsp.Samples
             var data = new
             {
                 woof = "<woof>",
-                color = new { },
+                color = new object(),
                 kind = "dog",
                 name = "<name>",
             };
@@ -664,7 +664,7 @@ namespace ConfidentLevelsInTsp.Samples
             var data = new
             {
                 woof = "<woof>",
-                color = new { },
+                color = new object(),
                 kind = "dog",
                 name = "<name>",
             };
@@ -688,12 +688,12 @@ namespace ConfidentLevelsInTsp.Samples
             var data = new
             {
                 woof = "<woof>",
-                color = new { },
+                color = new object(),
                 kind = "dog",
                 name = "<name>",
             };
 
-            Response response = await client.PollutedDerivedMethodAsync(RequestContent.Create(data));
+            Response response = await client.PollutedDerivedMethodAsync(RequestContent.Create(data)).ConfigureAwait(false);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("woof").ToString());
@@ -712,12 +712,12 @@ namespace ConfidentLevelsInTsp.Samples
             var data = new
             {
                 woof = "<woof>",
-                color = new { },
+                color = new object(),
                 kind = "dog",
                 name = "<name>",
             };
 
-            Response response = await client.PollutedDerivedMethodAsync(RequestContent.Create(data));
+            Response response = await client.PollutedDerivedMethodAsync(RequestContent.Create(data)).ConfigureAwait(false);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("woof").ToString());
@@ -784,7 +784,7 @@ namespace ConfidentLevelsInTsp.Samples
                 name = "<name>",
             };
 
-            Response response = await client.UnpollutedDerivedMethodAsync(RequestContent.Create(data));
+            Response response = await client.UnpollutedDerivedMethodAsync(RequestContent.Create(data)).ConfigureAwait(false);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("meow").ToString());
@@ -806,7 +806,7 @@ namespace ConfidentLevelsInTsp.Samples
                 name = "<name>",
             };
 
-            Response response = await client.UnpollutedDerivedMethodAsync(RequestContent.Create(data));
+            Response response = await client.UnpollutedDerivedMethodAsync(RequestContent.Create(data)).ConfigureAwait(false);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("meow").ToString());
@@ -841,7 +841,7 @@ namespace ConfidentLevelsInTsp.Samples
             {
                 age = 1234,
                 name = "<name>",
-                size = 123.45d,
+                size = 3.14d,
             };
 
             Response response = client.UseDerivedModel(RequestContent.Create(data));
@@ -860,7 +860,7 @@ namespace ConfidentLevelsInTsp.Samples
                 name = "<name>",
             };
 
-            Response response = await client.UseDerivedModelAsync(RequestContent.Create(data));
+            Response response = await client.UseDerivedModelAsync(RequestContent.Create(data)).ConfigureAwait(false);
             Console.WriteLine(response.Status);
         }
 
@@ -875,10 +875,10 @@ namespace ConfidentLevelsInTsp.Samples
             {
                 age = 1234,
                 name = "<name>",
-                size = 123.45d,
+                size = 3.14d,
             };
 
-            Response response = await client.UseDerivedModelAsync(RequestContent.Create(data));
+            Response response = await client.UseDerivedModelAsync(RequestContent.Create(data)).ConfigureAwait(false);
             Console.WriteLine(response.Status);
         }
 
@@ -891,7 +891,7 @@ namespace ConfidentLevelsInTsp.Samples
 
             var data = new
             {
-                unionProperty = new { },
+                unionProperty = new object(),
                 name = "<name>",
             };
 
@@ -908,9 +908,9 @@ namespace ConfidentLevelsInTsp.Samples
 
             var data = new
             {
-                unionProperty = new { },
+                unionProperty = new object(),
                 name = "<name>",
-                size = 123.45d,
+                size = 3.14d,
             };
 
             Response response = client.UseDerivedModelWithUnion(RequestContent.Create(data));
@@ -926,11 +926,11 @@ namespace ConfidentLevelsInTsp.Samples
 
             var data = new
             {
-                unionProperty = new { },
+                unionProperty = new object(),
                 name = "<name>",
             };
 
-            Response response = await client.UseDerivedModelWithUnionAsync(RequestContent.Create(data));
+            Response response = await client.UseDerivedModelWithUnionAsync(RequestContent.Create(data)).ConfigureAwait(false);
             Console.WriteLine(response.Status);
         }
 
@@ -943,12 +943,12 @@ namespace ConfidentLevelsInTsp.Samples
 
             var data = new
             {
-                unionProperty = new { },
+                unionProperty = new object(),
                 name = "<name>",
-                size = 123.45d,
+                size = 3.14d,
             };
 
-            Response response = await client.UseDerivedModelWithUnionAsync(RequestContent.Create(data));
+            Response response = await client.UseDerivedModelWithUnionAsync(RequestContent.Create(data)).ConfigureAwait(false);
             Console.WriteLine(response.Status);
         }
     }

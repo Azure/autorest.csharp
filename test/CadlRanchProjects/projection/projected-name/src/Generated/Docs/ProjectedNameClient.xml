@@ -7,7 +7,7 @@ This sample shows how to call OperationAsync.
 <code><![CDATA[
 var client = new ProjectedNameClient();
 
-Response response = await client.OperationAsync();
+Response response = await client.OperationAsync().ConfigureAwait(false);
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
@@ -29,7 +29,7 @@ This sample shows how to call ParameterAsync with required parameters.
 <code><![CDATA[
 var client = new ProjectedNameClient();
 
-Response response = await client.ParameterAsync("<defaultName>");
+Response response = await client.ParameterAsync("<defaultName>").ConfigureAwait(false);
 Console.WriteLine(response.Status);
 ]]></code>
 </example>

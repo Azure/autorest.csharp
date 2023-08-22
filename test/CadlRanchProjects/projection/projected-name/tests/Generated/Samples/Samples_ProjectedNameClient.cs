@@ -6,13 +6,8 @@
 #nullable disable
 
 using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Text.Json;
 using System.Threading.Tasks;
 using Azure;
-using Azure.Core;
-using Azure.Identity;
 using NUnit.Framework;
 
 namespace Projection.ProjectedName.Samples
@@ -45,7 +40,7 @@ namespace Projection.ProjectedName.Samples
         {
             var client = new ProjectedNameClient();
 
-            Response response = await client.OperationAsync();
+            Response response = await client.OperationAsync().ConfigureAwait(false);
             Console.WriteLine(response.Status);
         }
 
@@ -55,7 +50,7 @@ namespace Projection.ProjectedName.Samples
         {
             var client = new ProjectedNameClient();
 
-            Response response = await client.OperationAsync();
+            Response response = await client.OperationAsync().ConfigureAwait(false);
             Console.WriteLine(response.Status);
         }
 
@@ -85,7 +80,7 @@ namespace Projection.ProjectedName.Samples
         {
             var client = new ProjectedNameClient();
 
-            Response response = await client.ParameterAsync("<defaultName>");
+            Response response = await client.ParameterAsync("<defaultName>").ConfigureAwait(false);
             Console.WriteLine(response.Status);
         }
 
@@ -95,7 +90,7 @@ namespace Projection.ProjectedName.Samples
         {
             var client = new ProjectedNameClient();
 
-            Response response = await client.ParameterAsync("<defaultName>");
+            Response response = await client.ParameterAsync("<defaultName>").ConfigureAwait(false);
             Console.WriteLine(response.Status);
         }
     }

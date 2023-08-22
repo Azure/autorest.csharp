@@ -6,15 +6,10 @@
 #nullable disable
 
 using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Text.Json;
 using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
-using Azure.Identity;
 using NUnit.Framework;
-using Parameters.Spread.Models;
 
 namespace Parameters.Spread.Samples
 {
@@ -61,7 +56,7 @@ namespace Parameters.Spread.Samples
                 name = "<name>",
             };
 
-            Response response = await client.SpreadAsRequestBodyAsync(RequestContent.Create(data));
+            Response response = await client.SpreadAsRequestBodyAsync(RequestContent.Create(data)).ConfigureAwait(false);
             Console.WriteLine(response.Status);
         }
 
@@ -76,7 +71,7 @@ namespace Parameters.Spread.Samples
                 name = "<name>",
             };
 
-            Response response = await client.SpreadAsRequestBodyAsync(RequestContent.Create(data));
+            Response response = await client.SpreadAsRequestBodyAsync(RequestContent.Create(data)).ConfigureAwait(false);
             Console.WriteLine(response.Status);
         }
 
@@ -86,7 +81,7 @@ namespace Parameters.Spread.Samples
         {
             var client = new SpreadClient().GetAliasClient("1.0.0");
 
-            var result = await client.SpreadAsRequestBodyAsync("<name>");
+            var result = await client.SpreadAsRequestBodyAsync("<name>").ConfigureAwait(false);
         }
 
         [Test]
@@ -130,7 +125,7 @@ namespace Parameters.Spread.Samples
                 name = "<name>",
             };
 
-            Response response = await client.SpreadAsRequestParameterAsync("<id>", "<xMsTestHeader>", RequestContent.Create(data));
+            Response response = await client.SpreadAsRequestParameterAsync("<id>", "<xMsTestHeader>", RequestContent.Create(data)).ConfigureAwait(false);
             Console.WriteLine(response.Status);
         }
 
@@ -145,7 +140,7 @@ namespace Parameters.Spread.Samples
                 name = "<name>",
             };
 
-            Response response = await client.SpreadAsRequestParameterAsync("<id>", "<xMsTestHeader>", RequestContent.Create(data));
+            Response response = await client.SpreadAsRequestParameterAsync("<id>", "<xMsTestHeader>", RequestContent.Create(data)).ConfigureAwait(false);
             Console.WriteLine(response.Status);
         }
 
@@ -155,7 +150,7 @@ namespace Parameters.Spread.Samples
         {
             var client = new SpreadClient().GetAliasClient("1.0.0");
 
-            var result = await client.SpreadAsRequestParameterAsync("<id>", "<xMsTestHeader>", "<name>");
+            var result = await client.SpreadAsRequestParameterAsync("<id>", "<xMsTestHeader>", "<name>").ConfigureAwait(false);
         }
 
         [Test]
@@ -214,7 +209,7 @@ namespace Parameters.Spread.Samples
                 prop6 = "<prop6>",
             };
 
-            Response response = await client.SpreadWithMultipleParametersAsync("<id>", "<xMsTestHeader>", RequestContent.Create(data));
+            Response response = await client.SpreadWithMultipleParametersAsync("<id>", "<xMsTestHeader>", RequestContent.Create(data)).ConfigureAwait(false);
             Console.WriteLine(response.Status);
         }
 
@@ -234,7 +229,7 @@ namespace Parameters.Spread.Samples
                 prop6 = "<prop6>",
             };
 
-            Response response = await client.SpreadWithMultipleParametersAsync("<id>", "<xMsTestHeader>", RequestContent.Create(data));
+            Response response = await client.SpreadWithMultipleParametersAsync("<id>", "<xMsTestHeader>", RequestContent.Create(data)).ConfigureAwait(false);
             Console.WriteLine(response.Status);
         }
 
@@ -244,7 +239,7 @@ namespace Parameters.Spread.Samples
         {
             var client = new SpreadClient().GetAliasClient("1.0.0");
 
-            var result = await client.SpreadWithMultipleParametersAsync("<id>", "<xMsTestHeader>", "<prop1>", "<prop2>", "<prop3>", "<prop4>", "<prop5>", "<prop6>");
+            var result = await client.SpreadWithMultipleParametersAsync("<id>", "<xMsTestHeader>", "<prop1>", "<prop2>", "<prop3>", "<prop4>", "<prop5>", "<prop6>").ConfigureAwait(false);
         }
     }
 }

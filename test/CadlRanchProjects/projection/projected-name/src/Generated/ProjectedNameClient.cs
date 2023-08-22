@@ -121,7 +121,7 @@ namespace Projection.ProjectedName
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="defaultName"> The String to use. </param>
+        /// <param name="defaultName"> The string to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="defaultName"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
@@ -156,7 +156,7 @@ namespace Projection.ProjectedName
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="defaultName"> The String to use. </param>
+        /// <param name="defaultName"> The string to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="defaultName"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>

@@ -59,11 +59,11 @@ namespace CustomizationsInTsp.Samples
                 {
                     propertyToMakeInternal = 1234,
                     propertyToRename = 1234,
-                    propertyToMakeFloat = 1234,
-                    propertyToMakeInt = 123.45f,
-                    propertyToMakeDuration = "<propertyToMakeDuration>",
-                    propertyToMakeString = "PT1H23M45S",
-                    propertyToMakeJsonElement = "<propertyToMakeJsonElement>",
+                    propertyToMakeFloat = 3.14f,
+                    propertyToMakeInt = 1234,
+                    propertyToMakeDuration = "PT1H23M45S",
+                    propertyToMakeString = "<propertyToMakeString>",
+                    propertyToMakeJsonElement = "{}",
                     propertyToField = "<propertyToField>",
                     badListName = new[] {
             "<String>"
@@ -127,7 +127,7 @@ namespace CustomizationsInTsp.Samples
 
             var data = new { };
 
-            Response response = await client.RoundTripAsync(RequestContent.Create(data));
+            Response response = await client.RoundTripAsync(RequestContent.Create(data)).ConfigureAwait(false);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());
@@ -158,11 +158,11 @@ namespace CustomizationsInTsp.Samples
                 {
                     propertyToMakeInternal = 1234,
                     propertyToRename = 1234,
-                    propertyToMakeFloat = 1234,
-                    propertyToMakeInt = 123.45f,
-                    propertyToMakeDuration = "<propertyToMakeDuration>",
-                    propertyToMakeString = "PT1H23M45S",
-                    propertyToMakeJsonElement = "<propertyToMakeJsonElement>",
+                    propertyToMakeFloat = 3.14f,
+                    propertyToMakeInt = 1234,
+                    propertyToMakeDuration = "PT1H23M45S",
+                    propertyToMakeString = "<propertyToMakeString>",
+                    propertyToMakeJsonElement = "{}",
                     propertyToField = "<propertyToField>",
                     badListName = new[] {
             "<String>"
@@ -192,7 +192,7 @@ namespace CustomizationsInTsp.Samples
                 propertyToMoveToCustomization = "a",
             };
 
-            Response response = await client.RoundTripAsync(RequestContent.Create(data));
+            Response response = await client.RoundTripAsync(RequestContent.Create(data)).ConfigureAwait(false);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("propertyModelToMakeInternal").GetProperty("requiredInt").ToString());
@@ -260,7 +260,7 @@ namespace CustomizationsInTsp.Samples
                 },
                 PropertyToMoveToCustomization = NormalEnum.A,
             };
-            var result = await client.RoundTripAsync(input);
+            var result = await client.RoundTripAsync(input).ConfigureAwait(false);
         }
     }
 }
