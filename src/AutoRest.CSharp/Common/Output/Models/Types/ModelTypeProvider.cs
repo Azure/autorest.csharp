@@ -20,6 +20,7 @@ using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Utilities;
 using Azure;
 using Azure.Core;
+using Microsoft.CodeAnalysis.CSharp;
 using static Azure.Core.HttpHeader;
 
 namespace AutoRest.CSharp.Output.Models.Types
@@ -60,11 +61,19 @@ namespace AutoRest.CSharp.Output.Models.Types
             _typeFactory = typeFactory!;
             _inputModel = inputModel;
             _sourceInputModel = sourceInputModel;
-            DefaultName = inputModel.Name.ToCleanName();
+            DefaultName = GetValidIdentifier(inputModel.Name); // TODO -- this is only a workaround. The `ToCleanName` method does (almost) the same when we want to change it to a valid csharp identifier, but it will change the leading character captilized. Defer the decision of that to this issue: https://github.com/Azure/autorest.csharp/issues/3669
             DefaultAccessibility = inputModel.Accessibility ?? "public";
             _deprecated = inputModel.Deprecated;
             _derivedTypes = derivedTypes;
             _defaultDerivedType = defaultDerivedType ?? (inputModel.IsUnknownDiscriminatorModel ? this : null);
+        }
+
+        private static string GetValidIdentifier(string name)
+        {
+            if (SyntaxFacts.IsValidIdentifier(name))
+                return name;
+
+            return $"_{name}"; // prepend a underscore to make sure the name is valid identifier
         }
 
         private MethodSignatureModifiers GetFromResponseModifiers()
