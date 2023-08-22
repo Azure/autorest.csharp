@@ -6,7 +6,6 @@
 #nullable disable
 
 using System.Text.Json;
-using Azure;
 using Azure.Core;
 
 namespace Azure.NewProject.TypeSpec.Models

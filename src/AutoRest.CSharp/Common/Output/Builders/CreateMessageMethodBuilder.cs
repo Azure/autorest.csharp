@@ -284,7 +284,7 @@ namespace AutoRest.CSharp.Output.Models
             else
             {
                 addToQuery = inputParameter.ArraySerializationDelimiter is { } delimiter
-                    ? uriBuilder.AppendQueryDelimited(nameInRequest, convertedValue, delimiter, escape)
+                    ? uriBuilder.AppendQueryDelimited(nameInRequest, convertedValue, delimiter, format, escape)
                     : uriBuilder.AppendQuery(nameInRequest, convertedValue, format, escape);
             }
 
@@ -318,7 +318,7 @@ namespace AutoRest.CSharp.Output.Models
             var convertedValue = ConvertToRequestPartType(RemoveAllNullConditional(value), outputParameter.Type, format);
 
             var addToHeader = inputParameter.ArraySerializationDelimiter is {} delimiter
-                ? request.Headers.AddDelimited(headerName, convertedValue, delimiter)
+                ? request.Headers.AddDelimited(headerName, convertedValue, delimiter, format)
                 : request.Headers.Add(headerName, convertedValue, format);
 
             return NullCheckRequestPartValue(value, outputParameter.Type, addToHeader);

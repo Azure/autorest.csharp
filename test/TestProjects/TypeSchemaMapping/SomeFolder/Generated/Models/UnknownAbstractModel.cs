@@ -7,7 +7,7 @@
 
 namespace TypeSchemaMapping.Models
 {
-    /// <summary> The UnknownAbstractModel. </summary>
+    /// <summary> Unknown version of AbstractModel. </summary>
     internal partial class UnknownAbstractModel : AbstractModel
     {
         /// <summary> Initializes a new instance of UnknownAbstractModel. </summary>

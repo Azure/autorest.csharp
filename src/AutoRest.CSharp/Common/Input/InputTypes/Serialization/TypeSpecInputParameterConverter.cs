@@ -121,6 +121,7 @@ namespace AutoRest.CSharp.Common.Input
         private static InputType FixInputParameterType(InputType parameterType, RequestLocation requestLocation)
             => parameterType switch
             {
+                InputLiteralType literalType => literalType.LiteralValueType,
                 InputListType listType => listType with { ElementType = FixInputParameterType(listType.ElementType, requestLocation)},
                 InputDictionaryType dictionaryType => dictionaryType with { ValueType = FixInputParameterType(dictionaryType.ValueType, requestLocation)},
                 InputPrimitiveType { Kind: InputTypeKind.DateTime } when requestLocation == RequestLocation.Header => InputPrimitiveType.DateTimeRFC7231,

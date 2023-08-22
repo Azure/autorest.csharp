@@ -27,5 +27,11 @@ namespace AutoRest.CSharp.Common.Output.Models.KnownValueExpressions
 
         public MethodBodyStatement AddDelimited(string name, ValueExpression value, string delimiter)
             => new InvokeStaticMethodStatement(typeof(RequestUriBuilderExtensions), nameof(RequestHeaderExtensions.AddDelimited), new[]{Untyped, Literal(name), value, Literal(delimiter)}, CallAsExtension: true);
+        public MethodBodyStatement AddDelimited(string name, ValueExpression value, string delimiter, string format)
+            => new InvokeStaticMethodStatement(typeof(RequestUriBuilderExtensions), nameof(RequestHeaderExtensions.AddDelimited), new[]{Untyped, Literal(name), value, Literal(delimiter), Literal(format)}, CallAsExtension: true);
+        public MethodBodyStatement AddDelimited(string name, ValueExpression value, string delimiter, SerializationFormat format)
+            => format.ToFormatSpecifier() is { } formatSpecifier
+                ? AddDelimited(name, value, delimiter, formatSpecifier)
+                : AddDelimited(name, value, delimiter);
     }
 }

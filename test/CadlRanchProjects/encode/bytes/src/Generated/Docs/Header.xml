@@ -7,7 +7,7 @@ This sample shows how to call DefaultAsync with required parameters.
 <code><![CDATA[
 var client = new BytesClient().GetHeaderClient("1.0.0");
 
-Response response = await client.DefaultAsync(BinaryData.FromString("<your binary data content>"));
+Response response = await client.DefaultAsync(BinaryData.FromString("<your binary data content>")).ConfigureAwait(false);
 Console.WriteLine(response.Status);
 ]]></code>
 </example>

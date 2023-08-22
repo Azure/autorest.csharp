@@ -40,6 +40,7 @@ namespace HlcConstants
 
         /// <param name="value"> The RoundTripModel to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="value"/> is null. </exception>
         public virtual async Task<Response<RoundTripModel>> MixedAsync(RoundTripModel value, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("HlcConstantsClient.Mixed");
@@ -57,6 +58,7 @@ namespace HlcConstants
 
         /// <param name="value"> The RoundTripModel to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="value"/> is null. </exception>
         public virtual Response<RoundTripModel> Mixed(RoundTripModel value, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("HlcConstantsClient.Mixed");
@@ -74,6 +76,7 @@ namespace HlcConstants
 
         /// <param name="value"> The RoundTripModel to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="value"/> is null. </exception>
         public virtual async Task<Response<RoundTripModel>> PostSomethingAsync(RoundTripModel value, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("HlcConstantsClient.PostSomething");
@@ -91,6 +94,7 @@ namespace HlcConstants
 
         /// <param name="value"> The RoundTripModel to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="value"/> is null. </exception>
         public virtual Response<RoundTripModel> PostSomething(RoundTripModel value, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("HlcConstantsClient.PostSomething");
