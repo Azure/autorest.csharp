@@ -1,12 +1,10 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
-using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
-using System.Reflection;
 using AutoRest.CSharp.Common.Input;
 using Microsoft.CodeAnalysis.CSharp;
 
@@ -68,7 +66,7 @@ namespace AutoRest.CSharp.Output.Models
                 InputModelType modelType => WalkModelType(modelType, visitedModels),
                 InputListType listType => WalkType(listType.ElementType, visitedModels),
                 InputDictionaryType dictType => WalkType(dictType.KeyType, visitedModels) && WalkType(dictType.ValueType, visitedModels),
-                InputLiteralType literalType => WalkLiteralType(literalType),
+                InputEnumType enumType => WalkEnumType(enumType),
                 InputUnionType unionType => WalkUnionType(unionType),
                 _ => true
             };
@@ -116,20 +114,10 @@ namespace AutoRest.CSharp.Output.Models
             return isConfident;
         }
 
-        private static bool WalkLiteralType(InputLiteralType literalType)
+        private static bool WalkEnumType(InputEnumType enumType)
         {
-            // a literal type is not confident, when we wrap it wiht a number-valued enum without proper names for its enum value items
-            if (literalType.LiteralValueType is not InputEnumType enumType)
-                return true;
-
-            var isConfident = true;
-            foreach (var value in enumType.AllowedValues)
-            {
-                // this checks if the enum value is properly named. Numbers like `1` or `3.14` will return false, which is considered as "not properly named" thus not confident.
-                isConfident = isConfident && SyntaxFacts.IsValidIdentifier(value.Name);
-            }
-
-            return isConfident;
+            // this checks if the enum value is properly named. Numbers like `1` or `3.14` will return false, which is considered as "not properly named" thus not confident.
+            return enumType.AllowedValues.All(value => SyntaxFacts.IsValidIdentifier(value.Name));
         }
 
         private static bool WalkUnionType(InputUnionType unionType)

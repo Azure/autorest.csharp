@@ -383,11 +383,7 @@ namespace AutoRest.CSharp.Output.Builders
             var propertiesCopy = propertyBag.Properties.ToArray();
             foreach (var property in propertiesCopy)
             {
-                var name = property.SchemaProperty is {FlattenedNames: {} schemaFlattenedNames} && schemaFlattenedNames.Count > depthIndex + 1
-                    ? schemaFlattenedNames.ElementAt(depthIndex)
-                    : property.InputModelProperty is {FlattenedNames: {} inputFlattenedNames} && inputFlattenedNames.Count > depthIndex + 1
-                        ? inputFlattenedNames[depthIndex]
-                        : null;
+                var name = GetPropertyNameAtDepth(property, depthIndex);
 
                 if (name is null)
                 {
@@ -408,6 +404,26 @@ namespace AutoRest.CSharp.Output.Builders
             {
                 PopulatePropertyBag(innerBag, depthIndex + 1);
             }
+        }
+
+        private static string? GetPropertyNameAtDepth(ObjectTypeProperty property, int depthIndex)
+        {
+            if (property.SerializationMapping is {SerializationPath: {} serializationPath} && serializationPath.Count > depthIndex + 1)
+            {
+                return serializationPath.ElementAt(depthIndex);
+            }
+
+            if (property.SchemaProperty is {FlattenedNames: {} schemaFlattenedNames} && schemaFlattenedNames.Count > depthIndex + 1)
+            {
+                return schemaFlattenedNames.ElementAt(depthIndex);
+            }
+
+            if (property.InputModelProperty is {FlattenedNames: {} inputFlattenedNames} && inputFlattenedNames.Count > depthIndex + 1)
+            {
+                return inputFlattenedNames[depthIndex];
+            }
+
+            return null;
         }
 
         private JsonAdditionalPropertiesSerialization? CreateAdditionalProperties(ObjectSchema objectSchema, ObjectType objectType)

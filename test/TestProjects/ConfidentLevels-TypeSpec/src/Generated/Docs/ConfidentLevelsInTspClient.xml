@@ -13,10 +13,10 @@ var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new ConfidentLevelsInTspClient(endpoint);
 
 var data = new {
-    unionProperty = new {},
+    unionProperty = new object(),
 };
 
-Response response = await client.UnionInRequestPropertyAsync(RequestContent.Create(data));
+Response response = await client.UnionInRequestPropertyAsync(RequestContent.Create(data)).ConfigureAwait(false);
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
@@ -29,7 +29,7 @@ var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new ConfidentLevelsInTspClient(endpoint);
 
 var data = new {
-    unionProperty = new {},
+    unionProperty = new object(),
 };
 
 Response response = client.UnionInRequestProperty(RequestContent.Create(data));
@@ -53,7 +53,7 @@ var data = new {
     age = 1234,
 };
 
-Response response = await client.UnionInResponsePropertyAsync(RequestContent.Create(data));
+Response response = await client.UnionInResponsePropertyAsync(RequestContent.Create(data)).ConfigureAwait(false);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("unionProperty").ToString());
@@ -66,10 +66,10 @@ var client = new ConfidentLevelsInTspClient(endpoint);
 var data = new {
     name = "<name>",
     age = 1234,
-    size = 123.45d,
+    size = 3.14d,
 };
 
-Response response = await client.UnionInResponsePropertyAsync(RequestContent.Create(data));
+Response response = await client.UnionInResponsePropertyAsync(RequestContent.Create(data)).ConfigureAwait(false);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("unionProperty").ToString());
@@ -101,7 +101,7 @@ var client = new ConfidentLevelsInTspClient(endpoint);
 var data = new {
     name = "<name>",
     age = 1234,
-    size = 123.45d,
+    size = 3.14d,
 };
 
 Response response = client.UnionInResponseProperty(RequestContent.Create(data));
@@ -124,10 +124,10 @@ var client = new ConfidentLevelsInTspClient(endpoint);
 
 var data = new {
     name = "<name>",
-    unionProperty = new {},
+    unionProperty = new object(),
 };
 
-Response response = await client.UnionWithSelfReferenceAsync(RequestContent.Create(data));
+Response response = await client.UnionWithSelfReferenceAsync(RequestContent.Create(data)).ConfigureAwait(false);
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
@@ -141,7 +141,7 @@ var client = new ConfidentLevelsInTspClient(endpoint);
 
 var data = new {
     name = "<name>",
-    unionProperty = new {},
+    unionProperty = new object(),
 };
 
 Response response = client.UnionWithSelfReference(RequestContent.Create(data));
@@ -164,7 +164,7 @@ var data = new {
     name = "<name>",
 };
 
-Response response = await client.UnionWithInderictAsync(RequestContent.Create(data));
+Response response = await client.UnionWithInderictAsync(RequestContent.Create(data)).ConfigureAwait(false);
 Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call UnionWithInderictAsync with all request content.
@@ -179,14 +179,14 @@ var data = new {
             something = "<something>",
             reference = new {
                 name = "<name>",
-                unionProperty = new {},
+                unionProperty = new object(),
             },
-            unionProperty = new {},
+            unionProperty = new object(),
         }
     },
 };
 
-Response response = await client.UnionWithInderictAsync(RequestContent.Create(data));
+Response response = await client.UnionWithInderictAsync(RequestContent.Create(data)).ConfigureAwait(false);
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
@@ -217,9 +217,9 @@ var data = new {
             something = "<something>",
             reference = new {
                 name = "<name>",
-                unionProperty = new {},
+                unionProperty = new object(),
             },
-            unionProperty = new {},
+            unionProperty = new object(),
         }
     },
 };
@@ -245,7 +245,7 @@ var data = new {
     id = 1,
 };
 
-Response response = await client.LiteralOfIntegerAsync(RequestContent.Create(data));
+Response response = await client.LiteralOfIntegerAsync(RequestContent.Create(data)).ConfigureAwait(false);
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
@@ -280,10 +280,10 @@ var client = new ConfidentLevelsInTspClient(endpoint);
 
 var data = new {
     name = "<name>",
-    id = 3.141592,
+    id = 3.141592F,
 };
 
-Response response = await client.LiteralOfFloatAsync(RequestContent.Create(data));
+Response response = await client.LiteralOfFloatAsync(RequestContent.Create(data)).ConfigureAwait(false);
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
@@ -297,7 +297,7 @@ var client = new ConfidentLevelsInTspClient(endpoint);
 
 var data = new {
     name = "<name>",
-    id = 3.141592,
+    id = 3.141592F,
 };
 
 Response response = client.LiteralOfFloat(RequestContent.Create(data));
