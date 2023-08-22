@@ -1215,7 +1215,7 @@ namespace paging_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new PagingClient(credential);
 
-            var operation = await client.GetMultiplePagesLROAsync(WaitUntil.Completed, 1234, 1234, new RequestContext());
+            var operation = await client.GetMultiplePagesLROAsync(WaitUntil.Completed, 1234, 1234, new RequestContext()).ConfigureAwait(false);
 
             await foreach (var item in operation.Value)
             {
@@ -1231,7 +1231,7 @@ namespace paging_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new PagingClient(credential);
 
-            var operation = await client.GetMultiplePagesLROAsync(WaitUntil.Completed, 1234, 1234, new RequestContext());
+            var operation = await client.GetMultiplePagesLROAsync(WaitUntil.Completed, 1234, 1234, new RequestContext()).ConfigureAwait(false);
 
             await foreach (var item in operation.Value)
             {

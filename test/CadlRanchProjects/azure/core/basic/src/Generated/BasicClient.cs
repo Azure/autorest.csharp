@@ -909,8 +909,8 @@ namespace _Specs_.Azure.Core.Basic
             uri.AppendPath("/azure/core/basic/users/", false);
             uri.AppendPath(id, true);
             uri.AppendPath(":export", false);
-            uri.AppendQuery("format", format, true);
             uri.AppendQuery("api-version", _apiVersion, true);
+            uri.AppendQuery("format", format, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             return message;

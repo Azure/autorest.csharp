@@ -6,13 +6,10 @@
 #nullable disable
 
 using System;
-using System.Collections.Generic;
-using System.IO;
 using System.Text.Json;
 using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
-using Azure.Identity;
 using NUnit.Framework;
 using _Specs_.Azure.Core.Basic.Models;
 
@@ -78,7 +75,7 @@ namespace _Specs_.Azure.Core.Basic.Samples
                 name = "<name>",
             };
 
-            Response response = await client.CreateOrUpdateAsync(1234, RequestContent.Create(data));
+            Response response = await client.CreateOrUpdateAsync(1234, RequestContent.Create(data)).ConfigureAwait(false);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("id").ToString());
@@ -103,7 +100,7 @@ namespace _Specs_.Azure.Core.Basic.Samples
     },
             };
 
-            Response response = await client.CreateOrUpdateAsync(1234, RequestContent.Create(data));
+            Response response = await client.CreateOrUpdateAsync(1234, RequestContent.Create(data)).ConfigureAwait(false);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("id").ToString());
@@ -172,7 +169,7 @@ namespace _Specs_.Azure.Core.Basic.Samples
                 name = "<name>",
             };
 
-            Response response = await client.CreateOrReplaceAsync(1234, RequestContent.Create(data));
+            Response response = await client.CreateOrReplaceAsync(1234, RequestContent.Create(data)).ConfigureAwait(false);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("id").ToString());
@@ -197,7 +194,7 @@ namespace _Specs_.Azure.Core.Basic.Samples
     },
             };
 
-            Response response = await client.CreateOrReplaceAsync(1234, RequestContent.Create(data));
+            Response response = await client.CreateOrReplaceAsync(1234, RequestContent.Create(data)).ConfigureAwait(false);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("id").ToString());
@@ -261,7 +258,7 @@ namespace _Specs_.Azure.Core.Basic.Samples
         {
             var client = new BasicClient();
 
-            Response response = await client.GetUserAsync(1234, new RequestContext());
+            Response response = await client.GetUserAsync(1234, new RequestContext()).ConfigureAwait(false);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("id").ToString());
@@ -275,7 +272,7 @@ namespace _Specs_.Azure.Core.Basic.Samples
         {
             var client = new BasicClient();
 
-            Response response = await client.GetUserAsync(1234, new RequestContext());
+            Response response = await client.GetUserAsync(1234, new RequestContext()).ConfigureAwait(false);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("id").ToString());
@@ -292,7 +289,7 @@ namespace _Specs_.Azure.Core.Basic.Samples
         {
             var client = new BasicClient();
 
-            var result = await client.GetUserAsync(1234);
+            var result = await client.GetUserAsync(1234).ConfigureAwait(false);
         }
 
         [Test]
@@ -321,7 +318,7 @@ namespace _Specs_.Azure.Core.Basic.Samples
         {
             var client = new BasicClient();
 
-            Response response = await client.DeleteAsync(1234);
+            Response response = await client.DeleteAsync(1234).ConfigureAwait(false);
             Console.WriteLine(response.Status);
         }
 
@@ -331,7 +328,7 @@ namespace _Specs_.Azure.Core.Basic.Samples
         {
             var client = new BasicClient();
 
-            Response response = await client.DeleteAsync(1234);
+            Response response = await client.DeleteAsync(1234).ConfigureAwait(false);
             Console.WriteLine(response.Status);
         }
 
@@ -372,7 +369,7 @@ namespace _Specs_.Azure.Core.Basic.Samples
         {
             var client = new BasicClient();
 
-            Response response = await client.ExportAsync(1234, "<format>", new RequestContext());
+            Response response = await client.ExportAsync(1234, "<format>", new RequestContext()).ConfigureAwait(false);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("id").ToString());
@@ -386,7 +383,7 @@ namespace _Specs_.Azure.Core.Basic.Samples
         {
             var client = new BasicClient();
 
-            Response response = await client.ExportAsync(1234, "<format>", new RequestContext());
+            Response response = await client.ExportAsync(1234, "<format>", new RequestContext()).ConfigureAwait(false);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("id").ToString());
@@ -403,7 +400,7 @@ namespace _Specs_.Azure.Core.Basic.Samples
         {
             var client = new BasicClient();
 
-            var result = await client.ExportAsync(1234, "<format>");
+            var result = await client.ExportAsync(1234, "<format>").ConfigureAwait(false);
         }
 
         [Test]

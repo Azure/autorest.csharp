@@ -313,7 +313,7 @@ var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new ConfidentLevelsInTspClient(endpoint);
 
 var input = new Cat("<name>", "<meow>");
-var result = await client.ConfidentOperationWithDiscriminatorAsync(input);
+var result = await client.ConfidentOperationWithDiscriminatorAsync(input).ConfigureAwait(false);
 ]]></code>
 </example>
     </member>
@@ -342,7 +342,7 @@ var data = new {
     name = "<name>",
 };
 
-Response response = await client.ConfidentOperationWithDiscriminatorAsync(RequestContent.Create(data));
+Response response = await client.ConfidentOperationWithDiscriminatorAsync(RequestContent.Create(data)).ConfigureAwait(false);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("kind").ToString());
@@ -384,12 +384,12 @@ var client = new ConfidentLevelsInTspClient(endpoint);
 
 var data = new {
     woof = "<woof>",
-    color = new {},
+    color = new object(),
     kind = "dog",
     name = "<name>",
 };
 
-Response response = await client.PollutedBaseMethodAsync(RequestContent.Create(data));
+Response response = await client.PollutedBaseMethodAsync(RequestContent.Create(data)).ConfigureAwait(false);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("kind").ToString());
@@ -406,7 +406,7 @@ var client = new ConfidentLevelsInTspClient(endpoint);
 
 var data = new {
     woof = "<woof>",
-    color = new {},
+    color = new object(),
     kind = "dog",
     name = "<name>",
 };
@@ -432,12 +432,12 @@ var client = new ConfidentLevelsInTspClient(endpoint);
 
 var data = new {
     woof = "<woof>",
-    color = new {},
+    color = new object(),
     kind = "dog",
     name = "<name>",
 };
 
-Response response = await client.PollutedDerivedMethodAsync(RequestContent.Create(data));
+Response response = await client.PollutedDerivedMethodAsync(RequestContent.Create(data)).ConfigureAwait(false);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("woof").ToString());
@@ -456,7 +456,7 @@ var client = new ConfidentLevelsInTspClient(endpoint);
 
 var data = new {
     woof = "<woof>",
-    color = new {},
+    color = new object(),
     kind = "dog",
     name = "<name>",
 };
@@ -488,7 +488,7 @@ var data = new {
     name = "<name>",
 };
 
-Response response = await client.UnpollutedDerivedMethodAsync(RequestContent.Create(data));
+Response response = await client.UnpollutedDerivedMethodAsync(RequestContent.Create(data)).ConfigureAwait(false);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("meow").ToString());
@@ -534,7 +534,7 @@ var data = new {
     name = "<name>",
 };
 
-Response response = await client.UseDerivedModelAsync(RequestContent.Create(data));
+Response response = await client.UseDerivedModelAsync(RequestContent.Create(data)).ConfigureAwait(false);
 Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call UseDerivedModelAsync with all request content.
@@ -545,10 +545,10 @@ var client = new ConfidentLevelsInTspClient(endpoint);
 var data = new {
     age = 1234,
     name = "<name>",
-    size = 123.45d,
+    size = 3.14d,
 };
 
-Response response = await client.UseDerivedModelAsync(RequestContent.Create(data));
+Response response = await client.UseDerivedModelAsync(RequestContent.Create(data)).ConfigureAwait(false);
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
@@ -575,7 +575,7 @@ var client = new ConfidentLevelsInTspClient(endpoint);
 var data = new {
     age = 1234,
     name = "<name>",
-    size = 123.45d,
+    size = 3.14d,
 };
 
 Response response = client.UseDerivedModel(RequestContent.Create(data));
@@ -595,11 +595,11 @@ var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new ConfidentLevelsInTspClient(endpoint);
 
 var data = new {
-    unionProperty = new {},
+    unionProperty = new object(),
     name = "<name>",
 };
 
-Response response = await client.UseDerivedModelWithUnionAsync(RequestContent.Create(data));
+Response response = await client.UseDerivedModelWithUnionAsync(RequestContent.Create(data)).ConfigureAwait(false);
 Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call UseDerivedModelWithUnionAsync with all request content.
@@ -608,12 +608,12 @@ var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new ConfidentLevelsInTspClient(endpoint);
 
 var data = new {
-    unionProperty = new {},
+    unionProperty = new object(),
     name = "<name>",
-    size = 123.45d,
+    size = 3.14d,
 };
 
-Response response = await client.UseDerivedModelWithUnionAsync(RequestContent.Create(data));
+Response response = await client.UseDerivedModelWithUnionAsync(RequestContent.Create(data)).ConfigureAwait(false);
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
@@ -626,7 +626,7 @@ var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new ConfidentLevelsInTspClient(endpoint);
 
 var data = new {
-    unionProperty = new {},
+    unionProperty = new object(),
     name = "<name>",
 };
 
@@ -639,9 +639,9 @@ var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new ConfidentLevelsInTspClient(endpoint);
 
 var data = new {
-    unionProperty = new {},
+    unionProperty = new object(),
     name = "<name>",
-    size = 123.45d,
+    size = 3.14d,
 };
 
 Response response = client.UseDerivedModelWithUnion(RequestContent.Create(data));

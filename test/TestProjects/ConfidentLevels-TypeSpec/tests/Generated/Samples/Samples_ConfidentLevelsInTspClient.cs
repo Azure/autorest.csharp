@@ -26,7 +26,7 @@ namespace ConfidentLevelsInTsp.Samples
 
             var data = new
             {
-                unionProperty = new { },
+                unionProperty = new object(),
             };
 
             Response response = client.UnionInRequestProperty(RequestContent.Create(data));
@@ -42,7 +42,7 @@ namespace ConfidentLevelsInTsp.Samples
 
             var data = new
             {
-                unionProperty = new { },
+                unionProperty = new object(),
             };
 
             Response response = client.UnionInRequestProperty(RequestContent.Create(data));
@@ -58,10 +58,10 @@ namespace ConfidentLevelsInTsp.Samples
 
             var data = new
             {
-                unionProperty = new { },
+                unionProperty = new object(),
             };
 
-            Response response = await client.UnionInRequestPropertyAsync(RequestContent.Create(data));
+            Response response = await client.UnionInRequestPropertyAsync(RequestContent.Create(data)).ConfigureAwait(false);
             Console.WriteLine(response.Status);
         }
 
