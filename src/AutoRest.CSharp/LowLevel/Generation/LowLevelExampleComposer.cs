@@ -808,8 +808,8 @@ namespace AutoRest.CSharp.Generation.Writers
             _ when TypeFactory.IsList(type) => ComposeConvenienceArrayCSharpType(allProperties, type.Arguments.Single(), includeCollectionInitialization, visitedModels), // IList<T> is guaranteed to have one and only one generic parameter
             _ when TypeFactory.IsDictionary(type) => ComposeConvenienceDictionaryInstance(allProperties, type.Arguments[0], type.Arguments[1], includeCollectionInitialization, visitedModels), // IDictionary<K, V> is guaranteed to have two generic parameters
             { IsFrameworkType: true } => MockParameterTypeValue(propertyDescription, type, null),
-            { IsFrameworkType: false, Implementation: ObjectType objectType } => ComposeObjectType(objectType, allProperties, visitedModels),
-            { IsFrameworkType: false, Implementation: EnumType enumType } => EnumValue(enumType, enumType.Values.First()),
+            { Implementation: SerializableObjectType objectType } => ComposeObjectType(GetMostConcreteModel(objectType), allProperties, visitedModels),
+            { Implementation: EnumType enumType } => EnumValue(enumType, enumType.Values.First()),
             _ => Null
         };
 
@@ -819,12 +819,8 @@ namespace AutoRest.CSharp.Generation.Writers
             JsonArraySerialization array => ComposeProtocolArrayCSharpType(allProperties, array, visitedModels),
             JsonDictionarySerialization dictionary => ComposeProtocolDictionaryInstance(allProperties, dictionary, visitedModels),
             JsonValueSerialization { Type.IsFrameworkType: true } value => MockParameterTypeValue(propertyDescription, value.Type, value.Format),
-            JsonValueSerialization { Type: {IsFrameworkType: false} type }  => type.Implementation switch
-            {
-                SerializableObjectType model => ComposeAnonymousObjectType(GetMostConcreteModel(model), allProperties, visitedModels),
-                EnumType enumType => new ConstantExpression(enumType.Values.First().Value),
-                _ => Null
-            },
+            JsonValueSerialization { Type.Implementation: SerializableObjectType model } => ComposeAnonymousObjectType(GetMostConcreteModel(model), allProperties, visitedModels),
+            JsonValueSerialization { Type: {Implementation: EnumType enumType }} => new ConstantExpression(enumType.Values.First().Value),
             _ => Null
         };
 
@@ -951,6 +947,8 @@ namespace AutoRest.CSharp.Generation.Writers
                     .ToDictionary(p => p.Declaration.Name, p => ComposeConvenienceCSharpTypeInstance(allProperties, p.Declaration.Type, p.Declaration.Name, false, visitedModels))
                 : null;
 
+            visitedModels.Remove(model);
+
             return new NewInstanceExpression(model.Type, arguments, new ObjectInitializerExpression(propertyExpressions, IsInline: false));
         }
 
@@ -968,7 +966,7 @@ namespace AutoRest.CSharp.Generation.Writers
 
             var propertyExpressions = model.JsonSerialization?.Properties
                 .Where(p => !p.ShouldSkipSerialization && !IsVisitedModel(p.ValueSerialization, visitedModels) && (allProperties || p.IsRequired))
-                .ToDictionary(p => p.SerializedName, p => ComposeProtocolCSharpTypeInstance(allProperties, p.ValueSerialization, p.SerializedName, visitedModels));
+                .ToDictionary(p => p.SerializedName, p => ComposeProtocolPropertyValue(p, visitedModels, model.Discriminator, allProperties));
 
             visitedModels.Remove(model);
 
@@ -979,6 +977,11 @@ namespace AutoRest.CSharp.Generation.Writers
 
             return New.Anonymous(propertyExpressions);
         }
+
+        private ValueExpression ComposeProtocolPropertyValue(JsonPropertySerialization propertySerialization, HashSet<ObjectType> visitedModels, ObjectTypeDiscriminator? discriminator, bool allProperties)
+            => discriminator is not null && discriminator.SerializedName == propertySerialization.SerializedName && discriminator.Value is {} discriminatorValue
+                ? new ConstantExpression(discriminatorValue)
+                : ComposeProtocolCSharpTypeInstance(allProperties, propertySerialization.ValueSerialization, propertySerialization.SerializedName, visitedModels);
 
         private static SerializableObjectType GetMostConcreteModel(SerializableObjectType model)
         {

@@ -562,7 +562,7 @@ namespace ModelsTypeSpec.Samples
         1234
     },
             };
-            var result = await client.InputToRoundTripAsync(input);
+            var result = await client.InputToRoundTripAsync(input).ConfigureAwait(false);
         }
 
         [Test]
@@ -991,7 +991,7 @@ namespace ModelsTypeSpec.Samples
         1234
     },
             };
-            var result = await client.InputToRoundTripPrimitiveAsync(input);
+            var result = await client.InputToRoundTripPrimitiveAsync(input).ConfigureAwait(false);
         }
 
         [Test]
@@ -1220,7 +1220,7 @@ namespace ModelsTypeSpec.Samples
                     requiredPropertyOnBase = 1234,
                 },
                 requiredFixedStringEnum = "1",
-                requiredFixedIntEnum = "1",
+                requiredFixedIntEnum = 1,
                 requiredExtensibleEnum = "1",
                 requiredList = new[] {
         new {
@@ -1294,7 +1294,7 @@ namespace ModelsTypeSpec.Samples
                     requiredPropertyOnBase = 1234,
                 },
                 requiredFixedStringEnum = "1",
-                requiredFixedIntEnum = "1",
+                requiredFixedIntEnum = 1,
                 requiredExtensibleEnum = "1",
                 requiredList = new[] {
         new {
@@ -1377,7 +1377,7 @@ namespace ModelsTypeSpec.Samples
                     requiredPropertyOnBase = 1234,
                 },
                 requiredFixedStringEnum = "1",
-                requiredFixedIntEnum = "1",
+                requiredFixedIntEnum = 1,
                 requiredExtensibleEnum = "1",
                 requiredList = new[] {
         new {
@@ -1451,7 +1451,7 @@ namespace ModelsTypeSpec.Samples
                     requiredPropertyOnBase = 1234,
                 },
                 requiredFixedStringEnum = "1",
-                requiredFixedIntEnum = "1",
+                requiredFixedIntEnum = 1,
                 requiredExtensibleEnum = "1",
                 requiredList = new[] {
         new {
