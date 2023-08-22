@@ -286,7 +286,7 @@ namespace AutoRest.CSharp.Generation.Writers
 
                 var responseVariable = new CodeWriterDeclaration("response");
                 _writer
-                    .Append($"{typeof(Response)} {responseVariable:D} = ")
+                    .Append($"{clientMethod.ProtocolMethodSignature.ReturnType} {responseVariable:D} = ")
                     .WriteMethodCall(clientMethod.ProtocolMethodSignature, parameterValues, async)
                     .LineRaw(";");
 
