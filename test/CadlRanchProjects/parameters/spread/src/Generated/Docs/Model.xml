@@ -8,7 +8,7 @@ This sample shows how to call SpreadAsRequestBodyAsync with required parameters.
 var client = new SpreadClient().GetModelClient("1.0.0");
 
 var bodyParameter = new BodyParameter("<name>");
-var result = await client.SpreadAsRequestBodyAsync(bodyParameter);
+var result = await client.SpreadAsRequestBodyAsync(bodyParameter).ConfigureAwait(false);
 ]]></code>
 </example>
     </member>
@@ -33,7 +33,7 @@ var data = new {
     name = "<name>",
 };
 
-Response response = await client.SpreadAsRequestBodyAsync(RequestContent.Create(data));
+Response response = await client.SpreadAsRequestBodyAsync(RequestContent.Create(data)).ConfigureAwait(false);
 Console.WriteLine(response.Status);
 ]]></code>
 </example>

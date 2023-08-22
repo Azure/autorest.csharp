@@ -6,13 +6,10 @@
 #nullable disable
 
 using System;
-using System.Collections.Generic;
-using System.IO;
 using System.Text.Json;
 using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
-using Azure.Identity;
 using NUnit.Framework;
 using _Type.Model.Inheritance.NotDiscriminated.Models;
 
@@ -67,7 +64,7 @@ namespace _Type.Model.Inheritance.NotDiscriminated.Samples
                 name = "<name>",
             };
 
-            Response response = await client.PostValidAsync(RequestContent.Create(data));
+            Response response = await client.PostValidAsync(RequestContent.Create(data)).ConfigureAwait(false);
             Console.WriteLine(response.Status);
         }
 
@@ -84,7 +81,7 @@ namespace _Type.Model.Inheritance.NotDiscriminated.Samples
                 name = "<name>",
             };
 
-            Response response = await client.PostValidAsync(RequestContent.Create(data));
+            Response response = await client.PostValidAsync(RequestContent.Create(data)).ConfigureAwait(false);
             Console.WriteLine(response.Status);
         }
 
@@ -95,7 +92,7 @@ namespace _Type.Model.Inheritance.NotDiscriminated.Samples
             var client = new NotDiscriminatedClient();
 
             var input = new Siamese("<name>", 1234, true);
-            var result = await client.PostValidAsync(input);
+            var result = await client.PostValidAsync(input).ConfigureAwait(false);
         }
 
         [Test]
@@ -132,7 +129,7 @@ namespace _Type.Model.Inheritance.NotDiscriminated.Samples
         {
             var client = new NotDiscriminatedClient();
 
-            Response response = await client.GetValidAsync(new RequestContext());
+            Response response = await client.GetValidAsync(new RequestContext()).ConfigureAwait(false);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("smart").ToString());
@@ -146,7 +143,7 @@ namespace _Type.Model.Inheritance.NotDiscriminated.Samples
         {
             var client = new NotDiscriminatedClient();
 
-            Response response = await client.GetValidAsync(new RequestContext());
+            Response response = await client.GetValidAsync(new RequestContext()).ConfigureAwait(false);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("smart").ToString());
@@ -160,7 +157,7 @@ namespace _Type.Model.Inheritance.NotDiscriminated.Samples
         {
             var client = new NotDiscriminatedClient();
 
-            var result = await client.GetValidAsync();
+            var result = await client.GetValidAsync().ConfigureAwait(false);
         }
 
         [Test]
@@ -218,7 +215,7 @@ namespace _Type.Model.Inheritance.NotDiscriminated.Samples
                 name = "<name>",
             };
 
-            Response response = await client.PutValidAsync(RequestContent.Create(data));
+            Response response = await client.PutValidAsync(RequestContent.Create(data)).ConfigureAwait(false);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("smart").ToString());
@@ -239,7 +236,7 @@ namespace _Type.Model.Inheritance.NotDiscriminated.Samples
                 name = "<name>",
             };
 
-            Response response = await client.PutValidAsync(RequestContent.Create(data));
+            Response response = await client.PutValidAsync(RequestContent.Create(data)).ConfigureAwait(false);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("smart").ToString());
@@ -254,7 +251,7 @@ namespace _Type.Model.Inheritance.NotDiscriminated.Samples
             var client = new NotDiscriminatedClient();
 
             var input = new Siamese("<name>", 1234, true);
-            var result = await client.PutValidAsync(input);
+            var result = await client.PutValidAsync(input).ConfigureAwait(false);
         }
     }
 }

@@ -6,13 +6,10 @@
 #nullable disable
 
 using System;
-using System.Collections.Generic;
-using System.IO;
 using System.Text.Json;
 using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
-using Azure.Identity;
 using Encode.Duration.Models;
 using NUnit.Framework;
 
@@ -65,7 +62,7 @@ namespace Encode.Duration.Samples
                 value = "PT1H23M45S",
             };
 
-            Response response = await client.DefaultAsync(RequestContent.Create(data));
+            Response response = await client.DefaultAsync(RequestContent.Create(data)).ConfigureAwait(false);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("value").ToString());
@@ -82,7 +79,7 @@ namespace Encode.Duration.Samples
                 value = "PT1H23M45S",
             };
 
-            Response response = await client.DefaultAsync(RequestContent.Create(data));
+            Response response = await client.DefaultAsync(RequestContent.Create(data)).ConfigureAwait(false);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("value").ToString());
@@ -94,8 +91,8 @@ namespace Encode.Duration.Samples
         {
             var client = new DurationClient().GetPropertyClient("1.0.0");
 
-            var body = new DefaultDurationProperty(new TimeSpan(1, 2, 3));
-            var result = await client.DefaultAsync(body);
+            var body = new DefaultDurationProperty(new TimeSpan(1, 23, 45));
+            var result = await client.DefaultAsync(body).ConfigureAwait(false);
         }
 
         [Test]
@@ -143,7 +140,7 @@ namespace Encode.Duration.Samples
                 value = "PT1H23M45S",
             };
 
-            Response response = await client.Iso8601Async(RequestContent.Create(data));
+            Response response = await client.Iso8601Async(RequestContent.Create(data)).ConfigureAwait(false);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("value").ToString());
@@ -160,7 +157,7 @@ namespace Encode.Duration.Samples
                 value = "PT1H23M45S",
             };
 
-            Response response = await client.Iso8601Async(RequestContent.Create(data));
+            Response response = await client.Iso8601Async(RequestContent.Create(data)).ConfigureAwait(false);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("value").ToString());
@@ -172,8 +169,8 @@ namespace Encode.Duration.Samples
         {
             var client = new DurationClient().GetPropertyClient("1.0.0");
 
-            var body = new ISO8601DurationProperty(new TimeSpan(1, 2, 3));
-            var result = await client.Iso8601Async(body);
+            var body = new ISO8601DurationProperty(new TimeSpan(1, 23, 45));
+            var result = await client.Iso8601Async(body).ConfigureAwait(false);
         }
 
         [Test]
@@ -221,7 +218,7 @@ namespace Encode.Duration.Samples
                 value = new { },
             };
 
-            Response response = await client.Int32SecondsAsync(RequestContent.Create(data));
+            Response response = await client.Int32SecondsAsync(RequestContent.Create(data)).ConfigureAwait(false);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("value").ToString());
@@ -238,7 +235,7 @@ namespace Encode.Duration.Samples
                 value = new { },
             };
 
-            Response response = await client.Int32SecondsAsync(RequestContent.Create(data));
+            Response response = await client.Int32SecondsAsync(RequestContent.Create(data)).ConfigureAwait(false);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("value").ToString());
@@ -250,8 +247,8 @@ namespace Encode.Duration.Samples
         {
             var client = new DurationClient().GetPropertyClient("1.0.0");
 
-            var body = new Int32SecondsDurationProperty(new TimeSpan(1, 2, 3));
-            var result = await client.Int32SecondsAsync(body);
+            var body = new Int32SecondsDurationProperty(new TimeSpan(1, 23, 45));
+            var result = await client.Int32SecondsAsync(body).ConfigureAwait(false);
         }
 
         [Test]
@@ -328,8 +325,8 @@ namespace Encode.Duration.Samples
         {
             var client = new DurationClient().GetPropertyClient("1.0.0");
 
-            var body = new FloatSecondsDurationProperty(new TimeSpan(1, 2, 3));
-            var result = await client.FloatSecondsAsync(body);
+            var body = new FloatSecondsDurationProperty(new TimeSpan(1, 23, 45));
+            var result = await client.FloatSecondsAsync(body).ConfigureAwait(false);
         }
 
         [Test]

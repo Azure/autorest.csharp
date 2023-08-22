@@ -6,13 +6,8 @@
 #nullable disable
 
 using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Text.Json;
 using System.Threading.Tasks;
 using Azure;
-using Azure.Core;
-using Azure.Identity;
 using NUnit.Framework;
 
 namespace SpecialWords.Samples
@@ -45,7 +40,7 @@ namespace SpecialWords.Samples
         {
             var client = new SpecialWordsClient().GetParameterClient("1.0.0");
 
-            Response response = await client.GetWithIfAsync("<if>");
+            Response response = await client.GetWithIfAsync("<if>").ConfigureAwait(false);
             Console.WriteLine(response.Status);
         }
 
@@ -55,7 +50,7 @@ namespace SpecialWords.Samples
         {
             var client = new SpecialWordsClient().GetParameterClient("1.0.0");
 
-            Response response = await client.GetWithIfAsync("<if>");
+            Response response = await client.GetWithIfAsync("<if>").ConfigureAwait(false);
             Console.WriteLine(response.Status);
         }
 
@@ -85,7 +80,7 @@ namespace SpecialWords.Samples
         {
             var client = new SpecialWordsClient().GetParameterClient("1.0.0");
 
-            Response response = await client.GetWithFilterAsync("<filter>");
+            Response response = await client.GetWithFilterAsync("<filter>").ConfigureAwait(false);
             Console.WriteLine(response.Status);
         }
 
@@ -95,7 +90,7 @@ namespace SpecialWords.Samples
         {
             var client = new SpecialWordsClient().GetParameterClient("1.0.0");
 
-            Response response = await client.GetWithFilterAsync("<filter>");
+            Response response = await client.GetWithFilterAsync("<filter>").ConfigureAwait(false);
             Console.WriteLine(response.Status);
         }
     }

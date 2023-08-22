@@ -6,13 +6,8 @@
 #nullable disable
 
 using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Text.Json;
 using System.Threading.Tasks;
 using Azure;
-using Azure.Core;
-using Azure.Identity;
 using NUnit.Framework;
 
 namespace SpecialHeaders.Repeatability.Samples
@@ -45,7 +40,7 @@ namespace SpecialHeaders.Repeatability.Samples
         {
             var client = new RepeatabilityClient();
 
-            Response response = await client.ImmediateSuccessAsync();
+            Response response = await client.ImmediateSuccessAsync().ConfigureAwait(false);
             Console.WriteLine(response.Status);
         }
 
@@ -55,7 +50,7 @@ namespace SpecialHeaders.Repeatability.Samples
         {
             var client = new RepeatabilityClient();
 
-            Response response = await client.ImmediateSuccessAsync();
+            Response response = await client.ImmediateSuccessAsync().ConfigureAwait(false);
             Console.WriteLine(response.Status);
         }
     }

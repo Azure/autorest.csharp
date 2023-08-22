@@ -7,7 +7,7 @@ This sample shows how to call ImmediateSuccessAsync.
 <code><![CDATA[
 var client = new RepeatabilityClient();
 
-Response response = await client.ImmediateSuccessAsync();
+Response response = await client.ImmediateSuccessAsync().ConfigureAwait(false);
 Console.WriteLine(response.Status);
 ]]></code>
 </example>

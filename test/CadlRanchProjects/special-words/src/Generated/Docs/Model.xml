@@ -7,7 +7,7 @@ This sample shows how to call GetModelValueAsync.
 <code><![CDATA[
 var client = new SpecialWordsClient().GetModelClient("1.0.0");
 
-var result = await client.GetModelValueAsync();
+var result = await client.GetModelValueAsync().ConfigureAwait(false);
 ]]></code>
 </example>
     </member>
@@ -27,7 +27,7 @@ This sample shows how to call GetModelAsync and parse the result.
 <code><![CDATA[
 var client = new SpecialWordsClient().GetModelClient("1.0.0");
 
-Response response = await client.GetModelAsync();
+Response response = await client.GetModelAsync().ConfigureAwait(false);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("model.kind").ToString());
@@ -54,7 +54,7 @@ This sample shows how to call PutAsync with required parameters.
 var client = new SpecialWordsClient().GetModelClient("1.0.0");
 
 var body = new DerivedModel("<derivedName>", "<for>");
-var result = await client.PutAsync(body);
+var result = await client.PutAsync(body).ConfigureAwait(false);
 ]]></code>
 </example>
     </member>
@@ -75,13 +75,14 @@ This sample shows how to call PutAsync with required request content.
 <code><![CDATA[
 var client = new SpecialWordsClient().GetModelClient("1.0.0");
 
-var data = new {
-    derivedname = "<derived.name>",
-    @for = "<for>",
-    modelkind = "derived",
+var data = new Dictionary<string, object>
+{
+    ["derived.name"] = "<derived.name>",
+    ["for"] = "<for>",
+    ["model.kind"] = "derived"
 };
 
-Response response = await client.PutAsync(RequestContent.Create(data));
+Response response = await client.PutAsync(RequestContent.Create(data)).ConfigureAwait(false);
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
@@ -92,10 +93,11 @@ This sample shows how to call Put with required request content.
 <code><![CDATA[
 var client = new SpecialWordsClient().GetModelClient("1.0.0");
 
-var data = new {
-    derivedname = "<derived.name>",
-    @for = "<for>",
-    modelkind = "derived",
+var data = new Dictionary<string, object>
+{
+    ["derived.name"] = "<derived.name>",
+    ["for"] = "<for>",
+    ["model.kind"] = "derived"
 };
 
 Response response = client.Put(RequestContent.Create(data));

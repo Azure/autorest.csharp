@@ -36,7 +36,7 @@ namespace SpecialWords
         /// <param name="clientDiagnostics"> The handler for diagnostic messaging in the client. </param>
         /// <param name="pipeline"> The HTTP pipeline for sending and receiving REST requests and responses. </param>
         /// <param name="endpoint"> TestServer endpoint. </param>
-        /// <param name="apiVersion"> The String to use. </param>
+        /// <param name="apiVersion"> The string to use. </param>
         internal Parameter(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Uri endpoint, string apiVersion)
         {
             ClientDiagnostics = clientDiagnostics;
@@ -56,7 +56,7 @@ namespace SpecialWords
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="if"> The String to use. </param>
+        /// <param name="if"> The string to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="if"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
@@ -91,7 +91,7 @@ namespace SpecialWords
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="if"> The String to use. </param>
+        /// <param name="if"> The string to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="if"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
@@ -126,7 +126,7 @@ namespace SpecialWords
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="filter"> The String to use. </param>
+        /// <param name="filter"> The string to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="filter"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
@@ -161,7 +161,7 @@ namespace SpecialWords
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="filter"> The String to use. </param>
+        /// <param name="filter"> The string to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="filter"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>

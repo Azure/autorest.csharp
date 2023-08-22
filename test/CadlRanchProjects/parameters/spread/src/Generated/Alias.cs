@@ -11,7 +11,6 @@ using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
 using Azure.Core.Pipeline;
-using Parameters.Spread.Models;
 
 namespace Parameters.Spread
 {
@@ -38,7 +37,7 @@ namespace Parameters.Spread
         /// <param name="clientDiagnostics"> The handler for diagnostic messaging in the client. </param>
         /// <param name="pipeline"> The HTTP pipeline for sending and receiving REST requests and responses. </param>
         /// <param name="endpoint"> TestServer endpoint. </param>
-        /// <param name="apiVersion"> The String to use. </param>
+        /// <param name="apiVersion"> The string to use. </param>
         internal Alias(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Uri endpoint, string apiVersion)
         {
             ClientDiagnostics = clientDiagnostics;
@@ -250,8 +249,8 @@ namespace Parameters.Spread
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="id"> The String to use. </param>
-        /// <param name="xMsTestHeader"> The String to use. </param>
+        /// <param name="id"> The string to use. </param>
+        /// <param name="xMsTestHeader"> The string to use. </param>
         /// <param name="content"> The content to send as the body of the request. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="id"/>, <paramref name="xMsTestHeader"/> or <paramref name="content"/> is null. </exception>

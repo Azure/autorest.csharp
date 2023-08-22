@@ -6,13 +6,8 @@
 #nullable disable
 
 using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Text.Json;
 using System.Threading.Tasks;
 using Azure;
-using Azure.Core;
-using Azure.Identity;
 using NUnit.Framework;
 
 namespace SpecialHeaders.ClientRequestId.Samples
@@ -45,7 +40,7 @@ namespace SpecialHeaders.ClientRequestId.Samples
         {
             var client = new ClientRequestIdClient();
 
-            Response response = await client.GetClientRequestIdAsync();
+            Response response = await client.GetClientRequestIdAsync().ConfigureAwait(false);
             Console.WriteLine(response.Status);
         }
 
@@ -55,7 +50,7 @@ namespace SpecialHeaders.ClientRequestId.Samples
         {
             var client = new ClientRequestIdClient();
 
-            Response response = await client.GetClientRequestIdAsync();
+            Response response = await client.GetClientRequestIdAsync().ConfigureAwait(false);
             Console.WriteLine(response.Status);
         }
     }

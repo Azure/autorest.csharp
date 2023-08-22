@@ -7,7 +7,7 @@ This sample shows how to call ForAsync.
 <code><![CDATA[
 var client = new SpecialWordsClient().GetOperationClient("1.0.0");
 
-Response response = await client.ForAsync();
+Response response = await client.ForAsync().ConfigureAwait(false);
 Console.WriteLine(response.Status);
 ]]></code>
 </example>

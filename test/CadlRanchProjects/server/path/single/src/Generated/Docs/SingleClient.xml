@@ -8,7 +8,7 @@ This sample shows how to call MyOpAsync.
 var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new SingleClient(endpoint);
 
-Response response = await client.MyOpAsync();
+Response response = await client.MyOpAsync().ConfigureAwait(false);
 Console.WriteLine(response.Status);
 ]]></code>
 </example>

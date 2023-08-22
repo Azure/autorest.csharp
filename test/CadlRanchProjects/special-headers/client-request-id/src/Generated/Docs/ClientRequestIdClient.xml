@@ -7,7 +7,7 @@ This sample shows how to call GetClientRequestIdAsync.
 <code><![CDATA[
 var client = new ClientRequestIdClient();
 
-Response response = await client.GetClientRequestIdAsync();
+Response response = await client.GetClientRequestIdAsync().ConfigureAwait(false);
 Console.WriteLine(response.Status);
 ]]></code>
 </example>

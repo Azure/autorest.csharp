@@ -7,7 +7,7 @@ This sample shows how to call SpreadAsRequestBodyAsync with required parameters.
 <code><![CDATA[
 var client = new SpreadClient().GetAliasClient("1.0.0");
 
-var result = await client.SpreadAsRequestBodyAsync("<name>");
+var result = await client.SpreadAsRequestBodyAsync("<name>").ConfigureAwait(false);
 ]]></code>
 </example>
     </member>
@@ -31,7 +31,7 @@ var data = new {
     name = "<name>",
 };
 
-Response response = await client.SpreadAsRequestBodyAsync(RequestContent.Create(data));
+Response response = await client.SpreadAsRequestBodyAsync(RequestContent.Create(data)).ConfigureAwait(false);
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
@@ -57,7 +57,7 @@ This sample shows how to call SpreadAsRequestParameterAsync with required parame
 <code><![CDATA[
 var client = new SpreadClient().GetAliasClient("1.0.0");
 
-var result = await client.SpreadAsRequestParameterAsync("<id>", "<xMsTestHeader>", "<name>");
+var result = await client.SpreadAsRequestParameterAsync("<id>", "<xMsTestHeader>", "<name>").ConfigureAwait(false);
 ]]></code>
 </example>
     </member>
@@ -81,7 +81,7 @@ var data = new {
     name = "<name>",
 };
 
-Response response = await client.SpreadAsRequestParameterAsync("<id>", "<xMsTestHeader>", RequestContent.Create(data));
+Response response = await client.SpreadAsRequestParameterAsync("<id>", "<xMsTestHeader>", RequestContent.Create(data)).ConfigureAwait(false);
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
@@ -107,7 +107,7 @@ This sample shows how to call SpreadWithMultipleParametersAsync with required pa
 <code><![CDATA[
 var client = new SpreadClient().GetAliasClient("1.0.0");
 
-var result = await client.SpreadWithMultipleParametersAsync("<id>", "<xMsTestHeader>", "<prop1>", "<prop2>", "<prop3>", "<prop4>", "<prop5>", "<prop6>");
+var result = await client.SpreadWithMultipleParametersAsync("<id>", "<xMsTestHeader>", "<prop1>", "<prop2>", "<prop3>", "<prop4>", "<prop5>", "<prop6>").ConfigureAwait(false);
 ]]></code>
 </example>
     </member>
@@ -136,7 +136,7 @@ var data = new {
     prop6 = "<prop6>",
 };
 
-Response response = await client.SpreadWithMultipleParametersAsync("<id>", "<xMsTestHeader>", RequestContent.Create(data));
+Response response = await client.SpreadWithMultipleParametersAsync("<id>", "<xMsTestHeader>", RequestContent.Create(data)).ConfigureAwait(false);
 Console.WriteLine(response.Status);
 ]]></code>
 </example>

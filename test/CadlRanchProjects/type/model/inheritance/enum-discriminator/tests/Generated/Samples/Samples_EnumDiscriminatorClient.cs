@@ -6,13 +6,10 @@
 #nullable disable
 
 using System;
-using System.Collections.Generic;
-using System.IO;
 using System.Text.Json;
 using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
-using Azure.Identity;
 using NUnit.Framework;
 using _Type.Model.Inheritance.EnumDiscriminator.Models;
 
@@ -52,7 +49,7 @@ namespace _Type.Model.Inheritance.EnumDiscriminator.Samples
         {
             var client = new EnumDiscriminatorClient();
 
-            Response response = await client.GetExtensibleModelAsync(new RequestContext());
+            Response response = await client.GetExtensibleModelAsync(new RequestContext()).ConfigureAwait(false);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("kind").ToString());
@@ -65,7 +62,7 @@ namespace _Type.Model.Inheritance.EnumDiscriminator.Samples
         {
             var client = new EnumDiscriminatorClient();
 
-            Response response = await client.GetExtensibleModelAsync(new RequestContext());
+            Response response = await client.GetExtensibleModelAsync(new RequestContext()).ConfigureAwait(false);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("kind").ToString());
@@ -78,7 +75,7 @@ namespace _Type.Model.Inheritance.EnumDiscriminator.Samples
         {
             var client = new EnumDiscriminatorClient();
 
-            var result = await client.GetExtensibleModelAsync();
+            var result = await client.GetExtensibleModelAsync().ConfigureAwait(false);
         }
 
         [Test]

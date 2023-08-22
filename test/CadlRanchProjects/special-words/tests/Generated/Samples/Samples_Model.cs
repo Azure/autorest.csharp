@@ -7,12 +7,10 @@
 
 using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Text.Json;
 using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
-using Azure.Identity;
 using NUnit.Framework;
 using SpecialWords.Models;
 
@@ -50,7 +48,7 @@ namespace SpecialWords.Samples
         {
             var client = new SpecialWordsClient().GetModelClient("1.0.0");
 
-            Response response = await client.GetModelAsync();
+            Response response = await client.GetModelAsync().ConfigureAwait(false);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("model.kind").ToString());
@@ -62,7 +60,7 @@ namespace SpecialWords.Samples
         {
             var client = new SpecialWordsClient().GetModelClient("1.0.0");
 
-            Response response = await client.GetModelAsync();
+            Response response = await client.GetModelAsync().ConfigureAwait(false);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("model.kind").ToString());
@@ -74,7 +72,7 @@ namespace SpecialWords.Samples
         {
             var client = new SpecialWordsClient().GetModelClient("1.0.0");
 
-            var result = await client.GetModelValueAsync();
+            var result = await client.GetModelValueAsync().ConfigureAwait(false);
         }
 
         [Test]
@@ -83,11 +81,11 @@ namespace SpecialWords.Samples
         {
             var client = new SpecialWordsClient().GetModelClient("1.0.0");
 
-            var data = new
+            var data = new Dictionary<string, object>
             {
-                derivedname = "<derived.name>",
-                @for = "<for>",
-                modelkind = "derived",
+                ["derived.name"] = "<derived.name>",
+                ["for"] = "<for>",
+                ["model.kind"] = "derived"
             };
 
             Response response = client.Put(RequestContent.Create(data));
@@ -100,11 +98,11 @@ namespace SpecialWords.Samples
         {
             var client = new SpecialWordsClient().GetModelClient("1.0.0");
 
-            var data = new
+            var data = new Dictionary<string, object>
             {
-                derivedname = "<derived.name>",
-                @for = "<for>",
-                modelkind = "derived",
+                ["derived.name"] = "<derived.name>",
+                ["for"] = "<for>",
+                ["model.kind"] = "derived"
             };
 
             Response response = client.Put(RequestContent.Create(data));
@@ -117,14 +115,14 @@ namespace SpecialWords.Samples
         {
             var client = new SpecialWordsClient().GetModelClient("1.0.0");
 
-            var data = new
+            var data = new Dictionary<string, object>
             {
-                derivedname = "<derived.name>",
-                @for = "<for>",
-                modelkind = "derived",
+                ["derived.name"] = "<derived.name>",
+                ["for"] = "<for>",
+                ["model.kind"] = "derived"
             };
 
-            Response response = await client.PutAsync(RequestContent.Create(data));
+            Response response = await client.PutAsync(RequestContent.Create(data)).ConfigureAwait(false);
             Console.WriteLine(response.Status);
         }
 
@@ -134,14 +132,14 @@ namespace SpecialWords.Samples
         {
             var client = new SpecialWordsClient().GetModelClient("1.0.0");
 
-            var data = new
+            var data = new Dictionary<string, object>
             {
-                derivedname = "<derived.name>",
-                @for = "<for>",
-                modelkind = "derived",
+                ["derived.name"] = "<derived.name>",
+                ["for"] = "<for>",
+                ["model.kind"] = "derived"
             };
 
-            Response response = await client.PutAsync(RequestContent.Create(data));
+            Response response = await client.PutAsync(RequestContent.Create(data)).ConfigureAwait(false);
             Console.WriteLine(response.Status);
         }
 
@@ -152,7 +150,7 @@ namespace SpecialWords.Samples
             var client = new SpecialWordsClient().GetModelClient("1.0.0");
 
             var body = new DerivedModel("<derivedName>", "<for>");
-            var result = await client.PutAsync(body);
+            var result = await client.PutAsync(body).ConfigureAwait(false);
         }
     }
 }

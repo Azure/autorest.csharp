@@ -8,7 +8,7 @@ This sample shows how to call PostValidAsync with required parameters.
 var client = new NotDiscriminatedClient();
 
 var input = new Siamese("<name>", 1234, true);
-var result = await client.PostValidAsync(input);
+var result = await client.PostValidAsync(input).ConfigureAwait(false);
 ]]></code>
 </example>
     </member>
@@ -35,7 +35,7 @@ var data = new {
     name = "<name>",
 };
 
-Response response = await client.PostValidAsync(RequestContent.Create(data));
+Response response = await client.PostValidAsync(RequestContent.Create(data)).ConfigureAwait(false);
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
@@ -63,7 +63,7 @@ This sample shows how to call GetValidAsync.
 <code><![CDATA[
 var client = new NotDiscriminatedClient();
 
-var result = await client.GetValidAsync();
+var result = await client.GetValidAsync().ConfigureAwait(false);
 ]]></code>
 </example>
     </member>
@@ -83,7 +83,7 @@ This sample shows how to call GetValidAsync with required parameters and parse t
 <code><![CDATA[
 var client = new NotDiscriminatedClient();
 
-Response response = await client.GetValidAsync(new RequestContext());
+Response response = await client.GetValidAsync(new RequestContext()).ConfigureAwait(false);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("smart").ToString());
@@ -114,7 +114,7 @@ This sample shows how to call PutValidAsync with required parameters.
 var client = new NotDiscriminatedClient();
 
 var input = new Siamese("<name>", 1234, true);
-var result = await client.PutValidAsync(input);
+var result = await client.PutValidAsync(input).ConfigureAwait(false);
 ]]></code>
 </example>
     </member>
@@ -141,7 +141,7 @@ var data = new {
     name = "<name>",
 };
 
-Response response = await client.PutValidAsync(RequestContent.Create(data));
+Response response = await client.PutValidAsync(RequestContent.Create(data)).ConfigureAwait(false);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("smart").ToString());

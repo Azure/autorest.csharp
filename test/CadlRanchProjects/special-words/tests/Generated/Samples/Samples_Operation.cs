@@ -6,13 +6,8 @@
 #nullable disable
 
 using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Text.Json;
 using System.Threading.Tasks;
 using Azure;
-using Azure.Core;
-using Azure.Identity;
 using NUnit.Framework;
 
 namespace SpecialWords.Samples
@@ -45,7 +40,7 @@ namespace SpecialWords.Samples
         {
             var client = new SpecialWordsClient().GetOperationClient("1.0.0");
 
-            Response response = await client.ForAsync();
+            Response response = await client.ForAsync().ConfigureAwait(false);
             Console.WriteLine(response.Status);
         }
 
@@ -55,7 +50,7 @@ namespace SpecialWords.Samples
         {
             var client = new SpecialWordsClient().GetOperationClient("1.0.0");
 
-            Response response = await client.ForAsync();
+            Response response = await client.ForAsync().ConfigureAwait(false);
             Console.WriteLine(response.Status);
         }
     }

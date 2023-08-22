@@ -7,7 +7,7 @@ This sample shows how to call GetWithIfAsync with required parameters.
 <code><![CDATA[
 var client = new SpecialWordsClient().GetParameterClient("1.0.0");
 
-Response response = await client.GetWithIfAsync("<if>");
+Response response = await client.GetWithIfAsync("<if>").ConfigureAwait(false);
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
@@ -29,7 +29,7 @@ This sample shows how to call GetWithFilterAsync with required parameters.
 <code><![CDATA[
 var client = new SpecialWordsClient().GetParameterClient("1.0.0");
 
-Response response = await client.GetWithFilterAsync("<filter>");
+Response response = await client.GetWithFilterAsync("<filter>").ConfigureAwait(false);
 Console.WriteLine(response.Status);
 ]]></code>
 </example>

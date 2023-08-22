@@ -44,7 +44,7 @@ namespace SpecialWords
         }
 
         /// <summary> Initializes a new instance of Operation. </summary>
-        /// <param name="apiVersion"> The String to use. </param>
+        /// <param name="apiVersion"> The string to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="apiVersion"/> is null. </exception>
         public virtual Operation GetOperationClient(string apiVersion = "1.0.0")
         {
@@ -54,7 +54,7 @@ namespace SpecialWords
         }
 
         /// <summary> Initializes a new instance of Parameter. </summary>
-        /// <param name="apiVersion"> The String to use. </param>
+        /// <param name="apiVersion"> The string to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="apiVersion"/> is null. </exception>
         public virtual Parameter GetParameterClient(string apiVersion = "1.0.0")
         {
@@ -64,7 +64,7 @@ namespace SpecialWords
         }
 
         /// <summary> Initializes a new instance of Model. </summary>
-        /// <param name="apiVersion"> The String to use. </param>
+        /// <param name="apiVersion"> The string to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="apiVersion"/> is null. </exception>
         public virtual Model GetModelClient(string apiVersion = "1.0.0")
         {

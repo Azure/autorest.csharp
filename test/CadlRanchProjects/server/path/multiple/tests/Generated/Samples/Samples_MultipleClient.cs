@@ -6,13 +6,8 @@
 #nullable disable
 
 using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Text.Json;
 using System.Threading.Tasks;
 using Azure;
-using Azure.Core;
-using Azure.Identity;
 using NUnit.Framework;
 
 namespace Server.Path.Multiple.Samples
@@ -48,7 +43,7 @@ namespace Server.Path.Multiple.Samples
             var endpoint = new Uri("<https://my-service.azure.com>");
             var client = new MultipleClient(endpoint);
 
-            Response response = await client.NoOperationParamsAsync();
+            Response response = await client.NoOperationParamsAsync().ConfigureAwait(false);
             Console.WriteLine(response.Status);
         }
 
@@ -59,7 +54,7 @@ namespace Server.Path.Multiple.Samples
             var endpoint = new Uri("<https://my-service.azure.com>");
             var client = new MultipleClient(endpoint);
 
-            Response response = await client.NoOperationParamsAsync();
+            Response response = await client.NoOperationParamsAsync().ConfigureAwait(false);
             Console.WriteLine(response.Status);
         }
 
@@ -92,7 +87,7 @@ namespace Server.Path.Multiple.Samples
             var endpoint = new Uri("<https://my-service.azure.com>");
             var client = new MultipleClient(endpoint);
 
-            Response response = await client.WithOperationPathParamAsync("<keyword>");
+            Response response = await client.WithOperationPathParamAsync("<keyword>").ConfigureAwait(false);
             Console.WriteLine(response.Status);
         }
 
@@ -103,7 +98,7 @@ namespace Server.Path.Multiple.Samples
             var endpoint = new Uri("<https://my-service.azure.com>");
             var client = new MultipleClient(endpoint);
 
-            Response response = await client.WithOperationPathParamAsync("<keyword>");
+            Response response = await client.WithOperationPathParamAsync("<keyword>").ConfigureAwait(false);
             Console.WriteLine(response.Status);
         }
     }

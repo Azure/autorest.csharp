@@ -6,13 +6,10 @@
 #nullable disable
 
 using System;
-using System.Collections.Generic;
-using System.IO;
 using System.Text.Json;
 using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
-using Azure.Identity;
 using NUnit.Framework;
 using _Type._Enum.Extensible.Models;
 
@@ -50,7 +47,7 @@ namespace _Type._Enum.Extensible.Samples
         {
             var client = new ExtensibleClient();
 
-            Response response = await client.GetKnownValueAsync(new RequestContext());
+            Response response = await client.GetKnownValueAsync(new RequestContext()).ConfigureAwait(false);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());
@@ -62,7 +59,7 @@ namespace _Type._Enum.Extensible.Samples
         {
             var client = new ExtensibleClient();
 
-            Response response = await client.GetKnownValueAsync(new RequestContext());
+            Response response = await client.GetKnownValueAsync(new RequestContext()).ConfigureAwait(false);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());
@@ -74,7 +71,7 @@ namespace _Type._Enum.Extensible.Samples
         {
             var client = new ExtensibleClient();
 
-            var result = await client.GetKnownValueAsync();
+            var result = await client.GetKnownValueAsync().ConfigureAwait(false);
         }
 
         [Test]
@@ -107,7 +104,7 @@ namespace _Type._Enum.Extensible.Samples
         {
             var client = new ExtensibleClient();
 
-            Response response = await client.GetUnknownValueAsync(new RequestContext());
+            Response response = await client.GetUnknownValueAsync(new RequestContext()).ConfigureAwait(false);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());
@@ -119,7 +116,7 @@ namespace _Type._Enum.Extensible.Samples
         {
             var client = new ExtensibleClient();
 
-            Response response = await client.GetUnknownValueAsync(new RequestContext());
+            Response response = await client.GetUnknownValueAsync(new RequestContext()).ConfigureAwait(false);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());
@@ -131,7 +128,7 @@ namespace _Type._Enum.Extensible.Samples
         {
             var client = new ExtensibleClient();
 
-            var result = await client.GetUnknownValueAsync();
+            var result = await client.GetUnknownValueAsync().ConfigureAwait(false);
         }
 
         [Test]
@@ -166,7 +163,7 @@ namespace _Type._Enum.Extensible.Samples
 
             var data = "Monday";
 
-            Response response = await client.PutKnownValueAsync(RequestContent.Create(data));
+            Response response = await client.PutKnownValueAsync(RequestContent.Create(data)).ConfigureAwait(false);
             Console.WriteLine(response.Status);
         }
 
@@ -178,7 +175,7 @@ namespace _Type._Enum.Extensible.Samples
 
             var data = "Monday";
 
-            Response response = await client.PutKnownValueAsync(RequestContent.Create(data));
+            Response response = await client.PutKnownValueAsync(RequestContent.Create(data)).ConfigureAwait(false);
             Console.WriteLine(response.Status);
         }
 
@@ -189,7 +186,7 @@ namespace _Type._Enum.Extensible.Samples
             var client = new ExtensibleClient();
 
             var body = DaysOfWeekExtensibleEnum.Monday;
-            var result = await client.PutKnownValueAsync(body);
+            var result = await client.PutKnownValueAsync(body).ConfigureAwait(false);
         }
 
         [Test]
@@ -224,7 +221,7 @@ namespace _Type._Enum.Extensible.Samples
 
             var data = "Monday";
 
-            Response response = await client.PutUnknownValueAsync(RequestContent.Create(data));
+            Response response = await client.PutUnknownValueAsync(RequestContent.Create(data)).ConfigureAwait(false);
             Console.WriteLine(response.Status);
         }
 
@@ -236,7 +233,7 @@ namespace _Type._Enum.Extensible.Samples
 
             var data = "Monday";
 
-            Response response = await client.PutUnknownValueAsync(RequestContent.Create(data));
+            Response response = await client.PutUnknownValueAsync(RequestContent.Create(data)).ConfigureAwait(false);
             Console.WriteLine(response.Status);
         }
 
@@ -247,7 +244,7 @@ namespace _Type._Enum.Extensible.Samples
             var client = new ExtensibleClient();
 
             var body = DaysOfWeekExtensibleEnum.Monday;
-            var result = await client.PutUnknownValueAsync(body);
+            var result = await client.PutUnknownValueAsync(body).ConfigureAwait(false);
         }
     }
 }

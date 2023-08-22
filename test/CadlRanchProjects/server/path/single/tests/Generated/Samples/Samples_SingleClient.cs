@@ -6,13 +6,8 @@
 #nullable disable
 
 using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Text.Json;
 using System.Threading.Tasks;
 using Azure;
-using Azure.Core;
-using Azure.Identity;
 using NUnit.Framework;
 
 namespace Server.Path.Single.Samples
@@ -48,7 +43,7 @@ namespace Server.Path.Single.Samples
             var endpoint = new Uri("<https://my-service.azure.com>");
             var client = new SingleClient(endpoint);
 
-            Response response = await client.MyOpAsync();
+            Response response = await client.MyOpAsync().ConfigureAwait(false);
             Console.WriteLine(response.Status);
         }
 
@@ -59,7 +54,7 @@ namespace Server.Path.Single.Samples
             var endpoint = new Uri("<https://my-service.azure.com>");
             var client = new SingleClient(endpoint);
 
-            Response response = await client.MyOpAsync();
+            Response response = await client.MyOpAsync().ConfigureAwait(false);
             Console.WriteLine(response.Status);
         }
     }
