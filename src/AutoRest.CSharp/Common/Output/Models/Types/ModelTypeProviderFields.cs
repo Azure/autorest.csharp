@@ -30,7 +30,7 @@ namespace AutoRest.CSharp.Output.Models.Types
         public int Count => _fields.Count;
         public FieldDeclaration? AdditionalProperties { get; }
 
-        public ModelTypeProviderFields(IReadOnlyList<InputModelProperty> properties, string inputModelName, InputModelTypeUsage inputModelUsage, TypeFactory typeFactory, ModelTypeMapping? sourceTypeMapping, InputDictionaryType? additionalPropertiesType, bool isStruct)
+        public ModelTypeProviderFields(IReadOnlyList<InputModelProperty> properties, string inputModelName, InputModelTypeUsage inputModelUsage, TypeFactory typeFactory, ModelTypeMapping? sourceTypeMapping, InputDictionaryType? additionalPropertiesType, bool isStruct, bool isPropertyBag)
         {
             var fields = new List<FieldDeclaration>();
             var fieldsToInputs = new Dictionary<FieldDeclaration, InputModelProperty>();
@@ -59,7 +59,7 @@ namespace AutoRest.CSharp.Output.Models.Types
                 var serialization = sourceTypeMapping?.GetForMemberSerialization(existingMember);
                 var field = existingMember is not null
                     ? CreateFieldFromExisting(existingMember, serialization, propertyType, inputModelProperty, typeFactory, optionalViaNullability)
-                    : CreateField(originalFieldName, propertyType, inputModelUsage, inputModelProperty, isStruct, optionalViaNullability);
+                    : CreateField(originalFieldName, propertyType, inputModelUsage, inputModelProperty, isStruct, isPropertyBag, optionalViaNullability);
 
                 if (existingMember is not null)
                 {
@@ -165,22 +165,9 @@ namespace AutoRest.CSharp.Output.Models.Types
         public IEnumerator<FieldDeclaration> GetEnumerator() => _fields.GetEnumerator();
         IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
 
-        private static FieldDeclaration CreateField(string fieldName, CSharpType originalType, InputModelTypeUsage usage, InputModelProperty inputModelProperty, bool isStruct, bool optionalViaNullability)
+        private static FieldDeclaration CreateField(string fieldName, CSharpType originalType, InputModelTypeUsage usage, InputModelProperty inputModelProperty, bool isStruct, bool isPropertyBag, bool optionalViaNullability)
         {
-            var propertyIsRequiredInNonRoundTripModel = usage is InputModelTypeUsage.Input or InputModelTypeUsage.Output && inputModelProperty.IsRequired;
-            var propertyIsOptionalInOutputModel = usage is InputModelTypeUsage.Output && !inputModelProperty.IsRequired;
-            var propertyIsConstant = inputModelProperty.ConstantValue is not null;
             var propertyIsDiscriminator = inputModelProperty.IsDiscriminator;
-
-            var propertyShouldOmitSetter = !propertyIsDiscriminator && (
-                inputModelProperty.IsReadOnly || // a property will not have setter when it is readonly
-                isStruct || // structs must have all their properties set in constructor
-                !usage.HasFlag(InputModelTypeUsage.Input) || // In Legacy DataPlane, non-input models have read-only properties
-                (propertyIsConstant && inputModelProperty.IsRequired) || // a property will not have setter when it is required literal type
-                (TypeFactory.IsCollectionType(originalType) && !originalType.IsNullable) || // a property will not have setter when it is a non-nullable collection
-                propertyIsRequiredInNonRoundTripModel || // a property will explicitly omit its setter when it is useless
-                propertyIsOptionalInOutputModel); // a property will explicitly omit its setter when it is useless
-
             if (optionalViaNullability)
             {
                 originalType = originalType.WithNullable(true);
@@ -198,7 +185,7 @@ namespace AutoRest.CSharp.Output.Models.Types
                 fieldModifiers = Public;
             }
 
-            if (propertyShouldOmitSetter)
+            if (PropertyIsReadOnly(inputModelProperty, usage, originalType, isStruct, isPropertyBag))
             {
                 fieldModifiers |= ReadOnly;
             }
@@ -216,6 +203,49 @@ namespace AutoRest.CSharp.Output.Models.Types
                 WriteAsProperty: true,
                 SetterModifiers: setterModifiers);
         }
+
+        private static bool PropertyIsReadOnly(InputModelProperty property, InputModelTypeUsage usage, CSharpType type, bool isStruct, bool isPropertyBag)
+        {
+            if (property.IsDiscriminator)
+            {
+                // discriminator properties should be writable because we need to set values to the discriminators in the public ctor of derived classes.
+                return false;
+            }
+
+            // a property will not have setter when it is readonly
+            if (property.IsReadOnly)
+            {
+                return true;
+            }
+
+            // structs must have all their properties set in constructor
+            if (isStruct)
+            {
+                return true;
+            }
+
+            // structs must have all their properties set in constructor
+            if (!usage.HasFlag(InputModelTypeUsage.Input))
+            {
+                return true;
+            }
+
+            if (property.ConstantValue is not null && property.IsReadOnly) // a property will not have setter when it is required literal type
+            {
+                return true;
+            }
+
+            if (TypeFactory.IsCollectionType(type))
+            {
+                // nullable collection should be settable
+                // one exception is in the property bag, we never let them to be settable.
+                return !property.Type.IsNullable || isPropertyBag;
+            }
+
+            // In mixed models required properties are not readonly
+            return property.IsRequired && usage.HasFlag(InputModelTypeUsage.Input) && !usage.HasFlag(InputModelTypeUsage.Output);
+        }
+
 
         private static FieldDeclaration CreateFieldFromExisting(ISymbol existingMember, SourcePropertySerializationMapping? serialization, CSharpType originalType, InputModelProperty inputModelProperty, TypeFactory typeFactory, bool optionalViaNullability)
         {

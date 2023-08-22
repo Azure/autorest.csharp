@@ -8,7 +8,7 @@ This sample shows how to call GetOutputDiscriminatorModelAsync.
 var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new ModelsTypeSpecClient(endpoint);
 
-var result = await client.GetOutputDiscriminatorModelAsync();
+var result = await client.GetOutputDiscriminatorModelAsync().ConfigureAwait(false);
 ]]></code>
 </example>
     </member>
@@ -30,7 +30,7 @@ This sample shows how to call GetOutputDiscriminatorModelAsync with required par
 var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new ModelsTypeSpecClient(endpoint);
 
-Response response = await client.GetOutputDiscriminatorModelAsync(new RequestContext());
+Response response = await client.GetOutputDiscriminatorModelAsync(new RequestContext()).ConfigureAwait(false);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("kind").ToString());
@@ -227,24 +227,8 @@ var data = new {
     requiredInt = 1234,
     requiredNullableInt = 1234,
     requiredNullableString = "<requiredNullableString>",
-    requiredModel = new {
-        requiredList = new[] {
-            new {
-                requiredModelRecord = new {
-                    key = new {},
-                },
-            }
-        },
-    },
-    requiredModel2 = new {
-        requiredList = new[] {
-            new {
-                requiredModelRecord = new {
-                    key = new {},
-                },
-            }
-        },
-    },
+    requiredModel = new {},
+    requiredModel2 = new {},
     requiredIntList = new[] {
         1234
     },
@@ -266,7 +250,7 @@ var data = new {
         },
     },
     requiredCollectionWithNullableFloatElement = new[] {
-        123.45f
+        3.14f
     },
     requiredCollectionWithNullableBooleanElement = new[] {
         true
@@ -286,7 +270,7 @@ var data = new {
     },
 };
 
-Response response = await client.InputToRoundTripAsync(RequestContent.Create(data));
+Response response = await client.InputToRoundTripAsync(RequestContent.Create(data)).ConfigureAwait(false);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("requiredString").ToString());
@@ -320,24 +304,8 @@ var data = new {
     requiredNullableString = "<requiredNullableString>",
     nonRequiredNullableInt = 1234,
     nonRequiredNullableString = "<nonRequiredNullableString>",
-    requiredModel = new {
-        requiredList = new[] {
-            new {
-                requiredModelRecord = new {
-                    key = new {},
-                },
-            }
-        },
-    },
-    requiredModel2 = new {
-        requiredList = new[] {
-            new {
-                requiredModelRecord = new {
-                    key = new {},
-                },
-            }
-        },
-    },
+    requiredModel = new {},
+    requiredModel2 = new {},
     requiredIntList = new[] {
         1234
     },
@@ -359,7 +327,7 @@ var data = new {
         },
     },
     requiredCollectionWithNullableFloatElement = new[] {
-        123.45f
+        3.14f
     },
     requiredCollectionWithNullableBooleanElement = new[] {
         true
@@ -405,7 +373,7 @@ var data = new {
     },
 };
 
-Response response = await client.InputToRoundTripAsync(RequestContent.Create(data));
+Response response = await client.InputToRoundTripAsync(RequestContent.Create(data)).ConfigureAwait(false);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("requiredString").ToString());
@@ -453,24 +421,8 @@ var data = new {
     requiredInt = 1234,
     requiredNullableInt = 1234,
     requiredNullableString = "<requiredNullableString>",
-    requiredModel = new {
-        requiredList = new[] {
-            new {
-                requiredModelRecord = new {
-                    key = new {},
-                },
-            }
-        },
-    },
-    requiredModel2 = new {
-        requiredList = new[] {
-            new {
-                requiredModelRecord = new {
-                    key = new {},
-                },
-            }
-        },
-    },
+    requiredModel = new {},
+    requiredModel2 = new {},
     requiredIntList = new[] {
         1234
     },
@@ -492,7 +444,7 @@ var data = new {
         },
     },
     requiredCollectionWithNullableFloatElement = new[] {
-        123.45f
+        3.14f
     },
     requiredCollectionWithNullableBooleanElement = new[] {
         true
@@ -546,24 +498,8 @@ var data = new {
     requiredNullableString = "<requiredNullableString>",
     nonRequiredNullableInt = 1234,
     nonRequiredNullableString = "<nonRequiredNullableString>",
-    requiredModel = new {
-        requiredList = new[] {
-            new {
-                requiredModelRecord = new {
-                    key = new {},
-                },
-            }
-        },
-    },
-    requiredModel2 = new {
-        requiredList = new[] {
-            new {
-                requiredModelRecord = new {
-                    key = new {},
-                },
-            }
-        },
-    },
+    requiredModel = new {},
+    requiredModel2 = new {},
     requiredIntList = new[] {
         1234
     },
@@ -585,7 +521,7 @@ var data = new {
         },
     },
     requiredCollectionWithNullableFloatElement = new[] {
-        123.45f
+        3.14f
     },
     requiredCollectionWithNullableBooleanElement = new[] {
         true
@@ -843,24 +779,8 @@ var data = new {
     requiredInt = 1234,
     requiredNullableInt = 1234,
     requiredNullableString = "<requiredNullableString>",
-    requiredModel = new {
-        requiredList = new[] {
-            new {
-                requiredModelRecord = new {
-                    key = new {},
-                },
-            }
-        },
-    },
-    requiredModel2 = new {
-        requiredList = new[] {
-            new {
-                requiredModelRecord = new {
-                    key = new {},
-                },
-            }
-        },
-    },
+    requiredModel = new {},
+    requiredModel2 = new {},
     requiredIntList = new[] {
         1234
     },
@@ -882,7 +802,7 @@ var data = new {
         },
     },
     requiredCollectionWithNullableFloatElement = new[] {
-        123.45f
+        3.14f
     },
     requiredCollectionWithNullableBooleanElement = new[] {
         true
@@ -902,7 +822,7 @@ var data = new {
     },
 };
 
-Response response = await client.InputToRoundTripPrimitiveAsync(RequestContent.Create(data));
+Response response = await client.InputToRoundTripPrimitiveAsync(RequestContent.Create(data)).ConfigureAwait(false);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("requiredString").ToString());
@@ -928,24 +848,8 @@ var data = new {
     requiredNullableString = "<requiredNullableString>",
     nonRequiredNullableInt = 1234,
     nonRequiredNullableString = "<nonRequiredNullableString>",
-    requiredModel = new {
-        requiredList = new[] {
-            new {
-                requiredModelRecord = new {
-                    key = new {},
-                },
-            }
-        },
-    },
-    requiredModel2 = new {
-        requiredList = new[] {
-            new {
-                requiredModelRecord = new {
-                    key = new {},
-                },
-            }
-        },
-    },
+    requiredModel = new {},
+    requiredModel2 = new {},
     requiredIntList = new[] {
         1234
     },
@@ -967,7 +871,7 @@ var data = new {
         },
     },
     requiredCollectionWithNullableFloatElement = new[] {
-        123.45f
+        3.14f
     },
     requiredCollectionWithNullableBooleanElement = new[] {
         true
@@ -1013,7 +917,7 @@ var data = new {
     },
 };
 
-Response response = await client.InputToRoundTripPrimitiveAsync(RequestContent.Create(data));
+Response response = await client.InputToRoundTripPrimitiveAsync(RequestContent.Create(data)).ConfigureAwait(false);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("requiredString").ToString());
@@ -1041,24 +945,8 @@ var data = new {
     requiredInt = 1234,
     requiredNullableInt = 1234,
     requiredNullableString = "<requiredNullableString>",
-    requiredModel = new {
-        requiredList = new[] {
-            new {
-                requiredModelRecord = new {
-                    key = new {},
-                },
-            }
-        },
-    },
-    requiredModel2 = new {
-        requiredList = new[] {
-            new {
-                requiredModelRecord = new {
-                    key = new {},
-                },
-            }
-        },
-    },
+    requiredModel = new {},
+    requiredModel2 = new {},
     requiredIntList = new[] {
         1234
     },
@@ -1080,7 +968,7 @@ var data = new {
         },
     },
     requiredCollectionWithNullableFloatElement = new[] {
-        123.45f
+        3.14f
     },
     requiredCollectionWithNullableBooleanElement = new[] {
         true
@@ -1126,24 +1014,8 @@ var data = new {
     requiredNullableString = "<requiredNullableString>",
     nonRequiredNullableInt = 1234,
     nonRequiredNullableString = "<nonRequiredNullableString>",
-    requiredModel = new {
-        requiredList = new[] {
-            new {
-                requiredModelRecord = new {
-                    key = new {},
-                },
-            }
-        },
-    },
-    requiredModel2 = new {
-        requiredList = new[] {
-            new {
-                requiredModelRecord = new {
-                    key = new {},
-                },
-            }
-        },
-    },
+    requiredModel = new {},
+    requiredModel2 = new {},
     requiredIntList = new[] {
         1234
     },
@@ -1165,7 +1037,7 @@ var data = new {
         },
     },
     requiredCollectionWithNullableFloatElement = new[] {
-        123.45f
+        3.14f
     },
     requiredCollectionWithNullableBooleanElement = new[] {
         true
@@ -1240,7 +1112,7 @@ var client = new ModelsTypeSpecClient(endpoint);
 
 var data = new {};
 
-Response response = await client.InputToRoundTripOptionalAsync(RequestContent.Create(data));
+Response response = await client.InputToRoundTripOptionalAsync(RequestContent.Create(data)).ConfigureAwait(false);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.ToString());
@@ -1307,7 +1179,7 @@ var data = new {
     },
 };
 
-Response response = await client.InputToRoundTripOptionalAsync(RequestContent.Create(data));
+Response response = await client.InputToRoundTripOptionalAsync(RequestContent.Create(data)).ConfigureAwait(false);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("optionalString").ToString());
@@ -1471,11 +1343,11 @@ var data = new {
             },
         },
     },
-    requiredBytes = new {},
+    requiredBytes = BinaryData.FromString("<your binary data content>"),
     requiredUint8Array = new[] {
         1234
     },
-    requiredUnknown = new {},
+    requiredUnknown = BinaryData.FromString("<your binary data content>"),
     requiredInt8Array = new[] {
         1234
     },
@@ -1487,7 +1359,7 @@ var data = new {
     },
 };
 
-Response response = await client.RoundTripToOutputAsync(RequestContent.Create(data));
+Response response = await client.RoundTripToOutputAsync(RequestContent.Create(data)).ConfigureAwait(false);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("requiredString").ToString());
@@ -1536,16 +1408,16 @@ var data = new {
             },
         },
     },
-    requiredBytes = new {},
-    optionalBytes = new {},
+    requiredBytes = BinaryData.FromString("<your binary data content>"),
+    optionalBytes = BinaryData.FromString("<your binary data content>"),
     requiredUint8Array = new[] {
         1234
     },
     optionalUint8Array = new[] {
         1234
     },
-    requiredUnknown = new {},
-    optionalUnknown = new {},
+    requiredUnknown = BinaryData.FromString("<your binary data content>"),
+    optionalUnknown = BinaryData.FromString("<your binary data content>"),
     requiredInt8Array = new[] {
         1234
     },
@@ -1566,7 +1438,7 @@ var data = new {
     },
 };
 
-Response response = await client.RoundTripToOutputAsync(RequestContent.Create(data));
+Response response = await client.RoundTripToOutputAsync(RequestContent.Create(data)).ConfigureAwait(false);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("requiredString").ToString());
@@ -1614,11 +1486,11 @@ var data = new {
             },
         },
     },
-    requiredBytes = new {},
+    requiredBytes = BinaryData.FromString("<your binary data content>"),
     requiredUint8Array = new[] {
         1234
     },
-    requiredUnknown = new {},
+    requiredUnknown = BinaryData.FromString("<your binary data content>"),
     requiredInt8Array = new[] {
         1234
     },
@@ -1679,16 +1551,16 @@ var data = new {
             },
         },
     },
-    requiredBytes = new {},
-    optionalBytes = new {},
+    requiredBytes = BinaryData.FromString("<your binary data content>"),
+    optionalBytes = BinaryData.FromString("<your binary data content>"),
     requiredUint8Array = new[] {
         1234
     },
     optionalUint8Array = new[] {
         1234
     },
-    requiredUnknown = new {},
-    optionalUnknown = new {},
+    requiredUnknown = BinaryData.FromString("<your binary data content>"),
+    optionalUnknown = BinaryData.FromString("<your binary data content>"),
     requiredInt8Array = new[] {
         1234
     },
@@ -1725,7 +1597,7 @@ var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new ModelsTypeSpecClient(endpoint);
 
 var input = new InputRecursiveModel("<message>");
-var result = await client.InputRecursiveAsync(input);
+var result = await client.InputRecursiveAsync(input).ConfigureAwait(false);
 ]]></code>
 </example>
     </member>
@@ -1752,7 +1624,7 @@ var data = new {
     message = "<message>",
 };
 
-Response response = await client.InputRecursiveAsync(RequestContent.Create(data));
+Response response = await client.InputRecursiveAsync(RequestContent.Create(data)).ConfigureAwait(false);
 Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call InputRecursiveAsync with all request content.
@@ -1764,7 +1636,7 @@ var data = new {
     message = "<message>",
 };
 
-Response response = await client.InputRecursiveAsync(RequestContent.Create(data));
+Response response = await client.InputRecursiveAsync(RequestContent.Create(data)).ConfigureAwait(false);
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
@@ -1805,7 +1677,7 @@ var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new ModelsTypeSpecClient(endpoint);
 
 var input = new RoundTripRecursiveModel("<message>");
-var result = await client.RoundTripRecursiveAsync(input);
+var result = await client.RoundTripRecursiveAsync(input).ConfigureAwait(false);
 ]]></code>
 </example>
     </member>
@@ -1832,7 +1704,7 @@ var data = new {
     message = "<message>",
 };
 
-Response response = await client.RoundTripRecursiveAsync(RequestContent.Create(data));
+Response response = await client.RoundTripRecursiveAsync(RequestContent.Create(data)).ConfigureAwait(false);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("message").ToString());
@@ -1846,7 +1718,7 @@ var data = new {
     message = "<message>",
 };
 
-Response response = await client.RoundTripRecursiveAsync(RequestContent.Create(data));
+Response response = await client.RoundTripRecursiveAsync(RequestContent.Create(data)).ConfigureAwait(false);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("message").ToString());
@@ -1894,7 +1766,7 @@ This sample shows how to call SelfReferenceAsync.
 var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new ModelsTypeSpecClient(endpoint);
 
-var result = await client.SelfReferenceAsync();
+var result = await client.SelfReferenceAsync().ConfigureAwait(false);
 ]]></code>
 </example>
     </member>
@@ -1916,7 +1788,7 @@ This sample shows how to call SelfReferenceAsync with required parameters and pa
 var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new ModelsTypeSpecClient(endpoint);
 
-Response response = await client.SelfReferenceAsync(new RequestContext());
+Response response = await client.SelfReferenceAsync(new RequestContext()).ConfigureAwait(false);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("message").ToString());
@@ -1946,14 +1818,14 @@ This sample shows how to call RoundTripToOutputWithNoUseBaseAsync with required 
 var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new ModelsTypeSpecClient(endpoint);
 
-var input = new RoundTripOnNoUse("<baseModelProp>", new CollectionItem[] 
+var input = new RoundTripOnNoUse("<baseModelProp>", new CollectionItem[]
 {
     new CollectionItem(new Dictionary<string, RecordItem>
-{
-        ["key"] = new RecordItem(Array.Empty<CollectionItem>()),
+    {
+        ["key"] = new RecordItem(Array.Empty<CollectionItem>())
     })
 });
-var result = await client.RoundTripToOutputWithNoUseBaseAsync(input);
+var result = await client.RoundTripToOutputWithNoUseBaseAsync(input).ConfigureAwait(false);
 ]]></code>
 </example>
     </member>
@@ -1964,11 +1836,11 @@ This sample shows how to call RoundTripToOutputWithNoUseBase with required param
 var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new ModelsTypeSpecClient(endpoint);
 
-var input = new RoundTripOnNoUse("<baseModelProp>", new CollectionItem[] 
+var input = new RoundTripOnNoUse("<baseModelProp>", new CollectionItem[]
 {
     new CollectionItem(new Dictionary<string, RecordItem>
-{
-        ["key"] = new RecordItem(Array.Empty<CollectionItem>()),
+    {
+        ["key"] = new RecordItem(Array.Empty<CollectionItem>())
     })
 });
 var result = client.RoundTripToOutputWithNoUseBase(input);
@@ -1993,7 +1865,7 @@ var data = new {
     baseModelProp = "<baseModelProp>",
 };
 
-Response response = await client.RoundTripToOutputWithNoUseBaseAsync(RequestContent.Create(data));
+Response response = await client.RoundTripToOutputWithNoUseBaseAsync(RequestContent.Create(data)).ConfigureAwait(false);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("baseModelProp").ToString());
@@ -2032,7 +1904,7 @@ This sample shows how to call AnalyzeConversationAsync.
 var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new ModelsTypeSpecClient(endpoint);
 
-var result = await client.AnalyzeConversationAsync();
+var result = await client.AnalyzeConversationAsync().ConfigureAwait(false);
 ]]></code>
 </example>
     </member>
@@ -2054,7 +1926,7 @@ This sample shows how to call AnalyzeConversationAsync with required parameters 
 var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new ModelsTypeSpecClient(endpoint);
 
-Response response = await client.AnalyzeConversationAsync(new RequestContext());
+Response response = await client.AnalyzeConversationAsync(new RequestContext()).ConfigureAwait(false);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("discriminatorProperty").ToString());

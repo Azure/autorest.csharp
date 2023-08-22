@@ -156,7 +156,10 @@ namespace AutoRest.CSharp.Output.Models
             {
                 if (outputParameter is null)
                 {
-                    yield return request.Headers.Add(nameInRequest, GetNonParameterizedHeaderValue(nameInRequest, request), format);
+                    if (!addContentHeaders)
+                    {
+                        yield return request.Headers.Add(nameInRequest, GetNonParameterizedHeaderValue(nameInRequest, request), format);
+                    }
                 }
                 else if (inputParameter is null)
                 {
