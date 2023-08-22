@@ -90,11 +90,6 @@ namespace AutoRest.CSharp.Common.Input
             }
             Enum.TryParse<InputOperationParameterKind>(kind, ignoreCase: true, out var parameterKind);
 
-            if (parameterType is InputLiteralType literalType)
-            {
-                parameterType = literalType.LiteralValueType;
-            }
-
             var parameter = new InputParameter(
                 Name: name,
                 NameInRequest: nameInRequest,
@@ -124,21 +119,13 @@ namespace AutoRest.CSharp.Common.Input
         }
 
         private static InputType FixInputParameterType(InputType parameterType, RequestLocation requestLocation)
-        {
-            if (parameterType is InputPrimitiveType { Kind: InputTypeKind.DateTime })
+            => parameterType switch
             {
-                if (requestLocation == RequestLocation.Header)
-                {
-                    return InputPrimitiveType.DateTimeRFC7231;
-                }
-
-                if (requestLocation == RequestLocation.Body)
-                {
-                    return InputPrimitiveType.DateTimeRFC3339;
-                }
-            }
-
-            return parameterType;
-        }
+                InputListType listType => listType with { ElementType = FixInputParameterType(listType.ElementType, requestLocation)},
+                InputDictionaryType dictionaryType => dictionaryType with { ValueType = FixInputParameterType(dictionaryType.ValueType, requestLocation)},
+                InputPrimitiveType { Kind: InputTypeKind.DateTime } when requestLocation == RequestLocation.Header => InputPrimitiveType.DateTimeRFC7231,
+                InputPrimitiveType { Kind: InputTypeKind.DateTime } when requestLocation == RequestLocation.Body => InputPrimitiveType.DateTimeRFC3339,
+                _ => parameterType
+            };
     }
 }

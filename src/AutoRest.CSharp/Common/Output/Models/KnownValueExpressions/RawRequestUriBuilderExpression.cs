@@ -39,5 +39,11 @@ namespace AutoRest.CSharp.Common.Output.Models.KnownValueExpressions
 
         public MethodBodyStatement AppendQueryDelimited(string name, ValueExpression value, string delimiter, bool escape)
             => new InvokeStaticMethodStatement(typeof(RequestUriBuilderExtensions), nameof(RequestUriBuilderExtensions.AppendQueryDelimited), new[]{Untyped, Literal(name), value, Literal(delimiter), Bool(escape)}, CallAsExtension: true);
+        public MethodBodyStatement AppendQueryDelimited(string name, ValueExpression value, string delimiter, string format, bool escape)
+            => new InvokeStaticMethodStatement(typeof(RequestUriBuilderExtensions), nameof(RequestUriBuilderExtensions.AppendQueryDelimited), new[]{Untyped, Literal(name), value, Literal(delimiter), Literal(format), Bool(escape)}, CallAsExtension: true);
+        public MethodBodyStatement AppendQueryDelimited(string name, ValueExpression value, string delimiter, SerializationFormat format, bool escape)
+            => format.ToFormatSpecifier() is { } formatSpecifier
+                ? AppendQueryDelimited(name, value, delimiter, formatSpecifier, escape)
+                : AppendQueryDelimited(name, value, delimiter, escape);
     }
 }

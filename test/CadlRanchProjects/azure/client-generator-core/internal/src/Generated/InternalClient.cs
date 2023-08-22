@@ -187,14 +187,9 @@ namespace _Specs_.Azure.ClientGenerator.Core.Internal
         /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
         /// </description>
         /// </item>
-        /// <item>
-        /// <description>
-        /// Please try the simpler <see cref="InternalOnlyAsync(string,CancellationToken)"/> convenience overload with strongly typed models first.
-        /// </description>
-        /// </item>
         /// </list>
         /// </summary>
-        /// <param name="name"> The String to use. </param>
+        /// <param name="name"> The string to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
@@ -226,14 +221,9 @@ namespace _Specs_.Azure.ClientGenerator.Core.Internal
         /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
         /// </description>
         /// </item>
-        /// <item>
-        /// <description>
-        /// Please try the simpler <see cref="InternalOnly(string,CancellationToken)"/> convenience overload with strongly typed models first.
-        /// </description>
-        /// </item>
         /// </list>
         /// </summary>
-        /// <param name="name"> The String to use. </param>
+        /// <param name="name"> The string to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>

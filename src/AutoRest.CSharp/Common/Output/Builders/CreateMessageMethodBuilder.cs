@@ -104,7 +104,7 @@ namespace AutoRest.CSharp.Output.Models
 
                         lines.Add(outputParameter.Type.Equals(typeof(Uri))
                             ? uriBuilder.Reset(value)
-                            : uriBuilder.AppendRaw(ConvertToRequestPartType(value, outputParameter.Type, true), !inputParameter.SkipUrlEncoding));
+                            : uriBuilder.AppendRaw(ConvertToRequestPartType(value, outputParameter.Type, convertOnlyExtendableEnumToString: true), !inputParameter.SkipUrlEncoding));
                     }
                 }
                 else
@@ -156,7 +156,7 @@ namespace AutoRest.CSharp.Output.Models
             {
                 if (outputParameter is null)
                 {
-                    if (!addContentHeaders)
+                    if (!addContentHeaders && inputParameter is {Location: RequestLocation.Header})
                     {
                         yield return request.Headers.Add(nameInRequest, GetNonParameterizedHeaderValue(nameInRequest, request), format);
                     }
@@ -270,7 +270,7 @@ namespace AutoRest.CSharp.Output.Models
         private MethodBodyStatement AddToQuery(RawRequestUriBuilderExpression uriBuilder, InputParameter inputParameter, Parameter outputParameter, string nameInRequest, SerializationFormat format)
         {
             var value = GetValueForRequestPart(inputParameter, outputParameter);
-            var convertedValue = ConvertToRequestPartType(RemoveAllNullConditional(value), outputParameter.Type);
+            var convertedValue = ConvertToRequestPartType(RemoveAllNullConditional(value), outputParameter.Type, format);
             var escape = !inputParameter.SkipUrlEncoding;
 
             MethodBodyStatement addToQuery;
@@ -315,7 +315,7 @@ namespace AutoRest.CSharp.Output.Models
         {
             var headerName = inputParameter.HeaderCollectionPrefix ?? nameInRequest;
             var value = GetValueForRequestPart(inputParameter, outputParameter);
-            var convertedValue = ConvertToRequestPartType(RemoveAllNullConditional(value), outputParameter.Type);
+            var convertedValue = ConvertToRequestPartType(RemoveAllNullConditional(value), outputParameter.Type, format);
 
             var addToHeader = inputParameter.ArraySerializationDelimiter is {} delimiter
                 ? request.Headers.AddDelimited(headerName, convertedValue, delimiter)
@@ -509,7 +509,7 @@ namespace AutoRest.CSharp.Output.Models
                 : new IfElseStatement(NotEqual(value, Null), inner, null);
         }
 
-        private static ValueExpression ConvertToRequestPartType(ValueExpression value, CSharpType fromType, bool convertOnlyExtendableEnumToString = false)
+        private static ValueExpression ConvertToRequestPartType(ValueExpression value, CSharpType fromType, SerializationFormat format = SerializationFormat.Default, bool convertOnlyExtendableEnumToString = false)
         {
             if (fromType is { IsFrameworkType: false, Implementation: EnumType enumType } && (!convertOnlyExtendableEnumToString || enumType.IsExtensible))
             {
@@ -524,6 +524,11 @@ namespace AutoRest.CSharp.Output.Models
             if (fromType.EqualsIgnoreNullable(typeof(ContentType)))
             {
                 return value.NullableStructValue(fromType).InvokeToString();
+            }
+
+            if (fromType.EqualsIgnoreNullable(typeof(BinaryData)) && format is SerializationFormat.Bytes_Base64 or SerializationFormat.Bytes_Base64Url)
+            {
+                return new BinaryDataExpression(value).ToArray();
             }
 
             return value.NullableStructValue(fromType);

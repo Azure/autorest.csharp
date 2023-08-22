@@ -38,7 +38,7 @@ namespace _Specs_.Azure.ClientGenerator.Core.Internal
         /// <param name="clientDiagnostics"> The handler for diagnostic messaging in the client. </param>
         /// <param name="pipeline"> The HTTP pipeline for sending and receiving REST requests and responses. </param>
         /// <param name="endpoint"> TestServer endpoint. </param>
-        /// <param name="apiVersion"> The String to use. </param>
+        /// <param name="apiVersion"> The string to use. </param>
         internal Shared(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Uri endpoint, string apiVersion)
         {
             ClientDiagnostics = clientDiagnostics;
@@ -47,7 +47,7 @@ namespace _Specs_.Azure.ClientGenerator.Core.Internal
             _apiVersion = apiVersion;
         }
 
-        /// <param name="name"> The String to use. </param>
+        /// <param name="name"> The string to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
         /// <include file="Docs/Shared.xml" path="doc/members/member[@name='PublicAsync(string,CancellationToken)']/*" />
@@ -60,7 +60,7 @@ namespace _Specs_.Azure.ClientGenerator.Core.Internal
             return Response.FromValue(SharedModel.FromResponse(response), response);
         }
 
-        /// <param name="name"> The String to use. </param>
+        /// <param name="name"> The string to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
         /// <include file="Docs/Shared.xml" path="doc/members/member[@name='Public(string,CancellationToken)']/*" />
@@ -88,7 +88,7 @@ namespace _Specs_.Azure.ClientGenerator.Core.Internal
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="name"> The String to use. </param>
+        /// <param name="name"> The string to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
@@ -127,7 +127,7 @@ namespace _Specs_.Azure.ClientGenerator.Core.Internal
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="name"> The String to use. </param>
+        /// <param name="name"> The string to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
@@ -151,7 +151,7 @@ namespace _Specs_.Azure.ClientGenerator.Core.Internal
             }
         }
 
-        /// <param name="name"> The String to use. </param>
+        /// <param name="name"> The string to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
         /// <include file="Docs/Shared.xml" path="doc/members/member[@name='InternalAsync(string,CancellationToken)']/*" />
@@ -164,7 +164,7 @@ namespace _Specs_.Azure.ClientGenerator.Core.Internal
             return Response.FromValue(SharedModel.FromResponse(response), response);
         }
 
-        /// <param name="name"> The String to use. </param>
+        /// <param name="name"> The string to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
         /// <include file="Docs/Shared.xml" path="doc/members/member[@name='Internal(string,CancellationToken)']/*" />
@@ -185,14 +185,9 @@ namespace _Specs_.Azure.ClientGenerator.Core.Internal
         /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
         /// </description>
         /// </item>
-        /// <item>
-        /// <description>
-        /// Please try the simpler <see cref="InternalAsync(string,CancellationToken)"/> convenience overload with strongly typed models first.
-        /// </description>
-        /// </item>
         /// </list>
         /// </summary>
-        /// <param name="name"> The String to use. </param>
+        /// <param name="name"> The string to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
@@ -224,14 +219,9 @@ namespace _Specs_.Azure.ClientGenerator.Core.Internal
         /// This <see href="https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/core/Azure.Core/samples/ProtocolMethods.md">protocol method</see> allows explicit creation of the request and processing of the response for advanced scenarios.
         /// </description>
         /// </item>
-        /// <item>
-        /// <description>
-        /// Please try the simpler <see cref="Internal(string,CancellationToken)"/> convenience overload with strongly typed models first.
-        /// </description>
-        /// </item>
         /// </list>
         /// </summary>
-        /// <param name="name"> The String to use. </param>
+        /// <param name="name"> The string to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
