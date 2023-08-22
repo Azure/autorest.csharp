@@ -794,6 +794,50 @@ default
 
         [Test]
         [Ignore("Only validating compilation of examples")]
+        public void Example_HeadAsBoolean()
+        {
+            var endpoint = new Uri("<https://my-service.azure.com>");
+            var client = new FirstTestTypeSpecClient(endpoint);
+
+            Response<bool> response = client.HeadAsBoolean("<id>");
+            Console.WriteLine(response.GetRawResponse().Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_HeadAsBoolean_AllParameters()
+        {
+            var endpoint = new Uri("<https://my-service.azure.com>");
+            var client = new FirstTestTypeSpecClient(endpoint);
+
+            Response<bool> response = client.HeadAsBoolean("<id>");
+            Console.WriteLine(response.GetRawResponse().Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_HeadAsBoolean_Async()
+        {
+            var endpoint = new Uri("<https://my-service.azure.com>");
+            var client = new FirstTestTypeSpecClient(endpoint);
+
+            Response<bool> response = await client.HeadAsBooleanAsync("<id>");
+            Console.WriteLine(response.GetRawResponse().Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_HeadAsBoolean_AllParameters_Async()
+        {
+            var endpoint = new Uri("<https://my-service.azure.com>");
+            var client = new FirstTestTypeSpecClient(endpoint);
+
+            Response<bool> response = await client.HeadAsBooleanAsync("<id>");
+            Console.WriteLine(response.GetRawResponse().Status);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
         public void Example_SayHi()
         {
             Uri endpoint = new Uri("<https://my-service.azure.com>");

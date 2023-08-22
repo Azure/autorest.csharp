@@ -551,6 +551,30 @@ Response response = client.StringFormat(Guid.Parse("73f411fe-4f43-4b4b-9cbd-6828
 Console.WriteLine(response.Status);
 ]]></code></example>
     </member>
+    <member name="HeadAsBooleanAsync(string,RequestContext)">
+<example>
+This sample shows how to call HeadAsBooleanAsync with required parameters.
+<code><![CDATA[
+var endpoint = new Uri("<https://my-service.azure.com>");
+var client = new FirstTestTypeSpecClient(endpoint);
+
+Response<bool> response = await client.HeadAsBooleanAsync("<id>");
+Console.WriteLine(response.GetRawResponse().Status);
+]]></code>
+</example>
+    </member>
+    <member name="HeadAsBoolean(string,RequestContext)">
+<example>
+This sample shows how to call HeadAsBoolean with required parameters.
+<code><![CDATA[
+var endpoint = new Uri("<https://my-service.azure.com>");
+var client = new FirstTestTypeSpecClient(endpoint);
+
+Response<bool> response = client.HeadAsBoolean("<id>");
+Console.WriteLine(response.GetRawResponse().Status);
+]]></code>
+</example>
+    </member>
     <member name="SayHiAsync(string,string,string,RequestContext)">
       <example>
 This sample shows how to call SayHiAsync with required parameters and parse the result.
