@@ -6,18 +6,14 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
-using System.Text;
 using System.Text.Json;
-using System.Threading;
 using System.Threading.Tasks;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.LowLevel.Generation.Extensions;
-using AutoRest.CSharp.MgmtTest.Extensions;
 using AutoRest.CSharp.Output.Models;
 using AutoRest.CSharp.Output.Models.Shared;
 using AutoRest.CSharp.Output.Samples.Models;
-using NUnit.Framework;
 
 namespace AutoRest.CSharp.LowLevel.Generation
 {
@@ -192,7 +188,14 @@ namespace AutoRest.CSharp.LowLevel.Generation
                 WriteNormalOperationResponse(sample, $"{response}", $"{response}.ContentStream");
             else
             {
-                _writer.ConsoleWriteLine($"{response}.Status");
+                if (returnType.EqualsIgnoreNullable(typeof(Azure.Response)))
+                {
+                    _writer.ConsoleWriteLine($"{response}.Status");
+                }
+                else
+                {
+                    _writer.ConsoleWriteLine($"{response}.GetRawResponse().Status");
+                }
             }
         }
 

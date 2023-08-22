@@ -110,6 +110,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                 documents.Add(Task.Run(() => ProcessDocument(compilation, document, suppressedTypeNames)));
             }
 
+            var needProcessGeneratedDocs = _xmlDocFiles.Any();
             var generatedDocs = new Dictionary<string, SyntaxTree>();
 
             foreach (var task in documents)
@@ -120,7 +121,8 @@ namespace AutoRest.CSharp.AutoRest.Plugins
                 processed = await Formatter.FormatAsync(processed);
                 var text = await processed.GetSyntaxTreeAsync();
                 yield return (processed.Name, text!.ToString());
-                generatedDocs.Add(processed.Name, text);
+                if (needProcessGeneratedDocs) // TODO -- this is a workaround. In HLC, in some cases, there are multiple documents with the same name added in this list, and we get "dictionary same key has been added" exception
+                    generatedDocs.Add(processed.Name, text);
             }
 
             foreach (var (docName, doc) in _xmlDocFiles)
