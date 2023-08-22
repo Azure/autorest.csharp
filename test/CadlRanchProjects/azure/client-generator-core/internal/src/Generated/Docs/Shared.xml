@@ -7,7 +7,7 @@ This sample shows how to call PublicAsync with required parameters.
 <code><![CDATA[
 var client = new InternalClient().GetSharedClient();
 
-var result = await client.PublicAsync("<name>");
+var result = await client.PublicAsync("<name>").ConfigureAwait(false);
 ]]></code>
 </example>
     </member>
@@ -27,7 +27,7 @@ This sample shows how to call PublicAsync with required parameters and parse the
 <code><![CDATA[
 var client = new InternalClient().GetSharedClient();
 
-Response response = await client.PublicAsync("<name>", new RequestContext());
+Response response = await client.PublicAsync("<name>", new RequestContext()).ConfigureAwait(false);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("name").ToString());

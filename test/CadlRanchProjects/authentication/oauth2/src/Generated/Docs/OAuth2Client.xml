@@ -5,10 +5,10 @@
 <example>
 This sample shows how to call ValidAsync.
 <code><![CDATA[
-var credential = new DefaultAzureCredential();
+var credential = new Azure.Identity.DefaultAzureCredential();
 var client = new OAuth2Client(credential);
 
-Response response = await client.ValidAsync();
+Response response = await client.ValidAsync().ConfigureAwait(false);
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
@@ -17,7 +17,7 @@ Console.WriteLine(response.Status);
 <example>
 This sample shows how to call Valid.
 <code><![CDATA[
-var credential = new DefaultAzureCredential();
+var credential = new Azure.Identity.DefaultAzureCredential();
 var client = new OAuth2Client(credential);
 
 Response response = client.Valid();
@@ -29,10 +29,10 @@ Console.WriteLine(response.Status);
 <example>
 This sample shows how to call InvalidAsync.
 <code><![CDATA[
-var credential = new DefaultAzureCredential();
+var credential = new Azure.Identity.DefaultAzureCredential();
 var client = new OAuth2Client(credential);
 
-Response response = await client.InvalidAsync();
+Response response = await client.InvalidAsync().ConfigureAwait(false);
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
@@ -41,7 +41,7 @@ Console.WriteLine(response.Status);
 <example>
 This sample shows how to call Invalid.
 <code><![CDATA[
-var credential = new DefaultAzureCredential();
+var credential = new Azure.Identity.DefaultAzureCredential();
 var client = new OAuth2Client(credential);
 
 Response response = client.Invalid();

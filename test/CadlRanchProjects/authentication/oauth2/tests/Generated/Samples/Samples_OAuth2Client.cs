@@ -6,13 +6,8 @@
 #nullable disable
 
 using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Text.Json;
 using System.Threading.Tasks;
 using Azure;
-using Azure.Core;
-using Azure.Identity;
 using NUnit.Framework;
 
 namespace Authentication.OAuth2.Samples
@@ -23,7 +18,7 @@ namespace Authentication.OAuth2.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Valid()
         {
-            var credential = new DefaultAzureCredential();
+            var credential = new Azure.Identity.DefaultAzureCredential();
             var client = new OAuth2Client(credential);
 
             Response response = client.Valid();
@@ -34,7 +29,7 @@ namespace Authentication.OAuth2.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Valid_AllParameters()
         {
-            var credential = new DefaultAzureCredential();
+            var credential = new Azure.Identity.DefaultAzureCredential();
             var client = new OAuth2Client(credential);
 
             Response response = client.Valid();
@@ -45,10 +40,10 @@ namespace Authentication.OAuth2.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Valid_Async()
         {
-            var credential = new DefaultAzureCredential();
+            var credential = new Azure.Identity.DefaultAzureCredential();
             var client = new OAuth2Client(credential);
 
-            Response response = await client.ValidAsync();
+            Response response = await client.ValidAsync().ConfigureAwait(false);
             Console.WriteLine(response.Status);
         }
 
@@ -56,10 +51,10 @@ namespace Authentication.OAuth2.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Valid_AllParameters_Async()
         {
-            var credential = new DefaultAzureCredential();
+            var credential = new Azure.Identity.DefaultAzureCredential();
             var client = new OAuth2Client(credential);
 
-            Response response = await client.ValidAsync();
+            Response response = await client.ValidAsync().ConfigureAwait(false);
             Console.WriteLine(response.Status);
         }
 
@@ -67,7 +62,7 @@ namespace Authentication.OAuth2.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Invalid()
         {
-            var credential = new DefaultAzureCredential();
+            var credential = new Azure.Identity.DefaultAzureCredential();
             var client = new OAuth2Client(credential);
 
             Response response = client.Invalid();
@@ -78,7 +73,7 @@ namespace Authentication.OAuth2.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Invalid_AllParameters()
         {
-            var credential = new DefaultAzureCredential();
+            var credential = new Azure.Identity.DefaultAzureCredential();
             var client = new OAuth2Client(credential);
 
             Response response = client.Invalid();
@@ -89,10 +84,10 @@ namespace Authentication.OAuth2.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Invalid_Async()
         {
-            var credential = new DefaultAzureCredential();
+            var credential = new Azure.Identity.DefaultAzureCredential();
             var client = new OAuth2Client(credential);
 
-            Response response = await client.InvalidAsync();
+            Response response = await client.InvalidAsync().ConfigureAwait(false);
             Console.WriteLine(response.Status);
         }
 
@@ -100,10 +95,10 @@ namespace Authentication.OAuth2.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Invalid_AllParameters_Async()
         {
-            var credential = new DefaultAzureCredential();
+            var credential = new Azure.Identity.DefaultAzureCredential();
             var client = new OAuth2Client(credential);
 
-            Response response = await client.InvalidAsync();
+            Response response = await client.InvalidAsync().ConfigureAwait(false);
             Console.WriteLine(response.Status);
         }
     }

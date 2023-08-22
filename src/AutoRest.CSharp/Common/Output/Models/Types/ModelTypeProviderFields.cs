@@ -230,7 +230,7 @@ namespace AutoRest.CSharp.Output.Models.Types
                 return true;
             }
 
-            if (property.ConstantValue is not null && property.IsReadOnly) // a property will not have setter when it is required literal type
+            if (property.ConstantValue is not null && property.IsRequired) // a property will not have setter when it is required literal type
             {
                 return true;
             }

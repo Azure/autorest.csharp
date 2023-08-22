@@ -49,7 +49,7 @@ namespace _Specs_.Azure.ClientGenerator.Core.Internal
             _apiVersion = options.Version;
         }
 
-        /// <param name="name"> The String to use. </param>
+        /// <param name="name"> The string to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
         /// <include file="Docs/InternalClient.xml" path="doc/members/member[@name='PublicOnlyAsync(string,CancellationToken)']/*" />
@@ -62,7 +62,7 @@ namespace _Specs_.Azure.ClientGenerator.Core.Internal
             return Response.FromValue(PublicModel.FromResponse(response), response);
         }
 
-        /// <param name="name"> The String to use. </param>
+        /// <param name="name"> The string to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
         /// <include file="Docs/InternalClient.xml" path="doc/members/member[@name='PublicOnly(string,CancellationToken)']/*" />
@@ -90,7 +90,7 @@ namespace _Specs_.Azure.ClientGenerator.Core.Internal
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="name"> The String to use. </param>
+        /// <param name="name"> The string to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
@@ -129,7 +129,7 @@ namespace _Specs_.Azure.ClientGenerator.Core.Internal
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="name"> The String to use. </param>
+        /// <param name="name"> The string to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
@@ -153,7 +153,7 @@ namespace _Specs_.Azure.ClientGenerator.Core.Internal
             }
         }
 
-        /// <param name="name"> The String to use. </param>
+        /// <param name="name"> The string to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
         /// <include file="Docs/InternalClient.xml" path="doc/members/member[@name='InternalOnlyAsync(string,CancellationToken)']/*" />
@@ -166,7 +166,7 @@ namespace _Specs_.Azure.ClientGenerator.Core.Internal
             return Response.FromValue(InternalModel.FromResponse(response), response);
         }
 
-        /// <param name="name"> The String to use. </param>
+        /// <param name="name"> The string to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
         /// <include file="Docs/InternalClient.xml" path="doc/members/member[@name='InternalOnly(string,CancellationToken)']/*" />

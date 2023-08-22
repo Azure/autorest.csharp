@@ -6,15 +6,10 @@
 #nullable disable
 
 using System;
-using System.Collections.Generic;
-using System.IO;
 using System.Text.Json;
 using System.Threading.Tasks;
 using Azure;
-using Azure.Core;
-using Azure.Identity;
 using NUnit.Framework;
-using _Specs_.Azure.ClientGenerator.Core.Internal.Models;
 
 namespace _Specs_.Azure.ClientGenerator.Core.Internal.Samples
 {
@@ -50,7 +45,7 @@ namespace _Specs_.Azure.ClientGenerator.Core.Internal.Samples
         {
             var client = new InternalClient().GetSharedClient();
 
-            Response response = await client.PublicAsync("<name>", new RequestContext());
+            Response response = await client.PublicAsync("<name>", new RequestContext()).ConfigureAwait(false);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("name").ToString());
@@ -62,7 +57,7 @@ namespace _Specs_.Azure.ClientGenerator.Core.Internal.Samples
         {
             var client = new InternalClient().GetSharedClient();
 
-            Response response = await client.PublicAsync("<name>", new RequestContext());
+            Response response = await client.PublicAsync("<name>", new RequestContext()).ConfigureAwait(false);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("name").ToString());
@@ -74,7 +69,7 @@ namespace _Specs_.Azure.ClientGenerator.Core.Internal.Samples
         {
             var client = new InternalClient().GetSharedClient();
 
-            var result = await client.PublicAsync("<name>");
+            var result = await client.PublicAsync("<name>").ConfigureAwait(false);
         }
     }
 }

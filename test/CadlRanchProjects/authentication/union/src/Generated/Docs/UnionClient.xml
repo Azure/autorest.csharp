@@ -8,7 +8,7 @@ This sample shows how to call ValidKeyAsync.
 var credential = new AzureKeyCredential("<key>");
 var client = new UnionClient(credential);
 
-Response response = await client.ValidKeyAsync();
+Response response = await client.ValidKeyAsync().ConfigureAwait(false);
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
@@ -32,7 +32,7 @@ This sample shows how to call ValidTokenAsync.
 var credential = new AzureKeyCredential("<key>");
 var client = new UnionClient(credential);
 
-Response response = await client.ValidTokenAsync();
+Response response = await client.ValidTokenAsync().ConfigureAwait(false);
 Console.WriteLine(response.Status);
 ]]></code>
 </example>

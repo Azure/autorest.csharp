@@ -11,7 +11,7 @@ var data = new {
     name = "<name>",
 };
 
-Response response = await client.CreateOrUpdateAsync(1234, RequestContent.Create(data));
+Response response = await client.CreateOrUpdateAsync(1234, RequestContent.Create(data)).ConfigureAwait(false);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("id").ToString());
@@ -32,7 +32,7 @@ var data = new {
     },
 };
 
-Response response = await client.CreateOrUpdateAsync(1234, RequestContent.Create(data));
+Response response = await client.CreateOrUpdateAsync(1234, RequestContent.Create(data)).ConfigureAwait(false);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("id").ToString());
