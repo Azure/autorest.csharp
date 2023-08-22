@@ -267,6 +267,11 @@ namespace AutoRest.CSharp.Common.Output.Builders
 
             if (valueType == typeof(BinaryData))
             {
+                if (valueSerialization.Format is SerializationFormat.Bytes_Base64 or SerializationFormat.Bytes_Base64Url)
+                {
+                    return utf8JsonWriter.WriteBase64StringValue(new BinaryDataExpression(value).ToArray(), valueSerialization.Format.ToFormatSpecifier());
+                }
+
                 return new IfElsePreprocessorDirective
                 (
                     "NET6_0_OR_GREATER",
@@ -764,7 +769,9 @@ namespace AutoRest.CSharp.Common.Output.Builders
 
             if (frameworkType == typeof(BinaryData))
             {
-                return BinaryDataExpression.FromString(element.GetRawText());
+                return format is SerializationFormat.Bytes_Base64 or SerializationFormat.Bytes_Base64Url
+                    ? BinaryDataExpression.FromBytes(element.GetBytesFromBase64(format.ToFormatSpecifier()))
+                    : BinaryDataExpression.FromString(element.GetRawText());
             }
 
             if (IsCustomJsonConverterAdded(frameworkType) && serializationType is not null)
