@@ -114,19 +114,11 @@ namespace ModelsTypeSpec.Models
             }
             writer.WriteEndObject();
             writer.WritePropertyName("requiredBytes"u8);
-#if NET6_0_OR_GREATER
-				writer.WriteRawValue(RequiredBytes);
-#else
-            JsonSerializer.Serialize(writer, JsonDocument.Parse(RequiredBytes.ToString()).RootElement);
-#endif
+            writer.WriteBase64StringValue(RequiredBytes.ToArray(), "D");
             if (Optional.IsDefined(OptionalBytes))
             {
                 writer.WritePropertyName("optionalBytes"u8);
-#if NET6_0_OR_GREATER
-				writer.WriteRawValue(OptionalBytes);
-#else
-                JsonSerializer.Serialize(writer, JsonDocument.Parse(OptionalBytes.ToString()).RootElement);
-#endif
+                writer.WriteBase64StringValue(OptionalBytes.ToArray(), "D");
             }
             writer.WritePropertyName("requiredUint8Array"u8);
             writer.WriteStartArray();
@@ -177,7 +169,7 @@ namespace ModelsTypeSpec.Models
                 }
                 writer.WriteEndArray();
             }
-            if (RequiredNullableIntList != null && Optional.IsCollectionDefined(RequiredNullableIntList))
+            if (RequiredNullableIntList != null)
             {
                 writer.WritePropertyName("requiredNullableIntList"u8);
                 writer.WriteStartArray();
@@ -191,7 +183,7 @@ namespace ModelsTypeSpec.Models
             {
                 writer.WriteNull("requiredNullableIntList");
             }
-            if (RequiredNullableStringList != null && Optional.IsCollectionDefined(RequiredNullableStringList))
+            if (RequiredNullableStringList != null)
             {
                 writer.WritePropertyName("requiredNullableStringList"u8);
                 writer.WriteStartArray();
@@ -420,7 +412,7 @@ namespace ModelsTypeSpec.Models
                 }
                 if (property.NameEquals("requiredBytes"u8))
                 {
-                    requiredBytes = BinaryData.FromString(property.Value.GetRawText());
+                    requiredBytes = BinaryData.FromBytes(property.Value.GetBytesFromBase64("D"));
                     continue;
                 }
                 if (property.NameEquals("optionalBytes"u8))
@@ -429,7 +421,7 @@ namespace ModelsTypeSpec.Models
                     {
                         continue;
                     }
-                    optionalBytes = BinaryData.FromString(property.Value.GetRawText());
+                    optionalBytes = BinaryData.FromBytes(property.Value.GetBytesFromBase64("D"));
                     continue;
                 }
                 if (property.NameEquals("requiredUint8Array"u8))
@@ -498,7 +490,7 @@ namespace ModelsTypeSpec.Models
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        requiredNullableIntList = new ChangeTrackingList<int>();
+                        requiredNullableIntList = null;
                         continue;
                     }
                     List<int> array = new List<int>();
@@ -513,7 +505,7 @@ namespace ModelsTypeSpec.Models
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        requiredNullableStringList = new ChangeTrackingList<string>();
+                        requiredNullableStringList = null;
                         continue;
                     }
                     List<string> array = new List<string>();
@@ -528,6 +520,7 @@ namespace ModelsTypeSpec.Models
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
+                        nonRequiredNullableIntList = null;
                         continue;
                     }
                     List<int> array = new List<int>();
@@ -542,6 +535,7 @@ namespace ModelsTypeSpec.Models
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
+                        nonRequiredNullableStringList = null;
                         continue;
                     }
                     List<string> array = new List<string>();

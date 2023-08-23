@@ -84,6 +84,7 @@ namespace ModelsTypeSpec.Models
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
+                        optionalNullableList = null;
                         continue;
                     }
                     List<CollectionItem> array = new List<CollectionItem>();
@@ -112,6 +113,7 @@ namespace ModelsTypeSpec.Models
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
+                        optionalNullableRecord = null;
                         continue;
                     }
                     Dictionary<string, RecordItem> dictionary = new Dictionary<string, RecordItem>();

@@ -11,8 +11,23 @@ using Azure.Core;
 
 namespace ModelsTypeSpec.Models
 {
-    internal partial class UnknownBaseModelWithDiscriminator
+    internal partial class UnknownBaseModelWithDiscriminator : IUtf8JsonSerializable
     {
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
+        {
+            writer.WriteStartObject();
+            writer.WritePropertyName("discriminatorProperty"u8);
+            writer.WriteStringValue(DiscriminatorProperty);
+            if (Optional.IsDefined(OptionalPropertyOnBase))
+            {
+                writer.WritePropertyName("optionalPropertyOnBase"u8);
+                writer.WriteStringValue(OptionalPropertyOnBase);
+            }
+            writer.WritePropertyName("requiredPropertyOnBase"u8);
+            writer.WriteNumberValue(RequiredPropertyOnBase);
+            writer.WriteEndObject();
+        }
+
         internal static UnknownBaseModelWithDiscriminator DeserializeUnknownBaseModelWithDiscriminator(JsonElement element)
         {
             if (element.ValueKind == JsonValueKind.Null)
@@ -49,6 +64,14 @@ namespace ModelsTypeSpec.Models
         {
             using var document = JsonDocument.Parse(response.Content);
             return DeserializeUnknownBaseModelWithDiscriminator(document.RootElement);
+        }
+
+        /// <summary> Convert into a Utf8JsonRequestContent. </summary>
+        internal override RequestContent ToRequestContent()
+        {
+            var content = new Utf8JsonRequestContent();
+            content.JsonWriter.WriteObjectValue(this);
+            return content;
         }
     }
 }
