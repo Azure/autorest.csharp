@@ -114,14 +114,13 @@ namespace AutoRest.CSharp.LowLevel.Generation
             var operation = WriteSampleLongRunningOperation(sample, methodSignature, clientVar, isAsync);
 
             // write the paging invocation
-            // TODO -- this might be incorrect, to be verified
-            var itemType = GetItemType(methodSignature.ReturnType);
+            var itemType = GetLongRunningPageableItemType(methodSignature.ReturnType);
             var item = new CodeWriterDeclaration("item");
             _writer.AppendRawIf("await ", isAsync)
                 .Append($"foreach ({itemType} {item:D} in {operation}.Value)");
             using (_writer.Scope())
             {
-                // TODO -- handle response
+                WriteNormalOperationResponse(sample, $"{item}", $"{item}.ToStream()");
             }
         }
 
@@ -158,7 +157,7 @@ namespace AutoRest.CSharp.LowLevel.Generation
         {
             var parameters = WriteOperationInvocationParameters(sample, methodSignature.Parameters);
 
-            var itemType = GetItemType(methodSignature.ReturnType);
+            var itemType = GetPageableItemType(methodSignature.ReturnType);
             var item = new CodeWriterDeclaration("item");
             _writer.AppendRawIf("await ", isAsync)
                 .Append($"foreach ({itemType} {item:D} in {clientVar}.");
@@ -305,17 +304,26 @@ namespace AutoRest.CSharp.LowLevel.Generation
             return returnType;
         }
 
+        private static CSharpType GetLongRunningPageableItemType(CSharpType? returnType)
+        {
+            var unwrapOperation = GetOperationValueType(returnType);
+
+            return GetPageableItemType(unwrapOperation);
+        }
+
         private static CSharpType GetOperationValueType(CSharpType? returnType)
         {
             if (returnType == null)
                 throw new InvalidOperationException("The return type of a client operation should never be null");
+
+            returnType = GetReturnType(returnType);
 
             Debug.Assert(TypeFactory.IsOperationOfT(returnType));
 
             return returnType.Arguments.Single();
         }
 
-        private static CSharpType GetItemType(CSharpType? returnType)
+        private static CSharpType GetPageableItemType(CSharpType? returnType)
         {
             if (returnType == null)
                 throw new InvalidOperationException("The return type of a client operation should never be null");
