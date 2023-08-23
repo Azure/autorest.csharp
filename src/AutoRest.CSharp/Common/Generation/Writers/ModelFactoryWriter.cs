@@ -3,6 +3,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Diagnostics;
 using System.Linq;
 using AutoRest.CSharp.Common.Output.Models.Types;
@@ -40,6 +41,12 @@ namespace AutoRest.CSharp.Generation.Writers
                     foreach (var method in This.Methods)
                     {
                         WriteFactoryMethod(method);
+                        _writer.Line();
+                    }
+
+                    foreach ((MethodSignature currentMethodToCall, MethodSignature previousMethodToAdd, IList<Parameter> missingParameters) in This.MissingOverloadMethods)
+                    {
+                        This.WriteMissingOverloadMethod(_writer, currentMethodToCall, previousMethodToAdd, missingParameters);
                         _writer.Line();
                     }
                 }

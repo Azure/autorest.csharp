@@ -3,11 +3,14 @@
 
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Threading.Tasks;
 using AutoRest.CSharp.Generation.Types;
+using AutoRest.CSharp.Mgmt.AutoRest;
 using AutoRest.CSharp.Output.Models.Shared;
 using Azure;
+using Microsoft.CodeAnalysis;
 using static AutoRest.CSharp.Output.Models.MethodSignatureModifiers;
 
 namespace AutoRest.CSharp.Output.Models
@@ -100,6 +103,46 @@ namespace AutoRest.CSharp.Output.Models
                         : ReturnType.Arguments[0]
                     : null
             };
+        }
+    }
+
+    internal class MethodSignatureComparer : IEqualityComparer<MethodSignature>
+    {
+        public bool Equals(MethodSignature? x, MethodSignature? y)
+        {
+            if (ReferenceEquals(x, y))
+            {
+                return true;
+            }
+
+            if (x is null || y is null)
+            {
+                return false;
+            }
+
+            var result = x.Name == x.Name
+                && CompareType(x.ReturnType, y.ReturnType)
+                && x.Parameters.SequenceEqual(y.Parameters, new ParameterComparer());
+            return result;
+        }
+
+        public int GetHashCode([DisallowNull] MethodSignature obj)
+        {
+            return HashCode.Combine(obj.Name, obj.ReturnType);
+        }
+
+        private bool CompareType(CSharpType? x, CSharpType? y)
+        {
+            if (ReferenceEquals(x, y))
+            {
+                return true;
+            }
+
+            if (x is null || y is null)
+            {
+                return false;
+            }
+            return x.GetType().Equals(y.GetType());
         }
     }
 }

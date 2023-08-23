@@ -334,7 +334,7 @@
     },
     "MgmtCustomizations": {
       "commandName": "Project",
-      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\MgmtCustomizations\\Generated"
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\MgmtCustomizations\\Generated --previous-contract $(SolutionDir)\\test\\PreviousContract\\MgmtCustomizations"
     },
     "MgmtDiscriminator": {
       "commandName": "Project",
