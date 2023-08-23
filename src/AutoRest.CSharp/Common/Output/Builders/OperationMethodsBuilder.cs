@@ -30,13 +30,10 @@ namespace AutoRest.CSharp.Output.Models
                 Return(PipelineField.ProcessMessage(message, new RequestContextExpression(KnownParameters.RequestContext), null, async))
             );
 
-        protected override MethodBodyStatement CreateConvenienceMethodBody(string methodName,
-            RestClientMethodParameters parameters, MethodSignature? createNextPageMessageSignature, bool async)
-        {
-            return methodName != ProtocolMethodName
+        protected override MethodBodyStatement CreateConvenienceMethodBody(string methodName, RestClientMethodParameters parameters, MethodSignature? createNextPageMessageSignature, bool async)
+            => methodName != ProtocolMethodName
                 ? WrapInDiagnosticScope(methodName, CreateConvenienceMethodLogic(parameters, async).AsStatement())
                 : CreateConvenienceMethodLogic(parameters, async).AsStatement();
-        }
 
         private IEnumerable<MethodBodyStatement> CreateConvenienceMethodLogic(RestClientMethodParameters parameters, bool async)
         {
@@ -53,7 +50,7 @@ namespace AutoRest.CSharp.Output.Models
             {
                 yield return Return(ResponseExpression.FromValue(SerializableObjectTypeExpression.FromResponse(serializableObjectType, response), response));
             }
-            else if (TypeFactory.IsReadOnlyList(ResponseType))
+            else if (TypeFactory.IsCollectionType(ResponseType))
             {
                 var firstResponseBodyType = Operation.Responses.Where(r => r is { IsErrorResponse: false, BodyType: {} }).Select(r => r.BodyType).Distinct().First();
                 var serialization = SerializationBuilder.BuildJsonSerialization(firstResponseBodyType!, ResponseType, false);

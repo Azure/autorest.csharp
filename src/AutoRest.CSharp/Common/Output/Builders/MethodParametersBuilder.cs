@@ -319,9 +319,7 @@ namespace AutoRest.CSharp.Output.Models
             }
             else
             {
-                var convenienceMethodParameterType = inputParameter is { Location: RequestLocation.Body, Type: InputListType }
-                    ? new CSharpType(typeof(object))
-                    : _typeFactory.CreateType(inputParameter.Type);
+                var convenienceMethodParameterType = _typeFactory.CreateType(inputParameter.Type);
 
                 var convenienceMethodParameter = Parameter.FromInputParameter(inputParameter, convenienceMethodParameterType, _keepClientDefaultValue, _typeFactory);
                 AddCreateMessageParameter(protocolMethodParameter);
@@ -483,9 +481,22 @@ namespace AutoRest.CSharp.Output.Models
 
         private static ValueExpression CreateConversion(ValueExpression fromExpression, Type fromFrameworkType, CSharpType toType)
         {
-            if ((fromFrameworkType == typeof(BinaryData) || fromFrameworkType == typeof(string)) && toType.EqualsIgnoreNullable(typeof(RequestContent)))
+            if (toType.EqualsIgnoreNullable(typeof(RequestContent)))
             {
-                return fromExpression;
+                if (fromFrameworkType == typeof(BinaryData) || fromFrameworkType == typeof(string))
+                {
+                    return fromExpression;
+                }
+
+                if (TypeFactory.IsList(fromFrameworkType))
+                {
+                    return RequestContentExpression.FromEnumerable(fromExpression);
+                }
+
+                if (TypeFactory.IsDictionary(fromFrameworkType))
+                {
+                    return RequestContentExpression.FromDictionary(fromExpression);
+                }
             }
 
             return RequestContentExpression.Create(fromExpression);

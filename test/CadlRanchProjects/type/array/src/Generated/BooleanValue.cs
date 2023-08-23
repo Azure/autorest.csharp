@@ -39,7 +39,7 @@ namespace _Type._Array
         /// <param name="clientDiagnostics"> The handler for diagnostic messaging in the client. </param>
         /// <param name="pipeline"> The HTTP pipeline for sending and receiving REST requests and responses. </param>
         /// <param name="endpoint"> TestServer endpoint. </param>
-        /// <param name="apiVersion"> The String to use. </param>
+        /// <param name="apiVersion"> The string to use. </param>
         internal BooleanValue(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Uri endpoint, string apiVersion)
         {
             ClientDiagnostics = clientDiagnostics;
@@ -152,7 +152,7 @@ namespace _Type._Array
             }
         }
 
-        /// <param name="body"> The Array to use. </param>
+        /// <param name="body"> The IList{bool} to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
         /// <include file="Docs/BooleanValue.xml" path="doc/members/member[@name='PutAsync(IEnumerable{bool},CancellationToken)']/*" />
@@ -165,7 +165,7 @@ namespace _Type._Array
             return response;
         }
 
-        /// <param name="body"> The Array to use. </param>
+        /// <param name="body"> The IList{bool} to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
         /// <include file="Docs/BooleanValue.xml" path="doc/members/member[@name='Put(IEnumerable{bool},CancellationToken)']/*" />

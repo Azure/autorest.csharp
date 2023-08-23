@@ -7,6 +7,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Text.Json;
 using System.Threading;
 using System.Threading.Tasks;
 using Azure;
@@ -38,7 +39,7 @@ namespace _Type._Dictionary
         /// <param name="clientDiagnostics"> The handler for diagnostic messaging in the client. </param>
         /// <param name="pipeline"> The HTTP pipeline for sending and receiving REST requests and responses. </param>
         /// <param name="endpoint"> TestServer endpoint. </param>
-        /// <param name="apiVersion"> The String to use. </param>
+        /// <param name="apiVersion"> The string to use. </param>
         internal BooleanValue(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Uri endpoint, string apiVersion)
         {
             ClientDiagnostics = clientDiagnostics;
@@ -151,7 +152,7 @@ namespace _Type._Dictionary
             }
         }
 
-        /// <param name="body"> The Dictionary to use. </param>
+        /// <param name="body"> The IDictionary{string,bool} to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
         /// <include file="Docs/BooleanValue.xml" path="doc/members/member[@name='PutAsync(IDictionary{string,bool},CancellationToken)']/*" />
@@ -164,7 +165,7 @@ namespace _Type._Dictionary
             return response;
         }
 
-        /// <param name="body"> The Dictionary to use. </param>
+        /// <param name="body"> The IDictionary{string,bool} to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
         /// <include file="Docs/BooleanValue.xml" path="doc/members/member[@name='Put(IDictionary{string,bool},CancellationToken)']/*" />

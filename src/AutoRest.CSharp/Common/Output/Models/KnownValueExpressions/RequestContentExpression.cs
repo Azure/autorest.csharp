@@ -9,6 +9,8 @@ namespace AutoRest.CSharp.Common.Output.Models.KnownValueExpressions
     internal sealed record RequestContentExpression(ValueExpression Untyped) : TypedValueExpression(typeof(RequestContent), Untyped)
     {
         public static RequestContentExpression Create(ValueExpression serializable) => new(new InvokeStaticMethodExpression(typeof(RequestContent), nameof(RequestContent.Create), new[]{serializable}));
+        public static RequestContentExpression FromEnumerable(ValueExpression enumerable) => new(new InvokeStaticMethodExpression(typeof(RequestContentHelper), nameof(RequestContentHelper.FromEnumerable), new[]{enumerable}));
+        public static RequestContentExpression FromDictionary(ValueExpression dictionary) => new(new InvokeStaticMethodExpression(typeof(RequestContentHelper), nameof(RequestContentHelper.FromDictionary), new[]{dictionary}));
 
         public static implicit operator RequestContentExpression(FormUrlEncodedContentExpression formUrlEncodedContent) => new(formUrlEncodedContent.Untyped);
         public static implicit operator RequestContentExpression(MultipartFormDataContentExpression multipartFormDataContent) => new(multipartFormDataContent.Untyped);

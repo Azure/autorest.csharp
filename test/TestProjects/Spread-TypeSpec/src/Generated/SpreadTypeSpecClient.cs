@@ -7,7 +7,6 @@
 
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Azure;
@@ -900,17 +899,29 @@ namespace SpreadTypeSpec
         {
             Argument.AssertNotNull(requiredStringList, nameof(requiredStringList));
 
-            RequestContext context = FromCancellationToken(cancellationToken);
-            SpreadAliasWithCollectionsRequest spreadAliasWithCollectionsRequest = new SpreadAliasWithCollectionsRequest(requiredStringList.ToList());
+            var content = new Utf8JsonRequestContent();
+            var writer = content.JsonWriter;
+            writer.WriteStartObject();
+            writer.WritePropertyName("requiredStringList"u8);
+            writer.WriteStartArray();
+            foreach (var item in requiredStringList)
+            {
+                writer.WriteStringValue(item);
+            }
+            writer.WriteEndArray();
             if (optionalStringList != null)
             {
-                foreach (var value in optionalStringList)
+                writer.WritePropertyName("optionalStringList"u8);
+                writer.WriteStartArray();
+                foreach (var item in optionalStringList)
                 {
-                    spreadAliasWithCollectionsRequest.OptionalStringList.Add(value);
+                    writer.WriteStringValue(item);
                 }
+                writer.WriteEndArray();
             }
-            SpreadAliasWithCollectionsRequest spreadAliasWithCollectionsRequest0 = spreadAliasWithCollectionsRequest;
-            Response response = await SpreadAliasWithCollectionsAsync(spreadAliasWithCollectionsRequest0.ToRequestContent(), context).ConfigureAwait(false);
+            writer.WriteEndObject();
+            RequestContext context = FromCancellationToken(cancellationToken);
+            Response response = await SpreadAliasWithCollectionsAsync(content, context).ConfigureAwait(false);
             return response;
         }
 
@@ -924,17 +935,29 @@ namespace SpreadTypeSpec
         {
             Argument.AssertNotNull(requiredStringList, nameof(requiredStringList));
 
-            RequestContext context = FromCancellationToken(cancellationToken);
-            SpreadAliasWithCollectionsRequest spreadAliasWithCollectionsRequest = new SpreadAliasWithCollectionsRequest(requiredStringList.ToList());
+            var content = new Utf8JsonRequestContent();
+            var writer = content.JsonWriter;
+            writer.WriteStartObject();
+            writer.WritePropertyName("requiredStringList"u8);
+            writer.WriteStartArray();
+            foreach (var item in requiredStringList)
+            {
+                writer.WriteStringValue(item);
+            }
+            writer.WriteEndArray();
             if (optionalStringList != null)
             {
-                foreach (var value in optionalStringList)
+                writer.WritePropertyName("optionalStringList"u8);
+                writer.WriteStartArray();
+                foreach (var item in optionalStringList)
                 {
-                    spreadAliasWithCollectionsRequest.OptionalStringList.Add(value);
+                    writer.WriteStringValue(item);
                 }
+                writer.WriteEndArray();
             }
-            SpreadAliasWithCollectionsRequest spreadAliasWithCollectionsRequest0 = spreadAliasWithCollectionsRequest;
-            Response response = SpreadAliasWithCollections(spreadAliasWithCollectionsRequest0.ToRequestContent(), context);
+            writer.WriteEndObject();
+            RequestContext context = FromCancellationToken(cancellationToken);
+            Response response = SpreadAliasWithCollections(content, context);
             return response;
         }
 

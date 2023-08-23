@@ -6,15 +6,11 @@
 #nullable disable
 
 using System;
-using System.Collections.Generic;
-using System.IO;
 using System.Text.Json;
 using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
-using Azure.Identity;
 using NUnit.Framework;
-using _Type._Array.Models;
 
 namespace _Type._Array.Samples
 {
@@ -50,7 +46,7 @@ namespace _Type._Array.Samples
         {
             var client = new ArrayClient().GetDatetimeValueClient("1.0.0");
 
-            Response response = await client.GetDatetimeValueAsync(new RequestContext());
+            Response response = await client.GetDatetimeValueAsync(new RequestContext()).ConfigureAwait(false);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result[0].ToString());
@@ -62,7 +58,7 @@ namespace _Type._Array.Samples
         {
             var client = new ArrayClient().GetDatetimeValueClient("1.0.0");
 
-            Response response = await client.GetDatetimeValueAsync(new RequestContext());
+            Response response = await client.GetDatetimeValueAsync(new RequestContext()).ConfigureAwait(false);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result[0].ToString());
@@ -74,7 +70,7 @@ namespace _Type._Array.Samples
         {
             var client = new ArrayClient().GetDatetimeValueClient("1.0.0");
 
-            var result = await client.GetDatetimeValueAsync();
+            var result = await client.GetDatetimeValueAsync().ConfigureAwait(false);
         }
 
         [Test]

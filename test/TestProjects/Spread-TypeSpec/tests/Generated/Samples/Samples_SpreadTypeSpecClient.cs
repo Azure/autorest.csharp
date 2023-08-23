@@ -557,7 +557,7 @@ namespace SpreadTypeSpec.Samples
     },
             };
 
-            Response response = await client.SpreadAliasWithCollectionsAsync(RequestContent.Create(data));
+            Response response = await client.SpreadAliasWithCollectionsAsync(RequestContent.Create(data)).ConfigureAwait(false);
             Console.WriteLine(response.Status);
         }
 
@@ -578,7 +578,7 @@ namespace SpreadTypeSpec.Samples
     },
             };
 
-            Response response = await client.SpreadAliasWithCollectionsAsync(RequestContent.Create(data));
+            Response response = await client.SpreadAliasWithCollectionsAsync(RequestContent.Create(data)).ConfigureAwait(false);
             Console.WriteLine(response.Status);
         }
 
@@ -589,7 +589,7 @@ namespace SpreadTypeSpec.Samples
             var endpoint = new Uri("<https://my-service.azure.com>");
             var client = new SpreadTypeSpecClient(endpoint);
 
-            var result = await client.SpreadAliasWithCollectionsAsync(new string[] { "<requiredStringList>" }, new string[] { "<optionalStringList>" });
+            var result = await client.SpreadAliasWithCollectionsAsync(new string[] { "<requiredStringList>" }, new string[] { "<optionalStringList>" }).ConfigureAwait(false);
         }
     }
 }
