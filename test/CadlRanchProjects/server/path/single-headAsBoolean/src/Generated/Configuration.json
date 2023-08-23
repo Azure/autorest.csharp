@@ -1,0 +1,11 @@
+{
+  "output-folder": ".",
+  "namespace": "Server.Path.SingleHeadAsBoolean",
+  "library-name": "Server.Path.SingleHeadAsBoolean",
+  "shared-source-folders": [
+    "../../../../../../../artifacts/bin/AutoRest.CSharp/Debug/net6.0/Generator.Shared",
+    "../../../../../../../artifacts/bin/AutoRest.CSharp/Debug/net6.0/Azure.Core.Shared"
+  ],
+  "use-overloads-between-protocol-and-convenience": true,
+  "head-as-boolean": true
+}
