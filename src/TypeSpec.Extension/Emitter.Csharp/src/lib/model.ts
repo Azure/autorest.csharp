@@ -65,7 +65,9 @@ import { Usage } from "../type/usage.js";
 import { logger } from "./logger.js";
 import {
     SdkContext,
-    getSdkSimpleType,
+    getAccess,
+    getClientType,
+    getUsage,
     isInternal
 } from "@azure-tools/typespec-client-generator-core";
 import { capitalize, getNameForTemplate } from "./utils.js";
@@ -140,6 +142,13 @@ function getCSharpInputTypeKindByIntrinsicModelName(
             return InputTypeKind.Float32;
         case "float64":
             return InputTypeKind.Float64;
+        case "uri":
+        case "url":
+            return InputTypeKind.Uri;
+        case "uuid":
+            return InputTypeKind.Guid;
+        case "etag":
+            return InputTypeKind.String;
         case "string":
             switch (format?.toLowerCase()) {
                 case "date":
@@ -313,12 +322,12 @@ export function getInputType(
             // In such cases, we don't want to emit a ref and instead just
             // emit the base type directly.
             default:
-                const sdkType = getSdkSimpleType(context, type);
+                const sdkType = getClientType(context, type);
                 return {
                     Name: type.name,
                     Kind: getCSharpInputTypeKindByIntrinsicModelName(
                         sdkType.kind,
-                        sdkType.format ?? formattedType.format,
+                        formattedType.format,
                         formattedType.encode
                     ),
                     IsNullable: false
@@ -472,7 +481,7 @@ export function getInputType(
             enumType = {
                 Name: e.name,
                 Namespace: getFullNamespaceString(e.namespace),
-                Accessibility: undefined, //TODO: need to add accessibility
+                Accessibility: getAccess(context, e),
                 Deprecated: getDeprecated(program, e),
                 Description: getDoc(program, e) ?? "",
                 EnumValueType: enumValueType,
@@ -480,6 +489,7 @@ export function getInputType(
                 IsExtensible: !isFixed(program, e),
                 IsNullable: false
             } as InputEnumType;
+            setUsage(context, e, enumType);
             if (addToCollection) enums.set(e.name, enumType);
         }
         return enumType;
@@ -536,7 +546,7 @@ export function getInputType(
             model = {
                 Name: name,
                 Namespace: getFullNamespaceString(m.namespace),
-                Accessibility: isInternal(context, m) ? "internal" : undefined,
+                Accessibility: isInternal(context, m) ? "internal" : getAccess(context, m),
                 Deprecated: getDeprecated(program, m),
                 Description: getDoc(program, m),
                 IsNullable: false,
@@ -546,6 +556,7 @@ export function getInputType(
                 Usage: Usage.None,
                 Properties: properties // Properties should be the last assigned to model
             } as InputModelType;
+            setUsage(context, m, model);
 
             models.set(name, model);
 
@@ -758,6 +769,23 @@ export function getInputType(
                   IsNullable: false
               } as InputUnionType)
             : ItemTypes[0];
+    }
+}
+
+function setUsage(
+    context: SdkContext,
+    source: Model | Enum,
+    target: InputModelType | InputEnumType
+) {
+    const sourceUsage = getUsage(context, source);
+    if (sourceUsage === UsageFlags.Input) {
+        target.Usage = Usage.Input;
+    }
+    else if (sourceUsage === UsageFlags.Output) {
+        target.Usage = Usage.Output;
+    }
+    else if (sourceUsage === (UsageFlags.Input | UsageFlags.Output)) {
+        target.Usage = Usage.RoundTrip;
     }
 }
 

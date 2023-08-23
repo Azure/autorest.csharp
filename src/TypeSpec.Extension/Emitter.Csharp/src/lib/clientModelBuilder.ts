@@ -9,7 +9,9 @@ import {
     listOperationsInOperationGroup,
     SdkOperationGroup,
     SdkContext,
-    createStateSymbol
+    createStateSymbol,
+    getAllModels,
+    getUsage
 } from "@azure-tools/typespec-client-generator-core";
 import {
     EmitContext,
@@ -217,9 +219,9 @@ export function createModelForService(
         }
     }
 
-    const usages = getUsages(sdkContext, convenienceOperations, modelMap);
-    setUsage(usages, modelMap);
-    setUsage(usages, enumMap);
+    // const usages = getUsages(sdkContext, convenienceOperations, modelMap);
+    // setUsage(usages, modelMap);
+    // setUsage(usages, enumMap);
 
     const clientModel = {
         Name: namespace,
