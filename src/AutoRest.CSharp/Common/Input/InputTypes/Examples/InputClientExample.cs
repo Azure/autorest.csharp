@@ -5,5 +5,5 @@ using System.Collections.Generic;
 
 namespace AutoRest.CSharp.Common.Input.Examples
 {
-    internal record InputClientExample(IReadOnlyList<InputParameterExample> ClientParameters);
+    internal record InputClientExample(InputClient Client, IReadOnlyList<InputParameterExample> ClientParameters);
 }

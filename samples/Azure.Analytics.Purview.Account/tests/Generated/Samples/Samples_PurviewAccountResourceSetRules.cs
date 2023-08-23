@@ -7,10 +7,10 @@
 
 using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Text.Json;
 using System.Threading.Tasks;
 using Azure;
+using Azure.Analytics.Purview.Account;
 using Azure.Core;
 using Azure.Identity;
 using NUnit.Framework;
@@ -23,11 +23,11 @@ namespace Azure.Analytics.Purview.Account.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_GetResourceSetRule()
         {
-            var credential = new DefaultAzureCredential();
-            var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new PurviewAccountsClient(endpoint, credential).GetResourceSetRulesClient();
+            Uri endpoint = new Uri("<endpoint>");
+            TokenCredential credential = new DefaultAzureCredential();
+            PurviewAccountResourceSetRules client = new PurviewAccountsClient(endpoint, credential).GetResourceSetRulesClient();
 
-            Response response = client.GetResourceSetRule(new RequestContext());
+            Response response = client.GetResourceSetRule(null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());
@@ -37,11 +37,11 @@ namespace Azure.Analytics.Purview.Account.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_GetResourceSetRule_AllParameters()
         {
-            var credential = new DefaultAzureCredential();
-            var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new PurviewAccountsClient(endpoint, credential).GetResourceSetRulesClient();
+            Uri endpoint = new Uri("<endpoint>");
+            TokenCredential credential = new DefaultAzureCredential();
+            PurviewAccountResourceSetRules client = new PurviewAccountsClient(endpoint, credential).GetResourceSetRulesClient();
 
-            Response response = client.GetResourceSetRule(new RequestContext());
+            Response response = client.GetResourceSetRule(null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("advancedResourceSet").GetProperty("modifiedAt").ToString());
@@ -135,11 +135,11 @@ namespace Azure.Analytics.Purview.Account.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_GetResourceSetRule_Async()
         {
-            var credential = new DefaultAzureCredential();
-            var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new PurviewAccountsClient(endpoint, credential).GetResourceSetRulesClient();
+            Uri endpoint = new Uri("<endpoint>");
+            TokenCredential credential = new DefaultAzureCredential();
+            PurviewAccountResourceSetRules client = new PurviewAccountsClient(endpoint, credential).GetResourceSetRulesClient();
 
-            Response response = await client.GetResourceSetRuleAsync(new RequestContext());
+            Response response = await client.GetResourceSetRuleAsync(null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());
@@ -149,11 +149,11 @@ namespace Azure.Analytics.Purview.Account.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_GetResourceSetRule_AllParameters_Async()
         {
-            var credential = new DefaultAzureCredential();
-            var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new PurviewAccountsClient(endpoint, credential).GetResourceSetRulesClient();
+            Uri endpoint = new Uri("<endpoint>");
+            TokenCredential credential = new DefaultAzureCredential();
+            PurviewAccountResourceSetRules client = new PurviewAccountsClient(endpoint, credential).GetResourceSetRulesClient();
 
-            Response response = await client.GetResourceSetRuleAsync(new RequestContext());
+            Response response = await client.GetResourceSetRuleAsync(null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("advancedResourceSet").GetProperty("modifiedAt").ToString());
@@ -247,13 +247,12 @@ namespace Azure.Analytics.Purview.Account.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_CreateOrUpdateResourceSetRule()
         {
-            var credential = new DefaultAzureCredential();
-            var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new PurviewAccountsClient(endpoint, credential).GetResourceSetRulesClient();
+            Uri endpoint = new Uri("<endpoint>");
+            TokenCredential credential = new DefaultAzureCredential();
+            PurviewAccountResourceSetRules client = new PurviewAccountsClient(endpoint, credential).GetResourceSetRulesClient();
 
-            var data = new { };
-
-            Response response = client.CreateOrUpdateResourceSetRule(RequestContent.Create(data));
+            RequestContent content = RequestContent.Create(new Dictionary<string, object>());
+            Response response = client.CreateOrUpdateResourceSetRule(content);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());
@@ -263,141 +262,124 @@ namespace Azure.Analytics.Purview.Account.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_CreateOrUpdateResourceSetRule_AllParameters()
         {
-            var credential = new DefaultAzureCredential();
-            var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new PurviewAccountsClient(endpoint, credential).GetResourceSetRulesClient();
+            Uri endpoint = new Uri("<endpoint>");
+            TokenCredential credential = new DefaultAzureCredential();
+            PurviewAccountResourceSetRules client = new PurviewAccountsClient(endpoint, credential).GetResourceSetRulesClient();
 
-            var data = new
+            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
             {
-                advancedResourceSet = new
+                ["advancedResourceSet"] = new Dictionary<string, object>()
                 {
-                    modifiedAt = "2022-05-10T18:57:31.2311892Z",
-                    resourceSetProcessing = "Default",
+                    ["modifiedAt"] = "2022-05-10T18:57:31.2311892Z",
+                    ["resourceSetProcessing"] = "Default",
                 },
-                pathPatternConfig = new
+                ["pathPatternConfig"] = new Dictionary<string, object>()
                 {
-                    acceptedPatterns = new[] {
-            new {
-                createdBy = "<createdBy>",
-                filterType = "Pattern",
-                lastUpdatedTimestamp = 1234L,
-                modifiedBy = "<modifiedBy>",
-                name = "<name>",
-                path = "<path>",
-            }
-        },
-                    complexReplacers = new[] {
-            new {
-                createdBy = "<createdBy>",
-                description = "<description>",
-                disabled = true,
-                disableRecursiveReplacerApplication = true,
-                lastUpdatedTimestamp = 1234L,
-                modifiedBy = "<modifiedBy>",
-                name = "<name>",
-                typeName = "<typeName>",
-            }
-        },
-                    createdBy = "<createdBy>",
-                    enableDefaultPatterns = true,
-                    lastUpdatedTimestamp = 1234L,
-                    modifiedBy = "<modifiedBy>",
-                    normalizationRules = new[] {
-            new {
-                description = "<description>",
-                disabled = true,
-                dynamicReplacement = true,
-                entityTypes = new[] {
-                    "<String>"
+                    ["acceptedPatterns"] = new object[]
+            {
+new Dictionary<string, object>()
+{
+["createdBy"] = default,
+["filterType"] = default,
+["lastUpdatedTimestamp"] = default,
+["modifiedBy"] = default,
+["name"] = default,
+["path"] = default,
+}
+            },
+                    ["complexReplacers"] = new object[]
+            {
+new Dictionary<string, object>()
+{
+["createdBy"] = default,
+["description"] = default,
+["disabled"] = default,
+["disableRecursiveReplacerApplication"] = default,
+["lastUpdatedTimestamp"] = default,
+["modifiedBy"] = default,
+["name"] = default,
+["typeName"] = default,
+}
+            },
+                    ["createdBy"] = "<createdBy>",
+                    ["enableDefaultPatterns"] = true,
+                    ["lastUpdatedTimestamp"] = 1234L,
+                    ["modifiedBy"] = "<modifiedBy>",
+                    ["normalizationRules"] = new object[]
+            {
+new Dictionary<string, object>()
+{
+["description"] = default,
+["disabled"] = default,
+["dynamicReplacement"] = default,
+["entityTypes"] = new object[]
+{
+default
+},
+["lastUpdatedTimestamp"] = default,
+["name"] = default,
+["regex"] = new Dictionary<string, object>()
+{
+["maxDigits"] = default,
+["maxLetters"] = default,
+["minDashes"] = default,
+["minDigits"] = default,
+["minDigitsOrLetters"] = default,
+["minDots"] = default,
+["minHex"] = default,
+["minLetters"] = default,
+["minUnderscores"] = default,
+["options"] = default,
+["regexStr"] = default,
+},
+["replaceWith"] = default,
+["version"] = default,
+}
+            },
+                    ["regexReplacers"] = new object[]
+            {
+new Dictionary<string, object>()
+{
+["condition"] = default,
+["createdBy"] = default,
+["description"] = default,
+["disabled"] = default,
+["disableRecursiveReplacerApplication"] = default,
+["doNotReplaceRegex"] = null,
+["lastUpdatedTimestamp"] = default,
+["modifiedBy"] = default,
+["name"] = default,
+["regex"] = null,
+["replaceWith"] = default,
+}
+            },
+                    ["rejectedPatterns"] = new object[]
+            {
+null
+            },
+                    ["scopedRules"] = new object[]
+            {
+new Dictionary<string, object>()
+{
+["bindingUrl"] = default,
+["rules"] = new object[]
+{
+new Dictionary<string, object>()
+{
+["displayName"] = default,
+["isResourceSet"] = default,
+["lastUpdatedTimestamp"] = default,
+["name"] = default,
+["qualifiedName"] = default,
+}
+},
+["storeType"] = default,
+}
+            },
+                    ["version"] = 1234,
                 },
-                lastUpdatedTimestamp = 1234L,
-                name = "<name>",
-                regex = new {
-                    maxDigits = 1234,
-                    maxLetters = 1234,
-                    minDashes = 1234,
-                    minDigits = 1234,
-                    minDigitsOrLetters = 1234,
-                    minDots = 1234,
-                    minHex = 1234,
-                    minLetters = 1234,
-                    minUnderscores = 1234,
-                    options = 1234,
-                    regexStr = "<regexStr>",
-                },
-                replaceWith = "<replaceWith>",
-                version = 123.45d,
-            }
-        },
-                    regexReplacers = new[] {
-            new {
-                condition = "<condition>",
-                createdBy = "<createdBy>",
-                description = "<description>",
-                disabled = true,
-                disableRecursiveReplacerApplication = true,
-                doNotReplaceRegex = new {
-                    maxDigits = 1234,
-                    maxLetters = 1234,
-                    minDashes = 1234,
-                    minDigits = 1234,
-                    minDigitsOrLetters = 1234,
-                    minDots = 1234,
-                    minHex = 1234,
-                    minLetters = 1234,
-                    minUnderscores = 1234,
-                    options = 1234,
-                    regexStr = "<regexStr>",
-                },
-                lastUpdatedTimestamp = 1234L,
-                modifiedBy = "<modifiedBy>",
-                name = "<name>",
-                regex = new {
-                    maxDigits = 1234,
-                    maxLetters = 1234,
-                    minDashes = 1234,
-                    minDigits = 1234,
-                    minDigitsOrLetters = 1234,
-                    minDots = 1234,
-                    minHex = 1234,
-                    minLetters = 1234,
-                    minUnderscores = 1234,
-                    options = 1234,
-                    regexStr = "<regexStr>",
-                },
-                replaceWith = "<replaceWith>",
-            }
-        },
-                    rejectedPatterns = new[] {
-            new {
-                createdBy = "<createdBy>",
-                filterType = "Pattern",
-                lastUpdatedTimestamp = 1234L,
-                modifiedBy = "<modifiedBy>",
-                name = "<name>",
-                path = "<path>",
-            }
-        },
-                    scopedRules = new[] {
-            new {
-                bindingUrl = "<bindingUrl>",
-                rules = new[] {
-                    new {
-                        displayName = "<displayName>",
-                        isResourceSet = true,
-                        lastUpdatedTimestamp = 1234L,
-                        name = "<name>",
-                        qualifiedName = "<qualifiedName>",
-                    }
-                },
-                storeType = "<storeType>",
-            }
-        },
-                    version = 1234,
-                },
-            };
-
-            Response response = client.CreateOrUpdateResourceSetRule(RequestContent.Create(data));
+            });
+            Response response = client.CreateOrUpdateResourceSetRule(content);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("advancedResourceSet").GetProperty("modifiedAt").ToString());
@@ -491,13 +473,12 @@ namespace Azure.Analytics.Purview.Account.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_CreateOrUpdateResourceSetRule_Async()
         {
-            var credential = new DefaultAzureCredential();
-            var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new PurviewAccountsClient(endpoint, credential).GetResourceSetRulesClient();
+            Uri endpoint = new Uri("<endpoint>");
+            TokenCredential credential = new DefaultAzureCredential();
+            PurviewAccountResourceSetRules client = new PurviewAccountsClient(endpoint, credential).GetResourceSetRulesClient();
 
-            var data = new { };
-
-            Response response = await client.CreateOrUpdateResourceSetRuleAsync(RequestContent.Create(data));
+            RequestContent content = RequestContent.Create(new Dictionary<string, object>());
+            Response response = await client.CreateOrUpdateResourceSetRuleAsync(content);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());
@@ -507,141 +488,124 @@ namespace Azure.Analytics.Purview.Account.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_CreateOrUpdateResourceSetRule_AllParameters_Async()
         {
-            var credential = new DefaultAzureCredential();
-            var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new PurviewAccountsClient(endpoint, credential).GetResourceSetRulesClient();
+            Uri endpoint = new Uri("<endpoint>");
+            TokenCredential credential = new DefaultAzureCredential();
+            PurviewAccountResourceSetRules client = new PurviewAccountsClient(endpoint, credential).GetResourceSetRulesClient();
 
-            var data = new
+            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
             {
-                advancedResourceSet = new
+                ["advancedResourceSet"] = new Dictionary<string, object>()
                 {
-                    modifiedAt = "2022-05-10T18:57:31.2311892Z",
-                    resourceSetProcessing = "Default",
+                    ["modifiedAt"] = "2022-05-10T18:57:31.2311892Z",
+                    ["resourceSetProcessing"] = "Default",
                 },
-                pathPatternConfig = new
+                ["pathPatternConfig"] = new Dictionary<string, object>()
                 {
-                    acceptedPatterns = new[] {
-            new {
-                createdBy = "<createdBy>",
-                filterType = "Pattern",
-                lastUpdatedTimestamp = 1234L,
-                modifiedBy = "<modifiedBy>",
-                name = "<name>",
-                path = "<path>",
-            }
-        },
-                    complexReplacers = new[] {
-            new {
-                createdBy = "<createdBy>",
-                description = "<description>",
-                disabled = true,
-                disableRecursiveReplacerApplication = true,
-                lastUpdatedTimestamp = 1234L,
-                modifiedBy = "<modifiedBy>",
-                name = "<name>",
-                typeName = "<typeName>",
-            }
-        },
-                    createdBy = "<createdBy>",
-                    enableDefaultPatterns = true,
-                    lastUpdatedTimestamp = 1234L,
-                    modifiedBy = "<modifiedBy>",
-                    normalizationRules = new[] {
-            new {
-                description = "<description>",
-                disabled = true,
-                dynamicReplacement = true,
-                entityTypes = new[] {
-                    "<String>"
+                    ["acceptedPatterns"] = new object[]
+            {
+new Dictionary<string, object>()
+{
+["createdBy"] = default,
+["filterType"] = default,
+["lastUpdatedTimestamp"] = default,
+["modifiedBy"] = default,
+["name"] = default,
+["path"] = default,
+}
+            },
+                    ["complexReplacers"] = new object[]
+            {
+new Dictionary<string, object>()
+{
+["createdBy"] = default,
+["description"] = default,
+["disabled"] = default,
+["disableRecursiveReplacerApplication"] = default,
+["lastUpdatedTimestamp"] = default,
+["modifiedBy"] = default,
+["name"] = default,
+["typeName"] = default,
+}
+            },
+                    ["createdBy"] = "<createdBy>",
+                    ["enableDefaultPatterns"] = true,
+                    ["lastUpdatedTimestamp"] = 1234L,
+                    ["modifiedBy"] = "<modifiedBy>",
+                    ["normalizationRules"] = new object[]
+            {
+new Dictionary<string, object>()
+{
+["description"] = default,
+["disabled"] = default,
+["dynamicReplacement"] = default,
+["entityTypes"] = new object[]
+{
+default
+},
+["lastUpdatedTimestamp"] = default,
+["name"] = default,
+["regex"] = new Dictionary<string, object>()
+{
+["maxDigits"] = default,
+["maxLetters"] = default,
+["minDashes"] = default,
+["minDigits"] = default,
+["minDigitsOrLetters"] = default,
+["minDots"] = default,
+["minHex"] = default,
+["minLetters"] = default,
+["minUnderscores"] = default,
+["options"] = default,
+["regexStr"] = default,
+},
+["replaceWith"] = default,
+["version"] = default,
+}
+            },
+                    ["regexReplacers"] = new object[]
+            {
+new Dictionary<string, object>()
+{
+["condition"] = default,
+["createdBy"] = default,
+["description"] = default,
+["disabled"] = default,
+["disableRecursiveReplacerApplication"] = default,
+["doNotReplaceRegex"] = null,
+["lastUpdatedTimestamp"] = default,
+["modifiedBy"] = default,
+["name"] = default,
+["regex"] = null,
+["replaceWith"] = default,
+}
+            },
+                    ["rejectedPatterns"] = new object[]
+            {
+null
+            },
+                    ["scopedRules"] = new object[]
+            {
+new Dictionary<string, object>()
+{
+["bindingUrl"] = default,
+["rules"] = new object[]
+{
+new Dictionary<string, object>()
+{
+["displayName"] = default,
+["isResourceSet"] = default,
+["lastUpdatedTimestamp"] = default,
+["name"] = default,
+["qualifiedName"] = default,
+}
+},
+["storeType"] = default,
+}
+            },
+                    ["version"] = 1234,
                 },
-                lastUpdatedTimestamp = 1234L,
-                name = "<name>",
-                regex = new {
-                    maxDigits = 1234,
-                    maxLetters = 1234,
-                    minDashes = 1234,
-                    minDigits = 1234,
-                    minDigitsOrLetters = 1234,
-                    minDots = 1234,
-                    minHex = 1234,
-                    minLetters = 1234,
-                    minUnderscores = 1234,
-                    options = 1234,
-                    regexStr = "<regexStr>",
-                },
-                replaceWith = "<replaceWith>",
-                version = 123.45d,
-            }
-        },
-                    regexReplacers = new[] {
-            new {
-                condition = "<condition>",
-                createdBy = "<createdBy>",
-                description = "<description>",
-                disabled = true,
-                disableRecursiveReplacerApplication = true,
-                doNotReplaceRegex = new {
-                    maxDigits = 1234,
-                    maxLetters = 1234,
-                    minDashes = 1234,
-                    minDigits = 1234,
-                    minDigitsOrLetters = 1234,
-                    minDots = 1234,
-                    minHex = 1234,
-                    minLetters = 1234,
-                    minUnderscores = 1234,
-                    options = 1234,
-                    regexStr = "<regexStr>",
-                },
-                lastUpdatedTimestamp = 1234L,
-                modifiedBy = "<modifiedBy>",
-                name = "<name>",
-                regex = new {
-                    maxDigits = 1234,
-                    maxLetters = 1234,
-                    minDashes = 1234,
-                    minDigits = 1234,
-                    minDigitsOrLetters = 1234,
-                    minDots = 1234,
-                    minHex = 1234,
-                    minLetters = 1234,
-                    minUnderscores = 1234,
-                    options = 1234,
-                    regexStr = "<regexStr>",
-                },
-                replaceWith = "<replaceWith>",
-            }
-        },
-                    rejectedPatterns = new[] {
-            new {
-                createdBy = "<createdBy>",
-                filterType = "Pattern",
-                lastUpdatedTimestamp = 1234L,
-                modifiedBy = "<modifiedBy>",
-                name = "<name>",
-                path = "<path>",
-            }
-        },
-                    scopedRules = new[] {
-            new {
-                bindingUrl = "<bindingUrl>",
-                rules = new[] {
-                    new {
-                        displayName = "<displayName>",
-                        isResourceSet = true,
-                        lastUpdatedTimestamp = 1234L,
-                        name = "<name>",
-                        qualifiedName = "<qualifiedName>",
-                    }
-                },
-                storeType = "<storeType>",
-            }
-        },
-                    version = 1234,
-                },
-            };
-
-            Response response = await client.CreateOrUpdateResourceSetRuleAsync(RequestContent.Create(data));
+            });
+            Response response = await client.CreateOrUpdateResourceSetRuleAsync(content);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("advancedResourceSet").GetProperty("modifiedAt").ToString());
@@ -735,9 +699,9 @@ namespace Azure.Analytics.Purview.Account.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_DeleteResourceSetRule()
         {
-            var credential = new DefaultAzureCredential();
-            var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new PurviewAccountsClient(endpoint, credential).GetResourceSetRulesClient();
+            Uri endpoint = new Uri("<endpoint>");
+            TokenCredential credential = new DefaultAzureCredential();
+            PurviewAccountResourceSetRules client = new PurviewAccountsClient(endpoint, credential).GetResourceSetRulesClient();
 
             Response response = client.DeleteResourceSetRule();
             Console.WriteLine(response.Status);
@@ -747,9 +711,9 @@ namespace Azure.Analytics.Purview.Account.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_DeleteResourceSetRule_AllParameters()
         {
-            var credential = new DefaultAzureCredential();
-            var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new PurviewAccountsClient(endpoint, credential).GetResourceSetRulesClient();
+            Uri endpoint = new Uri("<endpoint>");
+            TokenCredential credential = new DefaultAzureCredential();
+            PurviewAccountResourceSetRules client = new PurviewAccountsClient(endpoint, credential).GetResourceSetRulesClient();
 
             Response response = client.DeleteResourceSetRule();
             Console.WriteLine(response.Status);
@@ -759,9 +723,9 @@ namespace Azure.Analytics.Purview.Account.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_DeleteResourceSetRule_Async()
         {
-            var credential = new DefaultAzureCredential();
-            var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new PurviewAccountsClient(endpoint, credential).GetResourceSetRulesClient();
+            Uri endpoint = new Uri("<endpoint>");
+            TokenCredential credential = new DefaultAzureCredential();
+            PurviewAccountResourceSetRules client = new PurviewAccountsClient(endpoint, credential).GetResourceSetRulesClient();
 
             Response response = await client.DeleteResourceSetRuleAsync();
             Console.WriteLine(response.Status);
@@ -771,9 +735,9 @@ namespace Azure.Analytics.Purview.Account.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_DeleteResourceSetRule_AllParameters_Async()
         {
-            var credential = new DefaultAzureCredential();
-            var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new PurviewAccountsClient(endpoint, credential).GetResourceSetRulesClient();
+            Uri endpoint = new Uri("<endpoint>");
+            TokenCredential credential = new DefaultAzureCredential();
+            PurviewAccountResourceSetRules client = new PurviewAccountsClient(endpoint, credential).GetResourceSetRulesClient();
 
             Response response = await client.DeleteResourceSetRuleAsync();
             Console.WriteLine(response.Status);

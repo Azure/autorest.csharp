@@ -7,10 +7,10 @@
 
 using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Text.Json;
 using System.Threading.Tasks;
 using Azure;
+using Azure.Analytics.Purview.Account;
 using Azure.Core;
 using Azure.Identity;
 using NUnit.Framework;
@@ -23,11 +23,11 @@ namespace Azure.Analytics.Purview.Account.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_GetCollection()
         {
-            var credential = new DefaultAzureCredential();
-            var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new PurviewAccountsClient(endpoint, credential).GetCollectionsClient("<collectionName>");
+            Uri endpoint = new Uri("<endpoint>");
+            TokenCredential credential = new DefaultAzureCredential();
+            PurviewAccountCollections client = new PurviewAccountsClient(endpoint, credential).GetCollectionsClient("<CollectionName>");
 
-            Response response = client.GetCollection(new RequestContext());
+            Response response = client.GetCollection(null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());
@@ -37,11 +37,11 @@ namespace Azure.Analytics.Purview.Account.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_GetCollection_AllParameters()
         {
-            var credential = new DefaultAzureCredential();
-            var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new PurviewAccountsClient(endpoint, credential).GetCollectionsClient("<collectionName>");
+            Uri endpoint = new Uri("<endpoint>");
+            TokenCredential credential = new DefaultAzureCredential();
+            PurviewAccountCollections client = new PurviewAccountsClient(endpoint, credential).GetCollectionsClient("<CollectionName>");
 
-            Response response = client.GetCollection(new RequestContext());
+            Response response = client.GetCollection(null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("collectionProvisioningState").ToString());
@@ -62,11 +62,11 @@ namespace Azure.Analytics.Purview.Account.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_GetCollection_Async()
         {
-            var credential = new DefaultAzureCredential();
-            var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new PurviewAccountsClient(endpoint, credential).GetCollectionsClient("<collectionName>");
+            Uri endpoint = new Uri("<endpoint>");
+            TokenCredential credential = new DefaultAzureCredential();
+            PurviewAccountCollections client = new PurviewAccountsClient(endpoint, credential).GetCollectionsClient("<CollectionName>");
 
-            Response response = await client.GetCollectionAsync(new RequestContext());
+            Response response = await client.GetCollectionAsync(null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());
@@ -76,11 +76,11 @@ namespace Azure.Analytics.Purview.Account.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_GetCollection_AllParameters_Async()
         {
-            var credential = new DefaultAzureCredential();
-            var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new PurviewAccountsClient(endpoint, credential).GetCollectionsClient("<collectionName>");
+            Uri endpoint = new Uri("<endpoint>");
+            TokenCredential credential = new DefaultAzureCredential();
+            PurviewAccountCollections client = new PurviewAccountsClient(endpoint, credential).GetCollectionsClient("<CollectionName>");
 
-            Response response = await client.GetCollectionAsync(new RequestContext());
+            Response response = await client.GetCollectionAsync(null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("collectionProvisioningState").ToString());
@@ -101,13 +101,12 @@ namespace Azure.Analytics.Purview.Account.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_CreateOrUpdateCollection()
         {
-            var credential = new DefaultAzureCredential();
-            var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new PurviewAccountsClient(endpoint, credential).GetCollectionsClient("<collectionName>");
+            Uri endpoint = new Uri("<endpoint>");
+            TokenCredential credential = new DefaultAzureCredential();
+            PurviewAccountCollections client = new PurviewAccountsClient(endpoint, credential).GetCollectionsClient("<CollectionName>");
 
-            var data = new { };
-
-            Response response = client.CreateOrUpdateCollection(RequestContent.Create(data));
+            RequestContent content = RequestContent.Create(new Dictionary<string, object>());
+            Response response = client.CreateOrUpdateCollection(content);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());
@@ -117,21 +116,20 @@ namespace Azure.Analytics.Purview.Account.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_CreateOrUpdateCollection_AllParameters()
         {
-            var credential = new DefaultAzureCredential();
-            var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new PurviewAccountsClient(endpoint, credential).GetCollectionsClient("<collectionName>");
+            Uri endpoint = new Uri("<endpoint>");
+            TokenCredential credential = new DefaultAzureCredential();
+            PurviewAccountCollections client = new PurviewAccountsClient(endpoint, credential).GetCollectionsClient("<CollectionName>");
 
-            var data = new
+            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
             {
-                description = "<description>",
-                friendlyName = "<friendlyName>",
-                parentCollection = new
+                ["description"] = "<description>",
+                ["friendlyName"] = "<friendlyName>",
+                ["parentCollection"] = new Dictionary<string, object>()
                 {
-                    referenceName = "<referenceName>",
+                    ["referenceName"] = "<referenceName>",
                 },
-            };
-
-            Response response = client.CreateOrUpdateCollection(RequestContent.Create(data));
+            });
+            Response response = client.CreateOrUpdateCollection(content);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("collectionProvisioningState").ToString());
@@ -152,13 +150,12 @@ namespace Azure.Analytics.Purview.Account.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_CreateOrUpdateCollection_Async()
         {
-            var credential = new DefaultAzureCredential();
-            var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new PurviewAccountsClient(endpoint, credential).GetCollectionsClient("<collectionName>");
+            Uri endpoint = new Uri("<endpoint>");
+            TokenCredential credential = new DefaultAzureCredential();
+            PurviewAccountCollections client = new PurviewAccountsClient(endpoint, credential).GetCollectionsClient("<CollectionName>");
 
-            var data = new { };
-
-            Response response = await client.CreateOrUpdateCollectionAsync(RequestContent.Create(data));
+            RequestContent content = RequestContent.Create(new Dictionary<string, object>());
+            Response response = await client.CreateOrUpdateCollectionAsync(content);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());
@@ -168,21 +165,20 @@ namespace Azure.Analytics.Purview.Account.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_CreateOrUpdateCollection_AllParameters_Async()
         {
-            var credential = new DefaultAzureCredential();
-            var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new PurviewAccountsClient(endpoint, credential).GetCollectionsClient("<collectionName>");
+            Uri endpoint = new Uri("<endpoint>");
+            TokenCredential credential = new DefaultAzureCredential();
+            PurviewAccountCollections client = new PurviewAccountsClient(endpoint, credential).GetCollectionsClient("<CollectionName>");
 
-            var data = new
+            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
             {
-                description = "<description>",
-                friendlyName = "<friendlyName>",
-                parentCollection = new
+                ["description"] = "<description>",
+                ["friendlyName"] = "<friendlyName>",
+                ["parentCollection"] = new Dictionary<string, object>()
                 {
-                    referenceName = "<referenceName>",
+                    ["referenceName"] = "<referenceName>",
                 },
-            };
-
-            Response response = await client.CreateOrUpdateCollectionAsync(RequestContent.Create(data));
+            });
+            Response response = await client.CreateOrUpdateCollectionAsync(content);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("collectionProvisioningState").ToString());
@@ -203,9 +199,9 @@ namespace Azure.Analytics.Purview.Account.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_DeleteCollection()
         {
-            var credential = new DefaultAzureCredential();
-            var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new PurviewAccountsClient(endpoint, credential).GetCollectionsClient("<collectionName>");
+            Uri endpoint = new Uri("<endpoint>");
+            TokenCredential credential = new DefaultAzureCredential();
+            PurviewAccountCollections client = new PurviewAccountsClient(endpoint, credential).GetCollectionsClient("<CollectionName>");
 
             Response response = client.DeleteCollection();
             Console.WriteLine(response.Status);
@@ -215,9 +211,9 @@ namespace Azure.Analytics.Purview.Account.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_DeleteCollection_AllParameters()
         {
-            var credential = new DefaultAzureCredential();
-            var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new PurviewAccountsClient(endpoint, credential).GetCollectionsClient("<collectionName>");
+            Uri endpoint = new Uri("<endpoint>");
+            TokenCredential credential = new DefaultAzureCredential();
+            PurviewAccountCollections client = new PurviewAccountsClient(endpoint, credential).GetCollectionsClient("<CollectionName>");
 
             Response response = client.DeleteCollection();
             Console.WriteLine(response.Status);
@@ -227,9 +223,9 @@ namespace Azure.Analytics.Purview.Account.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_DeleteCollection_Async()
         {
-            var credential = new DefaultAzureCredential();
-            var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new PurviewAccountsClient(endpoint, credential).GetCollectionsClient("<collectionName>");
+            Uri endpoint = new Uri("<endpoint>");
+            TokenCredential credential = new DefaultAzureCredential();
+            PurviewAccountCollections client = new PurviewAccountsClient(endpoint, credential).GetCollectionsClient("<CollectionName>");
 
             Response response = await client.DeleteCollectionAsync();
             Console.WriteLine(response.Status);
@@ -239,9 +235,9 @@ namespace Azure.Analytics.Purview.Account.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_DeleteCollection_AllParameters_Async()
         {
-            var credential = new DefaultAzureCredential();
-            var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new PurviewAccountsClient(endpoint, credential).GetCollectionsClient("<collectionName>");
+            Uri endpoint = new Uri("<endpoint>");
+            TokenCredential credential = new DefaultAzureCredential();
+            PurviewAccountCollections client = new PurviewAccountsClient(endpoint, credential).GetCollectionsClient("<CollectionName>");
 
             Response response = await client.DeleteCollectionAsync();
             Console.WriteLine(response.Status);
@@ -251,11 +247,11 @@ namespace Azure.Analytics.Purview.Account.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_GetCollectionPath()
         {
-            var credential = new DefaultAzureCredential();
-            var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new PurviewAccountsClient(endpoint, credential).GetCollectionsClient("<collectionName>");
+            Uri endpoint = new Uri("<endpoint>");
+            TokenCredential credential = new DefaultAzureCredential();
+            PurviewAccountCollections client = new PurviewAccountsClient(endpoint, credential).GetCollectionsClient("<CollectionName>");
 
-            Response response = client.GetCollectionPath(new RequestContext());
+            Response response = client.GetCollectionPath(null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());
@@ -265,11 +261,11 @@ namespace Azure.Analytics.Purview.Account.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_GetCollectionPath_AllParameters()
         {
-            var credential = new DefaultAzureCredential();
-            var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new PurviewAccountsClient(endpoint, credential).GetCollectionsClient("<collectionName>");
+            Uri endpoint = new Uri("<endpoint>");
+            TokenCredential credential = new DefaultAzureCredential();
+            PurviewAccountCollections client = new PurviewAccountsClient(endpoint, credential).GetCollectionsClient("<CollectionName>");
 
-            Response response = client.GetCollectionPath(new RequestContext());
+            Response response = client.GetCollectionPath(null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("parentFriendlyNameChain")[0].ToString());
@@ -280,11 +276,11 @@ namespace Azure.Analytics.Purview.Account.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_GetCollectionPath_Async()
         {
-            var credential = new DefaultAzureCredential();
-            var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new PurviewAccountsClient(endpoint, credential).GetCollectionsClient("<collectionName>");
+            Uri endpoint = new Uri("<endpoint>");
+            TokenCredential credential = new DefaultAzureCredential();
+            PurviewAccountCollections client = new PurviewAccountsClient(endpoint, credential).GetCollectionsClient("<CollectionName>");
 
-            Response response = await client.GetCollectionPathAsync(new RequestContext());
+            Response response = await client.GetCollectionPathAsync(null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());
@@ -294,11 +290,11 @@ namespace Azure.Analytics.Purview.Account.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_GetCollectionPath_AllParameters_Async()
         {
-            var credential = new DefaultAzureCredential();
-            var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new PurviewAccountsClient(endpoint, credential).GetCollectionsClient("<collectionName>");
+            Uri endpoint = new Uri("<endpoint>");
+            TokenCredential credential = new DefaultAzureCredential();
+            PurviewAccountCollections client = new PurviewAccountsClient(endpoint, credential).GetCollectionsClient("<CollectionName>");
 
-            Response response = await client.GetCollectionPathAsync(new RequestContext());
+            Response response = await client.GetCollectionPathAsync(null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("parentFriendlyNameChain")[0].ToString());
@@ -309,14 +305,14 @@ namespace Azure.Analytics.Purview.Account.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_GetCollections()
         {
-            var credential = new DefaultAzureCredential();
-            var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new PurviewAccountsClient(endpoint, credential).GetCollectionsClient("<collectionName>");
+            Uri endpoint = new Uri("<endpoint>");
+            TokenCredential credential = new DefaultAzureCredential();
+            PurviewAccountCollections client = new PurviewAccountsClient(endpoint, credential).GetCollectionsClient(null);
 
-            foreach (var item in client.GetCollections("<skipToken>", new RequestContext()))
+            foreach (BinaryData item in client.GetCollections(null, null))
             {
                 JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
-                Console.WriteLine(result.ToString());
+                Console.WriteLine(result[0].ToString());
             }
         }
 
@@ -324,25 +320,25 @@ namespace Azure.Analytics.Purview.Account.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_GetCollections_AllParameters()
         {
-            var credential = new DefaultAzureCredential();
-            var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new PurviewAccountsClient(endpoint, credential).GetCollectionsClient("<collectionName>");
+            Uri endpoint = new Uri("<endpoint>");
+            TokenCredential credential = new DefaultAzureCredential();
+            PurviewAccountCollections client = new PurviewAccountsClient(endpoint, credential).GetCollectionsClient(null);
 
-            foreach (var item in client.GetCollections("<skipToken>", new RequestContext()))
+            foreach (BinaryData item in client.GetCollections("<skipToken>", null))
             {
                 JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
-                Console.WriteLine(result.GetProperty("collectionProvisioningState").ToString());
-                Console.WriteLine(result.GetProperty("description").ToString());
-                Console.WriteLine(result.GetProperty("friendlyName").ToString());
-                Console.WriteLine(result.GetProperty("name").ToString());
-                Console.WriteLine(result.GetProperty("parentCollection").GetProperty("referenceName").ToString());
-                Console.WriteLine(result.GetProperty("parentCollection").GetProperty("type").ToString());
-                Console.WriteLine(result.GetProperty("systemData").GetProperty("createdAt").ToString());
-                Console.WriteLine(result.GetProperty("systemData").GetProperty("createdBy").ToString());
-                Console.WriteLine(result.GetProperty("systemData").GetProperty("createdByType").ToString());
-                Console.WriteLine(result.GetProperty("systemData").GetProperty("lastModifiedAt").ToString());
-                Console.WriteLine(result.GetProperty("systemData").GetProperty("lastModifiedBy").ToString());
-                Console.WriteLine(result.GetProperty("systemData").GetProperty("lastModifiedByType").ToString());
+                Console.WriteLine(result[0].GetProperty("collectionProvisioningState").ToString());
+                Console.WriteLine(result[0].GetProperty("description").ToString());
+                Console.WriteLine(result[0].GetProperty("friendlyName").ToString());
+                Console.WriteLine(result[0].GetProperty("name").ToString());
+                Console.WriteLine(result[0].GetProperty("parentCollection").GetProperty("referenceName").ToString());
+                Console.WriteLine(result[0].GetProperty("parentCollection").GetProperty("type").ToString());
+                Console.WriteLine(result[0].GetProperty("systemData").GetProperty("createdAt").ToString());
+                Console.WriteLine(result[0].GetProperty("systemData").GetProperty("createdBy").ToString());
+                Console.WriteLine(result[0].GetProperty("systemData").GetProperty("createdByType").ToString());
+                Console.WriteLine(result[0].GetProperty("systemData").GetProperty("lastModifiedAt").ToString());
+                Console.WriteLine(result[0].GetProperty("systemData").GetProperty("lastModifiedBy").ToString());
+                Console.WriteLine(result[0].GetProperty("systemData").GetProperty("lastModifiedByType").ToString());
             }
         }
 
@@ -350,14 +346,14 @@ namespace Azure.Analytics.Purview.Account.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_GetCollections_Async()
         {
-            var credential = new DefaultAzureCredential();
-            var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new PurviewAccountsClient(endpoint, credential).GetCollectionsClient("<collectionName>");
+            Uri endpoint = new Uri("<endpoint>");
+            TokenCredential credential = new DefaultAzureCredential();
+            PurviewAccountCollections client = new PurviewAccountsClient(endpoint, credential).GetCollectionsClient(null);
 
-            await foreach (var item in client.GetCollectionsAsync("<skipToken>", new RequestContext()))
+            await foreach (BinaryData item in client.GetCollectionsAsync(null, null))
             {
                 JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
-                Console.WriteLine(result.ToString());
+                Console.WriteLine(result[0].ToString());
             }
         }
 
@@ -365,25 +361,25 @@ namespace Azure.Analytics.Purview.Account.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_GetCollections_AllParameters_Async()
         {
-            var credential = new DefaultAzureCredential();
-            var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new PurviewAccountsClient(endpoint, credential).GetCollectionsClient("<collectionName>");
+            Uri endpoint = new Uri("<endpoint>");
+            TokenCredential credential = new DefaultAzureCredential();
+            PurviewAccountCollections client = new PurviewAccountsClient(endpoint, credential).GetCollectionsClient(null);
 
-            await foreach (var item in client.GetCollectionsAsync("<skipToken>", new RequestContext()))
+            await foreach (BinaryData item in client.GetCollectionsAsync("<skipToken>", null))
             {
                 JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
-                Console.WriteLine(result.GetProperty("collectionProvisioningState").ToString());
-                Console.WriteLine(result.GetProperty("description").ToString());
-                Console.WriteLine(result.GetProperty("friendlyName").ToString());
-                Console.WriteLine(result.GetProperty("name").ToString());
-                Console.WriteLine(result.GetProperty("parentCollection").GetProperty("referenceName").ToString());
-                Console.WriteLine(result.GetProperty("parentCollection").GetProperty("type").ToString());
-                Console.WriteLine(result.GetProperty("systemData").GetProperty("createdAt").ToString());
-                Console.WriteLine(result.GetProperty("systemData").GetProperty("createdBy").ToString());
-                Console.WriteLine(result.GetProperty("systemData").GetProperty("createdByType").ToString());
-                Console.WriteLine(result.GetProperty("systemData").GetProperty("lastModifiedAt").ToString());
-                Console.WriteLine(result.GetProperty("systemData").GetProperty("lastModifiedBy").ToString());
-                Console.WriteLine(result.GetProperty("systemData").GetProperty("lastModifiedByType").ToString());
+                Console.WriteLine(result[0].GetProperty("collectionProvisioningState").ToString());
+                Console.WriteLine(result[0].GetProperty("description").ToString());
+                Console.WriteLine(result[0].GetProperty("friendlyName").ToString());
+                Console.WriteLine(result[0].GetProperty("name").ToString());
+                Console.WriteLine(result[0].GetProperty("parentCollection").GetProperty("referenceName").ToString());
+                Console.WriteLine(result[0].GetProperty("parentCollection").GetProperty("type").ToString());
+                Console.WriteLine(result[0].GetProperty("systemData").GetProperty("createdAt").ToString());
+                Console.WriteLine(result[0].GetProperty("systemData").GetProperty("createdBy").ToString());
+                Console.WriteLine(result[0].GetProperty("systemData").GetProperty("createdByType").ToString());
+                Console.WriteLine(result[0].GetProperty("systemData").GetProperty("lastModifiedAt").ToString());
+                Console.WriteLine(result[0].GetProperty("systemData").GetProperty("lastModifiedBy").ToString());
+                Console.WriteLine(result[0].GetProperty("systemData").GetProperty("lastModifiedByType").ToString());
             }
         }
 
@@ -391,14 +387,14 @@ namespace Azure.Analytics.Purview.Account.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_GetChildCollectionNames()
         {
-            var credential = new DefaultAzureCredential();
-            var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new PurviewAccountsClient(endpoint, credential).GetCollectionsClient("<collectionName>");
+            Uri endpoint = new Uri("<endpoint>");
+            TokenCredential credential = new DefaultAzureCredential();
+            PurviewAccountCollections client = new PurviewAccountsClient(endpoint, credential).GetCollectionsClient("<CollectionName>");
 
-            foreach (var item in client.GetChildCollectionNames("<skipToken>", new RequestContext()))
+            foreach (BinaryData item in client.GetChildCollectionNames(null, null))
             {
                 JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
-                Console.WriteLine(result.ToString());
+                Console.WriteLine(result[0].ToString());
             }
         }
 
@@ -406,15 +402,15 @@ namespace Azure.Analytics.Purview.Account.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_GetChildCollectionNames_AllParameters()
         {
-            var credential = new DefaultAzureCredential();
-            var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new PurviewAccountsClient(endpoint, credential).GetCollectionsClient("<collectionName>");
+            Uri endpoint = new Uri("<endpoint>");
+            TokenCredential credential = new DefaultAzureCredential();
+            PurviewAccountCollections client = new PurviewAccountsClient(endpoint, credential).GetCollectionsClient("<CollectionName>");
 
-            foreach (var item in client.GetChildCollectionNames("<skipToken>", new RequestContext()))
+            foreach (BinaryData item in client.GetChildCollectionNames("<skipToken>", null))
             {
                 JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
-                Console.WriteLine(result.GetProperty("friendlyName").ToString());
-                Console.WriteLine(result.GetProperty("name").ToString());
+                Console.WriteLine(result[0].GetProperty("friendlyName").ToString());
+                Console.WriteLine(result[0].GetProperty("name").ToString());
             }
         }
 
@@ -422,14 +418,14 @@ namespace Azure.Analytics.Purview.Account.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_GetChildCollectionNames_Async()
         {
-            var credential = new DefaultAzureCredential();
-            var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new PurviewAccountsClient(endpoint, credential).GetCollectionsClient("<collectionName>");
+            Uri endpoint = new Uri("<endpoint>");
+            TokenCredential credential = new DefaultAzureCredential();
+            PurviewAccountCollections client = new PurviewAccountsClient(endpoint, credential).GetCollectionsClient("<CollectionName>");
 
-            await foreach (var item in client.GetChildCollectionNamesAsync("<skipToken>", new RequestContext()))
+            await foreach (BinaryData item in client.GetChildCollectionNamesAsync(null, null))
             {
                 JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
-                Console.WriteLine(result.ToString());
+                Console.WriteLine(result[0].ToString());
             }
         }
 
@@ -437,15 +433,15 @@ namespace Azure.Analytics.Purview.Account.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_GetChildCollectionNames_AllParameters_Async()
         {
-            var credential = new DefaultAzureCredential();
-            var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new PurviewAccountsClient(endpoint, credential).GetCollectionsClient("<collectionName>");
+            Uri endpoint = new Uri("<endpoint>");
+            TokenCredential credential = new DefaultAzureCredential();
+            PurviewAccountCollections client = new PurviewAccountsClient(endpoint, credential).GetCollectionsClient("<CollectionName>");
 
-            await foreach (var item in client.GetChildCollectionNamesAsync("<skipToken>", new RequestContext()))
+            await foreach (BinaryData item in client.GetChildCollectionNamesAsync("<skipToken>", null))
             {
                 JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
-                Console.WriteLine(result.GetProperty("friendlyName").ToString());
-                Console.WriteLine(result.GetProperty("name").ToString());
+                Console.WriteLine(result[0].GetProperty("friendlyName").ToString());
+                Console.WriteLine(result[0].GetProperty("name").ToString());
             }
         }
     }

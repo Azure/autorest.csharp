@@ -204,7 +204,7 @@ namespace AutoRest.CSharp.Output.Samples.Models
             // endpoint we kind of will change its description therefore here we only find it for name and type
             if (IsSameParameter(parameter, KnownParameters.Endpoint))
             {
-                result.Add(parameter.Name, new InputExampleParameterValue(parameter, GetEndpointValue()));
+                result.Add(parameter.Name, new InputExampleParameterValue(parameter, GetEndpointValue(parameter.Name)));
                 return true;
             }
 
@@ -241,13 +241,18 @@ namespace AutoRest.CSharp.Output.Samples.Models
         protected InputParameterExample? FindExampleParameterBySerializedName(IEnumerable<InputParameterExample> parameterExamples, string name)
             => parameterExamples.FirstOrDefault(p => p.Parameter.Name.ToVariableName() == name);
 
-        public InputExampleValue GetEndpointValue()
+        public InputExampleValue GetEndpointValue(string parameterName)
         {
             var clientParameterValue = _inputClientParameterExamples.FirstOrDefault(e => e.Parameter.IsEndpoint)?.ExampleValue;
             if (clientParameterValue != null)
                 return clientParameterValue;
 
-            return _inputOperationExample.Parameters.First(e => e.Parameter.IsEndpoint).ExampleValue;
+            var operationParameterValue = _inputOperationExample.Parameters.FirstOrDefault(e => e.Parameter.IsEndpoint)?.ExampleValue;
+            if (operationParameterValue != null)
+                return operationParameterValue;
+
+            // sometimes, especially in swagger projects, the parameter used as endpoint in our client, does not have the `IsEndpoint` flag, we have to fallback here so that we could at least have a value for it.
+            return InputExampleValue.Value(InputPrimitiveType.String, $"<{parameterName}>");
         }
 
         public bool IsInlineParameter(Parameter parameter)

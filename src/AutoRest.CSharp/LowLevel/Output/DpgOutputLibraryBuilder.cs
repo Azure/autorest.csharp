@@ -391,6 +391,8 @@ namespace AutoRest.CSharp.Output.Models
             }
         }
 
+        private record ClientParametersAndExamples(IReadOnlyList<InputParameter> ClientParameters, IReadOnlyDictionary<string, InputClientExample> Examples);
+
         private class ClientInfo
         {
             public string OperationGroupKey { get; }
@@ -399,21 +401,46 @@ namespace AutoRest.CSharp.Output.Models
             public string Description { get; }
             public INamedTypeSymbol? ExistingType { get; }
             public IReadOnlyList<InputOperation> Operations { get; }
-            public IReadOnlyDictionary<string, InputClientExample> Examples { get; }
 
-            private IReadOnlyList<InputParameter>? _clientParameters;
+            private IReadOnlyDictionary<string, InputClientExample> _initialExamples;
+            public IReadOnlyDictionary<string, InputClientExample> Examples => ClientParametersAndExamples.Examples;
+
             private IReadOnlyList<InputParameter> _initClientParameters;
-            public IReadOnlyList<InputParameter> ClientParameters => _clientParameters ??= EnsureClientParameters();
+            public IReadOnlyList<InputParameter> ClientParameters => ClientParametersAndExamples.ClientParameters;
 
-            private IReadOnlyList<InputParameter> EnsureClientParameters()
+            private ClientParametersAndExamples? _clientParametersAndExamples;
+            private ClientParametersAndExamples ClientParametersAndExamples => _clientParametersAndExamples ??= EnsureClientParametersAndExamples();
+            private ClientParametersAndExamples EnsureClientParametersAndExamples()
             {
                 if (_initClientParameters.Count == 0)
                 {
-                    var endpointParameter = this.Children.SelectMany(c => c.ClientParameters).FirstOrDefault(p => p.IsEndpoint);
-                    return endpointParameter != null ? new[] { endpointParameter } : Array.Empty<InputParameter>();
+                    // when this cliend does not have a defined endpoint parameter, we try to an endpoint parameter on one of the child client if any
+                    var (child, endpointParameter) = Children.Select(c => (c, c.ClientParameters.FirstOrDefault(p => p.IsEndpoint))).FirstOrDefault(p => p.Item2 != null);
+                    if (endpointParameter != null)
+                    {
+                        var fixedExamples = new Dictionary<string, InputClientExample>();
+                        // find the corresponding example value for this parameter from child client, and append it into the example of this client
+                        foreach (var (key, examples) in _initialExamples)
+                        {
+                            var childExample = child.Examples[key];
+                            var endpointExample = childExample.ClientParameters.First(e => e.Parameter == endpointParameter);
+                            fixedExamples.Add(key, examples with
+                            {
+                                ClientParameters = examples.ClientParameters.Append(endpointExample).ToArray()
+                            });
+                        }
+
+                        return new(new[] { endpointParameter }, fixedExamples);
+                    }
+                    else
+                    {
+                        return new(Array.Empty<InputParameter>(), _initialExamples);
+                    }
                 }
-                return _initClientParameters;
+
+                return new(_initClientParameters, _initialExamples);
             }
+
             public ISet<InputParameter> ResourceParameters { get; }
 
             public ClientInfo? Parent { get; set; }
@@ -437,7 +464,7 @@ namespace AutoRest.CSharp.Output.Models
                 ResourceParameters = resourceParameters;
                 Children = new List<ClientInfo>();
                 Requests = new List<InputOperation>();
-                Examples = examples;
+                _initialExamples = examples;
             }
 
             public ClientInfo(string clientName, string clientNamespace, IReadOnlyList<InputParameter> clientParameters, IReadOnlyDictionary<string, InputClientExample> examples)
@@ -452,7 +479,7 @@ namespace AutoRest.CSharp.Output.Models
                 ResourceParameters = new HashSet<InputParameter>();
                 Children = new List<ClientInfo>();
                 Requests = new List<InputOperation>();
-                Examples = examples;
+                _initialExamples = examples;
             }
         }
     }

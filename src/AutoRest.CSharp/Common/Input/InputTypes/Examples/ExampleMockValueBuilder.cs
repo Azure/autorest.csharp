@@ -33,7 +33,7 @@ namespace AutoRest.CSharp.Common.Input.Examples
                 clientParameterExamples.Add(parameterExample);
             }
 
-            return new(clientParameterExamples);
+            return new(client, clientParameterExamples);
         }
 
         public static InputOperationExample BuildOperationExample(InputOperation operation, bool useAllParameters)
