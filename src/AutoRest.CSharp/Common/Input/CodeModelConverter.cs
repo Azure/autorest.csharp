@@ -131,7 +131,7 @@ namespace AutoRest.CSharp.Common.Input
             IsRequired: input.IsRequired,
             GroupedBy: input.GroupedBy != null ? _parametersCache[input.GroupedBy]() : null,
             Kind: GetOperationParameterKind(input),
-            IsApiVersion: input.Origin == "modelerfour:synthesized/api-version",
+            IsApiVersion: input.IsApiVersion,
             IsResourceParameter: Convert.ToBoolean(input.Extensions.GetValue<string>("x-ms-resource-identifier")),
             IsContentType: input.Origin == "modelerfour:synthesized/content-type",
             IsEndpoint: input.Origin == "modelerfour:synthesized/host",
