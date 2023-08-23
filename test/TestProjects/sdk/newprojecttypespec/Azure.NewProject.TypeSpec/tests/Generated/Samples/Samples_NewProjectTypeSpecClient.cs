@@ -858,7 +858,7 @@ namespace Azure.NewProject.TypeSpec.Samples
                 ["requiredInt"] = 1234,
                 ["requiredCollection"] = new object[]
             {
-default
+"1"
             },
                 ["requiredDictionary"] = new Dictionary<string, object>()
                 {
@@ -913,7 +913,7 @@ default
                 ["requiredInt"] = 1234,
                 ["requiredCollection"] = new object[]
             {
-default
+"1"
             },
                 ["requiredDictionary"] = new Dictionary<string, object>()
                 {
@@ -936,22 +936,22 @@ default
                 ["intExtensibleEnum"] = 1,
                 ["intExtensibleEnumCollection"] = new object[]
             {
-default
+1
             },
                 ["floatExtensibleEnum"] = 1,
                 ["floatExtensibleEnumCollection"] = new object[]
             {
-default
+1
             },
                 ["floatFixedEnum"] = 1.1F,
                 ["floatFixedEnumCollection"] = new object[]
             {
-default
+1.1F
             },
                 ["intFixedEnum"] = 1,
                 ["intFixedEnumCollection"] = new object[]
             {
-default
+1
             },
                 ["stringFixedEnum"] = "1",
                 ["requiredUnknown"] = new Dictionary<string, object>(),
@@ -1014,7 +1014,7 @@ default
                 ["requiredInt"] = 1234,
                 ["requiredCollection"] = new object[]
             {
-default
+"1"
             },
                 ["requiredDictionary"] = new Dictionary<string, object>()
                 {
@@ -1069,7 +1069,7 @@ default
                 ["requiredInt"] = 1234,
                 ["requiredCollection"] = new object[]
             {
-default
+"1"
             },
                 ["requiredDictionary"] = new Dictionary<string, object>()
                 {
@@ -1092,22 +1092,22 @@ default
                 ["intExtensibleEnum"] = 1,
                 ["intExtensibleEnumCollection"] = new object[]
             {
-default
+1
             },
                 ["floatExtensibleEnum"] = 1,
                 ["floatExtensibleEnumCollection"] = new object[]
             {
-default
+1
             },
                 ["floatFixedEnum"] = 1.1F,
                 ["floatFixedEnumCollection"] = new object[]
             {
-default
+1.1F
             },
                 ["intFixedEnum"] = 1,
                 ["intFixedEnumCollection"] = new object[]
             {
-default
+1
             },
                 ["stringFixedEnum"] = "1",
                 ["requiredUnknown"] = new Dictionary<string, object>(),
@@ -1170,7 +1170,7 @@ default
                 ["requiredInt"] = 1234,
                 ["requiredCollection"] = new object[]
             {
-default
+"1"
             },
                 ["requiredDictionary"] = new Dictionary<string, object>()
                 {
@@ -1225,7 +1225,7 @@ default
                 ["requiredInt"] = 1234,
                 ["requiredCollection"] = new object[]
             {
-default
+"1"
             },
                 ["requiredDictionary"] = new Dictionary<string, object>()
                 {
@@ -1248,22 +1248,22 @@ default
                 ["intExtensibleEnum"] = 1,
                 ["intExtensibleEnumCollection"] = new object[]
             {
-default
+1
             },
                 ["floatExtensibleEnum"] = 1,
                 ["floatExtensibleEnumCollection"] = new object[]
             {
-default
+1
             },
                 ["floatFixedEnum"] = 1.1F,
                 ["floatFixedEnumCollection"] = new object[]
             {
-default
+1.1F
             },
                 ["intFixedEnum"] = 1,
                 ["intFixedEnumCollection"] = new object[]
             {
-default
+1
             },
                 ["stringFixedEnum"] = "1",
                 ["requiredUnknown"] = new Dictionary<string, object>(),
@@ -1326,7 +1326,7 @@ default
                 ["requiredInt"] = 1234,
                 ["requiredCollection"] = new object[]
             {
-default
+"1"
             },
                 ["requiredDictionary"] = new Dictionary<string, object>()
                 {
@@ -1381,7 +1381,7 @@ default
                 ["requiredInt"] = 1234,
                 ["requiredCollection"] = new object[]
             {
-default
+"1"
             },
                 ["requiredDictionary"] = new Dictionary<string, object>()
                 {
@@ -1404,22 +1404,22 @@ default
                 ["intExtensibleEnum"] = 1,
                 ["intExtensibleEnumCollection"] = new object[]
             {
-default
+1
             },
                 ["floatExtensibleEnum"] = 1,
                 ["floatExtensibleEnumCollection"] = new object[]
             {
-default
+1
             },
                 ["floatFixedEnum"] = 1.1F,
                 ["floatFixedEnumCollection"] = new object[]
             {
-default
+1.1F
             },
                 ["intFixedEnum"] = 1,
                 ["intFixedEnumCollection"] = new object[]
             {
-default
+1
             },
                 ["stringFixedEnum"] = "1",
                 ["requiredUnknown"] = new Dictionary<string, object>(),

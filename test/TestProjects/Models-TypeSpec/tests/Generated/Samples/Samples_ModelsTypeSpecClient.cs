@@ -130,11 +130,11 @@ namespace ModelsTypeSpec.Samples
             ,
                 ["requiredIntList"] = new object[]
             {
-default
+1234
             },
                 ["requiredStringList"] = new object[]
             {
-default
+"<requiredStringList>"
             },
                 ["requiredModelList"] = new object[]
             {
@@ -159,11 +159,11 @@ null
                 },
                 ["requiredCollectionWithNullableFloatElement"] = new object[]
             {
-default
+123.45F
             },
                 ["requiredCollectionWithNullableBooleanElement"] = new object[]
             {
-default
+true
             },
                 ["requiredNullableModelList"] = new object[]
             {
@@ -171,11 +171,11 @@ null
             },
                 ["requiredNullableStringList"] = new object[]
             {
-default
+"<requiredNullableStringList>"
             },
                 ["requiredNullableIntList"] = new object[]
             {
-default
+1234
             },
             });
             Response response = client.InputToRoundTrip(content);
@@ -221,11 +221,11 @@ default
             ,
                 ["requiredIntList"] = new object[]
             {
-default
+1234
             },
                 ["requiredStringList"] = new object[]
             {
-default
+"<requiredStringList>"
             },
                 ["requiredModelList"] = new object[]
             {
@@ -250,11 +250,11 @@ null
                 },
                 ["requiredCollectionWithNullableFloatElement"] = new object[]
             {
-default
+123.45F
             },
                 ["requiredCollectionWithNullableBooleanElement"] = new object[]
             {
-default
+true
             },
                 ["requiredNullableModelList"] = new object[]
             {
@@ -262,11 +262,11 @@ null
             },
                 ["requiredNullableStringList"] = new object[]
             {
-default
+"<requiredNullableStringList>"
             },
                 ["requiredNullableIntList"] = new object[]
             {
-default
+1234
             },
                 ["nonRequiredModelList"] = new object[]
             {
@@ -274,11 +274,11 @@ null
             },
                 ["nonRequiredStringList"] = new object[]
             {
-default
+"<nonRequiredStringList>"
             },
                 ["nonRequiredIntList"] = new object[]
             {
-default
+1234
             },
                 ["nonRequiredNullableModelList"] = new object[]
             {
@@ -286,11 +286,11 @@ null
             },
                 ["nonRequiredNullableStringList"] = new object[]
             {
-default
+"<nonRequiredNullableStringList>"
             },
                 ["nonRequiredNullableIntList"] = new object[]
             {
-default
+1234
             },
             });
             Response response = client.InputToRoundTrip(content);
@@ -462,11 +462,11 @@ null
             ,
                 ["requiredIntList"] = new object[]
             {
-default
+1234
             },
                 ["requiredStringList"] = new object[]
             {
-default
+"<requiredStringList>"
             },
                 ["requiredModelList"] = new object[]
             {
@@ -491,11 +491,11 @@ null
                 },
                 ["requiredCollectionWithNullableFloatElement"] = new object[]
             {
-default
+123.45F
             },
                 ["requiredCollectionWithNullableBooleanElement"] = new object[]
             {
-default
+true
             },
                 ["requiredNullableModelList"] = new object[]
             {
@@ -503,11 +503,11 @@ null
             },
                 ["requiredNullableStringList"] = new object[]
             {
-default
+"<requiredNullableStringList>"
             },
                 ["requiredNullableIntList"] = new object[]
             {
-default
+1234
             },
             });
             Response response = await client.InputToRoundTripAsync(content);
@@ -553,11 +553,11 @@ default
             ,
                 ["requiredIntList"] = new object[]
             {
-default
+1234
             },
                 ["requiredStringList"] = new object[]
             {
-default
+"<requiredStringList>"
             },
                 ["requiredModelList"] = new object[]
             {
@@ -582,11 +582,11 @@ null
                 },
                 ["requiredCollectionWithNullableFloatElement"] = new object[]
             {
-default
+123.45F
             },
                 ["requiredCollectionWithNullableBooleanElement"] = new object[]
             {
-default
+true
             },
                 ["requiredNullableModelList"] = new object[]
             {
@@ -594,11 +594,11 @@ null
             },
                 ["requiredNullableStringList"] = new object[]
             {
-default
+"<requiredNullableStringList>"
             },
                 ["requiredNullableIntList"] = new object[]
             {
-default
+1234
             },
                 ["nonRequiredModelList"] = new object[]
             {
@@ -606,11 +606,11 @@ null
             },
                 ["nonRequiredStringList"] = new object[]
             {
-default
+"<nonRequiredStringList>"
             },
                 ["nonRequiredIntList"] = new object[]
             {
-default
+1234
             },
                 ["nonRequiredNullableModelList"] = new object[]
             {
@@ -618,11 +618,11 @@ null
             },
                 ["nonRequiredNullableStringList"] = new object[]
             {
-default
+"<nonRequiredNullableStringList>"
             },
                 ["nonRequiredNullableIntList"] = new object[]
             {
-default
+1234
             },
             });
             Response response = await client.InputToRoundTripAsync(content);
@@ -794,11 +794,11 @@ null
             ,
                 ["requiredIntList"] = new object[]
             {
-default
+1234
             },
                 ["requiredStringList"] = new object[]
             {
-default
+"<requiredStringList>"
             },
                 ["requiredModelList"] = new object[]
             {
@@ -823,11 +823,11 @@ null
                 },
                 ["requiredCollectionWithNullableFloatElement"] = new object[]
             {
-default
+123.45F
             },
                 ["requiredCollectionWithNullableBooleanElement"] = new object[]
             {
-default
+true
             },
                 ["requiredNullableModelList"] = new object[]
             {
@@ -835,11 +835,11 @@ null
             },
                 ["requiredNullableStringList"] = new object[]
             {
-default
+"<requiredNullableStringList>"
             },
                 ["requiredNullableIntList"] = new object[]
             {
-default
+1234
             },
             });
             Response response = client.InputToRoundTripPrimitive(content);
@@ -877,11 +877,11 @@ default
             ,
                 ["requiredIntList"] = new object[]
             {
-default
+1234
             },
                 ["requiredStringList"] = new object[]
             {
-default
+"<requiredStringList>"
             },
                 ["requiredModelList"] = new object[]
             {
@@ -906,11 +906,11 @@ null
                 },
                 ["requiredCollectionWithNullableFloatElement"] = new object[]
             {
-default
+123.45F
             },
                 ["requiredCollectionWithNullableBooleanElement"] = new object[]
             {
-default
+true
             },
                 ["requiredNullableModelList"] = new object[]
             {
@@ -918,11 +918,11 @@ null
             },
                 ["requiredNullableStringList"] = new object[]
             {
-default
+"<requiredNullableStringList>"
             },
                 ["requiredNullableIntList"] = new object[]
             {
-default
+1234
             },
                 ["nonRequiredModelList"] = new object[]
             {
@@ -930,11 +930,11 @@ null
             },
                 ["nonRequiredStringList"] = new object[]
             {
-default
+"<nonRequiredStringList>"
             },
                 ["nonRequiredIntList"] = new object[]
             {
-default
+1234
             },
                 ["nonRequiredNullableModelList"] = new object[]
             {
@@ -942,11 +942,11 @@ null
             },
                 ["nonRequiredNullableStringList"] = new object[]
             {
-default
+"<nonRequiredNullableStringList>"
             },
                 ["nonRequiredNullableIntList"] = new object[]
             {
-default
+1234
             },
             });
             Response response = client.InputToRoundTripPrimitive(content);
@@ -1098,11 +1098,11 @@ null
             ,
                 ["requiredIntList"] = new object[]
             {
-default
+1234
             },
                 ["requiredStringList"] = new object[]
             {
-default
+"<requiredStringList>"
             },
                 ["requiredModelList"] = new object[]
             {
@@ -1127,11 +1127,11 @@ null
                 },
                 ["requiredCollectionWithNullableFloatElement"] = new object[]
             {
-default
+123.45F
             },
                 ["requiredCollectionWithNullableBooleanElement"] = new object[]
             {
-default
+true
             },
                 ["requiredNullableModelList"] = new object[]
             {
@@ -1139,11 +1139,11 @@ null
             },
                 ["requiredNullableStringList"] = new object[]
             {
-default
+"<requiredNullableStringList>"
             },
                 ["requiredNullableIntList"] = new object[]
             {
-default
+1234
             },
             });
             Response response = await client.InputToRoundTripPrimitiveAsync(content);
@@ -1181,11 +1181,11 @@ default
             ,
                 ["requiredIntList"] = new object[]
             {
-default
+1234
             },
                 ["requiredStringList"] = new object[]
             {
-default
+"<requiredStringList>"
             },
                 ["requiredModelList"] = new object[]
             {
@@ -1210,11 +1210,11 @@ null
                 },
                 ["requiredCollectionWithNullableFloatElement"] = new object[]
             {
-default
+123.45F
             },
                 ["requiredCollectionWithNullableBooleanElement"] = new object[]
             {
-default
+true
             },
                 ["requiredNullableModelList"] = new object[]
             {
@@ -1222,11 +1222,11 @@ null
             },
                 ["requiredNullableStringList"] = new object[]
             {
-default
+"<requiredNullableStringList>"
             },
                 ["requiredNullableIntList"] = new object[]
             {
-default
+1234
             },
                 ["nonRequiredModelList"] = new object[]
             {
@@ -1234,11 +1234,11 @@ null
             },
                 ["nonRequiredStringList"] = new object[]
             {
-default
+"<nonRequiredStringList>"
             },
                 ["nonRequiredIntList"] = new object[]
             {
-default
+1234
             },
                 ["nonRequiredNullableModelList"] = new object[]
             {
@@ -1246,11 +1246,11 @@ null
             },
                 ["nonRequiredNullableStringList"] = new object[]
             {
-default
+"<nonRequiredNullableStringList>"
             },
                 ["nonRequiredNullableIntList"] = new object[]
             {
-default
+1234
             },
             });
             Response response = await client.InputToRoundTripPrimitiveAsync(content);
@@ -1411,11 +1411,11 @@ null
                 ["optionalInt"] = 1234,
                 ["optionalStringList"] = new object[]
             {
-default
+"<optionalStringList>"
             },
                 ["optionalIntList"] = new object[]
             {
-default
+1234
             },
                 ["optionalModelList"] = new object[]
             {
@@ -1467,7 +1467,7 @@ null
                 ["optionalPlainTime"] = "01:23:45",
                 ["optionalCollectionWithNullableIntElement"] = new object[]
             {
-default
+1234
             },
             });
             Response response = client.InputToRoundTripOptional(content);
@@ -1586,11 +1586,11 @@ null
                 ["optionalInt"] = 1234,
                 ["optionalStringList"] = new object[]
             {
-default
+"<optionalStringList>"
             },
                 ["optionalIntList"] = new object[]
             {
-default
+1234
             },
                 ["optionalModelList"] = new object[]
             {
@@ -1642,7 +1642,7 @@ null
                 ["optionalPlainTime"] = "01:23:45",
                 ["optionalCollectionWithNullableIntElement"] = new object[]
             {
-default
+1234
             },
             });
             Response response = await client.InputToRoundTripOptionalAsync(content);
@@ -1788,20 +1788,20 @@ null
                 ["requiredBytes"] = new Dictionary<string, object>(),
                 ["requiredUint8Array"] = new object[]
             {
-default
+1234
             },
                 ["requiredUnknown"] = new Dictionary<string, object>(),
                 ["requiredInt8Array"] = new object[]
             {
-default
+1234
             },
                 ["requiredNullableIntList"] = new object[]
             {
-default
+1234
             },
                 ["requiredNullableStringList"] = new object[]
             {
-default
+"<requiredNullableStringList>"
             },
             });
             Response response = client.RoundTripToOutput(content);
@@ -1871,37 +1871,37 @@ null
                 ["optionalBytes"] = new Dictionary<string, object>(),
                 ["requiredUint8Array"] = new object[]
             {
-default
+1234
             },
                 ["optionalUint8Array"] = new object[]
             {
-default
+1234
             },
                 ["requiredUnknown"] = new Dictionary<string, object>(),
                 ["optionalUnknown"] = new Dictionary<string, object>(),
                 ["requiredInt8Array"] = new object[]
             {
-default
+1234
             },
                 ["optionalInt8Array"] = new object[]
             {
-default
+1234
             },
                 ["requiredNullableIntList"] = new object[]
             {
-default
+1234
             },
                 ["requiredNullableStringList"] = new object[]
             {
-default
+"<requiredNullableStringList>"
             },
                 ["nonRequiredNullableIntList"] = new object[]
             {
-default
+1234
             },
                 ["nonRequiredNullableStringList"] = new object[]
             {
-default
+"<nonRequiredNullableStringList>"
             },
             });
             Response response = client.RoundTripToOutput(content);
@@ -2074,20 +2074,20 @@ null
                 ["requiredBytes"] = new Dictionary<string, object>(),
                 ["requiredUint8Array"] = new object[]
             {
-default
+1234
             },
                 ["requiredUnknown"] = new Dictionary<string, object>(),
                 ["requiredInt8Array"] = new object[]
             {
-default
+1234
             },
                 ["requiredNullableIntList"] = new object[]
             {
-default
+1234
             },
                 ["requiredNullableStringList"] = new object[]
             {
-default
+"<requiredNullableStringList>"
             },
             });
             Response response = await client.RoundTripToOutputAsync(content);
@@ -2157,37 +2157,37 @@ null
                 ["optionalBytes"] = new Dictionary<string, object>(),
                 ["requiredUint8Array"] = new object[]
             {
-default
+1234
             },
                 ["optionalUint8Array"] = new object[]
             {
-default
+1234
             },
                 ["requiredUnknown"] = new Dictionary<string, object>(),
                 ["optionalUnknown"] = new Dictionary<string, object>(),
                 ["requiredInt8Array"] = new object[]
             {
-default
+1234
             },
                 ["optionalInt8Array"] = new object[]
             {
-default
+1234
             },
                 ["requiredNullableIntList"] = new object[]
             {
-default
+1234
             },
                 ["requiredNullableStringList"] = new object[]
             {
-default
+"<requiredNullableStringList>"
             },
                 ["nonRequiredNullableIntList"] = new object[]
             {
-default
+1234
             },
                 ["nonRequiredNullableStringList"] = new object[]
             {
-default
+"<nonRequiredNullableStringList>"
             },
             });
             Response response = await client.RoundTripToOutputAsync(content);

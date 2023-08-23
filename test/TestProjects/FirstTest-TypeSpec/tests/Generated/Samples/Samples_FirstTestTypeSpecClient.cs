@@ -218,7 +218,7 @@ namespace FirstTestTypeSpec.Samples
                 ["requiredBadDescription"] = "<requiredBadDescription>",
                 ["requiredNullableList"] = new object[]
             {
-default
+1234
             },
             });
             Response response = client.PatchAction(content);
@@ -256,11 +256,11 @@ default
                 ["requiredBadDescription"] = "<requiredBadDescription>",
                 ["optionalNullableList"] = new object[]
             {
-default
+1234
             },
                 ["requiredNullableList"] = new object[]
             {
-default
+1234
             },
             });
             Response response = client.PatchAction(content);
@@ -299,7 +299,7 @@ default
                 ["requiredBadDescription"] = "<requiredBadDescription>",
                 ["requiredNullableList"] = new object[]
             {
-default
+1234
             },
             });
             Response response = await client.PatchActionAsync(content);
@@ -337,11 +337,11 @@ default
                 ["requiredBadDescription"] = "<requiredBadDescription>",
                 ["optionalNullableList"] = new object[]
             {
-default
+1234
             },
                 ["requiredNullableList"] = new object[]
             {
-default
+1234
             },
             });
             Response response = await client.PatchActionAsync(content);
@@ -380,7 +380,7 @@ default
                 ["requiredBadDescription"] = "<requiredBadDescription>",
                 ["requiredNullableList"] = new object[]
             {
-default
+1234
             },
             });
             Response response = client.AnonymousBody(content);
@@ -418,11 +418,11 @@ default
                 ["requiredBadDescription"] = "<requiredBadDescription>",
                 ["optionalNullableList"] = new object[]
             {
-default
+1234
             },
                 ["requiredNullableList"] = new object[]
             {
-default
+1234
             },
             });
             Response response = client.AnonymousBody(content);
@@ -461,7 +461,7 @@ default
                 ["requiredBadDescription"] = "<requiredBadDescription>",
                 ["requiredNullableList"] = new object[]
             {
-default
+1234
             },
             });
             Response response = await client.AnonymousBodyAsync(content);
@@ -499,11 +499,11 @@ default
                 ["requiredBadDescription"] = "<requiredBadDescription>",
                 ["optionalNullableList"] = new object[]
             {
-default
+1234
             },
                 ["requiredNullableList"] = new object[]
             {
-default
+1234
             },
             });
             Response response = await client.AnonymousBodyAsync(content);
@@ -796,8 +796,8 @@ default
         [Ignore("Only validating compilation of examples")]
         public void Example_HeadAsBoolean()
         {
-            var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new FirstTestTypeSpecClient(endpoint);
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
             Response<bool> response = client.HeadAsBoolean("<id>");
             Console.WriteLine(response.GetRawResponse().Status);
@@ -807,8 +807,8 @@ default
         [Ignore("Only validating compilation of examples")]
         public void Example_HeadAsBoolean_AllParameters()
         {
-            var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new FirstTestTypeSpecClient(endpoint);
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
             Response<bool> response = client.HeadAsBoolean("<id>");
             Console.WriteLine(response.GetRawResponse().Status);
@@ -818,8 +818,8 @@ default
         [Ignore("Only validating compilation of examples")]
         public async Task Example_HeadAsBoolean_Async()
         {
-            var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new FirstTestTypeSpecClient(endpoint);
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
             Response<bool> response = await client.HeadAsBooleanAsync("<id>");
             Console.WriteLine(response.GetRawResponse().Status);
@@ -829,8 +829,8 @@ default
         [Ignore("Only validating compilation of examples")]
         public async Task Example_HeadAsBoolean_AllParameters_Async()
         {
-            var endpoint = new Uri("<https://my-service.azure.com>");
-            var client = new FirstTestTypeSpecClient(endpoint);
+            Uri endpoint = new Uri("<https://my-service.azure.com>");
+            FirstTestTypeSpecClient client = new FirstTestTypeSpecClient(endpoint);
 
             Response<bool> response = await client.HeadAsBooleanAsync("<id>");
             Console.WriteLine(response.GetRawResponse().Status);
@@ -939,7 +939,7 @@ default
                 ["requiredInt"] = 1234,
                 ["requiredCollection"] = new object[]
             {
-default
+"1"
             },
                 ["requiredDictionary"] = new Dictionary<string, object>()
                 {
@@ -956,7 +956,7 @@ default
                     ["requiredBadDescription"] = "<requiredBadDescription>",
                     ["requiredNullableList"] = new object[]
             {
-default
+1234
             },
                 },
                 ["requiredUnknown"] = new Dictionary<string, object>(),
@@ -1007,7 +1007,7 @@ default
                 ["requiredInt"] = 1234,
                 ["requiredCollection"] = new object[]
             {
-default
+"1"
             },
                 ["requiredDictionary"] = new Dictionary<string, object>()
                 {
@@ -1028,32 +1028,32 @@ default
                     ["requiredBadDescription"] = "<requiredBadDescription>",
                     ["optionalNullableList"] = new object[]
             {
-default
+1234
             },
                     ["requiredNullableList"] = new object[]
             {
-default
+1234
             },
                 },
                 ["intExtensibleEnum"] = 1,
                 ["intExtensibleEnumCollection"] = new object[]
             {
-default
+1
             },
                 ["floatExtensibleEnum"] = 1,
                 ["floatExtensibleEnumCollection"] = new object[]
             {
-default
+1
             },
                 ["floatFixedEnum"] = 1.1F,
                 ["floatFixedEnumCollection"] = new object[]
             {
-default
+1.1F
             },
                 ["intFixedEnum"] = 1,
                 ["intFixedEnumCollection"] = new object[]
             {
-default
+1
             },
                 ["stringFixedEnum"] = "1",
                 ["requiredUnknown"] = new Dictionary<string, object>(),
@@ -1126,7 +1126,7 @@ default
                 ["requiredInt"] = 1234,
                 ["requiredCollection"] = new object[]
             {
-default
+"1"
             },
                 ["requiredDictionary"] = new Dictionary<string, object>()
                 {
@@ -1143,7 +1143,7 @@ default
                     ["requiredBadDescription"] = "<requiredBadDescription>",
                     ["requiredNullableList"] = new object[]
             {
-default
+1234
             },
                 },
                 ["requiredUnknown"] = new Dictionary<string, object>(),
@@ -1194,7 +1194,7 @@ default
                 ["requiredInt"] = 1234,
                 ["requiredCollection"] = new object[]
             {
-default
+"1"
             },
                 ["requiredDictionary"] = new Dictionary<string, object>()
                 {
@@ -1215,32 +1215,32 @@ default
                     ["requiredBadDescription"] = "<requiredBadDescription>",
                     ["optionalNullableList"] = new object[]
             {
-default
+1234
             },
                     ["requiredNullableList"] = new object[]
             {
-default
+1234
             },
                 },
                 ["intExtensibleEnum"] = 1,
                 ["intExtensibleEnumCollection"] = new object[]
             {
-default
+1
             },
                 ["floatExtensibleEnum"] = 1,
                 ["floatExtensibleEnumCollection"] = new object[]
             {
-default
+1
             },
                 ["floatFixedEnum"] = 1.1F,
                 ["floatFixedEnumCollection"] = new object[]
             {
-default
+1.1F
             },
                 ["intFixedEnum"] = 1,
                 ["intFixedEnumCollection"] = new object[]
             {
-default
+1
             },
                 ["stringFixedEnum"] = "1",
                 ["requiredUnknown"] = new Dictionary<string, object>(),
@@ -1313,7 +1313,7 @@ default
                 ["requiredInt"] = 1234,
                 ["requiredCollection"] = new object[]
             {
-default
+"1"
             },
                 ["requiredDictionary"] = new Dictionary<string, object>()
                 {
@@ -1330,7 +1330,7 @@ default
                     ["requiredBadDescription"] = "<requiredBadDescription>",
                     ["requiredNullableList"] = new object[]
             {
-default
+1234
             },
                 },
                 ["requiredUnknown"] = new Dictionary<string, object>(),
@@ -1381,7 +1381,7 @@ default
                 ["requiredInt"] = 1234,
                 ["requiredCollection"] = new object[]
             {
-default
+"1"
             },
                 ["requiredDictionary"] = new Dictionary<string, object>()
                 {
@@ -1402,32 +1402,32 @@ default
                     ["requiredBadDescription"] = "<requiredBadDescription>",
                     ["optionalNullableList"] = new object[]
             {
-default
+1234
             },
                     ["requiredNullableList"] = new object[]
             {
-default
+1234
             },
                 },
                 ["intExtensibleEnum"] = 1,
                 ["intExtensibleEnumCollection"] = new object[]
             {
-default
+1
             },
                 ["floatExtensibleEnum"] = 1,
                 ["floatExtensibleEnumCollection"] = new object[]
             {
-default
+1
             },
                 ["floatFixedEnum"] = 1.1F,
                 ["floatFixedEnumCollection"] = new object[]
             {
-default
+1.1F
             },
                 ["intFixedEnum"] = 1,
                 ["intFixedEnumCollection"] = new object[]
             {
-default
+1
             },
                 ["stringFixedEnum"] = "1",
                 ["requiredUnknown"] = new Dictionary<string, object>(),
@@ -1500,7 +1500,7 @@ default
                 ["requiredInt"] = 1234,
                 ["requiredCollection"] = new object[]
             {
-default
+"1"
             },
                 ["requiredDictionary"] = new Dictionary<string, object>()
                 {
@@ -1517,7 +1517,7 @@ default
                     ["requiredBadDescription"] = "<requiredBadDescription>",
                     ["requiredNullableList"] = new object[]
             {
-default
+1234
             },
                 },
                 ["requiredUnknown"] = new Dictionary<string, object>(),
@@ -1568,7 +1568,7 @@ default
                 ["requiredInt"] = 1234,
                 ["requiredCollection"] = new object[]
             {
-default
+"1"
             },
                 ["requiredDictionary"] = new Dictionary<string, object>()
                 {
@@ -1589,32 +1589,32 @@ default
                     ["requiredBadDescription"] = "<requiredBadDescription>",
                     ["optionalNullableList"] = new object[]
             {
-default
+1234
             },
                     ["requiredNullableList"] = new object[]
             {
-default
+1234
             },
                 },
                 ["intExtensibleEnum"] = 1,
                 ["intExtensibleEnumCollection"] = new object[]
             {
-default
+1
             },
                 ["floatExtensibleEnum"] = 1,
                 ["floatExtensibleEnumCollection"] = new object[]
             {
-default
+1
             },
                 ["floatFixedEnum"] = 1.1F,
                 ["floatFixedEnumCollection"] = new object[]
             {
-default
+1.1F
             },
                 ["intFixedEnum"] = 1,
                 ["intFixedEnumCollection"] = new object[]
             {
-default
+1
             },
                 ["stringFixedEnum"] = "1",
                 ["requiredUnknown"] = new Dictionary<string, object>(),
@@ -1782,7 +1782,7 @@ default
                 ["requiredBadDescription"] = "<requiredBadDescription>",
                 ["requiredNullableList"] = new object[]
             {
-default
+1234
             },
             });
             Response response = client.CreateLiteral(content);
@@ -1820,11 +1820,11 @@ default
                 ["requiredBadDescription"] = "<requiredBadDescription>",
                 ["optionalNullableList"] = new object[]
             {
-default
+1234
             },
                 ["requiredNullableList"] = new object[]
             {
-default
+1234
             },
             });
             Response response = client.CreateLiteral(content);
@@ -1863,7 +1863,7 @@ default
                 ["requiredBadDescription"] = "<requiredBadDescription>",
                 ["requiredNullableList"] = new object[]
             {
-default
+1234
             },
             });
             Response response = await client.CreateLiteralAsync(content);
@@ -1901,11 +1901,11 @@ default
                 ["requiredBadDescription"] = "<requiredBadDescription>",
                 ["optionalNullableList"] = new object[]
             {
-default
+1234
             },
                 ["requiredNullableList"] = new object[]
             {
-default
+1234
             },
             });
             Response response = await client.CreateLiteralAsync(content);

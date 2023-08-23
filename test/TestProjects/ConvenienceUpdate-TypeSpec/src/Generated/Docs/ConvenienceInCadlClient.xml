@@ -25,7 +25,7 @@ This sample shows how to call UpdateConvenienceAsync with required parameters an
 <code><![CDATA[
 ConvenienceInCadlClient client = new ConvenienceInCadlClient();
 
-Response response = await client.UpdateConvenienceAsync(new RequestContext());
+Response response = await client.UpdateConvenienceAsync(null);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("id").ToString());
@@ -37,7 +37,7 @@ This sample shows how to call UpdateConvenience with required parameters and par
 <code><![CDATA[
 ConvenienceInCadlClient client = new ConvenienceInCadlClient();
 
-Response response = client.UpdateConvenience(new RequestContext());
+Response response = client.UpdateConvenience(null);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("id").ToString());
@@ -121,7 +121,7 @@ This sample shows how to call NoConvenienceAsync with required parameters and pa
 <code><![CDATA[
 ConvenienceInCadlClient client = new ConvenienceInCadlClient();
 
-Response response = await client.NoConvenienceAsync(new RequestContext());
+Response response = await client.NoConvenienceAsync(null);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("id").ToString());
@@ -133,7 +133,7 @@ This sample shows how to call NoConvenience with required parameters and parse t
 <code><![CDATA[
 ConvenienceInCadlClient client = new ConvenienceInCadlClient();
 
-Response response = client.NoConvenience(new RequestContext());
+Response response = client.NoConvenience(null);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("id").ToString());
@@ -303,7 +303,7 @@ This sample shows how to call ConvenienceWithRequiredAsync with required paramet
 <code><![CDATA[
 ConvenienceInCadlClient client = new ConvenienceInCadlClient();
 
-Response response = await client.ConvenienceWithRequiredAsync(new RequestContext());
+Response response = await client.ConvenienceWithRequiredAsync(null);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("id").ToString());
@@ -315,7 +315,7 @@ This sample shows how to call ConvenienceWithRequired with required parameters a
 <code><![CDATA[
 ConvenienceInCadlClient client = new ConvenienceInCadlClient();
 
-Response response = client.ConvenienceWithRequired(new RequestContext());
+Response response = client.ConvenienceWithRequired(null);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("id").ToString());
@@ -689,7 +689,7 @@ This sample shows how to call ConvenienceOptionalQueryWithRequiredAsync with req
 <code><![CDATA[
 ConvenienceInCadlClient client = new ConvenienceInCadlClient();
 
-Response response = await client.ConvenienceOptionalQueryWithRequiredAsync(1234, new RequestContext());
+Response response = await client.ConvenienceOptionalQueryWithRequiredAsync(1234, null);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("id").ToString());
@@ -701,7 +701,7 @@ This sample shows how to call ConvenienceOptionalQueryWithRequired with required
 <code><![CDATA[
 ConvenienceInCadlClient client = new ConvenienceInCadlClient();
 
-Response response = client.ConvenienceOptionalQueryWithRequired(1234, new RequestContext());
+Response response = client.ConvenienceOptionalQueryWithRequired(1234, null);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("id").ToString());
@@ -731,7 +731,7 @@ This sample shows how to call ConvenienceRequiredQueryWithRequiredAsync with req
 <code><![CDATA[
 ConvenienceInCadlClient client = new ConvenienceInCadlClient();
 
-Response response = await client.ConvenienceRequiredQueryWithRequiredAsync(1234, new RequestContext());
+Response response = await client.ConvenienceRequiredQueryWithRequiredAsync(1234, null);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("id").ToString());
@@ -743,7 +743,7 @@ This sample shows how to call ConvenienceRequiredQueryWithRequired with required
 <code><![CDATA[
 ConvenienceInCadlClient client = new ConvenienceInCadlClient();
 
-Response response = client.ConvenienceRequiredQueryWithRequired(1234, new RequestContext());
+Response response = client.ConvenienceRequiredQueryWithRequired(1234, null);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("id").ToString());

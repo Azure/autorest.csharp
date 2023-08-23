@@ -263,17 +263,17 @@ null
             {
 new Dictionary<string, object>()
 {
-["something"] = default,
+["something"] = "<something>",
 ["reference"] = new Dictionary<string, object>()
 {
-["name"] = default,
+["name"] = "<name>",
 ["selfReference"] = new object[]
 {
 null
 },
-["unionProperty"] = default,
+["unionProperty"] = "<unionProperty>",
 },
-["unionProperty"] = default,
+["unionProperty"] = "<unionProperty>",
 }
             },
             });
@@ -310,17 +310,17 @@ null
             {
 new Dictionary<string, object>()
 {
-["something"] = default,
+["something"] = "<something>",
 ["reference"] = new Dictionary<string, object>()
 {
-["name"] = default,
+["name"] = "<name>",
 ["selfReference"] = new object[]
 {
 null
 },
-["unionProperty"] = default,
+["unionProperty"] = "<unionProperty>",
 },
-["unionProperty"] = default,
+["unionProperty"] = "<unionProperty>",
 }
             },
             });

@@ -7,13 +7,13 @@
 
 using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Text.Json;
 using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
 using Azure.Identity;
 using NUnit.Framework;
+using _Specs_.Azure.Core.Basic;
 using _Specs_.Azure.Core.Basic.Models;
 
 namespace _Specs_.Azure.Core.Basic.Samples
@@ -24,14 +24,13 @@ namespace _Specs_.Azure.Core.Basic.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_CreateOrUpdate()
         {
-            var client = new BasicClient();
+            BasicClient client = new BasicClient();
 
-            var data = new
+            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
             {
-                name = "<name>",
-            };
-
-            Response response = client.CreateOrUpdate(1234, RequestContent.Create(data));
+                ["name"] = "<name>",
+            });
+            Response response = client.CreateOrUpdate(1234, content);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("id").ToString());
@@ -43,20 +42,21 @@ namespace _Specs_.Azure.Core.Basic.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_CreateOrUpdate_AllParameters()
         {
-            var client = new BasicClient();
+            BasicClient client = new BasicClient();
 
-            var data = new
+            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
             {
-                name = "<name>",
-                orders = new[] {
-        new {
-            userId = 1234,
-            detail = "<detail>",
-        }
-    },
-            };
-
-            Response response = client.CreateOrUpdate(1234, RequestContent.Create(data));
+                ["name"] = "<name>",
+                ["orders"] = new object[]
+            {
+new Dictionary<string, object>()
+{
+["userId"] = 1234,
+["detail"] = "<detail>",
+}
+            },
+            });
+            Response response = client.CreateOrUpdate(1234, content);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("id").ToString());
@@ -71,14 +71,13 @@ namespace _Specs_.Azure.Core.Basic.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_CreateOrUpdate_Async()
         {
-            var client = new BasicClient();
+            BasicClient client = new BasicClient();
 
-            var data = new
+            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
             {
-                name = "<name>",
-            };
-
-            Response response = await client.CreateOrUpdateAsync(1234, RequestContent.Create(data));
+                ["name"] = "<name>",
+            });
+            Response response = await client.CreateOrUpdateAsync(1234, content);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("id").ToString());
@@ -90,20 +89,21 @@ namespace _Specs_.Azure.Core.Basic.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_CreateOrUpdate_AllParameters_Async()
         {
-            var client = new BasicClient();
+            BasicClient client = new BasicClient();
 
-            var data = new
+            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
             {
-                name = "<name>",
-                orders = new[] {
-        new {
-            userId = 1234,
-            detail = "<detail>",
-        }
-    },
-            };
-
-            Response response = await client.CreateOrUpdateAsync(1234, RequestContent.Create(data));
+                ["name"] = "<name>",
+                ["orders"] = new object[]
+            {
+new Dictionary<string, object>()
+{
+["userId"] = 1234,
+["detail"] = "<detail>",
+}
+            },
+            });
+            Response response = await client.CreateOrUpdateAsync(1234, content);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("id").ToString());
@@ -118,14 +118,13 @@ namespace _Specs_.Azure.Core.Basic.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_CreateOrReplace()
         {
-            var client = new BasicClient();
+            BasicClient client = new BasicClient();
 
-            var data = new
+            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
             {
-                name = "<name>",
-            };
-
-            Response response = client.CreateOrReplace(1234, RequestContent.Create(data));
+                ["name"] = "<name>",
+            });
+            Response response = client.CreateOrReplace(1234, content);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("id").ToString());
@@ -137,20 +136,21 @@ namespace _Specs_.Azure.Core.Basic.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_CreateOrReplace_AllParameters()
         {
-            var client = new BasicClient();
+            BasicClient client = new BasicClient();
 
-            var data = new
+            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
             {
-                name = "<name>",
-                orders = new[] {
-        new {
-            userId = 1234,
-            detail = "<detail>",
-        }
-    },
-            };
-
-            Response response = client.CreateOrReplace(1234, RequestContent.Create(data));
+                ["name"] = "<name>",
+                ["orders"] = new object[]
+            {
+new Dictionary<string, object>()
+{
+["userId"] = 1234,
+["detail"] = "<detail>",
+}
+            },
+            });
+            Response response = client.CreateOrReplace(1234, content);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("id").ToString());
@@ -163,16 +163,41 @@ namespace _Specs_.Azure.Core.Basic.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
+        public void Example_CreateOrReplace_Convenience()
+        {
+            BasicClient client = new BasicClient();
+
+            User resource = new User("<name>");
+            Response<User> response = client.CreateOrReplace(1234, resource);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_CreateOrReplace_AllParameters_Convenience()
+        {
+            BasicClient client = new BasicClient();
+
+            User resource = new User("<name>")
+            {
+                Orders =
+{
+new UserOrder(1234,"<detail>")
+},
+            };
+            Response<User> response = client.CreateOrReplace(1234, resource);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
         public async Task Example_CreateOrReplace_Async()
         {
-            var client = new BasicClient();
+            BasicClient client = new BasicClient();
 
-            var data = new
+            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
             {
-                name = "<name>",
-            };
-
-            Response response = await client.CreateOrReplaceAsync(1234, RequestContent.Create(data));
+                ["name"] = "<name>",
+            });
+            Response response = await client.CreateOrReplaceAsync(1234, content);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("id").ToString());
@@ -184,20 +209,21 @@ namespace _Specs_.Azure.Core.Basic.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_CreateOrReplace_AllParameters_Async()
         {
-            var client = new BasicClient();
+            BasicClient client = new BasicClient();
 
-            var data = new
+            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
             {
-                name = "<name>",
-                orders = new[] {
-        new {
-            userId = 1234,
-            detail = "<detail>",
-        }
-    },
-            };
-
-            Response response = await client.CreateOrReplaceAsync(1234, RequestContent.Create(data));
+                ["name"] = "<name>",
+                ["orders"] = new object[]
+            {
+new Dictionary<string, object>()
+{
+["userId"] = 1234,
+["detail"] = "<detail>",
+}
+            },
+            });
+            Response response = await client.CreateOrReplaceAsync(1234, content);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("id").ToString());
@@ -212,25 +238,35 @@ namespace _Specs_.Azure.Core.Basic.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_CreateOrReplace_Convenience_Async()
         {
-            var client = new BasicClient();
+            BasicClient client = new BasicClient();
 
-            var resource = new User("<name>")
+            User resource = new User("<name>");
+            Response<User> response = await client.CreateOrReplaceAsync(1234, resource);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_CreateOrReplace_AllParameters_Convenience_Async()
+        {
+            BasicClient client = new BasicClient();
+
+            User resource = new User("<name>")
             {
                 Orders =
 {
-        new UserOrder(1234, "<detail>")
-    },
+new UserOrder(1234,"<detail>")
+},
             };
-            var result = await client.CreateOrReplaceAsync(1234, resource);
+            Response<User> response = await client.CreateOrReplaceAsync(1234, resource);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
         public void Example_GetUser()
         {
-            var client = new BasicClient();
+            BasicClient client = new BasicClient();
 
-            Response response = client.GetUser(1234, new RequestContext());
+            Response response = client.GetUser(1234, null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("id").ToString());
@@ -242,9 +278,9 @@ namespace _Specs_.Azure.Core.Basic.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_GetUser_AllParameters()
         {
-            var client = new BasicClient();
+            BasicClient client = new BasicClient();
 
-            Response response = client.GetUser(1234, new RequestContext());
+            Response response = client.GetUser(1234, null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("id").ToString());
@@ -257,11 +293,29 @@ namespace _Specs_.Azure.Core.Basic.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
+        public void Example_GetUser_Convenience()
+        {
+            BasicClient client = new BasicClient();
+
+            Response<User> response = client.GetUser(1234);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_GetUser_AllParameters_Convenience()
+        {
+            BasicClient client = new BasicClient();
+
+            Response<User> response = client.GetUser(1234);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
         public async Task Example_GetUser_Async()
         {
-            var client = new BasicClient();
+            BasicClient client = new BasicClient();
 
-            Response response = await client.GetUserAsync(1234, new RequestContext());
+            Response response = await client.GetUserAsync(1234, null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("id").ToString());
@@ -273,9 +327,9 @@ namespace _Specs_.Azure.Core.Basic.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_GetUser_AllParameters_Async()
         {
-            var client = new BasicClient();
+            BasicClient client = new BasicClient();
 
-            Response response = await client.GetUserAsync(1234, new RequestContext());
+            Response response = await client.GetUserAsync(1234, null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("id").ToString());
@@ -290,16 +344,25 @@ namespace _Specs_.Azure.Core.Basic.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_GetUser_Convenience_Async()
         {
-            var client = new BasicClient();
+            BasicClient client = new BasicClient();
 
-            var result = await client.GetUserAsync(1234);
+            Response<User> response = await client.GetUserAsync(1234);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_GetUser_AllParameters_Convenience_Async()
+        {
+            BasicClient client = new BasicClient();
+
+            Response<User> response = await client.GetUserAsync(1234);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
         public void Example_Delete()
         {
-            var client = new BasicClient();
+            BasicClient client = new BasicClient();
 
             Response response = client.Delete(1234);
             Console.WriteLine(response.Status);
@@ -309,7 +372,7 @@ namespace _Specs_.Azure.Core.Basic.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Delete_AllParameters()
         {
-            var client = new BasicClient();
+            BasicClient client = new BasicClient();
 
             Response response = client.Delete(1234);
             Console.WriteLine(response.Status);
@@ -319,7 +382,7 @@ namespace _Specs_.Azure.Core.Basic.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Delete_Async()
         {
-            var client = new BasicClient();
+            BasicClient client = new BasicClient();
 
             Response response = await client.DeleteAsync(1234);
             Console.WriteLine(response.Status);
@@ -329,7 +392,7 @@ namespace _Specs_.Azure.Core.Basic.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Delete_AllParameters_Async()
         {
-            var client = new BasicClient();
+            BasicClient client = new BasicClient();
 
             Response response = await client.DeleteAsync(1234);
             Console.WriteLine(response.Status);
@@ -339,9 +402,9 @@ namespace _Specs_.Azure.Core.Basic.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Export()
         {
-            var client = new BasicClient();
+            BasicClient client = new BasicClient();
 
-            Response response = client.Export(1234, "<format>", new RequestContext());
+            Response response = client.Export(1234, "<format>", null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("id").ToString());
@@ -353,9 +416,9 @@ namespace _Specs_.Azure.Core.Basic.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Export_AllParameters()
         {
-            var client = new BasicClient();
+            BasicClient client = new BasicClient();
 
-            Response response = client.Export(1234, "<format>", new RequestContext());
+            Response response = client.Export(1234, "<format>", null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("id").ToString());
@@ -368,11 +431,29 @@ namespace _Specs_.Azure.Core.Basic.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
+        public void Example_Export_Convenience()
+        {
+            BasicClient client = new BasicClient();
+
+            Response<User> response = client.Export(1234, "<format>");
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_Export_AllParameters_Convenience()
+        {
+            BasicClient client = new BasicClient();
+
+            Response<User> response = client.Export(1234, "<format>");
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
         public async Task Example_Export_Async()
         {
-            var client = new BasicClient();
+            BasicClient client = new BasicClient();
 
-            Response response = await client.ExportAsync(1234, "<format>", new RequestContext());
+            Response response = await client.ExportAsync(1234, "<format>", null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("id").ToString());
@@ -384,9 +465,9 @@ namespace _Specs_.Azure.Core.Basic.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Export_AllParameters_Async()
         {
-            var client = new BasicClient();
+            BasicClient client = new BasicClient();
 
-            Response response = await client.ExportAsync(1234, "<format>", new RequestContext());
+            Response response = await client.ExportAsync(1234, "<format>", null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("id").ToString());
@@ -401,23 +482,32 @@ namespace _Specs_.Azure.Core.Basic.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Export_Convenience_Async()
         {
-            var client = new BasicClient();
+            BasicClient client = new BasicClient();
 
-            var result = await client.ExportAsync(1234, "<format>");
+            Response<User> response = await client.ExportAsync(1234, "<format>");
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_Export_AllParameters_Convenience_Async()
+        {
+            BasicClient client = new BasicClient();
+
+            Response<User> response = await client.ExportAsync(1234, "<format>");
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
         public void Example_GetUsers()
         {
-            var client = new BasicClient();
+            BasicClient client = new BasicClient();
 
-            foreach (var item in client.GetUsers(1234, 1234, 1234, new string[] { "<orderby>" }, "<filter>", new string[] { "<select>" }, new string[] { "<expand>" }, new RequestContext()))
+            foreach (BinaryData item in client.GetUsers(null, null, null, null, null, null, null, null))
             {
                 JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
-                Console.WriteLine(result.GetProperty("id").ToString());
-                Console.WriteLine(result.GetProperty("name").ToString());
-                Console.WriteLine(result.GetProperty("etag").ToString());
+                Console.WriteLine(result[0].GetProperty("id").ToString());
+                Console.WriteLine(result[0].GetProperty("name").ToString());
+                Console.WriteLine(result[0].GetProperty("etag").ToString());
             }
         }
 
@@ -425,17 +515,57 @@ namespace _Specs_.Azure.Core.Basic.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_GetUsers_AllParameters()
         {
-            var client = new BasicClient();
+            BasicClient client = new BasicClient();
 
-            foreach (var item in client.GetUsers(1234, 1234, 1234, new string[] { "<orderby>" }, "<filter>", new string[] { "<select>" }, new string[] { "<expand>" }, new RequestContext()))
+            foreach (BinaryData item in client.GetUsers(1234, 1234, 1234, new string[]
+            {
+"<orderby>"
+            }, "<filter>", new string[]
+            {
+"<select>"
+            }, new string[]
+            {
+"<expand>"
+            }, null))
             {
                 JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
-                Console.WriteLine(result.GetProperty("id").ToString());
-                Console.WriteLine(result.GetProperty("name").ToString());
-                Console.WriteLine(result.GetProperty("orders")[0].GetProperty("id").ToString());
-                Console.WriteLine(result.GetProperty("orders")[0].GetProperty("userId").ToString());
-                Console.WriteLine(result.GetProperty("orders")[0].GetProperty("detail").ToString());
-                Console.WriteLine(result.GetProperty("etag").ToString());
+                Console.WriteLine(result[0].GetProperty("id").ToString());
+                Console.WriteLine(result[0].GetProperty("name").ToString());
+                Console.WriteLine(result[0].GetProperty("orders")[0].GetProperty("id").ToString());
+                Console.WriteLine(result[0].GetProperty("orders")[0].GetProperty("userId").ToString());
+                Console.WriteLine(result[0].GetProperty("orders")[0].GetProperty("detail").ToString());
+                Console.WriteLine(result[0].GetProperty("etag").ToString());
+            }
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_GetUsers_Convenience()
+        {
+            BasicClient client = new BasicClient();
+
+            foreach (User item in client.GetUsers())
+            {
+            }
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_GetUsers_AllParameters_Convenience()
+        {
+            BasicClient client = new BasicClient();
+
+            foreach (User item in client.GetUsers(maxCount: 1234, skip: 1234, maxpagesize: 1234, orderby: new string[]
+            {
+"<orderby>"
+            }, filter: "<filter>", select: new string[]
+            {
+"<select>"
+            }, expand: new string[]
+            {
+"<expand>"
+            }))
+            {
             }
         }
 
@@ -443,14 +573,14 @@ namespace _Specs_.Azure.Core.Basic.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_GetUsers_Async()
         {
-            var client = new BasicClient();
+            BasicClient client = new BasicClient();
 
-            await foreach (var item in client.GetUsersAsync(1234, 1234, 1234, new string[] { "<orderby>" }, "<filter>", new string[] { "<select>" }, new string[] { "<expand>" }, new RequestContext()))
+            await foreach (BinaryData item in client.GetUsersAsync(null, null, null, null, null, null, null, null))
             {
                 JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
-                Console.WriteLine(result.GetProperty("id").ToString());
-                Console.WriteLine(result.GetProperty("name").ToString());
-                Console.WriteLine(result.GetProperty("etag").ToString());
+                Console.WriteLine(result[0].GetProperty("id").ToString());
+                Console.WriteLine(result[0].GetProperty("name").ToString());
+                Console.WriteLine(result[0].GetProperty("etag").ToString());
             }
         }
 
@@ -458,17 +588,26 @@ namespace _Specs_.Azure.Core.Basic.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_GetUsers_AllParameters_Async()
         {
-            var client = new BasicClient();
+            BasicClient client = new BasicClient();
 
-            await foreach (var item in client.GetUsersAsync(1234, 1234, 1234, new string[] { "<orderby>" }, "<filter>", new string[] { "<select>" }, new string[] { "<expand>" }, new RequestContext()))
+            await foreach (BinaryData item in client.GetUsersAsync(1234, 1234, 1234, new string[]
+            {
+"<orderby>"
+            }, "<filter>", new string[]
+            {
+"<select>"
+            }, new string[]
+            {
+"<expand>"
+            }, null))
             {
                 JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
-                Console.WriteLine(result.GetProperty("id").ToString());
-                Console.WriteLine(result.GetProperty("name").ToString());
-                Console.WriteLine(result.GetProperty("orders")[0].GetProperty("id").ToString());
-                Console.WriteLine(result.GetProperty("orders")[0].GetProperty("userId").ToString());
-                Console.WriteLine(result.GetProperty("orders")[0].GetProperty("detail").ToString());
-                Console.WriteLine(result.GetProperty("etag").ToString());
+                Console.WriteLine(result[0].GetProperty("id").ToString());
+                Console.WriteLine(result[0].GetProperty("name").ToString());
+                Console.WriteLine(result[0].GetProperty("orders")[0].GetProperty("id").ToString());
+                Console.WriteLine(result[0].GetProperty("orders")[0].GetProperty("userId").ToString());
+                Console.WriteLine(result[0].GetProperty("orders")[0].GetProperty("detail").ToString());
+                Console.WriteLine(result[0].GetProperty("etag").ToString());
             }
         }
 
@@ -476,9 +615,29 @@ namespace _Specs_.Azure.Core.Basic.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_GetUsers_Convenience_Async()
         {
-            var client = new BasicClient();
+            BasicClient client = new BasicClient();
 
-            await foreach (var item in client.GetUsersAsync(1234, 1234, 1234, new string[] { "<orderby>" }, "<filter>", new string[] { "<select>" }, new string[] { "<expand>" }))
+            await foreach (User item in client.GetUsersAsync())
+            {
+            }
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_GetUsers_AllParameters_Convenience_Async()
+        {
+            BasicClient client = new BasicClient();
+
+            await foreach (User item in client.GetUsersAsync(maxCount: 1234, skip: 1234, maxpagesize: 1234, orderby: new string[]
+            {
+"<orderby>"
+            }, filter: "<filter>", select: new string[]
+            {
+"<select>"
+            }, expand: new string[]
+            {
+"<expand>"
+            }))
             {
             }
         }
@@ -487,14 +646,14 @@ namespace _Specs_.Azure.Core.Basic.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_GetWithPage()
         {
-            var client = new BasicClient();
+            BasicClient client = new BasicClient();
 
-            foreach (var item in client.GetWithPage(new RequestContext()))
+            foreach (BinaryData item in client.GetWithPage(null))
             {
                 JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
-                Console.WriteLine(result.GetProperty("id").ToString());
-                Console.WriteLine(result.GetProperty("name").ToString());
-                Console.WriteLine(result.GetProperty("etag").ToString());
+                Console.WriteLine(result[0].GetProperty("id").ToString());
+                Console.WriteLine(result[0].GetProperty("name").ToString());
+                Console.WriteLine(result[0].GetProperty("etag").ToString());
             }
         }
 
@@ -502,17 +661,39 @@ namespace _Specs_.Azure.Core.Basic.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_GetWithPage_AllParameters()
         {
-            var client = new BasicClient();
+            BasicClient client = new BasicClient();
 
-            foreach (var item in client.GetWithPage(new RequestContext()))
+            foreach (BinaryData item in client.GetWithPage(null))
             {
                 JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
-                Console.WriteLine(result.GetProperty("id").ToString());
-                Console.WriteLine(result.GetProperty("name").ToString());
-                Console.WriteLine(result.GetProperty("orders")[0].GetProperty("id").ToString());
-                Console.WriteLine(result.GetProperty("orders")[0].GetProperty("userId").ToString());
-                Console.WriteLine(result.GetProperty("orders")[0].GetProperty("detail").ToString());
-                Console.WriteLine(result.GetProperty("etag").ToString());
+                Console.WriteLine(result[0].GetProperty("id").ToString());
+                Console.WriteLine(result[0].GetProperty("name").ToString());
+                Console.WriteLine(result[0].GetProperty("orders")[0].GetProperty("id").ToString());
+                Console.WriteLine(result[0].GetProperty("orders")[0].GetProperty("userId").ToString());
+                Console.WriteLine(result[0].GetProperty("orders")[0].GetProperty("detail").ToString());
+                Console.WriteLine(result[0].GetProperty("etag").ToString());
+            }
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_GetWithPage_Convenience()
+        {
+            BasicClient client = new BasicClient();
+
+            foreach (User item in client.GetWithPage())
+            {
+            }
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_GetWithPage_AllParameters_Convenience()
+        {
+            BasicClient client = new BasicClient();
+
+            foreach (User item in client.GetWithPage())
+            {
             }
         }
 
@@ -520,14 +701,14 @@ namespace _Specs_.Azure.Core.Basic.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_GetWithPage_Async()
         {
-            var client = new BasicClient();
+            BasicClient client = new BasicClient();
 
-            await foreach (var item in client.GetWithPageAsync(new RequestContext()))
+            await foreach (BinaryData item in client.GetWithPageAsync(null))
             {
                 JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
-                Console.WriteLine(result.GetProperty("id").ToString());
-                Console.WriteLine(result.GetProperty("name").ToString());
-                Console.WriteLine(result.GetProperty("etag").ToString());
+                Console.WriteLine(result[0].GetProperty("id").ToString());
+                Console.WriteLine(result[0].GetProperty("name").ToString());
+                Console.WriteLine(result[0].GetProperty("etag").ToString());
             }
         }
 
@@ -535,17 +716,17 @@ namespace _Specs_.Azure.Core.Basic.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_GetWithPage_AllParameters_Async()
         {
-            var client = new BasicClient();
+            BasicClient client = new BasicClient();
 
-            await foreach (var item in client.GetWithPageAsync(new RequestContext()))
+            await foreach (BinaryData item in client.GetWithPageAsync(null))
             {
                 JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
-                Console.WriteLine(result.GetProperty("id").ToString());
-                Console.WriteLine(result.GetProperty("name").ToString());
-                Console.WriteLine(result.GetProperty("orders")[0].GetProperty("id").ToString());
-                Console.WriteLine(result.GetProperty("orders")[0].GetProperty("userId").ToString());
-                Console.WriteLine(result.GetProperty("orders")[0].GetProperty("detail").ToString());
-                Console.WriteLine(result.GetProperty("etag").ToString());
+                Console.WriteLine(result[0].GetProperty("id").ToString());
+                Console.WriteLine(result[0].GetProperty("name").ToString());
+                Console.WriteLine(result[0].GetProperty("orders")[0].GetProperty("id").ToString());
+                Console.WriteLine(result[0].GetProperty("orders")[0].GetProperty("userId").ToString());
+                Console.WriteLine(result[0].GetProperty("orders")[0].GetProperty("detail").ToString());
+                Console.WriteLine(result[0].GetProperty("etag").ToString());
             }
         }
 
@@ -553,9 +734,20 @@ namespace _Specs_.Azure.Core.Basic.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_GetWithPage_Convenience_Async()
         {
-            var client = new BasicClient();
+            BasicClient client = new BasicClient();
 
-            await foreach (var item in client.GetWithPageAsync())
+            await foreach (User item in client.GetWithPageAsync())
+            {
+            }
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_GetWithPage_AllParameters_Convenience_Async()
+        {
+            BasicClient client = new BasicClient();
+
+            await foreach (User item in client.GetWithPageAsync())
             {
             }
         }
@@ -564,14 +756,14 @@ namespace _Specs_.Azure.Core.Basic.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_GetWithCustomPageModel()
         {
-            var client = new BasicClient();
+            BasicClient client = new BasicClient();
 
-            foreach (var item in client.GetWithCustomPageModel(new RequestContext()))
+            foreach (BinaryData item in client.GetWithCustomPageModel(null))
             {
                 JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
-                Console.WriteLine(result.GetProperty("id").ToString());
-                Console.WriteLine(result.GetProperty("name").ToString());
-                Console.WriteLine(result.GetProperty("etag").ToString());
+                Console.WriteLine(result[0].GetProperty("id").ToString());
+                Console.WriteLine(result[0].GetProperty("name").ToString());
+                Console.WriteLine(result[0].GetProperty("etag").ToString());
             }
         }
 
@@ -579,17 +771,39 @@ namespace _Specs_.Azure.Core.Basic.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_GetWithCustomPageModel_AllParameters()
         {
-            var client = new BasicClient();
+            BasicClient client = new BasicClient();
 
-            foreach (var item in client.GetWithCustomPageModel(new RequestContext()))
+            foreach (BinaryData item in client.GetWithCustomPageModel(null))
             {
                 JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
-                Console.WriteLine(result.GetProperty("id").ToString());
-                Console.WriteLine(result.GetProperty("name").ToString());
-                Console.WriteLine(result.GetProperty("orders")[0].GetProperty("id").ToString());
-                Console.WriteLine(result.GetProperty("orders")[0].GetProperty("userId").ToString());
-                Console.WriteLine(result.GetProperty("orders")[0].GetProperty("detail").ToString());
-                Console.WriteLine(result.GetProperty("etag").ToString());
+                Console.WriteLine(result[0].GetProperty("id").ToString());
+                Console.WriteLine(result[0].GetProperty("name").ToString());
+                Console.WriteLine(result[0].GetProperty("orders")[0].GetProperty("id").ToString());
+                Console.WriteLine(result[0].GetProperty("orders")[0].GetProperty("userId").ToString());
+                Console.WriteLine(result[0].GetProperty("orders")[0].GetProperty("detail").ToString());
+                Console.WriteLine(result[0].GetProperty("etag").ToString());
+            }
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_GetWithCustomPageModel_Convenience()
+        {
+            BasicClient client = new BasicClient();
+
+            foreach (User item in client.GetWithCustomPageModel())
+            {
+            }
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_GetWithCustomPageModel_AllParameters_Convenience()
+        {
+            BasicClient client = new BasicClient();
+
+            foreach (User item in client.GetWithCustomPageModel())
+            {
             }
         }
 
@@ -597,14 +811,14 @@ namespace _Specs_.Azure.Core.Basic.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_GetWithCustomPageModel_Async()
         {
-            var client = new BasicClient();
+            BasicClient client = new BasicClient();
 
-            await foreach (var item in client.GetWithCustomPageModelAsync(new RequestContext()))
+            await foreach (BinaryData item in client.GetWithCustomPageModelAsync(null))
             {
                 JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
-                Console.WriteLine(result.GetProperty("id").ToString());
-                Console.WriteLine(result.GetProperty("name").ToString());
-                Console.WriteLine(result.GetProperty("etag").ToString());
+                Console.WriteLine(result[0].GetProperty("id").ToString());
+                Console.WriteLine(result[0].GetProperty("name").ToString());
+                Console.WriteLine(result[0].GetProperty("etag").ToString());
             }
         }
 
@@ -612,17 +826,17 @@ namespace _Specs_.Azure.Core.Basic.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_GetWithCustomPageModel_AllParameters_Async()
         {
-            var client = new BasicClient();
+            BasicClient client = new BasicClient();
 
-            await foreach (var item in client.GetWithCustomPageModelAsync(new RequestContext()))
+            await foreach (BinaryData item in client.GetWithCustomPageModelAsync(null))
             {
                 JsonElement result = JsonDocument.Parse(item.ToStream()).RootElement;
-                Console.WriteLine(result.GetProperty("id").ToString());
-                Console.WriteLine(result.GetProperty("name").ToString());
-                Console.WriteLine(result.GetProperty("orders")[0].GetProperty("id").ToString());
-                Console.WriteLine(result.GetProperty("orders")[0].GetProperty("userId").ToString());
-                Console.WriteLine(result.GetProperty("orders")[0].GetProperty("detail").ToString());
-                Console.WriteLine(result.GetProperty("etag").ToString());
+                Console.WriteLine(result[0].GetProperty("id").ToString());
+                Console.WriteLine(result[0].GetProperty("name").ToString());
+                Console.WriteLine(result[0].GetProperty("orders")[0].GetProperty("id").ToString());
+                Console.WriteLine(result[0].GetProperty("orders")[0].GetProperty("userId").ToString());
+                Console.WriteLine(result[0].GetProperty("orders")[0].GetProperty("detail").ToString());
+                Console.WriteLine(result[0].GetProperty("etag").ToString());
             }
         }
 
@@ -630,9 +844,20 @@ namespace _Specs_.Azure.Core.Basic.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_GetWithCustomPageModel_Convenience_Async()
         {
-            var client = new BasicClient();
+            BasicClient client = new BasicClient();
 
-            await foreach (var item in client.GetWithCustomPageModelAsync())
+            await foreach (User item in client.GetWithCustomPageModelAsync())
+            {
+            }
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_GetWithCustomPageModel_AllParameters_Convenience_Async()
+        {
+            BasicClient client = new BasicClient();
+
+            await foreach (User item in client.GetWithCustomPageModelAsync())
             {
             }
         }

@@ -7,13 +7,13 @@
 
 using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Text.Json;
 using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
 using Azure.Identity;
 using NUnit.Framework;
+using _Specs_.Azure.Core.Traits;
 using _Specs_.Azure.Core.Traits.Models;
 
 namespace _Specs_.Azure.Core.Traits.Samples
@@ -24,9 +24,9 @@ namespace _Specs_.Azure.Core.Traits.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_SmokeTest()
         {
-            var client = new TraitsClient();
+            TraitsClient client = new TraitsClient();
 
-            Response response = client.SmokeTest(1234, "<foo>", null, new RequestContext());
+            Response response = client.SmokeTest(1234, "<foo>", null, null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("id").ToString());
@@ -36,9 +36,9 @@ namespace _Specs_.Azure.Core.Traits.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_SmokeTest_AllParameters()
         {
-            var client = new TraitsClient();
+            TraitsClient client = new TraitsClient();
 
-            Response response = client.SmokeTest(1234, "<foo>", null, new RequestContext());
+            Response response = client.SmokeTest(1234, "<foo>", null, null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("id").ToString());
@@ -47,11 +47,29 @@ namespace _Specs_.Azure.Core.Traits.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
+        public void Example_SmokeTest_Convenience()
+        {
+            TraitsClient client = new TraitsClient();
+
+            Response<User> response = client.SmokeTest(1234, "<foo>");
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_SmokeTest_AllParameters_Convenience()
+        {
+            TraitsClient client = new TraitsClient();
+
+            Response<User> response = client.SmokeTest(1234, "<foo>", requestConditions: null);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
         public async Task Example_SmokeTest_Async()
         {
-            var client = new TraitsClient();
+            TraitsClient client = new TraitsClient();
 
-            Response response = await client.SmokeTestAsync(1234, "<foo>", null, new RequestContext());
+            Response response = await client.SmokeTestAsync(1234, "<foo>", null, null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("id").ToString());
@@ -61,9 +79,9 @@ namespace _Specs_.Azure.Core.Traits.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_SmokeTest_AllParameters_Async()
         {
-            var client = new TraitsClient();
+            TraitsClient client = new TraitsClient();
 
-            Response response = await client.SmokeTestAsync(1234, "<foo>", null, new RequestContext());
+            Response response = await client.SmokeTestAsync(1234, "<foo>", null, null);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("id").ToString());
@@ -74,23 +92,31 @@ namespace _Specs_.Azure.Core.Traits.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_SmokeTest_Convenience_Async()
         {
-            var client = new TraitsClient();
+            TraitsClient client = new TraitsClient();
 
-            var result = await client.SmokeTestAsync(1234, "<foo>", null);
+            Response<User> response = await client.SmokeTestAsync(1234, "<foo>");
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_SmokeTest_AllParameters_Convenience_Async()
+        {
+            TraitsClient client = new TraitsClient();
+
+            Response<User> response = await client.SmokeTestAsync(1234, "<foo>", requestConditions: null);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
         public void Example_RepeatableAction()
         {
-            var client = new TraitsClient();
+            TraitsClient client = new TraitsClient();
 
-            var data = new
+            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
             {
-                userActionValue = "<userActionValue>",
-            };
-
-            Response response = client.RepeatableAction(1234, RequestContent.Create(data));
+                ["userActionValue"] = "<userActionValue>",
+            });
+            Response response = client.RepeatableAction(1234, content);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("userActionResult").ToString());
@@ -100,14 +126,13 @@ namespace _Specs_.Azure.Core.Traits.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_RepeatableAction_AllParameters()
         {
-            var client = new TraitsClient();
+            TraitsClient client = new TraitsClient();
 
-            var data = new
+            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
             {
-                userActionValue = "<userActionValue>",
-            };
-
-            Response response = client.RepeatableAction(1234, RequestContent.Create(data));
+                ["userActionValue"] = "<userActionValue>",
+            });
+            Response response = client.RepeatableAction(1234, content);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("userActionResult").ToString());
@@ -115,16 +140,35 @@ namespace _Specs_.Azure.Core.Traits.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
+        public void Example_RepeatableAction_Convenience()
+        {
+            TraitsClient client = new TraitsClient();
+
+            UserActionParam userActionParam = new UserActionParam("<userActionValue>");
+            Response<UserActionResponse> response = client.RepeatableAction(1234, userActionParam);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_RepeatableAction_AllParameters_Convenience()
+        {
+            TraitsClient client = new TraitsClient();
+
+            UserActionParam userActionParam = new UserActionParam("<userActionValue>");
+            Response<UserActionResponse> response = client.RepeatableAction(1234, userActionParam);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
         public async Task Example_RepeatableAction_Async()
         {
-            var client = new TraitsClient();
+            TraitsClient client = new TraitsClient();
 
-            var data = new
+            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
             {
-                userActionValue = "<userActionValue>",
-            };
-
-            Response response = await client.RepeatableActionAsync(1234, RequestContent.Create(data));
+                ["userActionValue"] = "<userActionValue>",
+            });
+            Response response = await client.RepeatableActionAsync(1234, content);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("userActionResult").ToString());
@@ -134,14 +178,13 @@ namespace _Specs_.Azure.Core.Traits.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_RepeatableAction_AllParameters_Async()
         {
-            var client = new TraitsClient();
+            TraitsClient client = new TraitsClient();
 
-            var data = new
+            RequestContent content = RequestContent.Create(new Dictionary<string, object>()
             {
-                userActionValue = "<userActionValue>",
-            };
-
-            Response response = await client.RepeatableActionAsync(1234, RequestContent.Create(data));
+                ["userActionValue"] = "<userActionValue>",
+            });
+            Response response = await client.RepeatableActionAsync(1234, content);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("userActionResult").ToString());
@@ -151,10 +194,20 @@ namespace _Specs_.Azure.Core.Traits.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_RepeatableAction_Convenience_Async()
         {
-            var client = new TraitsClient();
+            TraitsClient client = new TraitsClient();
 
-            var userActionParam = new UserActionParam("<userActionValue>");
-            var result = await client.RepeatableActionAsync(1234, userActionParam);
+            UserActionParam userActionParam = new UserActionParam("<userActionValue>");
+            Response<UserActionResponse> response = await client.RepeatableActionAsync(1234, userActionParam);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_RepeatableAction_AllParameters_Convenience_Async()
+        {
+            TraitsClient client = new TraitsClient();
+
+            UserActionParam userActionParam = new UserActionParam("<userActionValue>");
+            Response<UserActionResponse> response = await client.RepeatableActionAsync(1234, userActionParam);
         }
     }
 }

@@ -66,7 +66,7 @@ namespace CustomizationsInTsp.Samples
                     ["propertyToField"] = "<propertyToField>",
                     ["badListName"] = new object[]
             {
-default
+"<badListName>"
             },
                     ["badDictionaryName"] = new Dictionary<string, object>()
                     {
@@ -76,14 +76,14 @@ default
             {
 new object[]
 {
-default
+"<badListOfListName>"
 }
             },
                     ["badListOfDictionaryName"] = new object[]
             {
 new Dictionary<string, object>()
 {
-["key"] = default,
+["key"] = "<badListOfDictionaryName>",
 }
             },
                 },
@@ -219,7 +219,7 @@ new Dictionary<string, string>()
                     ["propertyToField"] = "<propertyToField>",
                     ["badListName"] = new object[]
             {
-default
+"<badListName>"
             },
                     ["badDictionaryName"] = new Dictionary<string, object>()
                     {
@@ -229,14 +229,14 @@ default
             {
 new object[]
 {
-default
+"<badListOfListName>"
 }
             },
                     ["badListOfDictionaryName"] = new object[]
             {
 new Dictionary<string, object>()
 {
-["key"] = default,
+["key"] = "<badListOfDictionaryName>",
 }
             },
                 },

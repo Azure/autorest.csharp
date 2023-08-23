@@ -126,7 +126,7 @@ RequestContent content = RequestContent.Create(new Dictionary<string, object>()
         ["propertyToField"] = "<propertyToField>",
         ["badListName"] = new object[]
 {
-default
+"<badListName>"
 },
         ["badDictionaryName"] = new Dictionary<string, object>()
         {
@@ -136,14 +136,14 @@ default
 {
 new object[]
 {
-default
+"<badListOfListName>"
 }
 },
         ["badListOfDictionaryName"] = new object[]
 {
 new Dictionary<string, object>()
 {
-["key"] = default,
+["key"] = "<badListOfDictionaryName>",
 }
 },
     },
@@ -225,7 +225,7 @@ RequestContent content = RequestContent.Create(new Dictionary<string, object>()
         ["propertyToField"] = "<propertyToField>",
         ["badListName"] = new object[]
 {
-default
+"<badListName>"
 },
         ["badDictionaryName"] = new Dictionary<string, object>()
         {
@@ -235,14 +235,14 @@ default
 {
 new object[]
 {
-default
+"<badListOfListName>"
 }
 },
         ["badListOfDictionaryName"] = new object[]
 {
 new Dictionary<string, object>()
 {
-["key"] = default,
+["key"] = "<badListOfDictionaryName>",
 }
 },
     },

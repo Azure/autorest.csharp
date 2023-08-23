@@ -173,17 +173,17 @@ RequestContent content = RequestContent.Create(new Dictionary<string, object>()
 {
 new Dictionary<string, object>()
 {
-["something"] = default,
+["something"] = "<something>",
 ["reference"] = new Dictionary<string, object>()
 {
-["name"] = default,
+["name"] = "<name>",
 ["selfReference"] = new object[]
 {
 null
 },
-["unionProperty"] = default,
+["unionProperty"] = "<unionProperty>",
 },
-["unionProperty"] = default,
+["unionProperty"] = "<unionProperty>",
 }
 },
 });
@@ -217,17 +217,17 @@ RequestContent content = RequestContent.Create(new Dictionary<string, object>()
 {
 new Dictionary<string, object>()
 {
-["something"] = default,
+["something"] = "<something>",
 ["reference"] = new Dictionary<string, object>()
 {
-["name"] = default,
+["name"] = "<name>",
 ["selfReference"] = new object[]
 {
 null
 },
-["unionProperty"] = default,
+["unionProperty"] = "<unionProperty>",
 },
-["unionProperty"] = default,
+["unionProperty"] = "<unionProperty>",
 }
 },
 });

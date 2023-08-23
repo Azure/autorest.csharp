@@ -123,9 +123,8 @@ namespace AutoRest.CSharp.Output.Samples.Models
                     continue;
 
                 // find the corresponding input parameter
-                var exampleParameter = FindExampleParameterBySerializedName(parameterExamples, parameter.Name);
+                var exampleValue = FindExampleValueBySerializedName(parameterExamples, parameter.Name);
 
-                var exampleValue = exampleParameter?.ExampleValue;
                 if (exampleValue == null)
                 {
                     // if this is a required parameter and we did not find the corresponding parameter in the examples, we put the null
@@ -238,8 +237,41 @@ namespace AutoRest.CSharp.Output.Samples.Models
             return false;
         }
 
-        protected InputParameterExample? FindExampleParameterBySerializedName(IEnumerable<InputParameterExample> parameterExamples, string name)
-            => parameterExamples.FirstOrDefault(p => p.Parameter.Name.ToVariableName() == name);
+        protected InputExampleValue? FindExampleValueBySerializedName(IEnumerable<InputParameterExample> parameterExamples, string name)
+        {
+            foreach (var parameterExample in parameterExamples)
+            {
+                var parameter = parameterExample.Parameter;
+                // TODO -- we might need to refactor this when we finally separate protocol method and convenience method from the LowLevelClientMethod class
+                if (parameter.Kind == InputOperationParameterKind.Spread)
+                {
+                    // when it is a spread parameter, it should always be InputModelType
+                    var modelType = parameter.Type as InputModelType;
+                    var objectExampleValue = parameterExample.ExampleValue as InputExampleObjectValue;
+                    Debug.Assert(modelType != null);
+                    Debug.Assert(objectExampleValue != null);
+
+                    foreach (var modelOrBase in modelType.GetSelfAndBaseModels())
+                    {
+                        foreach (var property in modelOrBase.Properties)
+                        {
+                            if (property.Name.ToVariableName() == name)
+                            {
+                                return objectExampleValue.Values[property.SerializedName];
+                            }
+                        }
+                    }
+                }
+                else
+                {
+                    if (parameter.Name.ToVariableName() == name)
+                    {
+                        return parameterExample.ExampleValue;
+                    }
+                }
+            }
+            return null;
+        }
 
         public InputExampleValue GetEndpointValue(string parameterName)
         {

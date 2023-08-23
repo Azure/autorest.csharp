@@ -223,7 +223,7 @@ namespace AutoRest.CSharp.LowLevel.Generation.Extensions
                 return writer.Append($"new {type}()");
             }
 
-            return writer.AppendRaw("default"); // fall back to default since we need to try our best not to generate compile errors.
+            return writer.Literal(rawValue); // fall back to default since we need to try our best not to generate compile errors.
         }
 
         //private static CodeWriter AppendRawValue(this CodeWriter writer, object? rawValue, Type type, InputType? inputType = null) => rawValue switch
