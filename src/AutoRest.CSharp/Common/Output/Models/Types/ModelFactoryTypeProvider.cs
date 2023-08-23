@@ -4,6 +4,7 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Reflection;
 using AutoRest.CSharp.Common.Output.Builders;
@@ -17,17 +18,18 @@ using AutoRest.CSharp.Utilities;
 using Azure.Core.Expressions.DataFactory;
 using Azure.ResourceManager.Models;
 using Humanizer;
+using Microsoft.CodeAnalysis;
 using static AutoRest.CSharp.Output.Models.MethodSignatureModifiers;
 
 namespace AutoRest.CSharp.Output.Models.Types
 {
-    internal sealed class ModelFactoryTypeProvider : TypeProvider
+    internal sealed class ModelFactoryTypeProvider : SignatureTypeProvider
     {
         protected override string DefaultName { get; }
         protected override string DefaultAccessibility { get; }
 
         private IEnumerable<MethodSignature>? _methods;
-        public IEnumerable<MethodSignature> Methods => _methods ??= Models.Select(CreateMethod);
+        public override IEnumerable<MethodSignature> Methods => _methods ??= Models.Select(CreateMethod).ToList();
 
         public IEnumerable<SerializableObjectType> Models { get; }
 
@@ -35,7 +37,8 @@ namespace AutoRest.CSharp.Output.Models.Types
 
         internal string FullName => $"{Type.Namespace}.{Type.Name}";
 
-        private ModelFactoryTypeProvider(IEnumerable<SerializableObjectType> objectTypes, string defaultClientName, string defaultNamespace, SourceInputModel? sourceInputModel) : base(defaultNamespace, sourceInputModel)
+        private ModelFactoryTypeProvider(IEnumerable<SerializableObjectType> objectTypes, string defaultClientName, string defaultNamespace, SourceInputModel? sourceInputModel)
+            : base(defaultNamespace, $"{defaultClientName}ModelFactory".ToCleanName(), new List<MethodSignature>(), sourceInputModel)
         {
             Models = objectTypes;
 
@@ -67,7 +70,7 @@ namespace AutoRest.CSharp.Output.Models.Types
             return new ModelFactoryTypeProvider(objectTypes, defaultRPName, defaultNamespace, sourceInputModel);
         }
 
-        public static string GetRPName(string defaultNamespace)
+        private static string GetRPName(string defaultNamespace)
         {
             // for mgmt plane packages, we always have the prefix `Arm` on the name of model factories, except for Azure.ResourceManager
             var prefix = Configuration.AzureArm && !Configuration.MgmtConfiguration.IsArmCore ? "Arm" : string.Empty;

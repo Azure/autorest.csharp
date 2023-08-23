@@ -25,6 +25,7 @@ namespace AutoRest.CSharp.AutoRest.Communication
             string outputPath;
             string sampleOutputPath;
             bool wasProjectPathPassedIn = options.ProjectPath is not null;
+            string? previousContractPath = null;
             if (options.Standalone is not null)
             {
                 //TODO this is only here for back compat we should consider removing it
@@ -36,6 +37,11 @@ namespace AutoRest.CSharp.AutoRest.Communication
                 outputPath = Path.Combine(projectPath, "Generated");
             }
             sampleOutputPath = Path.Combine(outputPath, "..", "..", "tests", "Generated", "Samples");
+
+            if (options.PreviousContract is not null)
+            {
+                previousContractPath = options.PreviousContract;
+            }
 
             var configurationPath = options.ConfigurationPath ?? Path.Combine(outputPath, "Configuration.json");
             LoadConfiguration(projectPath, outputPath, options.ExistingProjectFolder, File.ReadAllText(configurationPath));
@@ -59,7 +65,7 @@ namespace AutoRest.CSharp.AutoRest.Communication
             {
                 var yaml = await File.ReadAllTextAsync(codeModelInputPath);
                 var codeModel = CodeModelSerialization.DeserializeCodeModel(yaml);
-                workspace = await new CSharpGen().ExecuteAsync(codeModel);
+                workspace = await new CSharpGen().ExecuteAsync(codeModel, previousContractPath);
                 if (options.IsNewProject)
                 {
                     new CSharpProj().Execute(Configuration.Namespace, outputPath, (yaml.Contains("x-ms-format: dfe-", StringComparison.Ordinal)), Configuration.ToCSharpProjConfiguration());

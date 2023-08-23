@@ -13,19 +13,22 @@ namespace AutoRest.CSharp.Input.Source
 {
     public class SourceInputModel
     {
-        private readonly Compilation _compilation;
         private readonly CompilationInput? _existingCompilation;
         private readonly CodeGenAttributes _codeGenAttributes;
         private readonly Dictionary<string, INamedTypeSymbol> _nameMap = new Dictionary<string, INamedTypeSymbol>(StringComparer.OrdinalIgnoreCase);
 
-        public SourceInputModel(Compilation compilation, CompilationInput? existingCompilation = null)
+        public Compilation Customization { get; }
+        public Compilation? PreviousContract { get; }
+
+        public SourceInputModel(Compilation customization, CompilationInput? existingCompilation = null, Compilation? previousContract = null)
         {
-            _compilation = compilation;
+            Customization = customization;
+            PreviousContract = previousContract;
             _existingCompilation = existingCompilation;
 
-            _codeGenAttributes = new CodeGenAttributes(compilation);
+            _codeGenAttributes = new CodeGenAttributes(customization);
 
-            IAssemblySymbol assembly = _compilation.Assembly;
+            IAssemblySymbol assembly = Customization.Assembly;
 
             foreach (IModuleSymbol module in assembly.Modules)
             {
@@ -41,8 +44,8 @@ namespace AutoRest.CSharp.Input.Source
 
         public IReadOnlyList<string>? GetServiceVersionOverrides()
         {
-            var osvAttributeType = _compilation.GetTypeByMetadataName(typeof(CodeGenOverrideServiceVersionsAttribute).FullName!)!;
-            var osvAttribute = _compilation.Assembly.GetAttributes()
+            var osvAttributeType = Customization.GetTypeByMetadataName(typeof(CodeGenOverrideServiceVersionsAttribute).FullName!)!;
+            var osvAttribute = Customization.Assembly.GetAttributes()
                 .FirstOrDefault(a => SymbolEqualityComparer.Default.Equals(a.AttributeClass, osvAttributeType));
 
             return osvAttribute?.ConstructorArguments[0].Values.Select(v => v.Value).OfType<string>().ToList();
@@ -67,7 +70,7 @@ namespace AutoRest.CSharp.Input.Source
             if (!_nameMap.TryGetValue(name, out var type) &&
                 !_nameMap.TryGetValue(fullyQualifiedMetadataName, out type))
             {
-                type = includeArmCore ? _compilation.GetTypeByMetadataName(fullyQualifiedMetadataName) : _compilation.Assembly.GetTypeByMetadataName(fullyQualifiedMetadataName);
+                type = includeArmCore ? Customization.GetTypeByMetadataName(fullyQualifiedMetadataName) : Customization.Assembly.GetTypeByMetadataName(fullyQualifiedMetadataName);
             }
 
             return type;

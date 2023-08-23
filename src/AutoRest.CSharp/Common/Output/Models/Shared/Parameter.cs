@@ -2,6 +2,7 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
@@ -9,14 +10,16 @@ using AutoRest.CSharp.Common.Input;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Generation.Writers;
 using AutoRest.CSharp.Input;
+using AutoRest.CSharp.Mgmt.AutoRest;
 using AutoRest.CSharp.Output.Builders;
 using AutoRest.CSharp.Output.Models.Requests;
 using AutoRest.CSharp.Output.Models.Serialization;
 using AutoRest.CSharp.Utilities;
+using Microsoft.CodeAnalysis;
 
 namespace AutoRest.CSharp.Output.Models.Shared
 {
-    internal record Parameter(string Name, string? Description, CSharpType Type, Constant? DefaultValue, ValidationType Validation, FormattableString? Initializer, bool IsApiVersionParameter = false, bool IsResourceIdentifier = false, bool SkipUrlEncoding = false, RequestLocation RequestLocation = RequestLocation.None, SerializationFormat SerializationFormat = SerializationFormat.Default, bool IsPropertyBag = false)
+    internal record Parameter(string Name, string? Description, CSharpType Type, Constant? DefaultValue = null, ValidationType Validation = ValidationType.None, FormattableString? Initializer = null, bool IsApiVersionParameter = false, bool IsResourceIdentifier = false, bool SkipUrlEncoding = false, RequestLocation RequestLocation = RequestLocation.None, SerializationFormat SerializationFormat = SerializationFormat.Default, bool IsPropertyBag = false)
     {
         public FormattableString? FormattableDescription => Description is null ? (FormattableString?)null : $"{Description}";
         public CSharpAttribute[] Attributes { get; init; } = Array.Empty<CSharpAttribute>();
@@ -32,6 +35,21 @@ namespace AutoRest.CSharp.Output.Models.Shared
             // we do not validate a parameter when it is a value type (struct or int, etc), or it is readonly, or it is optional, or it it nullable
             var validation = propertyType.IsValueType || property.IsReadOnly || !property.IsRequired || property.Type.IsNullable ? ValidationType.None : ValidationType.AssertNotNull;
             return new Parameter(name, property.Description, propertyType, null, validation, null);
+        }
+
+        public static Parameter? FromParameterSymbol(IParameterSymbol parameterSymbol)
+        {
+            var typeFactory = new TypeFactory(MgmtContext.Library);
+            var parameterName = parameterSymbol.Name;
+            if (typeFactory.TryCreateType(parameterSymbol.Type, out var parameterType))
+            {
+                return new Parameter(parameterName, null, parameterType);
+            }
+            else
+            {
+                // TODO: handle missing type from MgmtOutputLibrary
+                return null;
+            }
         }
 
         public static Parameter FromInputParameter(in InputParameter operationParameter, CSharpType type, TypeFactory typeFactory, bool shouldKeepClientDefaultValue = false)
@@ -264,5 +282,29 @@ namespace AutoRest.CSharp.Output.Models.Shared
         None,
         AssertNotNull,
         AssertNotNullOrEmpty
+    }
+
+    internal class ParameterComparer : IEqualityComparer<Parameter>
+    {
+        public bool Equals(Parameter? x, Parameter? y)
+        {
+            if (Object.ReferenceEquals(x, y))
+            {
+                return true;
+            }
+
+            if (x is null || y is null)
+            {
+                return false;
+            }
+
+            var result = x.Type.Equals(y.Type) && x.Name == y.Name;
+            return result;
+        }
+
+        public int GetHashCode([DisallowNull] Parameter obj)
+        {
+            return HashCode.Combine(obj.Type, obj.Name);
+        }
     }
 }

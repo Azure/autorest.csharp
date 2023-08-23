@@ -18,13 +18,22 @@ namespace AutoRest.CSharp.AutoRest.Plugins
     [PluginName("csharpgen")]
     internal class CSharpGen : IPlugin
     {
-        public async Task<GeneratedCodeWorkspace> ExecuteAsync(CodeModel codeModel)
+        public async Task<GeneratedCodeWorkspace> ExecuteAsync(CodeModel codeModel, string? previousContractPath = null)
         {
             ValidateConfiguration();
 
             Directory.CreateDirectory(Configuration.OutputFolder);
             var project = await GeneratedCodeWorkspace.Create(Configuration.AbsoluteProjectFolder, Configuration.OutputFolder, Configuration.SharedSourceFolders);
-            var sourceInputModel = new SourceInputModel(await project.GetCompilationAsync());
+            SourceInputModel sourceInputModel;
+            if (previousContractPath is not null)
+            {
+                var previousContract = GeneratedCodeWorkspace.CreateExistingCodeProject(previousContractPath);
+                sourceInputModel = new SourceInputModel(await project.GetCompilationAsync(), previousContract: await previousContract.GetCompilationAsync());
+            }
+            else
+            {
+                sourceInputModel = new SourceInputModel(await project.GetCompilationAsync());
+            }
 
             if (Configuration.Generation1ConvenienceClient)
             {
