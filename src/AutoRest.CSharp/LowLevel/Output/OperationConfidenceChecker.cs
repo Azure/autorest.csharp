@@ -101,7 +101,7 @@ namespace AutoRest.CSharp.Output.Models
             visitedModels.Add(type, null);
 
             var confidenceLevel = ConvenienceMethodConfidenceLevel.Confident;
-            if (!SyntaxFacts.IsValidIdentifier(type.Name)) // because the result of this is "Removal", we do not really need to consider customized code for it
+            if (type.IsAnonymousModel) // because the result of this is "Removal", we do not really need to consider customized code for it
             {
                 confidenceLevel = ConvenienceMethodConfidenceLevel.Removal;
             }

@@ -90,15 +90,22 @@ namespace AutoRest.CSharp.Common.Input
             if (name == null)
                 throw new JsonException("Model must have name");
 
+            bool isAnonymousModel = false;
             if (name.Length == 0)
+            {
                 name = id ?? throw new JsonException("Model must have id"); // we just use id as the name of the model
+                isAnonymousModel = true;
+            }
 
             InputModelTypeUsage usage = InputModelTypeUsage.None;
             if (usageString != null)
             {
                 Enum.TryParse<InputModelTypeUsage>(usageString, ignoreCase: true, out usage);
             }
-            var model = new InputModelType(name, ns, accessibility, deprecated, description, usage, properties, baseModel, derivedModels, discriminatorValue, discriminatorPropertyName, isNullable);
+            var model = new InputModelType(name, ns, accessibility, deprecated, description, usage, properties, baseModel, derivedModels, discriminatorValue, discriminatorPropertyName, isNullable)
+            {
+                IsAnonymousModel = isAnonymousModel
+            };
             if (id != null)
             {
                 resolver.AddReference(id, model);
