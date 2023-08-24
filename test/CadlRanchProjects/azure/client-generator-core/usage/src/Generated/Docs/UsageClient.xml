@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doc>
+  <members>
+    <member name="InputToRoundTripAsync(InputModel,CancellationToken)">
+<example>
+This sample shows how to call InputToRoundTripAsync with required parameters.
+<code><![CDATA[
+var client = new UsageClient();
+
+var body = new InputModel("<name>");
+var result = await client.InputToRoundTripAsync(body);
+]]></code>
+</example>
+    </member>
+    <member name="InputToRoundTrip(InputModel,CancellationToken)">
+<example>
+This sample shows how to call InputToRoundTrip with required parameters.
+<code><![CDATA[
+var client = new UsageClient();
+
+var body = new InputModel("<name>");
+var result = client.InputToRoundTrip(body);
+]]></code>
+</example>
+    </member>
+    <member name="InputToRoundTripAsync(RequestContent,RequestContext)">
+<example>
+This sample shows how to call InputToRoundTripAsync with required request content.
+<code><![CDATA[
+var client = new UsageClient();
+
+var data = new {
+    name = "<name>",
+};
+
+Response response = await client.InputToRoundTripAsync(RequestContent.Create(data));
+Console.WriteLine(response.Status);
+]]></code>
+</example>
+    </member>
+    <member name="InputToRoundTrip(RequestContent,RequestContext)">
+<example>
+This sample shows how to call InputToRoundTrip with required request content.
+<code><![CDATA[
+var client = new UsageClient();
+
+var data = new {
+    name = "<name>",
+};
+
+Response response = client.InputToRoundTrip(RequestContent.Create(data));
+Console.WriteLine(response.Status);
+]]></code>
+</example>
+    </member>
+    <member name="OutputToRoundTripAsync(CancellationToken)">
+<example>
+This sample shows how to call OutputToRoundTripAsync.
+<code><![CDATA[
+var client = new UsageClient();
+
+var result = await client.OutputToRoundTripAsync();
+]]></code>
+</example>
+    </member>
+    <member name="OutputToRoundTrip(CancellationToken)">
+<example>
+This sample shows how to call OutputToRoundTrip.
+<code><![CDATA[
+var client = new UsageClient();
+
+var result = client.OutputToRoundTrip();
+]]></code>
+</example>
+    </member>
+    <member name="OutputToRoundTripAsync(RequestContext)">
+<example>
+This sample shows how to call OutputToRoundTripAsync with required parameters and parse the result.
+<code><![CDATA[
+var client = new UsageClient();
+
+Response response = await client.OutputToRoundTripAsync(new RequestContext());
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("name").ToString());
+]]></code>
+</example>
+    </member>
+    <member name="OutputToRoundTrip(RequestContext)">
+<example>
+This sample shows how to call OutputToRoundTrip with required parameters and parse the result.
+<code><![CDATA[
+var client = new UsageClient();
+
+Response response = client.OutputToRoundTrip(new RequestContext());
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("name").ToString());
+]]></code>
+</example>
+    </member>
+  </members>
+</doc>

@@ -67,7 +67,7 @@ import {
     SdkContext,
     getAccess,
     getClientType,
-    getUsage,
+    getUsageOverride,
     isInternal
 } from "@azure-tools/typespec-client-generator-core";
 import { capitalize, getNameForTemplate } from "./utils.js";
@@ -282,7 +282,8 @@ export function getInputType(
     formattedType: FormattedType,
     models: Map<string, InputModelType>,
     enums: Map<string, InputEnumType>,
-    literalTypeContext?: LiteralTypeContext
+    literalTypeContext?: LiteralTypeContext,
+    parentType?: Type
 ): InputType {
     const type = formattedType.type;
     logger.debug(`getInputType for kind: ${type.kind}`);
@@ -294,7 +295,7 @@ export function getInputType(
         type.kind === "Number" ||
         type.kind === "Boolean"
     ) {
-        return getInputLiteralType(formattedType, literalTypeContext);
+        return getInputLiteralType(formattedType, literalTypeContext, parentType);
     } else if (type.kind === "Enum") {
         return getInputTypeForEnum(type);
     } else if (type.kind === "EnumMember") {
@@ -381,7 +382,8 @@ export function getInputType(
 
     function getInputLiteralType(
         formattedType: FormattedType,
-        literalContext?: LiteralTypeContext
+        literalContext?: LiteralTypeContext,
+        parentType?: Type
     ): InputLiteralType {
         // For literal types, we just want to emit them directly as well.
         const type = formattedType.type;
@@ -397,7 +399,7 @@ export function getInputType(
             IsNullable: false
         } as InputPrimitiveType;
         const literalValue = getDefaultValue(type);
-        const newValueType = getLiteralValueType();
+        const newValueType = getLiteralValueType(parentType);
 
         if (isInputEnumType(newValueType)) {
             enums.set(newValueType.Name, newValueType);
@@ -410,7 +412,7 @@ export function getInputType(
             IsNullable: false
         } as InputLiteralType;
 
-        function getLiteralValueType(): InputPrimitiveType | InputEnumType {
+        function getLiteralValueType(parentType?: Type): InputPrimitiveType | InputEnumType {
             // we will not wrap it if it comes from outside a model or it is a boolean
             // TODO -- we need to wrap it into extensible enum when it comes from an operation
             if (literalContext === undefined || rawValueType.Kind === "Boolean")
@@ -557,11 +559,10 @@ export function getInputType(
                 Properties: properties // Properties should be the last assigned to model
             } as InputModelType;
             setUsage(context, m, model);
-
             models.set(name, model);
 
             // Resolve properties after model is added to the map to resolve possible circular dependencies
-            addModelProperties(model, m.properties, properties);
+            addModelProperties(m, model, m.properties, properties);
 
             // Temporary part. Derived types may not be referenced directly by any operation
             // We should be able to remove it when https://github.com/Azure/typespec-azure/issues/1733 is closed
@@ -608,6 +609,7 @@ export function getInputType(
     }
 
     function addModelProperties(
+        source: Model,
         model: InputModelType,
         inputProperties: Map<string, ModelProperty>,
         outputProperties: InputModelProperty[]
@@ -641,7 +643,8 @@ export function getInputType(
                     getFormattedType(program, value),
                     models,
                     enums,
-                    literalTypeContext
+                    literalTypeContext,
+                    source
                 );
                 const inputProp = {
                     Name: name,
@@ -777,7 +780,7 @@ function setUsage(
     source: Model | Enum,
     target: InputModelType | InputEnumType
 ) {
-    const sourceUsage = getUsage(context, source);
+    const sourceUsage = getUsageOverride(context, source);
     if (sourceUsage === UsageFlags.Input) {
         target.Usage = Usage.Input;
     }
@@ -786,6 +789,9 @@ function setUsage(
     }
     else if (sourceUsage === (UsageFlags.Input | UsageFlags.Output)) {
         target.Usage = Usage.RoundTrip;
+    }
+    else {
+        target.Usage = Usage.None;
     }
 }
 

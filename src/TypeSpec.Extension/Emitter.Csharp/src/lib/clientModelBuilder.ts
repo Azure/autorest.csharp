@@ -8,10 +8,7 @@ import {
     listOperationGroups,
     listOperationsInOperationGroup,
     SdkOperationGroup,
-    SdkContext,
-    createStateSymbol,
-    getAllModels,
-    getUsage
+    SdkContext
 } from "@azure-tools/typespec-client-generator-core";
 import {
     EmitContext,
@@ -219,9 +216,9 @@ export function createModelForService(
         }
     }
 
-    // const usages = getUsages(sdkContext, convenienceOperations, modelMap);
-    // setUsage(usages, modelMap);
-    // setUsage(usages, enumMap);
+    const usages = getUsages(sdkContext, convenienceOperations, modelMap);
+    setUsage(usages, modelMap);
+    setUsage(usages, enumMap);
 
     const clientModel = {
         Name: namespace,
@@ -305,6 +302,7 @@ function setUsage(
     models: Map<string, InputModelType | InputEnumType>
 ) {
     for (const [name, m] of models) {
+        if (m.Usage !== undefined && m.Usage !== Usage.None) continue;
         if (usages.inputs.includes(name)) {
             m.Usage = Usage.Input;
         } else if (usages.outputs.includes(name)) {
