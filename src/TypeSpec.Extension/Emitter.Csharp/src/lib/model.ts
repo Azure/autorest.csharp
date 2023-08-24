@@ -11,7 +11,6 @@ import {
     getEffectiveModelType,
     getEncode,
     getFormat,
-    getFriendlyName,
     getKnownValues,
     getVisibility,
     Model,
@@ -67,10 +66,11 @@ import { Usage } from "../type/usage.js";
 import { logger } from "./logger.js";
 import {
     SdkContext,
+    getLibraryName,
     getSdkSimpleType,
     isInternal
 } from "@azure-tools/typespec-client-generator-core";
-import { capitalize, getNameForTemplate } from "./utils.js";
+import { capitalize, getModelName, getNameForTemplate } from "./utils.js";
 import { FormattedType } from "../type/formattedType.js";
 import { LiteralTypeContext } from "../type/literalTypeContext.js";
 /**
@@ -518,7 +518,7 @@ export function getInputType(
 
     function getInputModelForModel(m: Model): InputModelType {
         m = getEffectiveSchemaType(context, m) as Model;
-        const name = getFriendlyName(program, m) ?? getNameForTemplate(m);
+        const name = getModelName(context, m);
         let model = models.get(name);
         if (!model) {
             const baseModel = getInputModelBaseType(m.baseModel);
@@ -778,8 +778,7 @@ export function getUsages(
         let effectiveType = type;
         if (type.kind === "Model") {
             effectiveType = getEffectiveSchemaType(context, type) as Model;
-            typeName =
-                getFriendlyName(program, effectiveType) ?? effectiveType.name;
+            typeName = getModelName(context, effectiveType);
         }
         const affectTypes: string[] = [];
         if (typeName !== "") {
@@ -792,9 +791,7 @@ export function getUsages(
                             "name" in arg &&
                             arg.name !== ""
                         ) {
-                            affectTypes.push(
-                                getFriendlyName(program, arg) ?? arg.name
-                            );
+                            affectTypes.push(getModelName(context, arg));
                         }
                     }
                 }
@@ -837,8 +834,7 @@ export function getUsages(
                         )}Request`;
                     }
                     affectedTypes.push(
-                        getFriendlyName(program, effectiveBodyType) ??
-                            effectiveBodyType.name
+                        getModelName(context, effectiveBodyType)
                     );
                 }
             }
@@ -875,9 +871,7 @@ export function getUsages(
                         effectiveReturnType.kind === "Model" &&
                         effectiveReturnType.name !== ""
                     ) {
-                        returnType =
-                            getFriendlyName(program, effectiveReturnType) ??
-                            effectiveReturnType.name;
+                        returnType = getModelName(context, effectiveReturnType);
                     }
                     /*propagate to sub models and composite models*/
                     if (effectiveReturnType.kind === "Model") {
@@ -947,15 +941,13 @@ export function getUsages(
         ) {
             result.push(...getAllEffectedModels(model.indexer.value, visited));
         } else {
-            const name = getFriendlyName(program, model) ?? model.name;
+            const name = getModelName(context, model);
             if (model.kind !== "Model" || visited.has(name)) return result;
             result.push(name);
             visited.add(name);
             const derivedModels = model.derivedModels;
             for (const derivedModel of derivedModels) {
-                result.push(
-                    getFriendlyName(program, derivedModel) ?? derivedModel.name
-                );
+                result.push(getModelName(context, derivedModel));
                 result.push(...getAllEffectedModels(derivedModel, visited));
             }
             for (const [_, prop] of model.properties) {

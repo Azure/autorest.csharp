@@ -138,6 +138,13 @@ model NotFriend {
     name: string;
 }
 
+@doc("this is a model with a projected name")
+@projectedName("client", "ProjectedModel")
+model ModelWithProjectedName {
+    @doc("name of the ModelWithProjectedName")
+    name: string;
+}
+
 @doc("this is a roundtrip model")
 model RoundTripModel {
     @doc("Required string, illustrating a reference type property.")
@@ -318,6 +325,19 @@ op addTimeHeader(
 @post
 @convenientAPI(true)
 op stringFormat(@path @format("uuid") subscriptionId: string, @body body: ModelWithFormat): void;
+
+
+@route("/projectedName")
+@doc("Model can have its projected name")
+@post
+@convenientAPI(true)
+op projectedNameModel(...ModelWithProjectedName): ModelWithProjectedName;
+
+@route("/retunsAnonymousModel")
+@doc("return anonymous model")
+@post
+@convenientAPI(true)
+op returnsAnonymousModel(): {};
 
 namespace EnumTest {
     @get
