@@ -209,7 +209,6 @@ stages:
             filter: "s*,t*,u*,v*,w*,x*,y*,z*"
         - job: Create_PR
           dependsOn:
-            - Update_Code
             - Update_Samples_A_F
             - Update_Samples_G_L
             - Update_Samples_M_R
