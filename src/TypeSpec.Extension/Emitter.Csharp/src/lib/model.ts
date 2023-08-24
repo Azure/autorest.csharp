@@ -58,7 +58,9 @@ import {
     InputUnionType,
     InputNullType,
     InputIntrinsicType,
-    InputUnknownType
+    InputUnknownType,
+    isInputEnumType,
+    isInputLiteralType
 } from "../type/inputType.js";
 import { InputTypeKind } from "../type/inputTypeKind.js";
 import { Usage } from "../type/usage.js";
@@ -237,8 +239,8 @@ function isSchemaProperty(context: SdkContext, property: ModelProperty) {
     const headerInfo = getHeaderFieldName(program, property);
     const queryInfo = getQueryParamName(program, property);
     const pathInfo = getPathParamName(program, property);
-    const statusCodeinfo = isStatusCode(program, property);
-    return !(headerInfo || queryInfo || pathInfo || statusCodeinfo);
+    const statusCodeInfo = isStatusCode(program, property);
+    return !(headerInfo || queryInfo || pathInfo || statusCodeInfo);
 }
 
 export function getDefaultValue(type: Type): any {
@@ -258,14 +260,6 @@ export function getDefaultValue(type: Type): any {
 
 export function isNeverType(type: Type): type is NeverType {
     return type.kind === "Intrinsic" && type.name === "never";
-}
-
-function isInputEnumType(x: any): x is InputEnumType {
-    return x.AllowedValues !== undefined;
-}
-
-function isInputLiteralType(x: any): x is InputLiteralType {
-    return x.Name === "Literal";
 }
 
 export function getInputType(
@@ -403,7 +397,6 @@ export function getInputType(
 
         function getLiteralValueType(): InputPrimitiveType | InputEnumType {
             // we will not wrap it if it comes from outside a model or it is a boolean
-            // TODO -- we need to wrap it into extensible enum when it comes from an operation
             if (literalContext === undefined || rawValueType.Kind === "Boolean")
                 return rawValueType;
 
@@ -419,7 +412,6 @@ export function getInputType(
                     Description: literalValue.toString()
                 } as InputEnumTypeValue
             ];
-            // TODO -- we need to make it low confident if the enum is not string
             const enumType = {
                 Name: enumName,
                 Namespace: literalContext.Namespace,
@@ -544,7 +536,7 @@ export function getInputType(
                 DiscriminatorValue: getDiscriminatorValue(m, baseModel),
                 BaseModel: baseModel,
                 Usage: Usage.None,
-                Properties: properties // Properties should be the last assigned to model
+                Properties: properties // DerivedModels should be the last assigned to model, if no derived models, properties should be the last
             } as InputModelType;
 
             models.set(name, model);
@@ -552,16 +544,17 @@ export function getInputType(
             // Resolve properties after model is added to the map to resolve possible circular dependencies
             addModelProperties(model, m.properties, properties);
 
-            // Temporary part. Derived types may not be referenced directly by any operation
-            // We should be able to remove it when https://github.com/Azure/typespec-azure/issues/1733 is closed
-            if (model.DiscriminatorPropertyName && m.derivedModels) {
+            // add the derived models into the list
+            if (m.derivedModels !== undefined && m.derivedModels.length > 0) {
+                model.DerivedModels = [];
                 for (const dm of m.derivedModels) {
-                    getInputType(
+                    const derivedModel = getInputType(
                         context,
                         getFormattedType(program, dm),
                         models,
                         enums
                     );
+                    model.DerivedModels.push(derivedModel as InputModelType);
                 }
             }
         }

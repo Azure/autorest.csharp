@@ -388,7 +388,7 @@ namespace AutoRest.CSharp.Common.Input
             AnySchema when IsDPG => InputIntrinsicType.Unknown,
             AnyObjectSchema when IsDPG => InputIntrinsicType.Unknown,
 
-            _ => new CodeModelType(schema)
+            _ => new CodeModelType(schema, false)
         };
 
         private static InputLiteralType CreateLiteralType(ConstantSchema constantSchema, string? format, IReadOnlyDictionary<ObjectSchema, InputModelType>? modelsCache)
@@ -424,7 +424,8 @@ namespace AutoRest.CSharp.Common.Input
             Usage: InputModelTypeUsage.None,
             EnumValueType: (InputPrimitiveType)CreateType(choiceType, schema.Extensions?.Format, null),
             AllowedValues: choices.Select(CreateEnumValue).ToList(),
-            IsExtensible: isExtensible
+            IsExtensible: isExtensible,
+            IsNullable: false
         );
 
         private static InputEnumTypeValue CreateEnumValue(ChoiceValue choiceValue) => new(

@@ -8,7 +8,7 @@
 namespace Azure.NewProject.TypeSpec.Models
 {
     /// <summary> float fixed enum. </summary>
-    public enum FloatFixedEnum
+    internal enum FloatFixedEnum
     {
         /// <summary> 1.1. </summary>
         One,
