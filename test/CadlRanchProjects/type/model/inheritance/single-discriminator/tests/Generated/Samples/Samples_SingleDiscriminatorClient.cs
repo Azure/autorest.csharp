@@ -89,7 +89,7 @@ namespace _Type.Model.Inheritance.SingleDiscriminator.Samples
 
             var data = new
             {
-                kind = "",
+                kind = "seagull",
                 wingspan = 1234,
             };
 
@@ -105,7 +105,7 @@ namespace _Type.Model.Inheritance.SingleDiscriminator.Samples
 
             var data = new
             {
-                kind = "",
+                kind = "seagull",
                 wingspan = 1234,
             };
 
@@ -121,7 +121,7 @@ namespace _Type.Model.Inheritance.SingleDiscriminator.Samples
 
             var data = new
             {
-                kind = "",
+                kind = "seagull",
                 wingspan = 1234,
             };
 
@@ -137,7 +137,7 @@ namespace _Type.Model.Inheritance.SingleDiscriminator.Samples
 
             var data = new
             {
-                kind = "",
+                kind = "seagull",
                 wingspan = 1234,
             };
 
@@ -224,7 +224,7 @@ namespace _Type.Model.Inheritance.SingleDiscriminator.Samples
 
             var data = new
             {
-                kind = "",
+                kind = "seagull",
                 wingspan = 1234,
             };
 
@@ -240,7 +240,7 @@ namespace _Type.Model.Inheritance.SingleDiscriminator.Samples
 
             var data = new
             {
-                kind = "",
+                kind = "seagull",
                 wingspan = 1234,
             };
 
@@ -256,7 +256,7 @@ namespace _Type.Model.Inheritance.SingleDiscriminator.Samples
 
             var data = new
             {
-                kind = "",
+                kind = "seagull",
                 wingspan = 1234,
             };
 
@@ -272,7 +272,7 @@ namespace _Type.Model.Inheritance.SingleDiscriminator.Samples
 
             var data = new
             {
-                kind = "",
+                kind = "seagull",
                 wingspan = 1234,
             };
 

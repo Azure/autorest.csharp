@@ -32,49 +32,54 @@
      },
      "IsDiscriminator": true
     }
+   ],
+   "DerivedModels": [
+    {
+     "$id": "5",
+     "Name": "DerivedModel",
+     "Namespace": "SpecialWords",
+     "Description": "This is a model has property names of special words or characters.",
+     "IsNullable": false,
+     "DiscriminatorValue": "derived",
+     "BaseModel": {
+      "$ref": "2"
+     },
+     "Usage": "RoundTrip",
+     "Properties": [
+      {
+       "$id": "6",
+       "Name": "derived.name",
+       "SerializedName": "derived.name",
+       "Description": "",
+       "Type": {
+        "$id": "7",
+        "Name": "string",
+        "Kind": "String",
+        "IsNullable": false
+       },
+       "IsRequired": true,
+       "IsReadOnly": false
+      },
+      {
+       "$id": "8",
+       "Name": "for",
+       "SerializedName": "for",
+       "Description": "",
+       "Type": {
+        "$id": "9",
+        "Name": "string",
+        "Kind": "String",
+        "IsNullable": false
+       },
+       "IsRequired": true,
+       "IsReadOnly": false
+      }
+     ]
+    }
    ]
   },
   {
-   "$id": "5",
-   "Name": "DerivedModel",
-   "Namespace": "SpecialWords",
-   "Description": "This is a model has property names of special words or characters.",
-   "IsNullable": false,
-   "DiscriminatorValue": "derived",
-   "BaseModel": {
-    "$ref": "2"
-   },
-   "Usage": "RoundTrip",
-   "Properties": [
-    {
-     "$id": "6",
-     "Name": "derived.name",
-     "SerializedName": "derived.name",
-     "Description": "",
-     "Type": {
-      "$id": "7",
-      "Name": "string",
-      "Kind": "String",
-      "IsNullable": false
-     },
-     "IsRequired": true,
-     "IsReadOnly": false
-    },
-    {
-     "$id": "8",
-     "Name": "for",
-     "SerializedName": "for",
-     "Description": "",
-     "Type": {
-      "$id": "9",
-      "Name": "string",
-      "Kind": "String",
-      "IsNullable": false
-     },
-     "IsRequired": true,
-     "IsReadOnly": false
-    }
-   ]
+   "$ref": "5"
   }
  ],
  "Clients": [

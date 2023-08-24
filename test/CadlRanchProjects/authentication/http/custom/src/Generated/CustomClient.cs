@@ -60,6 +60,7 @@ namespace Authentication.Http.Custom
             _apiVersion = options.Version;
         }
 
+        // The convenience method is omitted here because it has exactly the same parameter list as the corresponding protocol method
         /// <summary>
         /// [Protocol Method] Check whether client is authenticated
         /// <list type="bullet">
@@ -90,6 +91,7 @@ namespace Authentication.Http.Custom
             }
         }
 
+        // The convenience method is omitted here because it has exactly the same parameter list as the corresponding protocol method
         /// <summary>
         /// [Protocol Method] Check whether client is authenticated
         /// <list type="bullet">
@@ -120,6 +122,7 @@ namespace Authentication.Http.Custom
             }
         }
 
+        // The convenience method is omitted here because it has exactly the same parameter list as the corresponding protocol method
         /// <summary>
         /// [Protocol Method] Check whether client is authenticated.
         /// <list type="bullet">
@@ -150,6 +153,7 @@ namespace Authentication.Http.Custom
             }
         }
 
+        // The convenience method is omitted here because it has exactly the same parameter list as the corresponding protocol method
         /// <summary>
         /// [Protocol Method] Check whether client is authenticated.
         /// <list type="bullet">

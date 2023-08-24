@@ -106,7 +106,7 @@ namespace AutoRest.CSharp.Generation.Writers.Tests
                         new("Spanish", "Spanish", "Translate to Spanish"),
                         new("Mandarin", "Mandarin", "Translate to Mandarin"),
                         new("Undocumented", "Undocumented", null)
-                    }, true);
+                    }, true, false);
 
         private static readonly InputEnumType FixedEnumType = new InputEnumType("DayOfTheWeek", "Cadl.TestServer.EnumPropertiesBasic", "public", null, "Represents the days of the week using a standard, non-string enum.", InputModelTypeUsage.RoundTrip, InputPrimitiveType.String,
                     new List<InputEnumTypeValue>() {
@@ -117,7 +117,7 @@ namespace AutoRest.CSharp.Generation.Writers.Tests
                         new("Friday", "Friday", null),
                         new("Saturday", "Saturday", null),
                         new("Sunday", "Sunday", null)
-                    }, false);
+                    }, false, false);
 
         private static readonly object[] ExtensibleEnumCase =
         {
