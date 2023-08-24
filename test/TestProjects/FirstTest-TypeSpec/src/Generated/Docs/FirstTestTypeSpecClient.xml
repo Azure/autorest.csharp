@@ -559,6 +559,32 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
+    <member name="ReturnsAnonymousModelAsync(RequestContext)">
+<example>
+This sample shows how to call ReturnsAnonymousModelAsync with required parameters and parse the result.
+<code><![CDATA[
+var endpoint = new Uri("<https://my-service.azure.com>");
+var client = new FirstTestTypeSpecClient(endpoint);
+
+Response response = await client.ReturnsAnonymousModelAsync(new RequestContext());
+
+Console.WriteLine(response.ToString());
+]]></code>
+</example>
+    </member>
+    <member name="ReturnsAnonymousModel(RequestContext)">
+<example>
+This sample shows how to call ReturnsAnonymousModel with required parameters and parse the result.
+<code><![CDATA[
+var endpoint = new Uri("<https://my-service.azure.com>");
+var client = new FirstTestTypeSpecClient(endpoint);
+
+Response response = client.ReturnsAnonymousModel(new RequestContext());
+
+Console.WriteLine(response.ToString());
+]]></code>
+</example>
+    </member>
     <member name="HeadAsBooleanAsync(string,RequestContext)">
 <example>
 This sample shows how to call HeadAsBooleanAsync with required parameters.
