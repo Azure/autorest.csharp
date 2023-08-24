@@ -13,7 +13,7 @@ using Azure.Core;
 
 namespace FirstTestTypeSpec.Models
 {
-    public partial class RoundTripModel : IUtf8JsonSerializable
+    internal partial class RoundTripModel : IUtf8JsonSerializable
     {
         void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
         {

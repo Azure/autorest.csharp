@@ -13,7 +13,7 @@ using Azure.Core;
 namespace FirstTestTypeSpec.Models
 {
     /// <summary> this is a roundtrip model. </summary>
-    public partial class RoundTripModel
+    internal partial class RoundTripModel
     {
         /// <summary> Initializes a new instance of RoundTripModel. </summary>
         /// <param name="requiredString"> Required string, illustrating a reference type property. </param>
