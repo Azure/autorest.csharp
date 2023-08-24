@@ -333,6 +333,12 @@ op stringFormat(@path @format("uuid") subscriptionId: string, @body body: ModelW
 @convenientAPI(true)
 op projectedNameModel(...ModelWithProjectedName): ModelWithProjectedName;
 
+@route("/retunsAnonymousModel")
+@doc("return anonymous model")
+@post
+@convenientAPI(true)
+op returnsAnonymousModel(): {};
+
 namespace EnumTest {
     @get
     @route("/unknown-value")

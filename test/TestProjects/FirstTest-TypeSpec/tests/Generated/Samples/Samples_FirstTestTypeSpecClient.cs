@@ -811,6 +811,54 @@ namespace FirstTestTypeSpec.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
+        public void Example_ReturnsAnonymousModel()
+        {
+            var endpoint = new Uri("<https://my-service.azure.com>");
+            var client = new FirstTestTypeSpecClient(endpoint);
+
+            Response response = client.ReturnsAnonymousModel(new RequestContext());
+
+            Console.WriteLine(response.ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public void Example_ReturnsAnonymousModel_AllParameters()
+        {
+            var endpoint = new Uri("<https://my-service.azure.com>");
+            var client = new FirstTestTypeSpecClient(endpoint);
+
+            Response response = client.ReturnsAnonymousModel(new RequestContext());
+
+            Console.WriteLine(response.ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_ReturnsAnonymousModel_Async()
+        {
+            var endpoint = new Uri("<https://my-service.azure.com>");
+            var client = new FirstTestTypeSpecClient(endpoint);
+
+            Response response = await client.ReturnsAnonymousModelAsync(new RequestContext());
+
+            Console.WriteLine(response.ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_ReturnsAnonymousModel_AllParameters_Async()
+        {
+            var endpoint = new Uri("<https://my-service.azure.com>");
+            var client = new FirstTestTypeSpecClient(endpoint);
+
+            Response response = await client.ReturnsAnonymousModelAsync(new RequestContext());
+
+            Console.WriteLine(response.ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
         public void Example_HeadAsBoolean()
         {
             var endpoint = new Uri("<https://my-service.azure.com>");
