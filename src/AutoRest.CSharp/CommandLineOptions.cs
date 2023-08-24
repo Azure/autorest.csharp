@@ -33,8 +33,5 @@ namespace AutoRest.CSharp
 
         [Option('x', "clear-output-folder", Required = false, Default = false, HelpText = "Clear the output folder before generating code.")]
         public bool ClearOutputFolder { get; set; }
-
-        [Option("previous-contract", Required = false, Default = null, HelpText = "Path to the previous contract directory.")]
-        public string? PreviousContract { get; set; }
     }
 }
