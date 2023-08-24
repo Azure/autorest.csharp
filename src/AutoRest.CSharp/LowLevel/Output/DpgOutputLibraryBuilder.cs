@@ -403,42 +403,42 @@ namespace AutoRest.CSharp.Output.Models
             public IReadOnlyList<InputOperation> Operations { get; }
 
             private IReadOnlyDictionary<string, InputClientExample> _initialExamples;
-            public IReadOnlyDictionary<string, InputClientExample> Examples => ClientParametersAndExamples.Examples;
+            private IReadOnlyDictionary<string, InputClientExample>? _examples;
+            public IReadOnlyDictionary<string, InputClientExample> Examples => _examples ??= EnsureExamples();
 
+            private IReadOnlyDictionary<string, InputClientExample> EnsureExamples()
+            {
+                // pick up all examples from child client infos here, since we might promote some parameters from child clients
+                var examples = new Dictionary<string, InputClientExample>();
+                foreach (var (key, example) in _initialExamples)
+                {
+                    var clientParameterExamples = new List<InputParameterExample>(example.ClientParameters);
+                    foreach (var child in Children)
+                    {
+                        if (child.Examples.TryGetValue(key, out var childExamples))
+                        {
+                            clientParameterExamples.AddRange(childExamples.ClientParameters);
+                        }
+                    }
+
+                    examples.Add(key, new(example.Client, clientParameterExamples));
+                }
+
+                return examples;
+            }
+
+            private IReadOnlyList<InputParameter>? _clientParameters;
             private IReadOnlyList<InputParameter> _initClientParameters;
-            public IReadOnlyList<InputParameter> ClientParameters => ClientParametersAndExamples.ClientParameters;
+            public IReadOnlyList<InputParameter> ClientParameters => _clientParameters ??= EnsureClientParameters();
 
-            private ClientParametersAndExamples? _clientParametersAndExamples;
-            private ClientParametersAndExamples ClientParametersAndExamples => _clientParametersAndExamples ??= EnsureClientParametersAndExamples();
-            private ClientParametersAndExamples EnsureClientParametersAndExamples()
+            private IReadOnlyList<InputParameter> EnsureClientParameters()
             {
                 if (_initClientParameters.Count == 0)
                 {
-                    // when this cliend does not have a defined endpoint parameter, we try to an endpoint parameter on one of the child client if any
-                    var (child, endpointParameter) = Children.Select(c => (c, c.ClientParameters.FirstOrDefault(p => p.IsEndpoint))).FirstOrDefault(p => p.Item2 != null);
-                    if (endpointParameter != null)
-                    {
-                        var fixedExamples = new Dictionary<string, InputClientExample>();
-                        // find the corresponding example value for this parameter from child client, and append it into the example of this client
-                        foreach (var (key, examples) in _initialExamples)
-                        {
-                            var childExample = child.Examples[key];
-                            var endpointExample = childExample.ClientParameters.First(e => e.Parameter == endpointParameter);
-                            fixedExamples.Add(key, examples with
-                            {
-                                ClientParameters = examples.ClientParameters.Append(endpointExample).ToArray()
-                            });
-                        }
-
-                        return new(new[] { endpointParameter }, fixedExamples);
-                    }
-                    else
-                    {
-                        return new(Array.Empty<InputParameter>(), _initialExamples);
-                    }
+                    var endpointParameter = this.Children.SelectMany(c => c.ClientParameters).FirstOrDefault(p => p.IsEndpoint);
+                    return endpointParameter != null ? new[] { endpointParameter } : Array.Empty<InputParameter>();
                 }
-
-                return new(_initClientParameters, _initialExamples);
+                return _initClientParameters;
             }
 
             public ISet<InputParameter> ResourceParameters { get; }
