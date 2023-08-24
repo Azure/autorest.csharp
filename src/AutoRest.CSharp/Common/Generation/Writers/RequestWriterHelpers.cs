@@ -216,6 +216,19 @@ namespace AutoRest.CSharp.Generation.Writers
         private static ReferenceOrConstant GetFieldReference(ClientFields? fields, ReferenceOrConstant value) =>
             fields != null && !value.IsConstant ? fields.GetFieldByParameter(value.Reference.Name, value.Reference.Type) ?? value : value;
 
+        private static ReferenceOrConstant GetReferenceForQueryParameter(ClientFields? fields, QueryParameter parameter)
+        {
+            var value = parameter.Value;
+            if (fields is null ||
+                value.IsConstant is true ||
+                (value.Reference.Name == "apiVersion" && parameter.IsApiVersion is false))// strictly check api-version parameter name
+            {
+                return parameter.Value;
+            }
+
+            return fields.GetFieldByParameter(value.Reference.Name, value.Reference.Type) ?? value;
+        }
+
         public static void WriteHeaders(CodeWriter writer, RestClientMethod clientMethod, CodeWriterDeclaration request, bool content, ClientFields? fields)
         {
             foreach (var header in clientMethod.Request.Headers)
@@ -360,7 +373,7 @@ namespace AutoRest.CSharp.Generation.Writers
                 ? nameof(RequestUriBuilderExtensions.AppendQueryDelimited)
                 : nameof(RequestUriBuilderExtensions.AppendQuery);
 
-            var value = GetFieldReference(fields, queryParameter.Value);
+            var value = GetReferenceForQueryParameter(fields, queryParameter);
             var parameter = parameters != null && queryParameter.Name == "api-version" ? parameters.FirstOrDefault(p => p.Name == "apiVersion") : null;
             using (parameter != null && parameter.IsOptionalInSignature ? null : WriteValueNullCheck(writer, value, checkUndefinedCollection: true))
             {
