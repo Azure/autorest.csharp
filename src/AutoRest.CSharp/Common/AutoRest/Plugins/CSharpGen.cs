@@ -23,6 +23,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             ValidateConfiguration();
             Directory.CreateDirectory(Configuration.OutputFolder);
             var project = await GeneratedCodeWorkspace.Create(Configuration.AbsoluteProjectFolder, Configuration.OutputFolder, Configuration.SharedSourceFolders);
+            // TODO: get previous contract path from configuration
             var previousContractPath = Path.GetFullPath(Path.Combine(Configuration.AbsoluteProjectFolder, "..", "..", "PreviousContract", Configuration.Namespace));
             var sourceInputModel = Directory.Exists(previousContractPath)
                 ? new SourceInputModel(await project.GetCompilationAsync(), previousContract: await GeneratedCodeWorkspace.CreateExistingCodeProject(previousContractPath).GetCompilationAsync())
