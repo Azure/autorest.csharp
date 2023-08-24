@@ -279,26 +279,26 @@ namespace Azure.Analytics.Purview.Account.Samples
             {
 new Dictionary<string, object>()
 {
-["createdBy"] = default,
-["filterType"] = default,
-["lastUpdatedTimestamp"] = default,
-["modifiedBy"] = default,
-["name"] = default,
-["path"] = default,
+["createdBy"] = "<createdBy>",
+["filterType"] = "Pattern",
+["lastUpdatedTimestamp"] = 1234L,
+["modifiedBy"] = "<modifiedBy>",
+["name"] = "<name>",
+["path"] = "<path>",
 }
             },
                     ["complexReplacers"] = new object[]
             {
 new Dictionary<string, object>()
 {
-["createdBy"] = default,
-["description"] = default,
-["disabled"] = default,
-["disableRecursiveReplacerApplication"] = default,
-["lastUpdatedTimestamp"] = default,
-["modifiedBy"] = default,
-["name"] = default,
-["typeName"] = default,
+["createdBy"] = "<createdBy>",
+["description"] = "<description>",
+["disabled"] = true,
+["disableRecursiveReplacerApplication"] = true,
+["lastUpdatedTimestamp"] = 1234L,
+["modifiedBy"] = "<modifiedBy>",
+["name"] = "<name>",
+["typeName"] = "<typeName>",
 }
             },
                     ["createdBy"] = "<createdBy>",
@@ -309,48 +309,48 @@ new Dictionary<string, object>()
             {
 new Dictionary<string, object>()
 {
-["description"] = default,
-["disabled"] = default,
-["dynamicReplacement"] = default,
+["description"] = "<description>",
+["disabled"] = true,
+["dynamicReplacement"] = true,
 ["entityTypes"] = new object[]
 {
-default
+"<entityTypes>"
 },
-["lastUpdatedTimestamp"] = default,
-["name"] = default,
+["lastUpdatedTimestamp"] = 1234L,
+["name"] = "<name>",
 ["regex"] = new Dictionary<string, object>()
 {
-["maxDigits"] = default,
-["maxLetters"] = default,
-["minDashes"] = default,
-["minDigits"] = default,
-["minDigitsOrLetters"] = default,
-["minDots"] = default,
-["minHex"] = default,
-["minLetters"] = default,
-["minUnderscores"] = default,
-["options"] = default,
-["regexStr"] = default,
+["maxDigits"] = 1234,
+["maxLetters"] = 1234,
+["minDashes"] = 1234,
+["minDigits"] = 1234,
+["minDigitsOrLetters"] = 1234,
+["minDots"] = 1234,
+["minHex"] = 1234,
+["minLetters"] = 1234,
+["minUnderscores"] = 1234,
+["options"] = 1234,
+["regexStr"] = "<regexStr>",
 },
-["replaceWith"] = default,
-["version"] = default,
+["replaceWith"] = "<replaceWith>",
+["version"] = 123.45,
 }
             },
                     ["regexReplacers"] = new object[]
             {
 new Dictionary<string, object>()
 {
-["condition"] = default,
-["createdBy"] = default,
-["description"] = default,
-["disabled"] = default,
-["disableRecursiveReplacerApplication"] = default,
+["condition"] = "<condition>",
+["createdBy"] = "<createdBy>",
+["description"] = "<description>",
+["disabled"] = true,
+["disableRecursiveReplacerApplication"] = true,
 ["doNotReplaceRegex"] = null,
-["lastUpdatedTimestamp"] = default,
-["modifiedBy"] = default,
-["name"] = default,
+["lastUpdatedTimestamp"] = 1234L,
+["modifiedBy"] = "<modifiedBy>",
+["name"] = "<name>",
 ["regex"] = null,
-["replaceWith"] = default,
+["replaceWith"] = "<replaceWith>",
 }
             },
                     ["rejectedPatterns"] = new object[]
@@ -361,19 +361,19 @@ null
             {
 new Dictionary<string, object>()
 {
-["bindingUrl"] = default,
+["bindingUrl"] = "<bindingUrl>",
 ["rules"] = new object[]
 {
 new Dictionary<string, object>()
 {
-["displayName"] = default,
-["isResourceSet"] = default,
-["lastUpdatedTimestamp"] = default,
-["name"] = default,
-["qualifiedName"] = default,
+["displayName"] = "<displayName>",
+["isResourceSet"] = true,
+["lastUpdatedTimestamp"] = 1234L,
+["name"] = "<name>",
+["qualifiedName"] = "<qualifiedName>",
 }
 },
-["storeType"] = default,
+["storeType"] = "<storeType>",
 }
             },
                     ["version"] = 1234,
@@ -505,26 +505,26 @@ new Dictionary<string, object>()
             {
 new Dictionary<string, object>()
 {
-["createdBy"] = default,
-["filterType"] = default,
-["lastUpdatedTimestamp"] = default,
-["modifiedBy"] = default,
-["name"] = default,
-["path"] = default,
+["createdBy"] = "<createdBy>",
+["filterType"] = "Pattern",
+["lastUpdatedTimestamp"] = 1234L,
+["modifiedBy"] = "<modifiedBy>",
+["name"] = "<name>",
+["path"] = "<path>",
 }
             },
                     ["complexReplacers"] = new object[]
             {
 new Dictionary<string, object>()
 {
-["createdBy"] = default,
-["description"] = default,
-["disabled"] = default,
-["disableRecursiveReplacerApplication"] = default,
-["lastUpdatedTimestamp"] = default,
-["modifiedBy"] = default,
-["name"] = default,
-["typeName"] = default,
+["createdBy"] = "<createdBy>",
+["description"] = "<description>",
+["disabled"] = true,
+["disableRecursiveReplacerApplication"] = true,
+["lastUpdatedTimestamp"] = 1234L,
+["modifiedBy"] = "<modifiedBy>",
+["name"] = "<name>",
+["typeName"] = "<typeName>",
 }
             },
                     ["createdBy"] = "<createdBy>",
@@ -535,48 +535,48 @@ new Dictionary<string, object>()
             {
 new Dictionary<string, object>()
 {
-["description"] = default,
-["disabled"] = default,
-["dynamicReplacement"] = default,
+["description"] = "<description>",
+["disabled"] = true,
+["dynamicReplacement"] = true,
 ["entityTypes"] = new object[]
 {
-default
+"<entityTypes>"
 },
-["lastUpdatedTimestamp"] = default,
-["name"] = default,
+["lastUpdatedTimestamp"] = 1234L,
+["name"] = "<name>",
 ["regex"] = new Dictionary<string, object>()
 {
-["maxDigits"] = default,
-["maxLetters"] = default,
-["minDashes"] = default,
-["minDigits"] = default,
-["minDigitsOrLetters"] = default,
-["minDots"] = default,
-["minHex"] = default,
-["minLetters"] = default,
-["minUnderscores"] = default,
-["options"] = default,
-["regexStr"] = default,
+["maxDigits"] = 1234,
+["maxLetters"] = 1234,
+["minDashes"] = 1234,
+["minDigits"] = 1234,
+["minDigitsOrLetters"] = 1234,
+["minDots"] = 1234,
+["minHex"] = 1234,
+["minLetters"] = 1234,
+["minUnderscores"] = 1234,
+["options"] = 1234,
+["regexStr"] = "<regexStr>",
 },
-["replaceWith"] = default,
-["version"] = default,
+["replaceWith"] = "<replaceWith>",
+["version"] = 123.45,
 }
             },
                     ["regexReplacers"] = new object[]
             {
 new Dictionary<string, object>()
 {
-["condition"] = default,
-["createdBy"] = default,
-["description"] = default,
-["disabled"] = default,
-["disableRecursiveReplacerApplication"] = default,
+["condition"] = "<condition>",
+["createdBy"] = "<createdBy>",
+["description"] = "<description>",
+["disabled"] = true,
+["disableRecursiveReplacerApplication"] = true,
 ["doNotReplaceRegex"] = null,
-["lastUpdatedTimestamp"] = default,
-["modifiedBy"] = default,
-["name"] = default,
+["lastUpdatedTimestamp"] = 1234L,
+["modifiedBy"] = "<modifiedBy>",
+["name"] = "<name>",
 ["regex"] = null,
-["replaceWith"] = default,
+["replaceWith"] = "<replaceWith>",
 }
             },
                     ["rejectedPatterns"] = new object[]
@@ -587,19 +587,19 @@ null
             {
 new Dictionary<string, object>()
 {
-["bindingUrl"] = default,
+["bindingUrl"] = "<bindingUrl>",
 ["rules"] = new object[]
 {
 new Dictionary<string, object>()
 {
-["displayName"] = default,
-["isResourceSet"] = default,
-["lastUpdatedTimestamp"] = default,
-["name"] = default,
-["qualifiedName"] = default,
+["displayName"] = "<displayName>",
+["isResourceSet"] = true,
+["lastUpdatedTimestamp"] = 1234L,
+["name"] = "<name>",
+["qualifiedName"] = "<qualifiedName>",
 }
 },
-["storeType"] = default,
+["storeType"] = "<storeType>",
 }
             },
                     ["version"] = 1234,
