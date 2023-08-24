@@ -86,5 +86,12 @@ namespace CadlRanchProjects.Tests
             CollectionAssert.AreEqual(new int?[] { null, 123 }, result.RequiredCollectionWithNullableIntElement);
             CollectionAssert.AreEqual(new bool?[] { null, false, true }, result.OptionalCollectionWithNullableBooleanElement);
         });
+
+        [Test]
+        public Task Models_SingleBase() => Test(async (host) =>
+        {
+            SingleBase result = await new ModelsTypeSpecClient(host).GetSingleBaseAsync();
+            Assert.AreEqual(123, result.Size);
+        });
     }
 }
