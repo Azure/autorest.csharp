@@ -288,7 +288,11 @@ export function getInputType(
         type.kind === "Number" ||
         type.kind === "Boolean"
     ) {
-        return getInputLiteralType(formattedType, literalTypeContext, parentType);
+        return getInputLiteralType(
+            formattedType,
+            literalTypeContext,
+            parentType
+        );
     } else if (type.kind === "Enum") {
         return getInputTypeForEnum(type);
     } else if (type.kind === "EnumMember") {
@@ -405,7 +409,9 @@ export function getInputType(
             IsNullable: false
         } as InputLiteralType;
 
-        function getLiteralValueType(parentType?: Type): InputPrimitiveType | InputEnumType {
+        function getLiteralValueType(
+            parentType?: Type
+        ): InputPrimitiveType | InputEnumType {
             // we will not wrap it if it comes from outside a model or it is a boolean
             if (literalContext === undefined || rawValueType.Kind === "Boolean")
                 return rawValueType;
@@ -539,7 +545,9 @@ export function getInputType(
             model = {
                 Name: name,
                 Namespace: getFullNamespaceString(m.namespace),
-                Accessibility: isInternal(context, m) ? "internal" : getAccess(context, m),
+                Accessibility: isInternal(context, m)
+                    ? "internal"
+                    : getAccess(context, m),
                 Deprecated: getDeprecated(program, m),
                 Description: getDoc(program, m),
                 IsNullable: false,
@@ -775,14 +783,11 @@ function setUsage(
     const sourceUsage = getUsageOverride(context, source);
     if (sourceUsage === UsageFlags.Input) {
         target.Usage = Usage.Input;
-    }
-    else if (sourceUsage === UsageFlags.Output) {
+    } else if (sourceUsage === UsageFlags.Output) {
         target.Usage = Usage.Output;
-    }
-    else if (sourceUsage === (UsageFlags.Input | UsageFlags.Output)) {
+    } else if (sourceUsage === (UsageFlags.Input | UsageFlags.Output)) {
         target.Usage = Usage.RoundTrip;
-    }
-    else {
+    } else {
         target.Usage = Usage.None;
     }
 }
