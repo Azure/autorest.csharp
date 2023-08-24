@@ -290,7 +290,7 @@ namespace AutoRest.CSharp.Output.Models
                         pathParametersMap.Add(parameterName, new PathSegment(reference, escape, serializationFormat, isRaw: false));
                         break;
                     case HttpParameterIn.Query:
-                        queryParameters.Add(new QueryParameter(parameterName, reference, GetArraySerializationDelimiter(requestParameter), escape, serializationFormat, GetExplode(requestParameter)));
+                        queryParameters.Add(new QueryParameter(parameterName, reference, GetArraySerializationDelimiter(requestParameter), escape, serializationFormat, GetExplode(requestParameter), requestParameter.IsApiVersion));
                         break;
                     case HttpParameterIn.Header:
                         var headerName = requestParameter.Extensions?.HeaderCollectionPrefix ?? parameterName;

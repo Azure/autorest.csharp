@@ -16,7 +16,7 @@ param(
 
     [bool]$UseInternalFeed = $false)
 
-# $ErrorActionPreference = 'Stop'
+$ErrorActionPreference = 'Stop'
 
 Invoke-Expression "$PSScriptRoot\UpdateGeneratorMetadata.ps1 -AutorestCSharpVersion $AutorestCSharpVersion -TypeSpecEmitterVersion $TypeSpecEmitterVersion -SdkRepoRoot $SdkRepoRoot -UseInternalFeed `$$UseInternalFeed"
 
