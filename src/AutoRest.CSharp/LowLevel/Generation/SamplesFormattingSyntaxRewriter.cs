@@ -13,6 +13,7 @@ namespace AutoRest.CSharp.Generation.Writers
     {
         private static readonly CSharpSyntaxRewriter Instance = new SamplesFormattingSyntaxRewriter();
         private static readonly SyntaxTrivia Indentation = SyntaxFactory.Whitespace("    ");
+        private const string ParentLeadingTriviaKind = nameof(ParentLeadingTriviaKind);
 
         public static string FormatFile(string code)
         {
@@ -65,54 +66,17 @@ namespace AutoRest.CSharp.Generation.Writers
                 return node;
             }
 
-            var parentLeadingTrivia = GetParentLeadingTrivia(node);
-
-            if (node.Initializer is {Expressions.Count: > 0} initializer)
+            if (node.Initializer is {Expressions.Count: > 0})
             {
                 node = node.ArgumentList is {} argumentList
                     ? node.WithArgumentList(argumentList.WithTrailingTrivia(SyntaxFactory.CarriageReturnLineFeed))
                     : node.WithType(node.Type.WithTrailingTrivia(SyntaxFactory.CarriageReturnLineFeed));
-
-                node = node.WithInitializer(FixInitializerBeforeVisit(initializer, parentLeadingTrivia));
             }
 
-            if (base.VisitObjectCreationExpression(node) is not ObjectCreationExpressionSyntax newNode)
-            {
-                return null;
-            }
-
-            if (newNode.Initializer is { } newInitializer)
-            {
-                newNode = newNode.WithInitializer(FixInitializerAfterVisit(newInitializer, parentLeadingTrivia));
-            }
-
-            return newNode;
+            return base.VisitObjectCreationExpression(node);
         }
 
-        public override SyntaxNode? VisitImplicitArrayCreationExpression(ImplicitArrayCreationExpressionSyntax node)
-        {
-            var parentLeadingTrivia = GetParentLeadingTrivia(node);
-            var initializer = node.Initializer;
-
-            node = node
-                .WithNewKeyword(node.NewKeyword.WithTrailingTrivia(SyntaxTriviaList.Empty))
-                .WithCloseBracketToken(node.CloseBracketToken.WithTrailingTrivia(SyntaxTriviaList.Empty))
-                .WithInitializer(initializer
-                    .WithOpenBraceToken(FixOpenBraceTrivia(initializer.OpenBraceToken, initializer.Expressions.Any()))
-                    .WithExpressions(SyntaxFactory.SeparatedList<ExpressionSyntax>(FixInitializerLeadingTrivia(initializer.Expressions.GetWithSeparators(), parentLeadingTrivia))));
-
-            if (base.VisitImplicitArrayCreationExpression(node) is not ImplicitArrayCreationExpressionSyntax newNode)
-            {
-                return null;
-            }
-
-            initializer = newNode.Initializer;
-            return newNode.WithInitializer(initializer
-                .WithExpressions(SyntaxFactory.SeparatedList<ExpressionSyntax>(FixInitializerTrailingTrivia(initializer.Expressions.GetWithSeparators())))
-                .WithCloseBraceToken(FixCloseBraceTrivia(initializer.CloseBraceToken, initializer.Expressions.Any() ? parentLeadingTrivia : SyntaxTriviaList.Empty)));
-        }
-
-        public override SyntaxNode? VisitArrayCreationExpression(ArrayCreationExpressionSyntax node)
+        public override SyntaxNode? VisitInitializerExpression(InitializerExpressionSyntax node)
         {
             if (IsSingleLine(node))
             {
@@ -120,29 +84,35 @@ namespace AutoRest.CSharp.Generation.Writers
             }
 
             var parentLeadingTrivia = GetParentLeadingTrivia(node);
+            node = FixInitializerBeforeVisit(node, parentLeadingTrivia);
 
-            if (node.Initializer is { } initializer)
-            {
-                node = node.WithInitializer(FixInitializerBeforeVisit(initializer, parentLeadingTrivia));
-            }
+            return base.VisitInitializerExpression(node) is InitializerExpressionSyntax newNode
+                ? FixInitializerAfterVisit(newNode, parentLeadingTrivia)
+                : null;
+        }
 
-            if (base.VisitArrayCreationExpression(node) is not ArrayCreationExpressionSyntax newNode)
-            {
-                return null;
-            }
-
-            if (newNode.Initializer is { } newInitializer)
-            {
-                newNode = newNode.WithInitializer(FixInitializerAfterVisit(newInitializer, parentLeadingTrivia));
-            }
-
-            return newNode;
+        public override SyntaxNode? VisitImplicitArrayCreationExpression(ImplicitArrayCreationExpressionSyntax node)
+        {
+            return base.VisitImplicitArrayCreationExpression(node) is ImplicitArrayCreationExpressionSyntax newNode
+                ? newNode.WithNewKeyword(node.NewKeyword.WithTrailingTrivia(SyntaxTriviaList.Empty))
+                : null;
         }
 
         private static InitializerExpressionSyntax FixInitializerBeforeVisit(InitializerExpressionSyntax initializer, SyntaxTriviaList parentLeadingTrivia)
-            => initializer
-                .WithOpenBraceToken(initializer.OpenBraceToken.WithLeadingTrivia(parentLeadingTrivia))
+        {
+            var openBraceToken = initializer.OpenBraceToken;
+            openBraceToken = initializer.Parent switch
+            {
+                ImplicitArrayCreationExpressionSyntax => openBraceToken
+                    .WithLeadingTrivia(SyntaxFactory.Space)
+                    .WithTrailingTrivia(SyntaxFactory.CarriageReturnLineFeed),
+                _ => openBraceToken.WithLeadingTrivia(parentLeadingTrivia)
+            };
+
+            return initializer
+                .WithOpenBraceToken(openBraceToken)
                 .WithExpressions(SyntaxFactory.SeparatedList<ExpressionSyntax>(FixInitializerLeadingTrivia(initializer.Expressions.GetWithSeparators(), parentLeadingTrivia)));
+        }
 
         private static InitializerExpressionSyntax FixInitializerAfterVisit(InitializerExpressionSyntax newInitializer, SyntaxTriviaList parentLeadingTrivia)
             => newInitializer
@@ -169,7 +139,7 @@ namespace AutoRest.CSharp.Generation.Writers
                 }
             }
 
-            return SyntaxTriviaList.Empty;
+            return node.GetLeadingTrivia();
         }
 
         private static IEnumerable<SyntaxNodeOrToken> FixInitializerLeadingTrivia(SyntaxNodeOrTokenList nodesOrToken, SyntaxTriviaList leadingTrivia)
