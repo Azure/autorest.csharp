@@ -28,8 +28,8 @@ namespace AutoRest.CSharp.Output.Models.Types
         protected override string DefaultName { get; }
         protected override string DefaultAccessibility { get; }
 
-        private IEnumerable<MethodSignature>? _methods;
-        public override IEnumerable<MethodSignature> Methods => _methods ??= Models.Select(CreateMethod).ToList();
+        private IList<MethodSignature>? _methods;
+        public override IList<MethodSignature> Methods => _methods ??= Models.Select(CreateMethod).ToList();
 
         public IEnumerable<SerializableObjectType> Models { get; }
 

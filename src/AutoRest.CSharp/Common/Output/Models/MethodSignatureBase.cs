@@ -16,12 +16,13 @@ namespace AutoRest.CSharp.Output.Models
         public string? SummaryText => Summary.IsNullOrEmpty() ? Description : Summary;
         public string? DescriptionText => Summary.IsNullOrEmpty() || Description == Summary ? string.Empty : Description;
 
-        public static IEnumerable<MethodSignature> PopulateMethods(INamedTypeSymbol? typeSymbol)
+        public static IList<MethodSignature> PopulateMethods(INamedTypeSymbol? typeSymbol)
         {
+            var result = new List<MethodSignature>();
             if (typeSymbol is null)
             {
                 // TODO: handle missing type
-                yield break;
+                return result;
             }
             var methods = typeSymbol!.GetMembers().OfType<IMethodSymbol>();
             foreach (var method in methods)
@@ -39,13 +40,14 @@ namespace AutoRest.CSharp.Output.Models
                             parameters.Add(methodParameter);
                         }
                     }
-                    yield return new MethodSignature(method.Name, null, null, MapModifiers(method), returnType, null, parameters);
+                    result.Add(new MethodSignature(method.Name, null, null, MapModifiers(method), returnType, null, parameters));
                 }
                 else
                 {
                     // TODO: handle missing method return type from MgmtOutputLibrary
                 }
             }
+            return result;
         }
 
         private static MethodSignatureModifiers MapModifiers(IMethodSymbol methodSymbol)

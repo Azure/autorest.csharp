@@ -26,7 +26,7 @@ namespace AutoRest.CSharp.Common.Output.Models.Types
     {
         private SourceInputModel? _sourceInputModel;
 
-        protected SignatureTypeProvider(string defaultNamespace, string defaultName, IEnumerable<MethodSignature> methods, SourceInputModel? sourceInputModel = null) : base(defaultNamespace, sourceInputModel)
+        protected SignatureTypeProvider(string defaultNamespace, string defaultName, IList<MethodSignature> methods, SourceInputModel? sourceInputModel = null) : base(defaultNamespace, sourceInputModel)
         {
             DefaultName = defaultName;
             DefaultAccessibility = "public";
@@ -41,7 +41,7 @@ namespace AutoRest.CSharp.Common.Output.Models.Types
         protected SignatureTypeProvider? PreviousContract => _previousContract ??= CreateFromCompilation(_sourceInputModel?.PreviousContract);
 
         // TODO: store the implementation of missing methods along with declaration
-        public virtual IEnumerable<MethodSignature> Methods { get; }
+        public virtual IList<MethodSignature> Methods { get; }
 
         protected override string DefaultName { get; }
 
