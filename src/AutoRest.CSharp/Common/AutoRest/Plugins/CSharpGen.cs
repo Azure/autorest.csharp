@@ -18,22 +18,15 @@ namespace AutoRest.CSharp.AutoRest.Plugins
     [PluginName("csharpgen")]
     internal class CSharpGen : IPlugin
     {
-        public async Task<GeneratedCodeWorkspace> ExecuteAsync(CodeModel codeModel, string? previousContractPath = null)
+        public async Task<GeneratedCodeWorkspace> ExecuteAsync(CodeModel codeModel)
         {
             ValidateConfiguration();
-
             Directory.CreateDirectory(Configuration.OutputFolder);
             var project = await GeneratedCodeWorkspace.Create(Configuration.AbsoluteProjectFolder, Configuration.OutputFolder, Configuration.SharedSourceFolders);
-            SourceInputModel sourceInputModel;
-            if (previousContractPath is not null)
-            {
-                var previousContract = GeneratedCodeWorkspace.CreateExistingCodeProject(previousContractPath);
-                sourceInputModel = new SourceInputModel(await project.GetCompilationAsync(), previousContract: await previousContract.GetCompilationAsync());
-            }
-            else
-            {
-                sourceInputModel = new SourceInputModel(await project.GetCompilationAsync());
-            }
+            var previousContractPath = Path.GetFullPath(Path.Combine(Configuration.AbsoluteProjectFolder, "..", "..", "PreviousContract", Configuration.Namespace));
+            var sourceInputModel = Directory.Exists(previousContractPath)
+                ? new SourceInputModel(await project.GetCompilationAsync(), previousContract: await GeneratedCodeWorkspace.CreateExistingCodeProject(previousContractPath).GetCompilationAsync())
+                : new SourceInputModel(await project.GetCompilationAsync());
 
             if (Configuration.Generation1ConvenienceClient)
             {
@@ -69,7 +62,7 @@ namespace AutoRest.CSharp.AutoRest.Plugins
             return project;
         }
 
-        private static void ValidateConfiguration ()
+        private static void ValidateConfiguration()
         {
             if (Configuration.Generation1ConvenienceClient && Configuration.AzureArm)
             {

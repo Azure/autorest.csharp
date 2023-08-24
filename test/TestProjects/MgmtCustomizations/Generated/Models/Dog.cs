@@ -23,11 +23,20 @@ namespace MgmtCustomizations.Models
         /// The size of the pet. This property here is mocking the following scenario:
         /// Despite in the swagger it has a type of string, in the real payload of this request, the service is actually sending using a number, therefore the type in this swagger here is wrong and we have to fix it using customization code.
         /// </param>
+        /// <param name="sleep"> A dog can sleep. </param>
         /// <param name="bark"> A dog can bark. </param>
-        internal Dog(PetKind kind, string name, int size, string bark) : base(kind, name, size)
+        /// <param name="jump"> A dog can jump. </param>
+        internal Dog(PetKind kind, string name, int size, string sleep, string bark, string jump) : base(kind, name, size)
         {
+            Sleep = sleep;
             Bark = bark;
+            Jump = jump;
             Kind = kind;
         }
+
+        /// <summary> A dog can sleep. </summary>
+        public string Sleep { get; set; }
+        /// <summary> A dog can jump. </summary>
+        public string Jump { get; set; }
     }
 }
