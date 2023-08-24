@@ -190,7 +190,6 @@ stages:
       - job: Create_PR
         dependsOn: 
           - Update_Generator_Versions
-          - Update_Code
         steps:
           - checkout: self
             fetchDepth: 1
