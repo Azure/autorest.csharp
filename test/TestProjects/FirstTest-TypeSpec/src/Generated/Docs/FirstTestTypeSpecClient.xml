@@ -559,6 +559,66 @@ Console.WriteLine(response.Status);
 ]]></code>
 </example>
     </member>
+    <member name="ProjectedNameModelAsync(ProjectedModel,CancellationToken)">
+<example>
+This sample shows how to call ProjectedNameModelAsync with required parameters.
+<code><![CDATA[
+var endpoint = new Uri("<https://my-service.azure.com>");
+var client = new FirstTestTypeSpecClient(endpoint);
+
+var modelWithProjectedName = new ProjectedModel("<name>");
+var result = await client.ProjectedNameModelAsync(modelWithProjectedName);
+]]></code>
+</example>
+    </member>
+    <member name="ProjectedNameModel(ProjectedModel,CancellationToken)">
+<example>
+This sample shows how to call ProjectedNameModel with required parameters.
+<code><![CDATA[
+var endpoint = new Uri("<https://my-service.azure.com>");
+var client = new FirstTestTypeSpecClient(endpoint);
+
+var modelWithProjectedName = new ProjectedModel("<name>");
+var result = client.ProjectedNameModel(modelWithProjectedName);
+]]></code>
+</example>
+    </member>
+    <member name="ProjectedNameModelAsync(RequestContent,RequestContext)">
+<example>
+This sample shows how to call ProjectedNameModelAsync with required request content and parse the result.
+<code><![CDATA[
+var endpoint = new Uri("<https://my-service.azure.com>");
+var client = new FirstTestTypeSpecClient(endpoint);
+
+var data = new {
+    name = "<name>",
+};
+
+Response response = await client.ProjectedNameModelAsync(RequestContent.Create(data));
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("name").ToString());
+]]></code>
+</example>
+    </member>
+    <member name="ProjectedNameModel(RequestContent,RequestContext)">
+<example>
+This sample shows how to call ProjectedNameModel with required request content and parse the result.
+<code><![CDATA[
+var endpoint = new Uri("<https://my-service.azure.com>");
+var client = new FirstTestTypeSpecClient(endpoint);
+
+var data = new {
+    name = "<name>",
+};
+
+Response response = client.ProjectedNameModel(RequestContent.Create(data));
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("name").ToString());
+]]></code>
+</example>
+    </member>
     <member name="ReturnsAnonymousModelAsync(RequestContext)">
 <example>
 This sample shows how to call ReturnsAnonymousModelAsync with required parameters and parse the result.
