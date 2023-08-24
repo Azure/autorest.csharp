@@ -319,6 +319,12 @@ op addTimeHeader(
 @convenientAPI(true)
 op stringFormat(@path @format("uuid") subscriptionId: string, @body body: ModelWithFormat): void;
 
+@route("/retunsAnonymousModel")
+@doc("return anonymous model")
+@post
+@convenientAPI(true)
+op returnsAnonymousModel(): {};
+
 namespace EnumTest {
     @get
     @route("/unknown-value")
