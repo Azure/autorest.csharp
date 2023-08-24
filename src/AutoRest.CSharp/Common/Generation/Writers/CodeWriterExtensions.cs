@@ -141,7 +141,7 @@ namespace AutoRest.CSharp.Generation.Writers
             return writer.Line();
         }
 
-        public static IDisposable WriteMethodDeclaration(this CodeWriter writer, MethodSignatureBase methodBase, params string[] disabledWarnings)
+        public static IDisposable WriteMethodDeclaration(this CodeWriter writer, MethodSignatureBase methodBase, bool ignoreOptional = false, params string[] disabledWarnings)
         {
             if (methodBase.Attributes is { } attributes)
             {
@@ -222,7 +222,7 @@ namespace AutoRest.CSharp.Generation.Writers
 
             foreach (var parameter in methodBase.Parameters)
             {
-                writer.WriteParameter(parameter);
+                writer.WriteParameter(parameter, ignoreOptional);
             }
 
             writer.RemoveTrailingComma();
@@ -287,7 +287,7 @@ namespace AutoRest.CSharp.Generation.Writers
             return writer;
         }
 
-        public static void WriteParameter(this CodeWriter writer, Parameter clientParameter)
+        public static void WriteParameter(this CodeWriter writer, Parameter clientParameter, bool ignoreOptional = false)
         {
             if (clientParameter.Attributes.Any())
             {
@@ -301,7 +301,7 @@ namespace AutoRest.CSharp.Generation.Writers
             }
 
             writer.Append($"{clientParameter.Type} {clientParameter.Name:D}");
-            if (clientParameter.DefaultValue != null)
+            if (!ignoreOptional && clientParameter.DefaultValue != null)
             {
                 var defaultValue = clientParameter.DefaultValue.Value;
                 if (defaultValue.IsNewInstanceSentinel && defaultValue.Type.IsValueType || clientParameter.IsApiVersionParameter && clientParameter.Initializer != null)

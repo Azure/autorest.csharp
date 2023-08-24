@@ -288,6 +288,14 @@
                 }
             ],
             "properties": {
+                "sleep": {
+                    "description": "A cat can sleep",
+                    "type": "string"
+                },
+                "jump": {
+                    "description": "A cat can jump",
+                    "type": "string"
+                },
                 "meow": {
                     "description": "A cat can meow",
                     "type": "string",
@@ -304,8 +312,16 @@
                 }
             ],
             "properties": {
+                "sleep": {
+                    "description": "A dog can sleep",
+                    "type": "string"
+                },
                 "bark": {
                     "description": "A dog can bark",
+                    "type": "string"
+                },
+                "jump": {
+                    "description": "A dog can jump",
                     "type": "string"
                 }
             }

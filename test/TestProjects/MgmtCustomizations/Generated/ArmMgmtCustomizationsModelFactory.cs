@@ -6,6 +6,7 @@
 #nullable disable
 
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using Azure.Core;
 using Azure.ResourceManager.Models;
@@ -46,11 +47,13 @@ namespace MgmtCustomizations.Models
         /// The size of the pet. This property here is mocking the following scenario:
         /// Despite in the swagger it has a type of string, in the real payload of this request, the service is actually sending using a number, therefore the type in this swagger here is wrong and we have to fix it using customization code.
         /// </param>
+        /// <param name="sleep"> A cat can sleep. </param>
+        /// <param name="jump"> A cat can jump. </param>
         /// <param name="meow"> A cat can meow. </param>
         /// <returns> A new <see cref="Models.Cat"/> instance for mocking. </returns>
-        public static Cat Cat(string name = null, int size = default, string meow = null)
+        public static Cat Cat(string name = null, int size = default, string sleep = null, string jump = null, string meow = null)
         {
-            return new Cat(PetKind.Cat, name, size, meow);
+            return new Cat(PetKind.Cat, name, size, sleep, jump, meow);
         }
 
         /// <summary> Initializes a new instance of Dog. </summary>
@@ -59,11 +62,25 @@ namespace MgmtCustomizations.Models
         /// The size of the pet. This property here is mocking the following scenario:
         /// Despite in the swagger it has a type of string, in the real payload of this request, the service is actually sending using a number, therefore the type in this swagger here is wrong and we have to fix it using customization code.
         /// </param>
+        /// <param name="sleep"> A dog can sleep. </param>
         /// <param name="bark"> A dog can bark. </param>
+        /// <param name="jump"> A dog can jump. </param>
         /// <returns> A new <see cref="Models.Dog"/> instance for mocking. </returns>
-        public static Dog Dog(string name = null, int size = default, string bark = null)
+        public static Dog Dog(string name = null, int size = default, string sleep = null, string bark = null, string jump = null)
         {
-            return new Dog(PetKind.Dog, name, size, bark);
+            return new Dog(PetKind.Dog, name, size, sleep, bark, jump);
+        }
+
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public static Cat Cat(string name, int size, string meow)
+        {
+            return Cat(name, size, default, default, meow);
+        }
+
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public static Dog Dog(string name, int size, string bark)
+        {
+            return Dog(name, size, default, bark, default);
         }
     }
 }

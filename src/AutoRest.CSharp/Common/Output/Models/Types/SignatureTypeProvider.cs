@@ -50,7 +50,7 @@ namespace AutoRest.CSharp.Common.Output.Models.Types
         public void WriteMissingOverloadMethod(CodeWriter writer, MethodSignature currentMethodToCall, MethodSignature previousMethodToAdd, IList<MethodParameter> missingParameters)
         {
             writer.Line($"[{typeof(EditorBrowsableAttribute)}({typeof(EditorBrowsableState)}.{nameof(EditorBrowsableState.Never)})]");
-            using (writer.WriteMethodDeclaration(previousMethodToAdd))
+            using (writer.WriteMethodDeclaration(previousMethodToAdd, ignoreOptional: true))
             {
                 writer.Line();
                 writer.Append($"return {currentMethodToCall.Name}(");
@@ -148,7 +148,7 @@ namespace AutoRest.CSharp.Common.Output.Models.Types
                 var parameters = item.Parameters.Except(previousMethod.Parameters, new ParameterComparer());
                 if (parameters.All(x => x.IsOptionalInSignature))
                 {
-                    missingParameters = parameters.Select(x => x.ToRequired()).ToList();
+                    missingParameters = parameters.ToList();
                     currentMethodToCall = item;
                     return true;
                 }
