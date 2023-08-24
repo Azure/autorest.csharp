@@ -2,26 +2,30 @@
 <doc>
   <members>
     <member name="CsvAsync(IEnumerable{string},RequestContext)">
-<example>
+      <example>
 This sample shows how to call CsvAsync with required parameters.
 <code><![CDATA[
-var client = new CollectionFormatClient().GetHeaderClient("1.0.0");
+Header client = new CollectionFormatClient().GetHeaderClient(apiVersion: "1.0.0");
 
-Response response = await client.CsvAsync(new String[]{"<colors>"});
+Response response = await client.CsvAsync(new string[]
+{
+"<colors>"
+});
 Console.WriteLine(response.Status);
-]]></code>
-</example>
+]]></code></example>
     </member>
     <member name="Csv(IEnumerable{string},RequestContext)">
-<example>
+      <example>
 This sample shows how to call Csv with required parameters.
 <code><![CDATA[
-var client = new CollectionFormatClient().GetHeaderClient("1.0.0");
+Header client = new CollectionFormatClient().GetHeaderClient(apiVersion: "1.0.0");
 
-Response response = client.Csv(new String[]{"<colors>"});
+Response response = client.Csv(new string[]
+{
+"<colors>"
+});
 Console.WriteLine(response.Status);
-]]></code>
-</example>
+]]></code></example>
     </member>
   </members>
 </doc>
