@@ -5,7 +5,6 @@ import { VersioningTestLibrary } from "@typespec/versioning/testing";
 import { AzureCoreTestLibrary } from "@azure-tools/typespec-azure-core/testing";
 import {
     EmitContext,
-    getFormat,
     isGlobalNamespace,
     Namespace,
     navigateTypesInNamespace,
@@ -16,7 +15,7 @@ import { NetEmitterOptions } from "../../../src/options.js";
 import { InputEnumType, InputModelType } from "../../../src/type/inputType.js";
 import { getFormattedType, getInputType } from "../../../src/lib/model.js";
 import { SdkContext } from "@azure-tools/typespec-client-generator-core";
-import { FormattedType } from "../../../src/type/formattedType.js";
+import { SdkTestLibrary } from "@azure-tools/typespec-client-generator-core/testing";
 
 export async function createEmitterTestHost(): Promise<TestHost> {
     return createTestHost({
@@ -24,17 +23,26 @@ export async function createEmitterTestHost(): Promise<TestHost> {
             RestTestLibrary,
             HttpTestLibrary,
             VersioningTestLibrary,
-            AzureCoreTestLibrary
+            AzureCoreTestLibrary,
+            SdkTestLibrary
         ]
     });
+}
+
+export interface TypeSpecCompileOptions {
+    IsNamespaceNeeded?: boolean;
+    IsAzureCoreNeeded?: boolean;
+    IsTCGCNeeded?: boolean;
 }
 
 export async function typeSpecCompile(
     content: string,
     host: TestHost,
-    needNamespaces: boolean = true,
-    needAzureCore: boolean = false
+    options?: TypeSpecCompileOptions
 ) {
+    const needNamespaces = options?.IsNamespaceNeeded ?? true;
+    const needAzureCore = options?.IsAzureCoreNeeded ?? false;
+    const needTCGC = options?.IsTCGCNeeded ?? false;
     const namespace = `
     @useAuth(ApiKeyAuth<ApiKeyLocation.header, "api-key">)
     @service({
@@ -44,22 +52,22 @@ export async function typeSpecCompile(
     ${needAzureCore ? "@useDependency(Azure.Core.Versions.v1_0_Preview_1)" : ""}
     namespace Azure.Csharp.Testing;
     `;
-    host.addTypeSpecFile(
-        "main.tsp",
-        `
+    const fileContent = `
     import "@typespec/rest";
     import "@typespec/http";
     import "@typespec/versioning";
-    ${needAzureCore ? 'import "@azure-tools/typespec-azure-core";' : ""} 
+    ${needAzureCore ? 'import "@azure-tools/typespec-azure-core";' : ""}
+    ${needTCGC ? 'import "@azure-tools/typespec-client-generator-core";' : ""}
     using TypeSpec.Rest; 
     using TypeSpec.Http;
     using TypeSpec.Versioning;
     ${needAzureCore ? "using Azure.Core;" : ""}
+    ${needTCGC ? "using Azure.ClientGenerator.Core;" : ""}
     
     ${needNamespaces ? namespace : ""}
     ${content}
-    `
-    );
+    `;
+    host.addTypeSpecFile("main.tsp", fileContent);
     await host.compile("./", {
         warningAsError: false
     });

@@ -47,6 +47,7 @@ namespace SpecialHeaders.ClientRequestId
             _apiVersion = options.Version;
         }
 
+        // The convenience method is omitted here because it has exactly the same parameter list as the corresponding protocol method
         /// <summary>
         /// [Protocol Method] Get operation with azure client request id header.
         /// <list type="bullet">
@@ -77,6 +78,7 @@ namespace SpecialHeaders.ClientRequestId
             }
         }
 
+        // The convenience method is omitted here because it has exactly the same parameter list as the corresponding protocol method
         /// <summary>
         /// [Protocol Method] Get operation with azure client request id header.
         /// <list type="bullet">

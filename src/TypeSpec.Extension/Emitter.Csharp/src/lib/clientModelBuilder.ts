@@ -194,7 +194,7 @@ export function createModelForService(
                         apiVersionParam.DefaultValue;
                 }
                 /**
-                 * replace to the global apiVerison parameter if the apiVersion defined in the operation is the same as the global service apiVersion parameter.
+                 * replace to the global apiVersion parameter if the apiVersion defined in the operation is the same as the global service apiVersion parameter.
                  * Three checkpoints:
                  * the parameter is query parameter,
                  * it is client parameter

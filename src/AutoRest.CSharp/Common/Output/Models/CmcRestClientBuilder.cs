@@ -179,7 +179,8 @@ namespace AutoRest.CSharp.Output.Models
                     SkipUrlEncoding: requestParameter.Extensions?.SkipEncoding ?? false,
                     HeaderCollectionPrefix: requestParameter.Extensions?.HeaderCollectionPrefix,
                     VirtualParameter: requestParameter is VirtualParameter { Schema: not ConstantSchema } vp ? vp : null,
-                    SerializationFormat: BuilderHelpers.GetSerializationFormat(requestParameter.Schema));
+                    SerializationFormat: BuilderHelpers.GetSerializationFormat(requestParameter.Schema)
+                );
         }
 
         private static InputConstant? GetDefaultValue(RequestParameter parameter)
@@ -289,7 +290,7 @@ namespace AutoRest.CSharp.Output.Models
                         pathParametersMap.Add(parameterName, new PathSegment(reference, escape, serializationFormat, isRaw: false));
                         break;
                     case HttpParameterIn.Query:
-                        queryParameters.Add(new QueryParameter(parameterName, reference, GetArraySerializationDelimiter(requestParameter), escape, serializationFormat, GetExplode(requestParameter)));
+                        queryParameters.Add(new QueryParameter(parameterName, reference, GetArraySerializationDelimiter(requestParameter), escape, serializationFormat, GetExplode(requestParameter), requestParameter.IsApiVersion));
                         break;
                     case HttpParameterIn.Header:
                         var headerName = requestParameter.Extensions?.HeaderCollectionPrefix ?? parameterName;

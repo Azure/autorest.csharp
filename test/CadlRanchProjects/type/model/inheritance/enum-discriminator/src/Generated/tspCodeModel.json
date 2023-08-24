@@ -79,20 +79,25 @@
      "IsRequired": true,
      "IsReadOnly": false
     }
+   ],
+   "DerivedModels": [
+    {
+     "$id": "10",
+     "Name": "Golden",
+     "Namespace": "Type.Model.Inheritance.EnumDiscriminator",
+     "Description": "Golden dog model",
+     "IsNullable": false,
+     "DiscriminatorValue": "golden",
+     "BaseModel": {
+      "$ref": "6"
+     },
+     "Usage": "RoundTrip",
+     "Properties": []
+    }
    ]
   },
   {
-   "$id": "10",
-   "Name": "Golden",
-   "Namespace": "Type.Model.Inheritance.EnumDiscriminator",
-   "Description": "Golden dog model",
-   "IsNullable": false,
-   "DiscriminatorValue": "golden",
-   "BaseModel": {
-    "$ref": "6"
-   },
-   "Usage": "RoundTrip",
-   "Properties": []
+   "$ref": "10"
   },
   {
    "$id": "11",
@@ -129,20 +134,25 @@
      "IsRequired": true,
      "IsReadOnly": false
     }
+   ],
+   "DerivedModels": [
+    {
+     "$id": "15",
+     "Name": "Cobra",
+     "Namespace": "Type.Model.Inheritance.EnumDiscriminator",
+     "Description": "Cobra model",
+     "IsNullable": false,
+     "DiscriminatorValue": "cobra",
+     "BaseModel": {
+      "$ref": "11"
+     },
+     "Usage": "RoundTrip",
+     "Properties": []
+    }
    ]
   },
   {
-   "$id": "15",
-   "Name": "Cobra",
-   "Namespace": "Type.Model.Inheritance.EnumDiscriminator",
-   "Description": "Cobra model",
-   "IsNullable": false,
-   "DiscriminatorValue": "cobra",
-   "BaseModel": {
-    "$ref": "11"
-   },
-   "Usage": "RoundTrip",
-   "Properties": []
+   "$ref": "15"
   }
  ],
  "Clients": [

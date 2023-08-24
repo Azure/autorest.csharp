@@ -11,7 +11,6 @@ import {
     getEffectiveModelType,
     getEncode,
     getFormat,
-    getFriendlyName,
     getKnownValues,
     getVisibility,
     Model,
@@ -58,7 +57,9 @@ import {
     InputUnionType,
     InputNullType,
     InputIntrinsicType,
-    InputUnknownType
+    InputUnknownType,
+    isInputEnumType,
+    isInputLiteralType
 } from "../type/inputType.js";
 import { InputTypeKind } from "../type/inputTypeKind.js";
 import { Usage } from "../type/usage.js";
@@ -70,7 +71,7 @@ import {
     getUsageOverride,
     isInternal
 } from "@azure-tools/typespec-client-generator-core";
-import { capitalize, getNameForTemplate } from "./utils.js";
+import { capitalize, getModelName } from "./utils.js";
 import { FormattedType } from "../type/formattedType.js";
 import { LiteralTypeContext } from "../type/literalTypeContext.js";
 /**
@@ -246,8 +247,8 @@ function isSchemaProperty(context: SdkContext, property: ModelProperty) {
     const headerInfo = getHeaderFieldName(program, property);
     const queryInfo = getQueryParamName(program, property);
     const pathInfo = getPathParamName(program, property);
-    const statusCodeinfo = isStatusCode(program, property);
-    return !(headerInfo || queryInfo || pathInfo || statusCodeinfo);
+    const statusCodeInfo = isStatusCode(program, property);
+    return !(headerInfo || queryInfo || pathInfo || statusCodeInfo);
 }
 
 export function getDefaultValue(type: Type): any {
@@ -267,14 +268,6 @@ export function getDefaultValue(type: Type): any {
 
 export function isNeverType(type: Type): type is NeverType {
     return type.kind === "Intrinsic" && type.name === "never";
-}
-
-function isInputEnumType(x: any): x is InputEnumType {
-    return x.AllowedValues !== undefined;
-}
-
-function isInputLiteralType(x: any): x is InputLiteralType {
-    return x.Name === "Literal";
 }
 
 export function getInputType(
@@ -414,7 +407,6 @@ export function getInputType(
 
         function getLiteralValueType(parentType?: Type): InputPrimitiveType | InputEnumType {
             // we will not wrap it if it comes from outside a model or it is a boolean
-            // TODO -- we need to wrap it into extensible enum when it comes from an operation
             if (literalContext === undefined || rawValueType.Kind === "Boolean")
                 return rawValueType;
 
@@ -430,7 +422,6 @@ export function getInputType(
                     Description: literalValue.toString()
                 } as InputEnumTypeValue
             ];
-            // TODO -- we need to make it low confident if the enum is not string
             const enumType = {
                 Name: enumName,
                 Namespace: literalContext.Namespace,
@@ -538,7 +529,7 @@ export function getInputType(
 
     function getInputModelForModel(m: Model): InputModelType {
         m = getEffectiveSchemaType(context, m) as Model;
-        const name = getFriendlyName(program, m) ?? getNameForTemplate(m);
+        const name = getModelName(context, m);
         let model = models.get(name);
         if (!model) {
             const baseModel = getInputModelBaseType(m.baseModel);
@@ -556,7 +547,7 @@ export function getInputType(
                 DiscriminatorValue: getDiscriminatorValue(m, baseModel),
                 BaseModel: baseModel,
                 Usage: Usage.None,
-                Properties: properties // Properties should be the last assigned to model
+                Properties: properties // DerivedModels should be the last assigned to model, if no derived models, properties should be the last
             } as InputModelType;
             setUsage(context, m, model);
             models.set(name, model);
@@ -564,16 +555,17 @@ export function getInputType(
             // Resolve properties after model is added to the map to resolve possible circular dependencies
             addModelProperties(m, model, m.properties, properties);
 
-            // Temporary part. Derived types may not be referenced directly by any operation
-            // We should be able to remove it when https://github.com/Azure/typespec-azure/issues/1733 is closed
-            if (model.DiscriminatorPropertyName && m.derivedModels) {
+            // add the derived models into the list
+            if (m.derivedModels !== undefined && m.derivedModels.length > 0) {
+                model.DerivedModels = [];
                 for (const dm of m.derivedModels) {
-                    getInputType(
+                    const derivedModel = getInputType(
                         context,
                         getFormattedType(program, dm),
                         models,
                         enums
                     );
+                    model.DerivedModels.push(derivedModel as InputModelType);
                 }
             }
         }
@@ -819,8 +811,7 @@ export function getUsages(
         let effectiveType = type;
         if (type.kind === "Model") {
             effectiveType = getEffectiveSchemaType(context, type) as Model;
-            typeName =
-                getFriendlyName(program, effectiveType) ?? effectiveType.name;
+            typeName = getModelName(context, effectiveType);
         }
         const affectTypes: string[] = [];
         if (typeName !== "") {
@@ -833,9 +824,7 @@ export function getUsages(
                             "name" in arg &&
                             arg.name !== ""
                         ) {
-                            affectTypes.push(
-                                getFriendlyName(program, arg) ?? arg.name
-                            );
+                            affectTypes.push(getModelName(context, arg));
                         }
                     }
                 }
@@ -878,8 +867,7 @@ export function getUsages(
                         )}Request`;
                     }
                     affectedTypes.push(
-                        getFriendlyName(program, effectiveBodyType) ??
-                            effectiveBodyType.name
+                        getModelName(context, effectiveBodyType)
                     );
                 }
             }
@@ -916,9 +904,7 @@ export function getUsages(
                         effectiveReturnType.kind === "Model" &&
                         effectiveReturnType.name !== ""
                     ) {
-                        returnType =
-                            getFriendlyName(program, effectiveReturnType) ??
-                            effectiveReturnType.name;
+                        returnType = getModelName(context, effectiveReturnType);
                     }
                     /*propagate to sub models and composite models*/
                     if (effectiveReturnType.kind === "Model") {
@@ -988,15 +974,13 @@ export function getUsages(
         ) {
             result.push(...getAllEffectedModels(model.indexer.value, visited));
         } else {
-            const name = getFriendlyName(program, model) ?? model.name;
+            const name = getModelName(context, model);
             if (model.kind !== "Model" || visited.has(name)) return result;
             result.push(name);
             visited.add(name);
             const derivedModels = model.derivedModels;
             for (const derivedModel of derivedModels) {
-                result.push(
-                    getFriendlyName(program, derivedModel) ?? derivedModel.name
-                );
+                result.push(getModelName(context, derivedModel));
                 result.push(...getAllEffectedModels(derivedModel, visited));
             }
             for (const [_, prop] of model.properties) {
