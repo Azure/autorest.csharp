@@ -12,7 +12,7 @@ using System.Globalization;
 namespace FirstTestTypeSpec.Models
 {
     /// <summary> The Thing_optionalLiteralFloat. </summary>
-    public readonly partial struct ThingOptionalLiteralFloat : IEquatable<ThingOptionalLiteralFloat>
+    internal readonly partial struct ThingOptionalLiteralFloat : IEquatable<ThingOptionalLiteralFloat>
     {
         private readonly float _value;
 

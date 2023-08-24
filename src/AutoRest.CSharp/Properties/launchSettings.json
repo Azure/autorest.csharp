@@ -184,6 +184,10 @@
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\CollapseRequestCondition-LowLevel\\src\\Generated"
     },
+    "ConfidentLevels-TypeSpec": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestProjects\\ConfidentLevels-TypeSpec\\src\\Generated -n"
+    },
     "constants": {
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestServerProjects\\constants\\Generated"
@@ -255,6 +259,10 @@
     "head-LowLevel": {
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\TestServerProjectsLowLevel\\head\\src\\Generated"
+    },
+    "headAsBoolean-typespec-server/path/single": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\CadlRanchProjects\\server\\path\\single-headAsBoolean\\src\\Generated -n"
     },
     "HeadAsBooleanTrue": {
       "commandName": "Project",
@@ -708,13 +716,17 @@
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\CadlRanchProjects\\type\\property\\nullable\\src\\Generated -n"
     },
-    "typespec-type/property/optional": {
+    "typespec-type/property/optionality": {
       "commandName": "Project",
-      "commandLineArgs": "--standalone $(SolutionDir)\\test\\CadlRanchProjects\\type\\property\\optional\\src\\Generated -n"
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\CadlRanchProjects\\type\\property\\optionality\\src\\Generated -n"
     },
     "typespec-type/property/value-types": {
       "commandName": "Project",
       "commandLineArgs": "--standalone $(SolutionDir)\\test\\CadlRanchProjects\\type\\property\\value-types\\src\\Generated -n"
+    },
+    "typespec-type/union": {
+      "commandName": "Project",
+      "commandLineArgs": "--standalone $(SolutionDir)\\test\\CadlRanchProjects\\type\\union\\src\\Generated -n"
     },
     "url": {
       "commandName": "Project",
