@@ -2079,5 +2079,57 @@ Console.WriteLine(result.GetProperty("requiredPropertyOnBase").ToString());
 ]]></code>
 </example>
     </member>
+    <member name="GetSingleBaseAsync(CancellationToken)">
+<example>
+This sample shows how to call GetSingleBaseAsync.
+<code><![CDATA[
+var endpoint = new Uri("<https://my-service.azure.com>");
+var client = new ModelsTypeSpecClient(endpoint);
+
+var result = await client.GetSingleBaseAsync();
+]]></code>
+</example>
+    </member>
+    <member name="GetSingleBase(CancellationToken)">
+<example>
+This sample shows how to call GetSingleBase.
+<code><![CDATA[
+var endpoint = new Uri("<https://my-service.azure.com>");
+var client = new ModelsTypeSpecClient(endpoint);
+
+var result = client.GetSingleBase();
+]]></code>
+</example>
+    </member>
+    <member name="GetSingleBaseAsync(RequestContext)">
+<example>
+This sample shows how to call GetSingleBaseAsync with required parameters and parse the result.
+<code><![CDATA[
+var endpoint = new Uri("<https://my-service.azure.com>");
+var client = new ModelsTypeSpecClient(endpoint);
+
+Response response = await client.GetSingleBaseAsync(new RequestContext());
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("kind").ToString());
+Console.WriteLine(result.GetProperty("size").ToString());
+]]></code>
+</example>
+    </member>
+    <member name="GetSingleBase(RequestContext)">
+<example>
+This sample shows how to call GetSingleBase with required parameters and parse the result.
+<code><![CDATA[
+var endpoint = new Uri("<https://my-service.azure.com>");
+var client = new ModelsTypeSpecClient(endpoint);
+
+Response response = client.GetSingleBase(new RequestContext());
+
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.GetProperty("kind").ToString());
+Console.WriteLine(result.GetProperty("size").ToString());
+]]></code>
+</example>
+    </member>
   </members>
 </doc>
