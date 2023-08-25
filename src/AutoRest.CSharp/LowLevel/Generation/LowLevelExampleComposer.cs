@@ -984,7 +984,7 @@ namespace AutoRest.CSharp.Generation.Writers
 
         private ValueExpression ComposeProtocolPropertyValue(JsonPropertySerialization propertySerialization, HashSet<ObjectType> visitedModels, ObjectTypeDiscriminator? discriminator, bool allProperties)
             => discriminator is not null && discriminator.SerializedName == propertySerialization.SerializedName && discriminator.Value is {} discriminatorValue
-                ? new ConstantExpression(discriminatorValue is {Value: EnumTypeValue enumValue} ? enumValue.Value : discriminatorValue) 
+                ? new ConstantExpression(discriminatorValue is {Value: EnumTypeValue enumValue} ? enumValue.Value : discriminatorValue)
                 : ComposeProtocolCSharpTypeInstance(allProperties, propertySerialization.ValueSerialization, propertySerialization.SerializedName, visitedModels);
 
         private static SerializableObjectType GetMostConcreteModel(SerializableObjectType model)
