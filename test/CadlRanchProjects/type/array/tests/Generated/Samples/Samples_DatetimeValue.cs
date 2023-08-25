@@ -80,7 +80,7 @@ namespace _Type._Array.Samples
             var client = new ArrayClient().GetDatetimeValueClient("1.0.0");
 
             var data = new[] {
-    "2022-05-10T14:57:31.2311892-04:00"
+    "2022-05-10T14:14:57.0310000Z"
 };
 
             Response response = client.Put(RequestContent.Create(data));
@@ -94,7 +94,7 @@ namespace _Type._Array.Samples
             var client = new ArrayClient().GetDatetimeValueClient("1.0.0");
 
             var data = new[] {
-    "2022-05-10T14:57:31.2311892-04:00"
+    "2022-05-10T14:14:57.0310000Z"
 };
 
             Response response = client.Put(RequestContent.Create(data));
@@ -108,10 +108,10 @@ namespace _Type._Array.Samples
             var client = new ArrayClient().GetDatetimeValueClient("1.0.0");
 
             var data = new[] {
-    "2022-05-10T14:57:31.2311892-04:00"
+    "2022-05-10T14:14:57.0310000Z"
 };
 
-            Response response = await client.PutAsync(RequestContent.Create(data));
+            Response response = await client.PutAsync(RequestContent.Create(data)).ConfigureAwait(false);
             Console.WriteLine(response.Status);
         }
 
@@ -122,10 +122,10 @@ namespace _Type._Array.Samples
             var client = new ArrayClient().GetDatetimeValueClient("1.0.0");
 
             var data = new[] {
-    "2022-05-10T14:57:31.2311892-04:00"
+    "2022-05-10T14:14:57.0310000Z"
 };
 
-            Response response = await client.PutAsync(RequestContent.Create(data));
+            Response response = await client.PutAsync(RequestContent.Create(data)).ConfigureAwait(false);
             Console.WriteLine(response.Status);
         }
 
@@ -139,7 +139,7 @@ namespace _Type._Array.Samples
             {
     DateTimeOffset.UtcNow
             };
-            var result = await client.PutAsync(body);
+            var result = await client.PutAsync(body).ConfigureAwait(false);
         }
     }
 }

@@ -7,7 +7,7 @@ This sample shows how to call GetDurationValueAsync.
 <code><![CDATA[
 var client = new ArrayClient().GetDurationValueClient("1.0.0");
 
-var result = await client.GetDurationValueAsync();
+var result = await client.GetDurationValueAsync().ConfigureAwait(false);
 ]]></code>
 </example>
     </member>
@@ -27,7 +27,7 @@ This sample shows how to call GetDurationValueAsync with required parameters and
 <code><![CDATA[
 var client = new ArrayClient().GetDurationValueClient("1.0.0");
 
-Response response = await client.GetDurationValueAsync(new RequestContext());
+Response response = await client.GetDurationValueAsync(new RequestContext()).ConfigureAwait(false);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result[0].ToString());
@@ -53,11 +53,11 @@ This sample shows how to call PutAsync with required parameters.
 <code><![CDATA[
 var client = new ArrayClient().GetDurationValueClient("1.0.0");
 
-var body = new TimeSpan[] 
+var body = new TimeSpan[]
 {
-    new TimeSpan(1, 2, 3)
+    new TimeSpan(1, 23, 45)
 };
-var result = await client.PutAsync(body);
+var result = await client.PutAsync(body).ConfigureAwait(false);
 ]]></code>
 </example>
     </member>
@@ -67,9 +67,9 @@ This sample shows how to call Put with required parameters.
 <code><![CDATA[
 var client = new ArrayClient().GetDurationValueClient("1.0.0");
 
-var body = new TimeSpan[] 
+var body = new TimeSpan[]
 {
-    new TimeSpan(1, 2, 3)
+    new TimeSpan(1, 23, 45)
 };
 var result = client.Put(body);
 ]]></code>
@@ -85,7 +85,7 @@ var data = new[] {
     "PT1H23M45S"
 };
 
-Response response = await client.PutAsync(RequestContent.Create(data));
+Response response = await client.PutAsync(RequestContent.Create(data)).ConfigureAwait(false);
 Console.WriteLine(response.Status);
 ]]></code>
 </example>

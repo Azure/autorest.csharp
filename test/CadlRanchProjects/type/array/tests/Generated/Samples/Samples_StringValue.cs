@@ -6,15 +6,11 @@
 #nullable disable
 
 using System;
-using System.Collections.Generic;
-using System.IO;
 using System.Text.Json;
 using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
-using Azure.Identity;
 using NUnit.Framework;
-using _Type._Array.Models;
 
 namespace _Type._Array.Samples
 {
@@ -50,7 +46,7 @@ namespace _Type._Array.Samples
         {
             var client = new ArrayClient().GetStringValueClient("1.0.0");
 
-            Response response = await client.GetStringValueAsync(new RequestContext());
+            Response response = await client.GetStringValueAsync(new RequestContext()).ConfigureAwait(false);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result[0].ToString());
@@ -62,7 +58,7 @@ namespace _Type._Array.Samples
         {
             var client = new ArrayClient().GetStringValueClient("1.0.0");
 
-            Response response = await client.GetStringValueAsync(new RequestContext());
+            Response response = await client.GetStringValueAsync(new RequestContext()).ConfigureAwait(false);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result[0].ToString());
@@ -74,7 +70,7 @@ namespace _Type._Array.Samples
         {
             var client = new ArrayClient().GetStringValueClient("1.0.0");
 
-            var result = await client.GetStringValueAsync();
+            var result = await client.GetStringValueAsync().ConfigureAwait(false);
         }
 
         [Test]
@@ -115,7 +111,7 @@ namespace _Type._Array.Samples
     "<String>"
 };
 
-            Response response = await client.PutAsync(RequestContent.Create(data));
+            Response response = await client.PutAsync(RequestContent.Create(data)).ConfigureAwait(false);
             Console.WriteLine(response.Status);
         }
 
@@ -129,7 +125,7 @@ namespace _Type._Array.Samples
     "<String>"
 };
 
-            Response response = await client.PutAsync(RequestContent.Create(data));
+            Response response = await client.PutAsync(RequestContent.Create(data)).ConfigureAwait(false);
             Console.WriteLine(response.Status);
         }
 
@@ -141,9 +137,9 @@ namespace _Type._Array.Samples
 
             var body = new string[]
             {
-    "<null>"
+    "<String>"
             };
-            var result = await client.PutAsync(body);
+            var result = await client.PutAsync(body).ConfigureAwait(false);
         }
     }
 }

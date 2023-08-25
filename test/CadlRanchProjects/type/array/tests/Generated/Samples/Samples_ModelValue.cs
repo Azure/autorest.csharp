@@ -6,13 +6,10 @@
 #nullable disable
 
 using System;
-using System.Collections.Generic;
-using System.IO;
 using System.Text.Json;
 using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
-using Azure.Identity;
 using NUnit.Framework;
 using _Type._Array.Models;
 
@@ -51,7 +48,7 @@ namespace _Type._Array.Samples
         {
             var client = new ArrayClient().GetModelValueClient("1.0.0");
 
-            Response response = await client.GetModelValueAsync(new RequestContext());
+            Response response = await client.GetModelValueAsync(new RequestContext()).ConfigureAwait(false);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result[0].GetProperty("property").ToString());
@@ -63,7 +60,7 @@ namespace _Type._Array.Samples
         {
             var client = new ArrayClient().GetModelValueClient("1.0.0");
 
-            Response response = await client.GetModelValueAsync(new RequestContext());
+            Response response = await client.GetModelValueAsync(new RequestContext()).ConfigureAwait(false);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result[0].GetProperty("property").ToString());
@@ -76,7 +73,7 @@ namespace _Type._Array.Samples
         {
             var client = new ArrayClient().GetModelValueClient("1.0.0");
 
-            var result = await client.GetModelValueAsync();
+            var result = await client.GetModelValueAsync().ConfigureAwait(false);
         }
 
         [Test]
@@ -123,7 +120,7 @@ namespace _Type._Array.Samples
     }
 };
 
-            Response response = await client.PutAsync(RequestContent.Create(data));
+            Response response = await client.PutAsync(RequestContent.Create(data)).ConfigureAwait(false);
             Console.WriteLine(response.Status);
         }
 
@@ -139,7 +136,7 @@ namespace _Type._Array.Samples
     }
 };
 
-            Response response = await client.PutAsync(RequestContent.Create(data));
+            Response response = await client.PutAsync(RequestContent.Create(data)).ConfigureAwait(false);
             Console.WriteLine(response.Status);
         }
 
@@ -152,11 +149,11 @@ namespace _Type._Array.Samples
             var body = new InnerModel[]
             {
     new InnerModel("<property>")
-{
+    {
         Children = {},
     }
             };
-            var result = await client.PutAsync(body);
+            var result = await client.PutAsync(body).ConfigureAwait(false);
         }
     }
 }

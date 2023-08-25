@@ -853,7 +853,7 @@ namespace AutoRest.CSharp.Generation.Writers
              *     {element_expression}
              * }
              */
-            return New.Array(null, ComposeProtocolCSharpTypeInstance(allProperties, serialization.ValueSerialization, null, visitedModels));
+            return New.Array(null, false, ComposeProtocolCSharpTypeInstance(allProperties, serialization.ValueSerialization, null, visitedModels));
         }
 
         private ValueExpression ComposeConvenienceDictionaryInstance(bool allProperties, CSharpType keyType, CSharpType valueType, bool includeCollectionInitialization, HashSet<ObjectType> visitedModels)

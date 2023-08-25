@@ -7,7 +7,7 @@ This sample shows how to call GetDatetimeValueAsync.
 <code><![CDATA[
 var client = new ArrayClient().GetDatetimeValueClient("1.0.0");
 
-var result = await client.GetDatetimeValueAsync();
+var result = await client.GetDatetimeValueAsync().ConfigureAwait(false);
 ]]></code>
 </example>
     </member>
@@ -27,7 +27,7 @@ This sample shows how to call GetDatetimeValueAsync with required parameters and
 <code><![CDATA[
 var client = new ArrayClient().GetDatetimeValueClient("1.0.0");
 
-Response response = await client.GetDatetimeValueAsync(new RequestContext());
+Response response = await client.GetDatetimeValueAsync(new RequestContext()).ConfigureAwait(false);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result[0].ToString());
@@ -53,11 +53,11 @@ This sample shows how to call PutAsync with required parameters.
 <code><![CDATA[
 var client = new ArrayClient().GetDatetimeValueClient("1.0.0");
 
-var body = new DateTimeOffset[] 
+var body = new DateTimeOffset[]
 {
     DateTimeOffset.UtcNow
 };
-var result = await client.PutAsync(body);
+var result = await client.PutAsync(body).ConfigureAwait(false);
 ]]></code>
 </example>
     </member>
@@ -67,7 +67,7 @@ This sample shows how to call Put with required parameters.
 <code><![CDATA[
 var client = new ArrayClient().GetDatetimeValueClient("1.0.0");
 
-var body = new DateTimeOffset[] 
+var body = new DateTimeOffset[]
 {
     DateTimeOffset.UtcNow
 };
@@ -82,10 +82,10 @@ This sample shows how to call PutAsync with required request content.
 var client = new ArrayClient().GetDatetimeValueClient("1.0.0");
 
 var data = new[] {
-    "2022-05-10T14:57:31.2311892-04:00"
+    "2022-05-10T14:14:57.0310000Z"
 };
 
-Response response = await client.PutAsync(RequestContent.Create(data));
+Response response = await client.PutAsync(RequestContent.Create(data)).ConfigureAwait(false);
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
@@ -97,7 +97,7 @@ This sample shows how to call Put with required request content.
 var client = new ArrayClient().GetDatetimeValueClient("1.0.0");
 
 var data = new[] {
-    "2022-05-10T14:57:31.2311892-04:00"
+    "2022-05-10T14:14:57.0310000Z"
 };
 
 Response response = client.Put(RequestContent.Create(data));

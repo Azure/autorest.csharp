@@ -6,15 +6,11 @@
 #nullable disable
 
 using System;
-using System.Collections.Generic;
-using System.IO;
 using System.Text.Json;
 using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
-using Azure.Identity;
 using NUnit.Framework;
-using _Type._Array.Models;
 
 namespace _Type._Array.Samples
 {
@@ -50,7 +46,7 @@ namespace _Type._Array.Samples
         {
             var client = new ArrayClient().GetDurationValueClient("1.0.0");
 
-            Response response = await client.GetDurationValueAsync(new RequestContext());
+            Response response = await client.GetDurationValueAsync(new RequestContext()).ConfigureAwait(false);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result[0].ToString());
@@ -62,7 +58,7 @@ namespace _Type._Array.Samples
         {
             var client = new ArrayClient().GetDurationValueClient("1.0.0");
 
-            Response response = await client.GetDurationValueAsync(new RequestContext());
+            Response response = await client.GetDurationValueAsync(new RequestContext()).ConfigureAwait(false);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result[0].ToString());
@@ -74,7 +70,7 @@ namespace _Type._Array.Samples
         {
             var client = new ArrayClient().GetDurationValueClient("1.0.0");
 
-            var result = await client.GetDurationValueAsync();
+            var result = await client.GetDurationValueAsync().ConfigureAwait(false);
         }
 
         [Test]
@@ -115,7 +111,7 @@ namespace _Type._Array.Samples
     "PT1H23M45S"
 };
 
-            Response response = await client.PutAsync(RequestContent.Create(data));
+            Response response = await client.PutAsync(RequestContent.Create(data)).ConfigureAwait(false);
             Console.WriteLine(response.Status);
         }
 
@@ -129,7 +125,7 @@ namespace _Type._Array.Samples
     "PT1H23M45S"
 };
 
-            Response response = await client.PutAsync(RequestContent.Create(data));
+            Response response = await client.PutAsync(RequestContent.Create(data)).ConfigureAwait(false);
             Console.WriteLine(response.Status);
         }
 
@@ -141,9 +137,9 @@ namespace _Type._Array.Samples
 
             var body = new TimeSpan[]
             {
-    new TimeSpan(1, 2, 3)
+    new TimeSpan(1, 23, 45)
             };
-            var result = await client.PutAsync(body);
+            var result = await client.PutAsync(body).ConfigureAwait(false);
         }
     }
 }

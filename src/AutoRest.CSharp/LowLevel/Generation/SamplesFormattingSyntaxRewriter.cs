@@ -13,7 +13,6 @@ namespace AutoRest.CSharp.Generation.Writers
     {
         private static readonly CSharpSyntaxRewriter Instance = new SamplesFormattingSyntaxRewriter();
         private static readonly SyntaxTrivia Indentation = SyntaxFactory.Whitespace("    ");
-        private const string ParentLeadingTriviaKind = nameof(ParentLeadingTriviaKind);
 
         public static string FormatFile(string code)
         {
@@ -40,6 +39,28 @@ namespace AutoRest.CSharp.Generation.Writers
             return base.VisitForEachStatement(node);
         }
 
+        public override SyntaxNode? VisitObjectCreationExpression(ObjectCreationExpressionSyntax node)
+        {
+            if (IsSingleLine(node))
+            {
+                return node;
+            }
+
+            if (base.VisitObjectCreationExpression(node) is not ObjectCreationExpressionSyntax newNode)
+            {
+                return null;
+            }
+
+            if (newNode.Initializer is {Expressions.Count: > 0})
+            {
+                return newNode.ArgumentList is {} argumentList
+                    ? newNode.WithArgumentList(argumentList.WithTrailingTrivia(SyntaxFactory.CarriageReturnLineFeed))
+                    : newNode.WithType(newNode.Type.WithTrailingTrivia(SyntaxFactory.CarriageReturnLineFeed));
+            }
+
+            return newNode;
+        }
+
         public override SyntaxNode? VisitAnonymousObjectCreationExpression(AnonymousObjectCreationExpressionSyntax node)
         {
             var parentLeadingTrivia = GetPreviousLevelTrivia(node);
@@ -57,23 +78,6 @@ namespace AutoRest.CSharp.Generation.Writers
             return newNode
                 .WithInitializers(SyntaxFactory.SeparatedList<AnonymousObjectMemberDeclaratorSyntax>(FixInitializerTrailingTrivia(newNode.Initializers.GetWithSeparators())))
                 .WithCloseBraceToken(FixCloseBraceTrivia(newNode.CloseBraceToken, newNode.Initializers.Any() ? parentLeadingTrivia : SyntaxTriviaList.Empty));
-        }
-
-        public override SyntaxNode? VisitObjectCreationExpression(ObjectCreationExpressionSyntax node)
-        {
-            if (IsSingleLine(node))
-            {
-                return node;
-            }
-
-            if (node.Initializer is {Expressions.Count: > 0})
-            {
-                node = node.ArgumentList is {} argumentList
-                    ? node.WithArgumentList(argumentList.WithTrailingTrivia(SyntaxFactory.CarriageReturnLineFeed))
-                    : node.WithType(node.Type.WithTrailingTrivia(SyntaxFactory.CarriageReturnLineFeed));
-            }
-
-            return base.VisitObjectCreationExpression(node);
         }
 
         public override SyntaxNode? VisitInitializerExpression(InitializerExpressionSyntax node)
@@ -94,7 +98,9 @@ namespace AutoRest.CSharp.Generation.Writers
         public override SyntaxNode? VisitImplicitArrayCreationExpression(ImplicitArrayCreationExpressionSyntax node)
         {
             return base.VisitImplicitArrayCreationExpression(node) is ImplicitArrayCreationExpressionSyntax newNode
-                ? newNode.WithNewKeyword(node.NewKeyword.WithTrailingTrivia(SyntaxTriviaList.Empty))
+                ? newNode
+                    .WithNewKeyword(newNode.NewKeyword.WithTrailingTrivia(SyntaxTriviaList.Empty))
+                    .WithCloseBracketToken(newNode.CloseBracketToken.WithTrailingTrivia(SyntaxTriviaList.Empty))
                 : null;
         }
 

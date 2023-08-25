@@ -7,7 +7,7 @@ This sample shows how to call GetNonNullAsync.
 <code><![CDATA[
 var client = new NullableClient().GetCollectionsByteClient("1.0.0");
 
-var result = await client.GetNonNullAsync();
+var result = await client.GetNonNullAsync().ConfigureAwait(false);
 ]]></code>
 </example>
     </member>

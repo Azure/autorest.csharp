@@ -6,15 +6,11 @@
 #nullable disable
 
 using System;
-using System.Collections.Generic;
-using System.IO;
 using System.Text.Json;
 using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
-using Azure.Identity;
 using NUnit.Framework;
-using _Type._Array.Models;
 
 namespace _Type._Array.Samples
 {
@@ -50,7 +46,7 @@ namespace _Type._Array.Samples
         {
             var client = new ArrayClient().GetUnknownValueClient("1.0.0");
 
-            Response response = await client.GetUnknownValueAsync(new RequestContext());
+            Response response = await client.GetUnknownValueAsync(new RequestContext()).ConfigureAwait(false);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result[0].ToString());
@@ -62,7 +58,7 @@ namespace _Type._Array.Samples
         {
             var client = new ArrayClient().GetUnknownValueClient("1.0.0");
 
-            Response response = await client.GetUnknownValueAsync(new RequestContext());
+            Response response = await client.GetUnknownValueAsync(new RequestContext()).ConfigureAwait(false);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result[0].ToString());
@@ -74,7 +70,7 @@ namespace _Type._Array.Samples
         {
             var client = new ArrayClient().GetUnknownValueClient("1.0.0");
 
-            var result = await client.GetUnknownValueAsync();
+            var result = await client.GetUnknownValueAsync().ConfigureAwait(false);
         }
 
         [Test]
@@ -84,7 +80,7 @@ namespace _Type._Array.Samples
             var client = new ArrayClient().GetUnknownValueClient("1.0.0");
 
             var data = new[] {
-    new {}
+    BinaryData.FromString("<your binary data content>")
 };
 
             Response response = client.Put(RequestContent.Create(data));
@@ -98,7 +94,7 @@ namespace _Type._Array.Samples
             var client = new ArrayClient().GetUnknownValueClient("1.0.0");
 
             var data = new[] {
-    new {}
+    BinaryData.FromString("<your binary data content>")
 };
 
             Response response = client.Put(RequestContent.Create(data));
@@ -112,10 +108,10 @@ namespace _Type._Array.Samples
             var client = new ArrayClient().GetUnknownValueClient("1.0.0");
 
             var data = new[] {
-    new {}
+    BinaryData.FromString("<your binary data content>")
 };
 
-            Response response = await client.PutAsync(RequestContent.Create(data));
+            Response response = await client.PutAsync(RequestContent.Create(data)).ConfigureAwait(false);
             Console.WriteLine(response.Status);
         }
 
@@ -126,10 +122,10 @@ namespace _Type._Array.Samples
             var client = new ArrayClient().GetUnknownValueClient("1.0.0");
 
             var data = new[] {
-    new {}
+    BinaryData.FromString("<your binary data content>")
 };
 
-            Response response = await client.PutAsync(RequestContent.Create(data));
+            Response response = await client.PutAsync(RequestContent.Create(data)).ConfigureAwait(false);
             Console.WriteLine(response.Status);
         }
 
@@ -143,7 +139,7 @@ namespace _Type._Array.Samples
             {
     BinaryData.FromString("<your binary data content>")
             };
-            var result = await client.PutAsync(body);
+            var result = await client.PutAsync(body).ConfigureAwait(false);
         }
     }
 }
