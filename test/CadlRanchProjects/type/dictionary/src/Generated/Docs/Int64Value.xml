@@ -7,7 +7,7 @@ This sample shows how to call GetInt64ValueAsync.
 <code><![CDATA[
 var client = new DictionaryClient().GetInt64ValueClient("1.0.0");
 
-var result = await client.GetInt64ValueAsync();
+var result = await client.GetInt64ValueAsync().ConfigureAwait(false);
 ]]></code>
 </example>
     </member>
@@ -27,7 +27,7 @@ This sample shows how to call GetInt64ValueAsync with required parameters and pa
 <code><![CDATA[
 var client = new DictionaryClient().GetInt64ValueClient("1.0.0");
 
-Response response = await client.GetInt64ValueAsync(new RequestContext());
+Response response = await client.GetInt64ValueAsync(new RequestContext()).ConfigureAwait(false);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("<test>").ToString());
@@ -55,9 +55,9 @@ var client = new DictionaryClient().GetInt64ValueClient("1.0.0");
 
 var body = new Dictionary<string, long>
 {
-    ["key"] = 1234,
+    ["key"] = 1234L
 };
-var result = await client.PutAsync(body);
+var result = await client.PutAsync(body).ConfigureAwait(false);
 ]]></code>
 </example>
     </member>
@@ -69,7 +69,7 @@ var client = new DictionaryClient().GetInt64ValueClient("1.0.0");
 
 var body = new Dictionary<string, long>
 {
-    ["key"] = 1234,
+    ["key"] = 1234L
 };
 var result = client.Put(body);
 ]]></code>
@@ -85,7 +85,7 @@ var data = new {
     key = 1234L,
 };
 
-Response response = await client.PutAsync(RequestContent.Create(data));
+Response response = await client.PutAsync(RequestContent.Create(data)).ConfigureAwait(false);
 Console.WriteLine(response.Status);
 ]]></code>
 </example>

@@ -7,7 +7,7 @@ This sample shows how to call GetRecursiveModelValueAsync.
 <code><![CDATA[
 var client = new DictionaryClient().GetRecursiveModelValueClient("1.0.0");
 
-var result = await client.GetRecursiveModelValueAsync();
+var result = await client.GetRecursiveModelValueAsync().ConfigureAwait(false);
 ]]></code>
 </example>
     </member>
@@ -27,7 +27,7 @@ This sample shows how to call GetRecursiveModelValueAsync with required paramete
 <code><![CDATA[
 var client = new DictionaryClient().GetRecursiveModelValueClient("1.0.0");
 
-Response response = await client.GetRecursiveModelValueAsync(new RequestContext());
+Response response = await client.GetRecursiveModelValueAsync(new RequestContext()).ConfigureAwait(false);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("<test>").GetProperty("property").ToString());
@@ -58,11 +58,11 @@ var client = new DictionaryClient().GetRecursiveModelValueClient("1.0.0");
 var body = new Dictionary<string, InnerModel>
 {
     ["key"] = new InnerModel("<property>")
-{
+    {
         Children = {},
-    },
+    }
 };
-var result = await client.PutAsync(body);
+var result = await client.PutAsync(body).ConfigureAwait(false);
 ]]></code>
 </example>
     </member>
@@ -75,9 +75,9 @@ var client = new DictionaryClient().GetRecursiveModelValueClient("1.0.0");
 var body = new Dictionary<string, InnerModel>
 {
     ["key"] = new InnerModel("<property>")
-{
+    {
         Children = {},
-    },
+    }
 };
 var result = client.Put(body);
 ]]></code>
@@ -95,7 +95,7 @@ var data = new {
     },
 };
 
-Response response = await client.PutAsync(RequestContent.Create(data));
+Response response = await client.PutAsync(RequestContent.Create(data)).ConfigureAwait(false);
 Console.WriteLine(response.Status);
 ]]></code>
 </example>

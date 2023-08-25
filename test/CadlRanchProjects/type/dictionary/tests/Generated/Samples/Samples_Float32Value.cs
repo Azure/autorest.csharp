@@ -7,14 +7,11 @@
 
 using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Text.Json;
 using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
-using Azure.Identity;
 using NUnit.Framework;
-using _Type._Dictionary.Models;
 
 namespace _Type._Dictionary.Samples
 {
@@ -50,7 +47,7 @@ namespace _Type._Dictionary.Samples
         {
             var client = new DictionaryClient().GetFloat32ValueClient("1.0.0");
 
-            Response response = await client.GetFloat32ValueAsync(new RequestContext());
+            Response response = await client.GetFloat32ValueAsync(new RequestContext()).ConfigureAwait(false);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("<test>").ToString());
@@ -62,7 +59,7 @@ namespace _Type._Dictionary.Samples
         {
             var client = new DictionaryClient().GetFloat32ValueClient("1.0.0");
 
-            Response response = await client.GetFloat32ValueAsync(new RequestContext());
+            Response response = await client.GetFloat32ValueAsync(new RequestContext()).ConfigureAwait(false);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("<test>").ToString());
@@ -74,7 +71,7 @@ namespace _Type._Dictionary.Samples
         {
             var client = new DictionaryClient().GetFloat32ValueClient("1.0.0");
 
-            var result = await client.GetFloat32ValueAsync();
+            var result = await client.GetFloat32ValueAsync().ConfigureAwait(false);
         }
 
         [Test]
@@ -85,7 +82,7 @@ namespace _Type._Dictionary.Samples
 
             var data = new
             {
-                key = 123.45f,
+                key = 3.14f,
             };
 
             Response response = client.Put(RequestContent.Create(data));
@@ -100,7 +97,7 @@ namespace _Type._Dictionary.Samples
 
             var data = new
             {
-                key = 123.45f,
+                key = 3.14f,
             };
 
             Response response = client.Put(RequestContent.Create(data));
@@ -115,10 +112,10 @@ namespace _Type._Dictionary.Samples
 
             var data = new
             {
-                key = 123.45f,
+                key = 3.14f,
             };
 
-            Response response = await client.PutAsync(RequestContent.Create(data));
+            Response response = await client.PutAsync(RequestContent.Create(data)).ConfigureAwait(false);
             Console.WriteLine(response.Status);
         }
 
@@ -130,10 +127,10 @@ namespace _Type._Dictionary.Samples
 
             var data = new
             {
-                key = 123.45f,
+                key = 3.14f,
             };
 
-            Response response = await client.PutAsync(RequestContent.Create(data));
+            Response response = await client.PutAsync(RequestContent.Create(data)).ConfigureAwait(false);
             Console.WriteLine(response.Status);
         }
 
@@ -145,9 +142,9 @@ namespace _Type._Dictionary.Samples
 
             var body = new Dictionary<string, float>
             {
-                ["key"] = 3.14f,
+                ["key"] = 3.14f
             };
-            var result = await client.PutAsync(body);
+            var result = await client.PutAsync(body).ConfigureAwait(false);
         }
     }
 }

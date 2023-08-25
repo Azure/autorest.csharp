@@ -7,14 +7,11 @@
 
 using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Text.Json;
 using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
-using Azure.Identity;
 using NUnit.Framework;
-using _Type._Dictionary.Models;
 
 namespace _Type._Dictionary.Samples
 {
@@ -50,7 +47,7 @@ namespace _Type._Dictionary.Samples
         {
             var client = new DictionaryClient().GetBooleanValueClient("1.0.0");
 
-            Response response = await client.GetBooleanValueAsync(new RequestContext());
+            Response response = await client.GetBooleanValueAsync(new RequestContext()).ConfigureAwait(false);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("<test>").ToString());
@@ -62,7 +59,7 @@ namespace _Type._Dictionary.Samples
         {
             var client = new DictionaryClient().GetBooleanValueClient("1.0.0");
 
-            Response response = await client.GetBooleanValueAsync(new RequestContext());
+            Response response = await client.GetBooleanValueAsync(new RequestContext()).ConfigureAwait(false);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("<test>").ToString());
@@ -74,7 +71,7 @@ namespace _Type._Dictionary.Samples
         {
             var client = new DictionaryClient().GetBooleanValueClient("1.0.0");
 
-            var result = await client.GetBooleanValueAsync();
+            var result = await client.GetBooleanValueAsync().ConfigureAwait(false);
         }
 
         [Test]
@@ -118,7 +115,7 @@ namespace _Type._Dictionary.Samples
                 key = true,
             };
 
-            Response response = await client.PutAsync(RequestContent.Create(data));
+            Response response = await client.PutAsync(RequestContent.Create(data)).ConfigureAwait(false);
             Console.WriteLine(response.Status);
         }
 
@@ -133,7 +130,7 @@ namespace _Type._Dictionary.Samples
                 key = true,
             };
 
-            Response response = await client.PutAsync(RequestContent.Create(data));
+            Response response = await client.PutAsync(RequestContent.Create(data)).ConfigureAwait(false);
             Console.WriteLine(response.Status);
         }
 
@@ -145,9 +142,9 @@ namespace _Type._Dictionary.Samples
 
             var body = new Dictionary<string, bool>
             {
-                ["key"] = true,
+                ["key"] = true
             };
-            var result = await client.PutAsync(body);
+            var result = await client.PutAsync(body).ConfigureAwait(false);
         }
     }
 }

@@ -7,7 +7,7 @@ This sample shows how to call GetNullableFloatValueAsync.
 <code><![CDATA[
 var client = new DictionaryClient().GetNullableFloatValueClient("1.0.0");
 
-var result = await client.GetNullableFloatValueAsync();
+var result = await client.GetNullableFloatValueAsync().ConfigureAwait(false);
 ]]></code>
 </example>
     </member>
@@ -27,7 +27,7 @@ This sample shows how to call GetNullableFloatValueAsync with required parameter
 <code><![CDATA[
 var client = new DictionaryClient().GetNullableFloatValueClient("1.0.0");
 
-Response response = await client.GetNullableFloatValueAsync(new RequestContext());
+Response response = await client.GetNullableFloatValueAsync(new RequestContext()).ConfigureAwait(false);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("<test>").ToString());
@@ -55,9 +55,9 @@ var client = new DictionaryClient().GetNullableFloatValueClient("1.0.0");
 
 var body = new Dictionary<string, float?>
 {
-    ["key"] = 3.14f,
+    ["key"] = 3.14f
 };
-var result = await client.PutAsync(body);
+var result = await client.PutAsync(body).ConfigureAwait(false);
 ]]></code>
 </example>
     </member>
@@ -69,7 +69,7 @@ var client = new DictionaryClient().GetNullableFloatValueClient("1.0.0");
 
 var body = new Dictionary<string, float?>
 {
-    ["key"] = 3.14f,
+    ["key"] = 3.14f
 };
 var result = client.Put(body);
 ]]></code>
@@ -82,10 +82,10 @@ This sample shows how to call PutAsync with required request content.
 var client = new DictionaryClient().GetNullableFloatValueClient("1.0.0");
 
 var data = new {
-    key = 123.45f,
+    key = 3.14f,
 };
 
-Response response = await client.PutAsync(RequestContent.Create(data));
+Response response = await client.PutAsync(RequestContent.Create(data)).ConfigureAwait(false);
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
@@ -97,7 +97,7 @@ This sample shows how to call Put with required request content.
 var client = new DictionaryClient().GetNullableFloatValueClient("1.0.0");
 
 var data = new {
-    key = 123.45f,
+    key = 3.14f,
 };
 
 Response response = client.Put(RequestContent.Create(data));

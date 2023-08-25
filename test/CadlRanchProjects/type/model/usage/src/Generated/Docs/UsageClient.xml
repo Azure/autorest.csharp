@@ -8,7 +8,7 @@ This sample shows how to call InputAsync with required parameters.
 var client = new UsageClient();
 
 var input = new InputRecord("<requiredProp>");
-var result = await client.InputAsync(input);
+var result = await client.InputAsync(input).ConfigureAwait(false);
 ]]></code>
 </example>
     </member>
@@ -33,7 +33,7 @@ var data = new {
     requiredProp = "<requiredProp>",
 };
 
-Response response = await client.InputAsync(RequestContent.Create(data));
+Response response = await client.InputAsync(RequestContent.Create(data)).ConfigureAwait(false);
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
@@ -59,7 +59,7 @@ This sample shows how to call OutputAsync.
 <code><![CDATA[
 var client = new UsageClient();
 
-var result = await client.OutputAsync();
+var result = await client.OutputAsync().ConfigureAwait(false);
 ]]></code>
 </example>
     </member>
@@ -79,7 +79,7 @@ This sample shows how to call OutputAsync with required parameters and parse the
 <code><![CDATA[
 var client = new UsageClient();
 
-Response response = await client.OutputAsync(new RequestContext());
+Response response = await client.OutputAsync(new RequestContext()).ConfigureAwait(false);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("requiredProp").ToString());
@@ -106,7 +106,7 @@ This sample shows how to call InputAndOutputAsync with required parameters.
 var client = new UsageClient();
 
 var body = new InputOutputRecord("<requiredProp>");
-var result = await client.InputAndOutputAsync(body);
+var result = await client.InputAndOutputAsync(body).ConfigureAwait(false);
 ]]></code>
 </example>
     </member>
@@ -131,7 +131,7 @@ var data = new {
     requiredProp = "<requiredProp>",
 };
 
-Response response = await client.InputAndOutputAsync(RequestContent.Create(data));
+Response response = await client.InputAndOutputAsync(RequestContent.Create(data)).ConfigureAwait(false);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("requiredProp").ToString());

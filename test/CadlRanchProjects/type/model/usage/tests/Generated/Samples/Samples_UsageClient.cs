@@ -6,13 +6,10 @@
 #nullable disable
 
 using System;
-using System.Collections.Generic;
-using System.IO;
 using System.Text.Json;
 using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
-using Azure.Identity;
 using NUnit.Framework;
 using _Type.Model.Usage.Models;
 
@@ -61,7 +58,7 @@ namespace _Type.Model.Usage.Samples
                 requiredProp = "<requiredProp>",
             };
 
-            Response response = await client.InputAsync(RequestContent.Create(data));
+            Response response = await client.InputAsync(RequestContent.Create(data)).ConfigureAwait(false);
             Console.WriteLine(response.Status);
         }
 
@@ -76,7 +73,7 @@ namespace _Type.Model.Usage.Samples
                 requiredProp = "<requiredProp>",
             };
 
-            Response response = await client.InputAsync(RequestContent.Create(data));
+            Response response = await client.InputAsync(RequestContent.Create(data)).ConfigureAwait(false);
             Console.WriteLine(response.Status);
         }
 
@@ -87,7 +84,7 @@ namespace _Type.Model.Usage.Samples
             var client = new UsageClient();
 
             var input = new InputRecord("<requiredProp>");
-            var result = await client.InputAsync(input);
+            var result = await client.InputAsync(input).ConfigureAwait(false);
         }
 
         [Test]
@@ -120,7 +117,7 @@ namespace _Type.Model.Usage.Samples
         {
             var client = new UsageClient();
 
-            Response response = await client.OutputAsync(new RequestContext());
+            Response response = await client.OutputAsync(new RequestContext()).ConfigureAwait(false);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("requiredProp").ToString());
@@ -132,7 +129,7 @@ namespace _Type.Model.Usage.Samples
         {
             var client = new UsageClient();
 
-            Response response = await client.OutputAsync(new RequestContext());
+            Response response = await client.OutputAsync(new RequestContext()).ConfigureAwait(false);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("requiredProp").ToString());
@@ -144,7 +141,7 @@ namespace _Type.Model.Usage.Samples
         {
             var client = new UsageClient();
 
-            var result = await client.OutputAsync();
+            var result = await client.OutputAsync().ConfigureAwait(false);
         }
 
         [Test]
@@ -192,7 +189,7 @@ namespace _Type.Model.Usage.Samples
                 requiredProp = "<requiredProp>",
             };
 
-            Response response = await client.InputAndOutputAsync(RequestContent.Create(data));
+            Response response = await client.InputAndOutputAsync(RequestContent.Create(data)).ConfigureAwait(false);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("requiredProp").ToString());
@@ -209,7 +206,7 @@ namespace _Type.Model.Usage.Samples
                 requiredProp = "<requiredProp>",
             };
 
-            Response response = await client.InputAndOutputAsync(RequestContent.Create(data));
+            Response response = await client.InputAndOutputAsync(RequestContent.Create(data)).ConfigureAwait(false);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("requiredProp").ToString());
@@ -222,7 +219,7 @@ namespace _Type.Model.Usage.Samples
             var client = new UsageClient();
 
             var body = new InputOutputRecord("<requiredProp>");
-            var result = await client.InputAndOutputAsync(body);
+            var result = await client.InputAndOutputAsync(body).ConfigureAwait(false);
         }
     }
 }
