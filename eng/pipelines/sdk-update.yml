@@ -24,7 +24,7 @@ resources:
 
 variables:
   nugetMultiFeedWarnLevel: 'none'
-  azureSdkForNetCommit: $[ resources.repositories.['azure-sdk-for-net'].ref ]
+  azureSdkForNetCommit: $[ resources.repositories['azure-sdk-for-net'].ref ]
 
 stages:
   - stage: 'Build_and_Test'
