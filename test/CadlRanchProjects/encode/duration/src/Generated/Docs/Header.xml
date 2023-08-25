@@ -7,7 +7,7 @@ This sample shows how to call DefaultAsync with required parameters.
 <code><![CDATA[
 var client = new DurationClient().GetHeaderClient("1.0.0");
 
-Response response = await client.DefaultAsync(new TimeSpan(1, 2, 3));
+Response response = await client.DefaultAsync(new TimeSpan(1, 23, 45)).ConfigureAwait(false);
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
@@ -18,7 +18,7 @@ This sample shows how to call Default with required parameters.
 <code><![CDATA[
 var client = new DurationClient().GetHeaderClient("1.0.0");
 
-Response response = client.Default(new TimeSpan(1, 2, 3));
+Response response = client.Default(new TimeSpan(1, 23, 45));
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
@@ -29,7 +29,7 @@ This sample shows how to call Iso8601Async with required parameters.
 <code><![CDATA[
 var client = new DurationClient().GetHeaderClient("1.0.0");
 
-Response response = await client.Iso8601Async(new TimeSpan(1, 2, 3));
+Response response = await client.Iso8601Async(new TimeSpan(1, 23, 45)).ConfigureAwait(false);
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
@@ -40,7 +40,7 @@ This sample shows how to call Iso8601 with required parameters.
 <code><![CDATA[
 var client = new DurationClient().GetHeaderClient("1.0.0");
 
-Response response = client.Iso8601(new TimeSpan(1, 2, 3));
+Response response = client.Iso8601(new TimeSpan(1, 23, 45));
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
@@ -51,7 +51,7 @@ This sample shows how to call Iso8601ArrayAsync with required parameters.
 <code><![CDATA[
 var client = new DurationClient().GetHeaderClient("1.0.0");
 
-Response response = await client.Iso8601ArrayAsync(new TimeSpan[]{new TimeSpan(1, 2, 3)});
+Response response = await client.Iso8601ArrayAsync(new TimeSpan[]{new TimeSpan(1, 23, 45)}).ConfigureAwait(false);
 Console.WriteLine(response.Status);
 ]]></code>
 </example>

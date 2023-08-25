@@ -323,7 +323,7 @@ namespace body_string_LowLevel.Samples
                 ColorConstant = "green-color",
             };
 
-            Response response = await client.PutReferencedConstantAsync(RequestContent.Create(data));
+            Response response = await client.PutReferencedConstantAsync(RequestContent.Create(data)).ConfigureAwait(false);
             Console.WriteLine(response.Status);
         }
 
@@ -340,7 +340,7 @@ namespace body_string_LowLevel.Samples
                 field1 = "<field1>",
             };
 
-            Response response = await client.PutReferencedConstantAsync(RequestContent.Create(data));
+            Response response = await client.PutReferencedConstantAsync(RequestContent.Create(data)).ConfigureAwait(false);
             Console.WriteLine(response.Status);
         }
     }

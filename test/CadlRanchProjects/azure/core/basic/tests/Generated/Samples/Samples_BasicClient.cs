@@ -214,11 +214,11 @@ namespace _Specs_.Azure.Core.Basic.Samples
             var resource = new User("<name>")
             {
                 Orders =
-{
+    {
         new UserOrder(1234, "<detail>")
     },
             };
-            var result = await client.CreateOrReplaceAsync(1234, resource);
+            var result = await client.CreateOrReplaceAsync(1234, resource).ConfigureAwait(false);
         }
 
         [Test]

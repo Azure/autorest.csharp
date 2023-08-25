@@ -154,7 +154,7 @@ var data = new {
     ColorConstant = "green-color",
 };
 
-Response response = await client.PutReferencedConstantAsync(RequestContent.Create(data));
+Response response = await client.PutReferencedConstantAsync(RequestContent.Create(data)).ConfigureAwait(false);
 Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call PutReferencedConstantAsync with all request content.
@@ -167,7 +167,7 @@ var data = new {
     field1 = "<field1>",
 };
 
-Response response = await client.PutReferencedConstantAsync(RequestContent.Create(data));
+Response response = await client.PutReferencedConstantAsync(RequestContent.Create(data)).ConfigureAwait(false);
 Console.WriteLine(response.Status);
 ]]></code>
 </example>

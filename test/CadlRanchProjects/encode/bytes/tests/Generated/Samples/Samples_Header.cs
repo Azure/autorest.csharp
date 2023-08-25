@@ -40,7 +40,7 @@ namespace Encode.Bytes.Samples
         {
             var client = new BytesClient().GetHeaderClient("1.0.0");
 
-            Response response = await client.DefaultAsync(BinaryData.FromString("<your binary data content>"));
+            Response response = await client.DefaultAsync(BinaryData.FromString("<your binary data content>")).ConfigureAwait(false);
             Console.WriteLine(response.Status);
         }
 
@@ -50,7 +50,7 @@ namespace Encode.Bytes.Samples
         {
             var client = new BytesClient().GetHeaderClient("1.0.0");
 
-            Response response = await client.DefaultAsync(BinaryData.FromString("<your binary data content>"));
+            Response response = await client.DefaultAsync(BinaryData.FromString("<your binary data content>")).ConfigureAwait(false);
             Console.WriteLine(response.Status);
         }
 
@@ -80,7 +80,7 @@ namespace Encode.Bytes.Samples
         {
             var client = new BytesClient().GetHeaderClient("1.0.0");
 
-            Response response = await client.Base64Async(BinaryData.FromString("<your binary data content>"));
+            Response response = await client.Base64Async(BinaryData.FromString("<your binary data content>")).ConfigureAwait(false);
             Console.WriteLine(response.Status);
         }
 
@@ -90,7 +90,7 @@ namespace Encode.Bytes.Samples
         {
             var client = new BytesClient().GetHeaderClient("1.0.0");
 
-            Response response = await client.Base64Async(BinaryData.FromString("<your binary data content>"));
+            Response response = await client.Base64Async(BinaryData.FromString("<your binary data content>")).ConfigureAwait(false);
             Console.WriteLine(response.Status);
         }
 
@@ -120,7 +120,7 @@ namespace Encode.Bytes.Samples
         {
             var client = new BytesClient().GetHeaderClient("1.0.0");
 
-            Response response = await client.Base64urlAsync(BinaryData.FromString("<your binary data content>"));
+            Response response = await client.Base64urlAsync(BinaryData.FromString("<your binary data content>")).ConfigureAwait(false);
             Console.WriteLine(response.Status);
         }
 
@@ -130,7 +130,7 @@ namespace Encode.Bytes.Samples
         {
             var client = new BytesClient().GetHeaderClient("1.0.0");
 
-            Response response = await client.Base64urlAsync(BinaryData.FromString("<your binary data content>"));
+            Response response = await client.Base64urlAsync(BinaryData.FromString("<your binary data content>")).ConfigureAwait(false);
             Console.WriteLine(response.Status);
         }
 
@@ -160,7 +160,7 @@ namespace Encode.Bytes.Samples
         {
             var client = new BytesClient().GetHeaderClient("1.0.0");
 
-            Response response = await client.Base64urlArrayAsync(new BinaryData[] { BinaryData.FromString("<your binary data content>") });
+            Response response = await client.Base64urlArrayAsync(new BinaryData[] { BinaryData.FromString("<your binary data content>") }).ConfigureAwait(false);
             Console.WriteLine(response.Status);
         }
 
@@ -170,7 +170,7 @@ namespace Encode.Bytes.Samples
         {
             var client = new BytesClient().GetHeaderClient("1.0.0");
 
-            Response response = await client.Base64urlArrayAsync(new BinaryData[] { BinaryData.FromString("<your binary data content>") });
+            Response response = await client.Base64urlArrayAsync(new BinaryData[] { BinaryData.FromString("<your binary data content>") }).ConfigureAwait(false);
             Console.WriteLine(response.Status);
         }
     }

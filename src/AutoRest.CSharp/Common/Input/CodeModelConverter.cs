@@ -385,11 +385,11 @@ namespace AutoRest.CSharp.Common.Input
 
         private InputType GetOrCreateType(RequestParameter requestParameter)
         {
-            var sc = requestParameter is { Schema: ConstantSchema constantSchema }
+            var schema = requestParameter is { Schema: ConstantSchema constantSchema }
                 ? constantSchema.ValueType
                 : requestParameter.Schema;
 
-            return GetOrCreateType(sc, requestParameter.Extensions?.Format, _modelsCache, requestParameter.IsNullable || !requestParameter.IsRequired);
+            return GetOrCreateType(schema, requestParameter.Extensions?.Format, _modelsCache, requestParameter.IsNullable || !requestParameter.IsRequired);
         }
 
         private InputType GetOrCreateType(Property property)

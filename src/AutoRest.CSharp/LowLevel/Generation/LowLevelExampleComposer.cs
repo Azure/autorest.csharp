@@ -657,7 +657,7 @@ namespace AutoRest.CSharp.Generation.Writers
             return new ConstantExpression(defaultValue);
         }
 
-        private ValueExpression MockParameterTypeValue(string? parameterName, CSharpType parameterType, SerializationFormat? serializationFormat)
+        private ValueExpression MockParameterTypeValue(string? propertyName, CSharpType parameterType, SerializationFormat? serializationFormat)
         {
             if (parameterType.IsFrameworkType)
             {
@@ -687,7 +687,7 @@ namespace AutoRest.CSharp.Generation.Writers
 
                 if (type == typeof(string))
                 {
-                    return string.IsNullOrWhiteSpace(parameterName) ? Literal("<String>") : Literal($"<{parameterName}>");
+                    return string.IsNullOrWhiteSpace(propertyName) ? Literal("<String>") : Literal($"<{propertyName}>");
                 }
 
                 if (type == typeof(bool))
@@ -756,13 +756,13 @@ namespace AutoRest.CSharp.Generation.Writers
                 if (type == typeof(IEnumerable<>))
                 {
                     var elementType = parameterType.Arguments[0];
-                    return New.Array(elementType, true, MockParameterTypeValue(parameterName, elementType, null));
+                    return New.Array(elementType, true, MockParameterTypeValue(propertyName, elementType, null));
                 }
 
                 if (type == typeof(IDictionary<,>))
                 {
                     var valueType = parameterType.Arguments[1];
-                    return New.Dictionary(typeof(string), valueType, (Literal("test"), MockParameterTypeValue(parameterName, valueType, null)));
+                    return New.Dictionary(typeof(string), valueType, (Literal("test"), MockParameterTypeValue(propertyName, valueType, null)));
                 }
 
                 if (type == typeof(BinaryData))
@@ -814,11 +814,11 @@ namespace AutoRest.CSharp.Generation.Writers
         };
 
 
-        private ValueExpression ComposeProtocolCSharpTypeInstance(bool allProperties, JsonSerialization? serialization, string? propertyDescription, HashSet<ObjectType> visitedModels) => serialization switch
+        private ValueExpression ComposeProtocolCSharpTypeInstance(bool allProperties, JsonSerialization? serialization, string? propertyName, HashSet<ObjectType> visitedModels) => serialization switch
         {
             JsonArraySerialization array => ComposeProtocolArrayCSharpType(allProperties, array, visitedModels),
             JsonDictionarySerialization dictionary => ComposeProtocolDictionaryInstance(allProperties, dictionary, visitedModels),
-            JsonValueSerialization { Type.IsFrameworkType: true } value => MockParameterTypeValue(propertyDescription, value.Type, value.Format),
+            JsonValueSerialization { Type.IsFrameworkType: true } value => MockParameterTypeValue(propertyName, value.Type, value.Format),
             JsonValueSerialization { Type.Implementation: SerializableObjectType model } => ComposeAnonymousObjectType(GetMostConcreteModel(model), allProperties, visitedModels),
             JsonValueSerialization { Type.Implementation: EnumType enumType } => new ConstantExpression(enumType.Values.First().Value),
             _ => Null
@@ -983,9 +983,14 @@ namespace AutoRest.CSharp.Generation.Writers
         }
 
         private ValueExpression ComposeProtocolPropertyValue(JsonPropertySerialization propertySerialization, HashSet<ObjectType> visitedModels, ObjectTypeDiscriminator? discriminator, bool allProperties)
-            => discriminator is not null && discriminator.SerializedName == propertySerialization.SerializedName && discriminator.Value is {} discriminatorValue
-                ? new ConstantExpression(discriminatorValue is {Value: EnumTypeValue enumValue} ? enumValue.Value : discriminatorValue)
-                : ComposeProtocolCSharpTypeInstance(allProperties, propertySerialization.ValueSerialization, propertySerialization.SerializedName, visitedModels);
+        {
+            if (discriminator is not null && discriminator.SerializedName == propertySerialization.SerializedName && discriminator.Value is {} discriminatorValue)
+            {
+                return new ConstantExpression(discriminatorValue is { Value: EnumTypeValue enumValue } ? enumValue.Value : discriminatorValue);
+            }
+
+            return ComposeProtocolCSharpTypeInstance(allProperties, propertySerialization.ValueSerialization, propertySerialization.SerializedName, visitedModels);
+        }
 
         private static SerializableObjectType GetMostConcreteModel(SerializableObjectType model)
         {

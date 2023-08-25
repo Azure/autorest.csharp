@@ -29,7 +29,7 @@ This sample shows how to call Base64Async with required parameters.
 <code><![CDATA[
 var client = new BytesClient().GetHeaderClient("1.0.0");
 
-Response response = await client.Base64Async(BinaryData.FromString("<your binary data content>"));
+Response response = await client.Base64Async(BinaryData.FromString("<your binary data content>")).ConfigureAwait(false);
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
@@ -51,7 +51,7 @@ This sample shows how to call Base64urlAsync with required parameters.
 <code><![CDATA[
 var client = new BytesClient().GetHeaderClient("1.0.0");
 
-Response response = await client.Base64urlAsync(BinaryData.FromString("<your binary data content>"));
+Response response = await client.Base64urlAsync(BinaryData.FromString("<your binary data content>")).ConfigureAwait(false);
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
@@ -73,7 +73,7 @@ This sample shows how to call Base64urlArrayAsync with required parameters.
 <code><![CDATA[
 var client = new BytesClient().GetHeaderClient("1.0.0");
 
-Response response = await client.Base64urlArrayAsync(new BinaryData[]{BinaryData.FromString("<your binary data content>")});
+Response response = await client.Base64urlArrayAsync(new BinaryData[]{BinaryData.FromString("<your binary data content>")}).ConfigureAwait(false);
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
