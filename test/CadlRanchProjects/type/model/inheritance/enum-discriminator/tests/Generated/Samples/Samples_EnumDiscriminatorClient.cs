@@ -86,7 +86,7 @@ namespace _Type.Model.Inheritance.EnumDiscriminator.Samples
 
             var data = new
             {
-                kind = DogKind.Golden,
+                kind = "golden",
                 weight = 1234,
             };
 
@@ -102,7 +102,7 @@ namespace _Type.Model.Inheritance.EnumDiscriminator.Samples
 
             var data = new
             {
-                kind = DogKind.Golden,
+                kind = "golden",
                 weight = 1234,
             };
 
@@ -118,7 +118,7 @@ namespace _Type.Model.Inheritance.EnumDiscriminator.Samples
 
             var data = new
             {
-                kind = DogKind.Golden,
+                kind = "golden",
                 weight = 1234,
             };
 
@@ -134,7 +134,7 @@ namespace _Type.Model.Inheritance.EnumDiscriminator.Samples
 
             var data = new
             {
-                kind = DogKind.Golden,
+                kind = "golden",
                 weight = 1234,
             };
 
@@ -343,7 +343,7 @@ namespace _Type.Model.Inheritance.EnumDiscriminator.Samples
 
             var data = new
             {
-                kind = SnakeKind.Cobra,
+                kind = "cobra",
                 length = 1234,
             };
 
@@ -359,7 +359,7 @@ namespace _Type.Model.Inheritance.EnumDiscriminator.Samples
 
             var data = new
             {
-                kind = SnakeKind.Cobra,
+                kind = "cobra",
                 length = 1234,
             };
 
@@ -375,7 +375,7 @@ namespace _Type.Model.Inheritance.EnumDiscriminator.Samples
 
             var data = new
             {
-                kind = SnakeKind.Cobra,
+                kind = "cobra",
                 length = 1234,
             };
 
@@ -391,7 +391,7 @@ namespace _Type.Model.Inheritance.EnumDiscriminator.Samples
 
             var data = new
             {
-                kind = SnakeKind.Cobra,
+                kind = "cobra",
                 length = 1234,
             };
 

@@ -78,7 +78,7 @@ This sample shows how to call PutExtensibleModelAsync with required request cont
 var client = new EnumDiscriminatorClient();
 
 var data = new {
-    kind = DogKind.Golden,
+    kind = "golden",
     weight = 1234,
 };
 
@@ -94,7 +94,7 @@ This sample shows how to call PutExtensibleModel with required request content.
 var client = new EnumDiscriminatorClient();
 
 var data = new {
-    kind = DogKind.Golden,
+    kind = "golden",
     weight = 1234,
 };
 
@@ -276,7 +276,7 @@ This sample shows how to call PutFixedModelAsync with required request content.
 var client = new EnumDiscriminatorClient();
 
 var data = new {
-    kind = SnakeKind.Cobra,
+    kind = "cobra",
     length = 1234,
 };
 
@@ -292,7 +292,7 @@ This sample shows how to call PutFixedModel with required request content.
 var client = new EnumDiscriminatorClient();
 
 var data = new {
-    kind = SnakeKind.Cobra,
+    kind = "cobra",
     length = 1234,
 };
 

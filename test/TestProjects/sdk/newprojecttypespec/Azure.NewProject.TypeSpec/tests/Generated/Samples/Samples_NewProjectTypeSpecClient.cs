@@ -792,9 +792,7 @@ namespace Azure.NewProject.TypeSpec.Samples
             {
                 requiredString = "<requiredString>",
                 requiredInt = 1234,
-                requiredCollection = new[] {
-        "1"
-    },
+                requiredCollection = new[] { "1" },
                 requiredDictionary = new
                 {
                     key = "1",
@@ -847,9 +845,7 @@ namespace Azure.NewProject.TypeSpec.Samples
             {
                 requiredString = "<requiredString>",
                 requiredInt = 1234,
-                requiredCollection = new[] {
-        "1"
-    },
+                requiredCollection = new[] { "1" },
                 requiredDictionary = new
                 {
                     key = "1",
