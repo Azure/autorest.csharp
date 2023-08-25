@@ -6,13 +6,10 @@
 #nullable disable
 
 using System;
-using System.Collections.Generic;
-using System.IO;
 using System.Text.Json;
 using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
-using Azure.Identity;
 using NUnit.Framework;
 using _Type.Property.ValueTypes.Models;
 
@@ -50,7 +47,7 @@ namespace _Type.Property.ValueTypes.Samples
         {
             var client = new ValueTypesClient().GetDurationClient("1.0.0");
 
-            Response response = await client.GetDurationAsync(new RequestContext());
+            Response response = await client.GetDurationAsync(new RequestContext()).ConfigureAwait(false);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("property").ToString());
@@ -62,7 +59,7 @@ namespace _Type.Property.ValueTypes.Samples
         {
             var client = new ValueTypesClient().GetDurationClient("1.0.0");
 
-            Response response = await client.GetDurationAsync(new RequestContext());
+            Response response = await client.GetDurationAsync(new RequestContext()).ConfigureAwait(false);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("property").ToString());
@@ -74,7 +71,7 @@ namespace _Type.Property.ValueTypes.Samples
         {
             var client = new ValueTypesClient().GetDurationClient("1.0.0");
 
-            var result = await client.GetDurationAsync();
+            var result = await client.GetDurationAsync().ConfigureAwait(false);
         }
 
         [Test]
@@ -118,7 +115,7 @@ namespace _Type.Property.ValueTypes.Samples
                 property = "PT1H23M45S",
             };
 
-            Response response = await client.PutAsync(RequestContent.Create(data));
+            Response response = await client.PutAsync(RequestContent.Create(data)).ConfigureAwait(false);
             Console.WriteLine(response.Status);
         }
 
@@ -133,7 +130,7 @@ namespace _Type.Property.ValueTypes.Samples
                 property = "PT1H23M45S",
             };
 
-            Response response = await client.PutAsync(RequestContent.Create(data));
+            Response response = await client.PutAsync(RequestContent.Create(data)).ConfigureAwait(false);
             Console.WriteLine(response.Status);
         }
 
@@ -143,8 +140,8 @@ namespace _Type.Property.ValueTypes.Samples
         {
             var client = new ValueTypesClient().GetDurationClient("1.0.0");
 
-            var body = new DurationProperty(new TimeSpan(1, 2, 3));
-            var result = await client.PutAsync(body);
+            var body = new DurationProperty(new TimeSpan(1, 23, 45));
+            var result = await client.PutAsync(body).ConfigureAwait(false);
         }
     }
 }

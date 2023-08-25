@@ -6,13 +6,10 @@
 #nullable disable
 
 using System;
-using System.Collections.Generic;
-using System.IO;
 using System.Text.Json;
 using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
-using Azure.Identity;
 using NUnit.Framework;
 using _Type.Property.Optional.Models;
 
@@ -50,7 +47,7 @@ namespace _Type.Property.Optional.Samples
         {
             var client = new OptionalClient().GetCollectionsModelClient("1.0.0");
 
-            Response response = await client.GetAllAsync(new RequestContext());
+            Response response = await client.GetAllAsync(new RequestContext()).ConfigureAwait(false);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());
@@ -62,7 +59,7 @@ namespace _Type.Property.Optional.Samples
         {
             var client = new OptionalClient().GetCollectionsModelClient("1.0.0");
 
-            Response response = await client.GetAllAsync(new RequestContext());
+            Response response = await client.GetAllAsync(new RequestContext()).ConfigureAwait(false);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("property")[0].GetProperty("property").ToString());
@@ -74,7 +71,7 @@ namespace _Type.Property.Optional.Samples
         {
             var client = new OptionalClient().GetCollectionsModelClient("1.0.0");
 
-            var result = await client.GetAllAsync();
+            var result = await client.GetAllAsync().ConfigureAwait(false);
         }
 
         [Test]
@@ -107,7 +104,7 @@ namespace _Type.Property.Optional.Samples
         {
             var client = new OptionalClient().GetCollectionsModelClient("1.0.0");
 
-            Response response = await client.GetDefaultAsync(new RequestContext());
+            Response response = await client.GetDefaultAsync(new RequestContext()).ConfigureAwait(false);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());
@@ -119,7 +116,7 @@ namespace _Type.Property.Optional.Samples
         {
             var client = new OptionalClient().GetCollectionsModelClient("1.0.0");
 
-            Response response = await client.GetDefaultAsync(new RequestContext());
+            Response response = await client.GetDefaultAsync(new RequestContext()).ConfigureAwait(false);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("property")[0].GetProperty("property").ToString());
@@ -131,7 +128,7 @@ namespace _Type.Property.Optional.Samples
         {
             var client = new OptionalClient().GetCollectionsModelClient("1.0.0");
 
-            var result = await client.GetDefaultAsync();
+            var result = await client.GetDefaultAsync().ConfigureAwait(false);
         }
 
         [Test]
@@ -173,7 +170,7 @@ namespace _Type.Property.Optional.Samples
 
             var data = new { };
 
-            Response response = await client.PutAllAsync(RequestContent.Create(data));
+            Response response = await client.PutAllAsync(RequestContent.Create(data)).ConfigureAwait(false);
             Console.WriteLine(response.Status);
         }
 
@@ -192,7 +189,7 @@ namespace _Type.Property.Optional.Samples
     },
             };
 
-            Response response = await client.PutAllAsync(RequestContent.Create(data));
+            Response response = await client.PutAllAsync(RequestContent.Create(data)).ConfigureAwait(false);
             Console.WriteLine(response.Status);
         }
 
@@ -202,17 +199,17 @@ namespace _Type.Property.Optional.Samples
         {
             var client = new OptionalClient().GetCollectionsModelClient("1.0.0");
 
-            var body = new CollectionsModelProperty()
+            var body = new CollectionsModelProperty
             {
                 Property =
-{
-        new StringProperty()
-{
+    {
+        new StringProperty
+        {
             Property = "<Property>",
         }
     },
             };
-            var result = await client.PutAllAsync(body);
+            var result = await client.PutAllAsync(body).ConfigureAwait(false);
         }
 
         [Test]
@@ -254,7 +251,7 @@ namespace _Type.Property.Optional.Samples
 
             var data = new { };
 
-            Response response = await client.PutDefaultAsync(RequestContent.Create(data));
+            Response response = await client.PutDefaultAsync(RequestContent.Create(data)).ConfigureAwait(false);
             Console.WriteLine(response.Status);
         }
 
@@ -273,7 +270,7 @@ namespace _Type.Property.Optional.Samples
     },
             };
 
-            Response response = await client.PutDefaultAsync(RequestContent.Create(data));
+            Response response = await client.PutDefaultAsync(RequestContent.Create(data)).ConfigureAwait(false);
             Console.WriteLine(response.Status);
         }
 
@@ -283,17 +280,17 @@ namespace _Type.Property.Optional.Samples
         {
             var client = new OptionalClient().GetCollectionsModelClient("1.0.0");
 
-            var body = new CollectionsModelProperty()
+            var body = new CollectionsModelProperty
             {
                 Property =
-{
-        new StringProperty()
-{
+    {
+        new StringProperty
+        {
             Property = "<Property>",
         }
     },
             };
-            var result = await client.PutDefaultAsync(body);
+            var result = await client.PutDefaultAsync(body).ConfigureAwait(false);
         }
     }
 }

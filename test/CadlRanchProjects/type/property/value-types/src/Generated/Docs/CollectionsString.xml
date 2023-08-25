@@ -7,7 +7,7 @@ This sample shows how to call GetCollectionsStringAsync.
 <code><![CDATA[
 var client = new ValueTypesClient().GetCollectionsStringClient("1.0.0");
 
-var result = await client.GetCollectionsStringAsync();
+var result = await client.GetCollectionsStringAsync().ConfigureAwait(false);
 ]]></code>
 </example>
     </member>

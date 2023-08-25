@@ -6,13 +6,10 @@
 #nullable disable
 
 using System;
-using System.Collections.Generic;
-using System.IO;
 using System.Text.Json;
 using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
-using Azure.Identity;
 using NUnit.Framework;
 using _Type.Property.ValueTypes.Models;
 
@@ -50,7 +47,7 @@ namespace _Type.Property.ValueTypes.Samples
         {
             var client = new ValueTypesClient().GetFloatClient("1.0.0");
 
-            Response response = await client.GetFloatAsync(new RequestContext());
+            Response response = await client.GetFloatAsync(new RequestContext()).ConfigureAwait(false);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("property").ToString());
@@ -62,7 +59,7 @@ namespace _Type.Property.ValueTypes.Samples
         {
             var client = new ValueTypesClient().GetFloatClient("1.0.0");
 
-            Response response = await client.GetFloatAsync(new RequestContext());
+            Response response = await client.GetFloatAsync(new RequestContext()).ConfigureAwait(false);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("property").ToString());
@@ -74,7 +71,7 @@ namespace _Type.Property.ValueTypes.Samples
         {
             var client = new ValueTypesClient().GetFloatClient("1.0.0");
 
-            var result = await client.GetFloatAsync();
+            var result = await client.GetFloatAsync().ConfigureAwait(false);
         }
 
         [Test]
@@ -85,7 +82,7 @@ namespace _Type.Property.ValueTypes.Samples
 
             var data = new
             {
-                property = 123.45f,
+                property = 3.14f,
             };
 
             Response response = client.Put(RequestContent.Create(data));
@@ -100,7 +97,7 @@ namespace _Type.Property.ValueTypes.Samples
 
             var data = new
             {
-                property = 123.45f,
+                property = 3.14f,
             };
 
             Response response = client.Put(RequestContent.Create(data));
@@ -115,10 +112,10 @@ namespace _Type.Property.ValueTypes.Samples
 
             var data = new
             {
-                property = 123.45f,
+                property = 3.14f,
             };
 
-            Response response = await client.PutAsync(RequestContent.Create(data));
+            Response response = await client.PutAsync(RequestContent.Create(data)).ConfigureAwait(false);
             Console.WriteLine(response.Status);
         }
 
@@ -130,10 +127,10 @@ namespace _Type.Property.ValueTypes.Samples
 
             var data = new
             {
-                property = 123.45f,
+                property = 3.14f,
             };
 
-            Response response = await client.PutAsync(RequestContent.Create(data));
+            Response response = await client.PutAsync(RequestContent.Create(data)).ConfigureAwait(false);
             Console.WriteLine(response.Status);
         }
 
@@ -144,7 +141,7 @@ namespace _Type.Property.ValueTypes.Samples
             var client = new ValueTypesClient().GetFloatClient("1.0.0");
 
             var body = new FloatProperty(3.14f);
-            var result = await client.PutAsync(body);
+            var result = await client.PutAsync(body).ConfigureAwait(false);
         }
     }
 }

@@ -6,13 +6,10 @@
 #nullable disable
 
 using System;
-using System.Collections.Generic;
-using System.IO;
 using System.Text.Json;
 using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
-using Azure.Identity;
 using NUnit.Framework;
 using _Type.Property.ValueTypes.Models;
 
@@ -50,7 +47,7 @@ namespace _Type.Property.ValueTypes.Samples
         {
             var client = new ValueTypesClient().GetCollectionsStringClient("1.0.0");
 
-            Response response = await client.GetCollectionsStringAsync(new RequestContext());
+            Response response = await client.GetCollectionsStringAsync(new RequestContext()).ConfigureAwait(false);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("property")[0].ToString());
@@ -62,7 +59,7 @@ namespace _Type.Property.ValueTypes.Samples
         {
             var client = new ValueTypesClient().GetCollectionsStringClient("1.0.0");
 
-            Response response = await client.GetCollectionsStringAsync(new RequestContext());
+            Response response = await client.GetCollectionsStringAsync(new RequestContext()).ConfigureAwait(false);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("property")[0].ToString());
@@ -74,7 +71,7 @@ namespace _Type.Property.ValueTypes.Samples
         {
             var client = new ValueTypesClient().GetCollectionsStringClient("1.0.0");
 
-            var result = await client.GetCollectionsStringAsync();
+            var result = await client.GetCollectionsStringAsync().ConfigureAwait(false);
         }
 
         [Test]
@@ -124,7 +121,7 @@ namespace _Type.Property.ValueTypes.Samples
     },
             };
 
-            Response response = await client.PutAsync(RequestContent.Create(data));
+            Response response = await client.PutAsync(RequestContent.Create(data)).ConfigureAwait(false);
             Console.WriteLine(response.Status);
         }
 
@@ -141,7 +138,7 @@ namespace _Type.Property.ValueTypes.Samples
     },
             };
 
-            Response response = await client.PutAsync(RequestContent.Create(data));
+            Response response = await client.PutAsync(RequestContent.Create(data)).ConfigureAwait(false);
             Console.WriteLine(response.Status);
         }
 
@@ -153,9 +150,9 @@ namespace _Type.Property.ValueTypes.Samples
 
             var body = new CollectionsStringProperty(new string[]
             {
-    "<null>"
+    "<String>"
             });
-            var result = await client.PutAsync(body);
+            var result = await client.PutAsync(body).ConfigureAwait(false);
         }
     }
 }

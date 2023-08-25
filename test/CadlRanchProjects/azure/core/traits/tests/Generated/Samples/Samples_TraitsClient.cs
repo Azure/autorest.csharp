@@ -23,7 +23,7 @@ namespace _Specs_.Azure.Core.Traits.Samples
         {
             var client = new TraitsClient();
 
-            Response response = client.SmokeTest(1234, "<foo>", null, new RequestContext());
+            Response response = client.SmokeTest(1234, "<foo>", new RequestConditions(), new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("id").ToString());
@@ -35,7 +35,7 @@ namespace _Specs_.Azure.Core.Traits.Samples
         {
             var client = new TraitsClient();
 
-            Response response = client.SmokeTest(1234, "<foo>", null, new RequestContext());
+            Response response = client.SmokeTest(1234, "<foo>", new RequestConditions(), new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("id").ToString());
@@ -48,7 +48,7 @@ namespace _Specs_.Azure.Core.Traits.Samples
         {
             var client = new TraitsClient();
 
-            Response response = await client.SmokeTestAsync(1234, "<foo>", null, new RequestContext());
+            Response response = await client.SmokeTestAsync(1234, "<foo>", new RequestConditions(), new RequestContext()).ConfigureAwait(false);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("id").ToString());
@@ -60,7 +60,7 @@ namespace _Specs_.Azure.Core.Traits.Samples
         {
             var client = new TraitsClient();
 
-            Response response = await client.SmokeTestAsync(1234, "<foo>", null, new RequestContext());
+            Response response = await client.SmokeTestAsync(1234, "<foo>", new RequestConditions(), new RequestContext()).ConfigureAwait(false);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("id").ToString());
@@ -73,7 +73,7 @@ namespace _Specs_.Azure.Core.Traits.Samples
         {
             var client = new TraitsClient();
 
-            var result = await client.SmokeTestAsync(1234, "<foo>", null);
+            var result = await client.SmokeTestAsync(1234, "<foo>", new RequestConditions()).ConfigureAwait(false);
         }
 
         [Test]
@@ -121,7 +121,7 @@ namespace _Specs_.Azure.Core.Traits.Samples
                 userActionValue = "<userActionValue>",
             };
 
-            Response response = await client.RepeatableActionAsync(1234, RequestContent.Create(data));
+            Response response = await client.RepeatableActionAsync(1234, RequestContent.Create(data)).ConfigureAwait(false);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("userActionResult").ToString());
@@ -138,7 +138,7 @@ namespace _Specs_.Azure.Core.Traits.Samples
                 userActionValue = "<userActionValue>",
             };
 
-            Response response = await client.RepeatableActionAsync(1234, RequestContent.Create(data));
+            Response response = await client.RepeatableActionAsync(1234, RequestContent.Create(data)).ConfigureAwait(false);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("userActionResult").ToString());
@@ -151,7 +151,7 @@ namespace _Specs_.Azure.Core.Traits.Samples
             var client = new TraitsClient();
 
             var userActionParam = new UserActionParam("<userActionValue>");
-            var result = await client.RepeatableActionAsync(1234, userActionParam);
+            var result = await client.RepeatableActionAsync(1234, userActionParam).ConfigureAwait(false);
         }
     }
 }

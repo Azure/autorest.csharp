@@ -5,14 +5,6 @@
 
 #nullable disable
 
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Text.Json;
-using Azure;
-using Azure.Core;
-using Azure.Identity;
-
 namespace _Type.Property.Optional.Samples
 {
     public class Samples_OptionalClient

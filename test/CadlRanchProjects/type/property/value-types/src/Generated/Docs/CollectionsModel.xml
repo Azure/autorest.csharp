@@ -7,7 +7,7 @@ This sample shows how to call GetCollectionsModelAsync.
 <code><![CDATA[
 var client = new ValueTypesClient().GetCollectionsModelClient("1.0.0");
 
-var result = await client.GetCollectionsModelAsync();
+var result = await client.GetCollectionsModelAsync().ConfigureAwait(false);
 ]]></code>
 </example>
     </member>
@@ -27,7 +27,7 @@ This sample shows how to call GetCollectionsModelAsync with required parameters 
 <code><![CDATA[
 var client = new ValueTypesClient().GetCollectionsModelClient("1.0.0");
 
-Response response = await client.GetCollectionsModelAsync(new RequestContext());
+Response response = await client.GetCollectionsModelAsync(new RequestContext()).ConfigureAwait(false);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("property")[0].GetProperty("property").ToString());
@@ -53,11 +53,11 @@ This sample shows how to call PutAsync with required parameters.
 <code><![CDATA[
 var client = new ValueTypesClient().GetCollectionsModelClient("1.0.0");
 
-var body = new CollectionsModelProperty(new InnerModel[] 
+var body = new CollectionsModelProperty(new InnerModel[]
 {
     new InnerModel("<property>")
 });
-var result = await client.PutAsync(body);
+var result = await client.PutAsync(body).ConfigureAwait(false);
 ]]></code>
 </example>
     </member>
@@ -67,7 +67,7 @@ This sample shows how to call Put with required parameters.
 <code><![CDATA[
 var client = new ValueTypesClient().GetCollectionsModelClient("1.0.0");
 
-var body = new CollectionsModelProperty(new InnerModel[] 
+var body = new CollectionsModelProperty(new InnerModel[]
 {
     new InnerModel("<property>")
 });
@@ -89,7 +89,7 @@ var data = new {
     },
 };
 
-Response response = await client.PutAsync(RequestContent.Create(data));
+Response response = await client.PutAsync(RequestContent.Create(data)).ConfigureAwait(false);
 Console.WriteLine(response.Status);
 ]]></code>
 </example>

@@ -7,7 +7,7 @@ This sample shows how to call GetAllAsync.
 <code><![CDATA[
 var client = new OptionalClient().GetRequiredAndOptionalClient("1.0.0");
 
-var result = await client.GetAllAsync();
+var result = await client.GetAllAsync().ConfigureAwait(false);
 ]]></code>
 </example>
     </member>
@@ -27,7 +27,7 @@ This sample shows how to call GetAllAsync with required parameters and parse the
 <code><![CDATA[
 var client = new OptionalClient().GetRequiredAndOptionalClient("1.0.0");
 
-Response response = await client.GetAllAsync(new RequestContext());
+Response response = await client.GetAllAsync(new RequestContext()).ConfigureAwait(false);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("optionalProperty").ToString());
@@ -55,7 +55,7 @@ This sample shows how to call GetRequiredOnlyAsync.
 <code><![CDATA[
 var client = new OptionalClient().GetRequiredAndOptionalClient("1.0.0");
 
-var result = await client.GetRequiredOnlyAsync();
+var result = await client.GetRequiredOnlyAsync().ConfigureAwait(false);
 ]]></code>
 </example>
     </member>
@@ -75,7 +75,7 @@ This sample shows how to call GetRequiredOnlyAsync with required parameters and 
 <code><![CDATA[
 var client = new OptionalClient().GetRequiredAndOptionalClient("1.0.0");
 
-Response response = await client.GetRequiredOnlyAsync(new RequestContext());
+Response response = await client.GetRequiredOnlyAsync(new RequestContext()).ConfigureAwait(false);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("optionalProperty").ToString());
@@ -107,7 +107,7 @@ var body = new RequiredAndOptionalProperty(1234)
 {
     OptionalProperty = "<OptionalProperty>",
 };
-var result = await client.PutAllAsync(body);
+var result = await client.PutAllAsync(body).ConfigureAwait(false);
 ]]></code>
 </example>
     </member>
@@ -135,7 +135,7 @@ var data = new {
     requiredProperty = 1234,
 };
 
-Response response = await client.PutAllAsync(RequestContent.Create(data));
+Response response = await client.PutAllAsync(RequestContent.Create(data)).ConfigureAwait(false);
 Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call PutAllAsync with all request content.
@@ -147,7 +147,7 @@ var data = new {
     requiredProperty = 1234,
 };
 
-Response response = await client.PutAllAsync(RequestContent.Create(data));
+Response response = await client.PutAllAsync(RequestContent.Create(data)).ConfigureAwait(false);
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
@@ -189,7 +189,7 @@ var body = new RequiredAndOptionalProperty(1234)
 {
     OptionalProperty = "<OptionalProperty>",
 };
-var result = await client.PutRequiredOnlyAsync(body);
+var result = await client.PutRequiredOnlyAsync(body).ConfigureAwait(false);
 ]]></code>
 </example>
     </member>
@@ -217,7 +217,7 @@ var data = new {
     requiredProperty = 1234,
 };
 
-Response response = await client.PutRequiredOnlyAsync(RequestContent.Create(data));
+Response response = await client.PutRequiredOnlyAsync(RequestContent.Create(data)).ConfigureAwait(false);
 Console.WriteLine(response.Status);
 ]]></code>
 This sample shows how to call PutRequiredOnlyAsync with all request content.
@@ -229,7 +229,7 @@ var data = new {
     requiredProperty = 1234,
 };
 
-Response response = await client.PutRequiredOnlyAsync(RequestContent.Create(data));
+Response response = await client.PutRequiredOnlyAsync(RequestContent.Create(data)).ConfigureAwait(false);
 Console.WriteLine(response.Status);
 ]]></code>
 </example>

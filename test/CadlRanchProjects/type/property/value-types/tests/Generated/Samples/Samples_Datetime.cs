@@ -6,13 +6,10 @@
 #nullable disable
 
 using System;
-using System.Collections.Generic;
-using System.IO;
 using System.Text.Json;
 using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
-using Azure.Identity;
 using NUnit.Framework;
 using _Type.Property.ValueTypes.Models;
 
@@ -50,7 +47,7 @@ namespace _Type.Property.ValueTypes.Samples
         {
             var client = new ValueTypesClient().GetDatetimeClient("1.0.0");
 
-            Response response = await client.GetDatetimeAsync(new RequestContext());
+            Response response = await client.GetDatetimeAsync(new RequestContext()).ConfigureAwait(false);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("property").ToString());
@@ -62,7 +59,7 @@ namespace _Type.Property.ValueTypes.Samples
         {
             var client = new ValueTypesClient().GetDatetimeClient("1.0.0");
 
-            Response response = await client.GetDatetimeAsync(new RequestContext());
+            Response response = await client.GetDatetimeAsync(new RequestContext()).ConfigureAwait(false);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("property").ToString());
@@ -74,7 +71,7 @@ namespace _Type.Property.ValueTypes.Samples
         {
             var client = new ValueTypesClient().GetDatetimeClient("1.0.0");
 
-            var result = await client.GetDatetimeAsync();
+            var result = await client.GetDatetimeAsync().ConfigureAwait(false);
         }
 
         [Test]
@@ -85,7 +82,7 @@ namespace _Type.Property.ValueTypes.Samples
 
             var data = new
             {
-                property = "2022-05-10T14:57:31.2311892-04:00",
+                property = "2022-05-10T14:14:57.0310000Z",
             };
 
             Response response = client.Put(RequestContent.Create(data));
@@ -100,7 +97,7 @@ namespace _Type.Property.ValueTypes.Samples
 
             var data = new
             {
-                property = "2022-05-10T14:57:31.2311892-04:00",
+                property = "2022-05-10T14:14:57.0310000Z",
             };
 
             Response response = client.Put(RequestContent.Create(data));
@@ -115,10 +112,10 @@ namespace _Type.Property.ValueTypes.Samples
 
             var data = new
             {
-                property = "2022-05-10T14:57:31.2311892-04:00",
+                property = "2022-05-10T14:14:57.0310000Z",
             };
 
-            Response response = await client.PutAsync(RequestContent.Create(data));
+            Response response = await client.PutAsync(RequestContent.Create(data)).ConfigureAwait(false);
             Console.WriteLine(response.Status);
         }
 
@@ -130,10 +127,10 @@ namespace _Type.Property.ValueTypes.Samples
 
             var data = new
             {
-                property = "2022-05-10T14:57:31.2311892-04:00",
+                property = "2022-05-10T14:14:57.0310000Z",
             };
 
-            Response response = await client.PutAsync(RequestContent.Create(data));
+            Response response = await client.PutAsync(RequestContent.Create(data)).ConfigureAwait(false);
             Console.WriteLine(response.Status);
         }
 
@@ -144,7 +141,7 @@ namespace _Type.Property.ValueTypes.Samples
             var client = new ValueTypesClient().GetDatetimeClient("1.0.0");
 
             var body = new DatetimeProperty(DateTimeOffset.UtcNow);
-            var result = await client.PutAsync(body);
+            var result = await client.PutAsync(body).ConfigureAwait(false);
         }
     }
 }

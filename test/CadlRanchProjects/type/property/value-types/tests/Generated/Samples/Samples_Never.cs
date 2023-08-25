@@ -6,13 +6,10 @@
 #nullable disable
 
 using System;
-using System.Collections.Generic;
-using System.IO;
 using System.Text.Json;
 using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
-using Azure.Identity;
 using NUnit.Framework;
 using _Type.Property.ValueTypes.Models;
 
@@ -70,7 +67,7 @@ namespace _Type.Property.ValueTypes.Samples
         {
             var client = new ValueTypesClient().GetNeverClient("1.0.0");
 
-            var result = await client.GetNeverAsync();
+            var result = await client.GetNeverAsync().ConfigureAwait(false);
         }
 
         [Test]
@@ -105,7 +102,7 @@ namespace _Type.Property.ValueTypes.Samples
 
             var data = new { };
 
-            Response response = await client.PutAsync(RequestContent.Create(data));
+            Response response = await client.PutAsync(RequestContent.Create(data)).ConfigureAwait(false);
             Console.WriteLine(response.Status);
         }
 
@@ -117,7 +114,7 @@ namespace _Type.Property.ValueTypes.Samples
 
             var data = new { };
 
-            Response response = await client.PutAsync(RequestContent.Create(data));
+            Response response = await client.PutAsync(RequestContent.Create(data)).ConfigureAwait(false);
             Console.WriteLine(response.Status);
         }
 
@@ -128,7 +125,7 @@ namespace _Type.Property.ValueTypes.Samples
             var client = new ValueTypesClient().GetNeverClient("1.0.0");
 
             var body = new NeverProperty();
-            var result = await client.PutAsync(body);
+            var result = await client.PutAsync(body).ConfigureAwait(false);
         }
     }
 }
