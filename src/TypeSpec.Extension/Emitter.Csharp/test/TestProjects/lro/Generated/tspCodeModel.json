@@ -149,18 +149,21 @@
        "Type": {
         "$id": "20",
         "Name": "Literal",
-        "LiteralValueType": {
+        "Value": {
          "$id": "21",
-         "Name": "String",
-         "Kind": "String",
-         "IsNullable": false
+         "Type": {
+          "$id": "22",
+          "Name": "String",
+          "Kind": "String",
+          "IsNullable": false
+         },
+         "Value": "application/merge-patch+json"
         },
-        "Value": "application/merge-patch+json",
         "IsNullable": false
        },
        "Location": "Header",
        "DefaultValue": {
-        "$id": "22",
+        "$id": "23",
         "Type": {
          "$ref": "20"
         },
@@ -176,7 +179,7 @@
        "Kind": "Constant"
       },
       {
-       "$id": "23",
+       "$id": "24",
        "Name": "resource",
        "NameInRequest": "resource",
        "Description": "The resource instance.",
@@ -194,11 +197,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "24",
+       "$id": "25",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "25",
+        "$id": "26",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -213,9 +216,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "26",
+        "$id": "27",
         "Type": {
-         "$ref": "25"
+         "$ref": "26"
         },
         "Value": "application/json"
        }
@@ -223,7 +226,7 @@
      ],
      "Responses": [
       {
-       "$id": "27",
+       "$id": "28",
        "StatusCodes": [
         200
        ],
@@ -233,12 +236,12 @@
        "BodyMediaType": "Json",
        "Headers": [
         {
-         "$id": "28",
+         "$id": "29",
          "Name": "Operation-Location",
          "NameInResponse": "operationLocation",
          "Description": "The location for monitoring the operation state.",
          "Type": {
-          "$id": "29",
+          "$id": "30",
           "Name": "ResourceLocation",
           "Kind": "Uri",
           "IsNullable": false
@@ -248,7 +251,7 @@
        "IsErrorResponse": false
       },
       {
-       "$id": "30",
+       "$id": "31",
        "StatusCodes": [
         201
        ],
@@ -258,12 +261,12 @@
        "BodyMediaType": "Json",
        "Headers": [
         {
-         "$id": "31",
+         "$id": "32",
          "Name": "Operation-Location",
          "NameInResponse": "operationLocation",
          "Description": "The location for monitoring the operation state.",
          "Type": {
-          "$id": "32",
+          "$id": "33",
           "Name": "ResourceLocation",
           "Kind": "Uri",
           "IsNullable": false
@@ -286,7 +289,7 @@
     }
    ],
    "Protocol": {
-    "$id": "33"
+    "$id": "34"
    },
    "Creatable": true
   }

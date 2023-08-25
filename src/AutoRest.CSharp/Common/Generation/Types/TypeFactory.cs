@@ -34,7 +34,7 @@ namespace AutoRest.CSharp.Generation.Types
 
         public CSharpType CreateType(InputType inputType) => inputType switch
         {
-            InputLiteralType literalType       => CreateType(literalType.LiteralValueType),
+            InputLiteralType literalType       => CreateType(literalType.Value.Type),
             InputUnionType unionType           => new CSharpType(typeof(object), unionType.IsNullable),
             InputListType listType             => new CSharpType(typeof(IList<>), listType.IsNullable, CreateType(listType.ElementType)),
             InputDictionaryType dictionaryType => new CSharpType(typeof(IDictionary<,>), inputType.IsNullable, typeof(string), CreateType(dictionaryType.ValueType)),

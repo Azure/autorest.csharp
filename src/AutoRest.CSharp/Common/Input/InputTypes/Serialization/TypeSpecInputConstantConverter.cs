@@ -110,7 +110,7 @@ namespace AutoRest.CSharp.Common.Input
                     }
                     break;
                 case InputLiteralType literalType:
-                    value = literalType.Value;
+                    value = literalType.Value.Value ?? throw new JsonException($"Value is not defined for {nameof(InputLiteralType)} of {propertyName}");
                     break;
                 case InputModelType model:
                     throw new JsonException($"Not supported type: InputModelType");

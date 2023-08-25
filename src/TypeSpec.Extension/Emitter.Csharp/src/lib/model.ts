@@ -73,6 +73,7 @@ import {
 import { capitalize, getModelName, getNameForTemplate } from "./utils.js";
 import { FormattedType } from "../type/formattedType.js";
 import { LiteralTypeContext } from "../type/literalTypeContext.js";
+import { InputConstant } from "../type/inputConstant.js";
 /**
  * Map calType to csharp InputTypeKind
  */
@@ -390,8 +391,10 @@ export function getInputType(
 
         return {
             Name: "Literal",
-            LiteralValueType: newValueType,
-            Value: literalValue,
+            Value: {
+                Type: newValueType,
+                Value: literalValue
+            } as InputConstant,
             IsNullable: false
         } as InputLiteralType;
 
@@ -902,7 +905,7 @@ export function getUsages(
                 if (!isInputLiteralType(type)) continue;
                 // now type should be a literal type
                 // find its corresponding enum type
-                const literalValueType = type.LiteralValueType;
+                const literalValueType = type.Value.Type;
                 if (!isInputEnumType(literalValueType)) continue;
                 // now literalValueType should be an enum type
                 // apply the usage on this model to the usagesMap

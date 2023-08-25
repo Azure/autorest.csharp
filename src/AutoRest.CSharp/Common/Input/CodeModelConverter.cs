@@ -414,7 +414,7 @@ namespace AutoRest.CSharp.Common.Input
                 _ => rawValue
             };
 
-            return new InputLiteralType("Literal", valueType, normalizedValue, false);
+            return new InputLiteralType(new InputConstant(normalizedValue, valueType), false);
         }
 
         public static InputEnumType CreateEnumType(Schema schema, PrimitiveSchema choiceType, IEnumerable<ChoiceValue> choices, bool isExtensible) => new(

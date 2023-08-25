@@ -12,7 +12,6 @@ namespace AutoRest.CSharp.Common.Input
     {
         private const string InputTypeName = nameof(InputType.Name);
         private const string PrimitiveTypeKind = nameof(InputPrimitiveType.Kind);
-        private const string LiteralValueType = nameof(InputLiteralType.LiteralValueType);
         private const string ListElementType = nameof(InputListType.ElementType);
         private const string DictionaryKeyType = nameof(InputDictionaryType.KeyType);
         private const string DictionaryValueType = nameof(InputDictionaryType.ValueType);
@@ -73,9 +72,9 @@ namespace AutoRest.CSharp.Common.Input
             DictionaryValueType => TypeSpecInputDictionaryTypeConverter.CreateDictionaryType(ref reader, id, name, options),
             EnumValueType       => TypeSpecInputEnumTypeConverter.CreateEnumType(ref reader, id, name, options, _referenceHandler.CurrentResolver),
             EnumAllowedValues   => TypeSpecInputEnumTypeConverter.CreateEnumType(ref reader, id, name, options, _referenceHandler.CurrentResolver),
-            LiteralValueType    => TypeSpecInputLiteralTypeConverter.CreateInputLiteralType(ref reader, id, name, options, _referenceHandler.CurrentResolver),
             UnionItemTypes      => TypeSpecInputUnionTypeConverter.CreateInputUnionType(ref reader, id, name, options, _referenceHandler.CurrentResolver),
             "" or null          => throw new JsonException("Property name can't be null or empty"),
+            _ when name == InputLiteralType.InputLiteralTypeName => TypeSpecInputLiteralTypeConverter.CreateInputLiteralType(ref reader, id, name, options, _referenceHandler.CurrentResolver),
             _                   => TypeSpecInputModelTypeConverter.CreateModelType(ref reader, id, name, options, _referenceHandler.CurrentResolver)
         };
 

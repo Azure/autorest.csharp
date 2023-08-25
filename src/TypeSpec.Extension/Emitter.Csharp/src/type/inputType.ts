@@ -1,6 +1,7 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
+import { InputConstant } from "./inputConstant.js";
 import { InputEnumTypeValue } from "./inputEnumTypeValue.js";
 import { InputModelProperty } from "./inputModelProperty.js";
 import { InputTypeKind } from "./inputTypeKind.js";
@@ -16,14 +17,13 @@ export interface InputPrimitiveType extends InputType {
 
 export interface InputLiteralType extends InputType {
     Name: "Literal";
-    LiteralValueType: InputType;
-    Value: any;
+    Value: InputConstant;
 }
 
 export function isInputLiteralType(type: InputType): type is InputLiteralType {
     return (
         type.Name === "Literal" &&
-        (type as InputLiteralType).LiteralValueType !== undefined
+        (type as InputLiteralType).Value.Type !== undefined
     );
 }
 

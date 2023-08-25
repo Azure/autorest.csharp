@@ -844,7 +844,7 @@ namespace AutoRest.CSharp.Generation.Writers
 
         private static string ComposeRequestContentForLiteral(InputLiteralType literalType)
         {
-            var kind = literalType.LiteralValueType switch
+            var kind = literalType.Value.Type switch
             {
                 InputPrimitiveType primivateType => primivateType.Kind,
                 InputEnumType enumType => enumType.EnumValueType.Kind,
@@ -852,9 +852,9 @@ namespace AutoRest.CSharp.Generation.Writers
             };
             return kind switch
             {
-                InputTypeKind.String => $"\"{literalType.Value}\"",
-                InputTypeKind.Boolean => (bool)literalType.Value ? "true" : "false",
-                _ => literalType.Value.ToString()!, // this branch we could get "int", "float". Calling ToString here will get the literal value of it without the quote.
+                InputTypeKind.String => $"\"{literalType.Value.Value}\"",
+                InputTypeKind.Boolean => (bool)literalType.Value.Value! ? "true" : "false",
+                _ => literalType.Value.Value!.ToString()!, // this branch we could get "int", "float". Calling ToString here will get the literal value of it without the quote.
             };
         }
 

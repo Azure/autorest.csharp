@@ -152,7 +152,7 @@ export function loadOperation(
         } else if (isInputUnionType(contentTypeParameter.Type)) {
             const mediaTypeValues =
                 contentTypeParameter.Type.UnionItemTypes.map((item) =>
-                    isInputLiteralType(item) ? item.Value : undefined
+                    isInputLiteralType(item) ? item.Value.Value : undefined
                 );
             if (mediaTypeValues.some((item) => item === undefined)) {
                 throw "Media type of content type should be string.";

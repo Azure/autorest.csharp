@@ -311,18 +311,21 @@
        "Type": {
         "$id": "41",
         "Name": "Literal",
-        "LiteralValueType": {
+        "Value": {
          "$id": "42",
-         "Name": "String",
-         "Kind": "String",
-         "IsNullable": false
+         "Type": {
+          "$id": "43",
+          "Name": "String",
+          "Kind": "String",
+          "IsNullable": false
+         },
+         "Value": "application/merge-patch+json"
         },
-        "Value": "application/merge-patch+json",
         "IsNullable": false
        },
        "Location": "Header",
        "DefaultValue": {
-        "$id": "43",
+        "$id": "44",
         "Type": {
          "$ref": "41"
         },
@@ -338,7 +341,7 @@
        "Kind": "Constant"
       },
       {
-       "$id": "44",
+       "$id": "45",
        "Name": "resource",
        "NameInRequest": "resource",
        "Description": "The resource instance.",
@@ -356,11 +359,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "45",
+       "$id": "46",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "46",
+        "$id": "47",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -375,9 +378,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "47",
+        "$id": "48",
         "Type": {
-         "$ref": "46"
+         "$ref": "47"
         },
         "Value": "application/json"
        }
@@ -385,7 +388,7 @@
      ],
      "Responses": [
       {
-       "$id": "48",
+       "$id": "49",
        "StatusCodes": [
         200
        ],
@@ -397,7 +400,7 @@
        "IsErrorResponse": false
       },
       {
-       "$id": "49",
+       "$id": "50",
        "StatusCodes": [
         201
        ],
@@ -421,7 +424,7 @@
      "GenerateConvenienceMethod": false
     },
     {
-     "$id": "50",
+     "$id": "51",
      "Name": "createOrReplace",
      "ResourceName": "User",
      "Summary": "Adds a user or replaces a user's fields.",
@@ -434,12 +437,12 @@
        "$ref": "34"
       },
       {
-       "$id": "51",
+       "$id": "52",
        "Name": "id",
        "NameInRequest": "id",
        "Description": "The user's id.",
        "Type": {
-        "$id": "52",
+        "$id": "53",
         "Name": "int32",
         "Kind": "Int32",
         "IsNullable": false
@@ -455,7 +458,7 @@
        "Kind": "Method"
       },
       {
-       "$id": "53",
+       "$id": "54",
        "Name": "resource",
        "NameInRequest": "resource",
        "Description": "The resource instance.",
@@ -473,11 +476,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "54",
+       "$id": "55",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Type": {
-        "$id": "55",
+        "$id": "56",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -492,19 +495,19 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "56",
+        "$id": "57",
         "Type": {
-         "$ref": "55"
+         "$ref": "56"
         },
         "Value": "application/json"
        }
       },
       {
-       "$id": "57",
+       "$id": "58",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "58",
+        "$id": "59",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -519,9 +522,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "59",
+        "$id": "60",
         "Type": {
-         "$ref": "58"
+         "$ref": "59"
         },
         "Value": "application/json"
        }
@@ -529,7 +532,7 @@
      ],
      "Responses": [
       {
-       "$id": "60",
+       "$id": "61",
        "StatusCodes": [
         200
        ],
@@ -541,7 +544,7 @@
        "IsErrorResponse": false
       },
       {
-       "$id": "61",
+       "$id": "62",
        "StatusCodes": [
         201
        ],
@@ -565,7 +568,7 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "62",
+     "$id": "63",
      "Name": "get",
      "ResourceName": "User",
      "Summary": "Gets a user.",
@@ -578,12 +581,12 @@
        "$ref": "34"
       },
       {
-       "$id": "63",
+       "$id": "64",
        "Name": "id",
        "NameInRequest": "id",
        "Description": "The user's id.",
        "Type": {
-        "$id": "64",
+        "$id": "65",
         "Name": "int32",
         "Kind": "Int32",
         "IsNullable": false
@@ -599,11 +602,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "65",
+       "$id": "66",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "66",
+        "$id": "67",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -618,9 +621,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "67",
+        "$id": "68",
         "Type": {
-         "$ref": "66"
+         "$ref": "67"
         },
         "Value": "application/json"
        }
@@ -628,7 +631,7 @@
      ],
      "Responses": [
       {
-       "$id": "68",
+       "$id": "69",
        "StatusCodes": [
         200
        ],
@@ -649,7 +652,7 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "69",
+     "$id": "70",
      "Name": "list",
      "ResourceName": "User",
      "Summary": "Lists all users.",
@@ -662,12 +665,12 @@
        "$ref": "34"
       },
       {
-       "$id": "70",
+       "$id": "71",
        "Name": "top",
        "NameInRequest": "top",
        "Description": "The number of result items to return.",
        "Type": {
-        "$id": "71",
+        "$id": "72",
         "Name": "int32",
         "Kind": "Int32",
         "IsNullable": false
@@ -683,12 +686,12 @@
        "Kind": "Method"
       },
       {
-       "$id": "72",
+       "$id": "73",
        "Name": "skip",
        "NameInRequest": "skip",
        "Description": "The number of result items to skip.",
        "Type": {
-        "$id": "73",
+        "$id": "74",
         "Name": "int32",
         "Kind": "Int32",
         "IsNullable": false
@@ -704,12 +707,12 @@
        "Kind": "Method"
       },
       {
-       "$id": "74",
+       "$id": "75",
        "Name": "maxpagesize",
        "NameInRequest": "maxpagesize",
        "Description": "The maximum number of result items per page.",
        "Type": {
-        "$id": "75",
+        "$id": "76",
         "Name": "int32",
         "Kind": "Int32",
         "IsNullable": false
@@ -725,15 +728,15 @@
        "Kind": "Method"
       },
       {
-       "$id": "76",
+       "$id": "77",
        "Name": "orderby",
        "NameInRequest": "orderby",
        "Description": "Expressions that specify the order of returned results.",
        "Type": {
-        "$id": "77",
+        "$id": "78",
         "Name": "Array",
         "ElementType": {
-         "$id": "78",
+         "$id": "79",
          "Name": "string",
          "Kind": "String",
          "IsNullable": false
@@ -751,12 +754,12 @@
        "Kind": "Method"
       },
       {
-       "$id": "79",
+       "$id": "80",
        "Name": "filter",
        "NameInRequest": "filter",
        "Description": "Filter the result list using the given expression.",
        "Type": {
-        "$id": "80",
+        "$id": "81",
         "Name": "string",
         "Kind": "String",
         "IsNullable": false
@@ -772,15 +775,15 @@
        "Kind": "Method"
       },
       {
-       "$id": "81",
+       "$id": "82",
        "Name": "select",
        "NameInRequest": "select",
        "Description": "Select the specified fields to be included in the response.",
        "Type": {
-        "$id": "82",
+        "$id": "83",
         "Name": "Array",
         "ElementType": {
-         "$id": "83",
+         "$id": "84",
          "Name": "string",
          "Kind": "String",
          "IsNullable": false
@@ -798,15 +801,15 @@
        "Kind": "Method"
       },
       {
-       "$id": "84",
+       "$id": "85",
        "Name": "expand",
        "NameInRequest": "expand",
        "Description": "Expand the indicated resources into the response.",
        "Type": {
-        "$id": "85",
+        "$id": "86",
         "Name": "Array",
         "ElementType": {
-         "$id": "86",
+         "$id": "87",
          "Name": "string",
          "Kind": "String",
          "IsNullable": false
@@ -824,11 +827,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "87",
+       "$id": "88",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "88",
+        "$id": "89",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -843,9 +846,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "89",
+        "$id": "90",
         "Type": {
-         "$ref": "88"
+         "$ref": "89"
         },
         "Value": "application/json"
        }
@@ -853,7 +856,7 @@
      ],
      "Responses": [
       {
-       "$id": "90",
+       "$id": "91",
        "StatusCodes": [
         200
        ],
@@ -871,7 +874,7 @@
      "Path": "/azure/core/basic/users",
      "BufferResponse": true,
      "Paging": {
-      "$id": "91",
+      "$id": "92",
       "NextLinkName": "nextLink",
       "ItemName": "value"
      },
@@ -879,7 +882,7 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "92",
+     "$id": "93",
      "Name": "listWithPage",
      "ResourceName": "Basic",
      "Description": "List with Azure.Core.Page<>.",
@@ -891,11 +894,11 @@
        "$ref": "34"
       },
       {
-       "$id": "93",
+       "$id": "94",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "94",
+        "$id": "95",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -910,9 +913,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "95",
+        "$id": "96",
         "Type": {
-         "$ref": "94"
+         "$ref": "95"
         },
         "Value": "application/json"
        }
@@ -920,7 +923,7 @@
      ],
      "Responses": [
       {
-       "$id": "96",
+       "$id": "97",
        "StatusCodes": [
         200
        ],
@@ -938,7 +941,7 @@
      "Path": "/azure/core/basic/page",
      "BufferResponse": true,
      "Paging": {
-      "$id": "97",
+      "$id": "98",
       "NextLinkName": "nextLink",
       "ItemName": "value"
      },
@@ -946,7 +949,7 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "98",
+     "$id": "99",
      "Name": "listWithCustomPageModel",
      "ResourceName": "Basic",
      "Description": "List with custom page model.",
@@ -958,11 +961,11 @@
        "$ref": "34"
       },
       {
-       "$id": "99",
+       "$id": "100",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "100",
+        "$id": "101",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -977,9 +980,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "101",
+        "$id": "102",
         "Type": {
-         "$ref": "100"
+         "$ref": "101"
         },
         "Value": "application/json"
        }
@@ -987,7 +990,7 @@
      ],
      "Responses": [
       {
-       "$id": "102",
+       "$id": "103",
        "StatusCodes": [
         200
        ],
@@ -1005,7 +1008,7 @@
      "Path": "/azure/core/basic/custom-page",
      "BufferResponse": true,
      "Paging": {
-      "$id": "103",
+      "$id": "104",
       "NextLinkName": "nextLink",
       "ItemName": "items"
      },
@@ -1013,7 +1016,7 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "104",
+     "$id": "105",
      "Name": "delete",
      "ResourceName": "User",
      "Summary": "Deletes a user.",
@@ -1026,12 +1029,12 @@
        "$ref": "34"
       },
       {
-       "$id": "105",
+       "$id": "106",
        "Name": "id",
        "NameInRequest": "id",
        "Description": "The user's id.",
        "Type": {
-        "$id": "106",
+        "$id": "107",
         "Name": "int32",
         "Kind": "Int32",
         "IsNullable": false
@@ -1047,11 +1050,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "107",
+       "$id": "108",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "108",
+        "$id": "109",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -1066,9 +1069,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "109",
+        "$id": "110",
         "Type": {
-         "$ref": "108"
+         "$ref": "109"
         },
         "Value": "application/json"
        }
@@ -1076,7 +1079,7 @@
      ],
      "Responses": [
       {
-       "$id": "110",
+       "$id": "111",
        "StatusCodes": [
         204
        ],
@@ -1094,7 +1097,7 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "111",
+     "$id": "112",
      "Name": "export",
      "ResourceName": "Basic",
      "Summary": "Exports a user.",
@@ -1107,12 +1110,12 @@
        "$ref": "34"
       },
       {
-       "$id": "112",
+       "$id": "113",
        "Name": "id",
        "NameInRequest": "id",
        "Description": "The user's id.",
        "Type": {
-        "$id": "113",
+        "$id": "114",
         "Name": "int32",
         "Kind": "Int32",
         "IsNullable": false
@@ -1128,12 +1131,12 @@
        "Kind": "Method"
       },
       {
-       "$id": "114",
+       "$id": "115",
        "Name": "format",
        "NameInRequest": "format",
        "Description": "The format of the data.",
        "Type": {
-        "$id": "115",
+        "$id": "116",
         "Name": "string",
         "Kind": "String",
         "IsNullable": false
@@ -1149,11 +1152,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "116",
+       "$id": "117",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "117",
+        "$id": "118",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -1168,9 +1171,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "118",
+        "$id": "119",
         "Type": {
-         "$ref": "117"
+         "$ref": "118"
         },
         "Value": "application/json"
        }
@@ -1178,7 +1181,7 @@
      ],
      "Responses": [
       {
-       "$id": "119",
+       "$id": "120",
        "StatusCodes": [
         200
        ],
@@ -1200,7 +1203,7 @@
     }
    ],
    "Protocol": {
-    "$id": "120"
+    "$id": "121"
    },
    "Creatable": true
   }

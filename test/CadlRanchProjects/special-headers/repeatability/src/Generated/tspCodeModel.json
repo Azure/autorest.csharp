@@ -169,25 +169,31 @@
            {
             "$id": "22",
             "Name": "Literal",
-            "LiteralValueType": {
+            "Value": {
              "$id": "23",
-             "Name": "String",
-             "Kind": "String",
-             "IsNullable": false
+             "Type": {
+              "$id": "24",
+              "Name": "String",
+              "Kind": "String",
+              "IsNullable": false
+             },
+             "Value": "accepted"
             },
-            "Value": "accepted",
             "IsNullable": false
            },
            {
-            "$id": "24",
+            "$id": "25",
             "Name": "Literal",
-            "LiteralValueType": {
-             "$id": "25",
-             "Name": "String",
-             "Kind": "String",
-             "IsNullable": false
+            "Value": {
+             "$id": "26",
+             "Type": {
+              "$id": "27",
+              "Name": "String",
+              "Kind": "String",
+              "IsNullable": false
+             },
+             "Value": "rejected"
             },
-            "Value": "rejected",
             "IsNullable": false
            }
           ],
@@ -208,7 +214,7 @@
     }
    ],
    "Protocol": {
-    "$id": "26"
+    "$id": "28"
    },
    "Creatable": true
   }

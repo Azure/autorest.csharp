@@ -164,7 +164,7 @@ namespace AutoRest.CSharp.Output.Models
         private static ConvenienceMethodConfidenceLevel WalkLiteralType(InputLiteralType literalType, TypeFactory typeFactory)
         {
             // a literal type is not confident, when we wrap it wiht a number-valued enum without proper names for its enum value items
-            if (literalType.LiteralValueType is not InputEnumType inputEnumType)
+            if (literalType.Value.Type is not InputEnumType inputEnumType)
                 return ConvenienceMethodConfidenceLevel.Confident;
 
             var isConfident = true;

@@ -233,18 +233,21 @@
        "Type": {
         "$id": "27",
         "Name": "Literal",
-        "LiteralValueType": {
+        "Value": {
          "$id": "28",
-         "Name": "String",
-         "Kind": "String",
-         "IsNullable": false
+         "Type": {
+          "$id": "29",
+          "Name": "String",
+          "Kind": "String",
+          "IsNullable": false
+         },
+         "Value": "text/plain"
         },
-        "Value": "text/plain",
         "IsNullable": false
        },
        "Location": "Header",
        "DefaultValue": {
-        "$id": "29",
+        "$id": "30",
         "Type": {
          "$ref": "27"
         },
@@ -260,7 +263,7 @@
        "Kind": "Constant"
       },
       {
-       "$id": "30",
+       "$id": "31",
        "Name": "body",
        "NameInRequest": "body",
        "Type": {
@@ -277,11 +280,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "31",
+       "$id": "32",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "32",
+        "$id": "33",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -296,9 +299,9 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "33",
+        "$id": "34",
         "Type": {
-         "$ref": "32"
+         "$ref": "33"
         },
         "Value": "application/json"
        }
@@ -309,7 +312,7 @@
      ],
      "Responses": [
       {
-       "$id": "34",
+       "$id": "35",
        "StatusCodes": [
         204
        ],
@@ -331,7 +334,7 @@
     }
    ],
    "Protocol": {
-    "$id": "35"
+    "$id": "36"
    },
    "Creatable": true
   }

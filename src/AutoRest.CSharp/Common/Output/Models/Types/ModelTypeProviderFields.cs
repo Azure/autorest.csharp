@@ -261,8 +261,8 @@ namespace AutoRest.CSharp.Output.Models.Types
                 return null;
             }
 
-            var constant = literalType.Value != null ?
-                        BuilderHelpers.ParseConstant(literalType.Value, propertyType) :
+            var constant = literalType.Value.Value != null ?
+                        BuilderHelpers.ParseConstant(literalType.Value.Value, propertyType) :
                         Constant.NewInstanceOf(propertyType);
 
             return constant.GetConstantFormattable();
