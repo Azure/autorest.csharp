@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using AutoRest.CSharp.Generation.Types;
 using AutoRest.CSharp.Mgmt.AutoRest;
 using AutoRest.CSharp.Output.Models.Shared;
+using AutoRest.CSharp.Output.Models.Types;
 using AutoRest.CSharp.Utilities;
 using Microsoft.CodeAnalysis;
 
@@ -26,9 +27,8 @@ namespace AutoRest.CSharp.Output.Models
             }
             var methods = typeSymbol!.GetMembers().OfType<IMethodSymbol>();
             foreach (var method in methods)
-            {
-                var typeFactory = new TypeFactory(MgmtContext.Library);
-                if (typeFactory.TryCreateType(method.ReturnType, out var returnType))
+            {;
+                if (MgmtContext.TypeFactory.TryCreateType(method.ReturnType, out var returnType))
                 {
                     // TODO: handle missing parameter type from MgmtOutputLibrary
                     var parameters = new List<Parameter>();

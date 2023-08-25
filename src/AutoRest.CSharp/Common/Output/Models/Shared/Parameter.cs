@@ -40,9 +40,8 @@ namespace AutoRest.CSharp.Output.Models.Shared
 
         public static Parameter? FromParameterSymbol(IParameterSymbol parameterSymbol)
         {
-            var typeFactory = new TypeFactory(MgmtContext.Library);
             var parameterName = parameterSymbol.Name;
-            if (typeFactory.TryCreateType(parameterSymbol.Type, out var parameterType))
+            if (MgmtContext.TypeFactory.TryCreateType(parameterSymbol.Type, out var parameterType))
             {
                 return new Parameter(parameterName, null, parameterType);
             }
