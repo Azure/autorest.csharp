@@ -209,7 +209,7 @@ namespace AutoRest.CSharp.Mgmt.Models
 
             try
             {
-                return finalSchema.Type == AllSchemaTypes.Object ? MgmtContext.Library.FindTypeForSchema(finalSchema) : new TypeFactory(MgmtContext.Library).CreateType(finalSchema, false);
+                return finalSchema.Type == AllSchemaTypes.Object ? MgmtContext.Library.FindTypeForSchema(finalSchema) : MgmtContext.TypeFactory.CreateType(finalSchema, false);
             }
             catch (Exception ex)
             {
