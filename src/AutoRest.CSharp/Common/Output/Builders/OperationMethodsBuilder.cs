@@ -53,8 +53,7 @@ namespace AutoRest.CSharp.Output.Models
             }
             else if (ResponseType is { IsFrameworkType: false, Implementation: EnumType enumType})
             {
-                var value = EnumExpression.ToEnum(enumType, new StringExpression(response.Content.ToObjectFromJson(typeof(string))));
-                yield return Return(ResponseExpression.FromValue(value, response));
+                yield return Return(ResponseExpression.FromValue(EnumExpression.ToEnum(enumType, response.Content.ToObjectFromJson(typeof(string))), response));
             }
             else if (TypeFactory.IsCollectionType(ResponseType))
             {

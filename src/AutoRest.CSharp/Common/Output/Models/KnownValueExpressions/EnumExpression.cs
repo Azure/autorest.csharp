@@ -17,7 +17,7 @@ namespace AutoRest.CSharp.Common.Output.Models.KnownValueExpressions
                     : new StringExpression(new InvokeStaticMethodExpression(EnumType.Type, serializationMethod.Signature.Name, new[]{Untyped}, null, true))
                 : Untyped.InvokeToString();
 
-        public static ValueExpression ToEnum(EnumType enumType, StringExpression value)
+        public static ValueExpression ToEnum(EnumType enumType, ValueExpression value)
             => enumType.IsExtensible
                 ? Snippets.New.Instance(enumType.Type, value)
                 : new InvokeStaticMethodExpression(enumType.Type, $"To{enumType.Declaration.Name}", new[]{value}, null, true);
