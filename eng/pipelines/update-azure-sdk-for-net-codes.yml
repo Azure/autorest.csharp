@@ -29,7 +29,7 @@ jobs:
       - "!SessionRecords"
       Repositories:
       - Name: Azure/azure-sdk-for-net
-        Commitish: $[ resources.repositories.azure-sdk-for-net.ref ]
+        Commitish: $[resources.repositories.azure-sdk-for-net.ref]
         WorkingDirectory: $(Build.SourcesDirectory)/azure-sdk-for-net
       SkipCheckoutNone: true
   - task: UseDotNet@2

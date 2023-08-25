@@ -48,6 +48,8 @@ stages:
             displayName: "Install Node 18.x"
             inputs:
               versionSpec: '18.x'
+          - pwsh: |
+              Write-Host $[resources.repositories.azure-sdk-for-net.ref]
           - ${{ if eq(parameters.UseTypeSpecNext, 'true') }}:
             - pwsh: ./eng/UseTypeSpecNextVersions.ps1
               displayName: "Use 'next' TypeSpec dependencies"
