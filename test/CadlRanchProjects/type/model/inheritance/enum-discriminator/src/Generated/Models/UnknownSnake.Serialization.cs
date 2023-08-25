@@ -11,8 +11,18 @@ using Azure.Core;
 
 namespace _Type.Model.Inheritance.EnumDiscriminator.Models
 {
-    internal partial class UnknownSnake
+    internal partial class UnknownSnake : IUtf8JsonSerializable
     {
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
+        {
+            writer.WriteStartObject();
+            writer.WritePropertyName("kind"u8);
+            writer.WriteStringValue(Kind.ToSerialString());
+            writer.WritePropertyName("length"u8);
+            writer.WriteNumberValue(Length);
+            writer.WriteEndObject();
+        }
+
         internal static UnknownSnake DeserializeUnknownSnake(JsonElement element)
         {
             if (element.ValueKind == JsonValueKind.Null)
@@ -43,6 +53,14 @@ namespace _Type.Model.Inheritance.EnumDiscriminator.Models
         {
             using var document = JsonDocument.Parse(response.Content);
             return DeserializeUnknownSnake(document.RootElement);
+        }
+
+        /// <summary> Convert into a Utf8JsonRequestContent. </summary>
+        internal override RequestContent ToRequestContent()
+        {
+            var content = new Utf8JsonRequestContent();
+            content.JsonWriter.WriteObjectValue(this);
+            return content;
         }
     }
 }

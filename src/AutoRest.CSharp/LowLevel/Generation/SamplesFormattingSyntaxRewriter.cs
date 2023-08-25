@@ -42,7 +42,7 @@ namespace AutoRest.CSharp.Generation.Writers
 
         public override SyntaxNode? VisitAnonymousObjectCreationExpression(AnonymousObjectCreationExpressionSyntax node)
         {
-            var parentLeadingTrivia = GetParentLeadingTrivia(node);
+            var parentLeadingTrivia = GetPreviousLevelTrivia(node);
 
             node = node
                 .WithNewKeyword(node.NewKeyword.WithTrailingTrivia(SyntaxTriviaList.Empty))
@@ -83,7 +83,7 @@ namespace AutoRest.CSharp.Generation.Writers
                 return node;
             }
 
-            var parentLeadingTrivia = GetParentLeadingTrivia(node);
+            var parentLeadingTrivia = GetPreviousLevelTrivia(node);
             node = FixInitializerBeforeVisit(node, parentLeadingTrivia);
 
             return base.VisitInitializerExpression(node) is InitializerExpressionSyntax newNode
@@ -126,12 +126,14 @@ namespace AutoRest.CSharp.Generation.Writers
             return lines.GetLinePosition(fullSpan.Start).Line == lines.GetLinePosition(fullSpan.End).Line;
         }
 
-        private static SyntaxTriviaList GetParentLeadingTrivia(SyntaxNode node)
+        private static SyntaxTriviaList GetPreviousLevelTrivia(SyntaxNode node)
         {
             while (node.Parent != null)
             {
                 node = node.Parent;
                 switch (node) {
+                    case MethodDeclarationSyntax {Body.Statements.Count: > 0 } methodDeclaration:
+                        return methodDeclaration.Body.Statements.First().GetLeadingTrivia();
                     case AnonymousObjectCreationExpressionSyntax { Initializers.Count: > 0 } objectCreation:
                         return objectCreation.Initializers.First().GetLeadingTrivia();
                     case InitializerExpressionSyntax { Expressions.Count: > 0 } initializer:

@@ -373,10 +373,10 @@ namespace AutoRest.CSharp.Common.Output.Builders
                     return SerializableObjectTypeExpression.Deserialize(serializableObjectType, value);
 
                 case EnumType clientEnum when value is XElementExpression xe:
-                    return clientEnum.IsExtensible ? New.Instance(clientEnum.Type, xe.Value) : InvokeToEnum(clientEnum.Type, xe.Value);
+                    return EnumExpression.ToEnum(clientEnum, xe.Value);
 
                 case EnumType clientEnum when value is XAttributeExpression xa:
-                    return clientEnum.IsExtensible ? New.Instance(clientEnum.Type, xa.Value) : InvokeToEnum(clientEnum.Type, xa.Value);
+                    return EnumExpression.ToEnum(clientEnum, xa.Value);
 
                 default:
                     throw new NotSupportedException();

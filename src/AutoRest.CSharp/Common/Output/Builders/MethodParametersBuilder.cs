@@ -506,13 +506,12 @@ namespace AutoRest.CSharp.Output.Models
         {
             return fromTypeImplementation switch
             {
+                EnumType enumType           when toType.EqualsIgnoreNullable(typeof(RequestContent)) => BinaryDataExpression.FromObjectAsJson(new EnumExpression(enumType, fromExpression).ToSerial()),
                 EnumType enumType           when toType.EqualsIgnoreNullable(typeof(string)) => new EnumExpression(enumType, fromExpression).ToSerial(),
                 SerializableObjectType type when toType.EqualsIgnoreNullable(typeof(RequestContent)) => new SerializableObjectTypeExpression(type, fromExpression).ToRequestContent(),
                 _ => fromExpression
             };
         }
-
-
 
         private static IEnumerable<InputParameter> GetLegacySortedParameters(IEnumerable<InputParameter> inputParameters)
             => inputParameters.OrderByDescending(p => p is { IsRequired: true, DefaultValue: null });

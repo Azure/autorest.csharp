@@ -25,6 +25,9 @@ namespace AutoRest.CSharp.Common.Output.Models.KnownValueExpressions
         public static BinaryDataExpression FromBytes(ValueExpression data)
             => new(new InvokeStaticMethodExpression(typeof(BinaryData), nameof(BinaryData.FromBytes), new[]{data}));
 
+        public static BinaryDataExpression FromObjectAsJson(ValueExpression data)
+            => new(new InvokeStaticMethodExpression(typeof(BinaryData), nameof(BinaryData.FromObjectAsJson), new[]{data}));
+
         public static BinaryDataExpression FromString(ValueExpression data)
             => new(new InvokeStaticMethodExpression(typeof(BinaryData), nameof(BinaryData.FromString), new[]{data}));
     }

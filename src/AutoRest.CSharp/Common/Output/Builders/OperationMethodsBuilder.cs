@@ -12,6 +12,7 @@ using AutoRest.CSharp.Common.Output.Models.Types;
 using AutoRest.CSharp.Common.Output.Models.ValueExpressions;
 using AutoRest.CSharp.Output.Builders;
 using AutoRest.CSharp.Output.Models.Shared;
+using AutoRest.CSharp.Output.Models.Types;
 using static AutoRest.CSharp.Common.Output.Models.Snippets;
 
 namespace AutoRest.CSharp.Output.Models
@@ -49,6 +50,11 @@ namespace AutoRest.CSharp.Output.Models
             else if (ResponseType is { IsFrameworkType: false, Implementation: SerializableObjectType { JsonSerialization: { }, IncludeDeserializer: true } serializableObjectType})
             {
                 yield return Return(ResponseExpression.FromValue(SerializableObjectTypeExpression.FromResponse(serializableObjectType, response), response));
+            }
+            else if (ResponseType is { IsFrameworkType: false, Implementation: EnumType enumType})
+            {
+                var value = EnumExpression.ToEnum(enumType, new StringExpression(response.Content.ToObjectFromJson(typeof(string))));
+                yield return Return(ResponseExpression.FromValue(value, response));
             }
             else if (TypeFactory.IsCollectionType(ResponseType))
             {

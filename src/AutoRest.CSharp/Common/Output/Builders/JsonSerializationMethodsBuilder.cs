@@ -712,8 +712,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
                     return SerializableObjectTypeExpression.Deserialize(type, element);
 
                 case EnumType clientEnum:
-                    var value = GetFrameworkTypeValueExpression(clientEnum.ValueType.FrameworkType, element, SerializationFormat.Default, null);
-                    return clientEnum.IsExtensible ? New.Instance(clientEnum.Type, value) : InvokeToEnum(clientEnum.Type, value);
+                    return EnumExpression.ToEnum(clientEnum, element.GetString());
 
                 default:
                     throw new NotSupportedException($"No deserialization logic exists for {implementation.Declaration.Name}");

@@ -820,7 +820,7 @@ namespace AutoRest.CSharp.Generation.Writers
             JsonDictionarySerialization dictionary => ComposeProtocolDictionaryInstance(allProperties, dictionary, visitedModels),
             JsonValueSerialization { Type.IsFrameworkType: true } value => MockParameterTypeValue(propertyDescription, value.Type, value.Format),
             JsonValueSerialization { Type.Implementation: SerializableObjectType model } => ComposeAnonymousObjectType(GetMostConcreteModel(model), allProperties, visitedModels),
-            JsonValueSerialization { Type: {Implementation: EnumType enumType }} => new ConstantExpression(enumType.Values.First().Value),
+            JsonValueSerialization { Type.Implementation: EnumType enumType } => new ConstantExpression(enumType.Values.First().Value),
             _ => Null
         };
 
@@ -835,7 +835,9 @@ namespace AutoRest.CSharp.Generation.Writers
              */
             if (IsVisitedModel(elementType, visitedModels))
             {
-                return includeCollectionInitialization ? New.Array(elementType) : New.Anonymous(null);
+                return includeCollectionInitialization
+                    ? New.Array(elementType)
+                    : new ArrayInitializerExpression(null, false);
             }
 
             var arrayElement = ComposeConvenienceCSharpTypeInstance(allProperties, elementType, null, includeCollectionInitialization, visitedModels);
@@ -866,7 +868,9 @@ namespace AutoRest.CSharp.Generation.Writers
 
             if (IsVisitedModel(valueType, visitedModels))
             {
-                return includeCollectionInitialization ? New.Dictionary(keyType, valueType) : New.Anonymous(null);
+                return includeCollectionInitialization
+                    ? New.Dictionary(keyType, valueType)
+                    : new DictionaryInitializerExpression();
             }
 
             var keyExpr = keyType.Equals(typeof(int)) ? Int(0) : Literal("key"); //handle dictionary with int key

@@ -7,7 +7,7 @@ This sample shows how to call GetBooleanValueAsync.
 <code><![CDATA[
 var client = new ArrayClient().GetBooleanValueClient("1.0.0");
 
-var result = await client.GetBooleanValueAsync();
+var result = await client.GetBooleanValueAsync().ConfigureAwait(false);
 ]]></code>
 </example>
     </member>

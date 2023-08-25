@@ -86,7 +86,7 @@ namespace _Type.Model.Inheritance.EnumDiscriminator.Samples
 
             var data = new
             {
-                kind = "golden",
+                kind = DogKind.Golden,
                 weight = 1234,
             };
 
@@ -102,7 +102,7 @@ namespace _Type.Model.Inheritance.EnumDiscriminator.Samples
 
             var data = new
             {
-                kind = "golden",
+                kind = DogKind.Golden,
                 weight = 1234,
             };
 
@@ -118,11 +118,11 @@ namespace _Type.Model.Inheritance.EnumDiscriminator.Samples
 
             var data = new
             {
-                kind = "golden",
+                kind = DogKind.Golden,
                 weight = 1234,
             };
 
-            Response response = await client.PutExtensibleModelAsync(RequestContent.Create(data));
+            Response response = await client.PutExtensibleModelAsync(RequestContent.Create(data)).ConfigureAwait(false);
             Console.WriteLine(response.Status);
         }
 
@@ -134,11 +134,11 @@ namespace _Type.Model.Inheritance.EnumDiscriminator.Samples
 
             var data = new
             {
-                kind = "golden",
+                kind = DogKind.Golden,
                 weight = 1234,
             };
 
-            Response response = await client.PutExtensibleModelAsync(RequestContent.Create(data));
+            Response response = await client.PutExtensibleModelAsync(RequestContent.Create(data)).ConfigureAwait(false);
             Console.WriteLine(response.Status);
         }
 
@@ -149,7 +149,7 @@ namespace _Type.Model.Inheritance.EnumDiscriminator.Samples
             var client = new EnumDiscriminatorClient();
 
             var input = new Golden(1234);
-            var result = await client.PutExtensibleModelAsync(input);
+            var result = await client.PutExtensibleModelAsync(input).ConfigureAwait(false);
         }
 
         [Test]
@@ -184,7 +184,7 @@ namespace _Type.Model.Inheritance.EnumDiscriminator.Samples
         {
             var client = new EnumDiscriminatorClient();
 
-            Response response = await client.GetExtensibleModelMissingDiscriminatorAsync(new RequestContext());
+            Response response = await client.GetExtensibleModelMissingDiscriminatorAsync(new RequestContext()).ConfigureAwait(false);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("kind").ToString());
@@ -197,7 +197,7 @@ namespace _Type.Model.Inheritance.EnumDiscriminator.Samples
         {
             var client = new EnumDiscriminatorClient();
 
-            Response response = await client.GetExtensibleModelMissingDiscriminatorAsync(new RequestContext());
+            Response response = await client.GetExtensibleModelMissingDiscriminatorAsync(new RequestContext()).ConfigureAwait(false);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("kind").ToString());
@@ -210,7 +210,7 @@ namespace _Type.Model.Inheritance.EnumDiscriminator.Samples
         {
             var client = new EnumDiscriminatorClient();
 
-            var result = await client.GetExtensibleModelMissingDiscriminatorAsync();
+            var result = await client.GetExtensibleModelMissingDiscriminatorAsync().ConfigureAwait(false);
         }
 
         [Test]
@@ -245,7 +245,7 @@ namespace _Type.Model.Inheritance.EnumDiscriminator.Samples
         {
             var client = new EnumDiscriminatorClient();
 
-            Response response = await client.GetExtensibleModelWrongDiscriminatorAsync(new RequestContext());
+            Response response = await client.GetExtensibleModelWrongDiscriminatorAsync(new RequestContext()).ConfigureAwait(false);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("kind").ToString());
@@ -258,7 +258,7 @@ namespace _Type.Model.Inheritance.EnumDiscriminator.Samples
         {
             var client = new EnumDiscriminatorClient();
 
-            Response response = await client.GetExtensibleModelWrongDiscriminatorAsync(new RequestContext());
+            Response response = await client.GetExtensibleModelWrongDiscriminatorAsync(new RequestContext()).ConfigureAwait(false);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("kind").ToString());
@@ -271,7 +271,7 @@ namespace _Type.Model.Inheritance.EnumDiscriminator.Samples
         {
             var client = new EnumDiscriminatorClient();
 
-            var result = await client.GetExtensibleModelWrongDiscriminatorAsync();
+            var result = await client.GetExtensibleModelWrongDiscriminatorAsync().ConfigureAwait(false);
         }
 
         [Test]
@@ -306,7 +306,7 @@ namespace _Type.Model.Inheritance.EnumDiscriminator.Samples
         {
             var client = new EnumDiscriminatorClient();
 
-            Response response = await client.GetFixedModelAsync(new RequestContext());
+            Response response = await client.GetFixedModelAsync(new RequestContext()).ConfigureAwait(false);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("kind").ToString());
@@ -319,7 +319,7 @@ namespace _Type.Model.Inheritance.EnumDiscriminator.Samples
         {
             var client = new EnumDiscriminatorClient();
 
-            Response response = await client.GetFixedModelAsync(new RequestContext());
+            Response response = await client.GetFixedModelAsync(new RequestContext()).ConfigureAwait(false);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("kind").ToString());
@@ -332,7 +332,7 @@ namespace _Type.Model.Inheritance.EnumDiscriminator.Samples
         {
             var client = new EnumDiscriminatorClient();
 
-            var result = await client.GetFixedModelAsync();
+            var result = await client.GetFixedModelAsync().ConfigureAwait(false);
         }
 
         [Test]
@@ -343,7 +343,7 @@ namespace _Type.Model.Inheritance.EnumDiscriminator.Samples
 
             var data = new
             {
-                kind = "cobra",
+                kind = SnakeKind.Cobra,
                 length = 1234,
             };
 
@@ -359,7 +359,7 @@ namespace _Type.Model.Inheritance.EnumDiscriminator.Samples
 
             var data = new
             {
-                kind = "cobra",
+                kind = SnakeKind.Cobra,
                 length = 1234,
             };
 
@@ -375,11 +375,11 @@ namespace _Type.Model.Inheritance.EnumDiscriminator.Samples
 
             var data = new
             {
-                kind = "cobra",
+                kind = SnakeKind.Cobra,
                 length = 1234,
             };
 
-            Response response = await client.PutFixedModelAsync(RequestContent.Create(data));
+            Response response = await client.PutFixedModelAsync(RequestContent.Create(data)).ConfigureAwait(false);
             Console.WriteLine(response.Status);
         }
 
@@ -391,11 +391,11 @@ namespace _Type.Model.Inheritance.EnumDiscriminator.Samples
 
             var data = new
             {
-                kind = "cobra",
+                kind = SnakeKind.Cobra,
                 length = 1234,
             };
 
-            Response response = await client.PutFixedModelAsync(RequestContent.Create(data));
+            Response response = await client.PutFixedModelAsync(RequestContent.Create(data)).ConfigureAwait(false);
             Console.WriteLine(response.Status);
         }
 
@@ -406,7 +406,7 @@ namespace _Type.Model.Inheritance.EnumDiscriminator.Samples
             var client = new EnumDiscriminatorClient();
 
             var input = new Cobra(1234);
-            var result = await client.PutFixedModelAsync(input);
+            var result = await client.PutFixedModelAsync(input).ConfigureAwait(false);
         }
 
         [Test]
@@ -441,7 +441,7 @@ namespace _Type.Model.Inheritance.EnumDiscriminator.Samples
         {
             var client = new EnumDiscriminatorClient();
 
-            Response response = await client.GetFixedModelMissingDiscriminatorAsync(new RequestContext());
+            Response response = await client.GetFixedModelMissingDiscriminatorAsync(new RequestContext()).ConfigureAwait(false);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("kind").ToString());
@@ -454,7 +454,7 @@ namespace _Type.Model.Inheritance.EnumDiscriminator.Samples
         {
             var client = new EnumDiscriminatorClient();
 
-            Response response = await client.GetFixedModelMissingDiscriminatorAsync(new RequestContext());
+            Response response = await client.GetFixedModelMissingDiscriminatorAsync(new RequestContext()).ConfigureAwait(false);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("kind").ToString());
@@ -467,7 +467,7 @@ namespace _Type.Model.Inheritance.EnumDiscriminator.Samples
         {
             var client = new EnumDiscriminatorClient();
 
-            var result = await client.GetFixedModelMissingDiscriminatorAsync();
+            var result = await client.GetFixedModelMissingDiscriminatorAsync().ConfigureAwait(false);
         }
 
         [Test]
@@ -502,7 +502,7 @@ namespace _Type.Model.Inheritance.EnumDiscriminator.Samples
         {
             var client = new EnumDiscriminatorClient();
 
-            Response response = await client.GetFixedModelWrongDiscriminatorAsync(new RequestContext());
+            Response response = await client.GetFixedModelWrongDiscriminatorAsync(new RequestContext()).ConfigureAwait(false);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("kind").ToString());
@@ -515,7 +515,7 @@ namespace _Type.Model.Inheritance.EnumDiscriminator.Samples
         {
             var client = new EnumDiscriminatorClient();
 
-            Response response = await client.GetFixedModelWrongDiscriminatorAsync(new RequestContext());
+            Response response = await client.GetFixedModelWrongDiscriminatorAsync(new RequestContext()).ConfigureAwait(false);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("kind").ToString());
@@ -528,7 +528,7 @@ namespace _Type.Model.Inheritance.EnumDiscriminator.Samples
         {
             var client = new EnumDiscriminatorClient();
 
-            var result = await client.GetFixedModelWrongDiscriminatorAsync();
+            var result = await client.GetFixedModelWrongDiscriminatorAsync().ConfigureAwait(false);
         }
     }
 }

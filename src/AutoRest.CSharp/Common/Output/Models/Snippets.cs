@@ -64,9 +64,6 @@ namespace AutoRest.CSharp.Common.Output.Models
         public static KeywordStatement Return(ValueExpression expression) => new("return", expression);
         public static KeywordStatement Throw(ValueExpression expression) => new("throw", expression);
 
-        public static ValueExpression InvokeToEnum(CSharpType enumType, ValueExpression stringValue)
-            => new InvokeStaticMethodExpression(enumType, $"To{enumType.Implementation.Declaration.Name}", new[]{stringValue}, null, true);
-
         public static MemberExpression InvokeDateTimeOffsetNow() =>
             new(typeof(DateTimeOffset), nameof(DateTimeOffset.Now));
         public static InvokeStaticMethodExpression InvokeDateTimeOffsetFromUnixTimeSeconds(ValueExpression expression)
