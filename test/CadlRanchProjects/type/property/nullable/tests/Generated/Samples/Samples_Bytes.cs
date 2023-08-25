@@ -6,15 +6,11 @@
 #nullable disable
 
 using System;
-using System.Collections.Generic;
-using System.IO;
 using System.Text.Json;
 using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
-using Azure.Identity;
 using NUnit.Framework;
-using _Type.Property.Nullable.Models;
 
 namespace _Type.Property.Nullable.Samples
 {
@@ -52,7 +48,7 @@ namespace _Type.Property.Nullable.Samples
         {
             var client = new NullableClient().GetBytesClient("1.0.0");
 
-            Response response = await client.GetNonNullAsync(new RequestContext());
+            Response response = await client.GetNonNullAsync(new RequestContext()).ConfigureAwait(false);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("requiredProperty").ToString());
@@ -65,7 +61,7 @@ namespace _Type.Property.Nullable.Samples
         {
             var client = new NullableClient().GetBytesClient("1.0.0");
 
-            Response response = await client.GetNonNullAsync(new RequestContext());
+            Response response = await client.GetNonNullAsync(new RequestContext()).ConfigureAwait(false);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("requiredProperty").ToString());
@@ -78,7 +74,7 @@ namespace _Type.Property.Nullable.Samples
         {
             var client = new NullableClient().GetBytesClient("1.0.0");
 
-            var result = await client.GetNonNullAsync();
+            var result = await client.GetNonNullAsync().ConfigureAwait(false);
         }
 
         [Test]
@@ -113,7 +109,7 @@ namespace _Type.Property.Nullable.Samples
         {
             var client = new NullableClient().GetBytesClient("1.0.0");
 
-            Response response = await client.GetNullAsync(new RequestContext());
+            Response response = await client.GetNullAsync(new RequestContext()).ConfigureAwait(false);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("requiredProperty").ToString());
@@ -126,7 +122,7 @@ namespace _Type.Property.Nullable.Samples
         {
             var client = new NullableClient().GetBytesClient("1.0.0");
 
-            Response response = await client.GetNullAsync(new RequestContext());
+            Response response = await client.GetNullAsync(new RequestContext()).ConfigureAwait(false);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("requiredProperty").ToString());
@@ -139,7 +135,7 @@ namespace _Type.Property.Nullable.Samples
         {
             var client = new NullableClient().GetBytesClient("1.0.0");
 
-            var result = await client.GetNullAsync();
+            var result = await client.GetNullAsync().ConfigureAwait(false);
         }
 
         [Test]
@@ -151,7 +147,7 @@ namespace _Type.Property.Nullable.Samples
             var data = new
             {
                 requiredProperty = "<requiredProperty>",
-                nullableProperty = new { },
+                nullableProperty = BinaryData.FromString("<your binary data content>"),
             };
 
             Response response = client.PatchNonNull(RequestContent.Create(data));
@@ -167,7 +163,7 @@ namespace _Type.Property.Nullable.Samples
             var data = new
             {
                 requiredProperty = "<requiredProperty>",
-                nullableProperty = new { },
+                nullableProperty = BinaryData.FromString("<your binary data content>"),
             };
 
             Response response = client.PatchNonNull(RequestContent.Create(data));
@@ -183,10 +179,10 @@ namespace _Type.Property.Nullable.Samples
             var data = new
             {
                 requiredProperty = "<requiredProperty>",
-                nullableProperty = new { },
+                nullableProperty = BinaryData.FromString("<your binary data content>"),
             };
 
-            Response response = await client.PatchNonNullAsync(RequestContent.Create(data));
+            Response response = await client.PatchNonNullAsync(RequestContent.Create(data)).ConfigureAwait(false);
             Console.WriteLine(response.Status);
         }
 
@@ -199,10 +195,10 @@ namespace _Type.Property.Nullable.Samples
             var data = new
             {
                 requiredProperty = "<requiredProperty>",
-                nullableProperty = new { },
+                nullableProperty = BinaryData.FromString("<your binary data content>"),
             };
 
-            Response response = await client.PatchNonNullAsync(RequestContent.Create(data));
+            Response response = await client.PatchNonNullAsync(RequestContent.Create(data)).ConfigureAwait(false);
             Console.WriteLine(response.Status);
         }
 
@@ -215,7 +211,7 @@ namespace _Type.Property.Nullable.Samples
             var data = new
             {
                 requiredProperty = "<requiredProperty>",
-                nullableProperty = new { },
+                nullableProperty = BinaryData.FromString("<your binary data content>"),
             };
 
             Response response = client.PatchNull(RequestContent.Create(data));
@@ -231,7 +227,7 @@ namespace _Type.Property.Nullable.Samples
             var data = new
             {
                 requiredProperty = "<requiredProperty>",
-                nullableProperty = new { },
+                nullableProperty = BinaryData.FromString("<your binary data content>"),
             };
 
             Response response = client.PatchNull(RequestContent.Create(data));
@@ -247,10 +243,10 @@ namespace _Type.Property.Nullable.Samples
             var data = new
             {
                 requiredProperty = "<requiredProperty>",
-                nullableProperty = new { },
+                nullableProperty = BinaryData.FromString("<your binary data content>"),
             };
 
-            Response response = await client.PatchNullAsync(RequestContent.Create(data));
+            Response response = await client.PatchNullAsync(RequestContent.Create(data)).ConfigureAwait(false);
             Console.WriteLine(response.Status);
         }
 
@@ -263,10 +259,10 @@ namespace _Type.Property.Nullable.Samples
             var data = new
             {
                 requiredProperty = "<requiredProperty>",
-                nullableProperty = new { },
+                nullableProperty = BinaryData.FromString("<your binary data content>"),
             };
 
-            Response response = await client.PatchNullAsync(RequestContent.Create(data));
+            Response response = await client.PatchNullAsync(RequestContent.Create(data)).ConfigureAwait(false);
             Console.WriteLine(response.Status);
         }
     }

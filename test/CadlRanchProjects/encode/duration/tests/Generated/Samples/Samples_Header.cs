@@ -20,7 +20,7 @@ namespace Encode.Duration.Samples
         {
             var client = new DurationClient().GetHeaderClient("1.0.0");
 
-            Response response = client.Default(new TimeSpan(1, 2, 3));
+            Response response = client.Default(new TimeSpan(1, 23, 45));
             Console.WriteLine(response.Status);
         }
 
@@ -30,7 +30,7 @@ namespace Encode.Duration.Samples
         {
             var client = new DurationClient().GetHeaderClient("1.0.0");
 
-            Response response = client.Default(new TimeSpan(1, 2, 3));
+            Response response = client.Default(new TimeSpan(1, 23, 45));
             Console.WriteLine(response.Status);
         }
 
@@ -40,7 +40,7 @@ namespace Encode.Duration.Samples
         {
             var client = new DurationClient().GetHeaderClient("1.0.0");
 
-            Response response = await client.DefaultAsync(new TimeSpan(1, 2, 3));
+            Response response = await client.DefaultAsync(new TimeSpan(1, 23, 45)).ConfigureAwait(false);
             Console.WriteLine(response.Status);
         }
 
@@ -50,7 +50,7 @@ namespace Encode.Duration.Samples
         {
             var client = new DurationClient().GetHeaderClient("1.0.0");
 
-            Response response = await client.DefaultAsync(new TimeSpan(1, 2, 3));
+            Response response = await client.DefaultAsync(new TimeSpan(1, 23, 45)).ConfigureAwait(false);
             Console.WriteLine(response.Status);
         }
 

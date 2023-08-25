@@ -44,7 +44,7 @@ namespace _Type.Property.ValueTypes
         }
 
         /// <summary> Initializes a new instance of Boolean. </summary>
-        /// <param name="apiVersion"> The String to use. </param>
+        /// <param name="apiVersion"> The string to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="apiVersion"/> is null. </exception>
         public virtual Boolean GetBooleanClient(string apiVersion = "1.0.0")
         {
@@ -54,7 +54,7 @@ namespace _Type.Property.ValueTypes
         }
 
         /// <summary> Initializes a new instance of String. </summary>
-        /// <param name="apiVersion"> The String to use. </param>
+        /// <param name="apiVersion"> The string to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="apiVersion"/> is null. </exception>
         public virtual String GetStringClient(string apiVersion = "1.0.0")
         {
@@ -64,7 +64,7 @@ namespace _Type.Property.ValueTypes
         }
 
         /// <summary> Initializes a new instance of Bytes. </summary>
-        /// <param name="apiVersion"> The String to use. </param>
+        /// <param name="apiVersion"> The string to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="apiVersion"/> is null. </exception>
         public virtual Bytes GetBytesClient(string apiVersion = "1.0.0")
         {
@@ -74,7 +74,7 @@ namespace _Type.Property.ValueTypes
         }
 
         /// <summary> Initializes a new instance of Int. </summary>
-        /// <param name="apiVersion"> The String to use. </param>
+        /// <param name="apiVersion"> The string to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="apiVersion"/> is null. </exception>
         public virtual Int GetIntClient(string apiVersion = "1.0.0")
         {
@@ -84,7 +84,7 @@ namespace _Type.Property.ValueTypes
         }
 
         /// <summary> Initializes a new instance of Float. </summary>
-        /// <param name="apiVersion"> The String to use. </param>
+        /// <param name="apiVersion"> The string to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="apiVersion"/> is null. </exception>
         public virtual Float GetFloatClient(string apiVersion = "1.0.0")
         {
@@ -94,7 +94,7 @@ namespace _Type.Property.ValueTypes
         }
 
         /// <summary> Initializes a new instance of Datetime. </summary>
-        /// <param name="apiVersion"> The String to use. </param>
+        /// <param name="apiVersion"> The string to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="apiVersion"/> is null. </exception>
         public virtual Datetime GetDatetimeClient(string apiVersion = "1.0.0")
         {
@@ -104,7 +104,7 @@ namespace _Type.Property.ValueTypes
         }
 
         /// <summary> Initializes a new instance of Duration. </summary>
-        /// <param name="apiVersion"> The String to use. </param>
+        /// <param name="apiVersion"> The string to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="apiVersion"/> is null. </exception>
         public virtual Duration GetDurationClient(string apiVersion = "1.0.0")
         {
@@ -114,7 +114,7 @@ namespace _Type.Property.ValueTypes
         }
 
         /// <summary> Initializes a new instance of Enum. </summary>
-        /// <param name="apiVersion"> The String to use. </param>
+        /// <param name="apiVersion"> The string to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="apiVersion"/> is null. </exception>
         public virtual Enum GetEnumClient(string apiVersion = "1.0.0")
         {
@@ -124,7 +124,7 @@ namespace _Type.Property.ValueTypes
         }
 
         /// <summary> Initializes a new instance of ExtensibleEnum. </summary>
-        /// <param name="apiVersion"> The String to use. </param>
+        /// <param name="apiVersion"> The string to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="apiVersion"/> is null. </exception>
         public virtual ExtensibleEnum GetExtensibleEnumClient(string apiVersion = "1.0.0")
         {
@@ -134,7 +134,7 @@ namespace _Type.Property.ValueTypes
         }
 
         /// <summary> Initializes a new instance of Model. </summary>
-        /// <param name="apiVersion"> The String to use. </param>
+        /// <param name="apiVersion"> The string to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="apiVersion"/> is null. </exception>
         public virtual Model GetModelClient(string apiVersion = "1.0.0")
         {
@@ -144,7 +144,7 @@ namespace _Type.Property.ValueTypes
         }
 
         /// <summary> Initializes a new instance of CollectionsString. </summary>
-        /// <param name="apiVersion"> The String to use. </param>
+        /// <param name="apiVersion"> The string to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="apiVersion"/> is null. </exception>
         public virtual CollectionsString GetCollectionsStringClient(string apiVersion = "1.0.0")
         {
@@ -154,7 +154,7 @@ namespace _Type.Property.ValueTypes
         }
 
         /// <summary> Initializes a new instance of CollectionsInt. </summary>
-        /// <param name="apiVersion"> The String to use. </param>
+        /// <param name="apiVersion"> The string to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="apiVersion"/> is null. </exception>
         public virtual CollectionsInt GetCollectionsIntClient(string apiVersion = "1.0.0")
         {
@@ -164,7 +164,7 @@ namespace _Type.Property.ValueTypes
         }
 
         /// <summary> Initializes a new instance of CollectionsModel. </summary>
-        /// <param name="apiVersion"> The String to use. </param>
+        /// <param name="apiVersion"> The string to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="apiVersion"/> is null. </exception>
         public virtual CollectionsModel GetCollectionsModelClient(string apiVersion = "1.0.0")
         {
@@ -174,7 +174,7 @@ namespace _Type.Property.ValueTypes
         }
 
         /// <summary> Initializes a new instance of DictionaryString. </summary>
-        /// <param name="apiVersion"> The String to use. </param>
+        /// <param name="apiVersion"> The string to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="apiVersion"/> is null. </exception>
         public virtual DictionaryString GetDictionaryStringClient(string apiVersion = "1.0.0")
         {
@@ -184,7 +184,7 @@ namespace _Type.Property.ValueTypes
         }
 
         /// <summary> Initializes a new instance of Never. </summary>
-        /// <param name="apiVersion"> The String to use. </param>
+        /// <param name="apiVersion"> The string to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="apiVersion"/> is null. </exception>
         public virtual Never GetNeverClient(string apiVersion = "1.0.0")
         {
@@ -194,7 +194,7 @@ namespace _Type.Property.ValueTypes
         }
 
         /// <summary> Initializes a new instance of UnknownString. </summary>
-        /// <param name="apiVersion"> The String to use. </param>
+        /// <param name="apiVersion"> The string to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="apiVersion"/> is null. </exception>
         public virtual UnknownString GetUnknownStringClient(string apiVersion = "1.0.0")
         {
@@ -204,7 +204,7 @@ namespace _Type.Property.ValueTypes
         }
 
         /// <summary> Initializes a new instance of UnknownInt. </summary>
-        /// <param name="apiVersion"> The String to use. </param>
+        /// <param name="apiVersion"> The string to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="apiVersion"/> is null. </exception>
         public virtual UnknownInt GetUnknownIntClient(string apiVersion = "1.0.0")
         {
@@ -214,7 +214,7 @@ namespace _Type.Property.ValueTypes
         }
 
         /// <summary> Initializes a new instance of UnknownDict. </summary>
-        /// <param name="apiVersion"> The String to use. </param>
+        /// <param name="apiVersion"> The string to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="apiVersion"/> is null. </exception>
         public virtual UnknownDict GetUnknownDictClient(string apiVersion = "1.0.0")
         {
@@ -224,7 +224,7 @@ namespace _Type.Property.ValueTypes
         }
 
         /// <summary> Initializes a new instance of UnknownArray. </summary>
-        /// <param name="apiVersion"> The String to use. </param>
+        /// <param name="apiVersion"> The string to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="apiVersion"/> is null. </exception>
         public virtual UnknownArray GetUnknownArrayClient(string apiVersion = "1.0.0")
         {

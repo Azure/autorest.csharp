@@ -27,7 +27,7 @@ This sample shows how to call GetNonNullAsync with required parameters and parse
 <code><![CDATA[
 var client = new NullableClient().GetCollectionsByteClient("1.0.0");
 
-Response response = await client.GetNonNullAsync(new RequestContext());
+Response response = await client.GetNonNullAsync(new RequestContext()).ConfigureAwait(false);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("requiredProperty").ToString());
@@ -55,7 +55,7 @@ This sample shows how to call GetNullAsync.
 <code><![CDATA[
 var client = new NullableClient().GetCollectionsByteClient("1.0.0");
 
-var result = await client.GetNullAsync();
+var result = await client.GetNullAsync().ConfigureAwait(false);
 ]]></code>
 </example>
     </member>
@@ -75,7 +75,7 @@ This sample shows how to call GetNullAsync with required parameters and parse th
 <code><![CDATA[
 var client = new NullableClient().GetCollectionsByteClient("1.0.0");
 
-Response response = await client.GetNullAsync(new RequestContext());
+Response response = await client.GetNullAsync(new RequestContext()).ConfigureAwait(false);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("requiredProperty").ToString());
@@ -106,11 +106,11 @@ var client = new NullableClient().GetCollectionsByteClient("1.0.0");
 var data = new {
     requiredProperty = "<requiredProperty>",
     nullableProperty = new[] {
-        new {}
+        BinaryData.FromString("<your binary data content>")
     },
 };
 
-Response response = await client.PatchNonNullAsync(RequestContent.Create(data));
+Response response = await client.PatchNonNullAsync(RequestContent.Create(data)).ConfigureAwait(false);
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
@@ -124,7 +124,7 @@ var client = new NullableClient().GetCollectionsByteClient("1.0.0");
 var data = new {
     requiredProperty = "<requiredProperty>",
     nullableProperty = new[] {
-        new {}
+        BinaryData.FromString("<your binary data content>")
     },
 };
 
@@ -142,11 +142,11 @@ var client = new NullableClient().GetCollectionsByteClient("1.0.0");
 var data = new {
     requiredProperty = "<requiredProperty>",
     nullableProperty = new[] {
-        new {}
+        BinaryData.FromString("<your binary data content>")
     },
 };
 
-Response response = await client.PatchNullAsync(RequestContent.Create(data));
+Response response = await client.PatchNullAsync(RequestContent.Create(data)).ConfigureAwait(false);
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
@@ -160,7 +160,7 @@ var client = new NullableClient().GetCollectionsByteClient("1.0.0");
 var data = new {
     requiredProperty = "<requiredProperty>",
     nullableProperty = new[] {
-        new {}
+        BinaryData.FromString("<your binary data content>")
     },
 };
 
