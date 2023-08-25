@@ -7,6 +7,7 @@ parameters:
 
 variables:
   nugetMultiFeedWarnLevel: 'none'
+  azureSdkForNetCommit: $[resources.repositories.azure-sdk-for-net.ref]
 
 resources:
   repositories:
@@ -49,7 +50,7 @@ stages:
             inputs:
               versionSpec: '18.x'
           - pwsh: |
-              Write-Host $[resources.repositories.azure-sdk-for-net.ref]
+              Write-Host $(azureSdkForNetCommit)
           - ${{ if eq(parameters.UseTypeSpecNext, 'true') }}:
             - pwsh: ./eng/UseTypeSpecNextVersions.ps1
               displayName: "Use 'next' TypeSpec dependencies"
