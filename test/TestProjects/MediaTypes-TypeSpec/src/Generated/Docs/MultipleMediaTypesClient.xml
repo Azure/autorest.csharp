@@ -60,8 +60,8 @@ This sample shows how to call OneStringBodyThreeContentTypesAsync with required 
 var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new MultipleMediaTypesClient(endpoint);
 
-var body = "<null>";
-var result = await client.OneStringBodyThreeContentTypesAsync(body, ContentType.ApplicationOctetStream);
+var body = "<String>";
+var result = await client.OneStringBodyThreeContentTypesAsync(body, ContentType.ApplicationOctetStream).ConfigureAwait(false);
 ]]></code>
 </example>
     </member>
@@ -72,7 +72,7 @@ This sample shows how to call OneStringBodyThreeContentTypes with required param
 var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new MultipleMediaTypesClient(endpoint);
 
-var body = "<null>";
+var body = "<String>";
 var result = client.OneStringBodyThreeContentTypes(body, ContentType.ApplicationOctetStream);
 ]]></code>
 </example>

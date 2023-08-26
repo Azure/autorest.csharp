@@ -6,13 +6,10 @@
 #nullable disable
 
 using System;
-using System.Collections.Generic;
-using System.IO;
 using System.Text.Json;
 using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
-using Azure.Identity;
 using Encode.Datetime.Models;
 using NUnit.Framework;
 
@@ -28,7 +25,7 @@ namespace Encode.Datetime.Samples
 
             var data = new
             {
-                value = "2022-05-10T14:57:31.2311892-04:00",
+                value = "2022-05-10T14:14:57.0310000Z",
             };
 
             Response response = client.Default(RequestContent.Create(data));
@@ -45,7 +42,7 @@ namespace Encode.Datetime.Samples
 
             var data = new
             {
-                value = "2022-05-10T14:57:31.2311892-04:00",
+                value = "2022-05-10T14:14:57.0310000Z",
             };
 
             Response response = client.Default(RequestContent.Create(data));
@@ -62,10 +59,10 @@ namespace Encode.Datetime.Samples
 
             var data = new
             {
-                value = "2022-05-10T14:57:31.2311892-04:00",
+                value = "2022-05-10T14:14:57.0310000Z",
             };
 
-            Response response = await client.DefaultAsync(RequestContent.Create(data));
+            Response response = await client.DefaultAsync(RequestContent.Create(data)).ConfigureAwait(false);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("value").ToString());
@@ -79,10 +76,10 @@ namespace Encode.Datetime.Samples
 
             var data = new
             {
-                value = "2022-05-10T14:57:31.2311892-04:00",
+                value = "2022-05-10T14:14:57.0310000Z",
             };
 
-            Response response = await client.DefaultAsync(RequestContent.Create(data));
+            Response response = await client.DefaultAsync(RequestContent.Create(data)).ConfigureAwait(false);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("value").ToString());
@@ -95,7 +92,7 @@ namespace Encode.Datetime.Samples
             var client = new DatetimeClient().GetPropertyClient("1.0.0");
 
             var body = new DefaultDatetimeProperty(DateTimeOffset.UtcNow);
-            var result = await client.DefaultAsync(body);
+            var result = await client.DefaultAsync(body).ConfigureAwait(false);
         }
 
         [Test]
@@ -106,7 +103,7 @@ namespace Encode.Datetime.Samples
 
             var data = new
             {
-                value = "2022-05-10T18:57:31.2311892Z",
+                value = "2022-05-10T14:14:57.0310000Z",
             };
 
             Response response = client.Rfc3339(RequestContent.Create(data));
@@ -123,7 +120,7 @@ namespace Encode.Datetime.Samples
 
             var data = new
             {
-                value = "2022-05-10T18:57:31.2311892Z",
+                value = "2022-05-10T14:14:57.0310000Z",
             };
 
             Response response = client.Rfc3339(RequestContent.Create(data));
@@ -140,10 +137,10 @@ namespace Encode.Datetime.Samples
 
             var data = new
             {
-                value = "2022-05-10T18:57:31.2311892Z",
+                value = "2022-05-10T14:14:57.0310000Z",
             };
 
-            Response response = await client.Rfc3339Async(RequestContent.Create(data));
+            Response response = await client.Rfc3339Async(RequestContent.Create(data)).ConfigureAwait(false);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("value").ToString());
@@ -157,10 +154,10 @@ namespace Encode.Datetime.Samples
 
             var data = new
             {
-                value = "2022-05-10T18:57:31.2311892Z",
+                value = "2022-05-10T14:14:57.0310000Z",
             };
 
-            Response response = await client.Rfc3339Async(RequestContent.Create(data));
+            Response response = await client.Rfc3339Async(RequestContent.Create(data)).ConfigureAwait(false);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("value").ToString());
@@ -173,7 +170,7 @@ namespace Encode.Datetime.Samples
             var client = new DatetimeClient().GetPropertyClient("1.0.0");
 
             var body = new Rfc3339DatetimeProperty(DateTimeOffset.UtcNow);
-            var result = await client.Rfc3339Async(body);
+            var result = await client.Rfc3339Async(body).ConfigureAwait(false);
         }
 
         [Test]
@@ -184,7 +181,7 @@ namespace Encode.Datetime.Samples
 
             var data = new
             {
-                value = "Tue, 10 May 2022 18:57:31 GMT",
+                value = "Tue, 10 May 2022 14:14:57 GMT",
             };
 
             Response response = client.Rfc7231(RequestContent.Create(data));
@@ -201,7 +198,7 @@ namespace Encode.Datetime.Samples
 
             var data = new
             {
-                value = "Tue, 10 May 2022 18:57:31 GMT",
+                value = "Tue, 10 May 2022 14:14:57 GMT",
             };
 
             Response response = client.Rfc7231(RequestContent.Create(data));
@@ -218,10 +215,10 @@ namespace Encode.Datetime.Samples
 
             var data = new
             {
-                value = "Tue, 10 May 2022 18:57:31 GMT",
+                value = "Tue, 10 May 2022 14:14:57 GMT",
             };
 
-            Response response = await client.Rfc7231Async(RequestContent.Create(data));
+            Response response = await client.Rfc7231Async(RequestContent.Create(data)).ConfigureAwait(false);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("value").ToString());
@@ -235,10 +232,10 @@ namespace Encode.Datetime.Samples
 
             var data = new
             {
-                value = "Tue, 10 May 2022 18:57:31 GMT",
+                value = "Tue, 10 May 2022 14:14:57 GMT",
             };
 
-            Response response = await client.Rfc7231Async(RequestContent.Create(data));
+            Response response = await client.Rfc7231Async(RequestContent.Create(data)).ConfigureAwait(false);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("value").ToString());
@@ -251,7 +248,7 @@ namespace Encode.Datetime.Samples
             var client = new DatetimeClient().GetPropertyClient("1.0.0");
 
             var body = new Rfc7231DatetimeProperty(DateTimeOffset.UtcNow);
-            var result = await client.Rfc7231Async(body);
+            var result = await client.Rfc7231Async(body).ConfigureAwait(false);
         }
 
         [Test]
@@ -262,7 +259,7 @@ namespace Encode.Datetime.Samples
 
             var data = new
             {
-                value = "1652209051",
+                value = "1652192097",
             };
 
             Response response = client.UnixTimestamp(RequestContent.Create(data));
@@ -279,7 +276,7 @@ namespace Encode.Datetime.Samples
 
             var data = new
             {
-                value = "1652209051",
+                value = "1652192097",
             };
 
             Response response = client.UnixTimestamp(RequestContent.Create(data));
@@ -296,10 +293,10 @@ namespace Encode.Datetime.Samples
 
             var data = new
             {
-                value = "1652209051",
+                value = "1652192097",
             };
 
-            Response response = await client.UnixTimestampAsync(RequestContent.Create(data));
+            Response response = await client.UnixTimestampAsync(RequestContent.Create(data)).ConfigureAwait(false);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("value").ToString());
@@ -313,10 +310,10 @@ namespace Encode.Datetime.Samples
 
             var data = new
             {
-                value = "1652209051",
+                value = "1652192097",
             };
 
-            Response response = await client.UnixTimestampAsync(RequestContent.Create(data));
+            Response response = await client.UnixTimestampAsync(RequestContent.Create(data)).ConfigureAwait(false);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("value").ToString());
@@ -329,7 +326,7 @@ namespace Encode.Datetime.Samples
             var client = new DatetimeClient().GetPropertyClient("1.0.0");
 
             var body = new UnixTimestampDatetimeProperty(DateTimeOffset.UtcNow);
-            var result = await client.UnixTimestampAsync(body);
+            var result = await client.UnixTimestampAsync(body).ConfigureAwait(false);
         }
 
         [Test]
@@ -341,7 +338,7 @@ namespace Encode.Datetime.Samples
             var data = new
             {
                 value = new[] {
-        "1652209051"
+        "1652192097"
     },
             };
 
@@ -360,7 +357,7 @@ namespace Encode.Datetime.Samples
             var data = new
             {
                 value = new[] {
-        "1652209051"
+        "1652192097"
     },
             };
 
@@ -379,11 +376,11 @@ namespace Encode.Datetime.Samples
             var data = new
             {
                 value = new[] {
-        "1652209051"
+        "1652192097"
     },
             };
 
-            Response response = await client.UnixTimestampArrayAsync(RequestContent.Create(data));
+            Response response = await client.UnixTimestampArrayAsync(RequestContent.Create(data)).ConfigureAwait(false);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("value")[0].ToString());
@@ -398,11 +395,11 @@ namespace Encode.Datetime.Samples
             var data = new
             {
                 value = new[] {
-        "1652209051"
+        "1652192097"
     },
             };
 
-            Response response = await client.UnixTimestampArrayAsync(RequestContent.Create(data));
+            Response response = await client.UnixTimestampArrayAsync(RequestContent.Create(data)).ConfigureAwait(false);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("value")[0].ToString());
@@ -418,7 +415,7 @@ namespace Encode.Datetime.Samples
             {
     DateTimeOffset.UtcNow
             });
-            var result = await client.UnixTimestampArrayAsync(body);
+            var result = await client.UnixTimestampArrayAsync(body).ConfigureAwait(false);
         }
     }
 }

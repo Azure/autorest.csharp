@@ -7,8 +7,8 @@ This sample shows how to call DefaultAsync with required parameters.
 <code><![CDATA[
 var client = new DurationClient().GetPropertyClient("1.0.0");
 
-var body = new DefaultDurationProperty(new TimeSpan(1, 2, 3));
-var result = await client.DefaultAsync(body);
+var body = new DefaultDurationProperty(new TimeSpan(1, 23, 45));
+var result = await client.DefaultAsync(body).ConfigureAwait(false);
 ]]></code>
 </example>
     </member>
@@ -18,7 +18,7 @@ This sample shows how to call Default with required parameters.
 <code><![CDATA[
 var client = new DurationClient().GetPropertyClient("1.0.0");
 
-var body = new DefaultDurationProperty(new TimeSpan(1, 2, 3));
+var body = new DefaultDurationProperty(new TimeSpan(1, 23, 45));
 var result = client.Default(body);
 ]]></code>
 </example>
@@ -33,7 +33,7 @@ var data = new {
     value = "PT1H23M45S",
 };
 
-Response response = await client.DefaultAsync(RequestContent.Create(data));
+Response response = await client.DefaultAsync(RequestContent.Create(data)).ConfigureAwait(false);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("value").ToString());
@@ -63,8 +63,8 @@ This sample shows how to call Iso8601Async with required parameters.
 <code><![CDATA[
 var client = new DurationClient().GetPropertyClient("1.0.0");
 
-var body = new ISO8601DurationProperty(new TimeSpan(1, 2, 3));
-var result = await client.Iso8601Async(body);
+var body = new ISO8601DurationProperty(new TimeSpan(1, 23, 45));
+var result = await client.Iso8601Async(body).ConfigureAwait(false);
 ]]></code>
 </example>
     </member>
@@ -74,7 +74,7 @@ This sample shows how to call Iso8601 with required parameters.
 <code><![CDATA[
 var client = new DurationClient().GetPropertyClient("1.0.0");
 
-var body = new ISO8601DurationProperty(new TimeSpan(1, 2, 3));
+var body = new ISO8601DurationProperty(new TimeSpan(1, 23, 45));
 var result = client.Iso8601(body);
 ]]></code>
 </example>
@@ -89,7 +89,7 @@ var data = new {
     value = "PT1H23M45S",
 };
 
-Response response = await client.Iso8601Async(RequestContent.Create(data));
+Response response = await client.Iso8601Async(RequestContent.Create(data)).ConfigureAwait(false);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("value").ToString());
@@ -119,8 +119,8 @@ This sample shows how to call Int32SecondsAsync with required parameters.
 <code><![CDATA[
 var client = new DurationClient().GetPropertyClient("1.0.0");
 
-var body = new Int32SecondsDurationProperty(new TimeSpan(1, 2, 3));
-var result = await client.Int32SecondsAsync(body);
+var body = new Int32SecondsDurationProperty(new TimeSpan(1, 23, 45));
+var result = await client.Int32SecondsAsync(body).ConfigureAwait(false);
 ]]></code>
 </example>
     </member>
@@ -130,7 +130,7 @@ This sample shows how to call Int32Seconds with required parameters.
 <code><![CDATA[
 var client = new DurationClient().GetPropertyClient("1.0.0");
 
-var body = new Int32SecondsDurationProperty(new TimeSpan(1, 2, 3));
+var body = new Int32SecondsDurationProperty(new TimeSpan(1, 23, 45));
 var result = client.Int32Seconds(body);
 ]]></code>
 </example>
@@ -142,10 +142,10 @@ This sample shows how to call Int32SecondsAsync with required request content an
 var client = new DurationClient().GetPropertyClient("1.0.0");
 
 var data = new {
-    value = new {},
+    value = "45",
 };
 
-Response response = await client.Int32SecondsAsync(RequestContent.Create(data));
+Response response = await client.Int32SecondsAsync(RequestContent.Create(data)).ConfigureAwait(false);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("value").ToString());
@@ -159,7 +159,7 @@ This sample shows how to call Int32Seconds with required request content and par
 var client = new DurationClient().GetPropertyClient("1.0.0");
 
 var data = new {
-    value = new {},
+    value = "45",
 };
 
 Response response = client.Int32Seconds(RequestContent.Create(data));
@@ -175,8 +175,8 @@ This sample shows how to call FloatSecondsAsync with required parameters.
 <code><![CDATA[
 var client = new DurationClient().GetPropertyClient("1.0.0");
 
-var body = new FloatSecondsDurationProperty(new TimeSpan(1, 2, 3));
-var result = await client.FloatSecondsAsync(body);
+var body = new FloatSecondsDurationProperty(new TimeSpan(1, 23, 45));
+var result = await client.FloatSecondsAsync(body).ConfigureAwait(false);
 ]]></code>
 </example>
     </member>
@@ -186,7 +186,7 @@ This sample shows how to call FloatSeconds with required parameters.
 <code><![CDATA[
 var client = new DurationClient().GetPropertyClient("1.0.0");
 
-var body = new FloatSecondsDurationProperty(new TimeSpan(1, 2, 3));
+var body = new FloatSecondsDurationProperty(new TimeSpan(1, 23, 45));
 var result = client.FloatSeconds(body);
 ]]></code>
 </example>
@@ -198,10 +198,10 @@ This sample shows how to call FloatSecondsAsync with required request content an
 var client = new DurationClient().GetPropertyClient("1.0.0");
 
 var data = new {
-    value = new {},
+    value = "45.000",
 };
 
-Response response = await client.FloatSecondsAsync(RequestContent.Create(data));
+Response response = await client.FloatSecondsAsync(RequestContent.Create(data)).ConfigureAwait(false);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("value").ToString());
@@ -215,7 +215,7 @@ This sample shows how to call FloatSeconds with required request content and par
 var client = new DurationClient().GetPropertyClient("1.0.0");
 
 var data = new {
-    value = new {},
+    value = "45.000",
 };
 
 Response response = client.FloatSeconds(RequestContent.Create(data));
@@ -231,11 +231,11 @@ This sample shows how to call FloatSecondsArrayAsync with required parameters.
 <code><![CDATA[
 var client = new DurationClient().GetPropertyClient("1.0.0");
 
-var body = new FloatSecondsDurationArrayProperty(new TimeSpan[] 
+var body = new FloatSecondsDurationArrayProperty(new TimeSpan[]
 {
-    new TimeSpan(1, 2, 3)
+    new TimeSpan(1, 23, 45)
 });
-var result = await client.FloatSecondsArrayAsync(body);
+var result = await client.FloatSecondsArrayAsync(body).ConfigureAwait(false);
 ]]></code>
 </example>
     </member>
@@ -245,9 +245,9 @@ This sample shows how to call FloatSecondsArray with required parameters.
 <code><![CDATA[
 var client = new DurationClient().GetPropertyClient("1.0.0");
 
-var body = new FloatSecondsDurationArrayProperty(new TimeSpan[] 
+var body = new FloatSecondsDurationArrayProperty(new TimeSpan[]
 {
-    new TimeSpan(1, 2, 3)
+    new TimeSpan(1, 23, 45)
 });
 var result = client.FloatSecondsArray(body);
 ]]></code>
@@ -261,11 +261,11 @@ var client = new DurationClient().GetPropertyClient("1.0.0");
 
 var data = new {
     value = new[] {
-        new {}
+        "45.000"
     },
 };
 
-Response response = await client.FloatSecondsArrayAsync(RequestContent.Create(data));
+Response response = await client.FloatSecondsArrayAsync(RequestContent.Create(data)).ConfigureAwait(false);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("value")[0].ToString());
@@ -280,7 +280,7 @@ var client = new DurationClient().GetPropertyClient("1.0.0");
 
 var data = new {
     value = new[] {
-        new {}
+        "45.000"
     },
 };
 

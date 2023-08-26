@@ -181,7 +181,7 @@ namespace Encode.Duration.Samples
 
             var data = new
             {
-                value = new { },
+                value = "45",
             };
 
             Response response = client.Int32Seconds(RequestContent.Create(data));
@@ -198,7 +198,7 @@ namespace Encode.Duration.Samples
 
             var data = new
             {
-                value = new { },
+                value = "45",
             };
 
             Response response = client.Int32Seconds(RequestContent.Create(data));
@@ -215,7 +215,7 @@ namespace Encode.Duration.Samples
 
             var data = new
             {
-                value = new { },
+                value = "45",
             };
 
             Response response = await client.Int32SecondsAsync(RequestContent.Create(data)).ConfigureAwait(false);
@@ -232,7 +232,7 @@ namespace Encode.Duration.Samples
 
             var data = new
             {
-                value = new { },
+                value = "45",
             };
 
             Response response = await client.Int32SecondsAsync(RequestContent.Create(data)).ConfigureAwait(false);
@@ -259,7 +259,7 @@ namespace Encode.Duration.Samples
 
             var data = new
             {
-                value = new { },
+                value = "45.000",
             };
 
             Response response = client.FloatSeconds(RequestContent.Create(data));
@@ -276,7 +276,7 @@ namespace Encode.Duration.Samples
 
             var data = new
             {
-                value = new { },
+                value = "45.000",
             };
 
             Response response = client.FloatSeconds(RequestContent.Create(data));
@@ -293,10 +293,10 @@ namespace Encode.Duration.Samples
 
             var data = new
             {
-                value = new { },
+                value = "45.000",
             };
 
-            Response response = await client.FloatSecondsAsync(RequestContent.Create(data));
+            Response response = await client.FloatSecondsAsync(RequestContent.Create(data)).ConfigureAwait(false);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("value").ToString());
@@ -310,10 +310,10 @@ namespace Encode.Duration.Samples
 
             var data = new
             {
-                value = new { },
+                value = "45.000",
             };
 
-            Response response = await client.FloatSecondsAsync(RequestContent.Create(data));
+            Response response = await client.FloatSecondsAsync(RequestContent.Create(data)).ConfigureAwait(false);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("value").ToString());
@@ -338,7 +338,7 @@ namespace Encode.Duration.Samples
             var data = new
             {
                 value = new[] {
-        new {}
+        "45.000"
     },
             };
 
@@ -357,7 +357,7 @@ namespace Encode.Duration.Samples
             var data = new
             {
                 value = new[] {
-        new {}
+        "45.000"
     },
             };
 
@@ -376,11 +376,11 @@ namespace Encode.Duration.Samples
             var data = new
             {
                 value = new[] {
-        new {}
+        "45.000"
     },
             };
 
-            Response response = await client.FloatSecondsArrayAsync(RequestContent.Create(data));
+            Response response = await client.FloatSecondsArrayAsync(RequestContent.Create(data)).ConfigureAwait(false);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("value")[0].ToString());
@@ -395,11 +395,11 @@ namespace Encode.Duration.Samples
             var data = new
             {
                 value = new[] {
-        new {}
+        "45.000"
     },
             };
 
-            Response response = await client.FloatSecondsArrayAsync(RequestContent.Create(data));
+            Response response = await client.FloatSecondsArrayAsync(RequestContent.Create(data)).ConfigureAwait(false);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("value")[0].ToString());
@@ -413,9 +413,9 @@ namespace Encode.Duration.Samples
 
             var body = new FloatSecondsDurationArrayProperty(new TimeSpan[]
             {
-    new TimeSpan(1, 2, 3)
+    new TimeSpan(1, 23, 45)
             });
-            var result = await client.FloatSecondsArrayAsync(body);
+            var result = await client.FloatSecondsArrayAsync(body).ConfigureAwait(false);
         }
     }
 }

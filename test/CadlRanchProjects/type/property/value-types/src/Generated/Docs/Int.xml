@@ -7,7 +7,7 @@ This sample shows how to call GetIntAsync.
 <code><![CDATA[
 var client = new ValueTypesClient().GetIntClient("1.0.0");
 
-var result = await client.GetIntAsync();
+var result = await client.GetIntAsync().ConfigureAwait(false);
 ]]></code>
 </example>
     </member>
@@ -27,7 +27,7 @@ This sample shows how to call GetIntAsync with required parameters and parse the
 <code><![CDATA[
 var client = new ValueTypesClient().GetIntClient("1.0.0");
 
-Response response = await client.GetIntAsync(new RequestContext());
+Response response = await client.GetIntAsync(new RequestContext()).ConfigureAwait(false);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("property").ToString());
@@ -54,7 +54,7 @@ This sample shows how to call PutAsync with required parameters.
 var client = new ValueTypesClient().GetIntClient("1.0.0");
 
 var body = new IntProperty(1234);
-var result = await client.PutAsync(body);
+var result = await client.PutAsync(body).ConfigureAwait(false);
 ]]></code>
 </example>
     </member>
@@ -79,7 +79,7 @@ var data = new {
     property = 1234,
 };
 
-Response response = await client.PutAsync(RequestContent.Create(data));
+Response response = await client.PutAsync(RequestContent.Create(data)).ConfigureAwait(false);
 Console.WriteLine(response.Status);
 ]]></code>
 </example>

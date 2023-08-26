@@ -25,7 +25,8 @@ namespace _Type.Property.ValueTypes.Samples
 
             Response response = client.GetNever(new RequestContext());
 
-            Console.WriteLine(response.ToString());
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.ToString());
         }
 
         [Test]
@@ -36,7 +37,8 @@ namespace _Type.Property.ValueTypes.Samples
 
             Response response = client.GetNever(new RequestContext());
 
-            Console.WriteLine(response.ToString());
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.ToString());
         }
 
         [Test]
@@ -45,9 +47,10 @@ namespace _Type.Property.ValueTypes.Samples
         {
             var client = new ValueTypesClient().GetNeverClient("1.0.0");
 
-            Response response = await client.GetNeverAsync(new RequestContext());
+            Response response = await client.GetNeverAsync(new RequestContext()).ConfigureAwait(false);
 
-            Console.WriteLine(response.ToString());
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.ToString());
         }
 
         [Test]
@@ -56,9 +59,10 @@ namespace _Type.Property.ValueTypes.Samples
         {
             var client = new ValueTypesClient().GetNeverClient("1.0.0");
 
-            Response response = await client.GetNeverAsync(new RequestContext());
+            Response response = await client.GetNeverAsync(new RequestContext()).ConfigureAwait(false);
 
-            Console.WriteLine(response.ToString());
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.ToString());
         }
 
         [Test]

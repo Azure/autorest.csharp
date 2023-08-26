@@ -118,11 +118,11 @@ var client = new FirstTestTypeSpecClient(endpoint);
 
 var data = new {
     name = "<name>",
-    requiredUnion = new {},
+    requiredUnion = new object(),
     requiredLiteralString = "accept",
     requiredLiteralInt = 123,
-    requiredLiteralFloat = 1.23,
-    requiredLiteralBool = false,
+    requiredLiteralFloat = 1.23F,
+    requiredLiteralBool = true,
     requiredBadDescription = "<requiredBadDescription>",
     requiredNullableList = new[] {
         1234
@@ -148,14 +148,14 @@ var client = new FirstTestTypeSpecClient(endpoint);
 
 var data = new {
     name = "<name>",
-    requiredUnion = new {},
+    requiredUnion = new object(),
     requiredLiteralString = "accept",
     requiredLiteralInt = 123,
-    requiredLiteralFloat = 1.23,
-    requiredLiteralBool = false,
+    requiredLiteralFloat = 1.23F,
+    requiredLiteralBool = true,
     optionalLiteralString = "reject",
     optionalLiteralInt = 456,
-    optionalLiteralFloat = 4.56,
+    optionalLiteralFloat = 4.56F,
     optionalLiteralBool = true,
     requiredBadDescription = "<requiredBadDescription>",
     optionalNullableList = new[] {
@@ -166,7 +166,7 @@ var data = new {
     },
 };
 
-Response response = await client.PatchActionAsync(RequestContent.Create(data));
+Response response = await client.PatchActionAsync(RequestContent.Create(data)).ConfigureAwait(false);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("name").ToString());
@@ -194,11 +194,11 @@ var client = new FirstTestTypeSpecClient(endpoint);
 
 var data = new {
     name = "<name>",
-    requiredUnion = new {},
+    requiredUnion = new object(),
     requiredLiteralString = "accept",
     requiredLiteralInt = 123,
-    requiredLiteralFloat = 1.23,
-    requiredLiteralBool = false,
+    requiredLiteralFloat = 1.23F,
+    requiredLiteralBool = true,
     requiredBadDescription = "<requiredBadDescription>",
     requiredNullableList = new[] {
         1234
@@ -224,14 +224,14 @@ var client = new FirstTestTypeSpecClient(endpoint);
 
 var data = new {
     name = "<name>",
-    requiredUnion = new {},
+    requiredUnion = new object(),
     requiredLiteralString = "accept",
     requiredLiteralInt = 123,
-    requiredLiteralFloat = 1.23,
-    requiredLiteralBool = false,
+    requiredLiteralFloat = 1.23F,
+    requiredLiteralBool = true,
     optionalLiteralString = "reject",
     optionalLiteralInt = 456,
-    optionalLiteralFloat = 4.56,
+    optionalLiteralFloat = 4.56F,
     optionalLiteralBool = true,
     requiredBadDescription = "<requiredBadDescription>",
     optionalNullableList = new[] {
@@ -274,18 +274,18 @@ var client = new FirstTestTypeSpecClient(endpoint);
 
 var data = new {
     name = "<name>",
-    requiredUnion = new {},
+    requiredUnion = new object(),
     requiredLiteralString = "accept",
     requiredLiteralInt = 123,
-    requiredLiteralFloat = 1.23,
-    requiredLiteralBool = false,
+    requiredLiteralFloat = 1.23F,
+    requiredLiteralBool = true,
     requiredBadDescription = "<requiredBadDescription>",
     requiredNullableList = new[] {
         1234
     },
 };
 
-Response response = await client.AnonymousBodyAsync(RequestContent.Create(data));
+Response response = await client.AnonymousBodyAsync(RequestContent.Create(data)).ConfigureAwait(false);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("name").ToString());
@@ -304,14 +304,14 @@ var client = new FirstTestTypeSpecClient(endpoint);
 
 var data = new {
     name = "<name>",
-    requiredUnion = new {},
+    requiredUnion = new object(),
     requiredLiteralString = "accept",
     requiredLiteralInt = 123,
-    requiredLiteralFloat = 1.23,
-    requiredLiteralBool = false,
+    requiredLiteralFloat = 1.23F,
+    requiredLiteralBool = true,
     optionalLiteralString = "reject",
     optionalLiteralInt = 456,
-    optionalLiteralFloat = 4.56,
+    optionalLiteralFloat = 4.56F,
     optionalLiteralBool = true,
     requiredBadDescription = "<requiredBadDescription>",
     optionalNullableList = new[] {
@@ -322,7 +322,7 @@ var data = new {
     },
 };
 
-Response response = await client.AnonymousBodyAsync(RequestContent.Create(data));
+Response response = await client.AnonymousBodyAsync(RequestContent.Create(data)).ConfigureAwait(false);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("name").ToString());
@@ -350,11 +350,11 @@ var client = new FirstTestTypeSpecClient(endpoint);
 
 var data = new {
     name = "<name>",
-    requiredUnion = new {},
+    requiredUnion = new object(),
     requiredLiteralString = "accept",
     requiredLiteralInt = 123,
-    requiredLiteralFloat = 1.23,
-    requiredLiteralBool = false,
+    requiredLiteralFloat = 1.23F,
+    requiredLiteralBool = true,
     requiredBadDescription = "<requiredBadDescription>",
     requiredNullableList = new[] {
         1234
@@ -380,14 +380,14 @@ var client = new FirstTestTypeSpecClient(endpoint);
 
 var data = new {
     name = "<name>",
-    requiredUnion = new {},
+    requiredUnion = new object(),
     requiredLiteralString = "accept",
     requiredLiteralInt = 123,
-    requiredLiteralFloat = 1.23,
-    requiredLiteralBool = false,
+    requiredLiteralFloat = 1.23F,
+    requiredLiteralBool = true,
     optionalLiteralString = "reject",
     optionalLiteralInt = 456,
-    optionalLiteralFloat = 4.56,
+    optionalLiteralFloat = 4.56F,
     optionalLiteralBool = true,
     requiredBadDescription = "<requiredBadDescription>",
     optionalNullableList = new[] {
@@ -425,7 +425,7 @@ var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new FirstTestTypeSpecClient(endpoint);
 
 var notFriend = new Friend("<name>");
-var result = await client.FriendlyModelAsync(notFriend);
+var result = await client.FriendlyModelAsync(notFriend).ConfigureAwait(false);
 ]]></code>
 </example>
     </member>
@@ -452,7 +452,7 @@ var data = new {
     name = "<name>",
 };
 
-Response response = await client.FriendlyModelAsync(RequestContent.Create(data));
+Response response = await client.FriendlyModelAsync(RequestContent.Create(data)).ConfigureAwait(false);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("name").ToString());
@@ -484,7 +484,7 @@ This sample shows how to call AddTimeHeaderAsync.
 var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new FirstTestTypeSpecClient(endpoint);
 
-Response response = await client.AddTimeHeaderAsync();
+Response response = await client.AddTimeHeaderAsync().ConfigureAwait(false);
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
@@ -509,7 +509,7 @@ var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new FirstTestTypeSpecClient(endpoint);
 
 var body = new ModelWithFormat(new Uri("http://localhost:3000"), Guid.NewGuid());
-var result = await client.StringFormatAsync(Guid.NewGuid(), body);
+var result = await client.StringFormatAsync(Guid.NewGuid(), body).ConfigureAwait(false);
 ]]></code>
 </example>
     </member>
@@ -537,7 +537,7 @@ var data = new {
     guid = "73f411fe-4f43-4b4b-9cbd-6828d8f4cf9a",
 };
 
-Response response = await client.StringFormatAsync(Guid.NewGuid(), RequestContent.Create(data));
+Response response = await client.StringFormatAsync(Guid.NewGuid(), RequestContent.Create(data)).ConfigureAwait(false);
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
@@ -566,7 +566,7 @@ This sample shows how to call SayHiAsync with required parameters and parse the 
 var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new FirstTestTypeSpecClient(endpoint);
 
-Response response = await client.SayHiAsync("<headParameter>", "<queryParameter>", "<optionalQuery>", new RequestContext());
+Response response = await client.SayHiAsync("<headParameter>", "<queryParameter>", "<optionalQuery>", new RequestContext()).ConfigureAwait(false);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("name").ToString());
@@ -633,19 +633,19 @@ var data = new {
     },
     requiredModel = new {
         name = "<name>",
-        requiredUnion = new {},
+        requiredUnion = new object(),
         requiredLiteralString = "accept",
         requiredLiteralInt = 123,
-        requiredLiteralFloat = 1.23,
-        requiredLiteralBool = false,
+        requiredLiteralFloat = 1.23F,
+        requiredLiteralBool = true,
         requiredBadDescription = "<requiredBadDescription>",
         requiredNullableList = new[] {
             1234
         },
     },
-    requiredUnknown = new {},
+    requiredUnknown = BinaryData.FromString("<your binary data content>"),
     requiredRecordUnknown = new {
-        key = new {},
+        key = BinaryData.FromString("<your binary data content>"),
     },
     modelWithRequiredNullable = new {
         requiredNullablePrimitive = 1234,
@@ -654,7 +654,7 @@ var data = new {
     },
 };
 
-Response response = await client.HelloAgainAsync("<p2>", "<p1>", RequestContent.Create(data));
+Response response = await client.HelloAgainAsync("<p2>", "<p1>", RequestContent.Create(data)).ConfigureAwait(false);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("requiredString").ToString());
@@ -692,14 +692,14 @@ var data = new {
     },
     requiredModel = new {
         name = "<name>",
-        requiredUnion = new {},
+        requiredUnion = new object(),
         requiredLiteralString = "accept",
         requiredLiteralInt = 123,
-        requiredLiteralFloat = 1.23,
-        requiredLiteralBool = false,
+        requiredLiteralFloat = 1.23F,
+        requiredLiteralBool = true,
         optionalLiteralString = "reject",
         optionalLiteralInt = 456,
-        optionalLiteralFloat = 4.56,
+        optionalLiteralFloat = 4.56F,
         optionalLiteralBool = true,
         requiredBadDescription = "<requiredBadDescription>",
         optionalNullableList = new[] {
@@ -709,30 +709,30 @@ var data = new {
             1234
         },
     },
-    intExtensibleEnum = "1",
+    intExtensibleEnum = 1,
     intExtensibleEnumCollection = new[] {
-        "1"
+        1
     },
-    floatExtensibleEnum = "1",
+    floatExtensibleEnum = 1,
     floatExtensibleEnumCollection = new[] {
-        "1"
+        1
     },
-    floatFixedEnum = "1.1",
+    floatFixedEnum = 1.1F,
     floatFixedEnumCollection = new[] {
-        "1.1"
+        1.1F
     },
-    intFixedEnum = "1",
+    intFixedEnum = 1,
     intFixedEnumCollection = new[] {
-        "1"
+        1
     },
     stringFixedEnum = "1",
-    requiredUnknown = new {},
-    optionalUnknown = new {},
+    requiredUnknown = BinaryData.FromString("<your binary data content>"),
+    optionalUnknown = BinaryData.FromString("<your binary data content>"),
     requiredRecordUnknown = new {
-        key = new {},
+        key = BinaryData.FromString("<your binary data content>"),
     },
     optionalRecordUnknown = new {
-        key = new {},
+        key = BinaryData.FromString("<your binary data content>"),
     },
     modelWithRequiredNullable = new {
         requiredNullablePrimitive = 1234,
@@ -741,7 +741,7 @@ var data = new {
     },
 };
 
-Response response = await client.HelloAgainAsync("<p2>", "<p1>", RequestContent.Create(data));
+Response response = await client.HelloAgainAsync("<p2>", "<p1>", RequestContent.Create(data)).ConfigureAwait(false);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("requiredString").ToString());
@@ -800,19 +800,19 @@ var data = new {
     },
     requiredModel = new {
         name = "<name>",
-        requiredUnion = new {},
+        requiredUnion = new object(),
         requiredLiteralString = "accept",
         requiredLiteralInt = 123,
-        requiredLiteralFloat = 1.23,
-        requiredLiteralBool = false,
+        requiredLiteralFloat = 1.23F,
+        requiredLiteralBool = true,
         requiredBadDescription = "<requiredBadDescription>",
         requiredNullableList = new[] {
             1234
         },
     },
-    requiredUnknown = new {},
+    requiredUnknown = BinaryData.FromString("<your binary data content>"),
     requiredRecordUnknown = new {
-        key = new {},
+        key = BinaryData.FromString("<your binary data content>"),
     },
     modelWithRequiredNullable = new {
         requiredNullablePrimitive = 1234,
@@ -859,14 +859,14 @@ var data = new {
     },
     requiredModel = new {
         name = "<name>",
-        requiredUnion = new {},
+        requiredUnion = new object(),
         requiredLiteralString = "accept",
         requiredLiteralInt = 123,
-        requiredLiteralFloat = 1.23,
-        requiredLiteralBool = false,
+        requiredLiteralFloat = 1.23F,
+        requiredLiteralBool = true,
         optionalLiteralString = "reject",
         optionalLiteralInt = 456,
-        optionalLiteralFloat = 4.56,
+        optionalLiteralFloat = 4.56F,
         optionalLiteralBool = true,
         requiredBadDescription = "<requiredBadDescription>",
         optionalNullableList = new[] {
@@ -876,30 +876,30 @@ var data = new {
             1234
         },
     },
-    intExtensibleEnum = "1",
+    intExtensibleEnum = 1,
     intExtensibleEnumCollection = new[] {
-        "1"
+        1
     },
-    floatExtensibleEnum = "1",
+    floatExtensibleEnum = 1,
     floatExtensibleEnumCollection = new[] {
-        "1"
+        1
     },
-    floatFixedEnum = "1.1",
+    floatFixedEnum = 1.1F,
     floatFixedEnumCollection = new[] {
-        "1.1"
+        1.1F
     },
-    intFixedEnum = "1",
+    intFixedEnum = 1,
     intFixedEnumCollection = new[] {
-        "1"
+        1
     },
     stringFixedEnum = "1",
-    requiredUnknown = new {},
-    optionalUnknown = new {},
+    requiredUnknown = BinaryData.FromString("<your binary data content>"),
+    optionalUnknown = BinaryData.FromString("<your binary data content>"),
     requiredRecordUnknown = new {
-        key = new {},
+        key = BinaryData.FromString("<your binary data content>"),
     },
     optionalRecordUnknown = new {
-        key = new {},
+        key = BinaryData.FromString("<your binary data content>"),
     },
     modelWithRequiredNullable = new {
         requiredNullablePrimitive = 1234,
@@ -967,19 +967,19 @@ var data = new {
     },
     requiredModel = new {
         name = "<name>",
-        requiredUnion = new {},
+        requiredUnion = new object(),
         requiredLiteralString = "accept",
         requiredLiteralInt = 123,
-        requiredLiteralFloat = 1.23,
-        requiredLiteralBool = false,
+        requiredLiteralFloat = 1.23F,
+        requiredLiteralBool = true,
         requiredBadDescription = "<requiredBadDescription>",
         requiredNullableList = new[] {
             1234
         },
     },
-    requiredUnknown = new {},
+    requiredUnknown = BinaryData.FromString("<your binary data content>"),
     requiredRecordUnknown = new {
-        key = new {},
+        key = BinaryData.FromString("<your binary data content>"),
     },
     modelWithRequiredNullable = new {
         requiredNullablePrimitive = 1234,
@@ -988,7 +988,7 @@ var data = new {
     },
 };
 
-Response response = await client.NoContentTypeAsync("<p2>", "<p1>", RequestContent.Create(data));
+Response response = await client.NoContentTypeAsync("<p2>", "<p1>", RequestContent.Create(data)).ConfigureAwait(false);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("requiredString").ToString());
@@ -1026,14 +1026,14 @@ var data = new {
     },
     requiredModel = new {
         name = "<name>",
-        requiredUnion = new {},
+        requiredUnion = new object(),
         requiredLiteralString = "accept",
         requiredLiteralInt = 123,
-        requiredLiteralFloat = 1.23,
-        requiredLiteralBool = false,
+        requiredLiteralFloat = 1.23F,
+        requiredLiteralBool = true,
         optionalLiteralString = "reject",
         optionalLiteralInt = 456,
-        optionalLiteralFloat = 4.56,
+        optionalLiteralFloat = 4.56F,
         optionalLiteralBool = true,
         requiredBadDescription = "<requiredBadDescription>",
         optionalNullableList = new[] {
@@ -1043,30 +1043,30 @@ var data = new {
             1234
         },
     },
-    intExtensibleEnum = "1",
+    intExtensibleEnum = 1,
     intExtensibleEnumCollection = new[] {
-        "1"
+        1
     },
-    floatExtensibleEnum = "1",
+    floatExtensibleEnum = 1,
     floatExtensibleEnumCollection = new[] {
-        "1"
+        1
     },
-    floatFixedEnum = "1.1",
+    floatFixedEnum = 1.1F,
     floatFixedEnumCollection = new[] {
-        "1.1"
+        1.1F
     },
-    intFixedEnum = "1",
+    intFixedEnum = 1,
     intFixedEnumCollection = new[] {
-        "1"
+        1
     },
     stringFixedEnum = "1",
-    requiredUnknown = new {},
-    optionalUnknown = new {},
+    requiredUnknown = BinaryData.FromString("<your binary data content>"),
+    optionalUnknown = BinaryData.FromString("<your binary data content>"),
     requiredRecordUnknown = new {
-        key = new {},
+        key = BinaryData.FromString("<your binary data content>"),
     },
     optionalRecordUnknown = new {
-        key = new {},
+        key = BinaryData.FromString("<your binary data content>"),
     },
     modelWithRequiredNullable = new {
         requiredNullablePrimitive = 1234,
@@ -1075,7 +1075,7 @@ var data = new {
     },
 };
 
-Response response = await client.NoContentTypeAsync("<p2>", "<p1>", RequestContent.Create(data));
+Response response = await client.NoContentTypeAsync("<p2>", "<p1>", RequestContent.Create(data)).ConfigureAwait(false);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("requiredString").ToString());
@@ -1144,9 +1144,9 @@ var data = new {
             1234
         },
     },
-    requiredUnknown = new {},
+    requiredUnknown = BinaryData.FromString("<your binary data content>"),
     requiredRecordUnknown = new {
-        key = new {},
+        key = BinaryData.FromString("<your binary data content>"),
     },
     modelWithRequiredNullable = new {
         requiredNullablePrimitive = 1234,
@@ -1210,30 +1210,30 @@ var data = new {
             1234
         },
     },
-    intExtensibleEnum = "1",
+    intExtensibleEnum = 1,
     intExtensibleEnumCollection = new[] {
-        "1"
+        1
     },
-    floatExtensibleEnum = "1",
+    floatExtensibleEnum = 1,
     floatExtensibleEnumCollection = new[] {
-        "1"
+        1
     },
-    floatFixedEnum = "1.1",
+    floatFixedEnum = 1.1F,
     floatFixedEnumCollection = new[] {
-        "1.1"
+        1.1F
     },
-    intFixedEnum = "1",
+    intFixedEnum = 1,
     intFixedEnumCollection = new[] {
-        "1"
+        1
     },
     stringFixedEnum = "1",
-    requiredUnknown = new {},
-    optionalUnknown = new {},
+    requiredUnknown = BinaryData.FromString("<your binary data content>"),
+    optionalUnknown = BinaryData.FromString("<your binary data content>"),
     requiredRecordUnknown = new {
-        key = new {},
+        key = BinaryData.FromString("<your binary data content>"),
     },
     optionalRecordUnknown = new {
-        key = new {},
+        key = BinaryData.FromString("<your binary data content>"),
     },
     modelWithRequiredNullable = new {
         requiredNullablePrimitive = 1234,

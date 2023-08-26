@@ -159,7 +159,7 @@ This sample shows how to call Base64url with required request content and parse 
 var client = new BytesClient().GetPropertyClient("1.0.0");
 
 var data = new {
-    value = new {},
+    value = BinaryData.FromString("<your binary data content>"),
 };
 
 Response response = client.Base64url(RequestContent.Create(data));
@@ -175,11 +175,11 @@ This sample shows how to call Base64urlArrayAsync with required parameters.
 <code><![CDATA[
 var client = new BytesClient().GetPropertyClient("1.0.0");
 
-var body = new Base64urlArrayBytesProperty(new BinaryData[] 
+var body = new Base64urlArrayBytesProperty(new BinaryData[]
 {
     BinaryData.FromString("<your binary data content>")
 });
-var result = await client.Base64urlArrayAsync(body);
+var result = await client.Base64urlArrayAsync(body).ConfigureAwait(false);
 ]]></code>
 </example>
     </member>
@@ -205,11 +205,11 @@ var client = new BytesClient().GetPropertyClient("1.0.0");
 
 var data = new {
     value = new[] {
-        new {}
+        BinaryData.FromString("<your binary data content>")
     },
 };
 
-Response response = await client.Base64urlArrayAsync(RequestContent.Create(data));
+Response response = await client.Base64urlArrayAsync(RequestContent.Create(data)).ConfigureAwait(false);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("value")[0].ToString());
@@ -224,7 +224,7 @@ var client = new BytesClient().GetPropertyClient("1.0.0");
 
 var data = new {
     value = new[] {
-        new {}
+        BinaryData.FromString("<your binary data content>")
     },
 };
 

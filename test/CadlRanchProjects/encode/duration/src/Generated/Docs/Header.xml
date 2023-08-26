@@ -62,7 +62,7 @@ This sample shows how to call Iso8601Array with required parameters.
 <code><![CDATA[
 var client = new DurationClient().GetHeaderClient("1.0.0");
 
-Response response = client.Iso8601Array(new TimeSpan[]{new TimeSpan(1, 2, 3)});
+Response response = client.Iso8601Array(new TimeSpan[]{new TimeSpan(1, 23, 45)});
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
@@ -73,7 +73,7 @@ This sample shows how to call Int32SecondsAsync with required parameters.
 <code><![CDATA[
 var client = new DurationClient().GetHeaderClient("1.0.0");
 
-Response response = await client.Int32SecondsAsync(new TimeSpan(1, 2, 3));
+Response response = await client.Int32SecondsAsync(new TimeSpan(1, 23, 45)).ConfigureAwait(false);
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
@@ -84,7 +84,7 @@ This sample shows how to call Int32Seconds with required parameters.
 <code><![CDATA[
 var client = new DurationClient().GetHeaderClient("1.0.0");
 
-Response response = client.Int32Seconds(new TimeSpan(1, 2, 3));
+Response response = client.Int32Seconds(new TimeSpan(1, 23, 45));
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
@@ -95,7 +95,7 @@ This sample shows how to call FloatSecondsAsync with required parameters.
 <code><![CDATA[
 var client = new DurationClient().GetHeaderClient("1.0.0");
 
-Response response = await client.FloatSecondsAsync(new TimeSpan(1, 2, 3));
+Response response = await client.FloatSecondsAsync(new TimeSpan(1, 23, 45)).ConfigureAwait(false);
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
@@ -106,7 +106,7 @@ This sample shows how to call FloatSeconds with required parameters.
 <code><![CDATA[
 var client = new DurationClient().GetHeaderClient("1.0.0");
 
-Response response = client.FloatSeconds(new TimeSpan(1, 2, 3));
+Response response = client.FloatSeconds(new TimeSpan(1, 23, 45));
 Console.WriteLine(response.Status);
 ]]></code>
 </example>

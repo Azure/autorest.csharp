@@ -138,8 +138,8 @@ namespace MultipleMediaTypes.Samples
             var endpoint = new Uri("<https://my-service.azure.com>");
             var client = new MultipleMediaTypesClient(endpoint);
 
-            var body = "<null>";
-            var result = await client.OneStringBodyThreeContentTypesAsync(body, ContentType.ApplicationOctetStream);
+            var body = "<String>";
+            var result = await client.OneStringBodyThreeContentTypesAsync(body, ContentType.ApplicationOctetStream).ConfigureAwait(false);
         }
 
         [Test]

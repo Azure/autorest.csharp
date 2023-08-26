@@ -7,7 +7,7 @@ This sample shows how to call GetDatetimeAsync.
 <code><![CDATA[
 var client = new ValueTypesClient().GetDatetimeClient("1.0.0");
 
-var result = await client.GetDatetimeAsync();
+var result = await client.GetDatetimeAsync().ConfigureAwait(false);
 ]]></code>
 </example>
     </member>
@@ -27,7 +27,7 @@ This sample shows how to call GetDatetimeAsync with required parameters and pars
 <code><![CDATA[
 var client = new ValueTypesClient().GetDatetimeClient("1.0.0");
 
-Response response = await client.GetDatetimeAsync(new RequestContext());
+Response response = await client.GetDatetimeAsync(new RequestContext()).ConfigureAwait(false);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("property").ToString());
@@ -54,7 +54,7 @@ This sample shows how to call PutAsync with required parameters.
 var client = new ValueTypesClient().GetDatetimeClient("1.0.0");
 
 var body = new DatetimeProperty(DateTimeOffset.UtcNow);
-var result = await client.PutAsync(body);
+var result = await client.PutAsync(body).ConfigureAwait(false);
 ]]></code>
 </example>
     </member>
@@ -76,10 +76,10 @@ This sample shows how to call PutAsync with required request content.
 var client = new ValueTypesClient().GetDatetimeClient("1.0.0");
 
 var data = new {
-    property = "2022-05-10T14:57:31.2311892-04:00",
+    property = "2022-05-10T14:14:57.0310000Z",
 };
 
-Response response = await client.PutAsync(RequestContent.Create(data));
+Response response = await client.PutAsync(RequestContent.Create(data)).ConfigureAwait(false);
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
@@ -91,7 +91,7 @@ This sample shows how to call Put with required request content.
 var client = new ValueTypesClient().GetDatetimeClient("1.0.0");
 
 var data = new {
-    property = "2022-05-10T14:57:31.2311892-04:00",
+    property = "2022-05-10T14:14:57.0310000Z",
 };
 
 Response response = client.Put(RequestContent.Create(data));

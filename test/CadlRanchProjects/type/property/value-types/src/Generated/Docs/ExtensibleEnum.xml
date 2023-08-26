@@ -7,7 +7,7 @@ This sample shows how to call GetExtensibleEnumAsync.
 <code><![CDATA[
 var client = new ValueTypesClient().GetExtensibleEnumClient("1.0.0");
 
-var result = await client.GetExtensibleEnumAsync();
+var result = await client.GetExtensibleEnumAsync().ConfigureAwait(false);
 ]]></code>
 </example>
     </member>
@@ -27,7 +27,7 @@ This sample shows how to call GetExtensibleEnumAsync with required parameters an
 <code><![CDATA[
 var client = new ValueTypesClient().GetExtensibleEnumClient("1.0.0");
 
-Response response = await client.GetExtensibleEnumAsync(new RequestContext());
+Response response = await client.GetExtensibleEnumAsync(new RequestContext()).ConfigureAwait(false);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("property").ToString());
@@ -54,7 +54,7 @@ This sample shows how to call PutAsync with required parameters.
 var client = new ValueTypesClient().GetExtensibleEnumClient("1.0.0");
 
 var body = new ExtensibleEnumProperty(InnerEnum.ValueOne);
-var result = await client.PutAsync(body);
+var result = await client.PutAsync(body).ConfigureAwait(false);
 ]]></code>
 </example>
     </member>
@@ -79,7 +79,7 @@ var data = new {
     property = "ValueOne",
 };
 
-Response response = await client.PutAsync(RequestContent.Create(data));
+Response response = await client.PutAsync(RequestContent.Create(data)).ConfigureAwait(false);
 Console.WriteLine(response.Status);
 ]]></code>
 </example>

@@ -20,7 +20,7 @@ namespace Encode.Duration.Samples
         {
             var client = new DurationClient().GetQueryClient("1.0.0");
 
-            Response response = client.Default(new TimeSpan(1, 2, 3));
+            Response response = client.Default(new TimeSpan(1, 23, 45));
             Console.WriteLine(response.Status);
         }
 
@@ -30,7 +30,7 @@ namespace Encode.Duration.Samples
         {
             var client = new DurationClient().GetQueryClient("1.0.0");
 
-            Response response = client.Default(new TimeSpan(1, 2, 3));
+            Response response = client.Default(new TimeSpan(1, 23, 45));
             Console.WriteLine(response.Status);
         }
 
@@ -40,7 +40,7 @@ namespace Encode.Duration.Samples
         {
             var client = new DurationClient().GetQueryClient("1.0.0");
 
-            Response response = await client.DefaultAsync(new TimeSpan(1, 2, 3));
+            Response response = await client.DefaultAsync(new TimeSpan(1, 23, 45)).ConfigureAwait(false);
             Console.WriteLine(response.Status);
         }
 
@@ -50,7 +50,7 @@ namespace Encode.Duration.Samples
         {
             var client = new DurationClient().GetQueryClient("1.0.0");
 
-            Response response = await client.DefaultAsync(new TimeSpan(1, 2, 3));
+            Response response = await client.DefaultAsync(new TimeSpan(1, 23, 45)).ConfigureAwait(false);
             Console.WriteLine(response.Status);
         }
 
@@ -60,7 +60,7 @@ namespace Encode.Duration.Samples
         {
             var client = new DurationClient().GetQueryClient("1.0.0");
 
-            Response response = client.Iso8601(new TimeSpan(1, 2, 3));
+            Response response = client.Iso8601(new TimeSpan(1, 23, 45));
             Console.WriteLine(response.Status);
         }
 
@@ -70,7 +70,7 @@ namespace Encode.Duration.Samples
         {
             var client = new DurationClient().GetQueryClient("1.0.0");
 
-            Response response = client.Iso8601(new TimeSpan(1, 2, 3));
+            Response response = client.Iso8601(new TimeSpan(1, 23, 45));
             Console.WriteLine(response.Status);
         }
 
@@ -80,7 +80,7 @@ namespace Encode.Duration.Samples
         {
             var client = new DurationClient().GetQueryClient("1.0.0");
 
-            Response response = await client.Iso8601Async(new TimeSpan(1, 2, 3));
+            Response response = await client.Iso8601Async(new TimeSpan(1, 23, 45)).ConfigureAwait(false);
             Console.WriteLine(response.Status);
         }
 
@@ -90,7 +90,7 @@ namespace Encode.Duration.Samples
         {
             var client = new DurationClient().GetQueryClient("1.0.0");
 
-            Response response = await client.Iso8601Async(new TimeSpan(1, 2, 3));
+            Response response = await client.Iso8601Async(new TimeSpan(1, 23, 45)).ConfigureAwait(false);
             Console.WriteLine(response.Status);
         }
 
@@ -100,7 +100,7 @@ namespace Encode.Duration.Samples
         {
             var client = new DurationClient().GetQueryClient("1.0.0");
 
-            Response response = client.Int32Seconds(new TimeSpan(1, 2, 3));
+            Response response = client.Int32Seconds(new TimeSpan(1, 23, 45));
             Console.WriteLine(response.Status);
         }
 
@@ -110,7 +110,7 @@ namespace Encode.Duration.Samples
         {
             var client = new DurationClient().GetQueryClient("1.0.0");
 
-            Response response = client.Int32Seconds(new TimeSpan(1, 2, 3));
+            Response response = client.Int32Seconds(new TimeSpan(1, 23, 45));
             Console.WriteLine(response.Status);
         }
 
@@ -120,7 +120,7 @@ namespace Encode.Duration.Samples
         {
             var client = new DurationClient().GetQueryClient("1.0.0");
 
-            Response response = await client.Int32SecondsAsync(new TimeSpan(1, 2, 3));
+            Response response = await client.Int32SecondsAsync(new TimeSpan(1, 23, 45)).ConfigureAwait(false);
             Console.WriteLine(response.Status);
         }
 
@@ -130,7 +130,7 @@ namespace Encode.Duration.Samples
         {
             var client = new DurationClient().GetQueryClient("1.0.0");
 
-            Response response = await client.Int32SecondsAsync(new TimeSpan(1, 2, 3));
+            Response response = await client.Int32SecondsAsync(new TimeSpan(1, 23, 45)).ConfigureAwait(false);
             Console.WriteLine(response.Status);
         }
 
@@ -140,7 +140,7 @@ namespace Encode.Duration.Samples
         {
             var client = new DurationClient().GetQueryClient("1.0.0");
 
-            Response response = client.FloatSeconds(new TimeSpan(1, 2, 3));
+            Response response = client.FloatSeconds(new TimeSpan(1, 23, 45));
             Console.WriteLine(response.Status);
         }
 
@@ -150,7 +150,7 @@ namespace Encode.Duration.Samples
         {
             var client = new DurationClient().GetQueryClient("1.0.0");
 
-            Response response = client.FloatSeconds(new TimeSpan(1, 2, 3));
+            Response response = client.FloatSeconds(new TimeSpan(1, 23, 45));
             Console.WriteLine(response.Status);
         }
 
@@ -160,7 +160,7 @@ namespace Encode.Duration.Samples
         {
             var client = new DurationClient().GetQueryClient("1.0.0");
 
-            Response response = await client.FloatSecondsAsync(new TimeSpan(1, 2, 3));
+            Response response = await client.FloatSecondsAsync(new TimeSpan(1, 23, 45)).ConfigureAwait(false);
             Console.WriteLine(response.Status);
         }
 
@@ -170,7 +170,7 @@ namespace Encode.Duration.Samples
         {
             var client = new DurationClient().GetQueryClient("1.0.0");
 
-            Response response = await client.FloatSecondsAsync(new TimeSpan(1, 2, 3));
+            Response response = await client.FloatSecondsAsync(new TimeSpan(1, 23, 45)).ConfigureAwait(false);
             Console.WriteLine(response.Status);
         }
 
@@ -180,7 +180,7 @@ namespace Encode.Duration.Samples
         {
             var client = new DurationClient().GetQueryClient("1.0.0");
 
-            Response response = client.Int32SecondsArray(new TimeSpan[] { new TimeSpan(1, 2, 3) });
+            Response response = client.Int32SecondsArray(new TimeSpan[] { new TimeSpan(1, 23, 45) });
             Console.WriteLine(response.Status);
         }
 
@@ -190,7 +190,7 @@ namespace Encode.Duration.Samples
         {
             var client = new DurationClient().GetQueryClient("1.0.0");
 
-            Response response = client.Int32SecondsArray(new TimeSpan[] { new TimeSpan(1, 2, 3) });
+            Response response = client.Int32SecondsArray(new TimeSpan[] { new TimeSpan(1, 23, 45) });
             Console.WriteLine(response.Status);
         }
 
@@ -200,7 +200,7 @@ namespace Encode.Duration.Samples
         {
             var client = new DurationClient().GetQueryClient("1.0.0");
 
-            Response response = await client.Int32SecondsArrayAsync(new TimeSpan[] { new TimeSpan(1, 2, 3) });
+            Response response = await client.Int32SecondsArrayAsync(new TimeSpan[] { new TimeSpan(1, 23, 45) }).ConfigureAwait(false);
             Console.WriteLine(response.Status);
         }
 
@@ -210,7 +210,7 @@ namespace Encode.Duration.Samples
         {
             var client = new DurationClient().GetQueryClient("1.0.0");
 
-            Response response = await client.Int32SecondsArrayAsync(new TimeSpan[] { new TimeSpan(1, 2, 3) });
+            Response response = await client.Int32SecondsArrayAsync(new TimeSpan[] { new TimeSpan(1, 23, 45) }).ConfigureAwait(false);
             Console.WriteLine(response.Status);
         }
     }

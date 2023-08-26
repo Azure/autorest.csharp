@@ -6,13 +6,8 @@
 #nullable disable
 
 using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Text.Json;
 using System.Threading.Tasks;
 using Azure;
-using Azure.Core;
-using Azure.Identity;
 using NUnit.Framework;
 
 namespace Encode.Datetime.Samples
@@ -45,7 +40,7 @@ namespace Encode.Datetime.Samples
         {
             var client = new DatetimeClient().GetHeaderClient("1.0.0");
 
-            Response response = await client.DefaultAsync(DateTimeOffset.UtcNow);
+            Response response = await client.DefaultAsync(DateTimeOffset.UtcNow).ConfigureAwait(false);
             Console.WriteLine(response.Status);
         }
 
@@ -55,7 +50,7 @@ namespace Encode.Datetime.Samples
         {
             var client = new DatetimeClient().GetHeaderClient("1.0.0");
 
-            Response response = await client.DefaultAsync(DateTimeOffset.UtcNow);
+            Response response = await client.DefaultAsync(DateTimeOffset.UtcNow).ConfigureAwait(false);
             Console.WriteLine(response.Status);
         }
 
@@ -85,7 +80,7 @@ namespace Encode.Datetime.Samples
         {
             var client = new DatetimeClient().GetHeaderClient("1.0.0");
 
-            Response response = await client.Rfc3339Async(DateTimeOffset.UtcNow);
+            Response response = await client.Rfc3339Async(DateTimeOffset.UtcNow).ConfigureAwait(false);
             Console.WriteLine(response.Status);
         }
 
@@ -95,7 +90,7 @@ namespace Encode.Datetime.Samples
         {
             var client = new DatetimeClient().GetHeaderClient("1.0.0");
 
-            Response response = await client.Rfc3339Async(DateTimeOffset.UtcNow);
+            Response response = await client.Rfc3339Async(DateTimeOffset.UtcNow).ConfigureAwait(false);
             Console.WriteLine(response.Status);
         }
 
@@ -125,7 +120,7 @@ namespace Encode.Datetime.Samples
         {
             var client = new DatetimeClient().GetHeaderClient("1.0.0");
 
-            Response response = await client.Rfc7231Async(DateTimeOffset.UtcNow);
+            Response response = await client.Rfc7231Async(DateTimeOffset.UtcNow).ConfigureAwait(false);
             Console.WriteLine(response.Status);
         }
 
@@ -135,7 +130,7 @@ namespace Encode.Datetime.Samples
         {
             var client = new DatetimeClient().GetHeaderClient("1.0.0");
 
-            Response response = await client.Rfc7231Async(DateTimeOffset.UtcNow);
+            Response response = await client.Rfc7231Async(DateTimeOffset.UtcNow).ConfigureAwait(false);
             Console.WriteLine(response.Status);
         }
 
@@ -165,7 +160,7 @@ namespace Encode.Datetime.Samples
         {
             var client = new DatetimeClient().GetHeaderClient("1.0.0");
 
-            Response response = await client.UnixTimestampAsync(DateTimeOffset.UtcNow);
+            Response response = await client.UnixTimestampAsync(DateTimeOffset.UtcNow).ConfigureAwait(false);
             Console.WriteLine(response.Status);
         }
 
@@ -175,7 +170,7 @@ namespace Encode.Datetime.Samples
         {
             var client = new DatetimeClient().GetHeaderClient("1.0.0");
 
-            Response response = await client.UnixTimestampAsync(DateTimeOffset.UtcNow);
+            Response response = await client.UnixTimestampAsync(DateTimeOffset.UtcNow).ConfigureAwait(false);
             Console.WriteLine(response.Status);
         }
 
@@ -205,7 +200,7 @@ namespace Encode.Datetime.Samples
         {
             var client = new DatetimeClient().GetHeaderClient("1.0.0");
 
-            Response response = await client.UnixTimestampArrayAsync(new DateTimeOffset[] { DateTimeOffset.UtcNow });
+            Response response = await client.UnixTimestampArrayAsync(new DateTimeOffset[] { DateTimeOffset.UtcNow }).ConfigureAwait(false);
             Console.WriteLine(response.Status);
         }
 
@@ -215,7 +210,7 @@ namespace Encode.Datetime.Samples
         {
             var client = new DatetimeClient().GetHeaderClient("1.0.0");
 
-            Response response = await client.UnixTimestampArrayAsync(new DateTimeOffset[] { DateTimeOffset.UtcNow });
+            Response response = await client.UnixTimestampArrayAsync(new DateTimeOffset[] { DateTimeOffset.UtcNow }).ConfigureAwait(false);
             Console.WriteLine(response.Status);
         }
     }

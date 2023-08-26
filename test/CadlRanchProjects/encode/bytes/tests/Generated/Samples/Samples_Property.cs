@@ -6,13 +6,10 @@
 #nullable disable
 
 using System;
-using System.Collections.Generic;
-using System.IO;
 using System.Text.Json;
 using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
-using Azure.Identity;
 using Encode.Bytes.Models;
 using NUnit.Framework;
 
@@ -28,7 +25,7 @@ namespace Encode.Bytes.Samples
 
             var data = new
             {
-                value = new { },
+                value = BinaryData.FromString("<your binary data content>"),
             };
 
             Response response = client.Default(RequestContent.Create(data));
@@ -45,7 +42,7 @@ namespace Encode.Bytes.Samples
 
             var data = new
             {
-                value = new { },
+                value = BinaryData.FromString("<your binary data content>"),
             };
 
             Response response = client.Default(RequestContent.Create(data));
@@ -62,10 +59,10 @@ namespace Encode.Bytes.Samples
 
             var data = new
             {
-                value = new { },
+                value = BinaryData.FromString("<your binary data content>"),
             };
 
-            Response response = await client.DefaultAsync(RequestContent.Create(data));
+            Response response = await client.DefaultAsync(RequestContent.Create(data)).ConfigureAwait(false);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("value").ToString());
@@ -79,10 +76,10 @@ namespace Encode.Bytes.Samples
 
             var data = new
             {
-                value = new { },
+                value = BinaryData.FromString("<your binary data content>"),
             };
 
-            Response response = await client.DefaultAsync(RequestContent.Create(data));
+            Response response = await client.DefaultAsync(RequestContent.Create(data)).ConfigureAwait(false);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("value").ToString());
@@ -95,7 +92,7 @@ namespace Encode.Bytes.Samples
             var client = new BytesClient().GetPropertyClient("1.0.0");
 
             var body = new DefaultBytesProperty(BinaryData.FromString("<your binary data content>"));
-            var result = await client.DefaultAsync(body);
+            var result = await client.DefaultAsync(body).ConfigureAwait(false);
         }
 
         [Test]
@@ -106,7 +103,7 @@ namespace Encode.Bytes.Samples
 
             var data = new
             {
-                value = new { },
+                value = BinaryData.FromString("<your binary data content>"),
             };
 
             Response response = client.Base64(RequestContent.Create(data));
@@ -123,7 +120,7 @@ namespace Encode.Bytes.Samples
 
             var data = new
             {
-                value = new { },
+                value = BinaryData.FromString("<your binary data content>"),
             };
 
             Response response = client.Base64(RequestContent.Create(data));
@@ -140,10 +137,10 @@ namespace Encode.Bytes.Samples
 
             var data = new
             {
-                value = new { },
+                value = BinaryData.FromString("<your binary data content>"),
             };
 
-            Response response = await client.Base64Async(RequestContent.Create(data));
+            Response response = await client.Base64Async(RequestContent.Create(data)).ConfigureAwait(false);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("value").ToString());
@@ -157,10 +154,10 @@ namespace Encode.Bytes.Samples
 
             var data = new
             {
-                value = new { },
+                value = BinaryData.FromString("<your binary data content>"),
             };
 
-            Response response = await client.Base64Async(RequestContent.Create(data));
+            Response response = await client.Base64Async(RequestContent.Create(data)).ConfigureAwait(false);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("value").ToString());
@@ -173,7 +170,7 @@ namespace Encode.Bytes.Samples
             var client = new BytesClient().GetPropertyClient("1.0.0");
 
             var body = new Base64BytesProperty(BinaryData.FromString("<your binary data content>"));
-            var result = await client.Base64Async(body);
+            var result = await client.Base64Async(body).ConfigureAwait(false);
         }
 
         [Test]
@@ -184,7 +181,7 @@ namespace Encode.Bytes.Samples
 
             var data = new
             {
-                value = new { },
+                value = BinaryData.FromString("<your binary data content>"),
             };
 
             Response response = client.Base64url(RequestContent.Create(data));
@@ -201,7 +198,7 @@ namespace Encode.Bytes.Samples
 
             var data = new
             {
-                value = new { },
+                value = BinaryData.FromString("<your binary data content>"),
             };
 
             Response response = client.Base64url(RequestContent.Create(data));
@@ -218,10 +215,10 @@ namespace Encode.Bytes.Samples
 
             var data = new
             {
-                value = new { },
+                value = BinaryData.FromString("<your binary data content>"),
             };
 
-            Response response = await client.Base64urlAsync(RequestContent.Create(data));
+            Response response = await client.Base64urlAsync(RequestContent.Create(data)).ConfigureAwait(false);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("value").ToString());
@@ -235,10 +232,10 @@ namespace Encode.Bytes.Samples
 
             var data = new
             {
-                value = new { },
+                value = BinaryData.FromString("<your binary data content>"),
             };
 
-            Response response = await client.Base64urlAsync(RequestContent.Create(data));
+            Response response = await client.Base64urlAsync(RequestContent.Create(data)).ConfigureAwait(false);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("value").ToString());
@@ -251,7 +248,7 @@ namespace Encode.Bytes.Samples
             var client = new BytesClient().GetPropertyClient("1.0.0");
 
             var body = new Base64urlBytesProperty(BinaryData.FromString("<your binary data content>"));
-            var result = await client.Base64urlAsync(body);
+            var result = await client.Base64urlAsync(body).ConfigureAwait(false);
         }
 
         [Test]
@@ -263,7 +260,7 @@ namespace Encode.Bytes.Samples
             var data = new
             {
                 value = new[] {
-        new {}
+        BinaryData.FromString("<your binary data content>")
     },
             };
 
@@ -282,7 +279,7 @@ namespace Encode.Bytes.Samples
             var data = new
             {
                 value = new[] {
-        new {}
+        BinaryData.FromString("<your binary data content>")
     },
             };
 
@@ -301,11 +298,11 @@ namespace Encode.Bytes.Samples
             var data = new
             {
                 value = new[] {
-        new {}
+        BinaryData.FromString("<your binary data content>")
     },
             };
 
-            Response response = await client.Base64urlArrayAsync(RequestContent.Create(data));
+            Response response = await client.Base64urlArrayAsync(RequestContent.Create(data)).ConfigureAwait(false);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("value")[0].ToString());
@@ -320,11 +317,11 @@ namespace Encode.Bytes.Samples
             var data = new
             {
                 value = new[] {
-        new {}
+        BinaryData.FromString("<your binary data content>")
     },
             };
 
-            Response response = await client.Base64urlArrayAsync(RequestContent.Create(data));
+            Response response = await client.Base64urlArrayAsync(RequestContent.Create(data)).ConfigureAwait(false);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("value")[0].ToString());
@@ -340,7 +337,7 @@ namespace Encode.Bytes.Samples
             {
     BinaryData.FromString("<your binary data content>")
             });
-            var result = await client.Base64urlArrayAsync(body);
+            var result = await client.Base64urlArrayAsync(body).ConfigureAwait(false);
         }
     }
 }
