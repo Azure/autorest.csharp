@@ -257,7 +257,7 @@ namespace paging
             uri.Reset(_endpoint);
             uri.AppendPath("/paging/multiple", false);
             request.Uri = uri;
-            request.Headers.Add("client-request-id", message.Request.ClientRequestId);
+            request.Headers.Add("client-request-id", request.ClientRequestId);
             if (pagingGetMultiplePagesOptions?.Maxresults != null)
             {
                 request.Headers.Add("maxresults", pagingGetMultiplePagesOptions.Maxresults.Value);
@@ -491,7 +491,7 @@ namespace paging
             uri.Reset(_endpoint);
             uri.AppendPath("/paging/multiple/odata", false);
             request.Uri = uri;
-            request.Headers.Add("client-request-id", message.Request.ClientRequestId);
+            request.Headers.Add("client-request-id", request.ClientRequestId);
             if (pagingGetOdataMultiplePagesOptions?.Maxresults != null)
             {
                 request.Headers.Add("maxresults", pagingGetOdataMultiplePagesOptions.Maxresults.Value);
@@ -556,12 +556,12 @@ namespace paging
             uri.AppendPath("/paging/multiple/withpath/", false);
             uri.AppendPath(pagingGetMultiplePagesWithOffsetOptions.Offset, true);
             request.Uri = uri;
-            request.Headers.Add("client-request-id", message.Request.ClientRequestId);
-            if (pagingGetMultiplePagesWithOffsetOptions?.Maxresults != null)
+            request.Headers.Add("client-request-id", request.ClientRequestId);
+            if (pagingGetMultiplePagesWithOffsetOptions.Maxresults != null)
             {
                 request.Headers.Add("maxresults", pagingGetMultiplePagesWithOffsetOptions.Maxresults.Value);
             }
-            if (pagingGetMultiplePagesWithOffsetOptions?.Timeout != null)
+            if (pagingGetMultiplePagesWithOffsetOptions.Timeout != null)
             {
                 request.Headers.Add("timeout", pagingGetMultiplePagesWithOffsetOptions.Timeout.Value);
             }
@@ -1045,7 +1045,7 @@ namespace paging
             uri.Reset(_endpoint);
             uri.AppendPath("/paging/multiple/lro", false);
             request.Uri = uri;
-            request.Headers.Add("client-request-id", message.Request.ClientRequestId);
+            request.Headers.Add("client-request-id", request.ClientRequestId);
             if (pagingGetMultiplePagesLroOptions?.Maxresults != null)
             {
                 request.Headers.Add("maxresults", pagingGetMultiplePagesLroOptions.Maxresults.Value);
@@ -1525,7 +1525,7 @@ namespace paging
             uri.Reset(_endpoint);
             uri.AppendRawNextLink(nextLink, false);
             request.Uri = uri;
-            request.Headers.Add("client-request-id", message.Request.ClientRequestId);
+            request.Headers.Add("client-request-id", request.ClientRequestId);
             if (pagingGetMultiplePagesOptions?.Maxresults != null)
             {
                 request.Headers.Add("maxresults", pagingGetMultiplePagesOptions.Maxresults.Value);
@@ -1672,7 +1672,7 @@ namespace paging
             uri.Reset(_endpoint);
             uri.AppendRawNextLink(nextLink, false);
             request.Uri = uri;
-            request.Headers.Add("client-request-id", message.Request.ClientRequestId);
+            request.Headers.Add("client-request-id", request.ClientRequestId);
             if (pagingGetOdataMultiplePagesOptions?.Maxresults != null)
             {
                 request.Headers.Add("maxresults", pagingGetOdataMultiplePagesOptions.Maxresults.Value);
@@ -1750,12 +1750,12 @@ namespace paging
             uri.Reset(_endpoint);
             uri.AppendRawNextLink(nextLink, false);
             request.Uri = uri;
-            request.Headers.Add("client-request-id", message.Request.ClientRequestId);
-            if (pagingGetMultiplePagesWithOffsetOptions?.Maxresults != null)
+            request.Headers.Add("client-request-id", request.ClientRequestId);
+            if (pagingGetMultiplePagesWithOffsetOptions.Maxresults != null)
             {
                 request.Headers.Add("maxresults", pagingGetMultiplePagesWithOffsetOptions.Maxresults.Value);
             }
-            if (pagingGetMultiplePagesWithOffsetOptions?.Timeout != null)
+            if (pagingGetMultiplePagesWithOffsetOptions.Timeout != null)
             {
                 request.Headers.Add("timeout", pagingGetMultiplePagesWithOffsetOptions.Timeout.Value);
             }
@@ -2171,7 +2171,7 @@ namespace paging
             uri.Reset(_endpoint);
             uri.AppendRawNextLink(nextLink, false);
             request.Uri = uri;
-            request.Headers.Add("client-request-id", message.Request.ClientRequestId);
+            request.Headers.Add("client-request-id", request.ClientRequestId);
             if (pagingGetMultiplePagesLroOptions?.Maxresults != null)
             {
                 request.Headers.Add("maxresults", pagingGetMultiplePagesLroOptions.Maxresults.Value);

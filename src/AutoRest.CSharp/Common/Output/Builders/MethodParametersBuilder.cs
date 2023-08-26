@@ -125,18 +125,25 @@ namespace AutoRest.CSharp.Output.Models
                 ? GetLegacySortedParameters(_unsortedParameters)
                 : GetSortedParameters(_operation, _unsortedParameters);
 
-            var parameters = new Dictionary<InputParameter, Parameter>();
+            var parameters = new Dictionary<InputParameter, Parameter?>();
             foreach (var inputParameter in sortedParameters)
             {
-                var parameter = Parameter.FromInputParameter(inputParameter, _typeFactory.CreateType(inputParameter.Type), _keepClientDefaultValue, _typeFactory);
-                // Grouped and flattened parameters shouldn't be added to methods
-                if (inputParameter.Kind == InputOperationParameterKind.Method)
+                if (SpecialHandledHeaders.IsNonParameterizedHeader(inputParameter.NameInRequest))
                 {
-                    AddCreateMessageParameter(parameter);
-                    _protocolParameters.Add(parameter);
+                    parameters.Add(inputParameter, null);
                 }
+                else
+                {
+                    var parameter = Parameter.FromInputParameter(inputParameter, _typeFactory.CreateType(inputParameter.Type), _keepClientDefaultValue, _typeFactory);
+                    // Grouped and flattened parameters shouldn't be added to methods
+                    if (inputParameter.Kind == InputOperationParameterKind.Method)
+                    {
+                        AddCreateMessageParameter(parameter);
+                        _protocolParameters.Add(parameter);
+                    }
 
-                parameters.Add(inputParameter, parameter);
+                    parameters.Add(inputParameter, parameter);
+                }
             }
 
             _convenienceParameters.AddRange(_protocolParameters);
