@@ -831,32 +831,33 @@ namespace AnomalyDetector.Samples
                     ModelState = new ModelState
                     {
                         EpochIds =
-{
-1234
-},
+            {
+                1234
+            },
                         TrainLosses =
-{
-3.14f
-},
+            {
+                3.14f
+            },
                         ValidationLosses =
-{
-3.14f
-},
+            {
+                3.14f
+            },
                         LatenciesInSeconds =
-{
-3.14f
-},
+            {
+                3.14f
+            },
                     },
                     VariableStates =
-{
-new VariableState
-{
-    Variable = "<Variable>",
-    FilledNARatio = 3.14f,
-    EffectiveCount = 1234,
-    FirstTimestamp = DateTimeOffset.UtcNow,
-    LastTimestamp = DateTimeOffset.UtcNow,
-}},
+        {
+            new VariableState
+            {
+                Variable = "<Variable>",
+                FilledNARatio = 3.14f,
+                EffectiveCount = 1234,
+                FirstTimestamp = DateTimeOffset.UtcNow,
+                LastTimestamp = DateTimeOffset.UtcNow,
+            }
+        },
                 },
             };
             var result = await client.TrainMultivariateModelAsync(modelInfo).ConfigureAwait(false);
