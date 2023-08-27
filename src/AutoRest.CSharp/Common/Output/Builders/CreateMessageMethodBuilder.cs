@@ -199,9 +199,10 @@ namespace AutoRest.CSharp.Output.Models
 
         public MethodBodyStatement AddBody(InputOperation operation, RequestExpression request)
         {
-            var bodyParameters = new Dictionary<string, Parameter>();
-            foreach (var (_, inputParameter, outputParameter, _) in _requestParts)
+            var bodyParameters = new List<RequestPartSource>();
+            foreach (var requestPart in _requestParts)
             {
+                var (_, inputParameter, outputParameter, _) = requestPart;
                 if (inputParameter is null || outputParameter is null || inputParameter.Location != RequestLocation.Body)
                 {
                     continue;
@@ -219,7 +220,7 @@ namespace AutoRest.CSharp.Output.Models
                 switch (operation.RequestBodyMediaType)
                 {
                     case BodyMediaType.Multipart or BodyMediaType.Form:
-                        bodyParameters.Add(inputParameter.NameInRequest, outputParameter);
+                        bodyParameters.Add(requestPart);
                         break;
 
                     case BodyMediaType.Binary:
@@ -255,7 +256,7 @@ namespace AutoRest.CSharp.Output.Models
             if (bodyParameters.Any())
             {
                 return operation.RequestBodyMediaType == BodyMediaType.Multipart
-                    ? AddMultipartBody(request, bodyParameters.Values).AsStatement()
+                    ? AddMultipartBody(request, bodyParameters).AsStatement()
                     : AddFormBody(request, bodyParameters).AsStatement();
             }
 
@@ -351,14 +352,14 @@ namespace AutoRest.CSharp.Output.Models
             }
         }
 
-        private IEnumerable<MethodBodyStatement> AddMultipartBody(RequestExpression request, IEnumerable<Parameter> bodyParameters)
+        private IEnumerable<MethodBodyStatement> AddMultipartBody(RequestExpression request, IEnumerable<RequestPartSource> bodyParameters)
         {
             yield return AddHeaders(request, true).AsStatement();
             yield return Var("content", New.MultipartFormDataContent(), out var multipartContent);
 
-            foreach (var parameter in bodyParameters)
+            foreach (var (_, _, parameter, _) in bodyParameters)
             {
-                var bodyPartName = parameter.Name;
+                var bodyPartName = parameter!.Name;
                 var bodyPartType = parameter.Type;
 
                 if (bodyPartType.Equals(typeof(string)))
@@ -385,15 +386,15 @@ namespace AutoRest.CSharp.Output.Models
             yield return multipartContent.ApplyToRequest(request);
         }
 
-        private IEnumerable<MethodBodyStatement> AddFormBody(RequestExpression request, IReadOnlyDictionary<string, Parameter> bodyParameters)
+        private IEnumerable<MethodBodyStatement> AddFormBody(RequestExpression request, IEnumerable<RequestPartSource> bodyParameters)
         {
             yield return AddHeaders(request, true).AsStatement();
             yield return Var("content", New.FormUrlEncodedContent(), out var urlContent);
 
-            foreach (var (nameInRequest, parameter) in bodyParameters)
+            foreach (var (nameInRequest, inputParameter, outputParameter, _) in bodyParameters)
             {
-                var type = parameter.Type;
-                var value = new ParameterReference(parameter);
+                var type = outputParameter!.Type;
+                var value = GetValueForRequestPart(inputParameter!, outputParameter);
 
                 yield return NullCheckRequestPartValue(value, type, urlContent.Add(nameInRequest, ConvertToString(value, type)));
             }
@@ -432,7 +433,7 @@ namespace AutoRest.CSharp.Output.Models
             var value = GetValueForRequestPart(inputParameter, outputParameter);
             var valueSerialization = SerializationBuilder.BuildJsonSerialization(property.Type, outputParameter.Type, false);
 
-            var propertyName = property.SerializedName ?? property.Name;
+            var propertyName = property.SerializedName;
             var writePropertyStatement = new[]
             {
                 jsonWriter.WritePropertyName(propertyName),
