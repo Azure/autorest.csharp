@@ -1355,7 +1355,7 @@ namespace paging_LowLevel
             uri.AppendPath("/paging/multiple", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
-            request.Headers.Add("client-request-id", request.ClientRequestId);
+            request.Headers.Add("client-request-id", message.Request.ClientRequestId);
             if (maxresults != null)
             {
                 request.Headers.Add("maxresults", maxresults.Value);
@@ -1440,7 +1440,7 @@ namespace paging_LowLevel
             uri.AppendPath("/paging/multiple/odata", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
-            request.Headers.Add("client-request-id", request.ClientRequestId);
+            request.Headers.Add("client-request-id", message.Request.ClientRequestId);
             if (maxresults != null)
             {
                 request.Headers.Add("maxresults", maxresults.Value);
@@ -1463,7 +1463,7 @@ namespace paging_LowLevel
             uri.AppendPath(offset, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
-            request.Headers.Add("client-request-id", request.ClientRequestId);
+            request.Headers.Add("client-request-id", message.Request.ClientRequestId);
             if (maxresults != null)
             {
                 request.Headers.Add("maxresults", maxresults.Value);
@@ -1580,7 +1580,7 @@ namespace paging_LowLevel
             uri.AppendPath("/paging/multiple/lro", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
-            request.Headers.Add("client-request-id", request.ClientRequestId);
+            request.Headers.Add("client-request-id", message.Request.ClientRequestId);
             if (maxresults != null)
             {
                 request.Headers.Add("maxresults", maxresults.Value);
@@ -1742,7 +1742,7 @@ namespace paging_LowLevel
             uri.AppendRawNextLink(nextLink, false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
-            request.Headers.Add("client-request-id", request.ClientRequestId);
+            request.Headers.Add("client-request-id", message.Request.ClientRequestId);
             if (maxresults != null)
             {
                 request.Headers.Add("maxresults", maxresults.Value);
@@ -1790,7 +1790,7 @@ namespace paging_LowLevel
             uri.AppendRawNextLink(nextLink, false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
-            request.Headers.Add("client-request-id", request.ClientRequestId);
+            request.Headers.Add("client-request-id", message.Request.ClientRequestId);
             if (maxresults != null)
             {
                 request.Headers.Add("maxresults", maxresults.Value);
@@ -1812,7 +1812,7 @@ namespace paging_LowLevel
             uri.AppendRawNextLink(nextLink, false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
-            request.Headers.Add("client-request-id", request.ClientRequestId);
+            request.Headers.Add("client-request-id", message.Request.ClientRequestId);
             if (maxresults != null)
             {
                 request.Headers.Add("maxresults", maxresults.Value);
@@ -1925,19 +1925,10 @@ namespace paging_LowLevel
             uri.AppendRawNextLink(nextLink, false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
-            request.Headers.Add("client-request-id", request.ClientRequestId);
-            if (maxresults != null)
-            {
-                request.Headers.Add("maxresults", maxresults.Value);
-            }
-            if (timeout != null)
-            {
-                request.Headers.Add("timeout", timeout.Value);
-            }
             return message;
         }
 
-        internal HttpMessage CreateGetPagingModelWithItemNameWithXMSClientNameNextPageRequest(string nextLink, RequestContext context)
+        internal HttpMessage CreateGetMultiplePagesLRONextPageRequest(string nextLink, int? maxresults, int? timeout, RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier200);
             var request = message.Request;
@@ -1947,6 +1938,15 @@ namespace paging_LowLevel
             uri.AppendRawNextLink(nextLink, false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
+            request.Headers.Add("client-request-id", message.Request.ClientRequestId);
+            if (maxresults != null)
+            {
+                request.Headers.Add("maxresults", maxresults.Value);
+            }
+            if (timeout != null)
+            {
+                request.Headers.Add("timeout", timeout.Value);
+            }
             return message;
         }
 
