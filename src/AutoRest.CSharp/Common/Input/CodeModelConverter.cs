@@ -145,7 +145,9 @@ namespace AutoRest.CSharp.Common.Input
             Explode: input.Protocol.Http is HttpParameter { Explode: true },
             SkipUrlEncoding: input.Extensions?.SkipEncoding ?? false,
             HeaderCollectionPrefix: input.Extensions?.HeaderCollectionPrefix,
-            FlattenedBodyProperty: input is VirtualParameter { Schema: not ConstantSchema, TargetProperty: {} property } ? CreateProperty(property) : null
+            FlattenedBodyProperty: input is VirtualParameter vp and ({ Schema: not ConstantSchema } or { Required: not true })
+                ? CreateProperty(vp.TargetProperty)
+                : null
         );
 
         public OperationResponse CreateOperationResponse(ServiceResponse response) => new(
@@ -304,8 +306,9 @@ namespace AutoRest.CSharp.Common.Input
         public static InputOperationParameterKind GetOperationParameterKind(RequestParameter input) => input switch
         {
             { Implementation: ImplementationLocation.Client } => InputOperationParameterKind.Client,
+
+            // only required constant parameter can be Constant kind which will be optimized to disappear from method signature
             { Schema: ConstantSchema, IsRequired: true } => InputOperationParameterKind.Constant,
-            { Schema: ConstantSchema, IsRequired: false } when !Configuration.AzureArm => InputOperationParameterKind.Constant,
 
             // Grouped and flattened parameters shouldn't be added to methods
             { IsFlattened: true } => InputOperationParameterKind.Flattened,
