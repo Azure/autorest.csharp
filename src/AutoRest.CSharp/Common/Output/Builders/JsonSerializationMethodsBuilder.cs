@@ -244,12 +244,22 @@ namespace AutoRest.CSharp.Common.Output.Builders
 
             if (valueType == typeof(DateTimeOffset) || valueType == typeof(DateTime) || valueType == typeof(TimeSpan))
             {
-                if (valueSerialization.Format == SerializationFormat.DateTime_Unix)
+                var format = valueSerialization.Format.ToFormatSpecifier();
+
+                if (valueSerialization.Format is SerializationFormat.Duration_Seconds)
                 {
-                    return utf8JsonWriter.WriteNumberValue(value, valueSerialization.Format.ToFormatSpecifier());
+                    return utf8JsonWriter.WriteNumberValue(InvokeConvert.ToInt32(new TimeSpanExpression(value).ToString(format)));
                 }
 
-                var format = valueSerialization.Format.ToFormatSpecifier();
+                if (valueSerialization.Format is SerializationFormat.Duration_Seconds_Float)
+                {
+                    return utf8JsonWriter.WriteNumberValue(InvokeConvert.ToDouble(new TimeSpanExpression(value).ToString(format)));
+                }
+
+                if (valueSerialization.Format is SerializationFormat.DateTime_Unix)
+                {
+                    return utf8JsonWriter.WriteNumberValue(value, format);
+                }
                 return format is not null
                     ? utf8JsonWriter.WriteStringValue(value, format)
                     : utf8JsonWriter.WriteStringValue(value);
@@ -820,7 +830,19 @@ namespace AutoRest.CSharp.Common.Output.Builders
             if (frameworkType == typeof(DateTime))
                 return element.GetDateTime();
             if (frameworkType == typeof(TimeSpan))
+            {
+                if (format == SerializationFormat.Duration_Seconds)
+                {
+                    return TimeSpanExpression.FromSeconds(element.GetInt32());
+                }
+
+                if (format == SerializationFormat.Duration_Seconds_Float)
+                {
+                    return TimeSpanExpression.FromSeconds(element.GetDouble());
+                }
+
                 return element.GetTimeSpan(format.ToFormatSpecifier());
+            }
 
             throw new NotSupportedException($"Framework type {frameworkType} is not supported");
         }

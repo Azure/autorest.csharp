@@ -81,7 +81,7 @@ namespace ModelShapes.Models
             {
                 writer.WriteNull("RequiredNullableInt");
             }
-            if (RequiredNullableStringList != null && Optional.IsCollectionDefined(RequiredNullableStringList))
+            if (RequiredNullableStringList != null)
             {
                 writer.WritePropertyName("RequiredNullableStringList"u8);
                 writer.WriteStartArray();
@@ -95,7 +95,7 @@ namespace ModelShapes.Models
             {
                 writer.WriteNull("RequiredNullableStringList");
             }
-            if (RequiredNullableIntList != null && Optional.IsCollectionDefined(RequiredNullableIntList))
+            if (RequiredNullableIntList != null)
             {
                 writer.WritePropertyName("RequiredNullableIntList"u8);
                 writer.WriteStartArray();
