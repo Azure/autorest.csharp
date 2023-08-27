@@ -461,19 +461,19 @@ namespace Azure.ResourceManager.Sample.Models
         /// <summary> Initializes a new instance of SampleUsage. </summary>
         /// <param name="unit">
         /// An enum describing the unit of usage measurement.
-        /// Serialized Name: SampleUsage.unit
+        /// Serialized Name: Usage.unit
         /// </param>
         /// <param name="currentValue">
         /// The current usage of the resource.
-        /// Serialized Name: SampleUsage.currentValue
+        /// Serialized Name: Usage.currentValue
         /// </param>
         /// <param name="limit">
         /// The maximum permitted usage of the resource.
-        /// Serialized Name: SampleUsage.limit
+        /// Serialized Name: Usage.limit
         /// </param>
         /// <param name="name">
         /// The name of the type of usage.
-        /// Serialized Name: SampleUsage.name
+        /// Serialized Name: Usage.name
         /// </param>
         /// <returns> A new <see cref="Models.SampleUsage"/> instance for mocking. </returns>
         public static SampleUsage SampleUsage(UsageUnit unit = default, int currentValue = default, long limit = default, SampleUsageName name = null)
@@ -484,11 +484,11 @@ namespace Azure.ResourceManager.Sample.Models
         /// <summary> Initializes a new instance of SampleUsageName. </summary>
         /// <param name="value">
         /// The name of the resource.
-        /// Serialized Name: SampleUsageName.value
+        /// Serialized Name: UsageName.value
         /// </param>
         /// <param name="localizedValue">
         /// The localized name of the resource.
-        /// Serialized Name: SampleUsageName.localizedValue
+        /// Serialized Name: UsageName.localizedValue
         /// </param>
         /// <returns> A new <see cref="Models.SampleUsageName"/> instance for mocking. </returns>
         public static SampleUsageName SampleUsageName(string value = null, string localizedValue = null)
