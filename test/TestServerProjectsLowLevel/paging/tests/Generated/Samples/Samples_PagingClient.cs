@@ -9,6 +9,7 @@ using System;
 using System.Text.Json;
 using System.Threading.Tasks;
 using Azure;
+using Azure.Core;
 using NUnit.Framework;
 
 namespace paging_LowLevel.Samples

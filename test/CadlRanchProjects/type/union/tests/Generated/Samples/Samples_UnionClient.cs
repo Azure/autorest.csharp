@@ -6,13 +6,9 @@
 #nullable disable
 
 using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Text.Json;
 using System.Threading.Tasks;
 using Azure;
 using Azure.Core;
-using Azure.Identity;
 using NUnit.Framework;
 
 namespace _Type.Union.Samples
@@ -27,7 +23,7 @@ namespace _Type.Union.Samples
 
             var data = new
             {
-                simpleUnion = new { },
+                simpleUnion = new object(),
             };
 
             Response response = client.SendInt(RequestContent.Create(data));
@@ -42,7 +38,7 @@ namespace _Type.Union.Samples
 
             var data = new
             {
-                simpleUnion = new { },
+                simpleUnion = new object(),
             };
 
             Response response = client.SendInt(RequestContent.Create(data));
@@ -57,10 +53,10 @@ namespace _Type.Union.Samples
 
             var data = new
             {
-                simpleUnion = new { },
+                simpleUnion = new object(),
             };
 
-            Response response = await client.SendIntAsync(RequestContent.Create(data));
+            Response response = await client.SendIntAsync(RequestContent.Create(data)).ConfigureAwait(false);
             Console.WriteLine(response.Status);
         }
 
@@ -72,10 +68,10 @@ namespace _Type.Union.Samples
 
             var data = new
             {
-                simpleUnion = new { },
+                simpleUnion = new object(),
             };
 
-            Response response = await client.SendIntAsync(RequestContent.Create(data));
+            Response response = await client.SendIntAsync(RequestContent.Create(data)).ConfigureAwait(false);
             Console.WriteLine(response.Status);
         }
 
@@ -87,7 +83,7 @@ namespace _Type.Union.Samples
 
             var data = new
             {
-                simpleUnion = new { },
+                simpleUnion = new object(),
             };
 
             Response response = client.SendIntArray(RequestContent.Create(data));
@@ -102,7 +98,7 @@ namespace _Type.Union.Samples
 
             var data = new
             {
-                simpleUnion = new { },
+                simpleUnion = new object(),
             };
 
             Response response = client.SendIntArray(RequestContent.Create(data));
@@ -117,10 +113,10 @@ namespace _Type.Union.Samples
 
             var data = new
             {
-                simpleUnion = new { },
+                simpleUnion = new object(),
             };
 
-            Response response = await client.SendIntArrayAsync(RequestContent.Create(data));
+            Response response = await client.SendIntArrayAsync(RequestContent.Create(data)).ConfigureAwait(false);
             Console.WriteLine(response.Status);
         }
 
@@ -132,10 +128,10 @@ namespace _Type.Union.Samples
 
             var data = new
             {
-                simpleUnion = new { },
+                simpleUnion = new object(),
             };
 
-            Response response = await client.SendIntArrayAsync(RequestContent.Create(data));
+            Response response = await client.SendIntArrayAsync(RequestContent.Create(data)).ConfigureAwait(false);
             Console.WriteLine(response.Status);
         }
 
@@ -147,7 +143,7 @@ namespace _Type.Union.Samples
 
             var data = new
             {
-                namedUnion = new { },
+                namedUnion = new object(),
             };
 
             Response response = client.SendFirstNamedUnionValue(RequestContent.Create(data));
@@ -162,7 +158,7 @@ namespace _Type.Union.Samples
 
             var data = new
             {
-                namedUnion = new { },
+                namedUnion = new object(),
             };
 
             Response response = client.SendFirstNamedUnionValue(RequestContent.Create(data));
@@ -177,10 +173,10 @@ namespace _Type.Union.Samples
 
             var data = new
             {
-                namedUnion = new { },
+                namedUnion = new object(),
             };
 
-            Response response = await client.SendFirstNamedUnionValueAsync(RequestContent.Create(data));
+            Response response = await client.SendFirstNamedUnionValueAsync(RequestContent.Create(data)).ConfigureAwait(false);
             Console.WriteLine(response.Status);
         }
 
@@ -192,10 +188,10 @@ namespace _Type.Union.Samples
 
             var data = new
             {
-                namedUnion = new { },
+                namedUnion = new object(),
             };
 
-            Response response = await client.SendFirstNamedUnionValueAsync(RequestContent.Create(data));
+            Response response = await client.SendFirstNamedUnionValueAsync(RequestContent.Create(data)).ConfigureAwait(false);
             Console.WriteLine(response.Status);
         }
 
@@ -207,7 +203,7 @@ namespace _Type.Union.Samples
 
             var data = new
             {
-                namedUnion = new { },
+                namedUnion = new object(),
             };
 
             Response response = client.SendSecondNamedUnionValue(RequestContent.Create(data));
@@ -222,7 +218,7 @@ namespace _Type.Union.Samples
 
             var data = new
             {
-                namedUnion = new { },
+                namedUnion = new object(),
             };
 
             Response response = client.SendSecondNamedUnionValue(RequestContent.Create(data));
@@ -237,10 +233,10 @@ namespace _Type.Union.Samples
 
             var data = new
             {
-                namedUnion = new { },
+                namedUnion = new object(),
             };
 
-            Response response = await client.SendSecondNamedUnionValueAsync(RequestContent.Create(data));
+            Response response = await client.SendSecondNamedUnionValueAsync(RequestContent.Create(data)).ConfigureAwait(false);
             Console.WriteLine(response.Status);
         }
 
@@ -252,10 +248,10 @@ namespace _Type.Union.Samples
 
             var data = new
             {
-                namedUnion = new { },
+                namedUnion = new object(),
             };
 
-            Response response = await client.SendSecondNamedUnionValueAsync(RequestContent.Create(data));
+            Response response = await client.SendSecondNamedUnionValueAsync(RequestContent.Create(data)).ConfigureAwait(false);
             Console.WriteLine(response.Status);
         }
     }

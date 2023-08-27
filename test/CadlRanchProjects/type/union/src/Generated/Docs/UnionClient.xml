@@ -12,10 +12,10 @@ This sample shows how to call SendIntAsync with required request content.
 var client = new UnionClient();
 
 var data = new {
-    simpleUnion = new {},
+    simpleUnion = new object(),
 };
 
-Response response = await client.SendIntAsync(RequestContent.Create(data));
+Response response = await client.SendIntAsync(RequestContent.Create(data)).ConfigureAwait(false);
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
@@ -27,7 +27,7 @@ This sample shows how to call SendInt with required request content.
 var client = new UnionClient();
 
 var data = new {
-    simpleUnion = new {},
+    simpleUnion = new object(),
 };
 
 Response response = client.SendInt(RequestContent.Create(data));
@@ -46,10 +46,10 @@ This sample shows how to call SendIntArrayAsync with required request content.
 var client = new UnionClient();
 
 var data = new {
-    simpleUnion = new {},
+    simpleUnion = new object(),
 };
 
-Response response = await client.SendIntArrayAsync(RequestContent.Create(data));
+Response response = await client.SendIntArrayAsync(RequestContent.Create(data)).ConfigureAwait(false);
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
@@ -61,7 +61,7 @@ This sample shows how to call SendIntArray with required request content.
 var client = new UnionClient();
 
 var data = new {
-    simpleUnion = new {},
+    simpleUnion = new object(),
 };
 
 Response response = client.SendIntArray(RequestContent.Create(data));
@@ -80,10 +80,10 @@ This sample shows how to call SendFirstNamedUnionValueAsync with required reques
 var client = new UnionClient();
 
 var data = new {
-    namedUnion = new {},
+    namedUnion = new object(),
 };
 
-Response response = await client.SendFirstNamedUnionValueAsync(RequestContent.Create(data));
+Response response = await client.SendFirstNamedUnionValueAsync(RequestContent.Create(data)).ConfigureAwait(false);
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
@@ -95,7 +95,7 @@ This sample shows how to call SendFirstNamedUnionValue with required request con
 var client = new UnionClient();
 
 var data = new {
-    namedUnion = new {},
+    namedUnion = new object(),
 };
 
 Response response = client.SendFirstNamedUnionValue(RequestContent.Create(data));
@@ -114,10 +114,10 @@ This sample shows how to call SendSecondNamedUnionValueAsync with required reque
 var client = new UnionClient();
 
 var data = new {
-    namedUnion = new {},
+    namedUnion = new object(),
 };
 
-Response response = await client.SendSecondNamedUnionValueAsync(RequestContent.Create(data));
+Response response = await client.SendSecondNamedUnionValueAsync(RequestContent.Create(data)).ConfigureAwait(false);
 Console.WriteLine(response.Status);
 ]]></code>
 </example>
@@ -129,7 +129,7 @@ This sample shows how to call SendSecondNamedUnionValue with required request co
 var client = new UnionClient();
 
 var data = new {
-    namedUnion = new {},
+    namedUnion = new object(),
 };
 
 Response response = client.SendSecondNamedUnionValue(RequestContent.Create(data));
