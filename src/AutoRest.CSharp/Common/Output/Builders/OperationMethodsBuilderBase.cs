@@ -29,6 +29,7 @@ namespace AutoRest.CSharp.Output.Models
     {
         private const string ConvenienceMethodNotConfident = "The convenience method of this operation is made internal because this operation directly or indirectly uses a low confident type, for instance, unions, literal types with number values, etc.";
         private const string ConvenienceMethodIsMeaningless = "The convenience method is omitted here because it has exactly the same parameter list as the corresponding protocol method";
+        private const string ConvenienceMethodIsUsingAnonymousModel = "The convenience method of this operation is omitted because it is using at least one anonymous model";
 
         private static readonly int[] RedirectResponseCodes = { 300, 301, 302, 303, 307, 308 };
 
@@ -41,6 +42,7 @@ namespace AutoRest.CSharp.Output.Models
         private readonly MethodSignatureModifiers _protocolAccessibility;
         private readonly MethodParametersBuilder _parametersBuilder;
         private readonly StatusCodeSwitchBuilder _statusCodeSwitchBuilder;
+        private readonly TypeFactory _typeFactory;
         private readonly SourceInputModel? _sourceInputModel;
 
         public InputOperation Operation { get; }
@@ -66,6 +68,7 @@ namespace AutoRest.CSharp.Output.Models
             _clientNamespace = args.ClientNamespace;
             _statusCodeSwitchBuilder = args.StatusCodeSwitchBuilder;
             _parametersBuilder = new MethodParametersBuilder(args.Operation, args.TypeFactory);
+            _typeFactory = args.TypeFactory;
             _sourceInputModel = args.SourceInputModel;
 
             Operation = args.Operation;
@@ -119,9 +122,13 @@ namespace AutoRest.CSharp.Output.Models
 
             if (Operation.GenerateConvenienceMethod)
             {
-                if (!Operation.GenerateProtocolMethod || !convenienceMethodIsMeaningless)
+                var confidenceLevel = OperationConfidenceChecker.GetConfidenceLevel(Operation, _typeFactory);
+                if (confidenceLevel == ConvenienceMethodConfidenceLevel.Removal)
                 {
-                    var methodIsConfident = OperationConfidentChecker.IsConfident(Operation);
+                    protocolMethodNonDocumentComment = ConvenienceMethodIsUsingAnonymousModel;
+                }
+                else if (!Operation.GenerateProtocolMethod || !convenienceMethodIsMeaningless)
+                {
                     var convenienceMethodName = ProtocolMethodName;
                     if (parameters.HasAmbiguityBetweenProtocolAndConvenience)
                     {
@@ -130,9 +137,10 @@ namespace AutoRest.CSharp.Output.Models
                             : $"{ProtocolMethodName.LastWordToSingular()}Values";
                     }
 
-                    protocolMethodNonDocumentComment = methodIsConfident ? null : ConvenienceMethodNotConfident;
-                    convenience = BuildConvenienceMethod(convenienceMethodName, parameters, createNextPageMessageMethodSignature, methodIsConfident, false);
-                    convenienceAsync = BuildConvenienceMethod(convenienceMethodName, parameters, createNextPageMessageMethodSignature, methodIsConfident, true);
+                    var methodNamingIsConfident = confidenceLevel == ConvenienceMethodConfidenceLevel.Confident;
+                    protocolMethodNonDocumentComment = methodNamingIsConfident ? null : ConvenienceMethodNotConfident;
+                    convenience = BuildConvenienceMethod(convenienceMethodName, parameters, createNextPageMessageMethodSignature, methodNamingIsConfident, false);
+                    convenienceAsync = BuildConvenienceMethod(convenienceMethodName, parameters, createNextPageMessageMethodSignature, methodNamingIsConfident, true);
                 }
                 else if (Operation.GenerateProtocolMethod)
                 {

@@ -567,7 +567,7 @@ var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new FirstTestTypeSpecClient(endpoint);
 
 var modelWithProjectedName = new ProjectedModel("<name>");
-var result = await client.ProjectedNameModelAsync(modelWithProjectedName);
+var result = await client.ProjectedNameModelAsync(modelWithProjectedName).ConfigureAwait(false);
 ]]></code>
 </example>
     </member>
@@ -594,7 +594,7 @@ var data = new {
     name = "<name>",
 };
 
-Response response = await client.ProjectedNameModelAsync(RequestContent.Create(data));
+Response response = await client.ProjectedNameModelAsync(RequestContent.Create(data)).ConfigureAwait(false);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.GetProperty("name").ToString());
@@ -626,9 +626,10 @@ This sample shows how to call ReturnsAnonymousModelAsync with required parameter
 var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new FirstTestTypeSpecClient(endpoint);
 
-Response response = await client.ReturnsAnonymousModelAsync(new RequestContext());
+Response response = await client.ReturnsAnonymousModelAsync(new RequestContext()).ConfigureAwait(false);
 
-Console.WriteLine(response.ToString());
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.ToString());
 ]]></code>
 </example>
     </member>
@@ -641,25 +642,26 @@ var client = new FirstTestTypeSpecClient(endpoint);
 
 Response response = client.ReturnsAnonymousModel(new RequestContext());
 
-Console.WriteLine(response.ToString());
+JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+Console.WriteLine(result.ToString());
 ]]></code>
 </example>
     </member>
     <member name="HeadAsBooleanAsync(string,RequestContext)">
 <example>
-This sample shows how to call HeadAsBooleanAsync with required parameters.
+This sample shows how to call HeadAsBooleanAsync with required parameters and parse the result.
 <code><![CDATA[
 var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new FirstTestTypeSpecClient(endpoint);
 
-Response<bool> response = await client.HeadAsBooleanAsync("<id>");
+Response<bool> response = await client.HeadAsBooleanAsync("<id>").ConfigureAwait(false);
 Console.WriteLine(response.GetRawResponse().Status);
 ]]></code>
 </example>
     </member>
     <member name="HeadAsBoolean(string,RequestContext)">
 <example>
-This sample shows how to call HeadAsBoolean with required parameters.
+This sample shows how to call HeadAsBoolean with required parameters and parse the result.
 <code><![CDATA[
 var endpoint = new Uri("<https://my-service.azure.com>");
 var client = new FirstTestTypeSpecClient(endpoint);

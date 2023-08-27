@@ -857,7 +857,7 @@ namespace FirstTestTypeSpec
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="id"> The String to use. </param>
+        /// <param name="id"> The string to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="id"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="id"/> is an empty string, and was expected to be non-empty. </exception>
@@ -893,7 +893,7 @@ namespace FirstTestTypeSpec
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="id"> The String to use. </param>
+        /// <param name="id"> The string to use. </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="id"/> is null. </exception>
         /// <exception cref="ArgumentException"> <paramref name="id"/> is an empty string, and was expected to be non-empty. </exception>

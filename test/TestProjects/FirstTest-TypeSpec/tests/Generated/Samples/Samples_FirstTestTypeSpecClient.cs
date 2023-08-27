@@ -771,7 +771,7 @@ namespace FirstTestTypeSpec.Samples
                 name = "<name>",
             };
 
-            Response response = await client.ProjectedNameModelAsync(RequestContent.Create(data));
+            Response response = await client.ProjectedNameModelAsync(RequestContent.Create(data)).ConfigureAwait(false);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("name").ToString());
@@ -789,7 +789,7 @@ namespace FirstTestTypeSpec.Samples
                 name = "<name>",
             };
 
-            Response response = await client.ProjectedNameModelAsync(RequestContent.Create(data));
+            Response response = await client.ProjectedNameModelAsync(RequestContent.Create(data)).ConfigureAwait(false);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("name").ToString());
@@ -803,7 +803,7 @@ namespace FirstTestTypeSpec.Samples
             var client = new FirstTestTypeSpecClient(endpoint);
 
             var modelWithProjectedName = new ProjectedModel("<name>");
-            var result = await client.ProjectedNameModelAsync(modelWithProjectedName);
+            var result = await client.ProjectedNameModelAsync(modelWithProjectedName).ConfigureAwait(false);
         }
 
         [Test]
@@ -815,7 +815,8 @@ namespace FirstTestTypeSpec.Samples
 
             Response response = client.ReturnsAnonymousModel(new RequestContext());
 
-            Console.WriteLine(response.ToString());
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.ToString());
         }
 
         [Test]
@@ -827,7 +828,8 @@ namespace FirstTestTypeSpec.Samples
 
             Response response = client.ReturnsAnonymousModel(new RequestContext());
 
-            Console.WriteLine(response.ToString());
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.ToString());
         }
 
         [Test]
@@ -837,9 +839,10 @@ namespace FirstTestTypeSpec.Samples
             var endpoint = new Uri("<https://my-service.azure.com>");
             var client = new FirstTestTypeSpecClient(endpoint);
 
-            Response response = await client.ReturnsAnonymousModelAsync(new RequestContext());
+            Response response = await client.ReturnsAnonymousModelAsync(new RequestContext()).ConfigureAwait(false);
 
-            Console.WriteLine(response.ToString());
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.ToString());
         }
 
         [Test]
@@ -849,9 +852,10 @@ namespace FirstTestTypeSpec.Samples
             var endpoint = new Uri("<https://my-service.azure.com>");
             var client = new FirstTestTypeSpecClient(endpoint);
 
-            Response response = await client.ReturnsAnonymousModelAsync(new RequestContext());
+            Response response = await client.ReturnsAnonymousModelAsync(new RequestContext()).ConfigureAwait(false);
 
-            Console.WriteLine(response.ToString());
+            JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
+            Console.WriteLine(result.ToString());
         }
 
         [Test]
@@ -883,7 +887,7 @@ namespace FirstTestTypeSpec.Samples
             var endpoint = new Uri("<https://my-service.azure.com>");
             var client = new FirstTestTypeSpecClient(endpoint);
 
-            Response<bool> response = await client.HeadAsBooleanAsync("<id>");
+            Response<bool> response = await client.HeadAsBooleanAsync("<id>").ConfigureAwait(false);
             Console.WriteLine(response.GetRawResponse().Status);
         }
 
@@ -894,7 +898,7 @@ namespace FirstTestTypeSpec.Samples
             var endpoint = new Uri("<https://my-service.azure.com>");
             var client = new FirstTestTypeSpecClient(endpoint);
 
-            Response<bool> response = await client.HeadAsBooleanAsync("<id>");
+            Response<bool> response = await client.HeadAsBooleanAsync("<id>").ConfigureAwait(false);
             Console.WriteLine(response.GetRawResponse().Status);
         }
 
