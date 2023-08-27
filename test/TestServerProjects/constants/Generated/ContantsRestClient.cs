@@ -141,7 +141,7 @@ namespace constants
             }
         }
 
-        internal HttpMessage CreatePutNoModelAsStringNoRequiredOneValueNoDefaultRequest()
+        internal HttpMessage CreatePutNoModelAsStringNoRequiredOneValueNoDefaultRequest(NoModelAsStringNoRequiredOneValueNoDefaultOpEnum? input)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -149,16 +149,20 @@ namespace constants
             var uri = new RawRequestUriBuilder();
             uri.Reset(_endpoint);
             uri.AppendPath("/constants/putNoModelAsStringNoRequiredOneValueNoDefault", false);
-            uri.AppendQuery("input", NoModelAsStringNoRequiredOneValueNoDefaultOpEnum.Value1.ToString(), true);
+            if (input != null)
+            {
+                uri.AppendQuery("input", input.Value.ToString(), true);
+            }
             request.Uri = uri;
             return message;
         }
 
         /// <summary> Puts constants to the testserver. </summary>
+        /// <param name="input"> The Literal to use. The default value is AutoRest.CSharp.Output.Models.Types.EnumTypeValue. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async Task<Response> PutNoModelAsStringNoRequiredOneValueNoDefaultAsync(CancellationToken cancellationToken = default)
+        public async Task<Response> PutNoModelAsStringNoRequiredOneValueNoDefaultAsync(NoModelAsStringNoRequiredOneValueNoDefaultOpEnum? input = null, CancellationToken cancellationToken = default)
         {
-            using var message = CreatePutNoModelAsStringNoRequiredOneValueNoDefaultRequest();
+            using var message = CreatePutNoModelAsStringNoRequiredOneValueNoDefaultRequest(input);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
             switch (message.Response.Status)
             {
@@ -170,10 +174,11 @@ namespace constants
         }
 
         /// <summary> Puts constants to the testserver. </summary>
+        /// <param name="input"> The Literal to use. The default value is AutoRest.CSharp.Output.Models.Types.EnumTypeValue. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response PutNoModelAsStringNoRequiredOneValueNoDefault(CancellationToken cancellationToken = default)
+        public Response PutNoModelAsStringNoRequiredOneValueNoDefault(NoModelAsStringNoRequiredOneValueNoDefaultOpEnum? input = null, CancellationToken cancellationToken = default)
         {
-            using var message = CreatePutNoModelAsStringNoRequiredOneValueNoDefaultRequest();
+            using var message = CreatePutNoModelAsStringNoRequiredOneValueNoDefaultRequest(input);
             _pipeline.Send(message, cancellationToken);
             switch (message.Response.Status)
             {
@@ -184,7 +189,7 @@ namespace constants
             }
         }
 
-        internal HttpMessage CreatePutNoModelAsStringNoRequiredOneValueDefaultRequest()
+        internal HttpMessage CreatePutNoModelAsStringNoRequiredOneValueDefaultRequest(NoModelAsStringNoRequiredOneValueDefaultOpEnum? input)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -192,16 +197,20 @@ namespace constants
             var uri = new RawRequestUriBuilder();
             uri.Reset(_endpoint);
             uri.AppendPath("/constants/putNoModelAsStringNoRequiredOneValueDefault", false);
-            uri.AppendQuery("input", NoModelAsStringNoRequiredOneValueDefaultOpEnum.Value1.ToString(), true);
+            if (input != null)
+            {
+                uri.AppendQuery("input", input.Value.ToString(), true);
+            }
             request.Uri = uri;
             return message;
         }
 
         /// <summary> Puts constants to the testserver. </summary>
+        /// <param name="input"> The Literal to use. The default value is AutoRest.CSharp.Output.Models.Types.EnumTypeValue. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async Task<Response> PutNoModelAsStringNoRequiredOneValueDefaultAsync(CancellationToken cancellationToken = default)
+        public async Task<Response> PutNoModelAsStringNoRequiredOneValueDefaultAsync(NoModelAsStringNoRequiredOneValueDefaultOpEnum? input = null, CancellationToken cancellationToken = default)
         {
-            using var message = CreatePutNoModelAsStringNoRequiredOneValueDefaultRequest();
+            using var message = CreatePutNoModelAsStringNoRequiredOneValueDefaultRequest(input);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
             switch (message.Response.Status)
             {
@@ -213,10 +222,11 @@ namespace constants
         }
 
         /// <summary> Puts constants to the testserver. </summary>
+        /// <param name="input"> The Literal to use. The default value is AutoRest.CSharp.Output.Models.Types.EnumTypeValue. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response PutNoModelAsStringNoRequiredOneValueDefault(CancellationToken cancellationToken = default)
+        public Response PutNoModelAsStringNoRequiredOneValueDefault(NoModelAsStringNoRequiredOneValueDefaultOpEnum? input = null, CancellationToken cancellationToken = default)
         {
-            using var message = CreatePutNoModelAsStringNoRequiredOneValueDefaultRequest();
+            using var message = CreatePutNoModelAsStringNoRequiredOneValueDefaultRequest(input);
             _pipeline.Send(message, cancellationToken);
             switch (message.Response.Status)
             {

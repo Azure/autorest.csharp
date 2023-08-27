@@ -18,6 +18,8 @@ namespace AutoRest.CSharp.Common.Input
         /// </summary>
         public bool IsPropertyBag { get; init; } = false;
 
+        public bool IsAnonymousModel { get; init; } = false;
+
         /// <summary>
         /// Types provided as immediate parents in spec that aren't base model
         /// </summary>

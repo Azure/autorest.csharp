@@ -172,5 +172,14 @@ namespace ModelsTypeSpec.Models
         {
             return new ErrorModel(message, innerError);
         }
+
+        /// <summary> Initializes a new instance of SingleBase. </summary>
+        /// <param name="kind"> Discriminator. </param>
+        /// <param name="size"></param>
+        /// <returns> A new <see cref="Models.SingleBase"/> instance for mocking. </returns>
+        public static SingleBase SingleBase(string kind = null, int size = default)
+        {
+            return new UnknownSingleBase(kind, size);
+        }
     }
 }

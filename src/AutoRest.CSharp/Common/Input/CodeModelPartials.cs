@@ -215,6 +215,8 @@ namespace AutoRest.CSharp.Input
 
         public HttpParameterIn In => Protocol.Http is HttpParameter httpParameter ? httpParameter.In : HttpParameterIn.None;
         public bool IsFlattened => Flattened ?? false;
+
+        public bool IsApiVersion => Origin == "modelerfour:synthesized/api-version";
     }
 
     internal partial class HttpResponse
