@@ -123,7 +123,7 @@ describe("Test getUsages", () => {
         const sdkContext = createSdkContext(context);
         const [services] = getAllHttpServices(program);
         const usages = getUsages(sdkContext, services[0].operations);
-        assert(usages.inputs.includes("TemplateModel"));
+        assert(usages.inputs.includes("TemplateModelFoo"));
         assert(usages.inputs.includes("Foo"));
     });
 
