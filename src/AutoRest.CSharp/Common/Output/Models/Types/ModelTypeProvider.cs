@@ -377,7 +377,7 @@ namespace AutoRest.CSharp.Output.Models.Types
 
         protected override bool EnsureHasXmlSerialization() => _inputModelSerialization.Xml is not null;
 
-        protected override bool EnsureIncludeSerializer() => _inputModelUsage.HasFlag(InputModelTypeUsage.Input);
+        protected override bool EnsureIncludeSerializer() => _inputModelUsage.HasFlag(InputModelTypeUsage.Input) && !_inputModel.IsUnknownDiscriminatorModel;
 
         protected override bool EnsureIncludeDeserializer() => _inputModelUsage.HasFlag(InputModelTypeUsage.Output);
 

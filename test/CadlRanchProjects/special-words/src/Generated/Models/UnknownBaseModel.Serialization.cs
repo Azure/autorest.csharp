@@ -7,20 +7,11 @@
 
 using System.Text.Json;
 using Azure;
-using Azure.Core;
 
 namespace SpecialWords.Models
 {
-    internal partial class UnknownBaseModel : IUtf8JsonSerializable
+    internal partial class UnknownBaseModel
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
-        {
-            writer.WriteStartObject();
-            writer.WritePropertyName("model.kind"u8);
-            writer.WriteStringValue(ModelKind);
-            writer.WriteEndObject();
-        }
-
         internal static UnknownBaseModel DeserializeUnknownBaseModel(JsonElement element)
         {
             if (element.ValueKind == JsonValueKind.Null)
@@ -45,14 +36,6 @@ namespace SpecialWords.Models
         {
             using var document = JsonDocument.Parse(response.Content);
             return DeserializeUnknownBaseModel(document.RootElement);
-        }
-
-        /// <summary> Convert into a Utf8JsonRequestContent. </summary>
-        internal override RequestContent ToRequestContent()
-        {
-            var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue(this);
-            return content;
         }
     }
 }

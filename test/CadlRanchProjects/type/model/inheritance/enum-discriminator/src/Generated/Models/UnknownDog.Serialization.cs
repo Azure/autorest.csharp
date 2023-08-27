@@ -7,22 +7,11 @@
 
 using System.Text.Json;
 using Azure;
-using Azure.Core;
 
 namespace _Type.Model.Inheritance.EnumDiscriminator.Models
 {
-    internal partial class UnknownDog : IUtf8JsonSerializable
+    internal partial class UnknownDog
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
-        {
-            writer.WriteStartObject();
-            writer.WritePropertyName("kind"u8);
-            writer.WriteStringValue(Kind.ToString());
-            writer.WritePropertyName("weight"u8);
-            writer.WriteNumberValue(Weight);
-            writer.WriteEndObject();
-        }
-
         internal static UnknownDog DeserializeUnknownDog(JsonElement element)
         {
             if (element.ValueKind == JsonValueKind.Null)
@@ -53,14 +42,6 @@ namespace _Type.Model.Inheritance.EnumDiscriminator.Models
         {
             using var document = JsonDocument.Parse(response.Content);
             return DeserializeUnknownDog(document.RootElement);
-        }
-
-        /// <summary> Convert into a Utf8JsonRequestContent. </summary>
-        internal override RequestContent ToRequestContent()
-        {
-            var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue(this);
-            return content;
         }
     }
 }

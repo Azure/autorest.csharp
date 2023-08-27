@@ -7,22 +7,11 @@
 
 using System.Text.Json;
 using Azure;
-using Azure.Core;
 
 namespace _Type.Model.Inheritance.SingleDiscriminator.Models
 {
-    internal partial class UnknownBird : IUtf8JsonSerializable
+    internal partial class UnknownBird
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
-        {
-            writer.WriteStartObject();
-            writer.WritePropertyName("kind"u8);
-            writer.WriteStringValue(Kind);
-            writer.WritePropertyName("wingspan"u8);
-            writer.WriteNumberValue(Wingspan);
-            writer.WriteEndObject();
-        }
-
         internal static UnknownBird DeserializeUnknownBird(JsonElement element)
         {
             if (element.ValueKind == JsonValueKind.Null)
@@ -53,14 +42,6 @@ namespace _Type.Model.Inheritance.SingleDiscriminator.Models
         {
             using var document = JsonDocument.Parse(response.Content);
             return DeserializeUnknownBird(document.RootElement);
-        }
-
-        /// <summary> Convert into a Utf8JsonRequestContent. </summary>
-        internal override RequestContent ToRequestContent()
-        {
-            var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteObjectValue(this);
-            return content;
         }
     }
 }

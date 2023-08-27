@@ -6,20 +6,11 @@
 #nullable disable
 
 using System.Text.Json;
-using Azure.Core;
 
 namespace Inheritance.Models
 {
-    internal partial class UnknownBaseClassWithExtensibleEnumDiscriminator : IUtf8JsonSerializable
+    internal partial class UnknownBaseClassWithExtensibleEnumDiscriminator
     {
-        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer)
-        {
-            writer.WriteStartObject();
-            writer.WritePropertyName("DiscriminatorProperty"u8);
-            writer.WriteStringValue(DiscriminatorProperty.ToString());
-            writer.WriteEndObject();
-        }
-
         internal static UnknownBaseClassWithExtensibleEnumDiscriminator DeserializeUnknownBaseClassWithExtensibleEnumDiscriminator(JsonElement element)
         {
             if (element.ValueKind == JsonValueKind.Null)
