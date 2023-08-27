@@ -379,10 +379,7 @@ namespace Encode.Bytes
             var uri = new RawRequestUriBuilder();
             uri.Reset(_endpoint);
             uri.AppendPath("/encode/bytes/query/base64url-array", false);
-            if (value != null && Optional.IsCollectionDefined(value))
-            {
-                uri.AppendQueryDelimited("value", value, ",", "U", true);
-            }
+            uri.AppendQueryDelimited("value", value, ",", "U", true);
             uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");

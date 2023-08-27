@@ -89,7 +89,7 @@ namespace AutoRest.CSharp.Output.Models
                         requestConditionHeaders |= header;
                         requestConditionRequestParameter ??= inputParameter;
                         requestConditionSerializationFormat = requestConditionSerializationFormat == SerializationFormat.Default
-                                ? SerializationBuilder.GetSerializationFormat(inputParameter.Type)
+                                ? GetSerializationFormat(inputParameter.Type)
                                 : requestConditionSerializationFormat;
                         break;
                     case { Location: RequestLocation.Header, IsContentType: true }:
@@ -152,7 +152,7 @@ namespace AutoRest.CSharp.Output.Models
             // for legacy logic, adding request parts unsorted
             foreach (var inputParameter in _unsortedParameters)
             {
-                var serializationFormat = SerializationBuilder.GetSerializationFormat(inputParameter.Type);
+                var serializationFormat = GetSerializationFormat(inputParameter.Type);
                 _requestParts.Add(new RequestPartSource(inputParameter.NameInRequest, inputParameter, parameters[inputParameter], serializationFormat));
             }
 
@@ -282,7 +282,7 @@ namespace AutoRest.CSharp.Output.Models
             var type = new CSharpType(parameterType, inputParameter.Type.IsNullable);
             var protocolMethodParameter = Parameter.FromInputParameter(inputParameter, type, _keepClientDefaultValue, _typeFactory);
 
-            AddReference(inputParameter.NameInRequest, inputParameter, protocolMethodParameter, SerializationBuilder.GetSerializationFormat(inputParameter.Type));
+            AddReference(inputParameter.NameInRequest, inputParameter, protocolMethodParameter, GetSerializationFormat(inputParameter.Type));
             AddParameter(inputParameter, protocolMethodParameter);
         }
 
@@ -292,7 +292,7 @@ namespace AutoRest.CSharp.Output.Models
                 ? inputParameter.IsRequired ? KnownParameters.RequestContent : KnownParameters.RequestContentNullable
                 : Parameter.FromInputParameter(inputParameter, ChangeTypeForProtocolMethod(inputParameter.Type), _keepClientDefaultValue, _typeFactory);
 
-            AddReference(nameInRequest, inputParameter, protocolMethodParameter, SerializationBuilder.GetSerializationFormat(inputParameter.Type));
+            AddReference(nameInRequest, inputParameter, protocolMethodParameter, GetSerializationFormat(inputParameter.Type));
             AddParameter(inputParameter, protocolMethodParameter);
         }
 
@@ -460,7 +460,7 @@ namespace AutoRest.CSharp.Output.Models
         }
 
         private void AddReference(InputParameter inputParameter)
-            => _requestParts.Add(new RequestPartSource(inputParameter.NameInRequest, inputParameter, null, SerializationBuilder.GetSerializationFormat(inputParameter.Type)));
+            => _requestParts.Add(new RequestPartSource(inputParameter.NameInRequest, inputParameter, null, GetSerializationFormat(inputParameter.Type)));
 
         private void AddReference(string nameInRequest, InputParameter? inputParameter, Parameter? outputParameter, SerializationFormat serializationFormat)
         {
@@ -592,5 +592,13 @@ namespace AutoRest.CSharp.Output.Models
                 }
             }
         }
+
+        private static SerializationFormat GetSerializationFormat(InputType type)
+            => type switch
+            {
+                InputListType listType => GetSerializationFormat(listType.ElementType),
+                InputDictionaryType dictionaryType => GetSerializationFormat(dictionaryType.ValueType),
+                _ => SerializationBuilder.GetSerializationFormat(type)
+            };
     }
 }
