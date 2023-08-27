@@ -8,13 +8,11 @@ This sample shows how to call GetFileAsync with required parameters and parse th
 var credential = new AzureKeyCredential("<key>");
 var client = new FilesClient(credential);
 
-Response response = await client.GetFileAsync(new RequestContext());
+Response response = await client.GetFileAsync(new RequestContext()).ConfigureAwait(false);
 if (response.ContentStream != null)
 {
-    using(Stream outFileStream = File.OpenWrite("<filePath>"))
-    {
-        response.ContentStream.CopyTo(outFileStream);
-    }
+    using Stream outFileStream = File.OpenWrite("<filePath>");
+    response.ContentStream.CopyTo(outFileStream);
 }
 ]]></code>
 </example>
@@ -29,10 +27,8 @@ var client = new FilesClient(credential);
 Response response = client.GetFile(new RequestContext());
 if (response.ContentStream != null)
 {
-    using(Stream outFileStream = File.OpenWrite("<filePath>"))
-    {
-        response.ContentStream.CopyTo(outFileStream);
-    }
+    using Stream outFileStream = File.OpenWrite("<filePath>");
+    response.ContentStream.CopyTo(outFileStream);
 }
 ]]></code>
 </example>
@@ -44,13 +40,11 @@ This sample shows how to call GetFileLargeAsync with required parameters and par
 var credential = new AzureKeyCredential("<key>");
 var client = new FilesClient(credential);
 
-Response response = await client.GetFileLargeAsync(new RequestContext());
+Response response = await client.GetFileLargeAsync(new RequestContext()).ConfigureAwait(false);
 if (response.ContentStream != null)
 {
-    using(Stream outFileStream = File.OpenWrite("<filePath>"))
-    {
-        response.ContentStream.CopyTo(outFileStream);
-    }
+    using Stream outFileStream = File.OpenWrite("<filePath>");
+    response.ContentStream.CopyTo(outFileStream);
 }
 ]]></code>
 </example>
@@ -65,10 +59,8 @@ var client = new FilesClient(credential);
 Response response = client.GetFileLarge(new RequestContext());
 if (response.ContentStream != null)
 {
-    using(Stream outFileStream = File.OpenWrite("<filePath>"))
-    {
-        response.ContentStream.CopyTo(outFileStream);
-    }
+    using Stream outFileStream = File.OpenWrite("<filePath>");
+    response.ContentStream.CopyTo(outFileStream);
 }
 ]]></code>
 </example>
@@ -80,13 +72,11 @@ This sample shows how to call GetEmptyFileAsync with required parameters and par
 var credential = new AzureKeyCredential("<key>");
 var client = new FilesClient(credential);
 
-Response response = await client.GetEmptyFileAsync(new RequestContext());
+Response response = await client.GetEmptyFileAsync(new RequestContext()).ConfigureAwait(false);
 if (response.ContentStream != null)
 {
-    using(Stream outFileStream = File.OpenWrite("<filePath>"))
-    {
-        response.ContentStream.CopyTo(outFileStream);
-    }
+    using Stream outFileStream = File.OpenWrite("<filePath>");
+    response.ContentStream.CopyTo(outFileStream);
 }
 ]]></code>
 </example>
@@ -101,10 +91,8 @@ var client = new FilesClient(credential);
 Response response = client.GetEmptyFile(new RequestContext());
 if (response.ContentStream != null)
 {
-    using(Stream outFileStream = File.OpenWrite("<filePath>"))
-    {
-        response.ContentStream.CopyTo(outFileStream);
-    }
+    using Stream outFileStream = File.OpenWrite("<filePath>");
+    response.ContentStream.CopyTo(outFileStream);
 }
 ]]></code>
 </example>

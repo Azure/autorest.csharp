@@ -39,6 +39,17 @@ namespace AutoRest.CSharp.Generation.Writers
             return base.VisitForEachStatement(node);
         }
 
+        public override SyntaxNode? VisitIfStatement(IfStatementSyntax node)
+        {
+            if (node.Statement is BlockSyntax block)
+            {
+                block = block.WithStatements(new SyntaxList<StatementSyntax>(block.Statements.Select(s => s.WithLeadingTrivia(Indentation))));
+                node = node.WithStatement(block);
+            }
+
+            return base.VisitIfStatement(node);
+        }
+
         public override SyntaxNode? VisitObjectCreationExpression(ObjectCreationExpressionSyntax node)
         {
             if (IsSingleLine(node))

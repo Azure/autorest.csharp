@@ -5,8 +5,6 @@
 
 #nullable disable
 
-using System;
-using Azure.Core;
 using NamespaceForEnums;
 
 namespace CustomNamespace

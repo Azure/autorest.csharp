@@ -179,7 +179,7 @@ namespace body_string_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new StringClient(credential);
 
-            var data = "";
+            var data = "<String>";
 
             Response response = client.PutEmpty(RequestContent.Create(data));
             Console.WriteLine(response.Status);
@@ -192,7 +192,7 @@ namespace body_string_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new StringClient(credential);
 
-            var data = "";
+            var data = "<String>";
 
             Response response = client.PutEmpty(RequestContent.Create(data));
             Console.WriteLine(response.Status);
@@ -205,9 +205,9 @@ namespace body_string_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new StringClient(credential);
 
-            var data = "";
+            var data = "<String>";
 
-            Response response = await client.PutEmptyAsync(RequestContent.Create(data));
+            Response response = await client.PutEmptyAsync(RequestContent.Create(data)).ConfigureAwait(false);
             Console.WriteLine(response.Status);
         }
 
@@ -218,9 +218,9 @@ namespace body_string_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new StringClient(credential);
 
-            var data = "";
+            var data = "<String>";
 
-            Response response = await client.PutEmptyAsync(RequestContent.Create(data));
+            Response response = await client.PutEmptyAsync(RequestContent.Create(data)).ConfigureAwait(false);
             Console.WriteLine(response.Status);
         }
 
@@ -311,7 +311,7 @@ namespace body_string_LowLevel.Samples
 
             var data = "啊齄丂狛狜隣郎隣兀﨩ˊ〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€";
 
-            Response response = await client.PutMbcsAsync(RequestContent.Create(data));
+            Response response = await client.PutMbcsAsync(RequestContent.Create(data)).ConfigureAwait(false);
             Console.WriteLine(response.Status);
         }
 
@@ -324,7 +324,7 @@ namespace body_string_LowLevel.Samples
 
             var data = "啊齄丂狛狜隣郎隣兀﨩ˊ〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€";
 
-            Response response = await client.PutMbcsAsync(RequestContent.Create(data));
+            Response response = await client.PutMbcsAsync(RequestContent.Create(data)).ConfigureAwait(false);
             Console.WriteLine(response.Status);
         }
 
@@ -361,7 +361,7 @@ namespace body_string_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new StringClient(credential);
 
-            Response response = await client.GetWhitespaceAsync(new RequestContext());
+            Response response = await client.GetWhitespaceAsync(new RequestContext()).ConfigureAwait(false);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());
@@ -374,7 +374,7 @@ namespace body_string_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new StringClient(credential);
 
-            Response response = await client.GetWhitespaceAsync(new RequestContext());
+            Response response = await client.GetWhitespaceAsync(new RequestContext()).ConfigureAwait(false);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());
@@ -415,7 +415,7 @@ namespace body_string_LowLevel.Samples
 
             var data = "    Now is the time for all good men to come to the aid of their country    ";
 
-            Response response = await client.PutWhitespaceAsync(RequestContent.Create(data));
+            Response response = await client.PutWhitespaceAsync(RequestContent.Create(data)).ConfigureAwait(false);
             Console.WriteLine(response.Status);
         }
 
@@ -428,7 +428,7 @@ namespace body_string_LowLevel.Samples
 
             var data = "    Now is the time for all good men to come to the aid of their country    ";
 
-            Response response = await client.PutWhitespaceAsync(RequestContent.Create(data));
+            Response response = await client.PutWhitespaceAsync(RequestContent.Create(data)).ConfigureAwait(false);
             Console.WriteLine(response.Status);
         }
 
@@ -465,7 +465,7 @@ namespace body_string_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new StringClient(credential);
 
-            Response response = await client.GetNotProvidedAsync(new RequestContext());
+            Response response = await client.GetNotProvidedAsync(new RequestContext()).ConfigureAwait(false);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());
@@ -478,7 +478,7 @@ namespace body_string_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new StringClient(credential);
 
-            Response response = await client.GetNotProvidedAsync(new RequestContext());
+            Response response = await client.GetNotProvidedAsync(new RequestContext()).ConfigureAwait(false);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());
@@ -517,7 +517,7 @@ namespace body_string_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new StringClient(credential);
 
-            Response response = await client.GetBase64EncodedAsync(new RequestContext());
+            Response response = await client.GetBase64EncodedAsync(new RequestContext()).ConfigureAwait(false);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());
@@ -530,7 +530,7 @@ namespace body_string_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new StringClient(credential);
 
-            Response response = await client.GetBase64EncodedAsync(new RequestContext());
+            Response response = await client.GetBase64EncodedAsync(new RequestContext()).ConfigureAwait(false);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());
@@ -569,7 +569,7 @@ namespace body_string_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new StringClient(credential);
 
-            Response response = await client.GetBase64UrlEncodedAsync(new RequestContext());
+            Response response = await client.GetBase64UrlEncodedAsync(new RequestContext()).ConfigureAwait(false);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());
@@ -582,7 +582,7 @@ namespace body_string_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new StringClient(credential);
 
-            Response response = await client.GetBase64UrlEncodedAsync(new RequestContext());
+            Response response = await client.GetBase64UrlEncodedAsync(new RequestContext()).ConfigureAwait(false);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());
@@ -595,7 +595,7 @@ namespace body_string_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new StringClient(credential);
 
-            var data = new { };
+            var data = BinaryData.FromString("<your binary data content>");
 
             Response response = client.PutBase64UrlEncoded(RequestContent.Create(data));
             Console.WriteLine(response.Status);
@@ -608,7 +608,7 @@ namespace body_string_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new StringClient(credential);
 
-            var data = new { };
+            var data = BinaryData.FromString("<your binary data content>");
 
             Response response = client.PutBase64UrlEncoded(RequestContent.Create(data));
             Console.WriteLine(response.Status);
@@ -621,9 +621,9 @@ namespace body_string_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new StringClient(credential);
 
-            var data = new { };
+            var data = BinaryData.FromString("<your binary data content>");
 
-            Response response = await client.PutBase64UrlEncodedAsync(RequestContent.Create(data));
+            Response response = await client.PutBase64UrlEncodedAsync(RequestContent.Create(data)).ConfigureAwait(false);
             Console.WriteLine(response.Status);
         }
 
@@ -634,9 +634,9 @@ namespace body_string_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new StringClient(credential);
 
-            var data = new { };
+            var data = BinaryData.FromString("<your binary data content>");
 
-            Response response = await client.PutBase64UrlEncodedAsync(RequestContent.Create(data));
+            Response response = await client.PutBase64UrlEncodedAsync(RequestContent.Create(data)).ConfigureAwait(false);
             Console.WriteLine(response.Status);
         }
 
@@ -673,7 +673,7 @@ namespace body_string_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new StringClient(credential);
 
-            Response response = await client.GetNullBase64UrlEncodedAsync(new RequestContext());
+            Response response = await client.GetNullBase64UrlEncodedAsync(new RequestContext()).ConfigureAwait(false);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());
@@ -686,7 +686,7 @@ namespace body_string_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new StringClient(credential);
 
-            Response response = await client.GetNullBase64UrlEncodedAsync(new RequestContext());
+            Response response = await client.GetNullBase64UrlEncodedAsync(new RequestContext()).ConfigureAwait(false);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());
