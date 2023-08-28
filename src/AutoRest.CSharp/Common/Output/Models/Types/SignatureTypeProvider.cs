@@ -47,30 +47,6 @@ namespace AutoRest.CSharp.Common.Output.Models.Types
 
         protected override string DefaultAccessibility { get; }
 
-        public void WriteMissingOverloadMethod(CodeWriter writer, MethodSignature currentMethodToCall, MethodSignature previousMethodToAdd, IList<MethodParameter> missingParameters)
-        {
-            writer.Line($"[{typeof(EditorBrowsableAttribute)}({typeof(EditorBrowsableState)}.{nameof(EditorBrowsableState.Never)})]");
-            using (writer.WriteMethodDeclaration(previousMethodToAdd, ignoreOptional: true))
-            {
-                writer.Line();
-                writer.Append($"return {currentMethodToCall.Name}(");
-                var set = missingParameters.ToHashSet(new ParameterComparer());
-                foreach (var parameter in currentMethodToCall.Parameters)
-                {
-                    if (set.Contains(parameter))
-                    {
-                        writer.Append($"{parameter.DefaultValue?.Value ?? "default"}, ");
-                    }
-                    else
-                    {
-                        writer.Append($"{parameter.Name}, ");
-                    }
-                }
-                writer.RemoveTrailingComma();
-                writer.Line($");");
-            }
-        }
-
         public IList<(MethodSignature CurrentMethodToCall, MethodSignature PreviousMethodToAdd, IList<MethodParameter> MissingParameters)> MissingOverloadMethods
         {
             get
