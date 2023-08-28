@@ -43,9 +43,6 @@ namespace body_complex_LowLevel.Samples
             Console.WriteLine(result.GetProperty("fishtype").ToString());
             Console.WriteLine(result.GetProperty("species").ToString());
             Console.WriteLine(result.GetProperty("length").ToString());
-            Console.WriteLine(result.GetProperty("siblings")[0].GetProperty("fishtype").ToString());
-            Console.WriteLine(result.GetProperty("siblings")[0].GetProperty("species").ToString());
-            Console.WriteLine(result.GetProperty("siblings")[0].GetProperty("length").ToString());
         }
 
         [Test]
@@ -75,9 +72,6 @@ namespace body_complex_LowLevel.Samples
             Console.WriteLine(result.GetProperty("fishtype").ToString());
             Console.WriteLine(result.GetProperty("species").ToString());
             Console.WriteLine(result.GetProperty("length").ToString());
-            Console.WriteLine(result.GetProperty("siblings")[0].GetProperty("fishtype").ToString());
-            Console.WriteLine(result.GetProperty("siblings")[0].GetProperty("species").ToString());
-            Console.WriteLine(result.GetProperty("siblings")[0].GetProperty("length").ToString());
         }
 
         [Test]
@@ -368,7 +362,8 @@ namespace body_complex_LowLevel.Samples
             Response response = client.GetComplicated(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.ToString());
+            Console.WriteLine(result.GetProperty("fishtype").ToString());
+            Console.WriteLine(result.GetProperty("length").ToString());
         }
 
         [Test]
@@ -401,7 +396,8 @@ namespace body_complex_LowLevel.Samples
             Response response = await client.GetComplicatedAsync(new RequestContext()).ConfigureAwait(false);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.ToString());
+            Console.WriteLine(result.GetProperty("fishtype").ToString());
+            Console.WriteLine(result.GetProperty("length").ToString());
         }
 
         [Test]
@@ -455,16 +451,7 @@ namespace body_complex_LowLevel.Samples
                 iswild = true,
                 fishtype = "smart_salmon",
                 species = "<species>",
-                length = 123.45f,
-                siblings = new[] {
-        new {
-            location = "<location>",
-            iswild = true,
-            fishtype = "salmon",
-            species = "<species>",
-            length = 123.45f,
-        }
-    },
+                length = 3.14f,
             };
 
             Response response = client.PutComplicated(RequestContent.Create(data));
@@ -502,16 +489,7 @@ namespace body_complex_LowLevel.Samples
                 iswild = true,
                 fishtype = "smart_salmon",
                 species = "<species>",
-                length = 123.45f,
-                siblings = new[] {
-        new {
-            location = "<location>",
-            iswild = true,
-            fishtype = "salmon",
-            species = "<species>",
-            length = 123.45f,
-        }
-    },
+                length = 3.14f,
             };
 
             Response response = await client.PutComplicatedAsync(RequestContent.Create(data)).ConfigureAwait(false);
@@ -534,7 +512,8 @@ namespace body_complex_LowLevel.Samples
             Response response = client.PutMissingDiscriminator(RequestContent.Create(data));
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.ToString());
+            Console.WriteLine(result.GetProperty("fishtype").ToString());
+            Console.WriteLine(result.GetProperty("length").ToString());
         }
 
         [Test]
@@ -551,16 +530,7 @@ namespace body_complex_LowLevel.Samples
                 iswild = true,
                 fishtype = "smart_salmon",
                 species = "<species>",
-                length = 123.45f,
-                siblings = new[] {
-        new {
-            location = "<location>",
-            iswild = true,
-            fishtype = "salmon",
-            species = "<species>",
-            length = 123.45f,
-        }
-    },
+                length = 3.14f,
             };
 
             Response response = client.PutMissingDiscriminator(RequestContent.Create(data));
@@ -592,7 +562,8 @@ namespace body_complex_LowLevel.Samples
             Response response = await client.PutMissingDiscriminatorAsync(RequestContent.Create(data)).ConfigureAwait(false);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
-            Console.WriteLine(result.ToString());
+            Console.WriteLine(result.GetProperty("fishtype").ToString());
+            Console.WriteLine(result.GetProperty("length").ToString());
         }
 
         [Test]
@@ -609,16 +580,7 @@ namespace body_complex_LowLevel.Samples
                 iswild = true,
                 fishtype = "smart_salmon",
                 species = "<species>",
-                length = 123.45f,
-                siblings = new[] {
-        new {
-            location = "<location>",
-            iswild = true,
-            fishtype = "salmon",
-            species = "<species>",
-            length = 123.45f,
-        }
-    },
+                length = 3.14f,
             };
 
             Response response = await client.PutMissingDiscriminatorAsync(RequestContent.Create(data)).ConfigureAwait(false);

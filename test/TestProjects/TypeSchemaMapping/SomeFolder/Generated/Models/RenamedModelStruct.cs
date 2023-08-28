@@ -17,12 +17,8 @@ namespace CustomNamespace
         /// <param name="propertyToField"> . </param>
         /// <param name="fruit"> Fruit. </param>
         /// <param name="daysOfWeek"> Day of week. </param>
-        /// <exception cref="ArgumentNullException"> <paramref name="customizedFlattenedStringProperty"/> or <paramref name="propertyToField"/> is null. </exception>
         public RenamedModelStruct(string customizedFlattenedStringProperty, string propertyToField, CustomFruitEnum? fruit, CustomDaysOfWeek? daysOfWeek)
         {
-            Argument.AssertNotNull(customizedFlattenedStringProperty, nameof(customizedFlattenedStringProperty));
-            Argument.AssertNotNull(propertyToField, nameof(propertyToField));
-
             CustomizedFlattenedStringProperty = customizedFlattenedStringProperty;
             PropertyToField = propertyToField;
             Fruit = fruit;

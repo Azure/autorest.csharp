@@ -461,7 +461,7 @@ namespace paging_LowLevel
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="maxpagesize"> Max page size query param. Don't send. The default value is "5". </param>
+        /// <param name="maxpagesize"> Max page size query param. Don't send. The default value is AutoRest.CSharp.Output.Models.Types.EnumTypeValue. Allowed values: "5". </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="AsyncPageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
@@ -483,7 +483,7 @@ namespace paging_LowLevel
         /// </item>
         /// </list>
         /// </summary>
-        /// <param name="maxpagesize"> Max page size query param. Don't send. The default value is "5". </param>
+        /// <param name="maxpagesize"> Max page size query param. Don't send. The default value is AutoRest.CSharp.Output.Models.Types.EnumTypeValue. Allowed values: "5". </param>
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The <see cref="Pageable{T}"/> from the service containing a list of <see cref="BinaryData"/> objects. Details of the body schema for each item in the collection are in the Remarks section below. </returns>
