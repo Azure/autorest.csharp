@@ -89,8 +89,8 @@ namespace body_complex_LowLevel.Samples
 
             var data = new
             {
-                fishtype = "salmon",
-                length = 123.45f,
+                fishtype = "smart_salmon",
+                length = 3.14f,
             };
 
             Response response = client.PutValid(RequestContent.Create(data));
@@ -106,11 +106,12 @@ namespace body_complex_LowLevel.Samples
 
             var data = new
             {
+                college_degree = "<college_degree>",
                 location = "<location>",
                 iswild = true,
-                fishtype = "salmon",
+                fishtype = "smart_salmon",
                 species = "<species>",
-                length = 123.45f,
+                length = 3.14f,
             };
 
             Response response = client.PutValid(RequestContent.Create(data));
@@ -126,11 +127,11 @@ namespace body_complex_LowLevel.Samples
 
             var data = new
             {
-                fishtype = "salmon",
-                length = 123.45f,
+                fishtype = "smart_salmon",
+                length = 3.14f,
             };
 
-            Response response = await client.PutValidAsync(RequestContent.Create(data));
+            Response response = await client.PutValidAsync(RequestContent.Create(data)).ConfigureAwait(false);
             Console.WriteLine(response.Status);
         }
 
@@ -143,14 +144,15 @@ namespace body_complex_LowLevel.Samples
 
             var data = new
             {
+                college_degree = "<college_degree>",
                 location = "<location>",
                 iswild = true,
-                fishtype = "salmon",
+                fishtype = "smart_salmon",
                 species = "<species>",
-                length = 123.45f,
+                length = 3.14f,
             };
 
-            Response response = await client.PutValidAsync(RequestContent.Create(data));
+            Response response = await client.PutValidAsync(RequestContent.Create(data)).ConfigureAwait(false);
             Console.WriteLine(response.Status);
         }
     }

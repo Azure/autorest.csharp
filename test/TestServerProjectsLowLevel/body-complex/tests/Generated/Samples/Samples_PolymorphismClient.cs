@@ -89,8 +89,8 @@ namespace body_complex_LowLevel.Samples
 
             var data = new
             {
-                fishtype = "salmon",
-                length = 123.45f,
+                fishtype = "smart_salmon",
+                length = 3.14f,
             };
 
             Response response = client.PutValid(RequestContent.Create(data));
@@ -106,11 +106,12 @@ namespace body_complex_LowLevel.Samples
 
             var data = new
             {
+                college_degree = "<college_degree>",
                 location = "<location>",
                 iswild = true,
-                fishtype = "salmon",
+                fishtype = "smart_salmon",
                 species = "<species>",
-                length = 123.45f,
+                length = 3.14f,
             };
 
             Response response = client.PutValid(RequestContent.Create(data));
@@ -126,11 +127,11 @@ namespace body_complex_LowLevel.Samples
 
             var data = new
             {
-                fishtype = "salmon",
-                length = 123.45f,
+                fishtype = "smart_salmon",
+                length = 3.14f,
             };
 
-            Response response = await client.PutValidAsync(RequestContent.Create(data));
+            Response response = await client.PutValidAsync(RequestContent.Create(data)).ConfigureAwait(false);
             Console.WriteLine(response.Status);
         }
 
@@ -143,14 +144,15 @@ namespace body_complex_LowLevel.Samples
 
             var data = new
             {
+                college_degree = "<college_degree>",
                 location = "<location>",
                 iswild = true,
-                fishtype = "salmon",
+                fishtype = "smart_salmon",
                 species = "<species>",
-                length = 123.45f,
+                length = 3.14f,
             };
 
-            Response response = await client.PutValidAsync(RequestContent.Create(data));
+            Response response = await client.PutValidAsync(RequestContent.Create(data)).ConfigureAwait(false);
             Console.WriteLine(response.Status);
         }
 
@@ -409,7 +411,7 @@ namespace body_complex_LowLevel.Samples
             var credential = new AzureKeyCredential("<key>");
             var client = new PolymorphismClient(credential);
 
-            Response response = await client.GetComplicatedAsync(new RequestContext());
+            Response response = await client.GetComplicatedAsync(new RequestContext()).ConfigureAwait(false);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("location").ToString());
@@ -432,7 +434,7 @@ namespace body_complex_LowLevel.Samples
             var data = new
             {
                 fishtype = "smart_salmon",
-                length = 123.45f,
+                length = 3.14f,
             };
 
             Response response = client.PutComplicated(RequestContent.Create(data));
@@ -479,10 +481,10 @@ namespace body_complex_LowLevel.Samples
             var data = new
             {
                 fishtype = "smart_salmon",
-                length = 123.45f,
+                length = 3.14f,
             };
 
-            Response response = await client.PutComplicatedAsync(RequestContent.Create(data));
+            Response response = await client.PutComplicatedAsync(RequestContent.Create(data)).ConfigureAwait(false);
             Console.WriteLine(response.Status);
         }
 
@@ -512,7 +514,7 @@ namespace body_complex_LowLevel.Samples
     },
             };
 
-            Response response = await client.PutComplicatedAsync(RequestContent.Create(data));
+            Response response = await client.PutComplicatedAsync(RequestContent.Create(data)).ConfigureAwait(false);
             Console.WriteLine(response.Status);
         }
 
@@ -526,7 +528,7 @@ namespace body_complex_LowLevel.Samples
             var data = new
             {
                 fishtype = "smart_salmon",
-                length = 123.45f,
+                length = 3.14f,
             };
 
             Response response = client.PutMissingDiscriminator(RequestContent.Create(data));
@@ -584,10 +586,10 @@ namespace body_complex_LowLevel.Samples
             var data = new
             {
                 fishtype = "smart_salmon",
-                length = 123.45f,
+                length = 3.14f,
             };
 
-            Response response = await client.PutMissingDiscriminatorAsync(RequestContent.Create(data));
+            Response response = await client.PutMissingDiscriminatorAsync(RequestContent.Create(data)).ConfigureAwait(false);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());
@@ -619,7 +621,7 @@ namespace body_complex_LowLevel.Samples
     },
             };
 
-            Response response = await client.PutMissingDiscriminatorAsync(RequestContent.Create(data));
+            Response response = await client.PutMissingDiscriminatorAsync(RequestContent.Create(data)).ConfigureAwait(false);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("location").ToString());
@@ -641,8 +643,8 @@ namespace body_complex_LowLevel.Samples
 
             var data = new
             {
-                fishtype = "salmon",
-                length = 123.45f,
+                fishtype = "smart_salmon",
+                length = 3.14f,
             };
 
             Response response = client.PutValidMissingRequired(RequestContent.Create(data));
@@ -658,11 +660,12 @@ namespace body_complex_LowLevel.Samples
 
             var data = new
             {
+                college_degree = "<college_degree>",
                 location = "<location>",
                 iswild = true,
-                fishtype = "salmon",
+                fishtype = "smart_salmon",
                 species = "<species>",
-                length = 123.45f,
+                length = 3.14f,
             };
 
             Response response = client.PutValidMissingRequired(RequestContent.Create(data));
@@ -678,11 +681,11 @@ namespace body_complex_LowLevel.Samples
 
             var data = new
             {
-                fishtype = "salmon",
-                length = 123.45f,
+                fishtype = "smart_salmon",
+                length = 3.14f,
             };
 
-            Response response = await client.PutValidMissingRequiredAsync(RequestContent.Create(data));
+            Response response = await client.PutValidMissingRequiredAsync(RequestContent.Create(data)).ConfigureAwait(false);
             Console.WriteLine(response.Status);
         }
 
@@ -695,14 +698,15 @@ namespace body_complex_LowLevel.Samples
 
             var data = new
             {
+                college_degree = "<college_degree>",
                 location = "<location>",
                 iswild = true,
-                fishtype = "salmon",
+                fishtype = "smart_salmon",
                 species = "<species>",
-                length = 123.45f,
+                length = 3.14f,
             };
 
-            Response response = await client.PutValidMissingRequiredAsync(RequestContent.Create(data));
+            Response response = await client.PutValidMissingRequiredAsync(RequestContent.Create(data)).ConfigureAwait(false);
             Console.WriteLine(response.Status);
         }
     }
