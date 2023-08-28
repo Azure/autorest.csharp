@@ -246,7 +246,7 @@ namespace ModelsTypeSpec.Models
         /// <returns> A new <see cref="Models.SingleBase"/> instance for mocking. </returns>
         public static SingleBase SingleBase(string kind = null, int size = default)
         {
-            return new UnknownSingleBase(kind, size);
+            return new UnknownSingleBase(kind, size, default);
         }
     }
 }

@@ -119,7 +119,7 @@ namespace paging_LowLevel
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetEmptyNextLinkNamePagesRequest(context);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => CreateGetEmptyNextLinkNamePagesNextPageRequest(nextLink, context);
-            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "PagingClient.GetEmptyNextLinkNamePages", "value", "nextLink", context);
+            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, (e, o) => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "PagingClient.GetEmptyNextLinkNamePages", "value", "nextLink", context);
         }
 
         /// <summary>
@@ -140,7 +140,7 @@ namespace paging_LowLevel
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetEmptyNextLinkNamePagesRequest(context);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => CreateGetEmptyNextLinkNamePagesNextPageRequest(nextLink, context);
-            return PageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "PagingClient.GetEmptyNextLinkNamePages", "value", "nextLink", context);
+            return PageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, (e, o) => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "PagingClient.GetEmptyNextLinkNamePages", "value", "nextLink", context);
         }
 
         /// <summary>
@@ -247,7 +247,7 @@ namespace paging_LowLevel
 
             HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetSinglePagesWithBodyParamsRequest(content, context);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => CreateGetSinglePagesWithBodyParamsNextPageRequest(nextLink, content, context);
-            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "PagingClient.GetSinglePagesWithBodyParams", "values", "nextLink", context);
+            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, (e, o) => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "PagingClient.GetSinglePagesWithBodyParams", "values", "nextLink", context);
         }
 
         /// <summary>
@@ -272,7 +272,7 @@ namespace paging_LowLevel
 
             HttpMessage FirstPageRequest(int? pageSizeHint) => CreateGetSinglePagesWithBodyParamsRequest(content, context);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => CreateGetSinglePagesWithBodyParamsNextPageRequest(nextLink, content, context);
-            return PageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "PagingClient.GetSinglePagesWithBodyParams", "values", "nextLink", context);
+            return PageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, (e, o) => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "PagingClient.GetSinglePagesWithBodyParams", "values", "nextLink", context);
         }
 
         /// <summary>
@@ -470,7 +470,7 @@ namespace paging_LowLevel
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => CreatePageWithMaxPageSizeRequest(maxpagesize, context);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => CreatePageWithMaxPageSizeNextPageRequest(nextLink, maxpagesize, context);
-            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "PagingClient.PageWithMaxPageSize", "values", "nextLink", context);
+            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, (e, o) => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "PagingClient.PageWithMaxPageSize", "values", "nextLink", context);
         }
 
         /// <summary>
@@ -492,7 +492,7 @@ namespace paging_LowLevel
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => CreatePageWithMaxPageSizeRequest(maxpagesize, context);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => CreatePageWithMaxPageSizeNextPageRequest(nextLink, maxpagesize, context);
-            return PageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "PagingClient.PageWithMaxPageSize", "values", "nextLink", context);
+            return PageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, (e, o) => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "PagingClient.PageWithMaxPageSize", "values", "nextLink", context);
         }
 
         /// <summary>
@@ -969,7 +969,7 @@ namespace paging_LowLevel
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => CreateAppendApiVersionRequest(context);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => CreateAppendApiVersionNextPageRequest(nextLink, context);
-            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "PagingClient.AppendApiVersion", "values", "nextLink", context);
+            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, (e, o) => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "PagingClient.AppendApiVersion", "values", "nextLink", context);
         }
 
         /// <summary>
@@ -990,7 +990,7 @@ namespace paging_LowLevel
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => CreateAppendApiVersionRequest(context);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => CreateAppendApiVersionNextPageRequest(nextLink, context);
-            return PageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "PagingClient.AppendApiVersion", "values", "nextLink", context);
+            return PageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, (e, o) => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "PagingClient.AppendApiVersion", "values", "nextLink", context);
         }
 
         /// <summary>
@@ -1011,7 +1011,7 @@ namespace paging_LowLevel
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => CreateReplaceApiVersionRequest(context);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => CreateReplaceApiVersionNextPageRequest(nextLink, context);
-            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "PagingClient.ReplaceApiVersion", "values", "nextLink", context);
+            return PageableHelpers.CreateAsyncPageable(FirstPageRequest, NextPageRequest, (e, o) => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "PagingClient.ReplaceApiVersion", "values", "nextLink", context);
         }
 
         /// <summary>
@@ -1032,7 +1032,7 @@ namespace paging_LowLevel
         {
             HttpMessage FirstPageRequest(int? pageSizeHint) => CreateReplaceApiVersionRequest(context);
             HttpMessage NextPageRequest(int? pageSizeHint, string nextLink) => CreateReplaceApiVersionNextPageRequest(nextLink, context);
-            return PageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, e => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "PagingClient.ReplaceApiVersion", "values", "nextLink", context);
+            return PageableHelpers.CreatePageable(FirstPageRequest, NextPageRequest, (e, o) => BinaryData.FromString(e.GetRawText()), ClientDiagnostics, _pipeline, "PagingClient.ReplaceApiVersion", "values", "nextLink", context);
         }
 
         /// <summary>

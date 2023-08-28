@@ -688,8 +688,8 @@ namespace FirstTestTypeSpec
             Argument.AssertNotNull(modelWithProjectedName, nameof(modelWithProjectedName));
 
             RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = await ProjectedNameModelAsync(modelWithProjectedName.ToRequestContent(), context).ConfigureAwait(false);
-            return Response.FromValue(ProjectedModel.FromResponse(response), response);
+            Response response = await ProjectedNameModelAsync(modelWithProjectedName, context).ConfigureAwait(false);
+            return Response.FromValue((ProjectedModel)response, response);
         }
 
         /// <summary> Model can have its projected name. </summary>
@@ -702,8 +702,8 @@ namespace FirstTestTypeSpec
             Argument.AssertNotNull(modelWithProjectedName, nameof(modelWithProjectedName));
 
             RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = ProjectedNameModel(modelWithProjectedName.ToRequestContent(), context);
-            return Response.FromValue(ProjectedModel.FromResponse(response), response);
+            Response response = ProjectedNameModel(modelWithProjectedName, context);
+            return Response.FromValue((ProjectedModel)response, response);
         }
 
         /// <summary>

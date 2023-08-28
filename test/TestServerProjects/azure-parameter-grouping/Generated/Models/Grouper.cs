@@ -5,14 +5,36 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
+
 namespace azure_parameter_grouping.Models
 {
     /// <summary> Parameter group. </summary>
     public partial class Grouper
     {
-        /// <summary> Initializes a new instance of Grouper. </summary>
+        private Dictionary<string, BinaryData> _rawData;
+
+        /// <summary>
+        /// Initializes a new instance of global::azure_parameter_grouping.Models.Grouper
+        ///
+        /// </summary>
         public Grouper()
         {
+        }
+
+        /// <summary>
+        /// Initializes a new instance of global::azure_parameter_grouping.Models.Grouper
+        ///
+        /// </summary>
+        /// <param name="groupedConstant"> A grouped parameter that is a constant. </param>
+        /// <param name="groupedParameter"> Optional parameter part of a parameter grouping. </param>
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal Grouper(EncryptionAlgorithmType? groupedConstant, string groupedParameter, Dictionary<string, BinaryData> rawData)
+        {
+            GroupedConstant = groupedConstant;
+            GroupedParameter = groupedParameter;
+            _rawData = rawData;
         }
 
         /// <summary> A grouped parameter that is a constant. </summary>

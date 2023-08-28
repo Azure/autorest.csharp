@@ -5,11 +5,18 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
+using Azure.Core.Serialization;
+
 namespace ModelsTypeSpec.Models
 {
     /// <summary> Single base model without any child model. </summary>
+    [AbstractHierarchyDeserializer(typeof(UnknownSingleBase))]
     public abstract partial class SingleBase
     {
+        protected internal Dictionary<string, BinaryData> _rawData;
+
         /// <summary> Initializes a new instance of SingleBase. </summary>
         /// <param name="size"></param>
         protected SingleBase(int size)
@@ -20,10 +27,12 @@ namespace ModelsTypeSpec.Models
         /// <summary> Initializes a new instance of SingleBase. </summary>
         /// <param name="kind"> Discriminator. </param>
         /// <param name="size"></param>
-        internal SingleBase(string kind, int size)
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal SingleBase(string kind, int size, Dictionary<string, BinaryData> rawData)
         {
             Kind = kind;
             Size = size;
+            _rawData = rawData;
         }
 
         /// <summary> Discriminator. </summary>

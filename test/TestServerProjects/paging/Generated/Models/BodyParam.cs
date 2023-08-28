@@ -5,14 +5,34 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
+
 namespace paging.Models
 {
     /// <summary> The BodyParam. </summary>
     public partial class BodyParam
     {
-        /// <summary> Initializes a new instance of BodyParam. </summary>
+        private Dictionary<string, BinaryData> _rawData;
+
+        /// <summary>
+        /// Initializes a new instance of global::paging.Models.BodyParam
+        ///
+        /// </summary>
         public BodyParam()
         {
+        }
+
+        /// <summary>
+        /// Initializes a new instance of global::paging.Models.BodyParam
+        ///
+        /// </summary>
+        /// <param name="name"></param>
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal BodyParam(string name, Dictionary<string, BinaryData> rawData)
+        {
+            Name = name;
+            _rawData = rawData;
         }
 
         /// <summary> Gets or sets the name. </summary>

@@ -1182,7 +1182,7 @@ namespace ModelsTypeSpec
         {
             RequestContext context = FromCancellationToken(cancellationToken);
             Response response = await GetSingleBaseAsync(context).ConfigureAwait(false);
-            return Response.FromValue(SingleBase.FromResponse(response), response);
+            return Response.FromValue((SingleBase)response, response);
         }
 
         /// <param name="cancellationToken"> The cancellation token to use. </param>
@@ -1191,7 +1191,7 @@ namespace ModelsTypeSpec
         {
             RequestContext context = FromCancellationToken(cancellationToken);
             Response response = GetSingleBase(context);
-            return Response.FromValue(SingleBase.FromResponse(response), response);
+            return Response.FromValue((SingleBase)response, response);
         }
 
         /// <summary>

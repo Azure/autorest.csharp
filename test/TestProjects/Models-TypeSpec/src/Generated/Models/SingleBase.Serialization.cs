@@ -5,28 +5,117 @@
 
 #nullable disable
 
+using System;
+using System.Collections.Generic;
 using System.Text.Json;
 using Azure;
+using Azure.Core;
+using Azure.Core.Serialization;
 
 namespace ModelsTypeSpec.Models
 {
-    public partial class SingleBase
+    public partial class SingleBase : IUtf8JsonSerializable, IModelJsonSerializable<SingleBase>
     {
-        internal static SingleBase DeserializeSingleBase(JsonElement element)
+        void IUtf8JsonSerializable.Write(Utf8JsonWriter writer) => ((IModelJsonSerializable<SingleBase>)this).Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
+
+        void IModelJsonSerializable<SingleBase>.Serialize(Utf8JsonWriter writer, ModelSerializerOptions options)
         {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            writer.WriteStartObject();
+            writer.WritePropertyName("kind"u8);
+            writer.WriteStringValue(Kind);
+            writer.WritePropertyName("size"u8);
+            writer.WriteNumberValue(Size);
+            if (_rawData is not null && options.Format == ModelSerializerFormat.Json)
+            {
+                foreach (var property in _rawData)
+                {
+                    writer.WritePropertyName(property.Key);
+#if NET6_0_OR_GREATER
+				writer.WriteRawValue(property.Value);
+#else
+                    JsonSerializer.Serialize(writer, JsonDocument.Parse(property.Value.ToString()).RootElement);
+#endif
+                }
+            }
+            writer.WriteEndObject();
+        }
+
+        internal static SingleBase DeserializeSingleBase(JsonElement element, ModelSerializerOptions options = default)
+        {
+            options ??= ModelSerializerOptions.DefaultWireOptions;
+
             if (element.ValueKind == JsonValueKind.Null)
             {
                 return null;
             }
-            return UnknownSingleBase.DeserializeUnknownSingleBase(element);
+            string kind = default;
+            int size = default;
+            Dictionary<string, BinaryData> rawData = new Dictionary<string, BinaryData>();
+            foreach (var property in element.EnumerateObject())
+            {
+                if (property.NameEquals("kind"u8))
+                {
+                    kind = property.Value.GetString();
+                    continue;
+                }
+                if (property.NameEquals("size"u8))
+                {
+                    size = property.Value.GetInt32();
+                    continue;
+                }
+                if (options.Format == ModelSerializerFormat.Json)
+                {
+                    rawData.Add(property.Name, BinaryData.FromString(property.Value.GetRawText()));
+                    continue;
+                }
+            }
+            return new UnknownSingleBase(kind, size, rawData);
         }
 
-        /// <summary> Deserializes the model from a raw response. </summary>
-        /// <param name="response"> The response to deserialize the model from. </param>
-        internal static SingleBase FromResponse(Response response)
+        SingleBase IModelJsonSerializable<SingleBase>.Deserialize(ref Utf8JsonReader reader, ModelSerializerOptions options)
         {
-            using var document = JsonDocument.Parse(response.Content);
-            return DeserializeSingleBase(document.RootElement);
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using var doc = JsonDocument.ParseValue(ref reader);
+            return DeserializeSingleBase(doc.RootElement, options);
+        }
+
+        BinaryData IModelSerializable<SingleBase>.Serialize(ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            return ModelSerializer.SerializeCore(this, options);
+        }
+
+        SingleBase IModelSerializable<SingleBase>.Deserialize(BinaryData data, ModelSerializerOptions options)
+        {
+            ModelSerializerHelper.ValidateFormat(this, options.Format);
+
+            using var doc = JsonDocument.Parse(data);
+            return DeserializeSingleBase(doc.RootElement, options);
+        }
+
+        public static implicit operator RequestContent(SingleBase model)
+        {
+            if (model is null)
+            {
+                return null;
+            }
+
+            return RequestContent.Create(model, ModelSerializerOptions.DefaultWireOptions);
+        }
+
+        public static explicit operator SingleBase(Response response)
+        {
+            if (response is null)
+            {
+                return null;
+            }
+
+            using JsonDocument doc = JsonDocument.Parse(response.ContentStream);
+            return DeserializeSingleBase(doc.RootElement, ModelSerializerOptions.DefaultWireOptions);
         }
     }
 }
