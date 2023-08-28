@@ -55,7 +55,7 @@ namespace AutoRest.CSharp.Output.Models.Types
         public bool IsPropertyBag => _inputModel.IsPropertyBag;
 
         public ModelTypeProvider(InputModelType inputModel, string defaultNamespace, SourceInputModel? sourceInputModel, TypeFactory typeFactory, ObjectType? defaultDerivedType = null)
-            : base(defaultNamespace, sourceInputModel)
+            : base(inputModel.Namespace ?? defaultNamespace, sourceInputModel)
         {
             _typeFactory = typeFactory;
             _inputModel = inputModel;
