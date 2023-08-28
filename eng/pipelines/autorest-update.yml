@@ -14,9 +14,6 @@ resources:
       endpoint: azure
       ref: refs/tags/azure-sdk-tools_20230428.1
 
-env:
-  GH_TOKEN: $(azuresdk-github-pat)
-
 jobs:
   - job: "Regen_and_Push"
     timeoutInMinutes: 30
@@ -30,6 +27,8 @@ jobs:
         fetchDepth: 1      
       - script: |
           gh pr checkout $(System.PullRequest.PullRequestNumber)
+        env:
+          GH_TOKEN: $(azuresdk-github-pat)
         displayName: 'Check out PR branch'
         workingDirectory: $(Build.SourcesDirectory)/autorest.csharp
       - task: UseDotNet@2
