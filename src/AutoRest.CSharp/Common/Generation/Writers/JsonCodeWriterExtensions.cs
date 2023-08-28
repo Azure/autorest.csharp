@@ -695,7 +695,7 @@ namespace AutoRest.CSharp.Generation.Writers
                 .Select(p => parameterValues[p.Name])
                 .ToArray();
 
-            var typeToReturn = serialization.Discriminator is not null && serialization.Discriminator.HasDescendants ? serialization.Discriminator.DefaultObjectType.Type : serialization.Type;
+            var typeToReturn = serialization.Discriminator is not null && serialization.ObjectType is not null && serialization.ObjectType.IsBaseClass ? serialization.Discriminator.DefaultObjectType.Type : serialization.Type;
             writer.Append($"return new {typeToReturn}({parameters.Join(", ")}");
             if (objAdditionalProperties is null && serialization.ObjectType is not null && serialization.ObjectType.HasRawDataInHeirarchy)
             {

@@ -298,7 +298,7 @@ namespace AutoRest.CSharp.Output.Models.Types
                 }
             }
 
-           return defaultCtorInitializers.ToArray();
+            return defaultCtorInitializers.ToArray();
         }
 
         protected override CSharpType? CreateInheritedType()

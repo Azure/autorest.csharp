@@ -47,7 +47,7 @@ namespace AutoRest.CSharp.Output.Models.Types
         }
 
         private bool? _isBaseClass;
-        public bool IsBaseClass => _isBaseClass ??= Inherits is null && HasSubClasses();
+        public bool IsBaseClass => _isBaseClass ??= (Inherits is null && HasSubClasses()) || Discriminator is not null && IsDiscriminatorBase(Discriminator.DefaultObjectType);
         protected abstract bool HasSubClasses();
 
         private ObjectTypeProperty? _rawDataProperty;
@@ -177,6 +177,26 @@ namespace AutoRest.CSharp.Output.Models.Types
                 return false;
 
             return true;
+        }
+
+        protected bool IsDiscriminatorBase(ObjectType? defaultDerivedType)
+        {
+            if (defaultDerivedType is null || defaultDerivedType.Type.IsFrameworkType)
+                return false;
+
+            if (defaultDerivedType.Type.Implementation is not ObjectType objectType)
+                return false;
+
+            if (objectType.Inherits is null)
+                return false;
+
+            if (objectType.Inherits.IsFrameworkType)
+                return false;
+
+            if (objectType.Inherits.Implementation is not ObjectType baseObjectType)
+                return false;
+
+            return baseObjectType.Type.Equals(Type);
         }
     }
 }
