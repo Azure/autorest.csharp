@@ -129,7 +129,7 @@ namespace MgmtExactMatchFlattenInheritance
             request.Headers.Add("Content-Type", "application/json");
             var content = new Utf8JsonRequestContent();
             content.JsonWriter.WriteStartObject();
-            if (foo != null)
+            if (Optional.IsDefined(foo))
             {
                 content.JsonWriter.WritePropertyName("foo"u8);
                 content.JsonWriter.WriteStringValue(foo);

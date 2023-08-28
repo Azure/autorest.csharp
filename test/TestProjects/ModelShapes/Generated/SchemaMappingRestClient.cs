@@ -296,12 +296,12 @@ namespace ModelShapes
             request.Headers.Add("Content-Type", "application/json");
             var content = new Utf8JsonRequestContent();
             content.JsonWriter.WriteStartObject();
-            if (code != null)
+            if (Optional.IsDefined(code))
             {
                 content.JsonWriter.WritePropertyName("Code"u8);
                 content.JsonWriter.WriteStringValue(code);
             }
-            if (status != null)
+            if (Optional.IsDefined(status))
             {
                 content.JsonWriter.WritePropertyName("Status"u8);
                 content.JsonWriter.WriteStringValue(status);

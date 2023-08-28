@@ -564,11 +564,9 @@ namespace AutoRest.CSharp.Common.Output.Builders
         {
             foreach (JsonPropertySerialization jsonProperty in jsonProperties.Where(p => !p.ShouldSkipDeserialization))
             {
-                if (jsonProperty.SerializedType != null)
+                if (jsonProperty.SerializedType is {} type)
                 {
                     var propertyDeclaration = new CodeWriterDeclaration(jsonProperty.SerializedName.ToVariableName());
-
-                    var type = jsonProperty.SerializedType;
                     if (!jsonProperty.IsRequired)
                     {
                         if (type.IsFrameworkType && type.FrameworkType == typeof(Nullable<>))

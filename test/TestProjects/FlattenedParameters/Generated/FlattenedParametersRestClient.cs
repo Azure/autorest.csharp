@@ -47,15 +47,22 @@ namespace FlattenedParameters
             request.Headers.Add("Content-Type", "application/json");
             var content = new Utf8JsonRequestContent();
             content.JsonWriter.WriteStartObject();
-            if (items != null)
+            if (Optional.IsCollectionDefined(items))
             {
-                content.JsonWriter.WritePropertyName("items"u8);
-                content.JsonWriter.WriteStartArray();
-                foreach (var item in items)
+                if (items != null)
                 {
-                    content.JsonWriter.WriteStringValue(item);
+                    content.JsonWriter.WritePropertyName("items"u8);
+                    content.JsonWriter.WriteStartArray();
+                    foreach (var item in items)
+                    {
+                        content.JsonWriter.WriteStringValue(item);
+                    }
+                    content.JsonWriter.WriteEndArray();
                 }
-                content.JsonWriter.WriteEndArray();
+                else
+                {
+                    content.JsonWriter.WriteNull("items");
+                }
             }
             content.JsonWriter.WriteEndObject();
             request.Content = content;
@@ -104,15 +111,22 @@ namespace FlattenedParameters
             request.Headers.Add("Content-Type", "application/json");
             var content = new Utf8JsonRequestContent();
             content.JsonWriter.WriteStartObject();
-            if (items != null)
+            if (Optional.IsCollectionDefined(items))
             {
-                content.JsonWriter.WritePropertyName("items"u8);
-                content.JsonWriter.WriteStartArray();
-                foreach (var item in items)
+                if (items != null)
                 {
-                    content.JsonWriter.WriteStringValue(item);
+                    content.JsonWriter.WritePropertyName("items"u8);
+                    content.JsonWriter.WriteStartArray();
+                    foreach (var item in items)
+                    {
+                        content.JsonWriter.WriteStringValue(item);
+                    }
+                    content.JsonWriter.WriteEndArray();
                 }
-                content.JsonWriter.WriteEndArray();
+                else
+                {
+                    content.JsonWriter.WriteNull("items");
+                }
             }
             content.JsonWriter.WriteEndObject();
             request.Content = content;
@@ -161,16 +175,19 @@ namespace FlattenedParameters
             request.Headers.Add("Content-Type", "application/json");
             var content = new Utf8JsonRequestContent();
             content.JsonWriter.WriteStartObject();
-            if (required != null)
+            content.JsonWriter.WritePropertyName("flattened"u8);
+            content.JsonWriter.WriteStartObject();
+            if (Optional.IsDefined(required))
             {
                 content.JsonWriter.WritePropertyName("required"u8);
                 content.JsonWriter.WriteStringValue(required);
             }
-            if (nonRequired != null)
+            if (Optional.IsDefined(nonRequired))
             {
                 content.JsonWriter.WritePropertyName("non_required"u8);
                 content.JsonWriter.WriteStringValue(nonRequired);
             }
+            content.JsonWriter.WriteEndObject();
             content.JsonWriter.WriteEndObject();
             request.Content = content;
             return message;
@@ -220,13 +237,16 @@ namespace FlattenedParameters
             request.Headers.Add("Content-Type", "application/json");
             var content = new Utf8JsonRequestContent();
             content.JsonWriter.WriteStartObject();
+            content.JsonWriter.WritePropertyName("flattened"u8);
+            content.JsonWriter.WriteStartObject();
             content.JsonWriter.WritePropertyName("required"u8);
             content.JsonWriter.WriteStringValue(required);
-            if (nonRequired != null)
+            if (Optional.IsDefined(nonRequired))
             {
                 content.JsonWriter.WritePropertyName("non_required"u8);
                 content.JsonWriter.WriteStringValue(nonRequired);
             }
+            content.JsonWriter.WriteEndObject();
             content.JsonWriter.WriteEndObject();
             request.Content = content;
             return message;

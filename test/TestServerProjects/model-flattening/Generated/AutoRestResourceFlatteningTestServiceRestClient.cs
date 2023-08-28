@@ -580,31 +580,37 @@ namespace model_flattening
             content.JsonWriter.WriteStartObject();
             content.JsonWriter.WritePropertyName("base_product_id"u8);
             content.JsonWriter.WriteStringValue(productId);
-            if (description != null)
+            if (Optional.IsDefined(description))
             {
                 content.JsonWriter.WritePropertyName("base_product_description"u8);
                 content.JsonWriter.WriteStringValue(description);
             }
-            if (maxProductDisplayName != null)
+            content.JsonWriter.WritePropertyName("details"u8);
+            content.JsonWriter.WriteStartObject();
+            if (Optional.IsDefined(maxProductDisplayName))
             {
                 content.JsonWriter.WritePropertyName("max_product_display_name"u8);
                 content.JsonWriter.WriteStringValue(maxProductDisplayName);
             }
-            if (capacity != null)
+            if (Optional.IsDefined(capacity))
             {
                 content.JsonWriter.WritePropertyName("max_product_capacity"u8);
                 content.JsonWriter.WriteStringValue(capacity.Value.ToString());
             }
-            if (genericValue != null)
+            content.JsonWriter.WritePropertyName("max_product_image"u8);
+            content.JsonWriter.WriteStartObject();
+            if (Optional.IsDefined(genericValue))
             {
                 content.JsonWriter.WritePropertyName("generic_value"u8);
                 content.JsonWriter.WriteStringValue(genericValue);
             }
-            if (odataValue != null)
+            if (Optional.IsDefined(odataValue))
             {
                 content.JsonWriter.WritePropertyName("@odata.value"u8);
                 content.JsonWriter.WriteStringValue(odataValue);
             }
+            content.JsonWriter.WriteEndObject();
+            content.JsonWriter.WriteEndObject();
             content.JsonWriter.WriteEndObject();
             request.Content = content;
             return message;
@@ -691,31 +697,37 @@ namespace model_flattening
             content.JsonWriter.WriteStartObject();
             content.JsonWriter.WritePropertyName("base_product_id"u8);
             content.JsonWriter.WriteStringValue(flattenParameterGroup.ProductId);
-            if (flattenParameterGroup.Description != null)
+            if (Optional.IsDefined(flattenParameterGroup.Description))
             {
                 content.JsonWriter.WritePropertyName("base_product_description"u8);
                 content.JsonWriter.WriteStringValue(flattenParameterGroup.Description);
             }
-            if (flattenParameterGroup.MaxProductDisplayName != null)
+            content.JsonWriter.WritePropertyName("details"u8);
+            content.JsonWriter.WriteStartObject();
+            if (Optional.IsDefined(flattenParameterGroup.MaxProductDisplayName))
             {
                 content.JsonWriter.WritePropertyName("max_product_display_name"u8);
                 content.JsonWriter.WriteStringValue(flattenParameterGroup.MaxProductDisplayName);
             }
-            if (flattenParameterGroup.Capacity != null)
+            if (Optional.IsDefined(flattenParameterGroup.Capacity))
             {
                 content.JsonWriter.WritePropertyName("max_product_capacity"u8);
                 content.JsonWriter.WriteStringValue(flattenParameterGroup.Capacity.Value.ToString());
             }
-            if (flattenParameterGroup.GenericValue != null)
+            content.JsonWriter.WritePropertyName("max_product_image"u8);
+            content.JsonWriter.WriteStartObject();
+            if (Optional.IsDefined(flattenParameterGroup.GenericValue))
             {
                 content.JsonWriter.WritePropertyName("generic_value"u8);
                 content.JsonWriter.WriteStringValue(flattenParameterGroup.GenericValue);
             }
-            if (flattenParameterGroup.OdataValue != null)
+            if (Optional.IsDefined(flattenParameterGroup.OdataValue))
             {
                 content.JsonWriter.WritePropertyName("@odata.value"u8);
                 content.JsonWriter.WriteStringValue(flattenParameterGroup.OdataValue);
             }
+            content.JsonWriter.WriteEndObject();
+            content.JsonWriter.WriteEndObject();
             content.JsonWriter.WriteEndObject();
             request.Content = content;
             return message;
