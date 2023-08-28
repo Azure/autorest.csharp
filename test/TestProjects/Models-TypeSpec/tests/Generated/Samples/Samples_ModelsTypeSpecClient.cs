@@ -496,19 +496,19 @@ namespace ModelsTypeSpec.Samples
     1234
             }, new string[]
             {
-    "<null>"
+    "<String>"
             }, new CollectionItem[]
             {
     new CollectionItem(new Dictionary<string, RecordItem>
-{
-        ["key"] = new RecordItem(Array.Empty<CollectionItem>()),
+    {
+        ["key"] = new RecordItem(Array.Empty<CollectionItem>())
     })
             }, new Dictionary<string, RecordItem>
             {
                 ["key"] = new RecordItem(new CollectionItem[]
-            {
+                {
         new CollectionItem(new Dictionary<string, RecordItem>())
-                }),
+                })
             }, new float?[]
             {
     3.14f
@@ -518,12 +518,12 @@ namespace ModelsTypeSpec.Samples
             }, new CollectionItem[]
             {
     new CollectionItem(new Dictionary<string, RecordItem>
-{
-        ["key"] = new RecordItem(Array.Empty<CollectionItem>()),
+    {
+        ["key"] = new RecordItem(Array.Empty<CollectionItem>())
     })
             }, new string[]
             {
-    "<null>"
+    "<String>"
             }, new int[]
             {
     1234
@@ -532,33 +532,33 @@ namespace ModelsTypeSpec.Samples
                 NonRequiredNullableInt = 1234,
                 NonRequiredNullableString = "<NonRequiredNullableString>",
                 NonRequiredModelList =
-{
+    {
         new CollectionItem(new Dictionary<string, RecordItem>
-{
-            ["key"] = new RecordItem(Array.Empty<CollectionItem>()),
+        {
+            ["key"] = new RecordItem(Array.Empty<CollectionItem>())
         })
     },
                 NonRequiredStringList =
-{
-        "<null>"
+    {
+        "<String>"
     },
                 NonRequiredIntList =
-{
+    {
         1234
     },
                 NonRequiredNullableModelList =
-{
+    {
         new CollectionItem(new Dictionary<string, RecordItem>
-{
-            ["key"] = new RecordItem(Array.Empty<CollectionItem>()),
+        {
+            ["key"] = new RecordItem(Array.Empty<CollectionItem>())
         })
     },
                 NonRequiredNullableStringList =
-{
-        "<null>"
+    {
+        "<String>"
     },
                 NonRequiredNullableIntList =
-{
+    {
         1234
     },
             };
@@ -925,19 +925,19 @@ namespace ModelsTypeSpec.Samples
     1234
             }, new string[]
             {
-    "<null>"
+    "<String>"
             }, new CollectionItem[]
             {
     new CollectionItem(new Dictionary<string, RecordItem>
-{
-        ["key"] = new RecordItem(Array.Empty<CollectionItem>()),
+    {
+        ["key"] = new RecordItem(Array.Empty<CollectionItem>())
     })
             }, new Dictionary<string, RecordItem>
             {
                 ["key"] = new RecordItem(new CollectionItem[]
-            {
+                {
         new CollectionItem(new Dictionary<string, RecordItem>())
-                }),
+                })
             }, new float?[]
             {
     3.14f
@@ -947,12 +947,12 @@ namespace ModelsTypeSpec.Samples
             }, new CollectionItem[]
             {
     new CollectionItem(new Dictionary<string, RecordItem>
-{
-        ["key"] = new RecordItem(Array.Empty<CollectionItem>()),
+    {
+        ["key"] = new RecordItem(Array.Empty<CollectionItem>())
     })
             }, new string[]
             {
-    "<null>"
+    "<String>"
             }, new int[]
             {
     1234
@@ -961,33 +961,33 @@ namespace ModelsTypeSpec.Samples
                 NonRequiredNullableInt = 1234,
                 NonRequiredNullableString = "<NonRequiredNullableString>",
                 NonRequiredModelList =
-{
+    {
         new CollectionItem(new Dictionary<string, RecordItem>
-{
-            ["key"] = new RecordItem(Array.Empty<CollectionItem>()),
+        {
+            ["key"] = new RecordItem(Array.Empty<CollectionItem>())
         })
     },
                 NonRequiredStringList =
-{
-        "<null>"
+    {
+        "<String>"
     },
                 NonRequiredIntList =
-{
+    {
         1234
     },
                 NonRequiredNullableModelList =
-{
+    {
         new CollectionItem(new Dictionary<string, RecordItem>
-{
-            ["key"] = new RecordItem(Array.Empty<CollectionItem>()),
+        {
+            ["key"] = new RecordItem(Array.Empty<CollectionItem>())
         })
     },
                 NonRequiredNullableStringList =
-{
-        "<null>"
+    {
+        "<String>"
     },
                 NonRequiredNullableIntList =
-{
+    {
         1234
     },
             };
@@ -1198,6 +1198,151 @@ namespace ModelsTypeSpec.Samples
             Console.WriteLine(result.GetProperty("optionalPlainDate").ToString());
             Console.WriteLine(result.GetProperty("optionalPlainTime").ToString());
             Console.WriteLine(result.GetProperty("optionalCollectionWithNullableIntElement")[0].ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_InputToRoundTripOptional_Convenience_Async()
+        {
+            var endpoint = new Uri("<https://my-service.azure.com>");
+            var client = new ModelsTypeSpecClient(endpoint);
+
+            var input = new RoundTripOptionalModel
+            {
+                OptionalString = "<OptionalString>",
+                OptionalInt = 1234,
+                OptionalStringList =
+    {
+        "<String>"
+    },
+                OptionalIntList =
+    {
+        1234
+    },
+                OptionalModelList =
+    {
+        new CollectionItem(new Dictionary<string, RecordItem>
+        {
+            ["key"] = new RecordItem(Array.Empty<CollectionItem>())
+        })
+    },
+                OptionalModel = new DerivedModel(new CollectionItem[]
+                {
+        new CollectionItem(new Dictionary<string, RecordItem>
+        {
+            ["key"] = new RecordItem(Array.Empty<CollectionItem>())
+        })
+                }),
+                OptionalModelWithPropertiesOnBase = new DerivedModelWithProperties(new CollectionItem[]
+                {
+        new CollectionItem(new Dictionary<string, RecordItem>
+        {
+            ["key"] = new RecordItem(Array.Empty<CollectionItem>())
+        })
+                }),
+                OptionalFixedStringEnum = FixedStringEnum.One,
+                OptionalExtensibleEnum = ExtensibleEnum.One,
+                OptionalIntRecord =     {
+        ["key"] = 1234
+    },
+                OptionalStringRecord =     {
+        ["key"] = "<String>"
+    },
+                OptionalModelRecord =     {
+        ["key"] = new RecordItem(new CollectionItem[]
+        {
+            new CollectionItem(new Dictionary<string, RecordItem>())
+        })
+    },
+                OptionalPlainDate = DateTimeOffset.UtcNow,
+                OptionalPlainTime = new TimeSpan(1, 23, 45),
+                OptionalCollectionWithNullableIntElement =
+    {
+        1234
+    },
+            };
+            var result = await client.InputToRoundTripOptionalAsync(input).ConfigureAwait(false);
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_InputToRoundTripReadOnly_Convenience_Async()
+        {
+            var endpoint = new Uri("<https://my-service.azure.com>");
+            var client = new ModelsTypeSpecClient(endpoint);
+
+            var input = new InputModel("<requiredString>", 1234, 1234, "<requiredNullableString>", new BaseModel(), new BaseModel(), new int[]
+            {
+    1234
+            }, new string[]
+            {
+    "<String>"
+            }, new CollectionItem[]
+            {
+    new CollectionItem(new Dictionary<string, RecordItem>
+    {
+        ["key"] = new RecordItem(Array.Empty<CollectionItem>())
+    })
+            }, new Dictionary<string, RecordItem>
+            {
+                ["key"] = new RecordItem(new CollectionItem[]
+                {
+        new CollectionItem(new Dictionary<string, RecordItem>())
+                })
+            }, new float?[]
+            {
+    3.14f
+            }, new bool?[]
+            {
+    true
+            }, new CollectionItem[]
+            {
+    new CollectionItem(new Dictionary<string, RecordItem>
+    {
+        ["key"] = new RecordItem(Array.Empty<CollectionItem>())
+    })
+            }, new string[]
+            {
+    "<String>"
+            }, new int[]
+            {
+    1234
+            })
+            {
+                NonRequiredNullableInt = 1234,
+                NonRequiredNullableString = "<NonRequiredNullableString>",
+                NonRequiredModelList =
+    {
+        new CollectionItem(new Dictionary<string, RecordItem>
+        {
+            ["key"] = new RecordItem(Array.Empty<CollectionItem>())
+        })
+    },
+                NonRequiredStringList =
+    {
+        "<String>"
+    },
+                NonRequiredIntList =
+    {
+        1234
+    },
+                NonRequiredNullableModelList =
+    {
+        new CollectionItem(new Dictionary<string, RecordItem>
+        {
+            ["key"] = new RecordItem(Array.Empty<CollectionItem>())
+        })
+    },
+                NonRequiredNullableStringList =
+    {
+        "<String>"
+    },
+                NonRequiredNullableIntList =
+    {
+        1234
+    },
+            };
+            var result = await client.InputToRoundTripReadOnlyAsync(input).ConfigureAwait(false);
         }
 
         [Test]
@@ -1512,6 +1657,74 @@ namespace ModelsTypeSpec.Samples
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("requiredString").ToString());
             Console.WriteLine(result.GetProperty("requiredInt").ToString());
+        }
+
+        [Test]
+        [Ignore("Only validating compilation of examples")]
+        public async Task Example_RoundTripToOutput_Convenience_Async()
+        {
+            var endpoint = new Uri("<https://my-service.azure.com>");
+            var client = new ModelsTypeSpecClient(endpoint);
+
+            var input = new RoundTripModel("<requiredString>", 1234, 1234, "<requiredNullableString>", new DerivedModelWithDiscriminatorA(1234, "<requiredString>")
+            {
+                OptionalPropertyOnBase = "<OptionalPropertyOnBase>",
+            }, FixedStringEnum.One, FixedIntEnum.One, ExtensibleEnum.One, new CollectionItem[]
+            {
+    new CollectionItem(new Dictionary<string, RecordItem>
+    {
+        ["key"] = new RecordItem(Array.Empty<CollectionItem>())
+    })
+            }, new Dictionary<string, int>
+            {
+                ["key"] = 1234
+            }, new Dictionary<string, string>
+            {
+                ["key"] = "<String>"
+            }, new Dictionary<string, RecordItem>
+            {
+                ["key"] = new RecordItem(new CollectionItem[]
+                {
+        new CollectionItem(new Dictionary<string, RecordItem>())
+                })
+            }, BinaryData.FromString("<your binary data content>"), new int[]
+            {
+    1234
+            }, BinaryData.FromString("<your binary data content>"), new int[]
+            {
+    1234
+            }, new int[]
+            {
+    1234
+            }, new string[]
+            {
+    "<String>"
+            })
+            {
+                NonRequiredString = "<NonRequiredString>",
+                NonRequiredInt = 1234,
+                NonRequiredNullableInt = 1234,
+                NonRequiredNullableString = "<NonRequiredNullableString>",
+                OptionalBytes = BinaryData.FromString("<your binary data content>"),
+                OptionalUint8Array =
+    {
+        1234
+    },
+                OptionalUnknown = BinaryData.FromString("<your binary data content>"),
+                OptionalInt8Array =
+    {
+        1234
+    },
+                NonRequiredNullableIntList =
+    {
+        1234
+    },
+                NonRequiredNullableStringList =
+    {
+        "<String>"
+    },
+            };
+            var result = await client.RoundTripToOutputAsync(input).ConfigureAwait(false);
         }
 
         [Test]
@@ -1958,7 +2171,7 @@ namespace ModelsTypeSpec.Samples
             var endpoint = new Uri("<https://my-service.azure.com>");
             var client = new ModelsTypeSpecClient(endpoint);
 
-            Response response = await client.GetSingleBaseAsync(new RequestContext());
+            Response response = await client.GetSingleBaseAsync(new RequestContext()).ConfigureAwait(false);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("kind").ToString());
@@ -1972,7 +2185,7 @@ namespace ModelsTypeSpec.Samples
             var endpoint = new Uri("<https://my-service.azure.com>");
             var client = new ModelsTypeSpecClient(endpoint);
 
-            Response response = await client.GetSingleBaseAsync(new RequestContext());
+            Response response = await client.GetSingleBaseAsync(new RequestContext()).ConfigureAwait(false);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("kind").ToString());
@@ -1986,7 +2199,7 @@ namespace ModelsTypeSpec.Samples
             var endpoint = new Uri("<https://my-service.azure.com>");
             var client = new ModelsTypeSpecClient(endpoint);
 
-            var result = await client.GetSingleBaseAsync();
+            var result = await client.GetSingleBaseAsync().ConfigureAwait(false);
         }
     }
 }
