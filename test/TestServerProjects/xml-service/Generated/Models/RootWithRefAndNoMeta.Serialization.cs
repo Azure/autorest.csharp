@@ -19,7 +19,7 @@ namespace xml_service.Models
     {
         private void Serialize(XmlWriter writer, string nameHint, ModelSerializerOptions options)
         {
-            writer.WriteStartElement("RootWithRefAndNoMeta");
+            writer.WriteStartElement(nameHint ?? "RootWithRefAndNoMeta");
             if (Optional.IsDefined(RefToModel))
             {
                 writer.WriteObjectValue(RefToModel, "RefToModel");

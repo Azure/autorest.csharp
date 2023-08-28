@@ -21,7 +21,7 @@ namespace TypeSchemaMapping.Models
     {
         private void Serialize(XmlWriter writer, string nameHint, ModelSerializerOptions options)
         {
-            writer.WriteStartElement("ModelWithCustomUsageViaAttribute");
+            writer.WriteStartElement(nameHint ?? "ModelWithCustomUsageViaAttribute");
             if (Optional.IsDefined(ModelProperty))
             {
                 writer.WriteStartElement("ModelProperty");

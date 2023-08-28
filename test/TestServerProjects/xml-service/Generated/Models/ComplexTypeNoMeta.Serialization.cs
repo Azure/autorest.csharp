@@ -19,7 +19,7 @@ namespace xml_service.Models
     {
         private void Serialize(XmlWriter writer, string nameHint, ModelSerializerOptions options)
         {
-            writer.WriteStartElement("ComplexTypeNoMeta");
+            writer.WriteStartElement(nameHint ?? "ComplexTypeNoMeta");
             if (Optional.IsDefined(ID))
             {
                 writer.WriteStartElement("ID");

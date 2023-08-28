@@ -22,7 +22,7 @@ namespace MgmtXmlDeserialization.Models
     {
         private void Serialize(XmlWriter writer, string nameHint, ModelSerializerOptions options)
         {
-            writer.WriteStartElement("XmlCollection");
+            writer.WriteStartElement(nameHint ?? "XmlCollection");
             if (Optional.IsDefined(Count))
             {
                 writer.WriteStartElement("count");

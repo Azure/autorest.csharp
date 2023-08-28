@@ -20,7 +20,7 @@ namespace xml_service.Models
     {
         private void Serialize(XmlWriter writer, string nameHint, ModelSerializerOptions options)
         {
-            writer.WriteStartElement("AppleBarrel");
+            writer.WriteStartElement(nameHint ?? "AppleBarrel");
             if (Optional.IsCollectionDefined(GoodApples))
             {
                 writer.WriteStartElement("GoodApples");

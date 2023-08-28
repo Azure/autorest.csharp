@@ -19,7 +19,7 @@ namespace xml_service.Models
     {
         private void Serialize(XmlWriter writer, string nameHint, ModelSerializerOptions options)
         {
-            writer.WriteStartElement("ContainerProperties");
+            writer.WriteStartElement(nameHint ?? "ContainerProperties");
             writer.WriteStartElement("Last-Modified");
             writer.WriteValue(LastModified, "R");
             writer.WriteEndElement();

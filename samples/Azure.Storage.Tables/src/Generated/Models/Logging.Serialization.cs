@@ -19,7 +19,7 @@ namespace Azure.Storage.Tables.Models
     {
         private void Serialize(XmlWriter writer, string nameHint, ModelSerializerOptions options)
         {
-            writer.WriteStartElement("Logging");
+            writer.WriteStartElement(nameHint ?? "Logging");
             writer.WriteStartElement("Version");
             writer.WriteValue(Version);
             writer.WriteEndElement();

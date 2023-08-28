@@ -6,6 +6,7 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
 using Azure.Core;
 
 namespace _Type.Union.Models
@@ -13,6 +14,8 @@ namespace _Type.Union.Models
     /// <summary> The ModelWithSimpleUnionProperty. </summary>
     internal partial class ModelWithSimpleUnionProperty
     {
+        private Dictionary<string, BinaryData> _rawData;
+
         /// <summary> Initializes a new instance of ModelWithSimpleUnionProperty. </summary>
         /// <param name="simpleUnion"></param>
         /// <exception cref="ArgumentNullException"> <paramref name="simpleUnion"/> is null. </exception>
@@ -21,6 +24,15 @@ namespace _Type.Union.Models
             Argument.AssertNotNull(simpleUnion, nameof(simpleUnion));
 
             SimpleUnion = simpleUnion;
+        }
+
+        /// <summary> Initializes a new instance of ModelWithSimpleUnionProperty. </summary>
+        /// <param name="simpleUnion"></param>
+        /// <param name="rawData"> Keeps track of any properties unknown to the library. </param>
+        internal ModelWithSimpleUnionProperty(object simpleUnion, Dictionary<string, BinaryData> rawData)
+        {
+            SimpleUnion = simpleUnion;
+            _rawData = rawData;
         }
 
         /// <summary> Gets the simple union. </summary>

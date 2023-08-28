@@ -19,7 +19,7 @@ namespace xml_service.Models
     {
         private void Serialize(XmlWriter writer, string nameHint, ModelSerializerOptions options)
         {
-            writer.WriteStartElement("ModelWithUrlProperty");
+            writer.WriteStartElement(nameHint ?? "ModelWithUrlProperty");
             if (Optional.IsDefined(Url))
             {
                 writer.WriteStartElement("Url");

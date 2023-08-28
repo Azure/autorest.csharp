@@ -19,7 +19,7 @@ namespace Azure.Storage.Tables.Models
     {
         private void Serialize(XmlWriter writer, string nameHint, ModelSerializerOptions options)
         {
-            writer.WriteStartElement("CorsRule");
+            writer.WriteStartElement(nameHint ?? "CorsRule");
             writer.WriteStartElement("AllowedOrigins");
             writer.WriteValue(AllowedOrigins);
             writer.WriteEndElement();

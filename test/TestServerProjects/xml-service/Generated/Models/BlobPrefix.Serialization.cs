@@ -19,7 +19,7 @@ namespace xml_service.Models
     {
         private void Serialize(XmlWriter writer, string nameHint, ModelSerializerOptions options)
         {
-            writer.WriteStartElement("BlobPrefix");
+            writer.WriteStartElement(nameHint ?? "BlobPrefix");
             writer.WriteStartElement("Name");
             writer.WriteValue(Name);
             writer.WriteEndElement();

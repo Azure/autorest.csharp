@@ -22,7 +22,7 @@ namespace MgmtXmlDeserialization
     {
         private void Serialize(XmlWriter writer, string nameHint, ModelSerializerOptions options)
         {
-            writer.WriteStartElement("XmlInstance");
+            writer.WriteStartElement(nameHint ?? "XmlInstance");
             writer.WriteStartElement("id");
             writer.WriteValue(Id);
             writer.WriteEndElement();

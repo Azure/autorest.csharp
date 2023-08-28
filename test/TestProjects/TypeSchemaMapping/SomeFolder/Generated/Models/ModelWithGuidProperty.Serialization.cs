@@ -19,7 +19,7 @@ namespace TypeSchemaMapping.Models
     {
         private void Serialize(XmlWriter writer, string nameHint, ModelSerializerOptions options)
         {
-            writer.WriteStartElement("ModelWithGuidProperty");
+            writer.WriteStartElement(nameHint ?? "ModelWithGuidProperty");
             if (Optional.IsDefined(ModelProperty))
             {
                 writer.WriteStartElement("ModelProperty");

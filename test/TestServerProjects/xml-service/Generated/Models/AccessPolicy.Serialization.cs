@@ -19,7 +19,7 @@ namespace xml_service.Models
     {
         private void Serialize(XmlWriter writer, string nameHint, ModelSerializerOptions options)
         {
-            writer.WriteStartElement("AccessPolicy");
+            writer.WriteStartElement(nameHint ?? "AccessPolicy");
             writer.WriteStartElement("Start");
             writer.WriteValue(Start, "O");
             writer.WriteEndElement();

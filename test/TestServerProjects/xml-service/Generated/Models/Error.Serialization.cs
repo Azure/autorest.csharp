@@ -19,7 +19,7 @@ namespace xml_service.Models
     {
         private void Serialize(XmlWriter writer, string nameHint, ModelSerializerOptions options)
         {
-            writer.WriteStartElement("Error");
+            writer.WriteStartElement(nameHint ?? "Error");
             if (Optional.IsDefined(Status))
             {
                 writer.WriteStartElement("status");

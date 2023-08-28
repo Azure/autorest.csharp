@@ -19,7 +19,7 @@ namespace Azure.Storage.Tables.Models
     {
         private void Serialize(XmlWriter writer, string nameHint, ModelSerializerOptions options)
         {
-            writer.WriteStartElement("GeoReplication");
+            writer.WriteStartElement(nameHint ?? "GeoReplication");
             writer.WriteStartElement("Status");
             writer.WriteValue(Status.ToString());
             writer.WriteEndElement();

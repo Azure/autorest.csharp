@@ -21,7 +21,7 @@ namespace Azure.Storage.Tables.Models
     {
         private void Serialize(XmlWriter writer, string nameHint, ModelSerializerOptions options)
         {
-            writer.WriteStartElement("StorageError");
+            writer.WriteStartElement(nameHint ?? "StorageError");
             if (Optional.IsDefined(Message))
             {
                 writer.WriteStartElement("Message");

@@ -20,7 +20,7 @@ namespace xml_service.Models
     {
         private void Serialize(XmlWriter writer, string nameHint, ModelSerializerOptions options)
         {
-            writer.WriteStartElement("EnumerationResults");
+            writer.WriteStartElement(nameHint ?? "EnumerationResults");
             writer.WriteStartAttribute("ServiceEndpoint");
             writer.WriteValue(ServiceEndpoint);
             writer.WriteEndAttribute();

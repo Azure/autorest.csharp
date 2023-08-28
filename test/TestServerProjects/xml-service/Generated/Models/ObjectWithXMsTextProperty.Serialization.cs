@@ -19,7 +19,7 @@ namespace xml_service.Models
     {
         private void Serialize(XmlWriter writer, string nameHint, ModelSerializerOptions options)
         {
-            writer.WriteStartElement("Data");
+            writer.WriteStartElement(nameHint ?? "Data");
             if (Optional.IsDefined(Language))
             {
                 writer.WriteStartAttribute("language");

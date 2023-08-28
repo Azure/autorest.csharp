@@ -19,7 +19,7 @@ namespace xml_service.Models
     {
         private void Serialize(XmlWriter writer, string nameHint, ModelSerializerOptions options)
         {
-            writer.WriteStartElement("banana");
+            writer.WriteStartElement(nameHint ?? "banana");
             if (Optional.IsDefined(Name))
             {
                 writer.WriteStartElement("name");

@@ -19,7 +19,7 @@ namespace xml_service.Models
     {
         private void Serialize(XmlWriter writer, string nameHint, ModelSerializerOptions options)
         {
-            writer.WriteStartElement("ModelWithByteProperty");
+            writer.WriteStartElement(nameHint ?? "ModelWithByteProperty");
             if (Optional.IsDefined(Bytes))
             {
                 writer.WriteStartElement("Bytes");

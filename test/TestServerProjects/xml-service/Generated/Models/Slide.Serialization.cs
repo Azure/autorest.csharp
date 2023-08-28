@@ -20,7 +20,7 @@ namespace xml_service.Models
     {
         private void Serialize(XmlWriter writer, string nameHint, ModelSerializerOptions options)
         {
-            writer.WriteStartElement("slide");
+            writer.WriteStartElement(nameHint ?? "slide");
             if (Optional.IsDefined(Type))
             {
                 writer.WriteStartAttribute("type");

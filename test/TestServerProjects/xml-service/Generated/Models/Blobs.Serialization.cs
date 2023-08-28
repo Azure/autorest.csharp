@@ -20,7 +20,7 @@ namespace xml_service.Models
     {
         private void Serialize(XmlWriter writer, string nameHint, ModelSerializerOptions options)
         {
-            writer.WriteStartElement("Blobs");
+            writer.WriteStartElement(nameHint ?? "Blobs");
             if (Optional.IsCollectionDefined(BlobPrefix))
             {
                 foreach (var item in BlobPrefix)
