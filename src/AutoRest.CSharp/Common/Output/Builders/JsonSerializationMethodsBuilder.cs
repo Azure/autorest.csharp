@@ -445,39 +445,50 @@ namespace AutoRest.CSharp.Common.Output.Builders
                 .Where(p => !p.ShouldSkipDeserialization)
                 .Select(p => new IfStatement(jsonProperty.NameEquals(p.SerializedName))
                 {
-                    DeserializeIntoObjectProperty(p, jsonProperty, propertyVariables, shouldTreatEmptyStringAsNull).AsStatement()
+                    DeserializeIntoObjectProperty(p, jsonProperty, propertyVariables, shouldTreatEmptyStringAsNull)
                 })
                 .ToArray();
 
-        private static IEnumerable<MethodBodyStatement> DeserializeIntoObjectProperty(JsonPropertySerialization jsonPropertySerialization, JsonPropertyExpression jsonProperty, IReadOnlyDictionary<JsonPropertySerialization, ObjectPropertyVariable> propertyVariables, bool shouldTreatEmptyStringAsNull)
+        private static MethodBodyStatement DeserializeIntoObjectProperty(JsonPropertySerialization jsonPropertySerialization, JsonPropertyExpression jsonProperty, IReadOnlyDictionary<JsonPropertySerialization, ObjectPropertyVariable> propertyVariables, bool shouldTreatEmptyStringAsNull)
         {
-            yield return CreatePropertyNullCheckStatement(jsonPropertySerialization, jsonProperty, propertyVariables, shouldTreatEmptyStringAsNull);
-
+            // write the deserialization hook
             if (jsonPropertySerialization.CustomDeserializationMethodName is {} deserializationMethodName)
             {
-                // write the deserialization hook
-                yield return InvokeCustomDeserializationMethod(deserializationMethodName, jsonProperty, propertyVariables[jsonPropertySerialization].Declaration);
-            }
-            else if (jsonPropertySerialization.ValueSerialization is not null)
-            {
-                // Reading a property value
-                yield return DeserializeValue(jsonPropertySerialization.ValueSerialization, jsonProperty.Value, out var value);
-                yield return Assign(propertyVariables[jsonPropertySerialization].Declaration, value);
-            }
-            else if (jsonPropertySerialization.PropertySerializations is not null)
-            {
-                // Reading a nested object
-                yield return new ForeachStatement("property", jsonProperty.Value.EnumerateObject(), out var nestedItemVariable)
+                return new[]
                 {
-                    DeserializeIntoObjectProperties(jsonPropertySerialization.PropertySerializations, new JsonPropertyExpression(nestedItemVariable), propertyVariables, shouldTreatEmptyStringAsNull)
+                    CreatePropertyNullCheckStatement(jsonPropertySerialization, jsonProperty, propertyVariables, shouldTreatEmptyStringAsNull),
+                    InvokeCustomDeserializationMethod(deserializationMethodName, jsonProperty, propertyVariables[jsonPropertySerialization].Declaration),
+                    Continue
                 };
             }
-            else
+
+            // Reading a property value
+            if (jsonPropertySerialization.ValueSerialization is not null)
             {
-                throw new InvalidOperationException($"Either {nameof(JsonPropertySerialization.ValueSerialization)} must not be null or {nameof(JsonPropertySerialization.PropertySerializations)} must not be null.");
+                return new[]
+                {
+                    CreatePropertyNullCheckStatement(jsonPropertySerialization, jsonProperty, propertyVariables, shouldTreatEmptyStringAsNull),
+                    DeserializeValue(jsonPropertySerialization.ValueSerialization, jsonProperty.Value, out var value),
+                    Assign(propertyVariables[jsonPropertySerialization].Declaration, value),
+                    Continue
+                };
             }
 
-            yield return Continue;
+            // Reading a nested object
+            if (jsonPropertySerialization.PropertySerializations is not null)
+            {
+                return new[]
+                {
+                    CreatePropertyNullCheckStatement(jsonPropertySerialization, jsonProperty, propertyVariables, shouldTreatEmptyStringAsNull),
+                    new ForeachStatement("property", jsonProperty.Value.EnumerateObject(), out var nestedItemVariable)
+                    {
+                        DeserializeIntoObjectProperties(jsonPropertySerialization.PropertySerializations, new JsonPropertyExpression(nestedItemVariable), propertyVariables, shouldTreatEmptyStringAsNull)
+                    },
+                    Continue
+                };
+            }
+
+            throw new InvalidOperationException($"Either {nameof(JsonPropertySerialization.ValueSerialization)} must not be null or {nameof(JsonPropertySerialization.PropertySerializations)} must not be null.");
         }
 
         private static MethodBodyStatement CreatePropertyNullCheckStatement(JsonPropertySerialization jsonPropertySerialization, JsonPropertyExpression jsonProperty, IReadOnlyDictionary<JsonPropertySerialization, ObjectPropertyVariable> propertyVariables, bool shouldTreatEmptyStringAsNull)
@@ -488,18 +499,25 @@ namespace AutoRest.CSharp.Common.Output.Builders
                 return new MethodBodyStatement();
             }
 
-            if (jsonPropertySerialization.SerializedType?.IsNullable == true)
+            var serializedType = jsonPropertySerialization.SerializedType;
+            if (serializedType?.IsNullable == true)
             {
+                // we only assign null when it is not a collection if we have DeserializeNullCollectionAsNullValue configuration is off
+                // specially when it is required, we assign ChangeTrackingList because for optional lists we are already doing that
+                var propertyValueForNullValueKind = TypeFactory.IsCollectionType(serializedType) && !Configuration.DeserializeNullCollectionAsNullValue
+                    ? New.Instance(TypeFactory.GetPropertyImplementationType(serializedType))
+                    : Null;
+
                 return new IfStatement(GetCheckEmptyPropertyValueExpression(jsonProperty, jsonPropertySerialization, shouldTreatEmptyStringAsNull))
                 {
-                    Assign(propertyVariables[jsonPropertySerialization].Declaration, Null),
+                    Assign(propertyVariables[jsonPropertySerialization].Declaration, propertyValueForNullValueKind),
                     Continue
                 };
             }
 
             if (!jsonPropertySerialization.IsRequired &&
-                jsonPropertySerialization.SerializedType?.Equals(typeof(JsonElement)) != true && // JsonElement handles nulls internally
-                jsonPropertySerialization.SerializedType?.Equals(typeof(string)) != true) //https://github.com/Azure/autorest.csharp/issues/922
+                serializedType?.Equals(typeof(JsonElement)) != true && // JsonElement handles nulls internally
+                serializedType?.Equals(typeof(string)) != true) //https://github.com/Azure/autorest.csharp/issues/922
             {
                 if (jsonPropertySerialization.PropertySerializations is null)
                 {

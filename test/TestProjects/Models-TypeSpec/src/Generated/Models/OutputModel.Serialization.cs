@@ -84,7 +84,7 @@ namespace ModelsTypeSpec.Models
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        optionalNullableList = null;
+                        optionalNullableList = new ChangeTrackingList<CollectionItem>();
                         continue;
                     }
                     List<CollectionItem> array = new List<CollectionItem>();
@@ -113,7 +113,7 @@ namespace ModelsTypeSpec.Models
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        optionalNullableRecord = null;
+                        optionalNullableRecord = new ChangeTrackingDictionary<string, RecordItem>();
                         continue;
                     }
                     Dictionary<string, RecordItem> dictionary = new Dictionary<string, RecordItem>();

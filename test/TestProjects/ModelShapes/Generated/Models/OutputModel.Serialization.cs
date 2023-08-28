@@ -135,7 +135,7 @@ namespace ModelShapes.Models
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        requiredNullableStringList = null;
+                        requiredNullableStringList = new ChangeTrackingList<string>();
                         continue;
                     }
                     List<string> array = new List<string>();
@@ -150,7 +150,7 @@ namespace ModelShapes.Models
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        requiredNullableIntList = null;
+                        requiredNullableIntList = new ChangeTrackingList<int>();
                         continue;
                     }
                     List<int> array = new List<int>();
@@ -185,7 +185,7 @@ namespace ModelShapes.Models
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        nonRequiredNullableStringList = null;
+                        nonRequiredNullableStringList = new ChangeTrackingList<string>();
                         continue;
                     }
                     List<string> array = new List<string>();
@@ -200,7 +200,7 @@ namespace ModelShapes.Models
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        nonRequiredNullableIntList = null;
+                        nonRequiredNullableIntList = new ChangeTrackingList<int>();
                         continue;
                     }
                     List<int> array = new List<int>();

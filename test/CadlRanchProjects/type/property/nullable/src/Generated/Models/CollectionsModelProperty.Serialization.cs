@@ -8,6 +8,7 @@
 using System.Collections.Generic;
 using System.Text.Json;
 using Azure;
+using Azure.Core;
 
 namespace _Type.Property.Nullable.Models
 {
@@ -32,7 +33,7 @@ namespace _Type.Property.Nullable.Models
                 {
                     if (property.Value.ValueKind == JsonValueKind.Null)
                     {
-                        nullableProperty = null;
+                        nullableProperty = new ChangeTrackingList<InnerModel>();
                         continue;
                     }
                     List<InnerModel> array = new List<InnerModel>();
