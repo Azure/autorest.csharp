@@ -4,7 +4,6 @@
 #nullable enable
 
 using System.Xml;
-using Azure.Core.Serialization;
 
 namespace Azure.Core
 {

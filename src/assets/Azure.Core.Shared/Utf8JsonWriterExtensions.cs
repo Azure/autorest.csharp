@@ -7,8 +7,8 @@ using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text.Json;
-using Azure.Core.Serialization;
 
 namespace Azure.Core
 {
@@ -74,9 +74,6 @@ namespace Azure.Core
             {
                 case null:
                     writer.WriteNullValue();
-                    break;
-                case IModelJsonSerializable<object> modelSerializable:
-                    modelSerializable.Serialize(writer, ModelSerializerOptions.DefaultWireOptions);
                     break;
                 case IUtf8JsonSerializable serializable:
                     serializable.Write(writer);
