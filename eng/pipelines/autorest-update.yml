@@ -21,13 +21,14 @@ jobs:
       name: azsdk-pool-mms-win-2022-general
       vmImage: windows-2022
     steps:
-      - checkout: git@github.com:Azure/autorest.csharp.git@refs/pulls/$(System.PullRequest.PullRequestNumber)/head
-      # - script: |
-      #     git clone https://github.com/Azure/autorest.csharp.git --depth=1
-      #     git checkout refs/pulls/$(System.PullRequest.PullRequestNumber)/head
-      #   displayName: 'Check out PR branch'
-      - checkout: azure-sdk-tools
+      - checkout: self
         fetchDepth: 1
+      - checkout: azure-sdk-tools
+        fetchDepth: 1      
+      - script: |
+          gh pr checkout $(System.PullRequest.PullRequestId)
+        displayName: 'Check out PR branch'
+        workingDirectory: $(Build.SourcesDirectory)/autorest.csharp
       - task: UseDotNet@2
         displayName: 'Use .NET Core SDK'
         retryCountOnTaskFailure: 3
