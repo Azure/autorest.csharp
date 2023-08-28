@@ -21,7 +21,7 @@ jobs:
       name: azsdk-pool-mms-win-2022-general
       vmImage: windows-2022
     steps:
-      - checkout: https://github.com/Azure/autorest.csharp.git@refs/pulls/$(System.PullRequest.PullRequestNumber)/head
+      - checkout: git@github.com:Azure/autorest.csharp.git@refs/pulls/$(System.PullRequest.PullRequestNumber)/head
       # - script: |
       #     git clone https://github.com/Azure/autorest.csharp.git --depth=1
       #     git checkout refs/pulls/$(System.PullRequest.PullRequestNumber)/head
