@@ -2555,25 +2555,66 @@
      "IsReadOnly": false
     }
    ]
+  },
+  {
+   "$id": "338",
+   "Name": "SingleBase",
+   "Namespace": "ModelsTypeSpec",
+   "Description": "Single base model without any child model.",
+   "IsNullable": false,
+   "DiscriminatorPropertyName": "kind",
+   "Usage": "Output",
+   "Properties": [
+    {
+     "$id": "339",
+     "Name": "kind",
+     "SerializedName": "kind",
+     "Description": "Discriminator",
+     "IsRequired": true,
+     "IsReadOnly": false,
+     "IsNullable": false,
+     "Type": {
+      "$id": "340",
+      "Name": "string",
+      "Kind": "String",
+      "IsNullable": false
+     },
+     "IsDiscriminator": true
+    },
+    {
+     "$id": "341",
+     "Name": "size",
+     "SerializedName": "size",
+     "Description": "",
+     "Type": {
+      "$id": "342",
+      "Name": "int32",
+      "Kind": "Int32",
+      "IsNullable": false
+     },
+     "IsRequired": true,
+     "IsReadOnly": false
+    }
+   ]
   }
  ],
  "Clients": [
   {
-   "$id": "338",
+   "$id": "343",
    "Name": "ModelsTypeSpecClient",
    "Description": "CADL project to test various types of models.",
    "Operations": [
     {
-     "$id": "339",
+     "$id": "344",
      "Name": "getOutputDiscriminatorModel",
      "ResourceName": "ModelsTypeSpec",
      "Parameters": [
       {
-       "$id": "340",
+       "$id": "345",
        "Name": "endpoint",
        "NameInRequest": "endpoint",
        "Type": {
-        "$id": "341",
+        "$id": "346",
         "Name": "Uri",
         "Kind": "Uri",
         "IsNullable": false
@@ -2589,11 +2630,11 @@
        "Kind": "Client"
       },
       {
-       "$id": "342",
+       "$id": "347",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "343",
+        "$id": "348",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -2608,20 +2649,20 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "344",
+        "$id": "349",
         "Type": {
-         "$ref": "343"
+         "$ref": "348"
         },
         "Value": "application/json"
        }
       },
       {
-       "$id": "345",
+       "$id": "350",
        "Name": "apiVersion",
        "NameInRequest": "api-version",
        "Description": "",
        "Type": {
-        "$id": "346",
+        "$id": "351",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -2636,9 +2677,9 @@
        "Explode": false,
        "Kind": "Client",
        "DefaultValue": {
-        "$id": "347",
+        "$id": "352",
         "Type": {
-         "$id": "348",
+         "$id": "353",
          "Name": "String",
          "Kind": "String",
          "IsNullable": false
@@ -2649,7 +2690,7 @@
      ],
      "Responses": [
       {
-       "$id": "349",
+       "$id": "354",
        "StatusCodes": [
         200
        ],
@@ -2670,16 +2711,16 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "350",
+     "$id": "355",
      "Name": "inputToRoundTrip",
      "ResourceName": "ModelsTypeSpec",
      "Description": "Input model that has property of its own type",
      "Parameters": [
       {
-       "$ref": "340"
+       "$ref": "345"
       },
       {
-       "$id": "351",
+       "$id": "356",
        "Name": "input",
        "NameInRequest": "input",
        "Type": {
@@ -2696,11 +2737,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "352",
+       "$id": "357",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Type": {
-        "$id": "353",
+        "$id": "358",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -2715,19 +2756,19 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "354",
+        "$id": "359",
         "Type": {
-         "$ref": "353"
+         "$ref": "358"
         },
         "Value": "application/json"
        }
       },
       {
-       "$id": "355",
+       "$id": "360",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "356",
+        "$id": "361",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -2742,20 +2783,20 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "357",
+        "$id": "362",
         "Type": {
-         "$ref": "356"
+         "$ref": "361"
         },
         "Value": "application/json"
        }
       },
       {
-       "$ref": "345"
+       "$ref": "350"
       }
      ],
      "Responses": [
       {
-       "$id": "358",
+       "$id": "363",
        "StatusCodes": [
         200
        ],
@@ -2779,16 +2820,16 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "359",
+     "$id": "364",
      "Name": "inputToRoundTripPrimitive",
      "ResourceName": "ModelsTypeSpec",
      "Description": "Input to RoundTripPrimitive",
      "Parameters": [
       {
-       "$ref": "340"
+       "$ref": "345"
       },
       {
-       "$id": "360",
+       "$id": "365",
        "Name": "input",
        "NameInRequest": "input",
        "Type": {
@@ -2805,11 +2846,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "361",
+       "$id": "366",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Type": {
-        "$id": "362",
+        "$id": "367",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -2824,19 +2865,19 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "363",
+        "$id": "368",
         "Type": {
-         "$ref": "362"
+         "$ref": "367"
         },
         "Value": "application/json"
        }
       },
       {
-       "$id": "364",
+       "$id": "369",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "365",
+        "$id": "370",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -2851,20 +2892,20 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "366",
+        "$id": "371",
         "Type": {
-         "$ref": "365"
+         "$ref": "370"
         },
         "Value": "application/json"
        }
       },
       {
-       "$ref": "345"
+       "$ref": "350"
       }
      ],
      "Responses": [
       {
-       "$id": "367",
+       "$id": "372",
        "StatusCodes": [
         200
        ],
@@ -2888,16 +2929,16 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "368",
+     "$id": "373",
      "Name": "inputToRoundTripOptional",
      "ResourceName": "ModelsTypeSpec",
      "Description": "Input to RoundTripOptional",
      "Parameters": [
       {
-       "$ref": "340"
+       "$ref": "345"
       },
       {
-       "$id": "369",
+       "$id": "374",
        "Name": "input",
        "NameInRequest": "input",
        "Type": {
@@ -2914,11 +2955,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "370",
+       "$id": "375",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Type": {
-        "$id": "371",
+        "$id": "376",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -2933,19 +2974,19 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "372",
+        "$id": "377",
         "Type": {
-         "$ref": "371"
+         "$ref": "376"
         },
         "Value": "application/json"
        }
       },
       {
-       "$id": "373",
+       "$id": "378",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "374",
+        "$id": "379",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -2960,20 +3001,20 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "375",
+        "$id": "380",
         "Type": {
-         "$ref": "374"
+         "$ref": "379"
         },
         "Value": "application/json"
        }
       },
       {
-       "$ref": "345"
+       "$ref": "350"
       }
      ],
      "Responses": [
       {
-       "$id": "376",
+       "$id": "381",
        "StatusCodes": [
         200
        ],
@@ -2997,17 +3038,17 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "377",
+     "$id": "382",
      "Name": "inputToRoundTripReadOnly",
      "ResourceName": "ModelsTypeSpec",
      "Deprecated": "deprecated for test",
      "Description": "Input to RoundTripReadOnly",
      "Parameters": [
       {
-       "$ref": "340"
+       "$ref": "345"
       },
       {
-       "$id": "378",
+       "$id": "383",
        "Name": "input",
        "NameInRequest": "input",
        "Type": {
@@ -3024,11 +3065,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "379",
+       "$id": "384",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Type": {
-        "$id": "380",
+        "$id": "385",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -3043,19 +3084,19 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "381",
+        "$id": "386",
         "Type": {
-         "$ref": "380"
+         "$ref": "385"
         },
         "Value": "application/json"
        }
       },
       {
-       "$id": "382",
+       "$id": "387",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "383",
+        "$id": "388",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -3070,20 +3111,20 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "384",
+        "$id": "389",
         "Type": {
-         "$ref": "383"
+         "$ref": "388"
         },
         "Value": "application/json"
        }
       },
       {
-       "$ref": "345"
+       "$ref": "350"
       }
      ],
      "Responses": [
       {
-       "$id": "385",
+       "$id": "390",
        "StatusCodes": [
         200
        ],
@@ -3107,16 +3148,16 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "386",
+     "$id": "391",
      "Name": "roundTripToOutput",
      "ResourceName": "ModelsTypeSpec",
      "Description": "RoundTrip to Output",
      "Parameters": [
       {
-       "$ref": "340"
+       "$ref": "345"
       },
       {
-       "$id": "387",
+       "$id": "392",
        "Name": "input",
        "NameInRequest": "input",
        "Type": {
@@ -3133,11 +3174,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "388",
+       "$id": "393",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Type": {
-        "$id": "389",
+        "$id": "394",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -3152,19 +3193,19 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "390",
+        "$id": "395",
         "Type": {
-         "$ref": "389"
+         "$ref": "394"
         },
         "Value": "application/json"
        }
       },
       {
-       "$id": "391",
+       "$id": "396",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "392",
+        "$id": "397",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -3179,20 +3220,20 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "393",
+        "$id": "398",
         "Type": {
-         "$ref": "392"
+         "$ref": "397"
         },
         "Value": "application/json"
        }
       },
       {
-       "$ref": "345"
+       "$ref": "350"
       }
      ],
      "Responses": [
       {
-       "$id": "394",
+       "$id": "399",
        "StatusCodes": [
         200
        ],
@@ -3216,16 +3257,16 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "395",
+     "$id": "400",
      "Name": "InputRecursive",
      "ResourceName": "ModelsTypeSpec",
      "Description": "Input recursive model",
      "Parameters": [
       {
-       "$ref": "340"
+       "$ref": "345"
       },
       {
-       "$id": "396",
+       "$id": "401",
        "Name": "input",
        "NameInRequest": "input",
        "Type": {
@@ -3242,11 +3283,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "397",
+       "$id": "402",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Type": {
-        "$id": "398",
+        "$id": "403",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -3261,19 +3302,19 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "399",
+        "$id": "404",
         "Type": {
-         "$ref": "398"
+         "$ref": "403"
         },
         "Value": "application/json"
        }
       },
       {
-       "$id": "400",
+       "$id": "405",
        "Name": "accept",
        "NameInRequest": "Accept",
        "Type": {
-        "$id": "401",
+        "$id": "406",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -3288,20 +3329,20 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "402",
+        "$id": "407",
         "Type": {
-         "$ref": "401"
+         "$ref": "406"
         },
         "Value": "application/json"
        }
       },
       {
-       "$ref": "345"
+       "$ref": "350"
       }
      ],
      "Responses": [
       {
-       "$id": "403",
+       "$id": "408",
        "StatusCodes": [
         200
        ],
@@ -3322,16 +3363,16 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "404",
+     "$id": "409",
      "Name": "roundTripRecursive",
      "ResourceName": "ModelsTypeSpec",
      "Description": "RoundTrip recursive model",
      "Parameters": [
       {
-       "$ref": "340"
+       "$ref": "345"
       },
       {
-       "$id": "405",
+       "$id": "410",
        "Name": "input",
        "NameInRequest": "input",
        "Type": {
@@ -3348,11 +3389,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "406",
+       "$id": "411",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Type": {
-        "$id": "407",
+        "$id": "412",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -3367,77 +3408,12 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "408",
+        "$id": "413",
         "Type": {
-         "$ref": "407"
+         "$ref": "412"
         },
         "Value": "application/json"
        }
-      },
-      {
-       "$id": "409",
-       "Name": "accept",
-       "NameInRequest": "Accept",
-       "Type": {
-        "$id": "410",
-        "Name": "String",
-        "Kind": "String",
-        "IsNullable": false
-       },
-       "Location": "Header",
-       "IsApiVersion": false,
-       "IsResourceParameter": false,
-       "IsContentType": false,
-       "IsRequired": true,
-       "IsEndpoint": false,
-       "SkipUrlEncoding": false,
-       "Explode": false,
-       "Kind": "Constant",
-       "DefaultValue": {
-        "$id": "411",
-        "Type": {
-         "$ref": "410"
-        },
-        "Value": "application/json"
-       }
-      },
-      {
-       "$ref": "345"
-      }
-     ],
-     "Responses": [
-      {
-       "$id": "412",
-       "StatusCodes": [
-        200
-       ],
-       "BodyType": {
-        "$ref": "321"
-       },
-       "BodyMediaType": "Json",
-       "Headers": [],
-       "IsErrorResponse": false
-      }
-     ],
-     "HttpMethod": "PUT",
-     "RequestBodyMediaType": "Json",
-     "Uri": "{endpoint}",
-     "Path": "/roundTripRecursive",
-     "RequestMediaTypes": [
-      "application/json"
-     ],
-     "BufferResponse": true,
-     "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
-    },
-    {
-     "$id": "413",
-     "Name": "selfReference",
-     "ResourceName": "ModelsTypeSpec",
-     "Description": "Returns model that has property of its own type",
-     "Parameters": [
-      {
-       "$ref": "340"
       },
       {
        "$id": "414",
@@ -3467,12 +3443,77 @@
        }
       },
       {
-       "$ref": "345"
+       "$ref": "350"
       }
      ],
      "Responses": [
       {
        "$id": "417",
+       "StatusCodes": [
+        200
+       ],
+       "BodyType": {
+        "$ref": "321"
+       },
+       "BodyMediaType": "Json",
+       "Headers": [],
+       "IsErrorResponse": false
+      }
+     ],
+     "HttpMethod": "PUT",
+     "RequestBodyMediaType": "Json",
+     "Uri": "{endpoint}",
+     "Path": "/roundTripRecursive",
+     "RequestMediaTypes": [
+      "application/json"
+     ],
+     "BufferResponse": true,
+     "GenerateProtocolMethod": true,
+     "GenerateConvenienceMethod": true
+    },
+    {
+     "$id": "418",
+     "Name": "selfReference",
+     "ResourceName": "ModelsTypeSpec",
+     "Description": "Returns model that has property of its own type",
+     "Parameters": [
+      {
+       "$ref": "345"
+      },
+      {
+       "$id": "419",
+       "Name": "accept",
+       "NameInRequest": "Accept",
+       "Type": {
+        "$id": "420",
+        "Name": "String",
+        "Kind": "String",
+        "IsNullable": false
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsRequired": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "421",
+        "Type": {
+         "$ref": "420"
+        },
+        "Value": "application/json"
+       }
+      },
+      {
+       "$ref": "350"
+      }
+     ],
+     "Responses": [
+      {
+       "$id": "422",
        "StatusCodes": [
         200
        ],
@@ -3493,16 +3534,16 @@
      "GenerateConvenienceMethod": true
     },
     {
-     "$id": "418",
+     "$id": "423",
      "Name": "roundTripToOutputWithNoUseBase",
      "ResourceName": "ModelsTypeSpec",
      "Description": "Returns RoundTripOnNoUse",
      "Parameters": [
       {
-       "$ref": "340"
+       "$ref": "345"
       },
       {
-       "$id": "419",
+       "$id": "424",
        "Name": "input",
        "NameInRequest": "input",
        "Type": {
@@ -3519,11 +3560,11 @@
        "Kind": "Method"
       },
       {
-       "$id": "420",
+       "$id": "425",
        "Name": "contentType",
        "NameInRequest": "Content-Type",
        "Type": {
-        "$id": "421",
+        "$id": "426",
         "Name": "String",
         "Kind": "String",
         "IsNullable": false
@@ -3538,80 +3579,12 @@
        "Explode": false,
        "Kind": "Constant",
        "DefaultValue": {
-        "$id": "422",
+        "$id": "427",
         "Type": {
-         "$ref": "421"
+         "$ref": "426"
         },
         "Value": "application/json"
        }
-      },
-      {
-       "$id": "423",
-       "Name": "accept",
-       "NameInRequest": "Accept",
-       "Type": {
-        "$id": "424",
-        "Name": "String",
-        "Kind": "String",
-        "IsNullable": false
-       },
-       "Location": "Header",
-       "IsApiVersion": false,
-       "IsResourceParameter": false,
-       "IsContentType": false,
-       "IsRequired": true,
-       "IsEndpoint": false,
-       "SkipUrlEncoding": false,
-       "Explode": false,
-       "Kind": "Constant",
-       "DefaultValue": {
-        "$id": "425",
-        "Type": {
-         "$ref": "424"
-        },
-        "Value": "application/json"
-       }
-      },
-      {
-       "$ref": "345"
-      }
-     ],
-     "Responses": [
-      {
-       "$id": "426",
-       "StatusCodes": [
-        200
-       ],
-       "BodyType": {
-        "$ref": "335"
-       },
-       "BodyMediaType": "Json",
-       "Headers": [],
-       "IsErrorResponse": false
-      }
-     ],
-     "HttpMethod": "GET",
-     "RequestBodyMediaType": "Json",
-     "Uri": "{endpoint}",
-     "Path": "/",
-     "RequestMediaTypes": [
-      "application/json"
-     ],
-     "BufferResponse": true,
-     "GenerateProtocolMethod": true,
-     "GenerateConvenienceMethod": true
-    },
-    {
-     "$id": "427",
-     "Name": "analyzeConversation",
-     "ResourceName": "ModelsTypeSpec",
-     "Description": "Resource collection action operation template.",
-     "Parameters": [
-      {
-       "$ref": "340"
-      },
-      {
-       "$ref": "345"
       },
       {
        "$id": "428",
@@ -3639,11 +3612,79 @@
         },
         "Value": "application/json"
        }
+      },
+      {
+       "$ref": "350"
       }
      ],
      "Responses": [
       {
        "$id": "431",
+       "StatusCodes": [
+        200
+       ],
+       "BodyType": {
+        "$ref": "335"
+       },
+       "BodyMediaType": "Json",
+       "Headers": [],
+       "IsErrorResponse": false
+      }
+     ],
+     "HttpMethod": "GET",
+     "RequestBodyMediaType": "Json",
+     "Uri": "{endpoint}",
+     "Path": "/",
+     "RequestMediaTypes": [
+      "application/json"
+     ],
+     "BufferResponse": true,
+     "GenerateProtocolMethod": true,
+     "GenerateConvenienceMethod": true
+    },
+    {
+     "$id": "432",
+     "Name": "analyzeConversation",
+     "ResourceName": "ModelsTypeSpec",
+     "Description": "Resource collection action operation template.",
+     "Parameters": [
+      {
+       "$ref": "345"
+      },
+      {
+       "$ref": "350"
+      },
+      {
+       "$id": "433",
+       "Name": "accept",
+       "NameInRequest": "Accept",
+       "Type": {
+        "$id": "434",
+        "Name": "String",
+        "Kind": "String",
+        "IsNullable": false
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsRequired": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "435",
+        "Type": {
+         "$ref": "434"
+        },
+        "Value": "application/json"
+       }
+      }
+     ],
+     "Responses": [
+      {
+       "$id": "436",
        "StatusCodes": [
         200
        ],
@@ -3662,10 +3703,71 @@
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
      "GenerateConvenienceMethod": true
+    },
+    {
+     "$id": "437",
+     "Name": "getSingleBase",
+     "ResourceName": "ModelsTypeSpec",
+     "Parameters": [
+      {
+       "$ref": "345"
+      },
+      {
+       "$id": "438",
+       "Name": "accept",
+       "NameInRequest": "Accept",
+       "Type": {
+        "$id": "439",
+        "Name": "String",
+        "Kind": "String",
+        "IsNullable": false
+       },
+       "Location": "Header",
+       "IsApiVersion": false,
+       "IsResourceParameter": false,
+       "IsContentType": false,
+       "IsRequired": true,
+       "IsEndpoint": false,
+       "SkipUrlEncoding": false,
+       "Explode": false,
+       "Kind": "Constant",
+       "DefaultValue": {
+        "$id": "440",
+        "Type": {
+         "$ref": "439"
+        },
+        "Value": "application/json"
+       }
+      },
+      {
+       "$ref": "350"
+      }
+     ],
+     "Responses": [
+      {
+       "$id": "441",
+       "StatusCodes": [
+        200
+       ],
+       "BodyType": {
+        "$ref": "338"
+       },
+       "BodyMediaType": "Json",
+       "Headers": [],
+       "IsErrorResponse": false
+      }
+     ],
+     "HttpMethod": "GET",
+     "RequestBodyMediaType": "None",
+     "Uri": "{endpoint}",
+     "Path": "/single",
+     "BufferResponse": true,
+     "GenerateProtocolMethod": true,
+     "GenerateConvenienceMethod": true
     }
    ],
    "Protocol": {
-    "$id": "432"
+    "$id": "442"
    },
    "Creatable": true
   }

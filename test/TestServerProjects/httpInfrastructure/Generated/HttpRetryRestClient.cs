@@ -78,7 +78,7 @@ namespace httpInfrastructure
             }
         }
 
-        internal HttpMessage CreatePut500Request()
+        internal HttpMessage CreatePut500Request(bool? booleanValue)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -88,18 +88,22 @@ namespace httpInfrastructure
             uri.AppendPath("/http/retry/500", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
-            request.Headers.Add("Content-Type", "application/json");
-            var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteBooleanValue(true);
-            request.Content = content;
+            if (booleanValue != null)
+            {
+                request.Headers.Add("Content-Type", "application/json");
+                var content = new Utf8JsonRequestContent();
+                content.JsonWriter.WriteBooleanValue(booleanValue.Value);
+                request.Content = content;
+            }
             return message;
         }
 
         /// <summary> Return 500 status code, then 200 after retry. </summary>
+        /// <param name="booleanValue"> Simple boolean value true. The default value is True. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async Task<Response> Put500Async(CancellationToken cancellationToken = default)
+        public async Task<Response> Put500Async(bool? booleanValue = null, CancellationToken cancellationToken = default)
         {
-            using var message = CreatePut500Request();
+            using var message = CreatePut500Request(booleanValue);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
             switch (message.Response.Status)
             {
@@ -111,10 +115,11 @@ namespace httpInfrastructure
         }
 
         /// <summary> Return 500 status code, then 200 after retry. </summary>
+        /// <param name="booleanValue"> Simple boolean value true. The default value is True. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response Put500(CancellationToken cancellationToken = default)
+        public Response Put500(bool? booleanValue = null, CancellationToken cancellationToken = default)
         {
-            using var message = CreatePut500Request();
+            using var message = CreatePut500Request(booleanValue);
             _pipeline.Send(message, cancellationToken);
             switch (message.Response.Status)
             {
@@ -125,7 +130,7 @@ namespace httpInfrastructure
             }
         }
 
-        internal HttpMessage CreatePatch500Request()
+        internal HttpMessage CreatePatch500Request(bool? booleanValue)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -135,18 +140,22 @@ namespace httpInfrastructure
             uri.AppendPath("/http/retry/500", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
-            request.Headers.Add("Content-Type", "application/json");
-            var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteBooleanValue(true);
-            request.Content = content;
+            if (booleanValue != null)
+            {
+                request.Headers.Add("Content-Type", "application/json");
+                var content = new Utf8JsonRequestContent();
+                content.JsonWriter.WriteBooleanValue(booleanValue.Value);
+                request.Content = content;
+            }
             return message;
         }
 
         /// <summary> Return 500 status code, then 200 after retry. </summary>
+        /// <param name="booleanValue"> Simple boolean value true. The default value is True. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async Task<Response> Patch500Async(CancellationToken cancellationToken = default)
+        public async Task<Response> Patch500Async(bool? booleanValue = null, CancellationToken cancellationToken = default)
         {
-            using var message = CreatePatch500Request();
+            using var message = CreatePatch500Request(booleanValue);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
             switch (message.Response.Status)
             {
@@ -158,10 +167,11 @@ namespace httpInfrastructure
         }
 
         /// <summary> Return 500 status code, then 200 after retry. </summary>
+        /// <param name="booleanValue"> Simple boolean value true. The default value is True. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response Patch500(CancellationToken cancellationToken = default)
+        public Response Patch500(bool? booleanValue = null, CancellationToken cancellationToken = default)
         {
-            using var message = CreatePatch500Request();
+            using var message = CreatePatch500Request(booleanValue);
             _pipeline.Send(message, cancellationToken);
             switch (message.Response.Status)
             {
@@ -268,7 +278,7 @@ namespace httpInfrastructure
             }
         }
 
-        internal HttpMessage CreatePost503Request()
+        internal HttpMessage CreatePost503Request(bool? booleanValue)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -278,18 +288,22 @@ namespace httpInfrastructure
             uri.AppendPath("/http/retry/503", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
-            request.Headers.Add("Content-Type", "application/json");
-            var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteBooleanValue(true);
-            request.Content = content;
+            if (booleanValue != null)
+            {
+                request.Headers.Add("Content-Type", "application/json");
+                var content = new Utf8JsonRequestContent();
+                content.JsonWriter.WriteBooleanValue(booleanValue.Value);
+                request.Content = content;
+            }
             return message;
         }
 
         /// <summary> Return 503 status code, then 200 after retry. </summary>
+        /// <param name="booleanValue"> Simple boolean value true. The default value is True. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async Task<Response> Post503Async(CancellationToken cancellationToken = default)
+        public async Task<Response> Post503Async(bool? booleanValue = null, CancellationToken cancellationToken = default)
         {
-            using var message = CreatePost503Request();
+            using var message = CreatePost503Request(booleanValue);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
             switch (message.Response.Status)
             {
@@ -301,10 +315,11 @@ namespace httpInfrastructure
         }
 
         /// <summary> Return 503 status code, then 200 after retry. </summary>
+        /// <param name="booleanValue"> Simple boolean value true. The default value is True. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response Post503(CancellationToken cancellationToken = default)
+        public Response Post503(bool? booleanValue = null, CancellationToken cancellationToken = default)
         {
-            using var message = CreatePost503Request();
+            using var message = CreatePost503Request(booleanValue);
             _pipeline.Send(message, cancellationToken);
             switch (message.Response.Status)
             {
@@ -315,7 +330,7 @@ namespace httpInfrastructure
             }
         }
 
-        internal HttpMessage CreateDelete503Request()
+        internal HttpMessage CreateDelete503Request(bool? booleanValue)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -325,18 +340,22 @@ namespace httpInfrastructure
             uri.AppendPath("/http/retry/503", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
-            request.Headers.Add("Content-Type", "application/json");
-            var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteBooleanValue(true);
-            request.Content = content;
+            if (booleanValue != null)
+            {
+                request.Headers.Add("Content-Type", "application/json");
+                var content = new Utf8JsonRequestContent();
+                content.JsonWriter.WriteBooleanValue(booleanValue.Value);
+                request.Content = content;
+            }
             return message;
         }
 
         /// <summary> Return 503 status code, then 200 after retry. </summary>
+        /// <param name="booleanValue"> Simple boolean value true. The default value is True. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async Task<Response> Delete503Async(CancellationToken cancellationToken = default)
+        public async Task<Response> Delete503Async(bool? booleanValue = null, CancellationToken cancellationToken = default)
         {
-            using var message = CreateDelete503Request();
+            using var message = CreateDelete503Request(booleanValue);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
             switch (message.Response.Status)
             {
@@ -348,10 +367,11 @@ namespace httpInfrastructure
         }
 
         /// <summary> Return 503 status code, then 200 after retry. </summary>
+        /// <param name="booleanValue"> Simple boolean value true. The default value is True. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response Delete503(CancellationToken cancellationToken = default)
+        public Response Delete503(bool? booleanValue = null, CancellationToken cancellationToken = default)
         {
-            using var message = CreateDelete503Request();
+            using var message = CreateDelete503Request(booleanValue);
             _pipeline.Send(message, cancellationToken);
             switch (message.Response.Status)
             {
@@ -362,7 +382,7 @@ namespace httpInfrastructure
             }
         }
 
-        internal HttpMessage CreatePut504Request()
+        internal HttpMessage CreatePut504Request(bool? booleanValue)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -372,18 +392,22 @@ namespace httpInfrastructure
             uri.AppendPath("/http/retry/504", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
-            request.Headers.Add("Content-Type", "application/json");
-            var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteBooleanValue(true);
-            request.Content = content;
+            if (booleanValue != null)
+            {
+                request.Headers.Add("Content-Type", "application/json");
+                var content = new Utf8JsonRequestContent();
+                content.JsonWriter.WriteBooleanValue(booleanValue.Value);
+                request.Content = content;
+            }
             return message;
         }
 
         /// <summary> Return 504 status code, then 200 after retry. </summary>
+        /// <param name="booleanValue"> Simple boolean value true. The default value is True. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async Task<Response> Put504Async(CancellationToken cancellationToken = default)
+        public async Task<Response> Put504Async(bool? booleanValue = null, CancellationToken cancellationToken = default)
         {
-            using var message = CreatePut504Request();
+            using var message = CreatePut504Request(booleanValue);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
             switch (message.Response.Status)
             {
@@ -395,10 +419,11 @@ namespace httpInfrastructure
         }
 
         /// <summary> Return 504 status code, then 200 after retry. </summary>
+        /// <param name="booleanValue"> Simple boolean value true. The default value is True. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response Put504(CancellationToken cancellationToken = default)
+        public Response Put504(bool? booleanValue = null, CancellationToken cancellationToken = default)
         {
-            using var message = CreatePut504Request();
+            using var message = CreatePut504Request(booleanValue);
             _pipeline.Send(message, cancellationToken);
             switch (message.Response.Status)
             {
@@ -409,7 +434,7 @@ namespace httpInfrastructure
             }
         }
 
-        internal HttpMessage CreatePatch504Request()
+        internal HttpMessage CreatePatch504Request(bool? booleanValue)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -419,18 +444,22 @@ namespace httpInfrastructure
             uri.AppendPath("/http/retry/504", false);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
-            request.Headers.Add("Content-Type", "application/json");
-            var content = new Utf8JsonRequestContent();
-            content.JsonWriter.WriteBooleanValue(true);
-            request.Content = content;
+            if (booleanValue != null)
+            {
+                request.Headers.Add("Content-Type", "application/json");
+                var content = new Utf8JsonRequestContent();
+                content.JsonWriter.WriteBooleanValue(booleanValue.Value);
+                request.Content = content;
+            }
             return message;
         }
 
         /// <summary> Return 504 status code, then 200 after retry. </summary>
+        /// <param name="booleanValue"> Simple boolean value true. The default value is True. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public async Task<Response> Patch504Async(CancellationToken cancellationToken = default)
+        public async Task<Response> Patch504Async(bool? booleanValue = null, CancellationToken cancellationToken = default)
         {
-            using var message = CreatePatch504Request();
+            using var message = CreatePatch504Request(booleanValue);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
             switch (message.Response.Status)
             {
@@ -442,10 +471,11 @@ namespace httpInfrastructure
         }
 
         /// <summary> Return 504 status code, then 200 after retry. </summary>
+        /// <param name="booleanValue"> Simple boolean value true. The default value is True. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public Response Patch504(CancellationToken cancellationToken = default)
+        public Response Patch504(bool? booleanValue = null, CancellationToken cancellationToken = default)
         {
-            using var message = CreatePatch504Request();
+            using var message = CreatePatch504Request(booleanValue);
             _pipeline.Send(message, cancellationToken);
             switch (message.Response.Status)
             {
