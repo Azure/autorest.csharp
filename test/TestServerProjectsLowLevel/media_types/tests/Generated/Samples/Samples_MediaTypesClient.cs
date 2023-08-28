@@ -348,7 +348,7 @@ namespace media_types_LowLevel.Samples
 
             var data = File.OpenRead("<filePath>");
 
-            Response response = await client.BodyThreeTypesAsync(RequestContent.Create(data), ContentType.ApplicationOctetStream);
+            Response response = await client.BodyThreeTypesAsync(RequestContent.Create(data), ContentType.ApplicationOctetStream).ConfigureAwait(false);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());
@@ -363,7 +363,7 @@ namespace media_types_LowLevel.Samples
 
             var data = File.OpenRead("<filePath>");
 
-            Response response = await client.BodyThreeTypesAsync(RequestContent.Create(data), ContentType.ApplicationOctetStream);
+            Response response = await client.BodyThreeTypesAsync(RequestContent.Create(data), ContentType.ApplicationOctetStream).ConfigureAwait(false);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.ToString());

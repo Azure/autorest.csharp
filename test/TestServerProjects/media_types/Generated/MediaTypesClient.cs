@@ -306,6 +306,7 @@ namespace media_types
         /// <summary> Body with three types. Can be stream, string, or JSON. Pass in string 'hello, world' with content type 'text/plain', {'hello': world'} with content type 'application/json' and a byte string for 'application/octet-stream'. </summary>
         /// <param name="message"> The payload body. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="message"/> is null. </exception>
         public virtual async Task<Response<string>> BodyThreeTypesAsync(Stream message, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("MediaTypesClient.BodyThreeTypes");
@@ -324,6 +325,7 @@ namespace media_types
         /// <summary> Body with three types. Can be stream, string, or JSON. Pass in string 'hello, world' with content type 'text/plain', {'hello': world'} with content type 'application/json' and a byte string for 'application/octet-stream'. </summary>
         /// <param name="message"> The payload body. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="message"/> is null. </exception>
         public virtual Response<string> BodyThreeTypes(Stream message, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("MediaTypesClient.BodyThreeTypes");
@@ -342,6 +344,7 @@ namespace media_types
         /// <summary> Body with three types. Can be stream, string, or JSON. Pass in string 'hello, world' with content type 'text/plain', {'hello': world'} with content type 'application/json' and a byte string for 'application/octet-stream'. </summary>
         /// <param name="message"> The payload body. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="message"/> is null. </exception>
         public virtual async Task<Response<string>> BodyThreeTypesAsync(string message, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("MediaTypesClient.BodyThreeTypes");
@@ -360,6 +363,7 @@ namespace media_types
         /// <summary> Body with three types. Can be stream, string, or JSON. Pass in string 'hello, world' with content type 'text/plain', {'hello': world'} with content type 'application/json' and a byte string for 'application/octet-stream'. </summary>
         /// <param name="message"> The payload body. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="message"/> is null. </exception>
         public virtual Response<string> BodyThreeTypes(string message, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("MediaTypesClient.BodyThreeTypes");
@@ -378,6 +382,7 @@ namespace media_types
         /// <summary> Body with three types. Can be stream, string, or JSON. Pass in string 'hello, world' with content type 'text/plain', {'hello': world'} with content type 'application/json' and a byte string for 'application/octet-stream'. </summary>
         /// <param name="message"> The payload body. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="message"/> is null. </exception>
         public virtual async Task<Response<string>> BodyThreeTypesAsync(object message, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("MediaTypesClient.BodyThreeTypes");
@@ -396,6 +401,7 @@ namespace media_types
         /// <summary> Body with three types. Can be stream, string, or JSON. Pass in string 'hello, world' with content type 'text/plain', {'hello': world'} with content type 'application/json' and a byte string for 'application/octet-stream'. </summary>
         /// <param name="message"> The payload body. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentNullException"> <paramref name="message"/> is null. </exception>
         public virtual Response<string> BodyThreeTypes(object message, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("MediaTypesClient.BodyThreeTypes");
