@@ -792,7 +792,9 @@ namespace Azure.NewProject.TypeSpec.Samples
             {
                 requiredString = "<requiredString>",
                 requiredInt = 1234,
-                requiredCollection = new[] { "1" },
+                requiredCollection = new[] {
+        "1"
+    },
                 requiredDictionary = new
                 {
                     key = "1",
@@ -845,7 +847,9 @@ namespace Azure.NewProject.TypeSpec.Samples
             {
                 requiredString = "<requiredString>",
                 requiredInt = 1234,
-                requiredCollection = new[] { "1" },
+                requiredCollection = new[] {
+        "1"
+    },
                 requiredDictionary = new
                 {
                     key = "1",
@@ -853,43 +857,43 @@ namespace Azure.NewProject.TypeSpec.Samples
                 requiredModel = new
                 {
                     name = "<name>",
-                    requiredUnion = new { },
+                    requiredUnion = new object(),
                     requiredLiteralString = "accept",
                     requiredLiteralInt = 123,
-                    requiredLiteralFloat = 1.23,
-                    requiredLiteralBool = false,
+                    requiredLiteralFloat = 1.23F,
+                    requiredLiteralBool = true,
                     optionalLiteralString = "reject",
                     optionalLiteralInt = 456,
-                    optionalLiteralFloat = 4.56,
+                    optionalLiteralFloat = 4.56F,
                     optionalLiteralBool = true,
                     requiredBadDescription = "<requiredBadDescription>",
                 },
-                intExtensibleEnum = "1",
+                intExtensibleEnum = 1,
                 intExtensibleEnumCollection = new[] {
-        "1"
+        1
     },
-                floatExtensibleEnum = "1",
+                floatExtensibleEnum = 1,
                 floatExtensibleEnumCollection = new[] {
-        "1"
+        1
     },
-                floatFixedEnum = "1.1",
+                floatFixedEnum = 1.1F,
                 floatFixedEnumCollection = new[] {
-        "1.1"
+        1.1F
     },
-                intFixedEnum = "1",
+                intFixedEnum = 1,
                 intFixedEnumCollection = new[] {
-        "1"
+        1
     },
                 stringFixedEnum = "1",
-                requiredUnknown = new { },
-                optionalUnknown = new { },
+                requiredUnknown = BinaryData.FromString("<your binary data content>"),
+                optionalUnknown = BinaryData.FromString("<your binary data content>"),
                 requiredRecordUnknown = new
                 {
-                    key = new { },
+                    key = BinaryData.FromString("<your binary data content>"),
                 },
                 optionalRecordUnknown = new
                 {
-                    key = new { },
+                    key = BinaryData.FromString("<your binary data content>"),
                 },
             };
 
@@ -1005,47 +1009,47 @@ namespace Azure.NewProject.TypeSpec.Samples
                 requiredModel = new
                 {
                     name = "<name>",
-                    requiredUnion = new { },
+                    requiredUnion = new object(),
                     requiredLiteralString = "accept",
                     requiredLiteralInt = 123,
-                    requiredLiteralFloat = 1.23,
-                    requiredLiteralBool = false,
+                    requiredLiteralFloat = 1.23F,
+                    requiredLiteralBool = true,
                     optionalLiteralString = "reject",
                     optionalLiteralInt = 456,
-                    optionalLiteralFloat = 4.56,
+                    optionalLiteralFloat = 4.56F,
                     optionalLiteralBool = true,
                     requiredBadDescription = "<requiredBadDescription>",
                 },
-                intExtensibleEnum = "1",
+                intExtensibleEnum = 1,
                 intExtensibleEnumCollection = new[] {
-        "1"
+        1
     },
-                floatExtensibleEnum = "1",
+                floatExtensibleEnum = 1,
                 floatExtensibleEnumCollection = new[] {
-        "1"
+        1
     },
-                floatFixedEnum = "1.1",
+                floatFixedEnum = 1.1F,
                 floatFixedEnumCollection = new[] {
-        "1.1"
+        1.1F
     },
-                intFixedEnum = "1",
+                intFixedEnum = 1,
                 intFixedEnumCollection = new[] {
-        "1"
+        1
     },
                 stringFixedEnum = "1",
-                requiredUnknown = new { },
-                optionalUnknown = new { },
+                requiredUnknown = BinaryData.FromString("<your binary data content>"),
+                optionalUnknown = BinaryData.FromString("<your binary data content>"),
                 requiredRecordUnknown = new
                 {
-                    key = new { },
+                    key = BinaryData.FromString("<your binary data content>"),
                 },
                 optionalRecordUnknown = new
                 {
-                    key = new { },
+                    key = BinaryData.FromString("<your binary data content>"),
                 },
             };
 
-            Response response = await client.HelloAgainAsync("<p2>", "<p1>", RequestContent.Create(data));
+            Response response = await client.HelloAgainAsync("<p2>", "<p1>", RequestContent.Create(data)).ConfigureAwait(false);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("requiredString").ToString());
@@ -1102,17 +1106,17 @@ namespace Azure.NewProject.TypeSpec.Samples
                 requiredModel = new
                 {
                     name = "<name>",
-                    requiredUnion = new { },
+                    requiredUnion = new object(),
                     requiredLiteralString = "accept",
                     requiredLiteralInt = 123,
-                    requiredLiteralFloat = 1.23,
-                    requiredLiteralBool = false,
+                    requiredLiteralFloat = 1.23F,
+                    requiredLiteralBool = true,
                     requiredBadDescription = "<requiredBadDescription>",
                 },
-                requiredUnknown = new { },
+                requiredUnknown = BinaryData.FromString("<your binary data content>"),
                 requiredRecordUnknown = new
                 {
-                    key = new { },
+                    key = BinaryData.FromString("<your binary data content>"),
                 },
             };
 
@@ -1157,43 +1161,43 @@ namespace Azure.NewProject.TypeSpec.Samples
                 requiredModel = new
                 {
                     name = "<name>",
-                    requiredUnion = new { },
+                    requiredUnion = new object(),
                     requiredLiteralString = "accept",
                     requiredLiteralInt = 123,
-                    requiredLiteralFloat = 1.23,
-                    requiredLiteralBool = false,
+                    requiredLiteralFloat = 1.23F,
+                    requiredLiteralBool = true,
                     optionalLiteralString = "reject",
                     optionalLiteralInt = 456,
-                    optionalLiteralFloat = 4.56,
+                    optionalLiteralFloat = 4.56F,
                     optionalLiteralBool = true,
                     requiredBadDescription = "<requiredBadDescription>",
                 },
-                intExtensibleEnum = "1",
+                intExtensibleEnum = 1,
                 intExtensibleEnumCollection = new[] {
-        "1"
+        1
     },
-                floatExtensibleEnum = "1",
+                floatExtensibleEnum = 1,
                 floatExtensibleEnumCollection = new[] {
-        "1"
+        1
     },
-                floatFixedEnum = "1.1",
+                floatFixedEnum = 1.1F,
                 floatFixedEnumCollection = new[] {
-        "1.1"
+        1.1F
     },
-                intFixedEnum = "1",
+                intFixedEnum = 1,
                 intFixedEnumCollection = new[] {
-        "1"
+        1
     },
                 stringFixedEnum = "1",
-                requiredUnknown = new { },
-                optionalUnknown = new { },
+                requiredUnknown = BinaryData.FromString("<your binary data content>"),
+                optionalUnknown = BinaryData.FromString("<your binary data content>"),
                 requiredRecordUnknown = new
                 {
-                    key = new { },
+                    key = BinaryData.FromString("<your binary data content>"),
                 },
                 optionalRecordUnknown = new
                 {
-                    key = new { },
+                    key = BinaryData.FromString("<your binary data content>"),
                 },
             };
 
@@ -1254,21 +1258,21 @@ namespace Azure.NewProject.TypeSpec.Samples
                 requiredModel = new
                 {
                     name = "<name>",
-                    requiredUnion = new { },
+                    requiredUnion = new object(),
                     requiredLiteralString = "accept",
                     requiredLiteralInt = 123,
-                    requiredLiteralFloat = 1.23,
-                    requiredLiteralBool = false,
+                    requiredLiteralFloat = 1.23F,
+                    requiredLiteralBool = true,
                     requiredBadDescription = "<requiredBadDescription>",
                 },
-                requiredUnknown = new { },
+                requiredUnknown = BinaryData.FromString("<your binary data content>"),
                 requiredRecordUnknown = new
                 {
-                    key = new { },
+                    key = BinaryData.FromString("<your binary data content>"),
                 },
             };
 
-            Response response = await client.NoContentTypeAsync("<p2>", "<p1>", RequestContent.Create(data));
+            Response response = await client.NoContentTypeAsync("<p2>", "<p1>", RequestContent.Create(data)).ConfigureAwait(false);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("requiredString").ToString());
@@ -1309,47 +1313,47 @@ namespace Azure.NewProject.TypeSpec.Samples
                 requiredModel = new
                 {
                     name = "<name>",
-                    requiredUnion = new { },
+                    requiredUnion = new object(),
                     requiredLiteralString = "accept",
                     requiredLiteralInt = 123,
-                    requiredLiteralFloat = 1.23,
-                    requiredLiteralBool = false,
+                    requiredLiteralFloat = 1.23F,
+                    requiredLiteralBool = true,
                     optionalLiteralString = "reject",
                     optionalLiteralInt = 456,
-                    optionalLiteralFloat = 4.56,
+                    optionalLiteralFloat = 4.56F,
                     optionalLiteralBool = true,
                     requiredBadDescription = "<requiredBadDescription>",
                 },
-                intExtensibleEnum = "1",
+                intExtensibleEnum = 1,
                 intExtensibleEnumCollection = new[] {
-        "1"
+        1
     },
-                floatExtensibleEnum = "1",
+                floatExtensibleEnum = 1,
                 floatExtensibleEnumCollection = new[] {
-        "1"
+        1
     },
-                floatFixedEnum = "1.1",
+                floatFixedEnum = 1.1F,
                 floatFixedEnumCollection = new[] {
-        "1.1"
+        1.1F
     },
-                intFixedEnum = "1",
+                intFixedEnum = 1,
                 intFixedEnumCollection = new[] {
-        "1"
+        1
     },
                 stringFixedEnum = "1",
-                requiredUnknown = new { },
-                optionalUnknown = new { },
+                requiredUnknown = BinaryData.FromString("<your binary data content>"),
+                optionalUnknown = BinaryData.FromString("<your binary data content>"),
                 requiredRecordUnknown = new
                 {
-                    key = new { },
+                    key = BinaryData.FromString("<your binary data content>"),
                 },
                 optionalRecordUnknown = new
                 {
-                    key = new { },
+                    key = BinaryData.FromString("<your binary data content>"),
                 },
             };
 
-            Response response = await client.NoContentTypeAsync("<p2>", "<p1>", RequestContent.Create(data));
+            Response response = await client.NoContentTypeAsync("<p2>", "<p1>", RequestContent.Create(data)).ConfigureAwait(false);
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("requiredString").ToString());

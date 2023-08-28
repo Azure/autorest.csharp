@@ -101,7 +101,7 @@ var client = new CustomizationsInTspClient();
 
 var data = new {};
 
-Response response = await client.RoundTripAsync(RequestContent.Create(data));
+Response response = await client.RoundTripAsync(RequestContent.Create(data)).ConfigureAwait(false);
 
 JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
 Console.WriteLine(result.ToString());
