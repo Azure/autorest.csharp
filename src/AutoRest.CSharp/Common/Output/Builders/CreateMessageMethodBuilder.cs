@@ -404,49 +404,49 @@ namespace AutoRest.CSharp.Output.Models
 
         private MethodBodyStatement AddFlattenedBody(RequestExpression request)
         {
-            var conversion = new List<MethodBodyStatement>
-            {
-                Var("content", New.Utf8JsonRequestContent(), out var content),
-                content.JsonWriter.WriteStartObject()
-            };
-
+            var requestParts = new Dictionary<InputModelProperty, (InputParameter, Parameter)>();
             foreach (var (_, inputParameter, outputParameter, _) in _requestParts)
             {
-                if (inputParameter is { FlattenedBodyProperty: { } property } && outputParameter is not null)
+                if (inputParameter is { FlattenedBodyProperty: { } property } &&  outputParameter is not null )
                 {
-                    conversion.Add(CreatePropertySerializationStatement(property, content.JsonWriter, inputParameter, outputParameter));
+                    requestParts[property] = (inputParameter, outputParameter);
                 }
             }
 
-            conversion.Add(content.JsonWriter.WriteEndObject());
+            var serializations = SerializationBuilder.GetPropertySerializations(requestParts.Keys, p =>
+            {
+                var (inputParameter, outputParameter) = requestParts[p];
+                return CreatePropertySerialization(p, inputParameter, outputParameter);
+            });
 
             return new[]
             {
                 AddHeaders(request, true).AsStatement(),
-                conversion,
+                Var("content", New.Utf8JsonRequestContent(), out var content),
+                content.JsonWriter.WriteStartObject(),
+                JsonSerializationMethodsBuilder.WriteProperties(content.JsonWriter, serializations).AsStatement(),
+                content.JsonWriter.WriteEndObject(),
                 Assign(request.Content, content)
             };
         }
 
-        private MethodBodyStatement CreatePropertySerializationStatement(InputModelProperty property, Utf8JsonWriterExpression jsonWriter, InputParameter inputParameter, Parameter outputParameter)
+        private JsonPropertySerialization CreatePropertySerialization(InputModelProperty inputModelProperty, InputParameter inputParameter, Parameter outputParameter)
         {
+            var serializedName = inputModelProperty.SerializedName;
             var value = GetValueForRequestPart(inputParameter, outputParameter);
-            var valueSerialization = SerializationBuilder.BuildJsonSerialization(property.Type, outputParameter.Type, false);
+            var valueSerialization = SerializationBuilder.BuildJsonSerialization(inputModelProperty.Type, outputParameter.Type, false);
+            var optionalViaNullability = inputModelProperty is { IsRequired: false, Type.IsNullable: false } && !TypeFactory.IsCollectionType(outputParameter.Type);
 
-            var propertyName = property.SerializedName;
-            var writePropertyStatement = new[]
-            {
-                jsonWriter.WritePropertyName(propertyName),
-                JsonSerializationMethodsBuilder.SerializeExpression(jsonWriter, valueSerialization, value)
-            };
-
-            var writeNullStatement = property.IsRequired ? jsonWriter.WriteNull(propertyName) : null;
-            if (outputParameter.Type.IsNullable)
-            {
-                return new IfElseStatement(NotEqual(value, Null), writePropertyStatement, writeNullStatement);
-            }
-
-            return writePropertyStatement;
+            return new JsonPropertySerialization(
+                outputParameter.Name,
+                value,
+                serializedName,
+                outputParameter.Type,
+                outputParameter.Type.IsNullable && optionalViaNullability ? outputParameter.Type.WithNullable(false) : outputParameter.Type,
+                valueSerialization,
+                inputModelProperty.IsRequired,
+                false,
+                false);
         }
 
         private static MethodBodyStatement SerializeContentIntoRequest(RequestExpression request, ObjectSerialization serialization, ValueExpression expression)

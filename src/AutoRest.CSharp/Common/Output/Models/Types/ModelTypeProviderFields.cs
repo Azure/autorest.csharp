@@ -51,8 +51,7 @@ namespace AutoRest.CSharp.Output.Models.Types
 
                 // We represent property being optional by making it nullable (when it is a value type)
                 // Except in the case of collection where there is a special handling
-                var optionalViaNullability = !inputModelProperty.IsRequired &&
-                                             !inputModelProperty.Type.IsNullable &&
+                var optionalViaNullability = inputModelProperty is { IsRequired: false, Type.IsNullable: false } &&
                                              !TypeFactory.IsCollectionType(propertyType);
 
                 var existingMember = sourceTypeMapping?.GetForMember(originalFieldName)?.ExistingMember;

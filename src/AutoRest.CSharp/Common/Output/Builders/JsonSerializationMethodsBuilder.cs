@@ -65,7 +65,7 @@ namespace AutoRest.CSharp.Common.Output.Builders
                 utf8JsonWriter.WriteEndObject()
             };
 
-        private static IEnumerable<MethodBodyStatement> WriteProperties(Utf8JsonWriterExpression utf8JsonWriter, IEnumerable<JsonPropertySerialization> properties)
+        public static IEnumerable<MethodBodyStatement> WriteProperties(Utf8JsonWriterExpression utf8JsonWriter, IEnumerable<JsonPropertySerialization> properties)
         {
             foreach (JsonPropertySerialization property in properties)
             {

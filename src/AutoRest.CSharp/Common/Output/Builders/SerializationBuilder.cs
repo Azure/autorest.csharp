@@ -253,116 +253,117 @@ namespace AutoRest.CSharp.Output.Builders
             }
         }
 
-        private static IEnumerable<JsonPropertySerialization> GetPropertySerializationsFromBag(PropertyBag propertyBag, SchemaObjectType objectType)
-        {
-            foreach (var objectProperty in propertyBag.Properties)
-            {
-                if (objectProperty.SchemaProperty is not {} schemaProperty)
-                {
-                    continue;
-                }
-
-                var serializedName = schemaProperty.SerializedName;
-                var isRequired = schemaProperty.IsRequired;
-                var isReadOnly = schemaProperty.IsReadOnly;
-                var serialization = BuildSerialization(schemaProperty.Schema, objectProperty.Declaration.Type, false);
-
-                var parameter = objectType.SerializationConstructor.FindParameterByInitializedProperty(objectProperty);
-                if (parameter is null)
-                {
-                    throw new InvalidOperationException($"Serialization constructor of the type {objectType.Declaration.Name} has no parameter for {serializedName} input property");
-                }
-
-                yield return new JsonPropertySerialization(
-                    parameter.Name,
-                    new MemberExpression(null, objectProperty.Declaration.Name),
-                    serializedName,
-                    objectProperty.Declaration.Type,
-                    objectProperty.ValueType,
-                    serialization,
-                    isRequired,
-                    isReadOnly,
-                    false,
-                    customSerializationMethodName: objectProperty.SerializationMapping?.SerializationValueHook,
-                    customDeserializationMethodName: objectProperty.SerializationMapping?.DeserializationValueHook);
-            }
-
-            foreach ((string name, PropertyBag innerBag) in propertyBag.Bag)
-            {
-                JsonPropertySerialization[] serializationProperties = GetPropertySerializationsFromBag(innerBag, objectType).ToArray();
-                yield return new JsonPropertySerialization(name, serializationProperties);
-            }
-        }
-
-        public static IReadOnlyList<JsonPropertySerialization> GetPropertySerializations(ModelTypeProvider model, InputModelTypeUsage usage)
-            => GetPropertySerializationsFromBag(PopulatePropertyBag(model), usage).ToArray();
-
-        private static IEnumerable<JsonPropertySerialization> GetPropertySerializationsFromBag(PropertyBag propertyBag, InputModelTypeUsage usage)
-        {
-            foreach (var property in propertyBag.Properties)
-            {
-                if (property.InputModelProperty is null)
-                {
-                    continue;
-                }
-
-                var declaredName = property.Declaration.Name;
-                var serializedName = property.InputModelProperty.SerializedName;
-                var valueSerialization = BuildJsonSerialization(property.InputModelProperty.Type, property.ValueType, false);
-
-                yield return new JsonPropertySerialization(
-                    declaredName.ToVariableName(),
-                    new MemberExpression(null, declaredName),
-                    serializedName,
-                    property.Declaration.Type,
-                    property.ValueType.IsNullable && property.OptionalViaNullability ? property.ValueType.WithNullable(false) : property.ValueType,
-                    valueSerialization,
-                    property.IsRequired,
-                    ShouldSkipSerialization(usage, property),
-                    false,
-                    customSerializationMethodName: property.SerializationMapping?.SerializationValueHook,
-                    customDeserializationMethodName: property.SerializationMapping?.DeserializationValueHook);
-            }
-
-            foreach ((string name, PropertyBag innerBag) in propertyBag.Bag)
-            {
-                JsonPropertySerialization[] serializationProperties = GetPropertySerializationsFromBag(innerBag, usage).ToArray();
-                yield return new JsonPropertySerialization(name, serializationProperties);
-            }
-        }
-
-        private static bool ShouldSkipSerialization(InputModelTypeUsage inputModelUsage, ObjectTypeProperty property)
-        {
-            if (property.InputModelProperty!.IsDiscriminator)
-            {
-                return false;
-            }
-
-            if (property.InputModelProperty!.ConstantValue is not null)
-            {
-                return false;
-            }
-
-            return property.InputModelProperty!.IsReadOnly;
-        }
-
         public JsonObjectSerialization BuildJsonObjectSerialization(ObjectSchema objectSchema, SchemaObjectType objectType)
         {
-            var propertyBag = PopulatePropertyBag(objectType);
-            var properties = GetPropertySerializationsFromBag(propertyBag, objectType).ToArray();
+            var properties = GetPropertySerializationsFromBag(PopulatePropertyBag(objectType), p => CreateJsonPropertySerializationFromSchemaProperty(p, objectType)).ToArray();
             var additionalProperties = CreateAdditionalProperties(objectSchema, objectType);
             return new JsonObjectSerialization(objectType.Type, objectType.SerializationConstructor.Signature.Parameters, properties, additionalProperties, objectType.Discriminator, objectType.IncludeConverter);
         }
 
-        private class PropertyBag
+        public static IReadOnlyList<JsonPropertySerialization> GetPropertySerializations(ModelTypeProvider model)
+            => GetPropertySerializationsFromBag(PopulatePropertyBag(model), CreateJsonPropertySerializationFromInputModelProperty).ToArray();
+
+        public static IReadOnlyList<JsonPropertySerialization> GetPropertySerializations(IEnumerable<InputModelProperty> properties, Func<InputModelProperty, JsonPropertySerialization?> jsonPropertySerializationFactory)
+            => GetPropertySerializationsFromBag(PopulatePropertyBag(properties), jsonPropertySerializationFactory).ToArray();
+
+        private static IEnumerable<JsonPropertySerialization> GetPropertySerializationsFromBag<T>(PropertyBag<T> propertyBag, Func<T, JsonPropertySerialization?> jsonPropertySerializationFactory)
         {
-            public Dictionary<string, PropertyBag> Bag { get; } = new();
-            public List<ObjectTypeProperty> Properties { get; } = new();
+            foreach (var property in propertyBag.Properties)
+            {
+                if (jsonPropertySerializationFactory(property) is { } serialization)
+                {
+                    yield return serialization;
+                }
+            }
+
+            foreach (var (name, innerBag) in propertyBag.Bag)
+            {
+                JsonPropertySerialization[] serializationProperties = GetPropertySerializationsFromBag(innerBag, jsonPropertySerializationFactory).ToArray();
+                yield return new JsonPropertySerialization(name, serializationProperties);
+            }
         }
 
-        private static PropertyBag PopulatePropertyBag(ObjectType objectType)
+        private static JsonPropertySerialization? CreateJsonPropertySerializationFromSchemaProperty(ObjectTypeProperty property, SchemaObjectType objectType)
         {
-            var propertyBag = new PropertyBag();
+            if (property.SchemaProperty is not {} schemaProperty)
+            {
+                return null;
+            }
+
+            var serializedName = schemaProperty.SerializedName;
+            var isRequired = schemaProperty.IsRequired;
+            var isReadOnly = schemaProperty.IsReadOnly;
+            var serialization = BuildSerialization(schemaProperty.Schema, property.Declaration.Type, false);
+
+            var parameter = objectType.SerializationConstructor.FindParameterByInitializedProperty(property);
+            if (parameter is null)
+            {
+                throw new InvalidOperationException($"Serialization constructor of the type {objectType.Declaration.Name} has no parameter for {serializedName} input property");
+            }
+
+            return new JsonPropertySerialization(
+                parameter.Name,
+                new MemberExpression(null, property.Declaration.Name),
+                serializedName,
+                property.Declaration.Type,
+                property.ValueType,
+                serialization,
+                isRequired,
+                isReadOnly,
+                false,
+                customSerializationMethodName: property.SerializationMapping?.SerializationValueHook,
+                customDeserializationMethodName: property.SerializationMapping?.DeserializationValueHook);
+        }
+
+        private static JsonPropertySerialization? CreateJsonPropertySerializationFromInputModelProperty(ObjectTypeProperty property)
+        {
+            if (property.InputModelProperty is not {} inputModelProperty)
+            {
+                return null;
+            }
+
+            var declaredName = property.Declaration.Name;
+            var serializedName = inputModelProperty.SerializedName;
+            var valueSerialization = BuildJsonSerialization(inputModelProperty.Type, property.ValueType, false);
+
+            return new JsonPropertySerialization(
+                declaredName.ToVariableName(),
+                new MemberExpression(null, declaredName),
+                serializedName,
+                property.Declaration.Type,
+                property.ValueType.IsNullable && property.OptionalViaNullability ? property.ValueType.WithNullable(false) : property.ValueType,
+                valueSerialization,
+                property.IsRequired,
+                ShouldSkipSerialization(inputModelProperty),
+                false,
+                customSerializationMethodName: property.SerializationMapping?.SerializationValueHook,
+                customDeserializationMethodName: property.SerializationMapping?.DeserializationValueHook);
+        }
+
+        private static bool ShouldSkipSerialization(InputModelProperty inputProperty)
+        {
+            if (inputProperty.IsDiscriminator)
+            {
+                return false;
+            }
+
+            if (inputProperty.ConstantValue is not null)
+            {
+                return false;
+            }
+
+            return inputProperty.IsReadOnly;
+        }
+
+        private class PropertyBag<T>
+        {
+            public Dictionary<string, PropertyBag<T>> Bag { get; } = new();
+            public List<T> Properties { get; } = new();
+        }
+
+        private static PropertyBag<ObjectTypeProperty> PopulatePropertyBag(ObjectType objectType)
+        {
+            var propertyBag = new PropertyBag<ObjectTypeProperty>();
             foreach (var objectTypeLevel in objectType.EnumerateHierarchy())
             {
                 foreach (var objectTypeProperty in objectTypeLevel.Properties)
@@ -374,25 +375,37 @@ namespace AutoRest.CSharp.Output.Builders
                 }
             }
 
-            PopulatePropertyBag(propertyBag, 0);
+            PopulatePropertyBag(propertyBag, GetPropertyNameAtDepth, 0);
             return propertyBag;
         }
 
-        private static void PopulatePropertyBag(PropertyBag propertyBag, int depthIndex)
+        private static PropertyBag<InputModelProperty> PopulatePropertyBag(IEnumerable<InputModelProperty> properties)
+        {
+            var propertyBag = new PropertyBag<InputModelProperty>();
+            foreach (var property in properties)
+            {
+                propertyBag.Properties.Add(property);
+            }
+
+            PopulatePropertyBag(propertyBag, GetPropertyNameAtDepth, 0);
+            return propertyBag;
+        }
+
+        private static void PopulatePropertyBag<T>(PropertyBag<T> propertyBag, Func<T, int, string?> getPropertyNameAtDepth, int depthIndex) where T : class
         {
             var propertiesCopy = propertyBag.Properties.ToArray();
             foreach (var property in propertiesCopy)
             {
-                var name = GetPropertyNameAtDepth(property, depthIndex);
+                var name = getPropertyNameAtDepth(property, depthIndex);
 
                 if (name is null)
                 {
                     continue;
                 }
 
-                if (!propertyBag.Bag.TryGetValue(name, out PropertyBag? namedBag))
+                if (!propertyBag.Bag.TryGetValue(name, out PropertyBag<T>? namedBag))
                 {
-                    namedBag = new PropertyBag();
+                    namedBag = new PropertyBag<T>();
                     propertyBag.Bag.Add(name, namedBag);
                 }
 
@@ -400,17 +413,22 @@ namespace AutoRest.CSharp.Output.Builders
                 propertyBag.Properties.Remove(property);
             }
 
-            foreach (PropertyBag innerBag in propertyBag.Bag.Values)
+            foreach (var innerBag in propertyBag.Bag.Values)
             {
-                PopulatePropertyBag(innerBag, depthIndex + 1);
+                PopulatePropertyBag(innerBag, getPropertyNameAtDepth, depthIndex + 1);
             }
         }
+
+        private static string? GetPropertyNameAtDepth(InputModelProperty property, int depthIndex)
+            => property is { FlattenedNames: { } inputFlattenedNames } && inputFlattenedNames.Count > depthIndex + 1
+                ? inputFlattenedNames[depthIndex]
+                : null;
 
         private static string? GetPropertyNameAtDepth(ObjectTypeProperty property, int depthIndex)
         {
             if (property.SerializationMapping is {SerializationPath: {} serializationPath} && serializationPath.Count > depthIndex + 1)
             {
-                return serializationPath.ElementAt(depthIndex);
+                return serializationPath[depthIndex];
             }
 
             if (property.SchemaProperty is {FlattenedNames: {} schemaFlattenedNames} && schemaFlattenedNames.Count > depthIndex + 1)
@@ -418,9 +436,9 @@ namespace AutoRest.CSharp.Output.Builders
                 return schemaFlattenedNames.ElementAt(depthIndex);
             }
 
-            if (property.InputModelProperty is {FlattenedNames: {} inputFlattenedNames} && inputFlattenedNames.Count > depthIndex + 1)
+            if (property.InputModelProperty is {} inputModelProperty)
             {
-                return inputFlattenedNames[depthIndex];
+                return GetPropertyNameAtDepth(inputModelProperty, depthIndex);
             }
 
             return null;
