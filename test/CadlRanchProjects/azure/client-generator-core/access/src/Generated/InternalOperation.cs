@@ -16,8 +16,8 @@ using _Specs_.Azure.ClientGenerator.Core.Access.Models;
 namespace _Specs_.Azure.ClientGenerator.Core.Access
 {
     // Data plane generated sub-client.
-    /// <summary> The Internal sub-client. </summary>
-    public partial class Internal
+    /// <summary> The InternalOperation sub-client. </summary>
+    public partial class InternalOperation
     {
         private readonly HttpPipeline _pipeline;
         private readonly Uri _endpoint;
@@ -29,17 +29,17 @@ namespace _Specs_.Azure.ClientGenerator.Core.Access
         /// <summary> The HTTP pipeline for sending and receiving REST requests and responses. </summary>
         public virtual HttpPipeline Pipeline => _pipeline;
 
-        /// <summary> Initializes a new instance of Internal for mocking. </summary>
-        protected Internal()
+        /// <summary> Initializes a new instance of InternalOperation for mocking. </summary>
+        protected InternalOperation()
         {
         }
 
-        /// <summary> Initializes a new instance of Internal. </summary>
+        /// <summary> Initializes a new instance of InternalOperation. </summary>
         /// <param name="clientDiagnostics"> The handler for diagnostic messaging in the client. </param>
         /// <param name="pipeline"> The HTTP pipeline for sending and receiving REST requests and responses. </param>
         /// <param name="endpoint"> TestServer endpoint. </param>
         /// <param name="apiVersion"> The String to use. </param>
-        internal Internal(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Uri endpoint, string apiVersion)
+        internal InternalOperation(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Uri endpoint, string apiVersion)
         {
             ClientDiagnostics = clientDiagnostics;
             _pipeline = pipeline;
@@ -50,7 +50,7 @@ namespace _Specs_.Azure.ClientGenerator.Core.Access
         /// <param name="name"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
-        /// <include file="Docs/Internal.xml" path="doc/members/member[@name='NoDecoratorInInternalAsync(string,CancellationToken)']/*" />
+        /// <include file="Docs/InternalOperation.xml" path="doc/members/member[@name='NoDecoratorInInternalAsync(string,CancellationToken)']/*" />
         internal virtual async Task<Response<NoDecoratorModelInInternal>> NoDecoratorInInternalAsync(string name, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(name, nameof(name));
@@ -63,7 +63,7 @@ namespace _Specs_.Azure.ClientGenerator.Core.Access
         /// <param name="name"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
-        /// <include file="Docs/Internal.xml" path="doc/members/member[@name='NoDecoratorInInternal(string,CancellationToken)']/*" />
+        /// <include file="Docs/InternalOperation.xml" path="doc/members/member[@name='NoDecoratorInInternal(string,CancellationToken)']/*" />
         internal virtual Response<NoDecoratorModelInInternal> NoDecoratorInInternal(string name, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(name, nameof(name));
@@ -93,12 +93,12 @@ namespace _Specs_.Azure.ClientGenerator.Core.Access
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/Internal.xml" path="doc/members/member[@name='NoDecoratorInInternalAsync(string,RequestContext)']/*" />
+        /// <include file="Docs/InternalOperation.xml" path="doc/members/member[@name='NoDecoratorInInternalAsync(string,RequestContext)']/*" />
         internal virtual async Task<Response> NoDecoratorInInternalAsync(string name, RequestContext context)
         {
             Argument.AssertNotNull(name, nameof(name));
 
-            using var scope = ClientDiagnostics.CreateScope("Internal.NoDecoratorInInternal");
+            using var scope = ClientDiagnostics.CreateScope("InternalOperation.NoDecoratorInInternal");
             scope.Start();
             try
             {
@@ -132,12 +132,12 @@ namespace _Specs_.Azure.ClientGenerator.Core.Access
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/Internal.xml" path="doc/members/member[@name='NoDecoratorInInternal(string,RequestContext)']/*" />
+        /// <include file="Docs/InternalOperation.xml" path="doc/members/member[@name='NoDecoratorInInternal(string,RequestContext)']/*" />
         internal virtual Response NoDecoratorInInternal(string name, RequestContext context)
         {
             Argument.AssertNotNull(name, nameof(name));
 
-            using var scope = ClientDiagnostics.CreateScope("Internal.NoDecoratorInInternal");
+            using var scope = ClientDiagnostics.CreateScope("InternalOperation.NoDecoratorInInternal");
             scope.Start();
             try
             {
@@ -154,7 +154,7 @@ namespace _Specs_.Azure.ClientGenerator.Core.Access
         /// <param name="name"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
-        /// <include file="Docs/Internal.xml" path="doc/members/member[@name='InternalDecoratorInInternalAsync(string,CancellationToken)']/*" />
+        /// <include file="Docs/InternalOperation.xml" path="doc/members/member[@name='InternalDecoratorInInternalAsync(string,CancellationToken)']/*" />
         internal virtual async Task<Response<InternalDecoratorModelInInternal>> InternalDecoratorInInternalAsync(string name, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(name, nameof(name));
@@ -167,7 +167,7 @@ namespace _Specs_.Azure.ClientGenerator.Core.Access
         /// <param name="name"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
-        /// <include file="Docs/Internal.xml" path="doc/members/member[@name='InternalDecoratorInInternal(string,CancellationToken)']/*" />
+        /// <include file="Docs/InternalOperation.xml" path="doc/members/member[@name='InternalDecoratorInInternal(string,CancellationToken)']/*" />
         internal virtual Response<InternalDecoratorModelInInternal> InternalDecoratorInInternal(string name, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(name, nameof(name));
@@ -197,12 +197,12 @@ namespace _Specs_.Azure.ClientGenerator.Core.Access
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/Internal.xml" path="doc/members/member[@name='InternalDecoratorInInternalAsync(string,RequestContext)']/*" />
+        /// <include file="Docs/InternalOperation.xml" path="doc/members/member[@name='InternalDecoratorInInternalAsync(string,RequestContext)']/*" />
         internal virtual async Task<Response> InternalDecoratorInInternalAsync(string name, RequestContext context)
         {
             Argument.AssertNotNull(name, nameof(name));
 
-            using var scope = ClientDiagnostics.CreateScope("Internal.InternalDecoratorInInternal");
+            using var scope = ClientDiagnostics.CreateScope("InternalOperation.InternalDecoratorInInternal");
             scope.Start();
             try
             {
@@ -236,12 +236,12 @@ namespace _Specs_.Azure.ClientGenerator.Core.Access
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/Internal.xml" path="doc/members/member[@name='InternalDecoratorInInternal(string,RequestContext)']/*" />
+        /// <include file="Docs/InternalOperation.xml" path="doc/members/member[@name='InternalDecoratorInInternal(string,RequestContext)']/*" />
         internal virtual Response InternalDecoratorInInternal(string name, RequestContext context)
         {
             Argument.AssertNotNull(name, nameof(name));
 
-            using var scope = ClientDiagnostics.CreateScope("Internal.InternalDecoratorInInternal");
+            using var scope = ClientDiagnostics.CreateScope("InternalOperation.InternalDecoratorInInternal");
             scope.Start();
             try
             {
@@ -258,7 +258,7 @@ namespace _Specs_.Azure.ClientGenerator.Core.Access
         /// <param name="name"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
-        /// <include file="Docs/Internal.xml" path="doc/members/member[@name='PublicDecoratorInInternalAsync(string,CancellationToken)']/*" />
+        /// <include file="Docs/InternalOperation.xml" path="doc/members/member[@name='PublicDecoratorInInternalAsync(string,CancellationToken)']/*" />
         internal virtual async Task<Response<PublicDecoratorModelInInternal>> PublicDecoratorInInternalAsync(string name, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(name, nameof(name));
@@ -271,7 +271,7 @@ namespace _Specs_.Azure.ClientGenerator.Core.Access
         /// <param name="name"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
-        /// <include file="Docs/Internal.xml" path="doc/members/member[@name='PublicDecoratorInInternal(string,CancellationToken)']/*" />
+        /// <include file="Docs/InternalOperation.xml" path="doc/members/member[@name='PublicDecoratorInInternal(string,CancellationToken)']/*" />
         internal virtual Response<PublicDecoratorModelInInternal> PublicDecoratorInInternal(string name, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(name, nameof(name));
@@ -301,12 +301,12 @@ namespace _Specs_.Azure.ClientGenerator.Core.Access
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/Internal.xml" path="doc/members/member[@name='PublicDecoratorInInternalAsync(string,RequestContext)']/*" />
+        /// <include file="Docs/InternalOperation.xml" path="doc/members/member[@name='PublicDecoratorInInternalAsync(string,RequestContext)']/*" />
         internal virtual async Task<Response> PublicDecoratorInInternalAsync(string name, RequestContext context)
         {
             Argument.AssertNotNull(name, nameof(name));
 
-            using var scope = ClientDiagnostics.CreateScope("Internal.PublicDecoratorInInternal");
+            using var scope = ClientDiagnostics.CreateScope("InternalOperation.PublicDecoratorInInternal");
             scope.Start();
             try
             {
@@ -340,12 +340,12 @@ namespace _Specs_.Azure.ClientGenerator.Core.Access
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/Internal.xml" path="doc/members/member[@name='PublicDecoratorInInternal(string,RequestContext)']/*" />
+        /// <include file="Docs/InternalOperation.xml" path="doc/members/member[@name='PublicDecoratorInInternal(string,RequestContext)']/*" />
         internal virtual Response PublicDecoratorInInternal(string name, RequestContext context)
         {
             Argument.AssertNotNull(name, nameof(name));
 
-            using var scope = ClientDiagnostics.CreateScope("Internal.PublicDecoratorInInternal");
+            using var scope = ClientDiagnostics.CreateScope("InternalOperation.PublicDecoratorInInternal");
             scope.Start();
             try
             {
@@ -366,7 +366,7 @@ namespace _Specs_.Azure.ClientGenerator.Core.Access
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.Reset(_endpoint);
-            uri.AppendPath("/azure/client-generator-core/access/internal/noDecoratorInInternal", false);
+            uri.AppendPath("/azure/client-generator-core/access/internalOperation/noDecoratorInInternal", false);
             uri.AppendQuery("name", name, true);
             uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
@@ -381,7 +381,7 @@ namespace _Specs_.Azure.ClientGenerator.Core.Access
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.Reset(_endpoint);
-            uri.AppendPath("/azure/client-generator-core/access/internal/internalDecoratorInInternal", false);
+            uri.AppendPath("/azure/client-generator-core/access/internalOperation/internalDecoratorInInternal", false);
             uri.AppendQuery("name", name, true);
             uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
@@ -396,7 +396,7 @@ namespace _Specs_.Azure.ClientGenerator.Core.Access
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.Reset(_endpoint);
-            uri.AppendPath("/azure/client-generator-core/access/internal/publicDecoratorInInternal", false);
+            uri.AppendPath("/azure/client-generator-core/access/internalOperation/publicDecoratorInInternal", false);
             uri.AppendQuery("name", name, true);
             uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;

@@ -16,8 +16,8 @@ using _Specs_.Azure.ClientGenerator.Core.Access.Models;
 namespace _Specs_.Azure.ClientGenerator.Core.Access
 {
     // Data plane generated sub-client.
-    /// <summary> The Relative sub-client. </summary>
-    public partial class Relative
+    /// <summary> The RelativeModelInOperation sub-client. </summary>
+    public partial class RelativeModelInOperation
     {
         private readonly HttpPipeline _pipeline;
         private readonly Uri _endpoint;
@@ -29,17 +29,17 @@ namespace _Specs_.Azure.ClientGenerator.Core.Access
         /// <summary> The HTTP pipeline for sending and receiving REST requests and responses. </summary>
         public virtual HttpPipeline Pipeline => _pipeline;
 
-        /// <summary> Initializes a new instance of Relative for mocking. </summary>
-        protected Relative()
+        /// <summary> Initializes a new instance of RelativeModelInOperation for mocking. </summary>
+        protected RelativeModelInOperation()
         {
         }
 
-        /// <summary> Initializes a new instance of Relative. </summary>
+        /// <summary> Initializes a new instance of RelativeModelInOperation. </summary>
         /// <param name="clientDiagnostics"> The handler for diagnostic messaging in the client. </param>
         /// <param name="pipeline"> The HTTP pipeline for sending and receiving REST requests and responses. </param>
         /// <param name="endpoint"> TestServer endpoint. </param>
         /// <param name="apiVersion"> The String to use. </param>
-        internal Relative(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Uri endpoint, string apiVersion)
+        internal RelativeModelInOperation(ClientDiagnostics clientDiagnostics, HttpPipeline pipeline, Uri endpoint, string apiVersion)
         {
             ClientDiagnostics = clientDiagnostics;
             _pipeline = pipeline;
@@ -63,7 +63,7 @@ namespace _Specs_.Azure.ClientGenerator.Core.Access
         /// <param name="name"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
-        /// <include file="Docs/Relative.xml" path="doc/members/member[@name='OperationAsync(string,CancellationToken)']/*" />
+        /// <include file="Docs/RelativeModelInOperation.xml" path="doc/members/member[@name='OperationAsync(string,CancellationToken)']/*" />
         internal virtual async Task<Response<OuterModel>> OperationAsync(string name, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(name, nameof(name));
@@ -89,7 +89,7 @@ namespace _Specs_.Azure.ClientGenerator.Core.Access
         /// <param name="name"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
-        /// <include file="Docs/Relative.xml" path="doc/members/member[@name='Operation(string,CancellationToken)']/*" />
+        /// <include file="Docs/RelativeModelInOperation.xml" path="doc/members/member[@name='Operation(string,CancellationToken)']/*" />
         internal virtual Response<OuterModel> Operation(string name, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(name, nameof(name));
@@ -129,12 +129,12 @@ namespace _Specs_.Azure.ClientGenerator.Core.Access
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/Relative.xml" path="doc/members/member[@name='OperationAsync(string,RequestContext)']/*" />
+        /// <include file="Docs/RelativeModelInOperation.xml" path="doc/members/member[@name='OperationAsync(string,RequestContext)']/*" />
         internal virtual async Task<Response> OperationAsync(string name, RequestContext context)
         {
             Argument.AssertNotNull(name, nameof(name));
 
-            using var scope = ClientDiagnostics.CreateScope("Relative.Operation");
+            using var scope = ClientDiagnostics.CreateScope("RelativeModelInOperation.Operation");
             scope.Start();
             try
             {
@@ -178,12 +178,12 @@ namespace _Specs_.Azure.ClientGenerator.Core.Access
         /// <exception cref="ArgumentNullException"> <paramref name="name"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/Relative.xml" path="doc/members/member[@name='Operation(string,RequestContext)']/*" />
+        /// <include file="Docs/RelativeModelInOperation.xml" path="doc/members/member[@name='Operation(string,RequestContext)']/*" />
         internal virtual Response Operation(string name, RequestContext context)
         {
             Argument.AssertNotNull(name, nameof(name));
 
-            using var scope = ClientDiagnostics.CreateScope("Relative.Operation");
+            using var scope = ClientDiagnostics.CreateScope("RelativeModelInOperation.Operation");
             scope.Start();
             try
             {
@@ -210,7 +210,7 @@ namespace _Specs_.Azure.ClientGenerator.Core.Access
         /// <param name="kind"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="kind"/> is null. </exception>
-        /// <include file="Docs/Relative.xml" path="doc/members/member[@name='DiscriminatorAsync(string,CancellationToken)']/*" />
+        /// <include file="Docs/RelativeModelInOperation.xml" path="doc/members/member[@name='DiscriminatorAsync(string,CancellationToken)']/*" />
         internal virtual async Task<Response<AbstractModel>> DiscriminatorAsync(string kind, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(kind, nameof(kind));
@@ -233,7 +233,7 @@ namespace _Specs_.Azure.ClientGenerator.Core.Access
         /// <param name="kind"> The String to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="kind"/> is null. </exception>
-        /// <include file="Docs/Relative.xml" path="doc/members/member[@name='Discriminator(string,CancellationToken)']/*" />
+        /// <include file="Docs/RelativeModelInOperation.xml" path="doc/members/member[@name='Discriminator(string,CancellationToken)']/*" />
         internal virtual Response<AbstractModel> Discriminator(string kind, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(kind, nameof(kind));
@@ -270,12 +270,12 @@ namespace _Specs_.Azure.ClientGenerator.Core.Access
         /// <exception cref="ArgumentNullException"> <paramref name="kind"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/Relative.xml" path="doc/members/member[@name='DiscriminatorAsync(string,RequestContext)']/*" />
+        /// <include file="Docs/RelativeModelInOperation.xml" path="doc/members/member[@name='DiscriminatorAsync(string,RequestContext)']/*" />
         internal virtual async Task<Response> DiscriminatorAsync(string kind, RequestContext context)
         {
             Argument.AssertNotNull(kind, nameof(kind));
 
-            using var scope = ClientDiagnostics.CreateScope("Relative.Discriminator");
+            using var scope = ClientDiagnostics.CreateScope("RelativeModelInOperation.Discriminator");
             scope.Start();
             try
             {
@@ -316,12 +316,12 @@ namespace _Specs_.Azure.ClientGenerator.Core.Access
         /// <exception cref="ArgumentNullException"> <paramref name="kind"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/Relative.xml" path="doc/members/member[@name='Discriminator(string,RequestContext)']/*" />
+        /// <include file="Docs/RelativeModelInOperation.xml" path="doc/members/member[@name='Discriminator(string,RequestContext)']/*" />
         internal virtual Response Discriminator(string kind, RequestContext context)
         {
             Argument.AssertNotNull(kind, nameof(kind));
 
-            using var scope = ClientDiagnostics.CreateScope("Relative.Discriminator");
+            using var scope = ClientDiagnostics.CreateScope("RelativeModelInOperation.Discriminator");
             scope.Start();
             try
             {
@@ -342,7 +342,7 @@ namespace _Specs_.Azure.ClientGenerator.Core.Access
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.Reset(_endpoint);
-            uri.AppendPath("/azure/client-generator-core/access/relative/operation", false);
+            uri.AppendPath("/azure/client-generator-core/access/relativeModelInOperation/operation", false);
             uri.AppendQuery("name", name, true);
             uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
@@ -357,7 +357,7 @@ namespace _Specs_.Azure.ClientGenerator.Core.Access
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.Reset(_endpoint);
-            uri.AppendPath("/azure/client-generator-core/access/relative/discriminator", false);
+            uri.AppendPath("/azure/client-generator-core/access/relativeModelInOperation/discriminator", false);
             uri.AppendQuery("kind", kind, true);
             uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;

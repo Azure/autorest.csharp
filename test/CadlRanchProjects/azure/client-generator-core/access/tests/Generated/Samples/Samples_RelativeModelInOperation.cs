@@ -15,7 +15,7 @@ using Azure.Identity;
 
 namespace _Specs_.Azure.ClientGenerator.Core.Access.Samples
 {
-    internal class Samples_Relative
+    internal class Samples_RelativeModelInOperation
     {
     }
 }

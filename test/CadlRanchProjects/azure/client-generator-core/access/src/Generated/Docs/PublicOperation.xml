@@ -5,7 +5,7 @@
 <example>
 This sample shows how to call NoDecoratorInPublicAsync with required parameters.
 <code><![CDATA[
-var client = new AccessClient().GetPublicClient("1.0.0");
+var client = new AccessClient().GetPublicOperationClient("1.0.0");
 
 var result = await client.NoDecoratorInPublicAsync("<name>");
 ]]></code>
@@ -15,7 +15,7 @@ var result = await client.NoDecoratorInPublicAsync("<name>");
 <example>
 This sample shows how to call NoDecoratorInPublic with required parameters.
 <code><![CDATA[
-var client = new AccessClient().GetPublicClient("1.0.0");
+var client = new AccessClient().GetPublicOperationClient("1.0.0");
 
 var result = client.NoDecoratorInPublic("<name>");
 ]]></code>
@@ -25,7 +25,7 @@ var result = client.NoDecoratorInPublic("<name>");
 <example>
 This sample shows how to call NoDecoratorInPublicAsync with required parameters and parse the result.
 <code><![CDATA[
-var client = new AccessClient().GetPublicClient("1.0.0");
+var client = new AccessClient().GetPublicOperationClient("1.0.0");
 
 Response response = await client.NoDecoratorInPublicAsync("<name>", new RequestContext());
 
@@ -38,7 +38,7 @@ Console.WriteLine(result.GetProperty("name").ToString());
 <example>
 This sample shows how to call NoDecoratorInPublic with required parameters and parse the result.
 <code><![CDATA[
-var client = new AccessClient().GetPublicClient("1.0.0");
+var client = new AccessClient().GetPublicOperationClient("1.0.0");
 
 Response response = client.NoDecoratorInPublic("<name>", new RequestContext());
 
@@ -51,7 +51,7 @@ Console.WriteLine(result.GetProperty("name").ToString());
 <example>
 This sample shows how to call PublicDecoratorInPublicAsync with required parameters.
 <code><![CDATA[
-var client = new AccessClient().GetPublicClient("1.0.0");
+var client = new AccessClient().GetPublicOperationClient("1.0.0");
 
 var result = await client.PublicDecoratorInPublicAsync("<name>");
 ]]></code>
@@ -61,7 +61,7 @@ var result = await client.PublicDecoratorInPublicAsync("<name>");
 <example>
 This sample shows how to call PublicDecoratorInPublic with required parameters.
 <code><![CDATA[
-var client = new AccessClient().GetPublicClient("1.0.0");
+var client = new AccessClient().GetPublicOperationClient("1.0.0");
 
 var result = client.PublicDecoratorInPublic("<name>");
 ]]></code>
@@ -71,7 +71,7 @@ var result = client.PublicDecoratorInPublic("<name>");
 <example>
 This sample shows how to call PublicDecoratorInPublicAsync with required parameters and parse the result.
 <code><![CDATA[
-var client = new AccessClient().GetPublicClient("1.0.0");
+var client = new AccessClient().GetPublicOperationClient("1.0.0");
 
 Response response = await client.PublicDecoratorInPublicAsync("<name>", new RequestContext());
 
@@ -84,7 +84,7 @@ Console.WriteLine(result.GetProperty("name").ToString());
 <example>
 This sample shows how to call PublicDecoratorInPublic with required parameters and parse the result.
 <code><![CDATA[
-var client = new AccessClient().GetPublicClient("1.0.0");
+var client = new AccessClient().GetPublicOperationClient("1.0.0");
 
 Response response = client.PublicDecoratorInPublic("<name>", new RequestContext());
 

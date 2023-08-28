@@ -22,7 +22,7 @@ namespace _Specs_.Azure.ClientGenerator.Core.Usage.Samples
     {
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_InputToRoundTrip()
+        public void Example_InputToInputOutput()
         {
             var client = new UsageClient();
 
@@ -31,13 +31,13 @@ namespace _Specs_.Azure.ClientGenerator.Core.Usage.Samples
                 name = "<name>",
             };
 
-            Response response = client.InputToRoundTrip(RequestContent.Create(data));
+            Response response = client.InputToInputOutput(RequestContent.Create(data));
             Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_InputToRoundTrip_AllParameters()
+        public void Example_InputToInputOutput_AllParameters()
         {
             var client = new UsageClient();
 
@@ -46,13 +46,13 @@ namespace _Specs_.Azure.ClientGenerator.Core.Usage.Samples
                 name = "<name>",
             };
 
-            Response response = client.InputToRoundTrip(RequestContent.Create(data));
+            Response response = client.InputToInputOutput(RequestContent.Create(data));
             Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_InputToRoundTrip_Async()
+        public async Task Example_InputToInputOutput_Async()
         {
             var client = new UsageClient();
 
@@ -61,13 +61,13 @@ namespace _Specs_.Azure.ClientGenerator.Core.Usage.Samples
                 name = "<name>",
             };
 
-            Response response = await client.InputToRoundTripAsync(RequestContent.Create(data));
+            Response response = await client.InputToInputOutputAsync(RequestContent.Create(data));
             Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_InputToRoundTrip_AllParameters_Async()
+        public async Task Example_InputToInputOutput_AllParameters_Async()
         {
             var client = new UsageClient();
 
@@ -76,27 +76,27 @@ namespace _Specs_.Azure.ClientGenerator.Core.Usage.Samples
                 name = "<name>",
             };
 
-            Response response = await client.InputToRoundTripAsync(RequestContent.Create(data));
+            Response response = await client.InputToInputOutputAsync(RequestContent.Create(data));
             Console.WriteLine(response.Status);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_InputToRoundTrip_Convenience_Async()
+        public async Task Example_InputToInputOutput_Convenience_Async()
         {
             var client = new UsageClient();
 
             var body = new InputModel("<name>");
-            var result = await client.InputToRoundTripAsync(body);
+            var result = await client.InputToInputOutputAsync(body);
         }
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_OutputToRoundTrip()
+        public void Example_OutputToInputOutput()
         {
             var client = new UsageClient();
 
-            Response response = client.OutputToRoundTrip(new RequestContext());
+            Response response = client.OutputToInputOutput(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("name").ToString());
@@ -104,11 +104,11 @@ namespace _Specs_.Azure.ClientGenerator.Core.Usage.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public void Example_OutputToRoundTrip_AllParameters()
+        public void Example_OutputToInputOutput_AllParameters()
         {
             var client = new UsageClient();
 
-            Response response = client.OutputToRoundTrip(new RequestContext());
+            Response response = client.OutputToInputOutput(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("name").ToString());
@@ -116,11 +116,11 @@ namespace _Specs_.Azure.ClientGenerator.Core.Usage.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_OutputToRoundTrip_Async()
+        public async Task Example_OutputToInputOutput_Async()
         {
             var client = new UsageClient();
 
-            Response response = await client.OutputToRoundTripAsync(new RequestContext());
+            Response response = await client.OutputToInputOutputAsync(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("name").ToString());
@@ -128,11 +128,11 @@ namespace _Specs_.Azure.ClientGenerator.Core.Usage.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_OutputToRoundTrip_AllParameters_Async()
+        public async Task Example_OutputToInputOutput_AllParameters_Async()
         {
             var client = new UsageClient();
 
-            Response response = await client.OutputToRoundTripAsync(new RequestContext());
+            Response response = await client.OutputToInputOutputAsync(new RequestContext());
 
             JsonElement result = JsonDocument.Parse(response.ContentStream).RootElement;
             Console.WriteLine(result.GetProperty("name").ToString());
@@ -140,11 +140,11 @@ namespace _Specs_.Azure.ClientGenerator.Core.Usage.Samples
 
         [Test]
         [Ignore("Only validating compilation of examples")]
-        public async Task Example_OutputToRoundTrip_Convenience_Async()
+        public async Task Example_OutputToInputOutput_Convenience_Async()
         {
             var client = new UsageClient();
 
-            var result = await client.OutputToRoundTripAsync();
+            var result = await client.OutputToInputOutputAsync();
         }
     }
 }

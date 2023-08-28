@@ -43,44 +43,44 @@ namespace _Specs_.Azure.ClientGenerator.Core.Access
             _endpoint = endpoint;
         }
 
-        /// <summary> Initializes a new instance of Public. </summary>
+        /// <summary> Initializes a new instance of PublicOperation. </summary>
         /// <param name="apiVersion"> The String to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="apiVersion"/> is null. </exception>
-        public virtual Public GetPublicClient(string apiVersion = "1.0.0")
+        public virtual PublicOperation GetPublicOperationClient(string apiVersion = "1.0.0")
         {
             Argument.AssertNotNull(apiVersion, nameof(apiVersion));
 
-            return new Public(ClientDiagnostics, _pipeline, _endpoint, apiVersion);
+            return new PublicOperation(ClientDiagnostics, _pipeline, _endpoint, apiVersion);
         }
 
-        /// <summary> Initializes a new instance of Internal. </summary>
+        /// <summary> Initializes a new instance of InternalOperation. </summary>
         /// <param name="apiVersion"> The String to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="apiVersion"/> is null. </exception>
-        public virtual Internal GetInternalClient(string apiVersion = "1.0.0")
+        public virtual InternalOperation GetInternalOperationClient(string apiVersion = "1.0.0")
         {
             Argument.AssertNotNull(apiVersion, nameof(apiVersion));
 
-            return new Internal(ClientDiagnostics, _pipeline, _endpoint, apiVersion);
+            return new InternalOperation(ClientDiagnostics, _pipeline, _endpoint, apiVersion);
         }
 
-        /// <summary> Initializes a new instance of Shared. </summary>
+        /// <summary> Initializes a new instance of SharedModelInOperation. </summary>
         /// <param name="apiVersion"> The String to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="apiVersion"/> is null. </exception>
-        public virtual Shared GetSharedClient(string apiVersion = "1.0.0")
+        public virtual SharedModelInOperation GetSharedModelInOperationClient(string apiVersion = "1.0.0")
         {
             Argument.AssertNotNull(apiVersion, nameof(apiVersion));
 
-            return new Shared(ClientDiagnostics, _pipeline, _endpoint, apiVersion);
+            return new SharedModelInOperation(ClientDiagnostics, _pipeline, _endpoint, apiVersion);
         }
 
-        /// <summary> Initializes a new instance of Relative. </summary>
+        /// <summary> Initializes a new instance of RelativeModelInOperation. </summary>
         /// <param name="apiVersion"> The String to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="apiVersion"/> is null. </exception>
-        public virtual Relative GetRelativeClient(string apiVersion = "1.0.0")
+        public virtual RelativeModelInOperation GetRelativeModelInOperationClient(string apiVersion = "1.0.0")
         {
             Argument.AssertNotNull(apiVersion, nameof(apiVersion));
 
-            return new Relative(ClientDiagnostics, _pipeline, _endpoint, apiVersion);
+            return new RelativeModelInOperation(ClientDiagnostics, _pipeline, _endpoint, apiVersion);
         }
     }
 }

@@ -18,13 +18,13 @@ using _Specs_.Azure.ClientGenerator.Core.Access.Models;
 
 namespace _Specs_.Azure.ClientGenerator.Core.Access.Samples
 {
-    internal class Samples_Shared
+    internal class Samples_SharedModelInOperation
     {
         [Test]
         [Ignore("Only validating compilation of examples")]
         public void Example_Public()
         {
-            var client = new AccessClient().GetSharedClient("1.0.0");
+            var client = new AccessClient().GetSharedModelInOperationClient("1.0.0");
 
             Response response = client.Public("<name>", new RequestContext());
 
@@ -36,7 +36,7 @@ namespace _Specs_.Azure.ClientGenerator.Core.Access.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_Public_AllParameters()
         {
-            var client = new AccessClient().GetSharedClient("1.0.0");
+            var client = new AccessClient().GetSharedModelInOperationClient("1.0.0");
 
             Response response = client.Public("<name>", new RequestContext());
 
@@ -48,7 +48,7 @@ namespace _Specs_.Azure.ClientGenerator.Core.Access.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Public_Async()
         {
-            var client = new AccessClient().GetSharedClient("1.0.0");
+            var client = new AccessClient().GetSharedModelInOperationClient("1.0.0");
 
             Response response = await client.PublicAsync("<name>", new RequestContext());
 
@@ -60,7 +60,7 @@ namespace _Specs_.Azure.ClientGenerator.Core.Access.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Public_AllParameters_Async()
         {
-            var client = new AccessClient().GetSharedClient("1.0.0");
+            var client = new AccessClient().GetSharedModelInOperationClient("1.0.0");
 
             Response response = await client.PublicAsync("<name>", new RequestContext());
 
@@ -72,7 +72,7 @@ namespace _Specs_.Azure.ClientGenerator.Core.Access.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_Public_Convenience_Async()
         {
-            var client = new AccessClient().GetSharedClient("1.0.0");
+            var client = new AccessClient().GetSharedModelInOperationClient("1.0.0");
 
             var result = await client.PublicAsync("<name>");
         }

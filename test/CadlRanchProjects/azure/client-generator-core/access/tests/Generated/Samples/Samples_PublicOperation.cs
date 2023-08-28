@@ -18,13 +18,13 @@ using _Specs_.Azure.ClientGenerator.Core.Access.Models;
 
 namespace _Specs_.Azure.ClientGenerator.Core.Access.Samples
 {
-    internal class Samples_Public
+    internal class Samples_PublicOperation
     {
         [Test]
         [Ignore("Only validating compilation of examples")]
         public void Example_NoDecoratorInPublic()
         {
-            var client = new AccessClient().GetPublicClient("1.0.0");
+            var client = new AccessClient().GetPublicOperationClient("1.0.0");
 
             Response response = client.NoDecoratorInPublic("<name>", new RequestContext());
 
@@ -36,7 +36,7 @@ namespace _Specs_.Azure.ClientGenerator.Core.Access.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_NoDecoratorInPublic_AllParameters()
         {
-            var client = new AccessClient().GetPublicClient("1.0.0");
+            var client = new AccessClient().GetPublicOperationClient("1.0.0");
 
             Response response = client.NoDecoratorInPublic("<name>", new RequestContext());
 
@@ -48,7 +48,7 @@ namespace _Specs_.Azure.ClientGenerator.Core.Access.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_NoDecoratorInPublic_Async()
         {
-            var client = new AccessClient().GetPublicClient("1.0.0");
+            var client = new AccessClient().GetPublicOperationClient("1.0.0");
 
             Response response = await client.NoDecoratorInPublicAsync("<name>", new RequestContext());
 
@@ -60,7 +60,7 @@ namespace _Specs_.Azure.ClientGenerator.Core.Access.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_NoDecoratorInPublic_AllParameters_Async()
         {
-            var client = new AccessClient().GetPublicClient("1.0.0");
+            var client = new AccessClient().GetPublicOperationClient("1.0.0");
 
             Response response = await client.NoDecoratorInPublicAsync("<name>", new RequestContext());
 
@@ -72,7 +72,7 @@ namespace _Specs_.Azure.ClientGenerator.Core.Access.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_NoDecoratorInPublic_Convenience_Async()
         {
-            var client = new AccessClient().GetPublicClient("1.0.0");
+            var client = new AccessClient().GetPublicOperationClient("1.0.0");
 
             var result = await client.NoDecoratorInPublicAsync("<name>");
         }
@@ -81,7 +81,7 @@ namespace _Specs_.Azure.ClientGenerator.Core.Access.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_PublicDecoratorInPublic()
         {
-            var client = new AccessClient().GetPublicClient("1.0.0");
+            var client = new AccessClient().GetPublicOperationClient("1.0.0");
 
             Response response = client.PublicDecoratorInPublic("<name>", new RequestContext());
 
@@ -93,7 +93,7 @@ namespace _Specs_.Azure.ClientGenerator.Core.Access.Samples
         [Ignore("Only validating compilation of examples")]
         public void Example_PublicDecoratorInPublic_AllParameters()
         {
-            var client = new AccessClient().GetPublicClient("1.0.0");
+            var client = new AccessClient().GetPublicOperationClient("1.0.0");
 
             Response response = client.PublicDecoratorInPublic("<name>", new RequestContext());
 
@@ -105,7 +105,7 @@ namespace _Specs_.Azure.ClientGenerator.Core.Access.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_PublicDecoratorInPublic_Async()
         {
-            var client = new AccessClient().GetPublicClient("1.0.0");
+            var client = new AccessClient().GetPublicOperationClient("1.0.0");
 
             Response response = await client.PublicDecoratorInPublicAsync("<name>", new RequestContext());
 
@@ -117,7 +117,7 @@ namespace _Specs_.Azure.ClientGenerator.Core.Access.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_PublicDecoratorInPublic_AllParameters_Async()
         {
-            var client = new AccessClient().GetPublicClient("1.0.0");
+            var client = new AccessClient().GetPublicOperationClient("1.0.0");
 
             Response response = await client.PublicDecoratorInPublicAsync("<name>", new RequestContext());
 
@@ -129,7 +129,7 @@ namespace _Specs_.Azure.ClientGenerator.Core.Access.Samples
         [Ignore("Only validating compilation of examples")]
         public async Task Example_PublicDecoratorInPublic_Convenience_Async()
         {
-            var client = new AccessClient().GetPublicClient("1.0.0");
+            var client = new AccessClient().GetPublicOperationClient("1.0.0");
 
             var result = await client.PublicDecoratorInPublicAsync("<name>");
         }

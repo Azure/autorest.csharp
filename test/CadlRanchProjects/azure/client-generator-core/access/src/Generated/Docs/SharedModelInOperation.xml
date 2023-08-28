@@ -5,7 +5,7 @@
 <example>
 This sample shows how to call PublicAsync with required parameters.
 <code><![CDATA[
-var client = new AccessClient().GetSharedClient("1.0.0");
+var client = new AccessClient().GetSharedModelInOperationClient("1.0.0");
 
 var result = await client.PublicAsync("<name>");
 ]]></code>
@@ -15,7 +15,7 @@ var result = await client.PublicAsync("<name>");
 <example>
 This sample shows how to call Public with required parameters.
 <code><![CDATA[
-var client = new AccessClient().GetSharedClient("1.0.0");
+var client = new AccessClient().GetSharedModelInOperationClient("1.0.0");
 
 var result = client.Public("<name>");
 ]]></code>
@@ -25,7 +25,7 @@ var result = client.Public("<name>");
 <example>
 This sample shows how to call PublicAsync with required parameters and parse the result.
 <code><![CDATA[
-var client = new AccessClient().GetSharedClient("1.0.0");
+var client = new AccessClient().GetSharedModelInOperationClient("1.0.0");
 
 Response response = await client.PublicAsync("<name>", new RequestContext());
 
@@ -38,7 +38,7 @@ Console.WriteLine(result.GetProperty("name").ToString());
 <example>
 This sample shows how to call Public with required parameters and parse the result.
 <code><![CDATA[
-var client = new AccessClient().GetSharedClient("1.0.0");
+var client = new AccessClient().GetSharedModelInOperationClient("1.0.0");
 
 Response response = client.Public("<name>", new RequestContext());
 

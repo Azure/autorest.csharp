@@ -23,7 +23,20 @@ namespace AutoRest.CSharp.Output.Models.Types
 
         public TypeFactory TypeFactory { get; }
         public IEnumerable<EnumType> Enums => _enums.Values;
-        public IEnumerable<ModelTypeProvider> Models => _models.Values;
+        public IEnumerable<ModelTypeProvider> Models
+        {
+            get
+            {
+                foreach (var key in _models.Keys)
+                {
+                    if (key is { Namespace: "Azure.Core.Foundations", Name: "Error" })
+                    {
+                        continue;
+                    }
+                    yield return _models[key];
+                }
+            }
+        }
         public IReadOnlyList<LowLevelClient> RestClients { get; }
         public ClientOptionsTypeProvider ClientOptions { get; }
         public IEnumerable<TypeProvider> AllModels => new List<TypeProvider>(_enums.Values).Concat(_models.Values);

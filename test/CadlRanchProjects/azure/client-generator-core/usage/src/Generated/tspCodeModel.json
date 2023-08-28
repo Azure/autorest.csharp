@@ -64,7 +64,7 @@
    "Operations": [
     {
      "$id": "9",
-     "Name": "inputToRoundTrip",
+     "Name": "inputToInputOutput",
      "ResourceName": "ModelInOperation",
      "Description": "Expected body parameter: \n```json\n{\n  \"name\": <any string>\n}\n```",
      "Parameters": [
@@ -216,7 +216,7 @@
      "HttpMethod": "POST",
      "RequestBodyMediaType": "Json",
      "Uri": "{host}",
-     "Path": "/azure/client-generator-core/usage/inputToRoundTrip",
+     "Path": "/azure/client-generator-core/usage/inputToInputOutput",
      "RequestMediaTypes": [
       "application/json"
      ],
@@ -226,7 +226,7 @@
     },
     {
      "$id": "26",
-     "Name": "outputToRoundTrip",
+     "Name": "outputToInputOutput",
      "ResourceName": "ModelInOperation",
      "Description": "Expected response body: \n```json\n{\n  \"name\": <any string>\n}\n```",
      "Parameters": [
@@ -281,7 +281,7 @@
      "HttpMethod": "GET",
      "RequestBodyMediaType": "None",
      "Uri": "{host}",
-     "Path": "/azure/client-generator-core/usage/outputToRoundTrip",
+     "Path": "/azure/client-generator-core/usage/outputToInputOutput",
      "BufferResponse": true,
      "GenerateProtocolMethod": true,
      "GenerateConvenienceMethod": true

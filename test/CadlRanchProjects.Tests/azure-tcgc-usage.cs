@@ -13,10 +13,10 @@ namespace CadlRanchProjects.Tests
         [Test]
         public Task Azure_ClientGenerator_Core_Usage_ModelInOperation() => Test(async (host) =>
         {
-            var response1 = await new UsageClient(host, null).InputToRoundTripAsync(new InputModel("Madge"));
+            var response1 = await new UsageClient(host, null).InputToInputOutputAsync(new InputModel("Madge"));
             Assert.AreEqual(204, response1.Status);
 
-            var response2 = await new UsageClient(host, null).OutputToRoundTripAsync();
+            var response2 = await new UsageClient(host, null).OutputToInputOutputAsync();
             Assert.AreEqual("Madge", response2.Value.Name);
 
             Assert.IsNotNull(typeof(InputModel).GetMethod("FromResponse", BindingFlags.Static | BindingFlags.NonPublic));

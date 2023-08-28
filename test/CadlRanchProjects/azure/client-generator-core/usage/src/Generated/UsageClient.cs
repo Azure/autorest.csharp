@@ -60,13 +60,13 @@ namespace _Specs_.Azure.ClientGenerator.Core.Usage
         /// <param name="body"> The InputModel to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
-        /// <include file="Docs/UsageClient.xml" path="doc/members/member[@name='InputToRoundTripAsync(InputModel,CancellationToken)']/*" />
-        public virtual async Task<Response> InputToRoundTripAsync(InputModel body, CancellationToken cancellationToken = default)
+        /// <include file="Docs/UsageClient.xml" path="doc/members/member[@name='InputToInputOutputAsync(InputModel,CancellationToken)']/*" />
+        public virtual async Task<Response> InputToInputOutputAsync(InputModel body, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(body, nameof(body));
 
             RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = await InputToRoundTripAsync(body.ToRequestContent(), context).ConfigureAwait(false);
+            Response response = await InputToInputOutputAsync(body.ToRequestContent(), context).ConfigureAwait(false);
             return response;
         }
 
@@ -81,13 +81,13 @@ namespace _Specs_.Azure.ClientGenerator.Core.Usage
         /// <param name="body"> The InputModel to use. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="body"/> is null. </exception>
-        /// <include file="Docs/UsageClient.xml" path="doc/members/member[@name='InputToRoundTrip(InputModel,CancellationToken)']/*" />
-        public virtual Response InputToRoundTrip(InputModel body, CancellationToken cancellationToken = default)
+        /// <include file="Docs/UsageClient.xml" path="doc/members/member[@name='InputToInputOutput(InputModel,CancellationToken)']/*" />
+        public virtual Response InputToInputOutput(InputModel body, CancellationToken cancellationToken = default)
         {
             Argument.AssertNotNull(body, nameof(body));
 
             RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = InputToRoundTrip(body.ToRequestContent(), context);
+            Response response = InputToInputOutput(body.ToRequestContent(), context);
             return response;
         }
 
@@ -106,7 +106,7 @@ namespace _Specs_.Azure.ClientGenerator.Core.Usage
         /// </item>
         /// <item>
         /// <description>
-        /// Please try the simpler <see cref="InputToRoundTripAsync(InputModel,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// Please try the simpler <see cref="InputToInputOutputAsync(InputModel,CancellationToken)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>
@@ -116,16 +116,16 @@ namespace _Specs_.Azure.ClientGenerator.Core.Usage
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/UsageClient.xml" path="doc/members/member[@name='InputToRoundTripAsync(RequestContent,RequestContext)']/*" />
-        public virtual async Task<Response> InputToRoundTripAsync(RequestContent content, RequestContext context = null)
+        /// <include file="Docs/UsageClient.xml" path="doc/members/member[@name='InputToInputOutputAsync(RequestContent,RequestContext)']/*" />
+        public virtual async Task<Response> InputToInputOutputAsync(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
 
-            using var scope = ClientDiagnostics.CreateScope("UsageClient.InputToRoundTrip");
+            using var scope = ClientDiagnostics.CreateScope("UsageClient.InputToInputOutput");
             scope.Start();
             try
             {
-                using HttpMessage message = CreateInputToRoundTripRequest(content, context);
+                using HttpMessage message = CreateInputToInputOutputRequest(content, context);
                 return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -150,7 +150,7 @@ namespace _Specs_.Azure.ClientGenerator.Core.Usage
         /// </item>
         /// <item>
         /// <description>
-        /// Please try the simpler <see cref="InputToRoundTrip(InputModel,CancellationToken)"/> convenience overload with strongly typed models first.
+        /// Please try the simpler <see cref="InputToInputOutput(InputModel,CancellationToken)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>
@@ -160,16 +160,16 @@ namespace _Specs_.Azure.ClientGenerator.Core.Usage
         /// <exception cref="ArgumentNullException"> <paramref name="content"/> is null. </exception>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/UsageClient.xml" path="doc/members/member[@name='InputToRoundTrip(RequestContent,RequestContext)']/*" />
-        public virtual Response InputToRoundTrip(RequestContent content, RequestContext context = null)
+        /// <include file="Docs/UsageClient.xml" path="doc/members/member[@name='InputToInputOutput(RequestContent,RequestContext)']/*" />
+        public virtual Response InputToInputOutput(RequestContent content, RequestContext context = null)
         {
             Argument.AssertNotNull(content, nameof(content));
 
-            using var scope = ClientDiagnostics.CreateScope("UsageClient.InputToRoundTrip");
+            using var scope = ClientDiagnostics.CreateScope("UsageClient.InputToInputOutput");
             scope.Start();
             try
             {
-                using HttpMessage message = CreateInputToRoundTripRequest(content, context);
+                using HttpMessage message = CreateInputToInputOutputRequest(content, context);
                 return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
@@ -188,11 +188,11 @@ namespace _Specs_.Azure.ClientGenerator.Core.Usage
         /// ```
         /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <include file="Docs/UsageClient.xml" path="doc/members/member[@name='OutputToRoundTripAsync(CancellationToken)']/*" />
-        public virtual async Task<Response<OutputModel>> OutputToRoundTripAsync(CancellationToken cancellationToken = default)
+        /// <include file="Docs/UsageClient.xml" path="doc/members/member[@name='OutputToInputOutputAsync(CancellationToken)']/*" />
+        public virtual async Task<Response<OutputModel>> OutputToInputOutputAsync(CancellationToken cancellationToken = default)
         {
             RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = await OutputToRoundTripAsync(context).ConfigureAwait(false);
+            Response response = await OutputToInputOutputAsync(context).ConfigureAwait(false);
             return Response.FromValue(OutputModel.FromResponse(response), response);
         }
 
@@ -205,11 +205,11 @@ namespace _Specs_.Azure.ClientGenerator.Core.Usage
         /// ```
         /// </summary>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        /// <include file="Docs/UsageClient.xml" path="doc/members/member[@name='OutputToRoundTrip(CancellationToken)']/*" />
-        public virtual Response<OutputModel> OutputToRoundTrip(CancellationToken cancellationToken = default)
+        /// <include file="Docs/UsageClient.xml" path="doc/members/member[@name='OutputToInputOutput(CancellationToken)']/*" />
+        public virtual Response<OutputModel> OutputToInputOutput(CancellationToken cancellationToken = default)
         {
             RequestContext context = FromCancellationToken(cancellationToken);
-            Response response = OutputToRoundTrip(context);
+            Response response = OutputToInputOutput(context);
             return Response.FromValue(OutputModel.FromResponse(response), response);
         }
 
@@ -228,7 +228,7 @@ namespace _Specs_.Azure.ClientGenerator.Core.Usage
         /// </item>
         /// <item>
         /// <description>
-        /// Please try the simpler <see cref="OutputToRoundTripAsync(CancellationToken)"/> convenience overload with strongly typed models first.
+        /// Please try the simpler <see cref="OutputToInputOutputAsync(CancellationToken)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>
@@ -236,14 +236,14 @@ namespace _Specs_.Azure.ClientGenerator.Core.Usage
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/UsageClient.xml" path="doc/members/member[@name='OutputToRoundTripAsync(RequestContext)']/*" />
-        public virtual async Task<Response> OutputToRoundTripAsync(RequestContext context)
+        /// <include file="Docs/UsageClient.xml" path="doc/members/member[@name='OutputToInputOutputAsync(RequestContext)']/*" />
+        public virtual async Task<Response> OutputToInputOutputAsync(RequestContext context)
         {
-            using var scope = ClientDiagnostics.CreateScope("UsageClient.OutputToRoundTrip");
+            using var scope = ClientDiagnostics.CreateScope("UsageClient.OutputToInputOutput");
             scope.Start();
             try
             {
-                using HttpMessage message = CreateOutputToRoundTripRequest(context);
+                using HttpMessage message = CreateOutputToInputOutputRequest(context);
                 return await _pipeline.ProcessMessageAsync(message, context).ConfigureAwait(false);
             }
             catch (Exception e)
@@ -268,7 +268,7 @@ namespace _Specs_.Azure.ClientGenerator.Core.Usage
         /// </item>
         /// <item>
         /// <description>
-        /// Please try the simpler <see cref="OutputToRoundTrip(CancellationToken)"/> convenience overload with strongly typed models first.
+        /// Please try the simpler <see cref="OutputToInputOutput(CancellationToken)"/> convenience overload with strongly typed models first.
         /// </description>
         /// </item>
         /// </list>
@@ -276,14 +276,14 @@ namespace _Specs_.Azure.ClientGenerator.Core.Usage
         /// <param name="context"> The request context, which can override default behaviors of the client pipeline on a per-call basis. </param>
         /// <exception cref="RequestFailedException"> Service returned a non-success status code. </exception>
         /// <returns> The response returned from the service. </returns>
-        /// <include file="Docs/UsageClient.xml" path="doc/members/member[@name='OutputToRoundTrip(RequestContext)']/*" />
-        public virtual Response OutputToRoundTrip(RequestContext context)
+        /// <include file="Docs/UsageClient.xml" path="doc/members/member[@name='OutputToInputOutput(RequestContext)']/*" />
+        public virtual Response OutputToInputOutput(RequestContext context)
         {
-            using var scope = ClientDiagnostics.CreateScope("UsageClient.OutputToRoundTrip");
+            using var scope = ClientDiagnostics.CreateScope("UsageClient.OutputToInputOutput");
             scope.Start();
             try
             {
-                using HttpMessage message = CreateOutputToRoundTripRequest(context);
+                using HttpMessage message = CreateOutputToInputOutputRequest(context);
                 return _pipeline.ProcessMessage(message, context);
             }
             catch (Exception e)
@@ -293,14 +293,14 @@ namespace _Specs_.Azure.ClientGenerator.Core.Usage
             }
         }
 
-        internal HttpMessage CreateInputToRoundTripRequest(RequestContent content, RequestContext context)
+        internal HttpMessage CreateInputToInputOutputRequest(RequestContent content, RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier204);
             var request = message.Request;
             request.Method = RequestMethod.Post;
             var uri = new RawRequestUriBuilder();
             uri.Reset(_endpoint);
-            uri.AppendPath("/azure/client-generator-core/usage/inputToRoundTrip", false);
+            uri.AppendPath("/azure/client-generator-core/usage/inputToInputOutput", false);
             uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
@@ -309,14 +309,14 @@ namespace _Specs_.Azure.ClientGenerator.Core.Usage
             return message;
         }
 
-        internal HttpMessage CreateOutputToRoundTripRequest(RequestContext context)
+        internal HttpMessage CreateOutputToInputOutputRequest(RequestContext context)
         {
             var message = _pipeline.CreateMessage(context, ResponseClassifier200);
             var request = message.Request;
             request.Method = RequestMethod.Get;
             var uri = new RawRequestUriBuilder();
             uri.Reset(_endpoint);
-            uri.AppendPath("/azure/client-generator-core/usage/outputToRoundTrip", false);
+            uri.AppendPath("/azure/client-generator-core/usage/outputToInputOutput", false);
             uri.AppendQuery("api-version", _apiVersion, true);
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
