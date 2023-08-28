@@ -78,5 +78,16 @@ namespace MgmtMockAndSample.Tests.Mock
             {
             }
         }
+
+        [RecordedTest]
+        public async Task GetIfExists()
+        {
+            // Example: ManagedHsmGetPrivateEndpointConnection
+
+            ResourceIdentifier managedHsmResourceId = ManagedHsmResource.CreateResourceIdentifier("00000000-0000-0000-0000-000000000000", "sample-group", "sample-mhsm");
+            ManagedHsmResource managedHsm = GetArmClient().GetManagedHsmResource(managedHsmResourceId);
+            var collection = managedHsm.GetMhsmPrivateEndpointConnections();
+            await collection.GetIfExistsAsync("sample-pec");
+        }
     }
 }

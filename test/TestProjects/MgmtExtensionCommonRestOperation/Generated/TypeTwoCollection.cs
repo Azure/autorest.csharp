@@ -321,6 +321,80 @@ namespace MgmtExtensionCommonRestOperation
             }
         }
 
+        /// <summary>
+        /// Tries to get details for this resource from the service.
+        /// <list type="bullet">
+        /// <item>
+        /// <term>Request Path</term>
+        /// <description>/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.TypeTwo/typeTwos/{typeTwoName}</description>
+        /// </item>
+        /// <item>
+        /// <term>Operation Id</term>
+        /// <description>Common_GetTypeTwo</description>
+        /// </item>
+        /// </list>
+        /// </summary>
+        /// <param name="typeTwoName"> The name. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="typeTwoName"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="typeTwoName"/> is null. </exception>
+        public virtual async Task<NullableResponse<TypeTwoResource>> GetIfExistsAsync(string typeTwoName, CancellationToken cancellationToken = default)
+        {
+            Argument.AssertNotNullOrEmpty(typeTwoName, nameof(typeTwoName));
+
+            using var scope = _typeTwoCommonClientDiagnostics.CreateScope("TypeTwoCollection.GetIfExists");
+            scope.Start();
+            try
+            {
+                var response = await _typeTwoCommonRestClient.GetTypeTwoAsync(Id.SubscriptionId, Id.ResourceGroupName, typeTwoName, cancellationToken: cancellationToken).ConfigureAwait(false);
+                if (response.Value == null)
+                    return new NoValueResponse<TypeTwoResource>(response.GetRawResponse());
+                return Response.FromValue(new TypeTwoResource(Client, response.Value), response.GetRawResponse());
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// Tries to get details for this resource from the service.
+        /// <list type="bullet">
+        /// <item>
+        /// <term>Request Path</term>
+        /// <description>/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.TypeTwo/typeTwos/{typeTwoName}</description>
+        /// </item>
+        /// <item>
+        /// <term>Operation Id</term>
+        /// <description>Common_GetTypeTwo</description>
+        /// </item>
+        /// </list>
+        /// </summary>
+        /// <param name="typeTwoName"> The name. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="typeTwoName"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="typeTwoName"/> is null. </exception>
+        public virtual NullableResponse<TypeTwoResource> GetIfExists(string typeTwoName, CancellationToken cancellationToken = default)
+        {
+            Argument.AssertNotNullOrEmpty(typeTwoName, nameof(typeTwoName));
+
+            using var scope = _typeTwoCommonClientDiagnostics.CreateScope("TypeTwoCollection.GetIfExists");
+            scope.Start();
+            try
+            {
+                var response = _typeTwoCommonRestClient.GetTypeTwo(Id.SubscriptionId, Id.ResourceGroupName, typeTwoName, cancellationToken: cancellationToken);
+                if (response.Value == null)
+                    return new NoValueResponse<TypeTwoResource>(response.GetRawResponse());
+                return Response.FromValue(new TypeTwoResource(Client, response.Value), response.GetRawResponse());
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
         IEnumerator<TypeTwoResource> IEnumerable<TypeTwoResource>.GetEnumerator()
         {
             return GetAll().GetEnumerator();

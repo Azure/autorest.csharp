@@ -321,6 +321,80 @@ namespace MgmtSafeFlatten
             }
         }
 
+        /// <summary>
+        /// Tries to get details for this resource from the service.
+        /// <list type="bullet">
+        /// <item>
+        /// <term>Request Path</term>
+        /// <description>/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.TypeOne/typeOnes/{typeOneName}</description>
+        /// </item>
+        /// <item>
+        /// <term>Operation Id</term>
+        /// <description>Common_GetTypeOne</description>
+        /// </item>
+        /// </list>
+        /// </summary>
+        /// <param name="typeOneName"> The name. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="typeOneName"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="typeOneName"/> is null. </exception>
+        public virtual async Task<NullableResponse<TypeOneResource>> GetIfExistsAsync(string typeOneName, CancellationToken cancellationToken = default)
+        {
+            Argument.AssertNotNullOrEmpty(typeOneName, nameof(typeOneName));
+
+            using var scope = _typeOneCommonClientDiagnostics.CreateScope("TypeOneCollection.GetIfExists");
+            scope.Start();
+            try
+            {
+                var response = await _typeOneCommonRestClient.GetTypeOneAsync(Id.SubscriptionId, Id.ResourceGroupName, typeOneName, cancellationToken: cancellationToken).ConfigureAwait(false);
+                if (response.Value == null)
+                    return new NoValueResponse<TypeOneResource>(response.GetRawResponse());
+                return Response.FromValue(new TypeOneResource(Client, response.Value), response.GetRawResponse());
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// Tries to get details for this resource from the service.
+        /// <list type="bullet">
+        /// <item>
+        /// <term>Request Path</term>
+        /// <description>/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.TypeOne/typeOnes/{typeOneName}</description>
+        /// </item>
+        /// <item>
+        /// <term>Operation Id</term>
+        /// <description>Common_GetTypeOne</description>
+        /// </item>
+        /// </list>
+        /// </summary>
+        /// <param name="typeOneName"> The name. </param>
+        /// <param name="cancellationToken"> The cancellation token to use. </param>
+        /// <exception cref="ArgumentException"> <paramref name="typeOneName"/> is an empty string, and was expected to be non-empty. </exception>
+        /// <exception cref="ArgumentNullException"> <paramref name="typeOneName"/> is null. </exception>
+        public virtual NullableResponse<TypeOneResource> GetIfExists(string typeOneName, CancellationToken cancellationToken = default)
+        {
+            Argument.AssertNotNullOrEmpty(typeOneName, nameof(typeOneName));
+
+            using var scope = _typeOneCommonClientDiagnostics.CreateScope("TypeOneCollection.GetIfExists");
+            scope.Start();
+            try
+            {
+                var response = _typeOneCommonRestClient.GetTypeOne(Id.SubscriptionId, Id.ResourceGroupName, typeOneName, cancellationToken: cancellationToken);
+                if (response.Value == null)
+                    return new NoValueResponse<TypeOneResource>(response.GetRawResponse());
+                return Response.FromValue(new TypeOneResource(Client, response.Value), response.GetRawResponse());
+            }
+            catch (Exception e)
+            {
+                scope.Failed(e);
+                throw;
+            }
+        }
+
         IEnumerator<TypeOneResource> IEnumerable<TypeOneResource>.GetEnumerator()
         {
             return GetAll().GetEnumerator();

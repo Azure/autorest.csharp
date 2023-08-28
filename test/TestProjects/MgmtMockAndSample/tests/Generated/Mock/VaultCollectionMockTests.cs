@@ -132,5 +132,16 @@ new VirtualNetworkRule("/subscriptions/subid/resourceGroups/rg1/providers/Micros
             {
             }
         }
+
+        [RecordedTest]
+        public async Task GetIfExists()
+        {
+            // Example: Retrieve a vault
+
+            ResourceIdentifier resourceGroupResourceId = ResourceGroupResource.CreateResourceIdentifier("00000000-0000-0000-0000-000000000000", "sample-resource-group");
+            ResourceGroupResource resourceGroupResource = GetArmClient().GetResourceGroupResource(resourceGroupResourceId);
+            var collection = resourceGroupResource.GetVaults();
+            await collection.GetIfExistsAsync("sample-vault");
+        }
     }
 }

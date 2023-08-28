@@ -285,5 +285,16 @@ DestinationPorts =
             {
             }
         }
+
+        [RecordedTest]
+        public async Task GetIfExists()
+        {
+            // Example: Get FirewallPolicy
+
+            ResourceIdentifier resourceGroupResourceId = ResourceGroupResource.CreateResourceIdentifier("00000000-0000-0000-0000-000000000000", "rg1");
+            ResourceGroupResource resourceGroupResource = GetArmClient().GetResourceGroupResource(resourceGroupResourceId);
+            var collection = resourceGroupResource.GetFirewallPolicies();
+            await collection.GetIfExistsAsync("firewallPolicy");
+        }
     }
 }
