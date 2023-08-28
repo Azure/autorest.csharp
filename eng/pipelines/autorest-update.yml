@@ -24,13 +24,7 @@ jobs:
       - checkout: self
         fetchDepth: 1
       - checkout: azure-sdk-tools
-        fetchDepth: 1      
-      - script: |
-          gh pr checkout $(System.PullRequest.PullRequestNumber)
-        env:
-          GH_TOKEN: $(azuresdk-github-pat)
-        displayName: 'Check out PR branch'
-        workingDirectory: $(Build.SourcesDirectory)/autorest.csharp
+        fetchDepth: 1
       - task: UseDotNet@2
         displayName: 'Use .NET Core SDK'
         retryCountOnTaskFailure: 3
