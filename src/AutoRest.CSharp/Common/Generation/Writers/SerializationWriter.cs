@@ -164,7 +164,7 @@ namespace AutoRest.CSharp.Generation.Writers
         private static void WiteXmlSerializeImplementation(CodeWriter writer, XmlObjectSerialization serialization, CSharpType modelSerializableType)
         {
             CodeWriterDeclaration nameHint = new CodeWriterDeclaration("nameHint");
-            writer.Append($"private void Serialize({typeof(XmlWriter)} writer, {typeof(string)} nameHint, {typeof(ModelSerializerOptions)} options)");
+            writer.Append($"private void Serialize({typeof(XmlWriter)} writer, {typeof(string)} {nameHint:D}, {typeof(ModelSerializerOptions)} options)");
             using (writer.Scope())
             {
                 writer.ToSerializeCall(serialization, nameHint);
