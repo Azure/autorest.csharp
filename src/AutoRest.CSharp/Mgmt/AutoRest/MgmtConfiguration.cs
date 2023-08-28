@@ -265,7 +265,7 @@ namespace AutoRest.CSharp.Input
                 operationPositions: autoRest.GetValue<JsonElement?>("operation-positions").GetAwaiter().GetResult(),
                 requestPathToSingletonResource: autoRest.GetValue<JsonElement?>("request-path-to-singleton-resource").GetAwaiter().GetResult(),
                 overrideOperationName: autoRest.GetValue<JsonElement?>("override-operation-name").GetAwaiter().GetResult(),
-                renameRules: autoRest.GetValue<JsonElement?>("acronym-mapping").GetAwaiter().GetResult() ?? autoRest.GetValue<JsonElement?>("rename-rules").GetAwaiter().GetResult(),
+                renameRules: GetAcronymMappingConfig(autoRest),
                 renamePropertyBag: autoRest.GetValue<JsonElement?>("rename-property-bag").GetAwaiter().GetResult(),
                 formatByNameRules: autoRest.GetValue<JsonElement?>("format-by-name-rules").GetAwaiter().GetResult(),
                 renameMapping: autoRest.GetValue<JsonElement?>("rename-mapping").GetAwaiter().GetResult(),
@@ -281,6 +281,16 @@ namespace AutoRest.CSharp.Input
                 patchInitializerCustomization: autoRest.GetValue<JsonElement?>("patch-initializer-customization").GetAwaiter().GetResult(),
                 partialResources: autoRest.GetValue<JsonElement?>("partial-resources").GetAwaiter().GetResult(),
                 operationsToLroApiVersionOverride: autoRest.GetValue<JsonElement?>("operations-to-lro-api-version-override").GetAwaiter().GetResult());
+        }
+
+        private static JsonElement? GetAcronymMappingConfig(IPluginCommunication autoRest)
+        {
+            var newValue = autoRest.GetValue<JsonElement?>("acronym-mapping").GetAwaiter().GetResult();
+            // acronym-mapping was renamed from rename-rules, so fallback to check rename-rules if acronym-mapping is not available
+            if (newValue == null || !newValue.HasValue || newValue.Value.ValueKind == JsonValueKind.Null)
+                return autoRest.GetValue<JsonElement?>("rename-rules").GetAwaiter().GetResult();
+            else
+                return newValue;
         }
 
         internal void SaveConfiguration(Utf8JsonWriter writer)
