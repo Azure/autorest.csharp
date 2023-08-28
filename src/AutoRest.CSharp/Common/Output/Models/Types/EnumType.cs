@@ -34,7 +34,7 @@ namespace AutoRest.CSharp.Output.Models.Types
         }
 
         public EnumType(InputEnumType input, string defaultNamespace, string defaultAccessibility, TypeFactory typeFactory, SourceInputModel? sourceInputModel)
-            : base(input.Namespace ?? defaultNamespace, sourceInputModel)
+            : base(Configuration.Generation1ConvenienceClient ? input.Namespace ?? defaultNamespace : defaultNamespace, sourceInputModel)
         {
             _allowedValues = input.AllowedValues;
             _typeFactory = typeFactory;
