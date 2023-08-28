@@ -131,7 +131,7 @@ namespace AutoRest.CSharp.Common.Input
             IsRequired: input.IsRequired,
             GroupedBy: input.GroupedBy != null ? _parametersCache[input.GroupedBy]() : null,
             Kind: GetOperationParameterKind(input),
-            IsApiVersion: input.Origin == "modelerfour:synthesized/api-version",
+            IsApiVersion: input.IsApiVersion,
             IsResourceParameter: Convert.ToBoolean(input.Extensions.GetValue<string>("x-ms-resource-identifier")),
             IsContentType: input.Origin == "modelerfour:synthesized/content-type",
             IsEndpoint: input.Origin == "modelerfour:synthesized/host",
@@ -139,7 +139,8 @@ namespace AutoRest.CSharp.Common.Input
             Explode: input.Protocol.Http is HttpParameter { Explode: true },
             SkipUrlEncoding: input.Extensions?.SkipEncoding ?? false,
             HeaderCollectionPrefix: input.Extensions?.HeaderCollectionPrefix,
-            VirtualParameter: input is VirtualParameter { Schema: not ConstantSchema } vp ? vp : null,
+            VirtualParameter: input is VirtualParameter vp &&
+                (vp is { Schema: not ConstantSchema } or { Required: not true }) ? vp : null, // optional constant parameter can be virtual parameter
             SerializationFormat: BuilderHelpers.GetSerializationFormat(input.Schema)
         );
 
@@ -269,7 +270,8 @@ namespace AutoRest.CSharp.Common.Input
         public static InputOperationParameterKind GetOperationParameterKind(RequestParameter input) => input switch
         {
             { Implementation: ImplementationLocation.Client } => InputOperationParameterKind.Client,
-            { Schema: ConstantSchema } => InputOperationParameterKind.Constant,
+            { Schema: ConstantSchema, IsRequired: true } => InputOperationParameterKind.Constant, // only required constant parameter can be Constant kind
+                                                                                                  // which will be optimized to disappear from method signature
 
             // Grouped and flattened parameters shouldn't be added to methods
             { IsFlattened: true } => InputOperationParameterKind.Flattened,

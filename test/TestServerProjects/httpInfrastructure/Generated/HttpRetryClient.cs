@@ -72,14 +72,15 @@ namespace httpInfrastructure
         }
 
         /// <summary> Return 500 status code, then 200 after retry. </summary>
+        /// <param name="booleanValue"> Simple boolean value true. The default value is True. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response> Put500Async(CancellationToken cancellationToken = default)
+        public virtual async Task<Response> Put500Async(bool? booleanValue = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("HttpRetryClient.Put500");
             scope.Start();
             try
             {
-                return await RestClient.Put500Async(cancellationToken).ConfigureAwait(false);
+                return await RestClient.Put500Async(booleanValue, cancellationToken).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -89,14 +90,15 @@ namespace httpInfrastructure
         }
 
         /// <summary> Return 500 status code, then 200 after retry. </summary>
+        /// <param name="booleanValue"> Simple boolean value true. The default value is True. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response Put500(CancellationToken cancellationToken = default)
+        public virtual Response Put500(bool? booleanValue = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("HttpRetryClient.Put500");
             scope.Start();
             try
             {
-                return RestClient.Put500(cancellationToken);
+                return RestClient.Put500(booleanValue, cancellationToken);
             }
             catch (Exception e)
             {
@@ -106,14 +108,15 @@ namespace httpInfrastructure
         }
 
         /// <summary> Return 500 status code, then 200 after retry. </summary>
+        /// <param name="booleanValue"> Simple boolean value true. The default value is True. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response> Patch500Async(CancellationToken cancellationToken = default)
+        public virtual async Task<Response> Patch500Async(bool? booleanValue = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("HttpRetryClient.Patch500");
             scope.Start();
             try
             {
-                return await RestClient.Patch500Async(cancellationToken).ConfigureAwait(false);
+                return await RestClient.Patch500Async(booleanValue, cancellationToken).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -123,14 +126,15 @@ namespace httpInfrastructure
         }
 
         /// <summary> Return 500 status code, then 200 after retry. </summary>
+        /// <param name="booleanValue"> Simple boolean value true. The default value is True. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response Patch500(CancellationToken cancellationToken = default)
+        public virtual Response Patch500(bool? booleanValue = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("HttpRetryClient.Patch500");
             scope.Start();
             try
             {
-                return RestClient.Patch500(cancellationToken);
+                return RestClient.Patch500(booleanValue, cancellationToken);
             }
             catch (Exception e)
             {
@@ -208,14 +212,15 @@ namespace httpInfrastructure
         }
 
         /// <summary> Return 503 status code, then 200 after retry. </summary>
+        /// <param name="booleanValue"> Simple boolean value true. The default value is True. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response> Post503Async(CancellationToken cancellationToken = default)
+        public virtual async Task<Response> Post503Async(bool? booleanValue = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("HttpRetryClient.Post503");
             scope.Start();
             try
             {
-                return await RestClient.Post503Async(cancellationToken).ConfigureAwait(false);
+                return await RestClient.Post503Async(booleanValue, cancellationToken).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -225,14 +230,15 @@ namespace httpInfrastructure
         }
 
         /// <summary> Return 503 status code, then 200 after retry. </summary>
+        /// <param name="booleanValue"> Simple boolean value true. The default value is True. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response Post503(CancellationToken cancellationToken = default)
+        public virtual Response Post503(bool? booleanValue = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("HttpRetryClient.Post503");
             scope.Start();
             try
             {
-                return RestClient.Post503(cancellationToken);
+                return RestClient.Post503(booleanValue, cancellationToken);
             }
             catch (Exception e)
             {
@@ -242,14 +248,15 @@ namespace httpInfrastructure
         }
 
         /// <summary> Return 503 status code, then 200 after retry. </summary>
+        /// <param name="booleanValue"> Simple boolean value true. The default value is True. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response> Delete503Async(CancellationToken cancellationToken = default)
+        public virtual async Task<Response> Delete503Async(bool? booleanValue = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("HttpRetryClient.Delete503");
             scope.Start();
             try
             {
-                return await RestClient.Delete503Async(cancellationToken).ConfigureAwait(false);
+                return await RestClient.Delete503Async(booleanValue, cancellationToken).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -259,14 +266,15 @@ namespace httpInfrastructure
         }
 
         /// <summary> Return 503 status code, then 200 after retry. </summary>
+        /// <param name="booleanValue"> Simple boolean value true. The default value is True. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response Delete503(CancellationToken cancellationToken = default)
+        public virtual Response Delete503(bool? booleanValue = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("HttpRetryClient.Delete503");
             scope.Start();
             try
             {
-                return RestClient.Delete503(cancellationToken);
+                return RestClient.Delete503(booleanValue, cancellationToken);
             }
             catch (Exception e)
             {
@@ -276,14 +284,15 @@ namespace httpInfrastructure
         }
 
         /// <summary> Return 504 status code, then 200 after retry. </summary>
+        /// <param name="booleanValue"> Simple boolean value true. The default value is True. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response> Put504Async(CancellationToken cancellationToken = default)
+        public virtual async Task<Response> Put504Async(bool? booleanValue = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("HttpRetryClient.Put504");
             scope.Start();
             try
             {
-                return await RestClient.Put504Async(cancellationToken).ConfigureAwait(false);
+                return await RestClient.Put504Async(booleanValue, cancellationToken).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -293,14 +302,15 @@ namespace httpInfrastructure
         }
 
         /// <summary> Return 504 status code, then 200 after retry. </summary>
+        /// <param name="booleanValue"> Simple boolean value true. The default value is True. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response Put504(CancellationToken cancellationToken = default)
+        public virtual Response Put504(bool? booleanValue = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("HttpRetryClient.Put504");
             scope.Start();
             try
             {
-                return RestClient.Put504(cancellationToken);
+                return RestClient.Put504(booleanValue, cancellationToken);
             }
             catch (Exception e)
             {
@@ -310,14 +320,15 @@ namespace httpInfrastructure
         }
 
         /// <summary> Return 504 status code, then 200 after retry. </summary>
+        /// <param name="booleanValue"> Simple boolean value true. The default value is True. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual async Task<Response> Patch504Async(CancellationToken cancellationToken = default)
+        public virtual async Task<Response> Patch504Async(bool? booleanValue = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("HttpRetryClient.Patch504");
             scope.Start();
             try
             {
-                return await RestClient.Patch504Async(cancellationToken).ConfigureAwait(false);
+                return await RestClient.Patch504Async(booleanValue, cancellationToken).ConfigureAwait(false);
             }
             catch (Exception e)
             {
@@ -327,14 +338,15 @@ namespace httpInfrastructure
         }
 
         /// <summary> Return 504 status code, then 200 after retry. </summary>
+        /// <param name="booleanValue"> Simple boolean value true. The default value is True. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
-        public virtual Response Patch504(CancellationToken cancellationToken = default)
+        public virtual Response Patch504(bool? booleanValue = null, CancellationToken cancellationToken = default)
         {
             using var scope = _clientDiagnostics.CreateScope("HttpRetryClient.Patch504");
             scope.Start();
             try
             {
-                return RestClient.Patch504(cancellationToken);
+                return RestClient.Patch504(booleanValue, cancellationToken);
             }
             catch (Exception e)
             {

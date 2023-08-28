@@ -36,7 +36,7 @@ namespace HlcConstants
             _endpoint = endpoint ?? new Uri("http://localhost:3000");
         }
 
-        internal HttpMessage CreateMixedRequest(RoundTripModel value)
+        internal HttpMessage CreateMixedRequest(RoundTripModel value, StringConstant? optionalStringQuery, bool? optionalBooleanQuery)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -46,8 +46,14 @@ namespace HlcConstants
             uri.AppendPath("/op", false);
             uri.AppendQuery("required-string-query", "default", true);
             uri.AppendQuery("required-boolean-query", true, true);
-            uri.AppendQuery("optional-string-query", StringConstant.Default.ToString(), true);
-            uri.AppendQuery("optional-boolean-query", true, true);
+            if (optionalStringQuery != null)
+            {
+                uri.AppendQuery("optional-string-query", optionalStringQuery.Value.ToString(), true);
+            }
+            if (optionalBooleanQuery != null)
+            {
+                uri.AppendQuery("optional-boolean-query", optionalBooleanQuery.Value, true);
+            }
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
@@ -58,16 +64,18 @@ namespace HlcConstants
         }
 
         /// <param name="value"> The RoundTripModel to use. </param>
+        /// <param name="optionalStringQuery"> The Literal to use. The default value is AutoRest.CSharp.Output.Models.Types.EnumTypeValue. </param>
+        /// <param name="optionalBooleanQuery"> The Literal to use. The default value is True. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="value"/> is null. </exception>
-        public async Task<Response<RoundTripModel>> MixedAsync(RoundTripModel value, CancellationToken cancellationToken = default)
+        public async Task<Response<RoundTripModel>> MixedAsync(RoundTripModel value, StringConstant? optionalStringQuery = null, bool? optionalBooleanQuery = null, CancellationToken cancellationToken = default)
         {
             if (value == null)
             {
                 throw new ArgumentNullException(nameof(value));
             }
 
-            using var message = CreateMixedRequest(value);
+            using var message = CreateMixedRequest(value, optionalStringQuery, optionalBooleanQuery);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
             switch (message.Response.Status)
             {
@@ -84,16 +92,18 @@ namespace HlcConstants
         }
 
         /// <param name="value"> The RoundTripModel to use. </param>
+        /// <param name="optionalStringQuery"> The Literal to use. The default value is AutoRest.CSharp.Output.Models.Types.EnumTypeValue. </param>
+        /// <param name="optionalBooleanQuery"> The Literal to use. The default value is True. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="value"/> is null. </exception>
-        public Response<RoundTripModel> Mixed(RoundTripModel value, CancellationToken cancellationToken = default)
+        public Response<RoundTripModel> Mixed(RoundTripModel value, StringConstant? optionalStringQuery = null, bool? optionalBooleanQuery = null, CancellationToken cancellationToken = default)
         {
             if (value == null)
             {
                 throw new ArgumentNullException(nameof(value));
             }
 
-            using var message = CreateMixedRequest(value);
+            using var message = CreateMixedRequest(value, optionalStringQuery, optionalBooleanQuery);
             _pipeline.Send(message, cancellationToken);
             switch (message.Response.Status)
             {
@@ -109,7 +119,7 @@ namespace HlcConstants
             }
         }
 
-        internal HttpMessage CreatePostSomethingRequest(RoundTripModel value)
+        internal HttpMessage CreatePostSomethingRequest(RoundTripModel value, IntConstant? optionalIntQuery, FloatConstant? optionalFloatQuery)
         {
             var message = _pipeline.CreateMessage();
             var request = message.Request;
@@ -119,8 +129,14 @@ namespace HlcConstants
             uri.AppendPath("/op2", false);
             uri.AppendQuery("required-int-query", 0, true);
             uri.AppendQuery("required-float-query", 3.14F, true);
-            uri.AppendQuery("optional-int-query", IntConstant._0.ToSerialInt32(), true);
-            uri.AppendQuery("optional-float-query", FloatConstant._314.ToSerialSingle(), true);
+            if (optionalIntQuery != null)
+            {
+                uri.AppendQuery("optional-int-query", optionalIntQuery.Value.ToSerialInt32(), true);
+            }
+            if (optionalFloatQuery != null)
+            {
+                uri.AppendQuery("optional-float-query", optionalFloatQuery.Value.ToSerialSingle(), true);
+            }
             request.Uri = uri;
             request.Headers.Add("Accept", "application/json");
             request.Headers.Add("Content-Type", "application/json");
@@ -131,16 +147,18 @@ namespace HlcConstants
         }
 
         /// <param name="value"> The RoundTripModel to use. </param>
+        /// <param name="optionalIntQuery"> The Literal to use. The default value is AutoRest.CSharp.Output.Models.Types.EnumTypeValue. </param>
+        /// <param name="optionalFloatQuery"> The Literal to use. The default value is AutoRest.CSharp.Output.Models.Types.EnumTypeValue. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="value"/> is null. </exception>
-        public async Task<Response<RoundTripModel>> PostSomethingAsync(RoundTripModel value, CancellationToken cancellationToken = default)
+        public async Task<Response<RoundTripModel>> PostSomethingAsync(RoundTripModel value, IntConstant? optionalIntQuery = null, FloatConstant? optionalFloatQuery = null, CancellationToken cancellationToken = default)
         {
             if (value == null)
             {
                 throw new ArgumentNullException(nameof(value));
             }
 
-            using var message = CreatePostSomethingRequest(value);
+            using var message = CreatePostSomethingRequest(value, optionalIntQuery, optionalFloatQuery);
             await _pipeline.SendAsync(message, cancellationToken).ConfigureAwait(false);
             switch (message.Response.Status)
             {
@@ -157,16 +175,18 @@ namespace HlcConstants
         }
 
         /// <param name="value"> The RoundTripModel to use. </param>
+        /// <param name="optionalIntQuery"> The Literal to use. The default value is AutoRest.CSharp.Output.Models.Types.EnumTypeValue. </param>
+        /// <param name="optionalFloatQuery"> The Literal to use. The default value is AutoRest.CSharp.Output.Models.Types.EnumTypeValue. </param>
         /// <param name="cancellationToken"> The cancellation token to use. </param>
         /// <exception cref="ArgumentNullException"> <paramref name="value"/> is null. </exception>
-        public Response<RoundTripModel> PostSomething(RoundTripModel value, CancellationToken cancellationToken = default)
+        public Response<RoundTripModel> PostSomething(RoundTripModel value, IntConstant? optionalIntQuery = null, FloatConstant? optionalFloatQuery = null, CancellationToken cancellationToken = default)
         {
             if (value == null)
             {
                 throw new ArgumentNullException(nameof(value));
             }
 
-            using var message = CreatePostSomethingRequest(value);
+            using var message = CreatePostSomethingRequest(value, optionalIntQuery, optionalFloatQuery);
             _pipeline.Send(message, cancellationToken);
             switch (message.Response.Status)
             {
