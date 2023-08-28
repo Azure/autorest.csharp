@@ -86,14 +86,14 @@ namespace AutoRest.TestServer.Tests
         public void DeserializeInputModel()
         {
             string jsonString = @"{""Input_Model_Property"": ""test_str""}";
-            Assert.That(() => JsonSerializer.Deserialize<InputModel>(jsonString), Throws.InstanceOf<NotImplementedException>());
+            JsonSerializer.Deserialize<InputModel>(jsonString);
         }
 
         [Test]
         public void SerializeOutputModel()
         {
             var model = new OutputModel("test_str", default);
-            Assert.That(() => JsonSerializer.Serialize(model), Throws.InstanceOf<NotImplementedException>());
+            JsonSerializer.Serialize(model);
         }
 
         [Test]

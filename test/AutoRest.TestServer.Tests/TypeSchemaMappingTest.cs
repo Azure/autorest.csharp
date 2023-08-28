@@ -201,7 +201,7 @@ namespace AutoRest.TestServer.Tests
             Assert.NotNull(type.GetMethod("Deserialize" + type.Name,
                 BindingFlags.Static | BindingFlags.NonPublic,
                 null,
-                new[] { typeof(XElement) },
+                new[] { typeof(XElement), typeof(ModelSerializerOptions) },
                 null));
         }
 

@@ -415,7 +415,7 @@ namespace AutoRest.TestServer.Tests
         public void ReadOnlyPropertyTypesOfMixedModelIsOutputOnly()
         {
             Assert.True(typeof(ReadonlyModel).IsPublic);
-            Assert.False(typeof(IUtf8JsonSerializable).IsAssignableFrom(typeof(ReadonlyModel)));
+            Assert.True(typeof(IUtf8JsonSerializable).IsAssignableFrom(typeof(ReadonlyModel)));
             Assert.NotNull(typeof(ReadonlyModel).GetMethod("DeserializeReadonlyModel", BindingFlags.Static | BindingFlags.NonPublic));
         }
 
@@ -434,7 +434,7 @@ namespace AutoRest.TestServer.Tests
         public void ModelsFlattenedIntoParametersAreInternal()
         {
             Assert.False(typeof(ParametersModel).IsPublic);
-            Assert.False(typeof(IUtf8JsonSerializable).IsAssignableFrom(typeof(ReadonlyModel)));
+            Assert.True(typeof(IUtf8JsonSerializable).IsAssignableFrom(typeof(ReadonlyModel)));
             Assert.Null(typeof(ReadonlyModel).GetMethod("DeserializeParametersModel", BindingFlags.Static | BindingFlags.NonPublic));
         }
 

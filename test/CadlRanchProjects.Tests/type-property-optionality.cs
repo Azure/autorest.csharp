@@ -146,8 +146,9 @@ namespace CadlRanchProjects.Tests
         public Task Type_Property_Optional_CollectionsByte_getAll() => Test(async (host) =>
         {
             Response response = await new OptionalClient(host, null).GetCollectionsByteClient().GetAllAsync(new RequestContext());
-            Assert.AreEqual(BinaryData.FromString("hello, world!").ToString(), ((CollectionsByteProperty)response).Property[0].ToString());
-            Assert.AreEqual(BinaryData.FromString("hello, world!").ToString(), ((CollectionsByteProperty)response).Property[1].ToString());
+            CollectionsByteProperty modelResponse = (CollectionsByteProperty)response;
+            Assert.AreEqual(BinaryData.FromString("hello, world!").ToString(), modelResponse.Property[0].ToString());
+            Assert.AreEqual(BinaryData.FromString("hello, world!").ToString(), modelResponse.Property[1].ToString());
         });
 
         [Test]

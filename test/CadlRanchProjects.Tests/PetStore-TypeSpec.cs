@@ -24,8 +24,9 @@ namespace CadlRanchProjects.Tests
         {
             Response response = await new PetStoreClient(host, null).ReadAsync(1, new RequestContext());
             Assert.AreEqual(200, response.Status);
-            Assert.AreEqual(12, ((Pet)response).Age);
-            Assert.AreEqual("dog", ((Pet)response).Name);
+            Pet responsePet = (Pet)response;
+            Assert.AreEqual(12, responsePet.Age);
+            Assert.AreEqual("dog", responsePet.Name);
         });
 
         [Test]
@@ -43,8 +44,9 @@ namespace CadlRanchProjects.Tests
             Pet pet = new("dog", 12);
             Response response = await new PetStoreClient(host, null).GetPetByKindAsync("dog");
             Assert.AreEqual(200, response.Status);
-            Assert.AreEqual(12, ((Pet)response).Age);
-            Assert.AreEqual("dog", ((Pet)response).Name);
+            Pet responsePet = (Pet)response;
+            Assert.AreEqual(12, responsePet.Age);
+            Assert.AreEqual("dog", responsePet.Name);
         });
 
         [Test]
@@ -53,8 +55,9 @@ namespace CadlRanchProjects.Tests
             Pet pet = new("dog", 12);
             Response response = await new PetStoreClient(host, null).GetFirstPetAsync(1, new RequestContext());
             Assert.AreEqual(200, response.Status);
-            Assert.AreEqual(12, ((Pet)response).Age);
-            Assert.AreEqual("dog", ((Pet)response).Name);
+            Pet responsePet = (Pet)response;
+            Assert.AreEqual(12, responsePet.Age);
+            Assert.AreEqual("dog", responsePet.Name);
         });
 
         [Test]
