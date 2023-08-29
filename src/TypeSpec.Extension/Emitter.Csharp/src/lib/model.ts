@@ -276,8 +276,7 @@ export function getInputType(
     formattedType: FormattedType,
     models: Map<string, InputModelType>,
     enums: Map<string, InputEnumType>,
-    literalTypeContext?: LiteralTypeContext,
-    parentType?: Type
+    literalTypeContext?: LiteralTypeContext
 ): InputType {
     const type = formattedType.type;
     logger.debug(`getInputType for kind: ${type.kind}`);
@@ -289,11 +288,7 @@ export function getInputType(
         type.kind === "Number" ||
         type.kind === "Boolean"
     ) {
-        return getInputLiteralType(
-            formattedType,
-            literalTypeContext,
-            parentType
-        );
+        return getInputLiteralType(formattedType, literalTypeContext);
     } else if (type.kind === "Enum") {
         return getInputTypeForEnum(type);
     } else if (type.kind === "EnumMember") {
@@ -380,8 +375,7 @@ export function getInputType(
 
     function getInputLiteralType(
         formattedType: FormattedType,
-        literalContext?: LiteralTypeContext,
-        parentType?: Type
+        literalContext?: LiteralTypeContext
     ): InputLiteralType {
         // For literal types, we just want to emit them directly as well.
         const type = formattedType.type;
@@ -397,7 +391,7 @@ export function getInputType(
             IsNullable: false
         } as InputPrimitiveType;
         const literalValue = getDefaultValue(type);
-        const newValueType = getLiteralValueType(parentType);
+        const newValueType = getLiteralValueType();
 
         if (isInputEnumType(newValueType)) {
             enums.set(newValueType.Name, newValueType);
@@ -410,9 +404,7 @@ export function getInputType(
             IsNullable: false
         } as InputLiteralType;
 
-        function getLiteralValueType(
-            parentType?: Type
-        ): InputPrimitiveType | InputEnumType {
+        function getLiteralValueType(): InputPrimitiveType | InputEnumType {
             // we will not wrap it if it comes from outside a model or it is a boolean
             if (literalContext === undefined || rawValueType.Kind === "Boolean")
                 return rawValueType;
@@ -610,7 +602,6 @@ export function getInputType(
     }
 
     function addModelProperties(
-        source: Model,
         model: InputModelType,
         inputProperties: Map<string, ModelProperty>,
         outputProperties: InputModelProperty[]
@@ -644,8 +635,7 @@ export function getInputType(
                     getFormattedType(program, value),
                     models,
                     enums,
-                    literalTypeContext,
-                    source
+                    literalTypeContext
                 );
                 if (
                     model.Namespace === "Azure.Core.Foundations" &&
