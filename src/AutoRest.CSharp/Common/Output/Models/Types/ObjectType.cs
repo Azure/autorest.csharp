@@ -57,7 +57,8 @@ namespace AutoRest.CSharp.Output.Models.Types
         public Parameter? RawDataParam => _rawDataParam ??= EnsureRawDataParam();
 
         public bool IsStruct => ExistingType?.IsValueType ?? false;
-        public ObjectTypeConstructor[] Constructors => _constructors ??= BuildConstructors().ToArray();
+        public ObjectTypeConstructor[] Constructors => _constructors ??= BuildConstructorsCore().ToArray();
+
         public ObjectTypeProperty[] Properties => _properties ??= BuildProperties().ToArray();
 
         public CSharpType? Inherits => _inheritsType ??= CreateInheritedType();
@@ -105,6 +106,19 @@ namespace AutoRest.CSharp.Output.Models.Types
         }
 
         protected abstract IEnumerable<ObjectTypeConstructor> BuildConstructors();
+
+        private IEnumerable<ObjectTypeConstructor> BuildConstructorsCore()
+        {
+            bool hasEmptyCtor = false;
+            foreach (var constructor in BuildConstructors())
+            {
+                hasEmptyCtor |= constructor.Signature.Parameters.Count == 0;
+                yield return constructor;
+            }
+
+            if (!hasEmptyCtor && !IsStruct && !GetType().Equals(typeof(SystemObjectType)))
+                yield return ObjectTypeConstructor.GetDefaultInternalConstructor(Type);
+        }
 
         protected ObjectType? GetBaseObjectType()
             => Inherits is { IsFrameworkType: false, Implementation: ObjectType objectType } ? objectType : null;

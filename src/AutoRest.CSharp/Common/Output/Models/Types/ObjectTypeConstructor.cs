@@ -13,6 +13,11 @@ namespace AutoRest.CSharp.Output.Models.Types
 {
     internal class ObjectTypeConstructor
     {
+        public static ObjectTypeConstructor GetDefaultInternalConstructor(CSharpType type) => new ObjectTypeConstructor(
+            new ConstructorSignature(type.Name, $"Initializes a new instance of <see cref=\"{type.Name}\"/> for deserialization", null, MethodSignatureModifiers.Internal, Array.Empty<Parameter>()),
+            Array.Empty<ObjectPropertyInitializer>(),
+            type);
+
         public ObjectTypeConstructor(ConstructorSignature signature, ObjectPropertyInitializer[] initializers, CSharpType type, ObjectTypeConstructor? baseConstructor = null, bool createInternal = false)
         {
             Signature = signature;
