@@ -16,7 +16,7 @@ namespace ModelsTypeSpec.Models
     /// Please note <see cref="OutputBaseModelWithDiscriminator"/> is the base class. According to the scenario, a derived class of the base class might need to be assigned here, or this property needs to be casted to one of the possible derived classes.
     /// The available derived classes include <see cref="FirstDerivedOutputModel"/> and <see cref="SecondDerivedOutputModel"/>.
     /// </summary>
-    [AbstractHierarchyDeserializer(typeof(UnknownOutputBaseModelWithDiscriminator))]
+    [AbstractTypeDeserializer(typeof(UnknownOutputBaseModelWithDiscriminator))]
     public abstract partial class OutputBaseModelWithDiscriminator
     {
         protected internal Dictionary<string, BinaryData> _rawData;

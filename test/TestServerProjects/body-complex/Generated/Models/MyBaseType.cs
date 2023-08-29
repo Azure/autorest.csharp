@@ -16,7 +16,7 @@ namespace body_complex.Models
     /// Please note <see cref="MyBaseType"/> is the base class. According to the scenario, a derived class of the base class might need to be assigned here, or this property needs to be casted to one of the possible derived classes.
     /// The available derived classes include <see cref="MyDerivedType"/>.
     /// </summary>
-    [AbstractHierarchyDeserializer(typeof(UnknownMyBaseType))]
+    [AbstractTypeDeserializer(typeof(UnknownMyBaseType))]
     public abstract partial class MyBaseType
     {
         protected internal Dictionary<string, BinaryData> _rawData;

@@ -16,7 +16,7 @@ namespace MgmtDiscriminator.Models
     /// Please note <see cref="DeliveryRuleCondition"/> is the base class. According to the scenario, a derived class of the base class might need to be assigned here, or this property needs to be casted to one of the possible derived classes.
     /// The available derived classes include <see cref="DeliveryRuleQueryStringCondition"/>, <see cref="DeliveryRuleRemoteAddressCondition"/> and <see cref="DeliveryRuleRequestMethodCondition"/>.
     /// </summary>
-    [AbstractHierarchyDeserializer(typeof(UnknownDeliveryRuleCondition))]
+    [AbstractTypeDeserializer(typeof(UnknownDeliveryRuleCondition))]
     public abstract partial class DeliveryRuleCondition
     {
         protected internal Dictionary<string, BinaryData> _rawData;

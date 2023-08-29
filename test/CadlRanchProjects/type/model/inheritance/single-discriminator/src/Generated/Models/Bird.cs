@@ -16,7 +16,7 @@ namespace _Type.Model.Inheritance.SingleDiscriminator.Models
     /// Please note <see cref="Bird"/> is the base class. According to the scenario, a derived class of the base class might need to be assigned here, or this property needs to be casted to one of the possible derived classes.
     /// The available derived classes include <see cref="SeaGull"/>, <see cref="Sparrow"/>, <see cref="Goose"/> and <see cref="Eagle"/>.
     /// </summary>
-    [AbstractHierarchyDeserializer(typeof(UnknownBird))]
+    [AbstractTypeDeserializer(typeof(UnknownBird))]
     public abstract partial class Bird
     {
         protected internal Dictionary<string, BinaryData> _rawData;

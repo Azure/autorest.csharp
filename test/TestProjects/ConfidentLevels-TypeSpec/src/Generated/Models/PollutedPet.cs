@@ -17,7 +17,7 @@ namespace ConfidentLevelsInTsp.Models
     /// Please note <see cref="PollutedPet"/> is the base class. According to the scenario, a derived class of the base class might need to be assigned here, or this property needs to be casted to one of the possible derived classes.
     /// The available derived classes include <see cref="PollutedDog"/> and <see cref="UnpollutedCat"/>.
     /// </summary>
-    [AbstractHierarchyDeserializer(typeof(UnknownPollutedPet))]
+    [AbstractTypeDeserializer(typeof(UnknownPollutedPet))]
     internal abstract partial class PollutedPet
     {
         protected internal Dictionary<string, BinaryData> _rawData;

@@ -12,7 +12,7 @@ using Azure.Core.Serialization;
 namespace ModelsTypeSpec.Models
 {
     /// <summary> Single base model without any child model. </summary>
-    [AbstractHierarchyDeserializer(typeof(UnknownSingleBase))]
+    [AbstractTypeDeserializer(typeof(UnknownSingleBase))]
     public abstract partial class SingleBase
     {
         protected internal Dictionary<string, BinaryData> _rawData;
