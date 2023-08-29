@@ -82,13 +82,13 @@ namespace AutoRest.CSharp.Generation.Writers
                 {
                     if (xmlSerialization != null)
                     {
-                            WriteXmlSerialize(writer, xmlSerialization, modelSerializableType, model.IsUnknownDerivedType);
+                            WriteXmlSerialize(writer, xmlSerialization, modelSerializableType);
                             WriteXmlDeserialize(writer, declaration, xmlSerialization, hasJson, modelSerializableType);
                     }
 
                     if (jsonSerialization != null)
                     {
-                            WriteJsonSerialize(writer, jsonSerialization, hasXml, modelSerializableType, modelJsonSerializableType, model.IsUnknownDerivedType);
+                            WriteJsonSerialize(writer, jsonSerialization, hasXml, modelSerializableType, modelJsonSerializableType);
                             WriteJsonDeserialize(writer, declaration, jsonSerialization, hasXml, modelSerializableType, modelJsonSerializableType, model.IsUnknownDerivedType);
                     }
 
@@ -140,10 +140,8 @@ namespace AutoRest.CSharp.Generation.Writers
             }
         }
 
-        private static void WriteXmlSerialize(CodeWriter writer, XmlObjectSerialization serialization, CSharpType modelSerializableType, bool isUnknownDerivedType)
+        private static void WriteXmlSerialize(CodeWriter writer, XmlObjectSerialization serialization, CSharpType modelSerializableType)
         {
-            bool isStruct = serialization.ObjectType is not null && serialization.ObjectType.IsStruct;
-
             WiteXmlSerializeImplementation(writer, serialization, modelSerializableType);
             WriteIXmlSerializableSerialize(writer, serialization, modelSerializableType);
         }
@@ -353,7 +351,7 @@ namespace AutoRest.CSharp.Generation.Writers
             writer.Line();
         }
 
-        private static void WriteJsonSerialize(CodeWriter writer, JsonObjectSerialization jsonSerialization, bool hasXml, CSharpType modelSerializableType, CSharpType modelJsonSerializableType, bool isUnknownDerivedType)
+        private static void WriteJsonSerialize(CodeWriter writer, JsonObjectSerialization jsonSerialization, bool hasXml, CSharpType modelSerializableType, CSharpType modelJsonSerializableType)
         {
             bool isStruct = jsonSerialization.ObjectType is not null && jsonSerialization.ObjectType.IsStruct;
 
